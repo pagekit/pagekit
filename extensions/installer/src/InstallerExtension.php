@@ -26,7 +26,7 @@ class InstallerExtension extends Extension
                     $app['translator']->setLocale($locale);
                 }
 
-                $app['view.scripts']->register('requirejs', 'vendor://assets/requirejs/require.js', array('requirejs-config'));
+                $app['view.scripts']->register('requirejs', 'vendor://assets/requirejs/require.min.js', array('requirejs-config'));
                 $app['view.scripts']->register('requirejs-config', 'extension://system/assets/js/require.js');
             });
         }
