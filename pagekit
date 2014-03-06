@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+use Pagekit\Framework\Console\Application as Console;
+
+if (PHP_SAPI != 'cli') {
+	exit('Script needs to be run from Command Line Interface (cli)');
+}
+
+$app = require_once __DIR__.'/app/app.php';
+$app->boot();
+
+$console = new Console($app);
+$console->run();

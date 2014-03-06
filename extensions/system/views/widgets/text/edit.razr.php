@@ -1,0 +1,1 @@
+@editor('widget[settings][content]', widget.get('content'), ['id' => 'form-content'])

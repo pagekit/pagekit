@@ -1,0 +1,81 @@
+/* ========================================================================
+   System extension
+ ========================================================================== */
+
+/* System view
+ ========================================================================== */
+
+.pk-system .uk-width { width: 125px !important; }
+
+.pk-system-hover {
+    color: #444;
+    text-align: center;
+}
+
+.pk-system-hover:hover { color: #37a5e4; }
+
+.pk-system-hover > p { margin-top: 10px; }
+
+
+/* Extensions view
+ ========================================================================== */
+
+/*
+ * Heading
+ */
+
+.pk-extensions-heading {
+    margin: 8px 0 0 0;
+    font-size: 18px;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+/*
+ * Margin top for better alignment
+ */
+
+.pk-extensions-margin {
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+}
+
+/*
+ * Meta list
+ */
+
+.pk-extensions-list { margin: 0; }
+
+.pk-extensions-list > li > strong {
+    display: inline-block;
+    min-width: 70px;
+}
+
+
+/* Themes view
+ ========================================================================== */
+
+.pk-themes-panel .uk-panel-teaser { position: relative; }
+
+
+/* Marketplace view
+ ========================================================================== */
+
+
+.pk-marketplace-panel .uk-panel-title { margin-bottom: 15px; }
+.pk-marketplace-panel .uk-overlay-area { border-radius: 2px; }
+
+
+/* Dashboard view
+ ========================================================================== */
+
+.pk-weather-image {
+    position: relative;
+    display: inline-block;
+}
+
+.pk-weather-temperatur {
+    position: absolute;
+    top: 0;
+    right: -20px;
+}

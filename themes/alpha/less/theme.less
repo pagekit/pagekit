@@ -1,0 +1,50 @@
+@import "uikit.less";
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html { overflow-y: scroll; }
+
+
+/* Navbar center
+ ========================================================================== */
+
+.tm-navbar { text-align: center; }
+
+.tm-navbar > .uk-navbar {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/* Brand
+ ========================================================================== */
+
+.tm-brand {
+    display: inline-block;
+    font-size: 28px;
+    color: #333335;
+}
+
+.tm-brand:hover { text-decoration: none; }
+
+/*
+ * Toggle
+ */
+
+.tm-navbar-toggle {
+    height: 28px;
+}
+
+
+/* Only large screens */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-brand { font-size: 42px; }
+
+}

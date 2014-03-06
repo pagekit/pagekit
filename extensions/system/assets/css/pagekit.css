@@ -1,0 +1,367 @@
+/* ========================================================================
+   Pagekit
+ ========================================================================== */
+
+/* Column layout
+========================================================================== */
+
+/* Tablet and bigger */
+@media (min-width: 768px) {
+
+    .pk-sidebar { border-right: 1px solid #e5e5e5; }
+
+    .pk-sidebar-panel { padding-right: 25px; }
+
+    .pk-content {
+        margin-left: -1px;
+        border-left: 1px solid #ddd;
+    }
+
+}
+
+
+/* Option toolbar
+========================================================================== */
+
+.pk-options {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/* Modifier `pk-breadcrumb`
+========================================================================== */
+
+.pk-breadcrumb {
+    margin: -20px 0 30px 0;
+    font-size: 12px;
+}
+
+/* Form heading
+========================================================================== */
+
+.pk-form-heading {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+
+/* Align subnavs if used in navs or sortables
+========================================================================== */
+
+.pk-sortable-item .uk-subnav,
+.uk-nav-side .uk-subnav {
+    margin: 5px 15px 0 0;
+    float: right;
+}
+
+
+/* Modifier `pk-subnav-icon`
+========================================================================== */
+
+.pk-subnav-icon {
+    margin: 0;
+    /* Needed if in table width minimum */
+    white-space: nowrap;
+    /* Needed if no `href` */
+    cursor: pointer;
+}
+
+.pk-subnav-icon > li > a { color: #999; }
+.pk-subnav-icon > li > a:hover { color: #444; }
+
+
+/* Modifier `pk-subnav-muted`
+========================================================================== */
+
+.pk-subnav-muted > li > a { color: #999; }
+.pk-subnav-muted > li > a:hover { color: #444; }
+
+
+/* Sub-modifier `pk-table-subheading`
+========================================================================== */
+
+/*
+ * Table with sub headings
+ */
+
+.pk-table-subheading tbody tr th { padding-top: 20px; }
+
+
+/* Sub-modifier `pk-table-indent`
+========================================================================== */
+
+/*
+ * Indent first cell in table body
+ */
+
+.pk-table-indent tbody tr td:first-child { padding-left: 25px; }
+
+
+/* Sub-modifier `pk-table-width-*`
+========================================================================== */
+
+/*
+ * Useful width classes for tables
+ */
+
+.pk-table-width-minimum { width: 1px; }
+
+/*
+ * Fixed width
+ * `width` sets the table cell width
+ * `max-width` needed to prevent text from expanding cell and to truncate text
+ */
+
+.pk-table-width-100 {
+    max-width: 100px;
+    width: 100px;
+}
+
+.pk-table-width-150 {
+    max-width: 150px;
+    width: 150px;
+}
+
+.pk-table-width-200 {
+    max-width: 200px;
+    width: 200px;
+}
+
+/*
+ * Max width
+ * Only useful to truncate text
+ */
+
+.pk-table-max-width-100 { max-width: 100px; }
+.pk-table-max-width-150 { max-width: 150px; }
+.pk-table-max-width-200 { max-width: 200px; }
+
+
+/* Sub-modifier `pk-table-head-sticky`
+========================================================================== */
+
+/*
+ * Sticky table header
+ */
+
+.pk-table-head-sticky {
+    margin: 0;
+    background: #fff;
+}
+
+
+/* Sub-modifier `pk-table-fake`
+========================================================================== */
+
+.pk-table-fake {
+    display: table;
+    width: 100%;
+}
+
+.pk-table-fake > div {
+    display: table-cell;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+/*
+ * Imitate table header
+ */
+
+.pk-table-fake-header > div { font-weight: bold; }
+
+.pk-table-fake-subheading { padding-top: 20px; }
+
+.pk-table-fake-border { border-bottom: 1px solid #e5e5e5; }
+
+/*
+ * Indent first cell
+ */
+
+.pk-table-fake-header-indent > :first-child { padding-left: 40px; }
+
+/*
+ * Make it work with `uk-sortable`
+ */
+
+.pk-table-fake.uk-sortable-item { padding: 0; }
+
+.pk-table-fake .uk-sortable-handle { display: block; }
+
+
+/* `pk-padding-horizontal-remove`
+========================================================================== */
+
+.pk-padding-horizontal-remove {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+/* `pk-sortable`
+========================================================================== */
+
+.pk-sortable {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Sub-object `pk-sortable-list`
+ */
+
+.pk-sortable-list {
+    margin: 0;
+    list-style: none;
+}
+
+/*
+ * Sub-modifier `pk-sortable-list-dragged`
+ */
+
+.pk-sortable-list-dragged {
+    position: absolute;
+    z-index: 1040;
+    padding-left: 0;
+    pointer-events: none;
+}
+
+.pk-sortable-list-dragged .uk-hidden {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/*
+ * Sub-object `pk-sortable-item`
+ */
+
+.pk-sortable-item > a {
+    display: block;
+    padding: 5px 15px 5px 25px;
+    text-decoration: none;
+    color: #999;
+}
+
+.pk-sortable-item.pk-active > a  {
+    background: #f0f0f0;
+    color: #444;
+}
+
+.pk-sortable-item:hover > a,
+.pk-sortable-list-dragged .pk-sortable-item > a  {
+    background: #ffd;
+    color: #444;
+}
+
+/*
+ * Sub-object `pk-sortable-placeholder`
+ */
+
+.pk-sortable-placeholder {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px dashed #99baca;
+    background: #f5fbfe;
+}
+
+/*
+ * Sub-object `pk-sortable-empty`
+ */
+
+.pk-sortable-empty { min-height: 40px; }
+
+/*
+ * Sub-object `pk-sortable-handle`
+ */
+
+.pk-sortable-handle {
+    float: left;
+    margin: 4px 0 0 5px;
+    width: 10px;
+    height: 20px;
+    background: url("../../assets/images/icon-sortable-handle.svg") 0 0 no-repeat;
+}
+
+.pk-sortable-handle:hover { cursor: move; }
+
+/*
+ * Sub-object `pk-sortable-moving`
+ */
+
+.pk-sortable-moving,
+.pk-sortable-moving * { cursor: move; }
+
+
+/* `pk-iframe-hidden`
+========================================================================== */
+
+.pk-iframe-hidden {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+
+
+/* `pk-finder`
+ ========================================================================== */
+
+/*
+ * Sub-object `pk-finder-icons-*`
+ */
+
+.pk-finder-icon-folder { color: #97BFF1; }
+
+.pk-finder-icon-file { color: #aaa; }
+
+/*
+ * Sub-object `pk-thumbnail`
+ */
+
+.pk-finder-thumbnail {
+    height: 150px;
+    background-color: #fafafa;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+}
+
+.pk-finder-thumbnail-folder {
+    background-image: url("../../assets/images/icon-finder-folder.svg");
+    background-size: 50px 50px;
+}
+.pk-finder-thumbnail-file {
+    background-image: url("../../assets/images/icon-finder-file.svg");
+    background-size: 50px 50px;
+}
+
+/*
+ * Sub-object `pk-thumbnail-small`
+ */
+
+.pk-finder-thumbnail-table {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+.pk-finder-thumbnail-table + span { vertical-align: middle; }
+
+
+/*
+ * Sub-modifier `pk-finder-subnav`
+ */
+
+.pk-finder-subnav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

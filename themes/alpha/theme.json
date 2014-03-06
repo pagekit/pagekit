@@ -1,0 +1,18 @@
+{
+    "name": "alpha",
+    "version": "0.8.0",
+    "type": "theme",
+    "title": "Alpha",
+    "description": "Pagekit Theme",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pagekit",
+            "email": "info@pagekit.com",
+            "homepage": "http://pagekit.com"
+        }
+    ],
+    "extra": {
+        "image": "theme.jpg"
+    }
+}

@@ -1,0 +1,80 @@
+@import "../../../system/theme/less/uikit.less";
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+/* Layout
+ ========================================================================== */
+
+/*
+ * Slide
+ */
+
+.tm-slide {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 80%;
+}
+
+/*
+ * Panel
+ */
+
+.tm-panel {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 500px;
+    padding: 25px;
+}
+
+
+/* Modifier: `tm-form-horizontal`
+ ========================================================================== */
+
+/* Only tablets and desktops */
+@media (min-width: 480px) {
+
+    .tm-form-horizontal .uk-form-label {
+        width: 120px;
+        margin-top: 7px;
+        float: left;
+    }
+
+    .tm-form-horizontal .uk-form-controls { margin-left: 135px; }
+
+}
+
+
+/* UIkit modifications
+ ========================================================================== */
+
+/*
+ * Icon
+ */
+
+.uk-icon-large:before {
+    font-size: 800%;
+    color: #ddd;
+}
+
+/*
+ * Animation
+ */
+
+[class*='uk-animation-slide-'] {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}

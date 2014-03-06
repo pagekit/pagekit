@@ -1,0 +1,41 @@
+//
+// Component: Breadcrumb
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@breadcrumb-disabled-color:                     @global-muted-color;
+@breadcrumb-divider-margin:                     12px;
+
+//
+// New
+//
+
+@breadcrumb-font-size:                          round(@global-font-size * 0.85); // 12px
+
+
+// Component
+// ========================================================================
+
+.hook-breadcrumb() {
+	font-size: @breadcrumb-font-size;
+    text-transform: uppercase;
+}
+
+
+// Items
+// ========================================================================
+
+.hook-breadcrumb-divider() {
+	font-weight: 300;
+	color: @global-muted-color;
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-breadcrumb-misc() {}

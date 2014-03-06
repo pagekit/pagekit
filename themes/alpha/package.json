@@ -1,0 +1,11 @@
+{
+    "name": "pagekit-alpha-theme",
+    "dependencies": {},
+    "devDependencies": {
+        "grunt-contrib-less": "0.8.2",
+        "grunt-contrib-watch": "0.2.0",
+        "grunt-banner": "0.1.4",
+        "grunt": "~0.4.0"
+    },
+    "keywords": []
+}

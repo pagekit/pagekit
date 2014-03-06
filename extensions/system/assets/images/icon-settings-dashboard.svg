@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-settings-dashboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+<path fill="#F77463" d="M30.424,31.447c0,2.29-1.854,4.145-4.144,4.145c-2.291,0-4.144-1.854-4.144-4.145
+	c0-0.565,0.11-1.099,0.319-1.591l-6.532-14.755l10.536,12.207C28.668,27.401,30.424,29.219,30.424,31.447z"/>
+<circle fill="#66B1E3" cx="12.5" cy="24.5" r="3.5"/>
+<circle fill="#66B1E3" cx="22.5" cy="12.501" r="3.5"/>
+<circle fill="#66B1E3" cx="36.5" cy="20.501" r="3.5"/>
+<path fill="#E0E0E0" d="M25.003,3C12.854,3,3,12.849,3,25s9.854,22,22.003,22S47,37.151,47,25S37.152,3,25.003,3z M24.85,44.292
+	c-10.541,0-19.087-8.547-19.087-19.09c0-10.535,8.546-19.083,19.087-19.083c10.534,0,19.081,8.548,19.081,19.083
+	C43.931,35.745,35.384,44.292,24.85,44.292z"/>
+</svg>

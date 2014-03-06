@@ -1,0 +1,9 @@
+<div class="pk-system-messages">
+    @foreach (app.message.levels() as level)
+        @if (app.message.has(level))
+            @foreach (app.message.get(level) as message)
+                <div class="uk-alert uk-alert-@(level == 'error' ? 'danger' : level)" data-status="@(level == 'error' ? 'danger' : level)">@message</div>
+            @endforeach
+        @endif
+    @endforeach
+</div>

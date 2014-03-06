@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 0.8.0 (system, messages)\n"
+"POT-Creation-Date: 2014-02-10 16:32+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: extensions/system/src/System/SystemExtension.php:148
+msgid "DATE_FULL"
+msgstr ""
+
+#: extensions/system/src/System/SystemExtension.php:149
+msgid "DATE_LONG"
+msgstr ""
+
+#: extensions/system/src/System/SystemExtension.php:150
+msgid "DATE_MEDIUM"
+msgstr ""
+
+#: extensions/system/src/System/SystemExtension.php:151
+msgid "DATE_SHORT"
+msgstr ""
+
+#: extensions/system/src/System/SystemExtension.php:152
+msgid "DATE_INTERVAL"
+msgstr ""

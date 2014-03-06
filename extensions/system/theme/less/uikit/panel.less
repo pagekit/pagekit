@@ -1,0 +1,86 @@
+//
+// Component: Panel
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@panel-title-margin-bottom:                     @global-margin;
+@panel-title-font-size:                         round(@global-font-size * 1.28); // 18px
+@panel-title-line-height:                       round(@panel-title-font-size * 1.33); // 24px
+@panel-title-color:                             @global-color;
+
+@panel-box-padding:                             @global-margin;
+@panel-box-background:                          @global-background;
+@panel-box-color:                               @global-color;
+@panel-box-title-color:                         @global-color;
+@panel-box-badge-right:                         @panel-box-badge-top;
+
+@panel-box-primary-background:                  @global-default-hover-background;
+@panel-box-primary-color:                       @global-color;
+@panel-box-primary-title-color:                 @global-color;
+
+@panel-box-secondary-background:                @global-default-background;
+
+@panel-header-title-border:                     @global-border;
+@panel-header-title-color:                      @global-color;
+
+@panel-divider-gutter:                          @global-grid-gutter;
+@panel-divider-gutter-large:                    @global-grid-gutter-large;
+@panel-divider-border:                          @global-border;
+
+//
+// New
+//
+
+@panel-box-border:                              @global-border;
+
+
+// Sub-object: `uk-panel-title`
+// ========================================================================
+
+.hook-panel-title() {}
+
+
+// Sub-object: `uk-panel-badge`
+// ========================================================================
+
+.hook-panel-badge() {}
+
+
+// Modifier: `uk-panel-box`
+// ========================================================================
+
+.hook-panel-box() {
+	border: 1px solid @panel-box-border;
+    border-radius: @global-border-radius;
+}
+
+.hook-panel-box-primary() {}
+
+.hook-panel-box-secondary() {}
+
+
+// Modifier: `uk-panel-header`
+// ========================================================================
+
+.hook-panel-header() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-panel-misc() {
+
+	.uk-panel-box .uk-panel-teaser {
+		border-bottom: 1px solid #eee;
+	}
+
+    .uk-panel-box .uk-panel-teaser > * {
+        border-top-left-radius: @global-border-radius;
+        border-top-right-radius: @global-border-radius;
+    }
+
+}

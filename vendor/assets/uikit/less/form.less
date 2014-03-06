@@ -1,0 +1,457 @@
+// Name:            Form
+// Description:     Defines styles for forms
+//
+// Component:       `uk-form`
+//
+// Sub-objects:     `uk-form-row`
+//                  `uk-form-help-inline`
+//                  `uk-form-help-block`
+//                  `uk-form-label`
+//                  `uk-form-controls`
+//                  `uk-form-controls-condensed`
+//
+// Modifiers:       `uk-form-stacked`
+//                  `uk-form-horizontal`
+//
+// Sub-modifiers:   `uk-form-danger`
+//                  `uk-form-success`
+//                  `uk-form-small`
+//                  `uk-form-large`
+//                  `uk-form-blank`
+//                  `uk-form-width-mini`
+//                  `uk-form-width-small`
+//                  `uk-form-width-medium`
+//                  `uk-form-width-large`
+//                  `uk-form-controls-text`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@form-height:                                   30px;
+@form-padding:                                  4px 6px;
+@form-border:                                   #ddd;
+@form-border-width:                             1px;
+@form-background:                               #fff;
+@form-color:                                    #444;
+
+@form-focus-border:                             #99baca;
+@form-focus-background:                         #f5fbfe;
+@form-focus-color:                              #444;
+
+@form-disabled-border:                          #ddd;
+@form-disabled-background:                      #f5f5f5;
+@form-disabled-color:                           #999;
+
+@form-placeholder-color:                        #999;
+
+@form-gutter:                                   15px;
+
+@form-legend-border:                            #ddd;
+@form-legend-border-width:                      1px;
+@form-legend-font-size:                         18px;
+@form-legend-line-height:                       30px;
+
+@form-small-height:                             25px;
+@form-large-height:                             40px;
+@form-small-padding:                            3px 3px;
+@form-large-padding:                            8px 6px;
+@form-small-font-size:                          12px;
+@form-large-font-size:                          16px;
+
+@form-danger-border:                            #dc8d99;
+@form-danger-background:                        #fff7f8;
+@form-danger-color:                             #c91032;
+
+@form-success-border:                           #8ec73b;
+@form-success-background:                       #fafff2;
+@form-success-color:                            #539022;
+
+@form-blank-border:                             #ddd;
+@form-blank-border-style:                       dashed;
+
+@form-mini-width:                               40px;
+@form-small-width:                              130px;
+@form-medium-width:                             200px;
+@form-large-width:                              500px;
+
+@form-help-inline-margin-left:                  10px;
+@form-help-block-margin-top:                    5px;
+
+@form-controls-condensed-margin-vertical:       5px;
+
+@form-stacked-margin-bottom:                    5px;
+
+@form-horizontal-label-width:                   200px;
+@form-horizontal-label-margin-top:              5px;
+@form-horizontal-controls-margin-left:          215px;
+@form-horizontal-controls-text-padding-top:     5px;
+
+@form-icon-width:                               30px;
+@form-icon-font-size:                           14px;
+@form-icon-color:                               #999;
+
+
+/* ========================================================================
+   Component: Form
+ ========================================================================== */
+
+/*
+ * Remove margin from the last-child
+ */
+
+.uk-form > :last-child { margin-bottom: 0; }
+
+/*
+ * Controls
+ * Except for `range`, `radio`, `checkbox`, `file`, `submit`, `reset`, `button` and `image`
+ * 1. Must be `height` because `min-height` is not working in OSX
+ * 2. Responsiveness: Sets a maximum width relative to the parent to scale on narrower viewports
+ * 3. Vertical `padding` needed for `select` elements in Firefox
+ * 4. Style
+ */
+
+.uk-form select,
+.uk-form textarea,
+.uk-form input:not([type]),
+.uk-form input[type="text"],
+.uk-form input[type="password"],
+.uk-form input[type="datetime"],
+.uk-form input[type="datetime-local"],
+.uk-form input[type="date"],
+.uk-form input[type="month"],
+.uk-form input[type="time"],
+.uk-form input[type="week"],
+.uk-form input[type="number"],
+.uk-form input[type="email"],
+.uk-form input[type="url"],
+.uk-form input[type="search"],
+.uk-form input[type="tel"],
+.uk-form input[type="color"] {
+    /* 1 */
+    height: @form-height;
+    /* 2 */
+    max-width: 100%;
+    /* 3 */
+    padding: @form-padding;
+    /* 4 */
+    border: @form-border-width solid @form-border;
+    background: @form-background;
+    color: @form-color;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+    .hook-form;
+
+    /* Focus state */
+    &:focus {
+        border-color: @form-focus-border;
+        outline: 0;
+        background: @form-focus-background;
+        color: @form-focus-color;
+        .hook-form-focus;
+    }
+
+    /* Disabled state */
+    &:disabled {
+        border-color: @form-disabled-border;
+        background-color: @form-disabled-background;
+        color: @form-disabled-color;
+        .hook-form-disabled;
+    }
+}
+
+/*
+ * Placeholder
+ * Higher specificity (!imporntant) needed to override color in IE
+ */
+
+.uk-form :-ms-input-placeholder { color: @form-placeholder-color !important; }
+.uk-form ::-moz-placeholder { color: @form-placeholder-color; }
+.uk-form ::-webkit-input-placeholder { color: @form-placeholder-color; }
+
+.uk-form :disabled:-ms-input-placeholder { color: @form-disabled-color !important; }
+.uk-form :disabled::-moz-placeholder { color: @form-disabled-color; }
+.uk-form :disabled::-webkit-input-placeholder { color: @form-disabled-color; }
+
+/*
+ * Reset style on iOS.
+ */
+
+.uk-form textarea,
+.uk-form input:not([type]),
+.uk-form input[type="text"],
+.uk-form input[type="password"],
+.uk-form input[type="email"],
+.uk-form input[type="url"],
+.uk-form input[type="search"],
+.uk-form input[type="tel"] { -webkit-appearance: none; }
+
+/*
+ * Removes box-shadow for invalid controls in Firefox.
+ */
+
+.uk-form :invalid { box-shadow: none; }
+
+/*
+ * Legend style
+ * 1. `margin-bottom` is not working in Safari and Opera.
+ *    Using `padding` and :after instead to create the border
+ * 2. Style
+ */
+
+.uk-form legend {
+    width: 100%;
+    /* 1 */
+    padding-bottom: @form-gutter;
+    /* 2 */
+    font-size: @form-legend-font-size;
+    line-height: @form-legend-line-height;
+    .hook-form-legend;
+}
+
+/* 1 */
+.uk-form legend:after {
+    content: "";
+    display: block;
+    border-bottom: @form-legend-border-width solid @form-legend-border;
+}
+
+
+/* Size modifiers
+ * Higher specificity needed to override defaults
+ ========================================================================== */
+
+select.uk-form-small,
+textarea.uk-form-small,
+input[type].uk-form-small,
+input:not([type]).uk-form-small {
+    height: @form-small-height;
+    padding: @form-small-padding;
+    font-size: @form-small-font-size;
+}
+
+select.uk-form-large,
+textarea.uk-form-large,
+input[type].uk-form-large,
+input:not([type]).uk-form-large  {
+    height: @form-large-height;
+    padding: @form-large-padding;
+    font-size: @form-large-font-size;
+}
+
+
+/* Reset height
+ * Must be after size modifiers
+ ========================================================================== */
+
+.uk-form textarea,
+.uk-form select[multiple],
+.uk-form select[size] { height: auto; }
+
+
+/* Validation states
+ * Using !important to keep the selector simple
+ ========================================================================== */
+
+/*
+ * Error state
+ */
+
+.uk-form-danger {
+    border-color: @form-danger-border !important;
+    background: @form-danger-background !important;
+    color: @form-danger-color !important;
+    .hook-form-danger;
+}
+
+/*
+ * Success state
+ */
+
+.uk-form-success  {
+    border-color: @form-success-border !important;
+    background: @form-success-background !important;
+    color: @form-success-color !important;
+    .hook-form-success;
+}
+
+
+/* Style modifiers
+ * Using !important to keep the selector simple
+ ========================================================================== */
+
+/*
+ * Blank form
+ */
+
+.uk-form-blank {
+    border-color: transparent !important;
+    border-style: @form-blank-border-style !important;
+    background: none !important;
+    .hook-form-blank;
+}
+
+.uk-form-blank:focus {
+    border-color: @form-blank-border !important;
+    .hook-form-blank-focus;
+}
+
+
+/* Size sub-modifiers
+ ========================================================================== */
+
+/*
+ * Fixed widths
+ * Different widths for mini sized `input` and `select` elements
+ */
+
+input.uk-form-width-mini { width: @form-mini-width; }
+select.uk-form-width-mini { width: (@form-mini-width + 25px); }
+.uk-form-width-small { width: @form-small-width; }
+.uk-form-width-medium { width: @form-medium-width; }
+.uk-form-width-large { width: @form-large-width; }
+
+
+/* Sub-objects: `uk-form-row`
+ * Groups labels and controls in rows
+ ========================================================================== */
+
+/*
+ * Micro clearfix
+ * Needed for `uk-form-horizontal` modifier
+ */
+
+.uk-form-row:before,
+.uk-form-row:after {
+    content: " ";
+    display: table;
+}
+
+.uk-form-row:after { clear: both; }
+
+/*
+ * Vertical gutter
+ */
+
+.uk-form-row + .uk-form-row { margin-top: @form-gutter; }
+
+
+/* Help text
+ * Sub-object: `uk-form-help-inline`, `uk-form-help-block`
+ ========================================================================== */
+
+.uk-form-help-inline {
+    display: inline-block;
+    margin: 0 0 0 @form-help-inline-margin-left;
+}
+
+.uk-form-help-block { margin: @form-help-block-margin-top 0 0 0; }
+
+
+/* Controls content
+ * Sub-object: `uk-form-controls`, `uk-form-controls-condensed`
+ ========================================================================== */
+
+/*
+ * Remove margins
+ */
+
+.uk-form-controls > :first-child { margin-top: 0; }
+.uk-form-controls > :last-child { margin-bottom: 0; }
+
+/*
+ * Group controls and text into blocks with a small spacing between blocks
+ */
+
+.uk-form-controls-condensed { margin: @form-controls-condensed-margin-vertical 0; }
+
+
+/* Modifier: `uk-form-stacked`
+ * Requrires sub-object: `uk-form-label`
+ ========================================================================== */
+
+.uk-form-stacked .uk-form-label {
+    display: block;
+    margin-bottom: @form-stacked-margin-bottom;
+    font-weight: bold;
+}
+
+
+/* Modifier: `uk-form-horizontal`
+ * Requires sub-objects: `uk-form-label`, `uk-form-controls`
+ ========================================================================== */
+
+/* Tablet portrait and smaller */
+@media (max-width: @breakpoint-medium-max) {
+
+    /* Behave like `uk-form-stacked` */
+    .uk-form-horizontal .uk-form-label {
+        display: block;
+        margin-bottom: @form-stacked-margin-bottom;
+        font-weight: bold;
+    }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    .uk-form-horizontal .uk-form-label {
+        width: @form-horizontal-label-width;
+        margin-top: @form-horizontal-label-margin-top;
+        float: left;
+    }
+
+    .uk-form-horizontal .uk-form-controls { margin-left: @form-horizontal-controls-margin-left; }
+
+    /* Better vertical alignment if controls are checkboxes and radio buttons with text */
+    .uk-form-horizontal .uk-form-controls-text { padding-top: @form-horizontal-controls-text-padding-top; }
+
+}
+
+
+/* Sub-object: `uk-form-icon`
+ ========================================================================== */
+
+.uk-form-icon {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.uk-form-icon > [class*='uk-icon-'] {
+    position: absolute;
+    top: 50%;
+    width: @form-icon-width;
+    margin-top: round(@form-icon-font-size / -2);
+    font-size: @form-icon-font-size;
+    color: @form-icon-color;
+    text-align: center;
+}
+
+.uk-form-icon:not(.uk-form-icon-flip) > input { padding-left: @form-icon-width !important; }
+
+/*
+ * Sub-modifier: `uk-form-icon-flip`
+ */
+
+.uk-form-icon-flip > [class*='uk-icon-'] { right: 0; }
+.uk-form-icon-flip > input { padding-right: @form-icon-width !important; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-form-misc;
+
+.hook-form() {}
+.hook-form-focus() {}
+.hook-form-disabled() {}
+.hook-form-legend() {}
+.hook-form-danger() {}
+.hook-form-success() {}
+.hook-form-blank() {}
+.hook-form-blank-focus() {}
+.hook-form-misc() {}

@@ -1,0 +1,86 @@
+@import "uikit.less";
+@import (less) "../../assets/css/pagekit.css";
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html { overflow-y: scroll; }
+
+
+/* Navbar
+ ========================================================================== */
+
+.tm-navbar {
+    margin-bottom: 50px;
+    border-bottom: 1px solid #e5e5e5;
+    background: @navbar-background;
+}
+
+
+/* Modifier `tm-subnav`
+ ========================================================================== */
+
+.tm-subnav {
+    margin: 0 0 30px 0;
+    border: 1px solid @global-border;
+    background: #fff;
+}
+
+.tm-subnav > li:nth-child(n+2) { margin-left: 0; }
+
+.tm-subnav > li > a {
+    padding: 12px 15px;
+    border-right: 1px solid @global-border;
+    color: @global-muted-color;
+    text-decoration: none;
+}
+
+.tm-subnav > li:hover > a,
+.tm-subnav > li > a:focus,
+.tm-subnav > li.uk-active > a { color: @global-color; }
+
+
+/* Heading
+ ========================================================================== */
+
+.tm-heading {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+
+/* Main
+ ========================================================================== */
+
+.tm-main {
+    margin-bottom: 25px;
+    padding: 25px;
+}
+
+
+/* Dialog pages like login and error
+ ========================================================================== */
+
+/*
+ * Helper class
+ */
+
+.tm-height-4-5 { height: 80%; }
+
+/*
+ * Panel
+ */
+
+.tm-panel {
+    margin: 20px 0;
+    padding: 25px;
+    width: 450px;
+}
+
+.tm-panel-small { width: 250px; }

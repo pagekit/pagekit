@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 0.8.0 (system, messages)\n"
+"POT-Creation-Date: 2014-02-10 16:32+0000\n"
+"PO-Revision-Date: 2014-02-10 18:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/system/src/System/SystemExtension.php:148
+msgid "DATE_FULL"
+msgstr "l, F d, y"
+
+#: extensions/system/src/System/SystemExtension.php:149
+msgid "DATE_LONG"
+msgstr "F d, y"
+
+#: extensions/system/src/System/SystemExtension.php:150
+msgid "DATE_MEDIUM"
+msgstr "M d, Y"
+
+#: extensions/system/src/System/SystemExtension.php:151
+msgid "DATE_SHORT"
+msgstr "n/d/y"
+
+#: extensions/system/src/System/SystemExtension.php:152
+msgid "DATE_INTERVAL"
+msgstr "%d days"
+
+#~ msgid "Error"
+#~ msgstr "Error"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-settings-marketplace" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+<path fill="#F77463" d="M43,8l4,13.082C47,24.198,44.641,27,41.627,27h-0.086c-3.012,0-5.457-2.527-5.457-5.646
+	c0,3.118-2.443,5.646-5.457,5.646h-0.084c-3.014,0-5.458-2.527-5.458-5.646c0,3.118-2.443,5.646-5.458,5.646h-0.085
+	c-3.014,0-5.458-2.527-5.458-5.646c0,3.118-2.443,5.646-5.456,5.646H8.542C5.528,27,3,24.198,3,21.082L7,8H43z"/>
+<polygon fill="#E0E0E0" points="10,40 15,40 15,46 7,46 7,28 10,28 "/>
+<polygon fill="#E0E0E0" points="43,28 43,46 28,46 28,40 40,40 40,28 "/>
+<path fill="#E0E0E0" d="M43,6v1H7V6c0-0.55,0.45-1,1-1h34C42.55,5,43,5.45,43,6z"/>
+<rect x="17" y="30" fill="#66B1E3" width="9" height="16"/>
+</svg>

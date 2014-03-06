@@ -1,0 +1,41 @@
+@script('update', 'system/js/settings/update.js', ['requirejs'])
+
+<div id="js-update" data-api="@api" data-version="@version" data-url="@url.to('@system/update/download')">
+
+    <div class="uk-hidden" data-msg="update-available">
+
+        <h2>@trans('There is a update available.')</h2>
+        <p class="js-version">@trans('Please update Pagekit to version %version%!')</p>
+
+        <p>
+            <a class="js-install uk-button uk-button-primary" href="#">@trans('Update')</a>
+            <a class="js-version uk-button uk-button-success" href="#">@trans('Download %version%')</a>
+        </p>
+
+    </div>
+
+    <div class="uk-hidden" data-msg="update-install">
+
+        <p class="js-message">@trans('Downloading ...')</p>
+
+        <div class="js-progress uk-progress uk-progress-striped uk-active">
+            <div class="uk-progress-bar" style="width: 0%;"></div>
+        </div>
+
+    </div>
+
+    <div class="uk-hidden" data-msg="no-updates">
+
+        <h2>@trans('You have the latest version of Pagekit.')</h2>
+        <p class="js-version">@trans('You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually.')</p>
+
+        <p>
+            <a class="js-install uk-button uk-button-primary" href="#">@trans('Re-install')</a>
+            <a class="js-version uk-button uk-button-success" href="#">@trans('Download %version%')</a>
+        </p>
+
+    </div>
+
+    <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the server. Please try again later.')</p>
+
+</div>

@@ -1,0 +1,15 @@
+{
+    "name": "page",
+    "version": "0.8.0",
+    "type": "extension",
+    "title": "Pages",
+    "description": "Create simple pages.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pagekit",
+            "email": "info@pagekit.com",
+            "homepage": "http://pagekit.com"
+        }
+    ]
+}

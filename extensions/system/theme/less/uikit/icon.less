@@ -1,0 +1,46 @@
+//
+// Component: Icon
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@icon-font-path:                                "../../../../vendor/assets/uikit/fonts";
+
+@icon-button-height:                            @icon-button-width;
+@icon-button-background:                        @global-default-background;
+@icon-button-font-size:                         round(@icon-button-width * 0.5);
+@icon-button-color:                             @global-color;
+
+@icon-button-hover-background:                  @global-default-hover-background;
+@icon-button-hover-color:                       @global-color;
+
+@icon-button-active-background:                 @global-default-active-background;
+@icon-button-active-color:                      @global-color;
+
+//
+// New
+//
+
+@icon-button-border:                            rgba(0,0,0,0.1);
+@icon-button-hover-border:                      rgba(0,0,0,0.15);
+
+
+// Modifier: `uk-icon-button`
+// ========================================================================
+
+.hook-icon-button() { border: 1px solid @icon-button-border; }
+
+// Hover
+.hook-icon-button-hover() { border-color: @icon-button-hover-border; }
+
+// Active
+.hook-icon-button-active() { box-shadow: inset 0 1px 5px -1px rgba(0,0,0,0.1); }
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-icon-misc() {}

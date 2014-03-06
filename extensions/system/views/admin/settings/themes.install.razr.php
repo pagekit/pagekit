@@ -1,0 +1,39 @@
+@if (checksum === false)
+<p class="uk-alert uk-alert-error">@trans('The checksum of the uploaded theme does not match the one from the repository. The uploaded theme might be manipulated.')</p>
+@endif
+
+@if (status == 'update')
+<p class="uk-alert uk-alert-success">@trans('There is an update available for the uploaded theme. Please consider installing it instead.')</p>
+@endif
+
+@if (status == 'old')
+<p class="uk-alert uk-alert-warning">@trans('You are trying to install an older version of a theme that is already installed.')</p>
+@endif
+
+<dl>
+    <dt>@trans('Name')</dt>
+    <dd>@package.name</dd>
+    <dt>@trans('Version')</dt>
+    <dd>@package.version</dd>
+    <dt>@trans('Type')</dt>
+    <dd>@package.type</dd>
+    <dt>@trans('Title')</dt>
+    <dd>@package.title</dd>
+    <dt>@trans('Description')</dt>
+    <dd>@package.description</dd>
+    <dt>@trans('Keywords')</dt>
+    <dd>@package.keywords|implode(', ')</dd>
+    <dt>@trans('Homepage')</dt>
+    <dd>@package.Homepage</dd>
+    <dt>@trans('License')</dt>
+    <dd>@package.license|implode(', ')</dd>
+    <dt>@trans('Authors')</dt>
+    <dd>@package.authors</dd>
+    <dt>@trans('Release Date')</dt>
+    <dd>@package.releaseDate</dd>
+</dl>
+
+<p>
+    <a class="uk-button uk-button-primary" href="@url.to('@system/themes/install', ['path' => path])">@trans('Install')</a>
+    <a class="uk-button" href="@url.to('@system/themes/index')">@trans('Cancel')</a>
+</p>

@@ -1,0 +1,16 @@
+/extensions/*
+!/extensions/hello
+!/extensions/installer
+!/extensions/page
+!/extensions/system
+/themes/*
+!/themes/alpha
+/vendor/*
+!/vendor/assets
+/config.php
+/composer.phar
+/composer.lock
+/pagekit*.zip
+/.idea
+node_modules
+.DS_Store

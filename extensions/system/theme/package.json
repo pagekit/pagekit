@@ -1,0 +1,20 @@
+{
+    "name": "pagekit-admin-theme",
+    "title": "Pagekit Admin Theme",
+    "description": "Theme for Pagekit administration.",
+    "version": "0.8.0",
+    "homepage": "http://www.pagekit.com",
+    "author": {
+     "name": "Pagekit",
+     "email": "info@pagekit.com",
+     "url": "http://www.pagekit.com"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "grunt-contrib-less": "0.8.2",
+        "grunt-contrib-watch": "0.2.0",
+        "grunt-banner": "0.1.4",
+        "grunt": "~0.4.0"
+    },
+    "keywords": []
+}
