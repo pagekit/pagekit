@@ -35,8 +35,8 @@ class WidgetsController extends Controller
         $this->widgets = $this('widgets')->getWidgetRepository();
         $this->levels  = $this('users')->getAccessLevelRepository();
 
-        if ($theme = $this('theme.site')) {
-            foreach ($theme->getConfig('positions', array()) as $id => $position) {
+        if (self::$app['theme.site']) {
+            foreach ($this('theme.site')->getConfig('positions', array()) as $id => $position) {
                 list($name, $description) = array_merge((array) $position, array(''));
                 $this->positions[$id] = compact('id', 'name', 'description');
             }

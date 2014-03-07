@@ -29,8 +29,8 @@ class ThemeListener extends EventSubscriber
      */
     public function onSiteInit()
     {
-        if ($theme = $this('theme.site')) {
-            $this('view')->setLayout($theme->boot(self::$app)->getLayout());
+        if (isset(self::$app['theme.site'])) {
+            $this('view')->setLayout($this('theme.site')->boot(self::$app)->getLayout());
         }
     }
 
