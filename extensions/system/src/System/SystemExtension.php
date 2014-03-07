@@ -250,7 +250,7 @@ class SystemExtension extends Extension
 
         // clear compiled template files
         if (empty($options) || isset($options['templates'])) {
-            $this('file')->delete('app://app/cache/templates');
+            $this('file')->delete($this('path.cache').'/templates');
         }
 
         // clear temp folder
