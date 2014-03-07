@@ -38,6 +38,10 @@ class DefaultController extends Controller
             return $this('response')->create(__('Unable to access this page!'), 403);
         }
 
+        if (0 !== strpos($this->url('@page/slug', array('slug' => $page->getSlug())), $this('request')->get)) {
+
+        }
+
         $this('events')->trigger('content.plugins', $event = new ContentEvent($page->getContent(), compact('page')));
 
         return array('meta.title' => __($page->getTitle()), 'page' => $page, 'content' => $event->getContent());

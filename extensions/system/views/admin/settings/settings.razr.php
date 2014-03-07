@@ -1,6 +1,6 @@
 @script('settings', 'system/js/settings/settings.js', 'requirejs')
 
-<form class="uk-form uk-form-horizontal uk-grid" action="@url.to('@system/settings/save')" method="post" data-uk-grid-margin data-uk-grid-match>
+<form class="uk-form uk-form-horizontal uk-grid" action="@url('@system/settings/save')" method="post" data-uk-grid-margin data-uk-grid-match>
 
     <div class="pk-sidebar uk-width-medium-1-4">
 
@@ -131,8 +131,8 @@
                 </div>
                 <div class="uk-form-row">
                     <div class="uk-form-controls">
-                        <button type="button" class="uk-button" data-smtp data-smtp-test="@url.to('@system/settings/testsmtpconnection')">@trans('Check Connection')</button>
-                        <button type="button" class="uk-button" data-mail-test="@url.to('@system/settings/testsendemail')">@trans('Send Test Email')</button>
+                        <button type="button" class="uk-button" data-smtp data-smtp-test="@url('@system/settings/testsmtpconnection')">@trans('Check Connection')</button>
+                        <button type="button" class="uk-button" data-mail-test="@url('@system/settings/testsendemail')">@trans('Send Test Email')</button>
                     </div>
                 </div>
 
@@ -223,7 +223,7 @@
         <p>
             <input type="hidden" name="tab" value="0">
             <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-            <a class="uk-button" href="@url.to('@system/system/index')">@trans('Close')</a>
+            <a class="uk-button" href="@url('@system/system/index')">@trans('Close')</a>
         </p>
 
     </div>

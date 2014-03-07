@@ -1,17 +1,17 @@
 @script('aliases', 'system/js/aliases/index.js', 'requirejs')
 
-<form id="js-aliases" class="uk-form" action="@url.to('@system/alias/index')" method="post">
+<form id="js-aliases" class="uk-form" action="@url('@system/alias/index')" method="post">
 
     <div class="pk-options uk-clearfix">
         <div class="uk-float-left">
 
-            <a class="uk-button uk-button-primary" href="@url.to('@system/alias/add')">@trans('Add Alias')</a>
+            <a class="uk-button uk-button-primary" href="@url('@system/alias/add')">@trans('Add Alias')</a>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.to('@system/alias/delete')">@trans('Delete')</a></li>
+                        <li><a href="#" data-action="@url('@system/alias/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <input type="checkbox" name="ids[]" value="@alias.Id">
                 </td>
                 <td>
-                    <a href="@url.to('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
+                    <a href="@url('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
                 </td>
                 <td>@alias.source</td>
             </tr>

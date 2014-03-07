@@ -1,7 +1,7 @@
 @style('system', 'system/css/system.css')
 @script('updates', 'system/js/settings/updates.js', ['requirejs'])
 
-<div id="js-extensions" data-api="@api" data-key="@key" data-url="@url.to('@system/package/install')" data-packages="@packagesJson|e">
+<div id="js-extensions" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-packages="@packagesJson|e">
 
     <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
         <li class="uk-active"><a href="#">@trans('All')</a></li>
@@ -26,16 +26,16 @@
                     @set(extension = app['extensions'].get(name))
                     <tr class="@if (!extension)uk-visible-hover-inline@endif @if (!extension)pk-table-disable@endif">
                         <td class="pk-table-width-minimum">
-                            <img class="uk-img-preserve" src="@( package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) :  url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
+                            <img class="uk-img-preserve" src="@( package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) :  url('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
                         </td>
                         <td>
                             <h2 class="pk-extensions-heading">@package.title</h2>
                             @if (extension)
                             <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
                                 @if (extension.config.settings)
-                                <li><a href="@url.to('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
+                                <li><a href="@url('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
                                 @endif
-                                <li><a href="@url.to('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
+                                <li><a href="@url('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
                             </ul>
                             @endif
                         </td>
@@ -56,13 +56,13 @@
                         </td>
                         <td class="uk-text-center">
                             @if (extension)
-                            <a class="uk-button uk-button-success pk-extensions-margin" href="@url.to('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
+                            <a class="uk-button uk-button-success pk-extensions-margin" href="@url('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
                             @else
-                            <a class="uk-button pk-extensions-margin" href="@url.to('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
+                            <a class="uk-button pk-extensions-margin" href="@url('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
                             @endif
                         </td>
                         <td>
-                            <a class="uk-button uk-button-danger pk-extensions-margin uk-invisible" href="@url.to('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
+                            <a class="uk-button uk-button-danger pk-extensions-margin uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
                         </td>
                     </tr>
                     @endforeach
@@ -85,7 +85,7 @@
 
             <h2>@trans('Install an extension')</h2>
 
-            <form class="uk-form" data-uk-form-file action="@url.to('@system/extensions/upload')" target="js-upload-frame" method="post" enctype="multipart/form-data">
+            <form class="uk-form" data-uk-form-file action="@url('@system/extensions/upload')" target="js-upload-frame" method="post" enctype="multipart/form-data">
                 <input type="text" disabled>
                 <div class="uk-form-file">
                     <button class="uk-button">@trans('Select')</button>

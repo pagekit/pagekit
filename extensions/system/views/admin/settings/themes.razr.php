@@ -1,7 +1,7 @@
 @style('system', 'system/css/system.css')
 @script('updates', 'system/js/settings/updates.js', ['requirejs'])
 
-<div id="js-themes" data-api="@api" data-key="@key" data-url="@url.to('@system/package/install')" data-packages="@packagesJson|e">
+<div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-packages="@packagesJson|e">
 
     <ul class="uk-tab" data-uk-tab="{ connect:'#tab-content' }">
         <li class="uk-active"><a href="#">@trans('All')</a></li>
@@ -17,7 +17,7 @@
                 <div>
                     <div class="uk-panel uk-panel-box pk-themes-panel">
                         <div class="uk-panel-teaser uk-overlay-toggle">
-                            <img src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@package.title">
+                            <img src="@(package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@package.title">
                             <div class="uk-overlay-area">
                                 <div class="uk-overlay-area-content">
                                     @package.description
@@ -42,12 +42,12 @@
                         </h2>
                         @if (current == package)
                         <div class="uk-float-right">
-                            <a class="uk-button" href="@url.to('@system/themes/settings', ['name' => name])" title="@trans('Click for settings')">@trans('Settings')</a>
+                            <a class="uk-button" href="@url('@system/themes/settings', ['name' => name])" title="@trans('Click for settings')">@trans('Settings')</a>
                         </div>
                         @else
                         <div class="uk-float-right">
-                            <a class="uk-button uk-button-primary" href="@url.to('@system/themes/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Enable')</a>
-                            <a class="uk-button uk-button-danger " href="@url.to('@system/themes/uninstall', ['name' => name])" title="@trans('Click to uninstall')">@trans('Delete')</a>
+                            <a class="uk-button uk-button-primary" href="@url('@system/themes/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Enable')</a>
+                            <a class="uk-button uk-button-danger " href="@url('@system/themes/uninstall', ['name' => name])" title="@trans('Click to uninstall')">@trans('Delete')</a>
                         </div>
                         @endif
                     </div>
@@ -71,7 +71,7 @@
 
             <h2>@trans('Install a theme')</h2>
 
-            <form class="uk-form" data-uk-form-file action="@url.to('@system/themes/upload')" target="js-upload-frame" method="post" enctype="multipart/form-data">
+            <form class="uk-form" data-uk-form-file action="@url('@system/themes/upload')" target="js-upload-frame" method="post" enctype="multipart/form-data">
                 <input type="text" disabled>
                 <div class="uk-form-file">
                     <button class="uk-button">@trans('Select')</button>

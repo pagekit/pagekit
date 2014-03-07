@@ -34,6 +34,6 @@
 </dl>
 
 <p>
-    <a class="uk-button uk-button-primary" href="@url.to('@system/extensions/install', ['path' => path])">@trans('Install')</a>
-    <a class="uk-button" href="@url.to('@system/extensions/index')">@trans('Cancel')</a>
+    <a class="uk-button uk-button-primary" href="@url('@system/extensions/install', ['path' => path])">@trans('Install')</a>
+    <a class="uk-button" href="@url('@system/extensions/index')">@trans('Cancel')</a>
 </p>

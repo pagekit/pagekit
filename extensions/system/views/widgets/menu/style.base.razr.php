@@ -5,7 +5,7 @@
 @foreach (root.children as item)
 
     <li@block('itemAttributes')@( item.attribute('active') ? ' class="uk-active"' )@endblock>
-        <a href="@url.to(item.url)">@item</a>
+        <a href="@url(item.url)">@item</a>
 
         @if (item.hasChildren())
         <ul>

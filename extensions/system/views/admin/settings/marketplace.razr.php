@@ -1,7 +1,7 @@
 @style('system', 'system/css/system.css')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-marketplace" data-api="@api" data-key="@key" data-url="@url.to('@system/package/install')" data-installed="@packages|e">
+<div id="js-marketplace" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packages|e">
 
     <form class="uk-form pk-options uk-clearfix">
         <div class="uk-float-left">

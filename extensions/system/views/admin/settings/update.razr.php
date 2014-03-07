@@ -1,6 +1,6 @@
 @script('update', 'system/js/settings/update.js', ['requirejs'])
 
-<div id="js-update" data-api="@api" data-version="@version" data-url="@url.to('@system/update/download')">
+<div id="js-update" data-api="@api" data-version="@version" data-url="@url('@system/update/download')">
 
     <div class="uk-hidden" data-msg="update-available">
 

@@ -7,7 +7,7 @@
             @trans('Enter your new password below.')
         </div>
 
-        <form class="uk-form" action="@url.to('@system/auth/resetconfirm', ['user' => username, 'key' => activation])" method="post">
+        <form class="uk-form" action="@url('@system/auth/resetconfirm', ['user' => username, 'key' => activation])" method="post">
 
             <h3>Logo Placeholder</h3>
             <div class="uk-form-row">

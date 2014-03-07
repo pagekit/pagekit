@@ -5,16 +5,16 @@
     <div class="pk-options uk-clearfix">
         <div class="uk-float-left">
 
-            <a class="uk-button uk-button-primary" href="@url.to('@system/user/add')">@trans('Add User')</a>
+            <a class="uk-button uk-button-primary" href="@url('@system/user/add')">@trans('Add User')</a>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.to('@system/user/status', ['status' => 1])">@trans('Activate')</a></li>
-                        <li><a href="#" data-action="@url.to('@system/user/status', ['status' => 0])">@trans('Block')</a></li>
+                        <li><a href="#" data-action="@url('@system/user/status', ['status' => 1])">@trans('Activate')</a></li>
+                        <li><a href="#" data-action="@url('@system/user/status', ['status' => 0])">@trans('Block')</a></li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="#" data-action="@url.to('@system/user/delete')">@trans('Delete')</a></li>
+                        <li><a href="#" data-action="@url('@system/user/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,10 +71,10 @@
                 <td><input type="checkbox" name="ids[]" value="@user.id"></td>
                 <td>
                     @gravatar(user.email, ['size' => 48, 'attrs' => ['width' => '24', 'height' => '24', 'alt' => user.username, 'class' => 'uk-border-circle uk-margin-small-right']])
-                    <a href="@url.to('@system/user/edit', ['id' => user.id])">@user.username</a>
+                    <a href="@url('@system/user/edit', ['id' => user.id])">@user.username</a>
                 </td>
                 <td class="uk-text-center">
-                    <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url.to('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
+                    <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
                 </td>
                 <td>@user.name</td>
                 <td class="pk-table-width-200 uk-text-truncate">@user.email</td>

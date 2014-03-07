@@ -34,6 +34,6 @@
 </dl>
 
 <p>
-    <a class="uk-button uk-button-primary" href="@url.to('@system/themes/install', ['path' => path])">@trans('Install')</a>
-    <a class="uk-button" href="@url.to('@system/themes/index')">@trans('Cancel')</a>
+    <a class="uk-button uk-button-primary" href="@url('@system/themes/install', ['path' => path])">@trans('Install')</a>
+    <a class="uk-button" href="@url('@system/themes/index')">@trans('Cancel')</a>
 </p>

@@ -203,18 +203,10 @@ class FinderController extends Controller
         $tokens = array();
 
         foreach ($parts as $part) {
-            switch ($part) {
-                case '.':
-                    continue;
-                case '..':
-                    if (0 !== count($tokens)) {
-                        array_pop($tokens);
-                        continue;
-                    } else if (!empty($prefix)) {
-                        continue;
-                    }
-                default:
-                    $tokens[] = $part;
+            if ('..' === $part) {
+                array_pop($tokens);
+            } elseif ('.' !== $part) {
+                array_push($tokens, $part);
             }
         }
 

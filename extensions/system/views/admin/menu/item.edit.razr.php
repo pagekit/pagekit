@@ -1,6 +1,6 @@
 @script('menu', 'system/js/menu/item.edit.js', 'requirejs')
 
-<form class="js-item-edit uk-form uk-form-horizontal" action="@url.to('@system/item/save')" data-item-id="@item.id" method="post">
+<form class="js-item-edit uk-form uk-form-horizontal" action="@url('@system/item/save')" data-item-id="@item.id" method="post">
 
     <div class="uk-form-row">
         <label for="form-title" class="uk-form-label">@trans('Title')</label>
@@ -57,7 +57,7 @@
 
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.to('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
+        <a class="uk-button" href="@url('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
 </form>

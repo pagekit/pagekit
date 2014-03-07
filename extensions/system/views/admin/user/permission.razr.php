@@ -1,7 +1,7 @@
 @style('user', 'system/css/user.css')
 @script('user', 'system/js/user/permission.js', ['requirejs'])
 
-<form id="js-permission" class="uk-form" action="@url.to('@system/permission/save')" method="post">
+<form id="js-permission" class="uk-form" action="@url('@system/permission/save')" method="post">
 
     <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent pk-table-head-sticky" data-uk-sticky>
         <thead>

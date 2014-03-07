@@ -1,6 +1,6 @@
 @script('widgets', 'system/js/widgets.js', ['requirejs'])
 
-<form id="js-widgets" class="uk-form" method="post" data-reorder="@url.to('@system/widgets/reorder')">
+<form id="js-widgets" class="uk-form" method="post" data-reorder="@url('@system/widgets/reorder')">
 
     <div class="pk-options uk-clearfix">
         <div class="uk-float-left">
@@ -10,7 +10,7 @@
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
                         @foreach (app.widgets.typeManager as type)
-                        <li><a href="@url.to('@system/widgets/add', ['type' => type.id])">@type.name</a></li>
+                        <li><a href="@url('@system/widgets/add', ['type' => type.id])">@type.name</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -20,11 +20,11 @@
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.to('@system/widgets/enable')">@trans('Enable')</a></li>
-                        <li><a href="#" data-action="@url.to('@system/widgets/disable')">@trans('Disable')</a></li>
+                        <li><a href="#" data-action="@url('@system/widgets/enable')">@trans('Enable')</a></li>
+                        <li><a href="#" data-action="@url('@system/widgets/disable')">@trans('Disable')</a></li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="#" data-action="@url.to('@system/widgets/copy')">@trans('Copy')</a></li>
-                        <li><a href="#" data-action="@url.to('@system/widgets/delete')">@trans('Delete')</a></li>
+                        <li><a href="#" data-action="@url('@system/widgets/copy')">@trans('Copy')</a></li>
+                        <li><a href="#" data-action="@url('@system/widgets/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,13 +92,13 @@
                     <div class="pk-table-width-minimum"><input type="checkbox" name="ids[]" value="@widget.id"></div>
                     <div>
                         @if (type)
-                        <a href="@url.to('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
+                        <a href="@url('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
                         @else
                         @widget.title
                         @endif
                     </div>
                     <div class="pk-table-width-100 uk-text-center">
-                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url.to(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
+                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
@@ -142,13 +142,13 @@
                     <div class="pk-table-width-minimum"><input type="checkbox" name="ids[]" value="@widget.id"></div>
                     <div>
                         @if (type)
-                        <a href="@url.to('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
+                        <a href="@url('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
                         @else
                         @widget.title
                         @endif
                     </div>
                     <div class="pk-table-width-100 uk-text-center">
-                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url.to(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
+                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">

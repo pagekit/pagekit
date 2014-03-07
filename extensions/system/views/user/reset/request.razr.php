@@ -7,7 +7,7 @@
             @trans('Please enter your username or email address. You will receive a link to create a new password via email.')
         </div>
 
-        <form class="uk-form" action="@url.to('@system/auth/reset')" method="post">
+        <form class="uk-form" action="@url('@system/auth/reset')" method="post">
 
             <h3>Logo Placeholder</h3>
             <div class="uk-form-row">

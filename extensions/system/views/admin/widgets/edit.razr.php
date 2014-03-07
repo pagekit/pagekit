@@ -1,4 +1,4 @@
-<form class="uk-form uk-form-horizontal" action="@url.to('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
+<form class="uk-form uk-form-horizontal" action="@url('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
 
     @set(type = app.widgets.type(widget.type))
 
@@ -89,7 +89,7 @@
 
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.to('@system/widgets/index')">@( widget.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url('@system/widgets/index')">@( widget.id ? trans('Close') : trans('Cancel') )</a>
     </p>
 
 </form>

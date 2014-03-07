@@ -1,4 +1,4 @@
-<form class="uk-form" action="@url.to('@system/auth/authenticate')" method="post">
+<form class="uk-form" action="@url('@system/auth/authenticate')" method="post">
 
     <h3>Logo Placeholder</h3>
     <div class="uk-form-row">
@@ -13,7 +13,7 @@
     <p class="uk-text-left">
         <label><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label><br>
         @if (app.config.mail.enabled)
-        <a href="@url.to('@system/auth/reset')" title="Recover your password">@trans('Forgot Password?')</a>
+        <a href="@url('@system/auth/reset')" title="Recover your password">@trans('Forgot Password?')</a>
         @endif
     </p>
 
