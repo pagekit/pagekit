@@ -30,3 +30,7 @@
 </div>
 
 <div class="js-finder-files"></div>
+
+<div class="uk-placeholder uk-text-center uk-vertical-align">
+    <div class="uk-vertical-align-middle"><i class="uk-icon-upload uk-icon-large uk-text-muted"></i></div>
+</div>
