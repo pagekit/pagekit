@@ -50,8 +50,6 @@
 
         <div class="uk-container uk-container-center">
 
-            @action('messages')
-
             @include('extension://system/theme/views/menu/subnav.razr.php', ['root' => subnav])
 
             @set(title = app.view.get('head.title'))
@@ -74,6 +72,8 @@
 
             </div>
         </div>
+
+        <div class="uk-hidden">@action('messages')</div>
 
     </body>
 </html>
