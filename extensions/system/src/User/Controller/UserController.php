@@ -141,7 +141,7 @@ class UserController extends Controller
             $self = $this->user->getId() == $user->getId();
 
             if ($self && $user->getStatus() == User::STATUS_BLOCKED) {
-                throw new Exception(__('Unable to block self.'));
+                throw new Exception(__('Unable to block yourself.'));
             }
 
             if ($this->users->where(array('id <> :id', ), compact('id'))->where(function($query) use ($data) {
@@ -226,7 +226,7 @@ class UserController extends Controller
                 $self = $this->user->getId() == $user->getId();
 
                 if ($self && $status == User::STATUS_BLOCKED) {
-                    $this('message')->warning(__('Unable to block self.'));
+                    $this('message')->warning(__('Unable to block yourself.'));
                     continue;
                 }
 
