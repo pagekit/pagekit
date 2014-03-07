@@ -291,7 +291,7 @@ class SystemExtension extends Extension
             'mail.username',
             'maintenance.enabled',
             'maintenance.msg',
-            'theme'
+            'theme.site'
         );
 
         foreach ($keys as $key) {

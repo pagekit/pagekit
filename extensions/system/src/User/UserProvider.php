@@ -6,7 +6,6 @@ use Pagekit\Component\Cache\CacheInterface;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\User\Entity\UserRepository;
-use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\Model\UserInterface;
 
 class UserProvider extends EventSubscriber

@@ -18,16 +18,10 @@ class ThemeListener extends EventSubscriber
 
         try {
 
-            $default = $this('config')->get('theme.default');
-
             self::$app['theme.admin'] = $this('themes')->load('system', 'extension://system/theme');
-            self::$app['theme.site']  = $this('themes')->load($this('option')->get('system:theme', $default));
+            self::$app['theme.site']  = $this('themes')->load($this('config')->get('theme.site'));
 
-        } catch(\Exception $e) {
-
-            self::$app['theme.site']  = $this('themes')->load($default);
-
-        }
+        } catch(\Exception $e) {}
     }
 
     /**
@@ -35,7 +29,9 @@ class ThemeListener extends EventSubscriber
      */
     public function onSiteInit()
     {
-        $this('view')->setLayout($this('theme.site')->boot(self::$app)->getLayout());
+        if ($theme = $this('theme.site')) {
+            $this('view')->setLayout($theme->boot(self::$app)->getLayout());
+        }
     }
 
     /**

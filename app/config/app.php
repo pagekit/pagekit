@@ -168,7 +168,7 @@ return array(
     'theme' => array(
 
         'path'    => '%path.themes%',
-        'default' => 'alpha'
+        'site' => 'alpha'
 
     )
 

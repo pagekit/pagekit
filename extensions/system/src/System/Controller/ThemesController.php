@@ -44,7 +44,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if ($this('option')->get('system:theme', $this('config')->get('theme.default')) == $name) {
+            if ($this('config')->get('theme.site') == $name) {
                 $current = $package;
             }
 
@@ -68,7 +68,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', array('%name%' => $name)));
             }
 
-            $this('option')->set('system:theme', $theme->getName(), true);
+            $this('option')->set('system:theme.site', $theme->getName(), true);
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

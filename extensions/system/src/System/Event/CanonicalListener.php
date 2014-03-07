@@ -2,7 +2,6 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Component\Routing\UrlGenerator;
 use Pagekit\Framework\Event\EventSubscriber;
 
 class CanonicalListener extends EventSubscriber
