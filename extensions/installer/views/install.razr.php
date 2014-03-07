@@ -96,14 +96,6 @@
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Email')</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="email" name="user[email]" tabindex="2" required>
-                                <p class="uk-form-help-block uk-text-danger">@trans('Field must be a valid email address.')</p>
-                            </div>
-                        </div>
-
-                        <div class="uk-form-row">
                             <label class="uk-form-label" for="">@trans('Password')</label>
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
@@ -111,6 +103,14 @@
                                     <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
                                 </div>
                                 <p id="js-user-password-error" class="uk-form-help-block uk-text-danger">@trans('Password cannot be blank.')</p>
+                            </div>
+                        </div>
+
+                        <div class="uk-form-row">
+                            <label class="uk-form-label" for="">@trans('Email')</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-width-1-1" type="email" name="user[email]" tabindex="2" required>
+                                <p class="uk-form-help-block uk-text-danger">@trans('Field must be a valid email address.')</p>
                             </div>
                         </div>
 
