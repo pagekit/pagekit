@@ -4,7 +4,7 @@
     {{/src}}
     {{^src}}
       <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align">
-          <div class="uk-vertical-align-middle">Placeholder Video</div>
+          <div class="uk-vertical-align-middle"><img src="@url('asset://system/images/placeholder-editor-video.svg')" width="60" height="60" alt="@trans('Placeholder Video')"></div>
       </div>
     {{/src}}
 
