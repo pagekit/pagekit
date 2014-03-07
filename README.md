@@ -24,11 +24,11 @@ If you haven't done so already, clone the Pagekit git repo.
 git clone git://github.com/pagekit/pagekit.git
 ```
 
-Navigate to the cloned directory and update Composer
-```bash
-composer update
-#or
-php path/to/composer.phar update
+To install the dependencies of the project, navigate to the cloned directory and run the composer `install` command
+```
+composer install
+#or if you don't have composer installed globally:
+php path/to/composer.phar install
 ```
 
 ### CLI
