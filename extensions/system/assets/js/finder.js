@@ -22,8 +22,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             progressbar = progress.find('.uk-progress-bar');
 
         this.progress = {
-            show:   function() { progress.removeClass('uk-invisible'); },
-            hide:   function() { progress.addClass('uk-invisible'); },
+            show:   function() { progress.removeClass('uk-hidden'); },
+            hide:   function() { progress.addClass('uk-hidden'); },
             update: function(percent) { progressbar.css('width', percent+'%').text(percent+'%'); }
         };
 

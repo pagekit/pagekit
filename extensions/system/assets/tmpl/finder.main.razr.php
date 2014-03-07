@@ -25,14 +25,13 @@
     </div>
 </div>
 
-<div class="uk-progress uk-progress-striped uk-active uk-invisible">
-    <div class="uk-progress-bar" style="width: 0%;">0%</div>
-</div>
-
 <ul class="uk-breadcrumb pk-breadcrumb js-breadcrumbs">
     <li><a href="#/" data-cmd="loadPath" data-path="/">@trans('Home')</a></li>
 </ul>
 
+<div class="uk-progress uk-progress-striped uk-active uk-hidden">
+    <div class="uk-progress-bar" style="width: 0%;">0%</div>
+</div>
 
 <div class="js-finder-files"></div>
 
