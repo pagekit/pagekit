@@ -6,7 +6,7 @@ return array(
 
         'version' => '0.8.0',
 
-        'debug' => false,
+        'debug' => true,
 
         'timezone' => 'UTC',
 

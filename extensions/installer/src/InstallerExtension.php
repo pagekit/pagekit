@@ -4,6 +4,7 @@ namespace Pagekit\Installer;
 
 use Pagekit\Framework\Application;
 use Pagekit\Framework\Extension\Extension;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class InstallerExtension extends Extension
 {
@@ -16,7 +17,7 @@ class InstallerExtension extends Extension
 
             parent::boot($app);
 
-            $app->error(function() use ($app) {
+            $app->error(function(NotFoundHttpException $e) use ($app) {
                 return $app['response']->redirect('@installer/installer/index');
             });
 
