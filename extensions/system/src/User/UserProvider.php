@@ -4,45 +4,23 @@ namespace Pagekit\User;
 
 use Pagekit\Component\Cache\CacheInterface;
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\ApplicationAware;
 use Pagekit\User\Entity\UserRepository;
+use Pagekit\User\Helper\AccessLevelHelper;
 use Pagekit\User\Model\UserInterface;
 
-class UserProvider extends EventSubscriber
+class UserProvider extends ApplicationAware
 {
     /**
-     * The access level cache.
-     *
-     * @var CacheInterface
+     * @var AccessLevelHelper
      */
-    protected $cache;
-
-    /**
-     * @var bool
-     */
-    protected $cacheDirty = false;
-
-    /**
-     * @var string
-     */
-    protected $cacheKey = 'user.access.levels';
-
-    /**
-     * @var array
-     */
-    protected $cacheEntries = array();
-
+    protected $access;
     /**
      * Constructor.
-     *
-     * @param CacheInterface $cache
      */
     public function __construct(CacheInterface $cache = null)
     {
-        if ($this->cache = $cache) {
-            $this->cacheEntries = $cache->fetch($this->cacheKey);
-            $this('events')->addSubscriber($this);
-        }
+        $this('events')->addSubscriber($this->access = new AccessLevelHelper($this->getAccessLevelRepository(), $cache));
     }
 
     /**
@@ -98,46 +76,12 @@ class UserProvider extends EventSubscriber
      * @param  UserInterface $user
      * @return bool
      */
-    public function hasAccess($id, UserInterface $user = null)
+    public function checkAccessLevel($id, UserInterface $user = null)
     {
         if (!$user) {
             $user = $this->get();
         }
 
-        if (!isset($this->cacheEntries[$id])) {
-
-            if (!$access = $this->getAccessLevelRepository()->find($id)) {
-                return true;
-            }
-
-            $this->cacheEntries[$id] = $access->getRoles();
-            $this->cacheDirty = true;
-        }
-
-        return !$this->cacheEntries[$id] ||array_intersect(array_keys($user->getRoles()), $this->cacheEntries[$id]);
-    }
-
-    public function clearCache()
-    {
-        $this->cacheEntries = array();
-        $this->cacheDirty = true;
-    }
-
-    public function __destruct()
-    {
-        if ($this->cache && $this->cacheDirty) {
-            $this->cache->save($this->cacheKey, $this->cacheEntries);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return array(
-            'system.accesslevel.postSave'   => 'clearCache',
-            'system.accesslevel.postDelete' => 'clearCache'
-        );
+        return $this->access->checkAccessLevel($id, $user);
     }
 }

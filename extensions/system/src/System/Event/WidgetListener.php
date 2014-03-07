@@ -19,7 +19,7 @@ class WidgetListener extends EventSubscriber
         foreach ($this('widgets')->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
 
             // filter by access
-            if (!$this('users')->hasAccess($widget->getAccessId())) {
+            if (!$this('users')->checkAccessLevel($widget->getAccessId())) {
                 continue;
             }
 

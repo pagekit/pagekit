@@ -9,6 +9,6 @@ class AccessFilter extends FilterIterator
      */
     public function accept()
     {
-        return !isset($this->options['access']) or !$this->options['access'] or $this('users')->hasAccess(parent::current()->getAccessId());
+        return !isset($this->options['access']) or !$this->options['access'] or $this('users')->checkAccessLevel(parent::current()->getAccessId());
     }
 }

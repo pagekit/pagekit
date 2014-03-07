@@ -35,7 +35,7 @@ class DefaultController extends Controller
             return $this('response')->create(__('Page not found!'), 404);
         }
 
-        if (!$this('users')->hasAccess($page->getAccessId())) {
+        if (!$this('users')->checkAccessLevel($page->getAccessId())) {
             return $this('response')->create(__('Unable to access this page!'), 403);
         }
 
