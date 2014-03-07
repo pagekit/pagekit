@@ -2,6 +2,7 @@
 
 namespace Pagekit\Page\Controller;
 
+use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\ContentEvent;
 
@@ -36,10 +37,6 @@ class DefaultController extends Controller
 
         if (!$this('users')->hasAccess($page->getAccessId())) {
             return $this('response')->create(__('Unable to access this page!'), 403);
-        }
-
-        if (0 !== strpos($this->url('@page/slug', array('slug' => $page->getSlug())), $this('request')->get)) {
-
         }
 
         $this('events')->trigger('content.plugins', $event = new ContentEvent($page->getContent(), compact('page')));
