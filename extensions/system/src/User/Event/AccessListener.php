@@ -46,7 +46,9 @@ class AccessListener extends EventSubscriber
         foreach ($this->reader->getClassAnnotations($event->getClass()) as $annot) {
             if ($annot instanceof Access) {
 
-                $access[] = $annot->getExpression();
+                if ($expression = $annot->getExpression()) {
+                    $access[] = $expression;
+                }
 
                 if ($annot->getAdmin()) {
                     $admin = true;
@@ -57,7 +59,9 @@ class AccessListener extends EventSubscriber
         foreach ($this->reader->getMethodAnnotations($event->getMethod()) as $annot) {
             if ($annot instanceof Access) {
 
-                $access[] = $annot->getExpression();
+                if ($expression = $annot->getExpression()) {
+                    $access[] = $expression;
+                }
 
                 if ($annot->getAdmin()) {
                     $admin = true;
@@ -96,7 +100,7 @@ class AccessListener extends EventSubscriber
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if ($access = $event->getRequest()->attributes->get('_route_options[access]')) {
+        if ($access = $event->getRequest()->attributes->get('_route_options[access]', array(), true)) {
             foreach ($access as $expression) {
                 if (!$this('user')->hasAccess($expression)) {
                     $event->setResponse($this('response')->create(__('Insufficient User Rights.'), 403));
@@ -115,7 +119,7 @@ class AccessListener extends EventSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$this('auth')->getUser() and $access = $request->attributes->get('_route_options[access]') and in_array('system: access admin area', $access)) {
+        if (!$this('auth')->getUser() and $access = $request->attributes->get('_route_options[access]', array(), true) and in_array('system: access admin area', $access)) {
 
             $params = array();
 
