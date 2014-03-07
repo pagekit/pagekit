@@ -29,7 +29,7 @@ class AccessListener extends EventSubscriber
     }
 
     /**
-     * Reads the "@Access" annotations from the controller stores them in the "_access" route attribute.
+     * Reads the "@Access" annotations from the controller stores them in the "access" route option.
      *
      * @param ConfigureRouteEvent $event
      */
@@ -69,11 +69,11 @@ class AccessListener extends EventSubscriber
 
         if ($admin) {
             $route->setPath(rtrim('admin'.$route->getPath(), '/'));
-            $route->setDefault('_admin', true);
+            $route->setOption('admin', true);
             $access[] = 'system: access admin area';
         }
 
-        $route->setDefault('_access', array_unique($access));
+        $route->setOption('access', array_unique($access));
     }
 
     /**
@@ -96,7 +96,7 @@ class AccessListener extends EventSubscriber
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if ($access = $event->getRequest()->attributes->get('_access')) {
+        if ($access = $event->getRequest()->attributes->get('_route_options[access]')) {
             foreach ($access as $expression) {
                 if (!$this('user')->hasAccess($expression)) {
                     $event->setResponse($this('response')->create(__('Insufficient User Rights.'), 403));
@@ -115,7 +115,7 @@ class AccessListener extends EventSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$this('auth')->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
+        if (!$this('auth')->getUser() and $access = $request->attributes->get('_route_options[access]') and in_array('system: access admin area', $access)) {
 
             $params = array();
 

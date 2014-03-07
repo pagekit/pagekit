@@ -41,6 +41,6 @@ class DefaultController extends Controller
 
         $this('events')->trigger('content.plugins', $event = new ContentEvent($page->getContent(), compact('page')));
 
-        return array('meta.title' => __($page->getTitle()), 'page' => $page, 'content' => $event->getContent());
+        return array('head.title' => __($page->getTitle()), 'page' => $page, 'content' => $event->getContent());
     }
 }

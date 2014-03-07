@@ -115,9 +115,7 @@ class UserProvider extends EventSubscriber
             $this->cacheDirty = true;
         }
 
-        return !$this->cacheEntries[$id]
-            or in_array(RoleInterface::ROLE_AUTHENTICATED, $this->cacheEntries[$id]) and $user->isAuthenticated()
-            or array_intersect(array_keys($user->getRoles()), $this->cacheEntries[$id]);
+        return !$this->cacheEntries[$id] ||array_intersect(array_keys($user->getRoles()), $this->cacheEntries[$id]);
     }
 
     public function clearCache()

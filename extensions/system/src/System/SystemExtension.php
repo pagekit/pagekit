@@ -21,6 +21,7 @@ use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
 use Pagekit\System\Event\AliasListener;
+use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\DashboardInitEvent;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
@@ -67,6 +68,7 @@ class SystemExtension extends Extension
         $app['events']->addSubscriber(new AdminMenuListener);
         $app['events']->addSubscriber(new AliasListener);
         $app['events']->addSubscriber(new AuthorizationListener);
+        $app['events']->addSubscriber(new CanonicalListener);
         $app['events']->addSubscriber(new FrontpageListener);
         $app['events']->addSubscriber(new LocaleListener);
         $app['events']->addSubscriber(new LoginAttemptListener);
@@ -233,7 +235,7 @@ class SystemExtension extends Extension
      */
     public function isAdmin()
     {
-        return (bool) $this('request')->attributes->get('_admin', false);
+        return (bool) $this('request')->attributes->get('_route_options')->get('admin', false);
     }
 
     /**
@@ -288,7 +290,8 @@ class SystemExtension extends Extension
             'mail.port',
             'mail.username',
             'maintenance.enabled',
-            'maintenance.msg'
+            'maintenance.msg',
+            'theme'
         );
 
         foreach ($keys as $key) {

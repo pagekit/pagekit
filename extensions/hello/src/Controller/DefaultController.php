@@ -16,6 +16,6 @@ class DefaultController extends Controller
      */
     public function indexAction($name = 'World')
     {
-        return array('meta.title' => __('Hello %name%', array('%name%' => $name)), 'name' => $name);
+        return array('head.title' => __('Hello %name%', array('%name%' => $name)), 'name' => $name);
     }
 }

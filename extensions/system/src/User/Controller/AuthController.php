@@ -36,7 +36,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route(methods="POST", defaults= {"_maintenance" = true})
+     * @Route(methods="POST", options= {"maintenance" = true})
      * @Request({"redirect"})
      * @View("system/user/login.razr.php")
      */
@@ -46,11 +46,11 @@ class AuthController extends Controller
             return $this->redirect($redirect);
         }
 
-        return array('meta.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => ($redirect), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
+        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => ($redirect), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
     }
 
     /**
-     * @Route(defaults= {"_maintenance" = true})
+     * @Route(options= {"maintenance" = true})
      */
     public function logoutAction()
     {
@@ -58,7 +58,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route(methods="POST", defaults= {"_maintenance" = true})
+     * @Route(methods="POST", options= {"maintenance" = true})
      * @Request({"credentials": "array", "redirect"})
      */
     public function authenticateAction($credentials, $redirect)
@@ -146,7 +146,7 @@ class AuthController extends Controller
             }
         }
 
-        return array('meta.title' => __('Reset'), 'last_login' => $this('session')->get($session_key));
+        return array('head.title' => __('Reset'), 'last_login' => $this('session')->get($session_key));
     }
 
     /**
@@ -187,6 +187,6 @@ class AuthController extends Controller
             }
         }
 
-        return array('meta.title' => __('Reset Confirm'), 'username' => $username, 'activation' => $activation);
+        return array('head.title' => __('Reset Confirm'), 'username' => $username, 'activation' => $activation);
     }
 }

@@ -14,7 +14,7 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        return array('meta.title' => __('Settings'), 'config' => array());
+        return array('head.title' => __('Settings'), 'config' => array());
     }
 
     /**

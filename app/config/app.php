@@ -168,7 +168,6 @@ return array(
     'theme' => array(
 
         'path'    => '%path.themes%',
-        'class'   => 'Pagekit\System\Theme',
         'default' => 'alpha'
 
     )

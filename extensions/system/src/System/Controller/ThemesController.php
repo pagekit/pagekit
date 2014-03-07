@@ -52,7 +52,7 @@ class ThemesController extends Controller
             $packagesJson[$name] = $package->getVersion();
         }
 
-        return array('meta.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
+        return array('head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
     }
 
     /**
@@ -129,7 +129,7 @@ class ThemesController extends Controller
                 $checksum = $checksum->getDistSha1Checksum() == sha1_file("{$this->temp}/{$path}");
             }
 
-            return array('meta.title' => __('Install Theme'), 'path' => $path, 'package' => $package, 'status' => $status, 'checksum' => $checksum);
+            return array('head.title' => __('Install Theme'), 'path' => $path, 'package' => $package, 'status' => $status, 'checksum' => $checksum);
 
         } catch (Exception $e) {
             return $e->getMessage();

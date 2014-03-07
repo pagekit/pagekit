@@ -36,7 +36,7 @@ class InstallerController extends Controller
      */
     public function indexAction()
     {
-        return array('meta.title' => __('Pagekit Installer'), 'config' => (int) $this->config);
+        return array('head.title' => __('Pagekit Installer'), 'config' => (int) $this->config);
     }
 
     /**

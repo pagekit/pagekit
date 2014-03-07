@@ -46,7 +46,7 @@ class ExtensionsController extends Controller
             }
         }
 
-        return array('meta.title' => __('Extensions'), 'api' => $this->api, 'key' => $this->apiKey, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
+        return array('head.title' => __('Extensions'), 'api' => $this->api, 'key' => $this->apiKey, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
     }
 
     /**
@@ -136,7 +136,7 @@ class ExtensionsController extends Controller
                 $checksum = $checksum->getDistSha1Checksum() == sha1_file("{$this->temp}/{$path}");
             }
 
-            return array('meta.title' => __('Install Extension'), 'path' => $path, 'package' => $package, 'status' => $status, 'checksum' => $checksum);
+            return array('head.title' => __('Install Extension'), 'path' => $path, 'package' => $package, 'status' => $status, 'checksum' => $checksum);
 
         } catch (Exception $e) {
             return $e->getMessage();

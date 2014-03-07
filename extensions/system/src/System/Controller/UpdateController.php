@@ -36,7 +36,7 @@ class UpdateController extends Controller
      */
     public function indexAction()
     {
-        return array('meta.title' => __('Update'), 'api' => $this->api, 'version' => $this('config')->get('app.version'));
+        return array('head.title' => __('Update'), 'api' => $this->api, 'version' => $this('config')->get('app.version'));
     }
 
     /**

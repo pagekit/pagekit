@@ -55,7 +55,7 @@ class MenuController extends Controller
             $menu->setId(0);
         }
 
-        return array('meta.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus, 'levels' => $this->levels->findAll(), 'controller' => $this);
+        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus, 'levels' => $this->levels->findAll(), 'controller' => $this);
     }
 
     /**

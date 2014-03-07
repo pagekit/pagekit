@@ -24,6 +24,6 @@ class MarketplaceController extends Controller
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        return array('meta.title' => __('Marketplace'), 'api' => $this('config')->get('api.url'), 'key' => $this('option')->get('system:api.key'), 'packages' => json_encode($packages));
+        return array('head.title' => __('Marketplace'), 'api' => $this('config')->get('api.url'), 'key' => $this('option')->get('system:api.key'), 'packages' => json_encode($packages));
     }
 }

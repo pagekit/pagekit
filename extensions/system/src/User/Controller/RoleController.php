@@ -45,7 +45,7 @@ class RoleController extends Controller
 
         $authrole = $this->roles->find(Role::ROLE_AUTHENTICATED);
 
-        return array('meta.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole);
+        return array('head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole);
     }
 
     /**

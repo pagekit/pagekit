@@ -55,7 +55,7 @@ class PageController extends Controller
             });
         }
 
-        return array('meta.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter);
+        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter);
     }
 
     /**
@@ -63,7 +63,7 @@ class PageController extends Controller
      */
     public function addAction()
     {
-        return array('meta.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
+        return array('head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
     }
 
     /**
@@ -85,7 +85,7 @@ class PageController extends Controller
             return $this->redirect('@page/page/index');
         }
 
-        return array('meta.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
+        return array('head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
     }
 
     /**

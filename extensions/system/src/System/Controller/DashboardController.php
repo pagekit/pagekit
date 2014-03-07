@@ -46,7 +46,7 @@ class DashboardController extends Controller
 
         $columns = $this->chunkList($columns, 3);
 
-        return array('meta.title' => __('Dashboard'), 'theme.boxed' => false, 'widgets' => $widgets, 'columns' => $columns);
+        return array('head.title' => __('Dashboard'), 'theme.boxed' => false, 'widgets' => $widgets, 'columns' => $columns);
     }
 
     /**
@@ -67,7 +67,7 @@ class DashboardController extends Controller
             }
         }
 
-        return array('meta.title' => __('Dashboard Settings'), 'types' => $this->types, 'widgets' => $widgets);
+        return array('head.title' => __('Dashboard Settings'), 'types' => $this->types, 'widgets' => $widgets);
     }
 
     /**
@@ -85,7 +85,7 @@ class DashboardController extends Controller
             $widget = new Widget;
             $widget->setType($id);
 
-            return array('meta.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget);
+            return array('head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget);
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -114,7 +114,7 @@ class DashboardController extends Controller
 
             $widget = $this->create($id, $widgets[$id]);
 
-            return array('meta.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget);
+            return array('head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget);
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

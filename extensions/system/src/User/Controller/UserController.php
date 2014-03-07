@@ -88,7 +88,7 @@ class UserController extends Controller
         $users = $query->get();
         $roles = $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get();
 
-        return array('meta.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'filter' => $filter);
+        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'filter' => $filter);
     }
 
     /**
@@ -101,7 +101,7 @@ class UserController extends Controller
 
         $roles = $this->user->hasAccess('administer permissions') ? $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get() : array();
 
-        return array('meta.title' => __('Add User'), 'user' => $user, 'roles' => $roles);
+        return array('head.title' => __('Add User'), 'user' => $user, 'roles' => $roles);
     }
 
     /**
@@ -113,7 +113,7 @@ class UserController extends Controller
         $user  = $this->users->where(compact('id'))->related('roles')->first();
         $roles = $this->user->hasAccess('system: manage user permissions') ? $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get() : array();
 
-        return array('meta.title' => __('Edit User'), 'user' => $user, 'roles' => $roles);
+        return array('head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles);
     }
 
     /**

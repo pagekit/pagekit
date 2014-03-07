@@ -15,7 +15,7 @@ class HelloController extends Controller
      */
     public function indexAction()
     {
-        return array('meta.title' => __('Hello'));
+        return array('head.title' => __('Hello'));
     }
 
     /**
@@ -23,7 +23,7 @@ class HelloController extends Controller
      */
     public function settingsAction()
     {
-        return array('meta.title' => __('Hello Settings'), 'config' => array());
+        return array('head.title' => __('Hello Settings'), 'config' => array());
     }
 
     /**

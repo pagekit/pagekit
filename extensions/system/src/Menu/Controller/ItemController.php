@@ -55,7 +55,7 @@ class ItemController extends Controller
             $item = new Item;
             $item->setMenu($menu);
 
-            return array('meta.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'levels' => $this->levels->findAll());
+            return array('head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'levels' => $this->levels->findAll());
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -76,7 +76,7 @@ class ItemController extends Controller
                 throw new Exception(__('Invalid menu item.'));
             }
 
-            return array('meta.title' => __('Edit Menu Item'), 'item' => $item, 'levels' => $this->levels->findAll());
+            return array('head.title' => __('Edit Menu Item'), 'item' => $item, 'levels' => $this->levels->findAll());
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

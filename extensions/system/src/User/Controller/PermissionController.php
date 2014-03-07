@@ -31,7 +31,7 @@ class PermissionController extends Controller
     {
         $roles = $this->roles->query()->orderBy('priority')->get();
 
-        return array('meta.title' => __('Permissions'), 'roles' => $roles);
+        return array('head.title' => __('Permissions'), 'roles' => $roles);
     }
 
     /**

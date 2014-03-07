@@ -20,11 +20,11 @@ class SystemController extends Controller
      */
     public function indexAction()
     {
-        return array('meta.title' => __('Settings'), 'user' => $this('user'));
+        return array('head.title' => __('Settings'), 'user' => $this('user'));
     }
 
     /**
-     * @Route("/admin/login", methods="POST", defaults={"_maintenance"=true})
+     * @Route("/admin/login", methods="POST", options={"maintenance"=true})
      * @View("extension://system/theme/templates/login.razr.php", layout=false)
      */
     public function loginAction()
@@ -33,7 +33,7 @@ class SystemController extends Controller
             return $this->redirect('@system/system/admin');
         }
 
-        return array('meta.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this->url('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
+        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this->url('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
     }
 
     /**
@@ -52,7 +52,7 @@ class SystemController extends Controller
      */
     public function storageAction()
     {
-        return array('meta.title' => __('Storage'), 'root' => $this('config')->get('app.storage'), 'mode' => 'write');
+        return array('head.title' => __('Storage'), 'root' => $this('config')->get('app.storage'), 'mode' => 'write');
     }
 
     /**
@@ -62,7 +62,7 @@ class SystemController extends Controller
      */
     public function infoAction()
     {
-        return array('meta.title' => __('System Information'), 'info' => $this('system.info')->get());
+        return array('head.title' => __('System Information'), 'info' => $this('system.info')->get());
     }
 
     /**

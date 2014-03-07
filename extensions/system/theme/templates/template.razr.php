@@ -54,7 +54,7 @@
 
             @include('extension://system/theme/views/menu/subnav.razr.php', ['root' => subnav])
 
-            @set(title = app.view.get('meta.title'))
+            @set(title = app.view.get('head.title'))
             @if (title)
             <h1 class="tm-heading">@title</h1>
             @endif

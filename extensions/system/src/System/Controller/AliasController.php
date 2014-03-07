@@ -44,7 +44,7 @@ class AliasController extends Controller
             $query->where('alias LIKE ?', array("%{$filter['search']}%"));
         }
 
-        return array('meta.title' => __('URL Aliases'), 'aliases' => $query->get(), 'filter' => $filter);
+        return array('head.title' => __('URL Aliases'), 'aliases' => $query->get(), 'filter' => $filter);
     }
 
     /**
@@ -52,7 +52,7 @@ class AliasController extends Controller
      */
     public function addAction()
     {
-        return array('meta.title' => __('Add URL Alias'), 'alias' => new Alias);
+        return array('head.title' => __('Add URL Alias'), 'alias' => new Alias);
     }
 
     /**
@@ -67,7 +67,7 @@ class AliasController extends Controller
                 throw new Exception(__('Invalid alias id.'));
             }
 
-            return array('meta.title' => __('Edit URL Alias'), 'alias' => $alias);
+            return array('head.title' => __('Edit URL Alias'), 'alias' => $alias);
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

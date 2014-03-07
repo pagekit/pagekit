@@ -5,13 +5,13 @@ $app->on('admin.init', function() use ($app) {
     // set title
     $app['view']->addAction('head', function() use ($app) {
 
-        $title = $app['view']->get('meta.title');
+        $title = $app['view']->get('head.title');
 
         if ($site = $app['config']->get('app.site_title')) {
             $title = "$title &lsaquo; $site";
         }
 
-        $app['view']->set('meta.title', "$title &#8212; Pagekit");
+        $app['view']->set('head.title', "$title &#8212; Pagekit");
 
     }, 8);
 

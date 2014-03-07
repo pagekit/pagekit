@@ -65,7 +65,7 @@ class SettingsController extends Controller
 
         $ssl = extension_loaded('openssl');
 
-        return array('meta.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl);
+        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl);
     }
 
     /**

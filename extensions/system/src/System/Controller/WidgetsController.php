@@ -61,7 +61,7 @@ class WidgetsController extends Controller
             $widgets[$position][] = $widget;
         }
 
-        return array('meta.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'notusedwidgets' => $notusedwidgets);
+        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'notusedwidgets' => $notusedwidgets);
     }
 
     /**
@@ -73,7 +73,7 @@ class WidgetsController extends Controller
         $widget = new Widget;
         $widget->setType($type);
 
-        return array('meta.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
+        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
     }
 
     /**
@@ -84,7 +84,7 @@ class WidgetsController extends Controller
     {
         $widget = $this->widgets->find($id);
 
-        return array('meta.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
+        return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
     }
 
     /**

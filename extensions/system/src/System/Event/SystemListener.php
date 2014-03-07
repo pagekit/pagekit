@@ -29,7 +29,7 @@ class SystemListener extends EventSubscriber
             return;
         }
 
-        self::$app['isAdmin'] = (bool) $event->getRequest()->attributes->get('_admin');
+        self::$app['isAdmin'] = (bool) $event->getRequest()->attributes->get('_route_options[admin]', false, true);
 
         $dispatcher->dispatch('init', new SystemInitEvent(self::$app));
         $dispatcher->dispatch($this('isAdmin') ? 'admin.init' : 'site.init', new SystemInitEvent(self::$app));

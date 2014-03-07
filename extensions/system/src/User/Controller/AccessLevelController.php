@@ -49,7 +49,7 @@ class AccessLevelController extends Controller
             $level->setId(0);
         }
 
-        return array('meta.title' => __('Access'), 'level' => $level, 'levels' => $levels, 'roles' => $roles);
+        return array('head.title' => __('Access Levels'), 'level' => $level, 'levels' => $levels, 'roles' => $roles);
     }
 
     /**
