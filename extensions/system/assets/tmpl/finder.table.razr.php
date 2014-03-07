@@ -1,15 +1,3 @@
-<ul class="uk-breadcrumb pk-breadcrumb">
-    <li><a href="#/" data-cmd="loadPath" data-path="/">@trans('Home')</a></li>
-    {{ #breadcrumbs }}
-        {{#last}}
-        <li class="uk-active"><span>{{ name }}</span></li>
-        {{ /last }}
-        {{ ^last }}
-        <li><a href="" data-cmd="loadPath" data-path="{{ path }}">{{ name }}</a></li>
-        {{ /last }}
-    {{ /breadcrumbs }}
-</ul>
-
 {{ #data }}
 <table class="uk-table uk-table-hover uk-table-middle">
     <thead>

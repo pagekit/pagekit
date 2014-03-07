@@ -14,16 +14,17 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
         this.options['messages'] = this.element.find('[data-messages]').data('messages');
 
-        this.main     = this.element.find('.js-finder-files');
-        this.filter   = this.element.find('.js-search:first');
+        this.main       = this.element.find('.js-finder-files');
+        this.filter     = this.element.find('.js-search:first');
+        this.crumbs     = this.element.find('.js-breadcrumbs:first');
 
         var progress    = this.element.find('.uk-progress'),
             progressbar = progress.find('.uk-progress-bar');
 
         this.progress = {
-            show:   function() { progress.removeClass('uk-hidden'); },
-            hide:   function() { progress.addClass('uk-hidden'); },
-            update: function(percent) { progressbar.css('width', percent+'%'); }
+            show:   function() { progress.removeClass('uk-invisible'); },
+            hide:   function() { progress.addClass('uk-invisible'); },
+            update: function(percent) { progressbar.css('width', percent+'%').text(percent+'%'); }
         };
 
         var uploadsettings = {
@@ -148,8 +149,10 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 $this.data = data;
 
                 // build breadcrumbs
-                data['breadcrumbs'] = [];
+                data.breadcrumbs = [];
+
                 var parts = newPath.split('/');
+
                 for (var i = 0; i < parts.length; i++) {
                     var name = parts[i], path = '';
 
@@ -158,7 +161,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                     for (var j = 0; j <= i; j++) {
                         path += '/'+parts[j];
                     }
-                    data['breadcrumbs'].push({ name: name, path: path });
+
+                    data.breadcrumbs.push({ name: name, path: path });
                 }
 
                 $this.render();
@@ -179,6 +183,25 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
         render: function()
         {
+
+            if (this.data && this.data.breadcrumbs) {
+
+                this.crumbs.children().not(':first').remove();
+
+                var i, path, name, max = this.data.breadcrumbs.length;
+
+                for(i= 0;i<max; i++) {
+
+                    path = this.data.breadcrumbs[i].path;
+                    name = this.data.breadcrumbs[i].name;
+
+                    if (i == max-1) {
+                        this.crumbs.append('<li class="uk-active"><span>'+name+'</span></li>');
+                    } else {
+                        this.crumbs.append('<li><a href="" data-cmd="loadPath" data-path="'+path+'">'+name+'</a></li>');
+                    }
+                }
+            }
 
             this.main.html(tmpl.render('finder.' + this.view, $.extend(this.data, { writable: this.options.mode == 'write' })));
 

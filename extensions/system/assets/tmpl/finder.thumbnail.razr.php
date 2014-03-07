@@ -1,15 +1,3 @@
-<ul class="uk-breadcrumb pk-breadcrumb">
-    <li><a href="#/" data-cmd="loadPath" data-path="/">Home</a></li>
-    {{ #breadcrumbs }}
-        {{#last}}
-        <li class="uk-active"><span>{{ name }}</span></li>
-        {{ /last }}
-        {{ ^last }}
-        <li><a href="" data-cmd="loadPath" data-path="{{ path }}">{{ name }}</a></li>
-        {{ /last }}
-    {{ /breadcrumbs }}
-</ul>
-
 {{ #data }}
 <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
     {{ #folders }}
