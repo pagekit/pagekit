@@ -36,37 +36,41 @@
                     <form class="uk-form tm-form-horizontal uk-text-left" action="" method="post">
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Hostname')</label>
+                            <label for="form-dbhost" class="uk-form-label">@trans('Hostname')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="text" name="config[database.connections.mysql.host]" value="localhost" required>
+                                <input id="form-dbhost" class="uk-width-1-1" type="text" name="config[database.connections.mysql.host]" value="localhost" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Host cannot be blank.')</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('User')</label>
+                            <label for="form-dbuser" class="uk-form-label">@trans('User')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="text" name="config[database.connections.mysql.user]" value="" required>
+                                <input id="form-dbuser" class="uk-width-1-1" type="text" name="config[database.connections.mysql.user]" value="" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('User cannot be blank.')</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Password')</label>
-                            <div class="uk-form-controls"><input class="uk-width-1-1" type="text" name="config[database.connections.mysql.password]" value="" autocomplete="off"></div>
+                            <label for="form-dbpassword" class="uk-form-label">@trans('Password')</label>
+                            <div class="uk-form-controls">
+                                <input id="form-dbpassword" class="uk-width-1-1" type="text" name="config[database.connections.mysql.password]" value="" autocomplete="off">
+                            </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Database Name')</label>
+                            <label for="form-dbname" class="uk-form-label">@trans('Database Name')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="text" name="config[database.connections.mysql.dbname]" value="pagekit" required>
+                                <input id="form-dbname" class="uk-width-1-1" type="text" name="config[database.connections.mysql.dbname]" value="pagekit" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Database name cannot be blank.')</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Table Prefix')</label>
-                            <div class="uk-form-controls"><input class="uk-width-1-1" type="text" name="config[database.connections.mysql.prefix]" value="pk_"></div>
+                            <label for="form-dbprefix" class="uk-form-label">@trans('Table Prefix')</label>
+                            <div class="uk-form-controls">
+                                <input id="form-dbprefix" class="uk-width-1-1" type="text" name="config[database.connections.mysql.prefix]" value="pk_">
+                            </div>
                         </div>
 
                         <p class="uk-text-right">
@@ -88,18 +92,18 @@
                     <form class="uk-form tm-form-horizontal uk-text-left" action="" method="post">
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Username')</label>
+                            <label for="form-username" class="uk-form-label">@trans('Username')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="text" name="user[username]" value="admin" tabindex="1" required>
+                                <input id="form-username" class="uk-width-1-1" type="text" name="user[username]" value="admin" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Username cannot be blank.')</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Password')</label>
+                            <label for="form-password" class="uk-form-label">@trans('Password')</label>
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
-                                    <input class="uk-width-1-1" type="password" name="user[password]" data-error-message="#js-user-password-error" required>
+                                    <input id="form-password" class="uk-width-1-1" type="password" name="user[password]" data-error-message="#js-user-password-error" required>
                                     <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
                                 </div>
                                 <p id="js-user-password-error" class="uk-form-help-block uk-text-danger">@trans('Password cannot be blank.')</p>
@@ -107,9 +111,9 @@
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Email')</label>
+                            <label for="form-email" class="uk-form-label">@trans('Email')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="email" name="user[email]" tabindex="2" required>
+                                <input id="form-email" class="uk-width-1-1" type="email" name="user[email]" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Field must be a valid email address.')</p>
                             </div>
                         </div>
@@ -133,17 +137,17 @@
                     <form class="uk-form tm-form-horizontal uk-text-left" action="" method="post">
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Name')</label>
+                            <label for="form-sitename" class="uk-form-label">@trans('Name')</label>
                             <div class="uk-form-controls">
-                                <input class="uk-width-1-1" type="text" name="option[system:app.site_title]" required>
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="option[system:app.site_title]" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Site name cannot be blank.')</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
-                            <label class="uk-form-label" for="">@trans('Description')</label>
+                            <label for="form-sitedescription" class="uk-form-label">@trans('Description')</label>
                             <div class="uk-form-controls">
-                                <textarea class="uk-width-1-1" name="option[system:app.site_description]"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" name="option[system:app.site_description]"></textarea>
                             </div>
                         </div>
 
