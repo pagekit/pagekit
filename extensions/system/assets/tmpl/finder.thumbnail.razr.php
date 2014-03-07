@@ -43,5 +43,13 @@
         </div>
     </li>
     {{ /files }}
+
+    <li>
+        <div class="uk-placeholder uk-text-center uk-vertical-align">
+            <div class="uk-vertical-align-middle">
+                <img src="@url('asset://system/images/icon-finder-droparea.svg')" width="20" height="20" alt="@trans('Droparea')">
+            </div>
+        </div>
+    </li>
 </ul>
 {{ /data }}
