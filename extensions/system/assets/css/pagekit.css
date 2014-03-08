@@ -340,7 +340,7 @@
 }
 
 /*
- * Sub-object `pk-thumbnail-small`
+ * Sub-object `pk-finder-thumbnail-table`
  */
 
 .pk-finder-thumbnail-table {
@@ -354,7 +354,6 @@
 }
 
 .pk-finder-thumbnail-table + span { vertical-align: middle; }
-
 
 /*
  * Sub-modifier `pk-finder-subnav`

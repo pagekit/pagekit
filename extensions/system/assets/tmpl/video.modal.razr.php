@@ -5,7 +5,7 @@
             <input type="text" class="js-url uk-width-1-1" placeholder="@trans('URL')">
         </div>
         <div class="js-finder uk-margin-top"></div>
-        <div class="uk-form-row">
+        <div class="uk-margin-top">
             <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
             <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>
         </div>

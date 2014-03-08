@@ -6062,6 +6062,12 @@ input.uk-search-field {
   box-sizing: border-box;
   overflow: auto;
 }
+/*
+ * Remove margin from the last-child
+ */
+.uk-modal-scrollable-box > :last-child {
+  margin-bottom: 0;
+}
 /* ========================================================================
    Component: Off-canvas
  ========================================================================== */
@@ -7752,7 +7758,7 @@ a.uk-datepicker-table-muted {
   background-size: 50px 50px;
 }
 /*
- * Sub-object `pk-thumbnail-small`
+ * Sub-object `pk-finder-thumbnail-table`
  */
 .pk-finder-thumbnail-table {
   display: inline-block;
