@@ -229,6 +229,16 @@ class SystemExtension extends Extension
     }
 
     /**
+     * @{inheritdoc}
+     */
+    public function enable()
+    {
+        if ($version = $this('migrator')->run('extension://system/migrations', $this('option')->get('system:version'))) {
+            $this('option')->set('system:version', $version);
+        }
+    }
+
+    /**
      * Check if the administration area is currently active.
      *
      * return bool
@@ -239,9 +249,21 @@ class SystemExtension extends Extension
     }
 
     /**
-     * TODO: clear opcache
+     * Clear cache on kernel terminate event.
      */
     public function clearCache(array $options = array())
+    {
+        $self = $this;
+
+        $this('router')->finish(function() use ($self, $options) {
+            $self->doClearCache($options);
+        }, -512);
+    }
+
+    /**
+     * TODO: clear opcache
+     */
+    public function doClearCache(array $options = array())
     {
         // clear cache
         if (empty($options) || isset($options['cache'])) {
@@ -258,16 +280,6 @@ class SystemExtension extends Extension
             foreach ($this('file')->find()->in($this('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
                 $this('file')->delete($file->getPathname());
             }
-        }
-    }
-
-    /**
-     * @{inheritdoc}
-     */
-    public function enable()
-    {
-        if ($version = $this('migrator')->run('extension://system/migrations', $this('option')->get('system:version'))) {
-            $this('option')->set('system:version', $version);
         }
     }
 

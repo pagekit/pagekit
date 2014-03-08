@@ -21,7 +21,7 @@ class ThemeListener extends EventSubscriber
             self::$app['theme.admin'] = $this('themes')->load('system', 'extension://system/theme');
             self::$app['theme.site']  = $this('themes')->load($this('config')->get('theme.site'));
 
-        } catch(\Exception $e) {}
+        } catch (\Exception $e) {}
     }
 
     /**

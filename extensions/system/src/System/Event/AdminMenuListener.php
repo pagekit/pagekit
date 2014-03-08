@@ -21,7 +21,7 @@ class AdminMenuListener extends EventSubscriber
         $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
         $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        self::$app->trigger('admin.menu', new MenuEvent($menu));
+        $this('events')->trigger('admin.menu', new MenuEvent($menu));
     }
 
     /**
