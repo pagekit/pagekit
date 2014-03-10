@@ -36,5 +36,5 @@
 <div class="js-finder-files"></div>
 
 <div class="uk-placeholder uk-text-center uk-text-muted js-show-when-empty uk-hidden">
-    <img src="@url('asset://system/images/icon-finder-droparea.svg')" width="20" height="20" alt="@trans('Droparea')"> @trans('Drop files here.')
+    <img src="@url('asset://system/images/icon-finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')"> @trans('Drop files here.')
 </div>
