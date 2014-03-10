@@ -98,16 +98,12 @@ class AliasController extends Controller
                 throw new Exception(__('The alias "%alias%" is already in use.', array('%alias%' => $alias)));
             }
 
-            $this('router')->getUrlMatcher()->match('/'.$source);
-
             $this->aliases->save($obj, compact('alias', 'source'));
             $id = $obj->getId();
             $this('message')->success($id ? __('Alias saved.') : __('Alias created.'));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
-        } catch (ResourceNotFoundException $e) {
-            $this('message')->error(__('Invalid source - not a system route.'));
         }
 
         return $this->redirect($id ? '@system/alias/edit' : '@system/alias/add', compact('id'));

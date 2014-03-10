@@ -8,40 +8,46 @@ define(['jquery', 'require','tmpl!urlpicker.modal', 'uikit', 'link'], function($
 
         var modal  = $(tmpl.get('urlpicker.modal')).appendTo('body'),
             picker = new UI.modal.Modal(modal),
-            url    = modal.find('.js-link-url'),
-            source = $(element),
             link   = new Link({ typeFilter: ['/'] });
+
+        this.url    = modal.find('.js-link-url');
+        this.source = $(element);
 
         modal.on('click', '.js-update', function () {
             picker.hide();
-
-            if (url.val().match(/^@/)) {
-
-                $.getJSON($this.options.url, { url: url.val() }, function(data) {
-                        if (data.error) {
-                            UI.notify(data.message, 'danger');
-                        }
-
-                        if (data.url) {
-                            source.val(data.url);
-                        }
-                    })
-                    .fail(function(jqXHR) {
-                        UI.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
-                    });
-
-            } else {
-                source.val(url.val());
-            }
+            $this.source.val($this.url.val());
+            $this.resolve();
         });
 
-        source.on('click', function() {
+        $this.source.on('click', function() {
             picker.show();
-            url.val(source.val());
-            setTimeout(function() { url.focus(); }, 10);
+            $this.url.val($this.source.val());
+            setTimeout(function() { $this.url.focus(); }, 10);
         });
 
     };
+
+    $.extend(UrlPicker.prototype, {
+
+        resolve: function() {
+            var $this = this, resolved = '';
+
+            if (!this.source.val().match(/^@/)) {
+                $this.source.trigger('resolved', '');
+                return;
+            }
+
+            $.post(this.options.url, { url: this.source.val() }, function(data) {
+                if (!data.error && data.url) {
+                    resolved = data.url;
+                }
+            }, 'json')
+            .always(function() {
+                $this.source.trigger('resolved', resolved);
+            });
+        }
+
+    });
 
     UrlPicker.defaults = {
         url: req.toUrl('admin/system/resolveurl')

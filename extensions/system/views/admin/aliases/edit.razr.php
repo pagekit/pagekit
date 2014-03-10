@@ -13,12 +13,13 @@
         <label for="form-source" class="uk-form-label">@trans('Source')</label>
         <div class="uk-form-controls">
             <input id="form-source" class="uk-form-width-large" type="text" name="source" value="@alias.source" required>
+            <span class="js-resolved-url uk-text-muted"></span>
             <p class="uk-form-help-block">@trans('Enter the existing system path you want to redirect. For example: <code>page/about</code>')</p>
         </div>
     </div>
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url('@system/alias/index')">@( alias.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url('@system/alias/index')">@(alias.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
 </form>

@@ -1,4 +1,4 @@
-require(['jquery', 'urlpicker', 'uikit!notify,form-password', 'domReady!'], function($, Picker, UI) {
+require(['jquery', 'require', 'urlpicker', 'uikit!notify,form-password', 'domReady!'], function($, req, Picker, UI) {
 
     // switcher
     var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {
@@ -35,5 +35,11 @@ require(['jquery', 'urlpicker', 'uikit!notify,form-password', 'domReady!'], func
     });
 
     // URL picker
-    new Picker('#form-frontpage');
+    var source = $('#form-frontpage'), picker = new Picker(source);
+
+    source.on('resolved', function(e, resolved) {
+        $('.js-resolved-url').text(resolved).show(resolved > 0);
+    }).on('change', function() {
+        picker.resolve();
+    }).trigger('change');
 });

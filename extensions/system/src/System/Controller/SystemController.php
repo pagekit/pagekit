@@ -4,7 +4,6 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
-use Pagekit\Component\Routing\Event\GenerateUrlEvent;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\RegisterTmplEvent;
 
@@ -72,13 +71,9 @@ class SystemController extends Controller
      */
     public function resolveUrlAction($url)
     {
-        $this('events')->on('url.generate', function(GenerateUrlEvent $event) { $event->stopPropagation(); }, 32);
+        $url = $this('system.info')->resolveURL($url);
 
-        if (!$url || !$url[0] == '@' || !$url = $this->url($url)) {
-            return $this('response')->json(array('error' => true, 'message' => __('Invalid URL.')));
-        }
-
-        return $this('response')->json(array('url' => ltrim(substr($url, strlen($this('request')->getBaseUrl())), '/')));
+        return $this('response')->json($url ? compact('url') : array('error' => true, 'message' => __('Invalid URL.')));
     }
 
     /**
