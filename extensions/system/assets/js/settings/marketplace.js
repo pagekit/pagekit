@@ -1,6 +1,6 @@
 require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domReady!'], function($, tmpl, uikit) {
 
-    var page = $('#js-marketplace'), form = $('form', page), details = $('.js-details', page), params = page.data(), updates = {}, packages = {}, modal;
+    var page = $('#js-extensions, #js-themes'), form = $('.js-marketplace-form', page), details = $('.js-marketplace-details', page), params = page.data(), updates = {}, packages = {}, modal;
 
     // details modal
     page.on('click', '[data-package]', function(e) {
@@ -102,7 +102,7 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
 
             });
 
-            $('.js-content').html(content);
+            $('.js-marketplace-content').html(content);
 
         });
 

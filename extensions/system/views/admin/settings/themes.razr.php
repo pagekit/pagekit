@@ -1,12 +1,14 @@
 @style('system', 'system/css/system.css')
-@script('updates', 'system/js/settings/updates.js', ['requirejs'])
+@script('updates', 'system/js/settings/updates.js', 'requirejs')
+@script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-packages="@packagesJson|e">
+<div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packagesJson|e">
 
     <ul class="uk-tab" data-uk-tab="{ connect:'#tab-content' }">
         <li class="uk-active"><a href="#">@trans('All')</a></li>
         <li><a href="#">@trans('Updates') <i class="uk-icon-spinner uk-icon-spin js-updates"></i></a></li>
         <li><a href="#">@trans('Install')</a></li>
+        <li><a href="#">@trans('Marketplace')</a></li>
     </ul>
 
     <ul id="tab-content" class="uk-switcher uk-margin">
@@ -79,6 +81,22 @@
                 </div>
                 <button class="uk-button uk-button-primary" type="submit">@trans('Upload')</button>
             </form>
+
+        </li>
+        <li>
+
+            <form class="js-marketplace-form uk-form pk-options uk-clearfix">
+                <div class="uk-float-left">
+                    <input type="text" name="q" placeholder="@trans('Search')">
+                    <input type="hidden" name="type" value="theme">
+                </div>
+            </form>
+
+            <p class="uk-alert uk-alert-info uk-hidden" data-msg="no-packages">@trans('No themes found.')</p>
+            <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the Marketplace. Please try again later.')</p>
+
+            <div class="js-marketplace-content"></div>
+            <div class="js-marketplace-details uk-modal"></div>
 
         </li>
     </ul>

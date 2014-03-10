@@ -80,13 +80,6 @@
         </a>
     </li>
 
-    <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url('@system/marketplace/index')">
-            <img src="@url('asset://system/images/icon-settings-marketplace.svg')" width="50" height="50" alt="@trans('Marketplace')">
-            <p>@trans('Marketplace')</p>
-        </a>
-    </li>
-
 </ul>
 
 <hr class="uk-margin-large">

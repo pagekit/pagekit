@@ -35,7 +35,7 @@ require(['jquery', 'tmpl!package.updates', 'uikit', 'uikit!form-file', 'domReady
     });
 
     // query for updates
-    $.post(params.api + '/package/update', {'api_key': params.key, 'packages': page.attr('data-packages')}, function(data) {
+    $.post(params.api + '/package/update', {'api_key': params.key, 'packages': page.attr('data-installed')}, function(data) {
 
         if (data.packages.length) {
 
