@@ -53,6 +53,24 @@ class MenuWidget extends ApplicationAware implements TypeInterface
             'status' => 1,
         ));
 
+        foreach (new \RecursiveIteratorIterator($root, \RecursiveIteratorIterator::CHILD_FIRST) as $node) {
+
+            if ($node->getAttribute('active')) {
+
+                if ($item = $node->getParent()->getItem()) {
+                    $item->setAttribute('active', true);
+                }
+
+                if ($node->getDepth() < $widget->get('start_level', 1)) {
+                    $root = $node;
+                }
+            }
+        }
+
+        if ($root->getDepth() != $widget->get('start_level', 1) - 1) {
+            return '';
+        }
+
         return $this('view')->render($layout, compact('widget', 'options', 'root'));
     }
 

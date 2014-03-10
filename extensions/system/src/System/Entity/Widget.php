@@ -41,12 +41,12 @@ class Widget extends BaseWidget
 
     public function getShowTitle()
     {
-        return (bool) $this->get('show_title');
+        return (bool) $this->get('show_title', true);
     }
 
-    public function setShowTitle($show_title)
+    public function setShowTitle($showTitle)
     {
-        $this->set('show_title', (bool) $show_title);
+        $this->set('show_title', (bool) $showTitle);
     }
 
     public function getPriority()

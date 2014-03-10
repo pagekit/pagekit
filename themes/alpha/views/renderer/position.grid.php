@@ -17,11 +17,10 @@ $width  = isset($widths[($count-1)]) ? $widths[($count-1)] : array_pad(array(), 
 foreach ($widgets as $widget) {
 
     $class     = $width[$i];
-    $showTitle = $widget->get('show_title', true);
 
     $output[] = '<div class="uk-width-medium-'.$class.'">';
     $output[] =     '<div class="uk-panel">';
-    $output[] =         $showTitle ? '<h3>'.$widget->getTitle().'</h3>':'';
+    $output[] =         $widget->getShowTitle() ? '<h3>'.$widget->getTitle().'</h3>':'';
     $output[] =         $provider->render($widget);
     $output[] =     '</div>';
     $output[] = '</div>';

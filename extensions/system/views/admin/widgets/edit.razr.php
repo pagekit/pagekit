@@ -17,7 +17,7 @@
                         <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@widget.title" required>
                     </p>
                      <p class="uk-form-controls-condensed">
-                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@( widget.get('showTitle', true) ? ' checked' )> @trans('Display the title')</label>
+                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@(widget.showTitle ? ' checked')> @trans('Display the title')</label>
                     </p>
                 </div>
             </div>
@@ -25,10 +25,10 @@
                 <span class="uk-form-label">@trans('Status')</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed">
-                        <label><input type="radio" name="widget[status]" value="1"@( widget.status ? ' checked' )> @trans('Enabled')</label>
+                        <label><input type="radio" name="widget[status]" value="1"@(widget.status ? ' checked')> @trans('Enabled')</label>
                     </p>
                     <p class="uk-form-controls-condensed">
-                        <label><input type="radio" name="widget[status]" value="0"@( !widget.status ? ' checked' )> @trans('Disabled')</label>
+                        <label><input type="radio" name="widget[status]" value="0"@(!widget.status ? ' checked')> @trans('Disabled')</label>
                     </p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="uk-form-controls">
                     <select id="form-position" class="uk-form-width-large" name="widget[position]">
                         @foreach (positions as position)
-                        <option value="@position.id"@( widget.position == position.id ? ' selected' )>@trans(position.name)</option>
+                        <option value="@position.id"@(widget.position == position.id ? ' selected')>@trans(position.name)</option>
                         @endforeach
                     </select>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="uk-form-controls">
                     <select id="form-access" class="uk-form-width-large" name="widget[accessId]">
                         @foreach (levels as level)
-                        <option value="@level.id"@( widget.accessId == level.id ? ' selected' )>@level.name</option>
+                        <option value="@level.id"@(widget.accessId == level.id ? ' selected')>@level.name</option>
                         @endforeach
                     </select>
                 </div>
@@ -89,7 +89,7 @@
 
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url('@system/widgets/index')">@( widget.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url('@system/widgets/index')">@(widget.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
 </form>
