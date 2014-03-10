@@ -31,6 +31,17 @@ composer install
 php path/to/composer.phar install
 ```
 
+### Update
+
+To updated you need to pull Pagekit and run the composer `update` command 
+
+```
+git pull
+composer update
+```
+
+You may also clear the `app/cache` folder.
+
 ### CLI
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
