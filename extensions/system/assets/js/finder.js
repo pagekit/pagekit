@@ -143,7 +143,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this, path = path || this.path, newPath = path;
 
-            $.getJSON(this.url + '/list', this.getParams(path), function(data) {
+            $.post(this.url + '/list', this.getParams(path), function(data) {
 
                 $this.path = newPath;
                 $this.data = data;
@@ -167,7 +167,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                 $this.render();
 
-            }).fail(function (jqXHR) {
+            }, 'json').fail(function (jqXHR) {
+
                 UI.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
             });
         },
@@ -213,6 +214,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             if (this.view == 'thumbnail') {
                 $(document).trigger('uk-domready');
             }
+
+            this.main.find('.js-show-when-empty')[this.main.find('[data-name]').length ? 'removeClass':'addClass']('uk-hidden');
         },
 
         applyFilter: function() {

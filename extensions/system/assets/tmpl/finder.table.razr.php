@@ -52,7 +52,3 @@
     </tbody>
 </table>
 {{ /data }}
-
-<div class="uk-placeholder uk-text-center uk-text-muted">
-    <img src="@url('asset://system/images/icon-finder-droparea.svg')" width="20" height="20" alt="@trans('Droparea')"> @trans('Drop files here.')
-</div>
