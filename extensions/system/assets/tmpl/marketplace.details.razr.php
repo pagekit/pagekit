@@ -1,4 +1,4 @@
-<div class="uk-modal-dialog">
+<div class="uk-modal-dialog uk-modal-dialog-large">
 
     <div>
         <h2>{{ title }}</h2>
