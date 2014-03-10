@@ -31,8 +31,6 @@ composer install
 php path/to/composer.phar install
 ```
 
-### Update
-
 To updated you need to pull Pagekit and run the composer `update` command 
 
 ```
