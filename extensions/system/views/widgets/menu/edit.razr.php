@@ -22,16 +22,9 @@
     <label for="form-style" class="uk-form-label">@trans('Start Level')</label>
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][start_level]">
-            <option value="1"@('1' === widget.get('start_level') ? ' selected')>@trans('1')</option>
-            <option value="2"@('2' === widget.get('start_level') ? ' selected')>@trans('2')</option>
-            <option value="3"@('3' === widget.get('start_level') ? ' selected')>@trans('3')</option>
-            <option value="4"@('4' === widget.get('start_level') ? ' selected')>@trans('4')</option>
-            <option value="5"@('5' === widget.get('start_level') ? ' selected')>@trans('5')</option>
-            <option value="6"@('6' === widget.get('start_level') ? ' selected')>@trans('6')</option>
-            <option value="7"@('7' === widget.get('start_level') ? ' selected')>@trans('7')</option>
-            <option value="8"@('8' === widget.get('start_level') ? ' selected')>@trans('8')</option>
-            <option value="9"@('9' === widget.get('start_level') ? ' selected')>@trans('9')</option>
-            <option value="10"@('10' === widget.get('start_level') ? ' selected')>@trans('10')</option>
+            @foreach([trans('1'), trans('2'), trans('3'), trans('4'), trans('5'), trans('6'), trans('7'), trans('8'), trans('9'), trans('10'), ] as value => text)
+            <option value="@(value + 1)"@(value + 1 == widget.get('start_level') ? ' selected')>@text</option>
+            @endforeach
         </select>
     </div>
 </div>
@@ -40,16 +33,9 @@
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][depth]">
             <option value="">@trans('- No Limit -')</option>
-            <option value="1"@('1' === widget.get('depth') ? ' selected')>@trans('1')</option>
-            <option value="2"@('2' === widget.get('depth') ? ' selected')>@trans('2')</option>
-            <option value="3"@('3' === widget.get('depth') ? ' selected')>@trans('3')</option>
-            <option value="4"@('4' === widget.get('depth') ? ' selected')>@trans('4')</option>
-            <option value="5"@('5' === widget.get('depth') ? ' selected')>@trans('5')</option>
-            <option value="6"@('6' === widget.get('depth') ? ' selected')>@trans('6')</option>
-            <option value="7"@('7' === widget.get('depth') ? ' selected')>@trans('7')</option>
-            <option value="8"@('8' === widget.get('depth') ? ' selected')>@trans('8')</option>
-            <option value="9"@('9' === widget.get('depth') ? ' selected')>@trans('9')</option>
-            <option value="10"@('10' === widget.get('depth') ? ' selected')>@trans('10')</option>
+            @foreach([trans('1'), trans('2'), trans('3'), trans('4'), trans('5'), trans('6'), trans('7'), trans('8'), trans('9'), trans('10'), ] as value => text)
+            <option value="@(value + 1)"@(value + 1 == widget.get('depth') ? ' selected')>@text</option>
+            @endforeach
         </select>
     </div>
 </div>
