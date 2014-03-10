@@ -4,9 +4,9 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
         var $this = this;
 
-        this.options  = $.extend({}, Finder.defaults, mod.config(), options);
+        this.options  = $.extend({}, Finder.defaults, options);
 
-        this.url  = this.options.url.replace(/\/$/, '');
+        this.url  = this.options.url;
         this.path = this.options.path;
         this.view = this.options.view;
 
@@ -28,7 +28,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
         };
 
         var uploadsettings = {
-            action: this.url + '/upload',
+            action: this.url + 'upload',
             before: function(options) {
                 options = $.extend(options.params, $this.getParams($this.path));
             },
@@ -143,7 +143,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this, path = path || this.path, newPath = path;
 
-            $.post(this.url + '/list', this.getParams(path), function(data) {
+            $.post(this.url + 'list', this.getParams(path), function(data) {
 
                 $this.path = newPath;
                 $this.data = data;
@@ -267,7 +267,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this;
 
-            return $.getJSON(this.url + '/' + name, $.extend(this.getParams(this.path), params), function(data) {
+            return $.getJSON(this.url + name, $.extend(this.getParams(this.path), params), function(data) {
 
                 UI.notify(data.message, data.error ? 'danger' : 'success');
 
@@ -284,7 +284,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
     });
 
     Finder.defaults = {
-        url : req.toUrl('system/finder'),
+        url : req.toUrl(mod.config().url),
         view: 'table',
         mode: 'read',
         root: '/',

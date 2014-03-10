@@ -1,6 +1,8 @@
 require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
-    var api = 'http://api.openweathermap.org/data/2.5', url = $('meta[data-base]').data('base').replace(/\/$/, ''), storage = sessionStorage || {};
+    var api = 'http://api.openweathermap.org/data/2.5', storage = sessionStorage || {};
+
+    // widget init
 
     $('[data-weather]').each(function() {
 
@@ -60,7 +62,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
         };
 
-        return url + '/extensions/system/assets/images/icon-weather-' + icons[icon];
+        return require.toUrl('extensions/system/assets/images/icon-weather-' + icons[icon]);
     }
 
     // widget settings
