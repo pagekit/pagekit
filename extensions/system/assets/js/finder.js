@@ -215,7 +215,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 $(document).trigger('uk-domready');
             }
 
-            this.main.find('.js-show-when-empty')[this.main.find('[data-name]').length ? 'removeClass':'addClass']('uk-hidden');
+            this.element.find('.js-show-when-empty').toggleClass("uk-hidden", (this.main.find('[data-name]').length > 0));
         },
 
         applyFilter: function() {
