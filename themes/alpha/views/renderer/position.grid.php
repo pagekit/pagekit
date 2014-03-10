@@ -17,8 +17,7 @@ $width  = isset($widths[($count-1)]) ? $widths[($count-1)] : array_pad(array(), 
 foreach ($widgets as $widget) {
 
     $class     = $width[$i];
-    $settings  = $widget->getSettings();
-    $showTitle = isset($settings["show_title"]) ? $settings["show_title"] : true;
+    $showTitle = $widget->get('show_title', true);
 
     $output[] = '<div class="uk-width-medium-'.$class.'">';
     $output[] =     '<div class="uk-panel">';

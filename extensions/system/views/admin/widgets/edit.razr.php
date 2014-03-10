@@ -17,7 +17,7 @@
                         <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@widget.title" required>
                     </p>
                      <p class="uk-form-controls-condensed">
-                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@( widget.showTitle ? ' checked' )> @trans('Display the title')</label>
+                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@( widget.get('showTitle', true) ? ' checked' )> @trans('Display the title')</label>
                     </p>
                 </div>
             </div>
