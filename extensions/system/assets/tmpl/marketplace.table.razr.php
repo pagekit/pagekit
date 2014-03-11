@@ -3,7 +3,7 @@
     <li>
         <a class="uk-panel uk-panel-box pk-marketplace-panel uk-overlay-toggle" href="#" data-package="{{ name }}">
 
-            <div class="uk-panel-teaser"><img src="{{ extra.teaser }}" width="900" height="600" alt="{{ title }}"></div>
+            <div class="uk-panel-teaser"><img src="{{ extra.teaser }}" width="800" height="600" alt="{{ title }}"></div>
 
             <h2 class="uk-panel-title">
                 {{ title }}
