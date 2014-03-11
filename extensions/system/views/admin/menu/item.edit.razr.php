@@ -10,7 +10,7 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-url" class="uk-form-label">@trans('Url')</label>
+        <label for="form-url" class="uk-form-label">@trans('URL')</label>
         <div class="uk-form-controls uk-form-controls-text">
             <input type="hidden" name="item[url]" value="@item.url">
         </div>

@@ -3182,7 +3182,7 @@ select.uk-form-width-mini {
   }
   /* Better vertical alignment if controls are checkboxes and radio buttons with text */
   .uk-form-horizontal .uk-form-controls-text {
-    padding-top: 5px;
+    padding-top: 7px;
   }
 }
 /* Sub-object: `uk-form-icon`

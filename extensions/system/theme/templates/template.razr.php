@@ -13,9 +13,9 @@
         <div class="tm-navbar">
             <div class="uk-container uk-container-center">
 
-            	<nav class="uk-navbar">
+                <nav class="uk-navbar">
 
-	                <a class="uk-navbar-brand uk-hidden-small" href="@url('@system/system/admin')">
+                    <a class="uk-navbar-brand uk-hidden-small" href="@url('@system/system/admin')">
                         <img src="@url('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
                     </a>
 
@@ -43,9 +43,9 @@
                         <img src="@url('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
                     </a>
 
-           		</nav>
+                </nav>
 
-           	</div>
+            </div>
         </div>
 
         <div class="uk-container uk-container-center">
@@ -58,7 +58,7 @@
             @endif
 
             @if (app.view.get('theme.boxed', true))
-        	<div class="tm-main uk-panel uk-panel-box">@action('content')</div>
+            <div class="tm-main uk-panel uk-panel-box">@action('content')</div>
             @else
             @action('content')
             @endif
