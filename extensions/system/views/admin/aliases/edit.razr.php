@@ -11,7 +11,7 @@
     </div>
     <div class="uk-form-row">
         <label for="form-source" class="uk-form-label">@trans('Source')</label>
-        <div class="uk-form-controls">
+        <div class="uk-form-controls uk-form-controls-text">
             <input type="hidden" name="source" value="@alias.source">
             <p class="uk-form-help-block">@trans('Pick an existing system path you want to redirect. For example: <code>page/about</code>')</p>
         </div>

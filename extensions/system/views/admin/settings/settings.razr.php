@@ -32,7 +32,7 @@
                 </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Front Page')</label>
-                    <div class="uk-form-controls">
+                    <div class="uk-form-controls uk-form-controls-text">
                         <input type="hidden" name="option[system:app.frontpage]" value="@option.get('system:app.frontpage')">
                     </div>
                 </div>
