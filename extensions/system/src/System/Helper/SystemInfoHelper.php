@@ -7,6 +7,7 @@ use Pagekit\Component\Routing\Event\GenerateUrlEvent;
 use Pagekit\Framework\ApplicationAware;
 use PDO;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SystemInfoHelper extends ApplicationAware
 {
@@ -50,14 +51,13 @@ class SystemInfoHelper extends ApplicationAware
         $listener = function(GenerateUrlEvent $event) { $event->stopPropagation(); };
         $this('events')->on('url.generate', $listener, 32);
 
-        $resolved = false;
-        if ($url && $url[0] == '@' && $url = $this('url')->to($url)) {
-            $resolved = ltrim(substr($url, strlen($this('request')->getBaseUrl())), '/');
-        }
+        try {
+            $url = $this('url')->to($url);
+        } catch (\Exception $e) {}
 
         $this('events')->removeListener('url.generate', $listener);
 
-        return $resolved;
+        return $url;
     }
 
     /**

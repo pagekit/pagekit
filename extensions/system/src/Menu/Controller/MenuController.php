@@ -55,7 +55,7 @@ class MenuController extends Controller
             $menu->setId(0);
         }
 
-        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus, 'levels' => $this->levels->findAll(), 'controller' => $this);
+        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus, 'levels' => $this->levels->findAll());
     }
 
     /**
@@ -133,13 +133,5 @@ class MenuController extends Controller
         }
 
         return $this('response')->json('success');
-    }
-
-    public function formatUrl($url)
-    {
-        $url  = $this('url')->to($url);
-        $root = $this('url')->root();
-
-        return substr($url, 0, $length = strlen($root)) == $root ? substr($url, $length) : $url;
     }
 }

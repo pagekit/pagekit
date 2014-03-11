@@ -12,20 +12,9 @@
     <div class="uk-form-row">
         <label for="form-url" class="uk-form-label">@trans('Url')</label>
         <div class="uk-form-controls">
-            <input id="form-url" class="uk-form-width-large js-link-url" type="text" name="item[url]" value="@item.url" required>
+            <input type="hidden" name="item[url]" value="@item.url">
         </div>
     </div>
-
-    <div class="uk-form-row">
-        <label for="form-type" class="uk-form-label">@trans('Type')</label>
-        <div class="uk-form-controls">
-            <select id="form-type" class="uk-form-width-large js-link-types" name="type">
-                <option value="">@trans('Custom')</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="uk-form-row js-link-edit uk-hidden"></div>
 
     <div class="uk-form-row">
         <span class="uk-form-label">@trans('Status')</span>

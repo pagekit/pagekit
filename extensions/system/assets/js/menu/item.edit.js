@@ -1,9 +1,4 @@
-require(['jquery', 'link'], function($, Link) {
-
-    var link = new Link();
-
-    $('form').on('submit', function() {
-        link.clearEditForm();
-    });
-
+require(['urlpicker'], function(Picker) {
+    // URL picker
+    new Picker('[name="item[url]"]', { typeFilter: false });
 });

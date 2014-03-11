@@ -19,7 +19,7 @@
                 <a class="uk-icon-circle uk-text-@(item.status ? 'success' : 'danger')" href="#" data-action="@url('@system/item/status', ['menu' => item.menuId,'id' => item.id, 'status' => item.status ? '0' : '1'])" title="@item.statusText"></a>
             </div>
             <div class="pk-table-width-200 uk-text-truncate">
-                <a href="@url(item.url)" target="_blank">@controller.formatUrl(item.url)</a>
+                <a href="@url(item.url)" target="_blank">@url(item.url)</a>
             </div>
             <div class="pk-table-width-100">
                 @(levels[item.accessId].name ?: trans('No access level'))

@@ -6,7 +6,6 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Entity\Alias;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * @Access("system: manage url aliases", admin=true)

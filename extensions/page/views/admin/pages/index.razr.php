@@ -61,7 +61,7 @@
                     </a>
                 </td>
                 <td>
-                    <div class="uk-text-truncate"><a href="@url('@page/id', ['id' => page.id])" target="_blank">@(url('@page/id', ['id' => page.id])|slice(app.router.requestContext.baseUrl|length))</a></div>
+                    <div class="uk-text-truncate"><a href="@url('@page/id', ['id' => page.id])" target="_blank">@url('@page/id', ['id' => page.id])</a></div>
                 </td>
                 <td>
                     @(levels[page.accessId].name ?: trans('No access level'))

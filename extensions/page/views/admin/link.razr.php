@@ -13,7 +13,6 @@
         var handler, $id = $('[name=id]', '.js-link-edit');
 
         $(document).on('load.urlpicker', function(e, link, params) {
-            var id = params['id'];
             handler = link;
 
             $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');

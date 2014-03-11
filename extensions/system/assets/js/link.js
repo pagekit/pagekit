@@ -10,11 +10,11 @@ define(['jquery', 'require'], function($, req) {
         this.url     = $(this.options.urlField);
         this.forms   = {};
 
-        $.getJSON($this.options.url)
+        $.getJSON(this.options.url)
             .done(function(links) {
                 $.each(links, function(route, link) {
 
-                    if (-1 !== $.inArray(route, $this.options.typeFilter)) {
+                    if ($this.options.typeFilter && -1 !== $.inArray(route, $this.options.typeFilter)) {
                         return;
                     }
 
@@ -29,21 +29,19 @@ define(['jquery', 'require'], function($, req) {
 
         this.types.on('change', function() {
 
-            var type = $(this).val();
+            var type = $(this).val()+'', show;
 
             $this.clearEditForm();
 
-            if (!type || !$this.forms[type]) {
+            if (!$this.forms[type]) {
                 return;
             }
 
             $this.edit.html($this.forms[type]);
 
-            if($this.edit.children(':not(script)').length) {
-                $this.edit.removeClass('uk-hidden').show()
-            } else {
-                $this.edit.addClass('uk-hidden');
-            }
+            show = $this.edit.children(':not(script)').length > 0;
+
+            $this.edit.toggleClass('uk-hidden', !show).toggle(show);
 
             $this.triggerLoad();
         });
@@ -69,18 +67,17 @@ define(['jquery', 'require'], function($, req) {
         },
 
         triggerLoad: function() {
-            var params = this.url.val().split('?')[1];
-            $(document).trigger('load.urlpicker', [this, (params ? this.deparam(params) : {})]);
+            $(document).trigger('load.urlpicker', [this, this.deparam(this.url.val().split('?')[1] + ''), this.url.val()]);
         },
 
         clearEditForm: function() {
-            this.edit.hide().html('');
+            this.edit.html('');
         },
 
-        updateUrl: function(params) {
-            if (this.types.val()) {
-                this.url.val(this.types.val() + (params ? '?' + $.param(params) : ''));
-            }
+        updateUrl: function(params, url) {
+            url = url ? url : this.types.val();
+
+            this.url.val(url + (params ? '?' + $.param(params) : ''));
         },
 
         /*

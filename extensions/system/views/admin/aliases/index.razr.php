@@ -42,7 +42,7 @@
                 <td>
                     <a href="@url('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
                 </td>
-                <td>@(alias.source|slice(0,1) == '@' ? app.get('system.info').resolveUrl(alias.source) : alias.source)</td>
+                <td>@app.get('system.info').resolveUrl(alias.source)</td>
             </tr>
             @endforeach
         </tbody>

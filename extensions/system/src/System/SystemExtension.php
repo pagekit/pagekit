@@ -194,6 +194,7 @@ class SystemExtension extends Extension
             $app['widgets']->registerType(new TextWidget);
 
             $app['links']->register('Pagekit\System\Link\Frontpage');
+            $app['links']->register('Pagekit\System\Link\Url');
 
             $app['events']->addSubscriber(new LinkPlugin);
             $app['events']->addSubscriber(new VideoPlugin);
@@ -225,6 +226,7 @@ class SystemExtension extends Extension
             $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
             $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
             $event->register('urlpicker.modal', 'extension://system/assets/tmpl/urlpicker.modal.razr.php');
+            $event->register('urlpicker.replace', 'extension://system/assets/tmpl/urlpicker.replace.razr.php');
         });
     }
 

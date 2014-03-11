@@ -35,11 +35,5 @@ require(['jquery', 'require', 'urlpicker', 'uikit!notify,form-password', 'domRea
     });
 
     // URL picker
-    var source = $('#form-frontpage'), picker = new Picker(source);
-
-    source.on('resolved', function(e, resolved) {
-        $('.js-resolved-url').text(resolved).show(resolved > 0);
-    }).on('change', function() {
-        picker.resolve();
-    }).trigger('change');
+    new Picker('[name="option[system:app.frontpage]"]');
 });

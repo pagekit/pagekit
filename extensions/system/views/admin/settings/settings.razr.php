@@ -31,11 +31,9 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label for="form-frontpage" class="uk-form-label">@trans('Front Page')</label>
+                    <label class="uk-form-label">@trans('Front Page')</label>
                     <div class="uk-form-controls">
-                        <input id="form-frontpage" class="uk-form-width-large" type="text" name="option[system:app.frontpage]" value="@option.get('system:app.frontpage')">
-                        <span class="js-resolved-url uk-text-muted"></span>
-                        <p class="uk-form-help-block">@trans('Optionally, pick a URL to display as the front page.')</p>
+                        <input type="hidden" name="option[system:app.frontpage]" value="@option.get('system:app.frontpage')">
                     </div>
                 </div>
                 <div class="uk-form-row">

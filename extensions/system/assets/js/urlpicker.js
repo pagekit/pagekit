@@ -1,4 +1,4 @@
-define(['jquery', 'require','tmpl!urlpicker.modal', 'uikit', 'link'], function($, req, tmpl, UI, Link) {
+define(['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, UI, Link) {
 
     var UrlPicker = function(element, options) {
 
@@ -6,51 +6,54 @@ define(['jquery', 'require','tmpl!urlpicker.modal', 'uikit', 'link'], function($
 
         this.options = $.extend({}, UrlPicker.defaults, options);
 
-        var modal  = $(tmpl.get('urlpicker.modal')).appendTo('body'),
-            picker = new UI.modal.Modal(modal),
-            link   = new Link({ typeFilter: ['/'] });
+        var modal   = $(tmpl.get('urlpicker.modal')).appendTo('body'),
+            picker  = new UI.modal.Modal(modal),
+            link    = new Link({ typeFilter: this.options.typeFilter }),
+            url     = modal.find('.js-link-url'),
+            source  = $(element),
+            trigger = $(tmpl.get('urlpicker.replace')).insertBefore(source);
 
-        this.url    = modal.find('.js-link-url');
-        this.source = $(element);
+        modal.on('submit', 'form', function (e) {
+            e.preventDefault();
 
-        modal.on('click', '.js-update', function () {
             picker.hide();
-            $this.source.val($this.url.val());
-            $this.resolve();
+            source.val(url.val()).trigger('change');
+            resolve();
         });
 
-        $this.source.on('click', function() {
+        trigger.on('click', function(e) {
+            e.preventDefault();
+
+            url.val(source.val()).trigger('change');
             picker.show();
-            $this.url.val($this.source.val());
-            setTimeout(function() { $this.url.focus(); }, 10);
         });
 
-    };
+        source
+            .on('change', function() {
+               resolve();
+            })
+            .on('resolved', function(e, resolved) {
+                var $text = $('.js-picker-resolved', trigger);
+                $text.text(resolved.length && source.val().length ? resolved : $text.data('text-empty'));
+            }).trigger('change');
 
-    $.extend(UrlPicker.prototype, {
+        function resolve() {
+            var resolved = '';
 
-        resolve: function() {
-            var $this = this, resolved = '';
-
-            if (!this.source.val().match(/^@/)) {
-                $this.source.trigger('resolved', '');
-                return;
-            }
-
-            $.post(this.options.url, { url: this.source.val() }, function(data) {
+            $.post($this.options.url, { url: source.val() }, function(data) {
                 if (!data.error && data.url) {
                     resolved = data.url;
                 }
-            }, 'json')
-            .always(function() {
-                $this.source.trigger('resolved', resolved);
+            }, 'json').always(function() {
+                source.trigger('resolved', resolved);
             });
         }
 
-    });
+    };
 
     UrlPicker.defaults = {
-        url: req.toUrl('admin/system/resolveurl')
+        url: req.toUrl('admin/system/resolveurl'),
+        typeFilter: ['/']
     };
 
     return UrlPicker;
