@@ -1144,8 +1144,18 @@
         },
 
         resize: function() {
+            
+            var paddingdir = "padding-" + (UI.langdirection == 'left' ? "right":"left");
+
             this.scrollbarwidth = window.innerWidth - html.width();
-            html.css("padding-" + (UI.langdirection == 'left' ? "right":"left"), this.scrollbarwidth);
+            
+            html.css(paddingdir, this.scrollbarwidth);
+
+            this.element.css(paddingdir, "");
+
+            if (this.dialog.offset().left > this.scrollbarwidth) {
+                this.element.css(paddingdir, this.scrollbarwidth);
+            }
 
             if (this.scrollable) {
 
@@ -1267,7 +1277,12 @@
 
     // init code
     $(document).on("click.modal.uikit", "[data-uk-modal]", function(e) {
+
         var ele = $(this);
+
+        if(ele.is("a")) {
+            e.preventDefault();
+        }
 
         if (!ele.data("modal")) {
             var modal = new ModalTrigger(ele, UI.Utils.options(ele.attr("data-uk-modal")));
@@ -1355,12 +1370,14 @@
                 var target = $(e.target);
 
                 if (!e.type.match(/swipe/)) {
-                    if (target.hasClass("uk-offcanvas-bar")) return;
-                    if (target.parents(".uk-offcanvas-bar:first").length) return;
+
+                    if (!target.hasClass("uk-offcanvas-close")) {
+                        if (target.hasClass("uk-offcanvas-bar")) return;
+                        if (target.parents(".uk-offcanvas-bar:first").length) return;
+                    }
                 }
 
                 e.stopImmediatePropagation();
-
                 Offcanvas.hide();
             });
 

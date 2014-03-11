@@ -5941,14 +5941,10 @@ input.uk-search-field {
   opacity: 1;
 }
 /*
- * 7. Prevents scrolling for the body content
- * 8. Prevents duplicated scrollbar caused by 4.
+ * Prevents duplicated scrollbar caused by 4.
  */
 .uk-modal-page,
 .uk-modal-page body {
-  /* 7 */
-  height: 100%;
-  /* 8 */
   overflow: hidden;
 }
 /* Sub-object: `uk-modal-dialog`
@@ -6052,7 +6048,7 @@ input.uk-search-field {
 /* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-modal-dialog-large {
-    width: 1130px;
+    width: 1150px;
   }
 }
 /* Sub-object: `uk-modal-scrollable-box`
