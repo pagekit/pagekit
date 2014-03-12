@@ -91,6 +91,7 @@ class AccessLevelController extends Controller
 
     /**
      * @Request({"order": "array"})
+     * @Token
      */
     public function priorityUpdateAction($order) {
 
