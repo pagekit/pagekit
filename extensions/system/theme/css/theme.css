@@ -7717,13 +7717,6 @@ a.uk-datepicker-table-muted {
 .pk-sortable-moving * {
   cursor: move;
 }
-/* `pk-iframe-hidden`
-========================================================================== */
-.pk-iframe-hidden {
-  width: 1px;
-  height: 1px;
-  visibility: hidden;
-}
 /* `pk-finder`
  ========================================================================== */
 /*

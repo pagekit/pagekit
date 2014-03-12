@@ -1,27 +1,24 @@
-<div class="uk-margin uk-text-center uk-vertical-align">
+<form class="uk-article uk-form" action="@url('@system/auth/resetconfirm', ['user' => username, 'key' => activation])" method="post">
 
-    <!-- TODO: style is '...' -->
-    <div class="uk-panel uk-panel-box uk-vertical-align-middle" style="width: 300px;">
+    <h1 class="uk-article-title">@trans('Password confirmation')</h1>
 
-        <div class="uk-alert">
-            @trans('Enter your new password below.')
+    <p>@trans('Enter your new password below.')</p>
+
+    <div class="uk-form-row">
+        <label for="form-password" class="uk-form-label">@trans('New password')</label>
+        <div class="uk-form-controls">
+            <input id="form-password" type="password" name="password1" value="" required>
         </div>
-
-        <form class="uk-form" action="@url('@system/auth/resetconfirm', ['user' => username, 'key' => activation])" method="post">
-
-            <h3>Logo Placeholder</h3>
-            <div class="uk-form-row">
-                <input class="uk-width-1-1" type="password" name="password1" value="" placeholder="@trans('New password')" required>
-            </div>
-            <div class="uk-form-row">
-                <input class="uk-width-1-1" type="password" name="password2" value="" placeholder="@trans('Confirm new password')" required>
-            </div>
-            <div class="uk-form-row">
-                <input class="uk-button uk-button-primary uk-width-1-1" type="submit" value="@trans('Reset Password')">
-            </div>
-
-        </form>
-
+    </div>
+    <div class="uk-form-row">
+        <label for="form-confirm" class="uk-form-label">@trans('Confirm password')</label>
+        <div class="uk-form-controls">
+            <input id="form-confirm" type="password" name="password2" value="" required>
+        </div>
     </div>
 
-</div>
+    <div class="uk-form-row">
+        <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
+    </div>
+
+</form>
