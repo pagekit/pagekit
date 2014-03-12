@@ -14,7 +14,7 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Settings'), 'config' => array());
+        return array('head.title' => __('Settings'), 'config' => $this('option')->get('alpha:config', array()));
     }
 
     /**
@@ -22,8 +22,12 @@ class SettingsController extends Controller
      */
     public function saveAction($config = array())
     {
+
+        $this('option')->set('alpha:config', $config);
+
         $this('message')->success(__('Settings saved.'));
 
-        return $this->redirect('@system/themes/settings', array('name' => 'default'));
+        return $this->redirect('@system/themes/settings', array('name' => 'alpha'));
     }
+
 }
