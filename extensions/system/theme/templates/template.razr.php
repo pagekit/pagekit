@@ -24,7 +24,7 @@
                     <div class="uk-navbar-flip">
 
                         <div class="uk-navbar-content" data-uk-dropdown>
-                            @set(user = app.users.get())
+                            @set (user = app.users.get())
                             <a href="#" title="@user.username">@gravatar(user.email, ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => user.username]])</a>
                             <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                 <ul class="uk-nav uk-nav-dropdown">
@@ -52,7 +52,7 @@
 
             @include('extension://system/theme/views/menu/subnav.razr.php', ['root' => subnav])
 
-            @set(title = app.view.get('head.title'))
+            @set (title = app.view.get('head.title'))
             @if (title)
             <h1 class="tm-heading">@title</h1>
             @endif

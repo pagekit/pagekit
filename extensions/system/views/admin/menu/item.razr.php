@@ -4,7 +4,7 @@
 
     @foreach (root.children as menuitem)
 
-    @set(item = menuitem.item)
+    @set (item = menuitem.item)
 
     <li class="uk-sortable-list-item" data-id="@item.id">
 

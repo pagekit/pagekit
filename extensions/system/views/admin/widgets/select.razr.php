@@ -4,8 +4,8 @@
 
     @foreach (root.children as node)
 
-    @set(item = node.item)
-    @set(type = app.menus.type(item.type))
+    @set (item = node.item)
+    @set (type = app.menus.type(item.type))
 
     <li>
 

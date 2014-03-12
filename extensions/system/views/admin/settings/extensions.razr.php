@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     @foreach (packages as name => package)
-                    @set(extension = app['extensions'].get(name))
+                    @set (extension = app['extensions'].get(name))
                     <tr class="@if (!extension)uk-visible-hover-inline@endif @if (!extension)pk-table-disable@endif">
                         <td class="pk-table-width-minimum">
                             <img class="uk-img-preserve" src="@( package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) :  url('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">

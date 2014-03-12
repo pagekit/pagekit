@@ -1,6 +1,6 @@
 <form class="uk-form uk-form-horizontal" action="@url('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
 
-    @set(type = app.widgets.type(widget.type))
+    @set (type = app.widgets.type(widget.type))
 
     <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
         <li class="uk-active"><a href="#">@trans('Settings')</a></li>
