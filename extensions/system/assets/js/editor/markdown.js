@@ -1,25 +1,26 @@
-require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], function($, UI, marked, codemirror) {
+require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], function($, uikit, marked, codemirror) {
 
-    var $script = $('script[data-plugins]'); plugins = $script.data('plugins'), options = $script.data('finder');
+    var $script = $('script[data-plugins]');
+    plugins = $script.data('plugins'), options = $script.data('finder');
 
     require(plugins, function() {
 
         for (var plugin in arguments) {
-            arguments[plugin](UI.markdownarea, options);
+            arguments[plugin](uikit.markdownarea, options);
         }
 
-        UI.markdownarea.defaults.codemirror.autoCloseTags = true;
+        uikit.markdownarea.defaults.codemirror.autoCloseTags = true;
 
         $('[data-editor="markdown"]').each(function() {
-            var editor = new UI.markdownarea(this, { "marked" : marked, "CodeMirror": codemirror });
+            var editor = new uikit.markdownarea(this, { marked: marked, CodeMirror: codemirror });
 
-            editor.editor.on("inputRead", UI.Utils.debounce(function(){
-              autocomplete(editor.editor);
+            editor.editor.on('inputRead', uikit.Utils.debounce(function() {
+                autocomplete(editor.editor);
             }, 100));
 
             editor.editor.addKeyMap({
-                'Ctrl-S': function(){ save(editor.element[0]); },
-                'Cmd-S': function(){ save(editor.element[0]); }
+                'Ctrl-S': function() { save(editor.element[0]); },
+                'Cmd-S': function() { save(editor.element[0]); }
             });
 
             setTimeout(function() {
@@ -42,8 +43,8 @@ require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], f
 
             var cur = cm.getCursor(), token = cm.getTokenAt(cur);
 
-            if(token.string.charAt(0) == "<" || token.type == "attribute") {
-              CodeMirror.showHint(cm, CodeMirror.hint.html, {completeSingle:false});
+            if (token.string.charAt(0) == "<" || token.type == "attribute") {
+                CodeMirror.showHint(cm, CodeMirror.hint.html, { completeSingle: false });
             }
         }
     };

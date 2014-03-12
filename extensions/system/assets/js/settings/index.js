@@ -1,23 +1,23 @@
-require(['jquery', 'uikit!notify', 'domReady!'], function($, notify) {
+require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
-   $('#clearCache').on('click', function(e) {
-       e.preventDefault();
+    $('#clearCache').on('click', function(e) {
+        e.preventDefault();
 
-       modal = new $.UIkit.modal.Modal('#modal-clearcache');
+        modal = new uikit.modal.Modal('#modal-clearcache');
 
-       modal.element.find('form').on('submit', function(e) {
-           e.preventDefault();
+        modal.element.find('form').on('submit', function(e) {
+            e.preventDefault();
 
-           $.post($(this).attr('action'), $(this).serialize(), function(data) {
-               notify.notify(data.message);
-           }).fail(function() {
-               notify.notify('Clearing cache failed.');
-           }).always(function() {
-               modal.hide();
-           });
-       });
+            $.post($(this).attr('action'), $(this).serialize(),function(data) {
+                uikit.notify(data.message);
+            }).fail(function() {
+                uikit.notify('Clearing cache failed.');
+            }).always(function() {
+                modal.hide();
+            });
+        });
 
-       modal.show();
-   });
+        modal.show();
+    });
 
 });

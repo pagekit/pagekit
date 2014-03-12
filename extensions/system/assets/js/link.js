@@ -83,10 +83,10 @@ define(['jquery', 'require'], function($, req) {
         /*
          * https://github.com/chrissrogers/jquery-deparam
          */
-        deparam: function (params) {
+        deparam: function(params) {
             var obj = {};
 
-            $.each(params.replace(/\+/g, ' ').split('&'), function (j, v) {
+            $.each(params.replace(/\+/g, ' ').split('&'), function(j, v) {
 
                 var param = v.split('='), key = decodeURIComponent(param[0]), val, cur = obj, i = 0, keys = key.split(']['), keys_last = keys.length - 1;
 

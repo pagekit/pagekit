@@ -1,6 +1,6 @@
-require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
+require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
-    var form = $("#js-widgets");
+    var form = $('#js-widgets');
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -14,32 +14,32 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
     });
 
     // save widgets order on sortable change
-    form.on('sortable-change', 'ul.uk-sortable', function(e,item, action) {
+    form.on('sortable-change', 'ul.uk-sortable', function(e, item, action) {
 
         var list = $(this);
 
         $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize() }, function(data) {
-            if(action=="added" || action=="moved") {
-                $.UIkit.notify(data.message, "succes");
+            if (action == 'added' || action == 'moved') {
+                uikit.notify(data.message, 'succes');
             }
         });
 
-        list.find("select[name^='positions']").val(list.data("position"));
+        list.find('select[name^="positions"]').val(list.data('position'));
     });
 
     // change position via selectbox
-    form.on("change", "select[name^='positions']", function() {
+    form.on('change', 'select[name^="positions"]', function() {
 
-        var select  = $(this),
-            li      = select.closest("li"),
+        var select = $(this),
+            li = select.closest('li'),
             current = li.parent(),
-            target  = $("ul[data-position='"+select.val()+"']");
+            target = $('ul[data-position="' + select.val() + '"]');
 
 
-        target.find(".uk-sortable-empty").remove().end().append(li);
+        target.find('.uk-sortable-empty').remove().end().append(li);
 
-        if(!current.children().length) {
-            if(current.data('position')) {
+        if (!current.children().length) {
+            if (current.data('position')) {
                 current.append('<li class="uk-sortable-empty"></li>');
             } else {
                 current.parent().addClass('uk-hidden');
@@ -54,27 +54,27 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
         applyFilters();
     });
 
-    form.on("change", "select[name^='filter']", function() {
+    form.on('change', 'select[name^="filter"]', function() {
         applyFilters();
     });
 
-    var positions = $(".js-position").each(function() {
+    var positions = $('.js-position').each(function() {
 
         var ele  = $(this),
-            list = ele.find("ul.uk-sortable");
+            list = ele.find('ul.uk-sortable');
 
-        ele[list.children("li").length ? "removeClass":"addClass"]('uk-hidden');
+        ele.toggleClass('uk-hidden', list.children('li').length < 1);
     });
 
-    var filters = form.find(":input[id^='filter']").each(function() {
-        $(this).val(sessionStorage["widgets-filter-"+this.id] || "");
+    var filters = form.find(':input[id^="filter"]').each(function() {
+        $(this).val(sessionStorage['widgets-filter-' + this.id] || '');
     });
 
     var filter = {
-        "pos"    : $("#filter-position"),
-        "title"  : $("#filter-title"),
-        "status" : $("#filter-status"),
-        "type"   : $("#filter-type")
+        pos    : $('#filter-position'),
+        title  : $('#filter-title'),
+        status : $('#filter-status'),
+        type   : $('#filter-type')
     };
 
     applyFilters();
@@ -83,17 +83,17 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
 
         var pos = filter.pos.val();
 
-        if(pos) {
+        if (pos) {
             positions.each(function() {
-                var ele  = $(this);
-                ele[ele.data("position")==pos ? "removeClass":"addClass"]('uk-hidden');
+                var ele = $(this);
+                ele.toggleClass('uk-hidden', ele.data('position') != pos);
             });
         } else {
             positions.removeClass('uk-hidden').show();
         }
 
-        var pos_visible = positions.filter(":visible"),
-            widgets     = pos_visible.find(".js-widget");
+        var pos_visible = positions.filter(':visible'),
+            widgets     = pos_visible.find('.js-widget');
 
         var title  = filter.title.val().toLowerCase(),
             status = filter.status.val(),
@@ -101,30 +101,26 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
 
         widgets.each(function() {
 
-            var ele  = $(this);
+            var ele = $(this);
 
-            ele[(function() {
-
-                return (title ? ele.data("title").toLowerCase().indexOf(title) !== -1:true) &&
-                       (status == "" ? true : (status==ele.data("status"))) &&
-                       (type == "" ? true : (type==ele.data("type")));
-
-            })() ? "show":"hide"]();
+            ele.toggle((title ? ele.data('title').toLowerCase().indexOf(title) !== -1 : true) &&
+                (status == '' ? true : (status == ele.data('status'))) &&
+                (type == '' ? true : (type == ele.data('type'))));
         });
 
         pos_visible.each(function() {
 
-            var ele  = $(this);
+            var ele = $(this);
 
-            ele[ele.find(".js-widget:visible").length ? "removeClass":"addClass"]('uk-hidden');
+            ele.toggleClass('uk-hidden', ele.find('.js-widget:visible').length < 1);
         });
 
         filters.each(function() {
-            sessionStorage["widgets-filter-"+this.id] = $(this).val();
+            sessionStorage['widgets-filter-' + this.id] = $(this).val();
         });
     }
 
-    $("#filter-title").on("keyup", $.UIkit.Utils.debounce(function() {
+    $('#filter-title').on('keyup', uikit.Utils.debounce(function() {
         applyFilters();
     }, 200));
 

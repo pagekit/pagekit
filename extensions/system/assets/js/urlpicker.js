@@ -1,4 +1,4 @@
-define(['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, UI, Link) {
+define(['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, uikit, Link) {
 
     var UrlPicker = function(element, options) {
 
@@ -7,13 +7,13 @@ define(['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', '
         this.options = $.extend({}, UrlPicker.defaults, options);
 
         var modal   = $(tmpl.get('urlpicker.modal')).appendTo('body'),
-            picker  = new UI.modal.Modal(modal),
+            picker  = new uikit.modal.Modal(modal),
             link    = new Link({ typeFilter: this.options.typeFilter }),
             url     = modal.find('.js-link-url'),
             source  = $(element),
             trigger = $(tmpl.get('urlpicker.replace')).insertBefore(source);
 
-        modal.on('submit', 'form', function (e) {
+        modal.on('submit', 'form', function(e) {
             e.preventDefault();
 
             picker.hide();

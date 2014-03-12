@@ -1,6 +1,6 @@
-require(['jquery', 'uikit!sortable', 'uikit!notify', 'domReady!'], function($) {
+require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
-    var form     = $('#js-access-level'),
+    var form = $('#js-access-level'),
         doaction = function(element) {
             element.closest('form').attr('action', element.data('action')).submit();
         },
@@ -12,8 +12,8 @@ require(['jquery', 'uikit!sortable', 'uikit!notify', 'domReady!'], function($) {
 
         var element = $(this);
 
-        if (element.data("confirm")) {
-            $.UIkit.modal.confirm(element.data("confirm"), function() {
+        if (element.data('confirm')) {
+            uikit.modal.confirm(element.data('confirm'), function() {
                 doaction(element);
             });
         } else {
@@ -26,7 +26,7 @@ require(['jquery', 'uikit!sortable', 'uikit!notify', 'domReady!'], function($) {
         e.preventDefault();
 
         if (!modal) {
-            modal = new $.UIkit.modal.Modal('#modal-access-level');
+            modal = new uikit.modal.Modal('#modal-access-level');
         }
 
         modal.show();
@@ -37,27 +37,27 @@ require(['jquery', 'uikit!sortable', 'uikit!notify', 'domReady!'], function($) {
         form.find('input:first').val($(this).data('name')).focus();
     });
 
-    var prioUpdateUrl = form.find('.pk-sortable').on("sortable-change", function() {
+    var prioUpdateUrl = form.find('.pk-sortable').on('sortable-change',function() {
 
         var data = {};
 
-        $(this).data("uksortable").list().forEach(function(item) {
+        $(this).data('uksortable').list().forEach(function(item) {
             data[item.id] = item.order;
         });
 
-        $.post(prioUpdateUrl, {"order":data}, function(res) {
-            $.UIkit.notify(data.message || "Access order updated");
+        $.post(prioUpdateUrl, { order: data }, function(res) {
+            uikit.notify(data.message || 'Access order updated');
         });
 
-    }).data("updateUrl");
+    }).data('updateUrl');
 
     // auto-save
-    $(document).on("click", "#js-access-level-roles input[type='checkbox']", $.UIkit.Utils.debounce(function() {
+    $(document).on('click', '#js-access-level-roles input[type="checkbox"]', uikit.Utils.debounce(function() {
 
-        var form = $(this).closest("form#js-access-level-roles");
+        var form = $(this).closest('form#js-access-level-roles');
 
-        $.post(form.attr("action"), form.serialize(), function(data) {
-            $.UIkit.notify(data.message || "Roles saved");
+        $.post(form.attr('action'), form.serialize(), function(data) {
+            uikit.notify(data.message || 'Roles saved');
         });
     }, 1000));
 

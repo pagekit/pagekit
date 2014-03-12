@@ -1,30 +1,36 @@
-define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit', 'ajaxupload'], function($, mod, req, tmpl, UI) {
+define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit', 'ajaxupload'], function($, mod, req, tmpl, uikit) {
 
     var Finder = function(element, options) {
 
         var $this = this;
 
-        this.options  = $.extend({}, Finder.defaults, options);
+        this.options = $.extend({}, Finder.defaults, options);
 
         this.url  = this.options.url;
         this.path = this.options.path;
         this.view = this.options.view;
 
-        this.element  = $(element).html(tmpl.render('finder.main', { writable: this.options.mode == 'write' }), this.options);
+        this.element = $(element).html(tmpl.render('finder.main', { writable: this.options.mode == 'write' }), this.options);
 
         this.options['messages'] = this.element.find('[data-messages]').data('messages');
 
-        this.main       = this.element.find('.js-finder-files');
-        this.filter     = this.element.find('.js-search:first');
-        this.crumbs     = this.element.find('.js-breadcrumbs:first');
+        this.main   = this.element.find('.js-finder-files');
+        this.filter = this.element.find('.js-search:first');
+        this.crumbs = this.element.find('.js-breadcrumbs:first');
 
         var progress    = this.element.find('.uk-progress'),
             progressbar = progress.find('.uk-progress-bar');
 
         this.progress = {
-            show:   function() { progress.removeClass('uk-hidden'); },
-            hide:   function() { progress.addClass('uk-hidden'); },
-            update: function(percent) { progressbar.css('width', percent+'%').text(percent+'%'); }
+            show: function() {
+                progress.removeClass('uk-hidden');
+            },
+            hide: function() {
+                progress.addClass('uk-hidden');
+            },
+            update: function(percent) {
+                progressbar.css('width', percent + '%').text(percent + '%');
+            }
         };
 
         var uploadsettings = {
@@ -45,7 +51,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                 $this.loadPath();
 
-                UI.notify(data.message, data.error ? 'danger' : 'success');
+                uikit.notify(data.message, data.error ? 'danger' : 'success');
 
                 $this.progress.update(100);
                 setTimeout($this.progress.hide, 500);
@@ -74,7 +80,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                     $this.element.trigger('picked', [$(this).data(), $this]);
                 }
             })
-            .on('keyup', this.filter, UI.Utils.debounce(function() {
+            .on('keyup', this.filter, uikit.Utils.debounce(function() {
                 $this.applyFilter();
             }, 50));
 
@@ -103,7 +109,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             },
 
             rename: function(element) {
-                var newname  = prompt(this.options.messages.newname, ''), oldname = element.data('name');
+                var newname = prompt(this.options.messages.newname, ''), oldname = element.data('name');
 
                 if (!newname || !oldname) return;
 
@@ -143,7 +149,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this, path = path || this.path, newPath = path;
 
-            $.post(this.url + 'list', this.getParams(path), function(data) {
+            $.post(this.url + 'list', this.getParams(path),function(data) {
 
                 $this.path = newPath;
                 $this.data = data;
@@ -159,7 +165,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                     if (!name) continue;
 
                     for (var j = 0; j <= i; j++) {
-                        path += '/'+parts[j];
+                        path += '/' + parts[j];
                     }
 
                     data.breadcrumbs.push({ name: name, path: path });
@@ -167,23 +173,22 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                 $this.render();
 
-            }, 'json').fail(function (jqXHR) {
+            }, 'json').fail(function(jqXHR) {
 
-                UI.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
+                uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
             });
         },
 
         switchView: function(view) {
 
-            this.view = view ? view : (this.view == 'thumbnail' ? 'table':'thumbnail');
+            this.view = view ? view : (this.view == 'thumbnail' ? 'table' : 'thumbnail');
 
             this.element.attr('data-view', this.view);
 
             this.render();
         },
 
-        render: function()
-        {
+        render: function() {
 
             if (this.data && this.data.breadcrumbs) {
 
@@ -191,22 +196,22 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                 var i, path, name, max = this.data.breadcrumbs.length;
 
-                for(i= 0;i<max; i++) {
+                for (i = 0; i < max; i++) {
 
                     path = this.data.breadcrumbs[i].path;
                     name = this.data.breadcrumbs[i].name;
 
-                    if (i == max-1) {
-                        this.crumbs.append('<li class="uk-active"><span>'+name+'</span></li>');
+                    if (i == max - 1) {
+                        this.crumbs.append('<li class="uk-active"><span>' + name + '</span></li>');
                     } else {
-                        this.crumbs.append('<li><a href="" data-cmd="loadPath" data-path="'+path+'">'+name+'</a></li>');
+                        this.crumbs.append('<li><a href="" data-cmd="loadPath" data-path="' + path + '">' + name + '</a></li>');
                     }
                 }
             }
 
             this.main.html(tmpl.render('finder.' + this.view, $.extend(this.data, { writable: this.options.mode == 'write' })));
 
-            this.element.find('[data-view="thumbnail"],[data-view="table"]').removeClass('uk-active').filter('[data-view="'+this.view+'"]').addClass('uk-active');
+            this.element.find('[data-view="thumbnail"],[data-view="table"]').removeClass('uk-active').filter('[data-view="' + this.view + '"]').addClass('uk-active');
 
             this.applyFilter();
             this.applyPreview();
@@ -215,7 +220,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 $(document).trigger('uk-domready');
             }
 
-            this.element.find('.js-show-when-empty').toggleClass("uk-hidden", (this.main.find('[data-name]').length > 0));
+            this.element.find('.js-show-when-empty').toggleClass('uk-hidden', (this.main.find('[data-name]').length > 0));
         },
 
         applyFilter: function() {
@@ -249,9 +254,9 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                     if (ele.data('url').match(/\.(gif|jpg|jpeg|png|svg)/i)) {
                         if ($this.view == 'table') {
-                            ele.find('.pk-finder-icon-file').removeClass('uk-icon-file-o').addClass('pk-finder-thumbnail-table').css('background-image','url("'+ele.data('url')+'")');
+                            ele.find('.pk-finder-icon-file').removeClass('uk-icon-file-o').addClass('pk-finder-thumbnail-table').css('background-image', 'url("' + ele.data('url') + '")');
                         } else {
-                            ele.find('.pk-finder-thumbnail-file').removeClass('pk-finder-thumbnail-file').css('background-image','url("'+ele.data('url')+'")');
+                            ele.find('.pk-finder-thumbnail-file').removeClass('pk-finder-thumbnail-file').css('background-image', 'url("' + ele.data('url') + '")');
                         }
                     }
                 });
@@ -267,14 +272,14 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this;
 
-            return $.getJSON(this.url + name, $.extend(this.getParams(this.path), params), function(data) {
+            return $.getJSON(this.url + name, $.extend(this.getParams(this.path), params),function(data) {
 
-                UI.notify(data.message, data.error ? 'danger' : 'success');
+                uikit.notify(data.message, data.error ? 'danger' : 'success');
 
                 $this.loadPath();
 
-            }).fail(function (jqXHR) {
-                UI.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
+            }).fail(function(jqXHR) {
+                uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
             });
         },
 
@@ -284,7 +289,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
     });
 
     Finder.defaults = {
-        url : req.toUrl(mod.config().url),
+        url: req.toUrl(mod.config().url),
         view: 'table',
         mode: 'read',
         root: '/',

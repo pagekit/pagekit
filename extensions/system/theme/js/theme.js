@@ -1,8 +1,8 @@
-jQuery(function($) {
+require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     $('.pk-system-messages').children().each(function() {
         var message = $(this);
-        $.UIkit.notify(message.html(), message.data());
+        uikit.notify(message.html(), message.data());
         message.remove();
     });
 

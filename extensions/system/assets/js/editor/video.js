@@ -1,31 +1,31 @@
-define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function ($, tmpl, UI, Finder) {
+define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
 
     var modal   = $(tmpl.render('video.modal')).appendTo('body'),
         element = modal.find('.js-finder'),
         video   = modal.find('.js-url'),
         handler, finder, picker;
 
-    modal.on('click', '.js-update', function () {
+    modal.on('click', '.js-update', function() {
         handler();
     });
 
-    element.on('picked', function (e, data) {
+    element.on('picked', function(e, data) {
         // TODO: add video formats
         if (data.type == 'file' && data.url.match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
             video.val(data.url);
         }
     });
 
-    return function (markdownarea, options) {
+    return function(markdownarea, options) {
 
         // videos
         markdownarea.commands.video = {
             title: 'Video',
             label: '<i class="uk-icon-video-camera"></i>',
-            action: function (editor) {
+            action: function(editor) {
 
-                var replace  = '(video){"src":"$1"}',
-                    text     = editor.getSelection(),
+                var replace = '(video){"src":"$1"}',
+                    text = editor.getSelection(),
                     markdown = replace.replace('$1', text);
 
                 editor.replaceSelection(markdown, 'end');
@@ -63,7 +63,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
                         url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
                         jsonp: 'callback',
                         dataType: 'jsonp',
-                        success: function (data) {
+                        success: function(data) {
                             session[imgid] = data.thumbnail_url;
                             $('img[data-id="' + imgid + '"]').replaceWith('<img src="' + session[imgid] + '" class="uk-width-1-1">');
                         }
@@ -74,13 +74,13 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
         }
 
-        markdownarea.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function (marker) {
+        markdownarea.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function(marker) {
 
             if (!finder) {
 
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-modal-scrollable-box');
-                picker  = new UI.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal)
             }
 
             var data = { src: '' };
@@ -89,21 +89,24 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
 
                 data = $.extend(data, (new Function('', 'var json = {' + marker.found[1] + '}; return JSON.parse(JSON.stringify(json));'))());
 
-            } catch (e) {}
+            } catch (e) {
+            }
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-config', function () {
+            marker.area.preview.on('click', '#' + marker.uid + ' .js-config', function() {
 
                 video.val(data.src);
                 picker.show();
-                setTimeout(function() { video.focus(); }, 10);
+                setTimeout(function() {
+                    video.focus();
+                }, 10);
 
-                handler = function () {
+                handler = function() {
                     picker.hide();
                     marker.replace('(video)' + JSON.stringify({ src: video.val() }));
                 };
             });
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-remove', function () {
+            marker.area.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
                 marker.replace('');
             });
 

@@ -20,7 +20,7 @@ require(['jquery', 'tmpl!feed.list', 'goog!feeds,1', 'domReady!'], function($, t
                     });
                 });
 
-                widget.replaceWith(tmpl.render('feed.list', {items: items}));
+                widget.replaceWith(tmpl.render('feed.list', { items: items }));
             }
 
         });

@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
+require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
     var form     = $('#js-role'),
         formPerm = $('#js-role-permissions'),
@@ -13,8 +13,8 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
 
         var element = $(this);
 
-        if (element.data("confirm")) {
-            $.UIkit.modal.confirm(element.data("confirm"), function() {
+        if (element.data('confirm')) {
+            uikit.modal.confirm(element.data('confirm'), function() {
                 doaction(element);
             });
         } else {
@@ -27,7 +27,7 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
         e.preventDefault();
 
         if (!modal) {
-            modal = new $.UIkit.modal.Modal('#modal-role');
+            modal = new uikit.modal.Modal('#modal-role');
         }
 
         modal.show();
@@ -45,12 +45,12 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
 
         checkbox.after('<div class="pk-checkbox-fake"><div></div><input type="checkbox" checked disabled></div>');
 
-        if (checkbox.is(":checked")) {
+        if (checkbox.is(':checked')) {
             checkbox.closest('td').addClass('pk-permission-enabled');
         }
 
-        checkbox.on("click clicked", function() {
-            checkbox.closest('td')[checkbox.is(":checked") ? "addClass":"removeClass"]('pk-permission-enabled');
+        checkbox.on('click clicked', function() {
+            checkbox.closest('td').toggleClass('pk-permission-enabled', checkbox.is(':checked'));
         });
     });
 
@@ -65,7 +65,7 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
         }
     });
 
-    var prioUpdateUrl = form.find('.pk-sortable').on('sortable-change', function() {
+    var prioUpdateUrl = form.find('.pk-sortable').on('sortable-change',function() {
 
         var data = {};
 
@@ -74,18 +74,18 @@ require(['jquery', 'uikit!sortable,notify', 'domReady!'], function($) {
         });
 
         $.post(prioUpdateUrl, {'order': data}, function(res) {
-            $.UIkit.notify(data.message || "Roles order updated");
+            uikit.notify(data.message || 'Roles order updated');
         });
 
     }).data('updateUrl');
 
     // auto-save
-    $(document).on("click", "#js-role-permissions input[type='checkbox']", $.UIkit.Utils.debounce(function() {
+    $(document).on('click', '#js-role-permissions input[type="checkbox"]', uikit.Utils.debounce(function() {
 
-        var form = $(this).closest("form#js-role-permissions");
+        var form = $(this).closest('form#js-role-permissions');
 
-        $.post(form.attr("action"), form.serialize(), function(data) {
-            $.UIkit.notify(data.message || "Permissions saved");
+        $.post(form.attr('action'), form.serialize(), function(data) {
+            uikit.notify(data.message || 'Permissions saved');
         });
     }, 1000));
 
