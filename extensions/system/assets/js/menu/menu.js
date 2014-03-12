@@ -29,11 +29,9 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         // save menu item order on sortable change
         .on('sortable-change', 'ul.uk-sortable', function() {
             $.post(form.attr('action'), { 'order': $(this).data('uksortable').list(), '_csrf': csrf }, function(data) {
-                if (data == 'success') {
-                    uikit.notify('Menu order updated', 'success');
-                } else {
-                    uikit.notify('Saving menu order failed', 'danger');
-                }
+                uikit.notify(data.message, 'success');
+            }).fail(function() {
+                uikit.notify('Saving menu order failed', 'danger');
             });
         });
 

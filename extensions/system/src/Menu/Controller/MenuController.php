@@ -132,6 +132,6 @@ class MenuController extends Controller
             $this->items->save($item);
         }
 
-        return $this('response')->json('success');
+        return $this('response')->json(array('message' => __('Menu order updated')));
     }
 }
