@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit!notify', 'domReady!'], function($, uikit) {
 
     $('.pk-system-messages').children().each(function() {
         var message = $(this);
