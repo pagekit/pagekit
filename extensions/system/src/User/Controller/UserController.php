@@ -86,7 +86,7 @@ class UserController extends Controller
         }
 
         $users = $query->get();
-        $roles = $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get();
+        $roles = $this->getRoles();
 
         return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'filter' => $filter);
     }
@@ -99,7 +99,7 @@ class UserController extends Controller
         $user = new User;
         $user->setRoles(array());
 
-        $roles = $this->user->hasAccess('administer permissions') ? $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get() : array();
+        $roles = $this->user->hasAccess('administer permissions') ? $this->getRoles() : array();
 
         return array('head.title' => __('Add User'), 'user' => $user, 'roles' => $roles);
     }
@@ -111,7 +111,7 @@ class UserController extends Controller
     public function editAction($id)
     {
         $user  = $this->users->where(compact('id'))->related('roles')->first();
-        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->get() : array();
+        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles() : array();
 
         return array('head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles);
     }
@@ -255,5 +255,10 @@ class UserController extends Controller
         );
 
         return (string) call_user_func_array(array($expr, 'orX'), $params);
+    }
+
+    protected function getRoles()
+    {
+        return $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->orderBy('priority')->get();
     }
 }

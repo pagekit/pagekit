@@ -5,7 +5,7 @@ namespace Pagekit\User\Entity;
 use Pagekit\User\Model\AccessLevel as BaseAccessLevel;
 
 /**
- * @Entity(tableClass="@system_access_level", eventPrefix="system.accesslevel")
+ * @Entity(repositoryClass="Pagekit\User\Entity\AccessLevelRepository", tableClass="@system_access_level", eventPrefix="system.accesslevel")
  */
 class AccessLevel extends BaseAccessLevel
 {
