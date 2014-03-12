@@ -7,4 +7,5 @@
     </div>
     <h1 class="js-weather-city uk-h2 uk-margin-remove"></h1>
     <h2 class="js-weather-country uk-h3 uk-margin-remove uk-text-muted"></h2>
+    <div class="js-error uk-hidden uk-alert uk-alert-danger">@trans('Unable to retrieve weather data.')</div>
 </div>

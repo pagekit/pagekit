@@ -218,6 +218,7 @@ class SystemExtension extends Extension
         });
 
         $app->on('view.register.tmpl', function(RegisterTmplEvent $event) {
+            $event->register('feed.error', 'extension://system/assets/tmpl/feed.error.razr.php');
             $event->register('feed.list', 'extension://system/assets/tmpl/feed.list.razr.php');
             $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
             $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');

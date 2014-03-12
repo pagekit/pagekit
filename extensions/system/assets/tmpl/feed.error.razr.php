@@ -1,0 +1,1 @@
+<div class="js-error uk-alert uk-alert-danger">@trans('Unable to retrieve feed data.')</div>

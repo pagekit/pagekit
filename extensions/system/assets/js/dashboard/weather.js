@@ -12,12 +12,14 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
             var unit = config.units == 'metric' ? ' &deg;C' : ' &deg;F',
                 location = config.location.split(',');
-
             $('.js-weather-city', widget).html(location[0]);
+
             $('.js-weather-country', widget).html(location[1]);
             $('.js-weather-temperatur', widget).html(Math.round(data.main.temp) + unit);
             $('.js-weather-icon', widget).attr('src', getIconUrl(data.weather[0].icon));
 
+        }).fail(function() {
+            $('.js-error', widget).removeClass('uk-hidden');
         });
 
     });
@@ -30,7 +32,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
             return $.Deferred().resolve(JSON.parse(cache)).promise();
         }
 
-        return $.getJSON(api + '/weather?callback=?', {id: config.id, units: config.units}, function(data) {
+        return $.getJSON(api + '/weather?callback=?', { id: config.id, units: config.units }, function(data) {
             if (data.cod == 200) {
                 storage[key] = JSON.stringify(data);
             }
@@ -71,7 +73,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     input.on('keyup', uikit.Utils.debounce(function() {
 
-        $.getJSON(api + '/find?callback=?', {q: input.val(), type: 'like'}, function(data) {
+        $.getJSON(api + '/find?callback=?', { q: input.val(), type: 'like' }, function(data) {
             if (data.cod == 200) {
                 showDropdown(data);
             }
@@ -102,7 +104,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
             list.append('<li data-id="' + value.id + '"><a>' + value.name + ', ' + value.sys.country + '</a></li>');
         });
 
-        dropdown.css({'top':input.offset().top + input.outerHeight(), 'left': input.offset().left}).show();
+        dropdown.css({ top: input.offset().top + input.outerHeight(), left: input.offset().left}).show();
     }
 
 });
