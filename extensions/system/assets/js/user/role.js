@@ -74,7 +74,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         });
 
         $.post(prioUpdateUrl, {'order': data}, function(res) {
-            uikit.notify(data.message || 'Roles order updated');
+            uikit.notify(data.message || 'Roles order updated', 'success');
         });
 
     }).data('updateUrl');
@@ -85,7 +85,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         var form = $(this).closest('form#js-role-permissions');
 
         $.post(form.attr('action'), form.serialize(), function(data) {
-            uikit.notify(data.message || 'Permissions saved');
+            uikit.notify(data.message || 'Permissions saved', 'success');
         });
     }, 1000));
 

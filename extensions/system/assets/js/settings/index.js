@@ -9,9 +9,9 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
             e.preventDefault();
 
             $.post($(this).attr('action'), $(this).serialize(),function(data) {
-                uikit.notify(data.message);
+                uikit.notify(data.message, 'success');
             }).fail(function() {
-                uikit.notify('Clearing cache failed.');
+                uikit.notify('Clearing cache failed.', 'danger');
             }).always(function() {
                 modal.hide();
             });

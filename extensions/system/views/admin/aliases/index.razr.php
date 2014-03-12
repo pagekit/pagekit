@@ -51,4 +51,6 @@
     <p class="uk-alert uk-alert-info">@trans('No URL aliases found.')</p>
     @endif
 
+    @token()
+
 </form>

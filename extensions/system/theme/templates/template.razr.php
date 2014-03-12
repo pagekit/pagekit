@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
-        @script('theme', 'extension://system/theme/js/theme.js', ['requirejs'])
+        @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify'])
     </head>
     <body>
 

@@ -30,7 +30,7 @@ require(['jquery', 'uikit!sticky', 'domReady!'], function($, uikit) {
     // auto-save
     form.on('click', 'input[type="checkbox"]', uikit.Utils.debounce(function() {
         $.post(form.attr('action'), form.serialize(), function(data) {
-            uikit.notify(data.message || 'Permissions saved');
+            uikit.notify(data.message || 'Permissions saved', 'success');
         });
     }, 1000));
 

@@ -125,6 +125,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id", "widget": "array"})
+     * @Token
      */
     public function saveAction($id = 0, $widget = array())
     {
@@ -147,6 +148,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"ids": "array"})
+     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -163,6 +165,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"order": "array"})
+     * @Token
      */
     public function reorderAction($order = array())
     {
@@ -179,7 +182,7 @@ class DashboardController extends Controller
 
         $this->save($reordered);
 
-        return $this('response')->json('success');
+        return $this('response')->json(array('message' => __('Widgets reordered.')));
     }
 
     /**

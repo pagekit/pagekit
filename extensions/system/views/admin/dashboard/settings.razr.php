@@ -51,4 +51,6 @@
         @endforeach
     </ul>
 
+    @token()
+
 </form>

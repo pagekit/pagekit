@@ -1,4 +1,4 @@
-define(['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, uikit, Link) {
+define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, uikit, Link) {
 
     var UrlPicker = function(element, options) {
 

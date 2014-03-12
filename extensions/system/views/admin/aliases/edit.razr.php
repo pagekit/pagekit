@@ -20,4 +20,6 @@
         <a class="uk-button" href="@url('@system/alias/index')">@(alias.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
+    @token()
+
 </form>

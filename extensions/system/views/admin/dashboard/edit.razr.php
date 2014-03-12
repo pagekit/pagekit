@@ -5,4 +5,7 @@
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url('@system/dashboard/settings')">@( widget.id ? trans('Close') : trans('Cancel') )</a>
     </p>
+
+    @token()
+
 </form>
