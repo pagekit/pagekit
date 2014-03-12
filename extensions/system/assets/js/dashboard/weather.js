@@ -19,7 +19,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
             $('.js-weather-icon', widget).attr('src', getIconUrl(data.weather[0].icon));
 
         }).fail(function() {
-            $('.js-error', widget).removeClass('uk-hidden');
+            widget.replaceWith(($('.js-error', widget)).removeClass('uk-hidden'));
         });
 
     });
