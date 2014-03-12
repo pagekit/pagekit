@@ -28,4 +28,14 @@ class AccessLevel extends BaseAccessLevel
     {
         return in_array($this->id, array(self::LEVEL_PUBLIC, self::LEVEL_REGISTERED));
     }
+
+    /**
+     * @PreSave
+     */
+    public function preSave($manager)
+    {
+        if (!$this->id) {
+            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_access_level'));
+        }
+    }
 }

@@ -87,4 +87,14 @@ class Item extends BaseItem
             self::STATUS_ENABLED   => __('Enabled')
         );
     }
+
+    /**
+     * @PreSave
+     */
+    public function preSave($manager)
+    {
+        if (!$this->id) {
+            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())));
+        }
+    }
 }

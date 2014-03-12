@@ -20,4 +20,14 @@ class Role extends BaseRole
 
     /** @Column(type="simple_array") */
     protected $permissions = array();
+
+    /**
+     * @PreSave
+     */
+    public function preSave($manager)
+    {
+        if (!$this->id) {
+            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
+        }
+    }
 }

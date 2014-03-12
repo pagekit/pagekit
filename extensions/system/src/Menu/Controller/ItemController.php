@@ -102,7 +102,6 @@ class ItemController extends Controller
                 $item = new Item;
                 $item->setMenu($menu);
                 $item->setMenuId($menu->getId());
-                $item->setPriority($this('db')->fetchColumn('SELECT MAX(priority) + 1 as maximum FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($menu->getId())));
             }
 
             if (!$this->url($item->getUrl())) {
