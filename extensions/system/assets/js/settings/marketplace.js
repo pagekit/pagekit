@@ -1,9 +1,9 @@
-require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domReady!'], function($, tmpl, uikit) {
+define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, tmpl, uikit) {
 
-    var page = $('#js-extensions, #js-themes'), form = $('.js-marketplace-form', page), details = $('.js-marketplace-details', page), params = page.data(), updates = {}, packages = {}, modal;
+    var updates = {}, packages = {}, element, form, details, modal;
 
     // details modal
-    page.on('click', '[data-package]', function(e) {
+    function detailsModal(e) {
         e.preventDefault();
 
         var name = $(this).data('package'), data = packages[name];
@@ -17,10 +17,10 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
 
         modal.show();
 
-    });
+    }
 
     // details install button
-    details.on('click', '[data-install]', function(e) {
+    function installButton(e) {
         e.preventDefault();
 
         var $this = $(this), name = $this.data('install');
@@ -40,20 +40,10 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
 
         });
 
-    });
+    }
 
-    // input search
-    form.on('keyup', 'input', debounce(function() {
-        form.submit();
-    }, 150));
-
-    // select type
-    form.on('change', 'select', function() {
-        form.submit();
-    });
-
-    // query the marketplace
-    form.on('submit', function(e) {
+    // query marketplace
+    function queryMarketplace(e) {
         e.preventDefault();
 
         var content = '', message = '';
@@ -90,7 +80,7 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
 
         }).always(function() {
 
-            $('[data-msg]', page).each(function() {
+            $('[data-msg]', element).each(function() {
 
                 var $this = $(this);
 
@@ -102,26 +92,11 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
 
             });
 
-            $('.js-marketplace-content').html(content);
+            $('.js-marketplace-content', element).html(content);
 
         });
 
-    });
-
-    // query for updates
-    $.post(params.api + '/package/update', {'api_key': params.key, 'packages': page.attr('data-installed')}, function(data) {
-
-        if (data.packages) {
-            $.each(data.packages, function(i, p) {
-                updates[p.name] = p.version;
-            });
-        }
-
-    }, 'jsonp').always(function() {
-
-        form.submit();
-
-    });
+    }
 
     function debounce(func, wait, immediate) {
         var timeout;
@@ -137,5 +112,27 @@ require(['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit', 'domRe
             if (callNow) func.apply(context, args);
         };
     }
+
+    return {
+
+        init: function(el, p) {
+
+            element = $(el), form = $('form', el), details = $('.js-marketplace-details', el), params = p, updates = p.updates;
+
+            element.on('click', '[data-package]', detailsModal);
+            details.on('click', '[data-install]', installButton);
+
+            form.on('submit', queryMarketplace);
+            form.on('keyup', 'input', debounce(function() {
+                form.submit();
+            }, 150));
+            form.on('change', 'select', function() {
+                form.submit();
+            });
+
+            form.submit();
+        }
+
+    };
 
 });

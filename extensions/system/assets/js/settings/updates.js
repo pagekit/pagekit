@@ -1,14 +1,35 @@
-require(['jquery', 'tmpl!package.updates', 'uikit', 'uikit!form-file', 'domReady!'], function($, tmpl, uikit) {
+require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!form-file', 'domReady!'], function($, marketplace, tmpl, uikit) {
 
-    var page = $('#js-extensions, #js-themes'), params = page.data(), packages = {};
+    var page = $('#js-extensions, #js-themes'), update = $('.js-update', page), upload = $('.js-upload', page), market = $('.js-marketplace', page), params = page.data(), packages = {}, modal;
 
-    // upload frame
-    var frame = $('#js-upload-frame').on('load', function() {
-        uikit.modal.dialog(frame.contents().find('body').html()).show();
+    // query for updates
+    $.post(params.api + '/package/update', {'api_key': params.key, 'packages': page.attr('data-installed')}, function(data) {
+
+        if (data.packages.length) {
+
+            $.each(data.packages, function(i, p) {
+                packages[p.name] = p;
+            });
+
+            update.append(tmpl.render('package.updates', data));
+
+        } else {
+            show('no-updates', update);
+        }
+
+    }, 'jsonp').fail(function() {
+
+        show('no-connection', update);
+
+    }).always(function() {
+
+        badge(packages);
+        marketplace.init(market, $.extend({updates: packages}, params));
+
     });
 
     // install update
-    $('.js-update-table').on('click', '[data-install]', function(e) {
+    update.on('click', '[data-install]', function(e) {
         e.preventDefault();
 
         var $this = $(this), name = $this.data('install');
@@ -34,34 +55,55 @@ require(['jquery', 'tmpl!package.updates', 'uikit', 'uikit!form-file', 'domReady
 
     });
 
-    // query for updates
-    $.post(params.api + '/package/update', {'api_key': params.key, 'packages': page.attr('data-installed')}, function(data) {
+    // upload package
+    $('.js-upload-button', upload).on('click', function(e) {
+        e.preventDefault();
 
-        if (data.packages.length) {
+        var form = $('form', upload), dialog = $('.js-upload-modal', upload);
 
-            $.each(data.packages, function(i, p) {
-                packages[p.name] = p;
-            });
+        $.ajax({
 
-            $('.js-update-table').append(tmpl.render('package.updates', data));
+            url: form.attr('action'),
+            data: new FormData(form[0]),
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false
 
-        } else {
-            show('no-updates');
-        }
+        }).done(function(data) {
 
-    }, 'jsonp').fail(function() {
+            if (data.error) {
+                uikit.notify(data.error, 'danger');
+                return;
+            }
 
-        show('no-connection');
+            $.post(params.api + '/package/' + data.package.name, function(info) {
 
-    }).always(function() {
+                var package = info.versions[data.package.version];
 
-        badge(packages);
+                if (package) {
+                    if (package.dist.shasum != data.package.shasum) {
+                        show('checksum-mismatch', upload);
+                    }
+                }
+
+            }, 'jsonp');
+
+            dialog.html(tmpl.render('package.upload', data));
+
+            if (!modal) {
+                modal = new uikit.modal.Modal(dialog);
+            }
+
+            modal.show();
+
+        });
 
     });
 
-    function show(message) {
+    function show(message, context) {
 
-        page.find('[data-msg]').each(function() {
+        context.find('[data-msg]').each(function() {
 
             var $this = $(this);
 
@@ -80,9 +122,9 @@ require(['jquery', 'tmpl!package.updates', 'uikit', 'uikit!form-file', 'domReady
         var len = length(packages);
 
         if (len) {
-            $('.js-updates').replaceWith('<span class="js-updates uk-badge">' + len + '</span>');
+            $('.js-updates', page).replaceWith('<span class="js-updates uk-badge">' + len + '</span>');
         } else {
-            $('.js-updates').remove();
+            $('.js-updates', page).remove();
         }
 
     }

@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
+use Pagekit\Component\File\Archive\Zip;
 use Pagekit\Component\Http\Client;
 use Pagekit\Component\Package\Downloader\PackageDownloader;
 use Pagekit\Component\Package\Exception\ArchiveExtractionException;
@@ -30,6 +31,56 @@ class PackageController extends Controller
         $this->temp   = $this('path.temp');
         $this->api    = $this('config')->get('api.url');
         $this->apiKey = $this('option')->get('system:api.key');
+    }
+
+    /**
+     * @Request({"type"})
+     */
+    public function uploadAction($type = null)
+    {
+        try {
+
+            $file = $this('request')->files->get('file');
+
+            if ($file === null || !$file->isValid()) {
+                throw new Exception(__('No file uploaded.'));
+            }
+
+            $package = $this->loadPackage($upload = $file->getPathname());
+
+            if ($type != $package->getType()) {
+                throw new Exception(__('Invalid package type.'));
+            }
+
+            if ($this->isCore($package->getName())) {
+                throw new Exception(__('Core extensions may not be installed.'));
+            }
+
+            Zip::extract($upload, "{$this->temp}/".($path = sha1($upload)));
+
+            if ($extra = $package->getExtra() and isset($extra['image'])) {
+                $extra['image'] = $this->url("{$this->temp}/$path/".$extra['image']);
+            }
+
+            $response = array(
+                'package' => array(
+                    'name' => $package->getName(),
+                    'type' => $package->getType(),
+                    'title' => $package->getTitle(),
+                    'description' => $package->getDescription(),
+                    'version' => $package->getVersion(),
+                    'author' => $package->getAuthor(),
+                    'shasum' => sha1_file($upload),
+                    'extra' => $extra
+                ),
+                'install' => $this->url('@system/package/install', compact('path'))
+            );
+
+        } catch (Exception $e) {
+            $response = array('error' => $e->getMessage());
+        }
+
+        return $this('response')->json($response);
     }
 
     /**
@@ -87,7 +138,7 @@ class PackageController extends Controller
         return $this('response')->json($response);
     }
 
-    protected function installTheme($package)
+    protected function installTheme($json, $package)
     {
         $installer = $this('themes')->getInstaller();
 

@@ -1,5 +1,5 @@
 @style('system', 'system/css/system.css')
-@script('updates', 'system/js/settings/updates.js', 'requirejs')
+@script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
 <div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packagesJson|e">
@@ -58,34 +58,36 @@
             </div>
 
         </li>
-        <li class="js-update-table">
+        <li class="js-update">
 
             <div class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">
                 @trans('An error occurred in retrieving update information. Please try again later.')
             </div>
 
             <div class="uk-alert uk-alert-info uk-hidden" data-msg="no-updates">
-                @trans('No updates found.')
+                @trans('No theme updates found.')
             </div>
 
         </li>
-        <li>
+        <li class="js-upload">
 
             <h2>@trans('Install a theme')</h2>
 
-            <form class="uk-form" data-uk-form-file action="@url('@system/themes/upload')" target="js-upload-frame" method="post" enctype="multipart/form-data">
+            <form class="uk-form" action="@url('@system/package/upload', ['type' => 'theme'])" data-uk-form-file>
                 <input type="text" disabled>
                 <div class="uk-form-file">
                     <button class="uk-button">@trans('Select')</button>
                     <input type="file" name="file">
                 </div>
-                <button class="uk-button uk-button-primary" type="submit">@trans('Upload')</button>
+                <button class="js-upload-button uk-button uk-button-primary">@trans('Upload')</button>
             </form>
 
-        </li>
-        <li>
+            <div class="js-upload-modal uk-modal"></div>
 
-            <form class="js-marketplace-form uk-form pk-options uk-clearfix">
+        </li>
+        <li class="js-marketplace">
+
+            <form class="uk-form pk-options uk-clearfix">
                 <div class="uk-float-left">
                     <input type="text" name="q" placeholder="@trans('Search')">
                     <input type="hidden" name="type" value="theme">
@@ -93,7 +95,7 @@
             </form>
 
             <p class="uk-alert uk-alert-info uk-hidden" data-msg="no-packages">@trans('No themes found.')</p>
-            <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the Marketplace. Please try again later.')</p>
+            <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the marketplace. Please try again later.')</p>
 
             <div class="js-marketplace-content"></div>
             <div class="js-marketplace-details uk-modal"></div>
@@ -102,5 +104,3 @@
     </ul>
 
 </div>
-
-<iframe id="js-upload-frame" class="pk-iframe-hidden" name="js-upload-frame" src="javascript:" frameborder="0"></iframe>

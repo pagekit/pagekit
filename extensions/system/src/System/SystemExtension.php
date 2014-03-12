@@ -226,6 +226,7 @@ class SystemExtension extends Extension
             $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
             $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
             $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
+            $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
             $event->register('urlpicker.modal', 'extension://system/assets/tmpl/urlpicker.modal.razr.php');
             $event->register('urlpicker.replace', 'extension://system/assets/tmpl/urlpicker.replace.razr.php');
         });
