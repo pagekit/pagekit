@@ -98,7 +98,7 @@
                         @endif
                     </div>
                     <div class="pk-table-width-100 uk-text-center">
-                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
+                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id, '_csrf' => app.csrf.generate])"  title="@widget.statusText"></a>
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
@@ -169,5 +169,7 @@
         </ul>
     </div>
     @endif
+
+    @token()
 
 </form>

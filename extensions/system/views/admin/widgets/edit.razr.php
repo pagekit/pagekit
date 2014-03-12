@@ -92,4 +92,6 @@
         <a class="uk-button" href="@url('@system/widgets/index')">@(widget.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
+    @token()
+
 </form>

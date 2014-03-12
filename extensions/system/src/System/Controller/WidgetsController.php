@@ -91,6 +91,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"id": "int", "widget": "array"})
+     * @Token
      */
     public function saveAction($id, $data)
     {
@@ -125,6 +126,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -142,6 +144,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function copyAction($ids = array())
     {
@@ -163,6 +166,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function enableAction($ids = array())
     {
@@ -177,6 +181,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function disableAction($ids = array())
     {
@@ -191,6 +196,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"position", "order": "array"})
+     * @Token
      */
     public function reorderAction($position, $order = array())
     {

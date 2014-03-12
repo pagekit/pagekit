@@ -18,9 +18,9 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
         var list = $(this);
 
-        $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize() }, function(data) {
+        $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
             if (action == 'added' || action == 'moved') {
-                uikit.notify(data.message, 'succes');
+                uikit.notify(data.message, 'success');
             }
         });
 
