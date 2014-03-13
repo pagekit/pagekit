@@ -56,13 +56,13 @@
                             </td>
                             <td class="uk-table-middle uk-text-center">
                                 @if (extension)
-                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
+                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to disable')">@trans('Enabled')</a>
                                 @else
-                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
+                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to enable')">@trans('Disabled')</a>
                                 @endif
                             </td>
                             <td class="uk-table-middle">
-                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
+                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Delete')">@trans('Delete')</a>
                             </td>
                         </tr>
                         @endforeach

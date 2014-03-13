@@ -48,8 +48,8 @@
                         </div>
                         @else
                         <div class="uk-float-right">
-                            <a class="uk-button uk-button-primary" href="@url('@system/themes/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Enable')</a>
-                            <a class="uk-button uk-button-danger " href="@url('@system/themes/uninstall', ['name' => name])" title="@trans('Click to uninstall')">@trans('Delete')</a>
+                            <a class="uk-button uk-button-primary" href="@url('@system/themes/enable', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to enable')">@trans('Enable')</a>
+                            <a class="uk-button uk-button-danger " href="@url('@system/themes/uninstall', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to uninstall')">@trans('Delete')</a>
                         </div>
                         @endif
                     </div>
