@@ -32,7 +32,7 @@
                     </div>
                     <div class="uk-form-row uk-text-small">
                         <label class="uk-float-left"><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
-                        <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{target:'.js-toggle'}" title="Recover your password">@trans('Forgot Password?')</a>
+                        <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{target:'.js-toggle'}">@trans('Forgot Password?')</a>
                     </div>
 
                     @token()

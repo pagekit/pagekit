@@ -13,7 +13,7 @@
     <p>
         <label><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
         @if (app.config.mail.enabled)
-        <br><a href="@url('@system/resetpassword/request')" title="Recover your password">@trans('Forgot Password?')</a>
+        <br><a href="@url('@system/resetpassword/request')">@trans('Forgot Password?')</a>
         @endif
     </p>
 
