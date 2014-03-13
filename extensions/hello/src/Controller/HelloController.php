@@ -27,7 +27,7 @@ class HelloController extends Controller
     }
 
     /**
-     * @Request()
+     * @Token
      */
     public function saveSettingsAction()
     {

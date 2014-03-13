@@ -9,4 +9,6 @@
         <a class="uk-button" href="@url('@system/system/index')">@trans('Close')</a>
     </p>
 
+    @token()
+
 </form>
