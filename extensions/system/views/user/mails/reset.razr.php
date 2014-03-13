@@ -8,7 +8,7 @@
 
 		<p>@trans('Someone requested that the password be reset for the following account'):</p>
 
-		<p><a target="_blank" href="@url.root">@url.root</a></p>
+		<p><a target="_blank" href="@app.url.root(true)">@app.url.root(true)</a></p>
 
 		<p>@trans('Username'): @username</p>
 
@@ -16,7 +16,7 @@
 
 		<p>@trans('To reset your password, visit the following address'):</p>
 
-		<p><a target="_blank" href="@url.confirm">@url.confirm</a></p>
+		<p><a target="_blank" href="@url">@url</a></p>
 
 	</body>
 </html>

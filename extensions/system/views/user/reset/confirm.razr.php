@@ -1,4 +1,4 @@
-<form class="uk-article uk-form" action="@url('@system/auth/resetconfirm', ['user' => username, 'key' => activation])" method="post">
+<form class="uk-article uk-form" action="@url('@system/resetpassword/confirm', ['user' => username, 'key' => activation])" method="post">
 
     <h1 class="uk-article-title">@trans('Password confirmation')</h1>
 
@@ -20,5 +20,7 @@
     <div class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
     </div>
+
+    @token()
 
 </form>

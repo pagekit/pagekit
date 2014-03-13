@@ -5,7 +5,7 @@
     <div class="pk-sidebar uk-width-medium-1-4">
         <form id="js-access-level" class="uk-form" method="post">
 
-            <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url('@system/accesslevel/priorityupdate')">
+            <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url('@system/accesslevel/priority')">
                 @foreach (levels as lev)
                 <li data-id="@lev.id">
                     <div class="pk-sortable-item uk-visible-hover@( lev == level ? ' pk-active' )">

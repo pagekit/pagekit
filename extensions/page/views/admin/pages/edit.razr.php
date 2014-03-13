@@ -54,4 +54,6 @@
         <a class="uk-button" href="@url('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
     </p>
 
+    @token()
+
 </form>

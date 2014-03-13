@@ -84,8 +84,9 @@ class RoleController extends Controller
 
     /**
      * @Request({"order": "array"})
+     * @Token
      */
-    public function priorityUpdateAction($order) {
+    public function priorityAction($order) {
 
         foreach($order as $id => $priority) {
 

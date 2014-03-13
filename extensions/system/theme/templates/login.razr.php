@@ -17,7 +17,7 @@
 
                 @action('messages')
 
-                <form class="js-login js-toggle uk-panel uk-panel-box tm-panel tm-panel-small uk-form" action="@url('@system/auth/authenticate')" method="post">
+                <form class="js-login js-toggle uk-panel uk-panel-box tm-panel tm-panel-small uk-form@(last_login ? ' uk-hidden')" action="@url('@system/auth/authenticate')" method="post">
 
                     <div class="uk-form-row">
                         <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="@last_username" placeholder="@trans('Username')" autofocus>
@@ -28,8 +28,6 @@
                         </div>
                     </div>
                     <div class="uk-form-row">
-                        <input type="hidden" name="redirect" value="@redirect">
-                        @token()
                         <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Login')</button>
                     </div>
                     <div class="uk-form-row uk-text-small">
@@ -37,9 +35,12 @@
                         <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{target:'.js-toggle'}" title="Recover your password">@trans('Forgot Password?')</a>
                     </div>
 
+                    @token()
+                    <input type="hidden" name="redirect" value="@redirect">
+
                 </form>
 
-                <form class="uk-panel uk-panel-box uk-panel-box-primary tm-panel-login uk-form uk-hidden js-toggle" action="@url('@system/auth/reset')" method="post">
+                <form class="uk-panel uk-panel-box uk-panel-box-primary tm-panel-login uk-form js-toggle@(!last_login ? ' uk-hidden')" action="@url('@system/resetpassword/reset')" method="post">
 
                     <div class="uk-form-row">
                         <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@last_login" placeholder="@trans('Username or Email')" required>
@@ -47,6 +48,8 @@
                     <div class="uk-form-row">
                         <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Reset Password')</button>
                     </div>
+
+                    @token()
 
                 </form>
 

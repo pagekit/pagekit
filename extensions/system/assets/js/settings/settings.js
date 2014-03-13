@@ -14,7 +14,7 @@ require(['jquery', 'require', 'urlpicker', 'uikit!form-password', 'domReady!'], 
 
     // test SMTP
     $('[data-smtp-test]').on('click', function() {
-        $.post($(this).data('smtp-test'), $('[data-smtp] :input').serialize(),function(data) {
+        $.post($(this).data('smtp-test'), $('[data-smtp] :input, [name="_csrf"]').serialize(), function(data) {
             if (data) {
                 uikit.notify(data.message, data.success ? 'success' : 'danger');
             }
@@ -25,7 +25,7 @@ require(['jquery', 'require', 'urlpicker', 'uikit!form-password', 'domReady!'], 
 
     // test mail
     $('[data-mail-test]').on('click', function() {
-        $.post($(this).data('mail-test'), $('[data-email] :input').serialize(),function(data) {
+        $.post($(this).data('mail-test'), $('[data-email] :input, [name="_csrf"]').serialize(), function(data) {
             if (data) {
                 uikit.notify(data.message, data.success ? 'success' : 'danger');
             }

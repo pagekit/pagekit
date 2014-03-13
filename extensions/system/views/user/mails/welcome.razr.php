@@ -7,8 +7,10 @@
     <body>
         <p>@trans('Hello %name%', ['%name%' => name]),</p>
 
-        <p>@trans('Thank you for registering! You may login using the following username.'):</p>
+        <p>@trans('Thank you for registering!')</p>
 
-        </p>@trans('Username'): @username</p>
+        <p><a target="_blank" href="@app.url.root(true)">@app.url.root(true)</a></p>
+
+        <p>@trans('Login with the username:') @username</p>
     </body>
 </html>

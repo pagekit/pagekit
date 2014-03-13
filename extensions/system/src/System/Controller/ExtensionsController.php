@@ -46,6 +46,7 @@ class ExtensionsController extends Controller
 
     /**
      * @Request({"name"})
+     * @Token
      */
     public function enableAction($name)
     {
@@ -74,6 +75,7 @@ class ExtensionsController extends Controller
 
     /**
      * @Request({"name"})
+     * @Token
      */
     public function disableAction($name)
     {
@@ -100,6 +102,7 @@ class ExtensionsController extends Controller
 
     /**
      * @Request({"name"})
+     * @Token
      */
     public function uninstallAction($name)
     {

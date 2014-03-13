@@ -73,4 +73,7 @@
     @else
     <p class="uk-alert uk-alert-info">@trans('No pages found.')</p>
     @endif
+
+    @token()
+
 </form>

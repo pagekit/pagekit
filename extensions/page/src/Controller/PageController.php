@@ -90,6 +90,7 @@ class PageController extends Controller
 
     /**
      * @Request({"id": "int", "page": "array"})
+     * @Token
      */
     public function saveAction($id, $data)
     {
@@ -124,6 +125,7 @@ class PageController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -140,6 +142,7 @@ class PageController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function copyAction($ids = array())
     {
@@ -161,6 +164,7 @@ class PageController extends Controller
 
     /**
      * @Request({"status": "int", "ids": "int[]"})
+     * @Token
      */
     public function statusAction($status, $ids = array())
     {

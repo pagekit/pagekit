@@ -1,4 +1,4 @@
-<form class="uk-article uk-form uk-form-stacked" action="@url('@system/auth/reset')" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="@url('@system/resetpassword/reset')" method="post">
 
     <h1 class="uk-article-title">@trans('Forgot password')</h1>
 
@@ -14,5 +14,7 @@
     <div class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
     </div>
+
+    @token()
 
 </form>

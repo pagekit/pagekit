@@ -65,11 +65,14 @@ class SettingsController extends Controller
 
         $ssl = extension_loaded('openssl');
 
-        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl);
+        $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
+
+        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
     }
 
     /**
      * @Request({"config": "array", "option": "array", "tab": "int"})
+     * @Token
      */
     public function saveAction($data, $option, $tab = 0)
     {
@@ -107,6 +110,7 @@ class SettingsController extends Controller
 
     /**
      * @Request({"option": "array"})
+     * @Token
      */
     public function testSmtpConnectionAction($option = array())
     {
@@ -135,6 +139,7 @@ class SettingsController extends Controller
      * Note: If the mailer is accessed prior to this controller action, this will possibly test the wrong mailer
      *
      * @Request({"option": "array"})
+     * @Token
      */
     public function testSendEmailAction($option = array())
     {

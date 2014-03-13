@@ -52,6 +52,7 @@ class ThemesController extends Controller
 
     /**
      * @Request({"name"})
+     * @Token
      */
     public function enableAction($name)
     {
@@ -74,6 +75,7 @@ class ThemesController extends Controller
 
     /**
      * @Request({"name"})
+     * @Token
      */
     public function uninstallAction($name)
     {

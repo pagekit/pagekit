@@ -2,7 +2,7 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-extensions" class="uk-grid" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
+<div id="js-extensions" class="uk-grid" data-api="@api" data-key="@key" data-url="@url('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
 
     <div class="pk-sidebar uk-width-medium-1-4">
 
@@ -56,13 +56,13 @@
                             </td>
                             <td class="uk-table-middle uk-text-center">
                                 @if (extension)
-                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
+                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to disable')">@trans('Enabled')</a>
                                 @else
-                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
+                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Click to enable')">@trans('Disabled')</a>
                                 @endif
                             </td>
                             <td class="uk-table-middle">
-                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
+                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])" title="@trans('Delete')">@trans('Delete')</a>
                             </td>
                         </tr>
                         @endforeach
@@ -92,6 +92,7 @@
                         <input type="file" name="file">
                     </div>
                     <button class="js-upload-button uk-button uk-button-primary">@trans('Upload')</button>
+                    @token()
                 </form>
 
                 <div class="js-upload-modal uk-modal"></div>
