@@ -35,6 +35,7 @@ class PackageController extends Controller
 
     /**
      * @Request({"type"})
+     * @Token
      */
     public function uploadAction($type = null)
     {
@@ -73,7 +74,7 @@ class PackageController extends Controller
                     'shasum' => sha1_file($upload),
                     'extra' => $extra
                 ),
-                'install' => $this->url('@system/package/install', compact('path'))
+                'install' => $this->url('@system/package/install', array('path' => $path, '_csrf' => $this('csrf')->generate()))
             );
 
         } catch (Exception $e) {
@@ -85,6 +86,7 @@ class PackageController extends Controller
 
     /**
      * @Request({"package": "json", "path": "alnum"})
+     * @Token
      */
     public function installAction($package = null, $path = '')
     {

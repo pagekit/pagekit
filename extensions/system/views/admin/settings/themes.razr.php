@@ -2,7 +2,7 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packagesJson|e">
+<div id="js-themes" data-api="@api" data-key="@key" data-url="@url('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e">
 
     <ul class="uk-tab" data-uk-tab="{ connect:'#tab-content' }">
         <li class="uk-active"><a href="#">@trans('All')</a></li>
@@ -80,6 +80,7 @@
                     <input type="file" name="file">
                 </div>
                 <button class="js-upload-button uk-button uk-button-primary">@trans('Upload')</button>
+                @token()
             </form>
 
             <div class="js-upload-modal uk-modal"></div>
