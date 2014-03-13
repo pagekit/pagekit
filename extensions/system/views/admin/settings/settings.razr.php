@@ -186,9 +186,9 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <span class="uk-form-label">@trans('Release Channel')</span>
+                    <label for="form-channel" class="uk-form-label">@trans('Release Channel')</label>
                     <div class="uk-form-controls">
-                        <select id="form-timezone" class="uk-form-width-large" name="option[system:app.release_channel]">
+                        <select id="form-channel" class="uk-form-width-large" name="option[system:app.release_channel]">
                             @foreach (['stable' => trans('Stable'), 'nightly' => trans('Nightly')] as id => channel)
                             <option value="@id"@( id == option.get('system:app.release_channel', 'stable') ? ' selected' )>@channel</option>
                             @endforeach
