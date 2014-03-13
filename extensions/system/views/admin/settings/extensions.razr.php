@@ -36,8 +36,8 @@
                             <td class="pk-table-width-minimum">
                                 <img class="uk-img-preserve" src="@( package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) :  url('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
                             </td>
-                            <td>
-                                <h2 class="pk-extensions-heading">@package.title</h2>
+                            <td class="uk-table-middle">
+                                <h2 class="uk-h3 uk-margin-remove">@package.title</h2>
                                 <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
                                     <li><a href="">@trans('Details')</a></li>
                                     @if (extension)
@@ -48,21 +48,21 @@
                                     @endif
                                 </ul>
                             </td>
-                            <td class="pk-table-max-width-200">
-                                <ul class="uk-list pk-extensions-list pk-extensions-margin">
+                            <td class="uk-table-middle pk-table-max-width-200">
+                                <ul class="uk-list uk-margin-remove">
                                     <li class="uk-text-truncate">@package.version</li>
                                     <li class="uk-text-truncate">/@package.name</li>
                                 </ul>
                             </td>
-                            <td class="uk-text-center">
+                            <td class="uk-table-middle uk-text-center">
                                 @if (extension)
-                                <a class="uk-button uk-button-success pk-extensions-margin" href="@url('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
+                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name])" title="@trans('Click to disable')">@trans('Enabled')</a>
                                 @else
-                                <a class="uk-button pk-extensions-margin" href="@url('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
+                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name])" title="@trans('Click to enable')">@trans('Disabled')</a>
                                 @endif
                             </td>
-                            <td>
-                                <a class="uk-button uk-button-danger pk-extensions-margin uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
+                            <td class="uk-table-middle">
+                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name])" title="@trans('Delete')">@trans('Delete')</a>
                             </td>
                         </tr>
                         @endforeach

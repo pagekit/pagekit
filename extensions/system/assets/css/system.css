@@ -20,36 +20,7 @@
 /* Extensions view
  ========================================================================== */
 
-/*
- * Heading
- */
-
-.pk-extensions-heading {
-    margin: 8px 0 0 0;
-    font-size: 18px;
-    line-height: 24px;
-    white-space: nowrap;
-}
-
-/*
- * Margin top for better alignment
- */
-
-.pk-extensions-margin {
-    margin-top: 8px !important;
-    margin-bottom: 0 !important;
-}
-
-/*
- * Meta list
- */
-
-.pk-extensions-list { margin: 0; }
-
-.pk-extensions-list > li > strong {
-    display: inline-block;
-    min-width: 70px;
-}
+.pk-extensions-margin { margin: 5px !important; }
 
 
 /* Themes view

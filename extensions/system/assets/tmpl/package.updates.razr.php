@@ -12,7 +12,7 @@
                 <img class="uk-img-preserve" src="{{ extra.image }}" width="50" height="50" alt="{{ title }}">
             </td>
             <td>
-                <h2 class="pk-extensions-heading">{{ title }}</h2>
+                <h2 class="uk-h3 uk-margin-remove pk-extensions-margin">{{ title }}</h2>
                 <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
                     <li><a href="#" data-uk-toggle="{target:'#toggle-{{ name }}'}">@trans('Changelog')</a></li>
                     <li><span>{{ version.version }}</span></li>
