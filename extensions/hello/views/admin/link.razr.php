@@ -6,15 +6,15 @@
 
     (function($) {
 
-        var handler, $name = $('[name=name]');
+        $(document).on('load.urlpicker', function(e, handler, params) {
 
-        $(document).on('load.urlpicker', function(e, link, params) {
-            handler = link;
-            $name.val(params['name'] ? params['name'] : '').trigger('change');
-        });
+            var $name = $('[name="name"]', handler.edit);
 
-        $name.on('change', function() {
-            handler.updateUrl($name.serializeArray());
+            $name.on('change', function() {
+                    handler.updateUrl($name.serializeArray());
+                })
+                .val(params['name'] ? params['name'] : '')
+                .trigger('change');
         });
 
     })(jQuery);

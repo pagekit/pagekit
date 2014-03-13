@@ -1,13 +1,13 @@
 define(['jquery', 'require'], function($, req) {
 
-    var Link = function(options) {
+    var Link = function(element, options) {
 
         var $this = this;
 
         this.options = $.extend({}, Link.defaults, options);
-        this.edit    = $(this.options.editForm);
-        this.types   = $(this.options.typeField);
-        this.url     = $(this.options.urlField);
+        this.edit    = $(this.options.editForm, element);
+        this.types   = $(this.options.typeField, element);
+        this.url     = $(this.options.urlField, element);
         this.forms   = {};
 
         $.getJSON(this.options.url)
@@ -134,8 +134,8 @@ define(['jquery', 'require'], function($, req) {
     Link.defaults = {
         urlField:   '.js-link-url',
         typeField:  '.js-link-types',
-        typeFilter: [],
         editForm:   '.js-link-edit',
+        typeFilter: [],
         url:        req.toUrl('admin/system/links')
     };
 

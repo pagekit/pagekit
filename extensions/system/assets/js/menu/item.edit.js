@@ -1,4 +1,4 @@
 require(['urlpicker'], function(Picker) {
     // URL picker
-    new Picker('[name="item[url]"]', { typeFilter: false });
+    new Picker('[name="item[url]"]');
 });

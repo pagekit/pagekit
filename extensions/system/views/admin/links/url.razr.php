@@ -6,15 +6,11 @@
 
     (function($) {
 
-        var handler, $url = $('[name=url]', '.js-link-edit');
+        $(document).on('load.urlpicker', function(e, handler, params, url) {
 
-        $(document).on('load.urlpicker', function(e, link, params, url) {
-            handler = link;
-            $url.val(url);
-        });
-
-        $url.on('change', function() {
-            handler.updateUrl(null, $url.val());
+            var $url = $('[name=url]', handler.edit).on('change', handler.edit, function() {
+                handler.updateUrl(null, $url.val());
+            }).val(url);
         });
 
     })(jQuery);

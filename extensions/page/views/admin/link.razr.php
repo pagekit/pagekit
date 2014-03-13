@@ -10,16 +10,16 @@
 
     (function($) {
 
-        var handler, $id = $('[name=id]', '.js-link-edit');
+        $(document).on('load.urlpicker', function(e, handler, params) {
 
-        $(document).on('load.urlpicker', function(e, link, params) {
-            handler = link;
+            var $id = $('[name=id]', handler.edit);
 
-            $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');
-        });
-
-        $id.on('change', function() {
-            handler.updateUrl($id.serializeArray());
+            $id
+                .on('change', function() {
+                    handler.updateUrl($id.serializeArray());
+                })
+                .val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val())
+                .trigger('change');
         });
 
     })(jQuery);

@@ -8,7 +8,7 @@ define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace
 
         var modal   = $(tmpl.get('urlpicker.modal')).appendTo('body'),
             picker  = new uikit.modal.Modal(modal),
-            link    = new Link({ typeFilter: this.options.typeFilter }),
+            link    = new Link(modal, { typeFilter: this.options.typeFilter }),
             url     = modal.find('.js-link-url'),
             source  = $(element),
             trigger = $(tmpl.get('urlpicker.replace')).insertBefore(source);
@@ -18,7 +18,6 @@ define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace
 
             picker.hide();
             source.val(url.val()).trigger('change');
-            resolve();
         });
 
         trigger.on('click', function(e) {
@@ -40,6 +39,11 @@ define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace
         function resolve() {
             var resolved = '';
 
+            if (!source.val()) {
+                source.trigger('resolved', '');
+                return;
+            }
+
             $.post($this.options.url, { url: source.val() }, function(data) {
                 if (!data.error && data.url) {
                     resolved = data.url;
@@ -53,7 +57,7 @@ define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace
 
     UrlPicker.defaults = {
         url: req.toUrl('admin/system/resolveurl'),
-        typeFilter: ['/']
+        typeFilter: []
     };
 
     return UrlPicker;

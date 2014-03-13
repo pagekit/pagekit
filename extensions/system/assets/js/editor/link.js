@@ -4,7 +4,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
         picker = new uikit.modal.Modal(modal),
         url    = modal.find('.js-link-url'),
         title  = modal.find('.js-title'),
-        link   = new Link(),
+        link   = new Link(modal),
         handler;
 
     modal.on('click', '.js-update', function() {
