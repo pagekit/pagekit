@@ -186,6 +186,16 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
+                    <span class="uk-form-label">@trans('Release Channel')</span>
+                    <div class="uk-form-controls">
+                        <select id="form-timezone" class="uk-form-width-large" name="option[system:app.release_channel]">
+                            @foreach (['stable' => trans('Stable'), 'nightly' => trans('Nightly')] as id => channel)
+                            <option value="@id"@( id == option.get('system:app.release_channel', 'stable') ? ' selected' )>@channel</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
                     <label for="form-uploadfolder" class="uk-form-label">@trans('Storage')</label>
                     <div class="uk-form-controls">
                         <input id="form-uploadfolder" class="uk-form-width-large" type="text" name="option[system:app.storage]" value="@option.get('system:app.storage')" placeholder="@app.config.app.storage">

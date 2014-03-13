@@ -5,28 +5,26 @@ require(['jquery', 'domReady!'], function($) {
     // query for update
     $.post(params.api + '/update', function(data) {
 
+        var version = data[params['channel'] == 'nightly' ? 'nightly' : 'latest'];
+
         $('.js-version', page).each(function() {
 
             var $this = $(this);
 
             if ($this.is('a')) {
-                $this.attr('href', data.latest.url);
+                $this.attr('href', version.url);
             }
 
-            $this.text($this.text().replace(/%version%/, data.latest.version));
+            $this.text($this.text().replace(/%version%/, version.version));
         });
 
         $('.js-install', page).on('click', function(e) {
             e.preventDefault();
             show('update-install');
-            step(params.url, {'update': JSON.stringify(data.latest)});
+            step(params.url, { update: JSON.stringify(version) });
         });
 
-        if (data.latest.version != params.version) {
-            show('update-available');
-        } else {
-            show('no-updates');
-        }
+        show(version.version != params.version ? 'update-available' : 'no-updates');
 
     }, 'jsonp').fail(function(e) {
 
