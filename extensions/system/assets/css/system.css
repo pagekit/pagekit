@@ -26,14 +26,20 @@
 /* Themes view
  ========================================================================== */
 
-.pk-themes-panel .uk-panel-teaser { position: relative; }
+.pk-themes-position { position: relative; }
+
+.pk-themes-action {
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
 
 
 /* Marketplace table template
  ========================================================================== */
 
-.pk-marketplace-panel .uk-panel-title { margin-bottom: 15px; }
 .pk-marketplace-panel .uk-overlay-area { border-radius: 2px; }
+
 
 /* Marketplace details template
  ========================================================================== */
