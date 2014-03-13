@@ -142,11 +142,11 @@ return array(
 
         'scripts' => function($scripts) {
 
-            $scripts->register('jquery', 'vendor://assets/jquery/jquery.js');
+            $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
             $scripts->register('requirejs', 'vendor://assets/requirejs/require.min.js', array('requirejs-config'));
             $scripts->register('requirejs-config', 'asset://system/js/require.js');
-            $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js');
-            $scripts->register('uikit-notify', 'vendor://assets/uikit/addons/notify/notify.js');
+            $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', array(), array('requirejs' => true));
+            $scripts->register('uikit-notify', 'vendor://assets/uikit/addons/notify/notify.js', array(), array('requirejs' => true));
 
         }
 

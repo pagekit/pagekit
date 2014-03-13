@@ -206,7 +206,32 @@ class SystemExtension extends Extension
             $app['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
             $app['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-            $app['view']->addAction('messages', function(ActionEvent $event) use($app) {
+            $app['view']->addAction('head', function(ActionEvent $event) use ($app) {
+
+                foreach ($scripts = $app['view.scripts'] as $script) {
+
+                    if ($script->getName() != 'requirejs') {
+                        continue;
+                    }
+
+                    foreach ($scripts as $script) {
+
+                        $dependencies = (array) $script['dependencies'];
+
+                        if (isset($script['requirejs'])) {
+                            $script['dependencies'] = array_merge($dependencies, array('requirejs'));
+                        } elseif (in_array('requirejs', $dependencies)) {
+                            $scripts->dequeue($name = $script->getName());
+                            $scripts->queue($name);
+                        }
+                    }
+
+                    break;
+                }
+
+            }, 5);
+
+            $app['view']->addAction('messages', function(ActionEvent $event) use ($app) {
                 $event->append($app['view']->render('system/messages/messages.razr.php'));
             });
         });
