@@ -7522,14 +7522,6 @@ a.uk-datepicker-table-muted {
 .pk-subnav-icon > li > a:hover {
   color: #444;
 }
-/* Modifier `pk-subnav-muted`
-========================================================================== */
-.pk-subnav-muted > li > a {
-  color: #999;
-}
-.pk-subnav-muted > li > a:hover {
-  color: #444;
-}
 /* Sub-modifier `pk-table-subheading`
 ========================================================================== */
 /*
@@ -7621,6 +7613,9 @@ a.uk-datepicker-table-muted {
  */
 .pk-table-fake-header-indent > :first-child {
   padding-left: 40px;
+}
+.pk-table-fake-header-indent-nested > :first-child {
+  padding-left: 48px;
 }
 /*
  * Make it work with `uk-sortable`

@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="pk-table-fake pk-table-fake-header">
+        <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested">
             <div class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></div>
             <div>@trans('Title') </div>
             <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
