@@ -17,7 +17,7 @@ var require = (function(doc) {
                         'codemirror':      'vendor/assets/codemirror/codemirror.js?ver=3.22',
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
-                        'uikit':           'vendor/assets/uikit/js/uikit',
+                        'uikit':           'vendor/assets/uikit/js/uikit.min.js',
                         'uikit/addons':    'vendor/assets/uikit/addons',
                         'markdownarea':    'vendor/assets/uikit/addons/markdownarea/markdownarea',
                         'ajaxupload':      'vendor/assets/ajaxupload/ajaxupload',
