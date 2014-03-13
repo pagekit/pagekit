@@ -2518,9 +2518,7 @@
             var ele = $(this);
 
             if (!ele.data("toggle")) {
-
                var obj = new Toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
-               ele.trigger("click");
             }
         });
     });
