@@ -72,11 +72,11 @@
             </li>
             <li class="js-update">
 
-                <div class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">
+                <div class="uk-alert uk-alert-warning uk-margin-remove uk-hidden" data-msg="no-connection">
                     @trans('An error occurred in retrieving update information. Please try again later.')
                 </div>
 
-                <div class="uk-alert uk-alert-info uk-hidden" data-msg="no-updates">
+                <div class="uk-alert uk-alert-info uk-margin-remove uk-hidden" data-msg="no-updates">
                     @trans('No extension updates found.')
                 </div>
 
