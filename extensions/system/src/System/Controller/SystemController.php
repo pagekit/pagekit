@@ -6,6 +6,7 @@ use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\User\Controller\ResetPasswordController;
 
 /**
  * @Route("/")
@@ -32,7 +33,10 @@ class SystemController extends Controller
             return $this->redirect('@system/system/admin');
         }
 
-        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this->url('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
+        $lastLogin = $this('session')->get(ResetPasswordController::RESET_LOGIN);
+        $this('session')->remove(ResetPasswordController::RESET_LOGIN);
+
+        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this->url('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
     }
 
     /**
