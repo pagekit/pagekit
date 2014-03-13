@@ -2,7 +2,6 @@
     <thead>
         <tr>
             <th colspan="2">@trans('Name')</th>
-            <th>@trans('Version')</th>
             <th class="pk-table-width-minimum"></th>
         </tr>
     </thead>
@@ -15,12 +14,12 @@
             <td>
                 <h2 class="pk-extensions-heading">{{ title }}</h2>
                 <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
-                    <li><a href="" data-uk-toggle="{target:'#toggle'}">@trans('Show Changelog')</a></li>
+                    <li><a href="#" data-uk-toggle="{target:'#toggle-{{ name }}'}">@trans('Changelog')</a></li>
+                    <li><span>{{ version.version }}</span></li>
                     <li><span>{{ version.released }}</span></li>
                 </ul>
-                <div id="toggle" class="uk-hidden">{{ version.changelog }}</div>
+                <div id="toggle-{{ name }}" class="uk-hidden uk-margin">{{ version.changelog }}</div>
             </td>
-            <td class="pk-table-max-width-200">{{ version.version }}</td>
             <td>
                 <button class="uk-button uk-button-primary pk-extensions-margin" data-install="{{ name }}">@trans('Update')</button>
             </td>

@@ -38,15 +38,15 @@
                             </td>
                             <td>
                                 <h2 class="pk-extensions-heading">@package.title</h2>
-                                @if (extension)
                                 <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
                                     <li><a href="">@trans('Details')</a></li>
+                                    @if (extension)
                                     @if (extension.config.settings)
                                     <li><a href="@url('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
                                     @endif
                                     <li><a href="@url('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
+                                    @endif
                                 </ul>
-                                @endif
                             </td>
                             <td class="pk-table-max-width-200">
                                 <ul class="uk-list pk-extensions-list pk-extensions-margin">
