@@ -67,7 +67,7 @@ define(['jquery', 'require'], function($, req) {
         },
 
         triggerLoad: function() {
-            $(document).trigger('load.urlpicker', [this, this.deparam(this.url.val().split('?')[1] + ''), this.url.val()]);
+            $(document).trigger('load.linkpicker', [this, this.deparam(this.url.val().split('?')[1] + ''), this.url.val()]);
         },
 
         clearEditForm: function() {

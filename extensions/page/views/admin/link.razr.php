@@ -10,7 +10,7 @@
 
     (function($) {
 
-        $(document).on('load.urlpicker', function(e, handler, params) {
+        $(document).on('load.linkpicker', function(e, handler, params) {
 
             var $id = $('[name=id]', handler.edit);
 

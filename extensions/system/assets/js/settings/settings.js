@@ -1,4 +1,4 @@
-require(['jquery', 'require', 'urlpicker', 'uikit!form-password', 'domReady!'], function($, req, Picker, uikit) {
+require(['jquery', 'require', 'linkpicker', 'uikit!form-password', 'domReady!'], function($, req, Picker, uikit) {
 
     // switcher
     var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {

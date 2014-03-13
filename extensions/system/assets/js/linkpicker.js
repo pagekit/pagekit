@@ -1,17 +1,17 @@
-define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace', 'uikit', 'link'], function($, req, tmpl, uikit, Link) {
+define('linkpicker', ['jquery', 'require','tmpl!linkpicker.modal,linkpicker.replace', 'uikit', 'link'], function($, req, tmpl, uikit, Link) {
 
-    var UrlPicker = function(element, options) {
+    var LinkPicker = function(element, options) {
 
         var $this = this;
 
-        this.options = $.extend({}, UrlPicker.defaults, options);
+        this.options = $.extend({}, LinkPicker.defaults, options);
 
-        var modal   = $(tmpl.get('urlpicker.modal')).appendTo('body'),
+        var modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
             picker  = new uikit.modal.Modal(modal),
             link    = new Link(modal, { typeFilter: this.options.typeFilter }),
             url     = modal.find('.js-link-url'),
             source  = $(element),
-            trigger = $(tmpl.get('urlpicker.replace')).insertBefore(source);
+            trigger = $(tmpl.get('linkpicker.replace')).insertBefore(source);
 
         modal.on('submit', 'form', function(e) {
             e.preventDefault();
@@ -55,10 +55,10 @@ define('urlpicker', ['jquery', 'require','tmpl!urlpicker.modal,urlpicker.replace
 
     };
 
-    UrlPicker.defaults = {
+    LinkPicker.defaults = {
         url: req.toUrl('admin/system/resolveurl'),
         typeFilter: []
     };
 
-    return UrlPicker;
+    return LinkPicker;
 });

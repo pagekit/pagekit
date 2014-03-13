@@ -2,7 +2,7 @@
 
     (function($) {
 
-        $(document).on('load.urlpicker', function(e, link, params) {
+        $(document).on('load.linkpicker', function(e, link, params) {
             link.updateUrl();
         });
 

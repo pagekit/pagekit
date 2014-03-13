@@ -1,6 +1,6 @@
 <div class="uk-modal">
     <form class="uk-modal-dialog uk-form">
-        <h1 class="uk-h3">@trans('Add Link')</h1>
+        <h1 class="uk-h3">@trans('Choose Link')</h1>
         <div class="uk-form-row">
             <select class="js-link-types uk-width-1-1" name="type"></select>
         </div>

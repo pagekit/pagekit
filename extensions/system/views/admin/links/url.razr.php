@@ -6,7 +6,7 @@
 
     (function($) {
 
-        $(document).on('load.urlpicker', function(e, handler, params, url) {
+        $(document).on('load.linkpicker', function(e, handler, params, url) {
 
             var $url = $('[name=url]', handler.edit).on('change', handler.edit, function() {
                 handler.updateUrl(null, $url.val());
