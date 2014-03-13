@@ -118,6 +118,7 @@ class UserController extends Controller
 
     /**
      * @Request({"id": "int", "user": "array", "password", "roles": "array"})
+     * @Token
      */
     public function saveAction($id, $data, $password, $roles = null)
     {
@@ -195,6 +196,7 @@ class UserController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -217,6 +219,7 @@ class UserController extends Controller
 
     /**
      * @Request({"status": "int", "ids": "int[]"})
+     * @Token
      */
     public function statusAction($status, $ids = array())
     {

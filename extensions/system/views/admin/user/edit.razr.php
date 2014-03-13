@@ -92,6 +92,8 @@
         </div>
     </div>
 
+    @token()
+
 </form>
 
 <script>

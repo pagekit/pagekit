@@ -73,7 +73,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
             data[item.id] = item.order;
         });
 
-        $.post(prioUpdateUrl, {'order': data}, function(res) {
+        $.post(prioUpdateUrl, { order: data, _csrf: $('[name="_csrf"]').val() }, function(res) {
             uikit.notify(data.message || 'Roles order updated', 'success');
         });
 

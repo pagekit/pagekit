@@ -93,4 +93,6 @@
     <p class="uk-alert uk-alert-info">@trans('No user found.')</p>
     @endif
 
+    @token()
+
 </form>

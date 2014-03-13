@@ -45,4 +45,7 @@
             @endforeach
         </tbody>
     </table>
+
+    @token()
+
 </form>
