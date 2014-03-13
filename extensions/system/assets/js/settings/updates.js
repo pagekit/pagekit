@@ -11,7 +11,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
                 packages[p.name] = p;
             });
 
-            update.append(tmpl.render('package.updates', data));
+            update.prepend(tmpl.render('package.updates', data));
 
         } else {
             show('no-updates', update);
