@@ -18,8 +18,10 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
         // save widgets order on sortable change
         .on('sortable-change', 'ul.uk-sortable', function(e) {
-            $.post(params.reorder, { order: $(this).data('uksortable').serialize() }, function(response) {
-                uikit.notify(response.message || "Widgets order updated");
+            $.post(params.reorder, { order: $(this).data('uksortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(response) {
+                uikit.notify(response.message || 'Widgets order updated', 'success');
+            }).fail(function() {
+                uikit.notify('Unable to reorder widgets.', 'danger');
             });
         });
 
