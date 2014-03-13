@@ -8,7 +8,7 @@ use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\UserInterface;
 
 /**
- * @Route("/user")
+ * @Route("/password")
  */
 class ResetPasswordController extends Controller
 {
@@ -34,7 +34,7 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/reset")
+     * @Route("/request")
      * @View("system/user/reset/request.razr.php")
      */
     public function requestAction()
@@ -53,7 +53,7 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/reset/execute")
+     * @Route("/reset")
      * @Request({"login"})
      * @View("system/user/reset/request.razr.php")
      */
@@ -119,7 +119,7 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/reset/confirm")
+     * @Route("/confirm")
      * @Request({"user", "key"})
      * @View("system/user/reset/confirm.razr.php")
      */
