@@ -5,7 +5,7 @@
     <div class="pk-sidebar uk-width-medium-1-4">
         <form id="js-role" class="uk-form" method="post">
 
-            <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url('@system/role/updatepriority')">
+            <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url('@system/role/priority')">
                 @foreach (roles as r)
                 <li data-id="@r.id">
                     <div class="pk-sortable-item uk-visible-hover@( r == role ? ' pk-active')">
