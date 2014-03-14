@@ -34,6 +34,14 @@ return array(
 
     ),
 
+    'resources' => array(
+
+        'override' => array(
+            'extension://system/theme/templates' => 'templates/system'
+        )
+
+    ),
+
     'settings' => '@alpha/settings/index',
 
 );
