@@ -4,6 +4,7 @@ $app->on('site.init', function() use ($app) {
 
     $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
     $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
+    $app['positions']->registerRenderer('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
     $app['positions']->registerRenderer('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
     $app['positions']->registerRenderer('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
 

@@ -9,12 +9,16 @@
     </head>
     <body>
 
+        @set(config = app.option.get('alpha:config'))
+
         <div class="uk-container uk-container-center">
 
+            @if (app.positions.exists('logo'))
             <div class="uk-text-center uk-margin-large uk-margin-large-top">
-                <a href="@url.root" class="tm-brand">Pagekit</a>
+                <a href="@url.root" class="tm-brand">@app.positions.render('logo', ['renderer' => 'blank'])</a>
                 <a href="#offcanvas" class="uk-navbar-toggle uk-hidden-large tm-navbar-toggle" data-uk-offcanvas></a>
             </div>
+            @endif
 
             @if (app.positions.exists('navbar'))
             <div class="tm-navbar u-margin-large">
