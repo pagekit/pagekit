@@ -6,6 +6,7 @@ use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\RegisterJsonEvent;
 use Pagekit\User\Controller\ResetPasswordController;
 
 /**
@@ -100,18 +101,22 @@ class SystemController extends Controller
 
 
     /**
-     * @Route("/system/js/{script}")
+     * @Route("/system/json/{sources}")
      */
-    public function jsAction($script = '')
+    public function jsonAction($sources = '')
     {
 
-        $script = preg_replace('/\.js$/i', '', $script);
+        $this('events')->trigger('view.register.json', $event = new RegisterJsonEvent);
 
-        $content = $this('view')->render("extension://system/assets/scripts/{$script}.razr.php");
+        $response = array();
 
-        $response = $this('response')->create($content, 200, array('Content-Type' => 'text/javascript'));
+        foreach (explode(',', $sources) as $source) {
+            if ($event->has($source)) {
+                $response[$source] = json_decode($this('view')->render($event->get($source)));
+            }
+        }
 
-        return $response;
+        return $this('response')->json($response);
     }
 
 

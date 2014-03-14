@@ -14,6 +14,7 @@ var require = (function(doc) {
                     baseUrl: base,
                     paths: {
                         'jquery':          'vendor/assets/jquery/jquery.js?ver=2.1.0',
+                        'jsonsource':      'vendor/assets/requirejs/plugins/jsonsource',
                         'codemirror':      'vendor/assets/codemirror/codemirror.js?ver=3.22',
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
@@ -25,7 +26,7 @@ var require = (function(doc) {
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'editor.markdown': 'extensions/system/assets/js/editor.markdown?ver=' + vers,
                         'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,
-                        'local':           base+'/system/js/local'
+                        'local':           'extensions/system/assets/js/local.js?ver=' + vers
                     },
                     shim: {
                         'uikit': {
@@ -47,6 +48,9 @@ var require = (function(doc) {
                         },
                         'tmpl': {
                             url: 'system/tmpl/'
+                        },
+                        'jsonsource': {
+                            url: 'system/json/'
                         },
                         'finder': {
                             url: 'system/finder/'

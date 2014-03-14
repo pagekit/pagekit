@@ -28,6 +28,7 @@ use Pagekit\System\Event\LocaleListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\RegisterJsonEvent;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener;
@@ -254,6 +255,10 @@ class SystemExtension extends Extension
             $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
             $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
             $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
+        });
+
+        $app->on('view.register.json', function(RegisterJsonEvent $event) {
+            $event->register('local', 'extension://system/assets/json/local.razr.php');
         });
     }
 
