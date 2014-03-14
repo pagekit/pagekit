@@ -9,7 +9,7 @@
 
         <p>@trans('Thank you for registering!')</p>
 
-        <p><a target="_blank" href="@app.url.root(true)">@app.url.root(true)</a></p>
+        <p><a target="_blank" href="@app.url.base(true)">@app.url.base(true)</a></p>
 
         <p>@trans('Login with the username:') @username</p>
     </body>
