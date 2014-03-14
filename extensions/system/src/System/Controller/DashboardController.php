@@ -140,6 +140,8 @@ class DashboardController extends Controller
 
             $this->save($widgets);
 
+            $this('message')->success($id ? __('Widget saved.') : __('Widget created.'));
+
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
         }
