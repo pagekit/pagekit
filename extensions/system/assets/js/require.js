@@ -24,7 +24,8 @@ var require = (function(doc) {
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'editor.markdown': 'extensions/system/assets/js/editor.markdown?ver=' + vers,
-                        'linkpicker':       'extensions/system/assets/js/linkpicker.js?ver=' + vers
+                        'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,
+                        'local':           base+'/system/js/local'
                     },
                     shim: {
                         'uikit': {

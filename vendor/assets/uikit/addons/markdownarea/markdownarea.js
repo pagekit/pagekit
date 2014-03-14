@@ -32,7 +32,7 @@
           breaks: false,
           pedantic: false,
           sanitize: false,
-          smartLists: true,
+          smartLists: false,
           smartypants: false,
           langPrefix: 'lang-'
         });

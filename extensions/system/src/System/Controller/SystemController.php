@@ -98,6 +98,23 @@ class SystemController extends Controller
         return $this('response')->json($response);
     }
 
+
+    /**
+     * @Route("/system/js/{script}")
+     */
+    public function jsAction($script = '')
+    {
+
+        $script = preg_replace('/\.js$/i', '', $script);
+
+        $content = $this('view')->render("extension://system/assets/scripts/{$script}.razr.php");
+
+        $response = $this('response')->create($content, 200, array('Content-Type' => 'text/javascript'));
+
+        return $response;
+    }
+
+
     /**
      * @Route("/system/clearcache")
      * @Access(admin=true)

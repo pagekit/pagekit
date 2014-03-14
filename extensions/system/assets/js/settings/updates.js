@@ -1,4 +1,4 @@
-require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!form-file', 'domReady!'], function($, marketplace, tmpl, uikit) {
+require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!form-file', 'local', 'domReady!'], function($, marketplace, tmpl, uikit, local) {
 
     var page = $('#js-extensions, #js-themes'), update = $('.js-update', page), upload = $('.js-upload', page), market = $('.js-marketplace', page), params = page.data(), packages = {}, modal;
 
@@ -8,6 +8,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
         if (data.packages.length) {
 
             $.each(data.packages, function(i, p) {
+                p.version.released = local.formatDate(p.version.released);
                 packages[p.name] = p;
             });
 
