@@ -21,12 +21,13 @@ class FinderController extends Controller
         }
 
         $data = array_fill_keys(array('folders', 'files'), array());
+
         foreach ($this('file')->find()->depth(0)->in($root) as $file) {
 
             $info = array(
                 'name' => $file->getFilename(),
                 'path' => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'  => htmlspecialchars($this->url($file->getPathname()), ENT_QUOTES),
+                'url'  => htmlspecialchars($this('url')->to($file->getPathname()), ENT_QUOTES),
             );
 
             if (!$isDir = $file->isDir()) {
@@ -37,7 +38,6 @@ class FinderController extends Controller
             }
 
             $data[$isDir ? 'folders' : 'files'][] = $info;
-
         }
 
         return $this('response')->json(compact('data'));

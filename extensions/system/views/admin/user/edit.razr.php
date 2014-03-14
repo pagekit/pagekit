@@ -1,6 +1,6 @@
 @script('requirejs')
 
-<form class="uk-form uk-form-horizontal" action="@url('@system/user/save', ['id' => user.id ?: 0])" method="post">
+<form class="uk-form uk-form-horizontal" action="@url.route('@system/user/save', ['id' => user.id ?: 0])" method="post">
 
     <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
         <div class="pk-sidebar uk-width-medium-1-4">
@@ -86,7 +86,7 @@
 
             <p>
                 <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-                <a class="uk-button" href="@url('@system/user/index')">@( user.id ? trans('Close') : trans('Cancel') )</a>
+                <a class="uk-button" href="@url.route('@system/user/index')">@( user.id ? trans('Close') : trans('Cancel') )</a>
             </p>
 
         </div>

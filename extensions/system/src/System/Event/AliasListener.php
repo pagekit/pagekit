@@ -21,7 +21,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias) {
-            $manager->register($alias->getAlias(), $this('url')->to($alias->getSource()));
+            $manager->register($alias->getAlias(), $this('url')->route($alias->getSource()));
         }
     }
 

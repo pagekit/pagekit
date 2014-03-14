@@ -1,21 +1,21 @@
 @script('pages-index', 'page/js/pages.js', 'requirejs')
 
-<form id="js-pages" class="uk-form" action="@url('@page/page/index')" method="post">
+<form id="js-pages" class="uk-form" action="@url.route('@page/page/index')" method="post">
 
     <div class="pk-options uk-clearfix">
         <div class="uk-float-left">
 
-            <a class="uk-button uk-button-primary" href="@url('@page/page/add')">@trans('Add Page')</a>
+            <a class="uk-button uk-button-primary" href="@url.route('@page/page/add')">@trans('Add Page')</a>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url('@page/page/status', ['status' => 1])">@trans('Enable')</a></li>
-                        <li><a href="#" data-action="@url('@page/page/status', ['status' => 0])">@trans('Disable')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 1])">@trans('Enable')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 0])">@trans('Disable')</a></li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="#" data-action="@url('@page/page/copy')">@trans('Copy')</a></li>
-                        <li><a href="#" data-action="@url('@page/page/delete')">@trans('Delete')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/copy')">@trans('Copy')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,15 +53,15 @@
                     <input type="checkbox" name="ids[]" value="@page.id">
                 </td>
                 <td>
-                    <a href="@url('@page/page/edit', ['id' => page.id])">@page.title</a>
+                    <a href="@url.route('@page/page/edit', ['id' => page.id])">@page.title</a>
                 </td>
                 <td class="uk-text-center">
-                    <a href="#" data-action="@url('@page/page/status', ['ids[]' => page.id, 'status' => page.status ? '0' : '1'])" title="@page.statusText">
+                    <a href="#" data-action="@url.route('@page/page/status', ['ids[]' => page.id, 'status' => page.status ? '0' : '1'])" title="@page.statusText">
                         <i class="uk-icon-circle uk-text-@(page.status ? 'success' : 'danger')" title="@page.statusText"></i>
                     </a>
                 </td>
                 <td>
-                    <div class="uk-text-truncate"><a href="@url('@page/id', ['id' => page.id])" target="_blank">@url('@page/id', ['id' => page.id])</a></div>
+                    <div class="uk-text-truncate"><a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@url.route('@page/id', ['id' => page.id])</a></div>
                 </td>
                 <td>
                     @(levels[page.accessId].name ?: trans('No access level'))

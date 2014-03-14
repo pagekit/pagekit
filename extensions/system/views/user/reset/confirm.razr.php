@@ -1,4 +1,4 @@
-<form class="uk-article uk-form" action="@url('@system/resetpassword/confirm', ['user' => username, 'key' => activation])" method="post">
+<form class="uk-article uk-form" action="@url.route('@system/resetpassword/confirm', ['user' => username, 'key' => activation])" method="post">
 
     <h1 class="uk-article-title">@trans('Password confirmation')</h1>
 

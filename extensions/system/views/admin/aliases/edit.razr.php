@@ -1,6 +1,6 @@
 @script('alias', 'system/js/aliases/edit.js', 'requirejs')
 
-<form class="uk-form uk-form-horizontal" action="@url('@system/alias/save', ['id' => alias.id ?: 0])" method="post">
+<form class="uk-form uk-form-horizontal" action="@url.route('@system/alias/save', ['id' => alias.id ?: 0])" method="post">
 
     <div class="uk-form-row">
         <label for="form-alias" class="uk-form-label">@trans('Alias')</label>
@@ -17,7 +17,7 @@
     </div>
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url('@system/alias/index')">@(alias.id ? trans('Close') : trans('Cancel'))</a>
+        <a class="uk-button" href="@url.route('@system/alias/index')">@(alias.id ? trans('Close') : trans('Cancel'))</a>
     </p>
 
     @token()

@@ -13,13 +13,13 @@
             <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-sortable-action="toggle"></div></div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id[]" value="@item.id"></div>
             <div>
-                <a href="@url('@system/item/edit', ['id' => item.id])">@item.name</a>
+                <a href="@url.route('@system/item/edit', ['id' => item.id])">@item.name</a>
             </div>
             <div class="pk-table-width-100 uk-text-center">
-                <a class="uk-icon-circle uk-text-@(item.status ? 'success' : 'danger')" href="#" data-action="@url('@system/item/status', ['menu' => item.menuId,'id' => item.id, 'status' => item.status ? '0' : '1'])" title="@item.statusText"></a>
+                <a class="uk-icon-circle uk-text-@(item.status ? 'success' : 'danger')" href="#" data-action="@url.route('@system/item/status', ['menu' => item.menuId,'id' => item.id, 'status' => item.status ? '0' : '1'])" title="@item.statusText"></a>
             </div>
             <div class="pk-table-width-200 uk-text-truncate">
-                <a href="@url(item.url)" target="_blank">@url(item.url)</a>
+                <a href="@url.route(item.url)" target="_blank">@url.route(item.url)</a>
             </div>
             <div class="pk-table-width-100">
                 @(levels[item.accessId].name ?: trans('No access level'))

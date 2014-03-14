@@ -26,7 +26,7 @@ class MenuListener extends EventSubscriber
         }
 
         $active = array_filter($query->get(), function ($item) use ($url) {
-            return $url->current() == $url->to($item->getUrl());
+            return $url->current() == $url->route($item->getUrl());
         });
 
         $attr->set('_menu', array_keys($active));

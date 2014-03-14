@@ -104,7 +104,7 @@ class ItemController extends Controller
                 $item->setMenuId($menu->getId());
             }
 
-            if (!$data['url'] || !$this->url($data['url'])) {
+            if (!$data['url'] || !$this('url')->route($data['url'])) {
                 throw new Exception(__('Invalid url.'));
             }
 

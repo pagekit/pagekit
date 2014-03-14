@@ -5,7 +5,7 @@
 @foreach (root.children as item)
 
     <li class="@(item.attribute('active') ? 'uk-active')@(item.hasChildren() ? ' uk-parent')">
-        <a href="@url(item.url)">@item</a>
+        <a href="@url.route(item.url)">@item</a>
 
         @if (item.hasChildren())
         <ul class="uk-nav-sub">

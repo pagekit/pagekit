@@ -2,7 +2,7 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-themes" class="uk-grid" data-api="@api" data-key="@key" data-url="@url('@system/package/install')" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
+<div id="js-themes" class="uk-grid" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install')" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
 
     <div class="pk-sidebar uk-width-medium-1-4">
 
@@ -25,7 +25,7 @@
                     <div>
                         <div class="uk-panel uk-panel-box">
                             <div class="uk-panel-teaser">
-                                <img src="@(package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@package.title">
+                                <img src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@package.title">
                             </div>
                             <div class="pk-themes-position">
                                 <h2 class="uk-panel-title uk-margin-remove">
@@ -40,12 +40,12 @@
                                 </ul>
                                 @if (current == package)
                                 <div class="pk-themes-action">
-                                    <a class="uk-button" href="@url('@system/themes/settings', ['name' => name])">@trans('Settings')</a>
+                                    <a class="uk-button" href="@url.route('@system/themes/settings', ['name' => name])">@trans('Settings')</a>
                                 </div>
                                 @else
                                 <div class="pk-themes-action">
-                                    <a class="uk-button uk-button-primary" href="@url('@system/themes/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enable')</a>
-                                    <a class="uk-button uk-button-danger " href="@url('@system/themes/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
+                                    <a class="uk-button uk-button-primary" href="@url.route('@system/themes/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enable')</a>
+                                    <a class="uk-button uk-button-danger " href="@url.route('@system/themes/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
                                 </div>
                                 @endif
                             </div>
@@ -70,7 +70,7 @@
 
                 <h2 class="pk-form-heading">@trans('Install a theme')</h2>
 
-                <form class="uk-form" action="@url('@system/package/upload', ['type' => 'theme'])" data-uk-form-file>
+                <form class="uk-form" action="@url.route('@system/package/upload', ['type' => 'theme'])" data-uk-form-file>
                     <input type="text" disabled>
                     <div class="uk-form-file">
                         <button class="uk-button">@trans('Select')</button>

@@ -15,8 +15,8 @@
 
                 <nav class="uk-navbar">
 
-                    <a class="uk-navbar-brand uk-hidden-small" href="@url('@system/system/admin')">
-                        <img src="@url('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                    <a class="uk-navbar-brand uk-hidden-small" href="@url.route('@system/system/admin')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
                     </a>
 
                     @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
@@ -29,8 +29,8 @@
                             <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li class="uk-nav-header">@user.username</li>
-                                    <li><a href="@url('@system/user/edit', ['id' => user.id])">@trans('Settings')</a></li>
-                                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                                    <li><a href="@url.route('@system/user/edit', ['id' => user.id])">@trans('Settings')</a></li>
+                                    <li><a href="@url.route('@system/auth/logout', ['redirect' => url.route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -39,8 +39,8 @@
 
                     <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
 
-                    <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="@url('@system/system/admin')">
-                        <img src="@url('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                    <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="@url.route('@system/system/admin')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
                     </a>
 
                 </nav>

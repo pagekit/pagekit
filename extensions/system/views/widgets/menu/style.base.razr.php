@@ -5,7 +5,7 @@
 @foreach (root.children as item)
 
     <li@block('itemAttributes')@(item.attribute('active') ? ' class="uk-active"')@endblock>
-        <a href="@url(item.url)">@item</a>
+        <a href="@url.route(item.url)">@item</a>
 
         @item.setAttribute('show_children', ((root.item && root.attribute('show_children')) || item.attribute('active') || widget.get('mode', 'all') == 'all')
             && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))

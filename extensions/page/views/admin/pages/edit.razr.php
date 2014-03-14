@@ -1,4 +1,4 @@
-<form id="js-page" class="uk-form uk-form-horizontal" action="@url('@page/page/save', ['id' => page.id ?: 0])" method="post">
+<form id="js-page" class="uk-form uk-form-horizontal" action="@url.route('@page/page/save', ['id' => page.id ?: 0])" method="post">
 
     <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
         <li class="uk-active"><a href="#">@trans('Content')</a></li>
@@ -51,7 +51,7 @@
 
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url.route('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
     </p>
 
     @token()
