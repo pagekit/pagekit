@@ -1,6 +1,6 @@
-var require = (function(doc) {
+var require = (function(win, doc) {
 
-    var i, base, vers, config = {}, metas = doc.getElementsByTagName('meta');
+    var i, base, vers, script = '', config = {}, metas = doc.getElementsByTagName('meta');
 
     if (metas) {
         for (i = 0; i < metas.length; i += 1) {
@@ -9,6 +9,10 @@ var require = (function(doc) {
             vers = metas[i].getAttribute('data-version');
 
             if (base && vers) {
+
+                if (win.location.pathname.indexOf('index.php') > 0) {
+                    script = 'index.php/';
+                }
 
                 config = {
                     baseUrl: base,
@@ -47,13 +51,13 @@ var require = (function(doc) {
                             base: 'vendor/assets/uikit/'
                         },
                         'tmpl': {
-                            url: 'system/tmpl/'
+                            url: script + 'system/tmpl/'
                         },
                         'jsonsource': {
-                            url: 'system/json/'
+                            url: script + 'system/json/'
                         },
                         'finder': {
-                            url: 'system/finder/'
+                            url: script + 'system/finder/'
                         }
                     }
                 };
@@ -65,4 +69,4 @@ var require = (function(doc) {
 
     return config;
 
-})(document);
+})(window, document);
