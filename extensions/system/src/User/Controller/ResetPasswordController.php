@@ -41,12 +41,12 @@ class ResetPasswordController extends Controller
     {
         if (!$this('config')->get('mail.enabled')) {
             $this('message')->error(__('Mail system disabled.'));
-            return $this->redirect($this('url')->root(true));
+            return $this->redirect($this('url')->base(true));
         }
 
         if ($this->user->isAuthenticated()) {
             $this('message')->error(__('You are already logged in.'));
-            return $this->redirect($this('url')->root(true));
+            return $this->redirect($this('url')->base(true));
         }
 
         return array('head.title' => __('Reset'), 'last_login' => $this('session')->get(self::RESET_LOGIN));
@@ -106,7 +106,7 @@ class ResetPasswordController extends Controller
 
             $this('message')->success(__('Check your email for the confirmation link.'));
 
-            return $this->redirect($this('url')->root(true));
+            return $this->redirect($this('url')->base(true));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -124,7 +124,7 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this('message')->error(__('Invalid key.'));
-            return $this->redirect($this('url')->root(true));
+            return $this->redirect($this('url')->base(true));
         }
 
         if ('POST' === $this('request')->getMethod()) {
@@ -150,7 +150,7 @@ class ResetPasswordController extends Controller
                 $this->users->save($user);
 
                 $this('message')->success(__('Your password has been reset.'));
-                return $this->redirect($this('url')->root(true));
+                return $this->redirect($this('url')->base(true));
 
             } catch (Exception $e) {
                 $this('message')->error($e->getMessage());
