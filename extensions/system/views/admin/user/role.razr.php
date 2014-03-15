@@ -35,7 +35,7 @@
                 <thead>
                     <tr>
                         <th>@trans('Permission')</th>
-                        <th class="pk-table-width-100 uk-text-center"></th>
+                        <th class="pk-table-width-minimum"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                                 <small class="uk-text-muted uk-display-block">@trans(data.description)</small>
                                 @endif
                             </td>
-                            <td class="uk-text-center@( role.locked && authrole.hasPermission(name) ? ' pk-role-inherited')@(role.hasPermission(name) ? ' pk-role-enabled')">
+                            <td class="@( role.locked && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
                                 @if (role.administrator)
                                     <input type="checkbox" checked disabled>
                                 @else

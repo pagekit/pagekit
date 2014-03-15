@@ -34,7 +34,8 @@
             <table class="uk-table uk-table-hover uk-table-middle">
                 <thead>
                     <tr>
-                        <th colspan="2">@trans('Roles')</th>
+                        <th>@trans('Roles')</th>
+                        <th class="pk-table-width-minimum"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,12 +43,11 @@
                     @foreach (roles as role)
                     <tr>
                         <td>@role.name</td>
-                        <td class="pk-table-width-minimum"><input type="checkbox" name="roles[]" value="@role.id"@( level.hasRole(role) ? ' checked' )@( level.locked ? ' disabled' )></td>
+                        <td><input type="checkbox" name="roles[]" value="@role.id"@( level.hasRole(role) ? ' checked' )@( level.locked ? ' disabled' )></td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
             @endif
 
             @token()
