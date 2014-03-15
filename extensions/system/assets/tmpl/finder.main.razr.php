@@ -4,7 +4,7 @@
         {{ #writable }}
         <button class="uk-button uk-button-primary" data-cmd="createFolder">@trans('New Folder')</button>
 
-        <form class="js-upload uk-form-file" action="@url('@system/media/upload')" method="post">
+        <form class="js-upload uk-form-file" action="@url.route('@system/media/upload')" method="post">
             <button class="uk-button">@trans('Upload')</button>
             <input type="file" name="files[]" multiple="multiple" onchange="jQuery(this.form).trigger('submit')">
         </form>
@@ -36,5 +36,5 @@
 <div class="js-finder-files"></div>
 
 <div class="uk-placeholder uk-text-center uk-text-muted js-show-when-empty uk-hidden">
-    <img src="@url('asset://system/images/icon-finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')"> @trans('Drop files here.')
+    <img src="@url.to('asset://system/images/icon-finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')"> @trans('Drop files here.')
 </div>

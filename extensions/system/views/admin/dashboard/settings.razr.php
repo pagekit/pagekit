@@ -1,6 +1,6 @@
 @script('dashboard', 'system/js/dashboard/settings.js', 'requirejs')
 
-<form id="js-dashboard" class="uk-form" action="@url('@system/system/admin')" method="post" data-reorder="@url('@system/dashboard/reorder')">
+<form id="js-dashboard" class="uk-form" action="@url.route('@system/system/admin')" method="post" data-reorder="@url.route('@system/dashboard/reorder')">
 
     <div class="pk-options uk-clearfix">
         <div class="uk-float-left">
@@ -10,7 +10,7 @@
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
                         @foreach (types as type)
-                        <li><a href="@url('@system/dashboard/add', ['type' => type.id])">@type.name</a></li>
+                        <li><a href="@url.route('@system/dashboard/add', ['type' => type.id])">@type.name</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -20,7 +20,7 @@
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url('@system/dashboard/delete')">@trans('Delete')</a></li>
+                        <li><a href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="pk-table-width-minimum"><div class="uk-sortable-handle">​</div></div>
                 <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="ids[]" value="@id"></div>
                 <div>
-                    <a href="@url('@system/dashboard/edit', ['id' => id])">@widget.title</a>
+                    <a href="@url.route('@system/dashboard/edit', ['id' => id])">@widget.title</a>
                 </div>
                 <div class="pk-table-width-100">@widget.type</div>
             </div>

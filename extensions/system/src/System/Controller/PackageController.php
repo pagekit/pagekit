@@ -60,7 +60,7 @@ class PackageController extends Controller
             Zip::extract($upload, "{$this->temp}/".($path = sha1($upload)));
 
             if ($extra = $package->getExtra() and isset($extra['image'])) {
-                $extra['image'] = $this->url("{$this->temp}/$path/".$extra['image']);
+                $extra['image'] = $this('url')->to("{$this->temp}/$path/".$extra['image']);
             }
 
             $response = array(
@@ -74,7 +74,7 @@ class PackageController extends Controller
                     'shasum' => sha1_file($upload),
                     'extra' => $extra
                 ),
-                'install' => $this->url('@system/package/install', array('path' => $path, '_csrf' => $this('csrf')->generate()))
+                'install' => $this('url')->route('@system/package/install', array('path' => $path, '_csrf' => $this('csrf')->generate()))
             );
 
         } catch (Exception $e) {

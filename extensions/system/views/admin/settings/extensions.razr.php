@@ -2,7 +2,7 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-extensions" class="uk-grid" data-api="@api" data-key="@key" data-url="@url('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
+<div id="js-extensions" class="uk-grid" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
 
     <div class="pk-sidebar uk-width-medium-1-4">
 
@@ -34,7 +34,7 @@
                         @set (extension = app['extensions'].get(name))
                         <tr class="@if (!extension)uk-visible-hover-inline@endif @if (!extension)pk-table-disable@endif">
                             <td class="pk-table-width-minimum">
-                                <img class="uk-img-preserve" src="@( package.extra.image ? url(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) :  url('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
+                                <img class="uk-img-preserve" src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
                             </td>
                             <td class="uk-table-middle">
                                 <h2 class="uk-h3 uk-margin-remove">@package.title</h2>
@@ -42,9 +42,9 @@
                                     <li><a href="">@trans('Details')</a></li>
                                     @if (extension)
                                     @if (extension.config.settings)
-                                    <li><a href="@url('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
+                                    <li><a href="@url.route('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
                                     @endif
-                                    <li><a href="@url('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
+                                    <li><a href="@url.route('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
                                     @endif
                                 </ul>
                             </td>
@@ -56,13 +56,13 @@
                             </td>
                             <td class="uk-table-middle uk-text-center">
                                 @if (extension)
-                                <a class="uk-button uk-button-success" href="@url('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enabled')</a>
+                                <a class="uk-button uk-button-success" href="@url.route('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enabled')</a>
                                 @else
-                                <a class="uk-button" href="@url('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Disabled')</a>
+                                <a class="uk-button" href="@url.route('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Disabled')</a>
                                 @endif
                             </td>
                             <td class="uk-table-middle">
-                                <a class="uk-button uk-button-danger uk-invisible" href="@url('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
+                                <a class="uk-button uk-button-danger uk-invisible" href="@url.route('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
                             </td>
                         </tr>
                         @endforeach
@@ -85,7 +85,7 @@
 
                 <h2 class="pk-form-heading">@trans('Install an extension')</h2>
 
-                <form class="uk-form" action="@url('@system/package/upload', ['type' => 'extension'])" data-uk-form-file>
+                <form class="uk-form" action="@url.route('@system/package/upload', ['type' => 'extension'])" data-uk-form-file>
                     <input type="text" disabled>
                     <div class="uk-form-file">
                         <button class="uk-button">@trans('Select')</button>

@@ -1,4 +1,4 @@
-<form class="uk-form uk-form-horizontal" action="@url('@alpha/settings/save')" method="post">
+<form class="uk-form uk-form-horizontal" action="@url.route('@alpha/settings/save')" method="post">
 
 	<div class="uk-form-row">
         <label for="form-sidebar-width" class="uk-form-label">@trans('Sidebar Width')</label>
@@ -25,7 +25,7 @@
 
     <p>
         <button class="uk-button uk-button-primary" type="submit">Save</button>
-        <a class="uk-button" href="@url('@system/themes/index')">@trans('Close')</a>
+        <a class="uk-button" href="@url.route('@system/themes/index')">@trans('Close')</a>
     </p>
 
 </form>

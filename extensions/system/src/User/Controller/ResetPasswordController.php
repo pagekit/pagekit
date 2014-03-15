@@ -87,7 +87,7 @@ class ResetPasswordController extends Controller
 
             $this->users->save($user);
 
-            $url = $this('url')->to('@system/resetpassword/confirm', array('user' => $user->getUsername(), 'key' => $user->getActivation()), true);
+            $url = $this('url')->route('@system/resetpassword/confirm', array('user' => $user->getUsername(), 'key' => $user->getActivation()), true);
 
             try {
 

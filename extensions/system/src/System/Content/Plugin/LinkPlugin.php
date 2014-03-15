@@ -52,7 +52,7 @@ class LinkPlugin extends EventSubscriber
      */
     public function replaceLink($matches)
     {
-        return $matches[1].'"'.$this('url')->to($matches[3]).'"'.$matches[4];
+        return $matches[1].'"'.$this('url')->route($matches[3]).'"'.$matches[4];
     }
 
     /**

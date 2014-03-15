@@ -60,7 +60,7 @@ class UpdateController extends Controller
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            $response = array('message' => __('Copying files...'), 'step' => $this->url('@system/update/copy'), 'progress' => 33);
+            $response = array('message' => __('Copying files...'), 'step' => $this('url')->route('@system/update/copy'), 'progress' => 33);
 
         } catch (ArchiveExtractionException $e) {
             $response = array('error' => __('Package extraction failed.'));
@@ -95,7 +95,7 @@ class UpdateController extends Controller
             $this('system')->clearCache();
             $this('session')->remove('system.updateDir');
 
-            $response = array('message' => __('Updating database...'), 'step' => $this->url('@system/update/database'), 'progress' => 66);
+            $response = array('message' => __('Updating database...'), 'step' => $this('url')->route('@system/update/database'), 'progress' => 66);
 
         } catch (\Exception $e) {
 
@@ -117,7 +117,7 @@ class UpdateController extends Controller
             $this('system')->enable();
             $this('session')->remove('system.update');
 
-            $response = array('message' => __('Installed successfully.'), 'redirect' => $this->url('@system/system/admin'), 'progress' => 100);
+            $response = array('message' => __('Installed successfully.'), 'redirect' => $this('url')->route('@system/system/admin'), 'progress' => 100);
 
         } catch (\Exception $e) {
 

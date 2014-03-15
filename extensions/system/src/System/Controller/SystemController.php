@@ -37,7 +37,7 @@ class SystemController extends Controller
         $lastLogin = $this('session')->get(ResetPasswordController::RESET_LOGIN);
         $this('session')->remove(ResetPasswordController::RESET_LOGIN);
 
-        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this->url('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
+        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this('url')->route('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
     }
 
     /**

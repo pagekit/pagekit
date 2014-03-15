@@ -5,7 +5,7 @@
 @foreach (root.children as item)
 
     <li@( item.attribute('active') ? ' class="uk-active"' )>
-        <a href="@url(item.url)">@trans(item)</a>
+        <a href="@url.route(item.url)">@trans(item)</a>
     </li>
 
 @endforeach

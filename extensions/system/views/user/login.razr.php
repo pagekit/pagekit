@@ -1,4 +1,4 @@
-<form class="uk-article uk-form uk-form-stacked" action="@url('@system/auth/authenticate')" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="@url.route('@system/auth/authenticate')" method="post">
 
     <h1 class="uk-article-title">@trans('Login')</h1>
 
@@ -10,7 +10,7 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-password" class="uk-form-label">@trans('Password') <a href="@url('@system/resetpassword/request')">@trans('(Forgot Password?)')</a></label>
+        <label for="form-password" class="uk-form-label">@trans('Password') <a href="@url.route('@system/resetpassword/request')">@trans('(Forgot Password?)')</a></label>
         <div class="uk-form-controls">
             <input id="form-password" type="password" name="credentials[password]" value="" required>
         </div>
