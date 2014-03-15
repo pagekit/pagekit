@@ -6051,19 +6051,6 @@ input.uk-search-field {
     width: 1150px;
   }
 }
-/* Sub-object: `uk-modal-scrollable-box`
- ========================================================================== */
-.uk-modal-scrollable-box {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow: auto;
-}
-/*
- * Remove margin from the last-child
- */
-.uk-modal-scrollable-box > :last-child {
-  margin-bottom: 0;
-}
 /* ========================================================================
    Component: Off-canvas
  ========================================================================== */
@@ -6699,6 +6686,7 @@ input.uk-search-field {
 .uk-scrollable-text {
   height: 300px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   resize: both;
 }
 /*
@@ -6711,13 +6699,23 @@ input.uk-search-field {
   padding: 10px;
   border: 1px solid #e5e5e5;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   resize: both;
   border-radius: 3px;
 }
-/*
- * Remove margin from the last-child
- */
 .uk-scrollable-box > :last-child {
+  margin-bottom: 0;
+}
+/* Overflow
+ ========================================================================== */
+/*
+ * Enable scrollbars if content is clipped
+ */
+.uk-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.uk-overflow-container > :last-child {
   margin-bottom: 0;
 }
 /* Display

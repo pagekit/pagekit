@@ -79,7 +79,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             if (!finder) {
 
                 finder = new Finder(element, options);
-                element.find('.js-finder-files').addClass('uk-modal-scrollable-box');
+                element.find('.js-finder-files').addClass('uk-overflow-container');
                 picker = new uikit.modal.Modal(modal)
             }
 
