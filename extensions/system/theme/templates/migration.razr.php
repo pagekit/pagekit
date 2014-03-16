@@ -13,7 +13,7 @@
         <div class="tm-height-4-5 uk-vertical-align uk-text-center">
             <div class="uk-vertical-align-middle">
 
-                <img class="tm-logo" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                <img class="uk-margin-top" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                 <form class="uk-panel uk-panel-box tm-panel" action="@url.route('@system/migration/migrate')">
                     <h1>@trans('Update Pagekit')</h1>

@@ -13,7 +13,7 @@
       <div class="tm-height-4-5 uk-vertical-align uk-text-center">
             <div class="uk-vertical-align-middle">
 
-                <img class="tm-logo" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                <img class="uk-margin-top" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                 @action('messages')
 
@@ -40,7 +40,7 @@
 
                 </form>
 
-                <form class="uk-panel uk-panel-box uk-panel-box-primary tm-panel-login uk-form js-toggle@(!last_login ? ' uk-hidden')" action="@url.route('@system/resetpassword/reset')" method="post">
+                <form class="js-toggle uk-panel uk-panel-box tm-panel tm-panel-small uk-form@(!last_login ? ' uk-hidden')" action="@url.route('@system/resetpassword/reset')" method="post">
 
                     <div class="uk-form-row">
                         <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@last_login" placeholder="@trans('Username or Email')" required>

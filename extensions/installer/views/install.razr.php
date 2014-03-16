@@ -16,7 +16,7 @@
 
                     <form action="@url.route('@installer/installer/createconfig')" method="post">
 
-                        <img class="tm-logo" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                        <img class="uk-margin-top" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                         <p>
                             <button class="uk-button" type="submit">@trans('Begin')</button>
