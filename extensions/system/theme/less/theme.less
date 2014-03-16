@@ -21,6 +21,12 @@ html { overflow-y: scroll; }
     background: @navbar-background;
 }
 
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-navbar { margin-bottom: 30px; }
+
+}
+
 
 /* Modifier `tm-subnav`
  ========================================================================== */
@@ -63,6 +69,15 @@ html { overflow-y: scroll; }
     padding: 25px;
 }
 
+
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-main {
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+
+}
 
 /* Dialog pages like login and error
  ========================================================================== */
