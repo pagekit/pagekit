@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Component\Event\Event;
+use Pagekit\Framework\Event\Event;
 use Pagekit\Framework\Application;
 use Symfony\Component\HttpFoundation\Request;
 

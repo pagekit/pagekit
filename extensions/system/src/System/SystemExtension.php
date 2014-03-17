@@ -4,7 +4,7 @@ namespace Pagekit\System;
 
 use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Framework\Application;
-use Pagekit\Framework\Extension\Extension;
+use Pagekit\Package\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\Content\MarkdownEditor;

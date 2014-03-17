@@ -3,7 +3,7 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Framework\Application;
-use Pagekit\Framework\Extension\Extension;
+use Pagekit\Package\Extension;
 
 class HelloExtension extends Extension
 {

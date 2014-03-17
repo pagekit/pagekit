@@ -20,10 +20,8 @@ return array(
 
             'Pagekit\Framework\Provider\ConsoleServiceProvider',
             'Pagekit\Framework\Provider\ExceptionServiceProvider',
-            'Pagekit\Framework\Provider\FileServiceProvider',
             'Pagekit\Framework\Provider\RazrServiceProvider',
             'Pagekit\Framework\Provider\TemplatingServiceProvider',
-            'Pagekit\Framework\Provider\ViewServiceProvider',
             'Pagekit\Component\Profiler\ProfilerServiceProvider',
             'Pagekit\Component\Cache\CacheServiceProvider',
             'Pagekit\Component\Cookie\CookieServiceProvider',
@@ -40,8 +38,8 @@ return array(
             'Pagekit\Component\Session\SessionServiceProvider',
             'Pagekit\Component\Translation\TranslationServiceProvider',
             'Pagekit\Component\View\AssetServiceProvider',
-            'Pagekit\Framework\Provider\ThemeServiceProvider',
-            'Pagekit\Framework\Provider\ExtensionServiceProvider'
+            'Pagekit\Component\View\ViewServiceProvider',
+            'Pagekit\SystemServiceProvider'
 
         )
 

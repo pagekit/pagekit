@@ -7,6 +7,7 @@ $config = require __DIR__.'/config.php';
 
 $app = new Application($config);
 $app['autoloader'] = $loader;
+$app['autoloader']->addPsr4('Pagekit\\', $app['path.extensions'].'/system/src');
 
 date_default_timezone_set($app['config']['app.timezone']);
 

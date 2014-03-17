@@ -4,12 +4,6 @@ return array(
 
     'main' => 'Pagekit\\System\\SystemExtension',
 
-    'autoload' => array(
-
-        'Pagekit\\' => 'src'
-
-    ),
-
     'resources' => array(
 
         'export' => array(

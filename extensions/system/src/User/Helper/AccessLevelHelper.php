@@ -4,7 +4,7 @@ namespace Pagekit\User\Helper;
 
 use Pagekit\Component\Cache\CacheInterface;
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Component\Event\EventSubscriberInterface;
+use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\User\Model\UserInterface;
 
 class AccessLevelHelper implements EventSubscriberInterface
