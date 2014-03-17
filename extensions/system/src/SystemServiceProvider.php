@@ -60,6 +60,20 @@ class SystemServiceProvider implements ServiceProviderInterface
 
     public function boot(Application $app)
     {
+        if ($app->runningInConsole()) {
+            $app->on('console.init', function($event) {
+
+                $console = $event->getConsole();
+                $namespace = 'Pagekit\\System\\Console\\';
+
+                foreach (glob(__DIR__.'/System/Console/*Command.php') as $file) {
+                    $class = $namespace.basename($file, '.php');
+                    $console->add(new $class);
+                }
+
+            });
+        }
+
         foreach (array_unique($app['extensions.boot']) as $extension) {
             try {
                 $app['extensions']->load($extension)->boot($app);

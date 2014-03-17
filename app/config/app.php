@@ -18,7 +18,6 @@ return array(
 
         'providers' => array(
 
-            'Pagekit\Framework\Provider\ConsoleServiceProvider',
             'Pagekit\Framework\Provider\ExceptionServiceProvider',
             'Pagekit\Framework\Provider\RazrServiceProvider',
             'Pagekit\Framework\Provider\TemplatingServiceProvider',

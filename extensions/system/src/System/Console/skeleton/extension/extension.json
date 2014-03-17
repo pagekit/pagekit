@@ -1,0 +1,15 @@
+{
+    "name": "%NAME%",
+    "version": "0.0.1",
+    "type": "extension",
+    "title": "%TITLE%",
+    "description": "",
+    "license": "",
+    "authors": [
+        {
+            "name": "%AUTHOR%",
+            "email": "%EMAIL%",
+            "homepage": ""
+        }
+    ]
+}
