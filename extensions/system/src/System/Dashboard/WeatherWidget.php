@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Dashboard;
 
-use Pagekit\Component\View\Widget\Model\TypeInterface;
-use Pagekit\Component\View\Widget\Model\WidgetInterface;
+use Pagekit\System\Widget\Model\TypeInterface;
+use Pagekit\System\Widget\Model\WidgetInterface;
 use Pagekit\Framework\ApplicationAware;
 
 class WeatherWidget extends ApplicationAware implements TypeInterface

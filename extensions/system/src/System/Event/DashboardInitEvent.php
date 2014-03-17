@@ -3,8 +3,8 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Component\Event\Event;
-use Pagekit\Component\View\Widget\Model\TypeInterface;
-use Pagekit\Component\View\Widget\Model\TypeManager;
+use Pagekit\System\Widget\Model\TypeInterface;
+use Pagekit\System\Widget\Model\TypeManager;
 
 class DashboardInitEvent extends Event
 {

@@ -3,9 +3,6 @@
 namespace Pagekit\System;
 
 use Pagekit\Component\View\Event\ActionEvent;
-use Pagekit\Component\View\Position\PositionManager;
-use Pagekit\Component\View\Widget\Model\TypeManager;
-use Pagekit\Component\View\Widget\WidgetProvider;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
@@ -39,12 +36,15 @@ use Pagekit\System\Helper\FinderHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Link\LinkManager;
+use Pagekit\System\Position\PositionManager;
 use Pagekit\System\Templating\DateHelper as TemplatingDateHelper;
 use Pagekit\System\Templating\EditorHelper;
 use Pagekit\System\Templating\FinderHelper as TemplatingFinderHelper;
 use Pagekit\System\Widget\LoginWidget;
 use Pagekit\System\Widget\MenuWidget;
 use Pagekit\System\Widget\TextWidget;
+use Pagekit\System\Widget\WidgetProvider;
+use Pagekit\System\Widget\Model\TypeManager;
 use Pagekit\User\Auth\UserProvider as AuthUserProvider;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;

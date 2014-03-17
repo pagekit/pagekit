@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Widget;
 
-use Pagekit\Component\View\Widget\Model\TypeInterface;
-use Pagekit\Component\View\Widget\Model\WidgetInterface;
 use Pagekit\Framework\ApplicationAware;
+use Pagekit\System\Widget\Model\TypeInterface;
+use Pagekit\System\Widget\Model\WidgetInterface;
 
 class MenuWidget extends ApplicationAware implements TypeInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Entity;
 
-use Pagekit\Component\View\Widget\Model\Widget as BaseWidget;
+use Pagekit\System\Widget\Model\Widget as BaseWidget;
 
 /**
  * @Entity(tableClass="@system_widget", eventPrefix="system.widget")

@@ -2,8 +2,8 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\Component\View\Widget\Model\TypeInterface;
-use Pagekit\Component\View\Widget\Model\WidgetInterface;
+use Pagekit\System\Widget\Model\TypeInterface;
+use Pagekit\System\Widget\Model\WidgetInterface;
 
 class HelloWidget implements TypeInterface
 {
