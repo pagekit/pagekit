@@ -36,8 +36,8 @@
 
             <select id="filter-status" name="filter[status]" data-filter="status">
                 <option value="">@trans('- Status -')</option>
-                <option value="@constant('Pagekit\\Component\\View\\Widget\\Model\\WidgetInterface::STATUS_ENABLED')">@trans('Enabled')</option>
-                <option value="@constant('Pagekit\\Component\\View\\Widget\\Model\\WidgetInterface::STATUS_DISABLED')">@trans('Disabled')</option>
+                <option value="@constant('Pagekit\\System\\Widget\\Model\\WidgetInterface::STATUS_ENABLED')">@trans('Enabled')</option>
+                <option value="@constant('Pagekit\\System\\Widget\\Model\\WidgetInterface::STATUS_DISABLED')">@trans('Disabled')</option>
             </select>
 
             <select id="filter-position" name="filter[position]" data-filter="position">
