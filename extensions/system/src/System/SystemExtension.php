@@ -176,16 +176,16 @@ class SystemExtension extends Extension
             $config['view']['scripts']($app['view.scripts']);
 
             $helper = new TemplatingDateHelper($app['dates']);
-            $app['view.engine.php']->addHelpers(array($helper));
-            $app['view.engine.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
+            $app['tmpl.php']->addHelpers(array($helper));
+            $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
 
             $helper = new EditorHelper($app);
-            $app['view.engine.php']->addHelpers(array($helper));
-            $app['view.engine.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
+            $app['tmpl.php']->addHelpers(array($helper));
+            $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
 
             $helper = new TemplatingFinderHelper($app);
-            $app['view.engine.php']->addHelpers(array($helper));
-            $app['view.engine.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
+            $app['tmpl.php']->addHelpers(array($helper));
+            $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
 
             $app['auth']->setUserProvider(new AuthUserProvider($app['auth.encoder.native']));
             $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));

@@ -18,11 +18,12 @@ return array(
 
         'providers' => array(
 
+            'Pagekit\Framework\Provider\ConsoleServiceProvider',
             'Pagekit\Framework\Provider\ExceptionServiceProvider',
             'Pagekit\Framework\Provider\FileServiceProvider',
-            'Pagekit\Framework\Provider\ConsoleServiceProvider',
+            'Pagekit\Framework\Provider\RazrServiceProvider',
+            'Pagekit\Framework\Provider\TemplatingServiceProvider',
             'Pagekit\Framework\Provider\ViewServiceProvider',
-            'Pagekit\Framework\Provider\PaginationServiceProvider',
             'Pagekit\Component\Profiler\ProfilerServiceProvider',
             'Pagekit\Component\Cache\CacheServiceProvider',
             'Pagekit\Component\Cookie\CookieServiceProvider',
