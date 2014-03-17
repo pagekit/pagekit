@@ -36,10 +36,10 @@ return array(
             'Pagekit\Component\Markdown\MarkdownServiceProvider',
             'Pagekit\Component\Migration\MigrationServiceProvider',
             'Pagekit\Component\Option\OptionServiceProvider',
+            'Pagekit\Component\Session\CsrfServiceProvider',
             'Pagekit\Component\Session\SessionServiceProvider',
             'Pagekit\Component\Translation\TranslationServiceProvider',
             'Pagekit\Component\View\AssetServiceProvider',
-            'Pagekit\Component\View\CsrfServiceProvider',
             'Pagekit\Framework\Provider\ThemeServiceProvider',
             'Pagekit\Framework\Provider\ExtensionServiceProvider'
 

@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Exception;
 
-use Pagekit\Component\View\Csrf\Exception\BadTokenException;
 use Pagekit\Framework\ApplicationAware;
 use Pagekit\Framework\Exception\ExceptionHandlerInterface;
+use Pagekit\Component\Session\Csrf\Exception\BadTokenException;
 use Symfony\Component\Debug\Exception\FlattenException;
 
 class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInterface
