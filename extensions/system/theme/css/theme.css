@@ -6792,6 +6792,11 @@ input.uk-search-field {
   display: inline-block !important;
   visibility: visible !important;
 }
+@media (max-width: 767px) {
+  .uk-container {
+    padding: 0 10px;
+  }
+}
 /* ========================================================================
    Component: Print
  ========================================================================== */
@@ -7778,6 +7783,11 @@ html {
   border-bottom: 1px solid #e5e5e5;
   background: #ffffff;
 }
+@media (max-width: 767px) {
+  .tm-navbar {
+    margin-bottom: 30px;
+  }
+}
 /* Modifier `tm-subnav`
  ========================================================================== */
 .tm-subnav {
@@ -7812,6 +7822,12 @@ html {
   margin-bottom: 25px;
   padding: 25px;
 }
+@media (max-width: 767px) {
+  .tm-main {
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+}
 /* Dialog pages like login and error
  ========================================================================== */
 /*
@@ -7821,13 +7837,13 @@ html {
   height: 80%;
 }
 /*
- * Panel
+ * Container
  */
-.tm-panel {
-  margin: 20px 0;
-  padding: 25px;
-  width: 450px;
+.tm-container {
+  width: 500px;
+  max-width: calc(100% - 40px);
+  padding: 20px;
 }
-.tm-panel-small {
-  width: 250px;
+.tm-container-small {
+  width: 300px;
 }

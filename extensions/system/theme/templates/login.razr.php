@@ -13,45 +13,49 @@
       <div class="tm-height-4-5 uk-vertical-align uk-text-center">
             <div class="uk-vertical-align-middle">
 
-                <img class="uk-margin-top" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                <div class="tm-container tm-container-small">
 
-                @action('messages')
+                    <img class="uk-margin-bottom" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
-                <form class="js-login js-toggle uk-panel uk-panel-box tm-panel tm-panel-small uk-form@(last_login ? ' uk-hidden')" action="@url.route('@system/auth/authenticate')" method="post">
+                    @action('messages')
 
-                    <div class="uk-form-row">
-                        <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="@last_username" placeholder="@trans('Username')" autofocus>
-                    </div>
-                    <div class="uk-form-row">
-                        <div class="uk-form-password uk-width-1-1">
-                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="@trans('Password')">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form@(last_login ? ' uk-hidden')" action="@url.route('@system/auth/authenticate')" method="post">
+
+                        <div class="uk-form-row">
+                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="@last_username" placeholder="@trans('Username')" autofocus>
                         </div>
-                    </div>
-                    <div class="uk-form-row">
-                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Login')</button>
-                    </div>
-                    <div class="uk-form-row uk-text-small">
-                        <label class="uk-float-left"><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
-                        <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{target:'.js-toggle'}">@trans('Forgot Password?')</a>
-                    </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-password uk-width-1-1">
+                                <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="@trans('Password')">
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Login')</button>
+                        </div>
+                        <div class="uk-form-row uk-text-small">
+                            <label class="uk-float-left"><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
+                            <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{target:'.js-toggle'}">@trans('Forgot Password?')</a>
+                        </div>
 
-                    @token()
-                    <input type="hidden" name="redirect" value="@redirect">
+                        @token()
+                        <input type="hidden" name="redirect" value="@redirect">
 
-                </form>
+                    </form>
 
-                <form class="js-toggle uk-panel uk-panel-box tm-panel tm-panel-small uk-form@(!last_login ? ' uk-hidden')" action="@url.route('@system/resetpassword/reset')" method="post">
+                    <form class="js-toggle uk-panel uk-panel-box uk-form@(!last_login ? ' uk-hidden')" action="@url.route('@system/resetpassword/reset')" method="post">
 
-                    <div class="uk-form-row">
-                        <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@last_login" placeholder="@trans('Username or Email')" required>
-                    </div>
-                    <div class="uk-form-row">
-                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Reset Password')</button>
-                    </div>
+                        <div class="uk-form-row">
+                            <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@last_login" placeholder="@trans('Username or Email')" required>
+                        </div>
+                        <div class="uk-form-row">
+                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Reset Password')</button>
+                        </div>
 
-                    @token()
+                        @token()
 
-                </form>
+                    </form>
+
+                </div>
 
             </div>
         </div>
