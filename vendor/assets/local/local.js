@@ -24,7 +24,7 @@
 
         date: function(format, timestamp){
 
-            var meta  = this.meta.date,
+            var meta = this.meta.date;
 
             return date(format || meta.medium, typeof(timestamp)=='string' ? strtotime(timestamp) : timestamp);
         },
@@ -107,7 +107,7 @@
             },
             D: function () {
                 // Shorthand day name; Mon...Sun
-                return date.meta.shortdays[f.w()];
+                return date.meta.shortdays[f.w()-1];
             },
             j: function () {
                 // Day of month; 1..31
@@ -115,7 +115,7 @@
             },
             l: function () {
                 // Full day name; Monday...Sunday
-                return date.meta.longdays[f.w()];
+                return date.meta.longdays[f.w()-1];
             },
             N: function () {
                 // ISO-8601 day of week; 1[Mon]..7[Sun]
