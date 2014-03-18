@@ -34,7 +34,7 @@ class EditorLoadEvent extends Event
      */
     public function getEditor()
     {
-        return $this('editor') ?: 'markdown';
+        return $this['editor'] ?: 'markdown';
     }
 
     /**
