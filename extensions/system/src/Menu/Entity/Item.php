@@ -94,7 +94,7 @@ class Item extends BaseItem
     public function preSave($manager)
     {
         if (!$this->id) {
-            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())));
+            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())) ?: 0);
         }
     }
 }
