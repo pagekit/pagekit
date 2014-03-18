@@ -1,6 +1,13 @@
 <?php
 
+$app->on('boot', function() use ($app) {
+    $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
+});
+
 $app->on('site.init', function() use ($app) {
+
+    $app['view']->set('position', $app['positions']);
+    $app['view']->set('config', $app['option']->get('alpha:config'), array());
 
     $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
     $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
@@ -10,11 +17,6 @@ $app->on('site.init', function() use ($app) {
 
 });
 
-$app->on('boot', function() use ($app) {
-    $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
-});
-
-// return the theme's config array
 return array(
 
     'positions' => array(

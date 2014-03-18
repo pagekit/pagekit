@@ -9,30 +9,28 @@
     </head>
     <body>
 
-        @set(config = app.option.get('alpha:config'))
-
         <div class="uk-container uk-container-center">
 
-            @if (app.positions.exists('logo'))
+            @if (position.exists('logo'))
             <div class="uk-text-center uk-margin-large uk-margin-large-top">
-                <a href="@url.root" class="tm-brand">@app.positions.render('logo', ['renderer' => 'blank'])</a>
+                <a href="@url.base" class="tm-brand">@position.render('logo', ['renderer' => 'blank'])</a>
                 <a href="#offcanvas" class="uk-navbar-toggle uk-hidden-large tm-navbar-toggle" data-uk-offcanvas></a>
             </div>
             @endif
 
-            @if (app.positions.exists('navbar'))
+            @if (position.exists('navbar'))
             <div class="tm-navbar u-margin-large">
                 <nav class="uk-navbar uk-hidden-small">
-                    @app.positions.render('navbar', ['renderer' => 'navbar'])
+                    @position.render('navbar', ['renderer' => 'navbar'])
                 </nav>
             </div>
             @endif
 
             @action('messages')
 
-            @if (app.positions.exists('top'))
+            @if (position.exists('top'))
             <section class="uk-grid uk-grid-divider" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                @app.positions.render('top', ['renderer' => 'grid'])
+                @position.render('top', ['renderer' => 'grid'])
             </section>
             @endif
 
@@ -41,23 +39,23 @@
                     @action('content')
                 </div>
                 <div class="uk-width-medium-1-3 uk-width-large-1-4">
-                    @app.positions.render('sidebar', ['renderer' => 'panel'])
+                    @position.render('sidebar', ['renderer' => 'panel'])
                 </div>
             </div>
 
-            @if (app.positions.exists('footer'))
+            @if (position.exists('footer'))
             <footer class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-               @app.positions.render('footer', ['renderer' => 'grid'])
+               @position.render('footer', ['renderer' => 'grid'])
             </footer>
             @endif
 
         </div>
 
-        @if (app.positions.exists('offcanvas'))
+        @if (position.exists('offcanvas'))
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
                 <nav class="uk-navbar uk-hidden-small">
-                    @app.positions.render('offcanvas', ['renderer' => 'offcanvas'])
+                    @position.render('offcanvas', ['renderer' => 'offcanvas'])
                 </nav>
             </div>
         </div>
