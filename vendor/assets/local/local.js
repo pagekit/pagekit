@@ -83,8 +83,6 @@
         var that = this;
         var jsdate, f;
 
-
-
         // trailing backslash -> (dropped)
         // a backslash followed by any character (including backslash) -> the character
         // empty string -> empty string
