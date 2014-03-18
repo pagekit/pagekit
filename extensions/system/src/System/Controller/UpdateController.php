@@ -90,6 +90,7 @@ class UpdateController extends Controller
             // TODO: create maintenance file
             // TODO: cleanup old files
 
+            $this('file')->delete("$updateDir/.htaccess");
             $this('file')->copyDir($updateDir, $this('path'));
             $this('file')->delete($updateDir);
             $this('system')->clearCache();
