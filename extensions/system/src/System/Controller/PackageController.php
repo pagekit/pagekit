@@ -59,8 +59,12 @@ class PackageController extends Controller
 
             Zip::extract($upload, "{$this->temp}/".($path = sha1($upload)));
 
-            if ($extra = $package->getExtra() and isset($extra['image'])) {
+            $extra = $package->getExtra();
+
+            if (isset($extra['image'])) {
                 $extra['image'] = $this('url')->to("{$this->temp}/$path/".$extra['image']);
+            } else {
+                $extra['image'] = $this('url')->to('extension://system/assets/images/placeholder-icon.svg');
             }
 
             $response = array(
