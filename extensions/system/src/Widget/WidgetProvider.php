@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\System\Widget;
+namespace Pagekit\Widget;
 
-use Pagekit\System\Widget\Model\TypeInterface;
-use Pagekit\System\Widget\Model\TypeManager;
-use Pagekit\System\Widget\Model\WidgetInterface;
+use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\TypeManager;
+use Pagekit\Widget\Model\WidgetInterface;
 
 class WidgetProvider implements \IteratorAggregate
 {

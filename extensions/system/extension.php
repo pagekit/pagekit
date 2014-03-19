@@ -2,7 +2,7 @@
 
 return array(
 
-    'main' => 'Pagekit\\System\\SystemExtension',
+    'main' => 'Pagekit\\SystemExtension',
 
     'resources' => array(
 

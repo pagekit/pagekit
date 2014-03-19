@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Widget\Controller;
 
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\System\Entity\Widget;
+use Pagekit\Widget\Entity\Widget;
 
 /**
  * @Access("system: manage widgets", admin=true)

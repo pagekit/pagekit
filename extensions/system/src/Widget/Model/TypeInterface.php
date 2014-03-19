@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Widget\Model;
+namespace Pagekit\Widget\Model;
 
 interface TypeInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System;
+namespace Pagekit;
 
 use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Framework\Application;
@@ -28,7 +28,6 @@ use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\System\Event\RegisterJsonEvent;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
-use Pagekit\System\Event\WidgetListener;
 use Pagekit\System\Exception\ExceptionHandler;
 use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
@@ -36,15 +35,16 @@ use Pagekit\System\Helper\FinderHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Link\LinkManager;
-use Pagekit\System\Position\PositionManager;
 use Pagekit\System\Templating\DateHelper as TemplatingDateHelper;
 use Pagekit\System\Templating\EditorHelper;
 use Pagekit\System\Templating\FinderHelper as TemplatingFinderHelper;
 use Pagekit\System\Widget\LoginWidget;
 use Pagekit\System\Widget\MenuWidget;
 use Pagekit\System\Widget\TextWidget;
-use Pagekit\System\Widget\WidgetProvider;
-use Pagekit\System\Widget\Model\TypeManager;
+use Pagekit\Widget\PositionManager;
+use Pagekit\Widget\WidgetProvider;
+use Pagekit\Widget\Event\WidgetListener;
+use Pagekit\Widget\Model\TypeManager;
 use Pagekit\User\Auth\UserProvider as AuthUserProvider;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
@@ -107,7 +107,7 @@ class SystemExtension extends Extension
         };
 
         $app['widgets'] = function($app) {
-            return new WidgetProvider($app['db.em']->getRepository('Pagekit\System\Entity\Widget'), new TypeManager);
+            return new WidgetProvider($app['db.em']->getRepository('Pagekit\Widget\Entity\Widget'), new TypeManager);
         };
 
         $app['positions'] = function($app) {

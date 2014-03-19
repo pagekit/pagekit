@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\System\Widget\Model\TypeManager;
-use Pagekit\System\Widget\Model\Widget;
+use Pagekit\Widget\Model\TypeManager;
+use Pagekit\Widget\Model\Widget;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\DashboardInitEvent;

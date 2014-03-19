@@ -22,9 +22,7 @@ class SettingsController extends Controller
      */
     public function saveAction($config = array())
     {
-
         $this('option')->set('alpha:config', $config);
-
         $this('message')->success(__('Settings saved.'));
 
         return $this->redirect('@system/themes/settings', array('name' => 'alpha'));

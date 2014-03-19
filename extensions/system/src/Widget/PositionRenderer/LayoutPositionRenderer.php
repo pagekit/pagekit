@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System\Position;
+namespace Pagekit\Widget\PositionRenderer;
 
 use Pagekit\Component\View\View;
-use Pagekit\System\Widget\WidgetProvider;
+use Pagekit\Widget\WidgetProvider;
 
 class LayoutPositionRenderer implements PositionRendererInterface
 {

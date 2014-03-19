@@ -3,8 +3,8 @@
 namespace Pagekit\System\Widget;
 
 use Pagekit\Framework\ApplicationAware;
-use Pagekit\System\Widget\Model\TypeInterface;
-use Pagekit\System\Widget\Model\WidgetInterface;
+use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\WidgetInterface;
 
 class MenuWidget extends ApplicationAware implements TypeInterface
 {

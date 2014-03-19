@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Widget\Model;
+namespace Pagekit\Widget\Model;
 
 class TypeManager implements \IteratorAggregate
 {
@@ -39,7 +39,7 @@ class TypeManager implements \IteratorAggregate
      */
     public function register($type)
     {
-        if (!is_subclass_of($type, 'Pagekit\System\Widget\Model\TypeInterface')) {
+        if (!is_subclass_of($type, 'Pagekit\Widget\Model\TypeInterface')) {
             throw new \RuntimeException(sprintf('The widget %s does not implement TypeInterface', $type));
         }
 

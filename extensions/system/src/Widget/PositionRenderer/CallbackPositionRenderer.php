@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\System\Position;
+namespace Pagekit\Widget\PositionRenderer;
 
-use Pagekit\System\Widget\WidgetProvider;
+use Pagekit\Widget\WidgetProvider;
 
 class CallbackPositionRenderer implements PositionRendererInterface
 {

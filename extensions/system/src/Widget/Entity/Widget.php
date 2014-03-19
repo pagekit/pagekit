@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\System\Entity;
+namespace Pagekit\Widget\Entity;
 
-use Pagekit\System\Widget\Model\Widget as BaseWidget;
+use Pagekit\Widget\Model\Widget as BaseWidget;
 
 /**
  * @Entity(tableClass="@system_widget", eventPrefix="system.widget")

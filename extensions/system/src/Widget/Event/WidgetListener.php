@@ -1,9 +1,10 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\Widget\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Entity\Widget;
+use Pagekit\System\Event\SystemInitEvent;
+use Pagekit\Widget\Entity\Widget;
 
 class WidgetListener extends EventSubscriber
 {

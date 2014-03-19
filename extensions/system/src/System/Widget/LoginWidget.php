@@ -5,8 +5,8 @@ namespace Pagekit\System\Widget;
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\ApplicationAware;
-use Pagekit\System\Widget\Model\TypeInterface;
-use Pagekit\System\Widget\Model\WidgetInterface;
+use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\WidgetInterface;
 
 class LoginWidget extends ApplicationAware implements TypeInterface
 {
