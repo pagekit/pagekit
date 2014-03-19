@@ -2,20 +2,33 @@
 
 namespace Pagekit\Menu\Entity;
 
-use Pagekit\Component\Menu\Entity\Item as BaseItem;
+use Pagekit\Menu\Model\Item as BaseItem;
 
 /**
- * Menu item entity.
- *
  * @Entity(repositoryClass="Pagekit\Menu\Entity\ItemRepository", tableClass="@system_menu_item", eventPrefix="system.menuitem")
  */
 class Item extends BaseItem
 {
-    /** @Column(type="smallint") */
-    protected $status;
+    /** @Column(type="integer") @Id */
+    protected $id;
+
+    /** @Column(name="menu_id", type="integer") */
+    protected $menuId;
 
     /** @Column(name="parent_id", type="integer") */
     protected $parentId = 0;
+
+    /** @Column(name="access_id", type="integer") */
+    protected $accessId;
+
+    /** @Column(type="string") */
+    protected $name;
+
+    /** @Column(type="string") */
+    protected $url;
+
+    /** @Column(type="smallint") */
+    protected $status;
 
     /** @Column(type="integer") */
     protected $priority = 0;
@@ -23,14 +36,55 @@ class Item extends BaseItem
     /** @Column(type="integer") */
     protected $depth = 0;
 
-    /** @Column(name="access_id", type="integer") */
-    protected $accessId;
+    /** @Column(type="json_array") */
+    protected $data;
 
     /**
      * @var Menu
      * @BelongsTo(targetEntity="Menu", keyFrom="menu_id")
      */
     protected $menu;
+
+    /**
+     * @return string
+     */
+    public function getMenuId()
+    {
+        return $this->menuId;
+    }
+
+    /**
+     * @param string $menuId
+     */
+    public function setMenuId($menuId)
+    {
+        $this->menuId = $menuId;
+    }
+
+    /**
+     * @param MenuInterface $menu
+     */
+    public function setMenu(MenuInterface $menu)
+    {
+        $this->menu = $menu;
+        $this->setMenuId($menu->getId());
+    }
+
+    /**
+     * @param int $accessId
+     */
+    public function setAccessId($accessId)
+    {
+        $this->accessId = $accessId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAccessId()
+    {
+        return (int) $this->accessId;
+    }
 
     public function getStatus()
     {
@@ -57,22 +111,6 @@ class Item extends BaseItem
     public function setDepth($depth)
     {
         $this->depth = $depth;
-    }
-
-    /**
-     * @param int $accessId
-     */
-    public function setAccessId($accessId)
-    {
-        $this->accessId = $accessId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAccessId()
-    {
-        return (int) $this->accessId;
     }
 
     public function isActive()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package;
+namespace Pagekit\Theme;
 
 use Pagekit\Package\PackageManager;
 
@@ -30,7 +30,7 @@ class ThemeManager extends PackageManager
         };
 
         $config = (!($config = $fn($this->app, "$root/theme.php")) || 1 === $config) ? array() : $config;
-        $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Package\Theme';
+        $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Theme\Theme';
 
         if (isset($config['autoload'])) {
             foreach ($config['autoload'] as $namespace => $path) {

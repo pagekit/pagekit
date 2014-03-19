@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package;
+namespace Pagekit\Extension;
 
 use Pagekit\Package\Exception\ExtensionLoadException;
 use Pagekit\Package\Exception\InvalidNameException;
@@ -51,7 +51,7 @@ class ExtensionManager extends PackageManager
         };
 
         $config = (!($config = $fn($this->app, "$root/extension.php")) || 1 === $config) ? array() : $config;
-        $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Package\Extension';
+        $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Extension\Extension';
 
         if (isset($config['autoload'])) {
             foreach ($config['autoload'] as $namespace => $path) {

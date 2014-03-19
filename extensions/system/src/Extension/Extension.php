@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package;
+namespace Pagekit\Extension;
 
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;

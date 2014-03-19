@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package\Loader;
+namespace Pagekit\Theme\Package;
 
 use Pagekit\Component\Package\Exception\UnexpectedValueException;
 use Pagekit\Component\Package\Loader\JsonLoader;

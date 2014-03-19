@@ -2,15 +2,32 @@
 
 namespace Pagekit\Menu\Filter;
 
-use Pagekit\Component\Menu\Filter\FilterIterator as BaseFilterIterator;
 use Pagekit\Framework\Application;
 
-abstract class FilterIterator extends BaseFilterIterator
+abstract class FilterIterator extends \FilterIterator
 {
+    /**
+     * @var array
+     */
+    protected $options;
+
     /**
      * @var Application
      */
     protected static $app;
+
+    /**
+     * Constructor.
+     *
+     * @param \Iterator $iterator
+     * @param array     $options
+     */
+    public function __construct(\Iterator $iterator, array $options = array())
+    {
+        parent::__construct($iterator);
+
+        $this->options = $options;
+    }
 
     /**
      * Gets the application.

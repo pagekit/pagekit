@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Menu;
 
-use Pagekit\Component\Menu\Model\Item as BaseItem;
+use Pagekit\Menu\Model\Item as BaseItem;
 
 class Item extends BaseItem
 {

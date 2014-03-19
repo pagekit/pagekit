@@ -3,7 +3,7 @@
 namespace Pagekit\Menu\Entity;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Component\Menu\Model\MenuInterface;
+use Pagekit\Menu\Model\MenuInterface;
 
 class ItemRepository extends Repository
 {

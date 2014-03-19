@@ -3,7 +3,7 @@
 namespace Pagekit\Page;
 
 use Pagekit\Framework\Application;
-use Pagekit\Package\Extension;
+use Pagekit\Extension\Extension;
 use Pagekit\Page\Event\RouteListener;
 
 class PageExtension extends Extension

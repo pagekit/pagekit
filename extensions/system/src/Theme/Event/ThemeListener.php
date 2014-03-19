@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\Theme\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package;
+namespace Pagekit\Theme;
 
 use Pagekit\Framework\Application;
 use Pagekit\Component\File\ResourceLocator;

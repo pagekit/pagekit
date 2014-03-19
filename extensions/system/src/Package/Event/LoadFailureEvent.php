@@ -2,7 +2,7 @@
 
 namespace Pagekit\Package\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Framework\Event\Event;
 
 class LoadFailureEvent extends Event
 {
