@@ -138,10 +138,7 @@
  * Sticky table header
  */
 
-.pk-table-head-sticky {
-    margin: 0;
-    background: #fff;
-}
+.pk-table-head-sticky { background: #fff; }
 
 
 /* Sub-modifier `pk-table-fake`
