@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System\Content;
+namespace Pagekit\Content;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\ContentEvent;
+use Pagekit\Content\Event\ContentEvent;
 use Pagekit\System\Event\EditorLoadEvent;
 use Pagekit\System\Event\RegisterTmplEvent;
 

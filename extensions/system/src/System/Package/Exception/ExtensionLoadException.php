@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package\Exception;
+namespace Pagekit\System\Package\Exception;
 
 class ExtensionLoadException extends \Exception
 {

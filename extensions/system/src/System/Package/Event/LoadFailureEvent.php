@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Package\Event;
+namespace Pagekit\System\Package\Event;
 
 use Pagekit\Framework\Event\Event;
 

@@ -3,7 +3,7 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\Package\Event\LoadFailureEvent;
+use Pagekit\System\Package\Event\LoadFailureEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class SystemListener extends EventSubscriber

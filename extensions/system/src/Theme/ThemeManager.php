@@ -2,7 +2,7 @@
 
 namespace Pagekit\Theme;
 
-use Pagekit\Package\PackageManager;
+use Pagekit\System\Package\PackageManager;
 
 class ThemeManager extends PackageManager
 {

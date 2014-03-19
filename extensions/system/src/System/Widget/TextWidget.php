@@ -3,7 +3,7 @@
 namespace Pagekit\System\Widget;
 
 use Pagekit\Framework\ApplicationAware;
-use Pagekit\System\Event\ContentEvent;
+use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 

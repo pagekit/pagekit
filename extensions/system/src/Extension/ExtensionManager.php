@@ -2,9 +2,9 @@
 
 namespace Pagekit\Extension;
 
-use Pagekit\Package\Exception\ExtensionLoadException;
-use Pagekit\Package\Exception\InvalidNameException;
-use Pagekit\Package\PackageManager;
+use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Pagekit\System\Package\Exception\InvalidNameException;
+use Pagekit\System\Package\PackageManager;
 
 class ExtensionManager extends PackageManager
 {

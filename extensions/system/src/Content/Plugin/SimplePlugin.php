@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System\Content\Plugin;
+namespace Pagekit\Content\Plugin;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\ContentEvent;
+use Pagekit\Content\Event\ContentEvent;
 use Pagekit\System\Event\EditorLoadEvent;
 
 class SimplePlugin extends EventSubscriber
