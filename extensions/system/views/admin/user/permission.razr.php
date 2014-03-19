@@ -5,7 +5,7 @@
 
     <div class="uk-overflow-container">
 
-        <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent pk-table-head-sticky" data-uk-sticky>
+        <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent uk-margin-remove">
             <thead>
                 <tr>
                     <th class="pk-table-min-width-200">@trans('Permission')</th>
@@ -14,15 +14,12 @@
                     @endforeach
                 </tr>
             </thead>
-        </table>
-
-        <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent uk-margin-remove">
             <tbody>
                 @foreach (app.permissions as extension => permission)
                 <tr id="ext-@extension">
                     <th class="pk-table-min-width-200">@app.extensions.repository.findPackage(extension).title</th>
                     @foreach (roles as role)
-                    <th class="pk-table-width-100 pk-table-max-width-100"></th>
+                    <th class="pk-table-width-100 pk-table-min-width-100"></th>
                     @endforeach
                 </tr>
                     @foreach (permission as name => data)

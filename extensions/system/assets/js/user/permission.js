@@ -34,4 +34,20 @@ require(['jquery', 'uikit!sticky', 'domReady!'], function($, uikit) {
         });
     }, 1000));
 
+
+    var table  = $("#js-permission table").css('position', "relative"),
+        thead  = table.find("thead"),
+        header = thead.clone().addClass('pk-table-head-sticky').hide();
+
+    header.css({position:"absolute", top:0,left:0}).appendTo(table);
+
+    $(window).on("scroll", function(){
+
+        if(uikit.Utils.isInView(thead)) {
+           header.hide();
+        } else {
+            header.css({top: window.scrollY - thead.offset().top}).show();
+        }
+    });
+
 });
