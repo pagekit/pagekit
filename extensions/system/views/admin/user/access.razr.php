@@ -31,23 +31,25 @@
         <form id="js-access-level-roles" class="uk-form" action="@url.route('@system/accesslevel/save', ['id' => level.id])" method="post">
 
             @if (level.id)
-            <table class="uk-table uk-table-hover uk-table-middle">
-                <thead>
-                    <tr>
-                        <th>@trans('Roles')</th>
-                        <th class="pk-table-width-minimum"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <input type="hidden" name="roles[]" value="">
-                    @foreach (roles as role)
-                    <tr>
-                        <td>@role.name</td>
-                        <td><input type="checkbox" name="roles[]" value="@role.id"@( level.hasRole(role) ? ' checked' )@( level.locked ? ' disabled' )></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="uk-overflow-container">
+                <table class="uk-table uk-table-hover uk-table-middle">
+                    <thead>
+                        <tr>
+                            <th>@trans('Roles')</th>
+                            <th class="pk-table-width-minimum"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <input type="hidden" name="roles[]" value="">
+                        @foreach (roles as role)
+                        <tr>
+                            <td>@role.name</td>
+                            <td><input type="checkbox" name="roles[]" value="@role.id"@( level.hasRole(role) ? ' checked' )@( level.locked ? ' disabled' )></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             @endif
 
             @token()

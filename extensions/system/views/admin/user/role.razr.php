@@ -31,38 +31,40 @@
         <form id="js-role-permissions" class="uk-form" action="@url.route('@system/role/save', ['id' => role.id])" method="post">
 
             @if (role.id)
-            <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent">
-                <thead>
-                    <tr>
-                        <th>@trans('Permission')</th>
-                        <th class="pk-table-width-minimum"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (app.permissions as extension => permission)
-                    <tr>
-                        <th colspan="2">@app.extensions.repository.findPackage(extension).title</th>
-                    </tr>
-                        @foreach (permission as name => data)
+            <div class="uk-overflow-container">
+                <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent">
+                    <thead>
                         <tr>
-                            <td>
-                                @trans(data.title)
-                                @if (data.description)
-                                <small class="uk-text-muted uk-display-block">@trans(data.description)</small>
-                                @endif
-                            </td>
-                            <td class="@( role.locked && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
-                                @if (role.administrator)
-                                    <input type="checkbox" checked disabled>
-                                @else
-                                    <input class="@(!role.locked ? 'pk-checkbox')" type="checkbox" name="permissions[]" value="@name"@(role.hasPermission(name) ? ' checked')>
-                                @endif
-                            </td>
+                            <th>@trans('Permission')</th>
+                            <th class="pk-table-width-minimum"></th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (app.permissions as extension => permission)
+                        <tr>
+                            <th colspan="2">@app.extensions.repository.findPackage(extension).title</th>
+                        </tr>
+                            @foreach (permission as name => data)
+                            <tr>
+                                <td>
+                                    @trans(data.title)
+                                    @if (data.description)
+                                    <small class="uk-text-muted uk-display-block">@trans(data.description)</small>
+                                    @endif
+                                </td>
+                                <td class="@( role.locked && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
+                                    @if (role.administrator)
+                                        <input type="checkbox" checked disabled>
+                                    @else
+                                        <input class="@(!role.locked ? 'pk-checkbox')" type="checkbox" name="permissions[]" value="@name"@(role.hasPermission(name) ? ' checked')>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
-                    @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             @endif
 
 

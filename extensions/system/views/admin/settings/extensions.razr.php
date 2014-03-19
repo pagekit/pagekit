@@ -20,54 +20,56 @@
         <ul id="tab-content" class="uk-switcher uk-margin">
             <li>
 
-                <table class="uk-table uk-table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="2">@trans('Name')</th>
-                            <th>@trans('Version')</th>
-                            <th class="pk-table-width-minimum uk-text-center">@trans('Status')</th>
-                            <th class="pk-table-width-minimum"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (packages as name => package)
-                        @set (extension = app['extensions'].get(name))
-                        <tr class="@if (!extension)uk-visible-hover-inline@endif @if (!extension)pk-table-disable@endif">
-                            <td class="pk-table-width-minimum">
-                                <img class="uk-img-preserve" src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
-                            </td>
-                            <td class="uk-table-middle">
-                                <h2 class="uk-h3 uk-margin-remove">@package.title</h2>
-                                <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
-                                    <li><a href="">@trans('Details')</a></li>
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-hover uk-table-middle">
+                        <thead>
+                            <tr>
+                                <th colspan="2">@trans('Name')</th>
+                                <th class="pk-table-width-100">@trans('Version')</th>
+                                <th class="pk-table-width-minimum uk-text-center">@trans('Status')</th>
+                                <th class="pk-table-width-minimum"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (packages as name => package)
+                            @set (extension = app['extensions'].get(name))
+                            <tr class="@if (!extension)uk-visible-hover-inline@endif @if (!extension)pk-table-disable@endif">
+                                <td class="pk-table-width-minimum">
+                                    <img class="uk-img-preserve" src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
+                                </td>
+                                <td class="uk-text-nowrap">
+                                    <h2 class="uk-h3 uk-margin-remove">@package.title</h2>
+                                    <ul class="uk-subnav uk-subnav-line uk-margin-remove">
+                                        <li><a href="">@trans('Details')</a></li>
+                                        @if (extension)
+                                        @if (extension.config.settings)
+                                        <li><a href="@url.route('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
+                                        @endif
+                                        <li><a href="@url.route('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
+                                        @endif
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="uk-list uk-margin-remove">
+                                        <li class="uk-text-truncate">@package.version</li>
+                                        <li class="uk-text-truncate">/@package.name</li>
+                                    </ul>
+                                </td>
+                                <td class="uk-text-center">
                                     @if (extension)
-                                    @if (extension.config.settings)
-                                    <li><a href="@url.route('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
+                                    <a class="uk-button uk-button-success" href="@url.route('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enabled')</a>
+                                    @else
+                                    <a class="uk-button" href="@url.route('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Disabled')</a>
                                     @endif
-                                    <li><a href="@url.route('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
-                                    @endif
-                                </ul>
-                            </td>
-                            <td class="uk-table-middle pk-table-max-width-200">
-                                <ul class="uk-list uk-margin-remove">
-                                    <li class="uk-text-truncate">@package.version</li>
-                                    <li class="uk-text-truncate">/@package.name</li>
-                                </ul>
-                            </td>
-                            <td class="uk-table-middle uk-text-center">
-                                @if (extension)
-                                <a class="uk-button uk-button-success" href="@url.route('@system/extensions/disable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enabled')</a>
-                                @else
-                                <a class="uk-button" href="@url.route('@system/extensions/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Disabled')</a>
-                                @endif
-                            </td>
-                            <td class="uk-table-middle">
-                                <a class="uk-button uk-button-danger uk-invisible" href="@url.route('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                </td>
+                                <td>
+                                    <a class="uk-button uk-button-danger uk-invisible" href="@url.route('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </li>
             <li class="js-update">

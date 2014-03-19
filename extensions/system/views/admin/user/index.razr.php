@@ -54,41 +54,46 @@
     </div>
 
     @if (users)
-    <table class="uk-table uk-table-hover uk-table-middle">
-        <thead>
-            <tr>
-                <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
-                <th>@trans('Username')</th>
-                <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
-                <th>@trans('Name')</th>
-                <th>@trans('Email')</th>
-                <th>@trans('Roles')</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (users as user)
-            <tr>
-                <td><input type="checkbox" name="ids[]" value="@user.id"></td>
-                <td>
-                    @gravatar(user.email, ['size' => 48, 'attrs' => ['width' => '24', 'height' => '24', 'alt' => user.username, 'class' => 'uk-border-circle uk-margin-small-right']])
-                    <a href="@url.route('@system/user/edit', ['id' => user.id])">@user.username</a>
-                </td>
-                <td class="uk-text-center">
-                    <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
-                </td>
-                <td>@user.name</td>
-                <td class="pk-table-width-200 uk-text-truncate">@user.email</td>
-                <td class="pk-table-width-200 uk-text-truncate">
-                    @if (user.roles|length == 1)
-                        @user.roles|implode('')
-                    @else
-                        @user.roles|slice(1)|implode(', ')
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="uk-overflow-container">
+        <table class="uk-table uk-table-hover uk-table-middle">
+            <thead>
+                <tr>
+                    <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
+                    <th colspan="2">@trans('User')</th>
+                    <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
+                    <th class="pk-table-width-200">@trans('Email')</th>
+                    <th class="pk-table-width-100">@trans('Roles')</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (users as user)
+                <tr>
+                    <td><input type="checkbox" name="ids[]" value="@user.id"></td>
+                    <td class="pk-table-width-minimum">
+                        @gravatar(user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => user.username, 'class' => 'uk-img-preserve uk-border-circle']])
+                    </td>
+                    <td class="uk-text-nowrap">
+                        <a href="@url.route('@system/user/edit', ['id' => user.id])">@user.username</a>
+                        <div class="uk-text-muted">@user.name</div>
+                    </td>
+                    <td class="uk-text-center">
+                        <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
+                    </td>
+                    <td>
+                        <a href="mailto:@user.email">@user.email</a>
+                    </td>
+                    <td>
+                        @if (user.roles|length == 1)
+                            @user.roles|implode('')
+                        @else
+                            @user.roles|slice(1)|implode(', ')
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     @else
     <p class="uk-alert uk-alert-info">@trans('No user found.')</p>
     @endif

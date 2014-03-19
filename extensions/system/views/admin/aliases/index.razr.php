@@ -25,28 +25,30 @@
     </div>
 
     @if (aliases)
-    <table class="uk-table uk-table-hover uk-table-middle">
-        <thead>
-            <tr>
-                <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
-                <th>@trans('Alias')</th>
-                <th>@trans('Source')</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (aliases as alias)
-            <tr>
-                <td>
-                    <input type="checkbox" name="ids[]" value="@alias.Id">
-                </td>
-                <td>
-                    <a href="@url.route('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
-                </td>
-                <td>@app.get('system.info').resolveUrl(alias.source)</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="uk-overflow-container">
+        <table class="uk-table uk-table-hover uk-table-middle">
+            <thead>
+                <tr>
+                    <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
+                    <th>@trans('Alias')</th>
+                    <th>@trans('Source')</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (aliases as alias)
+                <tr>
+                    <td>
+                        <input type="checkbox" name="ids[]" value="@alias.Id">
+                    </td>
+                    <td>
+                        <a href="@url.route('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
+                    </td>
+                    <td>@app.get('system.info').resolveUrl(alias.source)</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     @else
     <p class="uk-alert uk-alert-info">@trans('No URL aliases found.')</p>
     @endif

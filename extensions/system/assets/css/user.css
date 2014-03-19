@@ -24,11 +24,9 @@
  ========================================================================== */
 
 .pk-permission-inherited .pk-checkbox { display: none; }
-
 .pk-permission-inherited .pk-checkbox-fake { display: inline; }
 
 .pk-permission-enabled .pk-checkbox-fake { display: none; }
-
 .pk-permission-enabled .pk-checkbox { display: inline; }
 
 

@@ -7544,40 +7544,48 @@ a.uk-datepicker-table-muted {
 /* Sub-modifier `pk-table-width-*`
 ========================================================================== */
 /*
- * Useful width classes for tables
+ * Make cell as small as possible
  */
 .pk-table-width-minimum {
   width: 1px;
 }
 /*
- * Fixed width
- * `width` sets the table cell width
- * `max-width` needed to prevent text from expanding cell and to truncate text
+ * Useful width classes for table cells
+ * Text will wrap automatically, a long string will expand the cell
  */
 .pk-table-width-100 {
-  max-width: 100px;
   width: 100px;
 }
 .pk-table-width-150 {
-  max-width: 150px;
   width: 150px;
 }
 .pk-table-width-200 {
-  max-width: 200px;
   width: 200px;
 }
 /*
- * Max width
- * Only useful to truncate text
+ * Prevent a long string from expanding the cell
+ * `min-width` is needed to prevent cells from collapsing
+ */
+.pk-table-text-break {
+  word-break: break-word;
+}
+.pk-table-min-width-100 {
+  min-width: 100px;
+}
+.pk-table-min-width-150 {
+  min-width: 150px;
+}
+.pk-table-min-width-200 {
+  min-width: 200px;
+}
+.pk-table-min-width-300 {
+  min-width: 300px;
+}
+/*
+ * Need when `uk-text-truncate` is used
  */
 .pk-table-max-width-100 {
   max-width: 100px;
-}
-.pk-table-max-width-150 {
-  max-width: 150px;
-}
-.pk-table-max-width-200 {
-  max-width: 200px;
 }
 /* Sub-modifier `pk-table-head-sticky`
 ========================================================================== */
@@ -7727,7 +7735,13 @@ a.uk-datepicker-table-muted {
   color: #aaa;
 }
 /*
- * Sub-object `pk-thumbnail`
+ * Modifier `pk-finder-table`
+ */
+.pk-finder-table td:nth-child(2) {
+  padding-right: 0;
+}
+/*
+ * Sub-object `pk-finder-thumbnail`
  */
 .pk-finder-thumbnail {
   height: 150px;
@@ -7754,9 +7768,6 @@ a.uk-datepicker-table-muted {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  vertical-align: middle;
-}
-.pk-finder-thumbnail-table + span {
   vertical-align: middle;
 }
 /*
@@ -7828,7 +7839,7 @@ html {
     padding: 15px;
   }
 }
-/* Dialog pages like login and error
+/* Pages for login, error, etc
  ========================================================================== */
 /*
  * Helper class
