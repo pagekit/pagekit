@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Component\Menu\Event\MenuEvent;
-use Pagekit\Component\Menu\Model\Menu as AdminMenu;
+use Pagekit\Menu\Event\MenuEvent;
+use Pagekit\Menu\Model\Menu as AdminMenu;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Menu\Item;
 

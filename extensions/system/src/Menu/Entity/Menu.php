@@ -2,13 +2,32 @@
 
 namespace Pagekit\Menu\Entity;
 
-use Pagekit\Component\Menu\Entity\Menu as BaseMenu;
+use Pagekit\Menu\Model\Menu as BaseMenu;
 
 /**
- * Menu entity.
- *
  * @Entity(tableClass="@system_menu", eventPrefix="system.menu")
  */
 class Menu extends BaseMenu
 {
+    /** @Column(type="integer") @Id */
+    protected $id;
+
+    /** @Column(type="string") */
+    protected $name;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 }
