@@ -249,12 +249,13 @@ class SystemExtension extends Extension
             $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
             $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');
             $event->register('finder.thumbnail', 'extension://system/assets/tmpl/finder.thumbnail.razr.php');
+            $event->register('link.types', 'extension://system/assets/tmpl/link.types.razr.php');
+            $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
+            $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
             $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
             $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
             $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
             $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
-            $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
-            $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
         });
 
         $app->on('view.register.json', function(RegisterJsonEvent $event) {

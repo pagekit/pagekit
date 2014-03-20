@@ -1,143 +1,122 @@
-define(['jquery', 'require'], function($, req) {
+define(['jquery', 'tmpl!link.types'], function($, tmpl) {
 
-    var Link = function(element, options) {
+    var form  = $(tmpl.get('link.types')),
+        forms = $('[data-type]', form),
+        types = $('.js-types', form),
+        url   = $('.js-url', form),
+        edit  = $('.js-edit', form);
+
+    edit.on('update.linkpicker', function(e, params, link) {
+        link = link ? link : $('.js-types', form).val();
+
+        url.val(link + (params ? '?' + params : ''));
+    });
+
+    form.on('change', '.js-types' ,function() {
+
+        var type = $(this).val()+'' , show;
+
+        forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show();
+
+        // hide edit form if empty
+        show = forms.not('.uk-hidden').children(':not(script)').length > 0;
+        edit.toggleClass('uk-hidden', !show).toggle(show);
+
+        edit.trigger('change.linkpicker', [deparam(url.val().split('?')[1] + ''), url.val(), type]);
+    });
+
+    url.on('change', function() {
+
+        var types = $('.js-types', form), type = $(this).val().split('?')[0];
+
+        type = $('option[value="'+type+'"]', types).length ? type : '';
+
+        types.val(type).trigger('change');
+    });
+
+    var Link  = function(element, options) {
 
         var $this = this;
 
         this.options = $.extend({}, Link.defaults, options);
-        this.edit    = $(this.options.editForm, element);
-        this.types   = $(this.options.typeField, element);
-        this.url     = $(this.options.urlField, element);
-        this.forms   = {};
 
-        $.getJSON(this.options.url)
-            .done(function(links) {
-                $.each(links, function(route, link) {
+        this.element = element;
 
-                    if ($this.options.typeFilter && -1 !== $.inArray(route, $this.options.typeFilter)) {
-                        return;
-                    }
-
-                    $this.types.append($('<option>', { value: route, text : link.label }));
-                    $this.forms[route] = link.form;
-                });
-                $this.init();
-            })
-            .fail(function() {
-                // TODO: handle error
-            });
-
-        this.types.on('change', function() {
-
-            var type = $(this).val()+'', show;
-
-            $this.clearEditForm();
-
-            if (!$this.forms[type]) {
-                return;
+        this.types = types.clone().find('option').each(function() {
+            if ($this.options.typeFilter && -1 !== $.inArray($(this).val(), $this.options.typeFilter)) {
+                $(this).remove();
             }
-
-            $this.edit.html($this.forms[type]);
-
-            show = $this.edit.children(':not(script)').length > 0;
-
-            $this.edit.toggleClass('uk-hidden', !show).toggle(show);
-
-            $this.triggerLoad();
-        });
-
-        this.url.on('change', function() {
-
-            var type = $(this).val().split('?')[0];
-
-            type = $('option[value="'+type+'"]', $this.types).length ? type : '';
-
-            if ($this.types.val() != type) {
-                $this.types.val(type).trigger('change');
-            } else {
-                $this.triggerLoad();
-            }
-        });
+        }).end();
     };
 
     $.extend(Link.prototype, {
 
-        init: function() {
-            this.url.trigger('change');
+        init: function(link) {
+
+            this.element = form.appendTo(this.element);
+
+            $('.js-types', form).replaceWith(this.types);
+
+            url.val(link).trigger('change');
         },
 
-        triggerLoad: function() {
-            $(document).trigger('load.linkpicker', [this, this.deparam(this.url.val().split('?')[1] + ''), this.url.val()]);
-        },
-
-        clearEditForm: function() {
-            this.edit.html('');
-        },
-
-        updateUrl: function(params, url) {
-            url = url ? url : this.types.val();
-
-            this.url.val(url + (params ? '?' + $.param(params) : ''));
-        },
-
-        /*
-         * https://github.com/chrissrogers/jquery-deparam
-         */
-        deparam: function(params) {
-            var obj = {};
-
-            $.each(params.replace(/\+/g, ' ').split('&'), function(j, v) {
-
-                var param = v.split('='), key = decodeURIComponent(param[0]), val, cur = obj, i = 0, keys = key.split(']['), keys_last = keys.length - 1;
-
-                if (/\[/.test(keys[0]) && /\]$/.test(keys[keys_last])) {
-
-                    keys[keys_last] = keys[keys_last].replace(/\]$/, '');
-                    keys = keys.shift().split('[').concat(keys);
-
-                    keys_last = keys.length - 1;
-
-                } else {
-                    keys_last = 0;
-                }
-
-                if (param.length === 2) {
-                    val = decodeURIComponent(param[1]);
-
-                    if (keys_last) {
-                        for (; i <= keys_last; i++) {
-                            key = keys[i] === '' ? cur.length : keys[i];
-                            cur = cur[key] = i < keys_last ? cur[key] || (keys[i + 1] && isNaN(keys[i + 1]) ? {} : []) : val;
-                        }
-
-                    } else {
-
-                        if ($.isArray(obj[key])) {
-                            obj[key].push(val);
-                        } else if (obj[key] !== undefined) {
-                            obj[key] = [obj[key], val];
-                        } else {
-                            obj[key] = val;
-                        }
-                    }
-
-                } else if (key) {
-                    obj[key] = '';
-                }
-            });
-
-            return obj;
+        getValue: function() {
+            return url.val();
         }
-
     });
 
     Link.defaults = {
-        urlField:   '.js-link-url',
-        typeField:  '.js-link-types',
-        editForm:   '.js-link-edit',
-        typeFilter: [],
-        url:        req.toUrl('admin/system/links')
+        typeFilter: []
     };
+
+    /*
+     * https://github.com/chrissrogers/jquery-deparam
+     */
+    function deparam(params) {
+        var obj = {};
+
+        $.each(params.replace(/\+/g, ' ').split('&'), function(j, v) {
+
+            var param = v.split('='), key = decodeURIComponent(param[0]), val, cur = obj, i = 0, keys = key.split(']['), keys_last = keys.length - 1;
+
+            if (/\[/.test(keys[0]) && /\]$/.test(keys[keys_last])) {
+
+                keys[keys_last] = keys[keys_last].replace(/\]$/, '');
+                keys = keys.shift().split('[').concat(keys);
+
+                keys_last = keys.length - 1;
+
+            } else {
+                keys_last = 0;
+            }
+
+            if (param.length === 2) {
+                val = decodeURIComponent(param[1]);
+
+                if (keys_last) {
+                    for (; i <= keys_last; i++) {
+                        key = keys[i] === '' ? cur.length : keys[i];
+                        cur = cur[key] = i < keys_last ? cur[key] || (keys[i + 1] && isNaN(keys[i + 1]) ? {} : []) : val;
+                    }
+
+                } else {
+
+                    if ($.isArray(obj[key])) {
+                        obj[key].push(val);
+                    } else if (obj[key] !== undefined) {
+                        obj[key] = [obj[key], val];
+                    } else {
+                        obj[key] = val;
+                    }
+                }
+
+            } else if (key) {
+                obj[key] = '';
+            }
+        });
+
+        return obj;
+    }
 
     return Link;
 });

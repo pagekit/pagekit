@@ -28,6 +28,6 @@ class HelloLink extends ApplicationAware implements LinkInterface
      */
     public function renderForm()
     {
-        return $this('view')->render('hello/admin/link.razr.php', compact('item'));
+        return $this('view')->render('hello/admin/link.razr.php', array('route' => $this->getRoute()));
     }
 }

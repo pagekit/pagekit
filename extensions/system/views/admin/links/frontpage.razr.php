@@ -2,8 +2,12 @@
 
     (function($) {
 
-        $(document).on('load.linkpicker', function(e, link, params) {
-            link.updateUrl();
+        $('.js-edit').on('change.linkpicker', function(e, params, url) {
+
+            if (url !== '/') return;
+
+            $(this).trigger('update.linkpicker');
+
         });
 
     })(jQuery);

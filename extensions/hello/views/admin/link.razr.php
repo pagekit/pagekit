@@ -1,20 +1,22 @@
 <div class="uk-form-controls">
-    <input class="uk-width-1-1" name="name" value="" type="text" placeholder="@trans('Hello World')" required>
+    <input class="uk-width-1-1" name="name" value="" type="text" placeholder="@trans('Hello World')">
 </div>
 
 <script>
 
     (function($) {
 
-        $(document).on('load.linkpicker', function(e, handler, params) {
+        var $edit = $('.js-edit'), $name = $('[name="name"]', $edit);
 
-            var $name = $('[name="name"]', handler.edit);
+        $edit.on('change.linkpicker', function(e, params, url, type) {
 
-            $name.on('change', function() {
-                    handler.updateUrl($name.serializeArray());
-                })
-                .val(params['name'] ? params['name'] : '')
-                .trigger('change');
+            if (type !== '@route') return;
+
+            $name.val(params['name'] ? params['name'] : '').trigger('change');
+        });
+
+        $name.on('change', function() {
+            $edit.trigger('update.linkpicker', $name.serialize());
         });
 
     })(jQuery);

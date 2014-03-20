@@ -10,16 +10,16 @@
 
     (function($) {
 
-        $(document).on('load.linkpicker', function(e, handler, params) {
+        var $edit = $('.js-edit'), $id = $('[name="id"]', $edit);
 
-            var $id = $('[name=id]', handler.edit);
+        $edit.on('change.linkpicker', function(e, params, url, type) {
+            if (type !== '@route') return;
 
-            $id
-                .on('change', function() {
-                    handler.updateUrl($id.serializeArray());
-                })
-                .val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val())
-                .trigger('change');
+            $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');
+        });
+
+        $id.on('change', function() {
+            $edit.trigger('update.linkpicker', $id.serialize());
         });
 
     })(jQuery);

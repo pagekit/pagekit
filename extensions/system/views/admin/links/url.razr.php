@@ -6,11 +6,17 @@
 
     (function($) {
 
-        $(document).on('load.linkpicker', function(e, handler, params, url) {
+        var $edit = $('.js-edit'), $url = $('[name="url"]', $edit);
 
-            var $url = $('[name=url]', handler.edit).on('change', handler.edit, function() {
-                handler.updateUrl(null, $url.val());
-            }).val(url);
+        $edit.on('change.linkpicker', function(e, params, url, type) {
+
+            if (type != '') return;
+
+            $url.val(url).trigger('change');
+        });
+
+        $url.on('change', function() {
+            $edit.trigger('update.linkpicker', [null, $url.val()]);
         });
 
     })(jQuery);

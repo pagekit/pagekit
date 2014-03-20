@@ -30,6 +30,6 @@ class PageLink extends ApplicationAware implements LinkInterface
     {
         $pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page')->findAll();
 
-        return $this('view')->render('page/admin/link.razr.php', compact('item', 'pages'));
+        return $this('view')->render('page/admin/link.razr.php', array('route' => $this->getRoute(), 'pages' => $pages));
     }
 }
