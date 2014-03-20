@@ -14,15 +14,14 @@ define(['jquery', 'tmpl!link.types'], function($, tmpl) {
 
     form.on('change', '.js-types' ,function() {
 
-        var type = $(this).val()+'' , show;
+        var type = $(this).val(),
+            form = forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
 
-        forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show();
-
-        // hide edit form if empty
-        show = forms.not('.uk-hidden').children(':not(script)').length > 0;
+            // hide edit form if empty
+            show = form.children(':not(script)').length > 0;
         edit.toggleClass('uk-hidden', !show).toggle(show);
 
-        edit.trigger('change.linkpicker', [deparam(url.val().split('?')[1] + ''), url.val(), type]);
+        edit.trigger('load.linkpicker', [deparam(url.val().split('?')[1] + ''), url.val(), type]);
     });
 
     url.on('change', function() {

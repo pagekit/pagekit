@@ -24,6 +24,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
 
                 handler = function() {
                     picker.hide();
+
                     marker.replace('[' + title.val() + '](' + link.getValue() + ')');
                 };
 

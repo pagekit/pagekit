@@ -2,9 +2,9 @@
 
     (function($) {
 
-        $('.js-edit').on('change.linkpicker', function(e, params, url) {
+        $('.js-edit').on('load.linkpicker', function(e, params, url, type) {
 
-            if (url !== '/') return;
+            if (type != '@@frontpage') return;
 
             $(this).trigger('update.linkpicker');
 

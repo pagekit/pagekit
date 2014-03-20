@@ -35,5 +35,5 @@ require(['jquery', 'require', 'linkpicker', 'uikit!form-password', 'domReady!'],
     });
 
     // URL picker
-    new Picker('[name="option[system:app.frontpage]"]', { typeFilter: ['/'] });
+    new Picker('[name="option[system:app.frontpage]"]', { typeFilter: ['@frontpage'] });
 });

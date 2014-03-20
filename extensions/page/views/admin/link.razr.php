@@ -12,7 +12,7 @@
 
         var $edit = $('.js-edit'), $id = $('[name="id"]', $edit);
 
-        $edit.on('change.linkpicker', function(e, params, url, type) {
+        $edit.on('load.linkpicker', function(e, params, url, type) {
             if (type !== '@route') return;
 
             $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');

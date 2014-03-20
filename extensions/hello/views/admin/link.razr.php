@@ -8,7 +8,7 @@
 
         var $edit = $('.js-edit'), $name = $('[name="name"]', $edit);
 
-        $edit.on('change.linkpicker', function(e, params, url, type) {
+        $edit.on('load.linkpicker', function(e, params, url, type) {
 
             if (type !== '@route') return;
 

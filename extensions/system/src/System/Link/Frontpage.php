@@ -11,7 +11,7 @@ class Frontpage extends ApplicationAware implements LinkInterface
      */
     public function getRoute()
     {
-        return '/';
+        return '@frontpage';
     }
 
     /**
