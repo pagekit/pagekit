@@ -21,6 +21,10 @@ class MenuListener extends EventSubscriber
         $query = $this('menus')->getItemRepository()->query()
             ->orWhere(array('url = :path', 'url LIKE :route'), compact('path', 'route'));
 
+        if ('/' == $path) {
+            $query->orWhere('url = :front', array('front' => '@frontpage'));
+        }
+
         if ($alias = $attr->get('_system_path')) {
             $query->orWhere('url = :alias', compact('alias'));
         }
