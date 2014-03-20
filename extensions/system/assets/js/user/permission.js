@@ -37,7 +37,7 @@ require(['jquery', 'uikit!sticky', 'domReady!'], function($, uikit) {
 
     var table   = $("#js-permission table").css('position', "relative"),
         thead   = table.find("thead tr"),
-        header  = thead.clone().addClass('pk-table-head-sticky uk-animation-slide-top').hide(),
+        header  = thead.clone().addClass('pk-table-head-sticky').hide(),
         th      = thead.find("th:first"),
         thclone = header.find("th:first");
 
