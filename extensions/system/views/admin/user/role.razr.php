@@ -52,7 +52,7 @@
                                     <small class="uk-text-muted uk-display-block">@trans(data.description)</small>
                                     @endif
                                 </td>
-                                <td class="@( role.locked && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
+                                <td class="@( (!role.administrator && !role.locked) && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
                                     @if (role.administrator)
                                         <input type="checkbox" checked disabled>
                                     @else
