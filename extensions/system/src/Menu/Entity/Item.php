@@ -3,6 +3,7 @@
 namespace Pagekit\Menu\Entity;
 
 use Pagekit\Menu\Model\Item as BaseItem;
+use Pagekit\Menu\Model\MenuInterface;
 
 /**
  * @Entity(repositoryClass="Pagekit\Menu\Entity\ItemRepository", tableClass="@system_menu_item", eventPrefix="system.menuitem")
