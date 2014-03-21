@@ -1,1 +1,0 @@
-@widget.get('content')

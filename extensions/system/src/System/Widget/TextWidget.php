@@ -48,7 +48,7 @@ class TextWidget extends ApplicationAware implements TypeInterface
     {
         $this('events')->trigger('content.plugins', $event = new ContentEvent($widget->get('content'), compact('widget')));
 
-        return $this('view')->render('system/widgets/text/render.razr.php', array('widget' => $widget, 'options' => $options, 'content' => $event->getContent()));
+        return $event->getContent();
     }
 
     /**
