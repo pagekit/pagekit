@@ -34,14 +34,14 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
                 var resolved = '';
                 $.post(options.url, { url: source.val() },function (data) {
 
-                    if (!data.url) {
+                    if (data.error) {
                         source.val('');
-                    }
-
-                    if (!data.error && data.url) {
+                    } else if (data.url) {
                         resolved = data.url;
                     }
-                }, 'json').always(function () {
+                }, 'json').fail(function () {
+                    source.val('');
+                }).always(function () {
                     source.trigger('resolved', resolved);
                 });
             })

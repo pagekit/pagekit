@@ -51,9 +51,9 @@ class SystemInfoHelper extends ApplicationAware
         $this('events')->on('url.generate', $listener, 32);
 
         try {
-            $url = $this('url')->route($url);
+            $url = $this('url')->route($url, array(), 'base');
         } catch (\Exception $e) {
-            $url = '';
+            $url = false;
         }
 
         $this('events')->removeListener('url.generate', $listener);

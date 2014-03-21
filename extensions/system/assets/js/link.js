@@ -52,7 +52,7 @@ define(['jquery', 'tmpl!link.types'], function($, tmpl) {
 
         init: function(link) {
 
-            this.element = form.appendTo(this.element);
+            form.appendTo(this.element);
 
             $('.js-types', form).replaceWith(this.types);
 

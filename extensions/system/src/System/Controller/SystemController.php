@@ -78,7 +78,9 @@ class SystemController extends Controller
     {
         $url = $this('system.info')->resolveURL($url);
 
-        return $this('response')->json($url ? compact('url') : array('error' => true, 'message' => __('Invalid URL.')));
+        $url = $url !== '' ? $url : __('Frontpage');
+
+        return $this('response')->json(false !== $url ? compact('url') : array('error' => true, 'message' => __('Invalid URL.')));
     }
 
     /**
