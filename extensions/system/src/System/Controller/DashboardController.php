@@ -131,7 +131,7 @@ class DashboardController extends Controller
     {
         try {
 
-            if (!$id) {
+            if ($new = !$id) {
                 $id = uniqid();
             }
 
@@ -140,7 +140,7 @@ class DashboardController extends Controller
 
             $this->save($widgets);
 
-            $this('message')->success($id ? __('Widget saved.') : __('Widget created.'));
+            $this('message')->success($new ? __('Widget created.') : __('Widget saved.'));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -161,6 +161,8 @@ class DashboardController extends Controller
         }
 
         $this->save($widgets);
+
+        $this('message')->success(_c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
         return $this->redirect('@system/dashboard/settings');
     }
