@@ -15,6 +15,7 @@ class WidgetListener extends EventSubscriber
     {
         $request   = $event->getRequest();
         $active    = (array) $request->attributes->get('_menu');
+        $path      = ltrim($request->getPathInfo(), '/');
         $positions = $this('positions');
 
         foreach ($this('widgets')->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
@@ -29,7 +30,7 @@ class WidgetListener extends EventSubscriber
             $pages = $widget->getPages();
 
             $itemsMatch = (bool) array_intersect($items, $active);
-            $pagesMatch = $this->matchPath($request->getPathInfo(), $pages);
+            $pagesMatch = $this->matchPath($path, $pages);
 
             if (!( ((!$items || $itemsMatch) && (!$pages || $pagesMatch)) || ($items && $itemsMatch) || ($pages && $pagesMatch) )) {
                 continue;
