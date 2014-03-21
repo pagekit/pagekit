@@ -22,8 +22,8 @@
     <label for="form-style" class="uk-form-label">@trans('Start Level')</label>
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][start_level]">
-            @foreach([trans('1'), trans('2'), trans('3'), trans('4'), trans('5'), trans('6'), trans('7'), trans('8'), trans('9'), trans('10'), ] as value => text)
-            <option value="@(value + 1)"@(value + 1 == widget.get('start_level') ? ' selected')>@text</option>
+            @foreach ([1,2,3,4,5,6,7,8,9,10] as value)
+            <option value="@(value + 1)"@(value + 1 == widget.get('start_level') ? ' selected')>@trans(value)</option>
             @endforeach
         </select>
     </div>
@@ -33,8 +33,8 @@
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][depth]">
             <option value="">@trans('- No Limit -')</option>
-            @foreach([trans('1'), trans('2'), trans('3'), trans('4'), trans('5'), trans('6'), trans('7'), trans('8'), trans('9'), trans('10'), ] as value => text)
-            <option value="@(value + 1)"@(value + 1 == widget.get('depth') ? ' selected')>@text</option>
+            @foreach ([1,2,3,4,5,6,7,8,9,10] as value)
+            <option value="@(value + 1)"@(value + 1 == widget.get('depth') ? ' selected')>@trans(value)</option>
             @endforeach
         </select>
     </div>
