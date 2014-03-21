@@ -43,7 +43,7 @@
                     <td>
                         <a href="@url.route('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
                     </td>
-                    <td>@app.get('system.info').resolveUrl(alias.source)</td>
+                    <td>@app['system.info'].resolveUrl(alias.source)</td>
                 </tr>
                 @endforeach
             </tbody>
