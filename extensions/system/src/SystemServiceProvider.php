@@ -2,20 +2,20 @@
 
 namespace Pagekit;
 
-use Pagekit\Framework\Application;
-use Pagekit\Framework\ServiceProviderInterface;
+use Pagekit\Component\Package\Installer\PackageInstaller;
+use Pagekit\Component\View\Event\ActionEvent;
+use Pagekit\Component\View\View;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
-use Pagekit\Theme\ThemeManager;
-use Pagekit\Theme\Package\ThemeLoader;
-use Pagekit\Theme\Package\ThemeRepository;
+use Pagekit\Framework\Application;
+use Pagekit\Framework\ServiceProviderInterface;
+use Pagekit\System\FileProvider;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
-use Pagekit\System\FileProvider;
-use Pagekit\Component\Package\Installer\PackageInstaller;
-use Pagekit\Component\View\View;
-use Pagekit\Component\View\Event\ActionEvent;
+use Pagekit\Theme\Package\ThemeLoader;
+use Pagekit\Theme\Package\ThemeRepository;
+use Pagekit\Theme\ThemeManager;
 
 class SystemServiceProvider implements ServiceProviderInterface
 {

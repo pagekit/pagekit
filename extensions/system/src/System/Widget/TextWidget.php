@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Widget;
 
-use Pagekit\Framework\ApplicationAware;
 use Pagekit\Content\Event\ContentEvent;
+use Pagekit\Framework\ApplicationAware;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 

@@ -2,8 +2,8 @@
 
 namespace Pagekit\Theme;
 
-use Pagekit\Framework\Application;
 use Pagekit\Component\File\ResourceLocator;
+use Pagekit\Framework\Application;
 use Symfony\Component\Translation\Translator;
 
 class Theme

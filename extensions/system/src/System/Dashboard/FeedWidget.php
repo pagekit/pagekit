@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Dashboard;
 
+use Pagekit\Framework\ApplicationAware;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
-use Pagekit\Framework\ApplicationAware;
 
 class FeedWidget extends ApplicationAware implements TypeInterface
 {

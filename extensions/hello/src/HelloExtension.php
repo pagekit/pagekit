@@ -2,8 +2,8 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\Framework\Application;
 use Pagekit\Extension\Extension;
+use Pagekit\Framework\Application;
 
 class HelloExtension extends Extension
 {

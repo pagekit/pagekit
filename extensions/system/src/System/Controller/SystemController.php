@@ -5,8 +5,8 @@ namespace Pagekit\System\Controller;
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\System\Event\RegisterJsonEvent;
+use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\User\Controller\ResetPasswordController;
 
 /**

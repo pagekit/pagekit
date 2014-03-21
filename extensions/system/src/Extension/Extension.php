@@ -2,10 +2,10 @@
 
 namespace Pagekit\Extension;
 
+use Pagekit\Component\File\ResourceLocator;
+use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;
-use Pagekit\Component\Routing\Router;
-use Pagekit\Component\File\ResourceLocator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\Translator;
 

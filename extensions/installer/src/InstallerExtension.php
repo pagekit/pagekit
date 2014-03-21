@@ -2,8 +2,8 @@
 
 namespace Pagekit\Installer;
 
-use Pagekit\Framework\Application;
 use Pagekit\Extension\Extension;
+use Pagekit\Framework\Application;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class InstallerExtension extends Extension

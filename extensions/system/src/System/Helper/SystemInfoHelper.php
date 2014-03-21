@@ -7,7 +7,6 @@ use Pagekit\Component\Routing\Event\GenerateUrlEvent;
 use Pagekit\Framework\ApplicationAware;
 use PDO;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SystemInfoHelper extends ApplicationAware
 {

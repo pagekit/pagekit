@@ -2,12 +2,12 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Widget\Model\TypeManager;
-use Pagekit\Widget\Model\Widget;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\DashboardInitEvent;
 use Pagekit\User\Model\UserInterface;
+use Pagekit\Widget\Model\TypeManager;
+use Pagekit\Widget\Model\Widget;
 
 /**
  * @Access(admin=true)

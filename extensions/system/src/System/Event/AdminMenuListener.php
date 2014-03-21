@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Event;
 
+use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu as AdminMenu;
-use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Menu\Item;
 
 class AdminMenuListener extends EventSubscriber

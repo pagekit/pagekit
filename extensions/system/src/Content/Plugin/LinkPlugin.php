@@ -2,8 +2,8 @@
 
 namespace Pagekit\Content\Plugin;
 
-use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Content\Event\ContentEvent;
+use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\EditorLoadEvent;
 use Pagekit\System\Event\RegisterTmplEvent;
 

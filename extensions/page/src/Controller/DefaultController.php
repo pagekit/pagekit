@@ -3,8 +3,8 @@
 namespace Pagekit\Page\Controller;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\Controller\Controller;
 use Pagekit\Content\Event\ContentEvent;
+use Pagekit\Framework\Controller\Controller;
 
 /**
  * @Route("/page")

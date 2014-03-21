@@ -3,10 +3,9 @@
 namespace Pagekit\Widget;
 
 use Pagekit\Component\View\View;
-use Pagekit\Widget\WidgetProvider;
-use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
 use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
 use Pagekit\Widget\PositionRenderer\LayoutPositionRenderer;
+use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
 
 class PositionManager implements \ArrayAccess, \IteratorAggregate
 {

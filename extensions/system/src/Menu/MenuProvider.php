@@ -3,11 +3,11 @@
 namespace Pagekit\Menu;
 
 use Pagekit\Framework\Application;
-use Pagekit\Menu\Model\Node;
-use Pagekit\Menu\Model\FilterManager;
-use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\Menu\Entity\ItemRepository;
 use Pagekit\Menu\Filter\FilterIterator;
+use Pagekit\Menu\Model\FilterManager;
+use Pagekit\Menu\Model\MenuInterface;
+use Pagekit\Menu\Model\Node;
 
 class MenuProvider implements \IteratorAggregate
 {

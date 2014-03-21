@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Framework\Application;
+use Pagekit\Framework\Event\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 class SystemInitEvent extends Event
