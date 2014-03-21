@@ -2,6 +2,8 @@
 
 <form class="js-item-edit uk-form uk-form-horizontal" action="@url.route('@system/item/save')" data-item-id="@item.id" method="post">
 
+    <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-link">@trans('Please choose a Link.')</p>
+
     <div class="uk-form-row">
         <label for="form-title" class="uk-form-label">@trans('Title')</label>
         <div class="uk-form-controls">

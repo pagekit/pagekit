@@ -33,6 +33,11 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
 
                 var resolved = '';
                 $.post(options.url, { url: source.val() },function (data) {
+
+                    if (!data.url) {
+                        source.val('');
+                    }
+
                     if (!data.error && data.url) {
                         resolved = data.url;
                     }

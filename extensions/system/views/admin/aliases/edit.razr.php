@@ -2,6 +2,8 @@
 
 <form class="uk-form uk-form-horizontal" action="@url.route('@system/alias/save', ['id' => alias.id ?: 0])" method="post">
 
+    <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-source">@trans('Please select a source.')</p>
+
     <div class="uk-form-row">
         <label for="form-alias" class="uk-form-label">@trans('Alias')</label>
         <div class="uk-form-controls">
