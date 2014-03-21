@@ -4,7 +4,7 @@
 
     <div class="uk-hidden" data-msg="update-available">
 
-        <h2>@trans('There is a update available.')</h2>
+        <h2>@trans('There is an update available.')</h2>
         <p class="js-version">@trans('Please update Pagekit to version %version%!')</p>
 
         <p>
