@@ -1,81 +1,25 @@
-(function(){
+define('locale', ['json!index.php/system/locale'], function(locale) {
 
-    var Local = {
-
-        meta: {
-            date: {
-                short       : 'n/d/y',
-                medium      : 'M d, Y',
-                long        : 'F d, y',
-                full        : 'l, F d, y',
-                longdays    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                shortdays   : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                longmonths  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                shortmonths : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-
-            trans: {}
-        },
-
-
-        formatDate: function(timestamp, format){
-            return this.date(format || this.meta.date.medium, timestamp);
-        },
+    var module = {
 
         date: function(format, timestamp){
 
-            var meta = this.meta.date;
-
-            return date(format || meta.medium, typeof(timestamp)=='string' ? strtotime(timestamp) : timestamp);
-        },
-
-        trans: function(key) {
-            var args = arguments.length ==1 ? [] : Array.prototype.slice.call(arguments, 1);
-
-            if (!this.meta.trans[key]) {
-                return sprintf(key, args);
+            if (locale.date[format]) {
+                format = locale.date[format];
             }
 
-            return sprintf(String(this.meta.trans[key]), args);
-        },
-
-        register: function(key, data){
-
-            switch(arguments.length) {
-                case 1:
-                    extend(this.meta.trans, key);
-                    break;
-                case 2:
-                    this.meta.trans[key] = data;
-                    break;
+            if (typeof(timestamp) == 'string') {
+                timestamp = new Date(timestamp);
             }
+
+            return date(format, timestamp);
         }
+
     };
 
-    function extend(destination, source) {
-
-        if (!destination || !source) return destination;
-
-        for (var field in source) {
-            if (destination[field] === source[field]) continue;
-            destination[field] = source[field];
-        }
-        return destination;
-    }
-
-    // copyright: http://phpjs.org
-
-    function strtotime(c,e){function m(a){var c=a.split(" ");a=c[0];var b=c[1].substring(0,3),e=/\d+/.test(a),f=("last"===a?-1:1)*("ago"===c[2]?-1:1);e&&(f*=parseInt(a,10));if(g.hasOwnProperty(b)&&!c[1].match(/^mon(day|\.)?$/i))return d["set"+g[b]](d["get"+g[b]]()+f);if("wee"===b)return d.setDate(d.getDate()+7*f);if("next"===a||"last"===a)c=f,b=l[b],"undefined"!==typeof b&&(b-=d.getDay(),0===b?b=7*c:0<b&&"last"===a?b-=7:0>b&&"next"===a&&(b+=7),d.setDate(d.getDate()+b));else if(!e)return!1;return!0}var a,
-    h,d,l,g,k;if(!c)return null;c=c.trim().replace(/\s{2,}/g," ").replace(/[\t\r\n]/g,"").toLowerCase();if("now"===c)return null===e||isNaN(e)?(new Date).getTime()/1E3|0:e|0;if(!isNaN(a=Date.parse(c)))return a/1E3|0;if("now"===c)return(new Date).getTime()/1E3;if(!isNaN(a=Date.parse(c)))return a/1E3;if(a=c.match(/^(\d{2,4})-(\d{2})-(\d{2})(?:\s(\d{1,2}):(\d{2})(?::\d{2})?)?(?:\.(\d+)?)?$/))return h=0<=a[1]&&69>=a[1]?+a[1]+2E3:a[1],new Date(h,parseInt(a[2],10)-1,a[3],a[4]||0,a[5]||0,a[6]||0,a[7]||0)/1E3;
-    d=e?new Date(1E3*e):new Date;l={sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6};g={yea:"FullYear",mon:"Month",day:"Date",hou:"Hours",min:"Minutes",sec:"Seconds"};a=c.match(RegExp("([+-]?\\d+\\s(years?|months?|weeks?|days?|hours?|minutes?|min|seconds?|sec|sunday|sun\\.?|monday|mon\\.?|tuesday|tue\\.?|wednesday|wed\\.?|thursday|thu\\.?|friday|fri\\.?|saturday|sat\\.?)|(last|next)\\s(years?|months?|weeks?|days?|hours?|minutes?|min|seconds?|sec|sunday|sun\\.?|monday|mon\\.?|tuesday|tue\\.?|wednesday|wed\\.?|thursday|thu\\.?|friday|fri\\.?|saturday|sat\\.?))(\\sago)?",
-    "gi"));if(!a)return!1;k=0;for(h=a.length;k<h;k++)if(!m(a[k]))return!1;return d.getTime()/1E3};
-
-    function sprintf(){var l=arguments,r=0,s=function(b,a,f,c){f||(f=" ");a=b.length>=a?"":Array(1+a-b.length>>>0).join(f);return c?b+a:a+b},p=function(b,a,f,c,g,d){var e=c-b.length;0<e&&(b=f||!g?s(b,c,d,f):b.slice(0,a.length)+s("",e,"0",!0)+b.slice(a.length));return b},q=function(b,a,f,c,g,d,e){b>>>=0;f=f&&b&&{2:"0b",8:"0",16:"0x"}[a]||"";b=f+s(b.toString(a),d||0,"0",!1);return p(b,f,c,g,e)};return l[r++].replace(/%%|%(\d+\$)?([-+\'#0 ]*)(\*\d+\$|\*|\d+)?(\.(\*\d+\$|\*|\d+))?([scboxXuideEfFgG])/g,function(b,
-    a,f,c,g,d,e){var h,m;if("%%"===b)return"%";var k=!1;m="";var n=g=!1;h=" ";for(var u=f.length,t=0;f&&t<u;t++)switch(f.charAt(t)){case " ":m=" ";break;case "+":m="+";break;case "-":k=!0;break;case "'":h=f.charAt(t+1);break;case "0":g=!0;break;case "#":n=!0}c=c?"*"===c?+l[r++]:"*"==c.charAt(0)?+l[c.slice(1,-1)]:+c:0;0>c&&(c=-c,k=!0);if(!isFinite(c))throw Error("sprintf: (minimum-)width must be finite");d=d?"*"===d?+l[r++]:"*"==d.charAt(0)?+l[d.slice(1,-1)]:+d:-1<"fFeE".indexOf(e)?6:"d"===e?0:void 0;
-    a=a?l[a.slice(0,-1)]:l[r++];switch(e){case "s":return e=String(a),null!=d&&(e=e.slice(0,d)),p(e,"",k,c,g,h);case "c":return e=String.fromCharCode(+a),null!=d&&(e=e.slice(0,d)),p(e,"",k,c,g,void 0);case "b":return q(a,2,n,k,c,d,g);case "o":return q(a,8,n,k,c,d,g);case "x":return q(a,16,n,k,c,d,g);case "X":return q(a,16,n,k,c,d,g).toUpperCase();case "u":return q(a,10,n,k,c,d,g);case "i":case "d":return h=+a||0,h=Math.round(h-h%1),b=0>h?"-":m,a=b+s(String(Math.abs(h)),d,"0",!1),p(a,b,k,c,g);case "e":case "E":case "f":case "F":case "g":case "G":return h=
-    +a,b=0>h?"-":m,m=["toExponential","toFixed","toPrecision"]["efg".indexOf(e.toLowerCase())],e=["toString","toUpperCase"]["eEfFgG".indexOf(e)%2],a=b+Math.abs(h)[m](d),p(a,b,k,c,g)[e]();default:return b}})};
-
-
+    /**
+     * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
+     */
     function date(format, timestamp) {
 
         var that = this;
@@ -103,7 +47,7 @@
             },
             D: function () {
                 // Shorthand day name; Mon...Sun
-                return date.meta.shortdays[f.w()-1];
+                return locale.date.shortdays[f.w()-1];
             },
             j: function () {
                 // Day of month; 1..31
@@ -111,7 +55,7 @@
             },
             l: function () {
                 // Full day name; Monday...Sunday
-                return date.meta.longdays[f.w()-1];
+                return locale.date.longdays[f.w()-1];
             },
             N: function () {
                 // ISO-8601 day of week; 1[Mon]..7[Sun]
@@ -148,7 +92,7 @@
             // Month
             F: function () {
                 // Full month name; January...December
-                return date.meta.longmonths[f.n() - 1];
+                return locale.date.longmonths[f.n() - 1];
             },
             m: function () {
                 // Month w/leading 0; 01...12
@@ -156,7 +100,7 @@
             },
             M: function () {
                 // Shorthand month name; Jan...Dec
-                return date.meta.shortmonths[f.n() - 1];
+                return locale.date.shortmonths[f.n() - 1];
             },
             n: function () {
                 // Month; 1...12
@@ -306,13 +250,5 @@
         return this.date(format, timestamp);
     }
 
-    date.meta = Local.meta.date;
-
-    // AMD support
-    if (typeof define === 'function' && define.amd) {
-        define(function () { return Local; });
-    } else {
-        window.Local = Local;
-    }
-
-})();
+    return module;
+});

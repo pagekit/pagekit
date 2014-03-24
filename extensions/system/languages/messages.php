@@ -18,47 +18,6 @@ __('30');
 __('50');
 __('100');
 
-// Months
-__('Jan');
-__('January');
-__('Feb');
-__('February');
-__('Mar');
-__('March');
-__('Apr');
-__('April');
-__('May');
-__('Jun');
-__('June');
-__('Jul');
-__('July');
-__('Aug');
-__('August');
-__('Sep');
-__('September');
-__('Oct');
-__('October');
-__('Nov');
-__('November');
-__('Dec');
-__('December');
-
-// Days of the Week
-__('Sat');
-__('Saturday');
-__('Sun');
-__('Sunday');
-__('Mon');
-__('Monday');
-__('Tue');
-__('Tuesday');
-__('Wed');
-__('Wednesday');
-__('Thu');
-__('Thursday');
-__('Fri');
-__('Friday');
-
 // Menus
 __('Settings');
 __('Widgets');

@@ -21,10 +21,10 @@ use Pagekit\System\Event\AliasListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\DashboardInitEvent;
 use Pagekit\System\Event\FrontpageListener;
+use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\LocaleListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
-use Pagekit\System\Event\RegisterJsonEvent;
 use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Exception\ExceptionHandler;
@@ -63,6 +63,8 @@ class SystemExtension extends Extension
      */
     public function boot(Application $app)
     {
+        $config = $this->getConfig();
+
         $app['exception']->pushHandler(new ExceptionHandler($app['config']['app.debug']));
 
         $app['events']->addSubscriber(new AccessListener);
@@ -170,9 +172,8 @@ class SystemExtension extends Extension
             });
         }
 
-        $app->on('init', function() use ($app) {
+        $app->on('init', function() use ($app, $config) {
 
-            $config = $app['system']->getConfig();
             $config['view']['scripts']($app['view.scripts']);
 
             $helper = new TemplatingDateHelper($app['dates']);
@@ -237,6 +238,8 @@ class SystemExtension extends Extension
             });
         });
 
+        $app->on('system.locale', $config['locale']);
+
         $app->on('system.dashboard.init', function(DashboardInitEvent $event) {
             $event->registerType(new FeedWidget);
             $event->registerType(new UserWidget);
@@ -256,10 +259,6 @@ class SystemExtension extends Extension
             $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
             $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
             $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
-        });
-
-        $app->on('view.register.json', function(RegisterJsonEvent $event) {
-            $event->register('local', 'extension://system/assets/json/local.razr.php');
         });
     }
 

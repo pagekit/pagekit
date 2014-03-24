@@ -5,7 +5,7 @@ namespace Pagekit\System\Controller;
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\System\Event\RegisterJsonEvent;
+use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\User\Controller\ResetPasswordController;
 
@@ -84,6 +84,16 @@ class SystemController extends Controller
     }
 
     /**
+     * @Route("/system/locale")
+     */
+    public function localeAction()
+    {
+        $this('events')->trigger('system.locale', $event = new LocaleEvent);
+
+        return $this('response')->json($event->getLocale());
+    }
+
+    /**
      * @Route("/system/tmpl/{templates}")
      */
     public function tmplAction($templates = '')
@@ -100,27 +110,6 @@ class SystemController extends Controller
 
         return $this('response')->json($response);
     }
-
-
-    /**
-     * @Route("/system/json/{sources}")
-     */
-    public function jsonAction($sources = '')
-    {
-
-        $this('events')->trigger('view.register.json', $event = new RegisterJsonEvent);
-
-        $response = array();
-
-        foreach (explode(',', $sources) as $source) {
-            if ($event->has($source)) {
-                $response[$source] = json_decode($this('view')->render($event->get($source)));
-            }
-        }
-
-        return $this('response')->json($response);
-    }
-
 
     /**
      * @Route("/system/clearcache")
