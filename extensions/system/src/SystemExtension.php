@@ -279,7 +279,7 @@ class SystemExtension extends Extension
      */
     public function isAdmin()
     {
-        return (bool) $this('request')->attributes->get('_route_options')->get('admin', false);
+        return $this('isAdmin');
     }
 
     /**
