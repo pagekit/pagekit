@@ -73,7 +73,6 @@ class AccessListener extends EventSubscriber
 
         if ($admin) {
             $route->setPath(rtrim('admin'.$route->getPath(), '/'));
-            $route->setOption('admin', true);
             $access[] = 'system: access admin area';
         }
 

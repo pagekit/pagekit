@@ -17,6 +17,8 @@ class SystemListener extends EventSubscriber
             return;
         }
 
+        self::$app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+
         $dispatcher->dispatch('boot', new SystemInitEvent($this->getApplication()));
     }
 
@@ -28,8 +30,6 @@ class SystemListener extends EventSubscriber
         if (!$event->isMasterRequest()) {
             return;
         }
-
-        self::$app['isAdmin'] = (bool) $event->getRequest()->attributes->get('_route_options[admin]', false, true);
 
         $dispatcher->dispatch('init', new SystemInitEvent(self::$app));
         $dispatcher->dispatch($this('isAdmin') ? 'admin.init' : 'site.init', new SystemInitEvent(self::$app));
