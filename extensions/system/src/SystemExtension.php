@@ -21,10 +21,10 @@ use Pagekit\System\Event\AliasListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\DashboardInitEvent;
 use Pagekit\System\Event\FrontpageListener;
-use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\LocaleListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
+use Pagekit\System\Event\RegisterLinkEvent;
 use Pagekit\System\Event\RegisterTmplEvent;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Exception\ExceptionHandler;
@@ -33,7 +33,6 @@ use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\FinderHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
-use Pagekit\System\Link\LinkManager;
 use Pagekit\System\Templating\DateHelper as TemplatingDateHelper;
 use Pagekit\System\Templating\EditorHelper;
 use Pagekit\System\Templating\FinderHelper as TemplatingFinderHelper;
@@ -148,10 +147,6 @@ class SystemExtension extends Extension
             return $manager;
         };
 
-        $app['links'] = function() {
-            return new LinkManager;
-        };
-
         if (isset($app['profiler'])) {
             $app->before(function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
@@ -181,9 +176,6 @@ class SystemExtension extends Extension
             $app['widgets']->registerType(new LoginWidget);
             $app['widgets']->registerType(new MenuWidget);
             $app['widgets']->registerType(new TextWidget);
-
-            $app['links']->register('Pagekit\System\Link\Frontpage');
-            $app['links']->register('Pagekit\System\Link\Url');
 
             $app['events']->addSubscriber(new LinkPlugin);
             $app['events']->addSubscriber(new VideoPlugin);
@@ -241,13 +233,17 @@ class SystemExtension extends Extension
             $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
             $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');
             $event->register('finder.thumbnail', 'extension://system/assets/tmpl/finder.thumbnail.razr.php');
-            $event->register('link.types', 'extension://system/assets/tmpl/link.types.razr.php');
             $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
             $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
             $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
             $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
             $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
             $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
+        });
+
+        $app->on('link.register', function(RegisterLinkEvent $event) {
+            $event->register('Pagekit\System\Link\Frontpage');
+            $event->register('Pagekit\System\Link\Url');
         });
     }
 

@@ -1,10 +1,12 @@
 require(['linkpicker'], function(Picker) {
 
     // source
-    var $link = $('[name="item[url]"]'), $form = $link.closest('form'), $nolink = $('[data-msg="no-link"]', $form);
+    var $link = $('[name="item[url]"]'),
+        $form = $link.closest('form'),
+        $nolink = $('[data-msg="no-link"]', $form);
 
     // URL picker
-    new Picker($link);
+    new Picker($link, { context: 'system/menu' });
 
     $form.on('submit', function() {
         if (!$link.val()) {
@@ -14,5 +16,4 @@ require(['linkpicker'], function(Picker) {
     }).on('change', $link, function() {
         $nolink.addClass('uk-hidden');
     });
-
 });

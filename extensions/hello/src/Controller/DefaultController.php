@@ -10,8 +10,8 @@ use Pagekit\Framework\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
-     * @Route("/{name}")
+     * @Route("/", name="@hello/world")
+     * @Route("/{name}", name="@hello/name")
      * @View("hello/index.razr.php")
      */
     public function indexAction($name = 'World')

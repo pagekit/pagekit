@@ -1,71 +1,92 @@
-define(['jquery', 'tmpl!link.types'], function($, tmpl) {
+define(['jquery', 'require'], function($, req) {
 
-    var form  = $(tmpl.get('link.types')),
-        forms = $('[data-type]', form),
-        types = $('.js-types', form),
-        url   = $('.js-url', form),
-        edit  = $('.js-edit', form);
+    var deferreds = {}, data = {};
 
-    edit.on('update.linkpicker', function(e, params, link) {
-        link = link ? link : $('.js-types', form).val();
-
-        url.val(link + (params ? '?' + params : ''));
-    });
-
-    form.on('change', '.js-types' ,function() {
-
-        var type = $(this).val(),
-            form = forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
-
-            // hide edit form if empty
-            show = form.children(':not(script)').length > 0;
-        edit.toggleClass('uk-hidden', !show).toggle(show);
-
-        edit.trigger('load.linkpicker', [deparam(url.val().split('?')[1] + ''), url.val(), type]);
-    });
-
-    url.on('change', function() {
-
-        var types = $('.js-types', form), type = $(this).val().split('?')[0];
-
-        type = $('option[value="'+type+'"]', types).length ? type : '';
-
-        types.val(type).trigger('change');
-    });
-
-    var Link  = function(element, options) {
-
-        var $this = this;
+    var Link = function(element, options) {
 
         this.options = $.extend({}, Link.defaults, options);
+        this.element = $(element);
+        this.link    = false;
 
-        this.element = element;
+        var $this   = this,
+            context = this.options.context,
+            init    = [],
+            types   = {};
 
-        this.types = types.clone().find('option').each(function() {
-            if ($this.options.typeFilter && -1 !== $.inArray($(this).val(), $this.options.typeFilter)) {
-                $(this).remove();
-            }
-        }).end();
+        data[context] = data[context] || $.post(this.options.url, { context: context });
+
+        data[context].done(function(data) {
+
+            $this.element.html(data);
+
+            $this.types = $('.js-types', $this.element);
+
+            var $edit  = $('.js-edit', $this.element),
+                $forms = $edit.children('[data-type]');
+
+            $forms.each(function() {
+
+                var form = $(this),
+                    type = form.data('type');
+
+                if (-1 != $.inArray(type, $this.options.filter)) {
+                    $this.types.find('option[value="'+type+'"]').remove();
+                    return;
+                }
+
+                if (!deferreds[type]) {
+                    deferreds[type] = $.Deferred();
+                }
+
+                deferreds[type].done(function(func) {
+                    types[type] = func($this, form);
+                });
+
+                init.push(deferreds[type]);
+            });
+
+            $.when.apply($, init).done(function() {
+
+                $this.types.on('change', function() {
+
+                    var type = $(this).val(),
+                        form = $forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
+                        show = form.children(':not(script)').length > 0;
+
+                    $edit.toggleClass('uk-hidden', !show).toggle(show);
+
+                    types[type].show(deparam($this.link.split('?')[1] + ''), $this.link);
+                });
+
+                $this.set('', $this.options.value);
+            });
+        });
     };
 
     $.extend(Link.prototype, {
 
-        init: function(link) {
+        set: function(params, url) {
 
-            form.appendTo(this.element);
+            url = (url || this.types.val()) + (params ? '?' + params : '');
 
-            $('.js-types', form).replaceWith(this.types);
+            if (this.link === url) return;
 
-            url.val(link).trigger('change');
+            this.link = url;
+
+            var type = url.split('?')[0];
+            this.types.val($('option[value="'+type+'"]', this.types).length ? type : '').trigger('change');
         },
 
-        getValue: function() {
-            return url.val();
+        get: function() {
+            return this.link;
         }
+
     });
 
     Link.defaults = {
-        typeFilter: []
+        filter: [],
+        url   : req.toUrl('admin/system/link'),
+        value : ''
     };
 
     /*
@@ -117,5 +138,20 @@ define(['jquery', 'tmpl!link.types'], function($, tmpl) {
         return obj;
     }
 
-    return Link;
+    return {
+
+        attach: function(element, options) {
+            return new Link(element, options);
+        },
+
+        register: function(name, type) {
+
+            if (!deferreds[name]) {
+                deferreds[name] = $.Deferred();
+            }
+
+            deferreds[name].resolve(type);
+        }
+
+    };
 });

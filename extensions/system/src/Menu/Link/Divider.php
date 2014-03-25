@@ -1,15 +1,17 @@
 <?php
 
-namespace Pagekit\System\Link;
+namespace Pagekit\Menu\Link;
 
-class Frontpage extends Route
+use Pagekit\System\Link\Route;
+
+class Divider extends Route
 {
     /**
      * {@inheritdoc}
      */
     public function getRoute()
     {
-        return '@frontpage';
+        return '!divider';
     }
 
     /**
@@ -17,6 +19,6 @@ class Frontpage extends Route
      */
     public function getLabel()
     {
-        return __('Frontpage');
+        return __('Divider');
     }
 }

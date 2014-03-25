@@ -8,20 +8,24 @@
 
 <script>
 
-    (function($) {
+    require(['jquery', 'link'], function($, Link) {
 
-        var $edit = $('.js-edit'), $id = $('[name="id"]', $edit);
+        Link.register('@route', function(link, form) {
 
-        $edit.on('load.linkpicker', function(e, params, url, type) {
-            if (type !== '@route') return;
+            var $id = $('[name="id"]', form);
 
-            $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');
+                $id.on('change', function() {
+                    link.set($id.serialize());
+                });
+
+            return {
+                show: function(params, url) {
+                    $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val());
+                }
+            }
+
         });
 
-        $id.on('change', function() {
-            $edit.trigger('update.linkpicker', $id.serialize());
-        });
-
-    })(jQuery);
+    });
 
 </script>

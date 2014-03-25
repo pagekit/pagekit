@@ -12,7 +12,7 @@ class HelloLink extends ApplicationAware implements LinkInterface
      */
     public function getRoute()
     {
-        return '@hello/default/index_1';
+        return '@hello/name';
     }
 
     /**

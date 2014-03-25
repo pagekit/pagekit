@@ -4,21 +4,24 @@
 
 <script>
 
-    (function($) {
+    require(['jquery', 'link'], function($, Link) {
 
-        var $edit = $('.js-edit'), $name = $('[name="name"]', $edit);
+        Link.register('@route', function(link, form) {
 
-        $edit.on('load.linkpicker', function(e, params, url, type) {
+            var $name = $('[name="name"]', form)
 
-            if (type !== '@route') return;
+                .on('change', function() {
+                    link.set($name.serialize());
+                });
 
-            $name.val(params['name'] ? params['name'] : '').trigger('change');
+            return {
+                show: function(params, url) {
+                    $name.val(params['name'] ? params['name'] : '').trigger('change');
+                }
+            }
+
         });
 
-        $name.on('change', function() {
-            $edit.trigger('update.linkpicker', $name.serialize());
-        });
-
-    })(jQuery);
+    });
 
 </script>
