@@ -1,10 +1,7 @@
 //
-// Addon: Datepicker
+// Component: Datepicker
 //
 // ========================================================================
-
-@import "../../../../vendor/assets/uikit/less/addons/datepicker.less";
-@import "variables.less";
 
 
 // Variables
@@ -33,8 +30,12 @@
 @datepicker-hover-border:                       rgba(0,0,0,0.15);
 
 
-// Hooks
+// Component
 // ========================================================================
+
+.hook-datepicker-nav() {}
+
+.hook-datepicker-nav-item() {}
 
 .hook-datepicker-table-item() {
     border: 1px solid transparent;
@@ -49,3 +50,9 @@
 	border-color: transparent;
 	box-shadow: none;
 }
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-datepicker-misc() {}

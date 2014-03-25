@@ -1,10 +1,7 @@
 //
-// Addon: Sortable
+// Component: Sortable
 //
 // ========================================================================
-
-@import "../../../../vendor/assets/uikit/less/addons/sortable.less";
-@import "variables.less";
 
 
 // Variables
@@ -26,7 +23,7 @@
 @sortable-toggle-collapsed-icon:                "\f0da";
 
 
-// Hooks
+// Component
 // ========================================================================
 
 .hook-sortable() { margin: 0; }
@@ -58,8 +55,12 @@
 .hook-sortable-toggle() {}
 
 
-// Rules
+// Miscellaneous
 // ========================================================================
 
-.uk-sortable-item:hover,
-.uk-sortable-list-dragged .uk-sortable-item { background: @global-hover-background; }
+.hook-sortable-misc() {
+
+    .uk-sortable-item:hover,
+    .uk-sortable-list-dragged .uk-sortable-item { background: @global-hover-background; }
+
+}
