@@ -4,7 +4,7 @@ require(['linkpicker', 'uikit'], function(Picker, uikit) {
     var $source = $('[name="source"]'), $form = $source.closest('form'), $nosource = $('[data-msg="no-source"]', $form);
 
     // URL picker
-    new Picker($source, { typeFilter: ['@frontpage'] });
+    new Picker($source, { filter: ['@frontpage'] });
 
     $form.on('submit', function() {
         if (!$source.val()) {

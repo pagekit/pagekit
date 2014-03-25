@@ -3,15 +3,17 @@
 namespace Pagekit\Menu\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\System\Event\RegisterLinkEvent;
+use Pagekit\System\Event\SystemInitEvent;
 
 class MenuListener extends EventSubscriber
 {
     /**
-     * Sets the active menu items
+     * Sets the active menu items.
      *
-     * @param $event
+     * @param SystemInitEvent $event
      */
-    public function onSiteInit($event)
+    public function onSiteInit(SystemInitEvent $event)
     {
         $url   = $this('url');
         $attr  = $event->getRequest()->attributes;
@@ -37,12 +39,28 @@ class MenuListener extends EventSubscriber
     }
 
     /**
+     * Register link types for menu edit.
+     *
+     * @param RegisterLinkEvent $event
+     */
+    public function onRegisterLink(RegisterLinkEvent $event)
+    {
+        if (!$event->getContext() == 'system/menu') {
+            return;
+        }
+
+        $event->register('Pagekit\Menu\Link\Divider');
+        $event->register('Pagekit\Menu\Link\Header');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'site.init' => array('onSiteInit', 16)
+            'site.init' => array('onSiteInit', 16),
+            'link.register' => 'onRegisterLink'
         );
     }
 }

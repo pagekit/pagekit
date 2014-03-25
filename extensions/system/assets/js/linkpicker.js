@@ -4,24 +4,24 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
 
         options = $.extend({}, LinkPicker.defaults, options);
 
-        var modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
+        var source  = $(element),
+            modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
             picker  = new uikit.modal.Modal(modal),
-            link    = new Link(modal.find('.js-linkpicker'), { typeFilter: options.typeFilter }),
-            source  = $(element),
-            trigger = $(tmpl.get('linkpicker.replace')).insertBefore(source);
+            trigger = $(tmpl.get('linkpicker.replace')).insertBefore(source),
+            link;
 
         modal.on('submit', 'form', function (e) {
             e.preventDefault();
 
             picker.hide();
-            source.val(link.getValue()).trigger('change');
+            source.val(link.get()).trigger('change');
         });
 
         trigger.on('click', function (e) {
             e.preventDefault();
 
+            link = Link.attach(modal.find('.js-linkpicker'), { filter: options.filter, context: options.context, value: source.val() })
             picker.show();
-            link.init(source.val());
         });
 
         source
@@ -52,8 +52,9 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
     };
 
     LinkPicker.defaults = {
-        url       : req.toUrl('admin/system/resolveurl'),
-        typeFilter: []
+        url    : req.toUrl('admin/system/link/resolveurl'),
+        filter : [],
+        context: ''
     };
 
     return LinkPicker;

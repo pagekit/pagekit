@@ -6,7 +6,7 @@ use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Pagekit\Framework\Event\EventDispatcher;
 use Symfony\Component\Translation\Translator;
 
 class Extension extends ApplicationAware
@@ -50,6 +50,7 @@ class Extension extends ApplicationAware
      */
     public function boot(Application $app)
     {
+        $this->registerEvents($app['events']);
         $this->registerControllers($app['router']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator'], $app['events']);
@@ -83,6 +84,7 @@ class Extension extends ApplicationAware
         if (null === $key) {
             return $this->config;
         }
+
         $array = $this->config;
 
         if (isset($array[$key])) {
@@ -102,6 +104,20 @@ class Extension extends ApplicationAware
     }
 
     /**
+     * Registers events.
+     *
+     * @param EventDispatcher $dispatcher
+     */
+    public function registerEvents(EventDispatcher $dispatcher)
+    {
+        if (isset($this->config['events'])) {
+            foreach ($this->config['events'] as $event => $listener) {
+                $dispatcher->addListener($event, $listener);
+            }
+        }
+    }
+
+    /**
      * Finds and registers controllers.
      *
      * Override this method if your extension controllers do not follow the conventions:
@@ -113,8 +129,8 @@ class Extension extends ApplicationAware
      */
     public function registerControllers(Router $router)
     {
-        if ($config = $this->getConfig() and isset($config['controllers'])) {
-            $controllers = (array) $config['controllers'];
+        if (isset($this->config['controllers'])) {
+            $controllers = (array) $this->config['controllers'];
             foreach ($controllers as $controller) {
                 foreach (glob($this->getPath().'/'.ltrim($controller, '/')) as $file) {
 
@@ -158,12 +174,13 @@ class Extension extends ApplicationAware
     /**
      * Finds and adds extension's resources.
      *
-     * @param ResourceLocator          $locator
-     * @param EventDispatcherInterface $dispatcher
+     * @param ResourceLocator $locator
+     * @param EventDispatcher $dispatcher
      */
-    public function registerResources(ResourceLocator $locator, EventDispatcherInterface $dispatcher)
+    public function registerResources(ResourceLocator $locator, EventDispatcher $dispatcher)
     {
         $root = $this->getPath();
+
         $addResources = function($config, $prefix = '') use ($root, $locator) {
             foreach ($config as $scheme => $resources) {
 

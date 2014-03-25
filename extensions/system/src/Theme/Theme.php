@@ -4,6 +4,7 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
+use Pagekit\Framework\Event\EventDispatcher;
 use Symfony\Component\Translation\Translator;
 
 class Theme
@@ -47,9 +48,9 @@ class Theme
      */
     public function boot(Application $app)
     {
+        $this->registerEvents($app['events']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
-        return $this;
     }
 
     /**
@@ -114,6 +115,20 @@ class Theme
     }
 
     /**
+     * Registers events.
+     *
+     * @param EventDispatcher $dispatcher
+     */
+    public function registerEvents(EventDispatcher $dispatcher)
+    {
+        if (isset($this->config['events'])) {
+            foreach ($this->config['events'] as $event => $listener) {
+                $dispatcher->addListener($event, $listener);
+            }
+        }
+    }
+
+    /**
      * Finds and registers languages.
      *
      * Override this method if your theme does not follow the conventions:
@@ -150,6 +165,7 @@ class Theme
     public function registerResources(ResourceLocator $locator)
     {
         $root = $this->getPath();
+
         $addResources = function($config, $prefix = '') use ($root, $locator) {
             foreach ($config as $scheme => $resources) {
 

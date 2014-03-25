@@ -70,20 +70,6 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/resolveurl")
-     * @Access(admin=true)
-     * @Request({"url"})
-     */
-    public function resolveUrlAction($url)
-    {
-        $url = $this('system.info')->resolveURL($url);
-
-        $url = $url !== '' ? $url : __('Frontpage');
-
-        return $this('response')->json(false !== $url ? compact('url') : array('error' => true, 'message' => __('Invalid URL.')));
-    }
-
-    /**
      * @Route("/system/locale")
      */
     public function localeAction()

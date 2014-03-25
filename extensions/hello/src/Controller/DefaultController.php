@@ -10,13 +10,13 @@ use Pagekit\Framework\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
-     * @Route("/{names}")
+     * @Route("/", name="@hello/world")
+     * @Route("/{name}", name="@hello/name")
      * @View("hello/index.razr.php")
      */
-    public function indexAction($names = 'World')
+    public function indexAction($name = 'World')
     {
-        $names = explode(",", $names);
+        $names = explode(",", $name);
         return array('head.title' => __('Hello %name%', array('%names%' => $names[0])), 'names' => $names);
     }
 
