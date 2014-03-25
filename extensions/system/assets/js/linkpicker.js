@@ -32,13 +32,14 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
                 }
 
                 var resolved = '';
-                $.post(options.url, { url: source.val() },function (data) {
+                $.post(options.url, { link: source.val(), context: options.context },function (data) {
 
                     if (data.error) {
                         source.val('');
                     } else if (data.url) {
                         resolved = data.url;
                     }
+
                 }, 'json').fail(function () {
                     source.val('');
                 }).always(function () {
@@ -52,7 +53,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
     };
 
     LinkPicker.defaults = {
-        url    : req.toUrl('admin/system/link/resolveurl'),
+        url    : req.toUrl('admin/system/link/resolve'),
         filter : [],
         context: ''
     };

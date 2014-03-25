@@ -20,7 +20,7 @@
 
             return {
                 show: function(params, url) {
-                    $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val());
+                    $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val()).trigger('change');
                 }
             }
 
