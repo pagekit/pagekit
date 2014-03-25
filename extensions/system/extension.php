@@ -159,7 +159,7 @@ return array(
             'longmonths'  => array(__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December'))
         );
 
-        $event->addLocale('date', $date);
+        $event->addMessages($date, 'date');
     }
 
 );

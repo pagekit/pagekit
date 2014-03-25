@@ -9,35 +9,35 @@ class LocaleEvent extends Event
     /**
      * @var array
      */
-    protected $locale;
+    protected $messages;
 
     /**
      * @return array
      */
-    public function getLocale()
+    public function getMessages()
     {
-        return $this->locale;
+        return $this->messages;
     }
 
     /**
-     * @param string $namespace
      * @param array
+     * @param string $domain
      */
-    public function setLocale($namespace, array $values)
+    public function setMessages(array $messages, $domain = 'messages')
     {
-        $this->locale[$namespace] = $values;
+        $this->messages[$domain] = $messages;
     }
 
     /**
-     * @param string $namespace
      * @param array
+     * @param string $domain
      */
-    public function addLocale($namespace, array $values)
+    public function addMessages(array $messages, $domain = 'messages')
     {
-        if (isset($this->locale[$namespace])) {
-            $values = array_merge($this->locale[$namespace], $values);
+        if (isset($this->messages[$domain])) {
+            $messages = array_merge($this->messages[$domain], $messages);
         }
 
-        $this->locale[$namespace] = $values;
+        $this->messages[$domain] = $messages;
     }
 }

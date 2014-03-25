@@ -90,7 +90,7 @@ class SystemController extends Controller
     {
         $this('events')->trigger('system.locale', $event = new LocaleEvent);
 
-        return $this('response')->json($event->getLocale());
+        return $this('response')->json($event->getMessages());
     }
 
     /**
