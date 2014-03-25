@@ -17,7 +17,7 @@ class DefaultController extends Controller
     public function indexAction($name = 'World')
     {
         $names = explode(",", $name);
-        return array('head.title' => __('Hello %name%', array('%names%' => $names[0])), 'names' => $names);
+        return array('head.title' => __('Hello %name%', array('%name%' => $names[0])), 'names' => $names);
     }
 
     /**
