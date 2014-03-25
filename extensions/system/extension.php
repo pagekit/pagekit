@@ -150,7 +150,7 @@ return array(
             $scripts->register('requirejs', 'vendor://assets/requirejs/require.min.js', array('requirejs-config'));
             $scripts->register('requirejs-config', 'asset://system/js/require.js');
             $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', array(), array('requirejs' => true));
-            $scripts->register('uikit-notify', 'vendor://assets/uikit/addons/notify/notify.js', array(), array('requirejs' => true));
+            $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', array(), array('requirejs' => true));
 
         }
 
