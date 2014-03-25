@@ -4,8 +4,8 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
-use Pagekit\Framework\Event\EventDispatcher;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Theme
 {
@@ -117,9 +117,9 @@ class Theme
     /**
      * Registers events.
      *
-     * @param EventDispatcher $dispatcher
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function registerEvents(EventDispatcher $dispatcher)
+    public function registerEvents(EventDispatcherInterface $dispatcher)
     {
         if (isset($this->config['events'])) {
             foreach ($this->config['events'] as $event => $listener) {

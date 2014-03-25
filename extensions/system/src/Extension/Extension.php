@@ -6,8 +6,8 @@ use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;
-use Pagekit\Framework\Event\EventDispatcher;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Extension extends ApplicationAware
 {
@@ -106,9 +106,9 @@ class Extension extends ApplicationAware
     /**
      * Registers events.
      *
-     * @param EventDispatcher $dispatcher
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function registerEvents(EventDispatcher $dispatcher)
+    public function registerEvents(EventDispatcherInterface $dispatcher)
     {
         if (isset($this->config['events'])) {
             foreach ($this->config['events'] as $event => $listener) {
@@ -174,10 +174,10 @@ class Extension extends ApplicationAware
     /**
      * Finds and adds extension's resources.
      *
-     * @param ResourceLocator $locator
-     * @param EventDispatcher $dispatcher
+     * @param ResourceLocator          $locator
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function registerResources(ResourceLocator $locator, EventDispatcher $dispatcher)
+    public function registerResources(ResourceLocator $locator, EventDispatcherInterface $dispatcher)
     {
         $root = $this->getPath();
 
