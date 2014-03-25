@@ -217,10 +217,6 @@ class SystemExtension extends Extension
             });
         });
 
-        $app->on('admin.menu', $config['menu']);
-        $app->on('admin.permission', $config['permissions']);
-        $app->on('system.locale', $config['locale']);
-
         $app->on('system.dashboard.init', function(DashboardInitEvent $event) {
             $event->registerType(new FeedWidget);
             $event->registerType(new UserWidget);

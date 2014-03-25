@@ -21,33 +21,37 @@ return array(
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'menu' => function($event) {
+    'events' => array(
 
-        $items = array(
+        'link.register' => function($event) {
+            $event->register('Pagekit\Page\PageLink');
+        },
 
-            'page' => array(
-                'label'  => 'Pages',
-                'url'    => '@page/page/index',
-                'active' => '/admin/page*',
-                'access' => 'page: manage pages'
-            )
+        'admin.menu' => function($event) {
 
-        );
+            $event->addItems(array(
 
-        $event->addItems($items);
-    },
+                'page' => array(
+                    'label'  => __('Pages'),
+                    'url'    => '@page/page/index',
+                    'active' => '/admin/page*',
+                    'access' => 'page: manage pages'
+                )
 
-    'permissions' => function($event) {
+            ));
+        },
 
-        $permissions = array(
+        'admin.permission' => function($event) {
 
-            'page: manage pages' => array(
-                'title' => 'Manage pages'
-            )
+            $event->setPermissions('page', array(
 
-        );
+                'page: manage pages' => array(
+                    'title' => __('Manage pages')
+                )
 
-        $event->setPermissions('page', $permissions);
-    }
+            ));
+        }
+
+    )
 
 );

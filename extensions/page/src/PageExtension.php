@@ -17,12 +17,5 @@ class PageExtension extends Extension
         $app['events']->addSubscriber(new RouteListener);
 
         parent::boot($app);
-
-        $app->on('link.register', function(RegisterLinkEvent $event) {
-            $event->register('Pagekit\Page\PageLink');
-        });
-
-        $app->on('admin.menu', $this->config['menu']);
-        $app->on('admin.permission', $this->config['permissions']);
     }
 }

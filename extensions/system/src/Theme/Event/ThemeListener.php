@@ -13,14 +13,14 @@ class ThemeListener extends EventSubscriber
     {
         try {
 
-            self::$app['theme.admin'] = $this('themes')->load('system', 'extension://system/theme');
-            self::$app['theme.site']  = $this('themes')->load($this('config')->get('theme.site'));
+            $app = self::$app;
+            $app['theme.admin'] = $app['themes']->load('system', 'extension://system/theme');
+            $app['theme.site']  = $app['themes']->load($app['config']->get('theme.site'));
 
-            if ($this('isAdmin')) {
-                $this('view')->setLayout($this('theme.admin')->boot(self::$app)->getLayout());
-            } else {
-                $this('view')->setLayout($this('theme.site')->boot(self::$app)->getLayout());
-            }
+            $theme = $app['isAdmin'] ? $app['theme.admin'] : $app['theme.site'];
+            $theme->boot($app);
+
+            $app['view']->setLayout($theme->getLayout());
 
         } catch (\Exception $e) {}
     }
