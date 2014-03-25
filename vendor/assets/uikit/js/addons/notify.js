@@ -1,10 +1,10 @@
-/*! UIkit 2.4.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.5.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(addon) {
 
     if (typeof define == "function" && define.amd) { // AMD
         define("uikit-notify", ["uikit"], function(){
-            return jQuery.UIkit.notify ? jQuery.UIkit.notify : addon(window, window.jQuery, window.jQuery.UIkit);
+            return jQuery.UIkit.notify || addon(window, window.jQuery, window.jQuery.UIkit);
         });
     }
 

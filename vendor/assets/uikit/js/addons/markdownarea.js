@@ -1,10 +1,10 @@
-/*! UIkit 2.4.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.5.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(addon) {
 
     if (typeof define == "function" && define.amd) { // AMD
         define("uikit-markdownarea", ["uikit"], function(){
-            return jQuery.UIkit.markdownarea ? jQuery.UIkit.markdownarea : addon(window, window.jQuery, window.jQuery.UIkit);
+            return jQuery.UIkit.markdownarea || addon(window, window.jQuery, window.jQuery.UIkit);
         });
     }
 
@@ -29,10 +29,10 @@
         this.marked.setOptions({
           gfm: true,
           tables: true,
-          breaks: false,
+          breaks: true,
           pedantic: false,
           sanitize: false,
-          smartLists: false,
+          smartLists: true,
           smartypants: false,
           langPrefix: 'lang-'
         });

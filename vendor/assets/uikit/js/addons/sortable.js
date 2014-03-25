@@ -1,4 +1,4 @@
-/*! UIkit 2.4.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.5.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 /*
  * Based on Nestable jQuery Plugin - Copyright (c) 2012 David Bushell - http://dbushell.com/
@@ -7,7 +7,7 @@
 
      if (typeof define == "function" && define.amd) { // AMD
          define("uikit-sortable", ["uikit"], function(){
-            return jQuery.fn.uksortable ? jQuery.fn.uksortable : addon(window.jQuery, jQuery.UIkit, window, document);
+            return jQuery.fn.uksortable || addon(window.jQuery, jQuery.UIkit, window, document);
          });
      }
 
