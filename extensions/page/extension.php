@@ -21,23 +21,33 @@ return array(
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'menu' => array(
+    'menu' => function($event) {
 
-        'page' => array(
-            'label'  => 'Pages',
-            'url'    => '@page/page/index',
-            'active' => '/admin/page*',
-            'access' => 'page: manage pages'
-        )
+        $items = array(
 
-    ),
+            'page' => array(
+                'label'  => 'Pages',
+                'url'    => '@page/page/index',
+                'active' => '/admin/page*',
+                'access' => 'page: manage pages'
+            )
 
-    'permissions' => array(
+        );
 
-        'page: manage pages' => array(
-            'title' => 'Manage pages'
-        )
+        $event->addItems($items);
+    },
 
-    )
+    'permissions' => function($event) {
+
+        $permissions = array(
+
+            'page: manage pages' => array(
+                'title' => 'Manage pages'
+            )
+
+        );
+
+        $event->setPermissions('page', $permissions);
+    }
 
 );

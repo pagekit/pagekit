@@ -41,7 +41,7 @@
 
             <select class="uk-form-width-medium" name="filter[permission]">
                 <option value="">@trans('- Permission -')</option>
-                @foreach (app.permissions as ext => permission)
+                @foreach (permissions as ext => permission)
                 <optgroup label="@ext">
                     @foreach (permission as id => perm)
                     <option value="@id"@( filter['permission'] == id ? ' selected' )>@trans(perm['title'])</option>

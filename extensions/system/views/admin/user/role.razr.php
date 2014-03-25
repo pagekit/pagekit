@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (app.permissions as extension => permission)
+                        @foreach (permissions as extension => permission)
                         <tr>
                             <th colspan="2">@app.extensions.repository.findPackage(extension).title</th>
                         </tr>

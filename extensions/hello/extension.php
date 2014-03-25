@@ -19,19 +19,24 @@ return array(
 
     ),
 
-    'menu' => array(
-
-        'hello' => array(
-            'label'  => 'Hello',
-            'url'    => '@hello/hello/index',
-            'active' => '/admin/hello*',
-            'access' => 'hello: manage hellos'
-        )
-
-    ),
-
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => '@hello/hello/settings'
+    'settings' => '@hello/hello/settings',
+
+    'menu' => function($event) {
+
+        $items = array(
+
+            'hello' => array(
+                'label'  => __('Hello'),
+                'url'    => '@hello/hello/index',
+                'active' => '/admin/hello*',
+                'access' => 'hello: manage hellos'
+            )
+
+        );
+
+        $event->addItems($items);
+    }
 
 );

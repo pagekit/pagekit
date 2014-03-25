@@ -18,5 +18,7 @@ class HelloExtension extends Extension
             $app['widgets']->registerType('Pagekit\Hello\HelloWidget');
             $app['links']->register('Pagekit\Hello\HelloLink');
         });
+
+        $app->on('admin.menu', $this->config['menu']);
     }
 }

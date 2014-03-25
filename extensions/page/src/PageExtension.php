@@ -20,5 +20,8 @@ class PageExtension extends Extension
         $app->on('init', function() use ($app) {
             $app['links']->register('Pagekit\Page\PageLink');
         });
+
+        $app->on('admin.menu', $this->config['menu']);
+        $app->on('admin.permission', $this->config['permissions']);
     }
 }

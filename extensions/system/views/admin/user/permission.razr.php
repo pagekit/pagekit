@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (app.permissions as extension => permission)
+                @foreach (permissions as extension => permission)
                 <tr id="ext-@extension">
                     <th class="pk-table-min-width-200">@app.extensions.repository.findPackage(extension).title</th>
                     @foreach (roles as role)

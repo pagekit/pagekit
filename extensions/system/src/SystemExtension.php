@@ -116,19 +116,6 @@ class SystemExtension extends Extension
             return new PositionManager($app['view'], $app['widgets']);
         };
 
-        $app['permissions'] = function($app) {
-
-            $permissions = array();
-
-            foreach ($app['extensions'] as $extension) {
-                if ($config = $extension->getConfig('permissions')) {
-                    $permissions[$extension->getName()] = $config;
-                }
-            }
-
-            return $permissions;
-        };
-
         $app['languages'] = function() {
             return new LanguageHelper;
         };
@@ -238,6 +225,8 @@ class SystemExtension extends Extension
             });
         });
 
+        $app->on('admin.menu', $config['menu']);
+        $app->on('admin.permission', $config['permissions']);
         $app->on('system.locale', $config['locale']);
 
         $app->on('system.dashboard.init', function(DashboardInitEvent $event) {
