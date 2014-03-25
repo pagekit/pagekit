@@ -254,16 +254,6 @@ class SystemExtension extends Extension
     }
 
     /**
-     * Check if the administration area is currently active.
-     *
-     * return bool
-     */
-    public function isAdmin()
-    {
-        return $this('isAdmin');
-    }
-
-    /**
      * Clear cache on kernel terminate event.
      */
     public function clearCache(array $options = array())
