@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit) {
 
     var api = 'http://api.openweathermap.org/data/2.5', storage = sessionStorage || {};
 
@@ -69,42 +69,23 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     // widget settings
 
-    var input = $('#form-weather-location'), dropdown, list;
+    var autocomplete = new uikit.autocomplete($('#form-weather-location').parent(), {
 
-    input.on('keyup', uikit.Utils.debounce(function() {
+        'source': function(release) {
 
-        $.getJSON(api + '/find?callback=?', { q: input.val(), type: 'like' }, function(data) {
-            if (data.cod == 200) {
-                showDropdown(data);
-            }
-        });
-
-    }, 250));
-
-    function showDropdown(data) {
-
-        if (!dropdown) {
-
-            dropdown = $('<div class="uk-dropdown uk-dropdown-search"><ul class="uk-nav uk-nav-search"></ul></div>').appendTo('body').hide();
-
-            list = $('.uk-nav-search', dropdown).on('click', 'li', function() {
-                input.val($('a', this).text()).next().val($(this).data('id'));
-                dropdown.hide();
+            $.getJSON(api + '/find?callback=?', { q: this.input.val(), type: 'like' }, function(data) {
+                if (data.cod == 200) {
+                    release(data.list);
+                } else {
+                    release([]);
+                }
             });
+        },
+        template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
+    });
 
-            $('body').on('click', function() {
-                dropdown.hide();
-            });
-
-        }
-
-        list.empty();
-
-        $.each(data.list, function(key, value) {
-            list.append('<li data-id="' + value.id + '"><a>' + value.name + ', ' + value.sys.country + '</a></li>');
-        });
-
-        dropdown.css({ top: input.offset().top + input.outerHeight(), left: input.offset().left}).show();
-    }
+    autocomplete.element.on('autocomplete-select', function(e, data){
+        autocomplete.input.next().val(data.id);
+    });
 
 });

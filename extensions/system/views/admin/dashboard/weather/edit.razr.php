@@ -3,8 +3,10 @@
 <div class="uk-form-row">
     <label for="form-weather-location" class="uk-form-label">@trans('Location')</label>
     <div class="uk-form-controls">
-        <input id="form-weather-location" class="uk-form-width-large" type="search" name="widget[location]" value="@widget.get('location')" autocomplete="off">
-        <input type="hidden" name="widget[id]" value="@widget.get('id')">
+        <div class="uk-autocomplete">
+            <input id="form-weather-location" class="uk-form-width-large" type="search" name="widget[location]" value="@widget.get('location')" autocomplete="off">
+            <input type="hidden" name="widget[id]" value="@widget.get('id')">
+        </div>
         <p class="uk-form-help-block">@trans('Enter the name of the city you want to get weather information for.')</p>
     </div>
 </div>
