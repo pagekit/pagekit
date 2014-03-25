@@ -1,3 +1,7 @@
 @style('hello-site', 'hello/css/hello.css')
 
-Hello @name!
+@foreach(names as name)
+<p>
+    Hello @name!
+</p>
+@endforeach
