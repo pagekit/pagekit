@@ -1,5 +1,9 @@
 <?php
 
+$app->on('boot', function() use ($app) {
+    $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
+});
+
 return array(
 
     'positions' => array(
@@ -30,12 +34,6 @@ return array(
     'settings' => '@alpha/settings/index',
 
     'events' => array(
-
-        'boot' => function() use ($app) {
-
-            $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
-
-        },
 
         'site.init' => function() use ($app) {
 

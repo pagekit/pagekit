@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 class SystemListener extends EventSubscriber
 {
     /**
-     * Dispatches boot event.
+     * Sets admin based on the current path info.
      */
     public function onEarlyKernelRequest(GetResponseEvent $event, $name, $dispatcher)
     {
@@ -18,6 +18,16 @@ class SystemListener extends EventSubscriber
         }
 
         self::$app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+    }
+
+    /**
+     * Dispatches boot event.
+     */
+    public function onBootKernelRequest(GetResponseEvent $event, $name, $dispatcher)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
 
         $dispatcher->dispatch('boot', new SystemInitEvent($this->getApplication()));
     }
@@ -25,7 +35,7 @@ class SystemListener extends EventSubscriber
     /**
      * Dispatches initialize events.
      */
-    public function onKernelRequest(GetResponseEvent $event, $name, $dispatcher)
+    public function onInitKernelRequest(GetResponseEvent $event, $name, $dispatcher)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -59,8 +69,9 @@ class SystemListener extends EventSubscriber
     {
         return array(
             'kernel.request' => array(
-                array('onEarlyKernelRequest', 64),
-                array('onKernelRequest', 30)
+                array('onEarlyKernelRequest', 256),
+                array('onBootKernelRequest', 64),
+                array('onInitKernelRequest', 30)
             ),
             'extension.load_failure' => 'onExtensionLoadException'
         );
