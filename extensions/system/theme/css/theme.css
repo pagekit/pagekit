@@ -7106,8 +7106,8 @@ a.uk-datepicker-table-muted {
  */
 .uk-notify {
   position: fixed;
-  top: 30px;
-  left: 30px;
+  top: 50px;
+  left: 50px;
   z-index: 980;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -7118,7 +7118,7 @@ a.uk-datepicker-table-muted {
 .uk-notify-top-right,
 .uk-notify-bottom-right {
   left: auto;
-  right: 30px;
+  right: 50px;
 }
 .uk-notify-top-center,
 .uk-notify-bottom-center {
@@ -7129,7 +7129,7 @@ a.uk-datepicker-table-muted {
 .uk-notify-bottom-right,
 .uk-notify-bottom-center {
   top: auto;
-  bottom: 30px;
+  bottom: 50px;
 }
 /* Responsiveness
 ========================================================================== */
