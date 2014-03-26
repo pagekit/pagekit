@@ -4,12 +4,10 @@
         {{ #writable }}
         <button class="uk-button uk-button-primary" data-cmd="createFolder">@trans('New Folder')</button>
 
-
         <button class="uk-button uk-form-file">
             @trans('Upload')
             <input type="file" name="files[]" multiple="multiple">
         </button>
-
 
         <button class="uk-button uk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
         {{ /writable }}

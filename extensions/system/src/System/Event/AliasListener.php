@@ -11,7 +11,7 @@ class AliasListener extends EventSubscriber
     /**
      * Handles alias mapping.
      */
-    public function onBoot()
+    public function onInit()
     {
         $manager = $this('router')->getUrlAliases();
 
@@ -21,7 +21,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias) {
-            $manager->register($alias->getAlias(), $this('url')->route($alias->getSource()));
+            $manager->register($alias->getAlias(), $this('url')->route($alias->getSource(), array(), 'base'));
         }
     }
 
@@ -39,7 +39,7 @@ class AliasListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'boot'                    => array('onBoot', 8),
+            'init'                    => array('onInit', 8),
             'system.alias.postSave'   => 'clearCache',
             'system.alias.postDelete' => 'clearCache'
         );

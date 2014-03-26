@@ -22,9 +22,9 @@
                 @set (link = url.route(item.url, [], 'base'))
 
                 @if (link == '!divider')
-                <span class="">@trans('Divider')</span>
+                @trans('Divider')
                 @elseif (link == '!menu-header')
-                <span class="">@trans('Menu Header')</span>
+                @trans('Menu Header')
                 @else
                 <a href="@url.route(item.url)" target="_blank">@(link ?: '/')</a>
                 @endif
