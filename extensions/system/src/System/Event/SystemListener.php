@@ -20,6 +20,7 @@ use Pagekit\System\Widget\MenuWidget;
 use Pagekit\System\Widget\TextWidget;
 use Pagekit\User\Auth\UserProvider;
 use Pagekit\User\Event\UserListener;
+use Pagekit\User\Event\PermissionEvent;
 use Razr\SimpleFilter;
 use Razr\SimpleFunction;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -67,50 +68,6 @@ class SystemListener extends EventSubscriber
 
         $this('option')->set('system:extensions', $extensions);
     }
-
-    /**
-     * Registers dashboard widgets.
-     *
-     * @param DashboardEvent $event
-     */
-    public function onSystemDashboard(DashboardEvent $event)
-    {
-        $event->registerType(new FeedWidget);
-        $event->registerType(new UserWidget);
-        $event->registerType(new WeatherWidget);
-    }
-
-    /**
-     * Registers links.
-     *
-     * @param LinkEvent $event
-     */
-    public function onSystemLink(LinkEvent $event)
-    {
-        $event->register('Pagekit\System\Link\Frontpage');
-        $event->register('Pagekit\System\Link\Url');
-    }
-
-    /**
-     * Registers links.
-     *
-     * @param TmplEvent $event
-     */
-    public function onSystemTmpl(TmplEvent $event)
-    {
-        $event->register('feed.error', 'extension://system/assets/tmpl/feed.error.razr.php');
-        $event->register('feed.list', 'extension://system/assets/tmpl/feed.list.razr.php');
-        $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
-        $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');
-        $event->register('finder.thumbnail', 'extension://system/assets/tmpl/finder.thumbnail.razr.php');
-        $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
-        $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
-        $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
-        $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
-        $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
-        $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
-    }
-
 
     /**
      * Initialize system.
@@ -184,6 +141,125 @@ class SystemListener extends EventSubscriber
     }
 
     /**
+     * Registers dashboard widgets.
+     *
+     * @param DashboardEvent $event
+     */
+    public function onSystemDashboard(DashboardEvent $event)
+    {
+        $event->registerType(new FeedWidget);
+        $event->registerType(new UserWidget);
+        $event->registerType(new WeatherWidget);
+    }
+
+    /**
+     * Registers locales.
+     *
+     * @param LocaleEvent $event
+     */
+    public function onSystemLocale(LocaleEvent $event)
+    {
+        $event->addMessages(array(
+
+            'short'       => __('DATE_SHORT'),
+            'medium'      => __('DATE_MEDIUM'),
+            'long'        => __('DATE_LONG'),
+            'full'        => __('DATE_FULL'),
+            'shortdays'   => array(__('Mon'), __('Tue'), __('Wed'), __('Thu'), __('Fri'), __('Sat'), __('Sun')),
+            'longdays'    => array(__('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday'), __('Saturday'), __('Sunday')),
+            'shortmonths' => array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')),
+            'longmonths'  => array(__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December'))
+
+        ), 'date');
+    }
+
+    /**
+     * Registers links.
+     *
+     * @param LinkEvent $event
+     */
+    public function onSystemLink(LinkEvent $event)
+    {
+        $event->register('Pagekit\System\Link\Frontpage');
+        $event->register('Pagekit\System\Link\Url');
+    }
+
+    /**
+     * Registers templates.
+     *
+     * @param TmplEvent $event
+     */
+    public function onSystemTmpl(TmplEvent $event)
+    {
+        $event->register('feed.error', 'extension://system/assets/tmpl/feed.error.razr.php');
+        $event->register('feed.list', 'extension://system/assets/tmpl/feed.list.razr.php');
+        $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
+        $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');
+        $event->register('finder.thumbnail', 'extension://system/assets/tmpl/finder.thumbnail.razr.php');
+        $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
+        $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
+        $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
+        $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
+        $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
+        $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
+    }
+
+    /**
+     * Registers permissions.
+     *
+     * @param PermissionEvent $event
+     */
+    public function onSystemPermission(PermissionEvent $event)
+    {
+        $event->setPermissions('system', array(
+
+            'system: manage menus' => array(
+                'title' => __('Manage menus')
+            ),
+            'system: manage widgets' => array(
+                'title' => __('Manage widgets')
+            ),
+            'system: manage themes' => array(
+                'title' => __('Manage themes')
+            ),
+            'system: manage extensions' => array(
+                'title' => __('Manage extensions')
+            ),
+            'system: manage url aliases' => array(
+                'title' => __('Manage url aliases')
+            ),
+            'system: manage users' => array(
+                'title' => __('Manage users'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: manage user permissions' => array(
+                'title' => __('Manage user permissions'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: access admin area' => array(
+                'title' => __('Access admin area'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: access settings' => array(
+                'title' => __('Access system settings'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: software updates' => array(
+                'title' => __('Apply system updates'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: manage storage' => array(
+                'title' => __('Manage storage'),
+                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
+            ),
+            'system: maintenance access' => array(
+                'title' => __('Use the site in maintenance mode')
+            )
+
+        ));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -193,11 +269,13 @@ class SystemListener extends EventSubscriber
                 array('onEarlyKernelRequest', 256),
                 array('onInitKernelRequest', 64)
             ),
-            'extension.load_failure' => 'onExtensionLoadException',
-            'system.dashboard'       => 'onSystemDashboard',
+            'init'                   => 'onInit',
             'system.link'            => 'onSystemLink',
             'system.tmpl'            => 'onSystemTmpl',
-            'init'                   => 'onInit'
+            'system.locale'          => 'onSystemLocale',
+            'system.permission'      => 'onSystemPermission',
+            'system.dashboard'       => 'onSystemDashboard',
+            'extension.load_failure' => 'onExtensionLoadException'
         );
     }
 }
