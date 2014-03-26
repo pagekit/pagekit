@@ -4,8 +4,16 @@
 
 @foreach (root.children as item)
 
-    <li class="@(item.attribute('active') ? 'uk-active' )@( item.hasChildren() ? ' uk-parent')"@( item.hasChildren() && root.depth == 0 ? ' data-uk-dropdown' )>
+    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), parent = item.hasChildren())
+
+    <li@(active || header || divider || parent ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')~(parent ? ' uk-parent'))|trim)~'"')@(item.hasChildren() && root.depth == 0 ? ' data-uk-dropdown')>
+
+        @if (header)
+        @item.item.name
+        @elseif (!divider)
         <a href="@url.route(item.url)">@item</a>
+        @endif
+    
         @if (item.hasChildren())
         @if (root.depth == 0)
         <div class="uk-dropdown uk-dropdown-navbar">

@@ -4,9 +4,7 @@
 
 @foreach (root.children as item)
 
-    @set (divider = item.url == '!divider')
-    @set (header  = item.url == '!menu-header')
-    @set (active  = item.attribute('active'))
+    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'))
 
     <li@block('itemAttributes')@(active || header || divider ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider'))|trim)~'"')@endblock>
 
