@@ -82,7 +82,29 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             })
             .on('keyup', this.filter, uikit.Utils.debounce(function() {
                 $this.applyFilter();
-            }, 50));
+            }, 50))
+
+            // drag drop files to finder
+            .on("drop", function(e){
+
+                if (e.dataTransfer && e.dataTransfer.files) {
+
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    uikit.Utils.xhrupload(e.dataTransfer.files, uploadsettings);
+                }
+
+            }).on("dragenter", function(e){
+                e.stopPropagation();
+                e.preventDefault();
+            }).on("dragover", function(e){
+                e.stopPropagation();
+                e.preventDefault();
+            }).on("dragleave", function(e){
+                e.stopPropagation();
+                e.preventDefault();
+            });
 
         this.switchView(this.view);
         this.loadPath(this.path);
