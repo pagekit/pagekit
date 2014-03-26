@@ -4,10 +4,17 @@
 
 @foreach (root.children as item)
 
-    <li class="@(item.attribute('active') ? 'uk-active')@(item.hasChildren() ? ' uk-parent')">
-        <a href="@url.route(item.url)">@item</a>
+    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), parent = item.hasChildren())
 
-        @if (item.hasChildren())
+    <li@(active || header || divider || parent ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')~(parent ? ' uk-parent'))|trim)~'"')>
+
+        @if (header)
+        @item.item.name
+        @elseif (!divider)
+        <a href="@url.route(item.url)">@item</a>
+        @endif
+
+        @if (parent)
         <ul class="uk-nav-sub">
             @include('theme://alpha/views/renderer/menu.offcanvas.razr.php', ['root' => item])
         </ul>

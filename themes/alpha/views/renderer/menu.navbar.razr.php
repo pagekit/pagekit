@@ -6,15 +6,15 @@
 
     @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), parent = item.hasChildren())
 
-    <li@(active || header || divider || parent ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')~(parent ? ' uk-parent'))|trim)~'"')@(item.hasChildren() && root.depth == 0 ? ' data-uk-dropdown')>
+    <li@(active || header || divider || parent ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')~(parent ? ' uk-parent'))|trim)~'"')@(parent && root.depth == 0 ? ' data-uk-dropdown')>
 
         @if (header)
         @item.item.name
         @elseif (!divider)
         <a href="@url.route(item.url)">@item</a>
         @endif
-    
-        @if (item.hasChildren())
+
+        @if (parent)
         @if (root.depth == 0)
         <div class="uk-dropdown uk-dropdown-navbar">
             <ul class="uk-nav uk-nav-navbar">
