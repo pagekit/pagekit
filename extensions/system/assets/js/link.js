@@ -45,19 +45,18 @@ define(['jquery', 'require'], function($, req) {
                 init.push(deferreds[type]);
             });
 
+            $this.types.on('change', function() {
+
+                var type = $(this).val(),
+                    form = $forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
+                    show = form.children(':not(script)').length > 0;
+
+                $edit.toggleClass('uk-hidden', !show).toggle(show);
+
+                types[type].show(deparam($this.link.split('?')[1] + ''), $this.link);
+            });
+
             $.when.apply($, init).done(function() {
-
-                $this.types.on('change', function() {
-
-                    var type = $(this).val(),
-                        form = $forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
-                        show = form.children(':not(script)').length > 0;
-
-                    $edit.toggleClass('uk-hidden', !show).toggle(show);
-
-                    types[type].show(deparam($this.link.split('?')[1] + ''), $this.link);
-                });
-
                 $this.set('', $this.options.value);
             });
         });
