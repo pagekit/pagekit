@@ -18,11 +18,11 @@
             && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))
 
         @if (hasChildren && item.attribute('show_children'))
-        <ul>
+        @block('childrenStart')<ul>@endblock
             @block('recursion')
             @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
             @endblock
-        </ul>
+        @block('childrenEnd')</ul>@endblock
         @endif
     </li>
 
