@@ -11,5 +11,5 @@
             <div class="uk-dropdown uk-dropdown-navbar">@provider.render(widget)</div>
         </li>
     </ul>
-@endif
+    @endif
 @endforeach

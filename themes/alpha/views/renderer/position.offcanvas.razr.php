@@ -13,4 +13,3 @@
     </ul>
     @endif
 @endforeach
-</nav>
