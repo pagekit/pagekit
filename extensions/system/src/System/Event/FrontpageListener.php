@@ -9,7 +9,7 @@ class FrontpageListener extends EventSubscriber
     /**
      * Registers frontpage route
      */
-    public function onBoot()
+    public function onInit()
     {
         if ($frontpage = $this('option')->get('system:app.frontpage')) {
             $this('router')->getUrlAliases()->register('/', $this('system.info')->resolveUrl($frontpage));
@@ -25,7 +25,7 @@ class FrontpageListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'boot' => array('onBoot', 8)
+            'init' => array('onInit', 8)
         );
     }
 }

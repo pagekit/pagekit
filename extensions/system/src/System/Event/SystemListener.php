@@ -21,19 +21,7 @@ class SystemListener extends EventSubscriber
     }
 
     /**
-     * Dispatches boot event.
-     */
-    public function onBootKernelRequest(GetResponseEvent $event, $name, $dispatcher)
-    {
-        if (!$event->isMasterRequest()) {
-            return;
-        }
-
-        $dispatcher->dispatch('boot', new SystemInitEvent($this->getApplication()));
-    }
-
-    /**
-     * Dispatches initialize events.
+     * Dispatches init events.
      */
     public function onInitKernelRequest(GetResponseEvent $event, $name, $dispatcher)
     {
@@ -70,8 +58,7 @@ class SystemListener extends EventSubscriber
         return array(
             'kernel.request' => array(
                 array('onEarlyKernelRequest', 256),
-                array('onBootKernelRequest', 64),
-                array('onInitKernelRequest', 30)
+                array('onInitKernelRequest', 64)
             ),
             'extension.load_failure' => 'onExtensionLoadException'
         );

@@ -1,6 +1,6 @@
 <?php
 
-$app->on('boot', function() use ($app) {
+$app->on('admin.init', function() use ($app) {
     $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
 });
 
