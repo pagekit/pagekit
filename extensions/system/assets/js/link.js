@@ -9,9 +9,7 @@ define(['jquery', 'require'], function($, req) {
         this.link    = false;
 
         var $this   = this,
-            context = this.options.context,
-            init    = [],
-            types   = {};
+            context = this.options.context;
 
         data[context] = data[context] || $.post(this.options.url, { context: context });
 
@@ -21,7 +19,8 @@ define(['jquery', 'require'], function($, req) {
 
             $this.types = $('.js-types', $this.element);
 
-            var $edit  = $('.js-edit', $this.element),
+            var init   = [], types  = {},
+                $edit  = $('.js-edit', $this.element),
                 $forms = $edit.children('[data-type]');
 
             $forms.each(function() {

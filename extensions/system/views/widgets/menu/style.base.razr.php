@@ -4,10 +4,19 @@
 
 @foreach (root.children as item)
 
-    <li@block('itemAttributes')@(item.attribute('active') ? ' class="uk-active"')@endblock>
-        <a href="@url.route(item.url)">@item</a>
+    @set (divider = item.url == '!divider')
+    @set (header  = item.url == '!menu-header')
+    @set (active  = item.attribute('active'))
 
-        @item.setAttribute('show_children', ((root.item && root.attribute('show_children')) || item.attribute('active') || widget.get('mode', 'all') == 'all')
+    <li@block('itemAttributes')@(active || header || divider ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider'))|trim)~'"')@endblock>
+
+        @if (header)
+        @item.item.name
+        @elseif (!divider)
+        <a href="@url.route(item.url)">@item</a>
+        @endif
+
+        @item.setAttribute('show_children', ((root.item && root.attribute('show_children')) || active || widget.get('mode', 'all') == 'all')
             && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))
 
         @if (item.hasChildren() && item.attribute('show_children'))
