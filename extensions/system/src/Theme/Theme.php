@@ -4,8 +4,8 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Translation\Translator;
 
 class Theme
 {

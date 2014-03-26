@@ -6,8 +6,8 @@ use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Translation\Translator;
 
 class Extension extends ApplicationAware
 {
