@@ -1,7 +1,7 @@
 @foreach (widgets as widget)
     @if (widget.type == 'widget.menu')
 
-    @provider.render(widget, ['layout' => 'theme://alpha/views/renderer/menu.navbar.razr.php'])
+    @provider.render(widget, ['layout' => 'view://system/widgets/menu/style.navbar.razr.php'])
 
     @else
 

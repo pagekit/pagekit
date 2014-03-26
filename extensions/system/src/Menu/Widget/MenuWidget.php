@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Widget;
+namespace Pagekit\Menu\Widget;
 
 use Pagekit\Framework\ApplicationAware;
 use Pagekit\Widget\Model\TypeInterface;
@@ -45,7 +45,7 @@ class MenuWidget extends ApplicationAware implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        $layout = isset($options['layout']) ? $options['layout'] : "system/widgets/menu/style.{$widget->get('style', 'list')}.razr.php";
+        $layout = isset($options['layout']) ? $options['layout'] : "system/widgets/menu/style.nav.razr.php";
 
         $root = $this('menus')->getTree($widget->get('menu', 0), array(
             'access' => true,
@@ -80,8 +80,7 @@ class MenuWidget extends ApplicationAware implements TypeInterface
     public function renderForm(WidgetInterface $widget)
     {
         $menus  = $this('menus')->getMenuRepository()->findAll();
-        $styles = array('list', 'sidebar');
 
-        return $this('view')->render('system/widgets/menu/edit.razr.php', compact('widget', 'menus', 'styles'));
+        return $this('view')->render('system/widgets/menu/edit.razr.php', compact('widget', 'menus'));
     }
 }

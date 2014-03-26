@@ -6,10 +6,10 @@
 
     @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), hasChildren = item.hasChildren())
 
-    <li@block('itemAttributes')@(active || header || divider ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider'))|trim)~'"')@endblock>
+    <li@block('itemAttributes')@endblock>
 
         @if (header)
-        @item.item.name
+        @item
         @elseif (!divider)
         <a href="@url.route(item.url)">@item</a>
         @endif
@@ -18,11 +18,11 @@
             && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))
 
         @if (hasChildren && item.attribute('show_children'))
-        @block('childrenStart')<ul>@endblock
-            @block('recursion')
+        @block('children')
+        <ul>
             @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
-            @endblock
-        @block('childrenEnd')</ul>@endblock
+        </ul>
+        @endblock
         @endif
     </li>
 

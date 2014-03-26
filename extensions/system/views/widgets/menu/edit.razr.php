@@ -9,16 +9,6 @@
     </div>
 </div>
 <div class="uk-form-row">
-    <label for="form-style" class="uk-form-label">@trans('Style')</label>
-    <div class="uk-form-controls">
-        <select id="form-style" class="uk-form-width-large" name="widget[settings][style]">
-            @foreach (styles as style)
-            <option value="@style"@(style == widget.get('style') ? ' selected')>@style</option>
-            @endforeach
-        </select>
-    </div>
-</div>
-<div class="uk-form-row">
     <label for="form-style" class="uk-form-label">@trans('Start Level')</label>
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][start_level]">

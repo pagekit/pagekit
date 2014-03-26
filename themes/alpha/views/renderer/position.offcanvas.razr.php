@@ -1,7 +1,7 @@
 @foreach (widgets as widget)
     @if (widget.type == 'widget.menu')
 
-    @provider.render(widget, ['style' => 'theme://alpha/views/renderer/menu.offcanvas.razr.php'])
+    @provider.render(widget, ['style' => 'view://system/widgets/menu/style.offcanvas.razr.php'])
 
     @else
 
