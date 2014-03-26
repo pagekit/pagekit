@@ -56,11 +56,18 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit'
 
     });
 
+    var placeholder = $('.uk-placeholder', upload).on("dragover", function(e){
+        placeholder.addClass('uk-dragover');
+    }).on("dragleave", function(e){
+        placeholder.removeClass('uk-dragover');
+    });
+
+
     // upload package
-    $('.js-upload-button', upload).on('click', function(e) {
+    $('input[type="file"]', upload).on('change', function(e) {
         e.preventDefault();
 
-        var form = $('form', upload), dialog = $('.js-upload-modal', upload);
+        var form = $(this.form), dialog = $('.js-upload-modal', upload);
 
         $.ajax({
 
@@ -97,9 +104,10 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit'
             }
 
             modal.show();
-
         });
 
+        form[0].reset();
+        placeholder.removeClass('uk-dragover');
     });
 
     function show(message, context) {

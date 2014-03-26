@@ -87,18 +87,16 @@
 
                 <h2 class="pk-form-heading">@trans('Install an extension')</h2>
 
-                <form class="uk-form" action="@url.route('@system/package/upload', ['type' => 'extension'])" data-uk-form-file>
-                    <input type="text" disabled>
-                    <div class="uk-form-file">
-                        <button class="uk-button">@trans('Select')</button>
+                <form class="uk-form" action="@url.route('@system/package/upload', ['type' => 'extension'])">
+
+                    <div class="uk-placeholder uk-text-center uk-form-file" style="display:block;">
+                        <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i> @trans('Attach binaries by dropping them here or <a>selecting one</a>').
                         <input type="file" name="file">
                     </div>
-                    <button class="js-upload-button uk-button uk-button-primary">@trans('Upload')</button>
                     @token()
                 </form>
 
                 <div class="js-upload-modal uk-modal"></div>
-
             </li>
             <li class="js-marketplace">
 
