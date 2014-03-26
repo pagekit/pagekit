@@ -8,7 +8,6 @@ use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Entity\UserRepository;
-use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Model\RoleInterface;
 
 /**
@@ -89,9 +88,7 @@ class UserController extends Controller
         $users = $query->get();
         $roles = $this->getRoles();
 
-        $this('events')->trigger('admin.permission', $event = new PermissionEvent);
-
-        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $event->getPermissions(), 'filter' => $filter);
+        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this('permissions'), 'filter' => $filter);
     }
 
     /**

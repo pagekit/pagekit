@@ -80,7 +80,7 @@ return array(
             ));
         },
 
-        'admin.permission' => function($event) {
+        'system.permission' => function($event) {
 
             $event->setPermissions('system', array(
 

@@ -27,6 +27,7 @@ use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
 use Pagekit\User\Event\AuthorizationListener;
 use Pagekit\User\Event\LoginAttemptListener;
+use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
@@ -91,6 +92,10 @@ class SystemExtension extends Extension
 
         $app['positions'] = function($app) {
             return new PositionManager($app['view'], $app['widgets']);
+        };
+
+        $app['permissions'] = function($app) {
+            return $app['events']->trigger('system.permission', new PermissionEvent)->getPermissions();
         };
 
         $app['languages'] = function() {

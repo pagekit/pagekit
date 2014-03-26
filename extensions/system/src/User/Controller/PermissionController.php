@@ -4,7 +4,6 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\User\Event\PermissionEvent;
 
 /**
  * @Route("/system/user/permission")
@@ -32,9 +31,7 @@ class PermissionController extends Controller
     {
         $roles = $this->roles->query()->orderBy('priority')->get();
 
-        $this('events')->trigger('admin.permission', $event = new PermissionEvent);
-
-        return array('head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $event->getPermissions());
+        return array('head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this('permissions'));
     }
 
     /**

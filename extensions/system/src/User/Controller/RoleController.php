@@ -6,7 +6,6 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\User\Entity\Permission;
 use Pagekit\User\Entity\Role;
-use Pagekit\User\Event\PermissionEvent;
 
 /**
  * @Route("/system/user/role")
@@ -46,9 +45,7 @@ class RoleController extends Controller
 
         $authrole = $this->roles->find(Role::ROLE_AUTHENTICATED);
 
-        $this('events')->trigger('admin.permission', $event = new PermissionEvent);
-
-        return array('head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $event->getPermissions());
+        return array('head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $this('permissions'));
     }
 
     /**
