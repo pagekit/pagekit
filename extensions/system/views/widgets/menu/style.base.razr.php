@@ -4,7 +4,7 @@
 
 @foreach (root.children as item)
 
-    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'))
+    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), hasChildren = item.hasChildren())
 
     <li@block('itemAttributes')@(active || header || divider ? ' class="'~(((active ? 'uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider'))|trim)~'"')@endblock>
 
@@ -17,7 +17,7 @@
         @item.setAttribute('show_children', ((root.item && root.attribute('show_children')) || active || widget.get('mode', 'all') == 'all')
             && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))
 
-        @if (item.hasChildren() && item.attribute('show_children'))
+        @if (hasChildren && item.attribute('show_children'))
         <ul>
             @block('recursion')
             @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
