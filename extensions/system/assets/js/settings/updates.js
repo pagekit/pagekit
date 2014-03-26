@@ -1,4 +1,4 @@
-require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit', 'locale', 'domReady!'], function($, marketplace, tmpl, uikit, locale) {
+require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!upload', 'locale', 'domReady!'], function($, marketplace, tmpl, uikit, locale) {
 
     var page = $('#js-extensions, #js-themes'), update = $('.js-update', page), upload = $('.js-upload', page), market = $('.js-marketplace', page), params = page.data(), packages = {}, modal;
 
@@ -56,29 +56,36 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit'
 
     });
 
-    var placeholder = $('.uk-placeholder', upload).on("dragover", function(e){
-        placeholder.addClass('uk-dragover');
-    }).on("dragleave", function(e){
-        placeholder.removeClass('uk-dragover');
-    });
-
 
     // upload package
-    $('input[type="file"]', upload).on('change', function(e) {
-        e.preventDefault();
 
-        var form = $(this.form), dialog = $('.js-upload-modal', upload);
+    var progressbar = $(".js-upload-progressbar"),
+        bar         = progressbar.find('.uk-progress-bar'),
+        dialog      = $('.js-upload-modal', upload),
+        settings    = {
 
-        $.ajax({
+        action: upload.data("action"), // upload url
+        type  : 'json',
+        params: {'_csrf': upload.find('input[name="_csrf"]').val() },
+        param : 'file',
 
-            url: form.attr('action'),
-            data: new FormData(form[0]),
-            type: 'POST',
-            cache: false,
-            contentType: false,
-            processData: false
+        loadstart: function() {
+            bar.css("width", "0%").text("0%");
+            progressbar.removeClass("uk-hidden");
+        },
 
-        }).done(function(data) {
+        progress: function(percent) {
+            percent = Math.ceil(percent);
+            bar.css("width", percent+"%").text(percent+"%");
+        },
+
+        allcomplete: function(data) {
+
+            bar.css("width", "100%").text("100%");
+
+            setTimeout(function(){
+                progressbar.addClass("uk-hidden");
+            }, 250);
 
             if (data.error) {
                 uikit.notify(data.error, 'danger');
@@ -104,11 +111,13 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit'
             }
 
             modal.show();
-        });
+        }
+    },
 
-        form[0].reset();
-        placeholder.removeClass('uk-dragover');
-    });
+    // upload objects
+    uploadselect = new uikit.upload.select($(".js-upload-select"), settings),
+    uploaddrop   = new uikit.upload.drop($(".js-upload-drop"), settings);
+
 
     function show(message, context) {
 

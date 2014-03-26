@@ -66,21 +66,21 @@
                 </div>
 
             </li>
-            <li class="js-upload">
+            <li class="js-upload" data-action="@url.route('@system/package/upload', ['type' => 'theme'])">
 
-                <h2 class="pk-form-heading">@trans('Install a theme')</h2>
+                <h2 class="pk-form-heading">@trans('Install an extension')</h2>
 
-                <form class="uk-form" action="@url.route('@system/package/upload', ['type' => 'theme'])">
-
-                    <div class="uk-placeholder uk-text-center uk-form-file" style="display:block;">
-                        <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i> @trans('Attach binaries by dropping them here or <a>selecting one</a>').
-                        <input type="file" name="file">
-                    </div>
+                <div class="uk-placeholder uk-text-center js-upload-drop">
+                    <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i>
+                    @trans('Attach binaries by dropping them here or <a class="uk-form-file">selecting one<input class="js-upload-select" type="file" name="file"></a>').
                     @token()
-                </form>
+                </div>
+
+                <div class="js-upload-progressbar uk-progress uk-hidden">
+                    <div class="uk-progress-bar" style="width: 0%;">...</div>
+                </div>
 
                 <div class="js-upload-modal uk-modal"></div>
-
             </li>
             <li class="js-marketplace">
 
