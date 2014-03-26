@@ -4,10 +4,12 @@
         {{ #writable }}
         <button class="uk-button uk-button-primary" data-cmd="createFolder">@trans('New Folder')</button>
 
-        <form class="js-upload uk-form-file" action="@url.route('@system/media/upload')" method="post">
-            <button class="uk-button">@trans('Upload')</button>
-            <input type="file" name="files[]" multiple="multiple" onchange="jQuery(this.form).trigger('submit')">
-        </form>
+
+        <button class="uk-button uk-form-file">
+            @trans('Upload')
+            <input type="file" name="files[]" multiple="multiple">
+        </button>
+
 
         <button class="uk-button uk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
         {{ /writable }}

@@ -1,4 +1,4 @@
-define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit', 'ajaxupload'], function($, mod, req, tmpl, uikit) {
+define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit!upload'], function($, mod, req, tmpl, uikit) {
 
     var Finder = function(element, options) {
 
@@ -58,8 +58,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             }
         };
 
-        this.element.uploadOnDrag(uploadsettings);
-        this.element.find('.js-upload').ajaxform(uploadsettings);
+        var select = new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings),
+            drop   = new uikit.upload.drop(this.element.find('.uk-placeholder'), uploadsettings);
 
         this.element
             .on('click', '[data-cmd]', function(e) {
