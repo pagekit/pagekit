@@ -24,7 +24,6 @@ var require = (function(win, doc) {
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
                         'uikit/addons':    'vendor/assets/uikit/addons',
                         'markdownarea':    'vendor/assets/uikit/addons/markdownarea/markdownarea',
-                        'ajaxupload':      'vendor/assets/ajaxupload/ajaxupload',
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
                         'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,
