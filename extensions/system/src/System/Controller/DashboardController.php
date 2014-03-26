@@ -4,7 +4,7 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\System\Event\DashboardInitEvent;
+use Pagekit\System\Event\DashboardEvent;
 use Pagekit\User\Model\UserInterface;
 use Pagekit\Widget\Model\TypeManager;
 use Pagekit\Widget\Model\Widget;
@@ -26,7 +26,7 @@ class DashboardController extends Controller
     {
         $this->types = new TypeManager;
 
-        $this('events')->trigger('system.dashboard.init', new DashboardInitEvent($this->types));
+        $this('events')->trigger('system.dashboard', new DashboardEvent($this->types));
     }
 
     /**

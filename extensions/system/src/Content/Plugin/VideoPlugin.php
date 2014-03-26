@@ -5,7 +5,7 @@ namespace Pagekit\Content\Plugin;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\EditorLoadEvent;
-use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\TmplEvent;
 
 class VideoPlugin extends EventSubscriber
 {
@@ -75,9 +75,9 @@ class VideoPlugin extends EventSubscriber
     /**
      * Register Tmpls callback.
      *
-     * @param RegisterTmplEvent $event
+     * @param TmplEvent $event
      */
-    public function onRegisterTmpl(RegisterTmplEvent $event)
+    public function onSystemTmpl(TmplEvent $event)
     {
         $event->register('video.modal', 'extension://system/assets/tmpl/video.modal.razr.php');
         $event->register('video.replace', 'extension://system/assets/tmpl/video.replace.razr.php');
@@ -89,9 +89,9 @@ class VideoPlugin extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load'        => 'onEditorLoad',
-            'content.plugins'    => array('onContentPlugins', 15),
-            'view.register.tmpl' => 'onRegisterTmpl'
+            'editor.load'     => 'onEditorLoad',
+            'content.plugins' => array('onContentPlugins', 15),
+            'system.tmpl'     => 'onSystemTmpl'
         );
     }
 }

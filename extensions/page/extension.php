@@ -23,7 +23,7 @@ return array(
 
     'events' => array(
 
-        'link.register' => function($event) {
+        'system.link' => function($event) {
             $event->register('Pagekit\Page\PageLink');
         },
 

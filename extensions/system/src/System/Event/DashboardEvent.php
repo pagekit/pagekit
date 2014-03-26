@@ -6,7 +6,7 @@ use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\TypeManager;
 
-class DashboardInitEvent extends Event
+class DashboardEvent extends Event
 {
     /**
      * @var TypeManager

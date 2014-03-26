@@ -3,7 +3,6 @@
 namespace Pagekit\Widget\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\SystemInitEvent;
 use Pagekit\Widget\Entity\Widget;
 
 class WidgetListener extends EventSubscriber
@@ -11,11 +10,10 @@ class WidgetListener extends EventSubscriber
     /**
      * Handles the widget to position assignment.
      */
-    public function onSiteInit(SystemInitEvent $event)
+    public function onSiteInit()
     {
-        $request   = $event->getRequest();
-        $active    = (array) $request->attributes->get('_menu');
-        $path      = ltrim($request->getPathInfo(), '/');
+        $active    = (array) $this('request')->attributes->get('_menu');
+        $path      = ltrim($this('request')->getPathInfo(), '/');
         $positions = $this('positions');
 
         foreach ($this('widgets')->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {

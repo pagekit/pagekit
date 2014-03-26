@@ -4,7 +4,7 @@ namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\Event;
 
-class RegisterTmplEvent extends Event
+class TmplEvent extends Event
 {
     /**
      * @var string[]

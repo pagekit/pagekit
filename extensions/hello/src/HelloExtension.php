@@ -4,7 +4,7 @@ namespace Pagekit\Hello;
 
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
-use Pagekit\System\Event\RegisterLinkEvent;
+use Pagekit\System\Event\LinkEvent;
 
 class HelloExtension extends Extension
 {
@@ -19,7 +19,7 @@ class HelloExtension extends Extension
             $app['widgets']->registerType('Pagekit\Hello\HelloWidget');
         });
 
-        $app->on('link.register', function(RegisterLinkEvent $event) {
+        $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Hello\HelloLink');
         });
 

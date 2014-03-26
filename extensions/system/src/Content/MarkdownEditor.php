@@ -5,7 +5,7 @@ namespace Pagekit\Content;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\EditorLoadEvent;
-use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\TmplEvent;
 
 class MarkdownEditor extends EventSubscriber
 {
@@ -48,9 +48,9 @@ class MarkdownEditor extends EventSubscriber
     /**
      * Register Tmpls callback.
      *
-     * @param RegisterTmplEvent $event
+     * @param TmplEvent $event
      */
-    public function onRegisterTmpl(RegisterTmplEvent $event)
+    public function onSystemTmpl(TmplEvent $event)
     {
         $event->register('image.modal', 'extension://system/assets/tmpl/image.modal.razr.php');
         $event->register('image.replace', 'extension://system/assets/tmpl/image.replace.razr.php');
@@ -62,9 +62,9 @@ class MarkdownEditor extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load'        => array('onEditorLoad', -5),
-            'content.plugins'    => array('onContentPlugins', 5),
-            'view.register.tmpl' => 'onRegisterTmpl'
+            'editor.load'     => array('onEditorLoad', -5),
+            'content.plugins' => array('onContentPlugins', 5),
+            'system.tmpl'     => 'onSystemTmpl'
         );
     }
 }

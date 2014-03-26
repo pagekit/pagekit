@@ -5,7 +5,7 @@ namespace Pagekit\System\Event;
 use Pagekit\Framework\Event\Event;
 use Pagekit\System\Link\LinkInterface;
 
-class RegisterLinkEvent extends Event implements \IteratorAggregate
+class LinkEvent extends Event implements \IteratorAggregate
 {
     /**
      * @var string

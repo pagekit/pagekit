@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\System\Event\RegisterLinkEvent;
+use Pagekit\System\Event\LinkEvent;
 
 /**
  * @Access(admin=true)
@@ -16,8 +16,7 @@ class LinkController extends Controller
      */
     public function indexAction($context = '')
     {
-        $this('events')->dispatch('link.register', $event = new RegisterLinkEvent($context));
-        return array('links' => $event);
+        return array('links' => $this('events')->dispatch('system.link', new LinkEvent($context)));
     }
 
     /**
@@ -25,9 +24,9 @@ class LinkController extends Controller
      */
     public function resolveAction($link, $context = '')
     {
-        $this('events')->dispatch('link.register', $event = new RegisterLinkEvent($context));
-
+        $event = $this('events')->dispatch('system.link', new LinkEvent($context));
         $resolved = false;
+
         foreach ($event as $type) {
             if ($link == $type->getRoute()) {
                 $resolved = $type->getLabel();

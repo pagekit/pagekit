@@ -47,8 +47,8 @@ class SystemListener extends EventSubscriber
             return;
         }
 
-        $dispatcher->dispatch('init', new SystemInitEvent(self::$app));
-        $dispatcher->dispatch($this('isAdmin') ? 'admin.init' : 'site.init', new SystemInitEvent(self::$app));
+        $dispatcher->dispatch('init');
+        $dispatcher->dispatch($this('isAdmin') ? 'admin.init' : 'site.init');
     }
 
     /**
@@ -71,9 +71,9 @@ class SystemListener extends EventSubscriber
     /**
      * Registers dashboard widgets.
      *
-     * @param DashboardInitEvent $event
+     * @param DashboardEvent $event
      */
-    public function onDashboardInit(DashboardInitEvent $event)
+    public function onSystemDashboard(DashboardEvent $event)
     {
         $event->registerType(new FeedWidget);
         $event->registerType(new UserWidget);
@@ -83,9 +83,9 @@ class SystemListener extends EventSubscriber
     /**
      * Registers links.
      *
-     * @param RegisterLinkEvent $event
+     * @param LinkEvent $event
      */
-    public function onRegisterLinks(RegisterLinkEvent $event)
+    public function onSystemLink(LinkEvent $event)
     {
         $event->register('Pagekit\System\Link\Frontpage');
         $event->register('Pagekit\System\Link\Url');
@@ -94,9 +94,9 @@ class SystemListener extends EventSubscriber
     /**
      * Registers links.
      *
-     * @param RegisterTmplEvent $event
+     * @param TmplEvent $event
      */
-    public function onRegisterTemplates(RegisterTmplEvent $event)
+    public function onSystemTmpl(TmplEvent $event)
     {
         $event->register('feed.error', 'extension://system/assets/tmpl/feed.error.razr.php');
         $event->register('feed.list', 'extension://system/assets/tmpl/feed.list.razr.php');
@@ -115,11 +115,11 @@ class SystemListener extends EventSubscriber
     /**
      * Initialize system.
      *
-     * @param SystemInitEvent $event
+     * @param InitEvent $event
      */
-    public function onInit(SystemInitEvent $event)
+    public function onInit()
     {
-        $app = $event->getApplication();
+        $app = $this('app');
 
         $scripts = $app['system']->getConfig('view.scripts');
         $scripts($app['view.scripts']);
@@ -194,9 +194,9 @@ class SystemListener extends EventSubscriber
                 array('onInitKernelRequest', 64)
             ),
             'extension.load_failure' => 'onExtensionLoadException',
-            'system.dashboard.init'  => 'onDashboardInit',
-            'link.register'          => 'onRegisterLinks',
-            'view.register.tmpl'     => 'onRegisterTemplates',
+            'system.dashboard'       => 'onSystemDashboard',
+            'system.link'            => 'onSystemLink',
+            'system.tmpl'            => 'onSystemTmpl',
             'init'                   => 'onInit'
         );
     }

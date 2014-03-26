@@ -5,7 +5,7 @@ namespace Pagekit\Content\Plugin;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\EditorLoadEvent;
-use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\TmplEvent;
 
 class LinkPlugin extends EventSubscriber
 {
@@ -58,9 +58,9 @@ class LinkPlugin extends EventSubscriber
     /**
      * Register Tmpls callback.
      *
-     * @param RegisterTmplEvent $event
+     * @param TmplEvent $event
      */
-    public function onRegisterTmpl(RegisterTmplEvent $event)
+    public function onSystemTmpl(TmplEvent $event)
     {
         $event->register('link.modal', 'extension://system/assets/tmpl/link.modal.razr.php');
         $event->register('link.replace', 'extension://system/assets/tmpl/link.replace.razr.php');
@@ -72,9 +72,9 @@ class LinkPlugin extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load'        => 'onEditorLoad',
-            'content.plugins'    => 'onContentPlugins',
-            'view.register.tmpl' => 'onRegisterTmpl'
+            'editor.load'     => 'onEditorLoad',
+            'content.plugins' => 'onContentPlugins',
+            'system.tmpl'     => 'onSystemTmpl'
         );
     }
 }

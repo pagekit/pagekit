@@ -6,7 +6,7 @@ use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\LocaleEvent;
-use Pagekit\System\Event\RegisterTmplEvent;
+use Pagekit\System\Event\TmplEvent;
 use Pagekit\User\Controller\ResetPasswordController;
 
 /**
@@ -84,9 +84,8 @@ class SystemController extends Controller
      */
     public function tmplAction($templates = '')
     {
-        $this('events')->trigger('view.register.tmpl', $event = new RegisterTmplEvent);
-
         $response = array();
+        $event = $this('events')->trigger('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
