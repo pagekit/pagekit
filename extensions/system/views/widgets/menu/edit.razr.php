@@ -40,13 +40,13 @@
     </div>
 </div>
 <div class="uk-form-row">
-    <span class="uk-form-label">@trans('Sub menu items')</span>
+    <span class="uk-form-label">@trans('Sub Items')</span>
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
             <label><input type="radio" name="widget[settings][mode]" value="all"@('all' === widget.get('mode', 'all') ? ' checked')> @trans('Show all')</label>
         </p>
         <p class="uk-form-controls-condensed">
-            <label><input type="radio" name="widget[settings][mode]" value="active"@('active' === widget.get('mode') ? ' checked')> @trans('Show for active parent')</label>
+            <label><input type="radio" name="widget[settings][mode]" value="active"@('active' === widget.get('mode') ? ' checked')> @trans('Show only for active item')</label>
         </p>
     </div>
 </div>
