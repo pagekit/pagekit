@@ -131,7 +131,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             },
 
             rename: function(element) {
-                var newname = prompt(this.options.messages.newname, ''), oldname = element.data('name');
+                var oldname = element.data('name'), newname = prompt(this.options.messages.newname, oldname);
 
                 if (!newname || !oldname) return;
 

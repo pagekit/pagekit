@@ -786,7 +786,7 @@
                 var $target = $(e.target);
 
                 if (!$target.parents(".uk-dropdown").length) {
-                    
+
                     if ($target.is("a[href='#']") || $target.parent().is("a[href='#']")){
                         e.preventDefault();
                     }
@@ -827,6 +827,20 @@
                     if (active && active[0] == $this.element[0]) active = false;
 
                 }, $this.options.remaintime);
+
+            }).on("click", function(e){
+
+                var $target = $(e.target);
+
+                if ($this.remainIdle) {
+                    clearTimeout($this.remainIdle);
+                }
+
+                if ($target.is("a[href='#']") || $target.parent().is("a[href='#']")){
+                    e.preventDefault();
+                }
+
+                $this.show();
             });
         }
 
@@ -1203,17 +1217,17 @@
         },
 
         resize: function() {
-            
+
             var paddingdir = "padding-" + (UI.langdirection == 'left' ? "right":"left");
 
             this.scrollbarwidth = window.innerWidth - html.width();
-            
+
             html.css(paddingdir, this.scrollbarwidth);
 
             this.element.css(paddingdir, "");
 
             if (this.dialog.offset().left > this.scrollbarwidth) {
-                this.element.css(paddingdir, this.scrollbarwidth);
+                this.element.css(paddingdir, this.scrollbarwidth - (this.element[0].scrollHeight==window.innerHeight ? 0:this.scrollbarwidth ));
             }
 
             if (this.scrollable) {
