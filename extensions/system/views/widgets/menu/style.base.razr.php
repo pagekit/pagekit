@@ -15,7 +15,11 @@
         @endif
 
         @if (item.hasChildren && (item.attribute('active') || widget.get('mode', 'all') == 'all' || !root.depth == 0))
-        @block('children')@endblock
+        @block('children')
+        <ul>
+            @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
+        </ul>
+        @endblock
         @endif
     </li>
 

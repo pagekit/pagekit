@@ -9,7 +9,6 @@ use Pagekit\Framework\Controller\Controller;
  */
 class DefaultController extends Controller
 {
-
     /**
      * @View("hello/index.razr.php")
      */
@@ -65,5 +64,4 @@ class DefaultController extends Controller
     {
         return $this('response')->create(__('Permission denied.'), 401);
     }
-
 }

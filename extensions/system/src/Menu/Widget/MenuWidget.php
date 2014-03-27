@@ -45,6 +45,10 @@ class MenuWidget extends ApplicationAware implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = array())
     {
+        if (ini_get('xdebug.max_nesting_level') < 1000) {
+            ini_set('xdebug.max_nesting_level', 1000);
+        }
+
         $layout = isset($options['layout']) ? $options['layout'] : "system/widgets/menu/style.nav.razr.php";
 
         $root = $this('menus')->getTree($widget->get('menu', 0), array(
