@@ -1,10 +1,10 @@
-@if (root.depth == widget.get('start_level', 1) -1)
-<ul @block('menuAttributes')@endblock>
+@if (root.depth == 0)
+<ul@block('menuAttributes')@endblock>
 @endif
 
 @foreach (root.children as item)
 
-    @set (divider = item.url == '!divider', header = item.url == '!menu-header', active = item.attribute('active'), hasChildren = item.hasChildren())
+    @set (header = item.url == '!menu-header', divider = item.url == '!divider')
 
     <li@block('itemAttributes')@endblock>
 
@@ -14,10 +14,7 @@
         <a href="@url.route(item.url)">@item</a>
         @endif
 
-        @item.setAttribute('show_children', ((root.item && root.attribute('show_children')) || active || widget.get('mode', 'all') == 'all')
-            && (!widget.get('depth') || (widget.get('start_level', 1) + widget.get('depth') - 1) > item.depth))
-
-        @if (hasChildren && item.attribute('show_children'))
+        @if (item.hasChildren && (item.attribute('active') || widget.get('mode', 'all') == 'all' || !root.depth == 0))
         @block('children')
         <ul>
             @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
@@ -28,6 +25,6 @@
 
 @endforeach
 
-@if (root.depth == widget.get('start_level', 1) -1)
+@if (root.depth == 0)
 </ul>
 @endif

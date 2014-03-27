@@ -25,16 +25,27 @@ class Node extends \Pagekit\Component\Tree\Node
         return $this->item;
     }
 
+    /**
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
     public function getAttribute($key, $default = null)
     {
         return $this->item->getAttribute($key, $default);
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return $this->item->getUrl();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->item;
@@ -48,6 +59,10 @@ class Node extends \Pagekit\Component\Tree\Node
      */
     public function __call($method, $args)
     {
+        if (!$this->item) {
+            return;
+        }
+
         if (!is_callable($callable = array($this->item, $method))) {
             throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->item), $method));
         }

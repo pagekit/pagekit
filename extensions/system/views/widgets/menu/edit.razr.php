@@ -13,7 +13,7 @@
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][start_level]">
             @foreach ([1,2,3,4,5,6,7,8,9,10] as value)
-            <option value="@(value + 1)"@(value + 1 == widget.get('start_level') ? ' selected')>@trans(value)</option>
+            <option value="@(value)"@(value == widget.get('start_level') ? ' selected')>@trans(value)</option>
             @endforeach
         </select>
     </div>
@@ -24,7 +24,7 @@
         <select id="form-style" class="uk-form-width-large" name="widget[settings][depth]">
             <option value="">@trans('- No Limit -')</option>
             @foreach ([1,2,3,4,5,6,7,8,9,10] as value)
-            <option value="@(value + 1)"@(value + 1 == widget.get('depth') ? ' selected')>@trans(value)</option>
+            <option value="@(value)"@(value == widget.get('depth') ? ' selected')>@trans(value)</option>
             @endforeach
         </select>
     </div>

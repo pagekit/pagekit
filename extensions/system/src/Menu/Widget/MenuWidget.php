@@ -45,6 +45,10 @@ class MenuWidget extends ApplicationAware implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = array())
     {
+        if (ini_get('xdebug.max_nesting_level') < 1000) {
+            ini_set('xdebug.max_nesting_level', 1000);
+        }
+
         $layout = isset($options['layout']) ? $options['layout'] : "system/widgets/menu/style.nav.razr.php";
 
         $root = $this('menus')->getTree($widget->get('menu', 0), array(
@@ -53,23 +57,33 @@ class MenuWidget extends ApplicationAware implements TypeInterface
             'status' => 1,
         ));
 
+        $startLevel = (int) $widget->get('start_level', 1) - 1;
+        $maxDepth   = $widget->get('depth');
+
         foreach (new \RecursiveIteratorIterator($root, \RecursiveIteratorIterator::CHILD_FIRST) as $node) {
+
+            $parent = $node->getParent();
+            $parent->setAttribute('parent', true);
+
+            if ($maxDepth && $node->getDepth() > $startLevel + $maxDepth) {
+                $node->setParent();
+            }
 
             if ($node->getAttribute('active')) {
 
-                if ($item = $node->getParent()->getItem()) {
-                    $item->setAttribute('active', true);
-                }
+                $parent->setAttribute('active', true);
 
-                if ($node->getDepth() < $widget->get('start_level', 1)) {
+                if ($node->getDepth() == $startLevel) {
                     $root = $node;
                 }
             }
         }
 
-        if ($root->getDepth() != $widget->get('start_level', 1) - 1) {
+        if ($root->getDepth() != $startLevel) {
             return '';
         }
+
+        $root->setParent();
 
         return $this('view')->render($layout, compact('widget', 'options', 'root'));
     }
