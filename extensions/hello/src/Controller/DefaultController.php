@@ -38,6 +38,13 @@ class DefaultController extends Controller
         return array('head.title' => __('View article'), 'id' => $id);
     }
 
+    public function anotherViewAction()
+    {
+        $view = 'hello/view.razr.php';
+        $data = array('head.title' => __('View article'), 'id' => 1);
+        return $this('view')->render($view, $data);
+    }
+
     public function redirectAction()
     {
         return $this('response')->redirect('@hello/greet/name', ['name' => 'Someone']);
