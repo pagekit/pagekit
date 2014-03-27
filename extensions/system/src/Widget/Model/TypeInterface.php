@@ -26,7 +26,7 @@ interface TypeInterface
     public function getDescription();
 
     /**
-     * Returns information of the current widget obgect.
+     * Returns information of the current widget object.
      *
      * @return string
      */
