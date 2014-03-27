@@ -1,7 +1,22 @@
 <?php
 
 $app->on('admin.init', function() use ($app) {
+
     $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
+
+});
+
+$app->on('site.init', function() use ($app) {
+
+    $app['view']->set('position', $app['positions']);
+    $app['view']->set('config', $app['option']->get('alpha:config'), array());
+
+    $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
+    $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
+    $app['positions']->registerRenderer('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
+    $app['positions']->registerRenderer('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
+    $app['positions']->registerRenderer('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
+
 });
 
 return array(
@@ -31,23 +46,6 @@ return array(
 
     ),
 
-    'settings' => '@alpha/settings/index',
-
-    'events' => array(
-
-        'site.init' => function() use ($app) {
-
-            $app['view']->set('position', $app['positions']);
-            $app['view']->set('config', $app['option']->get('alpha:config'), array());
-
-            $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
-            $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
-            $app['positions']->registerRenderer('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
-            $app['positions']->registerRenderer('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
-            $app['positions']->registerRenderer('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
-
-        }
-
-    )
+    'settings' => '@alpha/settings/index'
 
 );

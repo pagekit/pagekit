@@ -4,7 +4,6 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\Translator;
 
 class Theme
@@ -48,7 +47,6 @@ class Theme
      */
     public function boot(Application $app)
     {
-        $this->registerEvents($app['events']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
     }
@@ -112,20 +110,6 @@ class Theme
         }
 
         return $array;
-    }
-
-    /**
-     * Registers events.
-     *
-     * @param EventDispatcherInterface $dispatcher
-     */
-    public function registerEvents(EventDispatcherInterface $dispatcher)
-    {
-        if (isset($this->config['events'])) {
-            foreach ($this->config['events'] as $event => $listener) {
-                $dispatcher->addListener($event, $listener);
-            }
-        }
     }
 
     /**

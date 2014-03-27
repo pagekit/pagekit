@@ -205,61 +205,6 @@ class SystemListener extends EventSubscriber
     }
 
     /**
-     * Registers permissions.
-     *
-     * @param PermissionEvent $event
-     */
-    public function onSystemPermission(PermissionEvent $event)
-    {
-        $event->setPermissions('system', array(
-
-            'system: manage menus' => array(
-                'title' => __('Manage menus')
-            ),
-            'system: manage widgets' => array(
-                'title' => __('Manage widgets')
-            ),
-            'system: manage themes' => array(
-                'title' => __('Manage themes')
-            ),
-            'system: manage extensions' => array(
-                'title' => __('Manage extensions')
-            ),
-            'system: manage url aliases' => array(
-                'title' => __('Manage url aliases')
-            ),
-            'system: manage users' => array(
-                'title' => __('Manage users'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: manage user permissions' => array(
-                'title' => __('Manage user permissions'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: access admin area' => array(
-                'title' => __('Access admin area'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: access settings' => array(
-                'title' => __('Access system settings'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: software updates' => array(
-                'title' => __('Apply system updates'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: manage storage' => array(
-                'title' => __('Manage storage'),
-                'description' => __('Warning: Give to trusted roles only; this permission has security implications.')
-            ),
-            'system: maintenance access' => array(
-                'title' => __('Use the site in maintenance mode')
-            )
-
-        ));
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -273,7 +218,6 @@ class SystemListener extends EventSubscriber
             'system.link'            => 'onSystemLink',
             'system.tmpl'            => 'onSystemTmpl',
             'system.locale'          => 'onSystemLocale',
-            'system.permission'      => 'onSystemPermission',
             'system.dashboard'       => 'onSystemDashboard',
             'extension.load_failure' => 'onExtensionLoadException'
         );

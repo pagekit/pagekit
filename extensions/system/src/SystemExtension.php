@@ -95,7 +95,16 @@ class SystemExtension extends Extension
         };
 
         $app['permissions'] = function($app) {
-            return $app['events']->trigger('system.permission', new PermissionEvent)->getPermissions();
+
+            $event = new PermissionEvent;
+
+            foreach ($app['extensions'] as $extension) {
+                if ($permissions = $extension->getConfig('permissions')) {
+                    $event->setPermissions($extension->getName(), $permissions);
+                }
+            }
+
+            return $app['events']->trigger('system.permission', $event)->getPermissions();
         };
 
         $app['languages'] = function() {

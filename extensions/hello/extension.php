@@ -23,20 +23,15 @@ return array(
 
     'settings' => '@hello/hello/settings',
 
-    'menu' => function($event) {
+    'menu' => array(
 
-        $items = array(
+        'hello' => array(
+            'label'  => 'Hello',
+            'url'    => '@hello/hello/index',
+            'active' => '/admin/hello*',
+            'access' => 'hello: manage hellos'
+        )
 
-            'hello' => array(
-                'label'  => __('Hello'),
-                'url'    => '@hello/hello/index',
-                'active' => '/admin/hello*',
-                'access' => 'hello: manage hellos'
-            )
-
-        );
-
-        $event->addItems($items);
-    }
+    )
 
 );

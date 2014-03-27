@@ -22,7 +22,5 @@ class HelloExtension extends Extension
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Hello\HelloLink');
         });
-
-        $app->on('admin.menu', $this->config['menu']);
     }
 }

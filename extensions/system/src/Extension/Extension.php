@@ -50,7 +50,6 @@ class Extension extends ApplicationAware
      */
     public function boot(Application $app)
     {
-        $this->registerEvents($app['events']);
         $this->registerControllers($app['router']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator'], $app['events']);
@@ -101,20 +100,6 @@ class Extension extends ApplicationAware
         }
 
         return $array;
-    }
-
-    /**
-     * Registers events.
-     *
-     * @param EventDispatcherInterface $dispatcher
-     */
-    public function registerEvents(EventDispatcherInterface $dispatcher)
-    {
-        if (isset($this->config['events'])) {
-            foreach ($this->config['events'] as $event => $listener) {
-                $dispatcher->addListener($event, $listener);
-            }
-        }
     }
 
     /**
