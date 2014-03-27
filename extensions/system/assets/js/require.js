@@ -22,7 +22,6 @@ var require = (function(win, doc) {
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
-                        'uikit/addons':    'vendor/assets/uikit/js/addons',
                         'markdownarea':    'vendor/assets/uikit/js/addons/markdownarea.min',
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
