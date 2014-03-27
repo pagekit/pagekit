@@ -9,14 +9,23 @@ use Pagekit\Framework\Controller\Controller;
  */
 class DefaultController extends Controller
 {
+
     /**
-     * @Route("/", name="@hello/world")
-     * @Route("/{name}", name="@hello/name")
      * @View("hello/index.razr.php")
      */
-    public function indexAction($name = 'World')
+    public function indexAction()
     {
-        $names = explode(",", $name);
+        return array('head.title' => 'Hello World');
+    }
+
+    /**
+     * @Route("/greet", name="@hello/greet/world")
+     * @Route("/greet/{name}", name="@hello/greet/name")
+     * @View("hello/greet.razr.php")
+     */
+    public function greetAction($name = 'World')
+    {
+        $names = explode(',', $name);
         return array('head.title' => __('Hello %name%', array('%name%' => $names[0])), 'names' => $names);
     }
 
@@ -27,6 +36,27 @@ class DefaultController extends Controller
     public function viewAction($id=1)
     {
         return array('head.title' => __('View article'), 'id' => $id);
+    }
+
+    public function redirectAction()
+    {
+        return $this('response')->redirect('@hello/greet/name', ['name' => 'Someone']);
+    }
+
+    public function jsonAction()
+    {
+        $data = array('error' => true, 'message' => 'There is nothing here. Move along.');
+        return $this('response')->json($data);
+    }
+
+    public function downloadAction()
+    {
+        return $this('response')->download('extensions/hello/extension.svg');
+    }
+
+    function forbiddenAction()
+    {
+        return $this('response')->create(__('Permission denied.'), 401);
     }
 
 }
