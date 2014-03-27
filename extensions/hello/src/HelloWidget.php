@@ -2,10 +2,11 @@
 
 namespace Pagekit\Hello;
 
+use Pagekit\Framework\ApplicationAware;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class HelloWidget implements TypeInterface
+class HelloWidget extends ApplicationAware implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -44,7 +45,7 @@ class HelloWidget implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        return __('Hello Widget!');
+        return $this('view')->render('hello/widget.razr.php');
     }
 
     /**
