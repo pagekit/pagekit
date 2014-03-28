@@ -34,8 +34,8 @@ class AlphaTheme extends Theme
             return $this->classes;
         }
 
-        $sidebars        = $this->getConfig('sidebars', array());
-        $columns         = array('main' => array('width' => 60, 'alignment' => 'right'));
+        $sidebars = $this->getConfig('sidebars', array());
+        $columns  = array('main' => array('width' => 60, 'alignment' => 'right'));
 
         $gcf = function($a, $b = 60) use(&$gcf) {
             return (int) ($b > 0 ? $gcf($b, $a % $b) : $a);

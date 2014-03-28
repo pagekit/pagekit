@@ -6,6 +6,7 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Event\WidgetSettingsEvent;
 
 /**
  * @Access("system: manage widgets", admin=true)
@@ -75,7 +76,7 @@ class WidgetsController extends Controller
         $widget = new Widget;
         $widget->setType($type);
 
-        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
+        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->getAdditionalSettings());
     }
 
     /**
@@ -86,7 +87,7 @@ class WidgetsController extends Controller
     {
         $widget = $this->widgets->find($id);
 
-        return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
+        return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->getAdditionalSettings());
     }
 
     /**
@@ -212,5 +213,11 @@ class WidgetsController extends Controller
         }
 
         return $this('response')->json(array('message' => __('Widgets updated.')));
+    }
+
+    protected function getAdditionalSettings()
+    {
+        $this('events')->dispatch('system.widget.settings', $event = new WidgetSettingsEvent);
+        return $event->getSettings();
     }
 }

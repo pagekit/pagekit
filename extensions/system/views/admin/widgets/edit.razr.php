@@ -5,6 +5,9 @@
     <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
         <li class="uk-active"><a href="#">@trans('Settings')</a></li>
         <li class=""><a href="#">@trans('Assignment')</a></li>
+        @foreach (additionals as name => view)
+        <li class=""><a href="#">@name</a></li>
+        @endforeach
     </ul>
 
     <ul id="tab-content" class="uk-switcher uk-margin">
@@ -55,6 +58,7 @@
 
             <h2 class="pk-form-heading">@trans('Advanced')</h2>
             @type.renderForm(widget)
+
         </li>
         <li>
 
@@ -83,6 +87,11 @@
             </div>
 
         </li>
+        @foreach (additionals as view)
+        <li>
+            @app.view.render(view, ['widget' => widget])
+        </li>
+        @endforeach
     </ul>
 
     <input type="hidden" name="widget[type]" value="@widget.type">
