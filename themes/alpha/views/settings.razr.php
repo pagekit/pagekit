@@ -4,8 +4,8 @@
         <label for="form-sidebar-width" class="uk-form-label">@trans('Sidebar Width')</label>
         <div class="uk-form-controls">
             <select id="form-sidebar-width" class="uk-form-width-large" name="config[sidebars][sidebar][width]">
-                @foreach (['20', '25', '30', '33', '40', '50'] as value)
-	            <option value="@value" @(config['sidebars']['sidebar']['width'] == value ? 'selected')>@trans('_dd_%', ['_dd_' => value])</option>
+                @foreach ([12 => '20', 15 => '25', 18 => '30', 20 => '33', 24 => '40', 30 => '50'] as value => percent)
+	            <option value="@value" @(config['sidebars']['sidebar']['width'] == value ? 'selected')>@trans('_dd_%', ['_dd_' => percent])</option>
 	            @endforeach
             </select>
         </div>
