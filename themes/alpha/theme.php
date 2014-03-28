@@ -2,20 +2,24 @@
 
 $app->on('admin.init', function() use ($app) {
 
-    $app['router']->addController('Pagekit\DefaultTheme\Controller\SettingsController', array('name' => 'alpha'));
+    $app['router']->addController('Pagekit\Alpha\Controller\SettingsController', array('name' => 'alpha'));
 
 });
 
 $app->on('site.init', function() use ($app) {
 
-    $app['view']->set('position', $app['positions']);
-    $app['view']->set('config', $app['option']->get('alpha:config'), array());
-
-    $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
-    $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
     $app['positions']->registerRenderer('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
+    $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
     $app['positions']->registerRenderer('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
     $app['positions']->registerRenderer('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
+    $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
+
+});
+
+$app->on('view.layout', function($event) use ($app) {
+
+    $event->setParameter('position', $app['positions']);
+    $event->setParameter('theme', $app['theme.site']);
 
 });
 
@@ -34,9 +38,11 @@ return array(
 
     'autoload' => array(
 
-        'Pagekit\\DefaultTheme\\' => 'src'
+        'Pagekit\\Alpha\\' => 'src'
 
     ),
+
+    'main' => 'Pagekit\\Alpha\\AlphaTheme',
 
     'resources' => array(
 

@@ -22,5 +22,3 @@ $app->on('admin.init', function() use ($app) {
     });
 
 });
-
-return array();

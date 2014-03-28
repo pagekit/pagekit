@@ -35,12 +35,18 @@
             @endif
 
             <div class="uk-grid">
-                <div class="uk-width-medium-2-3 uk-width-large-3-4">
+                <div class="@theme.classes.columns.main.class">
                     @action('content')
                 </div>
-                <div class="uk-width-medium-1-3 uk-width-large-1-4">
+
+                @foreach(theme.classes.columns as name => column)
+                @if (name != 'main' && position.exists(name))
+                <aside class="@column.class">
                     @position.render('sidebar', ['renderer' => 'panel'])
-                </div>
+                </aside>
+                @endif
+                @endforeach
+
             </div>
 
             @if (position.exists('footer'))

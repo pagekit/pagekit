@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\DefaultTheme\Controller;
+namespace Pagekit\Alpha\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 
@@ -22,7 +22,7 @@ class SettingsController extends Controller
      */
     public function saveAction($config = array())
     {
-        $this('option')->set('alpha:config', $config);
+        $this('option')->set('alpha:config', $config, true);
         $this('message')->success(__('Settings saved.'));
 
         return $this->redirect('@system/themes/settings', array('name' => 'alpha'));

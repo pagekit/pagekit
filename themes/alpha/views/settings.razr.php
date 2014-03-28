@@ -3,9 +3,9 @@
 	<div class="uk-form-row">
         <label for="form-sidebar-width" class="uk-form-label">@trans('Sidebar Width')</label>
         <div class="uk-form-controls">
-            <select id="form-sidebar-width" class="uk-form-width-large" name="config[sidebar-width]">
+            <select id="form-sidebar-width" class="uk-form-width-large" name="config[sidebars][sidebar][width]">
                 @foreach (['20', '25', '30', '33', '40', '50'] as value)
-	            <option value="@value" @(config['sidebar-width'] == value ? 'selected')>@value%</option>
+	            <option value="@value" @(config['sidebars']['sidebar']['width'] == value ? 'selected')>@trans('_dd_%', ['_dd_' => value])</option>
 	            @endforeach
             </select>
         </div>
@@ -15,10 +15,10 @@
         <span class="uk-form-label">@trans('Sidebar Alignment')</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="config[sidebar-alignment]" value="left"@(config['sidebar-alignment'] == 'left' ? ' checked')> @trans('Left')</label>
+                <label><input type="radio" name="config[sidebars][sidebar][alignment]" value="left"@(config['sidebars']['sidebar']['alignment'] == 'left' ? ' checked')> @trans('Left')</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="config[sidebar-alignment]" value="right"@(config['sidebar-alignment'] == 'right' ? ' checked')> @trans('Right')</label>
+                <label><input type="radio" name="config[sidebars][sidebar][alignment]" value="right"@(config['sidebars']['sidebar']['alignment'] != 'left' ? ' checked')> @trans('Right')</label>
             </p>
         </div>
     </div>
