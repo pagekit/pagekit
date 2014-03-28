@@ -2,11 +2,10 @@
 
 namespace Pagekit\Menu\Widget;
 
-use Pagekit\Framework\ApplicationAware;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class MenuWidget extends ApplicationAware implements TypeInterface
+class MenuWidget extends Type
 {
     /**
      * {@inheritdoc}

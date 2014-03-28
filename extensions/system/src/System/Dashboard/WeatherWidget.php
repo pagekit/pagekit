@@ -2,11 +2,10 @@
 
 namespace Pagekit\System\Dashboard;
 
-use Pagekit\Framework\ApplicationAware;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class WeatherWidget extends ApplicationAware implements TypeInterface
+class WeatherWidget extends Type
 {
     /**
      * {@inheritdoc}

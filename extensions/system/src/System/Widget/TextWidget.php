@@ -3,11 +3,10 @@
 namespace Pagekit\System\Widget;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\ApplicationAware;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class TextWidget extends ApplicationAware implements TypeInterface
+class TextWidget extends Type
 {
     /**
      * {@inheritdoc}

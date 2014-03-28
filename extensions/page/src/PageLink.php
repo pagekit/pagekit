@@ -2,10 +2,9 @@
 
 namespace Pagekit\Page;
 
-use Pagekit\Framework\ApplicationAware;
-use Pagekit\System\Link\LinkInterface;
+use Pagekit\System\Link\Link;
 
-class PageLink extends ApplicationAware implements LinkInterface
+class PageLink extends Link
 {
     /**
      * @{inheritdoc}

@@ -2,11 +2,10 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\Framework\ApplicationAware;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class HelloWidget extends ApplicationAware implements TypeInterface
+class HelloWidget extends Type
 {
     /**
      * {@inheritdoc}
