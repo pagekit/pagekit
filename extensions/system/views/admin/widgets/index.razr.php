@@ -9,7 +9,7 @@
                 <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        @foreach (app.widgets.typeManager as type)
+                        @foreach (app.widgets.types as type)
                         <li><a href="@url.route('@system/widgets/add', ['type' => type.id])">@type.name</a></li>
                         @endforeach
                     </ul>
@@ -49,7 +49,7 @@
 
             <select id="filter-type" name="filter[type]" data-filter="type">
                 <option value="">@trans('- Type -')</option>
-                @foreach (app.widgets.typeManager as type)
+                @foreach (app.widgets.types as type)
                 <option value="@type.id">@type.name</option>
                 @endforeach
             </select>
@@ -81,7 +81,7 @@
             @if (widgets[position.id])
             @foreach (widgets[position.id] as widget)
 
-            @set (type = app.widgets.type(widget.type))
+            @set (type = app.widgets.types[widget.type])
 
             <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
 
@@ -103,13 +103,13 @@
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
                             @foreach (positions as position)
-                            <option value="@position.id"@( position.id == widget.position ? ' selected' )>@trans(position.name)</option>
+                            <option value="@position.id"@(position.id == widget.position ? ' selected')>@trans(position.name)</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="pk-table-width-150 uk-text-truncate">@( type.name ?: trans('Extension not loaded'))</div>
+                    <div class="pk-table-width-150 uk-text-truncate">@(type.name ?: trans('Extension not loaded'))</div>
                     <div class="pk-table-width-100 uk-text-truncate">
-                        @( levels[widget.accessId].name ?: trans('No access level') )
+                        @(levels[widget.accessId].name ?: trans('No access level'))
                     </div>
                 </div>
 
