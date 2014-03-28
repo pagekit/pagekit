@@ -32,7 +32,6 @@ use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
 use Pagekit\Widget\Event\WidgetListener;
-use Pagekit\Widget\Model\TypeManager;
 use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetProvider;
 
@@ -67,8 +66,8 @@ class SystemExtension extends Extension
 
         $app['system'] = $app->protect($this);
 
-        $app['menus'] = function($app) {
-            return new MenuProvider($app);
+        $app['menus'] = function() {
+            return new MenuProvider;
         };
 
         $app['user'] = function($app) {
@@ -86,8 +85,8 @@ class SystemExtension extends Extension
             return new UserProvider($app['caches']['phpfile']);
         };
 
-        $app['widgets'] = function($app) {
-            return new WidgetProvider($app['db.em']->getRepository('Pagekit\Widget\Entity\Widget'), new TypeManager);
+        $app['widgets'] = function() {
+            return new WidgetProvider;
         };
 
         $app['positions'] = function($app) {

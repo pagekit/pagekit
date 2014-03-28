@@ -4,9 +4,8 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\System\Event\DashboardEvent;
 use Pagekit\User\Model\UserInterface;
-use Pagekit\Widget\Model\TypeManager;
+use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Pagekit\Widget\Model\Widget;
 
 /**
@@ -15,7 +14,7 @@ use Pagekit\Widget\Model\Widget;
 class DashboardController extends Controller
 {
     /**
-     * @var TypeManager
+     * @var RegisterWidgetEvent
      */
     protected $types;
 
@@ -24,9 +23,8 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->types = new TypeManager;
-
-        $this('events')->trigger('system.dashboard', new DashboardEvent($this->types));
+        $this('events')->trigger('system.dashboard', $event = new RegisterWidgetEvent);
+        $this->types = $event;
     }
 
     /**
@@ -38,7 +36,7 @@ class DashboardController extends Controller
         $columns = array();
 
         foreach ($this->getWidgets() as $id => $data) {
-            if ($type = $this->types->get($data['type'])) {
+            if ($type = $this->types[$data['type']]) {
                 $widgets[$id] = $type->render($this->create($id, $data));
                 $columns[] = $id;
             }
@@ -57,7 +55,7 @@ class DashboardController extends Controller
         $widgets = array();
 
         foreach ($this->getWidgets() as $id => $data) {
-            if ($type = $this->types->get($data['type'])) {
+            if ($type = $this->types[$data['type']]) {
 
                 $widget = $this->create($id, $data);
                 $widget->setType($type->getName());
@@ -78,7 +76,7 @@ class DashboardController extends Controller
     {
         try {
 
-            if (!$type = $this->types->get($id)) {
+            if (!$type = $this->types[$id]) {
                 throw new Exception(__('Invalid widget type.'));
             }
 
@@ -108,7 +106,7 @@ class DashboardController extends Controller
                 throw new Exception(__('Invalid widget id.'));
             }
 
-            if (!$type = $this->types->get($widgets[$id]['type'])) {
+            if (!$type = $this->types[$widgets[$id]['type']]) {
                 throw new Exception(__('Invalid widget type.'));
             }
 
@@ -233,15 +231,15 @@ class DashboardController extends Controller
 
     protected function chunkList($list, $p) {
 
-        $listlen = count($list);
-        $partlen = floor($listlen / $p);
-        $partrem = $listlen % $p;
+        $listlen   = count($list);
+        $partlen   = floor($listlen / $p);
+        $partrem   = $listlen % $p;
         $partition = array();
-        $mark = 0;
+        $mark      = 0;
 
         for ($px = 0; $px < $p; $px++) {
             $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
-            $partition[$px] = array_slice( $list, $mark, $incr );
+            $partition[$px] = array_slice($list, $mark, $incr);
             $mark += $incr;
         }
 

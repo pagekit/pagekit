@@ -20,7 +20,7 @@ use Pagekit\System\Widget\LoginWidget;
 use Pagekit\System\Widget\TextWidget;
 use Pagekit\User\Auth\UserProvider;
 use Pagekit\User\Event\UserListener;
-use Pagekit\User\Event\PermissionEvent;
+use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\SimpleFilter;
 use Razr\SimpleFunction;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -71,8 +71,6 @@ class SystemListener extends EventSubscriber
 
     /**
      * Initialize system.
-     *
-     * @param InitEvent $event
      */
     public function onInit()
     {
@@ -95,10 +93,6 @@ class SystemListener extends EventSubscriber
 
         $app['auth']->setUserProvider(new UserProvider($app['auth.encoder.native']));
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
-
-        $app['widgets']->registerType(new LoginWidget);
-        $app['widgets']->registerType(new MenuWidget);
-        $app['widgets']->registerType(new TextWidget);
 
         $app['events']->addSubscriber(new LinkPlugin);
         $app['events']->addSubscriber(new VideoPlugin);
@@ -141,15 +135,27 @@ class SystemListener extends EventSubscriber
     }
 
     /**
+     * Registers widgets.
+     *
+     * @param RegisterWidgetEvent $event
+     */
+    public function onSystemWidget(RegisterWidgetEvent $event)
+    {
+        $event->register(new LoginWidget);
+        $event->register(new MenuWidget);
+        $event->register(new TextWidget);
+    }
+
+    /**
      * Registers dashboard widgets.
      *
-     * @param DashboardEvent $event
+     * @param RegisterWidgetEvent $event
      */
-    public function onSystemDashboard(DashboardEvent $event)
+    public function onSystemDashboard(RegisterWidgetEvent $event)
     {
-        $event->registerType(new FeedWidget);
-        $event->registerType(new UserWidget);
-        $event->registerType(new WeatherWidget);
+        $event->register(new FeedWidget);
+        $event->register(new UserWidget);
+        $event->register(new WeatherWidget);
     }
 
     /**
@@ -219,6 +225,7 @@ class SystemListener extends EventSubscriber
             'system.tmpl'            => 'onSystemTmpl',
             'system.locale'          => 'onSystemLocale',
             'system.dashboard'       => 'onSystemDashboard',
+            'system.widget'          => 'onSystemWidget',
             'extension.load_failure' => 'onExtensionLoadException'
         );
     }

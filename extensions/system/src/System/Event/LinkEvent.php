@@ -12,6 +12,11 @@ class LinkEvent extends Event implements \IteratorAggregate
      */
     protected $context;
 
+    /**
+     * @var LinkInterface[]
+     */
+    protected $parameters;
+
     public function __construct($context = '')
     {
         $this->context = $context;
