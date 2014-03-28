@@ -2,9 +2,7 @@
 
 namespace Pagekit\System\Link;
 
-use Pagekit\Framework\ApplicationAware;
-
-abstract class Route extends ApplicationAware implements LinkInterface
+abstract class Route extends Link
 {
     /**
      * {@inheritdoc}
