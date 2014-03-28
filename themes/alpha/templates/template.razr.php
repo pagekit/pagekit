@@ -34,6 +34,7 @@
             </section>
             @endif
 
+            @if (config['sidebar-alignment'] == 'right')
             <div class="uk-grid">
                 <div class="@theme.classes.columns.main.class">
                     @action('content')
@@ -48,6 +49,16 @@
                 @endforeach
 
             </div>
+            @elseif (config['sidebar-alignment'] == 'left')
+            <div class="uk-grid">
+                <div class="uk-width-medium-1-3 uk-width-large-1-4">
+                    @position.render('sidebar', ['renderer' => 'panel'])
+                </div>            
+                <div class="uk-width-medium-2-3 uk-width-large-3-4">
+                    @action('content')
+                </div>
+            </div>
+            @endif
 
             @if (position.exists('footer'))
             <footer class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
