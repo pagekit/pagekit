@@ -58,6 +58,14 @@ class WidgetProvider extends ApplicationAware
     }
 
     /**
+     * @return RegisterWidgetEvent
+     */
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
+    /**
      * @return Repository
      */
     public function getWidgetRepository()
