@@ -46,7 +46,7 @@ class DefaultController extends Controller
 
     public function redirectAction()
     {
-        return $this('response')->redirect('@hello/greet/name', ['name' => 'Someone']);
+        return $this('response')->redirect('@hello/greet/name', array('name' => 'Someone'));
     }
 
     public function jsonAction()
