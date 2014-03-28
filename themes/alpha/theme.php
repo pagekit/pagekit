@@ -23,6 +23,12 @@ $app->on('view.layout', function($event) use ($app) {
 
 });
 
+$app->on('system.widget.settings', function($event) {
+
+    $event->addSettings('Alpha', 'theme://alpha/views/admin/widgets/edit.razr.php');
+
+});
+
 return array(
 
     'positions' => array(
@@ -52,6 +58,6 @@ return array(
 
     ),
 
-    'settings' => '@alpha/settings/index'
+    'settings' => '@alpha/settings/index',
 
 );
