@@ -14,6 +14,4 @@ require(['jquery', 'domReady!'], function($) {
 
     stati.eq(status.val()).removeClass('uk-hidden');
 
-    console.log(status.val(), stati.eq(status.val()))
-
 });
