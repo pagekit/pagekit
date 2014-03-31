@@ -23,8 +23,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this('events')->trigger('system.dashboard', $event = new RegisterWidgetEvent);
-        $this->types = $event;
+        $this('events')->trigger('system.dashboard', $this->types = new RegisterWidgetEvent);
     }
 
     /**

@@ -34,7 +34,10 @@ class AlphaTheme extends Theme
             return $this->classes;
         }
 
-        $sidebars = $this->getConfig('sidebars', array());
+        $sidebars = array_replace_recursive(array(
+            'sidebar-a' => array('width' => 12, 'alignment' => 'left'),
+            'sidebar-b' => array('width' => 12, 'alignment' => 'right')
+        ), $this->getConfig('sidebars', array()));
         $columns  = array('main' => array('width' => 60, 'alignment' => 'right'));
 
         $gcf = function($a, $b = 60) use(&$gcf) {
@@ -67,7 +70,7 @@ class AlphaTheme extends Theme
                     $shift += @$col['width'];
                 }
             }
-            $column['class'] = sprintf('tm-%s uk-width-medium-%s%s %s %s', $name, $fraction($column['width']), $shift ? ' uk-'.($column['alignment'] == 'left' ? 'pull' : 'push').'-'.$fraction($shift) : '', isset($column['style']) ? $column['style'] : '', isset($column['divider']) ? 'uk-grid-divider' : '');
+            $column['class'] = sprintf('tm-%s uk-width-medium-%s%s', $name, $fraction($column['width']), $shift ? ' uk-'.($column['alignment'] == 'left' ? 'pull' : 'push').'-'.$fraction($shift) : '');
         }
 
         $this->classes = compact('columns');

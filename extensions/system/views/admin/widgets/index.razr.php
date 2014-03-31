@@ -120,19 +120,19 @@
     </div>
     @endforeach
 
-    @if(notusedwidgets|length)
-    <div id="js-not-used-widgets" class="uk-margin">
+    @if(unassignedwidgets|length)
+    <div id="js-not-used-widgets">
 
         <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
             <div>
-                @trans('Unassigned widgets')
+                @trans('Unassigned Widgets')
             </div>
         </div>
 
         <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }" data-position="">
-            @foreach (notusedwidgets as widget)
+            @foreach (unassignedwidgets as widget)
 
-            @set (type = app.widgets.type(widget.type))
+            @set (type = app.widgets.types[widget.type])
             <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
 
                 <div class="uk-sortable-item pk-table-fake">
@@ -152,7 +152,7 @@
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
-                            <option value="">@trans('Unused position')</option>
+                            <option value="">@trans('- Assign -')</option>
                             @foreach (positions as position)
                             <option value="@position.id"@( position.id == widget.position ? ' selected' )>@trans(position.name)</option>
                             @endforeach

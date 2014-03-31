@@ -47,6 +47,16 @@ class ThemesController extends Controller
             $packagesJson[$name] = $package->getVersion();
         }
 
+        uasort($packages, function($themeA, $themeB) use ($current) {
+            if ($current === $themeA) {
+                return -1;
+            } elseif ($current === $themeB) {
+                return 1;
+            }
+
+            return strcmp($themeA->getName(), $themeB->getName());
+        });
+
         return array('head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
     }
 

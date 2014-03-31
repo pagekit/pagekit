@@ -82,25 +82,24 @@
 
 </ul>
 
+@if (packages)
 <hr class="uk-margin-large">
 
 <h2 class="uk-h3">@trans('Extensions')</h2>
 
 <ul class="uk-grid pk-system" data-uk-grid-margin>
 
-    @foreach (app.extensions as extension)
-    @if (extension.config.settings)
-    @set (package = app.extensions.repository.findPackage(extension.name))
+    @foreach (packages as extension => package)
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/extensions/settings', ['name' => extension.name])">
+        <a class="uk-panel pk-system-hover" href="@url.route('@system/extensions/settings', ['name' => extension])">
             <img class="uk-img-preserve" src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
             <p>@package.title</p>
         </a>
     </li>
-    @endif
     @endforeach
 
 </ul>
+@endif
 
 <div id="modal-clearcache" class="uk-modal">
     <div class="uk-modal-dialog">

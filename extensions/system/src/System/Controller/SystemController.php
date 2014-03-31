@@ -21,7 +21,14 @@ class SystemController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Settings'), 'user' => $this('user'));
+        $packages = array();
+        foreach ($this('extensions') as $extension) {
+            if ($extension->getConfig('settings')) {
+                $packages[$extension->getName()] = $this('extensions')->getRepository()->findPackage($extension->getName());
+            }
+        }
+
+        return array('head.title' => __('Settings'), 'user' => $this('user'), 'packages' => $packages);
     }
 
     /**

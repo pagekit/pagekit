@@ -50,21 +50,21 @@ class WidgetsController extends Controller
     public function indexAction()
     {
         $widgets        = array();
-        $notusedwidgets = array();
+        $unassignedwidgets = array();
 
         foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
 
             $position = $widget->getPosition();
 
             if (!isset($this->positions[$position])) {
-                $notusedwidgets[] = $widget;
+                $unassignedwidgets[] = $widget;
                 continue;
             }
 
             $widgets[$position][] = $widget;
         }
 
-        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'notusedwidgets' => $notusedwidgets);
+        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'unassignedwidgets' => $unassignedwidgets);
     }
 
     /**
