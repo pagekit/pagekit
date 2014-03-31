@@ -1,4 +1,4 @@
-@if (app.message.messages)
+@if (app.message.hasMessages())
 <div class="pk-system-messages">
     @foreach (app.message.levels() as level)
         @if (app.message.has(level))
