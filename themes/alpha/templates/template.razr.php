@@ -34,7 +34,8 @@
             </section>
             @endif
 
-            <div class="uk-grid">
+            <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
+            
                 <div class="@theme.classes.columns.main.class">
                     @action('content')
                 </div>

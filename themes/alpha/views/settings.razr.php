@@ -5,8 +5,8 @@
         <div class="uk-form-controls">
             <select id="form-sidebar-width" class="uk-form-width-large" name="config[sidebars][sidebar][width]">
                 @foreach ([12 => '20', 15 => '25', 18 => '30', 20 => '33', 24 => '40', 30 => '50'] as value => percent)
-	            <option value="@value" @(config['sidebars']['sidebar']['width'] == value ? 'selected')>@trans('_dd_%', ['_dd_' => percent])</option>
-	            @endforeach
+                <option value="@value" @(config['sidebars']['sidebar']['width'] == value ? 'selected')>@trans('_dd_%', ['_dd_' => percent])</option>
+                @endforeach
             </select>
         </div>
     </div>

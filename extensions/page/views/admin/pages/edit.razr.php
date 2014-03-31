@@ -36,7 +36,6 @@
         @editor('page[content]', page.content, ['id' => 'page-content'])
     </div>
 
-
     <p>
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url.route('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
