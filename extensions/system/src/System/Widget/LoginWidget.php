@@ -28,15 +28,7 @@ class LoginWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return __('Displays a user login form.');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
+    public function getDescription(WidgetInterface $widget = null)
     {
         return __('Displays a user login form.');
     }

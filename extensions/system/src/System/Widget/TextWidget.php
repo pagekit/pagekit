@@ -27,15 +27,7 @@ class TextWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return __('Text Widget');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
+    public function getDescription(WidgetInterface $widget = null)
     {
         return __('Text Widget');
     }

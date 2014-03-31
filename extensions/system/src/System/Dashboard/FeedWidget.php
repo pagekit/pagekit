@@ -26,19 +26,13 @@ class FeedWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(WidgetInterface $widget = null)
     {
-        return __('Feed Widget');
-    }
+        if (null === $widget) {
+            return __('Feed Widget');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
-    {
-        $settings = $widget->getSettings();
-
-        return isset($settings['title']) ? $settings['title'] : '';
+        return $widget->get('title', __('No title given.'));
     }
 
     /**

@@ -19,18 +19,12 @@ interface TypeInterface
     public function getName();
 
     /**
-     * Get widget description.
+     * Get widget description - optionally with additional information from current widget.
      *
+     * @param  WidgetInterface $widget
      * @return string
      */
-    public function getDescription();
-
-    /**
-     * Returns information of the current widget object.
-     *
-     * @return string
-     */
-    public function getInfo(WidgetInterface $widget);
+    public function getDescription(WidgetInterface $widget = null);
 
     /**
      * Render the widget.

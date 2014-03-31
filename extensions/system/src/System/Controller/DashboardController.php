@@ -59,7 +59,7 @@ class DashboardController extends Controller
 
                 $widget = $this->create($id, $data);
                 $widget->setType($type->getName());
-                $widget->setTitle($type->getInfo($widget));
+                $widget->setTitle($type->getDescription($widget));
 
                 $widgets[$id] = $widget;
             }

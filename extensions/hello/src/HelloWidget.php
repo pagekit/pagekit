@@ -26,15 +26,7 @@ class HelloWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return __('Hello Demo Widget');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
+    public function getDescription(WidgetInterface $widget = null)
     {
         return __('Hello Demo Widget');
     }

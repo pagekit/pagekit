@@ -26,19 +26,13 @@ class UserWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(WidgetInterface $widget = null)
     {
-        return __('Displays a list of users.');
-    }
+        if (null === $widget) {
+            return __('Displays a list of users.');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
-    {
-        $settings = $widget->getSettings();
-
-        return isset($settings['show']) ? __($settings["show"] == 'login' ? 'Logged in':'Last registered') : '';
+        return $widget->get('show') == 'login' ? __('Logged in') : __('Last registered');
     }
 
     /**

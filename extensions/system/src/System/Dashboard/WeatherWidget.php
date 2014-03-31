@@ -26,20 +26,13 @@ class WeatherWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription(WidgetInterface $widget = null)
     {
-        return __('Weather Widget');
-    }
+        if (null === $widget) {
+            return __('Weather Widget');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
-    {
-
-        $settings = $widget->getSettings();
-
-        return isset($settings['location']) ? $settings['location'] : '';
+        return $widget->get('location', __('No location chosen.'));
     }
 
     /**

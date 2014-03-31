@@ -26,15 +26,7 @@ class MenuWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return __('Menu Widget');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfo(WidgetInterface $widget)
+    public function getDescription(WidgetInterface $widget = null)
     {
         return __('Menu Widget');
     }
