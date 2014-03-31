@@ -40,15 +40,15 @@
                     @action('content')
                 </div>
 
-                @if (position.exists('sidebar-left'))
-                <aside class="@theme.classes.columns['sidebar-left'].class">
-                    @position.render('sidebar-left', ['renderer' => 'panel'])
+                @if (position.exists('sidebar-a'))
+                <aside class="@theme.classes.columns['sidebar-a'].class">
+                    @position.render('sidebar-a', ['renderer' => 'panel'])
                 </aside>
                 @endif
 
-                @if (position.exists('sidebar-right'))
-                <aside class="@theme.classes.columns['sidebar-right'].class">
-                    @position.render('sidebar-right', ['renderer' => 'panel'])
+                @if (position.exists('sidebar-b'))
+                <aside class="@theme.classes.columns['sidebar-b'].class">
+                    @position.render('sidebar-b', ['renderer' => 'panel'])
                 </aside>
                 @endif
 

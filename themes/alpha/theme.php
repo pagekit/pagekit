@@ -32,14 +32,14 @@ $app->on('system.widget.settings', function($event) {
 return array(
 
     'positions' => array(
-
-        'footer'        => 'Footer',
+        
         'logo'          => 'Logo',
         'navbar'        => 'Navbar',
-        'offcanvas'     => 'Offcanvas',
-        'sidebar-left'  => 'Sidebar Left',
-        'sidebar-right' => 'Sidebar Right',
-        'top'           => 'Top'
+        'top'           => 'Top',
+        'sidebar-a'     => 'Sidebar A',
+        'sidebar-b'     => 'Sidebar B',
+        'footer'        => 'Footer',
+        'offcanvas'     => 'Offcanvas'
 
     ),
 
