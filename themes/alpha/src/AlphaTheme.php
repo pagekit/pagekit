@@ -34,7 +34,7 @@ class AlphaTheme extends Theme
             return $this->classes;
         }
 
-        $sidebars = array_merge(array(
+        $sidebars = array_replace_recursive(array(
             'sidebar-left' => array('width' => 12, 'alignment' => 'left'),
             'sidebar-right' => array('width' => 12, 'alignment' => 'right')
         ), $this->getConfig('sidebars', array()));
