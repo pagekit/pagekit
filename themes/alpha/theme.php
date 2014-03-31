@@ -6,13 +6,13 @@ $app->on('admin.init', function() use ($app) {
 
 });
 
-$app->on('site.init', function() use ($app) {
+$app->on('system.position.renderer', function($event) use ($app) {
 
-    $app['positions']->registerRenderer('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
-    $app['positions']->registerRenderer('grid', 'theme://alpha/views/renderer/position.grid.php');
-    $app['positions']->registerRenderer('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
-    $app['positions']->registerRenderer('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
-    $app['positions']->registerRenderer('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
+    $event->register('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
+    $event->register('grid', 'theme://alpha/views/renderer/position.grid.php');
+    $event->register('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
+    $event->register('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
+    $event->register('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
 
 });
 

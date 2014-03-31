@@ -90,7 +90,7 @@ class SystemExtension extends Extension
         };
 
         $app['positions'] = function($app) {
-            return new PositionManager($app['view'], $app['widgets']);
+            return new PositionManager($app['widgets']);
         };
 
         $app['permissions'] = function($app) {

@@ -2,25 +2,18 @@
 
 namespace Pagekit\Widget;
 
-use Pagekit\Component\View\View;
-use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
-use Pagekit\Widget\PositionRenderer\LayoutPositionRenderer;
-use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
+use Pagekit\Framework\ApplicationAware;
+use Pagekit\Widget\Event\RegisterRendererEvent;
 
-class PositionManager implements \ArrayAccess, \IteratorAggregate
+class PositionManager extends ApplicationAware implements \ArrayAccess, \IteratorAggregate
 {
-    /**
-     * @var View
-     */
-    protected $view;
-
     /**
      * @var WidgetProvider
      */
     protected $provider;
 
     /**
-     * @var PositionRendererInterface[]
+     * @var RegisterRendererEvent
      */
     protected $renderers;
 
@@ -32,19 +25,18 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param View           $view
      * @param WidgetProvider $provider
      */
-    public function __construct(View $view, WidgetProvider $provider)
+    public function __construct(WidgetProvider $provider)
     {
-        $this->view     = $view;
         $this->provider = $provider;
 
-        $this->registerRenderer('default', function($provider, $position) {
+        $this('events')->trigger('system.position.renderer', $this->renderers = new RegisterRendererEvent($this('view')));
 
+        $this->renderers->register('default', function ($position, WidgetProvider $provider, \ArrayObject $widgets, array $options = array()) {
             $output = array();
 
-            foreach ($position as $widget) {
+            foreach ($widgets as $widget) {
                 $output[] = '<div>'.$provider->render($widget).'</div>';
             }
 
@@ -130,30 +122,6 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * Registers a position renderer.
-     *
-     * @param string $name
-     * @param callable|string|PositionRendererInterface $renderer
-     * @throws \InvalidArgumentException
-     */
-    public function registerRenderer($name, $renderer)
-    {
-        if (is_callable($renderer)) {
-            $renderer = new CallbackPositionRenderer($renderer);
-        }
-
-        if (is_string($renderer)) {
-            $renderer = new LayoutPositionRenderer($this->view, $renderer);
-        }
-
-        if (!$renderer instanceof PositionRendererInterface) {
-            throw new \InvalidArgumentException('Renderer has to implement the PositionRendererInterface');
-        }
-
-        $this->renderers[$name] = $renderer;
-    }
-
-    /**
      * Renders widgets output for a position.
      *
      * @param  mixed $id
@@ -166,13 +134,9 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate
             return;
         }
 
-        if (isset($options['renderer']) && $this->renderers[$options['renderer']]) {
-            $renderer = $options['renderer'];
-        } else {
-            $renderer = 'default';
-        }
+        $renderer = isset($options['renderer'], $this->renderers[$options['renderer']]) ? $options['renderer'] : 'default';
 
-        return $this->renderers[$renderer]->render($id, $this->provider, $this->offsetGet($id), $options);
+        return $this->renderers[$renderer]->render($id, $this->provider, $this[$id], $options);
     }
 
     /**

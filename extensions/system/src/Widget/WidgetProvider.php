@@ -24,8 +24,7 @@ class WidgetProvider extends ApplicationAware
      */
     public function __construct()
     {
-        $this('events')->trigger('system.widget', $event = new RegisterWidgetEvent);
-        $this->types = $event;
+        $this('events')->trigger('system.widget', $this->types = new RegisterWidgetEvent);
     }
 
     /**
