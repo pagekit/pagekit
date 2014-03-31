@@ -70,7 +70,7 @@ class AlphaTheme extends Theme
                     $shift += @$col['width'];
                 }
             }
-            $column['class'] = sprintf('tm-%s uk-width-medium-%s%s %s %s', $name, $fraction($column['width']), $shift ? ' uk-'.($column['alignment'] == 'left' ? 'pull' : 'push').'-'.$fraction($shift) : '', isset($column['style']) ? $column['style'] : '', isset($column['divider']) ? 'uk-grid-divider' : '');
+            $column['class'] = sprintf('tm-%s uk-width-medium-%s%s', $name, $fraction($column['width']), $shift ? ' uk-'.($column['alignment'] == 'left' ? 'pull' : 'push').'-'.$fraction($shift) : '');
         }
 
         $this->classes = compact('columns');
