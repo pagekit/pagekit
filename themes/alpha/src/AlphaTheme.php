@@ -34,7 +34,10 @@ class AlphaTheme extends Theme
             return $this->classes;
         }
 
-        $sidebars = $this->getConfig('sidebars', array());
+        $sidebars = array_merge(array(
+            'sidebar-left' => array('width' => 12, 'alignment' => 'left'),
+            'sidebar-right' => array('width' => 12, 'alignment' => 'right')
+        ), $this->getConfig('sidebars', array()));
         $columns  = array('main' => array('width' => 60, 'alignment' => 'right'));
 
         $gcf = function($a, $b = 60) use(&$gcf) {

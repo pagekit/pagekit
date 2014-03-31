@@ -35,18 +35,22 @@
             @endif
 
             <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
-            
+
                 <div class="@theme.classes.columns.main.class">
                     @action('content')
                 </div>
 
-                @foreach(theme.classes.columns as name => column)
-                @if (name != 'main' && position.exists(name))
-                <aside class="@column.class">
-                    @position.render('sidebar', ['renderer' => 'panel'])
+                @if (position.exists('sidebar-left'))
+                <aside class="@theme.classes.columns['sidebar-left'].class">
+                    @position.render('sidebar-left', ['renderer' => 'panel'])
                 </aside>
                 @endif
-                @endforeach
+
+                @if (position.exists('sidebar-right'))
+                <aside class="@theme.classes.columns['sidebar-right'].class">
+                    @position.render('sidebar-right', ['renderer' => 'panel'])
+                </aside>
+                @endif
 
             </div>
 

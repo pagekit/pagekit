@@ -132,7 +132,7 @@
         <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }" data-position="">
             @foreach (notusedwidgets as widget)
 
-            @set (type = app.widgets.type(widget.type))
+            @set (type = app.widgets.types[widget.type])
             <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
 
                 <div class="uk-sortable-item pk-table-fake">

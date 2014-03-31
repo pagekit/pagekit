@@ -33,12 +33,13 @@ return array(
 
     'positions' => array(
 
-        'logo'      => 'Logo',
-        'navbar'    => 'Navbar',
-        'top'       => 'Top',
-        'sidebar'   => 'Sidebar',
-        'footer'    => 'Footer',
-        'offcanvas' => 'Offcanvas'
+        'footer'        => 'Footer',
+        'logo'          => 'Logo',
+        'navbar'        => 'Navbar',
+        'offcanvas'     => 'Offcanvas',
+        'sidebar-left'  => 'Sidebar Left',
+        'sidebar-right' => 'Sidebar Right',
+        'top'           => 'Top'
 
     ),
 
