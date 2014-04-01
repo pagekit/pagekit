@@ -10,6 +10,7 @@ require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], f
         }
 
         uikit.markdownarea.defaults.codemirror.autoCloseTags = true;
+        uikit.markdownarea.defaults.codemirror.matchTags     = true;
 
         $('[data-editor="markdown"]').each(function() {
             var editor = new uikit.markdownarea(this, { marked: marked, CodeMirror: codemirror });
