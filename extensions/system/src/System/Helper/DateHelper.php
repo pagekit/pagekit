@@ -71,9 +71,9 @@ class DateHelper
 
     /**
      * @param  string|DateTime|\DateTimeInterface $date
-     * @param  int|string                        $format
-     * @param  DateTimeZone|string               $timezone
-     * @param  bool                              $translate
+     * @param  int|string                         $format
+     * @param  DateTimeZone|string                $timezone
+     * @param  bool                               $translate
      * @return mixed|string
      */
     public function format($date, $format = self::MEDIUM, $timezone = null, $translate = true)
@@ -94,8 +94,8 @@ class DateHelper
     }
 
     /**
-     * @param string|DateTime|\DateTimeInterface $date
-     * @param DateTimeZone|string               $timezone
+     * @param  string|DateTime|\DateTimeInterface $date
+     * @param  DateTimeZone|string                $timezone
      * @return DateTime|null|string
      */
     public function getDateTime($date = null, $timezone = null)
