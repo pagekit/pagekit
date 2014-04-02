@@ -5,6 +5,7 @@ namespace Pagekit\Page\Controller;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Controller\Controller;
+use Pagekit\Page\Entity\Page;
 
 /**
  * @Route("/page")
@@ -31,7 +32,7 @@ class DefaultController extends Controller
      */
     public function indexAction($id = 0, $slug = '')
     {
-        if (!$page = $this->pages->where(compact($slug ? 'slug' : 'id'))->first()) {
+        if (!$page = $this->pages->where(compact($slug ? 'slug' : 'id'))->where(array('status' => Page::STATUS_PUBLISHED))->first()) {
             return $this('response')->create(__('Page not found!'), 404);
         }
 

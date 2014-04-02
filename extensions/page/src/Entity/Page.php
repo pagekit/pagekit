@@ -7,11 +7,11 @@ namespace Pagekit\Page\Entity;
  */
 class Page
 {
-    /* Page draft status. */
-    const STATUS_DISABLED = 0;
+    /* Page unpublished status. */
+    const STATUS_UNPUBLISHED = 0;
 
-    /* Page published. */
-    const STATUS_ENABLED = 1;
+    /* Page published status. */
+    const STATUS_PUBLISHED = 1;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -30,6 +30,9 @@ class Page
 
     /** @Column(type="integer") */
     protected $access_id;
+
+    /** @Column(type="json_array") */
+    protected $data;
 
     public function getId()
     {
@@ -91,11 +94,31 @@ class Page
         return (int) $this->access_id;
     }
 
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    public function get($key, $default = null)
+    {
+        return isset($this->data[$key]) ? $this->data[$key] : $default;
+    }
+
+    public function set($key, $value)
+    {
+        $this->data[$key] = $value;
+    }
+
     public static function getStatuses()
     {
         return array(
-            self::STATUS_ENABLED  => __('Enabled'),
-            self::STATUS_DISABLED => __('Disabled')
+            self::STATUS_UNPUBLISHED  => __('Unpublished'),
+            self::STATUS_PUBLISHED => __('Disabled')
         );
     }
 
