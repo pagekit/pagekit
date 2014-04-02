@@ -62,7 +62,12 @@
                         </a>
                     </td>
                     <td class="pk-table-text-break">
-                        <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@(url.route('@page/id', ['id' => page.id], 'base') ?: '/')</a>
+                        @set(link = url.route('@page/id', ['id' => page.id], 'base') ?: '/')
+                        @if (page.status == 1)
+                        <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link</a>
+                        @else
+                        @link
+                        @endif
                     </td>
                     <td>
                         @(levels[page.accessId].name ?: trans('No access level'))
