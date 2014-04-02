@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>@trans('Pagekit Installer')</title>
+        <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         @action('head')
         @style('theme', 'installer/css/installer.css')
         @script('installer', 'installer/js/installer.js', 'requirejs')

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
         @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify'])
