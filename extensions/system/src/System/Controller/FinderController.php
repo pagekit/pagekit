@@ -141,7 +141,7 @@ class FinderController extends Controller
                 throw new Exception(__('No files uploaded.'));
             }
 
-            $result = array('message' => __('File(s) uploaded.'));
+            $result = array('message' => __('Upload complete.'));
             foreach ($files as $file) {
 
                 if (!$file->isValid()) {
