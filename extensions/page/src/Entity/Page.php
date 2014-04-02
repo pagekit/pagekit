@@ -118,7 +118,7 @@ class Page
     {
         return array(
             self::STATUS_UNPUBLISHED  => __('Unpublished'),
-            self::STATUS_PUBLISHED => __('Disabled')
+            self::STATUS_PUBLISHED => __('Published)
         );
     }
 
