@@ -60,3 +60,7 @@
     </table>
 </div>
 {{ /data }}
+
+<div class="uk-placeholder uk-text-center uk-text-muted">
+    <img src="@url.to('asset://system/images/icon-finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')"> @trans('Drop files here.')
+</div>

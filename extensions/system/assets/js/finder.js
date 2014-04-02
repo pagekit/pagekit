@@ -58,8 +58,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             }
         };
 
-        var select = new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings),
-            drop   = new uikit.upload.drop(this.element.find('.uk-placeholder'), uploadsettings);
+        var select = new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings);
 
         this.element
             .on('click', '[data-cmd]', function(e) {
@@ -95,15 +94,19 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                     uikit.Utils.xhrupload(e.dataTransfer.files, uploadsettings);
                 }
 
+                $this.main.removeClass('uk-dragover');
+
             }).on("dragenter", function(e){
                 e.stopPropagation();
                 e.preventDefault();
             }).on("dragover", function(e){
                 e.stopPropagation();
                 e.preventDefault();
+                $this.main.addClass('uk-dragover');
             }).on("dragleave", function(e){
                 e.stopPropagation();
                 e.preventDefault();
+                $this.main.removeClass('uk-dragover');
             });
 
         this.switchView(this.view);
