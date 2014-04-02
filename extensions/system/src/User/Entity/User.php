@@ -175,7 +175,7 @@ class User extends BaseUser implements UserInterface
      *
      * @PostSave
      */
-    public function postSave($manager)
+    public function postSave(EntityManager $manager)
     {
         if (is_array($this->roles)) {
 
