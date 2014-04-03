@@ -136,7 +136,7 @@ class PageController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
+        $this('message')->success(_c('{0} No page deleted.|{1} page deleted.|]1,Inf[ pages deleted.', count($ids)));
 
         return $this->redirect('@page/page/index');
     }
@@ -169,17 +169,11 @@ class PageController extends Controller
      */
     public function statusAction($status, $ids = array())
     {
-        try {
-
-            foreach ($ids as $id) {
-                if ($page = $this->pages->find($id) and $page->getStatus() != $status) {
-                    $page->setStatus($status);
-                    $this->pages->save($page);
-                }
+        foreach ($ids as $id) {
+            if ($page = $this->pages->find($id) and $page->getStatus() != $status) {
+                $page->setStatus($status);
+                $this->pages->save($page);
             }
-
-        } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
         }
 
         return $this->redirect('@page/page/index');

@@ -11,8 +11,8 @@
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 1])">@trans('Enable')</a></li>
-                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 0])">@trans('Disable')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 1])">@trans('Publish')</a></li>
+                        <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 0])">@trans('Unpublish')</a></li>
                         <li class="uk-nav-divider"></li>
                         <li><a href="#" data-action="@url.route('@page/page/copy')">@trans('Copy')</a></li>
                         <li><a href="#" data-action="@url.route('@page/page/delete')">@trans('Delete')</a></li>
