@@ -144,8 +144,8 @@ class Page
         }
 
         $i = 2;
-        while ($query->where(array('slug' => $this->slug))->first()) {
-            $this->slug = preg_replace('/-\d$/', '', $this->slug).'-'.$i++;
+        while ($query->where('slug = ?', array($this->slug))->first()) {
+            $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
     }
 }
