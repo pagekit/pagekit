@@ -137,14 +137,11 @@ class Page
      */
     public function postSave(EntityManager $manager)
     {
-        $query = $manager->getRepository('Pagekit\Page\Entity\Page')->query();
-
-        if ($this->id) {
-            $query->where('id <> ?', array($this->id));
-        }
+        $repository = $manager->getRepository('Pagekit\PAge\Entity\Page');
 
         $i = 2;
-        while ($query->where('slug = ?', array($this->slug))->first()) {
+        $id = $this->id;
+        while ($repository->query()->where('slug = ?', array($this->slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
     }
