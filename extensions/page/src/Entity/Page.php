@@ -137,7 +137,7 @@ class Page
      */
     public function postSave(EntityManager $manager)
     {
-        $repository = $manager->getRepository('Pagekit\PAge\Entity\Page');
+        $repository = $manager->getRepository('Pagekit\Page\Entity\Page');
 
         $i = 2;
         $id = $this->id;
