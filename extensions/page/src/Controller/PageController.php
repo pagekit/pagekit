@@ -105,11 +105,7 @@ class PageController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
-            $i = 2;
-
-            while ($this->pages->where(array('slug = ?', 'id <> ?'), array($data['slug'], $id))->first()) {
-                $data['slug'] .= "-$i";
-            }
+            $data['slug'] = $this->getUniqueSlug($data['slug'], $id);
 
             $this->pages->save($page, $data);
 
@@ -153,7 +149,7 @@ class PageController extends Controller
                 $page = clone $page;
                 $page->setId(null);
                 $page->setStatus(Page::STATUS_UNPUBLISHED);
-                $page->setSlug($page->getSlug().uniqid());
+                $page->setSlug($this->getUniqueSlug($page->getSlug()));
                 $page->setTitle($page->getTitle().' - '.__('Copy'));
 
                 $this->pages->save($page);
@@ -177,6 +173,22 @@ class PageController extends Controller
         }
 
         return $this->redirect('@page/page/index');
+    }
+
+    protected function getUniqueSlug($slug, $id = null)
+    {
+        $query = $this->pages->query();
+
+        if ($id) {
+            $query->where('id <> ?', array($id));
+        }
+
+        $i = 2;
+        while ($query->where(compact('slug'))->first()) {
+            $slug = preg_replace('/-\d$/', '', $slug).'-'.$i++;
+        }
+
+        return $slug;
     }
 
     protected function slugify($slug)
