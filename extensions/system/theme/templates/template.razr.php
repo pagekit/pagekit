@@ -18,7 +18,7 @@
                 <nav class="uk-navbar">
 
                     <a class="uk-navbar-brand uk-hidden-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                     @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
@@ -42,7 +42,7 @@
                     <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
 
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                 </nav>
