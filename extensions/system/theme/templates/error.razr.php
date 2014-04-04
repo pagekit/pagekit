@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noindex,nofollow">
         <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="@url.to('extension://system/theme/apple_touch_icon.png')">
         <link rel="stylesheet" href="@url.to('extension://system/theme/css/theme.css', [], true)">
     </head>
     <body class="uk-height-1-1">
