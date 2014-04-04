@@ -2,6 +2,7 @@
 
 namespace Pagekit;
 
+use Pagekit\Comment\Helper\CommentHelper;
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\Menu\Event\MenuListener;
@@ -104,6 +105,10 @@ class SystemExtension extends Extension
             }
 
             return $app['events']->trigger('system.permission', $event)->getPermissions();
+        };
+
+        $app['comments'] = function() {
+            return new CommentHelper;
         };
 
         $app['languages'] = function() {
