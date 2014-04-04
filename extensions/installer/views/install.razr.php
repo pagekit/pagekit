@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>@trans('Pagekit Installer')</title>
         <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="@url.to('extension://system/theme/apple_touch_icon.png')">
+        <link href="@url.to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'installer/css/installer.css')
         @script('installer', 'installer/js/installer.js', 'requirejs')

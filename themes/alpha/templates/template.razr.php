@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="@url.to('extension://system/theme/apple_touch_icon.png')">
+        <link href="@url.to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'theme://alpha/css/theme.css')
         @script('jquery')

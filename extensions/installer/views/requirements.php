@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <title>Pagekit Installer Errors</title>
         <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link rel="stylesheet" href="vendor/assets/uikit/css/uikit.pagekit-installer.min.css">
-        <link rel="stylesheet" href="extensions/installer/theme/css/installer.css">
+        <link href="vendor/assets/uikit/css/uikit.pagekit-installer.min.css" rel="stylesheet">
+        <link href="extensions/installer/theme/css/installer.css" rel="stylesheet">
         <script src="vendor/assets/jquery/jquery.js"></script>
         <script src="vendor/assets/uikit/js/uikit.min.js"></script>
     </head>
