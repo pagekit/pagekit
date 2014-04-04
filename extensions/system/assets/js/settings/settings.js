@@ -5,7 +5,7 @@ require(['jquery', 'require', 'linkpicker', 'uikit!form-password', 'domReady!'],
         $('input[name=tab]').val(active.prevAll().length);
     });
 
-    var tabui = new uikit.tab(tabs, { connect: '#tab-content', active: tabs.data('tabs') });
+    new uikit.tab(tabs, { connect: '#tab-content', active: tabs.data('tabs') });
 
     // change mailer
     $('[name="option[system:mail.driver]"]').on('change',function() {

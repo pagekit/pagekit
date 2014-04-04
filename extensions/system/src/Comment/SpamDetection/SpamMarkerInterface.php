@@ -1,0 +1,25 @@
+<?php
+
+namespace Pagekit\Component\Comment\SpamDetection;
+
+use Pagekit\Component\Comment\Model\CommentInterface;
+
+/**
+ * Spam marker interface.
+ */
+interface SpamMarkerInterface
+{
+    /**
+     * Submits a comment as ham
+     *
+     * @param CommentInterface $comment
+     */
+    public function markHam(CommentInterface $comment);
+
+    /**
+     * Submits a comment as spam
+     *
+     * @param CommentInterface $comment
+     */
+    public function markSpam(CommentInterface $comment);
+}

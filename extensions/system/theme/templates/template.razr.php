@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="@url.to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url.to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
         @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify'])
@@ -17,7 +18,7 @@
                 <nav class="uk-navbar">
 
                     <a class="uk-navbar-brand uk-hidden-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                     @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
@@ -41,7 +42,7 @@
                     <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
 
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="23" height="29" alt="@trans('Pagekit')">
+                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                 </nav>
