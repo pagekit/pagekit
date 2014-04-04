@@ -6,10 +6,16 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
+use Pagekit\Hello\Event\HelloListener;
 
 
 class HelloExtension extends Extension
 {
+    public function __construct()
+    {
+        $listener = new HelloListener();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +34,9 @@ class HelloExtension extends Extension
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Hello\HelloLink');
         });
+
+        // trigger event (check Hello\Event\HelloListener to see how subscribers work)
+        $app->trigger('hello.boot');
     }
 
     public function enable()
