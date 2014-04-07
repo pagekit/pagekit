@@ -2497,15 +2497,18 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-tab-center:after {
   clear: both;
 }
+/*
+ * 1. Using `right` to prevent vertical scrollbar caused by centering if to many tabs
+ */
 .uk-tab-center .uk-tab {
   position: relative;
-  left: 50%;
+  right: 50%;
   border: none;
-  float: left;
+  float: right;
 }
 .uk-tab-center .uk-tab > li {
   position: relative;
-  left: -50%;
+  right: -50%;
 }
 .uk-tab-center .uk-tab > li > a {
   text-align: center;
@@ -5578,7 +5581,7 @@ a.uk-thumbnail:focus {
   /* 4 */
   width: 200px;
   margin-top: 5px;
-  padding: 15px;
+  padding: 5px;
   background: #ffffff;
   color: #444444;
   /* 5 */
@@ -5623,7 +5626,7 @@ a.uk-thumbnail:focus {
 /* Nav in dropdown
  ========================================================================== */
 .uk-dropdown .uk-nav {
-  margin: 0 -15px;
+  margin: 0 -5px;
 }
 /* Grid and panel in dropdown
  ========================================================================== */
@@ -5632,11 +5635,11 @@ a.uk-thumbnail:focus {
 */
 /* Grid */
 .uk-dropdown > .uk-grid + .uk-grid {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 /* Panels */
 .uk-dropdown > .uk-grid > [class*='uk-width-'] > .uk-panel + .uk-panel {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 /* Tablet and bigger */
 @media (min-width: 768px) {
@@ -5644,12 +5647,12 @@ a.uk-thumbnail:focus {
      * Horizontal gutter
      */
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid {
-    margin-left: -15px;
-    margin-right: -15px;
+    margin-left: -5px;
+    margin-right: -5px;
   }
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-'] {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   /*
      * Column divider
@@ -5685,7 +5688,7 @@ a.uk-thumbnail:focus {
      * Vertical gutter
      */
   .uk-dropdown > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
-    margin-top: 15px;
+    margin-top: 5px;
   }
 }
 /*
@@ -5695,7 +5698,7 @@ a.uk-thumbnail:focus {
   width: 100%;
 }
 .uk-dropdown-stack > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 /* Modifier `uk-dropdown-small`
  ========================================================================== */
@@ -5717,18 +5720,16 @@ a.uk-thumbnail:focus {
 /* Modifier: `uk-dropdown-navbar`
  ========================================================================== */
 .uk-dropdown-navbar {
-  margin-top: 0;
+  margin-top: 5px;
   background: #ffffff;
   color: #999999;
-  border-top: none;
-  border-radius: 0;
+  min-width: 150px;
+  width: auto;
+  white-space: nowrap;
 }
 .uk-open > .uk-dropdown-navbar {
-  -webkit-animation: uk-slide-top-fixed 0.2s ease-in-out;
-  animation: uk-slide-top-fixed 0.2s ease-in-out;
-}
-.uk-dropdown-navbar .uk-nav {
-  margin: -15px -15px 0 -15px;
+  -webkit-animation: uk-fade 0.2s ease-in-out;
+  animation: uk-fade 0.2s ease-in-out;
 }
 /* ========================================================================
    Component: Modal
@@ -6167,7 +6168,7 @@ a.uk-thumbnail:focus {
   vertical-align: bottom !important;
 }
 /* Only tablets portrait */
-@media (min-width: 768px) and (max-width: 959px) {
+@media (max-width: 959px) {
   .uk-text-center-medium {
     text-align: center !important;
   }
@@ -6476,6 +6477,9 @@ a.uk-thumbnail:focus {
 }
 /* Link
  ========================================================================== */
+/*
+ * Let links appear in default text color
+ */
 .uk-link-muted,
 .uk-link-muted a {
   color: #444444;
@@ -6483,6 +6487,16 @@ a.uk-thumbnail:focus {
 .uk-link-muted:hover,
 .uk-link-muted a:hover {
   color: #444444;
+}
+/*
+ * Reset link style
+ */
+.uk-link-reset,
+.uk-link-reset a,
+.uk-link-reset:hover,
+.uk-link-reset a:hover {
+  color: inherit;
+  text-decoration: none;
 }
 /* Scrollable
  ========================================================================== */
@@ -6670,7 +6684,7 @@ a.uk-thumbnail:focus {
   /* 1 */
   left: 0;
   /* 2 */
-  font-size: 50px;
+  font-size: 500px;
 }
 /* ========================================================================
    Component: Form password
@@ -6886,11 +6900,11 @@ a.uk-datepicker-table-muted {
   box-shadow: none;
 }
 /* ========================================================================
-   Component: Markdownarea
+   Component: HTML editor
  ========================================================================== */
-/* Sub-object `uk-markdownarea-navbar`
+/* Sub-object `uk-htmleditor-navbar`
  ========================================================================== */
-.uk-markdownarea-navbar {
+.uk-htmleditor-navbar {
   background: #f5f5f5;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-top-left-radius: 2px;
@@ -6899,30 +6913,30 @@ a.uk-datepicker-table-muted {
 /*
  * Micro clearfix
  */
-.uk-markdownarea-navbar:before,
-.uk-markdownarea-navbar:after {
+.uk-htmleditor-navbar:before,
+.uk-htmleditor-navbar:after {
   content: " ";
   display: table;
 }
-.uk-markdownarea-navbar:after {
+.uk-htmleditor-navbar:after {
   clear: both;
 }
-/* Sub-object `uk-markdownarea-navbar-nav`
+/* Sub-object `uk-htmleditor-navbar-nav`
  ========================================================================== */
-.uk-markdownarea-navbar-nav {
+.uk-htmleditor-navbar-nav {
   margin: 0;
   padding: 0;
   list-style: none;
   float: left;
 }
-.uk-markdownarea-navbar-nav > li {
+.uk-htmleditor-navbar-nav > li {
   float: left;
 }
 /*
  * 1. Dimensions
  * 2. Style
  */
-.uk-markdownarea-navbar-nav > li > a {
+.uk-htmleditor-navbar-nav > li > a {
   display: block;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -6945,8 +6959,8 @@ a.uk-datepicker-table-muted {
  * 1. Apply hover style also to focus state
  * 2. Remove default focus style
  */
-.uk-markdownarea-navbar-nav > li:hover > a,
-.uk-markdownarea-navbar-nav > li > a:focus {
+.uk-htmleditor-navbar-nav > li:hover > a,
+.uk-htmleditor-navbar-nav > li > a:focus {
   background-color: #fafafa;
   color: #444444;
   outline: none;
@@ -6958,7 +6972,7 @@ a.uk-datepicker-table-muted {
   border-top-color: rgba(0, 0, 0, 0.1);
 }
 /* OnClick */
-.uk-markdownarea-navbar-nav > li > a:active {
+.uk-htmleditor-navbar-nav > li > a:active {
   background-color: #eeeeee;
   color: #444444;
   border-left-color: rgba(0, 0, 0, 0.1);
@@ -6966,27 +6980,27 @@ a.uk-datepicker-table-muted {
   border-top-color: rgba(0, 0, 0, 0.2);
 }
 /* Active */
-.uk-markdownarea-navbar-nav > li.uk-active > a {
+.uk-htmleditor-navbar-nav > li.uk-active > a {
   background-color: #fafafa;
   color: #444444;
   border-left-color: rgba(0, 0, 0, 0.1);
   border-right-color: rgba(0, 0, 0, 0.1);
   border-top-color: rgba(0, 0, 0, 0.1);
 }
-/* Sub-object: `uk-markdownarea-navbar-flip`
+/* Sub-object: `uk-htmleditor-navbar-flip`
  ========================================================================== */
-.uk-markdownarea-navbar-flip {
+.uk-htmleditor-navbar-flip {
   float: right;
 }
 /* Sub-object for special buttons
  ========================================================================== */
-[data-mode='split'] .uk-markdown-button-markdown,
-[data-mode='split'] .uk-markdown-button-preview {
+[data-mode='split'] .uk-htmleditor-button-code,
+[data-mode='split'] .uk-htmleditor-button-preview {
   display: none;
 }
-/* Sub-object `uk-markdownarea-content`
+/* Sub-object `uk-htmleditor-content`
  ========================================================================== */
-.uk-markdownarea-content {
+.uk-htmleditor-content {
   border-left: 1px solid #e5e5e5;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -6997,17 +7011,17 @@ a.uk-datepicker-table-muted {
 /*
  * Micro clearfix
  */
-.uk-markdownarea-content:before,
-.uk-markdownarea-content:after {
+.uk-htmleditor-content:before,
+.uk-htmleditor-content:after {
   content: " ";
   display: table;
 }
-.uk-markdownarea-content:after {
+.uk-htmleditor-content:after {
   clear: both;
 }
-/* Modifier `uk-markdownarea-fullscreen`
+/* Modifier `uk-htmleditor-fullscreen`
  ========================================================================== */
-.uk-markdownarea-fullscreen {
+.uk-htmleditor-fullscreen {
   position: fixed;
   top: 0;
   left: 0;
@@ -7015,87 +7029,87 @@ a.uk-datepicker-table-muted {
   bottom: 0;
   z-index: 990;
 }
-.uk-markdownarea-fullscreen .uk-markdownarea-content {
+.uk-htmleditor-fullscreen .uk-htmleditor-content {
   position: absolute;
   top: 41px;
   left: 0;
   right: 0;
   bottom: 0;
 }
-.uk-markdownarea-fullscreen .uk-icon-expand:before {
+.uk-htmleditor-fullscreen .uk-icon-expand:before {
   content: "\f066";
 }
-/* Sub-objects `uk-markdownarea-code` and `uk-markdownarea-preview`
+/* Sub-objects `uk-htmleditor-code` and `uk-htmleditor-preview`
  ========================================================================== */
-.uk-markdownarea-code,
-.uk-markdownarea-preview {
+.uk-htmleditor-code,
+.uk-htmleditor-preview {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.uk-markdownarea-preview {
+.uk-htmleditor-preview {
   padding: 20px;
   overflow-y: scroll;
 }
 /*
  * Tab view
  */
-[data-mode='tab'][data-active-tab='code'] .uk-markdownarea-preview,
-[data-mode='tab'][data-active-tab='preview'] .uk-markdownarea-code {
+[data-mode='tab'][data-active-tab='code'] .uk-htmleditor-preview,
+[data-mode='tab'][data-active-tab='preview'] .uk-htmleditor-code {
   display: none;
 }
 /*
  * Split view
  */
-[data-mode='split'] .uk-markdownarea-code,
-[data-mode='split'] .uk-markdownarea-preview {
+[data-mode='split'] .uk-htmleditor-code,
+[data-mode='split'] .uk-htmleditor-preview {
   float: left;
   width: 50%;
 }
-[data-mode='split'] .uk-markdownarea-code {
+[data-mode='split'] .uk-htmleditor-code {
   border-right: 1px solid #eeeeee;
 }
 /* CodeMirror modifications
  ========================================================================== */
-.uk-markdownarea .CodeMirror {
+.uk-htmleditor .CodeMirror {
   padding: 10px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 /*
-     * Apply same `border-radius` as `uk-markdownarea-navbar`
+     * Apply same `border-radius` as `uk-htmleditor-navbar`
      */
-.uk-markdownarea-navbar-nav:first-child > li:first-child > a {
+.uk-htmleditor-navbar-nav:first-child > li:first-child > a {
   border-top-left-radius: 2px;
 }
 /*
-     * Sub-modifier `uk-markdownarea-navbar-flip`
+     * Sub-modifier `uk-htmleditor-navbar-flip`
      */
 /* Collapse border */
-.uk-markdownarea-navbar-flip .uk-markdownarea-navbar-nav > li > a {
+.uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav > li > a {
   margin-left: 0;
   margin-right: -1px;
 }
-/* Apply same `border-radius` as `uk-markdownarea-navbar` */
-.uk-markdownarea-navbar-flip .uk-markdownarea-navbar-nav:first-child > li:first-child > a {
+/* Apply same `border-radius` as `uk-htmleditor-navbar` */
+.uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav:first-child > li:first-child > a {
   border-top-left-radius: 0;
 }
-.uk-markdownarea-navbar-flip .uk-markdownarea-navbar-nav:last-child > li:last-child > a {
+.uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav:last-child > li:last-child > a {
   border-top-right-radius: 2px;
 }
 /*
-     * Sub-modifier `uk-markdownarea-fullscreen`
+     * Sub-modifier `uk-htmleditor-fullscreen`
      */
-.uk-markdownarea-fullscreen .uk-markdownarea-navbar {
+.uk-htmleditor-fullscreen .uk-htmleditor-navbar {
   border-top: none;
   border-left: none;
   border-right: none;
   border-radius: 0;
 }
-.uk-markdownarea-fullscreen .uk-markdownarea-content {
+.uk-htmleditor-fullscreen .uk-htmleditor-content {
   border: none;
   border-radius: 0;
 }
-.uk-markdownarea-fullscreen .uk-markdownarea-navbar-nav > li > a {
+.uk-htmleditor-fullscreen .uk-htmleditor-navbar-nav > li > a {
   border-radius: 0 !important;
 }
 /* ========================================================================
