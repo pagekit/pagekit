@@ -16,10 +16,10 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
         }
     });
 
-    return function(markdownarea, options) {
+    return function(htmleditor, options) {
 
         // videos
-        markdownarea.commands.video = {
+        htmleditor.commands.video = {
             title: 'Video',
             label: '<i class="uk-icon-video-camera"></i>',
             action: function(editor) {
@@ -32,7 +32,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             }
         };
 
-        markdownarea.defaults.toolbar.push('video');
+        htmleditor.defaults.toolbar.push('video');
 
         function getVideoPreview(url) {
 
@@ -74,7 +74,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
         }
 
-        markdownarea.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function(marker) {
+        htmleditor.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function(marker) {
 
             if (!finder) {
 

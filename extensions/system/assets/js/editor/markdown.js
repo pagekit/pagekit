@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], function($, uikit, marked, codemirror) {
+require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], function($, uikit, marked, codemirror) {
 
     var $script = $('script[data-plugins]');
     plugins = $script.data('plugins'), options = $script.data('finder');
@@ -6,14 +6,14 @@ require(['jquery', 'uikit!markdownarea', 'marked', 'codemirror', 'domReady!'], f
     require(plugins, function() {
 
         for (var plugin in arguments) {
-            arguments[plugin](uikit.markdownarea, options);
+            arguments[plugin](uikit.htmleditor, options);
         }
 
-        uikit.markdownarea.defaults.codemirror.autoCloseTags = true;
-        uikit.markdownarea.defaults.codemirror.matchTags     = true;
+        uikit.htmleditor.defaults.codemirror.autoCloseTags = true;
+        uikit.htmleditor.defaults.codemirror.matchTags     = true;
 
         $('[data-editor="markdown"]').each(function() {
-            var editor = new uikit.markdownarea(this, { marked: marked, CodeMirror: codemirror });
+            var editor = new uikit.htmleditor(this, { marked: marked, CodeMirror: codemirror, markdown:true });
 
             editor.editor.on('inputRead', uikit.Utils.debounce(function() {
                 autocomplete(editor.editor);

@@ -16,9 +16,9 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         }
     });
 
-    return function(markdownarea, options) {
+    return function(htmleditor, options) {
 
-        markdownarea.addPlugin('htmlimages', /<img(.+?)>/gim, function(marker) {
+        htmleditor.addPlugin('htmlimages', /<img(.+?)>/gim, function(marker) {
 
             var attrs = {"src":"", "alt":""};
 
@@ -53,7 +53,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         });
 
 
-        markdownarea.addPlugin('images', /(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim, function(marker) {
+        htmleditor.addPlugin('images', /(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim, function(marker) {
 
             if (!finder) {
                 finder = new Finder(element, options);

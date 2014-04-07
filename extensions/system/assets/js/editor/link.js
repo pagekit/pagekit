@@ -9,9 +9,9 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
         handler();
     });
 
-    return function(markdownarea) {
+    return function(htmleditor) {
 
-        markdownarea.addPlugin('htmlurls', /<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)<\/a>/gim, function(marker) {
+        htmleditor.addPlugin('htmlurls', /<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)<\/a>/gim, function(marker) {
 
             var url = marker.found[1], txt = marker.found[2];
 
@@ -36,7 +36,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
         });
 
 
-        markdownarea.addPlugin('urls', /(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gim, function(marker) {
+        htmleditor.addPlugin('urls', /(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gim, function(marker) {
 
             if (marker.found[4] && marker.found[4].indexOf("!"+marker.found[0])!=-1) {
                 return marker.found[0];

@@ -22,7 +22,7 @@ var require = (function(win, doc) {
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
-                        'markdownarea':    'vendor/assets/uikit/js/addons/markdownarea.min',
+                        'htmleditor':      'vendor/assets/uikit/js/addons/htmleditor.min',
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
                         'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,
@@ -36,11 +36,11 @@ var require = (function(win, doc) {
                         'codemirror': {
                             deps: ['css!vendor/assets/codemirror/codemirror', 'css!vendor/assets/codemirror/hint']
                         },
-                        'markdownarea': {
+                        'htmleditor': {
                             deps: ['uikit', 'marked', 'codemirror']
                         },
                         'editor.markdown': {
-                            deps: ['markdownarea']
+                            deps: ['htmleditor']
                         }
                     },
                     config: {
