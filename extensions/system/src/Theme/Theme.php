@@ -47,8 +47,15 @@ class Theme
      */
     public function boot(Application $app)
     {
-        $this->registerLanguages($app['translator']);
-        $this->registerResources($app['locator']);
+        $self = $this;
+
+        $app->on('init', function() use ($app, $self) {
+            $self->registerLanguages($app['translator']);
+        });
+
+        $app->on('site.init', function() use ($app, $self) {
+            $self->registerResources($app['locator']);
+        });
     }
 
     /**
