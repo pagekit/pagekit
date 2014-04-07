@@ -1,4 +1,4 @@
-/*! UIkit 2.5.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.6.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(core) {
 
@@ -50,7 +50,7 @@
         return UI;
     }
 
-    UI.version = '2.5.0';
+    UI.version = '2.6.0';
 
     UI.fn = function(command, options) {
 
@@ -269,17 +269,21 @@
 
     $(function(){
 
-        $(doc).trigger("uk-domready");
+        $(document).trigger("uk-domready");
 
         // Check for dom modifications
         if(!UI.support.mutationobserver) return;
 
-        var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
-            $(doc).trigger("uk-domready");
-        }, 300));
+        try{
 
-        // pass in the target node, as well as the observer options
-        observer.observe(document.body, { childList: true, subtree: true });
+            var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
+                $(document).trigger("uk-domready");
+            }, 300));
+
+            // pass in the target node, as well as the observer options
+            observer.observe(document.body, { childList: true, subtree: true });
+
+        } catch(e) {}
 
         // remove css hover rules for touch devices
         if (UI.support.touch) {
@@ -1282,7 +1286,6 @@
 
     Modal.defaults = {
         keyboard: true,
-        show: false,
         bgclose: true,
         minScrollHeight: 150
     };

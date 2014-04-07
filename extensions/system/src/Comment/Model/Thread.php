@@ -17,17 +17,17 @@ abstract class Thread implements ThreadInterface
     /**
      * @var bool
      */
-    protected $isCommentable = true;
+    protected $is_commentable = true;
 
     /**
      * @var integer
      */
-    protected $numComments = 0;
+    protected $num_comments = 0;
 
     /**
      * @var \DateTime
      */
-    protected $lastCommentAt = null;
+    protected $last_comment_at = null;
 
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ abstract class Thread implements ThreadInterface
      */
     public function isCommentable()
     {
-        return $this->isCommentable;
+        return $this->is_commentable;
     }
 
     /**
@@ -58,7 +58,7 @@ abstract class Thread implements ThreadInterface
      */
     public function setCommentable($isCommentable)
     {
-        $this->isCommentable = (bool) $isCommentable;
+        $this->is_commentable = (bool) $isCommentable;
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class Thread implements ThreadInterface
      */
     public function getNumComments()
     {
-        return $this->numComments;
+        return $this->num_comments;
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class Thread implements ThreadInterface
      */
     public function setNumComments($numComments)
     {
-        $this->numComments = intval($numComments);
+        $this->num_comments = intval($numComments);
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class Thread implements ThreadInterface
      */
     public function incrementNumComments($by = 1)
     {
-        return $this->numComments += intval($by);
+        return $this->num_comments += intval($by);
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class Thread implements ThreadInterface
      */
     public function getLastCommentAt()
     {
-        return $this->lastCommentAt;
+        return $this->last_comment_at;
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class Thread implements ThreadInterface
      */
     public function setLastCommentAt(\DateTime $lastCommentAt)
     {
-        $this->lastCommentAt = $lastCommentAt;
+        $this->last_comment_at = $lastCommentAt;
     }
 
     /**

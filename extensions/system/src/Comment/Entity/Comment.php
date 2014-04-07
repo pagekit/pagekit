@@ -26,11 +26,11 @@ abstract class Comment extends AbstractComment
     /** @Column(type="smallint") */
     protected $status;
 
-    /** @Column(name="parent_id", type="integer") */
-    protected $parentId;
+    /** @Column(type="integer") */
+    protected $parent_id;
 
-    /** @Column(name="thread_id", type="integer") */
-    protected $threadId;
+    /** @Column(type="integer") */
+    protected $thread_id;
 
     public function __construct()
     {
@@ -39,12 +39,12 @@ abstract class Comment extends AbstractComment
 
     public function getThreadId()
     {
-        return $this->threadId;
+        return $this->thread_id;
     }
 
     public function setThreadId($threadId)
     {
-        $this->threadId = $threadId;
+        $this->thread_id = $threadId;
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class Comment extends AbstractComment
      */
     public function getParentId()
     {
-        return $this->parentId;
+        return $this->parent_id;
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class Comment extends AbstractComment
      */
     public function setParentId($parentId)
     {
-        $this->parentId = $parentId;
+        $this->parent_id = $parentId;
     }
 
     /**

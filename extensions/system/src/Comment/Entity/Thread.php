@@ -6,12 +6,12 @@ use Pagekit\Comment\Model\Thread as AbstractThread;
 
 class Thread extends AbstractThread
 {
-    /** @Column(name="is_commentable", type="boolean") */
-    protected $isCommentable;
+    /** @Column(type="boolean") */
+    protected $is_commentable;
 
-    /** @Column(name="num_comments", type="integer") */
-    protected $numComments = 0;
+    /** @Column(type="integer") */
+    protected $num_comments = 0;
 
-    /** @Column(name="last_comment_at", type="datetime") */
-    protected $lastCommentAt;
+    /** @Column(type="datetime") */
+    protected $last_comment_at;
 }

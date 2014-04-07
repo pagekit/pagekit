@@ -8,13 +8,15 @@
 // ========================================================================
 
 @dropdown-z-index:                              (@global-z-index + 20);
+@dropdown-padding:                              5px;
 @dropdown-background:                           #fff;
 @dropdown-color:                                @global-color;
 @dropdown-divider-border:                       @global-border;
 
-@dropdown-navbar-margin:                        0;
+@dropdown-navbar-margin:                        5px;
 @dropdown-navbar-background:                    @global-navbar-background;
 @dropdown-navbar-color:                         @global-navbar-color;
+@dropdown-navbar-animation:                     uk-fade;
 
 //
 // New
@@ -36,16 +38,13 @@
 // ========================================================================
 
 .hook-dropdown-navbar() {
-    border-top: none;
-    border-radius: 0;
+	min-width: 150px;
+    width: auto;
+    white-space: nowrap;
 }
 
 
 // Miscellaneous
 // ========================================================================
 
-.hook-dropdown-misc() {
-
-    .uk-dropdown-navbar .uk-nav { margin: -@dropdown-padding -@dropdown-padding 0 -@dropdown-padding; }
-
-}
+.hook-dropdown-misc() {}
