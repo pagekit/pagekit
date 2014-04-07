@@ -77,7 +77,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 marker.replace('');
             });
 
-            return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://'!==marker.found[3].trim()) ? attrs.src : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
+            return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://'!==marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
     };
