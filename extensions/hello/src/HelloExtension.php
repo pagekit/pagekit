@@ -11,10 +11,6 @@ use Pagekit\Hello\Event\HelloListener;
 
 class HelloExtension extends Extension
 {
-    public function __construct()
-    {
-        $listener = new HelloListener();
-    }
 
     /**
      * {@inheritdoc}
@@ -22,6 +18,8 @@ class HelloExtension extends Extension
     public function boot(Application $app)
     {
         parent::boot($app);
+
+        $this('events')->addSubscriber(new HelloListener());
 
         $app->on('system.widget', function(RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');

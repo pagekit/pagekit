@@ -8,11 +8,6 @@ use Pagekit\Framework\ApplicationAware;
 class HelloListener extends ApplicationAware implements EventSubscriberInterface
 {
 
-    public function __construct()
-    {
-        $this('events')->addSubscriber($this);
-    }
-
     public function onBoot($event, $eventName, $dispatcher)
     {
         // do something
