@@ -11,9 +11,9 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
 
     return function(htmleditor) {
 
-        htmleditor.addPlugin('htmlurls', /<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)<\/a>/gim, function(marker) {
+        htmleditor.addPlugin('htmlurls', /<a(.+?)>([^<]*)<\/a>/gim, function(marker) {
 
-            var url = marker.found[1], txt = marker.found[2];
+            var anchor = $(marker.found[0]), txt = anchor.html() || "", href = anchor.attr('href') || "";
 
             marker.area.preview.on('click', '#' + marker.uid, function(e) {
 
@@ -22,17 +22,20 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
                 handler = function() {
                     picker.hide();
 
-                    marker.replace('<a href="' + link.get() + '">' + title.val() + '</a>');
+                    anchor.attr("href", link.get());
+                    anchor.html(title.val());
+
+                    marker.replace(anchor[0].outerHTML);
                 };
 
                 title.val(txt);
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 
-                link = Link.attach(modal.find('.js-linkpicker'), { value: url })
+                link = Link.attach(modal.find('.js-linkpicker'), { value: href })
             });
 
-            return tmpl.render('link.replace', { marker: marker, link: url.trim() ? url : null, txt:  txt.trim() ? txt : null }).replace(/(\r\n|\n|\r)/gm, '');
+            return tmpl.render('link.replace', { marker: marker, link: href.trim() ? href : null, txt:  txt.trim() ? txt : null, "class": anchor.attr("class") || ""  }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
 

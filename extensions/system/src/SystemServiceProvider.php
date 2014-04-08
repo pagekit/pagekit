@@ -2,6 +2,7 @@
 
 namespace Pagekit;
 
+use Pagekit\Component\File\Exception\InvalidArgumentException;
 use Pagekit\Component\Package\Installer\PackageInstaller;
 use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Component\View\View;
@@ -109,13 +110,27 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.init' : 'site.init');
     }
 
+    public function onTemplateReference($event)
+    {
+        try {
+
+            $template = $event->getTemplateReference();
+
+            if (filter_var($path = $template->get('path'), FILTER_VALIDATE_URL) !== false) {
+                $template->set('path', $this->app['locator']->findResource($path));
+            }
+
+        } catch (InvalidArgumentException $e) {}
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
             'kernel.request' => array(
                 array('onEarlyKernelRequest', 256),
                 array('onKernelRequest', 64)
-            )
+            ),
+            'templating.reference' => 'onTemplateReference'
         );
     }
 }

@@ -1,1 +1,1 @@
-<a id="{{ marker.uid }}" href="{{ link }}">{{#txt}}{{txt}}{{/txt}}{{^txt}}@trans('Link...'){{/txt}} <span class="uk-icon-pencil"></span></a>
+<a id="{{ marker.uid }}" class="{{#class}}{{class}}{{/class}}" href="{{ link }}">{{#txt}}{{txt}}{{/txt}}{{^txt}}@trans('Link...'){{/txt}} <span class="uk-icon-pencil"></span></a>
