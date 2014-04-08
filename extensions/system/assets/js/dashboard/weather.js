@@ -10,7 +10,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
         loadData(config).done(function(data) {
 
-            widget.find('.spinner').addClass('uk-hidden');
+            widget.find('.js-spinner').addClass('uk-hidden');
 
             var unit = config.units == 'metric' ? ' &deg;C' : ' &deg;F',
                 location = config.location.split(',');
