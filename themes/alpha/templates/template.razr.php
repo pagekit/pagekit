@@ -14,17 +14,26 @@
         <div class="uk-container uk-container-center">
 
             @if (position.exists('logo'))
-            <div class="uk-text-center uk-margin-large uk-margin-large-top">
+            <div class="tm-logo uk-hidden-small">
                 <a href="@url.base" class="tm-brand">@position.render('logo', ['renderer' => 'blank'])</a>
-                <a href="#offcanvas" class="uk-navbar-toggle uk-hidden-large tm-navbar-toggle" data-uk-offcanvas></a>
             </div>
             @endif
 
             @if (position.exists('navbar'))
-            <div class="tm-navbar uk-margin-large">
+            <div class="tm-navbar">
+
                 <nav class="uk-navbar uk-hidden-small">
                     @position.render('navbar', ['renderer' => 'navbar', 'classes' => 'uk-hidden-small'])
                 </nav>
+
+                <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+
+                @if (position.exists('logo-small'))
+                <div class="uk-navbar-content uk-navbar-center uk-visible-small">
+                    <a href="@url.base" class="tm-brand">@position.render('logo-small', ['renderer' => 'blank'])</a>
+                </div>
+                @endif
+
             </div>
             @endif
 
@@ -67,9 +76,7 @@
         @if (position.exists('offcanvas'))
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
-                <nav class="uk-navbar uk-hidden-small">
-                    @position.render('offcanvas', ['renderer' => 'offcanvas'])
-                </nav>
+                @position.render('offcanvas', ['renderer' => 'offcanvas'])
             </div>
         </div>
         @endif

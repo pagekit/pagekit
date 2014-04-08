@@ -5,6 +5,7 @@ return array(
     'positions' => array(
 
         'logo'          => 'Logo',
+        'logo-small'    => 'Logo Small',
         'navbar'        => 'Navbar',
         'top'           => 'Top',
         'sidebar-a'     => 'Sidebar A',
