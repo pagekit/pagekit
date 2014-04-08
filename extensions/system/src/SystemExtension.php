@@ -43,6 +43,8 @@ class SystemExtension extends Extension
      */
     public function boot(Application $app)
     {
+        parent::boot($app);
+
         $app['exception']->pushHandler(new ExceptionHandler($app['config']['app.debug']));
 
         $app['events']->addSubscriber(new AccessListener);
@@ -60,8 +62,6 @@ class SystemExtension extends Extension
         $app['events']->addSubscriber(new ThemeListener);
         $app['events']->addSubscriber(new UserListener);
         $app['events']->addSubscriber(new WidgetListener);
-
-        parent::boot($app);
 
         $this->mergeOptions();
 

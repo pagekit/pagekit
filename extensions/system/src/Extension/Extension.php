@@ -50,9 +50,15 @@ class Extension extends ApplicationAware
      */
     public function boot(Application $app)
     {
-        $this->registerControllers($app['router']);
-        $this->registerLanguages($app['translator']);
-        $this->registerResources($app['locator'], $app['events']);
+        $self = $this;
+
+        $app->on('init', function() use ($app, $self) {
+
+            $self->registerControllers($app['router']);
+            $self->registerLanguages($app['translator']);
+            $self->registerResources($app['locator'], $app['events']);
+
+        }, 32);
     }
 
     /**

@@ -14,9 +14,9 @@ class PageExtension extends Extension
      */
     public function boot(Application $app)
     {
-        $app['events']->addSubscriber(new RouteListener);
-
         parent::boot($app);
+
+        $app['events']->addSubscriber(new RouteListener);
 
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');
