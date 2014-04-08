@@ -199,6 +199,7 @@ class SystemExtension extends Extension
     protected function mergeOptions()
     {
         $keys = array(
+            'app.frontpage',
             'app.locale',
             'app.locale_admin',
             'app.site_description',
