@@ -87,7 +87,7 @@ class AccessListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos($this('request')->get('redirect'), $this('url')->route('admin', array(), true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos($this('request')->get('redirect'), $this('url')->route('@system/system/admin', array(), true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
