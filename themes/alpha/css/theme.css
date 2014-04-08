@@ -6885,12 +6885,19 @@ html {
 /* Navbar center
  ========================================================================== */
 .tm-navbar {
-  margin: 40px 0;
+  margin: 20px 0;
   text-align: center;
 }
 .tm-navbar > .uk-navbar {
   display: inline-block;
   vertical-align: middle;
+}
+/* Only large screens */
+@media (min-width: 768px) {
+  .tm-navbar {
+    margin: 40px 0;
+    text-align: center;
+  }
 }
 /* Brand
  ========================================================================== */

@@ -15,21 +15,31 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 .tm-logo {
-	margin-top: 80px;
-	text-align: center;
+    margin-top: 80px;
+    text-align: center;
 }
 
 /* Navbar center
  ========================================================================== */
 
 .tm-navbar {
-	margin: 40px 0;
-	text-align: center;
+    margin: 20px 0;
+    text-align: center;
 }
 
 .tm-navbar > .uk-navbar {
     display: inline-block;
     vertical-align: middle;
+}
+
+/* Only large screens */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-navbar {
+        margin: 40px 0;
+        text-align: center;
+    }
+
 }
 
 
