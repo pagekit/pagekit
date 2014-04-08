@@ -17,6 +17,6 @@
         @endif
     </p>
 
-    <input type="hidden" name="redirect" value="@(widget.get('redirect.login') ?: app.url.current(true))">
+    <input type="hidden" name="redirect" value="@redirect">
     @token()
 </form>

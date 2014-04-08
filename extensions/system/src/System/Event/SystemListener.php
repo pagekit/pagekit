@@ -16,10 +16,10 @@ use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\EditorHelper;
 use Pagekit\System\Templating\FinderHelper;
-use Pagekit\System\Widget\LoginWidget;
 use Pagekit\System\Widget\TextWidget;
 use Pagekit\User\Auth\UserProvider;
 use Pagekit\User\Event\UserListener;
+use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\SimpleFilter;
 use Razr\SimpleFunction;
@@ -191,6 +191,7 @@ class SystemListener extends EventSubscriber
     {
         $event->register('Pagekit\System\Link\Frontpage');
         $event->register('Pagekit\System\Link\Url');
+        $event->register('Pagekit\User\Link\Login');
     }
 
     /**
