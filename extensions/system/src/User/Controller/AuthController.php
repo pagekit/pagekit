@@ -39,7 +39,7 @@ class AuthController extends Controller
      * @Request({"redirect"})
      * @View("system/user/login.razr.php")
      */
-    public function loginAction($redirect = '/')
+    public function loginAction($redirect = '')
     {
         if ($this->user->isAuthenticated()) {
             return $this->redirect($redirect);
