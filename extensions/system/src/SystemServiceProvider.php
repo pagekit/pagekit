@@ -10,6 +10,7 @@ use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ServiceProviderInterface;
+use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\System\FileProvider;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
@@ -17,10 +18,14 @@ use Pagekit\Theme\Package\ThemeLoader;
 use Pagekit\Theme\Package\ThemeRepository;
 use Pagekit\Theme\ThemeManager;
 
-class SystemServiceProvider implements ServiceProviderInterface
+class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
+    protected $app;
+
     public function register(Application $app)
     {
+        $this->app = $app;
+
         $app['file'] = function($app) {
             return new FileProvider($app);
         };
@@ -60,6 +65,8 @@ class SystemServiceProvider implements ServiceProviderInterface
 
     public function boot(Application $app)
     {
+        $app['events']->addSubscriber($this);
+
         if ($app->runningInConsole()) {
             $app->on('console.init', function($event) {
 
@@ -81,5 +88,34 @@ class SystemServiceProvider implements ServiceProviderInterface
                 $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
             }
         }
+    }
+
+    public function onEarlyKernelRequest($event)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+    }
+
+    public function onKernelRequest($event, $name, $dispatcher)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $dispatcher->dispatch('init');
+        $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.init' : 'site.init');
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            'kernel.request' => array(
+                array('onEarlyKernelRequest', 256),
+                array('onKernelRequest', 64)
+            )
+        );
     }
 }
