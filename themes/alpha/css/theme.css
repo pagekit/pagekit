@@ -6226,13 +6226,13 @@ a.uk-thumbnail:focus {
 .uk-container {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 960px;
+  max-width: 900px;
   padding: 0 25px;
 }
 /* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-container {
-    max-width: 960px;
+    max-width: 900px;
     padding: 0 25px;
   }
 }
@@ -6876,9 +6876,16 @@ input.uk-search-field {
 html {
   overflow-y: scroll;
 }
+/* Layout
+ ========================================================================== */
+.tm-logo {
+  margin-top: 80px;
+  text-align: center;
+}
 /* Navbar center
  ========================================================================== */
 .tm-navbar {
+  margin: 40px 0;
   text-align: center;
 }
 .tm-navbar > .uk-navbar {
@@ -6894,12 +6901,6 @@ html {
 }
 .tm-brand:hover {
   text-decoration: none;
-}
-/*
- * Toggle
- */
-.tm-navbar-toggle {
-  height: 28px;
 }
 /* Only large screens */
 @media (min-width: 768px) {

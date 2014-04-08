@@ -11,10 +11,21 @@
 html { overflow-y: scroll; }
 
 
+/* Layout
+ ========================================================================== */
+
+.tm-logo {
+	margin-top: 80px;
+	text-align: center;
+}
+
 /* Navbar center
  ========================================================================== */
 
-.tm-navbar { text-align: center; }
+.tm-navbar {
+	margin: 40px 0;
+	text-align: center;
+}
 
 .tm-navbar > .uk-navbar {
     display: inline-block;
@@ -32,15 +43,6 @@ html { overflow-y: scroll; }
 }
 
 .tm-brand:hover { text-decoration: none; }
-
-/*
- * Toggle
- */
-
-.tm-navbar-toggle {
-    height: 28px;
-}
-
 
 /* Only large screens */
 @media (min-width: @breakpoint-medium) {
