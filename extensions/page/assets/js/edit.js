@@ -21,7 +21,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
         $.post(form.attr("action"), form.serialize(), function(response){
 
-            uikit.notify(response.message);
+            uikit.notify(response.message, response.error ? 'danger':'success');
 
             if (response.id) {
                 form.find('input[name="id"]').val(response.id);

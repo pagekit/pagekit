@@ -116,6 +116,7 @@ class PageController extends Controller
         } catch (Exception $e) {
 
             $response["message"] = $e->getMessage();
+            $response["error"]   = true;
         }
 
         return $this('response')->json($response);
