@@ -31,7 +31,7 @@ composer install
 php path/to/composer.phar install
 ```
 
-To update Pagekit, you need to pull the Pagekit git repro and run the composer `update` command 
+To update Pagekit, you need to pull the Pagekit git repro and run the composer `update` command
 
 ```
 git pull
@@ -44,7 +44,7 @@ You may also clear the `app/cache` folder.
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
 ```
-pagekit --help
+./pagekit --help
 ```
 You can find further information about the command line tools in the [pagekit documentation](http://www.pagekit.com/documentation)
 
