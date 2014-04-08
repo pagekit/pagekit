@@ -5,7 +5,7 @@
     <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
         <li class="uk-active"><a href="#">@trans('Settings')</a></li>
         <li class=""><a href="#">@trans('Assignment')</a></li>
-        @foreach (additionals as name => view)
+        @foreach (additionals as name => settings)
         <li class=""><a href="#">@name</a></li>
         @endforeach
     </ul>
@@ -87,9 +87,9 @@
             </div>
 
         </li>
-        @foreach (additionals as view)
+        @foreach (additionals as settings)
         <li>
-            @app.view.render(view, ['widget' => widget])
+            @settings
         </li>
         @endforeach
     </ul>

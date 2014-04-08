@@ -2,6 +2,7 @@
 
 namespace Pagekit\Alpha;
 
+use Pagekit\Alpha\Event\WidgetListener;
 use Pagekit\Framework\Application;
 use Pagekit\Theme\Theme;
 
@@ -24,6 +25,8 @@ class AlphaTheme extends Theme
     {
         parent::boot($app);
 
+        $app['events']->addSubscriber(new WidgetListener);
+
         $this->app = $app;
         $this->config += $app['option']->get('alpha:config', array());
 
@@ -31,22 +34,17 @@ class AlphaTheme extends Theme
 
             $app['router']->addController('Pagekit\Alpha\Controller\SettingsController', array('name' => 'alpha'));
 
-            $app->on('system.widget.settings', function($event) {
-
-                $event->addSettings('Alpha', 'theme://alpha/views/admin/widgets/edit.razr.php');
-
-            });
         });
 
         $app->on('site.init', function() use ($app) {
 
             $app->on('system.position.renderer', function($event) use ($app) {
 
-                $event->register('blank', 'theme://alpha/views/renderer/position.blank.razr.php');
-                $event->register('grid', 'theme://alpha/views/renderer/position.grid.php');
-                $event->register('navbar', 'theme://alpha/views/renderer/position.navbar.razr.php');
+                $event->register('blank',     'theme://alpha/views/renderer/position.blank.razr.php');
+                $event->register('grid',      'theme://alpha/views/renderer/position.grid.php');
+                $event->register('navbar',    'theme://alpha/views/renderer/position.navbar.razr.php');
                 $event->register('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
-                $event->register('panel', 'theme://alpha/views/renderer/position.panel.razr.php');
+                $event->register('panel',     'theme://alpha/views/renderer/position.panel.razr.php');
 
             });
 

@@ -23,7 +23,6 @@ use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\SimpleFilter;
 use Razr\SimpleFunction;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class SystemListener extends EventSubscriber
 {

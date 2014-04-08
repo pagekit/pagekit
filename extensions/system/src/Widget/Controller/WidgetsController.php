@@ -6,6 +6,9 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Event\WidgetCopyEvent;
+use Pagekit\Widget\Event\WidgetEditEvent;
+use Pagekit\Widget\Event\WidgetEvent;
 use Pagekit\Widget\Event\WidgetSettingsEvent;
 
 /**
@@ -76,7 +79,7 @@ class WidgetsController extends Controller
         $widget = new Widget;
         $widget->setType($type);
 
-        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->getAdditionalSettings());
+        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
     }
 
     /**
@@ -85,9 +88,18 @@ class WidgetsController extends Controller
      */
     public function editAction($id)
     {
-        $widget = $this->widgets->find($id);
+        try {
 
-        return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->getAdditionalSettings());
+            if (!$widget = $this->widgets->find($id)) {
+                throw new Exception(__('Invalid widget id'));
+            }
+
+            return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
+
+        } catch (Exception $e) {
+            $this('message')->error($e->getMessage());
+        }
+        return $this->redirect('@system/widgets/index');
     }
 
     /**
@@ -102,7 +114,7 @@ class WidgetsController extends Controller
             if (!$widget = $this->widgets->find($id)) {
 
                 if ($id) {
-                    throw new Exception(__('No widget found for id "%id%"', array('%id%' => $id)));
+                    throw new Exception(__('Invalid widget id'));
                 }
 
                 $widget = new Widget;
@@ -112,6 +124,9 @@ class WidgetsController extends Controller
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
 
             $this->widgets->save($widget, $data);
+
+            $this('events')->dispatch('system.widget.save', $event = new WidgetEvent($widget));
+
             $id = $widget->getId();
 
             $this('message')->success($id ? __('Widget saved.') : __('Widget created.'));
@@ -150,15 +165,19 @@ class WidgetsController extends Controller
     public function copyAction($ids = array())
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id)) {
 
-                $widget = clone $widget;
-                $widget->setId(null);
-                $widget->setStatus(Widget::STATUS_DISABLED);
-                $widget->setTitle($widget->getTitle().' - '.__('Copy'));
-
-                $this->widgets->save($widget);
+            if (!$widget = $this->widgets->find($id)) {
+                continue;
             }
+
+            $copy = clone $widget;
+            $copy->setId(null);
+            $copy->setStatus(Widget::STATUS_DISABLED);
+            $copy->setTitle($widget->getTitle().' - '.__('Copy'));
+
+            $this->widgets->save($copy);
+
+            $this('events')->dispatch('system.widget.copy', $event = new WidgetCopyEvent($widget, $copy));
         }
 
         return $this->redirect('@system/widgets/index');
@@ -215,9 +234,9 @@ class WidgetsController extends Controller
         return $this('response')->json(array('message' => __('Widgets updated.')));
     }
 
-    protected function getAdditionalSettings()
+    protected function triggerEditEvent($widget)
     {
-        $this('events')->dispatch('system.widget.settings', $event = new WidgetSettingsEvent);
+        $this('events')->dispatch('system.widget.edit', $event = new WidgetEditEvent($widget));
         return $event->getSettings();
     }
 }

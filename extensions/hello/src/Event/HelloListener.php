@@ -2,8 +2,8 @@
 
 namespace Pagekit\Hello\Event;
 
-use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\Event\EventSubscriberInterface;
 
 class HelloListener extends ApplicationAware implements EventSubscriberInterface
 {
