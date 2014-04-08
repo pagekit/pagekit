@@ -145,17 +145,31 @@ class UserController extends Controller
                 throw new Exception(__('Unable to block yourself.'));
             }
 
-            if ($this->users->where(array('id <> :id', ), compact('id'))->where(function($query) use ($data) {
-                $query->orWhere(array('username = :username', 'email = :username'), array('username' => $data['username']));
+            $name  = trim(@$data['username']);
+            $email = trim(@$data['email']);
+
+            if (strlen($name) < 3) {
+                throw new Exception(__('Name is invalid.'));
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception(__('Email is invalid.'));
+            }
+
+            if ($this->users->where(array('id <> :id', ), compact('id'))->where(function($query) use ($name) {
+                $query->orWhere(array('username = :username', 'email = :username'), array('username' => $name));
             })->first()) {
                 throw new Exception(__('Username not available.'));
             }
 
-            if ($this->users->where(array('id <> :id'), compact('id'))->where(function($query) use ($data) {
-                $query->orWhere(array('username = :email', 'email = :email'), array('email' => $data['email']));
+            if ($this->users->where(array('id <> :id'), compact('id'))->where(function($query) use ($email) {
+                $query->orWhere(array('username = :email', 'email = :email'), array('email' => $email));
             })->first()) {
                 throw new Exception(__('Email not available.'));
             }
+
+            $data['username'] = $name;
+            $data['email']    = $email;
 
             if (!empty($password)) {
                 $user->setPassword($this('auth.encoder.native')->hash($password));
