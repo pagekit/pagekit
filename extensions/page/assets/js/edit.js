@@ -1,4 +1,4 @@
-require(['jquery', 'domReady!'], function($) {
+require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     var form = $('#js-page');
 
@@ -13,5 +13,20 @@ require(['jquery', 'domReady!'], function($) {
     if (status.val() == '') status.val(0);
 
     statuses.eq(status.val()).removeClass('uk-hidden');
+
+    form.on("submit", function(e){
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        $.post(form.attr("action"), form.serialize(), function(response){
+
+            uikit.notify(response.message);
+
+            if (response.id) {
+                form.find('input[name="id"]').val(response.id);
+            }
+        });
+    });
 
 });

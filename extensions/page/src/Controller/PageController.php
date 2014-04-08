@@ -95,6 +95,9 @@ class PageController extends Controller
      */
     public function saveAction($id, $data)
     {
+
+        $response = array();
+
         try {
 
             if (!$page = $this->pages->find($id)) {
@@ -107,15 +110,15 @@ class PageController extends Controller
 
             $this->pages->save($page, $data);
 
-            $this('message')->success($id ? __('Page saved.') : __('Page created.'));
-
-            $id = $page->getId();
+            $response["message"] = $id ? __('Page saved.') : __('Page created.');
+            $response["id"]      = $page->getId();
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+
+            $response["message"] = $e->getMessage();
         }
 
-        return $this->redirect(($id ? '@page/page/edit' : '@page/page/add'), compact('id'));
+        return $this('response')->json($response);
     }
 
     /**

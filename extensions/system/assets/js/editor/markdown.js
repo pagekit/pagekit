@@ -25,7 +25,7 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
 
     function save(textarea) {
         if (textarea.form) {
-            textarea.form.submit();
+            $(textarea.form).submit();
         }
     }
 });

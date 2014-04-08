@@ -1,9 +1,10 @@
 @script('pages-edit', 'page/js/edit.js', 'requirejs')
 
-<form id="js-page" class="uk-form uk-form-horizontal" action="@url.route('@page/page/save', ['id' => page.id ?: 0])" method="post">
+<form id="js-page" class="uk-form uk-form-horizontal" action="@url.route('@page/page/save')" method="post">
 
     <div class="uk-form-row">
         <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
+        <input type="hidden" name="id" value="@(page.id ?: 0)">
     </div>
 
     <div class="uk-form-row">
