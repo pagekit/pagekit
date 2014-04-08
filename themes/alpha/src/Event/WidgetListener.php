@@ -3,20 +3,13 @@
 namespace Pagekit\Alpha\Event;
 
 use Pagekit\Component\Database\Event\EntityEvent;
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\Theme\Theme;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;
 
 class WidgetListener extends EventSubscriber
 {
-    /**
-     * @var Theme
-     */
-    protected $theme;
-
     public function onWidgetEdit(WidgetEditEvent $event)
     {
         $view = $this('view');
@@ -74,17 +67,5 @@ class WidgetListener extends EventSubscriber
         $config['widgets'] = $settings;
 
         $this('option')->set('alpha:config', $config);
-    }
-
-    /**
-     * @return Repository
-     */
-    protected function getTheme()
-    {
-        if (!$this->theme) {
-            $this->theme = $this('themes')->get('alpha');
-        }
-
-        return $this->theme;
     }
 }

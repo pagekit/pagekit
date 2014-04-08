@@ -2,7 +2,6 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\Entity\Widget;
 
 class WidgetCopyEvent extends WidgetEvent
