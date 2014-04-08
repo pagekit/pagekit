@@ -1,6 +1,7 @@
 @script('weather', 'system/js/dashboard/weather.js', ['requirejs'])
 
 <div class="uk-text-center" data-weather="@(['id' => widget.settings.id, 'units' => widget.settings.units, 'location' => widget.settings.location]|json_encode|e)">
+    <div class="js-spinner uk-text-center"><i class="uk-icon-spinner uk-icon-spin"></i></div>
     <div class="pk-weather-image">
     	<img class="js-weather-icon uk-text-top">
     	<span class="js-weather-temperatur uk-text-large uk-text-muted pk-weather-temperatur"></span>
