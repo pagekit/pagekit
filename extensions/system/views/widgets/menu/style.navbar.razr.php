@@ -1,6 +1,6 @@
 @extends('view://system/widgets/menu/style.nav.razr.php')
 
-@block('menuAttributes') class="uk-navbar-nav"@endblock
+@block('menuAttributes') class="uk-navbar-nav@(options.classes ? ' '~options.classes : '')"@endblock
 
 @block('itemAttributes')@parent()@(item.hasChildren ? ' data-uk-dropdown')@endblock
 

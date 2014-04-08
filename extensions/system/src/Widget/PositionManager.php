@@ -37,7 +37,7 @@ class PositionManager extends ApplicationAware implements \ArrayAccess, \Iterato
             $output = array();
 
             foreach ($widgets as $widget) {
-                $output[] = '<div>'.$provider->render($widget).'</div>';
+                $output[] = '<div>'.$provider->render($widget, $options).'</div>';
             }
 
             return implode("\n", $output);

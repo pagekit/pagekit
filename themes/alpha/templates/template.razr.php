@@ -23,7 +23,7 @@
             @if (position.exists('navbar'))
             <div class="tm-navbar uk-margin-large">
                 <nav class="uk-navbar uk-hidden-small">
-                    @position.render('navbar', ['renderer' => 'navbar'])
+                    @position.render('navbar', ['renderer' => 'navbar', 'classes' => 'uk-hidden-small'])
                 </nav>
             </div>
             @endif

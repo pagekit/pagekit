@@ -40,7 +40,7 @@ class MenuWidget extends Type
             ini_set('xdebug.max_nesting_level', 1000);
         }
 
-        $layout = isset($options['layout']) ? $options['layout'] : "system/widgets/menu/style.nav.razr.php";
+        $layout = isset($options['layout']) ? $options['layout'] : 'system/widgets/menu/style.nav.razr.php';
 
         $root = $this('menus')->getTree($widget->get('menu', 0), array(
             'access' => true,
