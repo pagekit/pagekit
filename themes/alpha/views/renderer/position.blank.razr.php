@@ -1,3 +1,3 @@
 @foreach (widgets as widget)
-    @provider.render(widget)
+    @provider.render(widget, options)
 @endforeach

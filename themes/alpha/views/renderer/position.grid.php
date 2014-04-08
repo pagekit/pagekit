@@ -21,7 +21,7 @@ foreach ($widgets as $widget) {
     $output[] = '<div class="uk-width-medium-'.$class.'">';
     $output[] =     '<div class="uk-panel">';
     $output[] =         $widget->getShowTitle() ? '<h3>'.$widget->getTitle().'</h3>':'';
-    $output[] =         $provider->render($widget);
+    $output[] =         $provider->render($widget, $options);
     $output[] =     '</div>';
     $output[] = '</div>';
 

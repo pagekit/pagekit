@@ -44,7 +44,7 @@ class WidgetListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.init' => 'onSiteInit'
+            'site.init' => array('onSiteInit', -16)
         );
     }
 
