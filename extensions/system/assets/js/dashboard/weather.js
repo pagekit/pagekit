@@ -10,6 +10,8 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
         loadData(config).done(function(data) {
 
+            widget.find('.spinner').addClass('uk-hidden');
+
             var unit = config.units == 'metric' ? ' &deg;C' : ' &deg;F',
                 location = config.location.split(',');
             $('.js-weather-city', widget).html(location[0]);
