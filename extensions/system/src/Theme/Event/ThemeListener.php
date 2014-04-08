@@ -9,7 +9,7 @@ class ThemeListener extends EventSubscriber
     /**
      * Loads the site/admin theme.
      */
-    public function onEarlyKernelRequest()
+    public function onKernelRequest()
     {
         try {
 
@@ -32,7 +32,7 @@ class ThemeListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => array('onEarlyKernelRequest', 128)
+            'kernel.request' => array('onKernelRequest', 128)
         );
     }
 }
