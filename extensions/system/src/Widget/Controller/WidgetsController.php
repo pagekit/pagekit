@@ -152,7 +152,7 @@ class WidgetsController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
+        $this('message')->success(_c('{0} No widget was selected.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
         return $this->redirect('@system/widgets/index');
     }
@@ -179,6 +179,8 @@ class WidgetsController extends Controller
 
             $this('events')->dispatch('system.widget.copy', $event = new WidgetCopyEvent($widget, $copy));
         }
+        
+          $this('message')->success(_c('{0} No widget was selected.|{1} Widget copied.|]1,Inf[ Widgets copied.', count($ids)));      
 
         return $this->redirect('@system/widgets/index');
     }
@@ -195,6 +197,8 @@ class WidgetsController extends Controller
                 $this->widgets->save($widget, array('status' => Widget::STATUS_ENABLED));
             }
         }
+        
+          $this('message')->success(_c('{0} No widget was selected.|{1} Widget enabled.|]1,Inf[ Widgets enabled.', count($ids)));      
 
         return $this->redirect('@system/widgets/index');
     }
@@ -210,6 +214,8 @@ class WidgetsController extends Controller
                 $this->widgets->save($widget, array('status' => Widget::STATUS_DISABLED));
             }
         }
+        
+         $this('message')->success(_c('{0} No widget was selected.|{1} Widget disabled.|]1,Inf[ Widgets disabled.', count($ids)));       
 
         return $this->redirect('@system/widgets/index');
     }
