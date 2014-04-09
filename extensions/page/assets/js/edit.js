@@ -6,11 +6,10 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
     var $slug  = $('input[name="page[slug]"]', $form),
         $title = $('input[name="page[title]"]', $form);
 
-    if (!($id.val()-0)) {
-        $title.on('blur', function () {
-            $slug.val('').trigger('blur');
-        });
-    }
+    $title.on('blur', function () {
+        if (!($id.val()-0)) $slug.val('');
+        $slug.trigger('blur');
+    });
 
     $slug.on('blur', function() {
         $.post($slug.data('url'), { slug: $slug.val() ? $slug.val() : $title.val(), id: $id.val() }, function(data) {
