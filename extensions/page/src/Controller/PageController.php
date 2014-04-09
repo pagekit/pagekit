@@ -134,7 +134,7 @@ class PageController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No selection made.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
+        $this('message')->success(_c('{0} No selection was made.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
 
         return $this->redirect('@page/page/index');
     }
@@ -158,7 +158,7 @@ class PageController extends Controller
             }
         }
         
-        $this('message')->success(_c('{0} No selection made.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
+        $this('message')->success(_c('{0} No selection was made.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
 
         return $this->redirect('@page/page/index');
     }
@@ -177,9 +177,9 @@ class PageController extends Controller
         }
 
         if ($status == Page::STATUS_PUBLISHED) {
-            $this('message')->success(_c('{0} No selection made.|{1} Page published.|]1,Inf[ Pages published.', count($ids)));
+            $this('message')->success(_c('{0} No selection was made.|{1} Page published.|]1,Inf[ Pages published.', count($ids)));
         } else {
-            $this('message')->success(_c('{0} No selection made.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids)));
+            $this('message')->success(_c('{0} No selection was made.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids)));
         }
 
         return $this->redirect('@page/page/index');
