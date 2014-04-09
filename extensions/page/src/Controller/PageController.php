@@ -158,7 +158,7 @@ class PageController extends Controller
             }
         }
         
-        $this('message')->success(_c('{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));        
+        $this('message')->success(_c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
 
         return $this->redirect('@page/page/index');
     }

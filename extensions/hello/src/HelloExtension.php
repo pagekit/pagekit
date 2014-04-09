@@ -8,10 +8,8 @@ use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 
-
 class HelloExtension extends Extension
 {
-
     /**
      * {@inheritdoc}
      */
