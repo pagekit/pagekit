@@ -157,6 +157,8 @@ class PageController extends Controller
                 $this->pages->save($page);
             }
         }
+        
+        $this('message')->success(_c('{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));        
 
         return $this->redirect('@page/page/index');
     }
