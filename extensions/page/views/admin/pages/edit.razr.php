@@ -31,17 +31,15 @@
             </li>
             <li>
                 @trans('Markdown'):
-                <a class="js-markdown" href="#" data-uk-toggle="{target:'.js-markdown'}">...</a>
-                <select class="uk-form-width-small uk-form-small uk-hidden js-markdown" name="page[data][markdown]">
-                    <option value="0"@(!page.data.markdown ? ' selected' : '')>@trans('No')</option>
-                    <option value="1"@(page.data.markdown  ? ' selected' : '')>@trans('Yes')</option>
-                </select>
+                <a class="uk-text-danger js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('No')</a>
+                <a class="uk-text-success js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Yes')</a>
+                <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
             </li>
         </ul>
     </div>
 
     <div class="uk-form-row">
-        @editor('page[content]', page.content, ['id' => 'page-content', 'markdown' => (page.data.markdown ? 'true':'false') ])
+        @editor('page[content]', page.content, ['id' => 'page-content', 'markdown' => page.get('markdown', '0') ])
     </div>
 
     <p>

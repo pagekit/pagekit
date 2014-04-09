@@ -1,9 +1,8 @@
 require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
-    var form = $('#js-page');
+    var form = $('#js-page'), content = $('#page-content');
 
     $('a.js-access').text($('select.js-access option:selected').text());
-    $('a.js-markdown').text($('select.js-markdown option:selected').text());
 
     var status   = $('input[name="page[status]"]'),
         statuses = $('.js-status').on('click', function(e){
@@ -31,9 +30,10 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
     });
 
 
-    var textarea       = $('#page-content'),
-        markdownselect = $('select.js-markdown').on('change', function(){
-            textarea.trigger(markdownselect.val()=='1' ? 'enableMarkdown':'disableMarkdown');
+    var markdownstatus   = $('input[name="page[data][markdown]"]'),
+        markdownstatuses = $('.js-markdown').on('click', function(e){
+            e.preventDefault();
+            markdownstatus.val(markdownstatuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
+            content.trigger(markdownstatus.val()=='1' ? 'enableMarkdown':'disableMarkdown');
         });
-
 });
