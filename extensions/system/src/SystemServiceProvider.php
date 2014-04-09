@@ -66,10 +66,20 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function boot(Application $app)
     {
-        $app['events']->addSubscriber($this);
+        foreach (array_unique($app['extensions.boot']) as $extension) {
+            try {
+                $app['extensions']->load($extension)->boot($app);
+            } catch (ExtensionLoadException $e) {
+                $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
+            }
+        }
 
         if ($app->runningInConsole()) {
-            $app->on('console.init', function($event) {
+
+            $app['isAdmin'] = false;
+
+            $app['events']->dispatch('init');
+            $app['events']->on('console.init', function($event) {
 
                 $console = $event->getConsole();
                 $namespace = 'Pagekit\\System\\Console\\';
@@ -82,13 +92,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             });
         }
 
-        foreach (array_unique($app['extensions.boot']) as $extension) {
-            try {
-                $app['extensions']->load($extension)->boot($app);
-            } catch (ExtensionLoadException $e) {
-                $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
-            }
-        }
+        $app['events']->addSubscriber($this);
     }
 
     public function onEarlyKernelRequest($event)
