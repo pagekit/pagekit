@@ -174,7 +174,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             var $this = this, path = path || this.path, newPath = path;
 
-            $.post(this.url + 'list', this.getParams(path),function(data) {
+            $.post(this.url + 'list', this.getParams(path), function(data) {
 
                 $this.path = newPath;
                 $this.data = data;
@@ -199,7 +199,6 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 $this.render();
 
             }, 'json').fail(function(jqXHR) {
-
                 uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
             });
         },

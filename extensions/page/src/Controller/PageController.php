@@ -185,6 +185,21 @@ class PageController extends Controller
         return $this->redirect('@page/page/index');
     }
 
+    /**
+     * @Request({"slug", "id": "int"})
+     * @Token
+     */
+    public function getSlugAction($slug, $id = 0)
+    {
+        $slug = $this->slugify($slug);
+        $i = 2;
+        while ($this->pages->query()->where('slug = ?', array($slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
+            $slug = preg_replace('/-\d+$/', '', $slug).'-'.$i++;
+        }
+
+        return $this('response')->json($slug);
+    }
+
     protected function slugify($slug)
     {
         $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);

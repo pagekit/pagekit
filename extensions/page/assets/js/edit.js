@@ -1,39 +1,59 @@
 require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
-    var form = $('#js-page'), content = $('#page-content');
+    var $form = $('#js-page'), $id = $('input[name="id"]', $form);
 
-    $('a.js-access').text($('select.js-access option:selected').text());
+    // slug handling
+    var $slug  = $('input[name="page[slug]"]', $form),
+        $title = $('input[name="page[title]"]', $form);
 
-    var status   = $('input[name="page[status]"]'),
-        statuses = $('.js-status').on('click', function(e){
+    if (!($id.val()-0)) {
+        $title.on('blur', function () {
+            $slug.val('').trigger('blur');
+        });
+    }
+
+    $slug.on('blur', function() {
+        $.post($slug.data('url'), { slug: $slug.val() ? $slug.val() : $title.val(), id: $id.val() }, function(data) {
+            $slug.val(data).addClass('uk-hidden');
+            $('.js-slug[data-uk-toggle]').text(data).removeClass('uk-hidden');
+        }, 'json');
+    });
+
+    // status handling
+    var $status   = $('input[name="page[status]"]', $form),
+        $statuses = $('.js-status', $form).on('click', function(e){
             e.preventDefault();
-            status.val(statuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('status'));
+            $status.val($statuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('status'));
         });
 
-    if (status.val() == '') status.val(0);
+    if ($status.val() == '') $status.val(0);
 
-    statuses.eq(status.val()).removeClass('uk-hidden');
+    $statuses.eq($status.val()).removeClass('uk-hidden');
 
-    form.on("submit", function(e){
+    // access handling
+    $('a.js-access').text($('select.js-access option:selected').text());
+
+    // markdown status handling
+    var $markdownStatus   = $('input[name="page[data][markdown]"]'),
+        $markdownStatuses = $('.js-markdown').on('click', function(e){
+            e.preventDefault();
+            $markdownStatus.val($markdownStatuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
+            $('#page-content', $form).trigger($markdownStatus.val() == '1' ? 'enableMarkdown' : 'disableMarkdown');
+        });
+
+    // form ajax saving
+    $form.on('submit', function(e) {
 
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        $.post(form.attr("action"), form.serialize(), function(response){
+        $.post($form.attr('action'), $form.serialize(), function(response) {
 
-            uikit.notify(response.message, response.error ? 'danger':'success');
+            uikit.notify(response.message, response.error ? 'danger' : 'success');
 
             if (response.id) {
-                form.find('input[name="id"]').val(response.id);
+                $id.val(response.id);
             }
         });
     });
-
-
-    var markdownstatus   = $('input[name="page[data][markdown]"]'),
-        markdownstatuses = $('.js-markdown').on('click', function(e){
-            e.preventDefault();
-            markdownstatus.val(markdownstatuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
-            content.trigger(markdownstatus.val()=='1' ? 'enableMarkdown':'disableMarkdown');
-        });
 });
