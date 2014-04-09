@@ -1,7 +1,6 @@
 require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], function($, uikit, marked, codemirror) {
 
-    var $script = $('script[data-plugins]');
-    plugins = $script.data('plugins'), options = $script.data('finder');
+    var $script = $('script[data-plugins]'), plugins = $script.data('plugins'), options = $script.data('finder');
 
     require(plugins, function() {
 
@@ -11,7 +10,7 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
 
         $('[data-editor="markdown"]').each(function() {
 
-            var editor = new uikit.htmleditor(this, { marked: marked, CodeMirror: codemirror, markdown: JSON.parse($(this).attr('markdown') || "false") });
+            var editor = new uikit.htmleditor(this, { marked: marked, CodeMirror: codemirror, markdown: JSON.parse($(this).attr('markdown') || 'false') });
 
             editor.editor.addKeyMap({
                 'Ctrl-S': function() { save(editor.element[0]); },

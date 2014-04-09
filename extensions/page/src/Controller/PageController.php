@@ -176,6 +176,12 @@ class PageController extends Controller
             }
         }
 
+        if ($status == Page::STATUS_PUBLISHED) {
+            $this('message')->success(_c('{0} No page published.|{1} Page published.|]1,Inf[ Pages published.', count($ids)));
+        } else {
+            $this('message')->success(_c('{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids)));
+        }
+
         return $this->redirect('@page/page/index');
     }
 
