@@ -87,9 +87,9 @@
 
                 <h2 class="pk-form-heading">@trans('Install an extension')</h2>
 
-                <div class="uk-placeholder uk-text-center js-upload-drop">
-                    <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i>
-                    @trans('Attach binaries by dropping them here or <a class="uk-form-file">selecting one<input class="js-upload-select" type="file" name="file"></a>').
+                <div class="uk-placeholder uk-text-center uk-text-muted js-upload-drop">
+                    <img src="@url.to('asset://system/images/icon-finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')">
+                    @trans('Drop files here or <a class="uk-form-file">select one<input class="js-upload-select" type="file" name="file"></a>').
                     @token()
                 </div>
 
