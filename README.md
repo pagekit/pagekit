@@ -31,7 +31,7 @@ composer install
 php path/to/composer.phar install
 ```
 
-To update Pagekit, you need to pull the Pagekit git repro and run the composer `update` command
+To update Pagekit, you need to pull the Pagekit git repo and run the composer `update` command
 
 ```
 git pull

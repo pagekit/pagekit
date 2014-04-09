@@ -1,6 +1,7 @@
 define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
 
-    var modal   = $(tmpl.render('image.modal')).appendTo('body'),
+    var base    = requirejs.toUrl(''),
+        modal   = $(tmpl.render('image.modal')).appendTo('body'),
         element = modal.find('.js-finder'),
         image   = modal.find('.js-url'),
         title   = modal.find('.js-title'),
@@ -11,8 +12,17 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
     });
 
     element.on('picked', function(e, data) {
+
         if (data.type == 'file' && data.url.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
-            image.val(data.url);
+
+            var url = data.url;
+
+            // convert to relative urls
+            if (url.indexOf(base)===0) {
+                url = url.replace(base,'');
+            }
+
+            image.val(url);
         }
     });
 
@@ -78,6 +88,17 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             });
 
             return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://'!==marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
+        });
+
+        htmleditor.addPlugin('relativeimages', /src=[\"'](.+?)[\"']/gim, function(marker) {
+
+            var replacement = marker.found[0];
+
+            if(!marker.found[1].match(/^(\/|http\:|https\:|ftp\:)/i)) {
+                replacement = replacement.replace(marker.found[1], base + marker.found[1]);
+            }
+
+            return replacement;
         });
 
     };

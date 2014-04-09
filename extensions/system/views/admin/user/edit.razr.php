@@ -13,7 +13,7 @@
                     <li>@user.name (@user.username)</li>
                     <li><a href="mailto:@user.email">@user.email</a></li>
                     <li>@trans('Registered since: %date%', ['%date%' => user.registered|date])</li>
-                    <li>@trans('Last login: %date%', ['%date%' => user.login|date ?: trans('Never')])</li>
+                    <li>@trans('Last login: %date%', ['%date%' => user.login ? user.login|date : trans('Never')])</li>
                 </ul>
                 @endif
 

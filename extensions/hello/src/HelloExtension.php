@@ -8,10 +8,8 @@ use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 
-
 class HelloExtension extends Extension
 {
-
     /**
      * {@inheritdoc}
      */
@@ -25,7 +23,7 @@ class HelloExtension extends Extension
             $event->register('Pagekit\Hello\HelloWidget');
         });
 
-        $app->on('system.dashboard', function(RegisterWidgetEvent $event) use ($app) {
+        $app->on('system.dashboard', function(RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
         });
 

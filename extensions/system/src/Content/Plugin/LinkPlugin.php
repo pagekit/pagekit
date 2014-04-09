@@ -17,6 +17,14 @@ class LinkPlugin extends EventSubscriber
                             ([^>]*>.*<\/a>)   # match everything after the href value
                         /xiU';
 
+    const PATH_CODE = '/
+                            (src=|poster=)       # match the src|poster attribute
+                            ([\"\']??)           # optionally start with a single or double quote
+                            (?!\/|[a-zA-Z0-9]+:) # make sure it is a relative path
+                            ([^\"\'\s>]*?)       # match the actual src value
+                            \2                   # match the previous quote
+                        /xiU';
+
     /**
      * Editor load callback.
      *
@@ -38,21 +46,21 @@ class LinkPlugin extends EventSubscriber
      */
     public function onContentPlugins(ContentEvent $event)
     {
-        $content = $event->getContent();
-        $content = preg_replace_callback(self::LINK_CODE, array($this, 'replaceLink'), $content, PREG_SET_ORDER);
+        $url     = $this('url');
+
+        $content = preg_replace_callback(self::LINK_CODE, function($matches) use ($url) {
+
+            return $matches[1].'"'.$url->route($matches[3]).'"'.$matches[4];
+
+        }, $event->getContent(), PREG_SET_ORDER);
+
+        $content = preg_replace_callback(self::PATH_CODE, function($matches) use ($url) {
+
+            return $matches[1].'"'.$url->to($matches[3]).'"';
+
+        }, $content, PREG_SET_ORDER);
 
         $event->setContent($content);
-    }
-
-    /**
-     * Replace link callback.
-     *
-     * @param  array $matches
-     * @return string
-     */
-    public function replaceLink($matches)
-    {
-        return $matches[1].'"'.$this('url')->route($matches[3]).'"'.$matches[4];
     }
 
     /**
