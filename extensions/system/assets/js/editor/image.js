@@ -32,6 +32,10 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
             var attrs = {"src":"", "alt":""};
 
+            if (marker.found[0].match(/js\-no\-parse/)) {
+                return marker.found[0];
+            }
+
             marker.found[0].match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g).forEach(function(attr){
                 var parts = attr.replace(/('|")/g, '').split("=");
                 attrs[parts[0]] = parts[1];
