@@ -143,7 +143,7 @@ class ItemController extends Controller
                 }
             }
 
-            $this('message')->success(_c('{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
+            $this('message')->success(_c('{0} No menu item was selected.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -173,6 +173,12 @@ class ItemController extends Controller
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
         }
+        
+        if ($status == item::STATUS_ACTIVE) {
+            $this('message')->success(_c('{0} No menu item was selected.|{1} Menu item enabled.|]1,Inf[ Menu items enabled.', count($ids)));
+            } else {
+            $this('message')->success(_c('{0} No menu item was selected.|{1} Menu item disabled.|]1,Inf[ Menu items disabled.', count($ids)));
+        }      
 
         return $this->redirect('@system/menu/index', array('id' => $menuId));
     }
