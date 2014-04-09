@@ -29,11 +29,19 @@
                     @endforeach
                 </select>
             </li>
+            <li>
+                @trans('Markdown'):
+                <a class="js-markdown" href="#" data-uk-toggle="{target:'.js-markdown'}">...</a>
+                <select class="uk-form-width-small uk-form-small uk-hidden js-markdown" name="page[data][markdown]">
+                    <option value="0"@(!page.data.markdown ? ' selected' : '')>@trans('No')</option>
+                    <option value="1"@(page.data.markdown  ? ' selected' : '')>@trans('Yes')</option>
+                </select>
+            </li>
         </ul>
     </div>
 
     <div class="uk-form-row">
-        @editor('page[content]', page.content, ['id' => 'page-content'])
+        @editor('page[content]', page.content, ['id' => 'page-content', 'markdown' => (page.data.markdown ? 'true':'false') ])
     </div>
 
     <p>

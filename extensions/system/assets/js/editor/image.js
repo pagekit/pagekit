@@ -43,7 +43,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 picker  = new uikit.modal.Modal(modal)
             }
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-config', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
                 title.val(attrs.alt);
                 image.val(attrs.src);
                 picker.show();
@@ -55,7 +55,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 };
             });
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
                 marker.replace('');
             });
 
@@ -65,13 +65,17 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
         htmleditor.addPlugin('images', /(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim, function(marker) {
 
+            if(marker.editor.editor.options.mode != "gfm") {
+                return marker.found[0];
+            }
+
             if (!finder) {
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
                 picker  = new uikit.modal.Modal(modal)
             }
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-config', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
                 title.val(marker.found[2]);
                 image.val(marker.found[3]);
                 picker.show();
@@ -83,7 +87,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 };
             });
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
                 marker.replace('');
             });
 

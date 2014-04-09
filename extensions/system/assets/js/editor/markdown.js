@@ -10,7 +10,8 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
         }
 
         $('[data-editor="markdown"]').each(function() {
-            var editor = new uikit.htmleditor(this, { marked: marked, CodeMirror: codemirror, markdown:true });
+
+            var editor = new uikit.htmleditor(this, { marked: marked, CodeMirror: codemirror, markdown: JSON.parse($(this).attr('markdown') || "false") });
 
             editor.editor.addKeyMap({
                 'Ctrl-S': function() { save(editor.element[0]); },

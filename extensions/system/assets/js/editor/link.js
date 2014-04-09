@@ -15,7 +15,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
 
             var anchor = $(marker.found[0]), txt = anchor.html() || "", href = anchor.attr('href') || "";
 
-            marker.area.preview.on('click', '#' + marker.uid, function(e) {
+            marker.editor.preview.on('click', '#' + marker.uid, function(e) {
 
                 e.preventDefault();
 
@@ -41,11 +41,15 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
 
         htmleditor.addPlugin('urls', /(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gim, function(marker) {
 
+            if(marker.editor.editor.options.mode != "gfm") {
+                return marker.found[0];
+            }
+
             if (marker.found[4] && marker.found[4].indexOf("!"+marker.found[0])!=-1) {
                 return marker.found[0];
             }
 
-            marker.area.preview.on('click', '#' + marker.uid, function(e) {
+            marker.editor.preview.on('click', '#' + marker.uid, function(e) {
 
                 e.preventDefault();
 
