@@ -92,7 +92,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             } catch (e) {
             }
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-config', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
 
                 video.val(data.src);
                 picker.show();
@@ -106,7 +106,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
                 };
             });
 
-            marker.area.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
+            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
                 marker.replace('');
             });
 
