@@ -59,22 +59,21 @@ class PageController extends Controller
         }
 
         $limit = self::PAGES_PER_PAGE;
-        $total = $query->count();
-        $pages = ceil($total / $limit);
+        $total = max(1, ceil($query->count() / $limit));
 
         $query
-            ->offset(((min($pages - 1, max($page, 0)))) * $limit)
+            ->offset(((min($total - 1, max($page, 0)))) * $limit)
             ->limit($limit)
             ->orderBy('title');
 
-        if ($rows) {
+        if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
                 'rows'  => $this('view')->render('view://page/admin/pages/rows.razr.php', array('pages' => $query->get(), 'levels' => $this->levels->findAll())),
-                'total' => $pages
+                'total' => $total
             ));
         }
 
-        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter, 'total' => $pages);
+        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter, 'total' => $total);
     }
 
     /**

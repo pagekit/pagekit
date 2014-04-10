@@ -35,9 +35,7 @@
         </div>
     </div>
 
-    @if (pages)
-
-    <div class="uk-overflow-container">
+    <div class="js-not-empty uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
@@ -54,11 +52,9 @@
         </table>
     </div>
 
-    <ul class="uk-pagination" data-uk-pagination="{ pages: @total }"></ul>
+    <ul class="js-not-empty uk-pagination" data-uk-pagination="{ pages: @total }"></ul>
 
-    @else
-    <p class="uk-alert uk-alert-info">@trans('No pages found.')</p>
-    @endif
+    <p class="js-empty uk-alert uk-alert-info uk-hidden">@trans('No pages found.')</p>
 
     @token()
 
