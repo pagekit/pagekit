@@ -35,13 +35,13 @@
         </div>
     </div>
 
+    <p class="uk-alert uk-alert-info @(pages ? 'uk-hidden' : '')">@trans('No pages found.')</p>
+
     <div class="js-table uk-overflow-container">
         @include('view://page/admin/pages/table.razr.php', ['pages' => pages])
     </div>
 
     <ul class="uk-pagination @(!pages ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @total }"></ul>
-
-    <p class="uk-alert uk-alert-info @(pages ? 'uk-hidden' : '')">@trans('No pages found.')</p>
 
     @token()
 
