@@ -19,9 +19,9 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         })
 
         // submit filters
-        .on('change', '[name^="filter"]', function(e) {
+        .on('change keyup', '[name^="filter"]', uikit.Utils.debounce(function() {
             page.trigger('change');
-        })
+        }, 300))
 
         // select all checkbox
         .on('click', '.js-select-all:checkbox', function() {
