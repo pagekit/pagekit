@@ -32,7 +32,7 @@ class RouteListener extends EventSubscriber
 
         if (!$meta = $this('cache')->fetch(self::CACHE_KEY.$id)) {
             if (!$page = $this->getPages()->find($id)) {
-                throw new \RuntimeException(__('Page with id "%id%" not found!', array('%id%' => $id)));
+                return;
             }
 
             $this('cache')->save(self::CACHE_KEY.$id, $meta = array('slug' => $page->getSlug()));
