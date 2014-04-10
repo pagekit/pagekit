@@ -53,5 +53,8 @@ class HelloExtension extends Extension
         // drop all own tables (created in migrations)
         $util = $this('db')->getUtility();
         $util->dropTable('@hello_greetings');
+
+        // remove the options setting
+        $this('option')->remove('hello:version');
     }
 }
