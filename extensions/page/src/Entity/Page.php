@@ -29,6 +29,9 @@ class Page
     /** @Column */
     protected $content = '';
 
+    /** @Column(type="datetime")*/
+    protected $date;
+
     /** @Column(type="integer") */
     protected $access_id;
 
@@ -83,6 +86,16 @@ class Page
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 
     public function setAccessId($accessId)
