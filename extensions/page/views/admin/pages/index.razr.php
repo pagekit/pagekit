@@ -35,27 +35,13 @@
         </div>
     </div>
 
-    <div class="js-not-empty uk-overflow-container">
-        <table class="uk-table uk-table-hover uk-table-middle">
-            <thead>
-                <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
-                    <th class="pk-table-min-width-100">@trans('Title')</th>
-                    <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
-                    <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
-                    <th class="pk-table-width-100">@trans('Access')</th>
-                    <th class="pk-table-width-minimum"></th>
-                </tr>
-            </thead>
-            <tbody class="js-rows">
-                @include('view://page/admin/pages/rows.razr.php', ['pages' => pages])
-            </tbody>
-        </table>
+    <div class="js-table uk-overflow-container">
+        @include('view://page/admin/pages/table.razr.php', ['pages' => pages])
     </div>
 
-    <ul class="js-not-empty uk-pagination" data-uk-pagination="{ pages: @total }"></ul>
+    <ul class="uk-pagination @(!pages ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @total }"></ul>
 
-    <p class="js-empty uk-alert uk-alert-info uk-hidden">@trans('No pages found.')</p>
+    <p class="uk-alert uk-alert-info @(pages ? 'uk-hidden' : '')">@trans('No pages found.')</p>
 
     @token()
 

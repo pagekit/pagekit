@@ -68,7 +68,7 @@ class PageController extends Controller
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
-                'rows'  => $this('view')->render('view://page/admin/pages/rows.razr.php', array('pages' => $query->get(), 'levels' => $this->levels->findAll())),
+                'table' => $this('view')->render('view://page/admin/pages/table.razr.php', array('pages' => $query->get(), 'levels' => $this->levels->findAll())),
                 'total' => $total
             ));
         }
