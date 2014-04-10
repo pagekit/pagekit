@@ -28,18 +28,20 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
     return function(htmleditor, options) {
 
+        var rootpath = options.root.replace(/^\/+|\/+$/g, "")+'/';
+
         htmleditor.addPlugin('htmlimages', /<img(.+?)>/gim, function(marker) {
 
-            var attrs = {"src":"", "alt":""};
+            var attrs = {"src":"", "alt":""}, img;
 
             if (marker.found[0].match(/js\-no\-parse/)) {
                 return marker.found[0];
             }
 
-            marker.found[0].match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g).forEach(function(attr){
-                var parts = attr.replace(/('|")/g, '').split("=");
-                attrs[parts[0]] = parts[1];
-            });
+            img = $(marker.found[0]);
+
+            attrs.src = img.attr("src") || "";
+            attrs.alt = img.attr("alt") || "";
 
             if (!finder) {
                 finder = new Finder(element, options);
@@ -50,12 +52,20 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
                 title.val(attrs.alt);
                 image.val(attrs.src);
+
+                //load finder in image dir
+                if(attrs.src.trim() && attrs.src.indexOf(rootpath)===0) {
+                    finder.loadPath( attrs.src.replace(rootpath, '').split('/').slice(0,-1).join('/') );
+                }
+
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 
                 handler = function() {
                     picker.hide();
-                    marker.replace('<img src="' + image.val() + '" alt="' + title.val() + '">');
+                    img.attr("src", image.val());
+                    img.attr("alt", title.val());
+                    marker.replace(img[0].outerHTML);
                 };
             });
 
@@ -63,7 +73,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 marker.replace('');
             });
 
-            return tmpl.render('image.replace', { marker: marker, src: ((attrs.src && 'http://'!==attrs.src.trim()) ? attrs.src : false), alt: attrs.alt  }).replace(/(\r\n|\n|\r)/gm, '');
+            return tmpl.render('image.replace', { marker: marker, src: ((attrs.src.trim() && 'http://'!==attrs.src.trim()) ? attrs.src : false), alt: attrs.alt  }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
 
@@ -82,6 +92,12 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
                 title.val(marker.found[2]);
                 image.val(marker.found[3]);
+
+                //load finder in image dir
+                if(marker.found[3].trim() && marker.found[3].indexOf(rootpath)===0) {
+                    finder.loadPath( marker.found[3].replace(rootpath, '').split('/').slice(0,-1).join('/') );
+                }
+
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 
