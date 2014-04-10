@@ -13,6 +13,8 @@ use Pagekit\Page\Entity\Page;
  */
 class PageController extends Controller
 {
+    const PAGES_PER_PAGE = 20;
+
     /**
      * @var Repository
      */
@@ -33,10 +35,10 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"filter": "array"})
+     * @Request({"filter": "array", "page":"int", "rows":"bool"})
      * @View("page/admin/pages/index.razr.php")
      */
-    public function indexAction($filter = null)
+    public function indexAction($filter = null, $page = 0, $rows = false)
     {
         if ($filter) {
             $this('session')->set('page.filter', $filter);
@@ -44,7 +46,7 @@ class PageController extends Controller
             $filter = $this('session')->get('page.filter', array());
         }
 
-        $query = $this->pages->query()->orderBy('title');
+        $query = $this->pages->query();
 
         if (isset($filter['status']) && is_numeric($filter['status'])) {
             $query->where(array('status' => intval($filter['status'])));
@@ -56,7 +58,22 @@ class PageController extends Controller
             });
         }
 
-        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter);
+        $limit = self::PAGES_PER_PAGE;
+        $total = max(1, ceil($query->count() / $limit));
+
+        $query
+            ->offset(((min($total - 1, max($page, 0)))) * $limit)
+            ->limit($limit)
+            ->orderBy('title');
+
+        if ($this('request')->isXmlHttpRequest()) {
+            return $this('response')->json(array(
+                'rows'  => $this('view')->render('view://page/admin/pages/rows.razr.php', array('pages' => $query->get(), 'levels' => $this->levels->findAll())),
+                'total' => $total
+            ));
+        }
+
+        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter, 'total' => $total);
     }
 
     /**
@@ -130,9 +147,7 @@ class PageController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
-
-        return $this->redirect('@page/page/index');
+        return $this('response')->json(array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids))));
     }
 
     /**
@@ -153,10 +168,8 @@ class PageController extends Controller
                 $this->pages->save($page);
             }
         }
-        
-        $this('message')->success(_c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
 
-        return $this->redirect('@page/page/index');
+        return $this('response')->json(array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids))));
     }
 
     /**
@@ -173,12 +186,12 @@ class PageController extends Controller
         }
 
         if ($status == Page::STATUS_PUBLISHED) {
-            $this('message')->success(_c('{0} No page published.|{1} Page published.|]1,Inf[ Pages published.', count($ids)));
+            $message = _c('{0} No page published.|{1} Page published.|]1,Inf[ Pages published.', count($ids));
         } else {
-            $this('message')->success(_c('{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids)));
+            $message = _c('{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids));
         }
 
-        return $this->redirect('@page/page/index');
+        return $this('response')->json(compact('message'));
     }
 
     /**
