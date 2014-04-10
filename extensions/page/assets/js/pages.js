@@ -19,9 +19,9 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         })
 
         // submit filters
-        .on('change', '[name^="filter"]', function(e) {
+        .on('change keyup', '[name^="filter"]', uikit.Utils.debounce(function() {
             page.trigger('change');
-        })
+        }, 300))
 
         // select all checkbox
         .on('click', '.js-select-all:checkbox', function() {
@@ -49,10 +49,10 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
     });
 
     function refreshView() {
-        var show = rows.is(':empty');
+        var empty = !rows.children().length;
 
-        $('.js-not-empty', form).toggleClass('uk-hidden', show);
-        $('.js-empty', form).toggleClass('uk-hidden', !show);
+        $('.js-not-empty', form).toggleClass('uk-hidden', empty);
+        $('.js-empty', form).toggleClass('uk-hidden', !empty);
     }
     refreshView();
 });
