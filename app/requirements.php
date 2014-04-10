@@ -449,13 +449,12 @@ class PagekitRequirements extends RequirementCollection
             );
         }
 
-        $baseDir = $app['path'].'/app';
-
-        foreach (array('/cache', '/logs', '/sessions', '/temp') as $dir) {
+        $path = $app['path'];
+        foreach (array($path, "$path/app/cache", "$path/app/logs", "$path/app/sessions", "$path/app/temp") as $dir) {
             $this->addRequirement(
-                is_writable($baseDir.$dir),
-                "{$baseDir}{$dir} directory must be writable",
-                "Change the permissions of the \"<strong>{$baseDir}{$dir}</strong>\" directory so that the web server can write into it."
+                is_writable($dir),
+                "{$dir} directory must be writable",
+                "Change the permissions of the \"<strong>{$dir}</strong>\" directory so that the web server can write into it."
             );
         }
 
