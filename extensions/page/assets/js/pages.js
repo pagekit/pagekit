@@ -19,9 +19,12 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         })
 
         // submit filters
-        .on('change keyup', '[name^="filter"]', uikit.Utils.debounce(function() {
-            page.trigger('change');
+        .on('keyup', 'input:text[name^="filter"]', uikit.Utils.debounce(function() {
+            pagination.data('pagination').selectPage(0);
         }, 300))
+        .on('change', 'select[name^="filter"]', function() {
+            pagination.data('pagination').selectPage(0);
+        })
 
         // select all checkbox
         .on('click', '.js-select-all:checkbox', function() {
@@ -29,10 +32,10 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         })
         .on('submit', function(e) {
             e.preventDefault();
-        });
+        })
 
     // pagination
-    pagination.on('uk-select-page', function(e, index) {
+    .on('uk-select-page', function(e, index) {
         page.val(index).trigger('change');
     });
 
