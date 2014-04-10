@@ -16,7 +16,9 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
         }
     });
 
-    return function(htmleditor, options) {
+    return function(htmleditor, options, editors) {
+
+        editors = editors || [];
 
         // videos
         htmleditor.commands.video = {
@@ -111,6 +113,11 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             });
 
             return tmpl.render('video.replace', { marker: marker, preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
+        });
+
+        editors.forEach(function(editor) {
+            editor.options.toolbar.push('video');
+            editor.options.plugins.push('videos');
         });
     };
 });

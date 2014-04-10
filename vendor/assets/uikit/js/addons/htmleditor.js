@@ -141,7 +141,7 @@
         applyPlugins: function(){
 
             var $this   = this,
-                plugins = this.plugins || [],
+                plugins = this.options.plugins || [],
                 plgs    = Htmleditor.plugins;
 
             this.markers = {};

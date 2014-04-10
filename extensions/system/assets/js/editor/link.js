@@ -9,7 +9,9 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
         handler();
     });
 
-    return function(htmleditor) {
+    return function(htmleditor, options, editors) {
+
+        editors = editors || [];
 
         htmleditor.addPlugin('htmlurls', /<a(.+?)>([^<]*)<\/a>/gim, function(marker) {
 
@@ -69,5 +71,9 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
             return tmpl.render('link.replace', { marker: marker, link: marker.found[2].trim() ? marker.found[2] : null, txt:  marker.found[1].trim() ? marker.found[1] : null }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
+        editors.forEach(function(editor) {
+            editor.options.plugins.push('htmlurls');
+            editor.options.plugins.push('urls');
+        });
     };
 });

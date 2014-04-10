@@ -26,7 +26,9 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         }
     });
 
-    return function(htmleditor, options) {
+    return function(htmleditor, options, editors) {
+
+        editors = editors || [];
 
         var rootpath = options.root.replace(/^\/+|\/+$/g, "")+'/';
 
@@ -123,6 +125,12 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             }
 
             return replacement;
+        });
+
+        editors.forEach(function(editor) {
+            editor.options.plugins.push('htmlimages');
+            editor.options.plugins.push('images');
+            editor.options.plugins.push('relativeimages');
         });
 
     };
