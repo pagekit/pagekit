@@ -49,10 +49,10 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
     });
 
     function refreshView() {
-        var show = rows.is(':empty');
+        var empty = !rows.children().length;
 
-        $('.js-not-empty', form).toggleClass('uk-hidden', show);
-        $('.js-empty', form).toggleClass('uk-hidden', !show);
+        $('.js-not-empty', form).toggleClass('uk-hidden', empty);
+        $('.js-empty', form).toggleClass('uk-hidden', !empty);
     }
     refreshView();
 });
