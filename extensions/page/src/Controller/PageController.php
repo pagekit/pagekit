@@ -95,9 +95,6 @@ class PageController extends Controller
      */
     public function saveAction($id, $data)
     {
-
-        $response = array();
-
         try {
 
             if (!$page = $this->pages->find($id)) {
@@ -108,15 +105,14 @@ class PageController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
+            $data['date'] = $this('dates')->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+
             $this->pages->save($page, $data);
 
-            $response["message"] = $id ? __('Page saved.') : __('Page created.');
-            $response["id"]      = $page->getId();
+            $response = array('message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId());
 
         } catch (Exception $e) {
-
-            $response["message"] = $e->getMessage();
-            $response["error"]   = true;
+            $response = array('message' => $e->getMessage(), 'error' => true);
         }
 
         return $this('response')->json($response);
