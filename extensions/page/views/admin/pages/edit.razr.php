@@ -35,13 +35,6 @@
                 <a class="uk-text-success js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Yes')</a>
                 <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
             </li>
-            <li>
-                @trans('Publish on'):
-                <a class="js-publish" href="#" data-uk-toggle="{target:'.js-publish'}">@page.date|date @ @page.date|date('H:i')</a>
-                <input class="uk-form-width-small uk-form-small uk-hidden js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@page.date|date('Y-m-d')">
-                <input class="uk-form-width-small uk-form-small uk-hidden js-publish" type="text" data-uk-timepicker="{ showSeconds: true }" name="" value="@page.date|date('H:i:s')">
-                <input type="hidden" name="page[date]" value="@page.date|date('Y-m-d H:i:s')">
-            </li>
         </ul>
     </div>
 

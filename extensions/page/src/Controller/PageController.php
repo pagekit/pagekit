@@ -122,8 +122,6 @@ class PageController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
-            $data['date'] = $this('dates')->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
-
             $this->pages->save($page, $data);
 
             $response = array('message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId());

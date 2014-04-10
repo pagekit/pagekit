@@ -40,7 +40,7 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
     });
 
     // refresh rows
-    page.on('change', function(e) {
+    page.on('change', function() {
         $.post($(this).data('action'), form.serialize(), function(response) {
 
             rows.html(response.rows);

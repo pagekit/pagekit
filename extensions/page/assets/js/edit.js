@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!datepicker,timepicker', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form);
 
@@ -39,11 +39,6 @@ require(['jquery', 'uikit!datepicker,timepicker', 'domReady!'], function($, uiki
             markdownStatus.val(markdownStatuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
             $('#page-content', form).trigger(markdownStatus.val() == '1' ? 'enableMarkdown' : 'disableMarkdown');
         });
-
-    // date handling
-    form.on('change', '.js-publish', function() {
-        $('[name="page[date]"]', form).val($('[data-uk-datepicker]', form).val()+' '+$('[data-uk-timepicker]', form).val());
-    });
 
     // form ajax saving
     form.on('submit', function(e) {
