@@ -8,7 +8,7 @@
 
     <li class="uk-sortable-list-item" data-id="@item.id">
 
-        <div class="uk-sortable-item pk-table-fake">
+        <div class="uk-sortable-item pk-table-fake uk-visible-hover">
             <div class="pk-table-width-minimum"><div class="uk-sortable-handle"></div></div>
             <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-sortable-action="toggle"></div></div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id[]" value="@item.id"></div>
@@ -31,6 +31,11 @@
             </div>
             <div class="pk-table-width-100">
                 @(levels[item.accessId].name ?: trans('No access level'))
+            </div>
+            <div class="pk-table-width-minimum">
+                <ol class="uk-subnav pk-subnav-icon uk-invisible">
+                    <li><a class="uk-icon-minus-circle"></a></li>
+                </ol>
             </div>
         </div>
 

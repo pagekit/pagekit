@@ -1,5 +1,5 @@
 @foreach (pages as page)
-<tr>
+<tr class="uk-visible-hover">
     <td>
         <input type="checkbox" name="ids[]" value="@page.id">
     </td>
@@ -21,6 +21,11 @@
     </td>
     <td>
         @(levels[page.accessId].name ?: trans('No access level'))
+    </td>
+    <td>
+        <ul class="uk-subnav pk-subnav-icon uk-invisible">
+            <li><a class="uk-icon-minus-circle"></a></li>
+        </ul>
     </td>
 </tr>
 @endforeach

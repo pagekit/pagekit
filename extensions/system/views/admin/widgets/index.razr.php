@@ -64,6 +64,11 @@
         <div class="pk-table-width-150 uk-text-truncate">@trans('Position')</div>
         <div class="pk-table-width-150 uk-text-truncate">@trans('Type')</div>
         <div class="pk-table-width-100 uk-text-truncate">@trans('Access')</div>
+        <div class="pk-table-width-minimum">
+            <ol class="uk-subnav pk-subnav-icon uk-invisible">
+                <li><a class="uk-icon-minus-circle"></a></li>
+            </ol>
+        </div>
     </div>
 
     @foreach (positions as position)
@@ -85,7 +90,7 @@
 
             <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
 
-                <div class="uk-sortable-item pk-table-fake">
+                <div class="uk-sortable-item pk-table-fake uk-visible-hover">
                     <div class="pk-table-width-minimum">
                         <div class="uk-sortable-handle">​</div>
                     </div>
@@ -111,6 +116,11 @@
                     <div class="pk-table-width-100 uk-text-truncate">
                         @(levels[widget.accessId].name ?: trans('No access level'))
                     </div>
+                    <div class="pk-table-width-minimum">
+                        <ol class="uk-subnav pk-subnav-icon uk-invisible">
+                            <li><a class="uk-icon-minus-circle"></a></li>
+                        </ol>
+                    </div>
                 </div>
 
             </li>
@@ -135,7 +145,7 @@
             @set (type = app.widgets.types[widget.type])
             <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
 
-                <div class="uk-sortable-item pk-table-fake">
+                <div class="uk-sortable-item pk-table-fake uk-visible-hover">
                     <div class="pk-table-width-minimum">
                         <div class="uk-sortable-handle">​</div>
                     </div>
@@ -161,6 +171,11 @@
                     <div class="pk-table-width-150 uk-text-truncate">@( type.name ?: trans('Extension not loaded'))</div>
                     <div class="pk-table-width-100 uk-text-truncate">
                         @( levels[widget.accessId].name ?: trans('No access level') )
+                    </div>
+                    <div class="pk-table-width-minimum">
+                        <ol class="uk-subnav pk-subnav-icon uk-invisible">
+                            <li><a class="uk-icon-minus-circle"></a></li>
+                        </ol>
                     </div>
                 </div>
 

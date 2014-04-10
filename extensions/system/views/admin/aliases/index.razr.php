@@ -32,11 +32,12 @@
                     <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
                     <th>@trans('Alias')</th>
                     <th>@trans('Source')</th>
+                    <th class="pk-table-width-minimum"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (aliases as alias)
-                <tr>
+                <tr class="uk-visible-hover">
                     <td>
                         <input type="checkbox" name="ids[]" value="@alias.Id">
                     </td>
@@ -44,6 +45,11 @@
                         <a href="@url.route('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>
                     </td>
                     <td>@app['system.info'].resolveUrl(alias.source)</td>
+                    <td>
+                        <ul class="uk-subnav pk-subnav-icon uk-invisible">
+                            <li><a class="uk-icon-minus-circle"></a></li>
+                        </ul>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
