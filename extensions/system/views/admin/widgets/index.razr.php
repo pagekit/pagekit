@@ -101,7 +101,7 @@
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
-                            @if (position.id == '_unassigned')
+                            @if (!position.id)
                             <option value="">@trans('- Assign -')</option>
                             @endif
                             @foreach (positions|slice(0, positions|length - 1) as position)

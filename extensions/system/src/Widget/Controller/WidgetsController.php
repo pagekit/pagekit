@@ -45,7 +45,6 @@ class WidgetsController extends Controller
                 $this->positions[$id] = compact('id', 'name', 'description');
             }
         }
-        $this->positions['_unassigned'] = array('id' => '_unassigned', 'name' => __('Unassigned Widgets'));
     }
 
     /**
@@ -53,12 +52,13 @@ class WidgetsController extends Controller
      */
     public function indexAction()
     {
-        $widgets = array();
+        $this->positions[''] = array('name' => __('Unassigned Widgets'));
 
+        $widgets = array();
         foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
 
             $position = $widget->getPosition();
-            $widgets[isset($this->positions[$position]) ? $position : '_unassigned'][] = $widget;
+            $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
 
         }
 
