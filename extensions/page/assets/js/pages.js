@@ -64,7 +64,7 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
 
                     var start = Math.min(tr.index(), lastselected.index()), end = Math.max(tr.index(), lastselected.index());
 
-                    for(i = 0; i <= end; i++) {
+                    for(i = start; i <= end; i++) {
                         rows.eq(i).find('.js-select:first').prop('checked', true);
                     }
                 }
