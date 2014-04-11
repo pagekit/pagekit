@@ -9,7 +9,6 @@ use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;
-use Pagekit\Widget\Event\WidgetSettingsEvent;
 
 /**
  * @Access("system: manage widgets", admin=true)
