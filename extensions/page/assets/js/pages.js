@@ -1,6 +1,6 @@
 require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
 
-    var form = $('#js-pages'), table = $('.js-table', form), pagination = $('[data-uk-pagination]', form), search, prev, showOnSelect;
+    var form = $('#js-pages'), table = $('.js-table', form), pagination = $('[data-uk-pagination]', form), search, prev, showOnSelect, rows = table.find('tbody>tr'), lastselected;
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -47,16 +47,34 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
 
         var target = $(e.target), tr = $(this), select;
 
-        if(!target.is('input, [data-action]') && !target.closest('[data-action]').length) {
+        if(!target.is('a, input, [data-action]') && !target.closest('[data-action]').length) {
+
+            if (e.shiftKey && window.getSelection) {
+                window.getSelection()[window.getSelection().empty ? 'empty':'removeAllRanges']();
+            }
+
             select = tr.find('.js-select:first');
 
             if (select.length) {
 
-                if (!e.metaKey) {
-                    form.find('.js-select:checked').prop('checked', false);
+                select.prop('checked', !select.prop('checked'));
+
+                // shift select
+                if (e.shiftKey && lastselected) {
+
+                    var start = Math.min(tr.index(), lastselected.index()), end = Math.max(tr.index(), lastselected.index());
+
+                    for(i = 0; i <= end; i++) {
+                        rows.eq(i).find('.js-select:first').prop('checked', true);
+                    }
                 }
 
-                select.prop('checked', !select.prop('checked'));
+                if (!e.shiftKey && select.prop('checked')) {
+                    lastselected = tr;
+                } else {
+                    lastselected = false;
+                }
+
                 updateOnSelect();
             }
         }
@@ -67,14 +85,22 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
             table.html(data.table);
             pagination.toggleClass('uk-hidden', data.total == 0).data('pagination').render(data.total);
             $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
+
+            rows = table.find('tbody>tr');
         });
+
+        lastselected = false;
     }
 
     function updateOnSelect() {
         var selected = form.find('.js-select:checked');
         showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
 
-        form.find('tr').removeClass('pk-selected');
+        rows.removeClass('pk-selected');
         selected.closest('tr').addClass('pk-selected');
+
+        if (!selected.length) {
+            lastselected = false;
+        }
     }
 });
