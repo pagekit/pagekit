@@ -7,12 +7,11 @@
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
             <th class="pk-table-width-100">@trans('Access')</th>
-            <th class="pk-table-width-minimum"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (pages as page)
-        <tr class="uk-visible-hover">
+        <tr>
             <td>
                 <input type="checkbox" name="ids[]" value="@page.id">
             </td>
@@ -34,11 +33,6 @@
             </td>
             <td>
                 @(levels[page.accessId].name ?: trans('No access level'))
-            </td>
-            <td>
-                <ul class="uk-subnav pk-subnav-icon uk-invisible">
-                    <li><a class="uk-icon-minus-circle" data-action="@url.route('@page/page/delete', ['ids' => page.id])"></a></li>
-                </ul>
             </td>
         </tr>
         @endforeach

@@ -51,11 +51,6 @@
             <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
             <div class="pk-table-width-200 uk-text-truncate">@trans('URL')</div>
             <div class="pk-table-width-100">@trans('Access')</div>
-            <div class="pk-table-width-minimum">
-                <ol class="uk-subnav pk-subnav-icon uk-invisible">
-                    <li><a class="uk-icon-minus-circle"></a></li>
-                </ol>
-            </div>
         </div>
 
         @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu.id), 'levels' => levels])
