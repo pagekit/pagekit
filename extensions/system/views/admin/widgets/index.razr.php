@@ -42,7 +42,7 @@
 
             <select id="filter-position" name="filter[position]" data-filter="position">
                 <option value="">@trans('- Position -')</option>
-                @foreach (positions as position)
+                @foreach (positions|slice(0, positions|length - 1) as position)
                 <option value="@position.id">@trans(position.name)</option>
                 @endforeach
             </select>
@@ -67,7 +67,7 @@
     </div>
 
     @foreach (positions as position)
-    <div class="js-position @(widgets[position.id]|length ? '':'uk-hidden')" data-position="@position.id">
+    <div class="js-position @(widgets[position.id]|length ? '' : 'uk-hidden')" data-position="@position.id">
         <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
             <div>
                 @trans(position.name)
@@ -78,7 +78,6 @@
         </div>
 
         <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }" data-position="@position.id">
-            @if (widgets[position.id])
             @foreach (widgets[position.id] as widget)
 
             @set (type = app.widgets.types[widget.type])
@@ -102,7 +101,10 @@
                     </div>
                     <div class="pk-table-width-150">
                         <select name="positions[@widget.id]" class="uk-width-1-1">
-                            @foreach (positions as position)
+                            @if (position.id == '_unassigned')
+                            <option value="">@trans('- Assign -')</option>
+                            @endif
+                            @foreach (positions|slice(0, positions|length - 1) as position)
                             <option value="@position.id"@(position.id == widget.position ? ' selected')>@trans(position.name)</option>
                             @endforeach
                         </select>
@@ -115,65 +117,9 @@
 
             </li>
             @endforeach
-            @endif
         </ul>
     </div>
     @endforeach
-
-    @if(unassignedwidgets|length)
-    <div id="js-not-used-widgets">
-
-        <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
-            <div>
-                @trans('Unassigned Widgets')
-            </div>
-        </div>
-
-        <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }" data-position="">
-            @foreach (unassignedwidgets as widget)
-
-            @set (type = app.widgets.types[widget.type])
-            <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
-
-                <div class="uk-sortable-item pk-table-fake uk-visible-hover">
-                    <div class="pk-table-width-minimum">
-                        <div class="uk-sortable-handle">​</div>
-                    </div>
-                    <div class="pk-table-width-minimum"><input type="checkbox" name="ids[]" value="@widget.id"></div>
-                    <div>
-                        @if (type)
-                        <a href="@url.route('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
-                        @else
-                        @widget.title
-                        @endif
-                    </div>
-                    <div class="pk-table-width-100 uk-text-center">
-                        <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url.route(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id])"  title="@widget.statusText"></a>
-                    </div>
-                    <div class="pk-table-width-150">
-                        <select name="positions[@widget.id]" class="uk-width-1-1">
-                            <option value="">@trans('- Assign -')</option>
-                            @foreach (positions as position)
-                            <option value="@position.id"@( position.id == widget.position ? ' selected' )>@trans(position.name)</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="pk-table-width-150 uk-text-truncate">@( type.name ?: trans('Extension not loaded'))</div>
-                    <div class="pk-table-width-100 uk-text-truncate">
-                        @( levels[widget.accessId].name ?: trans('No access level') )
-                    </div>
-                    <div class="pk-table-width-minimum">
-                        <ol class="uk-subnav pk-subnav-icon uk-invisible">
-                            <li><a class="uk-icon-minus-circle"></a></li>
-                        </ol>
-                    </div>
-                </div>
-
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 
     @token()
 
