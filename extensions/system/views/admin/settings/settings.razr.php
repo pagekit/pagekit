@@ -218,7 +218,7 @@
                             <label><input type="checkbox" name="config[app.debug]" value="1"@(config.app.debug ? ' checked')> @trans('Enable debug mode')</label>
                         </p>
                         <p class="uk-form-controls-condensed">
-                            <label><input type="checkbox" name="config[profiler.enabled]" value="1"@(config.profiler.enabled ? ' checked')@(!sqlite ? ' disabled')> @trans('Enable profiler toolbar')</label>
+                            <label><input type="checkbox" name="config[profiler.enabled]" value="1"@(config.profiler.enabled ? ' checked')@(!sqlite ? ' disabled')> @trans('Enable debug toolbar')</label>
                         </p>
                         @if (!sqlite)
                         <p class="uk-form-help-block">@trans('Please enable the SQLite database extension.')</p>

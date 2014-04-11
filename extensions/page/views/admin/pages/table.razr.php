@@ -37,7 +37,7 @@
             </td>
             <td>
                 <ul class="uk-subnav pk-subnav-icon uk-invisible">
-                    <li><a class="uk-icon-minus-circle"></a></li>
+                    <li><a class="uk-icon-minus-circle" data-action="@url.route('@page/page/delete', ['ids' => page.id])"></a></li>
                 </ul>
             </td>
         </tr>

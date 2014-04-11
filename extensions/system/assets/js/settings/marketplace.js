@@ -27,7 +27,7 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
-        $.post(params.url, {'package': JSON.stringify(packages[name].version)}, function(data) {
+        $.post(params.url, { package: JSON.stringify(packages[name].version) }, function(data) {
 
             $this.removeClass('uk-button-primary');
 
@@ -74,7 +74,7 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
                 message = 'no-packages';
             }
 
-        }, 'jsonp').fail(function(e) {
+        }, 'jsonp').fail(function() {
 
             message = 'no-connection';
 
@@ -107,15 +107,15 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
             element.on('click', '[data-package]', detailsModal);
             details.on('click', '[data-install]', installButton);
 
-            form.on('submit', queryMarketplace);
-            form.on('keyup', 'input', uikit.Utils.debounce(function() {
-                form.submit();
-            }, 150));
-            form.on('change', 'select', function() {
-                form.submit();
-            });
-
-            form.submit();
+            form
+                .on('submit', queryMarketplace)
+                .on('keyup', 'input', uikit.Utils.debounce(function() {
+                    form.submit();
+                }, 150))
+                .on('change', 'select', function() {
+                    form.submit();
+                })
+                .submit();
         }
 
     };
