@@ -1,69 +1,65 @@
 require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
-    var form = $('#js-widgets');
+    var form = $('#js-widgets')
 
-    // action button
-    form.on('click', '[data-action]', function(e) {
-        e.preventDefault();
-        form.attr('action', $(this).data('action')).submit();
-    });
+        // action button
+        .on('click', '[data-action]', function(e) {
+            e.preventDefault();
+            form.attr('action', $(this).data('action')).submit();
+        })
 
-    // select all checkbox
-    form.on('click', '.js-select-all:checkbox', function() {
-        $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-    });
+        // select all checkbox
+        .on('click', '.js-select-all:checkbox', function() {
+            $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
+        })
 
-    // save widgets order on sortable change
-    form.on('sortable-change', 'ul.uk-sortable', function(e, item, action) {
+        // save widgets order on sortable change
+        .on('sortable-change', 'ul.uk-sortable', function(e, item, action) {
 
-        var list = $(this);
+            var list = $(this);
 
-        $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
-            if (action == 'added' || action == 'moved') {
-                uikit.notify(data.message, 'success');
+            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
+                if (action == 'added' || action == 'moved') {
+                    uikit.notify(data.message, 'success');
+                }
+            });
+
+            list.find('select[name^="positions"]').val(list.data('position'));
+        })
+
+        // change position via selectbox
+        .on('change', 'select[name^="positions"]', function() {
+
+            var select  = $(this),
+                li      = select.closest('li'),
+                current = li.parent(),
+                target  = $('ul[data-position="' + select.val() + '"]');
+
+            target.find('.uk-sortable-empty').remove().end().append(li);
+
+            if (!current.children().length) {
+                if (current.data('position')) {
+                    current.append('<li class="uk-sortable-empty"></li>');
+                } else {
+                    current.parent().addClass('uk-hidden');
+                }
             }
+
+            target.parent().removeClass('uk-hidden');
+
+            $([current, target]).trigger('sortable-change');
+
+            applyFilters();
+        })
+
+        .on('change', 'select[name^="filter"]', function() {
+            applyFilters();
         });
-
-        list.find('select[name^="positions"]').val(list.data('position'));
-    });
-
-    // change position via selectbox
-    form.on('change', 'select[name^="positions"]', function() {
-
-        var select = $(this),
-            li = select.closest('li'),
-            current = li.parent(),
-            target = $('ul[data-position="' + select.val() + '"]');
-
-
-        target.find('.uk-sortable-empty').remove().end().append(li);
-
-        if (!current.children().length) {
-            if (current.data('position')) {
-                current.append('<li class="uk-sortable-empty"></li>');
-            } else {
-                current.parent().addClass('uk-hidden');
-            }
-        }
-
-        target.parent().removeClass('uk-hidden');
-
-        current.trigger('sortable-change');
-        target.trigger('sortable-change');
-
-        applyFilters();
-    });
-
-    form.on('change', 'select[name^="filter"]', function() {
-        applyFilters();
-    });
 
     var positions = $('.js-position').each(function() {
 
-        var ele  = $(this),
-            list = ele.find('ul.uk-sortable');
-
-        ele.toggleClass('uk-hidden', list.children('li').length < 1);
+        var ele = $(this);
+        ele.toggleClass('uk-hidden', ele.find('ul.uk-sortable').children('li').length < 1);
     });
 
     var filters = form.find(':input[id^="filter"]').each(function() {

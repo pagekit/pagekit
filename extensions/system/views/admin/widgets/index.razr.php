@@ -82,7 +82,7 @@
 
             @set (type = app.widgets.types[widget.type])
 
-            <li class="uk-form js-widget" data-id="@widget.id" data-status="@( widget.status ?: 0 )" data-type="@widget.type" data-title="@widget.title">
+            <li class="uk-form js-widget" data-id="@widget.id" data-status="@(widget.status ?: 0)" data-type="@widget.type" data-title="@widget.title">
 
                 <div class="uk-sortable-item pk-table-fake">
                     <div class="pk-table-width-minimum">
@@ -104,8 +104,8 @@
                             @if (!position.id)
                             <option value="">@trans('- Assign -')</option>
                             @endif
-                            @foreach (positions|slice(0, positions|length - 1) as position)
-                            <option value="@position.id"@(position.id == widget.position ? ' selected')>@trans(position.name)</option>
+                            @foreach (positions|slice(0, positions|length - 1) as pos)
+                            <option value="@pos.id"@(pos.id == widget.position ? ' selected')>@trans(pos.name)</option>
                             @endforeach
                         </select>
                     </div>
