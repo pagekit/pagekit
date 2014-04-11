@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Dashboard;
+namespace Pagekit\User\Dashboard;
 
 use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
