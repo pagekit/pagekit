@@ -6,6 +6,7 @@
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@page/page/add')">@trans('Add Page')</a>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@page/page/delete')">@trans('Delete')</a>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
@@ -15,7 +16,6 @@
                         <li><a href="#" data-action="@url.route('@page/page/status', ['status' => 0])">@trans('Unpublish')</a></li>
                         <li class="uk-nav-divider"></li>
                         <li><a href="#" data-action="@url.route('@page/page/copy')">@trans('Copy')</a></li>
-                        <li><a href="#" data-action="@url.route('@page/page/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>

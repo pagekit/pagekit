@@ -1,6 +1,6 @@
 require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
 
-    var form = $('#js-pages'), table = $('.js-table', form), pagination = $('[data-uk-pagination]', form), search, prev;
+    var form = $('#js-pages'), table = $('.js-table', form), pagination = $('[data-uk-pagination]', form), search, prev, showOnSelect;
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -9,12 +9,14 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         $.post($(this).data('action'), form.serialize(), function(response) {
             uikit.notify(response.message, response.error ? 'danger' : 'success');
             updateTable();
+            updateOnSelect();
         });
     })
 
     // select all checkbox
     .on('click', '.js-select-all:checkbox', function() {
         $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
+        updateOnSelect();
     })
 
     // submit filters
@@ -34,6 +36,32 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         updateTable();
     });
 
+    showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden');
+
+    form.on('click', '.js-select', function() {
+        updateOnSelect();
+    })
+
+    // select via row clicking
+    .on('click', 'tr', function(e){
+
+        var target = $(e.target), tr = $(this), select;
+
+        if(!target.is('input, [data-action]') && !target.closest('[data-action]').length) {
+            select = tr.find('.js-select:first');
+
+            if (select.length) {
+
+                if (!e.metaKey) {
+                    form.find('.js-select:checked').prop('checked', false);
+                }
+
+                select.prop('checked', !select.prop('checked'));
+                updateOnSelect();
+            }
+        }
+    });
+
     function updateTable() {
         $.post(form.data('action'), form.serialize(), function(response) {
             table.html(response.table);
@@ -42,4 +70,11 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         });
     }
 
+    function updateOnSelect() {
+        var selected = form.find('.js-select:checked');
+        showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
+
+        form.find('tr').removeClass('pk-selected');
+        selected.closest('tr').addClass('pk-selected');
+    }
 });

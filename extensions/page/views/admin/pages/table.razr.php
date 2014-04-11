@@ -13,7 +13,7 @@
         @foreach (pages as page)
         <tr>
             <td>
-                <input type="checkbox" name="ids[]" value="@page.id">
+                <input type="checkbox" name="ids[]" class="js-select" value="@page.id">
             </td>
             <td>
                 <a href="@url.route('@page/page/edit', ['id' => page.id])">@page.title</a>
