@@ -226,7 +226,7 @@ class UserController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
+        $this('message')->success(_c('{0} No user selected.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
 
         return $this->redirect('@system/user/index');
     }
@@ -251,6 +251,13 @@ class UserController extends Controller
                     $this->users->save($user, compact('status'));
                 }
             }
+        }
+                
+        if ($self && $status == User::STATUS_BLOCKED) {
+        } elseif ($status == User::STATUS_BLOCKED) {
+            $this('message')->success(_c('{0} No user selected.|{1} User blocked.|]1,Inf[ Users blocked.', count($ids)));
+        } else {
+            $this('message')->success(_c('{0} No user selected.|{1} User activated.|]1,Inf[ Users activated.', count($ids)));
         }
 
         return $this->redirect('@system/user/index');
