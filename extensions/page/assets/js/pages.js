@@ -6,8 +6,8 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
     form.on('click', '[data-action]', function(e) {
         e.preventDefault();
 
-        $.post($(this).data('action'), form.serialize(), function(response) {
-            uikit.notify(response.message, response.error ? 'danger' : 'success');
+        $.post($(this).data('action'), form.serialize(), function(data) {
+            uikit.notify(data.message, data.error ? 'danger' : 'success');
             updateTable();
         });
     })
@@ -35,10 +35,10 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
     });
 
     function updateTable() {
-        $.post(form.data('action'), form.serialize(), function(response) {
-            table.html(response.table);
-            pagination.toggleClass('uk-hidden', response.table === '').data('pagination').render(response.total);
-            $('.uk-alert', form).toggleClass('uk-hidden', response.table !== '');
+        $.post(form.data('action'), form.serialize(), function(data) {
+            table.html(data.table);
+            pagination.toggleClass('uk-hidden', data.total == 0).data('pagination').render(data.total);
+            $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
         });
     }
 

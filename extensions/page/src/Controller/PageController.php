@@ -59,12 +59,10 @@ class PageController extends Controller
         }
 
         $limit = self::PAGES_PER_PAGE;
-        $total = max(1, ceil($query->count() / $limit));
+        $total = ceil($query->count() / $limit);
+        $page  = min($total, max($page, 0));
 
-        $query
-            ->offset(((min($total - 1, max($page, 0)))) * $limit)
-            ->limit($limit)
-            ->orderBy('title');
+        $query->offset($page * $limit)->limit($limit)->orderBy('title');
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
