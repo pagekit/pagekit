@@ -4,28 +4,12 @@ namespace Pagekit\Content\Plugin;
 
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\EditorLoadEvent;
-use Pagekit\System\Event\TmplEvent;
 
 class VideoPlugin extends EventSubscriber
 {
     const REGEX_YOUTUBE       = '/(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/';
     const REGEX_YOUTUBE_SHORT = '/youtu\.be\/(.*)/';
     const REGEX_VIMEO         = '/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/';
-
-    /**
-     * Editor load callback.
-     *
-     * @param EditorLoadEvent $event
-     */
-    public function onEditorLoad(EditorLoadEvent $event)
-    {
-        if ('markdown' != $event->getEditor()) {
-            return;
-        }
-
-        $event->addPlugin('video', 'extensions/system/assets/js/editor/video');
-    }
 
     /**
      * Content plugins callback.
@@ -73,25 +57,12 @@ class VideoPlugin extends EventSubscriber
     }
 
     /**
-     * Register Tmpls callback.
-     *
-     * @param TmplEvent $event
-     */
-    public function onSystemTmpl(TmplEvent $event)
-    {
-        $event->register('video.modal', 'extension://system/assets/tmpl/video.modal.razr.php');
-        $event->register('video.replace', 'extension://system/assets/tmpl/video.replace.razr.php');
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load'     => 'onEditorLoad',
             'content.plugins' => array('onContentPlugins', 15),
-            'system.tmpl'     => 'onSystemTmpl'
         );
     }
 }

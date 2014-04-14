@@ -1,11 +1,9 @@
 <?php
 
-namespace Pagekit\Content;
+namespace Pagekit\Editor;
 
-use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\EditorLoadEvent;
-use Pagekit\System\Event\TmplEvent;
 
 class MarkdownEditor extends EventSubscriber
 {
@@ -20,7 +18,6 @@ class MarkdownEditor extends EventSubscriber
             return;
         }
 
-        $event->addPlugin('image', 'extensions/system/assets/js/editor/image');
         $event->addAttributes(array('data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;'));
 
         $this('view.scripts')->queue(
@@ -33,38 +30,12 @@ class MarkdownEditor extends EventSubscriber
     }
 
     /**
-     * Content plugins callback.
-     *
-     * @param ContentEvent $event
-     */
-    public function onContentPlugins(ContentEvent $event)
-    {
-        $content = $event->getContent();
-        $content = $this('markdown')->parse($content);
-
-        $event->setContent($content);
-    }
-
-    /**
-     * Register Tmpls callback.
-     *
-     * @param TmplEvent $event
-     */
-    public function onSystemTmpl(TmplEvent $event)
-    {
-        $event->register('image.modal', 'extension://system/assets/tmpl/image.modal.razr.php');
-        $event->register('image.replace', 'extension://system/assets/tmpl/image.replace.razr.php');
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load'     => array('onEditorLoad', -5),
-            'content.plugins' => array('onContentPlugins', 5),
-            'system.tmpl'     => 'onSystemTmpl'
+            'editor.load'     => array('onEditorLoad', -5)
         );
     }
 }

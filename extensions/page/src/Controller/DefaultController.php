@@ -3,7 +3,6 @@
 namespace Pagekit\Page\Controller;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Page\Entity\Page;
 
@@ -40,8 +39,6 @@ class DefaultController extends Controller
             return $this('response')->create(__('Unable to access this page!'), 403);
         }
 
-        $event = $this('events')->trigger('content.plugins', new ContentEvent($page->getContent(), compact('page')));
-
-        return array('head.title' => __($page->getTitle()), 'page' => $page, 'content' => $event->getContent());
+        return array('head.title' => __($page->getTitle()), 'page' => $page);
     }
 }
