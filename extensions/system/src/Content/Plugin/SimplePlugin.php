@@ -4,7 +4,6 @@ namespace Pagekit\Content\Plugin;
 
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\EditorLoadEvent;
 
 class SimplePlugin extends EventSubscriber
 {
@@ -18,13 +17,6 @@ class SimplePlugin extends EventSubscriber
                             )*
                         \})?
                         /x';
-
-    /**
-     * Editor load callback.
-     *
-     * @param EditorLoadEvent $event
-     */
-    public function onEditorLoad(EditorLoadEvent $event) {}
 
     /**
      * Content plugins callback.
