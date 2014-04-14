@@ -6,15 +6,14 @@
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/user/add')">@trans('Add User')</a>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/user/delete')">@trans('Delete')</a>
 
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
+            <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
                         <li><a href="#" data-action="@url.route('@system/user/status', ['status' => 1])">@trans('Activate')</a></li>
                         <li><a href="#" data-action="@url.route('@system/user/status', ['status' => 0])">@trans('Block')</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="#" data-action="@url.route('@system/user/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,7 +54,7 @@
 
     @if (users)
     <div class="uk-overflow-container">
-        <table class="uk-table uk-table-hover uk-table-middle">
+        <table class="uk-table uk-table-hover uk-table-middle js-table-users">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
@@ -68,7 +67,7 @@
             <tbody>
                 @foreach (users as user)
                 <tr>
-                    <td><input type="checkbox" name="ids[]" value="@user.id"></td>
+                    <td><input class="js-select" type="checkbox" name="ids[]" value="@user.id"></td>
                     <td class="pk-table-width-minimum">
                         @gravatar(user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => user.username, 'class' => 'uk-img-preserve uk-border-circle']])
                     </td>

@@ -29,15 +29,14 @@
             <div class="uk-float-left">
 
                 <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
+                <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
 
-                <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                    <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+                    <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
                     <div class="uk-dropdown uk-dropdown-small">
                         <ul class="uk-nav uk-nav-dropdown">
                             <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 1])">@trans('Enable')</a></li>
                             <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 0])">@trans('Disable')</a></li>
-                            <li class="uk-nav-divider"></li>
-                            <li><a href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a></li>
                         </ul>
                     </div>
                 </div>

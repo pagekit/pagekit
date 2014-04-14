@@ -1,5 +1,5 @@
 @if (root.depth == 0)
-<ul class="uk-sortable" data-uk-sortable>
+<ul class="uk-sortable js-menu-items" data-uk-sortable>
 @endif
 
     @foreach (root.children as menuitem)
@@ -11,7 +11,7 @@
         <div class="uk-sortable-item pk-table-fake">
             <div class="pk-table-width-minimum"><div class="uk-sortable-handle"></div></div>
             <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-sortable-action="toggle"></div></div>
-            <div class="pk-table-width-minimum"><input type="checkbox" name="id[]" value="@item.id"></div>
+            <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="id[]" value="@item.id"></div>
             <div>
                 <a href="@url.route('@system/item/edit', ['id' => item.id])">@item.name</a>
             </div>
