@@ -1,6 +1,6 @@
 require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], function($, uikit, marked, codemirror) {
 
-    var $script = $('script[data-plugins]'), plugins = $script.data('plugins'), options = $script.data('finder'), editors = [];
+    var $script = $('script[data-plugins]'), plugins = $script.data('plugins'), options = $script.data('finder'), editors = [], base = requirejs.toUrl('');
 
     $('[data-editor="markdown"]').each(function() {
 
@@ -18,6 +18,19 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
         }, 200);
     });
 
+    uikit.htmleditor.addPlugin('relativesource', /src=["'](.+?)["']/gim, function(marker) {
+
+        var replacement = marker.found[0];
+
+        if(!marker.found[1].match(/^(\/|http\:|https\:|ftp\:)/i)) {
+            replacement = replacement.replace(marker.found[1], base + marker.found[1]);
+        }
+
+        return replacement;
+    });
+
+
+
     // load plugins
     require(plugins, function() {
 
@@ -27,6 +40,7 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
 
         // refresh editors
         editors.forEach(function(editor) {
+            editor.options.plugins.push('relativesource');
             editor.redraw();
         });
     });

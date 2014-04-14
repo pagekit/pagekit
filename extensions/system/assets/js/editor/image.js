@@ -112,21 +112,9 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://' !== marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
-        htmleditor.addPlugin('relativeimages', /src=["'](.+?)["']/gim, function(marker) {
-
-            var replacement = marker.found[0];
-
-            if(!marker.found[1].match(/^(\/|http\:|https\:|ftp\:)/i)) {
-                replacement = replacement.replace(marker.found[1], base + marker.found[1]);
-            }
-
-            return replacement;
-        });
-
         editors.forEach(function(editor) {
             editor.options.plugins.push('htmlimages');
             editor.options.plugins.push('images');
-            editor.options.plugins.push('relativeimages');
         });
 
     };
