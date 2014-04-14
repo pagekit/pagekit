@@ -197,7 +197,7 @@ class FinderController extends Controller
     {
         $path   = preg_replace('/\\\/', '/', $path);
         $path   = str_replace('//', '/', $path);
-        $prefix = $this->getAbsolutePrefix($path);
+        $prefix = preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches) ? $matches['prefix'] : '';
         $path   = substr($path, strlen($prefix));
         $parts  = array_filter(explode('/', $path), 'strlen');
         $tokens = array();
@@ -211,22 +211,5 @@ class FinderController extends Controller
         }
 
         return $prefix . implode('/', $tokens);
-    }
-
-    /**
-     * Returns the absolute prefix of the given path
-     *
-     * @param  string $path
-     * @return string
-     */
-    protected function getAbsolutePrefix($path)
-    {
-        preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches);
-
-        if (empty($matches['prefix'])) {
-            return '';
-        }
-
-        return strtolower($matches['prefix']);
     }
 }
