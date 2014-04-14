@@ -285,12 +285,20 @@
 
         render: function() {
 
-            var $this = this, value = this.editor.getValue();
+            var $this = this;
 
-            this.currentvalue  = String(value);
+            this.currentvalue  = this.editor.getValue();
+
+            // empty code
+            if (!this.currentvalue) {
+
+                this.element.val('');
+                this.preview.html('');
+
+                return;
+            }
 
             this.element.trigger("htmleditor-before", [this]);
-
             this.applyPlugins();
 
             if(this.editor.options.mode == 'gfm' && this.marked) {
@@ -367,6 +375,9 @@
             editor.setCursor({"line":pos.line, "ch":markdown.length});
             editor.focus();
         };
+
+    Htmleditor.baseReplacer = baseReplacer;
+    Htmleditor.lineReplacer = lineReplacer;
 
     Htmleditor.commands = {
         "fullscreen": {
@@ -445,14 +456,14 @@
             "title"  : "Unordered List",
             "label"  : '<i class="uk-icon-list-ul"></i>',
             "action" : function(editor){
-                if(this.getMode() == 'markdown') lineReplacer("* $1", editor);
+                lineReplacer(this.getMode() == 'html' ? "<li>$1</li>":"* $1", editor);
             }
         },
         "listOl" : {
             "title"  : "Ordered List",
             "label"  : '<i class="uk-icon-list-ol"></i>',
             "action" : function(editor){
-                if(this.getMode() == 'markdown') lineReplacer("1. $1", editor);
+                lineReplacer(this.getMode() == 'html' ? "<li>$1</li>":"* $1", editor);
             }
         }
     }
