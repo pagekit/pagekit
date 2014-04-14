@@ -8,6 +8,11 @@
     </div>
 
     <div class="uk-form-row">
+        <input class="js-showtitle" type="checkbox" @(page.get('title', true) ? 'checked':'')> @trans('Show title')
+        <input type="hidden" name="page[data][title]" value="@(page.get('title', 1) ? 1 : 0)">
+    </div>
+
+    <div class="uk-form-row">
         <ul class="uk-subnav uk-">
             <li>
                 @trans('Slug'):

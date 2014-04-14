@@ -40,6 +40,12 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
             $('#page-content', form).trigger(markdownStatus.val() == '1' ? 'enableMarkdown' : 'disableMarkdown');
         });
 
+    // show title checkbox
+    var showtitleinput = $('input[name="page[data][title]"]'),
+        showtitle      = $('.js-showtitle').on("click", function(){
+            showtitleinput.val(showtitle.prop('checked') ? 1:0);
+        });
+
     // form ajax saving
     form.on('submit', function(e) {
 
