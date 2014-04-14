@@ -18,6 +18,7 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
         }, 200);
     });
 
+    // relative image/video src resolver plugin
     uikit.htmleditor.addPlugin('relativesource', /src=["'](.+?)["']/gim, function(marker) {
 
         var replacement = marker.found[0];
@@ -28,8 +29,6 @@ require(['jquery', 'uikit!htmleditor', 'marked', 'codemirror', 'domReady!'], fun
 
         return replacement;
     });
-
-
 
     // load plugins
     require(plugins, function() {
