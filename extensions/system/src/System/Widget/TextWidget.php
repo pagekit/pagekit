@@ -2,7 +2,6 @@
 
 namespace Pagekit\System\Widget;
 
-use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
@@ -37,9 +36,7 @@ class TextWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        $this('events')->trigger('content.plugins', $event = new ContentEvent($widget->get('content'), compact('widget')));
-
-        return $event->getContent();
+        return $this('content')->applyPlugins($widget->get('content'), array('widget' => $widget, 'markdown' => $widget->get('markdown')));
     }
 
     /**

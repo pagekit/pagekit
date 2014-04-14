@@ -3,10 +3,14 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Component\View\Event\ActionEvent;
-use Pagekit\Content\MarkdownEditor;
 use Pagekit\Content\Plugin\LinkPlugin;
+use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
+use Pagekit\Editor\MarkdownEditor;
+use Pagekit\Editor\Plugin\ImagePlugin as EditorImagePlugin;
+use Pagekit\Editor\Plugin\LinkPlugin as EditorLinkPlugin;
+use Pagekit\Editor\Plugin\VideoPlugin as EditorVideoPlugin;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Widget\MenuWidget;
 use Pagekit\System\Dashboard\FeedWidget;
@@ -57,8 +61,13 @@ class SystemListener extends EventSubscriber
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
 
         $app['events']->addSubscriber(new LinkPlugin);
-        $app['events']->addSubscriber(new VideoPlugin);
+        $app['events']->addSubscriber(new MarkdownPlugin);
         $app['events']->addSubscriber(new SimplePlugin);
+        $app['events']->addSubscriber(new VideoPlugin);
+
+        $app['events']->addSubscriber(new EditorImagePlugin);
+        $app['events']->addSubscriber(new EditorLinkPlugin);
+        $app['events']->addSubscriber(new EditorVideoPlugin);
         $app['events']->addSubscriber(new MarkdownEditor);
 
         $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
