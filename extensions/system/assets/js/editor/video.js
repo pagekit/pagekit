@@ -1,6 +1,7 @@
 define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
 
-    var modal   = $(tmpl.render('video.modal')).appendTo('body'),
+    var base    = requirejs.toUrl(''),
+        modal   = $(tmpl.render('video.modal')).appendTo('body'),
         element = modal.find('.js-finder'),
         video   = modal.find('.js-url'),
         handler, finder, picker;
@@ -12,13 +13,23 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
     element.on('picked', function(e, data) {
         // TODO: add video formats
         if (data.type == 'file' && data.url.match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
-            video.val(data.url);
+
+            var url = data.url;
+
+            // convert to relative urls
+            if (url.indexOf(base) === 0) {
+                url = url.replace(base, '');
+            }
+
+            video.val(url);
         }
     });
 
     return function(htmleditor, options, editors) {
 
         editors = editors || [];
+
+        var rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/';
 
         // videos
         htmleditor.commands.video = {
@@ -106,6 +117,8 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
                     picker.hide();
                     marker.replace('(video)' + JSON.stringify({ src: video.val() }));
                 };
+
+                finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
             });
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
@@ -115,9 +128,21 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             return tmpl.render('video.replace', { marker: marker, preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
+        htmleditor.addPlugin('relativevideos', /src=["'](.+?)["']/gim, function(marker) {
+
+            var replacement = marker.found[0];
+
+            if(!marker.found[1].match(/^(\/|http\:|https\:|ftp\:)/i)) {
+                replacement = replacement.replace(marker.found[1], base + marker.found[1]);
+            }
+
+            return replacement;
+        });
+
         editors.forEach(function(editor) {
             editor.options.toolbar.push('video');
             editor.options.plugins.push('videos');
+            editor.options.plugins.push('relativevideos');
         });
     };
 });

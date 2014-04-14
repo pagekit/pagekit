@@ -26,7 +26,7 @@
 </div>
 
 <ul class="uk-breadcrumb pk-breadcrumb js-breadcrumbs">
-    <li><a href="#/" data-cmd="loadPath" data-path="/">@trans('Home')</a></li>
+    <li><a href="#" data-cmd="loadPath" data-path="/">@trans('Home')</a></li>
 </ul>
 
 <div class="uk-progress uk-progress-striped uk-active uk-hidden">

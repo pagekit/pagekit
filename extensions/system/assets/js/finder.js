@@ -22,29 +22,38 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             progressbar = progress.find('.uk-progress-bar');
 
         this.progress = {
+
             show: function() {
                 progress.removeClass('uk-hidden');
             },
+
             hide: function() {
                 progress.addClass('uk-hidden');
             },
+
             update: function(percent) {
                 progressbar.css('width', percent + '%').text(percent + '%');
             }
+
         };
 
         var uploadsettings = {
+
             action: this.url + 'upload',
+
             before: function(options) {
                 options = $.extend(options.params, $this.getParams($this.path));
             },
+
             loadstart: function() {
                 $this.progress.update(0);
                 $this.progress.show();
             },
+
             progress: function(percent) {
                 $this.progress.update(Math.ceil(percent));
             },
+
             allcomplete: function(response) {
 
                 var data = $.parseJSON(response);
@@ -56,6 +65,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 $this.progress.update(100);
                 setTimeout($this.progress.hide, 500);
             }
+
         };
 
         var select = new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings);
@@ -84,7 +94,7 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             }, 50))
 
             // drag drop files to finder
-            .on("drop", function(e){
+            .on('drop', function(e){
 
                 if (e.dataTransfer && e.dataTransfer.files) {
 
@@ -96,21 +106,23 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
                 $this.main.removeClass('uk-dragover');
 
-            }).on("dragenter", function(e){
+            })
+            .on('dragenter', function(e){
                 e.stopPropagation();
                 e.preventDefault();
-            }).on("dragover", function(e){
+            })
+            .on('dragover', function(e){
                 e.stopPropagation();
                 e.preventDefault();
                 $this.main.addClass('uk-dragover');
-            }).on("dragleave", function(e){
+            })
+            .on('dragleave', function(e){
                 e.stopPropagation();
                 e.preventDefault();
                 $this.main.removeClass('uk-dragover');
             });
 
         this.switchView(this.view);
-        this.loadPath(this.path);
         this.showOnSelect();
     };
 
@@ -190,6 +202,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                     if (!name) continue;
 
                     for (var j = 0; j <= i; j++) {
+                        if (!parts[j]) continue;
+
                         path += '/' + parts[j];
                     }
 

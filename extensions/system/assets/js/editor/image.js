@@ -18,8 +18,8 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             var url = data.url;
 
             // convert to relative urls
-            if (url.indexOf(base)===0) {
-                url = url.replace(base,'');
+            if (url.indexOf(base) === 0) {
+                url = url.replace(base, '');
             }
 
             image.val(url);
@@ -30,11 +30,11 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
         editors = editors || [];
 
-        var rootpath = options.root.replace(/^\/+|\/+$/g, "")+'/';
+        var rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/';
 
         htmleditor.addPlugin('htmlimages', /<img(.+?)>/gim, function(marker) {
 
-            var attrs = {"src":"", "alt":""}, img;
+            var attrs = { src: '', alt: '' }, img;
 
             if (marker.found[0].match(/js\-no\-parse/)) {
                 return marker.found[0];
@@ -42,13 +42,13 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
             img = $(marker.found[0]);
 
-            attrs.src = img.attr("src") || "";
-            attrs.alt = img.attr("alt") || "";
+            attrs.src = img.attr('src') || '';
+            attrs.alt = img.attr('alt') || '';
 
             if (!finder) {
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker  = new uikit.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal)
             }
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
@@ -56,17 +56,15 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 image.val(attrs.src);
 
                 //load finder in image dir
-                if(attrs.src.trim() && attrs.src.indexOf(rootpath)===0) {
-                    finder.loadPath( attrs.src.replace(rootpath, '').split('/').slice(0,-1).join('/') );
-                }
+                finder.loadPath(attrs.src.trim() && attrs.src.indexOf(rootpath) === 0 ? attrs.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 
                 handler = function() {
                     picker.hide();
-                    img.attr("src", image.val());
-                    img.attr("alt", title.val());
+                    img.attr('src', image.val());
+                    img.attr('alt', title.val());
                     marker.replace(img[0].outerHTML);
                 };
             });
@@ -75,20 +73,20 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 marker.replace('');
             });
 
-            return tmpl.render('image.replace', { marker: marker, src: ((attrs.src.trim() && 'http://'!==attrs.src.trim()) ? attrs.src : false), alt: attrs.alt  }).replace(/(\r\n|\n|\r)/gm, '');
+            return tmpl.render('image.replace', { marker: marker, src: ((attrs.src.trim() && 'http://' !== attrs.src.trim()) ? attrs.src : false), alt: attrs.alt  }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
 
         htmleditor.addPlugin('images', /(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim, function(marker) {
 
-            if(marker.editor.editor.options.mode != "gfm") {
+            if (marker.editor.editor.options.mode != 'gfm') {
                 return marker.found[0];
             }
 
             if (!finder) {
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker  = new uikit.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal)
             }
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
@@ -96,9 +94,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 image.val(marker.found[3]);
 
                 //load finder in image dir
-                if(marker.found[3].trim() && marker.found[3].indexOf(rootpath)===0) {
-                    finder.loadPath( marker.found[3].replace(rootpath, '').split('/').slice(0,-1).join('/') );
-                }
+                finder.loadPath(marker.found[3].trim() && marker.found[3].indexOf(rootpath) === 0 ? marker.found[3].replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
@@ -113,10 +109,10 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 marker.replace('');
             });
 
-            return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://'!==marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
+            return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://' !== marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
-        htmleditor.addPlugin('relativeimages', /src=[\"'](.+?)[\"']/gim, function(marker) {
+        htmleditor.addPlugin('relativeimages', /src=["'](.+?)["']/gim, function(marker) {
 
             var replacement = marker.found[0];
 
