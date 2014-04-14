@@ -37,7 +37,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
                     if (data.error) {
                         source.val('');
                     } else if (data.url) {
-                        resolved = data.url;
+                        resolved = decodeURIComponent(data.url);
                     }
 
                 }, 'json').fail(function () {

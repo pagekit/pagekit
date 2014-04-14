@@ -26,7 +26,7 @@
                 @elseif (link == '!menu-header')
                 @trans('Menu Header')
                 @else
-                <a href="@url.route(item.url)" target="_blank">@(link ?: '/')</a>
+                <a href="@url.route(item.url)" target="_blank">@(link|urldecode ?: '/')</a>
                 @endif
             </div>
             <div class="pk-table-width-100">

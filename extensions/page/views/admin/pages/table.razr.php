@@ -26,7 +26,7 @@
             <td class="pk-table-text-break">
                 @set(link = url.route('@page/id', ['id' => page.id], 'base') ?: '/')
                 @if (page.status == 1)
-                <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link</a>
+                <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link|urldecode</a>
                 @else
                 @link
                 @endif
