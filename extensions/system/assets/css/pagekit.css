@@ -84,6 +84,12 @@
 .pk-table-subheading tbody tr th { padding-top: 20px; }
 
 
+/* Sub-modifier `pk-table-selected`
+========================================================================== */
+
+.pk-table-selected { background: #ffd; }
+
+
 /* Sub-modifier `pk-table-indent`
 ========================================================================== */
 

@@ -96,8 +96,8 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         var selected = form.find('.js-select:checked');
         showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
 
-        rows.removeClass('pk-selected');
-        selected.closest('tr').addClass('pk-selected');
+        rows.removeClass('pk-table-selected');
+        selected.closest('tr').addClass('pk-table-selected');
 
         if (!selected.length) {
             lastselected = false;
