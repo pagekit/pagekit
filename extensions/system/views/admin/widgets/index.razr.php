@@ -16,15 +16,16 @@
                 </div>
             </div>
 
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/widgets/delete')">@trans('Delete')</a>
+
+            <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
                         <li><a href="#" data-action="@url.route('@system/widgets/enable')">@trans('Enable')</a></li>
                         <li><a href="#" data-action="@url.route('@system/widgets/disable')">@trans('Disable')</a></li>
                         <li class="uk-nav-divider"></li>
                         <li><a href="#" data-action="@url.route('@system/widgets/copy')">@trans('Copy')</a></li>
-                        <li><a href="#" data-action="@url.route('@system/widgets/delete')">@trans('Delete')</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,7 +89,7 @@
                     <div class="pk-table-width-minimum">
                         <div class="uk-sortable-handle">​</div>
                     </div>
-                    <div class="pk-table-width-minimum"><input type="checkbox" name="ids[]" value="@widget.id"></div>
+                    <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="ids[]" value="@widget.id"></div>
                     <div>
                         @if (type)
                         <a href="@url.route('@system/widgets/edit', ['id' => widget.id])">@widget.title</a>
