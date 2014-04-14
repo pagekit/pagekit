@@ -1,5 +1,9 @@
 jQuery(function($) {
 
+
+    $.UIkit.notify.message.defaults.timeout = 2000;
+
+
     $('.pk-system-messages').children().each(function() {
         var message = $(this);
         $.UIkit.notify(message.html(), message.data());
@@ -63,4 +67,7 @@ jQuery(function($) {
         return $.UIkit.Utils.debounce(respfn, 10);
 
     })());
+
+
+
 });
