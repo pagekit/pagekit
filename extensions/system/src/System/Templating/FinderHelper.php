@@ -32,7 +32,7 @@ class FinderHelper extends Helper
      */
     public function render($root, $mode)
     {
-        $this->app['view.scripts']->queue('finder.init', 'require(["finder", "domReady!"], function(Finder) { $("[data-finder]").each(function() { new Finder(this, $(this).data("finder")); }); });', 'requirejs', 'string');
+        $this->app['view.scripts']->queue('finder.init', 'require(["finder", "domReady!"], function(Finder) { $("[data-finder]").each(function() { new Finder(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
 
         $hash = $this->app['finder']->getToken($root, $mode);
 
