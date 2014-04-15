@@ -25,7 +25,7 @@
             </td>
             <td class="pk-table-text-break">
                 @set(link = url.route('@page/id', ['id' => page.id], 'base') ?: '/')
-                @if (page.status == 1)
+                @if (page.status == 1 && app.users.checkAccessLevel(page.accessId))
                 <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link|urldecode</a>
                 @else
                 @link

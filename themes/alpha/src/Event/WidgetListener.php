@@ -40,6 +40,15 @@ class WidgetListener extends EventSubscriber
         $this->setSettings($settings);
     }
 
+    public function onSiteInit()
+    {
+        $this('events')->on('system.widget.postLoad', function(EntityEvent $event) {
+            $widget = $event->getEntity();
+            $settings = $this->getSettings();
+            $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
+        });
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,7 +58,8 @@ class WidgetListener extends EventSubscriber
             'system.widget.edit'       => 'onWidgetEdit',
             'system.widget.save'       => 'onWidgetSave',
             'system.widget.copy'       => 'onWidgetCopy',
-            'system.widget.postDelete' => 'onWidgetDelete'
+            'system.widget.postDelete' => 'onWidgetDelete',
+            'site.init'                => 'onSiteInit'
         );
     }
 
