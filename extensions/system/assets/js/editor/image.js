@@ -5,10 +5,27 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         element = modal.find('.js-finder'),
         image   = modal.find('.js-url'),
         title   = modal.find('.js-title'),
+        preview = modal.find('.js-img-preview'),
+        screens = modal.find('[data-screen]').css({'animation-duration':'0.1s', '-webkit-animation-duration':'0.1s'}),
+        goto    = function(screen) {
+            var current = screens.filter(':visible'),
+                next    = screens.filter('[data-screen="'+screen+'"]');
+
+            current.addClass('uk-hidden');
+            next.removeClass('uk-hidden');
+
+            picker.resize();
+        },
+
         finder, handler, picker;
 
     modal.on('click', '.js-update', function() {
         handler();
+    });
+
+    modal.on('click', '[data-goto]', function(e){
+        e.preventDefault();
+        goto($(this).data('goto'));
     });
 
     element.on('picked', function(e, data) {
@@ -17,14 +34,44 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
             var url = data.url;
 
+            updatePreview(url);
+
             // convert to relative urls
             if (url.indexOf(base) === 0) {
                 url = url.replace(base, '');
             }
 
             image.val(url);
+
+
+            goto('settings');
         }
     });
+
+
+    // preview
+    var pimg;
+
+    function updatePreview(url) {
+
+        // convert to relative urls
+        if (url && !url.match(/^(\/|http\:|https\:|ftp\:)/i)) {
+            url = base + '/' + url;
+        }
+
+        var pimg = new Image();
+
+        pimg.onerror = function(){
+            preview.attr('src', base+'extensions/system/assets/images/placeholder-editor-image.svg');
+        };
+
+        pimg.onsuccess = function(){
+
+        };
+
+        pimg.src = url;
+        preview.attr('src', url);
+    }
 
     return function(htmleditor, options, editors) {
 
@@ -48,7 +95,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             if (!finder) {
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker = new uikit.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal);
             }
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
@@ -58,7 +105,9 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 //load finder in image dir
                 finder.loadPath(attrs.src.trim() && attrs.src.indexOf(rootpath) === 0 ? attrs.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
+                updatePreview(image.val());
                 picker.show();
+
                 setTimeout(function() { title.focus(); }, 10);
 
                 handler = function() {
@@ -96,6 +145,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 //load finder in image dir
                 finder.loadPath(marker.found[3].trim() && marker.found[3].indexOf(rootpath) === 0 ? marker.found[3].replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
+                updatePreview(image.val());
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 

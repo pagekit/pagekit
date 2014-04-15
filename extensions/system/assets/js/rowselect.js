@@ -27,7 +27,6 @@
 
                     // shift select
                     if (e.shiftKey && $this.lastselected) {
-
                         var start = Math.min($this.rows.index(row), $this.rows.index($this.lastselected)), end = Math.max($this.rows.index(row), $this.rows.index($this.lastselected));
 
                         for(i = start; i <= end; i++) {

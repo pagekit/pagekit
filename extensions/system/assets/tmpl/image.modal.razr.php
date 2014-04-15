@@ -1,16 +1,38 @@
 <div class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-large uk-form">
-        <h1 class="uk-h3">@trans('Add Image')</h1>
-        <div class="uk-form-row">
-            <input type="text" class="js-url uk-width-1-1" placeholder="@trans('URL')">
+        <div data-screen="settings">
+            <h1 class="uk-h3">@trans('Add Image')</h1>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-3">
+                    <img class="js-img-preview" alt="Preview image">
+                </div>
+
+                <div class="uk-width-2-3">
+
+                    <div class="uk-form-row">
+                        <input type="text" class="js-url uk-width-4-5" placeholder="@trans('URL')">
+                        <button type="button" class="uk-button uk-float-right uk-width-1-6" data-goto="finder">@trans('Select image')</button>
+                    </div>
+                    <div class="uk-form-row">
+                        <input type="text" class="js-title uk-width-1-1" placeholder="@trans('Alt')">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="uk-form-row uk-margin-top">
+                <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
+                <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>
+            </div>
         </div>
-        <div class="uk-form-row">
-            <input type="text" class="js-title uk-width-1-1" placeholder="@trans('Title')">
+        <div class="uk-hidden" data-screen="finder">
+            <h1 class="uk-h3">@trans('Select Image')</h1>
+            <div class="js-finder"></div>
+            <div class="uk-margin-top">
+                <button class="uk-button" type="button" data-goto="settings">@trans('Cancel')</button>
+            </div>
         </div>
-        <div class="js-finder uk-margin-top"></div>
-        <div class="uk-margin-top">
-            <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
-            <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>
-        </div>
+
     </div>
 </div>

@@ -14,7 +14,6 @@ require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uik
         $.post($(this).data('action'), form.serialize(), function(data) {
             uikit.notify(data.message, data.error ? 'danger' : 'success');
             updateTable();
-            updateOnSelect();
         });
     })
 
