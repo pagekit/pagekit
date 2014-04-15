@@ -23,6 +23,7 @@ var require = (function(win, doc) {
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
                         'htmleditor':      'vendor/assets/uikit/js/addons/htmleditor.min',
+                        'rowselect':       'extensions/system/assets/js/rowselect.js?ver=' + vers,
                         'finder':          'extensions/system/assets/js/finder.js?ver=' + vers,
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
                         'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,

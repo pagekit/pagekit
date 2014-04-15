@@ -1,67 +1,13 @@
-require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
-    var form  = $('#js-menu'), csrf = $('input[name=_csrf]', form).val(),
-        table = $('.js-menu-items'),
-        doaction = function(element) {
+    var form         = $('#js-menu'), csrf = $('input[name=_csrf]', form).val(),
+        showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
+        table        = $('.js-menu-items').on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
+        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' }),
+        doaction     = function(element) {
             element.closest('form').attr('action', element.data('action')).submit();
-        },
-        showOnSelect, lastselected, rows = table.find('.pk-table-fake');
+        };
 
-    // selections
-    showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden');
-
-    form.on('click', '.js-select', function() {
-        updateOnSelect();
-    })
-    // select via row clicking
-    .on('click', '.pk-table-fake', function(e){
-
-        var target = $(e.target), row = $(this), select;
-
-        if(!target.is('a, input, [data-action]') && !target.closest('[data-action]').length) {
-
-            if (e.shiftKey && window.getSelection) {
-                window.getSelection()[window.getSelection().empty ? 'empty':'removeAllRanges']();
-            }
-
-            select = row.find('.js-select:first');
-
-            if (select.length) {
-
-                select.prop('checked', !select.prop('checked'));
-
-                // shift select
-                if (e.shiftKey && lastselected) {
-
-                    var start = Math.min(row.index(), lastselected.index()), end = Math.max(rows.index(row), rows.index(lastselected));
-
-                    for(i = start; i <= end; i++) {
-                        rows.eq(i).find('.js-select:first').prop('checked', true);
-                    }
-                }
-
-                if (!e.shiftKey && select.prop('checked')) {
-                    lastselected = row;
-                } else {
-                    lastselected = false;
-                }
-
-                updateOnSelect();
-            }
-        }
-    });
-
-    function updateOnSelect() {
-        var selected = form.find('.js-select:checked');
-        showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
-
-        rows.removeClass('pk-table-selected');
-        selected.closest('.pk-table-fake').addClass('pk-table-selected');
-
-        if (!selected.length) {
-            lastselected = false;
-        }
-    }
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -82,7 +28,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         // select all checkbox
         .on('click', '.js-select-all:checkbox', function() {
             $('[name="id[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-            updateOnSelect();
+            rowselect.handleSelected();
         })
 
         // save menu item order on sortable change
