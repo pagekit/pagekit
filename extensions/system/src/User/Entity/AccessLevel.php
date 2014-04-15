@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
+use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\User\Model\AccessLevel as BaseAccessLevel;
 
 /**
@@ -32,10 +33,10 @@ class AccessLevel extends BaseAccessLevel
     /**
      * @PreSave
      */
-    public function preSave($manager)
+    public function preSave(EntityEvent $event)
     {
         if (!$this->id) {
-            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_access_level'));
+            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_access_level'));
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Pagekit\Menu\Entity;
 
+use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\Menu\Model\Item as BaseItem;
 use Pagekit\Menu\Model\MenuInterface;
 
@@ -130,10 +131,10 @@ class Item extends BaseItem
     /**
      * @PreSave
      */
-    public function preSave($manager)
+    public function preSave(EntityEvent $event)
     {
         if (!$this->id) {
-            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())) ?: 0);
+            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())) ?: 0);
         }
     }
 }

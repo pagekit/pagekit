@@ -1,7 +1,6 @@
 <?php
 
 namespace Pagekit\Page\Entity;
-use Pagekit\Component\Database\ORM\EntityManager;
 
 /**
  * @Entity(tableClass="@page_page", eventPrefix="page.page")
