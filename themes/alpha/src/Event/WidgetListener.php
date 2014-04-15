@@ -14,7 +14,7 @@ class WidgetListener extends EventSubscriber
     {
         $view = $this('view');
         $settings = $this->getSettings();
-        $event->addSettings(__('Theme: Alpha'), function($widget) use ($view, $settings) {
+        $event->addSettings(__('Theme'), function($widget) use ($view, $settings) {
             return $view->render('theme://alpha/views/admin/widgets/edit.razr.php', compact('widget', 'settings'));
         });
     }
