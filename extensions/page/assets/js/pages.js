@@ -1,6 +1,11 @@
-require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
+require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
-    var form = $('#js-pages'), table = $('.js-table', form), pagination = $('[data-uk-pagination]', form), search, prev, showOnSelect, rows = table.find('tbody>tr'), lastselected;
+    var form         = $('#js-pages'),
+        showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
+        table        = $('.js-table', form).on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
+        rowselect    = new RowSelect(table),
+        pagination   = $('[data-uk-pagination]', form),
+        search, prev;
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -15,8 +20,8 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
 
     // select all checkbox
     .on('click', '.js-select-all:checkbox', function() {
-        $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-        updateOnSelect();
+        $('.js-select', form).prop('checked', $(this).prop('checked'));
+        rowselect.handleSelected();
     })
 
     // submit filters
@@ -36,71 +41,13 @@ require(['jquery','uikit!pagination' , 'domReady!'], function($, uikit) {
         updateTable();
     });
 
-    showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden');
-
-    form.on('click', '.js-select', function() {
-        updateOnSelect();
-    })
-
-    // select via row clicking
-    .on('click', 'tr', function(e){
-
-        var target = $(e.target), tr = $(this), select;
-
-        if(!target.is('a, input, [data-action]') && !target.closest('[data-action]').length) {
-
-            if (e.shiftKey && window.getSelection) {
-                window.getSelection()[window.getSelection().empty ? 'empty':'removeAllRanges']();
-            }
-
-            select = tr.find('.js-select:first');
-
-            if (select.length) {
-
-                select.prop('checked', !select.prop('checked'));
-
-                // shift select
-                if (e.shiftKey && lastselected) {
-
-                    var start = Math.min(tr.index(), lastselected.index()), end = Math.max(tr.index(), lastselected.index());
-
-                    for(i = start; i <= end; i++) {
-                        rows.eq(i).find('.js-select:first').prop('checked', true);
-                    }
-                }
-
-                if (!e.shiftKey && select.prop('checked')) {
-                    lastselected = tr;
-                } else {
-                    lastselected = false;
-                }
-
-                updateOnSelect();
-            }
-        }
-    });
-
     function updateTable() {
         $.post(form.data('action'), form.serialize(), function(data) {
             table.html(data.table);
-            pagination.toggleClass('uk-hidden', data.total == 0).data('pagination').render(data.total);
+            pagination.toggleClass('uk-hidden', data.total === 0).data('pagination').render(data.total);
             $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
 
-            rows = table.find('tbody>tr');
+            rowselect.fetchRows();
         });
-
-        lastselected = false;
-    }
-
-    function updateOnSelect() {
-        var selected = form.find('.js-select:checked');
-        showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
-
-        rows.removeClass('pk-table-selected');
-        selected.closest('tr').addClass('pk-table-selected');
-
-        if (!selected.length) {
-            lastselected = false;
-        }
     }
 });

@@ -6,15 +6,7 @@
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/alias/add')">@trans('Add Alias')</a>
-
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.route('@system/alias/delete')">@trans('Delete')</a></li>
-                    </ul>
-                </div>
-            </div>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/alias/delete')">@trans('Delete')</a>
 
         </div>
         <div class="uk-float-right">
@@ -26,7 +18,7 @@
 
     @if (aliases)
     <div class="uk-overflow-container">
-        <table class="uk-table uk-table-hover uk-table-middle">
+        <table class="uk-table uk-table-hover uk-table-middle js-table">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
@@ -38,7 +30,7 @@
                 @foreach (aliases as alias)
                 <tr>
                     <td>
-                        <input type="checkbox" name="ids[]" value="@alias.Id">
+                        <input class="js-select" type="checkbox" name="ids[]" value="@alias.Id">
                     </td>
                     <td>
                         <a href="@url.route('@system/alias/edit', ['id' => alias.id])">@alias.alias</a>

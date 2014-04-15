@@ -7,17 +7,14 @@ use Pagekit\Content\Plugin\LinkPlugin;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
-use Pagekit\Editor\MarkdownEditor;
-use Pagekit\Editor\Plugin\ImagePlugin as EditorImagePlugin;
-use Pagekit\Editor\Plugin\LinkPlugin as EditorLinkPlugin;
-use Pagekit\Editor\Plugin\VideoPlugin as EditorVideoPlugin;
+use Pagekit\Editor\HtmlEditor;
+use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Widget\MenuWidget;
 use Pagekit\System\Dashboard\FeedWidget;
 use Pagekit\System\Dashboard\WeatherWidget;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Templating\DateHelper;
-use Pagekit\System\Templating\EditorHelper;
 use Pagekit\System\Templating\FinderHelper;
 use Pagekit\System\Widget\TextWidget;
 use Pagekit\User\Auth\UserProvider;
@@ -47,7 +44,7 @@ class SystemListener extends EventSubscriber
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
 
-        $helper = new EditorHelper($app);
+        $helper = new EditorHelper($app['events']);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
 
@@ -65,10 +62,7 @@ class SystemListener extends EventSubscriber
         $app['events']->addSubscriber(new SimplePlugin);
         $app['events']->addSubscriber(new VideoPlugin);
 
-        $app['events']->addSubscriber(new EditorImagePlugin);
-        $app['events']->addSubscriber(new EditorLinkPlugin);
-        $app['events']->addSubscriber(new EditorVideoPlugin);
-        $app['events']->addSubscriber(new MarkdownEditor);
+        $app['events']->addSubscriber(new HtmlEditor);
 
         $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
         $app['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);

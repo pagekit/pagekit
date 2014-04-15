@@ -3,5 +3,5 @@
     <h1 class="uk-article-title">@page.title</h1>
     @endif
 
-    @app.content.applyPlugins(page.content, ['markdown' => page.get('markdown'), 'page' => page])
+    @page.content
 </article>

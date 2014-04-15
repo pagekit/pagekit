@@ -195,8 +195,7 @@ class FinderController extends Controller
      */
     protected function normalizePath($path)
     {
-        $path   = preg_replace('/\\\/', '/', $path);
-        $path   = str_replace('//', '/', $path);
+        $path   = str_replace(array('\\', '//'), '/', $path);
         $prefix = preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches) ? $matches['prefix'] : '';
         $path   = substr($path, strlen($prefix));
         $parts  = array_filter(explode('/', $path), 'strlen');

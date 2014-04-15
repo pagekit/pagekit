@@ -1,6 +1,10 @@
-require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
-    var form = $('#js-dashboard'), params = form.data();
+    var form         = $('#js-dashboard'),
+        params       = form.data(),
+        showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
+        table        = form.on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
+        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' });
 
     // action button
     form.on('click', '[data-action]', function(e) {
@@ -11,6 +15,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         // select all checkbox
         .on('click', '.js-select-all',function() {
             form.find('.js-select').prop('checked', $(this).prop('checked'));
+            rowselect.handleSelected();
         })
         .on('click', '.js-select', function() {
             form.find('.js-select-all').prop('checked', false);
@@ -24,5 +29,4 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
                 uikit.notify('Unable to reorder widgets.', 'danger');
             });
         });
-
 });

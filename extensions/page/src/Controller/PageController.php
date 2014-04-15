@@ -116,7 +116,7 @@ class PageController extends Controller
                 $page = new Page;
             }
 
-            if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
+            if (!$data['slug'] = $this->getUniqueSlug($data['slug'] ?: $data['title'], $page->getId())) {
                 throw new Exception('Invalid slug.');
             }
 
@@ -158,8 +158,8 @@ class PageController extends Controller
                 $page = clone $page;
                 $page->setId(null);
                 $page->setStatus(Page::STATUS_UNPUBLISHED);
-                $page->setSlug($page->getSlug());
-                $page->setTitle($page->getTitle().' - '.__('Copy'));
+                $page->setSlug($this->getUniqueSlug($page->getSlug()));
+                $page->setTitle(__('%title% (Copy)', array('%title%' => $page->getTitle())));
 
                 $this->pages->save($page);
             }
@@ -196,16 +196,10 @@ class PageController extends Controller
      */
     public function getSlugAction($slug, $id = 0)
     {
-        $slug = $this->slugify($slug);
-        $i = 2;
-        while ($this->pages->query()->where('slug = ?', array($slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
-            $slug = preg_replace('/-\d+$/', '', $slug).'-'.$i++;
-        }
-
-        return $this('response')->json($slug);
+        return $this('response')->json($this->getUniqueSlug($slug, $id));
     }
 
-    protected function slugify($slug)
+    protected function getUniqueSlug($slug, $id = 0)
     {
         $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
         $slug = str_replace('-', ' ', $slug);
@@ -213,6 +207,11 @@ class PageController extends Controller
         $slug = str_replace('?', '', $slug);
         $slug = trim(mb_strtolower($slug, 'UTF-8'));
         $slug = preg_replace('#\x20+#', '-', $slug);
+
+        $i = 2;
+        while ($this->pages->query()->where('slug = ?', array($slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
+            $slug = preg_replace('/-\d+$/', '', $slug).'-'.$i++;
+        }
 
         return $slug;
     }

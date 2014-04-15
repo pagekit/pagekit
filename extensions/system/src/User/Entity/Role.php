@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
+use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\User\Model\Role as BaseRole;
 
 /**
@@ -24,10 +25,10 @@ class Role extends BaseRole
     /**
      * @PreSave
      */
-    public function preSave($manager)
+    public function preSave(EntityEvent $event)
     {
         if (!$this->id) {
-            $this->setPriority($manager->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
+            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
         }
     }
 }
