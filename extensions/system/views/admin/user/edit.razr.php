@@ -65,7 +65,7 @@
                 <div class="uk-form-controls uk-form-controls-text">
                     @foreach (user.statuses as status => name)
                     <p class="uk-form-controls-condensed">
-                        <label><input type="radio" name="user[status]" value="@status"@(user.status == status ? ' checked') @(app.user.id == user.id ? 'disabled' : '')> @name</label>
+                        <label><input type="radio" name="user[status]" value="@status"@(user.status == status ? ' checked')@(app.user.id == user.id ? ' disabled')> @name</label>
                     </p>
                     @endforeach
                 </div>
@@ -77,7 +77,7 @@
                 <div class="uk-form-controls uk-form-controls-text">
                     @foreach (roles as role)
                     <p class="uk-form-controls-condensed">
-                        <label><input type="checkbox" name="roles[]" value="@role.id" @(user.hasRole(role) ? 'checked')@(app.user.id == user.id && role.id == constant('Pagekit\\User\\Model\\RoleInterface::ROLE_ADMINISTRATOR') && user.hasRole(role) ? ' disabled' : '')> @role.name</label>
+                        <label><input type="checkbox" name="@(!role.isAuthenticated ? 'roles[]')" value="@role.id" @(user.hasRole(role) ? 'checked')@(role.disabled ? ' disabled')> @role.name</label>
                     </p>
                     @endforeach
                 </div>

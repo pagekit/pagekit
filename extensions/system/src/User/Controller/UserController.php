@@ -111,7 +111,7 @@ class UserController extends Controller
     public function editAction($id)
     {
         $user  = $this->users->where(compact('id'))->related('roles')->first();
-        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles() : array();
+        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles($user) : array();
 
         return array('head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles);
     }
@@ -274,8 +274,21 @@ class UserController extends Controller
         return (string) call_user_func_array(array($expr, 'orX'), $params);
     }
 
-    protected function getRoles()
+    protected function getRoles(User $user = null)
     {
-        return $this->roles->where(array('id <> ?', 'id <> ?'), array(Role::ROLE_ANONYMOUS, Role::ROLE_AUTHENTICATED))->orderBy('priority')->get();
+        $roles = $this->roles->where(array('id <> ?'), array(Role::ROLE_ANONYMOUS))->orderBy('priority')->get();
+
+        foreach ($roles as $role) {
+
+            if ($role->isAuthenticated()) {
+                $role->disabled = true;
+            }
+
+            if ($user && $user->getId() == $this('user')->getId() && $user->isAdministrator() && $role->isAdministrator()) {
+                $role->disabled = true;
+            }
+        }
+
+        return $roles;
     }
 }
