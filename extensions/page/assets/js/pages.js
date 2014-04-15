@@ -43,12 +43,10 @@ require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uik
     function updateTable() {
         $.post(form.data('action'), form.serialize(), function(data) {
             table.html(data.table);
-            pagination.toggleClass('uk-hidden', data.total == 0).data('pagination').render(data.total);
+            pagination.toggleClass('uk-hidden', data.total === 0).data('pagination').render(data.total);
             $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
 
             rowselect.fetchRows();
         });
-
-        lastselected = false;
     }
 });

@@ -1,7 +1,6 @@
 <?php
 
 namespace Pagekit\Page\Entity;
-use Pagekit\Component\Database\ORM\EntityManager;
 
 /**
  * @Entity(tableClass="@page_page", eventPrefix="page.page")
@@ -129,20 +128,4 @@ class Page
 
 		return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
 	}
-
-    /**
-     * Ensure unique slug.
-     *
-     * @PreSave
-     */
-    public function postSave(EntityManager $manager)
-    {
-        $repository = $manager->getRepository(get_class($this));
-
-        $i = 2;
-        $id = $this->id;
-        while ($repository->query()->where('slug = ?', array($this->slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
-            $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
-        }
-    }
 }
