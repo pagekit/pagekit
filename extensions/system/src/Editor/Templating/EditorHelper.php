@@ -37,6 +37,10 @@ class EditorHelper extends Helper
      */
     public function render($name, $value, array $attributes = array(), $parameters = array())
     {
-        return $this->events->dispatch('editor.load', new EditorLoadEvent(array_merge(array('attributes' => array_merge($attributes, compact('name')), 'editor' => 'markdown'), $parameters)))->getEditor()->render($value);
+        if ($editor = $this->events->dispatch('editor.load', new EditorLoadEvent(array_merge(array('editor' => 'markdown'), $parameters)))->getEditor()) {
+            return $editor->render($value, array_merge($attributes, compact('name')));
+        }
+
+        return __('Editor not found.');
     }
 }

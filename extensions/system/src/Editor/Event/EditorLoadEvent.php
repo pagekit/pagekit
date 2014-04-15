@@ -3,7 +3,6 @@
 namespace Pagekit\Editor\Event;
 
 use Pagekit\Editor\EditorInterface;
-use Pagekit\Editor\MarkdownEditor;
 use Pagekit\Framework\Event\Event;
 
 class EditorLoadEvent extends Event
@@ -18,7 +17,7 @@ class EditorLoadEvent extends Event
      */
     public function getEditor()
     {
-        return $this->editor ?: new MarkdownEditor;
+        return $this->editor;
     }
 
     /**

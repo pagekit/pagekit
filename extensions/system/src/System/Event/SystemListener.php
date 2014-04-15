@@ -7,7 +7,7 @@ use Pagekit\Content\Plugin\LinkPlugin;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
-use Pagekit\Editor\MarkdownEditor;
+use Pagekit\Editor\HtmlEditor;
 use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Widget\MenuWidget;
@@ -62,7 +62,7 @@ class SystemListener extends EventSubscriber
         $app['events']->addSubscriber(new SimplePlugin);
         $app['events']->addSubscriber(new VideoPlugin);
 
-        $app['events']->addSubscriber(new MarkdownEditor);
+        $app['events']->addSubscriber(new HtmlEditor);
 
         $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
         $app['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);

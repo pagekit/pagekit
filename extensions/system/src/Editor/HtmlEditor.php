@@ -6,17 +6,12 @@ use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\TmplEvent;
 
-class MarkdownEditor extends EventSubscriber implements EditorInterface
+class HtmlEditor extends EventSubscriber implements EditorInterface
 {
     /**
      * @var array
      */
     protected $plugins = array();
-
-    /**
-     * @var array
-     */
-    protected $attributes = array('data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;');
 
     /**
      * @return array
@@ -53,35 +48,11 @@ class MarkdownEditor extends EventSubscriber implements EditorInterface
     }
 
     /**
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * @param array $attributes
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    /**
-     * @param array $attributes
-     */
-    public function addAttributes(array $attributes)
-    {
-        $this->attributes = array_merge($this->attributes, $attributes);
-    }
-
-    /**
      * {@inheritdoc}
      *
      * TODO: refactor finder options
      */
-    public function render($value)
+    public function render($value, array $attributes = array())
     {
         $this('view.scripts')->queue(
             'editor.markdown', 'extension://system/assets/js/editor/markdown.js', 'requirejs',
@@ -91,19 +62,22 @@ class MarkdownEditor extends EventSubscriber implements EditorInterface
             )
         );
 
-        return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(), htmlspecialchars($value));
+        $attributes = array_merge(array('data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;'), $attributes);
+
+        return sprintf('<textarea%s>%s</textarea>', $this->getAttributes($attributes), htmlspecialchars($value));
     }
 
     /**
      * Get html attribute string
      *
+     * @param  array $attributes
      * @return string
      */
-    protected function parseAttributes()
+    protected function getAttributes($attributes)
     {
         $html = '';
 
-        foreach ($this->getAttributes() as $name => $val) {
+        foreach ($attributes as $name => $val) {
             $html .= sprintf(' %s="%s"', $name, htmlspecialchars($val));
         }
 
@@ -120,8 +94,6 @@ class MarkdownEditor extends EventSubscriber implements EditorInterface
         }
 
         $event->setEditor($this);
-
-        $this->addAttributes($event['attributes']);
 
         $this->addPlugin('link', 'extensions/system/assets/js/editor/link');
         $this->addPlugin('video', 'extensions/system/assets/js/editor/video');
@@ -149,7 +121,7 @@ class MarkdownEditor extends EventSubscriber implements EditorInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load' => array('onEditorLoad', -8),
+            'editor.load' => array('onEditorLoad', 8),
             'system.tmpl' => 'onSystemTmpl'
         );
     }
