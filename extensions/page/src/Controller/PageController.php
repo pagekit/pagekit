@@ -159,7 +159,7 @@ class PageController extends Controller
                 $page->setId(null);
                 $page->setStatus(Page::STATUS_UNPUBLISHED);
                 $page->setSlug($page->getSlug());
-                $page->setTitle($page->getTitle().' - '.__('Copy'));
+                $page->setTitle(__('%title% (Copy)', array('%title%' => $page->getTitle())));
 
                 $this->pages->save($page);
             }
