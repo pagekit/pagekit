@@ -5,7 +5,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         doaction = function(element) {
             element.closest('form').attr('action', element.data('action')).submit();
         },
-        showOnSelect, lastselected, rows = table.find('li');
+        showOnSelect, lastselected, rows = table.find('.pk-table-fake');
 
     // selections
     showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden');
@@ -14,9 +14,9 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         updateOnSelect();
     })
     // select via row clicking
-    .on('click', 'li', function(e){
+    .on('click', '.pk-table-fake', function(e){
 
-        var target = $(e.target), li = $(this), select;
+        var target = $(e.target), row = $(this), select;
 
         if(!target.is('a, input, [data-action]') && !target.closest('[data-action]').length) {
 
@@ -24,7 +24,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
                 window.getSelection()[window.getSelection().empty ? 'empty':'removeAllRanges']();
             }
 
-            select = li.find('.js-select:first');
+            select = row.find('.js-select:first');
 
             if (select.length) {
 
@@ -33,7 +33,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
                 // shift select
                 if (e.shiftKey && lastselected) {
 
-                    var start = Math.min(li.index(), lastselected.index()), end = Math.max(li.index(), lastselected.index());
+                    var start = Math.min(row.index(), lastselected.index()), end = Math.max(rows.index(row), rows.index(lastselected));
 
                     for(i = start; i <= end; i++) {
                         rows.eq(i).find('.js-select:first').prop('checked', true);
@@ -41,7 +41,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
                 }
 
                 if (!e.shiftKey && select.prop('checked')) {
-                    lastselected = li;
+                    lastselected = row;
                 } else {
                     lastselected = false;
                 }
@@ -56,7 +56,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         showOnSelect[selected.length ? 'removeClass':'addClass']('uk-hidden');
 
         rows.removeClass('pk-table-selected');
-        selected.closest('li').addClass('pk-table-selected');
+        selected.closest('.pk-table-fake').addClass('pk-table-selected');
 
         if (!selected.length) {
             lastselected = false;

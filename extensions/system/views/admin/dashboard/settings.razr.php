@@ -16,14 +16,7 @@
                 </div>
             </div>
 
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">@trans('Actions') <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a></li>
-                    </ul>
-                </div>
-            </div>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a>
 
         </div>
     </div>
