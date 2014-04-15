@@ -39,6 +39,8 @@ class DefaultController extends Controller
             return $this('response')->create(__('Unable to access this page!'), 403);
         }
 
+        $page->setContent($this('content')->applyPlugins($page->getContent(), array('page' => $page, 'markdown' => $page->get('markdown'))));
+
         return array('head.title' => __($page->getTitle()), 'page' => $page);
     }
 }
