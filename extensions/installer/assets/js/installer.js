@@ -118,7 +118,7 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                     }
 
                 } else {
-                    alert("Something went wrong");
+                    alert("Whoops, something went wrong");
                 }
 
             }, "json");
@@ -164,7 +164,7 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
                 }).fail(function() {
                     var con = status.hide().filter('[data-status="fail"]');
-                    con.find(".js-error-message").html("Uuups, something went wrong!.").end().show();
+                    con.find(".js-error-message").html("Whoops, something went wrong!").end().show();
                 });
 
             }, 1500);

@@ -89,7 +89,7 @@ require(['jquery', 'domReady!'], function($) {
             .error(function(result) {
                 progress.addClass('uk-progress-danger');
                 progress.removeClass('uk-active');
-                message.before($('<div class="uk-alert uk-alert-danger">@trans("Ooops. Something went wrong.")</span>'));
+                message.before($('<div class="uk-alert uk-alert-danger">@trans("Whoops, something went wrong.")</span>'));
             });
     }
 
