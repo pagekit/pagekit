@@ -38,7 +38,7 @@ require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uik
             table.html(data.table);
             pagination.toggleClass('uk-hidden', data.total === 0).data('pagination').render(data.total);
             $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
-
+            pagination.toggleClass('uk-hidden', data.total < 2);
             rowselect.fetchRows();
         });
     }

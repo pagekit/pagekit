@@ -41,7 +41,7 @@
         @include('view://page/admin/pages/table.razr.php', ['pages' => pages])
     </div>
 
-    <ul class="uk-pagination @(!pages ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @total }"></ul>
+    <ul class="uk-pagination @(total < 2 ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @total }"></ul>
 
     @token()
 
