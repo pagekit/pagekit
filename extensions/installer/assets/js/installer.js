@@ -29,6 +29,22 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                 $this["on" + frm.data("step")](frm);
             });
 
+            (function(){
+
+                var select = $("#form-dbdriver"), fn = function() {
+                    $('.js-hide-sqlite').toggleClass('uk-hidden', select.val() == 'sqlite');
+
+                    $('.js-required').each(function(){
+                        var ele = $(this);
+                        ele.prop('required', ele.is(':visible'))
+                    });
+
+                    return fn;
+                };
+
+                select.on("change", fn());
+            })();
+
             this.gotoStep('start');
         },
         gotoStep: function(step) {
@@ -67,8 +83,8 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
             return $.post(this.installer.data("route") + "/install", this.installer.find("form").serialize(), fn, 'json');
         },
-        // form submission callbacks
 
+        // form submission callbacks
         onstart: function() {
             this.gotoStep(this.configexists ? 'user' : 'database');
         },

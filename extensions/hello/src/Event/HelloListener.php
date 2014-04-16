@@ -25,7 +25,7 @@ class HelloListener extends ApplicationAware implements EventSubscriberInterface
             'hello.boot' => 'onBoot',
 
             // use any name and add a priority int if desired
-            'hello.boot' => array('anyName', 10)
+            'hello.anyEvent' => array('anyName', 10)
         );
     }
 }

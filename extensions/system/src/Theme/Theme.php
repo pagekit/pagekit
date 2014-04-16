@@ -4,9 +4,10 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
+use Pagekit\Framework\ApplicationAware;
 use Symfony\Component\Translation\Translator;
 
-class Theme
+class Theme extends ApplicationAware
 {
     /**
      * @var string
@@ -51,6 +52,8 @@ class Theme
 
         $app->on('init', function() use ($app, $self) {
             $self->registerLanguages($app['translator']);
+
+            $self->config += $app['option']->get("{$this->name}:config", array());
         });
 
         $app->on('site.init', function() use ($app, $self) {

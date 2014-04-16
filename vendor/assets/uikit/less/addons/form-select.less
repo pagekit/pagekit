@@ -1,15 +1,15 @@
-// Name:            Form file
+// Name:            Form select
 // Description:     Extends form component
 //
 // Component:       `uk-form`
 //
-// Sub-objects:     `uk-form-file`
+// Sub-objects:     `uk-form-select`
 //
 // ========================================================================
 
 
 /* ========================================================================
-   Component: Form file
+   Component: Form select
  ========================================================================== */
 
 /*
@@ -18,7 +18,7 @@
  * 3. Clip content
  */
 
-.uk-form-file {
+.uk-form-select {
     /* 1 */
     display: inline-block;
     vertical-align: middle;
@@ -30,26 +30,27 @@
 
 /*
  * 1. Required for Firefox
- * 2. Expand height and required for the cursor
+ * 1. Required for Webkit to make `height` work
  */
 
-.uk-form-file input[type="file"] {
+.uk-form-select select {
     position: absolute;
     top: 0;
     z-index: 1;
     width: 100%;
+    height: 100%;
     opacity: 0;
     cursor: pointer;
     /* 1 */
     left: 0;
     /* 2 */
-    font-size: 500px;
+    -webkit-appearance: none;
 }
 
 
 // Hooks
 // ========================================================================
 
-.hook-form-file-misc;
+.hook-form-select-misc;
 
-.hook-form-file-misc() {}
+.hook-form-select-misc() {}

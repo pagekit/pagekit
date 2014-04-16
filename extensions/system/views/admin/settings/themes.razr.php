@@ -39,9 +39,11 @@
                                     <li><a href="">@trans('Details')</a></li>
                                 </ul>
                                 @if (current == package)
+                                @if (app.themes.get(name).getConfig('settings.system'))
                                 <div class="pk-themes-action">
                                     <a class="uk-button" href="@url.route('@system/themes/settings', ['name' => name])">@trans('Settings')</a>
                                 </div>
+                                @endif
                                 @else
                                 <div class="pk-themes-action">
                                     <a class="uk-button uk-button-primary" href="@url.route('@system/themes/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enable')</a>

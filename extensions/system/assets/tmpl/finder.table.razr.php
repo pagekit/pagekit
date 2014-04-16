@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             {{ #folders }}
-            <tr class="uk-visible-hover" data-name="{{ name }}" data-type="folder" data-url="{{ url }}">
+            <tr class="uk-visible-hover" data-name="{{ name }}" data-type="folder" data-url="{{ url }}" data-row>
                 {{ #writable }}
                 <td><input type="checkbox" class="js-select" data-name="{{ name }}"></td>
                 {{ /writable }}
@@ -36,7 +36,7 @@
             {{ /folders }}
 
             {{ #files }}
-            <tr class="uk-visible-hover" data-name="{{ name }}" data-url="{{ url }}" data-type="file">
+            <tr class="uk-visible-hover" data-name="{{ name }}" data-url="{{ url }}" data-type="file" data-row>
                 {{ #writable }}
                 <td><input type="checkbox" class="js-select" data-name="{{ name }}"></td>
                 {{ /writable }}

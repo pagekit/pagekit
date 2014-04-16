@@ -63,13 +63,17 @@ return array(
         'caches'  => array(
 
             'main' => array(
+
                 'storage' => 'auto',
                 'path'    => '%path%/app/cache',
                 'prefix'  => sha1(__DIR__)
+
             ),
             'phpfile' => array(
+
                 'storage' => 'phpfile',
-                'path'    => '%path%/app/cache',
+                'path'    => '%path%/app/cache'
+
             )
 
         )
@@ -109,10 +113,13 @@ return array(
             ),
 
             'sqlite' => array (
+
                 'driver' => 'pdo_sqlite',
-                'prefix' => 'pk_',
-                'path' => '%path%/app/temp/sqlite.db'
+                'path'   => '%path%/app/database/pagekit.db',
+                'prefix' => ''
+
             ),
+
         )
 
     ),
@@ -132,20 +139,24 @@ return array(
     'locator' => array(
 
         'wrappers' => array(
+
             'app'       => false,
             'storage'   => false,
             'extension' => true,
             'theme'     => true,
             'view'      => true,
             'asset'     => true
+
         ),
 
         'paths' => array(
+
             'app'       => '%path%',
             'storage'   => '%path.storage%',
             'extension' => '%path.extensions%',
             'theme'     => '%path.themes%',
             'vendor'    => '%path.vendor%'
+
         )
 
     ),

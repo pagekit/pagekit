@@ -4,7 +4,7 @@
             <h1 class="uk-h3">@trans('Add Image')</h1>
 
             <div class="uk-grid">
-                <div class="uk-width-1-3">
+                <div class="uk-width-1-3 uk-text-center">
                     <img class="js-img-preview" alt="Preview image">
                 </div>
 
@@ -30,6 +30,7 @@
             <h1 class="uk-h3">@trans('Select Image')</h1>
             <div class="js-finder"></div>
             <div class="uk-margin-top">
+                <button class="uk-button uk-button-primary js-select-image" disabled type="button">@trans('Select')</button>
                 <button class="uk-button" type="button" data-goto="settings">@trans('Cancel')</button>
             </div>
         </div>

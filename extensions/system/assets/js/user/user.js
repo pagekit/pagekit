@@ -27,11 +27,4 @@ require(['jquery', 'uikit', 'rowselect', 'domReady!'], function($, uikit, RowSel
     form.on('change', 'select[name^="filter"]', function() {
         form.submit();
     });
-
-    // select all checkbox
-    form.on('click', '.js-select-all:checkbox', function() {
-        $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-        rowselect.handleSelected();
-    });
-
 });

@@ -1,8 +1,8 @@
 <div class="pk-options uk-form uk-clearfix" data-messages='{ "confirm" : "@trans('Are you sure?')", "newname" : "@trans('New Name')", "foldername" : "@trans('Folder Name')" }'>
-    <div class="uk-float-left">
+    <div class="uk-float-left js-finder-toolbar-left">
 
         {{ #writable }}
-        <button class="uk-button uk-button-primary" data-cmd="createFolder">@trans('New Folder')</button>
+        <button class="uk-button" data-cmd="createFolder">@trans('New Folder')</button>
 
         <button class="uk-button uk-form-file">
             @trans('Upload')
@@ -13,7 +13,7 @@
         {{ /writable }}
 
     </div>
-    <div class="uk-float-right">
+    <div class="uk-float-right js-finder-toolbar-right">
 
         <input class="js-search" type="text" placeholder="@trans('Search')">
 

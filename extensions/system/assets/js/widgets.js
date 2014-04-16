@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form = $('#js-widgets')
 
@@ -6,12 +6,6 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         .on('click', '[data-action]', function(e) {
             e.preventDefault();
             form.attr('action', $(this).data('action')).submit();
-        })
-
-        // select all checkbox
-        .on('click', '.js-select-all:checkbox', function() {
-            $('.js-select', form).prop('checked', $(this).prop('checked'));
-            rowselect.handleSelected();
         })
 
         // save widgets order on sortable change
@@ -119,7 +113,7 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         });
     }
 
-    $('#filter-title').on('keyup', uikit.Utils.debounce(function() {
+    filter.title.on('keyup', uikit.Utils.debounce(function() {
         applyFilters();
     }, 200));
 
@@ -128,6 +122,6 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
 
     var showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
         table        = form.on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
-        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' });;
+        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' });
 
 });

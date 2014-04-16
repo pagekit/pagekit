@@ -17,7 +17,7 @@ class UserDataCollector extends DataCollector
     /**
      * Constructor.
      *
-     * @param SystemInfoHelper $info
+     * @param Auth $auth
      */
     public function __construct(Auth $auth = null)
     {

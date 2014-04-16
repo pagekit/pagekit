@@ -1,29 +1,112 @@
 define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
 
-    var base    = requirejs.toUrl(''),
-        modal   = $(tmpl.render('video.modal')).appendTo('body'),
-        element = modal.find('.js-finder'),
-        video   = modal.find('.js-url'),
+    var base      = requirejs.toUrl(''),
+        modal     = $(tmpl.render('video.modal')).appendTo('body'),
+        element   = modal.find('.js-finder'),
+        video     = modal.find('.js-url'),
+        preview   = modal.find('.js-video-preview'),
+        btnselect = modal.find('.js-select-image'),
+        screens   = modal.find('[data-screen]').css({'animation-duration':'0.1s', '-webkit-animation-duration':'0.1s'}),
+        goto      = function(screen) {
+
+            var next = screens.filter('[data-screen="'+screen+'"]');
+
+            screens.addClass('uk-hidden')
+            next.removeClass('uk-hidden');
+
+            picker.resize();
+        },
         handler, finder, picker;
 
     modal.on('click', '.js-update', function() {
         handler();
     });
 
-    element.on('picked', function(e, data) {
-        // TODO: add video formats
-        if (data.type == 'file' && data.url.match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
+    modal.on('click', '[data-goto]', function(e){
+        e.preventDefault();
+        goto($(this).data('goto'));
+    });
 
-            var url = data.url;
+    element.on('selected-rows', function(e, rows) {
 
-            // convert to relative urls
-            if (url.indexOf(base) === 0) {
-                url = url.replace(base, '');
+        if (rows.length === 1) {
+
+            var data = $(rows[0]).data();
+
+            if (data.type == 'file' && data.url.match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
+                btnselect.prop('disabled', false).data('url', data.url);
             }
 
-            video.val(url);
+        } else {
+            btnselect.prop('disabled', true);
         }
     });
+
+    btnselect.on('click', function() {
+
+        var url = btnselect.data('url');
+
+        updatePreview(url);
+
+        // convert to relative urls
+        if (url.indexOf(base) === 0) {
+            url = url.replace(base, '');
+        }
+
+        video.val(url);
+
+        goto('settings');
+    });
+
+    function updatePreview(url) {
+
+        // convert to relative urls
+        if (url && !url.match(/^(\/|http\:|https\:|ftp\:)/i)) {
+            url = base + '/' + url;
+        }
+
+        preview.html(getVideoPreview(url));
+    }
+
+    function getVideoPreview(url) {
+
+        var youtubeRegExp = /(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/,
+            youtubeRegExpShort = /youtu\.be\/(.*)/,
+            vimeoRegExp = /(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/,
+            type = 'tag', code, matches, session = sessionStorage || {};
+
+        if (matches = url.match(youtubeRegExp)) {
+
+            code = '<img src="//img.youtube.com/vi/' + matches[2] + '/hqdefault.jpg" class="uk-width-1-1">';
+
+        } else if (matches = url.match(youtubeRegExpShort)) {
+
+            code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
+
+        } else if (url.match(vimeoRegExp)) {
+
+            var imgid = btoa(url);
+
+            if (session[imgid]) {
+                code = '<img src="' + session[imgid] + '" class="uk-width-1-1">';
+            } else {
+                code = '<img data-imgid="' + imgid + '" src="" class="uk-width-1-1">';
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
+                    jsonp: 'callback',
+                    dataType: 'jsonp',
+                    success: function(data) {
+                        session[imgid] = data.thumbnail_url;
+                        $('img[data-id="' + imgid + '"]').replaceWith('<img src="' + session[imgid] + '" class="uk-width-1-1">');
+                    }
+                });
+            }
+        }
+
+        return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
+    }
 
     return function(htmleditor, options, editors) {
 
@@ -47,53 +130,15 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
 
         htmleditor.defaults.toolbar.push('video');
 
-        function getVideoPreview(url) {
-
-            var youtubeRegExp = /(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/,
-                youtubeRegExpShort = /youtu\.be\/(.*)/,
-                vimeoRegExp = /(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/,
-                type = 'tag', code, matches, session = sessionStorage || {};
-
-            if (matches = url.match(youtubeRegExp)) {
-
-                code = '<img src="//img.youtube.com/vi/' + matches[2] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-            } else if (matches = url.match(youtubeRegExpShort)) {
-
-                code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-            } else if (matches = url.match(vimeoRegExp)) {
-
-                var imgid = btoa(url);
-
-                if (session[imgid]) {
-                    code = '<img src="' + session[imgid] + '" class="uk-width-1-1">';
-                } else {
-                    code = '<img data-imgid="' + imgid + '" src="" class="uk-width-1-1">';
-
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
-                        jsonp: 'callback',
-                        dataType: 'jsonp',
-                        success: function(data) {
-                            session[imgid] = data.thumbnail_url;
-                            $('img[data-id="' + imgid + '"]').replaceWith('<img src="' + session[imgid] + '" class="uk-width-1-1">');
-                        }
-                    });
-                }
-            }
-
-            return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
-        }
-
         htmleditor.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function(marker) {
 
             if (!finder) {
 
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker = new uikit.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal);
+
+                element.find('.js-finder-toolbar-left').prepend(btnselect);
             }
 
             var data = { src: '' };
@@ -108,6 +153,8 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
 
                 video.val(data.src);
+                updatePreview(video.val());
+                goto('settings');
                 picker.show();
                 setTimeout(function() {
                     video.focus();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Alpha\Event;
+namespace Pagekit\Theme\Event;
 
 use Pagekit\Component\Database\Event\EntityEvent;
 use Pagekit\Framework\Event\EventSubscriber;
@@ -12,17 +12,21 @@ class WidgetListener extends EventSubscriber
 {
     public function onWidgetEdit(WidgetEditEvent $event)
     {
-        $view = $this('view');
+        if (!$theme = $this('theme.site') or !$tmpl = $theme->getConfig('settings.widgets')) {
+            return;
+        }
+
+        $view     = $this('view');
         $settings = $this->getSettings();
-        $event->addSettings(__('Theme'), function($widget) use ($view, $settings) {
-            return $view->render('theme://alpha/views/admin/widgets/edit.razr.php', compact('widget', 'settings'));
+        $event->addSettings(__('Theme'), function($widget) use ($view, $tmpl, $theme, $settings) {
+            return $view->render($tmpl, compact('widget', 'settings', 'theme'));
         });
     }
 
     public function onWidgetSave(WidgetEvent $event)
     {
         $settings = $this->getSettings();
-        $settings[$event->getWidget()->getId()] = $this('request')->get('theme_alpha', array());
+        $settings[$event->getWidget()->getId()] = $this('request')->get('_theme', array());
         $this->setSettings($settings);
     }
 
@@ -65,17 +69,16 @@ class WidgetListener extends EventSubscriber
 
     protected function getSettings()
     {
-        $config = $this('option')->get('alpha:config', array());
-
-        return isset($config['widgets']) ? $config['widgets'] : array();
+        return $this('option')->get($this->getOptionsName(), array());
     }
 
     protected function setSettings($settings)
     {
-        $config = $this('option')->get('alpha:config', array());
+        $this('option')->set($this->getOptionsName(), $settings);
+    }
 
-        $config['widgets'] = $settings;
-
-        $this('option')->set('alpha:config', $config);
+    protected function getOptionsName()
+    {
+        return $this('theme.site')->getName().':config.widgets';
     }
 }

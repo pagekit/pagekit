@@ -1,6 +1,6 @@
 define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, tmpl, uikit) {
 
-    var updates = {}, packages = {}, element, form, details, modal;
+    var updates = {}, packages = {}, element, form, details, modal, params;
 
     // details modal
     function detailsModal(e) {
@@ -23,19 +23,18 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
     function installButton(e) {
         e.preventDefault();
 
-        var $this = $(this), name = $this.data('install');
+        var $this = $(this), label = $this.text(), name = $this.data('install');
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
         $.post(params.url, { package: JSON.stringify(packages[name].version) }, function(data) {
 
-            $this.removeClass('uk-button-primary');
-
             if (data.message) {
                 packages[name].installed = true;
                 $this.addClass('uk-button-success').html('<i class="uk-icon-check"></i>');
             } else {
-                $this.html('Error!');
+                uikit.notify(data.error, 'danger');
+                $this.attr('data-install', name).html(label);
             }
 
         });

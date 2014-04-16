@@ -3,9 +3,9 @@
 namespace %NAMESPACE%;
 
 use Pagekit\Framework\Application;
-use Pagekit\Extension\Extension;
+use Pagekit\Theme\Theme;
 
-class %CLASSNAME% extends Extension
+class %CLASSNAME% extends Theme
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,5 @@ class %CLASSNAME% extends Extension
     public function boot(Application $app)
     {
         parent::boot($app);
-
-        // your code here...
     }
 }

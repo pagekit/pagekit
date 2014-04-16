@@ -2,7 +2,7 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
 
     var form         = $('#js-menu'), csrf = $('input[name=_csrf]', form).val(),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
-        table        = $('.js-menu-items').on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
+        table        = $('.js-menu-items').parent().on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
         rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' }),
         doaction     = function(element) {
             element.closest('form').attr('action', element.data('action')).submit();
@@ -24,12 +24,6 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         }
 
     })
-
-        // select all checkbox
-        .on('click', '.js-select-all:checkbox', function() {
-            $('[name="id[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-            rowselect.handleSelected();
-        })
 
         // save menu item order on sortable change
         .on('sortable-change', 'ul.uk-sortable', function() {

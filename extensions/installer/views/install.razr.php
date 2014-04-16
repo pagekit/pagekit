@@ -38,32 +38,42 @@
                     <form class="uk-form tm-form-horizontal uk-text-left" action="" method="post">
 
                         <div class="uk-form-row">
+                            <label for="form-dbdriver" class="uk-form-label">@trans('Driver')</label>
+                            <div class="uk-form-controls">
+                                <select id="form-dbdriver" class="uk-width-1-1" name="config[database.default]">
+                                    <option value="mysql" selected>MySql</option>
+                                    <option value="sqlite">SQLite</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="uk-form-row js-hide-sqlite">
                             <label for="form-dbhost" class="uk-form-label">@trans('Hostname')</label>
                             <div class="uk-form-controls">
-                                <input id="form-dbhost" class="uk-width-1-1" type="text" name="config[database.connections.mysql.host]" value="localhost" required>
+                                <input id="form-dbhost" class="uk-width-1-1 js-required" type="text" name="config[database.connections.mysql.host]" value="localhost" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Host cannot be blank.')</p>
                             </div>
                         </div>
 
-                        <div class="uk-form-row">
+                        <div class="uk-form-row js-hide-sqlite">
                             <label for="form-dbuser" class="uk-form-label">@trans('User')</label>
                             <div class="uk-form-controls">
-                                <input id="form-dbuser" class="uk-width-1-1" type="text" name="config[database.connections.mysql.user]" value="" required>
+                                <input id="form-dbuser" class="uk-width-1-1 js-required" type="text" name="config[database.connections.mysql.user]" value="" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('User cannot be blank.')</p>
                             </div>
                         </div>
 
-                        <div class="uk-form-row">
+                        <div class="uk-form-row js-hide-sqlite">
                             <label for="form-dbpassword" class="uk-form-label">@trans('Password')</label>
                             <div class="uk-form-controls">
                                 <input id="form-dbpassword" class="uk-width-1-1" type="text" name="config[database.connections.mysql.password]" value="" autocomplete="off">
                             </div>
                         </div>
 
-                        <div class="uk-form-row">
+                        <div class="uk-form-row js-hide-sqlite">
                             <label for="form-dbname" class="uk-form-label">@trans('Database Name')</label>
                             <div class="uk-form-controls">
-                                <input id="form-dbname" class="uk-width-1-1" type="text" name="config[database.connections.mysql.dbname]" value="pagekit" required>
+                                <input id="form-dbname" class="uk-width-1-1 js-required" type="text" name="config[database.connections.mysql.dbname]" value="pagekit" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Database name cannot be blank.')</p>
                             </div>
                         </div>

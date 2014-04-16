@@ -17,7 +17,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
             $('.js-weather-city', widget).html(location[0]);
 
             $('.js-weather-country', widget).html(location[1]);
-            $('.js-weather-temperatur', widget).html(Math.round(data.main.temp) + unit);
+            $('.js-weather-temperature', widget).html(Math.round(data.main.temp) + unit);
             $('.js-weather-icon', widget).attr('src', getIconUrl(data.weather[0].icon));
 
         }).fail(function() {

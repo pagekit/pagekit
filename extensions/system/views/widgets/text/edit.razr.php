@@ -2,8 +2,8 @@
     <span class="uk-form-label">@trans('Markdown')</span>
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
-            <label class="uk-margin-small-right"><input type="radio" name="widget[settings][markdown]" value="1"@('1' == widget.get('markdown') ? ' checked')> @trans('Yes')</label>
-            <label><input type="radio" name="widget[settings][markdown]" value="0"@('0' == widget.get('markdown', '0') ? ' checked')> @trans('No')</label>
+            <label class="uk-margin-small-right"><input type="radio" name="widget[settings][markdown]" value="1"@('1' == widget.get('markdown') ? ' checked')> @trans('Enabled')</label>
+            <label><input type="radio" name="widget[settings][markdown]" value="0"@('0' == widget.get('markdown', '0') ? ' checked')> @trans('Disabled')</label>
         </p>
     </div>
 </div>

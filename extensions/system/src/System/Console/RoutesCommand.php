@@ -31,7 +31,8 @@ class RoutesCommand extends Command
         $routes = $this->pagekit['router']->getRoutes();
 
         if (count($routes) == 0) {
-            return $this->error("Your application doesn't have any routes.");
+            $this->error("Your application doesn't have any routes.");
+            return;
         }
 
         $rows = array();

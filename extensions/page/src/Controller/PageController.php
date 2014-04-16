@@ -35,10 +35,10 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"filter": "array", "page":"int", "rows":"bool"})
+     * @Request({"filter": "array", "page":"int"})
      * @View("page/admin/pages/index.razr.php")
      */
-    public function indexAction($filter = null, $page = 0, $rows = false)
+    public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
             $this('session')->set('page.filter', $filter);
