@@ -45,6 +45,9 @@
             }
         }).on('click', this.options.checkboxes, function() {
             $this.handleSelected();
+        }).on('click', this.options.selectall, function(){
+            $this.container.find($this.options.checkboxes).prop('checked', $(this).prop('checked'));
+            $this.handleSelected();
         });
 
         this.fetchRows();
@@ -74,6 +77,7 @@
     });
 
     RowSelect.defaults = {
+        'selectall' : '.js-select-all',
         'checkboxes' : '.js-select',
         'rows'       : 'tbody tr',
         'selectclass': 'pk-table-selected'

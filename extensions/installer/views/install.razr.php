@@ -38,9 +38,9 @@
                     <form class="uk-form tm-form-horizontal uk-text-left" action="" method="post">
 
                         <div class="uk-form-row">
-                            <label for="form-dbhost" class="uk-form-label">@trans('Driver')</label>
+                            <label for="form-dbdriver" class="uk-form-label">@trans('Driver')</label>
                             <div class="uk-form-controls">
-                                <select class="uk-width-1-1" name="config[database.default]" id="form-dbdriver">
+                                <select id="form-dbdriver" class="uk-width-1-1" name="config[database.default]">
                                     <option value="mysql" selected>MySql</option>
                                     <option value="sqlite">SQLite</option>
                                 </select>

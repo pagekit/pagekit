@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row uk-margin-top uk-text-right">
+            <div class="uk-form-row uk-margin-top">
                 <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
                 <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>
             </div>
@@ -27,7 +27,7 @@
         <div class="uk-hidden" data-screen="finder">
             <h1 class="uk-h3">@trans('Select Video')</h1>
             <div class="js-finder"></div>
-            <div class="uk-margin-top uk-text-right">
+            <div class="uk-margin-top">
                 <button class="uk-button uk-button-primary js-select-image" disabled type="button">@trans('Select')</button>
                 <button class="uk-button" type="button" data-goto="settings">@trans('Cancel')</button>
             </div>
