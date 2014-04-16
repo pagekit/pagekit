@@ -115,7 +115,7 @@ return array(
             'sqlite' => array (
 
                 'driver' => 'pdo_sqlite',
-                'path'   => '%path%/app/temp/sqlite.db',
+                'path'   => '%path%/app/database/pagekit.db',
                 'prefix' => ''
 
             ),
