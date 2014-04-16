@@ -2,10 +2,9 @@ require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uik
 
     var form         = $('#js-pages'),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
-        table        = $('.js-table', form).on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
+        table        = $('.js-table', form).on('selected-rows', function(e, rows) { showOnSelect.toggleClass('uk-hidden', !rows.length); }),
         rowselect    = new RowSelect(table),
-        pagination   = $('[data-uk-pagination]', form),
-        search, prev;
+        pagination   = $('[data-uk-pagination]', form);
 
     // action button
     form.on('click', '[data-action]', function(e) {

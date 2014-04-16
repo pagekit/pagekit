@@ -4,7 +4,7 @@
     <div class="js-spinner uk-text-center"><i class="uk-icon-spinner uk-icon-spin"></i></div>
     <div class="pk-weather-image">
     	<img class="js-weather-icon uk-text-top">
-    	<span class="js-weather-temperatur uk-text-large uk-text-muted pk-weather-temperatur"></span>
+    	<span class="js-weather-temperature uk-text-large uk-text-muted pk-weather-temperature"></span>
     </div>
     <h1 class="js-weather-city uk-h2 uk-margin-remove"></h1>
     <h2 class="js-weather-country uk-h3 uk-margin-remove uk-text-muted"></h2>

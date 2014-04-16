@@ -35,21 +35,21 @@ require(['jquery', 'uikit!sticky', 'domReady!'], function($, uikit) {
     }, 1000));
 
 
-    var table   = $("#js-permission table").css('position', "relative"),
-        thead   = table.find("thead tr"),
+    var table   = $('table', form).css('position', 'relative'),
+        thead   = table.find('thead tr'),
         header  = thead.clone().addClass('pk-table-head-sticky').hide(),
-        th      = thead.find("th:first"),
-        thclone = header.find("th:first");
+        th      = thead.find('th:first'),
+        thclone = header.find('th:first');
 
-    header.css({position:"absolute", top:0,left:0}).appendTo(table);
+    header.css({ position: 'absolute', top: 0,left: 0 }).appendTo(table);
 
-    $(window).on("scroll", function(){
+    $(window).on('scroll', function(){
 
         if(uikit.Utils.isInView(thead)) {
            header.hide();
         } else {
-            thclone.css("width", th.width());
-            header.css({width: thead.width(),top: window.scrollY - thead.offset().top}).show();
+            thclone.css('width', th.width());
+            header.css({ width: thead.width(), top: window.scrollY - thead.offset().top}).show();
         }
     });
 

@@ -4,7 +4,6 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\User\Entity\Permission;
 use Pagekit\User\Entity\Role;
 
 /**

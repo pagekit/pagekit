@@ -96,10 +96,8 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
 
                 var package = info.versions[data.package.version];
 
-                if (package) {
-                    if (package.dist.shasum != data.package.shasum) {
-                        show('checksum-mismatch', upload);
-                    }
+                if (package && package.dist.shasum != data.package.shasum) {
+                    show('checksum-mismatch', upload);
                 }
 
             }, 'jsonp');

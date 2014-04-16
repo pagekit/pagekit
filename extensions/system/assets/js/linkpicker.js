@@ -20,7 +20,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
         trigger.on('click', function (e) {
             e.preventDefault();
 
-            link = Link.attach(modal.find('.js-linkpicker'), { filter: options.filter, context: options.context, value: source.val() })
+            link = Link.attach(modal.find('.js-linkpicker'), { filter: options.filter, context: options.context, value: source.val() });
             picker.show();
         });
 

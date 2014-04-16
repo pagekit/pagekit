@@ -62,7 +62,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
 
                 code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
 
-            } else if (matches = url.match(vimeoRegExp)) {
+            } else if (url.match(vimeoRegExp)) {
 
                 var imgid = btoa(url);
 

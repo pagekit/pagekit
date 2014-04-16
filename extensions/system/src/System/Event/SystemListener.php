@@ -77,22 +77,22 @@ class SystemListener extends EventSubscriber
                     continue;
                 }
 
-            foreach ($scripts as $script) {
+                foreach ($scripts as $script) {
 
-                $dependencies = (array) $script['dependencies'];
+                    $dependencies = (array) $script['dependencies'];
 
-                if (isset($script['requirejs'])) {
-                    $script['dependencies'] = array_merge($dependencies, array('requirejs'));
-                } elseif (in_array('requirejs', $dependencies)) {
-                    $scripts->dequeue($name = $script->getName());
-                    $scripts->queue($name);
+                    if (isset($script['requirejs'])) {
+                        $script['dependencies'] = array_merge($dependencies, array('requirejs'));
+                    } elseif (in_array('requirejs', $dependencies)) {
+                        $scripts->dequeue($name = $script->getName());
+                        $scripts->queue($name);
+                    }
                 }
+
+                break;
             }
 
-            break;
-            }
-
-            }, 5);
+        }, 5);
 
         $app['view']->addAction('messages', function(ActionEvent $event) use ($app) {
             $event->append($app['view']->render('system/messages/messages.razr.php'));

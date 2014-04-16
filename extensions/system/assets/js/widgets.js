@@ -119,7 +119,7 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         });
     }
 
-    $('#filter-title').on('keyup', uikit.Utils.debounce(function() {
+    filter.title.on('keyup', uikit.Utils.debounce(function() {
         applyFilters();
     }, 200));
 
@@ -128,6 +128,6 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
 
     var showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
         table        = form.on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
-        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' });;
+        rowselect    = new RowSelect(table, { 'rows': '.pk-table-fake' });
 
 });
