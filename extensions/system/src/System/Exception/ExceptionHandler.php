@@ -6,6 +6,7 @@ use Pagekit\Component\Session\Csrf\Exception\BadTokenException;
 use Pagekit\Framework\ApplicationAware;
 use Pagekit\Framework\Exception\ExceptionHandlerInterface;
 use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInterface
@@ -38,6 +39,8 @@ class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInter
             $title = __('Invalid CSRF token.');
         } elseif ($exception instanceof NotFoundHttpException) {
             $title = __('Sorry, the page you are looking for could not be found.');
+        } elseif ($exception instanceof AccessDeniedHttpException) {
+            $title = $exception->getMessage();
         } else {
             $title = __('Whoops, looks like something went wrong.');
         }

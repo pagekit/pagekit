@@ -5,6 +5,8 @@ namespace Pagekit\Page\Controller;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Page\Entity\Page;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Route("/page")
@@ -32,11 +34,11 @@ class DefaultController extends Controller
     public function indexAction($id = 0, $slug = '')
     {
         if (!$page = $this->pages->where(compact($slug ? 'slug' : 'id'))->where(array('status' => Page::STATUS_PUBLISHED))->first()) {
-            return $this('response')->create(__('Page not found!'), 404);
+            throw new NotFoundHttpException(__('Page not found!'));
         }
 
         if (!$this('users')->checkAccessLevel($page->getAccessId())) {
-            return $this('response')->create(__('Unable to access this page!'), 403);
+            throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
         $page->setContent($this('content')->applyPlugins($page->getContent(), array('page' => $page, 'markdown' => $page->get('markdown'))));

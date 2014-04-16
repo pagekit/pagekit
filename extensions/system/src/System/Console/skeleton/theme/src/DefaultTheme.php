@@ -13,5 +13,11 @@ class %CLASSNAME% extends Theme
     public function boot(Application $app)
     {
         parent::boot($app);
+
+        $app->on('site.init', function() use ($app) {
+
+            // your code here...
+
+        });
     }
 }

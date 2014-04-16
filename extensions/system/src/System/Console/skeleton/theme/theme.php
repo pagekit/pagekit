@@ -1,11 +1,5 @@
 <?php
 
-$app->on('site.init', function() use ($app) {
-
-    // your code here...
-
-});
-
 // config array
 return array(
 
