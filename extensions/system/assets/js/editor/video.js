@@ -136,7 +136,9 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
 
                 finder = new Finder(element, options);
                 element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker = new uikit.modal.Modal(modal)
+                picker = new uikit.modal.Modal(modal);
+
+                element.find('.js-finder-toolbar-left').prepend(btnselect);
             }
 
             var data = { src: '' };

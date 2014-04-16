@@ -84,6 +84,14 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         pimg.src = url;
     }
 
+    function initFinder(options) {
+        finder = new Finder(element, options);
+        element.find('.js-finder-files').addClass('uk-overflow-container');
+        picker = new uikit.modal.Modal(modal);
+
+        element.find('.js-finder-toolbar-left').prepend(btnselect);
+    }
+
     return function(htmleditor, options, editors) {
 
         editors = editors || [];
@@ -104,9 +112,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             attrs.alt = img.attr('alt') || '';
 
             if (!finder) {
-                finder = new Finder(element, options);
-                element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker = new uikit.modal.Modal(modal);
+                initFinder(options);
             }
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
@@ -145,9 +151,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             }
 
             if (!finder) {
-                finder = new Finder(element, options);
-                element.find('.js-finder-files').addClass('uk-overflow-container');
-                picker = new uikit.modal.Modal(modal)
+                initFinder(options);
             }
 
             marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {

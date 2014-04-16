@@ -16,12 +16,6 @@ require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uik
         });
     })
 
-    // select all checkbox
-    .on('click', '.js-select-all:checkbox', function() {
-        $('.js-select', form).prop('checked', $(this).prop('checked'));
-        rowselect.handleSelected();
-    })
-
     // submit filters
     .on('keyup', 'input[name^="filter"]', uikit.Utils.debounce(function() {
         updateTable();

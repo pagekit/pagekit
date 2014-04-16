@@ -8,12 +8,6 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
             form.attr('action', $(this).data('action')).submit();
         })
 
-        // select all checkbox
-        .on('click', '.js-select-all:checkbox', function() {
-            $('.js-select', form).prop('checked', $(this).prop('checked'));
-            rowselect.handleSelected();
-        })
-
         // save widgets order on sortable change
         .on('sortable-change', 'ul.uk-sortable', function(e, item, action) {
 

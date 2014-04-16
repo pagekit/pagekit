@@ -10,12 +10,6 @@ require(['jquery', 'rowselect', 'domReady!'], function($, RowSelect) {
     form.on('click', '[data-action]', function(e) {
         e.preventDefault();
         form.attr('action', $(this).data('action')).submit();
-    })
-
-    // select all checkbox
-    .on('click', '.js-select-all:checkbox', function() {
-        $('[name="ids[]"]:checkbox', form).prop('checked', $(this).prop('checked'));
-        rowselect.handleSelected();
     });
 
 });
