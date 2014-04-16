@@ -67,8 +67,8 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
             return $.post(this.installer.data("route") + "/install", this.installer.find("form").serialize(), fn, 'json');
         },
-        // form submission callbacks
 
+        // form submission callbacks
         onstart: function() {
             this.gotoStep(this.configexists ? 'user' : 'database');
         },

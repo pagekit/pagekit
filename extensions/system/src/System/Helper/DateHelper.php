@@ -112,13 +112,7 @@ class DateHelper
 
             $returningDate = new DateTime($date->format('c'));
 
-            if (false !== $timezone) {
-                $returningDate->setTimezone($defaultTimezone);
-            } else {
-                $returningDate->setTimezone($date->getTimezone());
-            }
-
-            return $returningDate;
+            return $returningDate->setTimezone(false !== $timezone ? $defaultTimezone : $date->getTimezone());
         }
 
         $asString = (string) $date;

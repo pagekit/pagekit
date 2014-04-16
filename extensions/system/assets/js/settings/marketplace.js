@@ -1,6 +1,6 @@
 define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, tmpl, uikit) {
 
-    var updates = {}, packages = {}, element, form, details, modal;
+    var updates = {}, packages = {}, element, form, details, modal, params;
 
     // details modal
     function detailsModal(e) {
