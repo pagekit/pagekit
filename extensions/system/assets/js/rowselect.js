@@ -46,8 +46,8 @@
         }).on('click', this.options.checkboxes, function() {
             $this.handleSelected();
         }).on('click', this.options.selectall, function(){
-            $this.container.find($this.options.checkboxes).prop('checked', $(this).prop('checked'));
-            $this.handleSelected();
+            var checkboxes = $this.container.find($this.options.checkboxes).prop('checked', $(this).prop('checked'));
+            $this.handleSelected(checkboxes);
         });
 
         this.fetchRows();
@@ -61,15 +61,24 @@
             this.handleSelected();
         },
 
-        handleSelected: function() {
+        handleSelected: function(checkboxes) {
+
+            checkboxes = checkboxes || this.container.find(this.options.checkboxes);
 
             this.rows.removeClass(this.options.selectclass);
 
-            var selected = this.container.find(this.options.checkboxes+':checked'),
-                rows     = selected.closest(this.options.rows).addClass(this.options.selectclass);
+            var selected = checkboxes.filter(':checked'),
+                rows     = selected.closest(this.options.rows).addClass(this.options.selectclass),
+                all      = this.container.find(this.options.selectall);
 
             if (!rows.length) {
                 lastselected = false;
+            }
+
+            if(selected.length && (selected.length!=checkboxes.length)) {
+                all.prop("indeterminate", true);
+            } else {
+                all.prop('checked', selected.length==checkboxes.length).prop("indeterminate", false);
             }
 
             this.container.trigger('selected-rows', [rows]);
