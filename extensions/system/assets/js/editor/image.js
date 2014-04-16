@@ -1,17 +1,18 @@
 define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
 
-    var base    = requirejs.toUrl(''),
-        modal   = $(tmpl.render('image.modal')).appendTo('body'),
-        element = modal.find('.js-finder'),
-        image   = modal.find('.js-url'),
-        title   = modal.find('.js-title'),
-        preview = modal.find('.js-img-preview'),
-        screens = modal.find('[data-screen]').css({'animation-duration':'0.1s', '-webkit-animation-duration':'0.1s'}),
-        goto    = function(screen) {
-            var current = screens.filter(':visible'),
-                next    = screens.filter('[data-screen="'+screen+'"]');
+    var base      = requirejs.toUrl(''),
+        modal     = $(tmpl.render('image.modal')).appendTo('body'),
+        element   = modal.find('.js-finder'),
+        image     = modal.find('.js-url'),
+        title     = modal.find('.js-title'),
+        preview   = modal.find('.js-img-preview'),
+        btnselect = modal.find('.js-select-image'),
+        screens   = modal.find('[data-screen]').css({'animation-duration':'0.1s', '-webkit-animation-duration':'0.1s'}),
+        goto      = function(screen) {
 
-            current.addClass('uk-hidden');
+            var next = screens.filter('[data-screen="'+screen+'"]');
+
+            screens.addClass('uk-hidden')
             next.removeClass('uk-hidden');
 
             picker.resize();
@@ -28,24 +29,35 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
         goto($(this).data('goto'));
     });
 
-    element.on('picked', function(e, data) {
+    element.on('selected-rows', function(e, rows) {
 
-        if (data.type == 'file' && data.url.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+        if (rows.length === 1) {
 
-            var url = data.url;
+            var data = $(rows[0]).data();
 
-            updatePreview(url);
-
-            // convert to relative urls
-            if (url.indexOf(base) === 0) {
-                url = url.replace(base, '');
+            if (data.type == 'file' && data.url.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+                btnselect.prop('disabled', false).data('url', data.url);
             }
 
-            image.val(url);
-
-
-            goto('settings');
+        } else {
+            btnselect.prop('disabled', true);
         }
+    });
+
+    btnselect.on('click', function() {
+
+        var url = btnselect.data('url');
+
+        updatePreview(url);
+
+        // convert to relative urls
+        if (url.indexOf(base) === 0) {
+            url = url.replace(base, '');
+        }
+
+        image.val(url);
+
+        goto('settings');
     });
 
 
@@ -65,12 +77,11 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
             preview.attr('src', base+'extensions/system/assets/images/placeholder-editor-image.svg');
         };
 
-        pimg.onsuccess = function(){
-
+        pimg.onload = function(){
+            preview.attr('src', url);
         };
 
         pimg.src = url;
-        preview.attr('src', url);
     }
 
     return function(htmleditor, options, editors) {
@@ -106,6 +117,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 finder.loadPath(attrs.src.trim() && attrs.src.indexOf(rootpath) === 0 ? attrs.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
                 updatePreview(image.val());
+                goto('settings');
                 picker.show();
 
                 setTimeout(function() { title.focus(); }, 10);
@@ -146,6 +158,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
                 finder.loadPath(marker.found[3].trim() && marker.found[3].indexOf(rootpath) === 0 ? marker.found[3].replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
                 updatePreview(image.val());
+                goto('settings');
                 picker.show();
                 setTimeout(function() { title.focus(); }, 10);
 

@@ -1,4 +1,4 @@
-define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit!upload'], function($, mod, req, tmpl, uikit) {
+define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit!upload', 'rowselect'], function($, mod, req, tmpl, uikit, RowSelect) {
 
     var Finder = function(element, options) {
 
@@ -17,6 +17,12 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
         this.main   = this.element.find('.js-finder-files');
         this.filter = this.element.find('.js-search:first');
         this.crumbs = this.element.find('.js-breadcrumbs:first');
+
+        this.rowselect = new RowSelect(this.main, {'rows':'[data-row]'});
+
+        this.main.on('selected-rows', function(e, rows) {
+            $this.showOnSelect();
+        });
 
         var progress    = this.element.find('.uk-progress'),
             progressbar = progress.find('.uk-progress-bar');
@@ -179,6 +185,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             selectAll: function(element) {
                 this.element.find('.js-select').prop('checked', element.prop('checked')).trigger('change');
+
+                this.rowselect.handleSelected();
             }
         },
 
@@ -259,6 +267,8 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             }
 
             this.element.find('.js-show-when-empty').toggleClass('uk-hidden', (this.main.find('[data-name]').length > 0));
+
+            this.rowselect.fetchRows();
         },
 
         applyFilter: function() {
