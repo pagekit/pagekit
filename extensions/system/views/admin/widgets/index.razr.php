@@ -101,14 +101,17 @@
                         <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url.route(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id, '_csrf' => app.csrf.generate])"  title="@widget.statusText"></a>
                     </div>
                     <div class="pk-table-width-150">
-                        <select name="positions[@widget.id]" class="uk-width-1-1">
-                            @if (!position.id)
-                            <option value="">@trans('- Assign -')</option>
-                            @endif
-                            @foreach (positions|slice(0, positions|length - 1) as pos)
-                            <option value="@pos.id"@(pos.id == widget.position ? ' selected')>@trans(pos.name)</option>
-                            @endforeach
-                        </select>
+                        <div class="uk-form-select" data-uk-form-select="{label:'a'}">
+                            <a></a>
+                            <select name="positions[@widget.id]" class="uk-width-1-1">
+                                @if (!position.id)
+                                <option value="">@trans('- Assign -')</option>
+                                @endif
+                                @foreach (positions|slice(0, positions|length - 1) as pos)
+                                <option value="@pos.id"@(pos.id == widget.position ? ' selected')>@trans(pos.name)</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="pk-table-width-150 uk-text-truncate">@(type.name ?: trans('Extension not loaded'))</div>
                     <div class="pk-table-width-100 uk-text-truncate">

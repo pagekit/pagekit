@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form = $('#js-widgets')
 
