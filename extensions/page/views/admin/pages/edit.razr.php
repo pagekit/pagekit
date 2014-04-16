@@ -8,11 +8,6 @@
     </div>
 
     <div class="uk-form-row">
-        <input class="js-showtitle" type="checkbox" @(page.get('title', true) ? 'checked':'')> @trans('Show title')
-        <input type="hidden" name="page[data][title]" value="@(page.get('title', 1) ? 1 : 0)">
-    </div>
-
-    <div class="uk-form-row">
         <ul class="uk-subnav uk-">
             <li>
                 @trans('Slug'):
@@ -27,18 +22,30 @@
             </li>
             <li>
                 @trans('Access'):
-                <a class="js-access" href="#" data-uk-toggle="{target:'.js-access'}">...</a>
-                <select class="uk-form-width-small uk-form-small uk-hidden js-access" name="page[access_id]">
+                <div class="uk-form-select" data-uk-form-select="{label:'a'}">
                     @foreach (levels as level)
-                    <option value="@level.id"@(page.accessId == level.id ? ' selected' : '')>@level.name</option>
+                        @if (page.accessId == level.id)
+                        <a>@level.name</a>
+                        @endif
                     @endforeach
-                </select>
+                    <select name="page[access_id]">
+                        @foreach (levels as level)
+                        <option value="@level.id"@(page.accessId == level.id ? ' selected' : '')>@level.name</option>
+                        @endforeach
+                    </select>
+                </div>
             </li>
             <li>
                 @trans('Markdown'):
-                <a class="uk-text-danger js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('No')</a>
-                <a class="uk-text-success js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Yes')</a>
+                <a class="uk-text-danger js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('Disabled')</a>
+                <a class="uk-text-success js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Enabled')</a>
                 <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
+            </li>
+            <li>
+                @trans('Title'):
+                <a class="uk-text-danger js-title" data-value="0">@trans('Hide')</a>
+                <a class="uk-text-success js-title" data-value="1">@trans('Show')</a>
+                <input type="hidden" name="page[data][title]" value="@page.get('title', 1)">
             </li>
         </ul>
     </div>

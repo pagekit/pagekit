@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form);
 
@@ -29,8 +29,6 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     statuses.eq(status.val()).removeClass('uk-hidden');
 
-    // access handling
-    $('a.js-access').text($('select.js-access option:selected').text());
 
     // markdown status handling
     var markdownStatus   = $('input[name="page[data][markdown]"]'),
@@ -42,9 +40,17 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
 
     // show title checkbox
     var showtitleinput = $('input[name="page[data][title]"]'),
-        showtitle      = $('.js-showtitle').on("click", function(){
-            showtitleinput.val(showtitle.prop('checked') ? 1:0);
-        });
+        showtitle      = $('.js-title');
+
+        showtitle.on("click", (function(e){
+            var fn = function(){
+                showtitleinput.val(showtitle.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
+            };
+
+            showtitle.addClass('uk-hidden').filter('[data-value="'+showtitleinput.val()+'"]').removeClass('uk-hidden');
+
+            return fn;
+        })());
 
     // form ajax saving
     form.on('submit', function(e) {
