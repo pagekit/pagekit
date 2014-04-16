@@ -1,4 +1,4 @@
-<form class="uk-form uk-form-horizontal" action="@url.route('@alpha/settings/save')" method="post">
+<form class="uk-form uk-form-horizontal" action="@url.route('@system/themes/savesettings', ['name' => 'alpha'])" method="post">
 
     <div class="uk-form-row">
         <label for="form-sidebar-a-width" class="uk-form-label">@trans('Sidebar A Width')</label>

@@ -12,9 +12,9 @@ class WidgetEvent extends Event
      */
     protected $widget;
 
-    public function __construct(Widget $widget)
+    public function __construct(Widget $theme)
     {
-        $this->widget = $widget;
+        $this->widget = $theme;
     }
 
     /**

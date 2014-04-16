@@ -25,6 +25,7 @@ use Pagekit\System\Helper\FinderHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\Theme\Event\ThemeListener;
+use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
 use Pagekit\User\Event\AuthorizationListener;
@@ -63,6 +64,7 @@ class SystemExtension extends Extension
         $app['events']->addSubscriber(new ThemeListener);
         $app['events']->addSubscriber(new UserListener);
         $app['events']->addSubscriber(new WidgetListener);
+        $app['events']->addSubscriber(new ThemeWidgetListener);
 
         $this->mergeOptions();
 

@@ -31,6 +31,11 @@ return array(
 
     ),
 
-    'settings' => '@alpha/settings/index',
+    'settings' => array(
+
+        'system'  => 'theme://alpha/views/admin/settings.razr.php',
+        'widgets' => 'theme://alpha/views/admin/widgets/edit.razr.php'
+
+    )
 
 );

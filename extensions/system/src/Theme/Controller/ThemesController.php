@@ -1,9 +1,10 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Theme\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\Theme\Event\ThemeEvent;
 
 /**
  * @Access("system: manage themes", admin=true)
@@ -113,11 +114,41 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = $this->themes->get($name) or !$url = $theme->getConfig('settings')) {
+            if (!$theme = $this->themes->get($name) or !$tmpl = $theme->getConfig('settings.system')) {
                 throw new Exception(__('Invalid theme.'));
             }
 
-            return $this('router')->call($url);
+            $config = $this('option')->get("$name:config", array());
+
+            $this('events')->trigger('system.theme.edit', new ThemeEvent($theme, $config));
+
+            return $this('view')->render($tmpl, compact('theme', 'config'));
+
+        } catch (Exception $e) {
+            $this('message')->error($e->getMessage());
+        }
+
+        return $this->redirect('@system/system/index');
+    }
+
+    /**
+     * @Request({"name", "config": "array"})
+     */
+    public function saveSettingsAction($name, $config = array())
+    {
+        try {
+
+            if (!$theme = $this->themes->get($name)) {
+                throw new Exception(__('Invalid theme.'));
+            }
+
+            $this('events')->trigger('system.theme.save', new ThemeEvent($theme, $config));
+
+            $this('option')->set("$name:config", $config, true);
+
+            $this('message')->success(__('Settings saved.'));
+
+            return $this->redirect('@system/themes/settings', compact('name'));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

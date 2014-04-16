@@ -2,17 +2,11 @@
 
 namespace Pagekit\Alpha;
 
-use Pagekit\Alpha\Event\WidgetListener;
 use Pagekit\Framework\Application;
 use Pagekit\Theme\Theme;
 
 class AlphaTheme extends Theme
 {
-    /**
-     * @var Application
-     */
-    protected $app;
-
     /**
      * @var array
      */
@@ -24,17 +18,6 @@ class AlphaTheme extends Theme
     public function boot(Application $app)
     {
         parent::boot($app);
-
-        $app['events']->addSubscriber(new WidgetListener);
-
-        $this->app = $app;
-        $this->config += $app['option']->get('alpha:config', array());
-
-        $app->on('admin.init', function() use ($app) {
-
-            $app['router']->addController('Pagekit\Alpha\Controller\SettingsController', array('name' => 'alpha'));
-
-        });
 
         $app->on('site.init', function() use ($app) {
 
@@ -78,8 +61,9 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
+        $positions = $this('positions');
         foreach ($sidebars as $name => $sidebar) {
-            if (!$this->app['positions']->exists($name)) {
+            if (!$positions->exists($name)) {
                 unset($sidebars[$name]);
                 continue;
             }
