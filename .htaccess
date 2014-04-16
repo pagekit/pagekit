@@ -6,12 +6,7 @@
     RewriteEngine On
     # RewriteBase /
 
-    # preventing direct access to sqlite databases
-    RewriteCond %{REQUEST_URI} (.*).db [NC]
-    RewriteRule ^(.*)$ 404.html [R=404,L]
-
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule .* index.php [L]
-
 </IfModule>
