@@ -36,20 +36,29 @@ class ThemeGenerateCommand extends Command
             exit;
         }
 
-        $title  = $this->ask('Title: ');
-        $author = $this->ask('Author: ');
-        $email  = $this->ask('Email: ');
+        $title     = $this->ask('Title: ');
+        $author    = $this->ask('Author: ');
+        $email     = $this->ask('Email: ');
+        $namespace = $this->ask('PHP Namespace: ');
+        $classname = ucfirst($name).'Theme';
 
         $replace = array(
             '%NAME%'   => $name,
             '%TITLE%'  => $title,
             '%AUTHOR%' => $author,
-            '%EMAIL%'  => $email
+            '%EMAIL%'  => $email,
+            '%CLASSNAME%'     => $classname,
+            '%NAMESPACE%'     => $namespace,
+            '%NAMESPACE_ESC%' => addslashes($namespace)
         );
 
         foreach (Finder::create()->files()->in(__DIR__.'/skeleton/theme') as $file) {
 
-            $filename = "$path/".$file->getRelativepathname();
+            if ($file->getFilename() == 'DefaultTheme.php') {
+                $filename = "$path/src/$classname.php";
+            } else {
+                $filename = "$path/".$file->getRelativepathname();
+            }
 
             if (!is_dir($dir = dirname($filename))) {
                 mkdir($dir, 0777, true);
