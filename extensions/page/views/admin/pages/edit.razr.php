@@ -25,8 +25,8 @@
                 <li>
                     <div>@trans('Status'):</div>
                     <div>
-                        <button type="button" class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" data-status="0">@statuses[0]</button>
-                        <button type="button" class="uk-button uk-button-mini uk-button-success js-status uk-hidden" data-status="1">@statuses[1]</button>
+                        <button class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" type="button" data-status="0">@statuses[0]</button>
+                        <button class="uk-button uk-button-mini uk-button-success js-status uk-hidden" type="button" data-status="1">@statuses[1]</button>
                         <input type="hidden" name="page[status]" value="@page.status">
                     </div>
                 </li>
@@ -36,7 +36,7 @@
                         <div class="uk-form-select">
                             @foreach (levels as level)
                                 @if (page.accessId == level.id)
-                                <button type="button" class="uk-button uk-button-mini">@level.name</button>
+                                <button class="uk-button uk-button-mini" type="button">@level.name</button>
                                 @endif
                             @endforeach
                             <select name="page[access_id]">
@@ -50,16 +50,16 @@
                 <li>
                     <div>@trans('Markdown'):</div>
                     <div>
-                        <button type="button" class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('Disabled')</button>
-                        <button type="button" class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Enabled')</button>
+                        <button class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Disabled')</button>
+                        <button class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Enabled')</button>
                         <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
                     </div>
                 </li>
                 <li>
                     <div>@trans('Title'):</div>
                     <div>
-                        <button type="button" class="uk-button uk-button-mini js-title" data-value="0">@trans('Hide')</button>
-                        <button type="button" class="uk-button uk-button-mini js-title" data-value="1">@trans('Show')</button>
+                        <button class="uk-button uk-button-mini js-title @(page.get('title') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Hide')</button>
+                        <button class="uk-button uk-button-mini js-title @(!page.get('title') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Show')</button>
                         <input type="hidden" name="page[data][title]" value="@page.get('title', 1)">
                     </div>
                 </li>
