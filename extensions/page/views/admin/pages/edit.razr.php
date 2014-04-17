@@ -22,7 +22,7 @@
             </li>
             <li>
                 @trans('Access'):
-                <div class="uk-form-select" data-uk-form-select="{label:'a'}">
+                <div class="uk-form-select" data-uk-form-select="{target:'a'}">
                     @foreach (levels as level)
                         @if (page.accessId == level.id)
                         <a>@level.name</a>

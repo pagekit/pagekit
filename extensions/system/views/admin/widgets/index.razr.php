@@ -101,7 +101,7 @@
                         <a class="uk-icon-circle uk-text-@( widget.status ? 'success' : 'danger' )" href="@url.route(widget.status ? '@system/widgets/disable' : '@system/widgets/enable', ['ids[]' => widget.id, '_csrf' => app.csrf.generate])"  title="@widget.statusText"></a>
                     </div>
                     <div class="pk-table-width-150">
-                        <div class="uk-form-select" data-uk-form-select="{label:'a'}">
+                        <div class="uk-form-select" data-uk-form-select="{target:'a'}">
                             <a></a>
                             <select name="positions[@widget.id]" class="uk-width-1-1">
                                 @if (!position.id)

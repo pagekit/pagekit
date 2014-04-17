@@ -22,14 +22,18 @@
 
         this.element = $element;
         this.options = $.extend({}, FormSelect.defaults, options);
-        this.label   = this.element.find(this.options.label);
+        this.target  = this.element.find(this.options.target);
         this.select  = this.element.find('select');
 
         // init + on change event
         this.select.on("change", (function(){
 
             var select = $this.select[0], fn = function(){
-                $this.label.text(select.options[select.selectedIndex].text);
+
+                try {
+                    $this.target.text(select.options[select.selectedIndex].text);
+                } catch(e) {}
+
                 return fn;
             };
 
@@ -42,7 +46,7 @@
     };
 
     FormSelect.defaults = {
-        'label': '>span:first'
+        'target': '>span:first'
     };
 
     UI["formSelect"] = FormSelect;
