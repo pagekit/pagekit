@@ -186,26 +186,18 @@ class UserController extends Controller
 
             $this->users->save($user, $data);
 
-            if (!$id && $this('config')->get('mail.enabled')) {
-                $this('mailer')->create()
-                    ->to($user->getEmail())
-                    ->from($this('config')->get('mail.from.address'), $this('config')->get('mail.from.name'))
-                    ->subject(__('Welcome!'))
-                    ->body($this('view')->render('system/user/mails/welcome.razr.php', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
-                    ->queue();
+            if (!$id) {
+                $this->sendWelcomeEmail($user);
             }
 
-            $this('message')->success($id ? __('User saved.') : __('User created.'));
+            $response = array('message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+
+            $response = array('error' => $e->getMessage());
         }
 
-        if ($user && $user->getId()) {
-            return $this->redirect('@system/user/edit', array('id' => $user->getId()));
-        }
-
-        return $this->redirect('@system/user/add');
+        return $this('response')->json($response);
     }
 
     /**
@@ -257,6 +249,52 @@ class UserController extends Controller
     }
 
     /**
+     * Gets the user info.
+     *
+     * @param  User $user
+     * @return array
+     */
+    protected function getInfo(User $user)
+    {
+        return array(
+            'id'         => $user->getId(),
+            'username'   => $user->getUsername(),
+            'name'       => $user->getName(),
+            'email'      => $user->getEmail(),
+            'status'     => $user->getStatusText(),
+            'badge'      => $user->getStatus() ? 'success' : 'danger',
+            'login'      => ($date = $user->getLogin()) ? $this('dates')->format($date) : __('Never'),
+            'registered' => ($date = $user->getRegistered()) ? $this('dates')->format($date) : null
+        );
+    }
+
+    /**
+     * Gets the user roles.
+     *
+     * @param  User $user
+     * @return array
+     */
+    protected function getRoles(User $user = null)
+    {
+        $roles = $this->roles->where(array('id <> ?'), array(Role::ROLE_ANONYMOUS))->orderBy('priority')->get();
+
+        foreach ($roles as $role) {
+
+            if ($role->isAuthenticated()) {
+                $role->disabled = true;
+            }
+
+            if ($user && $user->getId() == $this('user')->getId() && $user->isAdministrator() && $role->isAdministrator()) {
+                $role->disabled = true;
+            }
+        }
+
+        return $roles;
+    }
+
+    /**
+     * Gets the permission SQL.
+     *
      * @param  string $permission
      * @return string
      */
@@ -274,21 +312,22 @@ class UserController extends Controller
         return (string) call_user_func_array(array($expr, 'orX'), $params);
     }
 
-    protected function getRoles(User $user = null)
+    /**
+     * Sends the user welcome email.
+     *
+     * @param User $user
+     */
+    protected function sendWelcomeEmail(User $user)
     {
-        $roles = $this->roles->where(array('id <> ?'), array(Role::ROLE_ANONYMOUS))->orderBy('priority')->get();
-
-        foreach ($roles as $role) {
-
-            if ($role->isAuthenticated()) {
-                $role->disabled = true;
-            }
-
-            if ($user && $user->getId() == $this('user')->getId() && $user->isAdministrator() && $role->isAdministrator()) {
-                $role->disabled = true;
-            }
+        if (!$this('config')->get('mail.enabled')) {
+            return;
         }
 
-        return $roles;
+        $this('mailer')->create()
+            ->to($user->getEmail())
+            ->from($this('config')->get('mail.from.address'), $this('config')->get('mail.from.name'))
+            ->subject(__('Welcome!'))
+            ->body($this('view')->render('system/user/mails/welcome.razr.php', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
+            ->queue();
     }
 }

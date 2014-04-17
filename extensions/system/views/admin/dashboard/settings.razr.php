@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a>
 
         </div>
     </div>

@@ -47,7 +47,7 @@
                                 @else
                                 <div class="pk-themes-action">
                                     <a class="uk-button uk-button-primary" href="@url.route('@system/themes/enable', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Enable')</a>
-                                    <a class="uk-button uk-button-danger " href="@url.route('@system/themes/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
+                                    <a class="uk-button pk-button-danger " href="@url.route('@system/themes/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
                                 </div>
                                 @endif
                             </div>

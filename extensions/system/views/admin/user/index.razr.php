@@ -6,7 +6,7 @@
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/user/add')">@trans('Add User')</a>
-            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/user/delete')">@trans('Delete')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/user/delete')">@trans('Delete')</a>
 
             <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>

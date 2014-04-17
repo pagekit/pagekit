@@ -7409,6 +7409,23 @@ a.uk-datepicker-table-muted {
   margin: -10px 0 20px 0;
   font-size: 12px;
 }
+/* Modifier `pk-button-danger`
+========================================================================== */
+/* Hover */
+.pk-button-danger:hover,
+.pk-button-danger:focus {
+  background-color: #e54f49;
+  color: #ffffff;
+  border-color: transparent;
+}
+/* Active */
+.pk-button-danger:active,
+.pk-button-danger.uk-active {
+  background-color: #e4463a;
+  color: #ffffff;
+  border-color: rgba(162, 32, 22, 0.5);
+  box-shadow: inset 0 1px 5px -1px rgba(162, 32, 22, 0.7);
+}
 /* Form heading
 ========================================================================== */
 .pk-form-heading {
