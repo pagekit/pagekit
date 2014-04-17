@@ -17,7 +17,7 @@
 @button-small-line-height:                      @global-height-small - 2;
 @button-large-line-height:                      @global-height-large - 2;
 
-@button-mini-font-size:                         round(@global-font-size * 0.78); // 11px
+@button-mini-font-size:                         round(@global-font-size * 0.85); // 12px
 @button-small-font-size:                        round(@global-font-size * 0.85); // 12px
 @button-large-font-size:                        round(@global-font-size * 1.14); // 16px
 
@@ -47,8 +47,8 @@
 @button-success-active-background:              @global-success-active-background;
 @button-success-active-color:                   @global-contrast-color;
 
-@button-danger-background:                      @global-default-background;
-@button-danger-color:                           @global-color;
+@button-danger-background:                      @global-danger-background;
+@button-danger-color:                           @global-contrast-color;
 @button-danger-hover-background:                @global-danger-hover-background;
 @button-danger-hover-color:                     @global-contrast-color;
 @button-danger-active-background:               @global-danger-active-background;
@@ -116,7 +116,7 @@
 // Modifier: `uk-button-danger`
 //
 
-.hook-button-danger() {}
+.hook-button-danger() { border-color: transparent; }
 
 .hook-button-danger-hover() { border-color: transparent; }
 

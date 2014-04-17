@@ -26,22 +26,20 @@
 
         @if (menu.id)
         <div class="pk-options uk-clearfix">
-            <div class="uk-float-left">
 
-                <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
-                <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
+            <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
+            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
 
-                <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
-                    <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
-                    <div class="uk-dropdown uk-dropdown-small">
-                        <ul class="uk-nav uk-nav-dropdown">
-                            <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 1])">@trans('Enable')</a></li>
-                            <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 0])">@trans('Disable')</a></li>
-                        </ul>
-                    </div>
+            <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 1])">@trans('Enable')</a></li>
+                        <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 0])">@trans('Disable')</a></li>
+                    </ul>
                 </div>
-
             </div>
+
         </div>
 
         <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested">

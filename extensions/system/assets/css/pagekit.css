@@ -24,7 +24,7 @@
 ========================================================================== */
 
 .pk-options {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #e5e5e5;
 }
@@ -34,7 +34,7 @@
 ========================================================================== */
 
 .pk-breadcrumb {
-    margin: -20px 0 30px 0;
+    margin: -10px 0 20px 0;
     font-size: 12px;
 }
 
@@ -48,6 +48,29 @@
     line-height: 24px;
 }
 
+
+/* Sidebar Panels
+========================================================================== */
+
+.pk-panel-sidebar .uk-panel-title {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+/* Modifier `pk-list-table`
+========================================================================== */
+
+.pk-list-table { display: table; }
+
+.pk-list-table > li { display: table-row; }
+
+.pk-list-table > li > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.pk-list-table > li > div:nth-child(n+2) { padding-left: 15px; }
+.pk-list-table > li:nth-child(n+2) > div { padding-top: 7px; }
 
 /* Align subnavs if used in navs or sortables
 ========================================================================== */
