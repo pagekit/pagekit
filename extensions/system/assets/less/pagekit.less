@@ -6,15 +6,15 @@
 ========================================================================== */
 
 /* Tablet and bigger */
-@media (min-width: 768px) {
+@media (min-width: @breakpoint-medium) {
 
-    .pk-sidebar { border-right: 1px solid #e5e5e5; }
+    .pk-sidebar { border-right: 1px solid @global-border; }
 
     .pk-sidebar-panel { padding-right: 25px; }
 
     .pk-content {
         margin-left: -1px;
-        border-left: 1px solid #ddd;
+        border-left: 1px solid @global-border;
     }
 
 }
@@ -26,7 +26,7 @@
 .pk-options {
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid @global-border;
 }
 
 
@@ -38,12 +38,13 @@
     font-size: 12px;
 }
 
+
 /* Form heading
 ========================================================================== */
 
 .pk-form-heading {
     padding-bottom: 5px;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid @global-border;
     font-size: 18px;
     line-height: 24px;
 }
@@ -94,8 +95,8 @@
     cursor: pointer;
 }
 
-.pk-subnav-icon > li > a { color: #999; }
-.pk-subnav-icon > li > a:hover { color: #444; }
+.pk-subnav-icon > li > a { color: @global-muted-color; }
+.pk-subnav-icon > li > a:hover { color: @global-color; }
 
 
 /* Sub-modifier `pk-table-subheading`
@@ -111,7 +112,7 @@
 /* Sub-modifier `pk-table-selected`
 ========================================================================== */
 
-.pk-table-selected { background: #ffd; }
+.pk-table-selected { background: @global-hover-background; }
 
 
 /* Sub-modifier `pk-table-indent`
@@ -168,7 +169,7 @@
  * Sticky table header
  */
 
-.pk-table-head-sticky { background: #fff; }
+.pk-table-head-sticky { background: @global-background; }
 
 
 /* Sub-modifier `pk-table-fake`
@@ -193,7 +194,7 @@
 
 .pk-table-fake-subheading { padding-top: 20px; }
 
-.pk-table-fake-border { border-bottom: 1px solid #e5e5e5; }
+.pk-table-fake-border { border-bottom: 1px solid @global-border; }
 
 /*
  * Indent first cell
@@ -263,18 +264,18 @@
     display: block;
     padding: 5px 15px 5px 25px;
     text-decoration: none;
-    color: #999;
+    color: @global-muted-color;
 }
 
 .pk-sortable-item.pk-active > a  {
     background: #f0f0f0;
-    color: #444;
+    color: @global-color;
 }
 
 .pk-sortable-item:hover > a,
 .pk-sortable-list-dragged .pk-sortable-item > a  {
-    background: #ffd;
-    color: #444;
+    background: @global-hover-background;
+    color: @global-color;
 }
 
 /*
