@@ -21,6 +21,7 @@ var require = (function(win, doc) {
                         'codemirror':      'vendor/assets/codemirror/codemirror.js?ver=3.22',
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
                         'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
+                        'md5':             'vendor/assets/requirejs/plugins/md5.js?ver=0.0.5',
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
                         'htmleditor':      'vendor/assets/uikit/js/addons/htmleditor.min',
                         'rowselect':       'extensions/system/assets/js/rowselect.js?ver=' + vers,

@@ -1,21 +1,23 @@
-@script('requirejs')
+@script('user', 'system/js/user/edit.js', 'requirejs')
 
-<form class="uk-form uk-form-horizontal" action="@url.route('@system/user/save', ['id' => user.id ?: 0])" method="post">
+<form id="js-user" class="uk-form uk-form-horizontal" action="@url.route('@system/user/save')" method="post">
 
     <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
         <div class="pk-sidebar uk-width-medium-1-4">
             <div class="pk-sidebar-panel uk-text-center">
 
-                <p>@gravatar(user.email, ['size' => 300, 'attrs' => ['width' => '150', 'height' => '150', 'alt' => user.name, 'class' => 'uk-border-circle']])</p>
-                @if (user.id)
-                <ul class="uk-list">
-                    <li><span class="uk-badge uk-badge-@( user.status ? 'success' : 'danger' )">@user.statusText</span></li>
-                    <li>@user.name (@user.username)</li>
-                    <li><a href="mailto:@user.email">@user.email</a></li>
-                    <li>@trans('Registered since: %date%', ['%date%' => user.registered|date])</li>
-                    <li>@trans('Last login: %date%', ['%date%' => user.login ? user.login|date : trans('Never')])</li>
-                </ul>
-                @endif
+                <p class="js-avatar"></p>
+                <div class="js-info">
+                    @if (user.id)
+                    <ul class="uk-list">
+                        <li><span class="uk-badge uk-badge-@(user.status ? 'success' : 'danger')">@user.statusText</span></li>
+                        <li>@user.name (@user.username)</li>
+                        <li><a href="mailto:@user.email">@user.email</a></li>
+                        <li>@trans('Last login: %date%', ['%date%' => user.login ? user.login|date : trans('Never')])</li>
+                        <li>@trans('Registered since: %date%', ['%date%' => user.registered|date])</li>
+                    </ul>
+                    @endif
+                </div>
 
             </div>
         </div>
@@ -51,7 +53,7 @@
                 </div>
                 @endif
 
-                <div class="uk-form-controls@( user.id ? ' js-password uk-hidden' )">
+                <div class="uk-form-controls@(user.id ? ' js-password uk-hidden')">
                     <div class="uk-form-password">
                         <input id="form-password" class="uk-form-width-large" type="password" name="password" value="">
                         <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
@@ -92,12 +94,19 @@
         </div>
     </div>
 
+    <input type="hidden" name="id" value="@(user.id ?: 0)">
     @token()
 
 </form>
 
-<script>
+<script type="text/tmpl" data-tmpl="user.info">
 
-    require(['uikit', 'uikit!form-password'], function() {});
+    <ul class="uk-list">
+        <li><span class="uk-badge uk-badge-{{ badge }}">{{ status }}</span></li>
+        <li>{{ name }} ({{ username }})</li>
+        <li><a href="mailto:{{ email }}">{{ email }}</a></li>
+        <li>@trans('Last login: {{ login }}')</li>
+        <li>@trans('Registered since: {{ registered }}')</li>
+    </ul>
 
 </script>

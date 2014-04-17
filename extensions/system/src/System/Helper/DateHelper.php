@@ -150,4 +150,4 @@ class DateHelper
         // Translate the marked sequences.
         return preg_replace_callback('/\xEF[AaeDlMTF]?(.*?)\xFF/', function(array $matches = null) { return __($matches[1]); }, $format);
     }
-} 
+}
