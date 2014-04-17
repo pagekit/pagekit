@@ -14,7 +14,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             screens.addClass('uk-hidden')
             next.removeClass('uk-hidden');
 
-            picker.resize();
+            picker.updateScrollable();
         },
         handler, finder, picker;
 

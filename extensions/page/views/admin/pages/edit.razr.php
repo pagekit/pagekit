@@ -2,7 +2,7 @@
 
 <form id="js-page" class="uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@page/page/save')" method="post">
     <div class="uk-width-medium-3-4">
-    
+
         <div class="pk-options uk-clearfix">
             <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
             <a class="uk-button" href="@url.route('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
@@ -25,8 +25,8 @@
                 <li>
                     <div>@trans('Status'):</div>
                     <div>
-                        <button class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" data-status="0">@statuses[0]</button>
-                        <button class="uk-button uk-button-mini uk-button-success js-status uk-hidden" data-status="1">@statuses[1]</button>
+                        <button type="button" class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" data-status="0">@statuses[0]</button>
+                        <button type="button" class="uk-button uk-button-mini uk-button-success js-status uk-hidden" data-status="1">@statuses[1]</button>
                         <input type="hidden" name="page[status]" value="@page.status">
                     </div>
                 </li>
@@ -36,7 +36,7 @@
                         <div class="uk-form-select">
                             @foreach (levels as level)
                                 @if (page.accessId == level.id)
-                                <button class="uk-button uk-button-mini">@level.name</button>
+                                <button type="button" class="uk-button uk-button-mini">@level.name</button>
                                 @endif
                             @endforeach
                             <select name="page[access_id]">
@@ -50,26 +50,25 @@
                 <li>
                     <div>@trans('Markdown'):</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('Disabled')</button>
-                        <button class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Enabled')</button>
+                        <button type="button" class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" data-value="0">@trans('Disabled')</button>
+                        <button type="button" class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" data-value="1">@trans('Enabled')</button>
                         <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
                     </div>
                 </li>
                 <li>
                     <div>@trans('Title'):</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-title" data-value="0">@trans('Hide')</button>
-                        <button class="uk-button uk-button-mini js-title" data-value="1">@trans('Show')</button>
+                        <button type="button" class="uk-button uk-button-mini js-title" data-value="0">@trans('Hide')</button>
+                        <button type="button" class="uk-button uk-button-mini js-title" data-value="1">@trans('Show')</button>
                         <input type="hidden" name="page[data][title]" value="@page.get('title', 1)">
                     </div>
                 </li>
             </ul>
         </div>
-        
+
         <div class="uk-panel pk-panel-sidebar">
             <h3 class="uk-panel-title">Slug</h3>
-            <a class="js-slug" href="#" data-uk-toggle="{target:'.js-slug'}">@(page.slug ?: '...')</a>
-            <input class="uk-form-width-medium uk-form-small uk-hidden js-slug" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug', ['_csrf' => app.csrf.generate])">
+            <input class="uk-form-width-medium uk-form-small" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug', ['_csrf' => app.csrf.generate])">
         </div>
 
     </div>

@@ -278,7 +278,7 @@
 
             var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
                 $(document).trigger("uk-domready");
-            }, 300));
+            }, 150));
 
             // pass in the target node, as well as the observer options
             observer.observe(document.body, { childList: true, subtree: true });
@@ -1244,6 +1244,12 @@
             if (this.dialog.offset().left > this.scrollbarwidth) {
                 this.element.css(paddingdir, this.scrollbarwidth - (this.element[0].scrollHeight==window.innerHeight ? 0:this.scrollbarwidth ));
             }
+
+            this.updateScrollable();
+
+        },
+
+        updateScrollable: function() {
 
             // has scrollable?
 
