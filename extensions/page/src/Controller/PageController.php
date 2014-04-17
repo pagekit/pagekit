@@ -60,7 +60,7 @@ class PageController extends Controller
 
         $limit = self::PAGES_PER_PAGE;
         $total = ceil($query->count() / $limit);
-        $page  = min($total, max($page, 0));
+        $page  = max(0, min($total - 1, $page));
 
         $query->offset($page * $limit)->limit($limit)->orderBy('title');
 

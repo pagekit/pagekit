@@ -115,7 +115,7 @@ class InstallerController extends Controller
 
                 foreach (explode(';', $sql) as $query) {
                     if ($query = trim($query)) {
-                        $this('db')->executeUpdate(trim($query));
+                        $this('db')->executeUpdate($query);
                     }
                 }
             }

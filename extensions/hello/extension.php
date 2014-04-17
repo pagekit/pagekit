@@ -21,7 +21,11 @@ return array(
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => '@hello/hello/settings',
+    'settings' => array(
+
+        'system'  => 'hello/admin/settings.razr.php'
+
+    ),
 
     'menu' => array(
 

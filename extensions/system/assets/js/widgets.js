@@ -28,9 +28,9 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
         .on('change', 'select[name^="positions"]', function() {
 
             var select  = $(this),
-                li      = select.closest('li'),
+                li      = select.closest('li.js-widget'),
                 current = li.parent(),
-                target  = $('ul[data-position="' + select.val() + '"]');
+                target  = $('ul.uk-sortable[data-position="' + select.val() + '"]');
 
             target.find('.uk-sortable-empty').remove().end().append(li);
 
@@ -44,7 +44,8 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
 
             target.parent().removeClass('uk-hidden');
 
-            $([current, target]).trigger('sortable-change');
+            current.trigger('sortable-change');
+            target.trigger('sortable-change', [null, 'moved']);
 
             applyFilters();
         })

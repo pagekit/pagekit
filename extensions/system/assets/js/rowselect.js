@@ -13,7 +13,7 @@
 
             var target = $(e.target), row = $(this), select;
 
-            if(!target.is('a, select, input, [data-action], .js-ignore-select') && !target.closest('[data-action]').length) {
+            if(!target.is('a, select, option, input, [data-action], .js-ignore-select') && !target.closest('[data-action]').length) {
 
                 if (e.shiftKey && window.getSelection) {
                     window.getSelection()[window.getSelection().empty ? 'empty':'removeAllRanges']();

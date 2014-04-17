@@ -29,22 +29,6 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                 $this["on" + frm.data("step")](frm);
             });
 
-            (function(){
-
-                var select = $("#form-dbdriver"), fn = function() {
-                    $('.js-hide-sqlite').toggleClass('uk-hidden', select.val() == 'sqlite');
-
-                    $('.js-required').each(function(){
-                        var ele = $(this);
-                        ele.prop('required', ele.is(':visible'))
-                    });
-
-                    return fn;
-                };
-
-                select.on("change", fn());
-            })();
-
             this.gotoStep('start');
         },
         gotoStep: function(step) {
@@ -175,19 +159,16 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
     // on domready
     $(function() {
 
-        // toggle password
-        $(".tm-form-password-toggle").on("click", function(e) {
+        // toggle db driver
+        $('#form-dbdriver').on('change', function() {
 
-            e.preventDefault();
+            var value = $(this).val();
+            $('.js-database').each(function() {
+                var connection = $(this), hide = !connection.is('.js-'+value);
+                connection.toggleClass('uk-hidden', hide).find(':input').prop('disabled', hide)
+            });
 
-            var ele = $(this), input = ele.next('input');
-
-            if (input.length) {
-                var type = input.attr("type");
-                input.attr("type", type == "text" ? "password" : "text");
-                ele.text(type == "text" ? "Show" : "Hide");
-            }
-        });
+        }).trigger('change');
 
         // prevent input html5 validation bubble
         $(':input').bind('invalid', function(e) {
