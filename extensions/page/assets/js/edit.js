@@ -11,11 +11,6 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
         slug.trigger('blur');
     });
 
-    // slug.on('blur', function() {
-    //     $.post(slug.data('url'), { slug: slug.val() ? slug.val() : title.val(), id: id.val() }, function(data) {
-    //     }, 'json');
-    // });
-
     // status handling
     var status   = $('input[name="page[status]"]', form),
         statuses = $('.js-status', form).on('click', function(e){
