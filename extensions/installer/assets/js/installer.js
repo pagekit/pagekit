@@ -29,22 +29,6 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                 $this["on" + frm.data("step")](frm);
             });
 
-            (function(){
-
-                var select = $("#form-dbdriver"), fn = function() {
-                    $('.js-hide-sqlite').toggleClass('uk-hidden', select.val() == 'sqlite');
-
-                    $('.js-required').each(function(){
-                        var ele = $(this);
-                        ele.prop('required', ele.is(':visible'))
-                    });
-
-                    return fn;
-                };
-
-                select.on("change", fn());
-            })();
-
             this.gotoStep('start');
         },
         gotoStep: function(step) {
@@ -188,6 +172,17 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                 ele.text(type == "text" ? "Show" : "Hide");
             }
         });
+
+        // toggle db driver
+        $('#form-dbdriver').on('change', function() {
+
+            var value = $(this).val();
+            $('.js-database').each(function() {
+                var connection = $(this), hide = !connection.is('.js-'+value);
+                connection.toggleClass('uk-hidden', hide).find(':input').prop('disabled', hide)
+            });
+
+        }).trigger('change');
 
         // prevent input html5 validation bubble
         $(':input').bind('invalid', function(e) {
