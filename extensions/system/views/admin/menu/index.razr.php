@@ -28,7 +28,7 @@
         <div class="pk-options uk-clearfix">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
-            <a class="uk-button uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
 
             <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>

@@ -63,7 +63,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="uk-button uk-button-danger uk-invisible" href="@url.route('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
+                                    <a class="uk-button pk-button-danger uk-invisible" href="@url.route('@system/extensions/uninstall', ['name' => name, '_csrf' => app.csrf.generate])">@trans('Delete')</a>
                                 </td>
                             </tr>
                             @endforeach

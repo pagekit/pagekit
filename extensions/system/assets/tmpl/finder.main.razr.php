@@ -9,7 +9,7 @@
             <input type="file" name="files[]" multiple="multiple">
         </button>
 
-        <button class="uk-button uk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
+        <button class="uk-button pk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
         {{ /writable }}
 
     </div>

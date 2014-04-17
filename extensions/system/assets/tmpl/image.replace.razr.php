@@ -12,7 +12,7 @@
         <div class="uk-overlay-area-content">
             <div>{{{ alt }}}</div>
             <button class="uk-button uk-button-primary js-config" type="button">@trans('Settings')</button>
-            <button class="uk-button uk-button-danger js-remove" type="button">@trans('Delete')</button>
+            <button class="uk-button pk-button-danger js-remove" type="button">@trans('Delete')</button>
         </div>
     </div>
 </div>
