@@ -2,6 +2,8 @@
 
 namespace Pagekit\Extension\Controller;
 
+use Pagekit\Extension\Event\ExtensionEvent;
+use Pagekit\Extension\Extension;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 
@@ -142,11 +144,15 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = $this->extensions->get($name) or !$url = $extension->getConfig('settings')) {
+            if (!$extension = $this->extensions->get($name) or !$tmpl = $extension->getConfig('settings.system')) {
                 throw new Exception(__('Invalid extension.'));
             }
 
-            return $this('router')->call($url);
+            $config = $this('option')->get("$name:config", array());
+
+            $this('events')->trigger('system.extension.edit', new ExtensionEvent($extension, $config));
+
+            return $this('view')->render($tmpl, compact('extension', 'config'));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -155,14 +161,40 @@ class ExtensionsController extends Controller
         return $this->redirect('@system/system/index');
     }
 
-    protected function enable($extension)
+    /**
+     * @Request({"name", "config": "array"})
+     */
+    public function saveSettingsAction($name, $config = array())
+    {
+        try {
+
+            if (!$extension = $this->extensions->get($name)) {
+                throw new Exception(__('Invalid extension.'));
+            }
+
+            $this('events')->trigger('system.extension.save', new ExtensionEvent($extension, $config));
+
+            $this('option')->set("$name:config", $config, true);
+
+            $this('message')->success(__('Settings saved.'));
+
+            return $this->redirect('@system/extensions/settings', compact('name'));
+
+        } catch (Exception $e) {
+            $this('message')->error($e->getMessage());
+        }
+
+        return $this->redirect('@system/system/index');
+    }
+
+    protected function enable(Extension $extension)
     {
         $this('option')->set('system:extensions', array_unique(array_merge($this('option')->get('system:extensions', array()), array($extension->getName()))), true);
 
         $extension->enable();
     }
 
-    protected function disable($extension)
+    protected function disable(Extension $extension)
     {
         $this('option')->set('system:extensions', array_values(array_diff($this('option')->get('system:extensions', array()), array($extension->getName()))), true);
 

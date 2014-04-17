@@ -1,4 +1,4 @@
-<form class="uk-form uk-form-horizontal" action="@url.route('@hello/hello/savesettings')" method="post">
+<form class="uk-form uk-form-horizontal" action="@url.route('@system/extensions/savesettings', ['name' => 'hello'])" method="post">
 
     <p>
         @trans('This settings page is just for demonstration purposes.')

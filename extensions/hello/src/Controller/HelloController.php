@@ -17,22 +17,4 @@ class HelloController extends Controller
     {
         return array('head.title' => __('Hello'));
     }
-
-    /**
-     * @View("hello/admin/settings.razr.php")
-     */
-    public function settingsAction()
-    {
-        return array('head.title' => __('Hello Settings'), 'config' => array());
-    }
-
-    /**
-     * @Token
-     */
-    public function saveSettingsAction()
-    {
-        $this('message')->success(__('Settings saved.'));
-
-        return $this->redirect('@system/extensions/settings', array('name' => 'hello'));
-    }
 }

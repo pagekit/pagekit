@@ -82,7 +82,7 @@
 
 </ul>
 
-@if (packages)
+@if (packages && app.user.hasAccess('system: manage extensions'))
 <hr class="uk-margin-large">
 
 <h2 class="uk-h3">@trans('Extensions')</h2>
