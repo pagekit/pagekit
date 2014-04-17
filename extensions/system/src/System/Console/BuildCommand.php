@@ -55,7 +55,7 @@ class BuildCommand extends Command
             ->filter(function ($file) {
 
                 $exclude = array(
-                    '^(app\/cache|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
+                    '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
                     '^extensions\/(?!(installer|page|system)\/).*',
                     '^extensions\/.+\/languages\/.+\.(po|pot)',
                     '^framework\/.+\/(tests\/|phpunit\.xml)',
@@ -78,11 +78,13 @@ class BuildCommand extends Command
         }
 
         $zip->addEmptyDir('app/cache');
+        $zip->addEmptyDir('app/database');
         $zip->addEmptyDir('app/logs');
         $zip->addEmptyDir('app/sessions');
         $zip->addEmptyDir('app/temp');
         $zip->addEmptyDir('storage');
         $zip->addFile($path . '/.htaccess', '.htaccess');
+        $zip->addFile($path . '/app/database/.htaccess', 'app/database/.htaccess');
 
         if ($this->option('development')) {
             $zip->addFromString('app/config/app.php', str_replace("'version' => '{$vers}',", "'version' => '{$dev}',", file_get_contents("{$path}/app/config/app.php")));
