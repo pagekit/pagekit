@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Extension\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
