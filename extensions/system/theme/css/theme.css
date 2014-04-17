@@ -7393,7 +7393,7 @@ a.uk-datepicker-table-muted {
   }
   .pk-content {
     margin-left: -1px;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #e5e5e5;
   }
 }
 /* Option toolbar
@@ -7458,10 +7458,10 @@ a.uk-datepicker-table-muted {
   cursor: pointer;
 }
 .pk-subnav-icon > li > a {
-  color: #999;
+  color: #999999;
 }
 .pk-subnav-icon > li > a:hover {
-  color: #444;
+  color: #444444;
 }
 /* Sub-modifier `pk-table-subheading`
 ========================================================================== */
@@ -7474,7 +7474,7 @@ a.uk-datepicker-table-muted {
 /* Sub-modifier `pk-table-selected`
 ========================================================================== */
 .pk-table-selected {
-  background: #ffd;
+  background: #ffffdd;
 }
 /* Sub-modifier `pk-table-indent`
 ========================================================================== */
@@ -7536,7 +7536,7 @@ a.uk-datepicker-table-muted {
  * Sticky table header
  */
 .pk-table-head-sticky {
-  background: #fff;
+  background: #ffffff;
 }
 /* Sub-modifier `pk-table-fake`
 ========================================================================== */
@@ -7619,16 +7619,16 @@ a.uk-datepicker-table-muted {
   display: block;
   padding: 5px 15px 5px 25px;
   text-decoration: none;
-  color: #999;
+  color: #999999;
 }
 .pk-sortable-item.pk-active > a {
   background: #f0f0f0;
-  color: #444;
+  color: #444444;
 }
 .pk-sortable-item:hover > a,
 .pk-sortable-list-dragged .pk-sortable-item > a {
-  background: #ffd;
-  color: #444;
+  background: #ffffdd;
+  color: #444444;
 }
 /*
  * Sub-object `pk-sortable-placeholder`
