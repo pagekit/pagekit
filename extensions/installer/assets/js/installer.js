@@ -159,20 +159,6 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
     // on domready
     $(function() {
 
-        // toggle password
-        $(".tm-form-password-toggle").on("click", function(e) {
-
-            e.preventDefault();
-
-            var ele = $(this), input = ele.next('input');
-
-            if (input.length) {
-                var type = input.attr("type");
-                input.attr("type", type == "text" ? "password" : "text");
-                ele.text(type == "text" ? "Show" : "Hide");
-            }
-        });
-
         // toggle db driver
         $('#form-dbdriver').on('change', function() {
 

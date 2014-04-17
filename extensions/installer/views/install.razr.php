@@ -127,7 +127,7 @@
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
                                     <input id="form-password" class="uk-width-1-1" type="password" name="user[password]" data-error-message="#js-user-password-error" required>
-                                    <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
+                                    <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
                                 </div>
                                 <p id="js-user-password-error" class="uk-form-help-block uk-text-danger">@trans('Password cannot be blank.')</p>
                             </div>
