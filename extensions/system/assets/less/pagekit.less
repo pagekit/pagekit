@@ -8,14 +8,11 @@
 /* Tablet and bigger */
 @media (min-width: @breakpoint-medium) {
 
-    .pk-sidebar { border-right: 1px solid @global-border; }
+    .pk-sidebar-left .pk-panel-marginless { margin-right: -@grid-gutter-horizontal; }
+    .pk-sidebar-right .pk-panel-marginless { margin-left: -@grid-gutter-horizontal; }
 
-    .pk-sidebar-panel { padding-right: 25px; }
-
-    .pk-content {
-        margin-left: -1px;
-        border-left: 1px solid @global-border;
-    }
+    .pk-sidebar-left .uk-panel + .uk-panel-divider:before { right: -@grid-gutter-horizontal; }
+    .pk-sidebar-right .uk-panel + .uk-panel-divider:before { left: -@grid-gutter-horizontal; }
 
 }
 
@@ -71,14 +68,6 @@
 }
 
 
-/* Sidebar Panels
-========================================================================== */
-
-.pk-panel-sidebar .uk-panel-title {
-    text-transform: uppercase;
-    font-size: 12px;
-}
-
 /* Modifier `pk-list-table`
 ========================================================================== */
 
@@ -91,8 +80,8 @@
     vertical-align: middle;
 }
 
-.pk-list-table > li > div:nth-child(n+2) { padding-left: 15px; }
-.pk-list-table > li:nth-child(n+2) > div { padding-top: 7px; }
+.pk-list-table > li > div:nth-child(n+2) { padding-left: 10px; }
+.pk-list-table > li:nth-child(n+2) > div { padding-top: 10px; }
 
 
 /* Align subnavs if used in navs or sortables

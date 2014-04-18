@@ -1,18 +1,20 @@
 @script('settings', 'system/js/settings/settings.js', 'requirejs')
 
-<form class="uk-form uk-form-horizontal uk-grid" action="@url.route('@system/settings/save')" method="post" data-uk-grid-margin data-uk-grid-match>
+<form class="uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/settings/save')" method="post">
 
-    <div class="pk-sidebar uk-width-medium-1-4">
+    <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        <ul class="uk-nav uk-nav-side" data-tabs="@tab">
-            <li><a href="#">@trans('Site')</a></li>
-            <li><a href="#">@trans('Email')</a></li>
-            <li><a href="#">@trans('Localization')</a></li>
-            <li><a href="#">@trans('System')</a></li>
-        </ul>
+        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+            <ul class="uk-nav uk-nav-side" data-tabs="@tab">
+                <li><a href="#">@trans('Site')</a></li>
+                <li><a href="#">@trans('Email')</a></li>
+                <li><a href="#">@trans('Localization')</a></li>
+                <li><a href="#">@trans('System')</a></li>
+            </ul>
+        </div>
 
     </div>
-    <div class="pk-content uk-width-medium-3-4">
+    <div class="uk-width-medium-3-4">
 
         <ul id="tab-content" class="uk-switcher uk-margin">
             <li>

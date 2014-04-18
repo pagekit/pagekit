@@ -1389,11 +1389,12 @@ iframe {
 .uk-panel-title {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 300;
   text-transform: none;
   color: #444444;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Sub-object: `uk-panel-badge`
  ========================================================================== */
@@ -1467,13 +1468,13 @@ iframe {
 /* Modifier: `uk-panel-divider`
  ========================================================================== */
 .uk-panel + .uk-panel-divider {
-  margin-top: 50px !important;
+  margin-top: 40px !important;
 }
 .uk-panel + .uk-panel-divider:before {
   content: "";
   display: block;
   position: absolute;
-  top: -25px;
+  top: -20px;
   left: 0;
   right: 0;
   border-top: 1px solid #e5e5e5;
@@ -1481,10 +1482,10 @@ iframe {
 /* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-panel + .uk-panel-divider {
-    margin-top: 50px !important;
+    margin-top: 40px !important;
   }
   .uk-panel + .uk-panel-divider:before {
-    top: -25px;
+    top: -20px;
   }
 }
 .uk-panel-box .uk-panel-teaser {
@@ -7385,15 +7386,17 @@ a.uk-datepicker-table-muted {
 ========================================================================== */
 /* Tablet and bigger */
 @media (min-width: 768px) {
-  .pk-sidebar {
-    border-right: 1px solid #e5e5e5;
+  .pk-sidebar-left .pk-panel-marginless {
+    margin-right: -25px;
   }
-  .pk-sidebar-panel {
-    padding-right: 25px;
+  .pk-sidebar-right .pk-panel-marginless {
+    margin-left: -25px;
   }
-  .pk-content {
-    margin-left: -1px;
-    border-left: 1px solid #e5e5e5;
+  .pk-sidebar-left .uk-panel + .uk-panel-divider:before {
+    right: -25px;
+  }
+  .pk-sidebar-right .uk-panel + .uk-panel-divider:before {
+    left: -25px;
   }
 }
 /* Option toolbar
@@ -7434,12 +7437,6 @@ a.uk-datepicker-table-muted {
   font-size: 18px;
   line-height: 24px;
 }
-/* Sidebar Panels
-========================================================================== */
-.pk-panel-sidebar .uk-panel-title {
-  text-transform: uppercase;
-  font-size: 12px;
-}
 /* Modifier `pk-list-table`
 ========================================================================== */
 .pk-list-table {
@@ -7453,10 +7450,10 @@ a.uk-datepicker-table-muted {
   vertical-align: middle;
 }
 .pk-list-table > li > div:nth-child(n+2) {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .pk-list-table > li:nth-child(n+2) > div {
-  padding-top: 7px;
+  padding-top: 10px;
 }
 /* Align subnavs if used in navs or sortables
 ========================================================================== */

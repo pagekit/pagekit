@@ -2,10 +2,10 @@
 
 <form id="js-user" class="uk-form uk-form-horizontal" action="@url.route('@system/user/save')" method="post">
 
-    <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
-        <div class="pk-sidebar uk-width-medium-1-4">
-            <div class="pk-sidebar-panel uk-text-center">
+    <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
+        <div class="uk-width-medium-1-4 pk-sidebar-left">
 
+            <div class="uk-panel uk-panel-divider uk-text-center">
                 <p class="js-avatar"></p>
                 <div class="js-info">
                     @if (user.id)
@@ -18,10 +18,10 @@
                     </ul>
                     @endif
                 </div>
-
             </div>
+
         </div>
-        <div class="pk-content uk-width-medium-3-4">
+        <div class="uk-width-medium-3-4">
 
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">@trans('Username')</label>

@@ -1,28 +1,32 @@
 @script('menu', 'system/js/menu/menu.js', 'requirejs')
 
-<form id="js-menu" class="uk-form uk-grid" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/menu/reorder', ['id' => menu.id])" method="post">
-    <div class="pk-sidebar uk-width-medium-1-4">
+<form id="js-menu" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/menu/reorder', ['id' => menu.id])" method="post">
+    <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        <ul class="uk-nav uk-nav-side">
-            @foreach (menus as m)
-            <li class="uk-visible-hover@( m == menu ? ' uk-active' )">
-                @if (m.id)
-                <ol class="uk-subnav pk-subnav-icon uk-hidden">
-                    <li><a href="#" data-edit="@url.route('@system/menu/save', ['id' => m.id])" data-menu-name="@m.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
-                    <li><a href="#" data-action="@url.route('@system/menu/delete', ['id' => m.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
-                </ol>
-                @endif
-                <a href="@url.route('@system/menu/index', ['id' => m.id])">@m.name</a>
-            </li>
-            @endforeach
-        </ul>
         @if (menus)
-        <hr>
+        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+            <ul class="uk-nav uk-nav-side">
+                @foreach (menus as m)
+                <li class="uk-visible-hover@( m == menu ? ' uk-active' )">
+                    @if (m.id)
+                    <ol class="uk-subnav pk-subnav-icon uk-hidden">
+                        <li><a href="#" data-edit="@url.route('@system/menu/save', ['id' => m.id])" data-menu-name="@m.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
+                        <li><a href="#" data-action="@url.route('@system/menu/delete', ['id' => m.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
+                    </ol>
+                    @endif
+                    <a href="@url.route('@system/menu/index', ['id' => m.id])">@m.name</a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
         @endif
-        <a class="uk-button" href="#modal-menu" data-edit="@url.route('@system/menu/save', ['id' => 0])" data-menu-name="">@trans('Add Menu')</a>
+
+        <div class="uk-panel uk-panel-divider">
+            <a class="uk-button" href="#modal-menu" data-edit="@url.route('@system/menu/save', ['id' => 0])" data-menu-name="">@trans('Add Menu')</a>
+        </div>
 
     </div>
-    <div class="pk-content uk-width-medium-3-4">
+    <div class="uk-width-medium-3-4">
 
         @if (menu.id)
         <div class="pk-options uk-clearfix">

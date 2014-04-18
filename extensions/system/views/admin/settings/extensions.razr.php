@@ -2,20 +2,22 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-extensions" class="uk-grid" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
+<div id="js-extensions" class="uk-grid uk-grid-divider" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
 
-    <div class="pk-sidebar uk-width-medium-1-4">
+    <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        <ul class="uk-nav uk-nav-side" data-uk-switcher="{connect:'#tab-content', toggle:' > *:not(.uk-nav-header)'}">
-            <li class="uk-active"><a href="#">@trans('Installed')</a></li>
-            <li><a href="#">@trans('Updates') <i class="uk-icon-spinner uk-icon-spin js-updates"></i></a></li>
-            <li><a href="#">@trans('Install')</a></li>
-            <li class="uk-nav-header">@trans('Marketplace')</li>
-            <li><a href="#">@trans('All')</a></li>
-        </ul>
+        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+            <ul class="uk-nav uk-nav-side" data-uk-switcher="{connect:'#tab-content', toggle:' > *:not(.uk-nav-header)'}">
+                <li class="uk-active"><a href="#">@trans('Installed')</a></li>
+                <li><a href="#">@trans('Updates') <i class="uk-icon-spinner uk-icon-spin js-updates"></i></a></li>
+                <li><a href="#">@trans('Install')</a></li>
+                <li class="uk-nav-header">@trans('Marketplace')</li>
+                <li><a href="#">@trans('All')</a></li>
+            </ul>
+        </div>
 
     </div>
-    <div class="pk-content uk-width-medium-3-4">
+    <div class="uk-width-medium-3-4">
 
         <ul id="tab-content" class="uk-switcher uk-margin">
             <li>

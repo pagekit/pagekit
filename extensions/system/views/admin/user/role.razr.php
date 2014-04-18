@@ -1,33 +1,38 @@
 @style('user', 'system/css/user.css')
 @script('user', 'system/js/user/role.js', ['requirejs'])
 
-<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
-    <div class="pk-sidebar uk-width-medium-1-4">
+<div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
+    <div class="uk-width-medium-1-4 pk-sidebar-left">
         <form id="js-role" class="uk-form" method="post">
 
-            <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/role/priority')">
-                @foreach (roles as r)
-                <li data-id="@r.id">
-                    <div class="pk-sortable-item uk-visible-hover@( r == role ? ' pk-active')">
-                        <div class="pk-sortable-handle"></div>
-                        @if (!r.locked)
-                        <ol class="uk-subnav pk-subnav-icon uk-hidden">
-                            <li><a href="#" data-edit="@url.route('@system/role/save', ['id' => r.id])" data-name="@r.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
-                            <li><a href="#" data-action="@url.route('@system/role/delete', ['id' => r.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
-                        </ol>
-                        @endif
-                        <a href="@url.route('@system/role/index', ['id' => r.id])">@r.name</a>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-            <hr>
-            <a class="uk-button" href="#" data-edit="@url.route('@system/role/save', ['id' => 0])">@trans('Add Role')</a>
+            <div class="uk-panel uk-panel-divider pk-panel-marginless">
+                <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/role/priority')">
+                    @foreach (roles as r)
+                    <li data-id="@r.id">
+                        <div class="pk-sortable-item uk-visible-hover@( r == role ? ' pk-active')">
+                            <div class="pk-sortable-handle"></div>
+                            @if (!r.locked)
+                            <ol class="uk-subnav pk-subnav-icon uk-hidden">
+                                <li><a href="#" data-edit="@url.route('@system/role/save', ['id' => r.id])" data-name="@r.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
+                                <li><a href="#" data-action="@url.route('@system/role/delete', ['id' => r.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
+                            </ol>
+                            @endif
+                            <a href="@url.route('@system/role/index', ['id' => r.id])">@r.name</a>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="uk-panel uk-panel-divider">
+                <a class="uk-button" href="#" data-edit="@url.route('@system/role/save', ['id' => 0])">@trans('Add Role')</a>
+            </div>
+
             @token()
 
         </form>
     </div>
-    <div class="pk-content uk-width-medium-3-4">
+    <div class="uk-width-medium-3-4">
         <form id="js-role-permissions" class="uk-form" action="@url.route('@system/role/save', ['id' => role.id])" method="post">
 
             @if (role.id)
