@@ -1389,12 +1389,11 @@ iframe {
 .uk-panel-title {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 300;
-  text-transform: none;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: normal;
+  text-transform: uppercase;
   color: #444444;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Sub-object: `uk-panel-badge`
  ========================================================================== */
