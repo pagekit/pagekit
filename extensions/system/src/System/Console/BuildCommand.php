@@ -58,7 +58,7 @@ class BuildCommand extends Command
                     '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
                     '^extensions\/(?!(installer|page|system)\/).*',
                     '^extensions\/.+\/languages\/.+\.(po|pot)',
-                    '^framework\/.+\/(tests\/|phpunit\.xml)',
+                    '^themes\/(?!(alpha)\/).*',
                     '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade)',
                     '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test)',
                     '^vendor\/nikic\/php-parser\/(doc|grammar|test|phpunit)',
