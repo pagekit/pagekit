@@ -25,6 +25,10 @@
 
                     <div class="uk-navbar-flip">
 
+                        <a class="uk-navbar-brand" href="@url.route('/')" target="_blank">
+                            @trans('View Site')
+                        </a>
+
                         <div class="uk-navbar-content" data-uk-dropdown>
                             @set (user = app.users.get())
                             <a href="#" title="@user.username">@gravatar(user.email, ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => user.username]])</a>
