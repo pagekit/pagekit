@@ -36,7 +36,7 @@
                 <li>
                     <div>@trans('Access')</div>
                     <div>
-                        <div class="uk-form-select">
+                        <div class="uk-form-select" data-uk-form-select="{target:'button:first'}">
                             @foreach (levels as level)
                                 @if (page.accessId == level.id)
                                 <button class="uk-button uk-button-mini" type="button">@level.name</button>
