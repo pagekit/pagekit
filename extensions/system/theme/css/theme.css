@@ -4960,6 +4960,12 @@ a.uk-thumbnail:focus {
   /* 5 */
   overflow: hidden;
 }
+/*
+ * Remove margin from content
+ */
+.uk-overlay > :first-child {
+  margin-bottom: 0;
+}
 /* Sub-object `uk-overlay-area`
  ========================================================================== */
 /*
@@ -4981,6 +4987,7 @@ a.uk-thumbnail:focus {
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
   -webkit-transform: translate3d(0, 0, 0);
+  border: 1px dashed #ddd;
 }
 /*
  * Hover
