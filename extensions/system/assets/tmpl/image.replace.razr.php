@@ -10,9 +10,11 @@
 
     <div class="uk-overlay-area">
         <div class="uk-overlay-area-content">
-            <div>{{{ alt }}}</div>
-            <button class="uk-button uk-button-primary js-config" type="button">@trans('Settings')</button>
-            <button class="uk-button pk-button-danger js-remove" type="button">@trans('Delete')</button>
+            <h3 class="uk-margin-small-bottom">Image</h2>
+            <div data-uk-margin>
+                <button class="uk-button uk-button-primary js-config" type="button">@trans('Settings')</button>
+                <button class="uk-button pk-button-danger js-remove" type="button">@trans('Delete')</button>
+            </div>
         </div>
     </div>
 </div>
