@@ -7725,14 +7725,6 @@ a.uk-datepicker-table-muted {
   background-size: contain;
   vertical-align: middle;
 }
-/*
- * Sub-modifier `pk-finder-subnav`
- */
-.pk-finder-subnav {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
 /* ========================================================================
    Theme
  ========================================================================== */

@@ -11,12 +11,6 @@
                 <input type="checkbox" class="js-select" data-name="{{ name }}">
                 {{ /writable }}
                 <a href="#" data-cmd="loadPath" data-path="{{ path }}">{{ name }}</a>
-                {{ #writable }}
-                <ul class="uk-subnav pk-subnav-icon pk-finder-subnav uk-hidden">
-                    <li><a class="uk-icon-pencil" data-cmd="rename" data-name="{{ name }}"></a></li>
-                    <li><a class="uk-icon-minus-circle" data-cmd="rename" data-name="{{ name }}"></a></li>
-                </ul>
-                {{ /writable }}
             </div>
         </div>
     </li>
@@ -34,12 +28,6 @@
                 {{ /writable }}
                 {{ name }}
             </div>
-            {{ #writable }}
-            <ul class="uk-subnav pk-subnav-icon pk-finder-subnav uk-hidden">
-                <li><a class="uk-icon-pencil" data-cmd="rename" data-name="{{ name }}"></a></li>
-                <li><a class="uk-icon-minus-circle" data-cmd="remove" data-name="{{ name }}"></a></li>
-            </ul>
-            {{ /writable }}
         </div>
     </li>
     {{ /files }}
