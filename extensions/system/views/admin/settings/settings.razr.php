@@ -4,7 +4,7 @@
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+        <div class="uk-panel pk-panel-marginless">
             <ul class="uk-nav uk-nav-side" data-tabs="@tab">
                 <li><a href="#">@trans('Site')</a></li>
                 <li><a href="#">@trans('Email')</a></li>
@@ -15,6 +15,11 @@
 
     </div>
     <div class="uk-width-medium-3-4">
+
+        <div class="pk-options">
+            <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
+            <a class="uk-button" href="@url.route('@system/system/index')">@trans('Close')</a>
+        </div>
 
         <ul id="tab-content" class="uk-switcher uk-margin">
             <li>
@@ -234,13 +239,9 @@
             </li>
         </ul>
 
-        <p>
-            <input type="hidden" name="tab" value="0">
-            <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-            <a class="uk-button" href="@url.route('@system/system/index')">@trans('Close')</a>
-        </p>
-
     </div>
+
+    <input type="hidden" name="tab" value="0">
 
     @token()
 

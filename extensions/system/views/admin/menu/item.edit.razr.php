@@ -2,6 +2,11 @@
 
 <form class="js-item-edit uk-form uk-form-horizontal" action="@url.route('@system/item/save')" data-item-id="@item.id" method="post">
 
+    <div class="pk-options">
+        <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
+        <a class="uk-button" href="@url.route('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
+    </div>
+
     <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-link">@trans('Please choose a link.')</p>
 
     <div class="uk-form-row">
@@ -45,10 +50,5 @@
     <input type="hidden" name="menu" value="@(menu.id ?: item.menuId)">
 
     @token()
-
-    <p>
-        <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
-    </p>
 
 </form>

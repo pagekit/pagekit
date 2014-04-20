@@ -7391,10 +7391,10 @@ a.uk-datepicker-table-muted {
   .pk-sidebar-right .pk-panel-marginless {
     margin-left: -25px;
   }
-  .pk-sidebar-left .uk-panel + .uk-panel-divider:before {
+  .pk-sidebar-left .uk-panel + .uk-panel-divider:not(.pk-panel-marginless):before {
     right: -25px;
   }
-  .pk-sidebar-right .uk-panel + .uk-panel-divider:before {
+  .pk-sidebar-right .uk-panel + .uk-panel-divider:not(.pk-panel-marginless):before {
     left: -25px;
   }
 }

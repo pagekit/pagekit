@@ -2,12 +2,12 @@
     <div class="uk-float-left js-finder-toolbar-left">
 
         {{ #writable }}
-        <button class="uk-button" data-cmd="createFolder">@trans('New Folder')</button>
-
-        <button class="uk-button uk-form-file">
+        <button class="uk-button uk-button-primary uk-form-file">
             @trans('Upload')
             <input type="file" name="files[]" multiple="multiple">
         </button>
+
+        <button class="uk-button" data-cmd="createFolder">@trans('Add Folder')</button>
 
         <button class="uk-button pk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
         {{ /writable }}
