@@ -6,6 +6,11 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
     var slug  = $('input[name="page[slug]"]', form),
         title = $('input[name="page[title]"]', form);
 
+    var slugpreview = $('.js-slug').on('click', function(){
+        slugpreview.addClass('uk-hidden');
+        slug.removeClass('uk-hidden');
+    });
+
     title.on('blur', function () {
         if (!(id.val()-0)) slug.val('');
         slug.trigger('blur');
