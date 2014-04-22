@@ -83,7 +83,7 @@ define(['jquery', 'require'], function($, req) {
 
     Link.defaults = {
         filter: [],
-        url   : req.toUrl('admin/system/link'),
+        url   : req.toUrl('index.php/admin/system/link'),
         value : ''
     };
 

@@ -53,7 +53,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
     };
 
     LinkPicker.defaults = {
-        url    : req.toUrl('admin/system/link/resolve'),
+        url    : req.toUrl('index.php/admin/system/link/resolve'),
         filter : [],
         context: ''
     };
