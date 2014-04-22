@@ -37,11 +37,7 @@
                     <div>@trans('Access')</div>
                     <div>
                         <div class="uk-form-select" data-uk-form-select="{target:'button:first'}">
-                            @foreach (levels as level)
-                                @if (page.accessId == level.id)
-                                <button class="uk-button uk-button-mini" type="button">@level.name</button>
-                                @endif
-                            @endforeach
+                            <button class="uk-button uk-button-mini" type="button">...</button>
                             <select name="page[access_id]">
                                 @foreach (levels as level)
                                 <option value="@level.id"@(page.accessId == level.id ? ' selected' : '')>@level.name</option>
@@ -51,10 +47,10 @@
                     </div>
                 </li>
                 <li>
-                    <div>@trans('Editor')</div>
+                    <div>@trans('Markdown')</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('HTML')</button>
-                        <button class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Markdown')</button>
+                        <button class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('No')</button>
+                        <button class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Yes')</button>
                         <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
                     </div>
                 </li>
