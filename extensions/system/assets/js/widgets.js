@@ -54,6 +54,26 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
             applyFilters();
         });
 
+
+    // check for empty positions
+    try{
+
+        var lists    =  form.find('ul.uk-sortable'),
+            observer = new uikit.support.mutationobserver(function(mutations) {
+                lists.each(function(){
+                    var list = $(this);
+                    if (!list.children().length) {
+                        list.append('<li class="uk-sortable-empty"></li>');
+                    }
+                });
+            });
+
+        // pass in the target node, as well as the observer options
+        observer.observe(form[0], { childList: true, subtree: true });
+
+    } catch(e) {}
+
+
     var positions = $('.js-position').each(function() {
 
         var ele = $(this);

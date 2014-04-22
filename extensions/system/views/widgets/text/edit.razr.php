@@ -1,11 +1,9 @@
 <div class="uk-form-row">
     <span class="uk-form-label">@trans('Markdown')</span>
     <div class="uk-form-controls uk-form-controls-text">
-        <p class="uk-form-controls-condensed">
-            <button class="uk-button uk-button-mini js-markdown  @(widget.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Disabled')</button>
-            <button class="uk-button uk-button-mini js-markdown  @(!widget.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Enabled')</button>
-            <input type="hidden" name="widget[settings][markdown]" value="@widget.get('markdown', '0')">
-        </p>
+        <button class="uk-button uk-button-mini js-markdown  @(widget.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Disabled')</button>
+        <button class="uk-button uk-button-mini js-markdown  @(!widget.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Enabled')</button>
+        <input type="hidden" name="widget[settings][markdown]" value="@widget.get('markdown', '0')">
     </div>
 </div>
 

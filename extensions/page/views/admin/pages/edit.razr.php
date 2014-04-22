@@ -12,7 +12,7 @@
             <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
             <input type="hidden" name="id" value="@(page.id ?: 0)">
             <div class="uk-text-muted uk-margin-small-top">
-                <span class="uk-visible-hover-inline js-slug">@(page.slug ?: '...') <a class="uk-invisible uk-icon-pencil"></a></span>
+                <span class="uk-visible-hover-inline js-slug">@(page.slug ?: '') <a class="uk-invisible uk-icon-pencil"></a></span>
                 <input class="uk-form-width-medium uk-form-small uk-hidden" type="text" name="page[slug]" value="@page.slug">
             </div>
         </div>
