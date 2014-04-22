@@ -114,7 +114,7 @@ class WidgetsController extends Controller
                 $widget = new Widget;
             }
 
-            $data['settings']['show_title'] = isset($data['settings']['show_title']);
+            $data['settings']['show_title'] = isset($data['settings']['show_title']) ? $data['settings']['show_title'] : 1;
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
 
             $this->widgets->save($widget, $data);

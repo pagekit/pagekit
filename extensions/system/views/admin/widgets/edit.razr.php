@@ -121,9 +121,9 @@
                 <li>
                     <div>@trans('Title')</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-title @(widget.showTitle ? 'uk-hidden':'')" type="button" data-value="0">@trans('Hide')</button>
-                        <button class="uk-button uk-button-mini js-title @(!widget.showTitle ? 'uk-hidden':'')" type="button" data-value="1">@trans('Show')</button>
-                        <input type="hidden" name="widget[settings][show_title]" value="@widget.showTitle">
+                        <button class="uk-button uk-button-mini js-title @(widget.get('show_title') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Hide')</button>
+                        <button class="uk-button uk-button-mini js-title @(!widget.get('show_title') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Show')</button>
+                        <input type="hidden" name="widget[settings][show_title]" value="@widget.get('show_title', '1')">
                     </div>
                 </li>
 
