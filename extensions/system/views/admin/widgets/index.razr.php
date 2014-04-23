@@ -33,8 +33,6 @@
         </div>
         <div class="uk-float-right">
 
-            <input id="filter-title" type="text" name="filter[search]" placeholder="@trans('Search')" value="">
-
             <select id="filter-status" name="filter[status]" data-filter="status">
                 <option value="">@trans('- Status -')</option>
                 <option value="@constant('Pagekit\\Widget\\Model\\WidgetInterface::STATUS_ENABLED')">@trans('Enabled')</option>
@@ -54,6 +52,8 @@
                 <option value="@type.id">@type.name</option>
                 @endforeach
             </select>
+
+            <input id="filter-title" type="text" name="filter[search]" placeholder="@trans('Search')" value="">
 
         </div>
     </div>

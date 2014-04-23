@@ -21,8 +21,6 @@
         </div>
         <div class="uk-float-right">
 
-            <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@filter['search']">
-
             <select name="filter[status]">
 
                 <option value="">@trans('- Status -')</option>
@@ -48,6 +46,8 @@
                 </optgroup>
                 @endforeach
             </select>
+
+            <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@filter['search']">
 
         </div>
     </div>

@@ -23,14 +23,14 @@
         </div>
         <div class="uk-float-right">
 
-            <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@filter['search']">
-
             <select name="filter[status]">
                 <option value="">@trans('- Status -')</option>
                 @foreach (statuses as id => status)
                 <option value="@id"@(filter['status']|length && filter['status'] == id ? ' selected')>@status</option>
                 @endforeach
             </select>
+
+            <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@filter['search']">
 
         </div>
     </div>
