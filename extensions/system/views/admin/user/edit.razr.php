@@ -31,7 +31,7 @@
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">@trans('Username')</label>
                 <div class="uk-form-controls">
-                    <input id="form-username" class="uk-form-width-large" type="text" name="user[username]" value="@user.username" required>
+                    <input id="form-username" class="uk-form-width-large" type="text" name="user[username]" value="@user.username" pattern="[a-zA-Z0-9_\-]+" required>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
     </div>
 
     <input type="hidden" name="id" value="@(user.id ?: 0)">
-    
+
     @token()
 
 </form>

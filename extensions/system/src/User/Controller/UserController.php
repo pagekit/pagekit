@@ -148,8 +148,8 @@ class UserController extends Controller
             $name  = trim(@$data['username']);
             $email = trim(@$data['email']);
 
-            if (strlen($name) < 3) {
-                throw new Exception(__('Name is invalid.'));
+            if (strlen($name) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $name)) {
+                throw new Exception(__('Username is invalid.'));
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
