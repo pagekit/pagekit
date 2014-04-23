@@ -147,6 +147,54 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
             label: '<i class="uk-icon-video-camera"></i>',
             action: function(editor) {
 
+                var text = editor.getSelection();
+
+                if (!text.length) {
+
+                    var cur     = editor.getCursor(),
+                        curLine = editor.getLine(cur.line),
+                        start   = cur.ch,
+                        end     = start;
+
+                    while (end < curLine.length && curLine.charAt(start - 1)!='}') {
+                        ++end;
+                    }
+                    while (start && curLine.slice(start-1, start+7)!='(video){') {
+                        --start;
+                    }
+
+                    var curWord = start != end && curLine.slice(start-1, end);
+
+                    if(curWord && curWord.match(/\(video\)\{(.+?)\}/gim)) {
+
+                        var data = { src: '' };
+
+                        try {
+                            data = $.extend(data, (new Function('', 'var json = ' + curWord.replace('(video)', '') + '; return JSON.parse(JSON.stringify(json));'))());
+                        } catch (e) {}
+
+                        VideoPopup.video.val(data.src);
+                        VideoPopup.updatePreview(VideoPopup.video.val());
+                        VideoPopup.goto('settings');
+                        VideoPopup.getPicker().show();
+
+                        setTimeout(function() {
+                            VideoPopup.video.focus();
+                        }, 10);
+
+                        VideoPopup.handler = function() {
+                            VideoPopup.getPicker().hide();
+                            editor.setSelection({"line": cur.line, "ch":start-1}, {"line": cur.line, "ch":end});
+                            editor.replaceSelection('(video)' + JSON.stringify({ src: VideoPopup.video.val() }), 'end');
+                            editor.setCursor({"line":cur.line, "ch":cur.ch});
+                            editor.focus();
+                        };
+
+                        VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
+                        return;
+                    }
+                }
+
                 VideoPopup.handler = function() {
                     VideoPopup.getPicker().hide();
                     editor.replaceSelection('(video)' + JSON.stringify({ src: VideoPopup.video.val() }), 'end');
