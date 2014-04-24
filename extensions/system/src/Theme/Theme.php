@@ -52,13 +52,13 @@ class Theme extends ApplicationAware
 
         $app->on('init', function() use ($app, $self) {
             $self->registerLanguages($app['translator']);
-
-            $self->config += $app['option']->get("{$self->getName()}:config", array());
         });
 
         $app->on('site.init', function() use ($app, $self) {
             $self->registerResources($app['locator']);
         });
+
+        $this->config += $app['option']->get("{$this->name}:config", array());
     }
 
     /**
