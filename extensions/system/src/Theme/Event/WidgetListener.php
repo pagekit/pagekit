@@ -46,9 +46,9 @@ class WidgetListener extends EventSubscriber
 
     public function onSiteInit()
     {
-        $this('events')->on('system.widget.postLoad', function(EntityEvent $event) {
+        $settings = $this->getSettings();
+        $this('events')->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
             $widget = $event->getEntity();
-            $settings = $this->getSettings();
             $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
         });
     }
