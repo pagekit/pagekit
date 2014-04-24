@@ -5,11 +5,7 @@
 
     @else
 
-    <ul class="uk-navbar-nav uk-visible-large">
-        <li class="uk-parent" data-uk-dropdown>
-            <a href="#">@widget.title</a>
-            <div class="uk-dropdown uk-dropdown-navbar">@provider.render(widget, options)</div>
-        </li>
-    </ul>
+    @include('theme://alpha/views/renderer/position.panel.razr.php')
+
     @endif
 @endforeach
