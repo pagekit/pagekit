@@ -28,7 +28,9 @@
                     @position.render('navbar', ['renderer' => 'navbar', 'classes' => 'uk-hidden-small'])
                 </nav>
 
+                @if (position.exists('offcanvas'))
                 <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+                @endif
 
                 @if (position.exists('logo-small'))
                 <div class="uk-navbar-content uk-navbar-center uk-visible-small">
