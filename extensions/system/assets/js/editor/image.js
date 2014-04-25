@@ -143,17 +143,20 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'
                         return false;
                     }
 
-                    var img = $(data.matches[0]);
+                    var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
+                        matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
 
-                    data['src'] = img.attr('src') || '';
-                    data['alt'] = img.attr('alt') || '';
+                    data['src'] = matchesSrc ? matchesSrc[1] : '';
+                    data['alt'] = matchesAlt ? matchesAlt[1] : '';
                     data['handler'] = function() {
                         ImagePopup.getPicker().hide();
 
-                        img.attr('src', ImagePopup.image.val());
-                        img.attr('alt', ImagePopup.title.val());
+                        var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
 
-                        data.replace(img[0].outerHTML);
+                        output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
+                        output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
+
+                        data.replace(output);
                     };
 
                 } else {
