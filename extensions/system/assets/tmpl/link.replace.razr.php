@@ -1,1 +1,1 @@
-<a id="{{ marker.uid }}" class="{{#class}}{{class}}{{/class}}" href="{{ link }}">{{#txt}}{{{txt}}}{{/txt}}{{^txt}}@trans('Choose Link'){{/txt}} <span class="uk-icon-pencil"></span></a>
+<a class="js-editor-link {{#class}}{{class}}{{/class}}" href="{{ link }}">{{#txt}}{{{txt}}}{{/txt}}{{^txt}}@trans('Choose Link'){{/txt}} <span class="uk-icon-pencil"></span></a>

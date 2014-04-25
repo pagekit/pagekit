@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
+define(['jquery', 'tmpl!video.modal,video.replace', 'uikit!htmleditor', 'finder'], function($, tmpl, uikit, Finder) {
 
     var VideoPopup = {
 
@@ -133,124 +133,92 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'finder'], function
         return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
     }
 
-    return function(htmleditor, options, editors) {
+    function openVideoModal(data, rootpath) {
+
+        VideoPopup.video.val(data.src);
+        VideoPopup.updatePreview(VideoPopup.video.val());
+        VideoPopup.goto('settings');
+        VideoPopup.getPicker().show();
+
+        setTimeout(function() {
+            VideoPopup.video.focus();
+        }, 10);
+
+        VideoPopup.handler = function() {
+            VideoPopup.getPicker().hide();
+
+            data.replace('(video)' + JSON.stringify({ src: VideoPopup.video.val() }));
+        };
+
+        VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
+    }
+
+    uikit.htmleditor.addPlugin('video', function(editor) {
+
+        var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
 
         VideoPopup.init(options);
 
-        editors = editors || [];
-
-        var rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/';
-
         // videos
-        htmleditor.commands.video = {
+        editor.addButton('video', {
             title: 'Video',
             label: '<i class="uk-icon-video-camera"></i>',
             action: function(editor) {
 
-                var text = editor.getSelection();
-
-                if (!text.length) {
-
-                    var cur     = editor.getCursor(),
-                        curLine = editor.getLine(cur.line),
-                        start   = cur.ch,
-                        end     = start;
-
-                    while (end < curLine.length && curLine.charAt(start - 1)!='}') {
-                        ++end;
+                var cursor = editor.getCursor(), data;
+                videos.forEach(function(video) {
+                    if (video.inRange(cursor)) {
+                        data = video;
+                        return false;
                     }
-                    while (start && curLine.slice(start-1, start+7)!='(video){') {
-                        --start;
-                    }
+                });
 
-                    var curWord = start != end && curLine.slice(start-1, end);
-
-                    if(curWord && curWord.match(/\(video\)\{(.+?)\}/gim)) {
-
-                        var data = { src: '' };
-
-                        try {
-                            data = $.extend(data, (new Function('', 'var json = ' + curWord.replace('(video)', '') + '; return JSON.parse(JSON.stringify(json));'))());
-                        } catch (e) {}
-
-                        VideoPopup.video.val(data.src);
-                        VideoPopup.updatePreview(VideoPopup.video.val());
-                        VideoPopup.goto('settings');
-                        VideoPopup.getPicker().show();
-
-                        setTimeout(function() {
-                            VideoPopup.video.focus();
-                        }, 10);
-
-                        VideoPopup.handler = function() {
-                            VideoPopup.getPicker().hide();
-                            editor.setSelection({"line": cur.line, "ch":start-1}, {"line": cur.line, "ch":end});
-                            editor.replaceSelection('(video)' + JSON.stringify({ src: VideoPopup.video.val() }), 'end');
-                            editor.setCursor({"line":cur.line, "ch":cur.ch});
-                            editor.focus();
-                        };
-
-                        VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-                        return;
-                    }
+                if (!data) {
+                    data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
                 }
 
-                VideoPopup.handler = function() {
-                    VideoPopup.getPicker().hide();
-                    editor.replaceSelection('(video)' + JSON.stringify({ src: VideoPopup.video.val() }), 'end');
-                };
-
-                VideoPopup.video.val('');
-                VideoPopup.updatePreview(VideoPopup.video.val());
-                VideoPopup.goto('settings');
-                VideoPopup.getPicker().show();
-                VideoPopup.finder.loadPath();
-
-                setTimeout(function() {
-                    VideoPopup.video.focus();
-                }, 10);
+                openVideoModal(data, rootpath);
             }
-        };
-
-        htmleditor.defaults.toolbar.push('video');
-
-        htmleditor.addPlugin('videos', /\(video\)\{(.+?)\}/gim, function(marker) {
-
-            var data = { src: '' };
-
-            try {
-                data = $.extend(data, (new Function('', 'var json = {' + marker.found[1] + '}; return JSON.parse(JSON.stringify(json));'))());
-            } catch (e) {}
-
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
-
-                VideoPopup.video.val(data.src);
-                VideoPopup.updatePreview(VideoPopup.video.val());
-                VideoPopup.goto('settings');
-                VideoPopup.getPicker().show();
-
-                setTimeout(function() {
-                    VideoPopup.video.focus();
-                }, 10);
-
-                VideoPopup.handler = function() {
-                    VideoPopup.getPicker().hide();
-                    marker.replace('(video)' + JSON.stringify({ src: VideoPopup.video.val() }));
-                };
-
-                VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-            });
-
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
-                marker.replace('');
-            });
-
-            return tmpl.render('video.replace', { marker: marker, preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
-        editors.forEach(function(editor) {
-            editor.options.toolbar.push('video');
-            editor.options.plugins.push('videos');
+        editor.element.on('action.video', function(e, editor) {
+
+            var cursor = editor.getCursor(), data;
+            videos.forEach(function(video) {
+                if (video.inRange(cursor)) {
+                    data = video;
+                    return false;
+                }
+            });
+
+            if (!data) {
+                data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
+            }
+
+            openVideoModal(data, rootpath);
         });
-    };
+
+        editor.options.toolbar.push('video');
+
+        editor.element.on('render', function() {
+
+            videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, function(data) {
+
+                $.extend(data, ($.parseJSON(data.matches[1]) || { src: '' }));
+
+                return tmpl.render('video.replace', { preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
+
+            });
+        });
+
+        editor.preview.on('click', '.js-editor-video .js-config', function() {
+            openVideoModal(videos[editor.preview.find('.js-editor-video .js-config').index(this)], rootpath);
+        });
+
+        editor.preview.on('click', '.js-editor-video .js-remove', function() {
+            videos[editor.preview.find('.js-editor-video .js-remove').index(this)].replace('');
+        });
+    });
+
+    return uikit.htmleditor;
 });

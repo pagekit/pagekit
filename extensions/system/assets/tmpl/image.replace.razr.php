@@ -1,4 +1,4 @@
-<div id="{{ marker.uid }}" class="uk-overlay uk-display-block">
+<div class="js-editor-image uk-overlay uk-display-block">
     {{#src}}
       <img src="{{{ src }}}" alt="{{{ alt }}}">
     {{/src}}
@@ -10,7 +10,7 @@
 
     <div class="uk-overlay-area">
         <div class="uk-overlay-area-content">
-            <h3 class="uk-margin-small-bottom">Image</h2>
+            <h3 class="uk-margin-small-bottom">Image</h3>
             <div data-uk-margin>
                 <button class="uk-button uk-button-primary js-config" type="button">@trans('Settings')</button>
                 <button class="uk-button pk-button-danger js-remove" type="button">@trans('Delete')</button>

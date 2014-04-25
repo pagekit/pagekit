@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function($, tmpl, uikit, Finder) {
+define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'], function($, tmpl, uikit, Finder) {
 
     var ImagePopup = {
 
@@ -107,126 +107,113 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'finder'], function
 
     };
 
-    return function(htmleditor, options, editors) {
+    function openImageModal(data, rootpath) {
+
+        ImagePopup.handler = data.handler;
+
+        ImagePopup.title.val(data.alt);
+        ImagePopup.image.val(data.src);
+
+        //load finder in image dir
+
+        ImagePopup.updatePreview(ImagePopup.image.val());
+        ImagePopup.goto('settings');
+        ImagePopup.getPicker().show();
+
+        ImagePopup.finder.loadPath(data.src.trim && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
+
+        setTimeout(function() { ImagePopup.title.focus(); }, 10);
+    }
+
+    uikit.htmleditor.addPlugin('image', function(editor) {
+
+        var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
 
         ImagePopup.init(options);
 
-        editors = editors || [];
+        editor.element.on('render', function() {
 
-        var rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/';
+            var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
 
-        htmleditor.addPlugin('htmlimages', /<img(.+?)>/gim, function(marker) {
+            images = editor.replaceInPreview(regexp, function(data) {
 
-            var attrs = { src: '', alt: '' }, img;
+                if (data.matches[0][0] == '<') {
 
-            if (marker.found[0].match(/js\-no\-parse/)) {
-                return marker.found[0];
-            }
+                    if (data.matches[0].match(/js\-no\-parse/)) {
+                        return false;
+                    }
 
-            img = $(marker.found[0]);
+                    var img = $(data.matches[0]);
 
-            attrs.src = img.attr('src') || '';
-            attrs.alt = img.attr('alt') || '';
+                    data['src'] = img.attr('src') || '';
+                    data['alt'] = img.attr('alt') || '';
+                    data['handler'] = function() {
+                        ImagePopup.getPicker().hide();
 
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
+                        img.attr('src', ImagePopup.image.val());
+                        img.attr('alt', ImagePopup.title.val());
 
-                ImagePopup.title.val(attrs.alt);
-                ImagePopup.image.val(attrs.src);
+                        data.replace(img[0].outerHTML);
+                    };
 
-                ImagePopup.updatePreview(ImagePopup.image.val());
-                ImagePopup.goto('settings');
-                ImagePopup.getPicker().show();
-
-                //load finder in image dir
-                ImagePopup.finder.loadPath(attrs.src.trim() && attrs.src.indexOf(rootpath) === 0 ? attrs.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-
-                setTimeout(function() { ImagePopup.title.focus(); }, 10);
-
-                ImagePopup.handler = function() {
-                    ImagePopup.getPicker().hide();
-                    img.attr('src', ImagePopup.image.val());
-                    img.attr('alt', ImagePopup.title.val());
-                    marker.replace(img[0].outerHTML);
-                };
-            });
-
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
-                marker.replace('');
-            });
-
-            return tmpl.render('image.replace', { marker: marker, src: ((attrs.src.trim() && 'http://' !== attrs.src.trim()) ? attrs.src : false), alt: attrs.alt  }).replace(/(\r\n|\n|\r)/gm, '');
-        });
-
-
-        htmleditor.addPlugin('images', /(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim, function(marker) {
-
-            if (marker.editor.editor.options.mode != 'gfm') {
-                return marker.found[0];
-            }
-
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-config', function() {
-
-                ImagePopup.title.val(marker.found[2]);
-                ImagePopup.image.val(marker.found[3]);
-
-                //load finder in image dir
-
-                ImagePopup.updatePreview(ImagePopup.image.val());
-                ImagePopup.goto('settings');
-                ImagePopup.getPicker().show();
-
-                ImagePopup.finder.loadPath(marker.found[3].trim() && marker.found[3].indexOf(rootpath) === 0 ? marker.found[3].replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-
-                setTimeout(function() { ImagePopup.title.focus(); }, 10);
-
-                ImagePopup.handler = function() {
-                    ImagePopup.getPicker().hide();
-                    marker.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
-                };
-            });
-
-            marker.editor.preview.on('click', '#' + marker.uid + ' .js-remove', function() {
-                marker.replace('');
-            });
-
-            return tmpl.render('image.replace', { marker: marker, src: ((marker.found[3] && 'http://' !== marker.found[3].trim()) ? marker.found[3] : false), alt: marker.found[2] }).replace(/(\r\n|\n|\r)/gm, '');
-        });
-
-        // override default image toolbar command
-        htmleditor.commands.picture.action = function(editor) {
-
-            var $this = this;
-
-            ImagePopup.handler = function() {
-
-                var repl;
-
-                ImagePopup.getPicker().hide();
-
-                if($this.getMode() == 'html') {
-                    repl = '<img src="' + ImagePopup.image.val() + '" alt="' + ImagePopup.title.val() + '">';
                 } else {
-                    repl = '![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')';
+
+                    data['src'] = data.matches[3].trim();
+                    data['alt'] = data.matches[2];
+                    data['handler'] = function() {
+                        ImagePopup.getPicker().hide();
+                        data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
+                    };
+
                 }
 
-                editor.replaceSelection(repl, 'end');
-            };
+                return tmpl.render('image.replace', { src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
 
-            ImagePopup.image.val('');
-            ImagePopup.updatePreview(ImagePopup.image.val());
-            ImagePopup.goto('settings');
-            ImagePopup.getPicker().show();
-            ImagePopup.finder.loadPath();
-
-            setTimeout(function() {
-                ImagePopup.image.focus();
-            }, 10);
-        };
-
-        editors.forEach(function(editor) {
-            editor.options.plugins.push('htmlimages');
-            editor.options.plugins.push('images');
+            });
         });
 
-    };
+        editor.preview.on('click', '.js-editor-image .js-config', function() {
+            openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
+        });
+
+        editor.preview.on('click', '.js-editor-image .js-remove', function() {
+            images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
+        });
+
+        editor.element.off('action.picture');
+        editor.element.on('action.picture', function() {
+
+            var cursor = editor.editor.getCursor(), data;
+            images.forEach(function(image) {
+                if (image.inRange(cursor)) {
+                    data = image;
+                    return false;
+                }
+            });
+
+            if (!data) {
+                data = {
+                    src: '',
+                    alt: '',
+                    handler: function() {
+
+                        var repl;
+
+                        ImagePopup.getPicker().hide();
+
+                        if (editor.getCursorMode() == 'html') {
+                            repl = '<img src="' + ImagePopup.image.val() + '" alt="' + ImagePopup.title.val() + '">';
+                        } else {
+                            repl = '![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')';
+                        }
+
+                        editor.editor.replaceSelection(repl, 'end');
+                    },
+                    replace: function(value) { editor.editor.replaceRange(value, cursor); }
+                };
+            }
+
+            openImageModal(data, rootpath);
+        });
+    });
 });

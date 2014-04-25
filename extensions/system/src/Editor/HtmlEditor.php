@@ -14,6 +14,11 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
     protected $plugins = array();
 
     /**
+     * @var array
+     */
+    protected $attributes = array();
+
+    /**
      * @return array
      */
     public function getPlugins()
@@ -48,23 +53,45 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
     }
 
     /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array $attributes
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * @param array $attribute
+     */
+    public function addAttribute($attribute)
+    {
+        $this->attributes = array_merge($this->attributes, $attribute);
+    }
+
+    /**
      * {@inheritdoc}
-     *
-     * TODO: refactor finder options
      */
     public function render($value, array $attributes = array())
     {
-        $this('view.scripts')->queue(
-            'editor.markdown', 'extension://system/assets/js/editor/markdown.js', 'requirejs',
-            array(
-                'data-plugins' => json_encode(array_values($this->getPlugins())),
-                'data-finder'  => json_encode(array('root' => $this('config')->get('app.storage'), 'mode' => 'write', 'hash' => $this('finder')->getToken($this('config')->get('app.storage'), 'write')))
-            )
-        );
+        $this('view.scripts')->queue('editor.markdown', 'extension://system/assets/js/editor/editor.html.js', 'requirejs', array(
+            'data-plugins' => json_encode(array_values($this->getPlugins()))
+        ));
 
-        $attributes = array_merge(array('data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;'), $attributes);
+        $this->addAttribute(array(
+            'data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
+            'data-plugins' => json_encode(array_keys($this->getPlugins())),
+            'data-finder' => json_encode(array('root' => $this('config')->get('app.storage'), 'mode' => 'write', 'hash' => $this('finder')->getToken($this('config')->get('app.storage'), 'write')))
+        ));
 
-        return sprintf('<textarea%s>%s</textarea>', $this->getAttributes($attributes), htmlspecialchars($value));
+        return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(array_merge($this->attributes, $attributes)), htmlspecialchars($value));
     }
 
     /**
@@ -73,7 +100,7 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
      * @param  array $attributes
      * @return string
      */
-    protected function getAttributes($attributes)
+    protected function parseAttributes($attributes)
     {
         $html = '';
 
@@ -98,6 +125,7 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
         $this->addPlugin('link', 'extensions/system/assets/js/editor/link');
         $this->addPlugin('video', 'extensions/system/assets/js/editor/video');
         $this->addPlugin('image', 'extensions/system/assets/js/editor/image');
+        $this->addPlugin('urlresolver', 'extensions/system/assets/js/editor/urlresolver');
     }
 
     /**

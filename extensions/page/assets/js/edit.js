@@ -27,7 +27,6 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     statuses.eq(status.val()).removeClass('uk-hidden');
 
-
     // markdown status handling
     var markdownStatus   = $('input[name="page[data][markdown]"]'),
         markdownStatuses = $('.js-markdown').on('click', function(e){

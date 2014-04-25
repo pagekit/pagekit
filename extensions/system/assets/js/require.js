@@ -29,7 +29,7 @@ var require = (function(win, doc) {
                         'link':            'extensions/system/assets/js/link.js?ver=' + vers,
                         'linkpicker':      'extensions/system/assets/js/linkpicker.js?ver=' + vers,
                         'locale':          'extensions/system/assets/js/locale.js?ver=' + vers,
-                        'editor.markdown': 'extensions/system/assets/js/editor.markdown?ver=' + vers
+                        'editor.html':     'extensions/system/assets/js/editor/editor.html.js?ver=' + vers
                     },
                     shim: {
                         'uikit': {
@@ -41,7 +41,7 @@ var require = (function(win, doc) {
                         'htmleditor': {
                             deps: ['uikit', 'marked', 'codemirror']
                         },
-                        'editor.markdown': {
+                        'editor.html': {
                             deps: ['htmleditor']
                         }
                     },

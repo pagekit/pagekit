@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, tmpl, uikit, Link) {
+define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], function($, tmpl, uikit, Link) {
 
     var modal  = $(tmpl.get('link.modal')).appendTo('body'),
         picker = new uikit.modal.Modal(modal),
@@ -9,71 +9,64 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'link'], function($, 
         handler();
     });
 
-    return function(htmleditor, options, editors) {
+    uikit.htmleditor.addPlugin('link', function(editor) {
 
-        editors = editors || [];
+        var links = [];
 
-        htmleditor.addPlugin('htmlurls', /<a(.+?)>([^<]*)<\/a>/gim, function(marker) {
+        editor.element.on('render', function() {
 
-            var anchor = $(marker.found[0]), txt = anchor.html() || "", href = anchor.attr('href') || "";
+            var regexp = editor.getMode() != 'gfm' ? /<a(?:.+?)>(?:[^<]*)<\/a>/gi : /<a(?:.+?)>(?:[^<]*)<\/a>|(^|[^!])(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
 
-            marker.editor.preview.on('click', '#' + marker.uid, function(e) {
+            links = editor.replaceInPreview(regexp, function(data) {
 
-                e.preventDefault();
+                var pre = '';
 
-                handler = function() {
-                    picker.hide();
+                if (data.matches[0][0] == '<') {
 
-                    anchor.attr("href", link.get());
-                    anchor.html(title.val());
+                    var anchor = $(data.matches[0]);
 
-                    marker.replace(anchor[0].outerHTML);
-                };
+                    data['link']    = anchor.attr('href');
+                    data['txt']     = anchor.html();
+                    data['class']   = anchor.attr('class') || '';
+                    data['handler'] = function() {
+                        picker.hide();
 
-                title.val(txt);
-                picker.show();
-                setTimeout(function() { title.focus(); }, 10);
+                        anchor.attr('href', link.get());
+                        anchor.html(title.val());
 
-                link = Link.attach(modal.find('.js-linkpicker'), { value: href })
+                        data.replace(anchor[0].outerHTML);
+                    };
+
+                } else {
+
+                    pre = data.matches[1];
+                    data['link']    = data.matches[3].trim();
+                    data['txt']     = data.matches[2].trim();
+                    data['class']   = '';
+                    data['handler'] = function() {
+                        picker.hide();
+
+                        data.replace(pre + '[' + title.val() + '](' + link.get() + ')');
+                    };
+                }
+
+                return pre + tmpl.render('link.replace', { link: data['link'], txt: data['txt'], class: data['class']  }).replace(/(\r\n|\n|\r)/gm, '');
+
             });
-
-            return tmpl.render('link.replace', { marker: marker, link: href.trim() ? href : null, txt:  txt.trim() ? txt : null, "class": anchor.attr("class") || ""  }).replace(/(\r\n|\n|\r)/gm, '');
         });
 
+        editor.preview.on('click', '.js-editor-link', function(e) {
+            e.preventDefault();
 
-        htmleditor.addPlugin('urls', /(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gim, function(marker) {
+            var data = links[editor.preview.find('.js-editor-link').index(this)];
 
-            if(marker.editor.editor.options.mode != "gfm") {
-                return marker.found[0];
-            }
+            handler = data.handler;
 
-            if (marker.found[4] && marker.found[4].indexOf("!"+marker.found[0])!=-1) {
-                return marker.found[0];
-            }
+            title.val(data.txt);
+            picker.show();
+            setTimeout(function() { title.focus(); }, 10);
 
-            marker.editor.preview.on('click', '#' + marker.uid, function(e) {
-
-                e.preventDefault();
-
-                handler = function() {
-                    picker.hide();
-
-                    marker.replace('[' + title.val() + '](' + link.get() + ')');
-                };
-
-                title.val(marker.found[1]);
-                picker.show();
-                setTimeout(function() { title.focus(); }, 10);
-
-                link = Link.attach(modal.find('.js-linkpicker'), { value: marker.found[2] })
-            });
-
-            return tmpl.render('link.replace', { marker: marker, link: marker.found[2].trim() ? marker.found[2] : null, txt:  marker.found[1].trim() ? marker.found[1] : null }).replace(/(\r\n|\n|\r)/gm, '');
+            link = Link.attach(modal.find('.js-linkpicker'), { value: data.link })
         });
-
-        editors.forEach(function(editor) {
-            editor.options.plugins.push('htmlurls');
-            editor.options.plugins.push('urls');
-        });
-    };
+    });
 });

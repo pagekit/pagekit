@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="uk-form-row">
-            @editor('page[content]', page.content, ['id' => 'page-content', 'markdown' => page.get('markdown', '0') ])
+            @editor('page[content]', page.content, ['id' => 'page-content', 'data-markdown' => page.get('markdown', '0') ])
         </div>
 
     </div>

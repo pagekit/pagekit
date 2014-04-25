@@ -1,4 +1,4 @@
-<div id="{{ marker.uid }}" class="uk-overlay uk-display-block">
+<div class="js-editor-video uk-overlay uk-display-block">
     {{ #src }}
       {{{ preview }}}
     {{ /src }}
