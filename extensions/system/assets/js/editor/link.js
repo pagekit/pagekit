@@ -9,6 +9,16 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
         handler();
     });
 
+    function openLinkModal(data) {
+        handler = data.handler;
+
+        title.val(data.txt);
+        picker.show();
+        setTimeout(function() { title.focus(); }, 10);
+
+        link = Link.attach(modal.find('.js-linkpicker'), { value: data.link });
+    }
+
     uikit.htmleditor.addPlugin('link', function(editor) {
 
         var links = [];
@@ -57,16 +67,25 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
 
         editor.preview.on('click', '.js-editor-link', function(e) {
             e.preventDefault();
+            openLinkModal(links[editor.preview.find('.js-editor-link').index(this)]);
+        });
 
-            var data = links[editor.preview.find('.js-editor-link').index(this)];
+        editor.element.off('action.link');
+        editor.element.on('action.link', function() {
 
-            handler = data.handler;
+            var cursor = editor.editor.getCursor(), data;
+            links.forEach(function(link) {
+                if (link.inRange(cursor)) {
+                    data = link;
+                    return false;
+                }
+            });
 
-            title.val(data.txt);
-            picker.show();
-            setTimeout(function() { title.focus(); }, 10);
-
-            link = Link.attach(modal.find('.js-linkpicker'), { value: data.link })
+            if (data) {
+                openLinkModal(data);
+            } else {
+                editor.replaceSelection(editor.getCursorMode() == 'html' ? '<a href="http://">$1</a>' : '[$1](http://)');
+            }
         });
     });
 });
