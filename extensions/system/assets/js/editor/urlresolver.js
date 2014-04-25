@@ -4,7 +4,7 @@ define(['jquery', 'uikit!htmleditor'], function($, uikit) {
 
     uikit.htmleditor.addPlugin('urlresolver', function(editor) {
 
-        editor.element.on('render', function() {
+        editor.element.on('renderLate', function() {
 
             editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
 
