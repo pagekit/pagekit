@@ -10,13 +10,8 @@ define('editor.html', ['jquery', 'uikit!htmleditor', 'marked', 'codemirror'], fu
 
         attach: function(element, options) {
 
-            var editor = new uikit.htmleditor(element, { marked: marked, CodeMirror: codemirror, markdown: options.markdown, plugins: options.plugins });
+            return new uikit.htmleditor(element, $.extend({}, { marked: marked, CodeMirror: codemirror }, options));
 
-            $(this).on('editor.plugins.loaded', function() {
-                editor.initPlugins();
-            });
-
-            return editor;
         }
 
     }
@@ -29,8 +24,6 @@ require(['jquery', 'editor.html', 'domReady!'], function($, editor) {
         editor.attach(this, $(this).data());
     });
 
-    require($('script[data-plugins]').data('plugins'), function() {
-        $(editor).trigger('editor.plugins.loaded');
-    });
+    require($('script[data-plugins]').data('plugins'), function() {});
 
 });

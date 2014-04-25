@@ -87,7 +87,6 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
 
         $this->addAttribute(array(
             'data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
-            'data-plugins' => json_encode(array_keys($this->getPlugins())),
             'data-finder' => json_encode(array('root' => $this('config')->get('app.storage'), 'mode' => 'write', 'hash' => $this('finder')->getToken($this('config')->get('app.storage'), 'write')))
         ));
 
