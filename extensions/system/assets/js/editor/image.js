@@ -139,9 +139,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'
 
                 if (data.matches[0][0] == '<') {
 
-                    if (data.matches[0].match(/js\-no\-parse/)) {
-                        return false;
-                    }
+                    if (data.matches[0].match(/js\-no\-parse/)) return false;
 
                     var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
                         matchesAlt = data.matches[0].match(/\salt="(.*?)"/);

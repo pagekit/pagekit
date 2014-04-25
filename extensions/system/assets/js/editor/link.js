@@ -25,7 +25,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
 
         editor.element.on('render', function() {
 
-            var regexp = editor.getMode() != 'gfm' ? /<a(?:.+?)>(?:[^<]*)<\/a>/gi : /<a(?:.+?)>(?:[^<]*)<\/a>|(^|[^!])(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
+            var regexp = editor.getMode() != 'gfm' ? /<a(?:.+?)>(?:[^<]*)<\/a>/gi : /<a(?:.+?)>(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
 
             links = editor.replaceInPreview(regexp, function(data) {
 
@@ -49,18 +49,19 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
 
                 } else {
 
-                    pre = data.matches[1];
-                    data['link']    = data.matches[3].trim();
-                    data['txt']     = data.matches[2].trim();
+                    if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
+
+                    data['link']    = data.matches[2].trim();
+                    data['txt']     = data.matches[1].trim();
                     data['class']   = '';
                     data['handler'] = function() {
                         picker.hide();
 
-                        data.replace(pre + '[' + title.val() + '](' + link.get() + ')');
+                        data.replace('[' + title.val() + '](' + link.get() + ')');
                     };
                 }
 
-                return pre + tmpl.render('link.replace', { link: data['link'], txt: data['txt'], class: data['class']  }).replace(/(\r\n|\n|\r)/gm, '');
+                return tmpl.render('link.replace', { link: data['link'], txt: data['txt'], class: data['class']  }).replace(/(\r\n|\n|\r)/gm, '');
 
             });
         });
