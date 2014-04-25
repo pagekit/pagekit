@@ -12,15 +12,8 @@ define('editor.html', ['jquery', 'uikit!htmleditor', 'marked', 'codemirror'], fu
 
             var editor = new uikit.htmleditor(element, { marked: marked, CodeMirror: codemirror, markdown: options.markdown, plugins: options.plugins });
 
-            setTimeout(function() {
-                editor.fit();
-            }, 200);
-
             $(this).on('editor.plugins.loaded', function() {
-
                 editor.initPlugins();
-                // TODO: remove
-                editor.redraw();
             });
 
             return editor;
