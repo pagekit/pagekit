@@ -34,6 +34,5 @@
                 <button class="uk-button" type="button" data-goto="settings">@trans('Cancel')</button>
             </div>
         </div>
-
     </div>
 </div>

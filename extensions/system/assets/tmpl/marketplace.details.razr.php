@@ -1,18 +1,16 @@
 <div class="uk-modal-dialog uk-modal-dialog-large pk-marketplace-modal-dialog">
 
     <div class="pk-marketplace-modal-action">
-        {{ #installed }}
+        {{#if installed}}
         <button class="uk-button" disabled>@trans('Installed')</button>
-        {{ /installed }}
-
-        {{ ^installed }}
-        <button class="uk-button uk-button-primary" data-install="{{ name }}">
-            {{ #install }}@trans('Install'){{ /install }}
-            {{ #update }}@trans('Update'){{ /update }}
+        {{else}}
+        <button class="uk-button uk-button-primary" data-install="{{name}}">
+            {{#if install}}@trans('Install'){{/if}}
+            {{#if update}}@trans('Update'){{/if}}
         </button>
-        {{ /installed }}
+        {{/if}}
     </div>
 
-    <iframe src="{{ iframe }}" class="uk-width-1-1 uk-height-1-1"></iframe>
+    <iframe src="{{iframe}}" class="uk-width-1-1 uk-height-1-1"></iframe>
 
 </div>

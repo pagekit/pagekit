@@ -12,7 +12,7 @@
         "propertyParser": "plugins/propertyParser",
         "domReady":       "plugins/domReady",
         "jquery":         "empty:",
-        "mustache":       "empty:",
+        "handlebars":     "empty:",
     },
     include: ["requireLib", "css", "text", "tmpl", "font", "json", "goog", "domReady"],
     out: "require.min.js",

@@ -1,10 +1,10 @@
 <ul class="uk-list uk-list-line">
-    {{ #items }}
+    {{#each items}}
     <li>
-        <a href="{{ link }}">{{ title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ publishedDate }}</span>
-        {{ #content }}
-        <p class="uk-margin-small-top">{{ content }}</p>
-        {{ /content }}
+        <a href="{{link}}">{{title}}</a> <span class="uk-text-muted uk-text-nowrap">{{publishedDate}}</span>
+        {{#if content}}
+        <p class="uk-margin-small-top">{{content}}</p>
+        {{/if}}
     </li>
-    {{ /items }}
+    {{/each}}
 </ul>

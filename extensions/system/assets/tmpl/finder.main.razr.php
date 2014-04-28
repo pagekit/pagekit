@@ -1,7 +1,7 @@
 <div class="pk-options uk-form uk-clearfix" data-messages='{ "confirm" : "@trans('Are you sure?')", "newname" : "@trans('New Name')", "foldername" : "@trans('Folder Name')" }'>
     <div class="uk-float-left js-finder-toolbar-left">
 
-        {{ #writable }}
+        {{#if writable}}
         <button class="uk-button uk-button-primary uk-form-file">
             @trans('Upload')
             <input type="file" name="files[]" multiple="multiple">
@@ -10,7 +10,7 @@
         <button class="uk-button" data-cmd="createFolder">@trans('Add Folder')</button>
 
         <button class="uk-button pk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
-        {{ /writable }}
+        {{/if}}
 
     </div>
     <div class="uk-float-right js-finder-toolbar-right">

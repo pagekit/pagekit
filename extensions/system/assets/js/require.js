@@ -19,8 +19,8 @@ var require = (function(win, doc) {
                     paths: {
                         'jquery':          'vendor/assets/jquery/jquery.js?ver=2.1.0',
                         'codemirror':      'vendor/assets/codemirror/codemirror.js?ver=3.22',
+                        'handlebars':      'vendor/assets/handlebars/handlebars.js?ver=2.0.0',
                         'marked':          'vendor/assets/marked/marked.js?ver=0.3.1',
-                        'mustache':        'vendor/assets/mustache/mustache.js?ver=0.8.1',
                         'md5':             'vendor/assets/requirejs/plugins/md5.js?ver=0.0.5',
                         'uikit':           'vendor/assets/uikit/js/uikit.min',
                         'htmleditor':      'vendor/assets/uikit/js/addons/htmleditor.min',
@@ -37,6 +37,9 @@ var require = (function(win, doc) {
                         },
                         'codemirror': {
                             deps: ['css!vendor/assets/codemirror/codemirror', 'css!vendor/assets/codemirror/hint']
+                        },
+                        'handlebars': {
+                            exports: 'Handlebars'
                         },
                         'htmleditor': {
                             deps: ['uikit', 'marked', 'codemirror']

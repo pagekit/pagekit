@@ -1,11 +1,11 @@
 /**
- * RequireJS tmpl plugin for mustache templating
+ * RequireJS tmpl plugin for templating
  * @author Pagekit, http://pagekit.com
  * @license MIT license
  */
-define(['jquery', 'module', 'mustache'], function ($, mod, mustache) {
+define(['jquery', 'module', 'handlebars'], function ($, mod, handlebars) {
 
-    var templates = {}, module = {
+    var templates = {}, compiled = {}, module = {
 
         get: function(name) {
             return templates[name] || '';
@@ -16,7 +16,16 @@ define(['jquery', 'module', 'mustache'], function ($, mod, mustache) {
         },
 
         render: function(name, data) {
-            return mustache.render(templates[name] || '', data);
+
+            var template;
+
+            if (compiled[name]) {
+                template = compiled[name];
+            } else if (templates[name]) {
+                template = compiled[name] = handlebars.compile(templates[name]);
+            }
+
+            return template ? template(data) : '';
         },
 
         config: mod.config()

@@ -31,7 +31,7 @@
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">@trans('Username')</label>
                 <div class="uk-form-controls">
-                    <input id="form-username" class="uk-form-width-large" type="text" name="user[username]" value="@user.username" pattern="[a-zA-Z0-9_\-]+" required>
+                    <input id="form-username" class="uk-form-width-large" type="text" name="user[username]" value="@user.username" required>
                 </div>
             </div>
 
@@ -103,11 +103,11 @@
 <script type="text/tmpl" data-tmpl="user.info">
 
     <ul class="uk-list">
-        <li><span class="uk-badge uk-badge-{{ badge }}">{{ status }}</span></li>
-        <li>{{ name }} ({{ username }})</li>
-        <li><a href="mailto:{{ email }}">{{ email }}</a></li>
-        <li>@trans('Last login: {{ login }}')</li>
-        <li>@trans('Registered since: {{ registered }}')</li>
+        <li><span class="uk-badge uk-badge-{{badge}}">{{status}}</span></li>
+        <li>{{name}} ({{username}})</li>
+        <li><a href="mailto:{{email}}">{{email}}</a></li>
+        <li>@trans('Last login: {{login}}')</li>
+        <li>@trans('Registered since: {{registered}}')</li>
     </ul>
 
 </script>

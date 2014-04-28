@@ -1,12 +1,11 @@
 <div class="js-editor-video uk-overlay uk-display-block">
-    {{ #src }}
-      {{{ preview }}}
-    {{ /src }}
-    {{ ^src }}
+    {{#if src}}
+        {{{preview}}}
+    {{else}}
       <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align">
           <div class="uk-vertical-align-middle"><img data-js-no-parse src="@url.to('asset://system/images/placeholder-editor-video.svg')" width="60" height="60" alt="@trans('Placeholder Video')"></div>
       </div>
-    {{ /src }}
+    {{/if}}
 
     <div class="uk-overlay-area">
         <div class="uk-overlay-area-content">
