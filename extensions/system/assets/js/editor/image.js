@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'], function($, tmpl, uikit, Finder) {
+define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor.html', 'finder'], function($, tmpl, uikit, editor, Finder) {
 
     var ImagePopup = {
 
@@ -125,7 +125,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'
         setTimeout(function() { ImagePopup.title.focus(); }, 10);
     }
 
-    uikit.htmleditor.addPlugin('image', function(editor) {
+    editor.addPlugin('image', function(editor) {
 
         var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
 
@@ -217,4 +217,6 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit!htmleditor', 'finder'
             openImageModal(data, rootpath);
         });
     });
+
+    return editor;
 });

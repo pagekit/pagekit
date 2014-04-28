@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], function($, tmpl, uikit, Link) {
+define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor.html', 'link'], function($, tmpl, uikit, editor, Link) {
 
     var modal  = $(tmpl.get('link.modal')).appendTo('body'),
         picker = new uikit.modal.Modal(modal),
@@ -19,7 +19,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
         link = Link.attach(modal.find('.js-linkpicker'), { value: data.link });
     }
 
-    uikit.htmleditor.addPlugin('link', function(editor) {
+    editor.addPlugin('link', function(editor) {
 
         var links = [];
 
@@ -89,4 +89,6 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit!htmleditor', 'link'], f
             }
         });
     });
+
+    return editor;
 });

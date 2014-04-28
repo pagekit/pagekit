@@ -1,8 +1,8 @@
-define(['jquery', 'uikit!htmleditor'], function($, uikit) {
+define(['jquery', 'editor.html'], function($, editor) {
 
     var base = requirejs.toUrl('');
 
-    uikit.htmleditor.addPlugin('urlresolver', function(editor) {
+    editor.addPlugin('urlresolver', function(editor) {
 
         editor.element.on('renderLate', function() {
 
@@ -20,4 +20,6 @@ define(['jquery', 'uikit!htmleditor'], function($, uikit) {
         });
 
     });
+
+    return editor;
 });

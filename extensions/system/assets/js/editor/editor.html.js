@@ -12,6 +12,10 @@ define('editor.html', ['jquery', 'uikit!htmleditor', 'marked', 'codemirror'], fu
 
             return new uikit.htmleditor(element, $.extend({}, { marked: marked, CodeMirror: codemirror }, options));
 
+        },
+
+        addPlugin: function(name, plugin) {
+            uikit.htmleditor.addPlugin(name, plugin);
         }
 
     }

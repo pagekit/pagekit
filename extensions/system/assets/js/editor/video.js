@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!video.modal,video.replace', 'uikit!htmleditor', 'finder'], function($, tmpl, uikit, Finder) {
+define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor.html', 'finder'], function($, tmpl, uikit, editor, Finder) {
 
     var VideoPopup = {
 
@@ -153,7 +153,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit!htmleditor', 'finder'
         VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
     }
 
-    uikit.htmleditor.addPlugin('video', function(editor) {
+    editor.addPlugin('video', function(editor) {
 
         var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
 
@@ -220,5 +220,5 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit!htmleditor', 'finder'
         });
     });
 
-    return uikit.htmleditor;
+    return editor;
 });
