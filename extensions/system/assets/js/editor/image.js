@@ -63,12 +63,10 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor.html', 'fin
 
         getPicker: function() {
 
-            if(!this.picker) {
-
+            if (!this.picker) {
                 this.finder = new Finder(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
                 this.picker = new uikit.modal.Modal(this.modal);
-                this.element.find('.js-finder-toolbar-left').prepend(this.btnselect);
             }
 
             return this.picker;
