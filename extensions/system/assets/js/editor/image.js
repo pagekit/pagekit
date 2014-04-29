@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor.html', 'finder'], function($, tmpl, uikit, editor, Finder) {
+define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder'], function($, tmpl, uikit, editor, Finder) {
 
     var ImagePopup = {
 

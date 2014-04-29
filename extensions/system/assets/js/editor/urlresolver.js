@@ -1,4 +1,4 @@
-define(['jquery', 'editor.html'], function($, editor) {
+define(['jquery', 'editor'], function($, editor) {
 
     var base = requirejs.toUrl('');
 

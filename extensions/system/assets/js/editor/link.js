@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor.html', 'link'], function($, tmpl, uikit, editor, Link) {
+define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], function($, tmpl, uikit, editor, Link) {
 
     var modal  = $(tmpl.get('link.modal')).appendTo('body'),
         picker = new uikit.modal.Modal(modal),

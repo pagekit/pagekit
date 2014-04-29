@@ -6,7 +6,7 @@ use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\TmplEvent;
 
-class HtmlEditor extends EventSubscriber implements EditorInterface
+class Editor extends EventSubscriber implements EditorInterface
 {
     /**
      * @var array
@@ -81,12 +81,12 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
      */
     public function render($value, array $attributes = array())
     {
-        $this('view.scripts')->queue('editor.markdown', 'extension://system/assets/js/editor/editor.html.js', 'requirejs', array(
+        $this('view.scripts')->queue('editor', 'extension://system/assets/js/editor/editor.js', 'requirejs', array(
             'data-plugins' => json_encode(array_values($this->getPlugins()))
         ));
 
         $this->addAttribute(array(
-            'data-editor' => 'markdown', 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
+            'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
             'data-finder' => json_encode(array('root' => $this('config')->get('app.storage'), 'mode' => 'write', 'hash' => $this('finder')->getToken($this('config')->get('app.storage'), 'write')))
         ));
 
@@ -104,7 +104,7 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
         $html = '';
 
         foreach ($attributes as $name => $val) {
-            $html .= sprintf(' %s="%s"', $name, htmlspecialchars($val));
+            $html .= is_bool($val) ? " $name" : sprintf(' %s="%s"', $name, htmlspecialchars($val));
         }
 
         return $html;
@@ -115,7 +115,7 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
      */
     public function onEditorLoad(EditorLoadEvent $event)
     {
-        if ('markdown' != $event['editor']) {
+        if ($event->getEditor()) {
             return;
         }
 
@@ -148,7 +148,7 @@ class HtmlEditor extends EventSubscriber implements EditorInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'editor.load' => array('onEditorLoad', 8),
+            'editor.load' => array('onEditorLoad', -8),
             'system.tmpl' => 'onSystemTmpl'
         );
     }

@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor.html', 'finder'], function($, tmpl, uikit, editor, Finder) {
+define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder'], function($, tmpl, uikit, editor, Finder) {
 
     var VideoPopup = {
 
