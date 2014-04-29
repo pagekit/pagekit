@@ -12,9 +12,10 @@ class FrontpageListener extends EventSubscriber
     public function onInit()
     {
         if ($frontpage = $this('config')->get('app.frontpage')) {
+            $app = self::$app;
             $this('router')->getUrlAliases()->register('/', $this('system.info')->resolveUrl($frontpage));
-            $this('router')->get('/', '@frontpage', function() {
-                $this('app')->abort(404);
+            $this('router')->get('/', '@frontpage', function() use ($app) {
+                $app->abort(404);
             });
         }
     }
