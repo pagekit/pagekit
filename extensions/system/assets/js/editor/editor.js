@@ -26,6 +26,6 @@ require(['jquery', 'editor', 'domReady!'], function($, editor, doc) {
         editor.attach(this, $(this).data());
     });
 
-    require($('script[data-plugins]').data('plugins'), function() {});
+    require($('script[data-editor]').data('editor'), function() {});
 
 });

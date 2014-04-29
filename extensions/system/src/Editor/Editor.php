@@ -82,7 +82,7 @@ class Editor extends EventSubscriber implements EditorInterface
     public function render($value, array $attributes = array())
     {
         $this('view.scripts')->queue('editor', 'extension://system/assets/js/editor/editor.js', 'requirejs', array(
-            'data-plugins' => json_encode(array_values($this->getPlugins()))
+            'data-editor' => json_encode(array_values($this->getPlugins()))
         ));
 
         $this->addAttribute(array(
