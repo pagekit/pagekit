@@ -7,7 +7,7 @@
                 <div class="pk-finder-thumbnail pk-finder-thumbnail-folder"></div>
             </div>
             <div class="uk-text-truncate">
-                <input type="checkbox" class="js-writable js-select" data-name="{{name}}">
+                <input type="checkbox" class="js-select" data-name="{{name}}">
                 <a href="#" data-cmd="loadPath" data-path="{{path}}">{{name}}</a>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
             {{/isImage}}
             <div class="uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" class="js-writable js-select" data-name="{{name}}">
+                <input type="checkbox" class="js-select" data-name="{{name}}">
                 {{name}}
             </div>
         </div>

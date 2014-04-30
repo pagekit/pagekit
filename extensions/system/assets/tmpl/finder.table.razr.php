@@ -2,7 +2,7 @@
 <div class="uk-overflow-container">
     <table class="uk-table uk-table-hover uk-table-middle pk-finder-table">
         <thead>
-            <th class="js-writable pk-table-width-minimum"><input type="checkbox" data-cmd="selectAll"></th>
+            <th class="pk-table-width-minimum"><input type="checkbox" data-cmd="selectAll"></th>
             <th colspan="2">Name</th>
             <th class="pk-table-width-minimum uk-text-center">@trans('Size')</th>
             <th class="pk-table-width-minimum">@trans('Modified')</th>
@@ -10,7 +10,7 @@
         <tbody>
             {{#each data.folders}}
             <tr class="uk-visible-hover" data-name="{{name}}" data-type="folder" data-url="{{url}}" data-row>
-                <td class="js-writable">{{#if writable}}<input type="checkbox" class="js-select" data-name="{{name}}">{{/if}}</td>
+                <td><input type="checkbox" class="js-select" data-name="{{name}}"></td>
                 <td class="pk-table-width-minimum">
                     <i class="uk-icon-folder-o pk-finder-icon-folder"></i>
                 </td>
@@ -22,7 +22,7 @@
 
             {{#each data.files}}
             <tr class="uk-visible-hover" data-name="{{name}}" data-url="{{url}}" data-type="file" data-row>
-                <td class="js-writable">{{#if writable}}<input type="checkbox" class="js-select" data-name="{{name}}">{{/if}}</td>
+                <td><input type="checkbox" class="js-select" data-name="{{name}}"></td>
                 <td class="pk-table-width-minimum">
                     {{#isImage url}}
                         <i class="pk-finder-thumbnail-table pk-finder-icon-file" style="background-image: url('{{url}}');"></i>
