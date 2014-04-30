@@ -176,6 +176,16 @@ class SystemListener extends EventSubscriber
     }
 
     /**
+     * Registers the media storage folder
+     *
+     * @param FileAccessEvent $event
+     */
+    public function onSystemFinder(FileAccessEvent $event)
+    {
+        $event->path('/^'.preg_quote($this('path').$this('config')->get('app.storage'), '/').'($|\/.*)/', $this('user')->hasAccess('system: manage storage') ? 'w' : 'r');
+    }
+
+    /**
      * Deactivate extension on load failure.
      *
      * @param LoadFailureEvent $event
@@ -204,6 +214,7 @@ class SystemListener extends EventSubscriber
             'system.locale'          => 'onSystemLocale',
             'system.dashboard'       => 'onSystemDashboard',
             'system.widget'          => 'onSystemWidget',
+            'system.finder'          => 'onSystemFinder',
             'extension.load_failure' => 'onExtensionLoadException'
         );
     }

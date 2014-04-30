@@ -63,7 +63,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder']
         getPicker: function() {
 
             if (!this.picker) {
-                this.finder = new Finder(this.element, this.options);
+                this.finder = Finder.attach(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
                 this.picker = new uikit.modal.Modal(this.modal);
             }

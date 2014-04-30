@@ -9,7 +9,7 @@
         this.options      = $.extend({}, RowSelect.defaults, options);
         this.lastselected = null;
 
-        this.container.on('click', this.options.rows, function(e){
+        this.container.data('rowselect', this).on('click', this.options.rows, function(e){
 
             var target = $(e.target), row = $(this), select;
 

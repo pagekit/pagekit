@@ -27,15 +27,12 @@ class FinderHelper extends Helper
 
     /**
      * @param  string $root
-     * @param  string $mode
      * @return string
      */
-    public function render($root, $mode)
+    public function render($root)
     {
-        $this->app['view.scripts']->queue('finder.init', 'require(["finder", "domReady!"], function(Finder) { $("[data-finder]").each(function() { new Finder(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
+        $this->app['view.scripts']->queue('finder.init', 'require(["finder", "domReady!"], function(Finder) { $("[data-finder]").each(function() { Finder.attach(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
 
-        $hash = $this->app['finder']->getToken($root, $mode);
-
-        return "<div data-finder='".json_encode(compact('root', 'mode', 'hash'))."'></div>";
+        return "<div data-finder='".json_encode(compact('root'))."'></div>";
     }
 }

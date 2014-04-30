@@ -2,9 +2,7 @@
 <div class="uk-overflow-container">
     <table class="uk-table uk-table-hover uk-table-middle pk-finder-table">
         <thead>
-            {{#if writable}}
-            <th class="pk-table-width-minimum"><input type="checkbox" data-cmd="selectAll"></th>
-            {{/if}}
+            <th class="js-writable pk-table-width-minimum"><input type="checkbox" data-cmd="selectAll"></th>
             <th colspan="2">Name</th>
             <th class="pk-table-width-minimum uk-text-center">@trans('Size')</th>
             <th class="pk-table-width-minimum">@trans('Modified')</th>
@@ -12,9 +10,7 @@
         <tbody>
             {{#each data.folders}}
             <tr class="uk-visible-hover" data-name="{{name}}" data-type="folder" data-url="{{url}}" data-row>
-                {{#if ../writable}}
-                <td><input type="checkbox" class="js-select" data-name="{{name}}"></td>
-                {{/if}}
+                <td class="js-writable">{{#if writable}}<input type="checkbox" class="js-select" data-name="{{name}}">{{/if}}</td>
                 <td class="pk-table-width-minimum">
                     <i class="uk-icon-folder-o pk-finder-icon-folder"></i>
                 </td>
@@ -26,11 +22,13 @@
 
             {{#each data.files}}
             <tr class="uk-visible-hover" data-name="{{name}}" data-url="{{url}}" data-type="file" data-row>
-                {{#if ../writable}}
-                <td><input type="checkbox" class="js-select" data-name="{{name}}"></td>
-                {{/if}}
+                <td class="js-writable">{{#if writable}}<input type="checkbox" class="js-select" data-name="{{name}}">{{/if}}</td>
                 <td class="pk-table-width-minimum">
-                    <i class="uk-icon-file-o pk-finder-icon-file"></i>
+                    {{#isImage url}}
+                        <i class="pk-finder-thumbnail-table pk-finder-icon-file" style="background-image: url('{{url}}');"></i>
+                    {{else}}
+                        <i class="uk-icon-file-o pk-finder-icon-file"></i>
+                    {{/isImage}}
                 </td>
                 <td class="pk-table-text-break pk-table-min-width-200">{{name}}</td>
                 <td class="uk-text-right uk-text-nowrap">{{size}}</td>

@@ -7,9 +7,7 @@
                 <div class="pk-finder-thumbnail pk-finder-thumbnail-folder"></div>
             </div>
             <div class="uk-text-truncate">
-                {{#if ../writable}}
-                <input type="checkbox" class="js-select" data-name="{{name}}">
-                {{/if}}
+                <input type="checkbox" class="js-writable js-select" data-name="{{name}}">
                 <a href="#" data-cmd="loadPath" data-path="{{path}}">{{name}}</a>
             </div>
         </div>
@@ -19,13 +17,13 @@
     {{#each data.files}}
     <li data-name="{{name}}" data-url="{{url}}" data-type="file">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover" data-url="{{url}}" data-type="file" data-row>
-            <div class="uk-panel-teaser">
-                <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
-            </div>
+            {{#isImage url}}
+            <div class="pk-finder-thumbnail" style="background-image: url('{{url}}');"></div>
+            {{else}}
+            <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
+            {{/isImage}}
             <div class="uk-text-nowrap uk-text-truncate">
-                {{#if ../writable}}
-                <input type="checkbox" class="js-select" data-name="{{name}}">
-                {{/if}}
+                <input type="checkbox" class="js-writable js-select" data-name="{{name}}">
                 {{name}}
             </div>
         </div>

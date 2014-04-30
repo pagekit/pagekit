@@ -21,7 +21,6 @@ use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Exception\ExceptionHandler;
 use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
-use Pagekit\System\Helper\FinderHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\Theme\Event\ThemeListener;
@@ -124,10 +123,6 @@ class SystemExtension extends Extension
 
         $app['countries'] = function() {
             return new CountryHelper;
-        };
-
-        $app['finder'] = function() {
-            return new FinderHelper;
         };
 
         $app['system.info'] = function() {

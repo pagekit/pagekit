@@ -87,7 +87,7 @@ class Editor extends EventSubscriber implements EditorInterface
 
         $this->addAttribute(array(
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
-            'data-finder' => json_encode(array('root' => $this('config')->get('app.storage'), 'mode' => 'write', 'hash' => $this('finder')->getToken($this('config')->get('app.storage'), 'write')))
+            'data-finder' => json_encode(array('root' => $this('config')->get('app.storage')))
         ));
 
         return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(array_merge($this->attributes, $attributes)), htmlspecialchars($value));

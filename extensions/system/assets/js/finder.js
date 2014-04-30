@@ -1,138 +1,246 @@
-define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thumbnail', 'uikit!upload', 'rowselect'], function($, mod, req, tmpl, uikit, RowSelect) {
+define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'], function($, mod, req, uikit, RowSelect, Handlebars) {
+
+    Handlebars.registerHelper('isImage', function(url, block) {
+        return url.match(/\.(?:gif|jpg|jpeg|png|svg)/i) ? block.fn(this) : block.inverse(this);
+    });
 
     var Finder = function(element, options) {
-
-        var $this = this;
-
         this.options = $.extend({}, Finder.defaults, options);
-
-        this.url  = this.options.url;
-        this.path = this.options.path;
-        this.view = this.options.view;
-
-        this.element = $(element).html(tmpl.render('finder.main', { writable: this.options.mode == 'write' }), this.options);
-
-        this.options['messages'] = this.element.find('[data-messages]').data('messages');
-
-        this.main   = this.element.find('.js-finder-files');
-        this.filter = this.element.find('.js-search:first');
-        this.crumbs = this.element.find('.js-breadcrumbs:first');
-
-        this.rowselect = new RowSelect(this.main, {'rows':'[data-row]'});
-
-        this.main.on('selected-rows', function(e, rows) {
-            $this.showOnSelect();
-        });
-
-        var progress    = this.element.find('.uk-progress'),
-            progressbar = progress.find('.uk-progress-bar');
-
-        this.progress = {
-
-            show: function() {
-                progress.removeClass('uk-hidden');
-            },
-
-            hide: function() {
-                progress.addClass('uk-hidden');
-            },
-
-            update: function(percent) {
-                progressbar.css('width', percent + '%').text(percent + '%');
-            }
-
-        };
-
-        var uploadsettings = {
-
-            action: this.url + 'upload',
-
-            before: function(options) {
-                options = $.extend(options.params, $this.getParams($this.path));
-            },
-
-            loadstart: function() {
-                $this.progress.update(0);
-                $this.progress.show();
-            },
-
-            progress: function(percent) {
-                $this.progress.update(Math.ceil(percent));
-            },
-
-            allcomplete: function(response) {
-
-                var data = $.parseJSON(response);
-
-                $this.loadPath();
-
-                uikit.notify(data.message, data.error ? 'danger' : 'success');
-
-                $this.progress.update(100);
-                setTimeout($this.progress.hide, 500);
-            }
-
-        };
-
-        var select = new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings);
-
-        this.element
-            .on('click', '[data-cmd]', function(e) {
-
-                var ele = $(this), cmd = ele.data('cmd');
-
-                if (!ele.is(':input')) e.preventDefault();
-
-                if ($this.commands[cmd]) {
-                    $this.commands[cmd].apply($this, [ele]);
-                }
-            })
-            .on('change', '.js-select', function() {
-                $this.showOnSelect();
-            })
-            .on('click', '[data-url]', function(e) {
-                if (!$(e.target).is('a')) {
-                    $this.element.trigger('picked', [$(this).data(), $this]);
-                }
-            })
-            .on('keyup', this.filter, uikit.Utils.debounce(function() {
-                $this.applyFilter();
-            }, 50))
-
-            // drag drop files to finder
-            .on('drop', function(e){
-
-                if (e.dataTransfer && e.dataTransfer.files) {
-
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    uikit.Utils.xhrupload(e.dataTransfer.files, uploadsettings);
-                }
-
-                $this.main.removeClass('uk-dragover');
-
-            })
-            .on('dragenter', function(e){
-                e.stopPropagation();
-                e.preventDefault();
-            })
-            .on('dragover', function(e){
-                e.stopPropagation();
-                e.preventDefault();
-                $this.main.addClass('uk-dragover');
-            })
-            .on('dragleave', function(e){
-                e.stopPropagation();
-                e.preventDefault();
-                $this.main.removeClass('uk-dragover');
-            });
-
-        this.switchView(this.view);
-        this.showOnSelect();
-    };
+        this.url     = this.options.url;
+        this.path    = this.options.path;
+        this.view    = this.options.view;
+        this.element = $(element);
+    }, deferred;
 
     $.extend(Finder.prototype, {
+
+        _init: function() {
+
+            if (!deferred) {
+                deferred = $.Deferred();
+
+                require(['tmpl!finder.main,finder.table,finder.thumbnail'], function(tmpl) {
+
+                    var tmpls = {};
+                    tmpls['main']      = Handlebars.compile(tmpl.get('finder.main'));
+                    tmpls['table']     = Handlebars.compile(tmpl.get('finder.table'));
+                    tmpls['thumbnail'] = Handlebars.compile(tmpl.get('finder.thumbnail'));
+
+                    deferred.resolve(tmpls);
+                });
+            }
+
+            if (deferred.state() == 'resolved') return deferred;
+
+            deferred.done(function(tmpls) {
+
+                this.element.html(tmpls.main());
+
+                this.main   = this.element.find('.js-finder-files');
+                this.filter = this.element.find('.js-search:first');
+                this.crumbs = this.element.find('.js-breadcrumbs:first');
+
+                var $this       = this,
+                    progress    = this.element.find('.uk-progress'),
+                    progressbar = progress.find('.uk-progress-bar'),
+                    callbacks   = {
+
+                        show: function() {
+                            progress.removeClass('uk-hidden');
+                        },
+                        hide: function() {
+                            progress.addClass('uk-hidden');
+                        },
+                        update: function(percent) {
+                            progressbar.css('width', percent + '%').text(percent + '%');
+                        }
+
+                    },
+                    uploadsettings = {
+
+                        action: this.url + 'upload',
+                        before: function(options) {
+                            options = $.extend(options.params, { path: $this.path, root: $this.options.root });
+                        },
+                        loadstart: function() {
+                            callbacks.update(0);
+                            callbacks.show();
+                        },
+                        progress: function(percent) {
+                            callbacks.update(Math.ceil(percent));
+                        },
+                        allcomplete: function(response) {
+
+                            var data = $.parseJSON(response);
+
+                            $this.loadPath();
+
+                            uikit.notify(data.message, data.error ? 'danger' : 'success');
+
+                            callbacks.update(100);
+                            setTimeout(callbacks.hide, 500);
+                        }
+
+                    };
+
+                new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings);
+                new RowSelect(this.element, { rows: '[data-row]' });
+
+                this.options['messages'] = this.element.find('[data-messages]').data('messages');
+
+                this.element
+                    .on('click', '[data-cmd]', function(e) {
+
+                        var ele = $(this), cmd = ele.data('cmd');
+
+                        if (!ele.is(':input')) e.preventDefault();
+
+                        if ($this.commands[cmd]) {
+                            $this.commands[cmd].apply($this, [ele]);
+                        }
+                    })
+                    .on('change', '.js-select', function() {
+                        $this.showOnSelect();
+                    })
+                    .on('selected-rows', '.js-finder-files', function() {
+                        $this.showOnSelect();
+                    })
+                    .on('click', '[data-url]', function(e) {
+                        if (!$(e.target).is('a')) {
+                            $this.element.trigger('picked', [$(this).data(), $this]);
+                        }
+                    })
+                    .on('keyup', this.filter, uikit.Utils.debounce(function() {
+                        $this.applyFilter();
+                    }, 50))
+                    .on('drop', function(e){
+
+                        if (e.dataTransfer && e.dataTransfer.files) {
+
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            uikit.Utils.xhrupload(e.dataTransfer.files, uploadsettings);
+                        }
+
+                        $this.main.removeClass('uk-dragover');
+
+                    })
+                    .on('dragenter', function(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on('dragover', function(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                        $this.main.addClass('uk-dragover');
+                    })
+                    .on('dragleave', function(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                        $this.main.removeClass('uk-dragover');
+                    });
+
+                this.showOnSelect();
+
+            }.bind(this));
+
+            return deferred;
+        },
+
+        loadPath: function(path) {
+
+            var $this = this;
+
+            this.path = path || this.path;
+
+            $.post(this.url + 'list', { path: this.path, root: this.options.root }, function(data) {
+
+                if (data.error) {
+                    uikit.notify(data.message, 'danger');
+                } else {
+                    $this.data = data;
+                }
+
+                $this.render();
+
+            }, 'json').fail(function(jqXHR) {
+                uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
+            });
+        },
+
+        switchView: function(view) {
+            this.view = view ? view : (this.view == 'thumbnail' ? 'table' : 'thumbnail');
+            this.render();
+        },
+
+        render: function() {
+
+            if (!this.data) return;
+
+            this._init().done(function(tmpls) {
+
+                this.renderBreadcrumbs();
+
+                this.main.html(tmpls[this.view]({ data: this.data }));
+
+                this.element.find('.js-writable').toggle(this.data.mode == 'w');
+
+                this.element.find('[data-view="thumbnail"],[data-view="table"]').removeClass('uk-active').filter('[data-view="' + this.view + '"]').addClass('uk-active');
+
+                this.applyFilter();
+
+                if (this.view == 'thumbnail') {
+                    $(document).trigger('uk-domready');
+                }
+
+                this.element.data('rowselect').fetchRows();
+
+            }.bind(this));
+
+        },
+
+        renderBreadcrumbs: function() {
+
+            var path = '';
+            this.crumbs.children().not(':first').remove();
+            this.path.substr(1).split('/').forEach(function(part, i, parts) {
+                if (!part) return;
+
+                path += '/' + part;
+                if (i == parts.length - 1) {
+                    this.crumbs.append('<li class="uk-active"><span>' + part + '</span></li>');
+                } else {
+                    this.crumbs.append('<li><a href="" data-cmd="loadPath" data-path="' + path + '">' + part + '</a></li>');
+                }
+            }.bind(this));
+        },
+
+        applyFilter: function() {
+
+            var query = this.filter.val();
+
+            if (!query) {
+
+                this.element.find('[data-name]').show();
+
+            } else {
+
+                this.element.find('[data-name]').each(function() {
+                    var ele = $(this);
+
+                    ele.toggle(ele.data('name').indexOf(query) != -1);
+                });
+            }
+
+            $(document).trigger('uk-domready');
+        },
+
+        showOnSelect: function() {
+            var count = this.element.find('.js-select:checked').length;
+            this.element.find('.js-show-on-select').toggle(count > 0);
+            this.element.find('.js-show-on-single-select').toggle(count == 1);
+        },
 
         commands: {
             switchView: function(element) {
@@ -157,6 +265,12 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
                 if (!newname || !oldname) return;
 
                 this.executeCommand('rename', { oldname: oldname, newname: newname });
+            },
+
+            renameSelected: function() {
+                var element = this.element.find('.js-select:checked').first();
+
+                if (element) this.commands.rename.apply(this, [element]);
             },
 
             remove: function(element) {
@@ -185,142 +299,15 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
             selectAll: function(element) {
                 this.element.find('.js-select').prop('checked', element.prop('checked')).trigger('change');
-
-                this.rowselect.handleSelected();
+                this.element.data('rowselect').handleSelected();
             }
-        },
-
-        loadPath: function(path) {
-
-            var $this = this, path = path || this.path, newPath = path;
-
-            $.post(this.url + 'list', this.getParams(path), function(data) {
-
-                $this.path = newPath;
-                $this.data = data;
-
-                // build breadcrumbs
-                data.breadcrumbs = [];
-
-                var parts = newPath.split('/');
-
-                for (var i = 0; i < parts.length; i++) {
-                    var name = parts[i], path = '';
-
-                    if (!name) continue;
-
-                    for (var j = 0; j <= i; j++) {
-                        if (!parts[j]) continue;
-
-                        path += '/' + parts[j];
-                    }
-
-                    data.breadcrumbs.push({ name: name, path: path });
-                }
-
-                $this.render();
-
-            }, 'json').fail(function(jqXHR) {
-                uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
-            });
-        },
-
-        switchView: function(view) {
-
-            this.view = view ? view : (this.view == 'thumbnail' ? 'table' : 'thumbnail');
-
-            this.element.attr('data-view', this.view);
-
-            this.render();
-        },
-
-        render: function() {
-
-            if (this.data && this.data.breadcrumbs) {
-
-                this.crumbs.children().not(':first').remove();
-
-                var i, path, name, max = this.data.breadcrumbs.length;
-
-                for (i = 0; i < max; i++) {
-
-                    path = this.data.breadcrumbs[i].path;
-                    name = this.data.breadcrumbs[i].name;
-
-                    if (i == max - 1) {
-                        this.crumbs.append('<li class="uk-active"><span>' + name + '</span></li>');
-                    } else {
-                        this.crumbs.append('<li><a href="" data-cmd="loadPath" data-path="' + path + '">' + name + '</a></li>');
-                    }
-                }
-            }
-
-            this.main.html(tmpl.render('finder.' + this.view, $.extend(this.data, { writable: this.options.mode == 'write' })));
-
-            this.element.find('[data-view="thumbnail"],[data-view="table"]').removeClass('uk-active').filter('[data-view="' + this.view + '"]').addClass('uk-active');
-
-            this.applyFilter();
-            this.applyPreview();
-
-            if (this.view == 'thumbnail') {
-                $(document).trigger('uk-domready');
-            }
-
-            this.element.find('.js-show-when-empty').toggleClass('uk-hidden', (this.main.find('[data-name]').length > 0));
-
-            this.rowselect.fetchRows();
-        },
-
-        applyFilter: function() {
-
-            var query = this.filter.val();
-
-            if (!query) {
-
-                this.main.find('[data-name]').show();
-
-            } else {
-
-                this.main.find('[data-name]').each(function() {
-                    var ele = $(this);
-
-                    ele.toggle(ele.data('name').indexOf(query) != -1);
-                });
-            }
-
-            $(document).trigger('uk-domready');
-        },
-
-        applyPreview: function() {
-
-            var $this = this;
-
-            setTimeout(function() {
-
-                $this.main.find('[data-type="file"]').each(function() {
-                    var ele = $(this);
-
-                    if (ele.data('url').match(/\.(gif|jpg|jpeg|png|svg)/i)) {
-                        if ($this.view == 'table') {
-                            ele.find('.pk-finder-icon-file').removeClass('uk-icon-file-o').addClass('pk-finder-thumbnail-table').css('background-image', 'url("' + ele.data('url') + '")');
-                        } else {
-                            ele.find('.pk-finder-thumbnail-file').removeClass('pk-finder-thumbnail-file').css('background-image', 'url("' + ele.data('url') + '")');
-                        }
-                    }
-                });
-
-            }, 0);
-        },
-
-        getParams: function(path) {
-            return { path: path, root: this.options.root, mode: this.options.mode, hash: this.options.hash };
         },
 
         executeCommand: function(name, params) {
 
             var $this = this;
 
-            return $.getJSON(this.url + name, $.extend(this.getParams(this.path), params),function(data) {
+            return $.getJSON(this.url + name, $.extend({ path: this.path, root: this.options.root }, params),function(data) {
 
                 uikit.notify(data.message, data.error ? 'danger' : 'success');
 
@@ -329,17 +316,12 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
             }).fail(function(jqXHR) {
                 uikit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
             });
-        },
-
-        showOnSelect: function() {
-            this.element.find('.js-show-on-select').toggle(this.element.find('.js-select:checked').length > 0);
         }
     });
 
     Finder.defaults = {
         url: req.toUrl(mod.config().url),
         view: 'table',
-        mode: 'read',
         root: '/',
         path: '/',
         messages: {
@@ -351,6 +333,14 @@ define(['jquery', 'module', 'require', 'tmpl!finder.main,finder.table,finder.thu
 
     window.Finder = Finder;
 
-    return Finder;
+    return {
+
+        attach: function(element, options) {
+
+            return new Finder(element, options);
+
+        }
+
+    };
 
 });
