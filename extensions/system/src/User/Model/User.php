@@ -168,7 +168,7 @@ class User
             $this->permissions = array();
 
             foreach ($this->getRoles() as $role) {
-                $this->permissions = $role->getPermissions();
+                $this->permissions = array_merge($this->permissions, $role->getPermissions());
             }
         }
 
@@ -198,7 +198,7 @@ class User
             return true;
         }
 
-        if (!preg_match('/[^&\(\)\|\!]/', $expression)) {
+        if (!preg_match('/[&\(\)\|\!]/', $expression)) {
             return $this->hasPermission($expression);
         }
 

@@ -116,6 +116,9 @@ return array(
             'title' => 'Manage storage',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ),
+        'system: manage storage read only' => array(
+            'title' => 'Manage storage (Read only)'
+        ),
         'system: maintenance access' => array(
             'title' => 'Use the site in maintenance mode'
         )

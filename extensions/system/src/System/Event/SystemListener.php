@@ -182,7 +182,10 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemFinder(FileAccessEvent $event)
     {
-        $event->path('/^'.preg_quote($this('path').$this('config')->get('app.storage'), '/').'($|\/.*)/', $this('user')->hasAccess('system: manage storage') ? 'w' : 'r');
+        if ($this('user')->hasAccess('system: manage storage | system: manage storage read only')) {
+            $mode = $this('user')->hasAccess('system: manage storage') ? 'w' : 'r';
+            $event->path('/^'.preg_quote($this('path').$this('config')->get('app.storage'), '/').'($|\/.*)/', $mode);
+        }
     }
 
     /**
