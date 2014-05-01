@@ -4776,7 +4776,7 @@ select.uk-form-width-mini {
   background: #fe634a;
   font-size: 10px;
   font-weight: normal;
-  line-height: 16px;
+  line-height: 14px;
   color: #ffffff;
   text-align: center;
   vertical-align: middle;
@@ -4955,6 +4955,7 @@ a.uk-thumbnail:focus {
  * 2. Create position context
  * 3. Set max-width for responsive images to prevent `inline-block` consequences
  * 4. Remove the gap between the container and its child element
+ * 5. Fixed wrong scaling calculation for images in Chrome
  */
 .uk-overlay {
   /* 1 */
@@ -4965,12 +4966,14 @@ a.uk-thumbnail:focus {
   max-width: 100%;
   /* 4 */
   vertical-align: middle;
+  /* 5 */
+  overflow: hidden;
 }
 /*
- * Fixed wrong scaling calculation for images in Chrome
+ * Remove margin from content
  */
-.uk-overlay > img:first-child {
-  display: block;
+.uk-overlay > :first-child {
+  margin-bottom: 0;
 }
 /* Sub-object `uk-overlay-area`
  ========================================================================== */
@@ -5217,8 +5220,10 @@ a.uk-thumbnail:focus {
   animation-fill-mode: both;
 }
 /* Hide animated element if scrollspy is used */
-[data-uk-scrollspy*='uk-animation-'] {
-  opacity: 0;
+@media screen {
+  [data-uk-scrollspy*='uk-animation-'] {
+    opacity: 0;
+  }
 }
 /*
  * Fade
@@ -6226,13 +6231,13 @@ a.uk-thumbnail:focus {
 .uk-container {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 900px;
+  max-width: 960px;
   padding: 0 25px;
 }
 /* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-container {
-    max-width: 900px;
+    max-width: 960px;
     padding: 0 25px;
   }
 }
