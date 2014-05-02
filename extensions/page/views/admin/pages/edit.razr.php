@@ -11,9 +11,9 @@
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
             <input type="hidden" name="id" value="@(page.id ?: 0)">
-            <div class="uk-text-muted uk-margin-small-top">
-                <span class="uk-visible-hover-inline js-slug">@(page.slug ?: '') <a class="uk-invisible uk-icon-pencil"></a></span>
-                <input class="uk-form-width-medium uk-form-small uk-hidden" type="text" name="page[slug]" value="@page.slug">
+            <div class="uk-margin-small-top">
+                <span class="uk-text-muted uk-link js-slug" data-uk-toggle="{target:'.js-slug'}">@(page.slug ?: '')</span>
+                <input class="uk-form-width-medium uk-form-small uk-hidden js-slug" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug')">
             </div>
         </div>
         <div class="uk-form-row">
@@ -29,8 +29,8 @@
                 <li>
                     <div>@trans('Status')</div>
                     <div>
-                        <button class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" type="button" data-status="0">@statuses[0]</button>
-                        <button class="uk-button uk-button-mini uk-button-success js-status uk-hidden" type="button" data-status="1">@statuses[1]</button>
+                        <button class="uk-button uk-button-mini uk-button-danger js-status@(page.status ? ' uk-hidden')" type="button" data-status="0">@statuses[0]</button>
+                        <button class="uk-button uk-button-mini uk-button-success js-status@(!page.status ? ' uk-hidden')" type="button" data-status="1">@statuses[1]</button>
                         <input type="hidden" name="page[status]" value="@page.status">
                     </div>
                 </li>
@@ -50,16 +50,16 @@
                 <li>
                     <div>@trans('Markdown')</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-markdown  @(page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="0">@trans('No')</button>
-                        <button class="uk-button uk-button-mini js-markdown  @(!page.get('markdown') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Yes')</button>
-                        <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', '0')">
+                        <button class="uk-button uk-button-mini js-markdown@(page.get('markdown', 0) ? ' uk-hidden')" type="button" data-value="0">@trans('No')</button>
+                        <button class="uk-button uk-button-mini js-markdown@(!page.get('markdown', 0) ? ' uk-hidden')" type="button" data-value="1">@trans('Yes')</button>
+                        <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', 0)">
                     </div>
                 </li>
                 <li>
                     <div>@trans('Title')</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-title @(page.get('title') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Hide')</button>
-                        <button class="uk-button uk-button-mini js-title @(!page.get('title') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Show')</button>
+                        <button class="uk-button uk-button-mini js-title@(page.get('title', 1) ? ' uk-hidden')" type="button" data-value="0">@trans('Hide')</button>
+                        <button class="uk-button uk-button-mini js-title@(!page.get('title', 1) ? ' uk-hidden')" type="button" data-value="1">@trans('Show')</button>
                         <input type="hidden" name="page[data][title]" value="@page.get('title', 1)">
                     </div>
                 </li>

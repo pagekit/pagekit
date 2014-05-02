@@ -22,8 +22,8 @@ class Page
     /** @Column(type="string") */
     protected $title;
 
-    /** @Column(type="boolean") */
-    protected $status;
+    /** @Column(type="integer") */
+    protected $status = self::STATUS_UNPUBLISHED;
 
     /** @Column */
     protected $content = '';

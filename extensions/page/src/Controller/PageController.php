@@ -192,7 +192,6 @@ class PageController extends Controller
 
     /**
      * @Request({"slug", "id": "int"})
-     * @Token
      */
     public function getSlugAction($slug, $id = 0)
     {
