@@ -29,8 +29,8 @@
                 <li>
                     <div>@trans('Status')</div>
                     <div>
-                        <button class="uk-button uk-button-mini uk-button-danger js-status@(page.status ? ' uk-hidden')" type="button" data-status="0">@statuses[0]</button>
-                        <button class="uk-button uk-button-mini uk-button-success js-status@(!page.status ? ' uk-hidden')" type="button" data-status="1">@statuses[1]</button>
+                        <button class="uk-button uk-button-mini uk-button-danger js-status@(page.status ? ' uk-hidden')" type="button" data-value="0">@statuses[0]</button>
+                        <button class="uk-button uk-button-mini uk-button-success js-status@(!page.status ? ' uk-hidden')" type="button" data-value="1">@statuses[1]</button>
                         <input type="hidden" name="page[status]" value="@page.status">
                     </div>
                 </li>

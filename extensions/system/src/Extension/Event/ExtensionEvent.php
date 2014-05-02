@@ -2,8 +2,8 @@
 
 namespace Pagekit\Extension\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Extension\Extension;
+use Pagekit\Framework\Event\Event;
 
 class ExtensionEvent extends Event
 {

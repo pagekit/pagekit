@@ -3,7 +3,6 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\Event;
-use Pagekit\System\Link\LinkInterface;
 use Symfony\Component\Finder\Expression\Expression;
 
 class FileAccessEvent extends Event

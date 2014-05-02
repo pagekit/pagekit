@@ -26,11 +26,11 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
     // status handling
     var status   = $('input[name="page[status]"]', form),
         statuses = $('.js-status', form).on('click', function() {
-            status.val(statuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('status'));
+            status.val(statuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
         });
 
     // markdown status handling
-    var markdownStatus   = $('input[name="page[data][markdown]"]'),
+    var markdownStatus   = $('input[name="page[data][markdown]"]', form),
         markdownStatuses = $('.js-markdown').on('click', function() {
             markdownStatus.val(markdownStatuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
             $('#page-content', form).trigger(markdownStatus.val() == '1' ? 'enableMarkdown' : 'disableMarkdown');
