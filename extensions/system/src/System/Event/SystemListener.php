@@ -34,11 +34,12 @@ class SystemListener extends EventSubscriber
     {
         $app = $this('app');
 
-        $app['view.scripts']->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
-        $app['view.scripts']->register('requirejs', 'vendor://assets/requirejs/require.min.js', array('requirejs-config'));
-        $app['view.scripts']->register('requirejs-config', 'asset://system/js/require.js');
-        $app['view.scripts']->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', array(), array('requirejs' => true));
-        $app['view.scripts']->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', array(), array('requirejs' => true));
+        $scripts = $app['view.scripts'];
+        $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
+        $scripts->register('requirejs', 'vendor://assets/requirejs/require.min.js', array('requirejs-config'));
+        $scripts->register('requirejs-config', 'asset://system/js/require.js');
+        $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', array(), array('requirejs' => true));
+        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', array(), array('requirejs' => true));
 
         $helper = new DateHelper($app['dates']);
         $app['tmpl.php']->addHelpers(array($helper));
@@ -68,27 +69,18 @@ class SystemListener extends EventSubscriber
         $app['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
         $app['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-        $app['view']->addAction('head', function() use ($app) {
+        $app['view']->addAction('head', function() use ($scripts) {
 
-            foreach ($scripts = $app['view.scripts'] as $script) {
+            foreach ($scripts as $script) {
 
-                if ($script->getName() != 'requirejs') {
-                    continue;
+                $dependencies = (array) $script['dependencies'];
+
+                if (isset($script['requirejs'])) {
+                    $script['dependencies'] = array_merge($dependencies, array('requirejs'));
+                } elseif (in_array('requirejs', $dependencies)) {
+                    $scripts->dequeue($name = $script->getName());
+                    $scripts->queue($name);
                 }
-
-                foreach ($scripts as $script) {
-
-                    $dependencies = (array) $script['dependencies'];
-
-                    if (isset($script['requirejs'])) {
-                        $script['dependencies'] = array_merge($dependencies, array('requirejs'));
-                    } elseif (in_array('requirejs', $dependencies)) {
-                        $scripts->dequeue($name = $script->getName());
-                        $scripts->queue($name);
-                    }
-                }
-
-                break;
             }
 
         }, 5);
