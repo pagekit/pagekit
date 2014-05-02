@@ -81,11 +81,11 @@ class FinderController extends Controller
      */
     public function renameAction($oldname, $newname)
     {
-        if (!$source = $this->getPath($oldname) or !file_exists($source) or !$target = $this->getPath($newname) or file_exists($target)) {
+        if (!$source = $this->getPath($oldname) or !$target = $this->getPath($newname)) {
             return $this->error(__('Invalid path.'));
         }
 
-        if ('w' !== $this->getMode($source) or 'w' !== $this->getMode(dirname($target))) {
+        if ('w' !== $this->getMode($source) || file_exists($target) || 'w' !== $this->getMode(dirname($target))) {
             return $this->error(__('Permission denied.'));
         }
 
