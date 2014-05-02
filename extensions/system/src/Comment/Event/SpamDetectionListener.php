@@ -2,8 +2,6 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Event\CommentPersistEvent;
-use Pagekit\Comment\Model\CommentEvents;
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Comment\SpamDetection\SpamDetectionInterface;
 use Psr\Log\LoggerInterface;
@@ -36,7 +34,7 @@ class SpamDetectionListener implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    public function spamCheck(CommentPersistEvent $event)
+    public function spamCheck(SpamEvent $event)
     {
         $comment = $event->getComment();
 
@@ -53,6 +51,6 @@ class SpamDetectionListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(CommentEvents::PRE_PERSIST => 'spamCheck');
+        return array('system.comment.spam_check' => 'spamCheck');
     }
 }

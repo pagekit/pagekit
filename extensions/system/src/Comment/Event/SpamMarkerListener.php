@@ -2,8 +2,6 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Event\CommentEvent;
-use Pagekit\Comment\Model\CommentEvents;
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Comment\SpamDetection\SpamMarkerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -21,21 +19,21 @@ class SpamMarkerListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param SpamMarkerInterface  $marker
+     * @param SpamMarkerInterface $marker
      */
     public function __construct(SpamMarkerInterface $marker)
     {
         $this->spamMarker = $marker;
     }
 
-    public function mark(CommentEvent $event)
+    public function mark(MarkSpamEvent $event)
     {
         $comment = $event->getComment();
 
-        if ($comment->getStatus() != $comment->getPreviousStatus()) {
+        if ($comment->getStatus() != $event->getPreviousStatus()) {
             if ($comment->getStatus() == CommentInterface::STATUS_SPAM) {
                 $this->spamMarker->markSpam($comment);
-            } elseif ($comment->getPreviousStatus() == CommentInterface::STATUS_SPAM) {
+            } elseif ($event->getPreviousStatus() == CommentInterface::STATUS_SPAM) {
                 $this->spamMarker->markHam($comment);
             }
         }
@@ -43,6 +41,6 @@ class SpamMarkerListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(CommentEvents::POST_PERSIST => 'mark');
+        return array('system.comment.spam_mark' => 'mark');
     }
 }

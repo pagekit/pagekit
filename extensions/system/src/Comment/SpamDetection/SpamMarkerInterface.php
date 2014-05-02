@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Component\Comment\SpamDetection;
+namespace Pagekit\Comment\SpamDetection;
 
-use Pagekit\Component\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\CommentInterface;
 
 /**
  * Spam marker interface.
