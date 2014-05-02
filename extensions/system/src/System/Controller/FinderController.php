@@ -13,11 +13,11 @@ class FinderController extends Controller
      */
     public function listAction($path)
     {
-        if (!$dir = $this->getPath() or !is_dir($dir)) {
+        if (!$dir = $this->getPath()) {
             return $this->error(__('Invalid path.'));
         }
 
-        if ('-' === $mode = $this->getMode($dir)) {
+        if (!is_dir($dir) || '-' === $mode = $this->getMode($dir)) {
             return $this->error(__('Permission denied.'));
         }
 
@@ -130,8 +130,12 @@ class FinderController extends Controller
     public function uploadAction()
     {
         try {
-            if (!$path = $this->getPath() or !is_dir($path)) {
+            if (!$path = $this->getPath()) {
                 return $this->error(__('Invalid path.'));
+            }
+
+            if (!is_dir($path) || 'w' !== $mode = $this->getMode($path)) {
+                return $this->error(__('Permission denied.'));
             }
 
             $files = $this('request')->files->get('files');
