@@ -57,6 +57,10 @@ class FinderController extends Controller
      */
     public function createFolderAction($name)
     {
+        if (!$this->isValidFilename($name)) {
+            return $this->error(__('Invalid file name.'));
+        }
+
         if (!$path = $this->getPath($name)) {
             return $this->error(__('Invalid path.'));
         }
@@ -81,6 +85,10 @@ class FinderController extends Controller
      */
     public function renameAction($oldname, $newname)
     {
+        if (!$this->isValidFilename($newname)) {
+            return $this->error(__('Invalid file name.'));
+        }
+
         if (!$source = $this->getPath($oldname) or !$target = $this->getPath($newname)) {
             return $this->error(__('Invalid path.'));
         }
@@ -218,6 +226,19 @@ class FinderController extends Controller
         }
 
         return $prefix . implode('/', $tokens);
+    }
+
+    protected function isValidFilename($name)
+    {
+        if (empty($name)) {
+            return false;
+        }
+
+        if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
+            return !preg_match('#[\\/:"*?<>|]#', $name);
+        }
+
+        return -1 !== strpos($name, '/');
     }
 
     protected function success($message) {

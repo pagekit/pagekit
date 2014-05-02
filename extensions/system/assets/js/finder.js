@@ -102,7 +102,7 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
                     .on('change', '.js-select', function() {
                         $this.showOnSelect();
                     })
-                    .on('selected-rows', '.js-finder-files', function() {
+                    .on('selected-rows', function() {
                         $this.showOnSelect();
                     })
                     .on('click', '[data-url]', function(e) {
@@ -113,7 +113,7 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
                     .on('keyup', this.filter, uikit.Utils.debounce(function() {
                         $this.applyFilter();
                     }, 50))
-                    .on('drop', function(e){
+                    .on('drop', function(e) {
 
                         if (e.dataTransfer && e.dataTransfer.files) {
 

@@ -9,7 +9,7 @@
         <button class="uk-button" data-cmd="createFolder">@trans('Add Folder')</button>
 
         <button class="uk-button pk-button-danger js-show-on-select" data-cmd="removeSelected">@trans('Delete')</button>
-        <button class="uk-button pk-button-danger js-show-on-single-select" data-cmd="renameSelected">@trans('Rename')</button>
+        <button class="uk-button js-show-on-single-select" data-cmd="renameSelected">@trans('Rename')</button>
 
     </div>
     <div class="uk-float-right">
