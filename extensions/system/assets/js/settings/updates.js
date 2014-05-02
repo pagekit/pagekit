@@ -94,9 +94,9 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
 
             $.post(params.api + '/package/' + data.package.name, function(info) {
 
-                var package = info.versions[data.package.version];
+                var version = info.versions[data.package.version];
 
-                if (package && package.dist.shasum != data.package.shasum) {
+                if (version && version.dist.shasum != data.package.shasum) {
                     show('checksum-mismatch', upload);
                 }
 

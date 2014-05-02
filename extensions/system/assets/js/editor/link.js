@@ -75,11 +75,12 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], fu
         editor.element.on('action.link', function() {
 
             var cursor = editor.editor.getCursor(), data;
-            links.forEach(function(link) {
+            links.every(function(link) {
                 if (link.inRange(cursor)) {
                     data = link;
                     return false;
                 }
+                return true;
             });
 
             if (data) {

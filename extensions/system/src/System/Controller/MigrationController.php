@@ -22,6 +22,8 @@ class MigrationController extends Controller
 
             return $this->redirect('@system/system/admin');
         }
+
+        return array('head.title' => __('Update Pagekit'));
     }
 
     /**

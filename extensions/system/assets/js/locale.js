@@ -1,6 +1,6 @@
 define('locale', ['json!index.php/system/locale'], function(locale) {
 
-    var module = {
+    return {
 
         trans: function(id, parameters, domain){
 
@@ -332,6 +332,4 @@ define('locale', ['json!index.php/system/locale'], function(locale) {
 
         return this.date(format, timestamp);
     }
-
-    return module;
 });

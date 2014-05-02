@@ -183,11 +183,12 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
         editor.element.on('action.picture', function() {
 
             var cursor = editor.editor.getCursor(), data;
-            images.forEach(function(image) {
+            images.every(function(image) {
                 if (image.inRange(cursor)) {
                     data = image;
                     return false;
                 }
+                return true;
             });
 
             if (!data) {

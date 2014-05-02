@@ -3,7 +3,7 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
     $('#clearCache').on('click', function(e) {
         e.preventDefault();
 
-        modal = new uikit.modal.Modal('#modal-clearcache');
+        var modal = new uikit.modal.Modal('#modal-clearcache');
 
         modal.element.find('form').on('submit', function(e) {
             e.preventDefault();

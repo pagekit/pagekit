@@ -160,33 +160,18 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder']
         // videos
         editor.addButton('video', {
             title: 'Video',
-            label: '<i class="uk-icon-video-camera"></i>',
-            action: function(editor) {
-
-                var cursor = editor.getCursor(), data;
-                videos.forEach(function(video) {
-                    if (video.inRange(cursor)) {
-                        data = video;
-                        return false;
-                    }
-                });
-
-                if (!data) {
-                    data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
-                }
-
-                openVideoModal(data, rootpath);
-            }
+            label: '<i class="uk-icon-video-camera"></i>'
         });
 
         editor.element.on('action.video', function(e, editor) {
 
             var cursor = editor.getCursor(), data;
-            videos.forEach(function(video) {
+            videos.every(function(video) {
                 if (video.inRange(cursor)) {
                     data = video;
                     return false;
                 }
+                return true;
             });
 
             if (!data) {

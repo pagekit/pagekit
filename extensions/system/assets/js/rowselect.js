@@ -29,7 +29,7 @@
                     if (e.shiftKey && $this.lastselected) {
                         var start = Math.min($this.rows.index(row), $this.rows.index($this.lastselected)), end = Math.max($this.rows.index(row), $this.rows.index($this.lastselected));
 
-                        for(i = start; i <= end; i++) {
+                        for(var i = start; i <= end; i++) {
                             $this.rows.eq(i).find($this.options.checkboxes+':first').prop('checked', true);
                         }
                     }
@@ -72,7 +72,7 @@
                 all      = this.container.find(this.options.selectall);
 
             if (!rows.length) {
-                lastselected = false;
+                this.lastselected = false;
             }
 
             if(selected.length && (selected.length!=checkboxes.length)) {
