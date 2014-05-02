@@ -101,7 +101,7 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
 
         init: function(el, p) {
 
-            element = $(el), form = $('form', el), details = $('.js-marketplace-details', el), params = p, updates = p.updates;
+            element = $(el); form = $('form', el); details = $('.js-marketplace-details', el); params = p; updates = p.updates;
 
             element.on('click', '[data-package]', detailsModal);
             details.on('click', '[data-install]', installButton);

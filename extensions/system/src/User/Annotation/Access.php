@@ -20,7 +20,8 @@ class Access
     /**
      * Constructor.
      *
-     * @param array $data
+     * @param  array $data
+     * @throws \BadMethodCallException
      */
     public function __construct(array $data)
     {

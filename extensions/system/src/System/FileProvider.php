@@ -44,7 +44,8 @@ class FileProvider
      * Proxy method call to filesystem.
      *
      * @param  string $method
-     * @param  array  $args
+     * @param  array $args
+     * @throws \BadMethodCallException
      * @return mixed
      */
     public function __call($method, $args)
