@@ -4,23 +4,25 @@ namespace Pagekit\Menu\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\System\Event\LinkEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class MenuListener extends EventSubscriber
 {
     /**
      * Sets the active menu items.
      */
-    public function onSiteInit()
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        $url   = $this('url');
-        $attr  = $this('request')->attributes;
-        $path  = $this('request')->getPathInfo();
-        $route = ($attr->get('_main_route') ?: $attr->get('_route')).'%';
+        $url     = $this('url');
+        $request = $event->getRequest();
+        $attr    = $request->attributes;
+        $path    = ltrim($request->getPathInfo(), '/');
+        $route   = ($attr->get('_main_route') ?: $attr->get('_route')).'%';
 
         $query = $this('menus')->getItemRepository()->query()
             ->orWhere(array('url = :path', 'url LIKE :route'), compact('path', 'route'));
 
-        if ('/' == $path) {
+        if ('' == $path) {
             $query->orWhere('url = :front', array('front' => '@frontpage'));
         }
 
@@ -56,8 +58,8 @@ class MenuListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.init' => array('onSiteInit', 16),
-            'system.link' => 'onSystemLink'
+            'kernel.request' => 'onKernelRequest',
+            'system.link'    => 'onSystemLink'
         );
     }
 }

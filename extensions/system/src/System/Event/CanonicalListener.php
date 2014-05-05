@@ -3,15 +3,16 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class CanonicalListener extends EventSubscriber
 {
     /**
      * Adds a canonical link to the document head.
      */
-    public function onSiteInit()
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        $request = $this('request');
+        $request = $event->getRequest();
 
         if ($request->getRequestFormat() != 'html') {
             return;
@@ -30,7 +31,7 @@ class CanonicalListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.init' => 'onSiteInit'
+            'kernel.request' => 'onKernelRequest'
         );
     }
 }

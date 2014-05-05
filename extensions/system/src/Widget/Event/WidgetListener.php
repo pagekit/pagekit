@@ -4,16 +4,18 @@ namespace Pagekit\Widget\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Widget\Entity\Widget;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class WidgetListener extends EventSubscriber
 {
     /**
      * Handles the widget to position assignment.
      */
-    public function onSiteInit()
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        $active    = (array) $this('request')->attributes->get('_menu');
-        $path      = ltrim($this('request')->getPathInfo(), '/');
+        $request   = $event->getRequest();
+        $active    = (array) $request->attributes->get('_menu');
+        $path      = ltrim($request->getPathInfo(), '/');
         $positions = $this('positions');
 
         foreach ($this('widgets')->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
@@ -44,7 +46,7 @@ class WidgetListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.init' => array('onSiteInit', -16)
+            'kernel.request' => array('onKernelRequest', -16)
         );
     }
 
