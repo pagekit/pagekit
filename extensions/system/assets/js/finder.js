@@ -5,19 +5,20 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
     });
 
     var Finder = function(element, options) {
-        this.options = $.extend({}, Finder.defaults, options);
-        this.url     = this.options.url;
-        this.path    = this.options.path;
-        this.view    = this.options.view;
-        this.element = $(element);
-    }, deferred;
+        this.options  = $.extend({}, Finder.defaults, options);
+        this.url      = this.options.url;
+        this.path     = this.options.path;
+        this.view     = this.options.view;
+        this.element  = $(element);
+        this.deferred = null;
+    };
 
     $.extend(Finder.prototype, {
 
         _init: function() {
 
-            if (!deferred) {
-                deferred = $.Deferred();
+            if (!this.deferred) {
+                this.deferred = $.Deferred();
 
                 require(['tmpl!finder.main,finder.table,finder.thumbnail'], function(tmpl) {
 
@@ -26,13 +27,13 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
                     tmpls['table']     = Handlebars.compile(tmpl.get('finder.table'));
                     tmpls['thumbnail'] = Handlebars.compile(tmpl.get('finder.thumbnail'));
 
-                    deferred.resolve(tmpls);
-                });
+                    this.deferred.resolve(tmpls);
+                }.bind(this));
             }
 
-            if (deferred.state() == 'resolved') return deferred;
+            if (this.deferred.state() == 'resolved') return this.deferred;
 
-            deferred.done(function(tmpls) {
+            this.deferred.done(function(tmpls) {
 
                 this.element.html(tmpls.main());
 
@@ -145,7 +146,7 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
 
             }.bind(this));
 
-            return deferred;
+            return this.deferred;
         },
 
         loadPath: function(path) {
