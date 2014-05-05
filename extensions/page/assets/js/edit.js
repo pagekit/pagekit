@@ -36,11 +36,16 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
             showtitleinput.val(showtitle.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
         });
 
+    var cancelButton = form.find('.js-cancel'),
+        spinner      = form.find('.js-spinner');
+
     // form ajax saving
     form.on('submit', function(e) {
 
         e.preventDefault();
         e.stopImmediatePropagation();
+
+        spinner.removeClass('uk-hidden');
 
         $.post(form.attr('action'), form.serialize(), function(response) {
 
@@ -48,7 +53,10 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
             if (response.id) {
                 id.val(response.id);
+                cancelButton.text(cancelButton.data('labelClose'));
             }
+
+            spinner.addClass('uk-hidden');
         });
     });
 

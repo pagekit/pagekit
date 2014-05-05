@@ -4,8 +4,8 @@
     <div class="uk-width-medium-3-4">
 
         <div class="pk-options uk-clearfix">
-            <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-            <a class="uk-button" href="@url.route('@page/page/index')">@( page.id ? trans('Close') : trans('Cancel') )</a>
+            <button class="uk-button uk-button-primary" type="submit"><i class="uk-icon-spinner uk-icon-spin js-spinner uk-margin-small-right uk-hidden"></i> @trans('Save')</button>
+            <a class="uk-button js-cancel" href="@url.route('@page/page/index')" data-label-close="@trans('Close')">@( page.id ? trans('Close') : trans('Cancel') )</a>
         </div>
 
         <div class="uk-form-row">
