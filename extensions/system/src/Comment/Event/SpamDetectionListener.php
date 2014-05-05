@@ -15,7 +15,7 @@ class SpamDetectionListener implements EventSubscriberInterface
     /**
      * @var SpamDetectionInterface
      */
-    protected $spamDetector;
+    protected $detector;
 
     /**
      * @var LoggerInterface
@@ -30,23 +30,24 @@ class SpamDetectionListener implements EventSubscriberInterface
      */
     public function __construct(SpamDetectionInterface $detector, LoggerInterface $logger = null)
     {
-        $this->spamDetector = $detector;
-        $this->logger = $logger;
+        $this->detector = $detector;
+        $this->logger   = $logger;
     }
 
-    public function spamCheck(SpamEvent $event)
+    public function spamCheck(CommentEvent $event)
     {
         $comment = $event->getComment();
 
-        if ($this->spamDetector->isSpam($comment)) {
-
-            if (null !== $this->logger) {
-                $this->logger->info('Comment is marked as spam from detector.');
-            }
-
-            $comment->setStatus(CommentInterface::STATUS_SPAM);
-            $event->stopPropagation();
+        if (!$this->detector->isSpam($comment)) {
+            return;
         }
+
+        if (null !== $this->logger) {
+            $this->logger->info('Comment is marked as spam from detector.');
+        }
+
+        $comment->setStatus(CommentInterface::STATUS_SPAM);
+        $event->stopPropagation();
     }
 
     public static function getSubscribedEvents()

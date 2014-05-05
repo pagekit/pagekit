@@ -5,7 +5,7 @@ namespace Pagekit\Comment\Event;
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Framework\Event\Event;
 
-class MarkSpamEvent extends SpamEvent
+class MarkSpamEvent extends CommentEvent
 {
     /**
      * @var mixed

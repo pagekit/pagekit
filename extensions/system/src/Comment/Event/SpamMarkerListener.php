@@ -14,7 +14,7 @@ class SpamMarkerListener implements EventSubscriberInterface
     /**
      * @var SpamMarkerInterface
      */
-    protected $spamMarker;
+    protected $marker;
 
     /**
      * Constructor.
@@ -23,19 +23,21 @@ class SpamMarkerListener implements EventSubscriberInterface
      */
     public function __construct(SpamMarkerInterface $marker)
     {
-        $this->spamMarker = $marker;
+        $this->marker = $marker;
     }
 
     public function mark(MarkSpamEvent $event)
     {
         $comment = $event->getComment();
 
-        if ($comment->getStatus() != $event->getPreviousStatus()) {
-            if ($comment->getStatus() == CommentInterface::STATUS_SPAM) {
-                $this->spamMarker->markSpam($comment);
-            } elseif ($event->getPreviousStatus() == CommentInterface::STATUS_SPAM) {
-                $this->spamMarker->markHam($comment);
-            }
+        if ($comment->getStatus() == $event->getPreviousStatus()) {
+            return;
+        }
+
+        if ($comment->getStatus() == CommentInterface::STATUS_SPAM) {
+            $this->marker->markSpam($comment);
+        } elseif ($event->getPreviousStatus() == CommentInterface::STATUS_SPAM) {
+            $this->marker->markHam($comment);
         }
     }
 
