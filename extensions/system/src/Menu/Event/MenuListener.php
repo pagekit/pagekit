@@ -26,7 +26,7 @@ class MenuListener extends EventSubscriber
             $query->orWhere('url = :front', array('front' => '@frontpage'));
         }
 
-        if ($alias = $attr->get('_system_path')) {
+        if ($alias = ltrim($attr->get('_system_path'), '/')) {
             $query->orWhere('url = :alias', compact('alias'));
         }
 
