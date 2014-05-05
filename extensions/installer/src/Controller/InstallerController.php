@@ -92,7 +92,7 @@ class InstallerController extends Controller
                 $this('db')->insert('@system_user', array(
                     'name' => $user['username'],
                     'username' => $user['username'],
-                    'password' => $this('auth.encoder.native')->hash($user['password']),
+                    'password' => $this('auth.password')->hash($user['password']),
                     'status' => 1,
                     'email' => $user['email'],
                     'registered' => new \DateTime

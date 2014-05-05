@@ -4,12 +4,11 @@ namespace Pagekit\User\Entity;
 
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\User\Model\User as BaseUser;
-use Pagekit\User\Model\UserInterface;
 
 /**
  * @Entity(repositoryClass="Pagekit\User\Entity\UserRepository", tableClass="@system_user", eventPrefix="system.user")
  */
-class User extends BaseUser implements UserInterface
+class User extends BaseUser
 {
     /** @Column(type="integer") @Id */
     protected $id;

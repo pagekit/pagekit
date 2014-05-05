@@ -74,7 +74,7 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addColumn('registered', 'datetime');
                 $table->addColumn('login', 'datetime', array('notnull' => false));
                 $table->addColumn('access', 'datetime', array('notnull' => false));
-                $table->addColumn('activation', 'string', array('length' => 255, 'default' => '', 'notnull' => false));
+                $table->addColumn('activation', 'string', array('length' => 255, 'notnull' => false));
                 $table->addColumn('data', 'json_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
                 $table->addUniqueIndex(array('username'), 'USER_USERNAME');

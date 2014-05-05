@@ -2,7 +2,9 @@
 
 namespace Pagekit\User\Model;
 
-class User
+use Pagekit\User\Model\UserInterface;
+
+abstract class User implements UserInterface
 {
     /**
      * @var string
@@ -155,6 +157,15 @@ class User
         return $this->hasRole(RoleInterface::ROLE_ADMINISTRATOR);
     }
 
+    /**
+     * Check if the user is blocked.
+     *
+     * @return bool
+     */
+    public function isBlocked()
+    {
+        return $this->getStatus() == self::STATUS_BLOCKED;
+    }
     /**
      * Check if the user has access for a provided permission identifier
      *

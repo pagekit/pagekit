@@ -172,7 +172,7 @@ class UserController extends Controller
             $data['email']    = $email;
 
             if (!empty($password)) {
-                $user->setPassword($this('auth.encoder.native')->hash($password));
+                $user->setPassword($this('auth.password')->hash($password));
             }
 
             if ($this->user->hasAccess('system: manage user permissions')) {

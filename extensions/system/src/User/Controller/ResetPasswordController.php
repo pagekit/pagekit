@@ -83,7 +83,7 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Invalid username or email.'));
             }
 
-            $user->setActivation($this('auth.encoder.native')->hash(md5(uniqid(mt_rand(), true))));
+            $user->setActivation($this('auth.random')->generateString(128));
 
             $this->users->save($user);
 
@@ -146,7 +146,9 @@ class ResetPasswordController extends Controller
                     throw new Exception(__('The passwords do not match.'));
                 }
 
-                $user->setPassword($this('auth.encoder.native')->hash($pass1));
+                $user->setPassword($this('auth.password')->hash($pass1));
+                $user->setActivation(null);
+
                 $this->users->save($user);
 
                 $this('message')->success(__('Your password has been reset.'));

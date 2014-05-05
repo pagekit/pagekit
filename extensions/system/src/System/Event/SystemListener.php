@@ -55,7 +55,7 @@ class SystemListener extends EventSubscriber
 
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('urldecode', 'urldecode'));
 
-        $app['auth']->setUserProvider(new UserProvider($app['auth.encoder.native']));
+        $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
 
         $app['events']->addSubscriber(new Editor);
