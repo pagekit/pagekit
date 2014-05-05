@@ -1,6 +1,6 @@
 require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
-    var form = $('.js-widget');
+    var form = $('.js-widget'), title = $('#form-title');
 
     // status handling
     var status   = $('input[name="widget[status]"]', form),
@@ -27,5 +27,16 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
             return fn;
         })());
 
+    // settings nav + remember active tab
 
+    var sidenav = form.find('.uk-nav-side'),
+        tabs    = sidenav.children();
+
+    sidenav.on('uk.switcher.show', function(e, tab){
+        sessionStorage['pk-widget-settings-active'] = tabs.index(tab);
+    });
+
+    if (title.val()) {
+        tabs.eq(sessionStorage['pk-widget-settings-active'] || 0).find('a').trigger('click');
+    }
 });
