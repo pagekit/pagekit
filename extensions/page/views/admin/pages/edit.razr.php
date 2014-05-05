@@ -12,8 +12,7 @@
             <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
             <input type="hidden" name="id" value="@(page.id ?: 0)">
             <div class="uk-margin-small-top">
-                <span class="uk-text-muted uk-link js-slug" data-uk-toggle="{target:'.js-slug'}">@(page.slug ?: '')</span>
-                <input class="uk-form-width-medium uk-form-small uk-hidden js-slug" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug')">
+                <input class="uk-form-width-medium uk-form-small uk-form-blank" type="text" name="page[slug]" value="@page.slug" placeholder="@trans('Slug')" data-url="@url.route('@page/page/getslug')">
             </div>
         </div>
         <div class="uk-form-row">

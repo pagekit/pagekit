@@ -4,12 +4,7 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     // slug handling
     var slug  = $('input[name="page[slug]"]', form),
-        title = $('input[name="page[title]"]', form),
-        slugPreview = $('.js-slug[data-uk-toggle]', form);
-
-    slugPreview.on('click', function() {
-        setTimeout(function() { slug.focus(); }, 10);
-    });
+        title = $('input[name="page[title]"]', form);
 
     title.on('blur', function () {
         if (!(id.val()-0)) slug.val('');
@@ -18,8 +13,7 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     slug.on('blur', function() {
         $.post(slug.data('url'), { slug: slug.val() || title.val(), id: id.val() }, function(data) {
-            slug.val(data).addClass('uk-hidden');
-            slugPreview.text(data).removeClass('uk-hidden');
+            slug.val(data);
         }, 'json');
     });
 
