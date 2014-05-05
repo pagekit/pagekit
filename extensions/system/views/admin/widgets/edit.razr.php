@@ -21,8 +21,6 @@
                     </div>
                 </div>
 
-                <h2 class="pk-form-heading">@trans('Advanced')</h2>
-
                 @set (type = app.widgets.types[widget.type])
                 @type.renderForm(widget)
 
