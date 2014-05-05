@@ -187,7 +187,13 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder']
 
             videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, function(data) {
 
-                $.extend(data, ($.parseJSON(data.matches[1]) || { src: '' }));
+                try {
+
+                    var settings = $.parseJSON(data.matches[1]);
+
+                } catch (e) {}
+
+                $.extend(data, (settings || { src: '' }));
 
                 return tmpl.render('video.replace', { preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
 
