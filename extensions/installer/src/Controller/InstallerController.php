@@ -128,7 +128,7 @@ class InstallerController extends Controller
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('app.key', sha1(uniqid(microtime())));
+                $configuration->set('app.key', $this('auth.random')->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 
