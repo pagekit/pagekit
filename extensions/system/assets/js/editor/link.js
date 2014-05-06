@@ -75,6 +75,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], fu
         editor.element.on('action.link', function() {
 
             var cursor = editor.editor.getCursor(), data;
+
             links.every(function(link) {
                 if (link.inRange(cursor)) {
                     data = link;
@@ -83,11 +84,31 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], fu
                 return true;
             });
 
-            if (data) {
-                openLinkModal(data);
-            } else {
-                editor.replaceSelection(editor.getCursorMode() == 'html' ? '<a href="http://">$1</a>' : '[$1](http://)');
+            if (!data) {
+
+                data = {
+                    txt: editor.editor.getSelection(),
+                    link: 'http://',
+                    'class': '',
+                    handler: function() {
+
+                        var repl;
+
+                        picker.hide();
+
+                        if (editor.getCursorMode() == 'html') {
+                            repl = '<a href="' + link.get() + '">' + title.val() + '</a>';
+                        } else {
+                            repl = '[' + title.val() + '](' + link.get() + ')';
+                        }
+
+                        editor.editor.replaceSelection(repl, 'end');
+                    },
+                    replace: function(value) { editor.editor.replaceRange(value, cursor); }
+                };
             }
+
+            openLinkModal(data);
         });
     });
 
