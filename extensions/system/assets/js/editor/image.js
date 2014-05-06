@@ -179,8 +179,8 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
             images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
         });
 
-        editor.element.off('action.picture');
-        editor.element.on('action.picture', function() {
+        editor.element.off('action.image');
+        editor.element.on('action.image', function() {
 
             var cursor = editor.editor.getCursor(), data;
             images.every(function(image) {
