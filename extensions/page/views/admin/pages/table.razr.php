@@ -1,9 +1,4 @@
 @if (pages)
-
-<div class="uk-margin uk-text-muted uk-text-right">
-    @count @transchoice("{0} Pages| {1} Page| ]1,Inf] Pages", count)
-</div>
-
 <table class="uk-table uk-table-hover uk-table-middle">
     <thead>
         <tr>

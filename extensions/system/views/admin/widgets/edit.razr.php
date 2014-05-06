@@ -32,11 +32,10 @@
                     <div class="uk-form-controls">
                         <div class="uk-scrollable-box uk-form-width-large">
                             @foreach (app.menus as id => menu)
-                            @set (root = app.menus.getTree(menu.id))
-                            @if (id != 'admin' && root.hasChildren())
+                            @if (menu.items)
                             @if (prev)<hr>@endif@set (prev = 1)
                             <h3 class="uk-h4 uk-margin-top-remove">@menu.name</h3>
-                            @include('view://system/admin/widgets/select.razr.php', ['root' => root, 'widget' => widget])
+                            @include('view://system/admin/widgets/select.razr.php', ['root' => app.menus.getTree(menu), 'widget' => widget])
                             @endif
                             @endforeach
                             <input type="hidden" name="widget[menuItems][]" value="">

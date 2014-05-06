@@ -15,8 +15,11 @@ class UserProvider extends ApplicationAware
      * @var AccessLevelHelper
      */
     protected $access;
+
     /**
      * Constructor.
+     *
+     * @param CacheInterface $cache
      */
     public function __construct(CacheInterface $cache = null)
     {

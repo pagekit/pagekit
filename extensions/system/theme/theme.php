@@ -17,8 +17,8 @@ $app->on('admin.init', function() use ($app) {
 
     // set menus
     $app->on('kernel.view', function() use ($app) {
-        $app['view']->set('nav', $root = $app['menus']->getTree('admin', array('access' => true)));
-        $app['view']->set('subnav', current(array_filter($root->getChildren(), function($item) { return $item->getAttribute('active'); })));
+        $app['view']->set('nav', $app['admin.menu']);
+        $app['view']->set('subnav', current(array_filter($app['admin.menu']->getChildren(), function($item) { return $item->getAttribute('active'); })));
     });
 
 });
