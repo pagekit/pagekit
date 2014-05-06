@@ -49,14 +49,14 @@ class MenuWidget extends Type
         ));
 
         $startLevel = (int) $widget->get('start_level', 1) - 1;
-        $maxDepth   = $widget->get('depth');
+        $maxDepth   = $startLevel + ($widget->get('depth') ?: INF);
 
         foreach (new \RecursiveIteratorIterator($root, \RecursiveIteratorIterator::CHILD_FIRST) as $node) {
 
             $parent = $node->getParent();
             $parent->setAttribute('parent', true);
 
-            if ($maxDepth && $node->getDepth() > $startLevel + $maxDepth) {
+            if ($node->getDepth() > $maxDepth) {
                 $node->setParent();
             }
 
@@ -84,8 +84,6 @@ class MenuWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        $menus  = $this('menus')->getMenuRepository()->findAll();
-
-        return $this('view')->render('system/widgets/menu/edit.razr.php', compact('widget', 'menus'));
+        return $this('view')->render('system/widgets/menu/edit.razr.php', compact('widget'));
     }
 }

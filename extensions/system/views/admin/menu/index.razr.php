@@ -28,7 +28,7 @@
     </div>
     <div class="uk-width-medium-3-4">
 
-        @if (menu.id)
+        @if (menu)
         <div class="pk-options uk-clearfix">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
@@ -54,7 +54,11 @@
             <div class="pk-table-width-100">@trans('Access')</div>
         </div>
 
-        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu.id), 'levels' => levels])
+        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
+
+        @else
+
+        @trans('No menu found.')
 
         @endif
 

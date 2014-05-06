@@ -2,7 +2,7 @@
     <label for="form-menu" class="uk-form-label">@trans('Menu')</label>
     <div class="uk-form-controls">
         <select id="form-menu" class="uk-form-width-large" name="widget[settings][menu]">
-            @foreach (menus as menu)
+            @foreach (app.menus as menu)
             <option value="@menu.id"@(menu.id == widget.get('menu') ? ' selected')>@menu.name</option>
             @endforeach
         </select>

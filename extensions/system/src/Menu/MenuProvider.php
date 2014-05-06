@@ -86,16 +86,6 @@ class MenuProvider extends ApplicationAware implements \IteratorAggregate
     }
 
     /**
-     * Sets a menu.
-     *
-     * @param MenuInterface $menu
-     */
-    public function set(MenuInterface $menu)
-    {
-        $this->menus[$menu->getId()] = $menu;
-    }
-
-    /**
      * @return FilterManager
      */
     public function getFilterManager()
@@ -114,13 +104,15 @@ class MenuProvider extends ApplicationAware implements \IteratorAggregate
     /**
      * Retrieves menu item tree.
      *
-     * @param  string $id
-     * @param  array  $parameters
+     * @param  string|MenuInterface $menu
+     * @param  array                $parameters
      * @return Node
      */
-    public function getTree($id, array $parameters = array())
+    public function getTree($menu, array $parameters = array())
     {
-        $menu     = $this->get($id);
+        if (!$menu instanceof MenuInterface) {
+            $menu = $this->get($menu);
+        }
         $iterator = $menu->getIterator();
 
         foreach ($this->filters as $filters) {

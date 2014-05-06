@@ -1,20 +1,19 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\Extension\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\Menu\Model\Menu;
+use Pagekit\System\Event\AdminMenuEvent;
 use Pagekit\System\Menu\Item;
 
 class AdminMenuListener extends EventSubscriber
 {
     /**
-     * Creates the menu instance and dispatches the 'system.admin_menu' event.
+     * Adds extensions menu items.
      */
-    public function onAdminInit()
+    public function onAdminMenu(AdminMenuEvent $event)
     {
-        $menu = new Menu;
-        $menu->setId('admin');
+        $menu = $event->getMenu();
 
         foreach ($this('extensions') as $extension) {
             foreach ($extension->getConfig('menu', array()) as $id => $properties) {
@@ -25,12 +24,6 @@ class AdminMenuListener extends EventSubscriber
                 $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu))));
             }
         }
-
-        $this('menus')->set($menu);
-        $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
-        $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
-
-        $this('events')->trigger('system.admin_menu', new AdminMenuEvent($menu));
     }
 
     /**
@@ -39,7 +32,7 @@ class AdminMenuListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'admin.init' => 'onAdminInit'
+            'system.admin_menu' => 'onAdminMenu'
         );
     }
 }

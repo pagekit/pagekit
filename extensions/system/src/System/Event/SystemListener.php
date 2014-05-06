@@ -10,6 +10,7 @@ use Pagekit\Content\Plugin\VideoPlugin;
 use Pagekit\Editor\Editor;
 use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
 use Pagekit\System\Dashboard\FeedWidget;
 use Pagekit\System\Dashboard\WeatherWidget;
@@ -88,6 +89,22 @@ class SystemListener extends EventSubscriber
         $app['view']->addAction('messages', function(ActionEvent $event) use ($app) {
             $event->append($app['view']->render('system/messages/messages.razr.php'));
         });
+    }
+
+    /**
+     * Creates the menu instance and dispatches the 'system.admin_menu' event.
+     */
+    public function onAdminInit()
+    {
+        $menu = new Menu;
+        $menu->setId('admin');
+
+        $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
+        $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
+
+        $this('events')->trigger('system.admin_menu', new AdminMenuEvent($menu));
+
+        self::$app['admin.menu'] = $this('menus')->getTree($menu, array('access' => true));
     }
 
     /**
@@ -204,6 +221,7 @@ class SystemListener extends EventSubscriber
     {
         return array(
             'init'                   => 'onInit',
+            'admin.init'             => 'onAdminInit',
             'system.link'            => 'onSystemLink',
             'system.tmpl'            => 'onSystemTmpl',
             'system.locale'          => 'onSystemLocale',
