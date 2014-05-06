@@ -33,10 +33,10 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
         tabs    = sidenav.children();
 
     sidenav.on('uk.switcher.show', function(e, tab){
-        sessionStorage['pk-widget-settings-active'] = tabs.index(tab);
+        sessionStorage['pk-widget-settings-'+form.data('id')] = tabs.index(tab);
     });
 
-    if (title.val()) {
-        tabs.eq(sessionStorage['pk-widget-settings-active'] || 0).find('a').trigger('click');
+    if (form.data('id')!=='0') {
+        tabs.eq(sessionStorage['pk-widget-settings-'+form.data('id')] || 0).find('a').trigger('click');
     }
 });

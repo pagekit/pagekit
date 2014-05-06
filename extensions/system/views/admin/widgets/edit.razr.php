@@ -1,6 +1,6 @@
 @script('widget', 'system/js/widgets/widget.js', 'requirejs')
 
-<form class="js-widget uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
+<form class="js-widget uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post" data-id="@(widget.id ?: 0)">
 
     <div class="uk-width-medium-3-4">
 
