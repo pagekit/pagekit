@@ -17,11 +17,13 @@
     {{#each data.files}}
     <li data-name="{{name}}" data-url="{{url}}" data-type="file">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover" data-url="{{url}}" data-type="file" data-row>
-            {{#isImage url}}
-            <div class="pk-finder-thumbnail" style="background-image: url('{{url}}');"></div>
-            {{else}}
-            <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
-            {{/isImage}}
+            <div class="uk-panel-teaser">
+                {{#isImage url}}
+                <div class="pk-finder-thumbnail" style="background-image: url('{{url}}');"></div>
+                {{else}}
+                <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
+                {{/isImage}}
+            </div>
             <div class="uk-text-nowrap uk-text-truncate">
                 <input type="checkbox" class="js-select" data-name="{{name}}">
                 {{name}}
