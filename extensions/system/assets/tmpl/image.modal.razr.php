@@ -1,25 +1,22 @@
 <div class="uk-modal">
-    <div class="uk-modal-dialog uk-modal-dialog-large uk-form">
+    <div class="uk-modal-dialog uk-form">
         <div data-screen="settings">
             <h1 class="uk-h3">@trans('Add Image')</h1>
 
-            <div class="uk-grid">
-                <div class="uk-width-1-3 uk-text-center">
+                <div class="uk-form-row uk-text-center">
                     <img class="js-img-preview" alt="Preview image">
                 </div>
 
-                <div class="uk-width-2-3">
-
-                    <div class="uk-form-row">
-                        <input type="text" class="js-url uk-width-4-5" placeholder="@trans('URL')">
-                        <button type="button" class="uk-button uk-float-right uk-width-1-6" data-goto="finder">@trans('Select image')</button>
-                    </div>
-                    <div class="uk-form-row">
-                        <input type="text" class="js-title uk-width-1-1" placeholder="@trans('Alt')">
-                    </div>
-
+                <div class="uk-form-row">
+                    <a href="#" data-goto="finder">@trans('Select image')</a>
                 </div>
-            </div>
+
+                <div class="uk-form-row">
+                    <input type="text" class="js-url uk-width-1-1" placeholder="@trans('URL')">
+                </div>
+                <div class="uk-form-row">
+                    <input type="text" class="js-title uk-width-1-1" placeholder="@trans('Alt')">
+                </div>
 
             <div class="uk-form-row uk-margin-top">
                 <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>

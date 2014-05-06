@@ -75,6 +75,12 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
         goto: function(screen){
             var next = this.screens.filter('[data-screen="'+screen+'"]');
 
+            if (screen=='settings') {
+                this.modal.find('.uk-modal-dialog').removeClass('uk-modal-dialog-large');
+            } else {
+                this.modal.find('.uk-modal-dialog').addClass('uk-modal-dialog-large');
+            }
+
             this.screens.addClass('uk-hidden');
             next.removeClass('uk-hidden');
 
