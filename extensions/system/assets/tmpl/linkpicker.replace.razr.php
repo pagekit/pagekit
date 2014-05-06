@@ -1,1 +1,1 @@
-<a href="#"><span class="js-picker-resolved uk-text-muted" data-text-empty="@trans('Choose Link')"></span> <i class="uk-icon-edit"></i></a>
+<a href="#"><span class="js-picker-resolved" data-text-empty="@trans('Choose Link')"></span> <i class="uk-icon-pencil"></i></a>
