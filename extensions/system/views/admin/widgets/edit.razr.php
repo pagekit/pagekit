@@ -26,22 +26,18 @@
 
             </li>
             <li>
-
+      
+                @foreach (app.menus as id => menu)
+                @if (menu.items)
                 <div class="uk-form-row">
-                    <label for="form-h-it" class="uk-form-label">@trans('Menu Items')</label>
-                    <div class="uk-form-controls">
-                        <div class="uk-scrollable-box uk-form-width-large">
-                            @foreach (app.menus as id => menu)
-                            @if (menu.items)
-                            @if (prev)<hr>@endif@set (prev = 1)
-                            <h3 class="uk-h4 uk-margin-top-remove">@menu.name</h3>
-                            @include('view://system/admin/widgets/select.razr.php', ['root' => app.menus.getTree(menu), 'widget' => widget])
-                            @endif
-                            @endforeach
-                            <input type="hidden" name="widget[menuItems][]" value="">
-                        </div>
+                    <label for="form-h-it" class="uk-form-label">@menu.name @trans('Menu')</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                    @include('view://system/admin/widgets/select.razr.php', ['root' => app.menus.getTree(menu), 'widget' => widget])
                     </div>
                 </div>
+                @endif
+                @endforeach
+
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">@trans('Pattern')</label>
                     <div class="uk-form-controls">
@@ -49,6 +45,8 @@
                         <p class="uk-form-help-block">@trans('Enter one page path per line. The "*" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: "blog" for the blog page, "blog/*" for blog entries or "!blog" if you want to exclude the blog.')</p>
                     </div>
                 </div>
+
+                <input type="hidden" name="widget[menuItems][]" value="">
 
             </li>
             @foreach (additionals as settings)
