@@ -2305,6 +2305,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   box-sizing: content-box;
   /* 2 */
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
 /*
@@ -2313,7 +2314,6 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-pagination > li > a {
   background: #f5f5f5;
   color: #444444;
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 /*
  * Hover
@@ -2340,6 +2340,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-pagination > .uk-active > span {
   background: #37a5e4;
   color: #ffffff;
+  border-color: transparent;
 }
 /*
  * Disabled
@@ -4987,7 +4988,6 @@ a.uk-thumbnail:focus {
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
   -webkit-transform: translate3d(0, 0, 0);
-  border: 1px dashed #ddd;
 }
 /*
  * Hover
@@ -7482,6 +7482,11 @@ a.uk-datepicker-table-muted {
 }
 .pk-subnav-icon > li > a:hover {
   color: #444444;
+}
+/* Sub-modifier `pk-table-subheading`
+========================================================================== */
+.pk-overlay-border {
+  border: 1px dashed #ddd;
 }
 /* Sub-modifier `pk-table-subheading`
 ========================================================================== */

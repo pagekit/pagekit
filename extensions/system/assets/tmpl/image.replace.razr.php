@@ -2,12 +2,12 @@
     {{#if src}}
         <img src="{{{src}}}" alt="{{{alt}}}">
     {{else}}
-      <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align">
+        <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align">
             <div class="uk-vertical-align-middle"><img data-js-no-parse src="@url.to('asset://system/images/placeholder-editor-image.svg')" width="60" height="60" alt="@trans('Placeholder Image')"></div>
-      </div>
+        </div>
     {{/if}}
 
-    <div class="uk-overlay-area">
+    <div class="uk-overlay-area pk-overlay-border">
         <div class="uk-overlay-area-content">
             <h3 class="uk-margin-small-bottom">@trans('Image')</h3>
             <div data-uk-margin>
