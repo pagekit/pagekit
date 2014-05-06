@@ -46,7 +46,7 @@ class MenuController extends Controller
     {
         $menus = $this->menus->query()->orderBy('name')->get();
 
-        if ($menu = $id === null && count($menus) ? current($menus) : isset($menus[$id]) ? $menus[$id] : false) {
+        if ($menu = $id === null && count($menus) ? current($menus) : (isset($menus[$id]) ? $menus[$id] : false)) {
             $menu->setItems($this->items->findByMenu($menu));
         }
 
