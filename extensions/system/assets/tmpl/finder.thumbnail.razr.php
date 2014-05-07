@@ -1,10 +1,10 @@
 {{#if data}}
-<ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+<ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4 pk-thumbnail-border-remove" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
     {{#each data.folders}}
     <li data-name="{{name}}" data-type="folder" data-url="{{url}}">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover" data-type="folder" data-url="{{url}}" data-row>
             <div class="uk-panel-teaser">
-                <div class="pk-finder-thumbnail pk-finder-thumbnail-folder"></div>
+                <div class="pk-thumbnail pk-thumbnail-folder"></div>
             </div>
             <div class="uk-text-truncate">
                 <input type="checkbox" class="js-select" data-name="{{name}}">
@@ -19,9 +19,9 @@
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover" data-url="{{url}}" data-type="file" data-row>
             <div class="uk-panel-teaser">
                 {{#isImage url}}
-                <div class="pk-finder-thumbnail" style="background-image: url('{{url}}');"></div>
+                <div class="pk-thumbnail" style="background-image: url('{{url}}');"></div>
                 {{else}}
-                <div class="pk-finder-thumbnail pk-finder-thumbnail-file"></div>
+                <div class="pk-thumbnail pk-thumbnail-file"></div>
                 {{/isImage}}
             </div>
             <div class="uk-text-nowrap uk-text-truncate">

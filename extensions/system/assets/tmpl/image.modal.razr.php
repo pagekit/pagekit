@@ -1,23 +1,25 @@
 <div class="uk-modal">
-    <div class="uk-modal-dialog uk-form">
+    <div class="uk-modal-dialog uk-form uk-form-stacked">
         <div data-screen="settings">
             <h1 class="uk-h3">@trans('Add Image')</h1>
-
-                <div class="uk-form-row uk-text-center">
-                    <img class="js-img-preview" alt="Preview image">
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <div class="js-img-preview pk-thumbnail pk-thumbnail-image"></div>
+                    <p class="uk-margin-small-top"><a href="#" data-goto="finder">@trans('Select image')</a></p>
                 </div>
-
-                <div class="uk-form-row">
-                    <a href="#" data-goto="finder">@trans('Select image')</a>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="form-url">@trans('URL')</label>
+                <div class="uk-form-controls">
+                    <input id="form-url" type="text" class="js-url uk-width-1-1">
                 </div>
-
-                <div class="uk-form-row">
-                    <input type="text" class="js-url uk-width-1-1" placeholder="@trans('URL')">
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="form-alt">@trans('Alt')</label>
+                <div class="uk-form-controls">
+                    <input type="text" class="js-title uk-width-1-1">
                 </div>
-                <div class="uk-form-row">
-                    <input type="text" class="js-title uk-width-1-1" placeholder="@trans('Alt')">
-                </div>
-
+            </div>
             <div class="uk-form-row uk-margin-top">
                 <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
                 <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>

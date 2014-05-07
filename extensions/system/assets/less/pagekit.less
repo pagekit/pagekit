@@ -109,7 +109,6 @@
 .pk-subnav-icon > li > a:hover { color: @global-color; }
 
 
-
 /* Sub-modifier `pk-overlay-border`
 ========================================================================== */
 
@@ -351,32 +350,49 @@
 
 .pk-finder-table td:nth-child(2) { padding-right: 0; }
 
-/*
- * Sub-object `pk-finder-thumbnail`
- */
 
-.pk-finder-thumbnail {
+/* `pk-thumbnail`
+ ========================================================================== */
+
+.pk-thumbnail {
     height: 150px;
+    border: 1px solid @global-border;
     background-color: #fafafa;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
 }
 
-.pk-finder-thumbnail-folder {
+/*
+ * Modifier
+ */
+
+.pk-thumbnail-border-remove .pk-thumbnail { border: none; }
+
+/*
+ * Placeholder
+ */
+
+.pk-thumbnail-folder {
     background-image: url("../../assets/images/icon-finder-folder.svg");
     background-size: 50px 50px;
 }
-.pk-finder-thumbnail-file {
+
+.pk-thumbnail-file {
     background-image: url("../../assets/images/icon-finder-file.svg");
     background-size: 50px 50px;
 }
 
-/*
- * Sub-object `pk-finder-thumbnail-table`
- */
+.pk-thumbnail-image {
+    background-image: url("../../assets/images/placeholder-icon.svg");
+    background-size: 50px 50px;
+}
 
-.pk-finder-thumbnail-table {
+
+/* `pk-thumbnail-icon`
+ ========================================================================== */
+
+.pk-thumbnail-icon {
     display: inline-block;
     width: 15px;
     height: 15px;

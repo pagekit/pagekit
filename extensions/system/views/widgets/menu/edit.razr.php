@@ -22,7 +22,7 @@
     <label for="form-style" class="uk-form-label">@trans('Depth')</label>
     <div class="uk-form-controls">
         <select id="form-style" class="uk-form-width-large" name="widget[settings][depth]">
-            <option value="">@trans('- No Limit -')</option>
+            <option value="">@trans('No Limit')</option>
             @foreach ([1,2,3,4,5,6,7,8,9,10] as value)
             <option value="@(value)"@(value == widget.get('depth') ? ' selected')>@trans(value)</option>
             @endforeach

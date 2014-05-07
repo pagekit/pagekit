@@ -25,7 +25,7 @@
                 <td><input type="checkbox" class="js-select" data-name="{{name}}"></td>
                 <td class="pk-table-width-minimum">
                     {{#isImage url}}
-                        <i class="pk-finder-thumbnail-table pk-finder-icon-file" style="background-image: url('{{url}}');"></i>
+                        <i class="pk-thumbnail-icon pk-finder-icon-file" style="background-image: url('{{url}}');"></i>
                     {{else}}
                         <i class="uk-icon-file-o pk-finder-icon-file"></i>
                     {{/isImage}}

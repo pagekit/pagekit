@@ -45,6 +45,8 @@
 
 @form-large-width:                              400px;
 
+@form-stacked-font-weight:                      normal;
+
 @form-horizontal-label-margin-top:              7px;
 @form-horizontal-controls-text-padding-top:     7px;
 
@@ -52,6 +54,13 @@
 @form-icon-font-size:                           @global-font-size;
 @form-icon-color:                               @global-muted-color;
 
+//
+// New
+//
+
+@form-stacked-font-size:                  round(@global-font-size * 0.85); // 12px / 14px
+@form-stacked-line-height:                round(@form-stacked-font-size *  1.46); // 18px / 20px
+                   
 
 // Component
 // ========================================================================
@@ -88,7 +97,20 @@
 // ========================================================================
 
 .hook-form-blank() {}
+
 .hook-form-blank-focus() {}
+
+
+// Sub-object: `uk-form-label`
+// ========================================================================
+
+.hook-form-stacked-label() {
+    font-size: @form-stacked-font-size;
+    line-height: @form-stacked-line-height;
+    text-transform: uppercase;
+}
+
+.hook-form-horizontal-label() {}
 
 
 // Miscellaneous
