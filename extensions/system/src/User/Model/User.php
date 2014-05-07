@@ -2,8 +2,6 @@
 
 namespace Pagekit\User\Model;
 
-use Pagekit\User\Model\UserInterface;
-
 abstract class User implements UserInterface
 {
     /**

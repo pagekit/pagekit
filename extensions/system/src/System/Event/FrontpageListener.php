@@ -3,6 +3,7 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Menu\Event\ActiveMenuEvent;
 
 class FrontpageListener extends EventSubscriber
 {
@@ -21,12 +22,27 @@ class FrontpageListener extends EventSubscriber
     }
 
     /**
+     * Activates frontpage menu items
+     *
+     * @param ActiveMenuEvent $event
+     */
+    public function onSystemMenu(ActiveMenuEvent $event)
+    {
+        if ($this('request')->getPathInfo() == '/') {
+            foreach ($event->get('@frontpage') as $id => $item) {
+                $event->add($id);
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'init' => array('onInit', 8)
+            'init'        => array('onInit', 8),
+            'system.menu' => 'onSystemMenu'
         );
     }
 }

@@ -3,7 +3,6 @@
 namespace Pagekit\Comment\Event;
 
 use Pagekit\Comment\Model\CommentInterface;
-use Pagekit\Framework\Event\Event;
 
 class MarkSpamEvent extends CommentEvent
 {

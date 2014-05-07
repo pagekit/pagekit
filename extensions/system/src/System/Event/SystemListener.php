@@ -10,6 +10,7 @@ use Pagekit\Content\Plugin\VideoPlugin;
 use Pagekit\Editor\Editor;
 use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
 use Pagekit\System\Dashboard\FeedWidget;
@@ -102,7 +103,7 @@ class SystemListener extends EventSubscriber
         $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
         $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        $this('events')->trigger('system.admin_menu', new AdminMenuEvent($menu));
+        $this('events')->trigger('system.admin_menu', new MenuEvent($menu));
 
         self::$app['admin.menu'] = $this('menus')->getTree($menu, array('access' => true));
     }
