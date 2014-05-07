@@ -59,12 +59,10 @@ class MenuListener extends EventSubscriber
 
     /**
      * Sets the active menu items.
-     *
-     * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onSiteLoaded()
     {
-        $event->getRequest()->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $this('request')->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -135,7 +133,7 @@ class MenuListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request'             => 'onKernelRequest',
+            'site.loaded'                => 'onSiteLoaded',
             'system.link'                => 'onSystemLink',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',

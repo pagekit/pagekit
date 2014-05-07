@@ -114,6 +114,16 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.init' : 'site.init');
     }
 
+    public function onRequestMatched($event, $name, $dispatcher)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $dispatcher->dispatch('loaded');
+        $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.loaded' : 'site.loaded');
+    }
+
     public function onTemplateReference($event)
     {
         try {
@@ -132,7 +142,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         return array(
             'kernel.request' => array(
                 array('onEarlyKernelRequest', 256),
-                array('onKernelRequest', 64)
+                array('onKernelRequest', 64),
+                array('onRequestMatched', 31)
             ),
             'templating.reference' => 'onTemplateReference'
         );

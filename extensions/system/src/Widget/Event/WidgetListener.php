@@ -11,9 +11,9 @@ class WidgetListener extends EventSubscriber
     /**
      * Handles the widget to position assignment.
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onSiteLoaded()
     {
-        $request   = $event->getRequest();
+        $request   = $this('request');
         $active    = (array) $request->attributes->get('_menu');
         $path      = ltrim($request->getPathInfo(), '/');
         $positions = $this('positions');
@@ -46,7 +46,7 @@ class WidgetListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => array('onKernelRequest', -16)
+            'site.loaded' => array('onSiteLoaded', -16)
         );
     }
 

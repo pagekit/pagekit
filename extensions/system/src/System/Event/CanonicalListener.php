@@ -10,9 +10,9 @@ class CanonicalListener extends EventSubscriber
     /**
      * Adds a canonical link to the document head.
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onSiteLoaded()
     {
-        $request = $event->getRequest();
+        $request = $this('request');
 
         if ($request->getRequestFormat() != 'html') {
             return;
@@ -31,7 +31,7 @@ class CanonicalListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => 'onKernelRequest'
+            'site.loaded' => 'onSiteLoaded'
         );
     }
 }
