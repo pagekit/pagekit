@@ -38,6 +38,9 @@ class Item extends BaseItem
     /** @Column(type="integer") */
     protected $depth = 0;
 
+    /** @Column(type="text") */
+    protected $pages = '';
+
     /** @Column(type="json_array") */
     protected $data;
 
@@ -113,6 +116,16 @@ class Item extends BaseItem
     public function setDepth($depth)
     {
         $this->depth = $depth;
+    }
+
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+    }
+
+    public function getPages()
+    {
+        return $this->pages;
     }
 
     public function isActive()

@@ -3,7 +3,7 @@
 namespace Pagekit\Extension\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\System\Event\AdminMenuEvent;
+use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\System\Menu\Item;
 
 class AdminMenuListener extends EventSubscriber
@@ -11,7 +11,7 @@ class AdminMenuListener extends EventSubscriber
     /**
      * Adds extensions menu items.
      */
-    public function onAdminMenu(AdminMenuEvent $event)
+    public function onAdminMenu(MenuEvent $event)
     {
         $menu = $event->getMenu();
 

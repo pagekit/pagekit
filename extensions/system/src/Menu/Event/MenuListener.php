@@ -2,39 +2,44 @@
 
 namespace Pagekit\Menu\Event;
 
+use Pagekit\Component\Cache\CacheInterface;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Menu\Model\ItemInterface;
 use Pagekit\System\Event\LinkEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class MenuListener extends EventSubscriber
 {
     /**
-     * Sets the active menu items.
+     * The access level cache.
+     *
+     * @var CacheInterface
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    protected $cache;
+
+    /**
+     * @var bool
+     */
+    protected $cacheDirty = false;
+
+    /**
+     * @var string
+     */
+    protected $cacheKey = 'menu.menuitems';
+
+    /**
+     * @var array
+     */
+    protected $cacheEntries = array();
+
+    /**
+     * Constructor.
+     *
+     * @param CacheInterface $cache
+     */
+    public function __construct(CacheInterface $cache = null)
     {
-        $url     = $this('url');
-        $request = $event->getRequest();
-        $attr    = $request->attributes;
-        $path    = ltrim($request->getPathInfo(), '/');
-        $route   = ($attr->get('_main_route') ?: $attr->get('_route')).'%';
-
-        $query = $this('menus')->getItemRepository()->query()
-            ->orWhere(array('url = :path', 'url LIKE :route'), compact('path', 'route'));
-
-        if ('' == $path) {
-            $query->orWhere('url = :front', array('front' => '@frontpage'));
-        }
-
-        if ($alias = ltrim($attr->get('_system_path'), '/')) {
-            $query->orWhere('url = :alias', compact('alias'));
-        }
-
-        $active = array_filter($query->get(), function ($item) use ($url) {
-            return $url->current() == $url->route($item->getUrl());
-        });
-
-        $attr->set('_menu', array_keys($active));
+        $this->cache = $cache ?: $this('cache');
     }
 
     /**
@@ -53,13 +58,88 @@ class MenuListener extends EventSubscriber
     }
 
     /**
+     * Sets the active menu items.
+     *
+     * @param GetResponseEvent $event
+     */
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        $event->getRequest()->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+    }
+
+    /**
+     * Activates menu items by current path.
+     *
+     * @param ActiveMenuEvent $event
+     */
+    public function onSystemMenu(ActiveMenuEvent $event)
+    {
+        $url     = $this('url');
+        $request = $this('request');
+        $attr    = $request->attributes;
+
+        $current = ltrim($request->getPathInfo(), '/');
+        $paths   = array($current, $attr->get('_route_options[_main_route]', false, true) ?: $attr->get('_route'));
+
+        if ($alias = ltrim($attr->get('_system_path'), '/')) {
+            $paths[] = $alias;
+        }
+
+        foreach ($event->get($paths) as $id => $path) {
+            if (0 === strpos($current, $url->route($path, array(), 'base'))) {
+                $event->add($id);
+            }
+        }
+
+        $event->match($current);
+    }
+
+    /**
+     * Gets menu items url info from cache
+     *
+     * @return array
+     */
+    protected function getItems()
+    {
+        if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
+            $this->cacheEntries = array('paths' => array(), 'patterns' => array());
+            foreach ($this('menus')->getItemRepository()->query()->where(array('status' => ItemInterface::STATUS_ACTIVE))->get() as $item) {
+                if (!$item->getPages()) {
+                    $this->cacheEntries['paths'][strtok($item->getUrl(), '?')][$item->getId()] = $item->getUrl();
+                } else {
+                    $this->cacheEntries['patterns'][$item->getId()] = $item->getPages();
+                }
+            }
+            $this->cacheDirty = true;
+        }
+
+        return $this->cacheEntries;
+    }
+
+    public function clearCache()
+    {
+        $this->cacheEntries = false;
+        $this->cacheDirty   = true;
+    }
+
+    public function __destruct()
+    {
+        if ($this->cache && $this->cacheDirty) {
+            $this->cache->save($this->cacheKey, $this->cacheEntries);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => 'onKernelRequest',
-            'system.link'    => 'onSystemLink'
+            'kernel.request'             => 'onKernelRequest',
+            'system.link'                => 'onSystemLink',
+            'system.menu'                => 'onSystemMenu',
+            'system.menuitem.postSave'   => 'clearCache',
+            'system.menuitem.postDelete' => 'clearCache'
         );
     }
 }

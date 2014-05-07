@@ -122,6 +122,7 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addColumn('priority', 'integer', array('default' => 0));
                 $table->addColumn('status', 'smallint');
                 $table->addColumn('depth', 'smallint');
+                $table->addColumn('pages', 'text');
                 $table->addColumn('data', 'json_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
             });
