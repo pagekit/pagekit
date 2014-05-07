@@ -31,6 +31,7 @@
                             <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                 <ul class="uk-nav uk-nav-dropdown">
                                     <li class="uk-nav-header">@user.username</li>
+                                    <li><a href="@url.base">@trans('Visit Site')</a></li>
                                     <li><a href="@url.route('@system/user/edit', ['id' => user.id])">@trans('Settings')</a></li>
                                     <li><a href="@url.route('@system/auth/logout', ['redirect' => url.route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
                                 </ul>
