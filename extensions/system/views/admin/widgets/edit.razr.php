@@ -39,9 +39,9 @@
                 @endforeach
 
                 <div class="uk-form-row">
-                    <label for="form-position" class="uk-form-label">@trans('Pattern')</label>
+                    <label for="form-pages" class="uk-form-label">@trans('Pattern')</label>
                     <div class="uk-form-controls">
-                        <textarea class="uk-form-width-large" name="widget[pages]" rows="5">@widget.pages</textarea>
+                        <textarea id="form-pages" class="uk-form-width-large" name="widget[pages]" rows="5">@widget.pages</textarea>
                         <p class="uk-form-help-block">@trans('Enter one page path per line. The "*" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: "blog" for the blog page, "blog/*" for blog entries or "!blog" if you want to exclude the blog.')</p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
         </div>
 
         <div class="uk-panel uk-panel-divider">
-            <h3 class="uk-panel-title">Options</h3>
+            <h3 class="uk-panel-title">@trans('Options')</h3>
 
             <ul class="uk-list pk-list-table uk-margin-remove">
 
