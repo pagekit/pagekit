@@ -17,7 +17,7 @@
             <div class="uk-form-row">
                 <label class="uk-form-label" for="form-alt">@trans('Alt')</label>
                 <div class="uk-form-controls">
-                    <input type="text" class="js-title uk-width-1-1">
+                    <input id="form-alt" type="text" class="js-title uk-width-1-1">
                 </div>
             </div>
             <div class="uk-form-row uk-margin-top">
