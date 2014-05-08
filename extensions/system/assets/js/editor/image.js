@@ -126,7 +126,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
 
         ImagePopup.finder.loadPath(data.src.trim && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
 
-        setTimeout(function() { ImagePopup.title.focus(); }, 10);
+        setTimeout(function() { ImagePopup.image.focus(); }, 10);
     }
 
     editor.addPlugin('image', function(editor) {
