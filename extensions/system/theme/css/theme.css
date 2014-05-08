@@ -7561,6 +7561,9 @@ a.uk-datepicker-table-muted {
 .pk-table-max-width-100 {
   max-width: 100px;
 }
+.pk-table-max-width-150 {
+  max-width: 150px;
+}
 /* Sub-modifier `pk-table-head-sticky`
 ========================================================================== */
 /*

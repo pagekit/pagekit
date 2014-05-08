@@ -46,21 +46,25 @@
 
         </div>
 
-        <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested">
-            <div class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></div>
-            <div>@trans('Title') </div>
-            <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
-            <div class="pk-table-width-200 uk-text-truncate">@trans('URL')</div>
-            <div class="pk-table-width-100">@trans('Access')</div>
+        <div class="uk-overflow-container">
+
+            <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested">
+                <div class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></div>
+                <div class="pk-table-min-width-100">@trans('Title') </div>
+                <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
+                <div class="pk-table-width-150">@trans('URL')</div>
+                <div class="pk-table-width-100">@trans('Access')</div>
+            </div>
+
+            @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
+
+            @else
+
+            @trans('No menu found.')
+
+            @endif
+
         </div>
-
-        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
-
-        @else
-
-        @trans('No menu found.')
-
-        @endif
 
         @token()
 
