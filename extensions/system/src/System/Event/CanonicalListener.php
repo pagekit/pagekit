@@ -9,10 +9,12 @@ class CanonicalListener extends EventSubscriber
 {
     /**
      * Adds a canonical link to the document head.
+     *
+     * @param GetResponseEvent $event
      */
-    public function onSiteLoaded()
+    public function onSiteLoaded(GetResponseEvent $event)
     {
-        $request = $this('request');
+        $request = $event->getRequest();
 
         if ($request->getRequestFormat() != 'html') {
             return;

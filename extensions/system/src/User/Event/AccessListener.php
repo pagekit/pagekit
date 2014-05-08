@@ -97,7 +97,7 @@ class AccessListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onLoad(GetResponseEvent $event)
     {
         if ($access = $event->getRequest()->attributes->get('_route_options[access]', array(), true)) {
             foreach ($access as $expression) {
@@ -114,7 +114,7 @@ class AccessListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onKernelRequestAdmin(GetResponseEvent $event)
+    public function onLoadAdmin(GetResponseEvent $event)
     {
         $request = $event->getRequest();
 
@@ -139,9 +139,9 @@ class AccessListener extends EventSubscriber
         return array(
             'route.configure' => 'onConfigureRoute',
             'auth.authorize'  => 'onAuthorize',
-            'kernel.request'  => array(
-                array('onKernelRequest', -512),
-                array('onKernelRequestAdmin', -256)
+            'loaded'  => array(
+                array('onLoad', -512),
+                array('onLoadAdmin', -256)
             )
         );
     }

@@ -12,12 +12,8 @@ class MaintenanceListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onLoad(GetResponseEvent $event)
     {
-        if (!$event->isMasterRequest()) {
-            return;
-        }
-
         $attributes = $event->getRequest()->attributes;
 
         if ($this('config')->get('maintenance.enabled') && !($this('isAdmin') || $attributes->get('_route_options[maintenance]', false, true) || $this('user')->hasAccess('system: maintenance access') || ($attributes->get('_route_options[admin]', false, true) && !$this('user')->isAuthenticated()))) {
@@ -37,7 +33,7 @@ class MaintenanceListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => array('onKernelRequest', 8)
+            'loaded' => array('onLoad', 8)
         );
     }
 }

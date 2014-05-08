@@ -15,7 +15,7 @@ class AuthorizationListener extends EventSubscriber
     /**
      * Logout blocked users
      */
-    public function onKernelRequest()
+    public function onLoad()
     {
         if ($user = $this('auth')->getUser() and $user->getStatus() == UserInterface::STATUS_BLOCKED) {
             $this('auth')->logout($user);
@@ -61,7 +61,7 @@ class AuthorizationListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => 'onKernelRequest',
+            'loaded'         => 'onLoad',
             'auth.authorize' => 'onAuthorize',
             'auth.login'     => array('onLogin', -8),
             'auth.logout'    => array('onLogout', -8)
