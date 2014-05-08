@@ -73,15 +73,20 @@ class MenuListener extends EventSubscriber
         $request = $this('request');
         $attr    = $request->attributes;
 
-        $current = ltrim($request->getPathInfo(), '/');
-        $paths   = array($current, $attr->get('_route_options[_main_route]', false, true) ?: $attr->get('_route'));
+        $query   = $request->getQueryString();
+        $path    = ltrim($request->getPathInfo(), '/');
+        $current = $path.($query ? '?' . $query : '');
+        $paths   = array($path, $attr->get('_route_options[_main_route]', false, true) ?: $attr->get('_route'));
 
         if ($alias = ltrim($attr->get('_system_path'), '/')) {
             $paths[] = $alias;
         }
 
         foreach ($event->get($paths) as $id => $path) {
-            if ($route = $url->route($path, array(), 'base') and 0 === strpos($current, $route)) {
+            if ($route = $url->route($path, array(), 'base') and ($current == $route
+                || (0 === strpos($current, $route) && strpbrk($current[strlen($route)], '/?'))
+                || (0 === strpos($route, $current) && strpbrk($route[strlen($current)], '/?')))) {
+
                 $event->add($id);
             }
         }
@@ -127,7 +132,9 @@ class MenuListener extends EventSubscriber
             'system.link'                => 'onSystemLink',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
-            'system.menuitem.postDelete' => 'clearCache'
+            'system.menuitem.postDelete' => 'clearCache',
+            'system.alias.postSave'   => 'clearCache',
+            'system.alias.postDelete' => 'clearCache'
         );
     }
 }
