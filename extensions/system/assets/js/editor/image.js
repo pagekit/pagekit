@@ -99,11 +99,11 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
             var pimg = new Image();
 
             pimg.onerror = function(){
-                $this.preview.attr('src', $this.base+'extensions/system/assets/images/placeholder-editor-image.svg');
+                $this.preview.css('background-image', '').css('background-size', '');
             };
 
             pimg.onload = function(){
-                $this.preview.attr('src', url);
+                $this.preview.css('background-image', 'url("'+url+'")').css('background-size', 'contain');
             };
 
             pimg.src = url;
