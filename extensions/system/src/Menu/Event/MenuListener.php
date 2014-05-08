@@ -11,16 +11,11 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 class MenuListener extends EventSubscriber
 {
     /**
-     * The access level cache.
+     * The menu item cache.
      *
      * @var CacheInterface
      */
     protected $cache;
-
-    /**
-     * @var bool
-     */
-    protected $cacheDirty = false;
 
     /**
      * @var string
@@ -30,7 +25,7 @@ class MenuListener extends EventSubscriber
     /**
      * @var array
      */
-    protected $cacheEntries = array();
+    protected $cacheEntries = false;
 
     /**
      * Constructor.
@@ -59,10 +54,12 @@ class MenuListener extends EventSubscriber
 
     /**
      * Sets the active menu items.
+     *
+     * @param GetResponseEvent $event
      */
-    public function onSiteLoaded()
+    public function onSiteLoaded(GetResponseEvent $event)
     {
-        $this('request')->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -108,7 +105,7 @@ class MenuListener extends EventSubscriber
                     $this->cacheEntries['patterns'][$item->getId()] = $item->getPages();
                 }
             }
-            $this->cacheDirty = true;
+            $this->cache->save($this->cacheKey, $this->cacheEntries);
         }
 
         return $this->cacheEntries;
@@ -116,15 +113,8 @@ class MenuListener extends EventSubscriber
 
     public function clearCache()
     {
+        $this->cache->delete($this->cacheKey);
         $this->cacheEntries = false;
-        $this->cacheDirty   = true;
-    }
-
-    public function __destruct()
-    {
-        if ($this->cache && $this->cacheDirty) {
-            $this->cache->save($this->cacheKey, $this->cacheEntries);
-        }
     }
 
     /**
