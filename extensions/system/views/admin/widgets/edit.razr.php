@@ -1,6 +1,6 @@
 @script('widget', 'system/js/widgets/widget.js', 'requirejs')
 
-<form class="js-widget uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post" data-id="@(widget.id ?: 0)">
+<form class="js-widget uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
 
     <div class="uk-width-medium-3-4">
 
@@ -79,8 +79,8 @@
                 <li>
                     <div>@trans('Status')</div>
                     <div>
-                        <button class="uk-button uk-button-mini uk-button-danger js-status uk-hidden" type="button" data-status="0">@trans('Disabled')</button>
-                        <button class="uk-button uk-button-mini uk-button-success js-status uk-hidden" type="button" data-status="1">@trans('Enabled')</button>
+                        <button class="uk-button uk-button-mini uk-button-danger js-status@(widget.status ? ' uk-hidden')" type="button" data-value="0">@trans('Disabled')</button>
+                        <button class="uk-button uk-button-mini uk-button-success js-status@(!widget.status ? ' uk-hidden')" type="button" data-value="1">@trans('Enabled')</button>
                         <input type="hidden" name="widget[status]" value="@widget.status">
                     </div>
                 </li>
@@ -116,8 +116,8 @@
                 <li>
                     <div>@trans('Title')</div>
                     <div>
-                        <button class="uk-button uk-button-mini js-title @(widget.get('show_title') ? 'uk-hidden':'')" type="button" data-value="0">@trans('Hide')</button>
-                        <button class="uk-button uk-button-mini js-title @(!widget.get('show_title') ? 'uk-hidden':'')" type="button" data-value="1">@trans('Show')</button>
+                        <button class="uk-button uk-button-mini js-title@(widget.get('show_title') ? ' uk-hidden')" type="button" data-value="0">@trans('Hide')</button>
+                        <button class="uk-button uk-button-mini js-title@(!widget.get('show_title') ? ' uk-hidden')" type="button" data-value="1">@trans('Show')</button>
                         <input type="hidden" name="widget[settings][show_title]" value="@widget.get('show_title', '1')">
                     </div>
                 </li>
