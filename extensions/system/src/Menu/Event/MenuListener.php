@@ -84,7 +84,7 @@ class MenuListener extends EventSubscriber
         }
 
         foreach ($event->get($paths) as $id => $path) {
-            if (0 === strpos($current, $url->route($path, array(), 'base'))) {
+            if ($route = $url->route($path, array(), 'base') and 0 === strpos($current, $route)) {
                 $event->add($id);
             }
         }
