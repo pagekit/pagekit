@@ -170,7 +170,7 @@ class SystemExtension extends Extension
     {
         $self = $this;
 
-        $this->on('kernel.terminate', function() use ($self, $options) {
+        $this('app')->on('kernel.terminate', function() use ($self, $options) {
             $self->doClearCache($options);
         }, -512);
     }
