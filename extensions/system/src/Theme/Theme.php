@@ -50,11 +50,11 @@ class Theme extends ApplicationAware
     {
         $self = $this;
 
-        $app->on('init', function() use ($app, $self) {
+        $app->on('loaded', function() use ($app, $self) {
             $self->registerLanguages($app['translator']);
         });
 
-        $app->on('site.init', function() use ($app, $self) {
+        $app->on('site.loaded', function() use ($app, $self) {
             $self->registerResources($app['locator']);
         });
 
