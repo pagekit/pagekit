@@ -8,11 +8,11 @@ use Pagekit\Framework\Event\EventSubscriber;
 class LinkPlugin extends EventSubscriber
 {
     const LINK_CODE = '/
-                            (href|src|poster)=   # match the attribute
-                            ([\"\']?)           # optionally start with a single or double quote
-                            (?!\/|[a-zA-Z0-9]+:) # make sure it is a relative path
-                            ([^\"\'\s>]+?)       # match the actual src value
-                            \2                   # match the previous quote
+                            (href|src|poster)=     # match the attribute
+                            ([\"\']?)              # optionally start with a single or double quote
+                            (?!\/|[a-zA-Z0-9\s]+:) # make sure it is a relative path
+                            ([^\"\'\s>]+?)         # match the actual src value
+                            \2                     # match the previous quote
                         /xiU';
 
     /**
