@@ -5,6 +5,7 @@ namespace Pagekit\System\Migration;
 use Pagekit\Component\Migration\MigrationInterface;
 use Pagekit\Framework\ApplicationAware;
 use Pagekit\User\Model\RoleInterface;
+use Pagekit\User\Model\AccessLevelInterface;
 
 class Init extends ApplicationAware implements MigrationInterface
 {
@@ -58,8 +59,10 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addUniqueIndex(array('name'), 'ACCESS_NAME');
             });
 
-            $this('db')->insert('@system_access_level', array('id' => 1, 'name' => 'Public', 'priority' => 0, 'roles' => null));
-            $this('db')->insert('@system_access_level', array('id' => 2, 'name' => 'Registered', 'priority' => 1, 'roles' => RoleInterface::ROLE_AUTHENTICATED));
+            $this('db')->insert('@system_access_level', array('id' => 1, 'name' => 'Everyone', 'priority' => 0, 'roles' => null));
+            $this('db')->insert('@system_access_level', array('id' => 2, 'name' => 'Anonymous', 'priority' => 1, 'roles' => RoleInterface::ROLE_ANONYMOUS));
+            $this('db')->insert('@system_access_level', array('id' => 3, 'name' => 'Authenticated', 'priority' => 2, 'roles' => RoleInterface::ROLE_AUTHENTICATED));
+            $this('db')->insert('@system_access_level', array('id' => 4, 'name' => 'Administrator', 'priority' => 3, 'roles' => RoleInterface::ROLE_ADMINISTRATOR));
         }
 
         if ($util->tableExists('@system_user') === false) {

@@ -27,7 +27,7 @@ class AccessLevel extends BaseAccessLevel
      */
     public function isLocked()
     {
-        return in_array($this->id, array(self::LEVEL_PUBLIC, self::LEVEL_REGISTERED));
+        return in_array($this->id, array(self::LEVEL_EVERYONE, self::LEVEL_ANONYMOUS, self::LEVEL_AUTHENTICATED));
     }
 
     /**

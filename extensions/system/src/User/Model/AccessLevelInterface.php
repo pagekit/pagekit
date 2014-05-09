@@ -5,18 +5,25 @@ namespace Pagekit\User\Model;
 interface AccessLevelInterface
 {
     /**
-     * The identifier of the public access level.
+     * The identifier of the everyone access level.
      *
      * @var int
      */
-    const LEVEL_PUBLIC = 1;
+    const LEVEL_EVERYONE = 1;
 
     /**
-     * The identifier of the registered access level.
+     * The identifier of the anonymous access level.
      *
      * @var int
      */
-    const LEVEL_REGISTERED = 2;
+    const LEVEL_ANONYMOUS = 2;
+
+    /**
+     * The identifier of the authenticated access level.
+     *
+     * @var int
+     */
+    const LEVEL_AUTHENTICATED = 3;
 
 	/**
 	 * Returns the access level's ID.
