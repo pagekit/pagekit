@@ -79,7 +79,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $app['isAdmin'] = false;
 
             $app['events']->dispatch('init');
-            $app['events']->on('console.init', function($event) {
+            $app['events']->addListener('console.init', function($event) {
 
                 $console = $event->getConsole();
                 $namespace = 'Pagekit\\System\\Console\\';

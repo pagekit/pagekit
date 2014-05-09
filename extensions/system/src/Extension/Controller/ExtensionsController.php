@@ -150,7 +150,7 @@ class ExtensionsController extends Controller
 
             $config = $this('option')->get("$name:config", array());
 
-            $this('events')->trigger('system.extension.edit', new ExtensionEvent($extension, $config));
+            $this('events')->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
 
             return $this('view')->render($tmpl, compact('extension', 'config'));
 
@@ -172,7 +172,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $this('events')->trigger('system.extension.save', new ExtensionEvent($extension, $config));
+            $this('events')->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
 
             $this('option')->set("$name:config", $config, true);
 

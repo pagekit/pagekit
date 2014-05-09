@@ -4,7 +4,6 @@ namespace Pagekit\Widget\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Widget\Entity\Widget;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class WidgetListener extends EventSubscriber
 {

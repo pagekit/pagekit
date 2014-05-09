@@ -31,8 +31,8 @@ class HelloExtension extends Extension
             $event->register('Pagekit\Hello\HelloLink');
         });
 
-        // trigger event (check Hello\Event\HelloListener to see how subscribers work)
-        $app->trigger('hello.boot');
+        // dispatch event (check Hello\Event\HelloListener to see how subscribers work)
+        $app['events']->dispatch('hello.boot');
     }
 
     public function enable()

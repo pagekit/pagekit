@@ -59,7 +59,7 @@ class MenuListener extends EventSubscriber
      */
     public function onSiteLoaded(GetResponseEvent $event)
     {
-        $event->getRequest()->attributes->set('_menu', $this('events')->trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', $this('events')->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**

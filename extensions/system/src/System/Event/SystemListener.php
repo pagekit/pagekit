@@ -103,7 +103,7 @@ class SystemListener extends EventSubscriber
         $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
         $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        $this('events')->trigger('system.admin_menu', new MenuEvent($menu));
+        $this('events')->dispatch('system.admin_menu', new MenuEvent($menu));
 
         self::$app['admin.menu'] = $this('menus')->getTree($menu, array('access' => true));
     }

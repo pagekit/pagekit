@@ -192,7 +192,7 @@ class Extension extends ApplicationAware
         $addResources($this->getConfig('resources.export', array()), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $dispatcher->on('init', function() use ($config, $addResources) {
+            $dispatcher->addListener('init', function() use ($config, $addResources) {
                 $addResources($config);
             });
         }

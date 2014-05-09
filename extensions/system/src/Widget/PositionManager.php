@@ -29,9 +29,8 @@ class PositionManager extends ApplicationAware implements \ArrayAccess, \Iterato
      */
     public function __construct(WidgetProvider $provider)
     {
-        $this->provider = $provider;
-
-        $this('events')->trigger('system.position.renderer', $this->renderers = new RegisterRendererEvent($this('view')));
+        $this->provider  = $provider;
+        $this->renderers = $this('events')->dispatch('system.position.renderer', new RegisterRendererEvent($this('view')));
 
         $this->renderers->register('default', function ($position, WidgetProvider $provider, \ArrayObject $widgets, array $options = array()) {
             $output = array();

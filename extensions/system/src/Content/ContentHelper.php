@@ -16,6 +16,6 @@ class ContentHelper extends ApplicationAware
      */
     public function applyPlugins($content, $parameters = array())
     {
-        return $this('events')->trigger('content.plugins', new ContentEvent($content, $parameters))->getContent();
+        return $this('events')->dispatch('content.plugins', new ContentEvent($content, $parameters))->getContent();
     }
 }

@@ -120,7 +120,7 @@ class ThemesController extends Controller
 
             $config = $this('option')->get("$name:config", array());
 
-            $this('events')->trigger('system.theme.edit', new ThemeEvent($theme, $config));
+            $this('events')->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
 
             return $this('view')->render($tmpl, compact('theme', 'config'));
 
@@ -142,7 +142,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $this('events')->trigger('system.theme.save', new ThemeEvent($theme, $config));
+            $this('events')->dispatch('system.theme.save', new ThemeEvent($theme, $config));
 
             $this('option')->set("$name:config", $config, true);
 

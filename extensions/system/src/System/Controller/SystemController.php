@@ -81,7 +81,7 @@ class SystemController extends Controller
      */
     public function localeAction()
     {
-        $this('events')->trigger('system.locale', $event = new LocaleEvent);
+        $this('events')->dispatch('system.locale', $event = new LocaleEvent);
 
         return $this('response')->json($event->getMessages());
     }
@@ -92,7 +92,7 @@ class SystemController extends Controller
     public function tmplAction($templates = '')
     {
         $response = array();
-        $event = $this('events')->trigger('system.tmpl', new TmplEvent);
+        $event = $this('events')->dispatch('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {

@@ -106,7 +106,7 @@ class SystemExtension extends Extension
                 }
             }
 
-            return $app['events']->trigger('system.permission', $event)->getPermissions();
+            return $app['events']->dispatch('system.permission', $event)->getPermissions();
         };
 
         $app['content'] = function() {
@@ -146,7 +146,7 @@ class SystemExtension extends Extension
         };
 
         if (isset($app['profiler'])) {
-            $app['events']->on('loaded', function() use ($app) {
+            $app->on('loaded', function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'view://system/profiler/toolbar/user.php', null, -20);
             });
@@ -170,7 +170,7 @@ class SystemExtension extends Extension
     {
         $self = $this;
 
-        $this('router')->finish(function() use ($self, $options) {
+        $this->on('kernel.terminate', function() use ($self, $options) {
             $self->doClearCache($options);
         }, -512);
     }

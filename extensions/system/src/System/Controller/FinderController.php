@@ -171,7 +171,7 @@ class FinderController extends Controller
 
     protected function getMode($path)
     {
-        $mode = $this('events')->trigger('system.finder', new FileAccessEvent)->mode($path);
+        $mode = $this('events')->dispatch('system.finder', new FileAccessEvent)->mode($path);
 
         if ('w' == $mode && !is_writable($path)) {
             $mode = 'r';

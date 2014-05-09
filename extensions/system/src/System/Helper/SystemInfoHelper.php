@@ -48,7 +48,7 @@ class SystemInfoHelper extends ApplicationAware
     public function resolveUrl($url)
     {
         $listener = function(GenerateUrlEvent $event) { $event->stopPropagation(); };
-        $this('events')->on('url.generate', $listener, 32);
+        $this('app')->on('url.generate', $listener, 32);
 
         try {
             $url = $this('url')->route($url, array(), 'base');
