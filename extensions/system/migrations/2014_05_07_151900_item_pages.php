@@ -5,7 +5,7 @@ namespace Pagekit\System\Migration;
 use Pagekit\Component\Migration\MigrationInterface;
 use Pagekit\Framework\ApplicationAware;
 
-class PageDate extends ApplicationAware implements MigrationInterface
+class ItemPages extends ApplicationAware implements MigrationInterface
 {
     public function up()
     {
