@@ -74,7 +74,7 @@ class MenuListener extends EventSubscriber
         $attr    = $request->attributes;
 
         $query   = $request->getQueryString();
-        $path    = ltrim($request->getPathInfo(), '/');
+        $path    = $request->getPathInfo();
         $current = $path.($query ? '?' . $query : '');
         $paths   = array($path, $attr->get('_route_options[_main_route]', false, true) ?: $attr->get('_route'));
 
