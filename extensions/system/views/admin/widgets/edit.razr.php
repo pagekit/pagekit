@@ -63,7 +63,7 @@
 
         <div class="uk-panel uk-panel-divider pk-panel-marginless">
             <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
-                <li class="uk-active"><a href="#">@trans('Settings')</a></li>
+                <li><a href="#">@trans('Settings')</a></li>
                 <li class=""><a href="#">@trans('Assignment')</a></li>
                 @foreach (additionals as name => settings)
                 <li class=""><a href="#">@name</a></li>
