@@ -27,7 +27,7 @@ require(['jquery', 'editor', 'uikit', 'domReady!'], function($, editor, uikit, d
             var editor = $(this).data('htmleditor');
 
             $.each(uikit.components.htmleditor.plugins, function(name, plugin){
-                if ((!editor.options.plugins.length || $.inArray(name, editor.options.plugins) >= 0) && !editor.plugins[name]) {
+                if ((!editor.options.plugins.length || editor.options.plugins.indexOf(name) >= 0) && !editor.plugins[name]) {
                     plugin.init(editor);
                     editor.plugins[name] = true;
                 }
