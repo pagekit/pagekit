@@ -13,7 +13,7 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
 
             var list = $(this);
 
-            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('uksortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
+            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('sortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
                 if (action == 'added' || action == 'moved') {
                     uikit.notify(data.message, 'success');
                 }
