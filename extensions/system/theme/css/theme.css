@@ -5104,6 +5104,9 @@ a.uk-thumbnail:focus {
 .uk-overlay-toggle:hover .uk-overlay-caption {
   opacity: 1;
 }
+.uk-overlay:hover {
+  min-height: 100px;
+}
 /* ========================================================================
    Component: Progress
  ========================================================================== */
