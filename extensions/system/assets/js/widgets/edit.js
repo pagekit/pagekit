@@ -28,4 +28,13 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     tabs.eq(sessionStorage['pk-widget-settings-tab'] || 0).find('a').trigger('click');
     sessionStorage.removeItem('pk-widget-settings-tab');
+
+    form.find(':input').bind('invalid', function(e) {
+
+        var input = $(this);
+
+        if (!input.is(':visible')) {
+            sidenav.data('switcher').show(0);
+        }
+    });
 });

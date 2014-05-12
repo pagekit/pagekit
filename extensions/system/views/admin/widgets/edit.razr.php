@@ -26,7 +26,7 @@
 
             </li>
             <li>
-      
+
                 @foreach (app.menus as id => menu)
                 @if (menu.items)
                 <div class="uk-form-row">
