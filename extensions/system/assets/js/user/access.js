@@ -41,7 +41,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
 
         var data = {};
 
-        $(this).data('uksortable').list().forEach(function(item) {
+        $(this).data('sortable').list().forEach(function(item) {
             data[item.id] = item.order;
         });
 

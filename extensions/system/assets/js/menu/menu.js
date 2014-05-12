@@ -27,7 +27,7 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
 
         // save menu item order on sortable change
         .on('sortable-change', 'ul.uk-sortable', function() {
-            $.post(form.attr('action'), { order: $(this).data('uksortable').list(), _csrf: csrf }, function(data) {
+            $.post(form.attr('action'), { order: $(this).data('sortable').list(), _csrf: csrf }, function(data) {
                 uikit.notify(data.message, 'success');
             }).fail(function() {
                 uikit.notify('Saving menu order failed', 'danger');
