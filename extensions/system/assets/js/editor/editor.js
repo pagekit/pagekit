@@ -22,17 +22,15 @@ require(['jquery', 'editor', 'uikit', 'domReady!'], function($, editor, uikit, d
 
     require($('script[data-editor]').data('editor'), function() {
 
-        var plugins = Object.keys(uikit.components.htmleditor.plugins).filter(function(plugin) {
-            return (plugin != 'base' && plugin != 'markdown');
-        });
-
         editors.each(function(){
 
             var editor = $(this).data('htmleditor');
 
-            plugins.forEach(function(plugin){
-                uikit.components.htmleditor.plugins[plugin].init(editor);
-                editor.options.plugins.push(plugin);
+            $.each(uikit.components.htmleditor.plugins, function(name, plugin){
+                if ((!editor.options.plugins.length || $.inArray(name, editor.options.plugins) >= 0) && !editor.plugins[name]) {
+                    plugin.init(editor);
+                    editor.plugins[name] = true;
+                }
             });
 
             editor.debouncedRedraw();
