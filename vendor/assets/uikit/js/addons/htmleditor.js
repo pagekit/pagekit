@@ -2,17 +2,19 @@
 
 (function(addon) {
 
-    if (typeof define == "function" && define.amd) { // AMD
-        define("uikit-htmleditor", ["uikit"], function() {
-            return jQuery.UIkit.htmleditor || addon(window, window.jQuery, window.jQuery.UIkit);
+    var component;
+
+    if (jQuery && jQuery.UIkit) {
+        component = addon(jQuery, jQuery.UIkit);
+    }
+
+    if (typeof define == "function" && define.amd) {
+        define("uikit-htmleditor", ["uikit"], function(){
+            return component || addon(jQuery, jQuery.UIkit);
         });
     }
 
-    if (window && window.jQuery && window.jQuery.UIkit) {
-        addon(window, window.jQuery, window.jQuery.UIkit);
-    }
-
-})(function(global, $, UI) {
+})(function($, UI) {
 
 
     UI.component('htmleditor', {
@@ -128,16 +130,6 @@
 
         addButtons: function(buttons) {
             $.extend(this.buttons, buttons);
-        },
-
-        addPlugin: function(name, redraw) {
-
-            if (!UI.components.htmleditor.plugins[name] || -1 != $.inArray(name, this.options.plugins)) return;
-
-            UI.components.htmleditor.plugins[name].init(this);
-            this.options.plugins.push(name);
-
-            if (redraw!==false) this.debouncedRedraw();
         },
 
         replaceInPreview: function(regexp, callback) {

@@ -518,7 +518,7 @@
 
         this[name] = function() {
 
-            var element, options, object;
+            var element, options;
 
             if(arguments.length) {
                 switch(arguments.length) {
@@ -532,6 +532,7 @@
 
                         break;
                     case 2:
+
                         element = $(arguments[0]);
                         options = arguments[1];
                         break;
