@@ -1,25 +1,27 @@
-define(['jquery', 'editor'], function($, editor) {
+define(['jquery', 'uikit', 'editor'], function($, uikit, editor) {
 
     var base = requirejs.toUrl('');
 
-    editor.addPlugin('urlresolver', function(editor) {
+    uikit.plugin('htmleditor', 'urlresolver', {
 
-        editor.element.on('renderLate', function() {
+        init: function(editor) {
 
-            editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
+            editor.element.on('renderLate', function() {
 
-                var replacement = data.matches[0];
+                editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
 
-                if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
-                    replacement = replacement.replace(data.matches[1], base + data.matches[1]);
-                }
+                    var replacement = data.matches[0];
 
-                return replacement;
+                    if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
+                        replacement = replacement.replace(data.matches[1], base + data.matches[1]);
+                    }
+
+                    return replacement;
+                });
+
             });
 
-        });
-
+            return editor;
+        }
     });
-
-    return editor;
 });

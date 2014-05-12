@@ -65,7 +65,7 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder']
             if (!this.picker) {
                 this.finder = Finder.attach(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
-                this.picker = new uikit.modal.Modal(this.modal);
+                this.picker = uikit.modal(this.modal);
             }
 
             return this.picker;
@@ -151,63 +151,66 @@ define(['jquery', 'tmpl!video.modal,video.replace', 'uikit', 'editor', 'finder']
         VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
     }
 
-    editor.addPlugin('video', function(editor) {
+    uikit.plugin('htmleditor', 'video', {
 
-        var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
+        init: function(editor) {
 
-        VideoPopup.init(options);
+            var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
 
-        // videos
-        editor.addButton('video', {
-            title: 'Video',
-            label: '<i class="uk-icon-video-camera"></i>'
-        });
+            VideoPopup.init(options);
 
-        editor.element.on('action.video', function(e, editor) {
+            // videos
+            editor.addButton('video', {
+                title: 'Video',
+                label: '<i class="uk-icon-video-camera"></i>'
+            });
 
-            var cursor = editor.getCursor(), data;
-            videos.every(function(video) {
-                if (video.inRange(cursor)) {
-                    data = video;
-                    return false;
+            editor.element.on('action.video', function(e, editor) {
+
+                var cursor = editor.getCursor(), data;
+                videos.every(function(video) {
+                    if (video.inRange(cursor)) {
+                        data = video;
+                        return false;
+                    }
+                    return true;
+                });
+
+                if (!data) {
+                    data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
                 }
-                return true;
+
+                openVideoModal(data, rootpath);
             });
 
-            if (!data) {
-                data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
-            }
+            editor.options.toolbar.push('video');
 
-            openVideoModal(data, rootpath);
-        });
+            editor.element.on('render', function() {
 
-        editor.options.toolbar.push('video');
+                videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, function(data) {
 
-        editor.element.on('render', function() {
+                    try {
 
-            videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, function(data) {
+                        var settings = $.parseJSON(data.matches[1]);
 
-                try {
+                    } catch (e) {}
 
-                    var settings = $.parseJSON(data.matches[1]);
+                    $.extend(data, (settings || { src: '' }));
 
-                } catch (e) {}
+                    return tmpl.render('video.replace', { preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
 
-                $.extend(data, (settings || { src: '' }));
-
-                return tmpl.render('video.replace', { preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
-
+                });
             });
-        });
 
-        editor.preview.on('click', '.js-editor-video .js-config', function() {
-            openVideoModal(videos[editor.preview.find('.js-editor-video .js-config').index(this)], rootpath);
-        });
+            editor.preview.on('click', '.js-editor-video .js-config', function() {
+                openVideoModal(videos[editor.preview.find('.js-editor-video .js-config').index(this)], rootpath);
+            });
 
-        editor.preview.on('click', '.js-editor-video .js-remove', function() {
-            videos[editor.preview.find('.js-editor-video .js-remove').index(this)].replace('');
-        });
+            editor.preview.on('click', '.js-editor-video .js-remove', function() {
+                videos[editor.preview.find('.js-editor-video .js-remove').index(this)].replace('');
+            });
+
+            return editor;
+        }
     });
-
-    return editor;
 });

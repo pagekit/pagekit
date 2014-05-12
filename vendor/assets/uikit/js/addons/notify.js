@@ -167,11 +167,9 @@
         pos: 'top-center'
     };
 
-
-    UI["notify"]          = notify;
-    UI["notify"].message  = Message;
-    UI["notify"].closeAll = closeAll;
+    UI.notify          = notify;
+    UI.notify.message  = Message;
+    UI.notify.closeAll = closeAll;
 
     return notify;
-
 });

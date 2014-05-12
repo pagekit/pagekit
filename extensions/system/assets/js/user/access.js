@@ -26,7 +26,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         e.preventDefault();
 
         if (!modal) {
-            modal = new uikit.modal.Modal('#modal-access-level');
+            modal = uikit.modal('#modal-access-level');
         }
 
         modal.show();

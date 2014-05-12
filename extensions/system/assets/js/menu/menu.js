@@ -43,7 +43,7 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         e.preventDefault();
 
         if (!modal) {
-            modal = new uikit.modal.Modal('#modal-menu');
+            modal = uikit.modal('#modal-menu');
         }
 
         var data      = $(this).data(),

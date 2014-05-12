@@ -27,7 +27,7 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         e.preventDefault();
 
         if (!modal) {
-            modal = new uikit.modal.Modal('#modal-role');
+            modal = uikit.modal('#modal-role');
         }
 
         modal.show();

@@ -71,7 +71,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
     // widget settings
 
-    var autocomplete = new uikit.autocomplete($('#form-weather-location').parent(), {
+    var autocomplete = uikit.autocomplete($('#form-weather-location').parent(), {
 
         'source': function(release) {
 
