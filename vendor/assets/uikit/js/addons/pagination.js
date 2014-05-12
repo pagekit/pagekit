@@ -5,42 +5,51 @@
  */
 (function(addon) {
 
-    if (typeof define == "function" && define.amd) { // AMD
+    var component;
+
+    if (jQuery && jQuery.UIkit) {
+        component = addon(jQuery, jQuery.UIkit);
+    }
+
+    if (typeof define == "function" && define.amd) {
         define("uikit-pagination", ["uikit"], function(){
-            return jQuery.UIkit.pagination || addon(window, window.jQuery, window.jQuery.UIkit);
+            return component || addon(jQuery, jQuery.UIkit);
         });
     }
 
-    if(window && window.jQuery && window.jQuery.UIkit) {
-        addon(window, window.jQuery, window.jQuery.UIkit);
-    }
-
-})(function(global, $, UI){
+})(function($, UI){
 
     "use strict";
 
-    var Pagination = function(element, options) {
+    UI.component('pagination', {
 
-        var $element = $(element), $this = this;
+        defaults: {
+            items          : 1,
+            itemsOnPage    : 1,
+            pages          : 0,
+            displayedPages : 3,
+            edges          : 3,
+            currentPage    : 1,
+            lblPrev        : false,
+            lblNext        : false,
+            onSelectPage   : function() {}
+        },
 
-        if ($element.data("pagination")) return;
+        init: function() {
 
-        this.element       = $element;
-        this.options       = $.extend({}, Pagination.defaults, options);
-        this.pages         = this.options.pages ?  this.options.pages : Math.ceil(this.options.items / this.options.itemsOnPage) ? Math.ceil(this.options.items / this.options.itemsOnPage) : 1;
-        this.currentPage   = this.options.currentPage - 1;
-        this.halfDisplayed = this.options.displayedPages / 2;
+            var $this = this;
 
-        $element.data("pagination", this).on("click", "a[data-page]", function(e){
-            e.preventDefault();
-            $this.selectPage($(this).data("page"));
-        });
+            this.pages         = this.options.pages ?  this.options.pages : Math.ceil(this.options.items / this.options.itemsOnPage) ? Math.ceil(this.options.items / this.options.itemsOnPage) : 1;
+            this.currentPage   = this.options.currentPage - 1;
+            this.halfDisplayed = this.options.displayedPages / 2;
 
-        this._render();
-    };
+            this.on("click", "a[data-page]", function(e){
+                e.preventDefault();
+                $this.selectPage($(this).data("page"));
+            });
 
-
-    $.extend(Pagination.prototype, {
+            this._render();
+        },
 
         _getInterval: function() {
 
@@ -60,7 +69,7 @@
             this.render(pages);
 
             this.options.onSelectPage.apply(this, [pageIndex]);
-            this.element.trigger('uk-select-page', [pageIndex, this]);
+            this.trigger('uk-select-page', [pageIndex, this]);
         },
 
         _render: function() {
@@ -121,20 +130,6 @@
         }
     });
 
-    Pagination.defaults = {
-        items          : 1,
-        itemsOnPage    : 1,
-        pages          : 0,
-        displayedPages : 3,
-        edges          : 3,
-        currentPage    : 1,
-        lblPrev        : false,
-        lblNext        : false,
-        onSelectPage   : function() {}
-    };
-
-    UI["pagination"] = Pagination;
-
     // init code
     $(document).on("uk-domready", function(e) {
 
@@ -142,10 +137,10 @@
             var ele = $(this);
 
             if (!ele.data("pagination")) {
-                var obj = new Pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
+                var obj = UI.pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
             }
         });
     });
 
-    return Pagination;
+    return UI.pagination;
 });

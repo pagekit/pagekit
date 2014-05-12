@@ -105,7 +105,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
             dialog.html(tmpl.render('package.upload', data));
 
             if (!modal) {
-                modal = new uikit.modal.Modal(dialog);
+                modal = uikit.modal(dialog);
             }
 
             modal.show();
@@ -113,8 +113,8 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
     },
 
     // upload objects
-    uploadselect = new uikit.upload.select($(".js-upload-select"), settings),
-    uploaddrop   = new uikit.upload.drop($(".js-upload-drop"), settings);
+    uploadselect = uikit.uploadSelect($(".js-upload-select"), settings),
+    uploaddrop   = uikit.uploadDrop($(".js-upload-drop"), settings);
 
 
     function show(message, context) {

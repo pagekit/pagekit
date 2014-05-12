@@ -66,7 +66,7 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
             if (!this.picker) {
                 this.finder = Finder.attach(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
-                this.picker = new uikit.modal.Modal(this.modal);
+                this.picker = uikit.modal(this.modal);
             }
 
             return this.picker;
@@ -129,99 +129,103 @@ define(['jquery', 'tmpl!image.modal,image.replace', 'uikit', 'editor', 'finder']
         setTimeout(function() { ImagePopup.image.focus(); }, 10);
     }
 
-    editor.addPlugin('image', function(editor) {
+    uikit.plugin('htmleditor', 'image', {
 
-        var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
+        init: function(editor) {
 
-        ImagePopup.init(options);
+            var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
 
-        editor.element.on('render', function() {
+            ImagePopup.init(options);
 
-            var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+            editor.element.on('render', function() {
 
-            images = editor.replaceInPreview(regexp, function(data) {
+                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
 
-                if (data.matches[0][0] == '<') {
+                images = editor.replaceInPreview(regexp, function(data) {
 
-                    if (data.matches[0].match(/js\-no\-parse/)) return false;
+                    if (data.matches[0][0] == '<') {
 
-                    var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
-                        matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
+                        if (data.matches[0].match(/js\-no\-parse/)) return false;
 
-                    data['src'] = matchesSrc ? matchesSrc[1] : '';
-                    data['alt'] = matchesAlt ? matchesAlt[1] : '';
-                    data['handler'] = function() {
-                        ImagePopup.getPicker().hide();
+                        var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
+                            matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
 
-                        var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
+                        data['src'] = matchesSrc ? matchesSrc[1] : '';
+                        data['alt'] = matchesAlt ? matchesAlt[1] : '';
+                        data['handler'] = function() {
+                            ImagePopup.getPicker().hide();
 
-                        output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
-                        output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
+                            var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
 
-                        data.replace(output);
-                    };
+                            output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
+                            output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
 
-                } else {
+                            data.replace(output);
+                        };
 
-                    data['src'] = data.matches[3].trim();
-                    data['alt'] = data.matches[2];
-                    data['handler'] = function() {
-                        ImagePopup.getPicker().hide();
-                        data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
-                    };
+                    } else {
 
-                }
+                        data['src'] = data.matches[3].trim();
+                        data['alt'] = data.matches[2];
+                        data['handler'] = function() {
+                            ImagePopup.getPicker().hide();
+                            data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
+                        };
 
-                return tmpl.render('image.replace', { src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
+                    }
 
-            });
-        });
+                    return tmpl.render('image.replace', { src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
 
-        editor.preview.on('click', '.js-editor-image .js-config', function() {
-            openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
-        });
-
-        editor.preview.on('click', '.js-editor-image .js-remove', function() {
-            images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
-        });
-
-        editor.element.off('action.image');
-        editor.element.on('action.image', function() {
-
-            var cursor = editor.editor.getCursor(), data;
-            images.every(function(image) {
-                if (image.inRange(cursor)) {
-                    data = image;
-                    return false;
-                }
-                return true;
+                });
             });
 
-            if (!data) {
-                data = {
-                    src: '',
-                    alt: '',
-                    handler: function() {
+            editor.preview.on('click', '.js-editor-image .js-config', function() {
+                openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
+            });
 
-                        var repl;
+            editor.preview.on('click', '.js-editor-image .js-remove', function() {
+                images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
+            });
 
-                        ImagePopup.getPicker().hide();
+            editor.element.off('action.image');
+            editor.element.on('action.image', function() {
 
-                        if (editor.getCursorMode() == 'html') {
-                            repl = '<img src="' + ImagePopup.image.val() + '" alt="' + ImagePopup.title.val() + '">';
-                        } else {
-                            repl = '![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')';
-                        }
+                var cursor = editor.editor.getCursor(), data;
+                images.every(function(image) {
+                    if (image.inRange(cursor)) {
+                        data = image;
+                        return false;
+                    }
+                    return true;
+                });
 
-                        editor.editor.replaceSelection(repl, 'end');
-                    },
-                    replace: function(value) { editor.editor.replaceRange(value, cursor); }
-                };
-            }
+                if (!data) {
+                    data = {
+                        src: '',
+                        alt: '',
+                        handler: function() {
 
-            openImageModal(data, rootpath);
-        });
+                            var repl;
+
+                            ImagePopup.getPicker().hide();
+
+                            if (editor.getCursorMode() == 'html') {
+                                repl = '<img src="' + ImagePopup.image.val() + '" alt="' + ImagePopup.title.val() + '">';
+                            } else {
+                                repl = '![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')';
+                            }
+
+                            editor.editor.replaceSelection(repl, 'end');
+                        },
+                        replace: function(value) { editor.editor.replaceRange(value, cursor); }
+                    };
+                }
+
+                openImageModal(data, rootpath);
+            });
+
+            return editor;
+
+        }
     });
-
-    return editor;
 });

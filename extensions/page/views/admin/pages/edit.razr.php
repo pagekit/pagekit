@@ -67,6 +67,10 @@
 
     </div>
 
+    <script id="unsafed-form-message" type="text/translation">
+        @trans('You\'ve made some changes! Leaving the page without saving will discard all changes.')
+    </script>
+
     @token()
 
 </form>
