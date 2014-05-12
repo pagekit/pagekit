@@ -49,6 +49,12 @@ class AccessLevelController extends Controller
             $level->setId(0);
         }
 
+        if ($level->getId() == AccessLevel::LEVEL_EVERYONE) {
+            $level->setRoles(array_keys($roles));
+        } elseif ($level->getId() == AccessLevel::LEVEL_AUTHENTICATED) {
+            $level->setRoles(array_keys(array_filter($roles, function($role) { return !$role->isAnonymous(); })));
+        }
+
         return array('head.title' => __('Access Levels'), 'level' => $level, 'levels' => $levels, 'roles' => $roles);
     }
 
