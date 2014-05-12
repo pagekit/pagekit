@@ -1,4 +1,4 @@
-require(['jquery', 'tmpl!user.info', 'uikit!form-password', 'md5', 'domReady!'], function($, tmpl, uikit, md5) {
+require(['jquery', 'tmpl!user.info', 'uikit!form-password', 'gravatar', 'domReady!'], function($, tmpl, uikit, gravatar) {
 
     var form = $('#js-user'), info = $('.js-info', form), avatar = $('.js-avatar', form);
 
@@ -19,7 +19,7 @@ require(['jquery', 'tmpl!user.info', 'uikit!form-password', 'md5', 'domReady!'],
 
     // show avatar
     $('[name="user[email]"]', form).on('change', function() {
-        avatar.html('<img src="//www.gravatar.com/avatar/' + md5.hash($(this).val()) + '?s=300&amp;d=mm&amp;r=g" class="uk-border-circle" height="150" width="150">');
+        avatar.html('<img src="' + gravatar.url($(this).val(), {s: 300, d: 'mm', r: 'g'}) + '" class="uk-border-circle" height="150" width="150">');
     }).trigger('change');
 
 });

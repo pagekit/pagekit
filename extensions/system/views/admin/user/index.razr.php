@@ -69,7 +69,7 @@
                 <tr>
                     <td><input class="js-select" type="checkbox" name="ids[]" value="@user.id"></td>
                     <td class="pk-table-width-minimum">
-                        @gravatar(user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => user.username, 'class' => 'uk-img-preserve uk-border-circle']])
+                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="" data-avatar="@user.email">
                     </td>
                     <td class="uk-text-nowrap">
                         <a href="@url.route('@system/user/edit', ['id' => user.id])">@user.username</a>

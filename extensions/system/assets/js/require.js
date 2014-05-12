@@ -22,6 +22,7 @@ var require = (function(win, doc) {
                         'handlebars': 'vendor/assets/handlebars/handlebars.js?ver=2.0.0',
                         'marked':     'vendor/assets/marked/marked.js?ver=0.3.1',
                         'md5':        'vendor/assets/requirejs/plugins/md5.js?ver=0.0.5',
+                        'gravatar':   'vendor/assets/requirejs/plugins/gravatar',
                         'uikit':      'vendor/assets/uikit/js/uikit.min',
                         'rowselect':  'extensions/system/assets/js/rowselect.js?ver=' + vers,
                         'finder':     'extensions/system/assets/js/finder.js?ver=' + vers,

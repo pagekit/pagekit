@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit', 'rowselect', 'gravatar', 'domReady!'], function($, uikit, RowSelect, gravatar) {
 
     var form         = $('#js-user'),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
@@ -27,4 +27,10 @@ require(['jquery', 'uikit', 'rowselect', 'domReady!'], function($, uikit, RowSel
     form.on('change', 'select[name^="filter"]', function() {
         form.submit();
     });
+
+    // show avatar
+    $('img[data-avatar]', form).each(function() {
+        $(this).attr('src', gravatar.url($(this).data('avatar'), {s: 80, d: 'mm', r: 'g'}));
+    });
+
 });
