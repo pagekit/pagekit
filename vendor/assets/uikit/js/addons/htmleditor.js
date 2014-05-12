@@ -24,7 +24,6 @@
             markdown     : false,
             autocomplete : true,
             height       : 500,
-            plugins      : ['base', 'markdown'],
             maxsplitsize : 1000,
             markedOptions: { gfm: true, tables: true, breaks: true, pedantic: true, sanitize: false, smartLists: true, smartypants: false, langPrefix: 'lang-'},
             codemirror   : { mode: 'htmlmixed', tabMode: 'indent', tabsize: 4, lineWrapping: true, dragDrop: false, autoCloseTags: true, matchTags: true, autoCloseBrackets: true, matchBrackets: true, indentUnit: 4, hintOptions: {completionSingle:false} },
@@ -93,7 +92,7 @@
             // toolbar actions
             this.htmleditor.on('click', 'a[data-htmleditor-button]', function() {
 
-                if ($this.activetab && $this.activetab != 'code') return;
+                if (!$this.code.is(':visible')) return;
 
                 $this.trigger('action.' + $(this).data('htmleditor-button'), [$this.editor]);
             });

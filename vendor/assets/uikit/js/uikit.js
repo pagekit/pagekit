@@ -452,6 +452,7 @@
 
             this.element = element ? $(element) : null;
             this.options = $.extend(true, {}, this.defaults, options);
+            this.plugins = {};
 
             if (this.element) {
                 this.element.data(name, this);
@@ -459,8 +460,13 @@
 
             this.init();
 
-            this.options.plugins.forEach(function(plugin) {
-                if(fn.plugins[plugin].init) fn.plugins[plugin].init($this);
+            (this.options.plugins.length ? this.options.plugins : Object.keys(fn.plugins)).forEach(function(plugin) {
+
+                if (fn.plugins[plugin].init) {
+                    fn.plugins[plugin].init($this);
+                    $this.plugins[plugin] = true;
+                }
+
             });
 
             this.trigger('init', [this]);
