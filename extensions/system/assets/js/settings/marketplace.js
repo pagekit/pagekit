@@ -12,7 +12,7 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
         details.html(tmpl.render('marketplace.details', data));
 
         if (!modal) {
-            modal = new uikit.modal.Modal(details);
+            modal = uikit.modal(details);
         }
 
         modal.show();

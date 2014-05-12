@@ -84,7 +84,7 @@ define(['jquery', 'module', 'require', 'uikit!upload', 'rowselect', 'handlebars'
 
                     };
 
-                new uikit.upload.select(this.element.find('.uk-form-file > input'), uploadsettings);
+                uikit.uploadSelect(this.element.find('.uk-form-file > input'), uploadsettings);
                 new RowSelect(this.element, { rows: '[data-row]' });
 
                 this.options['messages'] = this.element.find('[data-messages]').data('messages');

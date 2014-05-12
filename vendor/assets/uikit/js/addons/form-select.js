@@ -2,52 +2,49 @@
 
 (function(addon) {
 
-    if (typeof define == "function" && define.amd) { // AMD
+    var component;
+
+    if (jQuery && jQuery.UIkit) {
+        component = addon(jQuery, jQuery.UIkit);
+    }
+
+    if (typeof define == "function" && define.amd) {
         define("uikit-form-select", ["uikit"], function(){
-            return jQuery.UIkit.formSelect || addon(window, window.jQuery, window.jQuery.UIkit);
+            return component || addon(jQuery, jQuery.UIkit);
         });
     }
 
-    if(window && window.jQuery && window.jQuery.UIkit) {
-        addon(window, window.jQuery, window.jQuery.UIkit);
-    }
+})(function($, UI){
 
-})(function(global, $, UI){
+    UI.component('formSelect', {
+        defaults: {
+            'target': '>span:first'
+        },
 
-    var FormSelect = function(element, options) {
+        init: function() {
+            var $this = this;
 
-        var $this = this, $element = $(element);
+            this.target  = this.find(this.options.target);
+            this.select  = this.find('select');
 
-        if($element.data("formSelect")) return;
+            // init + on change event
+            this.select.on("change", (function(){
 
-        this.element = $element;
-        this.options = $.extend({}, FormSelect.defaults, options);
-        this.target  = this.element.find(this.options.target);
-        this.select  = this.element.find('select');
+                var select = $this.select[0], fn = function(){
 
-        // init + on change event
-        this.select.on("change", (function(){
+                    try {
+                        $this.target.text(select.options[select.selectedIndex].text);
+                    } catch(e) {}
 
-            var select = $this.select[0], fn = function(){
+                    return fn;
+                };
 
-                try {
-                    $this.target.text(select.options[select.selectedIndex].text);
-                } catch(e) {}
+                return fn();
+            })());
 
-                return fn;
-            };
-
-            return fn();
-        })());
-
-        this.element.data("formSelect", this);
-    };
-
-    FormSelect.defaults = {
-        'target': '>span:first'
-    };
-
-    UI["formSelect"] = FormSelect;
+            this.element.data("formSelect", this);
+        }
+    });
 
     // init code
     $(document).on("uk-domready", function(e) {
@@ -56,11 +53,10 @@
             var ele = $(this);
 
             if (!ele.data("formSelect")) {
-                e.preventDefault();
-                var obj = new FormSelect(ele, UI.Utils.options(ele.attr("data-uk-form-select")));
+                var obj = UI.formSelect(ele, UI.Utils.options(ele.attr("data-uk-form-select")));
             }
         });
     });
 
-    return FormSelect;
+    return UI.formSelect;
 });

@@ -2,6 +2,27 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form);
 
+
+    // check form before leaving page
+
+    window.onbeforeunload = (function() {
+
+        var dirtyform;
+
+        form.on('change', ':input', function() {
+            dirtyform = true;
+        }).on('submit', function() {
+            dirtyform = false;
+        });
+
+        return function(e) {
+
+            if (dirtyform) {
+                return $('#unsafed-form-message').text().trim();
+            }
+        };
+    })();
+
     // slug handling
     var slug  = $('input[name="page[slug]"]', form),
         title = $('input[name="page[title]"]', form);

@@ -6,7 +6,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
 
         var source  = $(element),
             modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
-            picker  = new uikit.modal.Modal(modal),
+            picker  = uikit.modal(modal),
             trigger = $(tmpl.get('linkpicker.replace')).insertBefore(source),
             link;
 
