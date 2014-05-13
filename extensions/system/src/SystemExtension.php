@@ -17,6 +17,7 @@ use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
+use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Exception\ExceptionHandler;
 use Pagekit\System\Helper\CountryHelper;
@@ -59,6 +60,7 @@ class SystemExtension extends Extension
         $app['events']->addSubscriber(new MaintenanceListener);
         $app['events']->addSubscriber(new MenuListener);
         $app['events']->addSubscriber(new MigrationListener);
+        $app['events']->addSubscriber(new ResponseListener);
         $app['events']->addSubscriber(new SystemListener);
         $app['events']->addSubscriber(new ThemeListener);
         $app['events']->addSubscriber(new UserListener);

@@ -3,7 +3,6 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Component\View\Event\ActionEvent;
-use Pagekit\Content\Plugin\LinkPlugin;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
@@ -61,7 +60,6 @@ class SystemListener extends EventSubscriber
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
 
         $app['events']->addSubscriber(new Editor);
-        $app['events']->addSubscriber(new LinkPlugin);
         $app['events']->addSubscriber(new MarkdownPlugin);
         $app['events']->addSubscriber(new SimplePlugin);
         $app['events']->addSubscriber(new VideoPlugin);
