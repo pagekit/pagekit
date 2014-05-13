@@ -57,10 +57,10 @@ class WidgetListener extends EventSubscriber
     {
         $negatives = $positives = '';
 
-        foreach (explode("\n", str_replace(array('\!', '\*', "\r"), array('!', '.*', ''), preg_quote($patterns, '/'))) as $pattern) {
+        $patterns = preg_replace('/^(\!)?([^\!\/])/m', '$1/$2', $patterns);
+        $patterns = preg_quote($patterns, '/');
 
-            $pattern = preg_replace('/^(\!)?(?:\\/)?(.+)/', '$1\/$2', $pattern);
-
+        foreach (explode("\n", str_replace(array('\!', '\*', "\r"), array('!', '.*', ''), $patterns)) as $pattern) {
             if ($pattern === '') {
                 continue;
             } elseif ($pattern[0] === '!') {
