@@ -7,14 +7,14 @@ use Pagekit\Component\Package\Installer\PackageInstaller;
 use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Component\View\View;
 use Pagekit\Extension\ExtensionManager;
+use Pagekit\Extension\Event\ExtensionListener;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ServiceProviderInterface;
 use Pagekit\System\FileProvider;
-use Pagekit\System\Package\Event\LoadFailureEvent;
-use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Package\ThemeLoader;
 use Pagekit\Theme\Package\ThemeRepository;
 use Pagekit\Theme\ThemeManager;
@@ -66,14 +66,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function boot(Application $app)
     {
-        foreach (array_unique($app['extensions.boot']) as $extension) {
-            try {
-                $app['extensions']->load($extension)->boot($app);
-            } catch (ExtensionLoadException $e) {
-                $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
-            }
-        }
-
         if ($app->runningInConsole()) {
 
             $app['isAdmin'] = false;
@@ -93,6 +85,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         }
 
         $app['events']->addSubscriber($this);
+        $app['events']->addSubscriber(new ExtensionListener);
+        $app['events']->addSubscriber(new ThemeListener);
     }
 
     public function onEarlyKernelRequest($event)
@@ -141,8 +135,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         return array(
             'kernel.request' => array(
-                array('onEarlyKernelRequest', 256),
-                array('onKernelRequest', 64),
+                array('onEarlyKernelRequest', 100),
+                array('onKernelRequest', 50),
                 array('onRequestMatched', 0)
             ),
             'templating.reference' => 'onTemplateReference'

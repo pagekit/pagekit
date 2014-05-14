@@ -6,7 +6,6 @@ use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationAware;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\Translator;
 
 class Extension extends ApplicationAware
@@ -50,15 +49,9 @@ class Extension extends ApplicationAware
      */
     public function boot(Application $app)
     {
-        $self = $this;
-
-        $app->on('init', function() use ($app, $self) {
-
-            $self->registerControllers($app['router']);
-            $self->registerLanguages($app['translator']);
-            $self->registerResources($app['locator'], $app['events']);
-
-        }, 32);
+        $this->registerControllers($app['router']);
+        $this->registerLanguages($app['translator']);
+        $this->registerResources($app['locator'], $app['events']);
     }
 
     /**
@@ -163,12 +156,11 @@ class Extension extends ApplicationAware
     }
 
     /**
-     * Finds and adds extension's resources.
+     * Finds and adds extension file resources.
      *
-     * @param ResourceLocator          $locator
-     * @param EventDispatcherInterface $dispatcher
+     * @param ResourceLocator $locator
      */
-    public function registerResources(ResourceLocator $locator, EventDispatcherInterface $dispatcher)
+    public function registerResources(ResourceLocator $locator)
     {
         $root = $this->getPath();
 
@@ -192,9 +184,9 @@ class Extension extends ApplicationAware
         $addResources($this->getConfig('resources.export', array()), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $dispatcher->addListener('init', function() use ($config, $addResources) {
+            $this('events')->addListener('init', function() use ($config, $addResources) {
                 $addResources($config);
-            });
+            }, 20);
         }
     }
 

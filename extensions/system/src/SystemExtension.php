@@ -24,7 +24,6 @@ use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
-use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
@@ -62,7 +61,6 @@ class SystemExtension extends Extension
         $app['events']->addSubscriber(new MigrationListener);
         $app['events']->addSubscriber(new ResponseListener);
         $app['events']->addSubscriber(new SystemListener);
-        $app['events']->addSubscriber(new ThemeListener);
         $app['events']->addSubscriber(new UserListener);
         $app['events']->addSubscriber(new WidgetListener);
         $app['events']->addSubscriber(new ThemeWidgetListener);

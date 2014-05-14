@@ -9,8 +9,12 @@ class ThemeListener extends EventSubscriber
     /**
      * Loads the site/admin theme.
      */
-    public function onInit()
+    public function onKernelRequest($event)
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
         try {
 
             $app = self::$app;
@@ -21,9 +25,15 @@ class ThemeListener extends EventSubscriber
             $app['theme.site'] = $app->protect($app['themes']->load($app['config']->get('theme.site')));
             $app['theme.site']->boot($app);
 
-            $app['view']->setLayout($app[$app['isAdmin'] ? 'theme.admin' : 'theme.site']->getLayout());
-
         } catch (\Exception $e) {}
+    }
+
+    /**
+     * Sets the view layout.
+     */
+    public function onInit()
+    {
+        $this('view')->setLayout($this($this('isAdmin') ? 'theme.admin' : 'theme.site')->getLayout());
     }
 
     /**
@@ -32,7 +42,8 @@ class ThemeListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'init' => array('onInit', 128)
+            'kernel.request' => array('onKernelRequest', 60),
+            'init' => 'onInit'
         );
     }
 }
