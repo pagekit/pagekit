@@ -53,8 +53,8 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], fu
 
                         if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
 
-                        data['link']    = data.matches[2].trim();
-                        data['txt']     = data.matches[1].trim();
+                        data['link']    = data.matches[2];
+                        data['txt']     = data.matches[1];
                         data['class']   = '';
                         data['handler'] = function() {
                             picker.hide();
