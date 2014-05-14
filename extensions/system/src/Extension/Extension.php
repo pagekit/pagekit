@@ -51,7 +51,7 @@ class Extension extends ApplicationAware
     {
         $this->registerControllers($app['router']);
         $this->registerLanguages($app['translator']);
-        $this->registerResources($app['locator'], $app['events']);
+        $this->registerResources($app['locator']);
     }
 
     /**
