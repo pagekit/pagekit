@@ -10,7 +10,7 @@ class WidgetListener extends EventSubscriber
     /**
      * Handles the widget to position assignment.
      */
-    public function onSiteLoaded()
+    public function onSystemSite()
     {
         $request   = $this('request');
         $positions = $this('positions');
@@ -44,7 +44,7 @@ class WidgetListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.loaded' => array('onSiteLoaded', -16)
+            'system.site' => array('onSystemSite', -16)
         );
     }
 

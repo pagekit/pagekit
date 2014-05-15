@@ -12,7 +12,7 @@ class CanonicalListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onSiteLoaded(GetResponseEvent $event)
+    public function onSystemSite(GetResponseEvent $event)
     {
         $request = $event->getRequest();
 
@@ -33,7 +33,7 @@ class CanonicalListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.loaded' => 'onSiteLoaded'
+            'system.site' => 'onSystemSite'
         );
     }
 }

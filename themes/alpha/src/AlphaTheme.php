@@ -19,7 +19,7 @@ class AlphaTheme extends Theme
     {
         parent::boot($app);
 
-        $app->on('site.init', function() use ($app) {
+        $app->on('system.site', function() use ($app) {
 
             $app->on('system.position.renderer', function($event) use ($app) {
 

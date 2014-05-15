@@ -184,7 +184,7 @@ class Extension extends ApplicationAware
         $addResources($this->getConfig('resources.export', array()), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $this('events')->addListener('init', function() use ($config, $addResources) {
+            $this('events')->addListener('system.init', function() use ($config, $addResources) {
                 $addResources($config);
             }, 20);
         }

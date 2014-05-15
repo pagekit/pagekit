@@ -21,7 +21,7 @@ class InstallerExtension extends Extension
                 return $app['response']->redirect('@installer/installer/index');
             });
 
-            $app->on('kernel.request', function() use ($app) {
+            $app->on('system.loaded', function() use ($app) {
 
                 if ($locale = $app['request']->getPreferredLanguage()) {
                     $app['translator']->setLocale($locale);

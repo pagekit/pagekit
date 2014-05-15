@@ -10,6 +10,15 @@ use Pagekit\Widget\Event\WidgetEvent;
 
 class WidgetListener extends EventSubscriber
 {
+    public function onSystemSite()
+    {
+        $settings = $this->getSettings();
+        $this('app')->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
+            $widget = $event->getEntity();
+            $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
+        });
+    }
+
     public function onWidgetEdit(WidgetEditEvent $event)
     {
         if (!$theme = $this('theme.site') or !$tmpl = $theme->getConfig('settings.widgets')) {
@@ -44,26 +53,17 @@ class WidgetListener extends EventSubscriber
         $this->setSettings($settings);
     }
 
-    public function onSiteInit()
-    {
-        $settings = $this->getSettings();
-        $this('app')->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
-            $widget = $event->getEntity();
-            $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
-        });
-    }
-
     /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
+            'system.site'              => 'onSystemSite',
             'system.widget.edit'       => 'onWidgetEdit',
             'system.widget.save'       => 'onWidgetSave',
             'system.widget.copy'       => 'onWidgetCopy',
-            'system.widget.postDelete' => 'onWidgetDelete',
-            'site.init'                => 'onSiteInit'
+            'system.widget.postDelete' => 'onWidgetDelete'
         );
     }
 

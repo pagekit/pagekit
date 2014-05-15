@@ -9,7 +9,7 @@ class LocaleListener extends EventSubscriber
     /**
      * Sets the systems locale
      */
-    public function onInit()
+    public function onSystemInit()
     {
         $this('translator')->setLocale($this('config')->get('app.locale'.($this('isAdmin') ? '_admin' : '')));
     }
@@ -20,7 +20,7 @@ class LocaleListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'init' => array('onInit', 10)
+            'system.init' => array('onSystemInit', 10)
         );
     }
 }

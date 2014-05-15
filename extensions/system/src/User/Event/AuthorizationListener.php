@@ -13,9 +13,9 @@ use Pagekit\User\Model\UserInterface;
 class AuthorizationListener extends EventSubscriber
 {
     /**
-     * Logout blocked users
+     * Logout blocked users.
      */
-    public function onLoad()
+    public function onSystemLoaded()
     {
         if ($user = $this('auth')->getUser() and $user->getStatus() == UserInterface::STATUS_BLOCKED) {
             $this('auth')->logout($user);
@@ -61,7 +61,7 @@ class AuthorizationListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'loaded'         => 'onLoad',
+            'system.loaded'  => 'onSystemLoaded',
             'auth.authorize' => 'onAuthorize',
             'auth.login'     => array('onLogin', -8),
             'auth.logout'    => array('onLogout', -8)

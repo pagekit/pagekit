@@ -97,7 +97,7 @@ class AccessListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onLoad(GetResponseEvent $event)
+    public function onSystemLoaded(GetResponseEvent $event)
     {
         if ($access = $event->getRequest()->attributes->get('_route_options[access]', array(), true)) {
             foreach ($access as $expression) {
@@ -139,8 +139,8 @@ class AccessListener extends EventSubscriber
         return array(
             'route.configure' => 'onConfigureRoute',
             'auth.authorize'  => 'onAuthorize',
-            'loaded'  => array(
-                array('onLoad', -512),
+            'system.loaded'   => array(
+                array('onSystemLoaded', -512),
                 array('onLoadAdmin', -256)
             )
         );

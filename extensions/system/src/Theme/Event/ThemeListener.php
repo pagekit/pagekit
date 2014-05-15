@@ -31,7 +31,7 @@ class ThemeListener extends EventSubscriber
     /**
      * Sets the view layout.
      */
-    public function onInit()
+    public function onSystemInit()
     {
         $this('view')->setLayout($this($this('isAdmin') ? 'theme.admin' : 'theme.site')->getLayout());
     }
@@ -43,7 +43,7 @@ class ThemeListener extends EventSubscriber
     {
         return array(
             'kernel.request' => array('onKernelRequest', 60),
-            'init' => 'onInit'
+            'system.init'    => 'onSystemInit'
         );
     }
 }

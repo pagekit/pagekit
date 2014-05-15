@@ -38,6 +38,16 @@ class MenuListener extends EventSubscriber
     }
 
     /**
+     * Sets the active menu items.
+     *
+     * @param GetResponseEvent $event
+     */
+    public function onSystemSite(GetResponseEvent $event)
+    {
+        $event->getRequest()->attributes->set('_menu', $this('events')->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+    }
+
+    /**
      * Register link types for menu edit.
      *
      * @param LinkEvent $event
@@ -50,16 +60,6 @@ class MenuListener extends EventSubscriber
 
         $event->register('Pagekit\Menu\Link\Divider');
         $event->register('Pagekit\Menu\Link\Header');
-    }
-
-    /**
-     * Sets the active menu items.
-     *
-     * @param GetResponseEvent $event
-     */
-    public function onSiteLoaded(GetResponseEvent $event)
-    {
-        $event->getRequest()->attributes->set('_menu', $this('events')->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -95,7 +95,7 @@ class MenuListener extends EventSubscriber
     }
 
     /**
-     * Gets menu items url info from cache
+     * Gets menu items url info from cache.
      *
      * @return array
      */
@@ -116,6 +116,9 @@ class MenuListener extends EventSubscriber
         return $this->cacheEntries;
     }
 
+    /**
+     * Clears the cache.
+     */
     public function clearCache()
     {
         $this->cache->delete($this->cacheKey);
@@ -128,13 +131,13 @@ class MenuListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'site.loaded'                => 'onSiteLoaded',
+            'system.site'                => 'onSystemSite',
             'system.link'                => 'onSystemLink',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',
-            'system.alias.postSave'   => 'clearCache',
-            'system.alias.postDelete' => 'clearCache'
+            'system.alias.postSave'      => 'clearCache',
+            'system.alias.postDelete'    => 'clearCache'
         );
     }
 }

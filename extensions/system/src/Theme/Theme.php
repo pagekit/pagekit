@@ -49,7 +49,7 @@ class Theme extends ApplicationAware
     public function boot(Application $app)
     {
         $this->registerLanguages($app['translator']);
-        $this->registerResources($app['locator'], $app['events']);
+        $this->registerResources($app['locator']);
 
         $this->config += $app['option']->get("{$this->name}:config", array());
     }
@@ -172,7 +172,7 @@ class Theme extends ApplicationAware
         $addResources($this->getConfig('resources.export', array()), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $this('events')->addListener('init', function() use ($config, $addResources) {
+            $this('events')->addListener('system.init', function() use ($config, $addResources) {
                 $addResources($config);
             }, 10);
         }

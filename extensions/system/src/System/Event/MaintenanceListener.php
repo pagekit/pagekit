@@ -12,7 +12,7 @@ class MaintenanceListener extends EventSubscriber
      *
      * @param GetResponseEvent $event
      */
-    public function onLoad(GetResponseEvent $event)
+    public function onSystemLoaded(GetResponseEvent $event)
     {
         $attributes = $event->getRequest()->attributes;
 
@@ -33,7 +33,7 @@ class MaintenanceListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'loaded' => array('onLoad', 8)
+            'system.loaded' => array('onSystemLoaded', 20)
         );
     }
 }

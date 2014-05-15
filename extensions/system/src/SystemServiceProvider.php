@@ -70,7 +70,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
             $app['isAdmin'] = false;
 
-            $app['events']->dispatch('init');
+            $app['events']->dispatch('system.init');
             $app['events']->addListener('console.init', function($event) {
 
                 $console = $event->getConsole();
@@ -89,23 +89,15 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $app['events']->addSubscriber(new ThemeListener);
     }
 
-    public function onEarlyKernelRequest($event)
-    {
-        if (!$event->isMasterRequest()) {
-            return;
-        }
-
-        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
-    }
-
     public function onKernelRequest($event, $name, $dispatcher)
     {
         if (!$event->isMasterRequest()) {
             return;
         }
 
-        $dispatcher->dispatch('init', $event);
-        $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.init' : 'site.init', $event);
+        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+
+        $dispatcher->dispatch('system.init', $event);
     }
 
     public function onRequestMatched($event, $name, $dispatcher)
@@ -114,8 +106,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
-        $dispatcher->dispatch('loaded', $event);
-        $dispatcher->dispatch($this->app['isAdmin'] ? 'admin.loaded' : 'site.loaded', $event);
+        $dispatcher->dispatch('system.loaded', $event);
     }
 
     public function onTemplateReference($event)
@@ -135,7 +126,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         return array(
             'kernel.request' => array(
-                array('onEarlyKernelRequest', 100),
                 array('onKernelRequest', 50),
                 array('onRequestMatched', 0)
             ),

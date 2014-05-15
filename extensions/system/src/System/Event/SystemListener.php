@@ -31,7 +31,7 @@ class SystemListener extends EventSubscriber
     /**
      * Initialize system.
      */
-    public function onInit()
+    public function onSystemInit()
     {
         $app = $this('app');
 
@@ -91,9 +91,17 @@ class SystemListener extends EventSubscriber
     }
 
     /**
+     * Dispatches the 'system.site' or 'system.admin' event.
+     */
+    public function onSystemLoaded($event, $name, $dispatcher)
+    {
+        $dispatcher->dispatch($this('isAdmin') ? 'system.admin' : 'system.site', $event);
+    }
+
+    /**
      * Creates the menu instance and dispatches the 'system.admin_menu' event.
      */
-    public function onAdminInit()
+    public function onSystemAdmin()
     {
         $menu = new Menu;
         $menu->setId('admin');
@@ -219,8 +227,9 @@ class SystemListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'init'                   => 'onInit',
-            'admin.init'             => 'onAdminInit',
+            'system.init'            => 'onSystemInit',
+            'system.loaded'          => 'onSystemLoaded',
+            'system.admin'           => 'onSystemAdmin',
             'system.link'            => 'onSystemLink',
             'system.tmpl'            => 'onSystemTmpl',
             'system.locale'          => 'onSystemLocale',

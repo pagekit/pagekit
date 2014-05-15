@@ -146,7 +146,7 @@ class SystemExtension extends Extension
         };
 
         if (isset($app['profiler'])) {
-            $app->on('loaded', function() use ($app) {
+            $app->on('system.loaded', function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'view://system/profiler/toolbar/user.php', null, -20);
             });

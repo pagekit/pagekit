@@ -1,6 +1,6 @@
 <?php
 
-$app->on('admin.init', function() use ($app) {
+$app->on('system.admin', function() use ($app) {
 
     // set title
     $app['view']->addAction('head', function() use ($app) {

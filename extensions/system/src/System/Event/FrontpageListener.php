@@ -10,7 +10,7 @@ class FrontpageListener extends EventSubscriber
     /**
      * Registers frontpage route
      */
-    public function onInit()
+    public function onSystemInit()
     {
         if ($frontpage = $this('config')->get('app.frontpage')) {
             $app = self::$app;
@@ -41,7 +41,7 @@ class FrontpageListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'init'        => array('onInit', 8),
+            'system.init' => array('onSystemInit', 10),
             'system.menu' => 'onSystemMenu'
         );
     }
