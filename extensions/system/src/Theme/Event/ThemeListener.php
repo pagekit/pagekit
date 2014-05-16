@@ -29,11 +29,19 @@ class ThemeListener extends EventSubscriber
     }
 
     /**
-     * Sets the view layout.
+     * Sets the admin layout.
      */
-    public function onSystemInit()
+    public function onSystemAdmin()
     {
-        $this('view')->setLayout($this($this('isAdmin') ? 'theme.admin' : 'theme.site')->getLayout());
+        $this('view')->setLayout($this('theme.admin')->getLayout());
+    }
+
+    /**
+     * Sets the site layout.
+     */
+    public function onSystemSite()
+    {
+        $this('view')->setLayout($this('theme.site')->getLayout());
     }
 
     /**
@@ -43,7 +51,8 @@ class ThemeListener extends EventSubscriber
     {
         return array(
             'kernel.request' => array('onKernelRequest', 60),
-            'system.init'    => 'onSystemInit'
+            'system.admin'   => 'onSystemAdmin',
+            'system.site'    => 'onSystemSite'
         );
     }
 }
