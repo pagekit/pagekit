@@ -170,11 +170,6 @@ class Theme extends ApplicationAware
         };
 
         $addResources($this->getConfig('resources.export', array()), $this->getName());
-
-        if ($config = $this->getConfig('resources.override')) {
-            $this('events')->addListener('system.init', function() use ($config, $addResources) {
-                $addResources($config);
-            }, 10);
-        }
+        $addResources($this->getConfig('resources.override', array()), $this->getName());
     }
 }

@@ -33,7 +33,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $view->set('url', $app['url']);
             $view->addAction('head', function(ActionEvent $event) use ($app) {
                 $event->append(sprintf('<meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-base="%2$s" />', $app['config']['app.version'], $app['url']->base() ?: '/'));
-            }, 16);
+            }, 10);
 
             return $view;
         };

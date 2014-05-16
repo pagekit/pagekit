@@ -53,7 +53,6 @@ class SystemListener extends EventSubscriber
         $helper = new FinderHelper($app);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
-
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('urldecode', 'urldecode'));
 
         $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
@@ -227,7 +226,7 @@ class SystemListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init'            => 'onSystemInit',
+            'system.init'            => array('onSystemInit', 20),
             'system.loaded'          => 'onSystemLoaded',
             'system.admin'           => 'onSystemAdmin',
             'system.link'            => 'onSystemLink',
