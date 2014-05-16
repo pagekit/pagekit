@@ -6,7 +6,7 @@
 
     @set (header = item.url == '!menu-header', divider = item.url == '!divider')
 
-    <li class="@((item.attribute('parent') ? ' uk-parent')(item.attribute('active') ? ' uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')|trim)">
+    <li class="@((item.attribute('parent') ? ' uk-parent')~(item.attribute('active') ? ' uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')|trim)">
 
         @if (header)
         @item
