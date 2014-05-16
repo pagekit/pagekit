@@ -14,10 +14,6 @@ use Pagekit\Framework\Application;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ServiceProviderInterface;
 use Pagekit\System\FileProvider;
-use Pagekit\Theme\Event\ThemeListener;
-use Pagekit\Theme\Package\ThemeLoader;
-use Pagekit\Theme\Package\ThemeRepository;
-use Pagekit\Theme\ThemeManager;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
@@ -41,15 +37,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             }, 16);
 
             return $view;
-        };
-
-        $app['themes'] = function($app) {
-
-            $loader     = new ThemeLoader;
-            $repository = new ThemeRepository($app['config']['theme.path'], $loader);
-            $installer  = new PackageInstaller($repository, $loader);
-
-            return new ThemeManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
         };
 
         $app['extensions'] = function($app) {
@@ -86,7 +73,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
         $app['events']->addSubscriber($this);
         $app['events']->addSubscriber(new ExtensionListener);
-        $app['events']->addSubscriber(new ThemeListener);
     }
 
     public function onKernelRequest($event, $name, $dispatcher)

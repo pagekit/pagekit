@@ -3,21 +3,30 @@
 namespace Pagekit\Theme\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Component\Package\Installer\PackageInstaller;
+use Pagekit\Theme\Package\ThemeLoader;
+use Pagekit\Theme\Package\ThemeRepository;
+use Pagekit\Theme\ThemeManager;
 
 class ThemeListener extends EventSubscriber
 {
     /**
      * Loads the site/admin theme.
      */
-    public function onKernelRequest($event)
+    public function onSystemInit($event)
     {
-        if (!$event->isMasterRequest()) {
-            return;
-        }
-
         try {
 
             $app = self::$app;
+
+            $app['themes'] = function($app) {
+
+                $loader     = new ThemeLoader;
+                $repository = new ThemeRepository($app['config']['theme.path'], $loader);
+                $installer  = new PackageInstaller($repository, $loader);
+
+                return new ThemeManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
+            };
 
             $app['theme.admin'] = $app->protect($app['themes']->load('system', 'extension://system/theme'));
             $app['theme.admin']->boot($app);
@@ -50,9 +59,9 @@ class ThemeListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.request' => array('onKernelRequest', 60),
-            'system.admin'   => 'onSystemAdmin',
-            'system.site'    => 'onSystemSite'
+            'system.init'  => 'onSystemInit',
+            'system.admin' => 'onSystemAdmin',
+            'system.site'  => 'onSystemSite'
         );
     }
 }

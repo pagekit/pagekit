@@ -26,9 +26,6 @@ INSERT INTO `@system_widget` (`id`, `access_id`, `type`, `title`, `position`, `p
 (2, 1, 'widget.user.login', 'Login', 'sidebar', 0, 1, '', NULL, '{"redirect.login":"","redirect.logout":""}'),
 (3, 1, 'widget.text', 'Copyright', 'footer', 0, 1, '', NULL, '{"content":"Powered by <a href=\\"\\">Pagekit<\\/a>"}');
 
-INSERT INTO `@system_access_level` (`id`, `name`, `priority`, `roles`) VALUES
-(3, 'Special', 2, '3');
-
 INSERT INTO `@system_option` (`name`, `value`, `autoload`) VALUES
 ('system:app.frontpage', '"@page/id?id=1"', 1),
 ('system:extensions', '["page"]', 1);
