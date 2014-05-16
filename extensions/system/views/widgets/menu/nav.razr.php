@@ -1,12 +1,12 @@
 @if (root.depth == 0)
-<ul@block('menuAttributes')@endblock>
+<ul class="uk-nav @(classes ?! 'uk-nav-side')@(options.classes ? ' '~options.classes : '')">
 @endif
 
 @foreach (root.children as item)
 
     @set (header = item.url == '!menu-header', divider = item.url == '!divider')
 
-    <li@block('itemAttributes')@endblock>
+    <li class="@((item.attribute('parent') ? ' uk-parent')(item.attribute('active') ? ' uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')|trim)">
 
         @if (header)
         @item
@@ -15,11 +15,9 @@
         @endif
 
         @if (item.hasChildren && (item.attribute('active') || widget.get('mode', 'all') == 'all' || !root.depth == 0))
-        @block('children')
-        <ul>
-            @include('view://system/widgets/menu/style.base.razr.php', ['root' => item])
+        <ul class="uk-nav-sub">
+            @include('view://system/widgets/menu/nav.razr.php', ['root' => item])
         </ul>
-        @endblock
         @endif
     </li>
 

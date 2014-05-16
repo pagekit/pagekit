@@ -1,7 +1,7 @@
 @foreach (widgets as widget)
     @if (widget.type == 'widget.menu')
 
-    @provider.render(widget, ['layout' => 'view://system/widgets/menu/style.navbar.razr.php']|merge(options))
+    @provider.render(widget, ['layout' => 'view://system/widgets/menu/navbar.razr.php']|merge(options))
 
     @else
 
