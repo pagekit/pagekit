@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!nestable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form         = $('#js-menu'), csrf = $('input[name=_csrf]', form).val(),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
@@ -25,9 +25,9 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
 
     })
 
-        // save menu item order on sortable change
-        .on('sortable-change', 'ul.uk-sortable', function() {
-            $.post(form.attr('action'), { order: $(this).data('sortable').list(), _csrf: csrf }, function(data) {
+        // save menu item order on nestable change
+        .on('nestable-change', 'ul.uk-nestable', function() {
+            $.post(form.attr('action'), { order: $(this).data('nestable').list(), _csrf: csrf }, function(data) {
                 uikit.notify(data.message, 'success');
             }).fail(function() {
                 uikit.notify('Saving menu order failed', 'danger');

@@ -7173,6 +7173,122 @@ a.uk-datepicker-table-muted {
   border-radius: 0 !important;
 }
 /* ========================================================================
+   Component: nestable
+ ========================================================================== */
+.uk-nestable {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+/* Sub-object `uk-nestable-list`
+ ========================================================================== */
+.uk-nestable-list {
+  margin: 0;
+  padding-left: 40px;
+  list-style: none;
+}
+/* Sub-modifier `uk-nestable-list-dragged`
+ ========================================================================== */
+.uk-nestable-list-dragged {
+  position: absolute;
+  z-index: 1050;
+  padding-left: 0;
+  pointer-events: none;
+  padding-top: 1px;
+}
+/* Sub-object `uk-nestable-item`
+ ========================================================================== */
+.uk-nestable-item {
+  margin-bottom: 0;
+  padding: 10px;
+  background: #ffffff;
+  margin-top: -1px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+/* Sub-object `uk-nestable-placeholder`
+ * The placeholder which marks the drop area
+ ========================================================================== */
+.uk-nestable-placeholder {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  border: 1px dashed #99baca;
+  margin: -1px 0 0 0;
+  background: #f5fbfe;
+  position: relative;
+}
+/* Sub-object `uk-nestable-empty`
+ * The style of an empty list
+ ========================================================================== */
+.uk-nestable-empty {
+  min-height: 39px;
+  border: 1px dashed #ddd;
+}
+/* Sub-object `uk-nestable-handle`
+ ========================================================================== */
+.uk-nestable-handle {
+  font-size: 18px;
+  color: #dddddd;
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: url("../../assets/images/icon-sortable-handle-large.svg") 0 0 no-repeat;
+  vertical-align: middle;
+}
+/* Hover */
+.uk-nestable-handle:hover {
+  cursor: move;
+}
+/* Icon */
+.uk-nestable-handle:after {
+  content: "";
+  font-family: FontAwesome;
+}
+/* Sub-object `uk-nestable-moving`
+ ========================================================================== */
+.uk-nestable-moving,
+.uk-nestable-moving * {
+  cursor: move;
+}
+/* Sub-object `[data-action='toggle']`
+ ========================================================================== */
+/* Hidden by default */
+[data-nestable-action='toggle'] {
+  display: inline-block;
+  color: #999999;
+  visibility: hidden;
+}
+/* Hover */
+[data-nestable-action='toggle']:hover {
+  color: #444444;
+  cursor: pointer;
+}
+/* Icon */
+[data-nestable-action='toggle']:after {
+  content: "\f0d7";
+  font-family: FontAwesome;
+}
+/*
+ * Show if nested
+ */
+.uk-parent > .uk-nestable-item [data-nestable-action='toggle'] {
+  visibility: visible;
+}
+/*
+ * Collapsed
+ */
+.uk-collapsed > .uk-nestable-item [data-nestable-action='toggle']:after {
+  content: "\f0da";
+}
+.uk-collapsed .uk-nestable-list {
+  display: none;
+}
+.uk-nestable-item:hover,
+.uk-nestable-list-dragged .uk-nestable-item {
+  background: #ffffdd;
+}
+/* ========================================================================
    Component: Notify
  ========================================================================== */
 /*
@@ -7267,120 +7383,35 @@ a.uk-datepicker-table-muted {
   color: #f0615b;
 }
 /* ========================================================================
-   Component: Sortable
+   Component: sortable
  ========================================================================== */
-.uk-sortable {
-  padding: 0;
-  list-style: none;
-  margin: 0;
+.uk-sortable [draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
-/* Sub-object `uk-sortable-list`
+.uk-sortable [draggable] * {
+  -moz-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+/* Sub-modifier `uk-sortable-dragging`
  ========================================================================== */
-.uk-sortable-list {
-  margin: 0;
-  padding-left: 40px;
-  list-style: none;
+.uk-sortable-dragging {
+  opacity: .25;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -moz-transform 0.2s ease-out;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
 }
-/* Sub-modifier `uk-sortable-list-dragged`
+/* Sub-modifier `uk-sortable-over`
  ========================================================================== */
-.uk-sortable-list-dragged {
-  position: absolute;
-  z-index: 1050;
-  padding-left: 0;
-  pointer-events: none;
-  padding-top: 1px;
-}
-/* Sub-object `uk-sortable-item`
- ========================================================================== */
-.uk-sortable-item {
-  margin-bottom: 0;
-  padding: 10px;
-  background: #ffffff;
-  margin-top: -1px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-/* Sub-object `uk-sortable-placeholder`
- * The placeholder which marks the drop area
- ========================================================================== */
-.uk-sortable-placeholder {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin-bottom: 0;
-  border: 1px dashed #99baca;
-  margin: -1px 0 0 0;
-  background: #f5fbfe;
-  position: relative;
-}
-/* Sub-object `uk-sortable-empty`
- * The style of an empty list
- ========================================================================== */
-.uk-sortable-empty {
-  min-height: 39px;
-  border: 1px dashed #ddd;
-}
-/* Sub-object `uk-sortable-handle`
- ========================================================================== */
-.uk-sortable-handle {
-  font-size: 18px;
-  color: #dddddd;
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  background: url("../../assets/images/icon-sortable-handle-large.svg") 0 0 no-repeat;
-  vertical-align: middle;
-}
-/* Hover */
-.uk-sortable-handle:hover {
-  cursor: move;
-}
-/* Icon */
-.uk-sortable-handle:after {
-  content: "";
-  font-family: FontAwesome;
-}
-/* Sub-object `uk-sortable-moving`
- ========================================================================== */
-.uk-sortable-moving,
-.uk-sortable-moving * {
-  cursor: move;
-}
-/* Sub-object `[data-action='toggle']`
- ========================================================================== */
-/* Hidden by default */
-[data-sortable-action='toggle'] {
-  display: inline-block;
-  color: #999999;
-  visibility: hidden;
-}
-/* Hover */
-[data-sortable-action='toggle']:hover {
-  color: #444444;
-  cursor: pointer;
-}
-/* Icon */
-[data-sortable-action='toggle']:after {
-  content: "\f0d7";
-  font-family: FontAwesome;
-}
-/*
- * Show if nested
- */
-.uk-parent > .uk-sortable-item [data-sortable-action='toggle'] {
-  visibility: visible;
-}
-/*
- * Collapsed
- */
-.uk-collapsed > .uk-sortable-item [data-sortable-action='toggle']:after {
-  content: "\f0da";
-}
-.uk-collapsed .uk-sortable-list {
-  display: none;
-}
-.uk-sortable-item:hover,
-.uk-sortable-list-dragged .uk-sortable-item {
-  background: #ffffdd;
+.uk-sortable-over {
+  opacity: .25;
 }
 /* ========================================================================
    Component: Sticky
@@ -7466,9 +7497,9 @@ a.uk-datepicker-table-muted {
 .pk-list-table > li:nth-child(n+2) > div {
   padding-top: 10px;
 }
-/* Align subnavs if used in navs or sortables
+/* Align subnavs if used in navs or nestables
 ========================================================================== */
-.pk-sortable-item .uk-subnav,
+.pk-nestable-item .uk-subnav,
 .uk-nav-side .uk-subnav {
   margin: 5px 15px 0 0;
   float: right;
@@ -7604,12 +7635,12 @@ a.uk-datepicker-table-muted {
   padding-left: 48px;
 }
 /*
- * Make it work with `uk-sortable`
+ * Make it work with `uk-nestable`
  */
-.pk-table-fake.uk-sortable-item {
+.pk-table-fake.uk-nestable-item {
   padding: 0;
 }
-.pk-table-fake .uk-sortable-handle {
+.pk-table-fake .uk-nestable-handle {
   display: block;
 }
 /*
@@ -7624,84 +7655,84 @@ a.uk-datepicker-table-muted {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-/* `pk-sortable`
+/* `pk-nestable`
 ========================================================================== */
-.pk-sortable {
+.pk-nestable {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 /*
- * Sub-object `pk-sortable-list`
+ * Sub-object `pk-nestable-list`
  */
-.pk-sortable-list {
+.pk-nestable-list {
   margin: 0;
   list-style: none;
 }
 /*
- * Sub-modifier `pk-sortable-list-dragged`
+ * Sub-modifier `pk-nestable-list-dragged`
  */
-.pk-sortable-list-dragged {
+.pk-nestable-list-dragged {
   position: absolute;
   z-index: 1040;
   padding-left: 0;
   pointer-events: none;
 }
-.pk-sortable-list-dragged .uk-hidden {
+.pk-nestable-list-dragged .uk-hidden {
   display: block !important;
   visibility: visible !important;
 }
 /*
- * Sub-object `pk-sortable-item`
+ * Sub-object `pk-nestable-item`
  */
-.pk-sortable-item > a {
+.pk-nestable-item > a {
   display: block;
   padding: 5px 15px 5px 25px;
   text-decoration: none;
   color: #999999;
 }
-.pk-sortable-item.pk-active > a {
+.pk-nestable-item.pk-active > a {
   background: #f0f0f0;
   color: #444444;
 }
-.pk-sortable-item:hover > a,
-.pk-sortable-list-dragged .pk-sortable-item > a {
+.pk-nestable-item:hover > a,
+.pk-nestable-list-dragged .pk-nestable-item > a {
   background: #ffffdd;
   color: #444444;
 }
 /*
- * Sub-object `pk-sortable-placeholder`
+ * Sub-object `pk-nestable-placeholder`
  */
-.pk-sortable-placeholder {
+.pk-nestable-placeholder {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 1px dashed #99baca;
   background: #f5fbfe;
 }
 /*
- * Sub-object `pk-sortable-empty`
+ * Sub-object `pk-nestable-empty`
  */
-.pk-sortable-empty {
+.pk-nestable-empty {
   min-height: 40px;
 }
 /*
- * Sub-object `pk-sortable-handle`
+ * Sub-object `pk-nestable-handle`
  */
-.pk-sortable-handle {
+.pk-nestable-handle {
   float: left;
   margin: 4px 0 0 5px;
   width: 10px;
   height: 20px;
-  background: url("../../assets/images/icon-sortable-handle.svg") 0 0 no-repeat;
+  background: url("../../assets/images/icon-nestable-handle.svg") 0 0 no-repeat;
 }
-.pk-sortable-handle:hover {
+.pk-nestable-handle:hover {
   cursor: move;
 }
 /*
- * Sub-object `pk-sortable-moving`
+ * Sub-object `pk-nestable-moving`
  */
-.pk-sortable-moving,
-.pk-sortable-moving * {
+.pk-nestable-moving,
+.pk-nestable-moving * {
   cursor: move;
 }
 /* `pk-finder`

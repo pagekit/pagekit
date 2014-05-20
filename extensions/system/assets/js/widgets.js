@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!nestable,form-select', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form = $('#js-widgets')
 
@@ -8,12 +8,12 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
             form.attr('action', $(this).data('action')).submit();
         })
 
-        // save widgets order on sortable change
-        .on('sortable-change', 'ul.uk-sortable', function(e, item, action) {
+        // save widgets order on nestable change
+        .on('nestable-change', 'ul.uk-nestable', function(e, item, action) {
 
             var list = $(this);
 
-            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('sortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
+            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('nestable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
                 if (action == 'added' || action == 'moved') {
                     uikit.notify(data.message, 'success');
                 }
@@ -30,13 +30,13 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
             var select  = $(this),
                 li      = select.closest('li.js-widget'),
                 current = li.parent(),
-                target  = $('ul.uk-sortable[data-position="' + select.val() + '"]');
+                target  = $('ul.uk-nestable[data-position="' + select.val() + '"]');
 
-            target.find('.uk-sortable-empty').remove().end().append(li);
+            target.find('.uk-nestable-empty').remove().end().append(li);
 
             if (!current.children().length) {
                 if (current.data('position')) {
-                    current.append('<li class="uk-sortable-empty"></li>');
+                    current.append('<li class="uk-nestable-empty"></li>');
                 } else {
                     current.parent().addClass('uk-hidden');
                 }
@@ -44,8 +44,8 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
 
             target.parent().removeClass('uk-hidden');
 
-            current.trigger('sortable-change');
-            target.trigger('sortable-change', [null, 'moved']);
+            current.trigger('nestable-change');
+            target.trigger('nestable-change', [null, 'moved']);
 
             applyFilters();
         })
@@ -58,12 +58,12 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
     // check for empty positions
     try{
 
-        var lists    =  form.find('ul.uk-sortable'),
+        var lists    =  form.find('ul.uk-nestable'),
             observer = new uikit.support.mutationobserver(function(mutations) {
                 lists.each(function(){
                     var list = $(this);
                     if (!list.children().length) {
-                        list.append('<li class="uk-sortable-empty"></li>');
+                        list.append('<li class="uk-nestable-empty"></li>');
                     }
                 });
             });
@@ -77,7 +77,7 @@ require(['jquery', 'uikit!sortable,form-select', 'rowselect', 'domReady!'], func
     var positions = $('.js-position').each(function() {
 
         var ele = $(this);
-        ele.toggleClass('uk-hidden', ele.find('ul.uk-sortable').children('li').length < 1);
+        ele.toggleClass('uk-hidden', ele.find('ul.uk-nestable').children('li').length < 1);
     });
 
     var filters = form.find(':input[id^="filter"]').each(function() {

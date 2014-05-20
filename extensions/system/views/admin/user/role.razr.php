@@ -6,11 +6,11 @@
         <form id="js-role" class="uk-form" method="post">
 
             <div class="uk-panel uk-panel-divider pk-panel-marginless">
-                <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/role/priority')">
+                <ul class="pk-nestable" data-uk-nestable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/role/priority')">
                     @foreach (roles as r)
                     <li data-id="@r.id">
-                        <div class="pk-sortable-item uk-visible-hover@( r == role ? ' pk-active')">
-                            <div class="pk-sortable-handle"></div>
+                        <div class="pk-nestable-item uk-visible-hover@( r == role ? ' pk-active')">
+                            <div class="pk-nestable-handle"></div>
                             @if (!r.locked)
                             <ol class="uk-subnav pk-subnav-icon uk-hidden">
                                 <li><a href="#" data-edit="@url.route('@system/role/save', ['id' => r.id])" data-name="@r.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>

@@ -74,10 +74,10 @@
 .pk-list-table > li:nth-child(n+2) > div { padding-top: 10px; }
 
 
-/* Align subnavs if used in navs or sortables
+/* Align subnavs if used in navs or nestables
 ========================================================================== */
 
-.pk-sortable-item .uk-subnav,
+.pk-nestable-item .uk-subnav,
 .uk-nav-side .uk-subnav {
     margin: 5px 15px 0 0;
     float: right;
@@ -212,12 +212,12 @@
 .pk-table-fake-header-indent-nested > :first-child { padding-left: 48px; }
 
 /*
- * Make it work with `uk-sortable`
+ * Make it work with `uk-nestable`
  */
 
-.pk-table-fake.uk-sortable-item { padding: 0; }
+.pk-table-fake.uk-nestable-item { padding: 0; }
 
-.pk-table-fake .uk-sortable-handle { display: block; }
+.pk-table-fake .uk-nestable-handle { display: block; }
 
 /*
  * Fix height
@@ -235,67 +235,67 @@
 }
 
 
-/* `pk-sortable`
+/* `pk-nestable`
 ========================================================================== */
 
-.pk-sortable {
+.pk-nestable {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 /*
- * Sub-object `pk-sortable-list`
+ * Sub-object `pk-nestable-list`
  */
 
-.pk-sortable-list {
+.pk-nestable-list {
     margin: 0;
     list-style: none;
 }
 
 /*
- * Sub-modifier `pk-sortable-list-dragged`
+ * Sub-modifier `pk-nestable-list-dragged`
  */
 
-.pk-sortable-list-dragged {
+.pk-nestable-list-dragged {
     position: absolute;
     z-index: 1040;
     padding-left: 0;
     pointer-events: none;
 }
 
-.pk-sortable-list-dragged .uk-hidden {
+.pk-nestable-list-dragged .uk-hidden {
     display: block !important;
     visibility: visible !important;
 }
 
 /*
- * Sub-object `pk-sortable-item`
+ * Sub-object `pk-nestable-item`
  */
 
-.pk-sortable-item > a {
+.pk-nestable-item > a {
     display: block;
     padding: 5px 15px 5px 25px;
     text-decoration: none;
     color: @global-muted-color;
 }
 
-.pk-sortable-item.pk-active > a  {
+.pk-nestable-item.pk-active > a  {
     background: #f0f0f0;
     color: @global-color;
 }
 
-.pk-sortable-item:hover > a,
-.pk-sortable-list-dragged .pk-sortable-item > a  {
+.pk-nestable-item:hover > a,
+.pk-nestable-list-dragged .pk-nestable-item > a  {
     background: @global-hover-background;
     color: @global-color;
 }
 
 /*
- * Sub-object `pk-sortable-placeholder`
+ * Sub-object `pk-nestable-placeholder`
  */
 
-.pk-sortable-placeholder {
+.pk-nestable-placeholder {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px dashed #99baca;
@@ -303,31 +303,31 @@
 }
 
 /*
- * Sub-object `pk-sortable-empty`
+ * Sub-object `pk-nestable-empty`
  */
 
-.pk-sortable-empty { min-height: 40px; }
+.pk-nestable-empty { min-height: 40px; }
 
 /*
- * Sub-object `pk-sortable-handle`
+ * Sub-object `pk-nestable-handle`
  */
 
-.pk-sortable-handle {
+.pk-nestable-handle {
     float: left;
     margin: 4px 0 0 5px;
     width: 10px;
     height: 20px;
-    background: url("../../assets/images/icon-sortable-handle.svg") 0 0 no-repeat;
+    background: url("../../assets/images/icon-nestable-handle.svg") 0 0 no-repeat;
 }
 
-.pk-sortable-handle:hover { cursor: move; }
+.pk-nestable-handle:hover { cursor: move; }
 
 /*
- * Sub-object `pk-sortable-moving`
+ * Sub-object `pk-nestable-moving`
  */
 
-.pk-sortable-moving,
-.pk-sortable-moving * { cursor: move; }
+.pk-nestable-moving,
+.pk-nestable-moving * { cursor: move; }
 
 
 /* `pk-finder`

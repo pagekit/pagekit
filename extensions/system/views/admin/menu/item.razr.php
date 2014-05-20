@@ -1,16 +1,16 @@
 @if (root.depth == 0)
-<ul class="uk-sortable js-menu-items" data-uk-sortable>
+<ul class="uk-nestable js-menu-items" data-uk-nestable>
 @endif
 
     @foreach (root.children as menuitem)
 
     @set (item = menuitem.item)
 
-    <li class="uk-sortable-list-item" data-id="@item.id">
+    <li class="uk-nestable-list-item" data-id="@item.id">
 
-        <div class="uk-sortable-item pk-table-fake">
-            <div class="pk-table-width-minimum"><div class="uk-sortable-handle"></div></div>
-            <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-sortable-action="toggle"></div></div>
+        <div class="uk-nestable-item pk-table-fake">
+            <div class="pk-table-width-minimum"><div class="uk-nestable-handle"></div></div>
+            <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-nestable-action="toggle"></div></div>
             <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="id[]" value="@item.id"></div>
             <div class="pk-table-min-width-100">
                 <a href="@url.route('@system/item/edit', ['id' => item.id])">@item.name</a>
@@ -35,7 +35,7 @@
         </div>
 
         @if (menuitem.hasChildren())
-        <ul class="uk-sortable-list">
+        <ul class="uk-nestable-list">
             @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => menuitem, 'levels' => levels])
         </ul>
         @endif

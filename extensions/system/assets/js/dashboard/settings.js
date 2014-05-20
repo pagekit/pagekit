@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!nestable', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form         = $('#js-dashboard'),
         params       = form.data(),
@@ -12,9 +12,9 @@ require(['jquery', 'uikit!sortable', 'rowselect', 'domReady!'], function($, uiki
         form.attr('action', $(this).data('action')).submit();
     })
 
-        // save widgets order on sortable change
-        .on('sortable-change', 'ul.uk-sortable', function(e) {
-            $.post(params.reorder, { order: $(this).data('sortable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(response) {
+        // save widgets order on nestable change
+        .on('nestable-change', 'ul.uk-nestable', function(e) {
+            $.post(params.reorder, { order: $(this).data('nestable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(response) {
                 uikit.notify(response.message || 'Widgets order updated', 'success');
             }).fail(function() {
                 uikit.notify('Unable to reorder widgets.', 'danger');

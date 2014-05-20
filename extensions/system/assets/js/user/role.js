@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit!nestable', 'domReady!'], function($, uikit) {
 
     var form     = $('#js-role'),
         formPerm = $('#js-role-permissions'),
@@ -65,11 +65,11 @@ require(['jquery', 'uikit!sortable', 'domReady!'], function($, uikit) {
         }
     });
 
-    var prioUpdateUrl = form.find('.pk-sortable').on('sortable-change',function() {
+    var prioUpdateUrl = form.find('.pk-nestable').on('nestable-change',function() {
 
         var data = {};
 
-        $(this).data('sortable').list().forEach(function(item) {
+        $(this).data('nestable').list().forEach(function(item) {
             data[item.id] = item.order;
         });
 

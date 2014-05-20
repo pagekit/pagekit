@@ -80,16 +80,16 @@
                 </div>
             </div>
 
-            <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }" data-position="@position.id">
+            <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }" data-position="@position.id">
                 @foreach (widgets[position.id] as widget)
 
                 @set (type = app.widgets.types[widget.type])
 
                 <li class="uk-form js-widget" data-id="@widget.id" data-status="@(widget.status ?: 0)" data-type="@widget.type" data-title="@widget.title">
 
-                    <div class="uk-sortable-item pk-table-fake">
+                    <div class="uk-nestable-item pk-table-fake">
                         <div class="pk-table-width-minimum">
-                            <div class="uk-sortable-handle">​</div>
+                            <div class="uk-nestable-handle">​</div>
                         </div>
                         <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="ids[]" value="@widget.id"></div>
                         <div class="pk-table-min-width-100">

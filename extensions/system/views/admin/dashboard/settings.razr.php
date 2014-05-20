@@ -27,12 +27,12 @@
         <div class="pk-table-width-100">@trans('Type')</div>
     </div>
 
-    <ul class="uk-sortable" data-uk-sortable="{ maxDepth: 1 }">
+    <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }">
         @foreach (widgets as id => widget)
         <li data-id="@id">
 
-            <div class="uk-sortable-item pk-table-fake">
-                <div class="pk-table-width-minimum"><div class="uk-sortable-handle">​</div></div>
+            <div class="uk-nestable-item pk-table-fake">
+                <div class="pk-table-width-minimum"><div class="uk-nestable-handle">​</div></div>
                 <div class="pk-table-width-minimum"><input class="js-select" type="checkbox" name="ids[]" value="@id"></div>
                 <div>
                     <a href="@url.route('@system/dashboard/edit', ['id' => id])">@widget.title</a>

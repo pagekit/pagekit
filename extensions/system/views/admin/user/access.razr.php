@@ -6,11 +6,11 @@
         <form id="js-access-level" class="uk-form" method="post">
 
             <div class="uk-panel uk-panel-divider pk-panel-marginless">
-                <ul class="pk-sortable" data-uk-sortable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/accesslevel/priority')">
+                <ul class="pk-nestable" data-uk-nestable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/accesslevel/priority')">
                     @foreach (levels as lev)
                     <li data-id="@lev.id">
-                        <div class="pk-sortable-item uk-visible-hover@( lev == level ? ' pk-active' )">
-                            <div class="pk-sortable-handle"></div>
+                        <div class="pk-nestable-item uk-visible-hover@( lev == level ? ' pk-active' )">
+                            <div class="pk-nestable-handle"></div>
                             @if (!lev.locked)
                             <ol class="uk-subnav pk-subnav-icon uk-hidden">
                                 <li><a href="#" data-edit="@url.route('@system/accesslevel/save', ['id' => lev.id])" data-name="@lev.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
@@ -27,7 +27,7 @@
             <div class="uk-panel uk-panel-divider">
                 <a class="uk-button" href="#" data-edit="@url.route('@system/accesslevel/save', ['id' => 0])">@trans('Add Access Level')</a>
             </div>
-            
+
             @token()
 
         </form>

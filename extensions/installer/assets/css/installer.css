@@ -827,7 +827,7 @@ iframe {
   margin-bottom: 25px;
   border-top: 1px solid #e5e5e5;
 }
-/* Even grid cell widths 
+/* Even grid cell widths
  ========================================================================== */
 [class*='uk-grid-width'] > * {
   -moz-box-sizing: border-box;
@@ -6457,7 +6457,7 @@ input.uk-search-field {
 .uk-vertical-align {
   font-size: 0;
 }
-/*  
+/*
  *  The `uk-vertical-align` container needs a specific height
  */
 .uk-vertical-align:before {
@@ -6483,7 +6483,7 @@ input.uk-search-field {
 .uk-vertical-align-bottom {
   vertical-align: bottom;
 }
-/*  
+/*
  *  This helper class is very useful to extend the `html` and `body` element to the full height of the page.
  */
 .uk-height-1-1 {
@@ -6517,7 +6517,7 @@ input.uk-search-field {
 }
 /* Margin
  ========================================================================== */
-/* 
+/*
  * Create a block with the same margin of a paragraph
  * Add margin if adjacent element
  */
@@ -6539,7 +6539,7 @@ input.uk-search-field {
 .uk-margin-right {
   margin-right: 20px !important;
 }
-/* 
+/*
  * Larger margins
  */
 .uk-margin-large {
@@ -6883,30 +6883,30 @@ a.uk-datepicker-table-muted {
 /* ========================================================================
    Addon: Sortable
  ========================================================================== */
-.uk-sortable {
+.uk-nestable {
   padding: 0;
   list-style: none;
   margin: 0;
 }
-/* Sub-object `uk-sortable-list`
+/* Sub-object `uk-nestable-list`
  ========================================================================== */
-.uk-sortable-list {
+.uk-nestable-list {
   margin: 0;
   padding-left: 40px;
   list-style: none;
 }
-/* Sub-modifier `uk-sortable-list-dragged`
+/* Sub-modifier `uk-nestable-list-dragged`
  ========================================================================== */
-.uk-sortable-list-dragged {
+.uk-nestable-list-dragged {
   position: absolute;
   z-index: 1050;
   padding-left: 0;
   pointer-events: none;
   padding-top: 1px;
 }
-/* Sub-object `uk-sortable-item`
+/* Sub-object `uk-nestable-item`
  ========================================================================== */
-.uk-sortable-item {
+.uk-nestable-item {
   margin-bottom: 0;
   padding: 10px;
   background: #ffffff;
@@ -6914,10 +6914,10 @@ a.uk-datepicker-table-muted {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
-/* Sub-object `uk-sortable-placeholder`
+/* Sub-object `uk-nestable-placeholder`
  * The placeholder which marks the drop area
  ========================================================================== */
-.uk-sortable-placeholder {
+.uk-nestable-placeholder {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin-bottom: 0;
@@ -6926,16 +6926,16 @@ a.uk-datepicker-table-muted {
   background: #f5fbfe;
   position: relative;
 }
-/* Sub-object `uk-sortable-empty`
+/* Sub-object `uk-nestable-empty`
  * The style of an empty list
  ========================================================================== */
-.uk-sortable-empty {
+.uk-nestable-empty {
   min-height: 50px;
   border: 1px dashed #ddd;
 }
-/* Sub-object `uk-sortable-handle`
+/* Sub-object `uk-nestable-handle`
  ========================================================================== */
-.uk-sortable-handle {
+.uk-nestable-handle {
   font-size: 18px;
   color: #dddddd;
   display: inline-block;
@@ -6945,55 +6945,55 @@ a.uk-datepicker-table-muted {
   vertical-align: middle;
 }
 /* Hover */
-.uk-sortable-handle:hover {
+.uk-nestable-handle:hover {
   cursor: move;
 }
 /* Icon */
-.uk-sortable-handle:after {
+.uk-nestable-handle:after {
   content: "";
   font-family: FontAwesome;
 }
-/* Sub-object `uk-sortable-moving`
+/* Sub-object `uk-nestable-moving`
  ========================================================================== */
-.uk-sortable-moving,
-.uk-sortable-moving * {
+.uk-nestable-moving,
+.uk-nestable-moving * {
   cursor: move;
 }
 /* Sub-object `[data-action='toggle']`
  ========================================================================== */
 /* Hidden by default */
-[data-sortable-action='toggle'] {
+[data-nestable-action='toggle'] {
   display: inline-block;
   color: #999999;
   visibility: hidden;
 }
 /* Hover */
-[data-sortable-action='toggle']:hover {
+[data-nestable-action='toggle']:hover {
   color: #444444;
   cursor: pointer;
 }
 /* Icon */
-[data-sortable-action='toggle']:after {
+[data-nestable-action='toggle']:after {
   content: "\f0d7";
   font-family: FontAwesome;
 }
 /*
  * Show if nested
  */
-.uk-parent > .uk-sortable-item [data-sortable-action='toggle'] {
+.uk-parent > .uk-nestable-item [data-nestable-action='toggle'] {
   visibility: visible;
 }
 /*
  * Collapsed
  */
-.uk-collapsed > .uk-sortable-item [data-sortable-action='toggle']:after {
+.uk-collapsed > .uk-nestable-item [data-nestable-action='toggle']:after {
   content: "\f0da";
 }
-.uk-collapsed .uk-sortable-list {
+.uk-collapsed .uk-nestable-list {
   display: none;
 }
-.uk-sortable-item:hover,
-.uk-sortable-list-dragged .uk-sortable-item {
+.uk-nestable-item:hover,
+.uk-nestable-list-dragged .uk-nestable-item {
   background: #ffffdd;
 }
 /* ========================================================================
