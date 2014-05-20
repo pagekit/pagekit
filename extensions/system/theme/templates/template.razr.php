@@ -56,20 +56,7 @@
             </div>
         </div>
 
-        <div class="uk-container uk-container-center">
-
-            @set (title = app.view.get('head.title'))
-            @if (title)
-            <h1 class="tm-heading">@title</h1>
-            @endif
-
-            @if (app.view.get('theme.boxed', true))
-            <div class="tm-main uk-panel uk-panel-box">@action('content')</div>
-            @else
-            @action('content')
-            @endif
-
-        </div>
+        <div class="tm-main uk-container uk-container-center">@action('content')</div>
 
         <div id="tm-offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">

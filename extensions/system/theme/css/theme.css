@@ -352,7 +352,7 @@ html {
   font-size: 14px;
 }
 body {
-  background: #fafafa;
+  background: #ffffff;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   line-height: 20px;
@@ -1907,7 +1907,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
    Component: Navbar
  ========================================================================== */
 .uk-navbar {
-  background: #ffffff;
+  background: #fafafa;
   color: #999999;
 }
 /*
@@ -1969,19 +1969,19 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li.uk-open > a {
-  background-color: #ffffff;
+  background-color: #fafafa;
   color: #444444;
   /* 3 */
   outline: none;
 }
 /* OnClick */
 .uk-navbar-nav > li > a:active {
-  background-color: #ffffff;
+  background-color: #fafafa;
   color: #444444;
 }
 /* Active */
 .uk-navbar-nav > li.uk-active > a {
-  background-color: #ffffff;
+  background-color: #fafafa;
   color: #444444;
 }
 /* Sub-objects: `uk-navbar-nav-subtitle`
@@ -5597,7 +5597,7 @@ a.uk-thumbnail:focus {
   /* 4 */
   width: 200px;
   margin-top: 5px;
-  padding: 5px;
+  padding: 20px;
   background: #ffffff;
   color: #444444;
   /* 5 */
@@ -5642,38 +5642,41 @@ a.uk-thumbnail:focus {
 /* Nav in dropdown
  ========================================================================== */
 .uk-dropdown .uk-nav {
-  margin: 0 -5px;
+  margin: 0 -20px;
 }
 /* Grid and panel in dropdown
  ========================================================================== */
 /*
 * Vertical gutter
 */
-/* Grid */
-.uk-dropdown > .uk-grid + .uk-grid {
-  margin-top: 5px;
+/*
+ * Grid
+ * Higher specificity to override large gutter
+ */
+.uk-grid .uk-dropdown-grid + .uk-dropdown-grid {
+  margin-top: 20px;
 }
 /* Panels */
-.uk-dropdown > .uk-grid > [class*='uk-width-'] > .uk-panel + .uk-panel {
-  margin-top: 5px;
+.uk-dropdown-grid > [class*='uk-width-'] > .uk-panel + .uk-panel {
+  margin-top: 20px;
 }
 /* Tablet and bigger */
 @media (min-width: 768px) {
   /*
      * Horizontal gutter
      */
-  .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid {
-    margin-left: -5px;
-    margin-right: -5px;
+  .uk-dropdown:not(.uk-dropdown-stack) > .uk-dropdown-grid {
+    margin-left: -20px;
+    margin-right: -20px;
   }
-  .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-'] {
-    padding-left: 5px;
-    padding-right: 5px;
+  .uk-dropdown:not(.uk-dropdown-stack) > .uk-dropdown-grid > [class*='uk-width-'] {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   /*
      * Column divider
      */
-  .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
+  .uk-dropdown:not(.uk-dropdown-stack) > .uk-dropdown-grid > [class*='uk-width-']:nth-child(n+2) {
     border-left: 1px solid #e5e5e5;
   }
   /*
@@ -5697,24 +5700,24 @@ a.uk-thumbnail:focus {
   /*
      * Stack columns and take full width
      */
-  .uk-dropdown > .uk-grid > [class*='uk-width-'] {
+  .uk-dropdown-grid > [class*='uk-width-'] {
     width: 100%;
   }
   /*
      * Vertical gutter
      */
-  .uk-dropdown > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
-    margin-top: 5px;
+  .uk-dropdown-grid > [class*='uk-width-']:nth-child(n+2) {
+    margin-top: 20px;
   }
 }
 /*
 * Stack grid columns
 */
-.uk-dropdown-stack > .uk-grid > [class*='uk-width-'] {
+.uk-dropdown-stack > .uk-dropdown-grid > [class*='uk-width-'] {
   width: 100%;
 }
-.uk-dropdown-stack > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
-  margin-top: 5px;
+.uk-dropdown-stack > .uk-dropdown-grid > [class*='uk-width-']:nth-child(n+2) {
+  margin-top: 20px;
 }
 /* Modifier `uk-dropdown-small`
  ========================================================================== */
@@ -5737,7 +5740,7 @@ a.uk-thumbnail:focus {
  ========================================================================== */
 .uk-dropdown-navbar {
   margin-top: 5px;
-  background: #ffffff;
+  background: #fafafa;
   color: #999999;
   min-width: 150px;
   width: auto;
@@ -7414,13 +7417,6 @@ a.uk-datepicker-table-muted {
     left: -25px;
   }
 }
-/* Option toolbar
-========================================================================== */
-.pk-options {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
-}
 /* Modifier `pk-breadcrumb`
 ========================================================================== */
 .pk-breadcrumb {
@@ -7779,14 +7775,36 @@ html {
 /* Navbar
  ========================================================================== */
 .tm-navbar {
-  margin-bottom: 50px;
+  margin-bottom: 116px;
   border-bottom: 1px solid #e5e5e5;
-  background: #ffffff;
+  background: #fafafa;
 }
-@media (max-width: 767px) {
-  .tm-navbar {
-    margin-bottom: 30px;
-  }
+/* Option toolbar
+========================================================================== */
+.pk-options {
+  position: absolute;
+  top: 71px;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+}
+/* Dropdown
+ ========================================================================== */
+.tm-dropdown {
+  width: 350px;
+  text-align: center;
+}
+.tm-dropdown a {
+  color: #444;
+  text-align: center;
+}
+.tm-dropdown a:hover {
+  color: #37a5e4;
+}
+.tm-dropdown p {
+  margin-top: 10px;
 }
 /* Modifier `tm-subnav`
  ========================================================================== */
@@ -7813,19 +7831,17 @@ html {
  ========================================================================== */
 .tm-heading {
   margin: 0 0 10px 0;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 22px;
+  line-height: 28px;
 }
 /* Main
  ========================================================================== */
 .tm-main {
   margin-bottom: 25px;
-  padding: 25px;
 }
 @media (max-width: 767px) {
   .tm-main {
     margin-bottom: 15px;
-    padding: 15px;
   }
 }
 /* Pages for login, error, etc

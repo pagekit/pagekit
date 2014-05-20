@@ -16,16 +16,41 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 .tm-navbar {
-    margin-bottom: 50px;
+    margin-bottom: 110px;
     border-bottom: 1px solid #e5e5e5;
     background: @navbar-background;
 }
 
-@media (max-width: @breakpoint-small-max) {
+/* Option toolbar
+========================================================================== */
 
-    .tm-navbar { margin-bottom: 30px; }
-
+.pk-options {
+    position: absolute;
+    top: 71px;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
 }
+
+
+/* Dropdown
+ ========================================================================== */
+
+.tm-dropdown {
+    width: 350px;
+    text-align: center;
+}
+
+.tm-dropdown a {
+    color: #444;
+    text-align: center;
+}
+
+.tm-dropdown a:hover { color: #37a5e4; }
+
+.tm-dropdown p { margin-top: 10px; }
 
 
 /* Modifier `tm-subnav`
@@ -51,22 +76,11 @@ html { overflow-y: scroll; }
 .tm-subnav > li.uk-active > a { color: @global-color; }
 
 
-/* Heading
- ========================================================================== */
-
-.tm-heading {
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    line-height: 30px;
-}
-
-
 /* Main
  ========================================================================== */
 
 .tm-main {
     margin-bottom: 25px;
-    padding: 25px;
 }
 
 
@@ -74,7 +88,6 @@ html { overflow-y: scroll; }
 
     .tm-main {
         margin-bottom: 15px;
-        padding: 15px;
     }
 
 }
