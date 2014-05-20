@@ -17,12 +17,12 @@
 
                 <nav class="uk-navbar">
 
-                    <div class="uk-navbar-content" data-uk-dropdown="{mode:'click'}">
-                        <a href="#">
+                    <div class="uk-navbar-content">
+                        <div class="uk-display-inline-block" data-uk-dropdown>
                             <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
-                        </a>
-                        <div class="uk-dropdown tm-dropdown">
-                        @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
+                            <div class="uk-dropdown tm-dropdown">
+                            @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
+                            </div>
                         </div>
                     </div>
 
@@ -30,16 +30,18 @@
 
                     <div class="uk-navbar-flip">
 
-                        <div class="uk-navbar-content" data-uk-dropdown="{mode:'click'}">
-                            @set (user = app.users.get())
-                            <a href="#" title="@user.username">@gravatar(user.email, ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => user.username]])</a>
-                            <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
-                                <ul class="uk-nav uk-nav-dropdown">
-                                    <li class="uk-nav-header">@user.username</li>
-                                    <li><a href="@url.base">@trans('Visit Site')</a></li>
-                                    <li><a href="@url.route('@system/user/edit', ['id' => user.id])">@trans('Settings')</a></li>
-                                    <li><a href="@url.route('@system/auth/logout', ['redirect' => url.route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
-                                </ul>
+                        <div class="uk-navbar-content">
+                            <div class="uk-display-inline-block" data-uk-dropdown>
+                                @set (user = app.users.get())
+                                @gravatar(user.email, ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => user.username]])
+                                <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@user.username</li>
+                                        <li><a href="@url.base">@trans('Visit Site')</a></li>
+                                        <li><a href="@url.route('@system/user/edit', ['id' => user.id])">@trans('Settings')</a></li>
+                                        <li><a href="@url.route('@system/auth/logout', ['redirect' => url.route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 

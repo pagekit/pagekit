@@ -1947,9 +1947,9 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   box-sizing: border-box;
   text-decoration: none;
   /* 1 */
-  height: 70px;
+  height: 60px;
   padding: 0 15px;
-  line-height: 70px;
+  line-height: 60px;
   /* 2 */
   color: #999999;
   font-size: 14px;
@@ -1987,10 +1987,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 /* Sub-objects: `uk-navbar-nav-subtitle`
  ========================================================================== */
 .uk-navbar-nav .uk-navbar-nav-subtitle {
-  line-height: 58px;
+  line-height: 48px;
 }
 .uk-navbar-nav-subtitle > div {
-  margin-top: -21px;
+  margin-top: -16px;
   font-size: 10px;
   line-height: 12px;
 }
@@ -2005,7 +2005,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
-  height: 70px;
+  height: 60px;
   padding: 0 15px;
   float: left;
   position: relative;
@@ -7786,7 +7786,7 @@ html {
 ========================================================================== */
 .tm-toolbar {
   position: absolute;
-  top: 71px;
+  top: 61px;
   left: 0;
   width: 100%;
   padding: 15px 0;
