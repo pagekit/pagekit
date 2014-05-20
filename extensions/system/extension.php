@@ -26,6 +26,7 @@ return array(
         ),
         'system: widgets' => array(
             'label'    => 'Widgets',
+            'icon'     => 'asset://system/images/icon-widgets.svg',
             'url'      => '@system/widgets/index',
             'active'   => '/admin/system/widgets*',
             'access'   => 'system: manage widgets',
@@ -33,6 +34,7 @@ return array(
         ),
         'system: menu' => array(
             'label'    => 'Menus',
+            'icon'     => 'asset://system/images/icon-menus.svg',
             'url'      => '@system/menu/index',
             'active'   => '/admin/system/menu*',
             'access'   => 'system: manage menus',
@@ -40,6 +42,7 @@ return array(
         ),
         'system: user' => array(
             'label'    => 'Users',
+            'icon'     => 'asset://system/images/icon-users.svg',
             'url'      => '@system/user/index',
             'active'   => '/admin/system/user*',
             'access'   => 'system: manage users || system: manage user permissions',

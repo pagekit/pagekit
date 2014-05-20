@@ -1,14 +1,14 @@
 jQuery(function($) {
 
-
     $.UIkit.notify.message.defaults.timeout = 2000;
-
 
     $('.pk-system-messages').children().each(function() {
         var message = $(this);
         $.UIkit.notify(message.html(), message.data());
         message.remove();
     });
+
+    $('.pk-options > *').wrapAll('<div class=" uk-container uk-container-center">');
 
     // always fit navbar
     $(window).on('resize load', (function(){
@@ -67,7 +67,5 @@ jQuery(function($) {
         return $.UIkit.Utils.debounce(respfn, 10);
 
     })());
-
-
 
 });
