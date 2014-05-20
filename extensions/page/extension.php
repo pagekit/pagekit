@@ -25,6 +25,7 @@ return array(
 
         'page' => array(
             'label'  => 'Pages',
+            'icon'   => 'extension://page/extension.svg',
             'url'    => '@page/page/index',
             'active' => '/admin/page*',
             'access' => 'page: manage pages'

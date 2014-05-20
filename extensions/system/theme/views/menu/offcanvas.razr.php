@@ -1,2 +1,13 @@
-@extends('extension://system/theme/views/menu/base.razr.php')
-@block('menuAttributes')class="uk-nav uk-nav-offcanvas"@endblock
+@if (root.depth == 0)
+<ul class="uk-nav uk-nav-offcanvas">
+@endif
+
+@foreach (root.children as item)
+    <li@(item.attribute('active') ? ' class="uk-active"')>
+        <a href="@url.route(item.url)">@trans(item)</a>
+    </li>
+@endforeach
+
+@if (root.depth == 0)
+</ul>
+@endif

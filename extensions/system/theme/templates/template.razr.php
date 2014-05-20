@@ -17,11 +17,16 @@
 
                 <nav class="uk-navbar">
 
-                    <a class="uk-navbar-brand uk-hidden-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
-                    </a>
+                    <div class="uk-navbar-content" data-uk-dropdown>
+                        <a href="@url.route('@system/system/admin')">
+                            <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                        </a>
+                        <div class="uk-dropdown tm-dropdown">
+                        @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
+                        </div>
+                    </div>
 
-                    @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
+                    @include('extension://system/theme/views/menu/subnav.razr.php', ['root' => subnav])
 
                     <div class="uk-navbar-flip">
 
@@ -52,8 +57,6 @@
         </div>
 
         <div class="uk-container uk-container-center">
-
-            @include('extension://system/theme/views/menu/subnav.razr.php', ['root' => subnav])
 
             @set (title = app.view.get('head.title'))
             @if (title)

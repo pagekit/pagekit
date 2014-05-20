@@ -19,6 +19,7 @@ return array(
 
         'system: settings' => array(
             'label'    => 'Settings',
+            'icon'     => 'asset://system/images/icon-settings-system.svg',
             'url'      => '@system/system/index',
             'active'   => '(/admin/system|/admin/system/(settings|themes|extensions|storage|alias|update|info|marketplace|dashboard/(settings|add|edit))*)',
             'priority' => 20
@@ -38,39 +39,32 @@ return array(
             'priority' => 10
         ),
         'system: user' => array(
-            'label' => 'Users',
+            'label'    => 'Users',
             'url'      => '@system/user/index',
             'active'   => '/admin/system/user*',
             'access'   => 'system: manage users || system: manage user permissions',
             'priority' => 15
         ),
-        'system: user list' => array(
-            'label'  => 'Users',
-            'parent' => 'system: user',
-            'url'    => '@system/user/index',
-            'active' => '/admin/system/user(/edit*)?',
-            'access' => 'system: manage users'
-        ),
         'system: user permissions' => array(
-            'label'  => 'Permissions',
-            'parent' => 'system: user',
-            'url'    => '@system/permission/index',
-            'active' => '/admin/system/user/permission*',
-            'access' => 'system: manage user permissions'
+            'label'    => 'Permissions',
+            'parent'   => 'system: user',
+            'url'      => '@system/permission/index',
+            'active'   => '/admin/system/user/permission*',
+            'access'   => 'system: manage user permissions'
         ),
         'system: user roles' => array(
-            'label'  => 'Roles',
-            'parent' => 'system: user',
-            'url'    => '@system/role/index',
-            'active' => '/admin/system/user/role*',
-            'access' => 'system: manage user permissions'
+            'label'    => 'Roles',
+            'parent'   => 'system: user',
+            'url'      => '@system/role/index',
+            'active'   => '/admin/system/user/role*',
+            'access'   => 'system: manage user permissions'
         ),
         'system: user access' => array(
-            'label'  => 'Access',
-            'parent' => 'system: user',
-            'url'    => '@system/accesslevel/index',
-            'active' => '/admin/system/user/access*',
-            'access' => 'system: manage user permissions'
+            'label'    => 'Access',
+            'parent'   => 'system: user',
+            'url'      => '@system/accesslevel/index',
+            'active'   => '/admin/system/user/access*',
+            'access'   => 'system: manage user permissions'
         )
 
     ),
