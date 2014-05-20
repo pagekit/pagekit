@@ -24,6 +24,13 @@ return array(
             'active'   => '(/admin/system|/admin/system/(settings|themes|extensions|storage|alias|update|info|marketplace|dashboard/(settings|add|edit))*)',
             'priority' => 20
         ),
+        'system: dashboard' => array(
+            'label'    => 'Dashboard',
+            'icon'     => 'asset://system/images/icon-settings-dashboard.svg',
+            'url'      => '@system/dashboard/index',
+            'active'   => '/admin/system/dashboard*',
+            'priority' => -5
+        ),
         'system: widgets' => array(
             'label'    => 'Widgets',
             'icon'     => 'asset://system/images/icon-widgets.svg',

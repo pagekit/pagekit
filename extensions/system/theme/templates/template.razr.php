@@ -17,8 +17,8 @@
 
                 <nav class="uk-navbar">
 
-                    <div class="uk-navbar-content" data-uk-dropdown>
-                        <a href="@url.route('@system/system/admin')">
+                    <div class="uk-navbar-content" data-uk-dropdown="{mode:'click'}">
+                        <a href="#">
                             <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                         </a>
                         <div class="uk-dropdown tm-dropdown">
