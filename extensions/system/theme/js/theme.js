@@ -8,7 +8,10 @@ jQuery(function($) {
         message.remove();
     });
 
-    $('.pk-options > *').wrapAll('<div class=" uk-container uk-container-center">');
+    $('.pk-options').each(function() {
+        $('.tm-navbar').addClass('tm-navbar-margin');
+        $(this).addClass('uk-container uk-container-center').wrap('<div class="tm-toolbar">');
+    });
 
     // always fit navbar
     $(window).on('resize load', (function(){
