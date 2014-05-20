@@ -19,7 +19,7 @@
 
                     <div class="uk-navbar-content">
                         <div class="uk-display-inline-block" data-uk-dropdown>
-                            <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                            <img class="tm-logo" src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                             <div class="uk-dropdown tm-dropdown">
                             @include('extension://system/theme/views/menu/main.razr.php', ['root' => nav])
                             </div>

@@ -7,7 +7,7 @@
 
     @if (user.hasAccess('system: access settings'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/settings/index')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/settings/index')">
             <img src="@url.to('asset://system/images/icon-settings-system.svg')" width="50" height="50" alt="@trans('Settings')">
             <p>@trans('Settings')</p>
         </a>
@@ -16,7 +16,7 @@
 
     @if (user.hasAccess('system: manage extensions'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/extensions/index')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/extensions/index')">
             <img src="@url.to('asset://system/images/icon-settings-extensions.svg')" width="50" height="50" alt="@trans('Extensions')">
             <p>@trans('Extensions')</p>
         </a>
@@ -25,7 +25,7 @@
 
     @if (user.hasAccess('system: manage themes'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/themes/index')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/themes/index')">
             <img src="@url.to('asset://system/images/icon-settings-themes.svg')" width="50" height="50" alt="@trans('Themes')">
             <p>@trans('Themes')</p>
         </a>
@@ -33,7 +33,7 @@
     @endif
 
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/dashboard/settings')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/dashboard/settings')">
             <img src="@url.to('asset://system/images/icon-settings-dashboard.svg')" width="50" height="50" alt="@trans('Dashboard')">
             <p>@trans('Dashboard')</p>
         </a>
@@ -41,7 +41,7 @@
 
     @if (user.hasAccess('system: manage media'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/system/storage')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/system/storage')">
             <img src="@url.to('asset://system/images/icon-settings-storage.svg')" width="50" height="50" alt="@trans('Storage')">
             <p>@trans('Storage')</p>
         </a>
@@ -50,7 +50,7 @@
 
     @if (user.hasAccess('system: software updates'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/update/index')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/update/index')">
             <img src="@url.to('asset://system/images/icon-settings-update.svg')" width="50" height="50" alt="@trans('Update')">
             <p>@trans('Update')</p>
         </a>
@@ -59,7 +59,7 @@
 
     @if (user.hasAccess('system: manage url aliases'))
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/alias/index')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/alias/index')">
             <img src="@url.to('asset://system/images/icon-settings-urlaliases.svg')" width="50" height="50" alt="@trans('URL Aliases')">
             <p>@trans('URL Aliases')</p>
         </a>
@@ -67,14 +67,14 @@
     @endif
 
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/system/info')">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/system/info')">
             <img src="@url.to('asset://system/images/icon-settings-info.svg')" width="50" height="50" alt="@trans('Info')">
             <p>@trans('Info')</p>
         </a>
     </li>
 
     <li class="uk-width">
-        <a id="clearCache" class="uk-panel pk-system-hover" href="@url.route('@system/settings/clearcache')">
+        <a id="clearCache" class="uk-panel pk-panel-icon" href="@url.route('@system/settings/clearcache')">
             <img src="@url.to('asset://system/images/icon-settings-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
             <p>@trans('Clear Cache')</p>
         </a>
@@ -91,7 +91,7 @@
 
     @foreach (packages as extension => package)
     <li class="uk-width">
-        <a class="uk-panel pk-system-hover" href="@url.route('@system/extensions/settings', ['name' => extension])">
+        <a class="uk-panel pk-panel-icon" href="@url.route('@system/extensions/settings', ['name' => extension])">
             <img class="uk-img-preserve" src="@(package.extra.image ? url.to(package.repository.path ~ '/' ~ package.name ~ '/' ~ package.extra.image) : url.to('asset://system/images/placeholder-icon.svg'))" width="50" height="50" alt="@package.title">
             <p>@package.title</p>
         </a>

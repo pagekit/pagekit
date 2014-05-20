@@ -7794,6 +7794,18 @@ a.uk-datepicker-table-muted {
   background-size: contain;
   vertical-align: middle;
 }
+/* `pk-panel-icon`
+ ========================================================================== */
+.pk-panel-icon {
+  color: #444;
+  text-align: center;
+}
+.pk-panel-icon:hover {
+  color: #37a5e4;
+}
+.pk-panel-icon > p {
+  margin-top: 10px;
+}
 /* ========================================================================
    Theme
  ========================================================================== */
@@ -7813,6 +7825,25 @@ html {
 .tm-navbar-margin {
   margin-bottom: 110px;
 }
+/* Logo
+ ========================================================================== */
+.tm-logo {
+  opacity: 0.8;
+}
+.tm-logo:hover {
+  opacity: 1;
+}
+/* Dropdown
+ ========================================================================== */
+.tm-dropdown {
+  width: 350px;
+}
+.tm-dropdown .uk-grid {
+  margin-top: -25px;
+}
+.tm-dropdown .uk-grid > * {
+  padding-top: 25px;
+}
 /* Option toolbar
 ========================================================================== */
 .tm-toolbar {
@@ -7823,44 +7854,6 @@ html {
   padding: 15px 0;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
-}
-/* Dropdown
- ========================================================================== */
-.tm-dropdown {
-  width: 350px;
-  text-align: center;
-}
-.tm-dropdown a {
-  display: block;
-  color: #444;
-  text-align: center;
-}
-.tm-dropdown a:hover {
-  color: #37a5e4;
-}
-.tm-dropdown p {
-  margin-top: 10px;
-}
-/* Modifier `tm-subnav`
- ========================================================================== */
-.tm-subnav {
-  margin: 0 0 30px 0;
-  border: 1px solid #e5e5e5;
-  background: #fff;
-}
-.tm-subnav > li:nth-child(n+2) {
-  margin-left: 0;
-}
-.tm-subnav > li > a {
-  padding: 12px 15px;
-  border-right: 1px solid #e5e5e5;
-  color: #999999;
-  text-decoration: none;
-}
-.tm-subnav > li:hover > a,
-.tm-subnav > li > a:focus,
-.tm-subnav > li.uk-active > a {
-  color: #444444;
 }
 /* Main
  ========================================================================== */

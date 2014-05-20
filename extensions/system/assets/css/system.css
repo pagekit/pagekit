@@ -7,15 +7,6 @@
 
 .pk-system .uk-width { width: 125px !important; }
 
-.pk-system-hover {
-    color: #444;
-    text-align: center;
-}
-
-.pk-system-hover:hover { color: #37a5e4; }
-
-.pk-system-hover > p { margin-top: 10px; }
-
 
 /* Extensions view
  ========================================================================== */
