@@ -7784,7 +7784,7 @@ html {
 }
 /* Option toolbar
 ========================================================================== */
-.pk-options {
+.tm-toolbar {
   position: absolute;
   top: 71px;
   left: 0;
@@ -7800,6 +7800,7 @@ html {
   text-align: center;
 }
 .tm-dropdown a {
+  display: block;
   color: #444;
   text-align: center;
 }
