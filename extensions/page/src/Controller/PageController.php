@@ -121,6 +121,8 @@ class PageController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
+            $data['data'] = array_merge(array('title' => 0, 'markdown' => 0), isset($data['data']) ? $data['data'] : array());
+
             $this->pages->save($page, $data);
 
             $response = array('message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId());

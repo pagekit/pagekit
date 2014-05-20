@@ -1,75 +1,61 @@
 @script('pages-edit', 'page/js/edit.js', 'requirejs')
 
-<form id="js-page" class="uk-form uk-form-horizontal uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@page/page/save')" method="post">
+<form id="js-page" class="uk-form uk-form-stacked uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@page/page/save')" method="post">
     <div class="uk-width-medium-3-4">
 
         <div class="pk-options uk-clearfix">
             <button class="uk-button uk-button-primary" type="submit">@trans('Save') <i class="uk-icon-spinner uk-icon-spin js-spinner uk-margin-small-left uk-hidden"></i></button>
-            <a class="uk-button js-cancel" href="@url.route('@page/page/index')" data-label-close="@trans('Close')">@( page.id ? trans('Close') : trans('Cancel') )</a>
+            <a class="uk-button js-cancel" href="@url.route('@page/page/index')" data-label="@trans('Close')">@(page.id ? trans('Close') : trans('Cancel'))</a>
         </div>
-
         <div class="uk-form-row">
             <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
             <input type="hidden" name="id" value="@(page.id ?: 0)">
-            <div class="uk-margin-small-top">
-                <input class="uk-form-width-medium uk-form-small uk-form-blank" type="text" name="page[slug]" value="@page.slug" placeholder="@trans('Slug')" data-url="@url.route('@page/page/getslug')">
-            </div>
         </div>
         <div class="uk-form-row">
-            @editor('page[content]', page.content, ['id' => 'page-content', 'data-markdown' => page.get('markdown', '0') ])
+            @editor('page[content]', page.content, ['id' => 'page-content', 'data-markdown' => page.get('markdown', '0')])
         </div>
 
     </div>
     <div class="uk-width-medium-1-4 pk-sidebar-right">
 
         <div class="uk-panel uk-panel-divider">
-            <h3 class="uk-panel-title">Options</h3>
-            <ul class="uk-list pk-list-table uk-margin-remove">
-                <li>
-                    <div>@trans('Status')</div>
-                    <div>
-                        <button class="uk-button uk-button-mini uk-button-danger js-status@(page.status ? ' uk-hidden')" type="button" data-value="0">@statuses[0]</button>
-                        <button class="uk-button uk-button-mini uk-button-success js-status@(!page.status ? ' uk-hidden')" type="button" data-value="1">@statuses[1]</button>
-                        <input type="hidden" name="page[status]" value="@page.status">
-                    </div>
-                </li>
-                <li>
-                    <div>@trans('Access')</div>
-                    <div>
-                        <div class="uk-form-select" data-uk-form-select="{target:'button:first'}">
-                            <button class="uk-button uk-button-mini" type="button">...</button>
-                            <select name="page[access_id]">
-                                @foreach (levels as level)
-                                <option value="@level.id"@(page.accessId == level.id ? ' selected' : '')>@level.name</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div>@trans('Markdown')</div>
-                    <div>
-                        <button class="uk-button uk-button-mini js-markdown@(page.get('markdown', 0) ? ' uk-hidden')" type="button" data-value="0">@trans('No')</button>
-                        <button class="uk-button uk-button-mini js-markdown@(!page.get('markdown', 0) ? ' uk-hidden')" type="button" data-value="1">@trans('Yes')</button>
-                        <input type="hidden" name="page[data][markdown]" value="@page.get('markdown', 0)">
-                    </div>
-                </li>
-                <li>
-                    <div>@trans('Title')</div>
-                    <div>
-                        <button class="uk-button uk-button-mini js-title@(page.get('title', 1) ? ' uk-hidden')" type="button" data-value="0">@trans('Hide')</button>
-                        <button class="uk-button uk-button-mini js-title@(!page.get('title', 1) ? ' uk-hidden')" type="button" data-value="1">@trans('Show')</button>
-                        <input type="hidden" name="page[data][title]" value="@page.get('title', 1)">
-                    </div>
-                </li>
-            </ul>
+            <div class="uk-form-row">
+                <label class="uk-form-label">@trans('Status')</label>
+                <div class="uk-form-controls">
+                    <select class="uk-width-1-1" name="page[status]">
+                        <option value="1"@(page.status ? ' selected')>@statuses[1]</option>
+                        <option value="0"@(!page.status ? ' selected')>@statuses[0]</option>
+                    </select>
+                </div>
+            </div>
+           <div class="uk-form-row">
+                <label class="uk-form-label">@trans('Access')</label>
+                <div class="uk-form-controls">
+                    <select class="uk-width-1-1" name="page[access_id]">
+                        @foreach (levels as level)
+                        <option value="@level.id"@(page.accessId == level.id ? ' selected')>@level.name</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">@trans('Slug')</label>
+                <div class="uk-form-controls">
+                    <input class="uk-width-1-1" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug')">
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">@trans('Options')</label>
+                <div class="uk-form-controls">
+                    <label><input type="checkbox" name="page[data][title]" value="1"@(page.get('title', 1) ? ' checked')> @trans('Show Title')</label>
+                </div>
+                <div class="uk-form-controls">
+                    <label><input type="checkbox" name="page[data][markdown]" value="1"@(page.get('markdown', 0) ? ' checked')> @trans('Enable Markdown')</label>
+                </div>
+            </div>
+
         </div>
-
     </div>
-
-    <script id="unsafed-form-message" type="text/translation">
-        @trans('You\'ve made some changes! Leaving the page without saving will discard all changes.')
-    </script>
 
     @token()
 
