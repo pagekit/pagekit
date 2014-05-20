@@ -7775,9 +7775,12 @@ html {
 /* Navbar
  ========================================================================== */
 .tm-navbar {
-  margin-bottom: 116px;
+  margin-bottom: 50px;
   border-bottom: 1px solid #e5e5e5;
   background: #fafafa;
+}
+.tm-navbar-margin {
+  margin-bottom: 110px;
 }
 /* Option toolbar
 ========================================================================== */
@@ -7826,13 +7829,6 @@ html {
 .tm-subnav > li > a:focus,
 .tm-subnav > li.uk-active > a {
   color: #444444;
-}
-/* Heading
- ========================================================================== */
-.tm-heading {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-  line-height: 28px;
 }
 /* Main
  ========================================================================== */
