@@ -8,7 +8,7 @@ jQuery(function($) {
         message.remove();
     });
 
-    $('.pk-options').each(function() {
+    $('.pk-toolbar').each(function() {
 
         $('.tm-navbar').addClass('tm-navbar-margin');
 

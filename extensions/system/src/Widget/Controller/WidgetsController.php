@@ -54,11 +54,10 @@ class WidgetsController extends Controller
         $this->positions[''] = array('name' => __('Unassigned Widgets'));
 
         $widgets = array();
-        foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
 
+        foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
             $position = $widget->getPosition();
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
-
         }
 
         return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
@@ -114,12 +113,12 @@ class WidgetsController extends Controller
                 $widget = new Widget;
             }
 
-            $data['settings']['show_title'] = isset($data['settings']['show_title']) ? $data['settings']['show_title'] : 1;
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
+            $data['settings']  = array_merge(array('show_title' => 0), isset($data['settings']) ? $data['settings'] : array());
 
             $this->widgets->save($widget, $data);
 
-            $this('events')->dispatch('system.widget.save', $event = new WidgetEvent($widget));
+            $this('events')->dispatch('system.widget.save', new WidgetEvent($widget));
 
             $id = $widget->getId();
 
@@ -171,12 +170,11 @@ class WidgetsController extends Controller
 
             $this->widgets->save($copy);
 
-            $this('events')->dispatch('system.widget.copy', $event = new WidgetCopyEvent($widget, $copy));
+            $this('events')->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
         return $this->redirect('@system/widgets/index');
     }
-
 
     /**
      * @Request({"ids": "int[]"})
@@ -230,7 +228,8 @@ class WidgetsController extends Controller
 
     protected function triggerEditEvent($widget)
     {
-        $this('events')->dispatch('system.widget.edit', $event = new WidgetEditEvent($widget));
+        $event = $this('events')->dispatch('system.widget.edit', new WidgetEditEvent($widget));
+
         return $event->getSettings();
     }
 }

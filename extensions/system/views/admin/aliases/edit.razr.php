@@ -2,7 +2,7 @@
 
 <form class="uk-form uk-form-horizontal" action="@url.route('@system/alias/save', ['id' => alias.id ?: 0])" method="post">
 
-    <div class="pk-options">
+    <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url.route('@system/alias/index')">@(alias.id ? trans('Close') : trans('Cancel'))</a>
     </div>

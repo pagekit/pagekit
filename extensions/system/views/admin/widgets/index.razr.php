@@ -2,7 +2,7 @@
 
 <form id="js-widgets" class="uk-form" method="post" data-reorder="@url.route('@system/widgets/reorder')">
 
-    <div class="pk-options uk-clearfix">
+    <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">

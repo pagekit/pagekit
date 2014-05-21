@@ -2,7 +2,7 @@
 
 <form id="js-pages" class="uk-form" action="@url.route('@page/page/index')" method="post">
 
-    <div class="pk-options uk-clearfix">
+    <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@page/page/add')">@trans('Add Page')</a>

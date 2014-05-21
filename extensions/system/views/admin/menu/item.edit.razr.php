@@ -2,7 +2,7 @@
 
 <form class="js-item-edit uk-form uk-form-horizontal" action="@url.route('@system/item/save')" method="post">
 
-    <div class="pk-options">
+    <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url.route('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
     </div>

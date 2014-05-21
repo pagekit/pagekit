@@ -2,6 +2,11 @@
 
 <form id="js-user" class="uk-form uk-form-horizontal" action="@url.route('@system/user/save')" method="post">
 
+    <div class="pk-toolbar">
+        <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
+        <a class="uk-button" href="@url.route('@system/user/index')">@( user.id ? trans('Close') : trans('Cancel') )</a>
+    </div>
+
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
         <div class="uk-width-medium-1-4 pk-sidebar-left">
 
@@ -22,11 +27,6 @@
 
         </div>
         <div class="uk-width-medium-3-4">
-
-            <div class="pk-options">
-                <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-                <a class="uk-button" href="@url.route('@system/user/index')">@( user.id ? trans('Close') : trans('Cancel') )</a>
-            </div>
 
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">@trans('Username')</label>

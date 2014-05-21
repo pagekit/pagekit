@@ -2,17 +2,13 @@
 
 <form id="js-aliases" class="uk-form" action="@url.route('@system/alias/index')" method="post">
 
-    <div class="pk-options uk-clearfix">
+    <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
-
             <a class="uk-button uk-button-primary" href="@url.route('@system/alias/add')">@trans('Add Alias')</a>
             <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/alias/delete')">@trans('Delete')</a>
-
         </div>
         <div class="uk-float-right">
-
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@filter['search']">
-
         </div>
     </div>
 

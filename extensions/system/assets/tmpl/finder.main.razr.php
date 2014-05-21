@@ -1,4 +1,4 @@
-<div class="pk-options uk-form uk-clearfix" data-messages='{ "confirm" : "@trans('Are you sure?')", "newname" : "@trans('New Name')", "foldername" : "@trans('Folder Name')" }'>
+<div class="pk-toolbar uk-form uk-clearfix" data-messages='{ "confirm" : "@trans('Are you sure?')", "newname" : "@trans('New Name')", "foldername" : "@trans('Folder Name')" }'>
     <div class="js-writable uk-float-left">
 
         <button class="uk-button uk-button-primary uk-form-file">
