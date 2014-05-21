@@ -19,14 +19,15 @@
             </ul>
 
             <ul id="tab-content" class="uk-switcher uk-margin">
-                <li class="uk-form-stacked">
+                <li>
 
-                    <div class="uk-form-row">
-                        <label for="form-title" class="uk-form-label">@trans('Title')</label>
-                        <div class="uk-form-controls">
-                            <p class="uk-form-controls-condensed">
-                                <input id="form-title" class="uk-width-1-1 uk-form-large" type="text" name="widget[title]" value="@widget.title" required>
-                            </p>
+                    <div class="uk-form-stacked">
+                        <div class="uk-form-row">
+                            <div class="uk-form-controls">
+                                <p class="uk-form-controls-condensed">
+                                    <input id="form-title" class="uk-width-1-1 uk-form-large" type="text" name="widget[title]" value="@widget.title" required>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -59,7 +60,7 @@
 
                 </li>
                 @foreach (additionals as settings)
-                <li class="uk-form-horizontal">
+                <li>
                     @settings
                 </li>
                 @endforeach
