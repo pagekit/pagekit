@@ -6,3 +6,15 @@
         </p>
     </div>
 </div>
+
+<script>
+
+    jQuery(function($) {
+
+        $('input[name="widget[settings][markdown]"]').on('change', function() {
+            $('#form-content').trigger($(this).prop('checked') ? 'enableMarkdown' : 'disableMarkdown');
+        });
+
+    });
+
+</script>
