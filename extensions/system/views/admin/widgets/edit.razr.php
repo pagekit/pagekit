@@ -2,7 +2,7 @@
 
 <form class="js-widget uk-form uk-form-stacked" action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
 
-    <div class="pk-options">
+    <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url.route('@system/widgets/index')">@(widget.id ? trans('Close') : trans('Cancel'))</a>
     </div>

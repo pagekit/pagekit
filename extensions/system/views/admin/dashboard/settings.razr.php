@@ -2,7 +2,7 @@
 
 <form id="js-dashboard" class="uk-form" action="@url.route('@system/system/admin')" method="post" data-reorder="@url.route('@system/dashboard/reorder')">
 
-    <div class="pk-options uk-clearfix">
+    <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">

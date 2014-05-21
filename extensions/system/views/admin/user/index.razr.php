@@ -2,7 +2,7 @@
 
 <form id="js-user" class="uk-form" method="post">
 
-    <div class="pk-options uk-clearfix">
+    <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/user/add')">@trans('Add User')</a>

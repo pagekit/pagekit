@@ -29,7 +29,7 @@
     <div class="uk-width-medium-3-4">
 
         @if (menu)
-        <div class="pk-options uk-clearfix">
+        <div class="pk-toolbar">
 
             <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
             <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
@@ -56,15 +56,15 @@
                 <div class="pk-table-width-100">@trans('Access')</div>
             </div>
 
-            @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
-
-            @else
-
-            @trans('No menu found.')
-
-            @endif
-
         </div>
+
+        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
+
+        @else
+
+        @trans('No menu found.')
+
+        @endif
 
         @token()
 

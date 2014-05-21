@@ -88,11 +88,9 @@
             </li>
             <li class="js-marketplace">
 
-                <form class="uk-form pk-options uk-clearfix">
-                    <div class="uk-float-left">
-                        <input type="text" name="q" placeholder="@trans('Search')">
-                        <input type="hidden" name="type" value="theme">
-                    </div>
+                <form class="uk-form pk-toolbar">
+                    <input type="text" name="q" placeholder="@trans('Search')">
+                    <input type="hidden" name="type" value="theme">
                 </form>
 
                 <p class="uk-alert uk-alert-info uk-hidden" data-msg="no-packages">@trans('No themes found.')</p>
