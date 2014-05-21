@@ -69,61 +69,45 @@
 
         </div>
         <div class="uk-width-medium-1-4 pk-sidebar-right">
-
             <div class="uk-panel uk-panel-divider">
-                <h3 class="uk-panel-title">@trans('Options')</h3>
 
-                <ul class="uk-list pk-list-table uk-margin-remove">
+                <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Status')</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-width-1-1" name="widget[status]">
+                            <option value="1"@(widget.status ? ' selected')>@trans('Enabled')</option>
+                            <option value="0"@(!widget.status ? ' selected')>@trans('Disabled')</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Access')</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-width-1-1" name="widget[accessId]">
+                            @foreach (levels as level)
+                            <option value="@level.id"@(widget.accessId == level.id ? ' selected')>@level.name</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Position')</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-width-1-1" name="widget[position]">
+                            @foreach (positions as position)
+                            <option value="@position.id"@(widget.position == position.id ? ' selected')>@trans(position.name)</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Options')</label>
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@(widget.get('show_title', 1) ? ' checked')> @trans('Show Title')</label>
+                    </div>
+                </div>
 
-                    <li>
-                        <div>@trans('Status')</div>
-                        <div>
-                            <button class="uk-button uk-button-mini uk-button-danger js-status@(widget.status ? ' uk-hidden')" type="button" data-value="0">@trans('Disabled')</button>
-                            <button class="uk-button uk-button-mini uk-button-success js-status@(!widget.status ? ' uk-hidden')" type="button" data-value="1">@trans('Enabled')</button>
-                            <input type="hidden" name="widget[status]" value="@widget.status">
-                        </div>
-                    </li>
-
-                    <li>
-                        <div>@trans('Position')</div>
-                        <div>
-                            <div class="uk-form-select" data-uk-form-select="{target:'button:first'}">
-                                <button class="uk-button uk-button-mini" type="button">...</button>
-                                <select id="form-position" name="widget[position]">
-                                    @foreach (positions as position)
-                                    <option value="@position.id"@(widget.position == position.id ? ' selected')>@trans(position.name)</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div>@trans('Access')</div>
-                        <div>
-                            <div class="uk-form-select" data-uk-form-select="{target:'button:first'}">
-                                <button class="uk-button uk-button-mini" type="button">...</button>
-                                <select id="form-access" name="widget[accessId]">
-                                    @foreach (levels as level)
-                                    <option value="@level.id"@(widget.accessId == level.id ? ' selected')>@level.name</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div>@trans('Title')</div>
-                        <div>
-                            <button class="uk-button uk-button-mini js-title@(widget.get('show_title') ? ' uk-hidden')" type="button" data-value="0">@trans('Hide')</button>
-                            <button class="uk-button uk-button-mini js-title@(!widget.get('show_title') ? ' uk-hidden')" type="button" data-value="1">@trans('Show')</button>
-                            <input type="hidden" name="widget[settings][show_title]" value="@widget.get('show_title', '1')">
-                        </div>
-                    </li>
-
-                </ul>
             </div>
-
         </div>
     </div>
 

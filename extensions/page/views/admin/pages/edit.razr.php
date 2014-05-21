@@ -9,7 +9,7 @@
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
         <div class="uk-width-medium-3-4">
-            
+
             <div class="uk-form-row">
                 <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" value="@page.title" placeholder="@trans('Enter Title')" required>
                 <input type="hidden" name="id" value="@(page.id ?: 0)">
