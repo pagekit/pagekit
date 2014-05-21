@@ -152,15 +152,26 @@
             var warp                     = !!this.options.warp,
                 currentlyDraggingElement = null,
                 currentlyDraggingTarget  = null,
-                children;
-
+                children, moved;
 
             this.element.children('li').attr("draggable", "true");
 
             var handleDragStart = delegate(function(e) {
 
+                var target = $(e.target);
+
+                moved = false;
+
                 if (supportsTouch) {
+
                     prevent(e);
+
+                    if (target.is('a') && target.attr('href')) {
+
+                        target.one('touchend', function(){
+                            if(!moved) location.href = target.attr('href');
+                        });
+                    }
                 }
 
                 if (e.dataTransfer) {
@@ -270,6 +281,8 @@
             };
 
             var handleTouchMove = delegate(function(e) {
+
+                moved = true;
 
                 if (!currentlyDraggingElement ||
                     currentlyDraggingElement === this ||
