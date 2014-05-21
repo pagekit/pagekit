@@ -1,22 +1,9 @@
 require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
 
-    var form = $('.js-widget'), title = $('#form-title');
-
-    // status handling
-    var status   = $('input[name="widget[status]"]', form),
-        statuses = $('.js-status', form).on('click', function() {
-            status.val(statuses.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
-        });
-
-    // show title checkbox
-    var showtitleinput = $('input[name="widget[settings][show_title]"]', form),
-        showtitle      = $('.js-title', form).on('click', function() {
-            showtitleinput.val(showtitle.addClass('uk-hidden').not(this).removeClass('uk-hidden').data('value'));
-        });
+    var form = $('.js-widget'), title = $('#form-title'), sidenav = $('.uk-nav-side', sidenav);
 
     // settings nav + remember active tab
-    var sidenav = form.find('.uk-nav-side'),
-        tabs    = sidenav.children(), active;
+    var tabs = sidenav.children(), active;
 
     sidenav.on('uk.switcher.show', function(e, tab){
         active = tabs.index(tab);
@@ -37,4 +24,5 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
             sidenav.data('switcher').show(0);
         }
     });
+
 });
