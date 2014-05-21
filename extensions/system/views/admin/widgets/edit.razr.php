@@ -1,6 +1,6 @@
 @script('widget', 'system/js/widgets/edit.js', 'requirejs')
 
-<form class="js-widget uk-form uk-form-stacked" action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
+<form class="js-widget uk-form" action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
@@ -19,7 +19,7 @@
             </ul>
 
             <ul id="tab-content" class="uk-switcher uk-margin">
-                <li>
+                <li class="uk-form-stacked">
 
                     <div class="uk-form-row">
                         <label for="form-title" class="uk-form-label">@trans('Title')</label>
@@ -34,7 +34,7 @@
                     @type.renderForm(widget)
 
                 </li>
-                <li>
+                <li class="uk-form-horizontal">
 
                     @foreach (app.menus as id => menu)
                     @if (menu.items)
@@ -59,7 +59,7 @@
 
                 </li>
                 @foreach (additionals as settings)
-                <li>
+                <li class="uk-form-horizontal">
                     @settings
                 </li>
                 @endforeach
