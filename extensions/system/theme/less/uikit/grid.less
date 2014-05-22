@@ -19,4 +19,22 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-grid-misc() {}
+.hook-grid-misc() {
+
+
+    @media (max-width: @breakpoint-small-max) {
+
+        .uk-grid-divider:not(:empty) {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        .uk-grid-divider > * {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+    }
+
+
+}
