@@ -149,10 +149,9 @@ class ExtensionsController extends Controller
             }
 
             $config = $this('option')->get("$name:config", array());
+            $event  = $this('events')->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
 
-            $this('events')->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
-
-            return $this('view')->render($tmpl, compact('extension', 'config'));
+            return $this('view')->render($tmpl, array('extension' => $extension, 'config' => $event->getConfig()));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -172,10 +171,9 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $this('events')->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
+            $event = $this('events')->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
 
-            $this('option')->set("$name:config", $config, true);
-
+            $this('option')->set("$name:config", $event->getConfig(), true);
             $this('message')->success(__('Settings saved.'));
 
             return $this->redirect('@system/extensions/settings', compact('name'));

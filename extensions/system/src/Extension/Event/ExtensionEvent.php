@@ -26,6 +26,7 @@ class ExtensionEvent extends Event
     public function __construct(Extension $extension, array $config = array())
     {
         $this->extension = $extension;
+        $this->config    = $config;
     }
 
     /**
@@ -37,18 +38,18 @@ class ExtensionEvent extends Event
     }
 
     /**
-     * @param array $config
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-    }
-
-    /**
      * @return array
      */
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig(array $config)
+    {
+        $this->config = $config;
     }
 }

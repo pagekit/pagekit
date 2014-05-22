@@ -25,7 +25,8 @@ class ThemeEvent extends Event
      */
     public function __construct(Theme $theme, array $config = array())
     {
-        $this->theme = $theme;
+        $this->theme  = $theme;
+        $this->config = $config;
     }
 
     /**
@@ -37,18 +38,18 @@ class ThemeEvent extends Event
     }
 
     /**
-     * @param array $config
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-    }
-
-    /**
      * @return array
      */
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig(array $config)
+    {
+        $this->config = $config;
     }
 }
