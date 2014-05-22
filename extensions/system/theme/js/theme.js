@@ -28,8 +28,4 @@ jQuery(function($) {
 
     });
 
-    require(['uikit!sortable'], function(){
-
-    });
-
 });
