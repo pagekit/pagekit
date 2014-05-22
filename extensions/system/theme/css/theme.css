@@ -358,19 +358,6 @@ body {
   line-height: 20px;
   color: #444444;
 }
-/* Phone landscape and smaller */
-@media (max-width: 767px) {
-  /*
-     * Break strings if their length exceeds the width of their container
-     */
-  body {
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
-  }
-}
 /* Text-level semantics
  ========================================================================== */
 /*
@@ -1354,6 +1341,16 @@ iframe {
     left: -90%;
   }
 }
+@media (max-width: 767px) {
+  .uk-grid-divider:not(:empty) {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .uk-grid-divider > * {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 /* ========================================================================
    Component: Panel
  ========================================================================== */
@@ -1909,6 +1906,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar {
   background: #fafafa;
   color: #999999;
+  position: relative;
 }
 /*
  * Micro clearfix
@@ -2008,7 +2006,6 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   height: 60px;
   padding: 0 15px;
   float: left;
-  position: relative;
 }
 /*
  * Helper to center all child elements vertically
@@ -2043,6 +2040,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-brand {
   font-size: 18px;
   color: #999999;
+  text-decoration: none;
 }
 /*
  * 1. Apply hover style also to focus state
@@ -2060,6 +2058,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-toggle {
   font-size: 18px;
   color: #999999;
+  text-decoration: none;
 }
 /*
  * 1. Apply hover style also to focus state
@@ -3726,6 +3725,8 @@ select.uk-form-width-mini {
 .uk-icon-video-camera:before {
   content: "\f03d";
 }
+.uk-icon-photo:before,
+.uk-icon-image:before,
 .uk-icon-picture-o:before {
   content: "\f03e";
 }
@@ -4089,6 +4090,8 @@ select.uk-form-width-mini {
 .uk-icon-square:before {
   content: "\f0c8";
 }
+.uk-icon-navicon:before,
+.uk-icon-reorder:before,
 .uk-icon-bars:before {
   content: "\f0c9";
 }
@@ -4148,11 +4151,11 @@ select.uk-form-width-mini {
   content: "\f0dc";
 }
 .uk-icon-sort-down:before,
-.uk-icon-sort-asc:before {
+.uk-icon-sort-desc:before {
   content: "\f0dd";
 }
 .uk-icon-sort-up:before,
-.uk-icon-sort-desc:before {
+.uk-icon-sort-asc:before {
   content: "\f0de";
 }
 .uk-icon-envelope:before {
@@ -4342,10 +4345,8 @@ select.uk-form-width-mini {
 .uk-icon-code:before {
   content: "\f121";
 }
+.uk-icon-mail-reply-all:before,
 .uk-icon-reply-all:before {
-  content: "\f122";
-}
-.uk-icon-mail-reply-all:before {
   content: "\f122";
 }
 .uk-icon-star-half-empty:before,
@@ -4692,6 +4693,238 @@ select.uk-form-width-mini {
 }
 .uk-icon-plus-square-o:before {
   content: "\f196";
+}
+.uk-icon-space-shuttle:before {
+  content: "\f197";
+}
+.uk-icon-slack:before {
+  content: "\f198";
+}
+.uk-icon-envelope-square:before {
+  content: "\f199";
+}
+.uk-icon-wordpress:before {
+  content: "\f19a";
+}
+.uk-icon-openid:before {
+  content: "\f19b";
+}
+.uk-icon-institution:before,
+.uk-icon-bank:before,
+.uk-icon-university:before {
+  content: "\f19c";
+}
+.uk-icon-mortar-board:before,
+.uk-icon-graduation-cap:before {
+  content: "\f19d";
+}
+.uk-icon-yahoo:before {
+  content: "\f19e";
+}
+.uk-icon-google:before {
+  content: "\f1a0";
+}
+.uk-icon-reddit:before {
+  content: "\f1a1";
+}
+.uk-icon-reddit-square:before {
+  content: "\f1a2";
+}
+.uk-icon-stumbleupon-circle:before {
+  content: "\f1a3";
+}
+.uk-icon-stumbleupon:before {
+  content: "\f1a4";
+}
+.uk-icon-delicious:before {
+  content: "\f1a5";
+}
+.uk-icon-digg:before {
+  content: "\f1a6";
+}
+.uk-icon-pied-piper-square:before,
+.uk-icon-pied-piper:before {
+  content: "\f1a7";
+}
+.uk-icon-pied-piper-alt:before {
+  content: "\f1a8";
+}
+.uk-icon-drupal:before {
+  content: "\f1a9";
+}
+.uk-icon-joomla:before {
+  content: "\f1aa";
+}
+.uk-icon-language:before {
+  content: "\f1ab";
+}
+.uk-icon-fax:before {
+  content: "\f1ac";
+}
+.uk-icon-building:before {
+  content: "\f1ad";
+}
+.uk-icon-child:before {
+  content: "\f1ae";
+}
+.uk-icon-paw:before {
+  content: "\f1b0";
+}
+.uk-icon-spoon:before {
+  content: "\f1b1";
+}
+.uk-icon-cube:before {
+  content: "\f1b2";
+}
+.uk-icon-cubes:before {
+  content: "\f1b3";
+}
+.uk-icon-behance:before {
+  content: "\f1b4";
+}
+.uk-icon-behance-square:before {
+  content: "\f1b5";
+}
+.uk-icon-steam:before {
+  content: "\f1b6";
+}
+.uk-icon-steam-square:before {
+  content: "\f1b7";
+}
+.uk-icon-recycle:before {
+  content: "\f1b8";
+}
+.uk-icon-automobile:before,
+.uk-icon-car:before {
+  content: "\f1b9";
+}
+.uk-icon-cab:before,
+.uk-icon-taxi:before {
+  content: "\f1ba";
+}
+.uk-icon-tree:before {
+  content: "\f1bb";
+}
+.uk-icon-spotify:before {
+  content: "\f1bc";
+}
+.uk-icon-deviantart:before {
+  content: "\f1bd";
+}
+.uk-icon-soundcloud:before {
+  content: "\f1be";
+}
+.uk-icon-database:before {
+  content: "\f1c0";
+}
+.uk-icon-file-pdf-o:before {
+  content: "\f1c1";
+}
+.uk-icon-file-word-o:before {
+  content: "\f1c2";
+}
+.uk-icon-file-excel-o:before {
+  content: "\f1c3";
+}
+.uk-icon-file-powerpoint-o:before {
+  content: "\f1c4";
+}
+.uk-icon-file-photo-o:before,
+.uk-icon-file-picture-o:before,
+.uk-icon-file-image-o:before {
+  content: "\f1c5";
+}
+.uk-icon-file-zip-o:before,
+.uk-icon-file-archive-o:before {
+  content: "\f1c6";
+}
+.uk-icon-file-sound-o:before,
+.uk-icon-file-audio-o:before {
+  content: "\f1c7";
+}
+.uk-icon-file-movie-o:before,
+.uk-icon-file-video-o:before {
+  content: "\f1c8";
+}
+.uk-icon-file-code-o:before {
+  content: "\f1c9";
+}
+.uk-icon-vine:before {
+  content: "\f1ca";
+}
+.uk-icon-codepen:before {
+  content: "\f1cb";
+}
+.uk-icon-jsfiddle:before {
+  content: "\f1cc";
+}
+.uk-icon-life-bouy:before,
+.uk-icon-life-saver:before,
+.uk-icon-support:before,
+.uk-icon-life-ring:before {
+  content: "\f1cd";
+}
+.uk-icon-circle-o-notch:before {
+  content: "\f1ce";
+}
+.uk-icon-ra:before,
+.uk-icon-rebel:before {
+  content: "\f1d0";
+}
+.uk-icon-ge:before,
+.uk-icon-empire:before {
+  content: "\f1d1";
+}
+.uk-icon-git-square:before {
+  content: "\f1d2";
+}
+.uk-icon-git:before {
+  content: "\f1d3";
+}
+.uk-icon-hacker-news:before {
+  content: "\f1d4";
+}
+.uk-icon-tencent-weibo:before {
+  content: "\f1d5";
+}
+.uk-icon-qq:before {
+  content: "\f1d6";
+}
+.uk-icon-wechat:before,
+.uk-icon-weixin:before {
+  content: "\f1d7";
+}
+.uk-icon-send:before,
+.uk-icon-paper-plane:before {
+  content: "\f1d8";
+}
+.uk-icon-send-o:before,
+.uk-icon-paper-plane-o:before {
+  content: "\f1d9";
+}
+.uk-icon-history:before {
+  content: "\f1da";
+}
+.uk-icon-circle-thin:before {
+  content: "\f1db";
+}
+.uk-icon-header:before {
+  content: "\f1dc";
+}
+.uk-icon-paragraph:before {
+  content: "\f1dd";
+}
+.uk-icon-sliders:before {
+  content: "\f1de";
+}
+.uk-icon-share-alt:before {
+  content: "\f1e0";
+}
+.uk-icon-share-alt-square:before {
+  content: "\f1e1";
+}
+.uk-icon-bomb:before {
+  content: "\f1e2";
 }
 /* ========================================================================
    Component: Close
@@ -6140,6 +6373,7 @@ a.uk-thumbnail:focus {
 .uk-text-large {
   font-size: 18px;
   line-height: 24px;
+  font-weight: normal;
 }
 /* Weight modifiers
  ========================================================================== */
@@ -7804,6 +8038,9 @@ a.uk-datepicker-table-muted {
 }
 .pk-panel-icon > p {
   margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 /* ========================================================================
    Theme
@@ -7824,6 +8061,12 @@ html {
 .tm-navbar-margin {
   margin-bottom: 110px;
 }
+.tm-navbar .uk-navbar > .uk-navbar-content:first-child {
+  padding-left: 10px;
+}
+.tm-navbar .uk-navbar-flip > .uk-navbar-content:first-child {
+  padding-right: 10px;
+}
 /* Logo
  ========================================================================== */
 .tm-logo {
@@ -7836,6 +8079,15 @@ html {
  ========================================================================== */
 .tm-dropdown {
   width: 350px;
+}
+/* Phone landscape and smaller */
+@media (max-width: 767px) {
+  .tm-dropdown {
+    left: -10px;
+    right: -10px;
+    width: auto;
+    margin-top: 0;
+  }
 }
 .tm-dropdown .uk-grid {
   margin-top: -25px;

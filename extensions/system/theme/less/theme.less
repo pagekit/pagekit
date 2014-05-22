@@ -23,6 +23,9 @@ html { overflow-y: scroll; }
 
 .tm-navbar-margin { margin-bottom: 110px; }
 
+.tm-navbar .uk-navbar > .uk-navbar-content:first-child { padding-left: 10px; }
+.tm-navbar .uk-navbar-flip > .uk-navbar-content:first-child { padding-right: 10px; }
+
 
 /* Logo
  ========================================================================== */
@@ -35,6 +38,18 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 .tm-dropdown { width: 350px; }
+
+/* Phone landscape and smaller */
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-dropdown {
+        left: -10px;
+        right: -10px;
+        width: auto;
+        margin-top: 0;
+    }
+
+}
 
 .tm-dropdown .uk-grid { margin-top: -25px; }
 .tm-dropdown .uk-grid > * { padding-top: 25px; }
@@ -58,16 +73,11 @@ html { overflow-y: scroll; }
 /* Main
  ========================================================================== */
 
-.tm-main {
-    margin-bottom: 25px;
-}
-
+.tm-main { margin-bottom: 25px; }
 
 @media (max-width: @breakpoint-small-max) {
 
-    .tm-main {
-        margin-bottom: 15px;
-    }
+    .tm-main { margin-bottom: 15px; }
 
 }
 
