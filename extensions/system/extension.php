@@ -17,19 +17,12 @@ return array(
 
     'menu' => array(
 
-        'system: settings' => array(
-            'label'    => 'Settings',
-            'icon'     => 'asset://system/images/icon-settings-system.svg',
-            'url'      => '@system/system/index',
-            'active'   => '(/admin/system|/admin/system/(settings|themes|extensions|storage|alias|update|info|marketplace|dashboard/(settings|add|edit))*)',
-            'priority' => 20
-        ),
         'system: dashboard' => array(
             'label'    => 'Dashboard',
             'icon'     => 'asset://system/images/icon-settings-dashboard.svg',
             'url'      => '@system/dashboard/index',
             'active'   => '/admin/system/dashboard',
-            'priority' => -5
+            'priority' => 0
         ),
         'system: widgets' => array(
             'label'    => 'Widgets',
@@ -75,6 +68,13 @@ return array(
             'url'      => '@system/accesslevel/index',
             'active'   => '/admin/system/user/access*',
             'access'   => 'system: manage user permissions'
+        ),
+        'system: settings' => array(
+            'label'    => 'Settings',
+            'icon'     => 'asset://system/images/icon-settings-system.svg',
+            'url'      => '@system/system/index',
+            'active'   => '(/admin/system|/admin/system/(settings|themes|extensions|storage|alias|update|info|marketplace|dashboard/(settings|add|edit))*)',
+            'priority' => 110
         )
 
     ),
