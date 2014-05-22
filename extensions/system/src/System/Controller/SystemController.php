@@ -115,4 +115,33 @@ class SystemController extends Controller
 
         return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system/index');
     }
+
+    /**
+     * @Route("/admin/menu", methods="POST", options={})
+     * @Access(admin=true)
+     * @Request({"order": "array"})
+     */
+    public function adminMenuAction($order)
+    {
+
+        try {
+
+            if (!$order) {
+                throw new Exception('Missing order data.');
+            }
+
+            $user = $this('user');
+
+            $user->set('admin.menu', $order);
+
+            //$this('users')->getUserRepository()->save($user);
+
+            $response = array('message' => __('Order saved.'));
+
+        } catch (Exception $e) {
+            $response = array('message' => $e->getMessage(), 'error' => true);
+        }
+
+        return $this('response')->json($response);
+    }
 }

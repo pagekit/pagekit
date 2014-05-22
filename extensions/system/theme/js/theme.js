@@ -25,7 +25,26 @@ jQuery(function($) {
 
             return fn;
         }));
+    });
 
+    var list = $('.js-admin-menu'),
+        url  = list.data('url'),
+        data, order, links;
+
+    list.on('sortable-stop', function() {
+
+        order = 0;
+        links = list.children();
+        data  = {};
+
+        links.each(function(){
+            var item = $(this);
+            data[item.data('id')] = order;
+        });
+
+        $.post(url, {'order': data}, function(){
+            // message?
+        });
     });
 
 });

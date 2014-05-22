@@ -15,13 +15,17 @@ class AdminMenuListener extends EventSubscriber
     {
         $menu = $event->getMenu();
 
+        $meta = $this('user')->get('admin.menu', array());
+
         foreach ($this('extensions') as $extension) {
             foreach ($extension->getConfig('menu', array()) as $id => $properties) {
 
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;
                 unset($properties['parent']);
 
-                $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu))));
+                $priority = isset($meta[$id]) ? $meta[$id] : (isset($properties['priority']) ? $properties['priority']:100);
+
+                $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu, 'priority' => $priority))));
             }
         }
     }
