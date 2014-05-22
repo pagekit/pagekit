@@ -28,7 +28,7 @@ return array(
             'label'    => 'Dashboard',
             'icon'     => 'asset://system/images/icon-settings-dashboard.svg',
             'url'      => '@system/dashboard/index',
-            'active'   => '/admin/system/dashboard*',
+            'active'   => '/admin/system/dashboard',
             'priority' => -5
         ),
         'system: widgets' => array(
