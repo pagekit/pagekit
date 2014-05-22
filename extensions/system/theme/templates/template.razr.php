@@ -8,7 +8,7 @@
         <link href="@url.to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
-        @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky'])
+        @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
     </head>
     <body>
 
