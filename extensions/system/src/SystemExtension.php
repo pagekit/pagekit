@@ -4,13 +4,13 @@ namespace Pagekit;
 
 use Pagekit\Comment\Helper\CommentHelper;
 use Pagekit\Content\ContentHelper;
-use Pagekit\Extension\Event\AdminMenuListener;
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
+use Pagekit\System\Event\AdminMenuListener;
 use Pagekit\System\Event\AliasListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Extension\Event;
+namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Event\MenuEvent;
