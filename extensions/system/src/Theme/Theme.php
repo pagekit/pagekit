@@ -48,24 +48,18 @@ class Theme extends ApplicationAware
      */
     public function boot(Application $app)
     {
-        $self = $this;
-
         $this->config += $app['option']->get("{$this->name}:config", array());
 
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
 
-        $app->on('system.site', function() use ($app, $self) {
-
-            if ($renderer = $self->getConfig('renderer')) {
-                $app->on('system.position.renderer', function($event) use ($renderer) {
-                    foreach ($renderer as $name => $template) {
-                        $event->register($name, $template);
-                    }
-                });
-            }
-
-        });
+        if ($renderer = $this->getConfig('renderer')) {
+            $app->on('system.position.renderer', function($event) use ($renderer) {
+                foreach ($renderer as $name => $template) {
+                    $event->register($name, $template);
+                }
+            });
+        }
     }
 
     /**
