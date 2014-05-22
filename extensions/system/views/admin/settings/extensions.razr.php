@@ -103,10 +103,12 @@
             </li>
             <li class="js-marketplace">
 
-                <form class="uk-form pk-toolbar">
+                <form class="uk-form">
                     <input type="text" name="q" placeholder="@trans('Search')">
                     <input type="hidden" name="type" value="extension">
                 </form>
+
+                <hr>
 
                 <p class="uk-alert uk-alert-info uk-hidden" data-msg="no-packages">@trans('No extensions found.')</p>
                 <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the marketplace. Please try again later.')</p>

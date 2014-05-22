@@ -21,16 +21,6 @@ class AlphaTheme extends Theme
 
         $app->on('system.site', function() use ($app) {
 
-            $app->on('system.position.renderer', function($event) use ($app) {
-
-                $event->register('blank',     'theme://alpha/views/renderer/position.blank.razr.php');
-                $event->register('grid',      'theme://alpha/views/renderer/position.grid.php');
-                $event->register('navbar',    'theme://alpha/views/renderer/position.navbar.razr.php');
-                $event->register('offcanvas', 'theme://alpha/views/renderer/position.offcanvas.razr.php');
-                $event->register('panel',     'theme://alpha/views/renderer/position.panel.razr.php');
-
-            });
-
             $app->on('view.layout', function($event) use ($app) {
 
                 $event->setParameter('position', $app['positions']);
