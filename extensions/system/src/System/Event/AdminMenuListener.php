@@ -14,7 +14,6 @@ class AdminMenuListener extends EventSubscriber
     public function onAdminMenu(MenuEvent $event)
     {
         $menu = $event->getMenu();
-
         $meta = $this('user')->get('admin.menu', array());
 
         foreach ($this('extensions') as $extension) {
@@ -23,9 +22,15 @@ class AdminMenuListener extends EventSubscriber
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;
                 unset($properties['parent']);
 
-                $priority = isset($meta[$id]) ? $meta[$id] : (isset($properties['priority']) ? $properties['priority']:100);
+                if (isset($meta[$id])) {
+                    $properties['priority'] = $meta[$id];
+                }
 
-                $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu, 'priority' => $priority))));
+                if (!isset($properties['priority'])) {
+                    $properties['priority'] = 100;
+                }
+
+                $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu))));
             }
         }
     }

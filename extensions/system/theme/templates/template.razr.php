@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="uk-navbar-center uk-visible-small">
-                        
+
                     </div>
 
                 </nav>
