@@ -11,9 +11,14 @@
 
     jQuery(function($) {
 
-        $('input[name="widget[settings][markdown]"]').on('change', function() {
-            $('#form-content').trigger($(this).prop('checked') ? 'enableMarkdown' : 'disableMarkdown');
+        var editor = $('#form-content'), tab = editor.closest('li');
+
+        $('input[name="widget[title]"]', tab).removeClass('uk-form-width-large').addClass('uk-form-large uk-width-1-1');
+        $('input[name="widget[settings][markdown]"]', tab).on('change', function() {
+            editor.trigger($(this).prop('checked') ? 'enableMarkdown' : 'disableMarkdown');
         });
+
+        tab.removeClass('uk-form-horizontal').addClass('uk-form-stacked').find('.uk-form-label').remove();
 
     });
 

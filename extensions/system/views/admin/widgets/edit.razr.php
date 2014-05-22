@@ -24,9 +24,7 @@
                     <div class="uk-form-row">
                         <label for="form-title" class="uk-form-label">@trans('Title')</label>
                         <div class="uk-form-controls">
-                            <p class="uk-form-controls-condensed">
-                                <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@widget.title" required>
-                            </p>
+                            <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@widget.title" required>
                         </div>
                     </div>
 
