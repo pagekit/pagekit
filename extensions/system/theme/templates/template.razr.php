@@ -47,11 +47,9 @@
 
                     </div>
 
-                    <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-
-                    <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="@url.route('@system/system/admin')">
-                        <img src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
-                    </a>
+                    <div class="uk-navbar-center uk-visible-small">
+                        
+                    </div>
 
                 </nav>
 
@@ -59,14 +57,6 @@
         </div>
 
         <div class="tm-main uk-container uk-container-center">@action('content')</div>
-
-        <div id="tm-offcanvas" class="uk-offcanvas">
-            <div class="uk-offcanvas-bar">
-
-                @include('extension://system/theme/views/menu/offcanvas.razr.php', ['root' => nav])
-
-            </div>
-        </div>
 
         <div class="uk-hidden">@action('messages')</div>
 
