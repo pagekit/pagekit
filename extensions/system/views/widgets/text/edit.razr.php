@@ -1,5 +1,4 @@
 <div class="uk-form-row">
-    <label class="uk-form-label">@trans('Content')</label>
     <div class="uk-form-controls">
         @editor('widget[settings][content]', widget.get('content'), ['id' => 'form-content', 'markdown' => widget.get('markdown', 0)])
         <p class="uk-form-controls-condensed">
