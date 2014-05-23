@@ -78,7 +78,7 @@ class PackageController extends Controller
                     'shasum' => sha1_file($upload),
                     'extra' => $extra
                 ),
-                'install' => $this('url')->route('@system/package/install', array('path' => $path, '_csrf' => $this('csrf')->generate()))
+                'install' => $path
             );
 
         } catch (Exception $e) {

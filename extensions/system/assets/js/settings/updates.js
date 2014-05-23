@@ -113,6 +113,28 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
     uploadselect = uikit.uploadSelect($(".js-upload-select"), settings),
     uploaddrop   = uikit.uploadDrop($(".js-upload-drop"), settings);
 
+    // install upload
+    dialog.on('click', '[data-install]', function(e) {
+        e.preventDefault();
+
+        var $this = $(this), label = $this.text(), path = $this.data('install');
+
+        $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
+
+        $.post(params.url, {'path': path}, function(data) {
+
+            if (data.message) {
+                modal.hide();
+                uikit.notify(data.message, 'success');
+            } else {
+                $this.attr('data-install', path).html(label);
+                uikit.notify(data.error, 'danger');
+            }
+
+        });
+
+    });
+
     function show(message, context) {
 
         context.find('[data-msg]').each(function() {

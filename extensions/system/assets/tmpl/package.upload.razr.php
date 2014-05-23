@@ -32,7 +32,7 @@
     </div>
 
     <p>
-        <a class="uk-button uk-button-primary" href="{{install}}">@trans('Install')</a>
+        <button class="uk-button uk-button-primary" data-install="{{install}}">@trans('Install')</button>
         <button class="uk-button uk-modal-close">@trans('Cancel')</button>
     </p>
 
