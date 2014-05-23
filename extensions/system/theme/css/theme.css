@@ -6170,8 +6170,8 @@ a.uk-thumbnail:focus {
   /* 1 */
   position: fixed;
   /* 2 */
-  -webkit-transition: margin-left 0.3s ease-in-out 50ms;
-  transition: margin-left 0.3s ease-in-out 50ms;
+  -webkit-transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
 }
 /* Sub-object `uk-offcanvas-bar`
  ========================================================================== */
@@ -7636,10 +7636,14 @@ a.uk-datepicker-table-muted {
   -o-user-drag: none;
   user-drag: none;
 }
-/* Sub-modifier `uk-sortable-dragging`
+.uk-sortable-dragged {
+  pointer-events: none;
+  position: absolute;
+}
+/* Sub-modifier `uk-sortable-placeholder`
  ========================================================================== */
-.uk-sortable-dragging {
-  opacity: .25;
+.uk-sortable-placeholder {
+  opacity: 0;
 }
 /* Sub-modifier `uk-sortable-over`
  ========================================================================== */
@@ -7660,6 +7664,9 @@ a.uk-datepicker-table-muted {
  */
 .uk-dragover {
   box-shadow: 0 0 20px rgba(100, 100, 100, 0.3);
+}
+.uk-sortable-dragged {
+  z-index: 1050;
 }
 /* ========================================================================
    Pagekit
@@ -8095,8 +8102,19 @@ html {
 .tm-dropdown .uk-grid > * {
   padding-top: 25px;
 }
+.tm-menu-dragged > a {
+  display: inline-block;
+  background: #ffffff;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.18);
+}
 /* Option toolbar
 ========================================================================== */
+/*
+ * 1. Prevent flashing on mobiles when switching from fixed to absolute
+ */
 .tm-toolbar {
   position: absolute;
   top: 61px;
@@ -8106,6 +8124,8 @@ html {
   padding: 15px 0;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
+  /* 1 */
+  -webkit-transform: translate3d(0, 0, 0);
 }
 /* Main
  ========================================================================== */

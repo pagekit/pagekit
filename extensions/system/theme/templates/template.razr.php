@@ -21,7 +21,7 @@
                         <div class="uk-display-inline-block" data-uk-dropdown>
                             <img class="tm-logo" src="@url.to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                             <div class="uk-dropdown tm-dropdown">
-                                <ul class="uk-sortable uk-grid uk-grid-width-1-3 js-admin-menu" data-url="@url.route('@system/system/adminmenu')" data-uk-sortable>
+                                <ul class="uk-sortable uk-grid uk-grid-width-1-3 js-admin-menu" data-url="@url.route('@system/system/adminmenu')" data-uk-sortable="{dragCustomClass:'tm-menu-dragged'}">
                                 @foreach (nav.children as item)
                                     <li@( item.attribute('active') ? ' class="uk-active"' ) data-id="@item.getId()">
                                         <a class="uk-panel pk-panel-icon" href="@url.route(item.url)">
@@ -114,7 +114,7 @@
 
         <div id="offcanvas-flip" class="uk-offcanvas">
             <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
-                
+
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header">@user.username</li>
                     <li><a href="@url.base">@trans('Visit Site')</a></li>

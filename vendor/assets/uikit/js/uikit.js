@@ -42,7 +42,7 @@
 
     "use strict";
 
-    var UI = $.UIkit || {}, $html = $("html"), $win = $(window);
+    var UI = $.UIkit || {}, $html = $("html"), $win = $(window), $doc = $(document);
 
     if (UI.fn) {
         return UI;
@@ -108,7 +108,7 @@
         return animationEnd && { end: animationEnd };
     })();
 
-    UI.support.requestAnimationFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.msRequestAnimationFrame || global.oRequestAnimationFrame || function(callback){ global.setTimeout(callback, 1000/60); };
+    UI.support.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function(callback){ setTimeout(callback, 1000/60); };
     UI.support.touch                 = (
         ('ontouchstart' in window && navigator.userAgent.toLowerCase().match(/mobile|tablet/)) ||
         (global.DocumentTouch && document instanceof global.DocumentTouch)  ||
@@ -267,7 +267,31 @@
 
     $(function(){
 
-        $(document).trigger("uk-domready");
+        $doc.trigger("uk-domready");
+
+        // custom scroll observer
+        setInterval((function(){
+
+            var memory = {x: window.scrollX, y:window.scrollY};
+
+            var fn = function(){
+
+                if (memory.x != window.scrollX || memory.y != window.scrollY) {
+                    memory = {x: window.scrollX, y:window.scrollY};
+                    $doc.trigger('uk-scroll', [memory]);
+                }
+            };
+
+            if ($.UIkit.support.touch) {
+                $doc.on('touchmove touchend MSPointerMove MSPointerUp', fn);
+            }
+
+            if(memory.x || memory.y) fn();
+
+            return fn;
+
+        })(), 15);
+
 
         // Check for dom modifications
         if(!UI.support.mutationobserver) return;
@@ -275,7 +299,7 @@
         try{
 
             var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
-                $(document).trigger("uk-domready");
+                $doc.trigger("uk-domready");
             }, 150));
 
             // pass in the target node, as well as the observer options
@@ -1658,20 +1682,22 @@
 
             if (!element.length) return;
 
-            var doc       = $("html"),
+            var $html     = $('body'),
+                winwidth  = $win.width(),
                 bar       = element.find(".uk-offcanvas-bar:first"),
                 rtl       = ($.UIkit.langdirection == "right"),
-                dir       = (bar.hasClass("uk-offcanvas-bar-flip") ? -1 : 1) * (rtl ? -1 : 1),
-                scrollbar = dir == -1 && $win.width() < window.innerWidth ? (window.innerWidth - $win.width()) : 0;
+                flip      = bar.hasClass("uk-offcanvas-bar-flip") ? -1:1,
+                dir       = flip * (rtl ? -1 : 1),
+                scrollbar = dir == -1 && winwidth < window.innerWidth ? (window.innerWidth - winwidth) : 0;
 
             scrollpos = {x: window.scrollX, y: window.scrollY};
 
             element.addClass("uk-active");
 
-            doc.css({"width": window.innerWidth, "height": window.innerHeight}).addClass("uk-offcanvas-page");
-            doc.css((rtl ? "margin-right" : "margin-left"), (rtl ? -1 : 1) * ((bar.outerWidth() - scrollbar) * dir)).width(); // .width() - force redraw
+            $html.css({"width": window.innerWidth, "height": window.innerHeight}).addClass("uk-offcanvas-page");
+            $html.css((rtl ? "margin-right" : "margin-left"), (rtl ? -1 : 1) * ((bar.outerWidth() - (scrollbar * dir)) * dir)).width(); // .width() - force redraw
 
-            bar.addClass("uk-offcanvas-bar-show").width();
+            bar.addClass("uk-offcanvas-bar-show");
 
             element.off(".ukoffcanvas").on("click.ukoffcanvas swipeRight.ukoffcanvas swipeLeft.ukoffcanvas", function(e) {
 
@@ -1698,7 +1724,7 @@
 
         hide: function(force) {
 
-            var doc   = $("html"),
+            var $html = $('body'),
                 panel = $(".uk-offcanvas.uk-active"),
                 rtl   = ($.UIkit.langdirection == "right"),
                 bar   = panel.find(".uk-offcanvas-bar:first");
@@ -1707,18 +1733,18 @@
 
             if ($.UIkit.support.transition && !force) {
 
-                doc.one($.UIkit.support.transition.end, function() {
-                    doc.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
+                $html.one($.UIkit.support.transition.end, function() {
+                    $html.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
                     panel.removeClass("uk-active");
                     window.scrollTo(scrollpos.x, scrollpos.y);
                 }).css((rtl ? "margin-right" : "margin-left"), "");
 
                 setTimeout(function(){
                     bar.removeClass("uk-offcanvas-bar-show");
-                }, 50);
+                }, 0);
 
             } else {
-                doc.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
+                $html.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
                 panel.removeClass("uk-active");
                 bar.removeClass("uk-offcanvas-bar-show");
                 window.scrollTo(scrollpos.x, scrollpos.y);
@@ -2210,6 +2236,7 @@
     "use strict";
 
     var $win           = $(window),
+        $doc           = $(document),
         scrollspies    = [],
         checkScrollSpy = function() {
             for(var i=0; i < scrollspies.length; i++) {
@@ -2272,7 +2299,6 @@
             scrollspies.push(this);
         }
     });
-
 
 
     var scrollspynavs = [],
@@ -2352,10 +2378,11 @@
     };
 
     // listen to scroll and resize
-    $win.on("scroll", fnCheck).on("resize orientationchange", UI.Utils.debounce(fnCheck, 50));
+    $doc.on("uk-scroll", fnCheck);
+    $win.on("resize orientationchange", UI.Utils.debounce(fnCheck, 50));
 
     // init code
-    $(document).on("uk-domready", function(e) {
+    $doc.on("uk-domready", function(e) {
         $("[data-uk-scrollspy]").each(function() {
 
             var element = $(this);

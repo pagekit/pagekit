@@ -54,10 +54,22 @@ html { overflow-y: scroll; }
 .tm-dropdown .uk-grid { margin-top: -25px; }
 .tm-dropdown .uk-grid > * { padding-top: 25px; }
 
+.tm-menu-dragged > a {
+    display: inline-block;
+    background: @dropdown-background;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.18);
+}
+
 
 /* Option toolbar
 ========================================================================== */
 
+/*
+ * 1. Prevent flashing on mobiles when switching from fixed to absolute
+ */
 .tm-toolbar {
     position: absolute;
     top: 61px;
@@ -67,6 +79,8 @@ html { overflow-y: scroll; }
     padding: 15px 0;
     border-bottom: 1px solid #e5e5e5;
     background: #fff;
+    /* 1 */
+    -webkit-transform: translate3d(0,0,0);
 }
 
 

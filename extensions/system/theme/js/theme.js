@@ -15,7 +15,7 @@ jQuery(function($) {
         var toolbar = $(this).addClass('uk-container uk-container-center').wrap('<div class="tm-toolbar">').parent(),
             offset  = toolbar.offset();
 
-        $(window).on('scroll', (function(){
+        $(document).on('uk-scroll', (function(){
 
             var fn = function(){
                 toolbar.css(window.scrollY > offset.top ? {'position': 'fixed', 'top':0} : {'position': '', 'top':''});

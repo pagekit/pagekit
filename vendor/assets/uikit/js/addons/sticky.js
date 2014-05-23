@@ -16,10 +16,10 @@
 
 })(function($, UI){
 
-    var $window      = $(window),
-        $document    = $(document),
+    var $win         = $(window),
+        $doc         = $(document),
         sticked      = [],
-        windowHeight = $window.height();
+        windowHeight = $win.height();
 
     UI.component('sticky', {
 
@@ -62,8 +62,8 @@
 
     function scroller() {
 
-        var scrollTop       = $window.scrollTop(),
-            documentHeight  = $document.height(),
+        var scrollTop       = $win.scrollTop(),
+            documentHeight  = $doc.height(),
             dwh             = documentHeight - windowHeight,
             extra           = (scrollTop > dwh) ? dwh - scrollTop : 0;
 
@@ -104,14 +104,14 @@
     }
 
     function resizer() {
-        windowHeight = $window.height();
+        windowHeight = $win.height();
     }
 
-    // should be more efficient than using $window.scroll(scroller) and $window.resize(resizer):
-    window.addEventListener('scroll', scroller, false);
-    window.addEventListener('resize', resizer, false);
+    // should be more efficient than using $win.scroll(scroller) and $win.resize(resizer):
+    $doc.on('uk-scroll', scroller);
+    $win.on('resize orientationchange', resizer);
 
-    $(document).on("uk-domready", function(e) {
+    $doc.on("uk-domready", function(e) {
         setTimeout(function(){
 
             scroller();
