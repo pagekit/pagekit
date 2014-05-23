@@ -22,6 +22,7 @@ class SystemController extends Controller
     public function indexAction()
     {
         $packages = array();
+
         foreach ($this('extensions') as $extension) {
             if ($extension->getConfig('settings')) {
                 $packages[$extension->getName()] = $this('extensions')->getRepository()->findPackage($extension->getName());
@@ -54,6 +55,34 @@ class SystemController extends Controller
     public function adminAction()
     {
         return $this->redirect('@system/dashboard/index');
+    }
+
+    /**
+     * @Route("/admin/menu")
+     * @Access(admin=true)
+     * @Request({"order": "array"})
+     */
+    public function adminMenuAction($order)
+    {
+
+        try {
+
+            if (!$order) {
+                throw new Exception('Missing order data.');
+            }
+
+            $user = $this('users')->get($this('user')->getId());
+            $user->set('admin.menu', $order);
+
+            $this('users')->getUserRepository()->save($user);
+
+            $response = array('message' => __('Order saved.'));
+
+        } catch (Exception $e) {
+            $response = array('message' => $e->getMessage(), 'error' => true);
+        }
+
+        return $this('response')->json($response);
     }
 
     /**
@@ -114,34 +143,5 @@ class SystemController extends Controller
         $this('system')->clearCache($caches);
 
         return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system/index');
-    }
-
-    /**
-     * @Route("/admin/menu", methods="POST", options={})
-     * @Access(admin=true)
-     * @Request({"order": "array"})
-     */
-    public function adminMenuAction($order)
-    {
-
-        try {
-
-            if (!$order) {
-                throw new Exception('Missing order data.');
-            }
-
-            $user = $this('user');
-
-            $user->set('admin.menu', $order);
-
-            //$this('users')->getUserRepository()->save($user);
-
-            $response = array('message' => __('Order saved.'));
-
-        } catch (Exception $e) {
-            $response = array('message' => $e->getMessage(), 'error' => true);
-        }
-
-        return $this('response')->json($response);
     }
 }

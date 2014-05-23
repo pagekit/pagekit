@@ -27,23 +27,16 @@ jQuery(function($) {
         }));
     });
 
-    var list = $('.js-admin-menu'),
-        url  = list.data('url'),
-        data, order, links;
+    $('.js-admin-menu').on('sortable-stop', function() {
 
-    list.on('sortable-stop', function() {
+        var data = {};
 
-        order = 0;
-        links = list.children();
-        data  = {};
-
-        links.each(function(){
-            var item = $(this);
-            data[item.data('id')] = order;
+        $(this).children().each(function(i) {
+            data[$(this).data('id')] = i;
         });
 
-        $.post(url, {'order': data}, function(){
-            // message?
+        $.post($(this).data('url'), {'order': data}, function() {
+            // message ?
         });
     });
 
