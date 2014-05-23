@@ -23,7 +23,7 @@
                             <div class="uk-dropdown tm-dropdown">
                                 <ul class="uk-sortable uk-grid uk-grid-width-1-3 js-admin-menu" data-url="@url.route('@system/system/adminmenu')" data-uk-sortable>
                                 @foreach (nav.children as item)
-                                    <li@( item.attribute('active') ? ' class="uk-active"' ) data-id="@item.getId()">
+                                    <li@(item.attribute('active') ? ' class="uk-active"') data-id="@item.getId()">
                                         <a class="uk-panel pk-panel-icon" href="@url.route(item.url)">
                                             <img src="@url.to(item.getIcon() ?: 'asset://system/images/icon-settings-extensions.svg')" width="50" height="50">
                                             <p>@trans(item)</p>
@@ -40,11 +40,11 @@
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
-                        <li@( subnav.attribute('active') ? ' class="uk-active"' )>
+                        <li@(subnav.attribute('active') ? ' class="uk-active"')>
                             <a href="@url.route(subnav.url)">@trans(subnav)</a>
                         </li>
                         @foreach (subnav.children as item)
-                        <li@( item.attribute('active') ? ' class="uk-active"' )>
+                        <li@(item.attribute('active') ? ' class="uk-active"')>
                             <a href="@url.route(item.url)">@trans(item)</a>
                         </li>
                         @endforeach
@@ -74,7 +74,13 @@
                     </div>
 
                     <div class="uk-navbar-content uk-navbar-center uk-visible-small">
-                        Headline
+                        @if (subnav.children)
+                            @foreach (subnav.children as item)
+                                @(item.attribute('active') ? trans(item))
+                            @endforeach
+                        @else
+                            @trans(subnav)
+                        @endif
                     </div>
 
                 </nav>
@@ -92,19 +98,23 @@
                 <ul class="uk-nav uk-nav-offcanvas">
                     @if (subnav.children)
                         <li class="uk-nav-header">@trans(subnav)</li>
-                        <li@( subnav.attribute('active') ? ' class="uk-active"' )>
+                        <li@(subnav.attribute('active') ? ' class="uk-active"')>
                             <a href="@url.route(subnav.url)">@trans(subnav)</a>
                         </li>
                         @foreach (subnav.children as item)
-                            <li@(item.attribute('active') ? ' class="uk-active"' )>
+                            <li@(item.attribute('active') ? ' class="uk-active"')>
                                 <a href="@url.route(item.url)">@trans(item)</a>
                             </li>
                         @endforeach
+                        <li class="uk-nav-divider"></li>
                     @endif
                     <li class="uk-nav-header">@trans('Extensions')</li>
                     @foreach (nav.children as item)
                         <li@(item.attribute('active') ? ' class="uk-active"')>
-                            <a href="@url.route(item.url)">@trans(item)</a>
+                            <a href="@url.route(item.url)">
+                                <img class="uk-margin-small-right" src="@url.to(item.getIcon() ?: 'asset://system/images/icon-settings-extensions.svg')" width="34" height="34">
+                                @trans(item)
+                            </a>
                         </li>
                     @endforeach
                 </ul>
