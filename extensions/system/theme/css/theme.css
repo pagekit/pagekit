@@ -1846,7 +1846,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-offcanvas > li > a {
-  color: #cccccc;
+  color: #444444;
   padding: 10px 15px;
 }
 /*
@@ -1858,8 +1858,8 @@ ul.uk-nav-sub {
 .uk-nav-offcanvas > .uk-open > a,
 html:not(.uk-touch) .uk-nav-offcanvas > li > a:hover,
 html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
-  background: #2f2f2f;
-  color: #ffffff;
+  background: #f5f5f5;
+  color: #444444;
   /* 2 */
   outline: none;
 }
@@ -1868,30 +1868,30 @@ html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
  * `html .uk-nav` needed for higher specificity to override hover
  */
 html .uk-nav.uk-nav-offcanvas > li.uk-active > a {
-  background: #080808;
-  color: #ffffff;
+  background: #f5f5f5;
+  color: #444444;
 }
 /*
  * Sub-object: `uk-nav-header`
  */
 .uk-nav-offcanvas .uk-nav-header {
-  color: #777777;
+  color: #999999;
 }
 /*
  * Sub-object: `uk-nav-divider`
  */
 .uk-nav-offcanvas .uk-nav-divider {
-  border-top: 2px solid #333333;
+  border-top: 1px solid #dddddd;
 }
 /*
  * Nested items
  * No hover on touch devices because it behaves buggy in fixed offcanvas
  */
 .uk-nav-offcanvas ul a {
-  color: #cccccc;
+  color: #37a5e5;
 }
 html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
-  color: #ffffff;
+  color: #1889c7;
 }
 /*
      * Needed because of nav-actions to keep style on hover
@@ -6154,7 +6154,7 @@ a.uk-thumbnail:focus {
   left: 0;
   z-index: 1000;
   /* 3 */
-  background: rgba(245, 245, 245, 0.8);
+  background: rgba(50, 50, 50, 0.8);
 }
 .uk-offcanvas.uk-active {
   display: block;
@@ -6194,13 +6194,14 @@ a.uk-thumbnail:focus {
   /* 2 */
   width: 270px;
   max-width: 100%;
-  background: #222222;
+  background: #ffffff;
   /* 3 */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   /* 4 */
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
+  padding-top: 15px;
 }
 .uk-offcanvas.uk-active .uk-offcanvas-bar.uk-offcanvas-bar-show {
   -webkit-transform: translateX(0%);
@@ -6218,16 +6219,16 @@ a.uk-thumbnail:focus {
  ========================================================================== */
 .uk-offcanvas .uk-panel {
   margin: 20px 15px;
-  color: #777777;
+  color: #444444;
 }
 .uk-offcanvas .uk-panel-title {
-  color: #cccccc;
+  color: #999999;
 }
 .uk-offcanvas .uk-panel a:not([class]) {
-  color: #cccccc;
+  color: #37a5e5;
 }
 .uk-offcanvas .uk-panel a:not([class]):hover {
-  color: #ffffff;
+  color: #1889c7;
 }
 /* ========================================================================
    Component: Switcher
@@ -8068,10 +8069,10 @@ html {
 .tm-navbar-margin {
   margin-bottom: 110px;
 }
-.tm-navbar .uk-navbar > .uk-navbar-content:first-child {
+.tm-navbar .uk-navbar > .uk-navbar-content {
   padding-left: 10px;
 }
-.tm-navbar .uk-navbar-flip > .uk-navbar-content:first-child {
+.tm-navbar .uk-navbar-flip > .uk-navbar-content {
   padding-right: 10px;
 }
 /* Logo

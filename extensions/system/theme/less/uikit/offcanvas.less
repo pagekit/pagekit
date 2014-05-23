@@ -8,9 +8,15 @@
 // ========================================================================
 
 @offcanvas-z-index:                             @global-z-index;
-@offcanvas-background:                          rgba(245,245,245,0.8);
+@offcanvas-background:                          rgba(50,50,50,0.8);
 
-@offcanvas-bar-background:                      #222;
+@offcanvas-bar-background:                      #fff;
+
+
+@offcanvas-panel-color:                         @global-color;
+@offcanvas-panel-title-color:                   @global-muted-color;
+@offcanvas-panel-link-color:                    @global-link-color;
+@offcanvas-panel-link-hover-color:              @global-link-hover-color;
 
 
 // Component
@@ -22,7 +28,7 @@
 // Sub-object `uk-offcanvas-bar`
 // ========================================================================
 
-.hook-offcanvas-bar() {}
+.hook-offcanvas-bar() { padding-top: 15px; }
 
 
 // Panel in offcanvas

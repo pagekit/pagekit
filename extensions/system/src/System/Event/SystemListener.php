@@ -179,17 +179,17 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('feed.error', 'extension://system/assets/tmpl/feed.error.razr.php');
-        $event->register('feed.list', 'extension://system/assets/tmpl/feed.list.razr.php');
-        $event->register('finder.main', 'extension://system/assets/tmpl/finder.main.razr.php');
-        $event->register('finder.table', 'extension://system/assets/tmpl/finder.table.razr.php');
-        $event->register('finder.thumbnail', 'extension://system/assets/tmpl/finder.thumbnail.razr.php');
-        $event->register('linkpicker.modal', 'extension://system/assets/tmpl/linkpicker.modal.razr.php');
-        $event->register('linkpicker.replace', 'extension://system/assets/tmpl/linkpicker.replace.razr.php');
-        $event->register('marketplace.details', 'extension://system/assets/tmpl/marketplace.details.razr.php');
-        $event->register('marketplace.table', 'extension://system/assets/tmpl/marketplace.table.razr.php');
-        $event->register('package.updates', 'extension://system/assets/tmpl/package.updates.razr.php');
-        $event->register('package.upload', 'extension://system/assets/tmpl/package.upload.razr.php');
+        $event->register('feed.error', 'view://system/tmpl/feed.error.razr.php');
+        $event->register('feed.list', 'view://system/tmpl/feed.list.razr.php');
+        $event->register('finder.main', 'view://system/tmpl/finder.main.razr.php');
+        $event->register('finder.table', 'view://system/tmpl/finder.table.razr.php');
+        $event->register('finder.thumbnail', 'view://system/tmpl/finder.thumbnail.razr.php');
+        $event->register('linkpicker.modal', 'view://system/tmpl/linkpicker.modal.razr.php');
+        $event->register('linkpicker.replace', 'view://system/tmpl/linkpicker.replace.razr.php');
+        $event->register('marketplace.details', 'view://system/tmpl/marketplace.details.razr.php');
+        $event->register('marketplace.table', 'view://system/tmpl/marketplace.table.razr.php');
+        $event->register('package.updates', 'view://system/tmpl/package.updates.razr.php');
+        $event->register('package.upload', 'view://system/tmpl/package.upload.razr.php');
     }
 
     /**

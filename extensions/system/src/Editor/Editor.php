@@ -134,12 +134,12 @@ class Editor extends EventSubscriber implements EditorInterface
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('image.modal', 'extension://system/assets/tmpl/image.modal.razr.php');
-        $event->register('image.replace', 'extension://system/assets/tmpl/image.replace.razr.php');
-        $event->register('link.modal', 'extension://system/assets/tmpl/link.modal.razr.php');
-        $event->register('link.replace', 'extension://system/assets/tmpl/link.replace.razr.php');
-        $event->register('video.modal', 'extension://system/assets/tmpl/video.modal.razr.php');
-        $event->register('video.replace', 'extension://system/assets/tmpl/video.replace.razr.php');
+        $event->register('image.modal', 'view://system/tmpl/image.modal.razr.php');
+        $event->register('image.replace', 'view://system/tmpl/image.replace.razr.php');
+        $event->register('link.modal', 'view://system/tmpl/link.modal.razr.php');
+        $event->register('link.replace', 'view://system/tmpl/link.replace.razr.php');
+        $event->register('video.modal', 'view://system/tmpl/video.modal.razr.php');
+        $event->register('video.replace', 'view://system/tmpl/video.replace.razr.php');
     }
 
     /**
