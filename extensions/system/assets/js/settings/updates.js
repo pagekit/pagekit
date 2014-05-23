@@ -33,13 +33,11 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
     update.on('click', '[data-install]', function(e) {
         e.preventDefault();
 
-        var $this = $(this), name = $this.data('install');
+        var $this = $(this), label = $this.text(), name = $this.data('install');
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
         $.post(params.url, {'package': JSON.stringify(packages[name].version)}, function(data) {
-
-            $this.removeClass('uk-button-primary');
 
             if (data.message) {
 
@@ -49,22 +47,21 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
                 $this.addClass('uk-button-success').html('<i class="uk-icon-check"></i>');
 
             } else {
-                $this.html('Error!');
+                uikit.notify(data.error, 'danger');
+                $this.attr('data-install', name).html(label);
             }
 
         });
 
     });
 
-
     // upload package
-
     var progressbar = $(".js-upload-progressbar"),
-        bar         = progressbar.find('.uk-progress-bar'),
+        bar         = $('.uk-progress-bar', progressbar),
         dialog      = $('.js-upload-modal', upload),
         settings    = {
 
-        action: upload.data("action"), // upload url
+        action: upload.data("action"),
         type  : 'json',
         params: {'_csrf': upload.find('input[name="_csrf"]').val() },
         param : 'file',
@@ -115,7 +112,6 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
     // upload objects
     uploadselect = uikit.uploadSelect($(".js-upload-select"), settings),
     uploaddrop   = uikit.uploadDrop($(".js-upload-drop"), settings);
-
 
     function show(message, context) {
 
