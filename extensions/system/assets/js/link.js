@@ -22,6 +22,8 @@ define(['jquery', 'require'], function($, req) {
             $this.edit   = $('.js-edit', $this.element);
             $this.forms  = $this.edit.children('[data-type]');
 
+            var init = [];
+
             $this.forms.each(function() {
 
                 var form = $(this), type = form.data('type');
@@ -38,6 +40,8 @@ define(['jquery', 'require'], function($, req) {
                 deferreds[type].done(function(func) {
                     $this.types[type] = func($this, form);
                 });
+
+                init.push(deferreds[type]);
             });
 
             $this.select.on('change', function() {
@@ -49,7 +53,7 @@ define(['jquery', 'require'], function($, req) {
                 $this._show($this._getOption(this.value.split('?', 1)[0]).val());
             });
 
-            $.when.apply($, $.makeArray(deferreds)).done(function() {
+            $.when.apply($, init).done(function() {
                 $this.set('', $this.options.value);
             });
         });
