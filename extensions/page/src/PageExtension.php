@@ -4,7 +4,7 @@ namespace Pagekit\Page;
 
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
-use Pagekit\Page\Event\RouteListener;
+use Pagekit\Page\Event\AliasListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 
@@ -17,7 +17,7 @@ class PageExtension extends Extension
     {
         parent::boot($app);
 
-        $app['events']->addSubscriber(new RouteListener);
+        $app['events']->addSubscriber(new AliasListener);
 
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');

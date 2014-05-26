@@ -28,7 +28,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/{id}", name="@page/id", requirements={"id"="\d+"})
-     * @Route("/{slug}", name="@page/slug", options={"_main_route" = "@page/id"})
      * @View("page/index.razr.php")
      */
     public function indexAction($id = 0, $slug = '')
