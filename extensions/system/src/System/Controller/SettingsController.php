@@ -67,7 +67,7 @@ class SettingsController extends Controller
 
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
-        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.caches.main.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
+        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
     }
 
     /**
@@ -80,7 +80,7 @@ class SettingsController extends Controller
         $data['app.debug'] = @$data['app.debug'] ?: '0';
         $data['profiler.enabled'] = @$data['profiler.enabled'] ?: '0';
         $data['app.nocache'] = @$data['app.nocache'] ?: '0';
-        $data['cache.caches.main.storage'] = @$data['cache.caches.main.storage'] ?: 'auto';
+        $data['cache.cache.storage'] = @$data['cache.cache.storage'] ?: 'auto';
         $option['system:app.site_title'] = @$option['system:app.site_title'] ?: '';
         $option['system:maintenance.enabled'] = @$option['system:maintenance.enabled'] ?: '0';
         $option['system:mail.enabled'] = @$option['system:mail.enabled'] ?: '0';
@@ -95,7 +95,7 @@ class SettingsController extends Controller
             $this('option')->set($key, $value, true);
         }
 
-        if ($data['cache.caches.main.storage'] != $this('config')->get('cache.caches.main.storage') || $data['app.debug'] != $this('config')->get('app.debug')) {
+        if ($data['cache.cache.storage'] != $this('config')->get('cache.cache.storage') || $data['app.debug'] != $this('config')->get('app.debug')) {
             $this('system')->clearCache();
         }
 

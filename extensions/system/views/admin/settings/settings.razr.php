@@ -214,7 +214,7 @@
                         <div class="uk-form-controls uk-form-controls-text">
                             @foreach (caches as id => info)
                             <p class="uk-form-controls-condensed">
-                                <label><input type="radio" name="config[cache.caches.main.storage]" value="@id"@(cache == id ? ' checked')@(!info['supported'] ? ' disabled')> @info['name']</label>
+                                <label><input type="radio" name="config[cache.cache.storage]" value="@id"@(cache == id ? ' checked')@(!info['supported'] ? ' disabled')> @info['name']</label>
                             </p>
                             @endforeach
                         </div>

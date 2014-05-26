@@ -58,23 +58,18 @@ return array(
 
     'cache' => array(
 
-        'default' => 'main',
+        'cache' => array(
 
-        'caches'  => array(
+            'storage' => 'auto',
+            'path'    => '%path%/app/cache',
+            'prefix'  => sha1(__DIR__)
 
-            'main' => array(
+        ),
 
-                'storage' => 'auto',
-                'path'    => '%path%/app/cache',
-                'prefix'  => sha1(__DIR__)
+        'cache.phpfile' => array(
 
-            ),
-            'phpfile' => array(
-
-                'storage' => 'phpfile',
-                'path'    => '%path%/app/cache'
-
-            )
+            'storage' => 'phpfile',
+            'path'    => '%path%/app/cache'
 
         )
 
