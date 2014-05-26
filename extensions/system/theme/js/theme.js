@@ -8,24 +8,47 @@ jQuery(function($) {
         message.remove();
     });
 
-    $('.pk-toolbar').each(function() {
+    $(document).on('uk-domready', (function() {
 
-        $('.tm-navbar').addClass('tm-navbar-margin');
+        var i = 0;
 
-        var toolbar = $(this).addClass('uk-container uk-container-center').wrap('<div class="tm-toolbar">').parent(),
-            offset  = toolbar.offset();
+        var fn = function() {
 
-        $(document).on('uk-scroll', (function(){
+            $('.pk-toolbar:not([toolbar-init])').each(function() {
 
-            var fn = function(){
-                toolbar.css(window.scrollY > offset.top ? {'position': 'fixed', 'top':0} : {'position': '', 'top':''});
-            };
+                var ele = $(this);
 
-            fn();
+                // ignore toolbars in modals
+                if (ele.parents('.uk-modal:first').length) {
+                    return;
+                }
 
-            return fn;
-        }));
-    });
+                $('.tm-navbar').addClass('tm-navbar-margin');
+
+                var toolbar = ele.attr('toolbar-init', 'true').addClass('uk-container uk-container-center').wrap('<div class="tm-toolbar">').parent(),
+                    offset  = toolbar.offset();
+
+                $(document).on('uk-scroll', (function(){
+
+                    var fn = function(){
+                        toolbar.css(window.scrollY > offset.top ? {'position': 'fixed', 'top':0} : {'position': '', 'top':''});
+                    };
+
+                    fn();
+
+                    return fn;
+                }));
+            });
+
+        };
+
+        fn();
+
+        return fn;
+
+    })());
+
+
 
     $('.js-admin-menu').on('sortable-stop', function() {
 
