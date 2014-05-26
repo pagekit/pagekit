@@ -17,7 +17,7 @@ class Page
     protected $id;
 
     /** @Column(type="string") */
-    protected $slug;
+    protected $url;
 
     /** @Column(type="string") */
     protected $title;
@@ -44,14 +44,14 @@ class Page
         $this->id = $id;
     }
 
-    public function getSlug()
+    public function setAccessId($accessId)
     {
-        return $this->slug;
+        $this->access_id = $accessId;
     }
 
-    public function setSlug($slug)
+    public function getAccessId()
     {
-        $this->slug = $slug;
+        return (int) $this->access_id;
     }
 
     public function getTitle()
@@ -64,16 +64,6 @@ class Page
         $this->title = $title;
     }
 
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
     public function getContent()
     {
         return $this->content;
@@ -84,14 +74,24 @@ class Page
         $this->content = $content;
     }
 
-    public function setAccessId($accessId)
+    public function getUrl()
     {
-        $this->access_id = $accessId;
+        return $this->url;
     }
 
-    public function getAccessId()
+    public function setUrl($url)
     {
-        return (int) $this->access_id;
+        $this->url = $url;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
     public function getData()

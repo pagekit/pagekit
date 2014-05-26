@@ -44,7 +44,7 @@
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('URL')</label>
                     <div class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" name="page[slug]" value="@page.slug" data-url="@url.route('@page/page/getslug')">
+                        <input class="uk-width-1-1" type="text" name="page[url]" value="@page.url">
                     </div>
                 </div>
                 <div class="uk-form-row">

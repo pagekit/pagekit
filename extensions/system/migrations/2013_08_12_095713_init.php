@@ -151,10 +151,10 @@ class Init extends ApplicationAware implements MigrationInterface
             $util->createTable('@page_page', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
                 $table->addColumn('access_id', 'integer', array('unsigned' => true, 'length' => 10));
-                $table->addColumn('slug', 'string', array('length' => 255));
                 $table->addColumn('title', 'string', array('length' => 255));
-                $table->addColumn('status', 'smallint');
                 $table->addColumn('content', 'text');
+                $table->addColumn('url', 'string', array('length' => 1023));
+                $table->addColumn('status', 'smallint');
                 $table->addColumn('data', 'json_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
                 $table->addUniqueIndex(array('slug'), 'PAGES_SLUG');

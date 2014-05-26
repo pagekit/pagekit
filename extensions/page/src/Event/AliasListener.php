@@ -9,6 +9,9 @@ class AliasListener extends EventSubscriber
 {
     const CACHE_KEY = 'page.aliases';
 
+    /**
+     * Registers the url aliases.
+     */
     public function registerAliases()
     {
         $manager = $this('router')->getUrlAliases();
@@ -19,7 +22,9 @@ class AliasListener extends EventSubscriber
             $pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
 
             foreach ($pages->where(array('status' => Page::STATUS_PUBLISHED))->get() as $page) {
-                $aliases[$page->getSlug()] = $this('url')->route('@page/id', array('id' => $page->getId()), 'base');
+                if ($page->getUrl() !== '') {
+                    $aliases[$page->getUrl()] = $this('url')->route('@page/id', array('id' => $page->getId()), 'base');
+                }
             }
 
             $this('cache.phpfile')->save(self::CACHE_KEY, $aliases);
@@ -30,6 +35,9 @@ class AliasListener extends EventSubscriber
         }
     }
 
+    /**
+     * Clears the url aliases cache.
+     */
     public function clearCache()
     {
         $this('cache.phpfile')->delete(self::CACHE_KEY);

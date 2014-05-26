@@ -30,9 +30,9 @@ class DefaultController extends Controller
      * @Route("/{id}", name="@page/id", requirements={"id"="\d+"})
      * @View("page/index.razr.php")
      */
-    public function indexAction($id = 0, $slug = '')
+    public function indexAction($id = 0)
     {
-        if (!$page = $this->pages->where(compact($slug ? 'slug' : 'id'))->where(array('status' => Page::STATUS_PUBLISHED))->first()) {
+        if (!$page = $this->pages->where(compact('id'))->where(array('status' => Page::STATUS_PUBLISHED))->first()) {
             throw new NotFoundHttpException(__('Page not found!'));
         }
 

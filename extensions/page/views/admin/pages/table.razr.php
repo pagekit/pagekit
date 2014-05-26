@@ -28,7 +28,7 @@
                 @if (page.status == 1 && app.users.checkAccessLevel(page.accessId))
                 <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link|urldecode</a>
                 @else
-                @link
+                @(page.url ?: link)
                 @endif
             </td>
             <td>

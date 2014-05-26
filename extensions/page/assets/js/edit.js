@@ -37,18 +37,15 @@ require(['jquery', 'uikit!form-select', 'locale', 'domReady!'], function($, uiki
 
     })();
 
-    // slug handling
-    var slug = $('input[name="page[slug]"]', form), title = $('input[name="page[title]"]', form);
+    // url handling
+    $('input[name="page[title]"]', form).on('blur', function() {
 
-    title.on('blur', function() {
-        if (!(id.val() - 0)) slug.val('');
-        slug.trigger('blur');
-    });
+        var url = $('input[name="page[url]"]', form);
 
-    slug.on('blur', function() {
-        $.post(slug.data('url'), { slug: slug.val() || title.val(), id: id.val() }, function(data) {
-            slug.val(data);
-        }, 'json');
+        if (url.val() === '') {
+            url.val($(this).val().replace(/^([^\/])/, '/$1').toLowerCase());
+        }
+
     });
 
     // markdown handling
