@@ -8128,6 +8128,11 @@ html {
   /* 1 */
   -webkit-transform: translate3d(0, 0, 0);
 }
+@media (max-width: 767px) {
+  .tm-toolbar {
+    padding: 10px 0;
+  }
+}
 /* Main
  ========================================================================== */
 .tm-main {

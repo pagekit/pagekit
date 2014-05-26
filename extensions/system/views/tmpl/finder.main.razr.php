@@ -12,7 +12,7 @@
         <button class="uk-button js-show-on-single-select" data-cmd="renameSelected">@trans('Rename')</button>
 
     </div>
-    <div class="uk-float-right">
+    <div class="uk-float-right uk-hidden-small">
 
         <input class="js-search" type="text" placeholder="@trans('Search')">
 

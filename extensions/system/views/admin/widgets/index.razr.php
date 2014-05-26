@@ -31,7 +31,7 @@
             </div>
 
         </div>
-        <div class="uk-float-right">
+        <div class="uk-float-right uk-hidden-small">
 
             <select id="filter-status" name="filter[status]" data-filter="status">
                 <option value="">@trans('- Status -')</option>

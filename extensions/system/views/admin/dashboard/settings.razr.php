@@ -2,23 +2,21 @@
 
 <form id="js-dashboard" class="uk-form" action="@url.route('@system/system/admin')" method="post" data-reorder="@url.route('@system/dashboard/reorder')">
 
-    <div class="pk-toolbar uk-clearfix">
-        <div class="uk-float-left">
+    <div class="pk-toolbar">
 
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        @foreach (types as type)
-                        <li><a href="@url.route('@system/dashboard/add', ['type' => type.id])">@type.name</a></li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+            <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
+            <div class="uk-dropdown uk-dropdown-small">
+                <ul class="uk-nav uk-nav-dropdown">
+                    @foreach (types as type)
+                    <li><a href="@url.route('@system/dashboard/add', ['type' => type.id])">@type.name</a></li>
+                    @endforeach
+                </ul>
             </div>
-
-            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a>
-
         </div>
+
+        <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/dashboard/delete')">@trans('Delete')</a>
+
     </div>
 
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent">
