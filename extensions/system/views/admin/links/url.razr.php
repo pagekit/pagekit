@@ -15,9 +15,15 @@
                 });
 
             return {
+
                 show: function(params, url) {
-                    $url.val(url).trigger('change');
+                    $url.val(url);
+                },
+
+                update: function() {
+                    $url.trigger('change');
                 }
+
             }
 
         });

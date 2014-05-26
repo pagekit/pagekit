@@ -20,20 +20,11 @@ class LinkController extends Controller
     }
 
     /**
-     * @Request({"link", "context"})
+     * @Request({"link"})
      */
-    public function resolveAction($link, $context = '')
+    public function resolveAction($link)
     {
-        $event = $this('events')->dispatch('system.link', new LinkEvent($context));
-        $resolved = false;
-
-        foreach ($event as $type) {
-            if ($link == $type->getRoute()) {
-                $resolved = $type->getLabel();
-            }
-        }
-
-        $resolved = $resolved ?: $this('system.info')->resolveURL($link);
+        $resolved = $this('system.info')->resolveURL($link);
 
         return $this('response')->json(false !== $resolved ? array('url' => $resolved) : array('error' => true, 'message' => __('Invalid URL.')));
     }

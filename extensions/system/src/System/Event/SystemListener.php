@@ -168,7 +168,6 @@ class SystemListener extends EventSubscriber
     public function onSystemLink(LinkEvent $event)
     {
         $event->register('Pagekit\System\Link\Frontpage');
-        $event->register('Pagekit\System\Link\Url');
         $event->register('Pagekit\User\Link\Login');
     }
 

@@ -17,9 +17,21 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-url" class="uk-form-label">@trans('URL')</label>
+        <label for="form-url" class="uk-form-label">@trans('Type')</label>
         <div class="uk-form-controls uk-form-controls-text">
-            <input type="hidden" name="item[url]" value="@item.url" data-context="system/menu">
+            <p class="uk-form-controls-condensed">
+                <label><input type="radio" name="item[url]" value="!divider"@(item.url == '!divider' ? ' checked')> @trans('Divider')</label>
+            </p>
+            <p class="uk-form-controls-condensed">
+                <label><input type="radio" name="item[url]" value="!menu-header"@(item.url == '!menu-header' ? ' checked')> @trans('Menu Header')</label>
+            </p>
+            <p class="uk-form-controls-condensed">
+                <label>
+                    <input type="radio" name="item[url]" value="@(item.url != '!divider' && item.url != '!menu-header' ? item.url~'" checked' : '"')>
+
+                    <input class="js-item-url" type="hidden" name="" value="@item.url" data-context="system/menu">
+                </label>
+            </p>
         </div>
     </div>
 

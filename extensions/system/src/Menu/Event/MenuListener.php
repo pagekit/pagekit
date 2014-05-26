@@ -5,7 +5,6 @@ namespace Pagekit\Menu\Event;
 use Pagekit\Component\Cache\CacheInterface;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Model\ItemInterface;
-use Pagekit\System\Event\LinkEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class MenuListener extends EventSubscriber
@@ -45,21 +44,6 @@ class MenuListener extends EventSubscriber
     public function onSystemSite(GetResponseEvent $event)
     {
         $event->getRequest()->attributes->set('_menu', $this('events')->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
-    }
-
-    /**
-     * Register link types for menu edit.
-     *
-     * @param LinkEvent $event
-     */
-    public function onSystemLink(LinkEvent $event)
-    {
-        if (!$event->getContext() == 'system/menu') {
-            return;
-        }
-
-        $event->register('Pagekit\Menu\Link\Divider');
-        $event->register('Pagekit\Menu\Link\Header');
     }
 
     /**
@@ -132,7 +116,6 @@ class MenuListener extends EventSubscriber
     {
         return array(
             'system.site'                => 'onSystemSite',
-            'system.link'                => 'onSystemLink',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',

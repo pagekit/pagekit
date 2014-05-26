@@ -7,7 +7,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
         var source  = $(element),
             modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
             picker  = uikit.modal(modal),
-            trigger = $(tmpl.get('linkpicker.replace')).insertBefore(source),
+            trigger = $(tmpl.get('linkpicker.replace')).insertAfter(source),
             link;
 
         modal.on('submit', 'form', function (e) {
@@ -32,30 +32,25 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
                 }
 
                 var resolved = '';
-                $.post(options.url, { link: source.val(), context: options.context },function (data) {
+                $.post(options.url, { link: source.val() },function (data) {
 
-                    if (data.error) {
-                        source.val('');
-                    } else if (data.url) {
-                        resolved = decodeURIComponent(data.url);
-                    }
+                    resolved = data.url ? decodeURIComponent(data.url) : source.val();
 
-                }, 'json').fail(function () {
-                    source.val('');
-                }).always(function () {
+                }, 'json').always(function () {
                     source.trigger('resolved', resolved);
                 });
             })
             .on('resolved',function (e, resolved) {
-                var $text = $('.js-picker-resolved', trigger);
-                $text.text(resolved.length && source.val().length ? resolved : $text.data('text-empty'));
+                var text = $('.js-picker-resolved', trigger);
+                text.text(resolved.length && source.val().length ? resolved : text.data('text-empty'));
             }).trigger('change');
     };
 
     LinkPicker.defaults = {
         url    : req.toUrl('index.php/admin/system/link/resolve'),
         filter : [],
-        context: ''
+        context: '',
+        textEmpty: 'Choose Link'
     };
 
     return LinkPicker;

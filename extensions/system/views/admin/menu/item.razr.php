@@ -19,14 +19,12 @@
                 <a class="uk-icon-circle uk-text-@(item.status ? 'success' : 'danger')" href="#" data-action="@url.route('@system/item/status', ['menu' => item.menuId,'id' => item.id, 'status' => item.status ? '0' : '1'])" title="@item.statusText"></a>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                @set (link = url.route(item.url, [], 'base'))
-
-                @if (link == '!divider')
+                @if (item.url == '!divider')
                 @trans('Divider')
-                @elseif (link == '!menu-header')
+                @elseif (item.url == '!menu-header')
                 @trans('Menu Header')
                 @else
-                <a href="@url.route(item.url)" target="_blank">@(link|urldecode ?: '/')</a>
+                <a href="@url.route(item.url)" target="_blank">@(url.route(item.url, [], 'base')|urldecode ?: '/')</a>
                 @endif
             </div>
             <div class="pk-table-width-100">

@@ -6,7 +6,6 @@ define(['jquery', 'require'], function($, req) {
 
         this.options = $.extend({}, Link.defaults, options);
         this.element = $(element);
-        this.link    = false;
 
         var $this   = this,
             context = this.options.context;
@@ -17,19 +16,18 @@ define(['jquery', 'require'], function($, req) {
 
             $this.element.html(data);
 
-            $this.types = $('.js-types', $this.element);
+            $this.types  = {};
+            $this.link   = $('.js-url', this.element);
+            $this.select = $('.js-types', $this.element);
+            $this.edit   = $('.js-edit', $this.element);
+            $this.forms  = $this.edit.children('[data-type]');
 
-            var init   = [], types  = {},
-                $edit  = $('.js-edit', $this.element),
-                $forms = $edit.children('[data-type]');
+            $this.forms.each(function() {
 
-            $forms.each(function() {
-
-                var form = $(this),
-                    type = form.data('type');
+                var form = $(this), type = form.data('type');
 
                 if (-1 != $.inArray(type, $this.options.filter)) {
-                    $this.types.find('option[value="'+type+'"]').remove();
+                    $this._getOption(type).remove();
                     return;
                 }
 
@@ -38,24 +36,20 @@ define(['jquery', 'require'], function($, req) {
                 }
 
                 deferreds[type].done(function(func) {
-                    types[type] = func($this, form);
+                    $this.types[type] = func($this, form);
                 });
-
-                init.push(deferreds[type]);
             });
 
-            $this.types.on('change', function() {
-
-                var type = $(this).val(),
-                    form = $forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
-                    show = form.children(':not(script)').length > 0;
-
-                $edit.toggleClass('uk-hidden', !show).toggle(show);
-
-                types[type].show(deparam($this.link.split('?')[1] + ''), $this.link);
+            $this.select.on('change', function() {
+                var type = $this._show($(this).val());
+                if (type) type.update();
             });
 
-            $.when.apply($, init).done(function() {
+            $this.link.on('change', function() {
+                $this._show($this._getOption(this.value.split('?', 1)[0]).val());
+            });
+
+            $.when.apply($, $.makeArray(deferreds)).done(function() {
                 $this.set('', $this.options.value);
             });
         });
@@ -64,19 +58,38 @@ define(['jquery', 'require'], function($, req) {
     $.extend(Link.prototype, {
 
         set: function(params, url) {
-
-            url = (url || this.types.val()) + (params ? '?' + params : '');
-
-            if (this.link === url) return;
-
-            this.link = url;
-
-            var type = url.split('?')[0];
-            this.types.val($('option[value="'+type+'"]', this.types).length ? type : '').trigger('change');
+            this.link.val((url || this.select.val()) + (params ? '?' + params : '')).trigger('change');
         },
 
         get: function() {
-            return this.link;
+            return this.link.val();
+        },
+
+        _getOption: function(type) {
+            var options = this.select.children(), option;
+
+            option = options.filter('[value="'+type+'"]');
+
+            if (!option.length) {
+                option = options.filter('[value=""]');
+            }
+
+            return option;
+        },
+
+        _show: function(type) {
+            var form = this.forms.addClass('uk-hidden').hide().filter('[data-type="'+type+'"]').removeClass('uk-hidden').show(),
+                show = form.children(':not(script)').length > 0,
+                url  = this.link.val();
+
+            this.edit.toggleClass('uk-hidden', !show).toggle(show);
+
+            if (!this.types[type]) return;
+
+            this.select.val(type);
+            this.types[type].show(deparam(url.split('?')[1] + ''), url);
+
+            return this.types[type];
         }
 
     });
