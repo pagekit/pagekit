@@ -24,6 +24,7 @@ use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
+use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
 use Pagekit\User\Entity\User as UserEntity;
@@ -146,6 +147,16 @@ class SystemExtension extends Extension
 
             return $manager;
         };
+
+        $app->extend('swift.mailer', function($mailer, $app) {
+
+            $address = $app['config']->get('mail.from.address');
+            $name    = $app['config']->get('mail.from.name');
+
+            $mailer->registerPlugin(new ImpersonatePlugin($address, $name));
+
+            return $mailer;
+        });
 
         if (isset($app['profiler'])) {
             $app->on('system.loaded', function() use ($app) {

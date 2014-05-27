@@ -93,7 +93,6 @@ class ResetPasswordController extends Controller
 
                 $this('mailer')->create()
                     ->to($user->getEmail())
-                    ->from($this('config')->get('mail.from.address'), $this('config')->get('mail.from.name'))
                     ->subject(sprintf('[%s] %s', $this('config')->get('app.site_title'), __('Password Reset')))
                     ->body($this('view')->render('system/user/mails/reset.razr.php', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
                     ->queue();

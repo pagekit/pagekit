@@ -325,7 +325,6 @@ class UserController extends Controller
 
         $this('mailer')->create()
             ->to($user->getEmail())
-            ->from($this('config')->get('mail.from.address'), $this('config')->get('mail.from.name'))
             ->subject(__('Welcome!'))
             ->body($this('view')->render('system/user/mails/welcome.razr.php', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
             ->queue();

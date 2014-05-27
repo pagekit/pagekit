@@ -162,11 +162,10 @@ class SettingsController extends Controller
                 $this('option')->set($key, $value);
             }
 
-            $response['success'] = filter_var($option['system:mail.from.address'], FILTER_VALIDATE_EMAIL) && $this('mailer')->create()
+            $response['success'] = (bool) $this('mailer')->create()
                 ->to($option['system:mail.from.address'])
-                ->from($option['system:mail.from.address'])
-                ->subject('Test email!')
-                ->body('Testemail')
+                ->subject(__('Test email!'))
+                ->body(__('Testemail'))
                 ->send();
 
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
