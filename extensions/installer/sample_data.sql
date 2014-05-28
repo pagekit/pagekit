@@ -1,7 +1,7 @@
 INSERT INTO `@system_menu` (`id`, `name`) VALUES
 (1, 'Main');
 
-INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `access_id`, `name`, `url`, `priority`, `status`, `depth`, `data`) VALUES
+INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `access_id`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
 (1, 1, 0, 1, 'Home', '@frontpage', 0, 1, 0, '[]');
 
 INSERT INTO `@page_page` (`id`, `access_id`, `url`, `title`, `status`, `content`, `data`) VALUES
@@ -19,7 +19,7 @@ Should something not work, don''t hesitate to ask in [our chat](https://www.hipc
 - [Razr on GitHub](https://github.com/pagekit/razr) - Pagekit''s template engine
 - [UIkit Website](http://www.getuikit.com) - Pagekit''s front-end framework
 
-Enjoy developing with Pagekit!', '{"markdown":"1"}');
+Enjoy developing with Pagekit!', '', '{"markdown":"1"}');
 
 INSERT INTO `@system_widget` (`id`, `access_id`, `type`, `title`, `position`, `priority`, `status`, `pages`, `menu_items`, `data`) VALUES
 (1, 1, 'widget.menu', 'Main Menu', 'navbar', 0, 1, '', NULL, '{"menu":"1","style":"list"}'),
