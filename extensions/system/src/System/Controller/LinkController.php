@@ -24,7 +24,7 @@ class LinkController extends Controller
      */
     public function resolveAction($link)
     {
-        $resolved = $this('system.info')->resolveURL($link);
+        $resolved = $this('url')->route($link, array(), 'base');
 
         return $this('response')->json(false !== $resolved ? array('url' => $resolved) : array('error' => true, 'message' => __('Invalid URL.')));
     }
