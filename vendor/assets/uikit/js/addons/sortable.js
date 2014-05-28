@@ -34,7 +34,7 @@
         defaults: {
 
             warp             : false,
-            animation        : 80,
+            animation        : 150,
 
             childClass       : 'uk-sortable-item',
             placeholderClass : 'uk-sortable-placeholder',
@@ -76,6 +76,7 @@
 
                 if (e.dataTransfer) {
                     e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.dropEffect = 'move';
                     e.dataTransfer.setData('Text', "*"); // Need to set to something or else drag doesn't start
                 }
 
@@ -97,7 +98,7 @@
                 }).data('mouse-offset', {
                     'left': offset.left - parseInt(e.pageX, 10),
                     'top' : offset.top  - parseInt(e.pageY, 10)
-                }).append($current.children().clone()).appendTo('body');
+                }).append($current.html()).appendTo('body');
 
                 $(this).addClass($this.options.placeholderClass);
                 children = $this.element.children().addClass($this.options.childClass);
@@ -319,7 +320,7 @@
                 children = list.children(),
                 count    = children.length;
 
-            if(!$this.options.animation) {
+            if($this.options.warp || !$this.options.animation) {
                 elementToMoveNextTo.parentNode.insertBefore(element, next);
                 return;
             }
@@ -327,8 +328,12 @@
             list.css('min-height', list.height());
 
             children.stop().each(function(){
-                var ele = $(this);
-                ele.data('offset-before', ele.position());
+                var ele = $(this),
+                    offset = ele.position();
+
+                    offset.width = ele.width();
+
+                ele.data('offset-before', offset);
             });
 
             elementToMoveNextTo.parentNode.insertBefore(element, next);
@@ -339,7 +344,7 @@
             }).each(function() {
                 var ele    = $(this),
                     before = ele.data('offset-before');
-                ele.css({'position':'absolute', 'top':before.top, 'left':before.left});
+                ele.css({'position':'absolute', 'top':before.top, 'left':before.left, 'min-width':before.width });
             });
 
             children.each(function(){
@@ -352,7 +357,7 @@
 
                     setTimeout(function(){
                         ele.animate({'top':offset.top, 'left':offset.left}, $this.options.animation, function() {
-                            ele.css({'position':'','top':'', 'left':'', 'pointer-events':''}).removeClass($this.options.overClass).attr('data-child-dragenter', '');
+                            ele.css({'position':'','top':'', 'left':'', 'min-width': '', 'pointer-events':''}).removeClass($this.options.overClass).attr('data-child-dragenter', '');
                             count--
                             if(!count) list.css('min-height', '');
                         });

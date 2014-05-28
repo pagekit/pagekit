@@ -1,9 +1,12 @@
 // Name:            Sortable
-// Description:     Defines styles for sortable lists
+// Description:     Defines styles for sortable grids
 //
 // Component:       `uk-sortable`
 //
-// Modifier:        `uk-sortable-dragging`
+// Sub-objects:     `uk-sortable-moving`
+//
+// Modifier:        `uk-sortable-dragged`
+//                  `uk-sortable-placeholder`
 //                  `uk-sortable-over`
 //
 // ========================================================================
@@ -12,41 +15,88 @@
 // Variables
 // ========================================================================
 
+@sortable-dragged-z-index:                      1050;
+
+@sortable-placeholder-opacity:                  0;
+
+@sortable-over-opacity:                         0.3;
+
 
 /* ========================================================================
-   Component: sortable
+   Component: Sortable
  ========================================================================== */
+
 .uk-sortable {
     position: relative;
+    .hook-sortable;
 }
 
-.uk-sortable [draggable] {
+/*
+ * Makes text unselectable
+ */
+
+.uk-sortable > * {
     -moz-user-select: none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
-    -o-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
-.uk-sortable [draggable] * {
-    -moz-user-drag: none;
-    -khtml-user-drag: none;
+/*
+ * Prevents images and links from being dragged (default browser behavior)
+ * Currently only works in Webkit
+ */
+
+.uk-sortable > * * {
     -webkit-user-drag: none;
-    -o-user-drag: none;
     user-drag: none;
 }
 
+
+/* Sub-modifier `uk-sortable-dragged`
+ ========================================================================== */
+
 .uk-sortable-dragged {
-    pointer-events: none;
     position: absolute;
+    z-index: @sortable-dragged-z-index;
+    pointer-events: none;
+    .hook-sortable-dragged;
 }
+
 
 /* Sub-modifier `uk-sortable-placeholder`
  ========================================================================== */
+
 .uk-sortable-placeholder {
-    opacity: 0;
+    opacity: @sortable-placeholder-opacity;
+    .hook-sortable-placeholder;
 }
 
+
 /* Sub-modifier `uk-sortable-over`
+ * Only if `warp:true`
  ========================================================================== */
-.uk-sortable-over { opacity: .25; }
+
+.uk-sortable-over {
+    opacity: @sortable-over-opacity;
+    .hook-sortable-over;
+}
+
+/* Sub-object `uk-nestable-moving`
+ ========================================================================== */
+
+.uk-sortable-moving,
+/* Needed if moving over links or buttons */
+.uk-sortable-moving * { cursor: move; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-sortable-misc;
+
+.hook-sortable() {}
+.hook-sortable-dragged() {}
+.hook-sortable-placeholder() {}
+.hook-sortable-over() {}
+.hook-sortable-misc() {}
