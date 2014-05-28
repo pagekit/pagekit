@@ -1,10 +1,10 @@
 INSERT INTO `@system_menu` (`id`, `name`) VALUES
 (1, 'Main');
 
-INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `access_id`, `name`, `url`, `priority`, `status`, `depth`, `data`) VALUES
-(1, 1, 0, 1, 'Home', '@frontpage', 0, 1, 0, '[]');
+INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `access_id`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
+(1, 1, 0, 1, 'Home', '@frontpage', 0, 1, 0, '', '[]');
 
-INSERT INTO `@page_page` (`id`, `access_id`, `slug`, `title`, `status`, `content`, `data`) VALUES
+INSERT INTO `@page_page` (`id`, `access_id`, `url`, `title`, `status`, `content`, `data`) VALUES
 (1, 1, 'home', 'Home', 1, 'Now you are ready to build awesome websites and benefit from the latest web technologies behind Pagekit. This is an alpha version, which means the system is still in development.
 
 You can find [Pagekit on GitHub](https://github.com/pagekit/pagekit) and it is open for everyone to contribute. Please [report bugs](https://github.com/pagekit/pagekit/issues?state=open) and send us pull requests. We are looking forward to your feedback and ideas!

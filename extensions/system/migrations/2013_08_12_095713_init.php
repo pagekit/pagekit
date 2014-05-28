@@ -157,7 +157,7 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addColumn('status', 'smallint');
                 $table->addColumn('data', 'json_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
-                $table->addUniqueIndex(array('slug'), 'PAGES_SLUG');
+                $table->addIndex(array('url'), 'PAGES_URL');
             });
         }
     }
