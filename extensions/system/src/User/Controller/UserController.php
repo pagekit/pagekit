@@ -77,10 +77,11 @@ class UserController extends Controller
             }
 
             if ($permission) {
-                $query->whereExists(function($query) use ($permission) {
+                $sql = $this->getPermissionSql($permission);
+                $query->whereExists(function($query) use ($sql) {
                     $query->from('@system_user_role ur')
                         ->join('@system_role r', 'ur.role_id = r.id')
-                        ->where(array('@system_user.id = ur.user_id', $this->getPermissionSql($permission)));
+                        ->where(array('@system_user.id = ur.user_id', $sql));
                 });
             }
         }
