@@ -39,7 +39,7 @@ class FrontpageListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init' => array('onSystemInit', 10),
+            'system.init' => array('onSystemInit', -10),
             'system.menu' => 'onSystemMenu'
         );
     }
