@@ -162,12 +162,7 @@ class SettingsController extends Controller
                 $this('option')->set($key, $value);
             }
 
-            $response['success'] = (bool) $this('mailer')->create()
-                ->to($option['system:mail.from.address'])
-                ->subject(__('Test email!'))
-                ->body(__('Testemail'))
-                ->send();
-
+            $response['success'] = (bool) $this('mailer')->create(__('Test email!'), __('Testemail'), $option['system:mail.from.address'])->send();
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
 
         } catch (\Exception $e) {

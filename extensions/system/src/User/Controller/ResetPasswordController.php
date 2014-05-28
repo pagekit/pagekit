@@ -92,9 +92,9 @@ class ResetPasswordController extends Controller
             try {
 
                 $this('mailer')->create()
-                    ->to($user->getEmail())
-                    ->subject(sprintf('[%s] %s', $this('config')->get('app.site_title'), __('Password Reset')))
-                    ->body($this('view')->render('system/user/mails/reset.razr.php', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
+                    ->setTo($user->getEmail())
+                    ->setSubject(sprintf('[%s] %s', $this('config')->get('app.site_title'), __('Password Reset')))
+                    ->setBody($this('view')->render('system/user/mails/reset.razr.php', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
                     ->queue();
 
             } catch (\Exception $e) {

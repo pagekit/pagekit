@@ -148,7 +148,7 @@ class SystemExtension extends Extension
             return $manager;
         };
 
-        $app->extend('swift.mailer', function($mailer, $app) {
+        $app->extend('mailer', function($mailer, $app) {
 
             $address = $app['config']->get('mail.from.address');
             $name    = $app['config']->get('mail.from.name');
