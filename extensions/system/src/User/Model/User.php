@@ -156,6 +156,16 @@ abstract class User implements UserInterface
     }
 
     /**
+     * Check if the user is active.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->getStatus() == self::STATUS_ACTIVE;
+    }
+
+    /**
      * Check if the user is blocked.
      *
      * @return bool
@@ -164,6 +174,7 @@ abstract class User implements UserInterface
     {
         return $this->getStatus() == self::STATUS_BLOCKED;
     }
+
     /**
      * Check if the user has access for a provided permission identifier
      *

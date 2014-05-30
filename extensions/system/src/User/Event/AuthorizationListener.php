@@ -17,7 +17,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        if ($user = $this('auth')->getUser() and $user->getStatus() == UserInterface::STATUS_BLOCKED) {
+        if ($user = $this('auth')->getUser() and $user->isBlocked()) {
             $this('auth')->logout($user);
         }
     }
@@ -30,7 +30,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if ($event->getUser()->getStatus() == UserInterface::STATUS_BLOCKED) {
+        if ($event->getUser()->isBlocked()) {
             throw new AuthException(__('Your account has not been activated or is blocked.'));
         }
     }

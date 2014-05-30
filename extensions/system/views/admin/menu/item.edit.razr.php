@@ -28,8 +28,7 @@
             <p class="uk-form-controls-condensed">
                 <label>
                     <input type="radio" name="item[url]" value="@(item.url != '!divider' && item.url != '!menu-header' ? item.url~'" checked' : '"')>
-
-                    <input class="js-item-url" type="hidden" name="" value="@item.url" data-context="system/menu">
+                    <input class="js-item-url" type="hidden" name="" value="@(item.url != '!divider' && item.url != '!menu-header' ? item.url)" data-context="system/menu">
                 </label>
             </p>
         </div>

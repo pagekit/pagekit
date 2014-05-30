@@ -13,6 +13,9 @@
     <p>
         <label><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
         @if (app.config.mail.enabled)
+        @if (app.option.get('system:user.registration', 'admin') != 'admin')
+        <br><a href="@url.route('@system/registration/index')">@trans('Create a new user account.')</a>
+        @endif
         <br><a href="@url.route('@system/resetpassword/request')">@trans('Forgot Password?')</a>
         @endif
     </p>

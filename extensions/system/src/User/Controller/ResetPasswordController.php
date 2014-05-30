@@ -34,7 +34,6 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/request")
      * @View("system/user/reset/request.razr.php")
      */
     public function requestAction()
@@ -53,7 +52,6 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/reset")
      * @Request({"login"})
      * @View("system/user/reset/request.razr.php")
      */
@@ -81,6 +79,10 @@ class ResetPasswordController extends Controller
 
             if (!$user = $this->users->findByLogin($login)) {
                 throw new Exception(__('Invalid username or email.'));
+            }
+
+            if ($user->isBlocked()) {
+                throw new Exception(__('Your account has not been activated or is blocked.'));
             }
 
             $user->setActivation($this('auth.random')->generateString(128));
@@ -115,7 +117,6 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @Route("/confirm")
      * @Request({"user", "key"})
      * @View("system/user/reset/confirm.razr.php")
      */
@@ -123,6 +124,11 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this('message')->error(__('Invalid key.'));
+            return $this->redirect($this('url')->base(true));
+        }
+
+        if ($user->isBlocked()) {
+            $this('message')->error(__('Your account has not been activated or is blocked.'));
             return $this->redirect($this('url')->base(true));
         }
 

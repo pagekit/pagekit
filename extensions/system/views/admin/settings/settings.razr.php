@@ -16,6 +16,7 @@
                     <li><a href="#">@trans('Email')</a></li>
                     <li><a href="#">@trans('Localization')</a></li>
                     <li><a href="#">@trans('System')</a></li>
+                    <li><a href="#">@trans('User')</a></li>
                 </ul>
             </div>
 
@@ -67,7 +68,7 @@
                         <label for="form-emailenabled" class="uk-form-label">@trans('Send Email')</label>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <label><input id="form-emailenabled" type="checkbox" name="option[system:mail.enabled]" value="1" @(option.get('system:mail.enabled') ? 'checked':'')> @trans('Enable mail sending.')</label>
+                                <label><input id="form-emailenabled" type="checkbox" name="option[system:mail.enabled]" value="1" @(option.get('system:mail.enabled') ? 'checked')> @trans('Enable mail sending.')</label>
                             </p>
                         </div>
                     </div>
@@ -237,6 +238,35 @@
                         </div>
                     </div>
 
+                </li>
+                <li>
+
+                    <h2 class="pk-form-heading">@trans('User')</h2>
+
+                    <div class="uk-form-row">
+                        <span class="uk-form-label">@trans('Registration')</span>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <p class="uk-form-controls-condensed">
+                                <label><input type="radio" name="option[system:user.registration]" value="admin"@(option.get('system:user.registration', 'admin') == 'admin' ? ' checked')> @trans('Adminstrators only')</label>
+                            </p>
+                            <p class="uk-form-controls-condensed">
+                                <label><input type="radio" name="option[system:user.registration]" value="guest"@(option.get('system:user.registration') == 'guest' ? ' checked')> @trans('Guests')</label>
+                            </p>
+                            <p class="uk-form-controls-condensed">
+                                <label><input type="radio" name="option[system:user.registration]" value="approval"@(option.get('system:user.registration') == 'approval' ? ' checked')> @trans('Guests, but administrator approval is required.')</label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row">
+                        <label for="form-user-verification" class="uk-form-label">@trans('Verification')</label>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <p class="uk-form-controls-condensed">
+                                <input type="hidden" value="0" name="option[system:user.require_verification]">
+                                <label><input id="form-user-verification" type="checkbox" name="option[system:user.require_verification]" value="1" @(option.get('system:user.require_verification', true) ? 'checked')> @trans('Require e-mail verification when a guest creates an account.')</label>
+                            </p>
+                        </div>
+                    </div>
                 </li>
             </ul>
 
