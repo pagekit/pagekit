@@ -5,7 +5,6 @@ namespace Pagekit\System\Migration;
 use Pagekit\Component\Migration\MigrationInterface;
 use Pagekit\Framework\ApplicationAware;
 use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\AccessLevelInterface;
 
 class Init extends ApplicationAware implements MigrationInterface
 {

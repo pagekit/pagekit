@@ -2,8 +2,8 @@
 
 namespace Pagekit\Page\Event;
 
-use Pagekit\Page\Entity\Page;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Page\Entity\Page;
 
 class AliasListener extends EventSubscriber
 {

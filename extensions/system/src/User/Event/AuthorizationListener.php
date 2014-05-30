@@ -8,7 +8,6 @@ use Pagekit\Component\Auth\Event\LoginEvent;
 use Pagekit\Component\Auth\Event\LogoutEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\User\Model\UserInterface;
 
 class AuthorizationListener extends EventSubscriber
 {
