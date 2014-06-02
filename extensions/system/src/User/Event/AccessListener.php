@@ -82,7 +82,7 @@ class AccessListener extends EventSubscriber
     /**
      * Checks if the user is authorized to login to administration section.
      *
-     * @param AuthorizeEvent $event
+     * @param  AuthorizeEvent $event
      * @throws AuthException
      */
     public function onAuthorize(AuthorizeEvent $event)

@@ -253,7 +253,7 @@
                                 <label><input type="radio" name="option[system:user.registration]" value="guest"@(option.get('system:user.registration') == 'guest' ? ' checked')> @trans('Guests')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <label><input type="radio" name="option[system:user.registration]" value="approval"@(option.get('system:user.registration') == 'approval' ? ' checked')> @trans('Guests, but administrator approval is required.')</label>
+                                <label><input type="radio" name="option[system:user.registration]" value="approval"@(option.get('system:user.registration') == 'approval' ? ' checked')> @trans('Guests, but administrator approval is required')</label>
                             </p>
                         </div>
                     </div>
