@@ -167,7 +167,6 @@ class RegistrationController extends Controller
 
             if ($admin) {
 
-                $user->set('verified', false);
                 $this->sendActivatedMail($user);
                 $this('message')->success(__('The user\'s account has been activated and the user has been notified about it.'));
 

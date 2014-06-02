@@ -54,8 +54,13 @@ class UserController extends Controller
 
         $query = $this->users->query()->related('roles')->orderBy('name');
 
-        if (isset($filter['status']) && is_numeric($filter['status'])) {
-            $query->where(array('status' => intval($filter['status'])));
+        if (isset($filter['status'])) {
+            if (is_numeric($filter['status'])) {
+                $filter['status'] = (int) $filter['status'];
+                $query->where(array('status' => intval($filter['status'])));
+            } elseif ('new' == $filter['status']) {
+                $query->where(array('status' => User::STATUS_BLOCKED, 'access IS NULL', 'activation > ""'));
+            }
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {

@@ -24,15 +24,16 @@
             <select name="filter[status]">
 
                 <option value="">@trans('- Status -')</option>
+                <option value="new"@(filter['status'] == 'new' ? ' selected' )>@trans('New')</option>
                 @foreach (statuses as id => status)
-                <option value="@id"@( filter['status']|length && filter['status'] == id ? ' selected' )>@status</option>
+                <option value="@id"@(filter['status']|length && filter['status'] === id ? ' selected' )>@status</option>
                 @endforeach
             </select>
 
             <select name="filter[role]">
                 <option value="">@trans('- Role -')</option>
                 @foreach (roles as role)
-                <option value="@role.id"@( filter['role'] == role.id ? ' selected' )>@role.name</option>
+                <option value="@role.id"@(filter['role'] == role.id ? ' selected')>@role.name</option>
                 @endforeach
             </select>
 
@@ -41,7 +42,7 @@
                 @foreach (permissions as ext => permission)
                 <optgroup label="@ext">
                     @foreach (permission as id => perm)
-                    <option value="@id"@( filter['permission'] == id ? ' selected' )>@trans(perm['title'])</option>
+                    <option value="@id"@(filter['permission'] == id ? ' selected')>@trans(perm['title'])</option>
                     @endforeach
                 </optgroup>
                 @endforeach
@@ -76,7 +77,11 @@
                         <div class="uk-text-muted">@user.name</div>
                     </td>
                     <td class="uk-text-center">
+                        @if (!user.status && !user.access && user.activation)
+                        <a href="#" class="uk-icon-circle" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => 1])" title="@trans('New')"></a>
+                        @else
                         <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
+                        @endif
                     </td>
                     <td>
                         <a href="mailto:@user.email">@user.email</a>
