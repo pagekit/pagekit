@@ -158,7 +158,6 @@ class RegistrationController extends Controller
         if ($admin = $this('option')->get('system:user.registration') == 'approval' and !$user->get('verified')) {
 
             $user->setActivation($this('auth.random')->generateString(128));
-            $user->set('verified', true);
             $this->sendActivateMail($user, 'verification.activate');
 
             $this('message')->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email, and you can login to the site.'));
@@ -176,6 +175,7 @@ class RegistrationController extends Controller
 
             }
 
+            $user->set('verified', true);
             $user->setStatus(UserInterface::STATUS_ACTIVE);
             $user->setActivation('');
 

@@ -17,7 +17,7 @@
                     <ul class="uk-list">
                         <li><span class="uk-badge uk-badge-@(user.status ? 'success' : 'danger')">@user.statusText</span></li>
                         <li>@user.name (@user.username)</li>
-                        <li><a href="mailto:@user.email">@user.email</a></li>
+                        <li><a href="mailto:@user.email">@user.email</a>@(app.option.get('system:user.require_verification') && user.get('verified') ? ' <i title="'~trans('Verified email address')~'" class="uk-icon-check"></i>')</li>
                         <li>@trans('Last login: %date%', ['%date%' => user.login ? user.login|date : trans('Never')])</li>
                         <li>@trans('Registered since: %date%', ['%date%' => user.registered|date])</li>
                     </ul>

@@ -84,7 +84,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="mailto:@user.email">@user.email</a>
+                        <a href="mailto:@user.email">@user.email</a>@(app.option.get('system:user.require_verification') && user.get('verified') ? ' <i title="'~trans('Verified Email Address')~'" class="uk-icon-check"></i>')
                     </td>
                     <td>
                         @if (user.roles|length == 1)
