@@ -177,6 +177,10 @@ class UserController extends Controller
             $data['username'] = $name;
             $data['email']    = $email;
 
+            if ($email != $user->getEmail()) {
+                $user->set('verified', false);
+            }
+
             if (!empty($password)) {
                 $user->setPassword($this('auth.password')->hash($password));
             }

@@ -75,6 +75,10 @@ class ProfileController extends Controller
             $data['name']  = $name;
             $data['email'] = $email;
 
+            if ($email != $user->getEmail()) {
+                $user->set('verified', false);
+            }
+
             $this->users->save($user, $data);
 
             $this('message')->success(__('Profile updated.'));
