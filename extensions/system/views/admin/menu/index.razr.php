@@ -53,12 +53,11 @@
                 <div class="pk-table-min-width-100">@trans('Title') </div>
                 <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
                 <div class="pk-table-width-150">@trans('URL')</div>
-                <div class="pk-table-width-100">@trans('Access')</div>
             </div>
 
         </div>
 
-        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu), 'levels' => levels])
+        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu)])
 
         @else
 

@@ -47,14 +47,13 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-access" class="uk-form-label">@trans('Access')</label>
+        <label class="uk-form-label">@trans('Access')</label>
+        <input type="hidden" name="item[roles]" value="">
+        @foreach (roles as role)
         <div class="uk-form-controls">
-            <select id="form-access" class="uk-form-width-large" name="item[accessId]">
-                @foreach (levels as level)
-                <option value="@level.id"@(item.accessId == level.id ? ' selected')>@level.name</option>
-                @endforeach
-            </select>
+            <label><input type="checkbox" name="item[roles][]" value="@role.id"@(item.hasRole(role) ? ' checked' )> @role.name</label>
         </div>
+        @endforeach
     </div>
 
     <div class="uk-form-row">

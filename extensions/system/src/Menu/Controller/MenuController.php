@@ -24,18 +24,12 @@ class MenuController extends Controller
     protected $items;
 
     /**
-     * @var Repository
-     */
-    protected $levels;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->menus  = $this('menus')->getMenuRepository();
         $this->items  = $this('menus')->getItemRepository();
-        $this->levels = $this('users')->getAccessLevelRepository();
     }
 
     /**
@@ -50,7 +44,7 @@ class MenuController extends Controller
             $menu->setItems($this->items->findByMenu($menu));
         }
 
-        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus, 'levels' => $this->levels->findAll());
+        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus);
     }
 
     /**

@@ -66,7 +66,6 @@
             <div class="pk-table-width-100 uk-text-center">@trans('Status')</div>
             <div class="pk-table-width-150">@trans('Position')</div>
             <div class="pk-table-width-150">@trans('Type')</div>
-            <div class="pk-table-width-100">@trans('Access')</div>
         </div>
 
         @foreach (positions as position)
@@ -116,9 +115,6 @@
                             </div>
                         </div>
                         <div class="pk-table-width-150">@(type.name ?: trans('Extension not loaded'))</div>
-                        <div class="pk-table-width-100">
-                            @(levels[widget.accessId].name ?: trans('No access level'))
-                        </div>
                     </div>
 
                 </li>

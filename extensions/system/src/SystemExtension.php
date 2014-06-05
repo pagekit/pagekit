@@ -87,8 +87,8 @@ class SystemExtension extends Extension
             return $user;
         };
 
-        $app['users'] = function($app) {
-            return new UserProvider($app['cache.phpfile']);
+        $app['users'] = function() {
+            return new UserProvider;
         };
 
         $app['widgets'] = function() {

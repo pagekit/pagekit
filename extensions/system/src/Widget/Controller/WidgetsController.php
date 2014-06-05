@@ -23,7 +23,7 @@ class WidgetsController extends Controller
     /**
      * @var Repository
      */
-    protected $levels;
+    protected $roles;
 
     /**
      * @var array
@@ -36,7 +36,7 @@ class WidgetsController extends Controller
     public function __construct()
     {
         $this->widgets = $this('widgets')->getWidgetRepository();
-        $this->levels  = $this('users')->getAccessLevelRepository();
+        $this->roles   = $this('users')->getRoleRepository();
 
         if (isset(self::$app['theme.site'])) {
             foreach ($this('theme.site')->getConfig('positions', array()) as $id => $position) {
@@ -60,7 +60,7 @@ class WidgetsController extends Controller
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
         }
 
-        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'levels' => $this->levels->findAll(), 'positions' => $this->positions);
+        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions);
     }
 
     /**
@@ -72,7 +72,7 @@ class WidgetsController extends Controller
         $widget = new Widget;
         $widget->setType($type);
 
-        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
+        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
     }
 
     /**
@@ -87,7 +87,7 @@ class WidgetsController extends Controller
                 throw new Exception(__('Invalid widget id'));
             }
 
-            return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'levels' => $this->levels->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
+            return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

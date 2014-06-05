@@ -23,15 +23,15 @@ class PageController extends Controller
     /**
      * @var Repository
      */
-    protected $levels;
+    protected $roles;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->pages  = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
-        $this->levels = $this('users')->getAccessLevelRepository();
+        $this->pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
+        $this->roles = $this('users')->getRoleRepository();
     }
 
     /**
@@ -67,12 +67,12 @@ class PageController extends Controller
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
-                'table' => $this('view')->render('view://page/admin/pages/table.razr.php', array('count' => $count, 'pages' => $query->get(), 'levels' => $this->levels->findAll())),
+                'table' => $this('view')->render('view://page/admin/pages/table.razr.php', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
                 'total' => $total
             ));
         }
 
-        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll(), 'filter' => $filter, 'total' => $total, 'count' => $count);
+        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count);
     }
 
     /**
@@ -80,7 +80,7 @@ class PageController extends Controller
      */
     public function addAction()
     {
-        return array('head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
+        return array('head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll());
     }
 
     /**
@@ -102,7 +102,7 @@ class PageController extends Controller
             return $this->redirect('@page/page/index');
         }
 
-        return array('head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'levels' => $this->levels->findAll());
+        return array('head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll());
     }
 
     /**

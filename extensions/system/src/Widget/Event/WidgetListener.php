@@ -15,11 +15,12 @@ class WidgetListener extends EventSubscriber
         $request   = $this('request');
         $positions = $this('positions');
         $active    = (array) $request->attributes->get('_menu');
+        $user      = $this('user');
 
         foreach ($this('widgets')->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
 
             // filter by access
-            if (!$this('users')->checkAccessLevel($widget->getAccessId())) {
+            if (!$widget->hasAccess($user)) {
                 continue;
             }
 

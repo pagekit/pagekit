@@ -31,21 +31,20 @@
                         </select>
                     </div>
                 </div>
-               <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Access')</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="page[access_id]">
-                            @foreach (levels as level)
-                            <option value="@level.id"@(page.accessId == level.id ? ' selected')>@level.name</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('URL')</label>
                     <div class="uk-form-controls">
                         <input class="uk-width-1-1" type="text" name="page[url]" value="@page.url">
                     </div>
+                </div>
+               <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Access')</label>
+                    <input type="hidden" name="page[roles]" value="">
+                    @foreach (roles as role)
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" name="page[roles][]" value="@role.id"@(page.hasRole(role) ? ' checked')> @role.name</label>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Options')</label>

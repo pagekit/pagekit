@@ -6,7 +6,6 @@
             <th class="pk-table-min-width-100">@trans('Title')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
-            <th class="pk-table-width-100">@trans('Access')</th>
         </tr>
     </thead>
     <tbody>
@@ -25,14 +24,11 @@
             </td>
             <td class="pk-table-text-break">
                 @set(link = url.route('@page/id', ['id' => page.id], 'base'))
-                @if (page.status == 1 && app.users.checkAccessLevel(page.accessId))
+                @if (page.status == 1 && page.hasAccess(app.user))
                 <a href="@url.route('@page/id', ['id' => page.id])" target="_blank">@link|urldecode</a>
                 @else
                 @(page.url ?: link)
                 @endif
-            </td>
-            <td>
-                @(levels[page.accessId].name ?: trans('No access level'))
             </td>
         </tr>
         @endforeach

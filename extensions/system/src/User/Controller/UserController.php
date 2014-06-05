@@ -245,9 +245,7 @@ class UserController extends Controller
                     continue;
                 }
 
-                if ($status == User::STATUS_ACTIVE) {
-                    $user->setActivation('');
-                }
+                $user->setActivation('');
 
                 if ($status != $user->getStatus()) {
                     $this->users->save($user, compact('status'));

@@ -48,22 +48,6 @@ class Init extends ApplicationAware implements MigrationInterface
             $this('db')->insert('@system_role', array('id' => RoleInterface::ROLE_ADMINISTRATOR, 'name' => 'Administrator', 'priority' => 2));
         }
 
-        if ($util->tableExists('@system_access_level') === false) {
-            $util->createTable('@system_access_level', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('name', 'string', array('length' => 64));
-                $table->addColumn('priority', 'integer', array('default' => 0));
-                $table->addColumn('roles', 'simple_array', array('notnull' => false));
-                $table->setPrimaryKey(array('id'));
-                $table->addUniqueIndex(array('name'), 'ACCESS_NAME');
-            });
-
-            $this('db')->insert('@system_access_level', array('id' => 1, 'name' => 'Everyone', 'priority' => 0, 'roles' => null));
-            $this('db')->insert('@system_access_level', array('id' => 2, 'name' => 'Anonymous', 'priority' => 1, 'roles' => RoleInterface::ROLE_ANONYMOUS));
-            $this('db')->insert('@system_access_level', array('id' => 3, 'name' => 'Authenticated', 'priority' => 2, 'roles' => RoleInterface::ROLE_AUTHENTICATED));
-            $this('db')->insert('@system_access_level', array('id' => 4, 'name' => 'Administrator', 'priority' => 3, 'roles' => RoleInterface::ROLE_ADMINISTRATOR));
-        }
-
         if ($util->tableExists('@system_user') === false) {
             $util->createTable('@system_user', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
@@ -118,7 +102,7 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
                 $table->addColumn('menu_id', 'integer', array('unsigned' => true, 'length' => 10));
                 $table->addColumn('parent_id', 'integer', array('unsigned' => true, 'length' => 10));
-                $table->addColumn('access_id', 'integer', array('unsigned' => true, 'length' => 10));
+                $table->addColumn('roles', 'simple_array', array('notnull' => false));
                 $table->addColumn('name', 'string', array('length' => 255));
                 $table->addColumn('url', 'string', array('length' => 1023));
                 $table->addColumn('priority', 'integer', array('default' => 0));
@@ -133,7 +117,7 @@ class Init extends ApplicationAware implements MigrationInterface
         if ($util->tableExists('@system_widget') === false) {
             $util->createTable('@system_widget', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('access_id', 'integer', array('unsigned' => true, 'length' => 10));
+                $table->addColumn('roles', 'simple_array', array('notnull' => false));
                 $table->addColumn('type', 'string', array('length' => 255));
                 $table->addColumn('title', 'string', array('length' => 255));
                 $table->addColumn('position', 'string', array('length' => 255));
@@ -149,7 +133,7 @@ class Init extends ApplicationAware implements MigrationInterface
         if ($util->tableExists('@page_page') === false) {
             $util->createTable('@page_page', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('access_id', 'integer', array('unsigned' => true, 'length' => 10));
+                $table->addColumn('roles', 'simple_array', array('notnull' => false));
                 $table->addColumn('title', 'string', array('length' => 255));
                 $table->addColumn('content', 'text');
                 $table->addColumn('url', 'string', array('length' => 1023));

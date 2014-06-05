@@ -28,16 +28,16 @@ class ItemController extends Controller
     /**
      * @var Repository
      */
-    protected $levels;
+    protected $roles;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->menus  = $this('menus')->getMenuRepository();
-        $this->items  = $this('menus')->getItemRepository();
-        $this->levels = $this('users')->getAccessLevelRepository();
+        $this->menus = $this('menus')->getMenuRepository();
+        $this->items = $this('menus')->getItemRepository();
+        $this->roles = $this('users')->getRoleRepository();
     }
 
     /**
@@ -55,7 +55,7 @@ class ItemController extends Controller
             $item = new Item;
             $item->setMenu($menu);
 
-            return array('head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'levels' => $this->levels->findAll());
+            return array('head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => $this->roles->findAll());
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
@@ -76,7 +76,7 @@ class ItemController extends Controller
                 throw new Exception(__('Invalid menu item.'));
             }
 
-            return array('head.title' => __('Edit Menu Item'), 'item' => $item, 'levels' => $this->levels->findAll());
+            return array('head.title' => __('Edit Menu Item'), 'item' => $item, 'roles' => $this->roles->findAll());
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());

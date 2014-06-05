@@ -27,14 +27,11 @@
                 <a href="@url.route(item.url)" target="_blank">@(url.route(item.url, [], 'base')|urldecode ?: '/')</a>
                 @endif
             </div>
-            <div class="pk-table-width-100">
-                @(levels[item.accessId].name ?: trans('No access level'))
-            </div>
         </div>
 
         @if (menuitem.hasChildren())
         <ul class="uk-nestable-list">
-            @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => menuitem, 'levels' => levels])
+            @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => menuitem])
         </ul>
         @endif
 

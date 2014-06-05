@@ -62,13 +62,6 @@ return array(
             'active'   => '/admin/system/user/role*',
             'access'   => 'system: manage user permissions'
         ),
-        'system: user access' => array(
-            'label'    => 'Access',
-            'parent'   => 'system: user',
-            'url'      => '@system/accesslevel/index',
-            'active'   => '/admin/system/user/access*',
-            'access'   => 'system: manage user permissions'
-        ),
         'system: settings' => array(
             'label'    => 'Settings',
             'icon'     => 'asset://system/images/icon-settings-system.svg',

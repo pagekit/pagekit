@@ -79,16 +79,6 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Access')</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="widget[accessId]">
-                            @foreach (levels as level)
-                            <option value="@level.id"@(widget.accessId == level.id ? ' selected')>@level.name</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Position')</label>
                     <div class="uk-form-controls">
                         <select class="uk-width-1-1" name="widget[position]">
@@ -97,6 +87,15 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">@trans('Access')</label>
+                    <input type="hidden" name="widget[roles]" value="">
+                    @foreach (roles as role)
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" name="widget[roles][]" value="@role.id"@(widget.hasRole(role) ? ' checked' )> @role.name</label>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Options')</label>
