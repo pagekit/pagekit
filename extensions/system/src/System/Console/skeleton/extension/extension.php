@@ -18,6 +18,12 @@ return array(
 
     ),
 
-    'controllers' => 'src/Controller/*Controller.php'
+    'controllers' => 'src/Controller/*Controller.php',
+
+    'settings' => array(
+
+        'system' => '%NAME%/admin/settings.razr.php'
+
+    )
 
 );
