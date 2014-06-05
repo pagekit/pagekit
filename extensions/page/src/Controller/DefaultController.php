@@ -37,6 +37,11 @@ class DefaultController extends Controller
         }
 
         if (!$page->hasAccess($this('user'))) {
+
+            if (!$this('user')->isAuthenticated()) {
+                return $this->redirect('@system/auth/login', array('redirect' => $this('url')->current()));
+            }
+
             throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
