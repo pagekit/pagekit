@@ -36,7 +36,7 @@ class DefaultController extends Controller
             throw new NotFoundHttpException(__('Page not found!'));
         }
 
-        if ($page->hasAccess($this('user'))) {
+        if (!$page->hasAccess($this('user'))) {
             throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
