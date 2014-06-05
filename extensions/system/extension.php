@@ -48,6 +48,14 @@ return array(
             'access'   => 'system: manage users || system: manage user permissions',
             'priority' => 15
         ),
+        'system: sub-user' => array(
+            'label'    => 'Users',
+            'parent'   => 'system: user',
+            'url'      => '@system/user/index',
+            'active'   => '/admin/system/user(?!/permission|/role)*',
+            'access'   => 'system: manage users',
+            'priority' => 15
+        ),
         'system: user permissions' => array(
             'label'    => 'Permissions',
             'parent'   => 'system: user',

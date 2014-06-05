@@ -40,9 +40,11 @@
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
+                        @if (!subnav.children)
                         <li@(subnav.attribute('active') ? ' class="uk-active"')>
                             <a href="@url.route(subnav.url)">@trans(subnav)</a>
                         </li>
+                        @endif
                         @foreach (subnav.children as item)
                         <li@(item.attribute('active') ? ' class="uk-active"')>
                             <a href="@url.route(item.url)">@trans(item)</a>
