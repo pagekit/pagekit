@@ -91,7 +91,14 @@ define(['jquery', 'require'], function($, req) {
             if (!this.types[type]) return;
 
             this.select.val(type);
-            this.types[type].show(deparam(url.split('?')[1] + ''), url);
+
+            try {
+
+                var params = deparam(url.split('?')[1] + '');
+
+            } catch (e) { params = {}; }
+
+            this.types[type].show(params, url);
 
             return this.types[type];
         }
