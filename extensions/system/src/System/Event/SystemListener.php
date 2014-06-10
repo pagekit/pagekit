@@ -169,6 +169,7 @@ class SystemListener extends EventSubscriber
     {
         $event->register('Pagekit\System\Link\Frontpage');
         $event->register('Pagekit\User\Link\Login');
+        $event->register('Pagekit\User\Link\Registration');
     }
 
     /**
