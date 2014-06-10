@@ -21,7 +21,7 @@
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
                 @if (item.url == '!divider')
                 @trans('Divider')
-                @elseif (item.url == '!menu-header')
+                @elseif (item.url == '!header')
                 @trans('Menu Header')
                 @else
                 <a href="@url.route(item.url)" target="_blank">@(url.route(item.url, [], 'base')|urldecode ?: '/')</a>

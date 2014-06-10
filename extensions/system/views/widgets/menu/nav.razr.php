@@ -4,7 +4,7 @@
 
 @foreach (root.children as item)
 
-    @set (header = item.url == '!menu-header', divider = item.url == '!divider')
+    @set (header = item.url == '!header', divider = item.url == '!divider')
 
     <li class="@((item.attribute('parent') ? ' uk-parent')~(item.attribute('active') ? ' uk-active')~(header ? ' uk-nav-header')~(divider ? ' uk-nav-divider')|trim)">
 
