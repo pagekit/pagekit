@@ -15,6 +15,6 @@ require(['jquery', 'linkpicker'], function($, Picker) {
         }
     }).on('change', link, function() {
         nolink.addClass('uk-hidden');
-        $('[name="item[url]"]:last').val(link.val());
+        $('[name="item[url]"]:first').val(link.val());
     });
 });
