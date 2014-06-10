@@ -8,7 +8,7 @@ use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\UserInterface;
 
 /**
- * @Route("/password")
+ * @Route("/user/password")
  */
 class ResetPasswordController extends Controller
 {

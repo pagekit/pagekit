@@ -11,7 +11,7 @@ use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\Model\UserInterface;
 
 /**
- * @Route("/registration")
+ * @Route("/user/registration")
  */
 class RegistrationController extends Controller
 {
