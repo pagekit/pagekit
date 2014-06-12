@@ -1,11 +1,11 @@
 INSERT INTO `@system_menu` (`id`, `name`) VALUES
 (1, 'Main');
 
-INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `access_id`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
-(1, 1, 0, 1, 'Home', '@frontpage', 0, 1, 0, '', '[]');
+INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `roles`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
+(1, 1, 0, NULL, 'Home', '@frontpage', 0, 1, 0, '', '[]');
 
-INSERT INTO `@page_page` (`id`, `access_id`, `url`, `title`, `status`, `content`, `data`) VALUES
-(1, 1, 'home', 'Home', 1, 'Now you are ready to build awesome websites and benefit from the latest web technologies behind Pagekit. This is an alpha version, which means the system is still in development.
+INSERT INTO `@page_page` (`id`, `roles`, `url`, `title`, `status`, `content`, `data`) VALUES
+(1, NULL, 'home', 'Home', 1, 'Now you are ready to build awesome websites and benefit from the latest web technologies behind Pagekit. This is an alpha version, which means the system is still in development.
 
 You can find [Pagekit on GitHub](https://github.com/pagekit/pagekit) and it is open for everyone to contribute. Please [report bugs](https://github.com/pagekit/pagekit/issues?state=open) and send us pull requests. We are looking forward to your feedback and ideas!
 
@@ -21,10 +21,10 @@ Should something not work, don''t hesitate to ask in [our chat](https://www.hipc
 
 Enjoy developing with Pagekit!', '{"markdown":"1"}');
 
-INSERT INTO `@system_widget` (`id`, `access_id`, `type`, `title`, `position`, `priority`, `status`, `pages`, `menu_items`, `data`) VALUES
-(1, 1, 'widget.menu', 'Main Menu', 'navbar', 0, 1, '', NULL, '{"menu":"1","style":"list"}'),
-(2, 1, 'widget.user.login', 'Login', 'sidebar', 0, 1, '', NULL, '{"redirect.login":"","redirect.logout":""}'),
-(3, 1, 'widget.text', 'Copyright', 'footer', 0, 1, '', NULL, '{"content":"Powered by <a href=\\"\\">Pagekit<\\/a>"}');
+INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `priority`, `status`, `pages`, `menu_items`, `data`) VALUES
+(1, NULL, 'widget.menu', 'Main Menu', 'navbar', 0, 1, '', NULL, '{"menu":"1","style":"list"}'),
+(2, NULL, 'widget.user.login', 'Login', 'sidebar', 0, 1, '', NULL, '{"redirect.login":"","redirect.logout":""}'),
+(3, NULL, 'widget.text', 'Copyright', 'footer', 0, 1, '', NULL, '{"content":"Powered by <a href=\\"\\">Pagekit<\\/a>"}');
 
 INSERT INTO `@system_option` (`name`, `value`, `autoload`) VALUES
 ('system:app.frontpage', '"@page/id?id=1"', 1),
