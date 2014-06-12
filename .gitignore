@@ -1,4 +1,5 @@
 /extensions/*
+!/extensions/blog
 !/extensions/hello
 !/extensions/installer
 !/extensions/page

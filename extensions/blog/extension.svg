@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-blog" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+<rect x="6" y="5" fill="#FFFFFF" width="33" height="40"/>
+<path fill="#D5ECF7" d="M35,25H10V10.637C10,10.285,10.285,10,10.638,10h23.725C34.715,10,35,10.285,35,10.637V25z"/>
+<path fill="#66B1E3" d="M35,23.602v0.761C35,24.697,34.72,25,34.386,25H10.441C10.105,25,10,24.793,10,24.458v-1.856l4.791-4.877
+	l1.786,1.219l3.639-3.521L22.632,18h1.219l3.049,2.91l1.83-1.897L35,23.602z"/>
+<path fill="#D4E0E6" d="M39,4H6C5.45,4,5,4.45,5,5v40c0,0.55,0.45,1,1,1h33c0.55,0,1-0.45,1-1V5C40,4.45,39.55,4,39,4z M39,44
+	c0,0.55-0.45,1-1,1H7c-0.55,0-1-0.45-1-1V6c0-0.55,0.45-1,1-1h31c0.55,0,1,0.45,1,1V44z"/>
+<rect x="10" y="32" fill="#D5ECF7" width="24" height="2"/>
+<rect x="10" y="28" fill="#D5ECF7" width="24" height="2"/>
+<rect x="10" y="36" fill="#D5ECF7" width="24" height="2"/>
+<polygon fill="#D4E0E6" points="40,27.8 40,32.36 37.12,37.2 28.08,41.75 "/>
+<polygon fill="#B7CAD3" points="40,22.27 40,29.85 36.82,35.45 28.08,41.75 33.4,34.23 "/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="59.6563" y1="70.8662" x2="66.667" y2="70.8662" gradientTransform="matrix(0.8639 0.5037 -0.5037 0.8639 18.0664 -66.4736)">
+	<stop  offset="0" style="stop-color:#FDCF61"/>
+	<stop  offset="0.9778" style="stop-color:#FF8B37"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="44.04,21.338 35.888,35.317 29.832,31.787 37.985,17.807 "/>
+<polygon fill="#FFE9BD" points="28.076,41.754 35.888,35.317 29.832,31.787 "/>
+<path fill="#886524" d="M31.192,39.187l-3.116,2.567l0.701-3.976c0.439,0.141,0.88,0.324,1.29,0.563
+	C30.476,38.579,30.85,38.865,31.192,39.187z"/>
+<path fill="#F36A59" d="M46.607,16.934l-2.567,4.404l-6.055-3.531l2.567-4.404c0.177-0.303,0.568-0.406,0.871-0.229l4.954,2.889
+	C46.683,16.24,46.784,16.629,46.607,16.934z"/>
+<path opacity="0.4" fill="#A87569" d="M46.607,16.934l-10.72,18.384l-4.695,3.869l-3.116,2.567l5.72-7.656l11.04-18.934l1.542,0.898
+	C46.683,16.24,46.784,16.629,46.607,16.934z"/>
+</svg>
