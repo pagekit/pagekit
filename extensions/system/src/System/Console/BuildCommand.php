@@ -43,6 +43,7 @@ class BuildCommand extends Command
         $dev  = preg_replace_callback('/(\d)$/', function($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
 
         $zip = new \ZipArchive;
+
         if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).".zip", \ZipArchive::OVERWRITE)) {
             $this->error("Can't open ZIP extension in '$zipFile'");
             exit;
@@ -60,8 +61,9 @@ class BuildCommand extends Command
                     '^extensions\/.+\/languages\/.+\.(po|pot)',
                     '^themes\/(?!(alpha)\/).*',
                     '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade)',
+                    '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
                     '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test)',
-                    '^vendor\/nikic\/php-parser\/(doc|grammar|test|phpunit)',
+                    '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
                     '^vendor\/pagekit\/.+\/(tests\/|phpunit\.xml)',
                     '^vendor\/pimple\/pimple\/(tests|phpunit)',
                     '^vendor\/psr\/.+\/(test\/|phpunit\.xml)',

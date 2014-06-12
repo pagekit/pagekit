@@ -311,15 +311,15 @@ abstract class NodeVisitor
     abstract public function traverse(array $files);
 }
 
-class PhpNodeVisitor extends NodeVisitor implements \PHPParser_NodeVisitor
+class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
 {
     /**
      * {@inheritdoc}
      */
     public function traverse(array $files)
     {
-        $parser = new \PHPParser_Parser(new \PHPParser_Lexer);
-        $traverser = new \PHPParser_NodeTraverser;
+        $parser = new \PhpParser\Parser(new \PhpParser\Lexer);
+        $traverser = new \PhpParser\NodeTraverser;
         $traverser->addVisitor($this);
 
         foreach ($files as $file) {
@@ -332,9 +332,9 @@ class PhpNodeVisitor extends NodeVisitor implements \PHPParser_NodeVisitor
     /**
      * {@inheritdoc}
      */
-    public function enterNode(\PHPParser_Node $node)
+    public function enterNode(\PhpParser\Node $node)
     {
-        if ($node instanceof \PHPParser_Node_Expr_FuncCall
+        if ($node instanceof \PhpParser\Node\Expr\FuncCall
             && ($node->name->parts[0] == '__' || $node->name->parts[0] == '_c')
             && isset($node->args[0]) && is_string($string = $node->args[0]->value->value))
         {
@@ -345,7 +345,7 @@ class PhpNodeVisitor extends NodeVisitor implements \PHPParser_NodeVisitor
     }
 
     public function beforeTraverse(array $nodes) {}
-    public function leaveNode(\PHPParser_Node $node) {}
+    public function leaveNode(\PhpParser\Node $node) {}
     public function afterTraverse(array $nodes) {}
 }
 
