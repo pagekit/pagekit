@@ -3167,6 +3167,9 @@ select.uk-form-width-mini {
   display: inline-block;
   max-width: 100%;
 }
+/*
+ * 1. Make form element clickable through icon
+ */
 .uk-form-icon > [class*='uk-icon-'] {
   position: absolute;
   top: 50%;
@@ -3175,6 +3178,8 @@ select.uk-form-width-mini {
   font-size: 14px;
   color: #999999;
   text-align: center;
+  /* 1 */
+  pointer-events: none;
 }
 .uk-form-icon:not(.uk-form-icon-flip) > input {
   padding-left: 35px !important;
@@ -5230,10 +5235,13 @@ a.uk-thumbnail:focus {
 }
 /*
  * Hover
- * 1. Use optional `uk-overlay-toggle` to trigger the overlay earlier
+ * 1. `uk-hover` to support touch devices
+ * 2. Use optional `uk-overlay-toggle` to trigger the overlay earlier
  */
 .uk-overlay:hover .uk-overlay-area,
-.uk-overlay-toggle:hover .uk-overlay-area {
+.uk-overlay.uk-hover .uk-overlay-area,
+.uk-overlay-toggle:hover .uk-overlay-area,
+.uk-overlay-toggle.uk-hover .uk-overlay-area {
   opacity: 1;
 }
 /*
@@ -5331,10 +5339,13 @@ a.uk-thumbnail:focus {
 }
 /*
  * Hover
- * 1. Use optional `uk-overlay-toggle` to trigger the overlay earlier
+ * 1. `uk-hover` to support touch devices
+ * 2. Use optional `uk-overlay-toggle` to trigger the overlay earlier
  */
 .uk-overlay:hover .uk-overlay-caption,
-.uk-overlay-toggle:hover .uk-overlay-caption {
+.uk-overlay.uk-hover .uk-overlay-caption,
+.uk-overlay-toggle:hover .uk-overlay-caption,
+.uk-overlay-toggle.uk-hover .uk-overlay-caption {
   opacity: 1;
 }
 .uk-overlay:hover {
@@ -6808,7 +6819,7 @@ a.uk-thumbnail:focus {
 }
 /*
  * Visibility
- * Avoids setting display to `block`
+ * Avoids setting display to `block` so it works also with `inline-block` and `table`
  */
 /* Desktop and bigger */
 @media (min-width: 960px) {
@@ -6822,7 +6833,7 @@ a.uk-thumbnail:focus {
     display: none !important;
   }
 }
-/* Only tablets portrait */
+/* Tablets portrait */
 @media (min-width: 768px) and (max-width: 959px) {
   .uk-visible-small {
     display: none !important;
@@ -6834,7 +6845,7 @@ a.uk-thumbnail:focus {
     display: none !important;
   }
 }
-/* Phone landscape and smaller */
+/* Phone landscape and smaller*/
 @media (max-width: 767px) {
   .uk-visible-medium {
     display: none !important;
@@ -7408,7 +7419,7 @@ a.uk-datepicker-table-muted {
   border-radius: 0 !important;
 }
 /* ========================================================================
-   Component: nestable
+   Component: Nestable
  ========================================================================== */
 .uk-nestable {
   padding: 0;
