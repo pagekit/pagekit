@@ -2,8 +2,9 @@
 
 namespace Pagekit\System\Console;
 
-use Guzzle\Http\Exception\BadResponseException;
-use Pagekit\Component\Http\Client;
+use GuzzleHttp\Client;
+use GuzzleHttp\Post\PostFile;
+use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Component\Package\Loader\JsonLoader;
 use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -92,10 +93,13 @@ class ExtensionUploadCommand extends Command
         try {
 
             $client = new Client;
-            $client->post("$api/package/upload")
-                ->addPostFields(array('api_key' => $key, 'force' => $this->option('force')))
-                ->addPostFiles(array('file' => $zipFile))
-                ->send();
+            $client->post("$api/package/upload", array(
+                    'body' => array(
+                        'api_key' => $key,
+                        'force'   => $this->option('force'),
+                        'file'    => new PostFile('file', fopen($zipFile, 'r'))
+                    )
+                ));
 
             $this->line(sprintf('Finished (%d KB/s)', $size * 1024 / (microtime(true) - $time)));
 

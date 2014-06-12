@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Component\Http\Client;
+use GuzzleHttp\Client;
 use Pagekit\Component\Package\Downloader\PackageDownloader;
 use Pagekit\Component\Package\Exception\ArchiveExtractionException;
 use Pagekit\Component\Package\Exception\ChecksumVerificationException;
