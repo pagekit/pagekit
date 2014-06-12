@@ -21,14 +21,14 @@ return array(
             'label'    => 'Dashboard',
             'icon'     => 'asset://system/images/icon-settings-dashboard.svg',
             'url'      => '@system/dashboard/index',
-            'active'   => '/admin/system/dashboard',
+            'active'   => '@system/dashboard/index',
             'priority' => 0
         ),
         'system: widgets' => array(
             'label'    => 'Widgets',
             'icon'     => 'asset://system/images/icon-widgets.svg',
             'url'      => '@system/widgets/index',
-            'active'   => '/admin/system/widgets*',
+            'active'   => '@system/widgets*',
             'access'   => 'system: manage widgets',
             'priority' => 5
         ),
@@ -36,7 +36,7 @@ return array(
             'label'    => 'Menus',
             'icon'     => 'asset://system/images/icon-menus.svg',
             'url'      => '@system/menu/index',
-            'active'   => '/admin/system/menu*',
+            'active'   => '@system/(menu|item)*',
             'access'   => 'system: manage menus',
             'priority' => 10
         ),
@@ -44,7 +44,7 @@ return array(
             'label'    => 'Users',
             'icon'     => 'asset://system/images/icon-users.svg',
             'url'      => '@system/user/index',
-            'active'   => '/admin/system/user*',
+            'active'   => '@system/user*',
             'access'   => 'system: manage users || system: manage user permissions',
             'priority' => 15
         ),
@@ -52,7 +52,7 @@ return array(
             'label'    => 'Users',
             'parent'   => 'system: user',
             'url'      => '@system/user/index',
-            'active'   => '/admin/system/user(?!/permission|/role)*',
+            'active'   => '@system/user*',
             'access'   => 'system: manage users',
             'priority' => 15
         ),
@@ -60,21 +60,21 @@ return array(
             'label'    => 'Permissions',
             'parent'   => 'system: user',
             'url'      => '@system/permission/index',
-            'active'   => '/admin/system/user/permission*',
+            'active'   => '@system/permission*',
             'access'   => 'system: manage user permissions'
         ),
         'system: user roles' => array(
             'label'    => 'Roles',
             'parent'   => 'system: user',
             'url'      => '@system/role/index',
-            'active'   => '/admin/system/user/role*',
+            'active'   => '@system/role*',
             'access'   => 'system: manage user permissions'
         ),
         'system: settings' => array(
             'label'    => 'Settings',
             'icon'     => 'asset://system/images/icon-settings-system.svg',
             'url'      => '@system/system/index',
-            'active'   => '(/admin/system|/admin/system/(settings|themes|extensions|storage|alias|update|info|marketplace|dashboard/(settings|add|edit))*)',
+            'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
             'priority' => 110
         )
 

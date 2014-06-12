@@ -9,7 +9,7 @@ class ActiveFilter extends FilterIterator
     /**
      * @var string
      */
-    protected $path;
+    protected $route;
 
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class ActiveFilter extends FilterIterator
     {
         parent::__construct($iterator, $options);
 
-        $this->path = $this('request')->getPathInfo();
+        $this->route = $this('request')->attributes->get('_route');
     }
 
     /**
@@ -29,7 +29,16 @@ class ActiveFilter extends FilterIterator
         $item = parent::current();
 
         if ($active = $item->getAttribute('active') and is_string($active)) {
-            $item->setAttribute('active', (bool) preg_match('#^'.str_replace('*', '.*', $active).'$#', $this->path));
+
+            $active = (bool) preg_match('#^'.str_replace('*', '.*', $active).'$#', $this->route);
+
+            $item->setAttribute('active', $active);
+
+            if ($active) {
+                while ($item->getParentId() && $item = $item->getMenu()->getItem($item->getParentId())) {
+                    $item->setAttribute('active', $active);
+                }
+            }
         }
 
         return true;

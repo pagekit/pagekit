@@ -32,7 +32,7 @@ return array(
         'hello' => array(
             'label'  => 'Hello',
             'url'    => '@hello/hello/index',
-            'active' => '/admin/hello*',
+            'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'
         )
 
