@@ -90,12 +90,14 @@
                 </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Restrict Access')</label>
-                    <input type="hidden" name="widget[roles]" value="">
-                    @foreach (roles as role)
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="widget[roles][]" value="@role.id"@(widget.hasRole(role) ? ' checked' )> @role.name</label>
+                        <input type="hidden" name="widget[roles]" value="">
+                        @foreach (roles as role)
+                        <div class="uk-form-controls">
+                            <label><input type="checkbox" name="widget[roles][]" value="@role.id"@(widget.hasRole(role) ? ' checked' )> @role.name</label>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
                 <div class="uk-form-row">
                     <label class="uk-form-label">@trans('Options')</label>
