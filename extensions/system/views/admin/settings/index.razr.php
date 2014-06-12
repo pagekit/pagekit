@@ -8,7 +8,7 @@
     @if (user.hasAccess('system: access settings'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/settings/index')">
-            <img src="@url.to('asset://system/images/icon-settings-system.svg')" width="50" height="50" alt="@trans('Settings')">
+            <img src="@url.to('asset://system/images/icon-settings.svg')" width="50" height="50" alt="@trans('Settings')">
             <p>@trans('Settings')</p>
         </a>
     </li>
@@ -17,7 +17,7 @@
     @if (user.hasAccess('system: manage extensions'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/extensions/index')">
-            <img src="@url.to('asset://system/images/icon-settings-extensions.svg')" width="50" height="50" alt="@trans('Extensions')">
+            <img src="@url.to('asset://system/images/icon-extensions.svg')" width="50" height="50" alt="@trans('Extensions')">
             <p>@trans('Extensions')</p>
         </a>
     </li>
@@ -26,7 +26,7 @@
     @if (user.hasAccess('system: manage themes'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/themes/index')">
-            <img src="@url.to('asset://system/images/icon-settings-themes.svg')" width="50" height="50" alt="@trans('Themes')">
+            <img src="@url.to('asset://system/images/icon-themes.svg')" width="50" height="50" alt="@trans('Themes')">
             <p>@trans('Themes')</p>
         </a>
     </li>
@@ -34,7 +34,7 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/dashboard/settings')">
-            <img src="@url.to('asset://system/images/icon-settings-dashboard.svg')" width="50" height="50" alt="@trans('Dashboard')">
+            <img src="@url.to('asset://system/images/icon-dashboard.svg')" width="50" height="50" alt="@trans('Dashboard')">
             <p>@trans('Dashboard')</p>
         </a>
     </li>
@@ -42,7 +42,7 @@
     @if (user.hasAccess('system: manage media'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/system/storage')">
-            <img src="@url.to('asset://system/images/icon-settings-storage.svg')" width="50" height="50" alt="@trans('Storage')">
+            <img src="@url.to('asset://system/images/icon-storage.svg')" width="50" height="50" alt="@trans('Storage')">
             <p>@trans('Storage')</p>
         </a>
     </li>
@@ -51,7 +51,7 @@
     @if (user.hasAccess('system: software updates'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/update/index')">
-            <img src="@url.to('asset://system/images/icon-settings-update.svg')" width="50" height="50" alt="@trans('Update')">
+            <img src="@url.to('asset://system/images/icon-update.svg')" width="50" height="50" alt="@trans('Update')">
             <p>@trans('Update')</p>
         </a>
     </li>
@@ -60,7 +60,7 @@
     @if (user.hasAccess('system: manage url aliases'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/alias/index')">
-            <img src="@url.to('asset://system/images/icon-settings-urlaliases.svg')" width="50" height="50" alt="@trans('URL Aliases')">
+            <img src="@url.to('asset://system/images/icon-urlaliases.svg')" width="50" height="50" alt="@trans('URL Aliases')">
             <p>@trans('URL Aliases')</p>
         </a>
     </li>
@@ -68,14 +68,14 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url.route('@system/system/info')">
-            <img src="@url.to('asset://system/images/icon-settings-info.svg')" width="50" height="50" alt="@trans('Info')">
+            <img src="@url.to('asset://system/images/icon-info.svg')" width="50" height="50" alt="@trans('Info')">
             <p>@trans('Info')</p>
         </a>
     </li>
 
     <li class="uk-width">
         <a id="clearCache" class="uk-panel pk-panel-icon" href="@url.route('@system/settings/clearcache')">
-            <img src="@url.to('asset://system/images/icon-settings-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
+            <img src="@url.to('asset://system/images/icon-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
             <p>@trans('Clear Cache')</p>
         </a>
     </li>

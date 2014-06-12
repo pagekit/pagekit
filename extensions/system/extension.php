@@ -19,7 +19,7 @@ return array(
 
         'system: dashboard' => array(
             'label'    => 'Dashboard',
-            'icon'     => 'asset://system/images/icon-settings-dashboard.svg',
+            'icon'     => 'asset://system/images/icon-dashboard.svg',
             'url'      => '@system/dashboard/index',
             'active'   => '@system/dashboard/index',
             'priority' => 0
@@ -72,7 +72,7 @@ return array(
         ),
         'system: settings' => array(
             'label'    => 'Settings',
-            'icon'     => 'asset://system/images/icon-settings-system.svg',
+            'icon'     => 'asset://system/images/icon-settings.svg',
             'url'      => '@system/system/index',
             'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
             'priority' => 110

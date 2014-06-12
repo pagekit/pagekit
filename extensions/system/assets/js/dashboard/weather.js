@@ -66,7 +66,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
         };
 
-        return require.toUrl('extensions/system/assets/images/icon-weather-' + icons[icon]);
+        return require.toUrl('extensions/system/assets/images/weather-' + icons[icon]);
     }
 
     // widget settings

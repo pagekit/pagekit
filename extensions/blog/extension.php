@@ -31,6 +31,7 @@ return array(
 
         'blog' => array(
             'label'  => 'Blog',
+            'icon'   => 'extension://blog/extension.svg',
             'url'    => '@blog/post/index',
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'

@@ -2,24 +2,11 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="icon-page" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-<rect x="8" y="5" fill="#FFFFFF" width="34" height="40"/>
-<path fill="#8AA345" d="M31,40c0,0.553-0.447,1-1,1H20c-0.553,0-1-0.447-1-1v-1c0-0.553,0.447-1,1-1h10c0.553,0,1,0.447,1,1V40z"/>
-<path fill="#ABD456" d="M31,39c0,0.553-0.447,1-1,1H20c-0.553,0-1-0.447-1-1v-1c0-0.553,0.447-1,1-1h10c0.553,0,1,0.447,1,1V39z"/>
-<rect x="12" y="10" fill="#EBF4F8" width="26" height="15"/>
-<rect x="12" y="15" fill="#CEDCE2" width="1" height="5"/>
-<rect x="37" y="15" fill="#CEDCE2" width="1" height="5"/>
-<rect x="23" y="24" fill="#CEDCE2" width="3" height="1"/>
-<rect x="18" y="24" fill="#CEDCE2" width="3" height="1"/>
-<rect x="28" y="24" fill="#CEDCE2" width="4" height="1"/>
-<polygon fill="#CEDCE2" points="15,24 15,25 12,25 12,22 13,22 13,24 "/>
-<polygon fill="#CEDCE2" points="38,22 38,25 35,25 35,24 37,24 37,22 "/>
-<rect x="23" y="10" fill="#CEDCE2" width="3" height="1"/>
-<rect x="28" y="10" fill="#CEDCE2" width="4" height="1"/>
-<rect x="18" y="10" fill="#CEDCE2" width="3" height="1"/>
-<polygon fill="#CEDCE2" points="15,10 15,11 13,11 13,13 12,13 12,10 "/>
-<polygon fill="#CEDCE2" points="38,10 38,13 37,13 37,11 35,11 35,10 "/>
-<rect x="12" y="28" fill="#D5ECF7" width="26" height="2"/>
-<rect x="12" y="32" fill="#D5ECF7" width="26" height="2"/>
-<path fill="#D4E0E6" d="M42,4H8C7.45,4,7,4.45,7,5v40c0,0.55,0.45,1,1,1h34c0.55,0,1-0.45,1-1V5C43,4.45,42.55,4,42,4z M42,44
-	c0,0.55-0.45,1-1,1H9c-0.55,0-1-0.45-1-1V6c0-0.55,0.45-1,1-1h32c0.55,0,1,0.45,1,1V44z"/>
+<path fill="#FFD564" d="M44,17v29c0,1.1-0.9,2-2,2H10c-1.1,0-2-0.9-2-2V4c0-1.1,0.9-2,2-2h19L44,17z"/>
+<polygon fill="#FFAC43" points="44,17 29,17 29,2 "/>
+<polygon fill="#FFC053" points="44,32 29,17 44,17 "/>
+<rect x="15" y="14" fill="#FFFFFF" width="10" height="3"/>
+<rect x="15" y="21" fill="#FFFFFF" width="22" height="3"/>
+<rect x="15" y="27" fill="#FFFFFF" width="22" height="3"/>
+<rect x="15" y="33" fill="#FFFFFF" width="14" height="3"/>
 </svg>

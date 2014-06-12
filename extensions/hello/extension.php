@@ -31,6 +31,7 @@ return array(
 
         'hello' => array(
             'label'  => 'Hello',
+            'icon'   => 'extension://hello/extension.svg',
             'url'    => '@hello/hello/index',
             'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'
