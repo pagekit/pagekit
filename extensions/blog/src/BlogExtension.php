@@ -32,7 +32,7 @@ class BlogExtension extends Extension
             $event->register('comment.edit', 'extension://blog/assets/tmpl/comment.edit.razr.php');
         });
 
-        $app->on('site.init', function() use ($app) {
+        $app->on('system.init', function() use ($app) {
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default/index');
         }, 16);
 
