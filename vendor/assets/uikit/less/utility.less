@@ -423,9 +423,8 @@
 
 /*
  * Visibility
- * Avoids setting display to `block`
+ * Avoids setting display to `block` so it works also with `inline-block` and `table`
  */
-
 
 /* Desktop and bigger */
 @media (min-width: @breakpoint-large) {
@@ -436,7 +435,7 @@
 
 }
 
-/* Only tablets portrait */
+/* Tablets portrait */
 @media (min-width: @breakpoint-medium) and (max-width: @breakpoint-medium-max) {
 
     .uk-visible-small { display: none !important; }
@@ -445,7 +444,7 @@
 
 }
 
-/* Phone landscape and smaller */
+/* Phone landscape and smaller*/
 @media (max-width: @breakpoint-small-max) {
 
     .uk-visible-medium { display: none !important; }

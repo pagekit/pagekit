@@ -1,4 +1,4 @@
-/*! UIkit 2.6.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.7.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(core) {
 
@@ -48,7 +48,7 @@
         return UI;
     }
 
-    UI.version = '2.6.0';
+    UI.version = '2.7.1';
 
     UI.fn = function(command, options) {
 
@@ -315,6 +315,25 @@
 
     // add touch identifier class
     $html.addClass(UI.support.touch ? "uk-touch" : "uk-notouch");
+
+    // add uk-hover class on tap to support overlays on touch devices
+    if (UI.support.touch) {
+
+        var hoverset = false, selector = '.uk-overlay, .uk-overlay-toggle, .uk-has-hover', exclude;
+
+        $doc.on('touchstart MSPointerDown', selector, function() {
+
+            if(hoverset) $('.uk-hover').removeClass('uk-hover');
+
+            hoverset = $(this).addClass('uk-hover');
+
+        }).on('touchend MSPointerUp', function(e) {
+
+            exclude = $(e.target).parents(selector);
+
+            if (hoverset) hoverset.not(exclude).removeClass('uk-hover');
+        });
+    }
 
     return UI;
 });
@@ -923,7 +942,9 @@
             var $this = this;
 
             this.on("click", this.options.target, function(e) {
-                e.preventDefault();
+
+                if ($(this).is('a[href="#"]')) e.preventDefault();
+
                 $this.find($this.options.target).not(this).removeClass("uk-active").blur();
                 $this.trigger("change", [$(this).addClass("uk-active")]);
             });
@@ -946,7 +967,9 @@
             var $this = this;
 
             this.on("click", this.options.target, function(e) {
-                e.preventDefault();
+
+                if ($(this).is('a[href="#"]')) e.preventDefault();
+
                 $this.trigger("change", [$(this).toggleClass("uk-active").blur()]);
             });
 
@@ -967,7 +990,9 @@
             var $this = this;
 
             this.on("click", function(e) {
-                e.preventDefault();
+
+                if ($this.element.is('a[href="#"]')) e.preventDefault();
+
                 $this.toggle();
                 $this.trigger("change", [$element.blur().hasClass("uk-active")]);
             });
@@ -1072,7 +1097,7 @@
 
                     } else {
 
-                        if ($target.is("a") || !$this.find(".uk-dropdown").find(e.target).length) {
+                        if ($target.is("a:not(.js-uk-prevent)") || $target.is(".uk-dropdown-close") || !$this.dropdown.find(e.target).length) {
                             $this.element.removeClass("uk-open");
                             active = false;
                         }
@@ -1140,7 +1165,9 @@
             setTimeout(function() {
                 $(document).on("click.outer.dropdown", function(e) {
 
-                    if (active && active[0] == $this.element[0] && ($(e.target).is("a") || !$this.find(".uk-dropdown").find(e.target).length)) {
+                    var $target = $(e.target);
+
+                    if (active && active[0] == $this.element[0] && ($target.is("a:not(.js-uk-prevent)") || $target.is(".uk-dropdown-close") || !$this.dropdown.find(e.target).length)) {
                         active.removeClass("uk-open");
                         $(document).off("click.outer.dropdown");
                     }
@@ -1411,7 +1438,7 @@
 
     "use strict";
 
-    var active = false, html = $("html");
+    var active = false, body;
 
     UI.component('modal', {
 
@@ -1425,6 +1452,8 @@
         transition: false,
 
         init: function() {
+
+            if (!body) body = $('body');
 
             var $this = this;
 
@@ -1462,9 +1491,11 @@
             this.resize();
 
             active = this;
-            html.addClass("uk-modal-page").height(); // force browser engine redraw
+            body.addClass("uk-modal-page").height(); // force browser engine redraw
 
             this.element.addClass("uk-open").trigger("uk.modal.show");
+
+            $(document).trigger("uk-check-display");
 
             return this;
         },
@@ -1493,9 +1524,9 @@
 
             var paddingdir = "padding-" + (UI.langdirection == 'left' ? "right":"left");
 
-            this.scrollbarwidth = window.innerWidth - html.width();
+            this.scrollbarwidth = window.innerWidth - body.width();
 
-            html.css(paddingdir, this.scrollbarwidth);
+            body.css(paddingdir, this.scrollbarwidth);
 
             this.element.css(paddingdir, "");
 
@@ -1530,7 +1561,7 @@
 
             this.element.hide().removeClass("uk-open");
 
-            html.removeClass("uk-modal-page").css("padding-" + (UI.langdirection == 'left' ? "right":"left"), "");
+            body.removeClass("uk-modal-page").css("padding-" + (UI.langdirection == 'left' ? "right":"left"), "");
 
             if(active===this) active = false;
 
@@ -1675,6 +1706,7 @@
     var scrollpos = {x: window.scrollX, y: window.scrollY},
         $win      = $(window),
         $doc      = $(document),
+        $html     = $('html'),
         Offcanvas = {
 
         show: function(element) {
@@ -1683,7 +1715,7 @@
 
             if (!element.length) return;
 
-            var $html     = $('body'),
+            var $body     = $('body'),
                 winwidth  = $win.width(),
                 bar       = element.find(".uk-offcanvas-bar:first"),
                 rtl       = ($.UIkit.langdirection == "right"),
@@ -1694,8 +1726,10 @@
 
             element.addClass("uk-active");
 
-            $html.css({"width": window.innerWidth, "height": window.innerHeight}).addClass("uk-offcanvas-page");
-            $html.css((rtl ? "margin-right" : "margin-left"), (rtl ? -1 : 1) * (bar.outerWidth() * dir)).width(); // .width() - force redraw
+            $body.css({"width": window.innerWidth, "height": $win.height()}).addClass("uk-offcanvas-page");
+            $body.css((rtl ? "margin-right" : "margin-left"), (rtl ? -1 : 1) * (bar.outerWidth() * dir)).width(); // .width() - force redraw
+
+            $html.css('margin-top', scrollpos.y * -1);
 
             bar.addClass("uk-offcanvas-bar-show");
 
@@ -1724,7 +1758,7 @@
 
         hide: function(force) {
 
-            var $html = $('body'),
+            var $body = $('body'),
                 panel = $(".uk-offcanvas.uk-active"),
                 rtl   = ($.UIkit.langdirection == "right"),
                 bar   = panel.find(".uk-offcanvas-bar:first");
@@ -1733,9 +1767,10 @@
 
             if ($.UIkit.support.transition && !force) {
 
-                $html.one($.UIkit.support.transition.end, function() {
-                    $html.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
+                $body.one($.UIkit.support.transition.end, function() {
+                    $body.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
                     panel.removeClass("uk-active");
+                    $html.css('margin-top', '');
                     window.scrollTo(scrollpos.x, scrollpos.y);
                 }).css((rtl ? "margin-right" : "margin-left"), "");
 
@@ -1744,9 +1779,10 @@
                 }, 0);
 
             } else {
-                $html.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
+                $body.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
                 panel.removeClass("uk-active");
                 bar.removeClass("uk-offcanvas-bar-show");
+                $html.css('margin-top', '');
                 window.scrollTo(scrollpos.x, scrollpos.y);
             }
 
@@ -1937,19 +1973,25 @@
             $tooltip.stop().css({"top": -2000, "visibility": "hidden"}).show();
             $tooltip.html('<div class="uk-tooltip-inner">' + this.tip + '</div>');
 
-            var $this    = this,
-                pos      = $.extend({}, this.element.offset(), {width: this.element[0].offsetWidth, height: this.element[0].offsetHeight}),
-                width    = $tooltip[0].offsetWidth,
-                height   = $tooltip[0].offsetHeight,
-                offset   = typeof(this.options.offset) === "function" ? this.options.offset.call(this.element) : this.options.offset,
-                position = typeof(this.options.pos) === "function" ? this.options.pos.call(this.element) : this.options.pos,
-                tcss     = {
+            var $this      = this,
+                bodyoffset = $('body').offset(),
+                pos        = $.extend({}, this.element.offset(), {width: this.element[0].offsetWidth, height: this.element[0].offsetHeight}),
+                width      = $tooltip[0].offsetWidth,
+                height     = $tooltip[0].offsetHeight,
+                offset     = typeof(this.options.offset) === "function" ? this.options.offset.call(this.element) : this.options.offset,
+                position   = typeof(this.options.pos) === "function" ? this.options.pos.call(this.element) : this.options.pos,
+                tmppos     = position.split("-"),
+                tcss       = {
                     "display": "none",
                     "visibility": "visible",
                     "top": (pos.top + pos.height + height),
                     "left": pos.left
-                },
-                tmppos = position.split("-");
+                };
+
+            // prevent strange position
+            // when tooltip is in offcanvas etc.
+            pos.left -= bodyoffset.left;
+            pos.top  -= bodyoffset.top;
 
             if ((tmppos[0] == "left" || tmppos[0] == "right") && $.UIkit.langdirection == 'right') {
                 tmppos[0] = tmppos[0] == "left" ? "right" : "left";
@@ -2089,7 +2131,7 @@
             var $this = this;
 
             this.on("click", this.options.toggle, function(e) {
-                e.preventDefault();
+                if ($(this).is('a[href="#"]')) e.preventDefault();
                 $this.show(this);
             });
 
@@ -2412,7 +2454,8 @@
         defaults: {
             duration: 1000,
             transition: 'easeOutExpo',
-            offset: 0
+            offset: 0,
+            complete: function(){}
         },
 
         init: function() {
@@ -2432,8 +2475,8 @@
                     target = docheight - winheight;
                 }
 
-                // animate to target and set the hash to the window.location after the animation
-                $("html,body").stop().animate({scrollTop: target}, $this.options.duration, $this.options.transition);
+                // animate to target, fire callback when done
+                $("html,body").stop().animate({scrollTop: target}, $this.options.duration, $this.options.transition).promise().done($this.options.complete);
 
                 // cancel default click action
                 return false;
@@ -2454,6 +2497,8 @@
             var obj = UI.smoothScroll(ele, UI.Utils.options(ele.attr("data-uk-smooth-scroll")));
             ele.trigger("click");
         }
+
+        return false;
     });
 
 })(jQuery, jQuery.UIkit);
@@ -2476,7 +2521,7 @@
             this.totoggle = this.options.target ? $(this.options.target):[];
 
             this.on("click", function(e) {
-                e.preventDefault();
+                if ($this.element.is('a[href="#"]')) e.preventDefault();
                 $this.toggle();
             });
         },

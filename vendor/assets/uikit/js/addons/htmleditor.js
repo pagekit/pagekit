@@ -1,4 +1,4 @@
-/*! UIkit 2.6.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.7.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(addon) {
 
@@ -16,6 +16,7 @@
 
 })(function($, UI) {
 
+    var editors = [];
 
     UI.component('htmleditor', {
 
@@ -121,6 +122,8 @@
             this.on('init', function() {
                 $this.redraw();
             });
+
+            editors.push(this);
         },
 
         addButton: function(name, button) {
@@ -578,6 +581,12 @@
             if (!editor.data('htmleditor')) {
                 obj = UI.htmleditor(editor, UI.Utils.options(editor.attr('data-uk-htmleditor')));
             }
+        });
+    });
+
+    $(document).on("uk-check-display", function(e) {
+        editors.forEach(function(item) {
+            if(item.htmleditor.is(":visible")) item.fit();
         });
     });
 
