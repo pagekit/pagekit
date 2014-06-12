@@ -58,8 +58,11 @@ class UserController extends Controller
             if (is_numeric($filter['status'])) {
                 $filter['status'] = (int) $filter['status'];
                 $query->where(array('status' => intval($filter['status'])));
+                if (!$filter['status']) {
+                    $query->where('access IS NOT NULL');
+                }
             } elseif ('new' == $filter['status']) {
-                $query->where(array('status' => User::STATUS_BLOCKED, 'access IS NULL', 'activation > ""'));
+                $query->where(array('status' => User::STATUS_BLOCKED, 'access IS NULL'));
             }
         }
 

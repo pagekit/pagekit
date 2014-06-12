@@ -169,6 +169,11 @@ class User extends BaseUser
         return $this->isAdministrator() || parent::hasAccess($expression);
     }
 
+    public function isNew()
+    {
+        return $this->isBlocked() && !$this->access;
+    }
+
     /**
      * Save related user roles.
      *

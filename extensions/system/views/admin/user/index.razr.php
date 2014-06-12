@@ -77,7 +77,7 @@
                         <div class="uk-text-muted">@user.name</div>
                     </td>
                     <td class="uk-text-center">
-                        @if (!user.status && !user.access && user.activation)
+                        @if (user.isNew)
                         <a href="#" class="uk-icon-circle" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => 1])" title="@trans('New')"></a>
                         @else
                         <a href="#" class="uk-icon-circle uk-text-@( user.status ? 'success' : 'danger' )" data-action="@url.route('@system/user/status', ['ids[]' => user.id, 'status' => user.status ? 0 : 1])" title="@user.statusText"></a>
