@@ -13,10 +13,9 @@ class FrontpageListener extends EventSubscriber
     public function onSystemInit()
     {
         if ($frontpage = $this('config')->get('app.frontpage')) {
-            $route = $this('system.info')->resolveUrl($frontpage);
-            $this('router')->getUrlAliases()->register('/', $route);
-            $this('router')->get($route, '@frontpage', function() {});
+            $this('router')->getUrlAliases()->add('/', $frontpage);
         }
+        $this('router')->getUrlAliases()->add('/', '@frontpage');
     }
 
     /**
@@ -39,7 +38,7 @@ class FrontpageListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init' => array('onSystemInit', -10),
+            'system.init' => array('onSystemInit', -15),
             'system.menu' => 'onSystemMenu'
         );
     }

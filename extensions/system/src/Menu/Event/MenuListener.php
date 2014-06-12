@@ -53,27 +53,20 @@ class MenuListener extends EventSubscriber
      */
     public function onSystemMenu(ActiveMenuEvent $event)
     {
-        $url     = $this('url');
-        $request = $this('request');
-        $attr    = $request->attributes;
+        $request  = $this('request');
+        $route    = $request->attributes->get('_route');
+        $params   = $request->attributes->get('_route_params', array());
+        $internal = $route . ($params ? '?' . http_build_query($params) : '');
+
+        foreach ($event->get($route) as $id => $path) {
+            if (0 === strpos($path, $internal)) {
+                $event->add($id);
+            }
+        }
 
         $query   = $request->getQueryString();
         $path    = $request->getPathInfo();
         $current = $path.($query ? '?' . $query : '');
-        $paths   = array($path, $attr->get('_route_options[_main_route]', false, true) ?: $attr->get('_route'));
-
-        if ($alias = ltrim($attr->get('_system_path'), '/')) {
-            $paths[] = $alias;
-        }
-
-        foreach ($event->get($paths) as $id => $path) {
-            if ($route = $url->route($path, array(), 'base') and ($current == $route
-                || (0 === strpos($current, $route) && strpbrk($current[strlen($route)], '/?'))
-                || ($current && 0 === strpos($route, $current) && strpbrk($route[strlen($current)], '/?')))) {
-
-                $event->add($id);
-            }
-        }
 
         $event->match($current);
     }

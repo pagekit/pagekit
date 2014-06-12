@@ -12,7 +12,7 @@ class AliasListener extends EventSubscriber
     /**
      * Registers the url aliases.
      */
-    public function registerAliases()
+    public function onSystemInit()
     {
         $manager = $this('router')->getUrlAliases();
         $aliases = $this('cache.phpfile')->fetch('page.aliases') ?: array();
@@ -23,7 +23,7 @@ class AliasListener extends EventSubscriber
 
             foreach ($pages->where(array('status' => Page::STATUS_PUBLISHED))->get() as $page) {
                 if ($page->getUrl() !== '') {
-                    $aliases[$page->getUrl()] = $this('url')->route('@page/id', array('id' => $page->getId()), 'base');
+                    $aliases[$page->getUrl()] = '@page/id?id=' . $page->getId();
                 }
             }
 
@@ -31,7 +31,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias => $source) {
-            $manager->register($alias, $source);
+            $manager->add($alias, $source);
         }
     }
 
@@ -49,7 +49,7 @@ class AliasListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init'          => 'registerAliases',
+            'system.init'          => 'onSystemInit',
             'page.page.postSave'   => 'clearCache',
             'page.page.postDelete' => 'clearCache'
         );

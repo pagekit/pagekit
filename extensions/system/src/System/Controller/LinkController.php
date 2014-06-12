@@ -18,14 +18,4 @@ class LinkController extends Controller
     {
         return array('links' => $this('events')->dispatch('system.link', new LinkEvent($context)));
     }
-
-    /**
-     * @Request({"link"})
-     */
-    public function resolveAction($link)
-    {
-        $resolved = $this('url')->route($link, array(), 'base');
-
-        return $this('response')->json(false !== $resolved ? array('url' => $resolved) : array('error' => true, 'message' => __('Invalid URL.')));
-    }
 }

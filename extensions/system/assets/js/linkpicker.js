@@ -26,30 +26,15 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
 
         source
             .on('change', function () {
-                if (!source.val()) {
-                    source.trigger('resolved', '');
-                    return;
-                }
-
-                var resolved = '';
-                $.post(options.url, { link: source.val() },function (data) {
-
-                    resolved = data.url ? decodeURIComponent(data.url) : source.val();
-
-                }, 'json').always(function () {
-                    source.trigger('resolved', resolved);
-                });
-            })
-            .on('resolved',function (e, resolved) {
                 var text = $('.js-picker-resolved', trigger);
-                text.text(resolved.length && source.val().length ? resolved : text.data('text-empty'));
-            }).trigger('change');
+                text.text(source.val().length ? source.val() : text.data('text-empty'));
+            })
+            .trigger('change');
     };
 
     LinkPicker.defaults = {
-        url    : req.toUrl('index.php/admin/system/link/resolve'),
-        filter : [],
-        context: '',
+        filter   : [],
+        context  : '',
         textEmpty: 'Choose Link'
     };
 

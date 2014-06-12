@@ -21,7 +21,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias) {
-            $manager->register(rawurlencode($alias->getAlias()), $this('url')->route($alias->getSource(), array(), 'base'));
+            $manager->add(rawurlencode($alias->getAlias()), $alias->getSource());
         }
     }
 
@@ -39,7 +39,7 @@ class AliasListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init'             => array('onSystemInit', 10),
+            'system.init'             => array('onSystemInit', -10),
             'system.alias.postSave'   => 'clearCache',
             'system.alias.postDelete' => 'clearCache'
         );

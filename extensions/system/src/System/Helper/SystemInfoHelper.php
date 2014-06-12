@@ -3,7 +3,6 @@
 namespace Pagekit\System\Helper;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Pagekit\Component\Routing\Event\GenerateUrlEvent;
 use Pagekit\Framework\ApplicationAware;
 use PDO;
 use Symfony\Component\Finder\Finder;
@@ -37,28 +36,6 @@ class SystemInfoHelper extends ApplicationAware
         $info['directories']   = $this->getDirectories();
 
         return $info;
-    }
-
-    /**
-     * Resolves an internal url
-     *
-     * @param  string $url
-     * @return bool|string
-     */
-    public function resolveUrl($url)
-    {
-        $listener = function(GenerateUrlEvent $event) { $event->stopPropagation(); };
-        $this('app')->on('url.generate', $listener, 32);
-
-        try {
-            $url = $this('url')->route($url, array(), 'base');
-        } catch (\Exception $e) {
-            $url = false;
-        }
-
-        $this('events')->removeListener('url.generate', $listener);
-
-        return $url;
     }
 
     /**

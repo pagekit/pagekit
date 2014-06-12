@@ -90,7 +90,7 @@ class AliasController extends Controller
                 throw new Exception(__('Invalid alias.'));
             }
 
-            if (!$source = trim($source, '/')) {
+            if (!$source = trim($source, '/') or strpos($source, '@') !== 0) {
                 throw new Exception(__('Invalid source.'));
             }
 
