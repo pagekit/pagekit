@@ -21,7 +21,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias) {
-            $manager->add(rawurlencode($alias->getAlias()), $alias->getSource());
+            $manager->add($alias->getAlias(), $alias->getSource());
         }
     }
 
