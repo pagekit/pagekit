@@ -61,7 +61,7 @@
                 <div class="uk-form-controls@(user.id ? ' js-password uk-hidden')">
                     <div class="uk-form-password">
                         <input id="form-password" class="uk-form-width-large" type="password" name="password" value="">
-                        <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
+                        <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
                     </div>
                 </div>
 
