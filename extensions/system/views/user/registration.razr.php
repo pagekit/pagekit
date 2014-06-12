@@ -2,7 +2,7 @@
 
 <form class="uk-article uk-form uk-form-stacked" action="@url.route('@system/registration/register')" method="post">
 
-    <h1 class="uk-article-title">@trans('User Registration')</h1>
+    <h1 class="uk-article-title">@trans('Registration')</h1>
 
     <div class="uk-form-row">
         <label for="form-username" class="uk-form-label">@trans('Username')</label>
