@@ -47,13 +47,15 @@
     </div>
 
     <div class="uk-form-row">
-        <label class="uk-form-label">@trans('Restrict Access')</label>
-        <input type="hidden" name="item[roles]" value="">
-        @foreach (roles as role)
-        <div class="uk-form-controls">
-            <label><input type="checkbox" name="item[roles][]" value="@role.id"@(item.hasRole(role) ? ' checked' )> @role.name</label>
+        <span class="uk-form-label">@trans('Restrict Access')</span>
+        <div class="uk-form-controls uk-form-controls-text">
+            <input type="hidden" name="item[roles]" value="">
+            @foreach (roles as role)
+            <p class="uk-form-controls-condensed">
+                <label><input type="checkbox" name="item[roles][]" value="@role.id"@(item.hasRole(role) ? ' checked' )> @role.name</label>
+            </p>
+            @endforeach
         </div>
-        @endforeach
     </div>
 
     <div class="uk-form-row">
