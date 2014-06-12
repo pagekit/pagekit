@@ -47,7 +47,7 @@
     </div>
 
     <div class="uk-form-row">
-        <label class="uk-form-label">@trans('Access')</label>
+        <label class="uk-form-label">@trans('Restrict Access')</label>
         <input type="hidden" name="item[roles]" value="">
         @foreach (roles as role)
         <div class="uk-form-controls">
