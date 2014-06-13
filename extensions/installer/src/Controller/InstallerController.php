@@ -139,7 +139,7 @@ class InstallerController extends Controller
             }
 
             foreach ($option as $key => $value) {
-                $this('option')->set($key, $value);
+                $this('option')->set($key, $value, true);
             }
 
             $status = 'success';
