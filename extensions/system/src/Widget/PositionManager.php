@@ -99,8 +99,6 @@ class PositionManager extends ApplicationAware implements \ArrayAccess, \Iterato
      */
     public function exists($expression)
     {
-        $self = $this;
-
         if (empty($expression)) {
             return true;
         }
@@ -109,8 +107,8 @@ class PositionManager extends ApplicationAware implements \ArrayAccess, \Iterato
             return $this->count($expression) > 0;
         }
 
-        $exp = preg_replace('/[^01&\(\)\|!]/', '', preg_replace_callback('/[a-z_][a-z-_\.:\d\s]*/i', function($position) use ($self) {
-            return $self->count(trim($position[0])) ? 1 : 0;
+        $exp = preg_replace('/[^01&\(\)\|!]/', '', preg_replace_callback('/[a-z_][a-z-_\.:\d\s]*/i', function($position) {
+            return $this->count(trim($position[0])) ? 1 : 0;
         }, $expression));
 
         if (!$fn = @create_function("", "return $exp;")) {

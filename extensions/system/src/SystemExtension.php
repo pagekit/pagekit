@@ -181,10 +181,8 @@ class SystemExtension extends Extension
      */
     public function clearCache(array $options = array())
     {
-        $self = $this;
-
-        $this('app')->on('kernel.terminate', function() use ($self, $options) {
-            $self->doClearCache($options);
+        $this('app')->on('kernel.terminate', function() use ($options) {
+            $this->doClearCache($options);
         }, -512);
     }
 
