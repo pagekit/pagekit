@@ -352,7 +352,7 @@ class RequirementCollection implements IteratorAggregate
  */
 class PagekitRequirements extends RequirementCollection
 {
-    const REQUIRED_PHP_VERSION = '5.3.7';
+    const REQUIRED_PHP_VERSION = '5.4.0';
 
     /**
      * Constructor that initializes the requirements.
@@ -372,12 +372,6 @@ class PagekitRequirements extends RequirementCollection
                 Before using Pagekit, upgrade your PHP installation, preferably to the latest version.',
                 $installedPhpVersion, self::REQUIRED_PHP_VERSION),
             sprintf('Install PHP %s or newer (installed version is %s)', self::REQUIRED_PHP_VERSION, $installedPhpVersion)
-        );
-
-        $this->addRequirement(
-            version_compare($installedPhpVersion, '5.3.16', '!='),
-            'PHP version must not be 5.3.16 as Pagekit won\'t work properly with it',
-            'Install PHP 5.3.17 or newer (or downgrade to an earlier PHP version)'
         );
 
         $this->addRequirement(
