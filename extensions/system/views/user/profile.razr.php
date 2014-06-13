@@ -17,6 +17,20 @@
     </div>
 
     <div class="uk-form-row">
+        <label for="form-password" class="uk-form-label">@trans('Password')</label>
+        <div class="uk-form-controls">
+            <input id="form-password" class="uk-form-width-large" type="password" name="user[password]" value="" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label for="form-password2" class="uk-form-label">@trans('Confirm Password')</label>
+        <div class="uk-form-controls">
+            <input id="form-password2" class="uk-form-width-large" type="password" name="user[password2]" value="" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
     </div>
 

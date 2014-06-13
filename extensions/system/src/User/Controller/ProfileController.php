@@ -8,7 +8,7 @@ use Pagekit\User\Entity\User;
 use Pagekit\User\Entity\UserRepository;
 
 /**
- * @Route("/profile")
+ * @Route("/user/profile")
  */
 class ProfileController extends Controller
 {
@@ -59,6 +59,8 @@ class ProfileController extends Controller
 
             $name  = trim(@$data['name']);
             $email = trim(@$data['email']);
+            $pass1 = @$data['password'];
+            $pass2 = @$data['password2'];
 
             if (strlen($name) < 3) {
                 throw new Exception(__('Name is invalid.'));
@@ -70,6 +72,19 @@ class ProfileController extends Controller
 
             if ($this->users->where(array('email = ?', 'id <> ?'), array($email, $user->getId()))->first()) {
                 throw new Exception(__('Email not available.'));
+            }
+
+            if ($pass1) {
+
+                if (trim($pass1) != $pass1 || strlen($pass1) < 3) {
+                    throw new Exception(__('Password is invalid.'));
+                }
+
+                if ($pass1 != $pass2) {
+                    throw new Exception(__('Passwords do not match.'));
+                }
+
+                $user->setPassword($this('auth.password')->hash($pass1));
             }
 
             $data['name']  = $name;

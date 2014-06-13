@@ -1,6 +1,7 @@
 <?php
 
 namespace Pagekit\Page\Entity;
+
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\Model\UserInterface;
 
@@ -139,15 +140,15 @@ class Page
     public static function getStatuses()
     {
         return array(
-            self::STATUS_UNPUBLISHED  => __('Unpublished'),
-            self::STATUS_PUBLISHED => __('Published')
+            self::STATUS_UNPUBLISHED => __('Unpublished'),
+            self::STATUS_PUBLISHED   => __('Published')
         );
     }
 
-	public function getStatusText()
+    public function getStatusText()
     {
-		$statuses = self::getStatuses();
+        $statuses = self::getStatuses();
 
-		return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
-	}
+        return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
+    }
 }
