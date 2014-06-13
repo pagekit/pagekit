@@ -7713,10 +7713,20 @@ a.uk-datepicker-table-muted {
     left: -25px;
   }
 }
+/* Modifier `pk-toolbar`
+========================================================================== */
+/*
+ * Only if toolbar is inside a modal
+ */
+.uk-modal .pk-toolbar {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
 /* Modifier `pk-breadcrumb`
 ========================================================================== */
 .pk-breadcrumb {
-  margin: -10px 0 20px 0;
+  margin: 0 0 20px 0;
   font-size: 12px;
 }
 /* Modifier `pk-button-danger`
