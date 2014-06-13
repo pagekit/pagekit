@@ -6,6 +6,7 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Entity\UserRepository;
+use Pagekit\User\Event\ProfileSaveEvent;
 
 /**
  * @Route("/user/profile")
@@ -87,14 +88,18 @@ class ProfileController extends Controller
                 $user->setPassword($this('auth.password')->hash($pass1));
             }
 
-            $data['name']  = $name;
-            $data['email'] = $email;
-
             if ($email != $user->getEmail()) {
                 $user->set('verified', false);
             }
 
-            $this->users->save($user, $data);
+            $user->setName($name);
+            $user->setEmail($email);
+
+            $this('events')->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
+
+            $this->users->save($user);
+
+            $this('events')->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 
             $this('message')->success(__('Profile updated.'));
 
