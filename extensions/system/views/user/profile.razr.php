@@ -19,7 +19,7 @@
     <div class="uk-form-row">
         <label for="form-password" class="uk-form-label">@trans('Password')</label>
         <div class="uk-form-controls">
-            <input id="form-password" class="uk-form-width-large" type="password" name="user[password]" value="" autocomplete="off">
+            <input id="form-password" class="uk-form-width-large" type="password" name="user[password1]" value="" autocomplete="off">
         </div>
     </div>
 

@@ -59,7 +59,7 @@ class ProfileController extends Controller
 
             $name  = trim(@$data['name']);
             $email = trim(@$data['email']);
-            $pass1 = @$data['password'];
+            $pass1 = @$data['password1'];
             $pass2 = @$data['password2'];
 
             if (strlen($name) < 3) {
