@@ -2998,7 +2998,7 @@ input[type].uk-form-small,
 input:not([type]).uk-form-small {
   height: 30px;
   padding: 3px 3px;
-  font-size: 12px;
+  font-size: 14px;
 }
 select.uk-form-large,
 textarea.uk-form-large,
