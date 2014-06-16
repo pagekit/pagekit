@@ -1,3 +1,5 @@
+@script('form-password', 'vendor://assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
+
 <form class="uk-article uk-form uk-form-stacked" action="@url.route('@system/profile/save')" method="post">
 
     <h1 class="uk-article-title">@trans('Your Profile')</h1>
@@ -17,16 +19,22 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-password" class="uk-form-label">@trans('Password')</label>
+        <label for="form-password-old" class="uk-form-label">@trans('Current Password')</label>
         <div class="uk-form-controls">
-            <input id="form-password" class="uk-form-width-large" type="password" name="user[password1]" value="" autocomplete="off">
+            <div class="uk-form-password">
+                <input id="form-password-old" class="uk-form-width-large" type="password" name="user[password_old]" value="">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
+            </div>
         </div>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-password2" class="uk-form-label">@trans('Confirm Password')</label>
+        <label for="form-password-new" class="uk-form-label">@trans('New Password')</label>
         <div class="uk-form-controls">
-            <input id="form-password2" class="uk-form-width-large" type="password" name="user[password2]" value="" autocomplete="off">
+            <div class="uk-form-password">
+                <input id="form-password-new" class="uk-form-width-large" type="password" name="user[password_new]" value="">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
+            </div>
         </div>
     </div>
 

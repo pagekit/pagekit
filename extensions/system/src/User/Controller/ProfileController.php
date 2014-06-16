@@ -58,10 +58,10 @@ class ProfileController extends Controller
 
             $user = $this->users->find($this->user->getId());
 
-            $name  = trim(@$data['name']);
-            $email = trim(@$data['email']);
-            $pass1 = @$data['password1'];
-            $pass2 = @$data['password2'];
+            $name    = trim(@$data['name']);
+            $email   = trim(@$data['email']);
+            $passNew = @$data['password_new'];
+            $passOld = @$data['password_old'];
 
             if (strlen($name) < 3) {
                 throw new Exception(__('Name is invalid.'));
@@ -75,17 +75,17 @@ class ProfileController extends Controller
                 throw new Exception(__('Email not available.'));
             }
 
-            if ($pass1) {
+            if ($passNew) {
 
-                if (trim($pass1) != $pass1 || strlen($pass1) < 3) {
-                    throw new Exception(__('Password is invalid.'));
+                if (!$this('auth')->getUserProvider()->validateCredentials($this->user, array('password' => $passOld))) {
+                    throw new Exception(__('Invalid Password.'));
                 }
 
-                if ($pass1 != $pass2) {
-                    throw new Exception(__('Passwords do not match.'));
+                if (trim($passNew) != $passNew || strlen($passNew) < 3) {
+                    throw new Exception(__('New Password is invalid.'));
                 }
 
-                $user->setPassword($this('auth.password')->hash($pass1));
+                $user->setPassword($this('auth.password')->hash($passNew));
             }
 
             if ($email != $user->getEmail()) {
