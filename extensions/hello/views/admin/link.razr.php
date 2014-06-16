@@ -9,8 +9,8 @@
 
     require(['jquery'], function($) {
 
-        $('#form-name').on('change', function() {
-            $('#form-url').val('@link?name=' + $(this).val());
+        $('.js-linkpicker #form-name').on('change', function() {
+            $('.js-linkpicker #form-url').val('@link?name=' + $(this).val());
         }).trigger('change');
 
     });
