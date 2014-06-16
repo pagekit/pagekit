@@ -1,6 +1,8 @@
 define(['jquery', 'module'], function ($, mod) {
 
-    var system = $('meta[name="generator"]').data(), config = mod.config(), locale = {};
+    var system = $('meta[name="generator"]').data(), locale = {};
+
+    system.config = mod.config();
 
     system.csrf = {token: system.csrf, param: '_csrf', params: {'_csrf': system.csrf}};
 
@@ -41,9 +43,9 @@ define(['jquery', 'module'], function ($, mod) {
         $.each(res.split(','), function(i, name) {
             if (name == 'locale') {
                 index = i;
-                load.push('json!index.php/system/locale');
+                load.push(system.config.locale);
             } else {
-                load.push(config.base + name);
+                load.push(system.config.base + name);
             }
         });
 
