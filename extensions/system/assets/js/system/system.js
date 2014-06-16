@@ -1,9 +1,8 @@
 define(['jquery', 'module'], function ($, mod) {
 
-    var system = $('meta[name="generator"]').data(), csrf = $('meta[name="csrf"]').data(), config = mod.config(), locale = {};
+    var system = $('meta[name="generator"]').data(), config = mod.config(), locale = {};
 
-    system.csrf = $.extend(csrf, {'params': {}});
-    system.csrf.params[csrf.param] = csrf.token;
+    system.csrf = {token: system.csrf, param: '_csrf', params: {'_csrf': system.csrf}};
 
     system.trans = function(id, parameters, domain){
 

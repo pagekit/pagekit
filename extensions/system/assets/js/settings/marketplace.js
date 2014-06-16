@@ -1,4 +1,4 @@
-define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, tmpl, uikit) {
+define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, system, tmpl, uikit) {
 
     var updates = {}, packages = {}, element, form, details, modal, params;
 
@@ -16,7 +16,6 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
         }
 
         modal.show();
-
     }
 
     // details install button
@@ -27,7 +26,7 @@ define('marketplace', ['jquery', 'tmpl!marketplace.table,marketplace.details', '
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
-        $.post(params.url, { package: JSON.stringify(packages[name].version) }, function(data) {
+        $.post(params.url, $.extend({package: JSON.stringify(packages[name].version)}, system.csrf.params), function(data) {
 
             if (data.message) {
                 packages[name].installed = true;
