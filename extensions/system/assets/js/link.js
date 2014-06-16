@@ -47,8 +47,8 @@ define(['jquery', 'require'], function($, req) {
             $.post(this.options.urlForm, { link: link, context: this.options.context }, function(data) {
 
                 $this.types.val(data.type ? data.type : '');
-                $this.edit.empty().append(data.form).toggleClass('uk-hidden', $this.edit.is(':empty'));
-
+                $this.edit.empty().append(data.form).toggleClass('uk-hidden', !$this.edit.children(':not(script)').length);
+                
             }, 'json');
 
         }
