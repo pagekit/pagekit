@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!nestable', 'domReady!'], function($, uikit) {
+require(['jquery', 'system', 'uikit!nestable', 'domReady!'], function($, system, uikit) {
 
     var form     = $('#js-role'),
         formPerm = $('#js-role-permissions'),
@@ -73,7 +73,7 @@ require(['jquery', 'uikit!nestable', 'domReady!'], function($, uikit) {
             data[item.id] = item.order;
         });
 
-        $.post(prioUpdateUrl, { order: data, _csrf: $('[name="_csrf"]').val() }, function(res) {
+        $.post(prioUpdateUrl, $.extend({order: data}, system.csrf.params), function(res) {
             uikit.notify(data.message || 'Roles order updated', 'success');
         });
 
@@ -87,6 +87,7 @@ require(['jquery', 'uikit!nestable', 'domReady!'], function($, uikit) {
         $.post(form.attr('action'), form.serialize(), function(data) {
             uikit.notify(data.message || 'Permissions saved', 'success');
         });
+
     }, 1000));
 
 });

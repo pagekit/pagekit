@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!nestable,form-select', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'system', 'uikit!nestable,form-select', 'rowselect', 'domReady!'], function($, system, uikit, RowSelect) {
 
     var form = $('#js-widgets')
 
@@ -13,7 +13,8 @@ require(['jquery', 'uikit!nestable,form-select', 'rowselect', 'domReady!'], func
 
             var list = $(this);
 
-            $.post(form.data('reorder'), { position: list.data('position'), order: list.data('nestable').serialize(), _csrf: $('[name="_csrf"]').val() }, function(data) {
+            $.post(form.data('reorder'), $.extend({position: list.data('position'), order: list.data('nestable').serialize()}, system.csrf.params), function(data) {
+
                 if (action == 'added' || action == 'moved') {
                     uikit.notify(data.message, 'success');
                 }
@@ -53,7 +54,6 @@ require(['jquery', 'uikit!nestable,form-select', 'rowselect', 'domReady!'], func
         .on('change', 'select[name^="filter"]', function() {
             applyFilters();
         });
-
 
     // check for empty positions
     try{
