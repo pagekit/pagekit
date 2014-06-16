@@ -1,38 +1,64 @@
-define('locale', ['json!index.php/system/locale'], function(locale) {
+define(['jquery', 'module'], function ($, mod) {
 
-    return {
+    var system = $('meta[name="generator"]').data(), csrf = $('meta[name="csrf"]').data(), config = mod.config(), locale = {};
 
-        trans: function(id, parameters, domain){
+    system.csrf = $.extend(csrf, {'params': {}});
+    system.csrf.params[csrf.param] = csrf.token;
 
-            if (parameters === undefined) {
-                parameters = {};
-            }
+    system.trans = function(id, parameters, domain){
 
-            if (domain === undefined) {
-                domain = 'messages';
-            }
-
-            if (locale[domain] && locale[domain][id]) {
-                id = locale[domain][id];
-            }
-
-            return strtr(id, parameters);
-        },
-
-        date: function(format, timestamp){
-
-            if (locale.date[format]) {
-                format = locale.date[format];
-            }
-
-            if (typeof timestamp === 'string') {
-                timestamp = new Date(timestamp);
-            }
-
-            return date(format, timestamp);
+        if (parameters === undefined) {
+            parameters = {};
         }
 
+        if (domain === undefined) {
+            domain = 'messages';
+        }
+
+        if (locale[domain] && locale[domain][id]) {
+            id = locale[domain][id];
+        }
+
+        return strtr(id, parameters);
     };
+
+    system.date = function(format, timestamp){
+
+        if (locale.date[format]) {
+            format = locale.date[format];
+        }
+
+        if (typeof timestamp === 'string') {
+            timestamp = new Date(timestamp);
+        }
+
+        return date(format, timestamp);
+    };
+
+    system.load = function(res, req, onload) {
+
+        var load = [], index;
+
+        $.each(res.split(','), function(i, name) {
+            if (name == 'locale') {
+                index = i;
+                load.push('json!index.php/system/locale');
+            } else {
+                load.push(config.base + name);
+            }
+        });
+
+        req(load, function() {
+
+            if (index !== undefined) {
+                locale = arguments[index];
+            }
+
+            onload(system);
+        });
+    };
+
+    return system;
 
     /**
      * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
@@ -332,4 +358,5 @@ define('locale', ['json!index.php/system/locale'], function(locale) {
 
         return this.date(format, timestamp);
     }
+
 });

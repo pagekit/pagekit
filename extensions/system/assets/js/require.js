@@ -28,7 +28,6 @@ var require = (function(win, doc) {
                         'finder':     'extensions/system/assets/js/finder.js?ver=' + vers,
                         'link':       'extensions/system/assets/js/link.js?ver=' + vers,
                         'linkpicker': 'extensions/system/assets/js/linkpicker.js?ver=' + vers,
-                        'locale':     'extensions/system/assets/js/locale.js?ver=' + vers,
                         'editor':     'extensions/system/assets/js/editor/editor.js?ver=' + vers
                     },
                     shim: {
@@ -45,6 +44,9 @@ var require = (function(win, doc) {
                     config: {
                         'uikit': {
                             base: 'vendor/assets/uikit/'
+                        },
+                        'system': {
+                            base: 'extensions/system/assets/js/system/'
                         },
                         'tmpl': {
                             url: script + 'system/tmpl/'

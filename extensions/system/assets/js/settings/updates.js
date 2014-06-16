@@ -1,4 +1,4 @@
-require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!upload', 'locale', 'domReady!'], function($, marketplace, tmpl, uikit, locale) {
+require(['jquery', 'marketplace', 'system!locale', 'tmpl!package.updates,package.upload', 'uikit!upload', 'domReady!'], function($, marketplace, system, tmpl, uikit) {
 
     var page = $('#js-extensions, #js-themes'), update = $('.js-update', page), upload = $('.js-upload', page), market = $('.js-marketplace', page), params = page.data(), packages = {}, modal;
 
@@ -8,7 +8,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
         if (data.packages.length) {
 
             $.each(data.packages, function(i, p) {
-                p.version.released = locale.date('medium', p.version.released);
+                p.version.released = system.date('medium', p.version.released);
                 packages[p.name] = p;
             });
 
@@ -63,7 +63,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
 
         action: upload.data("action"),
         type  : 'json',
-        params: {'_csrf': upload.find('input[name="_csrf"]').val() },
+        params: system.csrf.params,
         param : 'file',
 
         loadstart: function() {
@@ -121,7 +121,7 @@ require(['jquery', 'marketplace', 'tmpl!package.updates,package.upload', 'uikit!
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
-        $.post(params.url, {'path': path}, function(data) {
+        $.post(params.url, $.extend({'path': path}, system.csrf.params), function(data) {
 
             if (data.message) {
                 modal.hide();

@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!form-select', 'locale', 'domReady!'], function($, uikit, locale) {
+require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-post'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -32,7 +32,7 @@ require(['jquery', 'uikit!form-select', 'locale', 'domReady!'], function($, uiki
         });
 
         return function(e) {
-            if (dirty) return locale.trans('post.unsaved-form');
+            if (dirty) return system.trans('post.unsaved-form');
         };
 
     })();

@@ -2,7 +2,7 @@
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 
-<div id="js-extensions" class="uk-grid uk-grid-divider" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install', ['_csrf' => app.csrf.generate])" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
+<div id="js-extensions" class="uk-grid uk-grid-divider" data-api="@api" data-key="@key" data-url="@url.route('@system/package/install')" data-installed="@packagesJson|e" data-uk-grid-margin data-uk-grid-match>
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">
 
