@@ -7,8 +7,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
         var source  = $(element),
             modal   = $(tmpl.get('linkpicker.modal')).appendTo('body'),
             picker  = uikit.modal(modal),
-            trigger = $(tmpl.get('linkpicker.replace')).insertAfter(source),
-            link;
+            replace = $('<span>').insertAfter(source), link;
 
         modal.on('submit', 'form', function (e) {
             e.preventDefault();
@@ -17,25 +16,39 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
             source.val(link.get()).trigger('change');
         });
 
-        trigger.on('click', function (e) {
+        source.parent().on('click', '.js-linkpicker-trigger', function (e) {
             e.preventDefault();
 
-            link = Link.attach(modal.find('.js-linkpicker'), { filter: options.filter, context: options.context, value: source.val() });
+            link = Link.attach(modal.find('.js-linkpicker'), { context: options.context, value: source.val() });
             picker.show();
         });
 
         source
             .on('change', function () {
-                var text = $('.js-picker-resolved', trigger);
-                text.text(source.val().length ? source.val() : text.data('text-empty'));
-            })
-            .trigger('change');
+
+                if (!source.val()) {
+                    preview(null);
+                    return;
+                }
+
+                $.post(options.url, { link: source.val(), context: options.context },function (data) {
+
+                    preview(data);
+
+                }, 'json').fail(function() {
+                    preview(null);
+                });
+
+            }).trigger('change');
+
+        function preview(data) {
+            replace = $(tmpl.render('linkpicker.replace', data)).replaceAll(replace);
+        }
     };
 
     LinkPicker.defaults = {
-        filter   : [],
-        context  : '',
-        textEmpty: 'Choose Link'
+        url    : req.toUrl('index.php/admin/system/link/resolve'),
+        context: ''
     };
 
     return LinkPicker;

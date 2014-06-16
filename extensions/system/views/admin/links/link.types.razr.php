@@ -10,15 +10,9 @@
         <select id="form-type" class="js-types uk-width-1-1" name="type">
             <option value="">@trans('Pick URL')</option>
             @foreach(links as link)
-            <option value="@link.route">@link.label</option>
+            <option value="@link.id">@link.label</option>
             @endforeach
         </select>
     </div>
 </div>
-<div class="js-edit uk-form-row uk-hidden">
-    @foreach(links as link)
-    <div data-type="@link.route">
-        @link.renderForm()
-    </div>
-    @endforeach
-</div>
+<div class="js-edit uk-form-row uk-hidden"></div>

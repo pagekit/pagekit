@@ -48,7 +48,7 @@ class LinkEvent extends Event implements \IteratorAggregate
             $link = new $link;
         }
 
-        $this[$link->getRoute()] = $link;
+        $this->parameters[$link->getId()] = $link;
 
         uasort($this->parameters, function(LinkInterface $typeA, LinkInterface $typeB) { return strcmp($typeA->getLabel(), $typeB->getLabel()); });
     }

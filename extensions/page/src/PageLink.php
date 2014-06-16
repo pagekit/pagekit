@@ -2,9 +2,9 @@
 
 namespace Pagekit\Page;
 
-use Pagekit\System\Link\Link;
+use Pagekit\System\Link\Route;
 
-class PageLink extends Link
+class PageLink extends Route
 {
     /**
      * @{inheritdoc}
@@ -25,10 +25,10 @@ class PageLink extends Link
     /**
      * @{inheritdoc}
      */
-    public function renderForm()
+    public function renderForm($link, $params = [])
     {
         $pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page')->findAll();
 
-        return $this('view')->render('page/admin/link.razr.php', array('route' => $this->getRoute(), 'pages' => $pages));
+        return $this('view')->render('page/admin/link.razr.php', compact('link', 'params', 'pages'));
     }
 }

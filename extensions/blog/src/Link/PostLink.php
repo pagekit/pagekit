@@ -2,9 +2,9 @@
 
 namespace Pagekit\Blog\Link;
 
-use Pagekit\System\Link\Link;
+use Pagekit\System\Link\Route;
 
-class PostLink extends Link
+class PostLink extends Route
 {
     /**
      * @{inheritdoc}
@@ -25,10 +25,10 @@ class PostLink extends Link
     /**
      * @{inheritdoc}
      */
-    public function renderForm()
+    public function renderForm($link, $params = [])
     {
         $posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post')->findAll();
 
-        return $this('view')->render('blog/admin/link/post.razr.php', array('route' => $this->getRoute(), 'posts' => $posts));
+        return $this('view')->render('blog/admin/link/post.razr.php', compact('link', 'params', 'posts'));
     }
 }

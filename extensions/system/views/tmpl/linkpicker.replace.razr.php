@@ -1,1 +1,1 @@
-<a href="#"><span class="js-picker-resolved" data-text-empty="@trans('Choose Link')"></span> <i class="uk-icon-pencil"></i></a>
+<span>{{{type}}}{{#unless type}}@trans('Choose Link'){{/unless}} <a class="js-linkpicker-trigger" href="#">{{url}} <i class="uk-icon-pencil"></i></a></span>

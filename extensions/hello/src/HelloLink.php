@@ -2,9 +2,9 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\System\Link\Link;
+use Pagekit\System\Link\Route;
 
-class HelloLink extends Link
+class HelloLink extends Route
 {
     /**
      * @{inheritdoc}
@@ -25,8 +25,8 @@ class HelloLink extends Link
     /**
      * @{inheritdoc}
      */
-    public function renderForm()
+    public function renderForm($link, $params = [])
     {
-        return $this('view')->render('hello/admin/link.razr.php', array('route' => $this->getRoute()));
+        return $this('view')->render('hello/admin/link.razr.php', compact('link', 'params'));
     }
 }

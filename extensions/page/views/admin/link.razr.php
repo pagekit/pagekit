@@ -3,7 +3,7 @@
     <div class="uk-form-controls">
         <select id="form-page" class="uk-width-1-1" name="id">
             @foreach (pages as page)
-            <option value="@page.id">@page.title</option>
+            <option value="@page.id"@(params.id == page.id ? ' selected')>@page.title</option>
             @endforeach
         </select>
     </div>
@@ -11,29 +11,11 @@
 
 <script>
 
-    require(['jquery', 'link'], function($, Link) {
+    require(['jquery'], function($) {
 
-        Link.register('@route', function(link, form) {
-
-            var $id = $('[name="id"]', form);
-
-                $id.on('change', function() {
-                    link.set($id.serialize());
-                });
-
-            return {
-
-                show: function(params, url) {
-                    $id.val($('option[value="'+params['id']+'"]', $id).length ? params['id'] : $('option:first', $id).val());
-                },
-
-                update: function() {
-                    $id.trigger('change');
-                }
-
-            }
-
-        });
+        $('#form-page').on('change', function() {
+            $('#form-url').val('@link?id=' + $(this).val());
+        }).trigger('change');
 
     });
 

@@ -5,21 +5,31 @@ namespace Pagekit\System\Link;
 interface LinkInterface
 {
     /**
-     * Returns the types route
+     * Returns the type's id
      *
-     * @return string The types route
+     * @return string
      */
-    public function getRoute();
+    public function getId();
 
     /**
-     * Returns the types label
+     * Returns the type's label
      *
-     * @return string The types label
+     * @return string
      */
     public function getLabel();
 
     /**
-     * Renders the types edit form
+     * Returns true if route is handled by this link type
+     *
+     * @param  string $route
+     * @return bool
      */
-    public function renderForm();
+    public function accept($route);
+
+    /**
+     * Renders the type's edit form
+     * @param string $link
+     * @param array  $params
+     */
+    public function renderForm($link, $params = []);
 }
