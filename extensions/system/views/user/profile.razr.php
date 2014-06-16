@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="uk-form-controls uk-form-controls-text js-password">
+    <div class="uk-form-row js-password">
         <a href="#" data-uk-toggle="{ target: '.js-password' }">@trans('Change password')</a>
     </div>
 
