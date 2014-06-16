@@ -15,7 +15,7 @@ class FrontpageListener extends EventSubscriber
         if ($frontpage = $this('config')->get('app.frontpage')) {
             $this('router')->getUrlAliases()->add('/', $frontpage);
         }
-        $this('router')->getUrlAliases()->add('/', '@frontpage');
+        $this('router')->get('/', '@frontpage', function() {});
     }
 
     /**

@@ -18,7 +18,11 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-form-controls uk-form-controls-text js-password">
+        <a href="#" data-uk-toggle="{ target: '.js-password' }">@trans('Change password')</a>
+    </div>
+
+    <div class="uk-form-row js-password uk-hidden">
         <label for="form-password-old" class="uk-form-label">@trans('Current Password')</label>
         <div class="uk-form-controls">
             <div class="uk-form-password">
@@ -28,7 +32,7 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-form-row js-password uk-hidden">
         <label for="form-password-new" class="uk-form-label">@trans('New Password')</label>
         <div class="uk-form-controls">
             <div class="uk-form-password">
