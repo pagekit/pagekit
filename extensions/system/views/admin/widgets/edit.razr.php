@@ -70,18 +70,18 @@
             <div class="uk-panel uk-panel-divider">
 
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Status')</label>
+                    <label for="form-status" class="uk-form-label">@trans('Status')</label>
                     <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="widget[status]">
+                        <select id="form-status" class="uk-width-1-1" name="widget[status]">
                             <option value="1"@(widget.status ? ' selected')>@trans('Enabled')</option>
                             <option value="0"@(!widget.status ? ' selected')>@trans('Disabled')</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Position')</label>
+                    <label for="form-position" class="uk-form-label">@trans('Position')</label>
                     <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="widget[position]">
+                        <select id="form-position" class="uk-width-1-1" name="widget[position]">
                             @foreach (positions as position)
                             <option value="@position.id"@(widget.position == position.id ? ' selected')>@trans(position.name)</option>
                             @endforeach
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Restrict Access')</label>
+                    <span class="uk-form-label">@trans('Restrict Access')</span>
                     <div class="uk-form-controls">
                         <input type="hidden" name="widget[roles]" value="">
                         @foreach (roles as role)
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Options')</label>
+                    <span class="uk-form-label">@trans('Options')</span>
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="widget[settings][show_title]" value="1"@(widget.get('show_title', 1) ? ' checked')> @trans('Show Title')</label>
                     </div>

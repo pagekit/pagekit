@@ -23,22 +23,22 @@
 
             <div class="uk-panel uk-panel-divider">
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Status')</label>
+                    <label for="form-status" class="uk-form-label">@trans('Status')</label>
                     <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="page[status]">
+                        <select id="form-status" class="uk-width-1-1" name="page[status]">
                             <option value="1"@(page.status ? ' selected')>@statuses[1]</option>
                             <option value="0"@(!page.status ? ' selected')>@statuses[0]</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('URL')</label>
+                    <label for="form-url" class="uk-form-label">@trans('URL')</label>
                     <div class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" name="page[url]" value="@page.url">
+                        <input id="form-url" class="uk-width-1-1" type="text" name="page[url]" value="@page.url">
                     </div>
                 </div>
-               <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Restrict Access')</label>
+                <div class="uk-form-row">
+                    <span class="uk-form-label">@trans('Restrict Access')</span>
                     <input type="hidden" name="page[roles]" value="">
                     @foreach (roles as role)
                     <div class="uk-form-controls">
@@ -47,7 +47,7 @@
                     @endforeach
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Options')</label>
+                    <span class="uk-form-label">@trans('Options')</span>
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="page[data][title]" value="1"@(page.get('title', 1) ? ' checked')> @trans('Show Title')</label>
                     </div>

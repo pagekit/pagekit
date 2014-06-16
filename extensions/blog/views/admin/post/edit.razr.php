@@ -19,7 +19,10 @@
             </div>
 
             <div class="uk-form-row">
-                <textarea class="uk-width-1-1 uk-form-large" type="text" name="post[excerpt]" placeholder="@trans('Enter Excerpt')">@post.excerpt</textarea>
+                <label class="uk-form-label">@trans('Excerpt')</label>
+                <div class="uk-form-controls">
+                    <textarea class="uk-width-1-1" type="text" name="post[excerpt]" placeholder="@trans('Enter Excerpt')" rows="5">@post.excerpt</textarea>
+                </div>
             </div>
 
         </div>
@@ -27,18 +30,17 @@
 
             <div class="uk-panel uk-panel-divider">
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Status')</label>
+                    <label for="form-status" class="uk-form-label">@trans('Status')</label>
                     <div class="uk-form-controls">
-                        <select class="uk-width-1-1" name="post[status]">
+                        <select id="form-status" class="uk-width-1-1" name="post[status]">
                             @foreach(statuses as id => status)
                             <option value="@id"@(post.status == id ? ' selected')>@status</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Publish on')</label>
+                    <span class="uk-form-label">@trans('Publish on')</span>
                     <div class="uk-form-controls">
                         <a class="js-publish" href="#" data-uk-toggle="{target:'.js-publish'}">@post.date|date @ @post.date|date('H:i')</a>
                         <input class="uk-form-width-small uk-form-small uk-hidden js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@post.date|date('Y-m-d')">
@@ -46,15 +48,14 @@
                         <input type="hidden" name="post[date]" value="@post.date|date('Y-m-d H:i:s')">
                     </div>
                 </div>
-
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Slug')</label>
+                    <label for="form-slug" class="uk-form-label">@trans('Slug')</label>
                     <div class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" name="post[slug]" value="@post.slug">
+                        <input id="form-slug" class="uk-width-1-1" type="text" name="post[slug]" value="@post.slug">
                     </div>
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Restrict Access')</label>
+                    <span class="uk-form-label">@trans('Restrict Access')</span>
                     <input type="hidden" name="post[roles]" value="">
                     @foreach (roles as role)
                     <div class="uk-form-controls">
@@ -63,7 +64,7 @@
                     @endforeach
                 </div>
                 <div class="uk-form-row">
-                    <label class="uk-form-label">@trans('Options')</label>
+                    <span class="uk-form-label">@trans('Options')</span>
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="post[data][title]" value="1"@(post.get('title', 1) ? ' checked')> @trans('Show Title')</label>
                     </div>
