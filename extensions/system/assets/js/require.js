@@ -21,8 +21,6 @@ var require = (function(win, doc) {
                         'gravatar':   'vendor/assets/requirejs/plugins/gravatar',
                         'uikit':      'vendor/assets/uikit/js/uikit.min',
                         'rowselect':  'extensions/system/assets/js/rowselect.js?ver=' + vers,
-                        'link':       'extensions/system/assets/js/link.js?ver=' + vers,
-                        'linkpicker': 'extensions/system/assets/js/linkpicker.js?ver=' + vers,
                         'editor':     'extensions/system/assets/js/editor/editor.js?ver=' + vers
                     },
                     shim: {
@@ -46,7 +44,8 @@ var require = (function(win, doc) {
                         'system': {
                             base: 'extensions/system/assets/js/system/',
                             locale: 'json!' + url + '/system/locale',
-                            finder: url + '/system/finder/'
+                            finder: url + '/system/finder/',
+                            link: url + '/admin/system/link'
                         }
                     }
                 };

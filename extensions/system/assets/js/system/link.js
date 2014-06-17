@@ -1,4 +1,4 @@
-define(['jquery', 'require'], function($, req) {
+define(['jquery', 'system'], function($, system) {
 
     var data = {};
 
@@ -44,7 +44,7 @@ define(['jquery', 'require'], function($, req) {
         _update: function(link) {
 
             var $this = this;
-            $.post(this.options.urlForm, { link: link, context: this.options.context }, function(data) {
+            $.post(this.options.url + '/form', { link: link, context: this.options.context }, function(data) {
 
                 $this.types.val(data.type ? data.type : '');
                 $this.edit.empty().append(data.form).toggleClass('uk-hidden', !$this.edit.children(':not(script)').length);
@@ -56,17 +56,14 @@ define(['jquery', 'require'], function($, req) {
     });
 
     Link.defaults = {
-        url    : req.toUrl('index.php/admin/system/link'),
-        urlForm: req.toUrl('index.php/admin/system/link/form'),
+        url    : system.config.link,
         value  : '',
         context: ''
     };
 
-    return {
-
-        attach: function(element, options) {
-            return new Link(element, options);
-        }
-
+    system.link = function(element, options) {
+        return new Link(element, options);
     };
+
+    return system;
 });

@@ -1,4 +1,4 @@
-require(['jquery', 'linkpicker'], function($, Picker) {
+require(['jquery', 'system!linkpicker'], function($, system) {
 
     // source
     var link = $('.js-item-url'),
@@ -6,7 +6,7 @@ require(['jquery', 'linkpicker'], function($, Picker) {
         nolink = $('[data-msg="no-link"]', form);
 
     // URL picker
-    new Picker(link, { context: 'system/menu' });
+    system.linkpicker(link, { context: 'system/menu' });
 
     form.on('submit', function() {
         if (!link.val()) {
