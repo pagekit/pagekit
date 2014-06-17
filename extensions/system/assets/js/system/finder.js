@@ -1,4 +1,4 @@
-define(['jquery', 'require', 'system', 'uikit!upload', 'rowselect', 'handlebars'], function($, req, system, uikit, RowSelect, Handlebars) {
+define(['jquery', 'system', 'uikit!upload', 'rowselect', 'handlebars'], function($, system, uikit, RowSelect, Handlebars) {
 
     Handlebars.registerHelper('isImage', function(url, block) {
         return url.match(/\.(?:gif|jpg|jpeg|png|svg)/i) ? block.fn(this) : block.inverse(this);
@@ -321,7 +321,7 @@ define(['jquery', 'require', 'system', 'uikit!upload', 'rowselect', 'handlebars'
     });
 
     Finder.defaults = {
-        url: req.toUrl(system.config.finder),
+        url: system.config.finder,
         view: 'table',
         root: '/',
         path: '/',
@@ -331,8 +331,6 @@ define(['jquery', 'require', 'system', 'uikit!upload', 'rowselect', 'handlebars'
             foldername: 'Folder Name'
         }
     };
-
-    window.Finder = Finder;
 
     system.finder = function(element, options) {
         return new Finder(element, options);

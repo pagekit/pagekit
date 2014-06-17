@@ -4,6 +4,8 @@ define(['jquery', 'module'], function ($, mod) {
 
     system.config = mod.config();
 
+    system.path = system.url.replace(/\/index.php$/i, '');
+
     system.csrf = {token: system.csrf, param: '_csrf', params: {'_csrf': system.csrf}};
 
     system.trans = function(id, parameters, domain){

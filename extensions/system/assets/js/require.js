@@ -1,21 +1,17 @@
 var require = (function(win, doc) {
 
-    var i, base, vers, script = '', config = {}, metas = doc.getElementsByTagName('meta');
+    var i, url, vers, config = {}, metas = doc.getElementsByTagName('meta');
 
     if (metas) {
         for (i = 0; i < metas.length; i += 1) {
 
-            base = metas[i].getAttribute('data-base');
+            url  = metas[i].getAttribute('data-url');
             vers = metas[i].getAttribute('data-version');
 
-            if (base && vers) {
-
-                if (win.location.pathname.indexOf('index.php') > 0) {
-                    script = 'index.php/';
-                }
+            if (url !== null && vers!== null) {
 
                 config = {
-                    baseUrl: base,
+                    baseUrl: url.replace(/\/index.php$/i, '') || '/',
                     paths: {
                         'jquery':     'vendor/assets/jquery/jquery.js?ver=2.1.0',
                         'codemirror': 'vendor/assets/codemirror/codemirror.js?ver=3.22',
@@ -45,12 +41,12 @@ var require = (function(win, doc) {
                             base: 'vendor/assets/uikit/'
                         },
                         'tmpl': {
-                            url: script + 'system/tmpl/'
+                            url: url + '/system/tmpl/'
                         },
                         'system': {
                             base: 'extensions/system/assets/js/system/',
-                            locale: 'json!' + script + 'system/locale',
-                            finder: script + 'system/finder/'
+                            locale: 'json!' + url + '/system/locale',
+                            finder: url + '/system/finder/'
                         }
                     }
                 };
