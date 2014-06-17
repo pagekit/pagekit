@@ -21,7 +21,6 @@ class Blog extends ApplicationAware implements MigrationInterface
                 $table->addColumn('user_id', 'integer', array('unsigned' => true, 'length' => 10, 'default' => 0));
                 $table->addColumn('date', 'datetime', array('notnull' => false));
                 $table->addColumn('modified', 'datetime');
-                $table->addColumn('subtitle', 'text', array('length' => 65532));
                 $table->addColumn('content', 'text');
                 $table->addColumn('excerpt', 'text');
                 $table->addColumn('is_commentable', 'boolean', array('notnull' => false));

@@ -39,9 +39,6 @@ class Post extends Thread
     /** @Column(type="datetime")*/
     protected $date;
 
-    /** @Column(type="string") */
-    protected $subtitle;
-
     /** @Column(type="text") */
     protected $content;
 
@@ -109,16 +106,6 @@ class Post extends Thread
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
-    }
-
-    public function getSubtitle()
-    {
-        return $this->subtitle;
-    }
-
-    public function setSubtitle($subtitle)
-    {
-        $this->subtitle = $subtitle;
     }
 
     public function getContent()
