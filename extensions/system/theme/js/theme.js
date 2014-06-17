@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             // fix toolbar jumping when a modal is shown
             $doc.on({
                 'uk.modal.show': function() {
-                    $('.tm-toolbar').css('padding-right', $('.uk-modal-page').css('padding-right'));
+                    $('.tm-toolbar').css('padding-right', Math.abs(parseInt($('.uk-modal-page').css('margin-left'), 10)) );
                 },
                 'uk.modal.hide': function() {
                     $('.tm-toolbar').css('padding-right', '');
