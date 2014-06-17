@@ -130,18 +130,17 @@ class ResetPasswordController extends Controller
                     throw new Exception(__('Invalid token. Please try again.'));
                 }
 
-                $pass1 = $this('request')->request->get('password1');
-                $pass2 = $this('request')->request->get('password2');
+                $password = $this('request')->request->get('password');
 
-                if (empty($pass1) || empty($pass2)) {
+                if (empty($password)) {
                     throw new Exception(__('Enter password.'));
                 }
 
-                if ($pass1 != $pass2) {
-                    throw new Exception(__('The passwords do not match.'));
+                if ($password != trim($password)) {
+                    throw new Exception(__('Invalid password.'));
                 }
 
-                $user->setPassword($this('auth.password')->hash($pass1));
+                $user->setPassword($this('auth.password')->hash($password));
                 $user->setActivation(null);
 
                 $this->users->save($user);
