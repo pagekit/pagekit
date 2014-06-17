@@ -8,7 +8,9 @@ use Pagekit\Component\Database\ORM\Repository;
 class PostRepository extends Repository
 {
     /**
-     * {@inheritdoc}
+     * Updates the comments info on post.
+     *
+     * @param int $id
      */
     public function updateCommentInfo($id)
     {
