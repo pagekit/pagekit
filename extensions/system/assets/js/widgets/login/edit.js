@@ -1,6 +1,6 @@
-require(['linkpicker'], function(Picker) {
+require(['system!linkpicker'], function(system) {
 
-    new Picker('[name="widget[settings][redirect.login]"]');
-    new Picker('[name="widget[settings][redirect.logout]"]');
+    system.linkpicker('[name="widget[settings][redirect.login]"]');
+    system.linkpicker('[name="widget[settings][redirect.logout]"]');
 
 });

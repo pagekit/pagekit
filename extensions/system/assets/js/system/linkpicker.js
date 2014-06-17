@@ -1,4 +1,4 @@
-define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.replace', 'uikit', 'link'], function ($, req, tmpl, uikit, Link) {
+define(['jquery', 'tmpl!linkpicker.modal,linkpicker.replace', 'uikit', 'system!link'], function ($, tmpl, uikit, system) {
 
     var LinkPicker = function (element, options) {
 
@@ -19,7 +19,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
         source.parent().on('click', '.js-linkpicker-trigger', function (e) {
             e.preventDefault();
 
-            link = Link.attach(modal.find('.js-linkpicker'), { context: options.context, value: source.val() });
+            link = system.link(modal.find('.js-linkpicker'), { context: options.context, value: source.val() });
             picker.show();
         });
 
@@ -31,7 +31,7 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
                     return;
                 }
 
-                $.post(options.url, { link: source.val(), context: options.context },function (data) {
+                $.post(options.url + '/resolve', { link: source.val(), context: options.context },function (data) {
 
                     preview(data);
 
@@ -47,9 +47,13 @@ define('linkpicker', ['jquery', 'require', 'tmpl!linkpicker.modal,linkpicker.rep
     };
 
     LinkPicker.defaults = {
-        url    : req.toUrl('index.php/admin/system/link/resolve'),
+        url    : system.config.link,
         context: ''
     };
 
-    return LinkPicker;
+    system.linkpicker = function(element, options) {
+        return new LinkPicker(element, options);
+    };
+
+    return system;
 });

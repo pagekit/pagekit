@@ -1,4 +1,4 @@
-define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], function($, tmpl, uikit, editor, Link) {
+define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!link'], function($, tmpl, uikit, editor, system) {
 
     var modal  = $(tmpl.get('link.modal')).appendTo('body'),
         picker = uikit.modal(modal),
@@ -16,7 +16,7 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'link'], fu
         picker.show();
         setTimeout(function() { title.focus(); }, 10);
 
-        link = Link.attach(modal.find('.js-linkpicker'), { value: data.link });
+        link = system.link(modal.find('.js-linkpicker'), { value: data.link });
     }
 
     uikit.plugin('htmleditor', 'link', {

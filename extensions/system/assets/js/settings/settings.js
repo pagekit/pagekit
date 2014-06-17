@@ -1,4 +1,4 @@
-require(['jquery', 'require', 'linkpicker', 'uikit!form-password', 'domReady!'], function($, req, Picker, uikit) {
+require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'domReady!'], function($, req, system, uikit) {
 
     // switcher
     var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {
@@ -35,5 +35,5 @@ require(['jquery', 'require', 'linkpicker', 'uikit!form-password', 'domReady!'],
     });
 
     // URL picker
-    new Picker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
+    system.linkpicker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
 });
