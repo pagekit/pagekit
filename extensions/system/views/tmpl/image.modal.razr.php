@@ -9,15 +9,15 @@
                 </div>
             </div>
             <div class="uk-form-row">
-                <label class="uk-form-label" for="form-url">@trans('URL')</label>
+                <label for="form2-url" class="uk-form-label">@trans('URL')</label>
                 <div class="uk-form-controls">
-                    <input id="form-url" type="text" class="js-url uk-width-1-1">
+                    <input id="form2-url" type="text" class="js-url uk-width-1-1">
                 </div>
             </div>
             <div class="uk-form-row">
-                <label class="uk-form-label" for="form-alt">@trans('Alt')</label>
+                <label for="form2-alt" class="uk-form-label">@trans('Alt')</label>
                 <div class="uk-form-controls">
-                    <input id="form-alt" type="text" class="js-title uk-width-1-1">
+                    <input id="form2-alt" type="text" class="js-title uk-width-1-1">
                 </div>
             </div>
             <div class="uk-form-row uk-margin-top">
