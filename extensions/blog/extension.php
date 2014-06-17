@@ -32,21 +32,21 @@ return array(
         'blog' => array(
             'label'  => 'Blog',
             'icon'   => 'extension://blog/extension.svg',
-            'url'    => '@blog/post/index',
+            'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'
         ),
         'blog: post list' => array(
             'label'  => 'Blog',
             'parent' => 'blog',
-            'url'    => '@blog/post/index',
+            'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content'
         ),
         'blog: comment list' => array(
             'label'  => 'Comments',
             'parent' => 'blog',
-            'url'    => '@blog/comment/index',
+            'url'    => '@blog/comment',
             'active' => '@blog/comment*',
             'access' => 'blog: manage comments'
         ),

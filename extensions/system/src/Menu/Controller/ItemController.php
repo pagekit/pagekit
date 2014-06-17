@@ -61,7 +61,7 @@ class ItemController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index');
+        return $this->redirect('@system/menu');
     }
 
     /**
@@ -82,7 +82,7 @@ class ItemController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index');
+        return $this->redirect('@system/menu');
     }
 
     /**
@@ -149,7 +149,7 @@ class ItemController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index', array('id' => $menuId));
+        return $this->redirect('@system/menu', array('id' => $menuId));
     }
 
     /**
@@ -174,6 +174,6 @@ class ItemController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index', array('id' => $menuId));
+        return $this->redirect('@system/menu', array('id' => $menuId));
     }
 }

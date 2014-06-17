@@ -11,7 +11,7 @@ class BlogLink extends Route
      */
     public function getRoute()
     {
-        return '@blog/default/index';
+        return '@blog/default';
     }
 
     /**

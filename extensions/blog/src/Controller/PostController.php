@@ -108,7 +108,7 @@ class PostController extends Controller
 
             $this('message')->error($e->getMessage());
 
-            return $this->redirect('@blog/post/index');
+            return $this->redirect('@blog/post');
         }
 
         return array('head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());

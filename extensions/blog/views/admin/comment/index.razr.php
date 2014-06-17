@@ -1,6 +1,6 @@
 @script('blog.comments-index', 'blog/js/comment/index.js', 'requirejs')
 
-<form id="js-comments" class="uk-form" action="@url.route('@blog/comment/index')" method="post">
+<form id="js-comments" class="uk-form" action="@url.route('@blog/comment')" method="post">
 
     <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">

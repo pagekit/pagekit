@@ -47,7 +47,7 @@
                                         @if (extension.config.settings)
                                         <li><a href="@url.route('@system/extensions/settings', ['name' => extension.name])">@trans('Settings')</a></li>
                                         @endif
-                                        <li><a href="@url.route('@system/permission/index')#ext-@extension.name">@trans('Permissions')</a></li>
+                                        <li><a href="@url.route('@system/permission')#ext-@extension.name">@trans('Permissions')</a></li>
                                         @endif
                                     </ul>
                                 </td>

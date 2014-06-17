@@ -72,7 +72,7 @@ class ExtensionsController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/extensions/index');
+        return $this->redirect('@system/extensions');
     }
 
     /**
@@ -99,7 +99,7 @@ class ExtensionsController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/extensions/index');
+        return $this->redirect('@system/extensions');
     }
 
     /**
@@ -134,7 +134,7 @@ class ExtensionsController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/extensions/index');
+        return $this->redirect('@system/extensions');
     }
 
     /**
@@ -157,7 +157,7 @@ class ExtensionsController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/system/index');
+        return $this->redirect('@system/system');
     }
 
     /**
@@ -182,7 +182,7 @@ class ExtensionsController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/system/index');
+        return $this->redirect('@system/system');
     }
 
     protected function enable(Extension $extension)

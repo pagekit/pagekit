@@ -4,7 +4,7 @@
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/menu/index', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
+        <a class="uk-button" href="@url.route('@system/menu', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
     </div>
 
     <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-link">@trans('Please choose a link.')</p>

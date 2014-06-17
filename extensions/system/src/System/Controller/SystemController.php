@@ -54,7 +54,7 @@ class SystemController extends Controller
      */
     public function adminAction()
     {
-        return $this->redirect('@system/dashboard/index');
+        return $this->redirect('@system/dashboard');
     }
 
     /**
@@ -142,6 +142,6 @@ class SystemController extends Controller
     {
         $this('system')->clearCache($caches);
 
-        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system/index');
+        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system');
     }
 }

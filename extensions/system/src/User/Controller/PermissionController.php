@@ -45,6 +45,6 @@ class PermissionController extends Controller
             $this->roles->save($role);
         }
 
-        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Permissions saved!'))) : $this->redirect('@system/permission/index');
+        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Permissions saved!'))) : $this->redirect('@system/permission');
     }
 }

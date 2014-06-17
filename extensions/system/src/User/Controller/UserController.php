@@ -233,7 +233,7 @@ class UserController extends Controller
 
         $this('message')->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
 
-        return $this->redirect('@system/user/index');
+        return $this->redirect('@system/user');
     }
 
     /**
@@ -260,7 +260,7 @@ class UserController extends Controller
             }
         }
 
-        return $this->redirect('@system/user/index');
+        return $this->redirect('@system/user');
     }
 
     /**

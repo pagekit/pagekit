@@ -47,9 +47,9 @@ class User implements LinkInterface
     {
         return [
             '@system/auth/login' => __('Login'),
-            '@system/registration/index' => __('Registration'),
-            '@system/profile/index' => __('Profile'),
-            '@system/resetpassword/index' => __('Password Reset')
+            '@system/registration' => __('Registration'),
+            '@system/profile' => __('Profile'),
+            '@system/resetpassword' => __('Password Reset')
         ];
     }
 }

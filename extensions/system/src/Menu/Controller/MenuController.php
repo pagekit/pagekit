@@ -73,7 +73,7 @@ class MenuController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index', array('id' => isset($menu) ? $menu->getId() : 0));
+        return $this->redirect('@system/menu', array('id' => isset($menu) ? $menu->getId() : 0));
     }
 
     /**
@@ -96,7 +96,7 @@ class MenuController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu/index');
+        return $this->redirect('@system/menu');
     }
 
     /**

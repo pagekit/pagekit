@@ -4,7 +4,7 @@
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/user/index')">@( user.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url.route('@system/user')">@( user.id ? trans('Close') : trans('Cancel') )</a>
     </div>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>

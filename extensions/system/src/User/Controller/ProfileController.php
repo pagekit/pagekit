@@ -107,6 +107,6 @@ class ProfileController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/profile/index');
+        return $this->redirect('@system/profile');
     }
 }

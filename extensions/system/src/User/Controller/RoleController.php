@@ -65,7 +65,7 @@ class RoleController extends Controller
         $role->setPermissions($permissions);
         $this->roles->save($role);
 
-        return  $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' =>__('Roles saved!'))) : $this->redirect('@system/role/index', array('id' => isset($role) ? $role->getId() : 0));
+        return  $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' =>__('Roles saved!'))) : $this->redirect('@system/role', array('id' => isset($role) ? $role->getId() : 0));
     }
 
     /**
@@ -78,7 +78,7 @@ class RoleController extends Controller
             $this->roles->delete($role);
         }
 
-        return $this->redirect('@system/role/index');
+        return $this->redirect('@system/role');
     }
 
     /**

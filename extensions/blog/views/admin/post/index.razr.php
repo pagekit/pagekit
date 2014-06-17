@@ -1,6 +1,6 @@
 @script('blog.posts-index', 'blog/js/post/index.js', 'requirejs')
 
-<form id="js-posts" class="uk-form" action="@url.route('@blog/post/index')" method="post">
+<form id="js-posts" class="uk-form" action="@url.route('@blog/post')" method="post">
 
     <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">

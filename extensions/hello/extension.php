@@ -32,7 +32,7 @@ return array(
         'hello' => array(
             'label'  => 'Hello',
             'icon'   => 'extension://hello/extension.svg',
-            'url'    => '@hello/hello/index',
+            'url'    => '@hello/hello',
             'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'
         )

@@ -105,7 +105,7 @@ class SettingsController extends Controller
 
         $this('message')->success(__('Settings saved.'));
 
-        return $this->redirect('@system/settings/index', compact('tab'));
+        return $this->redirect('@system/settings', compact('tab'));
     }
 
     /**

@@ -37,7 +37,7 @@
                 <a href="@url.route('@system/user/edit', ['id' => post.user.id])">@post.user.username</a>
             </td>
             <td class="uk-text-center">
-                <a href="@url.route('@blog/comment/index', ['post' => post.id])">@post.numcomments</a>
+                <a href="@url.route('@blog/comment', ['post' => post.id])">@post.numcomments</a>
             </td>
             <td>
                 @post.date|date('long')

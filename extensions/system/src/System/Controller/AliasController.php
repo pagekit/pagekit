@@ -70,7 +70,7 @@ class AliasController extends Controller
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
-            return $this->redirect('@system/alias/index');
+            return $this->redirect('@system/alias');
         }
     }
 
@@ -123,6 +123,6 @@ class AliasController extends Controller
 
         $this('message')->success(_c('{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted.', count($ids)));
 
-        return $this->redirect('@system/alias/index');
+        return $this->redirect('@system/alias');
     }
 }

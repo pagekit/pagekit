@@ -14,7 +14,7 @@
                         <li><a href="#" data-action="@url.route('@system/menu/delete', ['id' => m.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
                     </ol>
                     @endif
-                    <a href="@url.route('@system/menu/index', ['id' => m.id])">@m.name</a>
+                    <a href="@url.route('@system/menu', ['id' => m.id])">@m.name</a>
                 </li>
                 @endforeach
             </ul>

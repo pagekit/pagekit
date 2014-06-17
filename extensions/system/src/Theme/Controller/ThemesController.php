@@ -81,7 +81,7 @@ class ThemesController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/themes/index');
+        return $this->redirect('@system/themes');
     }
 
     /**
@@ -104,7 +104,7 @@ class ThemesController extends Controller
 
         $this('system')->clearCache();
 
-        return $this->redirect('@system/themes/index');
+        return $this->redirect('@system/themes');
     }
 
     /**
@@ -127,7 +127,7 @@ class ThemesController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/system/index');
+        return $this->redirect('@system/system');
     }
 
     /**
@@ -152,6 +152,6 @@ class ThemesController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/system/index');
+        return $this->redirect('@system/system');
     }
 }

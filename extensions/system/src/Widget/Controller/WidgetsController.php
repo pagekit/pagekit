@@ -92,7 +92,7 @@ class WidgetsController extends Controller
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
         }
-        return $this->redirect('@system/widgets/index');
+        return $this->redirect('@system/widgets');
     }
 
     /**
@@ -147,7 +147,7 @@ class WidgetsController extends Controller
 
         $this('message')->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
-        return $this->redirect('@system/widgets/index');
+        return $this->redirect('@system/widgets');
     }
 
 
@@ -173,7 +173,7 @@ class WidgetsController extends Controller
             $this('events')->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
-        return $this->redirect('@system/widgets/index');
+        return $this->redirect('@system/widgets');
     }
 
     /**
@@ -188,7 +188,7 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this->redirect('@system/widgets/index');
+        return $this->redirect('@system/widgets');
     }
 
     /**
@@ -203,7 +203,7 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this->redirect('@system/widgets/index');
+        return $this->redirect('@system/widgets');
     }
 
     /**

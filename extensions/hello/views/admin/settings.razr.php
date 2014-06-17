@@ -2,7 +2,7 @@
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/system/index')">@trans('Close')</a>
+        <a class="uk-button" href="@url.route('@system/system')">@trans('Close')</a>
     </div>
 
     <div class="uk-form-row">

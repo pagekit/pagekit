@@ -1,6 +1,6 @@
 @script('pages-index', 'page/js/pages.js', 'requirejs')
 
-<form id="js-pages" class="uk-form" action="@url.route('@page/page/index')" method="post">
+<form id="js-pages" class="uk-form" action="@url.route('@page/page')" method="post">
 
     <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">

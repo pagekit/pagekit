@@ -33,7 +33,7 @@ class BlogExtension extends Extension
         });
 
         $app->on('system.init', function() use ($app) {
-            $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default/index');
+            $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default');
         }, 16);
 
         $app->on('system.locale', function(LocaleEvent $event) {

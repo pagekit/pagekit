@@ -99,7 +99,7 @@ class PageController extends Controller
 
             $this('message')->error($e->getMessage());
 
-            return $this->redirect('@page/page/index');
+            return $this->redirect('@page/page');
         }
 
         return array('head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll());

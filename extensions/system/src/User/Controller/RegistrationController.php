@@ -141,7 +141,7 @@ class RegistrationController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('@system/registration/index');
+        return $this->redirect('@system/registration');
     }
 
     /**
