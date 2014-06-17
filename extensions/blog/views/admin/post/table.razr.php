@@ -6,7 +6,7 @@
             <th class="pk-table-min-width-100">@trans('Title')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
-            <th class="pk-table-width-200 pk-table-min-width-200">@trans('Author')</th>
+            <th class="pk-table-width-200">@trans('Author')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Comments')</th>
             <th class="pk-table-width-100">@trans('Date')</th>
         </tr>
