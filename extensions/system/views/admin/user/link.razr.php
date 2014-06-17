@@ -13,8 +13,8 @@
 
     require(['jquery'], function($) {
 
-        $('.js-linkpicker #form-view').on('change', function() {
-            $('.js-linkpicker #form-url').val($(this).val());
+        $('.js-linkpicker #form2-view').on('change', function() {
+            $('.js-linkpicker #form2-url').val($(this).val());
         }).trigger('change');
 
     });
