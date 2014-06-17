@@ -39,8 +39,8 @@ class RegistrationController extends Controller
      */
     public function indexAction()
     {
-        if ($return = $this->isEnabled()) {
-            return $return;
+        if ($this('user')->isAuthenticated() || $this('option')->get('system:user.registration', 'admin') == 'admin') {
+            return $this->redirect('@frontpage');
         }
 
         return array('head.title' => __('User Registration'));
@@ -53,8 +53,8 @@ class RegistrationController extends Controller
     {
         try {
 
-            if ($return = $this->isEnabled()) {
-                return $return;
+            if ($this('user')->isAuthenticated() || $this('option')->get('system:user.registration', 'admin') == 'admin') {
+                return $this->redirect('@frontpage');
             }
 
             if (!$this('csrf')->validate($this('request')->request->get('_csrf'))) {
@@ -132,17 +132,16 @@ class RegistrationController extends Controller
             } else {
 
                 $this('message')->success(__('Your user account has been created.'));
-                return $this->redirect('@system/auth/login');
 
             }
 
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@system/auth/login');
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect($this('url')->previous());
+        return $this->redirect('@system/registration/index');
     }
 
     /**
@@ -152,7 +151,7 @@ class RegistrationController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(array('username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'))->first()) {
             $this('message')->error(__('Invalid key.'));
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@frontpage');
         }
 
         if ($admin = $this('option')->get('system:user.registration') == 'approval' and !$user->get('verified')) {
@@ -186,28 +185,6 @@ class RegistrationController extends Controller
         return $this->redirect('@system/auth/login');
     }
 
-    protected function isEnabled()
-    {
-        try {
-
-            if (!$this('config')->get('mail.enabled')) {
-                throw new Exception(__('Mail system disabled.'));
-            }
-
-            if ($this('user')->isAuthenticated()) {
-                throw new Exception(__('You are already logged in.'));
-            }
-
-            if ($this('option')->get('system:user.registration', 'admin') == 'admin') {
-                throw new Exception(__('Public user account registration disabled.'));
-            }
-
-        } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
-            return $this->redirect($this('url')->base(true));
-        }
-    }
-
     protected function sendActivateMail($user, $mail)
     {
         try {
@@ -216,7 +193,7 @@ class RegistrationController extends Controller
                 ->setTo($this('option')->get('system:mail.from.address'))
                 ->setSubject(__('Please approve registration at %site%!', array('%site%' => $this('option')->get('system:app.site_title'))))
                 ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr.php', $mail), compact('user')), 'text/html')
-                ->queue();
+                ->send();
 
         } catch (\Exception $e) {}
     }
@@ -229,7 +206,7 @@ class RegistrationController extends Controller
                 ->setTo($user->getEmail())
                 ->setSubject(__('Please confirm your registration at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
                 ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr.php', $mail), compact('user')), 'text/html')
-                ->queue();
+                ->send();
 
         } catch (\Exception $e) {
             throw new Exception(__('Unable to send verification link.'));
@@ -244,7 +221,7 @@ class RegistrationController extends Controller
                 ->setTo($user->getEmail())
                 ->setSubject(__('Account activated at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
                 ->setBody($this('view')->render('system/user/mails/activated.razr.php', compact('user')), 'text/html')
-                ->queue();
+                ->send();
 
         } catch (\Exception $e) {}
     }

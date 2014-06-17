@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function loginAction($redirect = '')
     {
         if ($this->user->isAuthenticated()) {
-            return $this('view')->render('system/user/logout.razr.php', compact('redirect'));
+            return $this->redirect('@frontpage');
         }
 
         return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => ($redirect), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);

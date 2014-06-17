@@ -36,16 +36,10 @@ class ResetPasswordController extends Controller
     /**
      * @View("system/user/reset/request.razr.php")
      */
-    public function requestAction()
+    public function indexAction()
     {
-        if (!$this('config')->get('mail.enabled')) {
-            $this('message')->error(__('Mail system disabled.'));
-            return $this->redirect($this('url')->base(true));
-        }
-
         if ($this->user->isAuthenticated()) {
-            $this('message')->error(__('You are already logged in.'));
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@frontpage');
         }
 
         return array('head.title' => __('Reset'), 'last_login' => $this('session')->get(self::RESET_LOGIN));
@@ -59,12 +53,8 @@ class ResetPasswordController extends Controller
     {
         try {
 
-            if (!$this('config')->get('mail.enabled')) {
-                throw new Exception(__('Mail system disabled.'));
-            }
-
             if ($this->user->isAuthenticated()) {
-                throw new Exception(__('You are already logged in.'));
+                return $this->redirect('@frontpage');
             }
 
             if (!$this('csrf')->validate($this('request')->request->get('_csrf'))) {
@@ -87,8 +77,6 @@ class ResetPasswordController extends Controller
 
             $user->setActivation($this('auth.random')->generateString(128));
 
-            $this->users->save($user);
-
             $url = $this('url')->route('@system/resetpassword/confirm', array('user' => $user->getUsername(), 'key' => $user->getActivation()), true);
 
             try {
@@ -97,23 +85,25 @@ class ResetPasswordController extends Controller
                     ->setTo($user->getEmail())
                     ->setSubject(sprintf('[%s] %s', $this('config')->get('app.site_title'), __('Password Reset')))
                     ->setBody($this('view')->render('system/user/mails/reset.razr.php', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
-                    ->queue();
+                    ->send();
 
             } catch (\Exception $e) {
                 throw new Exception(__('Unable to send confirmation link.'));
             }
 
+            $this->users->save($user);
+
             $this('session')->remove(self::RESET_LOGIN);
 
             $this('message')->success(__('Check your email for the confirmation link.'));
 
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@frontpage');
 
         } catch (Exception $e) {
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect($this('url')->previous());
+        return $this->redirect('system/resetpassword/reset');
     }
 
     /**
@@ -124,12 +114,12 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this('message')->error(__('Invalid key.'));
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@frontpage');
         }
 
         if ($user->isBlocked()) {
             $this('message')->error(__('Your account has not been activated or is blocked.'));
-            return $this->redirect($this('url')->base(true));
+            return $this->redirect('@frontpage');
         }
 
         if ('POST' === $this('request')->getMethod()) {
@@ -157,7 +147,7 @@ class ResetPasswordController extends Controller
                 $this->users->save($user);
 
                 $this('message')->success(__('Your password has been reset.'));
-                return $this->redirect($this('url')->base(true));
+                return $this->redirect('@frontpage');
 
             } catch (Exception $e) {
                 $this('message')->error($e->getMessage());
