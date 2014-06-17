@@ -1,13 +1,13 @@
 <div class="uk-form-row">
-    <label class="uk-form-label" for="form-url">@trans('URL')</label>
+    <label for="form2-url" class="uk-form-label">@trans('URL')</label>
     <div class="uk-form-controls">
-        <input id="form-url" type="text" class="js-url uk-width-1-1">
+        <input id="form2-url" type="text" class="js-url uk-width-1-1">
     </div>
 </div>
 <div class="uk-form-row">
-    <label class="uk-form-label" for="form-type">@trans('Type')</label>
+    <label for="form2-type" class="uk-form-label">@trans('Type')</label>
     <div class="uk-form-controls">
-        <select id="form-type" class="js-types uk-width-1-1" name="type">
+        <select id="form2-type" class="js-types uk-width-1-1" name="type">
             <option value="">@trans('Pick URL')</option>
             @foreach(links as link)
             <option value="@link.id">@link.label</option>

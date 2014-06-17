@@ -2,7 +2,7 @@
 
     require(['jquery'], function($) {
 
-        $('.js-linkpicker #form-url').val('@link');
+        $('.js-linkpicker #form2-url').val('@link');
 
     });
 

@@ -1,7 +1,7 @@
 <div class="uk-form-row">
-    <label class="uk-form-label" for="form-view">@trans('View')</label>
+    <label for="form2-view" class="uk-form-label">@trans('View')</label>
     <div class="uk-form-controls">
-        <select id="form-view" class="uk-width-1-1" name="id">
+        <select id="form2-view" class="uk-width-1-1" name="id">
             @foreach (routes as id => route)
             <option value="@id"@(params.id == id ? ' selected')>@route</option>
             @endforeach
