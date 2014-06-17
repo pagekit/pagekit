@@ -43,12 +43,12 @@ define(['jquery', 'require'], function($, req) {
 
         _update: function(link) {
 
-            $this = this;
+            var $this = this;
             $.post(this.options.urlForm, { link: link, context: this.options.context }, function(data) {
 
                 $this.types.val(data.type ? data.type : '');
                 $this.edit.empty().append(data.form).toggleClass('uk-hidden', !$this.edit.children(':not(script)').length);
-                
+
             }, 'json');
 
         }

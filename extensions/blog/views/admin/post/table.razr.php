@@ -6,6 +6,8 @@
             <th class="pk-table-min-width-100">@trans('Title')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
+            <th class="pk-table-width-200 pk-table-min-width-200">@trans('Author')</th>
+            <th class="pk-table-width-100 uk-text-center">@trans('Date')</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +31,12 @@
                 @else
                 @(post.url ?: link)
                 @endif
+            </td>
+            <td>
+                <a href="@url.route('@system/user/edit', ['id' => post.user.id])">@post.user.username</a>
+            </td>
+            <td>
+                @post.date|date('long')
             </td>
         </tr>
         @endforeach

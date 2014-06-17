@@ -6,6 +6,7 @@ use Pagekit\Blog\Entity\Post;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\User\Entity\UserRepository;
 
 /**
  * @Access("blog: manage content", admin=true)
@@ -25,12 +26,18 @@ class PostController extends Controller
     protected $roles;
 
     /**
+     * @var UserRepository
+     */
+    protected $users;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
         $this->roles = $this('users')->getRoleRepository();
+        $this->users = $this('users')->getUserRepository();
     }
 
     /**
@@ -62,7 +69,7 @@ class PostController extends Controller
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
 
-        $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('title');
+        $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC');
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
@@ -82,7 +89,7 @@ class PostController extends Controller
         $post = new Post;
         $post->setUser($this('user'));
 
-        return array('head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll());
+        return array('head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());
     }
 
     /**
@@ -104,7 +111,7 @@ class PostController extends Controller
             return $this->redirect('@blog/post/index');
         }
 
-        return array('head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll());
+        return array('head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());
     }
 
     /**

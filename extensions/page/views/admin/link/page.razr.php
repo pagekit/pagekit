@@ -13,7 +13,6 @@
 
     require(['jquery'], function($) {
 
-
         $('.js-linkpicker #form-page').on('change', function() {
             $('.js-linkpicker #form-url').val('@link?id=' + $(this).val());
         }).trigger('change');

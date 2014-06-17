@@ -40,6 +40,16 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
+                    <label for="form-author" class="uk-form-label">@trans('Author')</label>
+                    <div class="uk-form-controls">
+                        <select id="form-author" class="uk-width-1-1" name="post[user_id]">
+                            @foreach(users as id => user)
+                            <option value="@id"@(post.userid == id ? ' selected')>@user.username</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Publish on')</span>
                     <div class="uk-form-controls">
                         <a class="js-publish" href="#" data-uk-toggle="{target:'.js-publish'}">@post.date|date @ @post.date|date('H:i')</a>
