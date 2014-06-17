@@ -15,7 +15,7 @@ define(['jquery', 'system'], function($, system) {
 
             $this.element.html(data);
 
-            $this.link  = $('.js-url', this.element);
+            $this.link  = $('.js-url', $this.element);
             $this.types = $('.js-types', $this.element);
             $this.edit  = $('.js-edit', $this.element);
 
