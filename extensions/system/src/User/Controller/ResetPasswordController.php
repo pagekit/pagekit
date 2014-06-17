@@ -103,7 +103,7 @@ class ResetPasswordController extends Controller
             $this('message')->error($e->getMessage());
         }
 
-        return $this->redirect('system/resetpassword/reset');
+        return $this->redirect('@system/resetpassword/reset');
     }
 
     /**
