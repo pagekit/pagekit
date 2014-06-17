@@ -7,7 +7,8 @@
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
             <th class="pk-table-width-200 pk-table-min-width-200">@trans('Author')</th>
-            <th class="pk-table-width-100 uk-text-center">@trans('Date')</th>
+            <th class="pk-table-width-100 uk-text-center">@trans('Comments')</th>
+            <th class="pk-table-width-100">@trans('Date')</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,9 @@
             </td>
             <td>
                 <a href="@url.route('@system/user/edit', ['id' => post.user.id])">@post.user.username</a>
+            </td>
+            <td class="uk-text-center">
+                <a href="@url.route('@blog/comment/index', ['post' => post.id])">@post.numcomments</a>
             </td>
             <td>
                 @post.date|date('long')
