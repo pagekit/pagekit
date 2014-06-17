@@ -12,11 +12,9 @@
     
     <p>
         <label><input type="checkbox" name="@remember_me_param"> @trans('Remember Me')</label>
-        @if (app.config.mail.enabled)
-        <br><a href="@url.route('@system/resetpassword/request')">@trans('Forgot Password?')</a>
+        <br><a href="@url.route('@system/resetpassword/index')">@trans('Forgot Password?')</a>
         @if (app.option.get('system:user.registration', 'admin') != 'admin')
         <br><a href="@url.route('@system/registration/index')">@trans('Sign up')</a>
-        @endif
         @endif
     </p>
 

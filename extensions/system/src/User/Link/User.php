@@ -49,7 +49,7 @@ class User implements LinkInterface
             '@system/auth/login' => __('Login'),
             '@system/registration/index' => __('Registration'),
             '@system/profile/index' => __('Profile'),
-            '@system/resetpassword/request' => __('Password Reset')
+            '@system/resetpassword/index' => __('Password Reset')
         ];
     }
 }
