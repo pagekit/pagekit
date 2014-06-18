@@ -83,7 +83,6 @@ class SettingsController extends Controller
         $data['cache.cache.storage'] = @$data['cache.cache.storage'] ?: 'auto';
         $option['system:app.site_title'] = @$option['system:app.site_title'] ?: '';
         $option['system:maintenance.enabled'] = @$option['system:maintenance.enabled'] ?: '0';
-        $option['system:mail.enabled'] = @$option['system:mail.enabled'] ?: '0';
 
         foreach ($data as $key => $value) {
             $this->config->set($key, $value);

@@ -219,7 +219,6 @@ class SystemExtension extends Extension
             'app.site_title',
             'app.timezone',
             'app.storage',
-            'mail.enabled',
             'mail.driver',
             'mail.encryption',
             'mail.from.address',

@@ -65,14 +65,6 @@
 
                     <h2 class="pk-form-heading">@trans('Email')</h2>
                     <div class="uk-form-row" data-email>
-                        <label for="form-emailenabled" class="uk-form-label">@trans('Send Email')</label>
-                        <div class="uk-form-controls uk-form-controls-text">
-                            <p class="uk-form-controls-condensed">
-                                <label><input id="form-emailenabled" type="checkbox" name="option[system:mail.enabled]" value="1" @(option.get('system:mail.enabled') ? 'checked')> @trans('Enable mail sending.')</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="uk-form-row" data-email>
                         <label for="form-emailaddress" class="uk-form-label">@trans('From Email')</label>
                         <div class="uk-form-controls">
                             <input id="form-emailaddress" class="uk-form-width-large" type="text" name="option[system:mail.from.address]" value="@option.get('system:mail.from.address')">

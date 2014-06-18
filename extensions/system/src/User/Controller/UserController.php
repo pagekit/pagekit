@@ -206,7 +206,6 @@ class UserController extends Controller
             $response = array('message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user));
 
         } catch (Exception $e) {
-
             $response = array('error' => $e->getMessage());
         }
 
@@ -334,14 +333,14 @@ class UserController extends Controller
      */
     protected function sendWelcomeEmail(User $user)
     {
-        if (!$this('config')->get('mail.enabled')) {
-            return;
-        }
+        try {
 
-        $this('mailer')->create()
-            ->setTo($user->getEmail())
-            ->setSubject(__('Welcome!'))
-            ->setBody($this('view')->render('system/user/mails/welcome.razr.php', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
-            ->queue();
+            $this('mailer')->create()
+                ->setTo($user->getEmail())
+                ->setSubject(__('Welcome!'))
+                ->setBody($this('view')->render('system/user/mails/welcome.razr.php', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
+                ->queue();
+
+        } catch(\Exception $e) {}
     }
 }

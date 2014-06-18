@@ -77,14 +77,13 @@ class RouteListener extends EventSubscriber
     {
         if (!isset($this->cacheEntries[$id])) {
 
-            if (!$post = $this->getPosts()->where(compact('id'))->related('user')->first()) {
+            if (!$post = $this->getPosts()->where(compact('id'))->first()) {
                 throw new \RuntimeException(__('Post with id "%id%" not found!', array('%id%' => $id)));
             }
 
             $this->cacheEntries[$id] = array(
                 'id'     => $post->getId(),
                 'slug'   => $post->getSlug(),
-                'author' => $post->getUser()->getUsername(),
                 'year'   => $post->getDate()->format('Y'),
                 'month'  => $post->getDate()->format('m'),
                 'day'    => $post->getDate()->format('d'),
