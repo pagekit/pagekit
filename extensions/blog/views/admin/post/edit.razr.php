@@ -52,9 +52,9 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Publish on')</span>
                     <div class="uk-form-controls">
-                        <a class="js-publish" href="#" data-uk-toggle="{target:'.js-publish'}">@post.date|date @ @post.date|date('H:i')</a>
-                        <input class="uk-form-width-small uk-form-small uk-hidden js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@post.date|date('Y-m-d')">
-                        <input class="uk-form-width-small uk-form-small uk-hidden js-publish" type="text" data-uk-timepicker="{ showSeconds: true }" name="" value="@post.date|date('H:i:s')">
+
+                        <input class="uk-form-width-small uk-form-small js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@post.date|date('Y-m-d')">
+                        <input class="uk-form-width-small uk-form-small js-publish" type="text" data-uk-timepicker="" name="" value="@post.date|date('H:i')">
                         <input type="hidden" name="post[date]" value="@post.date|date('Y-m-d H:i:s')">
                     </div>
                 </div>

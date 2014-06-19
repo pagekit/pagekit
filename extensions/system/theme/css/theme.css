@@ -5994,6 +5994,15 @@ a.uk-thumbnail:focus {
   -webkit-animation: uk-fade 0.2s ease-in-out;
   animation: uk-fade 0.2s ease-in-out;
 }
+/* Modifier `uk-dropdown-scrollable`
+ ========================================================================== */
+/*
+ * Usefull for long lists
+ */
+.uk-dropdown-scrollable {
+  overflow-y: auto;
+  height: 200px;
+}
 /* ========================================================================
    Component: Modal
  ========================================================================== */

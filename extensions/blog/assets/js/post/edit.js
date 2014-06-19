@@ -1,4 +1,4 @@
-require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
+require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-post'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -9,6 +9,9 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         e.stopImmediatePropagation();
 
         spinner.removeClass('uk-hidden');
+
+        // date handling
+        $('[name="post[date]"]', form).val($('[data-uk-datepicker]', form).val()+' '+$('[data-uk-timepicker]', form).val());
 
         $.post(form.attr('action'), form.serialize(), function(response) {
 
@@ -36,11 +39,6 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         };
 
     })();
-
-    // date handling
-    form.on('change', '.js-publish', function() {
-        $('[name="post[date]"]', form).val($('[data-uk-datepicker]', form).val()+' '+$('[data-uk-timepicker]', form).val());
-    });
 
     // url handling
     $('input[name="page[title]"]', form).on('blur', function() {
