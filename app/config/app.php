@@ -20,6 +20,7 @@ return array(
 
             'Pagekit\Framework\Provider\ExceptionServiceProvider',
             'Pagekit\Framework\Provider\RazrServiceProvider',
+            'Pagekit\Framework\Provider\RazrServiceProvider2',
             'Pagekit\Framework\Provider\TemplatingServiceProvider',
             'Pagekit\Component\Profiler\ProfilerServiceProvider',
             'Pagekit\Component\Cache\CacheServiceProvider',
