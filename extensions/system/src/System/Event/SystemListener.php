@@ -12,6 +12,7 @@ use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
+use Pagekit\Razr\Directive\FunctionDirective;
 use Pagekit\System\Dashboard\FeedWidget;
 use Pagekit\System\Dashboard\WeatherWidget;
 use Pagekit\System\Package\Event\LoadFailureEvent;
@@ -47,14 +48,18 @@ class SystemListener extends EventSubscriber
         $helper = new DateHelper($app['dates']);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('date', array($helper, 'format')));
 
         $helper = new EditorHelper($app['events']);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('editor', array($helper, 'render'), false));
 
         $helper = new FinderHelper($app);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('finder', array($helper, 'render'), false));
+
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('urldecode', 'urldecode'));
 
         $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
