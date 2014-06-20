@@ -49,6 +49,7 @@ class SystemListener extends EventSubscriber
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
         $app['tmpl.razr2']->addDirective(new FunctionDirective('date', array($helper, 'format')));
+        $app['tmpl.razr2']->addFunction('date', array($helper, 'format'));
 
         $helper = new EditorHelper($app['events']);
         $app['tmpl.php']->addHelpers(array($helper));
@@ -59,6 +60,12 @@ class SystemListener extends EventSubscriber
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
         $app['tmpl.razr2']->addDirective(new FunctionDirective('finder', array($helper, 'render'), false));
+
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('url_route', array($app['url'], 'route')));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('url_to', array($app['url'], 'to')));
+
+        $app['tmpl.razr2']->addFunction('url_route', array($app['url'], 'route'));
+        $app['tmpl.razr2']->addFunction('url_to', array($app['url'], 'to'));
 
         $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('urldecode', 'urldecode'));
 
