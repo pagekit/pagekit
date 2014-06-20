@@ -32,11 +32,11 @@
             </div>
 
             <p>
-                <input class="uk-button uk-button-primary" type="submit" value="@trans('Submit comment')" accesskey="s"/>
+                <input class="uk-button uk-button-primary" type="submit" value="@trans('Submit comment')" accesskey="s">
                 <a class="js-cancel-reply" href="#">@trans('Cancel')</a>
             </p>
 
-            <input type="hidden" name="comment[parent_id]" value="0"/>
+            <input type="hidden" name="comment[parent_id]" value="0">
 
         @elseif (app.user.authenticated)
 

@@ -6,7 +6,7 @@
                 <textarea name="comment[content]" cols="60" rows="6"></textarea>
             </div>
 
-            <input type="hidden" name="comment[parent_id]" value="{{id}}" />
+            <input type="hidden" name="comment[parent_id]" value="{{id}}">
             @token()
 
             <p>

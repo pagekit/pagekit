@@ -45,6 +45,6 @@
     @token()
 
     <input type="hidden" name="page" value="0">
-    <input type="hidden" name="post" value="" />
+    <input type="hidden" name="post" value="">
 
 </form>
