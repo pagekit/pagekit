@@ -1,4 +1,5 @@
 @script('blog.comments-index', 'blog/js/comment/index.js', 'requirejs')
+@style('blog-admin', 'blog/css/blog.admin.css')
 
 <form id="js-comments" class="uk-form" action="@url.route('@blog/comment')" method="post">
 

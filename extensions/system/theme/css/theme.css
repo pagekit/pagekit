@@ -7808,6 +7808,14 @@ a.uk-datepicker-table-muted {
 .pk-overlay-border {
   border: 1px dashed #ddd;
 }
+/* Text utility `pk-text-left-large`
+========================================================================== */
+/* Desktop and bigger */
+@media (min-width: 960px) {
+  .pk-text-right-large {
+    text-align: right !important;
+  }
+}
 /* Sub-modifier `pk-table-subheading`
 ========================================================================== */
 /*
