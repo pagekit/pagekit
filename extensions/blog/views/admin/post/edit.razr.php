@@ -60,9 +60,9 @@
                                 </div>
                             </div>
                             <div class="uk-width-large-1-2">
-                                <div class="uk-form-icon">
+                                <div class="uk-form-icon" data-uk-timepicker="">
                                     <i class="uk-icon-clock-o"></i>
-                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" data-uk-timepicker="" name="" value="@post.date|date('H:i')">
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" name="" value="@post.date|date('H:i')">
                                 </div>
                             </div>
                         </div>
