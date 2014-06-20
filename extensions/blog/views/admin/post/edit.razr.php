@@ -52,9 +52,20 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Publish on')</span>
                     <div class="uk-form-controls">
-
-                        <input class="uk-form-width-small uk-form-small js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@post.date|date('Y-m-d')">
-                        <input class="uk-form-width-small uk-form-small js-publish" type="text" data-uk-timepicker="" name="" value="@post.date|date('H:i')">
+                        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon">
+                                    <i class="uk-icon-calendar"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@post.date|date('Y-m-d')">
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon" data-uk-timepicker="">
+                                    <i class="uk-icon-clock-o"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" name="" value="@post.date|date('H:i')">
+                                </div>
+                            </div>
+                        </div>
                         <input type="hidden" name="post[date]" value="@post.date|date('Y-m-d H:i:s')">
                     </div>
                 </div>

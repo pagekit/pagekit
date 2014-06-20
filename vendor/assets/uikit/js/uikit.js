@@ -1,4 +1,4 @@
-/*! UIkit 2.7.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.8.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(core) {
 
@@ -48,7 +48,7 @@
         return UI;
     }
 
-    UI.version = '2.7.1';
+    UI.version = '2.8.0';
     UI.$doc    = $doc;
     UI.$win    = $win;
 
@@ -311,7 +311,7 @@
 
         // remove css hover rules for touch devices
         if (UI.support.touch) {
-            UI.Utils.removeCssRules(/\.uk-(?!navbar).*:hover/);
+            // UI.Utils.removeCssRules(/\.uk-(?!navbar).*:hover/);
         }
     });
 
@@ -954,7 +954,7 @@
         },
 
         getSelected: function() {
-            this.find(".uk-active");
+            return this.find(".uk-active");
         }
     });
 
@@ -978,7 +978,7 @@
         },
 
         getSelected: function() {
-            this.find(".uk-active");
+            return this.find(".uk-active");
         }
     });
 
