@@ -32,7 +32,7 @@
                     </div>
                     <div class="uk-float-left uk-width-large-1-2 pk-text-right-large">
                         @if ( $comment.thread.status == 2 && $comment.thread.hasAccess($app.user) )
-                            <a href="@url_route('@blog/id', ['id' => $comment.threadId])#comment-@( $comment.id )">@( date($comment.created, 'l, d-M-y H:i:s') )</a>
+                            <a href="@url_route('@blog/id', ['id' => $comment.threadId])#comment-@( $comment.id )">@date($comment.created, 'l, d-M-y H:i:s')</a>
                         @else
                             @date($comment.created, 'l, d-M-y H:i:s')
                         @endif
