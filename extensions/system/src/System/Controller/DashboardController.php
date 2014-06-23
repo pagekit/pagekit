@@ -27,7 +27,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @View("system/admin/dashboard/index.razr.php")
+     * @View("system/admin/dashboard/index.razr")
      */
     public function indexAction()
     {
@@ -47,7 +47,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @View("system/admin/dashboard/settings.razr.php")
+     * @View("system/admin/dashboard/settings.razr")
      */
     public function settingsAction()
     {
@@ -69,7 +69,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @View("system/admin/dashboard/edit.razr.php")
+     * @View("system/admin/dashboard/edit.razr")
      */
     public function addAction($id)
     {
@@ -93,7 +93,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @View("system/admin/dashboard/edit.razr.php")
+     * @View("system/admin/dashboard/edit.razr")
      */
     public function editAction($id)
     {
