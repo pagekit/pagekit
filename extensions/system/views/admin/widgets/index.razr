@@ -69,7 +69,7 @@
         </div>
 
         @foreach ($positions as $position)
-        <div class="js-position@( $widgets[$position.id] ? '' : ' uk-hidden')" data-position="@( $position.id )">
+        <div class="js-position@( $widgets[$position.id] ? '' : ' uk-hidden' )" data-position="@( $position.id )">
             <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
                 <div>
                     @trans($position.name)
@@ -80,7 +80,7 @@
             </div>
 
             <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }" data-position="@( $position.id )">
-                @foreach ($widgets[$position.id] as $widget)
+                @foreach ($widgets[$position.id] ?: [] as $widget)
 
                 @set ($type = $app.widgets.types[$widget.type])
 

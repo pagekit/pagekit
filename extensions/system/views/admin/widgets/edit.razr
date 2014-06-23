@@ -58,7 +58,7 @@
                 </li>
                 @foreach ($additionals as $settings)
                 <li>
-                    @( $settings )
+                    @raw( $settings )
                 </li>
                 @endforeach
             </ul>
