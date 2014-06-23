@@ -1,28 +1,17 @@
-<h2 class="title">@trans('Blog')</h2>
+@foreach ($posts as $post)
+<article class="uk-article">
 
-<div>
+    <h1 class="uk-article-title"><a href="@url_route('@blog/id', ['id' => $post.id])">@( $post.title )</a></h1>
 
-    @foreach ($posts as $post)
-        <article class="uk-article">
+    <p class="uk-article-meta">
+        @raw( trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ]) )
+    </p>
 
-            <header>
+    <div>@raw( $post.content )</div>
 
-                <a href="@url_route('@blog/id', ['id' => $post.id])"><h1 class="title">@( $post.title )</h1></a>
+    <ul class="uk-subnav uk-subnav-line">
+        <li><a href="@url_route('@blog/id', ['id' => $post.id])">@trans('Continue Reading')</a></li>
+    </ul>
 
-                <p class="meta">
-                    @raw( trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ]) )
-                </p>
-
-            </header>
-
-            <div>
-                @raw( $post.content )
-            </div>
-
-            <p>
-                <a href="@url_route('@blog/id', ['id' => $post.id])">@trans('Continue Reading »')</a>
-            </p>
-        </article>
-    @endforeach
-
-</div>
+</article>
+@endforeach

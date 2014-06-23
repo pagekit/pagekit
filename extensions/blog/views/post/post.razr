@@ -1,6 +1,8 @@
 <article class="uk-article">
+
     <h1 class="uk-article-title">@( $post.title )</h1>
-    @raw( $post.content )
+
+    <div>@raw( $post.content )</div>
 
     @include('view://blog/comment/comments.razr', ['post' => $post])
 

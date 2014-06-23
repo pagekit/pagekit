@@ -1,17 +1,18 @@
-<div class="js-respond">
+<div class="js-respond uk-margin">
+
     <h3>@trans('Leave a comment')</h3>
 
-    <form class="uk-form" method="post" action="@url_route('@blog/default/comment', ['thread_id' => $post.id])">
+    @if ($app.user.hasAccess('blog: post comments'))
 
-        @if ($app.user.hasAccess('blog: post comments'))
+        <form class="uk-form" method="post" action="@url_route('@blog/default/comment', ['thread_id' => $post.id])">
 
             @if ($app.user.authenticated)
 
-                <p class="user">@trans('Logged in as %name%', ['%name%' => $app.user.name])</p>
+                <p>@trans('Logged in as %name%', ['%name%' => $app.user.name])</p>
 
             @else
 
-                <p class="user">@trans('You are commenting as guest.')</p>
+                <p>@trans('You are commenting as guest.')</p>
 
                 @set( $req = $config['comments.require_name_and_email'] )
 
@@ -38,17 +39,18 @@
 
             <input type="hidden" name="comment[parent_id]" value="0">
 
-        @elseif ($app.user.authenticated)
+            @token
 
-            @trans('You are not allowed to post comments.')
+        </form>
 
-        @else
+    @elseif ($app.user.authenticated)
 
-            @trans('Please login to leave a comment.')
+        <p>@trans('You are not allowed to post comments.')</p>
 
-        @endif
+    @else
 
-        @token
+        <p>@trans('Please login to leave a comment.')</p>
 
-    </form>
+    @endif
+
 </div>

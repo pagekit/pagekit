@@ -1,9 +1,11 @@
 <li id="comment-@( $comment.id )">
-    <article data-comment="@( $comment.id )" class="uk-comment ">
+
+    <article class="uk-comment" data-comment="@( $comment.id )">
 
         <header class="uk-comment-header">
 
-            @gravatar($comment.email, ['size' => 50, 'attrs' => ['width' => '50', 'height' => '50', 'alt' => $comment.author, 'class' => 'uk-comment-avatar']])
+            @gravatar($comment.email, ['size' => 100, 'attrs' => ['width' => '50', 'height' => '50', 'alt' => $comment.author, 'class' => 'uk-comment-avatar']])
+
             <h3 class="uk-comment-title">@( $comment.author )</h3>
 
             <ul class="uk-comment-meta uk-subnav uk-subnav-line">
@@ -26,6 +28,7 @@
         </div>
 
     </article>
+
     @if ($node.hasChildren())
     <ul>
         @foreach ($node.children as $child)
@@ -33,4 +36,5 @@
         @endforeach
     </ul>
     @endif
+
 </li>

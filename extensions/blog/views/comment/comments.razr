@@ -2,7 +2,7 @@
 
 <div class="js-comments uk-margin">
 
-    <h2>@trans('Comments (%count%)', ['%count%' => $post.numComments])</h2>
+    <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.numComments])</h2>
 
     <ul class="uk-comment-list">
 
