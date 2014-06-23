@@ -42,7 +42,7 @@ class UserController extends Controller
 
     /**
      * @Request({"filter": "array"})
-     * @View("system/admin/user/index.razr.php")
+     * @View("system/admin/user/index.razr")
      */
     public function indexAction($filter = null)
     {
@@ -101,7 +101,7 @@ class UserController extends Controller
     }
 
     /**
-     * @View("system/admin/user/edit.razr.php")
+     * @View("system/admin/user/edit.razr")
      */
     public function addAction()
     {
@@ -115,7 +115,7 @@ class UserController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/user/edit.razr.php")
+     * @View("system/admin/user/edit.razr")
      */
     public function editAction($id)
     {

@@ -6,18 +6,18 @@
         <form id="js-role" class="uk-form" method="post">
 
             <div class="uk-panel uk-panel-divider pk-panel-marginless">
-                <ul class="pk-nestable" data-uk-nestable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url.route('@system/role/priority')">
-                    @foreach (roles as r)
-                    <li data-id="@r.id">
-                        <div class="pk-nestable-item uk-visible-hover@( r == role ? ' pk-active')">
+                <ul class="pk-nestable" data-uk-nestable="{ maxDepth: 1, prefix: 'pk' }" data-update-url="@url_route('@system/role/priority')">
+                    @foreach ($roles as $r)
+                    <li data-id="@( $r.id )">
+                        <div class="pk-nestable-item uk-visible-hover@( $r == $role ? ' pk-active' : '')">
                             <div class="pk-nestable-handle"></div>
-                            @if (!r.locked)
+                            @if (!$r.locked)
                             <ol class="uk-subnav pk-subnav-icon uk-hidden">
-                                <li><a href="#" data-edit="@url.route('@system/role/save', ['id' => r.id])" data-name="@r.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
-                                <li><a href="#" data-action="@url.route('@system/role/delete', ['id' => r.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
+                                <li><a href="#" data-edit="@url_route('@system/role/save', ['id' => $r.id])" data-name="@( $r.name )" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
+                                <li><a href="#" data-action="@url_route('@system/role/delete', ['id' => $r.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
                             </ol>
                             @endif
-                            <a href="@url.route('@system/role', ['id' => r.id])">@r.name</a>
+                            <a href="@url_route('@system/role', ['id' => $r.id])">@( $r.name )</a>
                         </div>
                     </li>
                     @endforeach
@@ -25,17 +25,17 @@
             </div>
 
             <div class="uk-panel uk-panel-divider">
-                <a class="uk-button" href="#" data-edit="@url.route('@system/role/save', ['id' => 0])">@trans('Add Role')</a>
+                <a class="uk-button" href="#" data-edit="@url_route('@system/role/save', ['id' => 0])">@trans('Add Role')</a>
             </div>
 
-            @token()
+            @token
 
         </form>
     </div>
     <div class="uk-width-medium-3-4">
-        <form id="js-role-permissions" class="uk-form" action="@url.route('@system/role/save', ['id' => role.id])" method="post">
+        <form id="js-role-permissions" class="uk-form" action="@url_route('@system/role/save', ['id' => $role.id])" method="post">
 
-            @if (role.id)
+            @if ($role.id)
             <div class="uk-overflow-container">
                 <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent">
                     <thead>
@@ -45,23 +45,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (permissions as extension => permission)
+                        @foreach ($permissions as $extension => $permission)
                         <tr>
-                            <th colspan="2">@app.extensions.repository.findPackage(extension).title</th>
+                            <th colspan="2">@( $app.extensions.repository.findPackage($extension).title )</th>
                         </tr>
-                            @foreach (permission as name => data)
+                            @foreach ($permission as $name => $data)
                             <tr>
                                 <td>
-                                    @trans(data.title)
-                                    @if (data.description)
-                                    <small class="uk-text-muted uk-display-block">@trans(data.description)</small>
+                                    @trans($data.title)
+                                    @if ($data.description)
+                                    <small class="uk-text-muted uk-display-block">@trans($data.description)</small>
                                     @endif
                                 </td>
-                                <td class="@( (!role.administrator && !role.locked) && authrole.hasPermission(name) ? 'pk-role-inherited')@(role.hasPermission(name) ? 'pk-role-enabled')">
-                                    @if (role.administrator)
+                                <td class="@( (!$role.administrator && !$role.locked) && $authrole.hasPermission($name) ? 'pk-role-inherited' : '' )@( $role.hasPermission($name) ? 'pk-role-enabled' : '' )">
+                                    @if ($role.administrator)
                                         <input type="checkbox" checked disabled>
                                     @else
-                                        <input class="@(!role.locked ? 'pk-checkbox')" type="checkbox" name="permissions[]" value="@name"@(role.hasPermission(name) ? ' checked')>
+                                        <input class="@( !$role.locked ? 'pk-checkbox' : '' )" type="checkbox" name="permissions[]" value="@( $name )"@( $role.hasPermission($name) ? ' checked' : '' )>
                                     @endif
                                 </td>
                             </tr>
@@ -72,8 +72,7 @@
             </div>
             @endif
 
-
-            @token()
+            @token
 
         </form>
     </div>
@@ -91,7 +90,7 @@
             <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
             <button class="uk-button uk-modal-close" type="submit">@trans('Cancel')</button>
 
-            @token()
+            @token
 
         </form>
 

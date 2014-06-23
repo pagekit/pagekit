@@ -40,15 +40,15 @@ class User implements LinkInterface
     {
         $routes = $this->getRoutes();
 
-        return $this('view')->render('system/admin/user/link.razr.php', compact('link', 'params', 'routes'));
+        return $this('view')->render('system/admin/user/link.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()
     {
         return [
-            '@system/auth/login' => __('Login'),
-            '@system/registration' => __('Registration'),
-            '@system/profile' => __('Profile'),
+            '@system/auth/login'    => __('Login'),
+            '@system/registration'  => __('Registration'),
+            '@system/profile'       => __('Profile'),
             '@system/resetpassword' => __('Password Reset')
         ];
     }
