@@ -35,7 +35,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @View("system/user/registration.razr.php")
+     * @View("system/user/registration.razr")
      */
     public function indexAction()
     {
@@ -192,7 +192,7 @@ class RegistrationController extends Controller
             $this('mailer')->create()
                 ->setTo($this('option')->get('system:mail.from.address'))
                 ->setSubject(__('Please approve registration at %site%!', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr.php', $mail), compact('user')), 'text/html')
+                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}
@@ -205,7 +205,7 @@ class RegistrationController extends Controller
             $this('mailer')->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Please confirm your registration at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr.php', $mail), compact('user')), 'text/html')
+                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {
@@ -220,7 +220,7 @@ class RegistrationController extends Controller
             $this('mailer')->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Account activated at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render('system/user/mails/activated.razr.php', compact('user')), 'text/html')
+                ->setBody($this('view')->render('system/user/mails/activated.razr', compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}

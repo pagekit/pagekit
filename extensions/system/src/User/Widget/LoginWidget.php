@@ -48,7 +48,7 @@ class LoginWidget extends Type
         $redirect          = $widget->get('redirect.login') ?: $this('url')->current(true);
         $last_username     = $this('session')->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
-        return $this('view')->render('system/widgets/login/login.razr.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return $this('view')->render('system/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 
     /**

@@ -34,7 +34,7 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @View("system/user/reset/request.razr.php")
+     * @View("system/user/reset/request.razr")
      */
     public function indexAction()
     {
@@ -47,7 +47,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"login"})
-     * @View("system/user/reset/request.razr.php")
+     * @View("system/user/reset/request.razr")
      */
     public function resetAction($login)
     {
@@ -84,7 +84,7 @@ class ResetPasswordController extends Controller
                 $this('mailer')->create()
                     ->setTo($user->getEmail())
                     ->setSubject(sprintf('[%s] %s', $this('config')->get('app.site_title'), __('Password Reset')))
-                    ->setBody($this('view')->render('system/user/mails/reset.razr.php', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
+                    ->setBody($this('view')->render('system/user/mails/reset.razr', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
                     ->send();
 
             } catch (\Exception $e) {
@@ -108,7 +108,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"user", "key"})
-     * @View("system/user/reset/confirm.razr.php")
+     * @View("system/user/reset/confirm.razr")
      */
     public function confirmAction($username = "", $activation = "")
     {

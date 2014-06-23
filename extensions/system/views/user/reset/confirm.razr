@@ -1,6 +1,6 @@
 @script('form-password', 'vendor://assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
 
-<form class="uk-article uk-form" action="@url.route('@system/resetpassword/confirm', ['user' => username, 'key' => activation])" method="post">
+<form class="uk-article uk-form" action="@url_route('@system/resetpassword/confirm', ['user' => $username, 'key' => $activation])" method="post">
 
     <h1 class="uk-article-title">@trans('Password confirmation')</h1>
 
@@ -18,6 +18,6 @@
         <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
     </div>
 
-    @token()
+    @token
 
 </form>
