@@ -1,5 +1,5 @@
 <tr class="js-editor">
-    <td colspan="6">
+    <td colspan="5">
         <form class="uk-form" action="@url.route('@blog/comment/save')">
 
             <div class="uk-form-row">
