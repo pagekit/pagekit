@@ -1,15 +1,15 @@
-<div class="js-editor-image uk-overlay uk-display-block">
+<div class="js-editor-video uk-overlay uk-display-block">
     {{#if src}}
-        <img src="{{{src}}}" alt="{{{alt}}}">
+        {{{preview}}}
     {{else}}
         <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align">
-            <div class="uk-vertical-align-middle"><img data-js-no-parse src="@url.to('asset://system/images/placeholder-editor-image.svg')" width="60" height="60" alt="@trans('Placeholder Image')"></div>
+            <div class="uk-vertical-align-middle"><img data-js-no-parse src="@url_to('asset://system/images/placeholder-editor-video.svg')" width="60" height="60" alt="@trans('Placeholder Video')"></div>
         </div>
     {{/if}}
 
     <div class="uk-overlay-area pk-overlay-border">
         <div class="uk-overlay-area-content">
-            <h3 class="uk-margin-small-bottom">@trans('Image')</h3>
+            <h3 class="uk-margin-small-bottom">@trans('Video')</h3>
             <div data-uk-margin>
                 <button class="uk-button uk-button-primary js-config" type="button">@trans('Settings')</button>
                 <button class="uk-button pk-button-danger js-remove" type="button">@trans('Delete')</button>

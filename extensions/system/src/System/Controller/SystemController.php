@@ -88,7 +88,7 @@ class SystemController extends Controller
     /**
      * @Route("/system/storage")
      * @Access("system: manage storage", admin=true)
-     * @View("system/admin/settings/storage.razr.php")
+     * @View("system/admin/settings/storage.razr")
      */
     public function storageAction()
     {

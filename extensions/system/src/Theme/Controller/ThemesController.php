@@ -28,7 +28,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @View("system/admin/settings/themes.razr.php")
+     * @View("system/admin/settings/themes.razr")
      */
     public function indexAction()
     {

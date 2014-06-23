@@ -32,7 +32,7 @@ class UpdateController extends Controller
     }
 
     /**
-     * @View("system/admin/settings/update.razr.php")
+     * @View("system/admin/settings/update.razr")
      */
     public function indexAction()
     {
