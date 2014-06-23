@@ -22,7 +22,7 @@ return array(
 
     'settings' => array(
 
-        'system' => '%NAME%/admin/settings.razr.php'
+        'system' => '%NAME%/admin/settings.razr'
 
     )
 

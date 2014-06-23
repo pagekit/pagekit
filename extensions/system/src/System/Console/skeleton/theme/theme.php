@@ -25,7 +25,7 @@ return array(
 
     'settings' => array(
 
-        'system'  => 'theme://%NAME%/views/admin/settings.razr.php'
+        'system'  => 'theme://%NAME%/views/admin/settings.razr'
 
     )
 

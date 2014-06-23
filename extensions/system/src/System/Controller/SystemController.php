@@ -34,7 +34,7 @@ class SystemController extends Controller
 
     /**
      * @Route("/admin/login", methods="POST", options={"maintenance"=true})
-     * @View("extension://system/theme/templates/login.razr.php", layout=false)
+     * @View("extension://system/theme/templates/login.razr", layout=false)
      */
     public function loginAction()
     {

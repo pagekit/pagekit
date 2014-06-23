@@ -49,7 +49,7 @@ class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInter
             $exception = FlattenException::create($exception);
         }
 
-        $response = $this('view')->render('extension://system/theme/templates/error.razr.php', compact('title', 'exception'));
+        $response = $this('view')->render('extension://system/theme/templates/error.razr', compact('title', 'exception'));
 
         $this('response')->create($response, $exception->getStatusCode(), $exception->getHeaders())->send();
 
