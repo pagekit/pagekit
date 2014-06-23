@@ -26,7 +26,7 @@
                                     <li@( $item.attribute('active') ? ' class="uk-active"' : '' ) data-id="@( $item.getId() )">
                                         <a class="uk-panel pk-panel-icon" href="@url_route($item.url)">
                                             <img src="@url_to( $item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="50" height="50">
-                                            <p>@trans(item)</p>
+                                            <p>@trans($item)</p>
                                         </a>
                                     </li>
                                 @endforeach
