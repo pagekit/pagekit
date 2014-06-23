@@ -42,7 +42,7 @@ class ItemController extends Controller
 
     /**
      * @Request({"menu": "int"})
-     * @View("system/admin/menu/item.edit.razr.php")
+     * @View("system/admin/menu/item.edit.razr")
      */
     public function addAction($id)
     {
@@ -66,7 +66,7 @@ class ItemController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/menu/item.edit.razr.php")
+     * @View("system/admin/menu/item.edit.razr")
      */
     public function editAction($id)
     {

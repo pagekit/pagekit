@@ -1,10 +1,10 @@
 @script('menu', 'system/js/menu/item.edit.js', 'requirejs')
 
-<form class="js-item-edit uk-form uk-form-horizontal" action="@url.route('@system/item/save')" method="post">
+<form class="js-item-edit uk-form uk-form-horizontal" action="@url_route('@system/item/save')" method="post">
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/menu', ['id' => item.menuId])">@(item.id ? trans('Close') : trans('Cancel'))</a>
+        <a class="uk-button" href="@url_route('@system/menu', ['id' => $item.menuId])">@( $item.id ? trans('Close') : trans('Cancel') )</a>
     </div>
 
     <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-link">@trans('Please choose a link.')</p>
@@ -12,7 +12,7 @@
     <div class="uk-form-row">
         <label for="form-title" class="uk-form-label">@trans('Title')</label>
         <div class="uk-form-controls">
-            <input id="form-title" class="uk-form-width-large" type="text" name="item[name]" value="@item.name" required>
+            <input id="form-title" class="uk-form-width-large" type="text" name="item[name]" value="@( $item.name )" required>
         </div>
     </div>
 
@@ -21,15 +21,16 @@
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
                 <label>
-                    <input type="radio" name="item[url]" value="@(item.url != '!divider' && item.url != '!header' ? item.url~'" checked' : '"')>
-                    <input class="js-item-url" type="hidden" name="" value="@(item.url != '!divider' && item.url != '!header' ? item.url)" data-context="system/menu">
+                    @set ( $checked = !in_array($item.url, ['!divider', '!header']) )
+                    <input type="radio" name="item[url]" value="@raw( $checked ? escape($item.url).'" checked' : '"' )>
+                    <input class="js-item-url" type="hidden" name="" value="@( $checked ? $item.url : '' )" data-context="system/menu">
                 </label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="item[url]" value="!header"@(item.url == '!header' ? ' checked')> @trans('Header')</label>
+                <label><input type="radio" name="item[url]" value="!header"@( $item.url == '!header' ? ' checked' : '' )> @trans('Header')</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="item[url]" value="!divider"@(item.url == '!divider' ? ' checked')> @trans('Divider')</label>
+                <label><input type="radio" name="item[url]" value="!divider"@( $item.url == '!divider' ? ' checked' : '')> @trans('Divider')</label>
             </p>
         </div>
     </div>
@@ -38,10 +39,10 @@
         <span class="uk-form-label">@trans('Status')</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="item[status]" value="1"@(item.status ? ' checked')> @trans('Enabled')</label>
+                <label><input type="radio" name="item[status]" value="1"@( $item.status ? ' checked' : '' )> @trans('Enabled')</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" name="item[status]" value="0"@(!item.status ? ' checked')> @trans('Disabled')</label>
+                <label><input type="radio" name="item[status]" value="0"@( !$item.status ? ' checked' : '' )> @trans('Disabled')</label>
             </p>
         </div>
     </div>
@@ -49,9 +50,9 @@
     <div class="uk-form-row">
         <span class="uk-form-label">@trans('Restrict Access')</span>
         <div class="uk-form-controls uk-form-controls-text">
-            @foreach (roles as role)
+            @foreach ($roles as $role)
             <p class="uk-form-controls-condensed">
-                <label><input type="checkbox" name="item[roles][]" value="@role.id"@(item.hasRole(role) ? ' checked' )> @role.name</label>
+                <label><input type="checkbox" name="item[roles][]" value="@( $role.id )"@( $item.hasRole($role) ? ' checked' : '' )> @( $role.name )</label>
             </p>
             @endforeach
             <input type="hidden" name="item[roles]" value="">
@@ -61,15 +62,15 @@
     <div class="uk-form-row">
         <label for="form-pages" class="uk-form-label">@trans('Activation Rules')</label>
         <div class="uk-form-controls">
-            <textarea id="form-pages" class="uk-form-width-large" name="item[pages]" rows="5">@item.pages</textarea>
+            <textarea id="form-pages" class="uk-form-width-large" name="item[pages]" rows="5">@( $item.pages )</textarea>
             <p class="uk-form-help-block">@trans('Enter custom activation rules as paths.')</p>
         </div>
     </div>
 
 
-    <input type="hidden" name="id" value="@item.id">
-    <input type="hidden" name="menu" value="@(menu.id ?: item.menuId)">
+    <input type="hidden" name="id" value="@( $item.id )">
+    <input type="hidden" name="menu" value="@( $menu.id ?: $item.menuId )">
 
-    @token()
+    @token
 
 </form>

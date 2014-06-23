@@ -1,20 +1,20 @@
 @script('menu', 'system/js/menu/menu.js', 'requirejs')
 
-<form id="js-menu" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url.route('@system/menu/reorder', ['id' => menu.id])" method="post">
+<form id="js-menu" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url_route('@system/menu/reorder', ['id' => $menu.id])" method="post">
     <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        @if (menus)
+        @if ($menus)
         <div class="uk-panel uk-panel-divider pk-panel-marginless">
             <ul class="uk-nav uk-nav-side">
-                @foreach (menus as m)
-                <li class="uk-visible-hover@( m == menu ? ' uk-active' )">
-                    @if (m.id)
+                @foreach ($menus as $m)
+                <li class="uk-visible-hover@( $m == $menu ? ' uk-active' : '' )">
+                    @if ($m.id)
                     <ol class="uk-subnav pk-subnav-icon uk-hidden">
-                        <li><a href="#" data-edit="@url.route('@system/menu/save', ['id' => m.id])" data-menu-name="@m.name" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
-                        <li><a href="#" data-action="@url.route('@system/menu/delete', ['id' => m.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
+                        <li><a href="#" data-edit="@url_route('@system/menu/save', ['id' => $m.id])" data-menu-name="@( $m.name )" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
+                        <li><a href="#" data-action="@url_route('@system/menu/delete', ['id' => $m.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
                     </ol>
                     @endif
-                    <a href="@url.route('@system/menu', ['id' => m.id])">@m.name</a>
+                    <a href="@url_route('@system/menu', ['id' => $m.id])">@( $m.name )</a>
                 </li>
                 @endforeach
             </ul>
@@ -22,24 +22,24 @@
         @endif
 
         <div class="uk-panel uk-panel-divider">
-            <a class="uk-button" href="#modal-menu" data-edit="@url.route('@system/menu/save', ['id' => 0])" data-menu-name="">@trans('Add Menu')</a>
+            <a class="uk-button" href="#modal-menu" data-edit="@url_route('@system/menu/save', ['id' => 0])" data-menu-name="">@trans('Add Menu')</a>
         </div>
 
     </div>
     <div class="uk-width-medium-3-4">
 
-        @if (menu)
+        @if ($menu)
         <div class="pk-toolbar">
 
-            <a class="uk-button uk-button-primary" href="@url.route('@system/item/add', ['menu' => menu.id])">@trans('Add Item')</a>
-            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url.route('@system/item/delete', ['menu' => menu.id])">@trans('Delete')</a>
+            <a class="uk-button uk-button-primary" href="@url_route('@system/item/add', ['menu' => $menu.id])">@trans('Add Item')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url_route('@system/item/delete', ['menu' => $menu.id])">@trans('Delete')</a>
 
             <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 1])">@trans('Enable')</a></li>
-                        <li><a href="#" data-action="@url.route('@system/item/status', ['menu' => menu.id, 'status' => 0])">@trans('Disable')</a></li>
+                        <li><a href="#" data-action="@url_route('@system/item/status', ['menu' => $menu.id, 'status' => 1])">@trans('Enable')</a></li>
+                        <li><a href="#" data-action="@url_route('@system/item/status', ['menu' => $menu.id, 'status' => 0])">@trans('Disable')</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
         </div>
 
-        @include('view://system/admin/menu/item.razr.php', ['menu' => menu, 'root' => app.menus.getTree(menu)])
+        @include('view://system/admin/menu/item.razr', ['menu' => $menu, 'root' => $app.menus.getTree($menu)])
 
         @else
 
@@ -65,7 +65,7 @@
 
         @endif
 
-        @token()
+        @token
 
     </div>
 </form>
@@ -73,7 +73,7 @@
 <div id="modal-menu" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-slide">
 
-        <form class="uk-form" action="@url.route('@system/menu/save', ['id' => 0])" method="post">
+        <form class="uk-form" action="@url_route('@system/menu/save', ['id' => 0])" method="post">
 
             <p>
                 <input class="uk-width-1-1 uk-form-large" type="text" name="name" value="" placeholder="@trans('Enter Menu Name')">
@@ -82,7 +82,7 @@
             <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
             <button class="uk-button uk-modal-close" type="submit">@trans('Cancel')</button>
 
-            @token()
+            @token
 
         </form>
 

@@ -34,7 +34,7 @@ class MenuController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/menu/index.razr.php")
+     * @View("system/admin/menu/index.razr")
      */
     public function indexAction($id = null)
     {
