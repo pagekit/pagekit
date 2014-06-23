@@ -40,7 +40,7 @@ class MenuWidget extends Type
             ini_set('xdebug.max_nesting_level', 1000);
         }
 
-        $layout = isset($options['layout']) ? $options['layout'] : 'system/widgets/menu/nav.razr.php';
+        $layout = isset($options['layout']) ? $options['layout'] : 'system/widgets/menu/nav.razr';
 
         $root = $this('menus')->getTree($widget->get('menu', 0), array(
             'access' => true,
@@ -84,6 +84,6 @@ class MenuWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/widgets/menu/edit.razr.php', compact('widget'));
+        return $this('view')->render('system/widgets/menu/edit.razr', compact('widget'));
     }
 }

@@ -42,7 +42,7 @@ class LoginWidget extends Type
 
         if ($user->isAuthenticated()) {
             $redirect = $widget->get('redirect.logout');
-            return $this('view')->render('system/widgets/login/logout.razr.php', compact('widget', 'user', 'options', 'redirect'));
+            return $this('view')->render('system/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
         }
 
         $redirect          = $widget->get('redirect.login') ?: $this('url')->current(true);
@@ -56,6 +56,6 @@ class LoginWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/widgets/login/edit.razr.php', compact('widget'));
+        return $this('view')->render('system/widgets/login/edit.razr', compact('widget'));
     }
 }
