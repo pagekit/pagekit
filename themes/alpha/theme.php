@@ -20,8 +20,8 @@ return array(
 
     'settings' => array(
 
-        'system'  => 'theme://alpha/views/admin/settings.razr.php',
-        'widgets' => 'theme://alpha/views/admin/widgets/edit.razr.php'
+        'system'  => 'theme://alpha/views/admin/settings.razr',
+        'widgets' => 'theme://alpha/views/admin/widgets/edit.razr'
 
     ),
 
@@ -40,11 +40,11 @@ return array(
 
     'renderer' => array(
 
-        'blank'     => 'theme://alpha/views/renderer/position.blank.razr.php',
+        'blank'     => 'theme://alpha/views/renderer/position.blank.razr',
         'grid'      => 'theme://alpha/views/renderer/position.grid.php',
-        'navbar'    => 'theme://alpha/views/renderer/position.navbar.razr.php',
-        'offcanvas' => 'theme://alpha/views/renderer/position.offcanvas.razr.php',
-        'panel'     => 'theme://alpha/views/renderer/position.panel.razr.php'
+        'navbar'    => 'theme://alpha/views/renderer/position.navbar.razr',
+        'offcanvas' => 'theme://alpha/views/renderer/position.offcanvas.razr',
+        'panel'     => 'theme://alpha/views/renderer/position.panel.razr'
 
     )
 

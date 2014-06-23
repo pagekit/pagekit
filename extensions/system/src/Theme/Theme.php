@@ -27,7 +27,7 @@ class Theme extends ApplicationAware
     /**
      * @var string
      */
-    protected $layout = '/templates/template.razr.php';
+    protected $layout = '/templates/template.razr';
 
     /**
      * Constructor.

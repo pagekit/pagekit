@@ -54,12 +54,12 @@ class SystemListener extends EventSubscriber
         $helper = new EditorHelper($app['events']);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('editor', array($helper, 'render'), false));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
 
         $helper = new FinderHelper($app);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('finder', array($helper, 'render'), false));
+        $app['tmpl.razr2']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
 
         $app['tmpl.razr2']->addDirective(new FunctionDirective('url_route', array($app['url'], 'route')));
         $app['tmpl.razr2']->addDirective(new FunctionDirective('url_to', array($app['url'], 'to')));

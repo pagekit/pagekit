@@ -1,0 +1,11 @@
+@foreach ($widgets as $widget)
+<div class="uk-panel @( $widget.settings.theme.panel )@( $widget.settings.theme.alignment ? ' uk-text-center' : '' )">
+
+    @if ($widget.settings.theme.badge.text)
+    <div class="@( $widget.settings.theme.badge.type )">@( $widget.settings.theme.badge.text )</div>
+    @endif
+
+    @( $widget.showTitle ? "<h3>" . $widget.title . "</h3>" : '')
+    @raw( $provider.render($widget, $options) )
+</div>
+@endforeach

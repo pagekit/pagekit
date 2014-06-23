@@ -1,0 +1,11 @@
+@foreach ($widgets as $widget)
+    @if ($widget.type == 'widget.menu')
+
+    @raw( $provider.render($widget, array_merge(['layout' => 'view://system/widgets/menu/nav.razr', 'classes' => 'uk-nav-offcanvas'], $options)) )
+
+    @else
+
+    @include('theme://alpha/views/renderer/position.panel.razr', ['widgets' => [$widget]])
+
+    @endif
+@endforeach

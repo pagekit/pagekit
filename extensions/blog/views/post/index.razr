@@ -4,7 +4,7 @@
     <h1 class="uk-article-title"><a href="@url_route('@blog/id', ['id' => $post.id])">@( $post.title )</a></h1>
 
     <p class="uk-article-meta">
-        @raw( trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ]) )
+        @trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ])
     </p>
 
     <div>@raw( $post.content )</div>
