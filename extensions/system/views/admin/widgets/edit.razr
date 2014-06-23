@@ -1,20 +1,20 @@
 @script('widget', 'system/js/widgets/edit.js', 'requirejs')
 
-<form class="js-widget uk-form" action="@url.route('@system/widgets/save', ['id' => widget.id ?: 0])" method="post">
+<form class="js-widget uk-form" action="@url_route('@system/widgets/save', ['id' => $widget.id ?: 0])" method="post">
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url.route('@system/widgets')">@(widget.id ? trans('Close') : trans('Cancel'))</a>
+        <a class="uk-button" href="@url_route('@system/widgets')">@( $widget.id ? trans('Close') : trans('Cancel') )</a>
     </div>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
         <div class="uk-width-medium-3-4">
 
-            <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+            <ul class="uk-tab" data-uk-tab="{ connect: '#tab-content' }">
                 <li><a href="#">@trans('Settings')</a></li>
                 <li><a href="#">@trans('Assignment')</a></li>
-                @foreach (additionals as name => settings)
-                <li><a href="#">@name</a></li>
+                @foreach ($additionals as $name => $settings)
+                <li><a href="#">@( $name )</a></li>
                 @endforeach
             </ul>
 
@@ -24,22 +24,22 @@
                     <div class="uk-form-row">
                         <label for="form-title" class="uk-form-label">@trans('Title')</label>
                         <div class="uk-form-controls">
-                            <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@widget.title" required>
+                            <input id="form-title" class="uk-form-width-large" type="text" name="widget[title]" value="@( $widget.title )" required>
                         </div>
                     </div>
 
-                    @set (type = app.widgets.types[widget.type])
-                    @type.renderForm(widget)
+                    @set( $type = $app.widgets.types[$widget.type])
+                    @raw( $type.renderForm($widget) )
 
                 </li>
                 <li class="uk-form-horizontal">
 
-                    @foreach (app.menus as id => menu)
-                    @if (menu.items)
+                    @foreach ($app.menus as $id => $menu)
+                    @if ($menu.items)
                     <div class="uk-form-row">
-                        <label for="form-h-it" class="uk-form-label">@menu.name @trans('Menu')</label>
+                        <label for="form-h-it" class="uk-form-label">@( $menu.name ) @trans('Menu')</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                        @include('view://system/admin/widgets/select.razr.php', ['root' => app.menus.getTree(menu), 'widget' => widget])
+                        @include('view://system/admin/widgets/select.razr', ['root' => $app.menus.getTree($menu), 'widget' => $widget])
                         </div>
                     </div>
                     @endif
@@ -48,7 +48,7 @@
                     <div class="uk-form-row">
                         <label for="form-pages" class="uk-form-label">@trans('Pattern')</label>
                         <div class="uk-form-controls">
-                            <textarea id="form-pages" class="uk-form-width-large" name="widget[pages]" rows="5">@widget.pages</textarea>
+                            <textarea id="form-pages" class="uk-form-width-large" name="widget[pages]" rows="5">@( $widget.pages )</textarea>
                             <p class="uk-form-help-block">@trans('Enter one page path per line. The "*" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: "blog" for the blog page, "blog/*" for blog entries or "!blog" if you want to exclude the blog.')</p>
                         </div>
                     </div>
@@ -56,14 +56,14 @@
                     <input type="hidden" name="widget[menuItems][]" value="">
 
                 </li>
-                @foreach (additionals as settings)
+                @foreach ($additionals as $settings)
                 <li>
-                    @settings
+                    @( $settings )
                 </li>
                 @endforeach
             </ul>
 
-            <input type="hidden" name="widget[type]" value="@widget.type">
+            <input type="hidden" name="widget[type]" value="@( $widget.type )">
 
         </div>
         <div class="uk-width-medium-1-4 pk-sidebar-right uk-form-stacked">
@@ -73,17 +73,17 @@
                     <label for="form-status" class="uk-form-label">@trans('Status')</label>
                     <div class="uk-form-controls">
                         <select id="form-status" class="uk-width-1-1" name="widget[status]">
-                            <option value="1"@(widget.status ? ' selected')>@trans('Enabled')</option>
-                            <option value="0"@(!widget.status ? ' selected')>@trans('Disabled')</option>
+                            <option value="1"@( $widget.status ? ' selected' : '' )>@trans('Enabled')</option>
+                            <option value="0"@( !$widget.status ? ' selected' : '' )>@trans('Disabled')</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">@trans('Position')</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" class="uk-width-1-1" name="widget[position]">
-                            @foreach (positions as position)
-                            <option value="@position.id"@(widget.position == position.id ? ' selected')>@trans(position.name)</option>
+                        <select id="form-position" class="uk-width-1-1" name="widget[$position]">
+                            @foreach ($positions as $position)
+                            <option value="@( $position.id )"@( $widget.position == $position.id ? ' selected' : '' )>@trans($position.name)</option>
                             @endforeach
                         </select>
                     </div>
@@ -92,9 +92,9 @@
                     <span class="uk-form-label">@trans('Restrict Access')</span>
                     <div class="uk-form-controls">
                         <input type="hidden" name="widget[roles]" value="">
-                        @foreach (roles as role)
+                        @foreach ($roles as $role)
                         <div class="uk-form-controls">
-                            <label><input type="checkbox" name="widget[roles][]" value="@role.id"@(widget.hasRole(role) ? ' checked' )> @role.name</label>
+                            <label><input type="checkbox" name="widget[roles][]" value="@( $role.id )"@( $widget.hasRole($role) ? ' checked' : '' )> @( $role.name )</label>
                         </div>
                         @endforeach
                     </div>
@@ -102,7 +102,7 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Options')</span>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@(widget.get('show_title', 1) ? ' checked')> @trans('Show Title')</label>
+                        <label><input type="checkbox" name="widget[settings][show_title]" value="1"@( $widget.get('show_title', 1) ? ' checked' : '')> @trans('Show Title')</label>
                     </div>
                 </div>
 
@@ -110,6 +110,6 @@
         </div>
     </div>
 
-    @token()
+    @token
 
 </form>

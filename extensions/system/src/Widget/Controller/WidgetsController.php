@@ -47,7 +47,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @View("system/admin/widgets/index.razr.php")
+     * @View("system/admin/widgets/index.razr")
      */
     public function indexAction()
     {
@@ -65,7 +65,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"type"})
-     * @View("system/admin/widgets/edit.razr.php")
+     * @View("system/admin/widgets/edit.razr")
      */
     public function addAction($type)
     {
@@ -77,7 +77,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/widgets/edit.razr.php")
+     * @View("system/admin/widgets/edit.razr")
      */
     public function editAction($id)
     {
