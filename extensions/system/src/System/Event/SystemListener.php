@@ -47,27 +47,20 @@ class SystemListener extends EventSubscriber
 
         $helper = new DateHelper($app['dates']);
         $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('date', array($helper, 'format')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('date', array($helper, 'format')));
-        $app['tmpl.razr2']->addFunction('date', array($helper, 'format'));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('date', array($helper, 'format')));
+        $app['tmpl.razr']->addFunction('date', array($helper, 'format'));
 
         $helper = new EditorHelper($app['events']);
         $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('editor', array($helper, 'render')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
 
         $helper = new FinderHelper($app);
         $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->getEnvironment()->addFunction(new SimpleFunction('finder', array($helper, 'render')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
-
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('url_route', array($app['url'], 'route')));
-        $app['tmpl.razr2']->addDirective(new FunctionDirective('url_to', array($app['url'], 'to')));
-
-        $app['tmpl.razr2']->addFunction('url_route', array($app['url'], 'route'));
-        $app['tmpl.razr2']->addFunction('url_to', array($app['url'], 'to'));
-
-        $app['tmpl.razr']->getEnvironment()->addFilter(new SimpleFilter('urldecode', 'urldecode'));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('url_route', array($app['url'], 'route')));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('url_to', array($app['url'], 'to')));
+        $app['tmpl.razr']->addFunction('url_route', array($app['url'], 'route'));
+        $app['tmpl.razr']->addFunction('url_to', array($app['url'], 'to'));
 
         $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
