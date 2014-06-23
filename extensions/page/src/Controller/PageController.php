@@ -36,7 +36,7 @@ class PageController extends Controller
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @View("page/admin/pages/index.razr.php")
+     * @View("page/admin/pages/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -67,7 +67,7 @@ class PageController extends Controller
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
-                'table' => $this('view')->render('view://page/admin/pages/table.razr.php', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
+                'table' => $this('view')->render('view://page/admin/pages/table.razr', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
                 'total' => $total
             ));
         }
@@ -76,7 +76,7 @@ class PageController extends Controller
     }
 
     /**
-     * @View("page/admin/pages/edit.razr.php")
+     * @View("page/admin/pages/edit.razr")
      */
     public function addAction()
     {
@@ -85,7 +85,7 @@ class PageController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("page/admin/pages/edit.razr.php")
+     * @View("page/admin/pages/edit.razr")
      */
     public function editAction($id)
     {
