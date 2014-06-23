@@ -32,7 +32,7 @@ class InstallerController extends Controller
     }
 
     /**
-     * @View("installer/install.razr.php")
+     * @View("installer/install.razr")
      */
     public function indexAction()
     {

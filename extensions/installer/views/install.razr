@@ -11,14 +11,14 @@
     </head>
     <body>
 
-        <div id="installer" data-route="@url.route('installer')" data-config="@config">
+        <div id="installer" data-route="@url_route('installer')" data-config="@{ $config )">
 
             <div data-step="start" class="tm-slide uk-vertical-align uk-text-center uk-hidden">
                 <div class="js-panel uk-vertical-align-middle tm-panel">
 
-                    <form action="@url.route('@installer/installer/createconfig')" method="post">
+                    <form action="@url_route('@installer/installer/createconfig')" method="post">
 
-                        <img class="uk-margin-top" src="@url.to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                        <img class="uk-margin-top" src="@url_to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                         <p>
                             <button class="uk-button" type="submit">@trans('Begin')</button>
@@ -217,7 +217,7 @@
                         </p>
 
                         <p>
-                            <a class="uk-button uk-button-primary" href="@url.route('admin')">@trans('Login now')</a>
+                            <a class="uk-button uk-button-primary" href="@url_route('admin')">@trans('Login now')</a>
                         </p>
 
                     </div>
