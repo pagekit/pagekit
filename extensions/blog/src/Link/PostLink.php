@@ -29,6 +29,6 @@ class PostLink extends Route
     {
         $posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post')->findAll();
 
-        return $this('view')->render('blog/admin/link/post.razr.php', compact('link', 'params', 'posts'));
+        return $this('view')->render('blog/admin/link/post.razr', compact('link', 'params', 'posts'));
     }
 }

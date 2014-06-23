@@ -42,7 +42,7 @@ class PostController extends Controller
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @View("blog/admin/post/index.razr.php")
+     * @View("blog/admin/post/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -73,7 +73,7 @@ class PostController extends Controller
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
-                'table' => $this('view')->render('view://blog/admin/post/table.razr.php', array('count' => $count, 'posts' => $query->get(), 'roles' => $this->roles->findAll())),
+                'table' => $this('view')->render('view://blog/admin/post/table.razr', array('count' => $count, 'posts' => $query->get(), 'roles' => $this->roles->findAll())),
                 'total' => $total
             ));
         }
@@ -82,7 +82,7 @@ class PostController extends Controller
     }
 
     /**
-     * @View("blog/admin/post/edit.razr.php")
+     * @View("blog/admin/post/edit.razr")
      */
     public function addAction()
     {
@@ -94,7 +94,7 @@ class PostController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("blog/admin/post/edit.razr.php")
+     * @View("blog/admin/post/edit.razr")
      */
     public function editAction($id)
     {

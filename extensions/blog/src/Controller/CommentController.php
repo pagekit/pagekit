@@ -37,7 +37,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @View("blog/admin/comment/index.razr.php")
+     * @View("blog/admin/comment/index.razr")
      */
     public function indexAction($filter = array(), $thread = 0, $page = 0)
     {
@@ -77,7 +77,7 @@ class CommentController extends Controller
 
         if ($this('request')->isXmlHttpRequest()) {
             return $this('response')->json(array(
-                'table' => $this('view')->render('view://blog/admin/comment/table.razr.php', array('count' => $count, 'comments' => $query->get())),
+                'table' => $this('view')->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get())),
                 'total' => $total
             ));
         }

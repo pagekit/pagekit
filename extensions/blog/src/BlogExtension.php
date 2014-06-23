@@ -28,8 +28,8 @@ class BlogExtension extends Extension
         });
 
         $app->on('system.tmpl', function(TmplEvent $event) {
-            $event->register('comment.reply', 'extension://blog/assets/tmpl/comment.reply.razr.php');
-            $event->register('comment.edit', 'extension://blog/assets/tmpl/comment.edit.razr.php');
+            $event->register('comment.reply', 'extension://blog/assets/tmpl/comment.reply.razr');
+            $event->register('comment.edit', 'extension://blog/assets/tmpl/comment.edit.razr');
         });
 
         $app->on('system.init', function() use ($app) {

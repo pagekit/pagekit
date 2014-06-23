@@ -23,7 +23,7 @@ return array(
 
     'settings' => array(
 
-        'system'  => 'blog/admin/settings.razr.php'
+        'system'  => 'blog/admin/settings.razr'
 
     ),
 
