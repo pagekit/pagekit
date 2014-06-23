@@ -17,7 +17,7 @@ class SystemController extends Controller
     /**
      * @Route("/system")
      * @Access(admin=true)
-     * @View("system/admin/settings/index.razr.php")
+     * @View("system/admin/settings/index.razr")
      */
     public function indexAction()
     {
@@ -98,7 +98,7 @@ class SystemController extends Controller
     /**
      * @Route("/system/info")
      * @Access(admin=true)
-     * @View("system/admin/settings/info.razr.php")
+     * @View("system/admin/settings/info.razr")
      */
     public function infoAction()
     {

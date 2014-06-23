@@ -9,8 +9,8 @@
     <div class="uk-form-controls">
         <select id="form2-type" class="js-types uk-width-1-1" name="type">
             <option value="">@trans('Pick URL')</option>
-            @foreach(links as link)
-            <option value="@link.id">@link.label</option>
+            @foreach($links as $link)
+            <option value="@( $link.id )">@( $link.label )</option>
             @endforeach
         </select>
     </div>

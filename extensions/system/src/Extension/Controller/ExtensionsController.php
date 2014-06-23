@@ -29,7 +29,7 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @View("system/admin/settings/extensions.razr.php")
+     * @View("system/admin/settings/extensions.razr")
      */
     public function indexAction()
     {

@@ -34,6 +34,6 @@ abstract class Route implements LinkInterface
      */
     public function renderForm($link, $params = [])
     {
-        return $this('view')->render('system/admin/links/route.razr.php', compact('link'));
+        return $this('view')->render('system/admin/links/route.razr', compact('link'));
     }
 }

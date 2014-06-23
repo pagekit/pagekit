@@ -19,15 +19,15 @@
                 <tbody>
                     <tr>
                         <td class="uk-text-nowrap">@trans('Pagekit Version')</td>
-                        <td>@info['version']</td>
+                        <td>@( $info['version'] )</td>
                     </tr>
                     <tr>
                         <td class="uk-text-nowrap">@trans('Web Server')</td>
-                        <td class="pk-table-text-break">@info['server']</td>
+                        <td class="pk-table-text-break">@( $info['server'] )</td>
                     </tr>
                     <tr>
                         <td class="uk-text-nowrap">@trans('User Agent')</td>
-                        <td class="pk-table-text-break">@info['useragent']</td>
+                        <td class="pk-table-text-break">@( $info['useragent'] )</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,19 +47,19 @@
                 <tbody>
                     <tr>
                         <td>@trans('Version')</td>
-                        <td>@info['phpversion']</td>
+                        <td>@( $info['phpversion'] )</td>
                     </tr>
                     <tr>
                         <td>@trans('Handler')</td>
-                        <td>@info['sapi_name']</td>
+                        <td>@( $info['sapi_name'])</td>
                     </tr>
                     <tr>
                         <td>@trans('Built On')</td>
-                        <td class="pk-table-text-break">@info['php']</td>
+                        <td class="pk-table-text-break">@( $info['php'] )</td>
                     </tr>
                     <tr>
                         <td>@trans('Extensions')</td>
-                        <td class="pk-table-text-break">@info['extensions']</td>
+                        <td class="pk-table-text-break">@( $info['extensions'] )</td>
                     </tr>
                 </tbody>
             </table>
@@ -79,15 +79,15 @@
                 <tbody>
                     <tr>
                         <td>@trans('Driver')</td>
-                        <td>@info['dbdriver']</td>
+                        <td>@( $info['dbdriver'] )</td>
                     </tr>
                     <tr>
                         <td>@trans('Version')</td>
-                        <td>@info['dbversion']</td>
+                        <td>@( $info['dbversion'] )</td>
                     </tr>
                     <tr>
                         <td>@trans('Client')</td>
-                        <td class="pk-table-text-break">@info['dbclient']</td>
+                        <td class="pk-table-text-break">@( $info['dbclient'] )</td>
                     </tr>
                 </tbody>
             </table>
@@ -105,10 +105,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (info['directories'] as directory => writable)
+                    @foreach ($info['directories'] as $directory => $writable)
                     <tr>
-                        <td>@directory</td>
-                        <td class="uk-text-center@( writable ? ' uk-text-success' : ' uk-text-danger' )">@( writable ? trans('Writable') : trans('Unwritable') )</span></td>
+                        <td>@( $directory )</td>
+                        <td class="uk-text-center@( $writable ? ' uk-text-success' : ' uk-text-danger' )">@( $writable ? trans('Writable') : trans('Unwritable') )</span></td>
                     </tr>
                     @endforeach
                 </tbody>
