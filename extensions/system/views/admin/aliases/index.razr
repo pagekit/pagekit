@@ -1,11 +1,11 @@
 @script('aliases', 'system/js/aliases/index.js', 'requirejs')
 
-<form id="js-aliases" class="uk-form" action="@url_route('@system/alias')" method="post">
+<form id="js-aliases" class="uk-form" action="@url('@system/alias')" method="post">
 
     <div class="pk-toolbar uk-clearfix">
         <div class="uk-float-left">
-            <a class="uk-button uk-button-primary" href="@url_route('@system/alias/add')">@trans('Add Alias')</a>
-            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url_route('@system/alias/delete')">@trans('Delete')</a>
+            <a class="uk-button uk-button-primary" href="@url('@system/alias/add')">@trans('Add Alias')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url('@system/alias/delete')">@trans('Delete')</a>
         </div>
         <div class="uk-float-right uk-hidden-small">
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
@@ -29,7 +29,7 @@
                         <input class="js-select" type="checkbox" name="ids[]" value="@( $alias.Id )">
                     </td>
                     <td>
-                        <a href="@url_route('@system/alias/edit', ['id' => $alias.id])">@( $alias.alias )</a>
+                        <a href="@url('@system/alias/edit', ['id' => $alias.id])">@( $alias.alias )</a>
                     </td>
                     <td>@( urldecode($alias.source) )</td>
                 </tr>

@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        @set($link = url_route('@system/registration/activate', ['user' => $user.username, 'key' => $user.activation], true))
+        @set($link = url('@system/registration/activate', ['user' => $user.username, 'key' => $user.activation], true))
 
         <p>@trans('Hello'),</p>
         <p>@trans('A new user has registered at %site% and requests that you approve his account.', ['%site%' => $app.option.get('system:app.site_title')])</p>

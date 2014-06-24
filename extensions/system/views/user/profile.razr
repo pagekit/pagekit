@@ -1,6 +1,6 @@
 @script('form-password', 'vendor://assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
 
-<form class="uk-article uk-form uk-form-stacked" action="@url_route('@system/profile/save')" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="@url('@system/profile/save')" method="post">
 
     <h1 class="uk-article-title">@trans('Your Profile')</h1>
 

@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url_to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url_to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
         @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
@@ -19,13 +19,13 @@
 
                     <div class="uk-navbar-content uk-hidden-small">
                         <div class="uk-display-inline-block" data-uk-dropdown>
-                            <img class="tm-logo" src="@url_to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                            <img class="tm-logo" src="@url('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                             <div class="uk-dropdown tm-dropdown">
-                                <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="@url_route('@system/system/adminmenu')" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                                <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="@url('@system/system/adminmenu')" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 @foreach ($nav.children as $item)
                                     <li@( $item.attribute('active') ? ' class="uk-active"' : '' ) data-id="@( $item.getId() )">
-                                        <a class="uk-panel pk-panel-icon" href="@url_route($item.url)">
-                                            <img src="@url_to( $item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="50" height="50">
+                                        <a class="uk-panel pk-panel-icon" href="@url($item.url)">
+                                            <img src="@url( $item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="50" height="50">
                                             <p>@trans($item)</p>
                                         </a>
                                     </li>
@@ -36,18 +36,18 @@
                     </div>
 
                     <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img class="tm-logo" src="@url_to('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                        <img class="tm-logo" src="@url('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
                         @if (!$subnav.children)
                         <li@( $subnav.attribute('active') ? ' class="uk-active"' : '' )>
-                            <a href="@url_route($subnav.url)">@trans($subnav)</a>
+                            <a href="@url($subnav.url)">@trans($subnav)</a>
                         </li>
                         @endif
                         @foreach ($subnav.children as $item)
                         <li@( $item.attribute('active') ? ' class="uk-active"' : '')>
-                            <a href="@url_route($item.url)">@trans($item)</a>
+                            <a href="@url($item.url)">@trans($item)</a>
                         </li>
                         @endforeach
                     </ul>
@@ -62,8 +62,8 @@
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li class="uk-nav-header">@( $user.username )</li>
                                         <li><a href="@( $app.url.base() )">@trans('Visit Site')</a></li>
-                                        <li><a href="@url_route('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                                        <li><a href="@url_route('@system/auth/logout', ['redirect' => url_route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                                        <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
+                                        <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -101,11 +101,11 @@
                     @if ($subnav.children)
                         <li class="uk-nav-header">@trans(subnav)</li>
                         <li@( $subnav.attribute('active') ? ' class="uk-active"' : '' )>
-                            <a href="@url_route($subnav.url)">@trans($subnav)</a>
+                            <a href="@url($subnav.url)">@trans($subnav)</a>
                         </li>
                         @foreach ($subnav.children as $item)
                             <li@( $item.attribute('active') ? ' class="uk-active"' : '' )>
-                                <a href="@url_route($item.url)">@trans($item)</a>
+                                <a href="@url($item.url)">@trans($item)</a>
                             </li>
                         @endforeach
                         <li class="uk-nav-divider"></li>
@@ -113,8 +113,8 @@
                     <li class="uk-nav-header">@trans('Extensions')</li>
                     @foreach ($nav.children as $item)
                         <li@( $item.attribute('active') ? ' class="uk-active"' : '')>
-                            <a href="@url_route($item.url)">
-                                <img class="uk-margin-small-right" src="@url_to($item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="34" height="34">
+                            <a href="@url($item.url)">
+                                <img class="uk-margin-small-right" src="@url($item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="34" height="34">
                                 @trans($item)
                             </a>
                         </li>
@@ -130,8 +130,8 @@
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header">@( $user.username )</li>
                     <li><a href="@( $app.url.base() )">@trans('Visit Site')</a></li>
-                    <li><a href="@url_route('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                    <li><a href="@url_route('@system/auth/logout', ['redirect' => url_route('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                    <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
+                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
                 </ul>
 
             </div>

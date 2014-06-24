@@ -1,4 +1,4 @@
-<form class="uk-article uk-form uk-form-stacked" action="@url_route('@system/resetpassword/reset')" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="@url('@system/resetpassword/reset')" method="post">
 
     <h1 class="uk-article-title">@trans('Forgot password')</h1>
 

@@ -15,17 +15,17 @@
                 <input type="checkbox" name="ids[]" class="js-select" value="@( $page.id )">
             </td>
             <td>
-                <a href="@url_route('@page/page/edit', ['id' => $page.id])">@( $page.title )</a>
+                <a href="@url('@page/page/edit', ['id' => $page.id])">@( $page.title )</a>
             </td>
             <td class="uk-text-center">
-                <a href="#" data-action="@url_route('@page/page/status', ['ids[]' => $page.id, 'status' => $page.status ? '0' : '1'])" title="@( $page.statusText )">
+                <a href="#" data-action="@url('@page/page/status', ['ids[]' => $page.id, 'status' => $page.status ? '0' : '1'])" title="@( $page.statusText )">
                     <i class="uk-icon-circle uk-text-@( $page.status ? 'success' : 'danger')" title="@( $page.statusText )"></i>
                 </a>
             </td>
             <td class="pk-table-text-break">
-                @set ($link = url_route('@page/id', ['id' => $page.id], 'base'))
+                @set ($link = url('@page/id', ['id' => $page.id], 'base'))
                 @if ($page.status == 1 && $page.hasAccess($app.user))
-                <a href="@url_route('@page/id', ['id' => $page.id])" target="_blank">@( urldecode($link) )</a>
+                <a href="@url('@page/id', ['id' => $page.id])" target="_blank">@( urldecode($link) )</a>
                 @else
                 @( $page.url ?: $link )
                 @endif

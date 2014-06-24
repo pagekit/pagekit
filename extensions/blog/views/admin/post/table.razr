@@ -18,26 +18,26 @@
                 <input type="checkbox" name="ids[]" class="js-select" value="@( $post.id )">
             </td>
             <td>
-                <a href="@url_route('@blog/post/edit', ['id' => $post.id])">@( $post.title )</a>
+                <a href="@url('@blog/post/edit', ['id' => $post.id])">@( $post.title )</a>
             </td>
             <td class="uk-text-center">
-                <a href="#" data-action="@url_route('@blog/post/status', ['ids[]' => $post.id, 'status' => $post.status == 2 ? '3' : '2'])" title="@( $post.statusText )">
+                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => $post.status == 2 ? '3' : '2'])" title="@( $post.statusText )">
                     <i class="uk-icon-circle uk-text-@($post.status == 2 ? 'success' : 'danger')" title="@( $post.statusText )"></i>
                 </a>
             </td>
             <td class="pk-table-text-break">
-                @set( $link = url_route('@blog/id', ['id' => $post.id], 'base') )
+                @set( $link = url('@blog/id', ['id' => $post.id], 'base') )
                 @if ($post.status == 2 && $post.hasAccess($app.user))
-                <a href="@url_route('@blog/id', ['id' => $post.id])" target="_blank">@( urldecode($link) )</a>
+                <a href="@url('@blog/id', ['id' => $post.id])" target="_blank">@( urldecode($link) )</a>
                 @else
                 @( $post.url ?: $link )
                 @endif
             </td>
             <td>
-                <a href="@url_route('@system/user/edit', ['id' => $post.user.id])">@( $post.user.username )</a>
+                <a href="@url('@system/user/edit', ['id' => $post.user.id])">@( $post.user.username )</a>
             </td>
             <td class="uk-text-center">
-                <a href="@url_route('@blog/comment', ['post' => $post.id])">@( $post.numcomments )</a>
+                <a href="@url('@blog/comment', ['post' => $post.id])">@( $post.numcomments )</a>
             </td>
             <td>
                 @date($post.date, 'long')

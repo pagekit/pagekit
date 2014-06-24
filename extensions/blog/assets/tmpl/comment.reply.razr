@@ -1,6 +1,6 @@
 <tr class="js-editor">
     <td colspan="5">
-        <form class="uk-form" action="@url_route('@blog/comment/save')">
+        <form class="uk-form" action="@url('@blog/comment/save')">
 
             <div class="uk-form-row">
                 <textarea name="comment[content]" cols="60" rows="6"></textarea>

@@ -57,10 +57,8 @@ class SystemListener extends EventSubscriber
         $helper = new FinderHelper($app);
         $app['tmpl.php']->addHelpers(array($helper));
         $app['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('url_route', array($app['url'], 'route')));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('url_to', array($app['url'], 'to')));
-        $app['tmpl.razr']->addFunction('url_route', array($app['url'], 'route'));
-        $app['tmpl.razr']->addFunction('url_to', array($app['url'], 'to'));
+        $app['tmpl.razr']->addDirective(new FunctionDirective('url', array($app['url'], 'to')));
+        $app['tmpl.razr']->addFunction('url', array($app['url'], 'to'));
 
         $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
         $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));

@@ -11,7 +11,7 @@
         @if ($header)
         @($item)
         @elseif (!$divider)
-        <a href="@url_route($item.url)">@($item)</a>
+        <a href="@url($item.url)">@($item)</a>
         @endif
         @if ($item.hasChildren && ($item.attribute('active') || $widget.get('mode', 'all') == 'all' || !$root.depth == 0))
         <ul class="uk-nav-sub">

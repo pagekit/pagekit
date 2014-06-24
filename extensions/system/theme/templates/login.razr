@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url_to('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url_to('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @action('head')
         @style('theme', 'extension://system/theme/css/theme.css')
         @script('login', 'system/js/login.js', ['jquery', 'uikit', 'requirejs'])
@@ -17,11 +17,11 @@
 
                 <div class="tm-container tm-container-small">
 
-                    <img class="uk-margin-bottom" src="@url_to('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                    <img class="uk-margin-bottom" src="@url('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                     @action('messages')
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form@( $last_login ? ' uk-hidden' : '' )" action="@url_route('@system/auth/authenticate')" method="post">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form@( $last_login ? ' uk-hidden' : '' )" action="@url('@system/auth/authenticate')" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="@( $last_username )" placeholder="@trans('Username')" autofocus>
@@ -44,7 +44,7 @@
 
                     </form>
 
-                    <form class="js-toggle uk-panel uk-panel-box uk-form@( !$last_login ? ' uk-hidden' : '' )" action="@url_route('@system/resetpassword/reset')" method="post">
+                    <form class="js-toggle uk-panel uk-panel-box uk-form@( !$last_login ? ' uk-hidden' : '' )" action="@url('@system/resetpassword/reset')" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@( $last_login )" placeholder="@trans('Username or Email')" required>

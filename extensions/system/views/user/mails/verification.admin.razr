@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        @set($link = url_route('@system/registration/activate', ['user' => $user.username, 'key' => $user.activation], true))
+        @set($link = url('@system/registration/activate', ['user' => $user.username, 'key' => $user.activation], true))
 
         <p>@trans('Hello %name%', ['%name%' => $user.name]),</p>
         <p>@trans('Thank you for registering at %site%! Your account has been successfully created and must be verified before you can use it.', ['%site%' => $app.option.get('system:app.site_title')])</p>

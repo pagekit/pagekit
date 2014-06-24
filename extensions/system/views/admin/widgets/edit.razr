@@ -1,10 +1,10 @@
 @script('widget', 'system/js/widgets/edit.js', 'requirejs')
 
-<form class="js-widget uk-form" action="@url_route('@system/widgets/save', ['id' => $widget.id ?: 0])" method="post">
+<form class="js-widget uk-form" action="@url('@system/widgets/save', ['id' => $widget.id ?: 0])" method="post">
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url_route('@system/widgets')">@( $widget.id ? trans('Close') : trans('Cancel') )</a>
+        <a class="uk-button" href="@url('@system/widgets')">@( $widget.id ? trans('Close') : trans('Cancel') )</a>
     </div>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>

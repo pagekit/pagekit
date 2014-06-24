@@ -1,7 +1,7 @@
 @style('user', 'system/css/user.css')
 @script('user', 'system/js/user/permission.js', ['requirejs'])
 
-<form id="js-permission" class="uk-form" action="@url_route('@system/permission/save')" method="post">
+<form id="js-permission" class="uk-form" action="@url('@system/permission/save')" method="post">
 
     <div class="uk-overflow-container">
 
