@@ -39,7 +39,7 @@
                             <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{ target: '.js-toggle' }">@trans('Forgot Password?')</a>
                         </div>
 
-                        @token()
+                        @token
                         <input type="hidden" name="redirect" value="@( $redirect )">
 
                     </form>

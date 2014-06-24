@@ -17,7 +17,7 @@
 
             @if ($position.exists('logo'))
             <div class="tm-logo uk-hidden-small">
-                <a href="@( $app.url.base() )" class="tm-brand">@raw( $position.render('logo', ['renderer' => 'blank']) )</a>
+                <a href="@url()" class="tm-brand">@raw( $position.render('logo', ['renderer' => 'blank']) )</a>
             </div>
             @endif
 
@@ -34,7 +34,7 @@
 
                 @if ($position.exists('logo-small'))
                 <div class="uk-navbar-content uk-navbar-center uk-visible-small">
-                    <a href="@( $app.url.base() )" class="tm-brand">@raw( $position.render('logo-small', ['renderer' => 'blank']) )</a>
+                    <a href="@url()" class="tm-brand">@raw( $position.render('logo-small', ['renderer' => 'blank']) )</a>
                 </div>
                 @endif
 
