@@ -39,8 +39,8 @@ class DefaultController extends Controller
     public function __construct(BlogExtension $extension)
     {
         $this->extension = $extension;
-        $this->posts     = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments  = $this('db.em')->getRepository('Pagekit\Blog\Entity\Comment');
+        $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
+        $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
     }
 
     /**
@@ -51,7 +51,7 @@ class DefaultController extends Controller
         $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->related('user')->get();
 
         foreach ($posts as $post) {
-            $post->setContent($this('content')->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
+            $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
         }
 
         return array('head.title' => __('Blog'), 'posts' => $posts, 'config' => $this->extension->getConfig());
@@ -66,7 +66,7 @@ class DefaultController extends Controller
     {
         try {
 
-            $user = $this('user');
+            $user = $this['user'];
             if (!$user->hasAccess('blog: post comments')) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
@@ -74,7 +74,7 @@ class DefaultController extends Controller
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
                 and $minidle = $this->extension->getConfig('comments.minidle')
-                and $comment = $this->comments->query()->where($user->isAuthenticated() ? array('user_id' => $user->getId()) : array('ip' => $this('request')->getClientIp()))->orderBy('created', 'DESC')->first()) {
+                and $comment = $this->comments->query()->where($user->isAuthenticated() ? array('user_id' => $user->getId()) : array('ip' => $this['request']->getClientIp()))->orderBy('created', 'DESC')->first()) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
                 if ($diff->invert) {
@@ -97,9 +97,9 @@ class DefaultController extends Controller
 
             $comment = new Comment;
 
-            $comment->setContent($this('comments')->filterContentInput($data['content']));
+            $comment->setContent($this['comments']->filterContentInput($data['content']));
             $comment->setUserId((int) $user->getId());
-            $comment->setIp($this('request')->getClientIp());
+            $comment->setIp($this['request']->getClientIp());
             $comment->setCreated(new \DateTime);
             $comment->setThread($post);
 
@@ -112,25 +112,25 @@ class DefaultController extends Controller
             }
 
             // check for spam
-            $this('events')->dispatch('system.comment.spam_check', new CommentEvent($comment));
+            $this['events']->dispatch('system.comment.spam_check', new CommentEvent($comment));
 
             $this->comments->save($comment, $data);
 
-            $this('message')->info(__('Thanks for commenting!'));
+            $this['message']->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this('url')->route('@blog/id', array('id' => $post->getId())).'#comment-'.$comment->getId());
+            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId())).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
 
-            return $this->redirect($this('url')->previous());
+            return $this->redirect($this['url']->previous());
 
         } catch (\Exception $e) {
 
-            $this('message')->error(__('Whoops, something went wrong!'));
+            $this['message']->error(__('Whoops, something went wrong!'));
 
-            return $this->redirect($this('url')->previous());
+            return $this->redirect($this['url']->previous());
         }
     }
 
@@ -141,14 +141,14 @@ class DefaultController extends Controller
     public function postAction($id = 0)
     {
         if (!$post = $this->posts->find($id) and $post->getStatus() == Post::STATUS_PUBLISHED) {
-            return $this('response')->create(__('Post not found!'), 404);
+            return $this['response']->create(__('Post not found!'), 404);
         }
 
-        if (!$post->hasAccess($this('user'))) {
-            return $this('response')->create(__('Unable to access this post!'), 403);
+        if (!$post->hasAccess($this['user'])) {
+            return $this['response']->create(__('Unable to access this post!'), 403);
         }
 
-        $user = $this('user');
+        $user = $this['user'];
         $query = $this->comments->query()->where(array('status = ?'), array(CommentInterface::STATUS_VISIBLE));
 
         if ($user->isAuthenticated()) {
@@ -157,9 +157,9 @@ class DefaultController extends Controller
             });
         }
 
-        $this('db.em')->related($post, 'comments', $query);
+        $this['db.em']->related($post, 'comments', $query);
 
-        $post->setContent($this('content')->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
+        $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
 
         return array('head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig());
     }

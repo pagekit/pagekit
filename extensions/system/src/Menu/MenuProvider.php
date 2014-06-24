@@ -3,15 +3,17 @@
 namespace Pagekit\Menu;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Pagekit\Menu\Entity\ItemRepository;
 use Pagekit\Menu\Filter\FilterIterator;
 use Pagekit\Menu\Model\FilterManager;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\Menu\Model\Node;
 
-class MenuProvider extends ApplicationAware implements \IteratorAggregate
+class MenuProvider implements \IteratorAggregate, \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var MenuInterface[]
      */
@@ -36,7 +38,7 @@ class MenuProvider extends ApplicationAware implements \IteratorAggregate
     {
         $this->filters = $filters ?: new FilterManager;
 
-        FilterIterator::setApplication(self::$app);
+        FilterIterator::setApplication($this->getApplication());
     }
 
     /**
@@ -44,7 +46,7 @@ class MenuProvider extends ApplicationAware implements \IteratorAggregate
      */
     public function getMenuRepository()
     {
-        return $this('db.em')->getRepository('Pagekit\Menu\Entity\Menu');
+        return $this['db.em']->getRepository('Pagekit\Menu\Entity\Menu');
     }
 
     /**
@@ -52,7 +54,7 @@ class MenuProvider extends ApplicationAware implements \IteratorAggregate
      */
     public function getItemRepository()
     {
-        return $this('db.em')->getRepository('Pagekit\Menu\Entity\Item');
+        return $this['db.em']->getRepository('Pagekit\Menu\Entity\Item');
     }
 
     /**

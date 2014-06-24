@@ -2,13 +2,10 @@
 
 namespace Pagekit\User\Link;
 
-use Pagekit\Framework\ApplicationTrait;
-use Pagekit\System\Link\LinkInterface;
+use Pagekit\System\Link\Link;
 
-class User implements LinkInterface
+class User extends Link
 {
-    use ApplicationTrait;
-
     /**
      * {@inheritdoc}
      */
@@ -40,7 +37,7 @@ class User implements LinkInterface
     {
         $routes = $this->getRoutes();
 
-        return $this('view')->render('system/admin/user/link.razr', compact('link', 'params', 'routes'));
+        return $this['view']->render('system/admin/user/link.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()

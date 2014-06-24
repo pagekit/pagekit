@@ -30,8 +30,8 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
-        $this->roles = $this('users')->getRoleRepository();
+        $this->pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page');
+        $this->roles = $this['users']->getRoleRepository();
     }
 
     /**
@@ -41,9 +41,9 @@ class PageController extends Controller
     public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
-            $this('session')->set('page.filter', $filter);
+            $this['session']->set('page.filter', $filter);
         } else {
-            $filter = $this('session')->get('page.filter', array());
+            $filter = $this['session']->get('page.filter', array());
         }
 
         $query = $this->pages->query();
@@ -65,9 +65,9 @@ class PageController extends Controller
 
         $query->offset($page * $limit)->limit($limit)->orderBy('title');
 
-        if ($this('request')->isXmlHttpRequest()) {
-            return $this('response')->json(array(
-                'table' => $this('view')->render('view://page/admin/pages/table.razr', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
+        if ($this['request']->isXmlHttpRequest()) {
+            return $this['response']->json(array(
+                'table' => $this['view']->render('view://page/admin/pages/table.razr', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
                 'total' => $total
             ));
         }
@@ -97,7 +97,7 @@ class PageController extends Controller
 
         } catch (Exception $e) {
 
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
 
             return $this->redirect('@page/page');
         }
@@ -127,7 +127,7 @@ class PageController extends Controller
             $response = array('message' => $e->getMessage(), 'error' => true);
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -142,7 +142,7 @@ class PageController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids))));
     }
 
     /**
@@ -164,7 +164,7 @@ class PageController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids))));
     }
 
     /**
@@ -186,6 +186,6 @@ class PageController extends Controller
             $message = _c('{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids));
         }
 
-        return $this('response')->json(compact('message'));
+        return $this['response']->json(compact('message'));
     }
 }

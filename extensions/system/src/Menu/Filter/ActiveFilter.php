@@ -17,7 +17,7 @@ class ActiveFilter extends FilterIterator
         parent::__construct($iterator, $options);
 
         if (isset($options['active']) && $options['active']) {
-            $this->active = $this('request')->attributes->get('_menu', array());
+            $this->active = $this['request']->attributes->get('_menu', array());
         }
     }
 

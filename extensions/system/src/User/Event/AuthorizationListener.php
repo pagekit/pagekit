@@ -16,8 +16,8 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        if ($user = $this('auth')->getUser() and $user->isBlocked()) {
-            $this('auth')->logout($user);
+        if ($user = $this['auth']->getUser() and $user->isBlocked()) {
+            $this['auth']->logout($user);
         }
     }
 
@@ -41,7 +41,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onLogin(LoginEvent $event)
     {
-        $event->setResponse($this('response')->redirect($this('request')->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse($this['response']->redirect($this['request']->get(Auth::REDIRECT_PARAM)));
     }
 
     /**
@@ -51,7 +51,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onLogout(LogoutEvent $event)
     {
-        $event->setResponse($this('response')->redirect($this('request')->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse($this['response']->redirect($this['request']->get(Auth::REDIRECT_PARAM)));
     }
 
     /**

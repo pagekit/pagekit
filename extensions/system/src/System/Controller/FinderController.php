@@ -24,7 +24,7 @@ class FinderController extends Controller
         $data = array_fill_keys(array('folders', 'files'), array());
         $data['mode'] = $mode;
 
-        foreach ($this('file')->find()->depth(0)->in($dir) as $file) {
+        foreach ($this['file']->find()->depth(0)->in($dir) as $file) {
 
             if ('-' === $mode = $this->getMode($file->getPathname())) {
                 continue;
@@ -33,14 +33,14 @@ class FinderController extends Controller
             $info = array(
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => htmlspecialchars($this('url')->to($file->getPathname()), ENT_QUOTES),
+                'url'      => htmlspecialchars($this['url']->to($file->getPathname()), ENT_QUOTES),
                 'writable' => $mode == 'w'
             );
 
             if (!$isDir = $file->isDir()) {
                 $info = array_merge($info, array(
                     'size'         => $this->formatFileSize($file->getSize()),
-                    'lastmodified' => $this('dates')->format($file->getMTime(), 'd.m.y H:m')
+                    'lastmodified' => $this['dates']->format($file->getMTime(), 'd.m.y H:m')
                 ));
             }
 
@@ -49,7 +49,7 @@ class FinderController extends Controller
 
 
 
-        return $this('response')->json($data);
+        return $this['response']->json($data);
     }
 
     /**
@@ -71,7 +71,7 @@ class FinderController extends Controller
 
         try {
 
-            $this('file')->makeDir($path);
+            $this['file']->makeDir($path);
 
             return $this->success(__('Directory created.'));
 
@@ -99,7 +99,7 @@ class FinderController extends Controller
 
         try {
 
-            $this('file')->rename($source, $target);
+            $this['file']->rename($source, $target);
 
             return $this->success(__('Renamed.'));
 
@@ -125,7 +125,7 @@ class FinderController extends Controller
 
             try {
 
-                $this('file')->delete($path);
+                $this['file']->delete($path);
 
             } catch(\Exception $e) {
                 return $this->error(__('Unable to remove.'));
@@ -146,7 +146,7 @@ class FinderController extends Controller
                 return $this->error(__('Permission denied.'));
             }
 
-            $files = $this('request')->files->get('files');
+            $files = $this['request']->files->get('files');
 
             if (!$files) {
                 throw new Exception(__('No files uploaded.'));
@@ -171,7 +171,7 @@ class FinderController extends Controller
 
     protected function getMode($path)
     {
-        $mode = $this('events')->dispatch('system.finder', new FileAccessEvent)->mode($path);
+        $mode = $this['events']->dispatch('system.finder', new FileAccessEvent)->mode($path);
 
         if ('w' == $mode && !is_writable($path)) {
             $mode = 'r';
@@ -197,8 +197,8 @@ class FinderController extends Controller
 
     protected function getPath($path = '')
     {
-        $root = $this('path');
-        $path = $this->normalizePath($root.$this('request')->get('root').'/'.$this('request')->get('path').'/'.$path);
+        $root = $this['path'];
+        $path = $this->normalizePath($root.$this['request']->get('root').'/'.$this['request']->get('path').'/'.$path);
 
         return 0 === strpos($path, $root) ? $path : false;
     }
@@ -242,10 +242,10 @@ class FinderController extends Controller
     }
 
     protected function success($message) {
-        return $this('response')->json(compact('message'));
+        return $this['response']->json(compact('message'));
     }
 
     protected function error($message) {
-        return $this('response')->json(array('error' => true, 'message' => $message));
+        return $this['response']->json(array('error' => true, 'message' => $message));
     }
 }

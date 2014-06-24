@@ -3,12 +3,14 @@
 namespace Pagekit\System\Helper;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use PDO;
 use Symfony\Component\Finder\Finder;
 
-class SystemInfoHelper extends ApplicationAware
+class SystemInfoHelper implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * Method to get the system information
      *
@@ -16,12 +18,12 @@ class SystemInfoHelper extends ApplicationAware
      */
     public function get()
     {
-        $server = $this('request')->server;
+        $server = $this['request']->server;
 
         $info                  = array();
         $info['php']           = php_uname();
 
-        if ($pdo = $this('db')->getWrappedConnection() and $pdo instanceof PDOConnection) {
+        if ($pdo = $this['db']->getWrappedConnection() and $pdo instanceof PDOConnection) {
             $info['dbdriver']  = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
             $info['dbversion'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
             $info['dbclient']  = $pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
@@ -30,7 +32,7 @@ class SystemInfoHelper extends ApplicationAware
         $info['phpversion']    = phpversion();
         $info['server']        = $server->get('SERVER_SOFTWARE', getenv('SERVER_SOFTWARE'));
         $info['sapi_name']     = php_sapi_name();
-        $info['version']       = $this('config')->get('app.version');
+        $info['version']       = $this['config']->get('app.version');
         $info['useragent']     = $server->get('HTTP_USER_AGENT');
         $info['extensions']    = implode(", ", get_loaded_extensions());
         $info['directories']   = $this->getDirectories();
@@ -56,7 +58,7 @@ class SystemInfoHelper extends ApplicationAware
         $result = array();
 
         foreach ($directories as $directory) {
-            $path = $this('locator')->findResource($directory);
+            $path = $this['locator']->findResource($directory);
 
             $result[$this->getRelativePath($path)] = is_writable($path);
 
@@ -78,8 +80,8 @@ class SystemInfoHelper extends ApplicationAware
      */
     protected function getRelativePath($path)
     {
-        if (0 === strpos($path, $this('path'))) {
-            $path = ltrim(str_replace('\\', '/', substr($path, strlen($this('path')))), '/');
+        if (0 === strpos($path, $this['path'])) {
+            $path = ltrim(str_replace('\\', '/', substr($path, strlen($this['path']))), '/');
         }
 
         return $path;

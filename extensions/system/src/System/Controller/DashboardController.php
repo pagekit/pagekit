@@ -23,7 +23,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->types = $this('events')->dispatch('system.dashboard', new RegisterWidgetEvent);
+        $this->types = $this['events']->dispatch('system.dashboard', new RegisterWidgetEvent);
     }
 
     /**
@@ -85,7 +85,7 @@ class DashboardController extends Controller
             return array('head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/dashboard/settings');
@@ -114,7 +114,7 @@ class DashboardController extends Controller
             return array('head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/dashboard/settings');
@@ -137,10 +137,10 @@ class DashboardController extends Controller
 
             $this->save($widgets);
 
-            $this('message')->success($new ? __('Widget created.') : __('Widget saved.'));
+            $this['message']->success($new ? __('Widget created.') : __('Widget saved.'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
         return $this->redirect($id ? '@system/dashboard/edit' : '@system/dashboard/add', compact('id'));
     }
@@ -159,7 +159,7 @@ class DashboardController extends Controller
 
         $this->save($widgets);
 
-        $this('message')->success(_c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
+        $this['message']->success(_c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
         return $this->redirect('@system/dashboard/settings');
     }
@@ -183,7 +183,7 @@ class DashboardController extends Controller
 
         $this->save($reordered);
 
-        return $this('response')->json(array('message' => __('Widgets reordered.')));
+        return $this['response']->json(array('message' => __('Widgets reordered.')));
     }
 
     /**
@@ -208,10 +208,10 @@ class DashboardController extends Controller
     protected function save($dashboard, $user = null)
     {
         if (null === $user) {
-            $user = $this('user');
+            $user = $this['user'];
         }
 
-        $users = $this('users')->getUserRepository();
+        $users = $this['users']->getUserRepository();
 
         // make sure user is registered in the entity manager
         $user =  $users->find($user->getId());
@@ -225,7 +225,7 @@ class DashboardController extends Controller
      */
     protected function getWidgets()
     {
-        return $this('user')->get('dashboard', $this('system')->getConfig('dashboard.default'));
+        return $this['user']->get('dashboard', $this['system']->getConfig('dashboard.default'));
     }
 
     protected function chunkList($list, $p) {

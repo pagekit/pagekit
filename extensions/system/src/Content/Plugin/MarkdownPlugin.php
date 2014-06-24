@@ -19,7 +19,7 @@ class MarkdownPlugin extends EventSubscriber
         }
 
         $content = $event->getContent();
-        $content = $this('markdown')->parse($content);
+        $content = $this['markdown']->parse($content);
 
         $event->setContent($content);
     }

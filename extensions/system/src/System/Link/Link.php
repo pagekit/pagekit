@@ -2,8 +2,9 @@
 
 namespace Pagekit\System\Link;
 
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 
-abstract class Link extends ApplicationAware implements LinkInterface
+abstract class Link implements LinkInterface, \ArrayAccess
 {
+    use ApplicationTrait;
 }

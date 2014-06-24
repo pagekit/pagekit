@@ -35,9 +35,9 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->user  = $this('user');
-        $this->users = $this('users')->getUserRepository();
-        $this->roles = $this('users')->getRoleRepository();
+        $this->user  = $this['user'];
+        $this->users = $this['users']->getUserRepository();
+        $this->roles = $this['users']->getRoleRepository();
     }
 
     /**
@@ -47,9 +47,9 @@ class UserController extends Controller
     public function indexAction($filter = null)
     {
         if ($filter) {
-            $this('session')->set('user.filter', $filter);
+            $this['session']->set('user.filter', $filter);
         } else {
-            $filter = $this('session')->get('user.filter', array());
+            $filter = $this['session']->get('user.filter', array());
         }
 
         $query = $this->users->query()->related('roles')->orderBy('name');
@@ -97,7 +97,7 @@ class UserController extends Controller
         $users = $query->get();
         $roles = $this->getRoles();
 
-        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this('permissions'), 'filter' => $filter);
+        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter);
     }
 
     /**
@@ -185,7 +185,7 @@ class UserController extends Controller
             }
 
             if (!empty($password)) {
-                $user->setPassword($this('auth.password')->hash($password));
+                $user->setPassword($this['auth.password']->hash($password));
             }
 
             if ($this->user->hasAccess('system: manage user permissions')) {
@@ -209,7 +209,7 @@ class UserController extends Controller
             $response = array('error' => $e->getMessage());
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -221,7 +221,7 @@ class UserController extends Controller
         foreach ($ids as $id) {
 
             if ($id == $this->user->getId()) {
-                $this('message')->warning(__('Unable to delete self.'));
+                $this['message']->warning(__('Unable to delete self.'));
                 continue;
             }
 
@@ -230,7 +230,7 @@ class UserController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
+        $this['message']->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
 
         return $this->redirect('@system/user');
     }
@@ -247,7 +247,7 @@ class UserController extends Controller
                 $self = $this->user->getId() == $user->getId();
 
                 if ($self && $status == User::STATUS_BLOCKED) {
-                    $this('message')->warning(__('Unable to block yourself.'));
+                    $this['message']->warning(__('Unable to block yourself.'));
                     continue;
                 }
 
@@ -277,8 +277,8 @@ class UserController extends Controller
             'email'      => $user->getEmail(),
             'status'     => $user->getStatusText(),
             'badge'      => $user->getStatus() ? 'success' : 'danger',
-            'login'      => ($date = $user->getLogin()) ? $this('dates')->format($date) : __('Never'),
-            'registered' => ($date = $user->getRegistered()) ? $this('dates')->format($date) : null
+            'login'      => ($date = $user->getLogin()) ? $this['dates']->format($date) : __('Never'),
+            'registered' => ($date = $user->getRegistered()) ? $this['dates']->format($date) : null
         );
     }
 
@@ -298,7 +298,7 @@ class UserController extends Controller
                 $role->disabled = true;
             }
 
-            if ($user && $user->getId() == $this('user')->getId() && $user->isAdministrator() && $role->isAdministrator()) {
+            if ($user && $user->getId() == $this['user']->getId() && $user->isAdministrator() && $role->isAdministrator()) {
                 $role->disabled = true;
             }
         }
@@ -314,13 +314,13 @@ class UserController extends Controller
      */
     protected function getPermissionSql($permission)
     {
-        $expr     = $this('db')->getExpressionBuilder();
-        $platform = $this('db')->getDatabasePlatform();
-        $col      = $platform->getConcatExpression($this('db')->quote(','), 'r.permissions', $this('db')->quote(','));
+        $expr     = $this['db']->getExpressionBuilder();
+        $platform = $this['db']->getDatabasePlatform();
+        $col      = $platform->getConcatExpression($this['db']->quote(','), 'r.permissions', $this['db']->quote(','));
 
         $params = array(
             $expr->eq('r.id', Role::ROLE_ADMINISTRATOR),
-            $expr->comparison($col, 'LIKE', $this('db')->quote("%,$permission,%"))
+            $expr->comparison($col, 'LIKE', $this['db']->quote("%,$permission,%"))
         );
 
         return (string) call_user_func_array(array($expr, 'orX'), $params);
@@ -335,10 +335,10 @@ class UserController extends Controller
     {
         try {
 
-            $this('mailer')->create()
+            $this['mailer']->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Welcome!'))
-                ->setBody($this('view')->render('system/user/mails/welcome.razr', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
+                ->setBody($this['view']->render('system/user/mails/welcome.razr', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
                 ->queue();
 
         } catch(\Exception $e) {}

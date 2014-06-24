@@ -2,19 +2,16 @@
 
 namespace Pagekit\Menu\Filter;
 
-use Pagekit\Framework\Application;
+use Pagekit\Framework\ApplicationTrait;
 
-abstract class FilterIterator extends \FilterIterator
+abstract class FilterIterator extends \FilterIterator implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var array
      */
     protected $options;
-
-    /**
-     * @var Application
-     */
-    protected static $app;
 
     /**
      * Constructor.
@@ -27,36 +24,5 @@ abstract class FilterIterator extends \FilterIterator
         parent::__construct($iterator);
 
         $this->options = $options;
-    }
-
-    /**
-     * Gets the application.
-     *
-     * @return Application
-     */
-    public static function getApplication()
-    {
-        return self::$app;
-    }
-
-    /**
-     * Sets the application.
-     *
-     * @param Application $app
-     */
-    public static function setApplication(Application $app)
-    {
-        self::$app = $app;
-    }
-
-    /**
-     * Gets an application parameter or an object.
-     *
-     * @param  string $id
-     * @return mixed
-     */
-    public function __invoke($id)
-    {
-        return self::$app[$id];
     }
 }

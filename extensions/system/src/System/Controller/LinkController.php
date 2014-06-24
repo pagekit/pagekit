@@ -41,7 +41,7 @@ class LinkController extends Controller
             $result = array('type' => $type->getId(), 'form' => $type->renderForm($link ? $link->getName() : $url, $link ? $link->getParameters() : []));
         }
 
-        return $this('response')->json($result);
+        return $this['response']->json($result);
     }
 
     /**
@@ -52,10 +52,10 @@ class LinkController extends Controller
         $result = ['type' => __('Url'), 'url' => $url];
 
         if ($type = $this->matchType($url, $context)) {
-            $result = array('type' => $type->getLabel(), 'url' => $this('url')->route($url, [], 'base'));
+            $result = array('type' => $type->getLabel(), 'url' => $this['url']->route($url, [], 'base'));
         }
 
-        return $this('response')->json($result);
+        return $this['response']->json($result);
     }
 
     /**
@@ -65,7 +65,7 @@ class LinkController extends Controller
     protected function getTypes($context = '')
     {
         if (null == $this->types) {
-            $this->types = $this('events')->dispatch('system.link', new LinkEvent($context));
+            $this->types = $this['events']->dispatch('system.link', new LinkEvent($context));
         }
 
         return $this->types;
@@ -107,7 +107,7 @@ class LinkController extends Controller
     {
         try {
 
-            return $this('url')->getLinkGenerator()->generate($url);
+            return $this['url']->getLinkGenerator()->generate($url);
 
         } catch (RouteNotFoundException $e) {
         }

@@ -35,11 +35,11 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->widgets = $this('widgets')->getWidgetRepository();
-        $this->roles   = $this('users')->getRoleRepository();
+        $this->widgets = $this['widgets']->getWidgetRepository();
+        $this->roles   = $this['users']->getRoleRepository();
 
-        if (isset(self::$app['theme.site'])) {
-            foreach ($this('theme.site')->getConfig('positions', array()) as $id => $position) {
+        if (isset($this['theme.site'])) {
+            foreach ($this['theme.site']->getConfig('positions', array()) as $id => $position) {
                 list($name, $description) = array_merge((array) $position, array(''));
                 $this->positions[$id] = compact('id', 'name', 'description');
             }
@@ -90,7 +90,7 @@ class WidgetsController extends Controller
             return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
         return $this->redirect('@system/widgets');
     }
@@ -118,15 +118,15 @@ class WidgetsController extends Controller
 
             $this->widgets->save($widget, $data);
 
-            $this('events')->dispatch('system.widget.save', new WidgetEvent($widget));
+            $this['events']->dispatch('system.widget.save', new WidgetEvent($widget));
 
             $id = $widget->getId();
 
-            $this('message')->success($id ? __('Widget saved.') : __('Widget created.'));
+            $this['message']->success($id ? __('Widget saved.') : __('Widget created.'));
 
         } catch (Exception $e) {
 
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
 
         }
 
@@ -145,7 +145,7 @@ class WidgetsController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
+        $this['message']->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
         return $this->redirect('@system/widgets');
     }
@@ -170,7 +170,7 @@ class WidgetsController extends Controller
 
             $this->widgets->save($copy);
 
-            $this('events')->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
+            $this['events']->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
         return $this->redirect('@system/widgets');
@@ -223,12 +223,12 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => __('Widgets updated.')));
+        return $this['response']->json(array('message' => __('Widgets updated.')));
     }
 
     protected function triggerEditEvent($widget)
     {
-        $event = $this('events')->dispatch('system.widget.edit', new WidgetEditEvent($widget));
+        $event = $this['events']->dispatch('system.widget.edit', new WidgetEditEvent($widget));
 
         return $event->getSettings();
     }

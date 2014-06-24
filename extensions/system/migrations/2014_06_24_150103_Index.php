@@ -2,19 +2,18 @@
 
 namespace Pagekit\System\Migration;
 
-class PageData extends Migration
+class Index extends Migration
 {
     public function up()
     {
         $util = $this->getUtility();
         $schema = $util->createSchema();
 
-        if ($util->tableExists('@page_page') !== false) {
+        if ($util->tableExists('@system_widget') !== false) {
 
-            $table = $schema->getTable($this->getConnection()->replacePrefix('@page_page'));
-            if (!$table->hasColumn('data')) {
-                $table->addColumn('data', 'json_array', array('notnull' => false));
-            }
+            $table = $schema->getTable($this->getConnection()->replacePrefix('@system_widget'));
+
+            $table->addIndex(array('status', 'priority'), 'WIDGET_STATUS_PRIORITY');
 
             if ($queries = $schema->getMigrateFromSql($util->createSchema(), $util->getDatabasePlatform())) {
                 foreach ($queries as $query) {

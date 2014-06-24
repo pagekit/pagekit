@@ -3,18 +3,20 @@
 namespace Pagekit\User;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\UserInterface;
 
-class UserProvider extends ApplicationAware
+class UserProvider implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @return UserRepository
      */
     public function getUserRepository()
     {
-        return $this('db.em')->getRepository('Pagekit\User\Entity\User');
+        return $this['db.em']->getRepository('Pagekit\User\Entity\User');
     }
 
     /**
@@ -22,7 +24,7 @@ class UserProvider extends ApplicationAware
      */
     public function getRoleRepository()
     {
-        return $this('db.em')->getRepository('Pagekit\User\Entity\Role');
+        return $this['db.em']->getRepository('Pagekit\User\Entity\Role');
     }
 
     /**
@@ -33,7 +35,7 @@ class UserProvider extends ApplicationAware
      */
     public function get($id = null)
     {
-        return $id === null ? $this('user') : $this->getUserRepository()->find($id);
+        return $id === null ? $this['user'] : $this->getUserRepository()->find($id);
     }
 
     /**

@@ -30,8 +30,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->user  = $this('user');
-        $this->users = $this('users')->getUserRepository();
+        $this->user  = $this['user'];
+        $this->users = $this['users']->getUserRepository();
     }
 
     /**
@@ -45,7 +45,7 @@ class AuthController extends Controller
             return $this->redirect('@frontpage');
         }
 
-        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => ($redirect), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
+        return array('head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => ($redirect), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM);
     }
 
     /**
@@ -53,7 +53,7 @@ class AuthController extends Controller
      */
     public function logoutAction()
     {
-        return $this('auth')->logout();
+        return $this['auth']->logout();
     }
 
     /**
@@ -64,18 +64,18 @@ class AuthController extends Controller
     {
         try {
 
-            if (!$this('csrf')->validate($this('request')->request->get('_csrf'))) {
+            if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
                 throw new AuthException(__('Invalid token. Please try again.'));
             }
 
-            $this('auth')->authorize($user = $this('auth')->authenticate($credentials, false));
+            $this['auth']->authorize($user = $this['auth']->authenticate($credentials, false));
 
-            return $this('auth')->login($user);
+            return $this['auth']->login($user);
 
         } catch (BadCredentialsException $e) {
-            $this('message')->error(__('Invalid username or password.'));
+            $this['message']->error(__('Invalid username or password.'));
         } catch (AuthException $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect($redirect);

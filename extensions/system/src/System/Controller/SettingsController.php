@@ -26,7 +26,7 @@ class SettingsController extends Controller
     public function __construct()
     {
         $this->config = new Config;
-        $this->config->load($this->configFile = $this('config.file'));
+        $this->config->load($this->configFile = $this['config.file']);
     }
 
     /**
@@ -35,7 +35,7 @@ class SettingsController extends Controller
      */
     public function indexAction($tab = 0)
     {
-        $supported = $this('cache')->supports();
+        $supported = $this['cache']->supports();
 
         $caches = array(
             'auto' => array('name' => '', 'supported' => true),
@@ -45,12 +45,12 @@ class SettingsController extends Controller
 
         $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
-        $countries = $this('countries');
-        $languages = $this('languages');
+        $countries = $this['countries'];
+        $languages = $this['languages'];
 
         $codes = array('en_US');
 
-        foreach ($this('file')->find()->directories()->depth(0)->in('extension://system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+        foreach ($this['file']->find()->directories()->depth(0)->in('extension://system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
             $codes[] = $dir->getFileName();
         }
 
@@ -67,7 +67,7 @@ class SettingsController extends Controller
 
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
-        return array('head.title' => __('Settings'), 'option' => $this('option'), 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
+        return array('head.title' => __('Settings'), 'option' => $this['option'], 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
     }
 
     /**
@@ -91,18 +91,18 @@ class SettingsController extends Controller
         file_put_contents($this->configFile, $this->config->dump());
 
         foreach ($option as $key => $value) {
-            $this('option')->set($key, $value, true);
+            $this['option']->set($key, $value, true);
         }
 
-        if ($data['cache.cache.storage'] != $this('config')->get('cache.cache.storage') || $data['app.debug'] != $this('config')->get('app.debug')) {
-            $this('system')->clearCache();
+        if ($data['cache.cache.storage'] != $this['config']->get('cache.cache.storage') || $data['app.debug'] != $this['config']->get('app.debug')) {
+            $this['system']->clearCache();
         }
 
         if (function_exists('opcache_invalidate')) {
             opcache_invalidate($this->configFile);
         }
 
-        $this('message')->success(__('Settings saved.'));
+        $this['message']->success(__('Settings saved.'));
 
         return $this->redirect('@system/settings', compact('tab'));
     }
@@ -125,13 +125,13 @@ class SettingsController extends Controller
 
         try {
 
-            $this('mailer')->testSmtpConnection($option['system:mail.host'], $option['system:mail.port'], $option['system:mail.username'], $option['system:mail.password'], $option['system:mail.encryption']);
+            $this['mailer']->testSmtpConnection($option['system:mail.host'], $option['system:mail.port'], $option['system:mail.username'], $option['system:mail.password'], $option['system:mail.encryption']);
 
         } catch(\Exception $e) {
             $response = array('success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage()));
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -158,17 +158,17 @@ class SettingsController extends Controller
         try {
 
             foreach($option as $key => $value) {
-                $this('option')->set($key, $value);
+                $this['option']->set($key, $value);
             }
 
-            $response['success'] = (bool) $this('mailer')->create(__('Test email!'), __('Testemail'), $option['system:mail.from.address'])->send();
+            $response['success'] = (bool) $this['mailer']->create(__('Test email!'), __('Testemail'), $option['system:mail.from.address'])->send();
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
 
         } catch (\Exception $e) {
             $response = array('success' => false, 'message' => sprintf(__('Mail delivery failed! (%s)'), $e->getMessage()));
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**

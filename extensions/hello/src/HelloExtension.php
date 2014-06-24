@@ -17,7 +17,7 @@ class HelloExtension extends Extension
     {
         parent::boot($app);
 
-        $this('events')->addSubscriber(new HelloListener());
+        $this['events']->addSubscriber(new HelloListener());
 
         $app->on('system.widget', function(RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
@@ -38,8 +38,8 @@ class HelloExtension extends Extension
     public function enable()
     {
         // run all migrations that are newer than the current version
-        if ($version = $this('migrator')->run('extension://hello/migrations', $this('option')->get('hello:version'))) {
-            $this('option')->set('hello:version', $version);
+        if ($version = $this['migrator']->run('extension://hello/migrations', $this['option']->get('hello:version'))) {
+            $this['option']->set('hello:version', $version);
         }
     }
 
@@ -51,10 +51,10 @@ class HelloExtension extends Extension
     public function uninstall()
     {
         // drop all own tables (created in migrations)
-        $util = $this('db')->getUtility();
+        $util = $this['db']->getUtility();
         $util->dropTable('@hello_greetings');
 
         // remove the options setting
-        $this('option')->remove('hello:version');
+        $this['option']->remove('hello:version');
     }
 }

@@ -70,7 +70,7 @@ class SystemExtension extends Extension
 
         $this->mergeOptions();
 
-        $app['system'] = $app->protect($this);
+        $app['system'] = $this;
 
         $app['menus'] = function() {
             return new MenuProvider;
@@ -96,7 +96,7 @@ class SystemExtension extends Extension
         };
 
         $app['positions'] = function($app) {
-            return new PositionManager($app['widgets']);
+            return new PositionManager($app['widgets'], $app['events'], $app['view']);
         };
 
         $app['permissions'] = function($app) {
@@ -171,8 +171,8 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this('migrator')->run('extension://system/migrations', $this('option')->get('system:version'))) {
-            $this('option')->set('system:version', $version);
+        if ($version = $this['migrator']->run('extension://system/migrations', $this['option']->get('system:version'))) {
+            $this['option']->set('system:version', $version);
         }
     }
 
@@ -181,7 +181,7 @@ class SystemExtension extends Extension
      */
     public function clearCache(array $options = array())
     {
-        $this('app')->on('kernel.terminate', function() use ($options) {
+        $this['app']->on('kernel.terminate', function() use ($options) {
             $this->doClearCache($options);
         }, -512);
     }
@@ -193,18 +193,18 @@ class SystemExtension extends Extension
     {
         // clear cache
         if (empty($options) || isset($options['cache'])) {
-            $this('cache')->flushAll();
+            $this['cache']->flushAll();
         }
 
         // clear compiled template files
         if (empty($options) || isset($options['templates'])) {
-            $this('file')->delete($this('path.cache').'/templates');
+            $this['file']->delete($this['path.cache'].'/templates');
         }
 
         // clear temp folder
         if (isset($options['temp'])) {
-            foreach ($this('file')->find()->in($this('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
-                $this('file')->delete($file->getPathname());
+            foreach ($this['file']->find()->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
+                $this['file']->delete($file->getPathname());
             }
         }
     }
@@ -233,11 +233,11 @@ class SystemExtension extends Extension
         );
 
         foreach ($keys as $key) {
-            $this('config')->set($key, $this('option')->get("system:$key", $this('config')->get($key)));
+            $this['config']->set($key, $this['option']->get("system:$key", $this['config']->get($key)));
         }
 
-        if (!$this('config')->get('app.storage')) {
-            $this('config')->set('app.storage', '/storage');
+        if (!$this['config']->get('app.storage')) {
+            $this['config']->set('app.storage', '/storage');
         }
     }
 }

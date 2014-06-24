@@ -2,19 +2,18 @@
 
 namespace Pagekit\Blog\Migration;
 
-use Pagekit\Component\Migration\MigrationInterface;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\System\Migration\Migration;
 
-class RmAccess extends ApplicationAware implements MigrationInterface
+class RmAccess extends Migration
 {
     public function up()
     {
-        $util = $this('db')->getUtility();
+        $util = $this->getUtility();
         $schema = $util->createSchema();
 
         if ($util->tableExists('@blog_post') !== false) {
 
-            $table = $schema->getTable($this('db')->replacePrefix('@blog_post'));
+            $table = $schema->getTable($this->getConnection()->replacePrefix('@blog_post'));
 
             if (!$table->hasColumn('roles')) {
                 $table->addColumn('roles', 'simple_array', array('notnull' => false));
@@ -26,7 +25,7 @@ class RmAccess extends ApplicationAware implements MigrationInterface
 
             if ($queries = $schema->getMigrateFromSql($util->createSchema(), $util->getDatabasePlatform())) {
                 foreach ($queries as $query) {
-                    $this('db')->executeQuery($query);
+                    $this->getConnection()->executeQuery($query);
                 }
             }
         }

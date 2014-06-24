@@ -12,10 +12,10 @@ class FrontpageListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        if ($frontpage = $this('config')->get('app.frontpage')) {
-            $this('router')->getUrlAliases()->add('/', $frontpage);
+        if ($frontpage = $this['config']->get('app.frontpage')) {
+            $this['router']->getUrlAliases()->add('/', $frontpage);
         }
-        $this('router')->get('/', '@frontpage', function() {});
+        $this['router']->get('/', '@frontpage', function() {});
     }
 
     /**
@@ -25,7 +25,7 @@ class FrontpageListener extends EventSubscriber
      */
     public function onSystemMenu(ActiveMenuEvent $event)
     {
-        if ($this('request')->getPathInfo() == '/') {
+        if ($this['request']->getPathInfo() == '/') {
             foreach ($event->get('@frontpage') as $id => $item) {
                 $event->add($id);
             }

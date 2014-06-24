@@ -38,7 +38,7 @@ class CommentListener extends EventSubscriber
     protected function getPosts()
     {
         if (!$this->posts) {
-            $this->posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
+            $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
         }
 
         return $this->posts;

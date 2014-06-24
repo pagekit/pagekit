@@ -2,14 +2,13 @@
 
 namespace Pagekit\Hello\Migration;
 
-use Pagekit\Component\Migration\MigrationInterface;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\System\Migration\Migration;
 
-class HelloInit extends ApplicationAware implements MigrationInterface
+class HelloInit extends Migration
 {
     public function up()
     {
-        $util = $this('db')->getUtility();
+        $util = $this->getUtility();
 
         if ($util->tableExists('@hello_greetings') === false) {
             $util->createTable('@hello_greetings', function($table) {

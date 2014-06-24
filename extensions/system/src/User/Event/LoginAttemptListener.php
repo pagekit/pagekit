@@ -24,7 +24,7 @@ class LoginAttemptListener extends EventSubscriber
             return;
         }
 
-        $attempts = $this('cache')->fetch($this->getCacheKey($credentials['username'])) ?: array();
+        $attempts = $this['cache']->fetch($this->getCacheKey($credentials['username'])) ?: array();
 
         if (count($attempts) > self::ATTEMPTS && time() - (int) array_pop($attempts) < self::DELAY) {
             throw new AuthException(__('Slow down a bit.'));
@@ -44,10 +44,10 @@ class LoginAttemptListener extends EventSubscriber
 
         $key = $this->getCacheKey($credentials['username']);
 
-        $attempts = $this('cache')->fetch($key) ?: array();
+        $attempts = $this['cache']->fetch($key) ?: array();
         $attempts[] = time();
 
-        $this('cache')->save($key, $attempts);
+        $this['cache']->save($key, $attempts);
     }
 
     /*
@@ -61,7 +61,7 @@ class LoginAttemptListener extends EventSubscriber
             return;
         }
 
-        $this('cache')->delete($this->getCacheKey($credentials['username']));
+        $this['cache']->delete($this->getCacheKey($credentials['username']));
     }
 
     /**

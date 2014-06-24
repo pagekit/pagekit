@@ -23,7 +23,7 @@ class DefaultController extends Controller
      */
     public function __construct()
     {
-        $this->pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
+        $this->pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page');
     }
 
     /**
@@ -36,16 +36,16 @@ class DefaultController extends Controller
             throw new NotFoundHttpException(__('Page not found!'));
         }
 
-        if (!$page->hasAccess($this('user'))) {
+        if (!$page->hasAccess($this['user'])) {
 
-            if (!$this('user')->isAuthenticated()) {
-                return $this->redirect('@system/auth/login', array('redirect' => $this('url')->current()));
+            if (!$this['user']->isAuthenticated()) {
+                return $this->redirect('@system/auth/login', array('redirect' => $this['url']->current()));
             }
 
             throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
-        $page->setContent($this('content')->applyPlugins($page->getContent(), array('page' => $page, 'markdown' => $page->get('markdown'))));
+        $page->setContent($this['content']->applyPlugins($page->getContent(), array('page' => $page, 'markdown' => $page->get('markdown'))));
 
         return array('head.title' => __($page->getTitle()), 'page' => $page);
     }

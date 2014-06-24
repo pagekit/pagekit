@@ -28,9 +28,9 @@ class PackageController extends Controller
      */
     public function __construct()
     {
-        $this->temp   = $this('path.temp');
-        $this->api    = $this('config')->get('api.url');
-        $this->apiKey = $this('option')->get('system:api.key');
+        $this->temp   = $this['path.temp'];
+        $this->api    = $this['config']->get('api.url');
+        $this->apiKey = $this['option']->get('system:api.key');
     }
 
     /**
@@ -41,7 +41,7 @@ class PackageController extends Controller
     {
         try {
 
-            $file = $this('request')->files->get('file');
+            $file = $this['request']->files->get('file');
 
             if ($file === null || !$file->isValid()) {
                 throw new Exception(__('No file uploaded.'));
@@ -62,9 +62,9 @@ class PackageController extends Controller
             $extra = $package->getExtra();
 
             if (isset($extra['image'])) {
-                $extra['image'] = $this('url')->to("{$this->temp}/$path/".$extra['image']);
+                $extra['image'] = $this['url']->to("{$this->temp}/$path/".$extra['image']);
             } else {
-                $extra['image'] = $this('url')->to('extension://system/assets/images/placeholder-icon.svg');
+                $extra['image'] = $this['url']->to('extension://system/assets/images/placeholder-icon.svg');
             }
 
             $response = array(
@@ -85,7 +85,7 @@ class PackageController extends Controller
             $response = array('error' => $e->getMessage());
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -119,7 +119,7 @@ class PackageController extends Controller
                 $this->installExtension("$path/extension.json", $package);
             }
 
-            $this('system')->clearCache();
+            $this['system']->clearCache();
 
             $response = array('message' => __('Package "%name%" installed.', array('%name%' => $package->getName())));
 
@@ -138,15 +138,15 @@ class PackageController extends Controller
         }
 
         if (strpos($path, $this->temp) === 0 && file_exists($path)) {
-            $this('file')->delete($path);
+            $this['file']->delete($path);
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     protected function installTheme($json, $package)
     {
-        $installer = $this('themes')->getInstaller();
+        $installer = $this['themes']->getInstaller();
 
         if ($installer->isInstalled($package)) {
             $installer->update($json);
@@ -161,8 +161,8 @@ class PackageController extends Controller
             throw new Exception(__('Core extensions may not be installed.'));
         }
 
-        $installer = $this('extensions')->getInstaller();
-        $extension = $this('extensions')->get($name);
+        $installer = $this['extensions']->getInstaller();
+        $extension = $this['extensions']->get($name);
 
         if ($installer->isInstalled($package)) {
 
@@ -212,6 +212,6 @@ class PackageController extends Controller
 
     protected function isCore($name)
     {
-        return in_array($name, $this('config')->get('extension.core', array()));
+        return in_array($name, $this['config']->get('extension.core', array()));
     }
 }

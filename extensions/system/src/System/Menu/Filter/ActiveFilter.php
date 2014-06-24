@@ -18,7 +18,7 @@ class ActiveFilter extends FilterIterator
     {
         parent::__construct($iterator, $options);
 
-        $this->route = $this('request')->attributes->get('_route');
+        $this->route = $this['request']->attributes->get('_route');
     }
 
     /**

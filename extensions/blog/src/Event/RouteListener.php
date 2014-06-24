@@ -34,7 +34,7 @@ class RouteListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $extension = $this('extensions')->get('blog');
+        $extension = $this['extensions']->get('blog');
 
         if (!$this->permalink = $extension->getConfig('permalink')) {
             return;
@@ -44,9 +44,9 @@ class RouteListener extends EventSubscriber
             $this->permalink = $extension->getConfig('permalink.custom');
         }
 
-        $this('router')->getUrlAliases()->add($this->permalink, '@blog/id', array($this, 'inbound'), array($this, 'outbound'));
+        $this['router']->getUrlAliases()->add($this->permalink, '@blog/id', array($this, 'inbound'), array($this, 'outbound'));
 
-        $this->cacheEntries = $this('cache')->fetch(self::CACHE_KEY);
+        $this->cacheEntries = $this['cache']->fetch(self::CACHE_KEY);
     }
 
     public function inbound($parameters)
@@ -121,7 +121,7 @@ class RouteListener extends EventSubscriber
     public function __destruct()
     {
         if ($this->cacheDirty) {
-            $this('cache')->save(self::CACHE_KEY, $this->cacheEntries);
+            $this['cache']->save(self::CACHE_KEY, $this->cacheEntries);
         }
     }
 
@@ -143,7 +143,7 @@ class RouteListener extends EventSubscriber
     protected function getPosts()
     {
         if (!$this->posts) {
-            $this->posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
+            $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
         }
 
         return $this->posts;

@@ -24,8 +24,6 @@ use Pagekit\User\Dashboard\UserWidget;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
-use Razr\SimpleFilter;
-use Razr\SimpleFunction;
 
 class SystemListener extends EventSubscriber
 {
@@ -34,9 +32,7 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $app = $this('app');
-
-        $scripts = $app['view.scripts'];
+        $scripts = $this['view.scripts'];
         $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
         $scripts->register('requirejs', 'asset://system/js/require.min.js', array('requirejs-config'));
         $scripts->register('requirejs-config', 'asset://system/js/require.js');
@@ -45,35 +41,35 @@ class SystemListener extends EventSubscriber
         $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/addons/sticky.js', array(), array('requirejs' => true));
         $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/addons/sortable.js', array(), array('requirejs' => true));
 
-        $helper = new DateHelper($app['dates']);
-        $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('date', array($helper, 'format')));
-        $app['tmpl.razr']->addFunction('date', array($helper, 'format'));
+        $helper = new DateHelper($this['dates']);
+        $this['tmpl.php']->addHelpers(array($helper));
+        $this['tmpl.razr']->addDirective(new FunctionDirective('date', array($helper, 'format')));
+        $this['tmpl.razr']->addFunction('date', array($helper, 'format'));
 
-        $helper = new EditorHelper($app['events']);
-        $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
+        $helper = new EditorHelper($this['events']);
+        $this['tmpl.php']->addHelpers(array($helper));
+        $this['tmpl.razr']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
 
-        $helper = new FinderHelper($app);
-        $app['tmpl.php']->addHelpers(array($helper));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
-        $app['tmpl.razr']->addDirective(new FunctionDirective('url', array($app['url'], 'to')));
-        $app['tmpl.razr']->addFunction('url', array($app['url'], 'to'));
+        $helper = new FinderHelper($this->getApplication());
+        $this['tmpl.php']->addHelpers(array($helper));
+        $this['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
+        $this['tmpl.razr']->addDirective(new FunctionDirective('url', array($this['url'], 'to')));
+        $this['tmpl.razr']->addFunction('url', array($this['url'], 'to'));
 
-        $app['auth']->setUserProvider(new UserProvider($app['auth.password']));
-        $app['auth']->refresh($app['option']->get(UserListener::REFRESH_TOKEN));
+        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
+        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
 
-        $app['events']->addSubscriber(new Editor);
-        $app['events']->addSubscriber(new MarkdownPlugin);
-        $app['events']->addSubscriber(new SimplePlugin);
-        $app['events']->addSubscriber(new VideoPlugin);
+        $this['events']->addSubscriber(new Editor);
+        $this['events']->addSubscriber(new MarkdownPlugin);
+        $this['events']->addSubscriber(new SimplePlugin);
+        $this['events']->addSubscriber(new VideoPlugin);
 
-        $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
-        $app['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
-        $app['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
-        $app['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
+        $this['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
+        $this['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
+        $this['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
+        $this['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-        $app['view']->addAction('head', function() use ($scripts) {
+        $this['view']->addAction('head', function() use ($scripts) {
 
             foreach ($scripts as $script) {
 
@@ -89,8 +85,8 @@ class SystemListener extends EventSubscriber
 
         }, 5);
 
-        $app['view']->addAction('messages', function(ActionEvent $event) use ($app) {
-            $event->append($app['view']->render('system/messages/messages.razr'));
+        $this['view']->addAction('messages', function(ActionEvent $event) {
+            $event->append($this['view']->render('system/messages/messages.razr'));
         });
     }
 
@@ -99,7 +95,7 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemLoaded($event, $name, $dispatcher)
     {
-        $dispatcher->dispatch($this('isAdmin') ? 'system.admin' : 'system.site', $event);
+        $dispatcher->dispatch($this['isAdmin'] ? 'system.admin' : 'system.site', $event);
     }
 
     /**
@@ -110,12 +106,12 @@ class SystemListener extends EventSubscriber
         $menu = new Menu;
         $menu->setId('admin');
 
-        $this('menus')->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
-        $this('menus')->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
+        $this['menus']->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
+        $this['menus']->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        $this('events')->dispatch('system.admin_menu', new MenuEvent($menu));
+        $this['events']->dispatch('system.admin_menu', new MenuEvent($menu));
 
-        self::$app['admin.menu'] = $this('menus')->getTree($menu, array('access' => true));
+        $this['admin.menu'] = $this['menus']->getTree($menu, array('access' => true));
     }
 
     /**
@@ -203,9 +199,9 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemFinder(FileAccessEvent $event)
     {
-        if ($this('user')->hasAccess('system: manage storage | system: manage storage read only')) {
-            $mode = $this('user')->hasAccess('system: manage storage') ? 'w' : 'r';
-            $event->path('/^'.preg_quote($this('path').$this('config')->get('app.storage'), '/').'($|\/.*)/', $mode);
+        if ($this['user']->hasAccess('system: manage storage | system: manage storage read only')) {
+            $mode = $this['user']->hasAccess('system: manage storage') ? 'w' : 'r';
+            $event->path('/^'.preg_quote($this['path'].$this['config']->get('app.storage'), '/').'($|\/.*)/', $mode);
         }
     }
 
@@ -216,14 +212,14 @@ class SystemListener extends EventSubscriber
      */
     public function onExtensionLoadException(LoadFailureEvent $event)
     {
-        $extensions = $this('option')->get('system:extensions', array());
+        $extensions = $this['option']->get('system:extensions', array());
 
         if (false !== $index = array_search($event->getExtensionName(), $extensions)) {
             unset($extensions[$index]);
             $extensions = array_values($extensions);
         }
 
-        $this('option')->set('system:extensions', $extensions);
+        $this['option']->set('system:extensions', $extensions);
     }
 
     /**

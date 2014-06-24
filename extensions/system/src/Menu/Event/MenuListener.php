@@ -33,7 +33,7 @@ class MenuListener extends EventSubscriber
      */
     public function __construct(CacheInterface $cache = null)
     {
-        $this->cache = $cache ?: $this('cache');
+        $this->cache = $cache ?: $this['cache'];
     }
 
     /**
@@ -43,7 +43,7 @@ class MenuListener extends EventSubscriber
      */
     public function onSystemSite(GetResponseEvent $event)
     {
-        $event->getRequest()->attributes->set('_menu', $this('events')->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', $this['events']->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -53,7 +53,7 @@ class MenuListener extends EventSubscriber
      */
     public function onSystemMenu(ActiveMenuEvent $event)
     {
-        $request  = $this('request');
+        $request  = $this['request'];
         $route    = $request->attributes->get('_route');
         $params   = $request->attributes->get('_route_params', array());
         $internal = $route . ($params ? '?' . http_build_query($params) : '');
@@ -80,7 +80,7 @@ class MenuListener extends EventSubscriber
     {
         if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
             $this->cacheEntries = array('paths' => array(), 'patterns' => array());
-            foreach ($this('menus')->getItemRepository()->query()->where(array('status' => ItemInterface::STATUS_ACTIVE))->get() as $item) {
+            foreach ($this['menus']->getItemRepository()->query()->where(array('status' => ItemInterface::STATUS_ACTIVE))->get() as $item) {
                 if (!$item->getPages()) {
                     $this->cacheEntries['paths'][strtok($item->getUrl(), '?')][$item->getId()] = $item->getUrl();
                 } else {

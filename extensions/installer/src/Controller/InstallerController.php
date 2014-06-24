@@ -48,13 +48,13 @@ class InstallerController extends Controller
 
             if (!$this->config) {
                 foreach ($config as $key => $value) {
-                    $this('config')->set($key, $value);
+                    $this['config']->set($key, $value);
                 }
             }
 
-            $this('db')->connect();
+            $this['db']->connect();
 
-            $status  = $this('db')->getUtility()->tableExists('@system_option') ? 'tables-exist' : 'no-tables';
+            $status  = $this['db']->getUtility()->tableExists('@system_option') ? 'tables-exist' : 'no-tables';
             $message = '';
 
         } catch (\Exception $e) {
@@ -64,7 +64,7 @@ class InstallerController extends Controller
 
         }
 
-        return $response ? $this('response')->json(compact('status', 'message')) : $status;
+        return $response ? $this['response']->json(compact('status', 'message')) : $status;
     }
 
     /**
@@ -83,29 +83,29 @@ class InstallerController extends Controller
 
             if ('tables-exist' == $status) {
 
-                $this('option')->set('system:version', $this('migrator')->run('extension://system/migrations', $this('option')->get('system:version')));
+                $this['option']->set('system:version', $this['migrator']->run('extension://system/migrations', $this['option']->get('system:version')));
 
             } else {
 
-                $this('option')->set('system:version', $this('migrator')->run('extension://system/migrations'));
+                $this['option']->set('system:version', $this['migrator']->run('extension://system/migrations'));
 
-                $this('db')->insert('@system_user', array(
+                $this['db']->insert('@system_user', array(
                     'name' => $user['username'],
                     'username' => $user['username'],
-                    'password' => $this('auth.password')->hash($user['password']),
+                    'password' => $this['auth.password']->hash($user['password']),
                     'status' => 1,
                     'email' => $user['email'],
                     'registered' => new \DateTime
                 ), array('string', 'string', 'string', 'string', 'string', 'datetime'));
 
-                $id = $this('db')->lastInsertId();
+                $id = $this['db']->lastInsertId();
 
-                $this('db')->insert('@system_user_role', array(
+                $this['db']->insert('@system_user_role', array(
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_AUTHENTICATED
                 ));
 
-                $this('db')->insert('@system_user_role', array(
+                $this['db']->insert('@system_user_role', array(
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_ADMINISTRATOR
                 ));
@@ -115,7 +115,7 @@ class InstallerController extends Controller
 
                 foreach (explode(';', $sql) as $query) {
                     if ($query = trim($query)) {
-                        $this('db')->executeUpdate($query);
+                        $this['db']->executeUpdate($query);
                     }
                 }
             }
@@ -128,7 +128,7 @@ class InstallerController extends Controller
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('app.key', $this('auth.random')->generateString(64));
+                $configuration->set('app.key', $this['auth.random']->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 
@@ -139,7 +139,7 @@ class InstallerController extends Controller
             }
 
             foreach ($option as $key => $value) {
-                $this('option')->set($key, $value, true);
+                $this['option']->set($key, $value, true);
             }
 
             $status = 'success';
@@ -154,6 +154,6 @@ class InstallerController extends Controller
             $message = $e->getMessage();
         }
 
-        return $this('response')->json(compact('status', 'message'));
+        return $this['response']->json(compact('status', 'message'));
     }
 }

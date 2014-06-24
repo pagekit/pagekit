@@ -3,14 +3,16 @@
 namespace Pagekit\System\Exception;
 
 use Pagekit\Component\Session\Csrf\Exception\BadTokenException;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Pagekit\Framework\Exception\ExceptionHandlerInterface;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInterface
+class ExceptionHandler implements ExceptionHandlerInterface, \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var bool
      */
@@ -49,9 +51,9 @@ class ExceptionHandler extends ApplicationAware implements ExceptionHandlerInter
             $exception = FlattenException::create($exception);
         }
 
-        $response = $this('view')->render('extension://system/theme/templates/error.razr', compact('title', 'exception'));
+        $response = $this['view']->render('extension://system/theme/templates/error.razr', compact('title', 'exception'));
 
-        $this('response')->create($response, $exception->getStatusCode(), $exception->getHeaders())->send();
+        $this['response']->create($response, $exception->getStatusCode(), $exception->getHeaders())->send();
 
         return true;
     }

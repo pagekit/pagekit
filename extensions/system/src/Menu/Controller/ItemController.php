@@ -35,9 +35,9 @@ class ItemController extends Controller
      */
     public function __construct()
     {
-        $this->menus = $this('menus')->getMenuRepository();
-        $this->items = $this('menus')->getItemRepository();
-        $this->roles = $this('users')->getRoleRepository();
+        $this->menus = $this['menus']->getMenuRepository();
+        $this->items = $this['menus']->getItemRepository();
+        $this->roles = $this['users']->getRoleRepository();
     }
 
     /**
@@ -58,7 +58,7 @@ class ItemController extends Controller
             return array('head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => $this->roles->findAll());
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');
@@ -79,7 +79,7 @@ class ItemController extends Controller
             return array('head.title' => __('Edit Menu Item'), 'item' => $item, 'roles' => $this->roles->findAll());
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');
@@ -104,7 +104,7 @@ class ItemController extends Controller
                 $item->setMenuId($menu->getId());
             }
 
-            if (!$data['url'] || !$this('url')->route($data['url'])) {
+            if (!$data['url'] || !$this['url']->route($data['url'])) {
                 throw new Exception(__('Invalid url.'));
             }
 
@@ -112,12 +112,12 @@ class ItemController extends Controller
 
             $id = $item->getId();
 
-            $this('message')->success($id ? __('Menu item saved.') : __('Menu item created.'));
+            $this['message']->success($id ? __('Menu item saved.') : __('Menu item created.'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         } catch (InvalidParameterException $e) {
-            $this('message')->error(__('Invalid url.'));
+            $this['message']->error(__('Invalid url.'));
         }
 
         return $id ? $this->redirect('@system/item/edit', compact('id')) : $this->redirect('@system/item/add', array('menu' => $menuId));
@@ -143,10 +143,10 @@ class ItemController extends Controller
                 }
             }
 
-            $this('message')->success(_c('{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
+            $this['message']->success(_c('{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', array('id' => $menuId));
@@ -171,7 +171,7 @@ class ItemController extends Controller
             }
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', array('id' => $menuId));

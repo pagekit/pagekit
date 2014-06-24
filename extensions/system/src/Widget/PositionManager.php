@@ -2,10 +2,11 @@
 
 namespace Pagekit\Widget;
 
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Component\View\View;
 use Pagekit\Widget\Event\RegisterRendererEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class PositionManager extends ApplicationAware implements \ArrayAccess, \IteratorAggregate
+class PositionManager implements \ArrayAccess, \IteratorAggregate
 {
     /**
      * @var WidgetProvider
@@ -25,12 +26,14 @@ class PositionManager extends ApplicationAware implements \ArrayAccess, \Iterato
     /**
      * Constructor.
      *
-     * @param WidgetProvider $provider
+     * @param WidgetProvider           $provider
+     * @param EventDispatcherInterface $events
+     * @param View                     $view
      */
-    public function __construct(WidgetProvider $provider)
+    public function __construct(WidgetProvider $provider, EventDispatcherInterface $events, View $view)
     {
         $this->provider  = $provider;
-        $this->renderers = $this('events')->dispatch('system.position.renderer', new RegisterRendererEvent($this('view')));
+        $this->renderers = $events->dispatch('system.position.renderer', new RegisterRendererEvent($view));
 
         $this->renderers->register('default', function ($position, WidgetProvider $provider, \ArrayObject $widgets, array $options = array()) {
             $output = array();

@@ -26,9 +26,9 @@ class UpdateController extends Controller
      */
     public function __construct()
     {
-        $this->temp   = $this('path.temp');
-        $this->api    = $this('config')->get('api.url');
-        $this->apiKey = $this('option')->get('system:api.key');
+        $this->temp   = $this['path.temp'];
+        $this->api    = $this['config']->get('api.url');
+        $this->apiKey = $this['option']->get('system:api.key');
     }
 
     /**
@@ -36,7 +36,7 @@ class UpdateController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Update'), 'api' => $this->api, 'channel' => $this('option')->get('system:app.release_channel', 'stable'), 'version' => $this('config')->get('app.version'));
+        return array('head.title' => __('Update'), 'api' => $this->api, 'channel' => $this['option']->get('system:app.release_channel', 'stable'), 'version' => $this['config']->get('app.version'));
     }
 
     /**
@@ -47,12 +47,12 @@ class UpdateController extends Controller
         try {
 
             if ($update) {
-                $this('session')->set('system.update', $update);
+                $this['session']->set('system.update', $update);
             } else {
                 throw new Exception(__('Unable to find update.'));
             }
 
-            $this('session')->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
+            $this['session']->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
 
             $client = new Client;
             $client->setDefaultOption('query/api_key', $this->apiKey);
@@ -60,7 +60,7 @@ class UpdateController extends Controller
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            $response = array('message' => __('Copying files...'), 'step' => $this('url')->route('@system/update/copy'), 'progress' => 33);
+            $response = array('message' => __('Copying files...'), 'step' => $this['url']->route('@system/update/copy'), 'progress' => 33);
 
         } catch (ArchiveExtractionException $e) {
             $response = array('error' => __('Package extraction failed.'));
@@ -76,27 +76,27 @@ class UpdateController extends Controller
             $response = array('error' => $e->getMessage());
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     public function copyAction()
     {
         try {
 
-            if (!$update = $this('session')->get('system.update') or !$updateDir = $this('session')->get('system.updateDir')) {
+            if (!$update = $this['session']->get('system.update') or !$updateDir = $this['session']->get('system.updateDir')) {
                 throw new Exception(__('You may not call this step directly.'));
             }
 
             // TODO: create maintenance file
             // TODO: cleanup old files
 
-            $this('file')->delete("$updateDir/.htaccess");
-            $this('file')->copyDir($updateDir, $this('path'));
-            $this('file')->delete($updateDir);
-            $this('system')->clearCache();
-            $this('session')->remove('system.updateDir');
+            $this['file']->delete("$updateDir/.htaccess");
+            $this['file']->copyDir($updateDir, $this['path']);
+            $this['file']->delete($updateDir);
+            $this['system']->clearCache();
+            $this['session']->remove('system.updateDir');
 
-            $response = array('message' => __('Updating database...'), 'step' => $this('url')->route('@system/update/database'), 'progress' => 66);
+            $response = array('message' => __('Updating database...'), 'step' => $this['url']->route('@system/update/database'), 'progress' => 66);
 
         } catch (\Exception $e) {
 
@@ -104,21 +104,21 @@ class UpdateController extends Controller
 
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     public function databaseAction()
     {
         try {
 
-            if (!$update = $this('session')->get('system.update')) {
+            if (!$update = $this['session']->get('system.update')) {
                 throw new Exception(__('You may not call this step directly.'));
             }
 
-            $this('system')->enable();
-            $this('session')->remove('system.update');
+            $this['system']->enable();
+            $this['session']->remove('system.update');
 
-            $response = array('message' => __('Installed successfully.'), 'redirect' => $this('url')->route('@system/system/admin'), 'progress' => 100);
+            $response = array('message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/system/admin'), 'progress' => 100);
 
         } catch (\Exception $e) {
 
@@ -126,6 +126,6 @@ class UpdateController extends Controller
 
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 }

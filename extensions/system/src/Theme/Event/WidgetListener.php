@@ -13,7 +13,7 @@ class WidgetListener extends EventSubscriber
     public function onSystemSite()
     {
         $settings = $this->getSettings();
-        $this('app')->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
+        $this['app']->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
             $widget = $event->getEntity();
             $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
         });
@@ -21,11 +21,11 @@ class WidgetListener extends EventSubscriber
 
     public function onWidgetEdit(WidgetEditEvent $event)
     {
-        if (!$theme = $this('theme.site') or !$tmpl = $theme->getConfig('settings.widgets')) {
+        if (!$theme = $this['theme.site'] or !$tmpl = $theme->getConfig('settings.widgets')) {
             return;
         }
 
-        $view     = $this('view');
+        $view     = $this['view'];
         $settings = $this->getSettings();
         $event->addSettings(__('Theme'), function($widget) use ($view, $tmpl, $theme, $settings) {
             return $view->render($tmpl, compact('widget', 'settings', 'theme'));
@@ -35,7 +35,7 @@ class WidgetListener extends EventSubscriber
     public function onWidgetSave(WidgetEvent $event)
     {
         $settings = $this->getSettings();
-        $settings[$event->getWidget()->getId()] = $this('request')->get('_theme', array());
+        $settings[$event->getWidget()->getId()] = $this['request']->get('_theme', array());
         $this->setSettings($settings);
     }
 
@@ -69,16 +69,16 @@ class WidgetListener extends EventSubscriber
 
     protected function getSettings()
     {
-        return $this('option')->get($this->getOptionsName(), array());
+        return $this['option']->get($this->getOptionsName(), array());
     }
 
     protected function setSettings($settings)
     {
-        $this('option')->set($this->getOptionsName(), $settings);
+        $this['option']->set($this->getOptionsName(), $settings);
     }
 
     protected function getOptionsName()
     {
-        return $this('theme.site')->getName().':config.widgets';
+        return $this['theme.site']->getName().':config.widgets';
     }
 }

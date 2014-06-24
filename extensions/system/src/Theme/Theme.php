@@ -4,11 +4,13 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Framework\Application;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\Translation\Translator;
 
-class Theme extends ApplicationAware
+class Theme implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var string
      */

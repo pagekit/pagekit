@@ -31,8 +31,8 @@ class CommentController extends Controller
      */
     public function __construct()
     {
-        $this->posts    = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments = $this('db.em')->getRepository('Pagekit\Blog\Entity\Comment');
+        $this->posts    = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
+        $this->comments = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
     }
 
     /**
@@ -42,9 +42,9 @@ class CommentController extends Controller
     public function indexAction($filter = array(), $thread = 0, $page = 0)
     {
         if ($filter) {
-            $this('session')->set('blog.comments.filter', $filter);
+            $this['session']->set('blog.comments.filter', $filter);
         } else {
-            $filter = $this('session')->get('blog.comments.filter', array());
+            $filter = $this['session']->get('blog.comments.filter', array());
         }
 
         $query = $this->comments->query()->related(array('thread'));
@@ -75,9 +75,9 @@ class CommentController extends Controller
 
         $query->offset($page * $limit)->limit($limit)->orderBy('created', 'DESC');
 
-        if ($this('request')->isXmlHttpRequest()) {
-            return $this('response')->json(array(
-                'table' => $this('view')->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get())),
+        if ($this['request']->isXmlHttpRequest()) {
+            return $this['response']->json(array(
+                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get())),
                 'total' => $total
             ));
         }
@@ -95,7 +95,7 @@ class CommentController extends Controller
     {
         try {
 
-            $user = $this('user');
+            $user = $this['user'];
 
             if (!$id || !$comment = $this->comments->find($id)) {
 
@@ -106,7 +106,7 @@ class CommentController extends Controller
                 $comment = new Comment;
 
                 $comment->setUserId((int) $user->getId());
-                $comment->setIp($this('request')->getClientIp());
+                $comment->setIp($this['request']->getClientIp());
                 $comment->setAuthor($user->getName());
                 $comment->setEmail($user->getEmail());
                 $comment->setUrl($user->getUrl());
@@ -122,7 +122,7 @@ class CommentController extends Controller
         } catch (Exception $e) {
             $response = array('message' => $e->getMessage(), 'error' => true);
         }
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -137,7 +137,7 @@ class CommentController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids))));
     }
 
     /**
@@ -152,10 +152,10 @@ class CommentController extends Controller
                 $comment->setStatus($status);
                 $this->comments->save($comment);
 
-                $this('events')->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
+                $this['events']->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids))));
     }
 }

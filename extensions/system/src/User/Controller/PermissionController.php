@@ -21,7 +21,7 @@ class PermissionController extends Controller
      */
     public function __construct()
     {
-        $this->roles = $this('users')->getRoleRepository();
+        $this->roles = $this['users']->getRoleRepository();
     }
 
     /**
@@ -31,7 +31,7 @@ class PermissionController extends Controller
     {
         $roles = $this->roles->query()->orderBy('priority')->get();
 
-        return array('head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this('permissions'));
+        return array('head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this['permissions']);
     }
 
     /**
@@ -45,6 +45,6 @@ class PermissionController extends Controller
             $this->roles->save($role);
         }
 
-        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Permissions saved!'))) : $this->redirect('@system/permission');
+        return $this['request']->isXmlHttpRequest() ? $this['response']->json(array('message' => __('Permissions saved!'))) : $this->redirect('@system/permission');
     }
 }

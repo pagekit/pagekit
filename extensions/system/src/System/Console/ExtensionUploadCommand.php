@@ -3,8 +3,8 @@
 namespace Pagekit\System\Console;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Post\PostFile;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Post\PostFile;
 use Pagekit\Component\Package\Loader\JsonLoader;
 use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;

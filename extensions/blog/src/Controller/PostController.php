@@ -35,9 +35,9 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->posts = $this('db.em')->getRepository('Pagekit\Blog\Entity\Post');
-        $this->roles = $this('users')->getRoleRepository();
-        $this->users = $this('users')->getUserRepository();
+        $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
+        $this->roles = $this['users']->getRoleRepository();
+        $this->users = $this['users']->getUserRepository();
     }
 
     /**
@@ -47,9 +47,9 @@ class PostController extends Controller
     public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
-            $this('session')->set('blog.posts.filter', $filter);
+            $this['session']->set('blog.posts.filter', $filter);
         } else {
-            $filter = $this('session')->get('blog.posts.filter', array());
+            $filter = $this['session']->get('blog.posts.filter', array());
         }
 
         $query = $this->posts->query();
@@ -71,9 +71,9 @@ class PostController extends Controller
 
         $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC');
 
-        if ($this('request')->isXmlHttpRequest()) {
-            return $this('response')->json(array(
-                'table' => $this('view')->render('view://blog/admin/post/table.razr', array('count' => $count, 'posts' => $query->get(), 'roles' => $this->roles->findAll())),
+        if ($this['request']->isXmlHttpRequest()) {
+            return $this['response']->json(array(
+                'table' => $this['view']->render('view://blog/admin/post/table.razr', array('count' => $count, 'posts' => $query->get(), 'roles' => $this->roles->findAll())),
                 'total' => $total
             ));
         }
@@ -87,7 +87,7 @@ class PostController extends Controller
     public function addAction()
     {
         $post = new Post;
-        $post->setUser($this('user'));
+        $post->setUser($this['user']);
 
         return array('head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());
     }
@@ -106,7 +106,7 @@ class PostController extends Controller
 
         } catch (Exception $e) {
 
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
 
             return $this->redirect('@blog/post');
         }
@@ -132,7 +132,7 @@ class PostController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
-            $data['date'] = $this('dates')->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+            $data['date'] = $this['dates']->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
 
             $this->posts->save($post, $data);
 
@@ -142,7 +142,7 @@ class PostController extends Controller
             $response = array('message' => $e->getMessage(), 'error' => true);
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -157,7 +157,7 @@ class PostController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids))));
     }
 
     /**
@@ -179,7 +179,7 @@ class PostController extends Controller
             }
         }
 
-        return $this('response')->json(array('message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids))));
+        return $this['response']->json(array('message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids))));
     }
 
     /**
@@ -201,7 +201,7 @@ class PostController extends Controller
             $message = _c('{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished.', count($ids));
         }
 
-        return $this('response')->json(compact('message'));
+        return $this['response']->json(compact('message'));
     }
 
     protected function slugify($slug)

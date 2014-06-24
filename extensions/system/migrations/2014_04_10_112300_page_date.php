@@ -2,26 +2,23 @@
 
 namespace Pagekit\System\Migration;
 
-use Pagekit\Component\Migration\MigrationInterface;
-use Pagekit\Framework\ApplicationAware;
-
-class PageDate extends ApplicationAware implements MigrationInterface
+class PageDate extends Migration
 {
     public function up()
     {
-        $util = $this('db')->getUtility();
+        $util = $this->getUtility();
         $schema = $util->createSchema();
 
         if ($util->tableExists('@page_page') !== false) {
 
-            $table = $schema->getTable($this('db')->replacePrefix('@page_page'));
+            $table = $schema->getTable($this->getConnection()->replacePrefix('@page_page'));
             if (!$table->hasColumn('date')) {
                 $table->addColumn('date', 'datetime', array('notnull' => false));
             }
 
             if ($queries = $schema->getMigrateFromSql($util->createSchema(), $util->getDatabasePlatform())) {
                 foreach ($queries as $query) {
-                    $this('db')->executeQuery($query);
+                    $this->getConnection()->executeQuery($query);
                 }
             }
         }

@@ -11,7 +11,7 @@ class LocaleListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $this('translator')->setLocale($this('config')->get('app.locale'.($this('isAdmin') ? '_admin' : '')));
+        $this['translator']->setLocale($this['config']->get('app.locale'.($this['isAdmin'] ? '_admin' : '')));
     }
 
     /**

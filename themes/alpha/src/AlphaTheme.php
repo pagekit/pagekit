@@ -51,7 +51,7 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $positions = $this('positions');
+        $positions = $this['positions'];
         foreach ($sidebars as $name => $sidebar) {
             if (!$positions->exists($name)) {
                 unset($sidebars[$name]);

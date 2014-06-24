@@ -20,10 +20,10 @@ class CanonicalListener extends EventSubscriber
             return;
         }
 
-        $route = $this('url')->route($request->attributes->get('_route'), $request->attributes->get('_route_params', array()));
+        $route = $this['url']->route($request->attributes->get('_route'), $request->attributes->get('_route_params', array()));
 
         if ($route != $request->getRequestUri()) {
-            $this('view')->set('head.link.canonical', array('href' => $route));
+            $this['view']->set('head.link.canonical', array('href' => $route));
         }
     }
 

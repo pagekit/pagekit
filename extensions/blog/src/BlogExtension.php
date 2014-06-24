@@ -45,13 +45,13 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = $this('migrator')->run('extension://blog/migrations', $this('option')->get('blog:version'))) {
-            $this('option')->set('blog:version', $version);
+        if ($version = $this['migrator']->run('extension://blog/migrations', $this['option']->get('blog:version'))) {
+            $this['option']->set('blog:version', $version);
         }
     }
 
     public function uninstall()
     {
-        $this('option')->remove('blog:version');
+        $this['option']->remove('blog:version');
     }
 }

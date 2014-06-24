@@ -28,8 +28,8 @@ class MenuController extends Controller
      */
     public function __construct()
     {
-        $this->menus  = $this('menus')->getMenuRepository();
-        $this->items  = $this('menus')->getItemRepository();
+        $this->menus  = $this['menus']->getMenuRepository();
+        $this->items  = $this['menus']->getItemRepository();
     }
 
     /**
@@ -70,7 +70,7 @@ class MenuController extends Controller
             $this->menus->save($menu, compact('name'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', array('id' => isset($menu) ? $menu->getId() : 0));
@@ -90,10 +90,10 @@ class MenuController extends Controller
 
             $this->menus->delete($menu);
 
-            $this('db')->delete('@system_menu_item', array('menu_id' => $id));
+            $this['db']->delete('@system_menu_item', array('menu_id' => $id));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');
@@ -121,6 +121,6 @@ class MenuController extends Controller
             $this->items->save($item);
         }
 
-        return $this('response')->json(array('message' => __('Menu order updated')));
+        return $this['response']->json(array('message' => __('Menu order updated')));
     }
 }

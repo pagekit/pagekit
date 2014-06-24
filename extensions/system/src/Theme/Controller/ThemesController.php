@@ -21,10 +21,10 @@ class ThemesController extends Controller
      */
     public function __construct()
     {
-        $this->themes = $this('themes');
-        $this->temp   = $this('path.temp');
-        $this->api    = $this('config')->get('api.url');
-        $this->apiKey = $this('option')->get('system:api.key');
+        $this->themes = $this['themes'];
+        $this->temp   = $this['path.temp'];
+        $this->api    = $this['config']->get('api.url');
+        $this->apiKey = $this['option']->get('system:api.key');
     }
 
     /**
@@ -40,7 +40,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if ($this('config')->get('theme.site') == $name) {
+            if ($this['config']->get('theme.site') == $name) {
                 $current = $package;
             }
 
@@ -75,10 +75,10 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', array('%name%' => $name)));
             }
 
-            $this('option')->set('system:theme.site', $theme->getName(), true);
+            $this['option']->set('system:theme.site', $theme->getName(), true);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/themes');
@@ -99,10 +99,10 @@ class ThemesController extends Controller
             $this->themes->getInstaller()->uninstall($theme);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
-        $this('system')->clearCache();
+        $this['system']->clearCache();
 
         return $this->redirect('@system/themes');
     }
@@ -118,13 +118,13 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $config = $this('option')->get("$name:config", array());
-            $event  = $this('events')->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
+            $config = $this['option']->get("$name:config", array());
+            $event  = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
 
-            return $this('view')->render($tmpl, array('theme' => $theme, 'config' => $event->getConfig()));
+            return $this['view']->render($tmpl, array('theme' => $theme, 'config' => $event->getConfig()));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -141,15 +141,15 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = $this('events')->dispatch('system.theme.save', new ThemeEvent($theme, $config));
+            $event = $this['events']->dispatch('system.theme.save', new ThemeEvent($theme, $config));
 
-            $this('option')->set("$name:config", $event->getConfig(), true);
-            $this('message')->success(__('Settings saved.'));
+            $this['option']->set("$name:config", $event->getConfig(), true);
+            $this['message']->success(__('Settings saved.'));
 
             return $this->redirect('@system/themes/settings', compact('name'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');

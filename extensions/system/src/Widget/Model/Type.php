@@ -2,8 +2,9 @@
 
 namespace Pagekit\Widget\Model;
 
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 
-abstract class Type extends ApplicationAware implements TypeInterface
+abstract class Type implements TypeInterface, \ArrayAccess
 {
+    use ApplicationTrait;
 }

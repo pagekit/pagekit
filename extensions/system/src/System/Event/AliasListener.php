@@ -13,11 +13,11 @@ class AliasListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $manager = $this('router')->getUrlAliases();
+        $manager = $this['router']->getUrlAliases();
 
-        if (false === $aliases = $this('cache')->fetch(self::CACHE_KEY)) {
-            $aliases = $this('db.em')->getRepository('Pagekit\System\Entity\Alias')->findAll();
-            $this('cache')->save(self::CACHE_KEY, $aliases);
+        if (false === $aliases = $this['cache']->fetch(self::CACHE_KEY)) {
+            $aliases = $this['db.em']->getRepository('Pagekit\System\Entity\Alias')->findAll();
+            $this['cache']->save(self::CACHE_KEY, $aliases);
         }
 
         foreach ($aliases as $alias) {
@@ -30,7 +30,7 @@ class AliasListener extends EventSubscriber
      */
     public function clearCache()
     {
-        $this('cache')->delete(self::CACHE_KEY);
+        $this['cache']->delete(self::CACHE_KEY);
     }
 
     /**

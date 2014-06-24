@@ -36,7 +36,7 @@ class TextWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        return $this('content')->applyPlugins($widget->get('content'), array('widget' => $widget, 'markdown' => $widget->get('markdown')));
+        return $this['content']->applyPlugins($widget->get('content'), array('widget' => $widget, 'markdown' => $widget->get('markdown')));
     }
 
     /**
@@ -44,6 +44,6 @@ class TextWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/widgets/text/edit.razr', compact('widget'));
+        return $this['view']->render('system/widgets/text/edit.razr', compact('widget'));
     }
 }

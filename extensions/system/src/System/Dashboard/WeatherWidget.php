@@ -40,7 +40,7 @@ class WeatherWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        return $this('view')->render('system/admin/dashboard/weather/index.razr', compact('widget', 'options'));
+        return $this['view']->render('system/admin/dashboard/weather/index.razr', compact('widget', 'options'));
     }
 
     /**
@@ -48,6 +48,6 @@ class WeatherWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/admin/dashboard/weather/edit.razr', compact('widget'));
+        return $this['view']->render('system/admin/dashboard/weather/edit.razr', compact('widget'));
     }
 }

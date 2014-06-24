@@ -42,7 +42,7 @@ class MenuWidget extends Type
 
         $layout = isset($options['layout']) ? $options['layout'] : 'system/widgets/menu/nav.razr';
 
-        $root = $this('menus')->getTree($widget->get('menu', 0), array(
+        $root = $this['menus']->getTree($widget->get('menu', 0), array(
             'access' => true,
             'active' => true,
             'status' => 1,
@@ -76,7 +76,7 @@ class MenuWidget extends Type
 
         $root->setParent();
 
-        return $this('view')->render($layout, compact('widget', 'options', 'root'));
+        return $this['view']->render($layout, compact('widget', 'options', 'root'));
     }
 
     /**
@@ -84,6 +84,6 @@ class MenuWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/widgets/menu/edit.razr', compact('widget'));
+        return $this['view']->render('system/widgets/menu/edit.razr', compact('widget'));
     }
 }

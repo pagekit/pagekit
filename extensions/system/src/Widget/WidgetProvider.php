@@ -3,12 +3,14 @@
 namespace Pagekit\Widget;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class WidgetProvider extends ApplicationAware
+class WidgetProvider implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var mixed
      */
@@ -24,7 +26,7 @@ class WidgetProvider extends ApplicationAware
      */
     public function __construct()
     {
-        $this->types = $this('events')->dispatch('system.widget', new RegisterWidgetEvent);
+        $this->types = $this['events']->dispatch('system.widget', new RegisterWidgetEvent);
     }
 
     /**
@@ -69,6 +71,6 @@ class WidgetProvider extends ApplicationAware
      */
     public function getWidgetRepository()
     {
-        return $this('db.em')->getRepository('Pagekit\Widget\Entity\Widget');
+        return $this['db.em']->getRepository('Pagekit\Widget\Entity\Widget');
     }
 }

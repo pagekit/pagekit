@@ -30,8 +30,8 @@ class RegistrationController extends Controller
      */
     public function __construct()
     {
-        $this->users = $this('users')->getUserRepository();
-        $this->roles = $this('users')->getRoleRepository();
+        $this->users = $this['users']->getUserRepository();
+        $this->roles = $this['users']->getRoleRepository();
     }
 
     /**
@@ -39,7 +39,7 @@ class RegistrationController extends Controller
      */
     public function indexAction()
     {
-        if ($this('user')->isAuthenticated() || $this('option')->get('system:user.registration', 'admin') == 'admin') {
+        if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
             return $this->redirect('@frontpage');
         }
 
@@ -53,11 +53,11 @@ class RegistrationController extends Controller
     {
         try {
 
-            if ($this('user')->isAuthenticated() || $this('option')->get('system:user.registration', 'admin') == 'admin') {
+            if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
                 return $this->redirect('@frontpage');
             }
 
-            if (!$this('csrf')->validate($this('request')->request->get('_csrf'))) {
+            if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
@@ -95,14 +95,14 @@ class RegistrationController extends Controller
             $user->setName($name);
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPassword($this('auth.password')->hash($password));
+            $user->setPassword($this['auth.password']->hash($password));
             $user->setStatus(UserInterface::STATUS_BLOCKED);
             $user->setRoles($this->roles->where(array('id' => RoleInterface::ROLE_AUTHENTICATED))->get());
 
-            $token = $this('auth.random')->generateString(128);
-            $admin = $this('option')->get('system:user.registration') == 'approval';
+            $token = $this['auth.random']->generateString(128);
+            $admin = $this['option']->get('system:user.registration') == 'approval';
 
-            if ($verify = $this('option')->get('system:user.require_verification')) {
+            if ($verify = $this['option']->get('system:user.require_verification')) {
 
                 $user->setActivation($token);
 
@@ -122,23 +122,23 @@ class RegistrationController extends Controller
             if ($verify) {
 
                 $this->sendVerificationMail($user, $admin ? 'verification.admin' : 'verification');
-                $this('message')->success(__('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.'));
+                $this['message']->success(__('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.'));
 
             } elseif ($admin) {
 
                 $this->sendActivateMail($user, 'activate');
-                $this('message')->success(__('Your user account has been created and is pending approval by the site administrator.'));
+                $this['message']->success(__('Your user account has been created and is pending approval by the site administrator.'));
 
             } else {
 
-                $this('message')->success(__('Your user account has been created.'));
+                $this['message']->success(__('Your user account has been created.'));
 
             }
 
             return $this->redirect('@system/auth/login');
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/registration');
@@ -150,27 +150,27 @@ class RegistrationController extends Controller
     public function activateAction($username, $activation)
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(array('username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'))->first()) {
-            $this('message')->error(__('Invalid key.'));
+            $this['message']->error(__('Invalid key.'));
             return $this->redirect('@frontpage');
         }
 
-        if ($admin = $this('option')->get('system:user.registration') == 'approval' and !$user->get('verified')) {
+        if ($admin = $this['option']->get('system:user.registration') == 'approval' and !$user->get('verified')) {
 
-            $user->setActivation($this('auth.random')->generateString(128));
+            $user->setActivation($this['auth.random']->generateString(128));
             $this->sendActivateMail($user, 'verification.activate');
 
-            $this('message')->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email, and you can login to the site.'));
+            $this['message']->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email, and you can login to the site.'));
 
         } else {
 
             if ($admin) {
 
                 $this->sendActivatedMail($user);
-                $this('message')->success(__('The user\'s account has been activated and the user has been notified about it.'));
+                $this['message']->success(__('The user\'s account has been activated and the user has been notified about it.'));
 
             } else {
 
-                $this('message')->success(__('Your account has been activated.'));
+                $this['message']->success(__('Your account has been activated.'));
 
             }
 
@@ -189,10 +189,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this('mailer')->create()
-                ->setTo($this('option')->get('system:mail.from.address'))
-                ->setSubject(__('Please approve registration at %site%!', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
+            $this['mailer']->create()
+                ->setTo($this['option']->get('system:mail.from.address'))
+                ->setSubject(__('Please approve registration at %site%!', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setBody($this['view']->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}
@@ -202,10 +202,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this('mailer')->create()
+            $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Please confirm your registration at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
+                ->setSubject(__('Please confirm your registration at %site%', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setBody($this['view']->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {
@@ -217,10 +217,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this('mailer')->create()
+            $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Account activated at %site%', array('%site%' => $this('option')->get('system:app.site_title'))))
-                ->setBody($this('view')->render('system/user/mails/activated.razr', compact('user')), 'text/html')
+                ->setSubject(__('Account activated at %site%', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setBody($this['view']->render('system/user/mails/activated.razr', compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}

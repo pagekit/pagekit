@@ -14,7 +14,7 @@ class UserListener extends EventSubscriber
      */
     public function onUserChange()
     {
-        $this('option')->set(self::REFRESH_TOKEN, time(), true);
+        $this['option']->set(self::REFRESH_TOKEN, time(), true);
     }
 
     /**
@@ -22,7 +22,7 @@ class UserListener extends EventSubscriber
      */
     public function onUserLogin(LoginEvent $event)
     {
-        $this('users')->getUserRepository()->updateLogin($event->getUser());
+        $this['users']->getUserRepository()->updateLogin($event->getUser());
     }
 
     /**
@@ -30,8 +30,8 @@ class UserListener extends EventSubscriber
      */
     public function onUserAccess()
     {
-        if ($user = $this('user') and $user->isAuthenticated()) {
-            $this('users')->getUserRepository()->updateAccess($user);
+        if ($user = $this['user'] and $user->isAuthenticated()) {
+            $this['users']->getUserRepository()->updateAccess($user);
         }
     }
 

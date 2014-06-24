@@ -13,25 +13,25 @@ class ThemeListener extends EventSubscriber
     /**
      * Loads the site/admin theme.
      */
-    public function onSystemInit($event)
+    public function onSystemInit()
     {
         try {
 
-            $app = self::$app;
+            $app = $this->getApplication();
 
-            $app['themes'] = function($app) {
+            $this['themes'] = function($app) {
 
                 $loader     = new ThemeLoader;
-                $repository = new ThemeRepository($app['config']['theme.path'], $loader);
+                $repository = new ThemeRepository($this['config']['theme.path'], $loader);
                 $installer  = new PackageInstaller($repository, $loader);
 
                 return new ThemeManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
             };
 
-            $app['theme.admin'] = $app->protect($app['themes']->load('system', 'extension://system/theme'));
+            $app['theme.admin'] = $app['themes']->load('system', 'extension://system/theme');
             $app['theme.admin']->boot($app);
 
-            $app['theme.site'] = $app->protect($app['themes']->load($app['config']->get('theme.site')));
+            $app['theme.site'] = $app['themes']->load($app['config']->get('theme.site'));
             $app['theme.site']->boot($app);
 
         } catch (\Exception $e) {}
@@ -42,7 +42,7 @@ class ThemeListener extends EventSubscriber
      */
     public function onSystemAdmin()
     {
-        $this('view')->setLayout($this('theme.admin')->getLayout());
+        $this['view']->setLayout($this['theme.admin']->getLayout());
     }
 
     /**
@@ -50,7 +50,7 @@ class ThemeListener extends EventSubscriber
      */
     public function onSystemSite()
     {
-        $this('view')->setLayout($this('theme.site')->getLayout());
+        $this['view']->setLayout($this['theme.site']->getLayout());
     }
 
     /**

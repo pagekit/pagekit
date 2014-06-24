@@ -40,7 +40,7 @@ class UserWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = array())
     {
-        $query = $this('users')->getUserRepository()->query();
+        $query = $this['users']->getUserRepository()->query();
 
         if ($widget->get('show') == 'registered') {
             $query->orderBy('registered', 'DESC');
@@ -50,7 +50,7 @@ class UserWidget extends Type
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return $this('view')->render('system/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
+        return $this['view']->render('system/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -58,6 +58,6 @@ class UserWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this('view')->render('system/admin/dashboard/user/edit.razr', compact('widget'));
+        return $this['view']->render('system/admin/dashboard/user/edit.razr', compact('widget'));
     }
 }

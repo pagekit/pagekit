@@ -23,13 +23,13 @@ class SystemController extends Controller
     {
         $packages = array();
 
-        foreach ($this('extensions') as $extension) {
+        foreach ($this['extensions'] as $extension) {
             if ($extension->getConfig('settings')) {
-                $packages[$extension->getName()] = $this('extensions')->getRepository()->findPackage($extension->getName());
+                $packages[$extension->getName()] = $this['extensions']->getRepository()->findPackage($extension->getName());
             }
         }
 
-        return array('head.title' => __('Settings'), 'user' => $this('user'), 'packages' => $packages);
+        return array('head.title' => __('Settings'), 'user' => $this['user'], 'packages' => $packages);
     }
 
     /**
@@ -38,14 +38,14 @@ class SystemController extends Controller
      */
     public function loginAction()
     {
-        if ($this('user')->isAuthenticated()) {
+        if ($this['user']->isAuthenticated()) {
             return $this->redirect('@system/system/admin');
         }
 
-        $lastLogin = $this('session')->get(ResetPasswordController::RESET_LOGIN);
-        $this('session')->remove(ResetPasswordController::RESET_LOGIN);
+        $lastLogin = $this['session']->get(ResetPasswordController::RESET_LOGIN);
+        $this['session']->remove(ResetPasswordController::RESET_LOGIN);
 
-        return array('head.title' => __('Login'), 'last_username' => $this('session')->get(Auth::LAST_USERNAME), 'redirect' => $this('request')->get('redirect') ? : $this('url')->route('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
+        return array('head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ? : $this['url']->route('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
     }
 
     /**
@@ -71,10 +71,10 @@ class SystemController extends Controller
                 throw new Exception('Missing order data.');
             }
 
-            $user = $this('users')->get($this('user')->getId());
+            $user = $this['users']->get($this['user']->getId());
             $user->set('admin.menu', $order);
 
-            $this('users')->getUserRepository()->save($user);
+            $this['users']->getUserRepository()->save($user);
 
             $response = array('message' => __('Order saved.'));
 
@@ -82,7 +82,7 @@ class SystemController extends Controller
             $response = array('message' => $e->getMessage(), 'error' => true);
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -92,7 +92,7 @@ class SystemController extends Controller
      */
     public function storageAction()
     {
-        return array('head.title' => __('Storage'), 'root' => $this('config')->get('app.storage'), 'mode' => 'write');
+        return array('head.title' => __('Storage'), 'root' => $this['config']->get('app.storage'), 'mode' => 'write');
     }
 
     /**
@@ -102,7 +102,7 @@ class SystemController extends Controller
      */
     public function infoAction()
     {
-        return array('head.title' => __('System Information'), 'info' => $this('system.info')->get());
+        return array('head.title' => __('System Information'), 'info' => $this['system.info']->get());
     }
 
     /**
@@ -110,9 +110,9 @@ class SystemController extends Controller
      */
     public function localeAction()
     {
-        $this('events')->dispatch('system.locale', $event = new LocaleEvent);
+        $this['events']->dispatch('system.locale', $event = new LocaleEvent);
 
-        return $this('response')->json($event->getMessages());
+        return $this['response']->json($event->getMessages());
     }
 
     /**
@@ -121,15 +121,15 @@ class SystemController extends Controller
     public function tmplAction($templates = '')
     {
         $response = array();
-        $event = $this('events')->dispatch('system.tmpl', new TmplEvent);
+        $event = $this['events']->dispatch('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
-                $response[$template] = $this('view')->render($event->get($template));
+                $response[$template] = $this['view']->render($event->get($template));
             }
         }
 
-        return $this('response')->json($response);
+        return $this['response']->json($response);
     }
 
     /**
@@ -140,8 +140,8 @@ class SystemController extends Controller
      */
     public function clearCacheAction($caches)
     {
-        $this('system')->clearCache($caches);
+        $this['system']->clearCache($caches);
 
-        return $this('request')->isXmlHttpRequest() ? $this('response')->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system');
+        return $this['request']->isXmlHttpRequest() ? $this['response']->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system');
     }
 }

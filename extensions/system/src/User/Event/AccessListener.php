@@ -87,7 +87,7 @@ class AccessListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos($this('request')->get('redirect'), $this('url')->route('@system/system/admin', array(), true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/system/admin', array(), true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
@@ -101,8 +101,8 @@ class AccessListener extends EventSubscriber
     {
         if ($access = $event->getRequest()->attributes->get('_route_options[access]', array(), true)) {
             foreach ($access as $expression) {
-                if (!$this('user')->hasAccess($expression)) {
-                    $event->setResponse($this('response')->create(__('Insufficient User Rights.'), 403));
+                if (!$this['user']->hasAccess($expression)) {
+                    $event->setResponse($this['response']->create(__('Insufficient User Rights.'), 403));
                     break;
                 }
             }
@@ -118,16 +118,16 @@ class AccessListener extends EventSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$this('auth')->getUser() and $access = $request->attributes->get('_route_options[access]', array(), true) and in_array('system: access admin area', $access)) {
+        if (!$this['auth']->getUser() and $access = $request->attributes->get('_route_options[access]', array(), true) and in_array('system: access admin area', $access)) {
 
             $params = array();
 
             // redirect to default URL for POST requests and don't explicitly redirect the default URL
             if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/system/admin') {
-                $params['redirect'] = $this('url')->current(true);
+                $params['redirect'] = $this['url']->current(true);
             }
 
-            $event->setResponse($this('response')->redirect('@system/system/login', $params));
+            $event->setResponse($this['response']->redirect('@system/system/login', $params));
         }
     }
 

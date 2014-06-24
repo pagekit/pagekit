@@ -2,12 +2,8 @@
 
 namespace Pagekit\System\Link;
 
-use Pagekit\Framework\ApplicationTrait;
-
-abstract class Route implements LinkInterface
+abstract class Route extends Link
 {
-    use ApplicationTrait;
-
     /**
      * Returns the route for this link type
      */
@@ -34,6 +30,6 @@ abstract class Route implements LinkInterface
      */
     public function renderForm($link, $params = [])
     {
-        return $this('view')->render('system/admin/links/route.razr', compact('link'));
+        return $this['view']->render('system/admin/links/route.razr', compact('link'));
     }
 }

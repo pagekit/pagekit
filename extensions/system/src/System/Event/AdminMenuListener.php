@@ -14,9 +14,9 @@ class AdminMenuListener extends EventSubscriber
     public function onAdminMenu(MenuEvent $event)
     {
         $menu = $event->getMenu();
-        $meta = $this('user')->get('admin.menu', array());
+        $meta = $this['user']->get('admin.menu', array());
 
-        foreach ($this('extensions') as $extension) {
+        foreach ($this['extensions'] as $extension) {
             foreach ($extension->getConfig('menu', array()) as $id => $properties) {
 
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;

@@ -2,15 +2,14 @@
 
 namespace Pagekit\System\Migration;
 
-use Pagekit\Component\Migration\MigrationInterface;
-use Pagekit\Framework\ApplicationAware;
 use Pagekit\User\Model\RoleInterface;
 
-class Init extends ApplicationAware implements MigrationInterface
+class Init extends Migration
 {
     public function up()
     {
-        $util = $this('db')->getUtility();
+        $db   = $this->getConnection();
+        $util = $this->getUtility();
 
         if ($util->tableExists('@system_option') === false) {
             $util->createTable('@system_option', function($table) {
@@ -43,9 +42,9 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addIndex(array('name', 'priority'), 'ROLE_NAME_PRIORITY');
             });
 
-            $this('db')->insert('@system_role', array('id' => RoleInterface::ROLE_ANONYMOUS, 'name' => 'Anonymous', 'priority' => 0));
-            $this('db')->insert('@system_role', array('id' => RoleInterface::ROLE_AUTHENTICATED, 'name' => 'Authenticated', 'priority' => 1));
-            $this('db')->insert('@system_role', array('id' => RoleInterface::ROLE_ADMINISTRATOR, 'name' => 'Administrator', 'priority' => 2));
+            $db->insert('@system_role', array('id' => RoleInterface::ROLE_ANONYMOUS, 'name' => 'Anonymous', 'priority' => 0));
+            $db->insert('@system_role', array('id' => RoleInterface::ROLE_AUTHENTICATED, 'name' => 'Authenticated', 'priority' => 1));
+            $db->insert('@system_role', array('id' => RoleInterface::ROLE_ADMINISTRATOR, 'name' => 'Administrator', 'priority' => 2));
         }
 
         if ($util->tableExists('@system_user') === false) {
@@ -127,6 +126,7 @@ class Init extends ApplicationAware implements MigrationInterface
                 $table->addColumn('menu_items', 'simple_array', array('notnull' => false));
                 $table->addColumn('data', 'json_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
+                $table->addIndex(array('status', 'priority'), 'WIDGET_STATUS_PRIORITY');
             });
         }
 

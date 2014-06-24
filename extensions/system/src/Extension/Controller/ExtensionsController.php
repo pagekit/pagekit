@@ -22,10 +22,10 @@ class ExtensionsController extends Controller
      */
     public function __construct()
     {
-        $this->extensions = $this('extensions');
-        $this->temp       = $this('path.temp');
-        $this->api        = $this('config')->get('api.url');
-        $this->apiKey     = $this('option')->get('system:api.key');
+        $this->extensions = $this['extensions'];
+        $this->temp       = $this['path.temp'];
+        $this->api        = $this['config']->get('api.url');
+        $this->apiKey     = $this['option']->get('system:api.key');
     }
 
     /**
@@ -69,7 +69,7 @@ class ExtensionsController extends Controller
             $this->enable($extension);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/extensions');
@@ -93,10 +93,10 @@ class ExtensionsController extends Controller
 
             $this->disable($extension);
 
-            $this('system')->clearCache();
+            $this['system']->clearCache();
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/extensions');
@@ -128,10 +128,10 @@ class ExtensionsController extends Controller
 
             $this->extensions->getInstaller()->uninstall($this->extensions->getRepository()->findPackage($name));
 
-            $this('system')->clearCache();
+            $this['system']->clearCache();
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/extensions');
@@ -148,13 +148,13 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $config = $this('option')->get("$name:config", array());
-            $event  = $this('events')->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
+            $config = $this['option']->get("$name:config", array());
+            $event  = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
 
-            return $this('view')->render($tmpl, array('extension' => $extension, 'config' => $event->getConfig()));
+            return $this['view']->render($tmpl, array('extension' => $extension, 'config' => $event->getConfig()));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -171,15 +171,15 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = $this('events')->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
+            $event = $this['events']->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
 
-            $this('option')->set("$name:config", $event->getConfig(), true);
-            $this('message')->success(__('Settings saved.'));
+            $this['option']->set("$name:config", $event->getConfig(), true);
+            $this['message']->success(__('Settings saved.'));
 
             return $this->redirect('@system/extensions/settings', compact('name'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -187,20 +187,20 @@ class ExtensionsController extends Controller
 
     protected function enable(Extension $extension)
     {
-        $this('option')->set('system:extensions', array_unique(array_merge($this('option')->get('system:extensions', array()), array($extension->getName()))), true);
+        $this['option']->set('system:extensions', array_unique(array_merge($this['option']->get('system:extensions', array()), array($extension->getName()))), true);
 
         $extension->enable();
     }
 
     protected function disable(Extension $extension)
     {
-        $this('option')->set('system:extensions', array_values(array_diff($this('option')->get('system:extensions', array()), array($extension->getName()))), true);
+        $this['option']->set('system:extensions', array_values(array_diff($this['option']->get('system:extensions', array()), array($extension->getName()))), true);
 
         $extension->disable();
     }
 
     protected function isCore($name)
     {
-        return in_array($name, $this('config')->get('extension.core', array()));
+        return in_array($name, $this['config']->get('extension.core', array()));
     }
 }

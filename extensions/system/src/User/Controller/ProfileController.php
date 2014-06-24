@@ -28,8 +28,8 @@ class ProfileController extends Controller
      */
     public function __construct()
     {
-        $this->user  = $this('user');
-        $this->users = $this('users')->getUserRepository();
+        $this->user  = $this['user'];
+        $this->users = $this['users']->getUserRepository();
     }
 
     /**
@@ -38,7 +38,7 @@ class ProfileController extends Controller
     public function indexAction()
     {
         if (!$this->user->isAuthenticated()) {
-            return $this->redirect('@system/auth/login', array('redirect' => $this('url')->current()));
+            return $this->redirect('@system/auth/login', array('redirect' => $this['url']->current()));
         }
 
         return array('head.title' => __('Your Profile'), 'user' => $this->user);
@@ -77,7 +77,7 @@ class ProfileController extends Controller
 
             if ($passNew) {
 
-                if (!$this('auth')->getUserProvider()->validateCredentials($this->user, array('password' => $passOld))) {
+                if (!$this['auth']->getUserProvider()->validateCredentials($this->user, array('password' => $passOld))) {
                     throw new Exception(__('Invalid Password.'));
                 }
 
@@ -85,7 +85,7 @@ class ProfileController extends Controller
                     throw new Exception(__('New Password is invalid.'));
                 }
 
-                $user->setPassword($this('auth.password')->hash($passNew));
+                $user->setPassword($this['auth.password']->hash($passNew));
             }
 
             if ($email != $user->getEmail()) {
@@ -95,16 +95,16 @@ class ProfileController extends Controller
             $user->setName($name);
             $user->setEmail($email);
 
-            $this('events')->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
+            $this['events']->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
 
             $this->users->save($user);
 
-            $this('events')->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
+            $this['events']->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 
-            $this('message')->success(__('Profile updated.'));
+            $this['message']->success(__('Profile updated.'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect('@system/profile');

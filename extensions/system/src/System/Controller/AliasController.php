@@ -22,7 +22,7 @@ class AliasController extends Controller
      */
     public function __construct()
     {
-        $this->aliases = $this('db.em')->getRepository('Pagekit\System\Entity\Alias');
+        $this->aliases = $this['db.em']->getRepository('Pagekit\System\Entity\Alias');
     }
 
     /**
@@ -32,9 +32,9 @@ class AliasController extends Controller
     public function indexAction($filter = null)
     {
         if ($filter) {
-            $this('session')->set('alias.filter', $filter);
+            $this['session']->set('alias.filter', $filter);
         } else {
-            $filter = $this('session')->get('alias.filter', array());
+            $filter = $this['session']->get('alias.filter', array());
         }
 
         $query = $this->aliases->query();
@@ -69,7 +69,7 @@ class AliasController extends Controller
             return array('head.title' => __('Edit URL Alias'), 'alias' => $alias);
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
             return $this->redirect('@system/alias');
         }
     }
@@ -100,10 +100,10 @@ class AliasController extends Controller
 
             $this->aliases->save($obj, compact('alias', 'source'));
             $id = $obj->getId();
-            $this('message')->success($id ? __('Alias saved.') : __('Alias created.'));
+            $this['message']->success($id ? __('Alias saved.') : __('Alias created.'));
 
         } catch (Exception $e) {
-            $this('message')->error($e->getMessage());
+            $this['message']->error($e->getMessage());
         }
 
         return $this->redirect($id ? '@system/alias/edit' : '@system/alias/add', compact('id'));
@@ -121,7 +121,7 @@ class AliasController extends Controller
             }
         }
 
-        $this('message')->success(_c('{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted.', count($ids)));
+        $this['message']->success(_c('{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted.', count($ids)));
 
         return $this->redirect('@system/alias');
     }

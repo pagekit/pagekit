@@ -2,12 +2,10 @@
 
 namespace Pagekit\Hello\Event;
 
-use Pagekit\Framework\ApplicationAware;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 
-class HelloListener extends ApplicationAware implements EventSubscriberInterface
+class HelloListener implements EventSubscriberInterface
 {
-
     public function onBoot($event, $eventName, $dispatcher)
     {
         // do something

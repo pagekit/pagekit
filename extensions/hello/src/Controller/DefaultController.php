@@ -41,27 +41,27 @@ class DefaultController extends Controller
     {
         $view = 'hello/view.razr';
         $data = array('head.title' => __('View article'), 'id' => 1);
-        return $this('view')->render($view, $data);
+        return $this['view']->render($view, $data);
     }
 
     public function redirectAction()
     {
-        return $this('response')->redirect('@hello/greet/name', array('name' => 'Someone'));
+        return $this['response']->redirect('@hello/greet/name', array('name' => 'Someone'));
     }
 
     public function jsonAction()
     {
         $data = array('error' => true, 'message' => 'There is nothing here. Move along.');
-        return $this('response')->json($data);
+        return $this['response']->json($data);
     }
 
     public function downloadAction()
     {
-        return $this('response')->download('extensions/hello/extension.svg');
+        return $this['response']->download('extensions/hello/extension.svg');
     }
 
     function forbiddenAction()
     {
-        return $this('response')->create(__('Permission denied.'), 401);
+        return $this['response']->create(__('Permission denied.'), 401);
     }
 }

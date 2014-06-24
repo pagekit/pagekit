@@ -38,7 +38,7 @@ class ResponseListener extends EventSubscriber
      */
     public function replaceUrlCallback($matches)
     {
-        $route = '@' == $matches[3][0] ? $this('url')->route($matches[3]) : $this('url')->to($matches[3]);
+        $route = '@' == $matches[3][0] ? $this['url']->route($matches[3]) : $this['url']->to($matches[3]);
 
         return "$matches[1]=\"$route\"";
     }

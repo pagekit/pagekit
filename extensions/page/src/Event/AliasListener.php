@@ -14,12 +14,12 @@ class AliasListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $manager = $this('router')->getUrlAliases();
-        $aliases = $this('cache.phpfile')->fetch('page.aliases') ?: array();
+        $manager = $this['router']->getUrlAliases();
+        $aliases = $this['cache.phpfile']->fetch('page.aliases') ?: array();
 
         if (!$aliases) {
 
-            $pages = $this('db.em')->getRepository('Pagekit\Page\Entity\Page');
+            $pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page');
 
             foreach ($pages->where(array('status' => Page::STATUS_PUBLISHED))->get() as $page) {
                 if ($page->getUrl() !== '') {
@@ -27,7 +27,7 @@ class AliasListener extends EventSubscriber
                 }
             }
 
-            $this('cache.phpfile')->save(self::CACHE_KEY, $aliases);
+            $this['cache.phpfile']->save(self::CACHE_KEY, $aliases);
         }
 
         foreach ($aliases as $alias => $source) {
@@ -40,7 +40,7 @@ class AliasListener extends EventSubscriber
      */
     public function clearCache()
     {
-        $this('cache.phpfile')->delete(self::CACHE_KEY);
+        $this['cache.phpfile']->delete(self::CACHE_KEY);
     }
 
     /**

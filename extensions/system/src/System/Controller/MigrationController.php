@@ -14,11 +14,11 @@ class MigrationController extends Controller
      */
     public function indexAction()
     {
-        $version = $this('option')->get('system:version');
+        $version = $this['option']->get('system:version');
 
-        if (!$this('migrator')->get('extension://system/migrations', $version)) {
+        if (!$this['migrator']->get('extension://system/migrations', $version)) {
 
-            $this('message')->warning(__('Your Pagekit database is already up-to-date!'));
+            $this['message']->warning(__('Your Pagekit database is already up-to-date!'));
 
             return $this->redirect('@system/system/admin');
         }
@@ -31,8 +31,8 @@ class MigrationController extends Controller
      */
     public function migrateAction()
     {
-        $this('system')->enable();
-        $this('message')->success(__('Your Pagekit database has been updated successfully.'));
+        $this['system']->enable();
+        $this['message']->success(__('Your Pagekit database has been updated successfully.'));
 
         return $this->redirect('@system/system/admin');
     }

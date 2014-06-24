@@ -5,11 +5,13 @@ namespace Pagekit\Extension;
 use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Router;
 use Pagekit\Framework\Application;
-use Pagekit\Framework\ApplicationAware;
+use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\Translation\Translator;
 
-class Extension extends ApplicationAware
+class Extension implements \ArrayAccess
 {
+    use ApplicationTrait;
+
     /**
      * @var string
      */
@@ -184,7 +186,7 @@ class Extension extends ApplicationAware
         $addResources($this->getConfig('resources.export', array()), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $this('events')->addListener('system.init', function() use ($config, $addResources) {
+            $this['events']->addListener('system.init', function() use ($config, $addResources) {
                 $addResources($config);
             }, 20);
         }

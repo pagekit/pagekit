@@ -15,6 +15,6 @@ class AccessFilter extends FilterIterator
             return true;
         }
 
-        return $this('user')->hasAccess(parent::current()->getAccess());
+        return $this['user']->hasAccess(parent::current()->getAccess());
     }
 }
