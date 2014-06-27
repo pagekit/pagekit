@@ -35,7 +35,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route(methods="POST", options= {"maintenance" = true})
+     * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
      * @View("system/user/login.razr")
      */
@@ -49,7 +49,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route(options= {"maintenance" = true})
+     * @Route(defaults={"_maintenance" = true})
      */
     public function logoutAction()
     {
@@ -57,7 +57,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route(methods="POST", options= {"maintenance" = true})
+     * @Route(methods="POST", defaults={"_maintenance" = true})
      * @Request({"credentials": "array", "redirect"})
      */
     public function authenticateAction($credentials, $redirect)

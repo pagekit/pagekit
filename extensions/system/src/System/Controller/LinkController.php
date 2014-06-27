@@ -84,9 +84,7 @@ class LinkController extends Controller
             return $types[$url];
         }
 
-        if (!$link = $this->getLink($url)) {
-            return false;
-        }
+        $link = $this->getLink($url);
 
         foreach ($types as $type) {
 
@@ -107,10 +105,9 @@ class LinkController extends Controller
     {
         try {
 
-            return $this['url']->getLinkGenerator()->generate($url);
+            return $this['router']->generateLink($url);
 
-        } catch (RouteNotFoundException $e) {
-        }
+        } catch (RouteNotFoundException $e) {}
 
         return false;
     }

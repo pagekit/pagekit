@@ -13,7 +13,7 @@ class AliasListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $manager = $this['router']->getUrlAliases();
+        $router = $this['router'];
 
         if (false === $aliases = $this['cache']->fetch(self::CACHE_KEY)) {
             $aliases = $this['db.em']->getRepository('Pagekit\System\Entity\Alias')->findAll();
@@ -21,7 +21,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias) {
-            $manager->add($alias->getAlias(), $alias->getSource());
+            $router->addAlias($alias->getAlias(), $alias->getSource());
         }
     }
 

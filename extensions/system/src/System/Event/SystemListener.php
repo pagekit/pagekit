@@ -32,6 +32,15 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemInit()
     {
+        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
+        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
+    }
+
+    /**
+     * Dispatches the 'system.site' or 'system.admin' event.
+     */
+    public function onSystemLoaded($event, $name, $dispatcher)
+    {
         $scripts = $this['view.scripts'];
         $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
         $scripts->register('requirejs', 'asset://system/js/require.min.js', array('requirejs-config'));
@@ -53,11 +62,6 @@ class SystemListener extends EventSubscriber
         $helper = new FinderHelper($this->getApplication());
         $this['tmpl.php']->addHelpers(array($helper));
         $this['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
-        $this['tmpl.razr']->addDirective(new FunctionDirective('url', array($this['url'], 'to')));
-        $this['tmpl.razr']->addFunction('url', array($this['url'], 'to'));
-
-        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
-        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
 
         $this['events']->addSubscriber(new Editor);
         $this['events']->addSubscriber(new MarkdownPlugin);
@@ -88,13 +92,7 @@ class SystemListener extends EventSubscriber
         $this['view']->addAction('messages', function(ActionEvent $event) {
             $event->append($this['view']->render('system/messages/messages.razr'));
         });
-    }
 
-    /**
-     * Dispatches the 'system.site' or 'system.admin' event.
-     */
-    public function onSystemLoaded($event, $name, $dispatcher)
-    {
         $dispatcher->dispatch($this['isAdmin'] ? 'system.admin' : 'system.site', $event);
     }
 

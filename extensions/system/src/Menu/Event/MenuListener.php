@@ -55,8 +55,7 @@ class MenuListener extends EventSubscriber
     {
         $request  = $this['request'];
         $route    = $request->attributes->get('_route');
-        $params   = $request->attributes->get('_route_params', array());
-        $internal = $route . ($params ? '?' . http_build_query($params) : '');
+        $internal = $this['router']->generateLink($route, $request->attributes->get('_route_params', array()))->getLink();
 
         foreach ($event->get($route) as $id => $path) {
             if (0 === strpos($path, $internal)) {

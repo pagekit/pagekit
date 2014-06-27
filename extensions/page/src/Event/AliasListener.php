@@ -14,7 +14,7 @@ class AliasListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $manager = $this['router']->getUrlAliases();
+        $router = $this['router'];
         $aliases = $this['cache.phpfile']->fetch('page.aliases') ?: array();
 
         if (!$aliases) {
@@ -31,7 +31,7 @@ class AliasListener extends EventSubscriber
         }
 
         foreach ($aliases as $alias => $source) {
-            $manager->add($alias, $source);
+            $router->addAlias($alias, $source);
         }
     }
 

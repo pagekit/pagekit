@@ -44,7 +44,7 @@ class RouteListener extends EventSubscriber
             $this->permalink = $extension->getConfig('permalink.custom');
         }
 
-        $this['router']->getUrlAliases()->add($this->permalink, '@blog/id', array($this, 'inbound'), array($this, 'outbound'));
+        $this['router']->addAlias($this->permalink, '@blog/id', array($this, 'inbound'), array($this, 'outbound'));
 
         $this->cacheEntries = $this['cache']->fetch(self::CACHE_KEY);
     }
