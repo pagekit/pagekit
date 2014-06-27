@@ -21,9 +21,23 @@
                 <a href="@url('@blog/post/edit', ['id' => $post.id])">@( $post.title )</a>
             </td>
             <td class="uk-text-center">
-                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => $post.status == 2 ? '3' : '2'])" title="@( $post.statusText )">
-                    <i class="uk-icon-circle uk-text-@($post.status == 2 ? 'success' : 'danger')" title="@( $post.statusText )"></i>
+                @if ($post.status == constant('STATUS_DRAFT', $post))
+                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_PUBLISHED', $post)])" title="@($post.statusText)">
+                    <i class="uk-icon-circle uk-text-muted"></i>
                 </a>
+                @elseif ($post.status == constant('STATUS_PENDING_REVIEW', $post))
+                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_PUBLISHED', $post)])" title="@($post.statusText)">
+                    <i class="uk-icon-circle uk-text-warning"></i>
+                </a>
+                @elseif ($post.status == constant('STATUS_PUBLISHED', $post))
+                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_UNPUBLISHED', $post)])" title="@($post.statusText)">
+                    <i class="uk-icon-circle uk-text-success"></i>
+                </a>
+                @elseif ($post.status == constant('STATUS_UNPUBLISHED', $post))
+                <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_PUBLISHED', $post)])" title="@($post.statusText)">
+                    <i class="uk-icon-circle uk-text-danger"></i>
+                </a>
+                @endif
             </td>
             <td class="pk-table-text-break">
                 @set( $link = url('@blog/id', ['id' => $post.id], 'base') )
