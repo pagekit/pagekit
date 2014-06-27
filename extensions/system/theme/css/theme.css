@@ -3181,7 +3181,7 @@ select.uk-form-width-mini {
 .uk-form-icon > [class*='uk-icon-'] {
   position: absolute;
   top: 50%;
-  width: 35px;
+  width: 30px;
   margin-top: -7px;
   font-size: 14px;
   color: #999999;
@@ -3190,7 +3190,7 @@ select.uk-form-width-mini {
   pointer-events: none;
 }
 .uk-form-icon:not(.uk-form-icon-flip) > input {
-  padding-left: 35px !important;
+  padding-left: 30px !important;
 }
 /*
  * Sub-modifier: `uk-form-icon-flip`
@@ -3199,7 +3199,7 @@ select.uk-form-width-mini {
   right: 0;
 }
 .uk-form-icon-flip > input {
-  padding-right: 35px !important;
+  padding-right: 30px !important;
 }
 .uk-form-help-block {
   color: #999999;
