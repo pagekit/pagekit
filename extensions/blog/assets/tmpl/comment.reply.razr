@@ -1,9 +1,10 @@
 <tr class="js-editor">
     <td colspan="5">
-        <form class="uk-form" action="@url('@blog/comment/save')">
+        <form class="uk-form uk-form-stacked" action="@url('@blog/comment/save')">
 
             <div class="uk-form-row">
-                <textarea name="comment[content]" cols="60" rows="6"></textarea>
+                <label for="form-content" class="uk-form-label">@trans('Comment')</label>
+                <textarea id="form-content" class="uk-width-1-1" name="comment[content]" rows="6">{{content}}</textarea>
             </div>
 
             <input type="hidden" name="comment[parent_id]" value="{{id}}">

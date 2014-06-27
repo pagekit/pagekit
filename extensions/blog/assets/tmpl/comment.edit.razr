@@ -19,7 +19,7 @@
 
             <div class="uk-grid uk-grid-width-1-1">
                 <div>
-                    <label for="form-content" class="uk-form-label">@trans('E-mail')</label>
+                    <label for="form-content" class="uk-form-label">@trans('Comment')</label>
                     <textarea id="form-content" class="uk-width-1-1" name="comment[content]" rows="6">{{content}}</textarea>
                 </div>
             </div>
