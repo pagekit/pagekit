@@ -212,10 +212,10 @@ class Post extends Thread
     public static function getStatuses()
     {
         return array(
-            self::STATUS_DRAFT          => __('Draft'),
-            self::STATUS_PENDING_REVIEW => __('Pending Review'),
             self::STATUS_PUBLISHED      => __('Published'),
-            self::STATUS_UNPUBLISHED    => __('Unpublished')
+            self::STATUS_UNPUBLISHED    => __('Unpublished'),
+            self::STATUS_DRAFT          => __('Draft'),
+            self::STATUS_PENDING_REVIEW => __('Pending Review')
         );
     }
 

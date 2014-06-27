@@ -31,7 +31,11 @@
                 </a>
                 @elseif ($post.status == constant('STATUS_PUBLISHED', $post))
                 <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_UNPUBLISHED', $post)])" title="@($post.statusText)">
+                    @if($post.date > new \DateTime)
+                    <i class="uk-icon-clock-o uk-text-success"></i>
+                    @else
                     <i class="uk-icon-circle uk-text-success"></i>
+                    @endif
                 </a>
                 @elseif ($post.status == constant('STATUS_UNPUBLISHED', $post))
                 <a href="#" data-action="@url('@blog/post/status', ['ids[]' => $post.id, 'status' => constant('STATUS_PUBLISHED', $post)])" title="@($post.statusText)">

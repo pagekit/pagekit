@@ -13,7 +13,7 @@
     </ul>
 
     @if ($post.commentable)
-    @include('view://blog/comment/respond.razr')
+    @include('view://blog/comment/respond.razr', ['post' => $post])
     @endif
 
 </div>
