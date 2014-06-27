@@ -5027,6 +5027,9 @@ select.uk-form-width-mini {
   text-transform: none;
   border-radius: 2px;
 }
+.uk-badge:hover {
+  color: #ffffff;
+}
 /* Modifier: `uk-badge-notification`;
  ========================================================================== */
 .uk-badge-notification {
@@ -7755,7 +7758,16 @@ a.uk-datepicker-table-muted {
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
 }
-/* Modifier `pk-breadcrumb`
+/* Modifier `pk-badge`
+========================================================================== */
+.pk-badge {
+  background-color: #eeeeee;
+  color: #999999;
+}
+.pk-badge:hover {
+  color: #999999;
+}
+/* Modifier `pk-badge`
 ========================================================================== */
 .pk-breadcrumb {
   margin: 0 0 20px 0;

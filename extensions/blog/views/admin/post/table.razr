@@ -37,7 +37,7 @@
                 <a href="@url('@system/user/edit', ['id' => $post.user.id])">@( $post.user.username )</a>
             </td>
             <td class="uk-text-center">
-                <a href="@url('@blog/comment', ['post' => $post.id])">@( $post.numcomments )</a>
+                <a class="uk-badge uk-badge-notification pk-badge" href="@url('@blog/comment', ['post' => $post.id])">@( $post.numcomments )</a>
             </td>
             <td>
                 @date($post.date, 'long')

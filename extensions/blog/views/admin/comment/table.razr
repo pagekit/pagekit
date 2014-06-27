@@ -49,7 +49,7 @@
             </td>
             <td>
                 <a href="@url('@blog/post/edit', ['id' => $comment.threadId])">@( $comment.thread.title )</a>
-                <a href="#" data-filter="post" data-value="@( $comment.threadId )">(@( $comment.thread.numComments ))</a>
+                <a class="uk-badge uk-badge-notification pk-badge" href="#" data-filter="post" data-value="@( $comment.threadId )">@( $comment.thread.numComments )</a>
             </td>
         </tr>
         @endforeach
