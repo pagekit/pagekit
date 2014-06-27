@@ -4,7 +4,7 @@ namespace Pagekit\Blog\Migration;
 
 use Pagekit\System\Migration\Migration;
 
-class RmAccess extends Migration
+class RmSubtitle extends Migration
 {
     public function up()
     {
