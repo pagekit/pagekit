@@ -10,7 +10,7 @@
             @token
 
             <p>
-                <button class="uk-button uk-button-success" type="submit">@trans('Submit')</button>
+                <button class="uk-button uk-button-primary" type="submit">@trans('Reply')</button>
                 <a href="#" class="uk-button cancel">@trans('Cancel')</a>
             </p>
 

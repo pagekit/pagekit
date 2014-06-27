@@ -28,7 +28,7 @@
             @token
 
             <p>
-                <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
+                <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
                 <a href="#" class="uk-button cancel">@trans('Cancel')</a>
             </p>
 
