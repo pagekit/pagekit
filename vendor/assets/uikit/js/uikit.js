@@ -2527,6 +2527,7 @@
 
 (function(global, $, UI){
 
+    var togglers = [];
 
     UI.component('toggle', {
 
@@ -2539,12 +2540,14 @@
 
             var $this = this;
 
-            this.totoggle = this.options.target ? $(this.options.target):[];
+            this.getTogglers();
 
             this.on("click", function(e) {
                 if ($this.element.is('a[href="#"]')) e.preventDefault();
                 $this.toggle();
             });
+
+            togglers.push(this);
         },
 
         toggle: function() {
@@ -2556,6 +2559,10 @@
             if(this.options.cls == 'uk-hidden') {
                 $(document).trigger("uk-check-display");
             }
+        },
+
+        getTogglers: function() {
+            this.totoggle = this.options.target ? $(this.options.target):[];
         }
     });
 
@@ -2568,6 +2575,14 @@
                var obj = UI.toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
             }
         });
+
+        setTimeout(function(){
+
+            togglers.forEach(function(toggler){
+                toggler.getTogglers();
+            });
+
+        }, 0);
     });
 
 })(this, jQuery, jQuery.UIkit);
