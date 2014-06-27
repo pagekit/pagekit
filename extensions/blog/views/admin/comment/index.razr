@@ -48,3 +48,31 @@
     <input type="hidden" name="post" value="">
 
 </form>
+
+<script type="text/tmpl" data-tmpl="comment.reply">
+
+    <tr class="js-editor" data-url="@url('@blog/comment/save')">
+        <td></td>
+        <td>
+            @gravatar($app.user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => $app.user.username, 'class' => 'uk-img-preserve uk-border-circle']])
+        </td>
+        <td colspan="3">
+            <div class="uk-form" action="@url('@blog/comment/save')">
+
+                <div class="uk-form-row">
+                    <textarea class="uk-width-1-1" name="comment[content]" rows="6"></textarea>
+                </div>
+
+                <p>
+                    <button class="uk-button uk-button-primary" data-save>@trans('Reply')</button>
+                    <button class="uk-button" data-cancel>@trans('Cancel')</button>
+                </p>
+
+                <input type="hidden" name="comment[parent_id]" value="{{id}}">
+                @token
+
+            </div>
+        </td>
+    </tr>
+
+</script>

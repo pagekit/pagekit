@@ -88,6 +88,23 @@ class CommentController extends Controller
     }
 
     /**
+     * @Request({"id": "int"})
+     * @View("blog/admin/comment/edit.razr", layout=false)
+     */
+    public function editAction($id = 0)
+    {
+        try {
+
+            if (!$comment = $this->comments->find($id)) {
+                throw new Exception('Invalid comment.');
+            }
+
+            return array('comment' => $comment);
+
+        } catch (Exception $e) {}
+    }
+
+    /**
      * @Request({"comment": "array", "id": "int"})
      * @Token
      */
@@ -104,7 +121,6 @@ class CommentController extends Controller
                 }
 
                 $comment = new Comment;
-
                 $comment->setUserId((int) $user->getId());
                 $comment->setIp($this['request']->getClientIp());
                 $comment->setAuthor($user->getName());

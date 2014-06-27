@@ -27,11 +27,6 @@ class BlogExtension extends Extension
             $event->register('Pagekit\Blog\Link\PostLink');
         });
 
-        $app->on('system.tmpl', function(TmplEvent $event) {
-            $event->register('comment.reply', 'extension://blog/assets/tmpl/comment.reply.razr');
-            $event->register('comment.edit', 'extension://blog/assets/tmpl/comment.edit.razr');
-        });
-
         $app->on('system.init', function() use ($app) {
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default');
         }, 16);

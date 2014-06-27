@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.edit,comment.reply', 'domReady!'], function($, uikit, RowSelect, tmpl) {
+require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.reply', 'domReady!'], function($, uikit, RowSelect, tmpl) {
 
     var form         = $('#js-comments'),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
@@ -29,30 +29,53 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.edit,comment.r
         e.preventDefault();
     })
 
-    // post filter
+    // comment filter
     .on('click', '[data-filter="post"]', function(e) {
         e.preventDefault();
+
         post.val($(this).data('value'));
         selectPage(0);
     })
 
-    // quick actions
-    .on('click', '[data-quick-action]', function(e) {
+    // comment edit
+    .on('click', '[data-edit]', function(e) {
         e.preventDefault();
         removeEditor();
 
-        var row = $(this).closest('.js-comment'), reply = $(this).data('quick-action') == 'reply';
-        $(tmpl.render(reply ? 'comment.reply' : 'comment.edit', row.data())).insertAfter(row.hide()).on('submit', 'form', function(e) {
-            e.preventDefault();
+        var row = $(this).closest('.js-comment');
 
-            $.post($(this).prop('action'), $(this).serialize(), function(data) {
-                uikit.notify(data.message, data.error ? 'danger' : 'success');
-                selectPage(reply ? 0 : page.val());
-            });
+        $.post(row.data('url'), function(data) {
+            $(data).insertAfter(row.hide());
         });
-
     })
-    .on('click', '.js-editor .cancel', function(e) {
+
+    // comment reply
+    .on('click', '[data-reply]', function(e) {
+        e.preventDefault();
+        removeEditor();
+
+        var row = $(this).closest('.js-comment');
+
+        $(tmpl.render('comment.reply', row.data())).insertAfter(row);
+    })
+
+    // comment editor
+    .on('click', '.js-editor [data-save]', function(e) {
+        e.preventDefault();
+
+        var editor = $(this).closest('.js-editor');
+
+        $.post(editor.data('url'), $('input,select,textarea', editor), function(data) {
+
+            if (!data.error) {
+                removeEditor();
+                selectPage(0);
+            }
+
+            uikit.notify(data.message, data.error ? 'danger' : 'success');
+        });
+    })
+    .on('click', '.js-editor [data-cancel]', function(e) {
         e.preventDefault();
         removeEditor();
     });
