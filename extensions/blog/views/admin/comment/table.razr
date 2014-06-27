@@ -39,10 +39,10 @@
                     </div>
                 </div>
                 <div>@( $comment.content )</div>
-                <p>
-                    <a href="#" data-quick-action="reply">@trans('Reply')</a>
-                    <a href="#" data-quick-action="edit">@trans('Edit')</a>
-                </p>
+                <ul class="uk-subnav uk-subnav-line">
+                    <li><a href="#" data-quick-action="reply">@trans('Reply')</a></li>
+                    <li><a href="#" data-quick-action="edit">@trans('Edit')</a></li>
+                </ul>
             </td>
             <td class="uk-text-center">
                 @( $comment.statusText )
