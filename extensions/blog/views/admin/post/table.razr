@@ -5,10 +5,10 @@
             <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
             <th class="pk-table-min-width-200">@trans('Title')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
-            <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
-            <th class="pk-table-width-200">@trans('Author')</th>
+            <th class="pk-table-width-100">@trans('Author')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Comments')</th>
             <th class="pk-table-width-100">@trans('Date')</th>
+            <th class="pk-table-width-200 pk-table-min-width-200">@trans('URL')</th>
         </tr>
     </thead>
     <tbody>
@@ -43,14 +43,6 @@
                 </a>
                 @endif
             </td>
-            <td class="pk-table-text-break">
-                @set( $link = url('@blog/id', ['id' => $post.id], 'base') )
-                @if ($post.status == 2 && $post.hasAccess($app.user))
-                <a href="@url('@blog/id', ['id' => $post.id])" target="_blank">@( urldecode($link) )</a>
-                @else
-                @( $post.url ?: $link )
-                @endif
-            </td>
             <td>
                 <a href="@url('@system/user/edit', ['id' => $post.user.id])">@( $post.user.username )</a>
             </td>
@@ -59,6 +51,14 @@
             </td>
             <td>
                 @date($post.date, 'long')
+            </td>
+            <td class="pk-table-text-break">
+                @set( $link = url('@blog/id', ['id' => $post.id], 'base') )
+                @if ($post.status == 2 && $post.hasAccess($app.user))
+                <a href="@url('@blog/id', ['id' => $post.id])" target="_blank">@( urldecode($link) )</a>
+                @else
+                @( $post.url ?: $link )
+                @endif
             </td>
         </tr>
         @endforeach
