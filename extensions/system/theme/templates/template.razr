@@ -99,7 +99,7 @@
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     @if ($subnav.children)
-                        <li class="uk-nav-header">@trans(subnav)</li>
+                        <li class="uk-nav-header">@trans($subnav)</li>
                         <li@raw( $subnav.attribute('active') ? ' class="uk-active"' : '' )>
                             <a href="@url($subnav.url)">@trans($subnav)</a>
                         </li>
