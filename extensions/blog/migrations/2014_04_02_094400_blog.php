@@ -41,7 +41,7 @@ class Blog extends Migration
                 $table->addColumn('user_id', 'string', array('length' => 255));
                 $table->addColumn('author', 'string', array('length' => 255));
                 $table->addColumn('email', 'string', array('length' => 255));
-                $table->addColumn('url', 'string', array('length' => 255));
+                $table->addColumn('url', 'string', array('length' => 255, 'notnull' => false));
                 $table->addColumn('ip', 'string', array('length' => 255));
                 $table->addColumn('created', 'datetime');
                 $table->addColumn('content', 'text');

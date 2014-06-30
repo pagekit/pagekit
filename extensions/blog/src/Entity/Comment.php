@@ -16,7 +16,7 @@ class Comment extends BaseComment
     protected $email;
 
     /** @Column(type="string") */
-    protected $url;
+    protected $url = '';
 
     /** @Column(type="string") */
     protected $ip;

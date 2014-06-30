@@ -41,7 +41,7 @@ class LoginWidget extends Type
         $user = $this['user'];
 
         if ($user->isAuthenticated()) {
-            $redirect = $widget->get('redirect.logout');
+            $redirect = $widget->get('redirect.logout') ?: $this['url']->current(true);
             return $this['view']->render('system/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
         }
 

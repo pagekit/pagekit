@@ -118,7 +118,7 @@ class DefaultController extends Controller
 
             $this['message']->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId())).'#comment-'.$comment->getId());
+            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId()), true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
