@@ -144,7 +144,7 @@ class DefaultController extends Controller
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->find($id) and $post->getStatus() == Post::STATUS_PUBLISHED) {
+        if (!$post = $this->posts->find($id) or $post->getStatus() != Post::STATUS_PUBLISHED or $post->getDate() > new \DateTime) {
             return $this['response']->create(__('Post not found!'), 404);
         }
 
