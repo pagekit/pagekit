@@ -73,18 +73,26 @@ class CommentController extends Controller
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
 
-        $query->offset($page * $limit)->limit($limit)->orderBy('created', 'DESC');
+        $comments = $query->offset($page * $limit)->limit($limit)->orderBy('created', 'DESC')->get();
+
+        $pending = $this['db']->createQueryBuilder()
+            ->from('@blog_comment')
+            ->where(['status' => CommentInterface::STATUS_PENDING])
+            ->whereIn('thread_id', array_unique(array_map(function($comment) { return $comment->getThreadId(); }, $comments)))
+            ->groupBy('thread_id')
+            ->execute('thread_id, count(id)')
+            ->fetchAll(\PDO::FETCH_KEY_PAIR);
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json(array(
-                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get(), 'post' => $post)),
+                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending)),
                 'total' => $total
             ));
         }
 
         $title = isset($post) && $post ? __('Comments on %title%', array('%title%' => $post->getTitle())) : __('Comments');
 
-        return array('head.title' => $title, 'comments' => $query->get(), 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count);
+        return array('head.title' => $title, 'comments' => $comments, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending);
     }
 
     /**

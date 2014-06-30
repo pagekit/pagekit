@@ -3,6 +3,7 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Blog\Entity\Post;
+use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
@@ -69,16 +70,23 @@ class PostController extends Controller
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
 
-        $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC');
+        $posts = $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC')->get();
+        $pending = $this['db']->createQueryBuilder()
+            ->from('@blog_comment')
+            ->where(['status' => CommentInterface::STATUS_PENDING])
+            ->whereIn('thread_id', array_keys($posts))
+            ->groupBy('thread_id')
+            ->execute('thread_id, count(id)')
+            ->fetchAll(\PDO::FETCH_KEY_PAIR);
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json(array(
-                'table' => $this['view']->render('view://blog/admin/post/table.razr', array('count' => $count, 'posts' => $query->get(), 'roles' => $this->roles->findAll())),
+                'table' => $this['view']->render('view://blog/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => $this->roles->findAll(), 'pending' => $pending]),
                 'total' => $total
             ));
         }
 
-        return array('head.title' => __('Posts'), 'posts' => $query->get(), 'statuses' => Post::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count);
+        return array('head.title' => __('Posts'), 'posts' => $posts, 'statuses' => Post::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending);
     }
 
     /**

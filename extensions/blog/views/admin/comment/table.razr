@@ -44,7 +44,7 @@
             </td>
             <td>
                 <a href="@url('@blog/post/edit', ['id' => $comment.threadId])">@($comment.thread.title)</a>
-                <a class="uk-badge uk-badge-notification pk-badge" href="#" data-filter="post" data-value="@($comment.threadId)">@($comment.thread.numComments)</a>
+                <a class="uk-badge uk-badge-notification@( $pending[$comment.threadId] ? '' : ' pk-badge' )" href="#" data-filter="post" data-value="@($comment.threadId)" title="@transchoice("{0} No pending|{1} One pending|]1,Inf[ %comments% pending", $pending[$comment.threadId], ["%comments%" => $pending[$comment.threadId]])">@($comment.thread.numComments)</a>
             </td>
         </tr>
         @endforeach
