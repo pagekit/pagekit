@@ -77,7 +77,7 @@ class CommentController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json(array(
-                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get())),
+                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $query->get(), 'post' => $post)),
                 'total' => $total
             ));
         }
