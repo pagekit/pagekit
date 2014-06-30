@@ -48,7 +48,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->related('user')->get();
+        $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->related('user')->orderBy('date', 'DESC')->get();
 
         foreach ($posts as $post) {
             $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));

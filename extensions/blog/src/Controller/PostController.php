@@ -125,6 +125,7 @@ class PostController extends Controller
             if (!$post = $this->posts->find($id)) {
 
                 $post = new Post;
+                $post->setCommentable(true);
 
             }
 
