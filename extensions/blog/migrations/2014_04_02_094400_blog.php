@@ -46,7 +46,6 @@ class Blog extends Migration
                 $table->addColumn('created', 'datetime');
                 $table->addColumn('content', 'text');
                 $table->addColumn('status', 'smallint');
-                $table->addColumn('previous_status', 'smallint');
                 $table->addColumn('depth', 'smallint');
                 $table->setPrimaryKey(array('id'));
                 $table->addIndex(array('status'), 'STATUS');

@@ -57,7 +57,7 @@ class BuildCommand extends Command
 
                 $exclude = array(
                     '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
-                    '^extensions\/(?!(installer|page|system)\/).*',
+                    '^extensions\/(?!(installer|page|blog|system)\/).*',
                     '^extensions\/.+\/languages\/.+\.(po|pot)',
                     '^themes\/(?!(alpha)\/).*',
                     '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade)',
