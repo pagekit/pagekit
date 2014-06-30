@@ -8,6 +8,8 @@
     @if($widget.showTitle)
     <h3>@( $widget.title )</h3>
     @endif
+
     @raw( $provider.render($widget, $options) )
+    
 </div>
 @endforeach

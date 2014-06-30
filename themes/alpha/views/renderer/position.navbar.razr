@@ -5,11 +5,7 @@
 
     @else
 
-    <ul class="uk-navbar-nav uk-visible-large">
-        <li class="uk-parent" data-uk-dropdown>
-            <a href="#">@( $widget.title )</a>
-            <div class="uk-dropdown uk-dropdown-navbar">@raw( $provider.render($widget, $options) )</div>
-        </li>
-    </ul>
+    @raw( $provider.render($widget, $options) )
+
     @endif
 @endforeach
