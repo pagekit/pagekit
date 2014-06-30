@@ -1,13 +1,11 @@
 @script('menu', 'system/js/menu/item.edit.js', 'requirejs')
 
-<form class="js-item-edit uk-form uk-form-horizontal" action="@url('@system/item/save')" method="post">
+<form id="js-item-edit" class="uk-form uk-form-horizontal" action="@url('@system/item/save')" method="post">
 
     <div class="pk-toolbar">
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url('@system/menu', ['id' => $item.menuId])">@( $item.id ? trans('Close') : trans('Cancel') )</a>
     </div>
-
-    <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-link">@trans('Please choose a link.')</p>
 
     <div class="uk-form-row">
         <label for="form-title" class="uk-form-label">@trans('Title')</label>
@@ -22,8 +20,8 @@
             <p class="uk-form-controls-condensed">
                 <label>
                     @set ( $checked = !in_array($item.url, ['!divider', '!header']) )
-                    <input type="radio" name="item[url]" value="@raw( $checked ? escape($item.url).'" checked' : '"' )>
-                    <input class="js-item-url" type="hidden" name="" value="@( $checked ? $item.url : '' )" data-context="system/menu">
+                    <input class="js-url" type="radio" name="item[url]" value="@raw( $checked ? escape($item.url).'" checked' : '"' )>
+                    <input type="hidden" name="item[link]" value="@( $checked ? $item.url : '' )" data-context="system/menu">
                 </label>
             </p>
             <p class="uk-form-controls-condensed">

@@ -63,13 +63,13 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.reply', 'domRe
     .on('click', '.js-editor [data-save]', function(e) {
         e.preventDefault();
 
-        var editor = $(this).closest('.js-editor');
+        var editor = $(this).closest('.js-editor'), reply = editor.hasClass('js-reply');
 
         $.post(editor.data('url'), $('input,select,textarea', editor), function(data) {
 
             if (!data.error) {
                 removeEditor();
-                selectPage(0);
+                selectPage(reply ? 0 : page.val());
             }
 
             uikit.notify(data.message, data.error ? 'danger' : 'success');

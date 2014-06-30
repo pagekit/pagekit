@@ -7,13 +7,13 @@
     <ul class="uk-comment-list">
 
         @foreach ($app.comments.tree($post.comments) as $child)
-        @include('view://blog/comment/comment.razr', ['post' => $post, 'node' => $child, 'comment' => $child.comment])
+        @include('view://blog/comment/comment.razr', ['node' => $child, 'comment' => $child.comment]    )
         @endforeach
 
     </ul>
 
-    @if ($post.commentable)
-    @include('view://blog/comment/respond.razr', ['post' => $post])
+    @if ($post.isCommentable($config['comments.autoclose'] ? $config['comments.autoclose.days'] : 0))
+    @include('view://blog/comment/respond.razr')
     @endif
 
 </div>

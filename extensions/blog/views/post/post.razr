@@ -4,6 +4,6 @@
 
     <div>@raw( $post.content )</div>
 
-    @include('view://blog/comment/comments.razr', ['post' => $post])
+    @include('view://blog/comment/comments.razr')
 
 </article>

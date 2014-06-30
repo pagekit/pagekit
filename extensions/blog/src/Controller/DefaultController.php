@@ -48,7 +48,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->related('user')->get();
+        $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->related('user')->orderBy('date', 'DESC')->get();
 
         foreach ($posts as $post) {
             $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
@@ -86,6 +86,10 @@ class DefaultController extends Controller
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
+            if (!$post->isCommentable($this->extension->getConfig('comments.autoclose') ? $this->extension->getConfig('comments.autoclose.days') : 0)) {
+                throw new Exception(__('Comments have been disabled for this post.'));
+            }
+
             // retrieve user data
             if ($user->isAuthenticated()) {
                 $data['author'] = $user->getName();
@@ -118,7 +122,7 @@ class DefaultController extends Controller
 
             $this['message']->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId())).'#comment-'.$comment->getId());
+            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId()), true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 

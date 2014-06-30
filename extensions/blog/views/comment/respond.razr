@@ -22,9 +22,6 @@
                 <div class="uk-form-row">
                     <input type="email" name="comment[email]" placeholder="@trans('E-mail')@( $req ? ' *' : '')"@($req ? ' required' : '')>
                 </div>
-                <div class="uk-form-row">
-                    <input type="url" name="comment[url]" placeholder="@trans('Website')">
-                </div>
 
             @endif
 

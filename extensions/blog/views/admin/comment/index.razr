@@ -37,7 +37,7 @@
     <p class="uk-alert uk-alert-info @( $comments ? 'uk-hidden' : '')">@trans('No comments found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('view://blog/admin/comment/table.razr', ['comments' => $comments])
+        @include('view://blog/admin/comment/table.razr')
     </div>
 
     <ul class="uk-pagination @($total < 2 ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @( $total ) }"></ul>
@@ -51,13 +51,13 @@
 
 <script type="text/tmpl" data-tmpl="comment.reply">
 
-    <tr class="js-editor" data-url="@url('@blog/comment/save')">
+    <tr class="js-editor js-reply" data-url="@url('@blog/comment/save')">
         <td></td>
         <td>
             @gravatar($app.user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => $app.user.username, 'class' => 'uk-img-preserve uk-border-circle']])
         </td>
         <td colspan="3">
-            <div class="uk-form" action="@url('@blog/comment/save')">
+            <div class="uk-form">
 
                 <div class="uk-form-row">
                     <textarea class="uk-width-1-1" name="comment[content]" rows="6"></textarea>
