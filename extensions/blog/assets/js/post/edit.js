@@ -11,7 +11,7 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
         spinner.removeClass('uk-hidden');
 
         // date handling
-        $('[name="post[date]"]', form).val($('[data-uk-datepicker]', form).val()+' '+$('[data-uk-timepicker]', form).val());
+        $('[name="post[date]"]', form).val($('[data-uk-datepicker]', form).val()+' '+$('[data-uk-timepicker] input', form).val());
 
         $.post(form.attr('action'), form.serialize(), function(response) {
 
