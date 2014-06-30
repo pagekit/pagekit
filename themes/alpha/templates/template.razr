@@ -25,7 +25,7 @@
             <div class="tm-navbar">
 
                 <nav class="uk-navbar uk-hidden-small">
-                    @raw( $position.render('navbar', ['renderer' => 'navbar', 'classes' => 'uk-hidden-small']) )
+                    @raw( $position.render('navbar', ['renderer' => 'navbar']) )
                 </nav>
 
                 @if ($position.exists('offcanvas'))
