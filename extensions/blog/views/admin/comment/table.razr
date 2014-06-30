@@ -5,7 +5,7 @@
             <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
             <th class="pk-table-min-width-300" colspan="2">@trans('Comment')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
-            <th class="pk-table-width-200">@trans('In response to')</th>
+            <th class="pk-table-width-200">@( $post ? trans('In response to %post%', ['%post%' => $post.title]) : trans('In response to') )</th>
         </tr>
     </thead>
     <tbody>
@@ -38,17 +38,13 @@
                 </ul>
             </td>
             <td class="uk-text-center">
-                @if ($comment.status == constant('STATUS_VISIBLE', $comment))
-                    <i class="uk-icon-circle uk-text-success" title="@($comment.statusText)"></i>
-                @elseif ($comment.status == constant('STATUS_PENDING', $comment))
-                    <i class="uk-icon-circle uk-text-warning" title="@($comment.statusText)"></i>
-                @elseif ($comment.status == constant('STATUS_SPAM', $comment))
-                    <i class="uk-icon-circle uk-text-danger" title="@($comment.statusText)"></i>
-                @endif
+                <a href="#" data-action="@url('@blog/comment/status', ['ids[]' => $comment.id, 'status' => $comment.status == constant('STATUS_VISIBLE', $comment) ? constant('STATUS_PENDING', $comment) : constant('STATUS_VISIBLE', $comment)])" title="@( $comment.statusText )">
+                    <i class="uk-icon-circle uk-text-@( $comment.status == constant('STATUS_VISIBLE', $comment) ? 'success' : ($comment.status == constant('STATUS_PENDING', $comment) ? 'warning' : 'danger'))" title="@( $comment.statusText )"></i>
+                </a>
             </td>
             <td>
                 <a href="@url('@blog/post/edit', ['id' => $comment.threadId])">@($comment.thread.title)</a>
-                <a class="uk-badge uk-badge-notification pk-badge" href="#" data-filter="post" data-value="@($comment.threadId)">@($comment.thread.numComments)</a>
+                <a class="uk-badge uk-badge-notification@( $pending[$comment.threadId] ? '' : ' pk-badge' )" href="#" data-filter="post" data-value="@($comment.threadId)" title="@transchoice("{0} No pending|{1} One pending|]1,Inf[ %comments% pending", $pending[$comment.threadId], ["%comments%" => $pending[$comment.threadId]])">@($comment.thread.numComments)</a>
             </td>
         </tr>
         @endforeach
