@@ -64,8 +64,7 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
             }
         },
         install: function(fn) {
-
-            return $.post(this.installer.data("route") + "/install", this.installer.find("form").serialize(), fn, 'json');
+            return $.post(this.installer.data("route"), this.installer.find("form").serialize(), fn, 'json');
         },
 
         // form submission callbacks
@@ -78,7 +77,7 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
             frm.parent().removeClass(this.resetanims);
 
-            $.post(this.installer.data("route") + "/check", frm.serialize(), function(data) {
+            $.post(frm.attr('action'), frm.serialize(), function(data) {
 
                 if (data && data.status) {
 
