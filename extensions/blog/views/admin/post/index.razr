@@ -38,7 +38,7 @@
     <p class="uk-alert uk-alert-info @( $posts ? 'uk-hidden' : '' )">@trans('No posts found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('view://blog/admin/post/table.razr', ['posts' => $posts])
+        @include('view://blog/admin/post/table.razr'
     </div>
 
     <ul class="uk-pagination @( $total < 2 ? 'uk-hidden' : '' )" data-uk-pagination="{ pages: @( $total ) }"></ul>

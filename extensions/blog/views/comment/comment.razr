@@ -32,7 +32,7 @@
     @if ($node.hasChildren())
     <ul>
         @foreach ($node.children as $child)
-        @include('view://blog/comment/comment.razr', ['node' => $child, 'comment' => $child.comment, 'config' => $config])
+        @include('view://blog/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
     </ul>
     @endif

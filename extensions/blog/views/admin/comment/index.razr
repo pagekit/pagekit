@@ -37,7 +37,7 @@
     <p class="uk-alert uk-alert-info @( $comments ? 'uk-hidden' : '')">@trans('No comments found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('view://blog/admin/comment/table.razr', ['comments' => $comments])
+        @include('view://blog/admin/comment/table.razr')
     </div>
 
     <ul class="uk-pagination @($total < 2 ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @( $total ) }"></ul>
