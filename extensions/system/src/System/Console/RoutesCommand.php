@@ -28,7 +28,7 @@ class RoutesCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $routes = $this->pagekit['router']->getRoutes();
+        $routes = $this->pagekit['router']->getRouteCollection();
 
         if (count($routes) == 0) {
             $this->error("Your application doesn't have any routes.");
