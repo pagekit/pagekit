@@ -1,20 +1,14 @@
 require(['jquery', 'system!linkpicker'], function($, system) {
 
     // source
-    var link = $('.js-item-url'),
-        form = link.closest('form'),
-        nolink = $('[data-msg="no-link"]', form);
+    var form  = $('#js-item-edit'),
+        link  = $('[name="item[link]"]', form),
+        input = $('.js-url', form);
 
     // URL picker
     system.linkpicker(link, { context: 'system/menu' });
 
-    form.on('submit', function() {
-        if (!link.val()) {
-            nolink.removeClass('uk-hidden');
-            return false;
-        }
-    }).on('change', link, function() {
-        nolink.addClass('uk-hidden');
-        $('[name="item[url]"]:first').val(link.val());
+    link.on('change', function() {
+        input.prop("checked", "checked");
     });
 });
