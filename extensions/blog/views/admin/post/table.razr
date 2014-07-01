@@ -57,7 +57,7 @@
                 @if ($post.status == 2 && $post.hasAccess($app.user))
                 <a href="@url('@blog/id', ['id' => $post.id])" target="_blank">@( urldecode($link) )</a>
                 @else
-                @( $post.url ?: $link )
+                @( urldecode($link) )
                 @endif
             </td>
         </tr>
