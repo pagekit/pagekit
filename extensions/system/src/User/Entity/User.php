@@ -3,6 +3,7 @@
 namespace Pagekit\User\Entity;
 
 use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\User as BaseUser;
 
 /**
@@ -10,6 +11,8 @@ use Pagekit\User\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    use DataTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 
@@ -42,9 +45,6 @@ class User extends BaseUser
 
     /** @Column */
     protected $activation;
-
-    /** @Column(type="json_array") */
-    protected $data;
 
     /** @ManyToMany(targetEntity="Role", keyFrom="id", keyTo="id", tableThrough="@system_user_role", keyThroughFrom="user_id", keyThroughTo="role_id") */
     protected $roles;
@@ -142,26 +142,6 @@ class User extends BaseUser
     public function setActivation($activation)
     {
         $this->activation = $activation;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function get($key, $default = null)
-    {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
-    }
-
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
     }
 
     public function hasAccess($expression)

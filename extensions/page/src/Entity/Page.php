@@ -2,6 +2,7 @@
 
 namespace Pagekit\Page\Entity;
 
+use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
@@ -9,7 +10,7 @@ use Pagekit\User\Entity\AccessTrait;
  */
 class Page
 {
-    use AccessTrait;
+    use AccessTrait, DataTrait;
 
     /* Page unpublished status. */
     const STATUS_UNPUBLISHED = 0;
@@ -31,9 +32,6 @@ class Page
 
     /** @Column */
     protected $content = '';
-
-    /** @Column(type="json_array") */
-    protected $data;
 
     public function getId()
     {
@@ -83,26 +81,6 @@ class Page
     public function setStatus($status)
     {
         $this->status = $status;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function get($key, $default = null)
-    {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
-    }
-
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
     }
 
     public static function getStatuses()

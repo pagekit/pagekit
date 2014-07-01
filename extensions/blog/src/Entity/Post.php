@@ -11,7 +11,7 @@ use Pagekit\User\Entity\AccessTrait;
  */
 class Post extends Thread
 {
-    use AccessTrait;
+    use AccessTrait, DataTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
@@ -51,9 +51,6 @@ class Post extends Thread
 
     /** @Column(type="datetime") */
     protected $modified;
-
-    /** @Column(type="json_array") */
-    protected $data;
 
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
@@ -144,26 +141,6 @@ class Post extends Thread
     public function setModified(\DateTime $modified)
     {
         $this->modified = $modified;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function get($key, $default = null)
-    {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
-    }
-
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
     }
 
     public function getUser()
