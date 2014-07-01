@@ -4,6 +4,7 @@ namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\Entity\Thread;
 use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
