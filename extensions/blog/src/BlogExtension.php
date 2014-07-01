@@ -8,7 +8,6 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
-use Pagekit\System\Event\TmplEvent;
 
 class BlogExtension extends Extension
 {

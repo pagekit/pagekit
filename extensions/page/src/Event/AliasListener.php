@@ -3,7 +3,6 @@
 namespace Pagekit\Page\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\Page\Entity\Page;
 
 class AliasListener extends EventSubscriber
 {
