@@ -20,7 +20,7 @@
             <p class="uk-form-controls-condensed">
                 <label>
                     @set ( $checked = !in_array($item.url, ['!divider', '!header']) )
-                    <input class="js-url" type="radio" name="item[url]" value="@raw( $checked ? escape($item.url).'" checked' : '"' )>
+                    <input class="js-url" type="radio" name="item[url]" value=""@( $checked ? ' checked' : '' )>
                     <input type="hidden" name="item[link]" value="@( $checked ? $item.url : '' )" data-context="system/menu">
                 </label>
             </p>
