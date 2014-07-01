@@ -12,7 +12,6 @@ use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
-use Pagekit\Razr\Directive\FunctionDirective;
 use Pagekit\System\Dashboard\FeedWidget;
 use Pagekit\System\Dashboard\WeatherWidget;
 use Pagekit\System\Package\Event\LoadFailureEvent;
@@ -24,6 +23,7 @@ use Pagekit\User\Dashboard\UserWidget;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
+use Razr\Directive\FunctionDirective;
 
 class SystemListener extends EventSubscriber
 {

@@ -13,6 +13,8 @@ use Pagekit\Framework\Application;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ServiceProviderInterface;
 use Pagekit\System\FileProvider;
+use Pagekit\System\Package\Event\LoadFailureEvent;
+use Pagekit\System\Package\Exception\ExtensionLoadException;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
