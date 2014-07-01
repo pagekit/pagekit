@@ -27,7 +27,7 @@
                 @if ($page.status == 1 && $page.hasAccess($app.user))
                 <a href="@url('@page/id', ['id' => $page.id])" target="_blank">@( urldecode($link) )</a>
                 @else
-                @( $page.url ?: $link )
+                @( urldecode($link) )
                 @endif
             </td>
         </tr>

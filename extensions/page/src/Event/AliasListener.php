@@ -19,12 +19,14 @@ class AliasListener extends EventSubscriber
 
         if (!$aliases) {
 
-            $pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page');
+            $urls = $this['db']->createQueryBuilder()
+                ->from('@page_page')
+                ->where('url <> ""')
+                ->execute('id, url')
+                ->fetchAll(\PDO::FETCH_KEY_PAIR);
 
-            foreach ($pages->where(array('status' => Page::STATUS_PUBLISHED))->get() as $page) {
-                if ($page->getUrl() !== '') {
-                    $aliases[$page->getUrl()] = '@page/id?id=' . $page->getId();
-                }
+            foreach ($urls as $id => $url) {
+                $aliases[$url] = '@page/id?id=' . $id;
             }
 
             $this['cache.phpfile']->save(self::CACHE_KEY, $aliases);
