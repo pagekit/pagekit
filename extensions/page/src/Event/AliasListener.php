@@ -19,15 +19,15 @@ class AliasListener extends EventSubscriber
 
         if (!$aliases) {
 
-            $urls = $this['db']->createQueryBuilder()
-                ->from('@page_page')
-                ->where('url <> ""')
-                ->execute('id, url')
-                ->fetchAll(\PDO::FETCH_KEY_PAIR);
-
-            foreach ($urls as $id => $url) {
-                $aliases[$url] = '@page/id?id=' . $id;
-            }
+            $aliases = array_map(function($id) {
+                    return '@page/id?id='.$id;
+                },
+                $this['db']->createQueryBuilder()
+                    ->from('@page_page')
+                    ->where('url <> ""')
+                    ->execute('url, id')
+                    ->fetchAll(\PDO::FETCH_KEY_PAIR)
+            );
 
             $this['cache.phpfile']->save(self::CACHE_KEY, $aliases);
         }
