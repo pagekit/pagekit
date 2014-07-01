@@ -51,6 +51,9 @@ class RegistrationController extends Controller
      */
     public function registerAction($data)
     {
+
+        $response = ['success' => false];
+
         try {
 
             if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
@@ -122,26 +125,39 @@ class RegistrationController extends Controller
             if ($verify) {
 
                 $this->sendVerificationMail($user, $admin ? 'verification.admin' : 'verification');
-                $this['message']->success(__('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.'));
+                $response['success'] = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
 
             } elseif ($admin) {
 
                 $this->sendActivateMail($user, 'activate');
-                $this['message']->success(__('Your user account has been created and is pending approval by the site administrator.'));
+                $response['success'] = __('Your user account has been created and is pending approval by the site administrator.');
 
             } else {
 
-                $this['message']->success(__('Your user account has been created.'));
-
+                $response['success'] = __('Your user account has been created.');
             }
 
-            return $this->redirect('@system/auth/login');
+            if (!$response['success']) {
+                $response['success'] = true;
+            }
+
+            if (!$this['request']->isXmlHttpRequest()) {
+
+                $this['message']->success($response['success']);
+                return $this->redirect('@system/auth/login');
+            }
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+
+            if (!$this['request']->isXmlHttpRequest()) {
+                $this['message']->error($e->getMessage());
+            } else {
+                $response['error'] = $e->getMessage();
+            }
+
         }
 
-        return $this->redirect('@system/registration');
+        return $this['request']->isXmlHttpRequest() ? $this['response']->json($response) : $this->redirect('@system/registration');
     }
 
     /**
