@@ -81,7 +81,7 @@
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">@trans('Position')</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" class="uk-width-1-1" name="widget[$position]">
+                        <select id="form-position" class="uk-width-1-1" name="widget[position]">
                             @foreach ($positions as $position)
                             <option value="@( $position.id )"@( $widget.position == $position.id ? ' selected' : '' )>@trans($position.name)</option>
                             @endforeach
