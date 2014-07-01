@@ -2,14 +2,15 @@
 
 namespace Pagekit\Page\Entity;
 
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
+use Pagekit\User\Entity\AccessTrait;
 
 /**
  * @Entity(tableClass="@page_page", eventPrefix="page.page")
  */
 class Page
 {
+    use AccessTrait;
+
     /* Page unpublished status. */
     const STATUS_UNPUBLISHED = 0;
 
@@ -31,9 +32,6 @@ class Page
     /** @Column */
     protected $content = '';
 
-    /** @Column(type="simple_array") */
-    protected $roles = array();
-
     /** @Column(type="json_array") */
     protected $data;
 
@@ -45,36 +43,6 @@ class Page
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    public function hasAccess(UserInterface $user)
-    {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
-    }
-
-    /**
-     * @param  RoleInterface $role
-     * @return bool
-     */
-    public function hasRole(RoleInterface $role)
-    {
-        return in_array($role->getId(), $this->getRoles());
-    }
-
-    /**
-     * @return int[]
-     */
-    public function getRoles()
-    {
-        return (array) $this->roles;
-    }
-
-    /**
-     * @param $roles int[]
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
     }
 
     public function getTitle()

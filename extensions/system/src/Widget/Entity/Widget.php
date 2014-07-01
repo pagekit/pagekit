@@ -2,8 +2,7 @@
 
 namespace Pagekit\Widget\Entity;
 
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
+use Pagekit\User\Entity\AccessTrait;
 use Pagekit\Widget\Model\Widget as BaseWidget;
 
 /**
@@ -11,6 +10,8 @@ use Pagekit\Widget\Model\Widget as BaseWidget;
  */
 class Widget extends BaseWidget
 {
+    use AccessTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 
@@ -34,9 +35,6 @@ class Widget extends BaseWidget
 
     /** @Column(name="menu_items", type="simple_array") */
     protected $menuItems = array();
-
-    /** @Column(type="simple_array") */
-    protected $roles = array();
 
     /** @Column(type="json_array", name="data") */
     protected $settings = array();
@@ -84,37 +82,6 @@ class Widget extends BaseWidget
     public function hasMenuItem($id)
     {
         return in_array($id, $this->getMenuItems());
-    }
-
-
-    public function hasAccess(UserInterface $user)
-    {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
-    }
-
-    /**
-     * @param  RoleInterface $role
-     * @return bool
-     */
-    public function hasRole(RoleInterface $role)
-    {
-        return in_array($role->getId(), $this->getRoles());
-    }
-
-    /**
-     * @return int[]
-     */
-    public function getRoles()
-    {
-        return (array) $this->roles;
-    }
-
-    /**
-     * @param $roles int[]
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
     }
 
     public function getStatusText()

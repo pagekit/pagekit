@@ -4,14 +4,15 @@ namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\Entity\Thread;
 use Pagekit\Framework\Database\Event\EntityEvent;
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
+use Pagekit\User\Entity\AccessTrait;
 
 /**
  * @Entity(repositoryClass="Pagekit\Blog\Entity\PostRepository", tableClass="@blog_post", eventPrefix="blog.post")
  */
 class Post extends Thread
 {
+    use AccessTrait;
+
     /* Post draft status. */
     const STATUS_DRAFT = 0;
 
@@ -50,9 +51,6 @@ class Post extends Thread
 
     /** @Column(type="datetime") */
     protected $modified;
-
-    /** @Column(type="simple_array") */
-    protected $roles = array();
 
     /** @Column(type="json_array") */
     protected $data;
@@ -146,37 +144,6 @@ class Post extends Thread
     public function setModified(\DateTime $modified)
     {
         $this->modified = $modified;
-    }
-
-
-    public function hasAccess(UserInterface $user)
-    {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
-    }
-
-    /**
-     * @param  RoleInterface $role
-     * @return bool
-     */
-    public function hasRole(RoleInterface $role)
-    {
-        return in_array($role->getId(), $this->getRoles());
-    }
-
-    /**
-     * @return int[]
-     */
-    public function getRoles()
-    {
-        return (array) $this->roles;
-    }
-
-    /**
-     * @param $roles int[]
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
     }
 
     public function getData()

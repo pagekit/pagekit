@@ -5,14 +5,15 @@ namespace Pagekit\Menu\Entity;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\Menu\Model\Item as BaseItem;
 use Pagekit\Menu\Model\MenuInterface;
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
+use Pagekit\User\Entity\AccessTrait;
 
 /**
  * @Entity(repositoryClass="Pagekit\Menu\Entity\ItemRepository", tableClass="@system_menu_item", eventPrefix="system.menuitem")
  */
 class Item extends BaseItem
 {
+    use AccessTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 
@@ -21,9 +22,6 @@ class Item extends BaseItem
 
     /** @Column(name="parent_id", type="integer") */
     protected $parentId = 0;
-
-    /** @Column(type="simple_array") */
-    protected $roles = array();
 
     /** @Column(type="string") */
     protected $name;
@@ -75,36 +73,6 @@ class Item extends BaseItem
     {
         $this->menu = $menu;
         $this->setMenuId($menu->getId());
-    }
-
-    public function hasAccess(UserInterface $user)
-    {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
-    }
-
-    /**
-     * @param  RoleInterface $role
-     * @return bool
-     */
-    public function hasRole(RoleInterface $role)
-    {
-        return in_array($role->getId(), $this->getRoles());
-    }
-
-    /**
-     * @return int[]
-     */
-    public function getRoles()
-    {
-        return (array) $this->roles;
-    }
-
-    /**
-     * @param $roles int[]
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
     }
 
     public function getStatus()
