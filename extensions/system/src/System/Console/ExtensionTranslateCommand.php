@@ -4,12 +4,6 @@ namespace Pagekit\System\Console;
 
 use Pagekit\Component\Translation\Loader\PoFileLoader;
 use Pagekit\Framework\Console\Command;
-use Razr\Environment;
-use Razr\Node\Expression\ConstantNode;
-use Razr\Node\Expression\FunctionNode;
-use Razr\Node\Node;
-use Razr\Node\NodeTraverser;
-use Razr\Node\NodeVisitorInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -123,6 +117,11 @@ class ExtensionTranslateCommand extends Command
 
         $result = array();
         foreach ($this->visitors as $name => $visitor) {
+
+            if (!isset($files[$name])) {
+                continue;
+            }
+
             $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
         }
 
@@ -239,13 +238,13 @@ EOD;
     {
         $files = array();
 
-        foreach (Finder::create()->files()->in($path)->name('*.php') as $file) {
+        foreach (Finder::create()->files()->in($path)->name('*.{razr,php}') as $file) {
 
             $file = $file->getPathname();
 
             foreach ($this->visitors as $name => $visitor) {
                 if ($visitor->getEngine()->supports($file)) {
-                    $files[$name][] = $file;
+                    $files[$name][] = $visitor->loadTemplate($file);
                     break;
                 }
             }
@@ -303,6 +302,15 @@ abstract class NodeVisitor
     }
 
     /**
+     * @param  string $name
+     * @return string
+     */
+    public function loadTemplate($name)
+    {
+        return $name;
+    }
+
+    /**
      * Starts traversing an array of files.
      *
      * @param  array $files
@@ -323,7 +331,12 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
         $traverser->addVisitor($this);
 
         foreach ($files as $file) {
-            $traverser->traverse($parser->parse(file_get_contents($this->file = $file)));
+
+            try {
+
+                $traverser->traverse($parser->parse(file_get_contents($this->file = $file)));
+
+            } catch (\Exception $e) {}
         }
 
         return $this->results;
@@ -349,47 +362,13 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
     public function afterTraverse(array $nodes) {}
 }
 
-class RazrNodeVisitor extends NodeVisitor implements NodeVisitorInterface
+class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
 {
     /**
      * {@inheritdoc}
      */
-    public function traverse(array $files)
+    public function loadTemplate($name)
     {
-        $parser = $this->engine->getEnvironment();
-        $traverser = new NodeTraverser($parser);
-        $traverser->addVisitor($this);
-
-        foreach ($files as $file) {
-            $traverser->traverse($parser->parse($parser->tokenize(file_get_contents($this->file = $file), $file)));
-        }
-
-        return $this->results;
+        return $this->engine->loadTemplate($name);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enterNode(Node $node, Environment $env)
-    {
-        if ($node instanceof FunctionNode && $node->hasAttribute('name')
-            && (in_array(strtolower($node->getAttribute('name')), array('trans', 'transchoice'))))
-        {
-            $arguments = $node->getNode('arguments');
-            $message   = $arguments->getNode(0);
-
-            if (!$message instanceof ConstantNode) {
-                return $node;
-            }
-
-            $key = $node->getAttribute('name') == 'trans' ? 2 : 3;
-            $domain = $node->hasNode($key) && is_string($arguments->getNode($key)->getAttribute('value')) ? $arguments->getNode($key)->getAttribute('value') : 'messages';
-
-            $this->results[$domain][$message->getAttribute('value')][] = array('file' => $this->file, 'line' => $message->getLine());
-        }
-        return $node;
-    }
-
-    public function leaveNode(Node $node, Environment $env) {}
-    public function getPriority() {}
 }
