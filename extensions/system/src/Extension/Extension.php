@@ -3,7 +3,7 @@
 namespace Pagekit\Extension;
 
 use Pagekit\Component\File\ResourceLocator;
-use Pagekit\Component\Routing\Router;
+use Pagekit\Component\Routing\Controller\ControllerCollection;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\Translation\Translator;
@@ -51,7 +51,7 @@ class Extension implements \ArrayAccess
      */
     public function boot(Application $app)
     {
-        $this->registerControllers($app['router']);
+        $this->registerControllers($app['controllers']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
     }
@@ -111,9 +111,9 @@ class Extension implements \ArrayAccess
      *  - The controller folder is defined in the extensions config
      *  - The naming convention is 'HelloController.php'
      *
-     * @param Router $router
+     * @param ControllerCollection $collection
      */
-    public function registerControllers(Router $router)
+    public function registerControllers(ControllerCollection $collection)
     {
         if (isset($this->config['controllers'])) {
             $controllers = (array) $this->config['controllers'];
@@ -123,7 +123,7 @@ class Extension implements \ArrayAccess
                     $name = $this->getName();
                     $path = sprintf('%s/%s', $name, strtolower(basename($file, 'Controller.php')));
 
-                    $router->addController($file, compact('name', 'path'));
+                    $collection->add($file, compact('name', 'path'));
                 }
             }
         }

@@ -8,18 +8,19 @@ use Pagekit\Menu\Event\ActiveMenuEvent;
 class FrontpageListener extends EventSubscriber
 {
     /**
-     * Registers frontpage route
+     * Registers frontpage route.
      */
     public function onSystemInit()
     {
         if ($frontpage = $this['config']->get('app.frontpage')) {
             $this['router']->addAlias('/', $frontpage);
         }
-        $this['router']->get('/', '@frontpage', function() {});
+
+        $this['controllers']->get('/', '@frontpage', function() {});
     }
 
     /**
-     * Activates frontpage menu items
+     * Activates frontpage menu items.
      *
      * @param ActiveMenuEvent $event
      */
