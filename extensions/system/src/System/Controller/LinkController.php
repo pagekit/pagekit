@@ -38,7 +38,13 @@ class LinkController extends Controller
 
             $link = $this->getLink($url);
 
-            $result = array('type' => $type->getId(), 'form' => $type->renderForm($link ? $link->getName() : $url, $link ? $link->getParameters() : []));
+            $params = [];
+            if ($query = substr(strstr($link, '?'), 1)) {
+                parse_str($query, $params);
+                $link = strstr($link, '?', true);
+            }
+
+            $result = array('type' => $type->getId(), 'form' => $type->renderForm($link, $params));
         }
 
         return $this['response']->json($result);
@@ -52,7 +58,7 @@ class LinkController extends Controller
         $result = ['type' => __('Url'), 'url' => $url];
 
         if ($type = $this->matchType($url, $context)) {
-            $result = array('type' => $type->getLabel(), 'url' => $this['url']->route($url, [], 'base'));
+            $result = array('type' => $type->getLabel(), 'url' => urldecode($this['url']->route($url, [], 'base')));
         }
 
         return $this['response']->json($result);
@@ -88,7 +94,7 @@ class LinkController extends Controller
 
         foreach ($types as $type) {
 
-            if ($type->accept($link ? $link->getName() : $url, $link ? $link->getPathParameters() : [])) {
+            if ($type->accept(strstr(($link ? : $url), '?', true))) {
                 return $type;
             }
 
@@ -99,13 +105,13 @@ class LinkController extends Controller
 
     /**
      * @param  $url
-     * @return Link|false
+     * @return string|false
      */
     protected function getLink($url)
     {
         try {
 
-            return $this['router']->generateLink($url);
+            return $this['router']->generate($url, [], 'link');
 
         } catch (RouteNotFoundException $e) {}
 
