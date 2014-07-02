@@ -1,7 +1,7 @@
 <div class="uk-form-row">
     <span class="uk-form-label">@trans('User Type')</span>
     <div class="uk-form-controls uk-form-controls-text">
-        @foreach (['login' => trans('Logged in'), 'registered' => trans('Last registered')] as $value => $option)
+        @foreach (['login' => __('Logged in'), 'registered' => __('Last registered')] as $value => $option)
         <p class="uk-form-controls-condensed">
             <label><input type="radio" name="widget[show]" value="@( $value )" @( $widget.get('show', 'login') == $value ? 'checked' : '' )> @( $option )</label>
         </p>

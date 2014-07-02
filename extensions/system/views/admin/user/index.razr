@@ -84,7 +84,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="mailto:@( $user.email )">@( $user.email )</a>@raw( $app.option.get('system:user.require_verification') && $user.get('verified') ? ' <i title="'.trans('Verified Email Address').'" class="uk-icon-check"></i>' : '' )
+                        <a href="mailto:@( $user.email )">@( $user.email )</a>@raw( $app.option.get('system:user.require_verification') && $user.get('verified') ? ' <i title="'.__('Verified Email Address').'" class="uk-icon-check"></i>' : '' )
                     </td>
                     <td>
                         @( implode(', ', array_filter($user.roles, function($role) { return $role.id != 2; })) )

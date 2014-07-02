@@ -5,7 +5,7 @@
             <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
             <th class="pk-table-min-width-300" colspan="2">@trans('Comment')</th>
             <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
-            <th class="pk-table-width-200">@( $post ? trans('In response to %post%', ['%post%' => $post.title]) : trans('In response to') )</th>
+            <th class="pk-table-width-200">@( $post ? __('In response to %post%', ['%post%' => $post.title]) : __('In response to') )</th>
         </tr>
     </thead>
     <tbody>

@@ -78,7 +78,7 @@
                     <div class="uk-navbar-content uk-navbar-center uk-visible-small">
                         @if ($subnav.children)
                             @foreach ($subnav.children as $item)
-                                @( $item.attribute('active') ? trans($item) : '' )
+                                @( $item.attribute('active') ? __($item) : '' )
                             @endforeach
                         @else
                             @trans($subnav)

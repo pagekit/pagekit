@@ -114,7 +114,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="pk-table-width-150">@( $type.name ?: trans('Extension not loaded'))</div>
+                        <div class="pk-table-width-150">@( $type.name ?: __('Extension not loaded'))</div>
                     </div>
 
                 </li>

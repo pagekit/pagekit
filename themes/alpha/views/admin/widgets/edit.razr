@@ -5,12 +5,12 @@
         <div class="uk-form-controls">
             <select id="form-theme-panel" class="uk-form-width-large" name="_theme[panel]">
                 @foreach ([
-                    ''                                    => trans('None'),
-                    'uk-panel-box'                        => trans('Box'),
-                    'uk-panel-box uk-panel-box-primary'   => trans('Box Primary'),
-                    'uk-panel-box uk-panel-box-secondary' => trans('Box Secondary'),
-                    'uk-panel-header'                     => trans('Header'),
-                    'uk-panel-space'                      => trans('Space')
+                    ''                                    => __('None'),
+                    'uk-panel-box'                        => __('Box'),
+                    'uk-panel-box uk-panel-box-primary'   => __('Box Primary'),
+                    'uk-panel-box uk-panel-box-secondary' => __('Box Secondary'),
+                    'uk-panel-header'                     => __('Header'),
+                    'uk-panel-space'                      => __('Space')
                 ] as $value => $name)
                 <option value="@( $value )"@( $settings[$widget.id]['panel'] == $value ? ' selected' : '' )>@( $name )</option>
                 @endforeach
@@ -24,10 +24,10 @@
             <input id="form-theme-badge" class="uk-form-width-small" type="text" name="_theme[badge][text]" value="@( $settings[$widget.id]['badge']['text'] )">
             <select class="uk-form-width-small" name="_theme[badge][type]">
                 @foreach ([
-                    'uk-panel-badge uk-badge'                  => trans('Default'),
-                    'uk-panel-badge uk-badge uk-badge-success' => trans('Success'),
-                    'uk-panel-badge uk-badge uk-badge-warning' => trans('Warning'),
-                    'uk-panel-badge uk-badge uk-badge-danger'  => trans('Danger')
+                    'uk-panel-badge uk-badge'                  => __('Default'),
+                    'uk-panel-badge uk-badge uk-badge-success' => __('Success'),
+                    'uk-panel-badge uk-badge uk-badge-warning' => __('Warning'),
+                    'uk-panel-badge uk-badge uk-badge-danger'  => __('Danger')
                 ] as $value => $name)
                 <option value="@( $value )"@( ($settings[$widget.id]['badge']['type'] ?: 'uk-panel-badge uk-badge') == $value ? ' selected' : '')>@( $name )</option>
                 @endforeach

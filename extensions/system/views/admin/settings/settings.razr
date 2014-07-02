@@ -80,7 +80,7 @@
                         <label for="form-mailer" class="uk-form-label">@trans('Mailer')</label>
                         <div class="uk-form-controls">
                             <select id="form-mailer" class="uk-form-width-large" name="option[system:mail.driver]">
-                                @foreach (['mail' => trans('PHP Mailer'), 'smtp' => trans('SMTP Mailer')] as $key => $name)
+                                @foreach (['mail' => __('PHP Mailer'), 'smtp' => __('SMTP Mailer')] as $key => $name)
                                 <option value="@( $key )"@( $key == $option.get('system:mail.driver') ? ' selected' : '' )>@( $name )</option>
                                 @endforeach
                             </select>
@@ -119,7 +119,7 @@
                             <div class="uk-form-controls">
                                 <select id="form-smtpencryption" class="uk-form-width-large" name="option[system:mail.encryption]">
                                     <option value="">@trans('None')</option>
-                                    @foreach (['ssl' => trans('SSL'), 'tls' => trans('TLS')] as $key => $name)
+                                    @foreach (['ssl' => __('SSL'), 'tls' => __('TLS')] as $key => $name)
                                     <option value="@($key)"@( !$ssl ? 'disabled' : '' ) @( $key == $option.get('system:mail.encryption') ? ' selected' : '')>@( $name )</option>
                                     @endforeach
                                 </select>
@@ -215,7 +215,7 @@
                         <label for="form-channel" class="uk-form-label">@trans('Release Channel')</label>
                         <div class="uk-form-controls">
                             <select id="form-channel" class="uk-form-width-large" name="option[system:app.release_channel]">
-                                @foreach (['stable' => trans('Stable'), 'nightly' => trans('Nightly')] as $id => $channel)
+                                @foreach (['stable' => __('Stable'), 'nightly' => __('Nightly')] as $id => $channel)
                                 <option value="@( $id )"@( $id == $option.get('system:app.release_channel', 'stable') ? ' selected' : '' )>@( $channel )</option>
                                 @endforeach
                             </select>

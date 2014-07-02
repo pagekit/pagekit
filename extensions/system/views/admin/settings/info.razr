@@ -108,7 +108,7 @@
                     @foreach ($info['directories'] as $directory => $writable)
                     <tr>
                         <td>@( $directory )</td>
-                        <td class="uk-text-center@( $writable ? ' uk-text-success' : ' uk-text-danger' )">@( $writable ? trans('Writable') : trans('Unwritable') )</span></td>
+                        <td class="uk-text-center@( $writable ? ' uk-text-success' : ' uk-text-danger' )">@( $writable ? __('Writable') : __('Unwritable') )</span></td>
                     </tr>
                     @endforeach
                 </tbody>
