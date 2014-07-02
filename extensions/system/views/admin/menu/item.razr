@@ -24,7 +24,7 @@
                 @elseif ($item.url == '!header')
                 @trans('Menu Header')
                 @else
-                <a href="@url($item.url)" target="_blank">@( urldecode(url($item.url, [], 'base')) ?: '/' )</a>
+                <a href="@url($item.url)" target="_blank">@( urldecode(url($item.url, [], 'base')))</a>
                 @endif
             </div>
         </div>

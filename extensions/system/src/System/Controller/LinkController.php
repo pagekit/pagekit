@@ -92,9 +92,13 @@ class LinkController extends Controller
 
         $link = $this->getLink($url);
 
+        if (false !== $pos = strpos($link, '?')) {
+            $link = substr($link, 0, $pos);
+        }
+
         foreach ($types as $type) {
 
-            if ($type->accept(strstr(($link ? : $url), '?', true))) {
+            if ($type->accept($link ?: $url)) {
                 return $type;
             }
 
