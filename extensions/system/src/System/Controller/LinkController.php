@@ -92,6 +92,10 @@ class LinkController extends Controller
 
         $link = $this->getLink($url);
 
+        if (false !== $pos = strpos($link, '#')) {
+            $link = substr($link, 0, $pos);
+        }
+
         if (false !== $pos = strpos($link, '?')) {
             $link = substr($link, 0, $pos);
         }
