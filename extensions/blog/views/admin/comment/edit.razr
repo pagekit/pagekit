@@ -1,6 +1,6 @@
 <tr class="js-editor" data-url="@url('@blog/comment/save', ['id' => $comment.id])">
     <td></td>
-    <td>
+    <td class="pk-table-width-minimum">
         @gravatar($comment.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => $comment.author, 'class' => 'uk-img-preserve uk-border-circle']])
     </td>
     <td colspan="3">

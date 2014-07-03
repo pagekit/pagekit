@@ -53,7 +53,7 @@
 
     <tr class="js-editor js-reply" data-url="@url('@blog/comment/save')">
         <td></td>
-        <td>
+        <td class="pk-table-width-minimum">
             @gravatar($app.user.email, ['size' => 80, 'attrs' => ['width' => '40', 'height' => '40', 'alt' => $app.user.username, 'class' => 'uk-img-preserve uk-border-circle']])
         </td>
         <td colspan="3">
