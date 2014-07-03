@@ -1,0 +1,52 @@
+<div class="uk-form-row">
+    <div class="uk-form-controls uk-form-controls-text">
+        <p class="uk-form-controls-condensed">
+            <label><input class="js-posts" type="radio" name="blog-radio" value="@@blog/default"@( $link == '@blog/default' ? ' checked' : '' )> @trans('Posts View')</label>
+        </p>
+    </div>
+</div>
+
+<div class="uk-form-row">
+    <div class="uk-form-controls uk-form-controls-text">
+        <p class="uk-form-controls-condensed">
+            <label>
+                <input type="radio" name="blog-radio" value=""@( $link != '@blog/default' ? ' checked' : '' )> @trans('Post')
+                <select class="js-post" name="">
+                    <option value=""@( !in_array($params.id, array_keys($posts)) ? ' selected' : '' )>@trans('- Select Post -')</option>
+                    @foreach ($posts as $post)
+                    <option value="@@blog/id?id=@( $post.id )"@( $params.id == $post.id ? ' selected' : '' )>@( $post.title )</option>
+                    @endforeach
+                </select>
+            </label>
+        </p>
+    </div>
+</div>
+
+<script>
+
+    require(['jquery'], function($) {
+
+        var picker = $('.js-linkpicker'), url = $('#form2-url', picker), radios = $('[name="blog-radio"]', picker), post = $('.js-post', picker);
+
+        radios.on('change', function() {
+            var value = $(this).val();
+
+            if (value) {
+                url.val($(this).val());
+            } else {
+                post.trigger('change');
+            }
+        });
+
+        post.on('change', function() {
+            var value = $(this).val();
+
+            if (value) {
+                radios.filter('[value=""]').prop('checked', true);
+                url.val(value);
+            }
+        });
+
+    });
+
+</script>

@@ -23,7 +23,6 @@ class BlogExtension extends Extension
 
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Blog\Link\BlogLink');
-            $event->register('Pagekit\Blog\Link\PostLink');
         });
 
         $app->on('system.init', function() use ($app) {

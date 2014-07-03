@@ -10,8 +10,12 @@
     require(['jquery'], function($) {
 
         $('.js-linkpicker #form2-name').on('change', function() {
-            $('.js-linkpicker #form2-url').val('@( $link )?name=' + $(this).val());
-        }).trigger('change');
+            var value = $(this).val();
+
+            if (value) {
+                $('.js-linkpicker #form2-url').val('@@hello/greet/name?name=' + value);
+            }
+        });
 
     });
 

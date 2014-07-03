@@ -1,9 +1,10 @@
 <div class="uk-form-row">
     <label for="form2-page" class="uk-form-label">@trans('Page')</label>
     <div class="uk-form-controls">
-        <select id="form2-page" class="uk-width-1-1" name="id">
+        <select id="form2-page" class="uk-width-1-1" name="">
+            <option value=""@( !in_array($params.id, array_keys($pages)) ? ' selected' : '' )>@trans('- Select Page -')</option>
             @foreach ($pages as $page)
-            <option value="@( $page.id )"@( $params.id == $page.id ? ' selected' : '' )>@( $page.title )</option>
+            <option value="@@page/id?id=@( $page.id )"@( $params.id == $page.id ? ' selected' : '' )>@( $page.title )</option>
             @endforeach
         </select>
     </div>
@@ -14,8 +15,12 @@
     require(['jquery'], function($) {
 
         $('.js-linkpicker #form2-page').on('change', function() {
-            $('.js-linkpicker #form2-url').val('@( $link )?id=' + $(this).val());
-        }).trigger('change');
+            var value = $(this).val();
+
+            if (value) {
+                $('.js-linkpicker #form2-url').val($(this).val());
+            }
+        });
 
     });
 

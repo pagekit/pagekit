@@ -30,6 +30,7 @@ interface LinkInterface
      * Renders the type's edit form
      * @param string $link
      * @param array  $params
+     * @param string $context
      */
-    public function renderForm($link, $params = []);
+    public function renderForm($link, $params = [], $context = '');
 }

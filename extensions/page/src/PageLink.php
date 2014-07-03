@@ -25,7 +25,7 @@ class PageLink extends Route
     /**
      * @{inheritdoc}
      */
-    public function renderForm($link, $params = [])
+    public function renderForm($link, $params = [], $context = '')
     {
         $pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page')->findAll();
 

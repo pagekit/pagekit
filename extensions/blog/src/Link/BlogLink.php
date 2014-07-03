@@ -2,16 +2,16 @@
 
 namespace Pagekit\Blog\Link;
 
-use Pagekit\System\Link\Route;
+use Pagekit\System\Link\Link;
 
-class BlogLink extends Route
+class BlogLink extends Link
 {
     /**
      * @{inheritdoc}
      */
-    public function getRoute()
+    public function getId()
     {
-        return '@blog/default';
+        return 'blog';
     }
 
     /**
@@ -20,5 +20,23 @@ class BlogLink extends Route
     public function getLabel()
     {
         return __('Blog');
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function accept($route)
+    {
+        return $route == '@blog/default' || $route == '@blog/id';
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function renderForm($link, $params = [], $context = '')
+    {
+        $posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll();
+
+        return $this['view']->render('blog/admin/link/blog.razr', compact('link', 'params', 'posts'));
     }
 }

@@ -20,7 +20,7 @@ class LinkController extends Controller
 
     /**
      * @Request({"context"})
-     * @View("system/admin/links/link.types.razr", layout=false)
+     * @View("system/admin/link/link.types.razr", layout=false)
      */
     public function indexAction($context = '')
     {
@@ -44,7 +44,7 @@ class LinkController extends Controller
                 $link = strstr($link, '?', true);
             }
 
-            $result = array('type' => $type->getId(), 'form' => $type->renderForm($link, $params));
+            $result = array('type' => $type->getId(), 'form' => $type->renderForm($link ?: $url, $params, $context));
         }
 
         return $this['response']->json($result);
@@ -58,7 +58,17 @@ class LinkController extends Controller
         $result = ['type' => __('Url'), 'url' => $url];
 
         if ($type = $this->matchType($url, $context)) {
-            $result = array('type' => $type->getLabel(), 'url' => urldecode($this['url']->route($url, [], 'base')));
+
+            try {
+
+                if (!in_array($context, ['frontpage', 'urlalias'])) {
+                    $url = urldecode($this['url']->to($url, [], 'base'));
+                }
+
+                $result = ['type' => $type->getLabel(), 'url' => $url];
+
+            } catch (\Exception $e) {}
+
         }
 
         return $this['response']->json($result);
@@ -86,11 +96,13 @@ class LinkController extends Controller
     {
         $types = $this->getTypes($context);
 
+        $url = strtok($url, '#');
+
         if (isset($types[$url])) {
             return $types[$url];
         }
 
-        $link = strtok(strtok($this->getLink($url), '?'), '#');
+        $link = strtok($this->getLink($url), '?');
 
         foreach ($types as $type) {
 
@@ -110,6 +122,8 @@ class LinkController extends Controller
     protected function getLink($url)
     {
         try {
+
+            $url = strtok($url, '#');
 
             return $this['router']->generate($url, [], 'link');
 

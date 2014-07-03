@@ -164,10 +164,7 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemLink(LinkEvent $event)
     {
-        if (!in_array($event->getContext(), ['frontpage', 'urlalias'])) {
-            $event->register('Pagekit\System\Link\Frontpage');
-        }
-        $event->register('Pagekit\User\Link\User');
+        $event->register('Pagekit\System\Link\System');
     }
 
     /**

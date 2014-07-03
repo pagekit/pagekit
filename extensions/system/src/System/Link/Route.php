@@ -24,12 +24,4 @@ abstract class Route extends Link
     {
         return $route == $this->getRoute();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderForm($link, $params = [])
-    {
-        return $this['view']->render('system/admin/links/route.razr', compact('link'));
-    }
 }
