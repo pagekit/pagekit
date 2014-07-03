@@ -46,10 +46,10 @@ class System extends Link
     {
         return [
             '/'                     => __('Frontpage'),
-            '@system/auth/login'    => __('Login'),
-            '@system/registration'  => __('Registration'),
-            '@system/profile'       => __('Profile'),
-            '@system/resetpassword' => __('Password Reset')
+            '@system/auth/login'    => __('User Login'),
+            '@system/registration'  => __('User Registration'),
+            '@system/profile'       => __('User Profile'),
+            '@system/resetpassword' => __('User Password Reset')
         ];
     }
 }
