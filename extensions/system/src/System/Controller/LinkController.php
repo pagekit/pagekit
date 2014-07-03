@@ -19,7 +19,7 @@ class LinkController extends Controller
     protected $types;
 
     /**
-     * @Request({"link", "context"})
+     * @Request({"context"})
      * @View("system/admin/links/link.types.razr", layout=false)
      */
     public function indexAction($context = '')

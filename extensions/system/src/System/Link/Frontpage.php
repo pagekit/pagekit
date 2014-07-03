@@ -9,7 +9,7 @@ class Frontpage extends Route
      */
     public function getRoute()
     {
-        return '@frontpage';
+        return '/';
     }
 
     /**
@@ -18,5 +18,13 @@ class Frontpage extends Route
     public function getLabel()
     {
         return __('Frontpage');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function renderForm($link, $params = [])
+    {
+        return parent::renderForm('/');
     }
 }

@@ -40,7 +40,7 @@ class RegistrationController extends Controller
     public function indexAction()
     {
         if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
         }
 
         return array('head.title' => __('User Registration'));
@@ -57,7 +57,7 @@ class RegistrationController extends Controller
         try {
 
             if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
-                return $this->redirect('@frontpage');
+                return $this->redirect('/');
             }
 
             if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
@@ -167,7 +167,7 @@ class RegistrationController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(array('username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'))->first()) {
             $this['message']->error(__('Invalid key.'));
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
         }
 
         if ($admin = $this['option']->get('system:user.registration') == 'approval' and !$user->get('verified')) {

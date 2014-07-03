@@ -39,7 +39,7 @@ class ResetPasswordController extends Controller
     public function indexAction()
     {
         if ($this->user->isAuthenticated()) {
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
         }
 
         return array('head.title' => __('Reset'), 'last_login' => $this['session']->get(self::RESET_LOGIN));
@@ -54,7 +54,7 @@ class ResetPasswordController extends Controller
         try {
 
             if ($this->user->isAuthenticated()) {
-                return $this->redirect('@frontpage');
+                return $this->redirect('/');
             }
 
             if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
@@ -97,7 +97,7 @@ class ResetPasswordController extends Controller
 
             $this['message']->success(__('Check your email for the confirmation link.'));
 
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -114,12 +114,12 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this['message']->error(__('Invalid key.'));
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
         }
 
         if ($user->isBlocked()) {
             $this['message']->error(__('Your account has not been activated or is blocked.'));
-            return $this->redirect('@frontpage');
+            return $this->redirect('/');
         }
 
         if ('POST' === $this['request']->getMethod()) {
@@ -146,7 +146,7 @@ class ResetPasswordController extends Controller
                 $this->users->save($user);
 
                 $this['message']->success(__('Your password has been reset.'));
-                return $this->redirect('@frontpage');
+                return $this->redirect('/');
 
             } catch (Exception $e) {
                 $this['message']->error($e->getMessage());

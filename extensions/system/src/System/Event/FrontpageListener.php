@@ -3,7 +3,6 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
-use Pagekit\Menu\Event\ActiveMenuEvent;
 
 class FrontpageListener extends EventSubscriber
 {
@@ -14,22 +13,10 @@ class FrontpageListener extends EventSubscriber
     {
         if ($frontpage = $this['config']->get('app.frontpage')) {
             $this['router']->addAlias('/', $frontpage);
-        }
-
-        $this['controllers']->get('/', '@frontpage', function() {});
-    }
-
-    /**
-     * Activates frontpage menu items.
-     *
-     * @param ActiveMenuEvent $event
-     */
-    public function onSystemMenu(ActiveMenuEvent $event)
-    {
-        if ($this['request']->getPathInfo() == '/') {
-            foreach ($event->get('@frontpage') as $id => $item) {
-                $event->add($id);
-            }
+        } else {
+            $this['controllers']->get('/', '_frontpage', function() use ($frontpage) {
+                return __('No Frontpage assigned.');
+            });
         }
     }
 
@@ -39,8 +26,7 @@ class FrontpageListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init' => array('onSystemInit', -15),
-            'system.menu' => 'onSystemMenu'
+            'system.init' => array('onSystemInit', -15)
         );
     }
 }

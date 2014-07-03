@@ -105,11 +105,6 @@ class ItemController extends Controller
             }
 
             if (!$data['url']) {
-
-                if (!$this['url']->route($data['link'])) {
-                    throw new Exception(__('Invalid url.'));
-                }
-
                 $data['url'] = $data['link'];
             }
 
