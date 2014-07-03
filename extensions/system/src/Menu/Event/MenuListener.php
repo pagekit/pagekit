@@ -67,6 +67,10 @@ class MenuListener extends EventSubscriber
         $path    = $request->getPathInfo();
         $current = $path.($query ? '?' . $query : '');
 
+        foreach ($event->get($path) as $id => $path) {
+            $event->add($id);
+        }
+
         $event->match($current);
     }
 
@@ -81,7 +85,7 @@ class MenuListener extends EventSubscriber
             $this->cacheEntries = array('paths' => array(), 'patterns' => array());
             foreach ($this['menus']->getItemRepository()->query()->where(array('status' => ItemInterface::STATUS_ACTIVE))->get() as $item) {
                 if (!$item->getPages()) {
-                    $this->cacheEntries['paths'][strtok($item->getUrl(), '?')][$item->getId()] = $item->getUrl();
+                    $this->cacheEntries['paths'][strtok(strtok($item->getUrl(), '?'), '#')][$item->getId()] = $item->getUrl();
                 } else {
                     $this->cacheEntries['patterns'][$item->getId()] = $item->getPages();
                 }
