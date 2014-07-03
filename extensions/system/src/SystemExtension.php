@@ -194,6 +194,10 @@ class SystemExtension extends Extension
         // clear cache
         if (empty($options) || isset($options['cache'])) {
             $this['cache']->flushAll();
+
+            foreach (glob($this['path.cache'] . '/*.cache') as $file) {
+                @unlink($file);
+            }
         }
 
         // clear compiled template files
