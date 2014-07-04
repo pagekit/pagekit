@@ -3,6 +3,7 @@
 namespace Pagekit\Widget\Event;
 
 use Pagekit\Component\View\View;
+use Pagekit\Component\View\ViewInterface;
 use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
 use Pagekit\Widget\PositionRenderer\LayoutPositionRenderer;
@@ -11,7 +12,7 @@ use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
 class RegisterRendererEvent extends Event
 {
     /**
-     * @var View
+     * @var ViewInterface
      */
     protected $view;
 
@@ -23,9 +24,9 @@ class RegisterRendererEvent extends Event
     /**
      * Constructor.
      *
-     * @param View $view
+     * @param ViewInterface $view
      */
-    public function __construct(View $view)
+    public function __construct(ViewInterface $view)
     {
         $this->view = $view;
     }
@@ -52,5 +53,13 @@ class RegisterRendererEvent extends Event
         }
 
         $this->parameters[$name] = $renderer;
+    }
+
+    /**
+     * @return PositionRendererInterface[]
+     */
+    public function getRenderer()
+    {
+        return $this->parameters;
     }
 }

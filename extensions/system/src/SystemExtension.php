@@ -35,6 +35,7 @@ use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
+use Pagekit\Widget\Event\RegisterRendererEvent;
 use Pagekit\Widget\Event\WidgetListener;
 use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetProvider;
@@ -96,20 +97,11 @@ class SystemExtension extends Extension
         };
 
         $app['positions'] = function($app) {
-            return new PositionManager($app['widgets'], $app['events'], $app['view']);
+            return new PositionManager($app['widgets'], $app['events']->dispatch('system.position.renderer', new RegisterRendererEvent($app['view']))->getRenderer());
         };
 
         $app['permissions'] = function($app) {
-
-            $event = new PermissionEvent;
-
-            foreach ($app['extensions'] as $extension) {
-                if ($permissions = $extension->getConfig('permissions')) {
-                    $event->setPermissions($extension->getName(), $permissions);
-                }
-            }
-
-            return $app['events']->dispatch('system.permission', $event)->getPermissions();
+            return $app['events']->dispatch('system.permission', new PermissionEvent)->getPermissions();
         };
 
         $app['content'] = function() {

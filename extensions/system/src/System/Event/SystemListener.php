@@ -20,6 +20,7 @@ use Pagekit\System\Templating\FinderHelper;
 use Pagekit\System\Widget\TextWidget;
 use Pagekit\User\Auth\UserProvider;
 use Pagekit\User\Dashboard\UserWidget;
+use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
@@ -218,20 +219,35 @@ class SystemListener extends EventSubscriber
     }
 
     /**
+     * Registers the extension permissions
+     *
+     * @param PermissionEvent $event
+     */
+    public function onSystemPermission(PermissionEvent $event)
+    {
+        foreach ($this['extensions'] as $extension) {
+            if ($permissions = $extension->getConfig('permissions')) {
+                $event->setPermissions($extension->getName(), $permissions);
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'system.init'            => array('onSystemInit', 20),
-            'system.loaded'          => 'onSystemLoaded',
             'system.admin'           => 'onSystemAdmin',
-            'system.link'            => 'onSystemLink',
-            'system.tmpl'            => 'onSystemTmpl',
-            'system.locale'          => 'onSystemLocale',
             'system.dashboard'       => 'onSystemDashboard',
-            'system.widget'          => 'onSystemWidget',
             'system.finder'          => 'onSystemFinder',
+            'system.init'            => array('onSystemInit', 20),
+            'system.link'            => 'onSystemLink',
+            'system.loaded'          => 'onSystemLoaded',
+            'system.locale'          => 'onSystemLocale',
+            'system.permission'      => 'onSystemPermission',
+            'system.tmpl'            => 'onSystemTmpl',
+            'system.widget'          => 'onSystemWidget',
             'extension.load_failure' => 'onExtensionLoadException'
         );
     }

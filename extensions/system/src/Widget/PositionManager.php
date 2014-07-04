@@ -3,7 +3,10 @@
 namespace Pagekit\Widget;
 
 use Pagekit\Component\View\View;
+use Pagekit\Component\View\ViewInterface;
 use Pagekit\Widget\Event\RegisterRendererEvent;
+use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
+use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class PositionManager implements \ArrayAccess, \IteratorAggregate
@@ -14,7 +17,7 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate
     protected $provider;
 
     /**
-     * @var RegisterRendererEvent
+     * @var PositionRendererInterface[]
      */
     protected $renderers;
 
@@ -26,16 +29,15 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param WidgetProvider           $provider
-     * @param EventDispatcherInterface $events
-     * @param View                     $view
+     * @param WidgetProvider              $provider
+     * @param PositionRendererInterface[] $renderers
      */
-    public function __construct(WidgetProvider $provider, EventDispatcherInterface $events, View $view)
+    public function __construct(WidgetProvider $provider, array $renderers = array())
     {
         $this->provider  = $provider;
-        $this->renderers = $events->dispatch('system.position.renderer', new RegisterRendererEvent($view));
+        $this->renderers = $renderers;
 
-        $this->renderers->register('default', function ($position, WidgetProvider $provider, \ArrayObject $widgets, array $options = array()) {
+        $this->renderers['default'] = new CallbackPositionRenderer(function ($position, WidgetProvider $provider, \ArrayObject $widgets, array $options = array()) {
             $output = array();
 
             foreach ($widgets as $widget) {

@@ -2,13 +2,13 @@
 
 namespace Pagekit\Widget\PositionRenderer;
 
-use Pagekit\Component\View\View;
+use Pagekit\Component\View\ViewInterface;
 use Pagekit\Widget\WidgetProvider;
 
 class LayoutPositionRenderer implements PositionRendererInterface
 {
     /**
-     * @var View
+     * @var ViewInterface
      */
     protected $view;
 
@@ -20,7 +20,7 @@ class LayoutPositionRenderer implements PositionRendererInterface
     /**
      * Constructor.
      */
-    public function __construct(View $view, $layout)
+    public function __construct(ViewInterface $view, $layout)
     {
         $this->view   = $view;
         $this->layout = $layout;

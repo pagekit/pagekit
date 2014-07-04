@@ -25,4 +25,4 @@ abstract class Migration implements MigrationInterface, \ArrayAccess {
     {
         return $this->getConnection()->getUtility();
     }
-} 
+}

@@ -28,9 +28,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new FileProvider($app);
         };
 
-        $app['view'] = function($app) {
+        $app->extend('view', function($view, $app) {
 
-            $view = new View($app['events'], $app['tmpl']);
+            $view->setEngine($app['tmpl']);
             $view->set('app', $app);
             $view->set('url', $app['url']);
             $view->addAction('head', function(ActionEvent $event) use ($app) {
@@ -38,7 +38,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             }, 10);
 
             return $view;
-        };
+        });
 
         $app['extensions'] = function($app) {
 
