@@ -1,23 +1,18 @@
 <?php
 
-namespace Pagekit\Blog\Migration;
+return [
 
-use Pagekit\System\Migration\Migration;
+    'up' => function() use ($app) {
 
-class Blog extends Migration
-{
-    public function up()
-    {
-        $util = $this->getUtility();
+        $util = $app['db']->getUtility();
 
         if ($util->tableExists('@blog_post') === false) {
             $util->createTable('@blog_post', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('roles', 'simple_array', array('notnull' => false));
+                $table->addColumn('user_id', 'integer', array('unsigned' => true, 'length' => 10, 'default' => 0));
                 $table->addColumn('slug', 'string', array('length' => 255));
                 $table->addColumn('title', 'string', array('length' => 255));
                 $table->addColumn('status', 'smallint');
-                $table->addColumn('user_id', 'integer', array('unsigned' => true, 'length' => 10, 'default' => 0));
                 $table->addColumn('date', 'datetime', array('notnull' => false));
                 $table->addColumn('modified', 'datetime');
                 $table->addColumn('content', 'text');
@@ -26,6 +21,7 @@ class Blog extends Migration
                 $table->addColumn('num_comments', 'integer', array('default' => 0));
                 $table->addColumn('last_comment_at', 'datetime', array('notnull' => false));
                 $table->addColumn('data', 'json_array', array('notnull' => false));
+                $table->addColumn('roles', 'simple_array', array('notnull' => false));
                 $table->setPrimaryKey(array('id'));
                 $table->addUniqueIndex(array('slug'), 'POSTS_SLUG');
                 $table->addIndex(array('title'), 'TITLE');
@@ -57,7 +53,4 @@ class Blog extends Migration
         }
     }
 
-    public function down()
-    {
-    }
-}
+];

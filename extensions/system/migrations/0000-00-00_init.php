@@ -1,15 +1,39 @@
 <?php
 
-namespace Pagekit\System\Migration;
-
 use Pagekit\User\Model\RoleInterface;
 
-class Init extends Migration
-{
-    public function up()
-    {
-        $db   = $this->getConnection();
-        $util = $this->getUtility();
+return [
+
+    'up' => function() use ($app) {
+
+        $db = $app['db'];
+        $util = $app['db']->getUtility();
+
+        if ($util->tableExists('@system_menu') === false) {
+            $util->createTable('@system_menu', function($table) {
+                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
+                $table->addColumn('name', 'string', array('length' => 255));
+                $table->setPrimaryKey(array('id'));
+                $table->addUniqueIndex(array('name'), 'MENU_NAME');
+            });
+        }
+
+        if ($util->tableExists('@system_menu_item') === false) {
+            $util->createTable('@system_menu_item', function($table) {
+                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
+                $table->addColumn('menu_id', 'integer', array('unsigned' => true, 'length' => 10));
+                $table->addColumn('parent_id', 'integer', array('unsigned' => true, 'length' => 10));
+                $table->addColumn('roles', 'simple_array', array('notnull' => false));
+                $table->addColumn('name', 'string', array('length' => 255));
+                $table->addColumn('url', 'string', array('length' => 1023));
+                $table->addColumn('priority', 'integer', array('default' => 0));
+                $table->addColumn('status', 'smallint');
+                $table->addColumn('depth', 'smallint');
+                $table->addColumn('pages', 'text');
+                $table->addColumn('data', 'json_array', array('notnull' => false));
+                $table->setPrimaryKey(array('id'));
+            });
+        }
 
         if ($util->tableExists('@system_option') === false) {
             $util->createTable('@system_option', function($table) {
@@ -19,15 +43,6 @@ class Init extends Migration
                 $table->addColumn('autoload', 'boolean', array('default' => false));
                 $table->setPrimaryKey(array('id'));
                 $table->addUniqueIndex(array('name'), 'OPTION_NAME');
-            });
-        }
-
-        if ($util->tableExists('@system_session') === false) {
-            $util->createTable('@system_session', function($table) {
-                $table->addColumn('id', 'string', array('length' => 255));
-                $table->addColumn('data', 'text', array('length' => 65532));
-                $table->addColumn('time', 'datetime');
-                $table->setPrimaryKey(array('id'));
             });
         }
 
@@ -45,6 +60,26 @@ class Init extends Migration
             $db->insert('@system_role', array('id' => RoleInterface::ROLE_ANONYMOUS, 'name' => 'Anonymous', 'priority' => 0));
             $db->insert('@system_role', array('id' => RoleInterface::ROLE_AUTHENTICATED, 'name' => 'Authenticated', 'priority' => 1));
             $db->insert('@system_role', array('id' => RoleInterface::ROLE_ADMINISTRATOR, 'name' => 'Administrator', 'priority' => 2));
+        }
+
+        if ($util->tableExists('@system_session') === false) {
+            $util->createTable('@system_session', function($table) {
+                $table->addColumn('id', 'string', array('length' => 255));
+                $table->addColumn('data', 'text', array('length' => 65532));
+                $table->addColumn('time', 'datetime');
+                $table->setPrimaryKey(array('id'));
+            });
+        }
+
+        if ($util->tableExists('@system_url_alias') === false) {
+            $util->createTable('@system_url_alias', function($table) {
+                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
+                $table->addColumn('source', 'string', array('length' => 255));
+                $table->addColumn('alias', 'string', array('length' => 255));
+                $table->setPrimaryKey(array('id'));
+                $table->addUniqueIndex(array('alias'), 'URL_ALIAS');
+                $table->addIndex(array('source'), 'URL_ALIAS_SOURCE');
+            });
         }
 
         if ($util->tableExists('@system_user') === false) {
@@ -76,43 +111,6 @@ class Init extends Migration
             });
         }
 
-        if ($util->tableExists('@system_url_alias') === false) {
-            $util->createTable('@system_url_alias', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('source', 'string', array('length' => 255));
-                $table->addColumn('alias', 'string', array('length' => 255));
-                $table->setPrimaryKey(array('id'));
-                $table->addUniqueIndex(array('alias'), 'URL_ALIAS');
-                $table->addIndex(array('source'), 'URL_ALIAS_SOURCE');
-            });
-        }
-
-        if ($util->tableExists('@system_menu') === false) {
-            $util->createTable('@system_menu', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('name', 'string', array('length' => 255));
-                $table->setPrimaryKey(array('id'));
-                $table->addUniqueIndex(array('name'), 'MENU_NAME');
-            });
-        }
-
-        if ($util->tableExists('@system_menu_item') === false) {
-            $util->createTable('@system_menu_item', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('menu_id', 'integer', array('unsigned' => true, 'length' => 10));
-                $table->addColumn('parent_id', 'integer', array('unsigned' => true, 'length' => 10));
-                $table->addColumn('roles', 'simple_array', array('notnull' => false));
-                $table->addColumn('name', 'string', array('length' => 255));
-                $table->addColumn('url', 'string', array('length' => 1023));
-                $table->addColumn('priority', 'integer', array('default' => 0));
-                $table->addColumn('status', 'smallint');
-                $table->addColumn('depth', 'smallint');
-                $table->addColumn('pages', 'text');
-                $table->addColumn('data', 'json_array', array('notnull' => false));
-                $table->setPrimaryKey(array('id'));
-            });
-        }
-
         if ($util->tableExists('@system_widget') === false) {
             $util->createTable('@system_widget', function($table) {
                 $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
@@ -129,22 +127,6 @@ class Init extends Migration
                 $table->addIndex(array('status', 'priority'), 'WIDGET_STATUS_PRIORITY');
             });
         }
-
-        if ($util->tableExists('@page_page') === false) {
-            $util->createTable('@page_page', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('roles', 'simple_array', array('notnull' => false));
-                $table->addColumn('title', 'string', array('length' => 255));
-                $table->addColumn('content', 'text');
-                $table->addColumn('url', 'string', array('length' => 1023));
-                $table->addColumn('status', 'smallint');
-                $table->addColumn('data', 'json_array', array('notnull' => false));
-                $table->setPrimaryKey(array('id'));
-            });
-        }
     }
 
-    public function down()
-    {
-    }
-}
+];

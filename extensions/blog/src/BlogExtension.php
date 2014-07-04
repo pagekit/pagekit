@@ -40,7 +40,7 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = $this['migrator']->run('extension://blog/migrations', $this['option']->get('blog:version'))) {
+        if ($version = $this['migrator']->get('extension://blog/migrations', $this['option']->get('blog:version'))->up()) {
             $this['option']->set('blog:version', $version);
         }
 

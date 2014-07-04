@@ -83,11 +83,13 @@ class InstallerController extends Controller
 
             if ('tables-exist' == $status) {
 
-                $this['option']->set('system:version', $this['migrator']->run('extension://system/migrations', $this['option']->get('system:version')));
+                if ($version = $this['migrator']->get('extension://system/migrations', $this['option']->get('system:version'))->up()) {
+                    $this['option']->set('system:version', $version);
+                }
 
             } else {
 
-                $this['option']->set('system:version', $this['migrator']->run('extension://system/migrations'));
+                $this['option']->set('system:version', $this['migrator']->get('extension://system/migrations')->up());
 
                 $this['db']->insert('@system_user', array(
                     'name' => $user['username'],

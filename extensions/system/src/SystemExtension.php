@@ -163,7 +163,7 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->run('extension://system/migrations', $this['option']->get('system:version'))) {
+        if ($version = $this['migrator']->get('extension://system/migrations', $this['option']->get('system:version'))->up()) {
             $this['option']->set('system:version', $version);
         }
     }

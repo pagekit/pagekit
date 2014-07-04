@@ -27,4 +27,14 @@ class PageExtension extends Extension
             $event->addMessages(array('page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')));
         });
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        if ($version = $this['migrator']->get('extension://page/migrations', $this['option']->get('page:version'))->up()) {
+            $this['option']->set('page:version', $version);
+        }
+    }
 }

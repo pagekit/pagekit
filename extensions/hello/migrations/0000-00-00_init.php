@@ -1,14 +1,10 @@
 <?php
 
-namespace Pagekit\Hello\Migration;
+return [
 
-use Pagekit\System\Migration\Migration;
+    'up' => function() use ($app) {
 
-class HelloInit extends Migration
-{
-    public function up()
-    {
-        $util = $this->getUtility();
+        $util = $app['db']->getUtility();
 
         if ($util->tableExists('@hello_greetings') === false) {
             $util->createTable('@hello_greetings', function($table) {
@@ -19,8 +15,4 @@ class HelloInit extends Migration
         }
     }
 
-    public function down()
-    {
-
-    }
-}
+];
