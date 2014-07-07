@@ -10,7 +10,7 @@
     $current = (string) $profile->getCollector('request')->getRoute();
 ?>
 
-<h2>Routes</h2>
+<h1>Routes</h1>
 <table class="pf-table">
     <thead>
         <tr>
@@ -24,7 +24,7 @@
 
     <?php foreach($app['router']->getRouteCollection() as $name => $route) : ?>
 
-        <tr<?php echo ($name == $current ? ' style="background-color:#0e0"' : '') ?>>
+        <tr<?php echo ($name == $current ? ' style="background-color:#e5e5e5;font-weight:bold";' : '') ?>>
             <td><?php echo $name ?></td>
             <td><?php echo $route->getPattern() ?></td>
             <td><?php echo is_string($ctrl = $route->getDefault('_controller')) ? $abbrClass($ctrl) : 'Closure' ?></td>
