@@ -120,10 +120,10 @@ class Extension implements \ArrayAccess
             foreach ($controllers as $controller) {
                 foreach (glob($this->getPath().'/'.ltrim($controller, '/')) as $file) {
 
-                    $name = $this->getName();
-                    $path = sprintf('%s/%s', $name, strtolower(basename($file, 'Controller.php')));
+                    $path = strtolower(sprintf('%s/%s', $this->getName(), basename($file, 'Controller.php')));
+                    $name = '@'.$path;
 
-                    $collection->add($file, compact('name', 'path'));
+                    $collection->add($file, compact('path', 'name'));
                 }
             }
         }
