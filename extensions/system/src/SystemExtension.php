@@ -168,6 +168,12 @@ class SystemExtension extends Extension
         if ($version = $this['migrator']->get('extension://system/migrations', $this['option']->get('system:version'))->up()) {
             $this['option']->set('system:version', $version);
         }
+
+        foreach (array('blog', 'page') as $extension) {
+            if ($extension = $this['extensions']->get($extension)) {
+                $extension->enable();
+            }
+        }
     }
 
     /**

@@ -77,15 +77,17 @@ class InstallerController extends Controller
 
         try {
 
+            foreach (array('blog', 'page', 'system') as $extension) {
+                $this['extensions']->load($extension);
+            }
+
             if ('no-connection' == $status) {
                 throw new Exception(__('No database connection.'));
             }
 
             if ('tables-exist' == $status) {
 
-                if ($version = $this['migrator']->get('extension://system/migrations', $this['option']->get('system:version'))->up()) {
-                    $this['option']->set('system:version', $version);
-                }
+                $this['extensions']->get('system')->enable();
 
             } else {
 
@@ -112,7 +114,9 @@ class InstallerController extends Controller
                     'role_id' => RoleInterface::ROLE_ADMINISTRATOR
                 ));
 
-                // Insert sample data
+                $this['extensions']->get('system')->enable();
+
+                // sample data
                 $sql = file_get_contents(__DIR__.'/../../sample_data.sql');
 
                 foreach (explode(';', $sql) as $query) {
