@@ -1,1 +1,1 @@
-<a class="js-editor-link {{class}}" href="{{link}}">{{{txt}}}{{#unless txt}}@trans('Choose Link'){{/unless}} <span class="uk-icon-pencil"></span></a>
+<a class="js-editor-link {{class}}" href="{{link}}">{{{txt}}}{{#unless txt}}@trans('Select Link'){{/unless}} <span class="uk-icon-pencil"></span></a>
