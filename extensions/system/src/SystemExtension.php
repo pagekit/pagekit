@@ -39,6 +39,7 @@ use Pagekit\Widget\Event\RegisterRendererEvent;
 use Pagekit\Widget\Event\WidgetListener;
 use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetProvider;
+use Symfony\Component\HttpKernel\DataCollector\RouterDataCollector;
 
 class SystemExtension extends Extension
 {
@@ -154,6 +155,7 @@ class SystemExtension extends Extension
             $app->on('system.loaded', function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'view://system/profiler/toolbar/user.php', null, -20);
+                $app['profiler']->add(new RouterDataCollector, 'view://system/profiler/toolbar/router.php', 'view://system/profiler/panel/router.php', 35);
             });
         }
     }
