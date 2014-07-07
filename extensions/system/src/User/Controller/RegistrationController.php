@@ -70,26 +70,34 @@ class RegistrationController extends Controller
             $password = @$data['password'];
 
             if (empty($name)) {
+                $response['field'] = 'name';
                 throw new Exception(__('Name required.'));
             }
 
             if (empty($password)) {
+                $response['field'] = 'password';
                 throw new Exception(__('Password required.'));
             }
 
             if (strlen($username) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $username)) {
+                $response['field'] = 'username';
                 throw new Exception(__('Username is invalid.'));
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $response['field'] = 'email';
                 throw new Exception(__('Email is invalid.'));
             }
 
             if ($this->users->query()->orWhere(array('username = :username', 'email = :username'), array('username' => $username))->first()) {
+                $response['field'] = 'username';
+                $response['dynamic'] = true;
                 throw new Exception(__('Username not available.'));
             }
 
             if ($this->users->query()->orWhere(array('username = :email', 'email = :email'), array('email' => $email))->first()) {
+                $response['field'] = 'email';
+                $response['dynamic'] = true;
                 throw new Exception(__('Email not available.'));
             }
 
