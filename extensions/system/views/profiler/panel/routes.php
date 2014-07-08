@@ -21,13 +21,12 @@
     </thead>
     <tbody>
 
-
-    <?php foreach($app['router']->getRouteCollection() as $name => $route) : ?>
+    <?php foreach($collector->getRoutes() as $name => $route) : ?>
 
         <tr<?php echo ($name == $current ? ' style="background-color:#e5e5e5;font-weight:bold";' : '') ?>>
             <td><?php echo $name ?></td>
-            <td><?php echo $route->getPattern() ?></td>
-            <td><?php echo is_string($ctrl = $route->getDefault('_controller')) ? $abbrClass($ctrl) : 'Closure' ?></td>
+            <td><?php echo $route['pattern'] ?></td>
+            <td><?php echo $abbrClass($route['controller']) ?></td>
         </tr>
     <?php endforeach ?>
     </tbody>
