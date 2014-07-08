@@ -53,6 +53,7 @@ class RegistrationController extends Controller
     {
 
         $response = ['success' => false];
+        $errors   = [];
 
         try {
 
@@ -70,35 +71,31 @@ class RegistrationController extends Controller
             $password = @$data['password'];
 
             if (empty($name)) {
-                $response['field'] = 'name';
-                throw new Exception(__('Name required.'));
+                $errors[] = ['field'=> 'name', 'message' => __('Name required.')];
             }
 
             if (empty($password)) {
-                $response['field'] = 'password';
-                throw new Exception(__('Password required.'));
+                $errors[] = ['field'=> 'password', 'message' => __('Password required.')];
             }
 
             if (strlen($username) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $username)) {
-                $response['field'] = 'username';
-                throw new Exception(__('Username is invalid.'));
+                $errors[] = ['field'=> 'username', 'message' => __('Username is invalid.')];
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $response['field'] = 'email';
-                throw new Exception(__('Email is invalid.'));
+                $errors[] = ['field'=> 'email', 'message' => __('Email is invalid.')];
             }
 
             if ($this->users->query()->orWhere(array('username = :username', 'email = :username'), array('username' => $username))->first()) {
-                $response['field'] = 'username';
-                $response['dynamic'] = true;
-                throw new Exception(__('Username not available.'));
+                $errors[] = ['field'=> 'username', 'message' => __('Username not available.'), 'dynamic' => true];
             }
 
             if ($this->users->query()->orWhere(array('username = :email', 'email = :email'), array('email' => $email))->first()) {
-                $response['field'] = 'email';
-                $response['dynamic'] = true;
-                throw new Exception(__('Email not available.'));
+                $errors[] = ['field'=> 'email', 'message' => __('Email not available.'), 'dynamic' => true];
+            }
+
+            if (count($errors)) {
+                throw new Exception(__('Signup failed'));
             }
 
             $user = new User;
@@ -158,9 +155,13 @@ class RegistrationController extends Controller
         } catch (Exception $e) {
 
             if (!$this['request']->isXmlHttpRequest()) {
-                $this['message']->error($e->getMessage());
+
+                foreach ($errors as $error) {
+                    $this['message']->error($error['message']);
+                }
+
             } else {
-                $response['error'] = $e->getMessage();
+                $response['errors'] = $errors;
             }
 
         }
