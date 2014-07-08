@@ -33,7 +33,7 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->get('extension://page/migrations', $this['option']->get('page:version'))->up()) {
+        if ($version = $this['migrator']->create('extension://page/migrations', $this['option']->get('page:version'))->run()) {
             $this['option']->set('page:version', $version);
         }
     }

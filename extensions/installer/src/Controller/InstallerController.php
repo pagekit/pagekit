@@ -91,7 +91,7 @@ class InstallerController extends Controller
 
             } else {
 
-                $this['option']->set('system:version', $this['migrator']->get('extension://system/migrations')->up());
+                $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
 
                 $this['db']->insert('@system_user', array(
                     'name' => $user['username'],
