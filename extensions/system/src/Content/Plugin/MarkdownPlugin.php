@@ -14,12 +14,12 @@ class MarkdownPlugin extends EventSubscriber
      */
     public function onContentPlugins(ContentEvent $event)
     {
-        if ($event['markdown'] != true) {
+        if (!$event['markdown']) {
             return;
         }
 
         $content = $event->getContent();
-        $content = $this['markdown']->parse($content);
+        $content = $this['markdown']->parse($content, is_array($event['markdown']) ? $event['markdown'] : array());
 
         $event->setContent($content);
     }
