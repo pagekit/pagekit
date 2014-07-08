@@ -3,8 +3,13 @@
     <head>
         <meta charset="utf-8">
         @action('head')
+        @style('%NAME%', 'theme://%NAME%/css/theme.css')
     </head>
     <body>
+        @if ($position.exists('logo'))
+            @raw( $position.render('logo', ['renderer' => 'blank']) )
+        @endif
 
+        @action('content')
     </body>
 </html>
