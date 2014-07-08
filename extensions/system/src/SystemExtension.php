@@ -20,7 +20,6 @@ use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
-use Pagekit\System\Exception\ExceptionHandler;
 use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\LanguageHelper;
@@ -40,6 +39,7 @@ use Pagekit\Widget\Event\RegisterRendererEvent;
 use Pagekit\Widget\Event\WidgetListener;
 use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetProvider;
+use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class SystemExtension extends Extension
 {
@@ -48,7 +48,9 @@ class SystemExtension extends Extension
      */
     public function boot(Application $app)
     {
-        $app['exception']->pushHandler(new ExceptionHandler($app['config']['app.debug']));
+        if (!(isset($this['config']) ? $this['config']['app.debug'] : true)) {
+            $app['events']->addSubscriber(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
+        }
 
         $app['events']->addSubscriber(new AccessListener);
         $app['events']->addSubscriber(new AdminMenuListener);
@@ -152,7 +154,7 @@ class SystemExtension extends Extension
         });
 
         if (isset($app['profiler'])) {
-            $app->on('system.loaded', function() use ($app) {
+            $app->on('system.init', function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'view://system/profiler/toolbar/user.php', null, -20);
                 $app['profiler']->add(new RoutesDataCollector, 'view://system/profiler/toolbar/routes.php', 'view://system/profiler/panel/routes.php', 35);

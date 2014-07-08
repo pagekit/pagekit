@@ -166,12 +166,7 @@ class RegistrationController extends Controller
 
         }
 
-        if (count($errors)) {
-            return $this['request']->isXmlHttpRequest() ? $this['response']->json($response) : $this->redirect('@system/registration');
-        } else {
-            return $this['request']->isXmlHttpRequest() ? $this['response']->json($response) : $this->redirect('@system/auth/login');
-        }
-
+        return $this['request']->isXmlHttpRequest() ? $this['response']->json($response) : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
     }
 
     /**
