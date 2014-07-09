@@ -10,6 +10,7 @@ class FinderController extends Controller
 {
     /**
      * @Request({"path"})
+     * @Response("json")
      */
     public function listAction($path)
     {
@@ -47,13 +48,12 @@ class FinderController extends Controller
             $data[$isDir ? 'folders' : 'files'][] = $info;
         }
 
-
-
-        return $this['response']->json($data);
+        return $data;
     }
 
     /**
      * @Request({"name"})
+     * @Response("json")
      */
     public function createFolderAction($name)
     {
@@ -76,12 +76,14 @@ class FinderController extends Controller
             return $this->success(__('Directory created.'));
 
         } catch(\Exception $e) {
+
             return $this->error(__('Unable to create directory.'));
         }
     }
 
     /**
      * @Request({"oldname", "newname"})
+     * @Response("json")
      */
     public function renameAction($oldname, $newname)
     {
@@ -104,12 +106,14 @@ class FinderController extends Controller
             return $this->success(__('Renamed.'));
 
         } catch(\Exception $e) {
+
             return $this->error(__('Unable to rename.'));
         }
     }
 
     /**
      * @Request({"names": "array"})
+     * @Response("json")
      */
     public function removeFilesAction($names)
     {
@@ -127,7 +131,8 @@ class FinderController extends Controller
 
                 $this['file']->delete($path);
 
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
+
                 return $this->error(__('Unable to remove.'));
             }
         }
@@ -135,9 +140,13 @@ class FinderController extends Controller
         return $this->success(__('Removed selected.'));
     }
 
+    /**
+     * @Response("json")
+     */
     public function uploadAction()
     {
         try {
+
             if (!$path = $this->getPath()) {
                 return $this->error(__('Invalid path.'));
             }
@@ -159,12 +168,12 @@ class FinderController extends Controller
                 }
 
                 $file->move($path, $file->getClientOriginalName());
-
             }
 
             return $this->success(__('Upload complete.'));
 
         } catch(\Exception $e) {
+
             return $this->error(__('Unable to upload.'));
         }
     }
@@ -242,10 +251,10 @@ class FinderController extends Controller
     }
 
     protected function success($message) {
-        return $this['response']->json(compact('message'));
+        return compact('message');
     }
 
     protected function error($message) {
-        return $this['response']->json(array('error' => true, 'message' => $message));
+        return array('error' => true, 'message' => $message);
     }
 }

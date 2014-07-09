@@ -37,7 +37,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @View("blog/admin/comment/index.razr")
+     * @Response("blog/admin/comment/index.razr")
      */
     public function indexAction($filter = array(), $thread = 0, $page = 0)
     {
@@ -97,7 +97,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("blog/admin/comment/edit.razr", layout=false)
+     * @Response("blog/admin/comment/edit.razr", layout=false)
      */
     public function editAction($id = 0)
     {
@@ -114,6 +114,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"comment": "array", "id": "int"})
+     * @Response("json")
      * @Token
      */
     public function saveAction($data, $id = 0)
@@ -141,16 +142,17 @@ class CommentController extends Controller
 
             $this->comments->save($comment, $data);
 
-            $response = array('message' => $id ? __('Comment saved.') : __('Comment created.'));
+            return array('message' => $id ? __('Comment saved.') : __('Comment created.'));
 
         } catch (Exception $e) {
-            $response = array('message' => $e->getMessage(), 'error' => true);
+
+            return array('message' => $e->getMessage(), 'error' => true);
         }
-        return $this['response']->json($response);
     }
 
     /**
      * @Request({"ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function deleteAction($ids = array())
@@ -161,11 +163,12 @@ class CommentController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids))));
+        return array('message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids)));
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function statusAction($status, $ids = array())
@@ -180,6 +183,6 @@ class CommentController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids))));
+        return array('message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids)));
     }
 }

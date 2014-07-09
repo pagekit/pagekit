@@ -35,6 +35,7 @@ class PackageController extends Controller
 
     /**
      * @Request({"type"})
+     * @Response("json")
      * @Token
      */
     public function uploadAction($type = null)
@@ -85,11 +86,12 @@ class PackageController extends Controller
             $response = array('error' => $e->getMessage());
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
     /**
      * @Request({"package": "json", "path": "alnum"})
+     * @Response("json")
      * @Token
      */
     public function installAction($package = null, $path = '')
@@ -141,7 +143,7 @@ class PackageController extends Controller
             $this['file']->delete($path);
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
     protected function installTheme($json, $package)

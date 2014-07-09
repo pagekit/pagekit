@@ -16,12 +16,12 @@ class SystemController extends Controller
 {
     /**
      * @Route("/system")
+     * @Response("system/admin/settings/index.razr")
      * @Access(admin=true)
-     * @View("system/admin/settings/index.razr")
      */
     public function indexAction()
     {
-        $packages = array();
+        $packages = [];
 
         foreach ($this['extensions'] as $extension) {
             if ($extension->getConfig('settings')) {
@@ -29,12 +29,12 @@ class SystemController extends Controller
             }
         }
 
-        return array('head.title' => __('Settings'), 'user' => $this['user'], 'packages' => $packages);
+        return ['head.title' => __('Settings'), 'user' => $this['user'], 'packages' => $packages];
     }
 
     /**
      * @Route("/admin/login", methods="POST", defaults={"_maintenance"=true})
-     * @View("extension://system/theme/templates/login.razr", layout=false)
+     * @Response("extension://system/theme/templates/login.razr", layout=false)
      */
     public function loginAction()
     {
@@ -45,7 +45,7 @@ class SystemController extends Controller
         $lastLogin = $this['session']->get(ResetPasswordController::RESET_LOGIN);
         $this['session']->remove(ResetPasswordController::RESET_LOGIN);
 
-        return array('head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ? : $this['url']->route('@system/system/admin', array(), true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin);
+        return ['head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ? : $this['url']->route('@system/system/admin', [], true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM, 'last_login' => $lastLogin];
     }
 
     /**
@@ -59,12 +59,12 @@ class SystemController extends Controller
 
     /**
      * @Route("/admin/menu")
-     * @Access(admin=true)
      * @Request({"order": "array"})
+     * @Response("json")
+     * @Access(admin=true)
      */
     public function adminMenuAction($order)
     {
-
         try {
 
             if (!$order) {
@@ -76,51 +76,52 @@ class SystemController extends Controller
 
             $this['users']->getUserRepository()->save($user);
 
-            $response = array('message' => __('Order saved.'));
+            return ['message' => __('Order saved.')];
 
         } catch (Exception $e) {
-            $response = array('message' => $e->getMessage(), 'error' => true);
-        }
 
-        return $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+        }
     }
 
     /**
      * @Route("/system/storage")
+     * @Response("system/admin/settings/storage.razr")
      * @Access("system: manage storage", admin=true)
-     * @View("system/admin/settings/storage.razr")
      */
     public function storageAction()
     {
-        return array('head.title' => __('Storage'), 'root' => $this['config']->get('app.storage'), 'mode' => 'write');
+        return ['head.title' => __('Storage'), 'root' => $this['config']->get('app.storage'), 'mode' => 'write'];
     }
 
     /**
      * @Route("/system/info")
+     * @Response("system/admin/settings/info.razr")
      * @Access(admin=true)
-     * @View("system/admin/settings/info.razr")
      */
     public function infoAction()
     {
-        return array('head.title' => __('System Information'), 'info' => $this['system.info']->get());
+        return ['head.title' => __('System Information'), 'info' => $this['system.info']->get()];
     }
 
     /**
      * @Route("/system/locale")
+     * @Response("json")
      */
     public function localeAction()
     {
         $this['events']->dispatch('system.locale', $event = new LocaleEvent);
 
-        return $this['response']->json($event->getMessages());
+        return $event->getMessages();
     }
 
     /**
      * @Route("/system/tmpl/{templates}")
+     * @Response("json")
      */
     public function tmplAction($templates = '')
     {
-        $response = array();
+        $response = [];
         $event = $this['events']->dispatch('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
@@ -129,19 +130,20 @@ class SystemController extends Controller
             }
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
     /**
      * @Route("/system/clearcache")
-     * @Access(admin=true)
      * @Request({"caches": "array"})
+     * @Response("json")
+     * @Access(admin=true)
      * @Token
      */
     public function clearCacheAction($caches)
     {
         $this['system']->clearCache($caches);
 
-        return $this['request']->isXmlHttpRequest() ? $this['response']->json(array('message' => __('Cache cleared!'))) : $this->redirect('@system/system');
+        return $this['request']->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
     }
 }

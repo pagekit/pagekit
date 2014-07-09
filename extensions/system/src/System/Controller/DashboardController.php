@@ -27,12 +27,12 @@ class DashboardController extends Controller
     }
 
     /**
-     * @View("system/admin/dashboard/index.razr")
+     * @Response("system/admin/dashboard/index.razr")
      */
     public function indexAction()
     {
-        $widgets = array();
-        $columns = array();
+        $widgets = [];
+        $columns = [];
 
         foreach ($this->getWidgets() as $id => $data) {
             if ($type = $this->types[$data['type']]) {
@@ -43,15 +43,15 @@ class DashboardController extends Controller
 
         $columns = $this->chunkList($columns, 3);
 
-        return array('head.title' => __('Dashboard'), 'theme.boxed' => false, 'widgets' => $widgets, 'columns' => $columns);
+        return ['head.title' => __('Dashboard'), 'theme.boxed' => false, 'widgets' => $widgets, 'columns' => $columns];
     }
 
     /**
-     * @View("system/admin/dashboard/settings.razr")
+     * @Response("system/admin/dashboard/settings.razr")
      */
     public function settingsAction()
     {
-        $widgets = array();
+        $widgets = [];
 
         foreach ($this->getWidgets() as $id => $data) {
             if ($type = $this->types[$data['type']]) {
@@ -64,12 +64,12 @@ class DashboardController extends Controller
             }
         }
 
-        return array('head.title' => __('Dashboard Settings'), 'types' => $this->types, 'widgets' => $widgets);
+        return ['head.title' => __('Dashboard Settings'), 'types' => $this->types, 'widgets' => $widgets];
     }
 
     /**
      * @Request({"type"})
-     * @View("system/admin/dashboard/edit.razr")
+     * @Response("system/admin/dashboard/edit.razr")
      */
     public function addAction($id)
     {
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             $widget = new Widget;
             $widget->setType($id);
 
-            return array('head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget);
+            return ['head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -93,7 +93,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @View("system/admin/dashboard/edit.razr")
+     * @Response("system/admin/dashboard/edit.razr")
      */
     public function editAction($id)
     {
@@ -111,7 +111,7 @@ class DashboardController extends Controller
 
             $widget = $this->create($id, $widgets[$id]);
 
-            return array('head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget);
+            return ['head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -124,7 +124,7 @@ class DashboardController extends Controller
      * @Request({"id", "widget": "array"})
      * @Token
      */
-    public function saveAction($id = 0, $widget = array())
+    public function saveAction($id = 0, $widget = [])
     {
         try {
 
@@ -149,7 +149,7 @@ class DashboardController extends Controller
      * @Request({"ids": "array"})
      * @Token
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         $widgets = $this->getWidgets();
 
@@ -166,13 +166,13 @@ class DashboardController extends Controller
 
     /**
      * @Request({"order": "array"})
+     * @Response("json")
      * @Token
      */
-    public function reorderAction($order = array())
+    public function reorderAction($order = [])
     {
+        $reordered = [];
         $widgets = $this->getWidgets();
-
-        $reordered = array();
 
         foreach ($order as $data) {
             $id = $data['id'];
@@ -183,7 +183,7 @@ class DashboardController extends Controller
 
         $this->save($reordered);
 
-        return $this['response']->json(array('message' => __('Widgets reordered.')));
+        return ['message' => __('Widgets reordered.')];
     }
 
     /**
@@ -214,7 +214,7 @@ class DashboardController extends Controller
         $users = $this['users']->getUserRepository();
 
         // make sure user is registered in the entity manager
-        $user =  $users->find($user->getId());
+        $user = $users->find($user->getId());
         $user->set('dashboard', $dashboard);
 
         $users->save($user);
@@ -233,7 +233,7 @@ class DashboardController extends Controller
         $listlen   = count($list);
         $partlen   = floor($listlen / $p);
         $partrem   = $listlen % $p;
-        $partition = array();
+        $partition = [];
         $mark      = 0;
 
         for ($px = 0; $px < $p; $px++) {

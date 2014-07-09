@@ -36,7 +36,7 @@ class PageController extends Controller
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @View("page/admin/pages/index.razr")
+     * @Response("page/admin/pages/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -76,7 +76,7 @@ class PageController extends Controller
     }
 
     /**
-     * @View("page/admin/pages/edit.razr")
+     * @Response("page/admin/pages/edit.razr")
      */
     public function addAction()
     {
@@ -85,7 +85,7 @@ class PageController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("page/admin/pages/edit.razr")
+     * @Response("page/admin/pages/edit.razr")
      */
     public function editAction($id)
     {
@@ -132,6 +132,7 @@ class PageController extends Controller
 
     /**
      * @Request({"ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function deleteAction($ids = array())
@@ -142,11 +143,12 @@ class PageController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids))));
+        return array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
     }
 
     /**
      * @Request({"ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function copyAction($ids = array())
@@ -164,11 +166,12 @@ class PageController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids))));
+        return array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function statusAction($status, $ids = array())
@@ -186,6 +189,6 @@ class PageController extends Controller
             $message = _c('{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished.', count($ids));
         }
 
-        return $this['response']->json(compact('message'));
+        return compact('message');
     }
 }

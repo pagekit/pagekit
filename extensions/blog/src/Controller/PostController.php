@@ -43,7 +43,7 @@ class PostController extends Controller
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @View("blog/admin/post/index.razr")
+     * @Response("blog/admin/post/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -90,7 +90,7 @@ class PostController extends Controller
     }
 
     /**
-     * @View("blog/admin/post/edit.razr")
+     * @Response("blog/admin/post/edit.razr")
      */
     public function addAction()
     {
@@ -102,7 +102,7 @@ class PostController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("blog/admin/post/edit.razr")
+     * @Response("blog/admin/post/edit.razr")
      */
     public function editAction($id)
     {
@@ -124,6 +124,7 @@ class PostController extends Controller
 
     /**
      * @Request({"id": "int", "post": "array"})
+     * @Response("json")
      * @Token
      */
     public function saveAction($id, $data)
@@ -145,17 +146,18 @@ class PostController extends Controller
 
             $this->posts->save($post, $data);
 
-            $response = array('message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId());
+            return array('message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId());
 
         } catch (Exception $e) {
-            $response = array('message' => $e->getMessage(), 'error' => true);
-        }
 
-        return $this['response']->json($response);
+            return array('message' => $e->getMessage(), 'error' => true);
+
+        }
     }
 
     /**
      * @Request({"ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function deleteAction($ids = array())
@@ -166,11 +168,12 @@ class PostController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids))));
+        return array('message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids)));
     }
 
     /**
      * @Request({"ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function copyAction($ids = array())
@@ -188,11 +191,12 @@ class PostController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids))));
+        return array('message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids)));
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"})
+     * @Response("json")
      * @Token
      */
     public function statusAction($status, $ids = array())
@@ -210,7 +214,7 @@ class PostController extends Controller
             $message = _c('{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished.', count($ids));
         }
 
-        return $this['response']->json(compact('message'));
+        return compact('message');
     }
 
     protected function slugify($slug)

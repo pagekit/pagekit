@@ -34,7 +34,7 @@ class MenuController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/menu/index.razr")
+     * @Response("system/admin/menu/index.razr")
      */
     public function indexAction($id = null)
     {
@@ -101,6 +101,7 @@ class MenuController extends Controller
 
     /**
      * @Request({"id": "int", "order": "array"})
+     * @Response("json")
      * @Token
      */
     public function reorderAction($id, $order = array())
@@ -121,6 +122,6 @@ class MenuController extends Controller
             $this->items->save($item);
         }
 
-        return $this['response']->json(array('message' => __('Menu order updated')));
+        return ['message' => __('Menu order updated')];
     }
 }

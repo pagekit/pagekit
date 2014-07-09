@@ -76,7 +76,9 @@ class AccessListener extends EventSubscriber
             $access[] = 'system: access admin area';
         }
 
-        $route->setDefault('_access', array_unique($access));
+        if ($access) {
+            $route->setDefault('_access', array_unique($access));
+        }
     }
 
     /**

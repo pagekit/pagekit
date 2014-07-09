@@ -29,12 +29,12 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @View("system/admin/extensions/index.razr")
+     * @Response("system/admin/extensions/index.razr")
      */
     public function indexAction()
     {
-        $packages = array();
-        $packagesJson = array();
+        $packages = [];
+        $packagesJson = [];
 
         foreach ($this->extensions->getRepository()->getPackages() as $package) {
             if (!$this->isCore($name = $package->getName())) {
@@ -44,16 +44,17 @@ class ExtensionsController extends Controller
         }
 
         if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json(array(
+            return $this['response']->json([
                 'table' => $this['view']->render('view://system/admin/extensions/table.razr', ['packages' => $packages])
-            ));
+            ]);
         }
 
-        return array('head.title' => __('Extensions'), 'api' => $this->api, 'key' => $this->apiKey, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
+        return ['head.title' => __('Extensions'), 'api' => $this->api, 'key' => $this->apiKey, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**
      * @Request({"name"})
+     * @Response("json")
      * @Token
      */
     public function enableAction($name)
@@ -86,21 +87,22 @@ class ExtensionsController extends Controller
 
             $extension->boot($this->getApplication());
 
-            $this['option']->set('system:extensions', array_unique(array_merge($this['option']->get('system:extensions', array()), array($extension->getName()))), true);
+            $this['option']->set('system:extensions', array_unique(array_merge($this['option']->get('system:extensions', []), [$extension->getName()])), true);
 
             $this['exception']->setHandler($handler);
 
-            $response = ['message' => __('Extension enabled.')];
+            return ['message' => __('Extension enabled.')];
 
         } catch (Exception $e) {
-            $response = ['message' => $e->getMessage(), 'error' => true];
-        }
 
-        $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+
+        }
     }
 
     /**
      * @Request({"name"})
+     * @Response("json")
      * @Token
      */
     public function disableAction($name)
@@ -112,24 +114,25 @@ class ExtensionsController extends Controller
             }
 
             if (!$extension = $this->extensions->get($name)) {
-                throw new Exception(__('Extension "%name%" has not been loaded.', array('%name%' => $name)));
+                throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
             }
 
             $this->disable($extension);
 
             $this['system']->clearCache();
 
-            $response = ['message' => __('Extension disabled.')];
+            return ['message' => __('Extension disabled.')];
 
         } catch (Exception $e) {
-            $response = ['message' => $e->getMessage(), 'error' => true];
-        }
 
-        $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+
+        }
     }
 
     /**
      * @Request({"name"})
+     * @Response("json")
      * @Token
      */
     public function uninstallAction($name)
@@ -145,7 +148,7 @@ class ExtensionsController extends Controller
             }
 
             if (!$extension = $this->extensions->get($name)) {
-                throw new Exception(__('Unable to uninstall extension "%name%".', array('%name%' => $name)));
+                throw new Exception(__('Unable to uninstall extension "%name%".', ['%name%' => $name]));
             }
 
             $this->disable($extension);
@@ -156,13 +159,13 @@ class ExtensionsController extends Controller
 
             $this['system']->clearCache();
 
-            $response = ['message' => __('Extension uninstalled.')];
+            return ['message' => __('Extension uninstalled.')];
 
         } catch (Exception $e) {
-            $response = ['message' => $e->getMessage(), 'error' => true];
-        }
 
-        $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+
+        }
     }
 
     /**
@@ -176,10 +179,10 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $config = $this['option']->get("$name:config", array());
+            $config = $this['option']->get("$name:config", []);
             $event  = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
 
-            return $this['view']->render($tmpl, array('extension' => $extension, 'config' => $event->getConfig()));
+            return $this['view']->render($tmpl, ['extension' => $extension, 'config' => $event->getConfig()]);
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -191,7 +194,7 @@ class ExtensionsController extends Controller
     /**
      * @Request({"name", "config": "array"})
      */
-    public function saveSettingsAction($name, $config = array())
+    public function saveSettingsAction($name, $config = [])
     {
         try {
 
@@ -215,13 +218,13 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        $this['option']->set('system:extensions', array_values(array_diff($this['option']->get('system:extensions', array()), array($extension->getName()))), true);
+        $this['option']->set('system:extensions', array_values(array_diff($this['option']->get('system:extensions', []), [$extension->getName()])), true);
 
         $extension->disable();
     }
 
     protected function isCore($name)
     {
-        return in_array($name, $this['config']->get('extension.core', array()));
+        return in_array($name, $this['config']->get('extension.core', []));
     }
 }

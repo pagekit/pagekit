@@ -35,7 +35,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @View("system/user/registration.razr")
+     * @Response("system/user/registration.razr")
      */
     public function indexAction()
     {

@@ -10,7 +10,7 @@ use Pagekit\Framework\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @View("hello/index.razr")
+     * @Response("hello/index.razr")
      */
     public function indexAction()
     {
@@ -20,7 +20,7 @@ class DefaultController extends Controller
     /**
      * @Route("/greet", name="@hello/greet/world")
      * @Route("/greet/{name}", name="@hello/greet/name")
-     * @View("hello/greet.razr")
+     * @Response("hello/greet.razr")
      */
     public function greetAction($name = 'World')
     {
@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     * @View("hello/view.razr")
+     * @Response("hello/view.razr")
      */
     public function viewAction($id=1)
     {

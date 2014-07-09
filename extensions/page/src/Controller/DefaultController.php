@@ -28,7 +28,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/{id}", name="@page/id", requirements={"id"="\d+"})
-     * @View("page/index.razr")
+     * @Response("page/index.razr")
      */
     public function indexAction($id = 0)
     {

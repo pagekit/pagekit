@@ -34,7 +34,7 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @View("system/user/reset/request.razr")
+     * @Response("system/user/reset/request.razr")
      */
     public function indexAction()
     {
@@ -47,7 +47,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"login"})
-     * @View("system/user/reset/request.razr")
+     * @Response("system/user/reset/request.razr")
      */
     public function resetAction($login)
     {
@@ -108,7 +108,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"user", "key"})
-     * @View("system/user/reset/confirm.razr")
+     * @Response("system/user/reset/confirm.razr")
      */
     public function confirmAction($username = "", $activation = "")
     {

@@ -31,7 +31,7 @@ class SettingsController extends Controller
 
     /**
      * @Request({"tab": "int"})
-     * @View("system/admin/settings/settings.razr")
+     * @Response("system/admin/settings/settings.razr")
      */
     public function indexAction($tab = 0)
     {
@@ -109,55 +109,56 @@ class SettingsController extends Controller
 
     /**
      * @Request({"option": "array"})
+     * @Response("json")
      * @Token
      */
     public function testSmtpConnectionAction($option = array())
     {
-        $option = array_merge(array(
-            'system:mail.port' => '',
-            'system:mail.host' => '',
-            'system:mail.username' => '',
-            'system:mail.password' => '',
-            'system:mail.encryption' => ''
-        ), $option);
-
-        $response = array('success' => true, 'message' => __('Connection established!'));
-
         try {
+
+            $option = array_merge(array(
+                'system:mail.port' => '',
+                'system:mail.host' => '',
+                'system:mail.username' => '',
+                'system:mail.password' => '',
+                'system:mail.encryption' => ''
+            ), $option);
 
             $this['mailer']->testSmtpConnection($option['system:mail.host'], $option['system:mail.port'], $option['system:mail.username'], $option['system:mail.password'], $option['system:mail.encryption']);
 
-        } catch(\Exception $e) {
-            $response = array('success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage()));
-        }
+            return array('success' => true, 'message' => __('Connection established!'));
 
-        return $this['response']->json($response);
+        } catch (\Exception $e) {
+
+            return array('success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage()));
+        }
     }
 
     /**
      * Note: If the mailer is accessed prior to this controller action, this will possibly test the wrong mailer
      *
      * @Request({"option": "array"})
+     * @Response("json")
      * @Token
      */
     public function testSendEmailAction($option = array())
     {
-        $filter = array_fill_keys(array(
-            'system:mail.driver',
-            'system:mail.port',
-            'system:mail.host',
-            'system:mail.username',
-            'system:mail.password',
-            'system:mail.encryption',
-            'system:mail.from.address',
-            'system:mail.from.name'
-        ), null);
-
-        $option = array_intersect_key(array_merge($filter, $option), $filter);
-
         try {
 
-            foreach($option as $key => $value) {
+            $filter = array_fill_keys(array(
+                'system:mail.driver',
+                'system:mail.port',
+                'system:mail.host',
+                'system:mail.username',
+                'system:mail.password',
+                'system:mail.encryption',
+                'system:mail.from.address',
+                'system:mail.from.name'
+            ), null);
+
+            $option = array_intersect_key(array_merge($filter, $option), $filter);
+
+            foreach ($option as $key => $value) {
                 $this['option']->set($key, $value);
             }
 
@@ -165,10 +166,11 @@ class SettingsController extends Controller
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
 
         } catch (\Exception $e) {
+
             $response = array('success' => false, 'message' => sprintf(__('Mail delivery failed! (%s)'), $e->getMessage()));
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
     /**
@@ -179,6 +181,7 @@ class SettingsController extends Controller
         $timezones = array();
 
         foreach (\DateTimeZone::listIdentifiers() as $timezone) {
+
             $parts = explode('/', $timezone);
 
             if (count($parts) > 2) {

@@ -10,7 +10,7 @@ use Pagekit\Framework\Controller\Controller;
 class MigrationController extends Controller
 {
     /**
-     * @View("extension://system/theme/templates/migration.razr", layout=false)
+     * @Response("extension://system/theme/templates/migration.razr", layout=false)
      */
     public function indexAction()
     {

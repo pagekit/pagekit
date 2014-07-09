@@ -44,7 +44,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @View("blog/post/index.razr")
+     * @Response("blog/post/index.razr")
      */
     public function indexAction()
     {
@@ -140,7 +140,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/{id}", name="@blog/id")
-     * @View("blog/post/post.razr")
+     * @Response("blog/post/post.razr")
      */
     public function postAction($id = 0)
     {

@@ -28,7 +28,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @View("system/admin/themes/index.razr")
+     * @Response("system/admin/themes/index.razr")
      */
     public function indexAction()
     {
@@ -69,6 +69,7 @@ class ThemesController extends Controller
 
     /**
      * @Request({"name"})
+     * @Response("json")
      * @Token
      */
     public function enableAction($name)
@@ -76,6 +77,7 @@ class ThemesController extends Controller
         try {
 
             ini_set('display_errors', 0);
+
             $handler = $this['exception']->setHandler(function($exception) {
 
                 while (ob_get_level()) {
@@ -94,20 +96,19 @@ class ThemesController extends Controller
             $theme->boot($this->getApplication());
 
             $this['option']->set('system:theme.site', $theme->getName(), true);
-
             $this['exception']->setHandler($handler);
 
-            $response = ['message' => __('Theme enabled.')];
+            return ['message' => __('Theme enabled.')];
 
         } catch (Exception $e) {
-            $response = ['message' => $e->getMessage(), 'error' => true];
-        }
 
-        $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+        }
     }
 
     /**
      * @Request({"name"})
+     * @Response("json")
      * @Token
      */
     public function uninstallAction($name)
@@ -119,16 +120,14 @@ class ThemesController extends Controller
             }
 
             $this->themes->getInstaller()->uninstall($theme);
-
             $this['system']->clearCache();
 
-            $response = ['message' => __('Theme uninstalled.')];
+            return ['message' => __('Theme uninstalled.')];
 
         } catch (Exception $e) {
-            $response = ['message' => $e->getMessage(), 'error' => true];
-        }
 
-        $this['response']->json($response);
+            return ['message' => $e->getMessage(), 'error' => true];
+        }
     }
 
     /**
@@ -148,6 +147,7 @@ class ThemesController extends Controller
             return $this['view']->render($tmpl, array('theme' => $theme, 'config' => $event->getConfig()));
 
         } catch (Exception $e) {
+
             $this['message']->error($e->getMessage());
         }
 

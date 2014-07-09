@@ -32,7 +32,7 @@ class InstallerController extends Controller
     }
 
     /**
-     * @View("installer/install.razr")
+     * @Response("installer/install.razr")
      */
     public function indexAction()
     {
@@ -69,6 +69,7 @@ class InstallerController extends Controller
 
     /**
      * @Request({"config": "array", "option": "array", "user": "array"})
+     * @Response("json")
      */
     public function installAction($config = array(), $option = array(), $user = array())
     {
@@ -158,8 +159,9 @@ class InstallerController extends Controller
         } catch (\Exception $e) {
 
             $message = $e->getMessage();
+
         }
 
-        return $this['response']->json(compact('status', 'message'));
+        return compact('status', 'message');
     }
 }

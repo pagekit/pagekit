@@ -39,7 +39,7 @@ class WidgetsController extends Controller
         $this->roles   = $this['users']->getRoleRepository();
 
         if (isset($this['theme.site'])) {
-            foreach ($this['theme.site']->getConfig('positions', array()) as $id => $position) {
+            foreach ($this['theme.site']->getConfig('positions', []) as $id => $position) {
                 list($name, $description) = array_merge((array) $position, array(''));
                 $this->positions[$id] = compact('id', 'name', 'description');
             }
@@ -47,37 +47,37 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @View("system/admin/widgets/index.razr")
+     * @Response("system/admin/widgets/index.razr")
      */
     public function indexAction()
     {
-        $this->positions[''] = array('name' => __('Unassigned Widgets'));
+        $this->positions[''] = ['name' => __('Unassigned Widgets')];
 
-        $widgets = array();
+        $widgets = [];
 
         foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
             $position = $widget->getPosition();
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
         }
 
-        return array('head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions);
+        return ['head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions];
     }
 
     /**
      * @Request({"type"})
-     * @View("system/admin/widgets/edit.razr")
+     * @Response("system/admin/widgets/edit.razr")
      */
     public function addAction($type)
     {
         $widget = new Widget;
         $widget->setType($type);
 
-        return array('head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
+        return ['head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
     }
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/widgets/edit.razr")
+     * @Response("system/admin/widgets/edit.razr")
      */
     public function editAction($id)
     {
@@ -87,11 +87,12 @@ class WidgetsController extends Controller
                 throw new Exception(__('Invalid widget id'));
             }
 
-            return array('head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget));
+            return ['head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
         }
+
         return $this->redirect('@system/widgets');
     }
 
@@ -114,7 +115,7 @@ class WidgetsController extends Controller
             }
 
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
-            $data['settings']  = array_merge(array('show_title' => 0), isset($data['settings']) ? $data['settings'] : array());
+            $data['settings']  = array_merge(array('show_title' => 0), isset($data['settings']) ? $data['settings'] : []);
 
             $this->widgets->save($widget, $data);
 
@@ -127,17 +128,16 @@ class WidgetsController extends Controller
         } catch (Exception $e) {
 
             $this['message']->error($e->getMessage());
-
         }
 
-        return $id ? $this->redirect('@system/widgets/edit', compact('id')) : $this->redirect('@system/widgets/add', array('type' => $data['type']));
+        return $id ? $this->redirect('@system/widgets/edit', compact('id')) : $this->redirect('@system/widgets/add', ['type' => $data['type']]);
     }
 
     /**
      * @Request({"ids": "int[]"})
      * @Token
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($widget = $this->widgets->find($id)) {
@@ -155,7 +155,7 @@ class WidgetsController extends Controller
      * @Request({"ids": "int[]"})
      * @Token
      */
-    public function copyAction($ids = array())
+    public function copyAction($ids = [])
     {
         foreach ($ids as $id) {
 
@@ -180,11 +180,11 @@ class WidgetsController extends Controller
      * @Request({"ids": "int[]"})
      * @Token
      */
-    public function enableAction($ids = array())
+    public function enableAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($widget = $this->widgets->find($id) and !$widget->getStatus()) {
-                $this->widgets->save($widget, array('status' => Widget::STATUS_ENABLED));
+                $this->widgets->save($widget, ['status' => Widget::STATUS_ENABLED]);
             }
         }
 
@@ -195,11 +195,11 @@ class WidgetsController extends Controller
      * @Request({"ids": "int[]"})
      * @Token
      */
-    public function disableAction($ids = array())
+    public function disableAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($widget = $this->widgets->find($id) and $widget->getStatus()) {
-                $this->widgets->save($widget, array('status' => Widget::STATUS_DISABLED));
+                $this->widgets->save($widget, ['status' => Widget::STATUS_DISABLED]);
             }
         }
 
@@ -208,9 +208,10 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"position", "order": "array"})
+     * @Response("json")
      * @Token
      */
-    public function reorderAction($position, $order = array())
+    public function reorderAction($position, $order = [])
     {
         $widgets = $this->widgets->findAll();
 
@@ -223,7 +224,7 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this['response']->json(array('message' => __('Widgets updated.')));
+        return ['message' => __('Widgets updated.')];
     }
 
     protected function triggerEditEvent($widget)

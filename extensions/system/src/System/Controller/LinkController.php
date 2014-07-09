@@ -20,45 +20,42 @@ class LinkController extends Controller
 
     /**
      * @Request({"context"})
-     * @View("system/admin/link/link.types.razr", layout=false)
+     * @Response("system/admin/link/link.types.razr", layout=false)
      */
     public function indexAction($context = '')
     {
-        return array('links' => $this->getTypes($context));
+        return ['links' => $this->getTypes($context)];
     }
 
     /**
      * @Request({"link", "context"})
+     * @Response("json")
      */
     public function formAction($url, $context = '')
     {
-        $result = null;
-
         if ($type = $this->matchType($url, $context)) {
 
+            $params = [];
             $link = $this->getLink($url);
 
-            $params = [];
             if ($query = substr(strstr($link, '?'), 1)) {
                 parse_str($query, $params);
                 $link = strstr($link, '?', true);
             }
 
-            $result = array('type' => $type->getId(), 'form' => $type->renderForm($link ?: $url, $params, $context));
+            return ['type' => $type->getId(), 'form' => $type->renderForm($link ?: $url, $params, $context)];
         }
-
-        return $this['response']->json($result);
     }
 
     /**
      * @Request({"link", "context"})
+     * @Response("json")
      */
     public function resolveAction($url, $context = '')
     {
         $result = ['type' => __('Url'), 'url' => $url];
 
         if ($type = $this->matchType($url, $context)) {
-
             try {
 
                 if (!in_array($context, ['frontpage', 'urlalias'])) {
@@ -68,10 +65,9 @@ class LinkController extends Controller
                 $result = ['type' => $type->getLabel(), 'url' => $url];
 
             } catch (\Exception $e) {}
-
         }
 
-        return $this['response']->json($result);
+        return $result;
     }
 
     /**

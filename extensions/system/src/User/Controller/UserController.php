@@ -42,7 +42,7 @@ class UserController extends Controller
 
     /**
      * @Request({"filter": "array"})
-     * @View("system/admin/user/index.razr")
+     * @Response("system/admin/user/index.razr")
      */
     public function indexAction($filter = null)
     {
@@ -101,7 +101,7 @@ class UserController extends Controller
     }
 
     /**
-     * @View("system/admin/user/edit.razr")
+     * @Response("system/admin/user/edit.razr")
      */
     public function addAction()
     {
@@ -115,7 +115,7 @@ class UserController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/user/edit.razr")
+     * @Response("system/admin/user/edit.razr")
      */
     public function editAction($id)
     {
@@ -127,6 +127,7 @@ class UserController extends Controller
 
     /**
      * @Request({"id": "int", "user": "array", "password", "roles": "array"})
+     * @Response("json")
      * @Token
      */
     public function saveAction($id, $data, $password, $roles = null)
@@ -203,13 +204,12 @@ class UserController extends Controller
                 $this->sendWelcomeEmail($user);
             }
 
-            $response = array('message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user));
+            return array('message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user));
 
         } catch (Exception $e) {
-            $response = array('error' => $e->getMessage());
-        }
 
-        return $this['response']->json($response);
+            return array('error' => $e->getMessage());
+        }
     }
 
     /**

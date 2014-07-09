@@ -32,7 +32,7 @@ class UpdateController extends Controller
     }
 
     /**
-     * @View("system/admin/settings/update.razr")
+     * @Response("system/admin/settings/update.razr")
      */
     public function indexAction()
     {
@@ -41,6 +41,7 @@ class UpdateController extends Controller
 
     /**
      * @Request({"update": "json"})
+     * @Response("json")
      */
     public function downloadAction($update = null)
     {
@@ -76,9 +77,12 @@ class UpdateController extends Controller
             $response = array('error' => $e->getMessage());
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
+    /**
+     * @Response("json")
+     */
     public function copyAction()
     {
         try {
@@ -101,12 +105,14 @@ class UpdateController extends Controller
         } catch (\Exception $e) {
 
             $response = array('error' => $e->getMessage());
-
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 
+    /**
+     * @Response("json")
+     */
     public function databaseAction()
     {
         try {
@@ -123,9 +129,8 @@ class UpdateController extends Controller
         } catch (\Exception $e) {
 
             $response = array('error' => $e->getMessage());
-
         }
 
-        return $this['response']->json($response);
+        return $response;
     }
 }

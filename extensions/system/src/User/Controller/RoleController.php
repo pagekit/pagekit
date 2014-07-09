@@ -27,7 +27,7 @@ class RoleController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @View("system/admin/user/role.razr")
+     * @Response("system/admin/user/role.razr")
      */
     public function indexAction($id = null)
     {
@@ -83,11 +83,12 @@ class RoleController extends Controller
 
     /**
      * @Request({"order": "array"})
+     * @Response("json")
      * @Token
      */
-    public function priorityAction($order) {
-
-        foreach($order as $id => $priority) {
+    public function priorityAction($order)
+    {
+        foreach ($order as $id => $priority) {
 
             $role = $this->roles->find($id);
 
@@ -96,6 +97,6 @@ class RoleController extends Controller
             }
         }
 
-        return $this['response']->json($order);
+        return $order;
     }
 }
