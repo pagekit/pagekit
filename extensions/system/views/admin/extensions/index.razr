@@ -1,5 +1,5 @@
 @style('system', 'system/css/system.css')
-@script('extensions', 'system/js/settings/extensions.js', 'requirejs')
+@script('packages', 'system/js/settings/packages.js', 'requirejs')
 @script('updates', 'system/js/settings/updates.js', 'marketplace')
 @script('marketplace', 'system/js/settings/marketplace.js', 'requirejs')
 

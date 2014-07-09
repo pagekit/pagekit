@@ -1,0 +1,33 @@
+@foreach ($packages as $name => $package)
+<div>
+    <div class="uk-panel uk-panel-box">
+        <div class="uk-panel-teaser">
+            <img src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@($package.title)">
+        </div>
+        <div class="pk-themes-position">
+            <h2 class="uk-panel-title uk-margin-remove">
+                @($package.title)
+                @if ($current == $package)
+                <span class="uk-badge">@trans('Active')</span>
+                @endif
+            </h2>
+            <ul class="uk-subnav uk-subnav-line uk-margin-remove uk-text-nowrap">
+                <li><span>@($package.version)</span></li>
+                <li><a href="">@trans('Details')</a></li>
+            </ul>
+            @if ($current == $package)
+            @if ($app.themes.get($name).getConfig('settings.system'))
+            <div class="pk-themes-action">
+                <a class="uk-button" href="@url('@system/themes/settings', ['name' => $name])">@trans('Settings')</a>
+            </div>
+            @endif
+            @else
+            <div class="pk-themes-action">
+                <a href="#" class="uk-button uk-button-primary" data-action="@url('@system/themes/enable', ['name' => $name])">@trans('Enable')</a>
+                <a href="#" class="uk-button pk-button-danger " data-action="@url('@system/themes/uninstall', ['name' => $name])">@trans('Delete')</a>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+@endforeach

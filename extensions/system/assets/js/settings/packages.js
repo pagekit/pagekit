@@ -1,6 +1,6 @@
 require(['jquery', 'uikit', 'system', 'domReady!'], function($, uikit, system) {
 
-    var page = $('#js-extensions'), view = $('.js-installed', page);
+    var page = $('#js-extensions, #js-themes'), view = $('.js-installed', page);
 
     // install update
     view.on('click', '[data-action]', function(e) {

@@ -28,7 +28,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @View("system/admin/settings/themes.razr")
+     * @View("system/admin/themes/index.razr")
      */
     public function indexAction()
     {
@@ -58,6 +58,12 @@ class ThemesController extends Controller
             return strcmp($themeA->getName(), $themeB->getName());
         });
 
+        if ($this['request']->isXmlHttpRequest()) {
+            return $this['response']->json(array(
+                'table' => $this['view']->render('view://system/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
+            ));
+        }
+
         return array('head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
     }
 
@@ -69,19 +75,35 @@ class ThemesController extends Controller
     {
         try {
 
+            ini_set('display_errors', 0);
+            $handler = $this['exception']->setHandler(function($exception) {
+
+                while (ob_get_level()) {
+                    ob_get_clean();
+                }
+
+                $this['response']->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
+            });
+
             $this->themes->load($name);
 
             if (!$theme = $this->themes->get($name)) {
                 throw new Exception(__('Unable to enable theme "%name%".', array('%name%' => $name)));
             }
 
+            $theme->boot($this->getApplication());
+
             $this['option']->set('system:theme.site', $theme->getName(), true);
 
+            $this['exception']->setHandler($handler);
+
+            $response = ['message' => __('Theme enabled.')];
+
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            $response = ['message' => $e->getMessage(), 'error' => true];
         }
 
-        return $this->redirect('@system/themes');
+        $this['response']->json($response);
     }
 
     /**
@@ -98,13 +120,15 @@ class ThemesController extends Controller
 
             $this->themes->getInstaller()->uninstall($theme);
 
+            $this['system']->clearCache();
+
+            $response = ['message' => __('Theme uninstalled.')];
+
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            $response = ['message' => $e->getMessage(), 'error' => true];
         }
 
-        $this['system']->clearCache();
-
-        return $this->redirect('@system/themes');
+        $this['response']->json($response);
     }
 
     /**
