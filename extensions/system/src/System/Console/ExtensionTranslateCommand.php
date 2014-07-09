@@ -244,7 +244,7 @@ EOD;
 
             foreach ($this->visitors as $name => $visitor) {
                 if ($visitor->getEngine()->supports($file)) {
-                    $files[$name][] = $visitor->loadTemplate($file);
+                    $files[$name][] = $file;
                     break;
                 }
             }
@@ -302,21 +302,21 @@ abstract class NodeVisitor
     }
 
     /**
-     * @param  string $name
-     * @return string
-     */
-    public function loadTemplate($name)
-    {
-        return $name;
-    }
-
-    /**
      * Starts traversing an array of files.
      *
      * @param  array $files
      * @return array
      */
     abstract public function traverse(array $files);
+
+    /**
+     * @param  string $name
+     * @return string
+     */
+    protected function loadTemplate($name)
+    {
+        return $this->file = $name;
+    }
 }
 
 class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
@@ -334,7 +334,7 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
 
             try {
 
-                $traverser->traverse($parser->parse(file_get_contents($this->file = $file)));
+                $traverser->traverse($parser->parse(file_get_contents($this->loadTemplate($file))));
 
             } catch (\Exception $e) {}
         }
@@ -369,6 +369,7 @@ class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
      */
     public function loadTemplate($name)
     {
+        $this->file = $name;
         return $this->engine->loadTemplate($name);
     }
 }
