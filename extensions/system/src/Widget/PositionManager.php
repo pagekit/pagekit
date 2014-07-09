@@ -2,12 +2,8 @@
 
 namespace Pagekit\Widget;
 
-use Pagekit\Component\View\View;
-use Pagekit\Component\View\ViewInterface;
-use Pagekit\Widget\Event\RegisterRendererEvent;
 use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
 use Pagekit\Widget\PositionRenderer\PositionRendererInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class PositionManager implements \ArrayAccess, \IteratorAggregate
 {

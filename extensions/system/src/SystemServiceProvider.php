@@ -5,7 +5,6 @@ namespace Pagekit;
 use Pagekit\Component\File\Exception\InvalidArgumentException;
 use Pagekit\Component\Package\Installer\PackageInstaller;
 use Pagekit\Component\View\Event\ActionEvent;
-use Pagekit\Component\View\View;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;

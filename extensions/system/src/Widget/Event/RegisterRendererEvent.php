@@ -2,7 +2,6 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Component\View\View;
 use Pagekit\Component\View\ViewInterface;
 use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\PositionRenderer\CallbackPositionRenderer;
