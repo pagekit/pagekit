@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
+require(['jquery', 'uikit', 'system', 'domReady!'], function($, uikit, system) {
 
     var page = $('#js-extensions'), view = $('.js-installed', page);
 
@@ -7,9 +7,9 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
         e.preventDefault();
 
         $(this).html('<i class="uk-icon-spinner uk-icon-spin"></i>');
-        $.getJSON($(this).data('action'), function(data) {
+        $.post($(this).data('action'), system.csrf.params, function(data) {
             uikit.notify(data.message, data.error ? 'danger' : 'success');
-        }).always(function() {
+        }, 'json').always(function() {
             refreshTable();
         });
 

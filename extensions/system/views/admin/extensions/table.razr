@@ -34,13 +34,13 @@
             </td>
             <td class="uk-text-center">
                 @if ($extension)
-                <a href="#" class="uk-button uk-button-success" data-action="@url('@system/extensions/disable', ['name' => $name, '_csrf' => $app.csrf.generate])">@trans('Enabled')</a>
+                <a href="#" class="uk-button uk-button-success" data-action="@url('@system/extensions/disable', ['name' => $name])">@trans('Enabled')</a>
                 @else
-                <a href="#" class="uk-button" data-action="@url('@system/extensions/enable', ['name' => $name, '_csrf' => $app.csrf.generate])">@trans('Disabled')</a>
+                <a href="#" class="uk-button" data-action="@url('@system/extensions/enable', ['name' => $name])">@trans('Disabled')</a>
                 @endif
             </td>
             <td>
-                <a href="#" class="uk-button pk-button-danger uk-invisible" data-action="@url('@system/extensions/uninstall', ['name' => $name, '_csrf' => $app.csrf.generate])">@trans('Delete')</a>
+                <a href="#" class="uk-button pk-button-danger uk-invisible" data-action="@url('@system/extensions/uninstall', ['name' => $name])">@trans('Delete')</a>
             </td>
         </tr>
         @endforeach
