@@ -32,21 +32,21 @@ class DefaultController extends Controller
      */
     public function indexAction($id = 0)
     {
-        if (!$page = $this->pages->where(compact('id'))->where(array('status' => Page::STATUS_PUBLISHED))->first()) {
+        if (!$page = $this->pages->where(compact('id'))->where(['status' => Page::STATUS_PUBLISHED])->first()) {
             throw new NotFoundHttpException(__('Page not found!'));
         }
 
         if (!$page->hasAccess($this['user'])) {
 
             if (!$this['user']->isAuthenticated()) {
-                return $this->redirect('@system/auth/login', array('redirect' => $this['url']->current()));
+                return $this->redirect('@system/auth/login', ['redirect' => $this['url']->current()]);
             }
 
             throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
-        $page->setContent($this['content']->applyPlugins($page->getContent(), array('page' => $page, 'markdown' => $page->get('markdown'))));
+        $page->setContent($this['content']->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
 
-        return array('head.title' => __($page->getTitle()), 'page' => $page);
+        return ['head.title' => __($page->getTitle()), 'page' => $page];
     }
 }

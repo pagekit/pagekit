@@ -83,18 +83,18 @@ class Page
         $this->status = $status;
     }
 
-    public static function getStatuses()
-    {
-        return array(
-            self::STATUS_UNPUBLISHED => __('Unpublished'),
-            self::STATUS_PUBLISHED   => __('Published')
-        );
-    }
-
     public function getStatusText()
     {
         $statuses = self::getStatuses();
 
         return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
+    }
+
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_UNPUBLISHED => __('Unpublished'),
+            self::STATUS_PUBLISHED   => __('Published')
+        ];
     }
 }

@@ -43,18 +43,18 @@ class PageController extends Controller
         if ($filter) {
             $this['session']->set('page.filter', $filter);
         } else {
-            $filter = $this['session']->get('page.filter', array());
+            $filter = $this['session']->get('page.filter', []);
         }
 
         $query = $this->pages->query();
 
         if (isset($filter['status']) && is_numeric($filter['status'])) {
-            $query->where(array('status' => intval($filter['status'])));
+            $query->where(['status' => intval($filter['status'])]);
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
             $query->where(function($query) use ($filter) {
-                $query->orWhere('title LIKE :search', array('search' => "%{$filter['search']}%"));
+                $query->orWhere('title LIKE :search', ['search' => "%{$filter['search']}%"]);
             });
         }
 
@@ -66,13 +66,13 @@ class PageController extends Controller
         $query->offset($page * $limit)->limit($limit)->orderBy('title');
 
         if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json(array(
-                'table' => $this['view']->render('view://page/admin/pages/table.razr', array('count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll())),
+            return $this['response']->json([
+                'table' => $this['view']->render('view://page/admin/pages/table.razr', ['count' => $count, 'pages' => $query->get(), 'roles' => $this->roles->findAll()]),
                 'total' => $total
-            ));
+            ]);
         }
 
-        return array('head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count);
+        return ['head.title' => __('Pages'), 'pages' => $query->get(), 'statuses' => Page::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count];
     }
 
     /**
@@ -80,7 +80,7 @@ class PageController extends Controller
      */
     public function addAction()
     {
-        return array('head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll());
+        return ['head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll()];
     }
 
     /**
@@ -102,7 +102,7 @@ class PageController extends Controller
             return $this->redirect('@page/page');
         }
 
-        return array('head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll());
+        return ['head.title' => __('Edit Page'), 'page' => $page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll()];
     }
 
     /**
@@ -117,14 +117,14 @@ class PageController extends Controller
                 $page = new Page;
             }
 
-            $data['data'] = array_merge(array('title' => 0, 'markdown' => 0), isset($data['data']) ? $data['data'] : array());
+            $data['data'] = array_merge(['title' => 0, 'markdown' => 0], isset($data['data']) ? $data['data'] : []);
 
             $this->pages->save($page, $data);
 
-            $response = array('message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId());
+            $response = ['message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId()];
 
         } catch (Exception $e) {
-            $response = array('message' => $e->getMessage(), 'error' => true);
+            $response = ['message' => $e->getMessage(), 'error' => true];
         }
 
         return $this['response']->json($response);
@@ -135,7 +135,7 @@ class PageController extends Controller
      * @Response("json")
      * @Token
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($page = $this->pages->find($id)) {
@@ -143,7 +143,7 @@ class PageController extends Controller
             }
         }
 
-        return array('message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids)));
+        return ['message' => _c('{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted.', count($ids))];
     }
 
     /**
@@ -151,7 +151,7 @@ class PageController extends Controller
      * @Response("json")
      * @Token
      */
-    public function copyAction($ids = array())
+    public function copyAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($page = $this->pages->find((int) $id)) {
@@ -160,13 +160,13 @@ class PageController extends Controller
                 $page->setId(null);
                 $page->setUrl('');
                 $page->setStatus(Page::STATUS_UNPUBLISHED);
-                $page->setTitle(__('%title% (Copy)', array('%title%' => $page->getTitle())));
+                $page->setTitle(__('%title% (Copy)', ['%title%' => $page->getTitle()]));
 
                 $this->pages->save($page);
             }
         }
 
-        return array('message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids)));
+        return ['message' => _c('{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied.', count($ids))];
     }
 
     /**
@@ -174,7 +174,7 @@ class PageController extends Controller
      * @Response("json")
      * @Token
      */
-    public function statusAction($status, $ids = array())
+    public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
             if ($page = $this->pages->find($id) and $page->getStatus() != $status) {

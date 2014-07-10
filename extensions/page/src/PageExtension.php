@@ -24,7 +24,7 @@ class PageExtension extends Extension
         });
 
         $app->on('system.locale', function(LocaleEvent $event) {
-            $event->addMessages(array('page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')));
+            $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
         });
     }
 

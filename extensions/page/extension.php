@@ -1,45 +1,45 @@
 <?php
 
-return array(
+return [
 
     'main' => 'Pagekit\\Page\\PageExtension',
 
-    'autoload' => array(
+    'autoload' => [
 
         'Pagekit\\Page\\' => 'src'
 
-    ),
+    ],
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view'  => 'views',
             'asset' => 'assets'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'menu' => array(
+    'menu' => [
 
-        'page' => array(
+        'page' => [
             'label'    => 'Pages',
             'icon'     => 'extension://page/extension.svg',
             'url'      => '@page/page',
             'active'   => '@page/page*',
             'access'   => 'page: manage pages',
             'priority' => 0
-        )
+        ]
 
-    ),
+    ],
 
-    'permissions' => array(
+    'permissions' => [
 
-        'page: manage pages' => array(
+        'page: manage pages' => [
             'title' => 'Manage pages'
-        )
+        ]
 
-    )
+    ]
 
-);
+];

@@ -14,7 +14,7 @@ class AliasListener extends EventSubscriber
     public function onSystemInit()
     {
         $router = $this['router'];
-        $aliases = $this['cache.phpfile']->fetch('page.aliases') ?: array();
+        $aliases = $this['cache.phpfile']->fetch('page.aliases') ?: [];
 
         if (!$aliases) {
 
@@ -49,10 +49,10 @@ class AliasListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.init'          => 'onSystemInit',
             'page.page.postSave'   => 'clearCache',
             'page.page.postDelete' => 'clearCache'
-        );
+        ];
     }
 }
