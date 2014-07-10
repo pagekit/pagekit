@@ -116,9 +116,8 @@ class CommentController extends Controller
     }
 
     /**
-     * @Request({"comment": "array", "id": "int"})
+     * @Request({"comment": "array", "id": "int"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function saveAction($data, $id = 0)
     {
@@ -154,9 +153,8 @@ class CommentController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
+     * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -170,9 +168,8 @@ class CommentController extends Controller
     }
 
     /**
-     * @Request({"status": "int", "ids": "int[]"})
+     * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function statusAction($status, $ids = array())
     {

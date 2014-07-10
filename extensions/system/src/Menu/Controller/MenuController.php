@@ -48,8 +48,7 @@ class MenuController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "name"})
-     * @Token
+     * @Request({"id": "int", "name"}, csrf=true)
      */
     public function saveAction($id, $name)
     {
@@ -77,8 +76,7 @@ class MenuController extends Controller
     }
 
     /**
-     * @Request({"id": "int"})
-     * @Token
+     * @Request({"id": "int"}, csrf=true)
      */
     public function deleteAction($id)
     {
@@ -100,9 +98,8 @@ class MenuController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "order": "array"})
+     * @Request({"id": "int", "order": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function reorderAction($id, $order = array())
     {

@@ -34,9 +34,8 @@ class PackageController extends Controller
     }
 
     /**
-     * @Request({"type"})
+     * @Request({"type"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function uploadAction($type = null)
     {
@@ -90,9 +89,8 @@ class PackageController extends Controller
     }
 
     /**
-     * @Request({"package": "json", "path": "alnum"})
+     * @Request({"package": "json", "path": "alnum"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function installAction($package = null, $path = '')
     {

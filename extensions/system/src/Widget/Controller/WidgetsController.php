@@ -97,8 +97,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "widget": "array"})
-     * @Token
+     * @Request({"id": "int", "widget": "array"}, csrf=true)
      */
     public function saveAction($id, $data)
     {
@@ -134,8 +133,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function deleteAction($ids = [])
     {
@@ -152,8 +150,7 @@ class WidgetsController extends Controller
 
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function copyAction($ids = [])
     {
@@ -177,8 +174,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function enableAction($ids = [])
     {
@@ -192,8 +188,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function disableAction($ids = [])
     {
@@ -207,9 +202,8 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Request({"position", "order": "array"})
+     * @Request({"position", "order": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function reorderAction($position, $order = [])
     {

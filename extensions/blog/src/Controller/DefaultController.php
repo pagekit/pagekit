@@ -59,8 +59,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/comment")
-     * @Request({"thread_id": "int", "comment": "array"})
-     * @Token
+     * @Request({"thread_id": "int", "comment": "array"}, csrf=true)
      */
     public function commentAction($threadId, $data)
     {

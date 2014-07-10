@@ -126,9 +126,8 @@ class UserController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "user": "array", "password", "roles": "array"})
+     * @Request({"id": "int", "user": "array", "password", "roles": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function saveAction($id, $data, $password, $roles = null)
     {
@@ -213,8 +212,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function deleteAction($ids = array())
     {
@@ -236,8 +234,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Request({"status": "int", "ids": "int[]"})
-     * @Token
+     * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      */
     public function statusAction($status, $ids = array())
     {

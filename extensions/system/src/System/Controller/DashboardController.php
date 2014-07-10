@@ -121,8 +121,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Request({"id", "widget": "array"})
-     * @Token
+     * @Request({"id", "widget": "array"}, csrf=true)
      */
     public function saveAction($id = 0, $widget = [])
     {
@@ -146,8 +145,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Request({"ids": "array"})
-     * @Token
+     * @Request({"ids": "array"}, csrf=true)
      */
     public function deleteAction($ids = [])
     {
@@ -165,9 +163,8 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Request({"order": "array"})
+     * @Request({"order": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function reorderAction($order = [])
     {

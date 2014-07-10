@@ -86,8 +86,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "item": "array", "menu": "int"})
-     * @Token
+     * @Request({"id": "int", "item": "array", "menu": "int"}, csrf=true)
      */
     public function saveAction($id, $data, $menuId = null)
     {
@@ -124,8 +123,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Request({"menu": "int", "id": "int[]"})
-     * @Token
+     * @Request({"menu": "int", "id": "int[]"}, csrf=true)
      */
     public function deleteAction($menuId, $ids = array())
     {
@@ -153,8 +151,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Request({"status": "int", "menu": "int", "id": "int[]"})
-     * @Token
+     * @Request({"status": "int", "menu": "int", "id": "int[]"}, csrf=true)
      */
     public function statusAction($status, $menuId, $ids = array())
     {

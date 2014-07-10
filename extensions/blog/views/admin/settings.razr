@@ -115,6 +115,6 @@
 
     <input type="hidden" name="tab" value="0">
 
-    @token()
+    @token
 
 </form>

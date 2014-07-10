@@ -45,8 +45,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Request({"user": "array"})
-     * @Token
+     * @Request({"user": "array"}, csrf=true)
      */
     public function saveAction($data)
     {

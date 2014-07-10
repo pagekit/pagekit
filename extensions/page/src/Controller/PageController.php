@@ -106,8 +106,7 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "page": "array"})
-     * @Token
+     * @Request({"id": "int", "page": "array"}, csrf=true)
      */
     public function saveAction($id, $data)
     {
@@ -131,9 +130,8 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
+     * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function deleteAction($ids = [])
     {
@@ -147,9 +145,8 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
+     * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function copyAction($ids = [])
     {
@@ -170,9 +167,8 @@ class PageController extends Controller
     }
 
     /**
-     * @Request({"status": "int", "ids": "int[]"})
+     * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function statusAction($status, $ids = [])
     {

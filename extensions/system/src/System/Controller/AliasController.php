@@ -75,8 +75,7 @@ class AliasController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "alias", "source"})
-     * @Token
+     * @Request({"id": "int", "alias", "source"}, csrf=true)
      */
     public function saveAction($id, $alias, $source)
     {
@@ -110,8 +109,7 @@ class AliasController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
-     * @Token
+     * @Request({"ids": "int[]"}, csrf=true)
      */
     public function deleteAction($ids = array())
     {

@@ -18,7 +18,7 @@ class MigrationController extends Controller
     }
 
     /**
-     * @Token
+     * @Request(csrf=true)
      */
     public function migrateAction()
     {

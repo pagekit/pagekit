@@ -53,9 +53,8 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function enableAction($name)
     {
@@ -101,9 +100,8 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function disableAction($name)
     {
@@ -131,9 +129,8 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function uninstallAction($name)
     {

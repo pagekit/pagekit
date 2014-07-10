@@ -68,9 +68,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function enableAction($name)
     {
@@ -107,9 +106,8 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function uninstallAction($name)
     {

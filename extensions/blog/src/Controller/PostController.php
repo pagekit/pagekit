@@ -127,9 +127,8 @@ class PostController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "post": "array"})
+     * @Request({"id": "int", "post": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function saveAction($id, $data)
     {
@@ -160,9 +159,8 @@ class PostController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
+     * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function deleteAction($ids = array())
     {
@@ -176,9 +174,8 @@ class PostController extends Controller
     }
 
     /**
-     * @Request({"ids": "int[]"})
+     * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function copyAction($ids = array())
     {
@@ -199,9 +196,8 @@ class PostController extends Controller
     }
 
     /**
-     * @Request({"status": "int", "ids": "int[]"})
+     * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function statusAction($status, $ids = array())
     {

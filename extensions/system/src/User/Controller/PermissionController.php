@@ -35,9 +35,8 @@ class PermissionController extends Controller
     }
 
     /**
-     * @Request({"permissions": "array"})
+     * @Request({"permissions": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function saveAction($permissions = array())
     {

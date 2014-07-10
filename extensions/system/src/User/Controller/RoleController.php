@@ -48,9 +48,8 @@ class RoleController extends Controller
     }
 
     /**
-     * @Request({"id": "int", "name", "permissions": "array"})
+     * @Request({"id": "int", "name", "permissions": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function saveAction($id, $name = '', $permissions = array())
     {
@@ -70,8 +69,7 @@ class RoleController extends Controller
     }
 
     /**
-     * @Request({"id": "int"})
-     * @Token
+     * @Request({"id": "int"}, csrf=true)
      */
     public function deleteAction($id = 0)
     {
@@ -83,9 +81,8 @@ class RoleController extends Controller
     }
 
     /**
-     * @Request({"order": "array"})
+     * @Request({"order": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function priorityAction($order)
     {

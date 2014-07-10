@@ -135,10 +135,9 @@ class SystemController extends Controller
 
     /**
      * @Route("/system/clearcache")
-     * @Request({"caches": "array"})
+     * @Request({"caches": "array"}, csrf=true)
      * @Response("json")
      * @Access(admin=true)
-     * @Token
      */
     public function clearCacheAction($caches)
     {

@@ -71,8 +71,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Request({"config": "array", "option": "array", "tab": "int"})
-     * @Token
+     * @Request({"config": "array", "option": "array", "tab": "int"}, csrf=true)
      */
     public function saveAction($data, $option, $tab = 0)
     {
@@ -108,9 +107,8 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Request({"option": "array"})
+     * @Request({"option": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function testSmtpConnectionAction($option = array())
     {
@@ -137,9 +135,8 @@ class SettingsController extends Controller
     /**
      * Note: If the mailer is accessed prior to this controller action, this will possibly test the wrong mailer
      *
-     * @Request({"option": "array"})
+     * @Request({"option": "array"}, csrf=true)
      * @Response("json")
-     * @Token
      */
     public function testSendEmailAction($option = array())
     {
