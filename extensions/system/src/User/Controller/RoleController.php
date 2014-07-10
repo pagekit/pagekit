@@ -49,6 +49,7 @@ class RoleController extends Controller
 
     /**
      * @Request({"id": "int", "name", "permissions": "array"})
+     * @Response("json")
      * @Token
      */
     public function saveAction($id, $name = '', $permissions = array())
@@ -65,7 +66,7 @@ class RoleController extends Controller
         $role->setPermissions($permissions);
         $this->roles->save($role);
 
-        return  $this['request']->isXmlHttpRequest() ? $this['response']->json(array('message' =>__('Roles saved!'))) : $this->redirect('@system/role', array('id' => isset($role) ? $role->getId() : 0));
+        return  $this['request']->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', array('id' => isset($role) ? $role->getId() : 0));
     }
 
     /**

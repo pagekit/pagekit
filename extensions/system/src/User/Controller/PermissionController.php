@@ -36,6 +36,7 @@ class PermissionController extends Controller
 
     /**
      * @Request({"permissions": "array"})
+     * @Response("json")
      * @Token
      */
     public function saveAction($permissions = array())
@@ -45,6 +46,6 @@ class PermissionController extends Controller
             $this->roles->save($role);
         }
 
-        return $this['request']->isXmlHttpRequest() ? $this['response']->json(array('message' => __('Permissions saved!'))) : $this->redirect('@system/permission');
+        return $this['request']->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');
     }
 }

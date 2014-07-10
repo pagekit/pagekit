@@ -48,6 +48,7 @@ class RegistrationController extends Controller
 
     /**
      * @Request({"user": "array"})
+     * @Response("json")
      */
     public function registerAction($data)
     {
@@ -166,7 +167,7 @@ class RegistrationController extends Controller
 
         }
 
-        return $this['request']->isXmlHttpRequest() ? $this['response']->json($response) : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
+        return $this['request']->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
     }
 
     /**
