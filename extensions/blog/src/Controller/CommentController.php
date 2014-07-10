@@ -68,20 +68,23 @@ class CommentController extends Controller
             });
         }
 
-        $limit = self::COMMENTS_PER_PAGE;
-        $count = $query->count();
-        $total = ceil($count / $limit);
-        $page  = max(0, min($total - 1, $page));
-
+        $limit    = self::COMMENTS_PER_PAGE;
+        $count    = $query->count();
+        $total    = ceil($count / $limit);
+        $page     = max(0, min($total - 1, $page));
         $comments = $query->offset($page * $limit)->limit($limit)->orderBy('created', 'DESC')->get();
 
-        $pending = $this['db']->createQueryBuilder()
-            ->from('@blog_comment')
-            ->where(['status' => CommentInterface::STATUS_PENDING])
-            ->whereIn('thread_id', array_unique(array_map(function($comment) { return $comment->getThreadId(); }, $comments)))
-            ->groupBy('thread_id')
-            ->execute('thread_id, count(id)')
-            ->fetchAll(\PDO::FETCH_KEY_PAIR);
+        if ($comments) {
+            $pending = $this['db']->createQueryBuilder()
+                ->from('@blog_comment')
+                ->where(['status' => CommentInterface::STATUS_PENDING])
+                ->whereIn('thread_id', array_unique(array_map(function($comment) { return $comment->getThreadId(); }, $comments)))
+                ->groupBy('thread_id')
+                ->execute('thread_id, count(id)')
+                ->fetchAll(\PDO::FETCH_KEY_PAIR);
+        } else {
+            $pending = array();
+        }
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json(array(

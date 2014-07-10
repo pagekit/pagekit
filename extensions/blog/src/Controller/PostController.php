@@ -69,15 +69,19 @@ class PostController extends Controller
         $count = $query->count();
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
-
         $posts = $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC')->get();
-        $pending = $this['db']->createQueryBuilder()
-            ->from('@blog_comment')
-            ->where(['status' => CommentInterface::STATUS_PENDING])
-            ->whereIn('thread_id', array_keys($posts))
-            ->groupBy('thread_id')
-            ->execute('thread_id, count(id)')
-            ->fetchAll(\PDO::FETCH_KEY_PAIR);
+
+        if ($posts) {
+            $pending = $this['db']->createQueryBuilder()
+                ->from('@blog_comment')
+                ->where(['status' => CommentInterface::STATUS_PENDING])
+                ->whereIn('thread_id', array_keys($posts))
+                ->groupBy('thread_id')
+                ->execute('thread_id, count(id)')
+                ->fetchAll(\PDO::FETCH_KEY_PAIR);
+        } else {
+            $pending = array();
+        }
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json(array(
