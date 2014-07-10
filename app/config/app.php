@@ -4,7 +4,7 @@ return array(
 
     'app' => array(
 
-        'version' => '0.8.1',
+        'version' => '0.8.2',
 
         'debug' => true,
 
