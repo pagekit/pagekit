@@ -14,6 +14,12 @@ Download the [latest release](http://www.pagekit.com/download) and extract the a
 Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
 
+## Nginx
+```
+location / {
+    try_files $uri $uri/ /index.php?$args;
+}
+```
 
 ## Developers
 
