@@ -1,25 +1,25 @@
 <?php
 
-return array(
+return [
 
     'main' => 'Pagekit\\Installer\\InstallerExtension',
 
-    'autoload' => array(
+    'autoload' => [
 
         'Pagekit\\' => '../system/src',
         'Pagekit\\Installer\\' => 'src'
 
-    ),
+    ],
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view'  => 'views',
             'asset' => 'assets'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/Controller/*Controller.php'
 
-);
+];

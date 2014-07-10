@@ -36,13 +36,13 @@ class InstallerController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Pagekit Installer'), 'config' => (int) $this->config);
+        return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config];
     }
 
     /**
      * @Request({"config": "array"})
      */
-    public function checkAction($config = array(), $response = true)
+    public function checkAction($config = [], $response = true)
     {
         try {
 
@@ -64,21 +64,21 @@ class InstallerController extends Controller
 
         }
 
-        return $response ? $this['response']->json(compact('status', 'message')) : $status;
+        return $response ? $this['response']->json(['status' => $status, 'message' => $message]) : $status;
     }
 
     /**
      * @Request({"config": "array", "option": "array", "user": "array"})
      * @Response("json")
      */
-    public function installAction($config = array(), $option = array(), $user = array())
+    public function installAction($config = [], $option = [], $user = [])
     {
         $status  = $this->checkAction($config, false);
         $message = '';
 
         try {
 
-            foreach (array('blog', 'page', 'system') as $extension) {
+            foreach (['blog', 'page', 'system'] as $extension) {
                 $this['extensions']->load($extension);
             }
 
@@ -93,27 +93,28 @@ class InstallerController extends Controller
             } else {
 
                 $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
+                $this['option']->set('system:extensions', ['blog', 'page']);
 
-                $this['db']->insert('@system_user', array(
+                $this['db']->insert('@system_user', [
                     'name' => $user['username'],
                     'username' => $user['username'],
                     'password' => $this['auth.password']->hash($user['password']),
                     'status' => 1,
                     'email' => $user['email'],
                     'registered' => new \DateTime
-                ), array('string', 'string', 'string', 'string', 'string', 'datetime'));
+                ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
 
                 $id = $this['db']->lastInsertId();
 
-                $this['db']->insert('@system_user_role', array(
+                $this['db']->insert('@system_user_role', [
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_AUTHENTICATED
-                ));
+                ]);
 
-                $this['db']->insert('@system_user_role', array(
+                $this['db']->insert('@system_user_role', [
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_ADMINISTRATOR
-                ));
+                ]);
 
                 $this['extensions']->get('system')->enable();
 
@@ -154,7 +155,7 @@ class InstallerController extends Controller
         } catch (DBALException $e) {
 
             $status  = 'db-sql-failed';
-            $message = __('Database error: %error%', array('%error%' => $e->getMessage()));
+            $message = __('Database error: %error%', ['%error%' => $e->getMessage()]);
 
         } catch (\Exception $e) {
 
@@ -162,6 +163,6 @@ class InstallerController extends Controller
 
         }
 
-        return compact('status', 'message');
+        return ['status' => $status, 'message' => $message];
     }
 }
