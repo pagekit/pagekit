@@ -26,7 +26,7 @@ define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.d
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
-        $.post(params.url, $.extend({package: JSON.stringify(packages[name].version)}, system.csrf.params), function(data) {
+        $.post(params.url, $.extend({'package': JSON.stringify(packages[name].version)}, system.csrf.params), function(data) {
 
             if (data.message) {
                 packages[name].installed = true;
