@@ -18,12 +18,12 @@ class HelloListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
              // call onBoot in case of hello.boot event
             'hello.boot' => 'onBoot',
 
             // use any name and add a priority int if desired
-            'hello.anyEvent' => array('anyName', 10)
-        );
+            'hello.anyEvent' => ['anyName', 10]
+        ];
     }
 }

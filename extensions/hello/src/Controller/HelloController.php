@@ -15,6 +15,6 @@ class HelloController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Hello'));
+        return ['head.title' => __('Hello')];
     }
 }

@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => 'Hello World');
+        return ['head.title' => 'Hello World'];
     }
 
     /**
@@ -25,7 +25,7 @@ class DefaultController extends Controller
     public function greetAction($name = 'World')
     {
         $names = explode(',', $name);
-        return array('head.title' => __('Hello %name%', array('%name%' => $names[0])), 'names' => $names);
+        return ['head.title' => __('Hello %name%', ['%name%' => $names[0]]), 'names' => $names];
     }
 
     /**
@@ -34,24 +34,24 @@ class DefaultController extends Controller
      */
     public function viewAction($id=1)
     {
-        return array('head.title' => __('View article'), 'id' => $id);
+        return ['head.title' => __('View article'), 'id' => $id];
     }
 
     public function anotherViewAction()
     {
         $view = 'hello/view.razr';
-        $data = array('head.title' => __('View article'), 'id' => 1);
+        $data = ['head.title' => __('View article'), 'id' => 1];
         return $this['view']->render($view, $data);
     }
 
     public function redirectAction()
     {
-        return $this['response']->redirect('@hello/greet/name', array('name' => 'Someone'));
+        return $this['response']->redirect('@hello/greet/name', ['name' => 'Someone']);
     }
 
     public function jsonAction()
     {
-        $data = array('error' => true, 'message' => 'There is nothing here. Move along.');
+        $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
         return $this['response']->json($data);
     }
 

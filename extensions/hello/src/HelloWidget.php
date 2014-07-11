@@ -34,7 +34,7 @@ class HelloWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
         return $this['view']->render('hello/widget.razr');
     }

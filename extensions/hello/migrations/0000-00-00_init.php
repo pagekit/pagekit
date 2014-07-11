@@ -8,9 +8,9 @@ return [
 
         if ($util->tableExists('@hello_greetings') === false) {
             $util->createTable('@hello_greetings', function($table) {
-                $table->addColumn('id', 'integer', array('unsigned' => true, 'length' => 10, 'autoincrement' => true));
-                $table->addColumn('name', 'string', array('length' => 255, 'default' => ''));
-                $table->setPrimaryKey(array('id'));
+                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+                $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
+                $table->setPrimaryKey(['id']);
             });
         }
     }

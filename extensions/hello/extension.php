@@ -1,42 +1,42 @@
 <?php
 
-return array(
+return [
 
     'main' => 'Pagekit\\Hello\\HelloExtension',
 
-    'autoload' => array(
+    'autoload' => [
 
         'Pagekit\\Hello\\' => 'src'
 
-    ),
+    ],
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view'  => 'views',
             'asset' => 'assets'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => array(
+    'settings' => [
 
         'system'  => 'hello/admin/settings.razr'
 
-    ),
+    ],
 
-    'menu' => array(
+    'menu' => [
 
-        'hello' => array(
+        'hello' => [
             'label'  => 'Hello',
             'icon'   => 'extension://hello/extension.svg',
             'url'    => '@hello/hello',
             'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'
-        )
+        ]
 
-    )
+    ]
 
-);
+];
