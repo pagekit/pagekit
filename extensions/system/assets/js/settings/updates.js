@@ -37,7 +37,7 @@ require(['jquery', 'marketplace', 'system!locale', 'tmpl!package.updates,package
 
         $this.removeAttr('data-install').html('<i class="uk-icon-spinner uk-icon-spin"></i>');
 
-        $.post(params.url, {'package': JSON.stringify(packages[name].version)}, function(data) {
+        $.post(params.url, $.extend({'package': JSON.stringify(packages[name].version)}, system.csrf.params), function(data) {
 
             if (data.message) {
 
