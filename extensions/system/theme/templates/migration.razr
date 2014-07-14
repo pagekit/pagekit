@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        @action('head')
+        @section('head')
         @script('uikit')
         @style('theme', 'extension://system/theme/css/theme.css')
     </head>

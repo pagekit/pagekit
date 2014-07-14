@@ -35,9 +35,7 @@ use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
-use Pagekit\Widget\Event\RegisterRendererEvent;
 use Pagekit\Widget\Event\WidgetListener;
-use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetProvider;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -97,10 +95,6 @@ class SystemExtension extends Extension
 
         $app['widgets'] = function() {
             return new WidgetProvider;
-        };
-
-        $app['positions'] = function($app) {
-            return new PositionManager($app['widgets'], $app['events']->dispatch('system.position.renderer', new RegisterRendererEvent($app['view']))->getRenderer());
         };
 
         $app['permissions'] = function($app) {

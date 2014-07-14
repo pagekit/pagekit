@@ -6,6 +6,7 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Event\RegisterPositionEvent;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;
@@ -35,15 +36,9 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->widgets = $this['widgets']->getWidgetRepository();
-        $this->roles   = $this['users']->getRoleRepository();
-
-        if (isset($this['theme.site'])) {
-            foreach ($this['theme.site']->getConfig('positions', []) as $id => $position) {
-                list($name, $description) = array_merge((array) $position, array(''));
-                $this->positions[$id] = compact('id', 'name', 'description');
-            }
-        }
+        $this->widgets   = $this['widgets']->getWidgetRepository();
+        $this->roles     = $this['users']->getRoleRepository();
+        $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
     }
 
     /**

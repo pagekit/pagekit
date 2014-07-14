@@ -3,6 +3,7 @@
 namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
+use Pagekit\Component\View\Section\LayoutSectionRenderer;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\Translation\Translator;
@@ -55,12 +56,23 @@ class Theme implements \ArrayAccess
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
 
-        if ($renderer = $this->getConfig('renderer')) {
-            $app->on('system.position.renderer', function($event) use ($renderer) {
-                foreach ($renderer as $name => $template) {
-                    $event->register($name, $template);
-                }
-            });
+        $app->on('system.site', function() {
+            foreach ($this->getConfig('renderer', []) as $name => $template) {
+                $this['view.sections']->addRenderer($name, function($name, $value, $options = []) use ($template) {
+                    return $this['view']->render($template, compact('name', 'value', 'options'));
+                });
+            }
+        });
+
+        $app->on('system.positions', function($event) {
+            foreach ($this->getConfig('positions', []) as $id => $position) {
+                list($name, $description) = array_merge((array) $position, ['']);
+                $event->register($id, $name, $description);
+            }
+        });
+
+        foreach ($this->getConfig('positions', []) as $id => $position) {
+            $this['view.sections']->register($id, ['provider' => $this['widgets']]);
         }
     }
 

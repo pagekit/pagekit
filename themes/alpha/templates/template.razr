@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        @action('head')
+        @section('head')
         @style('theme', 'theme://alpha/css/theme.css')
         @script('jquery')
         @script('uikit')
@@ -15,72 +15,72 @@
 
         <div class="uk-container uk-container-center">
 
-            @if ($position.exists('logo'))
+            @if (hasSection('logo'))
             <div class="tm-logo uk-hidden-small">
-                <a href="@url()" class="tm-brand">@raw( $position.render('logo', ['renderer' => 'blank']) )</a>
+                <a href="@url()" class="tm-brand">@section('logo', ['renderer' => 'blank'])</a>
             </div>
             @endif
 
-            @if ($position.exists('navbar'))
+            @if (hasSection('navbar'))
             <div class="tm-navbar">
 
                 <nav class="uk-navbar uk-hidden-small">
-                    @raw( $position.render('navbar', ['renderer' => 'navbar']) )
+                    @section('navbar', ['renderer' => 'navbar'])
                 </nav>
 
-                @if ($position.exists('offcanvas'))
+                @if (hasSection('offcanvas'))
                 <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                 @endif
 
-                @if ($position.exists('logo-small'))
+                @if (hasSection('logo-small'))
                 <div class="uk-navbar-content uk-navbar-center uk-visible-small">
-                    <a href="@url()" class="tm-brand">@raw( $position.render('logo-small', ['renderer' => 'blank']) )</a>
+                    <a href="@url()" class="tm-brand">@section('logo-small', ['renderer' => 'blank'])</a>
                 </div>
                 @endif
 
             </div>
             @endif
 
-            @action('messages')
+            @section('messages')
 
-            @if ($position.exists('top'))
+            @if (hasSection('top'))
             <section class="uk-grid uk-grid-divider" data-uk-grid-match="{ target: '> div > .uk-panel' }" data-uk-grid-margin>
-                @raw( $position.render('top', ['renderer' => 'grid']) )
+                @section('top', ['renderer' => 'grid'])
             </section>
             @endif
 
             <div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
 
                 <div class="@( $theme.classes.columns.main['class'] )">
-                    @action('content')
+                    @section('content')
                 </div>
 
-                @if ($position.exists('sidebar-a'))
+                @if (hasSection('sidebar-a'))
                 <aside class="@( $theme.classes.columns['sidebar-a']['class'] )">
-                    @raw( $position.render('sidebar-a', ['renderer' => 'panel']) )
+                    @section('sidebar-a', ['renderer' => 'panel'])
                 </aside>
                 @endif
 
-                @if ($position.exists('sidebar-b'))
+                @if (hasSection('sidebar-b'))
                 <aside class="@( $theme.classes.columns['sidebar-b']['class'] )">
-                    @raw( $position.render('sidebar-b', ['renderer' => 'panel']) )
+                    @section('sidebar-b', ['renderer' => 'panel'])
                 </aside>
                 @endif
 
             </div>
 
-            @if ($position.exists('footer'))
+            @if (hasSection('footer'))
             <footer class="uk-grid" data-uk-grid-match="{ target: '> div > .uk-panel' }" data-uk-grid-margin>
-               @raw( $position.render('footer', ['renderer' => 'grid']) )
+                @section('footer', ['renderer' => 'grid'])
             </footer>
             @endif
 
         </div>
 
-        @if ($position.exists('offcanvas'))
+        @if (hasSection('offcanvas'))
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
-                @raw( $position.render('offcanvas', ['renderer' => 'offcanvas']) )
+                @section('offcanvas', ['renderer' => 'offcanvas'])
             </div>
         </div>
         @endif

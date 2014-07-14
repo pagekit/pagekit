@@ -2,7 +2,6 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
@@ -25,6 +24,7 @@ use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\Directive\FunctionDirective;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class SystemListener extends EventSubscriber
 {
@@ -74,24 +74,8 @@ class SystemListener extends EventSubscriber
         $this['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
         $this['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-        $this['view']->addAction('head', function() use ($scripts) {
-
-            foreach ($scripts as $script) {
-
-                $dependencies = (array) $script['dependencies'];
-
-                if (isset($script['requirejs'])) {
-                    $script['dependencies'] = array_merge($dependencies, array('requirejs'));
-                } elseif (in_array('requirejs', $dependencies)) {
-                    $scripts->dequeue($name = $script->getName());
-                    $scripts->queue($name);
-                }
-            }
-
-        }, 5);
-
-        $this['view']->addAction('messages', function(ActionEvent $event) {
-            $event->append($this['view']->render('system/messages/messages.razr'));
+        $this['view.sections']->set('messages', function() {
+            return $this['view']->render('system/messages/messages.razr');
         });
 
         $dispatcher->dispatch($this['isAdmin'] ? 'system.admin' : 'system.site', $event);

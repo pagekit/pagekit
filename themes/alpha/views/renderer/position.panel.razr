@@ -1,4 +1,4 @@
-@foreach ($widgets as $widget)
+@foreach ($value as $widget)
 <div class="uk-panel @( $widget.settings.theme.panel )@( $widget.settings.theme.alignment ? ' uk-text-center' : '' )">
 
     @if ($widget.settings.theme.badge.text)
@@ -9,7 +9,7 @@
     <h3>@( $widget.title )</h3>
     @endif
 
-    @raw( $provider.render($widget, $options) )
+    @raw( $options.provider.render($widget, $options) )
     
 </div>
 @endforeach

@@ -4,7 +4,6 @@ namespace Pagekit;
 
 use Pagekit\Component\File\Exception\InvalidArgumentException;
 use Pagekit\Component\Package\Installer\PackageInstaller;
-use Pagekit\Component\View\Event\ActionEvent;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
@@ -32,9 +31,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $view->setEngine($app['tmpl']);
             $view->set('app', $app);
             $view->set('url', $app['url']);
-            $view->addAction('head', function(ActionEvent $event) use ($app) {
-                $event->append(sprintf('<meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $app['config']['app.version'], $app['router']->getContext()->getBaseUrl(), $app['csrf']->generate()));
-            }, 10);
 
             return $view;
         });
@@ -88,6 +84,11 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
+        $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
+        $this->app['view.sections']->prepend('head', function() {
+            return sprintf('<meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
+        });
+
         $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
 
         $dispatcher->dispatch('system.init', $event);
@@ -115,6 +116,22 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         } catch (InvalidArgumentException $e) {}
     }
 
+    public function onKernelResponse()
+    {
+        $scripts = $this->app['view.scripts'];
+        foreach ($scripts as $script) {
+
+            $dependencies = (array) $script['dependencies'];
+
+            if (isset($script['requirejs'])) {
+                $script['dependencies'] = array_merge($dependencies, array('requirejs'));
+            } elseif (in_array('requirejs', $dependencies)) {
+                $scripts->dequeue($name = $script->getName());
+                $scripts->queue($name);
+            }
+        }
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
@@ -122,7 +139,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
                 array('onKernelRequest', 50),
                 array('onRequestMatched', 0)
             ),
-            'templating.reference' => 'onTemplateReference'
+            'templating.reference' => 'onTemplateReference',
+            'kernel.response'      => ['onKernelResponse', 15]
         );
     }
 }

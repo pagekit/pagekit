@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        @action('head')
+        @section('head')
         @style('%NAME%', 'theme://%NAME%/css/theme.css')
     </head>
     <body>
@@ -10,6 +10,6 @@
             @raw( $position.render('logo', ['renderer' => 'blank']) )
         @endif
 
-        @action('content')
+        @section('content')
     </body>
 </html>

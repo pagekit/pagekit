@@ -13,9 +13,9 @@ class WidgetListener extends EventSubscriber
     public function onSystemSite()
     {
         $request   = $this['request'];
-        $positions = $this['positions'];
         $active    = (array) $request->attributes->get('_menu');
         $user      = $this['user'];
+        $sections  = $this['view.sections'];
 
         foreach ($this['widgets']->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
 
@@ -35,7 +35,7 @@ class WidgetListener extends EventSubscriber
                 continue;
             }
 
-            $positions[$widget->getPosition()][$widget->getId()] = $widget;
+            $sections->append($widget->getPosition(), [$widget->getId() => $widget]);
         }
     }
 

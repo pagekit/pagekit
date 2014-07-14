@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        @action('head')
+        @section('head')
         @style('theme', 'extension://system/theme/css/theme.css')
         @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
     </head>
@@ -90,9 +90,13 @@
             </div>
         </div>
 
-        <div class="tm-main uk-container uk-container-center">@action('content')</div>
+        <div class="tm-main uk-container uk-container-center">
 
-        <div class="uk-hidden">@action('messages')</div>
+            @block('test')@endblock
+
+            @section('content')</div>
+
+        <div class="uk-hidden">@section('messages')</div>
 
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">

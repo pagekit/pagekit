@@ -1,3 +1,3 @@
-@foreach ($widgets as $widget)
-    @raw( $provider.render($widget, $options) )
+@foreach ($value as $widget)
+    @raw( $options.provider.render($widget, $options) )
 @endforeach
