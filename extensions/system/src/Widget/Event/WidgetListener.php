@@ -35,7 +35,7 @@ class WidgetListener extends EventSubscriber
                 continue;
             }
 
-            $sections->append($widget->getPosition(), [$widget->getId() => $widget]);
+            $sections->append($widget->getPosition(), $widget);
         }
     }
 
