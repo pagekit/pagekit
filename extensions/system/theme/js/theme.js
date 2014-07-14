@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    setTimeout(function() {
+        document.body.style.visibility = '';
+    }, 200);
+
+
     (function($, $doc){
 
         // adjust toolbar
@@ -7,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $doc.on('uk-domready', (function() {
 
             var navbar = $('.tm-navbar'), bars = [], fn;
-
-            document.body.style.visibility = 'hidden';
 
             fn = function() {
 

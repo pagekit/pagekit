@@ -141,5 +141,10 @@
             </div>
         </div>
 
+        <script>
+            // will be reseted in the theme.js
+            document.body.style.visibility = 'hidden';
+        </script>
+
     </body>
 </html>
