@@ -3,7 +3,8 @@
 namespace Pagekit\Theme;
 
 use Pagekit\Component\File\ResourceLocator;
-use Pagekit\Component\View\Section\LayoutSectionRenderer;
+use Pagekit\Component\View\Section\SectionManager;
+use Pagekit\Component\View\ViewInterface;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\Translation\Translator;
@@ -56,12 +57,8 @@ class Theme implements \ArrayAccess
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
 
-        $app->on('system.site', function() {
-            foreach ($this->getConfig('renderer', []) as $name => $template) {
-                $this['view.sections']->addRenderer($name, function($name, $value, $options = []) use ($template) {
-                    return $this['view']->render($template, compact('name', 'value', 'options'));
-                });
-            }
+        $app->on('system.site', function() use ($app) {
+            $this->registerRenderer($app['view.sections'], $app['view']);
         });
 
         $app->on('system.positions', function($event) {
@@ -193,5 +190,20 @@ class Theme implements \ArrayAccess
 
         $addResources($this->getConfig('resources.export', []), $this->getName());
         $addResources($this->getConfig('resources.override', []), $this->getName());
+    }
+
+    /**
+     * Adds section renderer.
+     *
+     * @param SectionManager $sections
+     * @param ViewInterface  $view
+     */
+    public function registerRenderer(SectionManager $sections, ViewInterface $view)
+    {
+        foreach ($this->getConfig('renderer', []) as $name => $template) {
+            $sections->addRenderer($name, function($name, $value, $options = []) use ($template, $view) {
+                return $view->render($template, compact('name', 'value', 'options'));
+            });
+        }
     }
 }

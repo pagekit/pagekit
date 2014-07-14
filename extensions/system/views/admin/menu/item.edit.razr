@@ -2,10 +2,10 @@
 
 <form id="js-item-edit" class="uk-form uk-form-horizontal" action="@url('@system/item/save')" method="post">
 
-    <div class="pk-toolbar">
+    @section('toolbar', 'show')
         <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
         <a class="uk-button" href="@url('@system/menu', ['id' => $item.menuId])">@( $item.id ? __('Close') : __('Cancel') )</a>
-    </div>
+    @endsection
 
     <div class="uk-form-row">
         <label for="form-title" class="uk-form-label">@trans('Title')</label>

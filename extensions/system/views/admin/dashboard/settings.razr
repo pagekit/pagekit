@@ -2,7 +2,7 @@
 
 <form id="js-dashboard" class="uk-form" action="@url('@system/system/admin')" method="post" data-reorder="@url('@system/dashboard/reorder')">
 
-    <div class="pk-toolbar">
+    @section('toolbar', 'show')
 
         <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
             <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
@@ -17,7 +17,7 @@
 
         <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url('@system/dashboard/delete')">@trans('Delete')</a>
 
-    </div>
+    @endsection
 
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent">
         <div class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></div>

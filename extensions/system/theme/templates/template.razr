@@ -92,8 +92,6 @@
 
         <div class="tm-main uk-container uk-container-center">
 
-            @block('test')@endblock
-
             @section('content')</div>
 
         <div class="uk-hidden">@section('messages')</div>
@@ -140,11 +138,6 @@
 
             </div>
         </div>
-
-        <script>
-            // will be reseted in the theme.js
-            document.body.style.visibility = 'hidden';
-        </script>
 
     </body>
 </html>

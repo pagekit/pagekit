@@ -1,0 +1,5 @@
+<div class="tm-toolbar">
+    <div class="pk-toolbar uk-clearfix uk-container uk-container-center">
+        @raw( $value )
+    </div>
+</div>

@@ -1,21 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    setTimeout(function() {
-        document.body.style.visibility = '';
-    }, 200);
-
-
     (function($, $doc){
 
         // adjust toolbar
-
         $doc.on('uk-domready', (function() {
 
             var navbar = $('.tm-navbar'), bars = [], fn;
 
             fn = function() {
 
-                var toolbars = $('.pk-toolbar:not([toolbar-init])');
+                var toolbars = $('.tm-toolbar');
 
                 if (toolbars.length && !navbar.hasClass('tm-navbar-margin')) {
                     navbar.addClass('tm-navbar-margin');
@@ -23,37 +17,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                 toolbars.each(function() {
 
-                    var ele = $(this);
+                    var toolbar = $(this);
 
-                    // ignore toolbars in modals
-                    if (ele.parents('.uk-modal:first').length) return;
+                    // ignore initialized toolbars and toolbars in modals
+                    if (toolbar.data('init') || toolbar.parents('.uk-modal:first').length) return;
 
-                    var toolbar = ele.addClass('uk-container uk-container-center').wrap('<div class="tm-toolbar">').parent(), offset  = toolbar.offset();
+                    var offset  = toolbar.offset();
 
-                    bars.push((function(){
-
-                        var check = function(){
-                            return toolbar.css(window.scrollY > offset.top ? {'position': 'fixed', 'top':0} : {'position': '', 'top':''}) ? check : check;
-                        };
-                        return check();
+                    bars.push((function check() {
+                        toolbar.css(window.scrollY > offset.top ? { position: 'fixed', top: 0} : { position: '', top: ''});
+                        return check;
                     })());
 
-                    ele.attr('toolbar-init', 'true');
+                    toolbar.data('init', true);
+
                 });
 
                 return fn;
             };
 
-            document.body.style.visibility = '';
-
-            $doc.on('uk-scroll', (function(){
-
-                var onscroll = function(){
-                    return bars.forEach(function(check){ check(); }) ? onscroll : onscroll;
-                };
-
-                return onscroll();
-            }));
+            $doc.on('uk-scroll', (function onscroll() {
+                bars.forEach(function(check) { check(); });
+                return onscroll;
+            })());
 
             // fix toolbar jumping when a modal is shown
             $doc.on({
