@@ -2,7 +2,7 @@
 
 use Pagekit\Component\Config\Config;
 
-$values = array_map('realpath', array(
+$values = array_map('realpath', [
     'path'            => __DIR__.'/..',
     'path.cache'      => __DIR__.'/cache',
     'path.logs'       => __DIR__.'/logs',
@@ -12,7 +12,7 @@ $values = array_map('realpath', array(
     'path.themes'     => __DIR__.'/../themes',
     'path.vendor'     => __DIR__.'/../vendor',
     'config.file'     => __DIR__.'/../config.php'
-));
+]);
 
 $config = new Config($values);
 $config->load(__DIR__.'/config/app.php');

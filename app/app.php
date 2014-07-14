@@ -35,7 +35,7 @@ try {
     }
 
     $app['extensions.boot'] = function($app) {
-        return array_merge($app['config']->get('extension.core', array()), $app['option']->get('system:extensions', array()));
+        return array_merge($app['config']->get('extension.core', []), $app['option']->get('system:extensions', []));
     };
 
 } catch (InstallerException $e) {
@@ -48,7 +48,7 @@ try {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
-    $app['extensions.boot'] = array('installer');
+    $app['extensions.boot'] = ['installer'];
 
 }
 

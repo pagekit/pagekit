@@ -1,29 +1,29 @@
 <?php
 
-return array(
+return [
 
-    'app' => array(
+    'app' => [
 
         'installer' => true
 
-    ),
+    ],
 
-    'cache' => array(
+    'cache' => [
 
         'storage' => 'array'
 
-    ),
+    ],
 
-    'session' => array(
+    'session' => [
 
         'storage' => 'native'
 
-    ),
+    ],
 
-    'profiler' => array(
+    'profiler' => [
 
         'enabled' => false
 
-    )
+    ]
 
-);
+];

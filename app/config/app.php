@@ -1,8 +1,8 @@
 <?php
 
-return array(
+return [
 
-    'app' => array(
+    'app' => [
 
         'version' => '0.8.2',
 
@@ -16,7 +16,7 @@ return array(
 
         'storage' => '/storage',
 
-        'providers' => array(
+        'providers' => [
 
             'Pagekit\Framework\Provider\ExceptionServiceProvider',
             'Pagekit\Framework\Provider\RazrServiceProvider',
@@ -40,60 +40,60 @@ return array(
             'Pagekit\Component\View\ViewServiceProvider',
             'Pagekit\SystemServiceProvider'
 
-        )
+        ]
 
-    ),
+    ],
 
-    'api' => array(
+    'api' => [
 
         'url' => 'http://pagekit.com/alpha/api'
 
-    ),
+    ],
 
-    'profiler' => array(
+    'profiler' => [
 
         'file' => '%path%/app/temp/profiler.db'
 
-    ),
+    ],
 
-    'cache' => array(
+    'cache' => [
 
-        'cache' => array(
+        'cache' => [
 
             'storage' => 'auto',
             'path'    => '%path%/app/cache',
             'prefix'  => sha1(__DIR__)
 
-        ),
+        ],
 
-        'cache.phpfile' => array(
+        'cache.phpfile' => [
 
             'storage' => 'phpfile',
             'path'    => '%path%/app/cache'
 
-        )
+        ]
 
-    ),
+    ],
 
-    'session' => array(
+    'session' => [
 
         'storage'  => 'database',
         'lifetime' => 900,
         'files'    => '%path%/app/sessions',
         'table'    => '@system_session',
-        'cookie'   => array(
+        'cookie'   => [
             'name' => 'pagekit_session',
-        )
+        ]
 
-    ),
+    ],
 
-    'database' => array(
+    'database' => [
 
         'default' => 'mysql',
 
-        'connections' => array(
+        'connections' => [
 
-            'mysql' => array(
+            'mysql' => [
 
                 'driver'   => 'pdo_mysql',
                 'dbname'   => '',
@@ -105,21 +105,21 @@ return array(
                 'collate'  => 'utf8_unicode_ci',
                 'prefix'   => ''
 
-            ),
+            ],
 
-            'sqlite' => array (
+            'sqlite' => [
 
                 'driver' => 'pdo_sqlite',
                 'path'   => '%path%/app/database/pagekit.db',
                 'prefix' => ''
 
-            ),
+            ],
 
-        )
+        ]
 
-    ),
+    ],
 
-    'mail' => array(
+    'mail' => [
 
         'driver'     => 'mail',
         'host'       => 'localhost',
@@ -127,13 +127,13 @@ return array(
         'encryption' => null,
         'username'   => null,
         'password'   => null,
-        'from'       => array('address' => null, 'name' => null)
+        'from'       => ['address' => null, 'name' => null]
 
-    ),
+    ],
 
-    'locator' => array(
+    'locator' => [
 
-        'wrappers' => array(
+        'wrappers' => [
 
             'app'       => false,
             'storage'   => false,
@@ -142,9 +142,9 @@ return array(
             'view'      => true,
             'asset'     => true
 
-        ),
+        ],
 
-        'paths' => array(
+        'paths' => [
 
             'app'       => '%path%',
             'storage'   => '%path.storage%',
@@ -152,28 +152,28 @@ return array(
             'theme'     => '%path.themes%',
             'vendor'    => '%path.vendor%'
 
-        )
+        ]
 
-    ),
+    ],
 
-    'option' => array(
+    'option' => [
 
         'table' => '@system_option'
 
-    ),
+    ],
 
-    'extension' => array(
+    'extension' => [
 
         'path' => '%path.extensions%',
-        'core' => array('installer', 'system')
+        'core' => ['installer', 'system']
 
-    ),
+    ],
 
-    'theme' => array(
+    'theme' => [
 
         'path'    => '%path.themes%',
         'site' => 'alpha'
 
-    )
+    ]
 
-);
+];
