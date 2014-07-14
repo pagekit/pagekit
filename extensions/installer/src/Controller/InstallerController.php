@@ -3,6 +3,7 @@
 namespace Pagekit\Installer\Controller;
 
 use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\DriverManager;
 use Pagekit\Component\Config\Config;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
@@ -41,8 +42,9 @@ class InstallerController extends Controller
 
     /**
      * @Request({"config": "array"})
+     * @Response("json")
      */
-    public function checkAction($config = [], $response = true)
+    public function checkAction($config = [])
     {
         try {
 
@@ -54,17 +56,38 @@ class InstallerController extends Controller
 
             $this['db']->connect();
 
-            $status  = $this['db']->getUtility()->tableExists('@system_option') ? 'tables-exist' : 'no-tables';
-            $message = '';
+            return [
+                'status'  => $this['db']->getUtility()->tableExists('@system_option') ? 'tables-exist' : 'no-tables',
+                'message' => ''
+            ];
 
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
 
-            $status  = 'no-connection';
-            $message = __('Database connection failed!');
+            if ($e->getCode() == 1049) {
+                if ($this->createDatabase()) {
+                    return [
+                        'status'  => 'no-tables',
+                        'message' => __('Database created!')
+                    ];
+                } else {
+                    return [
+                        'status'  => 'no-connection',
+                        'message' => __('Unable to create database!')
+                    ];
+                }
+            } elseif ($e->getCode() == 1044) {
+                return [
+                    'status'  => 'no-connection',
+                    'message' => __('Database connection failed - Access denied!')
+                ];
+            }
 
-        }
+        } catch (\Exception $e) {}
 
-        return $response ? $this['response']->json(['status' => $status, 'message' => $message]) : $status;
+        return [
+            'status'  => 'no-connection',
+            'message' => __('Database connection failed!')
+        ];
     }
 
     /**
@@ -164,5 +187,32 @@ class InstallerController extends Controller
         }
 
         return ['status' => $status, 'message' => $message];
+    }
+
+    /**
+     * @return bool
+     */
+    protected function createDatabase()
+    {
+        $params = $this['config']['database.connections'][$this['config']['database.default']];
+
+        if (!isset($params['dbname'])) {
+            return false;
+        }
+
+        $name = $tmpConnection->getDatabasePlatform()->quoteSingleIdentifier($params['dbname']);
+        unset($params['dbname']);
+
+        try {
+
+            $tmpConnection = DriverManager::getConnection($params);
+            $tmpConnection->getSchemaManager()->createDatabase($name);
+
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        $tmpConnection->close();
+        return true;
     }
 }

@@ -109,9 +109,10 @@ return [
 
             'sqlite' => [
 
-                'driver' => 'pdo_sqlite',
-                'path'   => '%path%/app/database/pagekit.db',
-                'prefix' => ''
+                'driver'  => 'pdo_sqlite',
+                'path'    => '%path%/app/database/pagekit.db',
+                'charset' => 'UTF-8',
+                'prefix'  => ''
 
             ],
 
