@@ -116,6 +116,10 @@ class PageController extends Controller
                 $page = new Page;
             }
 
+            if ($this->pages->where(['url = ?', 'id <> ?'], [$data['url'], $page->getId()])->first()) {
+                throw new Exception(__('Page Url not available.'));
+            }
+
             $data['data'] = array_merge(['title' => 0, 'markdown' => 0], isset($data['data']) ? $data['data'] : []);
 
             $this->pages->save($page, $data);
