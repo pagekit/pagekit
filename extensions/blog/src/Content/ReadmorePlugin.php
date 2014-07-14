@@ -5,7 +5,7 @@ namespace Pagekit\Blog\Content;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 
-class PagebreakPlugin extends EventSubscriber
+class ReadmorePlugin extends EventSubscriber
 {
     /**
      * Content plugins callback.
@@ -14,13 +14,13 @@ class PagebreakPlugin extends EventSubscriber
      */
     public function onContentPlugins(ContentEvent $event)
     {
-        $current = $this['request']->get('page', 1) - 1;
-        $content = preg_split('/\[pagebreak\]/i', $event->getContent());
+        $content = preg_split('/\[readmore\]/i', $event->getContent());
 
-        if (isset($content[$current])) {
-            $event->setContent($content[$current]);
-        } else {
+        if ($event['readmore'] && count($content) > 1) {
+            $event['post']->readmore = true;
             $event->setContent($content[0]);
+        } else {
+            $event->setContent(implode('', $content));
         }
     }
 

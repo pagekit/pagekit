@@ -51,7 +51,7 @@ class DefaultController extends Controller
         $posts = $this->posts->query()->where(['status' => Post::STATUS_PUBLISHED])->where('date < :date', [':date' => (new \DateTime)->format('Y-m-d H:i:s')])->related('user')->orderBy('date', 'DESC')->get();
 
         foreach ($posts as $post) {
-            $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
+            $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         }
 
         return ['head.title' => __('Blog'), 'posts' => $posts, 'config' => $this->extension->getConfig()];
