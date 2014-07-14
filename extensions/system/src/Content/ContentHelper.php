@@ -16,7 +16,7 @@ class ContentHelper implements \ArrayAccess
      * @param  array  $parameters
      * @return mixed
      */
-    public function applyPlugins($content, $parameters = array())
+    public function applyPlugins($content, $parameters = [])
     {
         return $this['events']->dispatch('content.plugins', new ContentEvent($content, $parameters))->getContent();
     }

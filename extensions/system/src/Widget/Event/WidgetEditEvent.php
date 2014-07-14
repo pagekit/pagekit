@@ -7,7 +7,7 @@ class WidgetEditEvent extends WidgetEvent
     /**
      * @var array
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * @return array
@@ -26,7 +26,7 @@ class WidgetEditEvent extends WidgetEvent
     public function addSettings($name, $settings)
     {
         if (is_callable($settings)) {
-            $settings = call_user_func_array($settings, array($this->getWidget()));
+            $settings = call_user_func_array($settings, [$this->getWidget()]);
         }
 
         $this->settings[$name] = $settings;

@@ -19,7 +19,7 @@ class MarkdownPlugin extends EventSubscriber
         }
 
         $content = $event->getContent();
-        $content = $this['markdown']->parse($content, is_array($event['markdown']) ? $event['markdown'] : array());
+        $content = $this['markdown']->parse($content, is_array($event['markdown']) ? $event['markdown'] : []);
 
         $event->setContent($content);
     }
@@ -29,8 +29,8 @@ class MarkdownPlugin extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'content.plugins' => array('onContentPlugins', 5)
-        );
+        return [
+            'content.plugins' => ['onContentPlugins', 5]
+        ];
     }
 }

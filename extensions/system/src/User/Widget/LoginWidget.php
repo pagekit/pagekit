@@ -36,7 +36,7 @@ class LoginWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
         $user = $this['user'];
 

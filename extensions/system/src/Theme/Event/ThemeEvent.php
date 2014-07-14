@@ -23,7 +23,7 @@ class ThemeEvent extends Event
      * @param Theme $theme
      * @param array $config
      */
-    public function __construct(Theme $theme, array $config = array())
+    public function __construct(Theme $theme, array $config = [])
     {
         $this->theme  = $theme;
         $this->config = $config;

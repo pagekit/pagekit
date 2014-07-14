@@ -52,6 +52,6 @@ class SpamDetectionListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array('system.comment.spam_check' => 'spamCheck');
+        return ['system.comment.spam_check' => 'spamCheck'];
     }
 }

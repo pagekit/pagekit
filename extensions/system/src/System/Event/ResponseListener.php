@@ -25,7 +25,7 @@ class ResponseListener extends EventSubscriber
         $response = $event->getResponse();
 
         if (strpos($response->headers->get('Content-Type'), 'html') !== false) {
-            $content = preg_replace_callback(self::REGEX_URL, array($this, 'replaceUrlCallback'), $response->getContent());
+            $content = preg_replace_callback(self::REGEX_URL, [$this, 'replaceUrlCallback'], $response->getContent());
             $response->setContent($content);
         }
     }
@@ -48,8 +48,8 @@ class ResponseListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'kernel.response' => array('onKernelResponse', -10)
-        );
+        return [
+            'kernel.response' => ['onKernelResponse', -10]
+        ];
     }
 }

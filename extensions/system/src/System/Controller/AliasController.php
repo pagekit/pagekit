@@ -34,16 +34,16 @@ class AliasController extends Controller
         if ($filter) {
             $this['session']->set('alias.filter', $filter);
         } else {
-            $filter = $this['session']->get('alias.filter', array());
+            $filter = $this['session']->get('alias.filter', []);
         }
 
         $query = $this->aliases->query();
 
         if (isset($filter['search']) && strlen($filter['search'])) {
-            $query->where('alias LIKE ?', array("%{$filter['search']}%"));
+            $query->where('alias LIKE ?', ["%{$filter['search']}%"]);
         }
 
-        return array('head.title' => __('URL Aliases'), 'aliases' => $query->get(), 'filter' => $filter);
+        return ['head.title' => __('URL Aliases'), 'aliases' => $query->get(), 'filter' => $filter];
     }
 
     /**
@@ -51,7 +51,7 @@ class AliasController extends Controller
      */
     public function addAction()
     {
-        return array('head.title' => __('Add URL Alias'), 'alias' => new Alias);
+        return ['head.title' => __('Add URL Alias'), 'alias' => new Alias];
     }
 
     /**
@@ -66,7 +66,7 @@ class AliasController extends Controller
                 throw new Exception(__('Invalid alias id.'));
             }
 
-            return array('head.title' => __('Edit URL Alias'), 'alias' => $alias);
+            return ['head.title' => __('Edit URL Alias'), 'alias' => $alias];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -93,8 +93,8 @@ class AliasController extends Controller
                 throw new Exception(__('Invalid source.'));
             }
 
-            if ($this->aliases->where(array('alias = ?', 'id <> ?'), array($alias, $id))->first()) {
-                throw new Exception(__('The alias "%alias%" is already in use.', array('%alias%' => $alias)));
+            if ($this->aliases->where(['alias = ?', 'id <> ?'], [$alias, $id])->first()) {
+                throw new Exception(__('The alias "%alias%" is already in use.', ['%alias%' => $alias]));
             }
 
             $this->aliases->save($obj, compact('alias', 'source'));
@@ -111,7 +111,7 @@ class AliasController extends Controller
     /**
      * @Request({"ids": "int[]"}, csrf=true)
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($alias = $this->aliases->find($id)) {

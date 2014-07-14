@@ -31,17 +31,17 @@ class PermissionController extends Controller
     {
         $roles = $this->roles->query()->orderBy('priority')->get();
 
-        return array('head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this['permissions']);
+        return ['head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this['permissions']];
     }
 
     /**
      * @Request({"permissions": "array"}, csrf=true)
      * @Response("json")
      */
-    public function saveAction($permissions = array())
+    public function saveAction($permissions = [])
     {
         foreach ($this->roles->findAll() as $role) {
-            $role->setPermissions(isset($permissions[$role->getId()]) ? $permissions[$role->getId()] : array());
+            $role->setPermissions(isset($permissions[$role->getId()]) ? $permissions[$role->getId()] : []);
             $this->roles->save($role);
         }
 

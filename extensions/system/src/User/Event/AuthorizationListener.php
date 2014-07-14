@@ -59,11 +59,11 @@ class AuthorizationListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.loaded'  => 'onSystemLoaded',
             'auth.authorize' => 'onAuthorize',
-            'auth.login'     => array('onLogin', -8),
-            'auth.logout'    => array('onLogout', -8)
-        );
+            'auth.login'     => ['onLogin', -8],
+            'auth.logout'    => ['onLogout', -8]
+        ];
     }
 }

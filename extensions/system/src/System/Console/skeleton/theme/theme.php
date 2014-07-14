@@ -1,33 +1,33 @@
 <?php
 
 // config array
-return array(
+return [
 
     'main' => '%NAMESPACE_ESC%\\%CLASSNAME%',
 
-    'autoload' => array(
+    'autoload' => [
         '%NAMESPACE_ESC%\\' => 'src'
-    ),
+    ],
 
 
     // positions are sections in your theme where widgets can be published
-    'positions' => array(
+    'positions' => [
         'logo'       => 'Logo',
         // ...
-    ),
+    ],
 
     // renderers define the markup that is rendered in widget positions
-    'renderer' => array(
+    'renderer' => [
         'blank'     => 'theme://%NAME%/views/renderer/position.blank.razr',
         // ...
-    ),
+    ],
 
-    'resources' => array (
+    'resources' => [
         // your resources here...
-    ),
+    ],
 
-    'settings' => array(
+    'settings' => [
         'system'  => 'theme://%NAME%/views/admin/settings.razr'
-    )
+    ]
 
-);
+];

@@ -49,7 +49,7 @@ class Menu implements MenuInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems(array $items = array()) {
+    public function setItems(array $items = []) {
         $this->items = $items;
     }
 

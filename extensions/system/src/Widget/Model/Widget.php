@@ -32,7 +32,7 @@ class Widget implements WidgetInterface
     /**
      * @var array
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * Constructor.
@@ -145,7 +145,7 @@ class Widget implements WidgetInterface
      *
      * @param array $settings
      */
-    public function setSettings(array $settings = array())
+    public function setSettings(array $settings = [])
     {
         $this->settings = $settings;
     }

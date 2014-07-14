@@ -10,7 +10,7 @@ class RegisterWidgetEvent extends Event implements \IteratorAggregate
     /**
      * @var TypeInterface[]
      */
-    protected $parameters = array();
+    protected $parameters = [];
 
 
     /**

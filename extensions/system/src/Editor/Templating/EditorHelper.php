@@ -35,7 +35,7 @@ class EditorHelper extends Helper
      * @param  array  $parameters
      * @return string
      */
-    public function render($name, $value, array $attributes = array(), $parameters = array())
+    public function render($name, $value, array $attributes = [], $parameters = [])
     {
         if ($editor = $this->events->dispatch('editor.load', new EditorLoadEvent)->getEditor()) {
             return $editor->render($value, array_merge($attributes, compact('name')));

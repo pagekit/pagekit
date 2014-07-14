@@ -24,8 +24,8 @@ class MigrationListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'auth.login' => array('onLogin', 8)
-        );
+        return [
+            'auth.login' => ['onLogin', 8]
+        ];
     }
 }

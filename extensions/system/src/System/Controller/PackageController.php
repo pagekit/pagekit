@@ -67,8 +67,8 @@ class PackageController extends Controller
                 $extra['image'] = $this['url']->to('extension://system/assets/images/placeholder-icon.svg');
             }
 
-            $response = array(
-                'package' => array(
+            $response = [
+                'package' => [
                     'name' => $package->getName(),
                     'type' => $package->getType(),
                     'title' => $package->getTitle(),
@@ -77,12 +77,12 @@ class PackageController extends Controller
                     'author' => $package->getAuthor(),
                     'shasum' => sha1_file($upload),
                     'extra' => $extra
-                ),
+                ],
                 'install' => $path
-            );
+            ];
 
         } catch (Exception $e) {
-            $response = array('error' => $e->getMessage());
+            $response = ['error' => $e->getMessage()];
         }
 
         return $response;
@@ -121,20 +121,20 @@ class PackageController extends Controller
 
             $this['system']->clearCache();
 
-            $response = array('message' => __('Package "%name%" installed.', array('%name%' => $package->getName())));
+            $response = ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
 
         } catch (ArchiveExtractionException $e) {
-            $response = array('error' => __('Package extraction failed.'));
+            $response = ['error' => __('Package extraction failed.')];
         } catch (ChecksumVerificationException $e) {
-            $response = array('error' => __('Package checksum verification failed.'));
+            $response = ['error' => __('Package checksum verification failed.')];
         } catch (UnauthorizedDownloadException $e) {
-            $response = array('error' => __('Invalid API key.'));
+            $response = ['error' => __('Invalid API key.')];
         } catch (DownloadErrorException $e) {
-            $response = array('error' => __('Package download failed.'));
+            $response = ['error' => __('Package download failed.')];
         } catch (NotWritableException $e) {
-            $response = array('error' => __('Path is not writable.'));
+            $response = ['error' => __('Path is not writable.')];
         } catch (Exception $e) {
-            $response = array('error' => $e->getMessage());
+            $response = ['error' => $e->getMessage()];
         }
 
         if (strpos($path, $this->temp) === 0 && file_exists($path)) {
@@ -212,6 +212,6 @@ class PackageController extends Controller
 
     protected function isCore($name)
     {
-        return in_array($name, $this['config']->get('extension.core', array()));
+        return in_array($name, $this['config']->get('extension.core', []));
     }
 }

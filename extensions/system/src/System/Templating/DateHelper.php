@@ -27,14 +27,14 @@ class DateHelper extends Helper
 
     public function format($date, $format = 'medium', $timezone = null)
     {
-        $formats = array(
+        $formats = [
             'none'     => DateManager::NONE,
             'short'    => DateManager::SHORT,
             'medium'   => DateManager::MEDIUM,
             'long'     => DateManager::LONG,
             'full'     => DateManager::FULL,
             'interval' => DateManager::INTERVAL
-        );
+        ];
 
         return $this->manager->format($date, isset($formats[$format]) ? $formats[$format] : $format, $timezone, $format);
     }

@@ -39,7 +39,7 @@ class Theme implements \ArrayAccess
      * @param string $path
      * @param array  $config
      */
-    public function __construct($name, $path, array $config = array())
+    public function __construct($name, $path, array $config = [])
     {
         $this->name   = $name;
         $this->path   = $path;
@@ -51,7 +51,7 @@ class Theme implements \ArrayAccess
      */
     public function boot(Application $app)
     {
-        $this->config += $app['option']->get("{$this->name}:config", array());
+        $this->config += $app['option']->get("{$this->name}:config", []);
 
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
@@ -191,7 +191,7 @@ class Theme implements \ArrayAccess
             }
         };
 
-        $addResources($this->getConfig('resources.export', array()), $this->getName());
-        $addResources($this->getConfig('resources.override', array()), $this->getName());
+        $addResources($this->getConfig('resources.export', []), $this->getName());
+        $addResources($this->getConfig('resources.override', []), $this->getName());
     }
 }

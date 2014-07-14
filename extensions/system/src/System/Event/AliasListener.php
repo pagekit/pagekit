@@ -38,10 +38,10 @@ class AliasListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'system.init'             => array('onSystemInit', -10),
+        return [
+            'system.init'             => ['onSystemInit', -10],
             'system.alias.postSave'   => 'clearCache',
             'system.alias.postDelete' => 'clearCache'
-        );
+        ];
     }
 }

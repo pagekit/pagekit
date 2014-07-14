@@ -20,7 +20,7 @@ class SystemInfoHelper implements \ArrayAccess
     {
         $server = $this['request']->server;
 
-        $info                  = array();
+        $info                  = [];
         $info['php']           = php_uname();
 
         if ($pdo = $this['db']->getWrappedConnection() and $pdo instanceof PDOConnection) {
@@ -47,15 +47,15 @@ class SystemInfoHelper implements \ArrayAccess
      */
     protected function getDirectories()
     {
-        $directories = array(
+        $directories = [
             'extension://',
             'storage://',
             'theme://',
             'app://config.php',
             'app://app',
-        );
+        ];
 
-        $result = array();
+        $result = [];
 
         foreach ($directories as $directory) {
             $path = $this['locator']->findResource($directory);

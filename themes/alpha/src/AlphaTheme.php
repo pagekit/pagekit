@@ -36,11 +36,11 @@ class AlphaTheme extends Theme
             return $this->classes;
         }
 
-        $sidebars = array_replace_recursive(array(
-            'sidebar-a' => array('width' => 12, 'alignment' => 'left'),
-            'sidebar-b' => array('width' => 12, 'alignment' => 'right')
-        ), $this->getConfig('sidebars', array()));
-        $columns  = array('main' => array('width' => 60, 'alignment' => 'right'));
+        $sidebars = array_replace_recursive([
+            'sidebar-a' => ['width' => 12, 'alignment' => 'left'],
+            'sidebar-b' => ['width' => 12, 'alignment' => 'right']
+        ], $this->getConfig('sidebars', []));
+        $columns  = ['main' => ['width' => 60, 'alignment' => 'right']];
 
         $gcf = function($a, $b = 60) use(&$gcf) {
             return (int) ($b > 0 ? $gcf($b, $a % $b) : $a);

@@ -14,7 +14,7 @@ class ContentEvent extends Event
     /**
      * @var array
      */
-    protected $plugins = array();
+    protected $plugins = [];
 
     /**
      * Constructor.
@@ -22,7 +22,7 @@ class ContentEvent extends Event
      * @param string $content
      * @param array  $parameters
      */
-    public function __construct($content, array $parameters = array())
+    public function __construct($content, array $parameters = [])
     {
         parent::__construct($parameters);
 

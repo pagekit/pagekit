@@ -55,7 +55,7 @@ class MenuListener extends EventSubscriber
     {
         $request  = $this['request'];
         $route    = $request->attributes->get('_route');
-        $internal = $this['url']->route($route, $request->attributes->get('_route_params', array()), 'link');
+        $internal = $this['url']->route($route, $request->attributes->get('_route_params', []), 'link');
 
         foreach ($event->get($route) as $id => $path) {
             if (0 === strpos($path, $internal)) {
@@ -82,8 +82,8 @@ class MenuListener extends EventSubscriber
     protected function getItems()
     {
         if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
-            $this->cacheEntries = array('paths' => array(), 'patterns' => array());
-            foreach ($this['menus']->getItemRepository()->query()->where(array('status' => ItemInterface::STATUS_ACTIVE))->get() as $item) {
+            $this->cacheEntries = ['paths' => [], 'patterns' => []];
+            foreach ($this['menus']->getItemRepository()->query()->where(['status' => ItemInterface::STATUS_ACTIVE])->get() as $item) {
                 if (!$item->getPages()) {
                     $this->cacheEntries['paths'][strtok(strtok($item->getUrl(), '?'), '#')][$item->getId()] = $item->getUrl();
                 } else {
@@ -110,13 +110,13 @@ class MenuListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.site'                => 'onSystemSite',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',
             'system.alias.postSave'      => 'clearCache',
             'system.alias.postDelete'    => 'clearCache'
-        );
+        ];
     }
 }

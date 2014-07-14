@@ -24,14 +24,14 @@ class DateHelper
     /**
      * @var array
      */
-    protected $formats = array(
+    protected $formats = [
         self::NONE      => '',
         self::FULL      => 'l, F d, y',
         self::LONG      => 'F d, y',
         self::MEDIUM    => 'M d, Y',
         self::SHORT     => 'n/d/y',
         self::INTERVAL  => '%d days'
-    );
+    ];
 
     /**
      * @return DateTimeZone
@@ -143,7 +143,7 @@ class DateHelper
         // Paired backslashes are isolated to prevent errors in
         // read-ahead evaluation. The read-ahead expression ensures that
         // A matches, but not \A.
-        $format = preg_replace(array('/\\\\\\\\/', '/(?<!\\\\)([AaeDlMTF])/'), array("\xEF\\\\\\\\\xFF", "\xEF\\\\\$1\$1\xFF"), $format);
+        $format = preg_replace(['/\\\\\\\\/', '/(?<!\\\\)([AaeDlMTF])/'], ["\xEF\\\\\\\\\xFF", "\xEF\\\\\$1\$1\xFF"], $format);
 
         $format = $date->format($format);
 

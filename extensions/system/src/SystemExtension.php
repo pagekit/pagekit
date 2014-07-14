@@ -82,7 +82,7 @@ class SystemExtension extends Extension
 
             if (!$user = $app['auth']->getUser()) {
                 $user  = new UserEntity;
-                $roles = $app['users']->getRoleRepository()->where(array('id' => RoleInterface::ROLE_ANONYMOUS))->get();
+                $roles = $app['users']->getRoleRepository()->where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
                 $user->setRoles($roles);
             }
 
@@ -125,14 +125,14 @@ class SystemExtension extends Extension
 
             $manager = new DateHelper;
             $manager->setTimezone($app['option']->get('system:app.timezone', 'UTC'));
-            $manager->setFormats(array(
+            $manager->setFormats([
                 DateHelper::NONE      => '',
                 DateHelper::FULL      => __('DATE_FULL'),
                 DateHelper::LONG      => __('DATE_LONG'),
                 DateHelper::MEDIUM    => __('DATE_MEDIUM'),
                 DateHelper::SHORT     => __('DATE_SHORT'),
                 DateHelper::INTERVAL  => __('DATE_INTERVAL')
-            ));
+            ]);
 
             return $manager;
         };
@@ -165,7 +165,7 @@ class SystemExtension extends Extension
             $this['option']->set('system:version', $version);
         }
 
-        foreach (array('blog', 'page') as $extension) {
+        foreach (['blog', 'page'] as $extension) {
             if ($extension = $this['extensions']->get($extension)) {
                 $extension->enable();
             }
@@ -175,7 +175,7 @@ class SystemExtension extends Extension
     /**
      * Clear cache on kernel terminate event.
      */
-    public function clearCache(array $options = array())
+    public function clearCache(array $options = [])
     {
         $this['app']->on('kernel.terminate', function() use ($options) {
             $this->doClearCache($options);
@@ -185,7 +185,7 @@ class SystemExtension extends Extension
     /**
      * TODO: clear opcache
      */
-    public function doClearCache(array $options = array())
+    public function doClearCache(array $options = [])
     {
         // clear cache
         if (empty($options) || isset($options['cache'])) {
@@ -211,7 +211,7 @@ class SystemExtension extends Extension
 
     protected function mergeOptions()
     {
-        $keys = array(
+        $keys = [
             'app.frontpage',
             'app.locale',
             'app.locale_admin',
@@ -230,7 +230,7 @@ class SystemExtension extends Extension
             'maintenance.enabled',
             'maintenance.msg',
             'theme.site'
-        );
+        ];
 
         foreach ($keys as $key) {
             $this['config']->set($key, $this['option']->get("system:$key", $this['config']->get($key)));

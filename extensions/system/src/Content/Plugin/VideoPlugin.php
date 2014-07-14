@@ -18,7 +18,7 @@ class VideoPlugin extends EventSubscriber
      */
     public function onContentPlugins(ContentEvent $event)
     {
-        $event->addPlugin('video', array($this, 'applyPlugin'));
+        $event->addPlugin('video', [$this, 'applyPlugin']);
     }
 
     /**
@@ -61,8 +61,8 @@ class VideoPlugin extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'content.plugins' => array('onContentPlugins', 15),
-        );
+        return [
+            'content.plugins' => ['onContentPlugins', 15],
+        ];
     }
 }

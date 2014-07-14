@@ -11,7 +11,7 @@ class ExtensionManager extends PackageManager
     /**
      * @var array
      */
-    protected $classes = array();
+    protected $classes = [];
 
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ class ExtensionManager extends PackageManager
             return include($bootstrap);
         };
 
-        $config = (!($config = $fn($this->app, "$root/extension.php")) || 1 === $config) ? array() : $config;
+        $config = (!($config = $fn($this->app, "$root/extension.php")) || 1 === $config) ? [] : $config;
         $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Extension\Extension';
 
         if (isset($config['autoload'])) {

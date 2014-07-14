@@ -14,7 +14,7 @@ class ActiveFilter extends FilterIterator
     /**
      * {@inheritdoc}
      */
-    public function __construct(\Iterator $iterator, array $options = array())
+    public function __construct(\Iterator $iterator, array $options = [])
     {
         parent::__construct($iterator, $options);
 

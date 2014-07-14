@@ -104,7 +104,7 @@ abstract class Thread implements ThreadInterface
     /**
      * {@inheritdoc}
      */
-    public function setComments(array $comments = array())
+    public function setComments(array $comments = [])
     {
         $this->comments = $comments;
     }

@@ -38,8 +38,8 @@ class MaintenanceListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'system.loaded' => array('onSystemLoaded', 20)
-        );
+        return [
+            'system.loaded' => ['onSystemLoaded', 20]
+        ];
     }
 }

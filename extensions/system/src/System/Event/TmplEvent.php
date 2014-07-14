@@ -9,7 +9,7 @@ class TmplEvent extends Event
     /**
      * @var string[]
      */
-    private $templates = array();
+    private $templates = [];
 
     /**
      * Checks if a template is registered.

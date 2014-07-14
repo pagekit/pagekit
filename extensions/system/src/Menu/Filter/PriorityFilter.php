@@ -7,7 +7,7 @@ class PriorityFilter extends FilterIterator
     /**
      * {@inheritdoc}
      */
-    public function __construct(\Iterator $iterator, array $options = array())
+    public function __construct(\Iterator $iterator, array $options = [])
     {
         $elements = iterator_to_array($iterator, false);
 

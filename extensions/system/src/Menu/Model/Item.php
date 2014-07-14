@@ -28,12 +28,12 @@ class Item implements ItemInterface
     /**
      * @var array
      */
-	protected $attributes = array();
+	protected $attributes = [];
 
     /**
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * @var MenuInterface

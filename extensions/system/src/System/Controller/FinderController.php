@@ -22,7 +22,7 @@ class FinderController extends Controller
             return $this->error(__('Permission denied.'));
         }
 
-        $data = array_fill_keys(array('folders', 'files'), array());
+        $data = array_fill_keys(['folders', 'files'], []);
         $data['mode'] = $mode;
 
         foreach ($this['file']->find()->depth(0)->in($dir) as $file) {
@@ -31,18 +31,18 @@ class FinderController extends Controller
                 continue;
             }
 
-            $info = array(
+            $info = [
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
                 'url'      => htmlspecialchars($this['url']->to($file->getPathname()), ENT_QUOTES),
                 'writable' => $mode == 'w'
-            );
+            ];
 
             if (!$isDir = $file->isDir()) {
-                $info = array_merge($info, array(
+                $info = array_merge($info, [
                     'size'         => $this->formatFileSize($file->getSize()),
                     'lastmodified' => $this['dates']->format($file->getMTime(), 'd.m.y H:m')
-                ));
+                ]);
             }
 
             $data[$isDir ? 'folders' : 'files'][] = $info;
@@ -199,7 +199,7 @@ class FinderController extends Controller
           return __('n/a');
       }
 
-      $sizes = array(__('%d Bytes'), __('%d  KB'), __('%d  MB'), __('%d  GB'), __('%d TB'), __('%d PB'), __('%d EB'), __('%d ZB'), __('%d YB'));
+      $sizes = [__('%d Bytes'), __('%d  KB'), __('%d  MB'), __('%d  GB'), __('%d TB'), __('%d PB'), __('%d EB'), __('%d ZB'), __('%d YB')];
       $size  = round($size/pow(1024, ($i = floor(log($size, 1024)))), 2);
       return sprintf($sizes[$i], $size);
     }
@@ -220,11 +220,11 @@ class FinderController extends Controller
      */
     protected function normalizePath($path)
     {
-        $path   = str_replace(array('\\', '//'), '/', $path);
+        $path   = str_replace(['\\', '//'], '/', $path);
         $prefix = preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches) ? $matches['prefix'] : '';
         $path   = substr($path, strlen($prefix));
         $parts  = array_filter(explode('/', $path), 'strlen');
-        $tokens = array();
+        $tokens = [];
 
         foreach ($parts as $part) {
             if ('..' === $part) {
@@ -255,6 +255,6 @@ class FinderController extends Controller
     }
 
     protected function error($message) {
-        return array('error' => true, 'message' => $message);
+        return ['error' => true, 'message' => $message];
     }
 }

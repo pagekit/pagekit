@@ -32,7 +32,7 @@ interface MenuInterface extends \IteratorAggregate
     /**
      * @param param ItemInterface[] $items
      */
-    public function setItems(array $items = array());
+    public function setItems(array $items = []);
 
     /**
      * @return ItemInterface[]

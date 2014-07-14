@@ -10,17 +10,17 @@ class FileAccessEvent extends Event
     /**
      * @var string[]
      */
-    protected $writePaths = array();
+    protected $writePaths = [];
 
     /**
      * @var string[]
      */
-    protected $readPaths = array();
+    protected $readPaths = [];
 
     /**
      * @var string[]
      */
-    protected $notPaths = array();
+    protected $notPaths = [];
 
     /**
      * Adds a rule a path must match

@@ -11,12 +11,12 @@ class Editor extends EventSubscriber implements EditorInterface
     /**
      * @var array
      */
-    protected $plugins = array();
+    protected $plugins = [];
 
     /**
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * @return array
@@ -79,16 +79,16 @@ class Editor extends EventSubscriber implements EditorInterface
     /**
      * {@inheritdoc}
      */
-    public function render($value, array $attributes = array())
+    public function render($value, array $attributes = [])
     {
-        $this['view.scripts']->queue('editor', 'extension://system/assets/js/editor/editor.js', 'requirejs', array(
+        $this['view.scripts']->queue('editor', 'extension://system/assets/js/editor/editor.js', 'requirejs', [
             'data-editor' => json_encode(array_values($this->getPlugins()))
-        ));
+        ]);
 
-        $this->addAttribute(array(
+        $this->addAttribute([
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
-            'data-finder' => json_encode(array('root' => $this['config']->get('app.storage')))
-        ));
+            'data-finder' => json_encode(['root' => $this['config']->get('app.storage')])
+        ]);
 
         return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(array_merge($this->attributes, $attributes)), htmlspecialchars($value));
     }
@@ -147,9 +147,9 @@ class Editor extends EventSubscriber implements EditorInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'editor.load' => array('onEditorLoad', -8),
+        return [
+            'editor.load' => ['onEditorLoad', -8],
             'system.tmpl' => 'onSystemTmpl'
-        );
+        ];
     }
 }

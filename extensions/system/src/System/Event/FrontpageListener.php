@@ -25,8 +25,8 @@ class FrontpageListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'system.init' => array('onSystemInit', -15)
-        );
+        return [
+            'system.init' => ['onSystemInit', -15]
+        ];
     }
 }

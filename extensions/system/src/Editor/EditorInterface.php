@@ -11,5 +11,5 @@ interface EditorInterface
      * @param  array  $attributes
      * @return string
      */
-    public function render($value, array $attributes = array());
+    public function render($value, array $attributes = []);
 }

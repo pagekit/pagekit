@@ -47,7 +47,7 @@ class WidgetProvider implements \ArrayAccess
      * @param  array $options
      * @return string|null
      */
-    public function render($widget, $options = array())
+    public function render($widget, $options = [])
     {
         if (!$widget instanceof WidgetInterface) {
             $widget = $this->get($widget);

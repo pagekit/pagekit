@@ -20,7 +20,7 @@ class Role extends BaseRole
     protected $priority = 0;
 
     /** @Column(type="simple_array") */
-    protected $permissions = array();
+    protected $permissions = [];
 
     /**
      * @PreSave

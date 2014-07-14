@@ -44,7 +44,7 @@ class MenuController extends Controller
             $menu->setItems($this->items->findByMenu($menu));
         }
 
-        return array('head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus);
+        return ['head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus];
     }
 
     /**
@@ -62,8 +62,8 @@ class MenuController extends Controller
                 $menu = new Menu;
             }
 
-            if ($this->menus->where(array('name = ?', 'id <> ?'), array($name, $id))->first()) {
-                throw new Exception(__('Invalid menu name. "%name%" is already in use.', array('%name%' => $name)));
+            if ($this->menus->where(['name = ?', 'id <> ?'], [$name, $id])->first()) {
+                throw new Exception(__('Invalid menu name. "%name%" is already in use.', ['%name%' => $name]));
             }
 
             $this->menus->save($menu, compact('name'));
@@ -72,7 +72,7 @@ class MenuController extends Controller
             $this['message']->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu', array('id' => isset($menu) ? $menu->getId() : 0));
+        return $this->redirect('@system/menu', ['id' => isset($menu) ? $menu->getId() : 0]);
     }
 
     /**
@@ -88,7 +88,7 @@ class MenuController extends Controller
 
             $this->menus->delete($menu);
 
-            $this['db']->delete('@system_menu_item', array('menu_id' => $id));
+            $this['db']->delete('@system_menu_item', ['menu_id' => $id]);
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -101,7 +101,7 @@ class MenuController extends Controller
      * @Request({"id": "int", "order": "array"}, csrf=true)
      * @Response("json")
      */
-    public function reorderAction($id, $order = array())
+    public function reorderAction($id, $order = [])
     {
         $items = $this->items->findByMenu($id);
 

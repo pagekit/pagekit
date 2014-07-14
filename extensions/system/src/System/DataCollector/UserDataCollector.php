@@ -30,29 +30,29 @@ class UserDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         if (null === $this->auth) {
-            $this->data = array(
+            $this->data = [
                 'enabled'       => false,
                 'authenticated' => false,
                 'user_class'   => null,
                 'user'          => '',
-                'roles'         => array(),
-            );
+                'roles'         => [],
+            ];
         } elseif (null === $user = $this->auth->getUser()) {
-            $this->data = array(
+            $this->data = [
                 'enabled'       => true,
                 'authenticated' => false,
                 'user_class'   => null,
                 'user'          => '',
-                'roles'         => array(),
-            );
+                'roles'         => [],
+            ];
         } else {
-            $this->data = array(
+            $this->data = [
                 'enabled'       => true,
                 'authenticated' => $user->isAuthenticated(),
                 'user_class'   => get_class($user),
                 'user'          => $user->getUsername(),
                 'roles'         => array_map(function ($role) { return $role->getName(); }, $user->getRoles()),
-            );
+            ];
         }
     }
 

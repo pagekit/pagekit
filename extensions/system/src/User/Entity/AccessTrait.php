@@ -8,7 +8,7 @@ use Pagekit\User\Model\UserInterface;
 trait AccessTrait
 {
     /** @Column(type="simple_array") */
-    protected $roles = array();
+    protected $roles = [];
 
     /**
      * @return int[]

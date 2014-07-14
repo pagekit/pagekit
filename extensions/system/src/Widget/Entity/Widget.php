@@ -34,10 +34,10 @@ class Widget extends BaseWidget
     protected $pages = '';
 
     /** @Column(name="menu_items", type="simple_array") */
-    protected $menuItems = array();
+    protected $menuItems = [];
 
     /** @Column(type="json_array", name="data") */
-    protected $settings = array();
+    protected $settings = [];
 
     public function getShowTitle()
     {
@@ -93,9 +93,9 @@ class Widget extends BaseWidget
 
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_DISABLED => __('Disabled'),
             self::STATUS_ENABLED  => __('Enabled')
-        );
+        ];
     }
 }

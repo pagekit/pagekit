@@ -44,14 +44,14 @@ class RoleController extends Controller
 
         $authrole = $this->roles->find(Role::ROLE_AUTHENTICATED);
 
-        return array('head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $this['permissions']);
+        return ['head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $this['permissions']];
     }
 
     /**
      * @Request({"id": "int", "name", "permissions": "array"}, csrf=true)
      * @Response("json")
      */
-    public function saveAction($id, $name = '', $permissions = array())
+    public function saveAction($id, $name = '', $permissions = [])
     {
         // is new ?
         if (!$role = $this->roles->find($id)) {
@@ -65,7 +65,7 @@ class RoleController extends Controller
         $role->setPermissions($permissions);
         $this->roles->save($role);
 
-        return  $this['request']->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', array('id' => isset($role) ? $role->getId() : 0));
+        return  $this['request']->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', ['id' => isset($role) ? $role->getId() : 0]);
     }
 
     /**

@@ -15,7 +15,7 @@ class WidgetListener extends EventSubscriber
         $settings = $this->getSettings();
         $this['app']->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
             $widget = $event->getEntity();
-            $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : array());
+            $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : []);
         });
     }
 
@@ -35,7 +35,7 @@ class WidgetListener extends EventSubscriber
     public function onWidgetSave(WidgetEvent $event)
     {
         $settings = $this->getSettings();
-        $settings[$event->getWidget()->getId()] = $this['request']->get('_theme', array());
+        $settings[$event->getWidget()->getId()] = $this['request']->get('_theme', []);
         $this->setSettings($settings);
     }
 
@@ -58,18 +58,18 @@ class WidgetListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.site'              => 'onSystemSite',
             'system.widget.edit'       => 'onWidgetEdit',
             'system.widget.save'       => 'onWidgetSave',
             'system.widget.copy'       => 'onWidgetCopy',
             'system.widget.postDelete' => 'onWidgetDelete'
-        );
+        ];
     }
 
     protected function getSettings()
     {
-        return $this['option']->get($this->getOptionsName(), array());
+        return $this['option']->get($this->getOptionsName(), []);
     }
 
     protected function setSettings($settings)

@@ -75,10 +75,10 @@ class ExtensionTranslateCommand extends Command
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->visitors = array(
+        $this->visitors = [
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
-        );
+        ];
         $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
         $this->loader = new PoFileLoader;
     }
@@ -89,11 +89,11 @@ class ExtensionTranslateCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $extension = $this->argument('extension') ? : 'system';
-        $extensions = array_diff($this->extensions, array('installer'));
+        $extensions = array_diff($this->extensions, ['installer']);
 
         if (in_array($extension, $extensions)) {
 
-            $files = array();
+            $files = [];
             $languages = $this->getPath($extension) . '/languages';
 
             foreach ($extensions as $path) {
@@ -115,7 +115,7 @@ class ExtensionTranslateCommand extends Command
             mkdir($languages, 0777, true);
         }
 
-        $result = array();
+        $result = [];
         foreach ($this->visitors as $name => $visitor) {
 
             if (!isset($files[$name])) {
@@ -236,7 +236,7 @@ EOD;
      */
     protected function getFiles($path)
     {
-        $files = array();
+        $files = [];
 
         foreach (Finder::create()->files()->in($path)->name('*.{razr,php}') as $file) {
 
@@ -281,7 +281,7 @@ abstract class NodeVisitor
     /**
      * @var array
      */
-    public $results = array();
+    public $results = [];
 
     /**
      * @var EngineInterface
@@ -353,7 +353,7 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
         {
             $key = $node->name->parts[0] == '__' ? 2 : 3;
             $domain = isset($node->args[$key]) && is_string($node->args[$key]->value->value) ? $node->args[$key]->value->value : 'messages';
-            $this->results[$domain][$string][] = array('file' => $this->file, 'line' => $node->getLine());
+            $this->results[$domain][$string][] = ['file' => $this->file, 'line' => $node->getLine()];
         }
     }
 

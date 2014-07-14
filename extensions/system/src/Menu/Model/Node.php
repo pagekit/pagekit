@@ -63,7 +63,7 @@ class Node extends \Pagekit\Component\Tree\Node
             return;
         }
 
-        if (!is_callable($callable = array($this->item, $method))) {
+        if (!is_callable($callable = [$this->item, $method])) {
             throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->item), $method));
         }
 

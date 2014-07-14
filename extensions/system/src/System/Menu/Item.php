@@ -21,7 +21,7 @@ class Item extends BaseItem
      *
      * @param array $properties
      */
-    public function __construct($properties = array())
+    public function __construct($properties = [])
     {
         foreach ($properties as $property => $value) {
             if (property_exists($this, $property)) {

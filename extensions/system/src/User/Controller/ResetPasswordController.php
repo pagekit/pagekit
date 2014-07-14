@@ -42,7 +42,7 @@ class ResetPasswordController extends Controller
             return $this->redirect('/');
         }
 
-        return array('head.title' => __('Reset'), 'last_login' => $this['session']->get(self::RESET_LOGIN));
+        return ['head.title' => __('Reset'), 'last_login' => $this['session']->get(self::RESET_LOGIN)];
     }
 
     /**
@@ -77,14 +77,14 @@ class ResetPasswordController extends Controller
 
             $user->setActivation($this['auth.random']->generateString(128));
 
-            $url = $this['url']->route('@system/resetpassword/confirm', array('user' => $user->getUsername(), 'key' => $user->getActivation()), true);
+            $url = $this['url']->route('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
 
             try {
 
                 $this['mailer']->create()
                     ->setTo($user->getEmail())
                     ->setSubject(sprintf('[%s] %s', $this['config']->get('app.site_title'), __('Password Reset')))
-                    ->setBody($this['view']->render('system/user/mails/reset.razr', array('username' => $user->getUsername(), 'url' => $url)), 'text/html')
+                    ->setBody($this['view']->render('system/user/mails/reset.razr', ['username' => $user->getUsername(), 'url' => $url]), 'text/html')
                     ->send();
 
             } catch (\Exception $e) {
@@ -153,6 +153,6 @@ class ResetPasswordController extends Controller
             }
         }
 
-        return array('head.title' => __('Reset Confirm'), 'username' => $username, 'activation' => $activation);
+        return ['head.title' => __('Reset Confirm'), 'username' => $username, 'activation' => $activation];
     }
 }

@@ -38,10 +38,10 @@ class ProfileController extends Controller
     public function indexAction()
     {
         if (!$this->user->isAuthenticated()) {
-            return $this->redirect('@system/auth/login', array('redirect' => $this['url']->current()));
+            return $this->redirect('@system/auth/login', ['redirect' => $this['url']->current()]);
         }
 
-        return array('head.title' => __('Your Profile'), 'user' => $this->user);
+        return ['head.title' => __('Your Profile'), 'user' => $this->user];
     }
 
     /**
@@ -70,13 +70,13 @@ class ProfileController extends Controller
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if ($this->users->where(array('email = ?', 'id <> ?'), array($email, $user->getId()))->first()) {
+            if ($this->users->where(['email = ?', 'id <> ?'], [$email, $user->getId()])->first()) {
                 throw new Exception(__('Email not available.'));
             }
 
             if ($passNew) {
 
-                if (!$this['auth']->getUserProvider()->validateCredentials($this->user, array('password' => $passOld))) {
+                if (!$this['auth']->getUserProvider()->validateCredentials($this->user, ['password' => $passOld])) {
                     throw new Exception(__('Invalid Password.'));
                 }
 

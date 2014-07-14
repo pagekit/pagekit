@@ -1,29 +1,29 @@
 <?php
 
-return array(
+return [
 
     'main' => '%NAMESPACE_ESC%\\%CLASSNAME%',
 
-    'autoload' => array(
+    'autoload' => [
 
         '%NAMESPACE_ESC%\\' => 'src'
 
-    ),
+    ],
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view' => 'views'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => array(
+    'settings' => [
 
         'system' => '%NAME%/admin/settings.razr'
 
-    )
+    ]
 
-);
+];

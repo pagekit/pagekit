@@ -41,7 +41,7 @@ class AccessListener extends EventSubscriber
         }
 
         $admin  = false;
-        $access = array();
+        $access = [];
 
         foreach ($this->reader->getClassAnnotations($event->getClass()) as $annot) {
             if ($annot instanceof Access) {
@@ -89,7 +89,7 @@ class AccessListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/system/admin', array(), true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
@@ -122,7 +122,7 @@ class AccessListener extends EventSubscriber
 
         if (!$this['auth']->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
 
-            $params = array();
+            $params = [];
 
             // redirect to default URL for POST requests and don't explicitly redirect the default URL
             if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/system/admin') {
@@ -138,13 +138,13 @@ class AccessListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'route.configure' => 'onConfigureRoute',
             'auth.authorize'  => 'onAuthorize',
-            'system.loaded'   => array(
-                array('onSystemLoaded', -512),
-                array('onLoadAdmin', -256)
-            )
-        );
+            'system.loaded'   => [
+                ['onSystemLoaded', -512],
+                ['onLoadAdmin', -256]
+            ]
+        ];
     }
 }

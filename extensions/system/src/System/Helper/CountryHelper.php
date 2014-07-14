@@ -16,7 +16,7 @@ class CountryHelper
      */
     public static function getStandardList()
     {
-        $countries = array(
+        $countries = [
             'AC' => __('Ascension Island'),
             'AD' => __('Andorra'),
             'AE' => __('United Arab Emirates'),
@@ -275,7 +275,7 @@ class CountryHelper
             'ZA' => __('South Africa'),
             'ZM' => __('Zambia'),
             'ZW' => __('Zimbabwe'),
-        );
+        ];
 
         // Sort the list.
         natcasesort($countries);

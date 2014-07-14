@@ -109,7 +109,7 @@ class WidgetsController extends Controller
             }
 
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
-            $data['settings']  = array_merge(array('show_title' => 0), isset($data['settings']) ? $data['settings'] : []);
+            $data['settings']  = array_merge(['show_title' => 0], isset($data['settings']) ? $data['settings'] : []);
 
             $this->widgets->save($widget, $data);
 

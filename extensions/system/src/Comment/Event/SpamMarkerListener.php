@@ -43,6 +43,6 @@ class SpamMarkerListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array('system.comment.spam_mark' => 'mark');
+        return ['system.comment.spam_mark' => 'mark'];
     }
 }

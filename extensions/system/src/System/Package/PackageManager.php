@@ -38,7 +38,7 @@ abstract class PackageManager implements \IteratorAggregate
     /**
      * @var array
      */
-    protected $loaded = array();
+    protected $loaded = [];
 
     /**
      * Constructor.

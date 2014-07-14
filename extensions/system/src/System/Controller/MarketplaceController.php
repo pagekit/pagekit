@@ -14,7 +14,7 @@ class MarketplaceController extends Controller
      */
     public function indexAction()
     {
-        $packages = array();
+        $packages = [];
 
         foreach ($this['extensions']->getRepository()->getPackages() as $package) {
             $packages[$package->getName()] = $package->getVersion();
@@ -24,6 +24,6 @@ class MarketplaceController extends Controller
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        return array('head.title' => __('Marketplace'), 'api' => $this['config']->get('api.url'), 'key' => $this['option']->get('system:api.key'), 'packages' => json_encode($packages));
+        return ['head.title' => __('Marketplace'), 'api' => $this['config']->get('api.url'), 'key' => $this['option']->get('system:api.key'), 'packages' => json_encode($packages)];
     }
 }

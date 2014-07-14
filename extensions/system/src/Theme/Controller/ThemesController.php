@@ -33,8 +33,8 @@ class ThemesController extends Controller
     public function indexAction()
     {
         $current = null;
-        $packages = array();
-        $packagesJson = array();
+        $packages = [];
+        $packagesJson = [];
 
         foreach ($this->themes->getRepository()->getPackages() as $package) {
 
@@ -59,12 +59,12 @@ class ThemesController extends Controller
         });
 
         if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json(array(
+            return $this['response']->json([
                 'table' => $this['view']->render('view://system/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
-            ));
+            ]);
         }
 
-        return array('head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson));
+        return ['head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**
@@ -89,7 +89,7 @@ class ThemesController extends Controller
             $this->themes->load($name);
 
             if (!$theme = $this->themes->get($name)) {
-                throw new Exception(__('Unable to enable theme "%name%".', array('%name%' => $name)));
+                throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
             $theme->boot($this->getApplication());
@@ -114,7 +114,7 @@ class ThemesController extends Controller
         try {
 
             if (!$theme = $this->themes->getRepository()->findPackage($name)) {
-                throw new Exception(__('Unable to uninstall theme "%name%".', array('%name%' => $name)));
+                throw new Exception(__('Unable to uninstall theme "%name%".', ['%name%' => $name]));
             }
 
             $this->themes->getInstaller()->uninstall($theme);
@@ -139,10 +139,10 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $config = $this['option']->get("$name:config", array());
+            $config = $this['option']->get("$name:config", []);
             $event  = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
 
-            return $this['view']->render($tmpl, array('theme' => $theme, 'config' => $event->getConfig()));
+            return $this['view']->render($tmpl, ['theme' => $theme, 'config' => $event->getConfig()]);
 
         } catch (Exception $e) {
 
@@ -155,7 +155,7 @@ class ThemesController extends Controller
     /**
      * @Request({"name", "config": "array"})
      */
-    public function saveSettingsAction($name, $config = array())
+    public function saveSettingsAction($name, $config = [])
     {
         try {
 

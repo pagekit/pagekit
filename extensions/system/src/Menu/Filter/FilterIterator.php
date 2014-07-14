@@ -19,7 +19,7 @@ abstract class FilterIterator extends \FilterIterator implements \ArrayAccess
      * @param \Iterator $iterator
      * @param array     $options
      */
-    public function __construct(\Iterator $iterator, array $options = array())
+    public function __construct(\Iterator $iterator, array $options = [])
     {
         parent::__construct($iterator);
 

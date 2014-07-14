@@ -7,7 +7,7 @@ class FilterManager implements \IteratorAggregate
     /**
      * @var string[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * Check if a filter is registered.

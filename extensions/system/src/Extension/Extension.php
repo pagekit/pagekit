@@ -39,7 +39,7 @@ class Extension implements \ArrayAccess
      * @param string $path
      * @param array  $config
      */
-    public function __construct($name, $path, array $config = array())
+    public function __construct($name, $path, array $config = [])
     {
         $this->name   = $name;
         $this->path   = $path;
@@ -183,7 +183,7 @@ class Extension implements \ArrayAccess
             }
         };
 
-        $addResources($this->getConfig('resources.export', array()), $this->getName());
+        $addResources($this->getConfig('resources.export', []), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
             $this['events']->addListener('system.init', function() use ($config, $addResources) {

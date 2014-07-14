@@ -43,7 +43,7 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        return array('head.title' => __('User Registration'));
+        return ['head.title' => __('User Registration')];
     }
 
     /**
@@ -87,11 +87,11 @@ class RegistrationController extends Controller
                 $errors[] = ['field'=> 'email', 'message' => __('Email is invalid.')];
             }
 
-            if ($this->users->query()->orWhere(array('username = :username', 'email = :username'), array('username' => $username))->first()) {
+            if ($this->users->query()->orWhere(['username = :username', 'email = :username'], ['username' => $username])->first()) {
                 $errors[] = ['field'=> 'username', 'message' => __('Username not available.'), 'dynamic' => true];
             }
 
-            if ($this->users->query()->orWhere(array('username = :email', 'email = :email'), array('email' => $email))->first()) {
+            if ($this->users->query()->orWhere(['username = :email', 'email = :email'], ['email' => $email])->first()) {
                 $errors[] = ['field'=> 'email', 'message' => __('Email not available.'), 'dynamic' => true];
             }
 
@@ -106,7 +106,7 @@ class RegistrationController extends Controller
             $user->setEmail($email);
             $user->setPassword($this['auth.password']->hash($password));
             $user->setStatus(UserInterface::STATUS_BLOCKED);
-            $user->setRoles($this->roles->where(array('id' => RoleInterface::ROLE_AUTHENTICATED))->get());
+            $user->setRoles($this->roles->where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
 
             $token = $this['auth.random']->generateString(128);
             $admin = $this['option']->get('system:user.registration') == 'approval';
@@ -175,7 +175,7 @@ class RegistrationController extends Controller
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) or empty($activation) or !$user = $this->users->where(array('username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'))->first()) {
+        if (empty($username) or empty($activation) or !$user = $this->users->where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             $this['message']->error(__('Invalid key.'));
             return $this->redirect('/');
         }
@@ -217,7 +217,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($this['option']->get('system:mail.from.address'))
-                ->setSubject(__('Please approve registration at %site%!', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setSubject(__('Please approve registration at %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
@@ -230,7 +230,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Please confirm your registration at %site%', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setSubject(__('Please confirm your registration at %site%', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render(sprintf('system/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 
@@ -245,7 +245,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Account activated at %site%', array('%site%' => $this['option']->get('system:app.site_title'))))
+                ->setSubject(__('Account activated at %site%', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render('system/user/mails/activated.razr', compact('user')), 'text/html')
                 ->send();
 

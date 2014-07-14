@@ -9,7 +9,7 @@ class PermissionEvent extends Event
     /**
      * @var array
      */
-    protected $permissions = array();
+    protected $permissions = [];
 
     /**
      * Gets the permissions.

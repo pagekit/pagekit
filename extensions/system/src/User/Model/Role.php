@@ -22,7 +22,7 @@ class Role implements RoleInterface
     /**
      * @var string[]
      */
-    protected $permissions = array();
+    protected $permissions = [];
 
     /**
      * {@inheritdoc}
@@ -109,7 +109,7 @@ class Role implements RoleInterface
      */
     public function clearPermissions()
     {
-        $this->permissions = array();
+        $this->permissions = [];
     }
 
     /**
@@ -117,7 +117,7 @@ class Role implements RoleInterface
      */
     public function isLocked()
     {
-        return in_array($this->id, array(self::ROLE_ANONYMOUS, self::ROLE_AUTHENTICATED, self::ROLE_ADMINISTRATOR));
+        return in_array($this->id, [self::ROLE_ANONYMOUS, self::ROLE_AUTHENTICATED, self::ROLE_ADMINISTRATOR]);
     }
 
     /**

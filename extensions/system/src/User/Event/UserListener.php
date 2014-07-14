@@ -40,13 +40,13 @@ class UserListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'auth.login'             => 'onUserLogin',
             'kernel.terminate'       => 'onUserAccess',
             'system.role.postSave'   => 'onUserChange',
             'system.role.postDelete' => 'onUserChange',
             'system.user.postSave'   => 'onUserChange',
             'system.user.postDelete' => 'onUserChange'
-        );
+        ];
     }
 }

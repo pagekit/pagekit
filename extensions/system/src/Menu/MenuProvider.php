@@ -17,7 +17,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
     /**
      * @var MenuInterface[]
      */
-    protected $menus = array();
+    protected $menus = [];
 
     /**
      * @var MenuInterface[]
@@ -110,7 +110,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
      * @param  array                $parameters
      * @return Node
      */
-    public function getTree($menu, array $parameters = array())
+    public function getTree($menu, array $parameters = [])
     {
         if (!$menu instanceof MenuInterface) {
             $menu = $this->get($menu);
@@ -123,7 +123,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
             }
         }
 
-        $items = array(new Node(0));
+        $items = [new Node(0)];
 
         foreach ($iterator as $item) {
             $id   = $item->getId();

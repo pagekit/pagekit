@@ -44,7 +44,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new ExtensionManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
         };
 
-        $app['extensions.boot'] = array();
+        $app['extensions.boot'] = [];
     }
 
     public function boot(Application $app)
@@ -124,7 +124,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $dependencies = (array) $script['dependencies'];
 
             if (isset($script['requirejs'])) {
-                $script['dependencies'] = array_merge($dependencies, array('requirejs'));
+                $script['dependencies'] = array_merge($dependencies, ['requirejs']);
             } elseif (in_array('requirejs', $dependencies)) {
                 $scripts->dequeue($name = $script->getName());
                 $scripts->queue($name);
@@ -134,13 +134,13 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public static function getSubscribedEvents()
     {
-        return array(
-            'kernel.request' => array(
-                array('onKernelRequest', 50),
-                array('onRequestMatched', 0)
-            ),
+        return [
+            'kernel.request' => [
+                ['onKernelRequest', 50],
+                ['onRequestMatched', 0]
+            ],
             'templating.reference' => 'onTemplateReference',
             'kernel.response'      => ['onKernelResponse', 15]
-        );
+        ];
     }
 }

@@ -44,7 +44,7 @@ class UserRepository extends Repository
      */
     public function findByLogin($login)
     {
-        return $this->where(array('username' => $login))->orWhere(array('email' => $login))->first();
+        return $this->where(['username' => $login])->orWhere(['email' => $login])->first();
     }
 
     /**
@@ -52,7 +52,7 @@ class UserRepository extends Repository
      */
     public function updateLogin(UserInterface $user)
     {
-        $this->where(array('id' => $user->getId()))->update(array('login' => date('Y-m-d H:i:s')));
+        $this->where(['id' => $user->getId()])->update(['login' => date('Y-m-d H:i:s')]);
     }
 
     /**
@@ -60,6 +60,6 @@ class UserRepository extends Repository
      */
     public function updateAccess(UserInterface $user)
     {
-        $this->where(array('id' => $user->getId()))->update(array('access' => date('Y-m-d H:i:s')));
+        $this->where(['id' => $user->getId()])->update(['access' => date('Y-m-d H:i:s')]);
     }
 }

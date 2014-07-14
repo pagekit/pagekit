@@ -34,9 +34,9 @@ class TextWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['content']->applyPlugins($widget->get('content'), array('widget' => $widget, 'markdown' => $widget->get('markdown')));
+        return $this['content']->applyPlugins($widget->get('content'), ['widget' => $widget, 'markdown' => $widget->get('markdown')]);
     }
 
     /**

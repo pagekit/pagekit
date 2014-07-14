@@ -185,7 +185,7 @@ abstract class User implements UserInterface
     {
         if (null === $this->permissions) {
 
-            $this->permissions = array();
+            $this->permissions = [];
 
             foreach ($this->getRoles() as $role) {
                 $this->permissions = array_merge($this->permissions, $role->getPermissions());

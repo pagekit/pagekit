@@ -27,7 +27,7 @@ class SimplePlugin extends EventSubscriber
     {
         $content = preg_replace_callback(self::PLUGIN_CODE, function($matches) use ($event) {
 
-            $options = isset($matches[2]) ? json_decode($matches[2], true) : array();
+            $options = isset($matches[2]) ? json_decode($matches[2], true) : [];
 
             if ($callback = $event->getPlugin($matches[1])) {
                 return call_user_func($callback, (array) $options);
@@ -43,8 +43,8 @@ class SimplePlugin extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'content.plugins' => array('onContentPlugins', 10)
-        );
+        return [
+            'content.plugins' => ['onContentPlugins', 10]
+        ];
     }
 }

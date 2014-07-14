@@ -55,7 +55,7 @@ class BuildCommand extends Command
             ->ignoreVCS(true)
             ->filter(function ($file) {
 
-                $exclude = array(
+                $exclude = [
                     '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
                     '^extensions\/(?!(installer|page|blog|system)\/).*',
                     '^extensions\/.+\/languages\/.+\.(po|pot)',
@@ -70,7 +70,7 @@ class BuildCommand extends Command
                     '^vendor\/swiftmailer\/swiftmailer\/(doc|notes|tests|test-suite|build)',
                     '^vendor\/symfony\/.+\/(tests\/|phpunit\.xml)',
                     '\/node_modules'
-                );
+                ];
 
                 return !preg_match('/' . implode('|', $exclude) . '/i', $file->getRelativePathname());
             });

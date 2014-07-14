@@ -34,7 +34,7 @@ class MenuWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
         if (ini_get('xdebug.max_nesting_level') < 1000) {
             ini_set('xdebug.max_nesting_level', 1000);
@@ -42,11 +42,11 @@ class MenuWidget extends Type
 
         $layout = isset($options['layout']) ? $options['layout'] : 'system/widgets/menu/nav.razr';
 
-        $root = $this['menus']->getTree($widget->get('menu', 0), array(
+        $root = $this['menus']->getTree($widget->get('menu', 0), [
             'access' => true,
             'active' => true,
             'status' => 1,
-        ));
+        ]);
 
         $startLevel = (int) $widget->get('start_level', 1) - 1;
         $maxDepth   = $startLevel + ($widget->get('depth') ?: INF);

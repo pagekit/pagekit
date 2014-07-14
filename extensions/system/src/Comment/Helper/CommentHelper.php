@@ -13,9 +13,9 @@ class CommentHelper
      * @param  array $parameters
      * @return Node
      */
-    public function getTree($comments = array(), array $parameters = array())
+    public function getTree($comments = [], array $parameters = [])
     {
-        $nodes = array(new Node(0));
+        $nodes = [new Node(0)];
 
         foreach ($comments as $comment) {
             $id   = $comment->getId();

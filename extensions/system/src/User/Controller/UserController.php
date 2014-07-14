@@ -49,7 +49,7 @@ class UserController extends Controller
         if ($filter) {
             $this['session']->set('user.filter', $filter);
         } else {
-            $filter = $this['session']->get('user.filter', array());
+            $filter = $this['session']->get('user.filter', []);
         }
 
         $query = $this->users->query()->related('roles')->orderBy('name');
@@ -57,18 +57,18 @@ class UserController extends Controller
         if (isset($filter['status'])) {
             if (is_numeric($filter['status'])) {
                 $filter['status'] = (int) $filter['status'];
-                $query->where(array('status' => intval($filter['status'])));
+                $query->where(['status' => intval($filter['status'])]);
                 if (!$filter['status']) {
                     $query->where('access IS NOT NULL');
                 }
             } elseif ('new' == $filter['status']) {
-                $query->where(array('status' => User::STATUS_BLOCKED, 'access IS NULL'));
+                $query->where(['status' => User::STATUS_BLOCKED, 'access IS NULL']);
             }
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(array('username LIKE :search', 'name LIKE :search', 'email LIKE :search'), array('search' => "%{$filter['search']}%"));
+                $query->orWhere(['username LIKE :search', 'name LIKE :search', 'email LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
             if ($role) {
                 $query->whereExists(function($query) use ($role) {
                     $query->from('@system_user_role u')
-                          ->where(array('@system_user.id = u.user_id', 'u.role_id' => $role));
+                          ->where(['@system_user.id = u.user_id', 'u.role_id' => $role]);
                 });
             }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
                 $query->whereExists(function($query) use ($sql) {
                     $query->from('@system_user_role ur')
                         ->join('@system_role r', 'ur.role_id = r.id')
-                        ->where(array('@system_user.id = ur.user_id', $sql));
+                        ->where(['@system_user.id = ur.user_id', $sql]);
                 });
             }
         }
@@ -97,7 +97,7 @@ class UserController extends Controller
         $users = $query->get();
         $roles = $this->getRoles();
 
-        return array('head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter);
+        return ['head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter];
     }
 
     /**
@@ -106,11 +106,11 @@ class UserController extends Controller
     public function addAction()
     {
         $user = new User;
-        $user->setRoles(array());
+        $user->setRoles([]);
 
-        $roles = $this->user->hasAccess('administer permissions') ? $this->getRoles() : array();
+        $roles = $this->user->hasAccess('administer permissions') ? $this->getRoles() : [];
 
-        return array('head.title' => __('Add User'), 'user' => $user, 'roles' => $roles);
+        return ['head.title' => __('Add User'), 'user' => $user, 'roles' => $roles];
     }
 
     /**
@@ -120,9 +120,9 @@ class UserController extends Controller
     public function editAction($id)
     {
         $user  = $this->users->where(compact('id'))->related('roles')->first();
-        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles($user) : array();
+        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
 
-        return array('head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles);
+        return ['head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles];
     }
 
     /**
@@ -165,14 +165,14 @@ class UserController extends Controller
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if ($this->users->where(array('id <> :id', ), compact('id'))->where(function($query) use ($name) {
-                $query->orWhere(array('username = :username', 'email = :username'), array('username' => $name));
+            if ($this->users->where(['id <> :id', ], compact('id'))->where(function($query) use ($name) {
+                $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
             })->first()) {
                 throw new Exception(__('Username not available.'));
             }
 
-            if ($this->users->where(array('id <> :id'), compact('id'))->where(function($query) use ($email) {
-                $query->orWhere(array('username = :email', 'email = :email'), array('email' => $email));
+            if ($this->users->where(['id <> :id'], compact('id'))->where(function($query) use ($email) {
+                $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
             })->first()) {
                 throw new Exception(__('Email not available.'));
             }
@@ -194,7 +194,7 @@ class UserController extends Controller
                     $roles[] = RoleInterface::ROLE_ADMINISTRATOR;
                 }
 
-                $user->setRoles($roles ? $this->roles->query()->whereIn('id', $roles)->get() : array());
+                $user->setRoles($roles ? $this->roles->query()->whereIn('id', $roles)->get() : []);
             }
 
             $this->users->save($user, $data);
@@ -203,18 +203,18 @@ class UserController extends Controller
                 $this->sendWelcomeEmail($user);
             }
 
-            return array('message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user));
+            return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user)];
 
         } catch (Exception $e) {
 
-            return array('error' => $e->getMessage());
+            return ['error' => $e->getMessage()];
         }
     }
 
     /**
      * @Request({"ids": "int[]"}, csrf=true)
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
 
@@ -236,7 +236,7 @@ class UserController extends Controller
     /**
      * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      */
-    public function statusAction($status, $ids = array())
+    public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
             if ($user = $this->users->find($id)) {
@@ -267,7 +267,7 @@ class UserController extends Controller
      */
     protected function getInfo(User $user)
     {
-        return array(
+        return [
             'id'         => $user->getId(),
             'username'   => $user->getUsername(),
             'name'       => $user->getName(),
@@ -276,7 +276,7 @@ class UserController extends Controller
             'badge'      => $user->getStatus() ? 'success' : 'danger',
             'login'      => ($date = $user->getLogin()) ? $this['dates']->format($date) : __('Never'),
             'registered' => ($date = $user->getRegistered()) ? $this['dates']->format($date) : null
-        );
+        ];
     }
 
     /**
@@ -287,7 +287,7 @@ class UserController extends Controller
      */
     protected function getRoles(User $user = null)
     {
-        $roles = $this->roles->where(array('id <> ?'), array(Role::ROLE_ANONYMOUS))->orderBy('priority')->get();
+        $roles = $this->roles->where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get();
 
         foreach ($roles as $role) {
 
@@ -315,12 +315,12 @@ class UserController extends Controller
         $platform = $this['db']->getDatabasePlatform();
         $col      = $platform->getConcatExpression($this['db']->quote(','), 'r.permissions', $this['db']->quote(','));
 
-        $params = array(
+        $params = [
             $expr->eq('r.id', Role::ROLE_ADMINISTRATOR),
             $expr->comparison($col, 'LIKE', $this['db']->quote("%,$permission,%"))
-        );
+        ];
 
-        return (string) call_user_func_array(array($expr, 'orX'), $params);
+        return (string) call_user_func_array([$expr, 'orX'], $params);
     }
 
     /**
@@ -335,7 +335,7 @@ class UserController extends Controller
             $this['mailer']->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Welcome!'))
-                ->setBody($this['view']->render('system/user/mails/welcome.razr', array('name' => $user->getName(), 'username' => $user->getUsername())), 'text/html')
+                ->setBody($this['view']->render('system/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
                 ->queue();
 
         } catch(\Exception $e) {}

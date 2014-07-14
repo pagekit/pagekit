@@ -9,12 +9,12 @@ class ActiveMenuEvent extends Event
     /**
      * @var int[]
      */
-    protected $active = array();
+    protected $active = [];
 
     /**
      * @var array
      */
-    protected $items = array('paths' => array(), 'patterns' => array());
+    protected $items = ['paths' => [], 'patterns' => []];
 
     /**
      * @param array $items
@@ -32,7 +32,7 @@ class ActiveMenuEvent extends Event
      */
     public function get($path)
     {
-        $items = array();
+        $items = [];
         foreach((array) $path as $p) {
             if (isset($this->items['paths'][$p])) {
                 $items += $this->items['paths'][$p];
@@ -87,7 +87,7 @@ class ActiveMenuEvent extends Event
         $patterns = preg_replace('/^(\!)?([^\!\/])/m', '$1/$2', $patterns);
         $patterns = preg_quote($patterns, '/');
 
-        foreach (explode("\n", str_replace(array('\!', '\*', "\r"), array('!', '.*', ''), $patterns)) as $pattern) {
+        foreach (explode("\n", str_replace(['\!', '\*', "\r"], ['!', '.*', ''], $patterns)) as $pattern) {
             if ($pattern === '') {
                 continue;
             } elseif ($pattern[0] === '!') {

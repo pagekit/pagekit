@@ -1,31 +1,31 @@
 <?php
 
-return array(
+return [
 
-    'autoload' => array(
+    'autoload' => [
 
         'Pagekit\\Alpha\\' => 'src'
 
-    ),
+    ],
 
     'main' => 'Pagekit\\Alpha\\AlphaTheme',
 
-    'resources' => array(
+    'resources' => [
 
-        'override' => array(
+        'override' => [
             'extension://system/theme/templates' => 'templates/system'
-        )
+        ]
 
-    ),
+    ],
 
-    'settings' => array(
+    'settings' => [
 
         'system'  => 'theme://alpha/views/admin/settings.razr',
         'widgets' => 'theme://alpha/views/admin/widgets/edit.razr'
 
-    ),
+    ],
 
-    'positions' => array(
+    'positions' => [
 
         'logo'       => 'Logo',
         'logo-small' => 'Logo Small',
@@ -36,9 +36,9 @@ return array(
         'footer'     => 'Footer',
         'offcanvas'  => 'Offcanvas'
 
-    ),
+    ],
 
-    'renderer' => array(
+    'renderer' => [
 
         'blank'     => 'theme://alpha/views/renderer/position.blank.razr',
         'grid'      => 'theme://alpha/views/renderer/position.grid.php',
@@ -46,6 +46,6 @@ return array(
         'offcanvas' => 'theme://alpha/views/renderer/position.offcanvas.razr',
         'panel'     => 'theme://alpha/views/renderer/position.panel.razr'
 
-    )
+    ]
 
-);
+];

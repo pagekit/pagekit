@@ -54,6 +54,6 @@ class FileProvider
             throw new \BadMethodCallException(sprintf('Undefined method call "%s::%s"', get_class($this->app['files']), $method));
         }
 
-        return call_user_func_array(array($this->app['files'], $method), $args);
+        return call_user_func_array([$this->app['files'], $method], $args);
     }
 }

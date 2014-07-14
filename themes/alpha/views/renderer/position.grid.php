@@ -1,18 +1,18 @@
 <?php
 
-$widths = array(
-    array('1-1'),
-    array('1-2', '1-2'),
-    array('1-3', '1-3', '1-3'),
-    array('1-4', '1-4', '1-4', '1-4'),
-    array('1-5', '1-5', '1-5', '1-5', '1-5'),
-    array('1-6', '1-6', '1-6', '1-6', '1-6', '1-6')
-);
+$widths = [
+    ['1-1'],
+    ['1-2', '1-2'],
+    ['1-3', '1-3', '1-3'],
+    ['1-4', '1-4', '1-4', '1-4'],
+    ['1-5', '1-5', '1-5', '1-5', '1-5'],
+    ['1-6', '1-6', '1-6', '1-6', '1-6', '1-6']
+];
 
 $i      = 0;
-$output = array();
+$output = [];
 $count  = count($value);
-$width  = isset($widths[($count-1)]) ? $widths[($count-1)] : array_pad(array(), $count, '1-6');
+$width  = isset($widths[($count-1)]) ? $widths[($count-1)] : array_pad([], $count, '1-6');
 
 foreach ($value as $widget) {
 

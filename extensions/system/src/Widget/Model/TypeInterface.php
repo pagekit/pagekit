@@ -32,7 +32,7 @@ interface TypeInterface
      * @param WidgetInterface $widget
      * @param array           $options
      */
-    public function render(WidgetInterface $widget, $options = array());
+    public function render(WidgetInterface $widget, $options = []);
 
     /**
      * Render widget form.

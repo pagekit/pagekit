@@ -38,14 +38,14 @@ class UserWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
         $query = $this['users']->getUserRepository()->query();
 
         if ($widget->get('show') == 'registered') {
             $query->orderBy('registered', 'DESC');
         } else {
-            $query->where('access > ?', array(date('Y-m-d H:i:s', time() - 300)))->orderBy('access', 'DESC');
+            $query->where('access > ?', [date('Y-m-d H:i:s', time() - 300)])->orderBy('access', 'DESC');
         }
 
         $users = $query->limit($widget->get('count') ?: 8)->get();

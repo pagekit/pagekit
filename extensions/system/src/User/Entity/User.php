@@ -93,10 +93,10 @@ class User extends BaseUser
 
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_ACTIVE  => __('Active'),
             self::STATUS_BLOCKED => __('Blocked')
-        );
+        ];
     }
 
     public function setStatus($status)
@@ -164,14 +164,14 @@ class User extends BaseUser
         if (is_array($this->roles)) {
 
             $connection = $event->getConnection();
-            $connection->delete('@system_user_role', array('user_id' => $this->getId()));
+            $connection->delete('@system_user_role', ['user_id' => $this->getId()]);
 
             if (!array_key_exists(Role::ROLE_AUTHENTICATED, $this->roles)) {
                 $this->roles[Role::ROLE_AUTHENTICATED] = $event->getEntityManager()->find('Pagekit\User\Entity\Role', Role::ROLE_AUTHENTICATED);
             }
 
             foreach ($this->roles as $role) {
-                $connection->insert('@system_user_role', array('user_id' => $this->getId(), 'role_id' => $role->getId()));
+                $connection->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
             }
         }
     }
@@ -183,6 +183,6 @@ class User extends BaseUser
      */
     public function postDelete(EntityEvent $event)
     {
-        $event->getConnection()->delete('@system_user_role', array('user_id' => $this->getId()));
+        $event->getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
     }
 }

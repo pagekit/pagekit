@@ -29,7 +29,7 @@ class ThemeManager extends PackageManager
             return include($bootstrap);
         };
 
-        $config = (!$config = $fn($this->app, "$root/theme.php") or 1 === $config) ? array() : $config;
+        $config = (!$config = $fn($this->app, "$root/theme.php") or 1 === $config) ? [] : $config;
         $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Theme\Theme';
 
         if (isset($config['autoload'])) {

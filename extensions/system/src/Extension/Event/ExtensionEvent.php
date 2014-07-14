@@ -23,7 +23,7 @@ class ExtensionEvent extends Event
      * @param Extension $extension
      * @param array     $config
      */
-    public function __construct(Extension $extension, array $config = array())
+    public function __construct(Extension $extension, array $config = [])
     {
         $this->extension = $extension;
         $this->config    = $config;

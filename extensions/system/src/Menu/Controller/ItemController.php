@@ -55,7 +55,7 @@ class ItemController extends Controller
             $item = new Item;
             $item->setMenu($menu);
 
-            return array('head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => $this->roles->findAll());
+            return ['head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => $this->roles->findAll()];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -76,7 +76,7 @@ class ItemController extends Controller
                 throw new Exception(__('Invalid menu item.'));
             }
 
-            return array('head.title' => __('Edit Menu Item'), 'item' => $item, 'roles' => $this->roles->findAll());
+            return ['head.title' => __('Edit Menu Item'), 'item' => $item, 'roles' => $this->roles->findAll()];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -119,13 +119,13 @@ class ItemController extends Controller
             $this['message']->error(__('Invalid url.'));
         }
 
-        return $id ? $this->redirect('@system/item/edit', compact('id')) : $this->redirect('@system/item/add', array('menu' => $menuId));
+        return $id ? $this->redirect('@system/item/edit', compact('id')) : $this->redirect('@system/item/add', ['menu' => $menuId]);
     }
 
     /**
      * @Request({"menu": "int", "id": "int[]"}, csrf=true)
      */
-    public function deleteAction($menuId, $ids = array())
+    public function deleteAction($menuId, $ids = [])
     {
         try {
 
@@ -147,13 +147,13 @@ class ItemController extends Controller
             $this['message']->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu', array('id' => $menuId));
+        return $this->redirect('@system/menu', ['id' => $menuId]);
     }
 
     /**
      * @Request({"status": "int", "menu": "int", "id": "int[]"}, csrf=true)
      */
-    public function statusAction($status, $menuId, $ids = array())
+    public function statusAction($status, $menuId, $ids = [])
     {
         try {
 
@@ -171,6 +171,6 @@ class ItemController extends Controller
             $this['message']->error($e->getMessage());
         }
 
-        return $this->redirect('@system/menu', array('id' => $menuId));
+        return $this->redirect('@system/menu', ['id' => $menuId]);
     }
 }

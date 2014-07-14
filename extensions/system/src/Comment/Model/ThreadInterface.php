@@ -59,5 +59,5 @@ interface ThreadInterface
     /**
      * @param CommentInterface[] $comments
      */
-    public function setComments(array $comments = array());
+    public function setComments(array $comments = []);
 }

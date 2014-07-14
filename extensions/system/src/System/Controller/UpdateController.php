@@ -36,7 +36,7 @@ class UpdateController extends Controller
      */
     public function indexAction()
     {
-        return array('head.title' => __('Update'), 'api' => $this->api, 'channel' => $this['option']->get('system:app.release_channel', 'stable'), 'version' => $this['config']->get('app.version'));
+        return ['head.title' => __('Update'), 'api' => $this->api, 'channel' => $this['option']->get('system:app.release_channel', 'stable'), 'version' => $this['config']->get('app.version')];
     }
 
     /**
@@ -61,20 +61,20 @@ class UpdateController extends Controller
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            $response = array('message' => __('Copying files...'), 'step' => $this['url']->route('@system/update/copy'), 'progress' => 33);
+            $response = ['message' => __('Copying files...'), 'step' => $this['url']->route('@system/update/copy'), 'progress' => 33];
 
         } catch (ArchiveExtractionException $e) {
-            $response = array('error' => __('Package extraction failed.'));
+            $response = ['error' => __('Package extraction failed.')];
         } catch (ChecksumVerificationException $e) {
-            $response = array('error' => __('Package checksum verification failed.'));
+            $response = ['error' => __('Package checksum verification failed.')];
         } catch (UnauthorizedDownloadException $e) {
-            $response = array('error' => __('Invalid API key.'));
+            $response = ['error' => __('Invalid API key.')];
         } catch (DownloadErrorException $e) {
-            $response = array('error' => __('Package download failed.'));
+            $response = ['error' => __('Package download failed.')];
         } catch (NotWritableException $e) {
-            $response = array('error' => __('Path is not writable.'));
+            $response = ['error' => __('Path is not writable.')];
         } catch (Exception $e) {
-            $response = array('error' => $e->getMessage());
+            $response = ['error' => $e->getMessage()];
         }
 
         return $response;
@@ -100,11 +100,11 @@ class UpdateController extends Controller
             $this['system']->clearCache();
             $this['session']->remove('system.updateDir');
 
-            $response = array('message' => __('Updating database...'), 'step' => $this['url']->route('@system/update/database'), 'progress' => 66);
+            $response = ['message' => __('Updating database...'), 'step' => $this['url']->route('@system/update/database'), 'progress' => 66];
 
         } catch (\Exception $e) {
 
-            $response = array('error' => $e->getMessage());
+            $response = ['error' => $e->getMessage()];
         }
 
         return $response;
@@ -124,11 +124,11 @@ class UpdateController extends Controller
             $this['system']->enable();
             $this['session']->remove('system.update');
 
-            $response = array('message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/system/admin'), 'progress' => 100);
+            $response = ['message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/system/admin'), 'progress' => 100];
 
         } catch (\Exception $e) {
 
-            $response = array('error' => $e->getMessage());
+            $response = ['error' => $e->getMessage()];
         }
 
         return $response;

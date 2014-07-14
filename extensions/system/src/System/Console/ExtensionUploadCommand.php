@@ -93,13 +93,13 @@ class ExtensionUploadCommand extends Command
         try {
 
             $client = new Client;
-            $client->post("$api/package/upload", array(
-                    'body' => array(
+            $client->post("$api/package/upload", [
+                    'body' => [
                         'api_key' => $key,
                         'force'   => $this->option('force'),
                         'file'    => new PostFile('file', fopen($zipFile, 'r'))
-                    )
-                ));
+                    ]
+                ]);
 
             $this->line(sprintf('Finished (%d KB/s)', $size * 1024 / (microtime(true) - $time)));
 

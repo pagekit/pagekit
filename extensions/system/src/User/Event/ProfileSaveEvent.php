@@ -21,7 +21,7 @@ class ProfileSaveEvent extends Event
      * @param UserInterface $user
      * @param array         $data
      */
-    public function __construct(UserInterface $user, $data = array())
+    public function __construct(UserInterface $user, $data = [])
     {
         $this->user = $user;
         $this->data = $data;

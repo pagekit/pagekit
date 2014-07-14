@@ -38,7 +38,7 @@ class WeatherWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = array())
+    public function render(WidgetInterface $widget, $options = [])
     {
         return $this['view']->render('system/admin/dashboard/weather/index.razr', compact('widget', 'options'));
     }

@@ -58,10 +58,10 @@ class ThemeListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'system.init'  => array('onSystemInit', 10),
+        return [
+            'system.init'  => ['onSystemInit', 10],
             'system.admin' => 'onSystemAdmin',
             'system.site'  => 'onSystemSite'
-        );
+        ];
     }
 }

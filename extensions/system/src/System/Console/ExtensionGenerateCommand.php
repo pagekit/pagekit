@@ -42,7 +42,7 @@ class ExtensionGenerateCommand extends Command
         $namespace = $this->ask('PHP Namespace: ');
         $classname = ucfirst($name).'Extension';
 
-        $replace = array(
+        $replace = [
             '%NAME%'          => $name,
             '%TITLE%'         => $title,
             '%AUTHOR%'        => $author,
@@ -50,7 +50,7 @@ class ExtensionGenerateCommand extends Command
             '%CLASSNAME%'     => $classname,
             '%NAMESPACE%'     => $namespace,
             '%NAMESPACE_ESC%' => addslashes($namespace)
-        );
+        ];
 
         foreach (Finder::create()->files()->in(__DIR__.'/skeleton/extension') as $file) {
 

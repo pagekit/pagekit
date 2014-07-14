@@ -17,7 +17,7 @@ class WidgetListener extends EventSubscriber
         $user      = $this['user'];
         $sections  = $this['view.sections'];
 
-        foreach ($this['widgets']->getWidgetRepository()->where('status = ?', array(Widget::STATUS_ENABLED))->orderBy('priority')->get() as $widget) {
+        foreach ($this['widgets']->getWidgetRepository()->where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 
             // filter by access
             if (!$widget->hasAccess($user)) {
@@ -44,9 +44,9 @@ class WidgetListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'system.site' => array('onSystemSite', -16)
-        );
+        return [
+            'system.site' => ['onSystemSite', -16]
+        ];
     }
 
     /**
@@ -61,7 +61,7 @@ class WidgetListener extends EventSubscriber
         $patterns = preg_replace('/^(\!)?([^\!\/])/m', '$1/$2', $patterns);
         $patterns = preg_quote($patterns, '/');
 
-        foreach (explode("\n", str_replace(array('\!', '\*', "\r"), array('!', '.*', ''), $patterns)) as $pattern) {
+        foreach (explode("\n", str_replace(['\!', '\*', "\r"], ['!', '.*', ''], $patterns)) as $pattern) {
             if ($pattern === '') {
                 continue;
             } elseif ($pattern[0] === '!') {

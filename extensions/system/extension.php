@@ -1,143 +1,143 @@
 <?php
 
-return array(
+return [
 
     'main' => 'Pagekit\\SystemExtension',
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view'  => 'views',
             'asset' => 'assets'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/*/Controller/*Controller.php',
 
-    'menu' => array(
+    'menu' => [
 
-        'system: dashboard' => array(
+        'system: dashboard' => [
             'label'    => 'Dashboard',
             'icon'     => 'asset://system/images/icon-dashboard.svg',
             'url'      => '@system/dashboard',
             'active'   => '@system/dashboard',
             'priority' => 0
-        ),
-        'system: widgets' => array(
+        ],
+        'system: widgets' => [
             'label'    => 'Widgets',
             'icon'     => 'asset://system/images/icon-widgets.svg',
             'url'      => '@system/widgets',
             'active'   => '@system/widgets*',
             'access'   => 'system: manage widgets',
             'priority' => 5
-        ),
-        'system: menu' => array(
+        ],
+        'system: menu' => [
             'label'    => 'Menus',
             'icon'     => 'asset://system/images/icon-menus.svg',
             'url'      => '@system/menu',
             'active'   => '@system/(menu|item)*',
             'access'   => 'system: manage menus',
             'priority' => 10
-        ),
-        'system: user' => array(
+        ],
+        'system: user' => [
             'label'    => 'Users',
             'icon'     => 'asset://system/images/icon-users.svg',
             'url'      => '@system/user',
             'active'   => '@system/user*',
             'access'   => 'system: manage users || system: manage user permissions',
             'priority' => 15
-        ),
-        'system: sub-user' => array(
+        ],
+        'system: sub-user' => [
             'label'    => 'Users',
             'parent'   => 'system: user',
             'url'      => '@system/user',
             'active'   => '@system/user*',
             'access'   => 'system: manage users',
             'priority' => 15
-        ),
-        'system: user permissions' => array(
+        ],
+        'system: user permissions' => [
             'label'    => 'Permissions',
             'parent'   => 'system: user',
             'url'      => '@system/permission',
             'active'   => '@system/permission*',
             'access'   => 'system: manage user permissions'
-        ),
-        'system: user roles' => array(
+        ],
+        'system: user roles' => [
             'label'    => 'Roles',
             'parent'   => 'system: user',
             'url'      => '@system/role',
             'active'   => '@system/role*',
             'access'   => 'system: manage user permissions'
-        ),
-        'system: settings' => array(
+        ],
+        'system: settings' => [
             'label'    => 'Settings',
             'icon'     => 'asset://system/images/icon-settings.svg',
             'url'      => '@system/system',
             'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
             'priority' => 110
-        )
+        ]
 
-    ),
+    ],
 
-    'permissions' => array(
+    'permissions' => [
 
-        'system: manage menus' => array(
+        'system: manage menus' => [
             'title' => 'Manage menus'
-        ),
-        'system: manage widgets' => array(
+        ],
+        'system: manage widgets' => [
             'title' => 'Manage widgets'
-        ),
-        'system: manage themes' => array(
+        ],
+        'system: manage themes' => [
             'title' => 'Manage themes'
-        ),
-        'system: manage extensions' => array(
+        ],
+        'system: manage extensions' => [
             'title' => 'Manage extensions'
-        ),
-        'system: manage url aliases' => array(
+        ],
+        'system: manage url aliases' => [
             'title' => 'Manage url aliases'
-        ),
-        'system: manage users' => array(
+        ],
+        'system: manage users' => [
             'title' => 'Manage users',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: manage user permissions' => array(
+        ],
+        'system: manage user permissions' => [
             'title' => 'Manage user permissions',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: access admin area' => array(
+        ],
+        'system: access admin area' => [
             'title' => 'Access admin area',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: access settings' => array(
+        ],
+        'system: access settings' => [
             'title' => 'Access system settings',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: software updates' => array(
+        ],
+        'system: software updates' => [
             'title' => 'Apply system updates',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: manage storage' => array(
+        ],
+        'system: manage storage' => [
             'title' => 'Manage storage',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ),
-        'system: manage storage read only' => array(
+        ],
+        'system: manage storage read only' => [
             'title' => 'Manage storage (Read only)'
-        ),
-        'system: maintenance access' => array(
+        ],
+        'system: maintenance access' => [
             'title' => 'Use the site in maintenance mode'
-        )
+        ]
 
-    ),
+    ],
 
-    'dashboard' => array(
+    'dashboard' => [
 
-        'default' => array(
-            '1' => array(
+        'default' => [
+            '1' => [
                 'type' => 'widget.user'
-            )
-        )
+            ]
+        ]
 
-    )
+    ]
 
-);
+];

@@ -79,7 +79,7 @@ class ExtensionsController extends Controller
             }
 
             if (!$extension = $this->extensions->get($name)) {
-                throw new Exception(__('Unable to enable extension "%name%".', array('%name%' => $name)));
+                throw new Exception(__('Unable to enable extension "%name%".', ['%name%' => $name]));
             }
 
             $extension->enable();

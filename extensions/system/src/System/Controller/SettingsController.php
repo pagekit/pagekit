@@ -37,24 +37,24 @@ class SettingsController extends Controller
     {
         $supported = $this['cache']->supports();
 
-        $caches = array(
-            'auto' => array('name' => '', 'supported' => true),
-            'apc' => array('name' => 'APC', 'supported' => in_array('apc', $supported)),
-            'file' => array('name' => 'File', 'supported' => in_array('file', $supported))
-        );
+        $caches = [
+            'auto' => ['name' => '', 'supported' => true],
+            'apc' => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
+            'file' => ['name' => 'File', 'supported' => in_array('file', $supported)]
+        ];
 
         $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
         $countries = $this['countries'];
         $languages = $this['languages'];
 
-        $codes = array('en_US');
+        $codes = ['en_US'];
 
         foreach ($this['file']->find()->directories()->depth(0)->in('extension://system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
             $codes[] = $dir->getFileName();
         }
 
-        $locales = array();
+        $locales = [];
 
         foreach ($codes as $code) {
             list($lang, $country) = explode('_', $code);
@@ -67,7 +67,7 @@ class SettingsController extends Controller
 
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
-        return array('head.title' => __('Settings'), 'option' => $this['option'], 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite);
+        return ['head.title' => __('Settings'), 'option' => $this['option'], 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite];
     }
 
     /**
@@ -110,25 +110,25 @@ class SettingsController extends Controller
      * @Request({"option": "array"}, csrf=true)
      * @Response("json")
      */
-    public function testSmtpConnectionAction($option = array())
+    public function testSmtpConnectionAction($option = [])
     {
         try {
 
-            $option = array_merge(array(
+            $option = array_merge([
                 'system:mail.port' => '',
                 'system:mail.host' => '',
                 'system:mail.username' => '',
                 'system:mail.password' => '',
                 'system:mail.encryption' => ''
-            ), $option);
+            ], $option);
 
             $this['mailer']->testSmtpConnection($option['system:mail.host'], $option['system:mail.port'], $option['system:mail.username'], $option['system:mail.password'], $option['system:mail.encryption']);
 
-            return array('success' => true, 'message' => __('Connection established!'));
+            return ['success' => true, 'message' => __('Connection established!')];
 
         } catch (\Exception $e) {
 
-            return array('success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage()));
+            return ['success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage())];
         }
     }
 
@@ -138,11 +138,11 @@ class SettingsController extends Controller
      * @Request({"option": "array"}, csrf=true)
      * @Response("json")
      */
-    public function testSendEmailAction($option = array())
+    public function testSendEmailAction($option = [])
     {
         try {
 
-            $filter = array_fill_keys(array(
+            $filter = array_fill_keys([
                 'system:mail.driver',
                 'system:mail.port',
                 'system:mail.host',
@@ -151,7 +151,7 @@ class SettingsController extends Controller
                 'system:mail.encryption',
                 'system:mail.from.address',
                 'system:mail.from.name'
-            ), null);
+            ], null);
 
             $option = array_intersect_key(array_merge($filter, $option), $filter);
 
@@ -164,7 +164,7 @@ class SettingsController extends Controller
 
         } catch (\Exception $e) {
 
-            $response = array('success' => false, 'message' => sprintf(__('Mail delivery failed! (%s)'), $e->getMessage()));
+            $response = ['success' => false, 'message' => sprintf(__('Mail delivery failed! (%s)'), $e->getMessage())];
         }
 
         return $response;
@@ -175,7 +175,7 @@ class SettingsController extends Controller
      */
     protected function getTimezones()
     {
-        $timezones = array();
+        $timezones = [];
 
         foreach (\DateTimeZone::listIdentifiers() as $timezone) {
 

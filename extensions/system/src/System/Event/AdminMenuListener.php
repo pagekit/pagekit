@@ -14,10 +14,10 @@ class AdminMenuListener extends EventSubscriber
     public function onAdminMenu(MenuEvent $event)
     {
         $menu = $event->getMenu();
-        $meta = $this['user']->get('admin.menu', array());
+        $meta = $this['user']->get('admin.menu', []);
 
         foreach ($this['extensions'] as $extension) {
-            foreach ($extension->getConfig('menu', array()) as $id => $properties) {
+            foreach ($extension->getConfig('menu', []) as $id => $properties) {
 
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;
                 unset($properties['parent']);
@@ -30,7 +30,7 @@ class AdminMenuListener extends EventSubscriber
                     $properties['priority'] = 100;
                 }
 
-                $menu->addItem(new Item(array_merge($properties, array('id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu))));
+                $menu->addItem(new Item(array_merge($properties, ['id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $menu])));
             }
         }
     }
@@ -40,8 +40,8 @@ class AdminMenuListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.admin_menu' => 'onAdminMenu'
-        );
+        ];
     }
 }

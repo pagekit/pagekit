@@ -43,26 +43,26 @@ class SystemListener extends EventSubscriber
     public function onSystemLoaded($event, $name, $dispatcher)
     {
         $scripts = $this['view.scripts'];
-        $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', array(), array('requirejs' => true));
-        $scripts->register('requirejs', 'asset://system/js/require.min.js', array('requirejs-config'));
+        $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', [], ['requirejs' => true]);
+        $scripts->register('requirejs', 'asset://system/js/require.min.js', ['requirejs-config']);
         $scripts->register('requirejs-config', 'asset://system/js/require.js');
-        $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', array(), array('requirejs' => true));
-        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', array(), array('requirejs' => true));
-        $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/addons/sticky.js', array(), array('requirejs' => true));
-        $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/addons/sortable.js', array(), array('requirejs' => true));
+        $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/addons/sticky.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/addons/sortable.js', [], ['requirejs' => true]);
 
         $helper = new DateHelper($this['dates']);
-        $this['tmpl.php']->addHelpers(array($helper));
-        $this['tmpl.razr']->addDirective(new FunctionDirective('date', array($helper, 'format')));
-        $this['tmpl.razr']->addFunction('date', array($helper, 'format'));
+        $this['tmpl.php']->addHelpers([$helper]);
+        $this['tmpl.razr']->addDirective(new FunctionDirective('date', [$helper, 'format']));
+        $this['tmpl.razr']->addFunction('date', [$helper, 'format']);
 
         $helper = new EditorHelper($this['events']);
-        $this['tmpl.php']->addHelpers(array($helper));
-        $this['tmpl.razr']->addDirective(new FunctionDirective('editor', array($helper, 'render')));
+        $this['tmpl.php']->addHelpers([$helper]);
+        $this['tmpl.razr']->addDirective(new FunctionDirective('editor', [$helper, 'render']));
 
         $helper = new FinderHelper($this->getApplication());
-        $this['tmpl.php']->addHelpers(array($helper));
-        $this['tmpl.razr']->addDirective(new FunctionDirective('finder', array($helper, 'render')));
+        $this['tmpl.php']->addHelpers([$helper]);
+        $this['tmpl.razr']->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 
         $this['events']->addSubscriber(new Editor);
         $this['events']->addSubscriber(new MarkdownPlugin);
@@ -94,7 +94,7 @@ class SystemListener extends EventSubscriber
 
         $this['events']->dispatch('system.admin_menu', new MenuEvent($menu));
 
-        $this['admin.menu'] = $this['menus']->getTree($menu, array('access' => true));
+        $this['admin.menu'] = $this['menus']->getTree($menu, ['access' => true]);
     }
 
     /**
@@ -128,18 +128,18 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemLocale(LocaleEvent $event)
     {
-        $event->addMessages(array(
+        $event->addMessages([
 
             'short'       => __('DATE_SHORT'),
             'medium'      => __('DATE_MEDIUM'),
             'long'        => __('DATE_LONG'),
             'full'        => __('DATE_FULL'),
-            'shortdays'   => array(__('Mon'), __('Tue'), __('Wed'), __('Thu'), __('Fri'), __('Sat'), __('Sun')),
-            'longdays'    => array(__('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday'), __('Saturday'), __('Sunday')),
-            'shortmonths' => array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')),
-            'longmonths'  => array(__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December'))
+            'shortdays'   => [__('Mon'), __('Tue'), __('Wed'), __('Thu'), __('Fri'), __('Sat'), __('Sun')],
+            'longdays'    => [__('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday'), __('Saturday'), __('Sunday')],
+            'shortmonths' => [__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')],
+            'longmonths'  => [__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December')]
 
-        ), 'date');
+        ], 'date');
     }
 
     /**
@@ -192,7 +192,7 @@ class SystemListener extends EventSubscriber
      */
     public function onExtensionLoadException(LoadFailureEvent $event)
     {
-        $extensions = $this['option']->get('system:extensions', array());
+        $extensions = $this['option']->get('system:extensions', []);
 
         if (false !== $index = array_search($event->getExtensionName(), $extensions)) {
             unset($extensions[$index]);
@@ -221,11 +221,11 @@ class SystemListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.admin'           => 'onSystemAdmin',
             'system.dashboard'       => 'onSystemDashboard',
             'system.finder'          => 'onSystemFinder',
-            'system.init'            => array('onSystemInit', 20),
+            'system.init'            => ['onSystemInit', 20],
             'system.link'            => 'onSystemLink',
             'system.loaded'          => 'onSystemLoaded',
             'system.locale'          => 'onSystemLocale',
@@ -233,6 +233,6 @@ class SystemListener extends EventSubscriber
             'system.tmpl'            => 'onSystemTmpl',
             'system.widget'          => 'onSystemWidget',
             'extension.load_failure' => 'onExtensionLoadException'
-        );
+        ];
     }
 }

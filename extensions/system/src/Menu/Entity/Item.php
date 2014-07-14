@@ -119,10 +119,10 @@ class Item extends BaseItem
 
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_DISABLED  => __('Disabled'),
             self::STATUS_ENABLED   => __('Enabled')
-        );
+        ];
     }
 
     /**
@@ -131,7 +131,7 @@ class Item extends BaseItem
     public function preSave(EntityEvent $event)
     {
         if (!$this->id) {
-            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', array($this->getMenuId())) ?: 0);
+            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', [$this->getMenuId()]) ?: 0);
         }
     }
 }
