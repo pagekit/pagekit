@@ -49,6 +49,7 @@ class CommentController extends Controller
 
         $query = $this->comments->query()->related(['thread']);
 
+        $post = null;
         if ($thread) {
             $query->where(['thread_id = ?'], [$thread]);
             $post = $this->posts->find($thread);
