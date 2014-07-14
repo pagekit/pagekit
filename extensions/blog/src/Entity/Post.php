@@ -156,12 +156,12 @@ class Post extends Thread
 
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_PUBLISHED      => __('Published'),
             self::STATUS_UNPUBLISHED    => __('Unpublished'),
             self::STATUS_DRAFT          => __('Draft'),
             self::STATUS_PENDING_REVIEW => __('Pending Review')
-        );
+        ];
     }
 
     public function getStatusText()
@@ -182,7 +182,7 @@ class Post extends Thread
 
         $i = 2;
         $id = $this->id;
-        while ($repository->query()->where('slug = ?', array($this->slug))->where(function($query) use($id) { if ($id) $query->where('id <> ?', array($id)); })->first()) {
+        while ($repository->query()->where('slug = ?', [$this->slug])->where(function($query) use($id) { if ($id) $query->where('id <> ?', [$id]); })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
     }
@@ -192,7 +192,7 @@ class Post extends Thread
      */
     public function preDelete(EntityEvent $event)
     {
-        $event->getConnection()->delete('@blog_comment', array('thread_id' => $this->getId()));
+        $event->getConnection()->delete('@blog_comment', ['thread_id' => $this->getId()]);
     }
 
     /**

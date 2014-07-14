@@ -1,88 +1,88 @@
 <?php
 
-return array(
+return [
 
     'main' => 'Pagekit\\Blog\\BlogExtension',
 
-    'autoload' => array(
+    'autoload' => [
 
         'Pagekit\\Blog\\' => 'src'
 
-    ),
+    ],
 
-    'resources' => array(
+    'resources' => [
 
-        'export' => array(
+        'export' => [
             'view'  => 'views',
             'asset' => 'assets'
-        )
+        ]
 
-    ),
+    ],
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => array(
+    'settings' => [
 
         'system'  => 'blog/admin/settings.razr'
 
-    ),
+    ],
 
-    'menu' => array(
+    'menu' => [
 
-        'blog' => array(
+        'blog' => [
             'label'  => 'Blog',
             'icon'   => 'extension://blog/extension.svg',
             'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'
-        ),
-        'blog: post list' => array(
+        ],
+        'blog: post list' => [
             'label'  => 'Blog',
             'parent' => 'blog',
             'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content'
-        ),
-        'blog: comment list' => array(
+        ],
+        'blog: comment list' => [
             'label'  => 'Comments',
             'parent' => 'blog',
             'url'    => '@blog/comment',
             'active' => '@blog/comment*',
             'access' => 'blog: manage comments'
-        ),
+        ],
 
-    ),
+    ],
 
-    'permissions' => array(
+    'permissions' => [
 
-        'blog: manage settings' => array(
+        'blog: manage settings' => [
             'title' => 'Manage settings'
-        ),
-        'blog: manage content' => array(
+        ],
+        'blog: manage content' => [
             'title' => 'Manage content'
-        ),
-        'blog: manage comments' => array(
+        ],
+        'blog: manage comments' => [
             'title' => 'Manage comments'
-        ),
-        'blog: view comments' => array(
+        ],
+        'blog: view comments' => [
             'title' => 'View comments'
-        ),
-        'blog: post comments' => array(
+        ],
+        'blog: post comments' => [
             'title' => 'Post comments'
-        ),
-        'blog: skip comment approval' => array(
+        ],
+        'blog: skip comment approval' => [
             'title' => 'Skip comment approval'
-        ),
-        'blog: comment approval required once' => array(
+        ],
+        'blog: comment approval required once' => [
             'title' => 'Comment approval required only once'
-        ),
-        'blog: skip comment min idle' => array(
+        ],
+        'blog: skip comment min idle' => [
             'title' => 'Skip comment minimum idle time'
-        )
+        ]
 
-    ),
+    ],
 
-    'defaults' => array(
+    'defaults' => [
 
         'comments.autoclose'              => false,
         'comments.autoclose.days'         => 14,
@@ -101,6 +101,6 @@ return array(
         'permalink'                       => '',
         'permalink.custom'                => 'blog/{slug}'
 
-    )
+    ]
 
-);
+];

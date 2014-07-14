@@ -48,13 +48,13 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->posts->query()->where(array('status' => Post::STATUS_PUBLISHED))->where('date < :date', array(':date' => (new \DateTime)->format('Y-m-d H:i:s')))->related('user')->orderBy('date', 'DESC')->get();
+        $posts = $this->posts->query()->where(['status' => Post::STATUS_PUBLISHED])->where('date < :date', [':date' => (new \DateTime)->format('Y-m-d H:i:s')])->related('user')->orderBy('date', 'DESC')->get();
 
         foreach ($posts as $post) {
-            $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
+            $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
         }
 
-        return array('head.title' => __('Blog'), 'posts' => $posts, 'config' => $this->extension->getConfig());
+        return ['head.title' => __('Blog'), 'posts' => $posts, 'config' => $this->extension->getConfig()];
     }
 
     /**
@@ -73,15 +73,15 @@ class DefaultController extends Controller
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
                 and $minidle = $this->extension->getConfig('comments.minidle')
-                and $comment = $this->comments->query()->where($user->isAuthenticated() ? array('user_id' => $user->getId()) : array('ip' => $this['request']->getClientIp()))->orderBy('created', 'DESC')->first()) {
+                and $comment = $this->comments->query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
                 if ($diff->invert) {
-                    throw new Exception(__('Please wait another %seconds% seconds before commenting again.', array('%seconds%' => $diff->s+$diff->i*60+$diff->h*3600)));
+                    throw new Exception(__('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s+$diff->i*60+$diff->h*3600]));
                 }
             }
 
-            if (!$post = $this->posts->query()->where(array('id' => $threadId, 'status' => Post::STATUS_PUBLISHED))->first()) {
+            if (!$post = $this->posts->query()->where(['id' => $threadId, 'status' => Post::STATUS_PUBLISHED])->first()) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
@@ -106,7 +106,7 @@ class DefaultController extends Controller
             $comment->setCreated(new \DateTime);
             $comment->setThread($post);
 
-            $approved_once = (boolean) $this->comments->query()->where(array('user_id' => $user->getId(), 'status' => CommentInterface::STATUS_VISIBLE))->first();
+            $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => CommentInterface::STATUS_VISIBLE])->first();
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? CommentInterface::STATUS_VISIBLE : $user->hasAccess('blog: comment approval required once') && $approved_once ? CommentInterface::STATUS_VISIBLE : CommentInterface::STATUS_PENDING);
 
             // check the max links rule
@@ -121,7 +121,7 @@ class DefaultController extends Controller
 
             $this['message']->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this['url']->route('@blog/id', array('id' => $post->getId()), true).'#comment-'.$comment->getId());
+            return $this->redirect($this['url']->route('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
@@ -152,18 +152,18 @@ class DefaultController extends Controller
         }
 
         $user = $this['user'];
-        $query = $this->comments->query()->where(array('status = ?'), array(CommentInterface::STATUS_VISIBLE));
+        $query = $this->comments->query()->where(['status = ?'], [CommentInterface::STATUS_VISIBLE]);
 
         if ($user->isAuthenticated()) {
             $query->orWhere(function($query) use ($user) {
-                $query->where(array('status = ?', 'user_id = ?'), array(CommentInterface::STATUS_PENDING, $user->getId()));
+                $query->where(['status = ?', 'user_id = ?'], [CommentInterface::STATUS_PENDING, $user->getId()]);
             });
         }
 
         $this['db.em']->related($post, 'comments', $query);
 
-        $post->setContent($this['content']->applyPlugins($post->getContent(), array('post' => $post, 'markdown' => $post->get('markdown'))));
+        $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
 
-        return array('head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig());
+        return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
     }
 }

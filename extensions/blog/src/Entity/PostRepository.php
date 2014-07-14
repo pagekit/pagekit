@@ -14,13 +14,13 @@ class PostRepository extends Repository
      */
     public function updateCommentInfo($id)
     {
-        $query = $this->manager->getRepository('Pagekit\Blog\Entity\Comment')->query()->where(array('thread_id' => $id, 'status' => CommentInterface::STATUS_VISIBLE));
+        $query = $this->manager->getRepository('Pagekit\Blog\Entity\Comment')->query()->where(['thread_id' => $id, 'status' => CommentInterface::STATUS_VISIBLE]);
 
         $this->where(compact('id'))->update(
-            array(
+            [
                 'num_comments' => $query->count(),
                 'last_comment_at' => $query->max('created')
-            )
+            ]
         );
     }
 }

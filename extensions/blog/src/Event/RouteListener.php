@@ -17,7 +17,7 @@ class RouteListener extends EventSubscriber
     /**
      * @var array
      */
-    protected $cacheEntries = array();
+    protected $cacheEntries = [];
 
     /**
      * @var Repository
@@ -44,7 +44,7 @@ class RouteListener extends EventSubscriber
             $this->permalink = $extension->getConfig('permalink.custom');
         }
 
-        $this['router']->addAlias($this->permalink, '@blog/id', array($this, 'inbound'), array($this, 'outbound'));
+        $this['router']->addAlias($this->permalink, '@blog/id', [$this, 'inbound'], [$this, 'outbound']);
 
         $this->cacheEntries = $this['cache']->fetch(self::CACHE_KEY);
     }
@@ -78,10 +78,10 @@ class RouteListener extends EventSubscriber
         if (!isset($this->cacheEntries[$id])) {
 
             if (!$post = $this->getPosts()->where(compact('id'))->first()) {
-                throw new \RuntimeException(__('Post with id "%id%" not found!', array('%id%' => $id)));
+                throw new \RuntimeException(__('Post with id "%id%" not found!', ['%id%' => $id]));
             }
 
-            $this->cacheEntries[$id] = array(
+            $this->cacheEntries[$id] = [
                 'id'     => $post->getId(),
                 'slug'   => $post->getSlug(),
                 'year'   => $post->getDate()->format('Y'),
@@ -90,7 +90,7 @@ class RouteListener extends EventSubscriber
                 'hour'   => $post->getDate()->format('H'),
                 'minute' => $post->getDate()->format('i'),
                 'second' => $post->getDate()->format('s'),
-            );
+            ];
             $this->cacheDirty = true;
         }
 
@@ -102,7 +102,7 @@ class RouteListener extends EventSubscriber
         if (!isset($this->cacheEntries[$slug])) {
 
             if (!$post = $this->getPosts()->where(compact('slug'))->first()) {
-                throw new \RuntimeException(__('Post with slug "%slug%" not found!', array('%slug%' => $slug)));
+                throw new \RuntimeException(__('Post with slug "%slug%" not found!', ['%slug%' => $slug]));
             }
 
             $this->cacheEntries[$slug] = $post->getId();
@@ -114,7 +114,7 @@ class RouteListener extends EventSubscriber
 
     public function clearCache()
     {
-        $this->cacheEntries = array();
+        $this->cacheEntries = [];
         $this->cacheDirty = true;
     }
 
@@ -130,11 +130,11 @@ class RouteListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'system.init'          => 'onSystemInit',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'
-        );
+        ];
     }
 
     /**

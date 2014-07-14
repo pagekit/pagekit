@@ -26,10 +26,10 @@ class CommentListener extends EventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'blog.comment.postSave' => 'onCommentChange',
             'blog.comment.postDelete' => 'onCommentChange'
-        );
+        ];
     }
 
     /**

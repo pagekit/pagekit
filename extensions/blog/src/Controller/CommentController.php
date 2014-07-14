@@ -39,32 +39,32 @@ class CommentController extends Controller
      * @Request({"filter": "array", "post":"int", "page":"int"})
      * @Response("blog/admin/comment/index.razr")
      */
-    public function indexAction($filter = array(), $thread = 0, $page = 0)
+    public function indexAction($filter = [], $thread = 0, $page = 0)
     {
         if ($filter) {
             $this['session']->set('blog.comments.filter', $filter);
         } else {
-            $filter = $this['session']->get('blog.comments.filter', array());
+            $filter = $this['session']->get('blog.comments.filter', []);
         }
 
-        $query = $this->comments->query()->related(array('thread'));
+        $query = $this->comments->query()->related(['thread']);
 
         if ($thread) {
-            $query->where(array('thread_id = ?'), array($thread));
+            $query->where(['thread_id = ?'], [$thread]);
             $post = $this->posts->find($thread);
         }
 
         if (isset($filter['status']) && is_numeric($status = $filter['status'])) {
-            $query->where(array('status = ?'), array(intval($filter['status'])));
+            $query->where(['status = ?'], [intval($filter['status'])]);
         } else {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(array('status = ?', 'status = ?'), array(CommentInterface::STATUS_VISIBLE, CommentInterface::STATUS_PENDING));
+                $query->orWhere(['status = ?', 'status = ?'], [CommentInterface::STATUS_VISIBLE, CommentInterface::STATUS_PENDING]);
             });
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(array('author LIKE :search', 'email LIKE :search', 'url LIKE :search', 'ip LIKE :search', 'content LIKE :search'), array('search' => "%{$filter['search']}%"));
+                $query->orWhere(['author LIKE :search', 'email LIKE :search', 'url LIKE :search', 'ip LIKE :search', 'content LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
 
@@ -83,19 +83,19 @@ class CommentController extends Controller
                 ->execute('thread_id, count(id)')
                 ->fetchAll(\PDO::FETCH_KEY_PAIR);
         } else {
-            $pending = array();
+            $pending = [];
         }
 
         if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json(array(
-                'table' => $this['view']->render('view://blog/admin/comment/table.razr', array('count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending)),
+            return $this['response']->json([
+                'table' => $this['view']->render('view://blog/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
                 'total' => $total
-            ));
+            ]);
         }
 
-        $title = isset($post) && $post ? __('Comments on %title%', array('%title%' => $post->getTitle())) : __('Comments');
+        $title = isset($post) && $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments');
 
-        return array('head.title' => $title, 'comments' => $comments, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending);
+        return ['head.title' => $title, 'comments' => $comments, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending];
     }
 
     /**
@@ -110,7 +110,7 @@ class CommentController extends Controller
                 throw new Exception('Invalid comment.');
             }
 
-            return array('comment' => $comment);
+            return ['comment' => $comment];
 
         } catch (Exception $e) {}
     }
@@ -144,11 +144,11 @@ class CommentController extends Controller
 
             $this->comments->save($comment, $data);
 
-            return array('message' => $id ? __('Comment saved.') : __('Comment created.'));
+            return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
 
         } catch (Exception $e) {
 
-            return array('message' => $e->getMessage(), 'error' => true);
+            return ['message' => $e->getMessage(), 'error' => true];
         }
     }
 
@@ -156,7 +156,7 @@ class CommentController extends Controller
      * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($comment = $this->comments->find($id)) {
@@ -164,14 +164,14 @@ class CommentController extends Controller
             }
         }
 
-        return array('message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids)));
+        return ['message' => _c('{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted.', count($ids))];
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      * @Response("json")
      */
-    public function statusAction($status, $ids = array())
+    public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
             if ($comment = $this->comments->find($id) and $comment->getStatus() != $status) {
@@ -183,6 +183,6 @@ class CommentController extends Controller
             }
         }
 
-        return array('message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids)));
+        return ['message' => _c('{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated.', count($ids))];
     }
 }

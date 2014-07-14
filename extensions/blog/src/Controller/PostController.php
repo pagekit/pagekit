@@ -50,18 +50,18 @@ class PostController extends Controller
         if ($filter) {
             $this['session']->set('blog.posts.filter', $filter);
         } else {
-            $filter = $this['session']->get('blog.posts.filter', array());
+            $filter = $this['session']->get('blog.posts.filter', []);
         }
 
         $query = $this->posts->query();
 
         if (isset($filter['status']) && is_numeric($filter['status'])) {
-            $query->where(array('status' => intval($filter['status'])));
+            $query->where(['status' => intval($filter['status'])]);
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(array('title LIKE :search', 'slug LIKE :search'), array('search' => "%{$filter['search']}%"));
+                $query->orWhere(['title LIKE :search', 'slug LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
 
@@ -80,17 +80,17 @@ class PostController extends Controller
                 ->execute('thread_id, count(id)')
                 ->fetchAll(\PDO::FETCH_KEY_PAIR);
         } else {
-            $pending = array();
+            $pending = [];
         }
 
         if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json(array(
+            return $this['response']->json([
                 'table' => $this['view']->render('view://blog/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => $this->roles->findAll(), 'pending' => $pending]),
                 'total' => $total
-            ));
+            ]);
         }
 
-        return array('head.title' => __('Posts'), 'posts' => $posts, 'statuses' => Post::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending);
+        return ['head.title' => __('Posts'), 'posts' => $posts, 'statuses' => Post::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending];
     }
 
     /**
@@ -101,7 +101,7 @@ class PostController extends Controller
         $post = new Post;
         $post->setUser($this['user']);
 
-        return array('head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());
+        return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
     }
 
     /**
@@ -123,7 +123,7 @@ class PostController extends Controller
             return $this->redirect('@blog/post');
         }
 
-        return array('head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll());
+        return ['head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
     }
 
     /**
@@ -149,11 +149,11 @@ class PostController extends Controller
 
             $this->posts->save($post, $data);
 
-            return array('message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId());
+            return ['message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId()];
 
         } catch (Exception $e) {
 
-            return array('message' => $e->getMessage(), 'error' => true);
+            return ['message' => $e->getMessage(), 'error' => true];
 
         }
     }
@@ -162,7 +162,7 @@ class PostController extends Controller
      * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
      */
-    public function deleteAction($ids = array())
+    public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($post = $this->posts->find($id)) {
@@ -170,14 +170,14 @@ class PostController extends Controller
             }
         }
 
-        return array('message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids)));
+        return ['message' => _c('{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted.', count($ids))];
     }
 
     /**
      * @Request({"ids": "int[]"}, csrf=true)
      * @Response("json")
      */
-    public function copyAction($ids = array())
+    public function copyAction($ids = [])
     {
         foreach ($ids as $id) {
             if ($post = $this->posts->find((int) $id)) {
@@ -192,14 +192,14 @@ class PostController extends Controller
             }
         }
 
-        return array('message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids)));
+        return ['message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids))];
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"}, csrf=true)
      * @Response("json")
      */
-    public function statusAction($status, $ids = array())
+    public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
             if ($post = $this->posts->find($id) and $post->getStatus() != $status) {

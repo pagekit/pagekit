@@ -79,11 +79,11 @@ class Comment extends BaseComment
 
     public static function getStatuses()
     {
-        return array(
+        return [
             self::STATUS_VISIBLE => __('Approved'),
             self::STATUS_PENDING => __('Pending'),
             self::STATUS_SPAM    => __('Spam')
-        );
+        ];
     }
 
     public function getStatusText()

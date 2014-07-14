@@ -27,14 +27,14 @@ class BlogExtension extends Extension
 
         $app->on('system.init', function() use ($app) {
 
-            $this->config += $app['option']->get("{$this->name}:config", array());
+            $this->config += $app['option']->get("{$this->name}:config", []);
 
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default');
 
         }, 16);
 
         $app->on('system.locale', function(LocaleEvent $event) {
-            $event->addMessages(array('post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')));
+            $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
         });
     }
 
