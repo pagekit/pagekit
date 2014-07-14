@@ -171,7 +171,7 @@ return [
 
     'theme' => [
 
-        'path'    => '%path.themes%',
+        'path' => '%path.themes%',
         'site' => 'alpha'
 
     ]
