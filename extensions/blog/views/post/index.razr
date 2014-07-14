@@ -13,7 +13,7 @@
         @if ($post.readmore)
         <li><a href="@url('@blog/id', ['id' => $post.id])">@trans('Continue Reading')</a></li>
         @endif
-        <li>@transchoice('{0} %num% Comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post.numcomments, ['%num%' => $post.numcomments])</li>
+        <li>@transchoice('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post.numcomments, ['%num%' => $post.numcomments])</li>
     </ul>
 
 </article>
