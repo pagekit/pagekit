@@ -2,7 +2,7 @@
 
 <form id="js-pages" class="uk-form" action="@url('@page/page')" method="post">
 
-    <div class="pk-toolbar uk-clearfix">
+    @section('toolbar', 'show')
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url('@page/page/add')">@trans('Add Page')</a>
@@ -33,7 +33,7 @@
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
 
         </div>
-    </div>
+    @endsection
 
     <p class="uk-alert uk-alert-info @( $pages ? 'uk-hidden' : '' )">@trans('No pages found.')</p>
 

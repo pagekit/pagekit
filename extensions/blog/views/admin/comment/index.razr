@@ -3,7 +3,7 @@
 
 <form id="js-comments" class="uk-form" action="@url('@blog/comment')" method="post">
 
-    <div class="pk-toolbar uk-clearfix">
+    @section('toolbar', 'show')
         <div class="uk-float-left">
 
             <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url('@blog/comment/delete')">@trans('Delete')</a>
@@ -32,7 +32,7 @@
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
 
         </div>
-    </div>
+    @endsection
 
     <p class="uk-alert uk-alert-info @( $comments ? 'uk-hidden' : '')">@trans('No comments found.')</p>
 

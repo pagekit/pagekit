@@ -2,7 +2,7 @@
 
 <form id="js-user" class="uk-form" method="post">
 
-    <div class="pk-toolbar uk-clearfix">
+    @section('toolbar', 'show')
         <div class="uk-float-left">
 
             <a class="uk-button uk-button-primary" href="@url('@system/user/add')">@trans('Add User')</a>
@@ -51,7 +51,7 @@
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
 
         </div>
-    </div>
+    @endsection
 
     @if ($users)
     <div class="uk-overflow-container">
