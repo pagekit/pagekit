@@ -2,6 +2,7 @@
 
 namespace Pagekit\Blog;
 
+use Pagekit\Blog\Content\PagebreakPlugin;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Extension\Extension;
@@ -20,6 +21,7 @@ class BlogExtension extends Extension
 
         $app['events']->addSubscriber(new RouteListener);
         $app['events']->addSubscriber(new CommentListener);
+        $app['events']->addSubscriber(new PagebreakPlugin);
 
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Blog\Link\BlogLink');
