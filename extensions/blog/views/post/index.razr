@@ -1,13 +1,17 @@
 @foreach ($posts as $post)
 <article class="uk-article">
 
-    <h1 class="uk-article-title"><a href="@url('@blog/id', ['id' => $post.id])">@( $post.title )</a></h1>
+    <h1 class="uk-article-title"><a href="@url('@blog/id', ['id' => $post.id])">@($post.title)</a></h1>
 
     <p class="uk-article-meta">
         @trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ])
     </p>
 
-    <div>@raw( $post.content )</div>
+    @if ($post.excerpt)
+    <div>@raw($post.excerpt)</div>
+    @else
+    <div>@raw($post.content)</div>
+    @endif
 
     <ul class="uk-subnav uk-subnav-line">
         @if ($post.readmore)

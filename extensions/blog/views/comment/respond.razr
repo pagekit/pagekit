@@ -4,7 +4,7 @@
 
     @if ($app.user.hasAccess('blog: post comments'))
 
-        <form class="uk-form" method="post" action="@url('@blog/default/comment', ['thread_id' => $post.id])">
+        <form class="uk-form" method="post" action="@url('@blog/default/comment', ['post_id' => $post.id])">
 
             @if ($app.user.authenticated)
 

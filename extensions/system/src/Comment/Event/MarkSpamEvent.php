@@ -20,6 +20,7 @@ class MarkSpamEvent extends CommentEvent
     public function __construct($comment, $previousStatus)
     {
         parent::__construct($comment);
+
         $this->previousStatus = $previousStatus;
     }
 

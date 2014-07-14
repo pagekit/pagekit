@@ -33,7 +33,7 @@ return [
             $util->createTable('@blog_comment', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
-                $table->addColumn('thread_id', 'integer', ['unsigned' => true, 'length' => 10]);
+                $table->addColumn('post_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('user_id', 'string', ['length' => 255]);
                 $table->addColumn('author', 'string', ['length' => 255]);
                 $table->addColumn('email', 'string', ['length' => 255]);
@@ -46,9 +46,9 @@ return [
                 $table->setPrimaryKey(['id']);
                 $table->addIndex(['status'], 'STATUS');
                 $table->addIndex(['created'], 'CREATED');
-                $table->addIndex(['thread_id'], 'THREAD_ID');
+                $table->addIndex(['post_id'], 'POST_ID');
                 $table->addIndex(['author'], 'AUTHOR');
-                $table->addIndex(['thread_id', 'status'], 'THREAD_ID_STATUS');
+                $table->addIndex(['post_id', 'status'], 'POST_ID_STATUS');
             });
         }
     }

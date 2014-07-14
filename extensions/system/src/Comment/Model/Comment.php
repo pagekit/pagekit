@@ -42,13 +42,6 @@ abstract class Comment implements CommentInterface
     protected $parent;
 
     /**
-     * Should be mapped by the end developer.
-     *
-     * @var ThreadInterface
-     */
-    protected $thread;
-
-    /**
      * {@inheritDoc}
      */
     public function getId()
@@ -62,6 +55,22 @@ abstract class Comment implements CommentInterface
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setParent(CommentInterface $parent)
+    {
+        $this->parent = $parent;
     }
 
     /**
@@ -132,22 +141,6 @@ abstract class Comment implements CommentInterface
     /**
      * {@inheritDoc}
      */
-    public function getThread()
-    {
-        return $this->thread;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setThread(ThreadInterface $thread)
-    {
-        $this->thread = $thread;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getStatus()
     {
         return (int) $this->status;
@@ -159,22 +152,6 @@ abstract class Comment implements CommentInterface
     public function setStatus($status)
     {
         $this->status = (int) $status;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setParent(CommentInterface $parent)
-    {
-        $this->parent = $parent;
     }
 
     public function __toString()

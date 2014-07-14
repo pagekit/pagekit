@@ -2,7 +2,7 @@
 
 namespace Pagekit\Blog\Entity;
 
-use Pagekit\Comment\Entity\Thread;
+use Pagekit\Comment\CommentsTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
@@ -10,9 +10,9 @@ use Pagekit\User\Entity\AccessTrait;
 /**
  * @Entity(repositoryClass="Pagekit\Blog\Entity\PostRepository", tableClass="@blog_post", eventPrefix="blog.post")
  */
-class Post extends Thread
+class Post
 {
-    use AccessTrait, DataTrait;
+    use AccessTrait, DataTrait, CommentsTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
@@ -53,16 +53,35 @@ class Post extends Thread
     /** @Column(type="datetime") */
     protected $modified;
 
+    /** @Column(type="boolean") */
+    protected $is_commentable;
+
+    /** @Column(type="integer") */
+    protected $num_comments = 0;
+
+    /** @Column(type="datetime") */
+    protected $last_comment_at;
+
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
      */
     protected $user;
 
     /**
-     * @HasMany(targetEntity="Comment", keyFrom="id", keyTo="thread_id")
+     * @HasMany(targetEntity="Comment", keyFrom="id", keyTo="post_id")
      * @OrderBy({"created" = "DESC"})
      */
     protected $comments;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     public function getTitle()
     {
@@ -144,16 +163,6 @@ class Post extends Thread
         $this->modified = $modified;
     }
 
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
     public static function getStatuses()
     {
         return [
@@ -171,6 +180,16 @@ class Post extends Thread
         return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * @PreSave
      */
@@ -182,6 +201,7 @@ class Post extends Thread
 
         $i = 2;
         $id = $this->id;
+
         while ($repository->query()->where('slug = ?', [$this->slug])->where(function($query) use($id) { if ($id) $query->where('id <> ?', [$id]); })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
@@ -192,7 +212,7 @@ class Post extends Thread
      */
     public function preDelete(EntityEvent $event)
     {
-        $event->getConnection()->delete('@blog_comment', ['thread_id' => $this->getId()]);
+        $event->getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
     }
 
     /**

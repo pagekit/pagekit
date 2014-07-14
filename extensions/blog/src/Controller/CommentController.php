@@ -39,7 +39,7 @@ class CommentController extends Controller
      * @Request({"filter": "array", "post":"int", "page":"int"})
      * @Response("blog/admin/comment/index.razr")
      */
-    public function indexAction($filter = [], $thread = 0, $page = 0)
+    public function indexAction($filter = [], $post_id = 0, $page = 0)
     {
         if ($filter) {
             $this['session']->set('blog.comments.filter', $filter);
@@ -47,19 +47,19 @@ class CommentController extends Controller
             $filter = $this['session']->get('blog.comments.filter', []);
         }
 
-        $query = $this->comments->query()->related(['thread']);
+        $post  = null;
+        $query = $this->comments->query()->related(['post']);
 
-        $post = null;
-        if ($thread) {
-            $query->where(['thread_id = ?'], [$thread]);
-            $post = $this->posts->find($thread);
+        if ($post) {
+            $query->where(compact('post_id'));
+            $post = $this->posts->find($post);
         }
 
         if (isset($filter['status']) && is_numeric($status = $filter['status'])) {
             $query->where(['status = ?'], [intval($filter['status'])]);
         } else {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(['status = ?', 'status = ?'], [CommentInterface::STATUS_VISIBLE, CommentInterface::STATUS_PENDING]);
+                $query->orWhere(['status = ?', 'status = ?'], [CommentInterface::STATUS_APPROVED, CommentInterface::STATUS_PENDING]);
             });
         }
 
@@ -79,9 +79,9 @@ class CommentController extends Controller
             $pending = $this['db']->createQueryBuilder()
                 ->from('@blog_comment')
                 ->where(['status' => CommentInterface::STATUS_PENDING])
-                ->whereIn('thread_id', array_unique(array_map(function($comment) { return $comment->getThreadId(); }, $comments)))
-                ->groupBy('thread_id')
-                ->execute('thread_id, count(id)')
+                ->whereIn('post_id', array_unique(array_map(function($comment) { return $comment->getPostId(); }, $comments)))
+                ->groupBy('post_id')
+                ->execute('post_id, count(id)')
                 ->fetchAll(\PDO::FETCH_KEY_PAIR);
         } else {
             $pending = [];
@@ -94,7 +94,7 @@ class CommentController extends Controller
             ]);
         }
 
-        $title = isset($post) && $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments');
+        $title = $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments');
 
         return ['head.title' => $title, 'comments' => $comments, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending];
     }
@@ -138,8 +138,8 @@ class CommentController extends Controller
                 $comment->setAuthor($user->getName());
                 $comment->setEmail($user->getEmail());
                 $comment->setUrl($user->getUrl());
-                $comment->setStatus(CommentInterface::STATUS_VISIBLE);
-                $comment->setThreadId($parent->getThreadId());
+                $comment->setStatus(CommentInterface::STATUS_APPROVED);
+                $comment->setPostId($parent->getPostId());
                 $comment->setParent($parent);
             }
 

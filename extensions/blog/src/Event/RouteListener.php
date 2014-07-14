@@ -91,6 +91,7 @@ class RouteListener extends EventSubscriber
                 'minute' => $post->getDate()->format('i'),
                 'second' => $post->getDate()->format('s'),
             ];
+
             $this->cacheDirty = true;
         }
 

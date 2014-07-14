@@ -75,9 +75,9 @@ class PostController extends Controller
             $pending = $this['db']->createQueryBuilder()
                 ->from('@blog_comment')
                 ->where(['status' => CommentInterface::STATUS_PENDING])
-                ->whereIn('thread_id', array_keys($posts))
-                ->groupBy('thread_id')
-                ->execute('thread_id, count(id)')
+                ->whereIn('post_id', array_keys($posts))
+                ->groupBy('post_id')
+                ->execute('post_id, count(id)')
                 ->fetchAll(\PDO::FETCH_KEY_PAIR);
         } else {
             $pending = [];

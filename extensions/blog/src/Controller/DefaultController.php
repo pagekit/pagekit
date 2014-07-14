@@ -59,13 +59,14 @@ class DefaultController extends Controller
 
     /**
      * @Route("/comment")
-     * @Request({"thread_id": "int", "comment": "array"}, csrf=true)
+     * @Request({"post_id": "int", "comment": "array"}, csrf=true)
      */
-    public function commentAction($threadId, $data)
+    public function commentAction($id, $data)
     {
         try {
 
             $user = $this['user'];
+
             if (!$user->hasAccess('blog: post comments')) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
@@ -76,12 +77,13 @@ class DefaultController extends Controller
                 and $comment = $this->comments->query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
+
                 if ($diff->invert) {
                     throw new Exception(__('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s+$diff->i*60+$diff->h*3600]));
                 }
             }
 
-            if (!$post = $this->posts->query()->where(['id' => $threadId, 'status' => Post::STATUS_PUBLISHED])->first()) {
+            if (!$post = $this->posts->query()->where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
@@ -99,18 +101,17 @@ class DefaultController extends Controller
             }
 
             $comment = new Comment;
-
             $comment->setContent($this['comments']->filterContentInput($data['content']));
             $comment->setUserId((int) $user->getId());
             $comment->setIp($this['request']->getClientIp());
             $comment->setCreated(new \DateTime);
-            $comment->setThread($post);
+            $comment->setPost($post);
 
-            $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => CommentInterface::STATUS_VISIBLE])->first();
-            $comment->setStatus($user->hasAccess('blog: skip comment approval') ? CommentInterface::STATUS_VISIBLE : $user->hasAccess('blog: comment approval required once') && $approved_once ? CommentInterface::STATUS_VISIBLE : CommentInterface::STATUS_PENDING);
+            $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => CommentInterface::STATUS_APPROVED])->first();
+            $comment->setStatus($user->hasAccess('blog: skip comment approval') ? CommentInterface::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? CommentInterface::STATUS_APPROVED : CommentInterface::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == CommentInterface::STATUS_VISIBLE && $this->extension->getConfig('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            if ($comment->getStatus() == CommentInterface::STATUS_APPROVED && $this->extension->getConfig('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
                 $comment->setStatus(CommentInterface::STATUS_PENDING);
             }
 
@@ -152,7 +153,7 @@ class DefaultController extends Controller
         }
 
         $user = $this['user'];
-        $query = $this->comments->query()->where(['status = ?'], [CommentInterface::STATUS_VISIBLE]);
+        $query = $this->comments->query()->where(['status = ?'], [CommentInterface::STATUS_APPROVED]);
 
         if ($user->isAuthenticated()) {
             $query->orWhere(function($query) use ($user) {

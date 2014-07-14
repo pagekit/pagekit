@@ -2,7 +2,9 @@
 
 namespace Pagekit\Comment\Model;
 
-class Node extends \Pagekit\Component\Tree\Node
+use Pagekit\Component\Tree\Node;
+
+class CommentNode extends Node
 {
     /**
      * @var CommentInterface

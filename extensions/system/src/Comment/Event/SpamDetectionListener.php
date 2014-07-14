@@ -47,6 +47,7 @@ class SpamDetectionListener implements EventSubscriberInterface
         }
 
         $comment->setStatus(CommentInterface::STATUS_SPAM);
+
         $event->stopPropagation();
     }
 

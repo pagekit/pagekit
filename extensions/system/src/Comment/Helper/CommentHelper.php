@@ -2,7 +2,7 @@
 
 namespace Pagekit\Comment\Helper;
 
-use Pagekit\Comment\Model\Node;
+use Pagekit\Comment\Model\CommentNode;
 
 class CommentHelper
 {
@@ -11,24 +11,25 @@ class CommentHelper
      *
      * @param  array $comments
      * @param  array $parameters
-     * @return Node
+     * @return CommentNode
      */
     public function getTree($comments = [], array $parameters = [])
     {
-        $nodes = [new Node(0)];
+        $nodes = [new CommentNode(0)];
 
         foreach ($comments as $comment) {
-            $id   = $comment->getId();
-            $pid  = $comment->getParentId();
+
+            $id  = $comment->getId();
+            $pid = $comment->getParentId();
 
             if (!isset($nodes[$id])) {
-                $nodes[$id] = new Node($id);
+                $nodes[$id] = new CommentNode($id);
             }
 
             $nodes[$id]->setComment($comment);
 
             if (!isset($nodes[$pid])) {
-                $nodes[$pid] = new Node($pid);
+                $nodes[$pid] = new CommentNode($pid);
             }
 
             $nodes[$pid]->add($nodes[$id]);
@@ -83,4 +84,4 @@ class CommentHelper
 
         return nl2br($content);
     }
-} 
+}

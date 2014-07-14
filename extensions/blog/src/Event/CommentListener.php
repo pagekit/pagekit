@@ -16,10 +16,8 @@ class CommentListener extends EventSubscriber
 
     public function onCommentChange(EntityEvent $event)
     {
-        $comment = $event->getEntity();
-        $this->getPosts()->updateCommentInfo($comment->getThreadId());
+        $this->getPosts()->updateCommentInfo($event->getEntity()->getPostId());
     }
-
 
     /**
      * {@inheritdoc}
