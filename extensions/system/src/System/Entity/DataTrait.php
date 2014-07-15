@@ -4,9 +4,6 @@ namespace Pagekit\System\Entity;
 
 trait DataTrait
 {
-    /** @Column(type="json_array") */
-    protected $data;
-
     /**
      * @return array
      */

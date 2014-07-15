@@ -27,7 +27,7 @@ class Item extends BaseItem
             if (property_exists($this, $property)) {
                 $this->$property = $value;
             } else {
-                $this->set($property, $value);
+                $this->setAttribute($property, $value);
             }
         }
     }

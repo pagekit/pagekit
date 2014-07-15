@@ -33,6 +33,9 @@ class Page
     /** @Column */
     protected $content = '';
 
+    /** @Column(type="json_array") */
+    protected $data;
+
     public function getId()
     {
         return $this->id;

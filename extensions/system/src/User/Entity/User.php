@@ -46,6 +46,9 @@ class User extends BaseUser
     /** @Column */
     protected $activation;
 
+    /** @Column(type="json_array") */
+    protected $data;
+
     /** @ManyToMany(targetEntity="Role", keyFrom="id", keyTo="id", tableThrough="@system_user_role", keyThroughFrom="user_id", keyThroughTo="role_id") */
     protected $roles;
 

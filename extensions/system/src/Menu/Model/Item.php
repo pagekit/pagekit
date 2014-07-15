@@ -2,8 +2,12 @@
 
 namespace Pagekit\Menu\Model;
 
+use Pagekit\System\Entity\DataTrait;
+
 class Item implements ItemInterface
 {
+    use DataTrait;
+
     /* Menu item disabled status. */
     const STATUS_DISABLED = 0;
 
@@ -31,11 +35,6 @@ class Item implements ItemInterface
 	protected $attributes = [];
 
     /**
-     * @var array
-     */
-    protected $data = [];
-
-    /**
      * @var MenuInterface
      */
     protected $menu;
@@ -49,6 +48,11 @@ class Item implements ItemInterface
      * @var int
      */
     protected $priority;
+
+    /**
+     * @var array
+     */
+    protected $data = [];
 
     /**
      * {@inheritdoc}
@@ -163,41 +167,6 @@ class Item implements ItemInterface
     public function setPriority($priority)
     {
         $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param array $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
-    }
-
-    /**
-     * Sets the given data value
-     *
-     * @param string $key
-     * @param mixed  $value
-     */
-    public function set($key, $value)
-    {
-        $this->attributes[$key] = $value;
     }
 
     /**

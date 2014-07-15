@@ -59,6 +59,9 @@ class Post
     /** @Column(type="integer") */
     protected $comment_count = 0;
 
+    /** @Column(type="json_array") */
+    protected $data;
+
     /** @var int */
     protected static $comment_autoclose;
 
