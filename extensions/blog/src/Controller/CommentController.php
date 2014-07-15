@@ -47,12 +47,12 @@ class CommentController extends Controller
             $filter = $this['session']->get('blog.comments.filter', []);
         }
 
-        $post  = null;
         $query = $this->comments->query()->related(['post']);
 
-        if ($post) {
-            $query->where(compact('post_id'));
-            $post = $this->posts->find($post);
+        $post  = null;
+        if ($post_id) {
+            $query->where(['post_id = ?'], [$post_id]);
+            $post = $this->posts->find($post_id);
         }
 
         if (isset($filter['status']) && is_numeric($status = $filter['status'])) {
@@ -96,7 +96,7 @@ class CommentController extends Controller
 
         $title = $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments');
 
-        return ['head.title' => $title, 'comments' => $comments, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending];
+        return ['head.title' => $title, 'comments' => $comments, 'post' => $post, 'statuses' => Comment::getStatuses(), 'filter' => $filter, 'total' => $total, 'count' => $count, 'pending' => $pending];
     }
 
     /**

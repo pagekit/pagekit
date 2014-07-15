@@ -4,7 +4,11 @@ namespace Pagekit\Comment\Entity;
 
 use Pagekit\Comment\Model\Comment as BaseComment;
 use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Framework\Database\Event\EntityEvent;
 
+/**
+ * @MappedSuperclass
+ */
 abstract class Comment extends BaseComment
 {
     /** @Column(type="integer") @Id */
@@ -59,5 +63,13 @@ abstract class Comment extends BaseComment
     {
         parent::setParent($parent);
         $this->setParentId($parent->getId());
+    }
+
+    /**
+     * @PreDelete
+     */
+    public function preDelete(EntityEvent $event)
+    {
+        $event->getEntityManager()->getRepository(get_class($this))->where(['parent_id = :old_parent'], [':old_parent' => $this->id])->update(['parent_id' => $this->parent_id]);
     }
 }
