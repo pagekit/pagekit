@@ -27,7 +27,7 @@ class BlogLink extends Link
      */
     public function accept($route)
     {
-        return $route == '@blog/default' || $route == '@blog/id';
+        return $route == '@blog/site' || $route == '@blog/id';
     }
 
     /**

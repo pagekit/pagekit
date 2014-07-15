@@ -31,7 +31,7 @@ class BlogExtension extends Extension
 
             $this->config += $app['option']->get("{$this->name}:config", []);
 
-            $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/default');
+            $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/site');
 
         }, 16);
 

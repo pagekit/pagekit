@@ -13,7 +13,7 @@ use Pagekit\Framework\Controller\Exception;
 /**
  * @Route("/blog")
  */
-class DefaultController extends Controller
+class SiteController extends Controller
 {
     /**
      * @var BlogExtension
@@ -150,7 +150,7 @@ class DefaultController extends Controller
             return $this['response']->create(__('Unable to access this post!'), 403);
         }
 
-        $user = $this['user'];
+        $user  = $this['user'];
         $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED]);
 
         if ($user->isAuthenticated()) {
@@ -161,17 +161,17 @@ class DefaultController extends Controller
 
         $this['db.em']->related($post, 'comments', $query);
 
+        if ($post->getCommentStatus() && $days = $this->extension->getConfig('comments.autoclose', 0)) {
+            if ($post->getDate() < new \DateTime("-{$days} day")) {
+                $post->setCommentStatus(false);
+                $this->posts->save($post);
+            }
+        }
+
         $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
 
         foreach ($post->getComments() as $comment) {
             $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
-        }
-
-        $autoclose = $post->getCommentStatus() && $this->extension->getConfig('comments.autoclose');
-        $days      = (int) $this->extension->getConfig('comments.autoclose');
-        if ($autoclose && $post->getDate() < new \DateTime("-{$days} day")) {
-            $post->setCommentStatus(false);
-            $this->posts->where(compact('id'))->update(['comment_status' => false]);
         }
 
         return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
