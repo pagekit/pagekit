@@ -274,6 +274,7 @@ class UserController extends Controller
             'email'      => $user->getEmail(),
             'status'     => $user->getStatusText(),
             'badge'      => $user->getStatus() ? 'success' : 'danger',
+            'new'        => $user->isNew(),
             'login'      => ($date = $user->getLogin()) ? $this['dates']->format($date) : __('Never'),
             'registered' => ($date = $user->getRegistered()) ? $this['dates']->format($date) : null
         ];

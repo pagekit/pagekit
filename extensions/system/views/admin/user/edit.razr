@@ -107,7 +107,11 @@
 <script type="text/tmpl" data-tmpl="user.info">
 
     <ul class="uk-list">
+        {{#if new}}
+        <li><span class="uk-badge">@trans('New')</span></li>
+        {{else}}
         <li><span class="uk-badge uk-badge-{{badge}}">{{status}}</span></li>
+        {{/if}}
         <li>{{name}} ({{username}})</li>
         <li><a href="mailto:{{email}}">{{email}}</a></li>
         <li>@trans('Last login: {{login}}')</li>
