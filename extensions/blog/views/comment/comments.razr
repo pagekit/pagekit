@@ -6,7 +6,7 @@
 
     <ul class="uk-comment-list">
 
-        @foreach ($post.tree as $child)
+        @foreach ($post.commentsTree as $child)
         @include('view://blog/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
 

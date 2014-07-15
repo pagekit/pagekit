@@ -72,7 +72,7 @@ trait CommentsTrait
      * @param  array $parameters
      * @return CommentNode
      */
-    public function getTree(array $parameters = [])
+    public function getCommentsTree(array $parameters = [])
     {
         $nodes = [new CommentNode(0)];
 
