@@ -59,9 +59,6 @@ class Post
     /** @Column(type="integer") */
     protected $comment_count = 0;
 
-    /** @Column(type="datetime") */
-    protected $comment_date;
-
     /** @var int */
     protected static $comment_autoclose;
 
