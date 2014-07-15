@@ -6,7 +6,6 @@ use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
-use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
@@ -107,12 +106,12 @@ class DefaultController extends Controller
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
-            $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => CommentInterface::STATUS_APPROVED])->first();
-            $comment->setStatus($user->hasAccess('blog: skip comment approval') ? CommentInterface::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? CommentInterface::STATUS_APPROVED : CommentInterface::STATUS_PENDING);
+            $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+            $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == CommentInterface::STATUS_APPROVED && $this->extension->getConfig('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
-                $comment->setStatus(CommentInterface::STATUS_PENDING);
+            if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->extension->getConfig('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+                $comment->setStatus(Comment::STATUS_PENDING);
             }
 
             // check for spam
@@ -153,11 +152,11 @@ class DefaultController extends Controller
         }
 
         $user = $this['user'];
-        $query = $this->comments->query()->where(['status = ?'], [CommentInterface::STATUS_APPROVED]);
+        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED]);
 
         if ($user->isAuthenticated()) {
             $query->orWhere(function($query) use ($user) {
-                $query->where(['status = ?', 'user_id = ?'], [CommentInterface::STATUS_PENDING, $user->getId()]);
+                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $user->getId()]);
             });
         }
 
