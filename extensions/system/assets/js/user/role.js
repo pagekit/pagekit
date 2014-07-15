@@ -73,7 +73,7 @@ require(['jquery', 'system', 'uikit!nestable', 'domReady!'], function($, system,
             data[item.id] = item.order;
         });
 
-        $.post(prioUpdateUrl, $.extend({order: data}, system.csrf.params), function(res) {
+        $.post(prioUpdateUrl, $.extend({order: data}, system.csrf.params), function() {
             uikit.notify(data.message || 'Roles order updated', 'success');
         });
 

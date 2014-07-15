@@ -107,11 +107,11 @@ require(['jquery', 'marketplace', 'system!locale', 'tmpl!package.updates,package
 
             modal.show();
         }
-    },
+    };
 
     // upload objects
-    uploadselect = uikit.uploadSelect($(".js-upload-select"), settings),
-    uploaddrop   = uikit.uploadDrop($(".js-upload-drop"), settings);
+    uikit.uploadSelect($(".js-upload-select"), settings);
+    uikit.uploadDrop($(".js-upload-drop"), settings);
 
     // install upload
     dialog.on('click', '[data-install]', function(e) {

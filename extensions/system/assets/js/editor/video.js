@@ -96,7 +96,7 @@ define(['jquery', 'system!finder', 'tmpl!video.modal,video.replace', 'uikit', 'e
         var youtubeRegExp = /(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/,
             youtubeRegExpShort = /youtu\.be\/(.*)/,
             vimeoRegExp = /(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/,
-            type = 'tag', code, matches, session = sessionStorage || {};
+            code, matches, session = sessionStorage || {};
 
         if (matches = url.match(youtubeRegExp)) {
 

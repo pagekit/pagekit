@@ -1,4 +1,4 @@
-define(['jquery', 'uikit', 'editor'], function($, uikit, editor) {
+define(['jquery', 'uikit', 'editor'], function($, uikit) {
 
     var base = requirejs.toUrl('');
 

@@ -3,10 +3,11 @@ require(['jquery', 'uikit', 'rowselect', 'gravatar', 'domReady!'], function($, u
     var form         = $('#js-user'),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
         table        = $('.js-table-users').on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
-        rowselect    = new RowSelect(table),
         doaction     = function(element) {
             element.closest('form').attr('action', element.data('action')).submit();
         };
+
+    new RowSelect(table);
 
     // action button
     form.on('click', '[data-action]', function(e) {

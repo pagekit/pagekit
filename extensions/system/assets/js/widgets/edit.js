@@ -16,7 +16,7 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
     tabs.eq(sessionStorage['pk-widget-settings-tab'] || 0).find('a').trigger('click');
     sessionStorage.removeItem('pk-widget-settings-tab');
 
-    form.find(':input').bind('invalid', function(e) {
+    form.find(':input').bind('invalid', function() {
 
         var input = $(this);
 

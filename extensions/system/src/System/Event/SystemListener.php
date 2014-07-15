@@ -25,7 +25,6 @@ use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\Directive\FunctionDirective;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 class SystemListener extends EventSubscriber
 {

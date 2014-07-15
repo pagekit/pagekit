@@ -31,8 +31,6 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!lin
 
                 links = editor.replaceInPreview(regexp, function(data) {
 
-                    var pre = '';
-
                     if (data.matches[0][0] == '<') {
 
                         var anchor = $(data.matches[0]);

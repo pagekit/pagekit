@@ -3,8 +3,9 @@ require(['jquery', 'system', 'uikit!nestable', 'rowselect', 'domReady!'], functi
     var form         = $('#js-dashboard'),
         params       = form.data(),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
-        table        = form.on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); }),
-        rowselect    = new RowSelect(table, {rows: '.pk-table-fake'});
+        table        = form.on('selected-rows', function(e, rows) { showOnSelect[rows.length ? 'removeClass':'addClass']('uk-hidden'); });
+
+    new RowSelect(table, {rows: '.pk-table-fake'});
 
     // action button
     form.on('click', '[data-action]', function(e) {

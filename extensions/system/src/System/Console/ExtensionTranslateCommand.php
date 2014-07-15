@@ -4,6 +4,10 @@ namespace Pagekit\System\Console;
 
 use Pagekit\Component\Translation\Loader\PoFileLoader;
 use Pagekit\Framework\Console\Command;
+use PhpParser\Lexer;
+use PhpParser\Node;
+use PhpParser\NodeTraverser;
+use PhpParser\Parser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -326,8 +330,8 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
      */
     public function traverse(array $files)
     {
-        $parser = new \PhpParser\Parser(new \PhpParser\Lexer);
-        $traverser = new \PhpParser\NodeTraverser;
+        $parser = new Parser(new Lexer);
+        $traverser = new NodeTraverser;
         $traverser->addVisitor($this);
 
         foreach ($files as $file) {
@@ -345,9 +349,9 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
     /**
      * {@inheritdoc}
      */
-    public function enterNode(\PhpParser\Node $node)
+    public function enterNode(Node $node)
     {
-        if ($node instanceof \PhpParser\Node\Expr\FuncCall
+        if ($node instanceof Node\Expr\FuncCall
             && ($node->name->parts[0] == '__' || $node->name->parts[0] == '_c')
             && isset($node->args[0]) && is_string($string = $node->args[0]->value->value))
         {
@@ -358,7 +362,7 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
     }
 
     public function beforeTraverse(array $nodes) {}
-    public function leaveNode(\PhpParser\Node $node) {}
+    public function leaveNode(Node $node) {}
     public function afterTraverse(array $nodes) {}
 }
 

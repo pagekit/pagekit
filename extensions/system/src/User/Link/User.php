@@ -33,7 +33,7 @@ class User extends Link
     /**
      * {@inheritdoc}
      */
-    public function renderForm($link, $params = [])
+    public function renderForm($link, $params = [], $context = '')
     {
         $routes = $this->getRoutes();
 
