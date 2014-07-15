@@ -167,6 +167,13 @@ class DefaultController extends Controller
             $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
+        $autoclose = $post->getCommentStatus() && $this->extension->getConfig('comments.autoclose');
+        $days      = (int) $this->extension->getConfig('comments.autoclose');
+        if ($autoclose && $post->getDate() < new \DateTime("-{$days} day")) {
+            $post->setCommentStatus(false);
+            $this->posts->where(compact('id'))->update(['comment_status' => false]);
+        }
+
         return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
     }
 }

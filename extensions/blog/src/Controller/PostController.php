@@ -100,6 +100,7 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->setUser($this['user']);
+        $post->setCommentStatus(true);
 
         return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
     }
@@ -137,7 +138,6 @@ class PostController extends Controller
             if (!$post = $this->posts->find($id)) {
 
                 $post = new Post;
-                $post->setCommentStatus(true);
 
             }
 

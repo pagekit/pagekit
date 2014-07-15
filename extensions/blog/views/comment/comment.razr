@@ -21,9 +21,11 @@
 
         <div class="uk-comment-body">
 
-            <p>@( $comment.content )</p>
+            <p>@raw( $comment.content )</p>
 
+            @if ($post.commentStatus)
             <p><a class="js-reply" href="#"><i class="uk-icon-reply"></i> @trans('Reply')</a></p>
+            @endif
 
         </div>
 

@@ -62,9 +62,6 @@ class Post
     /** @Column(type="json_array") */
     protected $data;
 
-    /** @var int */
-    protected static $comment_autoclose;
-
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
      */
