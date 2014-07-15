@@ -20,9 +20,6 @@ abstract class Comment extends BaseComment
     /** @Column(type="string") */
     protected $author;
 
-    /** @Column(type="integer") */
-    protected $depth = 0;
-
     /** @Column(type="datetime") */
     protected $created;
 

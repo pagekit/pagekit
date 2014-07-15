@@ -41,7 +41,6 @@ return [
                 $table->addColumn('created', 'datetime');
                 $table->addColumn('content', 'text');
                 $table->addColumn('status', 'smallint');
-                $table->addColumn('depth', 'smallint');
                 $table->setPrimaryKey(['id']);
                 $table->addIndex(['author'], 'AUTHOR');
                 $table->addIndex(['created'], 'CREATED');

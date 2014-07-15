@@ -20,11 +20,6 @@ abstract class Comment implements CommentInterface
     protected $author;
 
     /**
-     * @var integer
-     */
-    protected $depth = 0;
-
-    /**
      * @var \DateTime
      */
     protected $created;
@@ -103,22 +98,6 @@ abstract class Comment implements CommentInterface
     public function setAuthor($author)
     {
         $this->author = $author;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDepth()
-    {
-        return $this->depth;
-    }
-
-    /**
-     * @param int $depth
-     */
-    public function setDepth($depth)
-    {
-        $this->depth = $depth;
     }
 
     /**
