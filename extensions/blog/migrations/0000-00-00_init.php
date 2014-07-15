@@ -17,9 +17,8 @@ return [
                 $table->addColumn('modified', 'datetime');
                 $table->addColumn('content', 'text');
                 $table->addColumn('excerpt', 'text');
-                $table->addColumn('is_commentable', 'boolean', ['notnull' => false]);
-                $table->addColumn('num_comments', 'integer', ['default' => 0]);
-                $table->addColumn('last_comment_at', 'datetime', ['notnull' => false]);
+                $table->addColumn('comment_status', 'boolean', ['notnull' => false]);
+                $table->addColumn('comment_count', 'integer', ['default' => 0]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
@@ -44,10 +43,10 @@ return [
                 $table->addColumn('status', 'smallint');
                 $table->addColumn('depth', 'smallint');
                 $table->setPrimaryKey(['id']);
-                $table->addIndex(['status'], 'STATUS');
-                $table->addIndex(['created'], 'CREATED');
-                $table->addIndex(['post_id'], 'POST_ID');
                 $table->addIndex(['author'], 'AUTHOR');
+                $table->addIndex(['created'], 'CREATED');
+                $table->addIndex(['status'], 'STATUS');
+                $table->addIndex(['post_id'], 'POST_ID');
                 $table->addIndex(['post_id', 'status'], 'POST_ID_STATUS');
             });
         }

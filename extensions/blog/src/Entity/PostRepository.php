@@ -17,8 +17,7 @@ class PostRepository extends Repository
         $query = $this->manager->getRepository('Pagekit\Blog\Entity\Comment')->query()->where(['post_id' => $id, 'status' => CommentInterface::STATUS_APPROVED]);
 
         $this->where(compact('id'))->update([
-                'num_comments' => $query->count(),
-                'last_comment_at' => $query->max('created')
+                'comment_count' => $query->count()
             ]
         );
     }

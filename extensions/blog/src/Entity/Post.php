@@ -54,13 +54,16 @@ class Post
     protected $modified;
 
     /** @Column(type="boolean") */
-    protected $is_commentable;
+    protected $comment_status;
 
     /** @Column(type="integer") */
-    protected $num_comments = 0;
+    protected $comment_count = 0;
 
     /** @Column(type="datetime") */
-    protected $last_comment_at;
+    protected $comment_date;
+
+    /** @var int */
+    protected static $comment_autoclose;
 
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
@@ -213,20 +216,5 @@ class Post
     public function preDelete(EntityEvent $event)
     {
         $event->getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
-    }
-
-    /**
-     * @param  int $autoclose The number of days after which comments are closed automatically
-     * @return boolean
-     */
-    public function isCommentable($autoclose = 0)
-    {
-        if ($autoclose) {
-            if ($this->getDate() < new \DateTime("-{$autoclose} day")) {
-                return false;
-            }
-        }
-
-        return $this->is_commentable;
     }
 }

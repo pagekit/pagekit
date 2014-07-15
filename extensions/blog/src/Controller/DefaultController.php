@@ -87,7 +87,7 @@ class DefaultController extends Controller
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
-            if (!$post->isCommentable($this->extension->getConfig('comments.autoclose') ? $this->extension->getConfig('comments.autoclose.days') : 0)) {
+            if (!$post->getCommentStatus()) {
                 throw new Exception(__('Comments have been disabled for this post.'));
             }
 

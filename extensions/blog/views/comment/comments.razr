@@ -2,7 +2,7 @@
 
 <div class="js-comments uk-margin">
 
-    <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.numComments])</h2>
+    <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h2>
 
     <ul class="uk-comment-list">
 
@@ -12,7 +12,7 @@
 
     </ul>
 
-    @if ($post.isCommentable($config['comments.autoclose'] ? $config['comments.autoclose.days'] : 0))
+    @if ($post.commentStatus)
     @include('view://blog/comment/respond.razr')
     @endif
 

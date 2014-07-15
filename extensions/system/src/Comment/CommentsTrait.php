@@ -2,66 +2,46 @@
 
 namespace Pagekit\Comment;
 
-use Pagekit\Comment\Model\CommentNode;
-
 trait CommentsTrait
 {
     /**
-     * return boolean
+     * Gets the comment status.
+     *
+     * @return bool $comment_status
      */
-    public function isCommentable()
+    public function getCommentStatus()
     {
-        return $this->is_commentable;
+        return $this->comment_status;
     }
 
     /**
-     * @param bool $isCommentable
+     * Sets the comment status.
+     *
+     * @param bool $comment_status
      */
-    public function setCommentable($isCommentable)
+    public function setCommentStatus($comment_status)
     {
-        $this->is_commentable = (bool) $isCommentable;
+        $this->comment_status = (bool) $comment_status;
     }
 
     /**
-     * @return integer
+     * Gets the comment count.
+     *
+     * @return int $comment_count
      */
-    public function getNumComments()
+    public function getCommentCount()
     {
-        return $this->num_comments;
+        return $this->comment_count;
     }
 
     /**
-     * @param integer $numComments
+     * Sets the comment count.
+     *
+     * @param int $comment_count
      */
-    public function setNumComments($numComments)
+    public function setCommentCount($comment_count)
     {
-        $this->num_comments = intval($numComments);
-    }
-
-    /**
-     * @param  integer $by The number of comments to increment by
-     * @return integer The new comment total
-     */
-    public function incrementNumComments($by = 1)
-    {
-        return $this->num_comments += intval($by);
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getLastCommentAt()
-    {
-        return $this->last_comment_at;
-    }
-
-    /**
-     * @param  \DateTime
-     * @return null
-     */
-    public function setLastCommentAt(\DateTime $lastCommentAt)
-    {
-        $this->last_comment_at = $lastCommentAt;
+        $this->comment_count = (int) $comment_count;
     }
 
     /**
