@@ -100,7 +100,6 @@ class DefaultController extends Controller
             }
 
             $comment = new Comment;
-            $comment->setContent($this['comments']->filterContentInput($data['content']));
             $comment->setUserId((int) $user->getId());
             $comment->setIp($this['request']->getClientIp());
             $comment->setCreated(new \DateTime);
@@ -163,6 +162,10 @@ class DefaultController extends Controller
         $this['db.em']->related($post, 'comments', $query);
 
         $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
+
+        foreach ($post->getComments() as $comment) {
+            $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
+        }
 
         return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
     }

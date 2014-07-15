@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Event;
 
+use Pagekit\Comment\CommentPlugin;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
@@ -64,6 +65,7 @@ class SystemListener extends EventSubscriber
         $this['tmpl.php']->addHelpers([$helper]);
         $this['tmpl.razr']->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 
+        $this['events']->addSubscriber(new CommentPlugin);
         $this['events']->addSubscriber(new Editor);
         $this['events']->addSubscriber(new MarkdownPlugin);
         $this['events']->addSubscriber(new SimplePlugin);

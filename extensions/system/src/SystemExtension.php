@@ -105,10 +105,6 @@ class SystemExtension extends Extension
             return new ContentHelper;
         };
 
-        $app['comments'] = function() {
-            return new CommentHelper;
-        };
-
         $app['languages'] = function() {
             return new LanguageHelper;
         };

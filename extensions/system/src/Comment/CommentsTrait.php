@@ -2,6 +2,8 @@
 
 namespace Pagekit\Comment;
 
+use Pagekit\Comment\Model\CommentNode;
+
 trait CommentsTrait
 {
     /**
@@ -62,5 +64,36 @@ trait CommentsTrait
     public function setComments(array $comments = [])
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * Retrieves comments tree.
+     *
+     * @param  array $parameters
+     * @return CommentNode
+     */
+    public function getTree(array $parameters = [])
+    {
+        $nodes = [new CommentNode(0)];
+
+        foreach ($this->getComments() as $comment) {
+
+            $id  = $comment->getId();
+            $pid = $comment->getParentId();
+
+            if (!isset($nodes[$id])) {
+                $nodes[$id] = new CommentNode($id);
+            }
+
+            $nodes[$id]->setComment($comment);
+
+            if (!isset($nodes[$pid])) {
+                $nodes[$pid] = new CommentNode($pid);
+            }
+
+            $nodes[$pid]->add($nodes[$id]);
+        }
+
+        return $nodes[isset($parameters['root'], $nodes[$parameters['root']]) ? $parameters['root'] : 0];
     }
 }

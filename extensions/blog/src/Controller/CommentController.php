@@ -87,6 +87,10 @@ class CommentController extends Controller
             $pending = [];
         }
 
+        foreach ($comments as $comment) {
+            $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
+        }
+
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
                 'table' => $this['view']->render('view://blog/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
