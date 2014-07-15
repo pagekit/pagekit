@@ -336,7 +336,7 @@ class UserController extends Controller
                 ->setTo($user->getEmail())
                 ->setSubject(__('Welcome!'))
                 ->setBody($this['view']->render('system/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
-                ->queue();
+                ->send();
 
         } catch(\Exception $e) {}
     }
