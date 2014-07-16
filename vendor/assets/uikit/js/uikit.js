@@ -269,8 +269,6 @@
 
     $(function(){
 
-        $doc.trigger("uk-domready");
-
         // custom scroll observer
         setInterval((function(){
 
@@ -301,7 +299,7 @@
         try{
 
             var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
-                $doc.trigger("uk-domready");
+                $doc.trigger("uk-domready", [mutations]);
             }, 150));
 
             // pass in the target node, as well as the observer options
@@ -686,18 +684,27 @@
     });
 
     // init code
-    $(document).on("uk-domready", function(e) {
-        $("[data-uk-margin]").each(function() {
-            var ele = $(this), obj;
+    UI.$doc.on("uk-domready", (function(){
 
-            if (!ele.data("stackMargin")) {
-                obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
-            }
-        });
-    });
+        var fn = function(e) {
+
+            $("[data-uk-margin]").each(function() {
+                var ele = $(this), obj;
+
+                if (!ele.data("stackMargin")) {
+                    obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 
-    $(document).on("uk-check-display", function(e) {
+    UI.$doc.on("uk-check-display", function(e) {
         stacks.forEach(function(item) {
             if(item.element.is(":visible")) item.process();
         });
@@ -1431,21 +1438,30 @@
 
 
     // init code
-    $(document).on("uk-domready", function(e) {
-        $("[data-uk-grid-match],[data-uk-grid-margin]").each(function() {
-            var grid = $(this), obj;
+    UI.$doc.on("uk-domready", (function(){
 
-            if (grid.is("[data-uk-grid-match]") && !grid.data("gridMatchHeight")) {
-                obj = UI.gridMatchHeight(grid, UI.Utils.options(grid.attr("data-uk-grid-match")));
-            }
+        var fn = function(e) {
 
-            if (grid.is("[data-uk-grid-margin]") && !grid.data("gridMargin")) {
-                obj = UI.gridMargin(grid, UI.Utils.options(grid.attr("data-uk-grid-margin")));
-            }
-        });
-    });
+            $("[data-uk-grid-match],[data-uk-grid-margin]").each(function() {
+                var grid = $(this), obj;
 
-    $(document).on("uk-check-display", function(e) {
+                if (grid.is("[data-uk-grid-match]") && !grid.data("gridMatchHeight")) {
+                    obj = UI.gridMatchHeight(grid, UI.Utils.options(grid.attr("data-uk-grid-match")));
+                }
+
+                if (grid.is("[data-uk-grid-margin]") && !grid.data("gridMargin")) {
+                    obj = UI.gridMargin(grid, UI.Utils.options(grid.attr("data-uk-grid-margin")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
+
+    UI.$doc.on("uk-check-display", function(e) {
         grids.forEach(function(item) {
             if(item.element.is(":visible")) item.match();
         });
@@ -1934,15 +1950,24 @@
     }
 
     // init code
-    $(document).on("uk-domready", function(e) {
-        $("[data-uk-nav]").each(function() {
-            var nav = $(this);
+    UI.$doc.on("uk-domready", (function(){
 
-            if (!nav.data("nav")) {
-                var obj = UI.nav(nav, UI.Utils.options(nav.attr("data-uk-nav")));
-            }
-        });
-    });
+        var fn = function(e) {
+
+            $("[data-uk-nav]").each(function() {
+                var nav = $(this);
+
+                if (!nav.data("nav")) {
+                    var obj = UI.nav(nav, UI.Utils.options(nav.attr("data-uk-nav")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 })(jQuery, jQuery.UIkit);
 
@@ -2207,15 +2232,24 @@
 
 
     // init code
-    $(document).on("uk-domready", function(e) {
-        $("[data-uk-switcher]").each(function() {
-            var switcher = $(this);
+    UI.$doc.on("uk-domready", (function(){
 
-            if (!switcher.data("switcher")) {
-                var obj = UI.switcher(switcher, UI.Utils.options(switcher.attr("data-uk-switcher")));
-            }
-        });
-    });
+        var fn = function(e) {
+
+            $("[data-uk-switcher]").each(function() {
+                var switcher = $(this);
+
+                if (!switcher.data("switcher")) {
+                    var obj = UI.switcher(switcher, UI.Utils.options(switcher.attr("data-uk-switcher")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 })(jQuery, jQuery.UIkit);
 
@@ -2227,8 +2261,9 @@
     UI.component('tab', {
 
         defaults: {
-            connect: false,
-            active: 0
+            'target'  : '>li:not(.uk-tab-responsive, .uk-disabled)',
+            'connect' : false,
+            'active'  : 0
         },
 
         init: function() {
@@ -2328,16 +2363,25 @@
         }
     });
 
-    $(document).on("uk-domready", function(e) {
+    // init code
+    UI.$doc.on("uk-domready", (function(){
 
-        $("[data-uk-tab]").each(function() {
-            var tab = $(this);
+        var fn = function(e) {
 
-            if (!tab.data("tab")) {
-                var obj = UI.tab(tab, UI.Utils.options(tab.attr("data-uk-tab")));
-            }
-        });
-    });
+            $("[data-uk-tab]").each(function() {
+                var tab = $(this);
+
+                if (!tab.data("tab")) {
+                    var obj = UI.tab(tab, UI.Utils.options(tab.attr("data-uk-tab")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 })(jQuery, jQuery.UIkit);
 
@@ -2345,8 +2389,8 @@
 
     "use strict";
 
-    var $win           = $(window),
-        $doc           = $(document),
+    var $win           = UI.$win,
+        $doc           = UI.$doc,
         scrollspies    = [],
         checkScrollSpy = function() {
             for(var i=0; i < scrollspies.length; i++) {
@@ -2492,25 +2536,34 @@
     $win.on("resize orientationchange", UI.Utils.debounce(fnCheck, 50));
 
     // init code
-    $doc.on("uk-domready", function(e) {
-        $("[data-uk-scrollspy]").each(function() {
+    $doc.on("uk-domready", (function(){
 
-            var element = $(this);
+        var fn = function(e) {
 
-            if (!element.data("scrollspy")) {
-                var obj = UI.scrollspy(element, UI.Utils.options(element.attr("data-uk-scrollspy")));
-            }
-        });
+            $("[data-uk-scrollspy]").each(function() {
 
-        $("[data-uk-scrollspy-nav]").each(function() {
+                var element = $(this);
 
-            var element = $(this);
+                if (!element.data("scrollspy")) {
+                    var obj = UI.scrollspy(element, UI.Utils.options(element.attr("data-uk-scrollspy")));
+                }
+            });
 
-            if (!element.data("scrollspynav")) {
-                var obj = UI.scrollspynav(element, UI.Utils.options(element.attr("data-uk-scrollspy-nav")));
-            }
-        });
-    });
+            $("[data-uk-scrollspy-nav]").each(function() {
+
+                var element = $(this);
+
+                if (!element.data("scrollspynav")) {
+                    var obj = UI.scrollspynav(element, UI.Utils.options(element.attr("data-uk-scrollspy-nav")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 })(jQuery, jQuery.UIkit);
 
@@ -2614,23 +2667,32 @@
         }
     });
 
-    $(document).on("uk-domready", function(e) {
+    // init code
+    UI.$doc.on("uk-domready", (function(){
 
-        $("[data-uk-toggle]").each(function() {
-            var ele = $(this);
+        var fn = function(e) {
 
-            if (!ele.data("toggle")) {
-               var obj = UI.toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
-            }
-        });
+            $("[data-uk-toggle]").each(function() {
+                var ele = $(this);
 
-        setTimeout(function(){
-
-            togglers.forEach(function(toggler){
-                toggler.getTogglers();
+                if (!ele.data("toggle")) {
+                   var obj = UI.toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
+                }
             });
 
-        }, 0);
-    });
+            setTimeout(function(){
+
+                togglers.forEach(function(toggler){
+                    toggler.getTogglers();
+                });
+
+            }, 0);
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
 })(this, jQuery, jQuery.UIkit);

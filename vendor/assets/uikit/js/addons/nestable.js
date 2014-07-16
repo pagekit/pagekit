@@ -558,17 +558,26 @@
 
     });
 
-    $(document).on("uk-domready", function(e) {
+    // init code
+    UI.$doc.on("uk-domready", (function(){
 
-        $("[data-uk-nestable]").each(function(){
+        var fn = function(e) {
 
-          var ele = $(this);
+            $("[data-uk-nestable]").each(function(){
 
-          if(!ele.data("nestable")) {
-              var plugin = UI.nestable(ele, UI.Utils.options(ele.attr("data-uk-nestable")));
-          }
-        });
-    });
+                var ele = $(this);
+
+                if(!ele.data("nestable")) {
+                     var plugin = UI.nestable(ele, UI.Utils.options(ele.attr("data-uk-nestable")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
     return UI.nestable;
 });

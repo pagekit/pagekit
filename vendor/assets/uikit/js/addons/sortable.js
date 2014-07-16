@@ -461,19 +461,27 @@
     }
 
     // auto init
-    $(document).on("uk-domready", function(e) {
+    UI.$doc.on("uk-domready", (function(){
 
-        $("[data-uk-sortable]").each(function(){
+        var fn = function(e) {
 
-          var ele = $(this);
+            $("[data-uk-sortable]").each(function(){
 
-          if(!ele.data("sortable")) {
-              var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-uk-sortable")));
-          }
-        });
-    });
+              var ele = $(this);
 
-    $(document).on('mousemove touchmove', function(e) {
+              if(!ele.data("sortable")) {
+                  var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-uk-sortable")));
+              }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
+
+    UI.$doc.on('mousemove touchmove', function(e) {
 
         if (delayIdle) {
             if (Math.abs(e.pageX - delayIdle.pos.x) > delayIdle.threshold || Math.abs(e.pageY - delayIdle.pos.y) > delayIdle.threshold) {
@@ -501,7 +509,7 @@
         }
     });
 
-    $(document).on('mouseup touchend', function() {
+    UI.$doc.on('mouseup touchend', function() {
 
         if(!moving && clickedlink) {
             location.href = clickedlink.attr('href');

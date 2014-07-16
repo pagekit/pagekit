@@ -131,16 +131,24 @@
     });
 
     // init code
-    $(document).on("uk-domready", function(e) {
+    UI.$doc.on("uk-domready", (function(){
 
-        $("[data-uk-pagination]").each(function(){
-            var ele = $(this);
+        var fn = function(e) {
 
-            if (!ele.data("pagination")) {
-                var obj = UI.pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
-            }
-        });
-    });
+            $("[data-uk-pagination]").each(function(){
+                var ele = $(this);
+
+                if (!ele.data("pagination")) {
+                    var obj = UI.pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
+                }
+            });
+        };
+
+        $(fn);
+
+        return fn;
+
+    })());
 
     return UI.pagination;
 });
