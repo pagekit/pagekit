@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @Route("/page")
  */
-class DefaultController extends Controller
+class SiteController extends Controller
 {
     /**
      * @var Repository

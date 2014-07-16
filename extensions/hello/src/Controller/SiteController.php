@@ -7,7 +7,7 @@ use Pagekit\Framework\Controller\Controller;
 /**
  * @Route("/hello")
  */
-class DefaultController extends Controller
+class SiteController extends Controller
 {
     /**
      * @Response("hello/index.razr")
