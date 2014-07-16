@@ -161,8 +161,9 @@ class SiteController extends Controller
 
         $this['db.em']->related($post, 'comments', $query);
 
-        if ($post->getCommentStatus() && $days = $this->extension->getConfig('comments.autoclose', 0)) {
-            if ($post->getDate() < new \DateTime("-{$days} day")) {
+        if ($post->getCommentStatus() && $this->extension->getConfig('comments.autoclose')) {
+            $days = $this->extension->getConfig('comments.autoclose.days', 0);
+            if ($days && $post->getDate() < new \DateTime("-{$days} day")) {
                 $post->setCommentStatus(false);
                 $this->posts->save($post);
             }
