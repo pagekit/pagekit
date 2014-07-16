@@ -2,7 +2,7 @@
 
 namespace %NAMESPACE%\Controller;
 
-class DefaultController
+class SiteController
 {
     public function indexAction()
     {
