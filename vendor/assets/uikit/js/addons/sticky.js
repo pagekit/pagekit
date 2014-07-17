@@ -30,7 +30,8 @@
             clsactive    : 'uk-active',
             clswrapper   : 'uk-sticky',
             getWidthFrom : '',
-            media   : false
+            media        : false,
+            target       : false
         },
 
         init: function() {
@@ -165,6 +166,25 @@
 
                     if (!sticky.init) {
                         sticky.wrapper.addClass(sticky.options.clsinit);
+
+                        if (location.hash && sticky.options.target) {
+
+                            var $target = $(location.hash);
+
+                            if ($target.length) {
+
+                                var offset       = $target.offset(),
+                                    maxoffset    = offset.top + $target.outerHeight(),
+                                    stickyOffset = sticky.element.offset(),
+                                    stickyHeight = sticky.element.outerHeight(),
+                                    stickyMaxOffset = stickyOffset.top + stickyHeight;
+
+                                if (scrollTop >= offset.top && maxoffset < stickyMaxOffset ) {
+                                    scrollTop = offset.top - stickyHeight - sticky.options.target;
+                                    window.scrollTo(0, scrollTop);
+                                }
+                            }
+                        }
                     }
 
                     sticky.wrapper.addClass(sticky.options.clsactive);
@@ -195,9 +215,10 @@
         scroller();
     }, 100));
 
-    $doc.on("uk-domready", function(e) {
-        setTimeout(function(){
+    // init code
+    UI.ready(function(e) {
 
+        setTimeout(function(){
 
             $("[data-uk-sticky]").each(function(){
 
