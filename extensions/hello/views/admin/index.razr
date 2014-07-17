@@ -1,5 +1,5 @@
-@script('hello-admin', 'hello/js/hello.js', 'requirejs')
-@style('hello-admin', 'hello/css/hello.admin.css')
+@script('hello-admin', 'extension://hello/assets/js/hello.js', 'requirejs')
+@style('hello-admin', 'extension://hello/assets/css/hello.admin.css')
 
 
 Hello World

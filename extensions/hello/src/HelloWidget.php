@@ -36,7 +36,7 @@ class HelloWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['view']->render('hello/widget.razr');
+        return $this['view']->render('extension://hello/views/widget.razr');
     }
 
     /**

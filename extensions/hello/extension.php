@@ -10,20 +10,11 @@ return [
 
     ],
 
-    'resources' => [
-
-        'export' => [
-            'view'  => 'views',
-            'asset' => 'assets'
-        ]
-
-    ],
-
     'controllers' => 'src/Controller/*Controller.php',
 
     'settings' => [
 
-        'system'  => 'hello/admin/settings.razr'
+        'system'  => 'extension://hello/views/admin/settings.razr'
 
     ],
 
