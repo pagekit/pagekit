@@ -131,24 +131,16 @@
     });
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-pagination]").each(function(){
+            var ele = $(this);
 
-            $("[data-uk-pagination]").each(function(){
-                var ele = $(this);
-
-                if (!ele.data("pagination")) {
-                    var obj = UI.pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!ele.data("pagination")) {
+                var obj = UI.pagination(ele, UI.Utils.options(ele.attr("data-uk-pagination")));
+            }
+        });
+    });
 
     return UI.pagination;
 });

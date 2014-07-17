@@ -461,25 +461,17 @@
     }
 
     // auto init
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-sortable]").each(function(){
 
-            $("[data-uk-sortable]").each(function(){
+          var ele = $(this);
 
-              var ele = $(this);
-
-              if(!ele.data("sortable")) {
-                  var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-uk-sortable")));
-              }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+          if(!ele.data("sortable")) {
+              var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-uk-sortable")));
+          }
+        });
+    });
 
     UI.$doc.on('mousemove touchmove', function(e) {
 

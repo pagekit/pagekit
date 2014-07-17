@@ -313,6 +313,12 @@
         }
     });
 
+    // DOM mutation save ready helper function
+    UI.ready = function(fn) {
+        $(fn);
+        UI.$doc.on('uk-domready', fn);
+    };
+
     // add touch identifier class
     $html.addClass(UI.support.touch ? "uk-touch" : "uk-notouch");
 
@@ -608,7 +614,7 @@
 
     "use strict";
 
-    var win = $(window), event = 'resize orientationchange', stacks = [];
+    var win = UI.$win, event = 'resize orientationchange', stacks = [];
 
     UI.component('stackMargin', {
 
@@ -684,24 +690,16 @@
     });
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-margin]").each(function() {
+            var ele = $(this), obj;
 
-            $("[data-uk-margin]").each(function() {
-                var ele = $(this), obj;
-
-                if (!ele.data("stackMargin")) {
-                    obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!ele.data("stackMargin")) {
+                obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
+            }
+        });
+    });
 
 
     UI.$doc.on("uk-check-display", function(e) {
@@ -1438,28 +1436,20 @@
 
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-grid-match],[data-uk-grid-margin]").each(function() {
+            var grid = $(this), obj;
 
-            $("[data-uk-grid-match],[data-uk-grid-margin]").each(function() {
-                var grid = $(this), obj;
+            if (grid.is("[data-uk-grid-match]") && !grid.data("gridMatchHeight")) {
+                obj = UI.gridMatchHeight(grid, UI.Utils.options(grid.attr("data-uk-grid-match")));
+            }
 
-                if (grid.is("[data-uk-grid-match]") && !grid.data("gridMatchHeight")) {
-                    obj = UI.gridMatchHeight(grid, UI.Utils.options(grid.attr("data-uk-grid-match")));
-                }
-
-                if (grid.is("[data-uk-grid-margin]") && !grid.data("gridMargin")) {
-                    obj = UI.gridMargin(grid, UI.Utils.options(grid.attr("data-uk-grid-margin")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (grid.is("[data-uk-grid-margin]") && !grid.data("gridMargin")) {
+                obj = UI.gridMargin(grid, UI.Utils.options(grid.attr("data-uk-grid-margin")));
+            }
+        });
+    });
 
     UI.$doc.on("uk-check-display", function(e) {
         grids.forEach(function(item) {
@@ -1469,7 +1459,7 @@
 
 })(jQuery, jQuery.UIkit);
 
-(function($, UI, $win) {
+(function($, UI) {
 
     "use strict";
 
@@ -1506,9 +1496,7 @@
                 if (target[0] == $this.element[0] && $this.options.bgclose) {
                     $this.hide();
                 }
-
             });
-
         },
 
         toggle: function() {
@@ -1530,7 +1518,7 @@
 
             this.element.addClass("uk-open").trigger("uk.modal.show");
 
-            $(document).trigger("uk-check-display");
+            UI.$doc.trigger("uk-check-display");
 
             return this;
         },
@@ -1678,7 +1666,7 @@
     };
 
     // init code
-    $(document).on("click.modal.uikit", "[data-uk-modal]", function(e) {
+    UI.$doc.on("click.modal.uikit", "[data-uk-modal]", function(e) {
 
         var ele = $(this);
 
@@ -1694,7 +1682,7 @@
     });
 
     // close modal on esc button
-    $(document).on('keydown.modal.uikit', function (e) {
+    UI.$doc.on('keydown.modal.uikit', function (e) {
 
         if (active && e.keyCode === 27 && active.options.keyboard) { // ESC
             e.preventDefault();
@@ -1702,7 +1690,7 @@
         }
     });
 
-    $win.on("resize orientationchange", UI.Utils.debounce(function(){
+    UI.$win.on("resize orientationchange", UI.Utils.debounce(function(){
         if(active) active.resize();
     }, 150));
 
@@ -1734,7 +1722,7 @@
         return modal;
     }
 
-})(jQuery, jQuery.UIkit, jQuery(window));
+})(jQuery, jQuery.UIkit);
 
 (function($, UI) {
 
@@ -1950,24 +1938,16 @@
     }
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-nav]").each(function() {
+            var nav = $(this);
 
-            $("[data-uk-nav]").each(function() {
-                var nav = $(this);
-
-                if (!nav.data("nav")) {
-                    var obj = UI.nav(nav, UI.Utils.options(nav.attr("data-uk-nav")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!nav.data("nav")) {
+                var obj = UI.nav(nav, UI.Utils.options(nav.attr("data-uk-nav")));
+            }
+        });
+    });
 
 })(jQuery, jQuery.UIkit);
 
@@ -2232,24 +2212,16 @@
 
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-switcher]").each(function() {
+            var switcher = $(this);
 
-            $("[data-uk-switcher]").each(function() {
-                var switcher = $(this);
-
-                if (!switcher.data("switcher")) {
-                    var obj = UI.switcher(switcher, UI.Utils.options(switcher.attr("data-uk-switcher")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!switcher.data("switcher")) {
+                var obj = UI.switcher(switcher, UI.Utils.options(switcher.attr("data-uk-switcher")));
+            }
+        });
+    });
 
 })(jQuery, jQuery.UIkit);
 
@@ -2364,24 +2336,16 @@
     });
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-tab]").each(function() {
+            var tab = $(this);
 
-            $("[data-uk-tab]").each(function() {
-                var tab = $(this);
-
-                if (!tab.data("tab")) {
-                    var obj = UI.tab(tab, UI.Utils.options(tab.attr("data-uk-tab")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!tab.data("tab")) {
+                var obj = UI.tab(tab, UI.Utils.options(tab.attr("data-uk-tab")));
+            }
+        });
+    });
 
 })(jQuery, jQuery.UIkit);
 
@@ -2536,34 +2500,26 @@
     $win.on("resize orientationchange", UI.Utils.debounce(fnCheck, 50));
 
     // init code
-    $doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-scrollspy]").each(function() {
 
-            $("[data-uk-scrollspy]").each(function() {
+            var element = $(this);
 
-                var element = $(this);
+            if (!element.data("scrollspy")) {
+                var obj = UI.scrollspy(element, UI.Utils.options(element.attr("data-uk-scrollspy")));
+            }
+        });
 
-                if (!element.data("scrollspy")) {
-                    var obj = UI.scrollspy(element, UI.Utils.options(element.attr("data-uk-scrollspy")));
-                }
-            });
+        $("[data-uk-scrollspy-nav]").each(function() {
 
-            $("[data-uk-scrollspy-nav]").each(function() {
+            var element = $(this);
 
-                var element = $(this);
-
-                if (!element.data("scrollspynav")) {
-                    var obj = UI.scrollspynav(element, UI.Utils.options(element.attr("data-uk-scrollspy-nav")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!element.data("scrollspynav")) {
+                var obj = UI.scrollspynav(element, UI.Utils.options(element.attr("data-uk-scrollspy-nav")));
+            }
+        });
+    });
 
 })(jQuery, jQuery.UIkit);
 
@@ -2668,31 +2624,23 @@
     });
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-toggle]").each(function() {
+            var ele = $(this);
 
-            $("[data-uk-toggle]").each(function() {
-                var ele = $(this);
+            if (!ele.data("toggle")) {
+               var obj = UI.toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
+            }
+        });
 
-                if (!ele.data("toggle")) {
-                   var obj = UI.toggle(ele, UI.Utils.options(ele.attr("data-uk-toggle")));
-                }
+        setTimeout(function(){
+
+            togglers.forEach(function(toggler){
+                toggler.getTogglers();
             });
 
-            setTimeout(function(){
-
-                togglers.forEach(function(toggler){
-                    toggler.getTogglers();
-                });
-
-            }, 0);
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+        }, 0);
+    });
 
 })(this, jQuery, jQuery.UIkit);

@@ -47,24 +47,16 @@
     });
 
     // init code
-    UI.$doc.on("uk-domready", (function(){
+    UI.ready(function(e) {
 
-        var fn = function(e) {
+        $("[data-uk-form-select]").each(function(){
+            var ele = $(this);
 
-            $("[data-uk-form-select]").each(function(){
-                var ele = $(this);
-
-                if (!ele.data("formSelect")) {
-                    var obj = UI.formSelect(ele, UI.Utils.options(ele.attr("data-uk-form-select")));
-                }
-            });
-        };
-
-        $(fn);
-
-        return fn;
-
-    })());
+            if (!ele.data("formSelect")) {
+                var obj = UI.formSelect(ele, UI.Utils.options(ele.attr("data-uk-form-select")));
+            }
+        });
+    });
 
     return UI.formSelect;
 });
