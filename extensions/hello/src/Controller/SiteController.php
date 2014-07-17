@@ -57,7 +57,7 @@ class SiteController extends Controller
 
     public function downloadAction()
     {
-        return $this['response']->download('extensions/hello/extension.svg');
+        return $this['response']->download('extension://hello/extension.svg');
     }
 
     function forbiddenAction()

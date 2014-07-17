@@ -85,7 +85,7 @@ class PostController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('view://blog/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => $this->roles->findAll(), 'pending' => $pending]),
+                'table' => $this['view']->render('extension://blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => $this->roles->findAll(), 'pending' => $pending]),
                 'total' => $total
             ]);
         }
