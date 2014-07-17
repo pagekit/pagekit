@@ -39,7 +39,7 @@ class SettingsController extends Controller
 
         $caches = [
             'auto' => ['name' => '', 'supported' => true],
-            'apc' => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
+            'apc'  => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
             'file' => ['name' => 'File', 'supported' => in_array('file', $supported)]
         ];
 
@@ -142,18 +142,16 @@ class SettingsController extends Controller
     {
         try {
 
-            $filter = array_fill_keys([
-                'system:mail.driver',
-                'system:mail.port',
-                'system:mail.host',
-                'system:mail.username',
-                'system:mail.password',
-                'system:mail.encryption',
-                'system:mail.from.address',
-                'system:mail.from.name'
-            ], null);
-
-            $option = array_intersect_key(array_merge($filter, $option), $filter);
+            $option = array_merge([
+                'system:mail.driver' => '',
+                'system:mail.port' => '',
+                'system:mail.host' => '',
+                'system:mail.username' => '',
+                'system:mail.password' => '',
+                'system:mail.encryption' => '',
+                'system:mail.from.name' => '',
+                'system:mail.from.address' => ''
+            ], $option);
 
             foreach ($option as $key => $value) {
                 $this['option']->set($key, $value);

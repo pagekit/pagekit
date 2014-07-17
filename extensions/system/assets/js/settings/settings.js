@@ -14,7 +14,14 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'domRe
 
     // test SMTP
     $('[data-smtp-test]').on('click', function() {
-        $.post($(this).data('smtp-test'), $.extend($('[data-smtp] :input').serialize(), system.csrf.params), function(data) {
+
+        var data = {};
+
+        $('[name^="option[system:mail"]').each(function() {
+            data[$(this).attr('name')] = $(this).val();
+        });
+
+        $.post($(this).data('smtp-test'), $.extend(data, system.csrf.params), function(data) {
             if (data) {
                 uikit.notify(data.message, data.success ? 'success' : 'danger');
             }
@@ -25,7 +32,14 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'domRe
 
     // test mail
     $('[data-mail-test]').on('click', function() {
-        $.post($(this).data('mail-test'), $.extend($('[data-email] :input').serialize(), system.csrf.params), function(data) {
+
+        var data = {};
+
+        $('[name^="option[system:mail"]').each(function() {
+            data[$(this).attr('name')] = $(this).val();
+        });
+
+        $.post($(this).data('mail-test'), $.extend(data, system.csrf.params), function(data) {
             if (data) {
                 uikit.notify(data.message, data.success ? 'success' : 'danger');
             }

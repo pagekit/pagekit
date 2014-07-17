@@ -64,19 +64,19 @@
                 <li>
 
                     <h2 class="pk-form-heading">@trans('Email')</h2>
-                    <div class="uk-form-row" data-email>
+                    <div class="uk-form-row">
                         <label for="form-emailaddress" class="uk-form-label">@trans('From Email')</label>
                         <div class="uk-form-controls">
                             <input id="form-emailaddress" class="uk-form-width-large" type="text" name="option[system:mail.from.address]" value="@( $option.get('system:mail.from.address') )">
                         </div>
                     </div>
-                    <div class="uk-form-row" data-email>
+                    <div class="uk-form-row">
                         <label for="form-fromname" class="uk-form-label">@trans('From Name')</label>
                         <div class="uk-form-controls">
                             <input id="form-fromname" class="uk-form-width-large" type="text" name="option[system:mail.from.name]" value="@( $option.get('system:mail.from.name') )">
                         </div>
                     </div>
-                    <div class="uk-form-row" data-email>
+                    <div class="uk-form-row">
                         <label for="form-mailer" class="uk-form-label">@trans('Mailer')</label>
                         <div class="uk-form-controls">
                             <select id="form-mailer" class="uk-form-width-large" name="option[system:mail.driver]">
@@ -86,7 +86,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="uk-form-row" data-smtp data-email>
+                    <div class="uk-form-row" data-smtp>
                         <div class="uk-form-row">
                             <label for="form-smtpport" class="uk-form-label">@trans('SMTP Port')</label>
                             <div class="uk-form-controls">
