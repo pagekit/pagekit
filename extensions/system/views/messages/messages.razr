@@ -1,4 +1,4 @@
-@if ($app.message.hasMessages)
+@if ($app.message.peekAll)
 <div class="pk-system-messages">
     @foreach ($app.message.levels as $level)
         @if ($app.message.has($level))
