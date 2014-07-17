@@ -43,7 +43,7 @@ class PostController extends Controller
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("blog/admin/post/index.razr")
+     * @Response("extension://blog/views/admin/post/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -94,7 +94,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Response("blog/admin/post/edit.razr")
+     * @Response("extension://blog/views/admin/post/edit.razr")
      */
     public function addAction()
     {
@@ -107,7 +107,7 @@ class PostController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("blog/admin/post/edit.razr")
+     * @Response("extension://blog/views/admin/post/edit.razr")
      */
     public function editAction($id)
     {

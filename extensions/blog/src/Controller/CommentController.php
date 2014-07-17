@@ -37,7 +37,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @Response("blog/admin/comment/index.razr")
+     * @Response("extension://blog/views/admin/comment/index.razr")
      */
     public function indexAction($filter = [], $post_id = 0, $page = 0)
     {
@@ -105,7 +105,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("blog/admin/comment/edit.razr", layout=false)
+     * @Response("extension://blog/views/admin/comment/edit.razr", layout=false)
      */
     public function editAction($id = 0)
     {

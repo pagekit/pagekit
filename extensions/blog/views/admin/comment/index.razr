@@ -1,5 +1,5 @@
-@script('blog.comments-index', 'blog/js/comment/index.js', 'requirejs')
-@style('blog-admin', 'blog/css/blog.admin.css')
+@script('blog.comments-index', 'extension://blog/assets/js/comment/index.js', 'requirejs')
+@style('blog-admin', 'extension://blog/assets/css/blog.admin.css')
 
 <form id="js-comments" class="uk-form" action="@url('@blog/comment')" method="post">
 
@@ -37,7 +37,7 @@
     <p class="uk-alert uk-alert-info @( $comments ? 'uk-hidden' : '')">@trans('No comments found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('view://blog/admin/comment/table.razr')
+        @include('extension://blog/views/admin/comment/table.razr')
     </div>
 
     <ul class="uk-pagination @($total < 2 ? 'uk-hidden' : '')" data-uk-pagination="{ pages: @( $total ) }"></ul>

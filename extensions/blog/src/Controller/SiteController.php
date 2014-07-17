@@ -43,7 +43,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Response("blog/post/index.razr")
+     * @Response("extension://blog/views/post/index.razr")
      */
     public function indexAction()
     {
@@ -138,7 +138,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/{id}", name="@blog/id")
-     * @Response("blog/post/post.razr")
+     * @Response("extension://blog/views/post/post.razr")
      */
     public function postAction($id = 0)
     {
