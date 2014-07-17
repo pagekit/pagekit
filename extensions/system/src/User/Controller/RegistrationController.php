@@ -230,7 +230,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Please confirm your registration at %site%', ['%site%' => $this['option']->get('system:app.site_title')]))
+                ->setSubject(__('Activate your %site% account', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render(sprintf('extension://system/views/user/mails/%s.razr', $mail), compact('user')), 'text/html')
                 ->send();
 

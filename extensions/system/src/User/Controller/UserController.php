@@ -335,7 +335,7 @@ class UserController extends Controller
 
             $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Welcome!'))
+                ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
                 ->send();
 
