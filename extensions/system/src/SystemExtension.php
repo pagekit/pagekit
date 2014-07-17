@@ -2,13 +2,12 @@
 
 namespace Pagekit;
 
-use Pagekit\Comment\Helper\CommentHelper;
+use Pagekit\Component\Routing\DataCollector\RoutesDataCollector;
 use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
-use Pagekit\System\DataCollector\RoutesDataCollector;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
@@ -147,7 +146,7 @@ class SystemExtension extends Extension
             $app->on('system.init', function() use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extension://system/views/profiler/toolbar/system.php', 'extension://system/views/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'extension://system/views/profiler/toolbar/user.php', null, -20);
-                $app['profiler']->add(new RoutesDataCollector, 'extension://system/views/profiler/toolbar/routes.php', 'extension://system/views/profiler/panel/routes.php', 35);
+                $app['profiler']->add(new RoutesDataCollector($app['router'], $app['path.cache']), 'vendor://pagekit/framework/src/Component/Profiler/views/toolbar/routes.php', 'vendor://pagekit/framework/src/Component/Profiler/views/panel/routes.php', 35);
             });
         }
     }

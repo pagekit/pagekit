@@ -106,7 +106,6 @@ return [
             $util->createTable('@system_user_role', function($table) {
                 $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('role_id', 'integer', ['unsigned' => true, 'length' => 10]);
-                $table->addColumn('permissions', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['user_id', 'role_id']);
             });
         }
