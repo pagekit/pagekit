@@ -30,7 +30,7 @@ class ReadmorePlugin extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'content.plugins' => 'onContentPlugins'
+            'content.plugins' => ['onContentPlugins', 10]
         ];
     }
 }
