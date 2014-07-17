@@ -270,18 +270,39 @@
 
     // DOM mutation save ready helper function
 
-    UI.observers = [];
+    UI.domObservers = [];
+
+    UI.domObserve = function(selector, fn) {
+
+        if(!UI.support.mutationobserver) return;
+
+        $(selector).each(function() {
+
+            var element = this;
+
+            try {
+
+                var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
+                    fn.apply(element, []);
+                    $(element).trigger('uk.dom.changed');
+                }, 50));
+
+                // pass in the target node, as well as the observer options
+                observer.observe(element, { childList: true, subtree: true });
+
+            } catch(e) {}
+        });
+    };
 
     UI.ready = function(fn) {
         $(function() { fn(document); });
-        UI.observers.push(fn);
+        UI.domObservers.push(fn);
     };
 
-    $doc.on('uk-domready', function(){
-        UI.observers.forEach(function(fn){
+    $doc.on('uk.domready', function(){
+        UI.domObservers.forEach(function(fn){
             fn(document);
         });
-
         $doc.trigger('uk.dom.changed');
     });
 
@@ -311,28 +332,13 @@
         })(), 15);
 
         // Check for dom modifications
-        if(!UI.support.mutationobserver) return;
+        UI.domObserve('[data-uk-observe]', function() {
 
-        $('[data-uk-observe]').each(function() {
+            var ele = this;
 
-            var element = this;
-
-            try {
-
-                var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
-
-                    UI.observers.forEach(function(fn){
-                        fn(element);
-                    });
-
-                    $(element).trigger('uk.dom.changed');
-
-                }, 50));
-
-                // pass in the target node, as well as the observer options
-                observer.observe(element, { childList: true, subtree: true });
-
-            } catch(e) {}
+            UI.domObservers.forEach(function(fn){
+                fn(ele);
+            });
         });
 
         // remove css hover rules for touch devices
