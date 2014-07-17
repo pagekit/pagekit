@@ -56,7 +56,9 @@ class MenuWidget extends Type
             $parent = $node->getParent();
             $parent->setAttribute('parent', true);
 
-            if ($node->getDepth() > $maxDepth) {
+            $depth = $node->getDepth();
+
+            if ($depth > $maxDepth) {
                 $node->setParent();
             }
 
@@ -64,7 +66,7 @@ class MenuWidget extends Type
 
                 $parent->setAttribute('active', true);
 
-                if ($node->getDepth() == $startLevel) {
+                if ($depth == $startLevel) {
                     $root = $node;
                 }
             }
