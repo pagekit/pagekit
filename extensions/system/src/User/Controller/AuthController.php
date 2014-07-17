@@ -58,9 +58,9 @@ class AuthController extends Controller
 
     /**
      * @Route(methods="POST", defaults={"_maintenance" = true})
-     * @Request({"credentials": "array", "redirect"})
+     * @Request({"credentials": "array"})
      */
-    public function authenticateAction($credentials, $redirect)
+    public function authenticateAction($credentials)
     {
         try {
 
@@ -78,6 +78,6 @@ class AuthController extends Controller
             $this['message']->error($e->getMessage());
         }
 
-        return $this->redirect($redirect);
+        return $this->redirect($this['url']->previous());
     }
 }
