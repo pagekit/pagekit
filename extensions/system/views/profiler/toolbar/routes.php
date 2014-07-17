@@ -1,4 +1,4 @@
 <a title="Routes">
-    <div class="pf-icon uk-icon-share-alt"></div>
+    <div class="pf-icon pf-icon-routes"></div>
     Routes
 </a>
