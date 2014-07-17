@@ -47,7 +47,7 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->posts->query()->where(['status' => Post::STATUS_PUBLISHED])->where('date < :date', [':date' => (new \DateTime)->format('Y-m-d H:i:s')])->related('user')->orderBy('date', 'DESC')->get();
+        $posts = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get();
 
         foreach ($posts as $post) {
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
@@ -142,7 +142,7 @@ class SiteController extends Controller
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->find($id) or $post->getStatus() != Post::STATUS_PUBLISHED or $post->getDate() > new \DateTime) {
+        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->first()) {
             return $this['response']->create(__('Post not found!'), 404);
         }
 
