@@ -37,7 +37,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @Response("blog/admin/comment/index.razr")
+     * @Response("extension://blog/views/admin/comment/index.razr")
      */
     public function indexAction($filter = [], $post_id = 0, $page = 0)
     {
@@ -93,7 +93,7 @@ class CommentController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('view://blog/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
+                'table' => $this['view']->render('extension://blog/views/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
                 'total' => $total
             ]);
         }
@@ -105,7 +105,7 @@ class CommentController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("blog/admin/comment/edit.razr", layout=false)
+     * @Response("extension://blog/views/admin/comment/edit.razr", layout=false)
      */
     public function editAction($id = 0)
     {

@@ -10,15 +10,6 @@ return [
 
     ],
 
-    'resources' => [
-
-        'export' => [
-            'view'  => 'views',
-            'asset' => 'assets'
-        ]
-
-    ],
-
     'controllers' => 'src/Controller/*Controller.php',
 
     'menu' => [

@@ -1,4 +1,4 @@
-@script('alias', 'system/js/aliases/edit.js', 'requirejs')
+@script('alias', 'extension://system/assets/js/aliases/edit.js', 'requirejs')
 
 <form class="uk-form uk-form-horizontal" action="@url('@system/alias/save', ['id' => $alias.id ?: 0])" method="post">
 

@@ -1,4 +1,4 @@
-@script('update', 'system/js/settings/update.js', ['requirejs'])
+@script('update', 'extension://system/assets/js/settings/update.js', ['requirejs'])
 
 <div id="js-update" data-channel="@($channel)" data-api="@($api)" data-version="@($version)" data-url="@url('@system/update/download')">
 

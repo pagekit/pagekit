@@ -16,7 +16,7 @@ class SystemController extends Controller
 {
     /**
      * @Route("/system")
-     * @Response("system/admin/settings/index.razr")
+     * @Response("extension://system/views/admin/settings/index.razr")
      * @Access(admin=true)
      */
     public function indexAction()
@@ -86,7 +86,7 @@ class SystemController extends Controller
 
     /**
      * @Route("/system/storage")
-     * @Response("system/admin/settings/storage.razr")
+     * @Response("extension://system/views/admin/settings/storage.razr")
      * @Access("system: manage storage", admin=true)
      */
     public function storageAction()
@@ -96,7 +96,7 @@ class SystemController extends Controller
 
     /**
      * @Route("/system/info")
-     * @Response("system/admin/settings/info.razr")
+     * @Response("extension://system/views/admin/settings/info.razr")
      * @Access(admin=true)
      */
     public function infoAction()

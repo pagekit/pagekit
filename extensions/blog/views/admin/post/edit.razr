@@ -1,4 +1,4 @@
-@script('posts-edit', 'blog/js/post/edit.js', 'requirejs')
+@script('posts-edit', 'extension://blog/assets/js/post/edit.js', 'requirejs')
 
 <form id="js-post" class="uk-form uk-form-stacked" action="@url('@blog/post/save')" method="post">
 

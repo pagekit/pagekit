@@ -25,7 +25,7 @@ class PermissionController extends Controller
     }
 
     /**
-     * @Response("system/admin/user/permission.razr")
+     * @Response("extension://system/views/admin/user/permission.razr")
      */
     public function indexAction()
     {

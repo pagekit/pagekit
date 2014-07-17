@@ -2,7 +2,7 @@
 <div>
     <div class="uk-panel uk-panel-box">
         <div class="uk-panel-teaser">
-            <img src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('asset://system/images/placeholder-800x600.svg'))" width="800" height="600" alt="@($package.title)">
+            <img src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('extension://system/assets/images/placeholder-800x600.svg'))" width="800" height="600" alt="@($package.title)">
         </div>
         <div class="pk-themes-position">
             <h2 class="uk-panel-title uk-margin-remove">

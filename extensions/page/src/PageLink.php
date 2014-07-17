@@ -29,6 +29,6 @@ class PageLink extends Route
     {
         $pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page')->findAll();
 
-        return $this['view']->render('page/admin/link/page.razr', compact('link', 'params', 'pages'));
+        return $this['view']->render('extension://page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
     }
 }

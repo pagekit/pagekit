@@ -13,7 +13,6 @@ use Pagekit\Framework\Controller\Exception;
 class ExtensionsController extends Controller
 {
     protected $extensions;
-    protected $temp;
     protected $api;
     protected $apiKey;
 
@@ -23,13 +22,12 @@ class ExtensionsController extends Controller
     public function __construct()
     {
         $this->extensions = $this['extensions'];
-        $this->temp       = $this['path.temp'];
         $this->api        = $this['config']->get('api.url');
         $this->apiKey     = $this['option']->get('system:api.key');
     }
 
     /**
-     * @Response("system/admin/extensions/index.razr")
+     * @Response("extension://system/views/admin/extensions/index.razr")
      */
     public function indexAction()
     {
@@ -45,7 +43,7 @@ class ExtensionsController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('view://system/admin/extensions/table.razr', ['packages' => $packages])
+                'table' => $this['view']->render('extension://system/views/admin/extensions/table.razr', ['packages' => $packages])
             ]);
         }
 

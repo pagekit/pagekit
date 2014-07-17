@@ -1,7 +1,7 @@
 @foreach ($value as $widget)
     @if ($widget.type == 'widget.menu')
 
-    @raw( $options.provider.render($widget, array_merge(['layout' => 'view://system/widgets/menu/nav.razr', 'classes' => 'uk-nav-offcanvas'], $options)) )
+    @raw( $options.provider.render($widget, array_merge(['layout' => 'extension://system/views/widgets/menu/nav.razr', 'classes' => 'uk-nav-offcanvas'], $options)) )
 
     @else
 

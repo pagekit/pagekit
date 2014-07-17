@@ -28,7 +28,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/{id}", name="@page/id", requirements={"id"="\d+"})
-     * @Response("page/index.razr")
+     * @Response("extension://page/views/index.razr")
      */
     public function indexAction($id = 0)
     {

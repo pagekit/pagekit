@@ -4,29 +4,20 @@ return [
 
     'main' => 'Pagekit\\SystemExtension',
 
-    'resources' => [
-
-        'export' => [
-            'view'  => 'views',
-            'asset' => 'assets'
-        ]
-
-    ],
-
     'controllers' => 'src/*/Controller/*Controller.php',
 
     'menu' => [
 
         'system: dashboard' => [
             'label'    => 'Dashboard',
-            'icon'     => 'asset://system/images/icon-dashboard.svg',
+            'icon'     => 'extension://system/assets/images/icon-dashboard.svg',
             'url'      => '@system/dashboard',
             'active'   => '@system/dashboard',
             'priority' => 0
         ],
         'system: widgets' => [
             'label'    => 'Widgets',
-            'icon'     => 'asset://system/images/icon-widgets.svg',
+            'icon'     => 'extension://system/assets/images/icon-widgets.svg',
             'url'      => '@system/widgets',
             'active'   => '@system/widgets*',
             'access'   => 'system: manage widgets',
@@ -34,7 +25,7 @@ return [
         ],
         'system: menu' => [
             'label'    => 'Menus',
-            'icon'     => 'asset://system/images/icon-menus.svg',
+            'icon'     => 'extension://system/assets/images/icon-menus.svg',
             'url'      => '@system/menu',
             'active'   => '@system/(menu|item)*',
             'access'   => 'system: manage menus',
@@ -42,7 +33,7 @@ return [
         ],
         'system: user' => [
             'label'    => 'Users',
-            'icon'     => 'asset://system/images/icon-users.svg',
+            'icon'     => 'extension://system/assets/images/icon-users.svg',
             'url'      => '@system/user',
             'active'   => '@system/user*',
             'access'   => 'system: manage users || system: manage user permissions',
@@ -72,7 +63,7 @@ return [
         ],
         'system: settings' => [
             'label'    => 'Settings',
-            'icon'     => 'asset://system/images/icon-settings.svg',
+            'icon'     => 'extension://system/assets/images/icon-settings.svg',
             'url'      => '@system/system',
             'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
             'priority' => 110

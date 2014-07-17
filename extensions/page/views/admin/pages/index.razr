@@ -1,4 +1,4 @@
-@script('pages-index', 'page/js/pages.js', 'requirejs')
+@script('pages-index', 'extension://page/assets/js/pages.js', 'requirejs')
 
 <form id="js-pages" class="uk-form" action="@url('@page/page')" method="post">
 
@@ -38,7 +38,7 @@
     <p class="uk-alert uk-alert-info @( $pages ? 'uk-hidden' : '' )">@trans('No pages found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('view://page/admin/pages/table.razr', ['pages' => $pages])
+        @include('extension://page/views/admin/pages/table.razr', ['pages' => $pages])
     </div>
 
     <ul class="uk-pagination @( $total < 2 ? 'uk-hidden' : '' )" data-uk-pagination="{ pages: @( $total ) }"></ul>

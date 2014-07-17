@@ -8,7 +8,7 @@
         <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @section('head')
         @style('theme', 'extension://system/theme/css/theme.css')
-        @script('login', 'system/js/login.js', ['jquery', 'uikit', 'requirejs'])
+        @script('login', 'extension://system/assets/js/login.js', ['jquery', 'uikit', 'requirejs'])
     </head>
     <body class="uk-height-1-1">
 

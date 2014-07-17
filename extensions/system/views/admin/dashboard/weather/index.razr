@@ -1,4 +1,4 @@
-@script('weather', 'system/js/dashboard/weather.js', ['requirejs'])
+@script('weather', 'extension://system/assets/js/dashboard/weather.js', ['requirejs'])
 
 <div class="uk-text-center" data-weather="@( json(['id' => $widget.settings.id, 'units' => $widget.settings.units, 'location' => $widget.settings.location]) )">
     <div class="js-spinner uk-text-center"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>

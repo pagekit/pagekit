@@ -12,7 +12,6 @@ use Pagekit\Theme\Event\ThemeEvent;
 class ThemesController extends Controller
 {
     protected $themes;
-    protected $temp;
     protected $api;
     protected $apiKey;
 
@@ -22,13 +21,12 @@ class ThemesController extends Controller
     public function __construct()
     {
         $this->themes = $this['themes'];
-        $this->temp   = $this['path.temp'];
         $this->api    = $this['config']->get('api.url');
         $this->apiKey = $this['option']->get('system:api.key');
     }
 
     /**
-     * @Response("system/admin/themes/index.razr")
+     * @Response("extension://system/views/admin/themes/index.razr")
      */
     public function indexAction()
     {
@@ -60,7 +58,7 @@ class ThemesController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('view://system/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
+                'table' => $this['view']->render('extension://system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
             ]);
         }
 

@@ -37,7 +37,7 @@ class User extends Link
     {
         $routes = $this->getRoutes();
 
-        return $this['view']->render('system/admin/user/link.razr', compact('link', 'params', 'routes'));
+        return $this['view']->render('extension://system/views/admin/user/link.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()

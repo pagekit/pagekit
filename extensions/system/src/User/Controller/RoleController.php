@@ -27,7 +27,7 @@ class RoleController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/admin/user/role.razr")
+     * @Response("extension://system/views/admin/user/role.razr")
      */
     public function indexAction($id = null)
     {

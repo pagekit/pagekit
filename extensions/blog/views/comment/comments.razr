@@ -1,4 +1,4 @@
-@script('blog.post-comments', 'blog/js/comment/post.js', 'jquery')
+@script('blog.post-comments', 'extension://blog/assets/js/comment/post.js', 'jquery')
 
 <div class="js-comments uk-margin">
 
@@ -7,13 +7,13 @@
     <ul class="uk-comment-list">
 
         @foreach ($post.commentsTree as $child)
-        @include('view://blog/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @include('extension://blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
 
     </ul>
 
     @if ($post.commentStatus)
-    @include('view://blog/comment/respond.razr')
+    @include('extension://blog/views/comment/respond.razr')
     @endif
 
 </div>

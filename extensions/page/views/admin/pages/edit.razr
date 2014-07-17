@@ -1,4 +1,4 @@
-@script('pages-edit', 'page/js/edit.js', 'requirejs')
+@script('pages-edit', 'extension://page/assets/js/edit.js', 'requirejs')
 
 <form id="js-page" class="uk-form uk-form-stacked" action="@url('@page/page/save')" method="post">
 
