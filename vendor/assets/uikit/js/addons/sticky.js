@@ -216,11 +216,11 @@
     }, 100));
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
         setTimeout(function(){
 
-            $("[data-uk-sticky]").each(function(){
+            $("[data-uk-sticky]", context).each(function(){
 
                 var $ele = $(this);
 
