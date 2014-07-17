@@ -559,9 +559,9 @@
     });
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-nestable]").each(function(){
+        $("[data-uk-nestable]", context).each(function(){
 
             var ele = $(this);
 

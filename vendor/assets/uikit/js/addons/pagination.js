@@ -131,9 +131,9 @@
     });
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-pagination]").each(function(){
+        $("[data-uk-pagination]", context).each(function(){
             var ele = $(this);
 
             if (!ele.data("pagination")) {

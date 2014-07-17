@@ -267,6 +267,45 @@
 
     $.UIkit.langdirection = $html.attr("dir") == "rtl" ? "right" : "left";
 
+
+    // DOM mutation save ready helper function
+
+    UI.domObservers = [];
+
+    UI.domObserve = function(selector, fn) {
+
+        if(!UI.support.mutationobserver) return;
+
+        $(selector).each(function() {
+
+            var element = this;
+
+            try {
+
+                var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
+                    fn.apply(element, []);
+                    $(element).trigger('uk.dom.changed');
+                }, 50));
+
+                // pass in the target node, as well as the observer options
+                observer.observe(element, { childList: true, subtree: true });
+
+            } catch(e) {}
+        });
+    };
+
+    UI.ready = function(fn) {
+        $(function() { fn(document); });
+        UI.domObservers.push(fn);
+    };
+
+    $doc.on('uk.domready', function(){
+        UI.domObservers.forEach(function(fn){
+            fn(document);
+        });
+        $doc.trigger('uk.dom.changed');
+    });
+
     $(function(){
 
         // custom scroll observer
@@ -292,32 +331,21 @@
 
         })(), 15);
 
-
         // Check for dom modifications
-        if(!UI.support.mutationobserver) return;
+        UI.domObserve('[data-uk-observe]', function() {
 
-        try{
+            var ele = this;
 
-            var observer = new UI.support.mutationobserver(UI.Utils.debounce(function(mutations) {
-                $doc.trigger("uk-domready", [mutations]);
-            }, 150));
-
-            // pass in the target node, as well as the observer options
-            observer.observe(document.body, { childList: true, subtree: true });
-
-        } catch(e) {}
+            UI.domObservers.forEach(function(fn){
+                fn(ele);
+            });
+        });
 
         // remove css hover rules for touch devices
         if (UI.support.touch) {
             // UI.Utils.removeCssRules(/\.uk-(?!navbar).*:hover/);
         }
     });
-
-    // DOM mutation save ready helper function
-    UI.ready = function(fn) {
-        $(fn);
-        UI.$doc.on('uk-domready', fn);
-    };
 
     // add touch identifier class
     $html.addClass(UI.support.touch ? "uk-touch" : "uk-notouch");
@@ -614,7 +642,7 @@
 
     "use strict";
 
-    var win = UI.$win, event = 'resize orientationchange', stacks = [];
+    var stacks = [];
 
     UI.component('stackMargin', {
 
@@ -630,20 +658,21 @@
 
             if (!this.columns.length) return;
 
-            win.on(event, (function() {
+            UI.$win.on('resize orientationchange', (function() {
+
                 var fn = function() {
                     $this.process();
                 };
 
                 $(function() {
                     fn();
-                    win.on("load", fn);
+                    UI.$win.on("load", fn);
                 });
 
-                return UI.Utils.debounce(fn, 150);
+                return UI.Utils.debounce(fn, 50);
             })());
 
-            $(document).on("uk-domready", function(e) {
+            UI.$doc.on("uk.dom.changed", function(e) {
                 $this.columns  = $this.element.children();
                 $this.process();
             });
@@ -690,9 +719,9 @@
     });
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-margin]").each(function() {
+        $("[data-uk-margin]", context).each(function() {
             var ele = $(this), obj;
 
             if (!ele.data("stackMargin")) {
@@ -1307,7 +1336,7 @@
 
     "use strict";
 
-    var win = $(window), event = 'resize orientationchange', grids = [];
+    var grids = [];
 
     UI.component('gridMatchHeight', {
 
@@ -1325,20 +1354,21 @@
 
             if (!this.columns.length) return;
 
-            win.on(event, (function() {
+            UI.$win.on('resize orientationchange', (function() {
+
                 var fn = function() {
                     $this.match();
                 };
 
                 $(function() {
                     fn();
-                    win.on("load", fn);
+                    UI.$win.on("load", fn);
                 });
 
-                return UI.Utils.debounce(fn, 150);
+                return UI.Utils.debounce(fn, 50);
             })());
 
-            $(document).on("uk-domready", function(e) {
+            UI.$doc.on("uk.dom.changed", function(e) {
                 $this.columns  = $this.element.children();
                 $this.elements = $this.options.target ? $this.find($this.options.target) : $this.columns;
                 $this.match();
@@ -1436,9 +1466,9 @@
 
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-grid-match],[data-uk-grid-margin]").each(function() {
+        $("[data-uk-grid-match],[data-uk-grid-margin]", context).each(function() {
             var grid = $(this), obj;
 
             if (grid.is("[data-uk-grid-match]") && !grid.data("gridMatchHeight")) {
@@ -1938,9 +1968,9 @@
     }
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-nav]").each(function() {
+        $("[data-uk-nav]", context).each(function() {
             var nav = $(this);
 
             if (!nav.data("nav")) {
@@ -2212,9 +2242,9 @@
 
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-switcher]").each(function() {
+        $("[data-uk-switcher]", context).each(function() {
             var switcher = $(this);
 
             if (!switcher.data("switcher")) {
@@ -2336,9 +2366,9 @@
     });
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-tab]").each(function() {
+        $("[data-uk-tab]", context).each(function() {
             var tab = $(this);
 
             if (!tab.data("tab")) {
@@ -2500,9 +2530,9 @@
     $win.on("resize orientationchange", UI.Utils.debounce(fnCheck, 50));
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-scrollspy]").each(function() {
+        $("[data-uk-scrollspy]", context).each(function() {
 
             var element = $(this);
 
@@ -2511,7 +2541,7 @@
             }
         });
 
-        $("[data-uk-scrollspy-nav]").each(function() {
+        $("[data-uk-scrollspy-nav]", context).each(function() {
 
             var element = $(this);
 
@@ -2624,9 +2654,9 @@
     });
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
-        $("[data-uk-toggle]").each(function() {
+        $("[data-uk-toggle]", context).each(function() {
             var ele = $(this);
 
             if (!ele.data("toggle")) {

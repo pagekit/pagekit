@@ -176,10 +176,9 @@
                                 var offset       = $target.offset(),
                                     maxoffset    = offset.top + $target.outerHeight(),
                                     stickyOffset = sticky.element.offset(),
-                                    stickyHeight = sticky.element.outerHeight(),
-                                    stickyMaxOffset = stickyOffset.top + stickyHeight;
+                                    stickyHeight = sticky.element.outerHeight();
 
-                                if (scrollTop >= offset.top && maxoffset < stickyMaxOffset ) {
+                                if (scrollTop >= offset.top && stickyOffset.top < maxoffset) {
                                     scrollTop = offset.top - stickyHeight - sticky.options.target;
                                     window.scrollTo(0, scrollTop);
                                 }
@@ -216,11 +215,11 @@
     }, 100));
 
     // init code
-    UI.ready(function(e) {
+    UI.ready(function(context) {
 
         setTimeout(function(){
 
-            $("[data-uk-sticky]").each(function(){
+            $("[data-uk-sticky]", context).each(function(){
 
                 var $ele = $(this);
 
