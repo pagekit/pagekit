@@ -139,9 +139,7 @@ return [
             'app'       => false,
             'storage'   => false,
             'extension' => true,
-            'theme'     => true,
-            'view'      => true,
-            'asset'     => true
+            'theme'     => true
 
         ],
 

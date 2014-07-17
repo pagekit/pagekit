@@ -13,7 +13,6 @@ use Pagekit\Framework\Controller\Exception;
 class ExtensionsController extends Controller
 {
     protected $extensions;
-    protected $temp;
     protected $api;
     protected $apiKey;
 
@@ -23,7 +22,6 @@ class ExtensionsController extends Controller
     public function __construct()
     {
         $this->extensions = $this['extensions'];
-        $this->temp       = $this['path.temp'];
         $this->api        = $this['config']->get('api.url');
         $this->apiKey     = $this['option']->get('system:api.key');
     }

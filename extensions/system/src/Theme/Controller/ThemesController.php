@@ -12,7 +12,6 @@ use Pagekit\Theme\Event\ThemeEvent;
 class ThemesController extends Controller
 {
     protected $themes;
-    protected $temp;
     protected $api;
     protected $apiKey;
 
@@ -22,7 +21,6 @@ class ThemesController extends Controller
     public function __construct()
     {
         $this->themes = $this['themes'];
-        $this->temp   = $this['path.temp'];
         $this->api    = $this['config']->get('api.url');
         $this->apiKey = $this['option']->get('system:api.key');
     }
