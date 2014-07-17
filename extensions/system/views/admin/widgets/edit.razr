@@ -1,4 +1,4 @@
-@script('widget', 'system/js/widgets/edit.js', 'requirejs')
+@script('widget', 'extension://system/assets/js/widgets/edit.js', 'requirejs')
 
 <form class="js-widget uk-form" action="@url('@system/widgets/save', ['id' => $widget.id ?: 0])" method="post">
 
@@ -39,7 +39,7 @@
                     <div class="uk-form-row">
                         <label for="form-h-it" class="uk-form-label">@( $menu.name ) @trans('Menu')</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                        @include('view://system/admin/widgets/select.razr', ['root' => $app.menus.getTree($menu), 'widget' => $widget])
+                        @include('extension://system/views/admin/widgets/select.razr', ['root' => $app.menus.getTree($menu), 'widget' => $widget])
                         </div>
                     </div>
                     @endif

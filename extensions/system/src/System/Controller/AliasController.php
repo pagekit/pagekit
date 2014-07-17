@@ -27,7 +27,7 @@ class AliasController extends Controller
 
     /**
      * @Request({"filter": "array"})
-     * @Response("system/admin/aliases/index.razr")
+     * @Response("extension://system/views/admin/aliases/index.razr")
      */
     public function indexAction($filter = null)
     {
@@ -47,7 +47,7 @@ class AliasController extends Controller
     }
 
     /**
-     * @Response("system/admin/aliases/edit.razr")
+     * @Response("extension://system/views/admin/aliases/edit.razr")
      */
     public function addAction()
     {
@@ -56,7 +56,7 @@ class AliasController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/admin/aliases/edit.razr")
+     * @Response("extension://system/views/admin/aliases/edit.razr")
      */
     public function editAction($id)
     {

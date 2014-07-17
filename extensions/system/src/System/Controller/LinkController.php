@@ -20,7 +20,7 @@ class LinkController extends Controller
 
     /**
      * @Request({"context"})
-     * @Response("system/admin/link/link.types.razr", layout=false)
+     * @Response("extension://system/views/admin/link/link.types.razr", layout=false)
      */
     public function indexAction($context = '')
     {

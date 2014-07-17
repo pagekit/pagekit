@@ -10,7 +10,7 @@ use Pagekit\Framework\Controller\Controller;
 class MarketplaceController extends Controller
 {
     /**
-     * @Response("system/admin/settings/marketplace.razr")
+     * @Response("extension://system/views/admin/settings/marketplace.razr")
      */
     public function indexAction()
     {

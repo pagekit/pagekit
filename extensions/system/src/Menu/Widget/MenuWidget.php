@@ -84,6 +84,6 @@ class MenuWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('system/widgets/menu/edit.razr', compact('widget'));
+        return $this['view']->render('extension://system/views/widgets/menu/edit.razr', compact('widget'));
     }
 }

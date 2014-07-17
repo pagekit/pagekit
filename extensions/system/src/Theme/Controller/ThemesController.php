@@ -28,7 +28,7 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Response("system/admin/themes/index.razr")
+     * @Response("extension://system/views/admin/themes/index.razr")
      */
     public function indexAction()
     {
@@ -60,7 +60,7 @@ class ThemesController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('view://system/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
+                'table' => $this['view']->render('extension://system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
             ]);
         }
 

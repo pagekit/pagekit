@@ -1,5 +1,5 @@
-@style('user', 'system/css/user.css')
-@script('user', 'system/js/user/permission.js', ['requirejs'])
+@style('user', 'extension://system/assets/css/user.css')
+@script('user', 'extension://system/assets/js/user/permission.js', ['requirejs'])
 
 <form id="js-permission" class="uk-form" action="@url('@system/permission/save')" method="post">
 

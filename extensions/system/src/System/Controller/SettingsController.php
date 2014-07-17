@@ -31,7 +31,7 @@ class SettingsController extends Controller
 
     /**
      * @Request({"tab": "int"})
-     * @Response("system/admin/settings/settings.razr")
+     * @Response("extension://system/views/admin/settings/settings.razr")
      */
     public function indexAction($tab = 0)
     {

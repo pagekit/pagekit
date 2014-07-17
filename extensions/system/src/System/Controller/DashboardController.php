@@ -27,7 +27,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("system/admin/dashboard/index.razr")
+     * @Response("extension://system/views/admin/dashboard/index.razr")
      */
     public function indexAction()
     {
@@ -47,7 +47,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("system/admin/dashboard/settings.razr")
+     * @Response("extension://system/views/admin/dashboard/settings.razr")
      */
     public function settingsAction()
     {
@@ -69,7 +69,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("system/admin/dashboard/edit.razr")
+     * @Response("extension://system/views/admin/dashboard/edit.razr")
      */
     public function addAction($id)
     {
@@ -93,7 +93,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("system/admin/dashboard/edit.razr")
+     * @Response("extension://system/views/admin/dashboard/edit.razr")
      */
     public function editAction($id)
     {

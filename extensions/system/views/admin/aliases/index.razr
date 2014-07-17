@@ -1,4 +1,4 @@
-@script('aliases', 'system/js/aliases/index.js', 'requirejs')
+@script('aliases', 'extension://system/assets/js/aliases/index.js', 'requirejs')
 
 <form id="js-aliases" class="uk-form" action="@url('@system/alias')" method="post">
 

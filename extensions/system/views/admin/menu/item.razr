@@ -31,7 +31,7 @@
 
         @if ($menuitem.hasChildren())
         <ul class="uk-nestable-list">
-            @include('view://system/admin/menu/item.razr', ['menu' => $menu, 'root' => $menuitem])
+            @include('extension://system/views/admin/menu/item.razr', ['menu' => $menu, 'root' => $menuitem])
         </ul>
         @endif
 

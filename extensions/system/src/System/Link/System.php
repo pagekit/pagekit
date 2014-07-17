@@ -39,7 +39,7 @@ class System extends Link
             unset($routes['/']);
         }
 
-        return $this['view']->render('system/admin/link/system.razr', compact('link', 'params', 'routes'));
+        return $this['view']->render('extension://system/views/admin/link/system.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()

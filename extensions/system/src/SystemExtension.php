@@ -145,9 +145,9 @@ class SystemExtension extends Extension
 
         if (isset($app['profiler'])) {
             $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'view://system/profiler/toolbar/system.php', 'view://system/profiler/panel/system.php', 50);
-                $app['profiler']->add(new UserDataCollector($app['auth']), 'view://system/profiler/toolbar/user.php', null, -20);
-                $app['profiler']->add(new RoutesDataCollector, 'view://system/profiler/toolbar/routes.php', 'view://system/profiler/panel/routes.php', 35);
+                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extension://system/views/profiler/toolbar/system.php', 'extension://system/views/profiler/panel/system.php', 50);
+                $app['profiler']->add(new UserDataCollector($app['auth']), 'extension://system/views/profiler/toolbar/user.php', null, -20);
+                $app['profiler']->add(new RoutesDataCollector, 'extension://system/views/profiler/toolbar/routes.php', 'extension://system/views/profiler/panel/routes.php', 35);
             });
         }
     }

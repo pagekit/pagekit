@@ -42,7 +42,7 @@ class UserController extends Controller
 
     /**
      * @Request({"filter": "array"})
-     * @Response("system/admin/user/index.razr")
+     * @Response("extension://system/views/admin/user/index.razr")
      */
     public function indexAction($filter = null)
     {
@@ -101,7 +101,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Response("system/admin/user/edit.razr")
+     * @Response("extension://system/views/admin/user/edit.razr")
      */
     public function addAction()
     {
@@ -115,7 +115,7 @@ class UserController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/admin/user/edit.razr")
+     * @Response("extension://system/views/admin/user/edit.razr")
      */
     public function editAction($id)
     {
@@ -336,7 +336,7 @@ class UserController extends Controller
             $this['mailer']->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Welcome!'))
-                ->setBody($this['view']->render('system/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
+                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
                 ->send();
 
         } catch(\Exception $e) {}

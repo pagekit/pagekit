@@ -25,7 +25,7 @@
                                 @foreach ($nav.children as $item)
                                     <li@raw( $item.attribute('active') ? ' class="uk-active"' : '' ) data-id="@( $item.getId() )">
                                         <a class="uk-panel pk-panel-icon" href="@url($item.url)">
-                                            <img  src="@url( $item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="50" height="50" alt="@trans($item)">
+                                            <img  src="@url( $item.getIcon() ?: 'extension://system/assets/images/placeholder-icon.svg' )" width="50" height="50" alt="@trans($item)">
                                             <p>@trans($item)</p>
                                         </a>
                                     </li>
@@ -116,7 +116,7 @@
                     @foreach ($nav.children as $item)
                         <li@raw( $item.attribute('active') ? ' class="uk-active"' : '')>
                             <a href="@url($item.url)">
-                                <img class="uk-margin-small-right" src="@url($item.getIcon() ?: 'asset://system/images/placeholder-icon.svg' )" width="34" height="34" alt="@trans($item)">
+                                <img class="uk-margin-small-right" src="@url($item.getIcon() ?: 'extension://system/assets/images/placeholder-icon.svg' )" width="34" height="34" alt="@trans($item)">
                                 @trans($item)
                             </a>
                         </li>
