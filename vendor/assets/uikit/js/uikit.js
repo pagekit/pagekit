@@ -343,10 +343,11 @@
 
 
         if (UI.support.touch) {
+
             // remove css hover rules for touch devices
             // UI.Utils.removeCssRules(/\.uk-(?!navbar).*:hover/);
 
-            // viewport unit fix for uk-height-viewport
+            // viewport unit fix for uk-height-viewport - should be fixed in iOS 8
             if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
 
                 UI.$win.on('load orientationchange resize', UI.Utils.debounce((function(){

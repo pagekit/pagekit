@@ -28,7 +28,6 @@
             animation    : '',
             clsinit      : 'uk-sticky-init',
             clsactive    : 'uk-active',
-            clswrapper   : 'uk-sticky',
             getWidthFrom : '',
             media        : false,
             target       : false
@@ -37,7 +36,7 @@
         init: function() {
 
             var stickyId = this.element.attr('id') || ("s"+Math.ceil(Math.random()*10000)),
-                wrapper  = $('<div></div>').attr('id', 'sticky-'+stickyId).addClass(this.options.clswrapper);
+                wrapper  = $('<div></div>');
 
             wrapper = this.element.wrap(wrapper).parent();
 
@@ -61,8 +60,8 @@
 
                     var finalize = function() {
                         this.element.css({"position":"", "top":"", "width":"", "left":""});
-                        this.wrapper.removeClass([this.options.clsactive, this.options.clsinit].join(' '));
-                        this.element.removeClass([this.options.animation, 'uk-animation-reverse'].join(' '));
+                        this.wrapper.removeClass([this.options.clsinit].join(' '));
+                        this.element.removeClass([this.options.animation, 'uk-animation-reverse', this.options.clsactive].join(' '));
 
                         this.currentTop = null;
                         this.animate    = false;
@@ -197,7 +196,7 @@
                         }
                     }
 
-                    sticky.wrapper.addClass(sticky.options.clsactive);
+                    sticky.element.addClass(sticky.options.clsactive);
 
                     if (sticky.options.animation && sticky.init) {
                         sticky.element.addClass(sticky.options.animation);
