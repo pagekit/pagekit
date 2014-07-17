@@ -341,9 +341,25 @@
             });
         });
 
-        // remove css hover rules for touch devices
+
         if (UI.support.touch) {
+            // remove css hover rules for touch devices
             // UI.Utils.removeCssRules(/\.uk-(?!navbar).*:hover/);
+
+            // viewport unit fix for uk-height-viewport
+            if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
+
+                UI.$win.on('load orientationchange resize', UI.Utils.debounce((function(){
+
+                    var fn = function() {
+                        $('.uk-height-viewport').css('height', window.innerHeight);
+                        return fn;
+                    };
+
+                    return fn();
+
+                })(), 100));
+            }
         }
     });
 
