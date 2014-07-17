@@ -11,7 +11,7 @@
         <p>@trans('Hello %name%', ['%name%' => $user.name]),</p>
         <p>@trans('Thank you for registering at %site%! Your account has been successfully created and must be verified before you can use it.', ['%site%' => $app.option.get('system:app.site_title')])</p>
         <p>@trans('To verify the account click on:')</p>
-        <p><a target="_blank" href="@($link)">@($link)</a></p>
+        <p><a href="@($link)">@($link)</a></p>
         <p>@trans('After verification an administrator will be notified to activate your account. You\'ll receive a confirmation email when it\'s done.')</p>
 
     </body>

@@ -12,7 +12,7 @@
         <p>@trans('A new user has registered at %site%! The user has verified his email, and requests that you approve his account.', ['%site%' => $app.option.get('system:app.site_title')])</p>
         <p>@trans('User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%', ['site' => $app.option.get('system:app.site_title'), '%name%' => $user.name, '%username%' => $user.username, '%email%' => $user.email])</p>
         <p>@trans('To activate the account click on:')</p>
-        <p><a target="_blank" href="@($link)">@($link)</a></p>
+        <p><a href="@($link)">@($link)</a></p>
 
     </body>
 </html>

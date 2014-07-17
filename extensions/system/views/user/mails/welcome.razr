@@ -8,7 +8,7 @@
 
         <p>@trans('Hello %name%', ['%name%' => $name]),</p>
         <p>@trans('Thank you for registering!')</p>
-        <p><a target="_blank" href="@($app.url.base(true))">@($app.url.base(true))</a></p>
+        <p><a href="@($app.url.base(true))">@($app.url.base(true))</a></p>
         <p>@trans('Login with the username:') @($username)</p>
 
     </body>
