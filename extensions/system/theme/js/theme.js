@@ -1,9 +1,8 @@
 jQuery(function($) {
 
-    // adjust toolbar
-    var $doc     = $(document);
-    var toolbars = $('.tm-toolbar');
+    var $doc = $(document), toolbars = $('.tm-toolbar'), bars = [];
 
+    // adjust toolbar
     toolbars.each(function() {
 
         var toolbar = $(this);
@@ -19,9 +18,7 @@ jQuery(function($) {
         })());
 
         toolbar.data('init', true);
-
     });
-
 
     $doc.on('uk-scroll', (function onscroll() {
         bars.forEach(function(check) { check(); });

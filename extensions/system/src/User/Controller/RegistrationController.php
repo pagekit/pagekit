@@ -108,7 +108,7 @@ class RegistrationController extends Controller
             $user->setStatus(UserInterface::STATUS_BLOCKED);
             $user->setRoles($this->roles->where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
 
-            $token = $this['auth.random']->generateString(128);
+            $token = $this['auth.random']->generateString(32);
             $admin = $this['option']->get('system:user.registration') == 'approval';
 
             if ($verify = $this['option']->get('system:user.require_verification')) {
@@ -183,7 +183,7 @@ class RegistrationController extends Controller
 
         if ($admin = $this['option']->get('system:user.registration') == 'approval' and !$user->get('verified')) {
 
-            $user->setActivation($this['auth.random']->generateString(128));
+            $user->setActivation($this['auth.random']->generateString(32));
             $this->sendActivateMail($user, 'verification.activate');
 
             $this['message']->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email, and you can login to the site.'));
