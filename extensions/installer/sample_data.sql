@@ -29,4 +29,4 @@ INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `prior
 INSERT INTO `@system_option` (`name`, `value`, `autoload`) VALUES
 ('system:app.frontpage', '"@page/id?id=1"', 1);
 
-UPDATE `@system_user` SET `data`='{\"dashboard\":{\"1\":{\"show\":\"login\",\"count\":\"5\",\"type\":\"widget.user\",\"widget\":{},\"widget.type\":{}},\"53183c730b5f4\":{\"location\":\"Hamburg, Germany\",\"id\":\"2827552\",\"units\":\"metric\",\"type\":\"widget.weather\",\"widget\":{},\"widget.type\":{}},\"53183c968c9e2\":{\"title\":\"YOOtheme\",\"url\":\"http:\\/\\/www.yootheme.com\\/rss\",\"count\":\"5\",\"content\":\"1\",\"type\":\"widget.feed\"}}}' WHERE `id`=1;
+UPDATE `@system_user` SET `data`='{\"dashboard\":{\"1\":{\"show\":\"login\",\"count\":\"5\",\"type\":\"widget.user\",\"widget\":{},\"widget.type\":{}},\"53183c730b5f4\":{\"location\":\"Hamburg, Germany\",\"id\":\"2827552\",\"units\":\"metric\",\"type\":\"widget.weather\",\"widget\":{},\"widget.type\":{}},\"53183c968c9e2\":{\"title\":\"Pagekit\",\"url\":\"http:\\/\\/pagekit.com\\/blog\\/feed\",\"count\":\"5\",\"content\":\"1\",\"type\":\"widget.feed\"}}}' WHERE `id`=1;
