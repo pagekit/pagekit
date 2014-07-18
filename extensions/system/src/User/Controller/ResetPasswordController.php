@@ -75,7 +75,7 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Your account has not been activated or is blocked.'));
             }
 
-            $user->setActivation($this['auth.random']->generateString(128));
+            $user->setActivation($this['auth.random']->generateString(32));
 
             $url = $this['url']->route('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
 
