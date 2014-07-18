@@ -5,7 +5,7 @@
 
     @else
 
-    @include('theme://alpha/views/renderer/position.panel.razr', ['widgets' => [$widget]])
+    @include('theme://alpha/views/renderer/position.panel.razr', ['value' => [$widget]])
 
     @endif
 @endforeach
