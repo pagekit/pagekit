@@ -130,12 +130,12 @@ class RegistrationController extends Controller
 
             if ($verify) {
 
-                $this->sendVerificationMail($user, $admin ? 'verification.admin' : 'verification');
+                $this->sendVerificationMail($user);
                 $response['success'] = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
 
             } elseif ($admin) {
 
-                $this->sendActivateMail($user, 'activate');
+                $this->sendApproveMail($user);
                 $response['success'] = __('Your user account has been created and is pending approval by the site administrator.');
 
             } else {
@@ -184,27 +184,22 @@ class RegistrationController extends Controller
         if ($admin = $this['option']->get('system:user.registration') == 'approval' and !$user->get('verified')) {
 
             $user->setActivation($this['auth.random']->generateString(32));
-            $this->sendActivateMail($user, 'verification.activate');
+            $this->sendApproveMail($user);
 
-            $this['message']->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email, and you can login to the site.'));
+            $this['message']->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
 
         } else {
-
-            if ($admin) {
-
-                $this->sendActivatedMail($user);
-                $this['message']->success(__('The user\'s account has been activated and the user has been notified about it.'));
-
-            } else {
-
-                $this->sendWelcomeEmail($user);
-                $this['message']->success(__('Your account has been activated.'));
-
-            }
 
             $user->set('verified', true);
             $user->setStatus(UserInterface::STATUS_ACTIVE);
             $user->setActivation('');
+            $this->sendWelcomeEmail($user);
+
+            if ($admin) {
+                $this['message']->success(__('The user\'s account has been activated and the user has been notified about it.'));
+            } else {
+                $this['message']->success(__('Your account has been activated.'));
+            }
         }
 
         $this->users->save($user);
@@ -219,7 +214,7 @@ class RegistrationController extends Controller
             $this['mailer']->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
+                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}
@@ -232,7 +227,7 @@ class RegistrationController extends Controller
             $this['mailer']->create()
                 ->setTo($user->getEmail())
                 ->setSubject(__('Activate your %site% account', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render(sprintf('extension://system/views/user/mails/%s.razr', $mail), compact('user')), 'text/html')
+                ->setBody($this['view']->render('extension://system/views/user/mails/verification.razr', compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {
@@ -240,27 +235,14 @@ class RegistrationController extends Controller
         }
     }
 
-    protected function sendActivateMail($user, $mail)
+    protected function sendApproveMail($user)
     {
         try {
 
             $this['mailer']->create()
                 ->setTo($this['option']->get('system:mail.from.address'))
                 ->setSubject(__('Please approve registration at %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render(sprintf('extension://system/views/user/mails/%s.razr', $mail), compact('user')), 'text/html')
-                ->send();
-
-        } catch (\Exception $e) {}
-    }
-
-    protected function sendActivatedMail($user)
-    {
-        try {
-
-            $this['mailer']->create()
-                ->setTo($user->getEmail())
-                ->setSubject(__('Account activated at %site%', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/activated.razr', compact('user')), 'text/html')
+                ->setBody($this['view']->render('extension://system/views/user/mails/approve.razr', compact('user')), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}

@@ -6,10 +6,10 @@
     </head>
     <body>
 
-        <p>@trans('Hello %name%', ['%name%' => $name]),</p>
+        <p>@trans('Hello %name%', ['%name%' => $user.name]),</p>
         <p>@trans('Thank you for registering!')</p>
         <p><a href="@($app.url.base(true))">@($app.url.base(true))</a></p>
-        <p>@trans('Login with the username:') @($username)</p>
+        <p>@trans('Login with the username:') @($user.username)</p>
 
     </body>
 </html>

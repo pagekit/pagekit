@@ -10,10 +10,8 @@
 
         <p>@trans('Hello %name%', ['%name%' => $user.name]),</p>
         <p>@trans('Thank you for registering at %site%! Your account has been successfully created and must be verified before you can use it.', ['%site%' => $app.option.get('system:app.site_title')])</p>
-        <p>@trans('To verify the account click on:')</p>
+        <p>@trans('To verify your account click on:')</p>
         <p><a href="@($link)">@($link)</a></p>
-        <p>@trans('After verification you may login with the username:') @($user.username)</p>
-        <p><a href="@url('@system/auth/login', [], true)">@url('@system/auth/login', [], true)</a></p>
 
     </body>
 </html>
