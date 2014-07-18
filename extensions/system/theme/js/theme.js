@@ -2,12 +2,7 @@ jQuery(function($) {
 
     // adjust toolbar
     var $doc     = $(document);
-    var navbar   = $('.tm-navbar'), bars = [], fn;
     var toolbars = $('.tm-toolbar');
-
-    if (toolbars.length && !navbar.hasClass('tm-navbar-margin')) {
-        navbar.addClass('tm-navbar-margin');
-    }
 
     toolbars.each(function() {
 

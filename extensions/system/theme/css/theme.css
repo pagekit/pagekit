@@ -5027,7 +5027,10 @@ select.uk-form-width-mini {
   text-transform: none;
   border-radius: 2px;
 }
-.uk-badge:hover {
+/*
+ * Keep color when badge is a link
+ */
+a.uk-badge:hover {
   color: #ffffff;
 }
 /* Modifier: `uk-badge-notification`;
@@ -6635,11 +6638,27 @@ a.uk-thumbnail:focus {
 .uk-vertical-align-bottom {
   vertical-align: bottom;
 }
+/* Height
+ ========================================================================== */
 /*
- *  This helper class is very useful to extend the `html` and `body` element to the full height of the page.
+ * More robust if padding and border are used
+ */
+[class*='uk-height'] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*
+ * Useful to extend the `html` and `body` element to the full height of the page.
  */
 .uk-height-1-1 {
   height: 100%;
+}
+/*
+ * Useful to create fullscreen image teasers
+ */
+.uk-height-viewport {
+  height: 100vh;
+  min-height: 600px;
 }
 /* Responsive objects
  * Note: Images are already responsive by default, see Base component
@@ -7128,10 +7147,19 @@ a.uk-thumbnail:focus {
    Component: Datepicker
  ========================================================================== */
 /*
- * Reset dropdown width
+ * 1. Reset dropdown width
+ * 2. Set animation
+ * 3. Needed for scale animation
  */
 .uk-datepicker {
+  /* 1 */
   width: auto;
+  /* 2 */
+  -webkit-animation: uk-fade 0.2s ease-in-out;
+  animation: uk-fade 0.2s ease-in-out;
+  /* 3 */
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
 }
 /* Sub-object: `uk-datepicker-nav`
 ========================================================================== */
@@ -7713,8 +7741,25 @@ a.uk-datepicker-table-muted {
 /* ========================================================================
    Component: Sticky
  ========================================================================== */
-.uk-sticky {
+/*
+ * 1. More robust if padding and border are used
+ */
+[data-uk-sticky].uk-active {
   z-index: 980;
+  /* 1 */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*
+ * Faster animations
+ */
+[data-uk-sticky][class*='uk-animation-'] {
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+}
+[data-uk-sticky].uk-animation-reverse {
+  -webkit-animation-duration: 0.04s;
+  animation-duration: 0.04s;
 }
 /* ========================================================================
    Component: Upload
@@ -7748,12 +7793,9 @@ a.uk-datepicker-table-muted {
     left: -25px;
   }
 }
-/* Modifier `pk-toolbar`
+/* Toolbar
 ========================================================================== */
-/*
- * Only if toolbar is inside a modal
- */
-.uk-modal .pk-toolbar {
+.pk-toolbar {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;

@@ -12,7 +12,7 @@
     </head>
     <body>
 
-        <div class="tm-navbar">
+        <div class="tm-navbar @( hasSection('toolbar') ? 'tm-navbar-margin' : '' )">
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
@@ -90,9 +90,7 @@
             </div>
         </div>
 
-        <div class="tm-main uk-container uk-container-center">
-
-            @section('content')</div>
+        <div class="tm-main uk-container uk-container-center">@section('content')</div>
 
         <div class="uk-hidden">@section('messages')</div>
 
