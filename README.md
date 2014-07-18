@@ -46,7 +46,7 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 ```
 ./pagekit --help
 ```
-You can find further information about the command line tools in the [pagekit documentation](http://www.pagekit.com/documentation)
+You can find further information about the command line tools in the [pagekit documentation](http://www.pagekit.com/docs/quickstart)
 
 
 ## Copyright and license
