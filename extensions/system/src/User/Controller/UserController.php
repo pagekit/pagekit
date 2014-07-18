@@ -199,10 +199,6 @@ class UserController extends Controller
 
             $this->users->save($user, $data);
 
-            if (!$id) {
-                $this->sendWelcomeEmail($user);
-            }
-
             return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user)];
 
         } catch (Exception $e) {
@@ -322,23 +318,5 @@ class UserController extends Controller
         ];
 
         return (string) call_user_func_array([$expr, 'orX'], $params);
-    }
-
-    /**
-     * Sends the user welcome email.
-     *
-     * @param User $user
-     */
-    protected function sendWelcomeEmail(User $user)
-    {
-        try {
-
-            $this['mailer']->create()
-                ->setTo($user->getEmail())
-                ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
-                ->send();
-
-        } catch(\Exception $e) {}
     }
 }

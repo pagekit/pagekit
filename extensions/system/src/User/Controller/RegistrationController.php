@@ -140,7 +140,9 @@ class RegistrationController extends Controller
 
             } else {
 
+                $this->sendWelcomeEmail($user);
                 $response['success'] = __('Your user account has been created.');
+
             }
 
             if (!$response['success']) {
@@ -164,7 +166,6 @@ class RegistrationController extends Controller
             } else {
                 $response['errors'] = $errors;
             }
-
         }
 
         return $this['request']->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
@@ -196,6 +197,7 @@ class RegistrationController extends Controller
 
             } else {
 
+                $this->sendWelcomeEmail($user);
                 $this['message']->success(__('Your account has been activated.'));
 
             }
@@ -203,7 +205,6 @@ class RegistrationController extends Controller
             $user->set('verified', true);
             $user->setStatus(UserInterface::STATUS_ACTIVE);
             $user->setActivation('');
-
         }
 
         $this->users->save($user);
@@ -211,14 +212,14 @@ class RegistrationController extends Controller
         return $this->redirect('@system/auth/login');
     }
 
-    protected function sendActivateMail($user, $mail)
+    protected function sendWelcomeEmail($user)
     {
         try {
 
             $this['mailer']->create()
-                ->setTo($this['option']->get('system:mail.from.address'))
-                ->setSubject(__('Please approve registration at %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render(sprintf('extension://system/views/user/mails/%s.razr', $mail), compact('user')), 'text/html')
+                ->setTo($user->getEmail())
+                ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
+                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', ['name' => $user->getName(), 'username' => $user->getUsername()]), 'text/html')
                 ->send();
 
         } catch (\Exception $e) {}
@@ -237,6 +238,19 @@ class RegistrationController extends Controller
         } catch (\Exception $e) {
             throw new Exception(__('Unable to send verification link.'));
         }
+    }
+
+    protected function sendActivateMail($user, $mail)
+    {
+        try {
+
+            $this['mailer']->create()
+                ->setTo($this['option']->get('system:mail.from.address'))
+                ->setSubject(__('Please approve registration at %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
+                ->setBody($this['view']->render(sprintf('extension://system/views/user/mails/%s.razr', $mail), compact('user')), 'text/html')
+                ->send();
+
+        } catch (\Exception $e) {}
     }
 
     protected function sendActivatedMail($user)
