@@ -196,16 +196,17 @@ class InstallerController extends Controller
     {
         $params = $this['config']['database.connections'][$this['config']['database.default']];
 
-        if (!isset($params['dbname'])) {
+        if (empty($params['dbname'])) {
             return false;
         }
 
-        $name = $tmpConnection->getDatabasePlatform()->quoteSingleIdentifier($params['dbname']);
+        $name = $params['dbname'];
         unset($params['dbname']);
 
         try {
 
             $tmpConnection = DriverManager::getConnection($params);
+            $name = $tmpConnection->getDatabasePlatform()->quoteSingleIdentifier($name);
             $tmpConnection->getSchemaManager()->createDatabase($name);
 
         } catch (\Exception $e) {
