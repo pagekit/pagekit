@@ -17,8 +17,8 @@
         }
     ],
     "require": {
-        "pagekit/razr": "0.9.*",
-        "pagekit/framework": "dev-master"
+        "pagekit/framework": "dev-master",
+        "pagekit/razr": "0.9.*"
     },
     "minimum-stability": "dev"
 }

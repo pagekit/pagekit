@@ -2,6 +2,7 @@
 
 namespace Pagekit\Blog\Controller;
 
+use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Comment\Event\MarkSpamEvent;
 use Pagekit\Comment\Model\CommentInterface;
@@ -14,7 +15,10 @@ use Pagekit\Framework\Controller\Exception;
  */
 class CommentController extends Controller
 {
-    const COMMENTS_PER_PAGE = 20;
+    /**
+     * @var BlogExtension
+     */
+    protected $extension;
 
     /**
      * @var Repository
@@ -29,10 +33,11 @@ class CommentController extends Controller
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(BlogExtension $extension)
     {
-        $this->posts    = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
+        $this->extension = $extension;
+        $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
+        $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
     }
 
     /**
@@ -69,7 +74,7 @@ class CommentController extends Controller
             });
         }
 
-        $limit    = self::COMMENTS_PER_PAGE;
+        $limit    = $this->extension->getConfig('comments.comments_per_page', 20);
         $count    = $query->count();
         $total    = ceil($count / $limit);
         $page     = max(0, min($total - 1, $page));

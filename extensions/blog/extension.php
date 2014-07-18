@@ -99,7 +99,9 @@ return [
         'comments.replymail'              => true,
         'comments.require_name_and_email' => true,
         'permalink'                       => '',
-        'permalink.custom'                => 'blog/{slug}'
+        'permalink.custom'                => 'blog/{slug}',
+        'feed.type'                       => 'rss2',
+        'feed.limit'                      => 20
 
     ]
 

@@ -2,6 +2,10 @@
 
 namespace Pagekit\Blog\Controller;
 
+use FeedWriter\ATOM;
+use FeedWriter\Feed;
+use FeedWriter\RSS1;
+use FeedWriter\RSS2;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
@@ -9,6 +13,7 @@ use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/blog")
@@ -53,7 +58,14 @@ class SiteController extends Controller
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         }
 
-        return ['head.title' => __('Blog'), 'posts' => $posts, 'config' => $this->extension->getConfig()];
+        $feed = $this->getFeed();
+
+        return [
+            'head.title' => __('Blog'),
+            'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $feed->getMIMEType()],
+            'posts' => $posts,
+            'config' => $this->extension->getConfig()
+        ];
     }
 
     /**
@@ -176,5 +188,62 @@ class SiteController extends Controller
         }
 
         return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
+    }
+
+    /**
+     * @Route("/feed")
+     * @Route("/feed/{type}")
+     */
+    public function feedAction($type = '')
+    {
+        $feed = $this->getFeed($type);
+
+        $feed->setTitle($this['option']->get('system:app.site_title'));
+        $feed->setLink($this['url']->route('@blog/site/index', [], true));
+        $feed->setDescription($this['option']->get('system:app.site_description'));
+
+        $feed->setChannelElement('language', $this['option']->get('system:app.locale'));
+
+        if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+            $feed->setDate($last->getModified()->format(DATE_RSS));
+        }
+
+        $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
+
+        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getConfig('feed.limit', 20))->orderBy('date', 'DESC')->get() as $post) {
+
+            $item = $feed->createNewItem();
+
+            $item->setTitle($post->getTitle());
+            $item->setLink($this['url']->route('@blog/id', ['id' => $post->getId()], true));
+            $item->setDescription($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
+            $item->setDate($post->getDate()->format(DATE_RSS));
+            $item->setAuthor($post->getUser()->getName(), $post->getUser()->getEmail());
+            $item->setId($this['url']->route('@blog/id', ['id' => $post->getId()], true), true);
+
+            $feed->addItem($item);
+        }
+
+        return $this['response']->create($feed->generateFeed(), Response::HTTP_OK, array('Content-Type' => $feed->getMIMEType()));
+    }
+
+    /**
+     * @param  string $type
+     * @return Feed
+     */
+    protected function getFeed($type = '')
+    {
+        if (!$type) {
+            $type = $this->extension->getConfig('feed.type');
+        }
+
+        switch($type) {
+            case 'atom':
+                return new ATOM;
+            case 'rss':
+                return new RSS1;
+            default:
+                return new RSS2;
+        }
     }
 }
