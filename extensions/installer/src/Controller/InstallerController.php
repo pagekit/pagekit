@@ -46,48 +46,47 @@ class InstallerController extends Controller
      */
     public function checkAction($config = [])
     {
+        $status  = 'no-connection';
+        $message = '';
+
         try {
 
-            if (!$this->config) {
-                foreach ($config as $key => $value) {
-                    $this['config']->set($key, $value);
+            try {
+
+                if (!$this->config) {
+                    foreach ($config as $key => $value) {
+                        $this['config']->set($key, $value);
+                    }
                 }
-            }
 
-            $this['db']->connect();
+                $this['db']->connect();
 
-            return [
-                'status'  => $this['db']->getUtility()->tableExists('@system_option') ? 'tables-exist' : 'no-tables',
-                'message' => ''
-            ];
-
-        } catch (\PDOException $e) {
-
-            if ($e->getCode() == 1049) {
-                if ($this->createDatabase()) {
-                    return [
-                        'status'  => 'no-tables',
-                        'message' => __('Database created!')
-                    ];
+                if ($this['db']->getUtility()->tableExists('@system_option')) {
+                    $status = 'tables-exist';
                 } else {
-                    return [
-                        'status'  => 'no-connection',
-                        'message' => __('Unable to create database!')
-                    ];
+                    $status = 'no-tables';
                 }
-            } elseif ($e->getCode() == 1044) {
-                return [
-                    'status'  => 'no-connection',
-                    'message' => __('Database connection failed - Access denied!')
-                ];
+
+            } catch (\PDOException $e) {
+
+                if ($e->getCode() == 1049) {
+                    $this->createDatabase();
+                    $status = 'no-tables';
+                } else {
+                    throw $e;
+                }
             }
 
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
 
-        return [
-            'status'  => 'no-connection',
-            'message' => __('Database connection failed!')
-        ];
+            $message = __('Database connection failed!');
+
+            if ($e->getCode() == 1045) {
+                $message = __('Database access denied!');
+            }
+        }
+
+        return ['status' => $status, 'message' => $message];
     }
 
     /**
@@ -190,29 +189,17 @@ class InstallerController extends Controller
     }
 
     /**
-     * @return bool
+     * @return void
      */
     protected function createDatabase()
     {
         $params = $this['config']['database.connections'][$this['config']['database.default']];
+        $dbname = $params['dbname'];
 
-        if (!isset($params['dbname'])) {
-            return false;
-        }
-
-        $name = $tmpConnection->getDatabasePlatform()->quoteSingleIdentifier($params['dbname']);
         unset($params['dbname']);
 
-        try {
-
-            $tmpConnection = DriverManager::getConnection($params);
-            $tmpConnection->getSchemaManager()->createDatabase($name);
-
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        $tmpConnection->close();
-        return true;
+        $db = DriverManager::getConnection($params);
+        $db->getSchemaManager()->createDatabase($dbname);
+        $db->close();
     }
 }
