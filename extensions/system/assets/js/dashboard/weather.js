@@ -12,12 +12,18 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
             widget.find('.js-spinner').addClass('uk-hidden');
 
+            if (config.units == 'metric') {
+                var temp = data.main.temp;
+            } else {
+                var temp = convert_c_to_f(data.main.temp);
+            }
+
             var unit = config.units == 'metric' ? ' &deg;C' : ' &deg;F',
                 location = config.location.split(',');
             $('.js-weather-city', widget).html(location[0]);
 
             $('.js-weather-country', widget).html(location[1]);
-            $('.js-weather-temperature', widget).html(Math.round(data.main.temp) + unit);
+            $('.js-weather-temperature', widget).html(Math.round(temp) + unit);
             $('.js-weather-icon', widget).attr('src', getIconUrl(data.weather[0].icon));
 
         }).fail(function() {
@@ -25,6 +31,10 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
         });
 
     });
+
+    function convert_c_to_f(c) {
+        return (c * 1.8) + 32;
+    }
 
     function loadData(config) {
 
