@@ -93,23 +93,8 @@ class ExtensionTranslateCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $extension = $this->argument('extension') ? : 'system';
-        $extensions = array_diff($this->extensions, ['installer']);
-
-        if (in_array($extension, $extensions)) {
-
-            $files = [];
-            $languages = $this->getPath($extension) . '/languages';
-
-            foreach ($extensions as $path) {
-                $files = array_merge_recursive($files, $this->getFiles($this->getPath($path)));
-            }
-
-        } else {
-
-            $files     = $this->getFiles($path = $this->getPath($extension));
-            $languages = "$path/languages";
-            $messages  = $this->loader->load($this->getPath('system') . '/languages/messages.pot', 'en');
-        }
+        $files     = $this->getFiles($path = $this->getPath($extension));
+        $languages = "$path/languages";
 
         $this->line("Extracting strings for extension '$extension'");
 
@@ -120,6 +105,7 @@ class ExtensionTranslateCommand extends Command
         }
 
         $result = [];
+
         foreach ($this->visitors as $name => $visitor) {
 
             if (!isset($files[$name])) {
@@ -129,16 +115,21 @@ class ExtensionTranslateCommand extends Command
             $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
         }
 
-        // remove strings already present in domain "messages"
-        if (isset($messages)) {
+        // remove strings already present in system "messages"
+        if ($extension != 'system') {
+
+            $messages = $this->loader->load($this->getPath('system').'/languages/messages.pot', 'en');
+
             foreach ($result as $domain => $strings) {
+
                 if ('messages' != $domain) {
                     continue;
                 }
+
                 foreach (array_keys($strings) as $string) {
                     if ($messages->has($string)) {
                         unset($result[$domain][$string]);
-                    };
+                    }
                 }
             }
         }
