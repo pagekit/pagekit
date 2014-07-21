@@ -22,7 +22,7 @@ class BuildCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Builds a Pagekit release';
+    protected $description = 'Builds a release';
 
 
     /**
