@@ -154,7 +154,7 @@ class SiteController extends Controller
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->first()) {
+        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
             return $this['response']->create(__('Post not found!'), 404);
         }
 
