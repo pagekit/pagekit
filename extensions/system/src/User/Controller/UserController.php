@@ -226,7 +226,7 @@ class UserController extends Controller
             }
         }
 
-		if(count($deletedIds) > 0 || count($ids) === 0) {
+	if(count($deletedIds) > 0 || count($ids) === 0) {
         	$this['message']->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($deletedIds)));
         }
         
