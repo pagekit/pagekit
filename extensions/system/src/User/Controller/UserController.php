@@ -212,6 +212,7 @@ class UserController extends Controller
      */
     public function deleteAction($ids = [])
     {
+        $deletedIds = [];
         foreach ($ids as $id) {
 
             if ($id == $this->user->getId()) {
@@ -221,11 +222,14 @@ class UserController extends Controller
 
             if ($user = $this->users->find($id)) {
                 $this->users->delete($user);
+                $deletedIds[] = $id;
             }
         }
 
-        $this['message']->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
-
+		if(count($deletedIds) > 0 || count($ids) === 0) {
+        	$this['message']->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($deletedIds)));
+        }
+        
         return $this->redirect('@system/user');
     }
 
