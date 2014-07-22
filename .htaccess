@@ -1,5 +1,9 @@
-AddType image/svg+xml svg svgz
-AddEncoding gzip svgz
+<IfModule mime_module>
+
+    AddType image/svg+xml svg svgz
+    AddEncoding gzip svgz
+
+</IfModule>
 
 <IfModule mod_rewrite.c>
     SetEnv HTTP_MOD_REWRITE On
