@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-22 15:51+0400\n"
+"PO-Revision-Date: 2014-07-22 22:59+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
 "Language: ru_RU\n"
@@ -783,7 +783,7 @@ msgstr "Шифрование SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:121
 msgid "None"
-msgstr "Без шифрования"
+msgstr "Нет"
 
 #: extensions/system/views/admin/settings/settings.razr:122
 msgid "SSL"
