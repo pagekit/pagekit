@@ -17,6 +17,7 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "pagekit/framework": "dev-master",
         "pagekit/razr": "0.9.*"
     },
