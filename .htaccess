@@ -1,10 +1,4 @@
-<IfModule mime_module>
-
-    AddType image/svg+xml svg svgz
-    AddEncoding gzip svgz
-
-</IfModule>
-
+# URL rewrites
 <IfModule mod_rewrite.c>
     SetEnv HTTP_MOD_REWRITE On
 
@@ -16,4 +10,24 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule .* index.php [L]
+</IfModule>
+
+# Redirect admin URL, if rewrite is not enabled
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+
+        RedirectMatch (.*)(?<!index.php)\/admin$ $1/index.php/admin
+
+    </IfModule>
+</IfModule>
+
+# Media types
+<IfModule mod_mime.c>
+
+    AddType image/svg+xml svg svgz
+
+    <IfModule mod_deflate.c>
+        AddEncoding gzip svgz
+    </IfModule>
+
 </IfModule>
