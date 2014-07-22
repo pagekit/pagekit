@@ -220,7 +220,7 @@ class RegistrationController extends Controller
         } catch (\Exception $e) {}
     }
 
-    protected function sendVerificationMail($user, $mail)
+    protected function sendVerificationMail($user)
     {
         try {
 
