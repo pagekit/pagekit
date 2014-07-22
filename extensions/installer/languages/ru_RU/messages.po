@@ -1,143 +1,142 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (installer, messages)\n"
-"POT-Creation-Date: 2014-07-20 07:57+0000\n"
-"PO-Revision-Date: 2014-07-22 12:09+0400\n"
+"POT-Creation-Date: 2013-11-06 15:49+0000\n"
+"PO-Revision-Date: 2014-07-22 15:53+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: ru_RU\n"
 "X-Generator: Poedit 1.6.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: extensions/installer/views/install.razr:5
-#: extensions/installer/src/Controller/InstallerController.php:40
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
+#: extensions/installer/theme/templates/template.blade.php:5
 msgid "Pagekit Installer"
 msgstr "Установка Pagekit"
 
-#: extensions/installer/views/install.razr:24
-msgid "Begin"
-msgstr "Начать"
-
-#: extensions/installer/views/install.razr:34
-msgid "Connect database"
-msgstr "Подключение к базе данных"
-
-#: extensions/installer/views/install.razr:36
-msgid "Enter your database connection details."
-msgstr "Введите данные для подключения к базе данных."
-
-#: extensions/installer/views/install.razr:52
-msgid "Hostname"
-msgstr "Адрес хоста"
-
-#: extensions/installer/views/install.razr:55
-msgid "Host cannot be blank."
-msgstr "Адрес хоста не может быть пустым."
-
-#: extensions/installer/views/install.razr:63
-msgid "User cannot be blank."
-msgstr "Имя пользователя не может быть пустым."
-
-#: extensions/installer/views/install.razr:75
-msgid "Database Name"
-msgstr "Имя базы данных"
-
-#: extensions/installer/views/install.razr:78
-msgid "Database name cannot be blank."
-msgstr "Имя базы данных не может быть пустым."
-
-#: extensions/installer/views/install.razr:83
-#: extensions/installer/views/install.razr:92
-msgid "Table Prefix"
-msgstr "Префикс таблиц"
-
-#: extensions/installer/views/install.razr:100
-#: extensions/installer/views/install.razr:145
-#: extensions/installer/views/install.razr:178
-msgid "Next"
-msgstr "Далее"
-
-#: extensions/installer/views/install.razr:111
-msgid "Create your account"
-msgstr "Создайте ваш аккаунт"
-
-#: extensions/installer/views/install.razr:113
-msgid "You will be the site administrator."
-msgstr "Вы будете администратором сайта."
-
-#: extensions/installer/views/install.razr:121
-msgid "Username cannot be blank."
-msgstr "Имя пользователя не может быть пустым."
-
-#: extensions/installer/views/install.razr:132
-msgid "Password cannot be blank."
-msgstr "Пароль не может быть пустым."
-
-#: extensions/installer/views/install.razr:140
-msgid "Field must be a valid email address."
-msgstr "Неверный формат email."
-
-#: extensions/installer/views/install.razr:156
-msgid "Setup your site"
-msgstr "Информация о сайте"
-
-#: extensions/installer/views/install.razr:158
-msgid "Enter your website details."
-msgstr "Введите название и описание сайта."
-
-#: extensions/installer/views/install.razr:166
-msgid "Site name cannot be blank."
-msgstr "Имя сайта не может быть пустым."
-
-#: extensions/installer/views/install.razr:190
-msgid "Installing Pagekit..."
-msgstr "Установка Pagekit..."
-
-#: extensions/installer/views/install.razr:198
-msgid "Installation failed!"
-msgstr "Ошибка установки!"
-
-#: extensions/installer/views/install.razr:207
-msgid "Retry"
-msgstr "Повторить"
-
-#: extensions/installer/views/install.razr:213
-msgid "Finished!"
-msgstr "Готово!"
-
-#: extensions/installer/views/install.razr:220
-msgid "Login now"
-msgstr "Войти сейчас"
-
-#: extensions/installer/src/Controller/InstallerController.php:70
-msgid "Database created!"
-msgstr "База данных создана!"
-
-#: extensions/installer/src/Controller/InstallerController.php:75
-msgid "Unable to create database!"
-msgstr "Невозможно создать базу данных!"
-
-#: extensions/installer/src/Controller/InstallerController.php:81
-msgid "Database connection failed - Access denied!"
-msgstr "Не удалось подключиться к базе данных - Доступ запрещен!"
-
-#: extensions/installer/src/Controller/InstallerController.php:89
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
 msgstr "Не удалось подключиться к базе данных!"
 
-#: extensions/installer/src/Controller/InstallerController.php:109
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
 msgstr "Нет соединения с базой данных."
 
-#: extensions/installer/src/Controller/InstallerController.php:168
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
 msgstr "Файл конфигурации не доступен для записи."
 
-#: extensions/installer/src/Controller/InstallerController.php:181
-msgid "Database error: %error%"
-msgstr "Ошибка базы данных: %error%"
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
+msgid "DB user is missing required privileges."
+msgstr "У пользователя базы данных отсутствуют необходимые привилегии."
+
+#: extensions/installer/views/install.blade.php:13
+msgid "Begin"
+msgstr "Начать"
+
+#: extensions/installer/views/install.blade.php:23
+msgid "Connect database"
+msgstr "Подключение к базе данных"
+
+#: extensions/installer/views/install.blade.php:25
+msgid "Enter your database connection details."
+msgstr "Введите данные для подключения к базе данных."
+
+#: extensions/installer/views/install.blade.php:30
+msgid "Hostname"
+msgstr "Адрес хоста"
+
+#: extensions/installer/views/install.blade.php:33
+msgid "Host cannot be blank."
+msgstr "Адрес хоста не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:41
+msgid "User cannot be blank."
+msgstr "Имя пользователя не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:51
+msgid "Database Name"
+msgstr "Имя базы данных"
+
+#: extensions/installer/views/install.blade.php:54
+msgid "Database name cannot be blank."
+msgstr "Имя базы данных не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:59
+msgid "Table Prefix"
+msgstr "Префикс таблиц"
+
+#: extensions/installer/views/install.blade.php:64
+#: extensions/installer/views/install.blade.php:107
+#: extensions/installer/views/install.blade.php:140
+msgid "Next"
+msgstr "Далее"
+
+#: extensions/installer/views/install.blade.php:75
+msgid "Create your account"
+msgstr "Создайте ваш аккаунт"
+
+#: extensions/installer/views/install.blade.php:77
+msgid "You will be the site administrator."
+msgstr "Вы будете администратором сайта."
+
+#: extensions/installer/views/install.blade.php:85
+msgid "Username cannot be blank."
+msgstr "Имя пользователя не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:93
+msgid "Field must be a valid email adress."
+msgstr "Неверный формат email."
+
+#: extensions/installer/views/install.blade.php:102
+msgid "Password cannot be blank."
+msgstr "Пароль не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:118
+msgid "Setup your site"
+msgstr "Информация о сайте"
+
+#: extensions/installer/views/install.blade.php:120
+msgid "Enter your website details."
+msgstr "Введите название и описание сайта."
+
+#: extensions/installer/views/install.blade.php:128
+msgid "Site name cannot be blank."
+msgstr "Имя сайта не может быть пустым."
+
+#: extensions/installer/views/install.blade.php:152
+msgid "Installing Pagekit..."
+msgstr "Установка Pagekit..."
+
+#: extensions/installer/views/install.blade.php:160
+msgid "Installation failed!"
+msgstr "Ошибка установки!"
+
+#: extensions/installer/views/install.blade.php:169
+msgid "Retry"
+msgstr "Повторить"
+
+#: extensions/installer/views/install.blade.php:175
+msgid "Finished!"
+msgstr "Готово!"
+
+#: extensions/installer/views/install.blade.php:182
+msgid "Login now"
+msgstr "Войти сейчас"
+
+#~ msgid "Database created!"
+#~ msgstr "База данных создана!"
+
+#~ msgid "Unable to create database!"
+#~ msgstr "Невозможно создать базу данных!"
+
+#~ msgid "Database connection failed - Access denied!"
+#~ msgstr "Не удалось подключиться к базе данных - Доступ запрещен!"
+
+#~ msgid "Database error: %error%"
+#~ msgstr "Ошибка базы данных: %error%"
