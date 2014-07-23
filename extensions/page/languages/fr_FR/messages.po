@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-07-22 12:23+0100\n"
+"PO-Revision-Date: 2014-07-22 13:32+0100\n"
 "Last-Translator: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
 "Language-Team: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,11 @@ msgstr "L'id de la page est invalide."
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
+<<<<<<< HEAD
 msgstr "Editer la page"
+=======
+msgstr "Modifier la page"
+>>>>>>> 145037d4373753c17ee9bbcab4cb3281b761da96
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
