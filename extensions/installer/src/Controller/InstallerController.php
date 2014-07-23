@@ -37,7 +37,8 @@ class InstallerController extends Controller
      */
     public function indexAction()
     {
-        return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config];
+        $redirect = $this['router']->getContext()->getBaseUrl() . '/admin';
+        return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config, 'redirect' => $redirect];
     }
 
     /**

@@ -217,7 +217,7 @@
                         </p>
 
                         <p>
-                            <a class="uk-button uk-button-primary" href="@url('admin')">@trans('Login now')</a>
+                            <a class="uk-button uk-button-primary" href="@($redirect)">@trans('Login now')</a>
                         </p>
 
                     </div>
