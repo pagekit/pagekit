@@ -10,7 +10,7 @@ A modular and lightweight CMS built with Symfony components
 
 ## Getting started
 
-Download the [latest release](http://www.pagekit.com/download) and extract the archive, then copy the extracted folder to your webserver.
+Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver.
 Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
 

@@ -2,16 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-23 12:24+0400\n"
-"Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
-"Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
-"Language: ru_RU\n"
+"PO-Revision-Date: 2014-07-22 19:29+0200\n"
+"Last-Translator: Kehet <kehet@kehet.com>\n"
+"Language-Team: Kehet\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.6.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi_FI\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
@@ -23,11 +22,11 @@ msgstr ""
 #: extensions/system/views/admin/user/edit.razr:7
 #: extensions/system/views/admin/widgets/edit.razr:7
 msgid "Close"
-msgstr "Закрыть"
+msgstr "Sulje"
 
 #: extensions/system/theme/templates/error.razr:4
 msgid "Error"
-msgstr "Ошибка"
+msgstr "Virhe"
 
 #: extensions/system/theme/templates/login.razr:27
 #: extensions/system/views/admin/user/edit.razr:36
@@ -35,14 +34,14 @@ msgstr "Ошибка"
 #: extensions/system/views/user/mails/reset.razr:11
 #: extensions/system/views/user/registration.razr:8
 msgid "Username"
-msgstr "Имя пользователя"
+msgstr "Käyttäjänimi"
 
 #: extensions/system/theme/templates/login.razr:31
 #: extensions/system/views/admin/user/edit.razr:57
 #: extensions/system/views/user/login.razr:13
 #: extensions/system/views/user/registration.razr:29
 msgid "Password"
-msgstr "Пароль"
+msgstr "Salasana"
 
 #: extensions/system/theme/templates/login.razr:35
 #: extensions/system/views/user/login.razr:3
@@ -52,45 +51,45 @@ msgstr "Пароль"
 #: extensions/system/src/User/Link/User.php:46
 #: extensions/system/src/User/Widget/LoginWidget.php:25
 msgid "Login"
-msgstr "Вход"
+msgstr "Kirjaudu"
 
 #: extensions/system/theme/templates/login.razr:38
 #: extensions/system/views/user/login.razr:24
 #: extensions/system/views/widgets/login/login.razr:14
 msgid "Remember Me"
-msgstr "Запомнить меня"
+msgstr "Muista minut"
 
 #: extensions/system/theme/templates/login.razr:39
 #: extensions/system/views/widgets/login/login.razr:15
 msgid "Forgot Password?"
-msgstr "Забыли пароль?"
+msgstr "Unohtunut salasana?"
 
 #: extensions/system/theme/templates/login.razr:50
 #: extensions/system/views/user/reset/request.razr:8
 msgid "Username or Email"
-msgstr "Имя пользователя или email"
+msgstr "Käyttäjänimi tai sähköpostiosoite"
 
 #: extensions/system/theme/templates/login.razr:53
 msgid "Reset Password"
-msgstr "Восстановить пароль"
+msgstr "Palauta salasana"
 
 #: extensions/system/theme/templates/maintenance.razr:23
 #: extensions/system/views/admin/settings/settings.razr:49
 msgid "Maintenance"
-msgstr "Обслуживание"
+msgstr "Huoltotila"
 
 #: extensions/system/theme/templates/migration.razr:23
 #: extensions/system/src/System/Controller/MigrationController.php:17
 msgid "Update Pagekit"
-msgstr "Обновить Pagekit"
+msgstr "Päivitä Pagekit"
 
 #: extensions/system/theme/templates/migration.razr:24
 msgid ""
 "Pagekit has been updated! Before we send you on your way, we have to update "
 "your database to the newest version."
 msgstr ""
-"Pagekit был обновлен! Прежде чем идти дальше, мы должны обновить базу данных "
-"до последней версии."
+"Pagekit päivitettiin! Meidän täytyy kuitenkin vielä päivittää tietokanta "
+"ajantasalle."
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -104,7 +103,7 @@ msgstr ""
 #: extensions/system/views/tmpl/video.modal.razr:23
 #: extensions/system/src/System/Controller/UpdateController.php:39
 msgid "Update"
-msgstr "Обновить"
+msgstr "Päivitä"
 
 #: extensions/system/theme/templates/template.razr:22
 #: extensions/system/theme/templates/template.razr:39
@@ -114,7 +113,7 @@ msgstr "Pagekit"
 #: extensions/system/theme/templates/template.razr:64
 #: extensions/system/theme/templates/template.razr:132
 msgid "Visit Site"
-msgstr "Перейти на сайт"
+msgstr "Sivustolle"
 
 #: extensions/system/theme/templates/template.razr:65
 #: extensions/system/theme/templates/template.razr:133
@@ -129,13 +128,13 @@ msgstr "Перейти на сайт"
 #: extensions/system/src/System/Controller/SettingsController.php:70
 #: extensions/system/src/System/Controller/SystemController.php:32
 msgid "Settings"
-msgstr "Настройки"
+msgstr "Asetukset"
 
 #: extensions/system/theme/templates/template.razr:66
 #: extensions/system/theme/templates/template.razr:134
 #: extensions/system/views/widgets/login/logout.razr:2
 msgid "Logout"
-msgstr "Выход"
+msgstr "Kirjaudu ulos"
 
 #: extensions/system/theme/templates/template.razr:113
 #: extensions/system/views/admin/settings/index.razr:20
@@ -144,7 +143,7 @@ msgstr "Выход"
 #: extensions/system/views/admin/settings/info.razr:61
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:50
 msgid "Extensions"
-msgstr "Расширения"
+msgstr "Lisäosat"
 
 #: extensions/system/views/admin/aliases/edit.razr:6
 #: extensions/system/views/admin/dashboard/edit.razr:4
@@ -156,7 +155,7 @@ msgstr "Расширения"
 #: extensions/system/views/admin/widgets/edit.razr:6
 #: extensions/system/views/user/profile.razr:46
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Tallenna"
 
 #: extensions/system/views/admin/aliases/edit.razr:7
 #: extensions/system/views/admin/dashboard/edit.razr:5
@@ -174,33 +173,33 @@ msgstr "Сохранить"
 #: extensions/system/views/tmpl/video.modal.razr:24
 #: extensions/system/views/tmpl/video.modal.razr:32
 msgid "Cancel"
-msgstr "Отмена"
+msgstr "Peruuta"
 
 #: extensions/system/views/admin/aliases/edit.razr:10
 msgid "Please select a source."
-msgstr "Пожалуйста, выберите источник."
+msgstr "Valitse kohde"
 
 #: extensions/system/views/admin/aliases/edit.razr:13
 #: extensions/system/views/admin/aliases/index.razr:21
 msgid "Alias"
-msgstr "Псевдоним"
+msgstr "Alias"
 
 #: extensions/system/views/admin/aliases/edit.razr:16
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
 msgstr ""
-"Используйте относительный путь. Пример: <code>about</code>. Не добавляйте "
-"слеш в конце!"
+"Käytä suhteellista osoitetta ilman lopettavaa kauttaviivaa esimerkiksi: "
+"<code>about</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
 msgid "Source"
-msgstr "Источник"
+msgstr "Kohde"
 
 #: extensions/system/views/admin/aliases/index.razr:7
 msgid "Add Alias"
-msgstr "Добавить псевдоним"
+msgstr "Lisää alias"
 
 #: extensions/system/views/admin/aliases/index.razr:8
 #: extensions/system/views/admin/dashboard/settings.razr:18
@@ -215,7 +214,7 @@ msgstr "Добавить псевдоним"
 #: extensions/system/views/tmpl/image.replace.razr:15
 #: extensions/system/views/tmpl/video.replace.razr:15
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Poista"
 
 #: extensions/system/views/admin/aliases/index.razr:11
 #: extensions/system/views/admin/extensions/index.razr:61
@@ -224,11 +223,11 @@ msgstr "Удалить"
 #: extensions/system/views/admin/widgets/index.razr:56
 #: extensions/system/views/tmpl/finder.main.razr:17
 msgid "Search"
-msgstr "Поиск"
+msgstr "Hae"
 
 #: extensions/system/views/admin/aliases/index.razr:41
 msgid "No URL aliases found."
-msgstr "Псевдонимы URL не найдены."
+msgstr "Ei URL aliaksia"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:2
 #: extensions/system/views/admin/menu/index.razr:53
@@ -238,7 +237,7 @@ msgstr "Псевдонимы URL не найдены."
 #: extensions/system/views/admin/widgets/index.razr:65
 #: extensions/system/views/tmpl/link.modal.razr:5
 msgid "Title"
-msgstr "Заголовок"
+msgstr "Otsikko"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:9
 #: extensions/system/views/admin/link/link.types.razr:2
@@ -250,159 +249,155 @@ msgstr "URL"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:16
 msgid "Number of Posts"
-msgstr "Количество сообщений"
+msgstr "Artikkelien määrä"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:27
 msgid "Post Content"
-msgstr "Содержимое сообщения"
+msgstr "Artikkelin sisältö"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:30
 msgid "Don't show"
-msgstr "Не показывать"
+msgstr "Älä näytä"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:33
 msgid "Show on all posts"
-msgstr "Показать все сообщения"
+msgstr "Näytä kaikissa artikkeleissa"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:36
 msgid "Only show on first post."
-msgstr "Показать только первое сообщение"
+msgstr "Näytä vain ensimmäisessä artikkelissa"
 
 #: extensions/system/views/admin/dashboard/settings.razr:8
 #: extensions/system/views/admin/widgets/index.razr:9
 #: extensions/system/src/System/Controller/DashboardController.php:85
 #: extensions/system/src/Widget/Controller/WidgetsController.php:70
 msgid "Add Widget"
-msgstr "Добавить виджет"
+msgstr "Lisää vimpain"
 
 #: extensions/system/views/admin/dashboard/settings.razr:24
 msgid "Widget"
-msgstr "Виджет"
+msgstr "Vimpain"
 
 #: extensions/system/views/admin/dashboard/settings.razr:25
 #: extensions/system/views/admin/link/link.types.razr:8
 #: extensions/system/views/admin/menu/item.edit.razr:18
 #: extensions/system/views/admin/widgets/index.razr:68
 msgid "Type"
-msgstr "Тип"
+msgstr "Tyyppi"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:2
 msgid "User Type"
-msgstr "Тип пользователя"
+msgstr "Käyttäjätyyppi"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Logged in"
-msgstr "Авторизирован"
+msgstr "Sisäänkirjautunut"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Last registered"
-msgstr "Последний зарегистрированный "
+msgstr "Viimeksi rekisteröitynyt"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:12
 msgid "Number of Users"
-msgstr "Количество пользователей"
+msgstr "Käyttäjien määrä"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
 msgid ""
 "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users"
 "% registered users"
 msgstr ""
-"{0} Нет зарегистрированных пользователей|{1} Последний %users% "
-"зарегистрированный пользователь|]1,Inf[ Последние %users% зарегистрированные "
-"пользователи"
+"{0} Ei rekisteröityneitä käyttäjiä|{1} Viimeisin rekisteröitynyt käyttäjä|]1,"
+"Inf[ %users% viimeisintä rekisteröitynyttä käyttäjää"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
 msgstr ""
-"{0} Нет авторизированных пользователей|{1} %users% пользователь "
-"авторизирован|]1,Inf[ %users% пользователей авторизировано"
+"{0} Ei kirjautuneita käyttäjiä|{1} %users% kirjautunut käyttäjä|]1,"
+"Inf[ %users% kirjautunutta käyttäjää"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
-msgstr "Местоположение"
+msgstr "Sijainti"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:10
 msgid "Enter the name of the city you want to get weather information for."
-msgstr ""
-"Введите название города, для которого будет отображаться информация о погоде."
+msgstr "Valitse kaupunki, jonka säätiedot näytetään"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"
-msgstr "Единицы измерения"
+msgstr "Yksikkö"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:18
 msgid "Metric"
-msgstr "Метрическая"
+msgstr "Metrinen"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:21
 msgid "Imperial"
-msgstr "Империческая"
+msgstr "Imperiaalinen"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:12
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:23
 msgid "Weather"
-msgstr "Погода"
+msgstr "Sää"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:13
 msgid "Unable to retrieve weather data."
-msgstr "Не удалось получить данные о погоде."
+msgstr "Säätietoja ei voitu hakea"
 
 #: extensions/system/views/admin/extensions/index.razr:12
 #: extensions/system/views/admin/themes/index.razr:12
 #: extensions/system/views/tmpl/marketplace.details.razr:5
 msgid "Installed"
-msgstr "Установленные"
+msgstr "Asennettu"
 
 #: extensions/system/views/admin/extensions/index.razr:13
 #: extensions/system/views/admin/themes/index.razr:13
 msgid "Updates"
-msgstr "Обновления"
+msgstr "Päivitykset"
 
 #: extensions/system/views/admin/extensions/index.razr:14
 #: extensions/system/views/admin/themes/index.razr:14
 #: extensions/system/views/tmpl/marketplace.details.razr:8
 #: extensions/system/views/tmpl/package.upload.razr:35
 msgid "Install"
-msgstr "Установить"
+msgstr "Asenna"
 
 #: extensions/system/views/admin/extensions/index.razr:15
 #: extensions/system/views/admin/themes/index.razr:15
 #: extensions/system/src/System/Controller/MarketplaceController.php:27
 msgid "Marketplace"
-msgstr "Магазин"
+msgstr "Markkinapaikka"
 
 #: extensions/system/views/admin/extensions/index.razr:16
 #: extensions/system/views/admin/themes/index.razr:16
 msgid "All"
-msgstr "Все"
+msgstr "Kaikki"
 
 #: extensions/system/views/admin/extensions/index.razr:34
 #: extensions/system/views/admin/themes/index.razr:34
 msgid ""
 "An error occurred in retrieving update information. Please try again later."
-msgstr ""
-"Произошла ошибка при получении информации об обновлении. Пожалуйста, "
-"повторите попытку позже."
+msgstr "Päivitystietoja ei voitu hakea. Yritä myöhemmin uudelleen."
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
-msgstr "Обновлений расширений не найдено."
+msgstr "Päivityksiä lisäosiin ei löytynyt"
 
 #: extensions/system/views/admin/extensions/index.razr:44
 #: extensions/system/views/admin/themes/index.razr:44
 msgid "Install an extension"
-msgstr "Установка расширения"
+msgstr "Asenna lisäosa"
 
 #: extensions/system/views/admin/extensions/index.razr:47
 #: extensions/system/views/admin/themes/index.razr:47
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Droparea"
-msgstr "Область загрузки"
+msgstr "Raahausalue"
 
 #: extensions/system/views/admin/extensions/index.razr:48
 #: extensions/system/views/admin/themes/index.razr:48
@@ -410,18 +405,17 @@ msgid ""
 "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
 "upload-select\" type=\"file\" name=\"file\"></a>"
 msgstr ""
-"Перетащите файлы сюда или <a class=\"uk-form-file\">выберите один<input "
+"Raahaa tiedostot tähän tai <a class=\"uk-form-file\">valitse tästä<input "
 "class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
-msgstr "Расширений не найдено."
+msgstr "Lisäosia ei löytynyt"
 
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
 msgid "Cannot connect to the marketplace. Please try again later."
-msgstr ""
-"Не удается подключиться к магазину. Пожалуйста, повторите попытку позже."
+msgstr "Markkinapaikkaan ei saatu yhteyttä. Yritä myöhemmin uudelleen."
 
 #: extensions/system/views/admin/extensions/table.razr:4
 #: extensions/system/views/admin/user/edit.razr:43
@@ -429,14 +423,14 @@ msgstr ""
 #: extensions/system/views/user/profile.razr:8
 #: extensions/system/views/user/registration.razr:15
 msgid "Name"
-msgstr "Имя"
+msgstr "Nimi"
 
 #: extensions/system/views/admin/extensions/table.razr:5
 #: extensions/system/views/admin/settings/info.razr:49
 #: extensions/system/views/admin/settings/info.razr:85
 #: extensions/system/views/tmpl/package.upload.razr:17
 msgid "Version"
-msgstr "Версия"
+msgstr "Versio"
 
 #: extensions/system/views/admin/extensions/table.razr:6
 #: extensions/system/views/admin/menu/index.razr:54
@@ -447,20 +441,20 @@ msgstr "Версия"
 #: extensions/system/views/admin/widgets/edit.razr:73
 #: extensions/system/views/admin/widgets/index.razr:66
 msgid "Status"
-msgstr "Статус"
+msgstr "Tila"
 
 #: extensions/system/views/admin/extensions/table.razr:20
 #: extensions/system/views/admin/themes/table.razr:16
 #: extensions/system/views/tmpl/marketplace.table.razr:14
 msgid "Details"
-msgstr "Информация"
+msgstr "Tiedot"
 
 #: extensions/system/views/admin/extensions/table.razr:25
 #: extensions/system/views/admin/settings/info.razr:5
 #: extensions/system/languages/messages.php:28
 #: extensions/system/src/User/Controller/PermissionController.php:34
 msgid "Permissions"
-msgstr "Разрешения"
+msgstr "Käyttöoikeudet"
 
 #: extensions/system/views/admin/extensions/table.razr:37
 #: extensions/system/views/admin/menu/item.edit.razr:40
@@ -469,7 +463,7 @@ msgstr "Разрешения"
 #: extensions/system/src/Menu/Entity/Item.php:124
 #: extensions/system/src/Widget/Entity/Widget.php:98
 msgid "Enabled"
-msgstr "Вкл."
+msgstr "Käytössä"
 
 #: extensions/system/views/admin/extensions/table.razr:39
 #: extensions/system/views/admin/menu/item.edit.razr:43
@@ -478,89 +472,89 @@ msgstr "Вкл."
 #: extensions/system/src/Menu/Entity/Item.php:123
 #: extensions/system/src/Widget/Entity/Widget.php:97
 msgid "Disabled"
-msgstr "Выкл."
+msgstr "Ei käytössä"
 
 #: extensions/system/views/admin/link/link.types.razr:11
 msgid "- Select Type -"
-msgstr "- Выберите Тип -"
+msgstr "- Valitse tyyppi -"
 
 #: extensions/system/views/admin/link/system.razr:2
 msgid "View"
-msgstr "Вид"
+msgstr "Näkymä"
 
 #: extensions/system/views/admin/link/system.razr:5
 msgid "- Select View -"
-msgstr "- Выберите Вид -"
+msgstr "- Valitse näkymä -"
 
 #: extensions/system/views/admin/menu/index.razr:13
 #: extensions/system/views/admin/user/role.razr:16
 msgid "Edit"
-msgstr "Изменить"
+msgstr "Muokkaa"
 
 #: extensions/system/views/admin/menu/index.razr:14
 #: extensions/system/views/admin/user/role.razr:17
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "Are you sure?"
-msgstr "Вы уверены?"
+msgstr "Oletko varma?"
 
 #: extensions/system/views/admin/menu/index.razr:25
 msgid "Add Menu"
-msgstr "Добавить меню"
+msgstr "Lisää valikko"
 
 #: extensions/system/views/admin/menu/index.razr:34
 msgid "Add Item"
-msgstr "Добавить элемент"
+msgstr "Lisää kohta"
 
 #: extensions/system/views/admin/menu/index.razr:38
 #: extensions/system/views/admin/user/index.razr:12
 #: extensions/system/views/admin/widgets/index.razr:22
 msgid "More"
-msgstr "Еще"
+msgstr "lisää"
 
 #: extensions/system/views/admin/menu/index.razr:41
 #: extensions/system/views/admin/themes/table.razr:26
 #: extensions/system/views/admin/widgets/index.razr:25
 msgid "Enable"
-msgstr "Включить"
+msgstr "Ota käyttöön"
 
 #: extensions/system/views/admin/menu/index.razr:42
 #: extensions/system/views/admin/widgets/index.razr:26
 msgid "Disable"
-msgstr "Отключить"
+msgstr "Poista käytöstä"
 
 #: extensions/system/views/admin/menu/index.razr:64
 msgid "No menu found."
-msgstr "Меню не найдено."
+msgstr "Valikkoa ei löytynyt"
 
 #: extensions/system/views/admin/menu/index.razr:79
 msgid "Enter Menu Name"
-msgstr "Введите имя меню"
+msgstr "Anna valikon nimi"
 
 #: extensions/system/views/admin/menu/item.edit.razr:28
 msgid "Header"
-msgstr "Заголовок"
+msgstr "Otsikko"
 
 #: extensions/system/views/admin/menu/item.edit.razr:31
 #: extensions/system/views/admin/menu/item.razr:23
 msgid "Divider"
-msgstr "Разделитель"
+msgstr "Jakaja"
 
 #: extensions/system/views/admin/menu/item.edit.razr:49
 #: extensions/system/views/admin/widgets/edit.razr:92
 msgid "Restrict Access"
-msgstr "Ограничение доступа"
+msgstr "Rajoita näkyvyyttä"
 
 #: extensions/system/views/admin/menu/item.edit.razr:61
 msgid "Activation Rules"
-msgstr "Правила активации"
+msgstr "Aktivointisäännöt"
 
 #: extensions/system/views/admin/menu/item.edit.razr:64
 msgid "Enter custom activation rules as paths."
-msgstr "Введите пользовательские правила активации в качестве путей."
+msgstr "Anna aktivointisäännöt osoitteina"
 
 #: extensions/system/views/admin/menu/item.razr:25
 msgid "Menu Header"
-msgstr "Заголовок меню"
+msgstr "Valikon otsikko"
 
 #: extensions/system/views/admin/settings/index.razr:4
 #: extensions/system/views/admin/settings/info.razr:2
@@ -568,62 +562,62 @@ msgstr "Заголовок меню"
 #: extensions/system/views/admin/settings/settings.razr:207
 #: extensions/system/src/System/Link/System.php:20
 msgid "System"
-msgstr "Система"
+msgstr "Järjestelmä"
 
 #: extensions/system/views/admin/settings/index.razr:29
 #: extensions/system/views/admin/settings/index.razr:30
 #: extensions/system/src/Theme/Controller/ThemesController.php:65
 msgid "Themes"
-msgstr "Темы"
+msgstr "Teemat"
 
 #: extensions/system/views/admin/settings/index.razr:37
 #: extensions/system/views/admin/settings/index.razr:38
 #: extensions/system/src/System/Controller/DashboardController.php:46
 msgid "Dashboard"
-msgstr "Панель управления"
+msgstr "Kojelauta"
 
 #: extensions/system/views/admin/settings/index.razr:45
 #: extensions/system/views/admin/settings/index.razr:46
 #: extensions/system/views/admin/settings/settings.razr:225
 #: extensions/system/src/System/Controller/SystemController.php:94
 msgid "Storage"
-msgstr "Хранилище"
+msgstr "Säilö"
 
 #: extensions/system/views/admin/settings/index.razr:63
 #: extensions/system/views/admin/settings/index.razr:64
 #: extensions/system/src/System/Controller/AliasController.php:46
 msgid "URL Aliases"
-msgstr "Псевдонимы URL"
+msgstr "URL aliakset"
 
 #: extensions/system/views/admin/settings/index.razr:71
 #: extensions/system/views/admin/settings/index.razr:72
 msgid "Info"
-msgstr "Информация"
+msgstr "Tietoja"
 
 #: extensions/system/views/admin/settings/index.razr:78
 #: extensions/system/views/admin/settings/index.razr:79
 msgid "Clear Cache"
-msgstr "Очистка кэшка"
+msgstr "Tyhjennä välimuisti"
 
 #: extensions/system/views/admin/settings/index.razr:107
 msgid "Select caches to clear:"
-msgstr "Выберите элементы для очистки:"
+msgstr "Valitse tyhjennettävät välimuistit"
 
 #: extensions/system/views/admin/settings/index.razr:114
 msgid "System Cache"
-msgstr "Системный кэш"
+msgstr "Järjestelmän välimuisti"
 
 #: extensions/system/views/admin/settings/index.razr:121
 msgid "Rendered Templates"
-msgstr "Кэш шаблонов"
+msgstr "Käännetyt ulkoasut"
 
 #: extensions/system/views/admin/settings/index.razr:128
 msgid "Temporary Files"
-msgstr "Временные файлы"
+msgstr "Väliaikaiset tiedostot"
 
 #: extensions/system/views/admin/settings/index.razr:133
 msgid "Clear"
-msgstr "Очистить"
+msgstr "Tyhjennä"
 
 #: extensions/system/views/admin/settings/info.razr:3
 msgid "PHP"
@@ -631,64 +625,64 @@ msgstr "PHP"
 
 #: extensions/system/views/admin/settings/info.razr:4
 msgid "Database"
-msgstr "База данных"
+msgstr "Tietokanta"
 
 #: extensions/system/views/admin/settings/info.razr:15
 #: extensions/system/views/admin/settings/info.razr:43
 #: extensions/system/views/admin/settings/info.razr:75
 msgid "Setting"
-msgstr "Параметр"
+msgstr "Asetus"
 
 #: extensions/system/views/admin/settings/info.razr:16
 #: extensions/system/views/admin/settings/info.razr:44
 #: extensions/system/views/admin/settings/info.razr:76
 msgid "Value"
-msgstr "Значение"
+msgstr "Arvo"
 
 #: extensions/system/views/admin/settings/info.razr:21
 msgid "Pagekit Version"
-msgstr "Версия Pagekit"
+msgstr "Pagekit versio"
 
 #: extensions/system/views/admin/settings/info.razr:25
 msgid "Web Server"
-msgstr "Web сервер"
+msgstr "Web-palvelin"
 
 #: extensions/system/views/admin/settings/info.razr:29
 msgid "User Agent"
-msgstr "Агент пользователя"
+msgstr "User Agent"
 
 #: extensions/system/views/admin/settings/info.razr:53
 msgid "Handler"
-msgstr "Хэндлер"
+msgstr "Käsittelijä"
 
 #: extensions/system/views/admin/settings/info.razr:57
 msgid "Built On"
-msgstr "Работает на"
+msgstr "Pohjautuu"
 
 #: extensions/system/views/admin/settings/info.razr:81
 msgid "Driver"
-msgstr "Драйвер"
+msgstr "Ajuri"
 
 #: extensions/system/views/admin/settings/info.razr:89
 msgid "Client"
-msgstr "Клиент"
+msgstr "Asiakas"
 
 #: extensions/system/views/admin/settings/info.razr:103
 msgid "Path"
-msgstr "Путь"
+msgstr "Osoite"
 
 #: extensions/system/views/admin/settings/info.razr:111
 msgid "Writable"
-msgstr "Доступен для записи"
+msgstr "Kirjoitusoikeus"
 
 #: extensions/system/views/admin/settings/info.razr:111
 msgid "Unwritable"
-msgstr "Недоступен для записи"
+msgstr "Ei kirjoitusoikeutta"
 
 #: extensions/system/views/admin/settings/settings.razr:15
 #: extensions/system/views/admin/settings/settings.razr:29
 msgid "Site"
-msgstr "Сайт"
+msgstr "Sivu"
 
 #: extensions/system/views/admin/settings/settings.razr:16
 #: extensions/system/views/admin/settings/settings.razr:66
@@ -697,76 +691,76 @@ msgstr "Сайт"
 #: extensions/system/views/user/profile.razr:15
 #: extensions/system/views/user/registration.razr:22
 msgid "Email"
-msgstr "Email"
+msgstr "Sähköposti"
 
 #: extensions/system/views/admin/settings/settings.razr:17
 #: extensions/system/views/admin/settings/settings.razr:142
 msgid "Localization"
-msgstr "Локализация"
+msgstr "Kieli"
 
 #: extensions/system/views/admin/settings/settings.razr:18
 #: extensions/system/views/admin/settings/settings.razr:181
 #: extensions/system/views/admin/user/index.razr:62
 #: extensions/system/src/User/Link/User.php:22
 msgid "User"
-msgstr "Пользователь"
+msgstr "Käyttäjä"
 
 #: extensions/system/views/admin/settings/settings.razr:37
 msgid "Description"
-msgstr "Описание"
+msgstr "Kuvaus"
 
 #: extensions/system/views/admin/settings/settings.razr:43
 msgid "Front Page"
-msgstr "Главная страница"
+msgstr "Etusivu"
 
 #: extensions/system/views/admin/settings/settings.razr:52
 msgid "Put the site offline and show the offline message."
-msgstr "Выключить сайт."
+msgstr "Aseta sivusto huoltotilaan ja näytä viesti"
 
 #: extensions/system/views/admin/settings/settings.razr:57
 msgid "Offline Message"
-msgstr "Оффлайн-сообщение"
+msgstr "Huoltotilan viesti"
 
 #: extensions/system/views/admin/settings/settings.razr:59
 #: extensions/system/src/System/Event/MaintenanceListener.php:27
 msgid "We'll be back soon."
-msgstr "Мы скоро вернемся."
+msgstr "Palaamme pian"
 
 #: extensions/system/views/admin/settings/settings.razr:68
 msgid "From Email"
-msgstr "С адреса"
+msgstr "Lähettäjän sähköpostiosoite"
 
 #: extensions/system/views/admin/settings/settings.razr:74
 msgid "From Name"
-msgstr "Адрес отправителя"
+msgstr "Lähettäjän nimi"
 
 #: extensions/system/views/admin/settings/settings.razr:80
 msgid "Mailer"
-msgstr "Метод отправки писем"
+msgstr "Sähköpostin lähettäjä"
 
 #: extensions/system/views/admin/settings/settings.razr:83
 msgid "PHP Mailer"
-msgstr "PHP"
+msgstr "PHP Mailer"
 
 #: extensions/system/views/admin/settings/settings.razr:83
 msgid "SMTP Mailer"
-msgstr "SMTP"
+msgstr "SMTP Mailer"
 
 #: extensions/system/views/admin/settings/settings.razr:91
 msgid "SMTP Port"
-msgstr "Порт SMTP"
+msgstr "SMTP portti"
 
 #: extensions/system/views/admin/settings/settings.razr:97
 msgid "SMTP Host"
-msgstr "Хост SMTP"
+msgstr "SMTP palvelin"
 
 #: extensions/system/views/admin/settings/settings.razr:103
 msgid "SMTP User"
-msgstr "Пользователь SMTP"
+msgstr "SMTP käyttäjä"
 
 #: extensions/system/views/admin/settings/settings.razr:109
 msgid "SMTP Password"
-msgstr "Пароль SMTP"
+msgstr "SMTP salasana"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
@@ -775,15 +769,15 @@ msgstr "Пароль SMTP"
 #: extensions/system/views/user/registration.razr:33
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
-msgstr "Показать"
+msgstr "Näytä"
 
 #: extensions/system/views/admin/settings/settings.razr:118
 msgid "SMTP Encryption"
-msgstr "Шифрование SMTP"
+msgstr "SMTP salaus"
 
 #: extensions/system/views/admin/settings/settings.razr:121
 msgid "None"
-msgstr "Нет"
+msgstr "Ei mitään"
 
 #: extensions/system/views/admin/settings/settings.razr:122
 msgid "SSL"
@@ -795,118 +789,118 @@ msgstr "TLS"
 
 #: extensions/system/views/admin/settings/settings.razr:127
 msgid "Please enable the PHP Open SSL extension."
-msgstr "Пожалуйста, включите PHP-расширение Open SSL."
+msgstr "Asenna PHP Open SSL lisäosa"
 
 #: extensions/system/views/admin/settings/settings.razr:134
 msgid "Check Connection"
-msgstr "Проверить подключение"
+msgstr "Tarkista yhteys"
 
 #: extensions/system/views/admin/settings/settings.razr:135
 msgid "Send Test Email"
-msgstr "Отправить тестовый email"
+msgstr "Lähetä testisähköposti"
 
 #: extensions/system/views/admin/settings/settings.razr:144
 msgid "Site Locale"
-msgstr "Язык сайта"
+msgstr "Sivuston kieli"
 
 #: extensions/system/views/admin/settings/settings.razr:154
 msgid "Admin Locale"
-msgstr "Язык панели управления"
+msgstr "Ylläpidon kieli"
 
 #: extensions/system/views/admin/settings/settings.razr:164
 msgid "Time Zone"
-msgstr "Часовой пояс"
+msgstr "Aikavyöhyke"
 
 #: extensions/system/views/admin/settings/settings.razr:183
 #: extensions/system/views/user/registration.razr:5
 #: extensions/system/src/User/Link/User.php:47
 msgid "Registration"
-msgstr "Регистрация"
+msgstr "Rekisteröinti"
 
 #: extensions/system/views/admin/settings/settings.razr:186
 msgid "Adminstrators only"
-msgstr "Только администратор может создать нового пользователя"
+msgstr "Vain ylläpitäjät"
 
 #: extensions/system/views/admin/settings/settings.razr:189
 msgid "Guests"
-msgstr "Открытая регистрация"
+msgstr "Vieraat"
 
 #: extensions/system/views/admin/settings/settings.razr:192
 msgid "Guests, but administrator approval is required"
-msgstr "Открытая регистрация, но администратор должен одобрить учетную запись."
+msgstr "Vieraat, mutta vaatii ylläpitäjän hyväksymisen"
 
 #: extensions/system/views/admin/settings/settings.razr:197
 msgid "Verification"
-msgstr "Проверка"
+msgstr "Varmennus"
 
 #: extensions/system/views/admin/settings/settings.razr:200
 msgid "Require e-mail verification when a guest creates an account."
-msgstr "Требовать подтверждение электронной почты при создании аккаунта."
+msgstr "Vaadi sähköpostivarmennus kun vieras luo käyttäjätunnusta"
 
 #: extensions/system/views/admin/settings/settings.razr:209
 msgid "API Key"
-msgstr "API ключ"
+msgstr "API avain"
 
 #: extensions/system/views/admin/settings/settings.razr:211
 msgid "Enter your API key"
-msgstr "Введите свой API ключ"
+msgstr "API avaimesi"
 
 #: extensions/system/views/admin/settings/settings.razr:215
 msgid "Release Channel"
-msgstr "Канал обновлений"
+msgstr "Kanava"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Stable"
-msgstr "Стабильные версии"
+msgstr "Stable"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Nightly"
-msgstr "\"Ночные\" сборки"
+msgstr "Nightly"
 
 #: extensions/system/views/admin/settings/settings.razr:231
 msgid "Cache"
-msgstr "Кэш"
+msgstr "Välimuisti"
 
 #: extensions/system/views/admin/settings/settings.razr:241
 msgid "Developer"
-msgstr "Разработка"
+msgstr "Kehittäjä"
 
 #: extensions/system/views/admin/settings/settings.razr:244
 msgid "Enable debug mode"
-msgstr "Включить Debug-режим"
+msgstr "Ota kehittäjätila käyttöön"
 
 #: extensions/system/views/admin/settings/settings.razr:247
 msgid "Enable debug toolbar"
-msgstr "Включить Debug-панель"
+msgstr "Ota kehittäjäpalkki käyttöön"
 
 #: extensions/system/views/admin/settings/settings.razr:250
 msgid "Please enable the SQLite database extension."
-msgstr "Пожалуйста, включите PHP-расширение SQLite."
+msgstr "Asenna SQLite tietokantalisäosa"
 
 #: extensions/system/views/admin/settings/settings.razr:253
 msgid "Disable cache"
-msgstr "Отключить кэш"
+msgstr "Ota välimuisti pois käytöstä"
 
 #: extensions/system/views/admin/settings/update.razr:7
 msgid "There is an update available."
-msgstr "Доступны обновления."
+msgstr "Päivitys on saatavilla"
 
 #: extensions/system/views/admin/settings/update.razr:8
 msgid "Please update Pagekit to version %version%!"
-msgstr "Пожалуйста, обновите Pagekit до версии %version%!"
+msgstr "Päivitä Pagekit versioon %version%!"
 
 #: extensions/system/views/admin/settings/update.razr:12
 #: extensions/system/views/admin/settings/update.razr:34
 msgid "Download %version%"
-msgstr "Скачать %version%"
+msgstr "Lataa %version%"
 
 #: extensions/system/views/admin/settings/update.razr:19
 msgid "Downloading ..."
-msgstr "Загрузка..."
+msgstr "Ladataan ..."
 
 #: extensions/system/views/admin/settings/update.razr:29
 msgid "You have the latest version of Pagekit."
-msgstr "Установлена последняя версия Pagekit."
+msgstr "Pagekit on uusimmassa versiossa"
 
 #: extensions/system/views/admin/settings/update.razr:30
 msgid ""
@@ -914,60 +908,59 @@ msgid ""
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
 msgstr ""
-"Установлена последняя версия Pagekit. Обновление не требуется. Тем не менее, "
-"если вы хотите переустановить версию %version%, вы можете сделать это "
-"автоматически или загрузить пакет и заново произвести установку вручную."
+"Pagekit on uusimmassa versiossa, eikä sitä tarvitse päivittää. Voit "
+"kuitenkin uudelleenasentaa version %version% automaattisesti tai ladata sen, "
+"ja uudelleenasentaa manuaalisesti."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
-msgstr "Переустановить"
+msgstr "Uudelleenasenna"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
-msgstr ""
-"Не удается подключиться к серверу. Пожалуйста, повторите попытку позже."
+msgstr "Palvelimeen ei saatu yhteyttä. Yritä uudelleen myöhemmin."
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
-msgstr "Нет обновлений для темы."
+msgstr "Päivityksiä teemoihin ei löytynyt"
 
 #: extensions/system/views/admin/themes/index.razr:67
 msgid "No themes found."
-msgstr "Темы не найдены."
+msgstr "Teemoja ei löytynyt"
 
 #: extensions/system/views/admin/themes/table.razr:11
 #: extensions/system/src/User/Entity/User.php:100
 msgid "Active"
-msgstr "Актив."
+msgstr "Aktiivinen"
 
 #: extensions/system/views/admin/user/edit.razr:19
 #: extensions/system/views/admin/user/edit.razr:111
 #: extensions/system/views/admin/user/index.razr:27
 #: extensions/system/views/admin/user/index.razr:81
 msgid "New"
-msgstr "Новые"
+msgstr "Uusi"
 
 #: extensions/system/views/admin/user/edit.razr:24
 msgid "Verified email address"
-msgstr "Подтвержденный email"
+msgstr "Varmennettu sähköpostiosoite"
 
 #: extensions/system/views/admin/user/edit.razr:25
 msgid "Last login: %date%"
-msgstr "Активность: %date%"
+msgstr "Edellinen kirjautuminen %date%"
 
 #: extensions/system/views/admin/user/edit.razr:25
 #: extensions/system/src/User/Controller/UserController.php:274
 msgid "Never"
-msgstr "Никогда"
+msgstr "Ei koskaan"
 
 #: extensions/system/views/admin/user/edit.razr:26
 msgid "Registered since: %date%"
-msgstr "Регистрация: %date%"
+msgstr "Rekisteröitynyt %date%"
 
 #: extensions/system/views/admin/user/edit.razr:61
 #: extensions/system/views/user/profile.razr:22
 msgid "Change password"
-msgstr "Изменить пароль"
+msgstr "Vaihda salasana"
 
 #: extensions/system/views/admin/user/edit.razr:68
 #: extensions/system/views/user/profile.razr:30
@@ -975,83 +968,83 @@ msgstr "Изменить пароль"
 #: extensions/system/views/user/registration.razr:33
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Hide"
-msgstr "Скрыть"
+msgstr "Piilota"
 
 #: extensions/system/views/admin/user/edit.razr:87
 #: extensions/system/views/admin/user/index.razr:65
 #: extensions/system/languages/messages.php:29
 #: extensions/system/src/User/Controller/RoleController.php:47
 msgid "Roles"
-msgstr "Роли"
+msgstr "Roolit"
 
 #: extensions/system/views/admin/user/edit.razr:117
 msgid "Last login: {{login}}"
-msgstr "Активность: {{login}}"
+msgstr "Edellinen kirjautuminen {{login}}"
 
 #: extensions/system/views/admin/user/edit.razr:118
 msgid "Registered since: {{registered}}"
-msgstr "Регистрация: {{registered}}"
+msgstr "Rekisteröitynyt {{registered}}"
 
 #: extensions/system/views/admin/user/index.razr:8
 #: extensions/system/src/User/Controller/UserController.php:113
 msgid "Add User"
-msgstr "Создать пользователя"
+msgstr "Lisää käyttäjä"
 
 #: extensions/system/views/admin/user/index.razr:15
 msgid "Activate"
-msgstr "Активировать"
+msgstr "Aktivoi"
 
 #: extensions/system/views/admin/user/index.razr:16
 msgid "Block"
-msgstr "Заблокировать"
+msgstr "Estä"
 
 #: extensions/system/views/admin/user/index.razr:26
 #: extensions/system/views/admin/widgets/index.razr:37
 msgid "- Status -"
-msgstr "- Статус -"
+msgstr "- Tila -"
 
 #: extensions/system/views/admin/user/index.razr:34
 msgid "- Role -"
-msgstr "- Роль -"
+msgstr "- Rooli -"
 
 #: extensions/system/views/admin/user/index.razr:41
 msgid "- Permission -"
-msgstr "- Права -"
+msgstr "- Käyttöoikeudet -"
 
 #: extensions/system/views/admin/user/index.razr:87
 msgid "Verified Email Address"
-msgstr "Подтвержденный email"
+msgstr "Varmenna sähköpostiosoite"
 
 #: extensions/system/views/admin/user/index.razr:98
 msgid "No user found."
-msgstr "Пользователь не найден."
+msgstr "Käyttäjää ei löytynyt"
 
 #: extensions/system/views/admin/user/permission.razr:11
 #: extensions/system/views/admin/user/role.razr:43
 msgid "Permission"
-msgstr "Права"
+msgstr "Käyttöoikeus"
 
 #: extensions/system/views/admin/user/role.razr:28
 msgid "Add Role"
-msgstr "Добавить роль"
+msgstr "Lisää rooli"
 
 #: extensions/system/views/admin/user/role.razr:87
 msgid "Enter Role Name"
-msgstr "Введите имя роли"
+msgstr "Anna roolin nimi"
 
 #: extensions/system/views/admin/widgets/edit.razr:15
 msgid "Assignment"
-msgstr "Назначение"
+msgstr "Näkyvyys"
 
 #: extensions/system/views/admin/widgets/edit.razr:40
 #: extensions/system/views/widgets/menu/edit.razr:2
 #: extensions/system/src/Menu/Widget/MenuWidget.php:23
 msgid "Menu"
-msgstr "Меню"
+msgstr "Valikko"
 
 #: extensions/system/views/admin/widgets/edit.razr:49
 msgid "Pattern"
-msgstr "Образец"
+msgstr "Lauseke"
 
 #: extensions/system/views/admin/widgets/edit.razr:52
 msgid ""
@@ -1060,333 +1053,334 @@ msgid ""
 "for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
 "exclude the blog."
 msgstr ""
-"Введите путь к странице одной строкой. Символ \"*\" можно использовать как "
-"маску. Для исключения страниц добавьте восклицательный знак в начала пути. "
-"Пример: \"blog\"для страницы блога, \"blog/*\" для разделов блога или \"!blog"
-"\" если вы не хотите включать страницу блогов."
+"Yksi sivu riville. Voit korvata osia sivun nimestä \"*\" -merkillä. Voit "
+"poissulkea sivuja lisäämällä ! osoitteeseen. Esimerkiksi: \"blog\" "
+"tarkoittaa sivua blog, \"blog/*\" tarkoittaa kaikkia blogikirjoituksia ja \"!"
+"blog\" poissulkee blogin"
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
 msgid "Position"
-msgstr "Позиция"
+msgstr "Sijainti"
 
 #: extensions/system/views/admin/widgets/edit.razr:103
 msgid "Options"
-msgstr "Опции"
+msgstr "Valinnat"
 
 #: extensions/system/views/admin/widgets/edit.razr:105
 msgid "Show Title"
-msgstr "Отображать заголовок"
+msgstr "Näytä otsikko"
 
 #: extensions/system/views/admin/widgets/index.razr:28
 #: extensions/system/src/Widget/Controller/WidgetsController.php:161
 msgid "Copy"
-msgstr "Копировать"
+msgstr "Kopioi"
 
 #: extensions/system/views/admin/widgets/index.razr:43
 msgid "- Position -"
-msgstr "- Позиция -"
+msgstr "- Sijainti -"
 
 #: extensions/system/views/admin/widgets/index.razr:50
 msgid "- Type -"
-msgstr "- Тип -"
+msgstr "- Tyyppi -"
 
 #: extensions/system/views/admin/widgets/index.razr:109
 msgid "- Assign -"
-msgstr "- Назначить-"
+msgstr "- Sijoita -"
 
 #: extensions/system/views/admin/widgets/index.razr:117
 msgid "Extension not loaded"
-msgstr "Расширение не загружено"
+msgstr "Lisäosa ei ole ladattu"
 
 #: extensions/system/views/tmpl/feed.error.razr:1
 msgid "Unable to retrieve feed data."
-msgstr "Не удалось получить данные канала."
+msgstr "Syötettä ei voitu ladata"
 
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "New Name"
-msgstr "Новое имя"
+msgstr "Uusi nimi"
 
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "Folder Name"
-msgstr "Имя каталога"
+msgstr "Kansion nimi"
 
 #: extensions/system/views/tmpl/finder.main.razr:5
 msgid "Upload"
-msgstr "Загрузить"
+msgstr "Lähetä"
 
 #: extensions/system/views/tmpl/finder.main.razr:9
 msgid "Add Folder"
-msgstr "Добавить каталог"
+msgstr "Lisää kansio"
 
 #: extensions/system/views/tmpl/finder.main.razr:12
 msgid "Rename"
-msgstr "Переименовать"
+msgstr "Uudelleennimeä"
 
 #: extensions/system/views/tmpl/finder.main.razr:28
 msgid "Home"
-msgstr "Главная"
+msgstr "Kotikansio"
 
 #: extensions/system/views/tmpl/finder.table.razr:7
 msgid "Size"
-msgstr "Размер"
+msgstr "Koko"
 
 #: extensions/system/views/tmpl/finder.table.razr:8
 msgid "Modified"
-msgstr "Изменен"
+msgstr "Muokattu"
 
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Drop files here."
-msgstr "Перетащите файлы сюда."
+msgstr "Pudota tiedostot tähän"
 
 #: extensions/system/views/tmpl/image.modal.razr:4
 msgid "Add Image"
-msgstr "Добавить изображение"
+msgstr "Lisää kuva"
 
 #: extensions/system/views/tmpl/image.modal.razr:8
 msgid "Select image"
-msgstr "Выбрать изображение"
+msgstr "Valitse kuva"
 
 #: extensions/system/views/tmpl/image.modal.razr:18
 msgid "Alt"
-msgstr "Альтернативный текст"
+msgstr "Valinnainen teksti"
 
 #: extensions/system/views/tmpl/image.modal.razr:29
 msgid "Select Image"
-msgstr "Выбрать изображение"
+msgstr "Valitse kuva"
 
 #: extensions/system/views/tmpl/image.modal.razr:32
 #: extensions/system/views/tmpl/video.modal.razr:31
 msgid "Select"
-msgstr "Выбрать"
+msgstr "Valitse"
 
 #: extensions/system/views/tmpl/image.replace.razr:6
 msgid "Placeholder Image"
-msgstr "Заполнитель изображения"
+msgstr "Väliaikainen kuva"
 
 #: extensions/system/views/tmpl/image.replace.razr:12
 msgid "Image"
-msgstr "Изображения"
+msgstr "Kuva"
 
 #: extensions/system/views/tmpl/link.modal.razr:3
 msgid "Add Link"
-msgstr "Добавить ссылку"
+msgstr "Lisää linkki"
 
 #: extensions/system/views/tmpl/link.replace.razr:1
 #: extensions/system/views/tmpl/linkpicker.replace.razr:1
 msgid "Select Link"
-msgstr "Ссылка"
+msgstr "Valitse linkki"
 
 #: extensions/system/views/tmpl/linkpicker.modal.razr:3
 msgid "Link"
-msgstr "Ссылка"
+msgstr "Linkki"
 
 #: extensions/system/views/tmpl/package.updates.razr:18
 msgid "Changelog"
-msgstr "Список изменений"
+msgstr "Muutoslogi"
 
 #: extensions/system/views/tmpl/package.upload.razr:4
 msgid ""
 "The checksum of the uploaded package does not match the one from the "
 "marketplace. The file might be manipulated."
 msgstr ""
-"Контрольная сумма загружаемого пакета неверная (не соответствует данным "
-"Магазина). Файл может содержать вредоносный код."
+"Lähetetyn paketin tiiviste ei vastaa markkinapaikalla olevan paketin "
+"tiivistettä. Tiedostoa on voitu muokata."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
 msgid ""
 "There is an update available for the uploaded package. Please consider "
 "installing it instead."
 msgstr ""
-"Для загружаемого пакета доступны обновления. Рекомендуется установить данный "
-"пакет из Магазина."
+"Lähettämääsi pakettiin on saatavilla päivitys. Harkitse uuden version "
+"asentamista lähettämäsi sijaan."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
-msgstr "Путь:"
+msgstr "Osoite"
 
 #: extensions/system/views/tmpl/package.upload.razr:29
 msgid "Type:"
-msgstr "Тип:"
+msgstr "Tyyppi"
 
 #: extensions/system/views/tmpl/video.modal.razr:5
 msgid "Add Video"
-msgstr "Добавить видео"
+msgstr "Lisää video"
 
 #: extensions/system/views/tmpl/video.modal.razr:16
 msgid "Select video"
-msgstr "Выбрать видео"
+msgstr "Valitse video"
 
 #: extensions/system/views/tmpl/video.modal.razr:28
 msgid "Select Video"
-msgstr "Выбрать видео"
+msgstr "Valitse video"
 
 #: extensions/system/views/tmpl/video.replace.razr:6
 msgid "Placeholder Video"
-msgstr "Заполнитель видео"
+msgstr "Väliaikainen video"
 
 #: extensions/system/views/tmpl/video.replace.razr:12
 msgid "Video"
-msgstr "Видео"
+msgstr "Video"
 
 #: extensions/system/views/user/login.razr:13
 msgid "(Forgot Password?)"
-msgstr "(Забыли пароль?)"
+msgstr "(Unohditko salasanan?)"
 
 #: extensions/system/views/user/login.razr:20
 #: extensions/system/views/user/registration.razr:39
 #: extensions/system/views/user/reset/confirm.razr:18
 #: extensions/system/views/user/reset/request.razr:15
 msgid "Submit"
-msgstr "Отправить"
+msgstr "Lähetä"
 
 #: extensions/system/views/user/mails/approve.razr:11
 msgid "Hello"
-msgstr "Здравствуйте!"
+msgstr "Hei"
 
 #: extensions/system/views/user/mails/approve.razr:12
 msgid ""
 "A new user has registered at %site% and requests that you approve his "
 "account."
 msgstr ""
-"На сайте %site% зарегистрирован новый пользователь. Необходимо одобрить его "
-"аккаунт."
+"Uusi käyttäjä on rekisteröitynyt sivustolle %site% ja sinun on vahvistustasi "
+"tarvitaan tunnuksen luomiseksi."
 
 #: extensions/system/views/user/mails/approve.razr:13
 msgid ""
 "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
 msgstr ""
-"Информация о аккаунте:<br><br>Имя: %name%<br>Имя пользователя: %username"
-"%<br>Email: %email%"
+"Käyttäjän tiedot<br><br>Nimi: %name%<br>Käyttäjänimi: %username"
+"%<br>Sähköpostiosoite: %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
-msgstr "Для активации аккаунта нажмите на:"
+msgstr "Aktivoidaksesi tunnuksen, klikkaa"
 
 #: extensions/system/views/user/mails/reset.razr:9
 msgid "Someone requested that the password be reset for the following account"
-msgstr "Кто-то запросил сброс пароля для аккаунта"
+msgstr ""
+"Joku (todennäköisesti sinä) on pyytänyt salasanan palautusta seuraavalle "
+"tunnukselle"
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
 msgstr ""
-"Если это ошибка и вы не запрашивали сброс пароля, то просто проигнорируйте "
-"это письмо."
+"Jos et tarkoittanut tätä, voit poistaa tämän viestin, eikä mitään tapahdu."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
-msgstr "Для сброса пароля перейдите по следующей ссылке"
+msgstr "Palauttaaksesi salasanan, mene osoitteeseen"
 
 #: extensions/system/views/user/mails/verification.razr:11
 #: extensions/system/views/user/mails/welcome.razr:9
 msgid "Hello %name%"
-msgstr "Здравствуйте, %name%!"
+msgstr "Hei %name%"
 
 #: extensions/system/views/user/mails/verification.razr:12
 msgid ""
 "Thank you for registering at %site%! Your account has been successfully "
 "created and must be verified before you can use it."
 msgstr ""
-"Спасибо за регистрацию на сайте %site%! Ваш аккаунт успешно создан и ожидает "
-"одобрения администратором."
+"Kiitos rekisteröinnistäsi sivustolle %site%! Tunnuksesi on nyt luotu, mutta "
+"se täytyy vahvistaa ennen kuin voit käyttää sitä."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
-msgstr "Чтобы подтвердить свой аккаунт, нажмите на:"
+msgstr "Vahvistaaksesi sähköpostiosoitteesi, klikkaa"
 
 #: extensions/system/views/user/mails/welcome.razr:10
 msgid "Thank you for registering!"
-msgstr "Спасибо за регистрацию!"
+msgstr "Kiitos rekisteröitymisestäsi!"
 
 #: extensions/system/views/user/mails/welcome.razr:12
 msgid "Login with the username:"
-msgstr "Войти с именем пользователя:"
+msgstr "Voit kirjautua sisään käyttäjätunnuksella"
 
 #: extensions/system/views/user/profile.razr:5
 #: extensions/system/src/User/Controller/ProfileController.php:44
 msgid "Your Profile"
-msgstr "Ваш профиль"
+msgstr "Profiilisi"
 
 #: extensions/system/views/user/profile.razr:26
 msgid "Current Password"
-msgstr "Текущий пароль"
+msgstr "Salasanasi"
 
 #: extensions/system/views/user/profile.razr:36
 msgid "New Password"
-msgstr "Новый пароль"
+msgstr "Uusi salasana"
 
 #: extensions/system/views/user/reset/confirm.razr:5
 msgid "Password confirmation"
-msgstr "Подтверждение пароля"
+msgstr "Salasanan vahvistus"
 
 #: extensions/system/views/user/reset/confirm.razr:8
 msgid "Enter your new password below."
-msgstr "Введите новый пароль ниже."
+msgstr "Anna uusi salasana"
 
 #: extensions/system/views/user/reset/request.razr:3
 msgid "Forgot password"
-msgstr "Забыли пароль"
+msgstr "Salasana unohtunut?"
 
 #: extensions/system/views/user/reset/request.razr:5
 msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
 msgstr ""
-"Пожалуйста, укажите имя пользователя или email. Мы отправим вам ссылку для "
-"создания нового пароля. "
+"Anna käyttäjätunnuksesi tai sähköpostiosoitteesi. Lähetämme palautuslinkin "
+"sähköpostitse."
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
-msgstr "Перенаправить при входе"
+msgstr "Uudelleenohjaus sisäänkirjautumisen jälkeen"
 
 #: extensions/system/views/widgets/login/edit.razr:10
 msgid "Logout Redirect"
-msgstr "Перенаправить при выходе"
+msgstr "Uudelleenohjaus uloskirjautumisen jälkeen"
 
 #: extensions/system/views/widgets/login/login.razr:4
 msgid "username"
-msgstr "имя пользователя"
+msgstr "käyttäjänimi"
 
 #: extensions/system/views/widgets/login/login.razr:7
 msgid "password"
-msgstr "пароль"
+msgstr "salasana"
 
 #: extensions/system/views/widgets/login/login.razr:17
 msgid "Sign up"
-msgstr "Зарегистрироваться"
+msgstr "Kirjaudu"
 
 #: extensions/system/views/widgets/login/logout.razr:1
 msgid "Hi"
-msgstr "Привет"
+msgstr "Hei"
 
 #: extensions/system/views/widgets/menu/edit.razr:12
 msgid "Start Level"
-msgstr "начальный уровень"
+msgstr "Aloitustaso"
 
 #: extensions/system/views/widgets/menu/edit.razr:22
 msgid "Depth"
-msgstr "Глубина"
+msgstr "Syvyys"
 
 #: extensions/system/views/widgets/menu/edit.razr:25
 msgid "No Limit"
-msgstr "Без ограничения"
+msgstr "Ei rajoitusta"
 
 #: extensions/system/views/widgets/menu/edit.razr:33
 msgid "Sub Items"
-msgstr "Подпункты"
+msgstr "Alikohdat"
 
 #: extensions/system/views/widgets/menu/edit.razr:36
 msgid "Show all"
-msgstr "Показывть все"
+msgstr "Näytä kaikki"
 
 #: extensions/system/views/widgets/menu/edit.razr:39
 msgid "Show only for active item"
-msgstr "Показывать только для активного пункта"
+msgstr "Näytä aktiivisessa kirjoituksessa"
 
 #: extensions/system/views/widgets/text/edit.razr:5
 msgid "Enable Markdown"
-msgstr "Включить Markdown"
+msgstr "Ota Markdown käyttöön"
 
 #: extensions/system/languages/messages.php:4
 msgid "0"
@@ -1463,269 +1457,271 @@ msgstr "17"
 #: extensions/system/languages/messages.php:25
 #: extensions/system/src/Widget/Controller/WidgetsController.php:58
 msgid "Widgets"
-msgstr "Виджеты"
+msgstr "Vimpaimet"
 
 #: extensions/system/languages/messages.php:26
 #: extensions/system/src/Menu/Controller/MenuController.php:47
 msgid "Menus"
-msgstr "Меню"
+msgstr "Valikot"
 
 #: extensions/system/languages/messages.php:27
 #: extensions/system/src/User/Controller/UserController.php:100
 #: extensions/system/src/User/Dashboard/UserWidget.php:23
 msgid "Users"
-msgstr "Пользователи"
+msgstr "Käyttäjät"
 
 #: extensions/system/languages/messages.php:30
 msgid "Access"
-msgstr "Доступ"
+msgstr "Käyttöoikeus"
 
 #: extensions/system/languages/messages.php:33
 msgid "Manage media files"
-msgstr "Управление медиафайлами"
+msgstr "Hallitse mediatiedostoja"
 
 #: extensions/system/languages/messages.php:34
 msgid "Manage menus"
-msgstr "Управление меню"
+msgstr "Hallitse valikkoja"
 
 #: extensions/system/languages/messages.php:35
 msgid "Manage widgets"
-msgstr "Управление виджетами"
+msgstr "Hallitse vimpaimia"
 
 #: extensions/system/languages/messages.php:36
 msgid "Manage themes"
-msgstr "Управление темами"
+msgstr "Hallitse teemoja"
 
 #: extensions/system/languages/messages.php:37
 msgid "Manage extensions"
-msgstr "Управление расширениями"
+msgstr "Hallitse lisäosia"
 
 #: extensions/system/languages/messages.php:38
 msgid "Manage url aliases"
-msgstr "Управление псевдонимами URL"
+msgstr "Hallitse URL aliaksia"
 
 #: extensions/system/languages/messages.php:39
 msgid "Apply system updates"
-msgstr "Применение системных обновлений"
+msgstr "Asenna järjestelmäpäivitykset"
 
 #: extensions/system/languages/messages.php:40
 msgid "Access admin area"
-msgstr "Доступ к панели управления"
+msgstr "Pääsy hallintapaneeliin"
 
 #: extensions/system/languages/messages.php:41
 msgid "Access system settings"
-msgstr "Доступ к системным настройкам"
+msgstr "Pääsy järjestelmän asetuksiin"
 
 #: extensions/system/languages/messages.php:42
 msgid "Manage user permissions"
-msgstr "Управление правами пользователей"
+msgstr "Hallitse käyttäjäoikeuksia"
 
 #: extensions/system/languages/messages.php:43
 msgid "Manage users"
-msgstr "Управление пользователями"
+msgstr "Hallitse käyttäjiä"
 
 #: extensions/system/languages/messages.php:44
 msgid "Use the site in maintenance mode"
-msgstr "Использовать сайт в режиме обслуживания"
+msgstr "Käytä sivua huoltotilassa"
 
 #: extensions/system/languages/messages.php:45
 msgid ""
 "Warning: Give to trusted roles only; this permission has security "
 "implications."
-msgstr "Предупреждение: давайте это право только доверенным пользователям!"
+msgstr ""
+"Varoitus! Anna ainoastaa luotetuille rooleille; tämä käyttöoikeus voi "
+"vaarantaa sivustosi."
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
 msgid "Editor not found."
-msgstr "Редактор не найден."
+msgstr "Muokkainta ei löytynyt"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:62
 msgid "Core extensions may not be enabled."
-msgstr "Расширения ядра не могут быть включены."
+msgstr "Ydinlaajennoksia ei voi ottaa käyttöön"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
 msgid "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr ""
-"Не удается активировать расширение.<br>Расширение вызвало фатальную ошибку."
+msgstr "Lisäosaa ei voitu aktivoida.<br>Lisäosa aiheutti vakavan virheen."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
 msgid "Unable to enable extension \"%name%\"."
-msgstr "Не удается включить расширение \"%name%\"."
+msgstr "Lisäosaa \"%name%\" ei voitu aktivoida"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:91
 msgid "Extension enabled."
-msgstr "Расширение включено."
+msgstr "Lisäosa otettu käyttöön"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:109
 msgid "Core extensions may not be disabled."
-msgstr "Расширения ядра не могут быть отключены."
+msgstr "Ydinlisäosia ei voi poistaa käytöstä"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:113
 msgid "Extension \"%name%\" has not been loaded."
-msgstr "Расширение \"%name%\" еще не загружено."
+msgstr "Lisäosa \"%name%\" ei ole ladattu"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:120
 msgid "Extension disabled."
-msgstr "Расширение отключено."
+msgstr "Lisäosa poistettu käytöstä"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:138
 msgid "Core extensions may not be uninstalled."
-msgstr "Расширения ядра не могут быть удалены."
+msgstr "Ydinlisäosia ei voi poistaa"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:146
 msgid "Unable to uninstall extension \"%name%\"."
-msgstr "Невозможно удалить расширение \"%name%\"."
+msgstr "Virhe poistettaessa lisäosaa \"%name%\""
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:157
 msgid "Extension uninstalled."
-msgstr "Расширение удалено."
+msgstr "Lisäosa poistettu"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:174
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:197
 msgid "Invalid extension."
-msgstr "Некорректное расширение."
+msgstr "Virheellinen lisäosa"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:203
 #: extensions/system/src/System/Controller/SettingsController.php:104
 #: extensions/system/src/Theme/Controller/ThemesController.php:167
 msgid "Settings saved."
-msgstr "Настройки сохранены."
+msgstr "Asetukset tallennettu"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:52
 #: extensions/system/src/Menu/Controller/ItemController.php:98
 #: extensions/system/src/Menu/Controller/ItemController.php:133
 #: extensions/system/src/Menu/Controller/ItemController.php:161
 msgid "Invalid menu."
-msgstr "Неверное меню."
+msgstr "Virheellinen valikko"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:58
 msgid "Add Menu Item"
-msgstr "Добавить пункт меню"
+msgstr "Lisää valikon kohta"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:76
 msgid "Invalid menu item."
-msgstr "Неверный пункт меню."
+msgstr "Virheellinen valikon kohta"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:79
 msgid "Edit Menu Item"
-msgstr "Изменить пункт меню"
+msgstr "Muokkaa valikon kohtaa"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item saved."
-msgstr "Пункт меню сохранен."
+msgstr "Valikon kohta tallennettu"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item created."
-msgstr "Пункт меню создан."
+msgstr "Valikon kohta luotu"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:119
 msgid "Invalid url."
-msgstr "Недопустимый url-адрес."
+msgstr "Virheellinen URL"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
 "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
 msgstr ""
-"{0} Пункты меню не удалены.|{1} Пункт меню удален.|]1,Inf[ Пункты меню "
-"удалены."
+"{0} Valikon kohtia ei poistettu|{1} Valikon kohta poistettu|]1,Inf[ Valikon "
+"kohdat poistettu"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
-msgstr "Недопустимое имя меню."
+msgstr "Virheellinen valikon nimi"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:66
 msgid "Invalid menu name. \"%name%\" is already in use."
-msgstr "Недопустимое имя меню. Имя \"%name%\" уже используется."
+msgstr "Virheellinen valikon nimi. \"%name%\" on jo käytössä."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:86
 msgid "Invalid menu id"
-msgstr "Недопустимый ID меню."
+msgstr "Virheellinen valikon tunniste"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:122
 msgid "Menu order updated"
-msgstr "Сортировка меню обновлена"
+msgstr "Valikon järjestys päivitetty"
 
 #: extensions/system/src/Menu/Entity/Item.php:92
 #: extensions/system/src/User/Entity/User.php:94
 #: extensions/system/src/Widget/Entity/Widget.php:91
 msgid "Unknown"
-msgstr "Неизвестно"
+msgstr "Tuntematon"
 
 #: extensions/system/src/Menu/Widget/MenuWidget.php:31
 msgid "Menu Widget"
-msgstr "Виджет меню"
+msgstr "Valikko vimpain"
 
 #: extensions/system/src/System/Controller/AliasController.php:54
 msgid "Add URL Alias"
-msgstr "Добавить псевдоним URL"
+msgstr "Lisää URL alias"
 
 #: extensions/system/src/System/Controller/AliasController.php:66
 msgid "Invalid alias id."
-msgstr "Некорректный ID псевдонима."
+msgstr "Virheellinen aliaksen tunniste"
 
 #: extensions/system/src/System/Controller/AliasController.php:69
 msgid "Edit URL Alias"
-msgstr "Редактировать псевдоним URL"
+msgstr "Muokkaa URL aliasta"
 
 #: extensions/system/src/System/Controller/AliasController.php:89
 msgid "Invalid alias."
-msgstr "Недопустимый псевдоним."
+msgstr "Virheellinen alias"
 
 #: extensions/system/src/System/Controller/AliasController.php:93
 msgid "Invalid source."
-msgstr "Неверный источник."
+msgstr "Virheellinen kohde"
 
 #: extensions/system/src/System/Controller/AliasController.php:97
 msgid "The alias \"%alias%\" is already in use."
-msgstr "Псевдоним \"%alias%\" уже используется."
+msgstr "Alias \"%alias%\" on jo käytössä"
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias saved."
-msgstr "Псевдоним сохранен."
+msgstr "Alias tallennettu"
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias created."
-msgstr "Псевдоним создан."
+msgstr "Alias luotu"
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
 msgstr ""
-"{0} Псевдоним не удален.|{1} Псевдоним удален.|]1,Inf[ Псевдонимы удалены."
+"{0} Aliaksia ei poistettu|{1} Alias poistettu|]1,Inf[ Aliakset poistettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
-msgstr "Настройки панели управления"
+msgstr "Kojelaudan asetukset"
 
 #: extensions/system/src/System/Controller/DashboardController.php:79
 #: extensions/system/src/System/Controller/DashboardController.php:109
 msgid "Invalid widget type."
-msgstr "Неверный тип виджета."
+msgstr "Virheellinen vimpaimen tyyppi"
 
 #: extensions/system/src/System/Controller/DashboardController.php:105
 msgid "Invalid widget id."
-msgstr "Неверный ID виджета."
+msgstr "Virheellinen vimpaimen tunniste"
 
 #: extensions/system/src/System/Controller/DashboardController.php:114
 #: extensions/system/src/Widget/Controller/WidgetsController.php:85
 msgid "Edit Widget"
-msgstr "Изменить виджет"
+msgstr "Muokkaa vimpainta"
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget created."
-msgstr "Виджет создан."
+msgstr "Vimpain luotu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget saved."
-msgstr "Виджет сохранен."
+msgstr "Vimpain tallennettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:160
 msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr "{0} Виджеты не удалены.|{1} Виджет удален.|]1,Inf[ Виджеты удалены."
+msgstr ""
+"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:183
 msgid "Widgets reordered."
-msgstr "Виджеты переупорядочены."
+msgstr "Vimpaimet uudelleenjärjestetty"
 
 #: extensions/system/src/System/Controller/FinderController.php:18
 #: extensions/system/src/System/Controller/FinderController.php:65
@@ -1733,7 +1729,7 @@ msgstr "Виджеты переупорядочены."
 #: extensions/system/src/System/Controller/FinderController.php:123
 #: extensions/system/src/System/Controller/FinderController.php:151
 msgid "Invalid path."
-msgstr "Недопустимый путь."
+msgstr "Virheellinen osoite"
 
 #: extensions/system/src/System/Controller/FinderController.php:22
 #: extensions/system/src/System/Controller/FinderController.php:69
@@ -1741,92 +1737,93 @@ msgstr "Недопустимый путь."
 #: extensions/system/src/System/Controller/FinderController.php:127
 #: extensions/system/src/System/Controller/FinderController.php:155
 msgid "Permission denied."
-msgstr "Доступ запрещен."
+msgstr "Pääsy estetty"
 
 #: extensions/system/src/System/Controller/FinderController.php:61
 #: extensions/system/src/System/Controller/FinderController.php:91
 msgid "Invalid file name."
-msgstr "Неправильное имя файла."
+msgstr "Virheellinen tiedoston nimi"
 
 #: extensions/system/src/System/Controller/FinderController.php:76
 msgid "Directory created."
-msgstr "Каталог создан."
+msgstr "Kansio luotu"
 
 #: extensions/system/src/System/Controller/FinderController.php:80
 msgid "Unable to create directory."
-msgstr "Не удается создать каталог."
+msgstr "Kansiota ei voitu luoda"
 
 #: extensions/system/src/System/Controller/FinderController.php:106
 msgid "Renamed."
-msgstr "Переименован."
+msgstr "Uudelleennimetty"
 
 #: extensions/system/src/System/Controller/FinderController.php:110
 msgid "Unable to rename."
-msgstr "Не удается переименовать."
+msgstr "Ei voitu uudelleennimetä"
 
 #: extensions/system/src/System/Controller/FinderController.php:136
 msgid "Unable to remove."
-msgstr "Не удается удалить."
+msgstr "Ei voitu poistaa"
 
 #: extensions/system/src/System/Controller/FinderController.php:140
 msgid "Removed selected."
-msgstr "Удалить выбранные."
+msgstr "Valitut poistettu"
 
 #: extensions/system/src/System/Controller/FinderController.php:161
 msgid "No files uploaded."
-msgstr "Файлы не загружены."
+msgstr "Ei tiedostoja lähetetty"
 
 #: extensions/system/src/System/Controller/FinderController.php:167
 msgid "Uploaded file invalid."
-msgstr "Загруженный файл недопустим."
+msgstr "Virheellinen lähetetty tiedosto"
 
 #: extensions/system/src/System/Controller/FinderController.php:173
 msgid "Upload complete."
-msgstr "Загрузка завершена."
+msgstr "Lähetys valmis"
 
 #: extensions/system/src/System/Controller/FinderController.php:177
 msgid "Unable to upload."
-msgstr "Не удается загрузить."
+msgstr "Ei voida lähettää"
 
 #: extensions/system/src/System/Controller/FinderController.php:199
+#, fuzzy
 msgid "n/a"
-msgstr "н/д"
+msgstr "n/a"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
-msgstr "%d Байт"
+msgstr "%d tavua"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  KB"
-msgstr "%d  КБ"
+msgstr "%d Kt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  MB"
-msgstr "%d  МБ"
+msgstr "%d Mt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  GB"
-msgstr "%d  ГБ"
+msgstr "%d Gt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d TB"
-msgstr "%d ТБ"
+msgstr "%d Tt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d PB"
-msgstr "%d ПБ"
+msgstr "%d Pt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d EB"
-msgstr "%d ЕБ"
+msgstr "%d Et"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d ZB"
-msgstr "%d ЗБ"
+msgstr "%d Zt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d YB"
-msgstr "%d ЙБ"
+msgstr "%d Yt"
 
 #: extensions/system/src/System/Controller/LinkController.php:56
 msgid "Url"
@@ -1834,327 +1831,331 @@ msgstr "Url"
 
 #: extensions/system/src/System/Controller/MigrationController.php:29
 msgid "Your Pagekit database has been updated successfully."
-msgstr "Ваша база данных Pagekit успешно обновлена."
+msgstr "Pagekit tietokanta päivitetty onnistuneesti"
 
 #: extensions/system/src/System/Controller/MigrationController.php:31
 msgid "Your Pagekit database is already up-to-date!"
-msgstr "Ваша база данных Pagekit уже обновлена!"
+msgstr "Pagekit tietokanta on jo ajantasalla!"
 
 #: extensions/system/src/System/Controller/PackageController.php:47
 msgid "No file uploaded."
-msgstr "Файл не загружен."
+msgstr "Ei tiedostoja"
 
 #: extensions/system/src/System/Controller/PackageController.php:53
 msgid "Invalid package type."
-msgstr "Недопустимый тип пакета."
+msgstr "Virheellinen paketin tyyppi"
 
 #: extensions/system/src/System/Controller/PackageController.php:57
 #: extensions/system/src/System/Controller/PackageController.php:161
 msgid "Core extensions may not be installed."
-msgstr "Расширения ядра не могут быть установлены."
+msgstr "Ydinlisäosia ei voi asentaa"
 
 #: extensions/system/src/System/Controller/PackageController.php:111
 msgid "Path not found."
-msgstr "Путь не найден."
+msgstr "Osoitetta ei löytynyt"
 
 #: extensions/system/src/System/Controller/PackageController.php:124
 msgid "Package \"%name%\" installed."
-msgstr "Пакет \"%name%\" установлен."
+msgstr "Paketti \"%name%\" asennettu"
 
 #: extensions/system/src/System/Controller/PackageController.php:127
 #: extensions/system/src/System/Controller/UpdateController.php:67
 msgid "Package extraction failed."
-msgstr "Извлечения пакета не удалось."
+msgstr "Paketin purku epäonnistui"
 
 #: extensions/system/src/System/Controller/PackageController.php:129
 #: extensions/system/src/System/Controller/UpdateController.php:69
 msgid "Package checksum verification failed."
-msgstr "Ошибка проверки контрольной суммы пакета."
+msgstr "Paketin tarkistetta ei voitu varmistaa"
 
 #: extensions/system/src/System/Controller/PackageController.php:131
 #: extensions/system/src/System/Controller/UpdateController.php:71
 msgid "Invalid API key."
-msgstr "Неверный ключ API."
+msgstr "Virheellinen API avain"
 
 #: extensions/system/src/System/Controller/PackageController.php:133
 #: extensions/system/src/System/Controller/UpdateController.php:73
 msgid "Package download failed."
-msgstr "Не удалось загрузить пакет."
+msgstr "Paketin lataus epäonnistui"
 
 #: extensions/system/src/System/Controller/PackageController.php:135
 #: extensions/system/src/System/Controller/UpdateController.php:75
 msgid "Path is not writable."
-msgstr "Путь не доступен для записи."
+msgstr "Osoitteeseen ei ole kirjoitusoikeutta"
 
 #: extensions/system/src/System/Controller/PackageController.php:209
 msgid "Can't load json file from package."
-msgstr "Не могу загрузить json-файл из пакета."
+msgstr "Json -tiedostoa ei voitu ladata paketista"
 
 #: extensions/system/src/System/Controller/SettingsController.php:127
 msgid "Connection established!"
-msgstr "Соединение установлено!"
+msgstr "Yhdistetty!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:131
 msgid "Connection not established! (%s)"
-msgstr "Соединение не установлено! (%s)"
+msgstr "Yhteyttä ei voitu muodostaa! (%s)"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Test email!"
-msgstr "Тест email!"
+msgstr "Testisähköposti!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Testemail"
-msgstr "Тестовое сообщение"
+msgstr "Testisähköposti"
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail successfully sent!"
-msgstr "Почта успешно отправлена!"
+msgstr "Sähköposti lähetetty!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail delivery failed!"
-msgstr "Отправка почты не удалось!"
+msgstr "Sähköpostia ei voity lähettää!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:165
 msgid "Mail delivery failed! (%s)"
-msgstr "Отправка почты не удалось! (%s)"
+msgstr "Sähköpostia ei voity lähettää! (%s)"
 
 #: extensions/system/src/System/Controller/SystemController.php:79
 msgid "Order saved."
-msgstr "Сортировка сохранена."
+msgstr "Järjestys tallennettu"
 
 #: extensions/system/src/System/Controller/SystemController.php:104
 msgid "System Information"
-msgstr "Информация о системе"
+msgstr "Järjestelmätiedot"
 
 #: extensions/system/src/System/Controller/SystemController.php:146
 msgid "Cache cleared!"
-msgstr "Кэш очищен!"
+msgstr "Välimuisti tyhjennetty!"
 
 #: extensions/system/src/System/Controller/UpdateController.php:53
 msgid "Unable to find update."
-msgstr "Не удается найти обновления."
+msgstr "Päivityksiä ei löytynyt"
 
 #: extensions/system/src/System/Controller/UpdateController.php:64
 msgid "Copying files..."
-msgstr "Копирование файлов..."
+msgstr "Kopioidaan tiedostoja ..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:91
 #: extensions/system/src/System/Controller/UpdateController.php:121
 msgid "You may not call this step directly."
-msgstr "Вы можете сделать этот шаг напрямую."
+msgstr "Et voi yrittää suoraan suorittaa tätä askelta"
 
 #: extensions/system/src/System/Controller/UpdateController.php:103
 msgid "Updating database..."
-msgstr "Обновление базы данных..."
+msgstr "Päivitetään tietokantaa ..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:127
 msgid "Installed successfully."
-msgstr "Установлен прошла успешно."
+msgstr "Asennus onnistui"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
-msgstr "Лента новостей"
+msgstr "Syöte"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:32
 msgid "Feed Widget"
-msgstr "Виджет ленты новостей"
+msgstr "Syöte vimpain"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:35
 msgid "No title given."
-msgstr "Заголовок не задан."
+msgstr "Ei otsikkoa"
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:32
 msgid "Weather Widget"
-msgstr "Виджет погоды"
+msgstr "Sää vimpain"
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:35
 msgid "No location chosen."
-msgstr "Местоположение не выбрано."
+msgstr "Sijaintia ei valittu"
 
 #: extensions/system/src/System/Event/FrontpageListener.php:18
 msgid "No Frontpage assigned."
-msgstr "Нет назначенных главной страницей."
+msgstr "Etusivua ei valittu"
 
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
+#, fuzzy
 msgid "DATE_SHORT"
-msgstr "m.d.y, H:i"
+msgstr "d.m.Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:135
 #: extensions/system/src/SystemExtension.php:126
+#, fuzzy
 msgid "DATE_MEDIUM"
-msgstr "j M Y, H:i"
+msgstr "d.m.y"
 
 #: extensions/system/src/System/Event/SystemListener.php:136
 #: extensions/system/src/SystemExtension.php:125
+#, fuzzy
 msgid "DATE_LONG"
-msgstr "j F Y, H:i"
+msgstr "d.m.y"
 
 #: extensions/system/src/System/Event/SystemListener.php:137
 #: extensions/system/src/SystemExtension.php:124
+#, fuzzy
 msgid "DATE_FULL"
-msgstr "I, j M Y, H:i"
+msgstr "d.m.y"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Mon"
-msgstr "Пн."
+msgstr "Ma"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Tue"
-msgstr "Вт."
+msgstr "Ti"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Wed"
-msgstr "Ср."
+msgstr "Ke"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Thu"
-msgstr "Чт."
+msgstr "To"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Fri"
-msgstr "Пт."
+msgstr "Pe"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Sat"
-msgstr "Сб."
+msgstr "La"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Sun"
-msgstr "Вс."
+msgstr "su"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Monday"
-msgstr "Понедельник"
+msgstr "Maanantai"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Tuesday"
-msgstr "Вторник"
+msgstr "Tiistai"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Wednesday"
-msgstr "Среда"
+msgstr "Keskiviikko"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Thursday"
-msgstr "Чеверг"
+msgstr "Torstai"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Friday"
-msgstr "Пятница"
+msgstr "Perjantai"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Saturday"
-msgstr "Суббота"
+msgstr "Lauantai"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Sunday"
-msgstr "Воскресенье"
+msgstr "sunnunstai"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jan"
-msgstr "Янв."
+msgstr "Tammi"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Feb"
-msgstr "Фев."
+msgstr "Helmi"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Mar"
-msgstr "Мар."
+msgstr "Maalis"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Apr"
-msgstr "Апр."
+msgstr "Huhti"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "May"
-msgstr "Май"
+msgstr "Toukokuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jun"
-msgstr "Июн."
+msgstr "Kesä"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jul"
-msgstr "Июл."
+msgstr "Heinä"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Aug"
-msgstr "Авг."
+msgstr "Elo"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Sep"
-msgstr "Сен."
+msgstr "Syys"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Oct"
-msgstr "Окт."
+msgstr "Loka"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Nov"
-msgstr "Ноя."
+msgstr "Marras"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Dec"
-msgstr "Дек."
+msgstr "Joulu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "January"
-msgstr "Января"
+msgstr "Tammikuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "February"
-msgstr "Февраля"
+msgstr "Helmikuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "March"
-msgstr "Марта"
+msgstr "Maaliskuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "April"
-msgstr "Апреля"
+msgstr "Huhtikuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "June"
-msgstr "Июня"
+msgstr "Kesäkuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "July"
-msgstr "Июля"
+msgstr "Heinäkuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "August"
-msgstr "Августа"
+msgstr "Elokuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "September"
-msgstr "Сентября"
+msgstr "Syyskuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "October"
-msgstr "Октября"
+msgstr "Lokakuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "November"
-msgstr "Ноября"
+msgstr "Marraskuu"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "December"
-msgstr "Декабря"
+msgstr "Joulukuu"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:30
 msgid "Invalid CSRF token."
-msgstr "Поврежденных CSRF токен."
+msgstr "Virheellinen CSRF"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:33
 msgid "Sorry, the page you are looking for could not be found."
-msgstr "Извините, запрашиваемая страница не найдена."
+msgstr "Sivua ei löytynyt"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:39
 msgid "Whoops, looks like something went wrong."
-msgstr "Ой, похоже что-то пошло не так."
+msgstr "Oops! Jotain meni vikaan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:20
 msgid "Ascension Island"
@@ -2946,7 +2947,7 @@ msgstr "Serbia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:217
 msgid "Russia"
-msgstr "Россия"
+msgstr "Russia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:218
 msgid "Rwanda"
@@ -3474,7 +3475,7 @@ msgstr "Romanian"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:88
 msgid "Russian"
-msgstr "Русский"
+msgstr "Russian"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:89
 msgid "Scots"
@@ -3566,319 +3567,321 @@ msgstr "Chinese, Traditional"
 
 #: extensions/system/src/System/Link/System.php:48
 msgid "Frontpage"
-msgstr "Главная страница"
+msgstr "Etusivu"
 
 #: extensions/system/src/System/Link/System.php:49
 msgid "User Login"
-msgstr "Логин пользователя"
+msgstr "Sisäänkirjautuminen"
 
 #: extensions/system/src/System/Link/System.php:50
 #: extensions/system/src/User/Controller/RegistrationController.php:46
 msgid "User Registration"
-msgstr "Регистрация пользователя"
+msgstr "Rekisteröityminen"
 
 #: extensions/system/src/System/Link/System.php:51
 msgid "User Profile"
-msgstr "Профиль пользователя"
+msgstr "Profiili"
 
 #: extensions/system/src/System/Link/System.php:52
 msgid "User Password Reset"
-msgstr "Сброс пароля пользователя"
+msgstr "Salasanan palautus"
 
 #: extensions/system/src/System/Widget/TextWidget.php:23
 msgid "Text"
-msgstr "Текст"
+msgstr "Teksti"
 
 #: extensions/system/src/System/Widget/TextWidget.php:31
 msgid "Text Widget"
-msgstr "Виджет текста"
+msgstr "Tekstivimpain"
 
 #: extensions/system/src/SystemExtension.php:128
 msgid "DATE_INTERVAL"
-msgstr "DATE_INTERVAL"
+msgstr "%d päivää"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:84
 msgid "Unable to activate theme.<br>The theme triggered a fatal error."
-msgstr "Не удается активировать тему.<br>Тема вызвала фатальную ошибку."
+msgstr "Teemaa ei voitu aktivoida.<br/>Teema aiheutti vakavan virheen."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:90
 msgid "Unable to enable theme \"%name%\"."
-msgstr "Не удается включить тему \"%name%\"."
+msgstr "Teemaa \"%name%\" ei voitu ottaa käyttöön"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:98
 msgid "Theme enabled."
-msgstr "Тема включена."
+msgstr "Teema käytössä"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:115
 msgid "Unable to uninstall theme \"%name%\"."
-msgstr "Не удается удалить тему \"%name%\"."
+msgstr "Teemaa \"%name%\" ei voitu poistaa"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:121
 msgid "Theme uninstalled."
-msgstr "Тема удалена."
+msgstr "Teema poistettu"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:137
 #: extensions/system/src/Theme/Controller/ThemesController.php:161
 msgid "Invalid theme."
-msgstr "Некорректная тема."
+msgstr "Virheellinen teema"
 
 #: extensions/system/src/Theme/Event/WidgetListener.php:30
 msgid "Theme"
-msgstr "Тема"
+msgstr "Teema"
 
 #: extensions/system/src/User/Controller/AuthController.php:68
 #: extensions/system/src/User/Controller/RegistrationController.php:66
 #: extensions/system/src/User/Controller/ResetPasswordController.php:61
 #: extensions/system/src/User/Controller/ResetPasswordController.php:130
 msgid "Invalid token. Please try again."
-msgstr "Неверный токен. Пожалуйста, попробуйте еще раз."
+msgstr "Virheellinen poletti. Yritä uudelleen myöhemmin."
 
 #: extensions/system/src/User/Controller/AuthController.php:76
 msgid "Invalid username or password."
-msgstr "Неверное имя пользователя или пароль."
+msgstr "Virheellinen käyttäjätunnus tai salasana"
 
 #: extensions/system/src/User/Controller/PermissionController.php:48
 msgid "Permissions saved!"
-msgstr "Права сохранены!"
+msgstr "Käyttöoikeudet tallennettu!"
 
 #: extensions/system/src/User/Controller/ProfileController.php:66
 msgid "Name is invalid."
-msgstr "Недопустимое имя."
+msgstr "Virheellinen nimi"
 
 #: extensions/system/src/User/Controller/ProfileController.php:70
 #: extensions/system/src/User/Controller/RegistrationController.php:87
 #: extensions/system/src/User/Controller/UserController.php:165
 msgid "Email is invalid."
-msgstr "недопустимый email."
+msgstr "Virheellinen sähköpostiosoite"
 
 #: extensions/system/src/User/Controller/ProfileController.php:74
 #: extensions/system/src/User/Controller/RegistrationController.php:95
 #: extensions/system/src/User/Controller/UserController.php:177
 msgid "Email not available."
-msgstr "Email недоступен."
+msgstr "Sähköposti ei saatavilla"
 
 #: extensions/system/src/User/Controller/ProfileController.php:80
 msgid "Invalid Password."
-msgstr "Неверный пароль."
+msgstr "Virheellinen salasana"
 
 #: extensions/system/src/User/Controller/ProfileController.php:84
 msgid "New Password is invalid."
-msgstr "Новый пароль неверен."
+msgstr "Virheellinen uusi salasana"
 
 #: extensions/system/src/User/Controller/ProfileController.php:103
 msgid "Profile updated."
-msgstr "Профиль обновлен."
+msgstr "Profiili päivitetty"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:75
 msgid "Name required."
-msgstr "Требуется имя."
+msgstr "Nimi on vaadittu"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:79
 #: extensions/system/src/User/Controller/UserController.php:144
 msgid "Password required."
-msgstr "Требуется пароль."
+msgstr "Salasana on vaadittu"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:83
 #: extensions/system/src/User/Controller/UserController.php:161
 msgid "Username is invalid."
-msgstr "Недопустимое имя пользователя."
+msgstr "Virheellinen käyttäjänimi"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:91
 #: extensions/system/src/User/Controller/UserController.php:171
 msgid "Username not available."
-msgstr "Имя пользователя недоступно."
+msgstr "Käyttäjänimi ei ole käytettävissä"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr "Регистрация не удалось"
+msgstr "Rekisteröityminen epäonnistui"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
 msgstr ""
-"Ваш аккаунт успешно создан. Завершите регистрацию, перейдя по ссылке в "
-"отправленном письме."
+"Käyttäjätili luotiin onnistuneesti. Jatkaaksesi tilin käyttöönottoa, klikkaa "
+"linkkiä lähettämässämme sähköpostissa."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
 "Your user account has been created and is pending approval by the site "
 "administrator."
-msgstr "Ваш аккаунт успешно создан и ожидает одобрения администратором сайта."
+msgstr ""
+"Käyttäjätili luotiin onnistuneesti ja se odottaa ylläpitäjän vahvistusta"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
 msgid "Your user account has been created."
-msgstr "Ваш аккаунт успешно создан."
+msgstr "Käyttäjätili luotiin onnistuneesti."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:180
 #: extensions/system/src/User/Controller/ResetPasswordController.php:116
 msgid "Invalid key."
-msgstr "Неверный ключ."
+msgstr "Virheellinen avain"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:189
 msgid ""
 "Your email has been verified. Once an administrator approves your account, "
 "you will be notified by email."
 msgstr ""
-"Ваш email был проверен. После одобрения вашего аккаунта администратором, вы "
-"будете уведомлены по проверенному адресу."
+"Sähköpostiosoitteesi on varmistettu. Saat sähköpostia, kun ylläpitäjä on "
+"vahvistanut käyttäjätilisi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
 msgid ""
 "The user's account has been activated and the user has been notified about "
 "it."
-msgstr "Аккаунт активирован. Пользователю отправлено уведомление об этом."
+msgstr ""
+"Käyttäjätili on aktivoitu ja käyttäjälle on lähetetty sähköpostia siitä"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
-msgstr "Ваша аккаунт активирован."
+msgstr "Käyttäjätilisi on aktivoitu"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:216
 msgid "Welcome to %site%!"
-msgstr "Добро пожаловать на сайт %site%!"
+msgstr "Tervetuloa sivulle %site%!"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:229
 msgid "Activate your %site% account"
-msgstr "Ваш аккаунт на сайте %site% активирован."
+msgstr "Aktivoi %site% käyttäjätilisi"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:234
 msgid "Unable to send verification link."
-msgstr "Не удалось отправить ссылку для подтверждения."
+msgstr "Vahvistuslinkkiä ei voitu lähettää"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:244
 msgid "Please approve registration at %site%!"
-msgstr "Пожалуйста, подтвердите регистрацию на сайте %site%!"
+msgstr "Hyväksy rekisteröityminen sivustolle %site%!"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:45
 msgid "Reset"
-msgstr "Сброс"
+msgstr "Tyhjennä"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:65
 msgid "Enter a username or email address."
-msgstr "Введите имя пользователя или email."
+msgstr "Anna käyttäjänimi tai sähköpostiosoite"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:71
 msgid "Invalid username or email."
-msgstr "Неверное имя пользователя или email."
+msgstr "Virheellinen käyttäjänimi tai sähköpostiosoite"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:75
 #: extensions/system/src/User/Controller/ResetPasswordController.php:121
 msgid "Your account has not been activated or is blocked."
-msgstr "Ваша учетная запись не была активирована или заблокирована."
+msgstr "Käyttäjätunnustasi ei ole aktivoitu tai se on estetty"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:86
 #: extensions/system/src/User/Link/User.php:49
 msgid "Password Reset"
-msgstr "Сбросить пароль"
+msgstr "Salasanan palautus"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:91
 msgid "Unable to send confirmation link."
-msgstr "Не удалось отправить письмо с ссылкой для подтверждения."
+msgstr "Vahvistusviestiä ei voitu lähettää"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:98
 msgid "Check your email for the confirmation link."
-msgstr "Вам отправлена ссылка для подтверждения. Проверьте свой email."
+msgstr "Tarkista sähköpostisi"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:136
 msgid "Enter password."
-msgstr "Введите пароль."
+msgstr "Anna salasana"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:140
 msgid "Invalid password."
-msgstr "Неверный пароль."
+msgstr "Virheellinen salasana"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:148
 msgid "Your password has been reset."
-msgstr "Ваш пароль был сброшен."
+msgstr "Salasanasi on palautettu"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:156
 msgid "Reset Confirm"
-msgstr "Подтвердить сброс"
+msgstr "Nollaa vahvista"
 
 #: extensions/system/src/User/Controller/RoleController.php:68
 msgid "Roles saved!"
-msgstr "Роли сохранены!"
+msgstr "Roolit tallennettu"
 
 #: extensions/system/src/User/Controller/UserController.php:125
 msgid "Edit User"
-msgstr "Изменить пользователя"
+msgstr "Muokkaa käyttäjää"
 
 #: extensions/system/src/User/Controller/UserController.php:140
 msgid "User not found."
-msgstr "Пользователь не найден."
+msgstr "Käyttäjää ei löytynyt"
 
 #: extensions/system/src/User/Controller/UserController.php:154
 #: extensions/system/src/User/Controller/UserController.php:243
 msgid "Unable to block yourself."
-msgstr "Невозможно заблокировать себя."
+msgstr "Et voi estää itseäsi"
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User saved."
-msgstr "Пользователь сохранен."
+msgstr "Käyttäjä tallennettu"
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User created."
-msgstr "Пользователь создан."
+msgstr "Käyttäjä luotu"
 
 #: extensions/system/src/User/Controller/UserController.php:218
 msgid "Unable to delete self."
-msgstr "Невозможно удалить себя."
+msgstr "Et voi poistaa itseäsi"
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
 msgstr ""
-"{0} Пользователь не удалён.|{1} Пользователь удалён.|]1,Inf[ Пользователи "
-"удалены."
+"{0} Käyttäjiä ei poistettu|{1} Käyttäjä poistettu|]1,Inf[ Käyttäjät poistettu"
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
-msgstr "Отображает список пользователей."
+msgstr "Näytä lista käyttäjistä"
 
 #: extensions/system/src/User/Entity/User.php:101
 msgid "Blocked"
-msgstr "Заблок."
+msgstr "Estetty"
 
 #: extensions/system/src/User/Event/AccessListener.php:93
 msgid "You do not have access to the administration area of this site."
-msgstr "Вы не имеете доступа к панели управления этого сайта."
+msgstr "Et voi käyttää hallintapaneelia"
 
 #: extensions/system/src/User/Event/AccessListener.php:107
 msgid "Insufficient User Rights."
-msgstr "Недостаточно прав."
+msgstr "Käyttöoikeudet puuttuvat"
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account is blocked."
-msgstr "Ваш аккаунт заблокирован."
+msgstr "Käyttäjätunnuksesi on estetty"
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account has not been activated."
-msgstr "Ваш аккаунт не активирован."
+msgstr "Käyt"
 
 #: extensions/system/src/User/Event/LoginAttemptListener.php:30
 msgid "Slow down a bit."
-msgstr "Подождите немного."
+msgstr "Hidasta hieman"
 
 #: extensions/system/src/User/Link/User.php:48
 msgid "Profile"
-msgstr "Профиль"
+msgstr "Profiili"
 
 #: extensions/system/src/User/Widget/LoginWidget.php:33
 msgid "Displays a user login form."
-msgstr "Отображать форму входа."
+msgstr "Näyttää kirjautumislomakkeen"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:49
 msgid "Unassigned Widgets"
-msgstr "Неназначенные виджеты"
+msgstr "Käyttämättömät vimpaimet"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:82
 #: extensions/system/src/Widget/Controller/WidgetsController.php:105
 msgid "Invalid widget id"
-msgstr "Неверный ID виджета"
+msgstr "Virheellinen vimpain tunniste"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr "{0} Выджеты не удалены.|{1} Виджет удален.|]1,Inf[ Виджеты удалены."
+msgstr ""
+"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."
-msgstr "Виджеты обновлены."
+msgstr "Vimpaimet päivitetty"
