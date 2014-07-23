@@ -41,6 +41,6 @@ class StartCommand extends Command
         $this->line(sprintf('Document root is %s', getcwd()));
         $this->line('Press Ctrl-C to quit');
 
-        exec("php -S $server index.php");
+        exec("php -S $server pagekit.php");
     }
 }

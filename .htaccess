@@ -1,6 +1,5 @@
 # URL rewrites
 <IfModule mod_rewrite.c>
-    SetEnv HTTP_MOD_REWRITE On
 
     Options -MultiViews
 
@@ -9,7 +8,12 @@
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule .* index.php [L]
+    RewriteRule .* pagekit.php [L]
+
+    <IfModule mod_env.c>
+        SetEnv HTTP_MOD_REWRITE On
+    </IfModule>
+
 </IfModule>
 
 # Redirect admin URL, if rewrite is not enabled
