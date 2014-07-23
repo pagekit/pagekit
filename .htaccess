@@ -3,7 +3,7 @@
 
 	#	If you get the error Internal Server Error (500) when accessing the website,
 	#	add the "#" from the line that begins "Options-MultiViews" below.
-	#Options -MultiViews
+	Options -MultiViews
 
 	RewriteEngine On
 
