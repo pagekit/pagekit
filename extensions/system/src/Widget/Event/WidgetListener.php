@@ -4,6 +4,7 @@ namespace Pagekit\Widget\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Model\TypesTrait;
 
 class WidgetListener extends EventSubscriber
 {
@@ -17,7 +18,7 @@ class WidgetListener extends EventSubscriber
         $user      = $this['user'];
         $sections  = $this['view.sections'];
 
-        foreach ($this['widgets']->getWidgetRepository()->where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
+        foreach ($this['db.em']->getRepository('Pagekit\Widget\Entity\Widget')->where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 
             // filter by access
             if (!$widget->hasAccess($user)) {
@@ -40,12 +41,21 @@ class WidgetListener extends EventSubscriber
     }
 
     /**
+     * Registers widget types.
+     */
+    public function onSystemLoaded()
+    {
+        TypesTrait::setWidgetTypes($this['events']->dispatch('system.widget', new RegisterWidgetEvent)->getTypes());
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'system.site' => ['onSystemSite', -16]
+            'system.loaded' => ['onSystemLoaded', 5],
+            'system.site'   => ['onSystemSite', -16]
         ];
     }
 

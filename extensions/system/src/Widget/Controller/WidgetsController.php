@@ -10,6 +10,7 @@ use Pagekit\Widget\Event\RegisterPositionEvent;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;
+use Pagekit\Widget\Model\TypesTrait;
 
 /**
  * @Access("system: manage widgets", admin=true)
@@ -36,7 +37,7 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->widgets   = $this['widgets']->getWidgetRepository();
+        $this->widgets   = $this['db.em']->getRepository('Pagekit\Widget\Entity\Widget');
         $this->roles     = $this['users']->getRoleRepository();
         $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
     }
@@ -55,7 +56,7 @@ class WidgetsController extends Controller
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
         }
 
-        return ['head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions];
+        return ['head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions, 'types' => TypesTrait::getWidgetTypes()];
     }
 
     /**

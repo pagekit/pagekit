@@ -9,7 +9,7 @@
                 <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        @foreach ($app.widgets.types as $type)
+                        @foreach ($types as $type)
                         <li><a href="@url('@system/widgets/add', ['type' => $type.id])">@( $type.name )</a></li>
                         @endforeach
                     </ul>
@@ -48,7 +48,7 @@
 
             <select id="filter-type" name="filter[type]" data-filter="type">
                 <option value="">@trans('- Type -')</option>
-                @foreach ($app.widgets.types as $type)
+                @foreach ($types as $type)
                 <option value="@( $type.id )">@( $type.name )</option>
                 @endforeach
             </select>
@@ -82,7 +82,7 @@
             <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }" data-position="@( $position.id )">
                 @foreach ($widgets[$position.id] ?: [] as $widget)
 
-                @set ($type = $app.widgets.types[$widget.type])
+                @set ($type = $widget.widgetType($widget.type))
 
                 <li class="uk-form js-widget" data-id="@( $widget.id )" data-status="@( $widget.status ?: 0)" data-type="@( $widget.type )" data-title="@( $widget.title )">
 

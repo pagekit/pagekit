@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    @set( $type = $app.widgets.types[$widget.type])
+                    @set( $type = $widget.widgetType($widget.type))
                     @raw( $type.renderForm($widget) )
 
                 </li>

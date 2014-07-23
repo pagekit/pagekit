@@ -67,10 +67,6 @@ class Theme implements \ArrayAccess
                 $event->register($id, $name, $description);
             }
         });
-
-        foreach ($this->getConfig('positions', []) as $id => $position) {
-            $this['view.sections']->register($id, ['provider' => $this['widgets']]);
-        }
     }
 
     /**
