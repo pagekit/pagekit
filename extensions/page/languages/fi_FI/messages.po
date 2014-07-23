@@ -53,11 +53,7 @@ msgstr "Virheellinen sivun tunniste"
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
-<<<<<<< HEAD:extensions/page/languages/fr_FR/messages.po
-msgstr "Modifier la page"
-=======
 msgstr "Muokkaa sivua"
->>>>>>> master:extensions/page/languages/fi_FI/messages.po
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
