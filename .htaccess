@@ -1,37 +1,57 @@
 # URL rewrites
 <IfModule mod_rewrite.c>
 
-    Options -MultiViews
+	#	If you get the error Internal Server Error (500) when accessing the website,
+	#	add the "#" from the line that begins "Options-MultiViews" below.
+	Options -MultiViews
 
-    RewriteEngine On
-    # RewriteBase /
+	RewriteEngine On
 
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule .* pagekit.php [L]
+	#	If you are having problems with the rewrite rules, remove the "#" from the
+	#	line that begins "RewriteBase" below. You will also have to change the path
+	#	of the rewrite to reflect the path to your Pagekit installation.
+	#RewriteBase /
 
-    <IfModule mod_env.c>
-        SetEnv HTTP_MOD_REWRITE On
-    </IfModule>
+	RewriteCond %{REQUEST_FILENAME} -f [OR]
+	RewriteCond %{REQUEST_FILENAME} -l [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^.*$ - [NC,L]
+	RewriteRule ^(app/|extensions/|storage/|themes/|vendor/|favicon\.ico|crossdomain\.xml|robots\.txt) - [NC,L]
+	RewriteRule .* pagekit.php [NC,L]
+
+	<IfModule mod_env.c>
+		SetEnv HTTP_MOD_REWRITE On
+	</IfModule>
 
 </IfModule>
 
 # Redirect admin URL, if rewrite is not enabled
 <IfModule !mod_rewrite.c>
-    <IfModule mod_alias.c>
 
-        RedirectMatch (.*)(?<!index.php)\/admin$ $1/index.php/admin
+	<IfModule mod_alias.c>
+		RedirectMatch (.*)(?<!index.php)\/admin$ $1/index.php/admin
+	</IfModule>
 
-    </IfModule>
 </IfModule>
 
 # Media types
 <IfModule mod_mime.c>
 
-    AddType image/svg+xml svg svgz
+	AddType image/svg+xml svg svgz
 
-    <IfModule mod_deflate.c>
-        AddEncoding gzip svgz
-    </IfModule>
+	<IfModule mod_deflate.c>
+		AddEncoding gzip svgz
+	</IfModule>
+
+</IfModule>
+
+# Media types
+<IfModule mod_mime.c>
+
+	AddType image/svg+xml svg svgz
+
+	<IfModule mod_deflate.c>
+		AddEncoding gzip svgz
+	</IfModule>
 
 </IfModule>
