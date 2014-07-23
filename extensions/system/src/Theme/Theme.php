@@ -67,10 +67,6 @@ class Theme implements \ArrayAccess
                 $event->register($id, $name, $description);
             }
         });
-
-        foreach ($this->getConfig('positions', []) as $id => $position) {
-            $this['view.sections']->register($id, ['provider' => $this['widgets']]);
-        }
     }
 
     /**
@@ -146,8 +142,10 @@ class Theme implements \ArrayAccess
      */
     public function registerLanguages(Translator $translator)
     {
-        foreach (glob($this->getPath().'/languages/*/*') as $file) {
-            if (preg_match('/languages\/(.+)\/(.+)\.(mo|po|php)$/', $file, $matches)) {
+        $files = glob($this->getPath().'/languages/*/*.{mo,po,php}', GLOB_BRACE) ?: [];
+
+        foreach ($files as $file) {
+            if (preg_match('/languages\/(.+)\/(.+)\.(.+)$/', $file, $matches)) {
 
                 list(, $locale, $domain, $format) = $matches;
 

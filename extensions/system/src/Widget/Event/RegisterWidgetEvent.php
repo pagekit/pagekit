@@ -12,7 +12,6 @@ class RegisterWidgetEvent extends Event implements \IteratorAggregate
      */
     protected $parameters = [];
 
-
     /**
      * Register a widget type.
      *
@@ -30,6 +29,14 @@ class RegisterWidgetEvent extends Event implements \IteratorAggregate
         }
 
         $this->parameters[$type->getId()] = $type;
+    }
+
+    /**
+     * @return TypeInterface[]
+     */
+    public function getTypes()
+    {
+        return $this->parameters;
     }
 
     /**

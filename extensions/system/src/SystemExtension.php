@@ -34,7 +34,7 @@ use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
 use Pagekit\Widget\Event\WidgetListener;
-use Pagekit\Widget\WidgetProvider;
+
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class SystemExtension extends Extension
@@ -89,10 +89,6 @@ class SystemExtension extends Extension
 
         $app['users'] = function() {
             return new UserProvider;
-        };
-
-        $app['widgets'] = function() {
-            return new WidgetProvider;
         };
 
         $app['permissions'] = function($app) {

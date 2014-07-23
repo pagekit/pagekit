@@ -444,7 +444,15 @@ class PagekitRequirements extends RequirementCollection
         }
 
         $path = $app['path'];
-        foreach (array($path, "$path/app/cache", "$path/app/logs", "$path/app/sessions", "$path/app/temp") as $dir) {
+        $writable_directories = ["$path/app/cache", "$path/app/logs", "$path/app/sessions", "$path/app/temp"];
+
+        if (!file_exists("$path/config.php")) {
+          // If config.php doesn't exist, we need the root directory of the app
+          // to be writable.
+          array_unshift($writable_directories, $path);
+        }
+
+        foreach ($writable_directories as $dir) {
             $this->addRequirement(
                 is_writable($dir),
                 "{$dir} directory must be writable",

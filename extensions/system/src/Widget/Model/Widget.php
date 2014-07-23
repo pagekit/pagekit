@@ -4,6 +4,8 @@ namespace Pagekit\Widget\Model;
 
 class Widget implements WidgetInterface
 {
+    use TypesTrait;
+
     /**
      * @var mixed
      */
@@ -174,5 +176,23 @@ class Widget implements WidgetInterface
         if (isset($this->settings)) {
             unset($this->settings[$name]);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function render($options = [])
+    {
+        $type = $this->getWidgetType($this->type);
+
+        return $type ? $type->render($this, $options) : '';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 }
