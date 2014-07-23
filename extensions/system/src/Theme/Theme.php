@@ -146,7 +146,11 @@ class Theme implements \ArrayAccess
      */
     public function registerLanguages(Translator $translator)
     {
-        foreach (glob($this->getPath().'/languages/*/*') as $file) {
+        if (!$files = glob($this->getPath().'/languages/*/*')) {
+            return;
+        }
+
+        foreach ($files as $file) {
             if (preg_match('/languages\/(.+)\/(.+)\.(mo|po|php)$/', $file, $matches)) {
 
                 list(, $locale, $domain, $format) = $matches;
