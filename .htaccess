@@ -2,15 +2,15 @@
 <IfModule mod_rewrite.c>
 	SetEnv HTTP_MOD_REWRITE On
 
-	#	If you get the error Internal Server Error (500) when accessing the website,
-	#	add the "#" from the line that begins "Options -MultiViews" below.
+	# If you get the error Internal Server Error (500) when accessing the website,
+	# add the "#" from the line that begins "Options -MultiViews" below.
 	Options -MultiViews
 
 	RewriteEngine On
 
-	#	If you are having problems with the rewrite rules, remove the "#" from the
-	#	line that begins "RewriteBase" below. You will also have to change the path
-	#	of the rewrite to reflect the path to your Pagekit installation.
+	# If you are having problems with the rewrite rules, remove the "#" from the
+	# line that begins "RewriteBase" below. You will also have to change the path
+	# of the rewrite to reflect the path to your Pagekit installation.
 	#RewriteBase /
 
 	RewriteCond %{REQUEST_FILENAME} -f [OR]
