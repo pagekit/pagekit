@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
-"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+"POT-Creation-Date: 2014-07-23 13:46+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
