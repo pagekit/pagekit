@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (installer, messages)\n"
-"POT-Creation-Date: 2013-11-06 15:49+0000\n"
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
 "PO-Revision-Date: 2014-07-22 15:53+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
@@ -14,120 +14,131 @@ msgstr ""
 "X-Generator: Poedit 1.6.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
-#: extensions/installer/theme/templates/template.blade.php:5
+#: extensions/installer/views/install.razr:5
+#: extensions/installer/src/Controller/InstallerController.php:41
 msgid "Pagekit Installer"
 msgstr "Установка Pagekit"
 
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
-msgid "Database connection failed!"
-msgstr "Не удалось подключиться к базе данных!"
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
-msgid "No database connection."
-msgstr "Нет соединения с базой данных."
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
-msgid "Can't write config."
-msgstr "Файл конфигурации не доступен для записи."
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
-msgid "DB user is missing required privileges."
-msgstr "У пользователя базы данных отсутствуют необходимые привилегии."
-
-#: extensions/installer/views/install.blade.php:13
+#: extensions/installer/views/install.razr:24
 msgid "Begin"
 msgstr "Начать"
 
-#: extensions/installer/views/install.blade.php:23
+#: extensions/installer/views/install.razr:34
 msgid "Connect database"
 msgstr "Подключение к базе данных"
 
-#: extensions/installer/views/install.blade.php:25
+#: extensions/installer/views/install.razr:36
 msgid "Enter your database connection details."
 msgstr "Введите данные для подключения к базе данных."
 
-#: extensions/installer/views/install.blade.php:30
+#: extensions/installer/views/install.razr:52
 msgid "Hostname"
 msgstr "Адрес хоста"
 
-#: extensions/installer/views/install.blade.php:33
+#: extensions/installer/views/install.razr:55
 msgid "Host cannot be blank."
 msgstr "Адрес хоста не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:41
+#: extensions/installer/views/install.razr:63
 msgid "User cannot be blank."
 msgstr "Имя пользователя не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:51
+#: extensions/installer/views/install.razr:75
 msgid "Database Name"
 msgstr "Имя базы данных"
 
-#: extensions/installer/views/install.blade.php:54
+#: extensions/installer/views/install.razr:78
 msgid "Database name cannot be blank."
 msgstr "Имя базы данных не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:59
+#: extensions/installer/views/install.razr:83
+#: extensions/installer/views/install.razr:92
 msgid "Table Prefix"
 msgstr "Префикс таблиц"
 
-#: extensions/installer/views/install.blade.php:64
-#: extensions/installer/views/install.blade.php:107
-#: extensions/installer/views/install.blade.php:140
+#: extensions/installer/views/install.razr:100
+#: extensions/installer/views/install.razr:145
+#: extensions/installer/views/install.razr:178
 msgid "Next"
 msgstr "Далее"
 
-#: extensions/installer/views/install.blade.php:75
+#: extensions/installer/views/install.razr:111
 msgid "Create your account"
 msgstr "Создайте ваш аккаунт"
 
-#: extensions/installer/views/install.blade.php:77
+#: extensions/installer/views/install.razr:113
 msgid "You will be the site administrator."
 msgstr "Вы будете администратором сайта."
 
-#: extensions/installer/views/install.blade.php:85
+#: extensions/installer/views/install.razr:121
 msgid "Username cannot be blank."
 msgstr "Имя пользователя не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:93
-msgid "Field must be a valid email adress."
-msgstr "Неверный формат email."
-
-#: extensions/installer/views/install.blade.php:102
+#: extensions/installer/views/install.razr:132
 msgid "Password cannot be blank."
 msgstr "Пароль не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:118
+#: extensions/installer/views/install.razr:140
+msgid "Field must be a valid email address."
+msgstr ""
+
+#: extensions/installer/views/install.razr:156
 msgid "Setup your site"
 msgstr "Информация о сайте"
 
-#: extensions/installer/views/install.blade.php:120
+#: extensions/installer/views/install.razr:158
 msgid "Enter your website details."
 msgstr "Введите название и описание сайта."
 
-#: extensions/installer/views/install.blade.php:128
+#: extensions/installer/views/install.razr:166
 msgid "Site name cannot be blank."
 msgstr "Имя сайта не может быть пустым."
 
-#: extensions/installer/views/install.blade.php:152
+#: extensions/installer/views/install.razr:190
 msgid "Installing Pagekit..."
 msgstr "Установка Pagekit..."
 
-#: extensions/installer/views/install.blade.php:160
+#: extensions/installer/views/install.razr:198
 msgid "Installation failed!"
 msgstr "Ошибка установки!"
 
-#: extensions/installer/views/install.blade.php:169
+#: extensions/installer/views/install.razr:207
 msgid "Retry"
 msgstr "Повторить"
 
-#: extensions/installer/views/install.blade.php:175
+#: extensions/installer/views/install.razr:213
 msgid "Finished!"
 msgstr "Готово!"
 
-#: extensions/installer/views/install.blade.php:182
+#: extensions/installer/views/install.razr:220
 msgid "Login now"
 msgstr "Войти сейчас"
+
+#: extensions/installer/src/Controller/InstallerController.php:83
+msgid "Database connection failed!"
+msgstr "Не удалось подключиться к базе данных!"
+
+#: extensions/installer/src/Controller/InstallerController.php:86
+msgid "Database access denied!"
+msgstr ""
+
+#: extensions/installer/src/Controller/InstallerController.php:109
+msgid "No database connection."
+msgstr "Нет соединения с базой данных."
+
+#: extensions/installer/src/Controller/InstallerController.php:168
+msgid "Can't write config."
+msgstr "Файл конфигурации не доступен для записи."
+
+#: extensions/installer/src/Controller/InstallerController.php:181
+msgid "Database error: %error%"
+msgstr "Ошибка базы данных: %error%"
+
+#~ msgid "DB user is missing required privileges."
+#~ msgstr "У пользователя базы данных отсутствуют необходимые привилегии."
+
+#~ msgid "Field must be a valid email adress."
+#~ msgstr "Неверный формат email."
 
 #~ msgid "Database created!"
 #~ msgstr "База данных создана!"
@@ -137,6 +148,3 @@ msgstr "Войти сейчас"
 
 #~ msgid "Database connection failed - Access denied!"
 #~ msgstr "Не удалось подключиться к базе данных - Доступ запрещен!"
-
-#~ msgid "Database error: %error%"
-#~ msgstr "Ошибка базы данных: %error%"
