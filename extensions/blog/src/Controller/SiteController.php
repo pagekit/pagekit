@@ -90,7 +90,7 @@ class SiteController extends Controller
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
 
                 if ($diff->invert) {
-                    throw new Exception(__('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s+$diff->i*60+$diff->h*3600]));
+                    throw new Exception(__('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s + $diff->i * 60 + $diff->h * 3600]));
                 }
             }
 
@@ -163,7 +163,7 @@ class SiteController extends Controller
         }
 
         $user  = $this['user'];
-        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created', $this->extension->getConfig('comments.order', 'ASC'));
+        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created', $this->extension->getConfig('comments.order'));
 
         if ($user->isAuthenticated()) {
             $query->orWhere(function($query) use ($user) {
@@ -174,7 +174,7 @@ class SiteController extends Controller
         $this['db.em']->related($post, 'comments', $query);
 
         if ($post->getCommentStatus() && $this->extension->getConfig('comments.autoclose')) {
-            $days = $this->extension->getConfig('comments.autoclose.days', 0);
+            $days = $this->extension->getConfig('comments.autoclose.days');
             if ($days && $post->getDate() < new \DateTime("-{$days} day")) {
                 $post->setCommentStatus(false);
                 $this->posts->save($post);
@@ -210,7 +210,7 @@ class SiteController extends Controller
 
         $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
 
-        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getConfig('feed.limit', 20))->orderBy('date', 'DESC')->get() as $post) {
+        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getConfig('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
 
             $item = $feed->createNewItem();
 

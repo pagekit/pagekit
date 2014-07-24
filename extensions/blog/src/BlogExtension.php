@@ -29,7 +29,7 @@ class BlogExtension extends Extension
 
         $app->on('system.init', function() use ($app) {
 
-            $this->config += $app['option']->get("{$this->name}:config", []);
+            $this->config += $app['option']->get("{$this->name}:config", []) + $this->getConfig('defaults');
 
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/site');
 
@@ -44,10 +44,6 @@ class BlogExtension extends Extension
     {
         if ($version = $this['migrator']->create('extension://blog/migrations', $this['option']->get('blog:version'))->run()) {
             $this['option']->set('blog:version', $version);
-        }
-
-        if (!$config = $this['option']->get("{$this->name}:config")) {
-            $this['option']->set("{$this->name}:config", $this->getConfig('defaults'));
         }
     }
 
