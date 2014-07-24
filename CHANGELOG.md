@@ -16,3 +16,4 @@
 - Updated mod_rewrite check
 - Updated widgets now rendering themeselves
 - Remove the need for the app root to be writable if the config already exists.
+- Refactored comments settings in blog
