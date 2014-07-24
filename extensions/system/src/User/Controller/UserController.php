@@ -15,6 +15,8 @@ use Pagekit\User\Model\RoleInterface;
  */
 class UserController extends Controller
 {
+    const USERS_PER_PAGE = 20;
+
     /**
      * @var User
      */
@@ -41,10 +43,10 @@ class UserController extends Controller
     }
 
     /**
-     * @Request({"filter": "array"})
+     * @Request({"filter": "array", "page":"int"})
      * @Response("extension://system/views/admin/user/index.razr")
      */
-    public function indexAction($filter = null)
+    public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
             $this['session']->set('user.filter', $filter);
@@ -52,7 +54,7 @@ class UserController extends Controller
             $filter = $this['session']->get('user.filter', []);
         }
 
-        $query = $this->users->query()->related('roles')->orderBy('name');
+        $query = $this->users->query();
 
         if (isset($filter['status'])) {
             if (is_numeric($filter['status'])) {
@@ -94,10 +96,22 @@ class UserController extends Controller
             }
         }
 
-        $users = $query->get();
+        $limit = self::USERS_PER_PAGE;
+        $count = $query->count();
+        $total = ceil($count / $limit);
+        $page  = max(0, min($total - 1, $page));
+
+        $users = $query->offset($page * $limit)->limit($limit)->related('roles')->orderBy('name')->get();
         $roles = $this->getRoles();
 
-        return ['head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter];
+        if ($this['request']->isXmlHttpRequest()) {
+            return $this['response']->json([
+                'table' => $this['view']->render('extension://system/views/admin/user/table.razr', ['users' => $users]),
+                'total' => $total
+            ]);
+        }
+
+        return ['head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter, 'total' => $total];
     }
 
     /**
@@ -209,43 +223,35 @@ class UserController extends Controller
 
     /**
      * @Request({"ids": "int[]"}, csrf=true)
+     * @Response("json")
      */
     public function deleteAction($ids = [])
     {
+        if (in_array($this->user->getId(), $ids)) {
+            return ['message' => __('Unable to delete yourself.'), 'error' => true];
+        }
+
         foreach ($ids as $key => $id) {
-
-            if ($id == $this->user->getId()) {
-                $this['message']->warning(__('Unable to delete self.'));
-                unset($ids[$key]);
-                continue;
-            }
-
             if ($user = $this->users->find($id)) {
                 $this->users->delete($user);
             }
         }
 
-        if ($ids) {
-            $this['message']->success(_c('{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
-        }
-
-        return $this->redirect('@system/user');
+        return ['message' => _c('{1} User deleted.|]1,Inf[ Users deleted.', count($ids))];
     }
 
     /**
      * @Request({"status": "int", "ids": "int[]"}, csrf=true)
+     * @Response("json")
      */
     public function statusAction($status, $ids = [])
     {
+        if ($status == User::STATUS_BLOCKED && in_array($this->user->getId(), $ids)) {
+            return ['message' => __('Unable to block yourself.'), 'error' => true];
+        }
+
         foreach ($ids as $id) {
             if ($user = $this->users->find($id)) {
-
-                $self = $this->user->getId() == $user->getId();
-
-                if ($self && $status == User::STATUS_BLOCKED) {
-                    $this['message']->warning(__('Unable to block yourself.'));
-                    continue;
-                }
 
                 $user->setActivation('');
 
@@ -255,7 +261,13 @@ class UserController extends Controller
             }
         }
 
-        return $this->redirect('@system/user');
+        if ($status == User::STATUS_BLOCKED) {
+            $message = _c('{1} User blocked.|]1,Inf[ Users blocked.', count($ids));
+        } else {
+            $message = _c('{1} User activated.|]1,Inf[ Users activated.', count($ids));
+        }
+
+        return ['message' => $message];
     }
 
     /**

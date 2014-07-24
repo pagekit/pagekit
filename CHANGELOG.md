@@ -4,6 +4,7 @@
 
 - Added Russian translation
 - Added French translation
+- Added pagination in user manager
 - Fixed comments ordering (blog)
 - Fixed comments auto approval (blog)
 - Fixed finder (Windows)

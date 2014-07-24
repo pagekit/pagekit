@@ -1,0 +1,40 @@
+@if ($users)
+<table class="uk-table uk-table-hover uk-table-middle js-table-users">
+    <thead>
+        <tr>
+            <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
+            <th colspan="2">@trans('User')</th>
+            <th class="pk-table-width-100 uk-text-center">@trans('Status')</th>
+            <th class="pk-table-width-200">@trans('Email')</th>
+            <th class="pk-table-width-100">@trans('Roles')</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+        <tr>
+            <td><input class="js-select" type="checkbox" name="ids[]" value="@( $user.id )"></td>
+            <td class="pk-table-width-minimum">
+                <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="" data-avatar="@( $user.email )">
+            </td>
+            <td class="uk-text-nowrap">
+                <a href="@url('@system/user/edit', ['id' => $user.id])">@( $user.username )</a>
+                <div class="uk-text-muted">@( $user.name )</div>
+            </td>
+            <td class="uk-text-center">
+                @if ( $user.isNew )
+                <a href="#" class="uk-icon-circle" data-action="@url('@system/user/status', ['ids[]' => $user.id, 'status' => 1])" title="@trans('New')"></a>
+                @else
+                <a href="#" class="uk-icon-circle uk-text-@( $user.status ? 'success' : 'danger' )" data-action="@url('@system/user/status', ['ids[]' => $user.id, 'status' => $user.status ? 0 : 1])" title="@( $user.statusText )"></a>
+                @endif
+            </td>
+            <td>
+                <a href="mailto:@( $user.email )">@( $user.email )</a>@raw( $app.option.get('system:user.require_verification') && $user.get('verified') ? ' <i title="'.__('Verified Email Address').'" class="uk-icon-check"></i>' : '' )
+            </td>
+            <td>
+                @( implode(', ', array_filter($user.roles, function($role) { return $role.id != 2; })) )
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif

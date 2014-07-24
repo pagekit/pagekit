@@ -1,4 +1,4 @@
-require(['jquery','uikit!pagination', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
+require(['jquery', 'uikit!pagination', 'rowselect', 'domReady!'], function($, uikit, RowSelect) {
 
     var form         = $('#js-pages'),
         showOnSelect = form.find('.js-show-on-select').addClass('uk-hidden'),
