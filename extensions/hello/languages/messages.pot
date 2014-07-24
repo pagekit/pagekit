@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 1.0.0 (hello, messages)\n"
-"POT-Creation-Date: 2013-11-10 19:28+0000\n"
+"Project-Id-Version: Pagekit 0.8.3 (hello, messages)\n"
+"POT-Creation-Date: 2014-07-23 13:46+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,15 +9,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extensions/hello/src/Pagekit/Hello/Controller/DefaultController.php:17
-msgid "Hello %name%"
-msgstr ""
-
-#: extensions/hello/src/Pagekit/Hello/Controller/DefaultController.php:27
-msgid "This Settings page is just for demonstration purposes."
-msgstr ""
-
-#: extensions/hello/src/Pagekit/Hello/HelloMenu.php:24
+#: extensions/hello/views/admin/link.razr:4
+#: extensions/hello/src/HelloLink.php:22
 msgid "Hello World"
+msgstr ""
+
+#: extensions/hello/views/admin/settings.razr:9
+msgid "Message"
+msgstr ""
+
+#: extensions/hello/views/admin/settings.razr:15
+msgid "This settings page is just for demonstration purposes."
+msgstr ""
+
+#: extensions/hello/views/greet.razr:3
+msgid "{0}: No names|one: One name|more: %names% names"
+msgstr ""
+
+#: extensions/hello/views/greet.razr:7
+msgid "Hello %name%!"
+msgstr ""
+
+#: extensions/hello/views/widget.razr:1
+#: extensions/hello/src/HelloWidget.php:23
+msgid "Hello Widget!"
+msgstr ""
+
+#: extensions/hello/src/Controller/SiteController.php:37
+#: extensions/hello/src/Controller/SiteController.php:43
+msgid "View article"
+msgstr ""
+
+#: extensions/hello/src/HelloWidget.php:31
+msgid "Hello Demo Widget"
+msgstr ""
+
+#: extensions/hello/src/HelloWidget.php:47
+msgid "Hello Widget Form."
 msgstr ""
 

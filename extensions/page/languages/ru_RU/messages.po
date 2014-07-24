@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
-"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+"POT-Creation-Date: 2014-07-23 12:51+0000\n"
 "PO-Revision-Date: 2014-07-22 15:54+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
@@ -23,10 +23,6 @@ msgstr "Страница"
 msgid "- Select Page -"
 msgstr "- Выберите страницу -"
 
-#: extensions/page/views/admin/pages/edit.razr:14
-msgid "Enter Title"
-msgstr "Введите заголовок"
-
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
 msgid "Add Page"
@@ -43,6 +39,10 @@ msgstr "Отменить публикацию"
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
 msgstr "Страницы не найдены."
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
+msgstr "Введите заголовок"
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
@@ -104,14 +104,6 @@ msgstr "Страница не найдена!"
 msgid "Unable to access this page!"
 msgstr "Не удается получить доступ к этой странице!"
 
-#: extensions/page/src/Entity/Page.php:99
-msgid "Unpublished"
-msgstr "Неопубликованно"
-
-#: extensions/page/src/Entity/Page.php:100
-msgid "Published"
-msgstr "Опубликованно"
-
 #: extensions/page/src/PageExtension.php:27
 msgid ""
 "You've made some changes! Leaving the page without saving will discard all "
@@ -119,3 +111,11 @@ msgid ""
 msgstr ""
 "Вы внесли изменения! Покинув страницу без сохранения вы потеряете все "
 "изменения."
+
+#: extensions/page/src/Entity/Page.php:99
+msgid "Unpublished"
+msgstr "Неопубликованно"
+
+#: extensions/page/src/Entity/Page.php:100
+msgid "Published"
+msgstr "Опубликованно"

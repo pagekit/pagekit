@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 14:52+0000\n"
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
 "PO-Revision-Date: 2013-10-18 11:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,120 +14,130 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
-#: extensions/installer/theme/templates/template.blade.php:5
+#: extensions/installer/views/install.razr:5
+#: extensions/installer/src/Controller/InstallerController.php:41
 msgid "Pagekit Installer"
 msgstr "Pagekit Installation"
 
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
-#, fuzzy
-msgid "Database connection failed!"
-msgstr "Keine Datenbankverbindung."
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
-msgid "No database connection."
-msgstr "Keine Datenbankverbindung."
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
-msgid "Can't write config."
-msgstr "Konfiguration kann nicht geschrieben werden."
-
-#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
-msgid "DB user is missing required privileges."
-msgstr "Der Datenbankbenutzer hat nicht die erforderlichen Rechte."
-
-#: extensions/installer/views/install.blade.php:13
+#: extensions/installer/views/install.razr:24
 msgid "Begin"
 msgstr "Los geht's!"
 
-#: extensions/installer/views/install.blade.php:23
+#: extensions/installer/views/install.razr:34
 msgid "Connect database"
 msgstr "Verbindung zur Datenbank"
 
-#: extensions/installer/views/install.blade.php:25
+#: extensions/installer/views/install.razr:36
 msgid "Enter your database connection details."
 msgstr "Zugangsdaten zur Datenbank eingeben."
 
-#: extensions/installer/views/install.blade.php:30
+#: extensions/installer/views/install.razr:52
 msgid "Hostname"
 msgstr "Host"
 
-#: extensions/installer/views/install.blade.php:33
+#: extensions/installer/views/install.razr:55
 msgid "Host cannot be blank."
 msgstr "Host darf nicht leer sein"
 
-#: extensions/installer/views/install.blade.php:41
+#: extensions/installer/views/install.razr:63
 msgid "User cannot be blank."
 msgstr "Benutzer darf nicht leer sein."
 
-#: extensions/installer/views/install.blade.php:51
+#: extensions/installer/views/install.razr:75
 msgid "Database Name"
 msgstr "Datenbankname"
 
-#: extensions/installer/views/install.blade.php:54
+#: extensions/installer/views/install.razr:78
 msgid "Database name cannot be blank."
 msgstr "Datenbankname darf nicht leer sein."
 
-#: extensions/installer/views/install.blade.php:59
+#: extensions/installer/views/install.razr:83
+#: extensions/installer/views/install.razr:92
 msgid "Table Prefix"
 msgstr "Tabellen Präfix"
 
-#: extensions/installer/views/install.blade.php:64
-#: extensions/installer/views/install.blade.php:107
-#: extensions/installer/views/install.blade.php:140
+#: extensions/installer/views/install.razr:100
+#: extensions/installer/views/install.razr:145
+#: extensions/installer/views/install.razr:178
 msgid "Next"
 msgstr "Weiter"
 
-#: extensions/installer/views/install.blade.php:75
+#: extensions/installer/views/install.razr:111
 msgid "Create your account"
 msgstr "Benutzerkonto einrichten"
 
-#: extensions/installer/views/install.blade.php:77
+#: extensions/installer/views/install.razr:113
 msgid "You will be the site administrator."
 msgstr "Du wirst automatisch Seitenadministrator."
 
-#: extensions/installer/views/install.blade.php:85
+#: extensions/installer/views/install.razr:121
 msgid "Username cannot be blank."
 msgstr "Benutzername darf nicht leer sein."
 
-#: extensions/installer/views/install.blade.php:93
-msgid "Field must be a valid email adress."
-msgstr "Bitte eine gültige E-Mail-Adresse eingeben."
-
-#: extensions/installer/views/install.blade.php:102
+#: extensions/installer/views/install.razr:132
 msgid "Password cannot be blank."
 msgstr "Passwort darf nicht leer sein."
 
-#: extensions/installer/views/install.blade.php:118
+#: extensions/installer/views/install.razr:140
+msgid "Field must be a valid email address."
+msgstr ""
+
+#: extensions/installer/views/install.razr:156
 msgid "Setup your site"
 msgstr "Richte Deine Seite ein"
 
-#: extensions/installer/views/install.blade.php:120
+#: extensions/installer/views/install.razr:158
 #, fuzzy
 msgid "Enter your website details."
 msgstr "Details zu Deiner Website eintragen."
 
-#: extensions/installer/views/install.blade.php:128
+#: extensions/installer/views/install.razr:166
 msgid "Site name cannot be blank."
 msgstr "Seitenname darf nicht leer sein."
 
-#: extensions/installer/views/install.blade.php:152
+#: extensions/installer/views/install.razr:190
 msgid "Installing Pagekit..."
 msgstr "Pagekit wird installiert..."
 
-#: extensions/installer/views/install.blade.php:160
+#: extensions/installer/views/install.razr:198
 msgid "Installation failed!"
 msgstr "Installation fehlgeschlagen."
 
-#: extensions/installer/views/install.blade.php:169
+#: extensions/installer/views/install.razr:207
 msgid "Retry"
 msgstr "Erneut versuchen"
 
-#: extensions/installer/views/install.blade.php:175
+#: extensions/installer/views/install.razr:213
 msgid "Finished!"
 msgstr "Fertig!"
 
-#: extensions/installer/views/install.blade.php:182
+#: extensions/installer/views/install.razr:220
 msgid "Login now"
 msgstr "Jetzt einloggen"
 
+#: extensions/installer/src/Controller/InstallerController.php:83
+#, fuzzy
+msgid "Database connection failed!"
+msgstr "Keine Datenbankverbindung."
+
+#: extensions/installer/src/Controller/InstallerController.php:86
+msgid "Database access denied!"
+msgstr ""
+
+#: extensions/installer/src/Controller/InstallerController.php:109
+msgid "No database connection."
+msgstr "Keine Datenbankverbindung."
+
+#: extensions/installer/src/Controller/InstallerController.php:168
+msgid "Can't write config."
+msgstr "Konfiguration kann nicht geschrieben werden."
+
+#: extensions/installer/src/Controller/InstallerController.php:181
+msgid "Database error: %error%"
+msgstr ""
+
+#~ msgid "DB user is missing required privileges."
+#~ msgstr "Der Datenbankbenutzer hat nicht die erforderlichen Rechte."
+
+#~ msgid "Field must be a valid email adress."
+#~ msgstr "Bitte eine gültige E-Mail-Adresse eingeben."

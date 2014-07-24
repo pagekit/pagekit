@@ -1,115 +1,116 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
-"POT-Creation-Date: 2014-07-23 12:51+0000\n"
-"PO-Revision-Date: 2014-07-22 18:38+0200\n"
-"Last-Translator: Kehet <kehet@kehet.com>\n"
-"Language-Team: Kehet\n"
-"Language: fi_FI\n"
+"Project-Id-Version: Pagekit 1.0.0 (page, messages)\n"
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: Lucas C.S <lucas_z2011@hotmail.com>\n"
+"Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #: extensions/page/views/admin/link/page.razr:2
 #: extensions/page/src/PageLink.php:22
 msgid "Page"
-msgstr "Sivu"
+msgstr "Pagina"
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
-msgstr "- Valitse sivu -"
+msgstr "- Selecionar Pagina -"
 
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
 msgid "Add Page"
-msgstr "Lisää sivu"
+msgstr "Adicionar pagina"
 
 #: extensions/page/views/admin/pages/index.razr:15
 msgid "Publish"
-msgstr "Julkaise"
+msgstr "Publicar"
 
 #: extensions/page/views/admin/pages/index.razr:16
 msgid "Unpublish"
-msgstr "Kumoa julkaisu"
+msgstr "Despublicar"
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
-msgstr "Sivuja ei löytynyt"
+msgstr "Nenhuma pagina encontrada."
 
 #: extensions/page/views/admin/pages/edit.razr:14
 msgid "Enter Title"
-msgstr "Anna otsikko"
+msgstr "Digitar Titulo"
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
-msgstr "Sivut"
+msgstr "Paginas"
 
 #: extensions/page/src/Controller/PageController.php:95
 msgid "Invalid page id."
-msgstr "Virheellinen sivun tunniste"
+msgstr "ID da pagina invalido."
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
-msgstr "Muokkaa sivua"
+msgstr "Editar pagina"
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
-msgstr "Sivun URL ei saatavilla"
+msgstr "Url da pagina não esta disponivel."
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page saved."
-msgstr "Sivu tallennettu"
+msgstr "Pagina salva"
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page created."
-msgstr "Sivu luotu"
+msgstr "Pagina criada."
 
 #: extensions/page/src/Controller/PageController.php:148
 msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
-msgstr "{0} Sivuja ei poistettu|{1} Sivu poistettu|]1,Inf[ Sivut poistettu"
+msgstr ""
+"{0} Nenhuma pagina deletada.|{1} pagina deletada.|]1,Inf[ paginas deletadas."
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"
-msgstr "%title% (Kopio)"
+msgstr "%title% (Copiar)"
 
 #: extensions/page/src/Controller/PageController.php:170
 msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
-msgstr "{0} Sivuja ei kopioitu|{1} Sivu kopioitu|]1,Inf[ Sivut kopioitu"
+msgstr ""
+"{0} Nenhuma pagina copiada.|{1} pagina copiada.|]1,Inf[ paginas copiadas."
 
 #: extensions/page/src/Controller/PageController.php:187
 msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
-msgstr "{0} Sivuja ei julkaistu|{1} Sivu julkaistu|]1,Inf[ Sivut julkaistu"
+msgstr ""
+"{0} Nenhuma pagina publicada.|{1} pagina publicada.|]1,Inf[ paginas "
+"publicadas."
 
 #: extensions/page/src/Controller/PageController.php:189
 msgid ""
 "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
 msgstr ""
-"{0} Sivujen julkaisuja ei kumottu|{1} Sivun julkaisu kumottu|]1,Inf[ Sivujen "
-"julkaisut kumottu"
+"{0} Nenhuma pagina despublicada.|{1} pagina despublicada.|]1,Inf[ paginas "
+"despublicadas."
 
 #: extensions/page/src/Controller/SiteController.php:36
 msgid "Page not found!"
-msgstr "Sivua ei löydy!"
+msgstr "Pagina não encontrada!"
 
 #: extensions/page/src/Controller/SiteController.php:45
 msgid "Unable to access this page!"
-msgstr "Sivuun ei ole pääsyä!"
+msgstr "Não e possível acessar essa pagina!"
 
 #: extensions/page/src/PageExtension.php:27
 msgid ""
 "You've made some changes! Leaving the page without saving will discard all "
 "changes."
 msgstr ""
-"Olet tehnyt muokkauksia! Jos lähdet sivulta tallentamatta, muutoksesi "
-"kumotaan."
+"Você fez algumas mudanças! Deixando a página sem salvar irá descartar todas "
+"as alterações."
 
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
-msgstr "Ei julkinen"
+msgstr "Despublicado"
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
-msgstr "Julkaistu"
+msgstr "Publicado"
