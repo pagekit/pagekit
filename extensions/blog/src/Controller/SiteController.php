@@ -163,7 +163,7 @@ class SiteController extends Controller
         }
 
         $user  = $this['user'];
-        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED]);
+        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created', $this->extension->getConfig('comments.order', 'ASC'));
 
         if ($user->isAuthenticated()) {
             $query->orWhere(function($query) use ($user) {
