@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-22 19:29+0200\n"
+"PO-Revision-Date: 2014-07-24 17:01+0200\n"
 "Last-Translator: Kehet <kehet@kehet.com>\n"
 "Language-Team: Kehet\n"
 "MIME-Version: 1.0\n"
@@ -1118,7 +1118,7 @@ msgstr "Uudelleennimeä"
 
 #: extensions/system/views/tmpl/finder.main.razr:28
 msgid "Home"
-msgstr "Kotikansio"
+msgstr "Etusivu"
 
 #: extensions/system/views/tmpl/finder.table.razr:7
 msgid "Size"
@@ -3754,7 +3754,7 @@ msgstr "Hyväksy rekisteröityminen sivustolle %site%!"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:45
 msgid "Reset"
-msgstr "Tyhjennä"
+msgstr "Palauta"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:65
 msgid "Enter a username or email address."
@@ -3854,7 +3854,7 @@ msgstr "Käyttäjätunnuksesi on estetty"
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account has not been activated."
-msgstr "Käyt"
+msgstr "Käyttäjätunnustasi ei ole aktivoitu"
 
 #: extensions/system/src/User/Event/LoginAttemptListener.php:30
 msgid "Slow down a bit."
