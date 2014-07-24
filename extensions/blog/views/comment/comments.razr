@@ -1,9 +1,9 @@
 @script('blog.post-comments', 'extension://blog/assets/js/comment/post.js', 'jquery')
 
-<div class="js-comments uk-margin">
+<div id="comments" class="js-comments uk-margin">
 
-	@if ($post.commentCount)
-    <h2 id="comments" class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h2>
+    @if ($post.commentCount)
+    <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h2>
     <ul class="uk-comment-list">
 
         @foreach ($post.commentsTree as $child)
