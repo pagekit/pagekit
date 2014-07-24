@@ -22,7 +22,7 @@ return [
 
     'settings' => [
 
-        'system' => '%NAME%/admin/settings.razr'
+        'system' => 'extension://%NAME%/views/admin/settings.razr'
 
     ]
 
