@@ -87,10 +87,10 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Options')</span>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="post[data][title]" value="1"@( $post.get('title', 1) ? ' checked' : '')> @trans('Show Title')</label>
+                        <label><input type="checkbox" name="post[data][title]" value="1"@( $post.get('title') ? ' checked' : '')> @trans('Show Title')</label>
                     </div>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="post[data][markdown]" value="1"@( $post.get('markdown', 0) ? ' checked' : '')> @trans('Enable Markdown')</label>
+                        <label><input type="checkbox" name="post[data][markdown]" value="1"@( $post.get('markdown') ? ' checked' : '')> @trans('Enable Markdown')</label>
                     </div>
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="post[comment_status]" value="1"@( $post.commentstatus ? ' checked' : '')> @trans('Enable Comments')</label>

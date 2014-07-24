@@ -13,6 +13,7 @@ use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\Framework\Database\Event\EntityEvent;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -45,6 +46,13 @@ class SiteController extends Controller
         $this->extension = $extension;
         $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
         $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
+
+        $autoclose = $this->extension->getConfig('comments.autoclose') ? $this->extension->getConfig('comments.autoclose.days') : 0;
+
+        $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) use ($autoclose) {
+            $post = $event->getEntity();
+            $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
+        });
     }
 
     /**
@@ -52,18 +60,15 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get();
-
-        foreach ($posts as $post) {
+        $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) {
+            $post = $event->getEntity();
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
-        }
-
-        $feed = $this->getFeed();
+        });
 
         return [
             'head.title' => __('Blog'),
-            'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $feed->getMIMEType()],
-            'posts' => $posts,
+            'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $this->getFeed()->getMIMEType()],
+            'posts' => $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get(),
             'config' => $this->extension->getConfig()
         ];
     }
@@ -98,7 +103,7 @@ class SiteController extends Controller
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
-            if (!$post->getCommentStatus()) {
+            if (!$post->isCommentable()) {
                 throw new Exception(__('Comments have been disabled for this post.'));
             }
 
@@ -172,14 +177,6 @@ class SiteController extends Controller
         }
 
         $this['db.em']->related($post, 'comments', $query);
-
-        if ($post->getCommentStatus() && $this->extension->getConfig('comments.autoclose')) {
-            $days = $this->extension->getConfig('comments.autoclose.days');
-            if ($days && $post->getDate() < new \DateTime("-{$days} day")) {
-                $post->setCommentStatus(false);
-                $this->posts->save($post);
-            }
-        }
 
         $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
 

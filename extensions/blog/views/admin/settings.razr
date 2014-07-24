@@ -61,6 +61,24 @@
                         </div>
                     </div>
 
+                    <div class="uk-form-row">
+                        <span class="uk-form-label">@trans('Default post settings')</span>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <p class="uk-form-controls-condensed">
+                                <input type="hidden" name="config[posts.show_title]" value="0">
+                                <label><input type="checkbox" name="config[posts.show_title]" value="1" @($config['posts.show_title'] ? 'checked' : '')> @trans('Show Title')</label>
+                            </p>
+                            <p class="uk-form-controls-condensed">
+                                <input type="hidden" name="config[posts.markdown_enabled]" value="0">
+                                <label><input type="checkbox" name="config[posts.markdown_enabled]" value="1" @($config['posts.markdown_enabled'] ? 'checked' : '')> @trans('Enable Markdown')</label>
+                            </p>
+                            <p class="uk-form-controls-condensed">
+                                <input type="hidden" name="config[posts.comments_enabled]" value="0">
+                                <label><input type="checkbox" name="config[posts.comments_enabled]" value="1" @($config['posts.comments_enabled'] ? 'checked' : '')> @trans('Enable Comments')</label>
+                            </p>
+                        </div>
+                    </div>
+
                 </li>
                 <li>
 
@@ -68,10 +86,6 @@
                     <div class="uk-form-row">
                         <span class="uk-form-label">@trans('Comments')</span>
                         <div class="uk-form-controls uk-form-controls-text">
-                            <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[comments.enabled]" value="0">
-                                <label><input type="checkbox" name="config[comments.enabled]" value="1" @($config['comments.enabled'] ? 'checked' : '')> @trans('Enable comments.')</label>
-                            </p>
                             <p class="uk-form-controls-condensed">
                                 <input type="hidden" name="config[comments.require_name_and_email]" value="0">
                                 <label><input type="checkbox" name="config[comments.require_name_and_email]" value="1" @($config['comments.require_name_and_email'] ? 'checked' : '')> @trans('Require name and e-mail.')</label>

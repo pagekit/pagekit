@@ -13,8 +13,10 @@
     </ul>
     @endif
 
-    @if ($post.commentStatus)
+    @if ($post.isCommentable)
     @include('extension://blog/views/comment/respond.razr')
+    @else
+    @trans('Comments are closed.')
     @endif
 
 </div>
