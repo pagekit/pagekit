@@ -212,24 +212,23 @@ class UserController extends Controller
      */
     public function deleteAction($ids = [])
     {
-        $deletedIds = [];
-        foreach ($ids as $id) {
+        foreach ($ids as $key => $id) {
 
             if ($id == $this->user->getId()) {
                 $this['message']->warning(__('Unable to delete self.'));
+                unset($ids[$key]);
                 continue;
             }
 
             if ($user = $this->users->find($id)) {
                 $this->users->delete($user);
-                $deletedIds[] = $id;
             }
         }
 
-	if(count($deletedIds) > 0 || count($ids) === 0) {
-        	$this['message']->success(_c('{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted.', count($deletedIds)));
+        if ($ids) {
+            $this['message']->success(_c('{1} User deleted.|]1,Inf[ Users deleted.', count($ids)));
         }
-        
+
         return $this->redirect('@system/user');
     }
 
