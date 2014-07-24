@@ -182,7 +182,7 @@ class SystemListener extends EventSubscriber
     {
         if ($this['user']->hasAccess('system: manage storage | system: manage storage read only')) {
             $mode = $this['user']->hasAccess('system: manage storage') ? 'w' : 'r';
-            $event->path('/^'.preg_quote($this['path'].$this['config']->get('app.storage'), '/').'($|\/.*)/', $mode);
+            $event->path('/^'.preg_quote(strtr($this['path'].$this['config']->get('app.storage'), '\\', '/'), '/').'($|\/.*)/', $mode);
         }
     }
 
