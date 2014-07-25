@@ -1,9 +1,8 @@
 # Changelog
 
-### WIP
+### 0.8.4 (July 25, 2014)
 
-- Added Russian translation
-- Added French translation
+- Added Finnish, French, Spanish, Russian translation
 - Added pagination in user manager
 - Fixed comments ordering (blog)
 - Fixed comments auto approval (blog)
