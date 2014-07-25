@@ -2,6 +2,7 @@
 
 namespace Pagekit\Blog\Controller;
 
+use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Component\Database\ORM\Repository;
@@ -14,7 +15,10 @@ use Pagekit\User\Entity\UserRepository;
  */
 class PostController extends Controller
 {
-    const POSTS_PER_PAGE = 20;
+    /**
+     * @var BlogExtension
+     */
+    protected $extension;
 
     /**
      * @var Repository
@@ -34,8 +38,9 @@ class PostController extends Controller
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(BlogExtension $extension)
     {
+        $this->extension = $extension;
         $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
         $this->roles = $this['users']->getRoleRepository();
         $this->users = $this['users']->getUserRepository();
@@ -65,7 +70,7 @@ class PostController extends Controller
             });
         }
 
-        $limit = self::POSTS_PER_PAGE;
+        $limit = $this->extension->getConfig('posts.posts_per_page');
         $count = $query->count();
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
@@ -100,7 +105,9 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->setUser($this['user']);
-        $post->setCommentStatus(true);
+        $post->setCommentStatus((bool) $this->extension->getConfig('posts.comments_enabled'));
+        $post->set('title', $this->extension->getConfig('posts.show_title'));
+        $post->set('markdown', $this->extension->getConfig('posts.markdown_enabled'));
 
         return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
     }

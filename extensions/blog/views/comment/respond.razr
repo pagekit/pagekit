@@ -4,7 +4,7 @@
 
     @if ($app.user.hasAccess('blog: post comments'))
 
-        <form class="uk-form" method="post" action="@url('@blog/site/comment', ['post_id' => $post.id])">
+        <form class="uk-form uk-form-stacked" method="post" action="@url('@blog/site/comment', ['post_id' => $post.id])">
 
             @if ($app.user.authenticated)
 
@@ -12,21 +12,30 @@
 
             @else
 
-                <p>@trans('You are commenting as guest.')</p>
+                <p>@trans('Your email address will not be published.')</p>
 
                 @set( $req = $config['comments.require_name_and_email'] )
 
                 <div class="uk-form-row">
-                    <input type="text" name="comment[author]" placeholder="@trans('Name')@( $req ? ' *' : '')"@( $req ? ' required' : '')>
+                    <label for="form-name" class="uk-form-label">@trans('Name')</label>
+                    <div class="uk-form-controls">
+                        <input id="form-name" class="uk-form-width-large" type="text" name="comment[author]"@( $req ? ' required' : '')>
+                    </div>
                 </div>
                 <div class="uk-form-row">
-                    <input type="email" name="comment[email]" placeholder="@trans('E-mail')@( $req ? ' *' : '')"@($req ? ' required' : '')>
+                    <label for="form-email" class="uk-form-label">@trans('Email')</label>
+                    <div class="uk-form-controls">
+                        <input id="form-email" class="uk-form-width-large" type="email" name="comment[email]"@($req ? ' required' : '')>
+                    </div>
                 </div>
 
             @endif
 
             <div class="uk-form-row">
-                <textarea class="uk-form-width-large" name="comment[content]" required></textarea>
+                <label for="form-comment" class="uk-form-label">@trans('Comment')</label>
+                <div class="uk-form-controls">
+                    <textarea id="form-comment" class="uk-form-width-large" name="comment[content]" required rows="10"></textarea>
+                </div>
             </div>
 
             <p>

@@ -36,7 +36,7 @@ class FileAccessEvent extends Event
      */
     public function path($pattern, $mode = 'r')
     {
-        switch($mode) {
+        switch ($mode) {
 
             case 'r':
             case 'read':

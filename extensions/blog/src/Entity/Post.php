@@ -73,6 +73,11 @@ class Post
      */
     protected $comments;
 
+    /**
+     * @var bool
+     */
+    protected $commentable;
+
     public function getId()
     {
         return $this->id;
@@ -188,6 +193,16 @@ class Post
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    public function isCommentable()
+    {
+        return $this->commentable;
+    }
+
+    public function setCommentable($commentable)
+    {
+        $this->commentable = $commentable;
     }
 
     /**

@@ -174,7 +174,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $config = $this['option']->get("$name:config", []);
+            $config = $extension->getConfig();
             $event  = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
 
             return $this['view']->render($tmpl, ['extension' => $extension, 'config' => $event->getConfig()]);

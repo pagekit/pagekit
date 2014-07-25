@@ -1,9 +1,9 @@
 @script('blog.post-comments', 'extension://blog/assets/js/comment/post.js', 'jquery')
 
-<div class="js-comments uk-margin">
+<div id="comments" class="js-comments uk-margin">
 
+    @if ($post.commentCount)
     <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h2>
-
     <ul class="uk-comment-list">
 
         @foreach ($post.commentsTree as $child)
@@ -11,9 +11,12 @@
         @endforeach
 
     </ul>
+    @endif
 
-    @if ($post.commentStatus)
+    @if ($post.isCommentable)
     @include('extension://blog/views/comment/respond.razr')
+    @else
+    @trans('Comments are closed.')
     @endif
 
 </div>

@@ -1,0 +1,1036 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Pagekit\n"
+"Language: fr\n"
+
+#: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
+#: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/settings.razr:7
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/widgets/edit.razr:7
+msgid "Close"
+msgstr "Fermer"
+
+#: extensions/system/theme/templates/error.razr:4
+msgid "Error"
+msgstr "Erreur"
+
+#: extensions/system/theme/templates/login.razr:27
+#: extensions/system/views/admin/user/edit.razr:36
+#: extensions/system/views/user/login.razr:6
+#: extensions/system/views/user/mails/reset.razr:11
+#: extensions/system/views/user/registration.razr:8
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: extensions/system/theme/templates/login.razr:31
+#: extensions/system/views/admin/user/edit.razr:57
+#: extensions/system/views/user/login.razr:13
+#: extensions/system/views/user/registration.razr:29
+msgid "Password"
+msgstr "Mot de passe"
+
+#: extensions/system/theme/templates/login.razr:35
+#: extensions/system/views/user/login.razr:3
+#: extensions/system/views/widgets/login/login.razr:10
+#: extensions/system/src/System/Controller/SystemController.php:48
+#: extensions/system/src/User/Controller/AuthController.php:48
+#: extensions/system/src/User/Link/User.php:46
+#: extensions/system/src/User/Widget/LoginWidget.php:25
+msgid "Login"
+msgstr "Connexion"
+
+#: extensions/system/theme/templates/login.razr:38
+#: extensions/system/views/user/login.razr:24
+#: extensions/system/views/widgets/login/login.razr:14
+msgid "Remember Me"
+msgstr "Se souvenir de moi"
+
+#: extensions/system/theme/templates/login.razr:39
+#: extensions/system/views/widgets/login/login.razr:15
+msgid "Forgot Password?"
+msgstr "Mot de passe oublié ?"
+
+#: extensions/system/theme/templates/login.razr:50
+#: extensions/system/views/user/reset/request.razr:8
+msgid "Username or Email"
+msgstr "Nom d'utilisateur ou Email"
+
+#: extensions/system/theme/templates/login.razr:53
+msgid "Reset Password"
+msgstr "Réinitialiser mon mot de passe"
+
+#: extensions/system/theme/templates/maintenance.razr:23
+#: extensions/system/views/admin/settings/settings.razr:49
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: extensions/system/theme/templates/migration.razr:23
+#: extensions/system/src/System/Controller/MigrationController.php:17
+msgid "Update Pagekit"
+msgstr "Mettre à jour Pagekit"
+
+#: extensions/system/theme/templates/migration.razr:24
+msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
+msgstr "Pagekit a bien été mis à jour ! Avant de vous laisser partir, nous devons mettre à jour la base de donnée."
+
+#: extensions/system/theme/templates/migration.razr:26
+#: extensions/system/views/admin/settings/index.razr:54
+#: extensions/system/views/admin/settings/index.razr:55
+#: extensions/system/views/admin/settings/update.razr:11
+#: extensions/system/views/tmpl/image.modal.razr:24
+#: extensions/system/views/tmpl/link.modal.razr:12
+#: extensions/system/views/tmpl/linkpicker.modal.razr:6
+#: extensions/system/views/tmpl/marketplace.details.razr:9
+#: extensions/system/views/tmpl/package.updates.razr:25
+#: extensions/system/views/tmpl/video.modal.razr:23
+#: extensions/system/src/System/Controller/UpdateController.php:39
+msgid "Update"
+msgstr "Mise à jour"
+
+#: extensions/system/theme/templates/template.razr:22
+#: extensions/system/theme/templates/template.razr:39
+msgid "Pagekit"
+msgstr "Pagekit"
+
+#: extensions/system/theme/templates/template.razr:64
+#: extensions/system/theme/templates/template.razr:132
+msgid "Visit Site"
+msgstr "Voir le site"
+
+#: extensions/system/theme/templates/template.razr:65
+#: extensions/system/theme/templates/template.razr:133
+#: extensions/system/views/admin/extensions/table.razr:23
+#: extensions/system/views/admin/settings/index.razr:11
+#: extensions/system/views/admin/settings/index.razr:12
+#: extensions/system/views/admin/themes/table.razr:21
+#: extensions/system/views/admin/widgets/edit.razr:14
+#: extensions/system/views/tmpl/image.replace.razr:14
+#: extensions/system/views/tmpl/video.replace.razr:14
+#: extensions/system/languages/messages.php:24
+#: extensions/system/src/System/Controller/SettingsController.php:70
+#: extensions/system/src/System/Controller/SystemController.php:32
+msgid "Settings"
+msgstr "Paramètres"
+
+#: extensions/system/theme/templates/template.razr:66
+#: extensions/system/theme/templates/template.razr:134
+#: extensions/system/views/widgets/login/logout.razr:2
+msgid "Logout"
+msgstr "Deconnexion"
+
+#: extensions/system/theme/templates/template.razr:113
+#: extensions/system/views/admin/settings/index.razr:20
+#: extensions/system/views/admin/settings/index.razr:21
+#: extensions/system/views/admin/settings/index.razr:88
+#: extensions/system/views/admin/settings/info.razr:61
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:50
+msgid "Extensions"
+msgstr "Extensions"
+
+#: extensions/system/views/admin/aliases/edit.razr:6
+#: extensions/system/views/admin/dashboard/edit.razr:4
+#: extensions/system/views/admin/menu/index.razr:82
+#: extensions/system/views/admin/menu/item.edit.razr:6
+#: extensions/system/views/admin/settings/settings.razr:6
+#: extensions/system/views/admin/user/edit.razr:6
+#: extensions/system/views/admin/user/role.razr:90
+#: extensions/system/views/admin/widgets/edit.razr:6
+#: extensions/system/views/user/profile.razr:46
+msgid "Save"
+msgstr "Enregistrer"
+
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/index.razr:83
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/index.razr:134
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/user/role.razr:91
+#: extensions/system/views/admin/widgets/edit.razr:7
+#: extensions/system/views/tmpl/image.modal.razr:25
+#: extensions/system/views/tmpl/image.modal.razr:33
+#: extensions/system/views/tmpl/link.modal.razr:13
+#: extensions/system/views/tmpl/linkpicker.modal.razr:7
+#: extensions/system/views/tmpl/package.upload.razr:36
+#: extensions/system/views/tmpl/video.modal.razr:24
+#: extensions/system/views/tmpl/video.modal.razr:32
+msgid "Cancel"
+msgstr "Annuler"
+
+#: extensions/system/views/admin/aliases/edit.razr:10
+msgid "Please select a source."
+msgstr "Veuillez sélectionner une source."
+
+#: extensions/system/views/admin/aliases/edit.razr:13
+#: extensions/system/views/admin/aliases/index.razr:21
+msgid "Alias"
+msgstr "Alias"
+
+#: extensions/system/views/admin/aliases/edit.razr:16
+msgid "Use a relative path and don't add a trailing slash. For example: <code>about</code>"
+msgstr "Utilisez un chemin relatif et n'ajoutez pas de slash. Par exemple : <code>apropos</code>"
+
+#: extensions/system/views/admin/aliases/edit.razr:20
+#: extensions/system/views/admin/aliases/index.razr:22
+msgid "Source"
+msgstr "Source"
+
+#: extensions/system/views/admin/aliases/index.razr:7
+msgid "Add Alias"
+msgstr "Ajouter un alias"
+
+#: extensions/system/views/admin/aliases/index.razr:8
+#: extensions/system/views/admin/dashboard/settings.razr:18
+#: extensions/system/views/admin/extensions/table.razr:43
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/menu/index.razr:35
+#: extensions/system/views/admin/themes/table.razr:27
+#: extensions/system/views/admin/user/index.razr:9
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/admin/widgets/index.razr:19
+#: extensions/system/views/tmpl/finder.main.razr:11
+#: extensions/system/views/tmpl/image.replace.razr:15
+#: extensions/system/views/tmpl/video.replace.razr:15
+msgid "Delete"
+msgstr "Supprimer"
+
+#: extensions/system/views/admin/aliases/index.razr:11
+#: extensions/system/views/admin/extensions/index.razr:61
+#: extensions/system/views/admin/themes/index.razr:61
+#: extensions/system/views/admin/user/index.razr:51
+#: extensions/system/views/admin/widgets/index.razr:56
+#: extensions/system/views/tmpl/finder.main.razr:17
+msgid "Search"
+msgstr "Rechercher"
+
+#: extensions/system/views/admin/aliases/index.razr:41
+msgid "No URL aliases found."
+msgstr "Aucun alias d'URL trouvé."
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:2
+#: extensions/system/views/admin/menu/index.razr:53
+#: extensions/system/views/admin/menu/item.edit.razr:11
+#: extensions/system/views/admin/settings/settings.razr:31
+#: extensions/system/views/admin/widgets/edit.razr:25
+#: extensions/system/views/admin/widgets/index.razr:65
+#: extensions/system/views/tmpl/link.modal.razr:5
+msgid "Title"
+msgstr "Titre"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:9
+#: extensions/system/views/admin/link/link.types.razr:2
+#: extensions/system/views/admin/menu/index.razr:55
+#: extensions/system/views/tmpl/image.modal.razr:12
+#: extensions/system/views/tmpl/video.modal.razr:15
+msgid "URL"
+msgstr "URL"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:16
+msgid "Number of Posts"
+msgstr "Nombre d'articles"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:27
+msgid "Post Content"
+msgstr "Contenu de l'article"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:30
+msgid "Don't show"
+msgstr "Cacher"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:33
+msgid "Show on all posts"
+msgstr "Afficher sur tous les articles"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:36
+msgid "Only show on first post."
+msgstr "Afficher seulement sur le premier article."
+
+#: extensions/system/views/admin/dashboard/settings.razr:8
+#: extensions/system/views/admin/widgets/index.razr:9
+#: extensions/system/src/System/Controller/DashboardController.php:85
+#: extensions/system/src/Widget/Controller/WidgetsController.php:70
+msgid "Add Widget"
+msgstr "Ajouter un widget"
+
+#: extensions/system/views/admin/dashboard/settings.razr:24
+msgid "Widget"
+msgstr "Widget"
+
+#: extensions/system/views/admin/dashboard/settings.razr:25
+#: extensions/system/views/admin/link/link.types.razr:8
+#: extensions/system/views/admin/menu/item.edit.razr:18
+#: extensions/system/views/admin/widgets/index.razr:68
+msgid "Type"
+msgstr "Type"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:2
+msgid "User Type"
+msgstr "Type d'utilisateur"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Logged in"
+msgstr "Connecté"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Last registered"
+msgstr "Derniers inscrits"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:12
+msgid "Number of Users"
+msgstr "Nombre d'utilisateurs"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:2
+msgid "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
+msgstr "{0} Aucun utilisateur enregistré|{1} Dernier utilisateur enregistré|]1,Inf[ %users% derniers utilisateurs enregistrés"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:4
+msgid "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in"
+msgstr "{0} Aucun utilisateur connecté|{1} %users% utilisateur connecté|]1,Inf[ %users% utilisateurs connectés"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:4
+msgid "Location"
+msgstr "Localisation"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:10
+msgid "Enter the name of the city you want to get weather information for."
+msgstr "Renseignez la ville dont vous souhaitez récupérer la météo"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:15
+msgid "Unit"
+msgstr "Unité"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:18
+msgid "Metric"
+msgstr "Métrique"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:21
+msgid "Imperial"
+msgstr "Impériale"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:12
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:23
+msgid "Weather"
+msgstr "Météo"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:13
+msgid "Unable to retrieve weather data."
+msgstr "Impossible de récupérer les données météo."
+
+#: extensions/system/views/admin/extensions/index.razr:12
+#: extensions/system/views/admin/themes/index.razr:12
+#: extensions/system/views/tmpl/marketplace.details.razr:5
+msgid "Installed"
+msgstr "Installées"
+
+#: extensions/system/views/admin/extensions/index.razr:13
+#: extensions/system/views/admin/themes/index.razr:13
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: extensions/system/views/admin/extensions/index.razr:14
+#: extensions/system/views/admin/themes/index.razr:14
+#: extensions/system/views/tmpl/marketplace.details.razr:8
+#: extensions/system/views/tmpl/package.upload.razr:35
+msgid "Install"
+msgstr "Installer"
+
+#: extensions/system/views/admin/extensions/index.razr:16
+#: extensions/system/views/admin/themes/index.razr:16
+msgid "All"
+msgstr "Tout"
+
+#: extensions/system/views/admin/extensions/index.razr:34
+#: extensions/system/views/admin/themes/index.razr:34
+msgid "An error occurred in retrieving update information. Please try again later."
+msgstr "Une erreur est survenu durant la mise à jour des informations. Veuillez réessayer plus tard."
+
+#: extensions/system/views/admin/extensions/index.razr:38
+msgid "No extension updates found."
+msgstr "Aucune mise à jour trouvée."
+
+#: extensions/system/views/admin/extensions/index.razr:44
+#: extensions/system/views/admin/themes/index.razr:44
+msgid "Install an extension"
+msgstr "Installer une extension"
+
+#: extensions/system/views/admin/extensions/index.razr:47
+#: extensions/system/views/admin/themes/index.razr:47
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Droparea"
+msgstr "Zone de dépôt"
+
+#: extensions/system/views/admin/extensions/index.razr:48
+#: extensions/system/views/admin/themes/index.razr:48
+msgid "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Déposez vos fichier ici ou <a class=\"uk-form-file\">sélectionnez en un<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+
+#: extensions/system/views/admin/extensions/index.razr:67
+msgid "No extensions found."
+msgstr "Aucune extension trouvée."
+
+#: extensions/system/views/admin/extensions/index.razr:68
+#: extensions/system/views/admin/themes/index.razr:68
+msgid "Cannot connect to the marketplace. Please try again later."
+msgstr "Connexion au marketplace impossible. Veuillez réessayer plus tard."
+
+#: extensions/system/views/admin/extensions/table.razr:4
+#: extensions/system/views/admin/user/edit.razr:43
+#: extensions/system/views/tmpl/package.updates.razr:5
+#: extensions/system/views/user/profile.razr:8
+#: extensions/system/views/user/registration.razr:15
+msgid "Name"
+msgstr "Nom"
+
+#: extensions/system/views/admin/extensions/table.razr:5
+#: extensions/system/views/admin/settings/info.razr:49
+#: extensions/system/views/admin/settings/info.razr:85
+#: extensions/system/views/tmpl/package.upload.razr:17
+msgid "Version"
+msgstr "Version"
+
+#: extensions/system/views/admin/extensions/table.razr:6
+#: extensions/system/views/admin/menu/index.razr:54
+#: extensions/system/views/admin/menu/item.edit.razr:37
+#: extensions/system/views/admin/settings/info.razr:104
+#: extensions/system/views/admin/user/edit.razr:75
+#: extensions/system/views/admin/user/index.razr:63
+#: extensions/system/views/admin/widgets/edit.razr:73
+#: extensions/system/views/admin/widgets/index.razr:66
+msgid "Status"
+msgstr "Statut\n"
+""
+
+#: extensions/system/views/admin/extensions/table.razr:20
+#: extensions/system/views/admin/themes/table.razr:16
+#: extensions/system/views/tmpl/marketplace.table.razr:14
+msgid "Details"
+msgstr "Détails"
+
+#: extensions/system/views/admin/extensions/table.razr:25
+#: extensions/system/views/admin/settings/info.razr:5
+#: extensions/system/languages/messages.php:28
+#: extensions/system/src/User/Controller/PermissionController.php:34
+msgid "Permissions"
+msgstr "Droits"
+
+#: extensions/system/views/admin/extensions/table.razr:37
+#: extensions/system/views/admin/menu/item.edit.razr:40
+#: extensions/system/views/admin/widgets/edit.razr:76
+#: extensions/system/views/admin/widgets/index.razr:38
+#: extensions/system/src/Menu/Entity/Item.php:124
+#: extensions/system/src/Widget/Entity/Widget.php:98
+msgid "Enabled"
+msgstr "Activée"
+
+#: extensions/system/views/admin/extensions/table.razr:39
+#: extensions/system/views/admin/menu/item.edit.razr:43
+#: extensions/system/views/admin/widgets/edit.razr:77
+#: extensions/system/views/admin/widgets/index.razr:39
+#: extensions/system/src/Menu/Entity/Item.php:123
+#: extensions/system/src/Widget/Entity/Widget.php:97
+msgid "Disabled"
+msgstr "Désactivée"
+
+#: extensions/system/views/admin/menu/index.razr:13
+#: extensions/system/views/admin/user/role.razr:16
+msgid "Edit"
+msgstr "Modifier"
+
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Are you sure?"
+msgstr "Êtes-vous sûr ?"
+
+#: extensions/system/views/admin/menu/index.razr:25
+msgid "Add Menu"
+msgstr "Ajouter un menu"
+
+#: extensions/system/views/admin/menu/index.razr:34
+msgid "Add Item"
+msgstr "Ajouter un lien"
+
+#: extensions/system/views/admin/menu/index.razr:38
+#: extensions/system/views/admin/user/index.razr:12
+#: extensions/system/views/admin/widgets/index.razr:22
+msgid "More"
+msgstr "Plus"
+
+#: extensions/system/views/admin/menu/index.razr:41
+#: extensions/system/views/admin/themes/table.razr:26
+#: extensions/system/views/admin/widgets/index.razr:25
+msgid "Enable"
+msgstr "Activer"
+
+#: extensions/system/views/admin/menu/index.razr:42
+#: extensions/system/views/admin/widgets/index.razr:26
+msgid "Disable"
+msgstr "Désactiver"
+
+#: extensions/system/views/admin/menu/index.razr:64
+msgid "No menu found."
+msgstr "Aucun menu trouvé."
+
+#: extensions/system/views/admin/menu/index.razr:79
+msgid "Enter Menu Name"
+msgstr "Entrez le nom du menu"
+
+#: extensions/system/views/admin/settings/index.razr:4
+#: extensions/system/views/admin/settings/info.razr:2
+#: extensions/system/views/admin/settings/settings.razr:19
+#: extensions/system/views/admin/settings/settings.razr:207
+#: extensions/system/src/System/Link/System.php:20
+msgid "System"
+msgstr "Système"
+
+#: extensions/system/views/admin/settings/index.razr:29
+#: extensions/system/views/admin/settings/index.razr:30
+#: extensions/system/src/Theme/Controller/ThemesController.php:65
+msgid "Themes"
+msgstr "Thèmes"
+
+#: extensions/system/views/admin/settings/index.razr:37
+#: extensions/system/views/admin/settings/index.razr:38
+#: extensions/system/src/System/Controller/DashboardController.php:46
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: extensions/system/views/admin/settings/index.razr:45
+#: extensions/system/views/admin/settings/index.razr:46
+#: extensions/system/views/admin/settings/settings.razr:225
+#: extensions/system/src/System/Controller/SystemController.php:94
+msgid "Storage"
+msgstr "Stockage"
+
+#: extensions/system/views/admin/settings/index.razr:63
+#: extensions/system/views/admin/settings/index.razr:64
+#: extensions/system/src/System/Controller/AliasController.php:46
+msgid "URL Aliases"
+msgstr "Alias d'URL"
+
+#: extensions/system/views/admin/settings/index.razr:71
+#: extensions/system/views/admin/settings/index.razr:72
+msgid "Info"
+msgstr "Infos"
+
+#: extensions/system/views/admin/settings/index.razr:78
+#: extensions/system/views/admin/settings/index.razr:79
+msgid "Clear Cache"
+msgstr "Vider le cache"
+
+#: extensions/system/views/admin/settings/index.razr:107
+msgid "Select caches to clear:"
+msgstr "Sélectionnez les caches à vider"
+
+#: extensions/system/views/admin/settings/index.razr:114
+msgid "System Cache"
+msgstr "Système de cache"
+
+#: extensions/system/views/admin/settings/index.razr:128
+msgid "Temporary Files"
+msgstr "Fichiers temporaires"
+
+#: extensions/system/views/admin/settings/index.razr:133
+msgid "Clear"
+msgstr "Vider"
+
+#: extensions/system/views/admin/settings/settings.razr:17
+#: extensions/system/views/admin/settings/settings.razr:142
+msgid "Localization"
+msgstr "Localisation"
+
+#: extensions/system/views/admin/settings/settings.razr:18
+#: extensions/system/views/admin/settings/settings.razr:181
+#: extensions/system/views/admin/user/index.razr:62
+#: extensions/system/src/User/Link/User.php:22
+msgid "User"
+msgstr "Utilisateur"
+
+#: extensions/system/views/admin/settings/settings.razr:43
+msgid "Front Page"
+msgstr "Page d'accueil"
+
+#: extensions/system/views/admin/settings/settings.razr:52
+msgid "Put the site offline and show the offline message."
+msgstr "Mettre le site hors ligne et afficher un message de maintenance."
+
+#: extensions/system/views/admin/settings/settings.razr:57
+msgid "Offline Message"
+msgstr "Message de maintenance."
+
+#: extensions/system/views/admin/settings/settings.razr:68
+msgid "From Email"
+msgstr "Email expediteur"
+
+#: extensions/system/views/admin/settings/settings.razr:74
+msgid "From Name"
+msgstr "Nom expediteur"
+
+#: extensions/system/views/admin/settings/settings.razr:109
+msgid "SMTP Password"
+msgstr "Mot de passe SMTP"
+
+#: extensions/system/views/admin/settings/settings.razr:127
+msgid "Please enable the PHP Open SSL extension."
+msgstr "Veuillez activer l'extension PHP Open SSL."
+
+#: extensions/system/views/admin/settings/settings.razr:135
+msgid "Send Test Email"
+msgstr "Envoyer un email de test"
+
+#: extensions/system/views/admin/settings/settings.razr:144
+msgid "Site Locale"
+msgstr "Langue du site"
+
+#: extensions/system/views/admin/settings/settings.razr:154
+msgid "Admin Locale"
+msgstr "Langue de l'administration"
+
+#: extensions/system/views/admin/settings/settings.razr:164
+msgid "Time Zone"
+msgstr "Fuseau horaire"
+
+#: extensions/system/views/admin/settings/settings.razr:183
+#: extensions/system/views/user/registration.razr:5
+#: extensions/system/src/User/Link/User.php:47
+msgid "Registration"
+msgstr "Inscriptions"
+
+#: extensions/system/views/admin/settings/settings.razr:186
+msgid "Adminstrators only"
+msgstr "Administrateurs seulement"
+
+#: extensions/system/views/admin/settings/settings.razr:189
+msgid "Guests"
+msgstr "Visiteurs"
+
+#: extensions/system/views/admin/settings/settings.razr:192
+msgid "Guests, but administrator approval is required"
+msgstr "Visiteurs, avec approbation de l'administateur"
+
+#: extensions/system/views/admin/settings/settings.razr:197
+msgid "Verification"
+msgstr "Vérification"
+
+#: extensions/system/views/admin/settings/settings.razr:200
+msgid "Require e-mail verification when a guest creates an account."
+msgstr "Envoyer un mail de confirmation quand un visiteur s'inscrit."
+
+#: extensions/system/views/admin/settings/settings.razr:209
+msgid "API Key"
+msgstr "Clé API"
+
+#: extensions/system/views/admin/settings/settings.razr:211
+msgid "Enter your API key"
+msgstr "Entrez votre clé API"
+
+#: extensions/system/views/admin/settings/settings.razr:241
+msgid "Developer"
+msgstr "Développeur"
+
+#: extensions/system/views/admin/settings/settings.razr:244
+msgid "Enable debug mode"
+msgstr "Activer le mode debug"
+
+#: extensions/system/views/admin/settings/settings.razr:247
+msgid "Enable debug toolbar"
+msgstr "Activer la barre d'outil de debug"
+
+#: extensions/system/views/admin/settings/settings.razr:250
+msgid "Please enable the SQLite database extension."
+msgstr "Veuillez activer l'extension SQLite database"
+
+#: extensions/system/views/admin/themes/index.razr:38
+msgid "No theme updates found."
+msgstr "Aucune mise à jour de thème trouvée."
+
+#: extensions/system/views/admin/themes/index.razr:67
+msgid "No themes found."
+msgstr "Aucun thème disponible."
+
+#: extensions/system/views/admin/themes/table.razr:11
+#: extensions/system/src/User/Entity/User.php:100
+msgid "Active"
+msgstr "Actif"
+
+#: extensions/system/views/admin/user/edit.razr:19
+#: extensions/system/views/admin/user/edit.razr:111
+#: extensions/system/views/admin/user/index.razr:27
+#: extensions/system/views/admin/user/index.razr:81
+msgid "New"
+msgstr "Nouveau"
+
+#: extensions/system/views/admin/user/edit.razr:61
+#: extensions/system/views/user/profile.razr:22
+msgid "Change password"
+msgstr "Changer de mot de passe"
+
+#: extensions/system/views/admin/user/edit.razr:87
+#: extensions/system/views/admin/user/index.razr:65
+#: extensions/system/languages/messages.php:29
+#: extensions/system/src/User/Controller/RoleController.php:47
+msgid "Roles"
+msgstr "Rôles"
+
+#: extensions/system/views/admin/user/index.razr:8
+#: extensions/system/src/User/Controller/UserController.php:113
+msgid "Add User"
+msgstr "Ajouter un utilisateur"
+
+#: extensions/system/views/admin/user/index.razr:26
+#: extensions/system/views/admin/widgets/index.razr:37
+msgid "- Status -"
+msgstr "- Statut -"
+
+#: extensions/system/views/admin/user/index.razr:34
+msgid "- Role -"
+msgstr "- Rôle -"
+
+#: extensions/system/views/admin/user/index.razr:41
+msgid "- Permission -"
+msgstr "- Droit -"
+
+#: extensions/system/views/admin/user/index.razr:98
+msgid "No user found."
+msgstr "Aucun utilisateur."
+
+#: extensions/system/views/admin/user/permission.razr:11
+#: extensions/system/views/admin/user/role.razr:43
+msgid "Permission"
+msgstr "Droit"
+
+#: extensions/system/views/admin/user/role.razr:28
+msgid "Add Role"
+msgstr "Ajouter un rôle"
+
+#: extensions/system/views/admin/user/role.razr:87
+msgid "Enter Role Name"
+msgstr "Entrez le nom du rôle"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "New Name"
+msgstr "Nouveau nom"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Folder Name"
+msgstr "Nom de dossier"
+
+#: extensions/system/views/tmpl/finder.main.razr:9
+msgid "Add Folder"
+msgstr "Ajouter un dossier"
+
+#: extensions/system/views/tmpl/finder.main.razr:12
+msgid "Rename"
+msgstr "Renommer"
+
+#: extensions/system/views/tmpl/finder.table.razr:7
+msgid "Size"
+msgstr "Taille"
+
+#: extensions/system/views/tmpl/finder.table.razr:8
+msgid "Modified"
+msgstr "Dernière modification"
+
+#: extensions/system/views/user/login.razr:13
+msgid "(Forgot Password?)"
+msgstr "(Mot de passe oublié?)"
+
+#: extensions/system/views/user/mails/reset.razr:9
+msgid "Someone requested that the password be reset for the following account"
+msgstr "Une demande de réinitialisation de mot de passe a été faite pour ce compte."
+
+#: extensions/system/views/user/mails/reset.razr:13
+msgid "To reset your password, visit the following address"
+msgstr "Pour réinitialiser votre mot de passe, veuillez vous rendre à cette adresse"
+
+#: extensions/system/views/user/mails/verification.razr:11
+#: extensions/system/views/user/mails/welcome.razr:9
+msgid "Hello %name%"
+msgstr "Bonjour %name%"
+
+#: extensions/system/views/user/mails/welcome.razr:12
+msgid "Login with the username:"
+msgstr "Se connecter avec le nom d'utilisateur:"
+
+#: extensions/system/views/user/profile.razr:26
+msgid "Current Password"
+msgstr "Mot de passe courant"
+
+#: extensions/system/views/user/profile.razr:36
+msgid "New Password"
+msgstr "Nouveau mot de passe"
+
+#: extensions/system/views/user/reset/confirm.razr:5
+msgid "Password confirmation"
+msgstr "Confirmation mot de passe"
+
+#: extensions/system/views/user/reset/confirm.razr:8
+msgid "Enter your new password below."
+msgstr "Entrez votre nouveau mot de passe ci-dessous."
+
+#: extensions/system/views/user/reset/request.razr:3
+msgid "Forgot password"
+msgstr "Mot de passe oublié"
+
+#: extensions/system/views/user/reset/request.razr:5
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr "Veuillez entrer votre nom d'utilisateur ou votre email. Vous allez recevoir un email incluant un lien afin de créer un nouveau mot de passe."
+
+#: extensions/system/views/widgets/login/login.razr:4
+msgid "username"
+msgstr "Nom d'utilisateur"
+
+#: extensions/system/views/widgets/login/login.razr:7
+msgid "password"
+msgstr "mot de passe"
+
+#: extensions/system/views/widgets/text/edit.razr:5
+msgid "Enable Markdown"
+msgstr "Activer les Markdown"
+
+#: extensions/system/languages/messages.php:27
+#: extensions/system/src/User/Controller/UserController.php:100
+#: extensions/system/src/User/Dashboard/UserWidget.php:23
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: extensions/system/languages/messages.php:36
+msgid "Manage themes"
+msgstr "Gérer les thèmes"
+
+#: extensions/system/languages/messages.php:39
+msgid "Apply system updates"
+msgstr "Appliquer les mises à jour système"
+
+#: extensions/system/languages/messages.php:40
+msgid "Access admin area"
+msgstr "Accès à l'administration"
+
+#: extensions/system/languages/messages.php:41
+msgid "Access system settings"
+msgstr "Accès aux paramètres système"
+
+#: extensions/system/languages/messages.php:42
+msgid "Manage user permissions"
+msgstr "Gérer les droits utilisateur"
+
+#: extensions/system/languages/messages.php:43
+msgid "Manage users"
+msgstr "Gérer les utilisateurs"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:80
+msgid "Unable to enable extension \"%name%\"."
+msgstr "Impossible d'activer l'extension \"%name%\"."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:91
+msgid "Extension enabled."
+msgstr "Extension activée."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:113
+msgid "Extension \"%name%\" has not been loaded."
+msgstr "L'extension \"%name%\" n'a pas été chargée."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:146
+msgid "Unable to uninstall extension \"%name%\"."
+msgstr "Impossible de désinstaller l'extension \"%name%\"."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:58
+msgid "Invalid menu name."
+msgstr "Nom de menu incorrect."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:66
+msgid "Invalid menu name. \"%name%\" is already in use."
+msgstr "Nom de menu incorrect."
+
+#: extensions/system/src/System/Controller/DashboardController.php:67
+msgid "Dashboard Settings"
+msgstr "Paramètres du dashboard"
+
+#: extensions/system/src/System/Controller/FinderController.php:22
+#: extensions/system/src/System/Controller/FinderController.php:69
+#: extensions/system/src/System/Controller/FinderController.php:99
+#: extensions/system/src/System/Controller/FinderController.php:127
+#: extensions/system/src/System/Controller/FinderController.php:155
+msgid "Permission denied."
+msgstr "Accès refusé."
+
+#: extensions/system/src/System/Controller/FinderController.php:61
+#: extensions/system/src/System/Controller/FinderController.php:91
+msgid "Invalid file name."
+msgstr "Nom de fichier incorrect."
+
+#: extensions/system/src/System/Controller/FinderController.php:106
+msgid "Renamed."
+msgstr "Renommé."
+
+#: extensions/system/src/System/Controller/FinderController.php:110
+msgid "Unable to rename."
+msgstr "Impossible de renommer."
+
+#: extensions/system/src/System/Controller/PackageController.php:124
+msgid "Package \"%name%\" installed."
+msgstr "Package \"%name\"% installé."
+
+#: extensions/system/src/System/Controller/PackageController.php:131
+#: extensions/system/src/System/Controller/UpdateController.php:71
+msgid "Invalid API key."
+msgstr "Clé API incorrecte."
+
+#: extensions/system/src/System/Controller/SystemController.php:104
+msgid "System Information"
+msgstr "Informations système"
+
+#: extensions/system/src/System/Event/FrontpageListener.php:18
+msgid "No Frontpage assigned."
+msgstr "Aucune page d'accueil définie."
+
+#: extensions/system/src/System/Link/System.php:48
+msgid "Frontpage"
+msgstr "Page d'accueil"
+
+#: extensions/system/src/System/Link/System.php:50
+#: extensions/system/src/User/Controller/RegistrationController.php:46
+msgid "User Registration"
+msgstr "Inscription utilisateur"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:90
+msgid "Unable to enable theme \"%name%\"."
+msgstr "Impossible d'activer le thème \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:98
+msgid "Theme enabled."
+msgstr "Thème activé."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:115
+msgid "Unable to uninstall theme \"%name%\"."
+msgstr "Impossible de désinstaller le thème \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:121
+msgid "Theme uninstalled."
+msgstr "Thème désinstallé avec succès."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:137
+#: extensions/system/src/Theme/Controller/ThemesController.php:161
+msgid "Invalid theme."
+msgstr "Thème incorrect."
+
+#: extensions/system/src/Theme/Event/WidgetListener.php:30
+msgid "Theme"
+msgstr "Thème"
+
+#: extensions/system/src/User/Controller/AuthController.php:76
+msgid "Invalid username or password."
+msgstr "Nom d'utilisateur ou mot de passe incorrect."
+
+#: extensions/system/src/User/Controller/PermissionController.php:48
+msgid "Permissions saved!"
+msgstr "Droits enregistrés"
+
+#: extensions/system/src/User/Controller/ProfileController.php:66
+msgid "Name is invalid."
+msgstr "Nom incorrect."
+
+#: extensions/system/src/User/Controller/ProfileController.php:80
+msgid "Invalid Password."
+msgstr "Mot de passe incorrect."
+
+#: extensions/system/src/User/Controller/ProfileController.php:84
+msgid "New Password is invalid."
+msgstr "Nouveau mot de passe incorrect."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:75
+msgid "Name required."
+msgstr "Nom requis."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:79
+#: extensions/system/src/User/Controller/UserController.php:144
+msgid "Password required."
+msgstr "Mot de passe requis."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:83
+#: extensions/system/src/User/Controller/UserController.php:161
+msgid "Username is invalid."
+msgstr "Le nom d'utilisateur est incorrect."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:91
+#: extensions/system/src/User/Controller/UserController.php:171
+msgid "Username not available."
+msgstr "Nom d'utilisateur déjà pris."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:134
+msgid "Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you."
+msgstr "Votre compte a bien été créé. Validez votre inscription en cliquant sur le lien du mail de confirmation qui vous a été envoyé."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:139
+msgid "Your user account has been created and is pending approval by the site administrator."
+msgstr "Votre compte a bien été créé mais dois faire l'objet d'une validation par l'administrateur du site."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:180
+#: extensions/system/src/User/Controller/ResetPasswordController.php:116
+msgid "Invalid key."
+msgstr "Clé incorrecte."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:189
+msgid "Your email has been verified. Once an administrator approves your account, you will be notified by email."
+msgstr "Votre email a bien été vérifié. Dès que l'administrateur aura approuvé votre inscription, vous en serez notifié par mail."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:234
+msgid "Unable to send verification link."
+msgstr "Impossibilité d'envoyer le lien de vérification."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:65
+msgid "Enter a username or email address."
+msgstr "Entrez un nom d'utilisateur ou une adresse mail."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:71
+msgid "Invalid username or email."
+msgstr "Nom d'utilisateur ou email incorrect."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:75
+#: extensions/system/src/User/Controller/ResetPasswordController.php:121
+msgid "Your account has not been activated or is blocked."
+msgstr "Votre compte n'a pas été activé ou a été bloqué."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:91
+msgid "Unable to send confirmation link."
+msgstr "Impossibilité d'envoyer le lien de confirmation."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:140
+msgid "Invalid password."
+msgstr "Mot de passe incorrect."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:148
+msgid "Your password has been reset."
+msgstr "Votre mot de passe a été réinitialisé."
+
+#: extensions/system/src/User/Controller/RoleController.php:68
+msgid "Roles saved!"
+msgstr "Rôles enregistrés!"
+
+#: extensions/system/src/User/Dashboard/UserWidget.php:32
+msgid "Displays a list of users."
+msgstr "Afficher la liste des utilisateurs."
+
+#: extensions/system/src/User/Entity/User.php:101
+msgid "Blocked"
+msgstr "Bloqué"
+
+#: extensions/system/src/User/Event/AccessListener.php:93
+msgid "You do not have access to the administration area of this site."
+msgstr "Vous n'avez pas la permission d'accéder à l'administration du site."
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account is blocked."
+msgstr "Votre compte est bloqué."
+
