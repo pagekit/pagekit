@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+"PO-Revision-Date: 2014-07-26 23:46+0100\n"
+"Last-Translator: Stopka Peter <stopka.peter@outlook.sk>\n"
+"Language-Team: Stopka Peter <stopka.peter@outlook.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: sk_SK\n"
+"X-Generator: Poedit 1.6.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: extensions/page/views/admin/link/page.razr:2
+#: extensions/page/src/PageLink.php:22
+msgid "Page"
+msgstr "Stránka"
+
+#: extensions/page/views/admin/link/page.razr:5
+msgid "- Select Page -"
+msgstr "- Vybrať Stránku -"
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
+msgstr "Vložiť Názov"
+
+#: extensions/page/views/admin/pages/index.razr:8
+#: extensions/page/src/Controller/PageController.php:83
+msgid "Add Page"
+msgstr "Pridať Stránku"
+
+#: extensions/page/views/admin/pages/index.razr:15
+msgid "Publish"
+msgstr "Zverejniť"
+
+#: extensions/page/views/admin/pages/index.razr:16
+msgid "Unpublish"
+msgstr "Nezverejniť"
+
+#: extensions/page/views/admin/pages/index.razr:38
+msgid "No pages found."
+msgstr "Žiadne stránky sa nenašli."
+
+#: extensions/page/src/Controller/PageController.php:75
+msgid "Pages"
+msgstr "Stránky"
+
+#: extensions/page/src/Controller/PageController.php:95
+msgid "Invalid page id."
+msgstr "Neplatné id stránky"
+
+#: extensions/page/src/Controller/PageController.php:105
+msgid "Edit Page"
+msgstr "Upraviť Stránku"
+
+#: extensions/page/src/Controller/PageController.php:120
+msgid "Page Url not available."
+msgstr "Url Stránky nie je k dispozícii."
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page saved."
+msgstr "Stránka uložená."
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page created."
+msgstr "Stránka vytvorená."
+
+#: extensions/page/src/Controller/PageController.php:148
+msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
+msgstr ""
+"{0} Žiadna stránka zmazaná.|{1} Stránka zmazaná.|]1,Inf[ Stránky zmazané."
+
+#: extensions/page/src/Controller/PageController.php:164
+msgid "%title% (Copy)"
+msgstr "%title% (Kópia)"
+
+#: extensions/page/src/Controller/PageController.php:170
+msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
+msgstr ""
+"{0} Žiadna stránka skopírovaná.|{1} Stránka skopírovaná.|]1,Inf[ Stránky "
+"skopírované."
+
+#: extensions/page/src/Controller/PageController.php:187
+msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
+msgstr ""
+"{0} Žiadna stránka zverejnená.|{1} Stránka zverejnená.|]1,Inf[ Stránky "
+"zverejné."
+
+#: extensions/page/src/Controller/PageController.php:189
+msgid ""
+"{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
+msgstr ""
+"{0} Žiadna stránka nezverejnená.|{1} Stránka zverejnená.|]1,Inf[ Stránky "
+"zverejnené."
+
+#: extensions/page/src/Controller/SiteController.php:36
+msgid "Page not found!"
+msgstr "Stránka sa nenašla!"
+
+#: extensions/page/src/Controller/SiteController.php:45
+msgid "Unable to access this page!"
+msgstr "Nemožno získať prístup k tejto stránke!"
+
+#: extensions/page/src/Entity/Page.php:99
+msgid "Unpublished"
+msgstr "Nezverejnené"
+
+#: extensions/page/src/Entity/Page.php:100
+msgid "Published"
+msgstr "Zverejnené"
+
+#: extensions/page/src/PageExtension.php:27
+msgid ""
+"You've made some changes! Leaving the page without saving will discard all "
+"changes."
+msgstr ""
+"Vykonali ste nejaké zmeny! Ponechanie stránky bez uloženia zruší všetky "
+"zmeny."
