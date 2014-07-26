@@ -1,24 +1,18 @@
 {
     "name": "pagekit/pagekit",
-    "description": "Pagekit CMS",
-    "keywords": ["cms"],
+    "description": "The Pagekit CMS",
+    "keywords": ["cms", "pagekit"],
     "homepage": "http://pagekit.com",
     "license": "MIT",
     "authors": [
         {
-            "name": "Pagekit",
+            "name": "Pagekit Team",
             "email": "info@pagekit.com"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:pagekit/framework.git"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "pagekit/framework": "dev-master",
+        "pagekit/framework": "0.9.*",
         "pagekit/razr": "0.9.*"
     },
     "minimum-stability": "dev"
