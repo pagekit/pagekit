@@ -1,3 +1,9 @@
+# Restricted access to service files
+<FilesMatch ".(json|lock)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
+
 # URL rewrites
 <IfModule mod_rewrite.c>
 
