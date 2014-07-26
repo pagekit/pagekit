@@ -17,7 +17,9 @@
         @if ($post.readmore)
         <li><a href="@url('@blog/id', ['id' => $post.id])">@trans('Continue Reading')</a></li>
         @endif
-        <li>@transchoice('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post.commentCount, ['%num%' => $post.commentCount])</li>
+        @if ($post.isCommentable || $post.commentCount)
+        <li><a href="@url('@blog/id#comments', ['id' => $post.id])">@transchoice('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post.commentCount, ['%num%' => $post.commentCount])</a></li>
+        @endif
     </ul>
 
 </article>

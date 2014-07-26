@@ -79,4 +79,17 @@ interface WidgetInterface
      * @param string $name
      */
     public function remove($name);
+
+    /**
+     * Returns the rendered widget output, otherwise null.
+     *
+     * @param  array $options
+     * @return string|null
+     */
+    public function render($options = []);
+
+    /**
+     * Gets the default string representation of this widget.
+     */
+    public function __toString();
 }

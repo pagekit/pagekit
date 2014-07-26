@@ -2,16 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-24 17:01+0200\n"
-"Last-Translator: Kehet <kehet@kehet.com>\n"
-"Language-Team: Kehet\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi_FI\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: POEditor.com\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
 #: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
@@ -22,11 +24,11 @@ msgstr ""
 #: extensions/system/views/admin/user/edit.razr:7
 #: extensions/system/views/admin/widgets/edit.razr:7
 msgid "Close"
-msgstr "Sulje"
+msgstr "Fermer"
 
 #: extensions/system/theme/templates/error.razr:4
 msgid "Error"
-msgstr "Virhe"
+msgstr "Erreur"
 
 #: extensions/system/theme/templates/login.razr:27
 #: extensions/system/views/admin/user/edit.razr:36
@@ -34,14 +36,14 @@ msgstr "Virhe"
 #: extensions/system/views/user/mails/reset.razr:11
 #: extensions/system/views/user/registration.razr:8
 msgid "Username"
-msgstr "Käyttäjänimi"
+msgstr "Nom d'utilisateur"
 
 #: extensions/system/theme/templates/login.razr:31
 #: extensions/system/views/admin/user/edit.razr:57
 #: extensions/system/views/user/login.razr:13
 #: extensions/system/views/user/registration.razr:29
 msgid "Password"
-msgstr "Salasana"
+msgstr "Mot de passe"
 
 #: extensions/system/theme/templates/login.razr:35
 #: extensions/system/views/user/login.razr:3
@@ -51,45 +53,41 @@ msgstr "Salasana"
 #: extensions/system/src/User/Link/User.php:46
 #: extensions/system/src/User/Widget/LoginWidget.php:25
 msgid "Login"
-msgstr "Kirjaudu"
+msgstr "Connexion"
 
 #: extensions/system/theme/templates/login.razr:38
 #: extensions/system/views/user/login.razr:24
 #: extensions/system/views/widgets/login/login.razr:14
 msgid "Remember Me"
-msgstr "Muista minut"
+msgstr "Se souvenir de moi"
 
 #: extensions/system/theme/templates/login.razr:39
 #: extensions/system/views/widgets/login/login.razr:15
 msgid "Forgot Password?"
-msgstr "Unohtunut salasana?"
+msgstr "Mot de passe oublié ?"
 
 #: extensions/system/theme/templates/login.razr:50
 #: extensions/system/views/user/reset/request.razr:8
 msgid "Username or Email"
-msgstr "Käyttäjänimi tai sähköpostiosoite"
+msgstr "Nom d'utilisateur ou Email"
 
 #: extensions/system/theme/templates/login.razr:53
 msgid "Reset Password"
-msgstr "Palauta salasana"
+msgstr "Réinitialiser mon mot de passe"
 
 #: extensions/system/theme/templates/maintenance.razr:23
 #: extensions/system/views/admin/settings/settings.razr:49
 msgid "Maintenance"
-msgstr "Huoltotila"
+msgstr "Maintenance"
 
 #: extensions/system/theme/templates/migration.razr:23
 #: extensions/system/src/System/Controller/MigrationController.php:17
 msgid "Update Pagekit"
-msgstr "Päivitä Pagekit"
+msgstr "Mettre à jour Pagekit"
 
 #: extensions/system/theme/templates/migration.razr:24
-msgid ""
-"Pagekit has been updated! Before we send you on your way, we have to update "
-"your database to the newest version."
-msgstr ""
-"Pagekit päivitettiin! Meidän täytyy kuitenkin vielä päivittää tietokanta "
-"ajantasalle."
+msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
+msgstr "Pagekit a bien été mis à jour ! Avant de vous laisser continuer, nous devons mettre à jour la base de donnée."
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -103,7 +101,7 @@ msgstr ""
 #: extensions/system/views/tmpl/video.modal.razr:23
 #: extensions/system/src/System/Controller/UpdateController.php:39
 msgid "Update"
-msgstr "Päivitä"
+msgstr "Mise à jour"
 
 #: extensions/system/theme/templates/template.razr:22
 #: extensions/system/theme/templates/template.razr:39
@@ -113,7 +111,7 @@ msgstr "Pagekit"
 #: extensions/system/theme/templates/template.razr:64
 #: extensions/system/theme/templates/template.razr:132
 msgid "Visit Site"
-msgstr "Sivustolle"
+msgstr "Voir le site"
 
 #: extensions/system/theme/templates/template.razr:65
 #: extensions/system/theme/templates/template.razr:133
@@ -128,13 +126,13 @@ msgstr "Sivustolle"
 #: extensions/system/src/System/Controller/SettingsController.php:70
 #: extensions/system/src/System/Controller/SystemController.php:32
 msgid "Settings"
-msgstr "Asetukset"
+msgstr "Paramètres"
 
 #: extensions/system/theme/templates/template.razr:66
 #: extensions/system/theme/templates/template.razr:134
 #: extensions/system/views/widgets/login/logout.razr:2
 msgid "Logout"
-msgstr "Kirjaudu ulos"
+msgstr "Déconnexion"
 
 #: extensions/system/theme/templates/template.razr:113
 #: extensions/system/views/admin/settings/index.razr:20
@@ -143,7 +141,7 @@ msgstr "Kirjaudu ulos"
 #: extensions/system/views/admin/settings/info.razr:61
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:50
 msgid "Extensions"
-msgstr "Lisäosat"
+msgstr "Extensions"
 
 #: extensions/system/views/admin/aliases/edit.razr:6
 #: extensions/system/views/admin/dashboard/edit.razr:4
@@ -155,7 +153,7 @@ msgstr "Lisäosat"
 #: extensions/system/views/admin/widgets/edit.razr:6
 #: extensions/system/views/user/profile.razr:46
 msgid "Save"
-msgstr "Tallenna"
+msgstr "Enregistrer"
 
 #: extensions/system/views/admin/aliases/edit.razr:7
 #: extensions/system/views/admin/dashboard/edit.razr:5
@@ -173,11 +171,11 @@ msgstr "Tallenna"
 #: extensions/system/views/tmpl/video.modal.razr:24
 #: extensions/system/views/tmpl/video.modal.razr:32
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr "Annuler"
 
 #: extensions/system/views/admin/aliases/edit.razr:10
 msgid "Please select a source."
-msgstr "Valitse kohde"
+msgstr "Veuillez sélectionner une source."
 
 #: extensions/system/views/admin/aliases/edit.razr:13
 #: extensions/system/views/admin/aliases/index.razr:21
@@ -185,21 +183,17 @@ msgid "Alias"
 msgstr "Alias"
 
 #: extensions/system/views/admin/aliases/edit.razr:16
-msgid ""
-"Use a relative path and don't add a trailing slash. For example: "
-"<code>about</code>"
-msgstr ""
-"Käytä suhteellista osoitetta ilman lopettavaa kauttaviivaa esimerkiksi: "
-"<code>about</code>"
+msgid "Use a relative path and don't add a trailing slash. For example: <code>about</code>"
+msgstr "Utilisez un chemin relatif et n'ajoutez pas de slash. Par exemple : <code>a-propos</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
 msgid "Source"
-msgstr "Kohde"
+msgstr "Source"
 
 #: extensions/system/views/admin/aliases/index.razr:7
 msgid "Add Alias"
-msgstr "Lisää alias"
+msgstr "Ajouter un alias"
 
 #: extensions/system/views/admin/aliases/index.razr:8
 #: extensions/system/views/admin/dashboard/settings.razr:18
@@ -214,7 +208,7 @@ msgstr "Lisää alias"
 #: extensions/system/views/tmpl/image.replace.razr:15
 #: extensions/system/views/tmpl/video.replace.razr:15
 msgid "Delete"
-msgstr "Poista"
+msgstr "Supprimer"
 
 #: extensions/system/views/admin/aliases/index.razr:11
 #: extensions/system/views/admin/extensions/index.razr:61
@@ -223,11 +217,11 @@ msgstr "Poista"
 #: extensions/system/views/admin/widgets/index.razr:56
 #: extensions/system/views/tmpl/finder.main.razr:17
 msgid "Search"
-msgstr "Hae"
+msgstr "Rechercher"
 
 #: extensions/system/views/admin/aliases/index.razr:41
 msgid "No URL aliases found."
-msgstr "Ei URL aliaksia"
+msgstr "Aucun alias d'URL trouvé."
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:2
 #: extensions/system/views/admin/menu/index.razr:53
@@ -237,7 +231,7 @@ msgstr "Ei URL aliaksia"
 #: extensions/system/views/admin/widgets/index.razr:65
 #: extensions/system/views/tmpl/link.modal.razr:5
 msgid "Title"
-msgstr "Otsikko"
+msgstr "Titre"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:9
 #: extensions/system/views/admin/link/link.types.razr:2
@@ -249,173 +243,160 @@ msgstr "URL"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:16
 msgid "Number of Posts"
-msgstr "Artikkelien määrä"
+msgstr "Nombre d'articles"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:27
 msgid "Post Content"
-msgstr "Artikkelin sisältö"
+msgstr "Contenu de l'article"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:30
 msgid "Don't show"
-msgstr "Älä näytä"
+msgstr "Cacher"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:33
 msgid "Show on all posts"
-msgstr "Näytä kaikissa artikkeleissa"
+msgstr "Afficher sur tous les articles"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:36
 msgid "Only show on first post."
-msgstr "Näytä vain ensimmäisessä artikkelissa"
+msgstr "Afficher seulement sur le premier article."
 
 #: extensions/system/views/admin/dashboard/settings.razr:8
 #: extensions/system/views/admin/widgets/index.razr:9
 #: extensions/system/src/System/Controller/DashboardController.php:85
 #: extensions/system/src/Widget/Controller/WidgetsController.php:70
 msgid "Add Widget"
-msgstr "Lisää vimpain"
+msgstr "Ajouter un widget"
 
 #: extensions/system/views/admin/dashboard/settings.razr:24
 msgid "Widget"
-msgstr "Vimpain"
+msgstr "Widget"
 
 #: extensions/system/views/admin/dashboard/settings.razr:25
 #: extensions/system/views/admin/link/link.types.razr:8
 #: extensions/system/views/admin/menu/item.edit.razr:18
 #: extensions/system/views/admin/widgets/index.razr:68
 msgid "Type"
-msgstr "Tyyppi"
+msgstr "Type"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:2
 msgid "User Type"
-msgstr "Käyttäjätyyppi"
+msgstr "Type d'utilisateur"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Logged in"
-msgstr "Sisäänkirjautunut"
+msgstr "Connecté"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Last registered"
-msgstr "Viimeksi rekisteröitynyt"
+msgstr "Derniers inscrits"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:12
 msgid "Number of Users"
-msgstr "Käyttäjien määrä"
+msgstr "Nombre d'utilisateurs"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
-msgid ""
-"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users"
-"% registered users"
-msgstr ""
-"{0} Ei rekisteröityneitä käyttäjiä|{1} Viimeisin rekisteröitynyt käyttäjä|]1,"
-"Inf[ %users% viimeisintä rekisteröitynyttä käyttäjää"
+msgid "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
+msgstr "{0} Aucun utilisateur enregistré|{1} Dernier utilisateur enregistré|]1,Inf[ %users% derniers utilisateurs enregistrés"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
-msgid ""
-"{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
-"logged in"
-msgstr ""
-"{0} Ei kirjautuneita käyttäjiä|{1} %users% kirjautunut käyttäjä|]1,"
-"Inf[ %users% kirjautunutta käyttäjää"
+msgid "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in"
+msgstr "{0} Aucun utilisateur connecté|{1} %users% utilisateur connecté|]1,Inf[ %users% utilisateurs connectés"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
-msgstr "Sijainti"
+msgstr "Lieux"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:10
 msgid "Enter the name of the city you want to get weather information for."
-msgstr "Valitse kaupunki, jonka säätiedot näytetään"
+msgstr "Renseignez la ville dont vous souhaitez récupérer la météo"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"
-msgstr "Yksikkö"
+msgstr "Unité"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:18
 msgid "Metric"
-msgstr "Metrinen"
+msgstr "Métrique"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:21
 msgid "Imperial"
-msgstr "Imperiaalinen"
+msgstr "Impériale"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:12
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:23
 msgid "Weather"
-msgstr "Sää"
+msgstr "Météo"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:13
 msgid "Unable to retrieve weather data."
-msgstr "Säätietoja ei voitu hakea"
+msgstr "Impossible de récupérer les données météo."
 
 #: extensions/system/views/admin/extensions/index.razr:12
 #: extensions/system/views/admin/themes/index.razr:12
 #: extensions/system/views/tmpl/marketplace.details.razr:5
 msgid "Installed"
-msgstr "Asennettu"
+msgstr "Installées"
 
 #: extensions/system/views/admin/extensions/index.razr:13
 #: extensions/system/views/admin/themes/index.razr:13
 msgid "Updates"
-msgstr "Päivitykset"
+msgstr "Mises à jour"
 
 #: extensions/system/views/admin/extensions/index.razr:14
 #: extensions/system/views/admin/themes/index.razr:14
 #: extensions/system/views/tmpl/marketplace.details.razr:8
 #: extensions/system/views/tmpl/package.upload.razr:35
 msgid "Install"
-msgstr "Asenna"
+msgstr "Installer"
 
 #: extensions/system/views/admin/extensions/index.razr:15
 #: extensions/system/views/admin/themes/index.razr:15
 #: extensions/system/src/System/Controller/MarketplaceController.php:27
 msgid "Marketplace"
-msgstr "Markkinapaikka"
+msgstr "Marché"
 
 #: extensions/system/views/admin/extensions/index.razr:16
 #: extensions/system/views/admin/themes/index.razr:16
 msgid "All"
-msgstr "Kaikki"
+msgstr "Tout"
 
 #: extensions/system/views/admin/extensions/index.razr:34
 #: extensions/system/views/admin/themes/index.razr:34
-msgid ""
-"An error occurred in retrieving update information. Please try again later."
-msgstr "Päivitystietoja ei voitu hakea. Yritä myöhemmin uudelleen."
+msgid "An error occurred in retrieving update information. Please try again later."
+msgstr "Une erreur est survenu durant la mise à jour des informations. Veuillez réessayer plus tard."
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
-msgstr "Päivityksiä lisäosiin ei löytynyt"
+msgstr "Aucune mise à jour trouvée."
 
 #: extensions/system/views/admin/extensions/index.razr:44
 #: extensions/system/views/admin/themes/index.razr:44
 msgid "Install an extension"
-msgstr "Asenna lisäosa"
+msgstr "Installer une extension"
 
 #: extensions/system/views/admin/extensions/index.razr:47
 #: extensions/system/views/admin/themes/index.razr:47
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Droparea"
-msgstr "Raahausalue"
+msgstr "Zone de dépôt"
 
 #: extensions/system/views/admin/extensions/index.razr:48
 #: extensions/system/views/admin/themes/index.razr:48
-msgid ""
-"Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
-"upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
-"Raahaa tiedostot tähän tai <a class=\"uk-form-file\">valitse tästä<input "
-"class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgid "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Déposez vos fichier ici ou <a class=\"uk-form-file\">sélectionnez en un<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
-msgstr "Lisäosia ei löytynyt"
+msgstr "Aucune extension trouvée."
 
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
 msgid "Cannot connect to the marketplace. Please try again later."
-msgstr "Markkinapaikkaan ei saatu yhteyttä. Yritä myöhemmin uudelleen."
+msgstr "Connexion au marché impossible. Veuillez réessayer plus tard."
 
 #: extensions/system/views/admin/extensions/table.razr:4
 #: extensions/system/views/admin/user/edit.razr:43
@@ -423,14 +404,14 @@ msgstr "Markkinapaikkaan ei saatu yhteyttä. Yritä myöhemmin uudelleen."
 #: extensions/system/views/user/profile.razr:8
 #: extensions/system/views/user/registration.razr:15
 msgid "Name"
-msgstr "Nimi"
+msgstr "Nom"
 
 #: extensions/system/views/admin/extensions/table.razr:5
 #: extensions/system/views/admin/settings/info.razr:49
 #: extensions/system/views/admin/settings/info.razr:85
 #: extensions/system/views/tmpl/package.upload.razr:17
 msgid "Version"
-msgstr "Versio"
+msgstr "Version"
 
 #: extensions/system/views/admin/extensions/table.razr:6
 #: extensions/system/views/admin/menu/index.razr:54
@@ -441,20 +422,20 @@ msgstr "Versio"
 #: extensions/system/views/admin/widgets/edit.razr:73
 #: extensions/system/views/admin/widgets/index.razr:66
 msgid "Status"
-msgstr "Tila"
+msgstr "Statut"
 
 #: extensions/system/views/admin/extensions/table.razr:20
 #: extensions/system/views/admin/themes/table.razr:16
 #: extensions/system/views/tmpl/marketplace.table.razr:14
 msgid "Details"
-msgstr "Tiedot"
+msgstr "Détails"
 
 #: extensions/system/views/admin/extensions/table.razr:25
 #: extensions/system/views/admin/settings/info.razr:5
 #: extensions/system/languages/messages.php:28
 #: extensions/system/src/User/Controller/PermissionController.php:34
 msgid "Permissions"
-msgstr "Käyttöoikeudet"
+msgstr "Droits"
 
 #: extensions/system/views/admin/extensions/table.razr:37
 #: extensions/system/views/admin/menu/item.edit.razr:40
@@ -463,7 +444,7 @@ msgstr "Käyttöoikeudet"
 #: extensions/system/src/Menu/Entity/Item.php:124
 #: extensions/system/src/Widget/Entity/Widget.php:98
 msgid "Enabled"
-msgstr "Käytössä"
+msgstr "Activée"
 
 #: extensions/system/views/admin/extensions/table.razr:39
 #: extensions/system/views/admin/menu/item.edit.razr:43
@@ -472,89 +453,89 @@ msgstr "Käytössä"
 #: extensions/system/src/Menu/Entity/Item.php:123
 #: extensions/system/src/Widget/Entity/Widget.php:97
 msgid "Disabled"
-msgstr "Ei käytössä"
+msgstr "Désactivée"
 
 #: extensions/system/views/admin/link/link.types.razr:11
 msgid "- Select Type -"
-msgstr "- Valitse tyyppi -"
+msgstr "- Sélectionnez un type -"
 
 #: extensions/system/views/admin/link/system.razr:2
 msgid "View"
-msgstr "Näkymä"
+msgstr "Affichage"
 
 #: extensions/system/views/admin/link/system.razr:5
 msgid "- Select View -"
-msgstr "- Valitse näkymä -"
+msgstr "- Sélectionnez un affichage -"
 
 #: extensions/system/views/admin/menu/index.razr:13
 #: extensions/system/views/admin/user/role.razr:16
 msgid "Edit"
-msgstr "Muokkaa"
+msgstr "Modifier"
 
 #: extensions/system/views/admin/menu/index.razr:14
 #: extensions/system/views/admin/user/role.razr:17
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "Are you sure?"
-msgstr "Oletko varma?"
+msgstr "Êtes-vous sûr ?"
 
 #: extensions/system/views/admin/menu/index.razr:25
 msgid "Add Menu"
-msgstr "Lisää valikko"
+msgstr "Ajouter un menu"
 
 #: extensions/system/views/admin/menu/index.razr:34
 msgid "Add Item"
-msgstr "Lisää kohta"
+msgstr "Ajouter un lien"
 
 #: extensions/system/views/admin/menu/index.razr:38
 #: extensions/system/views/admin/user/index.razr:12
 #: extensions/system/views/admin/widgets/index.razr:22
 msgid "More"
-msgstr "lisää"
+msgstr "Plus"
 
 #: extensions/system/views/admin/menu/index.razr:41
 #: extensions/system/views/admin/themes/table.razr:26
 #: extensions/system/views/admin/widgets/index.razr:25
 msgid "Enable"
-msgstr "Ota käyttöön"
+msgstr "Activer"
 
 #: extensions/system/views/admin/menu/index.razr:42
 #: extensions/system/views/admin/widgets/index.razr:26
 msgid "Disable"
-msgstr "Poista käytöstä"
+msgstr "Désactiver"
 
 #: extensions/system/views/admin/menu/index.razr:64
 msgid "No menu found."
-msgstr "Valikkoa ei löytynyt"
+msgstr "Aucun menu trouvé."
 
 #: extensions/system/views/admin/menu/index.razr:79
 msgid "Enter Menu Name"
-msgstr "Anna valikon nimi"
+msgstr "Entrez le nom du menu"
 
 #: extensions/system/views/admin/menu/item.edit.razr:28
 msgid "Header"
-msgstr "Otsikko"
+msgstr "En-tête"
 
 #: extensions/system/views/admin/menu/item.edit.razr:31
 #: extensions/system/views/admin/menu/item.razr:23
 msgid "Divider"
-msgstr "Jakaja"
+msgstr "Séparateur"
 
 #: extensions/system/views/admin/menu/item.edit.razr:49
 #: extensions/system/views/admin/widgets/edit.razr:92
 msgid "Restrict Access"
-msgstr "Rajoita näkyvyyttä"
+msgstr "Accès restreint"
 
 #: extensions/system/views/admin/menu/item.edit.razr:61
 msgid "Activation Rules"
-msgstr "Aktivointisäännöt"
+msgstr "Règles d'activation"
 
 #: extensions/system/views/admin/menu/item.edit.razr:64
 msgid "Enter custom activation rules as paths."
-msgstr "Anna aktivointisäännöt osoitteina"
+msgstr "Entrez vos règles d'activation personnalisées en tant que chemins."
 
 #: extensions/system/views/admin/menu/item.razr:25
 msgid "Menu Header"
-msgstr "Valikon otsikko"
+msgstr "En-tête du menu"
 
 #: extensions/system/views/admin/settings/index.razr:4
 #: extensions/system/views/admin/settings/info.razr:2
@@ -562,62 +543,62 @@ msgstr "Valikon otsikko"
 #: extensions/system/views/admin/settings/settings.razr:207
 #: extensions/system/src/System/Link/System.php:20
 msgid "System"
-msgstr "Järjestelmä"
+msgstr "Système"
 
 #: extensions/system/views/admin/settings/index.razr:29
 #: extensions/system/views/admin/settings/index.razr:30
 #: extensions/system/src/Theme/Controller/ThemesController.php:65
 msgid "Themes"
-msgstr "Teemat"
+msgstr "Thèmes"
 
 #: extensions/system/views/admin/settings/index.razr:37
 #: extensions/system/views/admin/settings/index.razr:38
 #: extensions/system/src/System/Controller/DashboardController.php:46
 msgid "Dashboard"
-msgstr "Kojelauta"
+msgstr "Dashboard"
 
 #: extensions/system/views/admin/settings/index.razr:45
 #: extensions/system/views/admin/settings/index.razr:46
 #: extensions/system/views/admin/settings/settings.razr:225
 #: extensions/system/src/System/Controller/SystemController.php:94
 msgid "Storage"
-msgstr "Säilö"
+msgstr "Stockage"
 
 #: extensions/system/views/admin/settings/index.razr:63
 #: extensions/system/views/admin/settings/index.razr:64
 #: extensions/system/src/System/Controller/AliasController.php:46
 msgid "URL Aliases"
-msgstr "URL aliakset"
+msgstr "Alias d'URL"
 
 #: extensions/system/views/admin/settings/index.razr:71
 #: extensions/system/views/admin/settings/index.razr:72
 msgid "Info"
-msgstr "Tietoja"
+msgstr "Infos"
 
 #: extensions/system/views/admin/settings/index.razr:78
 #: extensions/system/views/admin/settings/index.razr:79
 msgid "Clear Cache"
-msgstr "Tyhjennä välimuisti"
+msgstr "Vider le cache"
 
 #: extensions/system/views/admin/settings/index.razr:107
 msgid "Select caches to clear:"
-msgstr "Valitse tyhjennettävät välimuistit"
+msgstr "Sélectionnez les caches à vider"
 
 #: extensions/system/views/admin/settings/index.razr:114
 msgid "System Cache"
-msgstr "Järjestelmän välimuisti"
+msgstr "Système de cache"
 
 #: extensions/system/views/admin/settings/index.razr:121
 msgid "Rendered Templates"
-msgstr "Käännetyt ulkoasut"
+msgstr "Gabarit rendus"
 
 #: extensions/system/views/admin/settings/index.razr:128
 msgid "Temporary Files"
-msgstr "Väliaikaiset tiedostot"
+msgstr "Fichiers temporaires"
 
 #: extensions/system/views/admin/settings/index.razr:133
 msgid "Clear"
-msgstr "Tyhjennä"
+msgstr "Vider"
 
 #: extensions/system/views/admin/settings/info.razr:3
 msgid "PHP"
@@ -625,64 +606,64 @@ msgstr "PHP"
 
 #: extensions/system/views/admin/settings/info.razr:4
 msgid "Database"
-msgstr "Tietokanta"
+msgstr "Base de données"
 
 #: extensions/system/views/admin/settings/info.razr:15
 #: extensions/system/views/admin/settings/info.razr:43
 #: extensions/system/views/admin/settings/info.razr:75
 msgid "Setting"
-msgstr "Asetus"
+msgstr "Paramètres"
 
 #: extensions/system/views/admin/settings/info.razr:16
 #: extensions/system/views/admin/settings/info.razr:44
 #: extensions/system/views/admin/settings/info.razr:76
 msgid "Value"
-msgstr "Arvo"
+msgstr "Valeur"
 
 #: extensions/system/views/admin/settings/info.razr:21
 msgid "Pagekit Version"
-msgstr "Pagekit versio"
+msgstr "Version de Pagekit"
 
 #: extensions/system/views/admin/settings/info.razr:25
 msgid "Web Server"
-msgstr "Web-palvelin"
+msgstr "Serveur web"
 
 #: extensions/system/views/admin/settings/info.razr:29
 msgid "User Agent"
-msgstr "User Agent"
+msgstr "Navigateur"
 
 #: extensions/system/views/admin/settings/info.razr:53
 msgid "Handler"
-msgstr "Käsittelijä"
+msgstr "Gestionnaire"
 
 #: extensions/system/views/admin/settings/info.razr:57
 msgid "Built On"
-msgstr "Pohjautuu"
+msgstr "Compilé le"
 
 #: extensions/system/views/admin/settings/info.razr:81
 msgid "Driver"
-msgstr "Ajuri"
+msgstr "Pilote"
 
 #: extensions/system/views/admin/settings/info.razr:89
 msgid "Client"
-msgstr "Asiakas"
+msgstr "Client"
 
 #: extensions/system/views/admin/settings/info.razr:103
 msgid "Path"
-msgstr "Osoite"
+msgstr "Chemin"
 
 #: extensions/system/views/admin/settings/info.razr:111
 msgid "Writable"
-msgstr "Kirjoitusoikeus"
+msgstr "Accessible en écriture"
 
 #: extensions/system/views/admin/settings/info.razr:111
 msgid "Unwritable"
-msgstr "Ei kirjoitusoikeutta"
+msgstr "Inaccessible en écriture"
 
 #: extensions/system/views/admin/settings/settings.razr:15
 #: extensions/system/views/admin/settings/settings.razr:29
 msgid "Site"
-msgstr "Sivu"
+msgstr "Site"
 
 #: extensions/system/views/admin/settings/settings.razr:16
 #: extensions/system/views/admin/settings/settings.razr:66
@@ -691,76 +672,76 @@ msgstr "Sivu"
 #: extensions/system/views/user/profile.razr:15
 #: extensions/system/views/user/registration.razr:22
 msgid "Email"
-msgstr "Sähköposti"
+msgstr "E-mail"
 
 #: extensions/system/views/admin/settings/settings.razr:17
 #: extensions/system/views/admin/settings/settings.razr:142
 msgid "Localization"
-msgstr "Kieli"
+msgstr "Localisation"
 
 #: extensions/system/views/admin/settings/settings.razr:18
 #: extensions/system/views/admin/settings/settings.razr:181
 #: extensions/system/views/admin/user/index.razr:62
 #: extensions/system/src/User/Link/User.php:22
 msgid "User"
-msgstr "Käyttäjä"
+msgstr "Utilisateur"
 
 #: extensions/system/views/admin/settings/settings.razr:37
 msgid "Description"
-msgstr "Kuvaus"
+msgstr "Description"
 
 #: extensions/system/views/admin/settings/settings.razr:43
 msgid "Front Page"
-msgstr "Etusivu"
+msgstr "Page d'accueil"
 
 #: extensions/system/views/admin/settings/settings.razr:52
 msgid "Put the site offline and show the offline message."
-msgstr "Aseta sivusto huoltotilaan ja näytä viesti"
+msgstr "Mettre le site hors ligne et afficher un message de maintenance."
 
 #: extensions/system/views/admin/settings/settings.razr:57
 msgid "Offline Message"
-msgstr "Huoltotilan viesti"
+msgstr "Message de maintenance."
 
 #: extensions/system/views/admin/settings/settings.razr:59
 #: extensions/system/src/System/Event/MaintenanceListener.php:27
 msgid "We'll be back soon."
-msgstr "Palaamme pian"
+msgstr "Nous revenons dans un moment."
 
 #: extensions/system/views/admin/settings/settings.razr:68
 msgid "From Email"
-msgstr "Lähettäjän sähköpostiosoite"
+msgstr "Email expediteur"
 
 #: extensions/system/views/admin/settings/settings.razr:74
 msgid "From Name"
-msgstr "Lähettäjän nimi"
+msgstr "Nom expediteur"
 
 #: extensions/system/views/admin/settings/settings.razr:80
 msgid "Mailer"
-msgstr "Sähköpostin lähettäjä"
+msgstr "Système d'envoi"
 
 #: extensions/system/views/admin/settings/settings.razr:83
 msgid "PHP Mailer"
-msgstr "PHP Mailer"
+msgstr "PHP"
 
 #: extensions/system/views/admin/settings/settings.razr:83
 msgid "SMTP Mailer"
-msgstr "SMTP Mailer"
+msgstr "SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:91
 msgid "SMTP Port"
-msgstr "SMTP portti"
+msgstr "Port SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:97
 msgid "SMTP Host"
-msgstr "SMTP palvelin"
+msgstr "Hôte SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:103
 msgid "SMTP User"
-msgstr "SMTP käyttäjä"
+msgstr "Utilisateur SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:109
 msgid "SMTP Password"
-msgstr "SMTP salasana"
+msgstr "Mot de passe SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
@@ -769,15 +750,15 @@ msgstr "SMTP salasana"
 #: extensions/system/views/user/registration.razr:33
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
-msgstr "Näytä"
+msgstr "Afficher"
 
 #: extensions/system/views/admin/settings/settings.razr:118
 msgid "SMTP Encryption"
-msgstr "SMTP salaus"
+msgstr "Chiffrement SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:121
 msgid "None"
-msgstr "Ei mitään"
+msgstr "Aucun"
 
 #: extensions/system/views/admin/settings/settings.razr:122
 msgid "SSL"
@@ -789,65 +770,65 @@ msgstr "TLS"
 
 #: extensions/system/views/admin/settings/settings.razr:127
 msgid "Please enable the PHP Open SSL extension."
-msgstr "Asenna PHP Open SSL lisäosa"
+msgstr "Veuillez activer l'extension PHP Open SSL."
 
 #: extensions/system/views/admin/settings/settings.razr:134
 msgid "Check Connection"
-msgstr "Tarkista yhteys"
+msgstr "Vérifier la connexion"
 
 #: extensions/system/views/admin/settings/settings.razr:135
 msgid "Send Test Email"
-msgstr "Lähetä testisähköposti"
+msgstr "Envoyer un email de test"
 
 #: extensions/system/views/admin/settings/settings.razr:144
 msgid "Site Locale"
-msgstr "Sivuston kieli"
+msgstr "Langue du site"
 
 #: extensions/system/views/admin/settings/settings.razr:154
 msgid "Admin Locale"
-msgstr "Ylläpidon kieli"
+msgstr "Langue de l'administration"
 
 #: extensions/system/views/admin/settings/settings.razr:164
 msgid "Time Zone"
-msgstr "Aikavyöhyke"
+msgstr "Fuseau horaire"
 
 #: extensions/system/views/admin/settings/settings.razr:183
 #: extensions/system/views/user/registration.razr:5
 #: extensions/system/src/User/Link/User.php:47
 msgid "Registration"
-msgstr "Rekisteröinti"
+msgstr "Inscriptions"
 
 #: extensions/system/views/admin/settings/settings.razr:186
 msgid "Adminstrators only"
-msgstr "Vain ylläpitäjät"
+msgstr "Administrateurs seulement"
 
 #: extensions/system/views/admin/settings/settings.razr:189
 msgid "Guests"
-msgstr "Vieraat"
+msgstr "Visiteurs"
 
 #: extensions/system/views/admin/settings/settings.razr:192
 msgid "Guests, but administrator approval is required"
-msgstr "Vieraat, mutta vaatii ylläpitäjän hyväksymisen"
+msgstr "Visiteurs, avec approbation de l'administateur"
 
 #: extensions/system/views/admin/settings/settings.razr:197
 msgid "Verification"
-msgstr "Varmennus"
+msgstr "Vérification"
 
 #: extensions/system/views/admin/settings/settings.razr:200
 msgid "Require e-mail verification when a guest creates an account."
-msgstr "Vaadi sähköpostivarmennus kun vieras luo käyttäjätunnusta"
+msgstr "Envoyer un mail de confirmation quand un visiteur s'inscrit."
 
 #: extensions/system/views/admin/settings/settings.razr:209
 msgid "API Key"
-msgstr "API avain"
+msgstr "Clé API"
 
 #: extensions/system/views/admin/settings/settings.razr:211
 msgid "Enter your API key"
-msgstr "API avaimesi"
+msgstr "Entrez votre clé API"
 
 #: extensions/system/views/admin/settings/settings.razr:215
 msgid "Release Channel"
-msgstr "Kanava"
+msgstr "Canal de diffusion"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Stable"
@@ -855,112 +836,106 @@ msgstr "Stable"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Nightly"
-msgstr "Nightly"
+msgstr "Chaque soir"
 
 #: extensions/system/views/admin/settings/settings.razr:231
 msgid "Cache"
-msgstr "Välimuisti"
+msgstr "Cache"
 
 #: extensions/system/views/admin/settings/settings.razr:241
 msgid "Developer"
-msgstr "Kehittäjä"
+msgstr "Développeur"
 
 #: extensions/system/views/admin/settings/settings.razr:244
 msgid "Enable debug mode"
-msgstr "Ota kehittäjätila käyttöön"
+msgstr "Activer le mode debug"
 
 #: extensions/system/views/admin/settings/settings.razr:247
 msgid "Enable debug toolbar"
-msgstr "Ota kehittäjäpalkki käyttöön"
+msgstr "Activer la barre d'outil de debug"
 
 #: extensions/system/views/admin/settings/settings.razr:250
 msgid "Please enable the SQLite database extension."
-msgstr "Asenna SQLite tietokantalisäosa"
+msgstr "Veuillez activer l'extension SQLite database"
 
 #: extensions/system/views/admin/settings/settings.razr:253
 msgid "Disable cache"
-msgstr "Ota välimuisti pois käytöstä"
+msgstr "Désactiver le cache"
 
 #: extensions/system/views/admin/settings/update.razr:7
 msgid "There is an update available."
-msgstr "Päivitys on saatavilla"
+msgstr "Il y a une mise à jour disponible."
 
 #: extensions/system/views/admin/settings/update.razr:8
 msgid "Please update Pagekit to version %version%!"
-msgstr "Päivitä Pagekit versioon %version%!"
+msgstr "Veuillez mettre à jour Pagekit à la version %version% !"
 
 #: extensions/system/views/admin/settings/update.razr:12
 #: extensions/system/views/admin/settings/update.razr:34
 msgid "Download %version%"
-msgstr "Lataa %version%"
+msgstr "Télécharger %version%"
 
 #: extensions/system/views/admin/settings/update.razr:19
 msgid "Downloading ..."
-msgstr "Ladataan ..."
+msgstr "Téléchargement..."
 
 #: extensions/system/views/admin/settings/update.razr:29
 msgid "You have the latest version of Pagekit."
-msgstr "Pagekit on uusimmassa versiossa"
+msgstr "Vous avez la dernière version de Pagekit."
 
 #: extensions/system/views/admin/settings/update.razr:30
-msgid ""
-"You have the latest version of Pagekit. You do not need to update. However, "
-"if you want to re-install version %version%, you can do so automatically or "
-"download the package and re-install manually."
-msgstr ""
-"Pagekit on uusimmassa versiossa, eikä sitä tarvitse päivittää. Voit "
-"kuitenkin uudelleenasentaa version %version% automaattisesti tai ladata sen, "
-"ja uudelleenasentaa manuaalisesti."
+msgid "You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually."
+msgstr "Vous avez la dernière version de Pagekit. Vous n'avez rien besoin de mettre à jour. Mais si vous voulez réinstaller la version %version%, vous pouvez le faire automatiquement ou la télécharger et l'installer manuellement."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
-msgstr "Uudelleenasenna"
+msgstr "Réinstaller"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
-msgstr "Palvelimeen ei saatu yhteyttä. Yritä uudelleen myöhemmin."
+msgstr "Connexion au serveur impossible. Veuillez réessayer plus tard."
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
-msgstr "Päivityksiä teemoihin ei löytynyt"
+msgstr "Aucune mise à jour de thème trouvée."
 
 #: extensions/system/views/admin/themes/index.razr:67
 msgid "No themes found."
-msgstr "Teemoja ei löytynyt"
+msgstr "Aucun thème disponible."
 
 #: extensions/system/views/admin/themes/table.razr:11
 #: extensions/system/src/User/Entity/User.php:100
 msgid "Active"
-msgstr "Aktiivinen"
+msgstr "Actif"
 
 #: extensions/system/views/admin/user/edit.razr:19
 #: extensions/system/views/admin/user/edit.razr:111
 #: extensions/system/views/admin/user/index.razr:27
 #: extensions/system/views/admin/user/index.razr:81
 msgid "New"
-msgstr "Uusi"
+msgstr "Nouveau"
 
 #: extensions/system/views/admin/user/edit.razr:24
 msgid "Verified email address"
-msgstr "Varmennettu sähköpostiosoite"
+msgstr "Adresse e-mail vérifiée"
 
 #: extensions/system/views/admin/user/edit.razr:25
 msgid "Last login: %date%"
-msgstr "Edellinen kirjautuminen %date%"
+msgstr "Dernière connexion : %data%"
 
 #: extensions/system/views/admin/user/edit.razr:25
 #: extensions/system/src/User/Controller/UserController.php:274
 msgid "Never"
-msgstr "Ei koskaan"
+msgstr "Jamais"
 
 #: extensions/system/views/admin/user/edit.razr:26
 msgid "Registered since: %date%"
-msgstr "Rekisteröitynyt %date%"
+msgstr "Inscrit depuis : %date%"
 
 #: extensions/system/views/admin/user/edit.razr:61
 #: extensions/system/views/user/profile.razr:22
 msgid "Change password"
-msgstr "Vaihda salasana"
+msgstr "Changer de mot de passe"
 
 #: extensions/system/views/admin/user/edit.razr:68
 #: extensions/system/views/user/profile.razr:30
@@ -968,419 +943,385 @@ msgstr "Vaihda salasana"
 #: extensions/system/views/user/registration.razr:33
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Hide"
-msgstr "Piilota"
+msgstr "Cacher"
 
 #: extensions/system/views/admin/user/edit.razr:87
 #: extensions/system/views/admin/user/index.razr:65
 #: extensions/system/languages/messages.php:29
 #: extensions/system/src/User/Controller/RoleController.php:47
 msgid "Roles"
-msgstr "Roolit"
+msgstr "Rôles"
 
 #: extensions/system/views/admin/user/edit.razr:117
 msgid "Last login: {{login}}"
-msgstr "Edellinen kirjautuminen {{login}}"
+msgstr "Dernière connexion : {{login}}"
 
 #: extensions/system/views/admin/user/edit.razr:118
 msgid "Registered since: {{registered}}"
-msgstr "Rekisteröitynyt {{registered}}"
+msgstr "Inscrit depuis : {{registered}}"
 
 #: extensions/system/views/admin/user/index.razr:8
 #: extensions/system/src/User/Controller/UserController.php:113
 msgid "Add User"
-msgstr "Lisää käyttäjä"
+msgstr "Ajouter un utilisateur"
 
 #: extensions/system/views/admin/user/index.razr:15
 msgid "Activate"
-msgstr "Aktivoi"
+msgstr "Activer"
 
 #: extensions/system/views/admin/user/index.razr:16
 msgid "Block"
-msgstr "Estä"
+msgstr "Bloc"
 
 #: extensions/system/views/admin/user/index.razr:26
 #: extensions/system/views/admin/widgets/index.razr:37
 msgid "- Status -"
-msgstr "- Tila -"
+msgstr "- Statut -"
 
 #: extensions/system/views/admin/user/index.razr:34
 msgid "- Role -"
-msgstr "- Rooli -"
+msgstr "- Rôle -"
 
 #: extensions/system/views/admin/user/index.razr:41
 msgid "- Permission -"
-msgstr "- Käyttöoikeudet -"
+msgstr "- Droit -"
 
 #: extensions/system/views/admin/user/index.razr:87
 msgid "Verified Email Address"
-msgstr "Varmenna sähköpostiosoite"
+msgstr "Adresse e-mail vérifiée"
 
 #: extensions/system/views/admin/user/index.razr:98
 msgid "No user found."
-msgstr "Käyttäjää ei löytynyt"
+msgstr "Aucun utilisateur."
 
 #: extensions/system/views/admin/user/permission.razr:11
 #: extensions/system/views/admin/user/role.razr:43
 msgid "Permission"
-msgstr "Käyttöoikeus"
+msgstr "Droit"
 
 #: extensions/system/views/admin/user/role.razr:28
 msgid "Add Role"
-msgstr "Lisää rooli"
+msgstr "Ajouter un rôle"
 
 #: extensions/system/views/admin/user/role.razr:87
 msgid "Enter Role Name"
-msgstr "Anna roolin nimi"
+msgstr "Entrez le nom du rôle"
 
 #: extensions/system/views/admin/widgets/edit.razr:15
 msgid "Assignment"
-msgstr "Näkyvyys"
+msgstr "Affectation"
 
 #: extensions/system/views/admin/widgets/edit.razr:40
 #: extensions/system/views/widgets/menu/edit.razr:2
 #: extensions/system/src/Menu/Widget/MenuWidget.php:23
 msgid "Menu"
-msgstr "Valikko"
+msgstr "Menu"
 
 #: extensions/system/views/admin/widgets/edit.razr:49
 msgid "Pattern"
-msgstr "Lauseke"
+msgstr "Motif"
 
 #: extensions/system/views/admin/widgets/edit.razr:52
-msgid ""
-"Enter one page path per line. The \"*\" character is a wildcard. Exclude "
-"pages by prepending an exclamation mark to the path. Example paths: \"blog\" "
-"for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
-"exclude the blog."
-msgstr ""
-"Yksi sivu riville. Voit korvata osia sivun nimestä \"*\" -merkillä. Voit "
-"poissulkea sivuja lisäämällä ! osoitteeseen. Esimerkiksi: \"blog\" "
-"tarkoittaa sivua blog, \"blog/*\" tarkoittaa kaikkia blogikirjoituksia ja \"!"
-"blog\" poissulkee blogin"
+msgid "Enter one page path per line. The \"*\" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: \"blog\" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to exclude the blog."
+msgstr "Entrez un chemin de page par ligne. Le caractère \"*\" est un caractère générique. Excluez des pages en préfixant leur chemin par un point d'exclamation. Exemples de chemins : \"blog\" pour la page du blog, \"blog/*\" pour les articles du blog ou \"!blog\" pour exclure le blog."
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
 msgid "Position"
-msgstr "Sijainti"
+msgstr "Position"
 
 #: extensions/system/views/admin/widgets/edit.razr:103
 msgid "Options"
-msgstr "Valinnat"
+msgstr "Options"
 
 #: extensions/system/views/admin/widgets/edit.razr:105
 msgid "Show Title"
-msgstr "Näytä otsikko"
+msgstr "Afficher le titre"
 
 #: extensions/system/views/admin/widgets/index.razr:28
 #: extensions/system/src/Widget/Controller/WidgetsController.php:161
 msgid "Copy"
-msgstr "Kopioi"
+msgstr "Copier"
 
 #: extensions/system/views/admin/widgets/index.razr:43
 msgid "- Position -"
-msgstr "- Sijainti -"
+msgstr "- Position -"
 
 #: extensions/system/views/admin/widgets/index.razr:50
 msgid "- Type -"
-msgstr "- Tyyppi -"
+msgstr "- Type -"
 
 #: extensions/system/views/admin/widgets/index.razr:109
 msgid "- Assign -"
-msgstr "- Sijoita -"
+msgstr "- Assigner -"
 
 #: extensions/system/views/admin/widgets/index.razr:117
 msgid "Extension not loaded"
-msgstr "Lisäosa ei ole ladattu"
+msgstr "L'extension n'est pas chargée"
 
 #: extensions/system/views/tmpl/feed.error.razr:1
 msgid "Unable to retrieve feed data."
-msgstr "Syötettä ei voitu ladata"
+msgstr "Impossible de récupérer les données du flux RSS."
 
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "New Name"
-msgstr "Uusi nimi"
+msgstr "Nouveau nom"
 
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "Folder Name"
-msgstr "Kansion nimi"
+msgstr "Nom de dossier"
 
 #: extensions/system/views/tmpl/finder.main.razr:5
 msgid "Upload"
-msgstr "Lähetä"
+msgstr "Tansférer"
 
 #: extensions/system/views/tmpl/finder.main.razr:9
 msgid "Add Folder"
-msgstr "Lisää kansio"
+msgstr "Ajouter un dossier"
 
 #: extensions/system/views/tmpl/finder.main.razr:12
 msgid "Rename"
-msgstr "Uudelleennimeä"
+msgstr "Renommer"
 
 #: extensions/system/views/tmpl/finder.main.razr:28
 msgid "Home"
-msgstr "Etusivu"
+msgstr "Accueil"
 
 #: extensions/system/views/tmpl/finder.table.razr:7
 msgid "Size"
-msgstr "Koko"
+msgstr "Taille"
 
 #: extensions/system/views/tmpl/finder.table.razr:8
 msgid "Modified"
-msgstr "Muokattu"
+msgstr "Dernière modification"
 
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Drop files here."
-msgstr "Pudota tiedostot tähän"
+msgstr "Glissez les fichiers ici."
 
 #: extensions/system/views/tmpl/image.modal.razr:4
 msgid "Add Image"
-msgstr "Lisää kuva"
+msgstr "Ajouter une image"
 
 #: extensions/system/views/tmpl/image.modal.razr:8
 msgid "Select image"
-msgstr "Valitse kuva"
+msgstr "Sélectionnez une image"
 
 #: extensions/system/views/tmpl/image.modal.razr:18
 msgid "Alt"
-msgstr "Valinnainen teksti"
+msgstr "Alt"
 
 #: extensions/system/views/tmpl/image.modal.razr:29
 msgid "Select Image"
-msgstr "Valitse kuva"
+msgstr "Sélectionnez une image"
 
 #: extensions/system/views/tmpl/image.modal.razr:32
 #: extensions/system/views/tmpl/video.modal.razr:31
 msgid "Select"
-msgstr "Valitse"
+msgstr "Sélectionner"
 
 #: extensions/system/views/tmpl/image.replace.razr:6
 msgid "Placeholder Image"
-msgstr "Väliaikainen kuva"
+msgstr "Image de remplacement"
 
 #: extensions/system/views/tmpl/image.replace.razr:12
 msgid "Image"
-msgstr "Kuva"
+msgstr "Image"
 
 #: extensions/system/views/tmpl/link.modal.razr:3
 msgid "Add Link"
-msgstr "Lisää linkki"
+msgstr "Ajouter un lien"
 
 #: extensions/system/views/tmpl/link.replace.razr:1
 #: extensions/system/views/tmpl/linkpicker.replace.razr:1
 msgid "Select Link"
-msgstr "Valitse linkki"
+msgstr "Sélectionnez un lien"
 
 #: extensions/system/views/tmpl/linkpicker.modal.razr:3
 msgid "Link"
-msgstr "Linkki"
+msgstr "Lien"
 
 #: extensions/system/views/tmpl/package.updates.razr:18
 msgid "Changelog"
-msgstr "Muutoslogi"
+msgstr "Journal des modifications"
 
 #: extensions/system/views/tmpl/package.upload.razr:4
-msgid ""
-"The checksum of the uploaded package does not match the one from the "
-"marketplace. The file might be manipulated."
-msgstr ""
-"Lähetetyn paketin tiiviste ei vastaa markkinapaikalla olevan paketin "
-"tiivistettä. Tiedostoa on voitu muokata."
+msgid "The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated."
+msgstr "La somme de contrôle du paquet transféré ne correspond pas à celle du marché. Le fichier est peut-être corrompu."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
-msgid ""
-"There is an update available for the uploaded package. Please consider "
-"installing it instead."
-msgstr ""
-"Lähettämääsi pakettiin on saatavilla päivitys. Harkitse uuden version "
-"asentamista lähettämäsi sijaan."
+msgid "There is an update available for the uploaded package. Please consider installing it instead."
+msgstr "Il y a une mise à jour disponible pour le paquet transféré. Vous devriez peut-être installer cette version à la place."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
-msgstr "Osoite"
+msgstr "Chemin :"
 
 #: extensions/system/views/tmpl/package.upload.razr:29
 msgid "Type:"
-msgstr "Tyyppi"
+msgstr "Type :"
 
 #: extensions/system/views/tmpl/video.modal.razr:5
 msgid "Add Video"
-msgstr "Lisää video"
+msgstr "Ajouter une vidéo"
 
 #: extensions/system/views/tmpl/video.modal.razr:16
 msgid "Select video"
-msgstr "Valitse video"
+msgstr "Sélectionnez une vidéo"
 
 #: extensions/system/views/tmpl/video.modal.razr:28
 msgid "Select Video"
-msgstr "Valitse video"
+msgstr "Sélectionnez une vidéo"
 
 #: extensions/system/views/tmpl/video.replace.razr:6
 msgid "Placeholder Video"
-msgstr "Väliaikainen video"
+msgstr "Vidéo de remplacement"
 
 #: extensions/system/views/tmpl/video.replace.razr:12
 msgid "Video"
-msgstr "Video"
+msgstr "Vidéo"
 
 #: extensions/system/views/user/login.razr:13
 msgid "(Forgot Password?)"
-msgstr "(Unohditko salasanan?)"
+msgstr "(Mot de passe oublié?)"
 
 #: extensions/system/views/user/login.razr:20
 #: extensions/system/views/user/registration.razr:39
 #: extensions/system/views/user/reset/confirm.razr:18
 #: extensions/system/views/user/reset/request.razr:15
 msgid "Submit"
-msgstr "Lähetä"
+msgstr "Envoyer"
 
 #: extensions/system/views/user/mails/approve.razr:11
 msgid "Hello"
-msgstr "Hei"
+msgstr "Bonjour"
 
 #: extensions/system/views/user/mails/approve.razr:12
-msgid ""
-"A new user has registered at %site% and requests that you approve his "
-"account."
-msgstr ""
-"Uusi käyttäjä on rekisteröitynyt sivustolle %site% ja sinun on vahvistustasi "
-"tarvitaan tunnuksen luomiseksi."
+msgid "A new user has registered at %site% and requests that you approve his account."
+msgstr "Un nouvel utilisateur s'est inscrit sur %site% et nécessite que vous approuviez son compte."
 
 #: extensions/system/views/user/mails/approve.razr:13
-msgid ""
-"User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
-msgstr ""
-"Käyttäjän tiedot<br><br>Nimi: %name%<br>Käyttäjänimi: %username"
-"%<br>Sähköpostiosoite: %email%"
+msgid "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
+msgstr "Détails de l'utilisateur :<br><br>Nom : %name%<br>Nom d'utilisateur : %username%<br>E-mail : %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
-msgstr "Aktivoidaksesi tunnuksen, klikkaa"
+msgstr "Pour activer le compte, cliquez sur :"
 
 #: extensions/system/views/user/mails/reset.razr:9
 msgid "Someone requested that the password be reset for the following account"
-msgstr ""
-"Joku (todennäköisesti sinä) on pyytänyt salasanan palautusta seuraavalle "
-"tunnukselle"
+msgstr "Une demande de réinitialisation de mot de passe a été faite pour ce compte."
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"Jos et tarkoittanut tätä, voit poistaa tämän viestin, eikä mitään tapahdu."
+msgstr "S'il s'agit d'une erreur, ignorez simplement ce message et rien ne se passera."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
-msgstr "Palauttaaksesi salasanan, mene osoitteeseen"
+msgstr "Pour réinitialiser votre mot de passe, veuillez vous rendre à cette adresse"
 
 #: extensions/system/views/user/mails/verification.razr:11
 #: extensions/system/views/user/mails/welcome.razr:9
 msgid "Hello %name%"
-msgstr "Hei %name%"
+msgstr "Bonjour %name%"
 
 #: extensions/system/views/user/mails/verification.razr:12
-msgid ""
-"Thank you for registering at %site%! Your account has been successfully "
-"created and must be verified before you can use it."
-msgstr ""
-"Kiitos rekisteröinnistäsi sivustolle %site%! Tunnuksesi on nyt luotu, mutta "
-"se täytyy vahvistaa ennen kuin voit käyttää sitä."
+msgid "Thank you for registering at %site%! Your account has been successfully created and must be verified before you can use it."
+msgstr "Merci pour votre inscription sur %site% ! Votre compte a été créé mais doit encore être validé avant que vous ne puissiez l'utiliser."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
-msgstr "Vahvistaaksesi sähköpostiosoitteesi, klikkaa"
+msgstr "Pour valider votre compte, cliquez sur :"
 
 #: extensions/system/views/user/mails/welcome.razr:10
 msgid "Thank you for registering!"
-msgstr "Kiitos rekisteröitymisestäsi!"
+msgstr "Merci pour votre inscription !"
 
 #: extensions/system/views/user/mails/welcome.razr:12
 msgid "Login with the username:"
-msgstr "Voit kirjautua sisään käyttäjätunnuksella"
+msgstr "Se connecter avec le nom d'utilisateur:"
 
 #: extensions/system/views/user/profile.razr:5
 #: extensions/system/src/User/Controller/ProfileController.php:44
 msgid "Your Profile"
-msgstr "Profiilisi"
+msgstr "Votre profil"
 
 #: extensions/system/views/user/profile.razr:26
 msgid "Current Password"
-msgstr "Salasanasi"
+msgstr "Mot de passe courant"
 
 #: extensions/system/views/user/profile.razr:36
 msgid "New Password"
-msgstr "Uusi salasana"
+msgstr "Nouveau mot de passe"
 
 #: extensions/system/views/user/reset/confirm.razr:5
 msgid "Password confirmation"
-msgstr "Salasanan vahvistus"
+msgstr "Confirmation mot de passe"
 
 #: extensions/system/views/user/reset/confirm.razr:8
 msgid "Enter your new password below."
-msgstr "Anna uusi salasana"
+msgstr "Entrez votre nouveau mot de passe ci-dessous."
 
 #: extensions/system/views/user/reset/request.razr:3
 msgid "Forgot password"
-msgstr "Salasana unohtunut?"
+msgstr "Mot de passe oublié"
 
 #: extensions/system/views/user/reset/request.razr:5
-msgid ""
-"Please enter your username or email address. You will receive a link to "
-"create a new password via email."
-msgstr ""
-"Anna käyttäjätunnuksesi tai sähköpostiosoitteesi. Lähetämme palautuslinkin "
-"sähköpostitse."
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr "Veuillez entrer votre nom d'utilisateur ou votre email. Vous allez recevoir un email incluant un lien afin de créer un nouveau mot de passe."
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
-msgstr "Uudelleenohjaus sisäänkirjautumisen jälkeen"
+msgstr "Redirection après la connexion"
 
 #: extensions/system/views/widgets/login/edit.razr:10
 msgid "Logout Redirect"
-msgstr "Uudelleenohjaus uloskirjautumisen jälkeen"
+msgstr "Redirection après la déconnexion"
 
 #: extensions/system/views/widgets/login/login.razr:4
 msgid "username"
-msgstr "käyttäjänimi"
+msgstr "Nom d'utilisateur"
 
 #: extensions/system/views/widgets/login/login.razr:7
 msgid "password"
-msgstr "salasana"
+msgstr "mot de passe"
 
 #: extensions/system/views/widgets/login/login.razr:17
 msgid "Sign up"
-msgstr "Kirjaudu"
+msgstr "Inscription"
 
 #: extensions/system/views/widgets/login/logout.razr:1
 msgid "Hi"
-msgstr "Hei"
+msgstr "Salut"
 
 #: extensions/system/views/widgets/menu/edit.razr:12
 msgid "Start Level"
-msgstr "Aloitustaso"
+msgstr "Niveau de départ"
 
 #: extensions/system/views/widgets/menu/edit.razr:22
 msgid "Depth"
-msgstr "Syvyys"
+msgstr "Profondeur"
 
 #: extensions/system/views/widgets/menu/edit.razr:25
 msgid "No Limit"
-msgstr "Ei rajoitusta"
+msgstr "Aucune limite"
 
 #: extensions/system/views/widgets/menu/edit.razr:33
 msgid "Sub Items"
-msgstr "Alikohdat"
+msgstr "Sous-éléments"
 
 #: extensions/system/views/widgets/menu/edit.razr:36
 msgid "Show all"
-msgstr "Näytä kaikki"
+msgstr "Afficher tout"
 
 #: extensions/system/views/widgets/menu/edit.razr:39
 msgid "Show only for active item"
-msgstr "Näytä aktiivisessa kirjoituksessa"
+msgstr "Afficher seulement pour l'élément courant"
 
 #: extensions/system/views/widgets/text/edit.razr:5
 msgid "Enable Markdown"
-msgstr "Ota Markdown käyttöön"
+msgstr "Activer Markdown"
 
 #: extensions/system/languages/messages.php:4
 msgid "0"
@@ -1457,271 +1398,262 @@ msgstr "17"
 #: extensions/system/languages/messages.php:25
 #: extensions/system/src/Widget/Controller/WidgetsController.php:58
 msgid "Widgets"
-msgstr "Vimpaimet"
+msgstr "Widgets"
 
 #: extensions/system/languages/messages.php:26
 #: extensions/system/src/Menu/Controller/MenuController.php:47
 msgid "Menus"
-msgstr "Valikot"
+msgstr "Menus"
 
 #: extensions/system/languages/messages.php:27
 #: extensions/system/src/User/Controller/UserController.php:100
 #: extensions/system/src/User/Dashboard/UserWidget.php:23
 msgid "Users"
-msgstr "Käyttäjät"
+msgstr "Utilisateurs"
 
 #: extensions/system/languages/messages.php:30
 msgid "Access"
-msgstr "Käyttöoikeus"
+msgstr "Accès"
 
 #: extensions/system/languages/messages.php:33
 msgid "Manage media files"
-msgstr "Hallitse mediatiedostoja"
+msgstr "Gérer les fichiers de la médiathèque"
 
 #: extensions/system/languages/messages.php:34
 msgid "Manage menus"
-msgstr "Hallitse valikkoja"
+msgstr "Gérer les menus"
 
 #: extensions/system/languages/messages.php:35
 msgid "Manage widgets"
-msgstr "Hallitse vimpaimia"
+msgstr "Gérer les widgets"
 
 #: extensions/system/languages/messages.php:36
 msgid "Manage themes"
-msgstr "Hallitse teemoja"
+msgstr "Gérer les thèmes"
 
 #: extensions/system/languages/messages.php:37
 msgid "Manage extensions"
-msgstr "Hallitse lisäosia"
+msgstr "Gérer les extensions"
 
 #: extensions/system/languages/messages.php:38
 msgid "Manage url aliases"
-msgstr "Hallitse URL aliaksia"
+msgstr "Gérer les alias d'URL"
 
 #: extensions/system/languages/messages.php:39
 msgid "Apply system updates"
-msgstr "Asenna järjestelmäpäivitykset"
+msgstr "Appliquer les mises à jour système"
 
 #: extensions/system/languages/messages.php:40
 msgid "Access admin area"
-msgstr "Pääsy hallintapaneeliin"
+msgstr "Accès à l'administration"
 
 #: extensions/system/languages/messages.php:41
 msgid "Access system settings"
-msgstr "Pääsy järjestelmän asetuksiin"
+msgstr "Accès aux paramètres du système"
 
 #: extensions/system/languages/messages.php:42
 msgid "Manage user permissions"
-msgstr "Hallitse käyttäjäoikeuksia"
+msgstr "Gérer les droits utilisateur"
 
 #: extensions/system/languages/messages.php:43
 msgid "Manage users"
-msgstr "Hallitse käyttäjiä"
+msgstr "Gérer les utilisateurs"
 
 #: extensions/system/languages/messages.php:44
 msgid "Use the site in maintenance mode"
-msgstr "Käytä sivua huoltotilassa"
+msgstr "Utiliser le site en mode maintenance"
 
 #: extensions/system/languages/messages.php:45
-msgid ""
-"Warning: Give to trusted roles only; this permission has security "
-"implications."
-msgstr ""
-"Varoitus! Anna ainoastaa luotetuille rooleille; tämä käyttöoikeus voi "
-"vaarantaa sivustosi."
+msgid "Warning: Give to trusted roles only; this permission has security implications."
+msgstr "Attention : Ne donner qu'aux rôles de confiance; cette permission a des implications sur la sécurité."
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
 msgid "Editor not found."
-msgstr "Muokkainta ei löytynyt"
+msgstr "Aucun éditeur n'a été trouvé."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:62
 msgid "Core extensions may not be enabled."
-msgstr "Ydinlaajennoksia ei voi ottaa käyttöön"
+msgstr "Les extensions de base ne peuvent pas être activées."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
 msgid "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr "Lisäosaa ei voitu aktivoida.<br>Lisäosa aiheutti vakavan virheen."
+msgstr "Impossible d'activer cette extension.<br>L'extension a causé une erreur fatale."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
 msgid "Unable to enable extension \"%name%\"."
-msgstr "Lisäosaa \"%name%\" ei voitu aktivoida"
+msgstr "Impossible d'activer l'extension \"%name%\"."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:91
 msgid "Extension enabled."
-msgstr "Lisäosa otettu käyttöön"
+msgstr "Extension activée."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:109
 msgid "Core extensions may not be disabled."
-msgstr "Ydinlisäosia ei voi poistaa käytöstä"
+msgstr "Les extensions de base ne peuvent pas être désactivées."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:113
 msgid "Extension \"%name%\" has not been loaded."
-msgstr "Lisäosa \"%name%\" ei ole ladattu"
+msgstr "L'extension \"%name%\" n'a pas été chargée."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:120
 msgid "Extension disabled."
-msgstr "Lisäosa poistettu käytöstä"
+msgstr "Extension désactivée."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:138
 msgid "Core extensions may not be uninstalled."
-msgstr "Ydinlisäosia ei voi poistaa"
+msgstr "Les extensions de base ne peuvent pas être déinstallées."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:146
 msgid "Unable to uninstall extension \"%name%\"."
-msgstr "Virhe poistettaessa lisäosaa \"%name%\""
+msgstr "Impossible de désinstaller l'extension \"%name%\"."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:157
 msgid "Extension uninstalled."
-msgstr "Lisäosa poistettu"
+msgstr "Extension désinstallée."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:174
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:197
 msgid "Invalid extension."
-msgstr "Virheellinen lisäosa"
+msgstr "L'extension est invalide."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:203
 #: extensions/system/src/System/Controller/SettingsController.php:104
 #: extensions/system/src/Theme/Controller/ThemesController.php:167
 msgid "Settings saved."
-msgstr "Asetukset tallennettu"
+msgstr "Les paramètres ont été enregistrés."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:52
 #: extensions/system/src/Menu/Controller/ItemController.php:98
 #: extensions/system/src/Menu/Controller/ItemController.php:133
 #: extensions/system/src/Menu/Controller/ItemController.php:161
 msgid "Invalid menu."
-msgstr "Virheellinen valikko"
+msgstr "Le menu est invalide."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:58
 msgid "Add Menu Item"
-msgstr "Lisää valikon kohta"
+msgstr "Ajouter un élément de menu"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:76
 msgid "Invalid menu item."
-msgstr "Virheellinen valikon kohta"
+msgstr "L'élément de menu est invalide."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:79
 msgid "Edit Menu Item"
-msgstr "Muokkaa valikon kohtaa"
+msgstr "Modifier l'élément de menu"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item saved."
-msgstr "Valikon kohta tallennettu"
+msgstr "L'élément de menu a été enregistré."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item created."
-msgstr "Valikon kohta luotu"
+msgstr "L'élément de menu a été ajouté."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:119
 msgid "Invalid url."
-msgstr "Virheellinen URL"
+msgstr "L'URL est invalide."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:144
-msgid ""
-"{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
-msgstr ""
-"{0} Valikon kohtia ei poistettu|{1} Valikon kohta poistettu|]1,Inf[ Valikon "
-"kohdat poistettu"
+msgid "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
+msgstr "{0} Aucun élément de menu supprimé.|{1} L'élément de menu a été supprimé.|]1,Inf[ Les éléments de menu ont été supprimés."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
-msgstr "Virheellinen valikon nimi"
+msgstr "Nom de menu incorrect."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:66
 msgid "Invalid menu name. \"%name%\" is already in use."
-msgstr "Virheellinen valikon nimi. \"%name%\" on jo käytössä."
+msgstr "Nom de menu incorrect."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:86
 msgid "Invalid menu id"
-msgstr "Virheellinen valikon tunniste"
+msgstr "L'id du menu est invalide"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:122
 msgid "Menu order updated"
-msgstr "Valikon järjestys päivitetty"
+msgstr "L'ordre du menu a été modifié."
 
 #: extensions/system/src/Menu/Entity/Item.php:92
 #: extensions/system/src/User/Entity/User.php:94
 #: extensions/system/src/Widget/Entity/Widget.php:91
 msgid "Unknown"
-msgstr "Tuntematon"
+msgstr "Inconnu"
 
 #: extensions/system/src/Menu/Widget/MenuWidget.php:31
 msgid "Menu Widget"
-msgstr "Valikko vimpain"
+msgstr "Widget Menu"
 
 #: extensions/system/src/System/Controller/AliasController.php:54
 msgid "Add URL Alias"
-msgstr "Lisää URL alias"
+msgstr "Ajouter un alias d'URL"
 
 #: extensions/system/src/System/Controller/AliasController.php:66
 msgid "Invalid alias id."
-msgstr "Virheellinen aliaksen tunniste"
+msgstr "L'id de l'alias est invalide."
 
 #: extensions/system/src/System/Controller/AliasController.php:69
 msgid "Edit URL Alias"
-msgstr "Muokkaa URL aliasta"
+msgstr "Modifier l'alias d'URL"
 
 #: extensions/system/src/System/Controller/AliasController.php:89
 msgid "Invalid alias."
-msgstr "Virheellinen alias"
+msgstr "L'alias est invalide."
 
 #: extensions/system/src/System/Controller/AliasController.php:93
 msgid "Invalid source."
-msgstr "Virheellinen kohde"
+msgstr "La source est invalide."
 
 #: extensions/system/src/System/Controller/AliasController.php:97
 msgid "The alias \"%alias%\" is already in use."
-msgstr "Alias \"%alias%\" on jo käytössä"
+msgstr "L'alias \"%alias%\" est déjà utilisé."
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias saved."
-msgstr "Alias tallennettu"
+msgstr "L'alias a été enregistré."
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias created."
-msgstr "Alias luotu"
+msgstr "L'alias a été ajouté."
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr ""
-"{0} Aliaksia ei poistettu|{1} Alias poistettu|]1,Inf[ Aliakset poistettu"
+msgstr "{0} Aucun alias supprimé.|{1} L'alias a été supprimé.|]1,Inf[ Les alias ont été supprimés."
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
-msgstr "Kojelaudan asetukset"
+msgstr "Paramètres du dashboard"
 
 #: extensions/system/src/System/Controller/DashboardController.php:79
 #: extensions/system/src/System/Controller/DashboardController.php:109
 msgid "Invalid widget type."
-msgstr "Virheellinen vimpaimen tyyppi"
+msgstr "Le type du widget est invalide."
 
 #: extensions/system/src/System/Controller/DashboardController.php:105
 msgid "Invalid widget id."
-msgstr "Virheellinen vimpaimen tunniste"
+msgstr "L'id du widget est invalide."
 
 #: extensions/system/src/System/Controller/DashboardController.php:114
 #: extensions/system/src/Widget/Controller/WidgetsController.php:85
 msgid "Edit Widget"
-msgstr "Muokkaa vimpainta"
+msgstr "Modifier le widget"
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget created."
-msgstr "Vimpain luotu"
+msgstr "Le widget a été ajouté."
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget saved."
-msgstr "Vimpain tallennettu"
+msgstr "Le widget a été enregistré."
 
 #: extensions/system/src/System/Controller/DashboardController.php:160
 msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
+msgstr "{0} Aucun widget supprimé.|{1} Le widget a été supprimé.|]1,Inf[ Les widgets ont été supprimés."
 
 #: extensions/system/src/System/Controller/DashboardController.php:183
 msgid "Widgets reordered."
-msgstr "Vimpaimet uudelleenjärjestetty"
+msgstr "Les widgets ont été réordonnés."
 
 #: extensions/system/src/System/Controller/FinderController.php:18
 #: extensions/system/src/System/Controller/FinderController.php:65
@@ -1729,7 +1661,7 @@ msgstr "Vimpaimet uudelleenjärjestetty"
 #: extensions/system/src/System/Controller/FinderController.php:123
 #: extensions/system/src/System/Controller/FinderController.php:151
 msgid "Invalid path."
-msgstr "Virheellinen osoite"
+msgstr "Le chemin est invalide."
 
 #: extensions/system/src/System/Controller/FinderController.php:22
 #: extensions/system/src/System/Controller/FinderController.php:69
@@ -1737,437 +1669,432 @@ msgstr "Virheellinen osoite"
 #: extensions/system/src/System/Controller/FinderController.php:127
 #: extensions/system/src/System/Controller/FinderController.php:155
 msgid "Permission denied."
-msgstr "Pääsy estetty"
+msgstr "Accès refusé."
 
 #: extensions/system/src/System/Controller/FinderController.php:61
 #: extensions/system/src/System/Controller/FinderController.php:91
 msgid "Invalid file name."
-msgstr "Virheellinen tiedoston nimi"
+msgstr "Nom de fichier incorrect."
 
 #: extensions/system/src/System/Controller/FinderController.php:76
 msgid "Directory created."
-msgstr "Kansio luotu"
+msgstr "Le dossier a été ajouté."
 
 #: extensions/system/src/System/Controller/FinderController.php:80
 msgid "Unable to create directory."
-msgstr "Kansiota ei voitu luoda"
+msgstr "Impossible de renommer le dossier."
 
 #: extensions/system/src/System/Controller/FinderController.php:106
 msgid "Renamed."
-msgstr "Uudelleennimetty"
+msgstr "Renommé."
 
 #: extensions/system/src/System/Controller/FinderController.php:110
 msgid "Unable to rename."
-msgstr "Ei voitu uudelleennimetä"
+msgstr "Impossible de renommer."
 
 #: extensions/system/src/System/Controller/FinderController.php:136
 msgid "Unable to remove."
-msgstr "Ei voitu poistaa"
+msgstr "Impossible de supprimer"
 
 #: extensions/system/src/System/Controller/FinderController.php:140
 msgid "Removed selected."
-msgstr "Valitut poistettu"
+msgstr "La sélection a été supprimée."
 
 #: extensions/system/src/System/Controller/FinderController.php:161
 msgid "No files uploaded."
-msgstr "Ei tiedostoja lähetetty"
+msgstr "Aucun fichier transféré."
 
 #: extensions/system/src/System/Controller/FinderController.php:167
 msgid "Uploaded file invalid."
-msgstr "Virheellinen lähetetty tiedosto"
+msgstr "Le fichier transféré est invalide."
 
 #: extensions/system/src/System/Controller/FinderController.php:173
 msgid "Upload complete."
-msgstr "Lähetys valmis"
+msgstr "Transfert terminé."
 
 #: extensions/system/src/System/Controller/FinderController.php:177
 msgid "Unable to upload."
-msgstr "Ei voida lähettää"
+msgstr "Impossible de transférer."
 
 #: extensions/system/src/System/Controller/FinderController.php:199
-#, fuzzy
 msgid "n/a"
-msgstr "n/a"
+msgstr "n.d."
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
-msgstr "%d tavua"
+msgstr "%d octets"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  KB"
-msgstr "%d Kt"
+msgstr "%d Ko"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  MB"
-msgstr "%d Mt"
+msgstr "%d Mo"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  GB"
-msgstr "%d Gt"
+msgstr "%d Go"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d TB"
-msgstr "%d Tt"
+msgstr "%d To"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d PB"
-msgstr "%d Pt"
+msgstr "%d Po"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d EB"
-msgstr "%d Et"
+msgstr "%d Eo"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d ZB"
-msgstr "%d Zt"
+msgstr "%d Zo"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d YB"
-msgstr "%d Yt"
+msgstr "%d Yo"
 
 #: extensions/system/src/System/Controller/LinkController.php:56
 msgid "Url"
-msgstr "Url"
+msgstr "URL"
 
 #: extensions/system/src/System/Controller/MigrationController.php:29
 msgid "Your Pagekit database has been updated successfully."
-msgstr "Pagekit tietokanta päivitetty onnistuneesti"
+msgstr "Votre base de données Pagekit a été mise à jour avec succès."
 
 #: extensions/system/src/System/Controller/MigrationController.php:31
 msgid "Your Pagekit database is already up-to-date!"
-msgstr "Pagekit tietokanta on jo ajantasalla!"
+msgstr "Votre base de données Pagekit est déjà à jour."
 
 #: extensions/system/src/System/Controller/PackageController.php:47
 msgid "No file uploaded."
-msgstr "Ei tiedostoja"
+msgstr "Aucun fichier transféré."
 
 #: extensions/system/src/System/Controller/PackageController.php:53
 msgid "Invalid package type."
-msgstr "Virheellinen paketin tyyppi"
+msgstr "Le type du paquet est invalide."
 
 #: extensions/system/src/System/Controller/PackageController.php:57
 #: extensions/system/src/System/Controller/PackageController.php:161
 msgid "Core extensions may not be installed."
-msgstr "Ydinlisäosia ei voi asentaa"
+msgstr "Les extensions de base ne peuvent pas être installées."
 
 #: extensions/system/src/System/Controller/PackageController.php:111
 msgid "Path not found."
-msgstr "Osoitetta ei löytynyt"
+msgstr "Le chemin n'a pas été trouvé."
 
 #: extensions/system/src/System/Controller/PackageController.php:124
 msgid "Package \"%name%\" installed."
-msgstr "Paketti \"%name%\" asennettu"
+msgstr "Package \"%name\"% installé."
 
 #: extensions/system/src/System/Controller/PackageController.php:127
 #: extensions/system/src/System/Controller/UpdateController.php:67
 msgid "Package extraction failed."
-msgstr "Paketin purku epäonnistui"
+msgstr "L'extraction du paquet a échoué."
 
 #: extensions/system/src/System/Controller/PackageController.php:129
 #: extensions/system/src/System/Controller/UpdateController.php:69
 msgid "Package checksum verification failed."
-msgstr "Paketin tarkistetta ei voitu varmistaa"
+msgstr "La vérification de la somme de contrôle a échoué."
 
 #: extensions/system/src/System/Controller/PackageController.php:131
 #: extensions/system/src/System/Controller/UpdateController.php:71
 msgid "Invalid API key."
-msgstr "Virheellinen API avain"
+msgstr "Clé API incorrecte."
 
 #: extensions/system/src/System/Controller/PackageController.php:133
 #: extensions/system/src/System/Controller/UpdateController.php:73
 msgid "Package download failed."
-msgstr "Paketin lataus epäonnistui"
+msgstr "Le téléchargement du paquet a échoué."
 
 #: extensions/system/src/System/Controller/PackageController.php:135
 #: extensions/system/src/System/Controller/UpdateController.php:75
 msgid "Path is not writable."
-msgstr "Osoitteeseen ei ole kirjoitusoikeutta"
+msgstr "Le chemin n'est pas accessible en écriture."
 
 #: extensions/system/src/System/Controller/PackageController.php:209
 msgid "Can't load json file from package."
-msgstr "Json -tiedostoa ei voitu ladata paketista"
+msgstr "Impossible de charger le ficher JSON du paquet."
 
 #: extensions/system/src/System/Controller/SettingsController.php:127
 msgid "Connection established!"
-msgstr "Yhdistetty!"
+msgstr "Connexion établie !"
 
 #: extensions/system/src/System/Controller/SettingsController.php:131
 msgid "Connection not established! (%s)"
-msgstr "Yhteyttä ei voitu muodostaa! (%s)"
+msgstr "La connexion  n'a pas pu être établie ! (%s)"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Test email!"
-msgstr "Testisähköposti!"
+msgstr "E-mail de test !"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Testemail"
-msgstr "Testisähköposti"
+msgstr "Ceci est un e-mail de test."
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail successfully sent!"
-msgstr "Sähköposti lähetetty!"
+msgstr "Le message a été envoyé !"
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail delivery failed!"
-msgstr "Sähköpostia ei voity lähettää!"
+msgstr "Le message n'a pas pu être envoyé !"
 
 #: extensions/system/src/System/Controller/SettingsController.php:165
 msgid "Mail delivery failed! (%s)"
-msgstr "Sähköpostia ei voity lähettää! (%s)"
+msgstr "Le message n'a pas pu être envoyé ! (%s)"
 
 #: extensions/system/src/System/Controller/SystemController.php:79
 msgid "Order saved."
-msgstr "Järjestys tallennettu"
+msgstr "L'ordre a été enregistré."
 
 #: extensions/system/src/System/Controller/SystemController.php:104
 msgid "System Information"
-msgstr "Järjestelmätiedot"
+msgstr "Informations système"
 
 #: extensions/system/src/System/Controller/SystemController.php:146
 msgid "Cache cleared!"
-msgstr "Välimuisti tyhjennetty!"
+msgstr "Le cache a été vidé !"
 
 #: extensions/system/src/System/Controller/UpdateController.php:53
 msgid "Unable to find update."
-msgstr "Päivityksiä ei löytynyt"
+msgstr "Impossible de trouver de mise à jour."
 
 #: extensions/system/src/System/Controller/UpdateController.php:64
 msgid "Copying files..."
-msgstr "Kopioidaan tiedostoja ..."
+msgstr "Copie des fichiers..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:91
 #: extensions/system/src/System/Controller/UpdateController.php:121
 msgid "You may not call this step directly."
-msgstr "Et voi yrittää suoraan suorittaa tätä askelta"
+msgstr "Vous ne pouvez pas accéder à cette étape directement."
 
 #: extensions/system/src/System/Controller/UpdateController.php:103
 msgid "Updating database..."
-msgstr "Päivitetään tietokantaa ..."
+msgstr "Mise à jour de la base de données..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:127
 msgid "Installed successfully."
-msgstr "Asennus onnistui"
+msgstr "Installé avec succès."
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
-msgstr "Syöte"
+msgstr "Flux"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:32
 msgid "Feed Widget"
-msgstr "Syöte vimpain"
+msgstr "Widget Flux RSS"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:35
 msgid "No title given."
-msgstr "Ei otsikkoa"
+msgstr "Aucun titre n'a été donné."
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:32
 msgid "Weather Widget"
-msgstr "Sää vimpain"
+msgstr "Widget Météo"
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:35
 msgid "No location chosen."
-msgstr "Sijaintia ei valittu"
+msgstr "Aucun lieux n'a été choisi."
 
 #: extensions/system/src/System/Event/FrontpageListener.php:18
 msgid "No Frontpage assigned."
-msgstr "Etusivua ei valittu"
+msgstr "Aucune page d'accueil définie."
 
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
-#, fuzzy
 msgid "DATE_SHORT"
 msgstr "d.m.Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:135
 #: extensions/system/src/SystemExtension.php:126
-#, fuzzy
 msgid "DATE_MEDIUM"
-msgstr "d.m.y"
+msgstr "j M Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:136
 #: extensions/system/src/SystemExtension.php:125
-#, fuzzy
 msgid "DATE_LONG"
-msgstr "d.m.y"
+msgstr "j F Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:137
 #: extensions/system/src/SystemExtension.php:124
-#, fuzzy
 msgid "DATE_FULL"
-msgstr "d.m.y"
+msgstr "l j F Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Mon"
-msgstr "Ma"
+msgstr "Lun"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Tue"
-msgstr "Ti"
+msgstr "Mar"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Wed"
-msgstr "Ke"
+msgstr "Mer"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Thu"
-msgstr "To"
+msgstr "Jeu"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Fri"
-msgstr "Pe"
+msgstr "Ven"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Sat"
-msgstr "La"
+msgstr "Sam"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Sun"
-msgstr "su"
+msgstr "Dim"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Monday"
-msgstr "Maanantai"
+msgstr "Lundi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Tuesday"
-msgstr "Tiistai"
+msgstr "Mardi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Wednesday"
-msgstr "Keskiviikko"
+msgstr "Mercredi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Thursday"
-msgstr "Torstai"
+msgstr "Jeudi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Friday"
-msgstr "Perjantai"
+msgstr "Vendredi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Saturday"
-msgstr "Lauantai"
+msgstr "Samedi"
 
 #: extensions/system/src/System/Event/SystemListener.php:139
 msgid "Sunday"
-msgstr "sunnunstai"
+msgstr "Dimanche"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jan"
-msgstr "Tammi"
+msgstr "Janv."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Feb"
-msgstr "Helmi"
+msgstr "Févr."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Mar"
-msgstr "Maalis"
+msgstr "Mars"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Apr"
-msgstr "Huhti"
+msgstr "Avr."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "May"
-msgstr "Toukokuu"
+msgstr "Mai"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jun"
-msgstr "Kesä"
+msgstr "Juin"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Jul"
-msgstr "Heinä"
+msgstr "Juill."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Aug"
-msgstr "Elo"
+msgstr "Août"
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Sep"
-msgstr "Syys"
+msgstr "Sept."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Oct"
-msgstr "Loka"
+msgstr "Oct."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Nov"
-msgstr "Marras"
+msgstr "Nov."
 
 #: extensions/system/src/System/Event/SystemListener.php:140
 msgid "Dec"
-msgstr "Joulu"
+msgstr "Déc."
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "January"
-msgstr "Tammikuu"
+msgstr "Janvier"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "February"
-msgstr "Helmikuu"
+msgstr "Février"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "March"
-msgstr "Maaliskuu"
+msgstr "Mars"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "April"
-msgstr "Huhtikuu"
+msgstr "Avril"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "June"
-msgstr "Kesäkuu"
+msgstr "Juin"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "July"
-msgstr "Heinäkuu"
+msgstr "Juillet"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "August"
-msgstr "Elokuu"
+msgstr "Août"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "September"
-msgstr "Syyskuu"
+msgstr "Septembre"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "October"
-msgstr "Lokakuu"
+msgstr "Octobre"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "November"
-msgstr "Marraskuu"
+msgstr "Novembre"
 
 #: extensions/system/src/System/Event/SystemListener.php:141
 msgid "December"
-msgstr "Joulukuu"
+msgstr "Décembre"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:30
 msgid "Invalid CSRF token."
-msgstr "Virheellinen CSRF"
+msgstr "Jeton CSRF invalide."
 
 #: extensions/system/src/System/Exception/ExceptionController.php:33
 msgid "Sorry, the page you are looking for could not be found."
-msgstr "Sivua ei löytynyt"
+msgstr "Désolé, la page que vous recherchez n'a pu être trouvée."
 
 #: extensions/system/src/System/Exception/ExceptionController.php:39
 msgid "Whoops, looks like something went wrong."
-msgstr "Oops! Jotain meni vikaan"
+msgstr "Oups, il semblerait que quelque-chose se soit mal passé."
 
 #: extensions/system/src/System/Helper/CountryHelper.php:20
 msgid "Ascension Island"
-msgstr "Ascension Island"
+msgstr "Île de l'Ascension"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:21
 msgid "Andorra"
-msgstr "Andorra"
+msgstr "Andorre"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:22
 msgid "United Arab Emirates"
-msgstr "United Arab Emirates"
+msgstr "Émirats arabes unis"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:23
 msgid "Afghanistan"
@@ -2175,7 +2102,7 @@ msgstr "Afghanistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:24
 msgid "Antigua and Barbuda"
-msgstr "Antigua and Barbuda"
+msgstr "Antigua et Barbuda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:25
 msgid "Anguilla"
@@ -2183,15 +2110,15 @@ msgstr "Anguilla"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:26
 msgid "Albania"
-msgstr "Albania"
+msgstr "Albanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:27
 msgid "Armenia"
-msgstr "Armenia"
+msgstr "Arménie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:28
 msgid "Netherlands Antilles"
-msgstr "Netherlands Antilles"
+msgstr "Antilles néerlandaises"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:29
 msgid "Angola"
@@ -2199,23 +2126,23 @@ msgstr "Angola"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:30
 msgid "Antarctica"
-msgstr "Antarctica"
+msgstr "Antarctique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:31
 msgid "Argentina"
-msgstr "Argentina"
+msgstr "Argentine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:32
 msgid "American Samoa"
-msgstr "American Samoa"
+msgstr "Samoa américaines"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:33
 msgid "Austria"
-msgstr "Austria"
+msgstr "Autriche"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:34
 msgid "Australia"
-msgstr "Australia"
+msgstr "Australie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:35
 msgid "Aruba"
@@ -2223,19 +2150,19 @@ msgstr "Aruba"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:36
 msgid "Åland Islands"
-msgstr "Åland Islands"
+msgstr "Åland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:37
 msgid "Azerbaijan"
-msgstr "Azerbaijan"
+msgstr "Azerbaïdjan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:38
 msgid "Bosnia and Herzegovina"
-msgstr "Bosnia and Herzegovina"
+msgstr "Bosnie-Herzégovine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:39
 msgid "Barbados"
-msgstr "Barbados"
+msgstr "Barbade"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:40
 msgid "Bangladesh"
@@ -2243,7 +2170,7 @@ msgstr "Bangladesh"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:41
 msgid "Belgium"
-msgstr "Belgium"
+msgstr "Belgique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:42
 msgid "Burkina Faso"
@@ -2251,11 +2178,11 @@ msgstr "Burkina Faso"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:43
 msgid "Bulgaria"
-msgstr "Bulgaria"
+msgstr "Bulgarie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:44
 msgid "Bahrain"
-msgstr "Bahrain"
+msgstr "Bahreïn"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:45
 msgid "Burundi"
@@ -2263,15 +2190,15 @@ msgstr "Burundi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:46
 msgid "Benin"
-msgstr "Benin"
+msgstr "Bénin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:47
 msgid "Saint Barthélemy"
-msgstr "Saint Barthélemy"
+msgstr "Saint-Barthélemy"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:48
 msgid "Bermuda"
-msgstr "Bermuda"
+msgstr "Bermudes"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:49
 msgid "Brunei"
@@ -2279,15 +2206,15 @@ msgstr "Brunei"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:50
 msgid "Bolivia"
-msgstr "Bolivia"
+msgstr "Bolivie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:51
 msgid "Caribbean Netherlands"
-msgstr "Caribbean Netherlands"
+msgstr "Pays-Bas caribéens"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:52
 msgid "Brazil"
-msgstr "Brazil"
+msgstr "Brésil"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:53
 msgid "Bahamas"
@@ -2295,11 +2222,11 @@ msgstr "Bahamas"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:54
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Bhoutan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:55
 msgid "Bouvet Island"
-msgstr "Bouvet Island"
+msgstr "Île Bouvet"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:56
 msgid "Botswana"
@@ -2307,7 +2234,7 @@ msgstr "Botswana"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:57
 msgid "Belarus"
-msgstr "Belarus"
+msgstr "Biélorussie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:58
 msgid "Belize"
@@ -2315,55 +2242,55 @@ msgstr "Belize"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:59
 msgid "Canada"
-msgstr "Canada"
+msgstr "Le Canada"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:60
 msgid "Cocos [Keeling] Islands"
-msgstr "Cocos [Keeling] Islands"
+msgstr "Îles Cocos"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:61
 msgid "Congo - Kinshasa"
-msgstr "Congo - Kinshasa"
+msgstr "Congo-Kinshasa"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:62
 msgid "Central African Republic"
-msgstr "Central African Republic"
+msgstr "République centrafricaine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:63
 msgid "Congo - Brazzaville"
-msgstr "Congo - Brazzaville"
+msgstr "Congo-Brazzaville"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:64
 msgid "Switzerland"
-msgstr "Switzerland"
+msgstr "Suisse"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:65
 msgid "Côte d’Ivoire"
-msgstr "Côte d’Ivoire"
+msgstr "Côte d'Ivoire"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:66
 msgid "Cook Islands"
-msgstr "Cook Islands"
+msgstr "Îles Cook"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:67
 msgid "Chile"
-msgstr "Chile"
+msgstr "Chili"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:68
 msgid "Cameroon"
-msgstr "Cameroon"
+msgstr "Cameroun"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:69
 msgid "China"
-msgstr "China"
+msgstr "Chine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:70
 msgid "Colombia"
-msgstr "Colombia"
+msgstr "Colombie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:71
 msgid "Clipperton Island"
-msgstr "Clipperton Island"
+msgstr "Île de Clipperton"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:72
 msgid "Costa Rica"
@@ -2375,7 +2302,7 @@ msgstr "Cuba"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:74
 msgid "Cape Verde"
-msgstr "Cape Verde"
+msgstr "Cap-Vert"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:75
 msgid "Curaçao"
@@ -2383,19 +2310,19 @@ msgstr "Curaçao"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:76
 msgid "Christmas Island"
-msgstr "Christmas Island"
+msgstr "Île Christmas"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:77
 msgid "Cyprus"
-msgstr "Cyprus"
+msgstr "Chypre"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:78
 msgid "Czech Republic"
-msgstr "Czech Republic"
+msgstr "République tchèque"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:79
 msgid "Germany"
-msgstr "Germany"
+msgstr "Allemagne"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:80
 msgid "Diego Garcia"
@@ -2407,71 +2334,71 @@ msgstr "Djibouti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:82
 msgid "Denmark"
-msgstr "Denmark"
+msgstr "Danemark"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:83
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Dominique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:84
 msgid "Dominican Republic"
-msgstr "Dominican Republic"
+msgstr "République dominicaine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:85
 msgid "Algeria"
-msgstr "Algeria"
+msgstr "Algérie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:86
 msgid "Ceuta and Melilla"
-msgstr "Ceuta and Melilla"
+msgstr "Ceuta et Melilla"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:87
 msgid "Ecuador"
-msgstr "Ecuador"
+msgstr "Équateur"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:88
 msgid "Estonia"
-msgstr "Estonia"
+msgstr "Estonie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:89
 msgid "Egypt"
-msgstr "Egypt"
+msgstr "Égypte"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:90
 msgid "Western Sahara"
-msgstr "Western Sahara"
+msgstr "Sahara Occidental"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:91
 msgid "Eritrea"
-msgstr "Eritrea"
+msgstr "Érythrée"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:92
 msgid "Spain"
-msgstr "Spain"
+msgstr "Espagne"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:93
 msgid "Ethiopia"
-msgstr "Ethiopia"
+msgstr "Éthiopie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:94
 msgid "Finland"
-msgstr "Finland"
+msgstr "Finlande"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:95
 msgid "Fiji"
-msgstr "Fiji"
+msgstr "Fidji"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:96
 msgid "Falkland Islands"
-msgstr "Falkland Islands"
+msgstr "Îles Falkland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:97
 msgid "Micronesia"
-msgstr "Micronesia"
+msgstr "Micronésie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:98
 msgid "Faroe Islands"
-msgstr "Faroe Islands"
+msgstr "Îles Féroé"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:99
 msgid "France"
@@ -2483,23 +2410,23 @@ msgstr "Gabon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:101
 msgid "United Kingdom"
-msgstr "United Kingdom"
+msgstr "Royaume-Uni"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:102
 msgid "Grenada"
-msgstr "Grenada"
+msgstr "Grenade"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:103
 msgid "Georgia"
-msgstr "Georgia"
+msgstr "Géorgie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:104
 msgid "French Guiana"
-msgstr "French Guiana"
+msgstr "Guyane française"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:105
 msgid "Guernsey"
-msgstr "Guernsey"
+msgstr "Guernesey"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:106
 msgid "Ghana"
@@ -2511,15 +2438,15 @@ msgstr "Gibraltar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:108
 msgid "Greenland"
-msgstr "Greenland"
+msgstr "Groenland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:109
 msgid "Gambia"
-msgstr "Gambia"
+msgstr "Gambie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:110
 msgid "Guinea"
-msgstr "Guinea"
+msgstr "Guinée"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:111
 msgid "Guadeloupe"
@@ -2527,15 +2454,15 @@ msgstr "Guadeloupe"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:112
 msgid "Equatorial Guinea"
-msgstr "Equatorial Guinea"
+msgstr "Guinée équatoriale"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:113
 msgid "Greece"
-msgstr "Greece"
+msgstr "Grèce"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:114
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "South Georgia and the South Sandwich Islands"
+msgstr "Géorgie du Sud et les îles Sandwich du Sud"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:115
 msgid "Guatemala"
@@ -2547,19 +2474,19 @@ msgstr "Guam"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:117
 msgid "Guinea-Bissau"
-msgstr "Guinea-Bissau"
+msgstr "Guinée-Bissau"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:118
 msgid "Guyana"
-msgstr "Guyana"
+msgstr "Guyane"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:119
 msgid "Hong Kong SAR China"
-msgstr "Hong Kong SAR China"
+msgstr "Hong Kong Chine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:120
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard Island and McDonald Islands"
+msgstr "Îles Heard et McDonald"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:121
 msgid "Honduras"
@@ -2567,47 +2494,47 @@ msgstr "Honduras"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:122
 msgid "Croatia"
-msgstr "Croatia"
+msgstr "Croatie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:123
 msgid "Haiti"
-msgstr "Haiti"
+msgstr "Haïti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:124
 msgid "Hungary"
-msgstr "Hungary"
+msgstr "Hongrie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:125
 msgid "Canary Islands"
-msgstr "Canary Islands"
+msgstr "Îles Canaries"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:126
 msgid "Indonesia"
-msgstr "Indonesia"
+msgstr "Indonésie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:127
 msgid "Ireland"
-msgstr "Ireland"
+msgstr "Irlande"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:128
 msgid "Israel"
-msgstr "Israel"
+msgstr "Israël"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:129
 msgid "Isle of Man"
-msgstr "Isle of Man"
+msgstr "Île de Man"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:130
 msgid "India"
-msgstr "India"
+msgstr "Inde"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:131
 msgid "British Indian Ocean Territory"
-msgstr "British Indian Ocean Territory"
+msgstr "Territoire britannique de l'océan Indien"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:132
 msgid "Iraq"
-msgstr "Iraq"
+msgstr "Irak"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:133
 msgid "Iran"
@@ -2615,11 +2542,11 @@ msgstr "Iran"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:134
 msgid "Iceland"
-msgstr "Iceland"
+msgstr "Islande"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:135
 msgid "Italy"
-msgstr "Italy"
+msgstr "Italie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:136
 msgid "Jersey"
@@ -2627,15 +2554,15 @@ msgstr "Jersey"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:137
 msgid "Jamaica"
-msgstr "Jamaica"
+msgstr "Jamaïque"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:138
 msgid "Jordan"
-msgstr "Jordan"
+msgstr "Jordanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:139
 msgid "Japan"
-msgstr "Japan"
+msgstr "Japon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:140
 msgid "Kenya"
@@ -2643,11 +2570,11 @@ msgstr "Kenya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:141
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr "Kirghizistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:142
 msgid "Cambodia"
-msgstr "Cambodia"
+msgstr "Cambodge"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:143
 msgid "Kiribati"
@@ -2655,27 +2582,27 @@ msgstr "Kiribati"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:144
 msgid "Comoros"
-msgstr "Comoros"
+msgstr "Comores"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:145
 msgid "Saint Kitts and Nevis"
-msgstr "Saint Kitts and Nevis"
+msgstr "Saint-Kitts-et-Nevis"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:146
 msgid "North Korea"
-msgstr "North Korea"
+msgstr "Corée du Sud"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:147
 msgid "South Korea"
-msgstr "South Korea"
+msgstr "Corée du Nord"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:148
 msgid "Kuwait"
-msgstr "Kuwait"
+msgstr "Koweït"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:149
 msgid "Cayman Islands"
-msgstr "Cayman Islands"
+msgstr "Îles Caïmans"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:150
 msgid "Kazakhstan"
@@ -2687,11 +2614,11 @@ msgstr "Laos"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:152
 msgid "Lebanon"
-msgstr "Lebanon"
+msgstr "Liban"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:153
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr "Sainte-Lucie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:154
 msgid "Liechtenstein"
@@ -2703,7 +2630,7 @@ msgstr "Sri Lanka"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:156
 msgid "Liberia"
-msgstr "Liberia"
+msgstr "Libéria"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:157
 msgid "Lesotho"
@@ -2711,7 +2638,7 @@ msgstr "Lesotho"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:158
 msgid "Lithuania"
-msgstr "Lithuania"
+msgstr "Lituanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:159
 msgid "Luxembourg"
@@ -2719,15 +2646,15 @@ msgstr "Luxembourg"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:160
 msgid "Latvia"
-msgstr "Latvia"
+msgstr "Lettonie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:161
 msgid "Libya"
-msgstr "Libya"
+msgstr "Libye"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:162
 msgid "Morocco"
-msgstr "Morocco"
+msgstr "Maroc"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:163
 msgid "Monaco"
@@ -2735,11 +2662,11 @@ msgstr "Monaco"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:164
 msgid "Moldova"
-msgstr "Moldova"
+msgstr "Moldavie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:165
 msgid "Montenegro"
-msgstr "Montenegro"
+msgstr "Monténégro"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:166
 msgid "Saint Martin"
@@ -2751,11 +2678,11 @@ msgstr "Madagascar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:168
 msgid "Marshall Islands"
-msgstr "Marshall Islands"
+msgstr "Îles Marshall"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:169
 msgid "Macedonia"
-msgstr "Macedonia"
+msgstr "Macédoine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:170
 msgid "Mali"
@@ -2763,19 +2690,19 @@ msgstr "Mali"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:171
 msgid "Myanmar [Burma]"
-msgstr "Myanmar [Burma]"
+msgstr "Myanmar [Birmanie]"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:172
 msgid "Mongolia"
-msgstr "Mongolia"
+msgstr "Mongolie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:173
 msgid "Macau SAR China"
-msgstr "Macau SAR China"
+msgstr "Macao Chine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:174
 msgid "Northern Mariana Islands"
-msgstr "Northern Mariana Islands"
+msgstr "Mariannes du Nord"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:175
 msgid "Martinique"
@@ -2783,7 +2710,7 @@ msgstr "Martinique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:176
 msgid "Mauritania"
-msgstr "Mauritania"
+msgstr "Mauritanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:177
 msgid "Montserrat"
@@ -2791,11 +2718,11 @@ msgstr "Montserrat"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:178
 msgid "Malta"
-msgstr "Malta"
+msgstr "Malte"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:179
 msgid "Mauritius"
-msgstr "Mauritius"
+msgstr "Île Maurice"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:180
 msgid "Maldives"
@@ -2807,11 +2734,11 @@ msgstr "Malawi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:182
 msgid "Mexico"
-msgstr "Mexico"
+msgstr "Mexique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:183
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Malaisie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:184
 msgid "Mozambique"
@@ -2819,11 +2746,11 @@ msgstr "Mozambique"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:185
 msgid "Namibia"
-msgstr "Namibia"
+msgstr "Namibie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:186
 msgid "New Caledonia"
-msgstr "New Caledonia"
+msgstr "Nouvelle-Calédonie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:187
 msgid "Niger"
@@ -2831,11 +2758,11 @@ msgstr "Niger"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:188
 msgid "Norfolk Island"
-msgstr "Norfolk Island"
+msgstr "Île Norfolk"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:189
 msgid "Nigeria"
-msgstr "Nigeria"
+msgstr "Nigéria"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:190
 msgid "Nicaragua"
@@ -2843,15 +2770,15 @@ msgstr "Nicaragua"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:191
 msgid "Netherlands"
-msgstr "Netherlands"
+msgstr "Pays-Bas"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:192
 msgid "Norway"
-msgstr "Norway"
+msgstr "Norvège"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:193
 msgid "Nepal"
-msgstr "Nepal"
+msgstr "Népal"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:194
 msgid "Nauru"
@@ -2863,7 +2790,7 @@ msgstr "Niue"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:196
 msgid "New Zealand"
-msgstr "New Zealand"
+msgstr "Nouvelle-Zélande"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:197
 msgid "Oman"
@@ -2875,15 +2802,15 @@ msgstr "Panama"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:199
 msgid "Peru"
-msgstr "Peru"
+msgstr "Pérou"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:200
 msgid "French Polynesia"
-msgstr "French Polynesia"
+msgstr "Polynésie française"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:201
 msgid "Papua New Guinea"
-msgstr "Papua New Guinea"
+msgstr "Papouasie-Nouvelle-Guinée"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:202
 msgid "Philippines"
@@ -2895,27 +2822,27 @@ msgstr "Pakistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:204
 msgid "Poland"
-msgstr "Poland"
+msgstr "Pologne"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:205
 msgid "Saint Pierre and Miquelon"
-msgstr "Saint Pierre and Miquelon"
+msgstr "Saint-Pierre-et-Miquelon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:206
 msgid "Pitcairn Islands"
-msgstr "Pitcairn Islands"
+msgstr "Pitcairn"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:207
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr "Porto Rico"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:208
 msgid "Palestinian Territories"
-msgstr "Palestinian Territories"
+msgstr "Territoires palestiniens"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:209
 msgid "Portugal"
-msgstr "Portugal"
+msgstr "Portugais (Portugal)"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:210
 msgid "Palau"
@@ -2931,7 +2858,7 @@ msgstr "Qatar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:213
 msgid "Outlying Oceania"
-msgstr "Outlying Oceania"
+msgstr "Périphérie Océanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:214
 msgid "Réunion"
@@ -2939,15 +2866,15 @@ msgstr "Réunion"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:215
 msgid "Romania"
-msgstr "Romania"
+msgstr "Roumanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:216
 msgid "Serbia"
-msgstr "Serbia"
+msgstr "Serbie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:217
 msgid "Russia"
-msgstr "Russia"
+msgstr "Russie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:218
 msgid "Rwanda"
@@ -2955,11 +2882,11 @@ msgstr "Rwanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:219
 msgid "Saudi Arabia"
-msgstr "Saudi Arabia"
+msgstr "Arabie saoudite"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:220
 msgid "Solomon Islands"
-msgstr "Solomon Islands"
+msgstr "Îles Salomon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:221
 msgid "Seychelles"
@@ -2967,31 +2894,31 @@ msgstr "Seychelles"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:222
 msgid "Sudan"
-msgstr "Sudan"
+msgstr "Soudan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:223
 msgid "Sweden"
-msgstr "Sweden"
+msgstr "Suède"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:224
 msgid "Singapore"
-msgstr "Singapore"
+msgstr "Singapour"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:225
 msgid "Saint Helena"
-msgstr "Saint Helena"
+msgstr "Sainte-Hélène"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:226
 msgid "Slovenia"
-msgstr "Slovenia"
+msgstr "Slovénie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:227
 msgid "Svalbard and Jan Mayen"
-msgstr "Svalbard and Jan Mayen"
+msgstr "Svalbard et Jan Mayen"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:228
 msgid "Slovakia"
-msgstr "Slovakia"
+msgstr "Slovaquie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:229
 msgid "Sierra Leone"
@@ -2999,15 +2926,15 @@ msgstr "Sierra Leone"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:230
 msgid "San Marino"
-msgstr "San Marino"
+msgstr "Saint-Marin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:231
 msgid "Senegal"
-msgstr "Senegal"
+msgstr "Sénégal"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:232
 msgid "Somalia"
-msgstr "Somalia"
+msgstr "Somalie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:233
 msgid "Suriname"
@@ -3015,23 +2942,23 @@ msgstr "Suriname"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:234
 msgid "South Sudan"
-msgstr "South Sudan"
+msgstr "Soudan du Sud"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:235
 msgid "São Tomé and Príncipe"
-msgstr "São Tomé and Príncipe"
+msgstr "São Tomé et Príncipe"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:236
 msgid "El Salvador"
-msgstr "El Salvador"
+msgstr "République du Salvador"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:237
 msgid "Sint Maarten"
-msgstr "Sint Maarten"
+msgstr "Saint-Martin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:238
 msgid "Syria"
-msgstr "Syria"
+msgstr "Syrie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:239
 msgid "Swaziland"
@@ -3043,15 +2970,15 @@ msgstr "Tristan da Cunha"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:241
 msgid "Turks and Caicos Islands"
-msgstr "Turks and Caicos Islands"
+msgstr "Îles Turques et Caïques"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:242
 msgid "Chad"
-msgstr "Chad"
+msgstr "Tchad"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:243
 msgid "French Southern Territories"
-msgstr "French Southern Territories"
+msgstr "Terres australes et antarctiques françaises"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:244
 msgid "Togo"
@@ -3059,11 +2986,11 @@ msgstr "Togo"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:245
 msgid "Thailand"
-msgstr "Thailand"
+msgstr "Thaïlande"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:246
 msgid "Tajikistan"
-msgstr "Tajikistan"
+msgstr "Tadjikistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:247
 msgid "Tokelau"
@@ -3071,15 +2998,15 @@ msgstr "Tokelau"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:248
 msgid "Timor-Leste"
-msgstr "Timor-Leste"
+msgstr "Timor Oriental"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:249
 msgid "Turkmenistan"
-msgstr "Turkmenistan"
+msgstr "Turkménistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:250
 msgid "Tunisia"
-msgstr "Tunisia"
+msgstr "Tunisie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:251
 msgid "Tonga"
@@ -3087,11 +3014,11 @@ msgstr "Tonga"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:252
 msgid "Turkey"
-msgstr "Turkey"
+msgstr "Turquie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:253
 msgid "Trinidad and Tobago"
-msgstr "Trinidad and Tobago"
+msgstr "Trinité-et-Tobago"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:254
 msgid "Tuvalu"
@@ -3099,11 +3026,11 @@ msgstr "Tuvalu"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:255
 msgid "Taiwan"
-msgstr "Taiwan"
+msgstr "Taïwan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:256
 msgid "Tanzania"
-msgstr "Tanzania"
+msgstr "Tanzanie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:257
 msgid "Ukraine"
@@ -3111,15 +3038,15 @@ msgstr "Ukraine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:258
 msgid "Uganda"
-msgstr "Uganda"
+msgstr "Ouganda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:259
 msgid "U.S. Outlying Islands"
-msgstr "U.S. Outlying Islands"
+msgstr "Iles éloignées des États-Unis"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:260
 msgid "United States"
-msgstr "United States"
+msgstr "États-Unis"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:261
 msgid "Uruguay"
@@ -3127,15 +3054,15 @@ msgstr "Uruguay"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:262
 msgid "Uzbekistan"
-msgstr "Uzbekistan"
+msgstr "Ouzbékistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:263
 msgid "Vatican City"
-msgstr "Vatican City"
+msgstr "Cité du Vatican"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:264
 msgid "Saint Vincent and the Grenadines"
-msgstr "Saint Vincent and the Grenadines"
+msgstr "Saint-Vincent-et-les Grenadines"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:265
 msgid "Venezuela"
@@ -3143,15 +3070,15 @@ msgstr "Venezuela"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:266
 msgid "British Virgin Islands"
-msgstr "British Virgin Islands"
+msgstr "Îles Vierges britanniques"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:267
 msgid "U.S. Virgin Islands"
-msgstr "U.S. Virgin Islands"
+msgstr "Îles Vierges américaines"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:268
 msgid "Vietnam"
-msgstr "Vietnam"
+msgstr "Viêt Nam"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:269
 msgid "Vanuatu"
@@ -3159,7 +3086,7 @@ msgstr "Vanuatu"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:270
 msgid "Wallis and Futuna"
-msgstr "Wallis and Futuna"
+msgstr "Wallis et Futuna"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:271
 msgid "Samoa"
@@ -3171,7 +3098,7 @@ msgstr "Kosovo"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:273
 msgid "Yemen"
-msgstr "Yemen"
+msgstr "Yémen"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:274
 msgid "Mayotte"
@@ -3179,11 +3106,11 @@ msgstr "Mayotte"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:275
 msgid "South Africa"
-msgstr "South Africa"
+msgstr "Afrique du Sud"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:276
 msgid "Zambia"
-msgstr "Zambia"
+msgstr "Zambie"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:277
 msgid "Zimbabwe"
@@ -3195,27 +3122,27 @@ msgstr "Afrikaans"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:18
 msgid "Amharic"
-msgstr "Amharic"
+msgstr "Amharique"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:19
 msgid "Arabic"
-msgstr "Arabic"
+msgstr "Arabe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:20
 msgid "Asturian"
-msgstr "Asturian"
+msgstr "Asturies"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:21
 msgid "Azerbaijani"
-msgstr "Azerbaijani"
+msgstr "Azéri"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:22
 msgid "Belarusian"
-msgstr "Belarusian"
+msgstr "Biélorusse"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:23
 msgid "Bulgarian"
-msgstr "Bulgarian"
+msgstr "Bulgare"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:24
 msgid "Bengali"
@@ -3223,11 +3150,11 @@ msgstr "Bengali"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:25
 msgid "Tibetan"
-msgstr "Tibetan"
+msgstr "Tibétain"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:26
 msgid "Bosnian"
-msgstr "Bosnian"
+msgstr "Bosnie"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:27
 msgid "Catalan"
@@ -3235,19 +3162,19 @@ msgstr "Catalan"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:28
 msgid "Czech"
-msgstr "Czech"
+msgstr "Tchèque"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:29
 msgid "Welsh"
-msgstr "Welsh"
+msgstr "Gallois"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:30
 msgid "Danish"
-msgstr "Danish"
+msgstr "Danois"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:31
 msgid "German"
-msgstr "German"
+msgstr "Allemand"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:32
 msgid "Dzongkha"
@@ -3255,35 +3182,35 @@ msgstr "Dzongkha"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:33
 msgid "Greek"
-msgstr "Greek"
+msgstr "Grec"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:34
 msgid "English"
-msgstr "English"
+msgstr "Anglais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:35
 msgid "Esperanto"
-msgstr "Esperanto"
+msgstr "Espéranto"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:36
 msgid "Spanish"
-msgstr "Spanish"
+msgstr "Espagnol"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:37
 msgid "Estonian"
-msgstr "Estonian"
+msgstr "Estonien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:38
 msgid "Basque"
-msgstr "Basque"
+msgstr "KiBasque"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:39
 msgid "Persian, Farsi"
-msgstr "Persian, Farsi"
+msgstr "Persan, Fārsi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:40
 msgid "Finnish"
-msgstr "Finnish"
+msgstr "Finnois"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:41
 msgid "Filipino"
@@ -3291,31 +3218,31 @@ msgstr "Filipino"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:42
 msgid "Faeroese"
-msgstr "Faeroese"
+msgstr "Féroïen"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:43
 msgid "French"
-msgstr "French"
+msgstr "Français"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:44
 msgid "Frisian, Western"
-msgstr "Frisian, Western"
+msgstr "Frison, Occidental"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:45
 msgid "Irish"
-msgstr "Irish"
+msgstr "Irlandais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:46
 msgid "Scots Gaelic"
-msgstr "Scots Gaelic"
+msgstr "Gaélique écossais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:47
 msgid "Galician"
-msgstr "Galician"
+msgstr "Galicien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:48
 msgid "Swiss German"
-msgstr "Swiss German"
+msgstr "Suisse allemand"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:49
 msgid "Gujarati"
@@ -3323,7 +3250,7 @@ msgstr "Gujarati"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:50
 msgid "Hebrew"
-msgstr "Hebrew"
+msgstr "Hébreu"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:51
 msgid "Hindi"
@@ -3331,43 +3258,43 @@ msgstr "Hindi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:52
 msgid "Croatian"
-msgstr "Croatian"
+msgstr "Croate"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:53
 msgid "Haitian Creole"
-msgstr "Haitian Creole"
+msgstr "Créole haïtien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:54
 msgid "Hungarian"
-msgstr "Hungarian"
+msgstr "Hongroise"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:55
 msgid "Armenian"
-msgstr "Armenian"
+msgstr "Arménien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:56
 msgid "Indonesian"
-msgstr "Indonesian"
+msgstr "Indonésien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:57
 msgid "Icelandic"
-msgstr "Icelandic"
+msgstr "Islandais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:58
 msgid "Italian"
-msgstr "Italian"
+msgstr "Italien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:59
 msgid "Japanese"
-msgstr "Japanese"
+msgstr "Japonais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:60
 msgid "Javanese"
-msgstr "Javanese"
+msgstr "Javanais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:61
 msgid "Georgian"
-msgstr "Georgian"
+msgstr "Géorgien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:62
 msgid "Kazakh"
@@ -3383,15 +3310,15 @@ msgstr "Kannada"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:65
 msgid "Korean"
-msgstr "Korean"
+msgstr "Coréen"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:66
 msgid "Kurdish"
-msgstr "Kurdish"
+msgstr "Kurde"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:67
 msgid "Kyrgyz"
-msgstr "Kyrgyz"
+msgstr "Kirghize"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:68
 msgid "Lao"
@@ -3399,19 +3326,19 @@ msgstr "Lao"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:69
 msgid "Lithuanian"
-msgstr "Lithuanian"
+msgstr "Lituanien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:70
 msgid "Latvian"
-msgstr "Latvian"
+msgstr "Letton"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:71
 msgid "Malagasy"
-msgstr "Malagasy"
+msgstr "Malgache"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:72
 msgid "Macedonian"
-msgstr "Macedonian"
+msgstr "Macédonien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:73
 msgid "Malayalam"
@@ -3419,7 +3346,7 @@ msgstr "Malayalam"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:74
 msgid "Mongolian"
-msgstr "Mongolian"
+msgstr "Mongol"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:75
 msgid "Marathi"
@@ -3427,27 +3354,27 @@ msgstr "Marathi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:76
 msgid "Bahasa Malaysia"
-msgstr "Bahasa Malaysia"
+msgstr "Malais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:77
 msgid "Burmese"
-msgstr "Burmese"
+msgstr "Birman"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:78
 msgid "Norwegian Bokmål"
-msgstr "Norwegian Bokmål"
+msgstr "Norvégien Bokmål"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:79
 msgid "Nepali"
-msgstr "Nepali"
+msgstr "Népalais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:80
 msgid "Dutch"
-msgstr "Dutch"
+msgstr "Néerlandais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:81
 msgid "Norwegian Nynorsk"
-msgstr "Norwegian Nynorsk"
+msgstr "Norvégien Nynorsk"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:82
 msgid "Occitan"
@@ -3455,59 +3382,59 @@ msgstr "Occitan"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:83
 msgid "Punjabi"
-msgstr "Punjabi"
+msgstr "Pendjabi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:84
 msgid "Polish"
-msgstr "Polish"
+msgstr "Polonais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:85
 msgid "Portuguese, Brazil"
-msgstr "Portuguese, Brazil"
+msgstr "Portugais, Brésil"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:86
 msgid "Portuguese, Portugal"
-msgstr "Portuguese, Portugal"
+msgstr "Portugais, Portugal"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:87
 msgid "Romanian"
-msgstr "Romanian"
+msgstr "Roumain"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:88
 msgid "Russian"
-msgstr "Russian"
+msgstr "Russe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:89
 msgid "Scots"
-msgstr "Scots"
+msgstr "Écossais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:90
 msgid "Northern Sami"
-msgstr "Northern Sami"
+msgstr "Sami du Nord"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:91
 msgid "Sinhala"
-msgstr "Sinhala"
+msgstr "Cinghalais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:92
 msgid "Slovak"
-msgstr "Slovak"
+msgstr "Slovaque"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:93
 msgid "Slovenian"
-msgstr "Slovenian"
+msgstr "Slovène"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:94
 msgid "Albanian"
-msgstr "Albanian"
+msgstr "Albanais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:95
 msgid "Serbian"
-msgstr "Serbian"
+msgstr "Serbe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:96
 msgid "Swedish"
-msgstr "Swedish"
+msgstr "Suédois"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:97
 msgid "Swahili"
@@ -3515,23 +3442,23 @@ msgstr "Swahili"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:98
 msgid "Tamil"
-msgstr "Tamil"
+msgstr "Tamoul"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:99
 msgid "Tamil, Sri Lanka"
-msgstr "Tamil, Sri Lanka"
+msgstr "Tamoul, Sri Lanka"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:100
 msgid "Telugu"
-msgstr "Telugu"
+msgstr "Télougou"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:101
 msgid "Thai"
-msgstr "Thai"
+msgstr "Thaï"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:102
 msgid "Turkish"
-msgstr "Turkish"
+msgstr "Turc"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:103
 msgid "Tuvan"
@@ -3543,15 +3470,15 @@ msgstr "Uyghur"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:105
 msgid "Ukrainian"
-msgstr "Ukrainian"
+msgstr "Ukrainien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:106
 msgid "Urdu"
-msgstr "Urdu"
+msgstr "Ourdou"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:107
 msgid "Vietnamese"
-msgstr "Vietnamese"
+msgstr "Vietnamien"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:108
 msgid "Lolspeak"
@@ -3559,329 +3486,314 @@ msgstr "Lolspeak"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:109
 msgid "Chinese, Simplified"
-msgstr "Chinese, Simplified"
+msgstr "Chinois simplifié"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:110
 msgid "Chinese, Traditional"
-msgstr "Chinese, Traditional"
+msgstr "Chinois traditionnel"
 
 #: extensions/system/src/System/Link/System.php:48
 msgid "Frontpage"
-msgstr "Etusivu"
+msgstr "Page d'accueil"
 
 #: extensions/system/src/System/Link/System.php:49
 msgid "User Login"
-msgstr "Sisäänkirjautuminen"
+msgstr "Connexion"
 
 #: extensions/system/src/System/Link/System.php:50
 #: extensions/system/src/User/Controller/RegistrationController.php:46
 msgid "User Registration"
-msgstr "Rekisteröityminen"
+msgstr "Inscription utilisateur"
 
 #: extensions/system/src/System/Link/System.php:51
 msgid "User Profile"
-msgstr "Profiili"
+msgstr "Profil d'utilisateur"
 
 #: extensions/system/src/System/Link/System.php:52
 msgid "User Password Reset"
-msgstr "Salasanan palautus"
+msgstr "Réinitialiser le mot de passe"
 
 #: extensions/system/src/System/Widget/TextWidget.php:23
 msgid "Text"
-msgstr "Teksti"
+msgstr "Texte"
 
 #: extensions/system/src/System/Widget/TextWidget.php:31
 msgid "Text Widget"
-msgstr "Tekstivimpain"
+msgstr "Widget Texte"
 
 #: extensions/system/src/SystemExtension.php:128
 msgid "DATE_INTERVAL"
-msgstr "%d päivää"
+msgstr "%d jours"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:84
 msgid "Unable to activate theme.<br>The theme triggered a fatal error."
-msgstr "Teemaa ei voitu aktivoida.<br/>Teema aiheutti vakavan virheen."
+msgstr "Impossible d'activer le thème.<br>Le thème a provoqué une erreur fatale."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:90
 msgid "Unable to enable theme \"%name%\"."
-msgstr "Teemaa \"%name%\" ei voitu ottaa käyttöön"
+msgstr "Impossible d'activer le thème \"%name%\"."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:98
 msgid "Theme enabled."
-msgstr "Teema käytössä"
+msgstr "Thème activé."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:115
 msgid "Unable to uninstall theme \"%name%\"."
-msgstr "Teemaa \"%name%\" ei voitu poistaa"
+msgstr "Impossible de désinstaller le thème \"%name%\"."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:121
 msgid "Theme uninstalled."
-msgstr "Teema poistettu"
+msgstr "Thème désinstallé avec succès."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:137
 #: extensions/system/src/Theme/Controller/ThemesController.php:161
 msgid "Invalid theme."
-msgstr "Virheellinen teema"
+msgstr "Thème incorrect."
 
 #: extensions/system/src/Theme/Event/WidgetListener.php:30
 msgid "Theme"
-msgstr "Teema"
+msgstr "Thème"
 
 #: extensions/system/src/User/Controller/AuthController.php:68
 #: extensions/system/src/User/Controller/RegistrationController.php:66
 #: extensions/system/src/User/Controller/ResetPasswordController.php:61
 #: extensions/system/src/User/Controller/ResetPasswordController.php:130
 msgid "Invalid token. Please try again."
-msgstr "Virheellinen poletti. Yritä uudelleen myöhemmin."
+msgstr "Le jeton est invalide. Veuillez réessayer."
 
 #: extensions/system/src/User/Controller/AuthController.php:76
 msgid "Invalid username or password."
-msgstr "Virheellinen käyttäjätunnus tai salasana"
+msgstr "Nom d'utilisateur ou mot de passe incorrect."
 
 #: extensions/system/src/User/Controller/PermissionController.php:48
 msgid "Permissions saved!"
-msgstr "Käyttöoikeudet tallennettu!"
+msgstr "Droits enregistrés"
 
 #: extensions/system/src/User/Controller/ProfileController.php:66
 msgid "Name is invalid."
-msgstr "Virheellinen nimi"
+msgstr "Nom incorrect."
 
 #: extensions/system/src/User/Controller/ProfileController.php:70
 #: extensions/system/src/User/Controller/RegistrationController.php:87
 #: extensions/system/src/User/Controller/UserController.php:165
 msgid "Email is invalid."
-msgstr "Virheellinen sähköpostiosoite"
+msgstr "L'e-mail est invalide."
 
 #: extensions/system/src/User/Controller/ProfileController.php:74
 #: extensions/system/src/User/Controller/RegistrationController.php:95
 #: extensions/system/src/User/Controller/UserController.php:177
 msgid "Email not available."
-msgstr "Sähköposti ei saatavilla"
+msgstr "Cette adresse e-mail est déjà utilisée."
 
 #: extensions/system/src/User/Controller/ProfileController.php:80
 msgid "Invalid Password."
-msgstr "Virheellinen salasana"
+msgstr "Mot de passe incorrect."
 
 #: extensions/system/src/User/Controller/ProfileController.php:84
 msgid "New Password is invalid."
-msgstr "Virheellinen uusi salasana"
+msgstr "Nouveau mot de passe incorrect."
 
 #: extensions/system/src/User/Controller/ProfileController.php:103
 msgid "Profile updated."
-msgstr "Profiili päivitetty"
+msgstr "Le profil a été mis à jour."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:75
 msgid "Name required."
-msgstr "Nimi on vaadittu"
+msgstr "Nom requis."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:79
 #: extensions/system/src/User/Controller/UserController.php:144
 msgid "Password required."
-msgstr "Salasana on vaadittu"
+msgstr "Mot de passe requis."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:83
 #: extensions/system/src/User/Controller/UserController.php:161
 msgid "Username is invalid."
-msgstr "Virheellinen käyttäjänimi"
+msgstr "Le nom d'utilisateur est incorrect."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:91
 #: extensions/system/src/User/Controller/UserController.php:171
 msgid "Username not available."
-msgstr "Käyttäjänimi ei ole käytettävissä"
+msgstr "Nom d'utilisateur déjà pris."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr "Rekisteröityminen epäonnistui"
+msgstr "Inscription échoué"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
-msgid ""
-"Your user account has been created. Complete your registration, by clicking "
-"the link provided in the mail that has been sent to you."
-msgstr ""
-"Käyttäjätili luotiin onnistuneesti. Jatkaaksesi tilin käyttöönottoa, klikkaa "
-"linkkiä lähettämässämme sähköpostissa."
+msgid "Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you."
+msgstr "Votre compte a bien été créé. Validez votre inscription en cliquant sur le lien du mail de confirmation qui vous a été envoyé."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
-msgid ""
-"Your user account has been created and is pending approval by the site "
-"administrator."
-msgstr ""
-"Käyttäjätili luotiin onnistuneesti ja se odottaa ylläpitäjän vahvistusta"
+msgid "Your user account has been created and is pending approval by the site administrator."
+msgstr "Votre compte a bien été créé mais dois faire l'objet d'une validation par l'administrateur du site."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
 msgid "Your user account has been created."
-msgstr "Käyttäjätili luotiin onnistuneesti."
+msgstr "Votre compte a été créé."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:180
 #: extensions/system/src/User/Controller/ResetPasswordController.php:116
 msgid "Invalid key."
-msgstr "Virheellinen avain"
+msgstr "Clé incorrecte."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:189
-msgid ""
-"Your email has been verified. Once an administrator approves your account, "
-"you will be notified by email."
-msgstr ""
-"Sähköpostiosoitteesi on varmistettu. Saat sähköpostia, kun ylläpitäjä on "
-"vahvistanut käyttäjätilisi."
+msgid "Your email has been verified. Once an administrator approves your account, you will be notified by email."
+msgstr "Votre email a bien été vérifié. Dès que l'administrateur aura approuvé votre inscription, vous en serez notifié par mail."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
-msgid ""
-"The user's account has been activated and the user has been notified about "
-"it."
-msgstr ""
-"Käyttäjätili on aktivoitu ja käyttäjälle on lähetetty sähköpostia siitä"
+msgid "The user's account has been activated and the user has been notified about it."
+msgstr "Le compte a été activé et l'utilisateur en a été notifié."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
-msgstr "Käyttäjätilisi on aktivoitu"
+msgstr "Votre compte a été activé."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:216
 msgid "Welcome to %site%!"
-msgstr "Tervetuloa sivulle %site%!"
+msgstr "Bienvenue à %s ite%!"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:229
 msgid "Activate your %site% account"
-msgstr "Aktivoi %site% käyttäjätilisi"
+msgstr "Activez votre %s ite% compte"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:234
 msgid "Unable to send verification link."
-msgstr "Vahvistuslinkkiä ei voitu lähettää"
+msgstr "Impossibilité d'envoyer le lien de vérification."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:244
 msgid "Please approve registration at %site%!"
-msgstr "Hyväksy rekisteröityminen sivustolle %site%!"
+msgstr "S'il vous plaît approuver l'inscription à %s ite%!"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:45
 msgid "Reset"
-msgstr "Palauta"
+msgstr "Réinitialiser"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:65
 msgid "Enter a username or email address."
-msgstr "Anna käyttäjänimi tai sähköpostiosoite"
+msgstr "Entrez un nom d'utilisateur ou une adresse mail."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:71
 msgid "Invalid username or email."
-msgstr "Virheellinen käyttäjänimi tai sähköpostiosoite"
+msgstr "Nom d'utilisateur ou email incorrect."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:75
 #: extensions/system/src/User/Controller/ResetPasswordController.php:121
 msgid "Your account has not been activated or is blocked."
-msgstr "Käyttäjätunnustasi ei ole aktivoitu tai se on estetty"
+msgstr "Votre compte n'a pas été activé ou a été bloqué."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:86
 #: extensions/system/src/User/Link/User.php:49
 msgid "Password Reset"
-msgstr "Salasanan palautus"
+msgstr "Réinitialisation du mot de passe"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:91
 msgid "Unable to send confirmation link."
-msgstr "Vahvistusviestiä ei voitu lähettää"
+msgstr "Impossibilité d'envoyer le lien de confirmation."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:98
 msgid "Check your email for the confirmation link."
-msgstr "Tarkista sähköpostisi"
+msgstr "Vérifiez vos e-mails pour obtenir votre lien de confirmation."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:136
 msgid "Enter password."
-msgstr "Anna salasana"
+msgstr "Entrez un mot de passe."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:140
 msgid "Invalid password."
-msgstr "Virheellinen salasana"
+msgstr "Mot de passe incorrect."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:148
 msgid "Your password has been reset."
-msgstr "Salasanasi on palautettu"
+msgstr "Votre mot de passe a été réinitialisé."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:156
 msgid "Reset Confirm"
-msgstr "Nollaa vahvista"
+msgstr "Vider"
 
 #: extensions/system/src/User/Controller/RoleController.php:68
 msgid "Roles saved!"
-msgstr "Roolit tallennettu"
+msgstr "Rôles enregistrés!"
 
 #: extensions/system/src/User/Controller/UserController.php:125
 msgid "Edit User"
-msgstr "Muokkaa käyttäjää"
+msgstr "Modifier l'utilisateur"
 
 #: extensions/system/src/User/Controller/UserController.php:140
 msgid "User not found."
-msgstr "Käyttäjää ei löytynyt"
+msgstr "L'utilisateur n'a pas été trouvé."
 
 #: extensions/system/src/User/Controller/UserController.php:154
 #: extensions/system/src/User/Controller/UserController.php:243
 msgid "Unable to block yourself."
-msgstr "Et voi estää itseäsi"
+msgstr "Vous ne pouvez pas bloquer votre propre compte."
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User saved."
-msgstr "Käyttäjä tallennettu"
+msgstr "L'utilisateur a été enregistré."
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User created."
-msgstr "Käyttäjä luotu"
+msgstr "Utilisateur créé."
 
 #: extensions/system/src/User/Controller/UserController.php:218
 msgid "Unable to delete self."
-msgstr "Et voi poistaa itseäsi"
+msgstr "Vous ne pouvez pas supprimer votre propre compte."
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
-"{0} Käyttäjiä ei poistettu|{1} Käyttäjä poistettu|]1,Inf[ Käyttäjät poistettu"
+msgstr "{0} Aucun utilisateur supprimé.|{1} L'utilisateur a été supprimé.|]1,Inf[ %users% utilisateurs ont été supprimés."
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
-msgstr "Näytä lista käyttäjistä"
+msgstr "Afficher la liste des utilisateurs."
 
 #: extensions/system/src/User/Entity/User.php:101
 msgid "Blocked"
-msgstr "Estetty"
+msgstr "Bloqué"
 
 #: extensions/system/src/User/Event/AccessListener.php:93
 msgid "You do not have access to the administration area of this site."
-msgstr "Et voi käyttää hallintapaneelia"
+msgstr "Vous n'avez pas la permission d'accéder à l'administration du site."
 
 #: extensions/system/src/User/Event/AccessListener.php:107
 msgid "Insufficient User Rights."
-msgstr "Käyttöoikeudet puuttuvat"
+msgstr "Droits insuffisant de l'utilisateur."
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account is blocked."
-msgstr "Käyttäjätunnuksesi on estetty"
+msgstr "Votre compte est bloqué."
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account has not been activated."
-msgstr "Käyttäjätunnustasi ei ole aktivoitu"
+msgstr "Votre compte n'a pas été activé."
 
 #: extensions/system/src/User/Event/LoginAttemptListener.php:30
 msgid "Slow down a bit."
-msgstr "Hidasta hieman"
+msgstr "Ralentissez un peu."
 
 #: extensions/system/src/User/Link/User.php:48
 msgid "Profile"
-msgstr "Profiili"
+msgstr "Profil"
 
 #: extensions/system/src/User/Widget/LoginWidget.php:33
 msgid "Displays a user login form."
-msgstr "Näyttää kirjautumislomakkeen"
+msgstr "Afficher un formulaire d'authentification."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:49
 msgid "Unassigned Widgets"
-msgstr "Käyttämättömät vimpaimet"
+msgstr "Non affecté Widgets"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:82
 #: extensions/system/src/Widget/Controller/WidgetsController.php:105
 msgid "Invalid widget id"
-msgstr "Virheellinen vimpain tunniste"
+msgstr "L'id du widget est invalide."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
+msgstr "{0} widget No supprimé |. {1} Widget supprimé |.] 1, [Inf Widgets supprimés."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."
-msgstr "Vimpaimet päivitetty"
+msgstr "Widgets mis à jour."
+

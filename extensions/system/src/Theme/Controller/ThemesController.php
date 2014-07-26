@@ -137,7 +137,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $config = $this['option']->get("$name:config", []);
+            $config = $theme->getConfig();
             $event  = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
 
             return $this['view']->render($tmpl, ['theme' => $theme, 'config' => $event->getConfig()]);

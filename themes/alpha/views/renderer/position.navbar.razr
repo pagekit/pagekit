@@ -1,11 +1,11 @@
 @foreach ($value as $widget)
     @if ($widget.type == 'widget.menu')
 
-    @raw( $options.provider.render($widget, array_merge(['layout' => 'extension://system/views/widgets/menu/navbar.razr'], $options)) )
+    @raw($widget.render(array_merge(['layout' => 'extension://system/views/widgets/menu/navbar.razr'], $options)))
 
     @else
 
-    @raw( $options.provider.render($widget, $options) )
+    @raw($widget.render($options))
 
     @endif
 @endforeach

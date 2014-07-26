@@ -9,7 +9,7 @@
     <h3>@( $widget.title )</h3>
     @endif
 
-    @raw( $options.provider.render($widget, $options) )
+    @raw($widget.render($options))
     
 </div>
 @endforeach

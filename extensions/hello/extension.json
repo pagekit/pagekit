@@ -1,6 +1,6 @@
 {
     "name": "hello",
-    "version": "0.8.3",
+    "version": "0.8.4",
     "type": "extension",
     "title": "Hello",
     "description": "A blueprint to develop your own extensions.",

@@ -38,9 +38,10 @@ class SettingsController extends Controller
         $supported = $this['cache']->supports();
 
         $caches = [
-            'auto' => ['name' => '', 'supported' => true],
-            'apc'  => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
-            'file' => ['name' => 'File', 'supported' => in_array('file', $supported)]
+            'auto'   => ['name' => '', 'supported' => true],
+            'apc'    => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
+            'xcache' => ['name' => 'XCache', 'supported' => in_array('xcache', $supported)],
+            'file'   => ['name' => 'File', 'supported' => in_array('file', $supported)]
         ];
 
         $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
