@@ -1,0 +1,10 @@
+# This is file robots.txt for Pagekit
+
+User-agent: *
+Disallow: /app/
+Disallow: /extensions/
+Disallow: /themes/
+Disallow: /vendor/
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /pagekit
