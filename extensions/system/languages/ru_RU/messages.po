@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-26 14:09+0400\n"
+"PO-Revision-Date: 2014-07-26 14:18+0400\n"
 "Last-Translator: Alex <admin@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
 "Language: ru_RU\n"
@@ -3690,7 +3690,7 @@ msgstr "Имя пользователя недоступно."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr "Регистрация не удалось"
+msgstr "Регистрация не удалась"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
 msgid ""
