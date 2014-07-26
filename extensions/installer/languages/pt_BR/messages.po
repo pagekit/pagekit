@@ -2,13 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.0 (installer, messages)\n"
 "POT-Creation-Date: 2014-07-23 12:50+0000\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"PO-Revision-Date: 2014-07-24 17:36-0000\n"
 "Last-Translator: Lucas C.S <lucas_z2011@hotmail.com>\n"
-"Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/>\n"
+"Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/"
+">\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #: extensions/installer/views/install.razr:5
 #: extensions/installer/src/Controller/InstallerController.php:41
@@ -17,7 +19,7 @@ msgstr "Instalador do Pagekit"
 
 #: extensions/installer/views/install.razr:24
 msgid "Begin"
-msgstr "Inicio"
+msgstr "Começar"
 
 #: extensions/installer/views/install.razr:34
 msgid "Connect database"
@@ -76,7 +78,7 @@ msgstr "Senha não pode ficar em branco"
 
 #: extensions/installer/views/install.razr:140
 msgid "Field must be a valid email address."
-msgstr ""
+msgstr "O campo deve ser um endereço de email válido."
 
 #: extensions/installer/views/install.razr:156
 msgid "Setup your site"
@@ -116,7 +118,7 @@ msgstr "Conexão com o banco de dados falhou"
 
 #: extensions/installer/src/Controller/InstallerController.php:86
 msgid "Database access denied!"
-msgstr ""
+msgstr "Acesso ao banco de dados negado!"
 
 #: extensions/installer/src/Controller/InstallerController.php:109
 msgid "No database connection."
@@ -128,7 +130,7 @@ msgstr "Configuração não pode ser escrita"
 
 #: extensions/installer/src/Controller/InstallerController.php:181
 msgid "Database error: %error%"
-msgstr ""
+msgstr "Erro do banco de dados: %error%"
 
 #~ msgid "DB user is missing required privileges."
 #~ msgstr "Usuário do banco de dados não tem privilégios necessários"
