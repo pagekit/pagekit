@@ -85,7 +85,7 @@ msgid "Username cannot be blank."
 msgstr ""
 
 #: extensions/installer/views/install.blade.php:93
-msgid "Field must be a valid email adress."
+msgid "Field must be a valid email address."
 msgstr ""
 
 #: extensions/installer/views/install.blade.php:102
