@@ -1,5 +1,6 @@
 {
     "name": "pagekit/pagekit",
+    "type": "project",
     "description": "The Pagekit CMS",
     "keywords": ["cms", "pagekit"],
     "homepage": "http://pagekit.com",
