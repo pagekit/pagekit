@@ -1,5 +1,5 @@
 # Restricted access to service files
-<FilesMatch ".(json|lock)$">
+<FilesMatch ".(json|lock|razr)$">
 	Order Allow,Deny
 	Deny from all
 </FilesMatch>
