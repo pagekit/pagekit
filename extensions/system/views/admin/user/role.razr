@@ -16,6 +16,10 @@
                                 <li><a href="#" data-edit="@url('@system/role/save', ['id' => $r.id])" data-name="@( $r.name )" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
                                 <li><a href="#" data-action="@url('@system/role/delete', ['id' => $r.id])" data-confirm="@trans('Are you sure?')" title="@trans('Delete')"><i class="uk-icon-minus-circle"></i></a></li>
                             </ol>
+                            @else
+                            <ol class="uk-subnav pk-subnav-icon uk-hidden">
+                                <li><a href="#" data-edit="@url('@system/role/save', ['id' => $r.id])" data-name="@( $r.name )" title="@trans('Edit')"><i class="uk-icon-pencil"></i></a></li>
+                            </ol>
                             @endif
                             <a href="@url('@system/role', ['id' => $r.id])">@( $r.name )</a>
                         </div>
