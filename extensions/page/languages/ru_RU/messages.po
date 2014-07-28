@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-07-22 15:54+0400\n"
+"PO-Revision-Date: 2014-07-25 17:23+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
 "Language: ru_RU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.6\n"
+"X-Generator: Poedit 1.6.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: extensions/page/views/admin/link/page.razr:2
@@ -71,7 +71,7 @@ msgstr "Страница создана."
 #: extensions/page/src/Controller/PageController.php:148
 msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
 msgstr ""
-"{0} Страница не удалена.|{1} Страница удалена .|]1,Inf[ Страницы удалены."
+"{0} Страница не удалена.|{1} Страница удалена.|]1,Inf[ Страницы удалены."
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"

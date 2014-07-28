@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-23 12:24+0400\n"
-"Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
+"PO-Revision-Date: 2014-07-26 14:47+0400\n"
+"Last-Translator: Alex <admin@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
@@ -603,7 +603,7 @@ msgstr "Информация"
 #: extensions/system/views/admin/settings/index.razr:78
 #: extensions/system/views/admin/settings/index.razr:79
 msgid "Clear Cache"
-msgstr "Очистка кэшка"
+msgstr "Очистка кэша"
 
 #: extensions/system/views/admin/settings/index.razr:107
 msgid "Select caches to clear:"
@@ -1949,7 +1949,7 @@ msgstr "Обновление базы данных..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:127
 msgid "Installed successfully."
-msgstr "Установлен прошла успешно."
+msgstr "Установка прошла успешно."
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
@@ -2146,7 +2146,7 @@ msgstr "Декабря"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:30
 msgid "Invalid CSRF token."
-msgstr "Поврежденных CSRF токен."
+msgstr "Неверный CSRF токен."
 
 #: extensions/system/src/System/Exception/ExceptionController.php:33
 msgid "Sorry, the page you are looking for could not be found."
@@ -3649,7 +3649,7 @@ msgstr "Недопустимое имя."
 #: extensions/system/src/User/Controller/RegistrationController.php:87
 #: extensions/system/src/User/Controller/UserController.php:165
 msgid "Email is invalid."
-msgstr "недопустимый email."
+msgstr "Недопустимый email."
 
 #: extensions/system/src/User/Controller/ProfileController.php:74
 #: extensions/system/src/User/Controller/RegistrationController.php:95
@@ -3690,7 +3690,7 @@ msgstr "Имя пользователя недоступно."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr "Регистрация не удалось"
+msgstr "Регистрация не удалась"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
 msgid ""
@@ -3731,7 +3731,7 @@ msgstr "Аккаунт активирован. Пользователю отпр
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
-msgstr "Ваша аккаунт активирован."
+msgstr "Ваш аккаунт активирован."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:216
 msgid "Welcome to %site%!"
