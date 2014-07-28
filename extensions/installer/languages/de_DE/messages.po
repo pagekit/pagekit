@@ -1,18 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 14:52+0000\n"
-"PO-Revision-Date: 2013-10-18 11:16+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: \n"
+"Project-Id-Version: Pagekit 1.0.0 (installer, messages)\n"
+"POT-Creation-Date: 2013-11-06 15:49+0000\n"
+"PO-Revision-Date: 2014-07-28 12:42+0100\n"
+"Last-Translator: Andre Sieverding <webmaster@andre-sieverding.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+"Language-Team: \n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
@@ -20,9 +18,8 @@ msgid "Pagekit Installer"
 msgstr "Pagekit Installation"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
-#, fuzzy
 msgid "Database connection failed!"
-msgstr "Keine Datenbankverbindung."
+msgstr "Datenbankverbindung ist fehlgeschlagen!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
@@ -30,35 +27,35 @@ msgstr "Keine Datenbankverbindung."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
-msgstr "Konfiguration kann nicht geschrieben werden."
+msgstr "Konfigurationen können nicht erstellt werden."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr "Der Datenbankbenutzer hat nicht die erforderlichen Rechte."
+msgstr "Dem Datenbankbenutzer fehlen erforderliche Rechte."
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"
-msgstr "Los geht's!"
+msgstr "Start"
 
 #: extensions/installer/views/install.blade.php:23
 msgid "Connect database"
-msgstr "Verbindung zur Datenbank"
+msgstr "Mit Datenbank verbinden"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Zugangsdaten zur Datenbank eingeben."
+msgstr "Gebe die Datenbankzugangsdaten ein."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
-msgstr "Host"
+msgstr "Hostname"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Host darf nicht leer sein"
+msgstr "Host darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "Benutzer darf nicht leer sein."
+msgstr "User darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
@@ -80,11 +77,11 @@ msgstr "Weiter"
 
 #: extensions/installer/views/install.blade.php:75
 msgid "Create your account"
-msgstr "Benutzerkonto einrichten"
+msgstr "Benutzeraccount erstellen"
 
 #: extensions/installer/views/install.blade.php:77
 msgid "You will be the site administrator."
-msgstr "Du wirst automatisch Seitenadministrator."
+msgstr "Du wirst der Administrator sein."
 
 #: extensions/installer/views/install.blade.php:85
 msgid "Username cannot be blank."
@@ -92,7 +89,7 @@ msgstr "Benutzername darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email adress."
-msgstr "Bitte eine gültige E-Mail-Adresse eingeben."
+msgstr "Es muss eine gültige E-Mail Adresse angegeben werden."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
@@ -100,12 +97,11 @@ msgstr "Passwort darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:118
 msgid "Setup your site"
-msgstr "Richte Deine Seite ein"
+msgstr "Richte deine Website ein"
 
 #: extensions/installer/views/install.blade.php:120
-#, fuzzy
 msgid "Enter your website details."
-msgstr "Details zu Deiner Website eintragen."
+msgstr "Gebe die Informationen zu deiner Website ein."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
@@ -117,7 +113,7 @@ msgstr "Pagekit wird installiert..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Installation fehlgeschlagen."
+msgstr "Installation ist fehlgeschlagen!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
@@ -129,5 +125,4 @@ msgstr "Fertig!"
 
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
-msgstr "Jetzt einloggen"
-
+msgstr "Jetzt Anmelden"
