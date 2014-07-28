@@ -1,6 +1,7 @@
-# Restricted access to files
-<FilesMatch "\.(cache|db|log|po|pot|sql|razr)$">
-    Order allow,deny
+# Restricted access to service files
+<FilesMatch "\.(cache|db|log|po|pot|sql|razr|json|lock)$">
+	Order allow,deny
+	Deny from all
 </FilesMatch>
 
 # Don't show directory listings
