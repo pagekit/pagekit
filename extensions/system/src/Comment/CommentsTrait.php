@@ -94,6 +94,14 @@ trait CommentsTrait
             $nodes[$pid]->add($nodes[$id]);
         }
 
-        return $nodes[isset($parameters['root'], $nodes[$parameters['root']]) ? $parameters['root'] : 0];
+        $root = $nodes[isset($parameters['root'], $nodes[$parameters['root']]) ? $parameters['root'] : 0];
+
+        if (isset($parameters['order']) && $parameters['order'] == 'DESC') {
+            $children = $root->getChildren();
+            $root->removeAll();
+            $root->addAll(array_reverse($children, true));
+        }
+
+        return $root;
     }
 }

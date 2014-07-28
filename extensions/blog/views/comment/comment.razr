@@ -1,3 +1,4 @@
+@set($maxlevel = $config['comments.max_depth'] <= $node->getDepth())
 <li id="comment-@( $comment.id )">
 
     <article class="uk-comment" data-comment="@( $comment.id )">
@@ -23,7 +24,7 @@
 
             <p>@raw( $comment.content )</p>
 
-            @if ($post.commentStatus)
+            @if ($post.commentStatus && !$maxlevel)
             <p><a class="js-reply" href="#"><i class="uk-icon-reply"></i> @trans('Reply')</a></p>
             @endif
 
@@ -31,7 +32,7 @@
 
     </article>
 
-    @if ($node.hasChildren())
+    @if ($node.hasChildren() && !$maxlevel)
     <ul>
         @foreach ($node.children as $child)
         @include('extension://blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
@@ -40,3 +41,9 @@
     @endif
 
 </li>
+
+@if ($node.hasChildren() && $maxlevel)
+    @foreach ($node.children as $child)
+    @include('extension://blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+    @endforeach
+@endif
