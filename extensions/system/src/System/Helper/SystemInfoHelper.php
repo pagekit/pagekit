@@ -5,7 +5,6 @@ namespace Pagekit\System\Helper;
 use Doctrine\DBAL\Driver\PDOConnection;
 use Pagekit\Framework\ApplicationTrait;
 use PDO;
-use Symfony\Component\Finder\Finder;
 
 class SystemInfoHelper implements \ArrayAccess
 {
@@ -63,7 +62,7 @@ class SystemInfoHelper implements \ArrayAccess
             $result[$this->getRelativePath($path)] = is_writable($path);
 
             if (is_dir($path)) {
-                foreach (Finder::create()->in($path)->directories()->depth(0) as $folder) {
+                foreach ($this['file']->find()->in($path)->directories()->depth(0) as $folder) {
                     $result[$this->getRelativePath($folder->getPathname())] = is_writable($folder->getPathname());
                 }
             }
