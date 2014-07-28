@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-07-27 18:00+0100\n"
+"PO-Revision-Date: 2014-07-28 12:43+0100\n"
 "Last-Translator: Andre Sieverding <webmaster@andre-sieverding.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: de_DE\n"
+"Language-Team: \n"
 
 #: extensions/page/views/admin/link/page.razr:2
 #: extensions/page/src/PageLink.php:22

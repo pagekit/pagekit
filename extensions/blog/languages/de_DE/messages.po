@@ -2,16 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-27 14:22+0100\n"
+"PO-Revision-Date: 2014-07-28 14:03+0100\n"
 "Last-Translator: Andre Sieverding <webmaster@andre-sieverding.de>\n"
-"Language-Team: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"Language: fr_FR\n"
 "X-Generator: Poedit 1.6.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+"Language-Team: \n"
 
 #: extensions/blog/views/admin/comment/edit.razr:15
 #: extensions/blog/views/comment/respond.razr:23
@@ -210,7 +209,7 @@ msgstr "Verschachtelte Kommentare aktivieren für"
 
 #: extensions/blog/views/admin/settings.razr:105
 msgid "levels deep."
-msgstr "Tiefe."
+msgstr "Ebenen."
 
 #: extensions/blog/views/comment/comment.razr:13
 msgid "%date% at %time%"
@@ -222,7 +221,7 @@ msgstr "Kommentare (%count%)"
 
 #: extensions/blog/views/comment/respond.razr:3
 msgid "Leave a comment"
-msgstr "Schreiben Sie einen Kommentar"
+msgstr "Schreibe einen Kommentar"
 
 #: extensions/blog/views/comment/respond.razr:11
 msgid "Logged in as %name%"
@@ -230,7 +229,7 @@ msgstr "Angemeldet als %name%"
 
 #: extensions/blog/views/comment/respond.razr:15
 msgid "You are commenting as guest."
-msgstr "Sie kommentieren als Gast."
+msgstr "Du kommentierst als Gast."
 
 #: extensions/blog/views/comment/respond.razr:33
 msgid "Submit comment"
@@ -238,11 +237,11 @@ msgstr "Senden"
 
 #: extensions/blog/views/comment/respond.razr:45
 msgid "You are not allowed to post comments."
-msgstr "Es ist Ihnen nicht erlaubt, Kommentare zu schreiben."
+msgstr "Du kannst keine Kommentare schreiben."
 
 #: extensions/blog/views/comment/respond.razr:49
 msgid "Please login to leave a comment."
-msgstr "Bitte melden Sie sich an, um einen Kommentar zu schreiben."
+msgstr "Bitte anmelden, um einen Kommentar zu schreiben."
 
 #: extensions/blog/views/post/index.razr:7
 msgid "Written by %name% on %date%"
@@ -261,8 +260,7 @@ msgid ""
 "You've made some changes! Leaving the post without saving will discard all "
 "changes."
 msgstr ""
-"Alle nicht gesicherten Änderungen gehen verloren, wenn Sie die Seite "
-"verlassen!"
+"Alle nicht gesicherten Änderungen gehen verloren, wenn du die Seite verlässt!"
 
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments on %title%"
@@ -343,8 +341,7 @@ msgstr "Blog"
 #: extensions/blog/src/Controller/SiteController.php:93
 msgid "Please wait another %seconds% seconds before commenting again."
 msgstr ""
-"Bitte warten Sie %seconds% Sekunden, bevor Sie erneut einen Kommentar "
-"schreiben."
+"Bitte warte %seconds% Sekunden, bevor du erneut einen Kommentar schreibst."
 
 #: extensions/blog/src/Controller/SiteController.php:102
 msgid "Comments have been disabled for this post."
@@ -352,11 +349,11 @@ msgstr "Die Kommentare wurden für diesen Artikel deaktiviert."
 
 #: extensions/blog/src/Controller/SiteController.php:111
 msgid "Please provide valid name and email."
-msgstr "Bitte geben Sie Ihren Namen und eine gültige E-Mail Adresse an."
+msgstr "Bitte einen Namen und eine gültige E-Mail Adresse eingeben."
 
 #: extensions/blog/src/Controller/SiteController.php:133
 msgid "Thanks for commenting!"
-msgstr "Danke für Ihr Kommentar!"
+msgstr "Danke für deinen Kommentar!"
 
 #: extensions/blog/src/Controller/SiteController.php:145
 msgid "Whoops, something went wrong!"

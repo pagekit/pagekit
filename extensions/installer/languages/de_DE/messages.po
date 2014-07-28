@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.0 (installer, messages)\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-07-27 17:53+0100\n"
+"PO-Revision-Date: 2014-07-28 12:42+0100\n"
 "Last-Translator: Andre Sieverding <webmaster@andre-sieverding.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: de_DE\n"
+"Language-Team: \n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
@@ -51,11 +51,11 @@ msgstr "Hostname"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Host kann nicht leer sein."
+msgstr "Host darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "User kann nicht leer sein."
+msgstr "User darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
@@ -63,7 +63,7 @@ msgstr "Datenbankname"
 
 #: extensions/installer/views/install.blade.php:54
 msgid "Database name cannot be blank."
-msgstr "Datenbankname kann nicht leer sein."
+msgstr "Datenbankname darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:59
 msgid "Table Prefix"
@@ -85,7 +85,7 @@ msgstr "Du wirst der Administrator sein."
 
 #: extensions/installer/views/install.blade.php:85
 msgid "Username cannot be blank."
-msgstr "Benutzername kann nicht leer sein."
+msgstr "Benutzername darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email adress."
@@ -93,7 +93,7 @@ msgstr "Es muss eine gültige E-Mail Adresse angegeben werden."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
-msgstr "Passwort kann nicht leer sein."
+msgstr "Passwort darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:118
 msgid "Setup your site"
@@ -105,7 +105,7 @@ msgstr "Gebe die Informationen zu deiner Website ein."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
-msgstr "Seitenname kann nicht leer sein."
+msgstr "Seitenname darf nicht leer sein."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
