@@ -43,7 +43,7 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         var url = $('input[name="page[url]"]', form);
 
         if (url.val() === '') {
-            url.val($(this).val().replace(/^([^\/])/, '/$1').toLowerCase());
+            url.val($(this).val().replace(/^([^\/])/, '/$1').replace(/\s/gi, '-').toLowerCase());
         }
 
     });
