@@ -1,3 +1,11 @@
+# Restricted access to files
+<FilesMatch "\.(cache|db|log|po|pot|sql|razr)$">
+    Order allow,deny
+</FilesMatch>
+
+# Don't show directory listings
+Options -Indexes
+
 # URL rewrites
 <IfModule mod_rewrite.c>
 
