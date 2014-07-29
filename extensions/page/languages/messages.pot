@@ -2,7 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2014-07-23 13:47+0000\n"
+=======
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+>>>>>>> parent of f279733... first commit
 =======
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
 >>>>>>> parent of f279733... first commit
