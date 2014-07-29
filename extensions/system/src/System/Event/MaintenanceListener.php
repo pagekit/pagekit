@@ -16,13 +16,7 @@ class MaintenanceListener extends EventSubscriber
     {
         $attributes = $event->getRequest()->attributes;
 
-        if ($this['config']->get('maintenance.enabled')
-            && !(
-                $this['isAdmin']
-                || $attributes->get('_maintenance')
-                || $this['user']->hasAccess('system: maintenance access') && !$this['user']->isAuthenticated()
-            )
-        ) {
+        if ($this['config']->get('maintenance.enabled') && !($this['isAdmin'] || $attributes->get('_maintenance') || $this['user']->hasAccess('system: maintenance access'))) {
 
             $message  = $this['config']->get('maintenance.msg') ? : __("We'll be back soon.");
             $response = $this['view']->render('extension://system/theme/templates/maintenance.razr', compact('message'));

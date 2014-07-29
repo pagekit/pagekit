@@ -75,8 +75,8 @@ class Extension implements \ArrayAccess
     /**
      * Returns the extension's config
      *
-     * @param mixed $key
-     * @param mixed $default
+     * @param  mixed $key
+     * @param  mixed $default
      * @return array
      */
     public function getConfig($key = null, $default = null)

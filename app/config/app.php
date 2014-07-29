@@ -111,7 +111,7 @@ return [
 
                 'driver'  => 'pdo_sqlite',
                 'path'    => '%path%/app/database/pagekit.db',
-                'charset' => 'UTF-8',
+                'charset' => 'utf8',
                 'prefix'  => ''
 
             ],
