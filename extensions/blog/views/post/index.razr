@@ -14,7 +14,7 @@
     @endif
 
     <ul class="uk-subnav uk-subnav-line">
-        @if ($post.readmore)
+        @if ($post.readmore || $post.excerpt)
         <li><a href="@url('@blog/id', ['id' => $post.id])">@trans('Continue Reading')</a></li>
         @endif
         @if ($post.isCommentable || $post.commentCount)
