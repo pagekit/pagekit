@@ -2,11 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 1.0.0 (hello, messages)\n"
 "POT-Creation-Date: 2014-07-23 12:50+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2014-07-24 17:34-0000\n"
 "Last-Translator: Lucas C.S <lucas_z2011@hotmail.com>\n"
 "Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/"
 ">\n"
 "Language: pt_BR\n"
+=======
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+>>>>>>> parent of fe9cba9... Added Portuguese language
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
