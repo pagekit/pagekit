@@ -39,7 +39,7 @@
         </a>
     </li>
 
-    @if ($user.hasAccess('system: manage media'))
+    @if ($user.hasAccess('system: manage storage'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/system/storage')">
             <img src="@url('extension://system/assets/images/icon-storage.svg')" width="50" height="50" alt="@trans('Storage')">
