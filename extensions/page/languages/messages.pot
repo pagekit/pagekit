@@ -1,7 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2014-07-23 13:47+0000\n"
+=======
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+>>>>>>> parent of f279733... first commit
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +20,10 @@ msgstr ""
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
+msgstr ""
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
 msgstr ""
 
 #: extensions/page/views/admin/pages/index.razr:8
@@ -33,10 +41,6 @@ msgstr ""
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
-msgstr ""
-
-#: extensions/page/views/admin/pages/edit.razr:14
-msgid "Enter Title"
 msgstr ""
 
 #: extensions/page/src/Controller/PageController.php:75
@@ -91,15 +95,15 @@ msgstr ""
 msgid "Unable to access this page!"
 msgstr ""
 
-#: extensions/page/src/PageExtension.php:27
-msgid "You've made some changes! Leaving the page without saving will discard all changes."
-msgstr ""
-
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
 msgstr ""
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
+msgstr ""
+
+#: extensions/page/src/PageExtension.php:27
+msgid "You've made some changes! Leaving the page without saving will discard all changes."
 msgstr ""
 

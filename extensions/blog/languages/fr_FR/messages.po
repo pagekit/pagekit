@@ -1,11 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
-"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
 "PO-Revision-Date: 2014-07-22 14:52+0100\n"
 "Last-Translator: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
 "Language-Team: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,29 +13,90 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: extensions/blog/views/admin/post/table.razr:8
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-mail"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Approuver"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Désapprouver"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Marquer comme spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Aucun commentaire."
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Répondre"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Commentaire"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "En réponse à %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "En réponse à"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Aucun commentaire en attente|{1} Un commentaire en attente |]1,Inf[ %comments% commentaires en attente"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Liste des articles"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Article"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "- Sélectionnez un article -"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Entrez un titre"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Résumé"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Entrez un résumé"
+
 #: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
 msgid "Author"
 msgstr "Auteur"
 
-#: extensions/blog/views/admin/post/table.razr:9
-#: extensions/blog/views/admin/settings.razr:16
-#: extensions/blog/views/admin/settings.razr:67
-#: extensions/blog/views/admin/settings.razr:69
-#: extensions/blog/src/Controller/CommentController.php:106
-msgid "Comments"
-msgstr "Commentaires"
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Publié le"
 
-#: extensions/blog/views/admin/post/table.razr:10
-msgid "Date"
-msgstr "Date"
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Slug"
 
-#: extensions/blog/views/admin/post/table.razr:50
-#: extensions/blog/views/admin/comment/table.razr:47
-msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
-msgstr ""
-"{0} Aucun commentaire en attente|{1} Un commentaire en attente |]1,"
-"Inf[ %comments% commentaires en attente"
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Activer les commentaires"
 
 #: extensions/blog/views/admin/post/index.razr:8
 #: extensions/blog/src/Controller/PostController.php:105
@@ -55,80 +115,17 @@ msgstr "Dépublier"
 msgid "No posts found."
 msgstr "Aucun article."
 
-#: extensions/blog/views/admin/post/edit.razr:14
-msgid "Enter Title"
-msgstr "Entrez un titre"
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Commentaires"
 
-#: extensions/blog/views/admin/post/edit.razr:22
-msgid "Excerpt"
-msgstr "Résumé"
-
-#: extensions/blog/views/admin/post/edit.razr:24
-msgid "Enter Excerpt"
-msgstr "Entrez un résumé"
-
-#: extensions/blog/views/admin/post/edit.razr:53
-msgid "Publish on"
-msgstr "Publié le"
-
-#: extensions/blog/views/admin/post/edit.razr:73
-msgid "Slug"
-msgstr "Slug"
-
-#: extensions/blog/views/admin/post/edit.razr:96
-msgid "Enable Comments"
-msgstr "Activer les commentaires"
-
-#: extensions/blog/views/admin/comment/table.razr:6
-msgid "Comment"
-msgstr "Commentaire"
-
-#: extensions/blog/views/admin/comment/table.razr:8
-msgid "In response to %post%"
-msgstr "En réponse à %post%"
-
-#: extensions/blog/views/admin/comment/table.razr:8
-msgid "In response to"
-msgstr "En réponse à"
-
-#: extensions/blog/views/admin/comment/table.razr:37
-#: extensions/blog/views/admin/comment/index.razr:67
-#: extensions/blog/views/comment/comment.razr:27
-msgid "Reply"
-msgstr "Répondre"
-
-#: extensions/blog/views/admin/comment/index.razr:15
-msgid "Approve"
-msgstr "Approuver"
-
-#: extensions/blog/views/admin/comment/index.razr:16
-msgid "Unapprove"
-msgstr "Désapprouver"
-
-#: extensions/blog/views/admin/comment/index.razr:17
-msgid "Mark as spam"
-msgstr "Marquer comme spam"
-
-#: extensions/blog/views/admin/comment/index.razr:37
-msgid "No comments found."
-msgstr "Aucun commentaire."
-
-#: extensions/blog/views/admin/comment/edit.razr:15
-#: extensions/blog/views/comment/respond.razr:23
-msgid "E-mail"
-msgstr "E-mail"
-
-#: extensions/blog/views/admin/link/blog.razr:5
-msgid "Posts View"
-msgstr "Liste des articles"
-
-#: extensions/blog/views/admin/link/blog.razr:15
-msgid "Post"
-msgstr "Article"
-
-#: extensions/blog/views/admin/link/blog.razr:18
-msgid "- Select Post -"
-msgstr "- Sélectionnez un article -"
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Date"
 
 #: extensions/blog/views/admin/settings.razr:15
 #: extensions/blog/views/admin/settings.razr:26
@@ -215,17 +212,13 @@ msgstr "Activer les commentaires imbriqués sur"
 msgid "levels deep."
 msgstr "niveaux."
 
-#: extensions/blog/views/post/index.razr:7
-msgid "Written by %name% on %date%"
-msgstr "Ecrit par %name% le %date%"
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "Le %date% à %time%"
 
-#: extensions/blog/views/post/index.razr:18
-msgid "Continue Reading"
-msgstr "Lire la suite"
-
-#: extensions/blog/views/post/index.razr:20
-msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
-msgstr "{0} Aucun comentaire|{1} Un commentaire|]1,Inf[ %num% commentaires"
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Commentaires (%count%)"
 
 #: extensions/blog/views/comment/respond.razr:3
 msgid "Leave a comment"
@@ -251,13 +244,21 @@ msgstr "Vous n'avez pas l'autorisation d'écrire des commentaires."
 msgid "Please login to leave a comment."
 msgstr "Veuillez vous connecter pour laisser un commentaire."
 
-#: extensions/blog/views/comment/comment.razr:13
-msgid "%date% at %time%"
-msgstr "Le %date% à %time%"
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "Ecrit par %name% le %date%"
 
-#: extensions/blog/views/comment/comments.razr:5
-msgid "Comments (%count%)"
-msgstr "Commentaires (%count%)"
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Lire la suite"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Aucun comentaire|{1} Un commentaire|]1,Inf[ %num% commentaires"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid "You've made some changes! Leaving the post without saving will discard all changes."
+msgstr "Vous avez effectué des modifications ! Si vous quittez cette page sans sauvegarder, vos modifications seront perdues."
 
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments on %title%"
@@ -273,17 +274,11 @@ msgstr "Le commentaire a été ajouté."
 
 #: extensions/blog/src/Controller/CommentController.php:177
 msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
-msgstr ""
-"{0} Aucun commentaire supprimé.|{1} Le commentaire a été supprimé.|]1,"
-"Inf[ Les commentaires ont été supprimés."
+msgstr "{0} Aucun commentaire supprimé.|{1} Le commentaire a été supprimé.|]1,Inf[ Les commentaires ont été supprimés."
 
 #: extensions/blog/src/Controller/CommentController.php:196
-msgid ""
-"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
-"statuses updated."
-msgstr ""
-"{0} Aucun status de commentaire modifié.|{1} Le status du commentaire a été "
-"modifié.|]1,Inf[ Les status des commentaires on été modifiés."
+msgid "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated."
+msgstr "{0} Aucun status de commentaire modifié.|{1} Le status du commentaire a été modifié.|]1,Inf[ Les status des commentaires on été modifiés."
 
 #: extensions/blog/src/Controller/PostController.php:93
 msgid "Posts"
@@ -307,28 +302,19 @@ msgstr "L'article a été ajouté."
 
 #: extensions/blog/src/Controller/PostController.php:173
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
-msgstr ""
-"{0} Aucun article supprimé.|{1} L'article a été supprimé.|]1,Inf[ Les "
-"articles ont été supprimés."
+msgstr "{0} Aucun article supprimé.|{1} L'article a été supprimé.|]1,Inf[ Les articles ont été supprimés."
 
 #: extensions/blog/src/Controller/PostController.php:195
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
-msgstr ""
-"{0} Aucun article copié.|{1} L'article a été copié.|]1,Inf[ Les articles ont "
-"été copiés."
+msgstr "{0} Aucun article copié.|{1} L'article a été copié.|]1,Inf[ Les articles ont été copiés."
 
 #: extensions/blog/src/Controller/PostController.php:212
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
-msgstr ""
-"{0} Aucune article publié.|{1} L'article a été publié.|]1,Inf[ Les articles "
-"ont été publiés."
+msgstr "{0} Aucune article publié.|{1} L'article a été publié.|]1,Inf[ Les articles ont été publiés."
 
 #: extensions/blog/src/Controller/PostController.php:214
-msgid ""
-"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
-msgstr ""
-"{0} Aucune article dépublié.|{1} L'article a été dépublié.|]1,Inf[ Les "
-"articles ont été dépubliés."
+msgid "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} Aucune article dépublié.|{1} L'article a été dépublié.|]1,Inf[ Les articles ont été dépubliés."
 
 #: extensions/blog/src/Controller/SiteController.php:64
 #: extensions/blog/src/Link/BlogLink.php:22
@@ -337,8 +323,7 @@ msgstr "Blog"
 
 #: extensions/blog/src/Controller/SiteController.php:93
 msgid "Please wait another %seconds% seconds before commenting again."
-msgstr ""
-"Veuillez attendre encore %seconds% secondes avant de commenter à nouveau."
+msgstr "Veuillez attendre encore %seconds% secondes avant de commenter à nouveau."
 
 #: extensions/blog/src/Controller/SiteController.php:102
 msgid "Comments have been disabled for this post."
@@ -400,10 +385,3 @@ msgstr "L'article avec l'id \"%id%\" n'a pas été trouvé !"
 msgid "Post with slug \"%slug%\" not found!"
 msgstr "L'article avec le slug \"%slug%\" n'a pas été trouvé !"
 
-#: extensions/blog/src/BlogExtension.php:39
-msgid ""
-"You've made some changes! Leaving the post without saving will discard all "
-"changes."
-msgstr ""
-"Vous avez effectué des modifications ! Si vous quittez cette page sans "
-"sauvegarder, vos modifications seront perdues."

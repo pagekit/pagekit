@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (page, messages)\n"
-"POT-Creation-Date: 2014-07-23 12:51+0000\n"
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
 "PO-Revision-Date: 2014-07-22 18:38+0200\n"
 "Last-Translator: Kehet <kehet@kehet.com>\n"
 "Language-Team: Kehet\n"
-"Language: fi_FI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi_FI\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: extensions/page/views/admin/link/page.razr:2
@@ -21,6 +21,10 @@ msgstr "Sivu"
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
 msgstr "- Valitse sivu -"
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
+msgstr "Anna otsikko"
 
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
@@ -38,10 +42,6 @@ msgstr "Kumoa julkaisu"
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
 msgstr "Sivuja ei löytynyt"
-
-#: extensions/page/views/admin/pages/edit.razr:14
-msgid "Enter Title"
-msgstr "Anna otsikko"
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
@@ -98,14 +98,6 @@ msgstr "Sivua ei löydy!"
 msgid "Unable to access this page!"
 msgstr "Sivuun ei ole pääsyä!"
 
-#: extensions/page/src/PageExtension.php:27
-msgid ""
-"You've made some changes! Leaving the page without saving will discard all "
-"changes."
-msgstr ""
-"Olet tehnyt muokkauksia! Jos lähdet sivulta tallentamatta, muutoksesi "
-"kumotaan."
-
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
 msgstr "Ei julkinen"
@@ -113,3 +105,11 @@ msgstr "Ei julkinen"
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
 msgstr "Julkaistu"
+
+#: extensions/page/src/PageExtension.php:27
+msgid ""
+"You've made some changes! Leaving the page without saving will discard all "
+"changes."
+msgstr ""
+"Olet tehnyt muokkauksia! Jos lähdet sivulta tallentamatta, muutoksesi "
+"kumotaan."

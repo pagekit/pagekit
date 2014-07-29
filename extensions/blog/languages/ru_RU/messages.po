@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
-"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
 "PO-Revision-Date: 2014-07-22 15:54+0400\n"
 "Last-Translator: Alex <manager@pagekitcommunity.ru>\n"
 "Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
@@ -14,27 +14,90 @@ msgstr ""
 "X-Generator: Poedit 1.6.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: extensions/blog/views/admin/post/table.razr:8
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "Email"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Одобрить"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Отклонить"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Пометить как спам"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Комментариев нет."
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Ответить"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Комментарий"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "В ответ на %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "В ответ на"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Нет ожидающих|{1} Один в ожидании|]1,Inf[ %comments% в ожидании"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Смотреть сообщения"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Сообщение"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "Выбрать сообщение"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Введите заголовок"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Вводный текст"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Введите текст введения"
+
 #: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
 msgid "Author"
 msgstr "Автор"
 
-#: extensions/blog/views/admin/post/table.razr:9
-#: extensions/blog/views/admin/settings.razr:16
-#: extensions/blog/views/admin/settings.razr:67
-#: extensions/blog/views/admin/settings.razr:69
-#: extensions/blog/src/Controller/CommentController.php:106
-msgid "Comments"
-msgstr "Комментарии"
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Дата публикации"
 
-#: extensions/blog/views/admin/post/table.razr:10
-msgid "Date"
-msgstr "Дата"
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Часть URL"
 
-#: extensions/blog/views/admin/post/table.razr:50
-#: extensions/blog/views/admin/comment/table.razr:47
-msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
-msgstr "{0} Нет ожидающих|{1} Один в ожидании|]1,Inf[ %comments% в ожидании"
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Включить комментарии"
 
 #: extensions/blog/views/admin/post/index.razr:8
 #: extensions/blog/src/Controller/PostController.php:105
@@ -53,80 +116,17 @@ msgstr "Снять с публикации"
 msgid "No posts found."
 msgstr "Сообщений нет."
 
-#: extensions/blog/views/admin/post/edit.razr:14
-msgid "Enter Title"
-msgstr "Введите заголовок"
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Комментарии"
 
-#: extensions/blog/views/admin/post/edit.razr:22
-msgid "Excerpt"
-msgstr "Вводный текст"
-
-#: extensions/blog/views/admin/post/edit.razr:24
-msgid "Enter Excerpt"
-msgstr "Введите текст введения"
-
-#: extensions/blog/views/admin/post/edit.razr:53
-msgid "Publish on"
-msgstr "Дата публикации"
-
-#: extensions/blog/views/admin/post/edit.razr:73
-msgid "Slug"
-msgstr "Часть URL"
-
-#: extensions/blog/views/admin/post/edit.razr:96
-msgid "Enable Comments"
-msgstr "Включить комментарии"
-
-#: extensions/blog/views/admin/comment/table.razr:6
-msgid "Comment"
-msgstr "Комментарий"
-
-#: extensions/blog/views/admin/comment/table.razr:8
-msgid "In response to %post%"
-msgstr "В ответ на %post%"
-
-#: extensions/blog/views/admin/comment/table.razr:8
-msgid "In response to"
-msgstr "В ответ на"
-
-#: extensions/blog/views/admin/comment/table.razr:37
-#: extensions/blog/views/admin/comment/index.razr:67
-#: extensions/blog/views/comment/comment.razr:27
-msgid "Reply"
-msgstr "Ответить"
-
-#: extensions/blog/views/admin/comment/index.razr:15
-msgid "Approve"
-msgstr "Одобрить"
-
-#: extensions/blog/views/admin/comment/index.razr:16
-msgid "Unapprove"
-msgstr "Отклонить"
-
-#: extensions/blog/views/admin/comment/index.razr:17
-msgid "Mark as spam"
-msgstr "Пометить как спам"
-
-#: extensions/blog/views/admin/comment/index.razr:37
-msgid "No comments found."
-msgstr "Комментариев нет."
-
-#: extensions/blog/views/admin/comment/edit.razr:15
-#: extensions/blog/views/comment/respond.razr:23
-msgid "E-mail"
-msgstr "Email"
-
-#: extensions/blog/views/admin/link/blog.razr:5
-msgid "Posts View"
-msgstr "Смотреть сообщения"
-
-#: extensions/blog/views/admin/link/blog.razr:15
-msgid "Post"
-msgstr "Сообщение"
-
-#: extensions/blog/views/admin/link/blog.razr:18
-msgid "- Select Post -"
-msgstr "Выбрать сообщение"
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Дата"
 
 #: extensions/blog/views/admin/settings.razr:15
 #: extensions/blog/views/admin/settings.razr:26
@@ -213,17 +213,13 @@ msgstr "Включить вложенность комментариев на"
 msgid "levels deep."
 msgstr "уровня глубины."
 
-#: extensions/blog/views/post/index.razr:7
-msgid "Written by %name% on %date%"
-msgstr "%name%, %date%"
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% в %time%"
 
-#: extensions/blog/views/post/index.razr:18
-msgid "Continue Reading"
-msgstr "Читать далее"
-
-#: extensions/blog/views/post/index.razr:20
-msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
-msgstr "{0} Нет комментариев|{1} %num% комментарий|]1,Inf[ %num% комментариев"
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Комментарии (%count%)"
 
 #: extensions/blog/views/comment/respond.razr:3
 msgid "Leave a comment"
@@ -249,13 +245,24 @@ msgstr "Вам не разрешено оставлять комментарии
 msgid "Please login to leave a comment."
 msgstr "Пожалуйста, войдите, чтобы оставить комментарий."
 
-#: extensions/blog/views/comment/comment.razr:13
-msgid "%date% at %time%"
-msgstr "%date% в %time%"
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "%name%, %date%"
 
-#: extensions/blog/views/comment/comments.razr:5
-msgid "Comments (%count%)"
-msgstr "Комментарии (%count%)"
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Читать далее"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Нет комментариев|{1} %num% комментарий|]1,Inf[ %num% комментариев"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr ""
+"Сделанные вами изменения будут отменены, если вы уйдете с этой страницы."
 
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments on %title%"
@@ -397,10 +404,3 @@ msgstr "Сообщение с ID \"%id%\" не найдено!"
 #: extensions/blog/src/Event/RouteListener.php:106
 msgid "Post with slug \"%slug%\" not found!"
 msgstr "Сообщение с частью ссылки \"%slug%\" не найдено!"
-
-#: extensions/blog/src/BlogExtension.php:39
-msgid ""
-"You've made some changes! Leaving the post without saving will discard all "
-"changes."
-msgstr ""
-"Сделанные вами изменения будут отменены, если вы уйдете с этой страницы."
