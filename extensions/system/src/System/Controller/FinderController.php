@@ -65,6 +65,10 @@ class FinderController extends Controller
             return $this->error(__('Invalid path.'));
         }
 
+        if (file_exists($this->getPath($name))) {
+            return $this->error(__('Folder already exists.'));
+        }
+
         if ('w' !== $this->getMode(dirname($path))) {
             return $this->error(__('Permission denied.'));
         }
