@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-30 19:58+0100\n"
+"PO-Revision-Date: 2014-07-30 21:25+0100\n"
 "Last-Translator: Christopher Pecoraro <chrispecoraro@gmail.com>\n"
 "Language-Team: Christopher Pecoraro <chrispecoraro@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Approva"
 
 #: extensions/blog/views/admin/comment/index.razr:16
 msgid "Unapprove"
-msgstr "Disapprova"
+msgstr "non approvare"
 
 #: extensions/blog/views/admin/comment/index.razr:17
 msgid "Mark as spam"
@@ -56,12 +56,12 @@ msgstr "In risposta a"
 #: extensions/blog/views/admin/post/table.razr:50
 msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
 msgstr ""
-"{0} |{1} Un commento in attesa di approvazione |]1,Inf[ %comments% commenti "
-"in attesa di approvazione"
+"{0} Nessun commento in attesa di approvazione |{1} Un commento in attesa di "
+"approvazione |]1,Inf[ %comments% commenti in attesa di approvazione"
 
 #: extensions/blog/views/admin/link/blog.razr:5
 msgid "Posts View"
-msgstr "Vista dei articoli"
+msgstr "Lista degli articoli"
 
 #: extensions/blog/views/admin/link/blog.razr:15
 msgid "Post"
@@ -107,11 +107,11 @@ msgstr "Aggiungi un Articolo"
 
 #: extensions/blog/views/admin/post/index.razr:15
 msgid "Publish"
-msgstr "Pubblisci"
+msgstr "Pubblica"
 
 #: extensions/blog/views/admin/post/index.razr:16
 msgid "Unpublish"
-msgstr "Annullare la pubblicazione"
+msgstr "Annulla la pubblicazione"
 
 #: extensions/blog/views/admin/post/index.razr:38
 msgid "No posts found."
@@ -152,7 +152,7 @@ msgstr "/blog/articolo-d-esempio"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "Day and name"
-msgstr "Data e nome"
+msgstr "Giorno e nome"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "/blog/2014/06/12/sample-post"
@@ -180,7 +180,7 @@ msgstr "Richiedi nome e email."
 
 #: extensions/blog/views/admin/settings.razr:81
 msgid "Close comments on articles older than"
-msgstr "Disabilita commenti per articoli più vecchi di"
+msgstr "Nascondi commenti per articoli più vecchi di"
 
 #: extensions/blog/views/admin/settings.razr:82
 msgid "days."
@@ -208,11 +208,11 @@ msgstr "la più recente per prima."
 
 #: extensions/blog/views/admin/settings.razr:103
 msgid "Enable nested comments of"
-msgstr "Abilita commenti nidificati"
+msgstr "Abilita commenti annidati di"
 
 #: extensions/blog/views/admin/settings.razr:105
 msgid "levels deep."
-msgstr "livelli."
+msgstr "profondità di livelli."
 
 #: extensions/blog/views/comment/comment.razr:13
 msgid "%date% at %time%"
@@ -224,7 +224,7 @@ msgstr "Commenti (%count%)"
 
 #: extensions/blog/views/comment/respond.razr:3
 msgid "Leave a comment"
-msgstr "Lasciare un commento"
+msgstr "Lascia un commento"
 
 #: extensions/blog/views/comment/respond.razr:11
 msgid "Logged in as %name%"
@@ -248,7 +248,7 @@ msgstr "Per piacere, fai login per lasciare un commento."
 
 #: extensions/blog/views/post/index.razr:7
 msgid "Written by %name% on %date%"
-msgstr "Scritto da %name% su %date%"
+msgstr "Scritto da %name% il %date%"
 
 #: extensions/blog/views/post/index.razr:18
 msgid "Continue Reading"
@@ -264,7 +264,7 @@ msgid ""
 "changes."
 msgstr ""
 "Hai effettuate delle modifiche! Se lasci l'articolo senza salvare, perderai "
-"tutti i tuoi aggiornamenti."
+"quello che hai cambiato."
 
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments on %title%"
@@ -289,8 +289,8 @@ msgid ""
 "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
 "statuses updated."
 msgstr ""
-"{0} Nessun commento di status aggiornato.|{1} Il commento di status è stato "
-"aggiornato.|]1,Inf[ I commenti di status sono stati aggiornati."
+"{0} Nessun aggiornato sullo stato del commento .|{1} lo stato del commento è "
+"stato aggiornato.|]1,Inf[ Gli stati dei commenti sono stati aggiornati."
 
 #: extensions/blog/src/Controller/PostController.php:93
 msgid "Posts"
@@ -298,7 +298,7 @@ msgstr "Articoli"
 
 #: extensions/blog/src/Controller/PostController.php:117
 msgid "Invalid post id."
-msgstr "L'id del post non è valido."
+msgstr "L'id del articolo non è valido."
 
 #: extensions/blog/src/Controller/PostController.php:127
 msgid "Edit Post"
@@ -315,26 +315,26 @@ msgstr "L'articolo è stato creato."
 #: extensions/blog/src/Controller/PostController.php:173
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
 msgstr ""
-"{0} Nessun articolo cancellato.|{1} L'articolo è stato cancellato.|]1,Inf[ I "
-"articolo sono stati cancellati."
+"{0} Nessun articolo cancellato.|{1} L'articolo è stato cancellato.|]1,"
+"Inf[ Gli articolo sono stati cancellati."
 
 #: extensions/blog/src/Controller/PostController.php:195
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
 msgstr ""
-"{0} Nessun articolo copiato.|{1} L'articolo è stato copiato.|]1,Inf[ I "
+"{0} Nessun articolo copiato.|{1} L'articolo è stato copiato.|]1,Inf[ Gli "
 "articolo sono stati copiati."
 
 #: extensions/blog/src/Controller/PostController.php:212
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
 msgstr ""
 "{0} Nessun articolo pubblicato.|{1} L'articolo è stato pubblicato .|]1,"
-"Inf[ I articolo sono stati pubblicati."
+"Inf[ Gli articolo sono stati pubblicati."
 
 #: extensions/blog/src/Controller/PostController.php:214
 msgid ""
 "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
 msgstr ""
-"{0} Nessun articolo nascosto.|{1} L'articolo è stato nascosto .|]1,Inf[ I "
+"{0} Nessun articolo nascosto.|{1} L'articolo è stato nascosto .|]1,Inf[ Gli "
 "articoli sono stati nascosti."
 
 #: extensions/blog/src/Controller/SiteController.php:64
@@ -353,7 +353,7 @@ msgstr "Commenti sono stati disabilitati per questo articolo."
 
 #: extensions/blog/src/Controller/SiteController.php:111
 msgid "Please provide valid name and email."
-msgstr "Per piacere, fornisci un nome e email valido."
+msgstr "Per piacere, fornisci un nome e un'email validi."
 
 #: extensions/blog/src/Controller/SiteController.php:133
 msgid "Thanks for commenting!"
@@ -369,7 +369,7 @@ msgstr "Articolo non trovato!"
 
 #: extensions/blog/src/Controller/SiteController.php:162
 msgid "Unable to access this post!"
-msgstr "Impossible ad accedere a questo articolo!"
+msgstr "Impossibile accedere a questo articolo!"
 
 #: extensions/blog/src/Entity/Comment.php:114
 msgid "Approved"
@@ -377,7 +377,7 @@ msgstr "Approvato"
 
 #: extensions/blog/src/Entity/Comment.php:115
 msgid "Pending"
-msgstr "In attesa"
+msgstr "In attesa di approvazione"
 
 #: extensions/blog/src/Entity/Comment.php:116
 msgid "Spam"
@@ -405,4 +405,4 @@ msgstr "L'articolo con l'id \"%id%\" non è stato trovato!"
 
 #: extensions/blog/src/Event/RouteListener.php:106
 msgid "Post with slug \"%slug%\" not found!"
-msgstr "L'articolo con la slug \"%slug%\" non è stato trovato!"
+msgstr "L'articolo con lo slug \"%slug%\" non è stato trovato!"
