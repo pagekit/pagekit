@@ -2,6 +2,8 @@
 
 namespace Pagekit\System\Console;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +16,6 @@ use Composer\IO\ConsoleIO;
 use Composer\Package\Locker;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
-
 
 class ExtensionComposerCommand extends Command
 {
@@ -30,7 +31,7 @@ class ExtensionComposerCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Extension Composer';
+    protected $description = 'Installs the extension dependencies';
 
     /**
      * Executes composer for the extension.
@@ -39,7 +40,6 @@ class ExtensionComposerCommand extends Command
     {
         $name   = $this->argument('extension');
         $update = $this->option('update');
-        $io     = new ConsoleIO($input, $output, $this->getHelperSet());
 
         if (!is_dir($path = $this->pagekit['path.extensions']."/$name") && file_exists("$path/extension.json")) {
             $this->error("Extension not exists '$path'");
@@ -53,44 +53,84 @@ class ExtensionComposerCommand extends Command
             exit;
         }
 
-        $memoryLimit = trim(ini_get('memory_limit'));
-        // Increase memory_limit if it is lower than 512M
-        if ($memoryLimit != -1 && $this->memoryInBytes($memoryLimit) < 512 * 1024 * 1024) {
-            @ini_set('memory_limit', '512M');
-        }
+        $this->loadComposer($path);
 
-        // Create Composer
-        putenv('COMPOSER_HOME='.$this->pagekit['path.vendor'].'/composer/composer');
-        putenv('COMPOSER_CACHE_DIR='.$this->pagekit['path.cache'].'/composer');
-        putenv('COMPOSER_VENDOR_DIR='.$path.'/vendor');
-
+        $io       = new ConsoleIO($input, $output, $this->getHelperSet());
         $composer = Factory::create($io, $package['composer']);
         $lockFile = new JsonFile("$path/extension.lock");
         $locker   = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($package['composer'])));
         $composer->setLocker($locker);
 
-        // Create Installer
-        $installer                   = Installer::create($io, $composer);
-        $internalRepository          = new CompositeRepository(array());
-        $installed                   = new JsonFile($this->pagekit['path'].'/vendor/composer/installed.json');
-        $internalInstalledRepository = new InstalledFilesystemRepository($installed);
+        $installed = new JsonFile($this->pagekit['path'].'/vendor/composer/installed.json');
+        $internal  = new CompositeRepository([]);
+        $internal->addRepository(new InstalledFilesystemRepository($installed));
 
-        $internalRepository->addRepository($internalInstalledRepository);
-        $installer->setAdditionalInstalledRepository($internalRepository);
+        $installer = Installer::create($io, $composer);
+        $installer->setAdditionalInstalledRepository($internal);
         $installer->setUpdate($update);
 
         return $installer->run();
     }
 
     /**
-     * Converts php.ini memory to bytes
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
+        $this->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
+    }
+
+    /**
+     * Loads the composer from .phar archive.
      *
-     * @param string meory
-     * @return int bytes
+     * @param string $path
+     */
+    protected function loadComposer($path)
+    {
+        $composer = $this->pagekit['path.temp'].'/composer.phar';
+        $memory   = trim(ini_get('memory_limit'));
+
+        // set environment
+        putenv('COMPOSER_HOME='.$this->pagekit['path.temp']);
+        putenv('COMPOSER_CACHE_DIR='.$this->pagekit['path.cache'].'/composer');
+        putenv('COMPOSER_VENDOR_DIR='.$path.'/vendor');
+
+        // set memory limit, if < 512M
+        if ($memory != -1 && $this->memoryInBytes($memory) < 512 * 1024 * 1024) {
+            @ini_set('memory_limit', '512M');
+        }
+
+        // get composer.phar
+        if (!file_exists($composer)) {
+
+            $this->line('Downloading composer.phar ...');
+
+            try {
+
+                $client = new Client;
+
+                file_put_contents($composer, $client->get('https://getcomposer.org/composer.phar')->getBody());
+
+            } catch (BadResponseException $e) {
+                $this->line(sprintf('Error: %s', $e->getMessage()));
+            }
+        }
+
+        require("phar://{$composer}/src/bootstrap.php");
+    }
+
+    /**
+     * Get memory in bytes.
+     *
+     * @param  string $value
+     * @return int
      */
     protected function memoryInBytes($value) {
+
         $unit = strtolower(substr($value, -1, 1));
         $value = (int) $value;
+
         switch($unit) {
             case 'g':
                 $value *= 1024;
@@ -103,15 +143,5 @@ class ExtensionComposerCommand extends Command
         }
 
         return $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
-        $this->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
-
     }
 }
