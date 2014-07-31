@@ -53,6 +53,12 @@ class ExtensionComposerCommand extends Command
             exit;
         }
 
+        $memoryLimit = trim(ini_get('memory_limit'));
+        // Increase memory_limit if it is lower than 512M
+        if ($memoryLimit != -1 && $this->memoryInBytes($memoryLimit) < 512 * 1024 * 1024) {
+            @ini_set('memory_limit', '512M');
+        }
+
         // Create Composer
         putenv('COMPOSER_HOME='.$this->pagekit['path.vendor'].'/composer/composer');
         putenv('COMPOSER_CACHE_DIR='.$this->pagekit['path.cache'].'/composer');
@@ -74,6 +80,29 @@ class ExtensionComposerCommand extends Command
         $installer->setUpdate($update);
 
         return $installer->run();
+    }
+
+    /**
+     * Converts php.ini memory to bytes
+     *
+     * @param string meory
+     * @return int bytes
+     */
+    protected function memoryInBytes($value) {
+        $unit = strtolower(substr($value, -1, 1));
+        $value = (int) $value;
+        switch($unit) {
+            case 'g':
+                $value *= 1024;
+                // no break (cumulative multiplier)
+            case 'm':
+                $value *= 1024;
+                // no break (cumulative multiplier)
+            case 'k':
+                $value *= 1024;
+        }
+
+        return $value;
     }
 
     /**
