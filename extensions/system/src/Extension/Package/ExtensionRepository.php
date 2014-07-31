@@ -33,7 +33,11 @@ class ExtensionRepository extends InstalledRepository
         parent::initialize();
 
         if (empty($this->packages)) {
-            foreach (glob("{$this->path}/*/extension.json") as $config) {
+            $packages = array_merge(
+                glob("{$this->path}/*/extension.json"),
+                glob("{$this->path}/*/*/extension.json")
+            );
+            foreach ($packages as $config) {
                 $this->addPackage($this->loader->load($config));
             }
         }
