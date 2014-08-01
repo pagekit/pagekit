@@ -38,6 +38,14 @@ class Node extends \Pagekit\Component\Tree\Node
     /**
      * @return string
      */
+    public function getName()
+    {
+        return $this->item->getName();
+    }
+
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return $this->item->getUrl();
