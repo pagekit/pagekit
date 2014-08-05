@@ -81,11 +81,11 @@ class ResetPasswordController extends Controller
 
             try {
 
-                $this['mailer']->create()
-                    ->setTo($user->getEmail())
-                    ->setSubject(__('Reset password for %site%.', ['%site%' => $this['config']->get('app.site_title')]))
-                    ->setBody($this['view']->render('extension://system/views/user/mails/reset.razr', ['username' => $user->getUsername(), 'url' => $url]), 'text/html')
-                    ->send();
+                $mail = $this['mailer']->create();
+                $mail->setTo($user->getEmail())
+                     ->setSubject(__('Reset password for %site%.', ['%site%' => $this['config']->get('app.site_title')]))
+                     ->setBody($this['view']->render('extension://system/views/user/mails/reset.razr', ['username' => $user->getUsername(), 'url' => $url, 'mail' => $mail]), 'text/html')
+                     ->send();
 
             } catch (\Exception $e) {
                 throw new Exception(__('Unable to send confirmation link.'));

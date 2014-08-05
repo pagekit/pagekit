@@ -211,11 +211,11 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this['mailer']->create()
-                ->setTo($user->getEmail())
-                ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', compact('user')), 'text/html')
-                ->send();
+            $mail = $this['mailer']->create();
+            $mail->setTo($user->getEmail())
+                 ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
+                 ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
+                 ->send();
 
         } catch (\Exception $e) {}
     }
@@ -224,11 +224,11 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this['mailer']->create()
-                ->setTo($user->getEmail())
-                ->setSubject(__('Activate your %site% account.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/verification.razr', compact('user')), 'text/html')
-                ->send();
+            $mail = $this['mailer']->create();
+            $mail->setTo($user->getEmail())
+                 ->setSubject(__('Activate your %site% account.', ['%site%' => $this['option']->get('system:app.site_title')]))
+                 ->setBody($this['view']->render('extension://system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
+                 ->send();
 
         } catch (\Exception $e) {
             throw new Exception(__('Unable to send verification link.'));
@@ -239,11 +239,11 @@ class RegistrationController extends Controller
     {
         try {
 
-            $this['mailer']->create()
-                ->setTo($this['option']->get('system:mail.from.address'))
-                ->setSubject(__('Approve an account at %site%.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                ->setBody($this['view']->render('extension://system/views/user/mails/approve.razr', compact('user')), 'text/html')
-                ->send();
+            $mail = $this['mailer']->create();
+            $mail->setTo($this['option']->get('system:mail.from.address'))
+                 ->setSubject(__('Approve an account at %site%.', ['%site%' => $this['option']->get('system:app.site_title')]))
+                 ->setBody($this['view']->render('extension://system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
+                 ->send();
 
         } catch (\Exception $e) {}
     }
