@@ -226,7 +226,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($user->getEmail())
-                ->setSubject(__('Activate your %site% account', ['%site%' => $this['option']->get('system:app.site_title')]))
+                ->setSubject(__('Activate your %site% account.', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render('extension://system/views/user/mails/verification.razr', compact('user')), 'text/html')
                 ->send();
 
@@ -241,7 +241,7 @@ class RegistrationController extends Controller
 
             $this['mailer']->create()
                 ->setTo($this['option']->get('system:mail.from.address'))
-                ->setSubject(__('Please approve registration at %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
+                ->setSubject(__('Approve an account at %site%.', ['%site%' => $this['option']->get('system:app.site_title')]))
                 ->setBody($this['view']->render('extension://system/views/user/mails/approve.razr', compact('user')), 'text/html')
                 ->send();
 
