@@ -1,5 +1,9 @@
 # Changelog
 
+### WIP
+
+- Beautified system emails
+
 ### 0.8.4 (July 25, 2014)
 
 - Added Finnish, French, Spanish, Russian translation
