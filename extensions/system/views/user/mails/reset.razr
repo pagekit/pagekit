@@ -69,11 +69,6 @@
 
             @@media (max-width: 480px) {
 
-                h1 {
-                    font-size: 34px !important;
-                    line-height: 38px !important;
-                }
-
                 #panel-table {
                     max-width: 480px !important;
                     width: 100% !important;
