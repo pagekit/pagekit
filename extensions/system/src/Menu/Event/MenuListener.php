@@ -58,7 +58,7 @@ class MenuListener extends EventSubscriber
         $internal = $this['url']->route($route, $request->attributes->get('_route_params', []), 'link');
 
         foreach ($event->get($route) as $id => $path) {
-            if (0 === strpos($path, $internal)) {
+            if ($path == $internal || substr($path, strlen($internal), 1) == '&') {
                 $event->add($id);
             }
         }
