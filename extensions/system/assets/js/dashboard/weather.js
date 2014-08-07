@@ -10,15 +10,14 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
         loadData(config).done(function(data) {
 
-            widget.find('.js-spinner').addClass('uk-hidden');
+            var location = config.location.split(',');
 
-            var unit = config.units == 'metric' ? ' &deg;C' : ' &deg;F',
-                location = config.location.split(',');
             $('.js-weather-city', widget).html(location[0]);
-
             $('.js-weather-country', widget).html(location[1]);
-            $('.js-weather-temperature', widget).html(Math.round(data.main.temp) + unit);
+            $('.js-weather-temperature', widget).html(Math.round(data.main.temp) + (config.units == 'metric' ? ' &deg;C' : ' &deg;F'));
             $('.js-weather-icon', widget).attr('src', getIconUrl(data.weather[0].icon));
+
+            widget.find('.js-spinner').addClass('uk-hidden');
 
         }).fail(function() {
             widget.replaceWith(($('.js-error', widget)).removeClass('uk-hidden'));
@@ -28,7 +27,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
     function loadData(config) {
 
-        var key = 'weather-' + config.id, cache = storage[key];
+        var key = 'weather-' + config.id + config.units[0], cache = storage[key];
 
         if (cache) {
             return $.Deferred().resolve(JSON.parse(cache)).promise();
