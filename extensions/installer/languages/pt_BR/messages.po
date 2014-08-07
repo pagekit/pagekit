@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 1.0.0 (installer, messages)\n"
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+<<<<<<< HEAD
+"PO-Revision-Date: 2014-07-24 17:36-0000\n"
+"Last-Translator: Lucas C.S <lucas_z2011@hotmail.com>\n"
+"Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/"
+">\n"
+"Language: pt_BR\n"
+=======
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+>>>>>>> parent of fe9cba9... Added Portuguese language
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: extensions/installer/views/install.razr:5
+#: extensions/installer/src/Controller/InstallerController.php:41
+msgid "Pagekit Installer"
+msgstr "Instalador do Pagekit"
+
+#: extensions/installer/views/install.razr:24
+msgid "Begin"
+msgstr "Começar"
+
+#: extensions/installer/views/install.razr:34
+msgid "Connect database"
+msgstr "Banco de dados conectado"
+
+#: extensions/installer/views/install.razr:36
+msgid "Enter your database connection details."
+msgstr "Digite detalhes de conexão com o seu banco de dados"
+
+#: extensions/installer/views/install.razr:52
+msgid "Hostname"
+msgstr "Nome do Host"
+
+#: extensions/installer/views/install.razr:55
+msgid "Host cannot be blank."
+msgstr "Host não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:63
+msgid "User cannot be blank."
+msgstr "Usuário não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:75
+msgid "Database Name"
+msgstr "Nome do Banco de dados"
+
+#: extensions/installer/views/install.razr:78
+msgid "Database name cannot be blank."
+msgstr "Banco de dados não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:83
+#: extensions/installer/views/install.razr:92
+msgid "Table Prefix"
+msgstr "Prefixo das tabelas"
+
+#: extensions/installer/views/install.razr:100
+#: extensions/installer/views/install.razr:145
+#: extensions/installer/views/install.razr:178
+msgid "Next"
+msgstr "Proximo"
+
+#: extensions/installer/views/install.razr:111
+msgid "Create your account"
+msgstr "Criar sua conta"
+
+#: extensions/installer/views/install.razr:113
+msgid "You will be the site administrator."
+msgstr "Você vai ser o administrador do sistema"
+
+#: extensions/installer/views/install.razr:121
+msgid "Username cannot be blank."
+msgstr "Usuário não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:132
+msgid "Password cannot be blank."
+msgstr "Senha não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:140
+msgid "Field must be a valid email address."
+msgstr "O campo deve ser um endereço de email válido."
+
+#: extensions/installer/views/install.razr:156
+msgid "Setup your site"
+msgstr "Configure o seu site"
+
+#: extensions/installer/views/install.razr:158
+msgid "Enter your website details."
+msgstr "Digite os detalhes do website"
+
+#: extensions/installer/views/install.razr:166
+msgid "Site name cannot be blank."
+msgstr "Nome do site não pode ficar em branco"
+
+#: extensions/installer/views/install.razr:190
+msgid "Installing Pagekit..."
+msgstr "Instalando Pagekit"
+
+#: extensions/installer/views/install.razr:198
+msgid "Installation failed!"
+msgstr "A Instalação falhou!"
+
+#: extensions/installer/views/install.razr:207
+msgid "Retry"
+msgstr "Tentar novamente"
+
+#: extensions/installer/views/install.razr:213
+msgid "Finished!"
+msgstr "Finalizado!"
+
+#: extensions/installer/views/install.razr:220
+msgid "Login now"
+msgstr "Entrar agora"
+
+#: extensions/installer/src/Controller/InstallerController.php:83
+msgid "Database connection failed!"
+msgstr "Conexão com o banco de dados falhou"
+
+#: extensions/installer/src/Controller/InstallerController.php:86
+msgid "Database access denied!"
+msgstr "Acesso ao banco de dados negado!"
+
+#: extensions/installer/src/Controller/InstallerController.php:109
+msgid "No database connection."
+msgstr "Não há conexão com o banco de dados"
+
+#: extensions/installer/src/Controller/InstallerController.php:168
+msgid "Can't write config."
+msgstr "Configuração não pode ser escrita"
+
+#: extensions/installer/src/Controller/InstallerController.php:181
+msgid "Database error: %error%"
+msgstr "Erro do banco de dados: %error%"
+
+#~ msgid "DB user is missing required privileges."
+#~ msgstr "Usuário do banco de dados não tem privilégios necessários"
+
+#~ msgid "Field must be a valid email adress."
+#~ msgstr "O campo deve ter um endereço de Email válido"

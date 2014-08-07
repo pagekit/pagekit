@@ -1,7 +1,21 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
+<<<<<<< HEAD
+"Project-Id-Version: Pagekit 0.8.3 (hello, messages)\n"
+<<<<<<< HEAD
+"POT-Creation-Date: 2014-07-23 13:46+0000\n"
+=======
 "Project-Id-Version: Pagekit 1.0.0 (hello, messages)\n"
 "POT-Creation-Date: 2013-11-10 19:28+0000\n"
+>>>>>>> parent of f279733... first commit
+=======
+"Project-Id-Version: Pagekit 1.0.0 (hello, messages)\n"
+"POT-Creation-Date: 2013-11-10 19:28+0000\n"
+>>>>>>> parent of f279733... first commit
+=======
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+>>>>>>> parent of fe9cba9... Added Portuguese language
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

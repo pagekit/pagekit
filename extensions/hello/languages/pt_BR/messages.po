@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 1.0.0 (hello, messages)\n"
+"POT-Creation-Date: 2014-07-23 12:50+0000\n"
+<<<<<<< HEAD
+"PO-Revision-Date: 2014-07-24 17:34-0000\n"
+"Last-Translator: Lucas C.S <lucas_z2011@hotmail.com>\n"
+"Language-Team: Hello Pagekit <https://www.facebook.com/groups/HelloPagekit/"
+">\n"
+"Language: pt_BR\n"
+=======
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+>>>>>>> parent of fe9cba9... Added Portuguese language
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: extensions/hello/views/admin/link.razr:4
+#: extensions/hello/src/HelloLink.php:22
+msgid "Hello World"
+msgstr "Olá Mundo"
+
+#: extensions/hello/views/admin/settings.razr:9
+msgid "Message"
+msgstr "Mensagem"
+
+#: extensions/hello/views/admin/settings.razr:15
+msgid "This settings page is just for demonstration purposes."
+msgstr "Esta página de configurações é apenas para fins de demonstração."
+
+#: extensions/hello/views/greet.razr:3
+msgid "{0}: No names|one: One name|more: %names% names"
+msgstr "{0}: Nenhum nome|one: Um nome|more: %names% nomes"
+
+#: extensions/hello/views/greet.razr:7
+msgid "Hello %name%!"
+msgstr "Olá  %name%!"
+
+#: extensions/hello/views/widget.razr:1
+#: extensions/hello/src/HelloWidget.php:23
+msgid "Hello Widget!"
+msgstr "Olá Widget!"
+
+#: extensions/hello/src/Controller/SiteController.php:37
+#: extensions/hello/src/Controller/SiteController.php:43
+msgid "View article"
+msgstr "Visualizar artigo"
+
+#: extensions/hello/src/HelloWidget.php:31
+msgid "Hello Demo Widget"
+msgstr "Olá Widget de demostração"
+
+#: extensions/hello/src/HelloWidget.php:47
+msgid "Hello Widget Form."
+msgstr "Olá Widget de formulário."
+
+#~ msgid "Hello %name%"
+#~ msgstr "Olá %name%"
+
+#~ msgid "This Settings page is just for demonstration purposes."
+#~ msgstr "Esta página Configurações é apenas para fins de demonstração."
