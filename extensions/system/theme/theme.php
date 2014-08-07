@@ -20,6 +20,9 @@ $app->on('system.admin', function() use ($app) {
         // set menus
         $app['view']->set('nav', $app['admin.menu']);
         $app['view']->set('subnav', current(array_filter($app['admin.menu']->getChildren(), function($item) { return $item->getAttribute('active'); })));
+
+        // set font subset
+        $app['view']->set('subset', 'latin,latin-ext');
     });
 
     $app['view.sections']->addRenderer('toolbar', function($name, $value, $options = []) use ($app) {
