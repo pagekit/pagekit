@@ -5,6 +5,6 @@ root = true
 [*]
 end_of_line = LF
 
-[*.php]
+[{*.php, *.js, *.less, *.css, *.json, *.razr}]
 indent_style = space
 indent_size = 4
