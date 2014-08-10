@@ -87,7 +87,11 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!lin
 
                         if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
 
-                        var advanced = $.parseJSON('{' + data.matches[3] + '}');
+                        var defaultAdvanced = "target: '', rel: ''"; 
+                        var advanced = (typeof data.matches[3] !== 'undefined') ? data.matches[3] : defaultAdvanced;
+                        console.log(advanced);
+                        advanced = $.parseJSON('{' + advanced + '}');
+                        console.log(advanced);
                         var other   = (advanced.target && $.inArray(advanced.target, ['', '_blank', '_top', '_parent']) != -1 
                                     || typeof advanced.target === 'undefined' );
 

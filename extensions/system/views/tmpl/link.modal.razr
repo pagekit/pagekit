@@ -37,6 +37,6 @@
         <div class="uk-form-row">
             <button class="js-update uk-button uk-button-primary" type="button">@trans('Update')</button>
             <button class="uk-button uk-modal-close" type="button">@trans('Cancel')</button>
-        </div>a
+        </div>
     </div>
 </div>
