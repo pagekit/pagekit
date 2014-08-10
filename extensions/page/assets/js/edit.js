@@ -1,4 +1,4 @@
-require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
+require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -9,6 +9,11 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         e.stopImmediatePropagation();
 
         spinner.removeClass('uk-hidden');
+
+        //publish up date handling
+        $('[name="page[publish_up]"]', form).val($('[data-uk-datepicker][for="publish_up"]', form).val()+' '+$('[data-uk-timepicker][for="publish_up"] input', form).val());
+        // publish down date handling
+        $('[name="page[publish_down]"]', form).val($('[data-uk-datepicker][for="publish_down"]', form).val()+' '+$('[data-uk-timepicker][for="publish_down"] input', form).val());
 
         $.post(form.attr('action'), form.serialize(), function(response) {
 

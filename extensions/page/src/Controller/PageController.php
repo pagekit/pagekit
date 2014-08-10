@@ -121,7 +121,13 @@ class PageController extends Controller
             }
 
             $data['data'] = array_merge(['title' => 0, 'markdown' => 0], isset($data['data']) ? $data['data'] : []);
+            $data['publish_up'] = $this['dates']->getDateTime($data['publish_up'] ? $data['publish_up'] : Page::DEFAULT_DATE)->setTimezone(new \DateTimeZone('UTC'));
+            $data['publish_down'] = $this['dates']->getDateTime($data['publish_down'] ? $data['publish_down'] : Page::DEFAULT_DATE)->setTimezone(new \DateTimeZone('UTC'));
 
+            if($data['publish_down'] < $data['publish_up']){
+                throw new Exception(__('Start publishing date must be before finish publishing date.'));
+            }
+            
             $this->pages->save($page, $data);
 
             $response = ['message' => $id ? __('Page saved.') : __('Page created.'), 'id' => $page->getId()];

@@ -12,6 +12,9 @@ class Page
 {
     use AccessTrait, DataTrait;
 
+    /* Page default date. */
+    const DEFAULT_DATE = '0000-00-00 00:00:00';
+
     /* Page unpublished status. */
     const STATUS_UNPUBLISHED = 0;
 
@@ -35,6 +38,12 @@ class Page
 
     /** @Column(type="json_array") */
     protected $data;
+
+    /** @Column(type="datetime")*/
+    protected $publish_up;
+
+    /** @Column(type="datetime")*/
+    protected $publish_down;
 
     public function getId()
     {
@@ -74,6 +83,26 @@ class Page
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    public function getPublishUp()
+    {
+        return $this->publish_up;
+    }
+
+    public function setPublishUp(\DateTime $publishUp)
+    {
+        $this->publish_up = $publishUp;
+    }
+
+    public function getPublishDown()
+    {
+        return ($this->publish_down !== self::DEFAULT_DATE) ? $this->publish_down : '';    
+    }
+
+    public function setPublishDown(\DateTime $publishDown)
+    {
+        $this->publish_down = $publishDown;
     }
 
     public function getStatus()
