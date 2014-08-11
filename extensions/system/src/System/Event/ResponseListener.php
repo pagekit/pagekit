@@ -10,8 +10,8 @@ class ResponseListener extends EventSubscriber
     const REGEX_URL = '/
                         (href|src|poster)=        # match the attribute
                         ([\"\'])                  # start with a single or double quote
-                        (?!\/|\#|[a-zA-Z0-9\s]+:) # make sure it is a relative path
-                        ([^\"\'\s>]+)             # match the actual src value
+                        (?!\/|\#|[a-zA-Z0-9]+:)   # make sure it is a relative path
+                        ([^\"\'>]+)               # match the actual src value
                         \2                        # match the previous quote
                        /xiU';
 
