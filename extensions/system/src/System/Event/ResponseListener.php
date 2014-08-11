@@ -8,11 +8,11 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 class ResponseListener extends EventSubscriber
 {
     const REGEX_URL = '/
-                        (href|src|poster)=        # match the attribute
-                        ([\"\'])                  # start with a single or double quote
-                        (?!\/|\#|[a-zA-Z0-9]+:)   # make sure it is a relative path
-                        ([^\"\'>]+)               # match the actual src value
-                        \2                        # match the previous quote
+                        (?<attr>href|src|poster)=              # match the attribute
+                        ([\"\'])                               # start with a single or double quote
+                        (?!\/|\#|(mailto|news|(ht|f)tp(s?))\:) # make sure it is a relative path
+                        (?<url>[^\"\'>]+)                      # match the actual src value
+                        \2                                     # match the previous quote
                        /xiU';
 
     /**
@@ -38,9 +38,7 @@ class ResponseListener extends EventSubscriber
      */
     public function replaceUrlCallback($matches)
     {
-        $route = '@' == $matches[3][0] ? $this['url']->route($matches[3]) : $this['url']->to($matches[3]);
-
-        return "$matches[1]=\"$route\"";
+        return sprintf('%s="%s"', $matches['attr'], $this['url']->to($matches['url']));
     }
 
     /**
