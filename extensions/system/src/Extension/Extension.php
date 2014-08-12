@@ -54,6 +54,21 @@ class Extension implements \ArrayAccess
         $this->registerControllers($app['controllers']);
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
+
+        $app->on('system.init', function() use ($app) {
+            $this->mergeConfig($app['option']);
+        });
+    }
+
+    /**
+     * Merges the extension options with the extension config
+     * and updates the extension config accordingly.
+     *
+     * @param  [type] $options Application options
+     */
+    protected function mergeConfig($options)
+    {
+        $this->config += $options->get("{$this->name}:config", []);
     }
 
     /**

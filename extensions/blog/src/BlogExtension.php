@@ -29,7 +29,7 @@ class BlogExtension extends Extension
 
         $app->on('system.init', function() use ($app) {
 
-            $this->config += $app['option']->get("{$this->name}:config", []) + $this->getConfig('defaults');
+            $this->config += $this->getConfig('defaults');
 
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/site');
 
