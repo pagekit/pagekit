@@ -29,6 +29,16 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
         });
     });
 
+    $(document).on('focus.datepicker.uikit', '[data-uk-datepicker][for="publish_down"]', function(e) {
+        console.log(e);
+        var ele = $(this);
+        if (!ele.data("datepicker")) {
+            e.preventDefault();
+            var obj = UI.datepicker(ele, UI.Utils.options(ele.attr("data-uk-datepicker")));
+            ele.trigger("focus");
+        }
+    });
+
     // check form before leaving page
     window.onbeforeunload = (function() {
 
