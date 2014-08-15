@@ -7,6 +7,9 @@
 
 .pk-system .uk-width { width: 125px !important; }
 
+/* Adds usability to the logo */
+.uk-display-inline-block { cursor: pointer; }
+
 
 /* Extensions view
  ========================================================================== */
@@ -14,7 +17,6 @@
 .pk-extensions-margin-3 { margin-top: 3px !important; }
 
 .pk-extensions-margin-5 { margin-top: 5px !important; }
-
 
 /* Themes view
  ========================================================================== */
