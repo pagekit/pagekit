@@ -97,8 +97,10 @@ class Page
 
     public function getPublishDown()
     {
-        return ($this->publish_down !== self::DEFAULT_DATE) ? $this->publish_down : '';    
+        $defaultDate = new \DateTime(self::DEFAULT_DATE, new \DateTimeZone('UTC'));
+        return ($this->publish_down != $defaultDate) ? $this->publish_down : false;    
     }
+
 
     public function setPublishDown(\DateTime $publishDown)
     {

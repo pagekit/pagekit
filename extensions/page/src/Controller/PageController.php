@@ -119,12 +119,19 @@ class PageController extends Controller
             if ($this->pages->where(['url = ?', 'id <> ?'], [$data['url'], $page->getId()])->first()) {
                 throw new Exception(__('Page Url not available.'));
             }
-
+            
             $data['data'] = array_merge(['title' => 0, 'markdown' => 0], isset($data['data']) ? $data['data'] : []);
-            $data['publish_up'] = $this['dates']->getDateTime($data['publish_up'] ? $data['publish_up'] : Page::DEFAULT_DATE)->setTimezone(new \DateTimeZone('UTC'));
-            $data['publish_down'] = $this['dates']->getDateTime($data['publish_down'] ? $data['publish_down'] : Page::DEFAULT_DATE)->setTimezone(new \DateTimeZone('UTC'));
 
-            if($data['publish_down'] < $data['publish_up']){
+            $publish_up = $data['publish_up'] ? $data['publish_up'] : Page::DEFAULT_DATE;
+            $data['publish_up'] = $this['dates']->getDateTime($publish_up)->setTimezone(new \DateTimeZone('UTC'));
+            
+            $publish_down =     ($data['publish_down'] && isset($data['publish_down_activated'])) 
+                                ? $data['publish_down'] 
+                                : Page::DEFAULT_DATE;
+
+            $data['publish_down'] = $this['dates']->getDateTime($publish_down)->setTimezone(new \DateTimeZone('UTC'));
+            // var_dump($data); die();
+            if($publish_down !== Page::DEFAULT_DATE && $data['publish_down'] < $data['publish_up']){
                 throw new Exception(__('Start publishing date must be before finish publishing date.'));
             }
             

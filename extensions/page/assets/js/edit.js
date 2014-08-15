@@ -29,15 +29,7 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
         });
     });
 
-    $(document).on('focus.datepicker.uikit', '[data-uk-datepicker][for="publish_down"]', function(e) {
-        console.log(e);
-        var ele = $(this);
-        if (!ele.data("datepicker")) {
-            e.preventDefault();
-            var obj = UI.datepicker(ele, UI.Utils.options(ele.attr("data-uk-datepicker")));
-            ele.trigger("focus");
-        }
-    });
+    
 
     // check form before leaving page
     window.onbeforeunload = (function() {
@@ -66,6 +58,12 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
     // markdown handling
     $('input[name="page[data][markdown]"]', form).on('change', function() {
         $('#page-content', form).trigger($(this).prop('checked') ? 'enableMarkdown' : 'disableMarkdown');
+    });
+
+    // active publish down
+    $('[name="page[publish_down_activated]"]').on('change', function(){
+        if(!$(this).is(':checked')) $('.js-publish-down').attr('disabled', 'disabled');
+        else $('.js-publish-down').removeAttr('disabled');
     });
 
 });
