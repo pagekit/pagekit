@@ -132,7 +132,7 @@ class PageController extends Controller
             $data['publish_down'] = $this['dates']->getDateTime($publish_down)->setTimezone(new \DateTimeZone('UTC'));
             // var_dump($data); die();
             if($publish_down !== Page::DEFAULT_DATE && $data['publish_down'] < $data['publish_up']){
-                throw new Exception(__('Start publishing date must be before finish publishing date.'));
+                throw new Exception(__('Publish up date must be inferior to publish down date.'));
             }
             
             $this->pages->save($page, $data);
