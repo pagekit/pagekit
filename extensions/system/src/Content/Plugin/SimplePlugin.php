@@ -9,13 +9,13 @@ class SimplePlugin extends EventSubscriber
 {
     const PLUGIN_CODE = '/
                         \(([a-zA-Z_][a-zA-Z0-9_]*)\) # the plugin name
-                        (\{                          # the optional options
+                        (\{                          # the plugin options
                             (?:
-                                ( [^\{\}] )+         # the options
+                                ( [^\{\}] )+
                                 |
                                 (?-2)                # the bracket recursion
                             )*
-                        \})?
+                        \})
                         /x';
 
     /**
