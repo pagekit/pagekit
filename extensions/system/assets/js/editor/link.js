@@ -87,11 +87,10 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!lin
 
                         if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
 
-                        var defaultAdvanced = "target: '', rel: ''"; 
+                        var defaultAdvanced = '"target": "", "rel": ""'; 
                         var advanced = (typeof data.matches[3] !== 'undefined') ? data.matches[3] : defaultAdvanced;
-                        console.log(advanced);
                         advanced = $.parseJSON('{' + advanced + '}');
-                        console.log(advanced);
+
                         var other   = (advanced.target && $.inArray(advanced.target, ['', '_blank', '_top', '_parent']) != -1 
                                     || typeof advanced.target === 'undefined' );
 
@@ -149,7 +148,11 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!lin
                     data = {
                         txt: editor.editor.getSelection(),
                         link: 'http://',
+                        target: '',
+                        targetOther: '',
+                        follow: '',
                         'class': '',
+
                         handler: function() {
 
                             var repl;
@@ -157,12 +160,24 @@ define(['jquery', 'tmpl!link.modal,link.replace', 'uikit', 'editor', 'system!lin
                             picker.hide();
                             if (editor.getCursorMode() == 'html') {
                                 var targetSelected = (target.val() != '') ? 'target="'+ target.val() +'"' : '';
-                                console.log(target.val());
-                                console.log('test2');
                                 repl = '<a href="' + link.get() + '" ' + targetSelected + ' >' + title.val() + '</a>';
                             } else {
+                                var advancedValues = {};
+                                var targetSelected = target.val();
+                                if(targetSelected !== '' ) {
+                                    if(targetSelected !== 'other')
+                                        advancedValues.target = targetSelected;
+                                    else if(targetOther.val() !== '') 
+                                        advancedValues.target = targetOther.val();
+                                }
+
+                                if(follow.is(':checked'))
+                                    advancedValues.rel = 'nofollow';    
+
+                                advancedValues = (!$.isEmptyObject(advancedValues)) ? JSON.stringify(advancedValues) : '';
+
                                 // {:target="_blank"} // syntaxe to use for extra data
-                                repl = '[' + title.val() + '](' + link.get() + ')';
+                                repl = '[' + title.val() + '](' + link.get() + ')' + advancedValues;
                             }
 
                             editor.editor.replaceSelection(repl, 'end');
