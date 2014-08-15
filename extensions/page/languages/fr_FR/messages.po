@@ -107,3 +107,15 @@ msgstr "Publiée"
 msgid "You've made some changes! Leaving the page without saving will discard all changes."
 msgstr "Vous avez effectué des modifications ! Si vous quittez cette page sans sauvegarder, vos modifications seront perdues."
 
+#: extensions/page/src/Controller/PageController.php:128
+msgid "Start publishing date must be before finish publishing date."
+msgstr "La date de debut de publication doit etre inférieur a la date de fub de publication"
+
+#: extensions/page/views/admin/pages/edit.razr:41
+msgid "Publish up"
+msgstr "Début de publication"
+
+#: extensions/page/views/admin/pages/edit.razr:61
+msgid "Publish down"
+msgstr "Fin de publication"
+
