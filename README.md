@@ -2,11 +2,13 @@
 
 A modular and lightweight CMS built with Symfony components
 
-* Homepage: [http://www.pagekit.com/](http://www.pagekit.com/) - Learn more about Pagekit
-* Twitter: [@pagekit](https://twitter.com/pagekit) - Get the latest news
-* IssueTracker: - [Issues](http://github.com/pagekit/pagekit/issues) - Report bugs here
-* Developer Chat: #pagekit on irc.freenode.net
-
+* [Homepage](http://www.pagekit.com) - Learn more about Pagekit
+* [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
+* [Issues](http://github.com/pagekit/pagekit/issues) - Report bugs
+* [Google+](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
+* [Google Group](https://plus.google.com/communities/104125443335488004107) - Help each other
+* [Developer Chat](https://www.hipchat.com/giPcIKmrx) - Wvery work day between 8:00 and 18:00 UTC
+* IRC: #pagekit on irc.freenode.net
 
 ## Getting started
 
