@@ -1,4 +1,4 @@
-/*! UIkit 2.8.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.9.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 /*
   * Based on nativesortable - Copyright (c) Brian Grinstead - https://github.com/bgrins/nativesortable
@@ -92,7 +92,7 @@
                     var handle = target.hasClass($this.options.handleClass) ? target : target.closest('.'+$this.options.handleClass, element);
 
                     if (!handle.length) {
-                        e.preventDefault();
+                        //e.preventDefault();
                         return;
                     }
                 }
@@ -361,7 +361,7 @@
 
             if($this.options.warp || !$this.options.animation) {
                 elementToMoveNextTo.parentNode.insertBefore(element, next);
-                $(document).trigger("uk-check-display");
+                UI.Utils.checkDisplay($this.element);
                 return;
             }
 
@@ -401,7 +401,7 @@
                             count--
                             if (!count) {
                                 list.css('min-height', '');
-                                $(document).trigger("uk-check-display");
+                                UI.Utils.checkDisplay(ele);
                             }
                         });
                     }, 0);

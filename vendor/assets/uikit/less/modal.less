@@ -13,6 +13,17 @@
 //
 // Uses:            Close: `uk-close`
 //
+// Markup:
+//
+// <!-- uk-modal -->
+// <a href="#modal" data-uk-modal=""></a>
+// <div id="modal" class="uk-modal">
+//     <div class="uk-modal-dialog">
+//         <a href="" class="uk-modal-close uk-close"></a>
+//         <p></p>
+//     </div>
+// </div>
+//
 // ========================================================================
 
 
@@ -42,7 +53,6 @@
  * 3. Allow scrolling for the modal dialog
  * 4. Mask the background page
  * 5. Fade-in transition
- * 6. Fix transition in Webkit
  */
 
 .uk-modal {
@@ -64,8 +74,7 @@
     opacity: 0;
     -webkit-transition: opacity 0.15s linear;
     transition: opacity 0.15s linear;
-    /* 6 */
-    -webkit-transform: translateZ(0);
+
     .hook-modal;
 }
 
@@ -195,7 +204,7 @@
 
 /* Tablet and bigger */
 @media (min-width: @breakpoint-medium) {
-    
+
     .uk-modal-dialog-large { width: @modal-dialog-large-width; }
 
 }

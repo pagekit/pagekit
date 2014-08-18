@@ -1,4 +1,4 @@
-/*! UIkit 2.8.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.9.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 /*
  * Based on Nestable jQuery Plugin - Copyright (c) 2012 David Bushell - http://dbushell.com/
@@ -22,7 +22,7 @@
     var hasTouch     = 'ontouchstart' in window,
         html         = $("html"),
         touchedlists = [],
-        $win         = $(window);
+        $win         = UI.$win;
 
     /**
      * Detect CSS pointer-events property

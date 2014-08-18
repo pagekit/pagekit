@@ -1,4 +1,4 @@
-/*! UIkit 2.8.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.9.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
 (function(core) {
 
@@ -12,7 +12,7 @@
                 var resources = res.split(','), load = [], i, base = (config.config && config.config.uikit && config.config.uikit.base ? config.config.uikit.base : "").replace(/\/+$/g, "");
 
                 if (!base) {
-                    throw new Error( "Please define base path to uikit in the requirejs config." );
+                    throw new Error( "Please define base path to UIkit in the requirejs config." );
                 }
 
                 for (i = 0; i < resources.length; i += 1) {
@@ -48,7 +48,7 @@
         return UI;
     }
 
-    UI.version = '2.8.0';
+    UI.version = '2.9.0';
     UI.$doc    = $doc;
     UI.$win    = $win;
 
@@ -180,6 +180,10 @@
         } else {
           return false;
         }
+    };
+
+    UI.Utils.checkDisplay = function(context) {
+        $('[data-uk-margin], [data-uk-grid-match], [data-uk-grid-margin], [data-uk-check-display]', context || document).trigger('uk-check-display');
     };
 
     UI.Utils.options = function(string) {
@@ -389,149 +393,6 @@
     return UI;
 });
 
-/**
- * Promises/A+ spec. polyfill
- * promiscuous - https://github.com/RubenVerborgh/promiscuous
- * @license MIT
- * Ruben Verborgh
- */
-
-(function(global){
-
-    global.Promise = global.Promise || (function (func, obj) {
-
-        // Type checking utility function
-        function is(type, item) { return (typeof item)[0] == type; }
-
-        // Creates a promise, calling callback(resolve, reject), ignoring other parameters.
-        function Promise(callback, handler) {
-            // The `handler` variable points to the function that will
-            // 1) handle a .then(resolved, rejected) call
-            // 2) handle a resolve or reject call (if the first argument === `is`)
-            // Before 2), `handler` holds a queue of callbacks.
-            // After 2), `handler` is a finalized .then handler.
-            handler = function pendingHandler(resolved, rejected, value, queue, then, i) {
-                queue = pendingHandler.q;
-
-                // Case 1) handle a .then(resolved, rejected) call
-                if (resolved != is) {
-                    return Promise(function (resolve, reject) {
-                        queue.push({ p: this, r: resolve, j: reject, 1: resolved, 0: rejected });
-                    });
-                }
-
-                // Case 2) handle a resolve or reject call
-                // (`resolved` === `is` acts as a sentinel)
-                // The actual function signature is
-                // .re[ject|solve](<is>, success, value)
-
-                // Check if the value is a promise and try to obtain its `then` method
-                if (value && (is(func, value) | is(obj, value))) {
-                    try { then = value.then; }
-                    catch (reason) { rejected = 0; value = reason; }
-                }
-                // If the value is a promise, take over its state
-                if (is(func, then)) {
-                    var valueHandler = function (resolved) {
-                        return function (value) { return then && (then = 0, pendingHandler(is, resolved, value)); };
-                    };
-                    try { then.call(value, valueHandler(1), rejected = valueHandler(0)); }
-                    catch (reason) { rejected(reason); }
-                }
-                // The value is not a promise; handle resolve/reject
-                else {
-                    // Replace this handler with a finalized resolved/rejected handler
-                    handler = function (Resolved, Rejected) {
-                        // If the Resolved or Rejected parameter is not a function,
-                        // return the original promise (now stored in the `callback` variable)
-                        if (!is(func, (Resolved = rejected ? Resolved : Rejected))) return callback;
-                        // Otherwise, return a finalized promise, transforming the value with the function
-                        return Promise(function (resolve, reject) { finalize(this, resolve, reject, value, Resolved); });
-                    };
-                    // Resolve/reject pending callbacks
-                    i = 0;
-                    while (i < queue.length) {
-                        then = queue[i++];
-                        // If no callback, just resolve/reject the promise
-                        if (!is(func, resolved = then[rejected])) {
-                            (rejected ? then.r : then.j)(value);
-                        // Otherwise, resolve/reject the promise with the result of the callback
-                        } else {
-                            finalize(then.p, then.r, then.j, value, resolved);
-                        }
-                    }
-                }
-            };
-
-            // The queue of pending callbacks; garbage-collected when handler is resolved/rejected
-            handler.q = [];
-
-            // Create and return the promise (reusing the callback variable)
-            callback.call(callback = {
-                    then:  function (resolved, rejected) { return handler(resolved, rejected); },
-                    catch: function (rejected)           { return handler(0,        rejected); }
-                },
-                function (value)  { handler(is, 1,  value); },
-                function (reason) { handler(is, 0, reason); }
-            );
-
-            return callback;
-        }
-
-        // Finalizes the promise by resolving/rejecting it with the transformed value
-        function finalize(promise, resolve, reject, value, transform) {
-            setTimeout(function () {
-                try {
-                    // Transform the value through and check whether it's a promise
-                    value = transform(value);
-                    transform = value && (is(obj, value) | is(func, value)) && value.then;
-                    // Return the result if it's not a promise
-                    if (!is(func, transform))
-                        resolve(value);
-                    // If it's a promise, make sure it's not circular
-                    else if (value == promise)
-                        reject(TypeError());
-                    // Take over the promise's state
-                    else
-                        transform.call(value, resolve, reject);
-                }
-                catch (error) { reject(error); }
-            }, 0);
-        }
-
-        // Creates a resolved promise
-        Promise.resolve = ResolvedPromise;
-        function ResolvedPromise(value) { return Promise(function (resolve) { resolve(value); }); }
-
-        // Creates a rejected promise
-        Promise.reject = function (reason) { return Promise(function (resolve, reject) { reject(reason); }); };
-
-        // Transforms an array of promises into a promise for an array
-        Promise.all = function (promises) {
-            return Promise(function (resolve, reject, count, values) {
-                // Array of collected values
-                values = [];
-                // Resolve immediately if there are no promises
-                count = promises.length || resolve(values);
-                // Transform all elements (`map` is shorter than `forEach`)
-                promises.map(function (promise, index) {
-                    ResolvedPromise(promise).then(
-                    // Store the value and resolve if it was the last
-                    function (value) {
-                        values[index] = value;
-                        count = count -1;
-                        if(!count) resolve(values);
-                    },
-                    // Reject if one element fails
-                    reject);
-                });
-            });
-        };
-
-        return Promise;
-    })('f', 'o');
-})(this);
-
 (function($, UI) {
 
     "use strict";
@@ -694,6 +555,10 @@
                 $this.process();
             });
 
+            this.on("uk-check-display", function(e) {
+                if(this.element.is(":visible")) this.process();
+            }.bind(this));
+
             stacks.push(this);
         },
 
@@ -744,13 +609,6 @@
             if (!ele.data("stackMargin")) {
                 obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
             }
-        });
-    });
-
-
-    UI.$doc.on("uk-check-display", function(e) {
-        stacks.forEach(function(item) {
-            if(item.element.is(":visible")) item.process();
         });
     });
 
@@ -963,7 +821,7 @@
     });
 
     // init code
-    $(document).on("click.alert.uikit", "[data-uk-alert]", function(e) {
+    UI.$doc.on("click.alert.uikit", "[data-uk-alert]", function(e) {
 
         var ele = $(this);
 
@@ -1059,7 +917,7 @@
 
 
     // init code
-    $(document).on("click.buttonradio.uikit", "[data-uk-button-radio]", function(e) {
+    UI.$doc.on("click.buttonradio.uikit", "[data-uk-button-radio]", function(e) {
         var ele = $(this);
 
         if (!ele.data("buttonRadio")) {
@@ -1071,7 +929,7 @@
         }
     });
 
-    $(document).on("click.buttoncheckbox.uikit", "[data-uk-button-checkbox]", function(e) {
+    UI.$doc.on("click.buttoncheckbox.uikit", "[data-uk-button-checkbox]", function(e) {
         var ele = $(this);
 
         if (!ele.data("buttonCheckbox")) {
@@ -1084,7 +942,7 @@
         }
     });
 
-    $(document).on("click.button.uikit", "[data-uk-button]", function(e) {
+    UI.$doc.on("click.button.uikit", "[data-uk-button]", function(e) {
         var ele = $(this);
 
         if (!ele.data("button")) {
@@ -1108,7 +966,7 @@
            'mode'       : 'hover',
            'remaintime' : 800,
            'justify'    : false,
-           'boundary'   : $(window),
+           'boundary'   : UI.$win,
            'delay'      : 0
         },
 
@@ -1127,7 +985,7 @@
             this.flipped   = this.dropdown.hasClass('uk-dropdown-flip');
 
             if(!this.boundary.length) {
-                this.boundary = $(window);
+                this.boundary = UI.$win;
             }
 
             if (this.options.mode == "click" || UI.support.touch) {
@@ -1217,6 +1075,8 @@
             this.checkDimensions();
             this.element.addClass("uk-open");
             this.trigger('uk.dropdown.show', [this]);
+
+            UI.Utils.checkDisplay(this.dropdown);
             active = this.element;
 
             this.registerOuterClick();
@@ -1226,10 +1086,10 @@
 
             var $this = this;
 
-            $(document).off("click.outer.dropdown");
+            UI.$doc.off("click.outer.dropdown");
 
             setTimeout(function() {
-                $(document).on("click.outer.dropdown", function(e) {
+                UI.$doc.on("click.outer.dropdown", function(e) {
 
                     if (hoverIdle) {
                         clearTimeout(hoverIdle);
@@ -1239,7 +1099,7 @@
 
                     if (active && active[0] == $this.element[0] && ($target.is("a:not(.js-uk-prevent)") || $target.is(".uk-dropdown-close") || !$this.dropdown.find(e.target).length)) {
                         active.removeClass("uk-open");
-                        $(document).off("click.outer.dropdown");
+                        UI.$doc.off("click.outer.dropdown");
                     }
                 });
             }, 10);
@@ -1330,7 +1190,7 @@
     var triggerevent = UI.support.touch ? "click" : "mouseenter";
 
     // init code
-    $(document).on(triggerevent+".dropdown.uikit", "[data-uk-dropdown]", function(e) {
+    UI.$doc.on(triggerevent+".dropdown.uikit", "[data-uk-dropdown]", function(e) {
         var ele = $(this);
 
         if (!ele.data("dropdown")) {
@@ -1390,6 +1250,10 @@
                 $this.elements = $this.options.target ? $this.find($this.options.target) : $this.columns;
                 $this.match();
             });
+
+            this.on("uk-check-display", function(e) {
+                if(this.element.is(":visible")) this.match();
+            }.bind(this));
 
             grids.push(this);
         },
@@ -1498,12 +1362,6 @@
         });
     });
 
-    UI.$doc.on("uk-check-display", function(e) {
-        grids.forEach(function(item) {
-            if(item.element.is(":visible")) item.match();
-        });
-    });
-
 })(jQuery, jQuery.UIkit);
 
 (function($, UI) {
@@ -1565,7 +1423,7 @@
 
             this.element.addClass("uk-open").trigger("uk.modal.show");
 
-            UI.$doc.trigger("uk-check-display");
+            UI.Utils.checkDisplay(this.dialog);
 
             return this;
         },
@@ -1776,8 +1634,8 @@
     "use strict";
 
     var scrollpos = {x: window.scrollX, y: window.scrollY},
-        $win      = $(window),
-        $doc      = $(document),
+        $win      = UI.$win,
+        $doc      = UI.$doc,
         $html     = $('html'),
         Offcanvas = {
 
@@ -1826,6 +1684,8 @@
                     Offcanvas.hide();
                 }
             });
+
+            $doc.trigger('uk.offcanvas.show', [element, bar]);
         },
 
         hide: function(force) {
@@ -1833,17 +1693,22 @@
             var $body = $('body'),
                 panel = $(".uk-offcanvas.uk-active"),
                 rtl   = ($.UIkit.langdirection == "right"),
-                bar   = panel.find(".uk-offcanvas-bar:first");
+                bar   = panel.find(".uk-offcanvas-bar:first"),
+                finalize = function() {
+                    $body.removeClass("uk-offcanvas-page").css({"width": "", "height": "", "margin-left": "", "margin-right": ""});
+                    panel.removeClass("uk-active");
+                    bar.removeClass("uk-offcanvas-bar-show");
+                    $html.css('margin-top', '');
+                    window.scrollTo(scrollpos.x, scrollpos.y);
+                    $doc.trigger('uk.offcanvas.hide', [panel, bar]);
+                };
 
             if (!panel.length) return;
 
             if ($.UIkit.support.transition && !force) {
 
                 $body.one($.UIkit.support.transition.end, function() {
-                    $body.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
-                    panel.removeClass("uk-active");
-                    $html.css('margin-top', '');
-                    window.scrollTo(scrollpos.x, scrollpos.y);
+                    finalize();
                 }).css((rtl ? "margin-right" : "margin-left"), "");
 
                 setTimeout(function(){
@@ -1851,11 +1716,7 @@
                 }, 0);
 
             } else {
-                $body.removeClass("uk-offcanvas-page").css({"width": "", "height": ""});
-                panel.removeClass("uk-active");
-                bar.removeClass("uk-offcanvas-bar-show");
-                $html.css('margin-top', '');
-                window.scrollTo(scrollpos.x, scrollpos.y);
+                finalize();
             }
 
             panel.off(".ukoffcanvas");
@@ -2049,7 +1910,6 @@
             $tooltip.html('<div class="uk-tooltip-inner">' + this.tip + '</div>');
 
             var $this      = this,
-                bodyoffset = $('body').offset(),
                 pos        = $.extend({}, this.element.offset(), {width: this.element[0].offsetWidth, height: this.element[0].offsetHeight}),
                 width      = $tooltip[0].offsetWidth,
                 height     = $tooltip[0].offsetHeight,
@@ -2057,16 +1917,24 @@
                 position   = typeof(this.options.pos) === "function" ? this.options.pos.call(this.element) : this.options.pos,
                 tmppos     = position.split("-"),
                 tcss       = {
-                    "display": "none",
-                    "visibility": "visible",
-                    "top": (pos.top + pos.height + height),
-                    "left": pos.left
+                    "display"    : "none",
+                    "visibility" : "visible",
+                    "top"        : (pos.top + pos.height + height),
+                    "left"       : pos.left
                 };
+
 
             // prevent strange position
             // when tooltip is in offcanvas etc.
-            pos.left -= bodyoffset.left;
-            pos.top  -= bodyoffset.top;
+            if ($('html').css('position')=='fixed' || $('body').css('position')=='fixed'){
+                var bodyoffset = $('body').offset(),
+                    htmloffset = $('html').offset(),
+                    docoffset  = {'top': (htmloffset.top + bodyoffset.top), 'left': (htmloffset.left + bodyoffset.left)};
+
+                pos.left -= docoffset.left;
+                pos.top  -= docoffset.top;
+            }
+
 
             if ((tmppos[0] == "left" || tmppos[0] == "right") && $.UIkit.langdirection == 'right') {
                 tmppos[0] = tmppos[0] == "left" ? "right" : "left";
@@ -2185,7 +2053,7 @@
 
 
     // init code
-    $(document).on("mouseenter.tooltip.uikit focus.tooltip.uikit", "[data-uk-tooltip]", function(e) {
+    UI.$doc.on("mouseenter.tooltip.uikit focus.tooltip.uikit", "[data-uk-tooltip]", function(e) {
         var ele = $(this);
 
         if (!ele.data("tooltip")) {
@@ -2221,6 +2089,28 @@
 
                 this.connect = $(this.options.connect).find(".uk-active").removeClass(".uk-active").end();
 
+                // delegate switch commands within container content
+                if (this.connect.length) {
+
+                    this.connect.on("click", '[data-uk-switcher-item]', function(e) {
+
+                        e.preventDefault();
+
+                        var item = $(this).data('ukSwitcherItem');
+
+                        if ($this.index == item) return;
+
+                        switch(item) {
+                            case 'next':
+                            case 'previous':
+                                $this.show($this.index + (item=='next' ? 1:-1));
+                                break;
+                            default:
+                                $this.show(item);
+                        }
+                    });
+                }
+
                 var toggles = this.find(this.options.toggle),
                     active   = toggles.filter(".uk-active");
 
@@ -2238,7 +2128,7 @@
 
             tab = isNaN(tab) ? $(tab) : this.find(this.options.toggle).eq(tab);
 
-            var active = tab;
+            var $this = this, active = tab;
 
             if (active.hasClass("uk-disabled")) return;
 
@@ -2247,13 +2137,19 @@
 
             if (this.options.connect && this.connect.length) {
 
-                var index = this.find(this.options.toggle).index(active);
+                this.index = this.find(this.options.toggle).index(active);
 
-                this.connect.children().removeClass("uk-active").eq(index).addClass("uk-active");
+                if (this.index == -1 ) {
+                    this.index = 0;
+                }
+
+                this.connect.each(function() {
+                    $(this).children().removeClass("uk-active").eq($this.index).addClass("uk-active");
+                    UI.Utils.checkDisplay(this);
+                });
             }
 
             this.trigger("uk.switcher.show", [active]);
-            $(document).trigger("uk-check-display");
         }
     });
 
@@ -2292,87 +2188,91 @@
             this.on("click", this.options.target, function(e) {
                 e.preventDefault();
                 $this.find($this.options.target).not(this).removeClass("uk-active").blur();
-                $this.trigger("change", [$(this).addClass("uk-active")]);
+                $this.trigger("uk.tab.change", [$(this).addClass("uk-active")]);
             });
-
 
             if (this.options.connect) {
                 this.connect = $(this.options.connect);
             }
 
-            if (location.hash && location.hash.match(/^#[a-z0-9_-]+$/)) {
-                var active = this.element.children().filter(window.location.hash);
-
-                if (active.length) {
-                    this.element.children().removeClass('uk-active').filter(active).addClass("uk-active");
-                }
-            }
-
-
             // init responsive tab
-
             this.responsivetab = $('<li class="uk-tab-responsive uk-active"><a></a></li>').append('<div class="uk-dropdown uk-dropdown-small"><ul class="uk-nav uk-nav-dropdown"></ul><div>');
 
             this.responsivetab.dropdown = this.responsivetab.find('.uk-dropdown');
             this.responsivetab.lst      = this.responsivetab.dropdown.find('ul');
-
+            this.responsivetab.caption  = this.responsivetab.find('a:first');
 
             if (this.element.hasClass("uk-tab-bottom")) this.responsivetab.dropdown.addClass("uk-dropdown-up");
-            if (this.element.hasClass("uk-tab-flip"))   this.responsivetab.dropdown.addClass("uk-dropdown-flip");
 
             // handle click
             this.responsivetab.lst.on('click', 'a', function(e) {
 
-                if ($this.options.connect) {
-                    e.preventDefault();
-                    $this.element.data("switcher").show($(this).data('index'));
-                }
+                e.preventDefault();
+                e.stopPropagation();
+
+                var link = $(this);
+
+                $this.element.children(':not(.uk-tab-responsive)').eq(link.data('index')).trigger('click');
             });
 
-            // init UIkit components
-            UI.switcher(this.element, {"toggle": ">li:not(.uk-tab-responsive)", "connect": this.options.connect, "active": this.options.active});
-            UI.dropdown(this.responsivetab, {"mode": "click"});
+            this.on('uk.switcher.show uk.tab.change', function(e, tab) {
+                $this.responsivetab.caption.html(tab.text());
+            });
 
             this.element.append(this.responsivetab);
 
+            // init UIkit components
+            if (this.options.connect) {
+                UI.switcher(this.element, {"toggle": ">li:not(.uk-tab-responsive)", "connect": this.options.connect, "active": this.options.active});
+            }
+
+            UI.dropdown(this.responsivetab, {"mode": "click"});
+
+            // init
+            $this.trigger("uk.tab.change", [this.element.find(this.options.target).filter('.uk-active')]);
 
             this.check();
 
             UI.$win.on('resize orientationchange', UI.Utils.debounce(function(){
-
                 $this.check();
-
             }, 100));
-
         },
 
         check: function() {
 
-            var children = this.element.children(':not(.uk-tab-responsive)');
+            var children = this.element.children(':not(.uk-tab-responsive)').removeClass('uk-hidden');
 
             if (children.length < 2) return;
 
-            var top = (children.eq(0).offset().top + Math.ceil(children.eq(0).height()/2)), added = 0;
-
-            children.removeClass('uk-hidden');
+            var top          = (children.eq(0).offset().top + Math.ceil(children.eq(0).height()/2)),
+                added        = 0,
+                doresponsive = false,
+                item, link;
 
             this.responsivetab.lst.empty();
-            this.responsivetab.removeClass('uk-hidden');
 
-            for (var i = children.length - 1; i > 0; i--) {
+            children.each(function(){
 
-                var item = children.eq(i);
+                item = $(this);
 
                 if (item.offset().top > top || (added && this.responsivetab.offset().top > top)) {
+                    doresponsive = true;
+                }
+            });
 
-                    var link = item.find('a');
+            if (doresponsive) {
+
+                for (var i = 0; i < children.length; i++) {
+
+                    item = children.eq(i);
+                    link = item.find('a');
 
                     if (item.css('float') != 'none' && !item.attr('uk-dropdown')) {
 
                         item.addClass('uk-hidden');
-                        if(!item.hasClass('uk-disabled')) {
+
+                        if (!item.hasClass('uk-disabled')) {
                             this.responsivetab.lst.append('<li><a href="'+link.attr('href')+'" data-index="'+i+'">'+link.html()+'</a></li>');
-                            added++;
                         }
                     }
                 }
@@ -2386,6 +2286,7 @@
     UI.ready(function(context) {
 
         $("[data-uk-tab]", context).each(function() {
+
             var tab = $(this);
 
             if (!tab.data("tab")) {
@@ -2592,8 +2493,8 @@
                 // get / set parameters
                 var ele       = ($(this.hash).length ? $(this.hash) : $("body")),
                     target    = ele.offset().top - $this.options.offset,
-                    docheight = $(document).height(),
-                    winheight = $(window).height(),
+                    docheight = UI.$doc.height(),
+                    winheight = UI.$win.height(),
                     eleheight = ele.outerHeight();
 
                 if ((target + winheight) > docheight) {
@@ -2615,7 +2516,7 @@
     }
 
     // init code
-    $(document).on("click.smooth-scroll.uikit", "[data-uk-smooth-scroll]", function(e) {
+    UI.$doc.on("click.smooth-scroll.uikit", "[data-uk-smooth-scroll]", function(e) {
         var ele = $(this);
 
         if (!ele.data("smoothScroll")) {
@@ -2660,8 +2561,8 @@
 
             this.totoggle.toggleClass(this.options.cls);
 
-            if(this.options.cls == 'uk-hidden') {
-                $(document).trigger("uk-check-display");
+            if (this.options.cls == 'uk-hidden') {
+                UI.Utils.checkDisplay(this.totoggle);
             }
         },
 
