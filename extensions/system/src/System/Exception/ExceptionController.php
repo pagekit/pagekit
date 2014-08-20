@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 class ExceptionController implements \ArrayAccess
 {
     use ApplicationTrait;
+
     /**
      * Converts an Exception to a Response.
      *

@@ -56,19 +56,17 @@ class Extension implements \ArrayAccess
         $this->registerResources($app['locator']);
 
         $app->on('system.init', function() use ($app) {
-            $this->mergeConfig($app['option']);
+            $this->mergeConfig();
         });
     }
 
     /**
      * Merges the extension options with the extension config
      * and updates the extension config accordingly.
-     *
-     * @param  [type] $options Application options
      */
-    protected function mergeConfig($options)
+    protected function mergeConfig()
     {
-        $this->config += $options->get("{$this->name}:config", []);
+        $this->config += $this['option']->get("{$this->name}:config", []);
     }
 
     /**

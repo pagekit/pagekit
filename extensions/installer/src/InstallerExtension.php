@@ -36,7 +36,7 @@ class InstallerExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    protected function mergeConfig($config) {
+    protected function mergeConfig() {
         // Overwriting inherited method to avoid db access
     }
 }
