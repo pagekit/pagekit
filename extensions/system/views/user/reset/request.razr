@@ -2,12 +2,12 @@
 
     <h1 class="uk-article-title">@trans('Forgot password')</h1>
 
-    <p>@trans('Please enter your username or email address. You will receive a link to create a new password via email.')</p>
+    <p>@trans('Please enter your email address. You will receive a link to create a new password via email.')</p>
 
     <div class="uk-form-row">
-        <label for="form-username" class="uk-form-label">@trans('Username or Email')</label>
+        <label for="form-username" class="uk-form-label">@trans('Email')</label>
         <div class="uk-form-controls">
-            <input id="form-username" type="text" name="login" value="@($last_login)" required autofocus>
+            <input id="form-username" type="text" name="email" value="" required autofocus>
         </div>
     </div>
 

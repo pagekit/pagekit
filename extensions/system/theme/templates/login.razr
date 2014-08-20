@@ -21,7 +21,7 @@
 
                     @section('messages')
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form@( $last_login ? ' uk-hidden' : '' )" action="@url('@system/auth/authenticate')" method="post">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="@url('@system/auth/authenticate')" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="@( $last_username )" placeholder="@trans('Username')" autofocus>
@@ -44,10 +44,10 @@
 
                     </form>
 
-                    <form class="js-toggle uk-panel uk-panel-box uk-form@( !$last_login ? ' uk-hidden' : '' )" action="@url('@system/resetpassword/reset')" method="post">
+                    <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="@url('@system/resetpassword/reset')" method="post">
 
                         <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="text" name="login" value="@( $last_login )" placeholder="@trans('Username or Email')" required>
+                            <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="@trans('Email')" required>
                         </div>
                         <div class="uk-form-row">
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">@trans('Reset Password')</button>

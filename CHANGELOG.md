@@ -2,9 +2,12 @@
 
 ### WIP
 
-- Beautified system emails
+- Added beautified system emails
 - Added admin theme font subset latin, latin-ext
 - Fixed simple plugin regex
+- Fixed gravatar on https
+- Updated UIkit to 2.9
+- Removed username in password reset
 
 ### 0.8.4 (July 25, 2014)
 
@@ -21,5 +24,5 @@
 - Fixed verify mail action
 - Updated mod_rewrite check
 - Updated widgets now rendering themeselves
-- Remove the need for the app root to be writable if the config already exists.
+- Removed that the app root needs to be writable if the config already exists
 - Refactored comments settings in blog

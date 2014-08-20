@@ -12,8 +12,6 @@ use Pagekit\User\Model\UserInterface;
  */
 class ResetPasswordController extends Controller
 {
-    const RESET_LOGIN = 'user.authentication.reset_login';
-
     /**
      * @var UserInterface
      */
@@ -42,14 +40,14 @@ class ResetPasswordController extends Controller
             return $this->redirect('/');
         }
 
-        return ['head.title' => __('Reset'), 'last_login' => $this['session']->get(self::RESET_LOGIN)];
+        return ['head.title' => __('Reset')];
     }
 
     /**
-     * @Request({"login"})
+     * @Request({"email"})
      * @Response("extension://system/views/user/reset/request.razr")
      */
-    public function resetAction($login)
+    public function resetAction($email)
     {
         try {
 
@@ -61,14 +59,12 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
-            if (empty($login)) {
-                throw new Exception(__('Enter a username or email address.'));
+            if (empty($email)) {
+                throw new Exception(__('Enter a email address.'));
             }
 
-            $this['session']->set(self::RESET_LOGIN, $login);
-
-            if (!$user = $this->users->findByLogin($login)) {
-                throw new Exception(__('Invalid username or email.'));
+            if (!$user = $this->users->findByEmail($email)) {
+                throw new Exception(__('Invalid email address.'));
             }
 
             if ($user->isBlocked()) {
@@ -92,8 +88,6 @@ class ResetPasswordController extends Controller
             }
 
             $this->users->save($user);
-
-            $this['session']->remove(self::RESET_LOGIN);
 
             $this['message']->success(__('Check your email for the confirmation link.'));
 
