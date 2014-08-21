@@ -2,6 +2,7 @@
 
 ### WIP
 
+- Added marketplace pagination
 - Added beautified system emails
 - Added admin theme font subset latin, latin-ext
 - Fixed simple plugin regex

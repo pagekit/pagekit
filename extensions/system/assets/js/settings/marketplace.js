@@ -1,4 +1,4 @@
-define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.details', 'uikit'], function($, system, tmpl, uikit) {
+define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.details', 'uikit!pagination'], function($, system, tmpl, uikit) {
 
     var updates = {}, packages = {}, element, form, details, modal, params;
 
@@ -41,12 +41,23 @@ define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.d
     }
 
     // query marketplace
-    function queryMarketplace(e) {
-        e.preventDefault();
+    function queryMarketplace(e, data) {
 
-        var content = '', message = '';
+        var content = '', message = '', container, pagination;
 
-        $.post(params.api + '/package/search', $(this).serialize(), function(data) {
+        if (e) {
+            e.preventDefault();
+        }
+
+        if (!data) {
+            data = {};
+        }
+
+        $('input', form).each(function() {
+            data[$(this).attr('name')] = $(this).val();
+        });
+
+        $.post(params.api + '/package/search', data, function(data) {
 
             if (data.packages.length) {
 
@@ -76,7 +87,7 @@ define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.d
 
             message = 'no-connection';
 
-        }).always(function() {
+        }).always(function(data) {
 
             $('[data-msg]', element).each(function() {
 
@@ -90,7 +101,14 @@ define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.d
 
             });
 
-            $('.js-marketplace-content', element).html(content);
+            container  = $('.js-marketplace-content', element).html(content);
+            pagination = $('.uk-pagination', container);
+
+            if (pagination.length && data.pages > 1) {
+                uikit.pagination(pagination.on('uk-select-page', function(e, page){
+                    queryMarketplace(null, {'page': page});
+                }), {'pages': data.pages, 'currentPage': data.page + 1});
+            }
 
         });
 
