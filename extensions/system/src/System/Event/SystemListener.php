@@ -47,9 +47,9 @@ class SystemListener extends EventSubscriber
         $scripts->register('requirejs', 'extension://system/assets/js/require.min.js', ['requirejs-config']);
         $scripts->register('requirejs-config', 'extension://system/assets/js/require.js');
         $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/addons/sticky.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/addons/sortable.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/addons/notify.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/addons/sticky.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/addons/sortable.min.js', [], ['requirejs' => true]);
 
         $helper = new DateHelper($this['dates']);
         $this['tmpl.php']->addHelpers([$helper]);
