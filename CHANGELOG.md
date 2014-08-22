@@ -1,6 +1,6 @@
 # Changelog
 
-### WIP
+### 0.8.5 (August 22, 2014)
 
 - Added marketplace pagination
 - Added beautified system emails
