@@ -15,18 +15,18 @@ class ThemeEvent extends Event
     /**
      * @var array
      */
-    protected $config;
+    protected $parameters;
 
     /**
      * Constructor.
      *
      * @param Theme $theme
-     * @param array $config
+     * @param array $parameters
      */
-    public function __construct(Theme $theme, array $config = [])
+    public function __construct(Theme $theme, array $parameters = [])
     {
-        $this->theme  = $theme;
-        $this->config = $config;
+        $this->theme = $theme;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -40,16 +40,16 @@ class ThemeEvent extends Event
     /**
      * @return array
      */
-    public function getConfig()
+    public function getParams()
     {
-        return $this->config;
+        return $this->parameters;
     }
 
     /**
-     * @param array $config
+     * @param array $parameters
      */
-    public function setConfig(array $config)
+    public function setParams(array $parameters)
     {
-        $this->config = $config;
+        $this->parameters = $parameters;
     }
 }

@@ -29,34 +29,34 @@
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="config[permalink]" value=""@(!$config['permalink'] ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value=""@(!$params['permalink'] ? ' checked' : '')>
                                     @trans('Numeric') <code>@trans('/blog/123')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="config[permalink]" value="blog/{slug}"@($config['permalink'] == 'blog/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="blog/{slug}"@($params['permalink'] == 'blog/{slug}' ? ' checked' : '')>
                                     @trans('Name') <code>@trans('/blog/sample-post')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="config[permalink]" value="blog/{year}/{month}/{day}/{slug}"@($config['permalink'] == 'blog/{year}/{month}/{day}/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="blog/{year}/{month}/{day}/{slug}"@($params['permalink'] == 'blog/{year}/{month}/{day}/{slug}' ? ' checked' : '')>
                                     @trans('Day and name') <code>@trans('/blog/2014/06/12/sample-post')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="config[permalink]" value="blog/{year}/{month}/{slug}"@($config['permalink'] == 'blog/{year}/{month}/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="blog/{year}/{month}/{slug}"@($params['permalink'] == 'blog/{year}/{month}/{slug}' ? ' checked' : '')>
                                     @trans('Month and name') <code>@trans('/blog/2014/06/sample-post')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="config[permalink]" value="custom"@($config['permalink'] == 'custom' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="custom"@($params['permalink'] == 'custom' ? ' checked' : '')>
                                     @trans('Custom')
                                 </label>
-                                <input class="uk-form-small" type="text" name="config[permalink.custom]" value="@($config['permalink.custom'])">
+                                <input class="uk-form-small" type="text" name="params[permalink.custom]" value="@($params['permalink.custom'])">
                             </p>
                         </div>
                     </div>
@@ -65,16 +65,16 @@
                         <span class="uk-form-label">@trans('Default post settings')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[posts.show_title]" value="0">
-                                <label><input type="checkbox" name="config[posts.show_title]" value="1" @($config['posts.show_title'] ? 'checked' : '')> @trans('Show Title')</label>
+                                <input type="hidden" name="params[posts.show_title]" value="0">
+                                <label><input type="checkbox" name="params[posts.show_title]" value="1" @($params['posts.show_title'] ? 'checked' : '')> @trans('Show Title')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[posts.markdown_enabled]" value="0">
-                                <label><input type="checkbox" name="config[posts.markdown_enabled]" value="1" @($config['posts.markdown_enabled'] ? 'checked' : '')> @trans('Enable Markdown')</label>
+                                <input type="hidden" name="params[posts.markdown_enabled]" value="0">
+                                <label><input type="checkbox" name="params[posts.markdown_enabled]" value="1" @($params['posts.markdown_enabled'] ? 'checked' : '')> @trans('Enable Markdown')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[posts.comments_enabled]" value="0">
-                                <label><input type="checkbox" name="config[posts.comments_enabled]" value="1" @($config['posts.comments_enabled'] ? 'checked' : '')> @trans('Enable Comments')</label>
+                                <input type="hidden" name="params[posts.comments_enabled]" value="0">
+                                <label><input type="checkbox" name="params[posts.comments_enabled]" value="1" @($params['posts.comments_enabled'] ? 'checked' : '')> @trans('Enable Comments')</label>
                             </p>
                         </div>
                     </div>
@@ -87,13 +87,13 @@
                         <span class="uk-form-label">@trans('Comments')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[comments.require_name_and_email]" value="0">
-                                <label><input type="checkbox" name="config[comments.require_name_and_email]" value="1" @($config['comments.require_name_and_email'] ? 'checked' : '')> @trans('Require name and e-mail.')</label>
+                                <input type="hidden" name="params[comments.require_name_and_email]" value="0">
+                                <label><input type="checkbox" name="params[comments.require_name_and_email]" value="1" @($params['comments.require_name_and_email'] ? 'checked' : '')> @trans('Require name and e-mail.')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[comments.autoclose]" value="0">
-                                <input type="checkbox" name="config[comments.autoclose]" value="1" @($config['comments.autoclose'] ? 'checked' : '')> @trans('Close comments on articles older than')
-                                <input class="uk-form-small uk-form-width-mini" type="number" name="config[comments.autoclose.days]" value="@($config['comments.autoclose.days'])" min="1"> @trans('days.')
+                                <input type="hidden" name="params[comments.autoclose]" value="0">
+                                <input type="checkbox" name="params[comments.autoclose]" value="1" @($params['comments.autoclose'] ? 'checked' : '')> @trans('Close comments on articles older than')
+                                <input class="uk-form-small uk-form-width-mini" type="number" name="params[comments.autoclose.days]" value="@($params['comments.autoclose.days'])" min="1"> @trans('days.')
                             </p>
                         </div>
                     </div>
@@ -101,22 +101,22 @@
                         <span class="uk-form-label">@trans('Appearance')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[comments.gravatar]" value="0">
-                                <label><input type="checkbox" name="config[comments.gravatar]" value="1" @($config['comments.gravatar'] ? 'checked' : '')> @trans('Show Avatars from Gravatar.')</label>
+                                <input type="hidden" name="params[comments.gravatar]" value="0">
+                                <label><input type="checkbox" name="params[comments.gravatar]" value="1" @($params['comments.gravatar'] ? 'checked' : '')> @trans('Show Avatars from Gravatar.')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>@trans('Order comments by')
-                                    <select class="uk-form-small" name="config[comments.order]">
-                                        <option value="ASC"@($config['comments.order'] != 'DESC' ? ' selected' : '')>@trans('latest last.')</option>
-                                        <option value="DESC"@($config['comments.order'] == 'DESC' ? ' selected' : '')>@trans('latest first.')</option>
+                                    <select class="uk-form-small" name="params[comments.order]">
+                                        <option value="ASC"@($params['comments.order'] != 'DESC' ? ' selected' : '')>@trans('latest last.')</option>
+                                        <option value="DESC"@($params['comments.order'] == 'DESC' ? ' selected' : '')>@trans('latest first.')</option>
                                     </select>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" name="config[comments.nested]" value="0">
-                                <input type="checkbox" name="config[comments.nested]" value="1"@($config['comments.nested'] ? ' checked' : '')> @trans('Enable nested comments of')
-                                <input type="hidden" name="config[comments.max_depth]" value="0">
-                                <input class="uk-form-small uk-form-width-mini" type="number" name="config[comments.max_depth]" value="@($config['comments.max_depth'])" min="2" max="10"> @trans('levels deep.')
+                                <input type="hidden" name="params[comments.nested]" value="0">
+                                <input type="checkbox" name="params[comments.nested]" value="1"@($params['comments.nested'] ? ' checked' : '')> @trans('Enable nested comments of')
+                                <input type="hidden" name="params[comments.max_depth]" value="0">
+                                <input class="uk-form-small uk-form-width-mini" type="number" name="params[comments.max_depth]" value="@($params['comments.max_depth'])" min="2" max="10"> @trans('levels deep.')
                             </p>
                         </div>
                     </div>

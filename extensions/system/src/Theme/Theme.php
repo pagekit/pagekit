@@ -29,6 +29,11 @@ class Theme implements \ArrayAccess
     protected $config;
 
     /**
+     * @var array
+     */
+    protected $parameters = [];
+
+    /**
      * @var string
      */
     protected $layout = '/templates/template.razr';
@@ -52,10 +57,19 @@ class Theme implements \ArrayAccess
      */
     public function boot(Application $app)
     {
-        $this->config += $app['option']->get("{$this->name}:config", []);
-
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
+
+        if ($this->getConfig('parameters.settings')) {
+
+            if (is_array($defaults = $this->getConfig('parameters.settings.defaults'))) {
+                $this->parameters = array_replace($this->parameters, $defaults);
+            }
+
+            if (is_array($settings = $this['option']->get("{$this->name}:settings"))) {
+                $this->parameters = array_replace($this->parameters, $settings);
+            }
+        }
 
         $app->on('system.site', function() use ($app) {
             $this->registerRenderer($app['view.sections'], $app['view']);
@@ -100,7 +114,7 @@ class Theme implements \ArrayAccess
     }
 
     /**
-     * Returns the theme's config
+     * Returns the theme's config.
      *
      * @param mixed $key
      * @param mixed $default
@@ -113,6 +127,38 @@ class Theme implements \ArrayAccess
         }
 
         $array = $this->config;
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        foreach (explode('.', $key) as $segment) {
+
+            if (!is_array($array) || !array_key_exists($segment, $array)) {
+                return $default;
+            }
+
+            $array = $array[$segment];
+        }
+
+        return $array;
+    }
+
+
+    /**
+     * Returns the theme's parameters.
+     *
+     * @param  mixed $key
+     * @param  mixed $default
+     * @return array
+     */
+    public function getParams($key = null, $default = null)
+    {
+        if (null === $key) {
+            return $this->parameters;
+        }
+
+        $array = $this->parameters;
 
         if (isset($array[$key])) {
             return $array[$key];

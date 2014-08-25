@@ -36,12 +36,12 @@ class RouteListener extends EventSubscriber
     {
         $extension = $this['extensions']->get('blog');
 
-        if (!$this->permalink = $extension->getConfig('permalink')) {
+        if (!$this->permalink = $extension->getParams('permalink')) {
             return;
         }
 
         if ($this->permalink == 'custom') {
-            $this->permalink = $extension->getConfig('permalink.custom');
+            $this->permalink = $extension->getParams('permalink.custom');
         }
 
         $this['router']->addAlias($this->permalink, '@blog/id', [$this, 'inbound'], [$this, 'outbound']);

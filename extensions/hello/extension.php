@@ -12,9 +12,11 @@ return [
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => [
+    'parameters' => [
 
-        'system'  => 'extension://hello/views/admin/settings.razr'
+        'settings' => [
+            'view' => 'extension://hello/views/admin/settings.razr'
+        ]
 
     ],
 

@@ -133,14 +133,13 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = $this->themes->get($name) or !$tmpl = $theme->getConfig('settings.system')) {
+            if (!$theme = $this->themes->get($name) or !$tmpl = $theme->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $config = $theme->getConfig();
-            $event  = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $config));
+            $event = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
 
-            return $this['view']->render($tmpl, ['theme' => $theme, 'config' => $event->getConfig()]);
+            return $this['view']->render($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
 
@@ -151,9 +150,9 @@ class ThemesController extends Controller
     }
 
     /**
-     * @Request({"name", "config": "array"})
+     * @Request({"name", "params": "array"})
      */
-    public function saveSettingsAction($name, $config = [])
+    public function saveSettingsAction($name, $params = [])
     {
         try {
 
@@ -161,14 +160,15 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = $this['events']->dispatch('system.theme.save', new ThemeEvent($theme, $config));
+            $event = $this['events']->dispatch('system.theme.save', new ThemeEvent($theme, $params));
 
-            $this['option']->set("$name:config", $event->getConfig(), true);
+            $this['option']->set("$name:settings", $event->getParams(), true);
             $this['message']->success(__('Settings saved.'));
 
             return $this->redirect('@system/themes/settings', compact('name'));
 
         } catch (Exception $e) {
+
             $this['message']->error($e->getMessage());
         }
 

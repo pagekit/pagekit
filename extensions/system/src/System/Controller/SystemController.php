@@ -24,7 +24,7 @@ class SystemController extends Controller
         $packages = [];
 
         foreach ($this['extensions'] as $extension) {
-            if ($extension->getConfig('settings')) {
+            if ($extension->getConfig('parameters.settings.view')) {
                 $packages[$extension->getName()] = $this['extensions']->getRepository()->findPackage($extension->getName());
             }
         }

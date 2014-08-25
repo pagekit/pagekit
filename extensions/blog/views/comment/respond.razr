@@ -14,7 +14,7 @@
 
                 <p>@trans('Your email address will not be published.')</p>
 
-                @set( $req = $config['comments.require_name_and_email'] )
+                @set($req = $params['comments.require_name_and_email'])
 
                 <div class="uk-form-row">
                     <label for="form-name" class="uk-form-label">@trans('Name')</label>

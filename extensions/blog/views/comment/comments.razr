@@ -6,7 +6,7 @@
     <h2 class="uk-h3">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h2>
     <ul class="uk-comment-list">
 
-        @foreach ($post.commentsTree(['order' => $config['comments.order']]) as $child)
+        @foreach ($post.commentsTree(['order' => $params['comments.order']]) as $child)
         @include('extension://blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
 

@@ -70,7 +70,7 @@ class PostController extends Controller
             });
         }
 
-        $limit = $this->extension->getConfig('posts.posts_per_page');
+        $limit = $this->extension->getParams('posts.posts_per_page');
         $count = $query->count();
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
@@ -105,9 +105,9 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->setUser($this['user']);
-        $post->setCommentStatus((bool) $this->extension->getConfig('posts.comments_enabled'));
-        $post->set('title', $this->extension->getConfig('posts.show_title'));
-        $post->set('markdown', $this->extension->getConfig('posts.markdown_enabled'));
+        $post->setCommentStatus((bool) $this->extension->getParams('posts.comments_enabled'));
+        $post->set('title', $this->extension->getParams('posts.show_title'));
+        $post->set('markdown', $this->extension->getParams('posts.markdown_enabled'));
 
         return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
     }

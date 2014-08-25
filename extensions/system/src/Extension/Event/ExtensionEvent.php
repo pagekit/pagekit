@@ -15,18 +15,18 @@ class ExtensionEvent extends Event
     /**
      * @var array
      */
-    protected $config;
+    protected $parameters;
 
     /**
      * Constructor.
      *
      * @param Extension $extension
-     * @param array     $config
+     * @param array     $parameters
      */
-    public function __construct(Extension $extension, array $config = [])
+    public function __construct(Extension $extension, array $parameters = [])
     {
-        $this->extension = $extension;
-        $this->config    = $config;
+        $this->extension  = $extension;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -40,16 +40,16 @@ class ExtensionEvent extends Event
     /**
      * @return array
      */
-    public function getConfig()
+    public function getParams()
     {
-        return $this->config;
+        return $this->parameters;
     }
 
     /**
-     * @param array $config
+     * @param array $parameters
      */
-    public function setConfig(array $config)
+    public function setParams(array $parameters)
     {
-        $this->config = $config;
+        $this->parameters = $parameters;
     }
 }

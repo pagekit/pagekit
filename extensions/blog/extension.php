@@ -21,9 +21,34 @@ return [
 
     'controllers' => 'src/Controller/*Controller.php',
 
-    'settings' => [
+    'parameters' => [
 
-        'system'  => 'extension://blog/views/admin/settings.razr'
+        'settings' => [
+            'view' => 'extension://blog/views/admin/settings.razr',
+            'defaults' => [
+                'comments.autoclose'              => false,
+                'comments.autoclose.days'         => 14,
+                'comments.blacklist'              => '',
+                'comments.comments_per_page'      => 20,
+                'comments.gravatar'               => true,
+                'comments.max_depth'              => 3,
+                'comments.maxlinks'               => 2,
+                'comments.minidle'                => 120,
+                'comments.nested'                 => true,
+                'comments.notifications'          => 'always',
+                'comments.order'                  => 'ASC',
+                'comments.replymail'              => true,
+                'comments.require_name_and_email' => true,
+                'posts.posts_per_page'            => 20,
+                'posts.comments_enabled'          => true,
+                'posts.markdown_enabled'          => true,
+                'posts.show_title'                => true,
+                'permalink'                       => '',
+                'permalink.custom'                => 'blog/{slug}',
+                'feed.type'                       => 'rss2',
+                'feed.limit'                      => 20
+            ]
+        ]
 
     ],
 
@@ -79,32 +104,6 @@ return [
         'blog: skip comment min idle' => [
             'title' => 'Skip comment minimum idle time'
         ]
-
-    ],
-
-    'defaults' => [
-
-        'comments.autoclose'              => false,
-        'comments.autoclose.days'         => 14,
-        'comments.blacklist'              => '',
-        'comments.comments_per_page'      => 20,
-        'comments.gravatar'               => true,
-        'comments.max_depth'              => 3,
-        'comments.maxlinks'               => 2,
-        'comments.minidle'                => 120,
-        'comments.nested'                 => true,
-        'comments.notifications'          => 'always',
-        'comments.order'                  => 'ASC',
-        'comments.replymail'              => true,
-        'comments.require_name_and_email' => true,
-        'posts.posts_per_page'            => 20,
-        'posts.comments_enabled'          => true,
-        'posts.markdown_enabled'          => true,
-        'posts.show_title'                => true,
-        'permalink'                       => '',
-        'permalink.custom'                => 'blog/{slug}',
-        'feed.type'                       => 'rss2',
-        'feed.limit'                      => 20
 
     ]
 

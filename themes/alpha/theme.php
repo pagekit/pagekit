@@ -38,10 +38,15 @@ return [
 
     ],
 
-    'settings' => [
+    'parameters' => [
 
-        'system'  => 'theme://alpha/views/admin/settings.razr',
-        'widgets' => 'theme://alpha/views/admin/widgets/edit.razr'
+        'settings' => [
+            'view' => 'theme://alpha/views/admin/settings.razr'
+        ],
+
+        'widgets'  => [
+            'view' => 'theme://alpha/views/admin/widgets/edit.razr'
+        ]
 
     ],
 

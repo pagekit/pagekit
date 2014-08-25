@@ -1,4 +1,4 @@
-@set($maxlevel = $config['comments.max_depth'] <= $node->getDepth())
+@set($maxlevel = $params['comments.max_depth'] <= $node->getDepth())
 <li id="comment-@( $comment.id )">
 
     <article class="uk-comment" data-comment="@( $comment.id )">

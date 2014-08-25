@@ -93,7 +93,6 @@ class ExtensionsController extends Controller
         } catch (Exception $e) {
 
             return ['message' => $e->getMessage(), 'error' => true];
-
         }
     }
 
@@ -122,7 +121,6 @@ class ExtensionsController extends Controller
         } catch (Exception $e) {
 
             return ['message' => $e->getMessage(), 'error' => true];
-
         }
     }
 
@@ -159,7 +157,6 @@ class ExtensionsController extends Controller
         } catch (Exception $e) {
 
             return ['message' => $e->getMessage(), 'error' => true];
-
         }
     }
 
@@ -170,16 +167,16 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = $this->extensions->get($name) or !$tmpl = $extension->getConfig('settings.system')) {
+            if (!$extension = $this->extensions->get($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $config = $extension->getConfig();
-            $event  = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $config));
+            $event = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
 
-            return $this['view']->render($tmpl, ['extension' => $extension, 'config' => $event->getConfig()]);
+            return $this['view']->render($tmpl, ['extension' => $extension, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
+
             $this['message']->error($e->getMessage());
         }
 
@@ -187,9 +184,9 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @Request({"name", "config": "array"})
+     * @Request({"name", "params": "array"})
      */
-    public function saveSettingsAction($name, $config = [])
+    public function saveSettingsAction($name, $params = [])
     {
         try {
 
@@ -197,14 +194,15 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = $this['events']->dispatch('system.extension.save', new ExtensionEvent($extension, $config));
+            $event = $this['events']->dispatch('system.extension.save', new ExtensionEvent($extension, $params));
 
-            $this['option']->set("$name:config", $event->getConfig(), true);
+            $this['option']->set("$name:settings", $event->getParams(), true);
             $this['message']->success(__('Settings saved.'));
 
             return $this->redirect('@system/extensions/settings', compact('name'));
 
         } catch (Exception $e) {
+
             $this['message']->error($e->getMessage());
         }
 

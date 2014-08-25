@@ -39,7 +39,7 @@ class AlphaTheme extends Theme
         $sidebars = array_replace_recursive([
             'sidebar-a' => ['width' => 12, 'alignment' => 'left'],
             'sidebar-b' => ['width' => 12, 'alignment' => 'right']
-        ], $this->getConfig('sidebars', []));
+        ], $this->getParams('sidebars', []));
         $columns  = ['main' => ['width' => 60, 'alignment' => 'right']];
 
         $gcf = function($a, $b = 60) use(&$gcf) {

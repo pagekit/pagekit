@@ -47,7 +47,7 @@ class SiteController extends Controller
         $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
         $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
 
-        $autoclose = $this->extension->getConfig('comments.autoclose') ? $this->extension->getConfig('comments.autoclose.days') : 0;
+        $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
         $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
@@ -69,7 +69,7 @@ class SiteController extends Controller
             'head.title' => __('Blog'),
             'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $this->getFeed()->getMIMEType()],
             'posts' => $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get(),
-            'config' => $this->extension->getConfig()
+            'params' => $this->extension->getParams()
         ];
     }
 
@@ -89,7 +89,7 @@ class SiteController extends Controller
 
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
-                and $minidle = $this->extension->getConfig('comments.minidle')
+                and $minidle = $this->extension->getParams('comments.minidle')
                 and $comment = $this->comments->query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
@@ -112,7 +112,7 @@ class SiteController extends Controller
                 $data['author'] = $user->getName();
                 $data['email'] = $user->getEmail();
                 $data['url'] = $user->getUrl();
-            } elseif ($this->extension->getConfig('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
+            } elseif ($this->extension->getParams('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
                 throw new Exception(__('Please provide valid name and email.'));
             }
 
@@ -126,7 +126,7 @@ class SiteController extends Controller
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->extension->getConfig('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->extension->getParams('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
                 $comment->setStatus(Comment::STATUS_PENDING);
             }
 
@@ -184,7 +184,7 @@ class SiteController extends Controller
             $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return ['head.title' => __($post->getTitle()), 'post' => $post, 'config' => $this->extension->getConfig()];
+        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => $this->extension->getParams()];
     }
 
     /**
@@ -207,7 +207,7 @@ class SiteController extends Controller
 
         $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
 
-        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getConfig('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
 
             $item = $feed->createNewItem();
 
@@ -231,7 +231,7 @@ class SiteController extends Controller
     protected function getFeed($type = '')
     {
         if (!$type) {
-            $type = $this->extension->getConfig('feed.type');
+            $type = $this->extension->getParams('feed.type');
         }
 
         switch($type) {

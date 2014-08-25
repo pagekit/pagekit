@@ -28,6 +28,11 @@ class Extension implements \ArrayAccess
     protected $config;
 
     /**
+     * @var array
+     */
+    protected $parameters = [];
+
+    /**
      * @var \ReflectionObject
      */
     protected $reflected;
@@ -55,19 +60,15 @@ class Extension implements \ArrayAccess
         $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
 
-        $app->on('system.init', function() use ($app) {
-            $this->mergeConfig();
-        });
-    }
+        if ($this->getConfig('parameters.settings')) {
 
-    /**
-     * Merges the extension options with the extension config
-     * and updates the extension config accordingly.
-     */
-    protected function mergeConfig()
-    {
-        if ($config = $this['option']->get("{$this->name}:config")) {
-            $this->config = array_replace($this->config, $config);
+            if (is_array($defaults = $this->getConfig('parameters.settings.defaults'))) {
+                $this->parameters = array_replace($this->parameters, $defaults);
+            }
+
+            if (is_array($settings = $this['option']->get("{$this->name}:settings"))) {
+                $this->parameters = array_replace($this->parameters, $settings);
+            }
         }
     }
 
@@ -88,7 +89,7 @@ class Extension implements \ArrayAccess
     }
 
     /**
-     * Returns the extension's config
+     * Returns the extension's config.
      *
      * @param  mixed $key
      * @param  mixed $default
@@ -101,6 +102,37 @@ class Extension implements \ArrayAccess
         }
 
         $array = $this->config;
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        foreach (explode('.', $key) as $segment) {
+
+            if (!is_array($array) || !array_key_exists($segment, $array)) {
+                return $default;
+            }
+
+            $array = $array[$segment];
+        }
+
+        return $array;
+    }
+
+    /**
+     * Returns the extension's parameters.
+     *
+     * @param  mixed $key
+     * @param  mixed $default
+     * @return array
+     */
+    public function getParams($key = null, $default = null)
+    {
+        if (null === $key) {
+            return $this->parameters;
+        }
+
+        $array = $this->parameters;
 
         if (isset($array[$key])) {
             return $array[$key];
