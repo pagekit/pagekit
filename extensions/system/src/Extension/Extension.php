@@ -156,10 +156,10 @@ class Extension implements \ArrayAccess
      */
     public function registerLanguages(Translator $translator)
     {
-        $files = glob($this->getPath().'/languages/*/*.{mo,po,php}', GLOB_BRACE) ?: [];
+        $files = glob($this->getPath().'/languages/*/*') ?: [];
 
         foreach ($files as $file) {
-            if (preg_match('/languages\/(.+)\/(.+)\.(.+)$/', $file, $matches)) {
+            if (preg_match('/languages\/(.+)\/(.+)\.(mo|po|php)$/', $file, $matches)) {
 
                 list(, $locale, $domain, $format) = $matches;
 
