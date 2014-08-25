@@ -66,7 +66,9 @@ class Extension implements \ArrayAccess
      */
     protected function mergeConfig()
     {
-        $this->config += $this['option']->get("{$this->name}:config", []);
+        if ($config = $this['option']->get("{$this->name}:config")) {
+            $this->config = array_replace($this->config, $config);
+        }
     }
 
     /**
