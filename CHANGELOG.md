@@ -1,5 +1,12 @@
 # Changelog
 
+### WIP
+
+- IMPORTANT: Removed 'settings' from extension/theme config, use 'parameters' instead
+- Fixed blog extension settings
+- Updated requirejs scripts ordering
+- Removed GLOB_BRACE for Solaris compatiblity
+
 ### 0.8.5 (August 22, 2014)
 
 - Added marketplace pagination

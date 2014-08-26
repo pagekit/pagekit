@@ -15,7 +15,12 @@ return [
     'parameters' => [
 
         'settings' => [
-            'view' => 'extension://hello/views/admin/settings.razr'
+
+            'view' => 'extension://hello/views/admin/settings.razr',
+            'defaults' => [
+                'message' => 'World'
+            ]
+
         ]
 
     ],
