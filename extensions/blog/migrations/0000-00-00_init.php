@@ -49,6 +49,9 @@ return [
                 $table->addIndex(['post_id', 'status'], 'POST_ID_STATUS');
             });
         }
+
+        // skip migrations and return latest version
+        return '0000-00-00_init';
     }
 
 ];

@@ -126,6 +126,9 @@ return [
                 $table->addIndex(['status', 'priority'], 'WIDGET_STATUS_PRIORITY');
             });
         }
+
+        // skip migrations and return latest version
+        return '0000-00-00_init';
     }
 
 ];

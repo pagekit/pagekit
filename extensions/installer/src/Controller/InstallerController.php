@@ -142,7 +142,7 @@ class InstallerController extends Controller
                 $this['extensions']->get('system')->enable();
 
                 // sample data
-                $sql = file_get_contents(__DIR__.'/../../sample_data.sql');
+                $sql = file_get_contents('extension://installer/sample_data.sql');
 
                 foreach (explode(';', $sql) as $query) {
                     if ($query = trim($query)) {

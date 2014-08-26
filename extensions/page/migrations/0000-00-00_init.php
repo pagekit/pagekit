@@ -18,6 +18,9 @@ return [
                 $table->setPrimaryKey(['id']);
             });
         }
+
+        // skip migrations and return latest version
+        return '0000-00-00_init';
     }
 
 ];
