@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Theme configuration.
+ * Theme configuration file.
  *
  * @link http://pagekit.com/docs/themes - basic explanation of theme development
  * @link http://pagekit.com/docs/configuration - full documentation of config options
@@ -32,7 +32,6 @@ return [
         ]
 
     ],
-
 
     /**
      * Define default settings values and views where end users can change these values.
