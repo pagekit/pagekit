@@ -32,7 +32,12 @@ class SiteController extends Controller
      */
     public function indexAction($id = 0)
     {
-        if (!$page = $this->pages->where(compact('id'))->where(['status' => Page::STATUS_PUBLISHED])->first()) {
+        if (!$page = $this->pages
+        ->where('id = ?', [$id])
+        ->where('status = ? OR status = ?', [Page::STATUS_PUBLISHED, Page::STATUS_UNPUBLISHED])
+        ->where('publish_down = ? OR publish_down >= ?', [Page::DEFAULT_DATE, new \DateTime])
+        ->where('publish_up = ? OR publish_up <= ?', [Page::DEFAULT_DATE, new \DateTime])
+        ->first()) {
             throw new NotFoundHttpException(__('Page not found!'));
         }
 

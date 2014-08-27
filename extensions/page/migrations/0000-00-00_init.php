@@ -13,6 +13,8 @@ return [
                 $table->addColumn('content', 'text');
                 $table->addColumn('url', 'string', ['length' => 1023]);
                 $table->addColumn('status', 'smallint');
+                $table->addColumn('publish_up', 'datetime', ['notnull' => false]);
+                $table->addColumn('publish_down', 'datetime', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);

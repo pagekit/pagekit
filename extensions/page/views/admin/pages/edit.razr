@@ -38,6 +38,50 @@
                     </div>
                 </div>
                 <div class="uk-form-row">
+                    <span class="uk-form-label">@trans('Publish up')</span>
+                    <div class="uk-form-controls">
+                        <div class="uk-grid uk-grid-small" data-uk-grid-margin="">
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon">
+                                    <i class="uk-icon-calendar"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" for="publish_up" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@date($page.publishUp, 'Y-m-d')">
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon" for="publish_up" data-uk-timepicker="">
+                                    <i class="uk-icon-clock-o"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish" type="text" name="" value="@date($page.publishUp, 'H:i')">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="page[publish_up]" value="@date($page.publishUp, 'Y-m-d H:i:s')">
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <span class="uk-form-label">
+                        @trans('Publish down')
+                        <span><input type="checkbox" name="page[publish_down_activated]" value="1" @($page.publishDown ? 'checked="checked"' : '')></span>
+                    </span>
+
+                    <div class="uk-form-controls">
+                        <div class="uk-grid uk-grid-small" data-uk-grid-margin="">
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon">
+                                    <i class="uk-icon-calendar"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish-down" type="text" for="publish_down" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" name="" value="@( $page.publishDown ? @date($page.publishDown, 'Y-m-d') : '')" @(!$page.publishDown ? 'disabled="disabled"' : '')>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-icon" for="publish_down" data-uk-timepicker="">
+                                    <i class="uk-icon-clock-o"></i>
+                                    <input class="uk-form-width-1-1 uk-form-small js-publish-down" type="text" name="" value="@( $page.publishDown ? @date($page.publishDown, 'H:i') : '')" @(!$page.publishDown ? 'disabled="disabled"' : '')>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="page[publish_down]" value="@( $page.publishDown ? @date($page.publishDown, 'Y-m-d H:i:s') : '')">
+                    </div>
+                </div>
+                <div class="uk-form-row">
                     <span class="uk-form-label">@trans('Restrict Access')</span>
                     <input type="hidden" name="page[roles]" value="">
                     @foreach ($roles as $role)
