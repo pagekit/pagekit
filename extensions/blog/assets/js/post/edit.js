@@ -40,13 +40,13 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
 
     })();
 
-    // url handling
-    $('input[name="page[title]"]', form).on('blur', function() {
+    // slug handling
+    $('input[name="post[title]"]', form).on('blur', function() {
 
-        var url = $('input[name="page[url]"]', form);
+        var slug = $('input[name="post[slug]"]', form);
 
-        if (url.val() === '') {
-            url.val($(this).val().replace(/^([^\/])/, '/$1').toLowerCase());
+        if (slug.val() === '') {
+            slug.val($(this).val().replace(/\s/g, '-').toLowerCase());
         }
 
     });
