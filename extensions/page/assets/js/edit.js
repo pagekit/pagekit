@@ -1,4 +1,4 @@
-require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
+require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -9,6 +9,11 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         e.stopImmediatePropagation();
 
         spinner.removeClass('uk-hidden');
+
+        //publish up date handling
+        $('[name="page[publish_up]"]', form).val($('[data-uk-datepicker][for="publish_up"]', form).val()+' '+$('[data-uk-timepicker][for="publish_up"] input', form).val());
+        // publish down date handling
+        $('[name="page[publish_down]"]', form).val($('[data-uk-datepicker][for="publish_down"]', form).val()+' '+$('[data-uk-timepicker][for="publish_down"] input', form).val());
 
         $.post(form.attr('action'), form.serialize(), function(response) {
 
@@ -23,6 +28,8 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
             spinner.addClass('uk-hidden');
         });
     });
+
+    
 
     // check form before leaving page
     window.onbeforeunload = (function() {
@@ -51,6 +58,12 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
     // markdown handling
     $('input[name="page[data][markdown]"]', form).on('change', function() {
         $('#page-content', form).trigger($(this).prop('checked') ? 'enableMarkdown' : 'disableMarkdown');
+    });
+
+    // active publish down
+    $('[name="page[publish_down_activated]"]').on('change', function(){
+        if(!$(this).is(':checked')) $('.js-publish-down').attr('disabled', 'disabled');
+        else $('.js-publish-down').removeAttr('disabled');
     });
 
 });
