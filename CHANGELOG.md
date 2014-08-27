@@ -4,6 +4,7 @@
 
 - IMPORTANT: Removed 'settings' from extension/theme config, use 'parameters' instead
 - Fixed blog extension settings
+- Fixed blog/page url handling
 - Updated requirejs scripts ordering
 - Removed GLOB_BRACE for Solaris compatiblity
 
