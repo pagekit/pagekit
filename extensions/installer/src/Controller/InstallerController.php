@@ -116,7 +116,7 @@ class InstallerController extends Controller
             } else {
 
                 $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
-                $this['option']->set('system:extensions', ['blog', 'page']);
+                $this['option']->set('system:extensions', ['blog', 'page'], true);
 
                 $this['db']->insert('@system_user', [
                     'name' => $user['username'],
