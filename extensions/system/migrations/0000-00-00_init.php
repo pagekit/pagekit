@@ -128,7 +128,7 @@ return [
         }
 
         // skip migrations and return latest version
-        return '0000-00-00_init';
+        return '2014-08-28_0.8.6';
     }
 
 ];

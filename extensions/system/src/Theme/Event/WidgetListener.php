@@ -74,11 +74,11 @@ class WidgetListener extends EventSubscriber
 
     protected function setSettings($settings)
     {
-        $this['option']->set($this->getOptionsName(), $settings);
+        $this['option']->set($this->getOptionsName(), $settings, true);
     }
 
     protected function getOptionsName()
     {
-        return $this['theme.site']->getName().':config.widgets';
+        return $this['theme.site']->getName().':settings.widgets';
     }
 }

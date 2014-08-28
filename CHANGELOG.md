@@ -1,6 +1,6 @@
 # Changelog
 
-### WIP
+### 0.8.6 (August 28, 2014)
 
 - IMPORTANT: Removed 'settings' from extension/theme config, use 'parameters' instead
 - Fixed blog extension settings
