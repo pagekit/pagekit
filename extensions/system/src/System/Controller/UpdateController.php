@@ -122,6 +122,7 @@ class UpdateController extends Controller
             }
 
             $this['system']->enable();
+            $this['system']->clearCache();
             $this['session']->remove('system.update');
 
             $response = ['message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/system/admin'), 'progress' => 100];
