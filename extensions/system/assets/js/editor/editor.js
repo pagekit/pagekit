@@ -3,6 +3,8 @@ define('editor', ['jquery', 'uikit!htmleditor', 'marked', 'codemirror'], functio
     return {
 
         attach: function(element, options) {
+            options.markdown = ('markdown' in options) && (options.markdown === "" || options.markdown);
+
             return uikit.htmleditor(element, $.extend({}, { marked: marked, CodeMirror: codemirror }, options));
         }
     };
