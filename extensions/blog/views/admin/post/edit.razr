@@ -93,7 +93,7 @@
                         <label><input type="checkbox" name="post[data][markdown]" value="1"@( $post.get('markdown') ? ' checked' : '')> @trans('Enable Markdown')</label>
                     </div>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="post[comment_status]" value="1"@( $post.commentstatus ? ' checked' : '')> @trans('Enable Comments')</label>
+                        <label><input type="checkbox" name="post[comment_status]" value="1"@( $post.comment_status ? ' checked' : '')> @trans('Enable Comments')</label>
                     </div>
                 </div>
 
