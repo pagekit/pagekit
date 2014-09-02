@@ -7,6 +7,7 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
+use Pagekit\OAuth\OAuth;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
@@ -109,6 +110,10 @@ class SystemExtension extends Extension
 
         $app['system.info'] = function() {
             return new SystemInfoHelper;
+        };
+
+        $app['oauth'] = function() {
+            return new OAuth();
         };
 
         $app['dates'] = function($app) {

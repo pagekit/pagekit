@@ -14,7 +14,8 @@
     "require": {
         "php": ">=5.4.0",
         "pagekit/framework": "0.9.*",
-        "pagekit/razr": "0.9.*"
+        "pagekit/razr": "0.9.*",
+        "lusitanian/oauth": "0.1.*"
     },
     "minimum-stability": "dev"
 }

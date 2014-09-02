@@ -1,4 +1,4 @@
-require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'domReady!'], function($, req, system, uikit) {
+require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!oauth.data,settings.oauth', 'domReady!'], function($, req, system, uikit, tmpl) {
 
     // switcher
     var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {
@@ -50,4 +50,43 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'domRe
 
     // URL picker
     system.linkpicker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
+
+    // OAuth
+    var oauthData = $.parseJSON(tmpl.get('oauth.data'));
+
+    $.each(oauthData, function (service, data) {
+        data.service = service;
+        if ('client_id' in data) {
+            $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
+            container.find('[data-info]').each(function() {
+                if ($(this).data('info') != service) {
+                    $(this).remove();
+                }
+            });
+        } else {
+            $("#oauth-service-dropdown").append($('<li><a href="#">'+service+'</a></li>').click(function() {
+                $(this).remove();
+                console.log($(tmpl.render('settings.oauth', data)));
+                $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
+                container.find('[data-info]').each(function() {
+                    if ($(this).data('info') != service) {
+                        $(this).remove();
+                    }
+                });
+            }));
+        }
+    });
+
+    $("#oauth-service-list").submit(function(e) {
+        e.preventDefault();
+
+        $.each($(this).find("[name='service-container']"), function() {
+            if (!$(this).find("#client_id").val() && !$(this).find("#client_secret").val()) {
+                $(this).remove();
+            }
+        });
+
+        $(this).unbind('submit').submit();
+    });
+
 });

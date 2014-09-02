@@ -171,6 +171,7 @@ class SystemListener extends EventSubscriber
         $event->register('marketplace.table', 'extension://system/views/tmpl/marketplace.table.razr');
         $event->register('package.updates', 'extension://system/views/tmpl/package.updates.razr');
         $event->register('package.upload', 'extension://system/views/tmpl/package.upload.razr');
+        $event->register('settings.oauth', 'extension://system/views/tmpl/settings.oauth.razr');
     }
 
     /**
