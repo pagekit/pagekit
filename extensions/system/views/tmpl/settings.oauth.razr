@@ -2,7 +2,7 @@
     <h2 class="pk-form-heading">{{service}}</h2>
 
     <p data-info="Google">@trans('<a href="%url%">Google API Console</a>', ['%url%' => 'https://console.developers.google.com'])</p>
-    <p data-info="Amazon">@trans('<a href="%url%">Amazon</a>', ['%url%' => 'https://console.developers.google.com'])</p>
+    <p data-info="Amazon">@trans('<a href="%url%">Amazon</a>', ['%url%' => ''])</p>
 
     <div class="uk-form-row">
         <label for="client_id" class="uk-form-label">@trans('Client ID')</label>

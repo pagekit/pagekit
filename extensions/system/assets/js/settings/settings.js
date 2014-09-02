@@ -52,32 +52,23 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
     system.linkpicker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
 
     // OAuth
-    var oauthData = $.parseJSON(tmpl.get('oauth.data'));
+    var oauthData = $.parseJSON(tmpl.get('oauth.data')), container;
 
     $.each(oauthData, function (service, data) {
         data.service = service;
         if ('client_id' in data) {
             $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
-            container.find('[data-info]').each(function() {
-                if ($(this).data('info') != service) {
-                    $(this).remove();
-                }
-            });
+            $("[data-info][data-info!='"+service+"']", container).remove();
         } else {
             $("#oauth-service-dropdown").append($('<li><a href="#">'+service+'</a></li>').click(function() {
                 $(this).remove();
-                console.log($(tmpl.render('settings.oauth', data)));
                 $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
-                container.find('[data-info]').each(function() {
-                    if ($(this).data('info') != service) {
-                        $(this).remove();
-                    }
-                });
+                $("[data-info][data-info!='"+service+"']", container).remove();
             }));
         }
     });
 
-    $("#oauth-service-list").submit(function(e) {
+    $("form").submit(function(e) {
         e.preventDefault();
 
         $.each($(this).find("[name='service-container']"), function() {

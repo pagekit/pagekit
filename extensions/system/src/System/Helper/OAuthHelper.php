@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\OAuth;
+namespace Pagekit\System\Helper;
 
 use Pagekit\Framework\ApplicationTrait;
 use Pagekit\Component\Routing\Generator\UrlGenerator;
@@ -11,7 +11,7 @@ use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 
 
-class OAuth implements \ArrayAccess
+class OAuthHelper implements \ArrayAccess
 {
     use ApplicationTrait;
 

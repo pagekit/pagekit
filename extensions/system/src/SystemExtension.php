@@ -7,7 +7,6 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
-use Pagekit\OAuth\OAuth;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
@@ -23,6 +22,7 @@ use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
+use Pagekit\System\Helper\OAuthHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
@@ -113,7 +113,7 @@ class SystemExtension extends Extension
         };
 
         $app['oauth'] = function() {
-            return new OAuth();
+            return new OAuthHelper();
         };
 
         $app['dates'] = function($app) {
