@@ -150,7 +150,10 @@ class Item implements ItemInterface
      */
     public function setParentId($parentId)
     {
-        $this->parentId = $parentId;
+        if ($parentId != "")
+        {
+            $this->parentId = $parentId;
+        }
     }
 
     /**
