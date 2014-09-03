@@ -112,7 +112,7 @@ class MenuController extends Controller
             }
 
             $item = $items[$data['id']];
-            $item->setParentId($data['parent_id']);
+            $item->setParentId($data['parent_id'] != "" ? $data['parent_id'] : "0");
             $item->setDepth($data['depth']);
             $item->setPriority($data['order']);
 
