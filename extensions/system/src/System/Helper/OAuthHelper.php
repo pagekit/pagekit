@@ -85,7 +85,7 @@ class OAuthHelper implements \ArrayAccess
             $storage->storeAccessToken($provider, $token);
 
             if ($token->getEndOfLife() < time()) {
-                if (!empty($token->getRefreshToken())) {
+                if ($token->getRefreshToken()) {
                     $service->refreshAccessToken($token);
                 } else {
                     return false;
