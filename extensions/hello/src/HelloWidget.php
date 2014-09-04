@@ -34,10 +34,12 @@ class HelloWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = [])
-    {
-        return $this['view']->render('extension://hello/views/widget.razr');
-    }
+public function render(WidgetInterface $widget, $options = [])
+{
+    $user = $this['user'];
+
+    return $this['view']->render('extension://hello/views/widget.razr', compact('user'));
+}
 
     /**
      * {@inheritdoc}
