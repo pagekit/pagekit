@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.7 (September 8, 2014)
+
+- Added OAuth api
+- Fixed option cache issue
+- Updated library dependencies
+
 ### 0.8.6 (August 28, 2014)
 
 - IMPORTANT: Removed 'settings' from extension/theme config, use 'parameters' instead

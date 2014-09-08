@@ -63,6 +63,7 @@ class BuildCommand extends Command
                     '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
                     '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
                     '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
+                    '^vendor\/lusitanian\/oauth\/(examples|tests)',
                     '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
                     '^vendor\/pagekit\/.+\/(tests\/|phpunit)',
                     '^vendor\/pimple\/pimple\/(tests|phpunit)',
