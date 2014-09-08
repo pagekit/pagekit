@@ -42,6 +42,7 @@ class AuthController extends Controller
     public function loginAction($redirect = '')
     {
         if ($this->user->isAuthenticated()) {
+            $this['message']->info(__('You are already logged in.'));
             return $this->redirect('/');
         }
 

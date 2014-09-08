@@ -39,7 +39,13 @@ class RegistrationController extends Controller
      */
     public function indexAction()
     {
-        if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
+        if ($this['user']->isAuthenticated()) {
+            $this['message']->info(__('You are already logged in.'));
+            return $this->redirect('/');
+        }
+
+        if ($this['option']->get('system:user.registration', 'admin') == 'admin') {
+            $this['message']->info(__('Public user registration is disabled.'));
             return $this->redirect('/');
         }
 
