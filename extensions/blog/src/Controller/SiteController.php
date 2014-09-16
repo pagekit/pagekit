@@ -56,10 +56,12 @@ class SiteController extends Controller
     }
 
     /**
+     * @Route("/page/{page}", name="@blog/page")
+     * @Route("/", name="@blog/site")
      * @Response("extension://blog/views/post/index.razr")
      * @Request({"page": "int"})
      */
-    public function indexAction($page=1)
+    public function indexAction($page = 1)
     {
         $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) {
             $post = $event->getEntity();

@@ -29,12 +29,12 @@
     <ul class="uk-pagination">
         @if($page > 1)
         <li class="uk-pagination-previous">
-            <a href="@url('@blog/site', ['page' => $page-1])">@trans('Newer posts')</a>
+            <a href="@url('@blog/page', ['page' => $page-1])">@trans('Newer posts')</a>
         </li>
         @endif
         @if($page < $total)
         <li class="uk-pagination-next">
-            <a href="@url('@blog/site', ['page' => $page+1])">@trans('Older posts')</a>
+            <a href="@url('@blog/page', ['page' => $page+1])">@trans('Older posts')</a>
         </li>
         @endif
     </ul>
