@@ -3,6 +3,10 @@
 ### WIP
 
 - Added pagination in Blog extension
+- Fixed comment status bug
+- Fixed reordering menu bug
+- Fixed marketplace grid
+- Updated UIkit to 2.10
 
 ### 0.8.7 (September 8, 2014)
 
