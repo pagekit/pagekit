@@ -56,7 +56,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/page/{page}", name="@blog/page")
+     * @Route("/page/{page}", name="@blog/page", requirements={"page" = "\d+"})
      * @Route("/", name="@blog/site")
      * @Response("extension://blog/views/post/index.razr")
      * @Request({"page": "int"})
