@@ -1,5 +1,9 @@
 # Changelog
 
+### WIP
+
+- Added pagination in Blog extension
+
 ### 0.8.7 (September 8, 2014)
 
 - Added OAuth api
