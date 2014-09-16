@@ -57,19 +57,34 @@ class SiteController extends Controller
 
     /**
      * @Response("extension://blog/views/post/index.razr")
+     * @Request({"page": "int"})
      */
-    public function indexAction()
+    public function indexAction($page=1)
     {
         $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) {
             $post = $event->getEntity();
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
+        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+
+        if (!$limit = $this->extension->getParams('posts_per_page')) {
+            $limit = 10;
+        }
+
+        $count = $query->count();
+        $total = ceil($count / $limit);
+        $page  = max(1, min($total, $page));
+
+        $query->offset(($page-1) * $limit)->limit($limit)->orderBy('date', 'DESC');
+
         return [
-            'head.title' => __('Blog'),
+            'head.title'          => __('Blog'),
             'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $this->getFeed()->getMIMEType()],
-            'posts' => $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get(),
-            'params' => $this->extension->getParams()
+            'posts'               => $query->get(),
+            'params'              => $this->extension->getParams(),
+            'total'               => $total,
+            'page'                => $page
         ];
     }
 
