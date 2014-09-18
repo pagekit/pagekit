@@ -58,7 +58,11 @@ class SettingsController extends Controller
         $locales = [];
 
         foreach ($codes as $code) {
-            list($lang, $country) = explode('_', $code);
+            if (strpos($code, '_') !== false) {
+                list($lang, $country) = explode('_', $code);
+            } else {
+                $lang = $country = $code;
+            }
             $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
         }
 
