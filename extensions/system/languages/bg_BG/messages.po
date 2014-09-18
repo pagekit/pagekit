@@ -1,0 +1,3844 @@
+# 
+# Translators:
+# Marush Denchev <marush.denchev@gmail.com>, 2014
+# Marush Denchev <marush.denchev@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-21 07:31+0000\n"
+"Last-Translator: Marush Denchev <marush.denchev@gmail.com>\n"
+"Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/projects/p/pagekit-cms/language/bg_BG/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg_BG\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
+#: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/settings.razr:7
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/widgets/edit.razr:7
+msgid "Close"
+msgstr "Затвори"
+
+#: extensions/system/theme/templates/error.razr:4
+msgid "Error"
+msgstr "Грешка"
+
+#: extensions/system/theme/templates/login.razr:27
+#: extensions/system/views/admin/user/edit.razr:36
+#: extensions/system/views/user/login.razr:6
+#: extensions/system/views/user/mails/reset.razr:11
+#: extensions/system/views/user/registration.razr:8
+msgid "Username"
+msgstr "Потребителско име"
+
+#: extensions/system/theme/templates/login.razr:31
+#: extensions/system/views/admin/user/edit.razr:57
+#: extensions/system/views/user/login.razr:13
+#: extensions/system/views/user/registration.razr:29
+msgid "Password"
+msgstr "Парола"
+
+#: extensions/system/theme/templates/login.razr:35
+#: extensions/system/views/user/login.razr:3
+#: extensions/system/views/widgets/login/login.razr:10
+#: extensions/system/src/System/Controller/SystemController.php:48
+#: extensions/system/src/User/Controller/AuthController.php:48
+#: extensions/system/src/User/Link/User.php:46
+#: extensions/system/src/User/Widget/LoginWidget.php:25
+msgid "Login"
+msgstr "Вход"
+
+#: extensions/system/theme/templates/login.razr:38
+#: extensions/system/views/user/login.razr:24
+#: extensions/system/views/widgets/login/login.razr:14
+msgid "Remember Me"
+msgstr "Запомни ме"
+
+#: extensions/system/theme/templates/login.razr:39
+#: extensions/system/views/widgets/login/login.razr:15
+msgid "Forgot Password?"
+msgstr "Забравена парола?"
+
+#: extensions/system/theme/templates/login.razr:50
+#: extensions/system/views/user/reset/request.razr:8
+msgid "Username or Email"
+msgstr "Потребителско име или Email"
+
+#: extensions/system/theme/templates/login.razr:53
+msgid "Reset Password"
+msgstr "Възстанови парола"
+
+#: extensions/system/theme/templates/maintenance.razr:23
+#: extensions/system/views/admin/settings/settings.razr:49
+msgid "Maintenance"
+msgstr "Поддръжка"
+
+#: extensions/system/theme/templates/migration.razr:23
+#: extensions/system/src/System/Controller/MigrationController.php:17
+msgid "Update Pagekit"
+msgstr "Обнови Pagekit"
+
+#: extensions/system/theme/templates/migration.razr:24
+msgid ""
+"Pagekit has been updated! Before we send you on your way, we have to update "
+"your database to the newest version."
+msgstr "Pagekit беше обновен! Преди да продължите, трябва да обновим базата данни до последната версия."
+
+#: extensions/system/theme/templates/migration.razr:26
+#: extensions/system/views/admin/settings/index.razr:54
+#: extensions/system/views/admin/settings/index.razr:55
+#: extensions/system/views/admin/settings/update.razr:11
+#: extensions/system/views/tmpl/image.modal.razr:24
+#: extensions/system/views/tmpl/link.modal.razr:12
+#: extensions/system/views/tmpl/linkpicker.modal.razr:6
+#: extensions/system/views/tmpl/marketplace.details.razr:9
+#: extensions/system/views/tmpl/package.updates.razr:25
+#: extensions/system/views/tmpl/video.modal.razr:23
+#: extensions/system/src/System/Controller/UpdateController.php:39
+msgid "Update"
+msgstr "Обнови"
+
+#: extensions/system/theme/templates/template.razr:22
+#: extensions/system/theme/templates/template.razr:39
+msgid "Pagekit"
+msgstr "Pagekit"
+
+#: extensions/system/theme/templates/template.razr:64
+#: extensions/system/theme/templates/template.razr:132
+msgid "Visit Site"
+msgstr "Посети сайта"
+
+#: extensions/system/theme/templates/template.razr:65
+#: extensions/system/theme/templates/template.razr:133
+#: extensions/system/views/admin/extensions/table.razr:23
+#: extensions/system/views/admin/settings/index.razr:11
+#: extensions/system/views/admin/settings/index.razr:12
+#: extensions/system/views/admin/themes/table.razr:21
+#: extensions/system/views/admin/widgets/edit.razr:14
+#: extensions/system/views/tmpl/image.replace.razr:14
+#: extensions/system/views/tmpl/video.replace.razr:14
+#: extensions/system/languages/messages.php:24
+#: extensions/system/src/System/Controller/SettingsController.php:70
+#: extensions/system/src/System/Controller/SystemController.php:32
+msgid "Settings"
+msgstr "Настройки"
+
+#: extensions/system/theme/templates/template.razr:66
+#: extensions/system/theme/templates/template.razr:134
+#: extensions/system/views/widgets/login/logout.razr:2
+msgid "Logout"
+msgstr "Изход"
+
+#: extensions/system/theme/templates/template.razr:113
+#: extensions/system/views/admin/settings/index.razr:20
+#: extensions/system/views/admin/settings/index.razr:21
+#: extensions/system/views/admin/settings/index.razr:88
+#: extensions/system/views/admin/settings/info.razr:61
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:50
+msgid "Extensions"
+msgstr "Разширения"
+
+#: extensions/system/views/admin/aliases/edit.razr:6
+#: extensions/system/views/admin/dashboard/edit.razr:4
+#: extensions/system/views/admin/menu/index.razr:82
+#: extensions/system/views/admin/menu/item.edit.razr:6
+#: extensions/system/views/admin/settings/settings.razr:6
+#: extensions/system/views/admin/user/edit.razr:6
+#: extensions/system/views/admin/user/role.razr:90
+#: extensions/system/views/admin/widgets/edit.razr:6
+#: extensions/system/views/user/profile.razr:46
+msgid "Save"
+msgstr "Запази"
+
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/index.razr:83
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/index.razr:134
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/user/role.razr:91
+#: extensions/system/views/admin/widgets/edit.razr:7
+#: extensions/system/views/tmpl/image.modal.razr:25
+#: extensions/system/views/tmpl/image.modal.razr:33
+#: extensions/system/views/tmpl/link.modal.razr:13
+#: extensions/system/views/tmpl/linkpicker.modal.razr:7
+#: extensions/system/views/tmpl/package.upload.razr:36
+#: extensions/system/views/tmpl/video.modal.razr:24
+#: extensions/system/views/tmpl/video.modal.razr:32
+msgid "Cancel"
+msgstr "Прекрати"
+
+#: extensions/system/views/admin/aliases/edit.razr:10
+msgid "Please select a source."
+msgstr "Моля изберете източник."
+
+#: extensions/system/views/admin/aliases/edit.razr:13
+#: extensions/system/views/admin/aliases/index.razr:21
+msgid "Alias"
+msgstr "Псевдоними"
+
+#: extensions/system/views/admin/aliases/edit.razr:16
+msgid ""
+"Use a relative path and don't add a trailing slash. For example: "
+"<code>about</code>"
+msgstr "Използвайте относителен път и не поставяйте /. Например: <code>about</code>"
+
+#: extensions/system/views/admin/aliases/edit.razr:20
+#: extensions/system/views/admin/aliases/index.razr:22
+msgid "Source"
+msgstr "Източник"
+
+#: extensions/system/views/admin/aliases/index.razr:7
+msgid "Add Alias"
+msgstr "Добави псевдоним"
+
+#: extensions/system/views/admin/aliases/index.razr:8
+#: extensions/system/views/admin/dashboard/settings.razr:18
+#: extensions/system/views/admin/extensions/table.razr:43
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/menu/index.razr:35
+#: extensions/system/views/admin/themes/table.razr:27
+#: extensions/system/views/admin/user/index.razr:9
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/admin/widgets/index.razr:19
+#: extensions/system/views/tmpl/finder.main.razr:11
+#: extensions/system/views/tmpl/image.replace.razr:15
+#: extensions/system/views/tmpl/video.replace.razr:15
+msgid "Delete"
+msgstr "Изтрий"
+
+#: extensions/system/views/admin/aliases/index.razr:11
+#: extensions/system/views/admin/extensions/index.razr:61
+#: extensions/system/views/admin/themes/index.razr:61
+#: extensions/system/views/admin/user/index.razr:51
+#: extensions/system/views/admin/widgets/index.razr:56
+#: extensions/system/views/tmpl/finder.main.razr:17
+msgid "Search"
+msgstr "Търси"
+
+#: extensions/system/views/admin/aliases/index.razr:41
+msgid "No URL aliases found."
+msgstr "Няма намерени псевдоними."
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:2
+#: extensions/system/views/admin/menu/index.razr:53
+#: extensions/system/views/admin/menu/item.edit.razr:11
+#: extensions/system/views/admin/settings/settings.razr:31
+#: extensions/system/views/admin/widgets/edit.razr:25
+#: extensions/system/views/admin/widgets/index.razr:65
+#: extensions/system/views/tmpl/link.modal.razr:5
+msgid "Title"
+msgstr "Заглавие"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:9
+#: extensions/system/views/admin/link/link.types.razr:2
+#: extensions/system/views/admin/menu/index.razr:55
+#: extensions/system/views/tmpl/image.modal.razr:12
+#: extensions/system/views/tmpl/video.modal.razr:15
+msgid "URL"
+msgstr "URL"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:16
+msgid "Number of Posts"
+msgstr "Брой публикации"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:27
+msgid "Post Content"
+msgstr "Публикувай съдържание"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:30
+msgid "Don't show"
+msgstr "Не показвай"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:33
+msgid "Show on all posts"
+msgstr "Показвай на всички публикации"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:36
+msgid "Only show on first post."
+msgstr "Покажи само първата публикация."
+
+#: extensions/system/views/admin/dashboard/settings.razr:8
+#: extensions/system/views/admin/widgets/index.razr:9
+#: extensions/system/src/System/Controller/DashboardController.php:85
+#: extensions/system/src/Widget/Controller/WidgetsController.php:70
+msgid "Add Widget"
+msgstr "Добави джаджа"
+
+#: extensions/system/views/admin/dashboard/settings.razr:24
+msgid "Widget"
+msgstr "Джаджа"
+
+#: extensions/system/views/admin/dashboard/settings.razr:25
+#: extensions/system/views/admin/link/link.types.razr:8
+#: extensions/system/views/admin/menu/item.edit.razr:18
+#: extensions/system/views/admin/widgets/index.razr:68
+msgid "Type"
+msgstr "Тип"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:2
+msgid "User Type"
+msgstr "Потребителски тип"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Logged in"
+msgstr "Влезнал"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Last registered"
+msgstr "Последно регистриран"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:12
+msgid "Number of Users"
+msgstr "Брой потребители"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:2
+msgid ""
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} Няма регистрани потребители|{1} Последно регистиран потребител]1,Inf[ Последни %users% регистрирани потребители"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:4
+msgid ""
+"{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
+"logged in"
+msgstr "{0} Няма влезли потребители|{1} %users% влязъл потребител|]1,Inf[ %users% влезли потреблите"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:4
+msgid "Location"
+msgstr "Местонахождение"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:10
+msgid "Enter the name of the city you want to get weather information for."
+msgstr "Въведето името на града, за който искате да получите информация за времето."
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:15
+msgid "Unit"
+msgstr "Мерна единица"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:18
+msgid "Metric"
+msgstr "Метрична"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:21
+msgid "Imperial"
+msgstr "Британска"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:12
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:23
+msgid "Weather"
+msgstr "Време"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:13
+msgid "Unable to retrieve weather data."
+msgstr "Не е възможно извличане на данни за времето."
+
+#: extensions/system/views/admin/extensions/index.razr:12
+#: extensions/system/views/admin/themes/index.razr:12
+#: extensions/system/views/tmpl/marketplace.details.razr:5
+msgid "Installed"
+msgstr "Инсталирано"
+
+#: extensions/system/views/admin/extensions/index.razr:13
+#: extensions/system/views/admin/themes/index.razr:13
+msgid "Updates"
+msgstr "Обновления"
+
+#: extensions/system/views/admin/extensions/index.razr:14
+#: extensions/system/views/admin/themes/index.razr:14
+#: extensions/system/views/tmpl/marketplace.details.razr:8
+#: extensions/system/views/tmpl/package.upload.razr:35
+msgid "Install"
+msgstr "Инсталирай"
+
+#: extensions/system/views/admin/extensions/index.razr:15
+#: extensions/system/views/admin/themes/index.razr:15
+#: extensions/system/src/System/Controller/MarketplaceController.php:27
+msgid "Marketplace"
+msgstr "Магазин"
+
+#: extensions/system/views/admin/extensions/index.razr:16
+#: extensions/system/views/admin/themes/index.razr:16
+msgid "All"
+msgstr "Всички"
+
+#: extensions/system/views/admin/extensions/index.razr:34
+#: extensions/system/views/admin/themes/index.razr:34
+msgid ""
+"An error occurred in retrieving update information. Please try again later."
+msgstr "Възникна грешка при опит за извличане на информация за обновленията. Моля, опитайте пак по-късно."
+
+#: extensions/system/views/admin/extensions/index.razr:38
+msgid "No extension updates found."
+msgstr "Не са намерени обновления за това разширение."
+
+#: extensions/system/views/admin/extensions/index.razr:44
+#: extensions/system/views/admin/themes/index.razr:44
+msgid "Install an extension"
+msgstr "Инсталирай разширение"
+
+#: extensions/system/views/admin/extensions/index.razr:47
+#: extensions/system/views/admin/themes/index.razr:47
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Droparea"
+msgstr "Зона за поставяне"
+
+#: extensions/system/views/admin/extensions/index.razr:48
+#: extensions/system/views/admin/themes/index.razr:48
+msgid ""
+"Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
+"upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Поставете файловете тук или <a class=\"uk-form-file\">изберете<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+
+#: extensions/system/views/admin/extensions/index.razr:67
+msgid "No extensions found."
+msgstr "Не са намерени разширения."
+
+#: extensions/system/views/admin/extensions/index.razr:68
+#: extensions/system/views/admin/themes/index.razr:68
+msgid "Cannot connect to the marketplace. Please try again later."
+msgstr "Не може да се свържем с магазина. Моля, опитайте пак по-късно."
+
+#: extensions/system/views/admin/extensions/table.razr:4
+#: extensions/system/views/admin/user/edit.razr:43
+#: extensions/system/views/tmpl/package.updates.razr:5
+#: extensions/system/views/user/profile.razr:8
+#: extensions/system/views/user/registration.razr:15
+msgid "Name"
+msgstr "Име"
+
+#: extensions/system/views/admin/extensions/table.razr:5
+#: extensions/system/views/admin/settings/info.razr:49
+#: extensions/system/views/admin/settings/info.razr:85
+#: extensions/system/views/tmpl/package.upload.razr:17
+msgid "Version"
+msgstr "Версия"
+
+#: extensions/system/views/admin/extensions/table.razr:6
+#: extensions/system/views/admin/menu/index.razr:54
+#: extensions/system/views/admin/menu/item.edit.razr:37
+#: extensions/system/views/admin/settings/info.razr:104
+#: extensions/system/views/admin/user/edit.razr:75
+#: extensions/system/views/admin/user/index.razr:63
+#: extensions/system/views/admin/widgets/edit.razr:73
+#: extensions/system/views/admin/widgets/index.razr:66
+msgid "Status"
+msgstr "Статус"
+
+#: extensions/system/views/admin/extensions/table.razr:20
+#: extensions/system/views/admin/themes/table.razr:16
+#: extensions/system/views/tmpl/marketplace.table.razr:14
+msgid "Details"
+msgstr "Детайли"
+
+#: extensions/system/views/admin/extensions/table.razr:25
+#: extensions/system/views/admin/settings/info.razr:5
+#: extensions/system/languages/messages.php:28
+#: extensions/system/src/User/Controller/PermissionController.php:34
+msgid "Permissions"
+msgstr "Права"
+
+#: extensions/system/views/admin/extensions/table.razr:37
+#: extensions/system/views/admin/menu/item.edit.razr:40
+#: extensions/system/views/admin/widgets/edit.razr:76
+#: extensions/system/views/admin/widgets/index.razr:38
+#: extensions/system/src/Menu/Entity/Item.php:124
+#: extensions/system/src/Widget/Entity/Widget.php:98
+msgid "Enabled"
+msgstr "Активирано"
+
+#: extensions/system/views/admin/extensions/table.razr:39
+#: extensions/system/views/admin/menu/item.edit.razr:43
+#: extensions/system/views/admin/widgets/edit.razr:77
+#: extensions/system/views/admin/widgets/index.razr:39
+#: extensions/system/src/Menu/Entity/Item.php:123
+#: extensions/system/src/Widget/Entity/Widget.php:97
+msgid "Disabled"
+msgstr "Неактивирано"
+
+#: extensions/system/views/admin/link/link.types.razr:11
+msgid "- Select Type -"
+msgstr "- Изберете тип -"
+
+#: extensions/system/views/admin/link/system.razr:2
+msgid "View"
+msgstr "Виж"
+
+#: extensions/system/views/admin/link/system.razr:5
+msgid "- Select View -"
+msgstr "- Изберете изглед -"
+
+#: extensions/system/views/admin/menu/index.razr:13
+#: extensions/system/views/admin/user/role.razr:16
+msgid "Edit"
+msgstr "Редактирай"
+
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Are you sure?"
+msgstr "Сигурни ли сте?"
+
+#: extensions/system/views/admin/menu/index.razr:25
+msgid "Add Menu"
+msgstr "Добави меню"
+
+#: extensions/system/views/admin/menu/index.razr:34
+msgid "Add Item"
+msgstr "Добави елемент"
+
+#: extensions/system/views/admin/menu/index.razr:38
+#: extensions/system/views/admin/user/index.razr:12
+#: extensions/system/views/admin/widgets/index.razr:22
+msgid "More"
+msgstr "Повече"
+
+#: extensions/system/views/admin/menu/index.razr:41
+#: extensions/system/views/admin/themes/table.razr:26
+#: extensions/system/views/admin/widgets/index.razr:25
+msgid "Enable"
+msgstr "Разреши"
+
+#: extensions/system/views/admin/menu/index.razr:42
+#: extensions/system/views/admin/widgets/index.razr:26
+msgid "Disable"
+msgstr "Забрани"
+
+#: extensions/system/views/admin/menu/index.razr:64
+msgid "No menu found."
+msgstr "Не беше намерено меню."
+
+#: extensions/system/views/admin/menu/index.razr:79
+msgid "Enter Menu Name"
+msgstr "Въведи име на меню"
+
+#: extensions/system/views/admin/menu/item.edit.razr:28
+msgid "Header"
+msgstr "Горна част"
+
+#: extensions/system/views/admin/menu/item.edit.razr:31
+#: extensions/system/views/admin/menu/item.razr:23
+msgid "Divider"
+msgstr "Разделител"
+
+#: extensions/system/views/admin/menu/item.edit.razr:49
+#: extensions/system/views/admin/widgets/edit.razr:92
+msgid "Restrict Access"
+msgstr "Ограничи достъп"
+
+#: extensions/system/views/admin/menu/item.edit.razr:61
+msgid "Activation Rules"
+msgstr "Правила за активация"
+
+#: extensions/system/views/admin/menu/item.edit.razr:64
+msgid "Enter custom activation rules as paths."
+msgstr "Добави персонализирани правила за активация като пътеки."
+
+#: extensions/system/views/admin/menu/item.razr:25
+msgid "Menu Header"
+msgstr "Горна част на меню"
+
+#: extensions/system/views/admin/settings/index.razr:4
+#: extensions/system/views/admin/settings/info.razr:2
+#: extensions/system/views/admin/settings/settings.razr:19
+#: extensions/system/views/admin/settings/settings.razr:207
+#: extensions/system/src/System/Link/System.php:20
+msgid "System"
+msgstr "Система"
+
+#: extensions/system/views/admin/settings/index.razr:29
+#: extensions/system/views/admin/settings/index.razr:30
+#: extensions/system/src/Theme/Controller/ThemesController.php:65
+msgid "Themes"
+msgstr "Теми"
+
+#: extensions/system/views/admin/settings/index.razr:37
+#: extensions/system/views/admin/settings/index.razr:38
+#: extensions/system/src/System/Controller/DashboardController.php:46
+msgid "Dashboard"
+msgstr "Табло"
+
+#: extensions/system/views/admin/settings/index.razr:45
+#: extensions/system/views/admin/settings/index.razr:46
+#: extensions/system/views/admin/settings/settings.razr:225
+#: extensions/system/src/System/Controller/SystemController.php:94
+msgid "Storage"
+msgstr "Склад"
+
+#: extensions/system/views/admin/settings/index.razr:63
+#: extensions/system/views/admin/settings/index.razr:64
+#: extensions/system/src/System/Controller/AliasController.php:46
+msgid "URL Aliases"
+msgstr "Псевдоними на URL адреси"
+
+#: extensions/system/views/admin/settings/index.razr:71
+#: extensions/system/views/admin/settings/index.razr:72
+msgid "Info"
+msgstr "Информация"
+
+#: extensions/system/views/admin/settings/index.razr:78
+#: extensions/system/views/admin/settings/index.razr:79
+msgid "Clear Cache"
+msgstr "Изчисти кеш"
+
+#: extensions/system/views/admin/settings/index.razr:107
+msgid "Select caches to clear:"
+msgstr "Изберете кеш за изчистване:"
+
+#: extensions/system/views/admin/settings/index.razr:114
+msgid "System Cache"
+msgstr "Системен кеш"
+
+#: extensions/system/views/admin/settings/index.razr:121
+msgid "Rendered Templates"
+msgstr "Предварително генерирани темплейи"
+
+#: extensions/system/views/admin/settings/index.razr:128
+msgid "Temporary Files"
+msgstr "Временни файлове"
+
+#: extensions/system/views/admin/settings/index.razr:133
+msgid "Clear"
+msgstr "Изчисти"
+
+#: extensions/system/views/admin/settings/info.razr:3
+msgid "PHP"
+msgstr "PHP"
+
+#: extensions/system/views/admin/settings/info.razr:4
+msgid "Database"
+msgstr "База данни"
+
+#: extensions/system/views/admin/settings/info.razr:15
+#: extensions/system/views/admin/settings/info.razr:43
+#: extensions/system/views/admin/settings/info.razr:75
+msgid "Setting"
+msgstr "Настройка"
+
+#: extensions/system/views/admin/settings/info.razr:16
+#: extensions/system/views/admin/settings/info.razr:44
+#: extensions/system/views/admin/settings/info.razr:76
+msgid "Value"
+msgstr "Стойност"
+
+#: extensions/system/views/admin/settings/info.razr:21
+msgid "Pagekit Version"
+msgstr "Версия на Pagekit"
+
+#: extensions/system/views/admin/settings/info.razr:25
+msgid "Web Server"
+msgstr "Уеб сървър"
+
+#: extensions/system/views/admin/settings/info.razr:29
+msgid "User Agent"
+msgstr "Потребителски агент"
+
+#: extensions/system/views/admin/settings/info.razr:53
+msgid "Handler"
+msgstr "Треньор"
+
+#: extensions/system/views/admin/settings/info.razr:57
+msgid "Built On"
+msgstr "Създаден на"
+
+#: extensions/system/views/admin/settings/info.razr:81
+msgid "Driver"
+msgstr "Драйвер"
+
+#: extensions/system/views/admin/settings/info.razr:89
+msgid "Client"
+msgstr "Клиент"
+
+#: extensions/system/views/admin/settings/info.razr:103
+msgid "Path"
+msgstr "Пътека"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Writable"
+msgstr "Може да пише"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Unwritable"
+msgstr "Не може да пише"
+
+#: extensions/system/views/admin/settings/settings.razr:15
+#: extensions/system/views/admin/settings/settings.razr:29
+msgid "Site"
+msgstr "Сайт"
+
+#: extensions/system/views/admin/settings/settings.razr:16
+#: extensions/system/views/admin/settings/settings.razr:66
+#: extensions/system/views/admin/user/edit.razr:50
+#: extensions/system/views/admin/user/index.razr:64
+#: extensions/system/views/user/profile.razr:15
+#: extensions/system/views/user/registration.razr:22
+msgid "Email"
+msgstr "Email"
+
+#: extensions/system/views/admin/settings/settings.razr:17
+#: extensions/system/views/admin/settings/settings.razr:142
+msgid "Localization"
+msgstr "Локализация"
+
+#: extensions/system/views/admin/settings/settings.razr:18
+#: extensions/system/views/admin/settings/settings.razr:181
+#: extensions/system/views/admin/user/index.razr:62
+#: extensions/system/src/User/Link/User.php:22
+msgid "User"
+msgstr "Потребител"
+
+#: extensions/system/views/admin/settings/settings.razr:37
+msgid "Description"
+msgstr "Описание"
+
+#: extensions/system/views/admin/settings/settings.razr:43
+msgid "Front Page"
+msgstr "Начална страница"
+
+#: extensions/system/views/admin/settings/settings.razr:52
+msgid "Put the site offline and show the offline message."
+msgstr "Спри сайта и покажи съобщението за спрян сайт."
+
+#: extensions/system/views/admin/settings/settings.razr:57
+msgid "Offline Message"
+msgstr "Съобщение при спрян сайт"
+
+#: extensions/system/views/admin/settings/settings.razr:59
+#: extensions/system/src/System/Event/MaintenanceListener.php:27
+msgid "We'll be back soon."
+msgstr "Ще се върнем скоро."
+
+#: extensions/system/views/admin/settings/settings.razr:68
+msgid "From Email"
+msgstr "От email"
+
+#: extensions/system/views/admin/settings/settings.razr:74
+msgid "From Name"
+msgstr "От име"
+
+#: extensions/system/views/admin/settings/settings.razr:80
+msgid "Mailer"
+msgstr "Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "PHP Mailer"
+msgstr "PHP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "SMTP Mailer"
+msgstr "SMTP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:91
+msgid "SMTP Port"
+msgstr "SMTP Port"
+
+#: extensions/system/views/admin/settings/settings.razr:97
+msgid "SMTP Host"
+msgstr "SMTP Host"
+
+#: extensions/system/views/admin/settings/settings.razr:103
+msgid "SMTP User"
+msgstr "SMTP Потребител"
+
+#: extensions/system/views/admin/settings/settings.razr:109
+msgid "SMTP Password"
+msgstr "SMTP парола"
+
+#: extensions/system/views/admin/settings/settings.razr:113
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Show"
+msgstr "Покажи"
+
+#: extensions/system/views/admin/settings/settings.razr:118
+msgid "SMTP Encryption"
+msgstr "SMTP Encryption"
+
+#: extensions/system/views/admin/settings/settings.razr:121
+msgid "None"
+msgstr "Николко"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "SSL"
+msgstr "SSL"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "TLS"
+msgstr "TLS"
+
+#: extensions/system/views/admin/settings/settings.razr:127
+msgid "Please enable the PHP Open SSL extension."
+msgstr "Моля, разрешете PHP Open SSL разширението."
+
+#: extensions/system/views/admin/settings/settings.razr:134
+msgid "Check Connection"
+msgstr "Проверете връзката"
+
+#: extensions/system/views/admin/settings/settings.razr:135
+msgid "Send Test Email"
+msgstr "Изпрати тестови email"
+
+#: extensions/system/views/admin/settings/settings.razr:144
+msgid "Site Locale"
+msgstr "Място на сайта"
+
+#: extensions/system/views/admin/settings/settings.razr:154
+msgid "Admin Locale"
+msgstr "Административен локал"
+
+#: extensions/system/views/admin/settings/settings.razr:164
+msgid "Time Zone"
+msgstr "Времева зона"
+
+#: extensions/system/views/admin/settings/settings.razr:183
+#: extensions/system/views/user/registration.razr:5
+#: extensions/system/src/User/Link/User.php:47
+msgid "Registration"
+msgstr "Регистрация"
+
+#: extensions/system/views/admin/settings/settings.razr:186
+msgid "Adminstrators only"
+msgstr "Само за администратори"
+
+#: extensions/system/views/admin/settings/settings.razr:189
+msgid "Guests"
+msgstr "Гости"
+
+#: extensions/system/views/admin/settings/settings.razr:192
+msgid "Guests, but administrator approval is required"
+msgstr "Гости, но е необходимо одобрение от администратор"
+
+#: extensions/system/views/admin/settings/settings.razr:197
+msgid "Verification"
+msgstr "Верификация"
+
+#: extensions/system/views/admin/settings/settings.razr:200
+msgid "Require e-mail verification when a guest creates an account."
+msgstr "Изисква се e-mail верификация, когато гост потребител създава акаунт."
+
+#: extensions/system/views/admin/settings/settings.razr:209
+msgid "API Key"
+msgstr "API ключ"
+
+#: extensions/system/views/admin/settings/settings.razr:211
+msgid "Enter your API key"
+msgstr "Въведете вашият API ключ"
+
+#: extensions/system/views/admin/settings/settings.razr:215
+msgid "Release Channel"
+msgstr "Канал за пускане"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Stable"
+msgstr "Стабилно"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Nightly"
+msgstr "Нощна"
+
+#: extensions/system/views/admin/settings/settings.razr:231
+msgid "Cache"
+msgstr "Кеш"
+
+#: extensions/system/views/admin/settings/settings.razr:241
+msgid "Developer"
+msgstr "Разработчик"
+
+#: extensions/system/views/admin/settings/settings.razr:244
+msgid "Enable debug mode"
+msgstr "Разреши дебъг режим"
+
+#: extensions/system/views/admin/settings/settings.razr:247
+msgid "Enable debug toolbar"
+msgstr "Разреши дебъг лента с инструменти"
+
+#: extensions/system/views/admin/settings/settings.razr:250
+msgid "Please enable the SQLite database extension."
+msgstr "Моля, разрешете SQLite разширението."
+
+#: extensions/system/views/admin/settings/settings.razr:253
+msgid "Disable cache"
+msgstr "Забрани кеш"
+
+#: extensions/system/views/admin/settings/update.razr:7
+msgid "There is an update available."
+msgstr "Има налично обновление."
+
+#: extensions/system/views/admin/settings/update.razr:8
+msgid "Please update Pagekit to version %version%!"
+msgstr "Моля, обновете Pagekit до версия %version%!"
+
+#: extensions/system/views/admin/settings/update.razr:12
+#: extensions/system/views/admin/settings/update.razr:34
+msgid "Download %version%"
+msgstr "Свалете %version%"
+
+#: extensions/system/views/admin/settings/update.razr:19
+msgid "Downloading ..."
+msgstr "Сваляне ..."
+
+#: extensions/system/views/admin/settings/update.razr:29
+msgid "You have the latest version of Pagekit."
+msgstr "Вие имате последната версия на Pagekit."
+
+#: extensions/system/views/admin/settings/update.razr:30
+msgid ""
+"You have the latest version of Pagekit. You do not need to update. However, "
+"if you want to re-install version %version%, you can do so automatically or "
+"download the package and re-install manually."
+msgstr "Вие имате последната версия на Pagekit. Не е необходимо да го обновявате. Обаче, ако искате да инсталирате отново версия %version%, може да го направите автоматично или да свалите пакета и извършите ръчно."
+
+#: extensions/system/views/admin/settings/update.razr:33
+msgid "Re-install"
+msgstr "Инсталирай отново"
+
+#: extensions/system/views/admin/settings/update.razr:39
+msgid "Cannot connect to the server. Please try again later."
+msgstr "Няма връзка със сървъра. Моля, опитайте пак отново."
+
+#: extensions/system/views/admin/themes/index.razr:38
+msgid "No theme updates found."
+msgstr "Няма теми, които имат нужда от обновяване."
+
+#: extensions/system/views/admin/themes/index.razr:67
+msgid "No themes found."
+msgstr "Няма намерени теми."
+
+#: extensions/system/views/admin/themes/table.razr:11
+#: extensions/system/src/User/Entity/User.php:100
+msgid "Active"
+msgstr "Активно"
+
+#: extensions/system/views/admin/user/edit.razr:19
+#: extensions/system/views/admin/user/edit.razr:111
+#: extensions/system/views/admin/user/index.razr:27
+#: extensions/system/views/admin/user/index.razr:81
+msgid "New"
+msgstr "Нов"
+
+#: extensions/system/views/admin/user/edit.razr:24
+msgid "Verified email address"
+msgstr "Потвърден email адрес"
+
+#: extensions/system/views/admin/user/edit.razr:25
+msgid "Last login: %date%"
+msgstr "Последен вход: %date%"
+
+#: extensions/system/views/admin/user/edit.razr:25
+#: extensions/system/src/User/Controller/UserController.php:274
+msgid "Never"
+msgstr "Никога"
+
+#: extensions/system/views/admin/user/edit.razr:26
+msgid "Registered since: %date%"
+msgstr "Регистриран от: %date%"
+
+#: extensions/system/views/admin/user/edit.razr:61
+#: extensions/system/views/user/profile.razr:22
+msgid "Change password"
+msgstr "Смени парола"
+
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Hide"
+msgstr "Скрий"
+
+#: extensions/system/views/admin/user/edit.razr:87
+#: extensions/system/views/admin/user/index.razr:65
+#: extensions/system/languages/messages.php:29
+#: extensions/system/src/User/Controller/RoleController.php:47
+msgid "Roles"
+msgstr "Роли"
+
+#: extensions/system/views/admin/user/edit.razr:117
+msgid "Last login: {{login}}"
+msgstr "Последен вход: {{login}}"
+
+#: extensions/system/views/admin/user/edit.razr:118
+msgid "Registered since: {{registered}}"
+msgstr "Регистриран от: {{registered}}"
+
+#: extensions/system/views/admin/user/index.razr:8
+#: extensions/system/src/User/Controller/UserController.php:113
+msgid "Add User"
+msgstr "Добави потребител"
+
+#: extensions/system/views/admin/user/index.razr:15
+msgid "Activate"
+msgstr "Активен"
+
+#: extensions/system/views/admin/user/index.razr:16
+msgid "Block"
+msgstr "Блокирай"
+
+#: extensions/system/views/admin/user/index.razr:26
+#: extensions/system/views/admin/widgets/index.razr:37
+msgid "- Status -"
+msgstr "- Статус -"
+
+#: extensions/system/views/admin/user/index.razr:34
+msgid "- Role -"
+msgstr "- Роля -"
+
+#: extensions/system/views/admin/user/index.razr:41
+msgid "- Permission -"
+msgstr "- Разрешение -"
+
+#: extensions/system/views/admin/user/index.razr:87
+msgid "Verified Email Address"
+msgstr "Потвърден email адрес"
+
+#: extensions/system/views/admin/user/index.razr:98
+msgid "No user found."
+msgstr "Не е намерен потребител."
+
+#: extensions/system/views/admin/user/permission.razr:11
+#: extensions/system/views/admin/user/role.razr:43
+msgid "Permission"
+msgstr "Разрешение"
+
+#: extensions/system/views/admin/user/role.razr:28
+msgid "Add Role"
+msgstr "Добави роля"
+
+#: extensions/system/views/admin/user/role.razr:87
+msgid "Enter Role Name"
+msgstr "Въведи име на роля"
+
+#: extensions/system/views/admin/widgets/edit.razr:15
+msgid "Assignment"
+msgstr "Задание"
+
+#: extensions/system/views/admin/widgets/edit.razr:40
+#: extensions/system/views/widgets/menu/edit.razr:2
+#: extensions/system/src/Menu/Widget/MenuWidget.php:23
+msgid "Menu"
+msgstr "Меню"
+
+#: extensions/system/views/admin/widgets/edit.razr:49
+msgid "Pattern"
+msgstr "Шаблон"
+
+#: extensions/system/views/admin/widgets/edit.razr:52
+msgid ""
+"Enter one page path per line. The \"*\" character is a wildcard. Exclude "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"exclude the blog."
+msgstr "Въведете една пътека за страница на ред. Символът \"*\" е маска. Изключете страници като сложите удивителна в началото на пътеката. Пример: \"blog\" за блог страницата, \"blog/*\" за съдържанието на блога или \"!blog\", ако искате да махнете blog."
+
+#: extensions/system/views/admin/widgets/edit.razr:82
+#: extensions/system/views/admin/widgets/index.razr:67
+msgid "Position"
+msgstr "Позиция"
+
+#: extensions/system/views/admin/widgets/edit.razr:103
+msgid "Options"
+msgstr "Възможности"
+
+#: extensions/system/views/admin/widgets/edit.razr:105
+msgid "Show Title"
+msgstr "Покажи заглавие"
+
+#: extensions/system/views/admin/widgets/index.razr:28
+#: extensions/system/src/Widget/Controller/WidgetsController.php:161
+msgid "Copy"
+msgstr "Копирай"
+
+#: extensions/system/views/admin/widgets/index.razr:43
+msgid "- Position -"
+msgstr "- Позиция -"
+
+#: extensions/system/views/admin/widgets/index.razr:50
+msgid "- Type -"
+msgstr "- Тип -"
+
+#: extensions/system/views/admin/widgets/index.razr:109
+msgid "- Assign -"
+msgstr "- Възложи -"
+
+#: extensions/system/views/admin/widgets/index.razr:117
+msgid "Extension not loaded"
+msgstr "Разширението не е заредено"
+
+#: extensions/system/views/tmpl/feed.error.razr:1
+msgid "Unable to retrieve feed data."
+msgstr "Извличането на данните от feed-а не е възможно"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "New Name"
+msgstr "Ново име"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Folder Name"
+msgstr "Име на папка"
+
+#: extensions/system/views/tmpl/finder.main.razr:5
+msgid "Upload"
+msgstr "Качване"
+
+#: extensions/system/views/tmpl/finder.main.razr:9
+msgid "Add Folder"
+msgstr "Добави папка"
+
+#: extensions/system/views/tmpl/finder.main.razr:12
+msgid "Rename"
+msgstr "Преименувай"
+
+#: extensions/system/views/tmpl/finder.main.razr:28
+msgid "Home"
+msgstr "Начало"
+
+#: extensions/system/views/tmpl/finder.table.razr:7
+msgid "Size"
+msgstr "Размер"
+
+#: extensions/system/views/tmpl/finder.table.razr:8
+msgid "Modified"
+msgstr "Променен"
+
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Drop files here."
+msgstr "Постави файлове тук."
+
+#: extensions/system/views/tmpl/image.modal.razr:4
+msgid "Add Image"
+msgstr "Добави снимка"
+
+#: extensions/system/views/tmpl/image.modal.razr:8
+msgid "Select image"
+msgstr "Избери снимка"
+
+#: extensions/system/views/tmpl/image.modal.razr:18
+msgid "Alt"
+msgstr "Алтернатива"
+
+#: extensions/system/views/tmpl/image.modal.razr:29
+msgid "Select Image"
+msgstr "Избери снимка"
+
+#: extensions/system/views/tmpl/image.modal.razr:32
+#: extensions/system/views/tmpl/video.modal.razr:31
+msgid "Select"
+msgstr "Избери"
+
+#: extensions/system/views/tmpl/image.replace.razr:6
+msgid "Placeholder Image"
+msgstr "Заемаща място снимка"
+
+#: extensions/system/views/tmpl/image.replace.razr:12
+msgid "Image"
+msgstr "Снимка"
+
+#: extensions/system/views/tmpl/link.modal.razr:3
+msgid "Add Link"
+msgstr "Добави връзка"
+
+#: extensions/system/views/tmpl/link.replace.razr:1
+#: extensions/system/views/tmpl/linkpicker.replace.razr:1
+msgid "Select Link"
+msgstr "Избери връзка"
+
+#: extensions/system/views/tmpl/linkpicker.modal.razr:3
+msgid "Link"
+msgstr "Връзка"
+
+#: extensions/system/views/tmpl/package.updates.razr:18
+msgid "Changelog"
+msgstr "Списък с промени"
+
+#: extensions/system/views/tmpl/package.upload.razr:4
+msgid ""
+"The checksum of the uploaded package does not match the one from the "
+"marketplace. The file might be manipulated."
+msgstr "Проверяващата сума на качения файл не е същата като тази на файла от магазина. Файлът може да е бил манипулиран."
+
+#: extensions/system/views/tmpl/package.upload.razr:8
+msgid ""
+"There is an update available for the uploaded package. Please consider "
+"installing it instead."
+msgstr "Има налично обновления за качения пакет. Обмислете инсталирането му."
+
+#: extensions/system/views/tmpl/package.upload.razr:28
+msgid "Path:"
+msgstr "Пътека:"
+
+#: extensions/system/views/tmpl/package.upload.razr:29
+msgid "Type:"
+msgstr "Тип:"
+
+#: extensions/system/views/tmpl/video.modal.razr:5
+msgid "Add Video"
+msgstr "Добави видео"
+
+#: extensions/system/views/tmpl/video.modal.razr:16
+msgid "Select video"
+msgstr "Избери видео"
+
+#: extensions/system/views/tmpl/video.modal.razr:28
+msgid "Select Video"
+msgstr "Избери видео"
+
+#: extensions/system/views/tmpl/video.replace.razr:6
+msgid "Placeholder Video"
+msgstr "Заемащо място видео"
+
+#: extensions/system/views/tmpl/video.replace.razr:12
+msgid "Video"
+msgstr "Видео"
+
+#: extensions/system/views/user/login.razr:13
+msgid "(Forgot Password?)"
+msgstr "(Забравена парола?)"
+
+#: extensions/system/views/user/login.razr:20
+#: extensions/system/views/user/registration.razr:39
+#: extensions/system/views/user/reset/confirm.razr:18
+#: extensions/system/views/user/reset/request.razr:15
+msgid "Submit"
+msgstr "Изпрати"
+
+#: extensions/system/views/user/mails/approve.razr:11
+msgid "Hello"
+msgstr "Здрасти"
+
+#: extensions/system/views/user/mails/approve.razr:12
+msgid ""
+"A new user has registered at %site% and requests that you approve his "
+"account."
+msgstr "Нов потребител е регистиран в сайт %site% и е пожелал да одобрите акаунта му."
+
+#: extensions/system/views/user/mails/approve.razr:13
+msgid ""
+"User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
+msgstr "Потребителски данни: <br><br>Име:  %name%<br>Потребителско име: %username%<br>Email: %email%"
+
+#: extensions/system/views/user/mails/approve.razr:14
+msgid "To activate the account click on:"
+msgstr "За да активирате акаунта натиснете тук:"
+
+#: extensions/system/views/user/mails/reset.razr:9
+msgid "Someone requested that the password be reset for the following account"
+msgstr "Някой е пожелал промяна на паролата на следния акаунт"
+
+#: extensions/system/views/user/mails/reset.razr:12
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr "Ако това е грешка, просто игнорирайте този email и нищо няма да се промени."
+
+#: extensions/system/views/user/mails/reset.razr:13
+msgid "To reset your password, visit the following address"
+msgstr "За да промените паролата, посете следния адрес"
+
+#: extensions/system/views/user/mails/verification.razr:11
+#: extensions/system/views/user/mails/welcome.razr:9
+msgid "Hello %name%"
+msgstr "Здравей %name%"
+
+#: extensions/system/views/user/mails/verification.razr:12
+msgid ""
+"Thank you for registering at %site%! Your account has been successfully "
+"created and must be verified before you can use it."
+msgstr "Благодаря, че се регистрирахте в сайта %site%! Вашият акаунт е успешно създаден и трябва да бъде потвърден преди да може да го използвате."
+
+#: extensions/system/views/user/mails/verification.razr:13
+msgid "To verify your account click on:"
+msgstr "За да потвърдите вашия акаунт натиснете тук:"
+
+#: extensions/system/views/user/mails/welcome.razr:10
+msgid "Thank you for registering!"
+msgstr "Благодаря, че се регистрирахте!"
+
+#: extensions/system/views/user/mails/welcome.razr:12
+msgid "Login with the username:"
+msgstr "Вход с потребителско име:"
+
+#: extensions/system/views/user/profile.razr:5
+#: extensions/system/src/User/Controller/ProfileController.php:44
+msgid "Your Profile"
+msgstr "Вашият профил"
+
+#: extensions/system/views/user/profile.razr:26
+msgid "Current Password"
+msgstr "Текуща парола"
+
+#: extensions/system/views/user/profile.razr:36
+msgid "New Password"
+msgstr "Нова парола"
+
+#: extensions/system/views/user/reset/confirm.razr:5
+msgid "Password confirmation"
+msgstr "Повтори паролата"
+
+#: extensions/system/views/user/reset/confirm.razr:8
+msgid "Enter your new password below."
+msgstr "Въведете новата парола отдолу."
+
+#: extensions/system/views/user/reset/request.razr:3
+msgid "Forgot password"
+msgstr "Забравена парола"
+
+#: extensions/system/views/user/reset/request.razr:5
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+msgstr "Моля, въведете вашето потребителско име и email адрес. На вашия email ще получите връзка, чрез която ще създате нова парола."
+
+#: extensions/system/views/widgets/login/edit.razr:4
+msgid "Login Redirect"
+msgstr "Прехвърляне след вход"
+
+#: extensions/system/views/widgets/login/edit.razr:10
+msgid "Logout Redirect"
+msgstr "Прехвърляне след изход"
+
+#: extensions/system/views/widgets/login/login.razr:4
+msgid "username"
+msgstr "потребителско име"
+
+#: extensions/system/views/widgets/login/login.razr:7
+msgid "password"
+msgstr "парола"
+
+#: extensions/system/views/widgets/login/login.razr:17
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: extensions/system/views/widgets/login/logout.razr:1
+msgid "Hi"
+msgstr "Здрасти"
+
+#: extensions/system/views/widgets/menu/edit.razr:12
+msgid "Start Level"
+msgstr "Начално ниво"
+
+#: extensions/system/views/widgets/menu/edit.razr:22
+msgid "Depth"
+msgstr "Дълбочина"
+
+#: extensions/system/views/widgets/menu/edit.razr:25
+msgid "No Limit"
+msgstr "Без лимит"
+
+#: extensions/system/views/widgets/menu/edit.razr:33
+msgid "Sub Items"
+msgstr "Под елементи"
+
+#: extensions/system/views/widgets/menu/edit.razr:36
+msgid "Show all"
+msgstr "Покажи всички"
+
+#: extensions/system/views/widgets/menu/edit.razr:39
+msgid "Show only for active item"
+msgstr "Показвай само за активни елементи"
+
+#: extensions/system/views/widgets/text/edit.razr:5
+msgid "Enable Markdown"
+msgstr "Използвай Markdown"
+
+#: extensions/system/languages/messages.php:4
+msgid "0"
+msgstr "0"
+
+#: extensions/system/languages/messages.php:5
+msgid "1"
+msgstr "1"
+
+#: extensions/system/languages/messages.php:6
+msgid "2"
+msgstr "2"
+
+#: extensions/system/languages/messages.php:7
+msgid "3"
+msgstr "3"
+
+#: extensions/system/languages/messages.php:8
+msgid "4"
+msgstr "4"
+
+#: extensions/system/languages/messages.php:9
+msgid "5"
+msgstr "5"
+
+#: extensions/system/languages/messages.php:10
+msgid "6"
+msgstr "6"
+
+#: extensions/system/languages/messages.php:11
+msgid "7"
+msgstr "7"
+
+#: extensions/system/languages/messages.php:12
+msgid "8"
+msgstr "8"
+
+#: extensions/system/languages/messages.php:13
+msgid "9"
+msgstr "9"
+
+#: extensions/system/languages/messages.php:14
+msgid "10"
+msgstr "10"
+
+#: extensions/system/languages/messages.php:15
+msgid "11"
+msgstr "11"
+
+#: extensions/system/languages/messages.php:16
+msgid "12"
+msgstr "12"
+
+#: extensions/system/languages/messages.php:17
+msgid "13"
+msgstr "13"
+
+#: extensions/system/languages/messages.php:18
+msgid "14"
+msgstr "14"
+
+#: extensions/system/languages/messages.php:19
+msgid "15"
+msgstr "15"
+
+#: extensions/system/languages/messages.php:20
+msgid "16"
+msgstr "16"
+
+#: extensions/system/languages/messages.php:21
+msgid "17"
+msgstr "17"
+
+#: extensions/system/languages/messages.php:25
+#: extensions/system/src/Widget/Controller/WidgetsController.php:58
+msgid "Widgets"
+msgstr "Джаджи"
+
+#: extensions/system/languages/messages.php:26
+#: extensions/system/src/Menu/Controller/MenuController.php:47
+msgid "Menus"
+msgstr "Менюта"
+
+#: extensions/system/languages/messages.php:27
+#: extensions/system/src/User/Controller/UserController.php:100
+#: extensions/system/src/User/Dashboard/UserWidget.php:23
+msgid "Users"
+msgstr "Потребители"
+
+#: extensions/system/languages/messages.php:30
+msgid "Access"
+msgstr "Достъп"
+
+#: extensions/system/languages/messages.php:33
+msgid "Manage media files"
+msgstr "Управление на мултимедийни файлове"
+
+#: extensions/system/languages/messages.php:34
+msgid "Manage menus"
+msgstr "Управление на менюта"
+
+#: extensions/system/languages/messages.php:35
+msgid "Manage widgets"
+msgstr "Управление на джаджи"
+
+#: extensions/system/languages/messages.php:36
+msgid "Manage themes"
+msgstr "Управление на теми"
+
+#: extensions/system/languages/messages.php:37
+msgid "Manage extensions"
+msgstr "Управление на разширения"
+
+#: extensions/system/languages/messages.php:38
+msgid "Manage url aliases"
+msgstr "Управление на url псевдоними"
+
+#: extensions/system/languages/messages.php:39
+msgid "Apply system updates"
+msgstr "Приложи системни обновления"
+
+#: extensions/system/languages/messages.php:40
+msgid "Access admin area"
+msgstr "Достъп до административната зона"
+
+#: extensions/system/languages/messages.php:41
+msgid "Access system settings"
+msgstr "Достъп до системните настройки"
+
+#: extensions/system/languages/messages.php:42
+msgid "Manage user permissions"
+msgstr "Управление на правата на потребителите"
+
+#: extensions/system/languages/messages.php:43
+msgid "Manage users"
+msgstr "Управление на потребители"
+
+#: extensions/system/languages/messages.php:44
+msgid "Use the site in maintenance mode"
+msgstr "Използвай сайта в режим на поддръжка"
+
+#: extensions/system/languages/messages.php:45
+msgid ""
+"Warning: Give to trusted roles only; this permission has security "
+"implications."
+msgstr "Внимание: Предоставяйте само на доверени лица; това право има влияние върху сигурността."
+
+#: extensions/system/src/Editor/Templating/EditorHelper.php:44
+msgid "Editor not found."
+msgstr "Редакторът не е намерен."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:62
+msgid "Core extensions may not be enabled."
+msgstr "Съществени разширения може би не са разрешени."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:72
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
+msgstr "Не е възможно активирането на разширение.<br>Разширението извика фатална грешка."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:80
+msgid "Unable to enable extension \"%name%\"."
+msgstr "Не е възможно активирането на разширение \"%name%\"."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:91
+msgid "Extension enabled."
+msgstr "Разширението е активно."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:109
+msgid "Core extensions may not be disabled."
+msgstr "Съществени разширения може би не са забранени."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:113
+msgid "Extension \"%name%\" has not been loaded."
+msgstr "Разширение %name% не е заредено."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:120
+msgid "Extension disabled."
+msgstr "Разширението е неактивно."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:138
+msgid "Core extensions may not be uninstalled."
+msgstr "Съществени разширения не може да се премахнат."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:146
+msgid "Unable to uninstall extension \"%name%\"."
+msgstr "Невъзможно е премахването на разширението %name%."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:157
+msgid "Extension uninstalled."
+msgstr "Разширеноето е премахнато."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:174
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:197
+msgid "Invalid extension."
+msgstr "Невалидно разширение."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:203
+#: extensions/system/src/System/Controller/SettingsController.php:104
+#: extensions/system/src/Theme/Controller/ThemesController.php:167
+msgid "Settings saved."
+msgstr "Настройките са записани."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:52
+#: extensions/system/src/Menu/Controller/ItemController.php:98
+#: extensions/system/src/Menu/Controller/ItemController.php:133
+#: extensions/system/src/Menu/Controller/ItemController.php:161
+msgid "Invalid menu."
+msgstr "Невалидно меню."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:58
+msgid "Add Menu Item"
+msgstr "Добави елемент към меню"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:76
+msgid "Invalid menu item."
+msgstr "Невалиден елемент от меню."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:79
+msgid "Edit Menu Item"
+msgstr "Редактирай елемент от меню"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item saved."
+msgstr "Елемент от меню е записано."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item created."
+msgstr "Елемент от меню е създаден."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:119
+msgid "Invalid url."
+msgstr "Невалиден адрес."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:144
+msgid ""
+"{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
+msgstr "{0} Няма изтрити меню елементи.|{1} Изтрито меню елемент.|]1,Inf[ Елементи на менюто са записани."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:58
+msgid "Invalid menu name."
+msgstr "Невалидно име на меню."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:66
+msgid "Invalid menu name. \"%name%\" is already in use."
+msgstr "Невалидно име на меню. %name% вече се използва."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:86
+msgid "Invalid menu id"
+msgstr "Невалиден идентификатор на меню"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:122
+msgid "Menu order updated"
+msgstr "Подредбата на менюто е обновена"
+
+#: extensions/system/src/Menu/Entity/Item.php:92
+#: extensions/system/src/User/Entity/User.php:94
+#: extensions/system/src/Widget/Entity/Widget.php:91
+msgid "Unknown"
+msgstr "Безпонятно"
+
+#: extensions/system/src/Menu/Widget/MenuWidget.php:31
+msgid "Menu Widget"
+msgstr "Меню джаджа"
+
+#: extensions/system/src/System/Controller/AliasController.php:54
+msgid "Add URL Alias"
+msgstr "Добави URL псевдоним"
+
+#: extensions/system/src/System/Controller/AliasController.php:66
+msgid "Invalid alias id."
+msgstr "Невалиден идентификатор на псевдоним."
+
+#: extensions/system/src/System/Controller/AliasController.php:69
+msgid "Edit URL Alias"
+msgstr "Редактирай URL псевдоним"
+
+#: extensions/system/src/System/Controller/AliasController.php:89
+msgid "Invalid alias."
+msgstr "Невалиден псевдоним."
+
+#: extensions/system/src/System/Controller/AliasController.php:93
+msgid "Invalid source."
+msgstr "Невалиден източник."
+
+#: extensions/system/src/System/Controller/AliasController.php:97
+msgid "The alias \"%alias%\" is already in use."
+msgstr "Псевдонима %alias% вече се използва."
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias saved."
+msgstr "Псевдонима е записан."
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias created."
+msgstr "Псевдонима е създаден."
+
+#: extensions/system/src/System/Controller/AliasController.php:122
+msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
+msgstr "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
+
+#: extensions/system/src/System/Controller/DashboardController.php:67
+msgid "Dashboard Settings"
+msgstr "Настройки на табло"
+
+#: extensions/system/src/System/Controller/DashboardController.php:79
+#: extensions/system/src/System/Controller/DashboardController.php:109
+msgid "Invalid widget type."
+msgstr "Невалиден тип на джаджа."
+
+#: extensions/system/src/System/Controller/DashboardController.php:105
+msgid "Invalid widget id."
+msgstr "Невалиден идентификатор на джаджа."
+
+#: extensions/system/src/System/Controller/DashboardController.php:114
+#: extensions/system/src/Widget/Controller/WidgetsController.php:85
+msgid "Edit Widget"
+msgstr "Редактирай джаджа"
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget created."
+msgstr "Джаджата е създадена."
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget saved."
+msgstr "Джаджата е записана."
+
+#: extensions/system/src/System/Controller/DashboardController.php:160
+msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} Няма изтрити джаджи.|{1} Джаджа изтрита|]1,Inf[ Джаджи изтрити"
+
+#: extensions/system/src/System/Controller/DashboardController.php:183
+msgid "Widgets reordered."
+msgstr "Джаджите са преподредени."
+
+#: extensions/system/src/System/Controller/FinderController.php:18
+#: extensions/system/src/System/Controller/FinderController.php:65
+#: extensions/system/src/System/Controller/FinderController.php:95
+#: extensions/system/src/System/Controller/FinderController.php:123
+#: extensions/system/src/System/Controller/FinderController.php:151
+msgid "Invalid path."
+msgstr "Невалиден път."
+
+#: extensions/system/src/System/Controller/FinderController.php:22
+#: extensions/system/src/System/Controller/FinderController.php:69
+#: extensions/system/src/System/Controller/FinderController.php:99
+#: extensions/system/src/System/Controller/FinderController.php:127
+#: extensions/system/src/System/Controller/FinderController.php:155
+msgid "Permission denied."
+msgstr "Достъпа е отказан."
+
+#: extensions/system/src/System/Controller/FinderController.php:61
+#: extensions/system/src/System/Controller/FinderController.php:91
+msgid "Invalid file name."
+msgstr "Невалидно име на файл."
+
+#: extensions/system/src/System/Controller/FinderController.php:76
+msgid "Directory created."
+msgstr "Директорията е създадена."
+
+#: extensions/system/src/System/Controller/FinderController.php:80
+msgid "Unable to create directory."
+msgstr "Създаването на директория е невъзможно."
+
+#: extensions/system/src/System/Controller/FinderController.php:106
+msgid "Renamed."
+msgstr "Преименувано."
+
+#: extensions/system/src/System/Controller/FinderController.php:110
+msgid "Unable to rename."
+msgstr "Преименуването е невъзможно."
+
+#: extensions/system/src/System/Controller/FinderController.php:136
+msgid "Unable to remove."
+msgstr "Премахването е невъзможно."
+
+#: extensions/system/src/System/Controller/FinderController.php:140
+msgid "Removed selected."
+msgstr "Избраните са премахнати."
+
+#: extensions/system/src/System/Controller/FinderController.php:161
+msgid "No files uploaded."
+msgstr "Не бяха качени файлове."
+
+#: extensions/system/src/System/Controller/FinderController.php:167
+msgid "Uploaded file invalid."
+msgstr "Качения файл е невалиден."
+
+#: extensions/system/src/System/Controller/FinderController.php:173
+msgid "Upload complete."
+msgstr "Качването приключи."
+
+#: extensions/system/src/System/Controller/FinderController.php:177
+msgid "Unable to upload."
+msgstr "Качването е невъзможно."
+
+#: extensions/system/src/System/Controller/FinderController.php:199
+msgid "n/a"
+msgstr "n/a"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d Bytes"
+msgstr "%d байта"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  KB"
+msgstr "%d KB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  MB"
+msgstr "%d  MB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  GB"
+msgstr "%d  GB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d TB"
+msgstr "%d TB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d PB"
+msgstr "%d PB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d EB"
+msgstr "%d EB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d ZB"
+msgstr "%d ZB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d YB"
+msgstr "%d YB"
+
+#: extensions/system/src/System/Controller/LinkController.php:56
+msgid "Url"
+msgstr "Url"
+
+#: extensions/system/src/System/Controller/MigrationController.php:29
+msgid "Your Pagekit database has been updated successfully."
+msgstr "Вашата Pagekit база данни беше обновена успешно."
+
+#: extensions/system/src/System/Controller/MigrationController.php:31
+msgid "Your Pagekit database is already up-to-date!"
+msgstr "Вашата Pagekit база данни е вече последната възможна."
+
+#: extensions/system/src/System/Controller/PackageController.php:47
+msgid "No file uploaded."
+msgstr "Няма качен файл."
+
+#: extensions/system/src/System/Controller/PackageController.php:53
+msgid "Invalid package type."
+msgstr "Невалиден тип пакет."
+
+#: extensions/system/src/System/Controller/PackageController.php:57
+#: extensions/system/src/System/Controller/PackageController.php:161
+msgid "Core extensions may not be installed."
+msgstr "Съществени разширения не може да се инсталират."
+
+#: extensions/system/src/System/Controller/PackageController.php:111
+msgid "Path not found."
+msgstr "Пътят не е намерен."
+
+#: extensions/system/src/System/Controller/PackageController.php:124
+msgid "Package \"%name%\" installed."
+msgstr "Пакет  \"%name%\" беше инсталиран."
+
+#: extensions/system/src/System/Controller/PackageController.php:127
+#: extensions/system/src/System/Controller/UpdateController.php:67
+msgid "Package extraction failed."
+msgstr "Разширението на пакет пропадна."
+
+#: extensions/system/src/System/Controller/PackageController.php:129
+#: extensions/system/src/System/Controller/UpdateController.php:69
+msgid "Package checksum verification failed."
+msgstr "Сверочната сума на пакета пропадна."
+
+#: extensions/system/src/System/Controller/PackageController.php:131
+#: extensions/system/src/System/Controller/UpdateController.php:71
+msgid "Invalid API key."
+msgstr "Невалиден API ключ."
+
+#: extensions/system/src/System/Controller/PackageController.php:133
+#: extensions/system/src/System/Controller/UpdateController.php:73
+msgid "Package download failed."
+msgstr "Свалянето на пакет пропадна."
+
+#: extensions/system/src/System/Controller/PackageController.php:135
+#: extensions/system/src/System/Controller/UpdateController.php:75
+msgid "Path is not writable."
+msgstr "Не е възможно писането на тази пътека."
+
+#: extensions/system/src/System/Controller/PackageController.php:209
+msgid "Can't load json file from package."
+msgstr "Не може да бъде зареден json файл от пакет."
+
+#: extensions/system/src/System/Controller/SettingsController.php:127
+msgid "Connection established!"
+msgstr "Връзката установена!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:131
+msgid "Connection not established! (%s)"
+msgstr "Връзката не е установена! (%s)"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Test email!"
+msgstr "Тестови email!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Testemail"
+msgstr "Testemail"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail successfully sent!"
+msgstr "Писмото е изпратено успешно!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail delivery failed!"
+msgstr "Изпращането на писмо се провали!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:165
+msgid "Mail delivery failed! (%s)"
+msgstr "Изпращането на писмо се прави! (%s)"
+
+#: extensions/system/src/System/Controller/SystemController.php:79
+msgid "Order saved."
+msgstr "Поръчката е записана."
+
+#: extensions/system/src/System/Controller/SystemController.php:104
+msgid "System Information"
+msgstr "Системна информация"
+
+#: extensions/system/src/System/Controller/SystemController.php:146
+msgid "Cache cleared!"
+msgstr "Кешът е изчистен!"
+
+#: extensions/system/src/System/Controller/UpdateController.php:53
+msgid "Unable to find update."
+msgstr "Обновление не е намерено."
+
+#: extensions/system/src/System/Controller/UpdateController.php:64
+msgid "Copying files..."
+msgstr "Копиране на файлове..."
+
+#: extensions/system/src/System/Controller/UpdateController.php:91
+#: extensions/system/src/System/Controller/UpdateController.php:121
+msgid "You may not call this step directly."
+msgstr "Не може да обърнете към тази стъпка директно."
+
+#: extensions/system/src/System/Controller/UpdateController.php:103
+msgid "Updating database..."
+msgstr "Обновяне на база данни..."
+
+#: extensions/system/src/System/Controller/UpdateController.php:127
+msgid "Installed successfully."
+msgstr "Инсталирано успешно."
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:23
+msgid "Feed"
+msgstr "Feed"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:32
+msgid "Feed Widget"
+msgstr "Feed джаджа"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:35
+msgid "No title given."
+msgstr "Няма зададено заглавие."
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:32
+msgid "Weather Widget"
+msgstr "Джаджа за времето"
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:35
+msgid "No location chosen."
+msgstr "Не е избрано местонахождение."
+
+#: extensions/system/src/System/Event/FrontpageListener.php:18
+msgid "No Frontpage assigned."
+msgstr "Не е избрана начална страница."
+
+#: extensions/system/src/System/Event/SystemListener.php:134
+#: extensions/system/src/SystemExtension.php:127
+msgid "DATE_SHORT"
+msgstr "DATE_SHORT"
+
+#: extensions/system/src/System/Event/SystemListener.php:135
+#: extensions/system/src/SystemExtension.php:126
+msgid "DATE_MEDIUM"
+msgstr "DATE_MEDIUM"
+
+#: extensions/system/src/System/Event/SystemListener.php:136
+#: extensions/system/src/SystemExtension.php:125
+msgid "DATE_LONG"
+msgstr "DATE_LONG"
+
+#: extensions/system/src/System/Event/SystemListener.php:137
+#: extensions/system/src/SystemExtension.php:124
+msgid "DATE_FULL"
+msgstr "DATE_FULL"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Mon"
+msgstr "Пон"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Tue"
+msgstr "Вто"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Wed"
+msgstr "Сря"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Thu"
+msgstr "Четв"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Fri"
+msgstr "Пет"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sat"
+msgstr "Съб"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sun"
+msgstr "Нед"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Monday"
+msgstr "Понеделник"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Wednesday"
+msgstr "Сряда"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Thursday"
+msgstr "Четвъртък"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Friday"
+msgstr "Петък"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Saturday"
+msgstr "Събота"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Sunday"
+msgstr "Неделя"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jan"
+msgstr "Яну"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Feb"
+msgstr "Феб"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Mar"
+msgstr "Март"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Apr"
+msgstr "Апр"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "May"
+msgstr "Май"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jun"
+msgstr "Юни"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jul"
+msgstr "Юли"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Aug"
+msgstr "Авг"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Sep"
+msgstr "Сеп"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Oct"
+msgstr "Окт"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Nov"
+msgstr "Ное"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Dec"
+msgstr "Дек"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "January"
+msgstr "Януари"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "February"
+msgstr "Февруари"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "March"
+msgstr "Март"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "April"
+msgstr "Април"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "June"
+msgstr "Юни"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "July"
+msgstr "Юли"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "August"
+msgstr "Август"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "September"
+msgstr "Септември"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "October"
+msgstr "Октомври"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "November"
+msgstr "Ноември"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "December"
+msgstr "Декември"
+
+#: extensions/system/src/System/Exception/ExceptionController.php:30
+msgid "Invalid CSRF token."
+msgstr "Невалиден CSRF токен."
+
+#: extensions/system/src/System/Exception/ExceptionController.php:33
+msgid "Sorry, the page you are looking for could not be found."
+msgstr "Съжаляваме, но страницата, която се опитвате да достъпите, не може да бъде намерена."
+
+#: extensions/system/src/System/Exception/ExceptionController.php:39
+msgid "Whoops, looks like something went wrong."
+msgstr "Оп-ааа, нещо лошо се е случило!"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:20
+msgid "Ascension Island"
+msgstr "Остров Възнесение"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:21
+msgid "Andorra"
+msgstr "Андора"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:22
+msgid "United Arab Emirates"
+msgstr "Обединени арабски емирства"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:23
+msgid "Afghanistan"
+msgstr "Афганистан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:24
+msgid "Antigua and Barbuda"
+msgstr "Антигуа и Барбуда"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:25
+msgid "Anguilla"
+msgstr "Ангуила"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:26
+msgid "Albania"
+msgstr "Албания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:27
+msgid "Armenia"
+msgstr "Армения"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:28
+msgid "Netherlands Antilles"
+msgstr "Нидерландски Атили"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:29
+msgid "Angola"
+msgstr "Ангола"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:30
+msgid "Antarctica"
+msgstr "Антарктика"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:31
+msgid "Argentina"
+msgstr "Аржентина"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:32
+msgid "American Samoa"
+msgstr "Американска Самоа"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:33
+msgid "Austria"
+msgstr "Австрия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:34
+msgid "Australia"
+msgstr "Австралия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:35
+msgid "Aruba"
+msgstr "Аруба"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:36
+msgid "Åland Islands"
+msgstr "Оландски острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:37
+msgid "Azerbaijan"
+msgstr "Азербайджан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:38
+msgid "Bosnia and Herzegovina"
+msgstr "Босня и Херцеговина"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:39
+msgid "Barbados"
+msgstr "Барбадос"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:40
+msgid "Bangladesh"
+msgstr "Бангладеш"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:41
+msgid "Belgium"
+msgstr "Белгия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:42
+msgid "Burkina Faso"
+msgstr "Буркина Фасо"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:43
+msgid "Bulgaria"
+msgstr "България"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:44
+msgid "Bahrain"
+msgstr "Бахрейн"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:45
+msgid "Burundi"
+msgstr "Бурунди"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:46
+msgid "Benin"
+msgstr "Бенин"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:47
+msgid "Saint Barthélemy"
+msgstr "Сен Бартелми"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:48
+msgid "Bermuda"
+msgstr "Бермуда"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:49
+msgid "Brunei"
+msgstr "Бруней"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:50
+msgid "Bolivia"
+msgstr "Боливия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:51
+msgid "Caribbean Netherlands"
+msgstr "Недерландски Кариби"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:52
+msgid "Brazil"
+msgstr "Бразилия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:53
+msgid "Bahamas"
+msgstr "Бахама"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:54
+msgid "Bhutan"
+msgstr "Бутан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:55
+msgid "Bouvet Island"
+msgstr "Остров Буве"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:56
+msgid "Botswana"
+msgstr "Ботсвана"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:57
+msgid "Belarus"
+msgstr "Беларус"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:58
+msgid "Belize"
+msgstr "Белизе"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:59
+msgid "Canada"
+msgstr "Канада"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:60
+msgid "Cocos [Keeling] Islands"
+msgstr "Кокосови [] острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:61
+msgid "Congo - Kinshasa"
+msgstr "Конго"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:62
+msgid "Central African Republic"
+msgstr "Централна африканска република"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:63
+msgid "Congo - Brazzaville"
+msgstr "Конго - Бразавил"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:64
+msgid "Switzerland"
+msgstr "Швейцария"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:65
+msgid "Côte d’Ivoire"
+msgstr "Бряг на слоновата кост"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:66
+msgid "Cook Islands"
+msgstr "Островите Кук"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:67
+msgid "Chile"
+msgstr "Чили"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:68
+msgid "Cameroon"
+msgstr "Камерун"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:69
+msgid "China"
+msgstr "Китай"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:70
+msgid "Colombia"
+msgstr "Колумбия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:71
+msgid "Clipperton Island"
+msgstr "Клипертон"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:72
+msgid "Costa Rica"
+msgstr "Коста Рика"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:73
+msgid "Cuba"
+msgstr "Куба"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:74
+msgid "Cape Verde"
+msgstr "Кабо Верде"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:75
+msgid "Curaçao"
+msgstr "Кюрасао"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:76
+msgid "Christmas Island"
+msgstr "Остров Рождество"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:77
+msgid "Cyprus"
+msgstr "Кипър"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:78
+msgid "Czech Republic"
+msgstr "Чехия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:79
+msgid "Germany"
+msgstr "Германия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:80
+msgid "Diego Garcia"
+msgstr "Диего Гарсия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:81
+msgid "Djibouti"
+msgstr "Джибути"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:82
+msgid "Denmark"
+msgstr "Дания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:83
+msgid "Dominica"
+msgstr "Доминикана"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:84
+msgid "Dominican Republic"
+msgstr "Доминиканска република"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:85
+msgid "Algeria"
+msgstr "Алжир"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:86
+msgid "Ceuta and Melilla"
+msgstr "Сеута и Мелиля"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:87
+msgid "Ecuador"
+msgstr "Еквадор"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:88
+msgid "Estonia"
+msgstr "Естония"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:89
+msgid "Egypt"
+msgstr "Египет"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:90
+msgid "Western Sahara"
+msgstr "Западна Сахара"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:91
+msgid "Eritrea"
+msgstr "Еритея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:92
+msgid "Spain"
+msgstr "Испания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:93
+msgid "Ethiopia"
+msgstr "Етиопия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:94
+msgid "Finland"
+msgstr "Финландия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:95
+msgid "Fiji"
+msgstr "Фиджи"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:96
+msgid "Falkland Islands"
+msgstr "Фолкландски острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:97
+msgid "Micronesia"
+msgstr "Микронезия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:98
+msgid "Faroe Islands"
+msgstr "Фароеви острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:99
+msgid "France"
+msgstr "Франция"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:100
+msgid "Gabon"
+msgstr "Габон"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:101
+msgid "United Kingdom"
+msgstr "Обединено кралство Великобритания и Северна Ирландия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:102
+msgid "Grenada"
+msgstr "Гренада"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:103
+msgid "Georgia"
+msgstr "Грузия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:104
+msgid "French Guiana"
+msgstr "Френска Гвинея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:105
+msgid "Guernsey"
+msgstr "Гърнси"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:106
+msgid "Ghana"
+msgstr "Гана"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:107
+msgid "Gibraltar"
+msgstr "Гибралтар"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:108
+msgid "Greenland"
+msgstr "Грийнланд"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:109
+msgid "Gambia"
+msgstr "Гамбия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:110
+msgid "Guinea"
+msgstr "Гвинея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:111
+msgid "Guadeloupe"
+msgstr "Гваделупа"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:112
+msgid "Equatorial Guinea"
+msgstr "Екваториална Гвинея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:113
+msgid "Greece"
+msgstr "Гърция"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:114
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Южна Джорджия и Южни Сандвичеви острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:115
+msgid "Guatemala"
+msgstr "Гватемала"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:116
+msgid "Guam"
+msgstr "Гуам"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:117
+msgid "Guinea-Bissau"
+msgstr "Гвинея-Бисау"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:118
+msgid "Guyana"
+msgstr "Гвиана"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:119
+msgid "Hong Kong SAR China"
+msgstr "Хонкконг"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:120
+msgid "Heard Island and McDonald Islands"
+msgstr "Островите Хърд и Макдоналд"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:121
+msgid "Honduras"
+msgstr "Хондурас"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:122
+msgid "Croatia"
+msgstr "Хърватска"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:123
+msgid "Haiti"
+msgstr "Хаити"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:124
+msgid "Hungary"
+msgstr "Унгария"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:125
+msgid "Canary Islands"
+msgstr "Канарски острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:126
+msgid "Indonesia"
+msgstr "Индонезия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:127
+msgid "Ireland"
+msgstr "Ирландия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:128
+msgid "Israel"
+msgstr "Израел"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:129
+msgid "Isle of Man"
+msgstr "Остров Ман"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:130
+msgid "India"
+msgstr "Индия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:131
+msgid "British Indian Ocean Territory"
+msgstr "Британска индоокеанска територия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:132
+msgid "Iraq"
+msgstr "Ирак"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:133
+msgid "Iran"
+msgstr "Иран"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:134
+msgid "Iceland"
+msgstr "Исландия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:135
+msgid "Italy"
+msgstr "Италия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:136
+msgid "Jersey"
+msgstr "Джърси"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:137
+msgid "Jamaica"
+msgstr "Ямайка"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:138
+msgid "Jordan"
+msgstr "Йордания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:139
+msgid "Japan"
+msgstr "Япония"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:140
+msgid "Kenya"
+msgstr "Кения"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:141
+msgid "Kyrgyzstan"
+msgstr "Киргизстан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:142
+msgid "Cambodia"
+msgstr "Камбоджа"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:143
+msgid "Kiribati"
+msgstr "Кирибати"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:144
+msgid "Comoros"
+msgstr "Коморос"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:145
+msgid "Saint Kitts and Nevis"
+msgstr "Сейнт Китс и Невис"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:146
+msgid "North Korea"
+msgstr "Северна Корея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:147
+msgid "South Korea"
+msgstr "Южна Корея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:148
+msgid "Kuwait"
+msgstr "Кувейт"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:149
+msgid "Cayman Islands"
+msgstr "Каймански острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:150
+msgid "Kazakhstan"
+msgstr "Казахстан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:151
+msgid "Laos"
+msgstr "Лаос"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:152
+msgid "Lebanon"
+msgstr "Ливан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:153
+msgid "Saint Lucia"
+msgstr "Санта Лучия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:154
+msgid "Liechtenstein"
+msgstr "Лихтенщайн"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:155
+msgid "Sri Lanka"
+msgstr "Шри Ланка"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:156
+msgid "Liberia"
+msgstr "Либерия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:157
+msgid "Lesotho"
+msgstr "Лесото"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:158
+msgid "Lithuania"
+msgstr "Литва"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:159
+msgid "Luxembourg"
+msgstr "Люксенбург"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:160
+msgid "Latvia"
+msgstr "Латвия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:161
+msgid "Libya"
+msgstr "Либия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:162
+msgid "Morocco"
+msgstr "Мароко"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:163
+msgid "Monaco"
+msgstr "Монако"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:164
+msgid "Moldova"
+msgstr "Молдова"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:165
+msgid "Montenegro"
+msgstr "Черна Гора"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:166
+msgid "Saint Martin"
+msgstr "Свети Мартин"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:167
+msgid "Madagascar"
+msgstr "Мадагаскар"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:168
+msgid "Marshall Islands"
+msgstr "Маршалови острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:169
+msgid "Macedonia"
+msgstr "Македония"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:170
+msgid "Mali"
+msgstr "Мали"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:171
+msgid "Myanmar [Burma]"
+msgstr "Мианмар [Бурма]"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:172
+msgid "Mongolia"
+msgstr "Монголия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:173
+msgid "Macau SAR China"
+msgstr "Макау"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:174
+msgid "Northern Mariana Islands"
+msgstr "Северни Мариански острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:175
+msgid "Martinique"
+msgstr "Мартиника"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:176
+msgid "Mauritania"
+msgstr "Мавритания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:177
+msgid "Montserrat"
+msgstr "Монсерат"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:178
+msgid "Malta"
+msgstr "Малта"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:179
+msgid "Mauritius"
+msgstr "Мавриций"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:180
+msgid "Maldives"
+msgstr "Малдиви"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:181
+msgid "Malawi"
+msgstr "Малави"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:182
+msgid "Mexico"
+msgstr "Мексико"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:183
+msgid "Malaysia"
+msgstr "Малайзия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:184
+msgid "Mozambique"
+msgstr "Мозамбик"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:185
+msgid "Namibia"
+msgstr "Намибия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:186
+msgid "New Caledonia"
+msgstr "Нова Каледония"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:187
+msgid "Niger"
+msgstr "Нигер"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:188
+msgid "Norfolk Island"
+msgstr "Остров Норфолк"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:189
+msgid "Nigeria"
+msgstr "Нигерия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:190
+msgid "Nicaragua"
+msgstr "Никарагуа"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:191
+msgid "Netherlands"
+msgstr "Холандия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:192
+msgid "Norway"
+msgstr "Норвегия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:193
+msgid "Nepal"
+msgstr "Непал"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:194
+msgid "Nauru"
+msgstr "Науру"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:195
+msgid "Niue"
+msgstr "Ниуе"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:196
+msgid "New Zealand"
+msgstr "Нова Зеландия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:197
+msgid "Oman"
+msgstr "Оман"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:198
+msgid "Panama"
+msgstr "Панама"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:199
+msgid "Peru"
+msgstr "Перу"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:200
+msgid "French Polynesia"
+msgstr "Френска Полинезия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:201
+msgid "Papua New Guinea"
+msgstr "Папуа Нова Гвинея"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:202
+msgid "Philippines"
+msgstr "Филипини"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:203
+msgid "Pakistan"
+msgstr "Пакистан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:204
+msgid "Poland"
+msgstr "Полша"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:205
+msgid "Saint Pierre and Miquelon"
+msgstr "Сен Пиер и Микелон"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:206
+msgid "Pitcairn Islands"
+msgstr "Питкерн"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:207
+msgid "Puerto Rico"
+msgstr "Пуерто Рико"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:208
+msgid "Palestinian Territories"
+msgstr "Палестина"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:209
+msgid "Portugal"
+msgstr "Португалия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:210
+msgid "Palau"
+msgstr "Палау"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:211
+msgid "Paraguay"
+msgstr "Парагвай"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:212
+msgid "Qatar"
+msgstr "Катар"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:213
+msgid "Outlying Oceania"
+msgstr "Океания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:214
+msgid "Réunion"
+msgstr "Реюнион"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:215
+msgid "Romania"
+msgstr "Румъния"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:216
+msgid "Serbia"
+msgstr "Сърбия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:217
+msgid "Russia"
+msgstr "Русия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:218
+msgid "Rwanda"
+msgstr "Рванда"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:219
+msgid "Saudi Arabia"
+msgstr "Саудитска Арабия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:220
+msgid "Solomon Islands"
+msgstr "Соломонови острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:221
+msgid "Seychelles"
+msgstr "Сейшели"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:222
+msgid "Sudan"
+msgstr "Судан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:223
+msgid "Sweden"
+msgstr "Швеция"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:224
+msgid "Singapore"
+msgstr "Сингапур"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:225
+msgid "Saint Helena"
+msgstr "Остров Света Елена"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:226
+msgid "Slovenia"
+msgstr "Словения"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:227
+msgid "Svalbard and Jan Mayen"
+msgstr "Свалбард и Ян Майен"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:228
+msgid "Slovakia"
+msgstr "Словакия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:229
+msgid "Sierra Leone"
+msgstr "Сиера Леон"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:230
+msgid "San Marino"
+msgstr "Сан Марино"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:231
+msgid "Senegal"
+msgstr "Сенегал"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:232
+msgid "Somalia"
+msgstr "Сомалия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:233
+msgid "Suriname"
+msgstr "Суринам"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:234
+msgid "South Sudan"
+msgstr "Южен Судан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:235
+msgid "São Tomé and Príncipe"
+msgstr "Сао Томе и Принсипи"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:236
+msgid "El Salvador"
+msgstr "Ел Салвадор"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:237
+msgid "Sint Maarten"
+msgstr "Синт Мартин"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:238
+msgid "Syria"
+msgstr "Сирия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:239
+msgid "Swaziland"
+msgstr "Свазиленд"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:240
+msgid "Tristan da Cunha"
+msgstr "Тристан да Куня"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:241
+msgid "Turks and Caicos Islands"
+msgstr "Търкс и Кайкос"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:242
+msgid "Chad"
+msgstr "Чад"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:243
+msgid "French Southern Territories"
+msgstr "Френски южни територии"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:244
+msgid "Togo"
+msgstr "Того"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:245
+msgid "Thailand"
+msgstr "Тайланд"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:246
+msgid "Tajikistan"
+msgstr "Таджикистан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:247
+msgid "Tokelau"
+msgstr "Токелау"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:248
+msgid "Timor-Leste"
+msgstr "Тимор-Лесте"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:249
+msgid "Turkmenistan"
+msgstr "Туркменистан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:250
+msgid "Tunisia"
+msgstr "Тунис"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:251
+msgid "Tonga"
+msgstr "Тонга"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:252
+msgid "Turkey"
+msgstr "Турция"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:253
+msgid "Trinidad and Tobago"
+msgstr "Тринидад и Тобаго"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:254
+msgid "Tuvalu"
+msgstr "Тувалу"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:255
+msgid "Taiwan"
+msgstr "Тайван"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:256
+msgid "Tanzania"
+msgstr "Танзания"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:257
+msgid "Ukraine"
+msgstr "Украйна"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:258
+msgid "Uganda"
+msgstr "Уганда"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:259
+msgid "U.S. Outlying Islands"
+msgstr "Малки далечни острови на САЩ"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:260
+msgid "United States"
+msgstr "Съединени американски щати"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:261
+msgid "Uruguay"
+msgstr "Уругвай"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:262
+msgid "Uzbekistan"
+msgstr "Узбекистан"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:263
+msgid "Vatican City"
+msgstr "Ватикана"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:264
+msgid "Saint Vincent and the Grenadines"
+msgstr "Сейнт Винсент и Гренадини"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:265
+msgid "Venezuela"
+msgstr "Венецуела"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:266
+msgid "British Virgin Islands"
+msgstr "Британски Вирджински острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:267
+msgid "U.S. Virgin Islands"
+msgstr "Американски Вирджински острови"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:268
+msgid "Vietnam"
+msgstr "Виетнам"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:269
+msgid "Vanuatu"
+msgstr "Вануату"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:270
+msgid "Wallis and Futuna"
+msgstr "Уолис и Футуна"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:271
+msgid "Samoa"
+msgstr "Самоа"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:272
+msgid "Kosovo"
+msgstr "Косово"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:273
+msgid "Yemen"
+msgstr "Йемен"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:274
+msgid "Mayotte"
+msgstr "Майоте"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:275
+msgid "South Africa"
+msgstr "Южна Африка"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:276
+msgid "Zambia"
+msgstr "Замбия"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:277
+msgid "Zimbabwe"
+msgstr "Зимбабве"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:17
+msgid "Afrikaans"
+msgstr "Африкански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:18
+msgid "Amharic"
+msgstr "Амхарски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:19
+msgid "Arabic"
+msgstr "Арабски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:20
+msgid "Asturian"
+msgstr "Астурски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:21
+msgid "Azerbaijani"
+msgstr "Азербайджански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:22
+msgid "Belarusian"
+msgstr "Беларуски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:23
+msgid "Bulgarian"
+msgstr "Български"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:24
+msgid "Bengali"
+msgstr "Бенгалски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:25
+msgid "Tibetan"
+msgstr "Тибетски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:26
+msgid "Bosnian"
+msgstr "Босненски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:27
+msgid "Catalan"
+msgstr "Каталунски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:28
+msgid "Czech"
+msgstr "Чешки"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:29
+msgid "Welsh"
+msgstr "Уелски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:30
+msgid "Danish"
+msgstr "Датски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:31
+msgid "German"
+msgstr "Германски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:32
+msgid "Dzongkha"
+msgstr "Дзонгкха"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:33
+msgid "Greek"
+msgstr "Гръцки"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:34
+msgid "English"
+msgstr "Английски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:35
+msgid "Esperanto"
+msgstr "Есперанто"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:36
+msgid "Spanish"
+msgstr "Испански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:37
+msgid "Estonian"
+msgstr "Естонски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:38
+msgid "Basque"
+msgstr "Баски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:39
+msgid "Persian, Farsi"
+msgstr "Фарси"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:40
+msgid "Finnish"
+msgstr "Фински"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:41
+msgid "Filipino"
+msgstr "Филипински"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:42
+msgid "Faeroese"
+msgstr "Фарьорски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:43
+msgid "French"
+msgstr "Френски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:44
+msgid "Frisian, Western"
+msgstr "Фризи, Западен"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:45
+msgid "Irish"
+msgstr "Ирландски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:46
+msgid "Scots Gaelic"
+msgstr "Шотландски келтски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:47
+msgid "Galician"
+msgstr "Келтски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:48
+msgid "Swiss German"
+msgstr "Швейцарски немски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:49
+msgid "Gujarati"
+msgstr "Гуджаратски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:50
+msgid "Hebrew"
+msgstr "Иврит"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:51
+msgid "Hindi"
+msgstr "Хинди"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:52
+msgid "Croatian"
+msgstr "Хърватски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:53
+msgid "Haitian Creole"
+msgstr "Хаитянски креолски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:54
+msgid "Hungarian"
+msgstr "Унгарски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:55
+msgid "Armenian"
+msgstr "Арменски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:56
+msgid "Indonesian"
+msgstr "Индонезийски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:57
+msgid "Icelandic"
+msgstr "Исландски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:58
+msgid "Italian"
+msgstr "Италиански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:59
+msgid "Japanese"
+msgstr "Японски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:60
+msgid "Javanese"
+msgstr "Явански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:61
+msgid "Georgian"
+msgstr "Грузински"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:62
+msgid "Kazakh"
+msgstr "Казахи"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:63
+msgid "Khmer"
+msgstr "Кхмерски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:64
+msgid "Kannada"
+msgstr "Канадигас"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:65
+msgid "Korean"
+msgstr "Корейски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:66
+msgid "Kurdish"
+msgstr "Кюрдски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:67
+msgid "Kyrgyz"
+msgstr "Киргизки"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:68
+msgid "Lao"
+msgstr "Лао"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:69
+msgid "Lithuanian"
+msgstr "Литовски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:70
+msgid "Latvian"
+msgstr "Латвийски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:71
+msgid "Malagasy"
+msgstr "Малагаси"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:72
+msgid "Macedonian"
+msgstr "Македонски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:73
+msgid "Malayalam"
+msgstr "Малайзийски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:74
+msgid "Mongolian"
+msgstr "Монголски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:75
+msgid "Marathi"
+msgstr "Марати"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:76
+msgid "Bahasa Malaysia"
+msgstr "Малайзийски [Бахаса]"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:77
+msgid "Burmese"
+msgstr "Бирмански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:78
+msgid "Norwegian Bokmål"
+msgstr "Норвежки Букмол"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:79
+msgid "Nepali"
+msgstr "Непалски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:80
+msgid "Dutch"
+msgstr "Нидерландски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:81
+msgid "Norwegian Nynorsk"
+msgstr "Норвежки Нюношк"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:82
+msgid "Occitan"
+msgstr "Окитански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:83
+msgid "Punjabi"
+msgstr "Пунджаби"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:84
+msgid "Polish"
+msgstr "Полски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:85
+msgid "Portuguese, Brazil"
+msgstr "Португалски, Бразилия"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:86
+msgid "Portuguese, Portugal"
+msgstr "Португалски, Португалия"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:87
+msgid "Romanian"
+msgstr "Румънски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:88
+msgid "Russian"
+msgstr "Руски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:89
+msgid "Scots"
+msgstr "Шотландски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:90
+msgid "Northern Sami"
+msgstr "Северен Сами"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:91
+msgid "Sinhala"
+msgstr "Синхала"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:92
+msgid "Slovak"
+msgstr "Словашки"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:93
+msgid "Slovenian"
+msgstr "Словенски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:94
+msgid "Albanian"
+msgstr "Албански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:95
+msgid "Serbian"
+msgstr "Сръбски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:96
+msgid "Swedish"
+msgstr "Шведски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:97
+msgid "Swahili"
+msgstr "Суахили"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:98
+msgid "Tamil"
+msgstr "Тамил"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:99
+msgid "Tamil, Sri Lanka"
+msgstr "Тамил, Шри Ланка"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:100
+msgid "Telugu"
+msgstr "Телугу"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:101
+msgid "Thai"
+msgstr "Тайвански"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:102
+msgid "Turkish"
+msgstr "Турски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:103
+msgid "Tuvan"
+msgstr "Туван"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:104
+msgid "Uyghur"
+msgstr "Уйгурски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:105
+msgid "Ukrainian"
+msgstr "Украински"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:106
+msgid "Urdu"
+msgstr "Урду"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:107
+msgid "Vietnamese"
+msgstr "Виетнамски"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:108
+msgid "Lolspeak"
+msgstr "Маймуница"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:109
+msgid "Chinese, Simplified"
+msgstr "Китайски, Опростен"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:110
+msgid "Chinese, Traditional"
+msgstr "Китайски, Традиционен"
+
+#: extensions/system/src/System/Link/System.php:48
+msgid "Frontpage"
+msgstr "Начална страница"
+
+#: extensions/system/src/System/Link/System.php:49
+msgid "User Login"
+msgstr "Потребителски вход"
+
+#: extensions/system/src/System/Link/System.php:50
+#: extensions/system/src/User/Controller/RegistrationController.php:46
+msgid "User Registration"
+msgstr "Потребителска регистрация"
+
+#: extensions/system/src/System/Link/System.php:51
+msgid "User Profile"
+msgstr "Потребителски профил"
+
+#: extensions/system/src/System/Link/System.php:52
+msgid "User Password Reset"
+msgstr "Смяна на парола"
+
+#: extensions/system/src/System/Widget/TextWidget.php:23
+msgid "Text"
+msgstr "Текст"
+
+#: extensions/system/src/System/Widget/TextWidget.php:31
+msgid "Text Widget"
+msgstr "Джаджа за текст"
+
+#: extensions/system/src/SystemExtension.php:128
+msgid "DATE_INTERVAL"
+msgstr "DATE_INTERVAL"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:84
+msgid "Unable to activate theme.<br>The theme triggered a fatal error."
+msgstr "Не е възможно да се активира тази тема.<br> Темата извика фатална грешка."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:90
+msgid "Unable to enable theme \"%name%\"."
+msgstr "Не е възможно активирането на темата \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:98
+msgid "Theme enabled."
+msgstr "Темата е активна."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:115
+msgid "Unable to uninstall theme \"%name%\"."
+msgstr "Не е възможно премахването на тема \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:121
+msgid "Theme uninstalled."
+msgstr "Темата е премахната."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:137
+#: extensions/system/src/Theme/Controller/ThemesController.php:161
+msgid "Invalid theme."
+msgstr "Невалидна тема."
+
+#: extensions/system/src/Theme/Event/WidgetListener.php:30
+msgid "Theme"
+msgstr "Тема"
+
+#: extensions/system/src/User/Controller/AuthController.php:68
+#: extensions/system/src/User/Controller/RegistrationController.php:66
+#: extensions/system/src/User/Controller/ResetPasswordController.php:61
+#: extensions/system/src/User/Controller/ResetPasswordController.php:130
+msgid "Invalid token. Please try again."
+msgstr "Невалиден токен. Моля, опитайте пак."
+
+#: extensions/system/src/User/Controller/AuthController.php:76
+msgid "Invalid username or password."
+msgstr "Невалидно потребителско име или парола."
+
+#: extensions/system/src/User/Controller/PermissionController.php:48
+msgid "Permissions saved!"
+msgstr "Правата са записани."
+
+#: extensions/system/src/User/Controller/ProfileController.php:66
+msgid "Name is invalid."
+msgstr "Невалидно име."
+
+#: extensions/system/src/User/Controller/ProfileController.php:70
+#: extensions/system/src/User/Controller/RegistrationController.php:87
+#: extensions/system/src/User/Controller/UserController.php:165
+msgid "Email is invalid."
+msgstr "Невалиден email."
+
+#: extensions/system/src/User/Controller/ProfileController.php:74
+#: extensions/system/src/User/Controller/RegistrationController.php:95
+#: extensions/system/src/User/Controller/UserController.php:177
+msgid "Email not available."
+msgstr "Email не е достъпен."
+
+#: extensions/system/src/User/Controller/ProfileController.php:80
+msgid "Invalid Password."
+msgstr "Невалидна парола."
+
+#: extensions/system/src/User/Controller/ProfileController.php:84
+msgid "New Password is invalid."
+msgstr "Невалидна нова парола."
+
+#: extensions/system/src/User/Controller/ProfileController.php:103
+msgid "Profile updated."
+msgstr "Профила е обновен."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:75
+msgid "Name required."
+msgstr "Името е задължително."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:79
+#: extensions/system/src/User/Controller/UserController.php:144
+msgid "Password required."
+msgstr "Паролата е задължителна."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:83
+#: extensions/system/src/User/Controller/UserController.php:161
+msgid "Username is invalid."
+msgstr "Невалидно потребителско име."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:91
+#: extensions/system/src/User/Controller/UserController.php:171
+msgid "Username not available."
+msgstr "Потребителското име не е достъпно."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:99
+msgid "Signup failed"
+msgstr "Провалена регистрация"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:134
+msgid ""
+"Your user account has been created. Complete your registration, by clicking "
+"the link provided in the mail that has been sent to you."
+msgstr "Вашият акаунт беше създаден. Довършете вашата регистрация като натиснете връзката в писмото, което ви беше изпратено."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:139
+msgid ""
+"Your user account has been created and is pending approval by the site "
+"administrator."
+msgstr "Вашият акаунт беше създаден и чака одобрението на администратор."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:144
+msgid "Your user account has been created."
+msgstr "Вашият акаунт беше създаден."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:180
+#: extensions/system/src/User/Controller/ResetPasswordController.php:116
+msgid "Invalid key."
+msgstr "Невалиден ключ."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:189
+msgid ""
+"Your email has been verified. Once an administrator approves your account, "
+"you will be notified by email."
+msgstr "Вашият email беше потвърден. Веднага след като администратор одобро вашият акаунт, ще получите email."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:199
+msgid ""
+"The user's account has been activated and the user has been notified about "
+"it."
+msgstr "Потребителският акаунт беше активиран и потребителя беше уведомен за това."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:201
+msgid "Your account has been activated."
+msgstr "Вашият акаунт е активиран."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:216
+msgid "Welcome to %site%!"
+msgstr "Добре дошли в %site%!"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:229
+msgid "Activate your %site% account"
+msgstr "Активирайте вашият %site% акаунт"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:234
+msgid "Unable to send verification link."
+msgstr "Не е възможно изпращането на връзка за потвърждаване."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:244
+msgid "Please approve registration at %site%!"
+msgstr "Моля, одобрете регистрацията на %site%!"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:45
+msgid "Reset"
+msgstr "Поднови"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:65
+msgid "Enter a username or email address."
+msgstr "Въведете потребителско име или email."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:71
+msgid "Invalid username or email."
+msgstr "Нвалидно потребителско име или email."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:75
+#: extensions/system/src/User/Controller/ResetPasswordController.php:121
+msgid "Your account has not been activated or is blocked."
+msgstr "Вашият акаунт не е активиран или е блокиран."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:86
+#: extensions/system/src/User/Link/User.php:49
+msgid "Password Reset"
+msgstr "Смяна на парола"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:91
+msgid "Unable to send confirmation link."
+msgstr "Не е възможно да изпратим връзка за потвърждение."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:98
+msgid "Check your email for the confirmation link."
+msgstr "Проверете вашата поща за връзка за потвърждение."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:136
+msgid "Enter password."
+msgstr "Въведете парола."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:140
+msgid "Invalid password."
+msgstr "Невалидна парола."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:148
+msgid "Your password has been reset."
+msgstr "Вашата парола беше подновена."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:156
+msgid "Reset Confirm"
+msgstr "Подновяването е потвърдено."
+
+#: extensions/system/src/User/Controller/RoleController.php:68
+msgid "Roles saved!"
+msgstr "Ролите са записани!"
+
+#: extensions/system/src/User/Controller/UserController.php:125
+msgid "Edit User"
+msgstr "Редактирай потребител"
+
+#: extensions/system/src/User/Controller/UserController.php:140
+msgid "User not found."
+msgstr "Потребителят не е намерен."
+
+#: extensions/system/src/User/Controller/UserController.php:154
+#: extensions/system/src/User/Controller/UserController.php:243
+msgid "Unable to block yourself."
+msgstr "Не е възможно да блокирате себе си."
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User saved."
+msgstr "Потребителят е записан."
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User created."
+msgstr "Потребителят е създаден."
+
+#: extensions/system/src/User/Controller/UserController.php:218
+msgid "Unable to delete self."
+msgstr "Не е възможно да изтриете себе си."
+
+#: extensions/system/src/User/Controller/UserController.php:227
+msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
+msgstr "{0} Няма изтрити потребител.|{1} изтрит потребител.|]1,Inf[ изтрити потребители."
+
+#: extensions/system/src/User/Dashboard/UserWidget.php:32
+msgid "Displays a list of users."
+msgstr "Покажи списък с всички потребители."
+
+#: extensions/system/src/User/Entity/User.php:101
+msgid "Blocked"
+msgstr "Блокиран"
+
+#: extensions/system/src/User/Event/AccessListener.php:93
+msgid "You do not have access to the administration area of this site."
+msgstr "Вие нямате достъп до административната зона на сайта."
+
+#: extensions/system/src/User/Event/AccessListener.php:107
+msgid "Insufficient User Rights."
+msgstr "Нямате достатъчно права."
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account is blocked."
+msgstr "Вашият акаунт е блокиран."
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account has not been activated."
+msgstr "Вашият акаунт не е активиран."
+
+#: extensions/system/src/User/Event/LoginAttemptListener.php:30
+msgid "Slow down a bit."
+msgstr "Намалете малко."
+
+#: extensions/system/src/User/Link/User.php:48
+msgid "Profile"
+msgstr "Профил"
+
+#: extensions/system/src/User/Widget/LoginWidget.php:33
+msgid "Displays a user login form."
+msgstr "Показва форма за вход на потребители."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:49
+msgid "Unassigned Widgets"
+msgstr "Неназначени джаджи."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:82
+#: extensions/system/src/Widget/Controller/WidgetsController.php:105
+msgid "Invalid widget id"
+msgstr "Невалиден идентификатор на джаджа."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:141
+msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} Няма изтрити джаджи.|{1} изтрита джаджа.|]1,Inf[ изтрити джаджи."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:216
+msgid "Widgets updated."
+msgstr "Джаджите са обновени."

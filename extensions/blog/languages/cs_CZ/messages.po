@@ -1,0 +1,393 @@
+# 
+# Translators:
+# escopecz <admin@escope.cz>, 2014
+# escopecz <admin@escope.cz>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-14 07:40+0000\n"
+"Last-Translator: Robert Jindrák <robert.jindrak@gmail.com>\n"
+"Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/pagekit-cms/language/cs_CZ/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-mail"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Schválit"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Zakázat"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Označit jako spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Nebyl nalezen žádný komentář."
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Odpovědět"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Komentář"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "Reakce na %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "Reakce na"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Žádné nevyřízené|{1} Jedna nevyřízená|]1,Inf[ %comments% nevyřízených"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Přehled článků"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Článek"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "- Vybrat článek -"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Vložit titulek"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Úvodník"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Napište úvodník"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "Autor"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Zveřejnit od"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Slug"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Povolit komentáře"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "Přidat článek"
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "Zveřejnit"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "Nezveřejnit"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "Nebyl nalezen žádný článek."
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Komentáře"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Datum"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "Obecné"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr "Permanentní odkaz"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "Číselný"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/blog/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/blog/ukazkovy-prispevek"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "Čas a jméno"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/blog/2014/06/12/ukazkovy-prispevek"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "Měsíc a jméno"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/blog/2014/06/ukazkovy-prispevek"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr "Vlastní"
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "Povolit komentáře"
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "Jméno a e-mail jsou povinné."
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "Zavřít komentáře pro články starší než"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "dny."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "Zobrazit Avatary ze služby Gravatar."
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "Řadit komentáře"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "od nejstaršího."
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "od nejnovějšího."
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "Povolit vnořené komentáře"
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "úrovní hluboko."
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date%, %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Komentáře (%count%)"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "Zanechte komentář"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "Přihlášen jako %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "Komentujete jako host."
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "Vložit komentář"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "Nemáte povoleno psát komentáře."
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "Pro napsání komentáře se prosím přihlaste."
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "%name%, %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Číst dál"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Bez komentáře|{1} %num% komentář|{2,3,4} %num% komentáře|]5,Inf[ %num% komentářů"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "Byly provedeny nějaké změny! Opuštěním článku bez jeho uložení budou ztraceny."
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "Komentáře k %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "Komentář byl uložen."
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "Komentář byl vytvořen."
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr "{0} Žádný komentář nebyl smazán.|{1} Komentář byl smazán.|]1,Inf[ Komentáře byly smazány."
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr "{0} Žádný stav komentáře nebyl aktualizován.|{1} Stav komentáře byl aktualizován.|]1,Inf[ Stavy byly komentáře aktualizovány."
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "Články"
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "Neplatné ID článku"
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "Upravit článek"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "Článek byl uložen."
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "Článek byl vytvořen."
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr "{0} Žádný článek nebyl smazán.|{1} Článek byl smazán.|]1,Inf[ Články byly smazány."
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr "{0} Žádné články nebyly zkopírovány.|{1} Článek byl zkopírován.|]1,Inf[ Články byly zkopírovány."
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr "{0} Žádný článek nebyl zveřejněn.|{1} Článek byl zveřejněn.|]1,Inf[ Články byly zveřejněny."
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} Žádný článek nebyl zneveřejněn.|{1} Článek byl zneveřejněn.|]1,Inf[ Články byly zneveřejněny."
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "Blog"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "Než budete moci znovu komentovat, je potřeba počkat ještě %seconds% vteřin."
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "Komentáře k tomuto článku byly zakázany."
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr "Uveďte prosím platné jméno a email."
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "Děkujeme vám za komentář!"
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "Jejda, něco se nepovedlo!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "Článek nebyl nalezen!"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "K tomuto článku nelze získat přístup!"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "Schváleno"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr "Nerozhodnuto"
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "Spam"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "Zveřejněno"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "Nezveřejněno"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "Koncept"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr "Čeká na schválení"
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "Článek s ID \"%id%\" nebyl nalezen!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "Článek se slugem \"%slug%\" nebyl nalezen!"

@@ -1,111 +1,112 @@
 # 
 # Translators:
+# Weiyu Weng <467055732@qq.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-08-14 07:41+0000\n"
-"Last-Translator: Robert Jindrák <robert.jindrak@gmail.com>\n"
-"Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/pagekit-cms/language/cs_CZ/)\n"
+"PO-Revision-Date: 2014-08-05 15:59+0000\n"
+"Last-Translator: Weiyu Weng <467055732@qq.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/pagekit-cms/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs_CZ\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: extensions/page/views/admin/link/page.razr:2
 #: extensions/page/src/PageLink.php:22
 msgid "Page"
-msgstr "Stránka"
+msgstr "页面"
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
-msgstr "- Vyberte stránku -"
+msgstr "- 选择页面 -"
 
 #: extensions/page/views/admin/pages/edit.razr:14
 msgid "Enter Title"
-msgstr "Uveďte titulek"
+msgstr "输入标题"
 
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
 msgid "Add Page"
-msgstr "Přidat stránku"
+msgstr "添加页面"
 
 #: extensions/page/views/admin/pages/index.razr:15
 msgid "Publish"
-msgstr "Zveřejnit"
+msgstr "发布"
 
 #: extensions/page/views/admin/pages/index.razr:16
 msgid "Unpublish"
-msgstr "Nezveřejnit"
+msgstr "取消发布"
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
-msgstr "Nebyly nalezeny žádné stránky."
+msgstr "没有找到页面。"
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
-msgstr "Stránky"
+msgstr "页面"
 
 #: extensions/page/src/Controller/PageController.php:95
 msgid "Invalid page id."
-msgstr "Neplatné ID stránky"
+msgstr "错误的页面ID"
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
-msgstr "Upravit stránku"
+msgstr "编辑页面"
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
-msgstr "URL stránky není dostupné."
+msgstr "页面URL不可用。"
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page saved."
-msgstr "Stránka byla uložena."
+msgstr "页面已保存。"
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page created."
-msgstr "Stránka byla vytvořena."
+msgstr "页面已创建。"
 
 #: extensions/page/src/Controller/PageController.php:148
 msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
-msgstr "{0} Žádná stránka nebyla smazána.|{1} Stránka byla smazána.|]1,Inf[ Stránky byly smazány."
+msgstr "{0} 没有页面被删除|{1} 个页面被删除|]1,Inf[ 个页面被删除"
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"
-msgstr "%title% (Kopie)"
+msgstr "%title% (复制)"
 
 #: extensions/page/src/Controller/PageController.php:170
 msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
-msgstr "{0} Žádná stránka nebyla zkopírována.|{1} Stránka byla zkopírována.|]1,Inf[ Stránky byly zkopírovány."
+msgstr "{0} 没有页面被复制|{1} 个页面被复制|]1,Inf[ 个页面被复制"
 
 #: extensions/page/src/Controller/PageController.php:187
 msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
-msgstr "{0} Žádná stránka nebyla zveřejněna.|{1} Stránka byla zveřejněna.|]1,Inf[ Stránky byly zveřejněny."
+msgstr "{0} 没有页面被发布|{1} 个页面被发布|]1,Inf[ 个页面被发布"
 
 #: extensions/page/src/Controller/PageController.php:189
 msgid ""
 "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
-msgstr "{0} Žádná stránka nebyla zneveřejněna.|{1} Stránka byla zneveřejněna.|]1,Inf[ Stránky byly zneveřejněny."
+msgstr "{0} 没有页面被取消发布|{1} 个页面被取消发布|]1,Inf[ 个页面被取消发布"
 
 #: extensions/page/src/Controller/SiteController.php:36
 msgid "Page not found!"
-msgstr "Stránka nebyla nalezena!"
+msgstr "页面未找到！"
 
 #: extensions/page/src/Controller/SiteController.php:45
 msgid "Unable to access this page!"
-msgstr "K této stránce nelze získat přístup!"
+msgstr "无法打开此页面！"
 
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
-msgstr "Nezveřejněno"
+msgstr "已取消发布"
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
-msgstr "Zveřejněno"
+msgstr "已发布"
 
 #: extensions/page/src/PageExtension.php:27
 msgid ""
 "You've made some changes! Leaving the page without saving will discard all "
 "changes."
-msgstr "Byly provedeny nějaké změny! Ponechání stránky bez uložení všechny změny zruší."
+msgstr "看起来你已做了一些修改，离开本页面而未保存将会丢失已更改的任何数据！"

@@ -1,130 +1,132 @@
 # 
 # Translators:
-# Damnation <darignac@gmail.com>, 2014
+# Andreyco <contact@andrejbadin.com>, 2014
+# Andreyco <contact@andrejbadin.com>, 2014
+# Stopka Peter <hydroless.software@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-08-06 08:46+0000\n"
-"Last-Translator: Damnation <darignac@gmail.com>\n"
-"Language-Team: German (Germany) (http://www.transifex.com/projects/p/pagekit-cms/language/de_DE/)\n"
+"PO-Revision-Date: 2014-08-07 12:58+0000\n"
+"Last-Translator: Stopka Peter <hydroless.software@gmail.com>\n"
+"Language-Team: Slovak (Slovakia) (http://www.transifex.com/projects/p/pagekit-cms/language/sk_SK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
 msgid "Pagekit Installer"
-msgstr "Pagekit Installation"
+msgstr "Pagekit Inštalátor"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
-msgstr "Datenbankverbindung ist fehlgeschlagen!"
+msgstr "Pripojenie k databáze zlyhalo!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
-msgstr "Keine Datenbankverbindung."
+msgstr "Chýbajúce pripojenie k databáze."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
-msgstr "Konfigurationen können nicht erstellt werden."
+msgstr "Nemôžem zapisovať konfiguráciu."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr "Dem Datenbankbenutzer fehlen erforderliche Rechte."
+msgstr "Užívateľovi databázy chýbajú požadované privilégiá."
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"
-msgstr "Start"
+msgstr "Začíname"
 
 #: extensions/installer/views/install.blade.php:23
 msgid "Connect database"
-msgstr "Mit Datenbank verbinden"
+msgstr "Pripojenie databázy"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Gebe die Datenbankzugangsdaten ein."
+msgstr "Vložte Vaše údaje k pripojeniu databázy."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
-msgstr "Hostname"
+msgstr "Názov Hostiteľa"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Host darf nicht leer sein."
+msgstr "Hostiteľ nemôže ostať prázdny."
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "User darf nicht leer sein."
+msgstr "Užívateľ nemôže ostať prázdny."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
-msgstr "Datenbankname"
+msgstr "Názov Databázy"
 
 #: extensions/installer/views/install.blade.php:54
 msgid "Database name cannot be blank."
-msgstr "Datenbankname darf nicht leer sein."
+msgstr "Meno databázy nemôže ostať prázdne."
 
 #: extensions/installer/views/install.blade.php:59
 msgid "Table Prefix"
-msgstr "Tabellen Präfix"
+msgstr "Predpona tabuliek"
 
 #: extensions/installer/views/install.blade.php:64
 #: extensions/installer/views/install.blade.php:107
 #: extensions/installer/views/install.blade.php:140
 msgid "Next"
-msgstr "Weiter"
+msgstr "Ďalej"
 
 #: extensions/installer/views/install.blade.php:75
 msgid "Create your account"
-msgstr "Benutzeraccount erstellen"
+msgstr "Vytvorte si Váš účet"
 
 #: extensions/installer/views/install.blade.php:77
 msgid "You will be the site administrator."
-msgstr "Du wirst der Administrator sein."
+msgstr "Stanete sa administrátor webu."
 
 #: extensions/installer/views/install.blade.php:85
 msgid "Username cannot be blank."
-msgstr "Benutzername darf nicht leer sein."
+msgstr "Užívateľské meno nemôže ostať prázdne."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email address."
-msgstr "Das Feld muss eine gültige E-Mail-Adresse enthalten."
+msgstr "Pole musí byť platná emailová adresa."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
-msgstr "Passwort darf nicht leer sein."
+msgstr "Heslo nemôže ostať prázdne."
 
 #: extensions/installer/views/install.blade.php:118
 msgid "Setup your site"
-msgstr "Richte deine Website ein"
+msgstr "Nastavte si Váš web"
 
 #: extensions/installer/views/install.blade.php:120
 msgid "Enter your website details."
-msgstr "Gebe die Informationen zu deiner Website ein."
+msgstr "Zadajte údaje Vašej internetovej stránky."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
-msgstr "Seitenname darf nicht leer sein."
+msgstr "Názov stránky nemôže ostať prázdny."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
-msgstr "Pagekit wird installiert..."
+msgstr "Inštalujem Pagekit..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Installation ist fehlgeschlagen!"
+msgstr "Inštalácia zlyhala!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
-msgstr "Erneut versuchen"
+msgstr "Zopakovať"
 
 #: extensions/installer/views/install.blade.php:175
 msgid "Finished!"
-msgstr "Fertig!"
+msgstr "Dokončené!"
 
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
-msgstr "Jetzt Anmelden"
+msgstr "Prihlásiť sa teraz"

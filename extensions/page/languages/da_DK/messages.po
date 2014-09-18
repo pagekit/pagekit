@@ -1,111 +1,112 @@
 # 
 # Translators:
+# lundmorten.dk <mortenlund@lundmorten.dk>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-08-14 07:41+0000\n"
-"Last-Translator: Robert Jindrák <robert.jindrak@gmail.com>\n"
-"Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/pagekit-cms/language/cs_CZ/)\n"
+"PO-Revision-Date: 2014-08-13 18:39+0000\n"
+"Last-Translator: lundmorten.dk <mortenlund@lundmorten.dk>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/pagekit-cms/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs_CZ\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: extensions/page/views/admin/link/page.razr:2
 #: extensions/page/src/PageLink.php:22
 msgid "Page"
-msgstr "Stránka"
+msgstr "Side"
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
-msgstr "- Vyberte stránku -"
+msgstr "- Vælg Side -"
 
 #: extensions/page/views/admin/pages/edit.razr:14
 msgid "Enter Title"
-msgstr "Uveďte titulek"
+msgstr "Skriv Titel"
 
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
 msgid "Add Page"
-msgstr "Přidat stránku"
+msgstr "Tilføj Side"
 
 #: extensions/page/views/admin/pages/index.razr:15
 msgid "Publish"
-msgstr "Zveřejnit"
+msgstr "Publisér"
 
 #: extensions/page/views/admin/pages/index.razr:16
 msgid "Unpublish"
-msgstr "Nezveřejnit"
+msgstr "Afpublisér"
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
-msgstr "Nebyly nalezeny žádné stránky."
+msgstr "Ingen sider fundet."
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
-msgstr "Stránky"
+msgstr "Sider"
 
 #: extensions/page/src/Controller/PageController.php:95
 msgid "Invalid page id."
-msgstr "Neplatné ID stránky"
+msgstr "Ugyldigt side id."
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
-msgstr "Upravit stránku"
+msgstr "Redigér Side"
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
-msgstr "URL stránky není dostupné."
+msgstr "Side Url ikke tilgængelig."
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page saved."
-msgstr "Stránka byla uložena."
+msgstr "Side gemt."
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page created."
-msgstr "Stránka byla vytvořena."
+msgstr "Side oprettet"
 
 #: extensions/page/src/Controller/PageController.php:148
 msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
-msgstr "{0} Žádná stránka nebyla smazána.|{1} Stránka byla smazána.|]1,Inf[ Stránky byly smazány."
+msgstr "{0} Ingen side slettet.|{1} Side slettet.|]1,Inf[ Sider slettet."
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"
-msgstr "%title% (Kopie)"
+msgstr "%title% (Kopi)"
 
 #: extensions/page/src/Controller/PageController.php:170
 msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
-msgstr "{0} Žádná stránka nebyla zkopírována.|{1} Stránka byla zkopírována.|]1,Inf[ Stránky byly zkopírovány."
+msgstr "{0} Ingen side kopieret.|{1} Side kopieret.|]1,Inf[ Sider kopieret."
 
 #: extensions/page/src/Controller/PageController.php:187
 msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
-msgstr "{0} Žádná stránka nebyla zveřejněna.|{1} Stránka byla zveřejněna.|]1,Inf[ Stránky byly zveřejněny."
+msgstr "{0} Ingen side publiseret.|{1} Side publiseret.|]1,Inf[ Sider publiseret."
 
 #: extensions/page/src/Controller/PageController.php:189
 msgid ""
 "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
-msgstr "{0} Žádná stránka nebyla zneveřejněna.|{1} Stránka byla zneveřejněna.|]1,Inf[ Stránky byly zneveřejněny."
+msgstr "{0} Ingen side afpubliseret.|{1} Side afpubliseret.|]1,Inf[ Sider afpubliseret."
 
 #: extensions/page/src/Controller/SiteController.php:36
 msgid "Page not found!"
-msgstr "Stránka nebyla nalezena!"
+msgstr "Siden blev ikke fundet!"
 
 #: extensions/page/src/Controller/SiteController.php:45
 msgid "Unable to access this page!"
-msgstr "K této stránce nelze získat přístup!"
+msgstr "Kunne ikke tilgå denne side!"
 
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
-msgstr "Nezveřejněno"
+msgstr "Afpubliseret"
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
-msgstr "Zveřejněno"
+msgstr "Publiseret"
 
 #: extensions/page/src/PageExtension.php:27
 msgid ""
 "You've made some changes! Leaving the page without saving will discard all "
 "changes."
-msgstr "Byly provedeny nějaké změny! Ponechání stránky bez uložení všechny změny zruší."
+msgstr "Du har lavet ændringer! Ændringer vil gå tabt, hvis du forlader siden uden at gemme."

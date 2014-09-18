@@ -1,130 +1,130 @@
 # 
 # Translators:
-# Damnation <darignac@gmail.com>, 2014
+# Randal <andrzej@nooia.pl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-08-06 08:46+0000\n"
-"Last-Translator: Damnation <darignac@gmail.com>\n"
-"Language-Team: German (Germany) (http://www.transifex.com/projects/p/pagekit-cms/language/de_DE/)\n"
+"PO-Revision-Date: 2014-08-06 20:05+0000\n"
+"Last-Translator: Randal <andrzej@nooia.pl>\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/pagekit-cms/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
 msgid "Pagekit Installer"
-msgstr "Pagekit Installation"
+msgstr "Instalator Pagekit"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
-msgstr "Datenbankverbindung ist fehlgeschlagen!"
+msgstr "Połączenie z bazą danych nie powiodło się!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
-msgstr "Keine Datenbankverbindung."
+msgstr "Brak połączenia z bazą danych."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
-msgstr "Konfigurationen können nicht erstellt werden."
+msgstr "Nie można zapisać konfiguracji."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr "Dem Datenbankbenutzer fehlen erforderliche Rechte."
+msgstr "Brak wymaganych uprawnień dla użytkownika bazy danych."
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"
-msgstr "Start"
+msgstr "Rozpocznij"
 
 #: extensions/installer/views/install.blade.php:23
 msgid "Connect database"
-msgstr "Mit Datenbank verbinden"
+msgstr "Połączenie z bazą danych"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Gebe die Datenbankzugangsdaten ein."
+msgstr "Podaj dane do połączenia się z bazą danych."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
-msgstr "Hostname"
+msgstr "Adres serwera bazy danych"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Host darf nicht leer sein."
+msgstr "Adres bazy danych nie może być pusty."
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "User darf nicht leer sein."
+msgstr "Pole użytkownik nie może być puste."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
-msgstr "Datenbankname"
+msgstr "Nazwa bazy danych"
 
 #: extensions/installer/views/install.blade.php:54
 msgid "Database name cannot be blank."
-msgstr "Datenbankname darf nicht leer sein."
+msgstr "Nazwa bazy danych nie może być pusta."
 
 #: extensions/installer/views/install.blade.php:59
 msgid "Table Prefix"
-msgstr "Tabellen Präfix"
+msgstr "Prefiks tabel"
 
 #: extensions/installer/views/install.blade.php:64
 #: extensions/installer/views/install.blade.php:107
 #: extensions/installer/views/install.blade.php:140
 msgid "Next"
-msgstr "Weiter"
+msgstr "Dalej"
 
 #: extensions/installer/views/install.blade.php:75
 msgid "Create your account"
-msgstr "Benutzeraccount erstellen"
+msgstr "Utwórz swoje konto"
 
 #: extensions/installer/views/install.blade.php:77
 msgid "You will be the site administrator."
-msgstr "Du wirst der Administrator sein."
+msgstr "Będziesz administratorem witryny."
 
 #: extensions/installer/views/install.blade.php:85
 msgid "Username cannot be blank."
-msgstr "Benutzername darf nicht leer sein."
+msgstr "Nazwa użytkownika nie może być pusta."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email address."
-msgstr "Das Feld muss eine gültige E-Mail-Adresse enthalten."
+msgstr "Pole musi zawierać poprawny adres email."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
-msgstr "Passwort darf nicht leer sein."
+msgstr "Hasło nie może być puste."
 
 #: extensions/installer/views/install.blade.php:118
 msgid "Setup your site"
-msgstr "Richte deine Website ein"
+msgstr "Skonfiguruj swoją stronę"
 
 #: extensions/installer/views/install.blade.php:120
 msgid "Enter your website details."
-msgstr "Gebe die Informationen zu deiner Website ein."
+msgstr "Podaj szczegóły swojej witryny."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
-msgstr "Seitenname darf nicht leer sein."
+msgstr "Nazwa witryny nie może być pusta."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
-msgstr "Pagekit wird installiert..."
+msgstr "Instaluje Pagekit..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Installation ist fehlgeschlagen!"
+msgstr "Instalacja nie powiodła się!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
-msgstr "Erneut versuchen"
+msgstr "Ponów"
 
 #: extensions/installer/views/install.blade.php:175
 msgid "Finished!"
-msgstr "Fertig!"
+msgstr "Instalacja powiodła się!"
 
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
-msgstr "Jetzt Anmelden"
+msgstr "Zaloguj się"

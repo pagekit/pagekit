@@ -1,130 +1,130 @@
 # 
 # Translators:
-# Damnation <darignac@gmail.com>, 2014
+# lundmorten.dk <mortenlund@lundmorten.dk>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-08-06 08:46+0000\n"
-"Last-Translator: Damnation <darignac@gmail.com>\n"
-"Language-Team: German (Germany) (http://www.transifex.com/projects/p/pagekit-cms/language/de_DE/)\n"
+"PO-Revision-Date: 2014-08-15 21:51+0000\n"
+"Last-Translator: lundmorten.dk <mortenlund@lundmorten.dk>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/pagekit-cms/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: da_DK\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
 msgid "Pagekit Installer"
-msgstr "Pagekit Installation"
+msgstr "Pagekit installer"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
-msgstr "Datenbankverbindung ist fehlgeschlagen!"
+msgstr "Databaseforbindelsen fejlede!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
-msgstr "Keine Datenbankverbindung."
+msgstr "Ingen databaseforbindelse."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
-msgstr "Konfigurationen können nicht erstellt werden."
+msgstr "Kan ikke skrive config."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr "Dem Datenbankbenutzer fehlen erforderliche Rechte."
+msgstr "DB user mangler de fornødne privilegier."
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"
-msgstr "Start"
+msgstr "Begynd"
 
 #: extensions/installer/views/install.blade.php:23
 msgid "Connect database"
-msgstr "Mit Datenbank verbinden"
+msgstr "Forbind database"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Gebe die Datenbankzugangsdaten ein."
+msgstr "Skriv dine databaseforbindelses detaljer."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
-msgstr "Hostname"
+msgstr "Hostnavn"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Host darf nicht leer sein."
+msgstr "Host kan ikke være blank"
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "User darf nicht leer sein."
+msgstr "Bruger kan ikke være blank."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
-msgstr "Datenbankname"
+msgstr "Databasenavn"
 
 #: extensions/installer/views/install.blade.php:54
 msgid "Database name cannot be blank."
-msgstr "Datenbankname darf nicht leer sein."
+msgstr "Databasenavn kan ikke være blank"
 
 #: extensions/installer/views/install.blade.php:59
 msgid "Table Prefix"
-msgstr "Tabellen Präfix"
+msgstr "Tabelprefix"
 
 #: extensions/installer/views/install.blade.php:64
 #: extensions/installer/views/install.blade.php:107
 #: extensions/installer/views/install.blade.php:140
 msgid "Next"
-msgstr "Weiter"
+msgstr "Næste"
 
 #: extensions/installer/views/install.blade.php:75
 msgid "Create your account"
-msgstr "Benutzeraccount erstellen"
+msgstr "Opret din konto"
 
 #: extensions/installer/views/install.blade.php:77
 msgid "You will be the site administrator."
-msgstr "Du wirst der Administrator sein."
+msgstr "Du vil være sidens administrator."
 
 #: extensions/installer/views/install.blade.php:85
 msgid "Username cannot be blank."
-msgstr "Benutzername darf nicht leer sein."
+msgstr "Brugernavn kan ikke være blank."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email address."
-msgstr "Das Feld muss eine gültige E-Mail-Adresse enthalten."
+msgstr "Feltet skal være en gyldig e-mail adresse."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
-msgstr "Passwort darf nicht leer sein."
+msgstr "Password kan ikke være blank."
 
 #: extensions/installer/views/install.blade.php:118
 msgid "Setup your site"
-msgstr "Richte deine Website ein"
+msgstr "Opsæt dit site"
 
 #: extensions/installer/views/install.blade.php:120
 msgid "Enter your website details."
-msgstr "Gebe die Informationen zu deiner Website ein."
+msgstr "Indtast dine detaljer for websitet."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
-msgstr "Seitenname darf nicht leer sein."
+msgstr "Sidenavn kan ikke være blank."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
-msgstr "Pagekit wird installiert..."
+msgstr "Installerer Pagekit..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Installation ist fehlgeschlagen!"
+msgstr "Installationen fejlede!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
-msgstr "Erneut versuchen"
+msgstr "Prøv igen"
 
 #: extensions/installer/views/install.blade.php:175
 msgid "Finished!"
-msgstr "Fertig!"
+msgstr "Færdig!"
 
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
-msgstr "Jetzt Anmelden"
+msgstr "Log ind nu"

@@ -1,0 +1,392 @@
+# 
+# Translators:
+# eantz <e_antz@yahoo.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-15 11:08+0000\n"
+"Last-Translator: eantz <e_antz@yahoo.com>\n"
+"Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/pagekit-cms/language/id_ID/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id_ID\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-mail"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Terima"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Jangan terima"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Tandai sebagai spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Komentar tidak ditemukan"
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Balas"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Komentar"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "Balasan untuk %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "Balasan untuk"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr ""
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr ""
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Post"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "Pilih Post"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Masukkan Judul"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Ringkasan"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Masukkan Ringkasan"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "Penulis"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Diterbitkan pada"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Slug"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Ijinkan Komentar"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "Tambah Post"
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "Terbitkan"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "Batalkan Penerbitan"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "Tidak ada post"
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Komentar"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Tanggal"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "Umum"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr ""
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "Numerik"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/blog/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/blog/sample-post"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "Hari dan nama"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/blog/2014/06/12/sample-post"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "Bulan dan nama"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/blog/2014/06/sample-post"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr ""
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "Ijinkan komentar"
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "Nama dan e-mail dibutuhkan"
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "Tutup komentar pada artikel yang lebih lama dari"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "hari."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "Tampilan"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "Tampilan Avatar dari Gravatar"
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "Urutkan komentar berdasarkan"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "yang paling lama lebih dulu"
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "yang terbaru lebih dulu"
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "Ijinkan komentar bertingkat sejumlah "
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "level"
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% pada %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "(%count%) Komentar"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "Tinggalkan komentar"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "Masuk sebagai %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "Anda memberikan komentar sebagai tamu"
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "Kirimkan komentar"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "Anda tidak diperbolehkan untuk mengirimkan komentar"
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "Silahkan masuk untuk meninggalkan komentar"
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "Ditulis oleh %name% pada %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Lanjutkan membaca"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr ""
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "Anda telah melakukan perubahan! Meninggalkan post tanpa menyimpan akan membatalkan perubahan."
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "Komentar pada %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "Komentar telah disimpan"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "Komentar telah dibuat"
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr ""
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr ""
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "Post"
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "Post id tidak benar"
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "Edit Post"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "Post telah disimpan"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "Post dibuat"
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr ""
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr ""
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr ""
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr ""
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "Blog"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "Silahkan tunggu %seconds% lagi sebelum berkomentar lagi"
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "Komentar dimatikan pada post ini."
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr ""
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "Terima kasih telah berkomentar"
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "Ooohhhh, sepertinya ada yang salah!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "Post tidak ditemukan"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "Tidak dapat mengakses post ini!"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "Diterima"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr ""
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "Spam"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "Diterbitkan"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "Tidak diterbitkan"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "Draft"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr ""
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "Post dengan id \"%id%\" tidak ditemukan!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "Post dengan slug \"%slug%\" tidak ditemukan"
