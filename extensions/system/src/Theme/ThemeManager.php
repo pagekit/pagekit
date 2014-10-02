@@ -26,7 +26,7 @@ class ThemeManager extends PackageManager
         }
 
         $fn = function($app, $bootstrap) {
-            return include($bootstrap);
+            return include $bootstrap;
         };
 
         $config = (!$config = $fn($this->app, "$root/theme.php") or 1 === $config) ? [] : $config;

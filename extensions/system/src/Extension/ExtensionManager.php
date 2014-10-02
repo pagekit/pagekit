@@ -47,7 +47,7 @@ class ExtensionManager extends PackageManager
         }
 
         $fn = function($app, $bootstrap) {
-            return include($bootstrap);
+            return include $bootstrap;
         };
 
         if (is_dir("$root/vendor/composer")) {

@@ -197,7 +197,7 @@ class Theme implements \ArrayAccess
 
                 if ($format == 'php') {
                     $format = 'array';
-                    $file = require($file);
+                    $file = require $file;
                 }
 
                 $translator->addResource($format, $file, $locale, $domain);
