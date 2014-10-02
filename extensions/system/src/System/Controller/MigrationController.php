@@ -22,9 +22,7 @@ class MigrationController extends Controller
      */
     public function migrateAction()
     {
-        $version = $this['option']->get('system:version');
-
-        if ($this['migrator']->create('extension://system/migrations', $version)->get()) {
+        if ($this['migrator']->create('extension://system/migrations', $this['option']->get('system:version'))->get()) {
             $this['system']->enable();
             $this['message']->success(__('Your Pagekit database has been updated successfully.'));
         } else {

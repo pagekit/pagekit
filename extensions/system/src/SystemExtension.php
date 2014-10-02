@@ -24,6 +24,7 @@ use Pagekit\System\Helper\LanguageHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Helper\OAuthHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
+use Pagekit\System\Migration\FilesystemLoader;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
 use Pagekit\User\Entity\User as UserEntity;
@@ -131,6 +132,11 @@ class SystemExtension extends Extension
 
             return $manager;
         };
+
+        $app->extend('migrator',function($migrator, $app) {
+            $migrator->setLoader(new FilesystemLoader($app['locator']));
+            return $migrator;
+        });
 
         $app->extend('mailer', function($mailer, $app) {
 
