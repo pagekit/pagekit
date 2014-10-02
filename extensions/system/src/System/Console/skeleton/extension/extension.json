@@ -3,13 +3,13 @@
     "version": "0.0.1",
     "type": "extension",
     "title": "%TITLE%",
-    "description": "",
-    "license": "",
+    "description": "%DESCRIPTION%",
+    "license": "%LICENSE%",
     "authors": [
         {
             "name": "%AUTHOR%",
             "email": "%EMAIL%",
-            "homepage": ""
+            "homepage": "%HOMEPAGE%"
         }
     ]
 }
