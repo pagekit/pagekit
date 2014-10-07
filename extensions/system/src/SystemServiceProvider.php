@@ -27,7 +27,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new FileProvider($app);
         };
 
-        $app->extend('migrator',function($migrator, $app) {
+        $app->extend('migrator', function($migrator, $app) {
             $migrator->setLoader(new FilesystemLoader($app['locator']));
             return $migrator;
         });
