@@ -88,7 +88,7 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.reply', 'domRe
     pagination.on('uk-select-page', function(e, index) {
         page.val(index);
 
-        $.post(form.data('action'), form.serialize(), function(data) {
+        $.post(form.attr('action'), form.serialize(), function(data) {
             table.html(data.table);
             pagination.toggleClass('uk-hidden', data.total < 2).data('pagination').render(data.total);
             $('.uk-alert', form).toggleClass('uk-hidden', data.total > 0);
