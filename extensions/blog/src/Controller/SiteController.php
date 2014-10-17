@@ -15,6 +15,8 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Route("/blog")
@@ -176,11 +178,11 @@ class SiteController extends Controller
     public function postAction($id = 0)
     {
         if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
-            return $this['response']->create(__('Post not found!'), 404);
+            throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
         if (!$post->hasAccess($this['user'])) {
-            return $this['response']->create(__('Unable to access this post!'), 403);
+            throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
         $user  = $this['user'];
