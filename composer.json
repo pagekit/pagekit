@@ -16,7 +16,7 @@
         "pagekit/framework": "0.9.*@dev",
         "pagekit/razr": "0.9.*@dev",
         "doctrine/annotations": "1.*@dev",
-        "lusitanian/oauth": "0.1.*",
+        "lusitanian/oauth": "0.1.*@dev",
         "mibe/feedwriter": "@dev",
         "nikic/php-parser": "1.*@dev"
     }

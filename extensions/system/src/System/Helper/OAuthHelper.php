@@ -15,7 +15,7 @@ class OAuthHelper implements \ArrayAccess
 {
     use ApplicationTrait;
 
-    protected $config, $serviceFactory, $services;
+    protected $serviceFactory, $services;
 
     public function __construct()
     {
@@ -79,14 +79,18 @@ class OAuthHelper implements \ArrayAccess
             $service = $this->createService($provider, [], $storage);
 
             if (!$token || !$service) {
-                return null;
+                return false;
             }
 
             $storage->storeAccessToken($provider, $token);
 
             if ($token->getEndOfLife() < time()) {
                 if ($token->getRefreshToken()) {
-                    $service->refreshAccessToken($token);
+                   try {
+                       $service->refreshAccessToken($token);
+                   } catch (\Exception $e) {
+                       return false;
+                   }
                 } else {
                     return false;
                 }
@@ -105,7 +109,7 @@ class OAuthHelper implements \ArrayAccess
      */
     public function getConfig($provider)
     {
-        return $this['option']->get("system:oauth.".$provider, []);
+        return isset($this['option']->get("system:oauth", [])[$provider]) ? $this['option']->get("system:oauth", [])[$provider] : [];
     }
 
     /**

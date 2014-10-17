@@ -266,7 +266,9 @@
                         </div>
                     </div>
                     <p>@trans('Redirect URL: %url%', ['%url%' => $app['oauth']->getRedirectUrl()])</p>
-                    <div id="oauth-service-list" class="uk-form-row"></div>
+                    <div id="oauth-service-list" class="uk-form-row">
+                        <input type="hidden" name="option[system:oauth]" value="">
+                    </div>
                     <script type="text/tmpl" data-tmpl="oauth.data">
                     @raw($app['oauth']->getJsonData())
 

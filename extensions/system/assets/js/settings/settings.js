@@ -52,32 +52,49 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
     system.linkpicker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
 
     // OAuth
-    var oauthData = $.parseJSON(tmpl.get('oauth.data')), container;
+    var oauthData = $.parseJSON(tmpl.get('oauth.data')),
+        list      = $("#oauth-service-list"),
+        dropdown  = $("#oauth-service-dropdown");
 
     $.each(oauthData, function (service, data) {
         data.service = service;
         if ('client_id' in data) {
-            $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
-            $("[data-info][data-info!='"+service+"']", container).remove();
+            appendService(data);
         } else {
-            $("#oauth-service-dropdown").append($('<li><a href="#">'+service+'</a></li>').click(function() {
-                $(this).remove();
-                $("#oauth-service-list").append(container = $(tmpl.render('settings.oauth', data)));
-                $("[data-info][data-info!='"+service+"']", container).remove();
-            }));
+            appendList(data);
         }
     });
 
-    $("form").submit(function(e) {
+    $("form").submit(function (e) {
         e.preventDefault();
-
         $.each($(this).find("[name='service-container']"), function() {
-            if (!$(this).find("#client_id").val() && !$(this).find("#client_secret").val()) {
+            if (!$(this).find(".client_id").val() && !$(this).find(".client_secret").val()) {
                 $(this).remove();
             }
         });
-
         $(this).unbind('submit').submit();
     });
+
+    function appendService (data)
+    {
+       var container;
+
+       $("#"+data.service+"-container", list).remove();
+       list.append(container = $(tmpl.render('settings.oauth', data)));
+       $("[data-info][data-info!='"+data.service+"']", container).remove();
+       $(".remove", container).click(function (e) {
+           e.preventDefault();
+           $(this).parent().remove();
+           appendList(data);
+       });
+    }
+
+    function appendList (data)
+    {
+      dropdown.append($('<li><a href="#">'+data.service+'</a></li>').click(function() {
+          $(this).remove();
+          appendService(data);
+      }));
+    }
 
 });

@@ -6,7 +6,6 @@ use Pagekit\Framework\Controller\Controller;
 use OAuth\Common\Storage\Memory;
 
 /**
- * @Access(admin=true)
  * @Route("/oauth")
  */
 class OAuthController extends Controller
