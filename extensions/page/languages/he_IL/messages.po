@@ -1,0 +1,111 @@
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+"PO-Revision-Date: 2014-08-19 00:12+0000\n"
+"Last-Translator: error455 <amirdelson@gmail.com>\n"
+"Language-Team: Hebrew (Israel) (http://www.transifex.com/projects/p/pagekit-cms/language/he_IL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/page/views/admin/link/page.razr:2
+#: extensions/page/src/PageLink.php:22
+msgid "Page"
+msgstr "עמוד"
+
+#: extensions/page/views/admin/link/page.razr:5
+msgid "- Select Page -"
+msgstr "- בחר עמוד -"
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
+msgstr "הכנס כותרת"
+
+#: extensions/page/views/admin/pages/index.razr:8
+#: extensions/page/src/Controller/PageController.php:83
+msgid "Add Page"
+msgstr "הוסף עמוד"
+
+#: extensions/page/views/admin/pages/index.razr:15
+msgid "Publish"
+msgstr "פרסם"
+
+#: extensions/page/views/admin/pages/index.razr:16
+msgid "Unpublish"
+msgstr "לא מפורסם"
+
+#: extensions/page/views/admin/pages/index.razr:38
+msgid "No pages found."
+msgstr "לא נמצאו עמודים"
+
+#: extensions/page/src/Controller/PageController.php:75
+msgid "Pages"
+msgstr "עמודים"
+
+#: extensions/page/src/Controller/PageController.php:95
+msgid "Invalid page id."
+msgstr "העמוד אותו אתה מחפש לא קיים."
+
+#: extensions/page/src/Controller/PageController.php:105
+msgid "Edit Page"
+msgstr "עריכת עמוד"
+
+#: extensions/page/src/Controller/PageController.php:120
+msgid "Page Url not available."
+msgstr "כתובת עמוד לא זמינה"
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page saved."
+msgstr "העמוד נשמר בהצלחה."
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page created."
+msgstr "העמוד נוצר בהצלחה."
+
+#: extensions/page/src/Controller/PageController.php:148
+msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
+msgstr "{0} לא נמחקו עמודים.|{1} העמוד נמחק.|[1,Inf עמודים נמחקו]"
+
+#: extensions/page/src/Controller/PageController.php:164
+msgid "%title% (Copy)"
+msgstr "%title% (Copy)"
+
+#: extensions/page/src/Controller/PageController.php:170
+msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
+msgstr "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
+
+#: extensions/page/src/Controller/PageController.php:187
+msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
+msgstr "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
+
+#: extensions/page/src/Controller/PageController.php:189
+msgid ""
+"{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
+msgstr "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
+
+#: extensions/page/src/Controller/SiteController.php:36
+msgid "Page not found!"
+msgstr "העמוד אותו אתה מחפש לא קיים!"
+
+#: extensions/page/src/Controller/SiteController.php:45
+msgid "Unable to access this page!"
+msgstr "אין לך גישה לעמוד זה!"
+
+#: extensions/page/src/Entity/Page.php:99
+msgid "Unpublished"
+msgstr "לא מפורסם"
+
+#: extensions/page/src/Entity/Page.php:100
+msgid "Published"
+msgstr "מפורסם"
+
+#: extensions/page/src/PageExtension.php:27
+msgid ""
+"You've made some changes! Leaving the page without saving will discard all "
+"changes."
+msgstr "האם אתה בטוח שברצונך לצאת? אם תעזוב את העמוד בלי לשמור, השינויים שביצעת לא ישמרו."

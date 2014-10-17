@@ -1,0 +1,3843 @@
+# 
+# Translators:
+# Weiyu Weng <467055732@qq.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-15 14:11+0000\n"
+"Last-Translator: Weiyu Weng <467055732@qq.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/pagekit-cms/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
+#: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/settings.razr:7
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/widgets/edit.razr:7
+msgid "Close"
+msgstr "关闭"
+
+#: extensions/system/theme/templates/error.razr:4
+msgid "Error"
+msgstr "错误"
+
+#: extensions/system/theme/templates/login.razr:27
+#: extensions/system/views/admin/user/edit.razr:36
+#: extensions/system/views/user/login.razr:6
+#: extensions/system/views/user/mails/reset.razr:11
+#: extensions/system/views/user/registration.razr:8
+msgid "Username"
+msgstr "用户名"
+
+#: extensions/system/theme/templates/login.razr:31
+#: extensions/system/views/admin/user/edit.razr:57
+#: extensions/system/views/user/login.razr:13
+#: extensions/system/views/user/registration.razr:29
+msgid "Password"
+msgstr "密码"
+
+#: extensions/system/theme/templates/login.razr:35
+#: extensions/system/views/user/login.razr:3
+#: extensions/system/views/widgets/login/login.razr:10
+#: extensions/system/src/System/Controller/SystemController.php:48
+#: extensions/system/src/User/Controller/AuthController.php:48
+#: extensions/system/src/User/Link/User.php:46
+#: extensions/system/src/User/Widget/LoginWidget.php:25
+msgid "Login"
+msgstr "登录"
+
+#: extensions/system/theme/templates/login.razr:38
+#: extensions/system/views/user/login.razr:24
+#: extensions/system/views/widgets/login/login.razr:14
+msgid "Remember Me"
+msgstr "记住我"
+
+#: extensions/system/theme/templates/login.razr:39
+#: extensions/system/views/widgets/login/login.razr:15
+msgid "Forgot Password?"
+msgstr "忘记密码"
+
+#: extensions/system/theme/templates/login.razr:50
+#: extensions/system/views/user/reset/request.razr:8
+msgid "Username or Email"
+msgstr "用户名或邮箱"
+
+#: extensions/system/theme/templates/login.razr:53
+msgid "Reset Password"
+msgstr "重置密码"
+
+#: extensions/system/theme/templates/maintenance.razr:23
+#: extensions/system/views/admin/settings/settings.razr:49
+msgid "Maintenance"
+msgstr "维护"
+
+#: extensions/system/theme/templates/migration.razr:23
+#: extensions/system/src/System/Controller/MigrationController.php:17
+msgid "Update Pagekit"
+msgstr "更新 Pagekit"
+
+#: extensions/system/theme/templates/migration.razr:24
+msgid ""
+"Pagekit has been updated! Before we send you on your way, we have to update "
+"your database to the newest version."
+msgstr "Pagekit 已更新！接下来让我们将数据表升级至新版本。"
+
+#: extensions/system/theme/templates/migration.razr:26
+#: extensions/system/views/admin/settings/index.razr:54
+#: extensions/system/views/admin/settings/index.razr:55
+#: extensions/system/views/admin/settings/update.razr:11
+#: extensions/system/views/tmpl/image.modal.razr:24
+#: extensions/system/views/tmpl/link.modal.razr:12
+#: extensions/system/views/tmpl/linkpicker.modal.razr:6
+#: extensions/system/views/tmpl/marketplace.details.razr:9
+#: extensions/system/views/tmpl/package.updates.razr:25
+#: extensions/system/views/tmpl/video.modal.razr:23
+#: extensions/system/src/System/Controller/UpdateController.php:39
+msgid "Update"
+msgstr "更新"
+
+#: extensions/system/theme/templates/template.razr:22
+#: extensions/system/theme/templates/template.razr:39
+msgid "Pagekit"
+msgstr "Pagekit"
+
+#: extensions/system/theme/templates/template.razr:64
+#: extensions/system/theme/templates/template.razr:132
+msgid "Visit Site"
+msgstr "访问站点"
+
+#: extensions/system/theme/templates/template.razr:65
+#: extensions/system/theme/templates/template.razr:133
+#: extensions/system/views/admin/extensions/table.razr:23
+#: extensions/system/views/admin/settings/index.razr:11
+#: extensions/system/views/admin/settings/index.razr:12
+#: extensions/system/views/admin/themes/table.razr:21
+#: extensions/system/views/admin/widgets/edit.razr:14
+#: extensions/system/views/tmpl/image.replace.razr:14
+#: extensions/system/views/tmpl/video.replace.razr:14
+#: extensions/system/languages/messages.php:24
+#: extensions/system/src/System/Controller/SettingsController.php:70
+#: extensions/system/src/System/Controller/SystemController.php:32
+msgid "Settings"
+msgstr "设置"
+
+#: extensions/system/theme/templates/template.razr:66
+#: extensions/system/theme/templates/template.razr:134
+#: extensions/system/views/widgets/login/logout.razr:2
+msgid "Logout"
+msgstr "登出"
+
+#: extensions/system/theme/templates/template.razr:113
+#: extensions/system/views/admin/settings/index.razr:20
+#: extensions/system/views/admin/settings/index.razr:21
+#: extensions/system/views/admin/settings/index.razr:88
+#: extensions/system/views/admin/settings/info.razr:61
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:50
+msgid "Extensions"
+msgstr "拓展"
+
+#: extensions/system/views/admin/aliases/edit.razr:6
+#: extensions/system/views/admin/dashboard/edit.razr:4
+#: extensions/system/views/admin/menu/index.razr:82
+#: extensions/system/views/admin/menu/item.edit.razr:6
+#: extensions/system/views/admin/settings/settings.razr:6
+#: extensions/system/views/admin/user/edit.razr:6
+#: extensions/system/views/admin/user/role.razr:90
+#: extensions/system/views/admin/widgets/edit.razr:6
+#: extensions/system/views/user/profile.razr:46
+msgid "Save"
+msgstr "保存"
+
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/index.razr:83
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/index.razr:134
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/user/role.razr:91
+#: extensions/system/views/admin/widgets/edit.razr:7
+#: extensions/system/views/tmpl/image.modal.razr:25
+#: extensions/system/views/tmpl/image.modal.razr:33
+#: extensions/system/views/tmpl/link.modal.razr:13
+#: extensions/system/views/tmpl/linkpicker.modal.razr:7
+#: extensions/system/views/tmpl/package.upload.razr:36
+#: extensions/system/views/tmpl/video.modal.razr:24
+#: extensions/system/views/tmpl/video.modal.razr:32
+msgid "Cancel"
+msgstr "取消"
+
+#: extensions/system/views/admin/aliases/edit.razr:10
+msgid "Please select a source."
+msgstr "请选择一个使用源。"
+
+#: extensions/system/views/admin/aliases/edit.razr:13
+#: extensions/system/views/admin/aliases/index.razr:21
+msgid "Alias"
+msgstr "别名"
+
+#: extensions/system/views/admin/aliases/edit.razr:16
+msgid ""
+"Use a relative path and don't add a trailing slash. For example: "
+"<code>about</code>"
+msgstr "请使用相对路径并且末尾不添加斜线，比如：<code>about</code>"
+
+#: extensions/system/views/admin/aliases/edit.razr:20
+#: extensions/system/views/admin/aliases/index.razr:22
+msgid "Source"
+msgstr "源"
+
+#: extensions/system/views/admin/aliases/index.razr:7
+msgid "Add Alias"
+msgstr "添加别名"
+
+#: extensions/system/views/admin/aliases/index.razr:8
+#: extensions/system/views/admin/dashboard/settings.razr:18
+#: extensions/system/views/admin/extensions/table.razr:43
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/menu/index.razr:35
+#: extensions/system/views/admin/themes/table.razr:27
+#: extensions/system/views/admin/user/index.razr:9
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/admin/widgets/index.razr:19
+#: extensions/system/views/tmpl/finder.main.razr:11
+#: extensions/system/views/tmpl/image.replace.razr:15
+#: extensions/system/views/tmpl/video.replace.razr:15
+msgid "Delete"
+msgstr "删除"
+
+#: extensions/system/views/admin/aliases/index.razr:11
+#: extensions/system/views/admin/extensions/index.razr:61
+#: extensions/system/views/admin/themes/index.razr:61
+#: extensions/system/views/admin/user/index.razr:51
+#: extensions/system/views/admin/widgets/index.razr:56
+#: extensions/system/views/tmpl/finder.main.razr:17
+msgid "Search"
+msgstr "搜索"
+
+#: extensions/system/views/admin/aliases/index.razr:41
+msgid "No URL aliases found."
+msgstr "无URL别名"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:2
+#: extensions/system/views/admin/menu/index.razr:53
+#: extensions/system/views/admin/menu/item.edit.razr:11
+#: extensions/system/views/admin/settings/settings.razr:31
+#: extensions/system/views/admin/widgets/edit.razr:25
+#: extensions/system/views/admin/widgets/index.razr:65
+#: extensions/system/views/tmpl/link.modal.razr:5
+msgid "Title"
+msgstr "标题"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:9
+#: extensions/system/views/admin/link/link.types.razr:2
+#: extensions/system/views/admin/menu/index.razr:55
+#: extensions/system/views/tmpl/image.modal.razr:12
+#: extensions/system/views/tmpl/video.modal.razr:15
+msgid "URL"
+msgstr "URL"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:16
+msgid "Number of Posts"
+msgstr "文章数量"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:27
+msgid "Post Content"
+msgstr "文章内容"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:30
+msgid "Don't show"
+msgstr "不要显示"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:33
+msgid "Show on all posts"
+msgstr "显示所有文章"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:36
+msgid "Only show on first post."
+msgstr "只显示第一篇文章"
+
+#: extensions/system/views/admin/dashboard/settings.razr:8
+#: extensions/system/views/admin/widgets/index.razr:9
+#: extensions/system/src/System/Controller/DashboardController.php:85
+#: extensions/system/src/Widget/Controller/WidgetsController.php:70
+msgid "Add Widget"
+msgstr "添加小工具"
+
+#: extensions/system/views/admin/dashboard/settings.razr:24
+msgid "Widget"
+msgstr "小工具"
+
+#: extensions/system/views/admin/dashboard/settings.razr:25
+#: extensions/system/views/admin/link/link.types.razr:8
+#: extensions/system/views/admin/menu/item.edit.razr:18
+#: extensions/system/views/admin/widgets/index.razr:68
+msgid "Type"
+msgstr "类型"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:2
+msgid "User Type"
+msgstr "用户类型"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Logged in"
+msgstr "已登录"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Last registered"
+msgstr "最后注册"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:12
+msgid "Number of Users"
+msgstr "用户数量"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:2
+msgid ""
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} 还没有用户注册。 |{1} 已有一名用户注册。|]1,Inf[ 已有 %users% 名用户注册。"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:4
+msgid ""
+"{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
+"logged in"
+msgstr "{0} 没有用户登入。|{1} %users% 用户登入。|]1,Inf[ %users% 用户登入。"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:4
+msgid "Location"
+msgstr "位置"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:10
+msgid "Enter the name of the city you want to get weather information for."
+msgstr "请输入你想获取的城市天气。"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:15
+msgid "Unit"
+msgstr "模块"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:18
+msgid "Metric"
+msgstr "十进制"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:21
+msgid "Imperial"
+msgstr "特级"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:12
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:23
+msgid "Weather"
+msgstr "天气"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:13
+msgid "Unable to retrieve weather data."
+msgstr "无法获取天气信息。"
+
+#: extensions/system/views/admin/extensions/index.razr:12
+#: extensions/system/views/admin/themes/index.razr:12
+#: extensions/system/views/tmpl/marketplace.details.razr:5
+msgid "Installed"
+msgstr "已安装"
+
+#: extensions/system/views/admin/extensions/index.razr:13
+#: extensions/system/views/admin/themes/index.razr:13
+msgid "Updates"
+msgstr "更新"
+
+#: extensions/system/views/admin/extensions/index.razr:14
+#: extensions/system/views/admin/themes/index.razr:14
+#: extensions/system/views/tmpl/marketplace.details.razr:8
+#: extensions/system/views/tmpl/package.upload.razr:35
+msgid "Install"
+msgstr "安装"
+
+#: extensions/system/views/admin/extensions/index.razr:15
+#: extensions/system/views/admin/themes/index.razr:15
+#: extensions/system/src/System/Controller/MarketplaceController.php:27
+msgid "Marketplace"
+msgstr "应用市场"
+
+#: extensions/system/views/admin/extensions/index.razr:16
+#: extensions/system/views/admin/themes/index.razr:16
+msgid "All"
+msgstr "全部"
+
+#: extensions/system/views/admin/extensions/index.razr:34
+#: extensions/system/views/admin/themes/index.razr:34
+msgid ""
+"An error occurred in retrieving update information. Please try again later."
+msgstr "在获取更新信息时出现错误，请稍后再试。"
+
+#: extensions/system/views/admin/extensions/index.razr:38
+msgid "No extension updates found."
+msgstr "无拓展可用更新。"
+
+#: extensions/system/views/admin/extensions/index.razr:44
+#: extensions/system/views/admin/themes/index.razr:44
+msgid "Install an extension"
+msgstr "安装一个拓展"
+
+#: extensions/system/views/admin/extensions/index.razr:47
+#: extensions/system/views/admin/themes/index.razr:47
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Droparea"
+msgstr "拖放区域"
+
+#: extensions/system/views/admin/extensions/index.razr:48
+#: extensions/system/views/admin/themes/index.razr:48
+msgid ""
+"Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
+"upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "将文件拖拽至此或<a class=\"uk-form-file\">选择..<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+
+#: extensions/system/views/admin/extensions/index.razr:67
+msgid "No extensions found."
+msgstr "无拓展。"
+
+#: extensions/system/views/admin/extensions/index.razr:68
+#: extensions/system/views/admin/themes/index.razr:68
+msgid "Cannot connect to the marketplace. Please try again later."
+msgstr "无法连接至应用市场，请稍后再试。"
+
+#: extensions/system/views/admin/extensions/table.razr:4
+#: extensions/system/views/admin/user/edit.razr:43
+#: extensions/system/views/tmpl/package.updates.razr:5
+#: extensions/system/views/user/profile.razr:8
+#: extensions/system/views/user/registration.razr:15
+msgid "Name"
+msgstr "名字"
+
+#: extensions/system/views/admin/extensions/table.razr:5
+#: extensions/system/views/admin/settings/info.razr:49
+#: extensions/system/views/admin/settings/info.razr:85
+#: extensions/system/views/tmpl/package.upload.razr:17
+msgid "Version"
+msgstr "版本"
+
+#: extensions/system/views/admin/extensions/table.razr:6
+#: extensions/system/views/admin/menu/index.razr:54
+#: extensions/system/views/admin/menu/item.edit.razr:37
+#: extensions/system/views/admin/settings/info.razr:104
+#: extensions/system/views/admin/user/edit.razr:75
+#: extensions/system/views/admin/user/index.razr:63
+#: extensions/system/views/admin/widgets/edit.razr:73
+#: extensions/system/views/admin/widgets/index.razr:66
+msgid "Status"
+msgstr "状态"
+
+#: extensions/system/views/admin/extensions/table.razr:20
+#: extensions/system/views/admin/themes/table.razr:16
+#: extensions/system/views/tmpl/marketplace.table.razr:14
+msgid "Details"
+msgstr "详情"
+
+#: extensions/system/views/admin/extensions/table.razr:25
+#: extensions/system/views/admin/settings/info.razr:5
+#: extensions/system/languages/messages.php:28
+#: extensions/system/src/User/Controller/PermissionController.php:34
+msgid "Permissions"
+msgstr "权限"
+
+#: extensions/system/views/admin/extensions/table.razr:37
+#: extensions/system/views/admin/menu/item.edit.razr:40
+#: extensions/system/views/admin/widgets/edit.razr:76
+#: extensions/system/views/admin/widgets/index.razr:38
+#: extensions/system/src/Menu/Entity/Item.php:124
+#: extensions/system/src/Widget/Entity/Widget.php:98
+msgid "Enabled"
+msgstr "启用"
+
+#: extensions/system/views/admin/extensions/table.razr:39
+#: extensions/system/views/admin/menu/item.edit.razr:43
+#: extensions/system/views/admin/widgets/edit.razr:77
+#: extensions/system/views/admin/widgets/index.razr:39
+#: extensions/system/src/Menu/Entity/Item.php:123
+#: extensions/system/src/Widget/Entity/Widget.php:97
+msgid "Disabled"
+msgstr "禁用"
+
+#: extensions/system/views/admin/link/link.types.razr:11
+msgid "- Select Type -"
+msgstr "- 选择类型 -"
+
+#: extensions/system/views/admin/link/system.razr:2
+msgid "View"
+msgstr "视图"
+
+#: extensions/system/views/admin/link/system.razr:5
+msgid "- Select View -"
+msgstr "- 选择视图 -"
+
+#: extensions/system/views/admin/menu/index.razr:13
+#: extensions/system/views/admin/user/role.razr:16
+msgid "Edit"
+msgstr "编辑"
+
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Are you sure?"
+msgstr "你确定要这么做吗？"
+
+#: extensions/system/views/admin/menu/index.razr:25
+msgid "Add Menu"
+msgstr "添加菜单"
+
+#: extensions/system/views/admin/menu/index.razr:34
+msgid "Add Item"
+msgstr "添加项目"
+
+#: extensions/system/views/admin/menu/index.razr:38
+#: extensions/system/views/admin/user/index.razr:12
+#: extensions/system/views/admin/widgets/index.razr:22
+msgid "More"
+msgstr "更多"
+
+#: extensions/system/views/admin/menu/index.razr:41
+#: extensions/system/views/admin/themes/table.razr:26
+#: extensions/system/views/admin/widgets/index.razr:25
+msgid "Enable"
+msgstr "启用"
+
+#: extensions/system/views/admin/menu/index.razr:42
+#: extensions/system/views/admin/widgets/index.razr:26
+msgid "Disable"
+msgstr "禁用"
+
+#: extensions/system/views/admin/menu/index.razr:64
+msgid "No menu found."
+msgstr "无菜单。"
+
+#: extensions/system/views/admin/menu/index.razr:79
+msgid "Enter Menu Name"
+msgstr "请输入菜单名"
+
+#: extensions/system/views/admin/menu/item.edit.razr:28
+msgid "Header"
+msgstr "头部"
+
+#: extensions/system/views/admin/menu/item.edit.razr:31
+#: extensions/system/views/admin/menu/item.razr:23
+msgid "Divider"
+msgstr "分割线"
+
+#: extensions/system/views/admin/menu/item.edit.razr:49
+#: extensions/system/views/admin/widgets/edit.razr:92
+msgid "Restrict Access"
+msgstr "限制访问"
+
+#: extensions/system/views/admin/menu/item.edit.razr:61
+msgid "Activation Rules"
+msgstr "激活规则"
+
+#: extensions/system/views/admin/menu/item.edit.razr:64
+msgid "Enter custom activation rules as paths."
+msgstr "请输入自定义激活规则路径。"
+
+#: extensions/system/views/admin/menu/item.razr:25
+msgid "Menu Header"
+msgstr "菜单头部"
+
+#: extensions/system/views/admin/settings/index.razr:4
+#: extensions/system/views/admin/settings/info.razr:2
+#: extensions/system/views/admin/settings/settings.razr:19
+#: extensions/system/views/admin/settings/settings.razr:207
+#: extensions/system/src/System/Link/System.php:20
+msgid "System"
+msgstr "系统"
+
+#: extensions/system/views/admin/settings/index.razr:29
+#: extensions/system/views/admin/settings/index.razr:30
+#: extensions/system/src/Theme/Controller/ThemesController.php:65
+msgid "Themes"
+msgstr "主题"
+
+#: extensions/system/views/admin/settings/index.razr:37
+#: extensions/system/views/admin/settings/index.razr:38
+#: extensions/system/src/System/Controller/DashboardController.php:46
+msgid "Dashboard"
+msgstr "控制面板"
+
+#: extensions/system/views/admin/settings/index.razr:45
+#: extensions/system/views/admin/settings/index.razr:46
+#: extensions/system/views/admin/settings/settings.razr:225
+#: extensions/system/src/System/Controller/SystemController.php:94
+msgid "Storage"
+msgstr "存储"
+
+#: extensions/system/views/admin/settings/index.razr:63
+#: extensions/system/views/admin/settings/index.razr:64
+#: extensions/system/src/System/Controller/AliasController.php:46
+msgid "URL Aliases"
+msgstr "URL 别名"
+
+#: extensions/system/views/admin/settings/index.razr:71
+#: extensions/system/views/admin/settings/index.razr:72
+msgid "Info"
+msgstr "信息"
+
+#: extensions/system/views/admin/settings/index.razr:78
+#: extensions/system/views/admin/settings/index.razr:79
+msgid "Clear Cache"
+msgstr "清空缓存"
+
+#: extensions/system/views/admin/settings/index.razr:107
+msgid "Select caches to clear:"
+msgstr "选择所要清除的缓存："
+
+#: extensions/system/views/admin/settings/index.razr:114
+msgid "System Cache"
+msgstr "系统缓存"
+
+#: extensions/system/views/admin/settings/index.razr:121
+msgid "Rendered Templates"
+msgstr "已渲染模板"
+
+#: extensions/system/views/admin/settings/index.razr:128
+msgid "Temporary Files"
+msgstr "临时文件"
+
+#: extensions/system/views/admin/settings/index.razr:133
+msgid "Clear"
+msgstr "清除"
+
+#: extensions/system/views/admin/settings/info.razr:3
+msgid "PHP"
+msgstr "PHP"
+
+#: extensions/system/views/admin/settings/info.razr:4
+msgid "Database"
+msgstr "数据库"
+
+#: extensions/system/views/admin/settings/info.razr:15
+#: extensions/system/views/admin/settings/info.razr:43
+#: extensions/system/views/admin/settings/info.razr:75
+msgid "Setting"
+msgstr "设置"
+
+#: extensions/system/views/admin/settings/info.razr:16
+#: extensions/system/views/admin/settings/info.razr:44
+#: extensions/system/views/admin/settings/info.razr:76
+msgid "Value"
+msgstr "值"
+
+#: extensions/system/views/admin/settings/info.razr:21
+msgid "Pagekit Version"
+msgstr "Pagekit 版本"
+
+#: extensions/system/views/admin/settings/info.razr:25
+msgid "Web Server"
+msgstr "网站服务器"
+
+#: extensions/system/views/admin/settings/info.razr:29
+msgid "User Agent"
+msgstr "User Agent"
+
+#: extensions/system/views/admin/settings/info.razr:53
+msgid "Handler"
+msgstr "Handler"
+
+#: extensions/system/views/admin/settings/info.razr:57
+msgid "Built On"
+msgstr "建立在"
+
+#: extensions/system/views/admin/settings/info.razr:81
+msgid "Driver"
+msgstr "驱动"
+
+#: extensions/system/views/admin/settings/info.razr:89
+msgid "Client"
+msgstr "客户端"
+
+#: extensions/system/views/admin/settings/info.razr:103
+msgid "Path"
+msgstr "路径"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Writable"
+msgstr "可写"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Unwritable"
+msgstr "不可写"
+
+#: extensions/system/views/admin/settings/settings.razr:15
+#: extensions/system/views/admin/settings/settings.razr:29
+msgid "Site"
+msgstr "网站"
+
+#: extensions/system/views/admin/settings/settings.razr:16
+#: extensions/system/views/admin/settings/settings.razr:66
+#: extensions/system/views/admin/user/edit.razr:50
+#: extensions/system/views/admin/user/index.razr:64
+#: extensions/system/views/user/profile.razr:15
+#: extensions/system/views/user/registration.razr:22
+msgid "Email"
+msgstr "Email"
+
+#: extensions/system/views/admin/settings/settings.razr:17
+#: extensions/system/views/admin/settings/settings.razr:142
+msgid "Localization"
+msgstr "本地化"
+
+#: extensions/system/views/admin/settings/settings.razr:18
+#: extensions/system/views/admin/settings/settings.razr:181
+#: extensions/system/views/admin/user/index.razr:62
+#: extensions/system/src/User/Link/User.php:22
+msgid "User"
+msgstr "用户"
+
+#: extensions/system/views/admin/settings/settings.razr:37
+msgid "Description"
+msgstr "描述"
+
+#: extensions/system/views/admin/settings/settings.razr:43
+msgid "Front Page"
+msgstr "首页"
+
+#: extensions/system/views/admin/settings/settings.razr:52
+msgid "Put the site offline and show the offline message."
+msgstr "使站点处于离线状态，并显示自定义信息。"
+
+#: extensions/system/views/admin/settings/settings.razr:57
+msgid "Offline Message"
+msgstr "离线信息"
+
+#: extensions/system/views/admin/settings/settings.razr:59
+#: extensions/system/src/System/Event/MaintenanceListener.php:27
+msgid "We'll be back soon."
+msgstr "网站暂时下线一段时间，我们晚点回来。"
+
+#: extensions/system/views/admin/settings/settings.razr:68
+msgid "From Email"
+msgstr "来自 Email"
+
+#: extensions/system/views/admin/settings/settings.razr:74
+msgid "From Name"
+msgstr "来自姓名"
+
+#: extensions/system/views/admin/settings/settings.razr:80
+msgid "Mailer"
+msgstr "发送者"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "PHP Mailer"
+msgstr "PHP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "SMTP Mailer"
+msgstr "SMTP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:91
+msgid "SMTP Port"
+msgstr "SMTP 端口"
+
+#: extensions/system/views/admin/settings/settings.razr:97
+msgid "SMTP Host"
+msgstr "SMTP 服务器地址"
+
+#: extensions/system/views/admin/settings/settings.razr:103
+msgid "SMTP User"
+msgstr "SMTP 用户名"
+
+#: extensions/system/views/admin/settings/settings.razr:109
+msgid "SMTP Password"
+msgstr "SMTP 密码"
+
+#: extensions/system/views/admin/settings/settings.razr:113
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Show"
+msgstr "展示"
+
+#: extensions/system/views/admin/settings/settings.razr:118
+msgid "SMTP Encryption"
+msgstr "SMTP 加密类型"
+
+#: extensions/system/views/admin/settings/settings.razr:121
+msgid "None"
+msgstr "无"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "SSL"
+msgstr "SSL"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "TLS"
+msgstr "TLS"
+
+#: extensions/system/views/admin/settings/settings.razr:127
+msgid "Please enable the PHP Open SSL extension."
+msgstr "请开启 PHP Open SSL 拓展。"
+
+#: extensions/system/views/admin/settings/settings.razr:134
+msgid "Check Connection"
+msgstr "检查连接"
+
+#: extensions/system/views/admin/settings/settings.razr:135
+msgid "Send Test Email"
+msgstr "发送测试邮件"
+
+#: extensions/system/views/admin/settings/settings.razr:144
+msgid "Site Locale"
+msgstr "网站"
+
+#: extensions/system/views/admin/settings/settings.razr:154
+msgid "Admin Locale"
+msgstr "后台管理区"
+
+#: extensions/system/views/admin/settings/settings.razr:164
+msgid "Time Zone"
+msgstr "时区"
+
+#: extensions/system/views/admin/settings/settings.razr:183
+#: extensions/system/views/user/registration.razr:5
+#: extensions/system/src/User/Link/User.php:47
+msgid "Registration"
+msgstr "注册"
+
+#: extensions/system/views/admin/settings/settings.razr:186
+msgid "Adminstrators only"
+msgstr "仅管理员"
+
+#: extensions/system/views/admin/settings/settings.razr:189
+msgid "Guests"
+msgstr "来宾"
+
+#: extensions/system/views/admin/settings/settings.razr:192
+msgid "Guests, but administrator approval is required"
+msgstr "来宾，但需要管理员批准"
+
+#: extensions/system/views/admin/settings/settings.razr:197
+msgid "Verification"
+msgstr "验证"
+
+#: extensions/system/views/admin/settings/settings.razr:200
+msgid "Require e-mail verification when a guest creates an account."
+msgstr "当游客创建账号时发送认证邮件"
+
+#: extensions/system/views/admin/settings/settings.razr:209
+msgid "API Key"
+msgstr "API Key"
+
+#: extensions/system/views/admin/settings/settings.razr:211
+msgid "Enter your API key"
+msgstr "请输入你的 API Key"
+
+#: extensions/system/views/admin/settings/settings.razr:215
+msgid "Release Channel"
+msgstr "使用版本"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Stable"
+msgstr "稳定版"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Nightly"
+msgstr "夜版"
+
+#: extensions/system/views/admin/settings/settings.razr:231
+msgid "Cache"
+msgstr "缓存"
+
+#: extensions/system/views/admin/settings/settings.razr:241
+msgid "Developer"
+msgstr "开发者"
+
+#: extensions/system/views/admin/settings/settings.razr:244
+msgid "Enable debug mode"
+msgstr "开启调试模式"
+
+#: extensions/system/views/admin/settings/settings.razr:247
+msgid "Enable debug toolbar"
+msgstr "开启调试工具栏"
+
+#: extensions/system/views/admin/settings/settings.razr:250
+msgid "Please enable the SQLite database extension."
+msgstr "请开启 SQLite 数据库拓展。"
+
+#: extensions/system/views/admin/settings/settings.razr:253
+msgid "Disable cache"
+msgstr "关闭缓存"
+
+#: extensions/system/views/admin/settings/update.razr:7
+msgid "There is an update available."
+msgstr "有更新可用。"
+
+#: extensions/system/views/admin/settings/update.razr:8
+msgid "Please update Pagekit to version %version%!"
+msgstr "请升级至 Pagekit %version%！"
+
+#: extensions/system/views/admin/settings/update.razr:12
+#: extensions/system/views/admin/settings/update.razr:34
+msgid "Download %version%"
+msgstr "下载 %version% 版本"
+
+#: extensions/system/views/admin/settings/update.razr:19
+msgid "Downloading ..."
+msgstr "下载中……"
+
+#: extensions/system/views/admin/settings/update.razr:29
+msgid "You have the latest version of Pagekit."
+msgstr "Pagekit 已是最新版本。"
+
+#: extensions/system/views/admin/settings/update.razr:30
+msgid ""
+"You have the latest version of Pagekit. You do not need to update. However, "
+"if you want to re-install version %version%, you can do so automatically or "
+"download the package and re-install manually."
+msgstr "Pagekit 已是最新版本，你不需要再执行更新。当然，如果需要重新安装 %version% 此版本，可以点击更新按钮或是至官网手动下载安装包。"
+
+#: extensions/system/views/admin/settings/update.razr:33
+msgid "Re-install"
+msgstr "重新安装"
+
+#: extensions/system/views/admin/settings/update.razr:39
+msgid "Cannot connect to the server. Please try again later."
+msgstr "无法连接至服务器，请稍候再试。"
+
+#: extensions/system/views/admin/themes/index.razr:38
+msgid "No theme updates found."
+msgstr "主题已是最新版本。"
+
+#: extensions/system/views/admin/themes/index.razr:67
+msgid "No themes found."
+msgstr "好像还没有主题进驻 Pagekit 呢！"
+
+#: extensions/system/views/admin/themes/table.razr:11
+#: extensions/system/src/User/Entity/User.php:100
+msgid "Active"
+msgstr "活跃"
+
+#: extensions/system/views/admin/user/edit.razr:19
+#: extensions/system/views/admin/user/edit.razr:111
+#: extensions/system/views/admin/user/index.razr:27
+#: extensions/system/views/admin/user/index.razr:81
+msgid "New"
+msgstr "新"
+
+#: extensions/system/views/admin/user/edit.razr:24
+msgid "Verified email address"
+msgstr "验证 Email 地址"
+
+#: extensions/system/views/admin/user/edit.razr:25
+msgid "Last login: %date%"
+msgstr "最后登录时间：%date%"
+
+#: extensions/system/views/admin/user/edit.razr:25
+#: extensions/system/src/User/Controller/UserController.php:274
+msgid "Never"
+msgstr "永不"
+
+#: extensions/system/views/admin/user/edit.razr:26
+msgid "Registered since: %date%"
+msgstr "注册时间：%date%"
+
+#: extensions/system/views/admin/user/edit.razr:61
+#: extensions/system/views/user/profile.razr:22
+msgid "Change password"
+msgstr "更改密码"
+
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Hide"
+msgstr "隐藏"
+
+#: extensions/system/views/admin/user/edit.razr:87
+#: extensions/system/views/admin/user/index.razr:65
+#: extensions/system/languages/messages.php:29
+#: extensions/system/src/User/Controller/RoleController.php:47
+msgid "Roles"
+msgstr "角色"
+
+#: extensions/system/views/admin/user/edit.razr:117
+msgid "Last login: {{login}}"
+msgstr "最后登录：{{login}}"
+
+#: extensions/system/views/admin/user/edit.razr:118
+msgid "Registered since: {{registered}}"
+msgstr "注册时间： {{registered}}"
+
+#: extensions/system/views/admin/user/index.razr:8
+#: extensions/system/src/User/Controller/UserController.php:113
+msgid "Add User"
+msgstr "添加用户"
+
+#: extensions/system/views/admin/user/index.razr:15
+msgid "Activate"
+msgstr "激活"
+
+#: extensions/system/views/admin/user/index.razr:16
+msgid "Block"
+msgstr "封锁"
+
+#: extensions/system/views/admin/user/index.razr:26
+#: extensions/system/views/admin/widgets/index.razr:37
+msgid "- Status -"
+msgstr "- 状态 -"
+
+#: extensions/system/views/admin/user/index.razr:34
+msgid "- Role -"
+msgstr "- 角色 -"
+
+#: extensions/system/views/admin/user/index.razr:41
+msgid "- Permission -"
+msgstr "- 权限 -"
+
+#: extensions/system/views/admin/user/index.razr:87
+msgid "Verified Email Address"
+msgstr "验证 Email 地址"
+
+#: extensions/system/views/admin/user/index.razr:98
+msgid "No user found."
+msgstr "无用户。"
+
+#: extensions/system/views/admin/user/permission.razr:11
+#: extensions/system/views/admin/user/role.razr:43
+msgid "Permission"
+msgstr "权限"
+
+#: extensions/system/views/admin/user/role.razr:28
+msgid "Add Role"
+msgstr "添加角色"
+
+#: extensions/system/views/admin/user/role.razr:87
+msgid "Enter Role Name"
+msgstr "请输入角色名"
+
+#: extensions/system/views/admin/widgets/edit.razr:15
+msgid "Assignment"
+msgstr "分配"
+
+#: extensions/system/views/admin/widgets/edit.razr:40
+#: extensions/system/views/widgets/menu/edit.razr:2
+#: extensions/system/src/Menu/Widget/MenuWidget.php:23
+msgid "Menu"
+msgstr "菜单"
+
+#: extensions/system/views/admin/widgets/edit.razr:49
+msgid "Pattern"
+msgstr "模式"
+
+#: extensions/system/views/admin/widgets/edit.razr:52
+msgid ""
+"Enter one page path per line. The \"*\" character is a wildcard. Exclude "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"exclude the blog."
+msgstr "请每行输入一个页面的路径地址， \"*\"为通配符，\"!\"为排除页面前加上路径的标记。例如：\"blog\"是博客页面，\"blog/*\"为博客内容；\"!blog\"为排除博客中的所有项目。"
+
+#: extensions/system/views/admin/widgets/edit.razr:82
+#: extensions/system/views/admin/widgets/index.razr:67
+msgid "Position"
+msgstr "位置"
+
+#: extensions/system/views/admin/widgets/edit.razr:103
+msgid "Options"
+msgstr "选项"
+
+#: extensions/system/views/admin/widgets/edit.razr:105
+msgid "Show Title"
+msgstr "显示标题"
+
+#: extensions/system/views/admin/widgets/index.razr:28
+#: extensions/system/src/Widget/Controller/WidgetsController.php:161
+msgid "Copy"
+msgstr "复制"
+
+#: extensions/system/views/admin/widgets/index.razr:43
+msgid "- Position -"
+msgstr "- 位置 - "
+
+#: extensions/system/views/admin/widgets/index.razr:50
+msgid "- Type -"
+msgstr "- 类型 -"
+
+#: extensions/system/views/admin/widgets/index.razr:109
+msgid "- Assign -"
+msgstr "- 分配 -"
+
+#: extensions/system/views/admin/widgets/index.razr:117
+msgid "Extension not loaded"
+msgstr "拓展未载入"
+
+#: extensions/system/views/tmpl/feed.error.razr:1
+msgid "Unable to retrieve feed data."
+msgstr "无法获取 Feed 数据。"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "New Name"
+msgstr "新名字"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Folder Name"
+msgstr "文件夹名"
+
+#: extensions/system/views/tmpl/finder.main.razr:5
+msgid "Upload"
+msgstr "上传"
+
+#: extensions/system/views/tmpl/finder.main.razr:9
+msgid "Add Folder"
+msgstr "添加文件夹"
+
+#: extensions/system/views/tmpl/finder.main.razr:12
+msgid "Rename"
+msgstr "重命名"
+
+#: extensions/system/views/tmpl/finder.main.razr:28
+msgid "Home"
+msgstr "主页"
+
+#: extensions/system/views/tmpl/finder.table.razr:7
+msgid "Size"
+msgstr "尺寸"
+
+#: extensions/system/views/tmpl/finder.table.razr:8
+msgid "Modified"
+msgstr "完善"
+
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Drop files here."
+msgstr "将文件拖动至此"
+
+#: extensions/system/views/tmpl/image.modal.razr:4
+msgid "Add Image"
+msgstr "添加图片"
+
+#: extensions/system/views/tmpl/image.modal.razr:8
+msgid "Select image"
+msgstr "选择图片"
+
+#: extensions/system/views/tmpl/image.modal.razr:18
+msgid "Alt"
+msgstr "替代文本（Alt）"
+
+#: extensions/system/views/tmpl/image.modal.razr:29
+msgid "Select Image"
+msgstr "选择图片"
+
+#: extensions/system/views/tmpl/image.modal.razr:32
+#: extensions/system/views/tmpl/video.modal.razr:31
+msgid "Select"
+msgstr "选择"
+
+#: extensions/system/views/tmpl/image.replace.razr:6
+msgid "Placeholder Image"
+msgstr "占位图片（Placeholder Image）"
+
+#: extensions/system/views/tmpl/image.replace.razr:12
+msgid "Image"
+msgstr "图片"
+
+#: extensions/system/views/tmpl/link.modal.razr:3
+msgid "Add Link"
+msgstr "添加链接"
+
+#: extensions/system/views/tmpl/link.replace.razr:1
+#: extensions/system/views/tmpl/linkpicker.replace.razr:1
+msgid "Select Link"
+msgstr "选择链接"
+
+#: extensions/system/views/tmpl/linkpicker.modal.razr:3
+msgid "Link"
+msgstr "链接"
+
+#: extensions/system/views/tmpl/package.updates.razr:18
+msgid "Changelog"
+msgstr "改动日志"
+
+#: extensions/system/views/tmpl/package.upload.razr:4
+msgid ""
+"The checksum of the uploaded package does not match the one from the "
+"marketplace. The file might be manipulated."
+msgstr "所上传安装包与应用市场中的文件校验不匹配。请注意，此安装包很有可能已被修改。"
+
+#: extensions/system/views/tmpl/package.upload.razr:8
+msgid ""
+"There is an update available for the uploaded package. Please consider "
+"installing it instead."
+msgstr "上传的安装包已有可用更新，请考虑安装。"
+
+#: extensions/system/views/tmpl/package.upload.razr:28
+msgid "Path:"
+msgstr "路径："
+
+#: extensions/system/views/tmpl/package.upload.razr:29
+msgid "Type:"
+msgstr "类型："
+
+#: extensions/system/views/tmpl/video.modal.razr:5
+msgid "Add Video"
+msgstr "添加视频"
+
+#: extensions/system/views/tmpl/video.modal.razr:16
+msgid "Select video"
+msgstr "选择视频"
+
+#: extensions/system/views/tmpl/video.modal.razr:28
+msgid "Select Video"
+msgstr "选择视频"
+
+#: extensions/system/views/tmpl/video.replace.razr:6
+msgid "Placeholder Video"
+msgstr "占位视频（Placeholder Video）"
+
+#: extensions/system/views/tmpl/video.replace.razr:12
+msgid "Video"
+msgstr "视频"
+
+#: extensions/system/views/user/login.razr:13
+msgid "(Forgot Password?)"
+msgstr "（不小心忘记密码了？）"
+
+#: extensions/system/views/user/login.razr:20
+#: extensions/system/views/user/registration.razr:39
+#: extensions/system/views/user/reset/confirm.razr:18
+#: extensions/system/views/user/reset/request.razr:15
+msgid "Submit"
+msgstr "发布"
+
+#: extensions/system/views/user/mails/approve.razr:11
+msgid "Hello"
+msgstr "你好"
+
+#: extensions/system/views/user/mails/approve.razr:12
+msgid ""
+"A new user has registered at %site% and requests that you approve his "
+"account."
+msgstr "一个新用户已在 %site% 注册并请求批准。"
+
+#: extensions/system/views/user/mails/approve.razr:13
+msgid ""
+"User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
+msgstr "用户的详细信息：<br><br>姓名： %name%<br>用户名：%username%<br>Email：%email%"
+
+#: extensions/system/views/user/mails/approve.razr:14
+msgid "To activate the account click on:"
+msgstr "若需激活账户请点击："
+
+#: extensions/system/views/user/mails/reset.razr:9
+msgid "Someone requested that the password be reset for the following account"
+msgstr "有用户要求对如下帐号进行密码重置操作"
+
+#: extensions/system/views/user/mails/reset.razr:12
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr "如果这是一个误会，那请您忽略这封邮件。请放心，什么都不会发生。"
+
+#: extensions/system/views/user/mails/reset.razr:13
+msgid "To reset your password, visit the following address"
+msgstr "若需重置密码，请访问以下链接"
+
+#: extensions/system/views/user/mails/verification.razr:11
+#: extensions/system/views/user/mails/welcome.razr:9
+msgid "Hello %name%"
+msgstr "你好~%name%"
+
+#: extensions/system/views/user/mails/verification.razr:12
+msgid ""
+"Thank you for registering at %site%! Your account has been successfully "
+"created and must be verified before you can use it."
+msgstr "非常感谢您注册 %site% ！您的账户已被成功创建，但在使用之前——您需要先验证电子邮箱地址。"
+
+#: extensions/system/views/user/mails/verification.razr:13
+msgid "To verify your account click on:"
+msgstr "请点击此验证您的账户："
+
+#: extensions/system/views/user/mails/welcome.razr:10
+msgid "Thank you for registering!"
+msgstr "感谢您的注册！"
+
+#: extensions/system/views/user/mails/welcome.razr:12
+msgid "Login with the username:"
+msgstr "使用用户名登录："
+
+#: extensions/system/views/user/profile.razr:5
+#: extensions/system/src/User/Controller/ProfileController.php:44
+msgid "Your Profile"
+msgstr "您的个人资料"
+
+#: extensions/system/views/user/profile.razr:26
+msgid "Current Password"
+msgstr "当前密码"
+
+#: extensions/system/views/user/profile.razr:36
+msgid "New Password"
+msgstr "新密码"
+
+#: extensions/system/views/user/reset/confirm.razr:5
+msgid "Password confirmation"
+msgstr "确认密码"
+
+#: extensions/system/views/user/reset/confirm.razr:8
+msgid "Enter your new password below."
+msgstr "请在下方输入您的新密码。"
+
+#: extensions/system/views/user/reset/request.razr:3
+msgid "Forgot password"
+msgstr "忘记密码"
+
+#: extensions/system/views/user/reset/request.razr:5
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+msgstr "请输入您的用户名及 Email，在稍后将会以邮件的形式发送重置密码链接。"
+
+#: extensions/system/views/widgets/login/edit.razr:4
+msgid "Login Redirect"
+msgstr "登录后重定向"
+
+#: extensions/system/views/widgets/login/edit.razr:10
+msgid "Logout Redirect"
+msgstr "登出后重定向"
+
+#: extensions/system/views/widgets/login/login.razr:4
+msgid "username"
+msgstr "用户名"
+
+#: extensions/system/views/widgets/login/login.razr:7
+msgid "password"
+msgstr "密码"
+
+#: extensions/system/views/widgets/login/login.razr:17
+msgid "Sign up"
+msgstr "注册"
+
+#: extensions/system/views/widgets/login/logout.razr:1
+msgid "Hi"
+msgstr "嗨~"
+
+#: extensions/system/views/widgets/menu/edit.razr:12
+msgid "Start Level"
+msgstr "起步阶段"
+
+#: extensions/system/views/widgets/menu/edit.razr:22
+msgid "Depth"
+msgstr "深度"
+
+#: extensions/system/views/widgets/menu/edit.razr:25
+msgid "No Limit"
+msgstr "无限制"
+
+#: extensions/system/views/widgets/menu/edit.razr:33
+msgid "Sub Items"
+msgstr "子项目"
+
+#: extensions/system/views/widgets/menu/edit.razr:36
+msgid "Show all"
+msgstr "显示全部"
+
+#: extensions/system/views/widgets/menu/edit.razr:39
+msgid "Show only for active item"
+msgstr "只显示已被激活的项目"
+
+#: extensions/system/views/widgets/text/edit.razr:5
+msgid "Enable Markdown"
+msgstr "开启 Markdown 模式"
+
+#: extensions/system/languages/messages.php:4
+msgid "0"
+msgstr "0"
+
+#: extensions/system/languages/messages.php:5
+msgid "1"
+msgstr "1"
+
+#: extensions/system/languages/messages.php:6
+msgid "2"
+msgstr "2"
+
+#: extensions/system/languages/messages.php:7
+msgid "3"
+msgstr "3"
+
+#: extensions/system/languages/messages.php:8
+msgid "4"
+msgstr "4"
+
+#: extensions/system/languages/messages.php:9
+msgid "5"
+msgstr "5"
+
+#: extensions/system/languages/messages.php:10
+msgid "6"
+msgstr "6"
+
+#: extensions/system/languages/messages.php:11
+msgid "7"
+msgstr "7"
+
+#: extensions/system/languages/messages.php:12
+msgid "8"
+msgstr "8"
+
+#: extensions/system/languages/messages.php:13
+msgid "9"
+msgstr "9"
+
+#: extensions/system/languages/messages.php:14
+msgid "10"
+msgstr "10"
+
+#: extensions/system/languages/messages.php:15
+msgid "11"
+msgstr "11"
+
+#: extensions/system/languages/messages.php:16
+msgid "12"
+msgstr "12"
+
+#: extensions/system/languages/messages.php:17
+msgid "13"
+msgstr "13"
+
+#: extensions/system/languages/messages.php:18
+msgid "14"
+msgstr "14"
+
+#: extensions/system/languages/messages.php:19
+msgid "15"
+msgstr "15"
+
+#: extensions/system/languages/messages.php:20
+msgid "16"
+msgstr "16"
+
+#: extensions/system/languages/messages.php:21
+msgid "17"
+msgstr "17"
+
+#: extensions/system/languages/messages.php:25
+#: extensions/system/src/Widget/Controller/WidgetsController.php:58
+msgid "Widgets"
+msgstr "小工具"
+
+#: extensions/system/languages/messages.php:26
+#: extensions/system/src/Menu/Controller/MenuController.php:47
+msgid "Menus"
+msgstr "菜单"
+
+#: extensions/system/languages/messages.php:27
+#: extensions/system/src/User/Controller/UserController.php:100
+#: extensions/system/src/User/Dashboard/UserWidget.php:23
+msgid "Users"
+msgstr "用户"
+
+#: extensions/system/languages/messages.php:30
+msgid "Access"
+msgstr "进入"
+
+#: extensions/system/languages/messages.php:33
+msgid "Manage media files"
+msgstr "管理媒体文件"
+
+#: extensions/system/languages/messages.php:34
+msgid "Manage menus"
+msgstr "管理菜单"
+
+#: extensions/system/languages/messages.php:35
+msgid "Manage widgets"
+msgstr "管理小工具"
+
+#: extensions/system/languages/messages.php:36
+msgid "Manage themes"
+msgstr "管理主题"
+
+#: extensions/system/languages/messages.php:37
+msgid "Manage extensions"
+msgstr "管理拓展"
+
+#: extensions/system/languages/messages.php:38
+msgid "Manage url aliases"
+msgstr "管理 URL 别名"
+
+#: extensions/system/languages/messages.php:39
+msgid "Apply system updates"
+msgstr "应用系统更新"
+
+#: extensions/system/languages/messages.php:40
+msgid "Access admin area"
+msgstr "进入后台管理区"
+
+#: extensions/system/languages/messages.php:41
+msgid "Access system settings"
+msgstr "进入系统设置"
+
+#: extensions/system/languages/messages.php:42
+msgid "Manage user permissions"
+msgstr "管理用户权限"
+
+#: extensions/system/languages/messages.php:43
+msgid "Manage users"
+msgstr "管理用户"
+
+#: extensions/system/languages/messages.php:44
+msgid "Use the site in maintenance mode"
+msgstr "在网站中启用维护模式"
+
+#: extensions/system/languages/messages.php:45
+msgid ""
+"Warning: Give to trusted roles only; this permission has security "
+"implications."
+msgstr "警告：请只给予被信任的角色，此权限将会使网站造成安全问题。"
+
+#: extensions/system/src/Editor/Templating/EditorHelper.php:44
+msgid "Editor not found."
+msgstr "编辑器未找到。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:62
+msgid "Core extensions may not be enabled."
+msgstr "核心拓展可能未被启用。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:72
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
+msgstr "无法激活拓展，<br>出现致命错误（Fatal Error）。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:80
+msgid "Unable to enable extension \"%name%\"."
+msgstr "无法启用拓展 \"%name%\"。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:91
+msgid "Extension enabled."
+msgstr "拓展已启用。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:109
+msgid "Core extensions may not be disabled."
+msgstr "核心扩展可能未被禁用。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:113
+msgid "Extension \"%name%\" has not been loaded."
+msgstr "拓展  \"%name%\" 未加载。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:120
+msgid "Extension disabled."
+msgstr "拓展已禁用。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:138
+msgid "Core extensions may not be uninstalled."
+msgstr "核心拓展可能未被卸载。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:146
+msgid "Unable to uninstall extension \"%name%\"."
+msgstr "无法卸载拓展 \"%name%\"。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:157
+msgid "Extension uninstalled."
+msgstr "拓展已卸载。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:174
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:197
+msgid "Invalid extension."
+msgstr "拓展错误。"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:203
+#: extensions/system/src/System/Controller/SettingsController.php:104
+#: extensions/system/src/Theme/Controller/ThemesController.php:167
+msgid "Settings saved."
+msgstr "设置已保存。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:52
+#: extensions/system/src/Menu/Controller/ItemController.php:98
+#: extensions/system/src/Menu/Controller/ItemController.php:133
+#: extensions/system/src/Menu/Controller/ItemController.php:161
+msgid "Invalid menu."
+msgstr "菜单错误。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:58
+msgid "Add Menu Item"
+msgstr "添加菜单项目"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:76
+msgid "Invalid menu item."
+msgstr "菜单项目错误。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:79
+msgid "Edit Menu Item"
+msgstr "编辑菜单项目"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item saved."
+msgstr "菜单项目已保存。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item created."
+msgstr "菜单项目已创建。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:119
+msgid "Invalid url."
+msgstr "URL错误。"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:144
+msgid ""
+"{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
+msgstr "{0} 没有菜单项目被删除。|{1} 个菜单项目被删除。|]1,Inf[  个菜单项目被删除。"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:58
+msgid "Invalid menu name."
+msgstr "菜单名错误。"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:66
+msgid "Invalid menu name. \"%name%\" is already in use."
+msgstr "菜单名错误，\"%name%\" 已被使用。"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:86
+msgid "Invalid menu id"
+msgstr "菜单 ID 错误"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:122
+msgid "Menu order updated"
+msgstr "菜单顺序已更新"
+
+#: extensions/system/src/Menu/Entity/Item.php:92
+#: extensions/system/src/User/Entity/User.php:94
+#: extensions/system/src/Widget/Entity/Widget.php:91
+msgid "Unknown"
+msgstr "未知"
+
+#: extensions/system/src/Menu/Widget/MenuWidget.php:31
+msgid "Menu Widget"
+msgstr "菜单小工具"
+
+#: extensions/system/src/System/Controller/AliasController.php:54
+msgid "Add URL Alias"
+msgstr "添加 URL 别名"
+
+#: extensions/system/src/System/Controller/AliasController.php:66
+msgid "Invalid alias id."
+msgstr "别名 ID 错误。"
+
+#: extensions/system/src/System/Controller/AliasController.php:69
+msgid "Edit URL Alias"
+msgstr "编辑 URL 别名。"
+
+#: extensions/system/src/System/Controller/AliasController.php:89
+msgid "Invalid alias."
+msgstr "别名错误。"
+
+#: extensions/system/src/System/Controller/AliasController.php:93
+msgid "Invalid source."
+msgstr "使用源错误。"
+
+#: extensions/system/src/System/Controller/AliasController.php:97
+msgid "The alias \"%alias%\" is already in use."
+msgstr "别名  \"%alias%\" 已被使用。"
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias saved."
+msgstr "别名已保存。"
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias created."
+msgstr "别名已创建"
+
+#: extensions/system/src/System/Controller/AliasController.php:122
+msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
+msgstr "{0} 没有别名被删除。 |{1} 个别名已删除。|]1,Inf[ 个别名已删除。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:67
+msgid "Dashboard Settings"
+msgstr "控制面板设置"
+
+#: extensions/system/src/System/Controller/DashboardController.php:79
+#: extensions/system/src/System/Controller/DashboardController.php:109
+msgid "Invalid widget type."
+msgstr "小工具类型错误。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:105
+msgid "Invalid widget id."
+msgstr "小工具 ID 错误。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:114
+#: extensions/system/src/Widget/Controller/WidgetsController.php:85
+msgid "Edit Widget"
+msgstr "编辑小工具"
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget created."
+msgstr "小工具已创建。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget saved."
+msgstr "小工具已保存。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:160
+msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} 没有小工具被删除。|{1} 个小工具被删除。|]1,Inf[ 个小工具被删除。"
+
+#: extensions/system/src/System/Controller/DashboardController.php:183
+msgid "Widgets reordered."
+msgstr "小工具已重新排列。"
+
+#: extensions/system/src/System/Controller/FinderController.php:18
+#: extensions/system/src/System/Controller/FinderController.php:65
+#: extensions/system/src/System/Controller/FinderController.php:95
+#: extensions/system/src/System/Controller/FinderController.php:123
+#: extensions/system/src/System/Controller/FinderController.php:151
+msgid "Invalid path."
+msgstr "路径错误。"
+
+#: extensions/system/src/System/Controller/FinderController.php:22
+#: extensions/system/src/System/Controller/FinderController.php:69
+#: extensions/system/src/System/Controller/FinderController.php:99
+#: extensions/system/src/System/Controller/FinderController.php:127
+#: extensions/system/src/System/Controller/FinderController.php:155
+msgid "Permission denied."
+msgstr "权限被拒绝。"
+
+#: extensions/system/src/System/Controller/FinderController.php:61
+#: extensions/system/src/System/Controller/FinderController.php:91
+msgid "Invalid file name."
+msgstr "文件名错误。"
+
+#: extensions/system/src/System/Controller/FinderController.php:76
+msgid "Directory created."
+msgstr "目录已创建。"
+
+#: extensions/system/src/System/Controller/FinderController.php:80
+msgid "Unable to create directory."
+msgstr "无法创建目录。"
+
+#: extensions/system/src/System/Controller/FinderController.php:106
+msgid "Renamed."
+msgstr "已重命名。"
+
+#: extensions/system/src/System/Controller/FinderController.php:110
+msgid "Unable to rename."
+msgstr "无法重命名。"
+
+#: extensions/system/src/System/Controller/FinderController.php:136
+msgid "Unable to remove."
+msgstr "无法删除。"
+
+#: extensions/system/src/System/Controller/FinderController.php:140
+msgid "Removed selected."
+msgstr "已删除所选项。"
+
+#: extensions/system/src/System/Controller/FinderController.php:161
+msgid "No files uploaded."
+msgstr "无文件被上传。"
+
+#: extensions/system/src/System/Controller/FinderController.php:167
+msgid "Uploaded file invalid."
+msgstr "上传文件错误。"
+
+#: extensions/system/src/System/Controller/FinderController.php:173
+msgid "Upload complete."
+msgstr "上传完成。"
+
+#: extensions/system/src/System/Controller/FinderController.php:177
+msgid "Unable to upload."
+msgstr "无法上传。"
+
+#: extensions/system/src/System/Controller/FinderController.php:199
+msgid "n/a"
+msgstr "N/A"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d Bytes"
+msgstr "%d Bytes"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  KB"
+msgstr "%d KB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  MB"
+msgstr "%d MB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  GB"
+msgstr "%d GB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d TB"
+msgstr "%d TB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d PB"
+msgstr "%d PB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d EB"
+msgstr "%d EB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d ZB"
+msgstr "%d ZB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d YB"
+msgstr "%d YB"
+
+#: extensions/system/src/System/Controller/LinkController.php:56
+msgid "Url"
+msgstr "URL"
+
+#: extensions/system/src/System/Controller/MigrationController.php:29
+msgid "Your Pagekit database has been updated successfully."
+msgstr "您的 Pagekit 数据表已被成功升级！"
+
+#: extensions/system/src/System/Controller/MigrationController.php:31
+msgid "Your Pagekit database is already up-to-date!"
+msgstr "您的 Pagekit 数据库已为最新！"
+
+#: extensions/system/src/System/Controller/PackageController.php:47
+msgid "No file uploaded."
+msgstr "无文件被上传。"
+
+#: extensions/system/src/System/Controller/PackageController.php:53
+msgid "Invalid package type."
+msgstr "安装包类型错误。"
+
+#: extensions/system/src/System/Controller/PackageController.php:57
+#: extensions/system/src/System/Controller/PackageController.php:161
+msgid "Core extensions may not be installed."
+msgstr "核心拓展未安装。"
+
+#: extensions/system/src/System/Controller/PackageController.php:111
+msgid "Path not found."
+msgstr "路径未找到。"
+
+#: extensions/system/src/System/Controller/PackageController.php:124
+msgid "Package \"%name%\" installed."
+msgstr "安装包 \"%name%\" 已安装。"
+
+#: extensions/system/src/System/Controller/PackageController.php:127
+#: extensions/system/src/System/Controller/UpdateController.php:67
+msgid "Package extraction failed."
+msgstr "安装包解压失败。"
+
+#: extensions/system/src/System/Controller/PackageController.php:129
+#: extensions/system/src/System/Controller/UpdateController.php:69
+msgid "Package checksum verification failed."
+msgstr "安装包校验失败。"
+
+#: extensions/system/src/System/Controller/PackageController.php:131
+#: extensions/system/src/System/Controller/UpdateController.php:71
+msgid "Invalid API key."
+msgstr "API Key 错误。"
+
+#: extensions/system/src/System/Controller/PackageController.php:133
+#: extensions/system/src/System/Controller/UpdateController.php:73
+msgid "Package download failed."
+msgstr "安装包下载失败。"
+
+#: extensions/system/src/System/Controller/PackageController.php:135
+#: extensions/system/src/System/Controller/UpdateController.php:75
+msgid "Path is not writable."
+msgstr "路径无法写入"
+
+#: extensions/system/src/System/Controller/PackageController.php:209
+msgid "Can't load json file from package."
+msgstr "无法从安装包载入 JSON。"
+
+#: extensions/system/src/System/Controller/SettingsController.php:127
+msgid "Connection established!"
+msgstr "连接已建立"
+
+#: extensions/system/src/System/Controller/SettingsController.php:131
+msgid "Connection not established! (%s)"
+msgstr "无法连接！ (%s)"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Test email!"
+msgstr "测试邮件！"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Testemail"
+msgstr "测试邮件"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail successfully sent!"
+msgstr "邮件成功投递！"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail delivery failed!"
+msgstr "邮件发送失败！"
+
+#: extensions/system/src/System/Controller/SettingsController.php:165
+msgid "Mail delivery failed! (%s)"
+msgstr "邮件发送失败！(%s)"
+
+#: extensions/system/src/System/Controller/SystemController.php:79
+msgid "Order saved."
+msgstr "顺序已保存。"
+
+#: extensions/system/src/System/Controller/SystemController.php:104
+msgid "System Information"
+msgstr "系统信息"
+
+#: extensions/system/src/System/Controller/SystemController.php:146
+msgid "Cache cleared!"
+msgstr "缓存已清空！"
+
+#: extensions/system/src/System/Controller/UpdateController.php:53
+msgid "Unable to find update."
+msgstr "无法找到更新。"
+
+#: extensions/system/src/System/Controller/UpdateController.php:64
+msgid "Copying files..."
+msgstr "正在复制文件……"
+
+#: extensions/system/src/System/Controller/UpdateController.php:91
+#: extensions/system/src/System/Controller/UpdateController.php:121
+msgid "You may not call this step directly."
+msgstr "你不能直接调用此步骤。"
+
+#: extensions/system/src/System/Controller/UpdateController.php:103
+msgid "Updating database..."
+msgstr "正在升级数据库……"
+
+#: extensions/system/src/System/Controller/UpdateController.php:127
+msgid "Installed successfully."
+msgstr "赞，安装成功！"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:23
+msgid "Feed"
+msgstr "Feed"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:32
+msgid "Feed Widget"
+msgstr "Feed 小工具"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:35
+msgid "No title given."
+msgstr "没有给定标题。"
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:32
+msgid "Weather Widget"
+msgstr "天气小工具"
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:35
+msgid "No location chosen."
+msgstr "没有位置被选定"
+
+#: extensions/system/src/System/Event/FrontpageListener.php:18
+msgid "No Frontpage assigned."
+msgstr "没有分配首页。"
+
+#: extensions/system/src/System/Event/SystemListener.php:134
+#: extensions/system/src/SystemExtension.php:127
+msgid "DATE_SHORT"
+msgstr "n/d/y"
+
+#: extensions/system/src/System/Event/SystemListener.php:135
+#: extensions/system/src/SystemExtension.php:126
+msgid "DATE_MEDIUM"
+msgstr "M d, Y"
+
+#: extensions/system/src/System/Event/SystemListener.php:136
+#: extensions/system/src/SystemExtension.php:125
+msgid "DATE_LONG"
+msgstr "F d, y"
+
+#: extensions/system/src/System/Event/SystemListener.php:137
+#: extensions/system/src/SystemExtension.php:124
+msgid "DATE_FULL"
+msgstr "l, F d, y"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Mon"
+msgstr "周一"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Tue"
+msgstr "周二"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Wed"
+msgstr "周三"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Thu"
+msgstr "周四"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Fri"
+msgstr "周五"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sat"
+msgstr "周六"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sun"
+msgstr "周日"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Monday"
+msgstr "星期一"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Tuesday"
+msgstr "星期二"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Wednesday"
+msgstr "星期三"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Thursday"
+msgstr "星期四"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Friday"
+msgstr "星期五"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Saturday"
+msgstr "星期六"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Sunday"
+msgstr "星期天"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jan"
+msgstr "一月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Feb"
+msgstr "二月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Mar"
+msgstr "三月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Apr"
+msgstr "四月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "May"
+msgstr "五月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jun"
+msgstr "六月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jul"
+msgstr "七月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Aug"
+msgstr "八月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Sep"
+msgstr "九月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Oct"
+msgstr "十月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Nov"
+msgstr "十一月"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Dec"
+msgstr "十二月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "January"
+msgstr "一月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "February"
+msgstr "二月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "March"
+msgstr "三月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "April"
+msgstr "四月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "June"
+msgstr "六月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "July"
+msgstr "七月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "August"
+msgstr "八月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "September"
+msgstr "九月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "October"
+msgstr "十月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "November"
+msgstr "十一月"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "December"
+msgstr "十二月"
+
+#: extensions/system/src/System/Exception/ExceptionController.php:30
+msgid "Invalid CSRF token."
+msgstr "错误的 CSRF token。"
+
+#: extensions/system/src/System/Exception/ExceptionController.php:33
+msgid "Sorry, the page you are looking for could not be found."
+msgstr "抱歉，您正在访问的页面可能未找到。"
+
+#: extensions/system/src/System/Exception/ExceptionController.php:39
+msgid "Whoops, looks like something went wrong."
+msgstr "啊哦！好像有什么东西出错了。"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:20
+msgid "Ascension Island"
+msgstr "阿森松岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:21
+msgid "Andorra"
+msgstr "安道尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:22
+msgid "United Arab Emirates"
+msgstr "阿拉伯联合酋长国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:23
+msgid "Afghanistan"
+msgstr "阿富汗伊斯兰共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:24
+msgid "Antigua and Barbuda"
+msgstr "安提瓜和巴布达"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:25
+msgid "Anguilla"
+msgstr "安圭拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:26
+msgid "Albania"
+msgstr "阿尔巴尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:27
+msgid "Armenia"
+msgstr "亚美尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:28
+msgid "Netherlands Antilles"
+msgstr "荷属安的列斯群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:29
+msgid "Angola"
+msgstr "安哥拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:30
+msgid "Antarctica"
+msgstr "南极洲"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:31
+msgid "Argentina"
+msgstr "阿根廷"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:32
+msgid "American Samoa"
+msgstr "萨摩亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:33
+msgid "Austria"
+msgstr "奥地利"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:34
+msgid "Australia"
+msgstr "澳洲"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:35
+msgid "Aruba"
+msgstr "阿鲁巴"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:36
+msgid "Åland Islands"
+msgstr "奥兰群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:37
+msgid "Azerbaijan"
+msgstr "阿塞拜疆"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:38
+msgid "Bosnia and Herzegovina"
+msgstr "波斯尼亚和黑塞哥维那"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:39
+msgid "Barbados"
+msgstr "巴巴多斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:40
+msgid "Bangladesh"
+msgstr "孟加拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:41
+msgid "Belgium"
+msgstr "比利时"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:42
+msgid "Burkina Faso"
+msgstr "布基纳法索"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:43
+msgid "Bulgaria"
+msgstr "保加利亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:44
+msgid "Bahrain"
+msgstr "巴林"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:45
+msgid "Burundi"
+msgstr "布隆迪"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:46
+msgid "Benin"
+msgstr "贝宁"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:47
+msgid "Saint Barthélemy"
+msgstr "圣卢西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:48
+msgid "Bermuda"
+msgstr "百慕大"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:49
+msgid "Brunei"
+msgstr "文莱"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:50
+msgid "Bolivia"
+msgstr "玻利维亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:51
+msgid "Caribbean Netherlands"
+msgstr "荷兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:52
+msgid "Brazil"
+msgstr "巴西"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:53
+msgid "Bahamas"
+msgstr "巴哈马"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:54
+msgid "Bhutan"
+msgstr "不丹"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:55
+msgid "Bouvet Island"
+msgstr "阿森松岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:56
+msgid "Botswana"
+msgstr "博茨瓦纳"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:57
+msgid "Belarus"
+msgstr "白俄罗斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:58
+msgid "Belize"
+msgstr "伯利兹"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:59
+msgid "Canada"
+msgstr "加拿大"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:60
+msgid "Cocos [Keeling] Islands"
+msgstr "科科斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:61
+msgid "Congo - Kinshasa"
+msgstr "金沙萨"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:62
+msgid "Central African Republic"
+msgstr "中非"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:63
+msgid "Congo - Brazzaville"
+msgstr "布拉柴维尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:64
+msgid "Switzerland"
+msgstr "瑞士"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:65
+msgid "Côte d’Ivoire"
+msgstr "Côte d’Ivoire"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:66
+msgid "Cook Islands"
+msgstr "库克岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:67
+msgid "Chile"
+msgstr "智利"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:68
+msgid "Cameroon"
+msgstr "喀麦隆"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:69
+msgid "China"
+msgstr "中国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:70
+msgid "Colombia"
+msgstr "哥伦比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:71
+msgid "Clipperton Island"
+msgstr "凯利帕顿岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:72
+msgid "Costa Rica"
+msgstr "哥斯达黎加"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:73
+msgid "Cuba"
+msgstr "古巴"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:74
+msgid "Cape Verde"
+msgstr "佛得角"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:75
+msgid "Curaçao"
+msgstr "库拉索"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:76
+msgid "Christmas Island"
+msgstr "圣诞岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:77
+msgid "Cyprus"
+msgstr "塞浦路斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:78
+msgid "Czech Republic"
+msgstr "捷克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:79
+msgid "Germany"
+msgstr "德国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:80
+msgid "Diego Garcia"
+msgstr "迪戈加西亚岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:81
+msgid "Djibouti"
+msgstr "吉布提"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:82
+msgid "Denmark"
+msgstr "丹麦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:83
+msgid "Dominica"
+msgstr "多米尼加"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:84
+msgid "Dominican Republic"
+msgstr "中非"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:85
+msgid "Algeria"
+msgstr "阿尔及利亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:86
+msgid "Ceuta and Melilla"
+msgstr "休达和梅利利亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:87
+msgid "Ecuador"
+msgstr "厄瓜多尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:88
+msgid "Estonia"
+msgstr "爱沙尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:89
+msgid "Egypt"
+msgstr "埃及"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:90
+msgid "Western Sahara"
+msgstr "西撒哈拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:91
+msgid "Eritrea"
+msgstr "厄立特里亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:92
+msgid "Spain"
+msgstr "西班牙"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:93
+msgid "Ethiopia"
+msgstr "埃塞俄比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:94
+msgid "Finland"
+msgstr "芬兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:95
+msgid "Fiji"
+msgstr "斐济"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:96
+msgid "Falkland Islands"
+msgstr "福克兰群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:97
+msgid "Micronesia"
+msgstr "密克罗尼西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:98
+msgid "Faroe Islands"
+msgstr "法罗"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:99
+msgid "France"
+msgstr "法国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:100
+msgid "Gabon"
+msgstr "加蓬"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:101
+msgid "United Kingdom"
+msgstr "英国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:102
+msgid "Grenada"
+msgstr "格林纳达"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:103
+msgid "Georgia"
+msgstr "佐治亚州"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:104
+msgid "French Guiana"
+msgstr "法语"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:105
+msgid "Guernsey"
+msgstr "根西岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:106
+msgid "Ghana"
+msgstr "加纳"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:107
+msgid "Gibraltar"
+msgstr "直布罗陀"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:108
+msgid "Greenland"
+msgstr "格陵兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:109
+msgid "Gambia"
+msgstr "冈比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:110
+msgid "Guinea"
+msgstr "几内亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:111
+msgid "Guadeloupe"
+msgstr "瓜德罗普岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:112
+msgid "Equatorial Guinea"
+msgstr "赤道几内亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:113
+msgid "Greece"
+msgstr "希腊"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:114
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "南乔治亚岛和南桑威奇群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:115
+msgid "Guatemala"
+msgstr "危地马拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:116
+msgid "Guam"
+msgstr "关岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:117
+msgid "Guinea-Bissau"
+msgstr "几内亚比绍"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:118
+msgid "Guyana"
+msgstr "圭亚那"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:119
+msgid "Hong Kong SAR China"
+msgstr "*香港"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:120
+msgid "Heard Island and McDonald Islands"
+msgstr "赫德和麦克唐纳群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:121
+msgid "Honduras"
+msgstr "洪都拉斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:122
+msgid "Croatia"
+msgstr "克罗地亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:123
+msgid "Haiti"
+msgstr "海地"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:124
+msgid "Hungary"
+msgstr "匈牙利"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:125
+msgid "Canary Islands"
+msgstr "加纳利"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:126
+msgid "Indonesia"
+msgstr "印度尼西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:127
+msgid "Ireland"
+msgstr "爱尔兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:128
+msgid "Israel"
+msgstr "以色列"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:129
+msgid "Isle of Man"
+msgstr "马恩岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:130
+msgid "India"
+msgstr "印度"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:131
+msgid "British Indian Ocean Territory"
+msgstr "英属印度洋领地"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:132
+msgid "Iraq"
+msgstr "伊拉克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:133
+msgid "Iran"
+msgstr "伊朗"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:134
+msgid "Iceland"
+msgstr "冰岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:135
+msgid "Italy"
+msgstr "意大利"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:136
+msgid "Jersey"
+msgstr "泽西州"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:137
+msgid "Jamaica"
+msgstr "牙买加"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:138
+msgid "Jordan"
+msgstr "约旦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:139
+msgid "Japan"
+msgstr "日本"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:140
+msgid "Kenya"
+msgstr "肯尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:141
+msgid "Kyrgyzstan"
+msgstr "吉尔吉斯斯坦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:142
+msgid "Cambodia"
+msgstr "柬埔寨"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:143
+msgid "Kiribati"
+msgstr "基里巴斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:144
+msgid "Comoros"
+msgstr "科摩罗"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:145
+msgid "Saint Kitts and Nevis"
+msgstr "圣基茨和尼维斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:146
+msgid "North Korea"
+msgstr "北韩"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:147
+msgid "South Korea"
+msgstr "南韩"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:148
+msgid "Kuwait"
+msgstr "科威特"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:149
+msgid "Cayman Islands"
+msgstr "开曼"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:150
+msgid "Kazakhstan"
+msgstr "哈萨克斯坦共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:151
+msgid "Laos"
+msgstr "老挝"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:152
+msgid "Lebanon"
+msgstr "黎巴嫩"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:153
+msgid "Saint Lucia"
+msgstr "圣卢西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:154
+msgid "Liechtenstein"
+msgstr "列支敦士登"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:155
+msgid "Sri Lanka"
+msgstr "斯里兰卡"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:156
+msgid "Liberia"
+msgstr "利比里亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:157
+msgid "Lesotho"
+msgstr "莱索托"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:158
+msgid "Lithuania"
+msgstr "立陶宛共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:159
+msgid "Luxembourg"
+msgstr "卢森堡"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:160
+msgid "Latvia"
+msgstr "拉脱维亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:161
+msgid "Libya"
+msgstr "利比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:162
+msgid "Morocco"
+msgstr "摩洛哥"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:163
+msgid "Monaco"
+msgstr "摩纳哥"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:164
+msgid "Moldova"
+msgstr "摩尔多瓦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:165
+msgid "Montenegro"
+msgstr "黑山"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:166
+msgid "Saint Martin"
+msgstr "圣马丁岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:167
+msgid "Madagascar"
+msgstr "马达加斯加"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:168
+msgid "Marshall Islands"
+msgstr "马绍尔群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:169
+msgid "Macedonia"
+msgstr "马其顿"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:170
+msgid "Mali"
+msgstr "马里"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:171
+msgid "Myanmar [Burma]"
+msgstr "缅甸"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:172
+msgid "Mongolia"
+msgstr "蒙古"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:173
+msgid "Macau SAR China"
+msgstr "*澳门"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:174
+msgid "Northern Mariana Islands"
+msgstr "北马里亚那群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:175
+msgid "Martinique"
+msgstr "马提尼克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:176
+msgid "Mauritania"
+msgstr "毛里塔尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:177
+msgid "Montserrat"
+msgstr "蒙特塞拉特"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:178
+msgid "Malta"
+msgstr "马耳他"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:179
+msgid "Mauritius"
+msgstr "毛里求斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:180
+msgid "Maldives"
+msgstr "马尔代夫"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:181
+msgid "Malawi"
+msgstr "马拉维"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:182
+msgid "Mexico"
+msgstr "墨西哥"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:183
+msgid "Malaysia"
+msgstr "马来西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:184
+msgid "Mozambique"
+msgstr "莫桑比克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:185
+msgid "Namibia"
+msgstr "纳米比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:186
+msgid "New Caledonia"
+msgstr "新喀里多尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:187
+msgid "Niger"
+msgstr "尼日尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:188
+msgid "Norfolk Island"
+msgstr "诺福克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:189
+msgid "Nigeria"
+msgstr "尼日利亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:190
+msgid "Nicaragua"
+msgstr "尼加拉瓜"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:191
+msgid "Netherlands"
+msgstr "荷兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:192
+msgid "Norway"
+msgstr "挪威"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:193
+msgid "Nepal"
+msgstr "尼泊尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:194
+msgid "Nauru"
+msgstr "瑙鲁"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:195
+msgid "Niue"
+msgstr "纽埃"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:196
+msgid "New Zealand"
+msgstr "新西兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:197
+msgid "Oman"
+msgstr "阿曼"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:198
+msgid "Panama"
+msgstr "巴拿马"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:199
+msgid "Peru"
+msgstr "秘鲁"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:200
+msgid "French Polynesia"
+msgstr "法属波利尼西亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:201
+msgid "Papua New Guinea"
+msgstr "巴布亚新几内亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:202
+msgid "Philippines"
+msgstr "菲律宾"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:203
+msgid "Pakistan"
+msgstr "巴基斯坦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:204
+msgid "Poland"
+msgstr "波兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:205
+msgid "Saint Pierre and Miquelon"
+msgstr "圣皮埃尔岛及密克隆岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:206
+msgid "Pitcairn Islands"
+msgstr "皮特凯恩"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:207
+msgid "Puerto Rico"
+msgstr "波多黎各"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:208
+msgid "Palestinian Territories"
+msgstr "巴勒斯坦地区"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:209
+msgid "Portugal"
+msgstr "葡萄牙"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:210
+msgid "Palau"
+msgstr "帕劳"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:211
+msgid "Paraguay"
+msgstr "巴拉圭"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:212
+msgid "Qatar"
+msgstr "卡塔尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:213
+msgid "Outlying Oceania"
+msgstr "偏远岛屿"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:214
+msgid "Réunion"
+msgstr "法国留尼汪岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:215
+msgid "Romania"
+msgstr "罗马尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:216
+msgid "Serbia"
+msgstr "塞尔维亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:217
+msgid "Russia"
+msgstr "俄罗斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:218
+msgid "Rwanda"
+msgstr "卢旺达"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:219
+msgid "Saudi Arabia"
+msgstr "沙特阿拉伯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:220
+msgid "Solomon Islands"
+msgstr "所罗门群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:221
+msgid "Seychelles"
+msgstr "塞舌尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:222
+msgid "Sudan"
+msgstr "苏丹共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:223
+msgid "Sweden"
+msgstr "瑞典"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:224
+msgid "Singapore"
+msgstr "新加坡"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:225
+msgid "Saint Helena"
+msgstr "圣赫勒拿岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:226
+msgid "Slovenia"
+msgstr "斯洛文尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:227
+msgid "Svalbard and Jan Mayen"
+msgstr "斯瓦尔巴群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:228
+msgid "Slovakia"
+msgstr "斯洛伐克"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:229
+msgid "Sierra Leone"
+msgstr "塞拉利昂"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:230
+msgid "San Marino"
+msgstr "圣马力诺"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:231
+msgid "Senegal"
+msgstr "塞内加尔"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:232
+msgid "Somalia"
+msgstr "索马里"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:233
+msgid "Suriname"
+msgstr "苏里南"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:234
+msgid "South Sudan"
+msgstr "南苏丹共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:235
+msgid "São Tomé and Príncipe"
+msgstr "圣多美和普林西比"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:236
+msgid "El Salvador"
+msgstr "萨尔瓦多"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:237
+msgid "Sint Maarten"
+msgstr "荷属圣马丁"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:238
+msgid "Syria"
+msgstr "叙利亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:239
+msgid "Swaziland"
+msgstr "斯威士兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:240
+msgid "Tristan da Cunha"
+msgstr "特里斯坦-达库尼亚群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:241
+msgid "Turks and Caicos Islands"
+msgstr "特克斯和凯科斯群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:242
+msgid "Chad"
+msgstr "乍得"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:243
+msgid "French Southern Territories"
+msgstr "法语"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:244
+msgid "Togo"
+msgstr "多哥"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:245
+msgid "Thailand"
+msgstr "泰国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:246
+msgid "Tajikistan"
+msgstr "塔吉克斯坦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:247
+msgid "Tokelau"
+msgstr "托克劳"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:248
+msgid "Timor-Leste"
+msgstr "东帝汶"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:249
+msgid "Turkmenistan"
+msgstr "土库曼斯坦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:250
+msgid "Tunisia"
+msgstr "突尼斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:251
+msgid "Tonga"
+msgstr "汤加"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:252
+msgid "Turkey"
+msgstr "土耳其"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:253
+msgid "Trinidad and Tobago"
+msgstr "特立尼达和多巴哥"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:254
+msgid "Tuvalu"
+msgstr "图瓦卢"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:255
+msgid "Taiwan"
+msgstr "台湾（中国）"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:256
+msgid "Tanzania"
+msgstr "坦桑尼亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:257
+msgid "Ukraine"
+msgstr "乌克兰"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:258
+msgid "Uganda"
+msgstr "乌干达"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:259
+msgid "U.S. Outlying Islands"
+msgstr "美国偏远岛屿"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:260
+msgid "United States"
+msgstr "美国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:261
+msgid "Uruguay"
+msgstr "乌拉圭"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:262
+msgid "Uzbekistan"
+msgstr "乌兹别克斯坦"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:263
+msgid "Vatican City"
+msgstr "梵蒂冈"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:264
+msgid "Saint Vincent and the Grenadines"
+msgstr "圣文森特和格林纳丁斯"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:265
+msgid "Venezuela"
+msgstr "委内瑞拉"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:266
+msgid "British Virgin Islands"
+msgstr "英属维尔京群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:267
+msgid "U.S. Virgin Islands"
+msgstr "美属维尔京群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:268
+msgid "Vietnam"
+msgstr "越南"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:269
+msgid "Vanuatu"
+msgstr "瓦努阿图"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:270
+msgid "Wallis and Futuna"
+msgstr "瓦利斯和富图纳群岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:271
+msgid "Samoa"
+msgstr "萨摩亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:272
+msgid "Kosovo"
+msgstr "科索沃"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:273
+msgid "Yemen"
+msgstr "也门"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:274
+msgid "Mayotte"
+msgstr "马约特岛"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:275
+msgid "South Africa"
+msgstr "南非共和国"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:276
+msgid "Zambia"
+msgstr "赞比亚"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:277
+msgid "Zimbabwe"
+msgstr "津巴布韦"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:17
+msgid "Afrikaans"
+msgstr "南非"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:18
+msgid "Amharic"
+msgstr "阿姆哈拉语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:19
+msgid "Arabic"
+msgstr "阿拉伯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:20
+msgid "Asturian"
+msgstr "阿斯图里亚斯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:21
+msgid "Azerbaijani"
+msgstr "阿塞拜疆语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:22
+msgid "Belarusian"
+msgstr "白俄罗斯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:23
+msgid "Bulgarian"
+msgstr "保加利亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:24
+msgid "Bengali"
+msgstr "孟加拉语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:25
+msgid "Tibetan"
+msgstr "藏语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:26
+msgid "Bosnian"
+msgstr "波斯尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:27
+msgid "Catalan"
+msgstr "加泰隆尼亚语（西班牙）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:28
+msgid "Czech"
+msgstr "捷克"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:29
+msgid "Welsh"
+msgstr "威尔士语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:30
+msgid "Danish"
+msgstr "丹麦语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:31
+msgid "German"
+msgstr "德语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:32
+msgid "Dzongkha"
+msgstr "不丹语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:33
+msgid "Greek"
+msgstr "希腊语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:34
+msgid "English"
+msgstr "英语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:35
+msgid "Esperanto"
+msgstr "世界语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:36
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:37
+msgid "Estonian"
+msgstr "爱沙尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:38
+msgid "Basque"
+msgstr "巴斯克语（西班牙）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:39
+msgid "Persian, Farsi"
+msgstr "波斯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:40
+msgid "Finnish"
+msgstr "芬兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:41
+msgid "Filipino"
+msgstr "菲律宾语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:42
+msgid "Faeroese"
+msgstr "法罗语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:43
+msgid "French"
+msgstr "法语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:44
+msgid "Frisian, Western"
+msgstr "北欧弗利然群岛语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:45
+msgid "Irish"
+msgstr "爱尔兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:46
+msgid "Scots Gaelic"
+msgstr "苏格兰的盖尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:47
+msgid "Galician"
+msgstr "加里西亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:48
+msgid "Swiss German"
+msgstr "德语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:49
+msgid "Gujarati"
+msgstr "印度语（西印度）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:50
+msgid "Hebrew"
+msgstr "希伯来语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:51
+msgid "Hindi"
+msgstr "印度语（北印度）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:52
+msgid "Croatian"
+msgstr "克罗地亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:53
+msgid "Haitian Creole"
+msgstr "克里奥尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:54
+msgid "Hungarian"
+msgstr "匈牙利语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:55
+msgid "Armenian"
+msgstr "亚美尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:56
+msgid "Indonesian"
+msgstr "印尼语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:57
+msgid "Icelandic"
+msgstr "冰岛语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:58
+msgid "Italian"
+msgstr "意大利语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:59
+msgid "Japanese"
+msgstr "日语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:60
+msgid "Javanese"
+msgstr "爪哇语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:61
+msgid "Georgian"
+msgstr "格鲁吉亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:62
+msgid "Kazakh"
+msgstr "哈萨克语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:63
+msgid "Khmer"
+msgstr "高棉语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:64
+msgid "Kannada"
+msgstr "德拉威语（西南印度）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:65
+msgid "Korean"
+msgstr "韩语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:66
+msgid "Kurdish"
+msgstr "库尔德语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:67
+msgid "Kyrgyz"
+msgstr "吉尔吉斯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:68
+msgid "Lao"
+msgstr "老挝语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:69
+msgid "Lithuanian"
+msgstr "立陶宛语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:70
+msgid "Latvian"
+msgstr "拉脱维亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:71
+msgid "Malagasy"
+msgstr "马拉加斯语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:72
+msgid "Macedonian"
+msgstr "马其顿语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:73
+msgid "Malayalam"
+msgstr "马拉雅拉姆语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:74
+msgid "Mongolian"
+msgstr "蒙古语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:75
+msgid "Marathi"
+msgstr "马拉地语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:76
+msgid "Bahasa Malaysia"
+msgstr "马来西亚"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:77
+msgid "Burmese"
+msgstr "缅甸语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:78
+msgid "Norwegian Bokmål"
+msgstr "挪威语 Bokmål"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:79
+msgid "Nepali"
+msgstr "尼泊尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:80
+msgid "Dutch"
+msgstr "荷兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:81
+msgid "Norwegian Nynorsk"
+msgstr "挪威语 Nynorsk"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:82
+msgid "Occitan"
+msgstr "奥克语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:83
+msgid "Punjabi"
+msgstr "旁遮普语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:84
+msgid "Polish"
+msgstr "波兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:85
+msgid "Portuguese, Brazil"
+msgstr "巴西"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:86
+msgid "Portuguese, Portugal"
+msgstr "葡萄牙"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:87
+msgid "Romanian"
+msgstr "罗马尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:88
+msgid "Russian"
+msgstr "俄罗斯联邦"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:89
+msgid "Scots"
+msgstr "苏格兰的盖尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:90
+msgid "Northern Sami"
+msgstr "北方萨米语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:91
+msgid "Sinhala"
+msgstr "锡兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:92
+msgid "Slovak"
+msgstr "斯洛伐克语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:93
+msgid "Slovenian"
+msgstr "斯洛文尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:94
+msgid "Albanian"
+msgstr "阿尔巴尼亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:95
+msgid "Serbian"
+msgstr "塞尔维亚语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:96
+msgid "Swedish"
+msgstr "瑞典语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:97
+msgid "Swahili"
+msgstr "斯瓦希里语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:98
+msgid "Tamil"
+msgstr "泰米尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:99
+msgid "Tamil, Sri Lanka"
+msgstr "斯里兰卡"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:100
+msgid "Telugu"
+msgstr "泰卢固语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:101
+msgid "Thai"
+msgstr "泰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:102
+msgid "Turkish"
+msgstr "土耳其语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:103
+msgid "Tuvan"
+msgstr "图瓦语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:104
+msgid "Uyghur"
+msgstr "维吾尔语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:105
+msgid "Ukrainian"
+msgstr "乌克兰语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:106
+msgid "Urdu"
+msgstr "乌尔杜语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:107
+msgid "Vietnamese"
+msgstr "越语"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:108
+msgid "Lolspeak"
+msgstr "火星文"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:109
+msgid "Chinese, Simplified"
+msgstr "中文（简体）"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:110
+msgid "Chinese, Traditional"
+msgstr "中文（繁体）"
+
+#: extensions/system/src/System/Link/System.php:48
+msgid "Frontpage"
+msgstr "首页"
+
+#: extensions/system/src/System/Link/System.php:49
+msgid "User Login"
+msgstr "用户登录"
+
+#: extensions/system/src/System/Link/System.php:50
+#: extensions/system/src/User/Controller/RegistrationController.php:46
+msgid "User Registration"
+msgstr "用户注册"
+
+#: extensions/system/src/System/Link/System.php:51
+msgid "User Profile"
+msgstr "用户个人资料"
+
+#: extensions/system/src/System/Link/System.php:52
+msgid "User Password Reset"
+msgstr "用户密码重置"
+
+#: extensions/system/src/System/Widget/TextWidget.php:23
+msgid "Text"
+msgstr "文本"
+
+#: extensions/system/src/System/Widget/TextWidget.php:31
+msgid "Text Widget"
+msgstr "文本小工具"
+
+#: extensions/system/src/SystemExtension.php:128
+msgid "DATE_INTERVAL"
+msgstr "%d days"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:84
+msgid "Unable to activate theme.<br>The theme triggered a fatal error."
+msgstr "无法激活主题，存在致命错误（Fatal Error）。"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:90
+msgid "Unable to enable theme \"%name%\"."
+msgstr "无法启用主题 \"%name%\"。"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:98
+msgid "Theme enabled."
+msgstr "主题已启用"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:115
+msgid "Unable to uninstall theme \"%name%\"."
+msgstr "无法卸载主题 \"%name%\"。"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:121
+msgid "Theme uninstalled."
+msgstr "主题已卸载。"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:137
+#: extensions/system/src/Theme/Controller/ThemesController.php:161
+msgid "Invalid theme."
+msgstr "主题错误。"
+
+#: extensions/system/src/Theme/Event/WidgetListener.php:30
+msgid "Theme"
+msgstr "主题"
+
+#: extensions/system/src/User/Controller/AuthController.php:68
+#: extensions/system/src/User/Controller/RegistrationController.php:66
+#: extensions/system/src/User/Controller/ResetPasswordController.php:61
+#: extensions/system/src/User/Controller/ResetPasswordController.php:130
+msgid "Invalid token. Please try again."
+msgstr "错误的 token，请重试。"
+
+#: extensions/system/src/User/Controller/AuthController.php:76
+msgid "Invalid username or password."
+msgstr "用户名或密码错误。"
+
+#: extensions/system/src/User/Controller/PermissionController.php:48
+msgid "Permissions saved!"
+msgstr "权限已保存。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:66
+msgid "Name is invalid."
+msgstr "姓名错误。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:70
+#: extensions/system/src/User/Controller/RegistrationController.php:87
+#: extensions/system/src/User/Controller/UserController.php:165
+msgid "Email is invalid."
+msgstr "Email 错误。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:74
+#: extensions/system/src/User/Controller/RegistrationController.php:95
+#: extensions/system/src/User/Controller/UserController.php:177
+msgid "Email not available."
+msgstr "Email 不可用。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:80
+msgid "Invalid Password."
+msgstr "密码错误。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:84
+msgid "New Password is invalid."
+msgstr "新密码错误。"
+
+#: extensions/system/src/User/Controller/ProfileController.php:103
+msgid "Profile updated."
+msgstr "个人资料已更新。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:75
+msgid "Name required."
+msgstr "名字为必填项。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:79
+#: extensions/system/src/User/Controller/UserController.php:144
+msgid "Password required."
+msgstr "密码为必填项。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:83
+#: extensions/system/src/User/Controller/UserController.php:161
+msgid "Username is invalid."
+msgstr "用户名错误。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:91
+#: extensions/system/src/User/Controller/UserController.php:171
+msgid "Username not available."
+msgstr "用户名不可用。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:99
+msgid "Signup failed"
+msgstr "注册失败"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:134
+msgid ""
+"Your user account has been created. Complete your registration, by clicking "
+"the link provided in the mail that has been sent to you."
+msgstr "您的用户帐户已创建。为了完成您的注册，邮件已发送到您所提供的 Email。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:139
+msgid ""
+"Your user account has been created and is pending approval by the site "
+"administrator."
+msgstr "您的用户帐户已被创建并正在等待网站管理员的批准。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:144
+msgid "Your user account has been created."
+msgstr "您的用户帐户已被创建。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:180
+#: extensions/system/src/User/Controller/ResetPasswordController.php:116
+msgid "Invalid key."
+msgstr "错误的 Key。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:189
+msgid ""
+"Your email has been verified. Once an administrator approves your account, "
+"you will be notified by email."
+msgstr "您的电子邮件已验证。一旦有管理员批准您的帐户，将通过电子邮件直接通知您。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:199
+msgid ""
+"The user's account has been activated and the user has been notified about "
+"it."
+msgstr "用户帐户已被激活并告知相关人员。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:201
+msgid "Your account has been activated."
+msgstr "您的帐户已被激活。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:216
+msgid "Welcome to %site%!"
+msgstr "欢迎来到 %site%！"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:229
+msgid "Activate your %site% account"
+msgstr "激活您在 %site% 的账户"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:234
+msgid "Unable to send verification link."
+msgstr "无法发送验证链接。"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:244
+msgid "Please approve registration at %site%!"
+msgstr "请批准在 %site% 上的注册！"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:45
+msgid "Reset"
+msgstr "重置"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:65
+msgid "Enter a username or email address."
+msgstr "请输入一个用户名或 Email 地址。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:71
+msgid "Invalid username or email."
+msgstr "错误的用户名或 Email 地址。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:75
+#: extensions/system/src/User/Controller/ResetPasswordController.php:121
+msgid "Your account has not been activated or is blocked."
+msgstr "您的账户仍未激活或已被封锁。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:86
+#: extensions/system/src/User/Link/User.php:49
+msgid "Password Reset"
+msgstr "密码重置"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:91
+msgid "Unable to send confirmation link."
+msgstr "无法发送确认链接。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:98
+msgid "Check your email for the confirmation link."
+msgstr "检查确认链接的电子邮件。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:136
+msgid "Enter password."
+msgstr "输入密码。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:140
+msgid "Invalid password."
+msgstr "密码错误。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:148
+msgid "Your password has been reset."
+msgstr "您的密码已被重置。"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:156
+msgid "Reset Confirm"
+msgstr "重置确认"
+
+#: extensions/system/src/User/Controller/RoleController.php:68
+msgid "Roles saved!"
+msgstr "角色已保存！"
+
+#: extensions/system/src/User/Controller/UserController.php:125
+msgid "Edit User"
+msgstr "编辑用户"
+
+#: extensions/system/src/User/Controller/UserController.php:140
+msgid "User not found."
+msgstr "用户未找到。"
+
+#: extensions/system/src/User/Controller/UserController.php:154
+#: extensions/system/src/User/Controller/UserController.php:243
+msgid "Unable to block yourself."
+msgstr "无法封锁你自己哦！"
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User saved."
+msgstr "用户已保存。"
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User created."
+msgstr "用户已创建。"
+
+#: extensions/system/src/User/Controller/UserController.php:218
+msgid "Unable to delete self."
+msgstr "无法删除自己哦！"
+
+#: extensions/system/src/User/Controller/UserController.php:227
+msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
+msgstr "{0} 没有用户被删除。|{1} 个用户已删除。|]1,Inf[ 个用户已删除。"
+
+#: extensions/system/src/User/Dashboard/UserWidget.php:32
+msgid "Displays a list of users."
+msgstr "显示用户列表。"
+
+#: extensions/system/src/User/Entity/User.php:101
+msgid "Blocked"
+msgstr "已封锁"
+
+#: extensions/system/src/User/Event/AccessListener.php:93
+msgid "You do not have access to the administration area of this site."
+msgstr "你没有访问该网站管理区的权限。"
+
+#: extensions/system/src/User/Event/AccessListener.php:107
+msgid "Insufficient User Rights."
+msgstr "没有足够的用户权限。"
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account is blocked."
+msgstr "您的用户已被封锁。"
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account has not been activated."
+msgstr "您的用户尚未激活。"
+
+#: extensions/system/src/User/Event/LoginAttemptListener.php:30
+msgid "Slow down a bit."
+msgstr "动作放慢一点~不然先喝杯茶，等会再试试？"
+
+#: extensions/system/src/User/Link/User.php:48
+msgid "Profile"
+msgstr "个人资料"
+
+#: extensions/system/src/User/Widget/LoginWidget.php:33
+msgid "Displays a user login form."
+msgstr "显示用户登录表单。"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:49
+msgid "Unassigned Widgets"
+msgstr "未指定的小工具"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:82
+#: extensions/system/src/Widget/Controller/WidgetsController.php:105
+msgid "Invalid widget id"
+msgstr "错误的小工具ID"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:141
+msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} 没有小工具被删除。|{1} 个小工具被删除。|]1,Inf[ 个小工具被删除。"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:216
+msgid "Widgets updated."
+msgstr "小工具已更新。"

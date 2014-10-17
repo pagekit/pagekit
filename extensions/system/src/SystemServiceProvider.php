@@ -11,6 +11,7 @@ use Pagekit\Framework\Application;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ServiceProviderInterface;
 use Pagekit\System\FileProvider;
+use Pagekit\System\Migration\FilesystemLoader;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
 
@@ -25,6 +26,11 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $app['file'] = function($app) {
             return new FileProvider($app);
         };
+
+        $app->extend('migrator', function($migrator, $app) {
+            $migrator->setLoader(new FilesystemLoader($app['locator']));
+            return $migrator;
+        });
 
         $app->extend('view', function($view, $app) {
 

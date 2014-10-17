@@ -1,0 +1,392 @@
+# 
+# Translators:
+# osfor <osforeduc@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-09-02 17:35+0000\n"
+"Last-Translator: osfor <osforeduc@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/pagekit-cms/language/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "بريد إلكتروني"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "موافقة"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "إلغاء الموافقة"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "علمه كبريد مزعج"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "لا توجد تعليقات"
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "رد"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "تعليق"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "ردا على %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "ردا على"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} لا يوجد تعليق قيد الانتظار|{1} تعليق واحد قيد الانتظار|]1,Inf[ %comments% قيد الانتظار"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "قائمة المشاركات"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "مشاركة"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "- حدد مشاركة -"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "أدخل عنوانا"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "ملخص"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "أدخل ملخصا"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "الكاتب"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "نشر في"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Slug"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "تمكين التعليقات"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "أضف مشاركة."
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "نشر"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "إلغاء النشر"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "لا توجد مشاركات."
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "تعليقات"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "تاريخ"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "عام"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr "رابط ثابت"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "رقمي"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/مدونة/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/مدونة/مثال-مشاركة"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "يوم واسم"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/مدونة,/2014/06/12/مثال-مشاركة"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "شهر واسم"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/مدونة/2014/06/مثال-مشاركة"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr "مخصص"
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "تمكين التعليقات."
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "يتطلب الاسم والبريد الإلكتروني."
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "أغلق التعليقات في المواضيع الأقدم من"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "أيام."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "المظهر"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "أظهر الصور الشخصية من خدمة Gravatar."
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "رتب التعليقات حسب"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "الأخيرة في الأسفل."
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "الأخيرة في الأعلى."
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "تمكين التعليقات المتداخلة على"
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "مستويات"
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% عند %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "تعليقات (%count%)"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "اترك تعليقا"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "دخول مسجل باسم %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "أنت تكتب تعليقا بصفتك ضيفا."
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "أرسل تعليقا"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "غير مسموح لك بكتابة التعليقات."
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "فضلا سجل دخولك لترك تعليق."
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "كتبت من قبل %name% في %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "تابع القراءة"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} لا توجد تعليقات|{1} %num% تعليق|]1,Inf[ %num% تعليقات"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "لقد قمت ببعض التغييرات! الخروج من المشاركة دون حفظ سيؤدي لإلغاء جميع التغييرات.."
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "تعليقات على %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "تم حفظ التعليق."
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "تم إنشاء التعليق."
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr "{0} لايوجد تعليق محذوف.|{1} تعليق محذوف.|]1,Inf[ تعليقات محذوفة."
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr "{0} لا توجد حالة تعليق محدثة.|{1} حالة تعليق محدثة.|]1,Inf[ حالات تعليق محدثة."
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "مشاركات."
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "معرف المشاركة خاطئ."
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "تحرير المشاركة."
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "تم حفظ المشاركة."
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "تم إنشاء المشاركة."
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr "{0} لا توجد مشاركة محذوفة.|{1} مشاركة محذوفة.|]1,Inf[ مشاركات محذوفة."
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr "{0} لا توجد مشاركة منسوخة.|{1} مشاركة منسوخة.|]1,Inf[ مشاركات منسوخة."
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr "{0} لا توجد مشاركة منشورة.|{1} مشاركة منشورة.|]1,Inf[ مشاركات منشورة."
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} لا توجد مشاركة غير منشورة.|{1} مشاركة غير منشورة.|]1,Inf[ مشاركات غير منشورة."
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "مدونة"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "فضلا إنتظر مجددا %seconds% ثانية قبل التعليق مرة أخرى."
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "تم تعطيل التعليقات لهذه المشاركة"
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr "فضلا أدخل اسما وبريدا الكترونيا صحيحين."
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "شكرا لك على التعليق"
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "عفوا،حدث خطأ ما!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "مشاركة غير موجودة"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "لا يمكن الدخول لهذه المشاركة !"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "تمت الموافقة عليه"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "بريد مزعج"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "منشور"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "غير منشور"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "مسودة"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr "مراجعة قيد الانتظار"
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "المشاركة التي تحمل المعرف \"%id%\" غير موجودة!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "Post with slug \"%slug%\" not found!"

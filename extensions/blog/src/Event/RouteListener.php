@@ -4,6 +4,8 @@ namespace Pagekit\Blog\Event;
 
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class RouteListener extends EventSubscriber
 {
@@ -78,7 +80,7 @@ class RouteListener extends EventSubscriber
         if (!isset($this->cacheEntries[$id])) {
 
             if (!$post = $this->getPosts()->where(compact('id'))->first()) {
-                throw new \RuntimeException(__('Post with id "%id%" not found!', ['%id%' => $id]));
+                throw new RouteNotFoundException(__('Post with id "%id%" not found!', ['%id%' => $id]));
             }
 
             $this->cacheEntries[$id] = [
@@ -103,7 +105,7 @@ class RouteListener extends EventSubscriber
         if (!isset($this->cacheEntries[$slug])) {
 
             if (!$post = $this->getPosts()->where(compact('slug'))->first()) {
-                throw new \RuntimeException(__('Post with slug "%slug%" not found!', ['%slug%' => $slug]));
+                throw new NotFoundHttpException(__('Post with slug "%slug%" not found!', ['%slug%' => $slug]));
             }
 
             $this->cacheEntries[$slug] = $post->getId();

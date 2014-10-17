@@ -1,0 +1,392 @@
+# 
+# Translators:
+# Alberte Moço, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-27 11:20+0000\n"
+"Last-Translator: Alberte Moço\n"
+"Language-Team: Galician (Spain) (http://www.transifex.com/projects/p/pagekit-cms/language/gl_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gl_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-mail"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Aprobar"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Desaprobar"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Marcar como spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Non se encontraron comentarios."
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Responder"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Comentar"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "En resposta a %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "En resposta a"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Ningún pendente|{1} Un pendente|]1,Inf[ %comments% pendentes"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Vista de artigos"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Artigo"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "- Selecciona artigo -"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Introduce título"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Extracto"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Introduce extracto"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "Autor"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Publicar en"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Slug"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Activar comentarios"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "Engadir artigo"
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "Publicar"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "Despublicar"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "Non se encontraron artigos."
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Comentarios"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Data"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "Xeral"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr "Ligazón permanente"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "Numérico"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/blog/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/blog/artigo-de-exemplo"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "Día e nome"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/blog/2014/06/12/artigo-de-exemplo"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "Mes e nome"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/blog/2014/06/artigo-de-exemplo"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr "Personalizado"
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "Activar comentarios."
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "Nome e e-mail obrigatorios."
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "Cerrar comentarios en artigos con antigüidade maior de"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "días."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "Aparencia"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "Mostrar avatares de Gravatar."
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "Ordenar comentarios por"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "últimos ao final."
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "últimos ao comezo."
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "Permitir comentarios aniñados de"
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "niveis de profundidade."
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% ás %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Comentarios (%count%)"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "Deixar un comentario"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "Sesión iniciada como %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "Estás a comentar como convidado."
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "Enviar comentario"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "Non tes permiso para publicar comentarios."
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "Por favor, inicia sesión para deixar un comentario."
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "Escrito por %name% no %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Continuar lendo"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Ningún comentario|{1} %num% comentario|]1,Inf[ %num% comentarios"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "Fixeche algunhas mudanzas! Abandonar o artigo sen salvar descartará todas as mudanzas."
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "Comentarios a %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "Comentario salvado."
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "Comentario creado."
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr "{0} Non se borraron comentarios.|{1} comentario borrado.|]1,Inf[ comentarios borrados."
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr "{0} Non mudou o estado de ningún comentario.|O estado de un comentario mudou.|]1,Inf[ O estado de algúns comentarios mudou."
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "Artigos"
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "Id de artigo inválido."
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "Editar artigo"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "Artigo salvado."
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "Artigo creado."
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr "{0} Non se borraron artigos.|{1} Artigo borrado.|]1,Inf[ Artigos borrados."
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr "{0} Non se copiaron artigos.|{1} Artigo copiado.|]1,Inf[ Artigos copiados."
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr "{0} Non se publicaron artigos.|{1} Artigo publicado.|]1,Inf[ Artigos publicados."
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} Non se despublicaron artigos.|{1} Artigo despublicado.|]1,Inf[ Artigos despublicados."
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "Blog"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "Por favor, agarda outros %seconds% segundos antes de comentar de novo."
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "Os comentarios foron desactivados para este artigo."
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr "Por favor, introduce un nome e e-mail válidos."
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "Grazas por comentar!"
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "Vaia, algo saiu mal!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "Artigo non encontrado!"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "Non se pode acceder a este artigo!"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "Aprobado"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr "Pendente"
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "Spam"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "Publicado"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "Despublicado"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "Bosquexo"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr "Revisión pendente"
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "O artigo con id \"%id%\" non foi encontrado!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "O artigo con slug \"%slug%\" non foi encontrado!"

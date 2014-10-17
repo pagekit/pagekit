@@ -167,6 +167,13 @@ class ItemController extends Controller
                 }
             }
 
+            if ($status == Item::STATUS_ENABLED) {
+                $message = _c('{0} No menu item enabled.|{1} Menu item enabled.|]1,Inf[ Menu items enabled.', count($ids));
+            } else {
+                $message = _c('{0} No menu item disabled.|{1} Menu item disabled.|]1,Inf[ Menu items disabled.', count($ids));
+            }
+
+            $this['message']->success($message);
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
         }

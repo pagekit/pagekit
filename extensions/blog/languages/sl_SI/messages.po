@@ -1,0 +1,392 @@
+# 
+# Translators:
+# GregaZ <gregaz@e-pro.si>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-22 21:01+0000\n"
+"Last-Translator: GregaZ <gregaz@e-pro.si>\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/pagekit-cms/language/sl_SI/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-pošta"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Odobreno"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Neodobreno"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Označi kot spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Ni komentarjev"
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Odgovori"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Komentar"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "Odgovor na %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "Odgovor na"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Nič čakajočih|{1} En čakajoč|{2} Dva čakajoča|{3} Trije čakajoči|{4} Štirje čakajoči|]4,Inf[ %comments% čakajočih"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Ogled objav"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Objave"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "-Izberi objavo-"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Dodaj naslov"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Uvodno besedilo"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Dodaj uvodno besedilo"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "Avtor"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Objavljeno"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "URL"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Omogoči komentarje"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "Dodaj novo objavo"
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "Objavi"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "Umakni objavo"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "Ni objav"
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Komentarji"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Datum"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "Splošno"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr "Povezava"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "Številčno"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/blog/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/blog/primer-objave"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "Datum in ime"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/blog/2014/06/12/primer-objave"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "Mesec in ime"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/blog/2014/06/primer-objave"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr "Po meri"
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "Omogoči komentarje"
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "Potrebujete ime in e-pošto"
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "Ne prikazuj komentarjev starejših od"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "dni."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "Izgled"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "Prikaži Gravatar avatarje."
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "Prikaži komentarje glede na"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "zadnji dodani nazadnje."
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "zadnji dodani najprej."
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "Omogoči gnezdene komentarje od"
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "nivojev globoko."
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% ob %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Komentarji (%count%)"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "Dodaj komentar"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "Vpisani ste kot %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "Komentirate kot gost."
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "Oddaj komentar"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "Nimate pravic za objavo komentarja."
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "Za komentiranje morate biti vpisani."
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "Komentiral %name% dne %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Naprej"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Brez komentarjev|{1} %num% komentar|{2} %num% komentarja|{3} %num% komentari|{4} %num% komentar|]4,Inf[ %num% komentarjev"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "Želite zapustiti stran? Spremembe, ki ste jih opravili se ne bodo shranile!"
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "komentarje po %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "Komentar shranjen."
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "Komentar dodan."
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr "Noben {0} komantar ni izbrisana.|{1} komentar je izbrisan.|Izbrisana sta {2} komentarja.|Izbrisani so {3} komentarji.|Izbrisani so {4} komentarji.|Izbrisanih je ]4,Inf[ komentarjev."
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr "{0} ni novih komantarjev.|{1} nov komentar.|{2} nova komentarja.|{3} novi komentarji.|{4} novi komentarji.|]4,Inf[ novih komentarjev."
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "Objave"
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "Napačen ID objave"
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "Uredi objavo"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "Objava shranjena"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "Objava ustvarjena"
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr "Nobena {0} objava ni izbrisana.|{1} objava je izbrisana.|Izbrisani sta {2} objavi.|Izbrisane so bile {3} objave.|Izbrisane so bile {4} objava.|Izbrisanih je bolo]4,Inf[ objav."
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr "Nobena {0} objava ni kopirana.|{1} objava je kopirana.|{2} objavi sta kopirani.|{3} objave so bile kopirane.|{4} objave so bile kopirane.|]4,Inf[ objav je bilo kopiranih."
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr "{0} novih objav.|{1} nova objava.|{2} novi objavi.|{3} nove objave.|{4} nove objave.|]4,Inf[ novih objav."
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} neobjavljenih objav.|{1} nova neobjavljena objava.|{2} novi neobjavljeni objavi.|{3} nove neobjavljene objave.|{4} nove neobjavljene objave.|]4,Inf[ novih neobjavljenih objav."
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "Blog"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "Počakajte %seconds% sekund, preden lahko spet komentirate."
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "Za to objavo so komentarji onemogočeni."
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr "Prosimo vnesite veljevno ime in e-pošto."
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "Hvala za komentar."
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "Upsss, prišlo je do napake!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "Iskanje je bilo neuspešno!"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "Ogled te objave ni mogoč!"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "Odobreno"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr "Čakajoče"
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "Spam"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "Objavljeno"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "Neobjavljeno"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "Osnutek"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr "Čakajoč napotrditev"
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "Objava \"%id%\" ni bila najdena!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "Objava z \"%slug%\" ni bila najdena!"

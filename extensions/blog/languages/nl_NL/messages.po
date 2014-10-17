@@ -1,0 +1,394 @@
+# 
+# Translators:
+# Markh07 <markh07@gmail.com>, 2014
+# Rick Roelofs <bazelaar@gmail.com>, 2014
+# robbert <robbertmastebroek@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-31 13:03+0000\n"
+"Last-Translator: Markh07 <markh07@gmail.com>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/pagekit-cms/language/nl_NL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/blog/views/admin/comment/edit.razr:15
+#: extensions/blog/views/comment/respond.razr:23
+msgid "E-mail"
+msgstr "E-mail"
+
+#: extensions/blog/views/admin/comment/index.razr:15
+msgid "Approve"
+msgstr "Goedkeuren"
+
+#: extensions/blog/views/admin/comment/index.razr:16
+msgid "Unapprove"
+msgstr "Afkeuren"
+
+#: extensions/blog/views/admin/comment/index.razr:17
+msgid "Mark as spam"
+msgstr "Markeren als spam"
+
+#: extensions/blog/views/admin/comment/index.razr:37
+msgid "No comments found."
+msgstr "Geen reacties gevonden."
+
+#: extensions/blog/views/admin/comment/index.razr:67
+#: extensions/blog/views/admin/comment/table.razr:37
+#: extensions/blog/views/comment/comment.razr:27
+msgid "Reply"
+msgstr "Beantwoorden"
+
+#: extensions/blog/views/admin/comment/table.razr:6
+msgid "Comment"
+msgstr "Reageren"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to %post%"
+msgstr "Antwoord op %post%"
+
+#: extensions/blog/views/admin/comment/table.razr:8
+msgid "In response to"
+msgstr "Antwoord op"
+
+#: extensions/blog/views/admin/comment/table.razr:47
+#: extensions/blog/views/admin/post/table.razr:50
+msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
+msgstr "{0} Geen wachtrij|{1} 1 in wachtrij|]1,Inf[ %comments% in wachtrij"
+
+#: extensions/blog/views/admin/link/blog.razr:5
+msgid "Posts View"
+msgstr "Berichtenoverzicht"
+
+#: extensions/blog/views/admin/link/blog.razr:15
+msgid "Post"
+msgstr "Bericht"
+
+#: extensions/blog/views/admin/link/blog.razr:18
+msgid "- Select Post -"
+msgstr "- Selecteer bericht -"
+
+#: extensions/blog/views/admin/post/edit.razr:14
+msgid "Enter Title"
+msgstr "Voer titel in"
+
+#: extensions/blog/views/admin/post/edit.razr:22
+msgid "Excerpt"
+msgstr "Inleiding"
+
+#: extensions/blog/views/admin/post/edit.razr:24
+msgid "Enter Excerpt"
+msgstr "Voer inleiding in"
+
+#: extensions/blog/views/admin/post/edit.razr:43
+#: extensions/blog/views/admin/post/table.razr:8
+msgid "Author"
+msgstr "Auteur"
+
+#: extensions/blog/views/admin/post/edit.razr:53
+msgid "Publish on"
+msgstr "Publiceer op"
+
+#: extensions/blog/views/admin/post/edit.razr:73
+msgid "Slug"
+msgstr "Alias"
+
+#: extensions/blog/views/admin/post/edit.razr:96
+msgid "Enable Comments"
+msgstr "Reacties toestaan"
+
+#: extensions/blog/views/admin/post/index.razr:8
+#: extensions/blog/src/Controller/PostController.php:105
+msgid "Add Post"
+msgstr "Bericht Toevoegen"
+
+#: extensions/blog/views/admin/post/index.razr:15
+msgid "Publish"
+msgstr "Publiceren"
+
+#: extensions/blog/views/admin/post/index.razr:16
+msgid "Unpublish"
+msgstr "Depubliceren"
+
+#: extensions/blog/views/admin/post/index.razr:38
+msgid "No posts found."
+msgstr "Geen berichten gevonden."
+
+#: extensions/blog/views/admin/post/table.razr:9
+#: extensions/blog/views/admin/settings.razr:16
+#: extensions/blog/views/admin/settings.razr:67
+#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments"
+msgstr "Reacties"
+
+#: extensions/blog/views/admin/post/table.razr:10
+msgid "Date"
+msgstr "Datum"
+
+#: extensions/blog/views/admin/settings.razr:15
+#: extensions/blog/views/admin/settings.razr:26
+msgid "General"
+msgstr "Algemeen"
+
+#: extensions/blog/views/admin/settings.razr:28
+msgid "Permalink"
+msgstr "Permalink"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "Numeric"
+msgstr "Numeriek"
+
+#: extensions/blog/views/admin/settings.razr:33
+msgid "/blog/123"
+msgstr "/blog/123"
+
+#: extensions/blog/views/admin/settings.razr:39
+msgid "/blog/sample-post"
+msgstr "/blog/voorbeeld-bericht"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "Day and name"
+msgstr "Dag en naam"
+
+#: extensions/blog/views/admin/settings.razr:45
+msgid "/blog/2014/06/12/sample-post"
+msgstr "/blog/2014/06/12/voorbeeld-bericht"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "Month and name"
+msgstr "Maand en naam"
+
+#: extensions/blog/views/admin/settings.razr:51
+msgid "/blog/2014/06/sample-post"
+msgstr "/blog/2014/06/voorbeeld-bericht"
+
+#: extensions/blog/views/admin/settings.razr:57
+msgid "Custom"
+msgstr "Aangepast"
+
+#: extensions/blog/views/admin/settings.razr:73
+msgid "Enable comments."
+msgstr "Sta reacties toe"
+
+#: extensions/blog/views/admin/settings.razr:77
+msgid "Require name and e-mail."
+msgstr "Vereis naam en e-mail."
+
+#: extensions/blog/views/admin/settings.razr:81
+msgid "Close comments on articles older than"
+msgstr "Zet reacties uit bij artikelen ouder dan"
+
+#: extensions/blog/views/admin/settings.razr:82
+msgid "days."
+msgstr "dagen."
+
+#: extensions/blog/views/admin/settings.razr:87
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#: extensions/blog/views/admin/settings.razr:91
+msgid "Show Avatars from Gravatar."
+msgstr "Gebruik avatars van Gravatar."
+
+#: extensions/blog/views/admin/settings.razr:94
+msgid "Order comments by"
+msgstr "Rangschik reacties op"
+
+#: extensions/blog/views/admin/settings.razr:96
+msgid "latest last."
+msgstr "meest recent laatst."
+
+#: extensions/blog/views/admin/settings.razr:97
+msgid "latest first."
+msgstr "meest recent eerst."
+
+#: extensions/blog/views/admin/settings.razr:103
+msgid "Enable nested comments of"
+msgstr "Sta geneste reacties van"
+
+#: extensions/blog/views/admin/settings.razr:105
+msgid "levels deep."
+msgstr "niveaus diep toe."
+
+#: extensions/blog/views/comment/comment.razr:13
+msgid "%date% at %time%"
+msgstr "%date% om %time%"
+
+#: extensions/blog/views/comment/comments.razr:5
+msgid "Comments (%count%)"
+msgstr "Reacties (%count%)"
+
+#: extensions/blog/views/comment/respond.razr:3
+msgid "Leave a comment"
+msgstr "Laat een reactie achter"
+
+#: extensions/blog/views/comment/respond.razr:11
+msgid "Logged in as %name%"
+msgstr "Ingelogd als %name%"
+
+#: extensions/blog/views/comment/respond.razr:15
+msgid "You are commenting as guest."
+msgstr "Je reageert als gast."
+
+#: extensions/blog/views/comment/respond.razr:33
+msgid "Submit comment"
+msgstr "Verstuur reactie"
+
+#: extensions/blog/views/comment/respond.razr:45
+msgid "You are not allowed to post comments."
+msgstr "Je mag geen reacties plaatsen."
+
+#: extensions/blog/views/comment/respond.razr:49
+msgid "Please login to leave a comment."
+msgstr "Log in om een reactie achter te laten."
+
+#: extensions/blog/views/post/index.razr:7
+msgid "Written by %name% on %date%"
+msgstr "Geschreven door %name% op %date%"
+
+#: extensions/blog/views/post/index.razr:18
+msgid "Continue Reading"
+msgstr "Verder lezen"
+
+#: extensions/blog/views/post/index.razr:20
+msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
+msgstr "{0} Geen reacties|{1} %num% reactie|]1,Inf[ %num% reacties"
+
+#: extensions/blog/src/BlogExtension.php:39
+msgid ""
+"You've made some changes! Leaving the post without saving will discard all "
+"changes."
+msgstr "De gemaakte wijzigingen gaan verloren wanneer je het bericht verlaat zonder eerst op te slaan."
+
+#: extensions/blog/src/Controller/CommentController.php:106
+msgid "Comments on %title%"
+msgstr "Reacties op %title%"
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment saved."
+msgstr "Reactie opgeslagen."
+
+#: extensions/blog/src/Controller/CommentController.php:157
+msgid "Comment created."
+msgstr "Reactie aangemaakt."
+
+#: extensions/blog/src/Controller/CommentController.php:177
+msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
+msgstr "{0} Geen reactie verwijderd.|{1} Reactie verwijderd.|]1,Inf[ Reacties verwijderd."
+
+#: extensions/blog/src/Controller/CommentController.php:196
+msgid ""
+"{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
+"statuses updated."
+msgstr "{0} Reactie status is niet veranderd.|{1} Reactie status veranderd.|]1,Inf[ Reactie statussen veranderd."
+
+#: extensions/blog/src/Controller/PostController.php:93
+msgid "Posts"
+msgstr "Berichten"
+
+#: extensions/blog/src/Controller/PostController.php:117
+msgid "Invalid post id."
+msgstr "Ongeldig bericht id."
+
+#: extensions/blog/src/Controller/PostController.php:127
+msgid "Edit Post"
+msgstr "Bericht aanpassen"
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post saved."
+msgstr "Bericht opgeslagen."
+
+#: extensions/blog/src/Controller/PostController.php:152
+msgid "Post created."
+msgstr "Bericht aangemaakt."
+
+#: extensions/blog/src/Controller/PostController.php:173
+msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
+msgstr "{0} Blog is niet verwijderd.|{1} Blog verwijderd.|]1,Inf[ Blogs verwijderd."
+
+#: extensions/blog/src/Controller/PostController.php:195
+msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
+msgstr "{0} Geen blogs gekopieerd.|{1} Blog gekopieerd.|]1,Inf[ Blogs gekopieerd."
+
+#: extensions/blog/src/Controller/PostController.php:212
+msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
+msgstr "{0} Blog niet gepubliceerd.|{1} Blog gepubliceerd.|]1,Inf[ Blogs gepubliceerd."
+
+#: extensions/blog/src/Controller/PostController.php:214
+msgid ""
+"{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
+msgstr "{0} Geen blogs gedepubliceerd.|{1} Blog gedepubliceerd.|]1,Inf[ Blogs gedepubliceerd."
+
+#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Link/BlogLink.php:22
+msgid "Blog"
+msgstr "Blog"
+
+#: extensions/blog/src/Controller/SiteController.php:93
+msgid "Please wait another %seconds% seconds before commenting again."
+msgstr "Wacht nog %seconds% seconden voordat je opnieuw een reactie plaatst."
+
+#: extensions/blog/src/Controller/SiteController.php:102
+msgid "Comments have been disabled for this post."
+msgstr "Reacties zijn uitgeschakeld voor dit bericht."
+
+#: extensions/blog/src/Controller/SiteController.php:111
+msgid "Please provide valid name and email."
+msgstr "Laat a.u.b. een geldige naam en mailadres achter."
+
+#: extensions/blog/src/Controller/SiteController.php:133
+msgid "Thanks for commenting!"
+msgstr "Bedankt voor het reageren!"
+
+#: extensions/blog/src/Controller/SiteController.php:145
+msgid "Whoops, something went wrong!"
+msgstr "Oeps, daar ging iets fout!"
+
+#: extensions/blog/src/Controller/SiteController.php:158
+msgid "Post not found!"
+msgstr "Bericht niet gevonden!"
+
+#: extensions/blog/src/Controller/SiteController.php:162
+msgid "Unable to access this post!"
+msgstr "Geen toegang tot dit bericht!"
+
+#: extensions/blog/src/Entity/Comment.php:114
+msgid "Approved"
+msgstr "Goedgekeurd"
+
+#: extensions/blog/src/Entity/Comment.php:115
+msgid "Pending"
+msgstr "In afwachting"
+
+#: extensions/blog/src/Entity/Comment.php:116
+msgid "Spam"
+msgstr "Spam"
+
+#: extensions/blog/src/Entity/Post.php:169
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: extensions/blog/src/Entity/Post.php:170
+msgid "Unpublished"
+msgstr "Gedepubliceerd"
+
+#: extensions/blog/src/Entity/Post.php:171
+msgid "Draft"
+msgstr "Opzet"
+
+#: extensions/blog/src/Entity/Post.php:172
+msgid "Pending Review"
+msgstr "Review in afwachting"
+
+#: extensions/blog/src/Event/RouteListener.php:81
+msgid "Post with id \"%id%\" not found!"
+msgstr "Bericht met id \"%id%\" niet gevonden!"
+
+#: extensions/blog/src/Event/RouteListener.php:106
+msgid "Post with slug \"%slug%\" not found!"
+msgstr "Blog met id \"%slug%\" niet gevonden!"

@@ -1,0 +1,130 @@
+# 
+# Translators:
+# lundmorten.dk <mortenlund@lundmorten.dk>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2013-11-06 15:49+0000\n"
+"PO-Revision-Date: 2014-08-15 21:51+0000\n"
+"Last-Translator: lundmorten.dk <mortenlund@lundmorten.dk>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/pagekit-cms/language/da_DK/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
+#: extensions/installer/theme/templates/template.blade.php:5
+msgid "Pagekit Installer"
+msgstr "Pagekit installer"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
+msgid "Database connection failed!"
+msgstr "Databaseforbindelsen fejlede!"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
+msgid "No database connection."
+msgstr "Ingen databaseforbindelse."
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
+msgid "Can't write config."
+msgstr "Kan ikke skrive config."
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
+msgid "DB user is missing required privileges."
+msgstr "DB user mangler de fornødne privilegier."
+
+#: extensions/installer/views/install.blade.php:13
+msgid "Begin"
+msgstr "Begynd"
+
+#: extensions/installer/views/install.blade.php:23
+msgid "Connect database"
+msgstr "Forbind database"
+
+#: extensions/installer/views/install.blade.php:25
+msgid "Enter your database connection details."
+msgstr "Skriv dine databaseforbindelses detaljer."
+
+#: extensions/installer/views/install.blade.php:30
+msgid "Hostname"
+msgstr "Hostnavn"
+
+#: extensions/installer/views/install.blade.php:33
+msgid "Host cannot be blank."
+msgstr "Host kan ikke være blank"
+
+#: extensions/installer/views/install.blade.php:41
+msgid "User cannot be blank."
+msgstr "Bruger kan ikke være blank."
+
+#: extensions/installer/views/install.blade.php:51
+msgid "Database Name"
+msgstr "Databasenavn"
+
+#: extensions/installer/views/install.blade.php:54
+msgid "Database name cannot be blank."
+msgstr "Databasenavn kan ikke være blank"
+
+#: extensions/installer/views/install.blade.php:59
+msgid "Table Prefix"
+msgstr "Tabelprefix"
+
+#: extensions/installer/views/install.blade.php:64
+#: extensions/installer/views/install.blade.php:107
+#: extensions/installer/views/install.blade.php:140
+msgid "Next"
+msgstr "Næste"
+
+#: extensions/installer/views/install.blade.php:75
+msgid "Create your account"
+msgstr "Opret din konto"
+
+#: extensions/installer/views/install.blade.php:77
+msgid "You will be the site administrator."
+msgstr "Du vil være sidens administrator."
+
+#: extensions/installer/views/install.blade.php:85
+msgid "Username cannot be blank."
+msgstr "Brugernavn kan ikke være blank."
+
+#: extensions/installer/views/install.blade.php:93
+msgid "Field must be a valid email address."
+msgstr "Feltet skal være en gyldig e-mail adresse."
+
+#: extensions/installer/views/install.blade.php:102
+msgid "Password cannot be blank."
+msgstr "Password kan ikke være blank."
+
+#: extensions/installer/views/install.blade.php:118
+msgid "Setup your site"
+msgstr "Opsæt dit site"
+
+#: extensions/installer/views/install.blade.php:120
+msgid "Enter your website details."
+msgstr "Indtast dine detaljer for websitet."
+
+#: extensions/installer/views/install.blade.php:128
+msgid "Site name cannot be blank."
+msgstr "Sidenavn kan ikke være blank."
+
+#: extensions/installer/views/install.blade.php:152
+msgid "Installing Pagekit..."
+msgstr "Installerer Pagekit..."
+
+#: extensions/installer/views/install.blade.php:160
+msgid "Installation failed!"
+msgstr "Installationen fejlede!"
+
+#: extensions/installer/views/install.blade.php:169
+msgid "Retry"
+msgstr "Prøv igen"
+
+#: extensions/installer/views/install.blade.php:175
+msgid "Finished!"
+msgstr "Færdig!"
+
+#: extensions/installer/views/install.blade.php:182
+msgid "Login now"
+msgstr "Log ind nu"

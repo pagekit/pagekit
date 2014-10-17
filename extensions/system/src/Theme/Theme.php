@@ -116,34 +116,14 @@ class Theme implements \ArrayAccess
     /**
      * Returns the theme's config.
      *
-     * @param mixed $key
-     * @param mixed $default
+     * @param  mixed $key
+     * @param  mixed $default
      * @return array
      */
     public function getConfig($key = null, $default = null)
     {
-        if (null === $key) {
-            return $this->config;
-        }
-
-        $array = $this->config;
-
-        if (isset($array[$key])) {
-            return $array[$key];
-        }
-
-        foreach (explode('.', $key) as $segment) {
-
-            if (!is_array($array) || !array_key_exists($segment, $array)) {
-                return $default;
-            }
-
-            $array = $array[$segment];
-        }
-
-        return $array;
+        return $this->fetch($this->config, $key, $default);
     }
-
 
     /**
      * Returns the theme's parameters.
@@ -154,11 +134,22 @@ class Theme implements \ArrayAccess
      */
     public function getParams($key = null, $default = null)
     {
-        if (null === $key) {
-            return $this->parameters;
-        }
+        return $this->fetch($this->parameters, $key, $default);
+    }
 
-        $array = $this->parameters;
+    /**
+     * Returns a value from given array.
+     *
+     * @param  array $array
+     * @param  mixed $key
+     * @param  mixed $default
+     * @return array
+     */
+    protected function fetch($array, $key, $default)
+    {
+        if (null === $key) {
+            return $array;
+        }
 
         if (isset($array[$key])) {
             return $array[$key];
@@ -197,7 +188,7 @@ class Theme implements \ArrayAccess
 
                 if ($format == 'php') {
                     $format = 'array';
-                    $file = require($file);
+                    $file = require $file;
                 }
 
                 $translator->addResource($format, $file, $locale, $domain);

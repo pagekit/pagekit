@@ -117,7 +117,7 @@ class ExtensionComposerCommand extends Command
             }
         }
 
-        require("phar://{$composer}/src/bootstrap.php");
+        require "phar://{$composer}/src/bootstrap.php";
     }
 
     /**

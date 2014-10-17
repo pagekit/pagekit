@@ -8,7 +8,15 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
 
         var widget = $(this), config = widget.data('weather');
 
-        loadData(config).done(function(data) {
+        loadData(config).then(function(data, status, jqxhr) {
+
+            if (data.cod != 200) {
+                return $.Deferred().reject(data);
+            }
+
+            return $.Deferred().resolve(data, status, jqxhr);
+
+        }).done(function(data) {
 
             var location = config.location.split(',');
 

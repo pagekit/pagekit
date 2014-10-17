@@ -67,7 +67,7 @@
                 <p class="uk-alert uk-alert-info uk-hidden" data-msg="no-packages">@trans('No extensions found.')</p>
                 <p class="uk-alert uk-alert-warning uk-hidden" data-msg="no-connection">@trans('Cannot connect to the marketplace. Please try again later.')</p>
 
-                <div class="js-marketplace-content"></div>
+                <div class="js-marketplace-content" data-uk-observe></div>
                 <div class="js-marketplace-details uk-modal"></div>
 
             </li>

@@ -1,0 +1,3844 @@
+# 
+# Translators:
+# Lucas Coutinho <lucas_z2011@hotmail.com>, 2014
+# pedroborg_es <oi@pedroborg.es>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"PO-Revision-Date: 2014-08-15 22:31+0000\n"
+"Last-Translator: pedroborg_es <oi@pedroborg.es>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/pagekit-cms/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
+#: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/settings.razr:7
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/widgets/edit.razr:7
+msgid "Close"
+msgstr "Fechar"
+
+#: extensions/system/theme/templates/error.razr:4
+msgid "Error"
+msgstr "Erro"
+
+#: extensions/system/theme/templates/login.razr:27
+#: extensions/system/views/admin/user/edit.razr:36
+#: extensions/system/views/user/login.razr:6
+#: extensions/system/views/user/mails/reset.razr:11
+#: extensions/system/views/user/registration.razr:8
+msgid "Username"
+msgstr "Nome de usuário"
+
+#: extensions/system/theme/templates/login.razr:31
+#: extensions/system/views/admin/user/edit.razr:57
+#: extensions/system/views/user/login.razr:13
+#: extensions/system/views/user/registration.razr:29
+msgid "Password"
+msgstr "Senha"
+
+#: extensions/system/theme/templates/login.razr:35
+#: extensions/system/views/user/login.razr:3
+#: extensions/system/views/widgets/login/login.razr:10
+#: extensions/system/src/System/Controller/SystemController.php:48
+#: extensions/system/src/User/Controller/AuthController.php:48
+#: extensions/system/src/User/Link/User.php:46
+#: extensions/system/src/User/Widget/LoginWidget.php:25
+msgid "Login"
+msgstr "Entrar"
+
+#: extensions/system/theme/templates/login.razr:38
+#: extensions/system/views/user/login.razr:24
+#: extensions/system/views/widgets/login/login.razr:14
+msgid "Remember Me"
+msgstr "Lembrar-me"
+
+#: extensions/system/theme/templates/login.razr:39
+#: extensions/system/views/widgets/login/login.razr:15
+msgid "Forgot Password?"
+msgstr "Esqueceu a senha?"
+
+#: extensions/system/theme/templates/login.razr:50
+#: extensions/system/views/user/reset/request.razr:8
+msgid "Username or Email"
+msgstr "Nome de usuário ou e-mail"
+
+#: extensions/system/theme/templates/login.razr:53
+msgid "Reset Password"
+msgstr "Redefinir senha"
+
+#: extensions/system/theme/templates/maintenance.razr:23
+#: extensions/system/views/admin/settings/settings.razr:49
+msgid "Maintenance"
+msgstr "Manutenção"
+
+#: extensions/system/theme/templates/migration.razr:23
+#: extensions/system/src/System/Controller/MigrationController.php:17
+msgid "Update Pagekit"
+msgstr "Atualizar  Pagekit"
+
+#: extensions/system/theme/templates/migration.razr:24
+msgid ""
+"Pagekit has been updated! Before we send you on your way, we have to update "
+"your database to the newest version."
+msgstr "O Pagekit foi atualizado! Mas antes de liberar você, precisamos atualizar seu banco de dados para a versão mais recente."
+
+#: extensions/system/theme/templates/migration.razr:26
+#: extensions/system/views/admin/settings/index.razr:54
+#: extensions/system/views/admin/settings/index.razr:55
+#: extensions/system/views/admin/settings/update.razr:11
+#: extensions/system/views/tmpl/image.modal.razr:24
+#: extensions/system/views/tmpl/link.modal.razr:12
+#: extensions/system/views/tmpl/linkpicker.modal.razr:6
+#: extensions/system/views/tmpl/marketplace.details.razr:9
+#: extensions/system/views/tmpl/package.updates.razr:25
+#: extensions/system/views/tmpl/video.modal.razr:23
+#: extensions/system/src/System/Controller/UpdateController.php:39
+msgid "Update"
+msgstr "Atualizar"
+
+#: extensions/system/theme/templates/template.razr:22
+#: extensions/system/theme/templates/template.razr:39
+msgid "Pagekit"
+msgstr "Pagekit"
+
+#: extensions/system/theme/templates/template.razr:64
+#: extensions/system/theme/templates/template.razr:132
+msgid "Visit Site"
+msgstr "Visite o site"
+
+#: extensions/system/theme/templates/template.razr:65
+#: extensions/system/theme/templates/template.razr:133
+#: extensions/system/views/admin/extensions/table.razr:23
+#: extensions/system/views/admin/settings/index.razr:11
+#: extensions/system/views/admin/settings/index.razr:12
+#: extensions/system/views/admin/themes/table.razr:21
+#: extensions/system/views/admin/widgets/edit.razr:14
+#: extensions/system/views/tmpl/image.replace.razr:14
+#: extensions/system/views/tmpl/video.replace.razr:14
+#: extensions/system/languages/messages.php:24
+#: extensions/system/src/System/Controller/SettingsController.php:70
+#: extensions/system/src/System/Controller/SystemController.php:32
+msgid "Settings"
+msgstr "Configurações"
+
+#: extensions/system/theme/templates/template.razr:66
+#: extensions/system/theme/templates/template.razr:134
+#: extensions/system/views/widgets/login/logout.razr:2
+msgid "Logout"
+msgstr "Sair"
+
+#: extensions/system/theme/templates/template.razr:113
+#: extensions/system/views/admin/settings/index.razr:20
+#: extensions/system/views/admin/settings/index.razr:21
+#: extensions/system/views/admin/settings/index.razr:88
+#: extensions/system/views/admin/settings/info.razr:61
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:50
+msgid "Extensions"
+msgstr "Extensões "
+
+#: extensions/system/views/admin/aliases/edit.razr:6
+#: extensions/system/views/admin/dashboard/edit.razr:4
+#: extensions/system/views/admin/menu/index.razr:82
+#: extensions/system/views/admin/menu/item.edit.razr:6
+#: extensions/system/views/admin/settings/settings.razr:6
+#: extensions/system/views/admin/user/edit.razr:6
+#: extensions/system/views/admin/user/role.razr:90
+#: extensions/system/views/admin/widgets/edit.razr:6
+#: extensions/system/views/user/profile.razr:46
+msgid "Save"
+msgstr "Salvar"
+
+#: extensions/system/views/admin/aliases/edit.razr:7
+#: extensions/system/views/admin/dashboard/edit.razr:5
+#: extensions/system/views/admin/menu/index.razr:83
+#: extensions/system/views/admin/menu/item.edit.razr:7
+#: extensions/system/views/admin/settings/index.razr:134
+#: extensions/system/views/admin/user/edit.razr:7
+#: extensions/system/views/admin/user/role.razr:91
+#: extensions/system/views/admin/widgets/edit.razr:7
+#: extensions/system/views/tmpl/image.modal.razr:25
+#: extensions/system/views/tmpl/image.modal.razr:33
+#: extensions/system/views/tmpl/link.modal.razr:13
+#: extensions/system/views/tmpl/linkpicker.modal.razr:7
+#: extensions/system/views/tmpl/package.upload.razr:36
+#: extensions/system/views/tmpl/video.modal.razr:24
+#: extensions/system/views/tmpl/video.modal.razr:32
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: extensions/system/views/admin/aliases/edit.razr:10
+msgid "Please select a source."
+msgstr "Selecione uma fonte, por favor."
+
+#: extensions/system/views/admin/aliases/edit.razr:13
+#: extensions/system/views/admin/aliases/index.razr:21
+msgid "Alias"
+msgstr "Apelido"
+
+#: extensions/system/views/admin/aliases/edit.razr:16
+msgid ""
+"Use a relative path and don't add a trailing slash. For example: "
+"<code>about</code>"
+msgstr "Use um caminho relativo sem a barra. Por exemplo: <code>sobre</code>"
+
+#: extensions/system/views/admin/aliases/edit.razr:20
+#: extensions/system/views/admin/aliases/index.razr:22
+msgid "Source"
+msgstr "Fonte"
+
+#: extensions/system/views/admin/aliases/index.razr:7
+msgid "Add Alias"
+msgstr "Adicionar apelido"
+
+#: extensions/system/views/admin/aliases/index.razr:8
+#: extensions/system/views/admin/dashboard/settings.razr:18
+#: extensions/system/views/admin/extensions/table.razr:43
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/menu/index.razr:35
+#: extensions/system/views/admin/themes/table.razr:27
+#: extensions/system/views/admin/user/index.razr:9
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/admin/widgets/index.razr:19
+#: extensions/system/views/tmpl/finder.main.razr:11
+#: extensions/system/views/tmpl/image.replace.razr:15
+#: extensions/system/views/tmpl/video.replace.razr:15
+msgid "Delete"
+msgstr "Excluir"
+
+#: extensions/system/views/admin/aliases/index.razr:11
+#: extensions/system/views/admin/extensions/index.razr:61
+#: extensions/system/views/admin/themes/index.razr:61
+#: extensions/system/views/admin/user/index.razr:51
+#: extensions/system/views/admin/widgets/index.razr:56
+#: extensions/system/views/tmpl/finder.main.razr:17
+msgid "Search"
+msgstr "Buscar"
+
+#: extensions/system/views/admin/aliases/index.razr:41
+msgid "No URL aliases found."
+msgstr "Nenhuma URL aliases encontrada."
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:2
+#: extensions/system/views/admin/menu/index.razr:53
+#: extensions/system/views/admin/menu/item.edit.razr:11
+#: extensions/system/views/admin/settings/settings.razr:31
+#: extensions/system/views/admin/widgets/edit.razr:25
+#: extensions/system/views/admin/widgets/index.razr:65
+#: extensions/system/views/tmpl/link.modal.razr:5
+msgid "Title"
+msgstr "Título"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:9
+#: extensions/system/views/admin/link/link.types.razr:2
+#: extensions/system/views/admin/menu/index.razr:55
+#: extensions/system/views/tmpl/image.modal.razr:12
+#: extensions/system/views/tmpl/video.modal.razr:15
+msgid "URL"
+msgstr "URL"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:16
+msgid "Number of Posts"
+msgstr "Número de publicações"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:27
+msgid "Post Content"
+msgstr "Publicar conteúdo"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:30
+msgid "Don't show"
+msgstr "Ocultar"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:33
+msgid "Show on all posts"
+msgstr "Mostrar todas as publicações"
+
+#: extensions/system/views/admin/dashboard/feed/edit.razr:36
+msgid "Only show on first post."
+msgstr "Mostrar apenas na primeira publicação."
+
+#: extensions/system/views/admin/dashboard/settings.razr:8
+#: extensions/system/views/admin/widgets/index.razr:9
+#: extensions/system/src/System/Controller/DashboardController.php:85
+#: extensions/system/src/Widget/Controller/WidgetsController.php:70
+msgid "Add Widget"
+msgstr "Adicionar Widget"
+
+#: extensions/system/views/admin/dashboard/settings.razr:24
+msgid "Widget"
+msgstr "Widget"
+
+#: extensions/system/views/admin/dashboard/settings.razr:25
+#: extensions/system/views/admin/link/link.types.razr:8
+#: extensions/system/views/admin/menu/item.edit.razr:18
+#: extensions/system/views/admin/widgets/index.razr:68
+msgid "Type"
+msgstr "Tipo"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:2
+msgid "User Type"
+msgstr "Tipo de usuário"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Logged in"
+msgstr "Logado"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:4
+#: extensions/system/src/User/Dashboard/UserWidget.php:35
+msgid "Last registered"
+msgstr "Último registrado"
+
+#: extensions/system/views/admin/dashboard/user/edit.razr:12
+msgid "Number of Users"
+msgstr "Número de usuários"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:2
+msgid ""
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
+
+#: extensions/system/views/admin/dashboard/user/index.razr:4
+msgid ""
+"{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
+"logged in"
+msgstr "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:4
+msgid "Location"
+msgstr "Localização"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:10
+msgid "Enter the name of the city you want to get weather information for."
+msgstr "Digite o nome da cidade que você deseja obter informações sobre o tempo para."
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:15
+msgid "Unit"
+msgstr "Unidade"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:18
+msgid "Metric"
+msgstr "Métrico"
+
+#: extensions/system/views/admin/dashboard/weather/edit.razr:21
+msgid "Imperial"
+msgstr "Imperial"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:12
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:23
+msgid "Weather"
+msgstr "Clima"
+
+#: extensions/system/views/admin/dashboard/weather/index.razr:13
+msgid "Unable to retrieve weather data."
+msgstr "Não é possível recuperar dados meteorológicos."
+
+#: extensions/system/views/admin/extensions/index.razr:12
+#: extensions/system/views/admin/themes/index.razr:12
+#: extensions/system/views/tmpl/marketplace.details.razr:5
+msgid "Installed"
+msgstr "Instalado"
+
+#: extensions/system/views/admin/extensions/index.razr:13
+#: extensions/system/views/admin/themes/index.razr:13
+msgid "Updates"
+msgstr "Atualizações"
+
+#: extensions/system/views/admin/extensions/index.razr:14
+#: extensions/system/views/admin/themes/index.razr:14
+#: extensions/system/views/tmpl/marketplace.details.razr:8
+#: extensions/system/views/tmpl/package.upload.razr:35
+msgid "Install"
+msgstr "Instalar"
+
+#: extensions/system/views/admin/extensions/index.razr:15
+#: extensions/system/views/admin/themes/index.razr:15
+#: extensions/system/src/System/Controller/MarketplaceController.php:27
+msgid "Marketplace"
+msgstr "Mercado"
+
+#: extensions/system/views/admin/extensions/index.razr:16
+#: extensions/system/views/admin/themes/index.razr:16
+msgid "All"
+msgstr "Tudo"
+
+#: extensions/system/views/admin/extensions/index.razr:34
+#: extensions/system/views/admin/themes/index.razr:34
+msgid ""
+"An error occurred in retrieving update information. Please try again later."
+msgstr "Ocorreu um erro ao recuperar informações de atualização. Por favor, tente novamente mais tarde."
+
+#: extensions/system/views/admin/extensions/index.razr:38
+msgid "No extension updates found."
+msgstr "Não há atualizações de extensão encontradas."
+
+#: extensions/system/views/admin/extensions/index.razr:44
+#: extensions/system/views/admin/themes/index.razr:44
+msgid "Install an extension"
+msgstr "Instalar um extensão"
+
+#: extensions/system/views/admin/extensions/index.razr:47
+#: extensions/system/views/admin/themes/index.razr:47
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Droparea"
+msgstr "Area para soltar"
+
+#: extensions/system/views/admin/extensions/index.razr:48
+#: extensions/system/views/admin/themes/index.razr:48
+msgid ""
+"Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
+"upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Solte os arquivos aqui ou <a class=\"uk-form-file\">selecione um<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+
+#: extensions/system/views/admin/extensions/index.razr:67
+msgid "No extensions found."
+msgstr "Nenhuma extensão encontrada."
+
+#: extensions/system/views/admin/extensions/index.razr:68
+#: extensions/system/views/admin/themes/index.razr:68
+msgid "Cannot connect to the marketplace. Please try again later."
+msgstr "Não é possível ligar para o mercado. Por favor, tente novamente mais tarde."
+
+#: extensions/system/views/admin/extensions/table.razr:4
+#: extensions/system/views/admin/user/edit.razr:43
+#: extensions/system/views/tmpl/package.updates.razr:5
+#: extensions/system/views/user/profile.razr:8
+#: extensions/system/views/user/registration.razr:15
+msgid "Name"
+msgstr "Nome"
+
+#: extensions/system/views/admin/extensions/table.razr:5
+#: extensions/system/views/admin/settings/info.razr:49
+#: extensions/system/views/admin/settings/info.razr:85
+#: extensions/system/views/tmpl/package.upload.razr:17
+msgid "Version"
+msgstr "Versão"
+
+#: extensions/system/views/admin/extensions/table.razr:6
+#: extensions/system/views/admin/menu/index.razr:54
+#: extensions/system/views/admin/menu/item.edit.razr:37
+#: extensions/system/views/admin/settings/info.razr:104
+#: extensions/system/views/admin/user/edit.razr:75
+#: extensions/system/views/admin/user/index.razr:63
+#: extensions/system/views/admin/widgets/edit.razr:73
+#: extensions/system/views/admin/widgets/index.razr:66
+msgid "Status"
+msgstr "Status"
+
+#: extensions/system/views/admin/extensions/table.razr:20
+#: extensions/system/views/admin/themes/table.razr:16
+#: extensions/system/views/tmpl/marketplace.table.razr:14
+msgid "Details"
+msgstr "Detalhes"
+
+#: extensions/system/views/admin/extensions/table.razr:25
+#: extensions/system/views/admin/settings/info.razr:5
+#: extensions/system/languages/messages.php:28
+#: extensions/system/src/User/Controller/PermissionController.php:34
+msgid "Permissions"
+msgstr "Permissões"
+
+#: extensions/system/views/admin/extensions/table.razr:37
+#: extensions/system/views/admin/menu/item.edit.razr:40
+#: extensions/system/views/admin/widgets/edit.razr:76
+#: extensions/system/views/admin/widgets/index.razr:38
+#: extensions/system/src/Menu/Entity/Item.php:124
+#: extensions/system/src/Widget/Entity/Widget.php:98
+msgid "Enabled"
+msgstr "Habilitado"
+
+#: extensions/system/views/admin/extensions/table.razr:39
+#: extensions/system/views/admin/menu/item.edit.razr:43
+#: extensions/system/views/admin/widgets/edit.razr:77
+#: extensions/system/views/admin/widgets/index.razr:39
+#: extensions/system/src/Menu/Entity/Item.php:123
+#: extensions/system/src/Widget/Entity/Widget.php:97
+msgid "Disabled"
+msgstr "Desabilitado"
+
+#: extensions/system/views/admin/link/link.types.razr:11
+msgid "- Select Type -"
+msgstr "- Selecione Tipo -"
+
+#: extensions/system/views/admin/link/system.razr:2
+msgid "View"
+msgstr "Visualizar"
+
+#: extensions/system/views/admin/link/system.razr:5
+msgid "- Select View -"
+msgstr "- Selecione Visualização -"
+
+#: extensions/system/views/admin/menu/index.razr:13
+#: extensions/system/views/admin/user/role.razr:16
+msgid "Edit"
+msgstr "Editar"
+
+#: extensions/system/views/admin/menu/index.razr:14
+#: extensions/system/views/admin/user/role.razr:17
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Are you sure?"
+msgstr "Você estar certo ?"
+
+#: extensions/system/views/admin/menu/index.razr:25
+msgid "Add Menu"
+msgstr "Adicionar Menu"
+
+#: extensions/system/views/admin/menu/index.razr:34
+msgid "Add Item"
+msgstr "Adicionar Item"
+
+#: extensions/system/views/admin/menu/index.razr:38
+#: extensions/system/views/admin/user/index.razr:12
+#: extensions/system/views/admin/widgets/index.razr:22
+msgid "More"
+msgstr "Mais"
+
+#: extensions/system/views/admin/menu/index.razr:41
+#: extensions/system/views/admin/themes/table.razr:26
+#: extensions/system/views/admin/widgets/index.razr:25
+msgid "Enable"
+msgstr "Habilitar"
+
+#: extensions/system/views/admin/menu/index.razr:42
+#: extensions/system/views/admin/widgets/index.razr:26
+msgid "Disable"
+msgstr "Desabilitar"
+
+#: extensions/system/views/admin/menu/index.razr:64
+msgid "No menu found."
+msgstr "Nenhum Menu encontrado."
+
+#: extensions/system/views/admin/menu/index.razr:79
+msgid "Enter Menu Name"
+msgstr "Digite o Nome do Menu"
+
+#: extensions/system/views/admin/menu/item.edit.razr:28
+msgid "Header"
+msgstr "Cabeçalho"
+
+#: extensions/system/views/admin/menu/item.edit.razr:31
+#: extensions/system/views/admin/menu/item.razr:23
+msgid "Divider"
+msgstr "Divisor"
+
+#: extensions/system/views/admin/menu/item.edit.razr:49
+#: extensions/system/views/admin/widgets/edit.razr:92
+msgid "Restrict Access"
+msgstr "Acesso Restrito"
+
+#: extensions/system/views/admin/menu/item.edit.razr:61
+msgid "Activation Rules"
+msgstr "Regras de Ativação"
+
+#: extensions/system/views/admin/menu/item.edit.razr:64
+msgid "Enter custom activation rules as paths."
+msgstr "Entre as regras de ativação personalizados como caminhos."
+
+#: extensions/system/views/admin/menu/item.razr:25
+msgid "Menu Header"
+msgstr "Menu do Cabeçalho"
+
+#: extensions/system/views/admin/settings/index.razr:4
+#: extensions/system/views/admin/settings/info.razr:2
+#: extensions/system/views/admin/settings/settings.razr:19
+#: extensions/system/views/admin/settings/settings.razr:207
+#: extensions/system/src/System/Link/System.php:20
+msgid "System"
+msgstr "Sistema"
+
+#: extensions/system/views/admin/settings/index.razr:29
+#: extensions/system/views/admin/settings/index.razr:30
+#: extensions/system/src/Theme/Controller/ThemesController.php:65
+msgid "Themes"
+msgstr "Themas"
+
+#: extensions/system/views/admin/settings/index.razr:37
+#: extensions/system/views/admin/settings/index.razr:38
+#: extensions/system/src/System/Controller/DashboardController.php:46
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: extensions/system/views/admin/settings/index.razr:45
+#: extensions/system/views/admin/settings/index.razr:46
+#: extensions/system/views/admin/settings/settings.razr:225
+#: extensions/system/src/System/Controller/SystemController.php:94
+msgid "Storage"
+msgstr "Armazenamento"
+
+#: extensions/system/views/admin/settings/index.razr:63
+#: extensions/system/views/admin/settings/index.razr:64
+#: extensions/system/src/System/Controller/AliasController.php:46
+msgid "URL Aliases"
+msgstr "URL Aliases"
+
+#: extensions/system/views/admin/settings/index.razr:71
+#: extensions/system/views/admin/settings/index.razr:72
+msgid "Info"
+msgstr "Informações"
+
+#: extensions/system/views/admin/settings/index.razr:78
+#: extensions/system/views/admin/settings/index.razr:79
+msgid "Clear Cache"
+msgstr "Limpar o Cache"
+
+#: extensions/system/views/admin/settings/index.razr:107
+msgid "Select caches to clear:"
+msgstr "Selecionar o Cache para limpar"
+
+#: extensions/system/views/admin/settings/index.razr:114
+msgid "System Cache"
+msgstr "Sistema de Cache"
+
+#: extensions/system/views/admin/settings/index.razr:121
+msgid "Rendered Templates"
+msgstr "Modelos de Templates"
+
+#: extensions/system/views/admin/settings/index.razr:128
+msgid "Temporary Files"
+msgstr "Arquivos temporarios"
+
+#: extensions/system/views/admin/settings/index.razr:133
+msgid "Clear"
+msgstr "Limpar"
+
+#: extensions/system/views/admin/settings/info.razr:3
+msgid "PHP"
+msgstr "PHP"
+
+#: extensions/system/views/admin/settings/info.razr:4
+msgid "Database"
+msgstr "Base da Dados"
+
+#: extensions/system/views/admin/settings/info.razr:15
+#: extensions/system/views/admin/settings/info.razr:43
+#: extensions/system/views/admin/settings/info.razr:75
+msgid "Setting"
+msgstr "Ajustes"
+
+#: extensions/system/views/admin/settings/info.razr:16
+#: extensions/system/views/admin/settings/info.razr:44
+#: extensions/system/views/admin/settings/info.razr:76
+msgid "Value"
+msgstr "Valor"
+
+#: extensions/system/views/admin/settings/info.razr:21
+msgid "Pagekit Version"
+msgstr "Versão do Pagekit"
+
+#: extensions/system/views/admin/settings/info.razr:25
+msgid "Web Server"
+msgstr "Servidor de Web"
+
+#: extensions/system/views/admin/settings/info.razr:29
+msgid "User Agent"
+msgstr "User Agent"
+
+#: extensions/system/views/admin/settings/info.razr:53
+msgid "Handler"
+msgstr "Treinador"
+
+#: extensions/system/views/admin/settings/info.razr:57
+msgid "Built On"
+msgstr "Construido em"
+
+#: extensions/system/views/admin/settings/info.razr:81
+msgid "Driver"
+msgstr "Motorista"
+
+#: extensions/system/views/admin/settings/info.razr:89
+msgid "Client"
+msgstr "Cliente"
+
+#: extensions/system/views/admin/settings/info.razr:103
+msgid "Path"
+msgstr "Caminho"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Writable"
+msgstr "Gravável"
+
+#: extensions/system/views/admin/settings/info.razr:111
+msgid "Unwritable"
+msgstr "não gravável"
+
+#: extensions/system/views/admin/settings/settings.razr:15
+#: extensions/system/views/admin/settings/settings.razr:29
+msgid "Site"
+msgstr "Site"
+
+#: extensions/system/views/admin/settings/settings.razr:16
+#: extensions/system/views/admin/settings/settings.razr:66
+#: extensions/system/views/admin/user/edit.razr:50
+#: extensions/system/views/admin/user/index.razr:64
+#: extensions/system/views/user/profile.razr:15
+#: extensions/system/views/user/registration.razr:22
+msgid "Email"
+msgstr "Email"
+
+#: extensions/system/views/admin/settings/settings.razr:17
+#: extensions/system/views/admin/settings/settings.razr:142
+msgid "Localization"
+msgstr "Localização"
+
+#: extensions/system/views/admin/settings/settings.razr:18
+#: extensions/system/views/admin/settings/settings.razr:181
+#: extensions/system/views/admin/user/index.razr:62
+#: extensions/system/src/User/Link/User.php:22
+msgid "User"
+msgstr "Usuário"
+
+#: extensions/system/views/admin/settings/settings.razr:37
+msgid "Description"
+msgstr "Descriçã"
+
+#: extensions/system/views/admin/settings/settings.razr:43
+msgid "Front Page"
+msgstr "Pagina Principal"
+
+#: extensions/system/views/admin/settings/settings.razr:52
+msgid "Put the site offline and show the offline message."
+msgstr "Coloque o site off-line e mostrar a mensagem offline."
+
+#: extensions/system/views/admin/settings/settings.razr:57
+msgid "Offline Message"
+msgstr "Mensagem Offline"
+
+#: extensions/system/views/admin/settings/settings.razr:59
+#: extensions/system/src/System/Event/MaintenanceListener.php:27
+msgid "We'll be back soon."
+msgstr "Estaremos de volta em breve."
+
+#: extensions/system/views/admin/settings/settings.razr:68
+msgid "From Email"
+msgstr "Do E-mail"
+
+#: extensions/system/views/admin/settings/settings.razr:74
+msgid "From Name"
+msgstr "Para o Nome"
+
+#: extensions/system/views/admin/settings/settings.razr:80
+msgid "Mailer"
+msgstr "Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "PHP Mailer"
+msgstr "PHP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:83
+msgid "SMTP Mailer"
+msgstr "SMTP Mailer"
+
+#: extensions/system/views/admin/settings/settings.razr:91
+msgid "SMTP Port"
+msgstr "Porta SMTP "
+
+#: extensions/system/views/admin/settings/settings.razr:97
+msgid "SMTP Host"
+msgstr "SMTP Host"
+
+#: extensions/system/views/admin/settings/settings.razr:103
+msgid "SMTP User"
+msgstr "Usuário SMTP"
+
+#: extensions/system/views/admin/settings/settings.razr:109
+msgid "SMTP Password"
+msgstr "Senha SMTP"
+
+#: extensions/system/views/admin/settings/settings.razr:113
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Show"
+msgstr "Mostrar"
+
+#: extensions/system/views/admin/settings/settings.razr:118
+msgid "SMTP Encryption"
+msgstr "Criptografia SMTP"
+
+#: extensions/system/views/admin/settings/settings.razr:121
+msgid "None"
+msgstr "Nada"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "SSL"
+msgstr "SSL"
+
+#: extensions/system/views/admin/settings/settings.razr:122
+msgid "TLS"
+msgstr "TLS"
+
+#: extensions/system/views/admin/settings/settings.razr:127
+msgid "Please enable the PHP Open SSL extension."
+msgstr "Por favor habilite a extensão PHP Open SSL."
+
+#: extensions/system/views/admin/settings/settings.razr:134
+msgid "Check Connection"
+msgstr "Verifique a conexao"
+
+#: extensions/system/views/admin/settings/settings.razr:135
+msgid "Send Test Email"
+msgstr "Envie um Email de teste"
+
+#: extensions/system/views/admin/settings/settings.razr:144
+msgid "Site Locale"
+msgstr "Site Locale"
+
+#: extensions/system/views/admin/settings/settings.razr:154
+msgid "Admin Locale"
+msgstr "Admin Locale"
+
+#: extensions/system/views/admin/settings/settings.razr:164
+msgid "Time Zone"
+msgstr "Fuso horário"
+
+#: extensions/system/views/admin/settings/settings.razr:183
+#: extensions/system/views/user/registration.razr:5
+#: extensions/system/src/User/Link/User.php:47
+msgid "Registration"
+msgstr "Inscrição"
+
+#: extensions/system/views/admin/settings/settings.razr:186
+msgid "Adminstrators only"
+msgstr "Apenas administradores"
+
+#: extensions/system/views/admin/settings/settings.razr:189
+msgid "Guests"
+msgstr "Convidados"
+
+#: extensions/system/views/admin/settings/settings.razr:192
+msgid "Guests, but administrator approval is required"
+msgstr "Os convidados, mas a aprovação do administrador é necessária"
+
+#: extensions/system/views/admin/settings/settings.razr:197
+msgid "Verification"
+msgstr "Verificação"
+
+#: extensions/system/views/admin/settings/settings.razr:200
+msgid "Require e-mail verification when a guest creates an account."
+msgstr "Pedir verificação de e-mail quando um convidado cria uma conta."
+
+#: extensions/system/views/admin/settings/settings.razr:209
+msgid "API Key"
+msgstr "Chave de API"
+
+#: extensions/system/views/admin/settings/settings.razr:211
+msgid "Enter your API key"
+msgstr "Digite sua chave de API"
+
+#: extensions/system/views/admin/settings/settings.razr:215
+msgid "Release Channel"
+msgstr "Canal de Lançamento"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Stable"
+msgstr "Estável"
+
+#: extensions/system/views/admin/settings/settings.razr:218
+msgid "Nightly"
+msgstr "A noite"
+
+#: extensions/system/views/admin/settings/settings.razr:231
+msgid "Cache"
+msgstr "Cache"
+
+#: extensions/system/views/admin/settings/settings.razr:241
+msgid "Developer"
+msgstr "Desenvolvedor"
+
+#: extensions/system/views/admin/settings/settings.razr:244
+msgid "Enable debug mode"
+msgstr "Ativar o modo de depuração"
+
+#: extensions/system/views/admin/settings/settings.razr:247
+msgid "Enable debug toolbar"
+msgstr "Ativar barra de debug"
+
+#: extensions/system/views/admin/settings/settings.razr:250
+msgid "Please enable the SQLite database extension."
+msgstr "Por favor ativar a extensão do banco de dados SQLite."
+
+#: extensions/system/views/admin/settings/settings.razr:253
+msgid "Disable cache"
+msgstr "Desabiltiar o cache"
+
+#: extensions/system/views/admin/settings/update.razr:7
+msgid "There is an update available."
+msgstr "Há uma atualização disponível."
+
+#: extensions/system/views/admin/settings/update.razr:8
+msgid "Please update Pagekit to version %version%!"
+msgstr "Por favor, atualize o  Pagekit para a versão %version%!"
+
+#: extensions/system/views/admin/settings/update.razr:12
+#: extensions/system/views/admin/settings/update.razr:34
+msgid "Download %version%"
+msgstr "Carregar %version%"
+
+#: extensions/system/views/admin/settings/update.razr:19
+msgid "Downloading ..."
+msgstr "Carregando ..."
+
+#: extensions/system/views/admin/settings/update.razr:29
+msgid "You have the latest version of Pagekit."
+msgstr "Você tem a versão mais recente do Pagekit."
+
+#: extensions/system/views/admin/settings/update.razr:30
+msgid ""
+"You have the latest version of Pagekit. You do not need to update. However, "
+"if you want to re-install version %version%, you can do so automatically or "
+"download the package and re-install manually."
+msgstr "Você tem a versão mais recente do Pagekit. Você não precisa atualizar. No entanto, se você quiser a versão re-instalar %version%, você pode fazê-lo automaticamente ou fazer o download do pacote e reinstalar manualmente."
+
+#: extensions/system/views/admin/settings/update.razr:33
+msgid "Re-install"
+msgstr "Reinstalar"
+
+#: extensions/system/views/admin/settings/update.razr:39
+msgid "Cannot connect to the server. Please try again later."
+msgstr "Não é possível conectar ao servidor. Por favor, tente novamente mais tarde."
+
+#: extensions/system/views/admin/themes/index.razr:38
+msgid "No theme updates found."
+msgstr "Não foram encontradas atualizações de themas."
+
+#: extensions/system/views/admin/themes/index.razr:67
+msgid "No themes found."
+msgstr "Nenhum tema encontrado"
+
+#: extensions/system/views/admin/themes/table.razr:11
+#: extensions/system/src/User/Entity/User.php:100
+msgid "Active"
+msgstr "Ativo"
+
+#: extensions/system/views/admin/user/edit.razr:19
+#: extensions/system/views/admin/user/edit.razr:111
+#: extensions/system/views/admin/user/index.razr:27
+#: extensions/system/views/admin/user/index.razr:81
+msgid "New"
+msgstr "Novo"
+
+#: extensions/system/views/admin/user/edit.razr:24
+msgid "Verified email address"
+msgstr "Verificar o endereço de Email"
+
+#: extensions/system/views/admin/user/edit.razr:25
+msgid "Last login: %date%"
+msgstr "Ultimo Login: %date%"
+
+#: extensions/system/views/admin/user/edit.razr:25
+#: extensions/system/src/User/Controller/UserController.php:274
+msgid "Never"
+msgstr "Nunca"
+
+#: extensions/system/views/admin/user/edit.razr:26
+msgid "Registered since: %date%"
+msgstr "Inscrito desde: %date%"
+
+#: extensions/system/views/admin/user/edit.razr:61
+#: extensions/system/views/user/profile.razr:22
+msgid "Change password"
+msgstr "Trocar a senha"
+
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
+#: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
+msgid "Hide"
+msgstr "Esconder"
+
+#: extensions/system/views/admin/user/edit.razr:87
+#: extensions/system/views/admin/user/index.razr:65
+#: extensions/system/languages/messages.php:29
+#: extensions/system/src/User/Controller/RoleController.php:47
+msgid "Roles"
+msgstr "Regras"
+
+#: extensions/system/views/admin/user/edit.razr:117
+msgid "Last login: {{login}}"
+msgstr "Ultimo Login: {{login}}"
+
+#: extensions/system/views/admin/user/edit.razr:118
+msgid "Registered since: {{registered}}"
+msgstr "Inscrito desde: {{registered}}"
+
+#: extensions/system/views/admin/user/index.razr:8
+#: extensions/system/src/User/Controller/UserController.php:113
+msgid "Add User"
+msgstr "Adicionar Usuário"
+
+#: extensions/system/views/admin/user/index.razr:15
+msgid "Activate"
+msgstr "Ativar"
+
+#: extensions/system/views/admin/user/index.razr:16
+msgid "Block"
+msgstr "Bloquear"
+
+#: extensions/system/views/admin/user/index.razr:26
+#: extensions/system/views/admin/widgets/index.razr:37
+msgid "- Status -"
+msgstr "- Status -"
+
+#: extensions/system/views/admin/user/index.razr:34
+msgid "- Role -"
+msgstr "- Regras -"
+
+#: extensions/system/views/admin/user/index.razr:41
+msgid "- Permission -"
+msgstr "- Permissão -"
+
+#: extensions/system/views/admin/user/index.razr:87
+msgid "Verified Email Address"
+msgstr "Endereço de Email verificado"
+
+#: extensions/system/views/admin/user/index.razr:98
+msgid "No user found."
+msgstr "Nenhum usuário encontrado"
+
+#: extensions/system/views/admin/user/permission.razr:11
+#: extensions/system/views/admin/user/role.razr:43
+msgid "Permission"
+msgstr "Permissão"
+
+#: extensions/system/views/admin/user/role.razr:28
+msgid "Add Role"
+msgstr "Adicionar Regra"
+
+#: extensions/system/views/admin/user/role.razr:87
+msgid "Enter Role Name"
+msgstr "Digite o nome da regra"
+
+#: extensions/system/views/admin/widgets/edit.razr:15
+msgid "Assignment"
+msgstr "Atribuição"
+
+#: extensions/system/views/admin/widgets/edit.razr:40
+#: extensions/system/views/widgets/menu/edit.razr:2
+#: extensions/system/src/Menu/Widget/MenuWidget.php:23
+msgid "Menu"
+msgstr "Menu"
+
+#: extensions/system/views/admin/widgets/edit.razr:49
+msgid "Pattern"
+msgstr "Padrão"
+
+#: extensions/system/views/admin/widgets/edit.razr:52
+msgid ""
+"Enter one page path per line. The \"*\" character is a wildcard. Exclude "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"exclude the blog."
+msgstr "Digite um caminho página por linha. o \"*\" personagem é um curinga. Excluir páginas, antecedendo um ponto de exclamação ao caminho. exemplos de caminhos  \"blog\" para a pagina do blog, \"blog/*\" para entradas de blog ou \"!blog\" se você quiser excluir o blog."
+
+#: extensions/system/views/admin/widgets/edit.razr:82
+#: extensions/system/views/admin/widgets/index.razr:67
+msgid "Position"
+msgstr "Posição"
+
+#: extensions/system/views/admin/widgets/edit.razr:103
+msgid "Options"
+msgstr "Opções"
+
+#: extensions/system/views/admin/widgets/edit.razr:105
+msgid "Show Title"
+msgstr "Mostrar Titulo"
+
+#: extensions/system/views/admin/widgets/index.razr:28
+#: extensions/system/src/Widget/Controller/WidgetsController.php:161
+msgid "Copy"
+msgstr "Copiar"
+
+#: extensions/system/views/admin/widgets/index.razr:43
+msgid "- Position -"
+msgstr "- Posição -"
+
+#: extensions/system/views/admin/widgets/index.razr:50
+msgid "- Type -"
+msgstr "- Tipo -"
+
+#: extensions/system/views/admin/widgets/index.razr:109
+msgid "- Assign -"
+msgstr "- Atribuir -"
+
+#: extensions/system/views/admin/widgets/index.razr:117
+msgid "Extension not loaded"
+msgstr "Extensão não carregada"
+
+#: extensions/system/views/tmpl/feed.error.razr:1
+msgid "Unable to retrieve feed data."
+msgstr "Não é possível recuperar dados de Feed."
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "New Name"
+msgstr "Novo Nome"
+
+#: extensions/system/views/tmpl/finder.main.razr:1
+msgid "Folder Name"
+msgstr "Nome da Pasta"
+
+#: extensions/system/views/tmpl/finder.main.razr:5
+msgid "Upload"
+msgstr "Upload"
+
+#: extensions/system/views/tmpl/finder.main.razr:9
+msgid "Add Folder"
+msgstr "Adicionar Pasta"
+
+#: extensions/system/views/tmpl/finder.main.razr:12
+msgid "Rename"
+msgstr "Renomear"
+
+#: extensions/system/views/tmpl/finder.main.razr:28
+msgid "Home"
+msgstr "Home"
+
+#: extensions/system/views/tmpl/finder.table.razr:7
+msgid "Size"
+msgstr "Tamanho"
+
+#: extensions/system/views/tmpl/finder.table.razr:8
+msgid "Modified"
+msgstr "Modifcado"
+
+#: extensions/system/views/tmpl/finder.table.razr:44
+#: extensions/system/views/tmpl/finder.thumbnail.razr:38
+msgid "Drop files here."
+msgstr "Solte os arquivos aqui."
+
+#: extensions/system/views/tmpl/image.modal.razr:4
+msgid "Add Image"
+msgstr "adicionar Imagem"
+
+#: extensions/system/views/tmpl/image.modal.razr:8
+msgid "Select image"
+msgstr "Selecionar Imagem"
+
+#: extensions/system/views/tmpl/image.modal.razr:18
+msgid "Alt"
+msgstr "Alt"
+
+#: extensions/system/views/tmpl/image.modal.razr:29
+msgid "Select Image"
+msgstr "Selecionar Imagem"
+
+#: extensions/system/views/tmpl/image.modal.razr:32
+#: extensions/system/views/tmpl/video.modal.razr:31
+msgid "Select"
+msgstr "Selecionar"
+
+#: extensions/system/views/tmpl/image.replace.razr:6
+msgid "Placeholder Image"
+msgstr "Espaço reservado para imagem"
+
+#: extensions/system/views/tmpl/image.replace.razr:12
+msgid "Image"
+msgstr "Imagem"
+
+#: extensions/system/views/tmpl/link.modal.razr:3
+msgid "Add Link"
+msgstr "Adicionar Link"
+
+#: extensions/system/views/tmpl/link.replace.razr:1
+#: extensions/system/views/tmpl/linkpicker.replace.razr:1
+msgid "Select Link"
+msgstr "Selecionar Link"
+
+#: extensions/system/views/tmpl/linkpicker.modal.razr:3
+msgid "Link"
+msgstr "Link"
+
+#: extensions/system/views/tmpl/package.updates.razr:18
+msgid "Changelog"
+msgstr "Log de mudanças"
+
+#: extensions/system/views/tmpl/package.upload.razr:4
+msgid ""
+"The checksum of the uploaded package does not match the one from the "
+"marketplace. The file might be manipulated."
+msgstr "A soma de verificação do pacote enviado não corresponde a do mercado. O arquivo pode ter sido manipulado."
+
+#: extensions/system/views/tmpl/package.upload.razr:8
+msgid ""
+"There is an update available for the uploaded package. Please consider "
+"installing it instead."
+msgstr "Há uma atualização disponível para o pacote enviado. Por favor, considere instalá-lo em seu lugar."
+
+#: extensions/system/views/tmpl/package.upload.razr:28
+msgid "Path:"
+msgstr "Caminho:"
+
+#: extensions/system/views/tmpl/package.upload.razr:29
+msgid "Type:"
+msgstr "Tipo:"
+
+#: extensions/system/views/tmpl/video.modal.razr:5
+msgid "Add Video"
+msgstr "Adicionar Vídeo"
+
+#: extensions/system/views/tmpl/video.modal.razr:16
+msgid "Select video"
+msgstr "Selecionar Vídeo"
+
+#: extensions/system/views/tmpl/video.modal.razr:28
+msgid "Select Video"
+msgstr "Selecionar Vídeo"
+
+#: extensions/system/views/tmpl/video.replace.razr:6
+msgid "Placeholder Video"
+msgstr "Espaço reservado para Vídeo"
+
+#: extensions/system/views/tmpl/video.replace.razr:12
+msgid "Video"
+msgstr "Víde"
+
+#: extensions/system/views/user/login.razr:13
+msgid "(Forgot Password?)"
+msgstr "(Esqueceu sua senha?)"
+
+#: extensions/system/views/user/login.razr:20
+#: extensions/system/views/user/registration.razr:39
+#: extensions/system/views/user/reset/confirm.razr:18
+#: extensions/system/views/user/reset/request.razr:15
+msgid "Submit"
+msgstr "Enviar"
+
+#: extensions/system/views/user/mails/approve.razr:11
+msgid "Hello"
+msgstr "Ola"
+
+#: extensions/system/views/user/mails/approve.razr:12
+msgid ""
+"A new user has registered at %site% and requests that you approve his "
+"account."
+msgstr "Um novo usuário foi registrado em %site% e solicita que você aprovar sua conta."
+
+#: extensions/system/views/user/mails/approve.razr:13
+msgid ""
+"User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
+msgstr "User Details:<br><br>Nome: %name%<br>Nome de Usuário: %username%<br>Email: %email%"
+
+#: extensions/system/views/user/mails/approve.razr:14
+msgid "To activate the account click on:"
+msgstr "Para ativar a conta, clique em:"
+
+#: extensions/system/views/user/mails/reset.razr:9
+msgid "Someone requested that the password be reset for the following account"
+msgstr "Alguém pediu que a senha seja redefinido para a seguinte conta"
+
+#: extensions/system/views/user/mails/reset.razr:12
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr "Se isso foi um erro, apenas ignore este email e nada acontecerá."
+
+#: extensions/system/views/user/mails/reset.razr:13
+msgid "To reset your password, visit the following address"
+msgstr "Para redefinir sua senha, visite o seguinte endereço"
+
+#: extensions/system/views/user/mails/verification.razr:11
+#: extensions/system/views/user/mails/welcome.razr:9
+msgid "Hello %name%"
+msgstr "ola %name%"
+
+#: extensions/system/views/user/mails/verification.razr:12
+msgid ""
+"Thank you for registering at %site%! Your account has been successfully "
+"created and must be verified before you can use it."
+msgstr "Obrigado por se registrar em %site%! Sua conta foi criada com sucesso e deve ser verificada antes de poder usá-lo."
+
+#: extensions/system/views/user/mails/verification.razr:13
+msgid "To verify your account click on:"
+msgstr "Para verificar sua conta, clique em:"
+
+#: extensions/system/views/user/mails/welcome.razr:10
+msgid "Thank you for registering!"
+msgstr "Obrigado por se cadastrar!"
+
+#: extensions/system/views/user/mails/welcome.razr:12
+msgid "Login with the username:"
+msgstr "Entrar com o nome de usuário:"
+
+#: extensions/system/views/user/profile.razr:5
+#: extensions/system/src/User/Controller/ProfileController.php:44
+msgid "Your Profile"
+msgstr "seu Perfil"
+
+#: extensions/system/views/user/profile.razr:26
+msgid "Current Password"
+msgstr "Senha atual"
+
+#: extensions/system/views/user/profile.razr:36
+msgid "New Password"
+msgstr "Nova Senha"
+
+#: extensions/system/views/user/reset/confirm.razr:5
+msgid "Password confirmation"
+msgstr "Confirmar Senha"
+
+#: extensions/system/views/user/reset/confirm.razr:8
+msgid "Enter your new password below."
+msgstr "Digite sua nova senha abaixo."
+
+#: extensions/system/views/user/reset/request.razr:3
+msgid "Forgot password"
+msgstr "Esqueceu sua senha"
+
+#: extensions/system/views/user/reset/request.razr:5
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+msgstr "Digite seu nome de usuário ou endereço de Email. Você receberá um link para criar uma nova senha via e-mail."
+
+#: extensions/system/views/widgets/login/edit.razr:4
+msgid "Login Redirect"
+msgstr "Login redirecionado"
+
+#: extensions/system/views/widgets/login/edit.razr:10
+msgid "Logout Redirect"
+msgstr "Logout Redirecionado"
+
+#: extensions/system/views/widgets/login/login.razr:4
+msgid "username"
+msgstr "usuário"
+
+#: extensions/system/views/widgets/login/login.razr:7
+msgid "password"
+msgstr "senha"
+
+#: extensions/system/views/widgets/login/login.razr:17
+msgid "Sign up"
+msgstr "Inscrever-se"
+
+#: extensions/system/views/widgets/login/logout.razr:1
+msgid "Hi"
+msgstr "OI"
+
+#: extensions/system/views/widgets/menu/edit.razr:12
+msgid "Start Level"
+msgstr "Nivel inicial"
+
+#: extensions/system/views/widgets/menu/edit.razr:22
+msgid "Depth"
+msgstr "Profundidade"
+
+#: extensions/system/views/widgets/menu/edit.razr:25
+msgid "No Limit"
+msgstr "Sem Limites"
+
+#: extensions/system/views/widgets/menu/edit.razr:33
+msgid "Sub Items"
+msgstr "Sub Itens"
+
+#: extensions/system/views/widgets/menu/edit.razr:36
+msgid "Show all"
+msgstr "Mostrar todos"
+
+#: extensions/system/views/widgets/menu/edit.razr:39
+msgid "Show only for active item"
+msgstr "Mostrar apenas os itens ativos"
+
+#: extensions/system/views/widgets/text/edit.razr:5
+msgid "Enable Markdown"
+msgstr "Ativar Markdown"
+
+#: extensions/system/languages/messages.php:4
+msgid "0"
+msgstr "0"
+
+#: extensions/system/languages/messages.php:5
+msgid "1"
+msgstr "1"
+
+#: extensions/system/languages/messages.php:6
+msgid "2"
+msgstr "2"
+
+#: extensions/system/languages/messages.php:7
+msgid "3"
+msgstr "3"
+
+#: extensions/system/languages/messages.php:8
+msgid "4"
+msgstr "4"
+
+#: extensions/system/languages/messages.php:9
+msgid "5"
+msgstr "5"
+
+#: extensions/system/languages/messages.php:10
+msgid "6"
+msgstr "6"
+
+#: extensions/system/languages/messages.php:11
+msgid "7"
+msgstr "7"
+
+#: extensions/system/languages/messages.php:12
+msgid "8"
+msgstr "8"
+
+#: extensions/system/languages/messages.php:13
+msgid "9"
+msgstr "9"
+
+#: extensions/system/languages/messages.php:14
+msgid "10"
+msgstr "10"
+
+#: extensions/system/languages/messages.php:15
+msgid "11"
+msgstr "11"
+
+#: extensions/system/languages/messages.php:16
+msgid "12"
+msgstr "12"
+
+#: extensions/system/languages/messages.php:17
+msgid "13"
+msgstr "13"
+
+#: extensions/system/languages/messages.php:18
+msgid "14"
+msgstr "14"
+
+#: extensions/system/languages/messages.php:19
+msgid "15"
+msgstr "15"
+
+#: extensions/system/languages/messages.php:20
+msgid "16"
+msgstr "16"
+
+#: extensions/system/languages/messages.php:21
+msgid "17"
+msgstr "17"
+
+#: extensions/system/languages/messages.php:25
+#: extensions/system/src/Widget/Controller/WidgetsController.php:58
+msgid "Widgets"
+msgstr "Widgets"
+
+#: extensions/system/languages/messages.php:26
+#: extensions/system/src/Menu/Controller/MenuController.php:47
+msgid "Menus"
+msgstr "Menus"
+
+#: extensions/system/languages/messages.php:27
+#: extensions/system/src/User/Controller/UserController.php:100
+#: extensions/system/src/User/Dashboard/UserWidget.php:23
+msgid "Users"
+msgstr "Usuários"
+
+#: extensions/system/languages/messages.php:30
+msgid "Access"
+msgstr "Acesso"
+
+#: extensions/system/languages/messages.php:33
+msgid "Manage media files"
+msgstr "Gerenciar arquivos de Mídia"
+
+#: extensions/system/languages/messages.php:34
+msgid "Manage menus"
+msgstr "Gerenciar Menus"
+
+#: extensions/system/languages/messages.php:35
+msgid "Manage widgets"
+msgstr "Gerenciar Widgets"
+
+#: extensions/system/languages/messages.php:36
+msgid "Manage themes"
+msgstr "Gerenciar Themas"
+
+#: extensions/system/languages/messages.php:37
+msgid "Manage extensions"
+msgstr "Gerenciar Extensões"
+
+#: extensions/system/languages/messages.php:38
+msgid "Manage url aliases"
+msgstr "Gerenciar URL Aliases"
+
+#: extensions/system/languages/messages.php:39
+msgid "Apply system updates"
+msgstr "Aplicar atualizações ao sistema"
+
+#: extensions/system/languages/messages.php:40
+msgid "Access admin area"
+msgstr "Acessar área administrativa"
+
+#: extensions/system/languages/messages.php:41
+msgid "Access system settings"
+msgstr "Acessar ajustes do sistema"
+
+#: extensions/system/languages/messages.php:42
+msgid "Manage user permissions"
+msgstr "Gerenciar permissões de usuários"
+
+#: extensions/system/languages/messages.php:43
+msgid "Manage users"
+msgstr "Gerenciar usuários"
+
+#: extensions/system/languages/messages.php:44
+msgid "Use the site in maintenance mode"
+msgstr "Use o site em modo de manutenção"
+
+#: extensions/system/languages/messages.php:45
+msgid ""
+"Warning: Give to trusted roles only; this permission has security "
+"implications."
+msgstr "Aviso: Dada a apenas funções de confiança; essa permissão tem implicações de segurança."
+
+#: extensions/system/src/Editor/Templating/EditorHelper.php:44
+msgid "Editor not found."
+msgstr "Editor não encontrado"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:62
+msgid "Core extensions may not be enabled."
+msgstr "Extensões Principais não podem ser ativados."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:72
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
+msgstr "Não é possível ativar a extensão. <br> A extensão provocou um erro fatal."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:80
+msgid "Unable to enable extension \"%name%\"."
+msgstr "Incapaz de permitir a extensão \"%name%\"."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:91
+msgid "Extension enabled."
+msgstr "Extensão habilitada."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:109
+msgid "Core extensions may not be disabled."
+msgstr "Extensões do núcleo não pode ser desativada."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:113
+msgid "Extension \"%name%\" has not been loaded."
+msgstr "Extensão \"%name%\" Não foi carregado."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:120
+msgid "Extension disabled."
+msgstr "Extensão desativada."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:138
+msgid "Core extensions may not be uninstalled."
+msgstr "Extensões do núcleo não pode ser desinstalada."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:146
+msgid "Unable to uninstall extension \"%name%\"."
+msgstr "Impossível desinstalar extensão \"%name%\"."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:157
+msgid "Extension uninstalled."
+msgstr "Extensão desinstalada"
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:174
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:197
+msgid "Invalid extension."
+msgstr "Extensão invalida."
+
+#: extensions/system/src/Extension/Controller/ExtensionsController.php:203
+#: extensions/system/src/System/Controller/SettingsController.php:104
+#: extensions/system/src/Theme/Controller/ThemesController.php:167
+msgid "Settings saved."
+msgstr "Ajustes salvos"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:52
+#: extensions/system/src/Menu/Controller/ItemController.php:98
+#: extensions/system/src/Menu/Controller/ItemController.php:133
+#: extensions/system/src/Menu/Controller/ItemController.php:161
+msgid "Invalid menu."
+msgstr "Menu Invalido."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:58
+msgid "Add Menu Item"
+msgstr "Adicionar Item de Menu"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:76
+msgid "Invalid menu item."
+msgstr "Item de menu invalido."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:79
+msgid "Edit Menu Item"
+msgstr "Editar Item de Menu"
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item saved."
+msgstr "Item de Menu salvo."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:114
+msgid "Menu item created."
+msgstr "Item de Menu criado."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:119
+msgid "Invalid url."
+msgstr "URL Invalida."
+
+#: extensions/system/src/Menu/Controller/ItemController.php:144
+msgid ""
+"{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
+msgstr "{0} Nenhum item de menu excluído.|{1} item de menu deletado.|]1,Inf[ Itens de Menu deletados."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:58
+msgid "Invalid menu name."
+msgstr "Nome do menu inválido."
+
+#: extensions/system/src/Menu/Controller/MenuController.php:66
+msgid "Invalid menu name. \"%name%\" is already in use."
+msgstr "Nome do menu invalido. \"%name%\" já esta em uso"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:86
+msgid "Invalid menu id"
+msgstr "ID do menu invalida"
+
+#: extensions/system/src/Menu/Controller/MenuController.php:122
+msgid "Menu order updated"
+msgstr "Ordem de menu atualizada"
+
+#: extensions/system/src/Menu/Entity/Item.php:92
+#: extensions/system/src/User/Entity/User.php:94
+#: extensions/system/src/Widget/Entity/Widget.php:91
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: extensions/system/src/Menu/Widget/MenuWidget.php:31
+msgid "Menu Widget"
+msgstr "Menu Widget"
+
+#: extensions/system/src/System/Controller/AliasController.php:54
+msgid "Add URL Alias"
+msgstr "Adicionar apelido da URL"
+
+#: extensions/system/src/System/Controller/AliasController.php:66
+msgid "Invalid alias id."
+msgstr "ID apelido inválido."
+
+#: extensions/system/src/System/Controller/AliasController.php:69
+msgid "Edit URL Alias"
+msgstr "Digite o apelido da URL"
+
+#: extensions/system/src/System/Controller/AliasController.php:89
+msgid "Invalid alias."
+msgstr "Apelido invalido"
+
+#: extensions/system/src/System/Controller/AliasController.php:93
+msgid "Invalid source."
+msgstr "Fonte invalida"
+
+#: extensions/system/src/System/Controller/AliasController.php:97
+msgid "The alias \"%alias%\" is already in use."
+msgstr "O apelido \"%alias%\" já esta em uso."
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias saved."
+msgstr "Apelido salvo"
+
+#: extensions/system/src/System/Controller/AliasController.php:102
+msgid "Alias created."
+msgstr "Apelido criado."
+
+#: extensions/system/src/System/Controller/AliasController.php:122
+msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
+msgstr "Nenhum apelido deletado.|{1} Apelido deletado.|]1,Inf[ Apelidos deletados."
+
+#: extensions/system/src/System/Controller/DashboardController.php:67
+msgid "Dashboard Settings"
+msgstr "Ajustes da Dashboard"
+
+#: extensions/system/src/System/Controller/DashboardController.php:79
+#: extensions/system/src/System/Controller/DashboardController.php:109
+msgid "Invalid widget type."
+msgstr "Tipo de widget invalido."
+
+#: extensions/system/src/System/Controller/DashboardController.php:105
+msgid "Invalid widget id."
+msgstr "ID do Widget invalido."
+
+#: extensions/system/src/System/Controller/DashboardController.php:114
+#: extensions/system/src/Widget/Controller/WidgetsController.php:85
+msgid "Edit Widget"
+msgstr "Editar Widget"
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget created."
+msgstr "Widget criado"
+
+#: extensions/system/src/System/Controller/DashboardController.php:139
+#: extensions/system/src/Widget/Controller/WidgetsController.php:120
+msgid "Widget saved."
+msgstr "Widget salvo"
+
+#: extensions/system/src/System/Controller/DashboardController.php:160
+msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} Nenhum Widget deletado.|{1} Widget deletado.|]1,Inf[ Widgets Deletados."
+
+#: extensions/system/src/System/Controller/DashboardController.php:183
+msgid "Widgets reordered."
+msgstr "Widgets reordenados."
+
+#: extensions/system/src/System/Controller/FinderController.php:18
+#: extensions/system/src/System/Controller/FinderController.php:65
+#: extensions/system/src/System/Controller/FinderController.php:95
+#: extensions/system/src/System/Controller/FinderController.php:123
+#: extensions/system/src/System/Controller/FinderController.php:151
+msgid "Invalid path."
+msgstr "Caminho invalido."
+
+#: extensions/system/src/System/Controller/FinderController.php:22
+#: extensions/system/src/System/Controller/FinderController.php:69
+#: extensions/system/src/System/Controller/FinderController.php:99
+#: extensions/system/src/System/Controller/FinderController.php:127
+#: extensions/system/src/System/Controller/FinderController.php:155
+msgid "Permission denied."
+msgstr "Permissão negada."
+
+#: extensions/system/src/System/Controller/FinderController.php:61
+#: extensions/system/src/System/Controller/FinderController.php:91
+msgid "Invalid file name."
+msgstr "Nome de arquivo invalido."
+
+#: extensions/system/src/System/Controller/FinderController.php:76
+msgid "Directory created."
+msgstr "Diretório criado. "
+
+#: extensions/system/src/System/Controller/FinderController.php:80
+msgid "Unable to create directory."
+msgstr "Não é possível criar diretório."
+
+#: extensions/system/src/System/Controller/FinderController.php:106
+msgid "Renamed."
+msgstr "Renomeado."
+
+#: extensions/system/src/System/Controller/FinderController.php:110
+msgid "Unable to rename."
+msgstr "Não e possível renomear."
+
+#: extensions/system/src/System/Controller/FinderController.php:136
+msgid "Unable to remove."
+msgstr "Não e possível remover"
+
+#: extensions/system/src/System/Controller/FinderController.php:140
+msgid "Removed selected."
+msgstr "Removido selecionado."
+
+#: extensions/system/src/System/Controller/FinderController.php:161
+msgid "No files uploaded."
+msgstr "Nenhum arquivo enviado."
+
+#: extensions/system/src/System/Controller/FinderController.php:167
+msgid "Uploaded file invalid."
+msgstr "Arquivo enviado invalido."
+
+#: extensions/system/src/System/Controller/FinderController.php:173
+msgid "Upload complete."
+msgstr "Envio completo."
+
+#: extensions/system/src/System/Controller/FinderController.php:177
+msgid "Unable to upload."
+msgstr "Não e possível enviar."
+
+#: extensions/system/src/System/Controller/FinderController.php:199
+msgid "n/a"
+msgstr "n/a"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d Bytes"
+msgstr "%d Bytes"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  KB"
+msgstr "%d KB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  MB"
+msgstr "%d MB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d  GB"
+msgstr "%d GB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d TB"
+msgstr "%d TB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d PB"
+msgstr "%d PB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d EB"
+msgstr "%d EB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d ZB"
+msgstr "%d ZB"
+
+#: extensions/system/src/System/Controller/FinderController.php:202
+msgid "%d YB"
+msgstr "%d YB"
+
+#: extensions/system/src/System/Controller/LinkController.php:56
+msgid "Url"
+msgstr "Url"
+
+#: extensions/system/src/System/Controller/MigrationController.php:29
+msgid "Your Pagekit database has been updated successfully."
+msgstr "Seu banco de dados Pagekit foi atualizado com sucesso."
+
+#: extensions/system/src/System/Controller/MigrationController.php:31
+msgid "Your Pagekit database is already up-to-date!"
+msgstr "Seu banco de dados Pagekit já está atualizado!"
+
+#: extensions/system/src/System/Controller/PackageController.php:47
+msgid "No file uploaded."
+msgstr "Nenhum arquivo enviado."
+
+#: extensions/system/src/System/Controller/PackageController.php:53
+msgid "Invalid package type."
+msgstr "Tipo de arquivo invalido."
+
+#: extensions/system/src/System/Controller/PackageController.php:57
+#: extensions/system/src/System/Controller/PackageController.php:161
+msgid "Core extensions may not be installed."
+msgstr "Extensões do núcleo não pode ser instalado."
+
+#: extensions/system/src/System/Controller/PackageController.php:111
+msgid "Path not found."
+msgstr "Caminho não encontrado."
+
+#: extensions/system/src/System/Controller/PackageController.php:124
+msgid "Package \"%name%\" installed."
+msgstr "Pacote  \"%name%\" instalado."
+
+#: extensions/system/src/System/Controller/PackageController.php:127
+#: extensions/system/src/System/Controller/UpdateController.php:67
+msgid "Package extraction failed."
+msgstr "Extração do pacote falhou."
+
+#: extensions/system/src/System/Controller/PackageController.php:129
+#: extensions/system/src/System/Controller/UpdateController.php:69
+msgid "Package checksum verification failed."
+msgstr "Verificação do checksum do Pacote falhou."
+
+#: extensions/system/src/System/Controller/PackageController.php:131
+#: extensions/system/src/System/Controller/UpdateController.php:71
+msgid "Invalid API key."
+msgstr "Chave de API invalida."
+
+#: extensions/system/src/System/Controller/PackageController.php:133
+#: extensions/system/src/System/Controller/UpdateController.php:73
+msgid "Package download failed."
+msgstr "Download do pacote falhou."
+
+#: extensions/system/src/System/Controller/PackageController.php:135
+#: extensions/system/src/System/Controller/UpdateController.php:75
+msgid "Path is not writable."
+msgstr "Caminho não é gravável."
+
+#: extensions/system/src/System/Controller/PackageController.php:209
+msgid "Can't load json file from package."
+msgstr "Não é possível carregar arquivo json de pacote."
+
+#: extensions/system/src/System/Controller/SettingsController.php:127
+msgid "Connection established!"
+msgstr "Conexão estabelecida!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:131
+msgid "Connection not established! (%s)"
+msgstr "Conexão não estabelecida! (%s)"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Test email!"
+msgstr "E-mail de teste!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:160
+msgid "Testemail"
+msgstr "E-mail de teste"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail successfully sent!"
+msgstr "E-mail enviado com sucesso!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:161
+msgid "Mail delivery failed!"
+msgstr "A entrega de correio falhou!"
+
+#: extensions/system/src/System/Controller/SettingsController.php:165
+msgid "Mail delivery failed! (%s)"
+msgstr "A entrega de correio falhou! (%s)"
+
+#: extensions/system/src/System/Controller/SystemController.php:79
+msgid "Order saved."
+msgstr "Ordem salva."
+
+#: extensions/system/src/System/Controller/SystemController.php:104
+msgid "System Information"
+msgstr "Informações sobre o sistema"
+
+#: extensions/system/src/System/Controller/SystemController.php:146
+msgid "Cache cleared!"
+msgstr "Cache limpo!"
+
+#: extensions/system/src/System/Controller/UpdateController.php:53
+msgid "Unable to find update."
+msgstr "Incapaz de encontrar atualização."
+
+#: extensions/system/src/System/Controller/UpdateController.php:64
+msgid "Copying files..."
+msgstr "Copiando arquivos..."
+
+#: extensions/system/src/System/Controller/UpdateController.php:91
+#: extensions/system/src/System/Controller/UpdateController.php:121
+msgid "You may not call this step directly."
+msgstr "Você não pode chamar essa etapa diretamente."
+
+#: extensions/system/src/System/Controller/UpdateController.php:103
+msgid "Updating database..."
+msgstr "Atualizando banco de dado ..."
+
+#: extensions/system/src/System/Controller/UpdateController.php:127
+msgid "Installed successfully."
+msgstr "Instalado com sucesso."
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:23
+msgid "Feed"
+msgstr "Feed"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:32
+msgid "Feed Widget"
+msgstr "Feed Widget"
+
+#: extensions/system/src/System/Dashboard/FeedWidget.php:35
+msgid "No title given."
+msgstr "Sem título dado."
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:32
+msgid "Weather Widget"
+msgstr "Widget Clima"
+
+#: extensions/system/src/System/Dashboard/WeatherWidget.php:35
+msgid "No location chosen."
+msgstr "Nenhum local escolhido."
+
+#: extensions/system/src/System/Event/FrontpageListener.php:18
+msgid "No Frontpage assigned."
+msgstr "Nenhuma pagina principal atribuida."
+
+#: extensions/system/src/System/Event/SystemListener.php:134
+#: extensions/system/src/SystemExtension.php:127
+msgid "DATE_SHORT"
+msgstr "DATE_SHORT"
+
+#: extensions/system/src/System/Event/SystemListener.php:135
+#: extensions/system/src/SystemExtension.php:126
+msgid "DATE_MEDIUM"
+msgstr "DATE_MEDIUM"
+
+#: extensions/system/src/System/Event/SystemListener.php:136
+#: extensions/system/src/SystemExtension.php:125
+msgid "DATE_LONG"
+msgstr "DATE_LONG"
+
+#: extensions/system/src/System/Event/SystemListener.php:137
+#: extensions/system/src/SystemExtension.php:124
+msgid "DATE_FULL"
+msgstr "DATE_FULL"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Mon"
+msgstr "Segunda"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Tue"
+msgstr "Terça"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Wed"
+msgstr "Quarta"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Thu"
+msgstr "Quinta"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Fri"
+msgstr "Sexta"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sat"
+msgstr "Sabado"
+
+#: extensions/system/src/System/Event/SystemListener.php:138
+msgid "Sun"
+msgstr "Domingo"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Monday"
+msgstr "Segunda"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Tuesday"
+msgstr "Terça"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Wednesday"
+msgstr "Quarta"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Thursday"
+msgstr "Quinta"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Friday"
+msgstr "Sexta"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Saturday"
+msgstr "Sábado"
+
+#: extensions/system/src/System/Event/SystemListener.php:139
+msgid "Sunday"
+msgstr "Domindo"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jan"
+msgstr "Janeiro"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Feb"
+msgstr "Fevereiro"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Mar"
+msgstr "Março"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Apr"
+msgstr "Abril"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "May"
+msgstr "Maio"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jun"
+msgstr "Junho"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Jul"
+msgstr "Julho"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Aug"
+msgstr "Agosto"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Sep"
+msgstr "Setembro"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Oct"
+msgstr "Outubro"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Nov"
+msgstr "Novembro"
+
+#: extensions/system/src/System/Event/SystemListener.php:140
+msgid "Dec"
+msgstr "Dezembro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "January"
+msgstr "Janeiro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "February"
+msgstr "Fevereiro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "March"
+msgstr "Março"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "April"
+msgstr "Abril"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "June"
+msgstr "Junho"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "July"
+msgstr "Julho"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "August"
+msgstr "Agosto"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "September"
+msgstr "Setembro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "October"
+msgstr "Outubro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "November"
+msgstr "Novembro"
+
+#: extensions/system/src/System/Event/SystemListener.php:141
+msgid "December"
+msgstr "Dezembro"
+
+#: extensions/system/src/System/Exception/ExceptionController.php:30
+msgid "Invalid CSRF token."
+msgstr " CSRF token invalido."
+
+#: extensions/system/src/System/Exception/ExceptionController.php:33
+msgid "Sorry, the page you are looking for could not be found."
+msgstr "Desculpe, a página que você está procurando não pôde ser encontrado."
+
+#: extensions/system/src/System/Exception/ExceptionController.php:39
+msgid "Whoops, looks like something went wrong."
+msgstr "Opa, parece que algo deu errado."
+
+#: extensions/system/src/System/Helper/CountryHelper.php:20
+msgid "Ascension Island"
+msgstr "Ilha de Ascensão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:21
+msgid "Andorra"
+msgstr "Andorra"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:22
+msgid "United Arab Emirates"
+msgstr "Emirados Árabes Unidos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:23
+msgid "Afghanistan"
+msgstr "Afeganistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:24
+msgid "Antigua and Barbuda"
+msgstr "Antígua e Barbuda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:25
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:26
+msgid "Albania"
+msgstr "Albania"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:27
+msgid "Armenia"
+msgstr "Armenia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:28
+msgid "Netherlands Antilles"
+msgstr "Antilhas Holandesas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:29
+msgid "Angola"
+msgstr "Angola"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:30
+msgid "Antarctica"
+msgstr "Antártica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:31
+msgid "Argentina"
+msgstr "Argentina"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:32
+msgid "American Samoa"
+msgstr "Samoa americana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:33
+msgid "Austria"
+msgstr "Áustria"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:34
+msgid "Australia"
+msgstr "Austrália"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:35
+msgid "Aruba"
+msgstr "Aruba"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:36
+msgid "Åland Islands"
+msgstr "Ilhas Åland"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:37
+msgid "Azerbaijan"
+msgstr "Azerbaijão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:38
+msgid "Bosnia and Herzegovina"
+msgstr "Bósnia e Herzegovina"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:39
+msgid "Barbados"
+msgstr "Barbados"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:40
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:41
+msgid "Belgium"
+msgstr "Bélgica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:42
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:43
+msgid "Bulgaria"
+msgstr "Bulgária"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:44
+msgid "Bahrain"
+msgstr "Bahrain"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:45
+msgid "Burundi"
+msgstr "Burundi"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:46
+msgid "Benin"
+msgstr "Benin"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:47
+msgid "Saint Barthélemy"
+msgstr "São Bartolomeu"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:48
+msgid "Bermuda"
+msgstr "Bermudas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:49
+msgid "Brunei"
+msgstr "Brunei"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:50
+msgid "Bolivia"
+msgstr "Bolívia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:51
+msgid "Caribbean Netherlands"
+msgstr "Caribe Holanda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:52
+msgid "Brazil"
+msgstr "Brasil"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:53
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:54
+msgid "Bhutan"
+msgstr "Butão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:55
+msgid "Bouvet Island"
+msgstr "Ilha Bouvet"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:56
+msgid "Botswana"
+msgstr "Botswana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:57
+msgid "Belarus"
+msgstr "Belarus"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:58
+msgid "Belize"
+msgstr "Belize"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:59
+msgid "Canada"
+msgstr "Canadá"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:60
+msgid "Cocos [Keeling] Islands"
+msgstr "Ilhas Cocos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:61
+msgid "Congo - Kinshasa"
+msgstr "Congo - Kinshasa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:62
+msgid "Central African Republic"
+msgstr "República Centro-Africana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:63
+msgid "Congo - Brazzaville"
+msgstr "v"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:64
+msgid "Switzerland"
+msgstr "Suíça"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:65
+msgid "Côte d’Ivoire"
+msgstr "Côte d’Ivoire"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:66
+msgid "Cook Islands"
+msgstr "Ilhas Cook"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:67
+msgid "Chile"
+msgstr "Chile"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:68
+msgid "Cameroon"
+msgstr "Camarões"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:69
+msgid "China"
+msgstr "China"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:70
+msgid "Colombia"
+msgstr "Colômbia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:71
+msgid "Clipperton Island"
+msgstr "Ilha de Clipperton"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:72
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:73
+msgid "Cuba"
+msgstr "Cuba"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:74
+msgid "Cape Verde"
+msgstr "Cabo Verde"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:75
+msgid "Curaçao"
+msgstr "Curaçao"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:76
+msgid "Christmas Island"
+msgstr "Ilha Christmas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:77
+msgid "Cyprus"
+msgstr "Chipre"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:78
+msgid "Czech Republic"
+msgstr "República Checa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:79
+msgid "Germany"
+msgstr "Alemanha"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:80
+msgid "Diego Garcia"
+msgstr "Diego Garcia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:81
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:82
+msgid "Denmark"
+msgstr "Dinamarca"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:83
+msgid "Dominica"
+msgstr "Dominica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:84
+msgid "Dominican Republic"
+msgstr "República Dominicana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:85
+msgid "Algeria"
+msgstr "Argélia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:86
+msgid "Ceuta and Melilla"
+msgstr "Ceuta and Melilla"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:87
+msgid "Ecuador"
+msgstr "Equador"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:88
+msgid "Estonia"
+msgstr "Estônia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:89
+msgid "Egypt"
+msgstr "Egito"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:90
+msgid "Western Sahara"
+msgstr "Saara Ocidental"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:91
+msgid "Eritrea"
+msgstr "Eritreia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:92
+msgid "Spain"
+msgstr "Espanha"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:93
+msgid "Ethiopia"
+msgstr "Etiópia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:94
+msgid "Finland"
+msgstr "Finlândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:95
+msgid "Fiji"
+msgstr "Fiji"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:96
+msgid "Falkland Islands"
+msgstr "Ilhas Malvinas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:97
+msgid "Micronesia"
+msgstr "Micronésia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:98
+msgid "Faroe Islands"
+msgstr "Ilhas Faroe"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:99
+msgid "France"
+msgstr "França"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:100
+msgid "Gabon"
+msgstr "Gabão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:101
+msgid "United Kingdom"
+msgstr "Reino Unido"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:102
+msgid "Grenada"
+msgstr "Granada"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:103
+msgid "Georgia"
+msgstr "Georgia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:104
+msgid "French Guiana"
+msgstr "Guiana Francesa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:105
+msgid "Guernsey"
+msgstr "Guernsey"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:106
+msgid "Ghana"
+msgstr "Gana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:107
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:108
+msgid "Greenland"
+msgstr "Groenlândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:109
+msgid "Gambia"
+msgstr "Gâmbia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:110
+msgid "Guinea"
+msgstr "Guiné"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:111
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:112
+msgid "Equatorial Guinea"
+msgstr "Guiné Equatorial"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:113
+msgid "Greece"
+msgstr "Grécia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:114
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Geórgia do Sul e Ilhas Sandwich do Sul"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:115
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:116
+msgid "Guam"
+msgstr "Guam"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:117
+msgid "Guinea-Bissau"
+msgstr "Guiné-Bissau"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:118
+msgid "Guyana"
+msgstr "Guiana"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:119
+msgid "Hong Kong SAR China"
+msgstr "Hong Kong SAR China"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:120
+msgid "Heard Island and McDonald Islands"
+msgstr "Ilhas Heard e Ilhas McDonald"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:121
+msgid "Honduras"
+msgstr "Honduras"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:122
+msgid "Croatia"
+msgstr "Croácia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:123
+msgid "Haiti"
+msgstr "Haiti"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:124
+msgid "Hungary"
+msgstr "Hungria"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:125
+msgid "Canary Islands"
+msgstr "Ilhas Canárias"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:126
+msgid "Indonesia"
+msgstr "Indonésia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:127
+msgid "Ireland"
+msgstr "Irlanda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:128
+msgid "Israel"
+msgstr "Israel"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:129
+msgid "Isle of Man"
+msgstr "Isle do homem"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:130
+msgid "India"
+msgstr "Índia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:131
+msgid "British Indian Ocean Territory"
+msgstr "Território Britânico do Oceano Índico"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:132
+msgid "Iraq"
+msgstr "Iraque"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:133
+msgid "Iran"
+msgstr "Irã"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:134
+msgid "Iceland"
+msgstr "Islândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:135
+msgid "Italy"
+msgstr "Itália"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:136
+msgid "Jersey"
+msgstr "Jersey"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:137
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:138
+msgid "Jordan"
+msgstr "Jordânia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:139
+msgid "Japan"
+msgstr "Japão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:140
+msgid "Kenya"
+msgstr "Quênia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:141
+msgid "Kyrgyzstan"
+msgstr "Quirguistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:142
+msgid "Cambodia"
+msgstr "Camboja"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:143
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:144
+msgid "Comoros"
+msgstr "Comoros"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:145
+msgid "Saint Kitts and Nevis"
+msgstr "São Cristóvão e Nevis"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:146
+msgid "North Korea"
+msgstr "Coréia do Norte"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:147
+msgid "South Korea"
+msgstr "Coréia do Sul"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:148
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:149
+msgid "Cayman Islands"
+msgstr "Ilhas Cayman"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:150
+msgid "Kazakhstan"
+msgstr "Cazaquistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:151
+msgid "Laos"
+msgstr "Laos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:152
+msgid "Lebanon"
+msgstr "Líbano"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:153
+msgid "Saint Lucia"
+msgstr "Santa Lúcia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:154
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:155
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:156
+msgid "Liberia"
+msgstr "Libéria"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:157
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:158
+msgid "Lithuania"
+msgstr "Lituânia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:159
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:160
+msgid "Latvia"
+msgstr "Látvia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:161
+msgid "Libya"
+msgstr "Líbia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:162
+msgid "Morocco"
+msgstr "Marrocos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:163
+msgid "Monaco"
+msgstr "Mônaco"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:164
+msgid "Moldova"
+msgstr "Moldávia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:165
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:166
+msgid "Saint Martin"
+msgstr "Saint Martin"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:167
+msgid "Madagascar"
+msgstr "Madagáscar"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:168
+msgid "Marshall Islands"
+msgstr "Ilhas Marshall"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:169
+msgid "Macedonia"
+msgstr "Macedonia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:170
+msgid "Mali"
+msgstr "Mali"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:171
+msgid "Myanmar [Burma]"
+msgstr "Mianmar [Birmânia]"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:172
+msgid "Mongolia"
+msgstr "Mongólia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:173
+msgid "Macau SAR China"
+msgstr "Macau SAR China"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:174
+msgid "Northern Mariana Islands"
+msgstr "Ilhas Marianas do Norte"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:175
+msgid "Martinique"
+msgstr "Martinica"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:176
+msgid "Mauritania"
+msgstr "Mauritânia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:177
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:178
+msgid "Malta"
+msgstr "Malta"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:179
+msgid "Mauritius"
+msgstr "Maurício"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:180
+msgid "Maldives"
+msgstr "Maldivas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:181
+msgid "Malawi"
+msgstr "Malavi"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:182
+msgid "Mexico"
+msgstr "México"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:183
+msgid "Malaysia"
+msgstr "Malásia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:184
+msgid "Mozambique"
+msgstr "Moçambique"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:185
+msgid "Namibia"
+msgstr "Namíbia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:186
+msgid "New Caledonia"
+msgstr "Nova Caledônia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:187
+msgid "Niger"
+msgstr "Níger"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:188
+msgid "Norfolk Island"
+msgstr "Ilha de Norfolk"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:189
+msgid "Nigeria"
+msgstr "Nigéria"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:190
+msgid "Nicaragua"
+msgstr "Nicarágua"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:191
+msgid "Netherlands"
+msgstr "Holanda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:192
+msgid "Norway"
+msgstr "Noruega"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:193
+msgid "Nepal"
+msgstr "Nepal"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:194
+msgid "Nauru"
+msgstr "Nauru"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:195
+msgid "Niue"
+msgstr "Niue"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:196
+msgid "New Zealand"
+msgstr "Nova Zelândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:197
+msgid "Oman"
+msgstr "Oman"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:198
+msgid "Panama"
+msgstr "Panamá"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:199
+msgid "Peru"
+msgstr "Peru"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:200
+msgid "French Polynesia"
+msgstr "Polinésia Francesa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:201
+msgid "Papua New Guinea"
+msgstr "Papua Nova Guiné"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:202
+msgid "Philippines"
+msgstr "Filipinas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:203
+msgid "Pakistan"
+msgstr "Paquistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:204
+msgid "Poland"
+msgstr "Polônia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:205
+msgid "Saint Pierre and Miquelon"
+msgstr "São Pedro e Miquelon"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:206
+msgid "Pitcairn Islands"
+msgstr "Ilhas Pitcairn"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:207
+msgid "Puerto Rico"
+msgstr "Porto Rico"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:208
+msgid "Palestinian Territories"
+msgstr "Territórios Palestinos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:209
+msgid "Portugal"
+msgstr "Portugal"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:210
+msgid "Palau"
+msgstr "Palau"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:211
+msgid "Paraguay"
+msgstr "Paraguai"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:212
+msgid "Qatar"
+msgstr "Catar"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:213
+msgid "Outlying Oceania"
+msgstr "Distantes Oceania"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:214
+msgid "Réunion"
+msgstr "Réunion"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:215
+msgid "Romania"
+msgstr "Romênia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:216
+msgid "Serbia"
+msgstr "Sérvia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:217
+msgid "Russia"
+msgstr "Rússia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:218
+msgid "Rwanda"
+msgstr "Ruanda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:219
+msgid "Saudi Arabia"
+msgstr "Arábia Saudita"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:220
+msgid "Solomon Islands"
+msgstr "Ilhas Salomão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:221
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:222
+msgid "Sudan"
+msgstr "Sudão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:223
+msgid "Sweden"
+msgstr "Suécia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:224
+msgid "Singapore"
+msgstr "Cingapura"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:225
+msgid "Saint Helena"
+msgstr "Santa Helena"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:226
+msgid "Slovenia"
+msgstr "Eslovenia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:227
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard e Jan Mayen"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:228
+msgid "Slovakia"
+msgstr "Eslováquia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:229
+msgid "Sierra Leone"
+msgstr "Serra Leoa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:230
+msgid "San Marino"
+msgstr "San Marino"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:231
+msgid "Senegal"
+msgstr "Senegal"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:232
+msgid "Somalia"
+msgstr "Somália"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:233
+msgid "Suriname"
+msgstr "Suriname"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:234
+msgid "South Sudan"
+msgstr "Sudão do Sul"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:235
+msgid "São Tomé and Príncipe"
+msgstr "São Tomé e Príncipe"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:236
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:237
+msgid "Sint Maarten"
+msgstr "Sint Maarten"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:238
+msgid "Syria"
+msgstr "Síria"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:239
+msgid "Swaziland"
+msgstr "Suazilândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:240
+msgid "Tristan da Cunha"
+msgstr "Tristão da Cunha"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:241
+msgid "Turks and Caicos Islands"
+msgstr "Ilhas Turks e Caicos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:242
+msgid "Chad"
+msgstr "Chad"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:243
+msgid "French Southern Territories"
+msgstr "Territórios Franceses do Sul"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:244
+msgid "Togo"
+msgstr "Togo"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:245
+msgid "Thailand"
+msgstr "Tailândia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:246
+msgid "Tajikistan"
+msgstr "Tadjiquistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:247
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:248
+msgid "Timor-Leste"
+msgstr "Timor-Leste"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:249
+msgid "Turkmenistan"
+msgstr "Turquemenistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:250
+msgid "Tunisia"
+msgstr "Tunísia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:251
+msgid "Tonga"
+msgstr "Tonga"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:252
+msgid "Turkey"
+msgstr "Turquia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:253
+msgid "Trinidad and Tobago"
+msgstr "Trinidad and Tobago"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:254
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:255
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:256
+msgid "Tanzania"
+msgstr "Tanzânia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:257
+msgid "Ukraine"
+msgstr "Ucrânia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:258
+msgid "Uganda"
+msgstr "Uganda"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:259
+msgid "U.S. Outlying Islands"
+msgstr "Territórios Insulares dos EUA"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:260
+msgid "United States"
+msgstr "Estados Unidos"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:261
+msgid "Uruguay"
+msgstr "Uruguai"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:262
+msgid "Uzbekistan"
+msgstr "Uzbequistão"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:263
+msgid "Vatican City"
+msgstr "Cidade do Vaticano"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:264
+msgid "Saint Vincent and the Grenadines"
+msgstr "São Vicente e Granadinas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:265
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:266
+msgid "British Virgin Islands"
+msgstr "Ilhas Virgens Britânicas"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:267
+msgid "U.S. Virgin Islands"
+msgstr "Ilhas Virgens dos EUA"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:268
+msgid "Vietnam"
+msgstr "Vietnã"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:269
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:270
+msgid "Wallis and Futuna"
+msgstr "Wallis and Futuna"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:271
+msgid "Samoa"
+msgstr "Samoa"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:272
+msgid "Kosovo"
+msgstr "Kosovo"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:273
+msgid "Yemen"
+msgstr "Iémen"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:274
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:275
+msgid "South Africa"
+msgstr "África do Sul"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:276
+msgid "Zambia"
+msgstr "Zâmbia"
+
+#: extensions/system/src/System/Helper/CountryHelper.php:277
+msgid "Zimbabwe"
+msgstr "Zimbábue"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:17
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:18
+msgid "Amharic"
+msgstr "Amárico"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:19
+msgid "Arabic"
+msgstr "Árabe"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:20
+msgid "Asturian"
+msgstr "Asturiano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:21
+msgid "Azerbaijani"
+msgstr "Azerbaijano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:22
+msgid "Belarusian"
+msgstr "Bielorrussa"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:23
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:24
+msgid "Bengali"
+msgstr "Bengali"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:25
+msgid "Tibetan"
+msgstr "Tibetano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:26
+msgid "Bosnian"
+msgstr "Bósnio"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:27
+msgid "Catalan"
+msgstr "Catalão"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:28
+msgid "Czech"
+msgstr "Tcheco"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:29
+msgid "Welsh"
+msgstr "Galês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:30
+msgid "Danish"
+msgstr "Dinamarquês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:31
+msgid "German"
+msgstr "Alemão"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:32
+msgid "Dzongkha"
+msgstr "Dzongk"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:33
+msgid "Greek"
+msgstr "Grego"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:34
+msgid "English"
+msgstr "Inglês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:35
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:36
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:37
+msgid "Estonian"
+msgstr "Estoniano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:38
+msgid "Basque"
+msgstr "Basco"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:39
+msgid "Persian, Farsi"
+msgstr "Persa, farsi"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:40
+msgid "Finnish"
+msgstr "Finlandês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:41
+msgid "Filipino"
+msgstr "Filipino"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:42
+msgid "Faeroese"
+msgstr "Faeroese"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:43
+msgid "French"
+msgstr "Francês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:44
+msgid "Frisian, Western"
+msgstr "Frisian, Western"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:45
+msgid "Irish"
+msgstr "Irlandês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:46
+msgid "Scots Gaelic"
+msgstr "Escocês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:47
+msgid "Galician"
+msgstr "Galego"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:48
+msgid "Swiss German"
+msgstr "Suíço Alemão"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:49
+msgid "Gujarati"
+msgstr "Gujarati"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:50
+msgid "Hebrew"
+msgstr "Hebraico"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:51
+msgid "Hindi"
+msgstr "Hindu"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:52
+msgid "Croatian"
+msgstr "Croata"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:53
+msgid "Haitian Creole"
+msgstr "Haitiano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:54
+msgid "Hungarian"
+msgstr "Húngaro"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:55
+msgid "Armenian"
+msgstr "Armênio"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:56
+msgid "Indonesian"
+msgstr "Indonésio"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:57
+msgid "Icelandic"
+msgstr "Islandês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:58
+msgid "Italian"
+msgstr "Italiano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:59
+msgid "Japanese"
+msgstr "Japonês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:60
+msgid "Javanese"
+msgstr "Javanês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:61
+msgid "Georgian"
+msgstr "Georgiano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:62
+msgid "Kazakh"
+msgstr "Cazaque"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:63
+msgid "Khmer"
+msgstr "Khmer"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:64
+msgid "Kannada"
+msgstr "Kannada"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:65
+msgid "Korean"
+msgstr "Coreano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:66
+msgid "Kurdish"
+msgstr "Kurdo"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:67
+msgid "Kyrgyz"
+msgstr "Quirguistão"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:68
+msgid "Lao"
+msgstr "Lao"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:69
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:70
+msgid "Latvian"
+msgstr "letão"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:71
+msgid "Malagasy"
+msgstr "Malagasy"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:72
+msgid "Macedonian"
+msgstr "Macedónio"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:73
+msgid "Malayalam"
+msgstr "Malayalam"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:74
+msgid "Mongolian"
+msgstr "Mongol"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:75
+msgid "Marathi"
+msgstr "Marathi"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:76
+msgid "Bahasa Malaysia"
+msgstr "Bahasa da Malásia"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:77
+msgid "Burmese"
+msgstr "Birmanês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:78
+msgid "Norwegian Bokmål"
+msgstr "Norueguês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:79
+msgid "Nepali"
+msgstr "Nepali"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:80
+msgid "Dutch"
+msgstr "Holandês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:81
+msgid "Norwegian Nynorsk"
+msgstr "Nynorsk Norueguês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:82
+msgid "Occitan"
+msgstr "Occitan"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:83
+msgid "Punjabi"
+msgstr "Punjabi"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:84
+msgid "Polish"
+msgstr "Polonês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:85
+msgid "Portuguese, Brazil"
+msgstr "Portuguese, Brazil"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:86
+msgid "Portuguese, Portugal"
+msgstr "Portuguese, Portugal"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:87
+msgid "Romanian"
+msgstr "Romeno"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:88
+msgid "Russian"
+msgstr "Russo"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:89
+msgid "Scots"
+msgstr "Escocês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:90
+msgid "Northern Sami"
+msgstr "Northern Sami"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:91
+msgid "Sinhala"
+msgstr "Sinhala"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:92
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:93
+msgid "Slovenian"
+msgstr "Esloveno"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:94
+msgid "Albanian"
+msgstr "Albanês"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:95
+msgid "Serbian"
+msgstr "Sérvio"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:96
+msgid "Swedish"
+msgstr "Siuço"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:97
+msgid "Swahili"
+msgstr "Swahili"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:98
+msgid "Tamil"
+msgstr "Tâmil"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:99
+msgid "Tamil, Sri Lanka"
+msgstr "Tamil, do Sri Lanka"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:100
+msgid "Telugu"
+msgstr "Telugu"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:101
+msgid "Thai"
+msgstr "v"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:102
+msgid "Turkish"
+msgstr "Turco"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:103
+msgid "Tuvan"
+msgstr "Tuvan"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:104
+msgid "Uyghur"
+msgstr "Uyghur"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:105
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:106
+msgid "Urdu"
+msgstr "Urdu"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:107
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:108
+msgid "Lolspeak"
+msgstr "Lolspeak"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:109
+msgid "Chinese, Simplified"
+msgstr "Chinês, simplificado"
+
+#: extensions/system/src/System/Helper/LanguageHelper.php:110
+msgid "Chinese, Traditional"
+msgstr "Chinês, tradicional"
+
+#: extensions/system/src/System/Link/System.php:48
+msgid "Frontpage"
+msgstr "Pagina principal"
+
+#: extensions/system/src/System/Link/System.php:49
+msgid "User Login"
+msgstr "Login do usuário"
+
+#: extensions/system/src/System/Link/System.php:50
+#: extensions/system/src/User/Controller/RegistrationController.php:46
+msgid "User Registration"
+msgstr "Registro de Usuário"
+
+#: extensions/system/src/System/Link/System.php:51
+msgid "User Profile"
+msgstr "Perfil do Usuário"
+
+#: extensions/system/src/System/Link/System.php:52
+msgid "User Password Reset"
+msgstr "Redefinir senha do usuário"
+
+#: extensions/system/src/System/Widget/TextWidget.php:23
+msgid "Text"
+msgstr "Texto"
+
+#: extensions/system/src/System/Widget/TextWidget.php:31
+msgid "Text Widget"
+msgstr "Widget Texto"
+
+#: extensions/system/src/SystemExtension.php:128
+msgid "DATE_INTERVAL"
+msgstr "DATE_INTERVAL"
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:84
+msgid "Unable to activate theme.<br>The theme triggered a fatal error."
+msgstr "Não é possível ativar o tema. <br> O tema provocou um erro fatal."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:90
+msgid "Unable to enable theme \"%name%\"."
+msgstr "Incapaz de permitir tema \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:98
+msgid "Theme enabled."
+msgstr "Tema habilitado."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:115
+msgid "Unable to uninstall theme \"%name%\"."
+msgstr "Impossível desinstalar tema \"%name%\"."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:121
+msgid "Theme uninstalled."
+msgstr "Tema desinstalado."
+
+#: extensions/system/src/Theme/Controller/ThemesController.php:137
+#: extensions/system/src/Theme/Controller/ThemesController.php:161
+msgid "Invalid theme."
+msgstr "Tema inválido."
+
+#: extensions/system/src/Theme/Event/WidgetListener.php:30
+msgid "Theme"
+msgstr "Thema"
+
+#: extensions/system/src/User/Controller/AuthController.php:68
+#: extensions/system/src/User/Controller/RegistrationController.php:66
+#: extensions/system/src/User/Controller/ResetPasswordController.php:61
+#: extensions/system/src/User/Controller/ResetPasswordController.php:130
+msgid "Invalid token. Please try again."
+msgstr "Token inválido. Por favor, tente novamente."
+
+#: extensions/system/src/User/Controller/AuthController.php:76
+msgid "Invalid username or password."
+msgstr "Nome de usuário ou senha inválida."
+
+#: extensions/system/src/User/Controller/PermissionController.php:48
+msgid "Permissions saved!"
+msgstr "Permissões salvas!"
+
+#: extensions/system/src/User/Controller/ProfileController.php:66
+msgid "Name is invalid."
+msgstr "Nome é inválido."
+
+#: extensions/system/src/User/Controller/ProfileController.php:70
+#: extensions/system/src/User/Controller/RegistrationController.php:87
+#: extensions/system/src/User/Controller/UserController.php:165
+msgid "Email is invalid."
+msgstr "E-mail não é válido."
+
+#: extensions/system/src/User/Controller/ProfileController.php:74
+#: extensions/system/src/User/Controller/RegistrationController.php:95
+#: extensions/system/src/User/Controller/UserController.php:177
+msgid "Email not available."
+msgstr "E-mail não disponível."
+
+#: extensions/system/src/User/Controller/ProfileController.php:80
+msgid "Invalid Password."
+msgstr "Senha inválida."
+
+#: extensions/system/src/User/Controller/ProfileController.php:84
+msgid "New Password is invalid."
+msgstr "Nova senha é inválida."
+
+#: extensions/system/src/User/Controller/ProfileController.php:103
+msgid "Profile updated."
+msgstr "Perfil atualizado."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:75
+msgid "Name required."
+msgstr "Nome necessário."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:79
+#: extensions/system/src/User/Controller/UserController.php:144
+msgid "Password required."
+msgstr "Password required."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:83
+#: extensions/system/src/User/Controller/UserController.php:161
+msgid "Username is invalid."
+msgstr "Nome de usuário é inválido."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:91
+#: extensions/system/src/User/Controller/UserController.php:171
+msgid "Username not available."
+msgstr "Utilizador não disponível."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:99
+msgid "Signup failed"
+msgstr "O Cadastro falhou"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:134
+msgid ""
+"Your user account has been created. Complete your registration, by clicking "
+"the link provided in the mail that has been sent to you."
+msgstr "Sua conta de usuário foi criada. Complete o seu registo, clicando no link fornecido no e-mail que foi enviado a você."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:139
+msgid ""
+"Your user account has been created and is pending approval by the site "
+"administrator."
+msgstr "Sua conta de usuário foi criada e está pendente de aprovação pelo administrador do site."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:144
+msgid "Your user account has been created."
+msgstr "Sua conta de usuário foi criada."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:180
+#: extensions/system/src/User/Controller/ResetPasswordController.php:116
+msgid "Invalid key."
+msgstr "Chave inválida."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:189
+msgid ""
+"Your email has been verified. Once an administrator approves your account, "
+"you will be notified by email."
+msgstr "Seu e-mail foi verificada. Uma vez que um administrador aprova a sua conta, você será notificado por e-mail."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:199
+msgid ""
+"The user's account has been activated and the user has been notified about "
+"it."
+msgstr "A conta do usuário foi ativado e que o usuário tenha sido notificado a respeito."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:201
+msgid "Your account has been activated."
+msgstr "Sua conta foi ativada."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:216
+msgid "Welcome to %site%!"
+msgstr "Bem-vindo ao %site%!"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:229
+msgid "Activate your %site% account"
+msgstr "Ative a sua conta no %site%"
+
+#: extensions/system/src/User/Controller/RegistrationController.php:234
+msgid "Unable to send verification link."
+msgstr "Não foi possível enviar link de verificação."
+
+#: extensions/system/src/User/Controller/RegistrationController.php:244
+msgid "Please approve registration at %site%!"
+msgstr "Por favor, aprovar o registro no%site%!"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:45
+msgid "Reset"
+msgstr "Redefinir"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:65
+msgid "Enter a username or email address."
+msgstr "Digite um nome de usuário ou endereço de email."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:71
+msgid "Invalid username or email."
+msgstr "Nome de usuário inválido ou e-mail."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:75
+#: extensions/system/src/User/Controller/ResetPasswordController.php:121
+msgid "Your account has not been activated or is blocked."
+msgstr "A sua conta não foi ativado ou está bloqueado."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:86
+#: extensions/system/src/User/Link/User.php:49
+msgid "Password Reset"
+msgstr "Redefinir Senha"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:91
+msgid "Unable to send confirmation link."
+msgstr "Não foi possível enviar o link de confirmação."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:98
+msgid "Check your email for the confirmation link."
+msgstr "Verifique seu e-mail para o link de confirmação."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:136
+msgid "Enter password."
+msgstr "Digite a senha."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:140
+msgid "Invalid password."
+msgstr "Senha inválida."
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:148
+msgid "Your password has been reset."
+msgstr "Sua senha foi redefinida"
+
+#: extensions/system/src/User/Controller/ResetPasswordController.php:156
+msgid "Reset Confirm"
+msgstr "Confirmar redefinir"
+
+#: extensions/system/src/User/Controller/RoleController.php:68
+msgid "Roles saved!"
+msgstr "Regras salvas!"
+
+#: extensions/system/src/User/Controller/UserController.php:125
+msgid "Edit User"
+msgstr "Editar Usuário"
+
+#: extensions/system/src/User/Controller/UserController.php:140
+msgid "User not found."
+msgstr "Usuário não encontrado."
+
+#: extensions/system/src/User/Controller/UserController.php:154
+#: extensions/system/src/User/Controller/UserController.php:243
+msgid "Unable to block yourself."
+msgstr "Incapaz de bloquear a si mesmo."
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User saved."
+msgstr "Usuário salvo."
+
+#: extensions/system/src/User/Controller/UserController.php:202
+msgid "User created."
+msgstr "Usuário criado."
+
+#: extensions/system/src/User/Controller/UserController.php:218
+msgid "Unable to delete self."
+msgstr "Não é possível excluir a si mesmo."
+
+#: extensions/system/src/User/Controller/UserController.php:227
+msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
+msgstr "{0} Nenhum usuário deletado.|{1} Usuário deletado.|]1,Inf[ Usuários deletados."
+
+#: extensions/system/src/User/Dashboard/UserWidget.php:32
+msgid "Displays a list of users."
+msgstr "Exibe uma lista de usuários."
+
+#: extensions/system/src/User/Entity/User.php:101
+msgid "Blocked"
+msgstr "Bloqueado"
+
+#: extensions/system/src/User/Event/AccessListener.php:93
+msgid "You do not have access to the administration area of this site."
+msgstr "Você não tem acesso à área de administração deste site."
+
+#: extensions/system/src/User/Event/AccessListener.php:107
+msgid "Insufficient User Rights."
+msgstr "Direitos insuficiente usuário."
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account is blocked."
+msgstr "Sua conta está bloqueada."
+
+#: extensions/system/src/User/Event/AuthorizationListener.php:33
+msgid "Your account has not been activated."
+msgstr "Sua conta não foi ativada."
+
+#: extensions/system/src/User/Event/LoginAttemptListener.php:30
+msgid "Slow down a bit."
+msgstr "Abrandar um pouco."
+
+#: extensions/system/src/User/Link/User.php:48
+msgid "Profile"
+msgstr "Perfil"
+
+#: extensions/system/src/User/Widget/LoginWidget.php:33
+msgid "Displays a user login form."
+msgstr "Exibe um formulário de login de usuário."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:49
+msgid "Unassigned Widgets"
+msgstr "Widgets não atribuídos"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:82
+#: extensions/system/src/Widget/Controller/WidgetsController.php:105
+msgid "Invalid widget id"
+msgstr "ID do Widget inválida"
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:141
+msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
+msgstr "{0} Nenhum widget deletado.|{1} Widget deletado.|]1,Inf[  Widgets deletados."
+
+#: extensions/system/src/Widget/Controller/WidgetsController.php:216
+msgid "Widgets updated."
+msgstr "Widgets atualizado."

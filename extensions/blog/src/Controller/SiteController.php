@@ -15,6 +15,8 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Route("/blog")
@@ -56,20 +58,36 @@ class SiteController extends Controller
     }
 
     /**
+     * @Route("/page/{page}", name="@blog/page", requirements={"page" = "\d+"})
+     * @Route("/", name="@blog/site")
      * @Response("extension://blog/views/post/index.razr")
      */
-    public function indexAction()
+    public function indexAction($page = 1)
     {
         $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) {
             $post = $event->getEntity();
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
+        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+
+        if (!$limit = $this->extension->getParams('posts_per_page')) {
+            $limit = 10;
+        }
+
+        $count = $query->count();
+        $total = ceil($count / $limit);
+        $page  = max(1, min($total, $page));
+
+        $query->offset(($page-1) * $limit)->limit($limit)->orderBy('date', 'DESC');
+
         return [
-            'head.title' => __('Blog'),
+            'head.title'          => __('Blog'),
             'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $this->getFeed()->getMIMEType()],
-            'posts' => $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->orderBy('date', 'DESC')->get(),
-            'params' => $this->extension->getParams()
+            'posts'               => $query->get(),
+            'params'              => $this->extension->getParams(),
+            'total'               => $total,
+            'page'                => $page
         ];
     }
 
@@ -160,11 +178,11 @@ class SiteController extends Controller
     public function postAction($id = 0)
     {
         if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
-            return $this['response']->create(__('Post not found!'), 404);
+            throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
         if (!$post->hasAccess($this['user'])) {
-            return $this['response']->create(__('Unable to access this post!'), 403);
+            throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
         $user  = $this['user'];

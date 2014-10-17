@@ -1,0 +1,112 @@
+# 
+# Translators:
+# GregaZ <gregaz@e-pro.si>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2014-07-21 17:09+0000\n"
+"PO-Revision-Date: 2014-08-22 09:07+0000\n"
+"Last-Translator: GregaZ <gregaz@e-pro.si>\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/pagekit-cms/language/sl_SI/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: extensions/page/views/admin/link/page.razr:2
+#: extensions/page/src/PageLink.php:22
+msgid "Page"
+msgstr "Stran"
+
+#: extensions/page/views/admin/link/page.razr:5
+msgid "- Select Page -"
+msgstr "- Izberi stran -"
+
+#: extensions/page/views/admin/pages/edit.razr:14
+msgid "Enter Title"
+msgstr "Dodaj naslov"
+
+#: extensions/page/views/admin/pages/index.razr:8
+#: extensions/page/src/Controller/PageController.php:83
+msgid "Add Page"
+msgstr "Dodaj stran"
+
+#: extensions/page/views/admin/pages/index.razr:15
+msgid "Publish"
+msgstr "Objavi"
+
+#: extensions/page/views/admin/pages/index.razr:16
+msgid "Unpublish"
+msgstr "Prekliči objavo"
+
+#: extensions/page/views/admin/pages/index.razr:38
+msgid "No pages found."
+msgstr "Iskanje strani je bilo neuspešno."
+
+#: extensions/page/src/Controller/PageController.php:75
+msgid "Pages"
+msgstr "Strani"
+
+#: extensions/page/src/Controller/PageController.php:95
+msgid "Invalid page id."
+msgstr "Napačna ID strani."
+
+#: extensions/page/src/Controller/PageController.php:105
+msgid "Edit Page"
+msgstr "Uredi stran"
+
+#: extensions/page/src/Controller/PageController.php:120
+msgid "Page Url not available."
+msgstr "URL strani ni na voljo."
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page saved."
+msgstr "Stran je shranjena."
+
+#: extensions/page/src/Controller/PageController.php:127
+msgid "Page created."
+msgstr "Nova stran je ustvarjena."
+
+#: extensions/page/src/Controller/PageController.php:148
+msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
+msgstr "{0} strani izbrisanih.|{1} stran je izbrisana.|Izbrisani sta {2} strani.|Izbrisane so {3} strani.|Izbrisane so {4} strani.|Izbrisanih je ]4,Inf[ strani."
+
+#: extensions/page/src/Controller/PageController.php:164
+msgid "%title% (Copy)"
+msgstr "%title% (kopija)"
+
+#: extensions/page/src/Controller/PageController.php:170
+msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
+msgstr "{0} strani prekopiranih.|{1} stran prekopirana.|]{2} strani prekopirani.]{3} strani prekopirane.|]{4} strani prekopirane.]4,Inf[ strani prekopiranih."
+
+#: extensions/page/src/Controller/PageController.php:187
+msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
+msgstr "Nobena {0} strain ni objavljena.|{1} stran je objavljena.|{2} strani sta objavljeni.|{3} strani so objavljene.|{4} strani so objavljene.|]4,Inf[ strani je objavljenih."
+
+#: extensions/page/src/Controller/PageController.php:189
+msgid ""
+"{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
+msgstr "Nobena {0} strain ni preklicana.|{1} stran je preklicana.|{2} strani sta preklicani.|{3} strani so preklicane.|{4} strani so preklicane.|]4,Inf[ strani je preklicanih."
+
+#: extensions/page/src/Controller/SiteController.php:36
+msgid "Page not found!"
+msgstr "Stran ni mogoče najti."
+
+#: extensions/page/src/Controller/SiteController.php:45
+msgid "Unable to access this page!"
+msgstr "Dostop do te strani ni mogoč!"
+
+#: extensions/page/src/Entity/Page.php:99
+msgid "Unpublished"
+msgstr "Neobjavljeno"
+
+#: extensions/page/src/Entity/Page.php:100
+msgid "Published"
+msgstr "Objavljeno"
+
+#: extensions/page/src/PageExtension.php:27
+msgid ""
+"You've made some changes! Leaving the page without saving will discard all "
+"changes."
+msgstr "Želite zapustiti stran? Spremembe, ki ste jih opravili se ne bodo shranile!"

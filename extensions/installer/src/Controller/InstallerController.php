@@ -195,7 +195,7 @@ class InstallerController extends Controller
     protected function createDatabase()
     {
         $params = $this['config']['database.connections'][$this['config']['database.default']];
-        $dbname = $params['dbname'];
+        $dbname = $this['db']->quoteIdentifier($params['dbname']);
 
         unset($params['dbname']);
 
