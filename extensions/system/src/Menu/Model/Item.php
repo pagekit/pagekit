@@ -8,12 +8,6 @@ class Item implements ItemInterface
 {
     use DataTrait;
 
-    /* Menu item disabled status. */
-    const STATUS_DISABLED = 0;
-
-    /* Menu item enabled status. */
-    const STATUS_ENABLED = 1;
-
     /**
      * @var string
      */

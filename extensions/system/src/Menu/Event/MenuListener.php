@@ -83,7 +83,7 @@ class MenuListener extends EventSubscriber
     {
         if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
             $this->cacheEntries = ['paths' => [], 'patterns' => []];
-            foreach ($this['menus']->getItemRepository()->query()->where(['status' => ItemInterface::STATUS_ACTIVE])->get() as $item) {
+            foreach ($this['menus']->getItemRepository()->query()->where(['status' => ItemInterface::STATUS_ENABLED])->get() as $item) {
                 if (!$item->getPages()) {
                     $this->cacheEntries['paths'][strtok(strtok($item->getUrl(), '?'), '#')][$item->getId()] = $item->getUrl();
                 } else {

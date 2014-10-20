@@ -112,11 +112,6 @@ class Item extends BaseItem
         return $this->pages;
     }
 
-    public function isActive()
-    {
-        return $this->getStatus() === self::STATUS_ACTIVE;
-    }
-
     public static function getStatuses()
     {
         return [

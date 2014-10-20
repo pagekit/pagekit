@@ -4,11 +4,11 @@ namespace Pagekit\Menu\Model;
 
 interface ItemInterface
 {
-    /** @var int Item deactivated. */
-    const STATUS_DEACTIVATED = 0;
+    /* Menu item disabled status. */
+    const STATUS_DISABLED = 0;
 
-    /** @var int Item active. */
-    const STATUS_ACTIVE = 1;
+    /* Menu item enabled status. */
+    const STATUS_ENABLED = 1;
 
     /**
      * @return string
