@@ -113,7 +113,7 @@ class SystemExtension extends Extension
         };
 
         $app['oauth'] = function() {
-            return new OAuthHelper();
+            return new OAuthHelper;
         };
 
         $app['dates'] = function($app) {
@@ -212,7 +212,6 @@ class SystemExtension extends Extension
             'app.site_description',
             'app.site_title',
             'app.timezone',
-            'app.storage',
             'mail.driver',
             'mail.encryption',
             'mail.from.address',
@@ -228,10 +227,6 @@ class SystemExtension extends Extension
 
         foreach ($keys as $key) {
             $this['config']->set($key, $this['option']->get("system:$key", $this['config']->get($key)));
-        }
-
-        if (!$this['config']->get('app.storage')) {
-            $this['config']->set('app.storage', '/storage');
         }
     }
 }

@@ -211,7 +211,7 @@ class FinderController extends Controller
     protected function getPath($path = '')
     {
         $root = strtr($this['path'], '\\', '/');
-        $path = $this->normalizePath($root.$this['request']->get('root').'/'.$this['request']->get('path').'/'.$path);
+        $path = $this->normalizePath($root.'/'.$this['request']->get('root').'/'.$this['request']->get('path').'/'.$path);
 
         return 0 === strpos($path, $root) ? $path : false;
     }

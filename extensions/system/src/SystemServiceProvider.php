@@ -50,6 +50,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new ExtensionManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
         };
 
+        $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
+        $app['path.storage'] = $app['config']['locator.paths.storage'] = rtrim($app['path'] . '/' . $app['config']['app.storage'], '/');
+
         $app['extensions.boot'] = [];
     }
 

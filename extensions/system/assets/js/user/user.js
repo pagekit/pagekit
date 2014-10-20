@@ -51,7 +51,7 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'gravatar', 'domReady!'], fu
         $('img[data-avatar]', form).each(function() {
             $(this).attr('src', gravatar.url($(this).data('avatar'), {s: 80, d: 'mm', r: 'g'}));
         });
-    };
+    }
 
     function selectPage(index) {
         pagination.data('pagination').selectPage(index);
