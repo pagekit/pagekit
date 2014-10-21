@@ -47,6 +47,7 @@ class System extends Link
         return [
             '/'                     => __('Frontpage'),
             '@system/auth/login'    => __('User Login'),
+            '@system/auth/logout'   => __('User Logout'),
             '@system/registration'  => __('User Registration'),
             '@system/profile'       => __('User Profile'),
             '@system/resetpassword' => __('User Password Reset')
