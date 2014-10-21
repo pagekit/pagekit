@@ -77,6 +77,17 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
             frm.parent().removeClass(this.resetanims);
 
+            var displayDbError = function(msg) {
+                if (!frm.find('.uk-alert-danger').length) {
+                    frm.prepend('<div class="uk-alert uk-alert-danger uk-margin"><p>' + msg + '</p></div>');
+                } else {
+                    frm.find('.uk-alert-danger').find('p').html(msg);
+                }
+
+                frm.parent().removeClass("uk-animation-shake").width(); // prepare for animation
+                frm.parent().addClass("uk-animation-shake");
+            };
+
             $.post(frm.attr('action'), frm.serialize(), function(data) {
 
                 if (data && data.status) {
@@ -84,16 +95,13 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
                     switch (data.status) {
                         case "no-connection":
 
-                            if (!frm.find('.uk-alert-danger').length) {
-                                frm.prepend('<div class="uk-alert uk-alert-danger uk-margin"><p>' + data.message + '</p></div>');
-                            }
-
-                            frm.parent().removeClass("uk-animation-shake").width(); // prepare for animation
-                            frm.parent().addClass("uk-animation-shake");
+                            displayDbError(data.message);
 
                             break;
                         case "tables-exist":
-                            $this.gotoStep('site');
+
+                            displayDbError(data.message);
+
                             break;
                         case "no-tables":
                             $this.gotoStep('user');

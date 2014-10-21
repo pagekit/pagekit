@@ -64,6 +64,7 @@ class InstallerController extends Controller
 
                 if ($this['db']->getUtility()->tableExists('@system_option')) {
                     $status = 'tables-exist';
+                    $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
                     $status = 'no-tables';
                 }
@@ -97,7 +98,8 @@ class InstallerController extends Controller
     public function installAction($config = [], $option = [], $user = [])
     {
         $status  = $this->checkAction($config, false);
-        $message = '';
+        $message = $status['message'];
+        $status  = $status['status'];
 
         try {
 
@@ -110,9 +112,7 @@ class InstallerController extends Controller
             }
 
             if ('tables-exist' == $status) {
-
-                $this['extensions']->get('system')->enable();
-
+                throw new Exception($message);
             } else {
 
                 $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
