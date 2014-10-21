@@ -198,6 +198,8 @@ class PostController extends Controller
                 $post->setTitle($post->getTitle().' - '.__('Copy'));
 
                 $this->posts->save($post);
+
+                $this->posts->updateCommentInfo($post->getId());
             }
         }
 
