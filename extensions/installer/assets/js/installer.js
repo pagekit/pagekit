@@ -77,15 +77,17 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
 
             frm.parent().removeClass(this.resetanims);
 
-            var displayDbError = function(msg) {
+            function displayDbError(msg) {
                 if (!frm.find('.uk-alert-danger').length) {
                     frm.prepend('<div class="uk-alert uk-alert-danger uk-margin"><p>' + msg + '</p></div>');
                 } else {
                     frm.find('.uk-alert-danger').find('p').html(msg);
                 }
 
-                frm.parent().removeClass("uk-animation-shake").width(); // prepare for animation
-                frm.parent().addClass("uk-animation-shake");
+                // shake the installer
+                frm.parent()
+                    .removeClass("uk-animation-shake")
+                    .addClass("uk-animation-shake");
             };
 
             $.post(frm.attr('action'), frm.serialize(), function(data) {
