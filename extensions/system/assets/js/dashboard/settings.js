@@ -14,7 +14,7 @@ require(['jquery', 'system', 'uikit!nestable', 'rowselect', 'domReady!'], functi
     })
 
     // save widgets order on nestable change
-    .on('nestable-change', 'ul.uk-nestable', function(e) {
+    .on('uk.nestable.change', 'ul.uk-nestable', function(e) {
         $.post(params.reorder, $.extend({order: $(this).data('nestable').serialize()}, system.csrf.params), function(response) {
             uikit.notify(response.message || 'Widgets order updated', 'success');
         }).fail(function() {

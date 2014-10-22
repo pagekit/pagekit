@@ -32,7 +32,7 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'gravatar', 'domReady!'], fu
     });
 
     // pagination
-    pagination.on('uk-select-page', function(e, index) {
+    pagination.on('uk.pagination.select', function(e, index) {
         page.val(index);
 
         $.post(form.attr('action'), form.serialize(), function(data) {

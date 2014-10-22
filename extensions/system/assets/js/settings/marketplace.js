@@ -105,7 +105,7 @@ define('marketplace', ['jquery', 'system', 'tmpl!marketplace.table,marketplace.d
             pagination = $('.uk-pagination', container);
 
             if (pagination.length && data.pages > 1) {
-                uikit.pagination(pagination.on('uk-select-page', function(e, page){
+                uikit.pagination(pagination.on('uk.pagination.select', function(e, page){
                     queryMarketplace(null, {'page': page});
                 }), {'pages': data.pages, 'currentPage': data.page + 1});
             }

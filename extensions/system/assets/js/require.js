@@ -36,7 +36,7 @@ var require = (function(win, doc) {
                     },
                     config: {
                         'uikit': {
-                            base: 'vendor/assets/uikit/'
+                            base: 'vendor/assets/uikit/js'
                         },
                         'tmpl': {
                             url: url + '/system/tmpl/'
