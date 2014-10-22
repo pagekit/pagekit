@@ -25,7 +25,7 @@ require(['jquery', 'system', 'uikit!nestable', 'rowselect', 'domReady!'], functi
     })
 
     // save menu item order on nestable change
-    .on('nestable-change', 'ul.uk-nestable', function() {
+    .on('uk.nestable.change', 'ul.uk-nestable', function() {
         $.post(form.attr('action'), $.extend({order: $(this).data('nestable').list()}, system.csrf.params), function(data) {
             uikit.notify(data.message, 'success');
         }).fail(function() {

@@ -1,6 +1,6 @@
 <div id="{{service}}-container" name="service-container">
     <h2 class="pk-form-heading">{{service}}</h2>
-    <a class= "uk-close uk-close-alt uk-right remove" style="float:right" href="#"></a>
+    <a class= "uk-close uk-close-alt uk-float-right js-remove" href="#"></a>
 
     <p data-info="Google">@trans('<a href="%url%">Google API Console</a>', ['%url%' => 'https://console.developers.google.com'])</p>
     <p data-info="Amazon">@trans('<a href="%url%">Amazon</a>', ['%url%' => ''])</p>
@@ -8,13 +8,13 @@
     <div class="uk-form-row">
         <label for="client_id_{{service}}" class="uk-form-label">@trans('Client ID')</label>
         <div class="uk-form-controls">
-            <input id="client_id_{{service}}" class="uk-form-width-large client_id" type="text" name="option[system:oauth][{{service}}][client_id]" value="{{client_id}}">
+            <input id="client_id_{{service}}" class="uk-form-width-large js-client-id" type="text" name="option[system:oauth][{{service}}][client_id]" value="{{client_id}}">
         </div>
     </div>
     <div class="uk-form-row">
         <label for="client_secret_{{service}}" class="uk-form-label">@trans('Client Secret')</label>
         <div class="uk-form-controls">
-            <input id="client_secret_{{service}}" class="uk-form-width-large client_secret" type="text" name="option[system:oauth][{{service}}][client_secret]" value="{{client_secret}}">
+            <input id="client_secret_{{service}}" class="uk-form-width-large js-client-secret" type="text" name="option[system:oauth][{{service}}][client_secret]" value="{{client_secret}}">
         </div>
     </div>
     </br>
