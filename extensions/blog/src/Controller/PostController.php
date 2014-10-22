@@ -153,7 +153,7 @@ class PostController extends Controller
             }
 
             $data['date'] = $this['dates']->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
-            
+
             $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
             $this->posts->save($post, $data);
@@ -196,6 +196,7 @@ class PostController extends Controller
                 $post->setStatus(Post::STATUS_DRAFT);
                 $post->setSlug($post->getSlug());
                 $post->setTitle($post->getTitle().' - '.__('Copy'));
+                $post->setCommentCount(0);
 
                 $this->posts->save($post);
             }
