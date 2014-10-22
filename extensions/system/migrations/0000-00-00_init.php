@@ -14,7 +14,7 @@ return [
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'MENU_NAME');
+                $table->addUniqueIndex(['name'], 'SYSTEM_MENU_NAME');
             });
         }
 
@@ -42,7 +42,7 @@ return [
                 $table->addColumn('value', 'text');
                 $table->addColumn('autoload', 'boolean', ['default' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'OPTION_NAME');
+                $table->addUniqueIndex(['name'], 'SYSTEM_OPTION_NAME');
             });
         }
 
@@ -53,8 +53,8 @@ return [
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('permissions', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'ROLE_NAME');
-                $table->addIndex(['name', 'priority'], 'ROLE_NAME_PRIORITY');
+                $table->addUniqueIndex(['name'], 'SYSTEM_ROLE_NAME');
+                $table->addIndex(['name', 'priority'], 'SYSTEM_ROLE_NAME_PRIORITY');
             });
 
             $db->insert('@system_role', ['id' => RoleInterface::ROLE_ANONYMOUS, 'name' => 'Anonymous', 'priority' => 0]);
@@ -77,8 +77,8 @@ return [
                 $table->addColumn('source', 'string', ['length' => 255]);
                 $table->addColumn('alias', 'string', ['length' => 255]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['alias'], 'URL_ALIAS');
-                $table->addIndex(['source'], 'URL_ALIAS_SOURCE');
+                $table->addUniqueIndex(['alias'], 'SYSTEM_URL_ALIAS');
+                $table->addIndex(['source'], 'SYSTEM_URL_ALIAS_SOURCE');
             });
         }
 
@@ -97,8 +97,8 @@ return [
                 $table->addColumn('activation', 'string', ['length' => 255, 'notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['username'], 'USER_USERNAME');
-                $table->addUniqueIndex(['email'], 'USER_EMAIL');
+                $table->addUniqueIndex(['username'], 'SYSTEM_USER_USERNAME');
+                $table->addUniqueIndex(['email'], 'SYSTEM_USER_EMAIL');
             });
         }
 
@@ -123,7 +123,7 @@ return [
                 $table->addColumn('menu_items', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addIndex(['status', 'priority'], 'WIDGET_STATUS_PRIORITY');
+                $table->addIndex(['status', 'priority'], 'SYSTEM_WIDGET_STATUS_PRIORITY');
             });
         }
 

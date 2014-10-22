@@ -22,9 +22,9 @@ return [
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['slug'], 'POSTS_SLUG');
-                $table->addIndex(['title'], 'TITLE');
-                $table->addIndex(['user_id'], 'USER_ID');
+                $table->addUniqueIndex(['slug'], 'BLOG_POST_SLUG');
+                $table->addIndex(['title'], 'BLOG_POST_TITLE');
+                $table->addIndex(['user_id'], 'BLOG_POST_USER_ID');
             });
         }
 
@@ -42,11 +42,11 @@ return [
                 $table->addColumn('content', 'text');
                 $table->addColumn('status', 'smallint');
                 $table->setPrimaryKey(['id']);
-                $table->addIndex(['author'], 'AUTHOR');
-                $table->addIndex(['created'], 'CREATED');
-                $table->addIndex(['status'], 'STATUS');
-                $table->addIndex(['post_id'], 'POST_ID');
-                $table->addIndex(['post_id', 'status'], 'POST_ID_STATUS');
+                $table->addIndex(['author'], 'BLOG_COMMENT_AUTHOR');
+                $table->addIndex(['created'], 'BLOG_COMMENT_CREATED');
+                $table->addIndex(['status'], 'BLOG_COMMENT_STATUS');
+                $table->addIndex(['post_id'], 'BLOG_COMMENT_POST_ID');
+                $table->addIndex(['post_id', 'status'], 'BLOG_COMMENT_POST_ID_STATUS');
             });
         }
 
