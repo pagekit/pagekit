@@ -1,6 +1,6 @@
 <div id="{{service}}-container" name="service-container">
     <h2 class="pk-form-heading">{{service}}</h2>
-    <a class= "uk-close uk-close-alt uk-right remove" style="float:right" href="#"></a>
+    <a class= "uk-close uk-close-alt uk-float-right remove" href="#"></a>
 
     <p data-info="Google">@trans('<a href="%url%">Google API Console</a>', ['%url%' => 'https://console.developers.google.com'])</p>
     <p data-info="Amazon">@trans('<a href="%url%">Amazon</a>', ['%url%' => ''])</p>
