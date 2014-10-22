@@ -1,5 +1,7 @@
 @script('blog.post-comments', 'extension://blog/assets/js/comment/post.js', 'jquery')
 
+@if ($app.user.hasAccess('blog: view comments'))
+
 <div id="comments" class="js-comments uk-margin">
 
     @if ($post.commentCount)
@@ -20,3 +22,13 @@
     @endif
 
 </div>
+
+@elseif ($app.user.authenticated)
+
+    <p>@trans('You are not allowed to view comments.')</p>
+
+@else
+
+    <p>@trans('Please login to view comments.')</p>
+
+@endif
