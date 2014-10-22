@@ -57,11 +57,17 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
         dropdown  = $("#oauth-service-dropdown");
 
     $.each(oauthData, function (service, data) {
+        var li;
+
         data.service = service;
+        dropdown.append(li = $('<li id="'+data.service+'_link"><a href="#">'+data.service+'</a></li>').click(function() {
+            $(this).hide();
+            appendService(data);
+        }));
+
         if ('client_id' in data) {
             appendService(data);
-        } else {
-            appendList(data);
+            li.hide();
         }
     });
 
@@ -85,16 +91,7 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
        $(".remove", container).click(function (e) {
            e.preventDefault();
            $(this).parent().remove();
-           appendList(data);
+           $("#"+data.service+"_link").show();
        });
     }
-
-    function appendList (data)
-    {
-      dropdown.append($('<li><a href="#">'+data.service+'</a></li>').click(function() {
-          $(this).remove();
-          appendService(data);
-      }));
-    }
-
 });
