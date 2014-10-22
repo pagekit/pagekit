@@ -74,7 +74,7 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
     $("form").submit(function (e) {
         e.preventDefault();
         $.each($(this).find("[name='service-container']"), function() {
-            if (!$(this).find(".client_id").val() && !$(this).find(".client_secret").val()) {
+            if (!$(this).find(".js-client-id").val() && !$(this).find(".js-client-secret").val()) {
                 $(this).remove();
             }
         });
@@ -88,7 +88,7 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
        $("#"+data.service+"-container", list).remove();
        list.append(container = $(tmpl.render('settings.oauth', data)));
        $("[data-info][data-info!='"+data.service+"']", container).remove();
-       $(".remove", container).click(function (e) {
+       $(".js-remove", container).click(function (e) {
            e.preventDefault();
            $(this).parent().remove();
            $("#"+data.service+"_link").show();
