@@ -28,7 +28,7 @@ class OAuthController extends Controller
         try {
 
             if (!$service = $this['oauth']->createService($provider, [], new Memory)) {
-                throw new \Exception("Provider not configured");
+                throw new \Exception("Provider not configured.");
             }
 
             switch ($service::OAUTH_VERSION) {
@@ -47,7 +47,7 @@ class OAuthController extends Controller
 
                     if(!$token->getAccessToken())
                     {
-                        throw new \Exception("Couldn't retrieve token");
+                        throw new \Exception("Couldn't retrieve token.");
                     }
 
                     break;

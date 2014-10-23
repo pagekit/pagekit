@@ -257,7 +257,7 @@ class OAuthHelper implements \ArrayAccess
         $provider = ucfirst(strtolower($provider));
 
         if (!$this->isConfigured($provider)) {
-            throw new \Exception(ucfirst($provider) . " OAuth not configured", 1);
+            throw new \Exception(ucfirst($provider) . " OAuth not configured.", 1);
         }
 
         $provider = $this->getConfig($provider);
