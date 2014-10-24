@@ -1,18 +1,17 @@
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-26 14:47+0400\n"
-"Last-Translator: Alex <admin@pagekitcommunity.ru>\n"
-"Language-Team: Pagekit Russian Comminity <admin@pagekitcommunity.ru>\n"
-"Language: ru_RU\n"
+"PO-Revision-Date: 2014-10-24 13:11+0000\n"
+"Last-Translator: Florian <florianletsch@gmail.com>\n"
+"Language-Team: Russian (Russia) (http://www.transifex.com/projects/p/pagekit-cms/language/ru_RU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
 #: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
@@ -88,9 +87,7 @@ msgstr "Обновить Pagekit"
 msgid ""
 "Pagekit has been updated! Before we send you on your way, we have to update "
 "your database to the newest version."
-msgstr ""
-"Pagekit был обновлен! Прежде чем идти дальше, мы должны обновить базу данных "
-"до последней версии."
+msgstr "Pagekit был обновлен! Прежде чем идти дальше, мы должны обновить базу данных до последней версии."
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -189,9 +186,7 @@ msgstr "Псевдоним"
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
-msgstr ""
-"Используйте относительный путь. Пример: <code>about</code>. Не добавляйте "
-"слеш в конце!"
+msgstr "Используйте относительный путь. Пример: <code>about</code>. Не добавляйте слеш в конце!"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
@@ -306,20 +301,15 @@ msgstr "Количество пользователей"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
 msgid ""
-"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users"
-"% registered users"
-msgstr ""
-"{0} Нет зарегистрированных пользователей|{1} Последний %users% "
-"зарегистрированный пользователь|]1,Inf[ Последние %users% зарегистрированные "
-"пользователи"
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} Нет зарегистрированных пользователей|{1} Последний %users% зарегистрированный пользователь|]1,Inf[ Последние %users% зарегистрированные пользователи"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
-msgstr ""
-"{0} Нет авторизированных пользователей|{1} %users% пользователь "
-"авторизирован|]1,Inf[ %users% пользователей авторизировано"
+msgstr "{0} Нет авторизированных пользователей|{1} %users% пользователь авторизирован|]1,Inf[ %users% пользователей авторизировано"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
@@ -327,8 +317,7 @@ msgstr "Местоположение"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:10
 msgid "Enter the name of the city you want to get weather information for."
-msgstr ""
-"Введите название города, для которого будет отображаться информация о погоде."
+msgstr "Введите название города, для которого будет отображаться информация о погоде."
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"
@@ -384,9 +373,7 @@ msgstr "Все"
 #: extensions/system/views/admin/themes/index.razr:34
 msgid ""
 "An error occurred in retrieving update information. Please try again later."
-msgstr ""
-"Произошла ошибка при получении информации об обновлении. Пожалуйста, "
-"повторите попытку позже."
+msgstr "Произошла ошибка при получении информации об обновлении. Пожалуйста, повторите попытку позже."
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
@@ -409,9 +396,7 @@ msgstr "Область загрузки"
 msgid ""
 "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
 "upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
-"Перетащите файлы сюда или <a class=\"uk-form-file\">выберите один<input "
-"class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Перетащите файлы сюда или <a class=\"uk-form-file\">выберите один<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
@@ -420,8 +405,7 @@ msgstr "Расширений не найдено."
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
 msgid "Cannot connect to the marketplace. Please try again later."
-msgstr ""
-"Не удается подключиться к магазину. Пожалуйста, повторите попытку позже."
+msgstr "Не удается подключиться к магазину. Пожалуйста, повторите попытку позже."
 
 #: extensions/system/views/admin/extensions/table.razr:4
 #: extensions/system/views/admin/user/edit.razr:43
@@ -738,7 +722,7 @@ msgstr "С адреса"
 
 #: extensions/system/views/admin/settings/settings.razr:74
 msgid "From Name"
-msgstr "Адрес отправителя"
+msgstr "Имя отправителя"
 
 #: extensions/system/views/admin/settings/settings.razr:80
 msgid "Mailer"
@@ -770,9 +754,14 @@ msgstr "Пароль SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
 #: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
 msgstr "Показать"
@@ -913,10 +902,7 @@ msgid ""
 "You have the latest version of Pagekit. You do not need to update. However, "
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
-msgstr ""
-"Установлена последняя версия Pagekit. Обновление не требуется. Тем не менее, "
-"если вы хотите переустановить версию %version%, вы можете сделать это "
-"автоматически или загрузить пакет и заново произвести установку вручную."
+msgstr "Установлена последняя версия Pagekit. Обновление не требуется. Тем не менее, если вы хотите переустановить версию %version%, вы можете сделать это автоматически или загрузить пакет и заново произвести установку вручную."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
@@ -924,8 +910,7 @@ msgstr "Переустановить"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
-msgstr ""
-"Не удается подключиться к серверу. Пожалуйста, повторите попытку позже."
+msgstr "Не удается подключиться к серверу. Пожалуйста, повторите попытку позже."
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
@@ -1056,14 +1041,10 @@ msgstr "Образец"
 #: extensions/system/views/admin/widgets/edit.razr:52
 msgid ""
 "Enter one page path per line. The \"*\" character is a wildcard. Exclude "
-"pages by prepending an exclamation mark to the path. Example paths: \"blog\" "
-"for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
 "exclude the blog."
-msgstr ""
-"Введите путь к странице одной строкой. Символ \"*\" можно использовать как "
-"маску. Для исключения страниц добавьте восклицательный знак в начала пути. "
-"Пример: \"blog\"для страницы блога, \"blog/*\" для разделов блога или \"!blog"
-"\" если вы не хотите включать страницу блогов."
+msgstr "Введите путь к странице одной строкой. Символ \"*\" можно использовать как маску. Для исключения страниц добавьте восклицательный знак в начала пути. Пример: \"blog\"для страницы блога, \"blog/*\" для разделов блога или \"!blog\" если вы не хотите включать страницу блогов."
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
@@ -1190,17 +1171,13 @@ msgstr "Список изменений"
 msgid ""
 "The checksum of the uploaded package does not match the one from the "
 "marketplace. The file might be manipulated."
-msgstr ""
-"Контрольная сумма загружаемого пакета неверная (не соответствует данным "
-"Магазина). Файл может содержать вредоносный код."
+msgstr "Контрольная сумма загружаемого пакета неверная (не соответствует данным Магазина). Файл может содержать вредоносный код."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
 msgid ""
 "There is an update available for the uploaded package. Please consider "
 "installing it instead."
-msgstr ""
-"Для загружаемого пакета доступны обновления. Рекомендуется установить данный "
-"пакет из Магазина."
+msgstr "Для загружаемого пакета доступны обновления. Рекомендуется установить данный пакет из Магазина."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
@@ -1249,16 +1226,12 @@ msgstr "Здравствуйте!"
 msgid ""
 "A new user has registered at %site% and requests that you approve his "
 "account."
-msgstr ""
-"На сайте %site% зарегистрирован новый пользователь. Необходимо одобрить его "
-"аккаунт."
+msgstr "На сайте %site% зарегистрирован новый пользователь. Необходимо одобрить его аккаунт."
 
 #: extensions/system/views/user/mails/approve.razr:13
 msgid ""
 "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
-msgstr ""
-"Информация о аккаунте:<br><br>Имя: %name%<br>Имя пользователя: %username"
-"%<br>Email: %email%"
+msgstr "Информация о аккаунте:<br><br>Имя: %name%<br>Имя пользователя: %username%<br>Email: %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
@@ -1270,9 +1243,7 @@ msgstr "Кто-то запросил сброс пароля для аккаун
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"Если это ошибка и вы не запрашивали сброс пароля, то просто проигнорируйте "
-"это письмо."
+msgstr "Если это ошибка и вы не запрашивали сброс пароля, то просто проигнорируйте это письмо."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
@@ -1287,9 +1258,7 @@ msgstr "Здравствуйте, %name%!"
 msgid ""
 "Thank you for registering at %site%! Your account has been successfully "
 "created and must be verified before you can use it."
-msgstr ""
-"Спасибо за регистрацию на сайте %site%! Ваш аккаунт успешно создан и ожидает "
-"одобрения администратором."
+msgstr "Спасибо за регистрацию на сайте %site%! Ваш аккаунт успешно создан и ожидает одобрения администратором."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
@@ -1332,9 +1301,7 @@ msgstr "Забыли пароль"
 msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
-msgstr ""
-"Пожалуйста, укажите имя пользователя или email. Мы отправим вам ссылку для "
-"создания нового пароля. "
+msgstr "Пожалуйста, укажите имя пользователя или email. Мы отправим вам ссылку для создания нового пароля. "
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
@@ -1543,9 +1510,9 @@ msgid "Core extensions may not be enabled."
 msgstr "Расширения ядра не могут быть включены."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
-msgid "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr ""
-"Не удается активировать расширение.<br>Расширение вызвало фатальную ошибку."
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
+msgstr "Не удается активировать расширение.<br>Расширение вызвало фатальную ошибку."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
 msgid "Unable to enable extension \"%name%\"."
@@ -1624,9 +1591,7 @@ msgstr "Недопустимый url-адрес."
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
 "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
-msgstr ""
-"{0} Пункты меню не удалены.|{1} Пункт меню удален.|]1,Inf[ Пункты меню "
-"удалены."
+msgstr "{0} Пункты меню не удалены.|{1} Пункт меню удален.|]1,Inf[ Пункты меню удалены."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
@@ -1688,8 +1653,7 @@ msgstr "Псевдоним создан."
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr ""
-"{0} Псевдоним не удален.|{1} Псевдоним удален.|]1,Inf[ Псевдонимы удалены."
+msgstr "{0} Псевдоним не удален.|{1} Псевдоним удален.|]1,Inf[ Псевдонимы удалены."
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
@@ -3696,9 +3660,7 @@ msgstr "Регистрация не удалась"
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
-msgstr ""
-"Ваш аккаунт успешно создан. Завершите регистрацию, перейдя по ссылке в "
-"отправленном письме."
+msgstr "Ваш аккаунт успешно создан. Завершите регистрацию, перейдя по ссылке в отправленном письме."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
@@ -3719,9 +3681,7 @@ msgstr "Неверный ключ."
 msgid ""
 "Your email has been verified. Once an administrator approves your account, "
 "you will be notified by email."
-msgstr ""
-"Ваш email был проверен. После одобрения вашего аккаунта администратором, вы "
-"будете уведомлены по проверенному адресу."
+msgstr "Ваш email был проверен. После одобрения вашего аккаунта администратором, вы будете уведомлены по проверенному адресу."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
 msgid ""
@@ -3826,9 +3786,7 @@ msgstr "Невозможно удалить себя."
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
-"{0} Пользователь не удалён.|{1} Пользователь удалён.|]1,Inf[ Пользователи "
-"удалены."
+msgstr "{0} Пользователь не удалён.|{1} Пользователь удалён.|]1,Inf[ Пользователи удалены."
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."

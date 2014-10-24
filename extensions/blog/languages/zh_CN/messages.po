@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-08-05 15:57+0000\n"
+"PO-Revision-Date: 2014-10-05 04:55+0000\n"
 "Last-Translator: Weiyu Weng <467055732@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/pagekit-cms/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -315,7 +315,7 @@ msgstr "{0} 没有文章被复制 |{1} 篇文章被复制|]1,Inf[ 篇文章被�
 
 #: extensions/blog/src/Controller/PostController.php:212
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
-msgstr "{0} 没有文章被发布 |{1} 篇文章被发布|]1,Inf[ 篇文章被发布"
+msgstr "{0} 没有文章被发布|{1} 篇文章被发布|]1,Inf[ 篇文章被发布"
 
 #: extensions/blog/src/Controller/PostController.php:214
 msgid ""

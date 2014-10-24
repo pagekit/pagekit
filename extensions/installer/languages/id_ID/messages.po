@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-08-15 11:14+0000\n"
+"PO-Revision-Date: 2014-09-24 10:29+0000\n"
 "Last-Translator: eantz <e_antz@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/pagekit-cms/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Tidak dapat menulis konfigurasi"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr ""
+msgstr "Hak yang diperlukan tidak ditemukan di DB user"
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"

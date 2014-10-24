@@ -1,18 +1,18 @@
+# 
+# Translators:
+# Alexander Smolenskyi <smolenskyisasha@yandex.ua>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-26 13:54+0200\n"
-"Last-Translator: Назар <admin@localuk.org.ua>\n"
-"Language-Team: LocalUK <admin@localuk.org.ua>\n"
-"Language: uk_UA\n"
+"PO-Revision-Date: 2014-10-24 13:08+0000\n"
+"Last-Translator: Florian <florianletsch@gmail.com>\n"
+"Language-Team: Ukrainian (Ukraine) (http://www.transifex.com/projects/p/pagekit-cms/language/uk_UA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Language: uk_UA\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
 #: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
@@ -88,9 +88,7 @@ msgstr "Оновити Pagekit"
 msgid ""
 "Pagekit has been updated! Before we send you on your way, we have to update "
 "your database to the newest version."
-msgstr ""
-"Pagekit було оновлено! Перш ніж йти далі, ми повинні оновити базу даних до "
-"останньої версії."
+msgstr "Pagekit було оновлено! Перш ніж йти далі, ми повинні оновити базу даних до останньої версії."
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -189,9 +187,7 @@ msgstr "Псевдонім"
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
-msgstr ""
-"Використовуйте відносний шлях. Приклад: <code>about</code>. Не додавайте "
-"слеш у кінці!"
+msgstr "Використовуйте відносний шлях. Приклад: <code>about</code>. Не додавайте слеш у кінці!"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
@@ -306,19 +302,15 @@ msgstr "Кількість користувачів"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
 msgid ""
-"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users"
-"% registered users"
-msgstr ""
-"{0} Немає зареєстрованих користувачів|{1} Останній %users% зареєстрований "
-"користувач|]1,Inf[ Останні %users% зареєстровані користувачі"
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} Немає зареєстрованих користувачів|{1} Останній %users% зареєстрований користувач|]1,Inf[ Останні %users% зареєстровані користувачі"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
-msgstr ""
-"{0} Немає авторизованих користувачів|{1} %users% користувач авторизований|]1,"
-"Inf[ %users% користувачів авторизовано"
+msgstr "{0} Немає авторизованих користувачів|{1} %users% користувач авторизований|]1,Inf[ %users% користувачів авторизовано"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
@@ -353,7 +345,7 @@ msgstr "Не вдалося отримати дані про погоду."
 #: extensions/system/views/admin/themes/index.razr:12
 #: extensions/system/views/tmpl/marketplace.details.razr:5
 msgid "Installed"
-msgstr "Установлені"
+msgstr "Встановлені"
 
 #: extensions/system/views/admin/extensions/index.razr:13
 #: extensions/system/views/admin/themes/index.razr:13
@@ -365,7 +357,7 @@ msgstr "Оновлення"
 #: extensions/system/views/tmpl/marketplace.details.razr:8
 #: extensions/system/views/tmpl/package.upload.razr:35
 msgid "Install"
-msgstr "Установити"
+msgstr "Встановити"
 
 #: extensions/system/views/admin/extensions/index.razr:15
 #: extensions/system/views/admin/themes/index.razr:15
@@ -382,9 +374,7 @@ msgstr "Усе"
 #: extensions/system/views/admin/themes/index.razr:34
 msgid ""
 "An error occurred in retrieving update information. Please try again later."
-msgstr ""
-"Виникла помилка при отриманні інформації про оновлення. Будь ласка, "
-"повторіть спробу пізніше."
+msgstr "Виникла помилка при отриманні інформації про оновлення. Будь ласка, спробуйте ще раз пізніше."
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
@@ -407,9 +397,7 @@ msgstr "Область завантаження"
 msgid ""
 "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
 "upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
-"Перетягніть файли сюди або <a class=\"uk-form-file\">оберіть один<input "
-"class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Перетягніть файли сюди або <a class=\"uk-form-file\">оберіть один<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
@@ -418,8 +406,7 @@ msgstr "Розширень не знайдено."
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
 msgid "Cannot connect to the marketplace. Please try again later."
-msgstr ""
-"Не вдається підключитися до крамниці. Будь ласка, повторіть спробу пізніше."
+msgstr "Не вдається підключитися до крамниці. Будь ласка, спробуйте ще раз пізніше."
 
 #: extensions/system/views/admin/extensions/table.razr:4
 #: extensions/system/views/admin/user/edit.razr:43
@@ -768,9 +755,14 @@ msgstr "Пароль SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
 #: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
 msgstr "Показати"
@@ -831,8 +823,7 @@ msgstr "Відкрита реєстрація"
 
 #: extensions/system/views/admin/settings/settings.razr:192
 msgid "Guests, but administrator approval is required"
-msgstr ""
-"Відкрита реєстрація, але адміністратор повинен схвалити обліковий запис."
+msgstr "Відкрита реєстрація, але адміністратор повинен схвалити обліковий запис."
 
 #: extensions/system/views/admin/settings/settings.razr:197
 msgid "Verification"
@@ -872,11 +863,11 @@ msgstr "Розробка"
 
 #: extensions/system/views/admin/settings/settings.razr:244
 msgid "Enable debug mode"
-msgstr "Увімкнути Debug-режим"
+msgstr "Увімкнути режим налагодження системи"
 
 #: extensions/system/views/admin/settings/settings.razr:247
 msgid "Enable debug toolbar"
-msgstr "Увімкнути Debug-панель"
+msgstr "Увімкнути панель налагодження системи"
 
 #: extensions/system/views/admin/settings/settings.razr:250
 msgid "Please enable the SQLite database extension."
@@ -912,19 +903,15 @@ msgid ""
 "You have the latest version of Pagekit. You do not need to update. However, "
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
-msgstr ""
-"Установлена остання версія Pagekit. Оновлення не потрібне. Однак, якщо Ви "
-"хочете перевстановити версію %version%, Ви можете зробити це автоматично або "
-"завантажити пакет і наново здійснити установлення вручну."
+msgstr "Встановлена остання версія Pagekit. Оновлення не потрібне. Однак, якщо Ви хочете перевстановити версію %version%, Ви можете зробити це автоматично або завантажити пакет і наново здійснити встановлення вручну."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
-msgstr "Переустановити"
+msgstr "Перевстановити"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
-msgstr ""
-"Не вдається підключитися до сервера. Будь ласка, повторіть спробу пізніше."
+msgstr "Не вдається підключитися до сервера. Будь ласка, спробуйте ще раз пізніше."
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
@@ -1002,7 +989,7 @@ msgstr "Активувати"
 
 #: extensions/system/views/admin/user/index.razr:16
 msgid "Block"
-msgstr "Заблкувати"
+msgstr "Заблокувати"
 
 #: extensions/system/views/admin/user/index.razr:26
 #: extensions/system/views/admin/widgets/index.razr:37
@@ -1055,14 +1042,10 @@ msgstr "Зразок"
 #: extensions/system/views/admin/widgets/edit.razr:52
 msgid ""
 "Enter one page path per line. The \"*\" character is a wildcard. Exclude "
-"pages by prepending an exclamation mark to the path. Example paths: \"blog\" "
-"for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
 "exclude the blog."
-msgstr ""
-"Уведіть шлях до сторінки одним рядком. Символ \"*\" можна використовувати як "
-"маску. Для виключення сторінок додайте знак оклику на початку шляху. "
-"Приклад: \"blog\"для сторінки блоґу, \"blog/*\" для розділів блоґу або \"!"
-"blog\", якщо Ви не хочете включати сторінку блоґів."
+msgstr "Введіть шлях до сторінки одним рядком. Символ \"*\" можна використовувати як маску. Для виключення сторінок додайте знак оклику на початку шляху. Приклад: \"blog\"для сторінки блоґу, \"blog/*\" для розділів блоґу або \"!blog\", якщо Ви не хочете включати сторінку блоґів."
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
@@ -1092,7 +1075,7 @@ msgstr "- Тип -"
 
 #: extensions/system/views/admin/widgets/index.razr:109
 msgid "- Assign -"
-msgstr "- Приначити-"
+msgstr "- Призначити-"
 
 #: extensions/system/views/admin/widgets/index.razr:117
 msgid "Extension not loaded"
@@ -1189,17 +1172,13 @@ msgstr "Список змін"
 msgid ""
 "The checksum of the uploaded package does not match the one from the "
 "marketplace. The file might be manipulated."
-msgstr ""
-"Контрольна сума пакета, що завантажується неправильна (не відповідає даним "
-"Крамниці). Файл може містити шкідливий код."
+msgstr "Контрольна сума пакета, що завантажується неправильна (не відповідає даним Крамниці). Файл може містити шкідливий код."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
 msgid ""
 "There is an update available for the uploaded package. Please consider "
 "installing it instead."
-msgstr ""
-"Для пакету, що завантажується доступні оновлення. Рекомендується установити "
-"цей пакет з Крамниці."
+msgstr "Для пакету, що завантажується доступні оновлення. Рекомендується установити цей пакет з Крамниці."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
@@ -1248,16 +1227,12 @@ msgstr "Привіт!"
 msgid ""
 "A new user has registered at %site% and requests that you approve his "
 "account."
-msgstr ""
-"На сайті %site% зареєстрований новий користувач. необхідно схвалити його "
-"акаунт."
+msgstr "На сайті %site% зареєстрований новий користувач. необхідно схвалити його акаунт."
 
 #: extensions/system/views/user/mails/approve.razr:13
 msgid ""
 "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
-msgstr ""
-"Інформація про акаунт:<br><br>Ім'я: %name%<br>Ім'я користувача: %username"
-"%<br>Email: %email%"
+msgstr "Інформація про акаунт:<br><br>Ім'я: %name%<br>Ім'я користувача: %username%<br>Email: %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
@@ -1269,9 +1244,7 @@ msgstr "Хтось надав запит на скидання паролю дл
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"Якщо це помилка і Ви не надавали запиту скидання паролю, то просто "
-"проігноруйте цей лист."
+msgstr "Якщо це помилка і Ви не надавали запиту скидання паролю, то просто проігноруйте цей лист."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
@@ -1286,9 +1259,7 @@ msgstr "Привіт, %name%!"
 msgid ""
 "Thank you for registering at %site%! Your account has been successfully "
 "created and must be verified before you can use it."
-msgstr ""
-"Дякуємо за реєстрацію на сайті %site%! Ваш акаунт вдало створено і очікує "
-"схвалення адміністратором."
+msgstr "Дякуємо за реєстрацію на сайті %site%! Ваш акаунт вдало створено і очікує схвалення адміністратором."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
@@ -1331,9 +1302,7 @@ msgstr "Забули пароль"
 msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
-msgstr ""
-"Будь ласка, укажіть ім'я користувача або email. Ми надішлемо Вам посилання "
-"для створення нового паролю. "
+msgstr "Будь ласка, укажіть ім'я користувача або email. Ми надішлемо Вам посилання для створення нового паролю. "
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
@@ -1542,9 +1511,9 @@ msgid "Core extensions may not be enabled."
 msgstr "Розширення ядра не можуть бути ввімкнені."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
-msgid "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr ""
-"Не вдається активувати розширення.<br>Розширення викликало фатальну помилку."
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
+msgstr "Не вдається активувати розширення.<br>Розширення викликало фатальну помилку."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
 msgid "Unable to enable extension \"%name%\"."
@@ -1623,9 +1592,7 @@ msgstr "Недопустима url-адреса."
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
 "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
-msgstr ""
-"{0} Пункти меню не вилучено.|{1} Пункт меню вилучено.|]1,Inf[ Пункти меню "
-"вилучено."
+msgstr "{0} Пункти меню не вилучено.|{1} Пункт меню вилучено.|]1,Inf[ Пункти меню вилучено."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
@@ -1687,9 +1654,7 @@ msgstr "Псевдонім створено."
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr ""
-"{0} Псевдонім не вилучено.|{1} Псевдонім вилучено.|]1,Inf[ Псевдоніми "
-"вилучено."
+msgstr "{0} Псевдонім не вилучено.|{1} Псевдонім вилучено.|]1,Inf[ Псевдоніми вилучено."
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
@@ -1721,8 +1686,7 @@ msgstr "Віджет збережено."
 
 #: extensions/system/src/System/Controller/DashboardController.php:160
 msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Віджети не вилучено.|{1} Віджет вилучено.|]1,Inf[ Віджети вилучені."
+msgstr "{0} Віджети не вилучено.|{1} Віджет вилучено.|]1,Inf[ Віджети вилучені."
 
 #: extensions/system/src/System/Controller/DashboardController.php:183
 msgid "Widgets reordered."
@@ -3697,9 +3661,7 @@ msgstr "Реєстрація не вдалася"
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
-msgstr ""
-"Ваш акаунт вдало створено. Завершіть реєстрацію, перейшовши за посиланням у "
-"надісланому листі."
+msgstr "Ваш акаунт вдало створено. Завершіть реєстрацію, перейшовши за посиланням у надісланому листі."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
@@ -3720,9 +3682,7 @@ msgstr "Неправильний ключ."
 msgid ""
 "Your email has been verified. Once an administrator approves your account, "
 "you will be notified by email."
-msgstr ""
-"Ваш email було перевірено. Після схвалення Вашого акаунту адміністратором, "
-"Ви будете сповіщені за перевіреною адресою."
+msgstr "Ваш email було перевірено. Після схвалення Вашого акаунту адміністратором, Ви будете сповіщені за перевіреною адресою."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
 msgid ""
@@ -3827,9 +3787,7 @@ msgstr "Неможливо вилучити себе."
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
-"{0} Користувача не вилучено.|{1} Користувача вилучено.|]1,Inf[ Користувачі "
-"вилучені."
+msgstr "{0} Користувача не вилучено.|{1} Користувача вилучено.|]1,Inf[ Користувачі вилучені."
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
@@ -3878,8 +3836,7 @@ msgstr "Неправильний ID віджета"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Віджети не вилучено.|{1} Віджет вилучено.|]1,Inf[ Віджети вилучено."
+msgstr "{0} Віджети не вилучено.|{1} Віджет вилучено.|]1,Inf[ Віджети вилучено."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."

@@ -1,12 +1,13 @@
 # 
 # Translators:
 # ozanmora <ozan.mora@gmail.com>, 2014
+# Taner YILMAZ <taner.yilmaz@live.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-08-08 13:16+0000\n"
-"Last-Translator: ozanmora <ozan.mora@gmail.com>\n"
+"PO-Revision-Date: 2014-10-16 10:39+0000\n"
+"Last-Translator: Taner YILMAZ <taner.yilmaz@live.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/pagekit-cms/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,16 +48,16 @@ msgstr "Yorum"
 
 #: extensions/blog/views/admin/comment/table.razr:8
 msgid "In response to %post%"
-msgstr ""
+msgstr " %post% yazıya cevaben"
 
 #: extensions/blog/views/admin/comment/table.razr:8
 msgid "In response to"
-msgstr ""
+msgstr "Karşılık ver"
 
 #: extensions/blog/views/admin/comment/table.razr:47
 #: extensions/blog/views/admin/post/table.razr:50
 msgid "{0} No pending|{1} One pending|]1,Inf[ %comments% pending"
-msgstr ""
+msgstr "{0} Bekleyen yok|{1} Bir tane bekleyen|]1,Inf[ %comments% bekliyor"
 
 #: extensions/blog/views/admin/link/blog.razr:5
 msgid "Posts View"
@@ -76,11 +77,11 @@ msgstr "Başlık Girin"
 
 #: extensions/blog/views/admin/post/edit.razr:22
 msgid "Excerpt"
-msgstr ""
+msgstr "Alıntı"
 
 #: extensions/blog/views/admin/post/edit.razr:24
 msgid "Enter Excerpt"
-msgstr ""
+msgstr "Alıntı Girin"
 
 #: extensions/blog/views/admin/post/edit.razr:43
 #: extensions/blog/views/admin/post/table.razr:8
@@ -89,11 +90,11 @@ msgstr "Yazar"
 
 #: extensions/blog/views/admin/post/edit.razr:53
 msgid "Publish on"
-msgstr ""
+msgstr "Yayınla"
 
 #: extensions/blog/views/admin/post/edit.razr:73
 msgid "Slug"
-msgstr ""
+msgstr "Takma Ad"
 
 #: extensions/blog/views/admin/post/edit.razr:96
 msgid "Enable Comments"
@@ -135,19 +136,19 @@ msgstr "Genel"
 
 #: extensions/blog/views/admin/settings.razr:28
 msgid "Permalink"
-msgstr ""
+msgstr "Kalıcı bağlantı"
 
 #: extensions/blog/views/admin/settings.razr:33
 msgid "Numeric"
-msgstr ""
+msgstr "Sayısal"
 
 #: extensions/blog/views/admin/settings.razr:33
 msgid "/blog/123"
-msgstr ""
+msgstr "/blog/123"
 
 #: extensions/blog/views/admin/settings.razr:39
 msgid "/blog/sample-post"
-msgstr ""
+msgstr "/blog/örnek-yazı"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "Day and name"
@@ -155,7 +156,7 @@ msgstr "Gün ve ad"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "/blog/2014/06/12/sample-post"
-msgstr ""
+msgstr "/blog/2014/06/12/örnek-yazı"
 
 #: extensions/blog/views/admin/settings.razr:51
 msgid "Month and name"
@@ -163,11 +164,11 @@ msgstr "Ay ve ad"
 
 #: extensions/blog/views/admin/settings.razr:51
 msgid "/blog/2014/06/sample-post"
-msgstr ""
+msgstr "/blog/2014/06/örnek-yazı"
 
 #: extensions/blog/views/admin/settings.razr:57
 msgid "Custom"
-msgstr ""
+msgstr "Özel"
 
 #: extensions/blog/views/admin/settings.razr:73
 msgid "Enable comments."
@@ -179,43 +180,43 @@ msgstr "Ad ve e-posta zorunludur."
 
 #: extensions/blog/views/admin/settings.razr:81
 msgid "Close comments on articles older than"
-msgstr ""
+msgstr "Bu tarihten önceki yazıları yoruma kapat:"
 
 #: extensions/blog/views/admin/settings.razr:82
 msgid "days."
-msgstr ""
+msgstr "gün."
 
 #: extensions/blog/views/admin/settings.razr:87
 msgid "Appearance"
-msgstr ""
+msgstr "Görünüm"
 
 #: extensions/blog/views/admin/settings.razr:91
 msgid "Show Avatars from Gravatar."
-msgstr ""
+msgstr "Gravatar profilini görüntüle"
 
 #: extensions/blog/views/admin/settings.razr:94
 msgid "Order comments by"
-msgstr ""
+msgstr "Yorumları Sırala"
 
 #: extensions/blog/views/admin/settings.razr:96
 msgid "latest last."
-msgstr ""
+msgstr "Son eklenen  sonda"
 
 #: extensions/blog/views/admin/settings.razr:97
 msgid "latest first."
-msgstr ""
+msgstr "Son eklenen önde"
 
 #: extensions/blog/views/admin/settings.razr:103
 msgid "Enable nested comments of"
-msgstr ""
+msgstr "İç içe yorumları etkinleştir"
 
 #: extensions/blog/views/admin/settings.razr:105
 msgid "levels deep."
-msgstr ""
+msgstr "derinlik seviyesi."
 
 #: extensions/blog/views/comment/comment.razr:13
 msgid "%date% at %time%"
-msgstr ""
+msgstr "%date% de %time%"
 
 #: extensions/blog/views/comment/comments.razr:5
 msgid "Comments (%count%)"
@@ -239,7 +240,7 @@ msgstr "Yorumu gönder"
 
 #: extensions/blog/views/comment/respond.razr:45
 msgid "You are not allowed to post comments."
-msgstr ""
+msgstr "Yorum gönderebilmek için izniniz yok"
 
 #: extensions/blog/views/comment/respond.razr:49
 msgid "Please login to leave a comment."
@@ -277,13 +278,13 @@ msgstr "Yorum oluşturuldu."
 
 #: extensions/blog/src/Controller/CommentController.php:177
 msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
-msgstr ""
+msgstr "{0} Silinmiş yorum yok.|{1} Yorum silindi.|]1,Inf[ Yorumlar silindi."
 
 #: extensions/blog/src/Controller/CommentController.php:196
 msgid ""
 "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
 "statuses updated."
-msgstr ""
+msgstr "{0} Durumu güncellenen yorum yok|{1} Yorum durumu güncellendi.|]1,Inf[ Yorum durumları güncellendi."
 
 #: extensions/blog/src/Controller/PostController.php:93
 msgid "Posts"
@@ -307,20 +308,20 @@ msgstr "Yazı oluşturuldu."
 
 #: extensions/blog/src/Controller/PostController.php:173
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
-msgstr ""
+msgstr "{0} Silinmiş yazı yok.|{1} Yazı silindi.|]1,Inf[ Yazılar silindi."
 
 #: extensions/blog/src/Controller/PostController.php:195
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
-msgstr ""
+msgstr "{0} Kopyalanan yazı yok.|{1} Yazı kopyalandı.|]1,Inf[ Yazılar kopyalandı."
 
 #: extensions/blog/src/Controller/PostController.php:212
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
-msgstr ""
+msgstr "{0} Yayınlanan yazı yok.|{1} Yazı yayınlandı.|]1,Inf[ Yazılar yayınlandı."
 
 #: extensions/blog/src/Controller/PostController.php:214
 msgid ""
 "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
-msgstr ""
+msgstr "{0} Yayınlanmamış yazı yok.|{1} Yazı yayından kaldırıldı.|]1,Inf[ Yazılar yayından kaldırıldı."
 
 #: extensions/blog/src/Controller/SiteController.php:64
 #: extensions/blog/src/Link/BlogLink.php:22
@@ -329,7 +330,7 @@ msgstr "Blog"
 
 #: extensions/blog/src/Controller/SiteController.php:93
 msgid "Please wait another %seconds% seconds before commenting again."
-msgstr ""
+msgstr "Lütfen tekrar yorum yazabilmek için %seconds% yani daha bekleyiniz."
 
 #: extensions/blog/src/Controller/SiteController.php:102
 msgid "Comments have been disabled for this post."
@@ -337,7 +338,7 @@ msgstr "Bu yazı için yorumlar devre dışı bırakıldı."
 
 #: extensions/blog/src/Controller/SiteController.php:111
 msgid "Please provide valid name and email."
-msgstr ""
+msgstr "Geçerli bir ad ve e-posta giriniz"
 
 #: extensions/blog/src/Controller/SiteController.php:133
 msgid "Thanks for commenting!"
@@ -353,7 +354,7 @@ msgstr "Yazı bulunamadı!"
 
 #: extensions/blog/src/Controller/SiteController.php:162
 msgid "Unable to access this post!"
-msgstr ""
+msgstr "Bu yazıya erişilemiyor!"
 
 #: extensions/blog/src/Entity/Comment.php:114
 msgid "Approved"
@@ -381,12 +382,12 @@ msgstr "Taslak"
 
 #: extensions/blog/src/Entity/Post.php:172
 msgid "Pending Review"
-msgstr ""
+msgstr "Bekleyen İnceleme"
 
 #: extensions/blog/src/Event/RouteListener.php:81
 msgid "Post with id \"%id%\" not found!"
-msgstr ""
+msgstr " \"%id%\" ID li yazı bulunamadı"
 
 #: extensions/blog/src/Event/RouteListener.php:106
 msgid "Post with slug \"%slug%\" not found!"
-msgstr ""
+msgstr "\"%slug%\"takma adlı yazı bulunamadı"

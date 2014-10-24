@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-09-15 10:40+0000\n"
+"PO-Revision-Date: 2014-09-23 05:36+0000\n"
 "Last-Translator: heinzawhtet <maungheinzawhtet@gmail.com>\n"
 "Language-Team: Burmese (Myanmar) (http://www.transifex.com/projects/p/pagekit-cms/language/my_MM/)\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "ပြန်စာ"
 
 #: extensions/blog/views/admin/comment/table.razr:6
 msgid "Comment"
-msgstr ""
+msgstr "ထင်မြင်ချက်များ"
 
 #: extensions/blog/views/admin/comment/table.razr:8
 msgid "In response to %post%"
@@ -52,7 +52,7 @@ msgstr "%post% နှင့်ပတ်သက်၍ ထင်မြင်ချ�
 
 #: extensions/blog/views/admin/comment/table.razr:8
 msgid "In response to"
-msgstr ""
+msgstr "၄င်းနှင့်ပတ်သက်၍ : "
 
 #: extensions/blog/views/admin/comment/table.razr:47
 #: extensions/blog/views/admin/post/table.razr:50
@@ -65,7 +65,7 @@ msgstr "ကြည့်ရှုမှုအကြိမ်"
 
 #: extensions/blog/views/admin/link/blog.razr:15
 msgid "Post"
-msgstr ""
+msgstr "Post"
 
 #: extensions/blog/views/admin/link/blog.razr:18
 msgid "- Select Post -"
@@ -90,11 +90,11 @@ msgstr "ရေးသားသူ"
 
 #: extensions/blog/views/admin/post/edit.razr:53
 msgid "Publish on"
-msgstr ""
+msgstr "တင်ခဲ့သောအချိန် :"
 
 #: extensions/blog/views/admin/post/edit.razr:73
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: extensions/blog/views/admin/post/edit.razr:96
 msgid "Enable Comments"
@@ -111,7 +111,7 @@ msgstr "တင်ရန်"
 
 #: extensions/blog/views/admin/post/index.razr:16
 msgid "Unpublish"
-msgstr ""
+msgstr "မတင်ရသေးပါ"
 
 #: extensions/blog/views/admin/post/index.razr:38
 msgid "No posts found."
@@ -136,7 +136,7 @@ msgstr "အထွေထွေ"
 
 #: extensions/blog/views/admin/settings.razr:28
 msgid "Permalink"
-msgstr ""
+msgstr "Permalink"
 
 #: extensions/blog/views/admin/settings.razr:33
 msgid "Numeric"
@@ -144,11 +144,11 @@ msgstr "ကိန်းဂဏန်း"
 
 #: extensions/blog/views/admin/settings.razr:33
 msgid "/blog/123"
-msgstr ""
+msgstr "/blog/123"
 
 #: extensions/blog/views/admin/settings.razr:39
 msgid "/blog/sample-post"
-msgstr ""
+msgstr "/blog/sample-post"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "Day and name"
@@ -156,15 +156,15 @@ msgstr "နေ့ရက်နှင့် နာမည်"
 
 #: extensions/blog/views/admin/settings.razr:45
 msgid "/blog/2014/06/12/sample-post"
-msgstr ""
+msgstr "/blog/2014/06/12/sample-post"
 
 #: extensions/blog/views/admin/settings.razr:51
 msgid "Month and name"
-msgstr ""
+msgstr "လ နှင့် နာမည်"
 
 #: extensions/blog/views/admin/settings.razr:51
 msgid "/blog/2014/06/sample-post"
-msgstr ""
+msgstr "/blog/2014/06/sample-post"
 
 #: extensions/blog/views/admin/settings.razr:57
 msgid "Custom"
@@ -180,11 +180,11 @@ msgstr "နာမည်နှင့် အီးမေလ်းလိုအပ�
 
 #: extensions/blog/views/admin/settings.razr:81
 msgid "Close comments on articles older than"
-msgstr ""
+msgstr "သတ်မှတ်ရက်ထပ် ကျော်သော Article ကို ၊ ထင်မြင်ချက် မပေးနိုင်ရန် ပိတ်ထားမည် :"
 
 #: extensions/blog/views/admin/settings.razr:82
 msgid "days."
-msgstr ""
+msgstr "နေ့ရက်များ"
 
 #: extensions/blog/views/admin/settings.razr:87
 msgid "Appearance"
@@ -208,19 +208,19 @@ msgstr "နောက်ဆုံးတင်တာ အရှေ့"
 
 #: extensions/blog/views/admin/settings.razr:103
 msgid "Enable nested comments of"
-msgstr ""
+msgstr "Enable nested comments of"
 
 #: extensions/blog/views/admin/settings.razr:105
 msgid "levels deep."
-msgstr ""
+msgstr "levels deep."
 
 #: extensions/blog/views/comment/comment.razr:13
 msgid "%date% at %time%"
-msgstr ""
+msgstr "%date% ၊ %time% တွင်"
 
 #: extensions/blog/views/comment/comments.razr:5
 msgid "Comments (%count%)"
-msgstr ""
+msgstr "ထင်မြင်ချက်များ (%count%)"
 
 #: extensions/blog/views/comment/respond.razr:3
 msgid "Leave a comment"
@@ -228,161 +228,161 @@ msgstr "ထင်မြင်ချက်ပေးရန်"
 
 #: extensions/blog/views/comment/respond.razr:11
 msgid "Logged in as %name%"
-msgstr ""
+msgstr "%name% အဖြစ်ဝင်ရောက်ထားပါသည်"
 
 #: extensions/blog/views/comment/respond.razr:15
 msgid "You are commenting as guest."
-msgstr ""
+msgstr "ဧည့်သည်တစ်ယောက်အနေနဲ့ ထင်မြင်ချက်ပေးနေသည်"
 
 #: extensions/blog/views/comment/respond.razr:33
 msgid "Submit comment"
-msgstr ""
+msgstr "ထင်မြင်ချက် တင်ရန်"
 
 #: extensions/blog/views/comment/respond.razr:45
 msgid "You are not allowed to post comments."
-msgstr ""
+msgstr "သင့်ကို ထင်မြင်ချက်ပေးရန် ခွင့်မပြုထားပါ"
 
 #: extensions/blog/views/comment/respond.razr:49
 msgid "Please login to leave a comment."
-msgstr ""
+msgstr "ထင်မြင်ချက်ပေးရန် Login ဝင်ရောက်ပါ"
 
 #: extensions/blog/views/post/index.razr:7
 msgid "Written by %name% on %date%"
-msgstr ""
+msgstr "%name% မှ %date% တွင်ရေးသားသည်"
 
 #: extensions/blog/views/post/index.razr:18
 msgid "Continue Reading"
-msgstr ""
+msgstr "ဆက်လက်ဖတ်ရှုရန်"
 
 #: extensions/blog/views/post/index.razr:20
 msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
-msgstr ""
+msgstr "{0} ထင်မြင်ချက်မရှိပါ|{1} ထင်မြင်ချက် %num% ခု|]1,Inf[ ထင်မြင်ချက် %num% ခု"
 
 #: extensions/blog/src/BlogExtension.php:39
 msgid ""
 "You've made some changes! Leaving the post without saving will discard all "
 "changes."
-msgstr ""
+msgstr "သင်ပြင်ထားတာတွေရှိပါတယ်။ မမှတ်ဘဲထွက်လိုက်မယ်ဆိုရင် ၊ ပြင်ထားတာတွေ ဆုံးရှုံးသွားပါလိမ့်မယ်။"
 
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments on %title%"
-msgstr ""
+msgstr "%title% နှင့်ပတ်သက်သော ထင်မြင်ချက်များ"
 
 #: extensions/blog/src/Controller/CommentController.php:157
 msgid "Comment saved."
-msgstr ""
+msgstr "ထင်မြင်ချက်ကို မှတ်ထားလိုက်ပါပြီ။"
 
 #: extensions/blog/src/Controller/CommentController.php:157
 msgid "Comment created."
-msgstr ""
+msgstr "ထင်မြင်ချက်ကို ထည့်ပေးပြီးသွားပါပြီ"
 
 #: extensions/blog/src/Controller/CommentController.php:177
 msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
-msgstr ""
+msgstr "{0} ထင်မြင်ချက် တစ်ခုမှ ဖျက်ထားခြင်းမရှိပါ|{1} ထင်မြင်ချက်တစ်ခု ဖျက်ထားသည်။|]1,Inf[ ခု ဖျက်ထားသည်။"
 
 #: extensions/blog/src/Controller/CommentController.php:196
 msgid ""
 "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment "
 "statuses updated."
-msgstr ""
+msgstr "{0} မည်သည့် ထင်မြင်ချက်ကိုမျှ ပြင်မထားပါ။|{1} ထင်မြင်ချက်တစ်ခုပြင်ထားသည်|]1,Inf[ ခုပြင်ထားသည်။"
 
 #: extensions/blog/src/Controller/PostController.php:93
 msgid "Posts"
-msgstr ""
+msgstr "Posts များ"
 
 #: extensions/blog/src/Controller/PostController.php:117
 msgid "Invalid post id."
-msgstr ""
+msgstr "Post ID မှားနေပါတယ်"
 
 #: extensions/blog/src/Controller/PostController.php:127
 msgid "Edit Post"
-msgstr ""
+msgstr "Post ပြင်ရန်"
 
 #: extensions/blog/src/Controller/PostController.php:152
 msgid "Post saved."
-msgstr ""
+msgstr "Post ကို မှတ်ထားလိုက်ပါပြီ"
 
 #: extensions/blog/src/Controller/PostController.php:152
 msgid "Post created."
-msgstr ""
+msgstr "Post ဖန်တီးပြီးသွားပါပြီ"
 
 #: extensions/blog/src/Controller/PostController.php:173
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
-msgstr ""
+msgstr "{0} ဖျက်ထားသော Post မရှိပါ။|{1} Post တစ်ခုဖျက်ထားသည်။|]1,Inf[ ခု ဖျက်ထားသည်"
 
 #: extensions/blog/src/Controller/PostController.php:195
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
-msgstr ""
+msgstr "{0} ကော်ပီကူးထားသော Post မရှိပါ။|{1} Post တစ်ခုကော်ပီ ကူးထားသည်။|]1,Inf[ ခု ကော်ပီကူးထားသည်"
 
 #: extensions/blog/src/Controller/PostController.php:212
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
-msgstr ""
+msgstr "{0} တင်ပြီးသား မရှိပါ။|{1} Post တစ်ခုတင်ထားသည်။|]1,Inf[ ခု တင်ပြီးပြီ"
 
 #: extensions/blog/src/Controller/PostController.php:214
 msgid ""
 "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
-msgstr ""
+msgstr "{0} မတင်ရသေးသော Post မရှိပါ။|{1} Post တစ်ခုမတင်ရသေးပါ။|]1,Inf[ ခု မတင်ရသေးပါ"
 
 #: extensions/blog/src/Controller/SiteController.php:64
 #: extensions/blog/src/Link/BlogLink.php:22
 msgid "Blog"
-msgstr ""
+msgstr "ဘလော့ဂ်"
 
 #: extensions/blog/src/Controller/SiteController.php:93
 msgid "Please wait another %seconds% seconds before commenting again."
-msgstr ""
+msgstr "ထင်မြင်ချက်ထပ်ပေးရန်အတွက် %seconds% စက္ကန့် စောင့်ပါ"
 
 #: extensions/blog/src/Controller/SiteController.php:102
 msgid "Comments have been disabled for this post."
-msgstr ""
+msgstr "၄င်း Post အတွက် ထင်မြင်ချက်ပေးခွင့် ပိတ်ထားသည်"
 
 #: extensions/blog/src/Controller/SiteController.php:111
 msgid "Please provide valid name and email."
-msgstr ""
+msgstr "အီးမေးလ်နှင့် နာမည်အမှန်ပေးပါ"
 
 #: extensions/blog/src/Controller/SiteController.php:133
 msgid "Thanks for commenting!"
-msgstr ""
+msgstr "ထင်မြင်ချက်ပေးတဲ့အတွက် ကျေးဇူးတင်ပါတယ်"
 
 #: extensions/blog/src/Controller/SiteController.php:145
 msgid "Whoops, something went wrong!"
-msgstr ""
+msgstr "တိန် ၊ တစ်ခုခုမှားနေပြီထင်တယ်"
 
 #: extensions/blog/src/Controller/SiteController.php:158
 msgid "Post not found!"
-msgstr ""
+msgstr "ရှာမတွေ့ပါ"
 
 #: extensions/blog/src/Controller/SiteController.php:162
 msgid "Unable to access this post!"
-msgstr ""
+msgstr "၄င်း Post ကို ဖွင့်၍မရပါ"
 
 #: extensions/blog/src/Entity/Comment.php:114
 msgid "Approved"
-msgstr ""
+msgstr "အတည်ပြုပြီး"
 
 #: extensions/blog/src/Entity/Comment.php:115
 msgid "Pending"
-msgstr ""
+msgstr "ဆိုင်းငံ့ထားသည်"
 
 #: extensions/blog/src/Entity/Comment.php:116
 msgid "Spam"
-msgstr ""
+msgstr "Spam"
 
 #: extensions/blog/src/Entity/Post.php:169
 msgid "Published"
-msgstr ""
+msgstr "တင္ၿပီး"
 
 #: extensions/blog/src/Entity/Post.php:170
 msgid "Unpublished"
-msgstr ""
+msgstr "မတင္ရေသးေသာ"
 
 #: extensions/blog/src/Entity/Post.php:171
 msgid "Draft"
-msgstr ""
+msgstr "အကြမ်း"
 
 #: extensions/blog/src/Entity/Post.php:172
 msgid "Pending Review"
-msgstr ""
+msgstr "စစ်စေးရန် ခေတ္တဆိုင်းငံ့ထားသည်"
 
 #: extensions/blog/src/Event/RouteListener.php:81
 msgid "Post with id \"%id%\" not found!"

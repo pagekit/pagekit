@@ -1,19 +1,17 @@
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
-"Language-Team: \n"
-"Language: fr\n"
+"PO-Revision-Date: 2014-08-01 13:25+0000\n"
+"Last-Translator: OliviaS <olivia@yootheme.com>\n"
+"Language-Team: French (France) (http://www.transifex.com/projects/p/pagekit-cms/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
+"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
 #: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
@@ -86,7 +84,9 @@ msgid "Update Pagekit"
 msgstr "Mettre à jour Pagekit"
 
 #: extensions/system/theme/templates/migration.razr:24
-msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
+msgid ""
+"Pagekit has been updated! Before we send you on your way, we have to update "
+"your database to the newest version."
 msgstr "Pagekit a bien été mis à jour ! Avant de vous laisser continuer, nous devons mettre à jour la base de donnée."
 
 #: extensions/system/theme/templates/migration.razr:26
@@ -183,7 +183,9 @@ msgid "Alias"
 msgstr "Alias"
 
 #: extensions/system/views/admin/aliases/edit.razr:16
-msgid "Use a relative path and don't add a trailing slash. For example: <code>about</code>"
+msgid ""
+"Use a relative path and don't add a trailing slash. For example: "
+"<code>about</code>"
 msgstr "Utilisez un chemin relatif et n'ajoutez pas de slash. Par exemple : <code>a-propos</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
@@ -298,11 +300,15 @@ msgid "Number of Users"
 msgstr "Nombre d'utilisateurs"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
-msgid "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
+msgid ""
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
 msgstr "{0} Aucun utilisateur enregistré|{1} Dernier utilisateur enregistré|]1,Inf[ %users% derniers utilisateurs enregistrés"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
-msgid "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in"
+msgid ""
+"{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
+"logged in"
 msgstr "{0} Aucun utilisateur connecté|{1} %users% utilisateur connecté|]1,Inf[ %users% utilisateurs connectés"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
@@ -365,7 +371,8 @@ msgstr "Tout"
 
 #: extensions/system/views/admin/extensions/index.razr:34
 #: extensions/system/views/admin/themes/index.razr:34
-msgid "An error occurred in retrieving update information. Please try again later."
+msgid ""
+"An error occurred in retrieving update information. Please try again later."
 msgstr "Une erreur est survenu durant la mise à jour des informations. Veuillez réessayer plus tard."
 
 #: extensions/system/views/admin/extensions/index.razr:38
@@ -386,7 +393,9 @@ msgstr "Zone de dépôt"
 
 #: extensions/system/views/admin/extensions/index.razr:48
 #: extensions/system/views/admin/themes/index.razr:48
-msgid "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgid ""
+"Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
+"upload-select\" type=\"file\" name=\"file\"></a>"
 msgstr "Déposez vos fichier ici ou <a class=\"uk-form-file\">sélectionnez en un<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
@@ -745,9 +754,14 @@ msgstr "Mot de passe SMTP"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
 #: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
 msgstr "Afficher"
@@ -884,7 +898,10 @@ msgid "You have the latest version of Pagekit."
 msgstr "Vous avez la dernière version de Pagekit."
 
 #: extensions/system/views/admin/settings/update.razr:30
-msgid "You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually."
+msgid ""
+"You have the latest version of Pagekit. You do not need to update. However, "
+"if you want to re-install version %version%, you can do so automatically or "
+"download the package and re-install manually."
 msgstr "Vous avez la dernière version de Pagekit. Vous n'avez rien besoin de mettre à jour. Mais si vous voulez réinstaller la version %version%, vous pouvez le faire automatiquement ou la télécharger et l'installer manuellement."
 
 #: extensions/system/views/admin/settings/update.razr:33
@@ -1022,7 +1039,11 @@ msgid "Pattern"
 msgstr "Motif"
 
 #: extensions/system/views/admin/widgets/edit.razr:52
-msgid "Enter one page path per line. The \"*\" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: \"blog\" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to exclude the blog."
+msgid ""
+"Enter one page path per line. The \"*\" character is a wildcard. Exclude "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"exclude the blog."
 msgstr "Entrez un chemin de page par ligne. Le caractère \"*\" est un caractère générique. Excluez des pages en préfixant leur chemin par un point d'exclamation. Exemples de chemins : \"blog\" pour la page du blog, \"blog/*\" pour les articles du blog ou \"!blog\" pour exclure le blog."
 
 #: extensions/system/views/admin/widgets/edit.razr:82
@@ -1147,11 +1168,15 @@ msgid "Changelog"
 msgstr "Journal des modifications"
 
 #: extensions/system/views/tmpl/package.upload.razr:4
-msgid "The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated."
+msgid ""
+"The checksum of the uploaded package does not match the one from the "
+"marketplace. The file might be manipulated."
 msgstr "La somme de contrôle du paquet transféré ne correspond pas à celle du marché. Le fichier est peut-être corrompu."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
-msgid "There is an update available for the uploaded package. Please consider installing it instead."
+msgid ""
+"There is an update available for the uploaded package. Please consider "
+"installing it instead."
 msgstr "Il y a une mise à jour disponible pour le paquet transféré. Vous devriez peut-être installer cette version à la place."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
@@ -1198,11 +1223,14 @@ msgid "Hello"
 msgstr "Bonjour"
 
 #: extensions/system/views/user/mails/approve.razr:12
-msgid "A new user has registered at %site% and requests that you approve his account."
+msgid ""
+"A new user has registered at %site% and requests that you approve his "
+"account."
 msgstr "Un nouvel utilisateur s'est inscrit sur %site% et nécessite que vous approuviez son compte."
 
 #: extensions/system/views/user/mails/approve.razr:13
-msgid "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
+msgid ""
+"User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
 msgstr "Détails de l'utilisateur :<br><br>Nom : %name%<br>Nom d'utilisateur : %username%<br>E-mail : %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
@@ -1227,7 +1255,9 @@ msgid "Hello %name%"
 msgstr "Bonjour %name%"
 
 #: extensions/system/views/user/mails/verification.razr:12
-msgid "Thank you for registering at %site%! Your account has been successfully created and must be verified before you can use it."
+msgid ""
+"Thank you for registering at %site%! Your account has been successfully "
+"created and must be verified before you can use it."
 msgstr "Merci pour votre inscription sur %site% ! Votre compte a été créé mais doit encore être validé avant que vous ne puissiez l'utiliser."
 
 #: extensions/system/views/user/mails/verification.razr:13
@@ -1268,7 +1298,9 @@ msgid "Forgot password"
 msgstr "Mot de passe oublié"
 
 #: extensions/system/views/user/reset/request.razr:5
-msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
 msgstr "Veuillez entrer votre nom d'utilisateur ou votre email. Vous allez recevoir un email incluant un lien afin de créer un nouveau mot de passe."
 
 #: extensions/system/views/widgets/login/edit.razr:4
@@ -1464,7 +1496,9 @@ msgid "Use the site in maintenance mode"
 msgstr "Utiliser le site en mode maintenance"
 
 #: extensions/system/languages/messages.php:45
-msgid "Warning: Give to trusted roles only; this permission has security implications."
+msgid ""
+"Warning: Give to trusted roles only; this permission has security "
+"implications."
 msgstr "Attention : Ne donner qu'aux rôles de confiance; cette permission a des implications sur la sécurité."
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
@@ -1476,7 +1510,8 @@ msgid "Core extensions may not be enabled."
 msgstr "Les extensions de base ne peuvent pas être activées."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
-msgid "Unable to activate extension.<br>The extension triggered a fatal error."
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
 msgstr "Impossible d'activer cette extension.<br>L'extension a causé une erreur fatale."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
@@ -1554,7 +1589,8 @@ msgid "Invalid url."
 msgstr "L'URL est invalide."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:144
-msgid "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
+msgid ""
+"{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
 msgstr "{0} Aucun élément de menu supprimé.|{1} L'élément de menu a été supprimé.|]1,Inf[ Les éléments de menu ont été supprimés."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
@@ -3621,11 +3657,15 @@ msgid "Signup failed"
 msgstr "Inscription échoué"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
-msgid "Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you."
+msgid ""
+"Your user account has been created. Complete your registration, by clicking "
+"the link provided in the mail that has been sent to you."
 msgstr "Votre compte a bien été créé. Validez votre inscription en cliquant sur le lien du mail de confirmation qui vous a été envoyé."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
-msgid "Your user account has been created and is pending approval by the site administrator."
+msgid ""
+"Your user account has been created and is pending approval by the site "
+"administrator."
 msgstr "Votre compte a bien été créé mais dois faire l'objet d'une validation par l'administrateur du site."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
@@ -3638,11 +3678,15 @@ msgid "Invalid key."
 msgstr "Clé incorrecte."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:189
-msgid "Your email has been verified. Once an administrator approves your account, you will be notified by email."
+msgid ""
+"Your email has been verified. Once an administrator approves your account, "
+"you will be notified by email."
 msgstr "Votre email a bien été vérifié. Dès que l'administrateur aura approuvé votre inscription, vous en serez notifié par mail."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
-msgid "The user's account has been activated and the user has been notified about it."
+msgid ""
+"The user's account has been activated and the user has been notified about "
+"it."
 msgstr "Le compte a été activé et l'utilisateur en a été notifié."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
@@ -3796,4 +3840,3 @@ msgstr "{0} widget No supprimé |. {1} Widget supprimé |.] 1, [Inf Widgets supp
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."
 msgstr "Widgets mis à jour."
-

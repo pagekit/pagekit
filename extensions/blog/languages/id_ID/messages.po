@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-08-15 11:08+0000\n"
+"PO-Revision-Date: 2014-09-24 10:28+0000\n"
 "Last-Translator: eantz <e_antz@yahoo.com>\n"
 "Language-Team: Indonesian (Indonesia) (http://www.transifex.com/projects/p/pagekit-cms/language/id_ID/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr ""
 
 #: extensions/blog/views/admin/link/blog.razr:5
 msgid "Posts View"
-msgstr ""
+msgstr "Tampilan Post"
 
 #: extensions/blog/views/admin/link/blog.razr:15
 msgid "Post"
@@ -337,7 +337,7 @@ msgstr "Komentar dimatikan pada post ini."
 
 #: extensions/blog/src/Controller/SiteController.php:111
 msgid "Please provide valid name and email."
-msgstr ""
+msgstr "Silahkan sediakan nama dan emai yang valid"
 
 #: extensions/blog/src/Controller/SiteController.php:133
 msgid "Thanks for commenting!"
@@ -361,7 +361,7 @@ msgstr "Diterima"
 
 #: extensions/blog/src/Entity/Comment.php:115
 msgid "Pending"
-msgstr ""
+msgstr "Tertunda"
 
 #: extensions/blog/src/Entity/Comment.php:116
 msgid "Spam"
@@ -381,7 +381,7 @@ msgstr "Draft"
 
 #: extensions/blog/src/Entity/Post.php:172
 msgid "Pending Review"
-msgstr ""
+msgstr "Review tertunda"
 
 #: extensions/blog/src/Event/RouteListener.php:81
 msgid "Post with id \"%id%\" not found!"

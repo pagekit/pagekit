@@ -1,12 +1,13 @@
 # 
 # Translators:
 # moni horovitz <moni@artbit.co.il>, 2014
+# Reuven Karasik <reuven.karasik@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-09-04 09:26+0000\n"
-"Last-Translator: moni horovitz <moni@artbit.co.il>\n"
+"PO-Revision-Date: 2014-10-21 17:33+0000\n"
+"Last-Translator: Reuven Karasik <reuven.karasik@gmail.com>\n"
 "Language-Team: Hebrew (Israel) (http://www.transifex.com/projects/p/pagekit-cms/language/he_IL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,7 +188,7 @@ msgstr "כינוי"
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
-msgstr ""
+msgstr "השתמש בנתיב יחסי ללא לוכסן מיקום בהתחלה. למשל:\n<code>אודות</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
@@ -196,7 +197,7 @@ msgstr "מקור"
 
 #: extensions/system/views/admin/aliases/index.razr:7
 msgid "Add Alias"
-msgstr ""
+msgstr "הוסף כינוי"
 
 #: extensions/system/views/admin/aliases/index.razr:8
 #: extensions/system/views/admin/dashboard/settings.razr:18
@@ -250,7 +251,7 @@ msgstr "מספר עמודים"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:27
 msgid "Post Content"
-msgstr ""
+msgstr "פרסם תוכן"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:30
 msgid "Don't show"
@@ -294,7 +295,7 @@ msgstr "מחוברים"
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Last registered"
-msgstr ""
+msgstr "נרשם לאחרונה"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:12
 msgid "Number of Users"
@@ -318,7 +319,7 @@ msgstr "מיקום"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:10
 msgid "Enter the name of the city you want to get weather information for."
-msgstr ""
+msgstr "הכנס את שם העיר שברצונך לקבל עליה מידע."
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"

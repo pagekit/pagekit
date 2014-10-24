@@ -1,0 +1,130 @@
+# 
+# Translators:
+# Fukuda Takuro <tea_hugutaku@yahoo.co.jp>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit CMS\n"
+"POT-Creation-Date: 2013-11-06 15:49+0000\n"
+"PO-Revision-Date: 2014-10-24 13:05+0000\n"
+"Last-Translator: Florian <florianletsch@gmail.com>\n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/projects/p/pagekit-cms/language/ja_JP/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
+#: extensions/installer/theme/templates/template.blade.php:5
+msgid "Pagekit Installer"
+msgstr "Pagekit インストーラ"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
+msgid "Database connection failed!"
+msgstr "データベースの接続に失敗しました!"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
+msgid "No database connection."
+msgstr "データベースとの接続がありません。"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
+msgid "Can't write config."
+msgstr "設定に書き込めません。"
+
+#: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
+msgid "DB user is missing required privileges."
+msgstr "このDBユーザには必須権限がありません。"
+
+#: extensions/installer/views/install.blade.php:13
+msgid "Begin"
+msgstr "開始"
+
+#: extensions/installer/views/install.blade.php:23
+msgid "Connect database"
+msgstr "データベースに接続"
+
+#: extensions/installer/views/install.blade.php:25
+msgid "Enter your database connection details."
+msgstr "あなたのデータベース接続情報を入力してください。"
+
+#: extensions/installer/views/install.blade.php:30
+msgid "Hostname"
+msgstr "ホスト名"
+
+#: extensions/installer/views/install.blade.php:33
+msgid "Host cannot be blank."
+msgstr "ホストは空にできません。"
+
+#: extensions/installer/views/install.blade.php:41
+msgid "User cannot be blank."
+msgstr "ユーザー名は空にできません。"
+
+#: extensions/installer/views/install.blade.php:51
+msgid "Database Name"
+msgstr "データベース名"
+
+#: extensions/installer/views/install.blade.php:54
+msgid "Database name cannot be blank."
+msgstr "データベース名は空にできません。"
+
+#: extensions/installer/views/install.blade.php:59
+msgid "Table Prefix"
+msgstr "テーブルプレフィックス"
+
+#: extensions/installer/views/install.blade.php:64
+#: extensions/installer/views/install.blade.php:107
+#: extensions/installer/views/install.blade.php:140
+msgid "Next"
+msgstr "次へ"
+
+#: extensions/installer/views/install.blade.php:75
+msgid "Create your account"
+msgstr "あなたのアカウントを作成"
+
+#: extensions/installer/views/install.blade.php:77
+msgid "You will be the site administrator."
+msgstr "あなたはサイトの管理者になります。"
+
+#: extensions/installer/views/install.blade.php:85
+msgid "Username cannot be blank."
+msgstr "ユーザー名は空にできません。"
+
+#: extensions/installer/views/install.blade.php:93
+msgid "Field must be a valid email address."
+msgstr "正しいEメールアドレスをフィールドに入力してください。"
+
+#: extensions/installer/views/install.blade.php:102
+msgid "Password cannot be blank."
+msgstr "パスワードは空にできません。"
+
+#: extensions/installer/views/install.blade.php:118
+msgid "Setup your site"
+msgstr "あなたのサイトをセットアップ"
+
+#: extensions/installer/views/install.blade.php:120
+msgid "Enter your website details."
+msgstr "あなたのウェブサイトの概要を入力してください。"
+
+#: extensions/installer/views/install.blade.php:128
+msgid "Site name cannot be blank."
+msgstr "サイト名は空にできません。"
+
+#: extensions/installer/views/install.blade.php:152
+msgid "Installing Pagekit..."
+msgstr "Pagekitをインストール中…"
+
+#: extensions/installer/views/install.blade.php:160
+msgid "Installation failed!"
+msgstr "インストールに失敗しました!"
+
+#: extensions/installer/views/install.blade.php:169
+msgid "Retry"
+msgstr "リトライ"
+
+#: extensions/installer/views/install.blade.php:175
+msgid "Finished!"
+msgstr "完了しました!"
+
+#: extensions/installer/views/install.blade.php:182
+msgid "Login now"
+msgstr "今すぐログインする"

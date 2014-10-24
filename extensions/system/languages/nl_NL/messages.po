@@ -1,15 +1,17 @@
 # 
 # Translators:
 # proman <frans.vanderschaft@promanagement.nl>, 2014
+# Lara Petersen <lara@cloud9webdesign.nl>, 2014
 # Markh07 <markh07@gmail.com>, 2014
 # Peter R <noordwesthoek@gmail.com>, 2014
 # robbert <robbertmastebroek@gmail.com>, 2014
+# Wim Strik <ikbenwim@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-09-10 17:49+0000\n"
-"Last-Translator: Peter R <noordwesthoek@gmail.com>\n"
+"PO-Revision-Date: 2014-10-08 08:13+0000\n"
+"Last-Translator: Wim Strik <ikbenwim@gmail.com>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/pagekit-cms/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2130,31 +2132,31 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:21
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:22
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Verenigde Arabische Emiraten"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:23
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afghanistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:24
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua en Barbuda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:25
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:26
 msgid "Albania"
-msgstr ""
+msgstr "Albanië"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:27
 msgid "Armenia"
-msgstr ""
+msgstr "Armenië"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:28
 msgid "Netherlands Antilles"
@@ -2162,95 +2164,95 @@ msgstr "Nederlandse Antillen"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:29
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:30
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarctica"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:31
 msgid "Argentina"
-msgstr ""
+msgstr "Argentinië"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:32
 msgid "American Samoa"
-msgstr ""
+msgstr "Amerikaans-Samoa"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:33
 msgid "Austria"
-msgstr ""
+msgstr "Oostenrijk"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:34
 msgid "Australia"
-msgstr ""
+msgstr "Australië"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:35
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:36
 msgid "Åland Islands"
-msgstr ""
+msgstr "Åland-eilanden"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:37
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbeidzjan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:38
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnië en Herzegovina"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:39
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:40
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:41
 msgid "Belgium"
-msgstr ""
+msgstr "België"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:42
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:43
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgarije"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:44
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrein"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:45
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:46
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:47
 msgid "Saint Barthélemy"
-msgstr ""
+msgstr "Saint Barthélemy"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:48
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:49
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:50
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:51
 msgid "Caribbean Netherlands"
-msgstr ""
+msgstr "Caribische eilanden"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:52
 msgid "Brazil"
@@ -2282,7 +2284,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:59
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:60
 msgid "Cocos [Keeling] Islands"
@@ -2302,7 +2304,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:64
 msgid "Switzerland"
-msgstr ""
+msgstr "Zwitserland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:65
 msgid "Côte d’Ivoire"
@@ -2322,7 +2324,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:69
 msgid "China"
-msgstr ""
+msgstr "China"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:70
 msgid "Colombia"
@@ -2334,7 +2336,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:72
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:73
 msgid "Cuba"
@@ -2354,7 +2356,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:77
 msgid "Cyprus"
-msgstr ""
+msgstr "Cyprus"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:78
 msgid "Czech Republic"
@@ -3398,127 +3400,127 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:77
 msgid "Burmese"
-msgstr ""
+msgstr "Burmees"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:78
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Bokmål Noorwegen"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:79
 msgid "Nepali"
-msgstr ""
+msgstr "Nepallees"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:80
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlands"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:81
 msgid "Norwegian Nynorsk"
-msgstr ""
+msgstr "Noors"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:82
 msgid "Occitan"
-msgstr ""
+msgstr "Occitaans"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:83
 msgid "Punjabi"
-msgstr ""
+msgstr "Punjabi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:84
 msgid "Polish"
-msgstr ""
+msgstr "Pools"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:85
 msgid "Portuguese, Brazil"
-msgstr ""
+msgstr "Portugees, Brazilie"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:86
 msgid "Portuguese, Portugal"
-msgstr ""
+msgstr "Portugees, Portugal"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:87
 msgid "Romanian"
-msgstr ""
+msgstr "Romeens"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:88
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:89
 msgid "Scots"
-msgstr ""
+msgstr "Schots"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:90
 msgid "Northern Sami"
-msgstr ""
+msgstr "Noord Sami"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:91
 msgid "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:92
 msgid "Slovak"
-msgstr ""
+msgstr "Slowaaks"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:93
 msgid "Slovenian"
-msgstr ""
+msgstr "Sloveens"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:94
 msgid "Albanian"
-msgstr ""
+msgstr "Albanees"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:95
 msgid "Serbian"
-msgstr ""
+msgstr "Servisch"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:96
 msgid "Swedish"
-msgstr ""
+msgstr "Zweeds"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:97
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:98
 msgid "Tamil"
-msgstr ""
+msgstr "Tamil"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:99
 msgid "Tamil, Sri Lanka"
-msgstr ""
+msgstr "Tamil, Sri Lanka"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:100
 msgid "Telugu"
-msgstr ""
+msgstr "Telugu"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:101
 msgid "Thai"
-msgstr ""
+msgstr "Thais"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:102
 msgid "Turkish"
-msgstr ""
+msgstr "Turks"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:103
 msgid "Tuvan"
-msgstr ""
+msgstr "Toeviens"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:104
 msgid "Uyghur"
-msgstr ""
+msgstr "Oeigoers"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:105
 msgid "Ukrainian"
-msgstr ""
+msgstr "Oekraïens"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:106
 msgid "Urdu"
-msgstr ""
+msgstr "Urdu"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:107
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamees"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:108
 msgid "Lolspeak"
@@ -3526,40 +3528,40 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:109
 msgid "Chinese, Simplified"
-msgstr ""
+msgstr "Chinese, Vereenvoudigd"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:110
 msgid "Chinese, Traditional"
-msgstr ""
+msgstr "Chinese, Traditioneel"
 
 #: extensions/system/src/System/Link/System.php:48
 msgid "Frontpage"
-msgstr ""
+msgstr "Voorpagina"
 
 #: extensions/system/src/System/Link/System.php:49
 msgid "User Login"
-msgstr ""
+msgstr "Gebruikers login"
 
 #: extensions/system/src/System/Link/System.php:50
 #: extensions/system/src/User/Controller/RegistrationController.php:46
 msgid "User Registration"
-msgstr ""
+msgstr "Gebruikers registratie"
 
 #: extensions/system/src/System/Link/System.php:51
 msgid "User Profile"
-msgstr ""
+msgstr "Gebruikers Profiel"
 
 #: extensions/system/src/System/Link/System.php:52
 msgid "User Password Reset"
-msgstr ""
+msgstr "Gebruikers Wachtwoord Herinstellen"
 
 #: extensions/system/src/System/Widget/TextWidget.php:23
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: extensions/system/src/System/Widget/TextWidget.php:31
 msgid "Text Widget"
-msgstr ""
+msgstr "Tekst widget"
 
 #: extensions/system/src/SystemExtension.php:128
 msgid "DATE_INTERVAL"
@@ -3567,119 +3569,119 @@ msgstr ""
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:84
 msgid "Unable to activate theme.<br>The theme triggered a fatal error."
-msgstr ""
+msgstr "Niet mogelijk om thema te activeren.<br> Het thema veroorzaakt een fatale fout."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:90
 msgid "Unable to enable theme \"%name%\"."
-msgstr ""
+msgstr "Niet mogelijk om thema \"%name%\" in te stellen"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:98
 msgid "Theme enabled."
-msgstr ""
+msgstr "Thema ingeschakeld."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:115
 msgid "Unable to uninstall theme \"%name%\"."
-msgstr ""
+msgstr "Niet mogelijk om thema \"% name%\" te deïnstalleren"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:121
 msgid "Theme uninstalled."
-msgstr ""
+msgstr "Thema verwijderd."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:137
 #: extensions/system/src/Theme/Controller/ThemesController.php:161
 msgid "Invalid theme."
-msgstr ""
+msgstr "Ongeldig thema."
 
 #: extensions/system/src/Theme/Event/WidgetListener.php:30
 msgid "Theme"
-msgstr ""
+msgstr "Thema"
 
 #: extensions/system/src/User/Controller/AuthController.php:68
 #: extensions/system/src/User/Controller/RegistrationController.php:66
 #: extensions/system/src/User/Controller/ResetPasswordController.php:61
 #: extensions/system/src/User/Controller/ResetPasswordController.php:130
 msgid "Invalid token. Please try again."
-msgstr ""
+msgstr "Ongeldige token. Probeer het opnieuw."
 
 #: extensions/system/src/User/Controller/AuthController.php:76
 msgid "Invalid username or password."
-msgstr ""
+msgstr "Ongeldige gebruikersnaam of wachtwoord."
 
 #: extensions/system/src/User/Controller/PermissionController.php:48
 msgid "Permissions saved!"
-msgstr ""
+msgstr "Permissies opgeslagen!"
 
 #: extensions/system/src/User/Controller/ProfileController.php:66
 msgid "Name is invalid."
-msgstr ""
+msgstr "Naam is ongeldig."
 
 #: extensions/system/src/User/Controller/ProfileController.php:70
 #: extensions/system/src/User/Controller/RegistrationController.php:87
 #: extensions/system/src/User/Controller/UserController.php:165
 msgid "Email is invalid."
-msgstr ""
+msgstr "Email is ongeldig."
 
 #: extensions/system/src/User/Controller/ProfileController.php:74
 #: extensions/system/src/User/Controller/RegistrationController.php:95
 #: extensions/system/src/User/Controller/UserController.php:177
 msgid "Email not available."
-msgstr ""
+msgstr "E-mail niet beschikbaar."
 
 #: extensions/system/src/User/Controller/ProfileController.php:80
 msgid "Invalid Password."
-msgstr ""
+msgstr "Ongeldig wachtwoord"
 
 #: extensions/system/src/User/Controller/ProfileController.php:84
 msgid "New Password is invalid."
-msgstr ""
+msgstr "Nieuw wachtwoord is ongeldig."
 
 #: extensions/system/src/User/Controller/ProfileController.php:103
 msgid "Profile updated."
-msgstr ""
+msgstr "Profiel bijgewerkt."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:75
 msgid "Name required."
-msgstr ""
+msgstr "Naam vereist"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:79
 #: extensions/system/src/User/Controller/UserController.php:144
 msgid "Password required."
-msgstr ""
+msgstr "Wachtwoord vereist"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:83
 #: extensions/system/src/User/Controller/UserController.php:161
 msgid "Username is invalid."
-msgstr ""
+msgstr "Gebruikersnaam is ongeldig"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:91
 #: extensions/system/src/User/Controller/UserController.php:171
 msgid "Username not available."
-msgstr ""
+msgstr "Gebruikersnaam niet beschikbaar"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr ""
+msgstr "Inschrijven mislukt"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
-msgstr ""
+msgstr "Je account is aangemaakt. Voltooi je registratie, door te klikken op de link in de e-mail die naar je verstuurd is."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
 "Your user account has been created and is pending approval by the site "
 "administrator."
-msgstr ""
+msgstr "Je account is aangemaakt en in afwachting van goedkeuring door de site beheerder."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
 msgid "Your user account has been created."
-msgstr ""
+msgstr "Je gebruikersaccount is aangemaakt."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:180
 #: extensions/system/src/User/Controller/ResetPasswordController.php:116
 msgid "Invalid key."
-msgstr ""
+msgstr "Ongeldige sleutel."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:189
 msgid ""
@@ -3699,148 +3701,148 @@ msgstr ""
 
 #: extensions/system/src/User/Controller/RegistrationController.php:216
 msgid "Welcome to %site%!"
-msgstr ""
+msgstr "Welkom op %site%!"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:229
 msgid "Activate your %site% account"
-msgstr ""
+msgstr "Activeer je %site% account"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:234
 msgid "Unable to send verification link."
-msgstr ""
+msgstr "Kan geen verificatie link sturen."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:244
 msgid "Please approve registration at %site%!"
-msgstr ""
+msgstr "Gelieve registratie goedkeuren op %site%!"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:45
 msgid "Reset"
-msgstr ""
+msgstr "Herinstellen"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:65
 msgid "Enter a username or email address."
-msgstr ""
+msgstr "Voer een gebruikersnaam of e-mailadres in."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:71
 msgid "Invalid username or email."
-msgstr ""
+msgstr "Ongeldige gebruikersnaam of e-mail."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:75
 #: extensions/system/src/User/Controller/ResetPasswordController.php:121
 msgid "Your account has not been activated or is blocked."
-msgstr ""
+msgstr "Je account is nog niet geactiveerd of geblokkeerd."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:86
 #: extensions/system/src/User/Link/User.php:49
 msgid "Password Reset"
-msgstr ""
+msgstr "Wachtwoord herinstellen"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:91
 msgid "Unable to send confirmation link."
-msgstr ""
+msgstr "Niet mogelijk een bevestigingslink te sturen."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:98
 msgid "Check your email for the confirmation link."
-msgstr ""
+msgstr "Controleer je email voor de bevestigingslink"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:136
 msgid "Enter password."
-msgstr ""
+msgstr "Voer wachtwoord in."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:140
 msgid "Invalid password."
-msgstr ""
+msgstr "Ongeldig wachtwoord."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:148
 msgid "Your password has been reset."
-msgstr ""
+msgstr "Je wachtwoord is opnieuw ingesteld."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:156
 msgid "Reset Confirm"
-msgstr ""
+msgstr "Reset bevestigen"
 
 #: extensions/system/src/User/Controller/RoleController.php:68
 msgid "Roles saved!"
-msgstr ""
+msgstr "Rollen opgeslagen!"
 
 #: extensions/system/src/User/Controller/UserController.php:125
 msgid "Edit User"
-msgstr ""
+msgstr "Bewerk gebruiker"
 
 #: extensions/system/src/User/Controller/UserController.php:140
 msgid "User not found."
-msgstr ""
+msgstr "Gebruiker niet gevonden."
 
 #: extensions/system/src/User/Controller/UserController.php:154
 #: extensions/system/src/User/Controller/UserController.php:243
 msgid "Unable to block yourself."
-msgstr ""
+msgstr "Het is niet mogelijk om jezelf te blokkeren."
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User saved."
-msgstr ""
+msgstr "Gebruiker opgeslagen."
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User created."
-msgstr ""
+msgstr "Gebruiker aangemaakt."
 
 #: extensions/system/src/User/Controller/UserController.php:218
 msgid "Unable to delete self."
-msgstr ""
+msgstr "Het is niet mogelijk om jezelf te verwijderen."
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
+msgstr "{0} geen gebruiker verwijderd.|{1} Gebruiker gewist.|]1,Inf[ Gebruikers verwijderd."
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
-msgstr ""
+msgstr "Toont een lijst van gebruikers."
 
 #: extensions/system/src/User/Entity/User.php:101
 msgid "Blocked"
-msgstr ""
+msgstr "Geblokkeerd"
 
 #: extensions/system/src/User/Event/AccessListener.php:93
 msgid "You do not have access to the administration area of this site."
-msgstr ""
+msgstr "Je hebt geen toegang tot het administratie deel van de website."
 
 #: extensions/system/src/User/Event/AccessListener.php:107
 msgid "Insufficient User Rights."
-msgstr ""
+msgstr "Onvoldoende gebruikersrechten."
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account is blocked."
-msgstr ""
+msgstr "Je account is geblokkeerd."
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account has not been activated."
-msgstr ""
+msgstr "Je account is nog niet geactiveerd."
 
 #: extensions/system/src/User/Event/LoginAttemptListener.php:30
 msgid "Slow down a bit."
-msgstr ""
+msgstr "Een beetje rustiger."
 
 #: extensions/system/src/User/Link/User.php:48
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 #: extensions/system/src/User/Widget/LoginWidget.php:33
 msgid "Displays a user login form."
-msgstr ""
+msgstr "Toont een gebruiker login formulier."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:49
 msgid "Unassigned Widgets"
-msgstr ""
+msgstr "Niet toegewezen Widgets"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:82
 #: extensions/system/src/Widget/Controller/WidgetsController.php:105
 msgid "Invalid widget id"
-msgstr ""
+msgstr "Ongeldige widget id"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
+msgstr "{0} Geen widget verwijderd.|{1} Widget verwijderd.|]1,Inf[ Widgets verwijderd."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."
-msgstr ""
+msgstr "Widgets bijgewerkt"

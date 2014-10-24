@@ -1,12 +1,13 @@
 # 
 # Translators:
+# Mehdi Khatiri <mehdikhatiri@live.com>, 2014
 # Mohammad Hossein Mojtahedi <Mhm5000@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-09-09 14:22+0000\n"
-"Last-Translator: Mohammad Hossein Mojtahedi <Mhm5000@gmail.com>\n"
+"PO-Revision-Date: 2014-09-21 18:05+0000\n"
+"Last-Translator: Mehdi Khatiri <mehdikhatiri@live.com>\n"
 "Language-Team: Persian (Iran) (http://www.transifex.com/projects/p/pagekit-cms/language/fa_IR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr "صفحه"
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
-msgstr "انتخاب صفحه"
+msgstr "- انتخاب صفحه -"
 
 #: extensions/page/views/admin/pages/edit.razr:14
 msgid "Enter Title"
@@ -38,7 +39,7 @@ msgstr "انتشار"
 
 #: extensions/page/views/admin/pages/index.razr:16
 msgid "Unpublish"
-msgstr ""
+msgstr "خروج از انتشار"
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
@@ -74,7 +75,7 @@ msgstr ""
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"
-msgstr ""
+msgstr "%title% (کپی)"
 
 #: extensions/page/src/Controller/PageController.php:170
 msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
@@ -91,19 +92,19 @@ msgstr ""
 
 #: extensions/page/src/Controller/SiteController.php:36
 msgid "Page not found!"
-msgstr ""
+msgstr "صفحه پیدا نشد!"
 
 #: extensions/page/src/Controller/SiteController.php:45
 msgid "Unable to access this page!"
-msgstr ""
+msgstr "به این صفحه دسترسی ندارید!"
 
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
-msgstr ""
+msgstr "منتشر نشده"
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
-msgstr ""
+msgstr "منتشر شده"
 
 #: extensions/page/src/PageExtension.php:27
 msgid ""

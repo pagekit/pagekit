@@ -1,17 +1,18 @@
+# 
+# Translators:
+# Boris Branez <mitoe@outlook.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 1.0.0 (installer, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-07-22 12:07+0100\n"
-"Last-Translator: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
-"Language-Team: Lionel Gaillard <lionel.gaillard@wxrstudios.com>\n"
+"PO-Revision-Date: 2014-08-05 15:40+0000\n"
+"Last-Translator: Boris Branez <mitoe@outlook.com>\n"
+"Language-Team: French (France) (http://www.transifex.com/projects/p/pagekit-cms/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
@@ -89,8 +90,8 @@ msgid "Username cannot be blank."
 msgstr "Le nom d'utilisateur ne peut pas être vide."
 
 #: extensions/installer/views/install.blade.php:93
-msgid "Field must be a valid email adress."
-msgstr "Le champs doit être une adresse e-mail valide."
+msgid "Field must be a valid email address."
+msgstr "Le champ doit contenir une adresse e-mail valide."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
@@ -127,4 +128,3 @@ msgstr "Terminé !"
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
 msgstr "Se connecter maintenant"
-

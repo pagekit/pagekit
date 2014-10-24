@@ -1,17 +1,17 @@
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (system, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-07-24 17:01+0200\n"
-"Last-Translator: Kehet <kehet@kehet.com>\n"
-"Language-Team: Kehet\n"
+"PO-Revision-Date: 2014-08-01 13:24+0000\n"
+"Last-Translator: OliviaS <olivia@yootheme.com>\n"
+"Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/pagekit-cms/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: fi_FI\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: extensions/system/src/System/Console/skeleton/extension/views/admin/settings.razr:7
 #: extensions/system/src/System/Console/skeleton/theme/views/admin/settings.razr:7
@@ -87,9 +87,7 @@ msgstr "Päivitä Pagekit"
 msgid ""
 "Pagekit has been updated! Before we send you on your way, we have to update "
 "your database to the newest version."
-msgstr ""
-"Pagekit päivitettiin! Meidän täytyy kuitenkin vielä päivittää tietokanta "
-"ajantasalle."
+msgstr "Pagekit päivitettiin! Meidän täytyy kuitenkin vielä päivittää tietokanta ajantasalle."
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -188,9 +186,7 @@ msgstr "Alias"
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
-msgstr ""
-"Käytä suhteellista osoitetta ilman lopettavaa kauttaviivaa esimerkiksi: "
-"<code>about</code>"
+msgstr "Käytä suhteellista osoitetta ilman lopettavaa kauttaviivaa esimerkiksi: <code>about</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
@@ -305,19 +301,15 @@ msgstr "Käyttäjien määrä"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
 msgid ""
-"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users"
-"% registered users"
-msgstr ""
-"{0} Ei rekisteröityneitä käyttäjiä|{1} Viimeisin rekisteröitynyt käyttäjä|]1,"
-"Inf[ %users% viimeisintä rekisteröitynyttä käyttäjää"
+"{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
+"%users% registered users"
+msgstr "{0} Ei rekisteröityneitä käyttäjiä|{1} Viimeisin rekisteröitynyt käyttäjä|]1,Inf[ %users% viimeisintä rekisteröitynyttä käyttäjää"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
-msgstr ""
-"{0} Ei kirjautuneita käyttäjiä|{1} %users% kirjautunut käyttäjä|]1,"
-"Inf[ %users% kirjautunutta käyttäjää"
+msgstr "{0} Ei kirjautuneita käyttäjiä|{1} %users% kirjautunut käyttäjä|]1,Inf[ %users% kirjautunutta käyttäjää"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
@@ -404,9 +396,7 @@ msgstr "Raahausalue"
 msgid ""
 "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
 "upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
-"Raahaa tiedostot tähän tai <a class=\"uk-form-file\">valitse tästä<input "
-"class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
+msgstr "Raahaa tiedostot tähän tai <a class=\"uk-form-file\">valitse tästä<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
@@ -764,9 +754,14 @@ msgstr "SMTP salasana"
 
 #: extensions/system/views/admin/settings/settings.razr:113
 #: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/admin/user/edit.razr:68
+#: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:30
 #: extensions/system/views/user/profile.razr:40
+#: extensions/system/views/user/profile.razr:40
 #: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/registration.razr:33
+#: extensions/system/views/user/reset/confirm.razr:12
 #: extensions/system/views/user/reset/confirm.razr:12
 msgid "Show"
 msgstr "Näytä"
@@ -907,10 +902,7 @@ msgid ""
 "You have the latest version of Pagekit. You do not need to update. However, "
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
-msgstr ""
-"Pagekit on uusimmassa versiossa, eikä sitä tarvitse päivittää. Voit "
-"kuitenkin uudelleenasentaa version %version% automaattisesti tai ladata sen, "
-"ja uudelleenasentaa manuaalisesti."
+msgstr "Pagekit on uusimmassa versiossa, eikä sitä tarvitse päivittää. Voit kuitenkin uudelleenasentaa version %version% automaattisesti tai ladata sen, ja uudelleenasentaa manuaalisesti."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
@@ -1049,14 +1041,10 @@ msgstr "Lauseke"
 #: extensions/system/views/admin/widgets/edit.razr:52
 msgid ""
 "Enter one page path per line. The \"*\" character is a wildcard. Exclude "
-"pages by prepending an exclamation mark to the path. Example paths: \"blog\" "
-"for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
+"pages by prepending an exclamation mark to the path. Example paths: \"blog\""
+" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
 "exclude the blog."
-msgstr ""
-"Yksi sivu riville. Voit korvata osia sivun nimestä \"*\" -merkillä. Voit "
-"poissulkea sivuja lisäämällä ! osoitteeseen. Esimerkiksi: \"blog\" "
-"tarkoittaa sivua blog, \"blog/*\" tarkoittaa kaikkia blogikirjoituksia ja \"!"
-"blog\" poissulkee blogin"
+msgstr "Yksi sivu riville. Voit korvata osia sivun nimestä \"*\" -merkillä. Voit poissulkea sivuja lisäämällä ! osoitteeseen. Esimerkiksi: \"blog\" tarkoittaa sivua blog, \"blog/*\" tarkoittaa kaikkia blogikirjoituksia ja \"!blog\" poissulkee blogin"
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
@@ -1183,17 +1171,13 @@ msgstr "Muutoslogi"
 msgid ""
 "The checksum of the uploaded package does not match the one from the "
 "marketplace. The file might be manipulated."
-msgstr ""
-"Lähetetyn paketin tiiviste ei vastaa markkinapaikalla olevan paketin "
-"tiivistettä. Tiedostoa on voitu muokata."
+msgstr "Lähetetyn paketin tiiviste ei vastaa markkinapaikalla olevan paketin tiivistettä. Tiedostoa on voitu muokata."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
 msgid ""
 "There is an update available for the uploaded package. Please consider "
 "installing it instead."
-msgstr ""
-"Lähettämääsi pakettiin on saatavilla päivitys. Harkitse uuden version "
-"asentamista lähettämäsi sijaan."
+msgstr "Lähettämääsi pakettiin on saatavilla päivitys. Harkitse uuden version asentamista lähettämäsi sijaan."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
@@ -1242,16 +1226,12 @@ msgstr "Hei"
 msgid ""
 "A new user has registered at %site% and requests that you approve his "
 "account."
-msgstr ""
-"Uusi käyttäjä on rekisteröitynyt sivustolle %site% ja sinun on vahvistustasi "
-"tarvitaan tunnuksen luomiseksi."
+msgstr "Uusi käyttäjä on rekisteröitynyt sivustolle %site% ja sinun on vahvistustasi tarvitaan tunnuksen luomiseksi."
 
 #: extensions/system/views/user/mails/approve.razr:13
 msgid ""
 "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
-msgstr ""
-"Käyttäjän tiedot<br><br>Nimi: %name%<br>Käyttäjänimi: %username"
-"%<br>Sähköpostiosoite: %email%"
+msgstr "Käyttäjän tiedot<br><br>Nimi: %name%<br>Käyttäjänimi: %username%<br>Sähköpostiosoite: %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
@@ -1259,14 +1239,11 @@ msgstr "Aktivoidaksesi tunnuksen, klikkaa"
 
 #: extensions/system/views/user/mails/reset.razr:9
 msgid "Someone requested that the password be reset for the following account"
-msgstr ""
-"Joku (todennäköisesti sinä) on pyytänyt salasanan palautusta seuraavalle "
-"tunnukselle"
+msgstr "Joku (todennäköisesti sinä) on pyytänyt salasanan palautusta seuraavalle tunnukselle"
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"Jos et tarkoittanut tätä, voit poistaa tämän viestin, eikä mitään tapahdu."
+msgstr "Jos et tarkoittanut tätä, voit poistaa tämän viestin, eikä mitään tapahdu."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
@@ -1281,9 +1258,7 @@ msgstr "Hei %name%"
 msgid ""
 "Thank you for registering at %site%! Your account has been successfully "
 "created and must be verified before you can use it."
-msgstr ""
-"Kiitos rekisteröinnistäsi sivustolle %site%! Tunnuksesi on nyt luotu, mutta "
-"se täytyy vahvistaa ennen kuin voit käyttää sitä."
+msgstr "Kiitos rekisteröinnistäsi sivustolle %site%! Tunnuksesi on nyt luotu, mutta se täytyy vahvistaa ennen kuin voit käyttää sitä."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
@@ -1326,9 +1301,7 @@ msgstr "Salasana unohtunut?"
 msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
-msgstr ""
-"Anna käyttäjätunnuksesi tai sähköpostiosoitteesi. Lähetämme palautuslinkin "
-"sähköpostitse."
+msgstr "Anna käyttäjätunnuksesi tai sähköpostiosoitteesi. Lähetämme palautuslinkin sähköpostitse."
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
@@ -1526,9 +1499,7 @@ msgstr "Käytä sivua huoltotilassa"
 msgid ""
 "Warning: Give to trusted roles only; this permission has security "
 "implications."
-msgstr ""
-"Varoitus! Anna ainoastaa luotetuille rooleille; tämä käyttöoikeus voi "
-"vaarantaa sivustosi."
+msgstr "Varoitus! Anna ainoastaa luotetuille rooleille; tämä käyttöoikeus voi vaarantaa sivustosi."
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
 msgid "Editor not found."
@@ -1539,7 +1510,8 @@ msgid "Core extensions may not be enabled."
 msgstr "Ydinlaajennoksia ei voi ottaa käyttöön"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
-msgid "Unable to activate extension.<br>The extension triggered a fatal error."
+msgid ""
+"Unable to activate extension.<br>The extension triggered a fatal error."
 msgstr "Lisäosaa ei voitu aktivoida.<br>Lisäosa aiheutti vakavan virheen."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
@@ -1619,9 +1591,7 @@ msgstr "Virheellinen URL"
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
 "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
-msgstr ""
-"{0} Valikon kohtia ei poistettu|{1} Valikon kohta poistettu|]1,Inf[ Valikon "
-"kohdat poistettu"
+msgstr "{0} Valikon kohtia ei poistettu|{1} Valikon kohta poistettu|]1,Inf[ Valikon kohdat poistettu"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
@@ -1683,8 +1653,7 @@ msgstr "Alias luotu"
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr ""
-"{0} Aliaksia ei poistettu|{1} Alias poistettu|]1,Inf[ Aliakset poistettu"
+msgstr "{0} Aliaksia ei poistettu|{1} Alias poistettu|]1,Inf[ Aliakset poistettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
@@ -1716,8 +1685,7 @@ msgstr "Vimpain tallennettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:160
 msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
+msgstr "{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
 
 #: extensions/system/src/System/Controller/DashboardController.php:183
 msgid "Widgets reordered."
@@ -1785,9 +1753,8 @@ msgid "Unable to upload."
 msgstr "Ei voida lähettää"
 
 #: extensions/system/src/System/Controller/FinderController.php:199
-#, fuzzy
 msgid "n/a"
-msgstr "n/a"
+msgstr ""
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
@@ -1974,27 +1941,23 @@ msgstr "Etusivua ei valittu"
 
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
-#, fuzzy
 msgid "DATE_SHORT"
-msgstr "d.m.Y"
+msgstr ""
 
 #: extensions/system/src/System/Event/SystemListener.php:135
 #: extensions/system/src/SystemExtension.php:126
-#, fuzzy
 msgid "DATE_MEDIUM"
-msgstr "d.m.y"
+msgstr ""
 
 #: extensions/system/src/System/Event/SystemListener.php:136
 #: extensions/system/src/SystemExtension.php:125
-#, fuzzy
 msgid "DATE_LONG"
-msgstr "d.m.y"
+msgstr ""
 
 #: extensions/system/src/System/Event/SystemListener.php:137
 #: extensions/system/src/SystemExtension.php:124
-#, fuzzy
 msgid "DATE_FULL"
-msgstr "d.m.y"
+msgstr ""
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Mon"
@@ -3697,16 +3660,13 @@ msgstr "Rekisteröityminen epäonnistui"
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
-msgstr ""
-"Käyttäjätili luotiin onnistuneesti. Jatkaaksesi tilin käyttöönottoa, klikkaa "
-"linkkiä lähettämässämme sähköpostissa."
+msgstr "Käyttäjätili luotiin onnistuneesti. Jatkaaksesi tilin käyttöönottoa, klikkaa linkkiä lähettämässämme sähköpostissa."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
 "Your user account has been created and is pending approval by the site "
 "administrator."
-msgstr ""
-"Käyttäjätili luotiin onnistuneesti ja se odottaa ylläpitäjän vahvistusta"
+msgstr "Käyttäjätili luotiin onnistuneesti ja se odottaa ylläpitäjän vahvistusta"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
 msgid "Your user account has been created."
@@ -3721,16 +3681,13 @@ msgstr "Virheellinen avain"
 msgid ""
 "Your email has been verified. Once an administrator approves your account, "
 "you will be notified by email."
-msgstr ""
-"Sähköpostiosoitteesi on varmistettu. Saat sähköpostia, kun ylläpitäjä on "
-"vahvistanut käyttäjätilisi."
+msgstr "Sähköpostiosoitteesi on varmistettu. Saat sähköpostia, kun ylläpitäjä on vahvistanut käyttäjätilisi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
 msgid ""
 "The user's account has been activated and the user has been notified about "
 "it."
-msgstr ""
-"Käyttäjätili on aktivoitu ja käyttäjälle on lähetetty sähköpostia siitä"
+msgstr "Käyttäjätili on aktivoitu ja käyttäjälle on lähetetty sähköpostia siitä"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
@@ -3829,8 +3786,7 @@ msgstr "Et voi poistaa itseäsi"
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
-"{0} Käyttäjiä ei poistettu|{1} Käyttäjä poistettu|]1,Inf[ Käyttäjät poistettu"
+msgstr "{0} Käyttäjiä ei poistettu|{1} Käyttäjä poistettu|]1,Inf[ Käyttäjät poistettu"
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
@@ -3879,8 +3835,7 @@ msgstr "Virheellinen vimpain tunniste"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-"{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
+msgstr "{0} Vimpaimia ei poistettu|{1} Vimpain poistettu|]1,Inf[ Vimpaimet poistettu"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."

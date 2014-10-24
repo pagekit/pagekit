@@ -1,23 +1,23 @@
+# 
+# Translators:
+# Alexander Smolenskyi <smolenskyisasha@yandex.ua>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (installer, messages)\n"
+"Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-07-25 16:32+0200\n"
-"Last-Translator: Назар <admin@localuk.org.ua>\n"
-"Language-Team: LocalUK <admin@localuk.org.ua>\n"
-"Language: uk_UA\n"
+"PO-Revision-Date: 2014-10-24 13:08+0000\n"
+"Last-Translator: Florian <florianletsch@gmail.com>\n"
+"Language-Team: Ukrainian (Ukraine) (http://www.transifex.com/projects/p/pagekit-cms/language/uk_UA/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.7\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Language: uk_UA\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:18
 #: extensions/installer/theme/templates/template.blade.php:5
 msgid "Pagekit Installer"
-msgstr "Установлення Pagekit"
+msgstr "Встановлення Pagekit"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
@@ -25,7 +25,7 @@ msgstr "Не вдалося підключитися до бази даних!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
-msgstr "Немає з'єднання з базою даних."
+msgstr "Відсутнє з'єднання з базою даних."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
@@ -45,7 +45,7 @@ msgstr "Підключення до бази даних"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Уведіть дані для підключення до бази даних."
+msgstr "Введіть дані для підключення до бази даних."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
@@ -90,8 +90,8 @@ msgid "Username cannot be blank."
 msgstr "Ім'я користувача не може бути порожнім."
 
 #: extensions/installer/views/install.blade.php:93
-msgid "Field must be a valid email adress."
-msgstr "Неправильний формат email."
+msgid "Field must be a valid email address."
+msgstr "Вкажіть правильну адресу електронної пошти"
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
@@ -103,7 +103,7 @@ msgstr "Інформація про сайт"
 
 #: extensions/installer/views/install.blade.php:120
 msgid "Enter your website details."
-msgstr "Уведіть назву сайту і опис сайту."
+msgstr "Введіть назву та опис сайту."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
@@ -111,11 +111,11 @@ msgstr "Ім'я сайту не можу бути порожнім."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
-msgstr "Установлення Pagekit..."
+msgstr "Встановлення Pagekit..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Помилка установлення!"
+msgstr "Помилка встановлення!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
@@ -128,15 +128,3 @@ msgstr "Готово!"
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
 msgstr "Увійти зараз"
-
-#~ msgid "Database created!"
-#~ msgstr "База данных создана!"
-
-#~ msgid "Unable to create database!"
-#~ msgstr "Невозможно создать базу данных!"
-
-#~ msgid "Database connection failed - Access denied!"
-#~ msgstr "Не удалось подключиться к базе данных - Доступ запрещен!"
-
-#~ msgid "Database error: %error%"
-#~ msgstr "Ошибка базы данных: %error%"

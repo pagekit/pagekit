@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-08-15 14:11+0000\n"
+"PO-Revision-Date: 2014-10-05 02:57+0000\n"
 "Last-Translator: Weiyu Weng <467055732@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/pagekit-cms/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -924,7 +924,7 @@ msgstr "好像还没有主题进驻 Pagekit 呢！"
 #: extensions/system/views/admin/themes/table.razr:11
 #: extensions/system/src/User/Entity/User.php:100
 msgid "Active"
-msgstr "活跃"
+msgstr "已激活"
 
 #: extensions/system/views/admin/user/edit.razr:19
 #: extensions/system/views/admin/user/edit.razr:111

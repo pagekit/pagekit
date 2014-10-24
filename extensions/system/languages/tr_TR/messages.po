@@ -2,12 +2,13 @@
 # Translators:
 # Hasan Tayyar BESIK <tayyar.besik@gmail.com>, 2014
 # ozanmora <ozan.mora@gmail.com>, 2014
+# Taner YILMAZ <taner.yilmaz@live.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-08-15 12:52+0000\n"
-"Last-Translator: Hasan Tayyar BESIK <tayyar.besik@gmail.com>\n"
+"PO-Revision-Date: 2014-10-16 10:45+0000\n"
+"Last-Translator: Taner YILMAZ <taner.yilmaz@live.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/pagekit-cms/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -225,7 +226,7 @@ msgstr "Ara"
 
 #: extensions/system/views/admin/aliases/index.razr:41
 msgid "No URL aliases found."
-msgstr ""
+msgstr "URL takma adı bulunamadı"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:2
 #: extensions/system/views/admin/menu/index.razr:53
@@ -251,7 +252,7 @@ msgstr "Yazıların Sayısı"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:27
 msgid "Post Content"
-msgstr ""
+msgstr "Mesaj İçeriği"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:30
 msgid "Don't show"
@@ -259,22 +260,22 @@ msgstr "Gösterme"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:33
 msgid "Show on all posts"
-msgstr ""
+msgstr "Tüm yazılarda göster"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:36
 msgid "Only show on first post."
-msgstr ""
+msgstr "Sadece ilk yazıda göster"
 
 #: extensions/system/views/admin/dashboard/settings.razr:8
 #: extensions/system/views/admin/widgets/index.razr:9
 #: extensions/system/src/System/Controller/DashboardController.php:85
 #: extensions/system/src/Widget/Controller/WidgetsController.php:70
 msgid "Add Widget"
-msgstr ""
+msgstr "Widget Ekle"
 
 #: extensions/system/views/admin/dashboard/settings.razr:24
 msgid "Widget"
-msgstr ""
+msgstr "Widget"
 
 #: extensions/system/views/admin/dashboard/settings.razr:25
 #: extensions/system/views/admin/link/link.types.razr:8
@@ -323,15 +324,15 @@ msgstr ""
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"
-msgstr ""
+msgstr "Birim"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:18
 msgid "Metric"
-msgstr ""
+msgstr "Metre"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:21
 msgid "Imperial"
-msgstr ""
+msgstr "Görkemli"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:12
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:23
@@ -340,7 +341,7 @@ msgstr "Hava Durumu"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:13
 msgid "Unable to retrieve weather data."
-msgstr ""
+msgstr "Hava durumu verileri alınamıyor."
 
 #: extensions/system/views/admin/extensions/index.razr:12
 #: extensions/system/views/admin/themes/index.razr:12
@@ -364,7 +365,7 @@ msgstr "Yükle"
 #: extensions/system/views/admin/themes/index.razr:15
 #: extensions/system/src/System/Controller/MarketplaceController.php:27
 msgid "Marketplace"
-msgstr ""
+msgstr "Magaza"
 
 #: extensions/system/views/admin/extensions/index.razr:16
 #: extensions/system/views/admin/themes/index.razr:16
@@ -379,7 +380,7 @@ msgstr ""
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
-msgstr ""
+msgstr "Eklenti güncellemesi bulunamadı"
 
 #: extensions/system/views/admin/extensions/index.razr:44
 #: extensions/system/views/admin/themes/index.razr:44
@@ -391,7 +392,7 @@ msgstr "Bir uzantı yükle"
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Droparea"
-msgstr ""
+msgstr "Bırakma Alanı"
 
 #: extensions/system/views/admin/extensions/index.razr:48
 #: extensions/system/views/admin/themes/index.razr:48
@@ -534,7 +535,7 @@ msgstr "Ayraç"
 #: extensions/system/views/admin/menu/item.edit.razr:49
 #: extensions/system/views/admin/widgets/edit.razr:92
 msgid "Restrict Access"
-msgstr ""
+msgstr "Erişimi Kısıtla"
 
 #: extensions/system/views/admin/menu/item.edit.razr:61
 msgid "Activation Rules"
@@ -641,7 +642,7 @@ msgstr "Web Sunucu"
 
 #: extensions/system/views/admin/settings/info.razr:29
 msgid "User Agent"
-msgstr ""
+msgstr "Kullanıcı Aracısı"
 
 #: extensions/system/views/admin/settings/info.razr:53
 msgid "Handler"
@@ -1108,7 +1109,7 @@ msgstr "Yeniden Adlandır"
 
 #: extensions/system/views/tmpl/finder.main.razr:28
 msgid "Home"
-msgstr ""
+msgstr "Anasayfa"
 
 #: extensions/system/views/tmpl/finder.table.razr:7
 msgid "Size"
@@ -1432,7 +1433,7 @@ msgstr "17"
 #: extensions/system/languages/messages.php:25
 #: extensions/system/src/Widget/Controller/WidgetsController.php:58
 msgid "Widgets"
-msgstr ""
+msgstr "Widgets"
 
 #: extensions/system/languages/messages.php:26
 #: extensions/system/src/Menu/Controller/MenuController.php:47
@@ -1756,43 +1757,43 @@ msgstr ""
 
 #: extensions/system/src/System/Controller/FinderController.php:199
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
-msgstr ""
+msgstr "%d Bit"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  KB"
-msgstr ""
+msgstr "%d  KB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  MB"
-msgstr ""
+msgstr "%d  MB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  GB"
-msgstr ""
+msgstr "%d  GB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d TB"
-msgstr ""
+msgstr "%d TB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d PB"
-msgstr ""
+msgstr "%d PB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d EB"
-msgstr ""
+msgstr "%d EB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d ZB"
-msgstr ""
+msgstr "%d ZB"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d YB"
-msgstr ""
+msgstr "%d YB"
 
 #: extensions/system/src/System/Controller/LinkController.php:56
 msgid "Url"
@@ -1919,7 +1920,7 @@ msgstr "Kurulum başarılı."
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
-msgstr ""
+msgstr "Besleme"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:32
 msgid "Feed Widget"
@@ -3553,7 +3554,7 @@ msgstr "Kullanıcı Şifresi Sıfırlama"
 
 #: extensions/system/src/System/Widget/TextWidget.php:23
 msgid "Text"
-msgstr ""
+msgstr "Yazı"
 
 #: extensions/system/src/System/Widget/TextWidget.php:31
 msgid "Text Widget"
