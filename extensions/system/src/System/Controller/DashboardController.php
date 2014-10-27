@@ -101,7 +101,7 @@ class DashboardController extends Controller
 
             $widgets = $this->getWidgets();
 
-            if (!isset($widgets[$id]) or !isset($widgets[$id]['type'])) {
+            if (!isset($widgets[$id]) || !isset($widgets[$id]['type'])) {
                 throw new Exception(__('Invalid widget id.'));
             }
 

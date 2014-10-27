@@ -175,7 +175,8 @@ class WidgetsController extends Controller
     public function enableAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id) and !$widget->getStatus()) {
+            $widget = $this->widgets->find($id);
+            if (isset($widget) && !$widget->getStatus()) {
                 $this->widgets->save($widget, ['status' => Widget::STATUS_ENABLED]);
             }
         }
@@ -189,7 +190,8 @@ class WidgetsController extends Controller
     public function disableAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id) and $widget->getStatus()) {
+            $widget = $this->widgets->find($id);
+            if (isset($widget) && $widget->getStatus()) {
                 $this->widgets->save($widget, ['status' => Widget::STATUS_DISABLED]);
             }
         }

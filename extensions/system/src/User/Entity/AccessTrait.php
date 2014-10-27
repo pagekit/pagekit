@@ -41,6 +41,7 @@ trait AccessTrait
      */
     public function hasAccess(UserInterface $user)
     {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
+        $roles = $this->getRoles();
+        return !isset($roles) || array_intersect(array_keys($user->getRoles()), $roles);
     }
 }

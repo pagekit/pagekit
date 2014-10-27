@@ -212,7 +212,8 @@ class PostController extends Controller
     public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
-            if ($post = $this->posts->find($id) and $post->getStatus() != $status) {
+            $post = $this->posts->find($id);
+            if (isset($post) && $post->getStatus() != $status) {
                 $post->setStatus($status);
                 $this->posts->save($post);
             }

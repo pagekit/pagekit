@@ -22,7 +22,8 @@ class SystemInfoHelper implements \ArrayAccess
         $info                  = [];
         $info['php']           = php_uname();
 
-        if ($pdo = $this['db']->getWrappedConnection() and $pdo instanceof PDOConnection) {
+        $pdo = $this['db'];
+        if ($pdo->getWrappedConnection() && $pdo instanceof PDOConnection) {
             $info['dbdriver']  = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
             $info['dbversion'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
             $info['dbclient']  = $pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);

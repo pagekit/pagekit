@@ -132,8 +132,8 @@ class ThemesController extends Controller
     public function settingsAction($name)
     {
         try {
-
-            if (!$theme = $this->themes->get($name) or !$tmpl = $theme->getConfig('parameters.settings.view')) {
+            $theme = $this->themes->get($name);
+            if (!isset($theme) || !$tmpl = $theme->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid theme.'));
             }
 

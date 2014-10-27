@@ -166,8 +166,8 @@ class ExtensionsController extends Controller
     public function settingsAction($name)
     {
         try {
-
-            if (!$extension = $this->extensions->get($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
+            $extension = $this->extensions->get($name);
+            if (!isset($extension) || !$tmpl = $extension->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid extension.'));
             }
 

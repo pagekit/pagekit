@@ -95,7 +95,7 @@ class FinderController extends Controller
             return $this->error(__('Invalid file name.'));
         }
 
-        if (!$source = $this->getPath($oldname) or !$target = $this->getPath($newname)) {
+        if (!$source = $this->getPath($oldname) || !$target = $this->getPath($newname)) {
             return $this->error(__('Invalid path.'));
         }
 

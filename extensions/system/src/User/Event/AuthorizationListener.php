@@ -16,7 +16,8 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        if ($user = $this['auth']->getUser() and $user->isBlocked()) {
+        $user = $this['auth'];
+        if ($user->getUser() && $user->isBlocked()) {
             $this['auth']->logout($user);
         }
     }
