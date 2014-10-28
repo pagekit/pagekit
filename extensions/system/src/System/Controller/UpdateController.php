@@ -55,7 +55,7 @@ class UpdateController extends Controller
 
             $this['session']->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
 
-            $client = new Client;
+            $client = new Client();
             $client->setDefaultOption('query/api_key', $this->apiKey);
 
             $downloader = new PackageDownloader($client);

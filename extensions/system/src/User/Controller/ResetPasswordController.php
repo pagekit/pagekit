@@ -108,11 +108,13 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this['message']->error(__('Invalid key.'));
+
             return $this->redirect('/');
         }
 
         if ($user->isBlocked()) {
             $this['message']->error(__('Your account has not been activated or is blocked.'));
+
             return $this->redirect('/');
         }
 
@@ -140,6 +142,7 @@ class ResetPasswordController extends Controller
                 $this->users->save($user);
 
                 $this['message']->success(__('Your password has been reset.'));
+
                 return $this->redirect('/');
 
             } catch (Exception $e) {

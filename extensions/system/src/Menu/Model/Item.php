@@ -124,7 +124,7 @@ class Item implements ItemInterface
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setAttribute($name, $value)
     {

@@ -45,7 +45,7 @@ class WidgetListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        TypesTrait::setWidgetTypes($this['events']->dispatch('system.widget', new RegisterWidgetEvent)->getTypes());
+        TypesTrait::setWidgetTypes($this['events']->dispatch('system.widget', new RegisterWidgetEvent())->getTypes());
     }
 
     /**

@@ -100,7 +100,7 @@ class PackageController extends Controller
 
                 $path = sha1(json_encode($package));
 
-                $client = new Client;
+                $client = new Client();
                 $client->setDefaultOption('query/api_key', $this->apiKey);
 
                 $downloader = new PackageDownloader($client);
@@ -187,7 +187,7 @@ class PackageController extends Controller
 
             } elseif (is_file($file)) {
 
-                $zip = new \ZipArchive;
+                $zip = new \ZipArchive();
 
                 if ($zip->open($file) === true) {
                     $json = $zip->getFromName("theme.json") ?: $zip->getFromName("extension.json");
@@ -197,13 +197,13 @@ class PackageController extends Controller
 
             if (isset($json) && $json) {
 
-                $loader  = new JsonLoader;
+                $loader  = new JsonLoader();
                 $package = $loader->load($json);
 
                 return $package;
             }
 
-            throw new Exception;
+            throw new Exception();
 
         } catch (\Exception $e) {
             throw new Exception(__('Can\'t load json file from package.'));

@@ -1,11 +1,11 @@
 <?php
 
-$app->on('system.admin', function() use ($app) {
+$app->on('system.admin', function () use ($app) {
 
-    $app->on('kernel.view', function() use ($app) {
+    $app->on('kernel.view', function () use ($app) {
 
         // set title
-        $app['view.sections']->prepend('head', function() use ($app) {
+        $app['view.sections']->prepend('head', function () use ($app) {
 
             $title = $app['view']->get('head.title');
 
@@ -19,13 +19,13 @@ $app->on('system.admin', function() use ($app) {
 
         // set menus
         $app['view']->set('nav', $app['admin.menu']);
-        $app['view']->set('subnav', current(array_filter($app['admin.menu']->getChildren(), function($item) { return $item->getAttribute('active'); })));
+        $app['view']->set('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
 
         // set font subset
         $app['view']->set('subset', 'latin,latin-ext');
     });
 
-    $app['view.sections']->addRenderer('toolbar', function($name, $value, $options = []) use ($app) {
+    $app['view.sections']->addRenderer('toolbar', function ($name, $value, $options = []) use ($app) {
         return $app['view']->render('extension://system/theme/views/renderer/toolbar.razr', compact('name', 'value', 'options'));
     });
 

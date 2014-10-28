@@ -10,7 +10,6 @@ use OAuth\ServiceFactory;
 use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 
-
 class OAuthHelper implements \ArrayAccess
 {
     use ApplicationTrait;
@@ -25,16 +24,16 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Open OAuth session and get new token
      *
-     * @param  string $provider
-     * @param  int $key
-     * @param  string $redirect
-     * @param  array $scope
+     * @param  string        $provider
+     * @param  int           $key
+     * @param  string        $redirect
+     * @param  array         $scope
      * @return Service|false
      */
     public function create($provider, $key, $redirect, $scope)
     {
         $provider = ucfirst(strtolower($provider));
-        $service = $this->createService($provider, $scope, new Memory);
+        $service = $this->createService($provider, $scope, new Memory());
 
         if (!$service) {
             return false;
@@ -50,9 +49,9 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Create OAuth service
      *
-     * @param  string $provider
-     * @param  array $scope
-     * @param  Storage $storage
+     * @param  string        $provider
+     * @param  array         $scope
+     * @param  Storage       $storage
      * @return Service|false
      */
     public function createService($provider, $scope, $storage)
@@ -66,15 +65,15 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Open OAuth session and load token from storage
      *
-     * @param  string $provider
-     * @param  int $key
+     * @param string $provider
+     * @param int    $key
      */
     public function get($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
 
         if (!isset($this->services[$provider.':'.$key])) {
-            $storage = new Memory;
+            $storage = new Memory();
             $token   = $this->getToken($provider, $key);
             $service = $this->createService($provider, [], $storage);
 
@@ -105,7 +104,7 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Get provider credentials
      *
-     * @param  string $provider
+     * @param string $provider
      */
     public function getConfig($provider)
     {
@@ -127,7 +126,7 @@ class OAuthHelper implements \ArrayAccess
      * Get token from storage
      *
      * @param  string $provider
-     * @param  int $key
+     * @param  int    $key
      * @return Token
      */
     public function getToken($provider, $key)
@@ -167,8 +166,8 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Delete token from storage
      *
-     * @param  string $provider
-     * @param  int $key
+     * @param string $provider
+     * @param int    $key
      */
     public function deleteToken($provider, $key)
     {
@@ -179,9 +178,9 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Save token to storage
      *
-     * @param  string $provider
-     * @param  int $key
-     * @param  Token $token
+     * @param string $provider
+     * @param int    $key
+     * @param Token  $token
      */
     public function saveToken($provider, $key, $token)
     {
@@ -249,7 +248,7 @@ class OAuthHelper implements \ArrayAccess
     /**
      * Get provider credentials
      *
-     * @param  string $provider
+     * @param  string      $provider
      * @return Credentials
      */
     public function getCredentials($provider)

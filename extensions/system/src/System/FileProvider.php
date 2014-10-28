@@ -32,7 +32,7 @@ class FileProvider
     /**
      * Locate the fully qualified path.
      *
-     * @param  string $name
+     * @param  string       $name
      * @return string|false
      */
     public function locate($name)
@@ -43,8 +43,8 @@ class FileProvider
     /**
      * Proxy method call to filesystem.
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string                  $method
+     * @param  array                   $args
      * @throws \BadMethodCallException
      * @return mixed
      */

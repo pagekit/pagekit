@@ -68,7 +68,7 @@ interface WidgetInterface
     /**
      * Sets a widget setting.
      *
-     * @param string  $name
+     * @param string $name
      * @param mixed  $value
      */
     public function set($name, $value);
@@ -83,7 +83,7 @@ interface WidgetInterface
     /**
      * Returns the rendered widget output, otherwise null.
      *
-     * @param  array $options
+     * @param  array       $options
      * @return string|null
      */
     public function render($options = []);

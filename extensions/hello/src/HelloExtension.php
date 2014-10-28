@@ -19,15 +19,15 @@ class HelloExtension extends Extension
 
         $this['events']->addSubscriber(new HelloListener());
 
-        $app->on('system.widget', function(RegisterWidgetEvent $event) {
+        $app->on('system.widget', function (RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
         });
 
-        $app->on('system.dashboard', function(RegisterWidgetEvent $event) {
+        $app->on('system.dashboard', function (RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
         });
 
-        $app->on('system.link', function(LinkEvent $event) {
+        $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Hello\HelloLink');
         });
 

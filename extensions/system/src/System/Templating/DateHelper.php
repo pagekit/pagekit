@@ -14,7 +14,7 @@ class DateHelper extends Helper
 
     public function __construct(DateManager $manager)
     {
-        $this->manager = $manager ?: new DateManager;
+        $this->manager = $manager ?: new DateManager();
     }
 
     /**
@@ -38,4 +38,4 @@ class DateHelper extends Helper
 
         return $this->manager->format($date, isset($formats[$format]) ? $formats[$format] : $format, $timezone, $format);
     }
-} 
+}

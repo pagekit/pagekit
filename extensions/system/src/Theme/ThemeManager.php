@@ -25,7 +25,7 @@ class ThemeManager extends PackageManager
             throw new \InvalidArgumentException('Theme path does not exist.');
         }
 
-        $fn = function($app, $bootstrap) {
+        $fn = function ($app, $bootstrap) {
             return include $bootstrap;
         };
 

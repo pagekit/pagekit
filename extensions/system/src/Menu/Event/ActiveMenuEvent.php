@@ -33,11 +33,12 @@ class ActiveMenuEvent extends Event
     public function get($path)
     {
         $items = [];
-        foreach((array) $path as $p) {
+        foreach ((array) $path as $p) {
             if (isset($this->items['paths'][$p])) {
                 $items += $this->items['paths'][$p];
             }
         }
+
         return $items;
     }
 

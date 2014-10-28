@@ -51,7 +51,7 @@ class AliasController extends Controller
      */
     public function addAction()
     {
-        return ['head.title' => __('Add URL Alias'), 'alias' => new Alias];
+        return ['head.title' => __('Add URL Alias'), 'alias' => new Alias()];
     }
 
     /**
@@ -70,6 +70,7 @@ class AliasController extends Controller
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
+
             return $this->redirect('@system/alias');
         }
     }
@@ -82,7 +83,7 @@ class AliasController extends Controller
         try {
 
             if (!$obj = $this->aliases->find($id)) {
-                $obj = new Alias;
+                $obj = new Alias();
             }
 
             if (!$alias = trim($alias, '/')) {

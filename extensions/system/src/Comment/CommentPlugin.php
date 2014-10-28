@@ -19,7 +19,7 @@ class CommentPlugin extends EventSubscriber
         }
 
         // remove all html tags or escape if in [code] tag
-        $content = preg_replace_callback('/\[code\](.+?)\[\/code\]/is', function($matches) { return htmlspecialchars($matches[0]); }, $event->getContent());
+        $content = preg_replace_callback('/\[code\](.+?)\[\/code\]/is', function ($matches) { return htmlspecialchars($matches[0]); }, $event->getContent());
         $content = strip_tags($content);
 
         $content = ' '.$content.' ';

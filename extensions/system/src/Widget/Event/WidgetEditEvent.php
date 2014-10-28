@@ -20,7 +20,7 @@ class WidgetEditEvent extends WidgetEvent
     /**
      * Add settings view.
      *
-     * @param string   $name
+     * @param string          $name
      * @param string|callable $settings
      */
     public function addSettings($name, $settings)

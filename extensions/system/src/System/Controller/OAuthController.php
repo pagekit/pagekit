@@ -24,10 +24,9 @@ class OAuthController extends Controller
         }
         $redirect = $redirect[0];
 
-
         try {
 
-            if (!$service = $this['oauth']->createService($provider, [], new Memory)) {
+            if (!$service = $this['oauth']->createService($provider, [], new Memory())) {
                 throw new \Exception("Provider not configured.");
             }
 
@@ -45,8 +44,7 @@ class OAuthController extends Controller
                         $token->getRequestTokenSecret()
                     );
 
-                    if(!$token->getAccessToken())
-                    {
+                    if (!$token->getAccessToken()) {
                         throw new \Exception("Couldn't retrieve token.");
                     }
 

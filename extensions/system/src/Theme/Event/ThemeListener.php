@@ -19,9 +19,9 @@ class ThemeListener extends EventSubscriber
 
             $app = $this->getApplication();
 
-            $this['themes'] = function($app) {
+            $this['themes'] = function ($app) {
 
-                $loader     = new ThemeLoader;
+                $loader     = new ThemeLoader();
                 $repository = new ThemeRepository($this['config']['theme.path'], $loader);
                 $installer  = new PackageInstaller($repository, $loader);
 

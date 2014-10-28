@@ -46,7 +46,7 @@ class ExtensionManager extends PackageManager
             throw new ExtensionLoadException(sprintf('Extension path does not exist (%s).', $root));
         }
 
-        $fn = function($app, $bootstrap) {
+        $fn = function ($app, $bootstrap) {
             return include $bootstrap;
         };
 

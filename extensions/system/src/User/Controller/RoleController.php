@@ -38,7 +38,7 @@ class RoleController extends Controller
         } elseif ($id && isset($roles[$id])) {
             $role = $roles[$id];
         } else {
-            $role = new Role;
+            $role = new Role();
             $role->setId(0);
         }
 
@@ -55,7 +55,7 @@ class RoleController extends Controller
     {
         // is new ?
         if (!$role = $this->roles->find($id)) {
-            $role = new Role;
+            $role = new Role();
         }
 
         if ($name !== '') {

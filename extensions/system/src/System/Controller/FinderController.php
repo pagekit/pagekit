@@ -79,8 +79,7 @@ class FinderController extends Controller
 
             return $this->success(__('Directory created.'));
 
-        } catch(\Exception $e) {
-
+        } catch (\Exception $e) {
             return $this->error(__('Unable to create directory.'));
         }
     }
@@ -109,8 +108,7 @@ class FinderController extends Controller
 
             return $this->success(__('Renamed.'));
 
-        } catch(\Exception $e) {
-
+        } catch (\Exception $e) {
             return $this->error(__('Unable to rename.'));
         }
     }
@@ -136,7 +134,6 @@ class FinderController extends Controller
                 $this['file']->delete($path);
 
             } catch (\Exception $e) {
-
                 return $this->error(__('Unable to remove.'));
             }
         }
@@ -176,15 +173,14 @@ class FinderController extends Controller
 
             return $this->success(__('Upload complete.'));
 
-        } catch(\Exception $e) {
-
+        } catch (\Exception $e) {
             return $this->error(__('Unable to upload.'));
         }
     }
 
     protected function getMode($path)
     {
-        $mode = $this['events']->dispatch('system.finder', new FileAccessEvent)->mode($path);
+        $mode = $this['events']->dispatch('system.finder', new FileAccessEvent())->mode($path);
 
         if ('w' == $mode && !is_writable($path)) {
             $mode = 'r';
@@ -205,6 +201,7 @@ class FinderController extends Controller
 
       $sizes = [__('%d Bytes'), __('%d  KB'), __('%d  MB'), __('%d  GB'), __('%d TB'), __('%d PB'), __('%d EB'), __('%d ZB'), __('%d YB')];
       $size  = round($size/pow(1024, ($i = floor(log($size, 1024)))), 2);
+
       return sprintf($sizes[$i], $size);
     }
 
@@ -254,11 +251,13 @@ class FinderController extends Controller
         return -1 !== strpos($name, '/');
     }
 
-    protected function success($message) {
+    protected function success($message)
+    {
         return compact('message');
     }
 
-    protected function error($message) {
+    protected function error($message)
+    {
         return ['error' => true, 'message' => $message];
     }
 }

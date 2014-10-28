@@ -7,7 +7,6 @@ use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\User\Controller\ResetPasswordController;
 
 /**
  * @Route("/")
@@ -42,7 +41,7 @@ class SystemController extends Controller
             return $this->redirect('@system/system/admin');
         }
 
-        return ['head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ? : $this['url']->route('@system/system/admin', [], true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
+        return ['head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ?: $this['url']->route('@system/system/admin', [], true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
     }
 
     /**
@@ -76,7 +75,6 @@ class SystemController extends Controller
             return ['message' => __('Order saved.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }
@@ -107,7 +105,7 @@ class SystemController extends Controller
      */
     public function localeAction()
     {
-        $this['events']->dispatch('system.locale', $event = new LocaleEvent);
+        $this['events']->dispatch('system.locale', $event = new LocaleEvent());
 
         return $event->getMessages();
     }
@@ -119,7 +117,7 @@ class SystemController extends Controller
     public function tmplAction($templates = '')
     {
         $response = [];
-        $event = $this['events']->dispatch('system.tmpl', new TmplEvent);
+        $event = $this['events']->dispatch('system.tmpl', new TmplEvent());
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {

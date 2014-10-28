@@ -17,13 +17,13 @@ class PageExtension extends Extension
     {
         parent::boot($app);
 
-        $app['events']->addSubscriber(new AliasListener);
+        $app['events']->addSubscriber(new AliasListener());
 
-        $app->on('system.link', function(LinkEvent $event) {
+        $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');
         });
 
-        $app->on('system.locale', function(LocaleEvent $event) {
+        $app->on('system.locale', function (LocaleEvent $event) {
             $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
         });
     }

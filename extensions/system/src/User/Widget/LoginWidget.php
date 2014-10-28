@@ -42,12 +42,14 @@ class LoginWidget extends Type
 
         if ($user->isAuthenticated()) {
             $redirect = $widget->get('redirect.logout') ?: $this['url']->current(true);
+
             return $this['view']->render('extension://system/views/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
         }
 
         $redirect          = $widget->get('redirect.login') ?: $this['url']->current(true);
         $last_username     = $this['session']->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
+
         return $this['view']->render('extension://system/views/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 

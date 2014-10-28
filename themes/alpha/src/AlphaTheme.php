@@ -19,9 +19,9 @@ class AlphaTheme extends Theme
     {
         parent::boot($app);
 
-        $app->on('system.site', function() use ($app) {
+        $app->on('system.site', function () use ($app) {
 
-            $app->on('view.layout', function($event) use ($app) {
+            $app->on('view.layout', function ($event) use ($app) {
 
                 $event->setParameter('theme', $app['theme.site']);
 
@@ -42,11 +42,11 @@ class AlphaTheme extends Theme
         ], $this->getParams('sidebars', []));
         $columns  = ['main' => ['width' => 60, 'alignment' => 'right']];
 
-        $gcf = function($a, $b = 60) use(&$gcf) {
+        $gcf = function ($a, $b = 60) use (&$gcf) {
             return (int) ($b > 0 ? $gcf($b, $a % $b) : $a);
         };
 
-        $fraction = function($nominator, $divider = 60) use(&$gcf) {
+        $fraction = function ($nominator, $divider = 60) use (&$gcf) {
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
@@ -77,6 +77,7 @@ class AlphaTheme extends Theme
         }
 
         $this->classes = compact('columns');
+
         return $this->classes;
     }
 }

@@ -300,12 +300,13 @@ class CountryHelper
     /**
      * Converts isocode2 to country name
      *
-     * @param string $isoCode
+     * @param  string $isoCode
      * @return string
      */
     public function isoToName($isoCode)
     {
         $this->getList();
+
         return array_key_exists($isoCode, $this->countries) ? $this->countries[$isoCode] : false;
     }
 }

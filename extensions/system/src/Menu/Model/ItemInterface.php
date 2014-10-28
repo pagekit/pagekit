@@ -39,7 +39,7 @@ interface ItemInterface
 
     /**
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      */
     public function getAttribute($name, $default = null);
 

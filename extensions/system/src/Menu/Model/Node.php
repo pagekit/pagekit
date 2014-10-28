@@ -60,8 +60,8 @@ class Node extends \Pagekit\Component\Tree\Node
     }
 
     /**
-     * @param  string $method
-     * @param  array  $args
+     * @param  string                    $method
+     * @param  array                     $args
      * @return mixed
      * @throws \InvalidArgumentException
      */

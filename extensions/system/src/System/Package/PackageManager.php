@@ -61,7 +61,7 @@ abstract class PackageManager implements \IteratorAggregate
     /**
      * Gets an instance by name.
      *
-     * @param  string $name
+     * @param  string     $name
      * @return mixed|null
      */
     public function get($name)

@@ -25,7 +25,7 @@ class RegisterWidgetEvent extends Event implements \IteratorAggregate
         }
 
         if (is_string($type)) {
-            $type = new $type;
+            $type = new $type();
         }
 
         $this->parameters[$type->getId()] = $type;

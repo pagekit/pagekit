@@ -24,7 +24,7 @@ class VideoPlugin extends EventSubscriber
     /**
      * Defines the plugins callback.
      *
-     * @param  array $options
+     * @param  array  $options
      * @return string
      */
     public function applyPlugin(array $options)

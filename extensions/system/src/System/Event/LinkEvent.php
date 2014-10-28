@@ -45,12 +45,12 @@ class LinkEvent extends Event implements \IteratorAggregate
         }
 
         if (is_string($link)) {
-            $link = new $link;
+            $link = new $link();
         }
 
         $this->parameters[$link->getId()] = $link;
 
-        uasort($this->parameters, function(LinkInterface $typeA, LinkInterface $typeB) { return strcmp($typeA->getLabel(), $typeB->getLabel()); });
+        uasort($this->parameters, function (LinkInterface $typeA, LinkInterface $typeB) { return strcmp($typeA->getLabel(), $typeB->getLabel()); });
     }
 
     /**

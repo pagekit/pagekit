@@ -39,7 +39,7 @@ class WidgetsController extends Controller
     {
         $this->widgets   = $this['db.em']->getRepository('Pagekit\Widget\Entity\Widget');
         $this->roles     = $this['users']->getRoleRepository();
-        $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
+        $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent())->getPositions();
     }
 
     /**
@@ -65,7 +65,7 @@ class WidgetsController extends Controller
      */
     public function addAction($type)
     {
-        $widget = new Widget;
+        $widget = new Widget();
         $widget->setType($type);
 
         return ['head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
@@ -106,7 +106,7 @@ class WidgetsController extends Controller
                     throw new Exception(__('Invalid widget id'));
                 }
 
-                $widget = new Widget;
+                $widget = new Widget();
             }
 
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
@@ -143,7 +143,6 @@ class WidgetsController extends Controller
 
         return $this->redirect('@system/widgets');
     }
-
 
     /**
      * @Request({"ids": "int[]"}, csrf=true)

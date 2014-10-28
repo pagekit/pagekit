@@ -31,7 +31,7 @@ class FileAccessEvent extends Event
      * $event->path('/some\/special\/dir/', 'w') // same as above
      *
      * @param  string $pattern A pattern (a regexp or a string)
-     * @param  string $mode ('r', 'read', 'w', 'write', '-', 'deny'
+     * @param  string $mode    ('r', 'read', 'w', 'write', '-', 'deny'
      * @return $this
      */
     public function path($pattern, $mode = 'r')
@@ -89,7 +89,7 @@ class FileAccessEvent extends Event
      *
      * @param string $str
      *
-     * @return bool    Whether the given string is a regex
+     * @return bool Whether the given string is a regex
      */
     protected function isRegex($str)
     {

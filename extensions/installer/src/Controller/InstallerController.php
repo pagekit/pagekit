@@ -38,6 +38,7 @@ class InstallerController extends Controller
     public function indexAction()
     {
         $redirect = $this['router']->getContext()->getBaseUrl() . '/admin';
+
         return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config, 'redirect' => $redirect];
     }
 
@@ -124,7 +125,7 @@ class InstallerController extends Controller
                     'password' => $this['auth.password']->hash($user['password']),
                     'status' => 1,
                     'email' => $user['email'],
-                    'registered' => new \DateTime
+                    'registered' => new \DateTime()
                 ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
 
                 $id = $this['db']->lastInsertId();
@@ -153,7 +154,7 @@ class InstallerController extends Controller
 
             if (!$this->config) {
 
-                $configuration = new Config;
+                $configuration = new Config();
 
                 foreach ($config as $key => $value) {
                     $configuration->set($key, $value);

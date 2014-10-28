@@ -68,14 +68,14 @@ class ExtensionUploadCommand extends Command
             exit;
         }
 
-        $loader  = new JsonLoader;
+        $loader  = new JsonLoader();
         $package = $loader->load("$path/$json");
         $version = $package->getVersion();
 
-        $zip = new \ZipArchive;
+        $zip = new \ZipArchive();
         $zip->open($zipFile = "$temp/$name-$version.zip", \ZipArchive::OVERWRITE);
 
-        $finder = new Finder;
+        $finder = new Finder();
         $finder->files()->in($path)->ignoreVCS(true);
 
         foreach ($finder as $file) {
@@ -92,7 +92,7 @@ class ExtensionUploadCommand extends Command
 
         try {
 
-            $client = new Client;
+            $client = new Client();
             $client->post("$api/package/upload", [
                     'body' => [
                         'api_key' => $key,

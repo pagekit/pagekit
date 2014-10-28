@@ -43,6 +43,7 @@ class AuthController extends Controller
     {
         if ($this->user->isAuthenticated()) {
             $this['message']->info(__('You are already logged in.'));
+
             return $this->redirect('/');
         }
 

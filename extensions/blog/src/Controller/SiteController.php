@@ -51,7 +51,7 @@ class SiteController extends Controller
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
-        $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) use ($autoclose) {
+        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
             $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
         });
@@ -64,12 +64,12 @@ class SiteController extends Controller
      */
     public function indexAction($page = 1)
     {
-        $this['events']->addListener('blog.post.postLoad', function(EntityEvent $event) {
+        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) {
             $post = $event->getEntity();
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
-        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime()])->related('user');
 
         if (!$limit = $this->extension->getParams('posts_per_page')) {
             $limit = 10;
@@ -134,10 +134,10 @@ class SiteController extends Controller
                 throw new Exception(__('Please provide valid name and email.'));
             }
 
-            $comment = new Comment;
+            $comment = new Comment();
             $comment->setUserId((int) $user->getId());
             $comment->setIp($this['request']->getClientIp());
-            $comment->setCreated(new \DateTime);
+            $comment->setCreated(new \DateTime());
             $comment->setPost($post);
 
             $approved_once = (boolean) $this->comments->query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
@@ -177,7 +177,7 @@ class SiteController extends Controller
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
+        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime()])->related('user')->first()) {
             throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
@@ -189,7 +189,7 @@ class SiteController extends Controller
         $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
         if ($user->isAuthenticated()) {
-            $query->orWhere(function($query) use ($user) {
+            $query->orWhere(function ($query) use ($user) {
                 $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $user->getId()]);
             });
         }
@@ -219,13 +219,13 @@ class SiteController extends Controller
 
         $feed->setChannelElement('language', $this['option']->get('system:app.locale'));
 
-        if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+        if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime()])->limit(1)->orderBy('modified', 'DESC')->first()) {
             $feed->setDate($last->getModified()->format(DATE_RSS));
         }
 
         $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
 
-        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime()])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
 
             $item = $feed->createNewItem();
 
@@ -252,13 +252,13 @@ class SiteController extends Controller
             $type = $this->extension->getParams('feed.type');
         }
 
-        switch($type) {
+        switch ($type) {
             case 'atom':
-                return new ATOM;
+                return new ATOM();
             case 'rss':
-                return new RSS1;
+                return new RSS1();
             default:
-                return new RSS2;
+                return new RSS2();
         }
     }
 }

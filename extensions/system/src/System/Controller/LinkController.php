@@ -71,7 +71,7 @@ class LinkController extends Controller
     }
 
     /**
-     * @param  string $context
+     * @param  string    $context
      * @return LinkEvent
      */
     protected function getTypes($context = '')
@@ -84,8 +84,8 @@ class LinkController extends Controller
     }
 
     /**
-     * @param  string $url
-     * @param  string $context
+     * @param  string              $url
+     * @param  string              $context
      * @return LinkInterface|false
      */
     protected function matchType($url, $context = '')

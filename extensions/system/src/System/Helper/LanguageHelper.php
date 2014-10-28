@@ -128,12 +128,13 @@ class LanguageHelper
     /**
      * Converts isocode to language name
      *
-     * @param string $isoCode
+     * @param  string $isoCode
      * @return string
      */
     public function isoToName($isoCode)
     {
         $this->getList();
+
         return array_key_exists($isoCode, $this->languages) ? $this->languages[$isoCode][0] : false;
     }
 }

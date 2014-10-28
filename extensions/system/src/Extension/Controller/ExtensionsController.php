@@ -63,7 +63,7 @@ class ExtensionsController extends Controller
             }
 
             ini_set('display_errors', 0);
-            $handler = $this['exception']->setHandler(function($exception) {
+            $handler = $this['exception']->setHandler(function ($exception) {
 
                 while (ob_get_level()) {
                     ob_get_clean();
@@ -91,7 +91,6 @@ class ExtensionsController extends Controller
             return ['message' => __('Extension enabled.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }
@@ -119,7 +118,6 @@ class ExtensionsController extends Controller
             return ['message' => __('Extension disabled.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }
@@ -155,7 +153,6 @@ class ExtensionsController extends Controller
             return ['message' => __('Extension uninstalled.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }

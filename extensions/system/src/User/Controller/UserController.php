@@ -69,7 +69,7 @@ class UserController extends Controller
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
-            $query->where(function($query) use ($filter) {
+            $query->where(function ($query) use ($filter) {
                 $query->orWhere(['username LIKE :search', 'name LIKE :search', 'email LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
@@ -80,7 +80,7 @@ class UserController extends Controller
         if ($role || $permission) {
 
             if ($role) {
-                $query->whereExists(function($query) use ($role) {
+                $query->whereExists(function ($query) use ($role) {
                     $query->from('@system_user_role u')
                           ->where(['@system_user.id = u.user_id', 'u.role_id' => $role]);
                 });
@@ -88,7 +88,7 @@ class UserController extends Controller
 
             if ($permission) {
                 $sql = $this->getPermissionSql($permission);
-                $query->whereExists(function($query) use ($sql) {
+                $query->whereExists(function ($query) use ($sql) {
                     $query->from('@system_user_role ur')
                         ->join('@system_role r', 'ur.role_id = r.id')
                         ->where(['@system_user.id = ur.user_id', $sql]);
@@ -119,7 +119,7 @@ class UserController extends Controller
      */
     public function addAction()
     {
-        $user = new User;
+        $user = new User();
         $user->setRoles([]);
 
         $roles = $this->user->hasAccess('administer permissions') ? $this->getRoles() : [];
@@ -158,8 +158,8 @@ class UserController extends Controller
                     throw new Exception(__('Password required.'));
                 }
 
-                $user = new User;
-                $user->setRegistered(new \DateTime);
+                $user = new User();
+                $user->setRegistered(new \DateTime());
             }
 
             $self = $this->user->getId() == $user->getId();
@@ -179,13 +179,13 @@ class UserController extends Controller
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if ($this->users->where(['id <> :id', ], compact('id'))->where(function($query) use ($name) {
+            if ($this->users->where(['id <> :id', ], compact('id'))->where(function ($query) use ($name) {
                 $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
             })->first()) {
                 throw new Exception(__('Username not available.'));
             }
 
-            if ($this->users->where(['id <> :id'], compact('id'))->where(function($query) use ($email) {
+            if ($this->users->where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
                 $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
             })->first()) {
                 throw new Exception(__('Email not available.'));
@@ -216,7 +216,6 @@ class UserController extends Controller
             return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user)];
 
         } catch (Exception $e) {
-
             return ['error' => $e->getMessage()];
         }
     }
@@ -273,7 +272,7 @@ class UserController extends Controller
     /**
      * Gets the user info.
      *
-     * @param  User $user
+     * @param  User  $user
      * @return array
      */
     protected function getInfo(User $user)
@@ -294,7 +293,7 @@ class UserController extends Controller
     /**
      * Gets the user roles.
      *
-     * @param  User $user
+     * @param  User  $user
      * @return array
      */
     protected function getRoles(User $user = null)

@@ -9,7 +9,6 @@ return [
         '%NAMESPACE_ESC%\\' => 'src'
     ],
 
-
     // positions are sections in your theme where widgets can be published
     'positions' => [
         'logo'       => 'Logo',

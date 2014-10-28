@@ -18,7 +18,7 @@ class AliasListener extends EventSubscriber
 
         if (!$aliases) {
 
-            $aliases = array_map(function($id) {
+            $aliases = array_map(function ($id) {
                     return '@page/id?id='.$id;
                 },
                 $this['db']->createQueryBuilder()

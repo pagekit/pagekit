@@ -4,13 +4,13 @@ use Pagekit\User\Model\RoleInterface;
 
 return [
 
-    'up' => function() use ($app) {
+    'up' => function () use ($app) {
 
         $db = $app['db'];
         $util = $app['db']->getUtility();
 
         if ($util->tableExists('@system_menu') === false) {
-            $util->createTable('@system_menu', function($table) {
+            $util->createTable('@system_menu', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255]);
                 $table->setPrimaryKey(['id']);
@@ -19,7 +19,7 @@ return [
         }
 
         if ($util->tableExists('@system_menu_item') === false) {
-            $util->createTable('@system_menu_item', function($table) {
+            $util->createTable('@system_menu_item', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('menu_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
@@ -36,7 +36,7 @@ return [
         }
 
         if ($util->tableExists('@system_option') === false) {
-            $util->createTable('@system_option', function($table) {
+            $util->createTable('@system_option', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 64, 'default' => '']);
                 $table->addColumn('value', 'text');
@@ -47,7 +47,7 @@ return [
         }
 
         if ($util->tableExists('@system_role') === false) {
-            $util->createTable('@system_role', function($table) {
+            $util->createTable('@system_role', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 64]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
@@ -63,7 +63,7 @@ return [
         }
 
         if ($util->tableExists('@system_session') === false) {
-            $util->createTable('@system_session', function($table) {
+            $util->createTable('@system_session', function ($table) {
                 $table->addColumn('id', 'string', ['length' => 255]);
                 $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->addColumn('time', 'datetime');
@@ -72,7 +72,7 @@ return [
         }
 
         if ($util->tableExists('@system_url_alias') === false) {
-            $util->createTable('@system_url_alias', function($table) {
+            $util->createTable('@system_url_alias', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('source', 'string', ['length' => 255]);
                 $table->addColumn('alias', 'string', ['length' => 255]);
@@ -83,7 +83,7 @@ return [
         }
 
         if ($util->tableExists('@system_user') === false) {
-            $util->createTable('@system_user', function($table) {
+            $util->createTable('@system_user', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('username', 'string', ['length' => 150, 'default' => '']);
@@ -103,7 +103,7 @@ return [
         }
 
         if ($util->tableExists('@system_user_role') === false) {
-            $util->createTable('@system_user_role', function($table) {
+            $util->createTable('@system_user_role', function ($table) {
                 $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('role_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->setPrimaryKey(['user_id', 'role_id']);
@@ -111,7 +111,7 @@ return [
         }
 
         if ($util->tableExists('@system_widget') === false) {
-            $util->createTable('@system_widget', function($table) {
+            $util->createTable('@system_widget', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('type', 'string', ['length' => 255]);

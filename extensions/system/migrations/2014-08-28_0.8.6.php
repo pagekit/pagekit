@@ -2,7 +2,7 @@
 
 return [
 
-    'up' => function() use ($app) {
+    'up' => function () use ($app) {
 
         foreach ($app['option'] as $name => $value) {
 

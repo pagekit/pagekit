@@ -2,12 +2,12 @@
 
 return [
 
-    'up' => function() use ($app) {
+    'up' => function () use ($app) {
 
         $util = $app['db']->getUtility();
 
         if ($util->tableExists('@page_page') === false) {
-            $util->createTable('@page_page', function($table) {
+            $util->createTable('@page_page', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('title', 'string', ['length' => 255]);
                 $table->addColumn('content', 'text');

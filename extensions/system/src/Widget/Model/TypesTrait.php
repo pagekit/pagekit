@@ -12,7 +12,7 @@ trait TypesTrait
     /**
      * Gets a widget type.
      *
-     * @param  string $type
+     * @param  string             $type
      * @return TypeInterface|null
      */
     public function getWidgetType($type)
