@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:09+0000\n"
-"PO-Revision-Date: 2014-07-22 08:50+0000\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-10-24 14:47+0000\n"
+"Last-Translator: Florian <florianletsch@gmail.com>\n"
 "Language-Team: English (United States) (http://www.transifex.com/projects/p/pagekit-cms/language/en_US/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,96 +16,96 @@ msgstr ""
 #: extensions/page/views/admin/link/page.razr:2
 #: extensions/page/src/PageLink.php:22
 msgid "Page"
-msgstr ""
+msgstr "Page"
 
 #: extensions/page/views/admin/link/page.razr:5
 msgid "- Select Page -"
-msgstr ""
+msgstr "- Select Page -"
 
 #: extensions/page/views/admin/pages/edit.razr:14
 msgid "Enter Title"
-msgstr ""
+msgstr "Enter Title"
 
 #: extensions/page/views/admin/pages/index.razr:8
 #: extensions/page/src/Controller/PageController.php:83
 msgid "Add Page"
-msgstr ""
+msgstr "Add Page"
 
 #: extensions/page/views/admin/pages/index.razr:15
 msgid "Publish"
-msgstr ""
+msgstr "Publish"
 
 #: extensions/page/views/admin/pages/index.razr:16
 msgid "Unpublish"
-msgstr ""
+msgstr "Unpublish"
 
 #: extensions/page/views/admin/pages/index.razr:38
 msgid "No pages found."
-msgstr ""
+msgstr "No pages found."
 
 #: extensions/page/src/Controller/PageController.php:75
 msgid "Pages"
-msgstr ""
+msgstr "Pages"
 
 #: extensions/page/src/Controller/PageController.php:95
 msgid "Invalid page id."
-msgstr ""
+msgstr "Invalid page id."
 
 #: extensions/page/src/Controller/PageController.php:105
 msgid "Edit Page"
-msgstr ""
+msgstr "Edit Page"
 
 #: extensions/page/src/Controller/PageController.php:120
 msgid "Page Url not available."
-msgstr ""
+msgstr "Page Url not available."
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page saved."
-msgstr ""
+msgstr "Page saved."
 
 #: extensions/page/src/Controller/PageController.php:127
 msgid "Page created."
-msgstr ""
+msgstr "Page created."
 
 #: extensions/page/src/Controller/PageController.php:148
 msgid "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
-msgstr ""
+msgstr "{0} No page deleted.|{1} Page deleted.|]1,Inf[ Pages deleted."
 
 #: extensions/page/src/Controller/PageController.php:164
 msgid "%title% (Copy)"
-msgstr ""
+msgstr "%title% (Copy)"
 
 #: extensions/page/src/Controller/PageController.php:170
 msgid "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
-msgstr ""
+msgstr "{0} No page copied.|{1} Page copied.|]1,Inf[ Pages copied."
 
 #: extensions/page/src/Controller/PageController.php:187
 msgid "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
-msgstr ""
+msgstr "{0} No page published.|{1} Page published.|]1,Inf[ Pages published."
 
 #: extensions/page/src/Controller/PageController.php:189
 msgid ""
 "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
-msgstr ""
+msgstr "{0} No page unpublished.|{1} Page unpublished.|]1,Inf[ Pages unpublished."
 
 #: extensions/page/src/Controller/SiteController.php:36
 msgid "Page not found!"
-msgstr ""
+msgstr "Page not found!"
 
 #: extensions/page/src/Controller/SiteController.php:45
 msgid "Unable to access this page!"
-msgstr ""
+msgstr "Unable to access this page!"
 
 #: extensions/page/src/Entity/Page.php:99
 msgid "Unpublished"
-msgstr ""
+msgstr "Unpublished"
 
 #: extensions/page/src/Entity/Page.php:100
 msgid "Published"
-msgstr ""
+msgstr "Published"
 
 #: extensions/page/src/PageExtension.php:27
 msgid ""
 "You've made some changes! Leaving the page without saving will discard all "
 "changes."
-msgstr ""
+msgstr "You've made some changes! Leaving the page without saving will discard all changes."
