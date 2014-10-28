@@ -1,14 +1,15 @@
 # 
 # Translators:
 # Hasan Tayyar BESIK <tayyar.besik@gmail.com>, 2014
+# Kaya Zeren <kayazeren@gmail.com>, 2014
 # ozanmora <ozan.mora@gmail.com>, 2014
 # Taner YILMAZ <taner.yilmaz@live.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-10-16 10:45+0000\n"
-"Last-Translator: Taner YILMAZ <taner.yilmaz@live.com>\n"
+"PO-Revision-Date: 2014-10-25 05:53+0000\n"
+"Last-Translator: Kaya Zeren <kayazeren@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/pagekit-cms/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +91,7 @@ msgstr "Pagekit'i Güncelle"
 msgid ""
 "Pagekit has been updated! Before we send you on your way, we have to update "
 "your database to the newest version."
-msgstr ""
+msgstr "Pagekit güncellendi. Kullanmaya başlamadan önce veritabanınızın da güncellenmesi gerekiyor. "
 
 #: extensions/system/theme/templates/migration.razr:26
 #: extensions/system/views/admin/settings/index.razr:54
@@ -189,7 +190,7 @@ msgstr "Takma Ad"
 msgid ""
 "Use a relative path and don't add a trailing slash. For example: "
 "<code>about</code>"
-msgstr ""
+msgstr "Yolu bağıl olarak yazın ve sonuna / eklemeyin. Örneğin <code>hakkinda</code>"
 
 #: extensions/system/views/admin/aliases/edit.razr:20
 #: extensions/system/views/admin/aliases/index.razr:22
@@ -296,7 +297,7 @@ msgstr "Girildi"
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Last registered"
-msgstr ""
+msgstr "Son kayıt olan"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:12
 msgid "Number of Users"
@@ -306,13 +307,13 @@ msgstr "Kullanıcıların Sayısı"
 msgid ""
 "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
 "%users% registered users"
-msgstr ""
+msgstr "{0} Henüz bir kullanıcı kayıt olmamış|{1} Son kayıt olan %users% kullanıcı|]1,Inf[ Son kayıt olan %users% kullanıcı"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
-msgstr ""
+msgstr "{0} Henüz hiç bir kullanıcı oturum açmamış|{1} %users% kullanıcı oturum açmış|]1,Inf[ %users% kullanıcı oturum açmış"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
@@ -320,7 +321,7 @@ msgstr "Konum"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:10
 msgid "Enter the name of the city you want to get weather information for."
-msgstr ""
+msgstr "Hava durumu bilgisini almak istediğiniz şehrin adını yazın."
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:15
 msgid "Unit"
@@ -328,11 +329,11 @@ msgstr "Birim"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:18
 msgid "Metric"
-msgstr "Metre"
+msgstr "Metrik"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:21
 msgid "Imperial"
-msgstr "Görkemli"
+msgstr "İngiliz-Amerikan"
 
 #: extensions/system/views/admin/dashboard/weather/index.razr:12
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:23
@@ -376,11 +377,11 @@ msgstr "Tümü"
 #: extensions/system/views/admin/themes/index.razr:34
 msgid ""
 "An error occurred in retrieving update information. Please try again later."
-msgstr ""
+msgstr "Güncelleme bilgileri alınırken bir hata oluştu. Lütfen bir süre sonra yeniden deneyin."
 
 #: extensions/system/views/admin/extensions/index.razr:38
 msgid "No extension updates found."
-msgstr "Eklenti güncellemesi bulunamadı"
+msgstr "Herhangi bir eklenti güncellemesi yok."
 
 #: extensions/system/views/admin/extensions/index.razr:44
 #: extensions/system/views/admin/themes/index.razr:44
@@ -399,7 +400,7 @@ msgstr "Bırakma Alanı"
 msgid ""
 "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-"
 "upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
+msgstr "Dosyaları buraya bırakın ya da <a class=\"uk-form-file\">birini seçin<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
@@ -408,7 +409,7 @@ msgstr "Hiçbir uzantı bulunamadı."
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
 msgid "Cannot connect to the marketplace. Please try again later."
-msgstr ""
+msgstr "Mağaza ile bağlantı kurulamadı. Lütfen bir süre sonra yeniden deneyin."
 
 #: extensions/system/views/admin/extensions/table.razr:4
 #: extensions/system/views/admin/user/edit.razr:43
@@ -543,7 +544,7 @@ msgstr "Aktivasyon Rolleri"
 
 #: extensions/system/views/admin/menu/item.edit.razr:64
 msgid "Enter custom activation rules as paths."
-msgstr ""
+msgstr "İsteğe göre uyarlanmış etkinleştirme kuralları yol olarak yazılsın."
 
 #: extensions/system/views/admin/menu/item.razr:25
 msgid "Menu Header"
@@ -602,7 +603,7 @@ msgstr "Sistem Önbelleği"
 
 #: extensions/system/views/admin/settings/index.razr:121
 msgid "Rendered Templates"
-msgstr ""
+msgstr "Oluşturulmuş Temalar"
 
 #: extensions/system/views/admin/settings/index.razr:128
 msgid "Temporary Files"
@@ -646,11 +647,11 @@ msgstr "Kullanıcı Aracısı"
 
 #: extensions/system/views/admin/settings/info.razr:53
 msgid "Handler"
-msgstr ""
+msgstr "İşleyici"
 
 #: extensions/system/views/admin/settings/info.razr:57
 msgid "Built On"
-msgstr ""
+msgstr "Yapım"
 
 #: extensions/system/views/admin/settings/info.razr:81
 msgid "Driver"
@@ -708,7 +709,7 @@ msgstr "Ana Sayfa"
 
 #: extensions/system/views/admin/settings/settings.razr:52
 msgid "Put the site offline and show the offline message."
-msgstr ""
+msgstr "Site çevrimdışı yapılarak çevrimdışı iletisi görüntülensin."
 
 #: extensions/system/views/admin/settings/settings.razr:57
 msgid "Offline Message"
@@ -905,7 +906,7 @@ msgid ""
 "You have the latest version of Pagekit. You do not need to update. However, "
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
-msgstr ""
+msgstr "Son Pagekit sürümün kullanıyorsunuz. Herhangi bir güncelleme gereksinimiz yok. Bununla birlikte %version% sürümünü yeniden yüklemek istiyorsanız, bu işlemi otomatik olarak ya da paketi indirip el ile yükleyerek yapabilirsiniz."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
@@ -913,7 +914,7 @@ msgstr "Tekrar Yükle"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
-msgstr ""
+msgstr "Sunucu ile bağlantı kurulamıyor. Lütfen bir süre sonra yeniden deneyin."
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
@@ -950,7 +951,7 @@ msgstr "Asla"
 
 #: extensions/system/views/admin/user/edit.razr:26
 msgid "Registered since: %date%"
-msgstr ""
+msgstr "Kayıt tarihi: %date%"
 
 #: extensions/system/views/admin/user/edit.razr:61
 #: extensions/system/views/user/profile.razr:22
@@ -974,11 +975,11 @@ msgstr "Roller"
 
 #: extensions/system/views/admin/user/edit.razr:117
 msgid "Last login: {{login}}"
-msgstr ""
+msgstr "Son oturum açma: {{login}}"
 
 #: extensions/system/views/admin/user/edit.razr:118
 msgid "Registered since: {{registered}}"
-msgstr ""
+msgstr "Kayıt tarihi: {{registered}}"
 
 #: extensions/system/views/admin/user/index.razr:8
 #: extensions/system/src/User/Controller/UserController.php:113
@@ -1047,7 +1048,7 @@ msgid ""
 "pages by prepending an exclamation mark to the path. Example paths: \"blog\""
 " for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to "
 "exclude the blog."
-msgstr ""
+msgstr "Her satıra bir sayfa yolu yazın. \"*\" karakteri jokerdir. Katılmayacak sayfaların yolunun başına ünlem işareti koyun. Örnek yollar: blog sayfası için \"blog\", tüm blog kayıtları için \"blog/*\", blog bölümünü katmamak için \"!blog\"."
 
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
@@ -1134,7 +1135,7 @@ msgstr "Resim seçin"
 
 #: extensions/system/views/tmpl/image.modal.razr:18
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: extensions/system/views/tmpl/image.modal.razr:29
 msgid "Select Image"
@@ -1147,7 +1148,7 @@ msgstr "Seçin"
 
 #: extensions/system/views/tmpl/image.replace.razr:6
 msgid "Placeholder Image"
-msgstr ""
+msgstr "Yer Belirtme Görseli"
 
 #: extensions/system/views/tmpl/image.replace.razr:12
 msgid "Image"
@@ -1174,13 +1175,13 @@ msgstr "Değişiklikler"
 msgid ""
 "The checksum of the uploaded package does not match the one from the "
 "marketplace. The file might be manipulated."
-msgstr ""
+msgstr "Yüklenen paketin sağlaması, mağazadaki ile uyuşmuyor. Dosyada değişiklik yapılmış olabilir."
 
 #: extensions/system/views/tmpl/package.upload.razr:8
 msgid ""
 "There is an update available for the uploaded package. Please consider "
 "installing it instead."
-msgstr ""
+msgstr "Yüklenen paket için bir güncelleme var. Lütfen en yeni sürümü yüklemeyi düşünün."
 
 #: extensions/system/views/tmpl/package.upload.razr:28
 msgid "Path:"
@@ -1204,7 +1205,7 @@ msgstr "Video Seçin"
 
 #: extensions/system/views/tmpl/video.replace.razr:6
 msgid "Placeholder Video"
-msgstr ""
+msgstr "Yer Belirtme Görüntüsü"
 
 #: extensions/system/views/tmpl/video.replace.razr:12
 msgid "Video"
@@ -1229,28 +1230,28 @@ msgstr "Merhaba"
 msgid ""
 "A new user has registered at %site% and requests that you approve his "
 "account."
-msgstr ""
+msgstr "%site% sitesine yeni bir kullanıcı kayıt oldu ve hesabını onaylamanızı bekliyor."
 
 #: extensions/system/views/user/mails/approve.razr:13
 msgid ""
 "User Details:<br><br>Name: %name%<br>Username: %username%<br>Email: %email%"
-msgstr ""
+msgstr "Kullanıcı Bilgileri:<br><br>Ad: %name%<br>Kullanıcı Adı: %username%<br>E-posta: %email%"
 
 #: extensions/system/views/user/mails/approve.razr:14
 msgid "To activate the account click on:"
-msgstr ""
+msgstr "Hesabı etkinleştirmek için şuraya tıklayın:"
 
 #: extensions/system/views/user/mails/reset.razr:9
 msgid "Someone requested that the password be reset for the following account"
-msgstr ""
+msgstr "Şu hesap için parola sıfırlama isteğinde bulunuldu"
 
 #: extensions/system/views/user/mails/reset.razr:12
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
+msgstr "Bu isteği siz yapmadıysanız, bu e-postayı dikkate almayın, herhangi bir değişiklik yapılmayacak."
 
 #: extensions/system/views/user/mails/reset.razr:13
 msgid "To reset your password, visit the following address"
-msgstr ""
+msgstr "Parolanızı sıfırlamak için şu adrese gidin"
 
 #: extensions/system/views/user/mails/verification.razr:11
 #: extensions/system/views/user/mails/welcome.razr:9
@@ -1261,11 +1262,11 @@ msgstr "Merhaba %name%"
 msgid ""
 "Thank you for registering at %site%! Your account has been successfully "
 "created and must be verified before you can use it."
-msgstr ""
+msgstr "%site% sitesine kayıt olduğunuz için teşekkürler. Hesabınız oluşturuldu ve onaylanmak üzere yöneticiye iletildi. Onaylandıktan sonra oturum açabilirsiniz."
 
 #: extensions/system/views/user/mails/verification.razr:13
 msgid "To verify your account click on:"
-msgstr "Hesabınızı aktifleştirmek için tıklayın:"
+msgstr "Hesabınızı etkinleştirmek için şuraya tıklayın:"
 
 #: extensions/system/views/user/mails/welcome.razr:10
 msgid "Thank you for registering!"
@@ -1304,7 +1305,7 @@ msgstr "Şifremi unuttum"
 msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
-msgstr ""
+msgstr "Lütfen kullanıcını adı ya da e-posta adresinizi yazın. E-posta adresinize parola değiştirme bağlantısını içeren bir ileti gönderilecek. "
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
@@ -1336,7 +1337,7 @@ msgstr "Başlangıç Seviyesi"
 
 #: extensions/system/views/widgets/menu/edit.razr:22
 msgid "Depth"
-msgstr ""
+msgstr "Derinlik"
 
 #: extensions/system/views/widgets/menu/edit.razr:25
 msgid "No Limit"
@@ -1433,7 +1434,7 @@ msgstr "17"
 #: extensions/system/languages/messages.php:25
 #: extensions/system/src/Widget/Controller/WidgetsController.php:58
 msgid "Widgets"
-msgstr "Widgets"
+msgstr "Araçlar"
 
 #: extensions/system/languages/messages.php:26
 #: extensions/system/src/Menu/Controller/MenuController.php:47
@@ -1460,7 +1461,7 @@ msgstr "Menüleri yönet"
 
 #: extensions/system/languages/messages.php:35
 msgid "Manage widgets"
-msgstr ""
+msgstr "Araç yönetimi"
 
 #: extensions/system/languages/messages.php:36
 msgid "Manage themes"
@@ -1502,7 +1503,7 @@ msgstr "Siteyi bakım modunda kullan"
 msgid ""
 "Warning: Give to trusted roles only; this permission has security "
 "implications."
-msgstr ""
+msgstr "Uyarı: Yalnız güvendiğiniz kullanıcılara izin verin. Bu yetki güvenlikle ilgilidir."
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
 msgid "Editor not found."
@@ -1515,11 +1516,11 @@ msgstr "Çekirdek uzantılar etkin olmayabilir."
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
 msgid ""
 "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr ""
+msgstr "Eklenti etkinleştirilemedi.<br>Eklenti önemli bir hataya yol açtı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:80
 msgid "Unable to enable extension \"%name%\"."
-msgstr ""
+msgstr "\"%name%\" eklentisi etkinleştirilemedi."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:91
 msgid "Extension enabled."
@@ -1531,7 +1532,7 @@ msgstr "Çekirdek uzantılar devre dışı olmayabilir."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:113
 msgid "Extension \"%name%\" has not been loaded."
-msgstr ""
+msgstr "\"%name%\" eklentisi yüklenemedi."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:120
 msgid "Extension disabled."
@@ -1543,7 +1544,7 @@ msgstr "Çekirdek uzantılar kaldırılmamış olabilir."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:146
 msgid "Unable to uninstall extension \"%name%\"."
-msgstr ""
+msgstr "\"%name%\" eklentisi kaldırılamadı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:157
 msgid "Extension uninstalled."
@@ -1594,7 +1595,7 @@ msgstr "Geçersiz URL."
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
 "{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted."
-msgstr ""
+msgstr "{0} Hiç bir menü ögesi silinmedi.|{1} menü ögesi silindi.|]1,Inf[ menü ögesi silindi."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
@@ -1602,7 +1603,7 @@ msgstr "Geçersiz menü adı."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:66
 msgid "Invalid menu name. \"%name%\" is already in use."
-msgstr ""
+msgstr "Menü adı geçersiz. \"%name%\" adında bir menü zaten var."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:86
 msgid "Invalid menu id"
@@ -1620,7 +1621,7 @@ msgstr "Bilinmeyen"
 
 #: extensions/system/src/Menu/Widget/MenuWidget.php:31
 msgid "Menu Widget"
-msgstr ""
+msgstr "Menü Aracı"
 
 #: extensions/system/src/System/Controller/AliasController.php:54
 msgid "Add URL Alias"
@@ -1656,7 +1657,7 @@ msgstr "Takma ad oluşturuldu."
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr ""
+msgstr "{0} Hiç bir kısaltma silinmedi.|{1} Kısaltma silindi.|]1,Inf[ kısaltma silindi."
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
@@ -1665,34 +1666,34 @@ msgstr "Kontrol Paneli Ayarları"
 #: extensions/system/src/System/Controller/DashboardController.php:79
 #: extensions/system/src/System/Controller/DashboardController.php:109
 msgid "Invalid widget type."
-msgstr ""
+msgstr "Araç tipi geçersiz."
 
 #: extensions/system/src/System/Controller/DashboardController.php:105
 msgid "Invalid widget id."
-msgstr ""
+msgstr "Araç kodu geçersiz."
 
 #: extensions/system/src/System/Controller/DashboardController.php:114
 #: extensions/system/src/Widget/Controller/WidgetsController.php:85
 msgid "Edit Widget"
-msgstr ""
+msgstr "Aracı Düzenleyin"
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget created."
-msgstr ""
+msgstr "Araç eklendi."
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
 msgid "Widget saved."
-msgstr ""
+msgstr "Araç kaydedildi."
 
 #: extensions/system/src/System/Controller/DashboardController.php:160
 msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
+msgstr "{0} Hiç bir araç silinmedi.|{1} araç silindi.|]1,Inf[ araç silindi."
 
 #: extensions/system/src/System/Controller/DashboardController.php:183
 msgid "Widgets reordered."
-msgstr ""
+msgstr "Araçlar yeniden sıralandı."
 
 #: extensions/system/src/System/Controller/FinderController.php:18
 #: extensions/system/src/System/Controller/FinderController.php:65
@@ -1721,7 +1722,7 @@ msgstr "Dizin oluşturuldu."
 
 #: extensions/system/src/System/Controller/FinderController.php:80
 msgid "Unable to create directory."
-msgstr ""
+msgstr "Klasör oluşturulamadı."
 
 #: extensions/system/src/System/Controller/FinderController.php:106
 msgid "Renamed."
@@ -1729,11 +1730,11 @@ msgstr "Yeniden adlandırıldı."
 
 #: extensions/system/src/System/Controller/FinderController.php:110
 msgid "Unable to rename."
-msgstr ""
+msgstr "Yeniden adlandırılamadı."
 
 #: extensions/system/src/System/Controller/FinderController.php:136
 msgid "Unable to remove."
-msgstr ""
+msgstr "Silinemedi."
 
 #: extensions/system/src/System/Controller/FinderController.php:140
 msgid "Removed selected."
@@ -1753,7 +1754,7 @@ msgstr "Karşıya yükleme tamamlandı."
 
 #: extensions/system/src/System/Controller/FinderController.php:177
 msgid "Unable to upload."
-msgstr ""
+msgstr "Yüklenemedi."
 
 #: extensions/system/src/System/Controller/FinderController.php:199
 msgid "n/a"
@@ -1761,7 +1762,7 @@ msgstr "n/a"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
-msgstr "%d Bit"
+msgstr "%d Bayt"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d  KB"
@@ -1831,12 +1832,12 @@ msgstr "\"%name%\" paketi kuruldu."
 #: extensions/system/src/System/Controller/PackageController.php:127
 #: extensions/system/src/System/Controller/UpdateController.php:67
 msgid "Package extraction failed."
-msgstr ""
+msgstr "Paket ayıklanamadı."
 
 #: extensions/system/src/System/Controller/PackageController.php:129
 #: extensions/system/src/System/Controller/UpdateController.php:69
 msgid "Package checksum verification failed."
-msgstr ""
+msgstr "Paket sağlaması doğrulanamadı."
 
 #: extensions/system/src/System/Controller/PackageController.php:131
 #: extensions/system/src/System/Controller/UpdateController.php:71
@@ -1899,7 +1900,7 @@ msgstr "Ön bellek temizlendi!"
 
 #: extensions/system/src/System/Controller/UpdateController.php:53
 msgid "Unable to find update."
-msgstr ""
+msgstr "Güncelleme bulunamadı."
 
 #: extensions/system/src/System/Controller/UpdateController.php:64
 msgid "Copying files..."
@@ -1908,7 +1909,7 @@ msgstr "Dosyalar kopyalanıyor..."
 #: extensions/system/src/System/Controller/UpdateController.php:91
 #: extensions/system/src/System/Controller/UpdateController.php:121
 msgid "You may not call this step directly."
-msgstr ""
+msgstr "Bu adım doğrudan çağrılamaz."
 
 #: extensions/system/src/System/Controller/UpdateController.php:103
 msgid "Updating database..."
@@ -1920,27 +1921,27 @@ msgstr "Kurulum başarılı."
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
-msgstr "Besleme"
+msgstr "Akış"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:32
 msgid "Feed Widget"
-msgstr ""
+msgstr "Akış Aracı"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:35
 msgid "No title given."
-msgstr ""
+msgstr "Başlık yazılmamış."
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:32
 msgid "Weather Widget"
-msgstr ""
+msgstr "Hava Durumu Aracı"
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:35
 msgid "No location chosen."
-msgstr "Konum seçilmedi."
+msgstr "Herhangi bir konum seçilmemiş."
 
 #: extensions/system/src/System/Event/FrontpageListener.php:18
 msgid "No Frontpage assigned."
-msgstr ""
+msgstr "Herhangi bir önsayfa atanmamış."
 
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
@@ -2113,15 +2114,15 @@ msgstr "Aralık"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:30
 msgid "Invalid CSRF token."
-msgstr ""
+msgstr "CSRF kodu geçersiz."
 
 #: extensions/system/src/System/Exception/ExceptionController.php:33
 msgid "Sorry, the page you are looking for could not be found."
-msgstr ""
+msgstr "Malesef aradığınız sayfa bulunamadı."
 
 #: extensions/system/src/System/Exception/ExceptionController.php:39
 msgid "Whoops, looks like something went wrong."
-msgstr ""
+msgstr "Bir şeyler ters gitti gibi görünüyor."
 
 #: extensions/system/src/System/Helper/CountryHelper.php:20
 msgid "Ascension Island"
@@ -3554,11 +3555,11 @@ msgstr "Kullanıcı Şifresi Sıfırlama"
 
 #: extensions/system/src/System/Widget/TextWidget.php:23
 msgid "Text"
-msgstr "Yazı"
+msgstr "Metin"
 
 #: extensions/system/src/System/Widget/TextWidget.php:31
 msgid "Text Widget"
-msgstr ""
+msgstr "Metin Aracı"
 
 #: extensions/system/src/SystemExtension.php:128
 msgid "DATE_INTERVAL"
@@ -3566,11 +3567,11 @@ msgstr "DATE_INTERVAL"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:84
 msgid "Unable to activate theme.<br>The theme triggered a fatal error."
-msgstr ""
+msgstr "Tema etkinleştirilemedi.<br>Tema önemli bir hataya yol açtı."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:90
 msgid "Unable to enable theme \"%name%\"."
-msgstr ""
+msgstr "\"%name%\" teması etkinleştirilemedi."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:98
 msgid "Theme enabled."
@@ -3578,7 +3579,7 @@ msgstr "Tema etkinleştirildi."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:115
 msgid "Unable to uninstall theme \"%name%\"."
-msgstr ""
+msgstr "\"%name%\" teması kaldırılamadı."
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:121
 msgid "Theme uninstalled."
@@ -3657,19 +3658,19 @@ msgstr "Kullanıcı adı mevcut değil."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
-msgstr ""
+msgstr "Hesap açılamadı"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:134
 msgid ""
 "Your user account has been created. Complete your registration, by clicking "
 "the link provided in the mail that has been sent to you."
-msgstr ""
+msgstr "Kullanıcı hesabınız oluşturuldu. Adresinize gönderilecek e-posta içindeki bağlantıya tıklayarak kayıt işleminizi tamamlayabilirsiniz."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:139
 msgid ""
 "Your user account has been created and is pending approval by the site "
 "administrator."
-msgstr ""
+msgstr "Kullanıcı hesabınız oluşturuldu ve onaylanmak üzere site yöneticisine iletildi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:144
 msgid "Your user account has been created."
@@ -3684,13 +3685,13 @@ msgstr "Geçersiz anahtar."
 msgid ""
 "Your email has been verified. Once an administrator approves your account, "
 "you will be notified by email."
-msgstr ""
+msgstr "E-posta adresiniz doğrulandı. Hesabınız yönetici tarafından onaylandığında bir bilgilendirme e-postası alacaksınız."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:199
 msgid ""
 "The user's account has been activated and the user has been notified about "
 "it."
-msgstr ""
+msgstr "Kullanıcı hesabı etkinleştirildi ve kullanıcıya bilgilendirme e-postası gönderildi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
@@ -3702,15 +3703,15 @@ msgstr "%site% sitesine hoşgeldiniz!"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:229
 msgid "Activate your %site% account"
-msgstr ""
+msgstr "%site% sitesindeki hesabınızı etkinleştirin"
 
 #: extensions/system/src/User/Controller/RegistrationController.php:234
 msgid "Unable to send verification link."
-msgstr ""
+msgstr "Doğrulama bağlantısı gönderilemedi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:244
 msgid "Please approve registration at %site%!"
-msgstr ""
+msgstr "Lütfen %site% sitesine kayıt olduğunuzu onaylayın."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:45
 msgid "Reset"
@@ -3727,7 +3728,7 @@ msgstr "Geçersiz kullanıcı adı veya eposta."
 #: extensions/system/src/User/Controller/ResetPasswordController.php:75
 #: extensions/system/src/User/Controller/ResetPasswordController.php:121
 msgid "Your account has not been activated or is blocked."
-msgstr ""
+msgstr "Hesabınız etkinleştirilmemiş ya da engellenmiş."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:86
 #: extensions/system/src/User/Link/User.php:49
@@ -3736,7 +3737,7 @@ msgstr "Şifre Sıfırla"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:91
 msgid "Unable to send confirmation link."
-msgstr ""
+msgstr "Doğrulama bağlantısı gönderilemedi."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:98
 msgid "Check your email for the confirmation link."
@@ -3773,7 +3774,7 @@ msgstr "Kullanıcı bulunamadı."
 #: extensions/system/src/User/Controller/UserController.php:154
 #: extensions/system/src/User/Controller/UserController.php:243
 msgid "Unable to block yourself."
-msgstr ""
+msgstr "Kendinizi engelleyemezsiniz."
 
 #: extensions/system/src/User/Controller/UserController.php:202
 msgid "User saved."
@@ -3785,15 +3786,15 @@ msgstr "Kullanıcı oluşturuldu."
 
 #: extensions/system/src/User/Controller/UserController.php:218
 msgid "Unable to delete self."
-msgstr ""
+msgstr "Kendinizi silemezsiniz."
 
 #: extensions/system/src/User/Controller/UserController.php:227
 msgid "{0} No user deleted.|{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
+msgstr "{0} Hiç bir kullanıcı silinmedi.|{1} kullanıcı silindi.|]1,Inf[ kullanıcı silindi."
 
 #: extensions/system/src/User/Dashboard/UserWidget.php:32
 msgid "Displays a list of users."
-msgstr "Kullanıcı listesini görüntüle."
+msgstr "Kullanıcı listesini görüntüler."
 
 #: extensions/system/src/User/Entity/User.php:101
 msgid "Blocked"
@@ -3801,11 +3802,11 @@ msgstr "Engellendi"
 
 #: extensions/system/src/User/Event/AccessListener.php:93
 msgid "You do not have access to the administration area of this site."
-msgstr ""
+msgstr "Bu sitenin yönetim bölümüne erişme izniniz yok."
 
 #: extensions/system/src/User/Event/AccessListener.php:107
 msgid "Insufficient User Rights."
-msgstr ""
+msgstr "Kullanıcı İzinleri Yetersiz"
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account is blocked."
@@ -3825,21 +3826,21 @@ msgstr "Profil"
 
 #: extensions/system/src/User/Widget/LoginWidget.php:33
 msgid "Displays a user login form."
-msgstr ""
+msgstr "Kullanıcı oturum açma formunu görüntüler."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:49
 msgid "Unassigned Widgets"
-msgstr ""
+msgstr "Atanmamış Araçlar"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:82
 #: extensions/system/src/Widget/Controller/WidgetsController.php:105
 msgid "Invalid widget id"
-msgstr ""
+msgstr "Araç kodu geçersiz"
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:141
 msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
+msgstr "{0} Hiç bir araç silinmedi.|{1} araç silindi.|]1,Inf[ araç silindi."
 
 #: extensions/system/src/Widget/Controller/WidgetsController.php:216
 msgid "Widgets updated."
-msgstr ""
+msgstr "Araçlar güncellendi."
