@@ -32,7 +32,7 @@ class CommentPlugin extends EventSubscriber
             }
 
             // Prepend scheme if URL appears to contain no scheme (unless a relative link starting with / or a php file).
-            if (strpos($url, ':') === false &&	substr($url, 0, 1) != '/' && substr($url, 0, 1) != '#' && !preg_match('/^[a-z0-9-]+?\.php/i', $url)) {
+            if (strpos($url, ':') === false &&  substr($url, 0, 1) != '/' && substr($url, 0, 1) != '#' && !preg_match('/^[a-z0-9-]+?\.php/i', $url)) {
                 $url = 'http://' . $url;
             }
 

@@ -303,9 +303,9 @@ class CountryHelper
      * @param string $isoCode
      * @return string
      */
-	public function isoToName($isoCode)
+    public function isoToName($isoCode)
     {
         $this->getList();
-		return array_key_exists($isoCode, $this->countries) ? $this->countries[$isoCode] : false;
-	}
+        return array_key_exists($isoCode, $this->countries) ? $this->countries[$isoCode] : false;
+    }
 }

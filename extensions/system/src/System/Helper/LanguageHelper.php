@@ -131,9 +131,9 @@ class LanguageHelper
      * @param string $isoCode
      * @return string
      */
-	public function isoToName($isoCode)
+    public function isoToName($isoCode)
     {
         $this->getList();
         return array_key_exists($isoCode, $this->languages) ? $this->languages[$isoCode][0] : false;
-	}
+    }
 }

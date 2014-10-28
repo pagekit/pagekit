@@ -25,32 +25,32 @@ interface RoleInterface
      */
     const ROLE_ADMINISTRATOR = 3;
 
-	/**
-	 * Returns the role's ID.
-	 *
-	 * @return mixed
-	 */
-	public function getId();
+    /**
+     * Returns the role's ID.
+     *
+     * @return mixed
+     */
+    public function getId();
 
-	/**
-	 * Returns the role's name.
-	 *
-	 * @return string
-	 */
-	public function getName();
+    /**
+     * Returns the role's name.
+     *
+     * @return string
+     */
+    public function getName();
 
-	/**
-	 * Returns permissions for the role.
-	 *
-	 * @return string[]
-	 */
-	public function getPermissions();
+    /**
+     * Returns permissions for the role.
+     *
+     * @return string[]
+     */
+    public function getPermissions();
 
-	/**
-	 * Returns the role's priority.
-	 *
-	 * @return int
-	 */
+    /**
+     * Returns the role's priority.
+     *
+     * @return int
+     */
     public function getPriority();
 
     /**

@@ -16,17 +16,17 @@ class Item implements ItemInterface
     /**
      * @var string
      */
-	protected $name;
+    protected $name;
 
     /**
      * @var string
      */
-	protected $url;
+    protected $url;
 
     /**
      * @var array
      */
-	protected $attributes = [];
+    protected $attributes = [];
 
     /**
      * @var MenuInterface
