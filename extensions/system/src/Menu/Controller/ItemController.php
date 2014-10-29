@@ -162,7 +162,8 @@ class ItemController extends Controller
             }
 
             foreach ($ids as $id) {
-                if ($item = $this->items->find($id) and $item->getStatus() != $status) {
+                $item = $this->items->find($id);
+                if (isset($item) && $item->getStatus() != $status) {
                     $this->items->save($item, compact('status'));
                 }
             }

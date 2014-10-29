@@ -21,7 +21,8 @@ class WidgetListener extends EventSubscriber
 
     public function onWidgetEdit(WidgetEditEvent $event)
     {
-        if (!$theme = $this['theme.site'] or !$tmpl = $theme->getConfig('parameters.widgets.view')) {
+        $theme = $this['theme.site'];
+        if (!isset($theme) || !$tmpl = $theme->getConfig('parameters.widgets.view')) {
             return;
         }
 

@@ -20,7 +20,7 @@ class LoginAttemptListener extends EventSubscriber
      */
     public function onPreAuthenticate(AuthenticateEvent $event)
     {
-        if (!$credentials = $event->getCredentials() or !isset($credentials['username'])) {
+        if (!$credentials = $event->getCredentials() || !isset($credentials['username'])) {
             return;
         }
 
@@ -38,7 +38,7 @@ class LoginAttemptListener extends EventSubscriber
      */
     public function onAuthFailure(AuthenticateEvent $event)
     {
-        if (!$credentials = $event->getCredentials() or !isset($credentials['username'])) {
+        if (!$credentials = $event->getCredentials() || !isset($credentials['username'])) {
             return;
         }
 
@@ -57,7 +57,7 @@ class LoginAttemptListener extends EventSubscriber
      */
     public function onAuthSuccess(AuthenticateEvent $event)
     {
-        if (!$credentials = $event->getCredentials() or !isset($credentials['username'])) {
+        if (!$credentials = $event->getCredentials() || !isset($credentials['username'])) {
             return;
         }
 

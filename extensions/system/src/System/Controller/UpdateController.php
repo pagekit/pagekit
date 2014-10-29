@@ -87,7 +87,7 @@ class UpdateController extends Controller
     {
         try {
 
-            if (!$update = $this['session']->get('system.update') or !$updateDir = $this['session']->get('system.updateDir')) {
+            if (!$update = $this['session']->get('system.update') || !$updateDir = $this['session']->get('system.updateDir')) {
                 throw new Exception(__('You may not call this step directly.'));
             }
 

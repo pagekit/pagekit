@@ -30,7 +30,8 @@ class UserListener extends EventSubscriber
      */
     public function onUserAccess()
     {
-        if ($user = $this['user'] and $user->isAuthenticated()) {
+        $user = $this['user'];
+        if (isset($user) && $user->isAuthenticated()) {
             $this['users']->getUserRepository()->updateAccess($user);
         }
     }

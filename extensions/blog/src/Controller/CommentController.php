@@ -184,7 +184,8 @@ class CommentController extends Controller
     public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
-            if ($comment = $this->comments->find($id) and $comment->getStatus() != $status) {
+            $comment = $this->comments->find($id);
+            if (isset($comment) && $comment->getStatus() != $status) {
                 $previous = $comment->getStatus();
                 $comment->setStatus($status);
                 $this->comments->save($comment);

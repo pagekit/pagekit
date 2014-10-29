@@ -177,7 +177,8 @@ class PageController extends Controller
     public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
-            if ($page = $this->pages->find($id) and $page->getStatus() != $status) {
+            $page = $this->pages->find($id);
+            if (isset($page) && $page->getStatus() != $status) {
                 $page->setStatus($status);
                 $this->pages->save($page);
             }
