@@ -106,7 +106,7 @@ class ResetPasswordController extends Controller
      */
     public function confirmAction($username = "", $activation = "")
     {
-        if (empty($username) or empty($activation) or !$user = $this->users->where(compact('username', 'activation'))->first()) {
+        if (empty($username) || empty($activation) || !$user = $this->users->where(compact('username', 'activation'))->first()) {
             $this['message']->error(__('Invalid key.'));
             return $this->redirect('/');
         }

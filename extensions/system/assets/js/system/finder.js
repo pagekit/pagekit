@@ -1,7 +1,7 @@
 define(['jquery', 'system', 'uikit!upload', 'rowselect', 'handlebars'], function($, system, uikit, RowSelect, Handlebars) {
 
     Handlebars.registerHelper('isImage', function(url, block) {
-        return url.match(/\.(?:gif|jpg|jpeg|png|svg)/i) ? block.fn(this) : block.inverse(this);
+        return url.match(/\.(?:gif|jpe?g|png|svg)/i) ? block.fn(this) : block.inverse(this);
     });
 
     var Finder = function(element, options) {

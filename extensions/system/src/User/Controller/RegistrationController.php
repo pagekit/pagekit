@@ -182,7 +182,7 @@ class RegistrationController extends Controller
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) or empty($activation) or !$user = $this->users->where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
+        if (empty($username) || empty($activation) || !$user = $this->users->where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             $this['message']->error(__('Invalid key.'));
             return $this->redirect('/');
         }

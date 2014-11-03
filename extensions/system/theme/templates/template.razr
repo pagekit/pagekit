@@ -45,12 +45,13 @@
                         <li@raw( $subnav.attribute('active') ? ' class="uk-active"' : '' )>
                             <a href="@url($subnav.url)">@trans($subnav)</a>
                         </li>
-                        @endif
+                        @else
                         @foreach ($subnav.children as $item)
                         <li@raw( $item.attribute('active') ? ' class="uk-active"' : '')>
                             <a href="@url($item.url)">@trans($item)</a>
                         </li>
                         @endforeach
+                        @endif
                     </ul>
 
                     <div class="uk-navbar-flip">
