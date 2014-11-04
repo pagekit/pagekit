@@ -32,25 +32,11 @@ class TranslationCompileCommand extends Command
     protected $extensions;
 
     /**
-     * Node visitors.
-     *
-     * @var NodeVisitor[]
-     */
-    protected $visitors;
-
-    /**
      * The xgettext command availability.
      *
      * @var bool
      */
     protected $xgettext;
-
-    /**
-     * The .po file loader.
-     *
-     * @var PoFileLoader
-     */
-    protected $loader;
 
     /**
      * Constructor.
@@ -81,8 +67,12 @@ class TranslationCompileCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->xgettext) {
+            // TODO: EXCEPTION
+        }
+
         $extension = $this->argument('extension') ? : 'system';
-        $path = $this->getPath($extension);
+        $path      = $this->getPath($extension);
         $languages = "$path/languages";
 
         $this->line("Looking for language files in extension '$extension'");
