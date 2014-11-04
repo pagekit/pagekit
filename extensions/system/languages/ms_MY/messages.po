@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-10-24 13:01+0000\n"
-"Last-Translator: Florian <florianletsch@gmail.com>\n"
+"PO-Revision-Date: 2014-10-29 06:08+0000\n"
+"Last-Translator: Salahuddin Hairai <mr.od3n@gmail.com>\n"
 "Language-Team: Malay (Malaysia) (http://www.transifex.com/projects/p/pagekit-cms/language/ms_MY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -641,7 +641,7 @@ msgstr "Pelayan Web"
 
 #: extensions/system/views/admin/settings/info.razr:29
 msgid "User Agent"
-msgstr ""
+msgstr "Agen Pengguna"
 
 #: extensions/system/views/admin/settings/info.razr:53
 msgid "Handler"
@@ -1707,12 +1707,12 @@ msgstr ""
 #: extensions/system/src/System/Controller/FinderController.php:127
 #: extensions/system/src/System/Controller/FinderController.php:155
 msgid "Permission denied."
-msgstr ""
+msgstr "Hak akses ditolak."
 
 #: extensions/system/src/System/Controller/FinderController.php:61
 #: extensions/system/src/System/Controller/FinderController.php:91
 msgid "Invalid file name."
-msgstr ""
+msgstr "Nama fail tidak sah."
 
 #: extensions/system/src/System/Controller/FinderController.php:76
 msgid "Directory created."
@@ -1902,7 +1902,7 @@ msgstr ""
 
 #: extensions/system/src/System/Controller/UpdateController.php:64
 msgid "Copying files..."
-msgstr ""
+msgstr "Menyalin fail..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:91
 #: extensions/system/src/System/Controller/UpdateController.php:121
@@ -1911,11 +1911,11 @@ msgstr ""
 
 #: extensions/system/src/System/Controller/UpdateController.php:103
 msgid "Updating database..."
-msgstr ""
+msgstr "Mengemaskini pangkalan data..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:127
 msgid "Installed successfully."
-msgstr ""
+msgstr "Berjaya dipasang!"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
@@ -1927,7 +1927,7 @@ msgstr "Widget Suapan"
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:35
 msgid "No title given."
-msgstr ""
+msgstr "Tiada tajuk diberikan."
 
 #: extensions/system/src/System/Dashboard/WeatherWidget.php:32
 msgid "Weather Widget"
@@ -2112,7 +2112,7 @@ msgstr "Disember"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:30
 msgid "Invalid CSRF token."
-msgstr ""
+msgstr "Token CSRF tidak sah!"
 
 #: extensions/system/src/System/Exception/ExceptionController.php:33
 msgid "Sorry, the page you are looking for could not be found."
@@ -3605,7 +3605,7 @@ msgstr "Kata nama atau kata laluan tidak sah."
 
 #: extensions/system/src/User/Controller/PermissionController.php:48
 msgid "Permissions saved!"
-msgstr ""
+msgstr "Hak akses telah disimpan!"
 
 #: extensions/system/src/User/Controller/ProfileController.php:66
 msgid "Name is invalid."
