@@ -1,10 +1,11 @@
 # 
 # Translators:
+# Florian <florianletsch@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-10-24 14:47+0000\n"
+"PO-Revision-Date: 2014-11-04 13:19+0000\n"
 "Last-Translator: Florian <florianletsch@gmail.com>\n"
 "Language-Team: English (United States) (http://www.transifex.com/projects/p/pagekit-cms/language/en_US/)\n"
 "MIME-Version: 1.0\n"
@@ -1942,22 +1943,22 @@ msgstr "No Frontpage assigned."
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
 msgid "DATE_SHORT"
-msgstr "DATE_SHORT"
+msgstr "n/d/y"
 
 #: extensions/system/src/System/Event/SystemListener.php:135
 #: extensions/system/src/SystemExtension.php:126
 msgid "DATE_MEDIUM"
-msgstr "DATE_MEDIUM"
+msgstr "M d, Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:136
 #: extensions/system/src/SystemExtension.php:125
 msgid "DATE_LONG"
-msgstr "DATE_LONG"
+msgstr "F d, y"
 
 #: extensions/system/src/System/Event/SystemListener.php:137
 #: extensions/system/src/SystemExtension.php:124
 msgid "DATE_FULL"
-msgstr "DATE_FULL"
+msgstr "l, F d, y"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Mon"
@@ -3559,7 +3560,7 @@ msgstr "Text Widget"
 
 #: extensions/system/src/SystemExtension.php:128
 msgid "DATE_INTERVAL"
-msgstr "DATE_INTERVAL"
+msgstr "%d days"
 
 #: extensions/system/src/Theme/Controller/ThemesController.php:84
 msgid "Unable to activate theme.<br>The theme triggered a fatal error."
