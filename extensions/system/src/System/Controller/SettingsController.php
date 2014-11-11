@@ -25,7 +25,7 @@ class SettingsController extends Controller
      */
     public function __construct()
     {
-        $this->config = new Config;
+        $this->config = new Config();
         $this->config->load($this->configFile = $this['config.file']);
     }
 
@@ -129,7 +129,6 @@ class SettingsController extends Controller
             return ['success' => true, 'message' => __('Connection established!')];
 
         } catch (\Exception $e) {
-
             return ['success' => false, 'message' => sprintf(__('Connection not established! (%s)'), $e->getMessage())];
         }
     }

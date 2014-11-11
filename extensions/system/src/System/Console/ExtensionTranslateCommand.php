@@ -71,7 +71,7 @@ class ExtensionTranslateCommand extends Command
     /**
      * Initialize the console command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -83,8 +83,8 @@ class ExtensionTranslateCommand extends Command
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
-        $this->loader = new PoFileLoader;
+        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
+        $this->loader = new PoFileLoader();
     }
 
     /**
@@ -92,7 +92,7 @@ class ExtensionTranslateCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $extension = $this->argument('extension') ? : 'system';
+        $extension = $this->argument('extension') ?: 'system';
         $files     = $this->getFiles($path = $this->getPath($extension));
         $languages = "$path/languages";
 
@@ -321,8 +321,8 @@ class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
      */
     public function traverse(array $files)
     {
-        $parser = new Parser(new Lexer);
-        $traverser = new NodeTraverser;
+        $parser = new Parser(new Lexer());
+        $traverser = new NodeTraverser();
         $traverser->addVisitor($this);
 
         foreach ($files as $file) {
@@ -365,6 +365,7 @@ class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
     public function loadTemplate($name)
     {
         $this->file = $name;
+
         return $this->engine->loadTemplate($name);
     }
 }

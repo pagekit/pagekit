@@ -20,7 +20,7 @@ foreach ($value as $widget) {
 
     $output[] = '<div class="uk-width-medium-'.$class.'">';
     $output[] =     '<div class="uk-panel">';
-    $output[] =         $widget->getShowTitle() ? '<h3>'.$widget->getTitle().'</h3>':'';
+    $output[] =         $widget->getShowTitle() ? '<h3>'.$widget->getTitle().'</h3>' : '';
     $output[] =         $widget->render($options);
     $output[] =     '</div>';
     $output[] = '</div>';

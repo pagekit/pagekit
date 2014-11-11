@@ -23,16 +23,17 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         $this->app = $app;
 
-        $app['file'] = function($app) {
+        $app['file'] = function ($app) {
             return new FileProvider($app);
         };
 
-        $app->extend('migrator', function($migrator, $app) {
+        $app->extend('migrator', function ($migrator, $app) {
             $migrator->setLoader(new FilesystemLoader($app['locator']));
+
             return $migrator;
         });
 
-        $app->extend('view', function($view, $app) {
+        $app->extend('view', function ($view, $app) {
 
             $view->setEngine($app['tmpl']);
             $view->set('app', $app);
@@ -41,9 +42,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return $view;
         });
 
-        $app['extensions'] = function($app) {
+        $app['extensions'] = function ($app) {
 
-            $loader     = new ExtensionLoader;
+            $loader     = new ExtensionLoader();
             $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
             $installer  = new PackageInstaller($repository, $loader);
 
@@ -71,14 +72,14 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $app['isAdmin'] = false;
 
             $app['events']->dispatch('system.init');
-            $app['events']->addListener('console.init', function($event) {
+            $app['events']->addListener('console.init', function ($event) {
 
                 $console = $event->getConsole();
                 $namespace = 'Pagekit\\System\\Console\\';
 
                 foreach (glob(__DIR__.'/System/Console/*Command.php') as $file) {
                     $class = $namespace.basename($file, '.php');
-                    $console->add(new $class);
+                    $console->add(new $class());
                 }
 
             });
@@ -94,7 +95,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         }
 
         $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
-        $this->app['view.sections']->prepend('head', function() {
+        $this->app['view.sections']->prepend('head', function () {
             return sprintf('<meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 

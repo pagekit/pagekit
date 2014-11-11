@@ -53,7 +53,7 @@ class PageController extends Controller
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
-            $query->where(function($query) use ($filter) {
+            $query->where(function ($query) use ($filter) {
                 $query->orWhere('title LIKE :search', ['search' => "%{$filter['search']}%"]);
             });
         }
@@ -80,7 +80,7 @@ class PageController extends Controller
      */
     public function addAction()
     {
-        return ['head.title' => __('Add Page'), 'page' => new Page, 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll()];
+        return ['head.title' => __('Add Page'), 'page' => new Page(), 'statuses' => Page::getStatuses(), 'roles' => $this->roles->findAll()];
     }
 
     /**
@@ -113,7 +113,7 @@ class PageController extends Controller
         try {
 
             if (!$page = $this->pages->find($id)) {
-                $page = new Page;
+                $page = new Page();
             }
 
             if ($this->pages->where(['url = ?', 'id <> ?'], [$data['url'], $page->getId()])->first()) {

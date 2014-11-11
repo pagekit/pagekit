@@ -12,7 +12,7 @@ class FilterManager implements \IteratorAggregate
     /**
      * Check if a filter is registered.
      *
-     * @param  string $name
+     * @param  string  $name
      * @return boolean
      */
     public function has($name)
@@ -34,9 +34,9 @@ class FilterManager implements \IteratorAggregate
     /**
      * Register a filter class name.
      *
-     * @param  string $name
-     * @param  string $filter
-     * @param  int    $priority
+     * @param  string                    $name
+     * @param  string                    $filter
+     * @param  int                       $priority
      * @throws \InvalidArgumentException
      */
     public function register($name, $filter, $priority = 0)
@@ -59,7 +59,7 @@ class FilterManager implements \IteratorAggregate
      */
     public function unregister($name)
     {
-        foreach($this->filters as $priority => $filters) {
+        foreach ($this->filters as $priority => $filters) {
             if (array_key_exists($name, $filters)) {
                 unset($this->filters[$priority][$name]);
             }

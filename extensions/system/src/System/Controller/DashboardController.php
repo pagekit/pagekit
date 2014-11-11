@@ -23,7 +23,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->types = $this['events']->dispatch('system.dashboard', new RegisterWidgetEvent);
+        $this->types = $this['events']->dispatch('system.dashboard', new RegisterWidgetEvent());
     }
 
     /**
@@ -79,7 +79,7 @@ class DashboardController extends Controller
                 throw new Exception(__('Invalid widget type.'));
             }
 
-            $widget = new Widget;
+            $widget = new Widget();
             $widget->setType($id);
 
             return ['head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget];
@@ -141,6 +141,7 @@ class DashboardController extends Controller
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
         }
+
         return $this->redirect($id ? '@system/dashboard/edit' : '@system/dashboard/add', compact('id'));
     }
 
@@ -184,13 +185,13 @@ class DashboardController extends Controller
     }
 
     /**
-     * @param string $id
-     * @param array  $data
+     * @param  string $id
+     * @param  array  $data
      * @return Widget
      */
     protected function create($id, $data)
     {
-        $widget = new Widget;
+        $widget = new Widget();
         $widget->setId($id);
         $widget->setType($data['type']);
         $widget->setSettings($data);
@@ -225,8 +226,8 @@ class DashboardController extends Controller
         return $this['user']->get('dashboard', $this['system']->getConfig('dashboard.default'));
     }
 
-    protected function chunkList($list, $p) {
-
+    protected function chunkList($list, $p)
+    {
         $listlen   = count($list);
         $partlen   = floor($listlen / $p);
         $partrem   = $listlen % $p;

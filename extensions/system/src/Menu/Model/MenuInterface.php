@@ -17,14 +17,14 @@ interface MenuInterface extends \IteratorAggregate
     /**
      * Add a new menu item instance.
      *
-     * @param  ItemInterface $item
+     * @param ItemInterface $item
      */
     public function addItem(ItemInterface $item);
 
     /**
      * Get a menu item instance.
      *
-     * @param  string $id
+     * @param  string        $id
      * @return ItemInterface
      */
     public function getItem($id);

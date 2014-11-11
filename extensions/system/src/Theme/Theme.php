@@ -71,11 +71,11 @@ class Theme implements \ArrayAccess
             }
         }
 
-        $app->on('system.site', function() use ($app) {
+        $app->on('system.site', function () use ($app) {
             $this->registerRenderer($app['view.sections'], $app['view']);
         });
 
-        $app->on('system.positions', function($event) {
+        $app->on('system.positions', function ($event) {
             foreach ($this->getConfig('positions', []) as $id => $position) {
                 list($name, $description) = array_merge((array) $position, ['']);
                 $event->register($id, $name, $description);
@@ -206,7 +206,7 @@ class Theme implements \ArrayAccess
     {
         $root = $this->getPath();
 
-        $addResources = function($config, $prefix = '') use ($root, $locator) {
+        $addResources = function ($config, $prefix = '') use ($root, $locator) {
             foreach ($config as $scheme => $resources) {
 
                 if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
@@ -215,7 +215,7 @@ class Theme implements \ArrayAccess
 
                 $resources = (array) $resources;
 
-                array_walk($resources, function(&$resource) use ($root) {
+                array_walk($resources, function (&$resource) use ($root) {
                     $resource = "$root/$resource";
                 });
 
@@ -236,7 +236,7 @@ class Theme implements \ArrayAccess
     public function registerRenderer(SectionManager $sections, ViewInterface $view)
     {
         foreach ($this->getConfig('renderer', []) as $name => $template) {
-            $sections->addRenderer($name, function($name, $value, $options = []) use ($template, $view) {
+            $sections->addRenderer($name, function ($name, $value, $options = []) use ($template, $view) {
                 return $view->render($template, compact('name', 'value', 'options'));
             });
         }

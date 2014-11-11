@@ -13,7 +13,7 @@ class WidgetListener extends EventSubscriber
     public function onSystemSite()
     {
         $settings = $this->getSettings();
-        $this['app']->on('system.widget.postLoad', function(EntityEvent $event) use ($settings) {
+        $this['app']->on('system.widget.postLoad', function (EntityEvent $event) use ($settings) {
             $widget = $event->getEntity();
             $widget->set('theme', isset($settings[$widget->getId()]) ? $settings[$widget->getId()] : []);
         });
@@ -27,7 +27,7 @@ class WidgetListener extends EventSubscriber
 
         $view     = $this['view'];
         $settings = $this->getSettings();
-        $event->addSettings(__('Theme'), function($widget) use ($view, $tmpl, $theme, $settings) {
+        $event->addSettings(__('Theme'), function ($widget) use ($view, $tmpl, $theme, $settings) {
             return $view->render($tmpl, compact('widget', 'settings', 'theme'));
         });
     }

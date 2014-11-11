@@ -54,6 +54,7 @@ class RouteListener extends EventSubscriber
     public function inbound($parameters)
     {
         $parameters['id'] = $this->getId($parameters['slug']);
+
         return $parameters;
     }
 
@@ -64,7 +65,7 @@ class RouteListener extends EventSubscriber
         preg_match_all('#{([a-z]+)}#i', $this->permalink, $matches);
 
         if ($matches) {
-            foreach($matches[1] as $attribute) {
+            foreach ($matches[1] as $attribute) {
                 if (isset($meta[$attribute])) {
                     $parameters[$attribute] = $meta[$attribute];
                 }
@@ -72,6 +73,7 @@ class RouteListener extends EventSubscriber
         }
 
         unset($parameters['id']);
+
         return $parameters;
     }
 

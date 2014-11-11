@@ -69,7 +69,7 @@ trait CommentsTrait
     /**
      * Retrieves comments tree.
      *
-     * @param  array $parameters
+     * @param  array       $parameters
      * @return CommentNode
      */
     public function getCommentsTree(array $parameters = [])

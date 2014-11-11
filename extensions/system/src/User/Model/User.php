@@ -206,7 +206,7 @@ abstract class User implements UserInterface
      *   - a single permission string can be "create_posts", "create posts", "posts:create" etc.
      *   - a boolean expression with multiple permissions boolean expression can be "create_posts && delete_posts", "(create posts && delete posts) || manage posts" etc.
      *
-     * @param  string $expression
+     * @param  string                    $expression
      * @throws \InvalidArgumentException
      * @return boolean
      */
@@ -222,7 +222,7 @@ abstract class User implements UserInterface
             return $this->hasPermission($expression);
         }
 
-        $exp = preg_replace('/[^01&\(\)\|!]/', '', preg_replace_callback('/[a-z_][a-z-_\.:\d\s]*/i', function($permission) use ($user) {
+        $exp = preg_replace('/[^01&\(\)\|!]/', '', preg_replace_callback('/[a-z_][a-z-_\.:\d\s]*/i', function ($permission) use ($user) {
             return (int) $user->hasPermission(trim($permission[0]));
         }, $expression));
 

@@ -36,7 +36,7 @@ class AccessListener extends EventSubscriber
     public function onConfigureRoute(ConfigureRouteEvent $event)
     {
         if (!$this->reader) {
-            $this->reader = new SimpleAnnotationReader;
+            $this->reader = new SimpleAnnotationReader();
             $this->reader->addNamespace('Pagekit\User\Annotation');
         }
 

@@ -19,7 +19,7 @@ class SystemDataCollector extends DataCollector
      *
      * @param SystemInfoHelper $info
      */
-    function __construct(SystemInfoHelper $info)
+    public function __construct(SystemInfoHelper $info)
     {
         $this->info = $info;
     }

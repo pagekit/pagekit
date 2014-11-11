@@ -30,7 +30,7 @@ class UserProvider implements \ArrayAccess
     /**
      * Gets a user by id.
      *
-     * @param  string|null $id The user id to retrieve or null for current user
+     * @param  string|null        $id The user id to retrieve or null for current user
      * @return UserInterface|null
      */
     public function get($id = null)
@@ -41,7 +41,7 @@ class UserProvider implements \ArrayAccess
     /**
      * Gets a user by username.
      *
-     * @param  string $username
+     * @param  string        $username
      * @return UserInterface
      */
     public function getByUsername($username)

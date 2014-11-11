@@ -46,7 +46,7 @@ class ThemesController extends Controller
             $packagesJson[$name] = $package->getVersion();
         }
 
-        uasort($packages, function($themeA, $themeB) use ($current) {
+        uasort($packages, function ($themeA, $themeB) use ($current) {
             if ($current === $themeA) {
                 return -1;
             } elseif ($current === $themeB) {
@@ -75,7 +75,7 @@ class ThemesController extends Controller
 
             ini_set('display_errors', 0);
 
-            $handler = $this['exception']->setHandler(function($exception) {
+            $handler = $this['exception']->setHandler(function ($exception) {
 
                 while (ob_get_level()) {
                     ob_get_clean();
@@ -98,7 +98,6 @@ class ThemesController extends Controller
             return ['message' => __('Theme enabled.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }
@@ -121,7 +120,6 @@ class ThemesController extends Controller
             return ['message' => __('Theme uninstalled.')];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
         }
     }

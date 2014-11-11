@@ -11,7 +11,7 @@ class PriorityFilter extends FilterIterator
     {
         $elements = iterator_to_array($iterator, false);
 
-        $iterator->uasort(function($a, $b) use ($elements) {
+        $iterator->uasort(function ($a, $b) use ($elements) {
 
             $priorityA = (int) $a->getPriority();
             $priorityB = (int) $b->getPriority();

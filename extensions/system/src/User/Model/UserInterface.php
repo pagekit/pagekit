@@ -65,5 +65,5 @@ interface UserInterface extends AuthUserInterface
 
     public static function getStatuses();
 
-	public function getStatusText();
+    public function getStatusText();
 }

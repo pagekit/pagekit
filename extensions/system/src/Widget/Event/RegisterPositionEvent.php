@@ -9,9 +9,9 @@ class RegisterPositionEvent extends Event
     /**
      * Registers a position.
      *
-     * @param  string $id
-     * @param  string $name
-     * @param  string $description
+     * @param  string                    $id
+     * @param  string                    $name
+     * @param  string                    $description
      * @throws \InvalidArgumentException
      */
     public function register($id, $name, $description = '')

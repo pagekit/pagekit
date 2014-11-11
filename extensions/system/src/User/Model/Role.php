@@ -144,7 +144,8 @@ class Role implements RoleInterface
         return $this->id == self::ROLE_ADMINISTRATOR;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->name;
     }
 }

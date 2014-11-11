@@ -14,7 +14,7 @@ class TmplEvent extends Event
     /**
      * Checks if a template is registered.
      *
-     * @param  string $name
+     * @param  string  $name
      * @return boolean
      */
     public function has($name)
@@ -36,8 +36,8 @@ class TmplEvent extends Event
     /**
      * Registers template.
      *
-     * @param  string $name
-     * @param  string $template
+     * @param string $name
+     * @param string $template
      */
     public function register($name, $template)
     {
@@ -47,7 +47,7 @@ class TmplEvent extends Event
     /**
      * Unregisters a template.
      *
-     * @param  string  $name
+     * @param string $name
      */
     public function unregister($name)
     {

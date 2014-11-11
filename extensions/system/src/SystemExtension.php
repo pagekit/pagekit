@@ -49,23 +49,23 @@ class SystemExtension extends Extension
             $app['events']->addSubscriber(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
-        $app['events']->addSubscriber(new AccessListener);
-        $app['events']->addSubscriber(new AdminMenuListener);
-        $app['events']->addSubscriber(new AliasListener);
-        $app['events']->addSubscriber(new AuthorizationListener);
-        $app['events']->addSubscriber(new CanonicalListener);
-        $app['events']->addSubscriber(new FrontpageListener);
-        $app['events']->addSubscriber(new LocaleListener);
-        $app['events']->addSubscriber(new LoginAttemptListener);
-        $app['events']->addSubscriber(new MaintenanceListener);
-        $app['events']->addSubscriber(new MenuListener);
-        $app['events']->addSubscriber(new MigrationListener);
-        $app['events']->addSubscriber(new ResponseListener);
-        $app['events']->addSubscriber(new SystemListener);
-        $app['events']->addSubscriber(new UserListener);
-        $app['events']->addSubscriber(new WidgetListener);
-        $app['events']->addSubscriber(new ThemeListener);
-        $app['events']->addSubscriber(new ThemeWidgetListener);
+        $app['events']->addSubscriber(new AccessListener());
+        $app['events']->addSubscriber(new AdminMenuListener());
+        $app['events']->addSubscriber(new AliasListener());
+        $app['events']->addSubscriber(new AuthorizationListener());
+        $app['events']->addSubscriber(new CanonicalListener());
+        $app['events']->addSubscriber(new FrontpageListener());
+        $app['events']->addSubscriber(new LocaleListener());
+        $app['events']->addSubscriber(new LoginAttemptListener());
+        $app['events']->addSubscriber(new MaintenanceListener());
+        $app['events']->addSubscriber(new MenuListener());
+        $app['events']->addSubscriber(new MigrationListener());
+        $app['events']->addSubscriber(new ResponseListener());
+        $app['events']->addSubscriber(new SystemListener());
+        $app['events']->addSubscriber(new UserListener());
+        $app['events']->addSubscriber(new WidgetListener());
+        $app['events']->addSubscriber(new ThemeListener());
+        $app['events']->addSubscriber(new ThemeWidgetListener());
 
         parent::boot($app);
 
@@ -73,14 +73,14 @@ class SystemExtension extends Extension
 
         $app['system'] = $this;
 
-        $app['menus'] = function() {
-            return new MenuProvider;
+        $app['menus'] = function () {
+            return new MenuProvider();
         };
 
-        $app['user'] = function($app) {
+        $app['user'] = function ($app) {
 
             if (!$user = $app['auth']->getUser()) {
-                $user  = new UserEntity;
+                $user  = new UserEntity();
                 $roles = $app['users']->getRoleRepository()->where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
                 $user->setRoles($roles);
             }
@@ -88,37 +88,37 @@ class SystemExtension extends Extension
             return $user;
         };
 
-        $app['users'] = function() {
-            return new UserProvider;
+        $app['users'] = function () {
+            return new UserProvider();
         };
 
-        $app['permissions'] = function($app) {
-            return $app['events']->dispatch('system.permission', new PermissionEvent)->getPermissions();
+        $app['permissions'] = function ($app) {
+            return $app['events']->dispatch('system.permission', new PermissionEvent())->getPermissions();
         };
 
-        $app['content'] = function() {
-            return new ContentHelper;
+        $app['content'] = function () {
+            return new ContentHelper();
         };
 
-        $app['languages'] = function() {
-            return new LanguageHelper;
+        $app['languages'] = function () {
+            return new LanguageHelper();
         };
 
-        $app['countries'] = function() {
-            return new CountryHelper;
+        $app['countries'] = function () {
+            return new CountryHelper();
         };
 
-        $app['system.info'] = function() {
-            return new SystemInfoHelper;
+        $app['system.info'] = function () {
+            return new SystemInfoHelper();
         };
 
-        $app['oauth'] = function() {
-            return new OAuthHelper;
+        $app['oauth'] = function () {
+            return new OAuthHelper();
         };
 
-        $app['dates'] = function($app) {
+        $app['dates'] = function ($app) {
 
-            $manager = new DateHelper;
+            $manager = new DateHelper();
             $manager->setTimezone($app['option']->get('system:app.timezone', 'UTC'));
             $manager->setFormats([
                 DateHelper::NONE      => '',
@@ -132,7 +132,7 @@ class SystemExtension extends Extension
             return $manager;
         };
 
-        $app->extend('mailer', function($mailer, $app) {
+        $app->extend('mailer', function ($mailer, $app) {
 
             $address = $app['config']->get('mail.from.address');
             $name    = $app['config']->get('mail.from.name');
@@ -143,7 +143,7 @@ class SystemExtension extends Extension
         });
 
         if (isset($app['profiler'])) {
-            $app->on('system.init', function() use ($app) {
+            $app->on('system.init', function () use ($app) {
                 $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extension://system/views/profiler/toolbar/system.php', 'extension://system/views/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'extension://system/views/profiler/toolbar/user.php', null, -20);
             });
@@ -171,7 +171,7 @@ class SystemExtension extends Extension
      */
     public function clearCache(array $options = [])
     {
-        $this['app']->on('kernel.terminate', function() use ($options) {
+        $this['app']->on('kernel.terminate', function () use ($options) {
             $this->doClearCache($options);
         }, -512);
     }

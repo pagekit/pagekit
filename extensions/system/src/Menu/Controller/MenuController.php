@@ -59,7 +59,7 @@ class MenuController extends Controller
             }
 
             if (!$menu = $this->menus->find($id)) {
-                $menu = new Menu;
+                $menu = new Menu();
             }
 
             if ($this->menus->where(['name = ?', 'id <> ?'], [$name, $id])->first()) {

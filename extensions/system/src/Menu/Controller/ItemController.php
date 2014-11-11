@@ -52,7 +52,7 @@ class ItemController extends Controller
                 throw new Exception(__('Invalid menu.'));
             }
 
-            $item = new Item;
+            $item = new Item();
             $item->setMenu($menu);
 
             return ['head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => $this->roles->findAll()];
@@ -98,7 +98,7 @@ class ItemController extends Controller
                     throw new Exception(__('Invalid menu.'));
                 }
 
-                $item = new Item;
+                $item = new Item();
                 $item->setMenu($menu);
                 $item->setMenuId($menu->getId());
             }

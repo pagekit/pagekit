@@ -76,7 +76,8 @@ class LoginAttemptListener extends EventSubscriber
         ];
     }
 
-    protected function getCacheKey($username) {
+    protected function getCacheKey($username)
+    {
         return self::CACHE_KEY.'_'.$username;
     }
 }

@@ -64,18 +64,18 @@ class SystemListener extends EventSubscriber
         $this['tmpl.php']->addHelpers([$helper]);
         $this['tmpl.razr']->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 
-        $this['events']->addSubscriber(new CommentPlugin);
-        $this['events']->addSubscriber(new Editor);
-        $this['events']->addSubscriber(new MarkdownPlugin);
-        $this['events']->addSubscriber(new SimplePlugin);
-        $this['events']->addSubscriber(new VideoPlugin);
+        $this['events']->addSubscriber(new CommentPlugin());
+        $this['events']->addSubscriber(new Editor());
+        $this['events']->addSubscriber(new MarkdownPlugin());
+        $this['events']->addSubscriber(new SimplePlugin());
+        $this['events']->addSubscriber(new VideoPlugin());
 
         $this['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
         $this['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
         $this['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
         $this['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-        $this['view.sections']->set('messages', function() {
+        $this['view.sections']->set('messages', function () {
             return $this['view']->render('extension://system/views/messages/messages.razr');
         });
 
@@ -87,7 +87,7 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemAdmin()
     {
-        $menu = new Menu;
+        $menu = new Menu();
         $menu->setId('admin');
 
         $this['menus']->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
@@ -105,9 +105,9 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemWidget(RegisterWidgetEvent $event)
     {
-        $event->register(new LoginWidget);
-        $event->register(new MenuWidget);
-        $event->register(new TextWidget);
+        $event->register(new LoginWidget());
+        $event->register(new MenuWidget());
+        $event->register(new TextWidget());
     }
 
     /**
@@ -117,9 +117,9 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemDashboard(RegisterWidgetEvent $event)
     {
-        $event->register(new FeedWidget);
-        $event->register(new UserWidget);
-        $event->register(new WeatherWidget);
+        $event->register(new FeedWidget());
+        $event->register(new UserWidget());
+        $event->register(new WeatherWidget());
     }
 
     /**

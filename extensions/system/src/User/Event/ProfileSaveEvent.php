@@ -33,7 +33,7 @@ class ProfileSaveEvent extends Event
     /**
      * @return UserInterface
      */
-    public function getUser ()
+    public function getUser()
     {
         return $this->user;
     }
@@ -41,7 +41,7 @@ class ProfileSaveEvent extends Event
     /**
      * @param UserInterface $user
      */
-    public function setUser ($user)
+    public function setUser($user)
     {
         $this->user = $user;
     }

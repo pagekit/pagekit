@@ -108,7 +108,7 @@ class ExtensionComposerCommand extends Command
 
             try {
 
-                $client = new Client;
+                $client = new Client();
 
                 file_put_contents($composer, $client->get('https://getcomposer.org/composer.phar')->getBody());
 
@@ -126,12 +126,12 @@ class ExtensionComposerCommand extends Command
      * @param  string $value
      * @return int
      */
-    protected function memoryInBytes($value) {
-
+    protected function memoryInBytes($value)
+    {
         $unit = strtolower(substr($value, -1, 1));
         $value = (int) $value;
 
-        switch($unit) {
+        switch ($unit) {
             case 'g':
                 $value *= 1024;
                 // no break (cumulative multiplier)

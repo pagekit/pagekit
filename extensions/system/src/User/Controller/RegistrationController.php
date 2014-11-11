@@ -41,11 +41,13 @@ class RegistrationController extends Controller
     {
         if ($this['user']->isAuthenticated()) {
             $this['message']->info(__('You are already logged in.'));
+
             return $this->redirect('/');
         }
 
         if ($this['option']->get('system:user.registration', 'admin') == 'admin') {
             $this['message']->info(__('Public user registration is disabled.'));
+
             return $this->redirect('/');
         }
 
@@ -105,8 +107,8 @@ class RegistrationController extends Controller
                 throw new Exception(__('Signup failed'));
             }
 
-            $user = new User;
-            $user->setRegistered(new \DateTime);
+            $user = new User();
+            $user->setRegistered(new \DateTime());
             $user->setName($name);
             $user->setUsername($username);
             $user->setEmail($email);
@@ -158,6 +160,7 @@ class RegistrationController extends Controller
             if (!$this['request']->isXmlHttpRequest()) {
 
                 $this['message']->success($response['success']);
+
                 return $this->redirect('@system/auth/login');
             }
 
@@ -184,6 +187,7 @@ class RegistrationController extends Controller
     {
         if (empty($username) || empty($activation) || !$user = $this->users->where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             $this['message']->error(__('Invalid key.'));
+
             return $this->redirect('/');
         }
 

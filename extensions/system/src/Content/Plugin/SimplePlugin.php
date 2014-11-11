@@ -25,7 +25,7 @@ class SimplePlugin extends EventSubscriber
      */
     public function onContentPlugins(ContentEvent $event)
     {
-        $content = preg_replace_callback(self::PLUGIN_CODE, function($matches) use ($event) {
+        $content = preg_replace_callback(self::PLUGIN_CODE, function ($matches) use ($event) {
 
             $options = isset($matches[2]) ? json_decode($matches[2], true) : [];
 

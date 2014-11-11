@@ -34,7 +34,7 @@ try {
         $app['cache']->save('installed', true);
     }
 
-    $app['extensions.boot'] = function($app) {
+    $app['extensions.boot'] = function ($app) {
         return array_merge($app['config']->get('extension.core', []), $app['option']->get('system:extensions', []));
     };
 

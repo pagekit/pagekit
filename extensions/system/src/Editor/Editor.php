@@ -96,7 +96,7 @@ class Editor extends EventSubscriber implements EditorInterface
     /**
      * Get html attribute string
      *
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return string
      */
     protected function parseAttributes($attributes)

@@ -65,7 +65,7 @@ class PostController extends Controller
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
-            $query->where(function($query) use ($filter) {
+            $query->where(function ($query) use ($filter) {
                 $query->orWhere(['title LIKE :search', 'slug LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
@@ -103,7 +103,7 @@ class PostController extends Controller
      */
     public function addAction()
     {
-        $post = new Post;
+        $post = new Post();
         $post->setUser($this['user']);
         $post->setCommentStatus((bool) $this->extension->getParams('posts.comments_enabled'));
         $post->set('title', $this->extension->getParams('posts.show_title'));
@@ -144,7 +144,7 @@ class PostController extends Controller
 
             if (!$post = $this->posts->find($id)) {
 
-                $post = new Post;
+                $post = new Post();
 
             }
 
@@ -161,7 +161,6 @@ class PostController extends Controller
             return ['message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId()];
 
         } catch (Exception $e) {
-
             return ['message' => $e->getMessage(), 'error' => true];
 
         }

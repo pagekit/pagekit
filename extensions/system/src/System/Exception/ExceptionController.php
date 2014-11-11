@@ -15,10 +15,10 @@ class ExceptionController implements \ArrayAccess
     /**
      * Converts an Exception to a Response.
      *
-     * @param  Request              $request
-     * @param  FlattenException     $exception
-     * @param  DebugLoggerInterface $logger
-     * @param  string               $_format
+     * @param  Request                   $request
+     * @param  FlattenException          $exception
+     * @param  DebugLoggerInterface      $logger
+     * @param  string                    $_format
      * @throws \InvalidArgumentException
      * @return Response
      */
@@ -46,7 +46,7 @@ class ExceptionController implements \ArrayAccess
     }
 
     /**
-     * @param int     $startObLevel
+     * @param int $startObLevel
      *
      * @return string
      */

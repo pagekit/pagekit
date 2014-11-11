@@ -36,7 +36,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
      */
     public function __construct(FilterManager $filters = null)
     {
-        $this->filters = $filters ?: new FilterManager;
+        $this->filters = $filters ?: new FilterManager();
 
         FilterIterator::setApplication($this->getApplication());
     }
@@ -79,7 +79,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
     /**
      * Gets a menu.
      *
-     * @param  string $id
+     * @param  string        $id
      * @return MenuInterface
      */
     public function get($id)

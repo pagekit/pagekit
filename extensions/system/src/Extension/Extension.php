@@ -207,7 +207,7 @@ class Extension implements \ArrayAccess
     {
         $root = $this->getPath();
 
-        $addResources = function($config, $prefix = '') use ($root, $locator) {
+        $addResources = function ($config, $prefix = '') use ($root, $locator) {
             foreach ($config as $scheme => $resources) {
 
                 if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
@@ -216,7 +216,7 @@ class Extension implements \ArrayAccess
 
                 $resources = (array) $resources;
 
-                array_walk($resources, function(&$resource) use ($root) {
+                array_walk($resources, function (&$resource) use ($root) {
                     $resource = "$root/$resource";
                 });
 
@@ -227,7 +227,7 @@ class Extension implements \ArrayAccess
         $addResources($this->getConfig('resources.export', []), $this->getName());
 
         if ($config = $this->getConfig('resources.override')) {
-            $this['events']->addListener('system.init', function() use ($config, $addResources) {
+            $this['events']->addListener('system.init', function () use ($config, $addResources) {
                 $addResources($config);
             }, 20);
         }

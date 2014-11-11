@@ -24,7 +24,6 @@ class BuildCommand extends Command
      */
     protected $description = 'Builds a release';
 
-
     /**
      * {@inheritdoc}
      */
@@ -40,9 +39,9 @@ class BuildCommand extends Command
     {
         $vers = $this->getApplication()->getVersion();
         $path = $this->pagekit['path'];
-        $dev  = preg_replace_callback('/(\d)$/', function($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
+        $dev  = preg_replace_callback('/(\d)$/', function ($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
 
-        $zip = new \ZipArchive;
+        $zip = new \ZipArchive();
 
         if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).".zip", \ZipArchive::OVERWRITE)) {
             $this->error("Can't open ZIP extension in '$zipFile'");

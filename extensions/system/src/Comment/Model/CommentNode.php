@@ -36,8 +36,8 @@ class CommentNode extends Node
     }
 
     /**
-     * @param  string $method
-     * @param  array  $args
+     * @param  string                    $method
+     * @param  array                     $args
      * @return mixed
      * @throws \InvalidArgumentException
      */

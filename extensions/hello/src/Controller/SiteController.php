@@ -25,6 +25,7 @@ class SiteController extends Controller
     public function greetAction($name = 'World')
     {
         $names = explode(',', $name);
+
         return ['head.title' => __('Hello %name%', ['%name%' => $names[0]]), 'names' => $names];
     }
 
@@ -41,6 +42,7 @@ class SiteController extends Controller
     {
         $view = 'extension://hello/views/view.razr';
         $data = ['head.title' => __('View article'), 'id' => 1];
+
         return $this['view']->render($view, $data);
     }
 
@@ -52,6 +54,7 @@ class SiteController extends Controller
     public function jsonAction()
     {
         $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
+
         return $this['response']->json($data);
     }
 
@@ -60,7 +63,7 @@ class SiteController extends Controller
         return $this['response']->download('extension://hello/extension.svg');
     }
 
-    function forbiddenAction()
+    public function forbiddenAction()
     {
         return $this['response']->create(__('Permission denied.'), 401);
     }
