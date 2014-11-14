@@ -32,7 +32,7 @@ class SiteController extends Controller
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
      * @Response("extension://hello/views/view.razr")
      */
-    public function viewAction($id=1)
+    public function viewAction($id = 1)
     {
         return ['head.title' => __('View article'), 'id' => $id];
     }
