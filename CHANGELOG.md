@@ -3,10 +3,12 @@
 ### WIP
 
 - Added pagination in Blog extension
+- Added languages from Transifex
 - Fixed comment status bug
 - Fixed reordering menu bug
 - Fixed marketplace grid
-- Updated UIkit to 2.10
+- Fixed thumbnail grid in Storage
+- Updated UIkit to 2.11.1
 
 ### 0.8.7 (September 8, 2014)
 
