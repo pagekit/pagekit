@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Input\StringInput;
 
 class BuildCommand extends Command
 {
@@ -41,6 +42,20 @@ class BuildCommand extends Command
         $vers = $this->getApplication()->getVersion();
         $path = $this->pagekit['path'];
         $dev  = preg_replace_callback('/(\d)$/', function($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
+
+        // compile translation files
+        try {
+
+            $cmd = $this->getApplication()->get('translation:compile');
+            foreach (['system', 'page', 'blog', 'installer'] as $extension) {
+                // position 0 will to be application name, pos 1 the extension arg
+                $tmpInput = new StringInput("name ".$extension);
+                $cmd->run($tmpInput, $output);
+            }
+
+        } catch (\InvalidArgumentException $e) {
+            $this->info("Could not compile language files. Command does not exist.");
+        }
 
         $zip = new \ZipArchive;
 
