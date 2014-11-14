@@ -192,7 +192,7 @@ define(['jquery', 'system', 'uikit!upload', 'rowselect', 'handlebars'], function
                 this.applyFilter();
 
                 if (this.view == 'thumbnail') {
-                    $(document).trigger('uk-domready');
+                    $(document).trigger('uk.domready');
                 }
 
                 this.element.data('rowselect').fetchRows();
