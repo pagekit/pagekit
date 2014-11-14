@@ -1,12 +1,13 @@
 # 
 # Translators:
+# Kaya Zeren <kayazeren@gmail.com>, 2014
 # ozanmora <ozan.mora@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2013-11-06 15:49+0000\n"
-"PO-Revision-Date: 2014-08-05 09:02+0000\n"
-"Last-Translator: ozanmora <ozan.mora@gmail.com>\n"
+"PO-Revision-Date: 2014-11-05 16:36+0000\n"
+"Last-Translator: Kaya Zeren <kayazeren@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/pagekit-cms/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,31 +22,31 @@ msgstr "Pagekit Yükleyicisi"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:46
 msgid "Database connection failed!"
-msgstr "Veritabanı bağlantısı başarısız!"
+msgstr "Veritabanı ile bağlantı kurulamadı!"
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:66
 msgid "No database connection."
-msgstr "Veritabanı bağlantısı yok."
+msgstr "Veritabanı ile bağlantı yok."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:112
 msgid "Can't write config."
-msgstr "Ayar yazılabilir değil."
+msgstr "Ayarlar dosyası yazılabilir değil."
 
 #: extensions/installer/src/Pagekit/Installer/Controller/InstallerController.php:125
 msgid "DB user is missing required privileges."
-msgstr "VT kullanıcısı gerekli ayrıcalıklara sahip değil."
+msgstr "VT kullanıcısının gerekli izinleri yok."
 
 #: extensions/installer/views/install.blade.php:13
 msgid "Begin"
-msgstr "Başla"
+msgstr "Başladı"
 
 #: extensions/installer/views/install.blade.php:23
 msgid "Connect database"
-msgstr "Veritabanına bağlantısı"
+msgstr "Veritabanı bağlantısı"
 
 #: extensions/installer/views/install.blade.php:25
 msgid "Enter your database connection details."
-msgstr "Veritabanı bağlantı bilgilerini girin."
+msgstr "Veritabanı bağlantı bilgilerinizi yazın."
 
 #: extensions/installer/views/install.blade.php:30
 msgid "Hostname"
@@ -53,11 +54,11 @@ msgstr "Sunucu Adı"
 
 #: extensions/installer/views/install.blade.php:33
 msgid "Host cannot be blank."
-msgstr "Sunucu boş bırakılamaz."
+msgstr "Sunucu adı boş bırakılamaz."
 
 #: extensions/installer/views/install.blade.php:41
 msgid "User cannot be blank."
-msgstr "Kullanıcı boş bırakılamaz."
+msgstr "Kullanıcı adı boş bırakılamaz."
 
 #: extensions/installer/views/install.blade.php:51
 msgid "Database Name"
@@ -69,7 +70,7 @@ msgstr "Veritabanı adı boş bırakılamaz."
 
 #: extensions/installer/views/install.blade.php:59
 msgid "Table Prefix"
-msgstr "Tablo Önadı"
+msgstr "Tablo Öneki"
 
 #: extensions/installer/views/install.blade.php:64
 #: extensions/installer/views/install.blade.php:107
@@ -79,7 +80,7 @@ msgstr "Sonraki"
 
 #: extensions/installer/views/install.blade.php:75
 msgid "Create your account"
-msgstr "Hesabınızı oluşturun"
+msgstr "Hesap açın"
 
 #: extensions/installer/views/install.blade.php:77
 msgid "You will be the site administrator."
@@ -91,7 +92,7 @@ msgstr "Kullanıcı adı boş bırakılamaz."
 
 #: extensions/installer/views/install.blade.php:93
 msgid "Field must be a valid email address."
-msgstr "Alan, geçerli bir e-posta adresi olmalıdır."
+msgstr "Alanda geçerli bir e-posta adresi olmalıdır."
 
 #: extensions/installer/views/install.blade.php:102
 msgid "Password cannot be blank."
@@ -103,11 +104,11 @@ msgstr "Sitenizi kurun"
 
 #: extensions/installer/views/install.blade.php:120
 msgid "Enter your website details."
-msgstr "Websitenizin bilgilerini girin."
+msgstr "Web sitenizle ilgili bilgileri yazın."
 
 #: extensions/installer/views/install.blade.php:128
 msgid "Site name cannot be blank."
-msgstr "Site adı boş bırakılamaz"
+msgstr "Site adı boş bırakılamaz."
 
 #: extensions/installer/views/install.blade.php:152
 msgid "Installing Pagekit..."
@@ -115,11 +116,11 @@ msgstr "Pagekit Yükleniyor..."
 
 #: extensions/installer/views/install.blade.php:160
 msgid "Installation failed!"
-msgstr "Yükleme başarısız!"
+msgstr "Yüklenemedi!"
 
 #: extensions/installer/views/install.blade.php:169
 msgid "Retry"
-msgstr "Tekrar Dene"
+msgstr "Yeniden Deneyin"
 
 #: extensions/installer/views/install.blade.php:175
 msgid "Finished!"
@@ -127,4 +128,4 @@ msgstr "Bitti!"
 
 #: extensions/installer/views/install.blade.php:182
 msgid "Login now"
-msgstr "Şimdi Giriş Yapın"
+msgstr "Oturum açın"

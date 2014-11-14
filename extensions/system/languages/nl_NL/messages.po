@@ -1,5 +1,6 @@
 # 
 # Translators:
+# Frank de Jonge <info@frenky.net>, 2014
 # proman <frans.vanderschaft@promanagement.nl>, 2014
 # Lara Petersen <lara@cloud9webdesign.nl>, 2014
 # Markh07 <markh07@gmail.com>, 2014
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-10-08 08:13+0000\n"
-"Last-Translator: Wim Strik <ikbenwim@gmail.com>\n"
+"PO-Revision-Date: 2014-11-11 16:59+0000\n"
+"Last-Translator: Frank de Jonge <info@frenky.net>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/pagekit-cms/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2256,7 +2257,7 @@ msgstr "Caribische eilanden"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:52
 msgid "Brazil"
-msgstr ""
+msgstr "Brazilië"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:53
 msgid "Bahamas"
@@ -2500,7 +2501,7 @@ msgstr ""
 
 #: extensions/system/src/System/Helper/CountryHelper.php:113
 msgid "Greece"
-msgstr ""
+msgstr "Griekenland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:114
 msgid "South Georgia and the South Sandwich Islands"

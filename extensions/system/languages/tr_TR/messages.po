@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit CMS\n"
 "POT-Creation-Date: 2014-07-21 17:08+0000\n"
-"PO-Revision-Date: 2014-10-25 05:53+0000\n"
+"PO-Revision-Date: 2014-11-07 03:49+0000\n"
 "Last-Translator: Kaya Zeren <kayazeren@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/pagekit-cms/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Şifre"
 #: extensions/system/src/User/Link/User.php:46
 #: extensions/system/src/User/Widget/LoginWidget.php:25
 msgid "Login"
-msgstr "Giriş"
+msgstr "Oturum Açın"
 
 #: extensions/system/theme/templates/login.razr:38
 #: extensions/system/views/user/login.razr:24
@@ -71,7 +71,7 @@ msgstr "Şifremi Unuttum?"
 #: extensions/system/theme/templates/login.razr:50
 #: extensions/system/views/user/reset/request.razr:8
 msgid "Username or Email"
-msgstr "Kullanıcı Adı veya Eposta"
+msgstr "Kullanıcı Adı veya E-posta"
 
 #: extensions/system/theme/templates/login.razr:53
 msgid "Reset Password"
@@ -85,7 +85,7 @@ msgstr "Bakım"
 #: extensions/system/theme/templates/migration.razr:23
 #: extensions/system/src/System/Controller/MigrationController.php:17
 msgid "Update Pagekit"
-msgstr "Pagekit'i Güncelle"
+msgstr "Pagekit Yazılımını Güncelle"
 
 #: extensions/system/theme/templates/migration.razr:24
 msgid ""
@@ -184,7 +184,7 @@ msgstr "Lütfen bir kaynak seçin."
 #: extensions/system/views/admin/aliases/edit.razr:13
 #: extensions/system/views/admin/aliases/index.razr:21
 msgid "Alias"
-msgstr "Takma Ad"
+msgstr "Kısaltma"
 
 #: extensions/system/views/admin/aliases/edit.razr:16
 msgid ""
@@ -199,7 +199,7 @@ msgstr "Kaynak"
 
 #: extensions/system/views/admin/aliases/index.razr:7
 msgid "Add Alias"
-msgstr "Takma Ad Ekle"
+msgstr "Kısaltma Ekle"
 
 #: extensions/system/views/admin/aliases/index.razr:8
 #: extensions/system/views/admin/dashboard/settings.razr:18
@@ -223,11 +223,11 @@ msgstr "Sil"
 #: extensions/system/views/admin/widgets/index.razr:56
 #: extensions/system/views/tmpl/finder.main.razr:17
 msgid "Search"
-msgstr "Ara"
+msgstr "Arama"
 
 #: extensions/system/views/admin/aliases/index.razr:41
 msgid "No URL aliases found."
-msgstr "URL takma adı bulunamadı"
+msgstr "İnternet adresi kısaltması bulunamadı."
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:2
 #: extensions/system/views/admin/menu/index.razr:53
@@ -245,7 +245,7 @@ msgstr "Başlık"
 #: extensions/system/views/tmpl/image.modal.razr:12
 #: extensions/system/views/tmpl/video.modal.razr:15
 msgid "URL"
-msgstr "URL"
+msgstr "İnternet adresi"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:16
 msgid "Number of Posts"
@@ -253,7 +253,7 @@ msgstr "Yazıların Sayısı"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:27
 msgid "Post Content"
-msgstr "Mesaj İçeriği"
+msgstr "İleti İçeriği"
 
 #: extensions/system/views/admin/dashboard/feed/edit.razr:30
 msgid "Don't show"
@@ -272,11 +272,11 @@ msgstr "Sadece ilk yazıda göster"
 #: extensions/system/src/System/Controller/DashboardController.php:85
 #: extensions/system/src/Widget/Controller/WidgetsController.php:70
 msgid "Add Widget"
-msgstr "Widget Ekle"
+msgstr "Araç Ekle"
 
 #: extensions/system/views/admin/dashboard/settings.razr:24
 msgid "Widget"
-msgstr "Widget"
+msgstr "Araç"
 
 #: extensions/system/views/admin/dashboard/settings.razr:25
 #: extensions/system/views/admin/link/link.types.razr:8
@@ -292,7 +292,7 @@ msgstr "Kullanıcı Tipi"
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
 msgid "Logged in"
-msgstr "Girildi"
+msgstr "Oturum açıldı"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:4
 #: extensions/system/src/User/Dashboard/UserWidget.php:35
@@ -301,19 +301,19 @@ msgstr "Son kayıt olan"
 
 #: extensions/system/views/admin/dashboard/user/edit.razr:12
 msgid "Number of Users"
-msgstr "Kullanıcıların Sayısı"
+msgstr "Kullanıcı Sayısı"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:2
 msgid ""
 "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last "
 "%users% registered users"
-msgstr "{0} Henüz bir kullanıcı kayıt olmamış|{1} Son kayıt olan %users% kullanıcı|]1,Inf[ Son kayıt olan %users% kullanıcı"
+msgstr "{0} Hiç bir kullanıcı kayıt olmamış|{1} son %users% kayıt olan kullanıcı|]1,Inf[ Son %users% kayıt olan kullanıcı"
 
 #: extensions/system/views/admin/dashboard/user/index.razr:4
 msgid ""
 "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users "
 "logged in"
-msgstr "{0} Henüz hiç bir kullanıcı oturum açmamış|{1} %users% kullanıcı oturum açmış|]1,Inf[ %users% kullanıcı oturum açmış"
+msgstr "{0} Hiç bir kullanıcı oturum açmamış|{1} %users% kullanıcı oturum açmış|]1,Inf[ %users% kullanıcı oturum açmış"
 
 #: extensions/system/views/admin/dashboard/weather/edit.razr:4
 msgid "Location"
@@ -366,7 +366,7 @@ msgstr "Yükle"
 #: extensions/system/views/admin/themes/index.razr:15
 #: extensions/system/src/System/Controller/MarketplaceController.php:27
 msgid "Marketplace"
-msgstr "Magaza"
+msgstr "Mağaza"
 
 #: extensions/system/views/admin/extensions/index.razr:16
 #: extensions/system/views/admin/themes/index.razr:16
@@ -386,14 +386,14 @@ msgstr "Herhangi bir eklenti güncellemesi yok."
 #: extensions/system/views/admin/extensions/index.razr:44
 #: extensions/system/views/admin/themes/index.razr:44
 msgid "Install an extension"
-msgstr "Bir uzantı yükle"
+msgstr "Bir eklenti yükle"
 
 #: extensions/system/views/admin/extensions/index.razr:47
 #: extensions/system/views/admin/themes/index.razr:47
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
 msgid "Droparea"
-msgstr "Bırakma Alanı"
+msgstr "Bırakma bölgesi"
 
 #: extensions/system/views/admin/extensions/index.razr:48
 #: extensions/system/views/admin/themes/index.razr:48
@@ -404,7 +404,7 @@ msgstr "Dosyaları buraya bırakın ya da <a class=\"uk-form-file\">birini seçi
 
 #: extensions/system/views/admin/extensions/index.razr:67
 msgid "No extensions found."
-msgstr "Hiçbir uzantı bulunamadı."
+msgstr "Hiçbir eklenti bulunamadı."
 
 #: extensions/system/views/admin/extensions/index.razr:68
 #: extensions/system/views/admin/themes/index.razr:68
@@ -441,7 +441,7 @@ msgstr "Durum"
 #: extensions/system/views/admin/themes/table.razr:16
 #: extensions/system/views/tmpl/marketplace.table.razr:14
 msgid "Details"
-msgstr "Detaylar"
+msgstr "Ayrıntılar"
 
 #: extensions/system/views/admin/extensions/table.razr:25
 #: extensions/system/views/admin/settings/info.razr:5
@@ -497,7 +497,7 @@ msgstr "Menü Ekle"
 
 #: extensions/system/views/admin/menu/index.razr:34
 msgid "Add Item"
-msgstr "Nesne Ekle"
+msgstr "Öge Ekle"
 
 #: extensions/system/views/admin/menu/index.razr:38
 #: extensions/system/views/admin/user/index.razr:12
@@ -518,11 +518,11 @@ msgstr "Devre Dışı Bırak"
 
 #: extensions/system/views/admin/menu/index.razr:64
 msgid "No menu found."
-msgstr "Hiçbir menu bulunamadı."
+msgstr "Henüz bir menu yok."
 
 #: extensions/system/views/admin/menu/index.razr:79
 msgid "Enter Menu Name"
-msgstr "Menü Adı Girin"
+msgstr "Menü Adını Yazın"
 
 #: extensions/system/views/admin/menu/item.edit.razr:28
 msgid "Header"
@@ -540,7 +540,7 @@ msgstr "Erişimi Kısıtla"
 
 #: extensions/system/views/admin/menu/item.edit.razr:61
 msgid "Activation Rules"
-msgstr "Aktivasyon Rolleri"
+msgstr "Etkinleştirme Kuralları"
 
 #: extensions/system/views/admin/menu/item.edit.razr:64
 msgid "Enter custom activation rules as paths."
@@ -581,12 +581,12 @@ msgstr "Depolama"
 #: extensions/system/views/admin/settings/index.razr:64
 #: extensions/system/src/System/Controller/AliasController.php:46
 msgid "URL Aliases"
-msgstr "URL takma adları"
+msgstr "İnternet Adresi Kısaltmaları"
 
 #: extensions/system/views/admin/settings/index.razr:71
 #: extensions/system/views/admin/settings/index.razr:72
 msgid "Info"
-msgstr "Bilgi"
+msgstr "Bilgiler"
 
 #: extensions/system/views/admin/settings/index.razr:78
 #: extensions/system/views/admin/settings/index.razr:79
@@ -659,7 +659,7 @@ msgstr "Sürücü"
 
 #: extensions/system/views/admin/settings/info.razr:89
 msgid "Client"
-msgstr "Alıcı"
+msgstr "İstemci"
 
 #: extensions/system/views/admin/settings/info.razr:103
 msgid "Path"
@@ -685,7 +685,7 @@ msgstr "Site"
 #: extensions/system/views/user/profile.razr:15
 #: extensions/system/views/user/registration.razr:22
 msgid "Email"
-msgstr "Eposta"
+msgstr "E-posta"
 
 #: extensions/system/views/admin/settings/settings.razr:17
 #: extensions/system/views/admin/settings/settings.razr:142
@@ -713,7 +713,7 @@ msgstr "Site çevrimdışı yapılarak çevrimdışı iletisi görüntülensin."
 
 #: extensions/system/views/admin/settings/settings.razr:57
 msgid "Offline Message"
-msgstr "Çevrimdışı Mesajı"
+msgstr "Çevrimdışı İletisi"
 
 #: extensions/system/views/admin/settings/settings.razr:59
 #: extensions/system/src/System/Event/MaintenanceListener.php:27
@@ -722,15 +722,15 @@ msgstr "Yakında döneceğiz."
 
 #: extensions/system/views/admin/settings/settings.razr:68
 msgid "From Email"
-msgstr "Gönderen Eposta"
+msgstr "Kimden E-postası"
 
 #: extensions/system/views/admin/settings/settings.razr:74
 msgid "From Name"
-msgstr "Gönderen Adı"
+msgstr "Kimden Adı"
 
 #: extensions/system/views/admin/settings/settings.razr:80
 msgid "Mailer"
-msgstr "Mailer"
+msgstr "Postalayıcı"
 
 #: extensions/system/views/admin/settings/settings.razr:83
 msgid "PHP Mailer"
@@ -742,7 +742,7 @@ msgstr "SMTP Mailer"
 
 #: extensions/system/views/admin/settings/settings.razr:91
 msgid "SMTP Port"
-msgstr "SMTP Port"
+msgstr "SMTP Kapısı"
 
 #: extensions/system/views/admin/settings/settings.razr:97
 msgid "SMTP Host"
@@ -788,7 +788,7 @@ msgstr "TLS"
 
 #: extensions/system/views/admin/settings/settings.razr:127
 msgid "Please enable the PHP Open SSL extension."
-msgstr "Lütfen PHP Open SSL uzantısını etkinleştirin."
+msgstr "Lütfen PHP Open SSL eklentisini etkinleştirin."
 
 #: extensions/system/views/admin/settings/settings.razr:134
 msgid "Check Connection"
@@ -796,7 +796,7 @@ msgstr "Bağlantıyı Kontrol Et"
 
 #: extensions/system/views/admin/settings/settings.razr:135
 msgid "Send Test Email"
-msgstr "Test Epostası Gönder"
+msgstr "Sınama E-postası Gönder"
 
 #: extensions/system/views/admin/settings/settings.razr:144
 msgid "Site Locale"
@@ -808,7 +808,7 @@ msgstr "Yönetim Konumu"
 
 #: extensions/system/views/admin/settings/settings.razr:164
 msgid "Time Zone"
-msgstr "Zaman Dilimi"
+msgstr "Saat Dilimi"
 
 #: extensions/system/views/admin/settings/settings.razr:183
 #: extensions/system/views/user/registration.razr:5
@@ -826,7 +826,7 @@ msgstr "Ziyaretçiler"
 
 #: extensions/system/views/admin/settings/settings.razr:192
 msgid "Guests, but administrator approval is required"
-msgstr "Ziyaretçiler, fakat yönetici onayı gereklidir"
+msgstr "Ziyaretçiler, fakat yönetici onayı aranır"
 
 #: extensions/system/views/admin/settings/settings.razr:197
 msgid "Verification"
@@ -834,7 +834,7 @@ msgstr "Doğrulama"
 
 #: extensions/system/views/admin/settings/settings.razr:200
 msgid "Require e-mail verification when a guest creates an account."
-msgstr "Ziyaretçi bir hesap oluşturduğunda e-posta doğrulaması gerekir."
+msgstr "Ziyaretçi bir hesap oluşturduğunda e-posta doğrulaması istenir."
 
 #: extensions/system/views/admin/settings/settings.razr:209
 msgid "API Key"
@@ -842,7 +842,7 @@ msgstr "API Anahtarı"
 
 #: extensions/system/views/admin/settings/settings.razr:211
 msgid "Enter your API key"
-msgstr "API anahtarınızı girin"
+msgstr "API anahtarınızı yazın"
 
 #: extensions/system/views/admin/settings/settings.razr:215
 msgid "Release Channel"
@@ -850,11 +850,11 @@ msgstr "Yayın Kanalı"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Stable"
-msgstr "Kararlı"
+msgstr "Kararlı Sürümler"
 
 #: extensions/system/views/admin/settings/settings.razr:218
 msgid "Nightly"
-msgstr "Nightly"
+msgstr "Gecelik Yapımlar"
 
 #: extensions/system/views/admin/settings/settings.razr:231
 msgid "Cache"
@@ -862,19 +862,19 @@ msgstr "Önbellek"
 
 #: extensions/system/views/admin/settings/settings.razr:241
 msgid "Developer"
-msgstr "Geliştirici"
+msgstr "Geliştiren"
 
 #: extensions/system/views/admin/settings/settings.razr:244
 msgid "Enable debug mode"
-msgstr "Hata ayıklama modunu etkinleştir"
+msgstr "Hata ayıklama modu kullanılsın"
 
 #: extensions/system/views/admin/settings/settings.razr:247
 msgid "Enable debug toolbar"
-msgstr "Hata ayıklama araç çubuğunu etkinleştir"
+msgstr "Hata ayıklama araç çubuğu kullanılsın"
 
 #: extensions/system/views/admin/settings/settings.razr:250
 msgid "Please enable the SQLite database extension."
-msgstr "Lütfen SQLite veritabanı uzantısını etkinleştirin."
+msgstr "Lütfen SQLite veritabanı eklentisini etkinleştirin."
 
 #: extensions/system/views/admin/settings/settings.razr:253
 msgid "Disable cache"
@@ -882,16 +882,16 @@ msgstr "Önbelleği devre dışı bırak"
 
 #: extensions/system/views/admin/settings/update.razr:7
 msgid "There is an update available."
-msgstr "Bir güncelleme mevcut."
+msgstr "Bir güncelleme yayınlanmış."
 
 #: extensions/system/views/admin/settings/update.razr:8
 msgid "Please update Pagekit to version %version%!"
-msgstr "Lütfen Pagekit'i %version% sürümüne güncelleyin!"
+msgstr "Lütfen Pagekit yazılımını %version% sürümüne güncelleyin!"
 
 #: extensions/system/views/admin/settings/update.razr:12
 #: extensions/system/views/admin/settings/update.razr:34
 msgid "Download %version%"
-msgstr "İndir %version%"
+msgstr "%version% sürümünü indirin"
 
 #: extensions/system/views/admin/settings/update.razr:19
 msgid "Downloading ..."
@@ -899,18 +899,18 @@ msgstr "İndiriliyor ..."
 
 #: extensions/system/views/admin/settings/update.razr:29
 msgid "You have the latest version of Pagekit."
-msgstr "Pagekit'in son sürümüne sahipsiniz."
+msgstr "Son Pagekit sürümünü kullanıyorsunuz."
 
 #: extensions/system/views/admin/settings/update.razr:30
 msgid ""
 "You have the latest version of Pagekit. You do not need to update. However, "
 "if you want to re-install version %version%, you can do so automatically or "
 "download the package and re-install manually."
-msgstr "Son Pagekit sürümün kullanıyorsunuz. Herhangi bir güncelleme gereksinimiz yok. Bununla birlikte %version% sürümünü yeniden yüklemek istiyorsanız, bu işlemi otomatik olarak ya da paketi indirip el ile yükleyerek yapabilirsiniz."
+msgstr "Son Pagekit sürümünü kullanıyorsunuz. Herhangi bir güncelleme gerekmiyor. Bununla birlikte %version% sürümünü yeniden yüklemek istiyorsanız, bu işlemi otomatik olarak ya da paketi indirip el ile yükleyerek yapabilirsiniz."
 
 #: extensions/system/views/admin/settings/update.razr:33
 msgid "Re-install"
-msgstr "Tekrar Yükle"
+msgstr "Yeniden Yükle"
 
 #: extensions/system/views/admin/settings/update.razr:39
 msgid "Cannot connect to the server. Please try again later."
@@ -918,7 +918,7 @@ msgstr "Sunucu ile bağlantı kurulamıyor. Lütfen bir süre sonra yeniden dene
 
 #: extensions/system/views/admin/themes/index.razr:38
 msgid "No theme updates found."
-msgstr "Hiçbir tema güncellemsi bulunamadı."
+msgstr "Hiçbir tema güncellemesi bulunamadı."
 
 #: extensions/system/views/admin/themes/index.razr:67
 msgid "No themes found."
@@ -927,7 +927,7 @@ msgstr "Hiçbir tema bulunamadı."
 #: extensions/system/views/admin/themes/table.razr:11
 #: extensions/system/src/User/Entity/User.php:100
 msgid "Active"
-msgstr "Aktif"
+msgstr "Etkin"
 
 #: extensions/system/views/admin/user/edit.razr:19
 #: extensions/system/views/admin/user/edit.razr:111
@@ -938,11 +938,11 @@ msgstr "Yeni"
 
 #: extensions/system/views/admin/user/edit.razr:24
 msgid "Verified email address"
-msgstr "Doğrulanmış eposta adresi"
+msgstr "Doğrulanmış e-posta adresi"
 
 #: extensions/system/views/admin/user/edit.razr:25
 msgid "Last login: %date%"
-msgstr "Son giriş: %date%"
+msgstr "Son oturum açma: %date%"
 
 #: extensions/system/views/admin/user/edit.razr:25
 #: extensions/system/src/User/Controller/UserController.php:274
@@ -988,7 +988,7 @@ msgstr "Kullanıcı Ekle"
 
 #: extensions/system/views/admin/user/index.razr:15
 msgid "Activate"
-msgstr "Aktifleştir"
+msgstr "Etkinleştir"
 
 #: extensions/system/views/admin/user/index.razr:16
 msgid "Block"
@@ -1009,11 +1009,11 @@ msgstr "- İzin -"
 
 #: extensions/system/views/admin/user/index.razr:87
 msgid "Verified Email Address"
-msgstr "Doğrulanmış Eposta Adresi"
+msgstr "Doğrulanmış E-posta Adresi"
 
 #: extensions/system/views/admin/user/index.razr:98
 msgid "No user found."
-msgstr "Hiçbir kullanıcı bulunamadı."
+msgstr "Hiç bir kullanıcı bulunamadı."
 
 #: extensions/system/views/admin/user/permission.razr:11
 #: extensions/system/views/admin/user/role.razr:43
@@ -1026,7 +1026,7 @@ msgstr "Rol Ekle"
 
 #: extensions/system/views/admin/user/role.razr:87
 msgid "Enter Role Name"
-msgstr "Rol Adı Girin"
+msgstr "Rol Adını Yazın"
 
 #: extensions/system/views/admin/widgets/edit.razr:15
 msgid "Assignment"
@@ -1040,7 +1040,7 @@ msgstr "Menü"
 
 #: extensions/system/views/admin/widgets/edit.razr:49
 msgid "Pattern"
-msgstr "Şablon"
+msgstr "Örüntü"
 
 #: extensions/system/views/admin/widgets/edit.razr:52
 msgid ""
@@ -1053,7 +1053,7 @@ msgstr "Her satıra bir sayfa yolu yazın. \"*\" karakteri jokerdir. Katılmayac
 #: extensions/system/views/admin/widgets/edit.razr:82
 #: extensions/system/views/admin/widgets/index.razr:67
 msgid "Position"
-msgstr "Pozisyon"
+msgstr "Konum"
 
 #: extensions/system/views/admin/widgets/edit.razr:103
 msgid "Options"
@@ -1070,7 +1070,7 @@ msgstr "Kopyala"
 
 #: extensions/system/views/admin/widgets/index.razr:43
 msgid "- Position -"
-msgstr "- Pozisyon -"
+msgstr "- Konum -"
 
 #: extensions/system/views/admin/widgets/index.razr:50
 msgid "- Type -"
@@ -1082,11 +1082,11 @@ msgstr "- Ata -"
 
 #: extensions/system/views/admin/widgets/index.razr:117
 msgid "Extension not loaded"
-msgstr "Uzantı çalıştırılamadı"
+msgstr "Eklenti yüklenmemiş"
 
 #: extensions/system/views/tmpl/feed.error.razr:1
 msgid "Unable to retrieve feed data."
-msgstr "Veri beslemesi alınamıyor."
+msgstr "Akış verisi alınamadı."
 
 #: extensions/system/views/tmpl/finder.main.razr:1
 msgid "New Name"
@@ -1118,7 +1118,7 @@ msgstr "Boyut"
 
 #: extensions/system/views/tmpl/finder.table.razr:8
 msgid "Modified"
-msgstr "Değiştirildi"
+msgstr "Son Değişiklik"
 
 #: extensions/system/views/tmpl/finder.table.razr:44
 #: extensions/system/views/tmpl/finder.thumbnail.razr:38
@@ -1127,11 +1127,11 @@ msgstr "Dosyaları buraya bırakın."
 
 #: extensions/system/views/tmpl/image.modal.razr:4
 msgid "Add Image"
-msgstr "Resim Ekle"
+msgstr "Görsel Ekle"
 
 #: extensions/system/views/tmpl/image.modal.razr:8
 msgid "Select image"
-msgstr "Resim seçin"
+msgstr "Görsel seçin"
 
 #: extensions/system/views/tmpl/image.modal.razr:18
 msgid "Alt"
@@ -1139,7 +1139,7 @@ msgstr "Alt"
 
 #: extensions/system/views/tmpl/image.modal.razr:29
 msgid "Select Image"
-msgstr "Resim Seçin"
+msgstr "Görsel Seçin"
 
 #: extensions/system/views/tmpl/image.modal.razr:32
 #: extensions/system/views/tmpl/video.modal.razr:31
@@ -1152,24 +1152,24 @@ msgstr "Yer Belirtme Görseli"
 
 #: extensions/system/views/tmpl/image.replace.razr:12
 msgid "Image"
-msgstr "Resim"
+msgstr "Görsel"
 
 #: extensions/system/views/tmpl/link.modal.razr:3
 msgid "Add Link"
-msgstr "Link Ekle"
+msgstr "Bağlantı Ekle"
 
 #: extensions/system/views/tmpl/link.replace.razr:1
 #: extensions/system/views/tmpl/linkpicker.replace.razr:1
 msgid "Select Link"
-msgstr "Link Seçin"
+msgstr "Bağlantı Seçin"
 
 #: extensions/system/views/tmpl/linkpicker.modal.razr:3
 msgid "Link"
-msgstr "Link"
+msgstr "Bağlantı"
 
 #: extensions/system/views/tmpl/package.updates.razr:18
 msgid "Changelog"
-msgstr "Değişiklikler"
+msgstr "Değişiklik günlüğü"
 
 #: extensions/system/views/tmpl/package.upload.razr:4
 msgid ""
@@ -1193,15 +1193,15 @@ msgstr "Tip:"
 
 #: extensions/system/views/tmpl/video.modal.razr:5
 msgid "Add Video"
-msgstr "Video Ekle"
+msgstr "Görüntü Ekle"
 
 #: extensions/system/views/tmpl/video.modal.razr:16
 msgid "Select video"
-msgstr "Video Seçin"
+msgstr "Görüntü Seçin"
 
 #: extensions/system/views/tmpl/video.modal.razr:28
 msgid "Select Video"
-msgstr "Video Seçin"
+msgstr "Görüntü Seçin"
 
 #: extensions/system/views/tmpl/video.replace.razr:6
 msgid "Placeholder Video"
@@ -1209,7 +1209,7 @@ msgstr "Yer Belirtme Görüntüsü"
 
 #: extensions/system/views/tmpl/video.replace.razr:12
 msgid "Video"
-msgstr "Video"
+msgstr "Görüntü"
 
 #: extensions/system/views/user/login.razr:13
 msgid "(Forgot Password?)"
@@ -1274,7 +1274,7 @@ msgstr "Kayıt olduğunuz için teşekkürler!"
 
 #: extensions/system/views/user/mails/welcome.razr:12
 msgid "Login with the username:"
-msgstr "kullanıcı adı ile giriş yapın:"
+msgstr "Kullanıcı adı ile oturum açın:"
 
 #: extensions/system/views/user/profile.razr:5
 #: extensions/system/src/User/Controller/ProfileController.php:44
@@ -1291,11 +1291,11 @@ msgstr "Yeni Şifre"
 
 #: extensions/system/views/user/reset/confirm.razr:5
 msgid "Password confirmation"
-msgstr "Şifre onaylama"
+msgstr "Şifre onayı"
 
 #: extensions/system/views/user/reset/confirm.razr:8
 msgid "Enter your new password below."
-msgstr "Aşağıya yeni şifrenizi girin."
+msgstr "Aşağıya yeni şifrenizi yazın."
 
 #: extensions/system/views/user/reset/request.razr:3
 msgid "Forgot password"
@@ -1309,11 +1309,11 @@ msgstr "Lütfen kullanıcını adı ya da e-posta adresinizi yazın. E-posta adr
 
 #: extensions/system/views/widgets/login/edit.razr:4
 msgid "Login Redirect"
-msgstr "Giriş Yönlendirme"
+msgstr "Oturum Açma Yönlendirmesi"
 
 #: extensions/system/views/widgets/login/edit.razr:10
 msgid "Logout Redirect"
-msgstr "Çıkış Yönlendirme"
+msgstr "Oturum Kapatma Yönlendirmesi"
 
 #: extensions/system/views/widgets/login/login.razr:4
 msgid "username"
@@ -1325,15 +1325,15 @@ msgstr "şifre"
 
 #: extensions/system/views/widgets/login/login.razr:17
 msgid "Sign up"
-msgstr "Kayıt ol"
+msgstr "Kayıt olun"
 
 #: extensions/system/views/widgets/login/logout.razr:1
 msgid "Hi"
-msgstr "Selam"
+msgstr "Merhaba"
 
 #: extensions/system/views/widgets/menu/edit.razr:12
 msgid "Start Level"
-msgstr "Başlangıç Seviyesi"
+msgstr "Başlangıç Düzeyi"
 
 #: extensions/system/views/widgets/menu/edit.razr:22
 msgid "Depth"
@@ -1341,11 +1341,11 @@ msgstr "Derinlik"
 
 #: extensions/system/views/widgets/menu/edit.razr:25
 msgid "No Limit"
-msgstr "Limit Yok"
+msgstr "Sınırlama Yok"
 
 #: extensions/system/views/widgets/menu/edit.razr:33
 msgid "Sub Items"
-msgstr "Alt Nesneler"
+msgstr "Alt Ögeler"
 
 #: extensions/system/views/widgets/menu/edit.razr:36
 msgid "Show all"
@@ -1353,11 +1353,11 @@ msgstr "Tümünü göster"
 
 #: extensions/system/views/widgets/menu/edit.razr:39
 msgid "Show only for active item"
-msgstr "Yalnızca etkin öğeyi göster"
+msgstr "Yalnızca etkin ögeyi göster"
 
 #: extensions/system/views/widgets/text/edit.razr:5
 msgid "Enable Markdown"
-msgstr "Markdown özelliğini etkinleştirin"
+msgstr "Markdown Kullanılsın"
 
 #: extensions/system/languages/messages.php:4
 msgid "0"
@@ -1453,11 +1453,11 @@ msgstr "Erişim"
 
 #: extensions/system/languages/messages.php:33
 msgid "Manage media files"
-msgstr "Medya dosyalarını yönet"
+msgstr "Ortam dosyaları yönetimi"
 
 #: extensions/system/languages/messages.php:34
 msgid "Manage menus"
-msgstr "Menüleri yönet"
+msgstr "Menü yönetimi"
 
 #: extensions/system/languages/messages.php:35
 msgid "Manage widgets"
@@ -1465,15 +1465,15 @@ msgstr "Araç yönetimi"
 
 #: extensions/system/languages/messages.php:36
 msgid "Manage themes"
-msgstr "Temaları yönet"
+msgstr "Tema yönetimi"
 
 #: extensions/system/languages/messages.php:37
 msgid "Manage extensions"
-msgstr "Uzantıları yönet"
+msgstr "Eklenti yönetimi"
 
 #: extensions/system/languages/messages.php:38
 msgid "Manage url aliases"
-msgstr "URL takma adlarını yönet"
+msgstr "İnternet adresi kısaltmaları yönetimi"
 
 #: extensions/system/languages/messages.php:39
 msgid "Apply system updates"
@@ -1489,15 +1489,15 @@ msgstr "Sistem ayarlarına erişim"
 
 #: extensions/system/languages/messages.php:42
 msgid "Manage user permissions"
-msgstr "Kullanıcı izinlerini yönet"
+msgstr "Kullanıcı izinleri yönetimi"
 
 #: extensions/system/languages/messages.php:43
 msgid "Manage users"
-msgstr "Kullanıcıları yönet"
+msgstr "Kullanıcı yönetimi"
 
 #: extensions/system/languages/messages.php:44
 msgid "Use the site in maintenance mode"
-msgstr "Siteyi bakım modunda kullan"
+msgstr "Site bakım kipine geçirilsin"
 
 #: extensions/system/languages/messages.php:45
 msgid ""
@@ -1507,11 +1507,11 @@ msgstr "Uyarı: Yalnız güvendiğiniz kullanıcılara izin verin. Bu yetki güv
 
 #: extensions/system/src/Editor/Templating/EditorHelper.php:44
 msgid "Editor not found."
-msgstr "Editör bulunamadı."
+msgstr "Düzenleyici bulunamadı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:62
 msgid "Core extensions may not be enabled."
-msgstr "Çekirdek uzantılar etkin olmayabilir."
+msgstr "Çekirdek eklentiler etkinleştirilmemiş olabilir."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:72
 msgid ""
@@ -1524,11 +1524,11 @@ msgstr "\"%name%\" eklentisi etkinleştirilemedi."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:91
 msgid "Extension enabled."
-msgstr "Uzantı etkinleştirildi"
+msgstr "Eklenti etkinleştirildi"
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:109
 msgid "Core extensions may not be disabled."
-msgstr "Çekirdek uzantılar devre dışı olmayabilir."
+msgstr "Çekirdek eklentiler devre dışı bırakılamamış olabilir."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:113
 msgid "Extension \"%name%\" has not been loaded."
@@ -1536,11 +1536,11 @@ msgstr "\"%name%\" eklentisi yüklenemedi."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:120
 msgid "Extension disabled."
-msgstr "Uzantı devre dışı bırakıldı."
+msgstr "Eklenti devre dışı bırakıldı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:138
 msgid "Core extensions may not be uninstalled."
-msgstr "Çekirdek uzantılar kaldırılmamış olabilir."
+msgstr "Çekirdek eklentiler kaldırılamamış olabilir."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:146
 msgid "Unable to uninstall extension \"%name%\"."
@@ -1548,12 +1548,12 @@ msgstr "\"%name%\" eklentisi kaldırılamadı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:157
 msgid "Extension uninstalled."
-msgstr "Uzantı kaldırıldı."
+msgstr "Eklenti kaldırıldı."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:174
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:197
 msgid "Invalid extension."
-msgstr "Geçersiz eklenti."
+msgstr "Eklenti geçersiz."
 
 #: extensions/system/src/Extension/Controller/ExtensionsController.php:203
 #: extensions/system/src/System/Controller/SettingsController.php:104
@@ -1566,31 +1566,31 @@ msgstr "Ayarlar kaydedildi."
 #: extensions/system/src/Menu/Controller/ItemController.php:133
 #: extensions/system/src/Menu/Controller/ItemController.php:161
 msgid "Invalid menu."
-msgstr "Geçersiz menü."
+msgstr "Menü geçersiz."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:58
 msgid "Add Menu Item"
-msgstr "Menü Nesnesi Ekle"
+msgstr "Menü Ögesi Ekle"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:76
 msgid "Invalid menu item."
-msgstr "Geçersiz menü nesnesi."
+msgstr "Menü ögesi geçersiz."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:79
 msgid "Edit Menu Item"
-msgstr "Menü Nesnesini Düzenle"
+msgstr "Menü Ögesini Düzenle"
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item saved."
-msgstr "Menü nesnesi kaydedildi."
+msgstr "Menü ögesi kaydedildi."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:114
 msgid "Menu item created."
-msgstr "Menü nesnesi oluşturuldu."
+msgstr "Menü ögesi eklendi."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:119
 msgid "Invalid url."
-msgstr "Geçersiz URL."
+msgstr "İnternet adresi geçersiz."
 
 #: extensions/system/src/Menu/Controller/ItemController.php:144
 msgid ""
@@ -1599,7 +1599,7 @@ msgstr "{0} Hiç bir menü ögesi silinmedi.|{1} menü ögesi silindi.|]1,Inf[ m
 
 #: extensions/system/src/Menu/Controller/MenuController.php:58
 msgid "Invalid menu name."
-msgstr "Geçersiz menü adı."
+msgstr "Menü adı geçersiz."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:66
 msgid "Invalid menu name. \"%name%\" is already in use."
@@ -1607,11 +1607,11 @@ msgstr "Menü adı geçersiz. \"%name%\" adında bir menü zaten var."
 
 #: extensions/system/src/Menu/Controller/MenuController.php:86
 msgid "Invalid menu id"
-msgstr "Geçersiz menü ID"
+msgstr "Menü kodu geçersiz"
 
 #: extensions/system/src/Menu/Controller/MenuController.php:122
 msgid "Menu order updated"
-msgstr "Menü sırası güncellendi"
+msgstr "Menü sıralaması güncellendi"
 
 #: extensions/system/src/Menu/Entity/Item.php:92
 #: extensions/system/src/User/Entity/User.php:94
@@ -1625,39 +1625,39 @@ msgstr "Menü Aracı"
 
 #: extensions/system/src/System/Controller/AliasController.php:54
 msgid "Add URL Alias"
-msgstr "URL Takma Adı Ekle"
+msgstr "İnternet Adresi Kısaltması Ekle"
 
 #: extensions/system/src/System/Controller/AliasController.php:66
 msgid "Invalid alias id."
-msgstr "Geçersiz takma ad ID."
+msgstr "Kısaltma kodu geçersiz."
 
 #: extensions/system/src/System/Controller/AliasController.php:69
 msgid "Edit URL Alias"
-msgstr "URL Takma Adını Düzenle"
+msgstr "İnternet Adresi Kısaltmasını Düzenle"
 
 #: extensions/system/src/System/Controller/AliasController.php:89
 msgid "Invalid alias."
-msgstr "Geçersiz takma ad."
+msgstr "Takma ad geçersiz."
 
 #: extensions/system/src/System/Controller/AliasController.php:93
 msgid "Invalid source."
-msgstr "Geçersiz kaynak."
+msgstr "Kaynak geçersiz."
 
 #: extensions/system/src/System/Controller/AliasController.php:97
 msgid "The alias \"%alias%\" is already in use."
-msgstr "\"%alias%\" takma adı zaten kullanımda."
+msgstr "\"%alias%\" kısaltması zaten kullanılıyor."
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias saved."
-msgstr "Takma ad kaydedildi."
+msgstr "Kısaltma kaydedildi."
 
 #: extensions/system/src/System/Controller/AliasController.php:102
 msgid "Alias created."
-msgstr "Takma ad oluşturuldu."
+msgstr "Kısaltma eklendi."
 
 #: extensions/system/src/System/Controller/AliasController.php:122
 msgid "{0} No alias deleted.|{1} Alias deleted.|]1,Inf[ Aliases deleted."
-msgstr "{0} Hiç bir kısaltma silinmedi.|{1} Kısaltma silindi.|]1,Inf[ kısaltma silindi."
+msgstr "{0} Hiç bir kısaltma silinmedi.|{1} kısaltma silindi.|]1,Inf[ kısaltma silindi."
 
 #: extensions/system/src/System/Controller/DashboardController.php:67
 msgid "Dashboard Settings"
@@ -1675,7 +1675,7 @@ msgstr "Araç kodu geçersiz."
 #: extensions/system/src/System/Controller/DashboardController.php:114
 #: extensions/system/src/Widget/Controller/WidgetsController.php:85
 msgid "Edit Widget"
-msgstr "Aracı Düzenleyin"
+msgstr "Aracı Düzenle"
 
 #: extensions/system/src/System/Controller/DashboardController.php:139
 #: extensions/system/src/Widget/Controller/WidgetsController.php:120
@@ -1714,11 +1714,11 @@ msgstr "İzin reddedildi."
 #: extensions/system/src/System/Controller/FinderController.php:61
 #: extensions/system/src/System/Controller/FinderController.php:91
 msgid "Invalid file name."
-msgstr "Gerçersiz dosya adı."
+msgstr "Dosya adı geçersiz."
 
 #: extensions/system/src/System/Controller/FinderController.php:76
 msgid "Directory created."
-msgstr "Dizin oluşturuldu."
+msgstr "Klasör oluşturuldu."
 
 #: extensions/system/src/System/Controller/FinderController.php:80
 msgid "Unable to create directory."
@@ -1742,7 +1742,7 @@ msgstr "Seçililer çıkarıldı."
 
 #: extensions/system/src/System/Controller/FinderController.php:161
 msgid "No files uploaded."
-msgstr "Hiçbir dosya karşıya yüklenemedi."
+msgstr "Karşıya bir dosya yüklenemedi."
 
 #: extensions/system/src/System/Controller/FinderController.php:167
 msgid "Uploaded file invalid."
@@ -1758,7 +1758,7 @@ msgstr "Yüklenemedi."
 
 #: extensions/system/src/System/Controller/FinderController.php:199
 msgid "n/a"
-msgstr "n/a"
+msgstr "yok"
 
 #: extensions/system/src/System/Controller/FinderController.php:202
 msgid "%d Bytes"
@@ -1798,11 +1798,11 @@ msgstr "%d YB"
 
 #: extensions/system/src/System/Controller/LinkController.php:56
 msgid "Url"
-msgstr "Url"
+msgstr "İnternet adresi"
 
 #: extensions/system/src/System/Controller/MigrationController.php:29
 msgid "Your Pagekit database has been updated successfully."
-msgstr "Pagekit veritabanı gücellemesi başarılı."
+msgstr "Pagekit veritabanı güncellendi."
 
 #: extensions/system/src/System/Controller/MigrationController.php:31
 msgid "Your Pagekit database is already up-to-date!"
@@ -1810,24 +1810,24 @@ msgstr "Pagekit veritabanı zaten güncel!"
 
 #: extensions/system/src/System/Controller/PackageController.php:47
 msgid "No file uploaded."
-msgstr "Hiçbir dosya karşıya yüklenemedi."
+msgstr "Karşıya bir dosya yüklenmedi."
 
 #: extensions/system/src/System/Controller/PackageController.php:53
 msgid "Invalid package type."
-msgstr "Geçersiz paket tipi."
+msgstr "Paket tipi geçersiz."
 
 #: extensions/system/src/System/Controller/PackageController.php:57
 #: extensions/system/src/System/Controller/PackageController.php:161
 msgid "Core extensions may not be installed."
-msgstr "Çekirdek uzantılar kurulu olmayabilir."
+msgstr "Çekirdek eklentiler yüklü olmayabilir."
 
 #: extensions/system/src/System/Controller/PackageController.php:111
 msgid "Path not found."
-msgstr "Yol bulunamaadı."
+msgstr "Yol bulunamadı."
 
 #: extensions/system/src/System/Controller/PackageController.php:124
 msgid "Package \"%name%\" installed."
-msgstr "\"%name%\" paketi kuruldu."
+msgstr "\"%name%\" paketi yüklendi."
 
 #: extensions/system/src/System/Controller/PackageController.php:127
 #: extensions/system/src/System/Controller/UpdateController.php:67
@@ -1842,12 +1842,12 @@ msgstr "Paket sağlaması doğrulanamadı."
 #: extensions/system/src/System/Controller/PackageController.php:131
 #: extensions/system/src/System/Controller/UpdateController.php:71
 msgid "Invalid API key."
-msgstr "Geçersiz API anahtarı."
+msgstr "API anahtarı geçersiz."
 
 #: extensions/system/src/System/Controller/PackageController.php:133
 #: extensions/system/src/System/Controller/UpdateController.php:73
 msgid "Package download failed."
-msgstr "Paket indirme başarısız."
+msgstr "Paket indirilemedi."
 
 #: extensions/system/src/System/Controller/PackageController.php:135
 #: extensions/system/src/System/Controller/UpdateController.php:75
@@ -1856,7 +1856,7 @@ msgstr "Yol yazılabilir değil."
 
 #: extensions/system/src/System/Controller/PackageController.php:209
 msgid "Can't load json file from package."
-msgstr "Paketteki json dosyası çalıştırılamadı."
+msgstr "Paketteki json dosyası yüklenemedi."
 
 #: extensions/system/src/System/Controller/SettingsController.php:127
 msgid "Connection established!"
@@ -1868,23 +1868,23 @@ msgstr "Bağlantı kurulamadı! (%s)"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Test email!"
-msgstr "Test eposta!"
+msgstr "E-postayı sına!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:160
 msgid "Testemail"
-msgstr "Testeposta"
+msgstr "Epostasina"
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail successfully sent!"
-msgstr "Posta başarıyla gönderildi!"
+msgstr "E-posta gönderildi!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:161
 msgid "Mail delivery failed!"
-msgstr "Posta teslimatı başarısız!"
+msgstr "E-posta gönderilemedi!"
 
 #: extensions/system/src/System/Controller/SettingsController.php:165
 msgid "Mail delivery failed! (%s)"
-msgstr "Posta teslimatı başarısız! (%s)"
+msgstr "E-posta gönderilemedi! (%s)"
 
 #: extensions/system/src/System/Controller/SystemController.php:79
 msgid "Order saved."
@@ -1896,7 +1896,7 @@ msgstr "Sistem Bilgileri"
 
 #: extensions/system/src/System/Controller/SystemController.php:146
 msgid "Cache cleared!"
-msgstr "Ön bellek temizlendi!"
+msgstr "Önbellek temizlendi!"
 
 #: extensions/system/src/System/Controller/UpdateController.php:53
 msgid "Unable to find update."
@@ -1917,7 +1917,7 @@ msgstr "Veritabanı güncelleniyor..."
 
 #: extensions/system/src/System/Controller/UpdateController.php:127
 msgid "Installed successfully."
-msgstr "Kurulum başarılı."
+msgstr "Yüklendi."
 
 #: extensions/system/src/System/Dashboard/FeedWidget.php:23
 msgid "Feed"
@@ -2126,7 +2126,7 @@ msgstr "Bir şeyler ters gitti gibi görünüyor."
 
 #: extensions/system/src/System/Helper/CountryHelper.php:20
 msgid "Ascension Island"
-msgstr "Ascension Island"
+msgstr "Ascension Adası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:21
 msgid "Andorra"
@@ -2134,15 +2134,15 @@ msgstr "Andorra"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:22
 msgid "United Arab Emirates"
-msgstr "United Arab Emirates"
+msgstr "Birleşik Arap Emirlikleri"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:23
 msgid "Afghanistan"
-msgstr "Afghanistan"
+msgstr "Afganistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:24
 msgid "Antigua and Barbuda"
-msgstr "Antigua and Barbuda"
+msgstr "Antik ve Barbuda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:25
 msgid "Anguilla"
@@ -2150,15 +2150,15 @@ msgstr "Anguilla"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:26
 msgid "Albania"
-msgstr "Albania"
+msgstr "Arnavutluk"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:27
 msgid "Armenia"
-msgstr "Armenia"
+msgstr "Ermenistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:28
 msgid "Netherlands Antilles"
-msgstr "Netherlands Antilles"
+msgstr "Hollanda Antilleri"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:29
 msgid "Angola"
@@ -2166,23 +2166,23 @@ msgstr "Angola"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:30
 msgid "Antarctica"
-msgstr "Antarctica"
+msgstr "Antartika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:31
 msgid "Argentina"
-msgstr "Argentina"
+msgstr "Arjantin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:32
 msgid "American Samoa"
-msgstr "American Samoa"
+msgstr "Amerikan Samoa"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:33
 msgid "Austria"
-msgstr "Austria"
+msgstr "Avusturya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:34
 msgid "Australia"
-msgstr "Australia"
+msgstr "Avustralya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:35
 msgid "Aruba"
@@ -2190,15 +2190,15 @@ msgstr "Aruba"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:36
 msgid "Åland Islands"
-msgstr "Åland Islands"
+msgstr "Åland Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:37
 msgid "Azerbaijan"
-msgstr "Azerbaijan"
+msgstr "Azerbaycan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:38
 msgid "Bosnia and Herzegovina"
-msgstr "Bosnia and Herzegovina"
+msgstr "Bosna ve Hersek"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:39
 msgid "Barbados"
@@ -2206,11 +2206,11 @@ msgstr "Barbados"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:40
 msgid "Bangladesh"
-msgstr "Bangladesh"
+msgstr "Bangladeş"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:41
 msgid "Belgium"
-msgstr "Belgium"
+msgstr "Belçika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:42
 msgid "Burkina Faso"
@@ -2218,11 +2218,11 @@ msgstr "Burkina Faso"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:43
 msgid "Bulgaria"
-msgstr "Bulgaria"
+msgstr "Bulgaristan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:44
 msgid "Bahrain"
-msgstr "Bahrain"
+msgstr "Bahreyn"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:45
 msgid "Burundi"
@@ -2246,27 +2246,27 @@ msgstr "Brunei"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:50
 msgid "Bolivia"
-msgstr "Bolivia"
+msgstr "Bolivya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:51
 msgid "Caribbean Netherlands"
-msgstr "Caribbean Netherlands"
+msgstr "Hollanda Karayipleri"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:52
 msgid "Brazil"
-msgstr "Brazil"
+msgstr "Brezilya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:53
 msgid "Bahamas"
-msgstr "Bahamas"
+msgstr "Bahamalar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:54
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Butan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:55
 msgid "Bouvet Island"
-msgstr "Bouvet Island"
+msgstr "Buve Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:56
 msgid "Botswana"
@@ -2274,7 +2274,7 @@ msgstr "Botswana"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:57
 msgid "Belarus"
-msgstr "Belarus"
+msgstr " Beyaz Rusya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:58
 msgid "Belize"
@@ -2282,11 +2282,11 @@ msgstr "Belize"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:59
 msgid "Canada"
-msgstr "Canada"
+msgstr "Kanada"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:60
 msgid "Cocos [Keeling] Islands"
-msgstr "Cocos [Keeling] Islands"
+msgstr "Cocos [Keeling] Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:61
 msgid "Congo - Kinshasa"
@@ -2294,15 +2294,15 @@ msgstr "Congo - Kinshasa"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:62
 msgid "Central African Republic"
-msgstr "Central African Republic"
+msgstr "Orta Afrika Cumhuriyeti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:63
 msgid "Congo - Brazzaville"
-msgstr "Congo - Brazzaville"
+msgstr "Kongo - Brazzaville"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:64
 msgid "Switzerland"
-msgstr "Switzerland"
+msgstr "İsviçre"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:65
 msgid "Côte d’Ivoire"
@@ -2310,35 +2310,35 @@ msgstr "Côte d’Ivoire"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:66
 msgid "Cook Islands"
-msgstr "Cook Islands"
+msgstr "Cook Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:67
 msgid "Chile"
-msgstr "Chile"
+msgstr "Şili"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:68
 msgid "Cameroon"
-msgstr "Cameroon"
+msgstr "Kamerun"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:69
 msgid "China"
-msgstr "China"
+msgstr "Çin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:70
 msgid "Colombia"
-msgstr "Colombia"
+msgstr "Kolombiya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:71
 msgid "Clipperton Island"
-msgstr "Clipperton Island"
+msgstr "Clipperton Adası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:72
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Kosta Rika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:73
 msgid "Cuba"
-msgstr "Cuba"
+msgstr "Küba"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:74
 msgid "Cape Verde"
@@ -2350,79 +2350,79 @@ msgstr "Curaçao"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:76
 msgid "Christmas Island"
-msgstr "Christmas Island"
+msgstr "Christmas Adası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:77
 msgid "Cyprus"
-msgstr "Cyprus"
+msgstr "Kıbrıs"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:78
 msgid "Czech Republic"
-msgstr "Czech Republic"
+msgstr "Çek Cumhuriyeti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:79
 msgid "Germany"
-msgstr "Germany"
+msgstr "Almanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:80
 msgid "Diego Garcia"
-msgstr "Diego Garcia"
+msgstr "Diego Garsiya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:81
 msgid "Djibouti"
-msgstr "Djibouti"
+msgstr "Cibuti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:82
 msgid "Denmark"
-msgstr "Denmark"
+msgstr "Danimarka"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:83
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Dominika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:84
 msgid "Dominican Republic"
-msgstr "Dominican Republic"
+msgstr "Dominik Cumhuriyeti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:85
 msgid "Algeria"
-msgstr "Algeria"
+msgstr "Cezayir"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:86
 msgid "Ceuta and Melilla"
-msgstr "Ceuta and Melilla"
+msgstr "Ceuta ve Melilla"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:87
 msgid "Ecuador"
-msgstr "Ecuador"
+msgstr "Ekvator"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:88
 msgid "Estonia"
-msgstr "Estonia"
+msgstr "Estonya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:89
 msgid "Egypt"
-msgstr "Egypt"
+msgstr "Mısır"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:90
 msgid "Western Sahara"
-msgstr "Western Sahara"
+msgstr "Batı Sahra"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:91
 msgid "Eritrea"
-msgstr "Eritrea"
+msgstr "Eritre"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:92
 msgid "Spain"
-msgstr "Spain"
+msgstr "İspanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:93
 msgid "Ethiopia"
-msgstr "Ethiopia"
+msgstr "Etyopya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:94
 msgid "Finland"
-msgstr "Finland"
+msgstr "Finlandiya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:95
 msgid "Fiji"
@@ -2430,19 +2430,19 @@ msgstr "Fiji"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:96
 msgid "Falkland Islands"
-msgstr "Falkland Islands"
+msgstr "Falkland Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:97
 msgid "Micronesia"
-msgstr "Micronesia"
+msgstr "Mikronezya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:98
 msgid "Faroe Islands"
-msgstr "Faroe Islands"
+msgstr "Faroe Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:99
 msgid "France"
-msgstr "France"
+msgstr "Fransa"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:100
 msgid "Gabon"
@@ -2450,7 +2450,7 @@ msgstr "Gabon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:101
 msgid "United Kingdom"
-msgstr "United Kingdom"
+msgstr "Birleşik Krallık"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:102
 msgid "Grenada"
@@ -2458,11 +2458,11 @@ msgstr "Grenada"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:103
 msgid "Georgia"
-msgstr "Georgia"
+msgstr "Gürcistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:104
 msgid "French Guiana"
-msgstr "French Guiana"
+msgstr "Fransız Guyanası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:105
 msgid "Guernsey"
@@ -2470,7 +2470,7 @@ msgstr "Guernsey"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:106
 msgid "Ghana"
-msgstr "Ghana"
+msgstr "Gana"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:107
 msgid "Gibraltar"
@@ -2478,7 +2478,7 @@ msgstr "Gibraltar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:108
 msgid "Greenland"
-msgstr "Greenland"
+msgstr "Grönland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:109
 msgid "Gambia"
@@ -2486,23 +2486,23 @@ msgstr "Gambia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:110
 msgid "Guinea"
-msgstr "Guinea"
+msgstr "Gine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:111
 msgid "Guadeloupe"
-msgstr "Guadeloupe"
+msgstr "Guadelup"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:112
 msgid "Equatorial Guinea"
-msgstr "Equatorial Guinea"
+msgstr "Ekvator Ginesi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:113
 msgid "Greece"
-msgstr "Greece"
+msgstr "Yunanistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:114
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "South Georgia and the South Sandwich Islands"
+msgstr "Güney Georgia ve Güney Sandwich Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:115
 msgid "Guatemala"
@@ -2522,11 +2522,11 @@ msgstr "Guyana"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:119
 msgid "Hong Kong SAR China"
-msgstr "Hong Kong SAR China"
+msgstr "Hong Kong SAR Çin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:120
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard Island and McDonald Islands"
+msgstr "Heard Adaları ve McDonald Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:121
 msgid "Honduras"
@@ -2534,7 +2534,7 @@ msgstr "Honduras"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:122
 msgid "Croatia"
-msgstr "Croatia"
+msgstr "Hırvatistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:123
 msgid "Haiti"
@@ -2542,15 +2542,15 @@ msgstr "Haiti"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:124
 msgid "Hungary"
-msgstr "Hungary"
+msgstr "Macaristan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:125
 msgid "Canary Islands"
-msgstr "Canary Islands"
+msgstr "Kanarya Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:126
 msgid "Indonesia"
-msgstr "Indonesia"
+msgstr "Endonezya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:127
 msgid "Ireland"
@@ -2558,7 +2558,7 @@ msgstr "İrlanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:128
 msgid "Israel"
-msgstr "Israel"
+msgstr "İsrail"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:129
 msgid "Isle of Man"
@@ -2566,27 +2566,27 @@ msgstr "Isle of Man"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:130
 msgid "India"
-msgstr "India"
+msgstr "Hindistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:131
 msgid "British Indian Ocean Territory"
-msgstr "British Indian Ocean Territory"
+msgstr "İngiliz Hint Okyanusu Bölgesi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:132
 msgid "Iraq"
-msgstr "Iraq"
+msgstr "Irak"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:133
 msgid "Iran"
-msgstr "Iran"
+msgstr "İran"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:134
 msgid "Iceland"
-msgstr "Iceland"
+msgstr "İzlanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:135
 msgid "Italy"
-msgstr "Italy"
+msgstr "İtalya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:136
 msgid "Jersey"
@@ -2594,15 +2594,15 @@ msgstr "Jersey"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:137
 msgid "Jamaica"
-msgstr "Jamaica"
+msgstr "Camaika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:138
 msgid "Jordan"
-msgstr "Jordan"
+msgstr "Ürdün"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:139
 msgid "Japan"
-msgstr "Japan"
+msgstr "Japonya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:140
 msgid "Kenya"
@@ -2610,11 +2610,11 @@ msgstr "Kenya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:141
 msgid "Kyrgyzstan"
-msgstr "Kyrgyzstan"
+msgstr "Kırgızistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:142
 msgid "Cambodia"
-msgstr "Cambodia"
+msgstr "Kamboçya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:143
 msgid "Kiribati"
@@ -2622,31 +2622,31 @@ msgstr "Kiribati"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:144
 msgid "Comoros"
-msgstr "Comoros"
+msgstr "Komoros"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:145
 msgid "Saint Kitts and Nevis"
-msgstr "Saint Kitts and Nevis"
+msgstr "Saint Kitts ve Nevis"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:146
 msgid "North Korea"
-msgstr "North Korea"
+msgstr "Kuzey Kore"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:147
 msgid "South Korea"
-msgstr "South Korea"
+msgstr "Güney Kore"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:148
 msgid "Kuwait"
-msgstr "Kuwait"
+msgstr "Kuveyt"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:149
 msgid "Cayman Islands"
-msgstr "Cayman Islands"
+msgstr "Kayman Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:150
 msgid "Kazakhstan"
-msgstr "Kazakhstan"
+msgstr "Kazakistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:151
 msgid "Laos"
@@ -2654,7 +2654,7 @@ msgstr "Laos"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:152
 msgid "Lebanon"
-msgstr "Lebanon"
+msgstr "Lübnan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:153
 msgid "Saint Lucia"
@@ -2662,7 +2662,7 @@ msgstr "Saint Lucia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:154
 msgid "Liechtenstein"
-msgstr "Liechtenstein"
+msgstr "Lihtenştayn"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:155
 msgid "Sri Lanka"
@@ -2670,19 +2670,19 @@ msgstr "Sri Lanka"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:156
 msgid "Liberia"
-msgstr "Liberia"
+msgstr "Liberya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:157
 msgid "Lesotho"
-msgstr "Lesotho"
+msgstr "Lesoto"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:158
 msgid "Lithuania"
-msgstr "Lithuania"
+msgstr "Litvanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:159
 msgid "Luxembourg"
-msgstr "Luxembourg"
+msgstr "Lüksemburg"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:160
 msgid "Latvia"
@@ -2694,11 +2694,11 @@ msgstr "Libya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:162
 msgid "Morocco"
-msgstr "Morocco"
+msgstr "Fas"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:163
 msgid "Monaco"
-msgstr "Monaco"
+msgstr "Monako"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:164
 msgid "Moldova"
@@ -2714,15 +2714,15 @@ msgstr "Saint Martin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:167
 msgid "Madagascar"
-msgstr "Madagascar"
+msgstr "Madagaskar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:168
 msgid "Marshall Islands"
-msgstr "Marshall Islands"
+msgstr "Marshall Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:169
 msgid "Macedonia"
-msgstr "Macedonia"
+msgstr "Makedonya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:170
 msgid "Mali"
@@ -2734,27 +2734,27 @@ msgstr "Myanmar [Burma]"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:172
 msgid "Mongolia"
-msgstr "Mongolia"
+msgstr "Mongolya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:173
 msgid "Macau SAR China"
-msgstr "Macau SAR China"
+msgstr "Macau SAR Çin"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:174
 msgid "Northern Mariana Islands"
-msgstr "Northern Mariana Islands"
+msgstr "Kuzey Mariana Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:175
 msgid "Martinique"
-msgstr "Martinique"
+msgstr "Martinik"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:176
 msgid "Mauritania"
-msgstr "Mauritania"
+msgstr "Moritanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:177
 msgid "Montserrat"
-msgstr "Montserrat"
+msgstr "Monserra"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:178
 msgid "Malta"
@@ -2766,7 +2766,7 @@ msgstr "Mauritius"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:180
 msgid "Maldives"
-msgstr "Maldives"
+msgstr "Maldivler"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:181
 msgid "Malawi"
@@ -2774,47 +2774,47 @@ msgstr "Malawi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:182
 msgid "Mexico"
-msgstr "Mexico"
+msgstr "Meksika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:183
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Malezya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:184
 msgid "Mozambique"
-msgstr "Mozambique"
+msgstr "Mozambik"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:185
 msgid "Namibia"
-msgstr "Namibia"
+msgstr "Namibya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:186
 msgid "New Caledonia"
-msgstr "New Caledonia"
+msgstr "Yeni Kaledonya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:187
 msgid "Niger"
-msgstr "Niger"
+msgstr "Nijer"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:188
 msgid "Norfolk Island"
-msgstr "Norfolk Island"
+msgstr "Norfolk Adası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:189
 msgid "Nigeria"
-msgstr "Nigeria"
+msgstr "Nijerya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:190
 msgid "Nicaragua"
-msgstr "Nicaragua"
+msgstr "Nikaragua"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:191
 msgid "Netherlands"
-msgstr "Netherlands"
+msgstr "Hollanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:192
 msgid "Norway"
-msgstr "Norway"
+msgstr "Norveç"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:193
 msgid "Nepal"
@@ -2830,11 +2830,11 @@ msgstr "Niue"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:196
 msgid "New Zealand"
-msgstr "New Zealand"
+msgstr "Yeni Zelanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:197
 msgid "Oman"
-msgstr "Oman"
+msgstr "Umman"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:198
 msgid "Panama"
@@ -2846,15 +2846,15 @@ msgstr "Peru"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:200
 msgid "French Polynesia"
-msgstr "French Polynesia"
+msgstr "Fransız Polinezyası"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:201
 msgid "Papua New Guinea"
-msgstr "Papua New Guinea"
+msgstr "Papua Yeni Gine"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:202
 msgid "Philippines"
-msgstr "Philippines"
+msgstr "Filipinler"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:203
 msgid "Pakistan"
@@ -2862,27 +2862,27 @@ msgstr "Pakistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:204
 msgid "Poland"
-msgstr "Poland"
+msgstr "Polonya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:205
 msgid "Saint Pierre and Miquelon"
-msgstr "Saint Pierre and Miquelon"
+msgstr "Saint Pierre ve Miquelon"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:206
 msgid "Pitcairn Islands"
-msgstr "Pitcairn Islands"
+msgstr "Pitcairn Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:207
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr "Puerto Riko"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:208
 msgid "Palestinian Territories"
-msgstr "Palestinian Territories"
+msgstr "Filistin Özerk Bölgesi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:209
 msgid "Portugal"
-msgstr "Portugal"
+msgstr "Portekiz"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:210
 msgid "Palau"
@@ -2894,7 +2894,7 @@ msgstr "Paraguay"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:212
 msgid "Qatar"
-msgstr "Qatar"
+msgstr "Katar"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:213
 msgid "Outlying Oceania"
@@ -2906,31 +2906,31 @@ msgstr "Réunion"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:215
 msgid "Romania"
-msgstr "Romania"
+msgstr "Romanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:216
 msgid "Serbia"
-msgstr "Serbia"
+msgstr "Sırbistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:217
 msgid "Russia"
-msgstr "Russia"
+msgstr "Rusya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:218
 msgid "Rwanda"
-msgstr "Rwanda"
+msgstr "Ruanda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:219
 msgid "Saudi Arabia"
-msgstr "Saudi Arabia"
+msgstr "Suudi Arabistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:220
 msgid "Solomon Islands"
-msgstr "Solomon Islands"
+msgstr "Solomon Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:221
 msgid "Seychelles"
-msgstr "Seychelles"
+msgstr "Seyşeller"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:222
 msgid "Sudan"
@@ -2938,11 +2938,11 @@ msgstr "Sudan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:223
 msgid "Sweden"
-msgstr "Sweden"
+msgstr "İsveç"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:224
 msgid "Singapore"
-msgstr "Singapore"
+msgstr "Singapur"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:225
 msgid "Saint Helena"
@@ -2950,15 +2950,15 @@ msgstr "Saint Helena"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:226
 msgid "Slovenia"
-msgstr "Slovenia"
+msgstr "Slovenya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:227
 msgid "Svalbard and Jan Mayen"
-msgstr "Svalbard and Jan Mayen"
+msgstr "Svalbard ve Jan Mayen"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:228
 msgid "Slovakia"
-msgstr "Slovakia"
+msgstr "Slovakya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:229
 msgid "Sierra Leone"
@@ -2974,19 +2974,19 @@ msgstr "Senegal"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:232
 msgid "Somalia"
-msgstr "Somalia"
+msgstr "Somali"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:233
 msgid "Suriname"
-msgstr "Suriname"
+msgstr "Surinam"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:234
 msgid "South Sudan"
-msgstr "South Sudan"
+msgstr "Güney Sudan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:235
 msgid "São Tomé and Príncipe"
-msgstr "São Tomé and Príncipe"
+msgstr "São Tomé ve Príncipe"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:236
 msgid "El Salvador"
@@ -2998,7 +2998,7 @@ msgstr "Sint Maarten"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:238
 msgid "Syria"
-msgstr "Syria"
+msgstr "Suriye"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:239
 msgid "Swaziland"
@@ -3010,15 +3010,15 @@ msgstr "Tristan da Cunha"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:241
 msgid "Turks and Caicos Islands"
-msgstr "Turks and Caicos Islands"
+msgstr "Turks ve Caicos Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:242
 msgid "Chad"
-msgstr "Chad"
+msgstr "Çad"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:243
 msgid "French Southern Territories"
-msgstr "French Southern Territories"
+msgstr "Fransız Güney Özer Bölgesi"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:244
 msgid "Togo"
@@ -3026,11 +3026,11 @@ msgstr "Togo"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:245
 msgid "Thailand"
-msgstr "Thailand"
+msgstr "Tayland"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:246
 msgid "Tajikistan"
-msgstr "Tajikistan"
+msgstr "Tacikistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:247
 msgid "Tokelau"
@@ -3042,11 +3042,11 @@ msgstr "Timor-Leste"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:249
 msgid "Turkmenistan"
-msgstr "Turkmenistan"
+msgstr "Türkmenistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:250
 msgid "Tunisia"
-msgstr "Tunisia"
+msgstr "Tunus"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:251
 msgid "Tonga"
@@ -3054,11 +3054,11 @@ msgstr "Tonga"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:252
 msgid "Turkey"
-msgstr "Turkey"
+msgstr "Türkiye"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:253
 msgid "Trinidad and Tobago"
-msgstr "Trinidad and Tobago"
+msgstr "Trinidad ve Tobago"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:254
 msgid "Tuvalu"
@@ -3066,15 +3066,15 @@ msgstr "Tuvalu"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:255
 msgid "Taiwan"
-msgstr "Taiwan"
+msgstr "Tayvan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:256
 msgid "Tanzania"
-msgstr "Tanzania"
+msgstr "Tanzanya"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:257
 msgid "Ukraine"
-msgstr "Ukraine"
+msgstr "Ukrayna"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:258
 msgid "Uganda"
@@ -3082,11 +3082,11 @@ msgstr "Uganda"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:259
 msgid "U.S. Outlying Islands"
-msgstr "U.S. Outlying Islands"
+msgstr "U.S. Outlying Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:260
 msgid "United States"
-msgstr "United States"
+msgstr "Birleşik Devletler"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:261
 msgid "Uruguay"
@@ -3094,27 +3094,27 @@ msgstr "Uruguay"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:262
 msgid "Uzbekistan"
-msgstr "Uzbekistan"
+msgstr "Özbekistan"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:263
 msgid "Vatican City"
-msgstr "Vatican City"
+msgstr "Vatikan Şehri"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:264
 msgid "Saint Vincent and the Grenadines"
-msgstr "Saint Vincent and the Grenadines"
+msgstr "Saint Vincent ve the Grenadines"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:265
 msgid "Venezuela"
-msgstr "Venezuela"
+msgstr "Venezüela"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:266
 msgid "British Virgin Islands"
-msgstr "British Virgin Islands"
+msgstr "İngiliz Virgin Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:267
 msgid "U.S. Virgin Islands"
-msgstr "U.S. Virgin Islands"
+msgstr "ABD Virgin Adaları"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:268
 msgid "Vietnam"
@@ -3126,7 +3126,7 @@ msgstr "Vanuatu"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:270
 msgid "Wallis and Futuna"
-msgstr "Wallis and Futuna"
+msgstr "Wallis ve Futuna"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:271
 msgid "Samoa"
@@ -3146,7 +3146,7 @@ msgstr "Mayotte"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:275
 msgid "South Africa"
-msgstr "South Africa"
+msgstr "Güney Afrika"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:276
 msgid "Zambia"
@@ -3154,7 +3154,7 @@ msgstr "Zambia"
 
 #: extensions/system/src/System/Helper/CountryHelper.php:277
 msgid "Zimbabwe"
-msgstr "Zimbabwe"
+msgstr "Zimbabve"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:17
 msgid "Afrikaans"
@@ -3162,59 +3162,59 @@ msgstr "Afrikaans"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:18
 msgid "Amharic"
-msgstr "Amharic"
+msgstr "Habeş Dili"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:19
 msgid "Arabic"
-msgstr "Arabic"
+msgstr "Arapça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:20
 msgid "Asturian"
-msgstr "Asturian"
+msgstr "Avusturya Dili"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:21
 msgid "Azerbaijani"
-msgstr "Azerbaijani"
+msgstr "Azerce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:22
 msgid "Belarusian"
-msgstr "Belarusian"
+msgstr "Beyaz Rusça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:23
 msgid "Bulgarian"
-msgstr "Bulgarian"
+msgstr "Bulgarca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:24
 msgid "Bengali"
-msgstr "Bengali"
+msgstr "Bengalce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:25
 msgid "Tibetan"
-msgstr "Tibetan"
+msgstr "Tibetçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:26
 msgid "Bosnian"
-msgstr "Bosnian"
+msgstr "Boşnakça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:27
 msgid "Catalan"
-msgstr "Catalan"
+msgstr "Katalanca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:28
 msgid "Czech"
-msgstr "Czech"
+msgstr "Çekce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:29
 msgid "Welsh"
-msgstr "Welsh"
+msgstr "Galce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:30
 msgid "Danish"
-msgstr "Danish"
+msgstr "Danca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:31
 msgid "German"
-msgstr "German"
+msgstr "Almanca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:32
 msgid "Dzongkha"
@@ -3222,11 +3222,11 @@ msgstr "Dzongkha"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:33
 msgid "Greek"
-msgstr "Greek"
+msgstr "Yunanca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:34
 msgid "English"
-msgstr "English"
+msgstr "İngilizce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:35
 msgid "Esperanto"
@@ -3234,27 +3234,27 @@ msgstr "Esperanto"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:36
 msgid "Spanish"
-msgstr "Spanish"
+msgstr "İspanyolca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:37
 msgid "Estonian"
-msgstr "Estonian"
+msgstr "Estonca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:38
 msgid "Basque"
-msgstr "Basque"
+msgstr "Baskça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:39
 msgid "Persian, Farsi"
-msgstr "Persian, Farsi"
+msgstr "Persçe, Farsça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:40
 msgid "Finnish"
-msgstr "Finnish"
+msgstr "Fince"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:41
 msgid "Filipino"
-msgstr "Filipino"
+msgstr "Filipince"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:42
 msgid "Faeroese"
@@ -3262,27 +3262,27 @@ msgstr "Faeroese"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:43
 msgid "French"
-msgstr "French"
+msgstr "Fransızca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:44
 msgid "Frisian, Western"
-msgstr "Frisian, Western"
+msgstr "Frisian, Batı"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:45
 msgid "Irish"
-msgstr "Irish"
+msgstr "İrlandaca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:46
 msgid "Scots Gaelic"
-msgstr "Scots Gaelic"
+msgstr "İskoç Galce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:47
 msgid "Galician"
-msgstr "Galician"
+msgstr "Galicçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:48
 msgid "Swiss German"
-msgstr "Swiss German"
+msgstr "İsveç Almancası"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:49
 msgid "Gujarati"
@@ -3290,43 +3290,43 @@ msgstr "Gujarati"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:50
 msgid "Hebrew"
-msgstr "Hebrew"
+msgstr "İbranice"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:51
 msgid "Hindi"
-msgstr "Hindi"
+msgstr "Hintçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:52
 msgid "Croatian"
-msgstr "Croatian"
+msgstr "Hırvatça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:53
 msgid "Haitian Creole"
-msgstr "Haitian Creole"
+msgstr "Haiti Creole"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:54
 msgid "Hungarian"
-msgstr "Hungarian"
+msgstr "Macarca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:55
 msgid "Armenian"
-msgstr "Armenian"
+msgstr "Ermenice"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:56
 msgid "Indonesian"
-msgstr "Indonesian"
+msgstr "Endonezca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:57
 msgid "Icelandic"
-msgstr "Icelandic"
+msgstr "İzlandaca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:58
 msgid "Italian"
-msgstr "Italian"
+msgstr "İtalyanca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:59
 msgid "Japanese"
-msgstr "Japanese"
+msgstr "Japonca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:60
 msgid "Javanese"
@@ -3334,15 +3334,15 @@ msgstr "Javanese"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:61
 msgid "Georgian"
-msgstr "Georgian"
+msgstr "Gürcüce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:62
 msgid "Kazakh"
-msgstr "Kazakh"
+msgstr "Kazakça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:63
 msgid "Khmer"
-msgstr "Khmer"
+msgstr "Kmerce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:64
 msgid "Kannada"
@@ -3350,15 +3350,15 @@ msgstr "Kannada"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:65
 msgid "Korean"
-msgstr "Korean"
+msgstr "Korece"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:66
 msgid "Kurdish"
-msgstr "Kurdish"
+msgstr "Kürtçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:67
 msgid "Kyrgyz"
-msgstr "Kyrgyz"
+msgstr "Kırgızca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:68
 msgid "Lao"
@@ -3366,11 +3366,11 @@ msgstr "Lao"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:69
 msgid "Lithuanian"
-msgstr "Lithuanian"
+msgstr "Litvanca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:70
 msgid "Latvian"
-msgstr "Latvian"
+msgstr "Latvianca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:71
 msgid "Malagasy"
@@ -3378,7 +3378,7 @@ msgstr "Malagasy"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:72
 msgid "Macedonian"
-msgstr "Macedonian"
+msgstr "Makedonca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:73
 msgid "Malayalam"
@@ -3386,7 +3386,7 @@ msgstr "Malayalam"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:74
 msgid "Mongolian"
-msgstr "Mongolian"
+msgstr "Mongolca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:75
 msgid "Marathi"
@@ -3398,23 +3398,23 @@ msgstr "Bahasa Malaysia"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:77
 msgid "Burmese"
-msgstr "Burmese"
+msgstr "Burmaca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:78
 msgid "Norwegian Bokmål"
-msgstr "Norwegian Bokmål"
+msgstr "Norveç Bokmål"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:79
 msgid "Nepali"
-msgstr "Nepali"
+msgstr "Nepalce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:80
 msgid "Dutch"
-msgstr "Dutch"
+msgstr "Felemenkçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:81
 msgid "Norwegian Nynorsk"
-msgstr "Norwegian Nynorsk"
+msgstr "Norveç Nynorsk"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:82
 msgid "Occitan"
@@ -3422,35 +3422,35 @@ msgstr "Occitan"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:83
 msgid "Punjabi"
-msgstr "Punjabi"
+msgstr "Pencapca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:84
 msgid "Polish"
-msgstr "Polish"
+msgstr "Lehçe"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:85
 msgid "Portuguese, Brazil"
-msgstr "Portuguese, Brazil"
+msgstr "Brezilya Portekizcesi"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:86
 msgid "Portuguese, Portugal"
-msgstr "Portuguese, Portugal"
+msgstr "Portekizce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:87
 msgid "Romanian"
-msgstr "Romanian"
+msgstr "Romanya"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:88
 msgid "Russian"
-msgstr "Russian"
+msgstr "Rusya"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:89
 msgid "Scots"
-msgstr "Scots"
+msgstr "İskoçca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:90
 msgid "Northern Sami"
-msgstr "Northern Sami"
+msgstr "Kuzey Sami"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:91
 msgid "Sinhala"
@@ -3458,23 +3458,23 @@ msgstr "Sinhala"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:92
 msgid "Slovak"
-msgstr "Slovak"
+msgstr "Slovakça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:93
 msgid "Slovenian"
-msgstr "Slovenian"
+msgstr "Slovence"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:94
 msgid "Albanian"
-msgstr "Albanian"
+msgstr "Arnavutça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:95
 msgid "Serbian"
-msgstr "Serbian"
+msgstr "Sırpça"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:96
 msgid "Swedish"
-msgstr "Swedish"
+msgstr "İsveçce"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:97
 msgid "Swahili"
@@ -3494,7 +3494,7 @@ msgstr "Telugu"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:101
 msgid "Thai"
-msgstr "Thai"
+msgstr "Tay"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:102
 msgid "Turkish"
@@ -3506,11 +3506,11 @@ msgstr "Tuvan"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:104
 msgid "Uyghur"
-msgstr "Uyghur"
+msgstr "Uygurca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:105
 msgid "Ukrainian"
-msgstr "Ukrainian"
+msgstr "Ukraynaca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:106
 msgid "Urdu"
@@ -3518,7 +3518,7 @@ msgstr "Urdu"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:107
 msgid "Vietnamese"
-msgstr "Vietnamese"
+msgstr "Vietnamca"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:108
 msgid "Lolspeak"
@@ -3526,11 +3526,11 @@ msgstr "Lolspeak"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:109
 msgid "Chinese, Simplified"
-msgstr "Chinese, Simplified"
+msgstr "Çince Basitleştirilmiş"
 
 #: extensions/system/src/System/Helper/LanguageHelper.php:110
 msgid "Chinese, Traditional"
-msgstr "Chinese, Traditional"
+msgstr "Çince, Geleneksel"
 
 #: extensions/system/src/System/Link/System.php:48
 msgid "Frontpage"
@@ -3538,12 +3538,12 @@ msgstr "Anasayfa"
 
 #: extensions/system/src/System/Link/System.php:49
 msgid "User Login"
-msgstr "Kullanıcı Girişi"
+msgstr "Oturum Açın"
 
 #: extensions/system/src/System/Link/System.php:50
 #: extensions/system/src/User/Controller/RegistrationController.php:46
 msgid "User Registration"
-msgstr "Kullanıcı Kaydı"
+msgstr "Kayıt Olun"
 
 #: extensions/system/src/System/Link/System.php:51
 msgid "User Profile"
@@ -3588,7 +3588,7 @@ msgstr "Tema kaldırıldı."
 #: extensions/system/src/Theme/Controller/ThemesController.php:137
 #: extensions/system/src/Theme/Controller/ThemesController.php:161
 msgid "Invalid theme."
-msgstr "Geçersiz tema."
+msgstr "Tema geçersiz."
 
 #: extensions/system/src/Theme/Event/WidgetListener.php:30
 msgid "Theme"
@@ -3599,11 +3599,11 @@ msgstr "Tema"
 #: extensions/system/src/User/Controller/ResetPasswordController.php:61
 #: extensions/system/src/User/Controller/ResetPasswordController.php:130
 msgid "Invalid token. Please try again."
-msgstr "Geçersiz jeton. Lütfen tekrar deneyin."
+msgstr "Pinkodu geçersiz. Lütfen yeniden deneyin."
 
 #: extensions/system/src/User/Controller/AuthController.php:76
 msgid "Invalid username or password."
-msgstr "Geçersiz kullanıcı adı veya şifre."
+msgstr "Kullanıcı adı veya şifre geçersiz."
 
 #: extensions/system/src/User/Controller/PermissionController.php:48
 msgid "Permissions saved!"
@@ -3617,17 +3617,17 @@ msgstr "Ad geçersiz."
 #: extensions/system/src/User/Controller/RegistrationController.php:87
 #: extensions/system/src/User/Controller/UserController.php:165
 msgid "Email is invalid."
-msgstr "Eposta geçersiz."
+msgstr "E-posta geçersiz."
 
 #: extensions/system/src/User/Controller/ProfileController.php:74
 #: extensions/system/src/User/Controller/RegistrationController.php:95
 #: extensions/system/src/User/Controller/UserController.php:177
 msgid "Email not available."
-msgstr "Eposta mevcut değil."
+msgstr "E-posta bulunamadı."
 
 #: extensions/system/src/User/Controller/ProfileController.php:80
 msgid "Invalid Password."
-msgstr "Geçersiz Şifre."
+msgstr "Şifre Geçersiz."
 
 #: extensions/system/src/User/Controller/ProfileController.php:84
 msgid "New Password is invalid."
@@ -3654,7 +3654,7 @@ msgstr "Kullanıcı adı geçersiz."
 #: extensions/system/src/User/Controller/RegistrationController.php:91
 #: extensions/system/src/User/Controller/UserController.php:171
 msgid "Username not available."
-msgstr "Kullanıcı adı mevcut değil."
+msgstr "Kullanıcı adı bulunamadı."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:99
 msgid "Signup failed"
@@ -3679,7 +3679,7 @@ msgstr "Kullanıcı hesabınız oluşturuldu."
 #: extensions/system/src/User/Controller/RegistrationController.php:180
 #: extensions/system/src/User/Controller/ResetPasswordController.php:116
 msgid "Invalid key."
-msgstr "Geçersiz anahtar."
+msgstr "Anahtar geçersiz."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:189
 msgid ""
@@ -3695,7 +3695,7 @@ msgstr "Kullanıcı hesabı etkinleştirildi ve kullanıcıya bilgilendirme e-po
 
 #: extensions/system/src/User/Controller/RegistrationController.php:201
 msgid "Your account has been activated."
-msgstr "Hesabınız aktifleştirildi."
+msgstr "Hesabınız etkinleştirildi."
 
 #: extensions/system/src/User/Controller/RegistrationController.php:216
 msgid "Welcome to %site%!"
@@ -3719,11 +3719,11 @@ msgstr "Sıfırla"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:65
 msgid "Enter a username or email address."
-msgstr "Bir kulanıcı adı veya eposta adresi girin."
+msgstr "Bir kulanıcı adı ya da e-posta adresi yazın."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:71
 msgid "Invalid username or email."
-msgstr "Geçersiz kullanıcı adı veya eposta."
+msgstr "Kullanıcı adı ya da e-posta geçersiz."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:75
 #: extensions/system/src/User/Controller/ResetPasswordController.php:121
@@ -3733,7 +3733,7 @@ msgstr "Hesabınız etkinleştirilmemiş ya da engellenmiş."
 #: extensions/system/src/User/Controller/ResetPasswordController.php:86
 #: extensions/system/src/User/Link/User.php:49
 msgid "Password Reset"
-msgstr "Şifre Sıfırla"
+msgstr "Şifrenizi Sıfırlayın"
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:91
 msgid "Unable to send confirmation link."
@@ -3741,15 +3741,15 @@ msgstr "Doğrulama bağlantısı gönderilemedi."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:98
 msgid "Check your email for the confirmation link."
-msgstr "Onaylama linki için epostanızı kontrol ediniz."
+msgstr "Doğrulama bağlantısı için e-postanızı denetleyin."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:136
 msgid "Enter password."
-msgstr "Şifre girin."
+msgstr "Şifrenizi yazın."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:140
 msgid "Invalid password."
-msgstr "Geçersiz şifre."
+msgstr "Şifre geçersiz."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:148
 msgid "Your password has been reset."
@@ -3757,7 +3757,7 @@ msgstr "Şifreniz sıfırlandı."
 
 #: extensions/system/src/User/Controller/ResetPasswordController.php:156
 msgid "Reset Confirm"
-msgstr "Sıfırlamayı Onayla"
+msgstr "Sıfırlamayı Onaylayın"
 
 #: extensions/system/src/User/Controller/RoleController.php:68
 msgid "Roles saved!"
@@ -3810,15 +3810,15 @@ msgstr "Kullanıcı İzinleri Yetersiz"
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account is blocked."
-msgstr "Hesabınız engellendi."
+msgstr "Hesabınız engellenmiş."
 
 #: extensions/system/src/User/Event/AuthorizationListener.php:33
 msgid "Your account has not been activated."
-msgstr "Hesabınız henüz aktifleştirilmedi."
+msgstr "Hesabınız henüz etkinleştirilmemiş."
 
 #: extensions/system/src/User/Event/LoginAttemptListener.php:30
 msgid "Slow down a bit."
-msgstr "Biraz yavaşla."
+msgstr "Biraz yavaşlayın."
 
 #: extensions/system/src/User/Link/User.php:48
 msgid "Profile"
