@@ -1,1 +1,3 @@
-@finder($root, $mode)
+<div data-uk-observe>
+    @finder($root, $mode)
+</div>
