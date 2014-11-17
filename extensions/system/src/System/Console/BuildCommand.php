@@ -25,39 +25,26 @@ class BuildCommand extends Command
      */
     protected $description = 'Builds a release';
 
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addOption('development', 'd', InputOption::VALUE_NONE, 'Development Build');
-    }
-
     /**
      * Builds a .zip release file.
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $vers = $this->getApplication()->getVersion();
-        $path = $this->pagekit['path'];
-        $dev  = preg_replace_callback('/(\d)$/', function($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
+        $path = $this->option('output') ?: $this->pagekit['path'];
+        $dev  = preg_replace_callback('/(\d)$/', function ($matches){
+                    return $matches[1] + 1;
+                }, $vers).'-dev'.time(true);
 
         // compile translation files
-        try {
-
-            $cmd = $this->getApplication()->get('translation:compile');
-            foreach (['system', 'page', 'blog', 'installer'] as $extension) {
-                $cmd->run(new ArrayInput(compact('extension')), $output);
-            }
-
-        } catch (\InvalidArgumentException $e) {
-            $this->info("Could not compile language files. Command does not exist.");
+        $cmd = $this->getApplication()->get('translation:compile');
+        foreach (['system', 'page', 'blog', 'installer'] as $extension) {
+            $cmd->run(new ArrayInput(compact('extension')), $output);
         }
 
         $zip = new \ZipArchive;
 
-        if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).".zip", \ZipArchive::OVERWRITE)) {
+        if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).'.zip', \ZipArchive::OVERWRITE)) {
             $this->error("Can't open ZIP extension in '$zipFile'");
             exit;
         }
@@ -66,7 +53,7 @@ class BuildCommand extends Command
             ->files()
             ->in($path)
             ->ignoreVCS(true)
-            ->filter(function ($file) {
+            ->filter(function ($file){
 
                 $exclude = [
                     '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
@@ -86,7 +73,7 @@ class BuildCommand extends Command
                     '\/node_modules'
                 ];
 
-                return !preg_match('/' . implode('|', $exclude) . '/i', $file->getRelativePathname());
+                return !preg_match('/'.implode('|', $exclude).'/i', $file->getRelativePathname());
             });
 
         foreach ($finder as $file) {
@@ -99,8 +86,8 @@ class BuildCommand extends Command
         $zip->addEmptyDir('app/sessions');
         $zip->addEmptyDir('app/temp');
         $zip->addEmptyDir('storage');
-        $zip->addFile($path . '/.htaccess', '.htaccess');
-        $zip->addFile($path . '/app/database/.htaccess', 'app/database/.htaccess');
+        $zip->addFile($path.'/.htaccess', '.htaccess');
+        $zip->addFile($path.'/app/database/.htaccess', 'app/database/.htaccess');
 
         if ($this->option('development')) {
             $zip->addFromString('app/config/app.php', str_replace("'version' => '{$vers}',", "'version' => '{$dev}',", file_get_contents("{$path}/app/config/app.php")));
@@ -112,5 +99,14 @@ class BuildCommand extends Command
         $size = filesize($zipFile) / 1024 / 1024;
 
         $this->line(sprintf('Building: %s (%.2f MB)', $name, $size));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addOption('development', 'd', InputOption::VALUE_NONE, 'Development Build')
+            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Output Path');
     }
 }

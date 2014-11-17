@@ -24,14 +24,6 @@ class StartCommand extends Command
     protected $description = 'Starts the built-in web server';
 
     /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addOption('server', 's', InputOption::VALUE_OPTIONAL, 'Server name and port', '127.0.0.1:8080');
-    }
-
-    /**
      * Starts the built-in web server.
      */
     public function execute(InputInterface $input, OutputInterface $output)
@@ -42,5 +34,13 @@ class StartCommand extends Command
         $this->line('Press Ctrl-C to quit');
 
         exec("php -S $server pagekit.php");
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addOption('server', 's', InputOption::VALUE_OPTIONAL, 'Server name and port', '127.0.0.1:8080');
     }
 }

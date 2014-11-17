@@ -4,15 +4,15 @@ namespace Pagekit\System\Console;
 
 use Pagekit\Component\Translation\Loader\PoFileLoader;
 use Pagekit\Framework\Console\Command;
+use Pagekit\System\Console\NodeVisitor\NodeVisitor;
+use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
+use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
 use PhpParser\Lexer;
 use PhpParser\Node;
-use PhpParser\NodeTraverser;
-use PhpParser\Parser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Templating\EngineInterface;
 
 class ExtensionTranslateCommand extends Command
 {
@@ -71,7 +71,7 @@ class ExtensionTranslateCommand extends Command
     /**
      * Initialize the console command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -79,12 +79,12 @@ class ExtensionTranslateCommand extends Command
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->visitors = [
+        $this->visitors   = [
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
-        $this->loader = new PoFileLoader;
+        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
+        $this->loader     = new PoFileLoader;
     }
 
     /**
@@ -92,7 +92,7 @@ class ExtensionTranslateCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $extension = $this->argument('extension') ? : 'system';
+        $extension = $this->argument('extension') ?: 'system';
         $files     = $this->getFiles($path = $this->getPath($extension));
         $languages = "$path/languages";
 
@@ -138,92 +138,6 @@ class ExtensionTranslateCommand extends Command
     }
 
     /**
-     * Writes the translation file for the given extension
-     *
-     */
-    protected function writeTranslationFile($messages, $extension, $languages)
-    {
-        foreach ($messages as $domain => $strings) {
-
-            $data = $this->getHeader($extension, $domain);
-
-            foreach ($strings as $string => $args) {
-
-                foreach ($args as $arg) {
-                    $file  = $this->getRelativePath($arg['file']);
-                    $data .= "#: {$file}:{$arg['line']}\n";
-                }
-
-                $string = str_replace('"', '\"', $string);
-                $data .= "msgid \"" . $string . "\"\nmsgstr \"\"\n\n";
-
-            }
-
-            // file_put_contents($refFile = $languages.'/'.$domain.'.pot', str_replace(array_values($files), array_keys($files), $data));
-            file_put_contents($refFile = $languages . '/' . $domain . '.pot', $data);
-
-            if (!$this->xgettext) {
-                continue;
-            }
-
-            foreach (Finder::create()->files()->in($languages)->name("$domain.po") as $file) {
-
-                $this->line("Merging existing .po file " . $file->getFilename());
-                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile);
-
-                $this->line("Generating binary .mo file " . preg_replace('/\.po$/', '.mo', $file->getFilename()));
-                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname());
-            }
-        }
-    }
-
-    /**
-     * Returns the .pot header.
-     *
-     * @param  string $extension
-     * @param  string $domain
-     * @return string
-     */
-    protected function getHeader($extension, $domain)
-    {
-        $version = $this->getApplication()->getVersion();
-        $date = date("Y-m-d H:iO");
-
-        return <<<EOD
-msgid ""
-msgstr ""
-"Project-Id-Version: Pagekit $version ($extension, $domain)\\n"
-"POT-Creation-Date: $date\\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\\n"
-"Language-Team: LANGUAGE <LL@li.org>\\n"
-"MIME-Version: 1.0\\n"
-"Content-Type: text/plain; charset=utf-8\\n"
-"Content-Transfer-Encoding: 8bit\\n"
-
-
-EOD;
-    }
-
-    /**
-     * Returns the extension path.
-     *
-     * @param  string $path
-     * @return array
-     */
-    protected function getPath($path)
-    {
-        $root = $this->pagekit['path.extensions'];
-
-        if (!is_dir($path = "$root/$path")) {
-            $this->error("Can't find extension in '$path'");
-            exit;
-        }
-
-        return $path;
-    }
-
-    /**
      * Returns all files of an extension to extract translations.
      *
      * @param  string $path
@@ -249,6 +163,92 @@ EOD;
     }
 
     /**
+     * Returns the extension path.
+     *
+     * @param  string $path
+     * @return array
+     */
+    protected function getPath($path)
+    {
+        $root = $this->pagekit['path.extensions'];
+
+        if (!is_dir($path = "$root/$path")) {
+            $this->error("Can't find extension in '$path'");
+            exit;
+        }
+
+        return $path;
+    }
+
+    /**
+     * Writes the translation file for the given extension
+     *
+     */
+    protected function writeTranslationFile($messages, $extension, $languages)
+    {
+        foreach ($messages as $domain => $strings) {
+
+            $data = $this->getHeader($extension, $domain);
+
+            foreach ($strings as $string => $args) {
+
+                foreach ($args as $arg) {
+                    $file = $this->getRelativePath($arg['file']);
+                    $data .= "#: {$file}:{$arg['line']}\n";
+                }
+
+                $string = str_replace('"', '\"', $string);
+                $data .= "msgid \"".$string."\"\nmsgstr \"\"\n\n";
+
+            }
+
+            // file_put_contents($refFile = $languages.'/'.$domain.'.pot', str_replace(array_values($files), array_keys($files), $data));
+            file_put_contents($refFile = $languages.'/'.$domain.'.pot', $data);
+
+            if (!$this->xgettext) {
+                continue;
+            }
+
+            foreach (Finder::create()->files()->in($languages)->name("$domain.po") as $file) {
+
+                $this->line("Merging existing .po file ".$file->getFilename());
+                exec('msgmerge --update --no-fuzzy-matching --backup=off '.$file->getPathname().' '.$refFile);
+
+                $this->line("Generating binary .mo file ".preg_replace('/\.po$/', '.mo', $file->getFilename()));
+                exec('msgfmt -o  '.preg_replace('/\.po$/', '.mo', $file->getPathname()).' '.$file->getPathname());
+            }
+        }
+    }
+
+    /**
+     * Returns the .pot header.
+     *
+     * @param  string $extension
+     * @param  string $domain
+     * @return string
+     */
+    protected function getHeader($extension, $domain)
+    {
+        $version = $this->getApplication()->getVersion();
+        $date    = date("Y-m-d H:iO");
+
+        return <<<EOD
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit $version ($extension, $domain)\\n"
+"POT-Creation-Date: $date\\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\\n"
+"Language-Team: LANGUAGE <LL@li.org>\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=utf-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+
+
+EOD;
+    }
+
+    /**
      * Returns the relative path to the root.
      *
      * @param  string $path
@@ -263,108 +263,5 @@ EOD;
         }
 
         return $path;
-    }
-}
-
-abstract class NodeVisitor
-{
-    /**
-     * @var string
-     */
-    public $file;
-
-    /**
-     * @var array
-     */
-    public $results = [];
-
-    /**
-     * @var EngineInterface
-     */
-    public $engine;
-
-    public function __construct(EngineInterface $engine)
-    {
-        $this->engine = $engine;
-    }
-
-    /**
-     * @return EngineInterface
-     */
-    public function getEngine()
-    {
-        return $this->engine;
-    }
-
-    /**
-     * Starts traversing an array of files.
-     *
-     * @param  array $files
-     * @return array
-     */
-    abstract public function traverse(array $files);
-
-    /**
-     * @param  string $name
-     * @return string
-     */
-    protected function loadTemplate($name)
-    {
-        return $this->file = $name;
-    }
-}
-
-class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function traverse(array $files)
-    {
-        $parser = new Parser(new Lexer);
-        $traverser = new NodeTraverser;
-        $traverser->addVisitor($this);
-
-        foreach ($files as $file) {
-
-            try {
-
-                $traverser->traverse($parser->parse(file_get_contents($this->loadTemplate($file))));
-
-            } catch (\Exception $e) {}
-        }
-
-        return $this->results;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enterNode(Node $node)
-    {
-        if ($node instanceof Node\Expr\FuncCall
-            && ($node->name->parts[0] == '__' || $node->name->parts[0] == '_c')
-            && isset($node->args[0]) && is_string($string = $node->args[0]->value->value))
-        {
-            $key = $node->name->parts[0] == '__' ? 2 : 3;
-            $domain = isset($node->args[$key]) && is_string($node->args[$key]->value->value) ? $node->args[$key]->value->value : 'messages';
-            $this->results[$domain][$string][] = ['file' => $this->file, 'line' => $node->getLine()];
-        }
-    }
-
-    public function beforeTraverse(array $nodes) {}
-    public function leaveNode(Node $node) {}
-    public function afterTraverse(array $nodes) {}
-}
-
-class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function loadTemplate($name)
-    {
-        $this->file = $name;
-        return $this->engine->loadTemplate($name);
     }
 }

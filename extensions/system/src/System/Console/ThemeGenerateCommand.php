@@ -43,10 +43,10 @@ class ThemeGenerateCommand extends Command
         $classname = ucfirst($name).'Theme';
 
         $replace = [
-            '%NAME%'   => $name,
-            '%TITLE%'  => $title,
-            '%AUTHOR%' => $author,
-            '%EMAIL%'  => $email,
+            '%NAME%'          => $name,
+            '%TITLE%'         => $title,
+            '%AUTHOR%'        => $author,
+            '%EMAIL%'         => $email,
             '%CLASSNAME%'     => $classname,
             '%NAMESPACE%'     => $namespace,
             '%NAMESPACE_ESC%' => addslashes($namespace)

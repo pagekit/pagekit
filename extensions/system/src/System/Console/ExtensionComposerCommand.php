@@ -2,13 +2,6 @@
 
 namespace Pagekit\System\Console;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use Pagekit\Framework\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Composer\Factory;
 use Composer\Installer;
 use Composer\Json\JsonFile;
@@ -16,6 +9,13 @@ use Composer\IO\ConsoleIO;
 use Composer\Package\Locker;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
+use Pagekit\Framework\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ExtensionComposerCommand extends Command
 {
@@ -73,15 +73,6 @@ class ExtensionComposerCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
-        $this->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
-    }
-
-    /**
      * Loads the composer from .phar archive.
      *
      * @param string $path
@@ -126,22 +117,32 @@ class ExtensionComposerCommand extends Command
      * @param  string $value
      * @return int
      */
-    protected function memoryInBytes($value) {
+    protected function memoryInBytes($value)
+    {
 
-        $unit = strtolower(substr($value, -1, 1));
-        $value = (int) $value;
+        $unit  = strtolower(substr($value, -1, 1));
+        $value = (int)$value;
 
-        switch($unit) {
+        switch ($unit) {
             case 'g':
                 $value *= 1024;
-                // no break (cumulative multiplier)
+            // no break (cumulative multiplier)
             case 'm':
                 $value *= 1024;
-                // no break (cumulative multiplier)
+            // no break (cumulative multiplier)
             case 'k':
                 $value *= 1024;
         }
 
         return $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name')
+            ->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
     }
 }

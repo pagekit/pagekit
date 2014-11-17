@@ -87,7 +87,7 @@ class Comment extends BaseComment
 
     public function setPost($post)
     {
-        $this->post = $post;
+        $this->post    = $post;
         $this->post_id = $post->getId();
     }
 

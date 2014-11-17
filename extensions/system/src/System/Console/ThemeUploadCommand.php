@@ -36,7 +36,7 @@ class ThemeUploadCommand extends ExtensionUploadCommand
      */
     protected function configure()
     {
-        $this->addArgument('theme', InputArgument::REQUIRED, 'Theme name');
-        $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
+        $this->addArgument('theme', InputArgument::REQUIRED, 'Theme name')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
     }
 }

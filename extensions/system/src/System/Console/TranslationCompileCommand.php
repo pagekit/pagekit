@@ -3,10 +3,10 @@
 namespace Pagekit\System\Console;
 
 use Pagekit\Framework\Console\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
 class TranslationCompileCommand extends Command
@@ -52,7 +52,7 @@ class TranslationCompileCommand extends Command
     /**
      * Initialize the console command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -60,7 +60,7 @@ class TranslationCompileCommand extends Command
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
+        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
     }
 
     /**
@@ -68,7 +68,7 @@ class TranslationCompileCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $extension = $this->argument('extension') ? : 'system';
+        $extension = $this->argument('extension') ?: 'system';
         $path      = $this->getPath($extension);
         $languages = "$path/languages";
 
@@ -92,7 +92,7 @@ class TranslationCompileCommand extends Command
 
         foreach ($files as $file) {
 
-            exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname());
+            exec('msgfmt -o  '.preg_replace('/\.po$/', '.mo', $file->getPathname()).' '.$file->getPathname());
             $progress->advance();
 
         }

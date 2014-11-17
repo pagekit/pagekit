@@ -38,15 +38,6 @@ class ExtensionUploadCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
-        $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
-    }
-
-    /**
      * Creates and uploads a .zip release file.
      *
      * @param string $name
@@ -94,12 +85,12 @@ class ExtensionUploadCommand extends Command
 
             $client = new Client;
             $client->post("$api/package/upload", [
-                    'body' => [
-                        'api_key' => $key,
-                        'force'   => $this->option('force'),
-                        'file'    => new PostFile('file', fopen($zipFile, 'r'))
-                    ]
-                ]);
+                'body' => [
+                    'api_key' => $key,
+                    'force'   => $this->option('force'),
+                    'file'    => new PostFile('file', fopen($zipFile, 'r'))
+                ]
+            ]);
 
             $this->line(sprintf('Finished (%d KB/s)', $size * 1024 / (microtime(true) - $time)));
 
@@ -109,5 +100,14 @@ class ExtensionUploadCommand extends Command
             $this->line(sprintf('Error: %s', $data['error']));
 
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
     }
 }
