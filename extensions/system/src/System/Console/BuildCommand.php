@@ -3,6 +3,7 @@
 namespace Pagekit\System\Console;
 
 use Pagekit\Framework\Console\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -48,9 +49,7 @@ class BuildCommand extends Command
 
             $cmd = $this->getApplication()->get('translation:compile');
             foreach (['system', 'page', 'blog', 'installer'] as $extension) {
-                // position 0 will to be application name, pos 1 the extension arg
-                $tmpInput = new StringInput("name ".$extension);
-                $cmd->run($tmpInput, $output);
+                $cmd->run(new ArrayInput(compact('extension')), $output);
             }
 
         } catch (\InvalidArgumentException $e) {
