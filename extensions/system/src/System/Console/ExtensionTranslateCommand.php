@@ -3,18 +3,16 @@
 namespace Pagekit\System\Console;
 
 use Pagekit\Component\Translation\Loader\PoFileLoader;
-use Pagekit\Framework\Console\Command;
-use PhpParser\Lexer;
-use PhpParser\Node;
-use PhpParser\NodeTraverser;
-use PhpParser\Parser;
+use Pagekit\System\Console\Translation\PhpNodeVisitor;
+use Pagekit\System\Console\Translation\RazrNodeVisitor;
+use Pagekit\System\Console\Translation\TranslationCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Templating\EngineInterface;
 
-class ExtensionTranslateCommand extends Command
+class ExtensionTranslateCommand extends TranslationCommand
 {
     /**
      * The console command name.
@@ -59,6 +57,13 @@ class ExtensionTranslateCommand extends Command
     protected $loader;
 
     /**
+     * The output interface for this command.
+     *
+     * @var OutputInterface
+     */
+    protected $output;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -85,6 +90,7 @@ class ExtensionTranslateCommand extends Command
         ];
         $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
         $this->loader = new PoFileLoader;
+        $this->output = $output;
     }
 
     /**
@@ -104,6 +110,10 @@ class ExtensionTranslateCommand extends Command
             mkdir($languages, 0777, true);
         }
 
+        $this->line("Traversing extension files");
+        $progress = new ProgressBar($this->output, count($this->visitors));
+        $progress->start();
+
         $result = [];
 
         foreach ($this->visitors as $name => $visitor) {
@@ -113,7 +123,12 @@ class ExtensionTranslateCommand extends Command
             }
 
             $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
+
+            $progress->advance();
         }
+
+        $progress->finish();
+        $this->line("\n");
 
         // remove strings already present in system "messages"
         if ($extension != 'system') {
@@ -166,14 +181,25 @@ class ExtensionTranslateCommand extends Command
                 continue;
             }
 
-            foreach (Finder::create()->files()->in($languages)->name("$domain.po") as $file) {
+            $files = Finder::create()->files()->in($languages)->name("$domain.po");
 
-                $this->line("Merging existing .po file " . $file->getFilename());
-                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile);
+            $this->line("Merging new translations with existing languages");
+            $progress = new ProgressBar($this->output, $files->count());
+            $progress->start();
 
-                $this->line("Generating binary .mo file " . preg_replace('/\.po$/', '.mo', $file->getFilename()));
-                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname());
+            foreach ($files as $file) {
+
+                // merge existing .po file
+                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
+
+                // generate binary .mo file
+                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname(). ' 2> /dev/null');
+
+                $progress->advance();
             }
+
+            $progress->finish();
+            $this->line("\n");
         }
     }
 
@@ -203,168 +229,5 @@ msgstr ""
 
 
 EOD;
-    }
-
-    /**
-     * Returns the extension path.
-     *
-     * @param  string $path
-     * @return array
-     */
-    protected function getPath($path)
-    {
-        $root = $this->pagekit['path.extensions'];
-
-        if (!is_dir($path = "$root/$path")) {
-            $this->error("Can't find extension in '$path'");
-            exit;
-        }
-
-        return $path;
-    }
-
-    /**
-     * Returns all files of an extension to extract translations.
-     *
-     * @param  string $path
-     * @return array
-     */
-    protected function getFiles($path)
-    {
-        $files = [];
-
-        foreach (Finder::create()->files()->in($path)->name('*.{razr,php}') as $file) {
-
-            $file = $file->getPathname();
-
-            foreach ($this->visitors as $name => $visitor) {
-                if ($visitor->getEngine()->supports($file)) {
-                    $files[$name][] = $file;
-                    break;
-                }
-            }
-        }
-
-        return $files;
-    }
-
-    /**
-     * Returns the relative path to the root.
-     *
-     * @param  string $path
-     * @return string
-     */
-    protected function getRelativePath($path)
-    {
-        $root = $this->pagekit['path'];
-
-        if (0 === strpos($path, $root)) {
-            $path = ltrim(str_replace('\\', '/', substr($path, strlen($root))), '/');
-        }
-
-        return $path;
-    }
-}
-
-abstract class NodeVisitor
-{
-    /**
-     * @var string
-     */
-    public $file;
-
-    /**
-     * @var array
-     */
-    public $results = [];
-
-    /**
-     * @var EngineInterface
-     */
-    public $engine;
-
-    public function __construct(EngineInterface $engine)
-    {
-        $this->engine = $engine;
-    }
-
-    /**
-     * @return EngineInterface
-     */
-    public function getEngine()
-    {
-        return $this->engine;
-    }
-
-    /**
-     * Starts traversing an array of files.
-     *
-     * @param  array $files
-     * @return array
-     */
-    abstract public function traverse(array $files);
-
-    /**
-     * @param  string $name
-     * @return string
-     */
-    protected function loadTemplate($name)
-    {
-        return $this->file = $name;
-    }
-}
-
-class PhpNodeVisitor extends NodeVisitor implements \PhpParser\NodeVisitor
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function traverse(array $files)
-    {
-        $parser = new Parser(new Lexer);
-        $traverser = new NodeTraverser;
-        $traverser->addVisitor($this);
-
-        foreach ($files as $file) {
-
-            try {
-
-                $traverser->traverse($parser->parse(file_get_contents($this->loadTemplate($file))));
-
-            } catch (\Exception $e) {}
-        }
-
-        return $this->results;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enterNode(Node $node)
-    {
-        if ($node instanceof Node\Expr\FuncCall
-            && ($node->name->parts[0] == '__' || $node->name->parts[0] == '_c')
-            && isset($node->args[0]) && is_string($string = $node->args[0]->value->value))
-        {
-            $key = $node->name->parts[0] == '__' ? 2 : 3;
-            $domain = isset($node->args[$key]) && is_string($node->args[$key]->value->value) ? $node->args[$key]->value->value : 'messages';
-            $this->results[$domain][$string][] = ['file' => $this->file, 'line' => $node->getLine()];
-        }
-    }
-
-    public function beforeTraverse(array $nodes) {}
-    public function leaveNode(Node $node) {}
-    public function afterTraverse(array $nodes) {}
-}
-
-class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function loadTemplate($name)
-    {
-        $this->file = $name;
-        return $this->engine->loadTemplate($name);
     }
 }

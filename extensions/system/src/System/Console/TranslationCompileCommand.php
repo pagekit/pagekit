@@ -2,14 +2,14 @@
 
 namespace Pagekit\System\Console;
 
-use Pagekit\Framework\Console\Command;
+use Pagekit\System\Console\Translation\TranslationCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
-class TranslationCompileCommand extends Command
+class TranslationCompileCommand extends TranslationCommand
 {
     /**
      * The console command name.
@@ -100,23 +100,5 @@ class TranslationCompileCommand extends Command
         $progress->finish();
         $this->line("\n");
 
-    }
-
-    /**
-     * Returns the extension path.
-     *
-     * @param  string $path
-     * @return array
-     */
-    protected function getPath($path)
-    {
-        $root = $this->pagekit['path.extensions'];
-
-        if (!is_dir($path = "$root/$path")) {
-            $this->error("Can't find extension in '$path'");
-            exit;
-        }
-
-        return $path;
     }
 }
