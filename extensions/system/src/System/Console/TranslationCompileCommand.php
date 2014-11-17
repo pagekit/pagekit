@@ -6,6 +6,7 @@ use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
 class TranslationCompileCommand extends Command
@@ -59,7 +60,7 @@ class TranslationCompileCommand extends Command
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
+        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettex');
     }
 
     /**
@@ -67,15 +68,16 @@ class TranslationCompileCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$this->xgettext) {
-            // TODO: EXCEPTION
-        }
-
         $extension = $this->argument('extension') ? : 'system';
         $path      = $this->getPath($extension);
         $languages = "$path/languages";
 
-        $this->line("Looking for language files in extension '$extension'");
+        if (!$this->xgettext) {
+            $this->error("Can't compile language files for extension '${extension}'. Please install xgettext on your system.");
+            return;
+        }
+
+        $this->line("Compiling language files for extension '$extension'");
 
         chdir($this->pagekit['path']);
 
@@ -83,12 +85,20 @@ class TranslationCompileCommand extends Command
             mkdir($languages, 0777, true);
         }
 
-        foreach (Finder::create()->files()->in($languages)->name("*.po") as $file) {
+        $files = Finder::create()->files()->in($languages)->name("*.po");
 
-            $this->line("Compiling " . $file->getRelativePathname() . " -> " . preg_replace('/\.po$/', '.mo', $file->getFilename()));
+        $progress = new ProgressBar($output, $files->count());
+        $progress->start();
+
+        foreach ($files as $file) {
+
             exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname());
+            $progress->advance();
 
         }
+
+        $progress->finish();
+        $this->line("\n");
 
     }
 
@@ -109,5 +119,4 @@ class TranslationCompileCommand extends Command
 
         return $path;
     }
-
 }
