@@ -49,7 +49,7 @@ class MenuWidget extends Type
         ]);
 
         $startLevel = (int) $widget->get('start_level', 1) - 1;
-        $maxDepth   = $startLevel + ($widget->get('depth') ?: INF);
+        $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
 
         foreach (new \RecursiveIteratorIterator($root, \RecursiveIteratorIterator::CHILD_FIRST) as $node) {
 
