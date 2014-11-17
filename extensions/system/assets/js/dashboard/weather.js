@@ -93,7 +93,7 @@ require(['jquery', 'uikit', 'uikit!autocomplete','domReady!'], function($, uikit
         template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
     });
 
-    autocomplete.element.on('autocomplete-select', function(e, data){
+    autocomplete.element.on('uk.autocomplete.select', function(e, data){
         autocomplete.input.next().val(data.id);
     });
 
