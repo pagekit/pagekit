@@ -31,10 +31,11 @@ class BuildCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $vers = $this->getApplication()->getVersion();
-        $path = $this->option('output') ?: $this->pagekit['path'];
+        $path = $this->pagekit['path'];
+        $file = $this->option('output') ?: $path;
         $dev  = preg_replace_callback('/(\d)$/', function ($matches){
-                    return $matches[1] + 1;
-                }, $vers).'-dev'.time(true);
+                return $matches[1] + 1;
+            }, $vers).'-dev'.time(true);
 
         // compile translation files
         $cmd = $this->getApplication()->get('translation:compile');
@@ -44,7 +45,7 @@ class BuildCommand extends Command
 
         $zip = new \ZipArchive;
 
-        if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).'.zip', \ZipArchive::OVERWRITE)) {
+        if (!$zip->open($zipFile = "{$file}/pagekit-".($this->option('development') ? $dev : $vers).'.zip', \ZipArchive::OVERWRITE)) {
             $this->error("Can't open ZIP extension in '$zipFile'");
             exit;
         }
