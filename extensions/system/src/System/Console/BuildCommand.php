@@ -26,6 +26,29 @@ class BuildCommand extends Command
     protected $description = 'Builds a release';
 
     /**
+     * Path filters to exclude from the build.
+     *
+     * @var string[]
+     */
+    protected $excludes = [
+        '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
+        '^extensions\/(?!(installer|page|blog|system)\/).*',
+        '^extensions\/.+\/languages\/.+\.(po|pot)',
+        '^themes\/(?!(alpha)\/).*',
+        '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
+        '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
+        '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
+        '^vendor\/lusitanian\/oauth\/(examples|tests)',
+        '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
+        '^vendor\/pagekit\/.+\/(tests\/|phpunit)',
+        '^vendor\/pimple\/pimple\/(tests|phpunit)',
+        '^vendor\/psr\/.+\/(test\/|phpunit)',
+        '^vendor\/swiftmailer\/swiftmailer\/(doc|notes|tests|test-suite|build|phpunit)',
+        '^vendor\/symfony\/.+\/(tests\/|phpunit)',
+        '\/node_modules'
+    ];
+
+    /**
      * Builds a .zip release file.
      */
     public function execute(InputInterface $input, OutputInterface $output)
@@ -54,27 +77,8 @@ class BuildCommand extends Command
             ->files()
             ->in($path)
             ->ignoreVCS(true)
-            ->filter(function ($file){
-
-                $exclude = [
-                    '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
-                    '^extensions\/(?!(installer|page|blog|system)\/).*',
-                    '^extensions\/.+\/languages\/.+\.(po|pot)',
-                    '^themes\/(?!(alpha)\/).*',
-                    '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
-                    '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
-                    '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
-                    '^vendor\/lusitanian\/oauth\/(examples|tests)',
-                    '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
-                    '^vendor\/pagekit\/.+\/(tests\/|phpunit)',
-                    '^vendor\/pimple\/pimple\/(tests|phpunit)',
-                    '^vendor\/psr\/.+\/(test\/|phpunit)',
-                    '^vendor\/swiftmailer\/swiftmailer\/(doc|notes|tests|test-suite|build|phpunit)',
-                    '^vendor\/symfony\/.+\/(tests\/|phpunit)',
-                    '\/node_modules'
-                ];
-
-                return !preg_match('/'.implode('|', $exclude).'/i', $file->getRelativePathname());
+            ->filter(function ($file) {
+                return !preg_match('/'.implode('|', $this->excludes).'/i', $file->getRelativePathname());
             });
 
         foreach ($finder as $file) {
