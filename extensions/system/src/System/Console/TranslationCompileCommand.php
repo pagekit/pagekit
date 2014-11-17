@@ -60,7 +60,7 @@ class TranslationCompileCommand extends Command
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettex');
+        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
     }
 
     /**
