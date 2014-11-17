@@ -1,6 +1,6 @@
 # Changelog
 
-### WIP
+### 0.8.8 (November 17, 2014)
 
 - Added pagination in Blog extension
 - Added languages from Transifex
@@ -8,6 +8,7 @@
 - Fixed reordering menu bug
 - Fixed marketplace grid
 - Fixed thumbnail grid in Storage
+- Fixed several issues for shared hosters
 - Updated UIkit to 2.11.1
 
 ### 0.8.7 (September 8, 2014)
