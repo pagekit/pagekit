@@ -12,6 +12,7 @@ use PhpParser\Node;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
 class ExtensionTranslateCommand extends Command
@@ -59,6 +60,13 @@ class ExtensionTranslateCommand extends Command
     protected $loader;
 
     /**
+     * The output interface for this command.
+     *
+     * @var OutputInterface
+     */
+    protected $output;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -85,6 +93,7 @@ class ExtensionTranslateCommand extends Command
         ];
         $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
         $this->loader     = new PoFileLoader;
+        $this->output     = $output;
     }
 
     /**
@@ -104,6 +113,7 @@ class ExtensionTranslateCommand extends Command
             mkdir($languages, 0777, true);
         }
 
+
         $result = [];
 
         foreach ($this->visitors as $name => $visitor) {
@@ -111,8 +121,19 @@ class ExtensionTranslateCommand extends Command
             if (!isset($files[$name])) {
                 continue;
             }
+            $this->line("Traversing extension files: ${name}");
 
-            $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
+            $progress = new ProgressBar($this->output, count($files[$name]));
+            $progress->start();
+
+            foreach ($files[$name] as $file) {
+                $result = array_merge_recursive($result, $visitor->traverse( array($file) ));
+                $progress->advance();
+            }
+
+            $progress->finish();
+            $this->line("\n");
+
         }
 
         // remove strings already present in system "messages"
@@ -202,21 +223,31 @@ class ExtensionTranslateCommand extends Command
 
             }
 
-            // file_put_contents($refFile = $languages.'/'.$domain.'.pot', str_replace(array_values($files), array_keys($files), $data));
             file_put_contents($refFile = $languages.'/'.$domain.'.pot', $data);
 
             if (!$this->xgettext) {
                 continue;
             }
 
-            foreach (Finder::create()->files()->in($languages)->name("$domain.po") as $file) {
+            $files = Finder::create()->files()->in($languages)->name("$domain.po");
 
-                $this->line("Merging existing .po file ".$file->getFilename());
-                exec('msgmerge --update --no-fuzzy-matching --backup=off '.$file->getPathname().' '.$refFile);
+            $this->line("Merging new translations with existing languages");
+            $progress = new ProgressBar($this->output, $files->count());
+            $progress->start();
 
-                $this->line("Generating binary .mo file ".preg_replace('/\.po$/', '.mo', $file->getFilename()));
-                exec('msgfmt -o  '.preg_replace('/\.po$/', '.mo', $file->getPathname()).' '.$file->getPathname());
+            foreach ($files as $file) {
+
+                // merge existing .po file
+                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
+
+                // generate binary .mo file
+                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname(). ' 2> /dev/null');
+
+                $progress->advance();
             }
+
+            $progress->finish();
+            $this->line("\n");
         }
     }
 
