@@ -88,9 +88,9 @@ class ExtensionTranslateCommand extends TranslationCommand
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
-        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
-        $this->loader = new PoFileLoader;
-        $this->output = $output;
+        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
+        $this->loader     = new PoFileLoader;
+        $this->output     = $output;
     }
 
     /**
@@ -110,10 +110,6 @@ class ExtensionTranslateCommand extends TranslationCommand
             mkdir($languages, 0777, true);
         }
 
-        $this->line("Traversing extension files");
-        $progress = new ProgressBar($this->output, count($this->visitors));
-        $progress->start();
-
         $result = [];
 
         foreach ($this->visitors as $name => $visitor) {
@@ -121,14 +117,19 @@ class ExtensionTranslateCommand extends TranslationCommand
             if (!isset($files[$name])) {
                 continue;
             }
+            $this->line("Traversing extension files: ${name}");
 
-            $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
+            $progress = new ProgressBar($this->output, count($files[$name]));
+            $progress->start();
 
-            $progress->advance();
+            foreach ($files[$name] as $file) {
+                $result = array_merge_recursive($result, $visitor->traverse( array($file) ));
+                $progress->advance();
+            }
+
+            $progress->finish();
+            $this->line("\n");
         }
-
-        $progress->finish();
-        $this->line("\n");
 
         // remove strings already present in system "messages"
         if ($extension != 'system') {
@@ -174,7 +175,6 @@ class ExtensionTranslateCommand extends TranslationCommand
 
             }
 
-            // file_put_contents($refFile = $languages.'/'.$domain.'.pot', str_replace(array_values($files), array_keys($files), $data));
             file_put_contents($refFile = $languages . '/' . $domain . '.pot', $data);
 
             if (!$this->xgettext) {
