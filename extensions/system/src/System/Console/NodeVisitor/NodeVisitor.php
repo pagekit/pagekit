@@ -1,7 +1,9 @@
 <?php
 
-namespace Pagekit\System\Console\Translation;
+namespace Pagekit\System\Console\NodeVisitor;
 
+use PhpParser\Lexer;
+use PhpParser\Node;
 use Symfony\Component\Templating\EngineInterface;
 
 abstract class NodeVisitor

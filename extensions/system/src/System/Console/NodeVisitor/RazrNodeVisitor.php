@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\System\Console\Translation;
+namespace Pagekit\System\Console\NodeVisitor;
 
-class RazrNodeVisitor extends PhpNodeVisitor implements \PhpParser\NodeVisitor
+class RazrNodeVisitor extends PhpNodeVisitor
 {
     /**
      * {@inheritdoc}

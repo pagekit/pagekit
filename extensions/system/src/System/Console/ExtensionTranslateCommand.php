@@ -3,16 +3,18 @@
 namespace Pagekit\System\Console;
 
 use Pagekit\Component\Translation\Loader\PoFileLoader;
-use Pagekit\System\Console\Translation\PhpNodeVisitor;
-use Pagekit\System\Console\Translation\RazrNodeVisitor;
-use Pagekit\System\Console\Translation\TranslationCommand;
+use Pagekit\Framework\Console\Command;
+use Pagekit\System\Console\NodeVisitor\NodeVisitor;
+use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
+use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
+use PhpParser\Lexer;
+use PhpParser\Node;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
-class ExtensionTranslateCommand extends TranslationCommand
+class ExtensionTranslateCommand extends Command
 {
     /**
      * The console command name.
@@ -57,13 +59,6 @@ class ExtensionTranslateCommand extends TranslationCommand
     protected $loader;
 
     /**
-     * The output interface for this command.
-     *
-     * @var OutputInterface
-     */
-    protected $output;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -76,7 +71,7 @@ class ExtensionTranslateCommand extends TranslationCommand
     /**
      * Initialize the console command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function initialize(InputInterface $input, OutputInterface $output)
@@ -84,13 +79,12 @@ class ExtensionTranslateCommand extends TranslationCommand
         parent::initialize($input, $output);
 
         $this->extensions = $this->pagekit['config']['extension.core'];
-        $this->visitors = [
+        $this->visitors   = [
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
         $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
         $this->loader     = new PoFileLoader;
-        $this->output     = $output;
     }
 
     /**
@@ -98,7 +92,7 @@ class ExtensionTranslateCommand extends TranslationCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $extension = $this->argument('extension') ? : 'system';
+        $extension = $this->argument('extension') ?: 'system';
         $files     = $this->getFiles($path = $this->getPath($extension));
         $languages = "$path/languages";
 
@@ -117,18 +111,8 @@ class ExtensionTranslateCommand extends TranslationCommand
             if (!isset($files[$name])) {
                 continue;
             }
-            $this->line("Traversing extension files: ${name}");
 
-            $progress = new ProgressBar($this->output, count($files[$name]));
-            $progress->start();
-
-            foreach ($files[$name] as $file) {
-                $result = array_merge_recursive($result, $visitor->traverse( array($file) ));
-                $progress->advance();
-            }
-
-            $progress->finish();
-            $this->line("\n");
+            $result = array_merge_recursive($result, $visitor->traverse($files[$name]));
         }
 
         // remove strings already present in system "messages"
@@ -154,6 +138,49 @@ class ExtensionTranslateCommand extends TranslationCommand
     }
 
     /**
+     * Returns all files of an extension to extract translations.
+     *
+     * @param  string $path
+     * @return array
+     */
+    protected function getFiles($path)
+    {
+        $files = [];
+
+        foreach (Finder::create()->files()->in($path)->name('*.{razr,php}') as $file) {
+
+            $file = $file->getPathname();
+
+            foreach ($this->visitors as $name => $visitor) {
+                if ($visitor->getEngine()->supports($file)) {
+                    $files[$name][] = $file;
+                    break;
+                }
+            }
+        }
+
+        return $files;
+    }
+
+    /**
+     * Returns the extension path.
+     *
+     * @param  string $path
+     * @return array
+     */
+    protected function getPath($path)
+    {
+        $root = $this->pagekit['path.extensions'];
+
+        if (!is_dir($path = "$root/$path")) {
+            $this->error("Can't find extension in '$path'");
+            exit;
+        }
+
+        return $path;
+    }
+
+    /**
      * Writes the translation file for the given extension
      *
      */
@@ -166,40 +193,30 @@ class ExtensionTranslateCommand extends TranslationCommand
             foreach ($strings as $string => $args) {
 
                 foreach ($args as $arg) {
-                    $file  = $this->getRelativePath($arg['file']);
+                    $file = $this->getRelativePath($arg['file']);
                     $data .= "#: {$file}:{$arg['line']}\n";
                 }
 
                 $string = str_replace('"', '\"', $string);
-                $data .= "msgid \"" . $string . "\"\nmsgstr \"\"\n\n";
+                $data .= "msgid \"".$string."\"\nmsgstr \"\"\n\n";
 
             }
 
-            file_put_contents($refFile = $languages . '/' . $domain . '.pot', $data);
+            // file_put_contents($refFile = $languages.'/'.$domain.'.pot', str_replace(array_values($files), array_keys($files), $data));
+            file_put_contents($refFile = $languages.'/'.$domain.'.pot', $data);
 
             if (!$this->xgettext) {
                 continue;
             }
 
-            $files = Finder::create()->files()->in($languages)->name("$domain.po");
+            foreach (Finder::create()->files()->in($languages)->name("$domain.po") as $file) {
 
-            $this->line("Merging new translations with existing languages");
-            $progress = new ProgressBar($this->output, $files->count());
-            $progress->start();
+                $this->line("Merging existing .po file ".$file->getFilename());
+                exec('msgmerge --update --no-fuzzy-matching --backup=off '.$file->getPathname().' '.$refFile);
 
-            foreach ($files as $file) {
-
-                // merge existing .po file
-                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
-
-                // generate binary .mo file
-                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname(). ' 2> /dev/null');
-
-                $progress->advance();
+                $this->line("Generating binary .mo file ".preg_replace('/\.po$/', '.mo', $file->getFilename()));
+                exec('msgfmt -o  '.preg_replace('/\.po$/', '.mo', $file->getPathname()).' '.$file->getPathname());
             }
-
-            $progress->finish();
-            $this->line("\n");
         }
     }
 
@@ -213,7 +230,7 @@ class ExtensionTranslateCommand extends TranslationCommand
     protected function getHeader($extension, $domain)
     {
         $version = $this->getApplication()->getVersion();
-        $date = date("Y-m-d H:iO");
+        $date    = date("Y-m-d H:iO");
 
         return <<<EOD
 msgid ""
@@ -229,5 +246,22 @@ msgstr ""
 
 
 EOD;
+    }
+
+    /**
+     * Returns the relative path to the root.
+     *
+     * @param  string $path
+     * @return string
+     */
+    protected function getRelativePath($path)
+    {
+        $root = $this->pagekit['path'];
+
+        if (0 === strpos($path, $root)) {
+            $path = ltrim(str_replace('\\', '/', substr($path, strlen($root))), '/');
+        }
+
+        return $path;
     }
 }
