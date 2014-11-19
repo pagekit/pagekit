@@ -95,7 +95,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
         $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
         $this->app['view.sections']->prepend('head', function() {
-            return sprintf('<meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
+            return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 
         $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());

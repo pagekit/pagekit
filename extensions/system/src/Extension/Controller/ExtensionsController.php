@@ -173,7 +173,9 @@ class ExtensionsController extends Controller
 
             $event = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
 
-            return $this['view']->render($tmpl, ['extension' => $extension, 'params' => $event->getParams()]);
+            $title = $this->extensions->getRepository()->findPackage($extension->getName())->getTitle();
+
+            return $this['view']->render($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
 
