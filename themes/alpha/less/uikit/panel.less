@@ -11,7 +11,7 @@
 @panel-title-font-size:                         round((@global-font-size * 1.28)); // 18px / 20px
 @panel-title-line-height:                       round((@panel-title-font-size * 1.32)); // 24px / 26px
 @panel-title-color:                             #333335;
-@panel-title-font-weight:						uppercase;
+@panel-title-font-weight:						300;
 
 @panel-box-padding:                             @global-margin;
 @panel-box-background:                          @global-background;
@@ -75,8 +75,6 @@
 // ========================================================================
 
 .hook-panel-misc() {
-
-	.uk-panel-box .uk-panel-teaser {}
 
     .uk-panel-box .uk-panel-teaser > * {
         border-top-left-radius: @global-border-radius;
