@@ -214,7 +214,7 @@ class SiteController extends Controller
         $feed = $this->getFeed($type);
 
         $feed->setTitle($this['option']->get('system:app.site_title'));
-        $feed->setLink($this['url']->route('@blog/site/index', [], true));
+        $feed->setLink($this['url']->route('@blog/site', [], true));
         $feed->setDescription($this['option']->get('system:app.site_description'));
 
         $feed->setChannelElement('language', $this['option']->get('system:app.locale'));
