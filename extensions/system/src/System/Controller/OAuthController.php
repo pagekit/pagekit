@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Framework\Controller\Controller;
 use OAuth\Common\Storage\Memory;
+use Pagekit\Framework\Controller\Controller;
 
 /**
  * @Route("/oauth")

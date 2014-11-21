@@ -2,20 +2,20 @@
 
 namespace Pagekit\System\Console;
 
+use Composer\Factory;
+use Composer\Installer;
+use Composer\IO\ConsoleIO;
+use Composer\Json\JsonFile;
+use Composer\Package\Locker;
+use Composer\Repository\CompositeRepository;
+use Composer\Repository\InstalledFilesystemRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Composer\Factory;
-use Composer\Installer;
-use Composer\Json\JsonFile;
-use Composer\IO\ConsoleIO;
-use Composer\Package\Locker;
-use Composer\Repository\CompositeRepository;
-use Composer\Repository\InstalledFilesystemRepository;
 
 class ExtensionComposerCommand extends Command
 {

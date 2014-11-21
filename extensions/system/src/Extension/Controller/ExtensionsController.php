@@ -178,7 +178,6 @@ class ExtensionsController extends Controller
             return $this['view']->render($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
-
             $this['message']->error($e->getMessage());
         }
 

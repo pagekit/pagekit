@@ -7,7 +7,6 @@ use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\User\Controller\ResetPasswordController;
 
 /**
  * @Route("/")

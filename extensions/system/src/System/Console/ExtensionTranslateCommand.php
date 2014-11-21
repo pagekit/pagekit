@@ -9,10 +9,10 @@ use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
 use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
 use PhpParser\Lexer;
 use PhpParser\Node;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 
 class ExtensionTranslateCommand extends Command
@@ -125,7 +125,7 @@ class ExtensionTranslateCommand extends Command
             $progress->start();
 
             foreach ($files[$name] as $file) {
-                $result = array_merge_recursive($result, $visitor->traverse( array($file) ));
+                $result = array_merge_recursive($result, $visitor->traverse( [$file] ));
                 $progress->advance();
             }
 

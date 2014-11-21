@@ -21,8 +21,8 @@ use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Helper\CountryHelper;
 use Pagekit\System\Helper\DateHelper;
 use Pagekit\System\Helper\LanguageHelper;
-use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Helper\OAuthHelper;
+use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
@@ -35,7 +35,6 @@ use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\UserProvider;
 use Pagekit\Widget\Event\WidgetListener;
-
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class SystemExtension extends Extension

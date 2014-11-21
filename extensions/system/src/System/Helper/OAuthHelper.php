@@ -2,13 +2,13 @@
 
 namespace Pagekit\System\Helper;
 
-use Pagekit\Framework\ApplicationTrait;
-use Pagekit\Component\Routing\Generator\UrlGenerator;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Storage\Memory;
-use OAuth\ServiceFactory;
 use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
+use OAuth\ServiceFactory;
+use Pagekit\Component\Routing\Generator\UrlGenerator;
+use Pagekit\Framework\ApplicationTrait;
 
 
 class OAuthHelper implements \ArrayAccess
