@@ -2,10 +2,6 @@
 
 namespace Pagekit\Blog\Controller;
 
-use FeedWriter\ATOM;
-use FeedWriter\Feed;
-use FeedWriter\RSS1;
-use FeedWriter\RSS2;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
