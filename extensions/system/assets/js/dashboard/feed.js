@@ -25,6 +25,8 @@ require(['jquery', 'tmpl!feed.list,feed.error'], function($, tmpl) {
                     widget.find('.js-spinner').addClass('uk-hidden');
 
                     widget.replaceWith(tmpl.render('feed.list', { items: items }));
+                } else {
+                    widget.replaceWith(tmpl.get('feed.error'));
                 }
 
             });

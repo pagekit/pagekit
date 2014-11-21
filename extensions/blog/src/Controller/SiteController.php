@@ -83,7 +83,11 @@ class SiteController extends Controller
 
         return [
             'head.title'          => __('Blog'),
-            'head.link.alternate' => ['href' => $this['url']->route('@blog/site/feed', [], true), 'title' => $this['option']->get('system:app.site_title'), 'type' => $this->getFeed()->getMIMEType()],
+            'head.link.alternate' => [
+                'href' => $this['url']->route('@blog/site/feed', [], true),
+                'title' => $this['option']->get('system:app.site_title'),
+                'type' => $this['feed']->create($this->extension->getParams('feed.type'))->getMIMEType()
+            ],
             'posts'               => $query->get(),
             'params'              => $this->extension->getParams(),
             'total'               => $total,
@@ -211,54 +215,35 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = $this->getFeed($type);
+        $feed = $this['feed']->create($type ?: $this->extension->getParams('feed.type'));
 
         $feed->setTitle($this['option']->get('system:app.site_title'));
         $feed->setLink($this['url']->route('@blog/site', [], true));
-        $feed->setDescription($this['option']->get('system:app.site_description'));
+        $feed->setDescription($this['option']->get('system:app.site_description') ?: 'TESTdescription');
+        $feed->setImage('name', 'link', 'url');
 
-        $feed->setChannelElement('language', $this['option']->get('system:app.locale'));
+        $feed->setElement('language', $this['option']->get('system:app.locale'));
 
         if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
-            $feed->setDate($last->getModified()->format(DATE_RSS));
+            $feed->setDate($last->getModified());
         }
 
         $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
 
         foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
 
-            $item = $feed->createNewItem();
+            $item = $feed->createItem();
 
             $item->setTitle($post->getTitle());
             $item->setLink($this['url']->route('@blog/id', ['id' => $post->getId()], true));
             $item->setDescription($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
-            $item->setDate($post->getDate()->format(DATE_RSS));
+            $item->setDate($post->getDate());
             $item->setAuthor($post->getUser()->getName(), $post->getUser()->getEmail());
             $item->setId($this['url']->route('@blog/id', ['id' => $post->getId()], true), true);
 
             $feed->addItem($item);
         }
 
-        return $this['response']->create($feed->generateFeed(), Response::HTTP_OK, array('Content-Type' => $feed->getMIMEType()));
-    }
-
-    /**
-     * @param  string $type
-     * @return Feed
-     */
-    protected function getFeed($type = '')
-    {
-        if (!$type) {
-            $type = $this->extension->getParams('feed.type');
-        }
-
-        switch($type) {
-            case 'atom':
-                return new ATOM;
-            case 'rss':
-                return new RSS1;
-            default:
-                return new RSS2;
-        }
+        return $this['response']->create($feed->generate(), Response::HTTP_OK, array('Content-Type' => $feed->getMIMEType()));
     }
 }
