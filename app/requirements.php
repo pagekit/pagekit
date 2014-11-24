@@ -405,6 +405,12 @@ class PagekitRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
+            function_exists('dom_import_simplexml'),
+            'dom_import_simplexml() must be available',
+            'Install and enable the <strong>DOM</strong> extension.'
+        );
+
+        $this->addRequirement(
             function_exists('curl_init'),
             'curl_init() must be available',
             'Install and enable the <strong>cURL</strong> extension.'

@@ -212,33 +212,29 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = $this['feed']->create($type ?: $this->extension->getParams('feed.type'));
-
-        $feed->setTitle($this['option']->get('system:app.site_title'));
-        $feed->setLink($this['url']->route('@blog/site', [], true));
-        $feed->setDescription($this['option']->get('system:app.site_description') ?: 'TESTdescription');
-        $feed->setImage('name', 'link', 'url');
-
-        $feed->setElement('language', $this['option']->get('system:app.locale'));
+        $feed = $this['feed']->create($type ?: $this->extension->getParams('feed.type'), [
+            'title'       => $this['option']->get('system:app.site_title'),
+            'link'        => $this['url']->route('@blog/site', [], true),
+            'description' => $this['option']->get('system:app.site_description'),
+            'element'     => ['language', $this['option']->get('system:app.locale')],
+            'selfLink'    => $this['url']->route('@blog/site/feed', [], true)
+        ]);
 
         if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
             $feed->setDate($last->getModified());
         }
 
-        $feed->setSelfLink($this['url']->route('@blog/site/feed', [], true));
-
         foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
-
-            $item = $feed->createItem();
-
-            $item->setTitle($post->getTitle());
-            $item->setLink($this['url']->route('@blog/id', ['id' => $post->getId()], true));
-            $item->setDescription($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
-            $item->setDate($post->getDate());
-            $item->setAuthor($post->getUser()->getName(), $post->getUser()->getEmail());
-            $item->setId($this['url']->route('@blog/id', ['id' => $post->getId()], true), true);
-
-            $feed->addItem($item);
+            $feed->addItem(
+                $feed->createItem([
+                    'title'       => $post->getTitle(),
+                    'link'        => $this['url']->route('@blog/id', ['id' => $post->getId()], true),
+                    'description' => $this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
+                    'date'        => $post->getDate(),
+                    'author'      => [$post->getUser()->getName(), $post->getUser()->getEmail()],
+                    'id'          => $this['url']->route('@blog/id', ['id' => $post->getId()], true)
+                ])
+            );
         }
 
         return $this['response']->create($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
