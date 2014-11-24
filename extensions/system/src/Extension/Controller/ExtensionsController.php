@@ -69,7 +69,13 @@ class ExtensionsController extends Controller
                     ob_get_clean();
                 }
 
-                $this['response']->json(['error' => true, 'message' => __('Unable to activate extension.<br>The extension triggered a fatal error.')])->send();
+                $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
+
+                if ($this['config']['app.debug']) {
+                    $message .= '<br><br>'.$exception->getMessage();
+                }
+
+                $this['response']->json(['error' => true, 'message' => $message])->send();
             });
 
             if (!$this->extensions->get($name)) {
