@@ -69,13 +69,11 @@ class ExtensionUploadCommand extends Command
         $api  = $this->pagekit['config']['api.url'];
 
         if (!is_dir($path = "{$this->path}/{$this->package}")) {
-            $this->error("Can't find {$this->json} in '{$this->path}'");
-            exit;
+            $this->abort("Can't find {$this->json} in '{$this->path}'");
         }
 
         if (!$key = $this->pagekit['option']->get('system:api.key')) {
-            $this->error("Please set your api key");
-            exit;
+            $this->abort("Please set your api key");
         }
 
         $loader  = new JsonLoader;

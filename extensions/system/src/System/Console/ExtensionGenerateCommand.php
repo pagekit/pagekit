@@ -36,8 +36,7 @@ class ExtensionGenerateCommand extends Command
         $name = $this->argument('extension');
 
         if (is_dir($path = $this->pagekit['path.extensions']."/$name")) {
-            $this->error("Extension already exists '$path'");
-            exit;
+            $this->abort("Extension already exists '$path'");
         }
 
         $title     = $this->ask('Title: ');

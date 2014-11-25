@@ -47,15 +47,13 @@ class ExtensionComposerCommand extends Command
         $update = $this->option('update');
 
         if (!is_dir($path = $this->pagekit['path.extensions']."/$name") && file_exists("$path/extension.json")) {
-            $this->error("Extension not exists '$path'");
-            exit;
+            $this->abort("Extension not exists '$path'");
         }
 
         $package = json_decode(file_get_contents("$path/extension.json"), true);
 
         if (!isset($package['composer']) || empty($package['composer'])) {
-            $this->error("Composer not defined in '$path/extension.json'");
-            exit;
+            $this->abort("Composer not defined in '$path/extension.json'");
         }
 
         $this->loadComposer($path);

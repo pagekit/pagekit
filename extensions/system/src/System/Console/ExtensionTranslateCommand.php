@@ -179,8 +179,7 @@ class ExtensionTranslateCommand extends Command
         $root = $this->pagekit['path.extensions'];
 
         if (!is_dir($path = "$root/$path")) {
-            $this->error("Can't find extension in '$path'");
-            exit;
+            $this->abort("Can't find extension in '$path'");
         }
 
         return $path;

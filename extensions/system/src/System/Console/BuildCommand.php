@@ -80,8 +80,7 @@ class BuildCommand extends Command
         $zip = new \ZipArchive;
 
         if (!$zip->open($zipFile = "{$path}/pagekit-".($this->option('development') ? $dev : $vers).".zip", \ZipArchive::OVERWRITE)) {
-            $this->error("Can't open ZIP extension in '$zipFile'");
-            exit;
+            $this->abort("Can't open ZIP extension in '$zipFile'");
         }
 
         $finder = Finder::create()
