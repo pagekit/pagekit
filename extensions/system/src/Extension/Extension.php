@@ -180,8 +180,7 @@ class Extension implements \ArrayAccess
     public function registerLanguages()
     {
         $locale = $this['translator']->getLocale();
-
-        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{po|php}', GLOB_BRACE) ?: [] as $file) {
+        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{po,php}', GLOB_BRACE) ?: [] as $file) {
 
             list($domain, $format) = explode('.', basename($file));
 
