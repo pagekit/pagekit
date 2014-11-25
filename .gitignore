@@ -4,6 +4,7 @@
 !/extensions/installer
 !/extensions/page
 !/extensions/system
+**/languages/*/*.php
 /themes/*
 !/themes/alpha
 /vendor/*
@@ -15,4 +16,3 @@
 /.idea
 node_modules
 .DS_Store
-*.mo

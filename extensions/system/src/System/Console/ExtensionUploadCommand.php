@@ -16,50 +16,60 @@ use Symfony\Component\Finder\Finder;
 class ExtensionUploadCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'extension:upload';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $description = 'Uploads an extension to the marketplace';
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->upload($this->argument('extension'), $this->pagekit['path.extensions'], 'extension.json');
-    }
+    protected $package;
+
+    /**
+     * @var string
+     */
+    protected $json = 'extension.json';
+
+    /**
+     * @var string
+     */
+    protected $path;
 
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
+        $this->addArgument('name', InputArgument::REQUIRED, 'Package name');
         $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
     }
 
     /**
-     * Creates and uploads a .zip release file.
-     *
-     * @param string $name
-     * @param string $path
-     * @param string $json
+     * {@inheritdoc}
      */
-    protected function upload($name, $path, $json)
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+
+        $this->package = $this->argument('name');
+        $this->path    = $this->pagekit['path.extensions'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $temp = $this->pagekit['path'].'/app/temp';
         $api  = $this->pagekit['config']['api.url'];
 
-        if (!is_dir($path = "$path/$name")) {
-            $this->error("Can't find $json in '$path'");
+        if (!is_dir($path = "{$this->path}/{$this->package}")) {
+            $this->error("Can't find {$this->json} in '{$this->path}'");
             exit;
         }
 
@@ -69,11 +79,12 @@ class ExtensionUploadCommand extends Command
         }
 
         $loader  = new JsonLoader;
-        $package = $loader->load("$path/$json");
+
+        $package = $loader->load("{$path}/{$this->json}");
         $version = $package->getVersion();
 
         $zip = new \ZipArchive;
-        $zip->open($zipFile = "$temp/$name-$version.zip", \ZipArchive::OVERWRITE);
+        $zip->open($zipFile = "{$temp}/{$this->package}-{$version}.zip", \ZipArchive::OVERWRITE);
 
         $finder = new Finder;
         $finder->files()->in($path)->ignoreVCS(true);
@@ -94,12 +105,12 @@ class ExtensionUploadCommand extends Command
 
             $client = new Client;
             $client->post("$api/package/upload", [
-                    'body' => [
-                        'api_key' => $key,
-                        'force'   => $this->option('force'),
-                        'file'    => new PostFile('file', fopen($zipFile, 'r'))
-                    ]
-                ]);
+                'body' => [
+                    'api_key' => $key,
+                    'force'   => $this->option('force'),
+                    'file'    => new PostFile('file', fopen($zipFile, 'r'))
+                ]
+            ]);
 
             $this->line(sprintf('Finished (%d KB/s)', $size * 1024 / (microtime(true) - $time)));
 

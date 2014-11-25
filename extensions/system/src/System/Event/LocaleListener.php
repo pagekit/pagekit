@@ -20,7 +20,7 @@ class LocaleListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'system.init' => 'onSystemInit'
+            'system.init' => ['onSystemInit', 10]
         ];
     }
 }

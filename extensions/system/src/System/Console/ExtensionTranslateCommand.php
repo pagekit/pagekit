@@ -7,29 +7,24 @@ use Pagekit\Framework\Console\Command;
 use Pagekit\System\Console\NodeVisitor\NodeVisitor;
 use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
 use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
-use PhpParser\Lexer;
-use PhpParser\Node;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 
 class ExtensionTranslateCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'extension:translate';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
-    protected $description = 'Generates translation .pot/.po/.mo files';
+    protected $description = 'Generates extension\'s translation .pot/.po/.php files';
 
     /**
      * The core extensions.
@@ -60,29 +55,19 @@ class ExtensionTranslateCommand extends Command
     protected $loader;
 
     /**
-     * The output interface for this command.
-     *
-     * @var OutputInterface
+     * {@inheritdoc}
      */
-    protected $output;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
+    protected function configure()
     {
-        parent::__construct();
-
         $this->addArgument('extension', InputArgument::OPTIONAL, 'Extension name');
+        $this->addOption('merge', null, InputOption::VALUE_NONE, 'Merge new translations with existing languages');
+        $this->addOption('compile', null, InputOption::VALUE_NONE, 'Compile .po files to .php files');
     }
 
     /**
-     * Initialize the console command.
-     *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
+     * {@inheritdoc}
      */
-    public function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
 
@@ -91,16 +76,16 @@ class ExtensionTranslateCommand extends Command
             'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
-        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool)exec('which xgettext');
+        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
         $this->loader     = new PoFileLoader;
     }
 
     /**
-     * Execute the console command.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $extension = $this->argument('extension') ? : 'system';
+        $extension = $this->argument('extension') ?: 'system';
         $files     = $this->getFiles($path = $this->getPath($extension));
         $languages = "$path/languages";
 
@@ -119,15 +104,18 @@ class ExtensionTranslateCommand extends Command
             if (!isset($files[$name])) {
                 continue;
             }
+
             $this->line("Traversing extension files: ${name}");
 
             $progress = new ProgressBar($this->output, count($files[$name]));
             $progress->start();
 
             foreach ($files[$name] as $file) {
-                $result = array_merge_recursive($result, $visitor->traverse( [$file] ));
+                $visitor->traverse([$file]);
                 $progress->advance();
             }
+
+            $result = array_merge_recursive($result, $visitor->results);
 
             $progress->finish();
             $this->line("\n");
@@ -136,7 +124,7 @@ class ExtensionTranslateCommand extends Command
         // remove strings already present in system "messages"
         if ($extension != 'system') {
 
-            $messages = $this->loader->load($this->getPath('system').'/languages/messages.pot', 'en');
+            $messages = $this->loader->load($this->getPath('system').'/languages/en_US/messages.po', 'en_US');
 
             foreach ($result as $domain => $strings) {
 
@@ -199,10 +187,13 @@ class ExtensionTranslateCommand extends Command
     }
 
     /**
-     * Writes the translation file for the given extension
+     * Writes the translation file for the given extension.
      *
+     * @param array  $messages
+     * @param string $extension
+     * @param string $path
      */
-    protected function writeTranslationFile($messages, $extension, $languages)
+    protected function writeTranslationFile($messages, $extension, $path)
     {
         foreach ($messages as $domain => $strings) {
 
@@ -220,30 +211,45 @@ class ExtensionTranslateCommand extends Command
 
             }
 
-            file_put_contents($refFile = $languages . '/' . $domain . '.pot', $data);
+            file_put_contents($refFile = $path . '/' . $domain . '.pot', $data);
 
-            if (!$this->xgettext) {
-                continue;
+            $files = Finder::create()->files()->in($path)->name("$domain.po");
+
+            if ($this->option('merge') && $this->xgettext) {
+                $this->line("Merging new translations with existing languages");
+                $progress = new ProgressBar($this->output, $files->count());
+                $progress->start();
+
+                foreach ($files as $file) {
+
+                    // merge existing .po file
+                    exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
+
+                    $progress->advance();
+                }
+
+                $progress->finish();
+                $this->line("\n");
             }
 
-            $files = Finder::create()->files()->in($languages)->name("$domain.po");
+            if ($this->option('compile')) {
+                $this->line("Compiling .po files to .php files");
+                $progress = new ProgressBar($this->output, $files->count());
+                $progress->start();
 
-            $this->line("Merging new translations with existing languages");
-            $progress = new ProgressBar($this->output, $files->count());
-            $progress->start();
+                foreach ($files as $file) {
 
-            foreach ($files as $file) {
+                    $messages = $this->loader->load($file->getPathname(), 'en', $domain);
 
-                // merge existing .po file
-                exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
+                    file_put_contents(preg_replace('/\.po$/', '.php', $file->getPathname()), '<?php return '.var_export($messages->all($domain), true).';');
 
-                // generate binary .mo file
-                exec('msgfmt -o  ' . preg_replace('/\.po$/', '.mo', $file->getPathname()) . ' ' . $file->getPathname(). ' 2> /dev/null');
+                    $progress->advance();
+                }
 
-                $progress->advance();
+                $progress->finish();
             }
 
-            $progress->finish();
+
             $this->line("\n");
         }
     }

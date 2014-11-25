@@ -47,7 +47,7 @@ class SiteController extends Controller
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose){
+        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
             $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
         });
@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function indexAction($page = 1)
     {
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event){
+        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) {
             $post = $event->getEntity();
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
@@ -186,12 +186,11 @@ class SiteController extends Controller
             throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
-        $user  = $this['user'];
         $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
-        if ($user->isAuthenticated()) {
-            $query->orWhere(function ($query) use ($user){
-                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $user->getId()]);
+        if ($this['user']->isAuthenticated()) {
+            $query->orWhere(function ($query) {
+                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $this['user']->getId()]);
             });
         }
 

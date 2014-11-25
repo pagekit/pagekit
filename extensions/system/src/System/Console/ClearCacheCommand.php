@@ -9,23 +9,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ClearCacheCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'clearcache';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
-    protected $description = 'Deletes all cache files';
+    protected $description = 'Clears the system cache.';
 
     /**
-     * Execute the console command.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->pagekit['system']->doClearCache();
     }

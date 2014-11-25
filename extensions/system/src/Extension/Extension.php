@@ -57,8 +57,9 @@ class Extension implements \ArrayAccess
     public function boot(Application $app)
     {
         $this->registerControllers($app['controllers']);
-        $this->registerLanguages($app['translator']);
         $this->registerResources($app['locator']);
+
+        $app->on('system.init', [$this, 'registerLanguages']);
 
         if ($this->getConfig('parameters.settings')) {
 
@@ -175,26 +176,22 @@ class Extension implements \ArrayAccess
      *
      *  - Languages are in the 'languages' sub-directory
      *  - The naming convention '/locale/domain.format', example: /en_GB/hello.mo
-     *
-     * @param Translator $translator
      */
-    public function registerLanguages(Translator $translator)
+    public function registerLanguages()
     {
-        $files = glob($this->getPath().'/languages/*/*') ?: [];
+        $locale = $this['translator']->getLocale();
 
-        foreach ($files as $file) {
-            if (preg_match('/languages\/(.+)\/(.+)\.(mo|po|php)$/', $file, $matches)) {
+        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{po|php}', GLOB_BRACE) ?: [] as $file) {
 
-                list(, $locale, $domain, $format) = $matches;
+            list($domain, $format) = explode('.', basename($file));
 
-                if ($format == 'php') {
-                    $format = 'array';
-                    $file = require $file;
-                }
-
-                $translator->addResource($format, $file, $locale, $domain);
-                $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
+            if ($format == 'php') {
+                $format = 'array';
+                $file = require $file;
             }
+
+            $this['translator']->addResource($format, $file, $locale, $domain);
+            $this['translator']->addResource($format, $file, substr($locale, 0, 2), $domain);
         }
     }
 

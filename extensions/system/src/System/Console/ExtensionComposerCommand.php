@@ -20,23 +20,28 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExtensionComposerCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'extension:composer';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
-    protected $description = 'Installs the extension dependencies';
+    protected $description = 'Executes composer for the extension.';
 
     /**
-     * Executes composer for the extension.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
+        $this->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name   = $this->argument('extension');
         $update = $this->option('update');
@@ -70,15 +75,6 @@ class ExtensionComposerCommand extends Command
         $installer->setUpdate($update);
 
         return $installer->run();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
-        $this->addOption('update', 'u', InputOption::VALUE_NONE, 'Update composer');
     }
 
     /**
@@ -131,7 +127,7 @@ class ExtensionComposerCommand extends Command
         $unit = strtolower(substr($value, -1, 1));
         $value = (int) $value;
 
-        switch($unit) {
+        switch ($unit) {
             case 'g':
                 $value *= 1024;
                 // no break (cumulative multiplier)

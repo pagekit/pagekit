@@ -2,41 +2,33 @@
 
 namespace Pagekit\System\Console;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ThemeUploadCommand extends ExtensionUploadCommand
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'theme:upload';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $description = 'Uploads a theme to the marketplace';
 
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->upload($this->argument('theme'), $this->pagekit['path.themes'], 'theme.json');
-    }
+    protected $json = 'theme.json';
 
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->addArgument('theme', InputArgument::REQUIRED, 'Theme name');
-        $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Force overwrite');
+        parent::initialize($input, $output);
+
+        $this->path = $this->pagekit['path.themes'];
     }
 }

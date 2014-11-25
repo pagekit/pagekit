@@ -10,16 +10,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class StartCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'start';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $description = 'Starts the built-in web server';
 
@@ -32,9 +28,9 @@ class StartCommand extends Command
     }
 
     /**
-     * Starts the built-in web server.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->line(sprintf('Pagekit %s Development Server started', $this->getApplication()->getVersion()));
         $this->line(sprintf('Listening on http://%s', $server = $this->option('server')));

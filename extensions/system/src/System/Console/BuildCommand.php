@@ -12,19 +12,40 @@ use Symfony\Component\Finder\Finder;
 class BuildCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'build';
 
     /**
-     * The console command description.
-     *
+     * {@inheritdoc}
+     */
+    protected $description = 'Builds a .zip release file.';
+
+    /**
+     * @var string[]
+     */
+    protected $excludes = [
+        '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
+        '^extensions\/(?!(installer|page|blog|system)\/).*',
+        '^extensions\/.+\/languages\/.+\.(po|pot)',
+        '^themes\/(?!(alpha)\/).*',
+        '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
+        '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
+        '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
+        '^vendor\/lusitanian\/oauth\/(examples|tests)',
+        '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
+        '^vendor\/pagekit\/.+\/(tests\/|phpunit)',
+        '^vendor\/pimple\/pimple\/(tests|phpunit)',
+        '^vendor\/psr\/.+\/(test\/|phpunit)',
+        '^vendor\/swiftmailer\/swiftmailer\/(doc|notes|tests|test-suite|build|phpunit)',
+        '^vendor\/symfony\/.+\/(tests\/|phpunit)',
+        '\/node_modules'
+    ];
+
+    /**
      * @var string
      */
-    protected $description = 'Builds a release';
-
+    protected $filter;
 
     /**
      * {@inheritdoc}
@@ -32,12 +53,13 @@ class BuildCommand extends Command
     protected function configure()
     {
         $this->addOption('development', 'd', InputOption::VALUE_NONE, 'Development Build');
+        $this->filter = '/' . implode('|', $this->excludes) . '/i';
     }
 
     /**
-     * Builds a .zip release file.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $vers = $this->getApplication()->getVersion();
         $path = $this->pagekit['path'];
@@ -46,9 +68,9 @@ class BuildCommand extends Command
         // compile translation files
         try {
 
-            $cmd = $this->getApplication()->get('translation:compile');
+            $cmd = $this->getApplication()->get('extension:translate');
             foreach (['system', 'page', 'blog', 'installer'] as $extension) {
-                $cmd->run(new ArrayInput(compact('extension')), $output);
+                $cmd->run(new ArrayInput(['extension' => $extension, '--compile' => true]), $output);
             }
 
         } catch (\InvalidArgumentException $e) {
@@ -67,26 +89,7 @@ class BuildCommand extends Command
             ->in($path)
             ->ignoreVCS(true)
             ->filter(function ($file) {
-
-                $exclude = [
-                    '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
-                    '^extensions\/(?!(installer|page|blog|system)\/).*',
-                    '^extensions\/.+\/languages\/.+\.(po|pot)',
-                    '^themes\/(?!(alpha)\/).*',
-                    '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
-                    '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
-                    '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
-                    '^vendor\/lusitanian\/oauth\/(examples|tests)',
-                    '^vendor\/nikic\/php-parser\/(bin|doc|grammar|test|test_old|phpunit)',
-                    '^vendor\/pagekit\/.+\/(tests\/|phpunit)',
-                    '^vendor\/pimple\/pimple\/(tests|phpunit)',
-                    '^vendor\/psr\/.+\/(test\/|phpunit)',
-                    '^vendor\/swiftmailer\/swiftmailer\/(doc|notes|tests|test-suite|build|phpunit)',
-                    '^vendor\/symfony\/.+\/(tests\/|phpunit)',
-                    '\/node_modules'
-                ];
-
-                return !preg_match('/' . implode('|', $exclude) . '/i', $file->getRelativePathname());
+                return !preg_match($this->filter, $file->getRelativePathname());
             });
 
         foreach ($finder as $file) {

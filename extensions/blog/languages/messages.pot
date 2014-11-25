@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.3 (blog, messages)\n"
-"POT-Creation-Date: 2014-07-21 17:08+0000\n"
+"Project-Id-Version: Pagekit 0.8.8 (blog, messages)\n"
+"POT-Creation-Date: 2014-11-25 16:05+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,7 +10,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: extensions/blog/views/admin/comment/edit.razr:15
-#: extensions/blog/views/comment/respond.razr:23
 msgid "E-mail"
 msgstr ""
 
@@ -32,11 +31,12 @@ msgstr ""
 
 #: extensions/blog/views/admin/comment/index.razr:67
 #: extensions/blog/views/admin/comment/table.razr:37
-#: extensions/blog/views/comment/comment.razr:27
+#: extensions/blog/views/comment/comment.razr:28
 msgid "Reply"
 msgstr ""
 
 #: extensions/blog/views/admin/comment/table.razr:6
+#: extensions/blog/views/comment/respond.razr:35
 msgid "Comment"
 msgstr ""
 
@@ -91,11 +91,12 @@ msgid "Slug"
 msgstr ""
 
 #: extensions/blog/views/admin/post/edit.razr:96
+#: extensions/blog/views/admin/settings.razr:86
 msgid "Enable Comments"
 msgstr ""
 
 #: extensions/blog/views/admin/post/index.razr:8
-#: extensions/blog/src/Controller/PostController.php:105
+#: extensions/blog/src/Controller/PostController.php:112
 msgid "Add Post"
 msgstr ""
 
@@ -113,8 +114,8 @@ msgstr ""
 
 #: extensions/blog/views/admin/post/table.razr:9
 #: extensions/blog/views/admin/settings.razr:16
-#: extensions/blog/views/admin/settings.razr:67
-#: extensions/blog/views/admin/settings.razr:69
+#: extensions/blog/views/admin/settings.razr:94
+#: extensions/blog/views/admin/settings.razr:96
 #: extensions/blog/src/Controller/CommentController.php:106
 msgid "Comments"
 msgstr ""
@@ -164,56 +165,72 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:73
-msgid "Enable comments."
+#: extensions/blog/views/admin/settings.razr:65
+msgid "Posts per page"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:77
+#: extensions/blog/views/admin/settings.razr:74
+msgid "Default post settings"
+msgstr ""
+
+#: extensions/blog/views/admin/settings.razr:100
 msgid "Require name and e-mail."
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:81
+#: extensions/blog/views/admin/settings.razr:104
 msgid "Close comments on articles older than"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:82
+#: extensions/blog/views/admin/settings.razr:105
 msgid "days."
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:87
+#: extensions/blog/views/admin/settings.razr:110
 msgid "Appearance"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:91
+#: extensions/blog/views/admin/settings.razr:114
 msgid "Show Avatars from Gravatar."
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:94
+#: extensions/blog/views/admin/settings.razr:117
 msgid "Order comments by"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:96
+#: extensions/blog/views/admin/settings.razr:119
 msgid "latest last."
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:97
+#: extensions/blog/views/admin/settings.razr:120
 msgid "latest first."
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:103
+#: extensions/blog/views/admin/settings.razr:126
 msgid "Enable nested comments of"
 msgstr ""
 
-#: extensions/blog/views/admin/settings.razr:105
+#: extensions/blog/views/admin/settings.razr:128
 msgid "levels deep."
 msgstr ""
 
-#: extensions/blog/views/comment/comment.razr:13
+#: extensions/blog/views/comment/comment.razr:14
 msgid "%date% at %time%"
 msgstr ""
 
-#: extensions/blog/views/comment/comments.razr:5
+#: extensions/blog/views/comment/comments.razr:8
 msgid "Comments (%count%)"
+msgstr ""
+
+#: extensions/blog/views/comment/comments.razr:21
+msgid "Comments are closed."
+msgstr ""
+
+#: extensions/blog/views/comment/comments.razr:28
+msgid "You are not allowed to view comments."
+msgstr ""
+
+#: extensions/blog/views/comment/comments.razr:32
+msgid "Please login to view comments."
 msgstr ""
 
 #: extensions/blog/views/comment/respond.razr:3
@@ -225,18 +242,18 @@ msgid "Logged in as %name%"
 msgstr ""
 
 #: extensions/blog/views/comment/respond.razr:15
-msgid "You are commenting as guest."
+msgid "Your email address will not be published."
 msgstr ""
 
-#: extensions/blog/views/comment/respond.razr:33
+#: extensions/blog/views/comment/respond.razr:42
 msgid "Submit comment"
 msgstr ""
 
-#: extensions/blog/views/comment/respond.razr:45
+#: extensions/blog/views/comment/respond.razr:54
 msgid "You are not allowed to post comments."
 msgstr ""
 
-#: extensions/blog/views/comment/respond.razr:49
+#: extensions/blog/views/comment/respond.razr:58
 msgid "Please login to leave a comment."
 msgstr ""
 
@@ -248,11 +265,19 @@ msgstr ""
 msgid "Continue Reading"
 msgstr ""
 
-#: extensions/blog/views/post/index.razr:20
+#: extensions/blog/views/post/index.razr:21
 msgid "{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments"
 msgstr ""
 
-#: extensions/blog/src/BlogExtension.php:39
+#: extensions/blog/views/post/index.razr:32
+msgid "Newer posts"
+msgstr ""
+
+#: extensions/blog/views/post/index.razr:37
+msgid "Older posts"
+msgstr ""
+
+#: extensions/blog/src/BlogExtension.php:35
 msgid "You've made some changes! Leaving the post without saving will discard all changes."
 msgstr ""
 
@@ -276,72 +301,73 @@ msgstr ""
 msgid "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:93
+#: extensions/blog/src/Controller/PostController.php:98
 msgid "Posts"
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:117
+#: extensions/blog/src/Controller/PostController.php:124
 msgid "Invalid post id."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:127
+#: extensions/blog/src/Controller/PostController.php:134
 msgid "Edit Post"
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:152
+#: extensions/blog/src/Controller/PostController.php:161
 msgid "Post saved."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:152
+#: extensions/blog/src/Controller/PostController.php:161
 msgid "Post created."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:173
+#: extensions/blog/src/Controller/PostController.php:182
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:195
+#: extensions/blog/src/Controller/PostController.php:205
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:212
+#: extensions/blog/src/Controller/PostController.php:222
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:214
+#: extensions/blog/src/Controller/PostController.php:224
 msgid "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:64
+#: extensions/blog/src/Controller/SiteController.php:81
 #: extensions/blog/src/Link/BlogLink.php:22
 msgid "Blog"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:93
+#: extensions/blog/src/Controller/SiteController.php:117
 msgid "Please wait another %seconds% seconds before commenting again."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:102
+#: extensions/blog/src/Controller/SiteController.php:126
 msgid "Comments have been disabled for this post."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:111
+#: extensions/blog/src/Controller/SiteController.php:135
 msgid "Please provide valid name and email."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:133
+#: extensions/blog/src/Controller/SiteController.php:157
 msgid "Thanks for commenting!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:145
+#: extensions/blog/src/Controller/SiteController.php:169
 msgid "Whoops, something went wrong!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:158
-msgid "Post not found!"
+#: extensions/blog/src/Controller/SiteController.php:182
+#: extensions/blog/src/Event/RouteListener.php:83
+msgid "Post with id \"%id%\" not found!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:162
+#: extensions/blog/src/Controller/SiteController.php:186
 msgid "Unable to access this post!"
 msgstr ""
 
@@ -357,27 +383,23 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: extensions/blog/src/Entity/Post.php:169
+#: extensions/blog/src/Entity/Post.php:174
 msgid "Published"
 msgstr ""
 
-#: extensions/blog/src/Entity/Post.php:170
+#: extensions/blog/src/Entity/Post.php:175
 msgid "Unpublished"
 msgstr ""
 
-#: extensions/blog/src/Entity/Post.php:171
+#: extensions/blog/src/Entity/Post.php:176
 msgid "Draft"
 msgstr ""
 
-#: extensions/blog/src/Entity/Post.php:172
+#: extensions/blog/src/Entity/Post.php:177
 msgid "Pending Review"
 msgstr ""
 
-#: extensions/blog/src/Event/RouteListener.php:81
-msgid "Post with id \"%id%\" not found!"
-msgstr ""
-
-#: extensions/blog/src/Event/RouteListener.php:106
+#: extensions/blog/src/Event/RouteListener.php:108
 msgid "Post with slug \"%slug%\" not found!"
 msgstr ""
 

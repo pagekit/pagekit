@@ -11,23 +11,19 @@ use Symfony\Component\Finder\Finder;
 class ThemeGenerateCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'theme:generate';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
-    protected $description = 'Generates a theme skeleton files';
+    protected $description = 'Builds a theme skeleton with minimum requirements.';
 
     /**
-     * Builds a theme skeleton with minimum requirements.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $this->argument('extension');
 

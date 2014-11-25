@@ -11,23 +11,27 @@ use Symfony\Component\Finder\Finder;
 class ExtensionGenerateCommand extends Command
 {
     /**
-     * The console command name.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $name = 'extension:generate';
 
     /**
-     * The console command description.
-     *
-     * @var string
+     * {@inheritdoc}
      */
-    protected $description = 'Generates an extension skeleton files';
+    protected $description = 'Builds an extension skeleton with minimum requirements.';
 
     /**
-     * Builds an extension skeleton with minimum requirements.
+     * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $this->argument('extension');
 
@@ -69,13 +73,5 @@ class ExtensionGenerateCommand extends Command
 
             file_put_contents($filename, $content);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
     }
 }
