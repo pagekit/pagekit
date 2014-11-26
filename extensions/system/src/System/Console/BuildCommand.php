@@ -53,6 +53,7 @@ class BuildCommand extends Command
     protected function configure()
     {
         $this->addOption('development', 'd', InputOption::VALUE_NONE, 'Development Build');
+        $this->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Output path');
         $this->filter = '/'.implode('|', $this->excludes).'/i';
     }
 
@@ -62,7 +63,8 @@ class BuildCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $vers = $this->getApplication()->getVersion();
-        $path = $this->pagekit['path'];
+        $root = $this->pagekit['path'];
+        $path = $this->option('output') ?: $root;
         $dev  = preg_replace_callback('/(\d+)$/', function ($matches) { return $matches[1] + 1; }, $vers).'-dev';
 
         // compile translation files
@@ -85,7 +87,7 @@ class BuildCommand extends Command
 
         $finder = Finder::create()
             ->files()
-            ->in($path)
+            ->in($root)
             ->ignoreVCS(true)
             ->filter(function ($file) {
                 return !preg_match($this->filter, $file->getRelativePathname());
@@ -101,11 +103,11 @@ class BuildCommand extends Command
         $zip->addEmptyDir('app/sessions');
         $zip->addEmptyDir('app/temp');
         $zip->addEmptyDir('storage');
-        $zip->addFile($path.'/.htaccess', '.htaccess');
-        $zip->addFile($path.'/app/database/.htaccess', 'app/database/.htaccess');
+        $zip->addFile($root.'/.htaccess', '.htaccess');
+        $zip->addFile($root.'/app/database/.htaccess', 'app/database/.htaccess');
 
         if ($this->option('development')) {
-            $zip->addFromString('app/config/app.php', str_replace("'version' => '{$vers}',", "'version' => '{$dev}',", file_get_contents("{$path}/app/config/app.php")));
+            $zip->addFromString('app/config/app.php', str_replace("'version' => '{$vers}',", "'version' => '{$dev}',", file_get_contents("{$root}/app/config/app.php")));
         }
 
         $zip->close();
