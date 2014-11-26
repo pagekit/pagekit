@@ -411,12 +411,6 @@ class PagekitRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
-            function_exists('curl_init'),
-            'curl_init() must be available',
-            'Install and enable the <strong>cURL</strong> extension.'
-        );
-
-        $this->addRecommendation(
             function_exists('mb_strtolower'),
             'mb_strtolower() must be available',
             'Install and enable the <strong>mbstring</strong> extension.'
@@ -474,15 +468,9 @@ class PagekitRequirements extends RequirementCollection
         /* optional recommendations follow */
 
         $this->addRecommendation(
-            class_exists('DomDocument'),
-            'PHP-XML module should be installed',
-            'Install and enable the <strong>PHP-XML</strong> module.'
-        );
-
-        $this->addRecommendation(
-            function_exists('mb_strlen'),
-            'mb_strlen() should be available',
-            'Install and enable the <strong>mbstring</strong> extension.'
+            function_exists('curl_init'),
+            'curl_init() should be available',
+            'Install and enable the <strong>cURL</strong> extension.'
         );
 
         $this->addRecommendation(
@@ -494,7 +482,7 @@ class PagekitRequirements extends RequirementCollection
         $this->addRecommendation(
             function_exists('utf8_decode'),
             'utf8_decode() should be available',
-            'Install and enable the <strong>XML</strong> extension.'
+            'Install and enable the <strong>XML Parser</strong> extension.'
         );
 
         if (extension_loaded('apcu')) {
@@ -513,10 +501,10 @@ class PagekitRequirements extends RequirementCollection
             );
         }
 
-        $accelerator = (function_exists('apc_store') && ini_get('apc.enabled')) ||
-                       (function_exists('eaccelerator_put') && ini_get('eaccelerator.enable')) ||
-                       (function_exists('opcache_invalidate') && ini_get('opcache.enable')) ||
-                        function_exists('xcache_set');
+        $accelerator = (function_exists('apc_store') && ini_get('apc.enabled'))
+                        || (function_exists('eaccelerator_put') && ini_get('eaccelerator.enable'))
+                        || (function_exists('opcache_invalidate') && ini_get('opcache.enable'))
+                        || function_exists('xcache_set');
 
         $this->addRecommendation(
             $accelerator,
@@ -525,11 +513,8 @@ class PagekitRequirements extends RequirementCollection
         );
 
         $this->addPhpIniRecommendation('short_open_tag', false);
-
         $this->addPhpIniRecommendation('magic_quotes_gpc', false, true);
-
         $this->addPhpIniRecommendation('register_globals', false, true);
-
         $this->addPhpIniRecommendation('session.auto_start', false);
     }
 }
