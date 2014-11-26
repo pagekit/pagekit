@@ -53,7 +53,7 @@ class BuildCommand extends Command
     protected function configure()
     {
         $this->addOption('development', 'd', InputOption::VALUE_NONE, 'Development Build');
-        $this->filter = '/' . implode('|', $this->excludes) . '/i';
+        $this->filter = '/'.implode('|', $this->excludes).'/i';
     }
 
     /**
@@ -63,7 +63,7 @@ class BuildCommand extends Command
     {
         $vers = $this->getApplication()->getVersion();
         $path = $this->pagekit['path'];
-        $dev  = preg_replace_callback('/(\d)$/', function($matches) { return $matches[1] + 1; }, $vers).'-dev'.time(true);
+        $dev  = preg_replace_callback('/(\d+)$/', function ($matches) { return $matches[1] + 1; }, $vers).'-dev';
 
         // compile translation files
         try {
@@ -101,8 +101,8 @@ class BuildCommand extends Command
         $zip->addEmptyDir('app/sessions');
         $zip->addEmptyDir('app/temp');
         $zip->addEmptyDir('storage');
-        $zip->addFile($path . '/.htaccess', '.htaccess');
-        $zip->addFile($path . '/app/database/.htaccess', 'app/database/.htaccess');
+        $zip->addFile($path.'/.htaccess', '.htaccess');
+        $zip->addFile($path.'/app/database/.htaccess', 'app/database/.htaccess');
 
         if ($this->option('development')) {
             $zip->addFromString('app/config/app.php', str_replace("'version' => '{$vers}',", "'version' => '{$dev}',", file_get_contents("{$path}/app/config/app.php")));
