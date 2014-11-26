@@ -210,7 +210,10 @@ class ExtensionTranslateCommand extends Command
 
             }
 
-            file_put_contents($refFile = $path . '/' . $domain . '.pot', $data);
+            $refFile = $path.'/'.$domain.'.pot';
+            if (!file_exists($refFile) || !($compare = preg_replace('/^"POT-Creation-Date: (.*)$/im', '', [file_get_contents($refFile), $data]) and $compare[0] === $compare[1])) {
+                file_put_contents($refFile, $data);
+            }
 
             $files = Finder::create()->files()->in($path)->name("$domain.po");
 
@@ -220,10 +223,7 @@ class ExtensionTranslateCommand extends Command
                 $progress->start();
 
                 foreach ($files as $file) {
-
-                    // merge existing .po file
-                    exec('msgmerge --update --no-fuzzy-matching --backup=off ' . $file->getPathname() . ' ' . $refFile. ' 2> /dev/null');
-
+                    exec('msgmerge --update --no-fuzzy-matching --backup=off '.$file->getPathname().' '.$refFile.' 2> /dev/null');
                     $progress->advance();
                 }
 
