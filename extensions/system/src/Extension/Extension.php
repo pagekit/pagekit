@@ -6,7 +6,6 @@ use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Routing\Controller\ControllerCollection;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\ApplicationTrait;
-use Symfony\Component\Translation\Translator;
 
 class Extension implements \ArrayAccess
 {
@@ -175,19 +174,22 @@ class Extension implements \ArrayAccess
      * Override this method if your extension does not follow the conventions:
      *
      *  - Languages are in the 'languages' sub-directory
-     *  - The naming convention '/locale/domain.format', example: /en_GB/hello.mo
+     *  - The naming convention '/locale/domain.format', example: /en_GB/hello.php
      */
     public function registerLanguages()
     {
         $locale = $this['translator']->getLocale();
-        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{po,php}', GLOB_BRACE) ?: [] as $file) {
+        $domains = [];
+        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{php,po}', GLOB_BRACE) ?: [] as $file) {
 
-            list($domain, $format) = explode('.', basename($file));
+            $format = substr(strrchr($file, '.'), 1);
+            $domain = basename($file, '.'.$format);
 
-            if ($format == 'php') {
-                $format = 'array';
-                $file = require $file;
+            if (in_array($domain, $domains)) {
+                continue;
             }
+
+            $domains[] = $domain;
 
             $this['translator']->addResource($format, $file, $locale, $domain);
             $this['translator']->addResource($format, $file, substr($locale, 0, 2), $domain);
