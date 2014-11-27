@@ -36,11 +36,18 @@ jQuery(function($) {
     });
 
     // show system messages
-    $.UIkit.notify.message.defaults.timeout = 2000;
 
     $('.pk-system-messages').children().each(function() {
-        var message = $(this);
-        $.UIkit.notify(message.html(), message.data());
+
+        var message = $(this),
+            data    = message.data();
+
+        // remove success message faster
+        if (data.status && data.status == 'success') {
+            data.timeout = 2000;
+        }
+
+        $.UIkit.notify(message.html(), data);
         message.remove();
     });
 
