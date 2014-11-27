@@ -162,13 +162,13 @@ class FinderController extends Controller
             $files = $this['request']->files->get('files');
 
             if (!$files) {
-                throw new Exception(__('No files uploaded.'));
+                return $this->error(__('No files uploaded.'));
             }
 
             foreach ($files as $file) {
 
                 if (!$file->isValid()) {
-                    throw new Exception(__('Uploaded file invalid.'));
+                    return $this->error(__(sprintf('Uploaded file invalid. (%s)', $file->getErrorMessage())));
                 }
 
                 $file->move($path, $file->getClientOriginalName());
