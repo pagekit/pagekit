@@ -16,7 +16,7 @@ return [
 
     'session' => [
 
-        'storage' => 'native'
+        'storage' => 'array'
 
     ],
 
