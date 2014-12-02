@@ -180,7 +180,7 @@ class Extension implements \ArrayAccess
     {
         $locale = $this['translator']->getLocale();
         $domains = [];
-        foreach (glob($this->getPath().'/languages/'.$locale.'/*.{php,po}', GLOB_BRACE) ?: [] as $file) {
+        foreach (glob($this->getPath().'/languages/'.$locale.'/*') ?: [] as $file) {
 
             $format = substr(strrchr($file, '.'), 1);
             $domain = basename($file, '.'.$format);

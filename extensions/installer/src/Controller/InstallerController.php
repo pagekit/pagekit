@@ -37,7 +37,7 @@ class InstallerController extends Controller
      */
     public function indexAction()
     {
-        $redirect = $this['router']->getContext()->getBaseUrl() . '/admin';
+        $redirect = $this['router']->getContext()->getBaseUrl().'/admin';
         return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config, 'redirect' => $redirect];
     }
 
@@ -63,7 +63,7 @@ class InstallerController extends Controller
                 $this['db']->connect();
 
                 if ($this['db']->getUtility()->tableExists('@system_option')) {
-                    $status = 'tables-exist';
+                    $status  = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
                     $status = 'no-tables';
@@ -119,11 +119,11 @@ class InstallerController extends Controller
                 $this['option']->set('system:extensions', ['blog', 'page'], true);
 
                 $this['db']->insert('@system_user', [
-                    'name' => $user['username'],
-                    'username' => $user['username'],
-                    'password' => $this['auth.password']->hash($user['password']),
-                    'status' => 1,
-                    'email' => $user['email'],
+                    'name'       => $user['username'],
+                    'username'   => $user['username'],
+                    'password'   => $this['auth.password']->hash($user['password']),
+                    'status'     => 1,
+                    'email'      => $user['email'],
                     'registered' => new \DateTime
                 ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
 
