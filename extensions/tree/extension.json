@@ -1,0 +1,15 @@
+{
+    "name": "tree",
+    "version": "0.8.0",
+    "type": "extension",
+    "title": "Tree",
+    "description": "Pagekit Tree Extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pagekit",
+            "email": "info@pagekit.com",
+            "homepage": "http://pagekit.com"
+        }
+    ]
+}

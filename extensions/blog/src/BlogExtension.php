@@ -9,6 +9,7 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
+use Pagekit\Tree\Event\MountEvent;
 
 class BlogExtension extends Extension
 {
@@ -33,6 +34,10 @@ class BlogExtension extends Extension
 
         $app->on('system.locale', function(LocaleEvent $event) {
             $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
+        });
+
+        $app->on('tree.mount', function(MountEvent $event) {
+            $event->register('blog', 'Blog');
         });
     }
 

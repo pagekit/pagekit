@@ -44,7 +44,7 @@ return [
                 'posts.markdown_enabled'          => true,
                 'posts.show_title'                => true,
                 'permalink'                       => '',
-                'permalink.custom'                => 'blog/{slug}',
+                'permalink.custom'                => '{slug}',
                 'feed.type'                       => 'rss2',
                 'feed.limit'                      => 20
             ]
