@@ -50,6 +50,7 @@ class SystemListener extends EventSubscriber
         $scripts->register('uikit-notify', 'vendor://assets/uikit/js/components/notify.min.js', [], ['requirejs' => true]);
         $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/components/sticky.min.js', [], ['requirejs' => true]);
         $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/components/sortable.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-nestable', 'vendor://assets/uikit/js/components/nestable.min.js', [], ['requirejs' => true]);
 
         $helper = new DateHelper($this['dates']);
         $this['tmpl.php']->addHelpers([$helper]);

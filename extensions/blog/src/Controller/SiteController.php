@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Route("/blog")
+ * @Route("/blog", mount="blog")
  */
 class SiteController extends Controller
 {
@@ -160,16 +160,17 @@ class SiteController extends Controller
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
-
-            return $this->redirect($this['url']->previous());
+            $message = $e->getMessage();
 
         } catch (\Exception $e) {
 
-            $this['message']->error(__('Whoops, something went wrong!'));
+            $message = __('Whoops, something went wrong!');
 
-            return $this->redirect($this['url']->previous());
         }
+
+        $this['message']->error($message);
+
+        return $this->redirect($this['url']->previous());
     }
 
     /**
