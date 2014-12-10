@@ -5,6 +5,7 @@ namespace Pagekit\System\Controller;
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
 
