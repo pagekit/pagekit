@@ -33,7 +33,7 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/admin/login", methods="POST", defaults={"_maintenance"=true})
+     * @Route("/admin/login", defaults={"_maintenance"=true})
      * @Response("extension://system/theme/templates/login.razr", layout=false)
      */
     public function loginAction()
