@@ -1,4 +1,4 @@
-/*! UIkit 2.11.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.14.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function($, UI) {
 
     "use strict";
@@ -8,7 +8,23 @@
     UI.component('stackMargin', {
 
         defaults: {
-            'cls': 'uk-margin-small-top'
+            'cls': '@-margin-small-top'
+        },
+
+        boot: function() {
+
+            // init code
+            UI.ready(function(context) {
+
+                UI.$("[data-@-margin]", context).each(function() {
+
+                    var ele = UI.$(this), obj;
+
+                    if (!ele.data("stackMargin")) {
+                        obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-@-margin")));
+                    }
+                });
+            });
         },
 
         init: function() {
@@ -30,15 +46,15 @@
                     UI.$win.on("load", fn);
                 });
 
-                return UI.Utils.debounce(fn, 50);
+                return UI.Utils.debounce(fn, 20);
             })());
 
-            UI.$html.on("uk.dom.changed", function(e) {
+            UI.$html.on("changed.uk.dom", function(e) {
                 $this.columns  = $this.element.children();
                 $this.process();
             });
 
-            this.on("uk.check.display", function(e) {
+            this.on("display.uk.check", function(e) {
                 $this.columns = $this.element.children();
                 if(this.element.is(":visible")) this.process();
             }.bind(this));
@@ -54,22 +70,22 @@
 
             var skip         = false,
                 firstvisible = this.columns.filter(":visible:first"),
-                offset       = firstvisible.length ? firstvisible.offset().top : false;
+                offset       = firstvisible.length ? (firstvisible.position().top + firstvisible.outerHeight()) - 1 : false; // (-1): weird firefox bug when parent container is display:flex
 
             if (offset === false) return;
 
             this.columns.each(function() {
 
-                var column = $(this);
+                var column = UI.$(this);
 
                 if (column.is(":visible")) {
 
                     if (skip) {
                         column.addClass($this.options.cls);
                     } else {
-                        if (column.offset().top != offset) {
-                            column.addClass($this.options.cls);
-                            skip = true;
+
+                        if (column.position().top >= offset) {
+                            skip = column.addClass($this.options.cls);
                         }
                     }
                 }
@@ -84,16 +100,4 @@
         }
     });
 
-    // init code
-    UI.ready(function(context) {
-
-        $("[data-uk-margin]", context).each(function() {
-            var ele = $(this), obj;
-
-            if (!ele.data("stackMargin")) {
-                obj = UI.stackMargin(ele, UI.Utils.options(ele.attr("data-uk-margin")));
-            }
-        });
-    });
-
-})(jQuery, jQuery.UIkit);
+})(jQuery, UIkit);

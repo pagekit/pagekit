@@ -27,25 +27,25 @@ jQuery(function($) {
 
     // fix toolbar jumping when a modal is shown
     $doc.on({
-        'uk.modal.show': function() {
+        'show.uk.modal': function() {
             $('.tm-toolbar').css('padding-right', Math.abs(parseInt($('.uk-modal-page').css('margin-left'), 10)) );
         },
-        'uk.modal.hide': function() {
+        'hide.uk.modal': function() {
             $('.tm-toolbar').css('padding-right', '');
         }
     });
 
     // show system messages
-    $.UIkit.notify.message.defaults.timeout = 2000;
+    UIkit.notify.message.defaults.timeout = 2000;
 
     $('.pk-system-messages').children().each(function() {
         var message = $(this);
-        $.UIkit.notify(message.html(), message.data());
+        UIkit.notify(message.html(), message.data());
         message.remove();
     });
 
     // save current menu order
-    $('.js-admin-menu').on('uk.sortable.stop', function() {
+    $('.js-admin-menu').on('stop.uk.sortable', function() {
 
         var data = {};
 

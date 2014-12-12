@@ -1,23 +1,41 @@
-/*! UIkit 2.11.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.14.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function(addon) {
 
     var component;
 
-    if (jQuery && jQuery.UIkit) {
-        component = addon(jQuery, jQuery.UIkit);
+    if (jQuery && UIkit) {
+        component = addon(jQuery, UIkit);
     }
 
     if (typeof define == "function" && define.amd) {
         define("uikit-form-select", ["uikit"], function(){
-            return component || addon(jQuery, jQuery.UIkit);
+            return component || addon(jQuery, UIkit);
         });
     }
 
 })(function($, UI){
 
+    "use strict";
+
     UI.component('formSelect', {
+
         defaults: {
             'target': '>span:first'
+        },
+
+        boot: function() {
+            // init code
+            UI.ready(function(context) {
+
+                UI.$("[data-@-form-select]", context).each(function(){
+
+                    var ele = UI.$(this);
+
+                    if (!ele.data("formSelect")) {
+                        var obj = UI.formSelect(ele, UI.Utils.options(ele.attr("data-@-form-select")));
+                    }
+                });
+            });
         },
 
         init: function() {
@@ -43,18 +61,6 @@
 
             this.element.data("formSelect", this);
         }
-    });
-
-    // init code
-    UI.ready(function(context) {
-
-        $("[data-uk-form-select]", context).each(function(){
-            var ele = $(this);
-
-            if (!ele.data("formSelect")) {
-                var obj = UI.formSelect(ele, UI.Utils.options(ele.attr("data-uk-form-select")));
-            }
-        });
     });
 
     return UI.formSelect;

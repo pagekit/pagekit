@@ -1,22 +1,23 @@
-/*! UIkit 2.11.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.14.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function(addon) {
 
     var component;
 
-    if (jQuery && jQuery.UIkit) {
-        component = addon(jQuery, jQuery.UIkit);
+    if (jQuery && UIkit) {
+        component = addon(jQuery, UIkit);
     }
 
     if (typeof define == "function" && define.amd) {
         define("uikit-upload", ["uikit"], function(){
-            return component || addon(jQuery, jQuery.UIkit);
+            return component || addon(jQuery, UIkit);
         });
     }
 
 })(function($, UI){
 
-    UI.component('uploadSelect', {
+    "use strict";
 
+    UI.component('uploadSelect', {
 
         init: function() {
 
@@ -34,7 +35,7 @@
     UI.component('uploadDrop', {
 
         defaults: {
-            'dragoverClass': 'uk-dragover'
+            'dragoverClass': '@-dragover'
         },
 
         init: function() {
@@ -49,7 +50,7 @@
                     e.preventDefault();
 
                     $this.element.removeClass($this.options.dragoverClass);
-                    $this.element.trigger('uk.dropped', [e.dataTransfer.files]);
+                    $this.element.trigger('dropped.uk.upload', [e.dataTransfer.files]);
 
                     xhrupload(e.dataTransfer.files, $this.options);
                 }

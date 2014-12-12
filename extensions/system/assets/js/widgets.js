@@ -9,7 +9,7 @@ require(['jquery', 'system', 'uikit!nestable,form-select', 'rowselect', 'domRead
         })
 
         // save widgets order on nestable change
-        .on('uk.nestable.change', 'ul.uk-nestable', function(e, item, action) {
+        .on('change.uk.nestable', 'ul.uk-nestable', function(e, item, action) {
 
             var list = $(this);
 
@@ -45,8 +45,8 @@ require(['jquery', 'system', 'uikit!nestable,form-select', 'rowselect', 'domRead
 
             target.parent().removeClass('uk-hidden');
 
-            current.trigger('uk.nestable.change');
-            target.trigger('uk.nestable.change', [null, 'moved']);
+            current.trigger('change.uk.nestable');
+            target.trigger('change.uk.nestable', [null, 'moved']);
 
             applyFilters();
         })

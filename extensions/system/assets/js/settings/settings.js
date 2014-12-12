@@ -1,7 +1,7 @@
 require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!oauth.data,settings.oauth', 'domReady!'], function($, req, system, uikit, tmpl) {
 
     // switcher
-    var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {
+    var tabs = $('[data-tabs]').on('show.uk.switcher', function(e, active) {
         $('input[name=tab]').val(active.prevAll().length);
     });
 

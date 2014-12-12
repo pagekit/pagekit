@@ -1,4 +1,4 @@
-/*! UIkit 2.11.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.14.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 /*
   * Based on nativesortable - Copyright (c) Brian Grinstead - https://github.com/bgrins/nativesortable
   */
@@ -6,13 +6,13 @@
 
     var component;
 
-    if (jQuery && jQuery.UIkit) {
-        component = addon(jQuery, jQuery.UIkit);
+    if (jQuery && UIkit) {
+        component = addon(jQuery, UIkit);
     }
 
     if (typeof define == "function" && define.amd) {
         define("uikit-sortable", ["uikit"], function(){
-            return component || addon(jQuery, jQuery.UIkit);
+            return component || addon(jQuery, UIkit);
         });
     }
 
@@ -52,6 +52,68 @@
             change           : function() {}
         },
 
+        boot: function() {
+
+            // auto init
+            UI.ready(function(context) {
+
+                UI.$("[data-uk-sortable]", context).each(function(){
+
+                    var ele = UI.$(this);
+
+                    if(!ele.data("sortable")) {
+                        var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-@-sortable")));
+                    }
+                });
+            });
+
+            UI.$html.on('mousemove touchmove', function(e) {
+
+                if (delayIdle) {
+
+                    var src = e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
+
+                    if (Math.abs(src.pageX - delayIdle.pos.x) > delayIdle.threshold || Math.abs(src.pageY - delayIdle.pos.y) > delayIdle.threshold) {
+                        delayIdle.apply();
+                    }
+                }
+
+                if (draggingPlaceholder) {
+
+                    if (!moving) {
+                        moving = true;
+                        draggingPlaceholder.show();
+
+                        draggingPlaceholder.$current.addClass(draggingPlaceholder.$sortable.options.placeholderClass);
+                        draggingPlaceholder.$sortable.element.children().addClass(draggingPlaceholder.$sortable.options.childClass);
+
+                        UI.$html.addClass(draggingPlaceholder.$sortable.options.dragMovingClass);
+                    }
+
+                    var offset = draggingPlaceholder.data('mouse-offset'),
+                    left   = parseInt(e.originalEvent.pageX, 10) + offset.left,
+                    top    = parseInt(e.originalEvent.pageY, 10) + offset.top;
+
+                    draggingPlaceholder.css({'left': left, 'top': top });
+
+                    if (top < UI.$win.scrollTop()) {
+                        UI.$win.scrollTop(UI.$win.scrollTop() - Math.ceil(draggingPlaceholder.height()/2));
+                    } else if ( (top + draggingPlaceholder.height()) > (window.innerHeight + UI.$win.scrollTop()) ) {
+                        UI.$win.scrollTop(UI.$win.scrollTop() + Math.ceil(draggingPlaceholder.height()/2));
+                    }
+                }
+            });
+
+            UI.$html.on('mouseup touchend', function() {
+
+                if(!moving && clickedlink) {
+                    location.href = clickedlink.attr('href');
+                }
+
+                delayIdle = clickedlink = false;
+            });
+        },
+
         init: function() {
 
             var $this                    = this,
@@ -59,6 +121,13 @@
                 currentlyDraggingElement = null,
                 currentlyDraggingTarget  = null,
                 children;
+
+            Object.keys(this.options).forEach(function(key){
+
+                if (String($this.options[key]).indexOf('Class')!=-1) {
+                    $this.options[key] = UI.prefix($this.options[key]);
+                }
+            });
 
             if (supportsDragAndDrop) {
                 this.element.children().attr("draggable", "true");
@@ -71,7 +140,9 @@
                     // don't break browser shortcuts for click+open in new tab
                     if(!e.ctrlKey && !e.metaKey && !e.shiftKey) {
                         clickedlink = $(this);
+                        e.preventDefault();
                     }
+
                 }).on('click', 'a[href]', function(e) {
                     if(!e.ctrlKey && !e.metaKey && !e.shiftKey) {
                         clickedlink = $(this);
@@ -100,6 +171,11 @@
                         //e.preventDefault();
                         return;
                     }
+                }
+
+                // prevent dragging if taget is a form field
+                if (target.is(':input')) {
+                    return;
                 }
 
                 if (e.dataTransfer) {
@@ -139,7 +215,7 @@
                         addFakeDragHandlers();
 
                         $this.options.start(this, currentlyDraggingElement);
-                        $this.trigger('uk.sortable.start', [$this, currentlyDraggingElement]);
+                        $this.trigger('start.uk.sortable', [$this, currentlyDraggingElement]);
 
                         delayIdle = false;
                     }
@@ -163,7 +239,7 @@
                 return false;
             });
 
-            var handleDragEnter = delegate($.UIkit.Utils.debounce(function(e) {
+            var handleDragEnter = delegate(UI.Utils.debounce(function(e) {
 
                 if (!currentlyDraggingElement || currentlyDraggingElement === this) {
                     return true;
@@ -227,7 +303,7 @@
                 }
 
                 $this.options.change(this, currentlyDraggingElement);
-                $this.trigger('uk.sortable.change', [$this, currentlyDraggingElement]);
+                $this.trigger('change.uk.sortable', [$this, currentlyDraggingElement]);
             });
 
             var handleDragEnd = function(e) {
@@ -247,7 +323,7 @@
                 removeFakeDragHandlers();
 
                 $this.options.stop(this);
-                $this.trigger('uk.sortable.stop', [$this]);
+                $this.trigger('stop.uk.sortable', [$this]);
 
                 draggingPlaceholder.remove();
                 draggingPlaceholder = null;
@@ -467,65 +543,6 @@
         }
         e.returnValue = false;
     }
-
-    // auto init
-    UI.ready(function(context) {
-
-        $("[data-uk-sortable]", context).each(function(){
-
-          var ele = $(this);
-
-          if(!ele.data("sortable")) {
-              var plugin = UI.sortable(ele, UI.Utils.options(ele.attr("data-uk-sortable")));
-          }
-        });
-    });
-
-    $('html').on('mousemove touchmove', function(e) {
-
-        if (delayIdle) {
-
-            var src = e.originalEvent.targetTouches ? e.originalEvent.targetTouches[0] : e;
-
-            if (Math.abs(src.pageX - delayIdle.pos.x) > delayIdle.threshold || Math.abs(src.pageY - delayIdle.pos.y) > delayIdle.threshold) {
-                delayIdle.apply();
-            }
-        }
-
-        if (draggingPlaceholder) {
-
-            if (!moving) {
-                moving = true;
-                draggingPlaceholder.show();
-
-                draggingPlaceholder.$current.addClass(draggingPlaceholder.$sortable.options.placeholderClass);
-                draggingPlaceholder.$sortable.element.children().addClass(draggingPlaceholder.$sortable.options.childClass);
-
-                $('html').addClass(draggingPlaceholder.$sortable.options.dragMovingClass);
-            }
-
-            var offset = draggingPlaceholder.data('mouse-offset'),
-                left   = parseInt(e.originalEvent.pageX, 10) + offset.left,
-                top    = parseInt(e.originalEvent.pageY, 10) + offset.top;
-
-            draggingPlaceholder.css({'left': left, 'top': top });
-
-            if (top < UI.$win.scrollTop()) {
-                UI.$win.scrollTop(UI.$win.scrollTop() - Math.ceil(draggingPlaceholder.height()/2));
-            } else if ( (top + draggingPlaceholder.height()) > (window.innerHeight + UI.$win.scrollTop()) ) {
-                UI.$win.scrollTop(UI.$win.scrollTop() + Math.ceil(draggingPlaceholder.height()/2));
-            }
-        }
-    });
-
-    UI.$html.on('mouseup touchend', function() {
-
-        if(!moving && clickedlink) {
-            location.href = clickedlink.attr('href');
-        }
-
-        delayIdle = clickedlink = false;
-    });
 
     return UI.sortable;
 });

@@ -65,7 +65,7 @@ require(['jquery', 'system', 'uikit!nestable', 'domReady!'], function($, system,
         }
     });
 
-    var prioUpdateUrl = form.find('.pk-nestable').on('uk.nestable.change',function() {
+    var prioUpdateUrl = form.find('.pk-nestable').on('change.uk.nestable',function() {
 
         var data = {};
 

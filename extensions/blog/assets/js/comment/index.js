@@ -85,7 +85,7 @@ require(['jquery', 'uikit!pagination', 'rowselect', 'tmpl!comment.reply', 'domRe
     }
 
     // pagination
-    pagination.on('uk.pagination.select', function(e, index) {
+    pagination.on('select.uk.pagination', function(e, index) {
         page.val(index);
 
         $.post(form.attr('action'), form.serialize(), function(data) {

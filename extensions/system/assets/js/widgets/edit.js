@@ -5,7 +5,7 @@ require(['jquery', 'uikit!form-select', 'domReady!'], function($, uikit) {
     // settings nav + remember active tab
     var tabs = sidenav.children(), active;
 
-    sidenav.on('uk.switcher.show', function(e, tab){
+    sidenav.on('show.uk.switcher', function(e, tab){
         active = tabs.index(tab);
     });
 
