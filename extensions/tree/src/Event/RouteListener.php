@@ -11,20 +11,33 @@ class RouteListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $pages = $this['db.em']->getRepository('Pagekit\Tree\Entity\Page')->query()->where(['status = ?'], [1])->get();
+        foreach ($this['option']->get('tree.pages') ?: $this->cache() as $page) {
 
-        foreach ($pages as $page) {
+            if ($page['url']) {
 
-            if ($page->getUrl()) {
+                $this['aliases']->add($page['path'], $page['url']);
 
-                $this['aliases']->add($page->getPath(), $page->getUrl());
+            } elseif ($page['mount'] and isset($this['mounts'][$page['mount']])) {
 
-            } elseif ($mount = $page->getMount() and isset($this['mounts'][$mount])) {
-
-                $this['controllers']->mount($page->getPath(), $this['mounts'][$mount]['controller'], "@{$mount}/");
+                $this['controllers']->mount($page['path'], $this['mounts'][$page['mount']]['controller'], "@{$page['mount']}/");
 
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function cache()
+    {
+        $pages = [];
+        foreach ($this['db.em']->getRepository('Pagekit\Tree\Entity\Page')->query()->where(['status = ?'], [1])->get() as $page) {
+            $pages[] = ['path' => $page->getPath(), 'url' => $page->getUrl(), 'mount' => $page->getMount()];
+        }
+
+        $this['option']->set('tree.pages', $pages, true);
+
+        return $pages;
     }
 
     /**
@@ -33,7 +46,9 @@ class RouteListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'system.init' => ['onSystemInit', 10]
+            'system.init' => ['onSystemInit', 10],
+            'tree.page.postSave'   => 'cache',
+            'tree.page.postDelete' => 'cache'
         ];
     }
 }
