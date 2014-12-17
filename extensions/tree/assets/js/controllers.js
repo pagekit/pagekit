@@ -33,6 +33,10 @@ angular.module('tree')
             return $filter('orderBy')($filter('filter')($filter('toArray')($scope.nodes), { parentId: id }, true), 'priority');
         };
 
+        vm.getNodeUrl = function(node) {
+            return node.path.substring(1);
+        };
+
         UIkit.$doc.on('uk.nestable.change', function () {
 
             $timeout(function () {
