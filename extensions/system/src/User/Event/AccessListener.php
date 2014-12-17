@@ -7,6 +7,7 @@ use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Pagekit\Component\Auth\Event\AuthorizeEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Component\Routing\Event\ConfigureRouteEvent;
+use Pagekit\Component\Routing\Event\RouteCollectionEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\User\Annotation\Access;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -40,40 +41,29 @@ class AccessListener extends EventSubscriber
             $this->reader->addNamespace('Pagekit\User\Annotation');
         }
 
-        $admin  = false;
         $access = [];
+        $route  = $event->getRoute();
 
-        foreach ($this->reader->getClassAnnotations($event->getClass()) as $annot) {
+        foreach (array_merge($this->reader->getClassAnnotations($event->getClass()), $this->reader->getMethodAnnotations($event->getMethod())) as $annot) {
             if ($annot instanceof Access) {
 
                 if ($expression = $annot->getExpression()) {
                     $access[] = $expression;
                 }
 
-                if ($annot->getAdmin()) {
-                    $admin = true;
+                if (null !== $annot->getAdmin()) {
+                    $route->setDefault('_admin', $admin = $annot->getAdmin());
+
+                    $permission = 'system: access admin area';
+                    if ($admin) {
+                        $access[] = $permission;
+                    } else {
+                        if ($key = array_search($permission, $access)) {
+                            unset($access[$key]);
+                        }
+                    }
                 }
             }
-        }
-
-        foreach ($this->reader->getMethodAnnotations($event->getMethod()) as $annot) {
-            if ($annot instanceof Access) {
-
-                if ($expression = $annot->getExpression()) {
-                    $access[] = $expression;
-                }
-
-                if ($annot->getAdmin()) {
-                    $admin = true;
-                }
-            }
-        }
-
-        $route = $event->getRoute();
-
-        if ($admin) {
-            $route->setPath(rtrim('admin'.$route->getPath(), '/'));
-            $access[] = 'system: access admin area';
         }
 
         if ($access) {
@@ -89,7 +79,7 @@ class AccessListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
@@ -125,11 +115,25 @@ class AccessListener extends EventSubscriber
             $params = [];
 
             // redirect to default URL for POST requests and don't explicitly redirect the default URL
-            if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/system/admin') {
+            if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/admin') {
                 $params['redirect'] = $this['url']->current(true);
             }
 
-            $event->setResponse($this['response']->redirect('@system/system/login', $params));
+            $event->setResponse($this['response']->redirect('@system/admin/login', $params));
+        }
+    }
+
+    /**
+     * Prepends "/admin" path.
+     *
+     * @param RouteCollectionEvent $event
+     */
+    public function getRoutes(RouteCollectionEvent $event)
+    {
+        foreach ($event->getRoutes() as $route) {
+            if ($route->getDefault('_admin')) {
+                $route->setPath('admin'.rtrim($route->getPath(), '/'));
+            }
         }
     }
 
@@ -139,9 +143,10 @@ class AccessListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'route.configure' => 'onConfigureRoute',
-            'auth.authorize'  => 'onAuthorize',
-            'system.loaded'   => [
+            'route.configure'  => 'onConfigureRoute',
+            'route.collection' => ['getRoutes', -32],
+            'auth.authorize'   => 'onAuthorize',
+            'system.loaded'    => [
                 ['onSystemLoaded', -512],
                 ['onLoadAdmin', -256]
             ]

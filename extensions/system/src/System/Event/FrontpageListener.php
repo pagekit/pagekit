@@ -12,9 +12,9 @@ class FrontpageListener extends EventSubscriber
     public function onSystemInit()
     {
         if ($frontpage = $this['config']->get('app.frontpage')) {
-            $this['router']->addAlias('/', $frontpage);
+            $this['aliases']->add('/', $frontpage);
         } else {
-            $this['controllers']->get('/', '_frontpage', function() use ($frontpage) {
+            $this['callbacks']->get('/', '_frontpage', function() use ($frontpage) {
                 return __('No Frontpage assigned.');
             });
         }

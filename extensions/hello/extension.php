@@ -10,7 +10,13 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
+
+        '/hello' => [
+            'Pagekit\\Hello\\Controller\\HelloController',
+            'Pagekit\\Hello\\Controller\\SiteController'
+        ]
+    ],
 
     'parameters' => [
 

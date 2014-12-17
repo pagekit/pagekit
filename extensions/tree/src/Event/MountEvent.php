@@ -12,9 +12,9 @@ class MountEvent extends Event implements \IteratorAggregate
      * @param  string $id
      * @param  string $label
      */
-    public function register($id, $label)
+    public function register($id, $label, $controller)
     {
-        $this->parameters[$id] = $label;
+        $this->parameters[$id] = compact('label', 'controller');
     }
 
     /**

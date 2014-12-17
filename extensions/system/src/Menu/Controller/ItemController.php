@@ -10,7 +10,7 @@ use Pagekit\Menu\Entity\ItemRepository;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 /**
- * @Route("/system/menu/item")
+ * @Route("/menu/item")
  * @Access("system: manage menus", admin=true)
  */
 class ItemController extends Controller

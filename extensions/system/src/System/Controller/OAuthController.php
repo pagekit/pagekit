@@ -5,12 +5,8 @@ namespace Pagekit\System\Controller;
 use OAuth\Common\Storage\Memory;
 use Pagekit\Framework\Controller\Controller;
 
-/**
- * @Route("/oauth")
- */
 class OAuthController extends Controller
 {
-
     public function connectAction()
     {
         $provider = $this['session']->get('oauth.provider');

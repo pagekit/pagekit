@@ -154,17 +154,12 @@ class Extension implements \ArrayAccess
      */
     public function registerControllers(ControllerCollection $collection)
     {
-        if (isset($this->config['controllers'])) {
-            $controllers = (array) $this->config['controllers'];
-            foreach ($controllers as $controller) {
-                foreach (glob($this->getPath().'/'.ltrim($controller, '/')) as $file) {
+        if (!isset($this->config['controllers'])) {
+            return;
+        }
 
-                    $path = strtolower(sprintf('%s/%s', $this->getName(), basename($file, 'Controller.php')));
-                    $name = '@'.$path;
-
-                    $collection->add($file, compact('path', 'name'));
-                }
-            }
+        foreach ((array) $this->config['controllers'] as $prefix => $controllers) {
+            $collection->mount($prefix, $controllers, "@{$this->getName()}/");
         }
     }
 

@@ -10,7 +10,14 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
+
+        '/page' => [
+            'Pagekit\\Page\\Controller\\PageController',
+            'Pagekit\\Page\\Controller\\SiteController'
+        ]
+
+    ],
 
     'menu' => [
 

@@ -10,7 +10,11 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
+
+        '/tree' => 'Pagekit\\Tree\\Controller\\PagesController'
+
+    ],
 
     'resources'   => [
 

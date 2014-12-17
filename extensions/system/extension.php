@@ -4,7 +4,39 @@ return [
 
     'main' => 'Pagekit\\SystemExtension',
 
-    'controllers' => 'src/*/Controller/*Controller.php',
+    'controllers' => [
+
+        '/' => [
+            'Pagekit\\System\\Controller\\AdminController',
+            'Pagekit\\System\\Controller\\OAuthController',
+            'Pagekit\\User\\Controller\\AuthController',
+            'Pagekit\\User\\Controller\\ProfileController'
+        ],
+
+        '/system' => [
+            'Pagekit\\Extension\\Controller\\ExtensionsController',
+            'Pagekit\\Menu\\Controller\\ItemController',
+            'Pagekit\\Menu\\Controller\\MenuController',
+            'Pagekit\\System\\Controller\\AliasController',
+            'Pagekit\\System\\Controller\\DashboardController',
+            'Pagekit\\System\\Controller\\FinderController',
+            'Pagekit\\System\\Controller\\LinkController',
+            'Pagekit\\System\\Controller\\MarketplaceController',
+            'Pagekit\\System\\Controller\\MigrationController',
+            'Pagekit\\System\\Controller\\PackageController',
+            'Pagekit\\System\\Controller\\SettingsController',
+            'Pagekit\\System\\Controller\\UpdateController',
+            'Pagekit\\System\\Controller\\SystemController',
+            'Pagekit\\Theme\\Controller\\ThemesController',
+            'Pagekit\\User\\Controller\\PermissionController',
+            'Pagekit\\User\\Controller\\RegistrationController',
+            'Pagekit\\User\\Controller\\ResetPasswordController',
+            'Pagekit\\User\\Controller\\RoleController',
+            'Pagekit\\User\\Controller\\UserController',
+            'Pagekit\\Widget\\Controller\\WidgetsController'
+        ]
+
+    ],
 
     'menu' => [
 

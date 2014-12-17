@@ -10,7 +10,7 @@ class RouteListener extends EventSubscriber
     /**
      * Register alias routes
      */
-    public function onRouteCollection()
+    public function onSystemInit()
     {
         $extension = $this['extensions']->get('blog');
 
@@ -26,7 +26,7 @@ class RouteListener extends EventSubscriber
             return;
         }
 
-        $this['router']->addAlias($page->getPath().'/'.ltrim($permalink, '/'), '@blog/id', 'Pagekit\Blog\UrlResolver');
+        $this['aliases']->add($page->getPath().'/'.ltrim($permalink, '/'), '@blog/id', 'Pagekit\Blog\UrlResolver');
     }
 
     /**
@@ -43,7 +43,7 @@ class RouteListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'route.collection'     => 'onRouteCollection',
+            'system.init' => ['onSystemInit', -15],
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'
         ];

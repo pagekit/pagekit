@@ -4,9 +4,8 @@ namespace Pagekit\Tree;
 
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
-use Pagekit\System\Event\TmplEvent;
 use Pagekit\Tree\Event\JsonRequestListener;
-use Pagekit\Tree\Event\MountListener;
+use Pagekit\Tree\Event\MountEvent;
 use Pagekit\Tree\Event\RouteListener;
 
 class TreeExtension extends Extension
@@ -19,8 +18,11 @@ class TreeExtension extends Extension
         parent::boot($app);
 
         $app['events']->addSubscriber(new JsonRequestListener);
-        $app['events']->addSubscriber(new MountListener);
         $app['events']->addSubscriber(new RouteListener);
+
+        $this['mounts'] = function ($app){
+            return $app['events']->dispatch('tree.mount', new MountEvent)->getMountPoints();
+        };
     }
 
     /**

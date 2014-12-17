@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Route("/blog", mount="blog")
+ * @Route("/")
  */
 class SiteController extends Controller
 {
@@ -54,8 +54,8 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/page/{page}", name="@blog/page", requirements={"page" = "\d+"})
-     * @Route("/", name="@blog/site")
+     * @Route("/", name="site")
+     * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
      * @Response("extension://blog/views/post/index.razr")
      */
     public function indexAction($page = 1)
@@ -174,7 +174,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="@blog/id")
+     * @Route("/{id}", name="id")
      * @Response("extension://blog/views/post/post.razr")
      */
     public function postAction($id = 0)

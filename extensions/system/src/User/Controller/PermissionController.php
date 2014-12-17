@@ -6,7 +6,7 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 
 /**
- * @Route("/system/user/permission")
+ * @Route("/user/permission")
  * @Access("system: manage user permissions", admin=true)
  */
 class PermissionController extends Controller

@@ -65,7 +65,7 @@
                                         <li class="uk-nav-header">@( $user.username )</li>
                                         <li><a href="@url()" target="_blank">@trans('Visit Site')</a></li>
                                         <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                                        <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                                        <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/admin', [], true)])">@trans('Logout')</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                     <li class="uk-nav-header">@( $user.username )</li>
                     <li><a href="@url()">@trans('Visit Site')</a></li>
                     <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/admin', [], true)])">@trans('Logout')</a></li>
                 </ul>
 
             </div>

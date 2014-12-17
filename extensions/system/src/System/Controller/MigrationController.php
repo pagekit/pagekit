@@ -29,6 +29,6 @@ class MigrationController extends Controller
             $this['message']->warning(__('Your Pagekit database is already up-to-date!'));
         }
 
-        return $this->redirect('@system/system/admin');
+        return $this->redirect('@system/admin');
     }
 }

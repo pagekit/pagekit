@@ -7,7 +7,7 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\User\Entity\Role;
 
 /**
- * @Route("/system/user/role")
+ * @Route("/user/role")
  * @Access("system: manage user permissions", admin=true)
  */
 class RoleController extends Controller

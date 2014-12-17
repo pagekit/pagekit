@@ -37,7 +37,7 @@ class BlogExtension extends Extension
         });
 
         $app->on('tree.mount', function(MountEvent $event) {
-            $event->register('blog', 'Blog');
+            $event->register('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController');
         });
     }
 

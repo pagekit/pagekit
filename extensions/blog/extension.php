@@ -19,7 +19,13 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
+
+        '/blog' => [
+            'Pagekit\\Blog\\Controller\\CommentController',
+            'Pagekit\\Blog\\Controller\\PostController'
+        ]
+    ],
 
     'parameters' => [
 

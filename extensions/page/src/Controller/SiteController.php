@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Route("/page")
+ * @Route("/")
  */
 class SiteController extends Controller
 {
@@ -27,7 +27,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="@page/id", requirements={"id"="\d+"})
+     * @Route("/{id}", name="id", requirements={"id"="\d+"})
      * @Response("extension://page/views/index.razr")
      */
     public function indexAction($id = 0)

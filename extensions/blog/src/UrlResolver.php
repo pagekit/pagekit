@@ -3,12 +3,12 @@
 namespace Pagekit\Blog;
 
 use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Component\Routing\UrlResolverInterface;
+use Pagekit\Component\Routing\ParamsResolverInterface;
 use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
-class UrlResolver implements UrlResolverInterface, \ArrayAccess
+class UrlResolver implements ParamsResolverInterface, \ArrayAccess
 {
     use ApplicationTrait;
 
