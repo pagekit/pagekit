@@ -5,17 +5,17 @@ namespace Pagekit\Tree\Controller;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\Tree\Entity\Page;
+use Pagekit\Tree\Entity\Node;
 
 /**
- * @Access("tree: manage pages", admin=true)
+ * @Access("tree: manage nodes", admin=true)
  */
-class PagesController extends Controller
+class NodeController extends Controller
 {
     /**
      * @var Repository
      */
-    protected $pages;
+    protected $nodes;
 
     /**
      * @var Repository
@@ -32,7 +32,7 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->pages = $this['db.em']->getRepository('Pagekit\Tree\Entity\Page');
+        $this->nodes = $this['db.em']->getRepository('Pagekit\Tree\Entity\Node');
         $this->roles = $this['users']->getRoleRepository();
 
         $this['view.scripts']->queue('angular', 'extension://tree/assets/angular/angular.min.js', 'jquery');
@@ -49,7 +49,7 @@ class PagesController extends Controller
         $this->config = [
             'config' => [
                 'url'    => $this['url']->base(),
-                'route'  => $this['url']->route('@tree/pages'),
+                'route'  => $this['url']->route('@tree/node'),
                 'mounts' => $this['mounts']
             ]
         ];
@@ -61,9 +61,9 @@ class PagesController extends Controller
      */
     public function indexAction()
     {
-        $this->config['config']['pages'] = $this->pages->findAll();
+        $this->config['config']['nodes'] = $this->nodes->findAll();
 
-        return ['head.title' => __('Pages')];
+        return ['head.title' => __('Nodes')];
     }
 
     /**
@@ -77,12 +77,12 @@ class PagesController extends Controller
         try {
 
             if ($id === 0) {
-                $page = new Page;
-            } elseif (!$page = $this->pages->find($id)) {
-                throw new Exception(__('Invalid page id.'));
+                $node = new Node;
+            } elseif (!$node = $this->nodes->find($id)) {
+                throw new Exception(__('Invalid node id.'));
             }
 
-            $this->config['config']['page'] = $page;
+            $this->config['config']['node'] = $node;
 
         } catch (Exception $e) {
 
@@ -91,27 +91,27 @@ class PagesController extends Controller
             return $this->redirect('@tree/tree');
         }
 
-        return ['head.title' => $page->getId() ? __('Edit Page') : __('Add Page')];
+        return ['head.title' => $node->getId() ? __('Edit Node') : __('Add Node')];
     }
 
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"page": "array", "id": "int"})
+     * @Request({"node": "array", "id": "int"})
      * @Response("json")
      */
     public function saveAction($data, $id = 0)
     {
         try {
 
-            if (!$page = $this->pages->find($id)) {
-                $page = new Page;
+            if (!$node = $this->nodes->find($id)) {
+                $node = new Node;
                 unset($data['id']);
             }
 
-            $this->pages->save($page, $data);
+            $this->nodes->save($node, $data);
 
-            return $page;
+            return $node;
 
         } catch (Exception $e) {
             return ['message' => $e->getMessage(), 'error' => true];
@@ -127,32 +127,32 @@ class PagesController extends Controller
     {
         try {
 
-            if ($page = $this->pages->find($id)) {
-                $this->pages->delete($page);
+            if ($node = $this->nodes->find($id)) {
+                $this->nodes->delete($node);
             }
 
         } catch (Exception $e) {
             return ['message' => $e->getMessage(), 'error' => true];
         }
 
-        return $this->pages->findAll();
+        return $this->nodes->findAll();
     }
 
     /**
      * @Route("/reorder", methods="POST")
-     * @Request({"pages": "json"})
+     * @Request({"nodes": "json"})
      * @Response("json")
      */
     public function reorderAction($datas = [])
     {
-        $pages = $this->pages->findAll();
+        $nodes = $this->nodes->findAll();
 
         foreach ($datas as $data) {
-            if (isset($pages[$data['id']])) {
-                $this->pages->save($pages[$data['id']], $data);
+            if (isset($nodes[$data['id']])) {
+                $this->nodes->save($nodes[$data['id']], $data);
             }
         }
 
-        return $pages;
+        return $nodes;
     }
 }

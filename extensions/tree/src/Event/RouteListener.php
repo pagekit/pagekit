@@ -7,19 +7,19 @@ use Pagekit\Framework\Event\EventSubscriber;
 class RouteListener extends EventSubscriber
 {
     /**
-     * Adds page aliases.
+     * Register node routes.
      */
     public function onSystemInit()
     {
-        foreach ($this['option']->get('tree.pages') ?: $this->cache() as $page) {
+        foreach ($this['option']->get('tree.nodes') ?: $this->cache() as $node) {
 
-            if ($page['url']) {
+            if ($node['url']) {
 
-                $this['aliases']->add($page['path'], $page['url']);
+                $this['aliases']->add($node['path'], $node['url']);
 
-            } elseif ($page['mount'] and isset($this['mounts'][$page['mount']])) {
+            } elseif ($node['mount'] and isset($this['mounts'][$node['mount']])) {
 
-                $this['controllers']->mount($page['path'], $this['mounts'][$page['mount']]['controller'], "@{$page['mount']}/");
+                $this['controllers']->mount($node['path'], $this['mounts'][$node['mount']]['controller'], "@{$node['mount']}/");
 
             }
         }
@@ -30,14 +30,14 @@ class RouteListener extends EventSubscriber
      */
     public function cache()
     {
-        $pages = [];
-        foreach ($this['db.em']->getRepository('Pagekit\Tree\Entity\Page')->query()->where(['status = ?'], [1])->get() as $page) {
-            $pages[] = ['path' => $page->getPath(), 'url' => $page->getUrl(), 'mount' => $page->getMount()];
+        $nodes = [];
+        foreach ($this['db.em']->getRepository('Pagekit\Tree\Entity\Node')->query()->where(['status = ?'], [1])->get() as $node) {
+            $nodes[] = ['path' => $node->getPath(), 'url' => $node->getUrl(), 'mount' => $node->getMount()];
         }
 
-        $this['option']->set('tree.pages', $pages, true);
+        $this['option']->set('tree.nodes', $nodes, true);
 
-        return $pages;
+        return $nodes;
     }
 
     /**
@@ -46,9 +46,9 @@ class RouteListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'system.init' => ['onSystemInit', 10],
-            'tree.page.postSave'   => 'cache',
-            'tree.page.postDelete' => 'cache'
+            'system.init'          => ['onSystemInit', 10],
+            'tree.node.postSave'   => 'cache',
+            'tree.node.postDelete' => 'cache'
         ];
     }
 }

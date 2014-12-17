@@ -12,7 +12,7 @@ return [
 
     'controllers' => [
 
-        '/tree' => 'Pagekit\\Tree\\Controller\\PagesController'
+        '/tree' => 'Pagekit\\Tree\\Controller\\NodeController'
 
     ],
 
@@ -30,8 +30,8 @@ return [
         'system: tree' => [
             'label'    => 'Tree',
             'icon'     => 'extension://page/extension.svg',
-            'url'      => '@tree/pages',
-            'active'   => '@tree/pages*',
+            'url'      => '@tree/node',
+            'active'   => '@tree/node*',
             'priority' => 0
         ]
 
@@ -39,8 +39,8 @@ return [
 
     'permissions' => [
 
-        'tree: manage pages' => [
-            'title' => 'Manage pages'
+        'tree: manage nodes' => [
+            'title' => 'Manage nodes'
         ]
     ]
 

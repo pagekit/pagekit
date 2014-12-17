@@ -4,7 +4,7 @@ angular.module('tree', ['Application', 'ngResource'])
 
     .value('UIkit', jQuery.UIkit)
 
-    .factory('Pages', ['$resource', 'Application', function($resource, App) {
+    .factory('Nodes', ['$resource', 'Application', function($resource, App) {
         return $resource(App.url('/:id'), {}, {
             query: { method: 'GET', responseType: 'json' }
         });

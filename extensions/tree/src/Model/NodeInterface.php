@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Model;
 
-interface PageInterface
+interface NodeInterface
 {
     /**
      * Returns the id.

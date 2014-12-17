@@ -1,74 +1,74 @@
 angular.module('tree')
 
-    .controller('indexCtrl', ['$scope', '$http', '$filter', '$timeout', 'Application', 'Pages', 'UIkit', function ($scope, $http, $filter, $timeout, App, Pages, UIkit) {
+    .controller('indexCtrl', ['$scope', '$http', '$filter', '$timeout', 'Application', 'Nodes', 'UIkit', function ($scope, $http, $filter, $timeout, App, Nodes, UIkit) {
 
         var vm = this;
 
-        $scope.pages = App.config.pages;
+        $scope.nodes = App.config.nodes;
         $scope.selections = {};
 
         UIkit.$doc.trigger('uk.domready');
 
-        vm.editPage = function (id) {
+        vm.editNode = function (id) {
             window.location = App.url('/' + id);
         };
 
-        vm.deletePages = function () {
-            var pages = $scope.pages;
-            angular.forEach($scope.selections, function (page, id) {
-                Pages.delete({ id: id }, function () {
-                    delete pages[id];
+        vm.deleteNodes = function () {
+            var nodes = $scope.nodes;
+            angular.forEach($scope.selections, function (node, id) {
+                Nodes.delete({ id: id }, function () {
+                    delete nodes[id];
                 });
             });
             $scope.selections = {};
         };
 
-        vm.toggleStatus = function (page) {
-            Pages.save({ id: page.id }, { page: angular.extend({}, page, { status: !page.status }) }, function (data) {
-                angular.extend(page, data.toJSON());
+        vm.toggleStatus = function (node) {
+            Nodes.save({ id: node.id }, { node: angular.extend({}, node, { status: !node.status }) }, function (data) {
+                angular.extend(node, data.toJSON());
             });
         };
 
         vm.getChildren = function (id) {
-            return $filter('orderBy')($filter('filter')($filter('toArray')($scope.pages), { parentId: id }, true), 'priority');
+            return $filter('orderBy')($filter('filter')($filter('toArray')($scope.nodes), { parentId: id }, true), 'priority');
         };
 
         UIkit.$doc.on('uk.nestable.change', function () {
 
             $timeout(function () {
-                var pages = [];
+                var nodes = [];
 
                 angular.forEach(angular.element('ul.uk-nestable:first li'), function (element, priority) {
 
                     element = angular.element(element);
 
-                    var page = angular.copy(element.scope().page), parent = element.parent().parent().scope().page;
+                    var node = angular.copy(element.scope().node), parent = element.parent().parent().scope().node;
 
-                    page.priority = priority;
-                    page.parentId = parent && parent.id || 0;
-                    page.path = (parent && parent.path || '') + '/' + page.slug;
+                    node.priority = priority;
+                    node.parentId = parent && parent.id || 0;
+                    node.path = (parent && parent.path || '') + '/' + node.slug;
 
-                    pages.push(page);
+                    nodes.push(node);
                 });
 
-                $http.post(App.url('/reorder', { pages: JSON.stringify(pages) })).success(function (data) {
-                    $scope.pages = data;
+                $http.post(App.url('/reorder', { nodes: JSON.stringify(nodes) })).success(function (data) {
+                    $scope.nodes = data;
                 });
             });
         });
     }])
 
-    .controller('editCtrl', ['$scope', 'Application', 'Pages', function ($scope, App, Pages) {
+    .controller('editCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
 
-        var vm = this, page = $scope.page = App.config.page;
+        var vm = this, node = $scope.node = App.config.node;
 
         vm.getPath = function () {
-            return (page.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (page.slug || ''));
+            return (node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (node.slug || ''));
         };
 
         vm.save = function () {
-            Pages.save({ id: page.id }, { page: page }, function (data) {
-                $scope.page = page = data.toJSON();
+            Nodes.save({ id: node.id }, { node: node }, function (data) {
+                $scope.node = node = data.toJSON();
             });
         };
 

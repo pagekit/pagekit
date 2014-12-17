@@ -6,8 +6,8 @@ return [
 
         $util = $app['db']->getUtility();
 
-        if ($util->tableExists('@tree_page') === false) {
-            $util->createTable('@tree_page', function($table) {
+        if ($util->tableExists('@tree_node') === false) {
+            $util->createTable('@tree_node', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);

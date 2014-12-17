@@ -3,14 +3,14 @@
 namespace Pagekit\Tree\Entity;
 
 use Pagekit\Framework\Database\Event\EntityEvent;
-use Pagekit\Tree\Model\PageInterface;
+use Pagekit\Tree\Model\NodeInterface;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
- * @Entity(repositoryClass="Pagekit\Tree\Entity\PageRepository", tableClass="@tree_page", eventPrefix="tree.page")
+ * @Entity(tableClass="@tree_node", eventPrefix="tree.node")
  */
-class Page implements PageInterface, \JsonSerializable
+class Node implements NodeInterface, \JsonSerializable
 {
     use AccessTrait, DataTrait;
 
