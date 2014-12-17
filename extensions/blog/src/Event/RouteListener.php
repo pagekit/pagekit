@@ -3,30 +3,31 @@
 namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\UrlResolver;
+use Pagekit\Component\Routing\Event\RouteCollectionEvent;
 use Pagekit\Framework\Event\EventSubscriber;
 
 class RouteListener extends EventSubscriber
 {
+    protected $permalink;
+
     /**
-     * Register alias routes
+     * Adds cache breaker to router.
      */
     public function onSystemInit()
     {
-        $extension = $this['extensions']->get('blog');
+        $this['router']->setOption('blog.permalink', $this->getPermalink());
+    }
 
-        if (!$permalink = $extension->getParams('permalink')) {
+    /**
+     * Register alias routes
+     */
+    public function onRouteCollection(RouteCollectionEvent $event)
+    {
+        if (!$route = $event->getRoutes()->get('@blog/id')) {
             return;
         }
 
-        if ($permalink == 'custom') {
-            $permalink = $extension->getParams('permalink.custom');
-        }
-
-        if (!$page = $this['db.em']->getRepository('Pagekit\Tree\Entity\Page')->query()->where(['mount = ?'], ['blog'])->first()) {
-            return;
-        }
-
-        $this['aliases']->add($page->getPath().'/'.ltrim($permalink, '/'), '@blog/id', 'Pagekit\Blog\UrlResolver');
+        $this['aliases']->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', 'Pagekit\Blog\UrlResolver');
     }
 
     /**
@@ -43,9 +44,28 @@ class RouteListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'system.init' => ['onSystemInit', -15],
+            'system.init'          => ['onSystemInit', 10],
+            'route.collection'     => 'onRouteCollection',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'
         ];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPermalink()
+    {
+        if (null === $this->permalink) {
+
+            $extension       = $this['extensions']->get('blog');
+            $this->permalink = $extension->getParams('permalink', '');
+
+            if ($this->permalink === 'custom') {
+                $this->permalink = $extension->getParams('permalink.custom');
+            }
+        }
+
+        return $this->permalink;
     }
 }
