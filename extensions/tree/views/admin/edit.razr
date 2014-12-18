@@ -1,5 +1,7 @@
 <div data-app="tree" ng-controller="editCtrl as vm" ng-cloak>
 
+    <h2></h2>
+
     <form class="uk-form uk-form-stacked">
 
         @section('toolbar', 'show')
@@ -26,6 +28,8 @@
                     </div>
                 </div>
 
+                <div ng-include="type['tmpl.edit']"></div>
+
                 <div class="uk-form-row">
                     <label for="form-url" class="uk-form-label">@trans('Route')</label>
                     <div class="uk-form-controls">
@@ -38,5 +42,8 @@
         </div>
 
     </form>
+
+    <pre>{{ node | json }}</pre>
+    <pre>{{ type | json }}</pre>
 
 </div>

@@ -7,17 +7,17 @@ angular.module('tree')
         $scope.nodes = App.config.nodes;
         $scope.selections = {};
 
-        UIkit.$doc.trigger('uk.domready');
-
         vm.editNode = function (id) {
             window.location = App.url('/' + id);
         };
 
         vm.deleteNodes = function () {
-            var nodes = $scope.nodes;
+            // TODO use bulk action instead
+            var nodes = angular.copy($scope.nodes);
             angular.forEach($scope.selections, function (node, id) {
                 Nodes.delete({ id: id }, function () {
                     delete nodes[id];
+                    $scope.nodes = nodes;
                 });
             });
             $scope.selections = {};
@@ -36,6 +36,18 @@ angular.module('tree')
         vm.getNodeUrl = function(node) {
             return node.path.substring(1);
         };
+
+        $scope.$watch('nodes', function() {
+            angular.forEach(($scope.types = angular.copy(App.config.types)), function(type, index) {
+                if (type.type == 'mount') {
+                    angular.forEach($scope.nodes, function(node) {
+                        if (node.type === type.id) {
+                            delete $scope.types[index];
+                        }
+                    });
+                }
+            });
+        });
 
         UIkit.$doc.on('uk.nestable.change', function () {
 
@@ -65,6 +77,8 @@ angular.module('tree')
     .controller('editCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
 
         var vm = this, node = $scope.node = App.config.node;
+
+        $scope.type = App.config.type;
 
         vm.getPath = function () {
             return (node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (node.slug || ''));

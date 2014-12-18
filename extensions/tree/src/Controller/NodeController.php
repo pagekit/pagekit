@@ -6,6 +6,7 @@ use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Tree\Entity\Node;
+use Pagekit\Tree\Event\NodeTypeEvent;
 
 /**
  * @Access("tree: manage nodes", admin=true)
@@ -48,9 +49,8 @@ class NodeController extends Controller
 
         $this->config = [
             'config' => [
-                'url'    => $this['url']->base(),
-                'route'  => $this['url']->route('@tree/node'),
-                'mounts' => $this['mounts']
+                'url'   => $this['url']->base(),
+                'route' => $this['url']->route('@tree/node')
             ]
         ];
     }
@@ -61,28 +61,37 @@ class NodeController extends Controller
      */
     public function indexAction()
     {
+        $this->config['config']['types'] = $this['tree.types'];
         $this->config['config']['nodes'] = $this->nodes->findAll();
 
         return ['head.title' => __('Nodes')];
     }
 
     /**
-     * @Route("/add", methods="GET")
      * @Route("/{id}", methods="GET", requirements={"id"="\d+"})
+     * @Route("/{type}", methods="GET")
      * @Request({"id": "int"})
      * @Response("extension://tree/views/admin/edit.razr")
      */
-    public function editAction($id = 0)
+    public function editAction($id = 0, $type = '')
     {
         try {
 
             if ($id === 0) {
+
                 $node = new Node;
+                $node->setType($type);
+
             } elseif (!$node = $this->nodes->find($id)) {
                 throw new Exception(__('Invalid node id.'));
             }
 
+            if (!isset($this['tree.types'][$node->getType()])) {
+                throw new Exception(__('Invalid node type.'));
+            }
+
             $this->config['config']['node'] = $node;
+            $this->config['config']['type'] = $this['tree.types'][$node->getType()];
 
         } catch (Exception $e) {
 

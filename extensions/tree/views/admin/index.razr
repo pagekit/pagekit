@@ -3,7 +3,15 @@
     @section('toolbar', 'show')
     <div class="uk-float-left">
 
-        <a class="uk-button uk-button-primary" ng-click="vm.editNode('add')">@trans('Add Node')</a>
+        <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+            <button class="uk-button uk-button-primary" type="button">@trans('Add')</button>
+            <div class="uk-dropdown uk-dropdown-small">
+                <ul class="uk-nav uk-nav-dropdown">
+                    <li ng-repeat="type in types"><a ng-click="vm.editNode(type.id)">{{ type.label }}</a></li>
+                </ul>
+            </div>
+        </div>
+
         <a class="uk-button pk-button-danger" ng-click="vm.deleteNodes()" ng-show="(selections | truthy).length">@trans('Delete')</a>
 
     </div>
@@ -36,8 +44,8 @@
                 <a ng-class="{ 'uk-text-success': node.status, 'uk-text-danger': !node.status }" class="uk-icon-circle" ng-click="vm.toggleStatus(node)" title="{{ node.status ? 'Enabled' : 'Disabled' }}"></a>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a ng-show="node.status" ng-href="{{ vm.getNodeUrl(node) }}" target="_blank">{{ node.path }}</a>
-                <span ng-show="!node.status">{{ node.path }}</span>
+                <a ng-if="node.status" ng-href="{{ vm.getNodeUrl(node) }}" target="_blank">{{ node.path }}</a>
+                <span ng-if="!node.status">{{ node.path }}</span>
             </div>
 
         </div>
@@ -47,4 +55,8 @@
         </ul>
 
     </script>
+
+<pre>{{ nodes | json }}</pre>
+<pre>{{ types | json }}</pre>
+
 </div>

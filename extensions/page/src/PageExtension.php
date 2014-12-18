@@ -7,6 +7,7 @@ use Pagekit\Framework\Application;
 use Pagekit\Page\Event\AliasListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
+use Pagekit\Tree\Event\NodeTypeEvent;
 
 class PageExtension extends Extension
 {
@@ -25,6 +26,10 @@ class PageExtension extends Extension
 
         $app->on('system.locale', function(LocaleEvent $event) {
             $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
+        });
+
+        $app->on('tree.types', function(NodeTypeEvent $event) {
+            $event->register('page', 'Page', ['tmpl.edit' => 'page.tmpl.edit']);
         });
     }
 

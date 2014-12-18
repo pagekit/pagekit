@@ -14,9 +14,8 @@ class AliasListener extends EventSubscriber
     public function onSystemInit()
     {
         $router = $this['router'];
-        $aliases = $this['cache.phpfile']->fetch('page.aliases') ?: [];
 
-        if (!$aliases) {
+        if (!$aliases = $this['cache.phpfile']->fetch(self::CACHE_KEY)) {
 
             $aliases = array_map(function($id) {
                     return '@page/id?id='.$id;

@@ -27,19 +27,16 @@ class Node implements NodeInterface, \JsonSerializable
     protected $status = 0;
 
     /** @Column(type="string") */
-    protected $url = '';
-
-    /** @Column(type="string") */
     protected $slug;
 
     /** @Column(type="string") */
     protected $path;
 
     /** @Column(type="string") */
-    protected $mount = '';
+    protected $title;
 
     /** @Column(type="string") */
-    protected $title;
+    protected $type;
 
     /** @Column(type="json_array") */
     protected $data;
@@ -94,16 +91,6 @@ class Node implements NodeInterface, \JsonSerializable
         $this->title = $title;
     }
 
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
     public function getSlug()
     {
         return $this->slug;
@@ -124,14 +111,14 @@ class Node implements NodeInterface, \JsonSerializable
         $this->path = $path;
     }
 
-    public function getMount()
+    public function getType()
     {
-        return $this->mount;
+        return $this->type;
     }
 
-    public function setMount($mount)
+    public function setType($type)
     {
-        $this->mount = $mount;
+        $this->type = $type;
     }
 
     public function jsonSerialize()
@@ -146,7 +133,9 @@ class Node implements NodeInterface, \JsonSerializable
      */
     public function preSave(EntityEvent $event)
     {
-        $repository = $event->getEntityManager()->getRepository(get_class($this));
+        $manager    = $event->getEntityManager();
+        $db         = $manager->getConnection();
+        $repository = $manager->getRepository(get_class($this));
 
         $i  = 2;
         $id = $this->id;
@@ -156,28 +145,35 @@ class Node implements NodeInterface, \JsonSerializable
         }
 
         while ($repository->query()->where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
-                if ($id) $query->where('id <> ?', [$id]);
-            })->first()) {
-            $this->slug = preg_replace('/-\d+$/', '', $this->slug) . '-' . $i++;
+            if ($id) $query->where('id <> ?', [$id]);
+        })->first()) {
+            $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
 
         // Update own path
-        $path = '/' . $this->getSlug();
+        $path = '/'.$this->getSlug();
         if ($parent = $repository->find($this->getParentId())) {
-            $path = $parent->getPath() . $path;
+            $path = $parent->getPath().$path;
         } else {
             // set Parent to 0, if old parent is not found
             $this->setParentId(0);
         }
         $this->setPath($path);
 
-        // Update childrens paths
         if ($this->id) {
+            // Update children's paths
             foreach ($repository->query()->where('parent_id = ?', [$this->id])->get() as $child) {
-                if (0 !== strpos($child->getPath(), $this->getPath() . '/')) {
+                if (0 !== strpos($child->getPath(), $this->getPath().'/')) {
                     $repository->save($child);
                 }
             }
+        } else {
+            // Set priority
+            $this->priority = 1 + $db->createQueryBuilder()
+                ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
+                ->from('@tree_node')
+                ->where('parent_id = ?', [$this->parentId])
+                ->execute()->fetchColumn();
         }
     }
 }
