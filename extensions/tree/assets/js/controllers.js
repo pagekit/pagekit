@@ -4,7 +4,7 @@ angular.module('tree')
 
         var vm = this;
 
-        $scope.nodes = App.config.nodes;
+        $scope.nodes = App.data.nodes;
         $scope.selections = {};
 
         vm.editNode = function (id) {
@@ -38,7 +38,7 @@ angular.module('tree')
         };
 
         $scope.$watch('nodes', function() {
-            angular.forEach(($scope.types = angular.copy(App.config.types)), function(type, index) {
+            angular.forEach(($scope.types = angular.copy(App.data.types)), function(type, index) {
                 if (type.type == 'mount') {
                     angular.forEach($scope.nodes, function(node) {
                         if (node.type === type.id) {
@@ -76,9 +76,9 @@ angular.module('tree')
 
     .controller('editCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
 
-        var vm = this, node = $scope.node = App.config.node;
+        var vm = this, node = $scope.node = App.data.node;
 
-        $scope.type = App.config.type;
+        $scope.type = App.data.type;
 
         vm.getPath = function () {
             return (node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (node.slug || ''));

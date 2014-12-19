@@ -41,11 +41,10 @@ class NodeEditEvent extends Event
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param array $config
      */
-    public function setConfig($key, $value)
+    public function addConfig(array $config)
     {
-        $this->config[$key] = $value;
+        $this->config = array_merge_recursive($this->config, $config);
     }
 }

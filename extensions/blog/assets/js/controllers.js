@@ -4,7 +4,7 @@ angular.module('tree')
 
         var vm = this;
 
-        $scope.posts = App['blog-config']['posts'];
+        $scope.posts = App.data.posts;
 
         $scope.$watch('node.data.id', function(id) {
             $scope.node.data = $scope.node.data || {};

@@ -57,12 +57,7 @@ class BlogExtension extends Extension
         $app->on('tree.node.edit', function (NodeEditEvent $event) {
             if ($event->getNode()->getType() == 'blog.post') {
                 $this['view.scripts']->queue('blog-controllers', 'extension://blog/assets/js/controllers.js', 'tree-application');
-
-                $posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll();
-
-                $event->setConfig('blog-config', [
-                    'posts' => array_map(function($post) { return $post->getTitle(); }, $posts)
-                ]);
+                $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll())]]);
             }
         });
     }

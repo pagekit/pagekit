@@ -73,7 +73,6 @@ class NodeListener extends EventSubscriber
         ];
     }
 
-
     /**
      * @return Repository
      */

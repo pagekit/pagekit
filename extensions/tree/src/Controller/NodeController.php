@@ -61,11 +61,15 @@ class NodeController extends Controller
      */
     public function indexAction()
     {
-        $this->config['config']['types'] = $this['tree.types'];
-        $this->config['config']['nodes'] = $this->nodes->findAll();
-        $this->config['templates']       = [
-            'tree.item' => $this['view']->render('extension://tree/views/tmpl/item.razr')
-        ];
+        $this->addConfig([
+            'data'      => [
+                'types' => $this['tree.types'],
+                'nodes' => $this->nodes->findAll()
+            ],
+            'templates' => [
+                'tree.item' => $this['view']->render('extension://tree/views/tmpl/item.razr')
+            ]
+        ]);
 
         return ['head.title' => __('Nodes')];
     }
@@ -93,10 +97,12 @@ class NodeController extends Controller
                 throw new Exception(__('Invalid node type.'));
             }
 
-            $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
+            $this->addConfig(['data' => [
+                'type' => $this['tree.types'][$node->getType()],
+                'node' => $node
+            ]]);
 
-            $this->config['config']['node'] = $node;
-            $this->config['config']['type'] = $this['tree.types'][$node->getType()];
+            $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
 
         } catch (Exception $e) {
 
@@ -168,5 +174,10 @@ class NodeController extends Controller
         }
 
         return $nodes;
+    }
+
+    protected function addConfig($config)
+    {
+        $this->config = array_merge_recursive($this->config, $config);
     }
 }
