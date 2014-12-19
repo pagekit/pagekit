@@ -22,10 +22,9 @@ class NodeListener extends EventSubscriber
         }
 
         $defaults = $node->get('defaults', []);
-        if (!isset($defaults['id']) || !$page = $this->getPages()->find($defaults['id'])) {
-            $page = new Page;
+        if (isset($defaults['id']) && $page = $this->getPages()->find($defaults['id'])) {
+            $node->set('page', $page);
         }
-        $node->set('page', $page);
     }
 
     public function onSave(EntityEvent $event)
@@ -56,8 +55,8 @@ class NodeListener extends EventSubscriber
         }
 
         $defaults = $node->get('defaults', []);
-        if (isset($defaults['id'])) {
-            $this->getPages()->delete($defaults['id']);
+        if (isset($defaults['id']) && $page = $this->getPages()->find($defaults['id'])) {
+            $this->getPages()->delete($page);
         }
     }
 

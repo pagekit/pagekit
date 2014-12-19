@@ -8,6 +8,7 @@ use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
+use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\Tree\Event\NodeTypeEvent;
 
 class PageExtension extends Extension
@@ -35,6 +36,13 @@ class PageExtension extends Extension
                 'tmpl.edit'   => 'page.tmpl.edit',
                 'controllers' => 'Pagekit\\Page\\Controller\\SiteController'
             ]);
+        });
+
+
+        $app->on('tree.node.edit', function (NodeEditEvent $event) {
+            if ($event->getNode()->getType() == 'page') {
+                $this['view.scripts']->queue('page-controllers', 'extension://page/assets/js/controllers.js', 'tree-application');
+            }
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
