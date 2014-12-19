@@ -4,7 +4,9 @@ namespace Pagekit\Tree;
 
 use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
+use Pagekit\System\Event\TmplEvent;
 use Pagekit\Tree\Event\JsonRequestListener;
+use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\Tree\Event\NodeTypeEvent;
 use Pagekit\Tree\Event\RouteListener;
 
@@ -23,6 +25,17 @@ class TreeExtension extends Extension
         $app['tree.types'] = function($app) {
             return $app['events']->dispatch('tree.types', new NodeTypeEvent)->getTypes();
         };
+
+        $app->on('tree.types', function (NodeTypeEvent $event) {
+            $event->register('alias', 'Alias', [
+                'type'        => 'url',
+                'tmpl.edit'   => 'alias.edit'
+            ]);
+        });
+
+        $app->on('system.tmpl', function (TmplEvent $event) {
+            $event->register('alias.edit', 'extension://tree/views/tmpl/alias.razr');
+        });
     }
 
     /**

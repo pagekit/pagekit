@@ -33,11 +33,10 @@ class PageExtension extends Extension
         $app->on('tree.types', function (NodeTypeEvent $event) {
             $event->register('page', 'Page', [
                 'type'        => 'node',
-                'tmpl.edit'   => 'page.tmpl.edit',
+                'tmpl.edit'   => 'page.edit',
                 'controllers' => 'Pagekit\\Page\\Controller\\SiteController'
             ]);
         });
-
 
         $app->on('tree.node.edit', function (NodeEditEvent $event) {
             if ($event->getNode()->getType() == 'page') {
@@ -46,7 +45,7 @@ class PageExtension extends Extension
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('page.tmpl.edit', 'extension://page/views/tmpl/edit.razr');
+            $event->register('page.edit', 'extension://page/views/tmpl/edit.razr');
         });
     }
 

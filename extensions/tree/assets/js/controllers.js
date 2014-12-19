@@ -90,4 +90,10 @@ angular.module('tree')
             });
         };
 
+    }])
+
+    .controller('aliasEditCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
+
+        var vm = this;
+
     }]);
