@@ -63,7 +63,10 @@ class RouteListener extends EventSubscriber
                 }
 
                 $type = $types[$node->getType()];
-                $nodes[$node->getPath()] = 'node' == $type['type'] ? $node->get('url', '') : $type;
+
+                $type['defaults'] = array_merge_recursive(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []));
+
+                $nodes[$node->getPath()] = in_array($type['type'], ['node', 'mount']) ? $type : $node->get('url', '');
             }
 
             $this['cache.phpfile']->save(self::CACHE_KEY, $nodes);

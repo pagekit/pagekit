@@ -26,7 +26,9 @@
                 },
 
                 templateUrl: function(name) {
-                    return this.url.template('template', {'name': name});
+                    var url = this.config['url.template'];
+
+                    return url += (url.indexOf('?') != -1 ? '&' : '?') + 'name=' +name;
                 }
 
             }, $window[name]);
@@ -79,7 +81,7 @@
 
                 return function(tpl, ignoreRequestError) {
 
-                    if (App['templates'] && !App.templates[tpl]) {
+                    if (!App.templates || !App.templates[tpl]) {
                         tpl = App.templateUrl(tpl);
                     }
 

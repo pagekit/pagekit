@@ -13,8 +13,8 @@ return [
     'controllers' => [
 
         '/page' => [
-            'Pagekit\\Page\\Controller\\PageController',
-            'Pagekit\\Page\\Controller\\SiteController'
+            'Pagekit\\Page\\Controller\\ApiController',
+            'Pagekit\\Page\\Controller\\PageController'
         ]
 
     ],

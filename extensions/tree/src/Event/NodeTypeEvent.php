@@ -16,22 +16,7 @@ class NodeTypeEvent extends Event implements \IteratorAggregate
      */
     public function register($id, $label, array $options = [])
     {
-        $type = 'node';
-        $this->types[$id] = array_merge($options, compact('id', 'label', 'type'));
-    }
-
-    /**
-     * Registers a mount point.
-     *
-     * @param string          $id
-     * @param string          $label
-     * @param string|string[] $controllers
-     * @param array           $defaults
-     */
-    public function registerMount($id, $label, $controllers, array $defaults = [], array $options = [])
-    {
-        $type = 'mount';
-        $this->types[$id] = array_merge($options, compact('id', 'label', 'controllers', 'defaults', 'type'));
+        $this->types[$id] = array_merge($options, compact('id', 'label'));
     }
 
     /**

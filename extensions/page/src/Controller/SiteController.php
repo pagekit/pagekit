@@ -27,22 +27,14 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="id", requirements={"id"="\d+"})
+     * @Route("/", name="id")
+     * @Request({"id" : "int"})
      * @Response("extension://page/views/index.razr")
      */
     public function indexAction($id = 0)
     {
-        if (!$page = $this->pages->where(compact('id'))->where(['status' => Page::STATUS_PUBLISHED])->first()) {
+        if (!$page = $this->pages->find($id)) {
             throw new NotFoundHttpException(__('Page not found!'));
-        }
-
-        if (!$page->hasAccess($this['user'])) {
-
-            if (!$this['user']->isAuthenticated()) {
-                return $this->redirect('@system/auth/login', ['redirect' => $this['url']->current()]);
-            }
-
-            throw new AccessDeniedHttpException(__('Unable to access this page!'));
         }
 
         $page->setContent($this['content']->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));

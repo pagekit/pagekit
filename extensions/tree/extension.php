@@ -12,7 +12,10 @@ return [
 
     'controllers' => [
 
-        '/tree' => 'Pagekit\\Tree\\Controller\\NodeController'
+        '/tree' => [
+            'Pagekit\\Tree\\Controller\\NodeController',
+            'Pagekit\\Tree\\Controller\\TemplateController'
+        ]
 
     ],
 

@@ -5,8 +5,9 @@ namespace Pagekit\Tree\Controller;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\Framework\Event\Event;
 use Pagekit\Tree\Entity\Node;
-use Pagekit\Tree\Event\NodeTypeEvent;
+use Pagekit\Tree\Event\NodeEditEvent;
 
 /**
  * @Access("tree: manage nodes", admin=true)
@@ -43,14 +44,15 @@ class NodeController extends Controller
         $this['view.scripts']->queue('tree-directives', 'extension://tree/assets/js/directives.js', 'tree-application');
         $this['view.scripts']->queue('tree-controllers', 'extension://tree/assets/js/controllers.js', 'tree-application');
 
-        $this->getApplication()->on('kernel.view', function() {
+        $this->getApplication()->on('kernel.view', function () {
             $this['view.scripts']->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
         });
 
         $this->config = [
             'config' => [
-                'url'   => $this['url']->base(),
-                'route' => $this['url']->route('@tree/node')
+                'url'          => $this['url']->base(),
+                'route'        => $this['url']->route('@tree/node'),
+                'url.template' => $this['url']->route('@tree/template')
             ]
         ];
     }
@@ -63,6 +65,9 @@ class NodeController extends Controller
     {
         $this->config['config']['types'] = $this['tree.types'];
         $this->config['config']['nodes'] = $this->nodes->findAll();
+        $this->config['templates']       = [
+            'tree.item' => $this['view']->render('extension://tree/views/tmpl/item.razr')
+        ];
 
         return ['head.title' => __('Nodes')];
     }
@@ -89,6 +94,8 @@ class NodeController extends Controller
             if (!isset($this['tree.types'][$node->getType()])) {
                 throw new Exception(__('Invalid node type.'));
             }
+
+            $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
 
             $this->config['config']['node'] = $node;
             $this->config['config']['type'] = $this['tree.types'][$node->getType()];
