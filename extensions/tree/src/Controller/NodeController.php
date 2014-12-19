@@ -48,13 +48,11 @@ class NodeController extends Controller
             $this['view.scripts']->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
         });
 
-        $this->config = [
-            'config' => [
-                'url'          => $this['url']->base(),
-                'route'        => $this['url']->route('@tree/node'),
-                'url.template' => $this['url']->route('@tree/template')
-            ]
-        ];
+        $this->config = ['config' => [
+            'url'          => $this['url']->base(),
+            'route'        => $this['url']->route('@tree/node'),
+            'url.template' => $this['url']->route('@tree/template')
+        ]];
     }
 
     /**
@@ -104,7 +102,7 @@ class NodeController extends Controller
 
             $this['message']->error($e->getMessage());
 
-            return $this->redirect('@tree/tree');
+            return $this->redirect('@tree/node');
         }
 
         return ['head.title' => $node->getId() ? __('Edit Node') : __('Add Node')];

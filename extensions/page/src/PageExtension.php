@@ -8,7 +8,6 @@ use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\Tree\Event\NodeTypeEvent;
 
 class PageExtension extends Extension
@@ -40,16 +39,6 @@ class PageExtension extends Extension
 
         $app->on('system.tmpl', function (TmplEvent $event) {
             $event->register('page.tmpl.edit', 'extension://page/views/tmpl/edit.razr');
-        });
-
-        $app->on('tree.node.edit', function (NodeEditEvent $event) {
-            if ($event->getNode()->getType() == 'page') {
-                $this['view.scripts']->queue('pages-controllers', 'extension://page/assets/js/controllers.js', 'tree-application');
-
-                $event->setConfig('page-config', [
-                    'api' => $this['url']->route('@page/api')
-                ]);
-            }
         });
     }
 

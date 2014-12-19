@@ -9,6 +9,8 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
+use Pagekit\System\Event\TmplEvent;
+use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\Tree\Event\NodeTypeEvent;
 
 class BlogExtension extends Extension
@@ -41,6 +43,27 @@ class BlogExtension extends Extension
                 'type' => 'mount',
                 'controllers' => 'Pagekit\\Blog\\Controller\\SiteController'
             ]);
+
+            $event->register('blog.post', 'Blog Post', [
+                'type'      => 'url',
+                'tmpl.edit' => 'blog.post.edit'
+            ]);
+        });
+
+        $app->on('system.tmpl', function (TmplEvent $event) {
+            $event->register('blog.post.edit', 'extension://blog/views/tmpl/edit.razr');
+        });
+
+        $app->on('tree.node.edit', function (NodeEditEvent $event) {
+            if ($event->getNode()->getType() == 'blog.post') {
+                $this['view.scripts']->queue('blog-controllers', 'extension://blog/assets/js/controllers.js', 'tree-application');
+
+                $posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll();
+
+                $event->setConfig('blog-config', [
+                    'posts' => array_map(function($post) { return $post->getTitle(); }, $posts)
+                ]);
+            }
         });
     }
 

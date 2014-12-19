@@ -34,7 +34,7 @@ angular.module('tree')
         };
 
         vm.getNodeUrl = function(node) {
-            return node.path.substring(1);
+            return App.config.url + node.path;
         };
 
         $scope.$watch('nodes', function() {
