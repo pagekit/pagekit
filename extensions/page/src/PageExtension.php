@@ -32,9 +32,7 @@ class PageExtension extends Extension
 
         $app->on('tree.types', function (NodeTypeEvent $event) {
             $event->register('page', 'Page', [
-                'type'        => 'node',
-                'tmpl.edit'   => 'page.edit',
-                'controllers' => 'Pagekit\\Page\\Controller\\SiteController'
+                'tmpl.edit'   => 'page.edit'
             ]);
         });
 

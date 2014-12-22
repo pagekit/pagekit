@@ -6,7 +6,6 @@ use Pagekit\Extension\Extension;
 use Pagekit\Framework\Application;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\Tree\Event\JsonRequestListener;
-use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\Tree\Event\NodeTypeEvent;
 use Pagekit\Tree\Event\RouteListener;
 
@@ -23,7 +22,7 @@ class TreeExtension extends Extension
         $app['events']->addSubscriber(new RouteListener);
 
         $app['tree.types'] = function($app) {
-            return $app['events']->dispatch('tree.types', new NodeTypeEvent)->getTypes();
+            return $app['events']->dispatch('tree.types', new NodeTypeEvent);
         };
 
         $app->on('tree.types', function (NodeTypeEvent $event) {

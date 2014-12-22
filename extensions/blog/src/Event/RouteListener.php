@@ -27,7 +27,7 @@ class RouteListener extends EventSubscriber
             return;
         }
 
-        $this['aliases']->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', 'Pagekit\Blog\UrlResolver');
+        $this['aliases']->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
     }
 
     /**

@@ -10,6 +10,12 @@ return [
 
     ],
 
+    'controllers' => [
+
+        '/page' => 'Pagekit\\Page\\Controller\\SiteController'
+
+    ],
+
     'permissions' => [
 
         'page: manage pages' => [

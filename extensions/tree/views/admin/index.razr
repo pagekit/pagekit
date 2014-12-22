@@ -13,6 +13,7 @@
         </div>
 
         <a class="uk-button pk-button-danger" ng-click="vm.deleteNodes()" ng-show="(selections | truthy).length">@trans('Delete')</a>
+        <a class="uk-button" ng-click="vm.makeHomepage()" ng-show="(selections | truthy).length === 1">@trans('Make Homepage')</a>
 
     </div>
     @endsection
@@ -22,6 +23,7 @@
         <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested"">
             <div class="pk-table-width-minimum"><input type="checkbox" check-all checkboxes="selections" all="nodes"></div>
             <div class="pk-table-min-width-100">Title</div>
+            <div class="pk-table-width-100 uk-text-center"></div>
             <div class="pk-table-width-100 uk-text-center">Status</div>
             <div class="pk-table-width-150">URL</div>
         </div>
@@ -34,5 +36,6 @@
 
 <pre>{{ nodes | json }}</pre>
 <pre>{{ types | json }}</pre>
+<pre>{{ selections | json }}</pre>
 
 </div>

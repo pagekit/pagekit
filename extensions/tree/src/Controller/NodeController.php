@@ -5,7 +5,6 @@ namespace Pagekit\Tree\Controller;
 use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\Framework\Event\Event;
 use Pagekit\Tree\Entity\Node;
 use Pagekit\Tree\Event\NodeEditEvent;
 
@@ -63,7 +62,7 @@ class NodeController extends Controller
     {
         $this->addConfig([
             'data'      => [
-                'types' => $this['tree.types'],
+                'types' => $this['tree.types']->getTypes(),
                 'nodes' => $this->nodes->findAll()
             ],
             'templates' => [
@@ -98,8 +97,9 @@ class NodeController extends Controller
             }
 
             $this->addConfig(['data' => [
-                'type' => $this['tree.types'][$node->getType()],
-                'node' => $node
+                'type'  => $this['tree.types'][$node->getType()],
+                'node'  => $node,
+                'roles' => $this->roles->findAll()
             ]]);
 
             $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
@@ -159,21 +159,31 @@ class NodeController extends Controller
     }
 
     /**
-     * @Route("/reorder", methods="POST")
+     * @Route("/bulk", methods="POST")
      * @Request({"nodes": "json"})
      * @Response("json")
      */
-    public function reorderAction($datas = [])
+    public function bulkSaveAction($nodes = [])
     {
-        $nodes = $this->nodes->findAll();
-
-        foreach ($datas as $data) {
-            if (isset($nodes[$data['id']])) {
-                $this->nodes->save($nodes[$data['id']], $data);
-            }
+        foreach ($nodes as $data) {
+            $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return $nodes;
+        return $this->nodes->findAll();
+    }
+
+    /**
+     * @Route("/bulk", methods="DELETE")
+     * @Request({"nodes": "json"})
+     * @Response("json")
+     */
+    public function bulkDeleteAction($nodes = [])
+    {
+        foreach ($nodes as $data) {
+            $this->deleteAction(isset($data['id']) ? $data['id'] : 0);
+        }
+
+        return $this->nodes->findAll();
     }
 
     protected function addConfig($config)

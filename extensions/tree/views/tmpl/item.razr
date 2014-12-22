@@ -4,6 +4,7 @@
     <div class="pk-table-width-minimum pk-padding-horizontal-remove"><div data-nestable-action="toggle"></div></div>
     <div class="pk-table-width-minimum"><input ng-model="selections[node.id]" ng-true-value="{{ node }}" type="checkbox"></div>
     <div class="pk-table-min-width-100"><a ng-click="vm.editNode(node.id)">{{ node.title }}</a></div>
+    <div class="pk-table-width-100 uk-text-center"><i ng-if="node.data.homepage" class="uk-icon-home"></i></div>
     <div class="pk-table-width-100 uk-text-center">
         <a ng-class="{ 'uk-text-success': node.status, 'uk-text-danger': !node.status }" class="uk-icon-circle" ng-click="vm.toggleStatus(node)" title="{{ node.status ? 'Enabled' : 'Disabled' }}"></a>
     </div>

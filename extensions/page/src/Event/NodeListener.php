@@ -43,6 +43,7 @@ class NodeListener extends EventSubscriber
         $this->getPages()->save($page, $data);
         $data                   = $node->getData();
         $data['defaults']['id'] = $page->getId();
+        $data['url']            = '@page/id?id='.$page->getId();
         unset($data['page']);
         $node->setData($data);
     }

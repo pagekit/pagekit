@@ -12,20 +12,32 @@ angular.module('tree')
         };
 
         vm.deleteNodes = function () {
-            // TODO use bulk action instead
-            var nodes = angular.copy($scope.nodes);
-            angular.forEach($scope.selections, function (node, id) {
-                Nodes.delete({ id: id }, function () {
-                    delete nodes[id];
-                    $scope.nodes = nodes;
-                });
+            $http.delete(App.url('/bulk', { nodes: JSON.stringify($scope.selections) })).success(function (data) {
+                $scope.nodes = data;
             });
+            $scope.selections = {};
+        };
+
+        vm.makeHomepage = function () {
+
+            var nodes = $filter('filter')($filter('toArray')($scope.nodes), function(node) {
+                    if (node.data['homepage']) {
+                        delete node.data['homepage'];
+                        return true;
+                    }
+                }),
+                node  = $filter('first')($scope.selections);
+
+            node.data['homepage'] = true;
+            nodes.push(node);
+
+            vm.bulkSave(nodes);
             $scope.selections = {};
         };
 
         vm.toggleStatus = function (node) {
             Nodes.save({ id: node.id }, { node: angular.extend({}, node, { status: !node.status }) }, function (data) {
-                angular.extend(node, data.toJSON());
+                angular.extend(node, data);
             });
         };
 
@@ -35,6 +47,12 @@ angular.module('tree')
 
         vm.getNodeUrl = function(node) {
             return App.config.url + node.path;
+        };
+
+        vm.bulkSave = function(nodes) {
+            $http.post(App.url('/bulk', { nodes: JSON.stringify(nodes) })).success(function (data) {
+                $scope.nodes = data;
+            });
         };
 
         $scope.$watch('nodes', function() {
@@ -67,9 +85,7 @@ angular.module('tree')
                     nodes.push(node);
                 });
 
-                $http.post(App.url('/reorder', { nodes: JSON.stringify(nodes) })).success(function (data) {
-                    $scope.nodes = data;
-                });
+                vm.bulkSave(nodes);
             });
         });
     }])
@@ -78,7 +94,8 @@ angular.module('tree')
 
         var vm = this, node = $scope.node = App.data.node;
 
-        $scope.type = App.data.type;
+        $scope.type  = App.data.type;
+        $scope.roles = App.data.roles;
 
         vm.getPath = function () {
             return (node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (node.slug || ''));

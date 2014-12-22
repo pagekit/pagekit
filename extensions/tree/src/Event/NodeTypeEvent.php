@@ -2,12 +2,10 @@
 
 namespace Pagekit\Tree\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Framework\Event\Event;
 
 class NodeTypeEvent extends Event implements \IteratorAggregate
 {
-    protected $types = [];
-
     /**
      * Registers a node type.
      *
@@ -16,7 +14,7 @@ class NodeTypeEvent extends Event implements \IteratorAggregate
      */
     public function register($id, $label, array $options = [])
     {
-        $this->types[$id] = array_merge($options, compact('id', 'label'));
+        $this->parameters[$id] = array_merge($options, compact('id', 'label'));
     }
 
     /**
@@ -26,7 +24,7 @@ class NodeTypeEvent extends Event implements \IteratorAggregate
      */
     public function getTypes()
     {
-        return $this->types;
+        return $this->parameters;
     }
 
     /**
@@ -34,6 +32,6 @@ class NodeTypeEvent extends Event implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->types);
+        return new \ArrayIterator($this->parameters);
     }
 }

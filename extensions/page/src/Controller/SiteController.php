@@ -27,7 +27,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/", name="id")
+     * @Route("/{id}", name="id")
      * @Request({"id" : "int"})
      * @Response("extension://page/views/index.razr")
      */

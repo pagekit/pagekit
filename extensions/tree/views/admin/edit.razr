@@ -28,6 +28,13 @@
                     </div>
                 </div>
 
+                <div class="uk-form-row">
+                    <span class="uk-form-label">@trans('Restrict Access')</span>
+                    <div ng-repeat="role in roles" class="uk-form-controls">
+                        <label><input type="checkbox" ng-model="node.roles[role.id]" ng-value="{{ role.id }}"> {{ role.name }}</label>
+                    </div>
+                </div>
+
                 <div class="uk-form-row" ng-include="type['tmpl.edit']"></div>
 
             </div>
@@ -38,5 +45,6 @@
 
     <pre>{{ node | json }}</pre>
     <pre>{{ type | json }}</pre>
+    <pre>{{ roles | json }}</pre>
 
 </div>

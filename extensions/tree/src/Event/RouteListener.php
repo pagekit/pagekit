@@ -15,13 +15,13 @@ class RouteListener extends EventSubscriber
     {
         foreach ($this->getNodes() as $path => $node) {
 
-            if (is_string($node)) {
-
-                $this['aliases']->add($path, $node);
-
-            } else {
+            if ($node['controllers']) {
 
                 $this['controllers']->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
+
+            } elseif ($node['url']) {
+
+                $this['aliases']->add($path, $node['url'], $node['defaults']);
 
             }
         }
@@ -58,15 +58,16 @@ class RouteListener extends EventSubscriber
             $types = $this['tree.types'];
             foreach ($this['db.em']->getRepository('Pagekit\Tree\Entity\Node')->query()->where(['status = ?'], [1])->get() as $node) {
 
-                if (!isset($types[$node->getType()])) {
+                if (!$type = $types[$node->getType()]) {
                     continue;
                 }
 
-                $type = $types[$node->getType()];
-
-                $type['defaults'] = array_merge_recursive(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []));
-
-                $nodes[$node->getPath()] = in_array($type['type'], ['node', 'mount']) ? $type : $node->get('url', '');
+                $nodes[$node->getPath()] = [
+                    'id'          => $type['id'],
+                    'url'         => $node->get('url', ''),
+                    'controllers' => isset($type['controllers']) ? $type['controllers'] : '',
+                    'defaults'    => array_merge_recursive(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []))
+                ];
             }
 
             $this['cache.phpfile']->save(self::CACHE_KEY, $nodes);
