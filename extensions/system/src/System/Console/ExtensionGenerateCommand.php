@@ -36,17 +36,23 @@ class ExtensionGenerateCommand extends Command
             exit;
         }
 
-        $title     = $this->ask('Title: ');
-        $author    = $this->ask('Author: ');
-        $email     = $this->ask('Email: ');
-        $namespace = $this->ask('PHP Namespace: ');
-        $classname = ucfirst($name).'Extension';
+        $title          = $this->ask('Title: ');
+        $description    = $this->ask('Description: ');
+        $license        = $this->ask('License: (MIT)', 'MIT');
+        $author         = $this->ask('Author: ');
+        $email          = $this->ask('Email: ');
+        $homepage       = $this->ask('Homepage: ');
+        $namespace      = $this->ask('PHP Namespace: ');
+        $classname      = ucfirst($name).'Extension';
 
         $replace = [
             '%NAME%'          => $name,
             '%TITLE%'         => $title,
+            '%DESCRIPTION%'   => $description,
+            '%LICENSE%'       => $license,
             '%AUTHOR%'        => $author,
             '%EMAIL%'         => $email,
+            '%HOMEPAGE%'      => $homepage,
             '%CLASSNAME%'     => $classname,
             '%NAMESPACE%'     => $namespace,
             '%NAMESPACE_ESC%' => addslashes($namespace)
