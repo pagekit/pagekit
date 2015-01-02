@@ -4,11 +4,10 @@ A modular and lightweight CMS built with Symfony components
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
-* [Issues](http://github.com/pagekit/pagekit/issues) - Report bugs
 * [Google+](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
-* [Google Group](https://plus.google.com/communities/104125443335488004107) - Help each other
-* [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit) - Every work day between 8:00 and 18:00 UTC
-* IRC: #pagekit on irc.freenode.net
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
+We are online every work day between 8:00 and 18:00 UTC
 
 ## Getting started
 
