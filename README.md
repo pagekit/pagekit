@@ -7,6 +7,7 @@ A modular and lightweight CMS built with Symfony components
 * [Google+](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
+
 We are online every work day between 8:00 and 18:00 UTC
 
 ## Getting started
