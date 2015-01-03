@@ -1,10 +1,10 @@
 # Pagekit
 
-A modular and lightweight CMS built with Symfony components
+Pagekit is a modular and lightweight CMS built with Symfony components.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
-* [Google+](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
+* [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 
 Join our developer chat. We are online every work day between 8:00 and 18:00 UTC
 
@@ -15,7 +15,6 @@ Join our developer chat. We are online every work day between 8:00 and 18:00 UTC
 Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver.
 Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
-
 
 ## Developers
 
