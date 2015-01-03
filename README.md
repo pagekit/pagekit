@@ -49,7 +49,16 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 ```
 You can find further information about the command line tools in the [pagekit documentation](http://www.pagekit.com/docs/quickstart)
 
+## Contributing
 
-## Copyright and license
+Pagekit follows the [GitFlow branching model](http://nvie.com/posts/a-successful-git-branching-model). The ```master``` branch always reflects a production-ready state while the latest development is taking place in the ```develop``` branch.
 
-Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE).
+Each time you want to work on a fix or a new feature, create a new branch based on the ```develop``` branch: ```git checkout -b BRANCH_NAME develop```. Only pull requests to the ```develop``` branch will be merged.
+
+## Versioning
+
+Pagekit is maintained by using the [Semantic Versioning Specification (SemVer)](http://semver.org).
+
+## Copyright and License
+
+Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE.md).
