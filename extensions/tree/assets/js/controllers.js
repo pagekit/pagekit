@@ -1,6 +1,6 @@
 angular.module('tree')
 
-    .controller('indexCtrl', ['$scope', '$http', '$filter', '$timeout', 'Application', 'Nodes', 'UIkit', function ($scope, $http, $filter, $timeout, App, Nodes, UIkit) {
+    .controller('indexCtrl', ['$scope', '$filter', '$timeout', 'Application', 'Node', 'UIkit', function ($scope, $filter, $timeout, App, Node, UIkit) {
 
         var vm = this;
 
@@ -12,7 +12,7 @@ angular.module('tree')
         };
 
         vm.deleteNodes = function () {
-            $http.delete(App.url('/bulk', { nodes: JSON.stringify($scope.selections) })).success(function (data) {
+            Node.delete({ id: 'bulk', ids: JSON.stringify(Object.keys($scope.selections)) }, function (data) {
                 $scope.nodes = data;
             });
             $scope.selections = {};
@@ -36,7 +36,7 @@ angular.module('tree')
         };
 
         vm.toggleStatus = function (node) {
-            Nodes.save({ id: node.id }, { node: angular.extend({}, node, { status: !node.status }) }, function (data) {
+            Node.save({ id: node.id }, { node: angular.extend({}, node, { status: !node.status }) }, function (data) {
                 angular.extend(node, data);
             });
         };
@@ -54,7 +54,7 @@ angular.module('tree')
         };
 
         vm.bulkSave = function(nodes) {
-            $http.post(App.url('/bulk', { nodes: JSON.stringify(nodes) })).success(function (data) {
+            Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) }, function (data) {
                 $scope.nodes = data;
             });
         };
@@ -94,7 +94,7 @@ angular.module('tree')
         });
     }])
 
-    .controller('editCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
+    .controller('editCtrl', ['$scope', 'Application', 'Node', function ($scope, App, Node) {
 
         var vm = this, node = $scope.node = App.data.node;
 
@@ -106,14 +106,14 @@ angular.module('tree')
         };
 
         vm.save = function () {
-            Nodes.save({ id: node.id }, { node: node }, function (data) {
+            Node.save({ id: node.id }, { node: node }, function (data) {
                 $scope.node = node = data.toJSON();
             });
         };
 
     }])
 
-    .controller('aliasEditCtrl', ['$scope', 'Application', 'Nodes', function ($scope, App, Nodes) {
+    .controller('aliasEditCtrl', ['$scope', 'Application', 'Node', function ($scope, App, Node) {
 
         var vm = this;
 

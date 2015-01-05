@@ -173,13 +173,13 @@ class NodeController extends Controller
 
     /**
      * @Route("/bulk", methods="DELETE")
-     * @Request({"nodes": "json"})
+     * @Request({"ids": "json"})
      * @Response("json")
      */
-    public function bulkDeleteAction($nodes = [])
+    public function bulkDeleteAction($ids = [])
     {
-        foreach ($nodes as $data) {
-            $this->deleteAction(isset($data['id']) ? $data['id'] : 0);
+        foreach (array_filter($ids) as $id) {
+            $this->deleteAction($id);
         }
 
         return $this->nodes->findAll();
