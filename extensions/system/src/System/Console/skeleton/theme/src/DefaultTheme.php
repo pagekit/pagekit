@@ -5,6 +5,9 @@ namespace %NAMESPACE%;
 use Pagekit\Framework\Application;
 use Pagekit\Theme\Theme;
 
+/**
+ * %DESCRIPTION%
+ */
 class %CLASSNAME% extends Theme
 {
     /**
