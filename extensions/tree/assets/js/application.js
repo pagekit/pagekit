@@ -66,6 +66,15 @@
             };
         })
 
+        .filter('toObject', function () {
+            return function (collection) {
+                return angular.isArray(collection) ? collection.reduce(function (obj, value, key) {
+                    obj[key] = value;
+                    return obj;
+                }, {}) : collection;
+            };
+        })
+
         .config(['$provide', function($provide) {
 
             $provide.decorator('$templateCache', ['$delegate', 'Application', function($delegate, App) {

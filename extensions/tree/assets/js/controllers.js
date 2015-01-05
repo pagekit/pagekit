@@ -28,7 +28,7 @@ angular.module('tree')
                 }),
                 node  = $filter('first')($scope.selections);
 
-            node.data['homepage'] = true;
+            node.data = angular.extend($filter('toObject')(node.data), { homepage: true });
             nodes.push(node);
 
             vm.bulkSave(nodes);
@@ -45,8 +45,12 @@ angular.module('tree')
             return $filter('orderBy')($filter('filter')($filter('toArray')($scope.nodes), { parentId: id }, true), 'priority');
         };
 
+        vm.getNodePath = function(node) {
+            return node.data['homepage'] ? '/' : node.path;
+        };
+
         vm.getNodeUrl = function(node) {
-            return App.config.url + node.path;
+            return App.config.url + vm.getNodePath(node);
         };
 
         vm.bulkSave = function(nodes) {

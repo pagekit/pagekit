@@ -41,7 +41,8 @@ class BlogExtension extends Extension
         $app->on('tree.types', function(NodeTypeEvent $event) {
             $event->register('blog', 'Blog', [
                 'type' => 'mount',
-                'controllers' => 'Pagekit\\Blog\\Controller\\SiteController'
+                'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
+                'url' => '@blog/site'
             ]);
 
             $event->register('blog.post', 'Blog Post', [

@@ -9,8 +9,8 @@
         <a ng-class="{ 'uk-text-success': node.status, 'uk-text-danger': !node.status }" class="uk-icon-circle" ng-click="vm.toggleStatus(node)" title="{{ node.status ? 'Enabled' : 'Disabled' }}"></a>
     </div>
     <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-        <a ng-if="node.status" ng-href="{{ vm.getNodeUrl(node) }}" target="_blank">{{ node.path }}</a>
-        <span ng-if="!node.status">{{ node.path }}</span>
+        <a ng-if="node.status" ng-href="{{ vm.getNodeUrl(node) }}" target="_blank">{{ vm.getNodePath(node) }}</a>
+        <span ng-if="!node.status">{{ vm.getNodePath(node) }}</span>
     </div>
 
 </div>
