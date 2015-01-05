@@ -13,7 +13,7 @@
         </div>
 
         <a class="uk-button pk-button-danger" ng-click="vm.deleteNodes()" ng-show="(selections | truthy).length">@trans('Delete')</a>
-        <a class="uk-button" ng-click="vm.makeHomepage()" ng-show="(selections | truthy).length === 1">@trans('Make Homepage')</a>
+        <a class="uk-button" ng-click="vm.makeFrontpage()" ng-show="(selections | truthy).length === 1">@trans('Make Frontpage')</a>
 
     </div>
     @endsection

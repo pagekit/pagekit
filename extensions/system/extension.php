@@ -17,7 +17,6 @@ return [
             'Pagekit\\Extension\\Controller\\ExtensionsController',
             'Pagekit\\Menu\\Controller\\ItemController',
             'Pagekit\\Menu\\Controller\\MenuController',
-            'Pagekit\\System\\Controller\\AliasController',
             'Pagekit\\System\\Controller\\DashboardController',
             'Pagekit\\System\\Controller\\FinderController',
             'Pagekit\\System\\Controller\\LinkController',
@@ -97,7 +96,7 @@ return [
             'label'    => 'Settings',
             'icon'     => 'extension://system/assets/images/icon-settings.svg',
             'url'      => '@system/system',
-            'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
+            'active'   => '@system/(system|settings|themes|extensions|storage|update|info|marketplace|dashboard)*',
             'priority' => 110
         ]
 
@@ -116,9 +115,6 @@ return [
         ],
         'system: manage extensions' => [
             'title' => 'Manage extensions'
-        ],
-        'system: manage url aliases' => [
-            'title' => 'Manage url aliases'
         ],
         'system: manage users' => [
             'title' => 'Manage users',

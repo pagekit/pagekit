@@ -18,17 +18,17 @@ angular.module('tree')
             $scope.selections = {};
         };
 
-        vm.makeHomepage = function () {
+        vm.makeFrontpage = function () {
 
             var nodes = $filter('filter')($filter('toArray')($scope.nodes), function(node) {
-                    if (node.data['homepage']) {
-                        delete node.data['homepage'];
+                    if (node.data['frontpage']) {
+                        delete node.data['frontpage'];
                         return true;
                     }
                 }),
                 node  = $filter('first')($scope.selections);
 
-            node.data = angular.extend($filter('toObject')(node.data), { homepage: true });
+            node.data = angular.extend($filter('toObject')(node.data), { frontpage: true });
             nodes.push(node);
 
             vm.bulkSave(nodes);
@@ -46,7 +46,7 @@ angular.module('tree')
         };
 
         vm.getNodePath = function(node) {
-            return node.data['homepage'] ? '/' : node.path;
+            return node.data['frontpage'] ? '/' : node.path;
         };
 
         vm.getNodeUrl = function(node) {

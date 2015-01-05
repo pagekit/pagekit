@@ -10,7 +10,6 @@ use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
-use Pagekit\System\Event\AliasListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
@@ -50,7 +49,6 @@ class SystemExtension extends Extension
 
         $app['events']->addSubscriber(new AccessListener);
         $app['events']->addSubscriber(new AdminMenuListener);
-        $app['events']->addSubscriber(new AliasListener);
         $app['events']->addSubscriber(new AuthorizationListener);
         $app['events']->addSubscriber(new CanonicalListener);
         $app['events']->addSubscriber(new FrontpageListener);

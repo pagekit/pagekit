@@ -115,8 +115,8 @@ class MenuListener extends EventSubscriber
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',
-            'system.alias.postSave'      => 'clearCache',
-            'system.alias.postDelete'    => 'clearCache'
+            'tree.node.postSave'         => 'clearCache',
+            'tree.node.postDelete'       => 'clearCache'
         ];
     }
 }

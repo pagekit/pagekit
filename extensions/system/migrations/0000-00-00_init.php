@@ -71,17 +71,6 @@ return [
             });
         }
 
-        if ($util->tableExists('@system_url_alias') === false) {
-            $util->createTable('@system_url_alias', function($table) {
-                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('source', 'string', ['length' => 255]);
-                $table->addColumn('alias', 'string', ['length' => 255]);
-                $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['alias'], 'SYSTEM_URL_ALIAS');
-                $table->addIndex(['source'], 'SYSTEM_URL_ALIAS_SOURCE');
-            });
-        }
-
         if ($util->tableExists('@system_user') === false) {
             $util->createTable('@system_user', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
