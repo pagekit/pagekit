@@ -46,24 +46,25 @@ class SystemInfoHelper implements \ArrayAccess
      */
     protected function getDirectories()
     {
+        // -TODO-
+
         $directories = [
-            'extension://',
-            'storage://',
-            'theme://',
-            'app://config.php',
-            'app://app',
+            $this['path.extensions'],
+            $this['path.storage'],
+            $this['path.themes'],
+            $this['config.file'],
+            $this['path'].'/app'
         ];
 
         $result = [];
 
         foreach ($directories as $directory) {
-            $path = $this['locator']->findResource($directory);
 
-            $result[$this->getRelativePath($path)] = is_writable($path);
+            $result[$this->getRelativePath($directory)] = is_writable($directory);
 
-            if (is_dir($path)) {
-                foreach ($this['file']->find()->in($path)->directories()->depth(0) as $folder) {
-                    $result[$this->getRelativePath($folder->getPathname())] = is_writable($folder->getPathname());
+            if (is_dir($directory)) {
+                foreach ($this['file']->find()->in($directory)->directories()->depth(0) as $dir) {
+                    $result[$this->getRelativePath($dir->getPathname())] = is_writable($dir->getPathname());
                 }
             }
         }

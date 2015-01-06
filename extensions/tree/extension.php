@@ -32,7 +32,7 @@ return [
 
         'system: tree' => [
             'label'    => 'Tree',
-            'icon'     => 'extension://page/extension.svg',
+            'icon'     => 'extensions/page/extension.svg',
             'url'      => '@tree/node',
             'active'   => '@tree/node*',
             'priority' => 0

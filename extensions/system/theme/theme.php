@@ -26,7 +26,7 @@ $app->on('system.admin', function() use ($app) {
     });
 
     $app['view.sections']->addRenderer('toolbar', function($name, $value, $options = []) use ($app) {
-        return $app['view']->render('extension://system/theme/views/renderer/toolbar.razr', compact('name', 'value', 'options'));
+        return $app['view']->render('extensions/system/theme/views/renderer/toolbar.razr', compact('name', 'value', 'options'));
     });
 
     $app['view.sections']->register('toolbar', ['renderer' => 'toolbar']);

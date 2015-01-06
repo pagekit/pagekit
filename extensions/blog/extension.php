@@ -30,7 +30,7 @@ return [
     'parameters' => [
 
         'settings' => [
-            'view' => 'extension://blog/views/admin/settings.razr',
+            'view' => 'extensions/blog/views/admin/settings.razr',
             'defaults' => [
                 'comments.autoclose'              => false,
                 'comments.autoclose.days'         => 14,
@@ -62,7 +62,7 @@ return [
 
         'blog' => [
             'label'  => 'Blog',
-            'icon'   => 'extension://blog/extension.svg',
+            'icon'   => 'extensions/blog/extension.svg',
             'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'

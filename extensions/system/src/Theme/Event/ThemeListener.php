@@ -25,10 +25,10 @@ class ThemeListener extends EventSubscriber
                 $repository = new ThemeRepository($this['config']['theme.path'], $loader);
                 $installer  = new PackageInstaller($repository, $loader);
 
-                return new ThemeManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
+                return new ThemeManager($app, $repository, $installer, $app['autoloader']);
             };
 
-            $app['theme.admin'] = $app['themes']->load('system', 'extension://system/theme');
+            $app['theme.admin'] = $app['themes']->load('system', 'extensions/system/theme');
             $app['theme.admin']->boot($app);
 
             $app['theme.site'] = $app['themes']->load($app['config']->get('theme.site'));

@@ -3,7 +3,6 @@
 namespace Pagekit\System\Package;
 
 use Composer\Autoload\ClassLoader;
-use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\Package\Installer\InstallerInterface;
 use Pagekit\Component\Package\Repository\InstalledRepository;
 use Pagekit\Framework\Application;
@@ -31,11 +30,6 @@ abstract class PackageManager implements \IteratorAggregate
     protected $autoloader;
 
     /**
-     * @var ResourceLocator
-     */
-    protected $locator;
-
-    /**
      * @var array
      */
     protected $loaded = [];
@@ -47,15 +41,13 @@ abstract class PackageManager implements \IteratorAggregate
      * @param InstalledRepository $repository
      * @param InstallerInterface  $installer
      * @param ClassLoader         $autoloader
-     * @param ResourceLocator     $locator
      */
-    public function __construct(Application $app, InstalledRepository $repository, InstallerInterface $installer, ClassLoader $autoloader, ResourceLocator $locator)
+    public function __construct(Application $app, InstalledRepository $repository, InstallerInterface $installer, ClassLoader $autoloader)
     {
         $this->app        = $app;
         $this->repository = $repository;
         $this->installer  = $installer;
         $this->autoloader = $autoloader;
-        $this->locator    = $locator;
     }
 
     /**

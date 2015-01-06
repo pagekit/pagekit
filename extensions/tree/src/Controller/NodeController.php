@@ -36,12 +36,12 @@ class NodeController extends Controller
         $this->nodes = $this['db.em']->getRepository('Pagekit\Tree\Entity\Node');
         $this->roles = $this['users']->getRoleRepository();
 
-        $this['view.scripts']->queue('angular', 'extension://tree/assets/angular/angular.min.js', 'jquery');
-        $this['view.scripts']->queue('angular-resource', 'extension://tree/assets/angular-resource/angular-resource.min.js', 'angular');
-        $this['view.scripts']->queue('application', 'extension://tree/assets/js/application.js', 'uikit');
-        $this['view.scripts']->queue('tree-application', 'extension://tree/assets/js/tree.js', ['application', 'uikit-nestable']);
-        $this['view.scripts']->queue('tree-directives', 'extension://tree/assets/js/directives.js', 'tree-application');
-        $this['view.scripts']->queue('tree-controllers', 'extension://tree/assets/js/controllers.js', 'tree-application');
+        $this['view.scripts']->queue('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
+        $this['view.scripts']->queue('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
+        $this['view.scripts']->queue('application', 'extensions/tree/assets/js/application.js', 'uikit');
+        $this['view.scripts']->queue('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
+        $this['view.scripts']->queue('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
+        $this['view.scripts']->queue('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
 
         $this->getApplication()->on('kernel.view', function () {
             $this['view.scripts']->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
@@ -56,7 +56,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/", methods="GET")
-     * @Response("extension://tree/views/admin/index.razr")
+     * @Response("extensions/tree/views/admin/index.razr")
      */
     public function indexAction()
     {
@@ -66,7 +66,7 @@ class NodeController extends Controller
         ];
 
         $this->config['templates'] = [
-            'tree.item' => $this['view']->render('extension://tree/views/tmpl/item.razr')
+            'tree.item' => $this['view']->render('extensions/tree/views/tmpl/item.razr')
         ];
 
         return ['head.title' => __('Nodes')];
@@ -76,7 +76,7 @@ class NodeController extends Controller
      * @Route("/{id}", methods="GET", requirements={"id"="\d+"})
      * @Route("/{type}", methods="GET")
      * @Request({"id": "int"})
-     * @Response("extension://tree/views/admin/edit.razr")
+     * @Response("extensions/tree/views/admin/edit.razr")
      */
     public function editAction($id = 0, $type = '')
     {

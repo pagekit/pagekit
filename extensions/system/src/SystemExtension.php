@@ -141,8 +141,8 @@ class SystemExtension extends Extension
 
         if (isset($app['profiler'])) {
             $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extension://system/views/profiler/toolbar/system.php', 'extension://system/views/profiler/panel/system.php', 50);
-                $app['profiler']->add(new UserDataCollector($app['auth']), 'extension://system/views/profiler/toolbar/user.php', null, -20);
+                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extensions/system/views/profiler/toolbar/system.php', 'extensions/system/views/profiler/panel/system.php', 50);
+                $app['profiler']->add(new UserDataCollector($app['auth']), 'extensions/system/views/profiler/toolbar/user.php', null, -20);
             });
         }
     }
@@ -152,7 +152,7 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extension://system/migrations', $this['option']->get('system:version'))->run()) {
+        if ($version = $this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->run()) {
             $this['option']->set('system:version', $version);
         }
 

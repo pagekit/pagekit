@@ -38,7 +38,7 @@ class HelloWidget extends Type
     {
         $user = $this['user'];
 
-        return $this['view']->render('extension://hello/views/widget.razr', compact('user'));
+        return $this['view']->render('extensions/hello/views/widget.razr', compact('user'));
     }
 
     /**

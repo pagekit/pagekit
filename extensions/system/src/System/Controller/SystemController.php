@@ -14,7 +14,7 @@ class SystemController extends Controller
 {
     /**
      * @Access(admin=true)
-     * @Response("extension://system/views/admin/settings/index.razr")
+     * @Response("extensions/system/views/admin/settings/index.razr")
      */
     public function indexAction()
     {
@@ -57,7 +57,7 @@ class SystemController extends Controller
 
     /**
      * @Access("system: manage storage", admin=true)
-     * @Response("extension://system/views/admin/settings/storage.razr")
+     * @Response("extensions/system/views/admin/settings/storage.razr")
      */
     public function storageAction()
     {
@@ -66,7 +66,7 @@ class SystemController extends Controller
 
     /**
      * @Access(admin=true)
-     * @Response("extension://system/views/admin/settings/info.razr")
+     * @Response("extensions/system/views/admin/settings/info.razr")
      */
     public function infoAction()
     {

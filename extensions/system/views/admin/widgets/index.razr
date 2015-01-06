@@ -1,4 +1,4 @@
-@script('widgets', 'extension://system/assets/js/widgets.js', ['requirejs'])
+@script('widgets', 'extensions/system/assets/js/widgets.js', ['requirejs'])
 
 <form id="js-widgets" class="uk-form" method="post" data-reorder="@url('@system/widgets/reorder')">
 

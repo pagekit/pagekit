@@ -33,7 +33,7 @@ class TreeExtension extends Extension
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('alias.edit', 'extension://tree/views/tmpl/alias.razr');
+            $event->register('alias.edit', 'extensions/tree/views/tmpl/alias.razr');
         });
     }
 
@@ -42,7 +42,7 @@ class TreeExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extension://tree/migrations', $this['option']->get('tree:version'))->run()) {
+        if ($version = $this['migrator']->create('extensions/tree/migrations', $this['option']->get('tree:version'))->run()) {
             $this['option']->set('tree:version', $version);
         }
     }

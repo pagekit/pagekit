@@ -29,7 +29,7 @@ class SiteController extends Controller
     /**
      * @Route("/{id}", name="id")
      * @Request({"id" : "int"})
-     * @Response("extension://page/views/index.razr")
+     * @Response("extensions/page/views/index.razr")
      */
     public function indexAction($id = 0)
     {

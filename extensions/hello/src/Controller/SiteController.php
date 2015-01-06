@@ -10,7 +10,7 @@ use Pagekit\Framework\Controller\Controller;
 class SiteController extends Controller
 {
     /**
-     * @Response("extension://hello/views/index.razr")
+     * @Response("extensions/hello/views/index.razr")
      */
     public function indexAction()
     {
@@ -20,7 +20,7 @@ class SiteController extends Controller
     /**
      * @Route("/greet", name="@hello/greet/world")
      * @Route("/greet/{name}", name="@hello/greet/name")
-     * @Response("extension://hello/views/greet.razr")
+     * @Response("extensions/hello/views/greet.razr")
      */
     public function greetAction($name = 'World')
     {
@@ -30,7 +30,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     * @Response("extension://hello/views/view.razr")
+     * @Response("extensions/hello/views/view.razr")
      */
     public function viewAction($id = 1)
     {
@@ -39,7 +39,7 @@ class SiteController extends Controller
 
     public function anotherViewAction()
     {
-        $view = 'extension://hello/views/view.razr';
+        $view = 'extensions/hello/views/view.razr';
         $data = ['head.title' => __('View article'), 'id' => 1];
         return $this['view']->render($view, $data);
     }
@@ -57,7 +57,7 @@ class SiteController extends Controller
 
     public function downloadAction()
     {
-        return $this['response']->download('extension://hello/extension.svg');
+        return $this['response']->download('extensions/hello/extension.svg');
     }
 
     function forbiddenAction()

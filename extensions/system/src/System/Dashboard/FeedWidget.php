@@ -40,7 +40,7 @@ class FeedWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['view']->render('extension://system/views/admin/dashboard/feed/index.razr', compact('widget', 'options'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/feed/index.razr', compact('widget', 'options'));
     }
 
     /**
@@ -48,6 +48,6 @@ class FeedWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extension://system/views/admin/dashboard/feed/edit.razr', compact('widget'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/feed/edit.razr', compact('widget'));
     }
 }

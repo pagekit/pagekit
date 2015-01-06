@@ -35,10 +35,11 @@ class FileProvider
      * @param  string $name
      * @return string|false
      */
-    public function locate($name)
-    {
-        return $this->app['locator']->findResource($name);
-    }
+    // -TODO-
+    // public function locate($name)
+    // {
+    //     return $this->app['locator']->findResource($name);
+    // }
 
     /**
      * Proxy method call to filesystem.

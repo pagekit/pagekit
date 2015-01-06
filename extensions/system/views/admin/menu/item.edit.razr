@@ -1,4 +1,4 @@
-@script('menu', 'extension://system/assets/js/menu/item.edit.js', 'requirejs')
+@script('menu', 'extensions/system/assets/js/menu/item.edit.js', 'requirejs')
 
 <form id="js-item-edit" class="uk-form uk-form-horizontal" action="@url('@system/item/save')" method="post">
 

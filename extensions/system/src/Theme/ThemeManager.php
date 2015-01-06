@@ -2,6 +2,7 @@
 
 namespace Pagekit\Theme;
 
+use Pagekit\Component\Filesystem\File;
 use Pagekit\System\Package\PackageManager;
 
 class ThemeManager extends PackageManager
@@ -11,11 +12,7 @@ class ThemeManager extends PackageManager
      */
     public function load($name, $path = null)
     {
-        $root = $path ?: $this->repository->getPath()."/$name";
-
-        if (strpos($root, '://') > 0 ) {
-            $root = $this->app['file']->locate($root);
-        }
+        $root = $path ? File::getPath($path, true) : $this->repository->getPath()."/$name";
 
         if (!is_string($name)) {
             throw new \InvalidArgumentException('Theme name must be of type string.');

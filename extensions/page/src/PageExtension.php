@@ -38,12 +38,12 @@ class PageExtension extends Extension
 
         $app->on('tree.node.edit', function (NodeEditEvent $event) {
             if ($event->getNode()->getType() == 'page') {
-                $this['view.scripts']->queue('page-controllers', 'extension://page/assets/js/controllers.js', 'tree-application');
+                $this['view.scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
             }
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('page.edit', 'extension://page/views/tmpl/edit.razr');
+            $event->register('page.edit', 'extensions/page/views/tmpl/edit.razr');
         });
     }
 
@@ -52,7 +52,7 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extension://page/migrations', $this['option']->get('page:version'))->run()) {
+        if ($version = $this['migrator']->create('extensions/page/migrations', $this['option']->get('page:version'))->run()) {
             $this['option']->set('page:version', $version);
         }
     }

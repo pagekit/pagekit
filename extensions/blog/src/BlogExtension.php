@@ -52,12 +52,12 @@ class BlogExtension extends Extension
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('blog.post.edit', 'extension://blog/views/tmpl/edit.razr');
+            $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.razr');
         });
 
         $app->on('tree.node.edit', function (NodeEditEvent $event) {
             if ($event->getNode()->getType() == 'blog.post') {
-                $this['view.scripts']->queue('blog-controllers', 'extension://blog/assets/js/controllers.js', 'tree-application');
+                $this['view.scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
                 $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll())]]);
             }
         });
@@ -65,7 +65,7 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = $this['migrator']->create('extension://blog/migrations', $this['option']->get('blog:version'))->run()) {
+        if ($version = $this['migrator']->create('extensions/blog/migrations', $this['option']->get('blog:version'))->run()) {
             $this['option']->set('blog:version', $version);
         }
     }

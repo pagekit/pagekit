@@ -56,7 +56,7 @@ class SiteController extends Controller
     /**
      * @Route("/", name="site")
      * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
-     * @Response("extension://blog/views/post/index.razr")
+     * @Response("extensions/blog/views/post/index.razr")
      */
     public function indexAction($page = 1)
     {
@@ -175,7 +175,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/{id}", name="id")
-     * @Response("extension://blog/views/post/post.razr")
+     * @Response("extensions/blog/views/post/post.razr")
      */
     public function postAction($id = 0)
     {

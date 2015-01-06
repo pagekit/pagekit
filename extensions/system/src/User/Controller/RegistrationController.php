@@ -35,7 +35,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/user/registration.razr")
+     * @Response("extensions/system/views/user/registration.razr")
      */
     public function indexAction()
     {
@@ -220,7 +220,7 @@ class RegistrationController extends Controller
             $mail = $this['mailer']->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extension://system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody($this['view']->render('extensions/system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -233,7 +233,7 @@ class RegistrationController extends Controller
             $mail = $this['mailer']->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Activate your %site% account.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extension://system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody($this['view']->render('extensions/system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -248,7 +248,7 @@ class RegistrationController extends Controller
             $mail = $this['mailer']->create();
             $mail->setTo($this['option']->get('system:mail.from.address'))
                  ->setSubject(__('Approve an account at %site%.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extension://system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody($this['view']->render('extensions/system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

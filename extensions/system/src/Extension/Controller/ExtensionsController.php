@@ -27,7 +27,7 @@ class ExtensionsController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/admin/extensions/index.razr")
+     * @Response("extensions/system/views/admin/extensions/index.razr")
      */
     public function indexAction()
     {
@@ -43,7 +43,7 @@ class ExtensionsController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('extension://system/views/admin/extensions/table.razr', ['packages' => $packages])
+                'table' => $this['view']->render('extensions/system/views/admin/extensions/table.razr', ['packages' => $packages])
             ]);
         }
 

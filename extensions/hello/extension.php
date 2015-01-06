@@ -22,7 +22,7 @@ return [
 
         'settings' => [
 
-            'view' => 'extension://hello/views/admin/settings.razr',
+            'view' => 'extensions/hello/views/admin/settings.razr',
             'defaults' => [
                 'message' => 'World'
             ]
@@ -35,7 +35,7 @@ return [
 
         'hello' => [
             'label'  => 'Hello',
-            'icon'   => 'extension://hello/extension.svg',
+            'icon'   => 'extensions/hello/extension.svg',
             'url'    => '@hello/hello',
             'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'

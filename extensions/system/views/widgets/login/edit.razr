@@ -1,4 +1,4 @@
-@script('settings', 'extension://system/assets/js/widgets/login/edit.js', 'requirejs')
+@script('settings', 'extensions/system/assets/js/widgets/login/edit.js', 'requirejs')
 
 <div class="uk-form-row">
     <label class="uk-form-label">@trans('Login Redirect')</label>

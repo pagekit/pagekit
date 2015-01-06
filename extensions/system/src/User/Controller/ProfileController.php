@@ -33,7 +33,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/user/profile.razr")
+     * @Response("extensions/system/views/user/profile.razr")
      */
     public function indexAction()
     {

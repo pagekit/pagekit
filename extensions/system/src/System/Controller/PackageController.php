@@ -64,7 +64,7 @@ class PackageController extends Controller
             if (isset($extra['image'])) {
                 $extra['image'] = $this['url']->to("{$this->temp}/$path/".$extra['image']);
             } else {
-                $extra['image'] = $this['url']->to('extension://system/assets/images/placeholder-icon.svg');
+                $extra['image'] = $this['url']->to('extensions/system/assets/images/placeholder-icon.svg');
             }
 
             $response = [

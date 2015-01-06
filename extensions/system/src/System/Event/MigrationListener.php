@@ -14,7 +14,7 @@ class MigrationListener extends EventSubscriber
      */
     public function onLogin(LoginEvent $event)
     {
-        if ($event->getUser()->hasAccess('system: software updates') && $this['migrator']->create('extension://system/migrations', $this['option']->get('system:version'))->get()) {
+        if ($event->getUser()->hasAccess('system: software updates') && $this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->get()) {
             $event->setResponse($this['response']->redirect('@system/migration'));
         }
     }

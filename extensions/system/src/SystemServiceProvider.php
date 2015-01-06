@@ -3,6 +3,12 @@
 namespace Pagekit;
 
 use Pagekit\Component\File\Exception\InvalidArgumentException;
+
+use Pagekit\Component\Filesystem\File;
+use Pagekit\Component\Filesystem\FileLocator;
+use Pagekit\Component\Filesystem\Adapter\FileAdapter;
+use Pagekit\Component\Filesystem\Adapter\StreamAdapter;
+
 use Pagekit\Component\Package\Installer\PackageInstaller;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
@@ -27,10 +33,14 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new FileProvider($app);
         };
 
-        $app->extend('migrator', function($migrator, $app) {
-            $migrator->setLoader(new FilesystemLoader($app['locator']));
-            return $migrator;
-        });
+        $app['locator'] = function($app) {
+            return new FileLocator($app['path']);
+        };
+
+        // $app->extend('migrator', function($migrator, $app) {
+        //     $migrator->setLoader(new FilesystemLoader($app['locator']));
+        //     return $migrator;
+        // });
 
         $app->extend('view', function($view, $app) {
 
@@ -47,7 +57,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
             $installer  = new PackageInstaller($repository, $loader);
 
-            return new ExtensionManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
+            return new ExtensionManager($app, $repository, $installer, $app['autoloader']);
         };
 
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
@@ -93,6 +103,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
+        File::registerAdapter('file', new FileAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
+        File::registerAdapter('app', new StreamAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
+
         $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
         $this->app['view.sections']->prepend('head', function() {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
@@ -118,8 +131,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
             $template = $event->getTemplateReference();
 
-            if (filter_var($path = $template->get('path'), FILTER_VALIDATE_URL) !== false) {
-                $template->set('path', $this->app['locator']->findResource($path));
+            if ($path = $this->app['locator']->get($template->get('path'))) {
+                $template->set('name', $path); // php engine uses name
+                $template->set('path', $path);
             }
 
         } catch (InvalidArgumentException $e) {}

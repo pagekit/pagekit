@@ -1,4 +1,4 @@
-@script('user', 'extension://system/assets/js/user/edit.js', 'requirejs')
+@script('user', 'extensions/system/assets/js/user/edit.js', 'requirejs')
 
 <form id="js-user" class="uk-form uk-form-horizontal" action="@url('@system/user/save')" method="post">
 

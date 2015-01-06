@@ -1,7 +1,7 @@
-@style('system', 'extension://system/assets/css/system.css')
-@script('packages', 'extension://system/assets/js/settings/packages.js', 'requirejs')
-@script('updates', 'extension://system/assets/js/settings/updates.js', 'marketplace')
-@script('marketplace', 'extension://system/assets/js/settings/marketplace.js', 'requirejs')
+@style('system', 'extensions/system/assets/css/system.css')
+@script('packages', 'extensions/system/assets/js/settings/packages.js', 'requirejs')
+@script('updates', 'extensions/system/assets/js/settings/updates.js', 'marketplace')
+@script('marketplace', 'extensions/system/assets/js/settings/marketplace.js', 'requirejs')
 
 <div id="js-themes" class="uk-grid uk-grid-divider" data-api="@($api)" data-key="@($key)" data-url="@url('@system/package/install')" data-installed="@($packagesJson)" data-uk-grid-margin data-uk-grid-match>
 
@@ -24,7 +24,7 @@
             <li>
 
                 <div class="js-installed uk-grid uk-grid-width-large-1-2" data-url="@url('@system/themes')" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
-                    @include('extension://system/views/admin/themes/table.razr', ['packages' => $packages])
+                    @include('extensions/system/views/admin/themes/table.razr', ['packages' => $packages])
                 </div>
 
             </li>
@@ -44,7 +44,7 @@
                 <h2 class="pk-form-heading">@trans('Install an extension')</h2>
 
                 <div class="uk-placeholder uk-text-center uk-text-muted js-upload-drop">
-                    <img src="@url('extension://system/assets/images/finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')">
+                    <img src="@url('extensions/system/assets/images/finder-droparea.svg')" width="22" height="22" alt="@trans('Droparea')">
                     @trans('Drop files here or <a class="uk-form-file">select one<input class="js-upload-select" type="file" name="file"></a>').
                     @token
                 </div>

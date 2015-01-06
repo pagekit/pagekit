@@ -31,7 +31,7 @@ class SettingsController extends Controller
 
     /**
      * @Request({"tab": "int"})
-     * @Response("extension://system/views/admin/settings/settings.razr")
+     * @Response("extensions/system/views/admin/settings/settings.razr")
      */
     public function indexAction($tab = 0)
     {
@@ -51,7 +51,7 @@ class SettingsController extends Controller
 
         $codes = ['en_US'];
 
-        foreach ($this['file']->find()->directories()->depth(0)->in('extension://system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+        foreach ($this['file']->find()->directories()->depth(0)->in('extensions/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
             $codes[] = $dir->getFileName();
         }
 

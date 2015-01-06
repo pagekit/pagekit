@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @section('head')
-        @style('theme', 'extension://system/theme/css/theme.css')
-        @script('login', 'extension://system/assets/js/login.js', ['jquery', 'uikit', 'requirejs'])
+        @style('theme', 'extensions/system/theme/css/theme.css')
+        @script('login', 'extensions/system/assets/js/login.js', ['jquery', 'uikit', 'requirejs'])
     </head>
     <body class="uk-height-1-1">
 
@@ -17,7 +17,7 @@
 
                 <div class="tm-container tm-container-small">
 
-                    <img class="uk-margin-bottom" src="@url('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                    <img class="uk-margin-bottom" src="@url('extensions/system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                     @section('messages')
 

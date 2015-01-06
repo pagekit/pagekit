@@ -37,6 +37,6 @@ class BlogLink extends Link
     {
         $posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll();
 
-        return $this['view']->render('extension://blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
+        return $this['view']->render('extensions/blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
     }
 }

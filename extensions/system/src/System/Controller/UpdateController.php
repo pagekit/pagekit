@@ -32,7 +32,7 @@ class UpdateController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/admin/settings/update.razr")
+     * @Response("extensions/system/views/admin/settings/update.razr")
      */
     public function indexAction()
     {

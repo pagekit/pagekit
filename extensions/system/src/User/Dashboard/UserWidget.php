@@ -50,7 +50,7 @@ class UserWidget extends Type
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return $this['view']->render('extension://system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -58,6 +58,6 @@ class UserWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extension://system/views/admin/dashboard/user/edit.razr', compact('widget'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/user/edit.razr', compact('widget'));
     }
 }

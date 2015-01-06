@@ -1,4 +1,4 @@
-@script('menu', 'extension://system/assets/js/menu/menu.js', 'requirejs')
+@script('menu', 'extensions/system/assets/js/menu/menu.js', 'requirejs')
 
 <form id="js-menu" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match action="@url('@system/menu/reorder', ['id' => $menu.id])" method="post">
     <div class="uk-width-medium-1-4 pk-sidebar-left">
@@ -57,7 +57,7 @@
 
         </div>
 
-        @include('extension://system/views/admin/menu/item.razr', ['menu' => $menu, 'root' => $app.menus.getTree($menu)])
+        @include('extensions/system/views/admin/menu/item.razr', ['menu' => $menu, 'root' => $app.menus.getTree($menu)])
 
         @else
 

@@ -40,7 +40,7 @@ class ExceptionController implements \ArrayAccess
                 $title = __('Whoops, looks like something went wrong.');
         }
 
-        $response = $this['view']->render('extension://system/theme/templates/error.razr', compact('title', 'exception', 'currentContent'));
+        $response = $this['view']->render('extensions/system/theme/templates/error.razr', compact('title', 'exception', 'currentContent'));
 
         return $this['response']->create($response, $exception->getStatusCode(), $exception->getHeaders());
     }

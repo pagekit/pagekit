@@ -1,5 +1,5 @@
-@style('system', 'extension://system/assets/css/system.css')
-@script('settings', 'extension://system/assets/js/settings/index.js', 'requirejs')
+@style('system', 'extensions/system/assets/css/system.css')
+@script('settings', 'extensions/system/assets/js/settings/index.js', 'requirejs')
 
 <h2 class="uk-h3">@trans('System')</h2>
 
@@ -8,7 +8,7 @@
     @if ($user.hasAccess('system: access settings'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/settings')">
-            <img src="@url('extension://system/assets/images/icon-settings.svg')" width="50" height="50" alt="@trans('Settings')">
+            <img src="@url('extensions/system/assets/images/icon-settings.svg')" width="50" height="50" alt="@trans('Settings')">
             <p>@trans('Settings')</p>
         </a>
     </li>
@@ -17,7 +17,7 @@
     @if ($user.hasAccess('system: manage extensions'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/extensions')">
-            <img src="@url('extension://system/assets/images/icon-extensions.svg')" width="50" height="50" alt="@trans('Extensions')">
+            <img src="@url('extensions/system/assets/images/icon-extensions.svg')" width="50" height="50" alt="@trans('Extensions')">
             <p>@trans('Extensions')</p>
         </a>
     </li>
@@ -26,7 +26,7 @@
     @if ($user.hasAccess('system: manage themes'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/themes')">
-            <img src="@url('extension://system/assets/images/icon-themes.svg')" width="50" height="50" alt="@trans('Themes')">
+            <img src="@url('extensions/system/assets/images/icon-themes.svg')" width="50" height="50" alt="@trans('Themes')">
             <p>@trans('Themes')</p>
         </a>
     </li>
@@ -34,7 +34,7 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/dashboard/settings')">
-            <img src="@url('extension://system/assets/images/icon-dashboard.svg')" width="50" height="50" alt="@trans('Dashboard')">
+            <img src="@url('extensions/system/assets/images/icon-dashboard.svg')" width="50" height="50" alt="@trans('Dashboard')">
             <p>@trans('Dashboard')</p>
         </a>
     </li>
@@ -42,7 +42,7 @@
     @if ($user.hasAccess('system: manage storage'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/system/storage')">
-            <img src="@url('extension://system/assets/images/icon-storage.svg')" width="50" height="50" alt="@trans('Storage')">
+            <img src="@url('extensions/system/assets/images/icon-storage.svg')" width="50" height="50" alt="@trans('Storage')">
             <p>@trans('Storage')</p>
         </a>
     </li>
@@ -51,7 +51,7 @@
     @if ($user.hasAccess('system: software updates'))
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/update')">
-            <img src="@url('extension://system/assets/images/icon-update.svg')" width="50" height="50" alt="@trans('Update')">
+            <img src="@url('extensions/system/assets/images/icon-update.svg')" width="50" height="50" alt="@trans('Update')">
             <p>@trans('Update')</p>
         </a>
     </li>
@@ -59,14 +59,14 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/system/info')">
-            <img src="@url('extension://system/assets/images/icon-info.svg')" width="50" height="50" alt="@trans('Info')">
+            <img src="@url('extensions/system/assets/images/icon-info.svg')" width="50" height="50" alt="@trans('Info')">
             <p>@trans('Info')</p>
         </a>
     </li>
 
     <li class="uk-width">
         <a id="clearCache" class="uk-panel pk-panel-icon" href="@url('@system/settings/clearcache')">
-            <img src="@url('extension://system/assets/images/icon-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
+            <img src="@url('extensions/system/assets/images/icon-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
             <p>@trans('Clear Cache')</p>
         </a>
     </li>
@@ -83,7 +83,7 @@
     @foreach ($packages as $extension => $package)
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="@url('@system/extensions/settings', ['name' => $extension])">
-            <img class="uk-img-preserve" src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('extension://system/assets/images/placeholder-icon.svg'))" width="50" height="50" alt="@( $package.title )">
+            <img class="uk-img-preserve" src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('extensions/system/assets/images/placeholder-icon.svg'))" width="50" height="50" alt="@( $package.title )">
             <p>@( $package.title )</p>
         </a>
     </li>
