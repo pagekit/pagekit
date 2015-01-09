@@ -3,7 +3,6 @@
 namespace Pagekit\System;
 
 use Pagekit\Framework\Application;
-use Symfony\Component\Finder\Finder;
 
 class FileProvider
 {
@@ -17,16 +16,6 @@ class FileProvider
     public function __construct(Application $app)
     {
         $this->app = $app;
-    }
-
-    /**
-     * Find files and directories using the Symfony Finder.
-     *
-     * @return Finder
-     */
-    public function find()
-    {
-        return Finder::create();
     }
 
     /**
