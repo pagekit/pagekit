@@ -194,7 +194,7 @@ class SystemExtension extends Extension
 
         // clear temp folder
         if (isset($options['temp'])) {
-            foreach ($this['file']->find()->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
+            foreach ($this['finder']->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
                 $this['file']->delete($file->getPathname());
             }
         }

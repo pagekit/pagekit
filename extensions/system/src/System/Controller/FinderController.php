@@ -25,7 +25,7 @@ class FinderController extends Controller
         $data = array_fill_keys(['folders', 'files'], []);
         $data['mode'] = $mode;
 
-        foreach ($this['file']->find()->depth(0)->in($dir) as $file) {
+        foreach ($this['finder']->depth(0)->in($dir) as $file) {
 
             if ('-' === $mode = $this->getMode($file->getPathname())) {
                 continue;

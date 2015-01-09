@@ -63,7 +63,7 @@ class SystemInfoHelper implements \ArrayAccess
             $result[$this->getRelativePath($directory)] = is_writable($directory);
 
             if (is_dir($directory)) {
-                foreach ($this['file']->find()->in($directory)->directories()->depth(0) as $dir) {
+                foreach ($this['finder']->in($directory)->directories()->depth(0) as $dir) {
                     $result[$this->getRelativePath($dir->getPathname())] = is_writable($dir->getPathname());
                 }
             }

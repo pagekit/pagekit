@@ -20,6 +20,7 @@ use Pagekit\System\FileProvider;
 use Pagekit\System\Migration\FilesystemLoader;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Symfony\Component\Finder\Finder;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
@@ -36,6 +37,10 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $app['locator'] = function($app) {
             return new FileLocator($app['path']);
         };
+
+        $app['finder'] = $app->factory(function() {
+            return Finder::create();
+        });
 
         // $app->extend('migrator', function($migrator, $app) {
         //     $migrator->setLoader(new FilesystemLoader($app['locator']));

@@ -51,7 +51,7 @@ class SettingsController extends Controller
 
         $codes = ['en_US'];
 
-        foreach ($this['file']->find()->directories()->depth(0)->in('extensions/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+        foreach ($this['finder']->directories()->depth(0)->in('extensions/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
             $codes[] = $dir->getFileName();
         }
 
