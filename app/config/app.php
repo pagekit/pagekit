@@ -28,7 +28,7 @@ return [
             'Pagekit\Component\Auth\AuthServiceProvider',
             'Pagekit\Component\Auth\RememberMeServiceProvider',
             'Pagekit\Component\Feed\FeedServiceProvider',
-            'Pagekit\Component\File\FilesystemServiceProvider',
+            'Pagekit\Component\Filesystem\FilesystemServiceProvider',
             'Pagekit\Component\Mail\MailServiceProvider',
             'Pagekit\Component\Markdown\MarkdownServiceProvider',
             'Pagekit\Component\Migration\MigrationServiceProvider',

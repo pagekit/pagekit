@@ -2,7 +2,6 @@
 
 namespace Pagekit\Theme;
 
-use Pagekit\Component\Filesystem\File;
 use Pagekit\System\Package\PackageManager;
 
 class ThemeManager extends PackageManager
@@ -12,7 +11,7 @@ class ThemeManager extends PackageManager
      */
     public function load($name, $path = null)
     {
-        $root = $path ? File::getPath($path, true) : $this->repository->getPath()."/$name";
+        $root = $path ? self::$app['file']->getPath($path, true) : $this->repository->getPath()."/$name";
 
         if (!is_string($name)) {
             throw new \InvalidArgumentException('Theme name must be of type string.');
@@ -30,12 +29,12 @@ class ThemeManager extends PackageManager
             return include $bootstrap;
         };
 
-        $config = (!$config = $fn($this->app, "$root/theme.php") or 1 === $config) ? [] : $config;
+        $config = (!$config = $fn(self::$app, "$root/theme.php") or 1 === $config) ? [] : $config;
         $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Theme\Theme';
 
         if (isset($config['autoload'])) {
             foreach ($config['autoload'] as $namespace => $path) {
-                $this->autoloader->addPsr4($namespace, "$root/$path");
+                $this['autoloader']->addPsr4($namespace, "$root/$path");
             }
         }
 

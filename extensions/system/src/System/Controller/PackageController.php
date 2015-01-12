@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
-use Pagekit\Component\File\Archive\Zip;
+use Pagekit\Component\Filesystem\Archive\Zip;
 use Pagekit\Component\Package\Downloader\PackageDownloader;
 use Pagekit\Component\Package\Exception\ArchiveExtractionException;
 use Pagekit\Component\Package\Exception\ChecksumVerificationException;
