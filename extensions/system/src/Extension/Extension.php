@@ -218,7 +218,7 @@ class Extension
     //     $addResources($this->getConfig('resources.export', []), $this->getName());
 
     //     if ($config = $this->getConfig('resources.override')) {
-    //         App::events()->addListener('system.init', function() use ($config, $addResources) {
+    //         App::on('system.init', function() use ($config, $addResources) {
     //             $addResources($config);
     //         }, 20);
     //     }

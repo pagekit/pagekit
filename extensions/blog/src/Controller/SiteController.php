@@ -35,7 +35,7 @@ class SiteController extends Controller
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
-        App::events()->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
+        App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
             $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
         });
@@ -48,7 +48,7 @@ class SiteController extends Controller
      */
     public function indexAction($page = 1)
     {
-        App::events()->addListener('blog.post.postLoad', function (EntityEvent $event) {
+        App::on('blog.post.postLoad', function (EntityEvent $event) {
             $post = $event->getEntity();
             $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
