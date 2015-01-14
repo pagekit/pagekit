@@ -6,6 +6,7 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
+use Pagekit\User\Entity\User;
 
 /**
  * @Route("/")
@@ -45,7 +46,7 @@ class SystemController extends Controller
             $user = $this['users']->get($this['user']->getId());
             $user->set('admin.menu', $order);
 
-            $this['users']->getUserRepository()->save($user);
+            User::save($user);
 
             return ['message' => __('Order saved.')];
 

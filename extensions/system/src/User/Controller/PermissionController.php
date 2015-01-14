@@ -2,8 +2,8 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
+use Pagekit\User\Entity\Role;
 
 /**
  * @Route("/user/permission")
@@ -12,24 +12,11 @@ use Pagekit\Framework\Controller\Controller;
 class PermissionController extends Controller
 {
     /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->roles = $this['users']->getRoleRepository();
-    }
-
-    /**
      * @Response("extensions/system/views/admin/user/permission.razr")
      */
     public function indexAction()
     {
-        $roles = $this->roles->query()->orderBy('priority')->get();
+        $roles = Role::query()->orderBy('priority')->get();
 
         return ['head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this['permissions']];
     }
@@ -40,9 +27,9 @@ class PermissionController extends Controller
      */
     public function saveAction($permissions = [])
     {
-        foreach ($this->roles->findAll() as $role) {
+        foreach (Role::findAll() as $role) {
             $role->setPermissions(isset($permissions[$role->getId()]) ? $permissions[$role->getId()] : []);
-            $this->roles->save($role);
+            Role::save($role);
         }
 
         return $this['request']->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');

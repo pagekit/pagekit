@@ -2,11 +2,10 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\RoleInterface;
 use Pagekit\User\Model\UserInterface;
 
@@ -15,25 +14,6 @@ use Pagekit\User\Model\UserInterface;
  */
 class RegistrationController extends Controller
 {
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->users = $this['users']->getUserRepository();
-        $this->roles = $this['users']->getRoleRepository();
-    }
-
     /**
      * @Response("extensions/system/views/user/registration.razr")
      */
@@ -93,11 +73,11 @@ class RegistrationController extends Controller
                 $errors[] = ['field'=> 'email', 'message' => __('Email is invalid.')];
             }
 
-            if ($this->users->query()->orWhere(['username = :username', 'email = :username'], ['username' => $username])->first()) {
+            if (User::query()->orWhere(['username = :username', 'email = :username'], ['username' => $username])->first()) {
                 $errors[] = ['field'=> 'username', 'message' => __('Username not available.'), 'dynamic' => true];
             }
 
-            if ($this->users->query()->orWhere(['username = :email', 'email = :email'], ['email' => $email])->first()) {
+            if (User::query()->orWhere(['username = :email', 'email = :email'], ['email' => $email])->first()) {
                 $errors[] = ['field'=> 'email', 'message' => __('Email not available.'), 'dynamic' => true];
             }
 
@@ -112,7 +92,7 @@ class RegistrationController extends Controller
             $user->setEmail($email);
             $user->setPassword($this['auth.password']->hash($password));
             $user->setStatus(UserInterface::STATUS_BLOCKED);
-            $user->setRoles($this->roles->where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
+            $user->setRoles(Role::where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
 
             $token = $this['auth.random']->generateString(32);
             $admin = $this['option']->get('system:user.registration') == 'approval';
@@ -132,7 +112,7 @@ class RegistrationController extends Controller
 
             }
 
-            $this->users->save($user);
+            User::save($user);
 
             if ($verify) {
 
@@ -182,7 +162,7 @@ class RegistrationController extends Controller
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) || empty($activation) || !$user = $this->users->where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
+        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             $this['message']->error(__('Invalid key.'));
             return $this->redirect('/');
         }
@@ -208,7 +188,7 @@ class RegistrationController extends Controller
             }
         }
 
-        $this->users->save($user);
+        User::save($user);
 
         return $this->redirect('@system/auth/login');
     }

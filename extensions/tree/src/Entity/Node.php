@@ -2,6 +2,7 @@
 
 namespace Pagekit\Tree\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\Tree\Model\NodeInterface;
 use Pagekit\System\Entity\DataTrait;
@@ -12,7 +13,7 @@ use Pagekit\User\Entity\AccessTrait;
  */
 class Node implements NodeInterface, \JsonSerializable
 {
-    use AccessTrait, DataTrait;
+    use AccessTrait, DataTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -133,9 +134,7 @@ class Node implements NodeInterface, \JsonSerializable
      */
     public function preSave(EntityEvent $event)
     {
-        $manager    = $event->getEntityManager();
-        $db         = $manager->getConnection();
-        $repository = $manager->getRepository(get_class($this));
+        $db = self::getConnection();
 
         $i  = 2;
         $id = $this->id;
@@ -144,7 +143,7 @@ class Node implements NodeInterface, \JsonSerializable
             $this->slug = $this->getTitle();
         }
 
-        while ($repository->query()->where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
+        while (self::query()->where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
             if ($id) $query->where('id <> ?', [$id]);
         })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
@@ -152,7 +151,7 @@ class Node implements NodeInterface, \JsonSerializable
 
         // Update own path
         $path = '/'.$this->getSlug();
-        if ($parent = $repository->find($this->getParentId())) {
+        if ($parent = self::find($this->getParentId())) {
             $path = $parent->getPath().$path;
         } else {
             // set Parent to 0, if old parent is not found
@@ -162,18 +161,18 @@ class Node implements NodeInterface, \JsonSerializable
 
         if ($this->id) {
             // Update children's paths
-            foreach ($repository->query()->where('parent_id = ?', [$this->id])->get() as $child) {
+            foreach (self::query()->where('parent_id = ?', [$this->id])->get() as $child) {
                 if (0 !== strpos($child->getPath(), $this->getPath().'/')) {
-                    $repository->save($child);
+                    self::save($child);
                 }
             }
         } else {
             // Set priority
             $this->priority = 1 + $db->createQueryBuilder()
-                ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
-                ->from('@tree_node')
-                ->where('parent_id = ?', [$this->parentId])
-                ->execute()->fetchColumn();
+                    ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
+                    ->from('@tree_node')
+                    ->where('parent_id = ?', [$this->parentId])
+                    ->execute()->fetchColumn();
         }
     }
 }

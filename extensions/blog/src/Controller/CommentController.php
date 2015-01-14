@@ -4,9 +4,9 @@ namespace Pagekit\Blog\Controller;
 
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
+use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
 use Pagekit\Comment\Model\CommentInterface;
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 
@@ -21,23 +21,11 @@ class CommentController extends Controller
     protected $extension;
 
     /**
-     * @var Repository
-     */
-    protected $posts;
-
-    /**
-     * @var Repository
-     */
-    protected $comments;
-
-    /**
      * Constructor.
      */
     public function __construct(BlogExtension $extension)
     {
         $this->extension = $extension;
-        $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
     }
 
     /**
@@ -52,12 +40,12 @@ class CommentController extends Controller
             $filter = $this['session']->get('blog.comments.filter', []);
         }
 
-        $query = $this->comments->query()->related(['post']);
+        $query = Comment::query()->related(['post']);
 
         $post  = null;
         if ($post_id) {
             $query->where(['post_id = ?'], [$post_id]);
-            $post = $this->posts->find($post_id);
+            $post = Post::find($post_id);
         }
 
         if (isset($filter['status']) && is_numeric($status = $filter['status'])) {
@@ -116,7 +104,7 @@ class CommentController extends Controller
     {
         try {
 
-            if (!$comment = $this->comments->find($id)) {
+            if (!$comment = Comment::find($id)) {
                 throw new Exception('Invalid comment.');
             }
 
@@ -135,9 +123,9 @@ class CommentController extends Controller
 
             $user = $this['user'];
 
-            if (!$id || !$comment = $this->comments->find($id)) {
+            if (!$id || !$comment = Comment::find($id)) {
 
-                if (!$parent = $this->comments->find((int) @$data['parent_id'])) {
+                if (!$parent = Comment::find((int) @$data['parent_id'])) {
                     throw new Exception('Invalid comment reply.');
                 }
 
@@ -152,7 +140,7 @@ class CommentController extends Controller
                 $comment->setParent($parent);
             }
 
-            $this->comments->save($comment, $data);
+            Comment::save($comment, $data);
 
             return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
 
@@ -169,8 +157,8 @@ class CommentController extends Controller
     public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($comment = $this->comments->find($id)) {
-                $this->comments->delete($comment);
+            if ($comment = Comment::find($id)) {
+                Comment::delete($comment);
             }
         }
 
@@ -184,10 +172,10 @@ class CommentController extends Controller
     public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
-            if ($comment = $this->comments->find($id) and $comment->getStatus() != $status) {
+            if ($comment = Comment::find($id) and $comment->getStatus() != $status) {
                 $previous = $comment->getStatus();
                 $comment->setStatus($status);
-                $this->comments->save($comment);
+                Comment::save($comment);
 
                 $this['events']->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
             }

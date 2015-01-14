@@ -4,7 +4,7 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\User\Entity\UserRepository;
+use Pagekit\User\Entity\User;
 use Pagekit\User\Model\UserInterface;
 
 /**
@@ -13,30 +13,11 @@ use Pagekit\User\Model\UserInterface;
 class ResetPasswordController extends Controller
 {
     /**
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->user  = $this['user'];
-        $this->users = $this['users']->getUserRepository();
-    }
-
-    /**
      * @Response("extensions/system/views/user/reset/request.razr")
      */
     public function indexAction()
     {
-        if ($this->user->isAuthenticated()) {
+        if ($this['user']->isAuthenticated()) {
             return $this->redirect('/');
         }
 
@@ -51,7 +32,7 @@ class ResetPasswordController extends Controller
     {
         try {
 
-            if ($this->user->isAuthenticated()) {
+            if ($this['user']->isAuthenticated()) {
                 return $this->redirect('/');
             }
 
@@ -63,7 +44,7 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Enter a email address.'));
             }
 
-            if (!$user = $this->users->findByEmail($email)) {
+            if (!$user = User::findByEmail($email)) {
                 throw new Exception(__('Invalid email address.'));
             }
 
@@ -87,7 +68,7 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Unable to send confirmation link.'));
             }
 
-            $this->users->save($user);
+            User::save($user);
 
             $this['message']->success(__('Check your email for the confirmation link.'));
 
@@ -106,7 +87,7 @@ class ResetPasswordController extends Controller
      */
     public function confirmAction($username = "", $activation = "")
     {
-        if (empty($username) || empty($activation) || !$user = $this->users->where(compact('username', 'activation'))->first()) {
+        if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
             $this['message']->error(__('Invalid key.'));
             return $this->redirect('/');
         }
@@ -137,7 +118,7 @@ class ResetPasswordController extends Controller
                 $user->setPassword($this['auth.password']->hash($password));
                 $user->setActivation(null);
 
-                $this->users->save($user);
+                User::save($user);
 
                 $this['message']->success(__('Your password has been reset.'));
                 return $this->redirect('/');

@@ -2,17 +2,17 @@
 
 namespace Pagekit\Menu\Entity;
 
-use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\Menu\Model\Item as BaseItem;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
- * @Entity(repositoryClass="Pagekit\Menu\Entity\ItemRepository", tableClass="@system_menu_item", eventPrefix="system.menuitem")
+ * @Entity(tableClass="@system_menu_item", eventPrefix="system.menuitem")
  */
 class Item extends BaseItem
 {
-    use AccessTrait;
+    use AccessTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -123,10 +123,16 @@ class Item extends BaseItem
     /**
      * @PreSave
      */
-    public function preSave(EntityEvent $event)
+    public function preSave()
     {
         if (!$this->id) {
-            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', [$this->getMenuId()]) ?: 0);
+            $this->setPriority(self::getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_menu_item WHERE menu_id=? AND DEPTH=0', [$this->getMenuId()]) ?: 0);
         }
+    }
+
+    public static function findByMenu($menu)
+    {
+        $menu_id = ($menu instanceof MenuInterface) ? $menu->getId() : (int) $menu;
+        return self::where(compact('menu_id'))->get();
     }
 }

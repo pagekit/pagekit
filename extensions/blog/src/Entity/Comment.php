@@ -3,12 +3,15 @@
 namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\Entity\Comment as BaseComment;
+use Pagekit\Component\Database\ORM\ModelTrait;
 
 /**
  * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")
  */
 class Comment extends BaseComment
 {
+    use ModelTrait;
+
     /** @Column(type="integer") */
     protected $post_id;
 

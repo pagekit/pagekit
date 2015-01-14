@@ -3,6 +3,7 @@
 namespace Pagekit\Blog;
 
 use Pagekit\Blog\Content\ReadmorePlugin;
+use Pagekit\Blog\Entity\Post;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Extension\Extension;
@@ -38,11 +39,11 @@ class BlogExtension extends Extension
             $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
         });
 
-        $app->on('tree.types', function(NodeTypeEvent $event) {
+        $app->on('tree.types', function (NodeTypeEvent $event) {
             $event->register('blog', 'Blog', [
-                'type' => 'mount',
+                'type'        => 'mount',
                 'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
-                'url' => '@blog/site'
+                'url'         => '@blog/site'
             ]);
 
             $event->register('blog.post', 'Blog Post', [
@@ -58,7 +59,7 @@ class BlogExtension extends Extension
         $app->on('tree.node.edit', function (NodeEditEvent $event) {
             if ($event->getNode()->getType() == 'blog.post') {
                 $this['view.scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
-                $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll())]]);
+                $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, Post::findAll())]]);
             }
         });
     }

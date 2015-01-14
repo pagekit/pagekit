@@ -2,12 +2,10 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\RoleInterface;
 
 /**
@@ -16,31 +14,6 @@ use Pagekit\User\Model\RoleInterface;
 class UserController extends Controller
 {
     const USERS_PER_PAGE = 20;
-
-    /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->user  = $this['user'];
-        $this->users = $this['users']->getUserRepository();
-        $this->roles = $this['users']->getRoleRepository();
-    }
 
     /**
      * @Request({"filter": "array", "page":"int"})
@@ -54,7 +27,7 @@ class UserController extends Controller
             $filter = $this['session']->get('user.filter', []);
         }
 
-        $query = $this->users->query();
+        $query = User::query();
 
         if (isset($filter['status'])) {
             if (is_numeric($filter['status'])) {
@@ -122,7 +95,7 @@ class UserController extends Controller
         $user = new User;
         $user->setRoles([]);
 
-        $roles = $this->user->hasAccess('administer permissions') ? $this->getRoles() : [];
+        $roles = $this['user']->hasAccess('administer permissions') ? $this->getRoles() : [];
 
         return ['head.title' => __('Add User'), 'user' => $user, 'roles' => $roles];
     }
@@ -133,8 +106,8 @@ class UserController extends Controller
      */
     public function editAction($id)
     {
-        $user  = $this->users->where(compact('id'))->related('roles')->first();
-        $roles = $this->user->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
+        $user  = User::where(compact('id'))->related('roles')->first();
+        $roles = $this['user']->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
 
         return ['head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles];
     }
@@ -148,7 +121,7 @@ class UserController extends Controller
         try {
 
             // is new ?
-            if (!$user = $this->users->find($id)) {
+            if (!$user = User::find($id)) {
 
                 if ($id) {
                     throw new Exception(__('User not found.'));
@@ -162,7 +135,7 @@ class UserController extends Controller
                 $user->setRegistered(new \DateTime);
             }
 
-            $self = $this->user->getId() == $user->getId();
+            $self = $this['user']->getId() == $user->getId();
 
             if ($self && $user->isBlocked()) {
                 throw new Exception(__('Unable to block yourself.'));
@@ -179,13 +152,13 @@ class UserController extends Controller
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if ($this->users->where(['id <> :id', ], compact('id'))->where(function($query) use ($name) {
+            if (User::where(['id <> :id', ], compact('id'))->where(function($query) use ($name) {
                 $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
             })->first()) {
                 throw new Exception(__('Username not available.'));
             }
 
-            if ($this->users->where(['id <> :id'], compact('id'))->where(function($query) use ($email) {
+            if (User::where(['id <> :id'], compact('id'))->where(function($query) use ($email) {
                 $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
             })->first()) {
                 throw new Exception(__('Email not available.'));
@@ -202,16 +175,16 @@ class UserController extends Controller
                 $user->setPassword($this['auth.password']->hash($password));
             }
 
-            if ($this->user->hasAccess('system: manage user permissions')) {
+            if ($this['user']->hasAccess('system: manage user permissions')) {
 
                 if ($self && $user->hasRole(RoleInterface::ROLE_ADMINISTRATOR) && (!$roles || !in_array(RoleInterface::ROLE_ADMINISTRATOR, $roles))) {
                     $roles[] = RoleInterface::ROLE_ADMINISTRATOR;
                 }
 
-                $user->setRoles($roles ? $this->roles->query()->whereIn('id', $roles)->get() : []);
+                $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
             }
 
-            $this->users->save($user, $data);
+            User::save($user, $data);
 
             return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user)];
 
@@ -227,13 +200,13 @@ class UserController extends Controller
      */
     public function deleteAction($ids = [])
     {
-        if (in_array($this->user->getId(), $ids)) {
+        if (in_array($this['user']->getId(), $ids)) {
             return ['message' => __('Unable to delete yourself.'), 'error' => true];
         }
 
         foreach ($ids as $key => $id) {
-            if ($user = $this->users->find($id)) {
-                $this->users->delete($user);
+            if ($user = User::find($id)) {
+                User::delete($user);
             }
         }
 
@@ -246,17 +219,17 @@ class UserController extends Controller
      */
     public function statusAction($status, $ids = [])
     {
-        if ($status == User::STATUS_BLOCKED && in_array($this->user->getId(), $ids)) {
+        if ($status == User::STATUS_BLOCKED && in_array($this['user']->getId(), $ids)) {
             return ['message' => __('Unable to block yourself.'), 'error' => true];
         }
 
         foreach ($ids as $id) {
-            if ($user = $this->users->find($id)) {
+            if ($user = User::find($id)) {
 
                 $user->setActivation('');
 
                 if ($status != $user->getStatus()) {
-                    $this->users->save($user, compact('status'));
+                    User::save($user, compact('status'));
                 }
             }
         }
@@ -299,7 +272,7 @@ class UserController extends Controller
      */
     protected function getRoles(User $user = null)
     {
-        $roles = $this->roles->where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get();
+        $roles = Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get();
 
         foreach ($roles as $role) {
 

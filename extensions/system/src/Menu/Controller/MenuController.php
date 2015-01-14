@@ -2,10 +2,8 @@
 
 namespace Pagekit\Menu\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\Menu\Entity\ItemRepository;
 use Pagekit\Menu\Entity\Menu;
 
 /**
@@ -14,34 +12,15 @@ use Pagekit\Menu\Entity\Menu;
 class MenuController extends Controller
 {
     /**
-     * @var Repository
-     */
-    protected $menus;
-
-    /**
-     * @var ItemRepository
-     */
-    protected $items;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->menus  = $this['menus']->getMenuRepository();
-        $this->items  = $this['menus']->getItemRepository();
-    }
-
-    /**
      * @Request({"id": "int"})
      * @Response("extensions/system/views/admin/menu/index.razr")
      */
     public function indexAction($id = null)
     {
-        $menus = $this->menus->query()->orderBy('name')->get();
+        $menus = Menu::query()->orderBy('name')->get();
 
         if ($menu = $id === null && count($menus) ? current($menus) : (isset($menus[$id]) ? $menus[$id] : false)) {
-            $menu->setItems($this->items->findByMenu($menu));
+            $menu->setItems(Item::findByMenu($menu));
         }
 
         return ['head.title' => __('Menus'), 'menu' => $menu, 'menus' => $menus];
@@ -58,15 +37,15 @@ class MenuController extends Controller
                 throw new Exception(__('Invalid menu name.'));
             }
 
-            if (!$menu = $this->menus->find($id)) {
+            if (!$menu = Menu::find($id)) {
                 $menu = new Menu;
             }
 
-            if ($this->menus->where(['name = ?', 'id <> ?'], [$name, $id])->first()) {
+            if (Menu::where(['name = ?', 'id <> ?'], [$name, $id])->first()) {
                 throw new Exception(__('Invalid menu name. "%name%" is already in use.', ['%name%' => $name]));
             }
 
-            $this->menus->save($menu, compact('name'));
+            Menu::save($menu, compact('name'));
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -82,11 +61,11 @@ class MenuController extends Controller
     {
         try {
 
-            if (!$menu = $this->menus->find($id)) {
+            if (!$menu = Menu::find($id)) {
                 throw new Exception(__('Invalid menu id'));
             }
 
-            $this->menus->delete($menu);
+            Menu::delete($menu);
 
             $this['db']->delete('@system_menu_item', ['menu_id' => $id]);
 
@@ -103,7 +82,7 @@ class MenuController extends Controller
      */
     public function reorderAction($id, $order = [])
     {
-        $items = $this->items->findByMenu($id);
+        $items = Item::findByMenu($id);
 
         foreach ($order as $data) {
 
@@ -116,7 +95,7 @@ class MenuController extends Controller
             $item->setDepth($data['depth']);
             $item->setPriority($data['order']);
 
-            $this->items->save($item);
+            Item::save($item);
         }
 
         return ['message' => __('Menu order updated')];

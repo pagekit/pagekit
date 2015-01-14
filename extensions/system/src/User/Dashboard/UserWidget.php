@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Dashboard;
 
+use Pagekit\User\Entity\User;
 use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
@@ -40,7 +41,7 @@ class UserWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        $query = $this['users']->getUserRepository()->query();
+        $query = User::query();
 
         if ($widget->get('show') == 'registered') {
             $query->orderBy('registered', 'DESC');

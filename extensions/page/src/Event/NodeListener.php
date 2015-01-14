@@ -3,17 +3,11 @@
 namespace Pagekit\Page\Event;
 
 use Pagekit\Component\Database\Event\EntityEvent;
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Page\Entity\Page;
 
 class NodeListener extends EventSubscriber
 {
-    /**
-     * @var Repository
-     */
-    protected $pages;
-
     public function onLoad(EntityEvent $event)
     {
         $node = $event->getEntity();
@@ -22,7 +16,7 @@ class NodeListener extends EventSubscriber
         }
 
         $defaults = $node->get('defaults', []);
-        if (isset($defaults['id']) && $page = $this->getPages()->find($defaults['id'])) {
+        if (isset($defaults['id']) && $page = Page::find($defaults['id'])) {
             $node->set('page', $page);
         }
     }
@@ -36,11 +30,11 @@ class NodeListener extends EventSubscriber
 
         $data = $node->get('page');
 
-        if (!isset($data['id']) || !$page = $this->getPages()->find($data['id'])) {
+        if (!isset($data['id']) || !$page = Page::find($data['id'])) {
             $page = new Page;
         }
 
-        $this->getPages()->save($page, $data);
+        Page::save($page, $data);
         $data                   = $node->getData();
         $data['defaults']['id'] = $page->getId();
         $data['url']            = '@page/id?id='.$page->getId();
@@ -56,8 +50,8 @@ class NodeListener extends EventSubscriber
         }
 
         $defaults = $node->get('defaults', []);
-        if (isset($defaults['id']) && $page = $this->getPages()->find($defaults['id'])) {
-            $this->getPages()->delete($page);
+        if (isset($defaults['id']) && $page = Page::find($defaults['id'])) {
+            Page::delete($page);
         }
     }
 
@@ -72,16 +66,5 @@ class NodeListener extends EventSubscriber
             'tree.node.postSave'   => 'onLoad',
             'tree.node.postDelete' => 'onDelete'
         ];
-    }
-
-    /**
-     * @return Repository
-     */
-    protected function getPages()
-    {
-        if (!$this->pages) {
-            $this->pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page');
-        }
-        return $this->pages;
     }
 }

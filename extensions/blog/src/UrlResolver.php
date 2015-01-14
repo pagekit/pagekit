@@ -2,7 +2,7 @@
 
 namespace Pagekit\Blog;
 
-use Pagekit\Component\Database\ORM\Repository;
+use Pagekit\Blog\Entity\Post;
 use Pagekit\Component\Routing\ParamsResolverInterface;
 use Pagekit\Framework\ApplicationTrait;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,11 +25,6 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
     protected $cacheEntries;
 
     /**
-     * @var Repository
-     */
-    protected $posts;
-
-    /**
      * @var string
      */
     protected $permalink;
@@ -48,7 +43,6 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
         }
 
         $this->cacheEntries = $this['cache']->fetch(self::CACHE_KEY) ?: [];
-        $this->posts        = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
     }
 
     /**
@@ -60,7 +54,7 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
 
         if (!isset($this->cacheEntries[$slug])) {
 
-            if (!$post = $this->posts->where(compact('slug'))->first()) {
+            if (!$post = Post::where(compact('slug'))->first()) {
                 throw new NotFoundHttpException(__('Post with slug "%slug%" not found!', ['%slug%' => $slug]));
             }
 
@@ -81,7 +75,7 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
 
         if (!isset($this->cacheEntries[$id])) {
 
-            if (!$post = $this->posts->where(compact('id'))->first()) {
+            if (!$post = Post::where(compact('id'))->first()) {
                 throw new RouteNotFoundException(__('Post with id "%id%" not found!', ['%id%' => $id]));
             }
 

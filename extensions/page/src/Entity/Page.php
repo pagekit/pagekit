@@ -2,6 +2,7 @@
 
 namespace Pagekit\Page\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 
 /**
@@ -9,7 +10,7 @@ use Pagekit\System\Entity\DataTrait;
  */
 class Page implements \JsonSerializable
 {
-    use DataTrait;
+    use DataTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;

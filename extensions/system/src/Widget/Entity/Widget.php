@@ -2,6 +2,7 @@
 
 namespace Pagekit\Widget\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\User\Entity\AccessTrait;
 use Pagekit\Widget\Model\Widget as BaseWidget;
 
@@ -10,7 +11,7 @@ use Pagekit\Widget\Model\Widget as BaseWidget;
  */
 class Widget extends BaseWidget
 {
-    use AccessTrait;
+    use AccessTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;

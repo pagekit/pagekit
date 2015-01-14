@@ -2,27 +2,17 @@
 
 namespace Pagekit\Tree\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Tree\Entity\Node;
 use Pagekit\Tree\Event\NodeEditEvent;
+use Pagekit\User\Entity\Role;
 
 /**
  * @Access("tree: manage nodes", admin=true)
  */
 class NodeController extends Controller
 {
-    /**
-     * @var Repository
-     */
-    protected $nodes;
-
-    /**
-     * @var Repository
-     */
-    protected $roles;
-
     /**
      * @var array
      */
@@ -33,9 +23,6 @@ class NodeController extends Controller
      */
     public function __construct()
     {
-        $this->nodes = $this['db.em']->getRepository('Pagekit\Tree\Entity\Node');
-        $this->roles = $this['users']->getRoleRepository();
-
         $this['view.scripts']->queue('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
         $this['view.scripts']->queue('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
         $this['view.scripts']->queue('application', 'extensions/tree/assets/js/application.js', 'uikit');
@@ -62,7 +49,7 @@ class NodeController extends Controller
     {
         $this->config['data'] = [
             'types' => $this['tree.types']->getTypes(),
-            'nodes' => $this->nodes->findAll()
+            'nodes' => Node::findAll()
         ];
 
         $this->config['templates'] = [
@@ -87,7 +74,7 @@ class NodeController extends Controller
                 $node = new Node;
                 $node->setType($type);
 
-            } elseif (!$node = $this->nodes->find($id)) {
+            } elseif (!$node = Node::find($id)) {
                 throw new Exception(__('Invalid node id.'));
             }
 
@@ -98,7 +85,7 @@ class NodeController extends Controller
             $this->config['data'] = [
                 'type'  => $this['tree.types'][$node->getType()],
                 'node'  => $node,
-                'roles' => $this->roles->findAll()
+                'roles' => Role::findAll()
             ];
 
             $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
@@ -123,12 +110,16 @@ class NodeController extends Controller
     {
         try {
 
-            if (!$node = $this->nodes->find($id)) {
+            if (!$node = Node::find($id)) {
                 $node = new Node;
                 unset($data['id']);
             }
 
-            $this->nodes->save($node, $data);
+//            if ($node->get('frontpage')) {
+//                $this['option']->set('system:app.frontpage', $node->)
+//            }
+
+            Node::save($node, $data);
 
             return $node;
 
@@ -146,8 +137,8 @@ class NodeController extends Controller
     {
         try {
 
-            if ($node = $this->nodes->find($id)) {
-                $this->nodes->delete($node);
+            if ($node = Node::find($id)) {
+                Node::delete($node);
             }
 
         } catch (Exception $e) {
@@ -168,7 +159,7 @@ class NodeController extends Controller
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return $this->nodes->findAll();
+        return Node::findAll();
     }
 
     /**
@@ -182,6 +173,6 @@ class NodeController extends Controller
             $this->deleteAction($id);
         }
 
-        return $this->nodes->findAll();
+        return Node::findAll();
     }
 }

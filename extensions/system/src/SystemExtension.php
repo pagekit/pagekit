@@ -25,6 +25,7 @@ use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
+use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
 use Pagekit\User\Event\AuthorizationListener;
@@ -78,7 +79,7 @@ class SystemExtension extends Extension
 
             if (!$user = $app['auth']->getUser()) {
                 $user  = new UserEntity;
-                $roles = $app['users']->getRoleRepository()->where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
+                $roles = Role::where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
                 $user->setRoles($roles);
             }
 

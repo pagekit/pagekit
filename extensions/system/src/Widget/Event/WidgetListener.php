@@ -18,7 +18,7 @@ class WidgetListener extends EventSubscriber
         $user      = $this['user'];
         $sections  = $this['view.sections'];
 
-        foreach ($this['db.em']->getRepository('Pagekit\Widget\Entity\Widget')->where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
+        foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 
             // filter by access
             if (!$widget->hasAccess($user)) {

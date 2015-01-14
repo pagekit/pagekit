@@ -4,6 +4,7 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\User\Entity\User;
 use Pagekit\User\Model\UserInterface;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Pagekit\Widget\Model\Widget;
@@ -208,13 +209,11 @@ class DashboardController extends Controller
             $user = $this['user'];
         }
 
-        $users = $this['users']->getUserRepository();
-
         // make sure user is registered in the entity manager
-        $user = $users->find($user->getId());
+        $user = User::find($user->getId());
         $user->set('dashboard', $dashboard);
 
-        $users->save($user);
+        User::save($user);
     }
 
     /**

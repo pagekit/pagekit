@@ -3,6 +3,7 @@
 namespace Pagekit\Tree\Event;
 
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Tree\Entity\Node;
 
 class RouteListener extends EventSubscriber
 {
@@ -56,7 +57,7 @@ class RouteListener extends EventSubscriber
 
             $nodes = [];
             $types = $this['tree.types'];
-            foreach ($this['db.em']->getRepository('Pagekit\Tree\Entity\Node')->query()->where(['status = ?'], [1])->get() as $node) {
+            foreach (Node::query()->where(['status = ?'], [1])->get() as $node) {
 
                 if (!$type = $types[$node->getType()]) {
                     continue;
