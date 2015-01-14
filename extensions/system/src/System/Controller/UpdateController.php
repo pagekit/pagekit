@@ -17,26 +17,12 @@ use Pagekit\Framework\Controller\Exception;
  */
 class UpdateController
 {
-    protected $temp;
-    protected $api;
-    protected $apiKey;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->temp   = App::get('path.temp');
-        $this->api    = App::config()->get('api.url');
-        $this->apiKey = App::option()->get('system:api.key');
-    }
-
     /**
      * @Response("extensions/system/views/admin/settings/update.razr")
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update'), 'api' => $this->api, 'channel' => App::option()->get('system:app.release_channel', 'stable'), 'version' => App::config()->get('app.version')];
+        return ['head.title' => __('Update'), 'api' => App::config()->get('api.url'), 'channel' => App::option()->get('system:app.release_channel', 'stable'), 'version' => App::config()->get('app.version')];
     }
 
     /**
@@ -53,10 +39,10 @@ class UpdateController
                 throw new Exception(__('Unable to find update.'));
             }
 
-            App::session()->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
+            App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
 
             $client = new Client;
-            $client->setDefaultOption('query/api_key', $this->apiKey);
+            $client->setDefaultOption('query/api_key', App::option()->get('system:api.key'));
 
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);

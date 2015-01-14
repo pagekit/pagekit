@@ -19,20 +19,6 @@ use Pagekit\Framework\Controller\Exception;
  */
 class PackageController
 {
-    protected $temp;
-    protected $api;
-    protected $apiKey;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->temp   = App::get('path.temp');
-        $this->api    = App::config()->get('api.url');
-        $this->apiKey = App::option()->get('system:api.key');
-    }
-
     /**
      * @Request({"type"}, csrf=true)
      * @Response("json")
@@ -41,6 +27,7 @@ class PackageController
     {
         try {
 
+            $temp = App::get('path.temp');
             $file = App::request()->files->get('file');
 
             if ($file === null || !$file->isValid()) {
@@ -57,12 +44,12 @@ class PackageController
                 throw new Exception(__('Core extensions may not be installed.'));
             }
 
-            Zip::extract($upload, "{$this->temp}/".($path = sha1($upload)));
+            Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
 
             $extra = $package->getExtra();
 
             if (isset($extra['image'])) {
-                $extra['image'] = App::url()->to("{$this->temp}/$path/".$extra['image']);
+                $extra['image'] = App::url()->to("{$temp}/$path/".$extra['image']);
             } else {
                 $extra['image'] = App::url()->to('extensions/system/assets/images/placeholder-icon.svg');
             }
@@ -96,22 +83,24 @@ class PackageController
     {
         try {
 
+            $temp = App::get('path.temp');
+
             if ($package !== null && isset($package['dist'])) {
 
                 $path = sha1(json_encode($package));
 
                 $client = new Client;
-                $client->setDefaultOption('query/api_key', $this->apiKey);
+                $client->setDefaultOption('query/api_key', App::option()->get('system:api.key'));
 
                 $downloader = new PackageDownloader($client);
-                $downloader->downloadFile("{$this->temp}/{$path}", $package['dist']['url'], $package['dist']['shasum']);
+                $downloader->downloadFile("{$temp}/{$path}", $package['dist']['url'], $package['dist']['shasum']);
             }
 
             if (!$path) {
                 throw new Exception(__('Path not found.'));
             }
 
-            $package = $this->loadPackage($path = "{$this->temp}/{$path}");
+            $package = $this->loadPackage($path = "{$temp}/{$path}");
 
             if ($package->getType() == 'theme') {
                 $this->installTheme("$path/theme.json", $package);
@@ -137,7 +126,7 @@ class PackageController
             $response = ['error' => $e->getMessage()];
         }
 
-        if (strpos($path, $this->temp) === 0 && file_exists($path)) {
+        if (strpos($path, $temp) === 0 && file_exists($path)) {
             App::file()->delete($path);
         }
 
