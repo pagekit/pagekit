@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\UrlResolver;
-use Pagekit\Component\Routing\Event\RouteCollectionEvent;
+use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Framework\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

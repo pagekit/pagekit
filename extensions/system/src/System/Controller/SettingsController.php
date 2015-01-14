@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Component\Config\Config;
+use Pagekit\Config\Config;
 use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 

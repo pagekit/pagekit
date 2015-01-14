@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\User as BaseUser;

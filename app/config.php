@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Component\Config\Config;
+use Pagekit\Config\Config;
 
 $values = array_map('realpath', [
     'path'            => __DIR__.'/..',

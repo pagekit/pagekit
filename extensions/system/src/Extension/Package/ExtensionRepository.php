@@ -2,8 +2,8 @@
 
 namespace Pagekit\Extension\Package;
 
-use Pagekit\Component\Package\Loader\LoaderInterface;
-use Pagekit\Component\Package\Repository\InstalledRepository;
+use Pagekit\Package\Loader\LoaderInterface;
+use Pagekit\Package\Repository\InstalledRepository;
 
 class ExtensionRepository extends InstalledRepository
 {

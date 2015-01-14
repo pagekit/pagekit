@@ -2,11 +2,11 @@
 
 namespace Pagekit\User\Event;
 
-use Pagekit\Component\Auth\Auth;
-use Pagekit\Component\Auth\Event\AuthorizeEvent;
-use Pagekit\Component\Auth\Event\LoginEvent;
-use Pagekit\Component\Auth\Event\LogoutEvent;
-use Pagekit\Component\Auth\Exception\AuthException;
+use Pagekit\Auth\Auth;
+use Pagekit\Auth\Event\AuthorizeEvent;
+use Pagekit\Auth\Event\LoginEvent;
+use Pagekit\Auth\Event\LogoutEvent;
+use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Framework\Application as App;
 use Pagekit\User\Auth\UserProvider;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

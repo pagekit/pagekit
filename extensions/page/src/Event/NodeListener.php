@@ -2,7 +2,7 @@
 
 namespace Pagekit\Page\Event;
 
-use Pagekit\Component\Database\Event\EntityEvent;
+use Pagekit\Database\Event\EntityEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Pagekit\Page\Entity\Page;
 

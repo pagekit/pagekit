@@ -2,7 +2,7 @@
 
 namespace Pagekit\Page\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 
 /**

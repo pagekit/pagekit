@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Model;
 
-use Pagekit\Component\Auth\UserInterface as AuthUserInterface;
+use Pagekit\Auth\UserInterface as AuthUserInterface;
 
 interface UserInterface extends AuthUserInterface
 {

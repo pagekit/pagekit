@@ -4,10 +4,10 @@ namespace Pagekit\User\Event;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use Pagekit\Component\Auth\Event\AuthorizeEvent;
-use Pagekit\Component\Auth\Exception\AuthException;
-use Pagekit\Component\Routing\Event\ConfigureRouteEvent;
-use Pagekit\Component\Routing\Event\RouteCollectionEvent;
+use Pagekit\Auth\Event\AuthorizeEvent;
+use Pagekit\Auth\Exception\AuthException;
+use Pagekit\Routing\Event\ConfigureRouteEvent;
+use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Framework\Application as App;
 use Pagekit\User\Annotation\Access;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

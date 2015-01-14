@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Model;
 
-class Node extends \Pagekit\Component\Tree\Node
+class Node extends \Pagekit\Tree\Node
 {
     /**
      * @var ItemInterface

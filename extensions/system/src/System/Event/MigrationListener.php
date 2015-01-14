@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Component\Auth\Event\LoginEvent;
+use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Framework\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

@@ -2,10 +2,10 @@
 
 namespace Pagekit;
 
-use Pagekit\Component\Filesystem\FileLocator;
-use Pagekit\Component\Filesystem\Adapter\FileAdapter;
-use Pagekit\Component\Filesystem\Adapter\StreamAdapter;
-use Pagekit\Component\Package\Installer\PackageInstaller;
+use Pagekit\Filesystem\FileLocator;
+use Pagekit\Filesystem\Adapter\FileAdapter;
+use Pagekit\Filesystem\Adapter\StreamAdapter;
+use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;

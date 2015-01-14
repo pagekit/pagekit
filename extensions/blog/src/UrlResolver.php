@@ -3,7 +3,7 @@
 namespace Pagekit\Blog;
 
 use Pagekit\Blog\Entity\Post;
-use Pagekit\Component\Routing\ParamsResolverInterface;
+use Pagekit\Routing\ParamsResolverInterface;
 use Pagekit\Framework\Application as App;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;

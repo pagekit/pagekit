@@ -4,8 +4,8 @@
 
 namespace Pagekit\System\Migration;
 
-use Pagekit\Component\File\ResourceLocator;
-use Pagekit\Component\Migration\Loader\FilesystemLoader as BaseLoader;
+use Pagekit\File\ResourceLocator;
+use Pagekit\Migration\Loader\FilesystemLoader as BaseLoader;
 
 class FilesystemLoader extends BaseLoader
 {

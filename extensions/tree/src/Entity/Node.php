@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\Tree\Model\NodeInterface;
 use Pagekit\System\Entity\DataTrait;

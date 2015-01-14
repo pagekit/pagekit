@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\Entity\Comment as BaseComment;
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 
 /**
  * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")

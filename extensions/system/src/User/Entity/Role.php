@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\User\Model\Role as BaseRole;
 
 /**

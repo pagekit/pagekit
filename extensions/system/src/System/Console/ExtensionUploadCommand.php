@@ -5,7 +5,7 @@ namespace Pagekit\System\Console;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Post\PostFile;
-use Pagekit\Component\Package\Loader\JsonLoader;
+use Pagekit\Package\Loader\JsonLoader;
 use Pagekit\Framework\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

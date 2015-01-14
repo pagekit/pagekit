@@ -7,7 +7,7 @@ use OAuth\Common\Storage\Memory;
 use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 use OAuth\ServiceFactory;
-use Pagekit\Component\Routing\Generator\UrlGenerator;
+use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Framework\Application as App;
 
 

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Theme\Event;
 
-use Pagekit\Component\Database\Event\EntityEvent;
+use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Framework\Application as App;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;

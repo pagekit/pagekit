@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\DataCollector;
 
-use Pagekit\Component\Auth\Auth;
+use Pagekit\Auth\Auth;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;

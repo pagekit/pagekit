@@ -37,7 +37,6 @@ class RegistrationController extends Controller
      */
     public function registerAction($data)
     {
-
         $response = ['success' => false];
         $errors   = [];
 

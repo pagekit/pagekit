@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\User\Entity\AccessTrait;
 use Pagekit\Widget\Model\Widget as BaseWidget;
 

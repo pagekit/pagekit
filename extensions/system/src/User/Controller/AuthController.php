@@ -2,10 +2,10 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Component\Auth\Auth;
-use Pagekit\Component\Auth\Exception\AuthException;
-use Pagekit\Component\Auth\Exception\BadCredentialsException;
-use Pagekit\Component\Auth\RememberMe;
+use Pagekit\Auth\Auth;
+use Pagekit\Auth\Exception\AuthException;
+use Pagekit\Auth\Exception\BadCredentialsException;
+use Pagekit\Auth\RememberMe;
 use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 

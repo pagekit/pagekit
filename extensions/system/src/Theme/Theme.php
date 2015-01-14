@@ -2,8 +2,8 @@
 
 namespace Pagekit\Theme;
 
-use Pagekit\Component\View\Section\SectionManager;
-use Pagekit\Component\View\ViewInterface;
+use Pagekit\View\Section\SectionManager;
+use Pagekit\View\ViewInterface;
 use Pagekit\Framework\Application as App;
 use Symfony\Component\Translation\Translator;
 

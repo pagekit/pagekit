@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\Entity\Post;
-use Pagekit\Component\Database\Event\EntityEvent;
+use Pagekit\Database\Event\EntityEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CommentListener implements EventSubscriberInterface

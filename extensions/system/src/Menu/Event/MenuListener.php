@@ -3,7 +3,7 @@
 namespace Pagekit\Menu\Event;
 
 use Pagekit\Framework\Application as App;
-use Pagekit\Component\Cache\CacheInterface;
+use Pagekit\Cache\CacheInterface;
 use Pagekit\Menu\Entity\Item;
 use Pagekit\Menu\Model\ItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

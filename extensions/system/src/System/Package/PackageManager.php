@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Package;
 
-use Pagekit\Component\Package\Installer\InstallerInterface;
-use Pagekit\Component\Package\Repository\InstalledRepository;
+use Pagekit\Package\Installer\InstallerInterface;
+use Pagekit\Package\Repository\InstalledRepository;
 
 abstract class PackageManager implements \IteratorAggregate
 {

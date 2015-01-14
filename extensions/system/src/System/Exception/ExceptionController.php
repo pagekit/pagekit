@@ -25,7 +25,7 @@ class ExceptionController
         $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
 
         switch ($exception->getClass()) {
-            case 'Pagekit\Component\Session\Csrf\Exception\BadTokenException':
+            case 'Pagekit\Session\Csrf\Exception\BadTokenException':
                 $title = __('Invalid CSRF token.');
                 break;
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':

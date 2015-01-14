@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Console;
 
-use Pagekit\Component\Translation\Loader\PoFileLoader;
+use Pagekit\Translation\Loader\PoFileLoader;
 use Pagekit\Framework\Console\Command;
 use Pagekit\System\Console\NodeVisitor\NodeVisitor;
 use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;

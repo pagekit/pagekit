@@ -2,8 +2,8 @@
 
 namespace Pagekit\Theme\Package;
 
-use Pagekit\Component\Package\Exception\UnexpectedValueException;
-use Pagekit\Component\Package\Loader\JsonLoader;
+use Pagekit\Package\Exception\UnexpectedValueException;
+use Pagekit\Package\Loader\JsonLoader;
 
 class ThemeLoader extends JsonLoader
 {

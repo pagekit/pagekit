@@ -2,8 +2,8 @@
 
 namespace Pagekit\User\Event;
 
-use Pagekit\Component\Auth\Event\AuthenticateEvent;
-use Pagekit\Component\Auth\Exception\AuthException;
+use Pagekit\Auth\Event\AuthenticateEvent;
+use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Framework\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

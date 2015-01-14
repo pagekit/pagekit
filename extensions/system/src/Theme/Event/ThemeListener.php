@@ -2,7 +2,7 @@
 
 namespace Pagekit\Theme\Event;
 
-use Pagekit\Component\Package\Installer\PackageInstaller;
+use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\Framework\Application as App;
 use Pagekit\Theme\Package\ThemeLoader;
 use Pagekit\Theme\Package\ThemeRepository;

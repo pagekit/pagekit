@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Entity;
 
-use Pagekit\Component\Database\ORM\ModelTrait;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Menu\Model\Item as BaseItem;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\User\Entity\AccessTrait;
