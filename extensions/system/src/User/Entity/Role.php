@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
-use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\User\Model\Role as BaseRole;
 
 /**
@@ -10,6 +10,8 @@ use Pagekit\User\Model\Role as BaseRole;
  */
 class Role extends BaseRole implements \JsonSerializable
 {
+    use ModelTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 
@@ -33,10 +35,10 @@ class Role extends BaseRole implements \JsonSerializable
     /**
      * @PreSave
      */
-    public function preSave(EntityEvent $event)
+    public function preSave()
     {
         if (!$this->id) {
-            $this->setPriority($event->getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
+            $this->setPriority(self::getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
         }
     }
 }
