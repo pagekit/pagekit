@@ -8,9 +8,19 @@ use Pagekit\Component\Auth\Event\LoginEvent;
 use Pagekit\Component\Auth\Event\LogoutEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\User\Auth\UserProvider;
 
 class AuthorizationListener extends EventSubscriber
 {
+    /**
+     * Initialize system.
+     */
+    public function onSystemInit()
+    {
+        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
+        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
+    }
+
     /**
      * Logout blocked users.
      */
@@ -60,6 +70,7 @@ class AuthorizationListener extends EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
+            'system.init'    => ['onSystemInit', 20],
             'system.loaded'  => 'onSystemLoaded',
             'auth.authorize' => 'onAuthorize',
             'auth.login'     => ['onLogin', -8],

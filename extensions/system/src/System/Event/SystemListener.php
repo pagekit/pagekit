@@ -18,25 +18,14 @@ use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\FinderHelper;
 use Pagekit\System\Widget\TextWidget;
-use Pagekit\User\Auth\UserProvider;
 use Pagekit\User\Dashboard\UserWidget;
 use Pagekit\User\Event\PermissionEvent;
-use Pagekit\User\Event\UserListener;
 use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\Directive\FunctionDirective;
 
 class SystemListener extends EventSubscriber
 {
-    /**
-     * Initialize system.
-     */
-    public function onSystemInit()
-    {
-        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
-        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
-    }
-
     /**
      * Dispatches the 'system.site' or 'system.admin' event.
      */
@@ -227,7 +216,6 @@ class SystemListener extends EventSubscriber
             'system.admin'           => 'onSystemAdmin',
             'system.dashboard'       => 'onSystemDashboard',
             'system.finder'          => 'onSystemFinder',
-            'system.init'            => ['onSystemInit', 20],
             'system.link'            => 'onSystemLink',
             'system.loaded'          => 'onSystemLoaded',
             'system.locale'          => 'onSystemLocale',
