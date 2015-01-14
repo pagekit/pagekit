@@ -3,9 +3,10 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Component\Auth\Event\LoginEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class MigrationListener extends EventSubscriber
+class MigrationListener implements EventSubscriberInterface
 {
     /**
      * Redirects to migration page on login.
@@ -14,8 +15,8 @@ class MigrationListener extends EventSubscriber
      */
     public function onLogin(LoginEvent $event)
     {
-        if ($event->getUser()->hasAccess('system: software updates') && $this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->get()) {
-            $event->setResponse($this['response']->redirect('@system/migration'));
+        if ($event->getUser()->hasAccess('system: software updates') && App::migrator()->create('extensions/system/migrations', App::option()->get('system:version'))->get()) {
+            $event->setResponse(App::response()->redirect('@system/migration'));
         }
     }
 

@@ -3,9 +3,10 @@
 namespace Pagekit\Blog\Link;
 
 use Pagekit\Blog\Entity\Post;
-use Pagekit\System\Link\Link;
+use Pagekit\Framework\Application as App;
+use Pagekit\System\Link\LinkInterface;
 
-class BlogLink extends Link
+class BlogLink implements LinkInterface
 {
     /**
      * @{inheritdoc}
@@ -38,6 +39,6 @@ class BlogLink extends Link
     {
         $posts = Post::findAll();
 
-        return $this['view']->render('extensions/blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
+        return App::view()->render('extensions/blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
     }
 }

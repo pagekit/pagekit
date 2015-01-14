@@ -2,6 +2,7 @@
 
 namespace Pagekit\Menu\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Menu\Entity\Item;
@@ -33,7 +34,7 @@ class ItemController extends Controller
             return ['head.title' => __('Add Menu Item'), 'item' => $item, 'menu' => $menu, 'roles' => Role::findAll()];
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');
@@ -54,7 +55,7 @@ class ItemController extends Controller
             return ['head.title' => __('Edit Menu Item'), 'item' => $item, 'roles' => Role::findAll()];
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');
@@ -86,12 +87,12 @@ class ItemController extends Controller
 
             $id = $item->getId();
 
-            $this['message']->success($id ? __('Menu item saved.') : __('Menu item created.'));
+            App::message()->success($id ? __('Menu item saved.') : __('Menu item created.'));
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         } catch (InvalidParameterException $e) {
-            $this['message']->error(__('Invalid url.'));
+            App::message()->error(__('Invalid url.'));
         }
 
         return $id ? $this->redirect('@system/item/edit', compact('id')) : $this->redirect('@system/item/add', ['menu' => $menuId]);
@@ -116,10 +117,10 @@ class ItemController extends Controller
                 }
             }
 
-            $this['message']->success(_c('{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
+            App::message()->success(_c('{0} No menu item deleted.|{1} Menu item deleted.|]1,Inf[ Menu items deleted.', count($ids)));
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', ['id' => $menuId]);
@@ -148,9 +149,9 @@ class ItemController extends Controller
                 $message = _c('{0} No menu item disabled.|{1} Menu item disabled.|]1,Inf[ Menu items disabled.', count($ids));
             }
 
-            $this['message']->success($message);
+            App::message()->success($message);
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', ['id' => $menuId]);

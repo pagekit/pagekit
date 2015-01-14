@@ -2,12 +2,12 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 
 /**
  * @Access("system: manage extensions", admin=true)
  */
-class MarketplaceController extends Controller
+class MarketplaceController
 {
     /**
      * @Response("extensions/system/views/admin/settings/marketplace.razr")
@@ -16,14 +16,14 @@ class MarketplaceController extends Controller
     {
         $packages = [];
 
-        foreach ($this['extensions']->getRepository()->getPackages() as $package) {
+        foreach (App::extensions()->getRepository()->getPackages() as $package) {
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        foreach ($this['themes']->getRepository()->getPackages() as $package) {
+        foreach (App::themes()->getRepository()->getPackages() as $package) {
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        return ['head.title' => __('Marketplace'), 'api' => $this['config']->get('api.url'), 'key' => $this['option']->get('system:api.key'), 'packages' => json_encode($packages)];
+        return ['head.title' => __('Marketplace'), 'api' => App::config()->get('api.url'), 'key' => App::option()->get('system:api.key'), 'packages' => json_encode($packages)];
     }
 }

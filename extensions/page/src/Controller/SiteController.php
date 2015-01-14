@@ -2,14 +2,14 @@
 
 namespace Pagekit\Page\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\Page\Entity\Page;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Route("/")
  */
-class SiteController extends Controller
+class SiteController
 {
     /**
      * @Route("/{id}", name="id")
@@ -22,7 +22,7 @@ class SiteController extends Controller
             throw new NotFoundHttpException(__('Page not found!'));
         }
 
-        $page->setContent($this['content']->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
+        $page->setContent(App::content()->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
 
         return ['head.title' => __($page->getTitle()), 'page' => $page];
     }

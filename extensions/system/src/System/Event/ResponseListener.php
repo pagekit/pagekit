@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ResponseListener extends EventSubscriber
+class ResponseListener implements EventSubscriberInterface
 {
     const REGEX_URL = '/
                         (?<attr>href|src|poster)=              # match the attribute
@@ -38,7 +39,7 @@ class ResponseListener extends EventSubscriber
      */
     public function replaceUrlCallback($matches)
     {
-        return sprintf('%s="%s"', $matches['attr'], $this['url']->to($matches['url']));
+        return sprintf('%s="%s"', $matches['attr'], App::url()->to($matches['url']));
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace Pagekit\Tree\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 
 /**
  * @Access(admin=true)
  */
-class TemplateController extends Controller
+class TemplateController
 {
     /**
      * @Request({"name"})
@@ -15,7 +15,7 @@ class TemplateController extends Controller
      */
     public function indexAction($name = '')
     {
-        $response = $this['router']->call('@system/system/tmpl', ['templates' => $name]);
+        $response = App::router()->call('@system/system/tmpl', ['templates' => $name]);
 
         $templates = json_decode($response->getContent(), true);
 

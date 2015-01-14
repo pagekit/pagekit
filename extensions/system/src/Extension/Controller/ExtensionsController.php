@@ -4,6 +4,7 @@ namespace Pagekit\Extension\Controller;
 
 use Pagekit\Extension\Event\ExtensionEvent;
 use Pagekit\Extension\Extension;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 
@@ -21,9 +22,9 @@ class ExtensionsController extends Controller
      */
     public function __construct()
     {
-        $this->extensions = $this['extensions'];
-        $this->api        = $this['config']->get('api.url');
-        $this->apiKey     = $this['option']->get('system:api.key');
+        $this->extensions = App::extensions();
+        $this->api        = App::config()->get('api.url');
+        $this->apiKey     = App::option()->get('system:api.key');
     }
 
     /**
@@ -41,9 +42,9 @@ class ExtensionsController extends Controller
             }
         }
 
-        if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json([
-                'table' => $this['view']->render('extensions/system/views/admin/extensions/table.razr', ['packages' => $packages])
+        if (App::request()->isXmlHttpRequest()) {
+            return App::response()->json([
+                'table' => App::view()->render('extensions/system/views/admin/extensions/table.razr', ['packages' => $packages])
             ]);
         }
 
@@ -63,7 +64,7 @@ class ExtensionsController extends Controller
             }
 
             ini_set('display_errors', 0);
-            $handler = $this['exception']->setHandler(function($exception) {
+            $handler = App::exception()->setHandler(function($exception) {
 
                 while (ob_get_level()) {
                     ob_get_clean();
@@ -71,11 +72,11 @@ class ExtensionsController extends Controller
 
                 $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
 
-                if ($this['config']['app.debug']) {
+                if (App::config()['app.debug']) {
                     $message .= '<br><br>'.$exception->getMessage();
                 }
 
-                $this['response']->json(['error' => true, 'message' => $message])->send();
+                App::response()->json(['error' => true, 'message' => $message])->send();
             });
 
             if (!$this->extensions->get($name)) {
@@ -88,11 +89,11 @@ class ExtensionsController extends Controller
 
             $extension->enable();
 
-            $extension->boot($this->getApplication());
+            $extension->boot(App::getInstance());
 
-            $this['option']->set('system:extensions', array_unique(array_merge($this['option']->get('system:extensions', []), [$extension->getName()])), true);
+            App::option()->set('system:extensions', array_unique(array_merge(App::option()->get('system:extensions', []), [$extension->getName()])), true);
 
-            $this['exception']->setHandler($handler);
+            App::exception()->setHandler($handler);
 
             return ['message' => __('Extension enabled.')];
 
@@ -120,7 +121,7 @@ class ExtensionsController extends Controller
 
             $this->disable($extension);
 
-            $this['system']->clearCache();
+            App::system()->clearCache();
 
             return ['message' => __('Extension disabled.')];
 
@@ -156,7 +157,7 @@ class ExtensionsController extends Controller
 
             $this->extensions->getInstaller()->uninstall($this->extensions->getRepository()->findPackage($name));
 
-            $this['system']->clearCache();
+            App::system()->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
 
@@ -177,14 +178,14 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = $this['events']->dispatch('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
+            $event = App::events()->dispatch('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
 
             $title = $this->extensions->getRepository()->findPackage($extension->getName())->getTitle();
 
-            return $this['view']->render($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
+            return App::view()->render($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -201,16 +202,16 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = $this['events']->dispatch('system.extension.save', new ExtensionEvent($extension, $params));
+            $event = App::events()->dispatch('system.extension.save', new ExtensionEvent($extension, $params));
 
-            $this['option']->set("$name:settings", $event->getParams(), true);
-            $this['message']->success(__('Settings saved.'));
+            App::option()->set("$name:settings", $event->getParams(), true);
+            App::message()->success(__('Settings saved.'));
 
             return $this->redirect('@system/extensions/settings', compact('name'));
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -218,13 +219,13 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        $this['option']->set('system:extensions', array_values(array_diff($this['option']->get('system:extensions', []), [$extension->getName()])), true);
+        App::option()->set('system:extensions', array_values(array_diff(App::option()->get('system:extensions', []), [$extension->getName()])), true);
 
         $extension->disable();
     }
 
     protected function isCore($name)
     {
-        return in_array($name, $this['config']->get('extension.core', []));
+        return in_array($name, App::config()->get('extension.core', []));
     }
 }

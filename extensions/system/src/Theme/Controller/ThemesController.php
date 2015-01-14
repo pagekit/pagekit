@@ -2,6 +2,7 @@
 
 namespace Pagekit\Theme\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Theme\Event\ThemeEvent;
@@ -20,9 +21,9 @@ class ThemesController extends Controller
      */
     public function __construct()
     {
-        $this->themes = $this['themes'];
-        $this->api    = $this['config']->get('api.url');
-        $this->apiKey = $this['option']->get('system:api.key');
+        $this->themes = App::themes();
+        $this->api    = App::config()->get('api.url');
+        $this->apiKey = App::option()->get('system:api.key');
     }
 
     /**
@@ -38,7 +39,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if ($this['config']->get('theme.site') == $name) {
+            if (App::config()->get('theme.site') == $name) {
                 $current = $package;
             }
 
@@ -56,9 +57,9 @@ class ThemesController extends Controller
             return strcmp($themeA->getName(), $themeB->getName());
         });
 
-        if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json([
-                'table' => $this['view']->render('extensions/system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
+        if (App::request()->isXmlHttpRequest()) {
+            return App::response()->json([
+                'table' => App::view()->render('extensions/system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
             ]);
         }
 
@@ -75,13 +76,13 @@ class ThemesController extends Controller
 
             ini_set('display_errors', 0);
 
-            $handler = $this['exception']->setHandler(function($exception) {
+            $handler = App::exception()->setHandler(function($exception) {
 
                 while (ob_get_level()) {
                     ob_get_clean();
                 }
 
-                $this['response']->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
+                App::response()->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
             });
 
             $this->themes->load($name);
@@ -90,10 +91,10 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
-            $theme->boot($this->getApplication());
+            $theme->boot(App::getInstance());
 
-            $this['option']->set('system:theme.site', $theme->getName(), true);
-            $this['exception']->setHandler($handler);
+            App::option()->set('system:theme.site', $theme->getName(), true);
+            App::exception()->setHandler($handler);
 
             return ['message' => __('Theme enabled.')];
 
@@ -116,7 +117,7 @@ class ThemesController extends Controller
             }
 
             $this->themes->getInstaller()->uninstall($theme);
-            $this['system']->clearCache();
+            App::system()->clearCache();
 
             return ['message' => __('Theme uninstalled.')];
 
@@ -137,13 +138,13 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = $this['events']->dispatch('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
+            $event = App::events()->dispatch('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
 
-            return $this['view']->render($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
+            return App::view()->render($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');
@@ -160,16 +161,16 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = $this['events']->dispatch('system.theme.save', new ThemeEvent($theme, $params));
+            $event = App::events()->dispatch('system.theme.save', new ThemeEvent($theme, $params));
 
-            $this['option']->set("$name:settings", $event->getParams(), true);
-            $this['message']->success(__('Settings saved.'));
+            App::option()->set("$name:settings", $event->getParams(), true);
+            App::message()->success(__('Settings saved.'));
 
             return $this->redirect('@system/themes/settings', compact('name'));
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/system');

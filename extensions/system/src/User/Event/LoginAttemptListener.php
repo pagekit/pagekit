@@ -4,9 +4,10 @@ namespace Pagekit\User\Event;
 
 use Pagekit\Component\Auth\Event\AuthenticateEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LoginAttemptListener extends EventSubscriber
+class LoginAttemptListener implements EventSubscriberInterface
 {
     const DELAY     = 5;
     const ATTEMPTS  = 5;
@@ -24,7 +25,7 @@ class LoginAttemptListener extends EventSubscriber
             return;
         }
 
-        $attempts = $this['cache']->fetch($this->getCacheKey($credentials['username'])) ?: [];
+        $attempts = App::cache()->fetch($this->getCacheKey($credentials['username'])) ?: [];
 
         if (count($attempts) > self::ATTEMPTS && time() - (int) array_pop($attempts) < self::DELAY) {
             throw new AuthException(__('Slow down a bit.'));
@@ -44,10 +45,10 @@ class LoginAttemptListener extends EventSubscriber
 
         $key = $this->getCacheKey($credentials['username']);
 
-        $attempts = $this['cache']->fetch($key) ?: [];
+        $attempts = App::cache()->fetch($key) ?: [];
         $attempts[] = time();
 
-        $this['cache']->save($key, $attempts);
+        App::cache()->save($key, $attempts);
     }
 
     /*
@@ -61,7 +62,7 @@ class LoginAttemptListener extends EventSubscriber
             return;
         }
 
-        $this['cache']->delete($this->getCacheKey($credentials['username']));
+        App::cache()->delete($this->getCacheKey($credentials['username']));
     }
 
     /**

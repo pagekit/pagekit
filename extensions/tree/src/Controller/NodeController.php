@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Tree\Entity\Node;
 use Pagekit\Tree\Event\NodeEditEvent;
@@ -11,7 +11,7 @@ use Pagekit\User\Entity\Role;
 /**
  * @Access("tree: manage nodes", admin=true)
  */
-class NodeController extends Controller
+class NodeController
 {
     /**
      * @var array
@@ -23,21 +23,21 @@ class NodeController extends Controller
      */
     public function __construct()
     {
-        $this['view.scripts']->queue('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
-        $this['view.scripts']->queue('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
-        $this['view.scripts']->queue('application', 'extensions/tree/assets/js/application.js', 'uikit');
-        $this['view.scripts']->queue('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
-        $this['view.scripts']->queue('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
-        $this['view.scripts']->queue('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
+        App::get('view.scripts')->queue('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
+        App::get('view.scripts')->queue('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
+        App::get('view.scripts')->queue('application', 'extensions/tree/assets/js/application.js', 'uikit');
+        App::get('view.scripts')->queue('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
+        App::get('view.scripts')->queue('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
+        App::get('view.scripts')->queue('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
 
-        $this->getApplication()->on('kernel.view', function () {
-            $this['view.scripts']->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
+        App::on('kernel.view', function () {
+            App::get('view.scripts')->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
         });
 
         $this->config = ['config' => [
-            'url'          => $this['url']->base(),
-            'route'        => $this['url']->route('@tree/node'),
-            'url.template' => $this['url']->route('@tree/template')
+            'url'          => App::url()->base(),
+            'route'        => App::url()->route('@tree/node'),
+            'url.template' => App::url()->route('@tree/template')
         ]];
     }
 
@@ -48,12 +48,12 @@ class NodeController extends Controller
     public function indexAction()
     {
         $this->config['data'] = [
-            'types' => $this['tree.types']->getTypes(),
+            'types' => App::get('tree.types')->getTypes(),
             'nodes' => Node::findAll()
         ];
 
         $this->config['templates'] = [
-            'tree.item' => $this['view']->render('extensions/tree/views/tmpl/item.razr')
+            'tree.item' => App::view()->render('extensions/tree/views/tmpl/item.razr')
         ];
 
         return ['head.title' => __('Nodes')];
@@ -78,21 +78,21 @@ class NodeController extends Controller
                 throw new Exception(__('Invalid node id.'));
             }
 
-            if (!isset($this['tree.types'][$node->getType()])) {
+            if (!isset(App::get('tree.types')[$node->getType()])) {
                 throw new Exception(__('Invalid node type.'));
             }
 
             $this->config['data'] = [
-                'type'  => $this['tree.types'][$node->getType()],
+                'type'  => App::get('tree.types')[$node->getType()],
                 'node'  => $node,
                 'roles' => Role::findAll()
             ];
 
-            $this->config = $this['events']->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
+            $this->config = App::events()->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
 
             return $this->redirect('@tree/node');
         }
@@ -116,7 +116,7 @@ class NodeController extends Controller
             }
 
 //            if ($node->get('frontpage')) {
-//                $this['option']->set('system:app.frontpage', $node->)
+//                App::option()->set('system:app.frontpage', $node->)
 //            }
 
             Node::save($node, $data);

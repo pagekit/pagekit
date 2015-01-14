@@ -2,11 +2,12 @@
 
 namespace Pagekit\User\Dashboard;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\User\Entity\User;
-use Pagekit\Widget\Model\Type;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class UserWidget extends Type
+class UserWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -51,7 +52,7 @@ class UserWidget extends Type
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return $this['view']->render('extensions/system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
+        return App::view()->render('extensions/system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -59,6 +60,6 @@ class UserWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/admin/dashboard/user/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/admin/dashboard/user/edit.razr', compact('widget'));
     }
 }

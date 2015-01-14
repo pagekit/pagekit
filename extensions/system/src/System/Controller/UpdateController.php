@@ -9,13 +9,13 @@ use Pagekit\Component\Package\Exception\ChecksumVerificationException;
 use Pagekit\Component\Package\Exception\DownloadErrorException;
 use Pagekit\Component\Package\Exception\NotWritableException;
 use Pagekit\Component\Package\Exception\UnauthorizedDownloadException;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Exception;
 
 /**
  * @Access("system: software updates", admin=true)
  */
-class UpdateController extends Controller
+class UpdateController
 {
     protected $temp;
     protected $api;
@@ -26,9 +26,9 @@ class UpdateController extends Controller
      */
     public function __construct()
     {
-        $this->temp   = $this['path.temp'];
-        $this->api    = $this['config']->get('api.url');
-        $this->apiKey = $this['option']->get('system:api.key');
+        $this->temp   = App::get('path.temp');
+        $this->api    = App::config()->get('api.url');
+        $this->apiKey = App::option()->get('system:api.key');
     }
 
     /**
@@ -36,7 +36,7 @@ class UpdateController extends Controller
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update'), 'api' => $this->api, 'channel' => $this['option']->get('system:app.release_channel', 'stable'), 'version' => $this['config']->get('app.version')];
+        return ['head.title' => __('Update'), 'api' => $this->api, 'channel' => App::option()->get('system:app.release_channel', 'stable'), 'version' => App::config()->get('app.version')];
     }
 
     /**
@@ -48,12 +48,12 @@ class UpdateController extends Controller
         try {
 
             if ($update) {
-                $this['session']->set('system.update', $update);
+                App::session()->set('system.update', $update);
             } else {
                 throw new Exception(__('Unable to find update.'));
             }
 
-            $this['session']->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
+            App::session()->set('system.updateDir', $path = $this->temp.'/'.sha1(uniqid()));
 
             $client = new Client;
             $client->setDefaultOption('query/api_key', $this->apiKey);
@@ -61,7 +61,7 @@ class UpdateController extends Controller
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            $response = ['message' => __('Copying files...'), 'step' => $this['url']->route('@system/update/copy'), 'progress' => 33];
+            $response = ['message' => __('Copying files...'), 'step' => App::url()->route('@system/update/copy'), 'progress' => 33];
 
         } catch (ArchiveExtractionException $e) {
             $response = ['error' => __('Package extraction failed.')];
@@ -87,20 +87,20 @@ class UpdateController extends Controller
     {
         try {
 
-            if (!$update = $this['session']->get('system.update') or !$updateDir = $this['session']->get('system.updateDir')) {
+            if (!$update = App::session()->get('system.update') or !$updateDir = App::session()->get('system.updateDir')) {
                 throw new Exception(__('You may not call this step directly.'));
             }
 
             // TODO: create maintenance file
             // TODO: cleanup old files
 
-            $this['file']->delete("$updateDir/.htaccess");
-            $this['file']->copyDir($updateDir, $this['path']);
-            $this['file']->delete($updateDir);
-            $this['system']->clearCache();
-            $this['session']->remove('system.updateDir');
+            App::file()->delete("$updateDir/.htaccess");
+            App::file()->copyDir($updateDir, App::path());
+            App::file()->delete($updateDir);
+            App::system()->clearCache();
+            App::session()->remove('system.updateDir');
 
-            $response = ['message' => __('Updating database...'), 'step' => $this['url']->route('@system/update/database'), 'progress' => 66];
+            $response = ['message' => __('Updating database...'), 'step' => App::url()->route('@system/update/database'), 'progress' => 66];
 
         } catch (\Exception $e) {
 
@@ -117,15 +117,15 @@ class UpdateController extends Controller
     {
         try {
 
-            if (!$update = $this['session']->get('system.update')) {
+            if (!$update = App::session()->get('system.update')) {
                 throw new Exception(__('You may not call this step directly.'));
             }
 
-            $this['system']->enable();
-            $this['system']->clearCache();
-            $this['session']->remove('system.update');
+            App::system()->enable();
+            App::system()->clearCache();
+            App::session()->remove('system.update');
 
-            $response = ['message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/admin'), 'progress' => 100];
+            $response = ['message' => __('Installed successfully.'), 'redirect' => App::url()->route('@system/admin'), 'progress' => 100];
 
         } catch (\Exception $e) {
 

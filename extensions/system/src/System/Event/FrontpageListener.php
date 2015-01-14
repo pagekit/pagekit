@@ -2,20 +2,21 @@
 
 namespace Pagekit\System\Event;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Database\Event\EntityEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class FrontpageListener extends EventSubscriber
+class FrontpageListener implements EventSubscriberInterface
 {
     /**
      * Registers frontpage route.
      */
     public function onSystemInit()
     {
-        if ($frontpage = $this['config']->get('app.frontpage')) {
-            $this['aliases']->add('/', $frontpage);
+        if ($frontpage = App::config()->get('app.frontpage')) {
+            App::aliases()->add('/', $frontpage);
         } else {
-            $this['callbacks']->get('/', '_frontpage', function() use ($frontpage) {
+            App::callbacks()->get('/', '_frontpage', function() use ($frontpage) {
                 return __('No Frontpage assigned.');
             });
         }
@@ -24,13 +25,13 @@ class FrontpageListener extends EventSubscriber
     public function onSave(EntityEvent $event) {
         $node = $event->getEntity();
         if ($node->get('homepage')) {
-            $this['option']->set('system:app.frontpage', $node->get('url'));
+            App::option()->set('system:app.frontpage', $node->get('url'));
         }
     }
 
     public function onDelete(EntityEvent $event) {
         if ($event->getEntity()->get('homepage')) {
-            $this['option']->set('system:app.frontpage', null);
+            App::option()->set('system:app.frontpage', null);
         }
     }
 

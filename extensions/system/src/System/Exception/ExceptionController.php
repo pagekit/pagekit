@@ -2,16 +2,14 @@
 
 namespace Pagekit\System\Exception;
 
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
-class ExceptionController implements \ArrayAccess
+class ExceptionController
 {
-    use ApplicationTrait;
-
     /**
      * Converts an Exception to a Response.
      *
@@ -40,9 +38,9 @@ class ExceptionController implements \ArrayAccess
                 $title = __('Whoops, looks like something went wrong.');
         }
 
-        $response = $this['view']->render('extensions/system/theme/templates/error.razr', compact('title', 'exception', 'currentContent'));
+        $response = App::view()->render('extensions/system/theme/templates/error.razr', compact('title', 'exception', 'currentContent'));
 
-        return $this['response']->create($response, $exception->getStatusCode(), $exception->getHeaders());
+        return App::response()->create($response, $exception->getStatusCode(), $exception->getHeaders());
     }
 
     /**

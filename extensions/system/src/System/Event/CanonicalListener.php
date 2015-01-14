@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class CanonicalListener extends EventSubscriber
+class CanonicalListener implements EventSubscriberInterface
 {
     /**
      * Adds a canonical link to the document head.
@@ -20,10 +21,10 @@ class CanonicalListener extends EventSubscriber
             return;
         }
 
-        $route = $this['url']->route($request->attributes->get('_route'), $request->attributes->get('_route_params', []));
+        $route = App::url()->route($request->attributes->get('_route'), $request->attributes->get('_route_params', []));
 
         if ($route != $request->getRequestUri()) {
-            $this['view']->set('head.link.canonical', ['href' => $route]);
+            App::view()->set('head.link.canonical', ['href' => $route]);
         }
     }
 

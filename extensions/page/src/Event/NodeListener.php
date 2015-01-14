@@ -3,10 +3,10 @@
 namespace Pagekit\Page\Event;
 
 use Pagekit\Component\Database\Event\EntityEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Pagekit\Page\Entity\Page;
 
-class NodeListener extends EventSubscriber
+class NodeListener implements EventSubscriberInterface
 {
     public function onLoad(EntityEvent $event)
     {

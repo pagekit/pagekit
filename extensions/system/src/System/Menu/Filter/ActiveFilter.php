@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Menu\Filter;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Menu\Filter\FilterIterator;
 
 class ActiveFilter extends FilterIterator
@@ -18,7 +19,7 @@ class ActiveFilter extends FilterIterator
     {
         parent::__construct($iterator, $options);
 
-        $this->route = $this['request']->attributes->get('_route');
+        $this->route = App::request()->attributes->get('_route');
     }
 
     /**

@@ -4,12 +4,9 @@ namespace Pagekit\System\Package;
 
 use Pagekit\Component\Package\Installer\InstallerInterface;
 use Pagekit\Component\Package\Repository\InstalledRepository;
-use Pagekit\Framework\ApplicationTrait;
 
-abstract class PackageManager implements \IteratorAggregate, \ArrayAccess
+abstract class PackageManager implements \IteratorAggregate
 {
-    use ApplicationTrait;
-
     /**
      * @var InstalledRepository
      */

@@ -2,6 +2,7 @@
 
 namespace Pagekit\Page;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Page\Entity\Page;
 use Pagekit\System\Link\Route;
 
@@ -30,6 +31,6 @@ class PageLink extends Route
     {
         $pages = Page::findAll();
 
-        return $this['view']->render('extensions/page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
+        return App::view()->render('extensions/page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
     }
 }

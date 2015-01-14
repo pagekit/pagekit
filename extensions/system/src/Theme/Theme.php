@@ -4,14 +4,11 @@ namespace Pagekit\Theme;
 
 use Pagekit\Component\View\Section\SectionManager;
 use Pagekit\Component\View\ViewInterface;
-use Pagekit\Framework\Application;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 use Symfony\Component\Translation\Translator;
 
-class Theme implements \ArrayAccess
+class Theme
 {
-    use ApplicationTrait;
-
     /**
      * @var string
      */
@@ -54,7 +51,7 @@ class Theme implements \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         $this->registerLanguages($app['translator']);
         // -TODO- $this->registerResources($app['locator']);
@@ -65,7 +62,7 @@ class Theme implements \ArrayAccess
                 $this->parameters = array_replace($this->parameters, $defaults);
             }
 
-            if (is_array($settings = $this['option']->get("{$this->name}:settings"))) {
+            if (is_array($settings = App::option()->get("{$this->name}:settings"))) {
                 $this->parameters = array_replace($this->parameters, $settings);
             }
         }

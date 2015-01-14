@@ -4,7 +4,7 @@ namespace Pagekit;
 
 use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application;
+use Pagekit\Framework\Application as App;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;
@@ -41,9 +41,9 @@ class SystemExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
-        if (!(isset($this['config']) ? $this['config']['app.debug'] : true)) {
+        if (!(isset($app['config']) ? $app['config']['app.debug'] : true)) {
             $app['events']->addSubscriber(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
@@ -70,7 +70,7 @@ class SystemExtension extends Extension
 
         $app['system'] = $this;
 
-        $app['menus'] = function() {
+        $app['menus'] = function($app) {
             return new MenuProvider;
         };
 
@@ -148,12 +148,12 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->run()) {
-            $this['option']->set('system:version', $version);
+        if ($version = App::migrator()->create('extensions/system/migrations', App::option()->get('system:version'))->run()) {
+            App::option()->set('system:version', $version);
         }
 
         foreach (['blog', 'page'] as $extension) {
-            if ($extension = $this['extensions']->get($extension)) {
+            if ($extension = App::extensions()->get($extension)) {
                 $extension->enable();
             }
         }
@@ -164,7 +164,7 @@ class SystemExtension extends Extension
      */
     public function clearCache(array $options = [])
     {
-        $this['app']->on('kernel.terminate', function() use ($options) {
+        App::app()->on('kernel.terminate', function() use ($options) {
             $this->doClearCache($options);
         }, -512);
     }
@@ -176,22 +176,22 @@ class SystemExtension extends Extension
     {
         // clear cache
         if (empty($options) || isset($options['cache'])) {
-            $this['cache']->flushAll();
+            App::cache()->flushAll();
 
-            foreach (glob($this['path.cache'] . '/*.cache') as $file) {
+            foreach (glob(App::get('path.cache') . '/*.cache') as $file) {
                 @unlink($file);
             }
         }
 
         // clear compiled template files
         if (empty($options) || isset($options['templates'])) {
-            $this['file']->delete($this['path.cache'].'/templates');
+            App::file()->delete(App::get('path.cache').'/templates');
         }
 
         // clear temp folder
         if (isset($options['temp'])) {
-            foreach ($this['finder']->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
-                $this['file']->delete($file->getPathname());
+            foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
+                App::file()->delete($file->getPathname());
             }
         }
     }
@@ -219,7 +219,7 @@ class SystemExtension extends Extension
         ];
 
         foreach ($keys as $key) {
-            $this['config']->set($key, $this['option']->get("system:$key", $this['config']->get($key)));
+            App::config()->set($key, App::option()->get("system:$key", App::config()->get($key)));
         }
     }
 }

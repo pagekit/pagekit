@@ -7,7 +7,7 @@ use Pagekit\Blog\Entity\Post;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application;
+use Pagekit\Framework\Application as App;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
@@ -19,7 +19,7 @@ class BlogExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
@@ -56,9 +56,9 @@ class BlogExtension extends Extension
             $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.razr');
         });
 
-        $app->on('tree.node.edit', function (NodeEditEvent $event) {
+        $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'blog.post') {
-                $this['view.scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
+                $app['view.scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
                 $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, Post::findAll())]]);
             }
         });
@@ -66,13 +66,13 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = $this['migrator']->create('extensions/blog/migrations', $this['option']->get('blog:version'))->run()) {
-            $this['option']->set('blog:version', $version);
+        if ($version = App::migrator()->create('extensions/blog/migrations', App::option()->get('blog:version'))->run()) {
+            App::option()->set('blog:version', $version);
         }
     }
 
     public function uninstall()
     {
-        $this['option']->remove('blog:version');
+        App::option()->remove('blog:version');
     }
 }

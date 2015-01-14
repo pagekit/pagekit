@@ -3,13 +3,11 @@
 namespace Pagekit\System\Helper;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 use PDO;
 
-class SystemInfoHelper implements \ArrayAccess
+class SystemInfoHelper
 {
-    use ApplicationTrait;
-
     /**
      * Method to get the system information
      *
@@ -17,12 +15,12 @@ class SystemInfoHelper implements \ArrayAccess
      */
     public function get()
     {
-        $server = $this['request']->server;
+        $server = App::request()->server;
 
         $info                  = [];
         $info['php']           = php_uname();
 
-        if ($pdo = $this['db']->getWrappedConnection() and $pdo instanceof PDOConnection) {
+        if ($pdo = App::db()->getWrappedConnection() and $pdo instanceof PDOConnection) {
             $info['dbdriver']  = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
             $info['dbversion'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
             $info['dbclient']  = $pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
@@ -31,7 +29,7 @@ class SystemInfoHelper implements \ArrayAccess
         $info['phpversion']    = phpversion();
         $info['server']        = $server->get('SERVER_SOFTWARE', getenv('SERVER_SOFTWARE'));
         $info['sapi_name']     = php_sapi_name();
-        $info['version']       = $this['config']->get('app.version');
+        $info['version']       = App::config()->get('app.version');
         $info['useragent']     = $server->get('HTTP_USER_AGENT');
         $info['extensions']    = implode(", ", get_loaded_extensions());
         $info['directories']   = $this->getDirectories();
@@ -49,11 +47,11 @@ class SystemInfoHelper implements \ArrayAccess
         // -TODO-
 
         $directories = [
-            $this['path.extensions'],
-            $this['path.storage'],
-            $this['path.themes'],
-            $this['config.file'],
-            $this['path'].'/app'
+            App::get('path.extensions'),
+            App::get('path.storage'),
+            App::get('path.themes'),
+            App::get('config.file'),
+            App::path().'/app'
         ];
 
         $result = [];
@@ -63,7 +61,7 @@ class SystemInfoHelper implements \ArrayAccess
             $result[$this->getRelativePath($directory)] = is_writable($directory);
 
             if (is_dir($directory)) {
-                foreach ($this['finder']->in($directory)->directories()->depth(0) as $dir) {
+                foreach (App::finder()->in($directory)->directories()->depth(0) as $dir) {
                     $result[$this->getRelativePath($dir->getPathname())] = is_writable($dir->getPathname());
                 }
             }
@@ -80,8 +78,8 @@ class SystemInfoHelper implements \ArrayAccess
      */
     protected function getRelativePath($path)
     {
-        if (0 === strpos($path, $this['path'])) {
-            $path = ltrim(str_replace('\\', '/', substr($path, strlen($this['path']))), '/');
+        if (0 === strpos($path, App::path())) {
+            $path = ltrim(str_replace('\\', '/', substr($path, strlen(App::path()))), '/');
         }
 
         return $path;

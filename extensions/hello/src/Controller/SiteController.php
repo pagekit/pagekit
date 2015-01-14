@@ -2,12 +2,12 @@
 
 namespace Pagekit\Hello\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 
 /**
  * @Route("/hello")
  */
-class SiteController extends Controller
+class SiteController
 {
     /**
      * @Response("extensions/hello/views/index.razr")
@@ -41,27 +41,27 @@ class SiteController extends Controller
     {
         $view = 'extensions/hello/views/view.razr';
         $data = ['head.title' => __('View article'), 'id' => 1];
-        return $this['view']->render($view, $data);
+        return App::view()->render($view, $data);
     }
 
     public function redirectAction()
     {
-        return $this['response']->redirect('@hello/greet/name', ['name' => 'Someone']);
+        return App::response()->redirect('@hello/greet/name', ['name' => 'Someone']);
     }
 
     public function jsonAction()
     {
         $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
-        return $this['response']->json($data);
+        return App::response()->json($data);
     }
 
     public function downloadAction()
     {
-        return $this['response']->download('extensions/hello/extension.svg');
+        return App::response()->download('extensions/hello/extension.svg');
     }
 
     function forbiddenAction()
     {
-        return $this['response']->create(__('Permission denied.'), 401);
+        return App::response()->create(__('Permission denied.'), 401);
     }
 }

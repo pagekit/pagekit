@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
@@ -19,13 +20,13 @@ class RegistrationController extends Controller
      */
     public function indexAction()
     {
-        if ($this['user']->isAuthenticated()) {
-            $this['message']->info(__('You are already logged in.'));
+        if (App::user()->isAuthenticated()) {
+            App::message()->info(__('You are already logged in.'));
             return $this->redirect('/');
         }
 
-        if ($this['option']->get('system:user.registration', 'admin') == 'admin') {
-            $this['message']->info(__('Public user registration is disabled.'));
+        if (App::option()->get('system:user.registration', 'admin') == 'admin') {
+            App::message()->info(__('Public user registration is disabled.'));
             return $this->redirect('/');
         }
 
@@ -44,11 +45,11 @@ class RegistrationController extends Controller
 
         try {
 
-            if ($this['user']->isAuthenticated() || $this['option']->get('system:user.registration', 'admin') == 'admin') {
+            if (App::user()->isAuthenticated() || App::option()->get('system:user.registration', 'admin') == 'admin') {
                 return $this->redirect('/');
             }
 
-            if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
+            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
@@ -90,14 +91,14 @@ class RegistrationController extends Controller
             $user->setName($name);
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPassword($this['auth.password']->hash($password));
+            $user->setPassword(App::get('auth.password')->hash($password));
             $user->setStatus(UserInterface::STATUS_BLOCKED);
             $user->setRoles(Role::where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
 
-            $token = $this['auth.random']->generateString(32);
-            $admin = $this['option']->get('system:user.registration') == 'approval';
+            $token = App::get('auth.random')->generateString(32);
+            $admin = App::option()->get('system:user.registration') == 'approval';
 
-            if ($verify = $this['option']->get('system:user.require_verification')) {
+            if ($verify = App::option()->get('system:user.require_verification')) {
 
                 $user->setActivation($token);
 
@@ -135,18 +136,18 @@ class RegistrationController extends Controller
                 $response['success'] = true;
             }
 
-            if (!$this['request']->isXmlHttpRequest()) {
+            if (!App::request()->isXmlHttpRequest()) {
 
-                $this['message']->success($response['success']);
+                App::message()->success($response['success']);
                 return $this->redirect('@system/auth/login');
             }
 
         } catch (Exception $e) {
 
-            if (!$this['request']->isXmlHttpRequest()) {
+            if (!App::request()->isXmlHttpRequest()) {
 
                 foreach ($errors as $error) {
-                    $this['message']->error($error['message']);
+                    App::message()->error($error['message']);
                 }
 
             } else {
@@ -154,7 +155,7 @@ class RegistrationController extends Controller
             }
         }
 
-        return $this['request']->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
+        return App::request()->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
     }
 
     /**
@@ -163,16 +164,16 @@ class RegistrationController extends Controller
     public function activateAction($username, $activation)
     {
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
-            $this['message']->error(__('Invalid key.'));
+            App::message()->error(__('Invalid key.'));
             return $this->redirect('/');
         }
 
-        if ($admin = $this['option']->get('system:user.registration') == 'approval' and !$user->get('verified')) {
+        if ($admin = App::option()->get('system:user.registration') == 'approval' and !$user->get('verified')) {
 
-            $user->setActivation($this['auth.random']->generateString(32));
+            $user->setActivation(App::get('auth.random')->generateString(32));
             $this->sendApproveMail($user);
 
-            $this['message']->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
+            App::message()->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
 
         } else {
 
@@ -182,9 +183,9 @@ class RegistrationController extends Controller
             $this->sendWelcomeEmail($user);
 
             if ($admin) {
-                $this['message']->success(__('The user\'s account has been activated and the user has been notified about it.'));
+                App::message()->success(__('The user\'s account has been activated and the user has been notified about it.'));
             } else {
-                $this['message']->success(__('Your account has been activated.'));
+                App::message()->success(__('Your account has been activated.'));
             }
         }
 
@@ -197,10 +198,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $mail = $this['mailer']->create();
+            $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Welcome to %site%!', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extensions/system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
+                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::option()->get('system:app.site_title')]))
+                 ->setBody(App::view()->render('extensions/system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -210,10 +211,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $mail = $this['mailer']->create();
+            $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Activate your %site% account.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extensions/system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
+                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::option()->get('system:app.site_title')]))
+                 ->setBody(App::view()->render('extensions/system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -225,10 +226,10 @@ class RegistrationController extends Controller
     {
         try {
 
-            $mail = $this['mailer']->create();
-            $mail->setTo($this['option']->get('system:mail.from.address'))
-                 ->setSubject(__('Approve an account at %site%.', ['%site%' => $this['option']->get('system:app.site_title')]))
-                 ->setBody($this['view']->render('extensions/system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
+            $mail = App::mailer()->create();
+            $mail->setTo(App::option()->get('system:mail.from.address'))
+                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::option()->get('system:app.site_title')]))
+                 ->setBody(App::view()->render('extensions/system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

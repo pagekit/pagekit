@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class MaintenanceListener extends EventSubscriber
+class MaintenanceListener implements EventSubscriberInterface
 {
     /**
      * Puts the page in maintenance mode.
@@ -16,14 +17,14 @@ class MaintenanceListener extends EventSubscriber
     {
         $attributes = $event->getRequest()->attributes;
 
-        if ($this['config']->get('maintenance.enabled') && !($this['isAdmin'] || $attributes->get('_maintenance') || $this['user']->hasAccess('system: maintenance access'))) {
+        if (App::config()->get('maintenance.enabled') && !(App::isAdmin() || $attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
 
-            $message  = $this['config']->get('maintenance.msg') ? : __("We'll be back soon.");
-            $response = $this['view']->render('extensions/system/theme/templates/maintenance.razr', compact('message'));
+            $message  = App::config()->get('maintenance.msg') ? : __("We'll be back soon.");
+            $response = App::view()->render('extensions/system/theme/templates/maintenance.razr', compact('message'));
 
             $attributes->set('_disable_profiler_toolbar', true);
 
-            $event->setResponse($this['response']->create($response));
+            $event->setResponse(App::response()->create($response));
         }
     }
 

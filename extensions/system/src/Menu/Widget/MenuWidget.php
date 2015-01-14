@@ -2,10 +2,11 @@
 
 namespace Pagekit\Menu\Widget;
 
-use Pagekit\Widget\Model\Type;
+use Pagekit\Framework\Application as App;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class MenuWidget extends Type
+class MenuWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -42,7 +43,7 @@ class MenuWidget extends Type
 
         $layout = isset($options['layout']) ? $options['layout'] : 'extensions/system/views/widgets/menu/nav.razr';
 
-        $root = $this['menus']->getTree($widget->get('menu', 0), [
+        $root = App::menus()->getTree($widget->get('menu', 0), [
             'access' => true,
             'active' => true,
             'status' => 1,
@@ -78,7 +79,7 @@ class MenuWidget extends Type
 
         $root->setParent();
 
-        return $this['view']->render($layout, compact('widget', 'options', 'root'));
+        return App::view()->render($layout, compact('widget', 'options', 'root'));
     }
 
     /**
@@ -86,6 +87,6 @@ class MenuWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/widgets/menu/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/widgets/menu/edit.razr', compact('widget'));
     }
 }

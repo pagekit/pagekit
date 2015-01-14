@@ -2,21 +2,22 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypesTrait;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class WidgetListener extends EventSubscriber
+class WidgetListener implements EventSubscriberInterface
 {
     /**
      * Handles the widget to position assignment.
      */
     public function onSystemSite()
     {
-        $request   = $this['request'];
+        $request   = App::request();
         $active    = (array) $request->attributes->get('_menu');
-        $user      = $this['user'];
-        $sections  = $this['view.sections'];
+        $user      = App::user();
+        $sections  = App::get('view.sections');
 
         foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 
@@ -45,7 +46,7 @@ class WidgetListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        TypesTrait::setWidgetTypes($this['events']->dispatch('system.widget', new RegisterWidgetEvent)->getTypes());
+        TypesTrait::setWidgetTypes(App::events()->dispatch('system.widget', new RegisterWidgetEvent)->getTypes());
     }
 
     /**

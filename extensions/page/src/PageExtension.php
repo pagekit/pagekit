@@ -3,7 +3,7 @@
 namespace Pagekit\Page;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application;
+use Pagekit\Framework\Application as App;
 use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
@@ -16,7 +16,7 @@ class PageExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
@@ -36,9 +36,9 @@ class PageExtension extends Extension
             ]);
         });
 
-        $app->on('tree.node.edit', function (NodeEditEvent $event) {
+        $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'page') {
-                $this['view.scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
+                $app['view.scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
             }
         });
 
@@ -52,8 +52,8 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extensions/page/migrations', $this['option']->get('page:version'))->run()) {
-            $this['option']->set('page:version', $version);
+        if ($version = App::migrator()->create('extensions/page/migrations', App::option()->get('page:version'))->run()) {
+            App::option()->set('page:version', $version);
         }
     }
 }

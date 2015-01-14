@@ -3,9 +3,9 @@
 namespace Pagekit\Content\Plugin;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class SimplePlugin extends EventSubscriber
+class SimplePlugin implements EventSubscriberInterface
 {
     const PLUGIN_CODE = '/
                         \(([a-zA-Z_][a-zA-Z0-9_]*)\) # the plugin name

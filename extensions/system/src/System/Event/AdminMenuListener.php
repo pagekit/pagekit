@@ -2,11 +2,12 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\System\Menu\Item;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AdminMenuListener extends EventSubscriber
+class AdminMenuListener implements EventSubscriberInterface
 {
     /**
      * Adds extensions menu items.
@@ -14,9 +15,9 @@ class AdminMenuListener extends EventSubscriber
     public function onAdminMenu(MenuEvent $event)
     {
         $menu = $event->getMenu();
-        $meta = $this['user']->get('admin.menu', []);
+        $meta = App::user()->get('admin.menu', []);
 
-        foreach ($this['extensions'] as $extension) {
+        foreach (App::extensions() as $extension) {
             foreach ($extension->getConfig('menu', []) as $id => $properties) {
 
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;

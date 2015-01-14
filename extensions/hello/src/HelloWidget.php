@@ -2,10 +2,11 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\Widget\Model\Type;
+use Pagekit\Framework\Application as App;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class HelloWidget extends Type
+class HelloWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -36,9 +37,9 @@ class HelloWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        $user = $this['user'];
+        $user = App::user();
 
-        return $this['view']->render('extensions/hello/views/widget.razr', compact('user'));
+        return App::view()->render('extensions/hello/views/widget.razr', compact('user'));
     }
 
     /**

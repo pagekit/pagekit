@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\LocaleEvent;
@@ -21,13 +22,13 @@ class SystemController extends Controller
     {
         $packages = [];
 
-        foreach ($this['extensions'] as $extension) {
+        foreach (App::extensions() as $extension) {
             if ($extension->getConfig('parameters.settings.view')) {
-                $packages[$extension->getName()] = $this['extensions']->getRepository()->findPackage($extension->getName());
+                $packages[$extension->getName()] = App::extensions()->getRepository()->findPackage($extension->getName());
             }
         }
 
-        return ['head.title' => __('Settings'), 'user' => $this['user'], 'packages' => $packages];
+        return ['head.title' => __('Settings'), 'user' => App::user(), 'packages' => $packages];
     }
 
     /**
@@ -43,7 +44,7 @@ class SystemController extends Controller
                 throw new Exception('Missing order data.');
             }
 
-            $user = User::find($this['user']->getId());
+            $user = User::find(App::user()->getId());
             $user->set('admin.menu', $order);
 
             User::save($user);
@@ -62,7 +63,7 @@ class SystemController extends Controller
      */
     public function storageAction()
     {
-        return ['head.title' => __('Storage'), 'root' => $this['config']->get('app.storage'), 'mode' => 'write'];
+        return ['head.title' => __('Storage'), 'root' => App::config()->get('app.storage'), 'mode' => 'write'];
     }
 
     /**
@@ -71,7 +72,7 @@ class SystemController extends Controller
      */
     public function infoAction()
     {
-        return ['head.title' => __('System Information'), 'info' => $this['system.info']->get()];
+        return ['head.title' => __('System Information'), 'info' => App::get('system.info')->get()];
     }
 
     /**
@@ -79,7 +80,7 @@ class SystemController extends Controller
      */
     public function localeAction()
     {
-        $this['events']->dispatch('system.locale', $event = new LocaleEvent);
+        App::events()->dispatch('system.locale', $event = new LocaleEvent);
 
         return $event->getMessages();
     }
@@ -91,11 +92,11 @@ class SystemController extends Controller
     public function tmplAction($templates = '')
     {
         $response = [];
-        $event = $this['events']->dispatch('system.tmpl', new TmplEvent);
+        $event = App::events()->dispatch('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
-                $response[$template] = $this['view']->render($event->get($template));
+                $response[$template] = App::view()->render($event->get($template));
             }
         }
 
@@ -109,8 +110,8 @@ class SystemController extends Controller
      */
     public function clearCacheAction($caches)
     {
-        $this['system']->clearCache($caches);
+        App::system()->clearCache($caches);
 
-        return $this['request']->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
+        return App::request()->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
     }
 }

@@ -6,6 +6,7 @@ use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Framework\Database\Event\EntityEvent;
@@ -34,7 +35,7 @@ class SiteController extends Controller
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
+        App::events()->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
             $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
         });
@@ -47,9 +48,9 @@ class SiteController extends Controller
      */
     public function indexAction($page = 1)
     {
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) {
+        App::events()->addListener('blog.post.postLoad', function (EntityEvent $event) {
             $post = $event->getEntity();
-            $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
+            $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
         $query = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
@@ -67,9 +68,9 @@ class SiteController extends Controller
         return [
             'head.title'          => __('Blog'),
             'head.link.alternate' => [
-                'href'  => $this['url']->route('@blog/site/feed', [], true),
-                'title' => $this['option']->get('system:app.site_title'),
-                'type'  => $this['feed']->create($this->extension->getParams('feed.type'))->getMIMEType()
+                'href'  => App::url()->route('@blog/site/feed', [], true),
+                'title' => App::option()->get('system:app.site_title'),
+                'type'  => App::feed()->create($this->extension->getParams('feed.type'))->getMIMEType()
             ],
             'posts'               => $query->get(),
             'params'              => $this->extension->getParams(),
@@ -86,7 +87,7 @@ class SiteController extends Controller
     {
         try {
 
-            $user = $this['user'];
+            $user = App::user();
 
             if (!$user->hasAccess('blog: post comments')) {
                 throw new Exception(__('Insufficient User Rights.'));
@@ -95,7 +96,7 @@ class SiteController extends Controller
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
                 and $minidle = $this->extension->getParams('comments.minidle')
-                and $comment = Comment::query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()
+                and $comment = Comment::query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
@@ -124,7 +125,7 @@ class SiteController extends Controller
 
             $comment = new Comment;
             $comment->setUserId((int)$user->getId());
-            $comment->setIp($this['request']->getClientIp());
+            $comment->setIp(App::request()->getClientIp());
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
@@ -137,13 +138,13 @@ class SiteController extends Controller
             }
 
             // check for spam
-            $this['events']->dispatch('system.comment.spam_check', new CommentEvent($comment));
+            App::events()->dispatch('system.comment.spam_check', new CommentEvent($comment));
 
             Comment::save($comment, $data);
 
-            $this['message']->info(__('Thanks for commenting!'));
+            App::message()->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this['url']->route('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
+            return $this->redirect(App::url()->route('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
@@ -155,9 +156,9 @@ class SiteController extends Controller
 
         }
 
-        $this['message']->error($message);
+        App::message()->error($message);
 
-        return $this->redirect($this['url']->previous());
+        return $this->redirect(App::url()->previous());
     }
 
     /**
@@ -170,24 +171,24 @@ class SiteController extends Controller
             throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
-        if (!$post->hasAccess($this['user'])) {
+        if (!$post->hasAccess(App::user())) {
             throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
         $query = Comment::query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
-        if ($this['user']->isAuthenticated()) {
+        if (App::user()->isAuthenticated()) {
             $query->orWhere(function ($query) {
-                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $this['user']->getId()]);
+                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, App::user()->getId()]);
             });
         }
 
-        $this['db.em']->related($post, 'comments', $query);
+        App::get('db.em')->related($post, 'comments', $query);
 
-        $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
+        $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
 
         foreach ($post->getComments() as $comment) {
-            $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
+            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
         return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => $this->extension->getParams()];
@@ -199,12 +200,12 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = $this['feed']->create($type ?: $this->extension->getParams('feed.type'), [
-            'title'       => $this['option']->get('system:app.site_title'),
-            'link'        => $this['url']->route('@blog/site', [], true),
-            'description' => $this['option']->get('system:app.site_description'),
-            'element'     => ['language', $this['option']->get('system:app.locale')],
-            'selfLink'    => $this['url']->route('@blog/site/feed', [], true)
+        $feed = App::feed()->create($type ?: $this->extension->getParams('feed.type'), [
+            'title'       => App::option()->get('system:app.site_title'),
+            'link'        => App::url()->route('@blog/site', [], true),
+            'description' => App::option()->get('system:app.site_description'),
+            'element'     => ['language', App::option()->get('system:app.locale')],
+            'selfLink'    => App::url()->route('@blog/site/feed', [], true)
         ]);
 
         if ($last = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
@@ -215,15 +216,15 @@ class SiteController extends Controller
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),
-                    'link'        => $this['url']->route('@blog/id', ['id' => $post->getId()], true),
-                    'description' => $this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
+                    'link'        => App::url()->route('@blog/id', ['id' => $post->getId()], true),
+                    'description' => App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
                     'date'        => $post->getDate(),
                     'author'      => [$post->getUser()->getName(), $post->getUser()->getEmail()],
-                    'id'          => $this['url']->route('@blog/id', ['id' => $post->getId()], true)
+                    'id'          => App::url()->route('@blog/id', ['id' => $post->getId()], true)
                 ])
             );
         }
 
-        return $this['response']->create($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
+        return App::response()->create($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
     }
 }

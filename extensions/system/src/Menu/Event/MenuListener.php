@@ -2,13 +2,14 @@
 
 namespace Pagekit\Menu\Event;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Component\Cache\CacheInterface;
-use Pagekit\Framework\Event\EventSubscriber;
 use Pagekit\Menu\Entity\Item;
 use Pagekit\Menu\Model\ItemInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class MenuListener extends EventSubscriber
+class MenuListener implements EventSubscriberInterface
 {
     /**
      * The menu item cache.
@@ -34,7 +35,7 @@ class MenuListener extends EventSubscriber
      */
     public function __construct(CacheInterface $cache = null)
     {
-        $this->cache = $cache ?: $this['cache'];
+        $this->cache = $cache ?: App::cache();
     }
 
     /**
@@ -44,7 +45,7 @@ class MenuListener extends EventSubscriber
      */
     public function onSystemSite(GetResponseEvent $event)
     {
-        $event->getRequest()->attributes->set('_menu', $this['events']->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', App::events()->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -54,9 +55,9 @@ class MenuListener extends EventSubscriber
      */
     public function onSystemMenu(ActiveMenuEvent $event)
     {
-        $request  = $this['request'];
+        $request  = App::request();
         $route    = $request->attributes->get('_route');
-        $internal = $this['url']->route($route, $request->attributes->get('_route_params', []), 'link');
+        $internal = App::url()->route($route, $request->attributes->get('_route_params', []), 'link');
 
         foreach ($event->get($route) as $id => $path) {
             if ($path == $internal || substr($path, strlen($internal), 1) == '&') {

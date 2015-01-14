@@ -3,15 +3,16 @@
 namespace Pagekit\System\Controller;
 
 use OAuth\Common\Storage\Memory;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 
 class OAuthController extends Controller
 {
     public function connectAction()
     {
-        $provider = $this['session']->get('oauth.provider');
-        $redirect = $this['session']->get('oauth.redirect');
-        $tokenKey = $this['session']->get('oauth.tokenKey');
+        $provider = App::session()->get('oauth.provider');
+        $redirect = App::session()->get('oauth.redirect');
+        $tokenKey = App::session()->get('oauth.tokenKey');
 
         $redirect  = explode('?', $redirect);
         $addionalParms = [];
@@ -23,15 +24,15 @@ class OAuthController extends Controller
 
         try {
 
-            if (!$service = $this['oauth']->createService($provider, [], new Memory)) {
+            if (!$service = App::oauth()->createService($provider, [], new Memory)) {
                 throw new \Exception("Provider not configured.");
             }
 
             switch ($service::OAUTH_VERSION) {
                 case 1:
 
-                    $oauth_token     = $this['request']->query->get('oauth_token');
-                    $oauth_verifier  = $this['request']->query->get('oauth_verifier');
+                    $oauth_token     = App::request()->query->get('oauth_token');
+                    $oauth_verifier  = App::request()->query->get('oauth_verifier');
 
                     $token = $service->storage->retrieveAccessToken($service->getClass());
 
@@ -50,7 +51,7 @@ class OAuthController extends Controller
 
                 case 2:
 
-                        $code  = $this['request']->query->get('code');
+                        $code  = App::request()->query->get('code');
                         $token = $service->requestAccessToken($code);
 
                     break;
@@ -61,7 +62,7 @@ class OAuthController extends Controller
         }
 
         if ($tokenKey) {
-            $this['oauth']->saveToken($provider, $tokenKey, $token);
+            App::oauth()->saveToken($provider, $tokenKey, $token);
         }
 
         return $this->redirect($redirect, array_merge($addionalParms, ['success' => true]));

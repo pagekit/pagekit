@@ -2,7 +2,9 @@
 
 namespace Pagekit\System\Link;
 
-class System extends Link
+use Pagekit\Framework\Application as App;
+
+class System implements LinkInterface
 {
     /**
      * {@inheritdoc}
@@ -39,7 +41,7 @@ class System extends Link
             unset($routes['/']);
         }
 
-        return $this['view']->render('extensions/system/views/admin/link/system.razr', compact('link', 'params', 'routes'));
+        return App::view()->render('extensions/system/views/admin/link/system.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()

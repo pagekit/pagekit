@@ -3,9 +3,9 @@
 namespace Pagekit\Content\Plugin;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class VideoPlugin extends EventSubscriber
+class VideoPlugin implements EventSubscriberInterface
 {
     const REGEX_YOUTUBE       = '/(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/';
     const REGEX_YOUTUBE_SHORT = '/youtu\.be\/(.*)/';

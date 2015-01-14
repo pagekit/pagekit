@@ -2,14 +2,14 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\User\Entity\Role;
 
 /**
  * @Route("/user/permission")
  * @Access("system: manage user permissions", admin=true)
  */
-class PermissionController extends Controller
+class PermissionController
 {
     /**
      * @Response("extensions/system/views/admin/user/permission.razr")
@@ -18,7 +18,7 @@ class PermissionController extends Controller
     {
         $roles = Role::query()->orderBy('priority')->get();
 
-        return ['head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => $this['permissions']];
+        return ['head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => App::permissions()];
     }
 
     /**
@@ -32,6 +32,6 @@ class PermissionController extends Controller
             Role::save($role);
         }
 
-        return $this['request']->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');
+        return App::request()->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');
     }
 }

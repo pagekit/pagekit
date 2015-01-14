@@ -11,13 +11,13 @@ use Pagekit\Component\Package\Exception\DownloadErrorException;
 use Pagekit\Component\Package\Exception\NotWritableException;
 use Pagekit\Component\Package\Exception\UnauthorizedDownloadException;
 use Pagekit\Component\Package\Loader\JsonLoader;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Exception;
 
 /**
  * @Access("system: manage extensions", admin=true)
  */
-class PackageController extends Controller
+class PackageController
 {
     protected $temp;
     protected $api;
@@ -28,9 +28,9 @@ class PackageController extends Controller
      */
     public function __construct()
     {
-        $this->temp   = $this['path.temp'];
-        $this->api    = $this['config']->get('api.url');
-        $this->apiKey = $this['option']->get('system:api.key');
+        $this->temp   = App::get('path.temp');
+        $this->api    = App::config()->get('api.url');
+        $this->apiKey = App::option()->get('system:api.key');
     }
 
     /**
@@ -41,7 +41,7 @@ class PackageController extends Controller
     {
         try {
 
-            $file = $this['request']->files->get('file');
+            $file = App::request()->files->get('file');
 
             if ($file === null || !$file->isValid()) {
                 throw new Exception(__('No file uploaded.'));
@@ -62,9 +62,9 @@ class PackageController extends Controller
             $extra = $package->getExtra();
 
             if (isset($extra['image'])) {
-                $extra['image'] = $this['url']->to("{$this->temp}/$path/".$extra['image']);
+                $extra['image'] = App::url()->to("{$this->temp}/$path/".$extra['image']);
             } else {
-                $extra['image'] = $this['url']->to('extensions/system/assets/images/placeholder-icon.svg');
+                $extra['image'] = App::url()->to('extensions/system/assets/images/placeholder-icon.svg');
             }
 
             $response = [
@@ -119,7 +119,7 @@ class PackageController extends Controller
                 $this->installExtension("$path/extension.json", $package);
             }
 
-            $this['system']->clearCache();
+            App::system()->clearCache();
 
             $response = ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
 
@@ -138,7 +138,7 @@ class PackageController extends Controller
         }
 
         if (strpos($path, $this->temp) === 0 && file_exists($path)) {
-            $this['file']->delete($path);
+            App::file()->delete($path);
         }
 
         return $response;
@@ -146,7 +146,7 @@ class PackageController extends Controller
 
     protected function installTheme($json, $package)
     {
-        $installer = $this['themes']->getInstaller();
+        $installer = App::themes()->getInstaller();
 
         if ($installer->isInstalled($package)) {
             $installer->update($json);
@@ -161,8 +161,8 @@ class PackageController extends Controller
             throw new Exception(__('Core extensions may not be installed.'));
         }
 
-        $installer = $this['extensions']->getInstaller();
-        $extension = $this['extensions']->get($name);
+        $installer = App::extensions()->getInstaller();
+        $extension = App::extensions()->get($name);
 
         if ($installer->isInstalled($package)) {
 
@@ -212,6 +212,6 @@ class PackageController extends Controller
 
     protected function isCore($name)
     {
-        return in_array($name, $this['config']->get('extension.core', []));
+        return in_array($name, App::config()->get('extension.core', []));
     }
 }

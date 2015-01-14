@@ -7,18 +7,19 @@ use Pagekit\Component\Auth\Event\AuthorizeEvent;
 use Pagekit\Component\Auth\Event\LoginEvent;
 use Pagekit\Component\Auth\Event\LogoutEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\User\Auth\UserProvider;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AuthorizationListener extends EventSubscriber
+class AuthorizationListener implements EventSubscriberInterface
 {
     /**
      * Initialize system.
      */
     public function onSystemInit()
     {
-        $this['auth']->setUserProvider(new UserProvider($this['auth.password']));
-        $this['auth']->refresh($this['option']->get(UserListener::REFRESH_TOKEN));
+        App::auth()->setUserProvider(new UserProvider(App::get('auth.password')));
+        App::auth()->refresh(App::option()->get(UserListener::REFRESH_TOKEN));
     }
 
     /**
@@ -26,8 +27,8 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onSystemLoaded()
     {
-        if ($user = $this['auth']->getUser() and $user->isBlocked()) {
-            $this['auth']->logout($user);
+        if ($user = App::auth()->getUser() and $user->isBlocked()) {
+            App::auth()->logout($user);
         }
     }
 
@@ -51,7 +52,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onLogin(LoginEvent $event)
     {
-        $event->setResponse($this['response']->redirect($this['request']->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     /**
@@ -61,7 +62,7 @@ class AuthorizationListener extends EventSubscriber
      */
     public function onLogout(LogoutEvent $event)
     {
-        $event->setResponse($this['response']->redirect($this['request']->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     /**

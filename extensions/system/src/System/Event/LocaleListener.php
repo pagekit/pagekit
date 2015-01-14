@@ -2,16 +2,17 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LocaleListener extends EventSubscriber
+class LocaleListener implements  EventSubscriberInterface
 {
     /**
      * Sets the systems locale
      */
     public function onSystemInit()
     {
-        $this['translator']->setLocale($this['config']->get('app.locale'.($this['isAdmin'] ? '_admin' : '')));
+        App::translator()->setLocale(App::config()->get('app.locale'.(App::isAdmin() ? '_admin' : '')));
     }
 
     /**

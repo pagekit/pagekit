@@ -2,12 +2,8 @@
 
 namespace Pagekit\Menu\Filter;
 
-use Pagekit\Framework\ApplicationTrait;
-
-abstract class FilterIterator extends \FilterIterator implements \ArrayAccess
+abstract class FilterIterator extends \FilterIterator
 {
-    use ApplicationTrait;
-
     /**
      * @var array
      */

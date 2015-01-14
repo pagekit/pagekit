@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Dashboard;
 
-use Pagekit\Widget\Model\Type;
+use Pagekit\Framework\Application as App;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class FeedWidget extends Type
+class FeedWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -40,7 +41,7 @@ class FeedWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['view']->render('extensions/system/views/admin/dashboard/feed/index.razr', compact('widget', 'options'));
+        return App::view()->render('extensions/system/views/admin/dashboard/feed/index.razr', compact('widget', 'options'));
     }
 
     /**
@@ -48,6 +49,6 @@ class FeedWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/admin/dashboard/feed/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/admin/dashboard/feed/edit.razr', compact('widget'));
     }
 }

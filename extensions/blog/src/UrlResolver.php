@@ -4,14 +4,12 @@ namespace Pagekit\Blog;
 
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Component\Routing\ParamsResolverInterface;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
-class UrlResolver implements ParamsResolverInterface, \ArrayAccess
+class UrlResolver implements ParamsResolverInterface
 {
-    use ApplicationTrait;
-
     const CACHE_KEY = 'blog.routing';
 
     /**
@@ -34,7 +32,7 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
      */
     public function __construct()
     {
-        $extension = $this['extensions']->get('blog');
+        $extension = App::extensions()->get('blog');
 
         $this->permalink = $extension->getParams('permalink');
 
@@ -42,7 +40,7 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
             $this->permalink = $extension->getParams('permalink.custom');
         }
 
-        $this->cacheEntries = $this['cache']->fetch(self::CACHE_KEY) ?: [];
+        $this->cacheEntries = App::cache()->fetch(self::CACHE_KEY) ?: [];
     }
 
     /**
@@ -112,7 +110,7 @@ class UrlResolver implements ParamsResolverInterface, \ArrayAccess
     public function __destruct()
     {
         if ($this->cacheDirty) {
-            $this['cache']->save(self::CACHE_KEY, $this->cacheEntries);
+            App::cache()->save(self::CACHE_KEY, $this->cacheEntries);
         }
     }
 }

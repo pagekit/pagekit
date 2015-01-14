@@ -3,9 +3,9 @@
 namespace Pagekit\Comment;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CommentPlugin extends EventSubscriber
+class CommentPlugin implements EventSubscriberInterface
 {
     /**
      * Content plugins callback.

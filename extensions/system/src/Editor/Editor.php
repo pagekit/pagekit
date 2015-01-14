@@ -3,10 +3,11 @@
 namespace Pagekit\Editor;
 
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\System\Event\TmplEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class Editor extends EventSubscriber implements EditorInterface
+class Editor implements EditorInterface, EventSubscriberInterface
 {
     /**
      * @var array
@@ -81,13 +82,13 @@ class Editor extends EventSubscriber implements EditorInterface
      */
     public function render($value, array $attributes = [])
     {
-        $this['view.scripts']->queue('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
+        App::get('view.scripts')->queue('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
             'data-editor' => json_encode(array_values($this->getPlugins()))
         ]);
 
         $this->addAttribute([
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
-            'data-finder' => json_encode(['root' => $this['config']->get('app.storage')])
+            'data-finder' => json_encode(['root' => App::config()->get('app.storage')])
         ]);
 
         return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(array_merge($this->attributes, $attributes)), htmlspecialchars($value));

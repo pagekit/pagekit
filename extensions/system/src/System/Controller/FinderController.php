@@ -2,11 +2,10 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Framework\Application as App;
 use Pagekit\System\Event\FileAccessEvent;
 
-class FinderController extends Controller
+class FinderController
 {
     /**
      * @Request({"path"})
@@ -25,7 +24,7 @@ class FinderController extends Controller
         $data = array_fill_keys(['folders', 'files'], []);
         $data['mode'] = $mode;
 
-        foreach ($this['finder']->depth(0)->in($dir) as $file) {
+        foreach (App::finder()->depth(0)->in($dir) as $file) {
 
             if ('-' === $mode = $this->getMode($file->getPathname())) {
                 continue;
@@ -34,14 +33,14 @@ class FinderController extends Controller
             $info = [
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => htmlspecialchars($this['url']->to($file->getPathname()), ENT_QUOTES),
+                'url'      => htmlspecialchars(App::url()->to($file->getPathname()), ENT_QUOTES),
                 'writable' => $mode == 'w'
             ];
 
             if (!$isDir = $file->isDir()) {
                 $info = array_merge($info, [
                     'size'         => $this->formatFileSize($file->getSize()),
-                    'lastmodified' => $this['dates']->format($file->getMTime(), 'd.m.y H:m')
+                    'lastmodified' => App::dates()->format($file->getMTime(), 'd.m.y H:m')
                 ]);
             }
 
@@ -75,7 +74,7 @@ class FinderController extends Controller
 
         try {
 
-            $this['file']->makeDir($path);
+            App::file()->makeDir($path);
 
             return $this->success(__('Directory created.'));
 
@@ -105,7 +104,7 @@ class FinderController extends Controller
 
         try {
 
-            $this['file']->rename($source, $target);
+            App::file()->rename($source, $target);
 
             return $this->success(__('Renamed.'));
 
@@ -133,7 +132,7 @@ class FinderController extends Controller
 
             try {
 
-                $this['file']->delete($path);
+                App::file()->delete($path);
 
             } catch (\Exception $e) {
 
@@ -159,7 +158,7 @@ class FinderController extends Controller
                 return $this->error(__('Permission denied.'));
             }
 
-            $files = $this['request']->files->get('files');
+            $files = App::request()->files->get('files');
 
             if (!$files) {
                 return $this->error(__('No files uploaded.'));
@@ -184,7 +183,7 @@ class FinderController extends Controller
 
     protected function getMode($path)
     {
-        $mode = $this['events']->dispatch('system.finder', new FileAccessEvent)->mode($path);
+        $mode = App::events()->dispatch('system.finder', new FileAccessEvent)->mode($path);
 
         if ('w' == $mode && !is_writable($path)) {
             $mode = 'r';
@@ -210,8 +209,8 @@ class FinderController extends Controller
 
     protected function getPath($path = '')
     {
-        $root = strtr($this['path'], '\\', '/');
-        $path = $this->normalizePath($root.'/'.$this['request']->get('root').'/'.$this['request']->get('path').'/'.$path);
+        $root = strtr(App::path(), '\\', '/');
+        $path = $this->normalizePath($root.'/'.App::request()->get('root').'/'.App::request()->get('path').'/'.$path);
 
         return 0 === strpos($path, $root) ? $path : false;
     }

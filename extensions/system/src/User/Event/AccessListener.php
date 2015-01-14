@@ -8,11 +8,12 @@ use Pagekit\Component\Auth\Event\AuthorizeEvent;
 use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Component\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Component\Routing\Event\RouteCollectionEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\User\Annotation\Access;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class AccessListener extends EventSubscriber
+class AccessListener implements EventSubscriberInterface
 {
     /**
      * @var Reader
@@ -79,7 +80,7 @@ class AccessListener extends EventSubscriber
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos($this['request']->get('redirect'), $this['url']->route('@system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos(App::request()->get('redirect'), App::url()->route('@system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
@@ -93,8 +94,8 @@ class AccessListener extends EventSubscriber
     {
         if ($access = $event->getRequest()->attributes->get('_access')) {
             foreach ($access as $expression) {
-                if (!$this['user']->hasAccess($expression)) {
-                    $event->setResponse($this['response']->create(__('Insufficient User Rights.'), 403));
+                if (!App::user()->hasAccess($expression)) {
+                    $event->setResponse(App::response()->create(__('Insufficient User Rights.'), 403));
                     break;
                 }
             }
@@ -110,16 +111,16 @@ class AccessListener extends EventSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$this['auth']->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
+        if (!App::auth()->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
 
             $params = [];
 
             // redirect to default URL for POST requests and don't explicitly redirect the default URL
             if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/admin') {
-                $params['redirect'] = $this['url']->current(true);
+                $params['redirect'] = App::url()->current(true);
             }
 
-            $event->setResponse($this['response']->redirect('@system/admin/login', $params));
+            $event->setResponse(App::response()->redirect('@system/admin/login', $params));
         }
     }
 

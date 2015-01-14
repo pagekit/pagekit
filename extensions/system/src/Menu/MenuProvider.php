@@ -2,18 +2,14 @@
 
 namespace Pagekit\Menu;
 
-use Pagekit\Framework\ApplicationTrait;
 use Pagekit\Menu\Entity\Item;
 use Pagekit\Menu\Entity\Menu;
-use Pagekit\Menu\Filter\FilterIterator;
 use Pagekit\Menu\Model\FilterManager;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\Menu\Model\Node;
 
-class MenuProvider implements \IteratorAggregate, \ArrayAccess
+class MenuProvider implements \IteratorAggregate
 {
-    use ApplicationTrait;
-
     /**
      * @var MenuInterface[]
      */
@@ -37,8 +33,6 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
     public function __construct(FilterManager $filters = null)
     {
         $this->filters = $filters ?: new FilterManager;
-
-        FilterIterator::setApplication($this->getApplication());
     }
 
     /**

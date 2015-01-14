@@ -2,6 +2,7 @@
 
 namespace Pagekit\Menu\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\Menu\Model\Menu as BaseMenu;
 
 /**
@@ -9,6 +10,8 @@ use Pagekit\Menu\Model\Menu as BaseMenu;
  */
 class Menu extends BaseMenu
 {
+    use ModelTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 

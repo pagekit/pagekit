@@ -3,13 +3,10 @@
 namespace Pagekit\Extension;
 
 use Pagekit\Component\Routing\Controller\ControllerCollection;
-use Pagekit\Framework\Application;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 
-class Extension implements \ArrayAccess
+class Extension
 {
-    use ApplicationTrait;
-
     /**
      * @var string
      */
@@ -52,11 +49,11 @@ class Extension implements \ArrayAccess
     /**
      * Boots the extension.
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         $this->registerControllers($app['controllers']);
 
-        $this->registerLanguages($app['translator']);
+        $this->registerLanguages();
         // -TODO- $this->registerResources($app['locator']);
 
         $app->on('system.init', [$this, 'registerLanguages']);
@@ -67,7 +64,7 @@ class Extension implements \ArrayAccess
                 $this->parameters = array_replace($this->parameters, $defaults);
             }
 
-            if (is_array($settings = $this['option']->get("{$this->name}:settings"))) {
+            if (is_array($settings = App::option()->get("{$this->name}:settings"))) {
                 $this->parameters = array_replace($this->parameters, $settings);
             }
         }
@@ -174,7 +171,7 @@ class Extension implements \ArrayAccess
      */
     public function registerLanguages()
     {
-        $locale = $this['translator']->getLocale();
+        $locale = App::translator()->getLocale();
         $domains = [];
         foreach (glob($this->getPath().'/languages/'.$locale.'/*') ?: [] as $file) {
 
@@ -187,8 +184,8 @@ class Extension implements \ArrayAccess
 
             $domains[] = $domain;
 
-            $this['translator']->addResource($format, $file, $locale, $domain);
-            $this['translator']->addResource($format, $file, substr($locale, 0, 2), $domain);
+            App::translator()->addResource($format, $file, $locale, $domain);
+            App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
         }
     }
 
@@ -221,7 +218,7 @@ class Extension implements \ArrayAccess
     //     $addResources($this->getConfig('resources.export', []), $this->getName());
 
     //     if ($config = $this->getConfig('resources.override')) {
-    //         $this['events']->addListener('system.init', function() use ($config, $addResources) {
+    //         App::events()->addListener('system.init', function() use ($config, $addResources) {
     //             $addResources($config);
     //         }, 20);
     //     }

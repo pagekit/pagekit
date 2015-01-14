@@ -2,10 +2,10 @@
 
 namespace Pagekit\User\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Model\UserInterface;
 
 /**
  * @Route("/user/password")
@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
      */
     public function indexAction()
     {
-        if ($this['user']->isAuthenticated()) {
+        if (App::user()->isAuthenticated()) {
             return $this->redirect('/');
         }
 
@@ -32,11 +32,11 @@ class ResetPasswordController extends Controller
     {
         try {
 
-            if ($this['user']->isAuthenticated()) {
+            if (App::user()->isAuthenticated()) {
                 return $this->redirect('/');
             }
 
-            if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
+            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
@@ -52,16 +52,16 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Your account has not been activated or is blocked.'));
             }
 
-            $user->setActivation($this['auth.random']->generateString(32));
+            $user->setActivation(App::get('auth.random')->generateString(32));
 
-            $url = $this['url']->route('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
+            $url = App::url()->route('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
 
             try {
 
-                $mail = $this['mailer']->create();
+                $mail = App::mailer()->create();
                 $mail->setTo($user->getEmail())
-                     ->setSubject(__('Reset password for %site%.', ['%site%' => $this['config']->get('app.site_title')]))
-                     ->setBody($this['view']->render('extensions/system/views/user/mails/reset.razr', compact('user', 'url', 'mail')), 'text/html')
+                     ->setSubject(__('Reset password for %site%.', ['%site%' => App::config()->get('app.site_title')]))
+                     ->setBody(App::view()->render('extensions/system/views/user/mails/reset.razr', compact('user', 'url', 'mail')), 'text/html')
                      ->send();
 
             } catch (\Exception $e) {
@@ -70,12 +70,12 @@ class ResetPasswordController extends Controller
 
             User::save($user);
 
-            $this['message']->success(__('Check your email for the confirmation link.'));
+            App::message()->success(__('Check your email for the confirmation link.'));
 
             return $this->redirect('/');
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/resetpassword');
@@ -88,24 +88,24 @@ class ResetPasswordController extends Controller
     public function confirmAction($username = "", $activation = "")
     {
         if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
-            $this['message']->error(__('Invalid key.'));
+            App::message()->error(__('Invalid key.'));
             return $this->redirect('/');
         }
 
         if ($user->isBlocked()) {
-            $this['message']->error(__('Your account has not been activated or is blocked.'));
+            App::message()->error(__('Your account has not been activated or is blocked.'));
             return $this->redirect('/');
         }
 
-        if ('POST' === $this['request']->getMethod()) {
+        if ('POST' === App::request()->getMethod()) {
 
             try {
 
-                if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
+                if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
                     throw new Exception(__('Invalid token. Please try again.'));
                 }
 
-                $password = $this['request']->request->get('password');
+                $password = App::request()->request->get('password');
 
                 if (empty($password)) {
                     throw new Exception(__('Enter password.'));
@@ -115,16 +115,16 @@ class ResetPasswordController extends Controller
                     throw new Exception(__('Invalid password.'));
                 }
 
-                $user->setPassword($this['auth.password']->hash($password));
+                $user->setPassword(App::get('auth.password')->hash($password));
                 $user->setActivation(null);
 
                 User::save($user);
 
-                $this['message']->success(__('Your password has been reset.'));
+                App::message()->success(__('Your password has been reset.'));
                 return $this->redirect('/');
 
             } catch (Exception $e) {
-                $this['message']->error($e->getMessage());
+                App::message()->error($e->getMessage());
             }
         }
 

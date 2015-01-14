@@ -2,10 +2,11 @@
 
 namespace Pagekit\Tree\Event;
 
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\Tree\Entity\Node;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class RouteListener extends EventSubscriber
+class RouteListener implements EventSubscriberInterface
 {
     const CACHE_KEY = 'tree.nodes';
 
@@ -18,11 +19,11 @@ class RouteListener extends EventSubscriber
 
             if ($node['controllers']) {
 
-                $this['controllers']->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
+                App::controllers()->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
 
             } elseif ($node['url']) {
 
-                $this['aliases']->add($path, $node['url'], $node['defaults']);
+                App::aliases()->add($path, $node['url'], $node['defaults']);
 
             }
         }
@@ -33,7 +34,7 @@ class RouteListener extends EventSubscriber
      */
     public function clearCache()
     {
-        $this['cache.phpfile']->delete(self::CACHE_KEY);
+        App::get('cache.phpfile')->delete(self::CACHE_KEY);
     }
 
     /**
@@ -53,10 +54,10 @@ class RouteListener extends EventSubscriber
      */
     protected function getNodes()
     {
-        if (!$nodes = $this['cache.phpfile']->fetch(self::CACHE_KEY) ?: []) {
+        if (!$nodes = App::get('cache.phpfile')->fetch(self::CACHE_KEY) ?: []) {
 
             $nodes = [];
-            $types = $this['tree.types'];
+            $types = App::get('tree.types');
             foreach (Node::query()->where(['status = ?'], [1])->get() as $node) {
 
                 if (!$type = $types[$node->getType()]) {
@@ -71,7 +72,7 @@ class RouteListener extends EventSubscriber
                 ];
             }
 
-            $this['cache.phpfile']->save(self::CACHE_KEY, $nodes);
+            App::get('cache.phpfile')->save(self::CACHE_KEY, $nodes);
         }
 
         return $nodes;

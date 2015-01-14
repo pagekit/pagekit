@@ -5,6 +5,7 @@ namespace Pagekit\Blog\Controller;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
@@ -35,9 +36,9 @@ class PostController extends Controller
     public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
-            $this['session']->set('blog.posts.filter', $filter);
+            App::session()->set('blog.posts.filter', $filter);
         } else {
-            $filter = $this['session']->get('blog.posts.filter', []);
+            $filter = App::session()->get('blog.posts.filter', []);
         }
 
         $query = Post::query();
@@ -59,7 +60,7 @@ class PostController extends Controller
         $posts = $query->offset($page * $limit)->limit($limit)->related('user')->orderBy('date', 'DESC')->get();
 
         if ($posts) {
-            $pending = $this['db']->createQueryBuilder()
+            $pending = App::db()->createQueryBuilder()
                 ->from('@blog_comment')
                 ->where(['status' => CommentInterface::STATUS_PENDING])
                 ->whereIn('post_id', array_keys($posts))
@@ -70,9 +71,9 @@ class PostController extends Controller
             $pending = [];
         }
 
-        if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json([
-                'table' => $this['view']->render('extensions/blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => Role::findAll(), 'pending' => $pending]),
+        if (App::request()->isXmlHttpRequest()) {
+            return App::response()->json([
+                'table' => App::view()->render('extensions/blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => Role::findAll(), 'pending' => $pending]),
                 'total' => $total
             ]);
         }
@@ -86,7 +87,7 @@ class PostController extends Controller
     public function addAction()
     {
         $post = new Post;
-        $post->setUser($this['user']);
+        $post->setUser(App::user());
         $post->setCommentStatus((bool) $this->extension->getParams('posts.comments_enabled'));
         $post->set('title', $this->extension->getParams('posts.show_title'));
         $post->set('markdown', $this->extension->getParams('posts.markdown_enabled'));
@@ -108,7 +109,7 @@ class PostController extends Controller
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
 
             return $this->redirect('@blog/post');
         }
@@ -134,7 +135,7 @@ class PostController extends Controller
                 throw new Exception('Invalid slug.');
             }
 
-            $data['date'] = $this['dates']->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+            $data['date'] = App::dates()->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
 
             $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 

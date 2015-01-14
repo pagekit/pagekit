@@ -3,7 +3,7 @@
 namespace Pagekit\Tree;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application;
+use Pagekit\Framework\Application as App;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\Tree\Event\JsonRequestListener;
 use Pagekit\Tree\Event\NodeTypeEvent;
@@ -14,7 +14,7 @@ class TreeExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
@@ -42,8 +42,8 @@ class TreeExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extensions/tree/migrations', $this['option']->get('tree:version'))->run()) {
-            $this['option']->set('tree:version', $version);
+        if ($version = App::migrator()->create('extensions/tree/migrations', App::option()->get('tree:version'))->run()) {
+            App::option()->set('tree:version', $version);
         }
     }
 }

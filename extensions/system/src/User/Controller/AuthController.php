@@ -6,8 +6,8 @@ use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Component\Auth\Exception\BadCredentialsException;
 use Pagekit\Component\Auth\RememberMe;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\User\Model\UserInterface;
 
 /**
  * @Route("/user")
@@ -15,31 +15,18 @@ use Pagekit\User\Model\UserInterface;
 class AuthController extends Controller
 {
     /**
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->user  = $this['user'];
-    }
-
-    /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
      * @Response("extensions/system/views/user/login.razr")
      */
     public function loginAction($redirect = '')
     {
-        if ($this->user->isAuthenticated()) {
-            $this['message']->info(__('You are already logged in.'));
+        if (App::user()->isAuthenticated()) {
+            App::message()->info(__('You are already logged in.'));
             return $this->redirect('/');
         }
 
-        return ['head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $redirect, 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
+        return ['head.title' => __('Login'), 'last_username' => App::session()->get(Auth::LAST_USERNAME), 'redirect' => $redirect, 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
     }
 
     /**
@@ -47,7 +34,7 @@ class AuthController extends Controller
      */
     public function logoutAction()
     {
-        return $this['auth']->logout();
+        return App::auth()->logout();
     }
 
     /**
@@ -58,20 +45,20 @@ class AuthController extends Controller
     {
         try {
 
-            if (!$this['csrf']->validate($this['request']->request->get('_csrf'))) {
+            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
                 throw new AuthException(__('Invalid token. Please try again.'));
             }
 
-            $this['auth']->authorize($user = $this['auth']->authenticate($credentials, false));
+            App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
 
-            return $this['auth']->login($user);
+            return App::auth()->login($user);
 
         } catch (BadCredentialsException $e) {
-            $this['message']->error(__('Invalid username or password.'));
+            App::message()->error(__('Invalid username or password.'));
         } catch (AuthException $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
-        return $this->redirect($this['url']->previous());
+        return $this->redirect(App::url()->previous());
     }
 }

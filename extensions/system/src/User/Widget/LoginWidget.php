@@ -4,10 +4,11 @@ namespace Pagekit\User\Widget;
 
 use Pagekit\Component\Auth\Auth;
 use Pagekit\Component\Auth\RememberMe;
-use Pagekit\Widget\Model\Type;
+use Pagekit\Framework\Application as App;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class LoginWidget extends Type
+class LoginWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -38,17 +39,17 @@ class LoginWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        $user = $this['user'];
+        $user = App::user();
 
         if ($user->isAuthenticated()) {
-            $redirect = $widget->get('redirect.logout') ?: $this['url']->current(true);
-            return $this['view']->render('extensions/system/views/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
+            $redirect = $widget->get('redirect.logout') ?: App::url()->current(true);
+            return App::view()->render('extensions/system/views/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
         }
 
-        $redirect          = $widget->get('redirect.login') ?: $this['url']->current(true);
-        $last_username     = $this['session']->get(Auth::LAST_USERNAME);
+        $redirect          = $widget->get('redirect.login') ?: App::url()->current(true);
+        $last_username     = App::session()->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
-        return $this['view']->render('extensions/system/views/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return App::view()->render('extensions/system/views/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 
     /**
@@ -56,6 +57,6 @@ class LoginWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/widgets/login/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/widgets/login/edit.razr', compact('widget'));
     }
 }

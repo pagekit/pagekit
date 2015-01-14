@@ -3,12 +3,10 @@
 namespace Pagekit\Content;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 
-class ContentHelper implements \ArrayAccess
+class ContentHelper
 {
-    use ApplicationTrait;
-
     /**
      * Applies content plugins
      *
@@ -18,6 +16,6 @@ class ContentHelper implements \ArrayAccess
      */
     public function applyPlugins($content, $parameters = [])
     {
-        return $this['events']->dispatch('content.plugins', new ContentEvent($content, $parameters))->getContent();
+        return App::events()->dispatch('content.plugins', new ContentEvent($content, $parameters))->getContent();
     }
 }

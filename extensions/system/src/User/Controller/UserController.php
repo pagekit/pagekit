@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
@@ -11,7 +11,7 @@ use Pagekit\User\Model\RoleInterface;
 /**
  * @Access("system: manage users", admin=true)
  */
-class UserController extends Controller
+class UserController
 {
     const USERS_PER_PAGE = 20;
 
@@ -22,9 +22,9 @@ class UserController extends Controller
     public function indexAction($filter = null, $page = 0)
     {
         if ($filter) {
-            $this['session']->set('user.filter', $filter);
+            App::session()->set('user.filter', $filter);
         } else {
-            $filter = $this['session']->get('user.filter', []);
+            $filter = App::session()->get('user.filter', []);
         }
 
         $query = User::query();
@@ -77,14 +77,14 @@ class UserController extends Controller
         $users = $query->offset($page * $limit)->limit($limit)->related('roles')->orderBy('name')->get();
         $roles = $this->getRoles();
 
-        if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json([
-                'table' => $this['view']->render('extensions/system/views/admin/user/table.razr', ['users' => $users]),
+        if (App::request()->isXmlHttpRequest()) {
+            return App::response()->json([
+                'table' => App::view()->render('extensions/system/views/admin/user/table.razr', ['users' => $users]),
                 'total' => $total
             ]);
         }
 
-        return ['head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => $this['permissions'], 'filter' => $filter, 'total' => $total];
+        return ['head.title' => __('Users'), 'users' => $users, 'statuses' => User::getStatuses(), 'roles' => $roles, 'permissions' => App::permissions(), 'filter' => $filter, 'total' => $total];
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
         $user = new User;
         $user->setRoles([]);
 
-        $roles = $this['user']->hasAccess('administer permissions') ? $this->getRoles() : [];
+        $roles = App::user()->hasAccess('administer permissions') ? $this->getRoles() : [];
 
         return ['head.title' => __('Add User'), 'user' => $user, 'roles' => $roles];
     }
@@ -107,7 +107,7 @@ class UserController extends Controller
     public function editAction($id)
     {
         $user  = User::where(compact('id'))->related('roles')->first();
-        $roles = $this['user']->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
+        $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
 
         return ['head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles];
     }
@@ -135,7 +135,7 @@ class UserController extends Controller
                 $user->setRegistered(new \DateTime);
             }
 
-            $self = $this['user']->getId() == $user->getId();
+            $self = App::user()->getId() == $user->getId();
 
             if ($self && $user->isBlocked()) {
                 throw new Exception(__('Unable to block yourself.'));
@@ -172,10 +172,10 @@ class UserController extends Controller
             }
 
             if (!empty($password)) {
-                $user->setPassword($this['auth.password']->hash($password));
+                $user->setPassword(App::get('auth.password')->hash($password));
             }
 
-            if ($this['user']->hasAccess('system: manage user permissions')) {
+            if (App::user()->hasAccess('system: manage user permissions')) {
 
                 if ($self && $user->hasRole(RoleInterface::ROLE_ADMINISTRATOR) && (!$roles || !in_array(RoleInterface::ROLE_ADMINISTRATOR, $roles))) {
                     $roles[] = RoleInterface::ROLE_ADMINISTRATOR;
@@ -200,7 +200,7 @@ class UserController extends Controller
      */
     public function deleteAction($ids = [])
     {
-        if (in_array($this['user']->getId(), $ids)) {
+        if (in_array(App::user()->getId(), $ids)) {
             return ['message' => __('Unable to delete yourself.'), 'error' => true];
         }
 
@@ -219,7 +219,7 @@ class UserController extends Controller
      */
     public function statusAction($status, $ids = [])
     {
-        if ($status == User::STATUS_BLOCKED && in_array($this['user']->getId(), $ids)) {
+        if ($status == User::STATUS_BLOCKED && in_array(App::user()->getId(), $ids)) {
             return ['message' => __('Unable to block yourself.'), 'error' => true];
         }
 
@@ -259,8 +259,8 @@ class UserController extends Controller
             'status'     => $user->getStatusText(),
             'badge'      => $user->getStatus() ? 'success' : 'danger',
             'new'        => $user->isNew(),
-            'login'      => ($date = $user->getLogin()) ? $this['dates']->format($date) : __('Never'),
-            'registered' => ($date = $user->getRegistered()) ? $this['dates']->format($date) : null
+            'login'      => ($date = $user->getLogin()) ? App::dates()->format($date) : __('Never'),
+            'registered' => ($date = $user->getRegistered()) ? App::dates()->format($date) : null
         ];
     }
 
@@ -280,7 +280,7 @@ class UserController extends Controller
                 $role->disabled = true;
             }
 
-            if ($user && $user->getId() == $this['user']->getId() && $user->isAdministrator() && $role->isAdministrator()) {
+            if ($user && $user->getId() == App::user()->getId() && $user->isAdministrator() && $role->isAdministrator()) {
                 $role->disabled = true;
             }
         }
@@ -296,13 +296,13 @@ class UserController extends Controller
      */
     protected function getPermissionSql($permission)
     {
-        $expr     = $this['db']->getExpressionBuilder();
-        $platform = $this['db']->getDatabasePlatform();
-        $col      = $platform->getConcatExpression($this['db']->quote(','), 'r.permissions', $this['db']->quote(','));
+        $expr     = App::db()->getExpressionBuilder();
+        $platform = App::db()->getDatabasePlatform();
+        $col      = $platform->getConcatExpression(App::db()->quote(','), 'r.permissions', App::db()->quote(','));
 
         $params = [
             $expr->eq('r.id', Role::ROLE_ADMINISTRATOR),
-            $expr->comparison($col, 'LIKE', $this['db']->quote("%,$permission,%"))
+            $expr->comparison($col, 'LIKE', App::db()->quote("%,$permission,%"))
         ];
 
         return (string) call_user_func_array([$expr, 'orX'], $params);

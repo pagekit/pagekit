@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 
 /**
@@ -22,11 +23,11 @@ class MigrationController extends Controller
      */
     public function migrateAction()
     {
-        if ($this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->get()) {
-            $this['system']->enable();
-            $this['message']->success(__('Your Pagekit database has been updated successfully.'));
+        if (App::migrator()->create('extensions/system/migrations', App::option()->get('system:version'))->get()) {
+            App::system()->enable();
+            App::message()->success(__('Your Pagekit database has been updated successfully.'));
         } else {
-            $this['message']->warning(__('Your Pagekit database is already up-to-date!'));
+            App::message()->warning(__('Your Pagekit database is already up-to-date!'));
         }
 
         return $this->redirect('@system/admin');

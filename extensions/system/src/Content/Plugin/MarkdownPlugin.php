@@ -3,9 +3,10 @@
 namespace Pagekit\Content\Plugin;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class MarkdownPlugin extends EventSubscriber
+class MarkdownPlugin implements EventSubscriberInterface
 {
     /**
      * Content plugins callback.
@@ -19,7 +20,7 @@ class MarkdownPlugin extends EventSubscriber
         }
 
         $content = $event->getContent();
-        $content = $this['markdown']->parse($content, is_array($event['markdown']) ? $event['markdown'] : []);
+        $content = App::markdown()->parse($content, is_array($event['markdown']) ? $event['markdown'] : []);
 
         $event->setContent($content);
     }

@@ -3,12 +3,13 @@
 namespace Pagekit\Theme\Event;
 
 use Pagekit\Component\Package\Installer\PackageInstaller;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\Theme\Package\ThemeLoader;
 use Pagekit\Theme\Package\ThemeRepository;
 use Pagekit\Theme\ThemeManager;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ThemeListener extends EventSubscriber
+class ThemeListener implements EventSubscriberInterface
 {
     /**
      * Loads the site/admin theme.
@@ -17,9 +18,9 @@ class ThemeListener extends EventSubscriber
     {
         try {
 
-            $app = $this->getApplication();
+            $app = App::getInstance();
 
-            $this['themes'] = function($app) {
+            $app['themes'] = function ($app) {
 
                 $loader     = new ThemeLoader;
                 $repository = new ThemeRepository($app['config']['theme.path'], $loader);
@@ -43,7 +44,7 @@ class ThemeListener extends EventSubscriber
      */
     public function onSystemAdmin()
     {
-        $this['view']->setLayout($this['theme.admin']->getLayout());
+        App::view()->setLayout(App::get('theme.admin')->getLayout());
     }
 
     /**
@@ -51,7 +52,7 @@ class ThemeListener extends EventSubscriber
      */
     public function onSystemSite()
     {
-        $this['view']->setLayout($this['theme.site']->getLayout());
+        App::view()->setLayout(App::get('theme.site')->getLayout());
     }
 
     /**

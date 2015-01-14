@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Widget;
 
-use Pagekit\Widget\Model\Type;
+use Pagekit\Framework\Application as App;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class TextWidget extends Type
+class TextWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -36,7 +37,7 @@ class TextWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['content']->applyPlugins($widget->get('content'), ['widget' => $widget, 'markdown' => $widget->get('markdown')]);
+        return App::content()->applyPlugins($widget->get('content'), ['widget' => $widget, 'markdown' => $widget->get('markdown')]);
     }
 
     /**
@@ -44,6 +45,6 @@ class TextWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/widgets/text/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/widgets/text/edit.razr', compact('widget'));
     }
 }

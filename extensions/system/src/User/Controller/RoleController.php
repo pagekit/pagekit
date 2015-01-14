@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\User\Entity\Role;
 
@@ -30,7 +31,7 @@ class RoleController extends Controller
 
         $authrole = Role::find(Role::ROLE_AUTHENTICATED);
 
-        return ['head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $this['permissions']];
+        return ['head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => App::permissions()];
     }
 
     /**
@@ -51,7 +52,7 @@ class RoleController extends Controller
         $role->setPermissions($permissions);
         Role::save($role);
 
-        return  $this['request']->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', ['id' => isset($role) ? $role->getId() : 0]);
+        return App::request()->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', ['id' => isset($role) ? $role->getId() : 0]);
     }
 
     /**

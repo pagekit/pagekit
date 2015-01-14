@@ -3,7 +3,7 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application;
+use Pagekit\Framework\Application as App;
 use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
@@ -13,11 +13,11 @@ class HelloExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
-        $this['events']->addSubscriber(new HelloListener());
+        $app['events']->addSubscriber(new HelloListener());
 
         $app->on('system.widget', function(RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
@@ -38,8 +38,8 @@ class HelloExtension extends Extension
     public function enable()
     {
         // run all migrations that are newer than the current version
-        if ($version = $this['migrator']->create('extensions/hello/migrations', $this['option']->get('hello:version'))->run()) {
-            $this['option']->set('hello:version', $version);
+        if ($version = App::migrator()->create('extensions/hello/migrations', App::option()->get('hello:version'))->run()) {
+            App::option()->set('hello:version', $version);
         }
     }
 
@@ -51,10 +51,10 @@ class HelloExtension extends Extension
     public function uninstall()
     {
         // drop all own tables (created in migrations)
-        $util = $this['db']->getUtility();
+        $util = App::db()->getUtility();
         $util->dropTable('@hello_greetings');
 
         // remove the options setting
-        $this['option']->remove('hello:version');
+        App::option()->remove('hello:version');
     }
 }

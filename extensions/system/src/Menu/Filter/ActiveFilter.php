@@ -2,6 +2,8 @@
 
 namespace Pagekit\Menu\Filter;
 
+use Pagekit\Framework\Application as App;
+
 class ActiveFilter extends FilterIterator
 {
     /**
@@ -17,7 +19,7 @@ class ActiveFilter extends FilterIterator
         parent::__construct($iterator, $options);
 
         if (isset($options['active']) && $options['active']) {
-            $this->active = $this['request']->attributes->get('_menu', []);
+            $this->active = App::request()->attributes->get('_menu', []);
         }
     }
 

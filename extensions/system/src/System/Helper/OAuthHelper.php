@@ -8,13 +8,11 @@ use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 use OAuth\ServiceFactory;
 use Pagekit\Component\Routing\Generator\UrlGenerator;
-use Pagekit\Framework\ApplicationTrait;
+use Pagekit\Framework\Application as App;
 
 
-class OAuthHelper implements \ArrayAccess
+class OAuthHelper
 {
-    use ApplicationTrait;
-
     protected $serviceFactory, $services;
 
     public function __construct()
@@ -40,9 +38,9 @@ class OAuthHelper implements \ArrayAccess
             return false;
         }
 
-        $this['session']->set('oauth.redirect', $redirect);
-        $this['session']->set('oauth.tokenKey', $key);
-        $this['session']->set('oauth.provider', $provider);
+        App::session()->set('oauth.redirect', $redirect);
+        App::session()->set('oauth.tokenKey', $key);
+        App::session()->set('oauth.provider', $provider);
 
         return $service;
     }
@@ -109,7 +107,8 @@ class OAuthHelper implements \ArrayAccess
      */
     public function getConfig($provider)
     {
-        return isset($this['option']->get("system:oauth", [])[$provider]) ? $this['option']->get("system:oauth", [])[$provider] : [];
+        $oauth = App::option()->get("system:oauth", []);
+        return isset($oauth[$provider]) ? $oauth[$provider] : [];
     }
 
     /**
@@ -133,7 +132,7 @@ class OAuthHelper implements \ArrayAccess
     public function getToken($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
-        $data     = $this['option']->get('oauth:token:'.$provider.':'.$key);
+        $data     = App::option()->get('oauth:token:'.$provider.':'.$key);
 
         if ($data &&
             array_key_exists('accessToken', $data) &&
@@ -173,7 +172,7 @@ class OAuthHelper implements \ArrayAccess
     public function deleteToken($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
-        $this['option']->remove('oauth:token:'.$provider.':'.$key);
+        App::option()->remove('oauth:token:'.$provider.':'.$key);
     }
 
     /**
@@ -203,7 +202,7 @@ class OAuthHelper implements \ArrayAccess
             $data['extraParams']  = $token->getExtraParams();
         }
 
-        $this['option']->set('oauth:token:'.$provider.':'.$key, $data);
+        App::option()->set('oauth:token:'.$provider.':'.$key, $data);
     }
 
     /**
@@ -216,7 +215,7 @@ class OAuthHelper implements \ArrayAccess
         $provider = [];
 
         foreach (['OAuth1', 'OAuth2'] as $version) {
-            foreach (glob($this['path'].'/vendor/lusitanian/oauth/src/OAuth/'.$version.'/Service/*.php') as $name) {
+            foreach (glob(App::path().'/vendor/lusitanian/oauth/src/OAuth/'.$version.'/Service/*.php') as $name) {
                $name = basename($name, '.php');
                if ($name !== 'ServiceInterface' && $name !== 'AbstractService') {
                    $provider[] = $name;
@@ -278,6 +277,6 @@ class OAuthHelper implements \ArrayAccess
      */
     public function getRedirectUrl()
     {
-        return $this['url']->route('@system/oauth/connect', [], UrlGenerator::ABSOLUTE_URL);
+        return App::url()->route('@system/oauth/connect', [], UrlGenerator::ABSOLUTE_URL);
     }
 }

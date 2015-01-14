@@ -4,9 +4,9 @@ namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Component\Database\Event\EntityEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CommentListener extends EventSubscriber
+class CommentListener implements EventSubscriberInterface
 {
     public function onCommentChange(EntityEvent $event)
     {

@@ -3,10 +3,11 @@
 namespace Pagekit\User\Event;
 
 use Pagekit\Component\Auth\Event\LoginEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
 use Pagekit\User\Entity\User;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class UserListener extends EventSubscriber
+class UserListener implements EventSubscriberInterface
 {
     const REFRESH_TOKEN = 'user:auth.refresh_token';
 
@@ -15,7 +16,7 @@ class UserListener extends EventSubscriber
      */
     public function onUserChange()
     {
-        $this['option']->set(self::REFRESH_TOKEN, time(), true);
+        App::option()->set(self::REFRESH_TOKEN, time(), true);
     }
 
     /**
@@ -31,7 +32,7 @@ class UserListener extends EventSubscriber
      */
     public function onUserAccess()
     {
-        if ($user = $this['user'] and $user->isAuthenticated()) {
+        if ($user = App::user() and $user->isAuthenticated()) {
             User::updateAccess($user);
         }
     }

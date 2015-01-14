@@ -2,8 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Component\Routing\Link;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Framework\Application as App;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Link\LinkInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -11,7 +10,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 /**
  * @Access(admin=true)
  */
-class LinkController extends Controller
+class LinkController
 {
     /**
      * @var LinkEvent
@@ -59,7 +58,7 @@ class LinkController extends Controller
             try {
 
                 if (!in_array($context, ['frontpage', 'urlalias'])) {
-                    $url = urldecode($this['url']->to($url, [], 'base'));
+                    $url = urldecode(App::url()->to($url, [], 'base'));
                 }
 
                 $result = ['type' => $type->getLabel(), 'url' => $url];
@@ -77,7 +76,7 @@ class LinkController extends Controller
     protected function getTypes($context = '')
     {
         if (null == $this->types) {
-            $this->types = $this['events']->dispatch('system.link', new LinkEvent($context));
+            $this->types = App::events()->dispatch('system.link', new LinkEvent($context));
         }
 
         return $this->types;
@@ -121,7 +120,7 @@ class LinkController extends Controller
 
             $url = strtok($url, '#');
 
-            return $this['router']->generate($url, [], 'link');
+            return App::router()->generate($url, [], 'link');
 
         } catch (RouteNotFoundException $e) {}
 

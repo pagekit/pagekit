@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\User;
@@ -17,11 +18,11 @@ class ProfileController extends Controller
      */
     public function indexAction()
     {
-        if (!$this['user']->isAuthenticated()) {
-            return $this->redirect('@system/auth/login', ['redirect' => $this['url']->current()]);
+        if (!App::user()->isAuthenticated()) {
+            return $this->redirect('@system/auth/login', ['redirect' => App::url()->current()]);
         }
 
-        return ['head.title' => __('Your Profile'), 'user' => $this['user']];
+        return ['head.title' => __('Your Profile'), 'user' => App::user()];
     }
 
     /**
@@ -29,13 +30,13 @@ class ProfileController extends Controller
      */
     public function saveAction($data)
     {
-        if (!$this['user']->isAuthenticated()) {
-            $this->getApplication()->abort(404);
+        if (!App::user()->isAuthenticated()) {
+            App::abort(404);
         }
 
         try {
 
-            $user = User::find($this['user']->getId());
+            $user = User::find(App::user()->getId());
 
             $name    = trim(@$data['name']);
             $email   = trim(@$data['email']);
@@ -56,7 +57,7 @@ class ProfileController extends Controller
 
             if ($passNew) {
 
-                if (!$this['auth']->getUserProvider()->validateCredentials($this->user, ['password' => $passOld])) {
+                if (!App::auth()->getUserProvider()->validateCredentials($this->user, ['password' => $passOld])) {
                     throw new Exception(__('Invalid Password.'));
                 }
 
@@ -64,7 +65,7 @@ class ProfileController extends Controller
                     throw new Exception(__('New Password is invalid.'));
                 }
 
-                $user->setPassword($this['auth.password']->hash($passNew));
+                $user->setPassword(App::get('auth.password')->hash($passNew));
             }
 
             if ($email != $user->getEmail()) {
@@ -74,16 +75,16 @@ class ProfileController extends Controller
             $user->setName($name);
             $user->setEmail($email);
 
-            $this['events']->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
+            App::events()->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
 
             User::save($user);
 
-            $this['events']->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
+            App::events()->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 
-            $this['message']->success(__('Profile updated.'));
+            App::message()->success(__('Profile updated.'));
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/profile');

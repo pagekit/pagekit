@@ -4,9 +4,10 @@ namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\UrlResolver;
 use Pagekit\Component\Routing\Event\RouteCollectionEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Framework\Application as App;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class RouteListener extends EventSubscriber
+class RouteListener implements EventSubscriberInterface
 {
     protected $permalink;
 
@@ -15,7 +16,7 @@ class RouteListener extends EventSubscriber
      */
     public function onSystemInit()
     {
-        $this['router']->setOption('blog.permalink', $this->getPermalink());
+        App::router()->setOption('blog.permalink', $this->getPermalink());
     }
 
     /**
@@ -27,7 +28,7 @@ class RouteListener extends EventSubscriber
             return;
         }
 
-        $this['aliases']->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
+        App::aliases()->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
     }
 
     /**
@@ -35,7 +36,7 @@ class RouteListener extends EventSubscriber
      */
     public function clearCache()
     {
-        $this['cache']->delete(UrlResolver::CACHE_KEY);
+        App::cache()->delete(UrlResolver::CACHE_KEY);
     }
 
     /**
@@ -58,7 +59,7 @@ class RouteListener extends EventSubscriber
     {
         if (null === $this->permalink) {
 
-            $extension       = $this['extensions']->get('blog');
+            $extension       = App::extensions()->get('blog');
             $this->permalink = $extension->getParams('permalink', '');
 
             if ($this->permalink === 'custom') {

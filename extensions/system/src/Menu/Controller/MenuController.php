@@ -2,8 +2,10 @@
 
 namespace Pagekit\Menu\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\Menu\Entity\Item;
 use Pagekit\Menu\Entity\Menu;
 
 /**
@@ -48,7 +50,7 @@ class MenuController extends Controller
             Menu::save($menu, compact('name'));
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu', ['id' => isset($menu) ? $menu->getId() : 0]);
@@ -67,10 +69,10 @@ class MenuController extends Controller
 
             Menu::delete($menu);
 
-            $this['db']->delete('@system_menu_item', ['menu_id' => $id]);
+            App::db()->delete('@system_menu_item', ['menu_id' => $id]);
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/menu');

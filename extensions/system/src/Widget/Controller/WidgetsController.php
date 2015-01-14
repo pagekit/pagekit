@@ -2,6 +2,7 @@
 
 namespace Pagekit\Widget\Controller;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
@@ -27,7 +28,7 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
+        $this->positions = App::events()->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
     }
 
     /**
@@ -74,7 +75,7 @@ class WidgetsController extends Controller
             return ['head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => Role::findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
 
         } catch (Exception $e) {
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $this->redirect('@system/widgets');
@@ -102,15 +103,15 @@ class WidgetsController extends Controller
 
             Widget::save($widget, $data);
 
-            $this['events']->dispatch('system.widget.save', new WidgetEvent($widget));
+            App::events()->dispatch('system.widget.save', new WidgetEvent($widget));
 
             $id = $widget->getId();
 
-            $this['message']->success($id ? __('Widget saved.') : __('Widget created.'));
+            App::message()->success($id ? __('Widget saved.') : __('Widget created.'));
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
+            App::message()->error($e->getMessage());
         }
 
         return $id ? $this->redirect('@system/widgets/edit', compact('id')) : $this->redirect('@system/widgets/add', ['type' => $data['type']]);
@@ -127,7 +128,7 @@ class WidgetsController extends Controller
             }
         }
 
-        $this['message']->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
+        App::message()->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
         return $this->redirect('@system/widgets');
     }
@@ -151,7 +152,7 @@ class WidgetsController extends Controller
 
             Widget::save($copy);
 
-            $this['events']->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
+            App::events()->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
         return $this->redirect('@system/widgets');
@@ -207,7 +208,7 @@ class WidgetsController extends Controller
 
     protected function triggerEditEvent($widget)
     {
-        $event = $this['events']->dispatch('system.widget.edit', new WidgetEditEvent($widget));
+        $event = App::events()->dispatch('system.widget.edit', new WidgetEditEvent($widget));
 
         return $event->getSettings();
     }

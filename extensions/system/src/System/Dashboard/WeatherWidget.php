@@ -2,10 +2,11 @@
 
 namespace Pagekit\System\Dashboard;
 
-use Pagekit\Widget\Model\Type;
+use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
+use Pagekit\Framework\Application as App;
 
-class WeatherWidget extends Type
+class WeatherWidget implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -40,7 +41,7 @@ class WeatherWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return $this['view']->render('extensions/system/views/admin/dashboard/weather/index.razr', compact('widget', 'options'));
+        return App::view()->render('extensions/system/views/admin/dashboard/weather/index.razr', compact('widget', 'options'));
     }
 
     /**
@@ -48,6 +49,6 @@ class WeatherWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extensions/system/views/admin/dashboard/weather/edit.razr', compact('widget'));
+        return App::view()->render('extensions/system/views/admin/dashboard/weather/edit.razr', compact('widget'));
     }
 }

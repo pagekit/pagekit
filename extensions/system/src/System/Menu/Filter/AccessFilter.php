@@ -2,6 +2,7 @@
 
 namespace Pagekit\System\Menu\Filter;
 
+use Pagekit\Framework\Application as App;
 use Pagekit\Menu\Filter\FilterIterator;
 
 class AccessFilter extends FilterIterator
@@ -15,6 +16,6 @@ class AccessFilter extends FilterIterator
             return true;
         }
 
-        return $this['user']->hasAccess(parent::current()->getAccess());
+        return App::user()->hasAccess(parent::current()->getAccess());
     }
 }

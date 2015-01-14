@@ -7,6 +7,7 @@ use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
 use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 
@@ -35,9 +36,9 @@ class CommentController extends Controller
     public function indexAction($filter = [], $post_id = 0, $page = 0)
     {
         if ($filter) {
-            $this['session']->set('blog.comments.filter', $filter);
+            App::session()->set('blog.comments.filter', $filter);
         } else {
-            $filter = $this['session']->get('blog.comments.filter', []);
+            $filter = App::session()->get('blog.comments.filter', []);
         }
 
         $query = Comment::query()->related(['post']);
@@ -69,7 +70,7 @@ class CommentController extends Controller
         $comments = $query->offset($page * $limit)->limit($limit)->orderBy('created', 'DESC')->get();
 
         if ($comments) {
-            $pending = $this['db']->createQueryBuilder()
+            $pending = App::db()->createQueryBuilder()
                 ->from('@blog_comment')
                 ->where(['status' => CommentInterface::STATUS_PENDING])
                 ->whereIn('post_id', array_unique(array_map(function($comment) { return $comment->getPostId(); }, $comments)))
@@ -81,12 +82,12 @@ class CommentController extends Controller
         }
 
         foreach ($comments as $comment) {
-            $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
+            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        if ($this['request']->isXmlHttpRequest()) {
-            return $this['response']->json([
-                'table' => $this['view']->render('extensions/blog/views/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
+        if (App::request()->isXmlHttpRequest()) {
+            return App::response()->json([
+                'table' => App::view()->render('extensions/blog/views/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
                 'total' => $total
             ]);
         }
@@ -121,7 +122,7 @@ class CommentController extends Controller
     {
         try {
 
-            $user = $this['user'];
+            $user = App::user();
 
             if (!$id || !$comment = Comment::find($id)) {
 
@@ -131,7 +132,7 @@ class CommentController extends Controller
 
                 $comment = new Comment;
                 $comment->setUserId((int) $user->getId());
-                $comment->setIp($this['request']->getClientIp());
+                $comment->setIp(App::request()->getClientIp());
                 $comment->setAuthor($user->getName());
                 $comment->setEmail($user->getEmail());
                 $comment->setUrl($user->getUrl());
@@ -177,7 +178,7 @@ class CommentController extends Controller
                 $comment->setStatus($status);
                 Comment::save($comment);
 
-                $this['events']->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
+                App::events()->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
             }
         }
 
