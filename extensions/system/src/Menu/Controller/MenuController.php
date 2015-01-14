@@ -47,7 +47,7 @@ class MenuController extends Controller
                 throw new Exception(__('Invalid menu name. "%name%" is already in use.', ['%name%' => $name]));
             }
 
-            Menu::save($menu, compact('name'));
+            $menu->save(compact('name'));
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
@@ -67,7 +67,7 @@ class MenuController extends Controller
                 throw new Exception(__('Invalid menu id'));
             }
 
-            Menu::delete($menu);
+            $menu->delete();
 
             App::db()->delete('@system_menu_item', ['menu_id' => $id]);
 
@@ -96,8 +96,7 @@ class MenuController extends Controller
             $item->setParentId($data['parent_id'] != "" ? $data['parent_id'] : "0");
             $item->setDepth($data['depth']);
             $item->setPriority($data['order']);
-
-            Item::save($item);
+            $item->save();
         }
 
         return ['message' => __('Menu order updated')];

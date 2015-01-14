@@ -29,7 +29,7 @@ class PermissionController
     {
         foreach (Role::findAll() as $role) {
             $role->setPermissions(isset($permissions[$role->getId()]) ? $permissions[$role->getId()] : []);
-            Role::save($role);
+            $role->save();
         }
 
         return App::request()->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');

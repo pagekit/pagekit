@@ -50,7 +50,7 @@ class RoleController extends Controller
         }
 
         $role->setPermissions($permissions);
-        Role::save($role);
+        $role->save();
 
         return App::request()->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', ['id' => isset($role) ? $role->getId() : 0]);
     }
@@ -61,7 +61,7 @@ class RoleController extends Controller
     public function deleteAction($id = 0)
     {
         if ($role = Role::find($id)) {
-            Role::delete($role);
+            $role->delete();
         }
 
         return $this->redirect('@system/role');
@@ -78,7 +78,7 @@ class RoleController extends Controller
             $role = Role::find($id);
 
             if ($role) {
-                Role::save($role, compact('priority'));
+                $role->save(compact('priority'));
             }
         }
 

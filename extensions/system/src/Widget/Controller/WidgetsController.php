@@ -101,7 +101,7 @@ class WidgetsController extends Controller
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
             $data['settings']  = array_merge(['show_title' => 0], isset($data['settings']) ? $data['settings'] : []);
 
-            Widget::save($widget, $data);
+            $widget->save($data);
 
             App::events()->dispatch('system.widget.save', new WidgetEvent($widget));
 
@@ -124,7 +124,7 @@ class WidgetsController extends Controller
     {
         foreach ($ids as $id) {
             if ($widget = Widget::find($id)) {
-                Widget::delete($widget);
+                $widget->delete();
             }
         }
 
@@ -149,8 +149,7 @@ class WidgetsController extends Controller
             $copy->setId(null);
             $copy->setStatus(Widget::STATUS_DISABLED);
             $copy->setTitle($widget->getTitle().' - '.__('Copy'));
-
-            Widget::save($copy);
+            $copy->save();
 
             App::events()->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
@@ -165,7 +164,7 @@ class WidgetsController extends Controller
     {
         foreach ($ids as $id) {
             if ($widget = Widget::find($id) and !$widget->getStatus()) {
-                Widget::save($widget, ['status' => Widget::STATUS_ENABLED]);
+                $widget->save(['status' => Widget::STATUS_ENABLED]);
             }
         }
 
@@ -179,7 +178,7 @@ class WidgetsController extends Controller
     {
         foreach ($ids as $id) {
             if ($widget = Widget::find($id) and $widget->getStatus()) {
-                Widget::save($widget, ['status' => Widget::STATUS_DISABLED]);
+                $widget->save(['status' => Widget::STATUS_DISABLED]);
             }
         }
 
@@ -199,7 +198,7 @@ class WidgetsController extends Controller
             $id = $data['id'];
 
             if (isset($widgets[$id])) {
-                Widget::save($widgets[$id], compact('position', 'priority'));
+                $widgets[$id]->save(compact('position', 'priority'));
             }
         }
 

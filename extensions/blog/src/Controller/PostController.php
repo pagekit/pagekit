@@ -126,9 +126,7 @@ class PostController extends Controller
         try {
 
             if (!$post = Post::find($id)) {
-
                 $post = new Post;
-
             }
 
             if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
@@ -136,10 +134,9 @@ class PostController extends Controller
             }
 
             $data['date'] = App::dates()->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
-
             $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
-            Post::save($post, $data);
+            $post->save($data);
 
             return ['message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId()];
 
@@ -158,7 +155,7 @@ class PostController extends Controller
     {
         foreach ($ids as $id) {
             if ($post = Post::find($id)) {
-                Post::delete($post);
+                $post->delete();
             }
         }
 
@@ -173,15 +170,13 @@ class PostController extends Controller
     {
         foreach ($ids as $id) {
             if ($post = Post::find((int) $id)) {
-
                 $post = clone $post;
                 $post->setId(null);
                 $post->setStatus(Post::STATUS_DRAFT);
                 $post->setSlug($post->getSlug());
                 $post->setTitle($post->getTitle().' - '.__('Copy'));
                 $post->setCommentCount(0);
-
-                Post::save($post);
+                $post->save();
             }
         }
 
@@ -197,7 +192,7 @@ class PostController extends Controller
         foreach ($ids as $id) {
             if ($post = Post::find($id) and $post->getStatus() != $status) {
                 $post->setStatus($status);
-                Post::save($post);
+                $post->save();
             }
         }
 

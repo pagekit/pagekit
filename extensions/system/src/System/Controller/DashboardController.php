@@ -213,8 +213,7 @@ class DashboardController extends Controller
         // make sure user is registered in the entity manager
         $user = User::find($user->getId());
         $user->set('dashboard', $dashboard);
-
-        User::save($user);
+        $user->save();
     }
 
     /**

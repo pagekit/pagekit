@@ -119,7 +119,7 @@ class NodeController
 //                App::option()->set('system:app.frontpage', $node->)
 //            }
 
-            Node::save($node, $data);
+            $node->save($data);
 
             return $node;
 
@@ -138,7 +138,7 @@ class NodeController
         try {
 
             if ($node = Node::find($id)) {
-                Node::delete($node);
+                $node->delete();
             }
 
         } catch (Exception $e) {

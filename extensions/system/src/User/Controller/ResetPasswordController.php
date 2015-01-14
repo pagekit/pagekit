@@ -68,7 +68,7 @@ class ResetPasswordController extends Controller
                 throw new Exception(__('Unable to send confirmation link.'));
             }
 
-            User::save($user);
+            $user->save();
 
             App::message()->success(__('Check your email for the confirmation link.'));
 
@@ -117,8 +117,7 @@ class ResetPasswordController extends Controller
 
                 $user->setPassword(App::get('auth.password')->hash($password));
                 $user->setActivation(null);
-
-                User::save($user);
+                $user->save();
 
                 App::message()->success(__('Your password has been reset.'));
                 return $this->redirect('/');

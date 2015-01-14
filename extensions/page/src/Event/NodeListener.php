@@ -34,7 +34,8 @@ class NodeListener implements EventSubscriberInterface
             $page = new Page;
         }
 
-        Page::save($page, $data);
+        $page->save($data);
+
         $data                   = $node->getData();
         $data['defaults']['id'] = $page->getId();
         $data['url']            = '@page/id?id='.$page->getId();
@@ -45,13 +46,15 @@ class NodeListener implements EventSubscriberInterface
     public function onDelete(EntityEvent $event)
     {
         $node = $event->getEntity();
+
         if ('page' !== $node->getType()) {
             return;
         }
 
         $defaults = $node->get('defaults', []);
+
         if (isset($defaults['id']) && $page = Page::find($defaults['id'])) {
-            Page::delete($page);
+            $page->delete();
         }
     }
 

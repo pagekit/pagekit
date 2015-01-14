@@ -140,7 +140,7 @@ class CommentController extends Controller
                 $comment->setParent($parent);
             }
 
-            Comment::save($comment, $data);
+            $comment->save($data);
 
             return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
 
@@ -158,7 +158,7 @@ class CommentController extends Controller
     {
         foreach ($ids as $id) {
             if ($comment = Comment::find($id)) {
-                Comment::delete($comment);
+                $comment->delete();
             }
         }
 
@@ -175,7 +175,7 @@ class CommentController extends Controller
             if ($comment = Comment::find($id) and $comment->getStatus() != $status) {
                 $previous = $comment->getStatus();
                 $comment->setStatus($status);
-                Comment::save($comment);
+                $comment->save();
 
                 App::events()->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
             }

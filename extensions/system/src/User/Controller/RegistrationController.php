@@ -110,7 +110,7 @@ class RegistrationController extends Controller
 
             }
 
-            User::save($user);
+            $user->save();
 
             if ($verify) {
 
@@ -186,7 +186,7 @@ class RegistrationController extends Controller
             }
         }
 
-        User::save($user);
+        $user->save();
 
         return $this->redirect('@system/auth/login');
     }

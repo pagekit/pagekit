@@ -163,7 +163,7 @@ class Node implements NodeInterface, \JsonSerializable
             // Update children's paths
             foreach (self::query()->where('parent_id = ?', [$this->id])->get() as $child) {
                 if (0 !== strpos($child->getPath(), $this->getPath().'/')) {
-                    self::save($child);
+                    $child->save();
                 }
             }
         } else {

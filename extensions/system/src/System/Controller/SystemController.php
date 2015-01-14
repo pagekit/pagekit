@@ -46,8 +46,7 @@ class SystemController extends Controller
 
             $user = User::find(App::user()->getId());
             $user->set('admin.menu', $order);
-
-            User::save($user);
+            $user->save();
 
             return ['message' => __('Order saved.')];
 

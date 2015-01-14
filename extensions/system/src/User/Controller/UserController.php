@@ -183,7 +183,7 @@ class UserController
                 $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
             }
 
-            User::save($user, $data);
+            $user->save($data);
 
             return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $this->getInfo($user)];
 
@@ -205,7 +205,7 @@ class UserController
 
         foreach ($ids as $key => $id) {
             if ($user = User::find($id)) {
-                User::delete($user);
+                $user->delete();
             }
         }
 
@@ -228,7 +228,7 @@ class UserController
                 $user->setActivation('');
 
                 if ($status != $user->getStatus()) {
-                    User::save($user, compact('status'));
+                    $user->save(compact('status'));
                 }
             }
         }

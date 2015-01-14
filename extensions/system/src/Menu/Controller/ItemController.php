@@ -83,7 +83,7 @@ class ItemController extends Controller
                 $data['url'] = $data['link'];
             }
 
-            Item::save($item, $data);
+            $item->save($data);
 
             $id = $item->getId();
 
@@ -113,7 +113,7 @@ class ItemController extends Controller
 
             foreach ($ids as $id) {
                 if (isset($items[$id])) {
-                    Item::delete($items[$id]);
+                    $items[$id]->delete();
                 }
             }
 
@@ -139,7 +139,7 @@ class ItemController extends Controller
 
             foreach ($ids as $id) {
                 if ($item = Item::find($id) and $item->getStatus() != $status) {
-                    Item::save($item, compact('status'));
+                    $item->save(compact('status'));
                 }
             }
 

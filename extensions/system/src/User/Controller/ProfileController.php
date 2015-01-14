@@ -77,7 +77,7 @@ class ProfileController extends Controller
 
             App::events()->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
 
-            User::save($user);
+            $user->save();
 
             App::events()->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 
