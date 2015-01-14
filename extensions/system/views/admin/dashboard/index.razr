@@ -1,4 +1,4 @@
-@style('system', 'extension://system/assets/css/system.css')
+@style('system', 'extensions/system/assets/css/system.css')
 
 <div class="uk-grid pk-grid-small uk-grid-preserve" data-uk-grid-margin>
 

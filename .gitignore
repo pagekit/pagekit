@@ -4,6 +4,7 @@
 !/extensions/installer
 !/extensions/page
 !/extensions/system
+!/extensions/tree
 **/languages/*/*.php
 /themes/*
 !/themes/alpha

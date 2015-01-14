@@ -2,12 +2,11 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Component\Auth\Auth;
-use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
+use Pagekit\User\Entity\User;
 
 /**
  * @Route("/")
@@ -15,9 +14,8 @@ use Pagekit\System\Event\TmplEvent;
 class SystemController extends Controller
 {
     /**
-     * @Route("/system")
-     * @Response("extension://system/views/admin/settings/index.razr")
      * @Access(admin=true)
+     * @Response("extensions/system/views/admin/settings/index.razr")
      */
     public function indexAction()
     {
@@ -33,32 +31,9 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/admin/login", defaults={"_maintenance"=true})
-     * @Response("extension://system/theme/templates/login.razr", layout=false)
-     */
-    public function loginAction()
-    {
-        if ($this['user']->isAuthenticated()) {
-            return $this->redirect('@system/system/admin');
-        }
-
-        return ['head.title' => __('Login'), 'last_username' => $this['session']->get(Auth::LAST_USERNAME), 'redirect' => $this['request']->get('redirect') ? : $this['url']->route('@system/system/admin', [], true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
-    }
-
-    /**
-     * @Route("/")
      * @Access(admin=true)
-     */
-    public function adminAction()
-    {
-        return $this->redirect('@system/dashboard');
-    }
-
-    /**
-     * @Route("/admin/menu")
      * @Request({"order": "array"})
      * @Response("json")
-     * @Access(admin=true)
      */
     public function adminMenuAction($order)
     {
@@ -71,7 +46,7 @@ class SystemController extends Controller
             $user = $this['users']->get($this['user']->getId());
             $user->set('admin.menu', $order);
 
-            $this['users']->getUserRepository()->save($user);
+            User::save($user);
 
             return ['message' => __('Order saved.')];
 
@@ -82,9 +57,8 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/storage")
-     * @Response("extension://system/views/admin/settings/storage.razr")
      * @Access("system: manage storage", admin=true)
+     * @Response("extensions/system/views/admin/settings/storage.razr")
      */
     public function storageAction()
     {
@@ -92,9 +66,8 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/info")
-     * @Response("extension://system/views/admin/settings/info.razr")
      * @Access(admin=true)
+     * @Response("extensions/system/views/admin/settings/info.razr")
      */
     public function infoAction()
     {
@@ -102,7 +75,6 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/locale")
      * @Response("json")
      */
     public function localeAction()
@@ -113,7 +85,7 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/tmpl/{templates}")
+     * @Route("/tmpl/{templates}")
      * @Response("json")
      */
     public function tmplAction($templates = '')
@@ -131,10 +103,9 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/system/clearcache")
+     * @Access(admin=true)
      * @Request({"caches": "array"}, csrf=true)
      * @Response("json")
-     * @Access(admin=true)
      */
     public function clearCacheAction($caches)
     {

@@ -53,26 +53,26 @@ class ExtensionManager extends PackageManager
         if (is_dir("$root/vendor/composer")) {
             $map = require "$root/vendor/composer/autoload_namespaces.php";
             foreach ($map as $namespace => $path) {
-                $this->app['autoloader']->set($namespace, $path);
+                $this['autoloader']->set($namespace, $path);
             }
 
             $map = require "$root/vendor/composer/autoload_psr4.php";
             foreach ($map as $namespace => $path) {
-                $this->app['autoloader']->setPsr4($namespace, $path);
+                $this['autoloader']->setPsr4($namespace, $path);
             }
 
             $classMap = require "$root/vendor/composer/autoload_classmap.php";
             if ($classMap) {
-                $this->app['autoloader']->addClassMap($classMap);
+                $this['autoloader']->addClassMap($classMap);
             }
         }
 
-        $config = (!($config = $fn($this->app, "$root/extension.php")) || 1 === $config) ? [] : $config;
+        $config = (!($config = $fn(self::$app, "$root/extension.php")) || 1 === $config) ? [] : $config;
         $class  = isset($config['main']) ? $config['main'] : 'Pagekit\Extension\Extension';
 
         if (isset($config['autoload'])) {
             foreach ($config['autoload'] as $namespace => $path) {
-                $this->autoloader->addPsr4($namespace, "$root/$path");
+                $this['autoloader']->addPsr4($namespace, "$root/$path");
             }
         }
 

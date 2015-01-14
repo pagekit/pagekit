@@ -2,36 +2,22 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\User\Entity\Role;
 
 /**
- * @Route("/system/user/role")
+ * @Route("/user/role")
  * @Access("system: manage user permissions", admin=true)
  */
 class RoleController extends Controller
 {
     /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->roles = $this['users']->getRoleRepository();
-    }
-
-    /**
      * @Request({"id": "int"})
-     * @Response("extension://system/views/admin/user/role.razr")
+     * @Response("extensions/system/views/admin/user/role.razr")
      */
     public function indexAction($id = null)
     {
-        $roles = $this->roles->query()->orderBy('priority')->get();
+        $roles = Role::query()->orderBy('priority')->get();
 
         if ($id === null && count($roles)) {
             $role = current($roles);
@@ -42,7 +28,7 @@ class RoleController extends Controller
             $role->setId(0);
         }
 
-        $authrole = $this->roles->find(Role::ROLE_AUTHENTICATED);
+        $authrole = Role::find(Role::ROLE_AUTHENTICATED);
 
         return ['head.title' => __('Roles'), 'role' => $role, 'roles' => $roles, 'authrole' => $authrole, 'permissions' => $this['permissions']];
     }
@@ -54,7 +40,7 @@ class RoleController extends Controller
     public function saveAction($id, $name = '', $permissions = [])
     {
         // is new ?
-        if (!$role = $this->roles->find($id)) {
+        if (!$role = Role::find($id)) {
             $role = new Role;
         }
 
@@ -63,7 +49,7 @@ class RoleController extends Controller
         }
 
         $role->setPermissions($permissions);
-        $this->roles->save($role);
+        Role::save($role);
 
         return  $this['request']->isXmlHttpRequest() ? ['message' =>__('Roles saved!')] : $this->redirect('@system/role', ['id' => isset($role) ? $role->getId() : 0]);
     }
@@ -73,8 +59,8 @@ class RoleController extends Controller
      */
     public function deleteAction($id = 0)
     {
-        if ($role = $this->roles->find($id)) {
-            $this->roles->delete($role);
+        if ($role = Role::find($id)) {
+            Role::delete($role);
         }
 
         return $this->redirect('@system/role');
@@ -88,10 +74,10 @@ class RoleController extends Controller
     {
         foreach ($order as $id => $priority) {
 
-            $role = $this->roles->find($id);
+            $role = Role::find($id);
 
             if ($role) {
-                $this->roles->save($role, compact('priority'));
+                Role::save($role, compact('priority'));
             }
         }
 

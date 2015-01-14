@@ -1,4 +1,4 @@
-@script('blog.settings', 'extension://system/assets/js/settings/settings.js', 'requirejs')
+@script('blog.settings', 'extensions/system/assets/js/settings/settings.js', 'requirejs')
 
 <form class="uk-form uk-form-horizontal" action="@url('@system/extensions/savesettings', ['name' => 'blog'])" method="post">
 
@@ -35,19 +35,19 @@
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="params[permalink]" value="blog/{slug}"@($params['permalink'] == 'blog/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="{slug}"@($params['permalink'] == '{slug}' ? ' checked' : '')>
                                     @trans('Name') <code>@trans('/blog/sample-post')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="params[permalink]" value="blog/{year}/{month}/{day}/{slug}"@($params['permalink'] == 'blog/{year}/{month}/{day}/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="{year}/{month}/{day}/{slug}"@($params['permalink'] == '{year}/{month}/{day}/{slug}' ? ' checked' : '')>
                                     @trans('Day and name') <code>@trans('/blog/2014/06/12/sample-post')</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
-                                    <input type="radio" name="params[permalink]" value="blog/{year}/{month}/{slug}"@($params['permalink'] == 'blog/{year}/{month}/{slug}' ? ' checked' : '')>
+                                    <input type="radio" name="params[permalink]" value="{year}/{month}/{slug}"@($params['permalink'] == '{year}/{month}/{slug}' ? ' checked' : '')>
                                     @trans('Month and name') <code>@trans('/blog/2014/06/sample-post')</code>
                                 </label>
                             </p>

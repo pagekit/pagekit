@@ -4,6 +4,7 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\User\Entity\User;
 use Pagekit\User\Model\UserInterface;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Pagekit\Widget\Model\Widget;
@@ -27,7 +28,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/admin/dashboard/index.razr")
+     * @Response("extensions/system/views/admin/dashboard/index.razr")
      */
     public function indexAction()
     {
@@ -47,7 +48,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/admin/dashboard/settings.razr")
+     * @Response("extensions/system/views/admin/dashboard/settings.razr")
      */
     public function settingsAction()
     {
@@ -69,7 +70,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("extension://system/views/admin/dashboard/edit.razr")
+     * @Response("extensions/system/views/admin/dashboard/edit.razr")
      */
     public function addAction($id)
     {
@@ -93,7 +94,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("extension://system/views/admin/dashboard/edit.razr")
+     * @Response("extensions/system/views/admin/dashboard/edit.razr")
      */
     public function editAction($id)
     {
@@ -208,13 +209,11 @@ class DashboardController extends Controller
             $user = $this['user'];
         }
 
-        $users = $this['users']->getUserRepository();
-
         // make sure user is registered in the entity manager
-        $user = $users->find($user->getId());
+        $user = User::find($user->getId());
         $user->set('dashboard', $dashboard);
 
-        $users->save($user);
+        User::save($user);
     }
 
     /**

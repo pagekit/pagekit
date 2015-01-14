@@ -8,7 +8,7 @@ use Pagekit\User\Model\Role as BaseRole;
 /**
  * @Entity(tableClass="@system_role", eventPrefix="system.role")
  */
-class Role extends BaseRole
+class Role extends BaseRole implements \JsonSerializable
 {
     /** @Column(type="integer") @Id */
     protected $id;
@@ -21,6 +21,14 @@ class Role extends BaseRole
 
     /** @Column(type="simple_array") */
     protected $permissions = [];
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
     /**
      * @PreSave

@@ -6,7 +6,6 @@ use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Framework\Database\Event\EntityEvent;
@@ -15,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Route("/blog")
+ * @Route("/")
  */
 class SiteController extends Controller
 {
@@ -25,16 +24,6 @@ class SiteController extends Controller
     protected $extension;
 
     /**
-     * @var Repository
-     */
-    protected $posts;
-
-    /**
-     * @var Repository
-     */
-    protected $comments;
-
-    /**
      * Constructor.
      *
      * @param BlogExtension $extension
@@ -42,8 +31,6 @@ class SiteController extends Controller
     public function __construct(BlogExtension $extension)
     {
         $this->extension = $extension;
-        $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 
@@ -54,9 +41,9 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/page/{page}", name="@blog/page", requirements={"page" = "\d+"})
-     * @Route("/", name="@blog/site")
-     * @Response("extension://blog/views/post/index.razr")
+     * @Route("/", name="site")
+     * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
+     * @Response("extensions/blog/views/post/index.razr")
      */
     public function indexAction($page = 1)
     {
@@ -65,7 +52,7 @@ class SiteController extends Controller
             $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
-        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+        $query = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
         if (!$limit = $this->extension->getParams('posts_per_page')) {
             $limit = 10;
@@ -108,7 +95,7 @@ class SiteController extends Controller
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
                 and $minidle = $this->extension->getParams('comments.minidle')
-                and $comment = $this->comments->query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()
+                and $comment = Comment::query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
@@ -118,7 +105,7 @@ class SiteController extends Controller
                 }
             }
 
-            if (!$post = $this->posts->query()->where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
+            if (!$post = Post::query()->where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
@@ -141,7 +128,7 @@ class SiteController extends Controller
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
-            $approved_once = (boolean)$this->comments->query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+            $approved_once = (boolean)Comment::query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
@@ -152,7 +139,7 @@ class SiteController extends Controller
             // check for spam
             $this['events']->dispatch('system.comment.spam_check', new CommentEvent($comment));
 
-            $this->comments->save($comment, $data);
+            Comment::save($comment, $data);
 
             $this['message']->info(__('Thanks for commenting!'));
 
@@ -160,25 +147,26 @@ class SiteController extends Controller
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
-
-            return $this->redirect($this['url']->previous());
+            $message = $e->getMessage();
 
         } catch (\Exception $e) {
 
-            $this['message']->error(__('Whoops, something went wrong!'));
+            $message = __('Whoops, something went wrong!');
 
-            return $this->redirect($this['url']->previous());
         }
+
+        $this['message']->error($message);
+
+        return $this->redirect($this['url']->previous());
     }
 
     /**
-     * @Route("/{id}", name="@blog/id")
-     * @Response("extension://blog/views/post/post.razr")
+     * @Route("/{id}", name="id")
+     * @Response("extensions/blog/views/post/post.razr")
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
+        if (!$post = Post::where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
             throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
@@ -186,7 +174,7 @@ class SiteController extends Controller
             throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
-        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
+        $query = Comment::query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
         if ($this['user']->isAuthenticated()) {
             $query->orWhere(function ($query) {
@@ -219,11 +207,11 @@ class SiteController extends Controller
             'selfLink'    => $this['url']->route('@blog/site/feed', [], true)
         ]);
 
-        if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+        if ($last = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
             $feed->setDate($last->getModified());
         }
 
-        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach (Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),

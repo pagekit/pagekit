@@ -43,13 +43,14 @@ class SystemListener extends EventSubscriber
     public function onSystemLoaded($event, $name, $dispatcher)
     {
         $scripts = $this['view.scripts'];
-        $scripts->register('jquery', 'vendor://assets/jquery/jquery.js', [], ['requirejs' => true]);
-        $scripts->register('requirejs', 'extension://system/assets/js/require.min.js', ['requirejs-config']);
-        $scripts->register('requirejs-config', 'extension://system/assets/js/require.js');
-        $scripts->register('uikit', 'vendor://assets/uikit/js/uikit.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-notify', 'vendor://assets/uikit/js/components/notify.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sticky', 'vendor://assets/uikit/js/components/sticky.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sortable', 'vendor://assets/uikit/js/components/sortable.min.js', [], ['requirejs' => true]);
+        $scripts->register('jquery', 'vendor/assets/jquery/jquery.js', [], ['requirejs' => true]);
+        $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', ['requirejs-config']);
+        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js');
+        $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', [], ['requirejs' => true]);
 
         $helper = new DateHelper($this['dates']);
         $this['tmpl.php']->addHelpers([$helper]);
@@ -76,7 +77,7 @@ class SystemListener extends EventSubscriber
         $this['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
         $this['view.sections']->set('messages', function() {
-            return $this['view']->render('extension://system/views/messages/messages.razr');
+            return $this['view']->render('extensions/system/views/messages/messages.razr');
         });
 
         $dispatcher->dispatch($this['isAdmin'] ? 'system.admin' : 'system.site', $event);
@@ -160,18 +161,18 @@ class SystemListener extends EventSubscriber
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('feed.error', 'extension://system/views/tmpl/feed.error.razr');
-        $event->register('feed.list', 'extension://system/views/tmpl/feed.list.razr');
-        $event->register('finder.main', 'extension://system/views/tmpl/finder.main.razr');
-        $event->register('finder.table', 'extension://system/views/tmpl/finder.table.razr');
-        $event->register('finder.thumbnail', 'extension://system/views/tmpl/finder.thumbnail.razr');
-        $event->register('linkpicker.modal', 'extension://system/views/tmpl/linkpicker.modal.razr');
-        $event->register('linkpicker.replace', 'extension://system/views/tmpl/linkpicker.replace.razr');
-        $event->register('marketplace.details', 'extension://system/views/tmpl/marketplace.details.razr');
-        $event->register('marketplace.table', 'extension://system/views/tmpl/marketplace.table.razr');
-        $event->register('package.updates', 'extension://system/views/tmpl/package.updates.razr');
-        $event->register('package.upload', 'extension://system/views/tmpl/package.upload.razr');
-        $event->register('settings.oauth', 'extension://system/views/tmpl/settings.oauth.razr');
+        $event->register('feed.error', 'extensions/system/views/tmpl/feed.error.razr');
+        $event->register('feed.list', 'extensions/system/views/tmpl/feed.list.razr');
+        $event->register('finder.main', 'extensions/system/views/tmpl/finder.main.razr');
+        $event->register('finder.table', 'extensions/system/views/tmpl/finder.table.razr');
+        $event->register('finder.thumbnail', 'extensions/system/views/tmpl/finder.thumbnail.razr');
+        $event->register('linkpicker.modal', 'extensions/system/views/tmpl/linkpicker.modal.razr');
+        $event->register('linkpicker.replace', 'extensions/system/views/tmpl/linkpicker.replace.razr');
+        $event->register('marketplace.details', 'extensions/system/views/tmpl/marketplace.details.razr');
+        $event->register('marketplace.table', 'extensions/system/views/tmpl/marketplace.table.razr');
+        $event->register('package.updates', 'extensions/system/views/tmpl/package.updates.razr');
+        $event->register('package.upload', 'extensions/system/views/tmpl/package.upload.razr');
+        $event->register('settings.oauth', 'extensions/system/views/tmpl/settings.oauth.razr');
     }
 
     /**

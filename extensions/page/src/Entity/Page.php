@@ -2,33 +2,21 @@
 
 namespace Pagekit\Page\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
-use Pagekit\User\Entity\AccessTrait;
 
 /**
  * @Entity(tableClass="@page_page", eventPrefix="page.page")
  */
-class Page
+class Page implements \JsonSerializable
 {
-    use AccessTrait, DataTrait;
-
-    /* Page unpublished status. */
-    const STATUS_UNPUBLISHED = 0;
-
-    /* Page published status. */
-    const STATUS_PUBLISHED = 1;
+    use DataTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
 
     /** @Column(type="string") */
-    protected $url;
-
-    /** @Column(type="string") */
     protected $title;
-
-    /** @Column(type="integer") */
-    protected $status = self::STATUS_UNPUBLISHED;
 
     /** @Column */
     protected $content = '';
@@ -66,38 +54,8 @@ class Page
         $this->content = $content;
     }
 
-    public function getUrl()
+    public function jsonSerialize()
     {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getStatusText()
-    {
-        $statuses = self::getStatuses();
-
-        return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
-    }
-
-    public static function getStatuses()
-    {
-        return [
-            self::STATUS_UNPUBLISHED => __('Unpublished'),
-            self::STATUS_PUBLISHED   => __('Published')
-        ];
+        return get_object_vars($this);
     }
 }

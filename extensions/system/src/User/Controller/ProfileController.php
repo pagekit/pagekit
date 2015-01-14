@@ -5,7 +5,6 @@ namespace Pagekit\User\Controller;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Event\ProfileSaveEvent;
 
 /**
@@ -14,34 +13,15 @@ use Pagekit\User\Event\ProfileSaveEvent;
 class ProfileController extends Controller
 {
     /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->user  = $this['user'];
-        $this->users = $this['users']->getUserRepository();
-    }
-
-    /**
-     * @Response("extension://system/views/user/profile.razr")
+     * @Response("extensions/system/views/user/profile.razr")
      */
     public function indexAction()
     {
-        if (!$this->user->isAuthenticated()) {
+        if (!$this['user']->isAuthenticated()) {
             return $this->redirect('@system/auth/login', ['redirect' => $this['url']->current()]);
         }
 
-        return ['head.title' => __('Your Profile'), 'user' => $this->user];
+        return ['head.title' => __('Your Profile'), 'user' => $this['user']];
     }
 
     /**
@@ -49,13 +29,13 @@ class ProfileController extends Controller
      */
     public function saveAction($data)
     {
-        if (!$this->user->isAuthenticated()) {
+        if (!$this['user']->isAuthenticated()) {
             $this->getApplication()->abort(404);
         }
 
         try {
 
-            $user = $this->users->find($this->user->getId());
+            $user = User::find($this['user']->getId());
 
             $name    = trim(@$data['name']);
             $email   = trim(@$data['email']);
@@ -70,7 +50,7 @@ class ProfileController extends Controller
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if ($this->users->where(['email = ?', 'id <> ?'], [$email, $user->getId()])->first()) {
+            if (User::where(['email = ?', 'id <> ?'], [$email, $user->getId()])->first()) {
                 throw new Exception(__('Email not available.'));
             }
 
@@ -96,7 +76,7 @@ class ProfileController extends Controller
 
             $this['events']->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
 
-            $this->users->save($user);
+            User::save($user);
 
             $this['events']->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 

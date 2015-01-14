@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=@($subset)" rel="stylesheet">
         @section('head')
-        @style('theme', 'extension://system/theme/css/theme.css')
-        @script('theme', 'extension://system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
+        @style('theme', 'extensions/system/theme/css/theme.css')
+        @script('theme', 'extensions/system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
     </head>
     <body>
 
@@ -20,13 +20,13 @@
 
                     <div class="uk-navbar-content uk-hidden-small">
                         <div class="uk-display-inline-block" data-uk-dropdown>
-                            <img class="tm-logo" src="@url('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                            <img class="tm-logo" src="@url('extensions/system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                             <div class="uk-dropdown tm-dropdown">
                                 <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="@url('@system/system/adminmenu')" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 @foreach ($nav.children as $item)
                                     <li@raw( $item.attribute('active') ? ' class="uk-active"' : '' ) data-id="@( $item.getId() )">
                                         <a class="uk-panel pk-panel-icon" href="@url($item.url)">
-                                            <img  src="@url( $item.getIcon() ?: 'extension://system/assets/images/placeholder-icon.svg' )" width="50" height="50" alt="@trans($item)">
+                                            <img src="@url( $item.getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg' )" width="50" height="50" alt="@trans($item)">
                                             <p>@trans($item)</p>
                                         </a>
                                     </li>
@@ -37,7 +37,7 @@
                     </div>
 
                     <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img class="tm-logo" src="@url('extension://system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
+                        <img class="tm-logo" src="@url('extensions/system/assets/images/pagekit-logo.svg')" width="24" height="29" alt="@trans('Pagekit')">
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
@@ -65,7 +65,7 @@
                                         <li class="uk-nav-header">@( $user.username )</li>
                                         <li><a href="@url()" target="_blank">@trans('Visit Site')</a></li>
                                         <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                                        <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                                        <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/admin', [], true)])">@trans('Logout')</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                     @foreach ($nav.children as $item)
                         <li@raw( $item.attribute('active') ? ' class="uk-active"' : '')>
                             <a href="@url($item.url)">
-                                <img class="uk-margin-small-right" src="@url($item.getIcon() ?: 'extension://system/assets/images/placeholder-icon.svg' )" width="34" height="34" alt="@trans($item)">
+                                <img class="uk-margin-small-right" src="@url($item.getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg' )" width="34" height="34" alt="@trans($item)">
                                 @trans($item)
                             </a>
                         </li>
@@ -133,7 +133,7 @@
                     <li class="uk-nav-header">@( $user.username )</li>
                     <li><a href="@url()">@trans('Visit Site')</a></li>
                     <li><a href="@url('@system/user/edit', ['id' => $user.id])">@trans('Settings')</a></li>
-                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/system/admin', [], true)])">@trans('Logout')</a></li>
+                    <li><a href="@url('@system/auth/logout', ['redirect' => url('@system/admin', [], true)])">@trans('Logout')</a></li>
                 </ul>
 
             </div>

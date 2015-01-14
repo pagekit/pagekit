@@ -2,9 +2,9 @@
 
 namespace Pagekit\Widget\Controller;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
+use Pagekit\User\Entity\Role;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Event\RegisterPositionEvent;
 use Pagekit\Widget\Event\WidgetCopyEvent;
@@ -18,16 +18,6 @@ use Pagekit\Widget\Model\TypesTrait;
 class WidgetsController extends Controller
 {
     /**
-     * @var Repository
-     */
-    protected $widgets;
-
-    /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
      * @var array
      */
     protected $positions;
@@ -37,13 +27,11 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->widgets   = $this['db.em']->getRepository('Pagekit\Widget\Entity\Widget');
-        $this->roles     = $this['users']->getRoleRepository();
         $this->positions = $this['events']->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
     }
 
     /**
-     * @Response("extension://system/views/admin/widgets/index.razr")
+     * @Response("extensions/system/views/admin/widgets/index.razr")
      */
     public function indexAction()
     {
@@ -51,7 +39,7 @@ class WidgetsController extends Controller
 
         $widgets = [];
 
-        foreach ($this->widgets->query()->orderBy('priority', 'ASC')->get() as $widget) {
+        foreach (Widget::query()->orderBy('priority', 'ASC')->get() as $widget) {
             $position = $widget->getPosition();
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
         }
@@ -61,29 +49,29 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("extension://system/views/admin/widgets/edit.razr")
+     * @Response("extensions/system/views/admin/widgets/edit.razr")
      */
     public function addAction($type)
     {
         $widget = new Widget;
         $widget->setType($type);
 
-        return ['head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
+        return ['head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => Role::findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
     }
 
     /**
      * @Request({"id": "int"})
-     * @Response("extension://system/views/admin/widgets/edit.razr")
+     * @Response("extensions/system/views/admin/widgets/edit.razr")
      */
     public function editAction($id)
     {
         try {
 
-            if (!$widget = $this->widgets->find($id)) {
+            if (!$widget = Widget::find($id)) {
                 throw new Exception(__('Invalid widget id'));
             }
 
-            return ['head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => $this->roles->findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
+            return ['head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => Role::findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
 
         } catch (Exception $e) {
             $this['message']->error($e->getMessage());
@@ -100,7 +88,7 @@ class WidgetsController extends Controller
         try {
 
             // is new ?
-            if (!$widget = $this->widgets->find($id)) {
+            if (!$widget = Widget::find($id)) {
 
                 if ($id) {
                     throw new Exception(__('Invalid widget id'));
@@ -112,7 +100,7 @@ class WidgetsController extends Controller
             $data['menuItems'] = array_filter((array) @$data['menuItems']);
             $data['settings']  = array_merge(['show_title' => 0], isset($data['settings']) ? $data['settings'] : []);
 
-            $this->widgets->save($widget, $data);
+            Widget::save($widget, $data);
 
             $this['events']->dispatch('system.widget.save', new WidgetEvent($widget));
 
@@ -134,8 +122,8 @@ class WidgetsController extends Controller
     public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id)) {
-                $this->widgets->delete($widget);
+            if ($widget = Widget::find($id)) {
+                Widget::delete($widget);
             }
         }
 
@@ -152,7 +140,7 @@ class WidgetsController extends Controller
     {
         foreach ($ids as $id) {
 
-            if (!$widget = $this->widgets->find($id)) {
+            if (!$widget = Widget::find($id)) {
                 continue;
             }
 
@@ -161,7 +149,7 @@ class WidgetsController extends Controller
             $copy->setStatus(Widget::STATUS_DISABLED);
             $copy->setTitle($widget->getTitle().' - '.__('Copy'));
 
-            $this->widgets->save($copy);
+            Widget::save($copy);
 
             $this['events']->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
@@ -175,8 +163,8 @@ class WidgetsController extends Controller
     public function enableAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id) and !$widget->getStatus()) {
-                $this->widgets->save($widget, ['status' => Widget::STATUS_ENABLED]);
+            if ($widget = Widget::find($id) and !$widget->getStatus()) {
+                Widget::save($widget, ['status' => Widget::STATUS_ENABLED]);
             }
         }
 
@@ -189,8 +177,8 @@ class WidgetsController extends Controller
     public function disableAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($widget = $this->widgets->find($id) and $widget->getStatus()) {
-                $this->widgets->save($widget, ['status' => Widget::STATUS_DISABLED]);
+            if ($widget = Widget::find($id) and $widget->getStatus()) {
+                Widget::save($widget, ['status' => Widget::STATUS_DISABLED]);
             }
         }
 
@@ -203,14 +191,14 @@ class WidgetsController extends Controller
      */
     public function reorderAction($position, $order = [])
     {
-        $widgets = $this->widgets->findAll();
+        $widgets = Widget::findAll();
 
         foreach ($order as $priority => $data) {
 
             $id = $data['id'];
 
             if (isset($widgets[$id])) {
-                $this->widgets->save($widgets[$id], compact('position', 'priority'));
+                Widget::save($widgets[$id], compact('position', 'priority'));
             }
         }
 

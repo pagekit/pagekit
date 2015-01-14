@@ -2,7 +2,6 @@
 
 namespace Pagekit\Theme;
 
-use Pagekit\Component\File\ResourceLocator;
 use Pagekit\Component\View\Section\SectionManager;
 use Pagekit\Component\View\ViewInterface;
 use Pagekit\Framework\Application;
@@ -58,7 +57,7 @@ class Theme implements \ArrayAccess
     public function boot(Application $app)
     {
         $this->registerLanguages($app['translator']);
-        $this->registerResources($app['locator']);
+        // -TODO- $this->registerResources($app['locator']);
 
         if ($this->getConfig('parameters.settings')) {
 
@@ -202,30 +201,30 @@ class Theme implements \ArrayAccess
      *
      * @param ResourceLocator $locator
      */
-    public function registerResources(ResourceLocator $locator)
-    {
-        $root = $this->getPath();
+    // public function registerResources(ResourceLocator $locator)
+    // {
+    //     $root = $this->getPath();
 
-        $addResources = function($config, $prefix = '') use ($root, $locator) {
-            foreach ($config as $scheme => $resources) {
+    //     $addResources = function($config, $prefix = '') use ($root, $locator) {
+    //         foreach ($config as $scheme => $resources) {
 
-                if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
-                    list($scheme, $prefix)  = $segments;
-                }
+    //             if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
+    //                 list($scheme, $prefix)  = $segments;
+    //             }
 
-                $resources = (array) $resources;
+    //             $resources = (array) $resources;
 
-                array_walk($resources, function(&$resource) use ($root) {
-                    $resource = "$root/$resource";
-                });
+    //             array_walk($resources, function(&$resource) use ($root) {
+    //                 $resource = "$root/$resource";
+    //             });
 
-                $locator->addPath($scheme, $prefix, $resources);
-            }
-        };
+    //             $locator->addPath($scheme, $prefix, $resources);
+    //         }
+    //     };
 
-        $addResources($this->getConfig('resources.export', []), $this->getName());
-        $addResources($this->getConfig('resources.override', []), $this->getName());
-    }
+    //     $addResources($this->getConfig('resources.export', []), $this->getName());
+    //     $addResources($this->getConfig('resources.override', []), $this->getName());
+    // }
 
     /**
      * Adds section renderer.

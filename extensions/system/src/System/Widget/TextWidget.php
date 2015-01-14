@@ -44,6 +44,6 @@ class TextWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extension://system/views/widgets/text/edit.razr', compact('widget'));
+        return $this['view']->render('extensions/system/views/widgets/text/edit.razr', compact('widget'));
     }
 }

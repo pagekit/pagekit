@@ -7,7 +7,6 @@ use Pagekit\Component\Auth\Exception\AuthException;
 use Pagekit\Component\Auth\Exception\BadCredentialsException;
 use Pagekit\Component\Auth\RememberMe;
 use Pagekit\Framework\Controller\Controller;
-use Pagekit\User\Entity\UserRepository;
 use Pagekit\User\Model\UserInterface;
 
 /**
@@ -21,23 +20,17 @@ class AuthController extends Controller
     protected $user;
 
     /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->user  = $this['user'];
-        $this->users = $this['users']->getUserRepository();
     }
 
     /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
-     * @Response("extension://system/views/user/login.razr")
+     * @Response("extensions/system/views/user/login.razr")
      */
     public function loginAction($redirect = '')
     {

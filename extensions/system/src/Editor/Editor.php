@@ -81,7 +81,7 @@ class Editor extends EventSubscriber implements EditorInterface
      */
     public function render($value, array $attributes = [])
     {
-        $this['view.scripts']->queue('editor', 'extension://system/assets/js/editor/editor.js', 'requirejs', [
+        $this['view.scripts']->queue('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
             'data-editor' => json_encode(array_values($this->getPlugins()))
         ]);
 
@@ -134,12 +134,12 @@ class Editor extends EventSubscriber implements EditorInterface
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('image.modal', 'extension://system/views/tmpl/image.modal.razr');
-        $event->register('image.replace', 'extension://system/views/tmpl/image.replace.razr');
-        $event->register('link.modal', 'extension://system/views/tmpl/link.modal.razr');
-        $event->register('link.replace', 'extension://system/views/tmpl/link.replace.razr');
-        $event->register('video.modal', 'extension://system/views/tmpl/video.modal.razr');
-        $event->register('video.replace', 'extension://system/views/tmpl/video.replace.razr');
+        $event->register('image.modal', 'extensions/system/views/tmpl/image.modal.razr');
+        $event->register('image.replace', 'extensions/system/views/tmpl/image.replace.razr');
+        $event->register('link.modal', 'extensions/system/views/tmpl/link.modal.razr');
+        $event->register('link.replace', 'extensions/system/views/tmpl/link.replace.razr');
+        $event->register('video.modal', 'extensions/system/views/tmpl/video.modal.razr');
+        $event->register('video.replace', 'extensions/system/views/tmpl/video.replace.razr');
     }
 
     /**

@@ -1,4 +1,4 @@
-@script('form-password', 'vendor://assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
+@script('form-password', 'vendor/assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
 
 <form class="uk-article uk-form uk-form-stacked" action="@url('@system/profile/save')" method="post">
 

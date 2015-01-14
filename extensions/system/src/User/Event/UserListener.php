@@ -4,6 +4,7 @@ namespace Pagekit\User\Event;
 
 use Pagekit\Component\Auth\Event\LoginEvent;
 use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\User\Entity\User;
 
 class UserListener extends EventSubscriber
 {
@@ -22,7 +23,7 @@ class UserListener extends EventSubscriber
      */
     public function onUserLogin(LoginEvent $event)
     {
-        $this['users']->getUserRepository()->updateLogin($event->getUser());
+        User::updateLogin($event->getUser());
     }
 
     /**
@@ -31,7 +32,7 @@ class UserListener extends EventSubscriber
     public function onUserAccess()
     {
         if ($user = $this['user'] and $user->isAuthenticated()) {
-            $this['users']->getUserRepository()->updateAccess($user);
+            User::updateAccess($user);
         }
     }
 

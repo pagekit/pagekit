@@ -2,9 +2,9 @@
 
 namespace Pagekit\Menu;
 
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\ApplicationTrait;
-use Pagekit\Menu\Entity\ItemRepository;
+use Pagekit\Menu\Entity\Item;
+use Pagekit\Menu\Entity\Menu;
 use Pagekit\Menu\Filter\FilterIterator;
 use Pagekit\Menu\Model\FilterManager;
 use Pagekit\Menu\Model\MenuInterface;
@@ -42,22 +42,6 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
     }
 
     /**
-     * @return Repository
-     */
-    public function getMenuRepository()
-    {
-        return $this['db.em']->getRepository('Pagekit\Menu\Entity\Menu');
-    }
-
-    /**
-     * @return ItemRepository
-     */
-    public function getItemRepository()
-    {
-        return $this['db.em']->getRepository('Pagekit\Menu\Entity\Item');
-    }
-
-    /**
      * Checks whether a menu is registered.
      */
     public function has($id)
@@ -70,7 +54,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
 
         if (isset($this->loaded[$id])) {
             $this->menus[$id] = $this->loaded[$id];
-            $this->menus[$id]->setItems($this->getItemRepository()->findByMenu($this->loaded[$id]));
+            $this->menus[$id]->setItems(Item::findByMenu($this->loaded[$id]));
         }
 
         return isset($this->menus[$id]);
@@ -164,7 +148,7 @@ class MenuProvider implements \IteratorAggregate, \ArrayAccess
     protected function load()
     {
         if (!$this->loaded) {
-            $this->loaded = $this->getMenuRepository()->findAll();
+            $this->loaded = Menu::findAll();
         }
     }
 }

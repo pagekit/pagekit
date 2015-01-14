@@ -10,18 +10,9 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
 
-    'menu' => [
-
-        'page' => [
-            'label'    => 'Pages',
-            'icon'     => 'extension://page/extension.svg',
-            'url'      => '@page/page',
-            'active'   => '@page/page*',
-            'access'   => 'page: manage pages',
-            'priority' => 0
-        ]
+        '/page' => 'Pagekit\\Page\\Controller\\SiteController'
 
     ],
 

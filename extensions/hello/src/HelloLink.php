@@ -27,6 +27,6 @@ class HelloLink extends Route
      */
     public function renderForm($link, $params = [], $context = '')
     {
-        return $this['view']->render('extension://hello/views/admin/link.razr', compact('link', 'params'));
+        return $this['view']->render('extensions/hello/views/admin/link.razr', compact('link', 'params'));
     }
 }

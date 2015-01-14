@@ -2,16 +2,18 @@
 
 namespace Pagekit\User\Entity;
 
+use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\User as BaseUser;
+use Pagekit\User\Model\UserInterface;
 
 /**
- * @Entity(repositoryClass="Pagekit\User\Entity\UserRepository", tableClass="@system_user", eventPrefix="system.user")
+ * @Entity(tableClass="@system_user", eventPrefix="system.user")
  */
 class User extends BaseUser
 {
-    use DataTrait;
+    use DataTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -184,8 +186,64 @@ class User extends BaseUser
      *
      * @PostDelete
      */
-    public function postDelete(EntityEvent $event)
+    public function postDelete()
     {
-        $event->getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
+        self::getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function find($id)
+    {
+        return self::where(compact('id'))->related('roles')->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findAll()
+    {
+        return self::query()->related('roles')->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findByUsername($username)
+    {
+        return self::where(compact('username'))->related('roles')->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findByEmail($email)
+    {
+        return self::where(compact('email'))->related('roles')->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findByLogin($login)
+    {
+        return self::where(['username' => $login])->orWhere(['email' => $login])->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function updateLogin(UserInterface $user)
+    {
+        self::where(['id' => $user->getId()])->update(['login' => date('Y-m-d H:i:s')]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function updateAccess(UserInterface $user)
+    {
+        self::where(['id' => $user->getId()])->update(['access' => date('Y-m-d H:i:s')]);
     }
 }

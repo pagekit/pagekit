@@ -32,7 +32,7 @@ class UpdateController extends Controller
     }
 
     /**
-     * @Response("extension://system/views/admin/settings/update.razr")
+     * @Response("extensions/system/views/admin/settings/update.razr")
      */
     public function indexAction()
     {
@@ -125,7 +125,7 @@ class UpdateController extends Controller
             $this['system']->clearCache();
             $this['session']->remove('system.update');
 
-            $response = ['message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/system/admin'), 'progress' => 100];
+            $response = ['message' => __('Installed successfully.'), 'redirect' => $this['url']->route('@system/admin'), 'progress' => 100];
 
         } catch (\Exception $e) {
 

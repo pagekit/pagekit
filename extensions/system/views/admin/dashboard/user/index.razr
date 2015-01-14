@@ -1,4 +1,4 @@
-@script('user', 'extension://system/assets/js/dashboard/user.js', ['requirejs'])
+@script('user', 'extensions/system/assets/js/dashboard/user.js', ['requirejs'])
 
 @if ($widget.get('show') == 'registered')
 <h1 class="uk-h3">@transchoice('{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users', count($users), ['%users%' => count($users)])</h1>

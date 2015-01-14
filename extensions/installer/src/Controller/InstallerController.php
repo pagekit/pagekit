@@ -33,7 +33,7 @@ class InstallerController extends Controller
     }
 
     /**
-     * @Response("extension://installer/views/install.razr")
+     * @Response("extensions/installer/views/install.razr")
      */
     public function indexAction()
     {
@@ -115,7 +115,7 @@ class InstallerController extends Controller
                 throw new Exception($message);
             } else {
 
-                $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
+                $this['option']->set('system:version', $this['migrator']->create('extensions/system/migrations')->run());
                 $this['option']->set('system:extensions', ['blog', 'page'], true);
 
                 $this['db']->insert('@system_user', [
@@ -142,7 +142,7 @@ class InstallerController extends Controller
                 $this['extensions']->get('system')->enable();
 
                 // sample data
-                $sql = file_get_contents('extension://installer/sample_data.sql');
+                $sql = file_get_contents('extensions/installer/sample_data.sql');
 
                 foreach (explode(';', $sql) as $query) {
                     if ($query = trim($query)) {

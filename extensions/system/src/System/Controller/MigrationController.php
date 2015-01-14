@@ -10,7 +10,7 @@ use Pagekit\Framework\Controller\Controller;
 class MigrationController extends Controller
 {
     /**
-     * @Response("extension://system/theme/templates/migration.razr", layout=false)
+     * @Response("extensions/system/theme/templates/migration.razr", layout=false)
      */
     public function indexAction()
     {
@@ -22,13 +22,13 @@ class MigrationController extends Controller
      */
     public function migrateAction()
     {
-        if ($this['migrator']->create('extension://system/migrations', $this['option']->get('system:version'))->get()) {
+        if ($this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->get()) {
             $this['system']->enable();
             $this['message']->success(__('Your Pagekit database has been updated successfully.'));
         } else {
             $this['message']->warning(__('Your Pagekit database is already up-to-date!'));
         }
 
-        return $this->redirect('@system/system/admin');
+        return $this->redirect('@system/admin');
     }
 }

@@ -10,7 +10,6 @@ use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
-use Pagekit\System\Event\AliasListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
@@ -26,6 +25,7 @@ use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
+use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User as UserEntity;
 use Pagekit\User\Event\AccessListener;
 use Pagekit\User\Event\AuthorizationListener;
@@ -50,7 +50,6 @@ class SystemExtension extends Extension
 
         $app['events']->addSubscriber(new AccessListener);
         $app['events']->addSubscriber(new AdminMenuListener);
-        $app['events']->addSubscriber(new AliasListener);
         $app['events']->addSubscriber(new AuthorizationListener);
         $app['events']->addSubscriber(new CanonicalListener);
         $app['events']->addSubscriber(new FrontpageListener);
@@ -80,7 +79,7 @@ class SystemExtension extends Extension
 
             if (!$user = $app['auth']->getUser()) {
                 $user  = new UserEntity;
-                $roles = $app['users']->getRoleRepository()->where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
+                $roles = Role::where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
                 $user->setRoles($roles);
             }
 
@@ -143,8 +142,8 @@ class SystemExtension extends Extension
 
         if (isset($app['profiler'])) {
             $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extension://system/views/profiler/toolbar/system.php', 'extension://system/views/profiler/panel/system.php', 50);
-                $app['profiler']->add(new UserDataCollector($app['auth']), 'extension://system/views/profiler/toolbar/user.php', null, -20);
+                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extensions/system/views/profiler/toolbar/system.php', 'extensions/system/views/profiler/panel/system.php', 50);
+                $app['profiler']->add(new UserDataCollector($app['auth']), 'extensions/system/views/profiler/toolbar/user.php', null, -20);
             });
         }
     }
@@ -154,7 +153,7 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = $this['migrator']->create('extension://system/migrations', $this['option']->get('system:version'))->run()) {
+        if ($version = $this['migrator']->create('extensions/system/migrations', $this['option']->get('system:version'))->run()) {
             $this['option']->set('system:version', $version);
         }
 
@@ -196,7 +195,7 @@ class SystemExtension extends Extension
 
         // clear temp folder
         if (isset($options['temp'])) {
-            foreach ($this['file']->find()->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
+            foreach ($this['finder']->in($this['path.temp'])->depth(0)->ignoreDotFiles(true) as $file) {
                 $this['file']->delete($file->getPathname());
             }
         }

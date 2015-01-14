@@ -28,8 +28,7 @@ return [
             'Pagekit\Component\Auth\AuthServiceProvider',
             'Pagekit\Component\Auth\RememberMeServiceProvider',
             'Pagekit\Component\Feed\FeedServiceProvider',
-            'Pagekit\Component\File\FilesystemServiceProvider',
-            'Pagekit\Component\File\ResourceLocatorServiceProvider',
+            'Pagekit\Component\Filesystem\FilesystemServiceProvider',
             'Pagekit\Component\Mail\MailServiceProvider',
             'Pagekit\Component\Markdown\MarkdownServiceProvider',
             'Pagekit\Component\Migration\MigrationServiceProvider',
@@ -130,30 +129,6 @@ return [
         'username'   => null,
         'password'   => null,
         'from'       => ['address' => null, 'name' => null]
-
-    ],
-
-    'locator' => [
-
-        'wrappers' => [
-
-            'app'       => false,
-            'storage'   => false,
-            'extension' => true,
-            'theme'     => true,
-            'vendor'    => true
-
-        ],
-
-        'paths' => [
-
-            'app'       => '%path%',
-            'storage'   => '%path.storage%',
-            'extension' => '%path.extensions%',
-            'theme'     => '%path.themes%',
-            'vendor'    => '%path.vendor%'
-
-        ]
 
     ],
 

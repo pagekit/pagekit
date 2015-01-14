@@ -6,6 +6,7 @@ use Pagekit\Component\Auth\Encoder\PasswordEncoderInterface;
 use Pagekit\Component\Auth\UserInterface;
 use Pagekit\Component\Auth\UserProviderInterface;
 use Pagekit\Framework\ApplicationTrait;
+use Pagekit\User\Entity\User;
 
 class UserProvider implements UserProviderInterface, \ArrayAccess
 {
@@ -51,7 +52,7 @@ class UserProvider implements UserProviderInterface, \ArrayAccess
             unset($credentials['password']);
         }
 
-        return $this['users']->getUserRepository()->where($credentials)->related('roles')->first();
+        return User::where($credentials)->related('roles')->first();
     }
 
     /**

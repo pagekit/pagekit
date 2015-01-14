@@ -2,7 +2,9 @@
 
 namespace Pagekit;
 
-use Pagekit\Component\File\Exception\InvalidArgumentException;
+use Pagekit\Component\Filesystem\FileLocator;
+use Pagekit\Component\Filesystem\Adapter\FileAdapter;
+use Pagekit\Component\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Component\Package\Installer\PackageInstaller;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
@@ -10,10 +12,10 @@ use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Framework\Application;
 use Pagekit\Framework\Event\EventSubscriberInterface;
 use Pagekit\Framework\ServiceProviderInterface;
-use Pagekit\System\FileProvider;
 use Pagekit\System\Migration\FilesystemLoader;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Symfony\Component\Finder\Finder;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
@@ -23,14 +25,20 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         $this->app = $app;
 
-        $app['file'] = function($app) {
-            return new FileProvider($app);
+        $app['locator'] = function($app) {
+            return new FileLocator($app['path']);
         };
 
-        $app->extend('migrator', function($migrator, $app) {
-            $migrator->setLoader(new FilesystemLoader($app['locator']));
-            return $migrator;
+        $app['finder'] = $app->factory(function() {
+            return Finder::create();
         });
+
+        // -TODO-
+
+        // $app->extend('migrator', function($migrator, $app) {
+        //     $migrator->setLoader(new FilesystemLoader($app['locator']));
+        //     return $migrator;
+        // });
 
         $app->extend('view', function($view, $app) {
 
@@ -45,9 +53,11 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
             $loader     = new ExtensionLoader;
             $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
-            $installer  = new PackageInstaller($repository, $loader);
+            $file       = isset($app['file']) ? $app['file'] : null;
 
-            return new ExtensionManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
+            $installer  = new PackageInstaller($repository, $loader, $file);
+
+            return new ExtensionManager($repository, $installer);
         };
 
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
@@ -93,6 +103,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
+        $this->app['file']->registerAdapter('file', new FileAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
+        $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
+
         $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
         $this->app['view.sections']->prepend('head', function() {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
@@ -114,15 +127,12 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function onTemplateReference($event)
     {
-        try {
+        $template = $event->getTemplateReference();
 
-            $template = $event->getTemplateReference();
-
-            if (filter_var($path = $template->get('path'), FILTER_VALIDATE_URL) !== false) {
-                $template->set('path', $this->app['locator']->findResource($path));
-            }
-
-        } catch (InvalidArgumentException $e) {}
+        if ($path = $this->app['locator']->get($template->get('path'))) {
+            $template->set('name', $path); // php engine uses name
+            $template->set('path', $path);
+        }
     }
 
     public function onKernelResponse()

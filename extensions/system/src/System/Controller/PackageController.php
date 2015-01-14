@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
-use Pagekit\Component\File\Archive\Zip;
+use Pagekit\Component\Filesystem\Archive\Zip;
 use Pagekit\Component\Package\Downloader\PackageDownloader;
 use Pagekit\Component\Package\Exception\ArchiveExtractionException;
 use Pagekit\Component\Package\Exception\ChecksumVerificationException;
@@ -64,7 +64,7 @@ class PackageController extends Controller
             if (isset($extra['image'])) {
                 $extra['image'] = $this['url']->to("{$this->temp}/$path/".$extra['image']);
             } else {
-                $extra['image'] = $this['url']->to('extension://system/assets/images/placeholder-icon.svg');
+                $extra['image'] = $this['url']->to('extensions/system/assets/images/placeholder-icon.svg');
             }
 
             $response = [

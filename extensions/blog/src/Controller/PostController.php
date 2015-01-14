@@ -5,10 +5,10 @@ namespace Pagekit\Blog\Controller;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Model\CommentInterface;
-use Pagekit\Component\Database\ORM\Repository;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
-use Pagekit\User\Entity\UserRepository;
+use Pagekit\User\Entity\Role;
+use Pagekit\User\Entity\User;
 
 /**
  * @Access("blog: manage content", admin=true)
@@ -21,34 +21,16 @@ class PostController extends Controller
     protected $extension;
 
     /**
-     * @var Repository
-     */
-    protected $posts;
-
-    /**
-     * @var Repository
-     */
-    protected $roles;
-
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
      * Constructor.
      */
     public function __construct(BlogExtension $extension)
     {
         $this->extension = $extension;
-        $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        $this->roles = $this['users']->getRoleRepository();
-        $this->users = $this['users']->getUserRepository();
     }
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("extension://blog/views/admin/post/index.razr")
+     * @Response("extensions/blog/views/admin/post/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -58,7 +40,7 @@ class PostController extends Controller
             $filter = $this['session']->get('blog.posts.filter', []);
         }
 
-        $query = $this->posts->query();
+        $query = Post::query();
 
         if (isset($filter['status']) && is_numeric($filter['status'])) {
             $query->where(['status' => intval($filter['status'])]);
@@ -90,7 +72,7 @@ class PostController extends Controller
 
         if ($this['request']->isXmlHttpRequest()) {
             return $this['response']->json([
-                'table' => $this['view']->render('extension://blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => $this->roles->findAll(), 'pending' => $pending]),
+                'table' => $this['view']->render('extensions/blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => Role::findAll(), 'pending' => $pending]),
                 'total' => $total
             ]);
         }
@@ -99,7 +81,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Response("extension://blog/views/admin/post/edit.razr")
+     * @Response("extensions/blog/views/admin/post/edit.razr")
      */
     public function addAction()
     {
@@ -109,18 +91,18 @@ class PostController extends Controller
         $post->set('title', $this->extension->getParams('posts.show_title'));
         $post->set('markdown', $this->extension->getParams('posts.markdown_enabled'));
 
-        return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
+        return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => Role::findAll(), 'users' => User::findAll()];
     }
 
     /**
      * @Request({"id": "int"})
-     * @Response("extension://blog/views/admin/post/edit.razr")
+     * @Response("extensions/blog/views/admin/post/edit.razr")
      */
     public function editAction($id)
     {
         try {
 
-            if (!$post = $this->posts->query()->where(compact('id'))->related('user')->first()) {
+            if (!$post = Post::query()->where(compact('id'))->related('user')->first()) {
                 throw new Exception(__('Invalid post id.'));
             }
 
@@ -131,7 +113,7 @@ class PostController extends Controller
             return $this->redirect('@blog/post');
         }
 
-        return ['head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => $this->roles->findAll(), 'users' => $this->users->findAll()];
+        return ['head.title' => __('Edit Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => Role::findAll(), 'users' => User::findAll()];
     }
 
     /**
@@ -142,7 +124,7 @@ class PostController extends Controller
     {
         try {
 
-            if (!$post = $this->posts->find($id)) {
+            if (!$post = Post::find($id)) {
 
                 $post = new Post;
 
@@ -156,7 +138,7 @@ class PostController extends Controller
 
             $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
-            $this->posts->save($post, $data);
+            Post::save($post, $data);
 
             return ['message' => $id ? __('Post saved.') : __('Post created.'), 'id' => $post->getId()];
 
@@ -174,8 +156,8 @@ class PostController extends Controller
     public function deleteAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($post = $this->posts->find($id)) {
-                $this->posts->delete($post);
+            if ($post = Post::find($id)) {
+                Post::delete($post);
             }
         }
 
@@ -189,7 +171,7 @@ class PostController extends Controller
     public function copyAction($ids = [])
     {
         foreach ($ids as $id) {
-            if ($post = $this->posts->find((int) $id)) {
+            if ($post = Post::find((int) $id)) {
 
                 $post = clone $post;
                 $post->setId(null);
@@ -198,7 +180,7 @@ class PostController extends Controller
                 $post->setTitle($post->getTitle().' - '.__('Copy'));
                 $post->setCommentCount(0);
 
-                $this->posts->save($post);
+                Post::save($post);
             }
         }
 
@@ -212,9 +194,9 @@ class PostController extends Controller
     public function statusAction($status, $ids = [])
     {
         foreach ($ids as $id) {
-            if ($post = $this->posts->find($id) and $post->getStatus() != $status) {
+            if ($post = Post::find($id) and $post->getStatus() != $status) {
                 $post->setStatus($status);
-                $this->posts->save($post);
+                Post::save($post);
             }
         }
 

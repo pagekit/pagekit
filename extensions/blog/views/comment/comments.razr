@@ -1,4 +1,4 @@
-@script('blog.post-comments', 'extension://blog/assets/js/comment/post.js', 'jquery')
+@script('blog.post-comments', 'extensions/blog/assets/js/comment/post.js', 'jquery')
 
 @if ($app.user.hasAccess('blog: view comments'))
 
@@ -9,14 +9,14 @@
     <ul class="uk-comment-list">
 
         @foreach ($post.commentsTree(['order' => $params['comments.order']]) as $child)
-        @include('extension://blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @include('extensions/blog/views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
 
     </ul>
     @endif
 
     @if ($post.isCommentable)
-    @include('extension://blog/views/comment/respond.razr')
+    @include('extensions/blog/views/comment/respond.razr')
     @else
     @trans('Comments are closed.')
     @endif

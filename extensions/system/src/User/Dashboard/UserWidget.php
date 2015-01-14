@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Dashboard;
 
+use Pagekit\User\Entity\User;
 use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
@@ -40,7 +41,7 @@ class UserWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        $query = $this['users']->getUserRepository()->query();
+        $query = User::query();
 
         if ($widget->get('show') == 'registered') {
             $query->orderBy('registered', 'DESC');
@@ -50,7 +51,7 @@ class UserWidget extends Type
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return $this['view']->render('extension://system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/user/index.razr', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -58,6 +59,6 @@ class UserWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return $this['view']->render('extension://system/views/admin/dashboard/user/edit.razr', compact('widget'));
+        return $this['view']->render('extensions/system/views/admin/dashboard/user/edit.razr', compact('widget'));
     }
 }

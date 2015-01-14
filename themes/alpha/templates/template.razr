@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @section('head')
-        @style('theme', 'theme://alpha/css/theme.css')
+        @style('theme', 'themes/alpha/css/theme.css')
         @script('jquery')
         @script('uikit')
     </head>

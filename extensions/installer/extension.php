@@ -11,6 +11,10 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php'
+    'controllers' => [
+
+        '/installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
+
+    ]
 
 ];

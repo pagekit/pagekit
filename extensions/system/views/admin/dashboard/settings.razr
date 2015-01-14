@@ -1,6 +1,6 @@
-@script('dashboard', 'extension://system/assets/js/dashboard/settings.js', 'requirejs')
+@script('dashboard', 'extensions/system/assets/js/dashboard/settings.js', 'requirejs')
 
-<form id="js-dashboard" class="uk-form" action="@url('@system/system/admin')" method="post" data-reorder="@url('@system/dashboard/reorder')">
+<form id="js-dashboard" class="uk-form" action="@url('@system/admin')" method="post" data-reorder="@url('@system/dashboard/reorder')">
 
     @section('toolbar', 'show')
 
