@@ -6,7 +6,6 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Model\RoleInterface;
 
 /**
  * @Access("system: manage users", admin=true)
@@ -177,8 +176,8 @@ class UserController extends Controller
 
             if ($this['user']->hasAccess('system: manage user permissions')) {
 
-                if ($self && $user->hasRole(RoleInterface::ROLE_ADMINISTRATOR) && (!$roles || !in_array(RoleInterface::ROLE_ADMINISTRATOR, $roles))) {
-                    $roles[] = RoleInterface::ROLE_ADMINISTRATOR;
+                if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
+                    $roles[] = Role::ROLE_ADMINISTRATOR;
                 }
 
                 $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);

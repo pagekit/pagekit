@@ -5,7 +5,6 @@ namespace Pagekit\User\Controller;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Model\UserInterface;
 
 /**
  * @Route("/user/password")
