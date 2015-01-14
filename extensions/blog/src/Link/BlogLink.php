@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Link;
 
 use Pagekit\Blog\Entity\Post;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Link\LinkInterface;
 
 class BlogLink implements LinkInterface

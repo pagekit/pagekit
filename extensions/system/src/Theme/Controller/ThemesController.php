@@ -2,7 +2,7 @@
 
 namespace Pagekit\Theme\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\Theme\Event\ThemeEvent;

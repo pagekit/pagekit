@@ -2,7 +2,7 @@
 
 namespace Pagekit\Page;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Page\Entity\Page;
 use Pagekit\System\Link\Route;
 

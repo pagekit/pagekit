@@ -3,7 +3,7 @@
 namespace Pagekit\Content;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 class ContentHelper
 {

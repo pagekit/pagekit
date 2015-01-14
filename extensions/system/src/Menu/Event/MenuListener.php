@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Event;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Cache\CacheInterface;
 use Pagekit\Menu\Entity\Item;
 use Pagekit\Menu\Model\ItemInterface;

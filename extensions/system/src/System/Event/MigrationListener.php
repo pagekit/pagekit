@@ -3,7 +3,7 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MigrationListener implements EventSubscriberInterface

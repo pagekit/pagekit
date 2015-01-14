@@ -5,7 +5,7 @@ namespace Pagekit\Installer\Controller;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Pagekit\Config\Config;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Model\RoleInterface;
 

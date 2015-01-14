@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;

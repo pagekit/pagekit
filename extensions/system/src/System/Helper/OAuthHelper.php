@@ -8,7 +8,7 @@ use OAuth\OAuth1\Token\StdOAuth1Token;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 use OAuth\ServiceFactory;
 use Pagekit\Routing\Generator\UrlGenerator;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 
 class OAuthHelper

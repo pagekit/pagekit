@@ -4,7 +4,7 @@ namespace Pagekit;
 
 use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;

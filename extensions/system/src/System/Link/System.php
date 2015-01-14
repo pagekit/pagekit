@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Link;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 class System implements LinkInterface
 {

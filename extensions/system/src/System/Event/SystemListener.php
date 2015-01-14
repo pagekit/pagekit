@@ -8,7 +8,7 @@ use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
 use Pagekit\Editor\Editor;
 use Pagekit\Editor\Templating\EditorHelper;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;

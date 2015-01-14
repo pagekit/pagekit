@@ -3,7 +3,7 @@
 namespace Pagekit\System\Helper;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use PDO;
 
 class SystemInfoHelper

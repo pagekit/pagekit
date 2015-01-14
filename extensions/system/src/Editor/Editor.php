@@ -3,7 +3,7 @@
 namespace Pagekit\Editor;
 
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Event\TmplEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

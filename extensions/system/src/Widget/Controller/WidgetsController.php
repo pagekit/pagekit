@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;

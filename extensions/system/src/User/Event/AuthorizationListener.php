@@ -7,7 +7,7 @@ use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Exception\AuthException;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\User\Auth\UserProvider;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

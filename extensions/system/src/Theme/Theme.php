@@ -4,7 +4,7 @@ namespace Pagekit\Theme;
 
 use Pagekit\View\Section\SectionManager;
 use Pagekit\View\ViewInterface;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Symfony\Component\Translation\Translator;
 
 class Theme

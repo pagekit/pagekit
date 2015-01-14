@@ -3,7 +3,7 @@
 namespace Pagekit\Extension;
 
 use Pagekit\Routing\Controller\ControllerCollection;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 class Extension
 {

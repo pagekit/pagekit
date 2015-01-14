@@ -8,7 +8,7 @@ use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\User\Annotation\Access;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

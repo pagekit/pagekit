@@ -6,7 +6,7 @@ use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 

@@ -3,7 +3,7 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\Widget\Event\RegisterWidgetEvent;

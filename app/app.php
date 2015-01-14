@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Framework\Application;
+use Pagekit\Application;
 
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';

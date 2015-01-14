@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Exception;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

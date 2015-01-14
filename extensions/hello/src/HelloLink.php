@@ -2,7 +2,7 @@
 
 namespace Pagekit\Hello;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Link\Route;
 
 class HelloLink extends Route

@@ -3,7 +3,7 @@
 namespace Pagekit\Tree;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\Tree\Event\JsonRequestListener;
 use Pagekit\Tree\Event\NodeTypeEvent;

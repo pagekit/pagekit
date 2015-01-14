@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Event;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Tree\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

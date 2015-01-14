@@ -3,7 +3,7 @@
 namespace Pagekit\Theme\Event;
 
 use Pagekit\Database\Event\EntityEvent;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;

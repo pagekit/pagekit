@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Link\LinkInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;

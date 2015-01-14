@@ -2,7 +2,7 @@
 
 namespace Pagekit\Alpha;
 
-use Pagekit\Framework\Application;
+use Pagekit\Application;
 use Pagekit\Theme\Theme;
 
 class AlphaTheme extends Theme

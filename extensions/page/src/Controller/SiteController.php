@@ -2,7 +2,7 @@
 
 namespace Pagekit\Page\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Page\Entity\Page;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

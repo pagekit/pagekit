@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Templating;
 
-use Pagekit\Framework\Application;
+use Pagekit\Application;
 use Symfony\Component\Templating\Helper\Helper;
 
 class FinderHelper extends Helper

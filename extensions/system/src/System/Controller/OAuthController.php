@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use OAuth\Common\Storage\Memory;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 
 class OAuthController extends Controller

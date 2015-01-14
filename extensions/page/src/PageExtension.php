@@ -3,7 +3,7 @@
 namespace Pagekit\Page;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;

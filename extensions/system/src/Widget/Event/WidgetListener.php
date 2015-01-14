@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypesTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

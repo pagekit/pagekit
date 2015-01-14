@@ -9,7 +9,7 @@ use Pagekit\Package\Exception\ChecksumVerificationException;
 use Pagekit\Package\Exception\DownloadErrorException;
 use Pagekit\Package\Exception\NotWritableException;
 use Pagekit\Package\Exception\UnauthorizedDownloadException;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Exception;
 
 /**

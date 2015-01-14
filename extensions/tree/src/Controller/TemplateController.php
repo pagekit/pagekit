@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 /**
  * @Access(admin=true)

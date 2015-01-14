@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Filter;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 class AccessFilter extends FilterIterator
 {

@@ -7,7 +7,7 @@ use Pagekit\Blog\Entity\Post;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;

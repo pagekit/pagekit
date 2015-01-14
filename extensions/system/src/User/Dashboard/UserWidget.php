@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Dashboard;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\User\Entity\User;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;

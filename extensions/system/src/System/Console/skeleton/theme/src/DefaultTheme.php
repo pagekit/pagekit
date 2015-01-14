@@ -2,7 +2,7 @@
 
 namespace %NAMESPACE%;
 
-use Pagekit\Framework\Application;
+use Pagekit\Application;
 use Pagekit\Theme\Theme;
 
 class %CLASSNAME% extends Theme

@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 
 /**
  * @Access("system: manage extensions", admin=true)

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Extension;
 
-use Pagekit\Framework\Application as App;
+use Pagekit\Application as App;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
 use Pagekit\System\Package\Exception\InvalidNameException;
 use Pagekit\System\Package\PackageManager;
