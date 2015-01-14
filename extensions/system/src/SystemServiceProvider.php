@@ -9,8 +9,6 @@ use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
-use Pagekit\Application;
-use Pagekit\Framework\ServiceProviderInterface;
 use Pagekit\System\Migration\FilesystemLoader;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
