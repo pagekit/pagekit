@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\CommentsTrait;
-use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Component\Database\ORM\ModelTrait;
 use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
@@ -237,7 +236,7 @@ class Post
      */
     public static function updateCommentInfo($id)
     {
-        $query = Comment::where(['post_id' => $id, 'status' => CommentInterface::STATUS_APPROVED]);
+        $query = Comment::where(['post_id' => $id, 'status' => Comment::STATUS_APPROVED]);
 
         self::where(compact('id'))->update([
                 'comment_count' => $query->count()
