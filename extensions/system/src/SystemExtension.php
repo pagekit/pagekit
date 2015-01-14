@@ -33,7 +33,6 @@ use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\UserProvider;
 use Pagekit\Widget\Event\WidgetListener;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -84,10 +83,6 @@ class SystemExtension extends Extension
             }
 
             return $user;
-        };
-
-        $app['users'] = function() {
-            return new UserProvider;
         };
 
         $app['permissions'] = function($app) {

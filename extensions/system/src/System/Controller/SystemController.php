@@ -43,7 +43,7 @@ class SystemController extends Controller
                 throw new Exception('Missing order data.');
             }
 
-            $user = $this['users']->get($this['user']->getId());
+            $user = User::find($this['user']->getId());
             $user->set('admin.menu', $order);
 
             User::save($user);

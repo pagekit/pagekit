@@ -5,13 +5,10 @@ namespace Pagekit\User\Auth;
 use Pagekit\Component\Auth\Encoder\PasswordEncoderInterface;
 use Pagekit\Component\Auth\UserInterface;
 use Pagekit\Component\Auth\UserProviderInterface;
-use Pagekit\Framework\ApplicationTrait;
 use Pagekit\User\Entity\User;
 
-class UserProvider implements UserProviderInterface, \ArrayAccess
+class UserProvider implements UserProviderInterface
 {
-    use ApplicationTrait;
-
     /**
      * @var PasswordEncoderInterface
      */
@@ -32,7 +29,7 @@ class UserProvider implements UserProviderInterface, \ArrayAccess
      */
     public function find($id)
     {
-        return $this['users']->get($id);
+        return User::find($id);
     }
 
     /**
@@ -40,7 +37,7 @@ class UserProvider implements UserProviderInterface, \ArrayAccess
      */
     public function findByUsername($username)
     {
-        return $this['users']->getByUsername($username);
+        return User::findByUsername($username);
     }
 
     /**
