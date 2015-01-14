@@ -5,7 +5,6 @@ namespace Pagekit\Menu\Event;
 use Pagekit\Application as App;
 use Pagekit\Cache\CacheInterface;
 use Pagekit\Menu\Entity\Item;
-use Pagekit\Menu\Model\ItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -85,7 +84,7 @@ class MenuListener implements EventSubscriberInterface
     {
         if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
             $this->cacheEntries = ['paths' => [], 'patterns' => []];
-            foreach (Item::where(['status' => ItemInterface::STATUS_ENABLED])->get() as $item) {
+            foreach (Item::where(['status' => Item::STATUS_ENABLED])->get() as $item) {
                 if (!$item->getPages()) {
                     $this->cacheEntries['paths'][strtok(strtok($item->getUrl(), '?'), '#')][$item->getId()] = $item->getUrl();
                 } else {
