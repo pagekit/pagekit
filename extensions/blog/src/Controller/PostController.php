@@ -103,7 +103,7 @@ class PostController extends Controller
     {
         try {
 
-            if (!$post = Post::query()->where(compact('id'))->related('user')->first()) {
+            if (!$post = Post::where(compact('id'))->related('user')->first()) {
                 throw new Exception(__('Invalid post id.'));
             }
 

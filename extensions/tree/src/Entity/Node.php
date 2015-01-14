@@ -143,7 +143,7 @@ class Node implements NodeInterface, \JsonSerializable
             $this->slug = $this->getTitle();
         }
 
-        while (self::query()->where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
+        while (self::where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
             if ($id) $query->where('id <> ?', [$id]);
         })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
@@ -161,7 +161,7 @@ class Node implements NodeInterface, \JsonSerializable
 
         if ($this->id) {
             // Update children's paths
-            foreach (self::query()->where('parent_id = ?', [$this->id])->get() as $child) {
+            foreach (self::where('parent_id = ?', [$this->id])->get() as $child) {
                 if (0 !== strpos($child->getPath(), $this->getPath().'/')) {
                     $child->save();
                 }

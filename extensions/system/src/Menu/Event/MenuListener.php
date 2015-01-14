@@ -85,7 +85,7 @@ class MenuListener implements EventSubscriberInterface
     {
         if (false === $this->cacheEntries = $this->cache->fetch($this->cacheKey)) {
             $this->cacheEntries = ['paths' => [], 'patterns' => []];
-            foreach (Item::query()->where(['status' => ItemInterface::STATUS_ENABLED])->get() as $item) {
+            foreach (Item::where(['status' => ItemInterface::STATUS_ENABLED])->get() as $item) {
                 if (!$item->getPages()) {
                     $this->cacheEntries['paths'][strtok(strtok($item->getUrl(), '?'), '#')][$item->getId()] = $item->getUrl();
                 } else {

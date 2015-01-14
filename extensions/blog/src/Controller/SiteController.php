@@ -53,7 +53,7 @@ class SiteController extends Controller
             $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
-        $query = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
         if (!$limit = $this->extension->getParams('posts_per_page')) {
             $limit = 10;
@@ -96,7 +96,7 @@ class SiteController extends Controller
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
                 and $minidle = $this->extension->getParams('comments.minidle')
-                and $comment = Comment::query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
+                and $comment = Comment::where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
@@ -106,7 +106,7 @@ class SiteController extends Controller
                 }
             }
 
-            if (!$post = Post::query()->where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
+            if (!$post = Post::where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
@@ -129,7 +129,7 @@ class SiteController extends Controller
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
-            $approved_once = (boolean)Comment::query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+            $approved_once = (boolean)Comment::where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
@@ -175,7 +175,7 @@ class SiteController extends Controller
             throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
-        $query = Comment::query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
+        $query = Comment::where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
         if (App::user()->isAuthenticated()) {
             $query->orWhere(function ($query) {
@@ -208,11 +208,11 @@ class SiteController extends Controller
             'selfLink'    => App::url()->route('@blog/site/feed', [], true)
         ]);
 
-        if ($last = Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+        if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
             $feed->setDate($last->getModified());
         }
 
-        foreach (Post::query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),

@@ -58,7 +58,7 @@ class RouteListener implements EventSubscriberInterface
 
             $nodes = [];
             $types = App::get('tree.types');
-            foreach (Node::query()->where(['status = ?'], [1])->get() as $node) {
+            foreach (Node::where(['status = ?'], [1])->get() as $node) {
 
                 if (!$type = $types[$node->getType()]) {
                     continue;
