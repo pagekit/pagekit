@@ -6,7 +6,6 @@ use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
-use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
@@ -53,7 +52,7 @@ class CommentController extends Controller
             $query->where(['status = ?'], [intval($filter['status'])]);
         } else {
             $query->where(function($query) use ($filter) {
-                $query->orWhere(['status = ?', 'status = ?'], [CommentInterface::STATUS_APPROVED, CommentInterface::STATUS_PENDING]);
+                $query->orWhere(['status = ?', 'status = ?'], [Comment::STATUS_APPROVED, Comment::STATUS_PENDING]);
             });
         }
 
@@ -72,7 +71,7 @@ class CommentController extends Controller
         if ($comments) {
             $pending = App::db()->createQueryBuilder()
                 ->from('@blog_comment')
-                ->where(['status' => CommentInterface::STATUS_PENDING])
+                ->where(['status' => Comment::STATUS_PENDING])
                 ->whereIn('post_id', array_unique(array_map(function($comment) { return $comment->getPostId(); }, $comments)))
                 ->groupBy('post_id')
                 ->execute('post_id, count(id)')
@@ -136,7 +135,7 @@ class CommentController extends Controller
                 $comment->setAuthor($user->getName());
                 $comment->setEmail($user->getEmail());
                 $comment->setUrl($user->getUrl());
-                $comment->setStatus(CommentInterface::STATUS_APPROVED);
+                $comment->setStatus(Comment::STATUS_APPROVED);
                 $comment->setPostId($parent->getPostId());
                 $comment->setParent($parent);
             }

@@ -3,8 +3,8 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Blog\BlogExtension;
+use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
-use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Framework\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
@@ -62,7 +62,7 @@ class PostController extends Controller
         if ($posts) {
             $pending = App::db()->createQueryBuilder()
                 ->from('@blog_comment')
-                ->where(['status' => CommentInterface::STATUS_PENDING])
+                ->where(['status' => Comment::STATUS_PENDING])
                 ->whereIn('post_id', array_keys($posts))
                 ->groupBy('post_id')
                 ->execute('post_id, count(id)')

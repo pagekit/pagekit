@@ -32,7 +32,6 @@ use Pagekit\User\Event\AuthorizationListener;
 use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
-use Pagekit\User\Model\RoleInterface;
 use Pagekit\Widget\Event\WidgetListener;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -78,7 +77,7 @@ class SystemExtension extends Extension
 
             if (!$user = $app['auth']->getUser()) {
                 $user  = new UserEntity;
-                $roles = Role::where(['id' => RoleInterface::ROLE_ANONYMOUS])->get();
+                $roles = Role::where(['id' => Role::ROLE_ANONYMOUS])->get();
                 $user->setRoles($roles);
             }
 

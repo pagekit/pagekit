@@ -7,8 +7,6 @@ use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
 
 /**
  * @Route("/user/registration")
@@ -92,8 +90,8 @@ class RegistrationController extends Controller
             $user->setUsername($username);
             $user->setEmail($email);
             $user->setPassword(App::get('auth.password')->hash($password));
-            $user->setStatus(UserInterface::STATUS_BLOCKED);
-            $user->setRoles(Role::where(['id' => RoleInterface::ROLE_AUTHENTICATED])->get());
+            $user->setStatus(User::STATUS_BLOCKED);
+            $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 
             $token = App::get('auth.random')->generateString(32);
             $admin = App::option()->get('system:user.registration') == 'approval';
@@ -109,7 +107,7 @@ class RegistrationController extends Controller
 
             } else {
 
-                $user->setStatus(UserInterface::STATUS_ACTIVE);
+                $user->setStatus(User::STATUS_ACTIVE);
 
             }
 
@@ -163,7 +161,7 @@ class RegistrationController extends Controller
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => UserInterface::STATUS_BLOCKED, 'access IS NULL'])->first()) {
+        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             App::message()->error(__('Invalid key.'));
             return $this->redirect('/');
         }
@@ -178,7 +176,7 @@ class RegistrationController extends Controller
         } else {
 
             $user->set('verified', true);
-            $user->setStatus(UserInterface::STATUS_ACTIVE);
+            $user->setStatus(User::STATUS_ACTIVE);
             $user->setActivation('');
             $this->sendWelcomeEmail($user);
 
