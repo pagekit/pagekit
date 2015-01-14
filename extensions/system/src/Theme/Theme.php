@@ -2,9 +2,9 @@
 
 namespace Pagekit\Theme;
 
+use Pagekit\Application as App;
 use Pagekit\View\Section\SectionManager;
 use Pagekit\View\ViewInterface;
-use Pagekit\Application as App;
 use Symfony\Component\Translation\Translator;
 
 class Theme

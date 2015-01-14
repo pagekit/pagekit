@@ -3,6 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
+use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
 use Pagekit\Package\Downloader\PackageDownloader;
 use Pagekit\Package\Exception\ArchiveExtractionException;
@@ -11,7 +12,6 @@ use Pagekit\Package\Exception\DownloadErrorException;
 use Pagekit\Package\Exception\NotWritableException;
 use Pagekit\Package\Exception\UnauthorizedDownloadException;
 use Pagekit\Package\Loader\JsonLoader;
-use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Exception;
 
 /**

@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Controller;
 
+use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
-use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 
 /**

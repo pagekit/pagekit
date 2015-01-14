@@ -2,9 +2,9 @@
 
 namespace Pagekit\Blog\Event;
 
+use Pagekit\Application as App;
 use Pagekit\Blog\UrlResolver;
 use Pagekit\Routing\Event\RouteCollectionEvent;
-use Pagekit\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class RouteListener implements EventSubscriberInterface

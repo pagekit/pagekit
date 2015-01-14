@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use Pagekit\Config\Config;
 use Pagekit\Application as App;
+use Pagekit\Config\Config;
 use Pagekit\Framework\Controller\Controller;
 
 /**

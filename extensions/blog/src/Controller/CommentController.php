@@ -2,11 +2,11 @@
 
 namespace Pagekit\Blog\Controller;
 
+use Pagekit\Application as App;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
-use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Controller;
 use Pagekit\Framework\Controller\Exception;
 

@@ -2,8 +2,8 @@
 
 namespace Pagekit\Editor;
 
-use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Application as App;
+use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\System\Event\TmplEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

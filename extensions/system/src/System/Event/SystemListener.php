@@ -2,13 +2,13 @@
 
 namespace Pagekit\System\Event;
 
+use Pagekit\Application as App;
 use Pagekit\Comment\CommentPlugin;
 use Pagekit\Content\Plugin\MarkdownPlugin;
 use Pagekit\Content\Plugin\SimplePlugin;
 use Pagekit\Content\Plugin\VideoPlugin;
 use Pagekit\Editor\Editor;
 use Pagekit\Editor\Templating\EditorHelper;
-use Pagekit\Application as App;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
@@ -51,7 +51,7 @@ class SystemListener implements EventSubscriberInterface
         App::get('tmpl.php')->addHelpers([$helper]);
         App::get('tmpl.razr')->addDirective(new FunctionDirective('editor', [$helper, 'render']));
 
-        $helper = new FinderHelper(App::getInstance());
+        $helper = new FinderHelper();
         App::get('tmpl.php')->addHelpers([$helper]);
         App::get('tmpl.razr')->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 

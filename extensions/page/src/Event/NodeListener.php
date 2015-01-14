@@ -3,8 +3,8 @@
 namespace Pagekit\Page\Event;
 
 use Pagekit\Database\Event\EntityEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Pagekit\Page\Entity\Page;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class NodeListener implements EventSubscriberInterface
 {

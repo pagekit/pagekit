@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Dashboard;
 
+use Pagekit\Application as App;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
-use Pagekit\Application as App;
 
 class WeatherWidget implements TypeInterface
 {

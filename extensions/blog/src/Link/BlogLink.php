@@ -2,8 +2,8 @@
 
 namespace Pagekit\Blog\Link;
 
-use Pagekit\Blog\Entity\Post;
 use Pagekit\Application as App;
+use Pagekit\Blog\Entity\Post;
 use Pagekit\System\Link\LinkInterface;
 
 class BlogLink implements LinkInterface

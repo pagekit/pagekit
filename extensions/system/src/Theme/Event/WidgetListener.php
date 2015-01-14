@@ -2,8 +2,8 @@
 
 namespace Pagekit\Theme\Event;
 
-use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Application as App;
+use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Widget\Event\WidgetCopyEvent;
 use Pagekit\Widget\Event\WidgetEditEvent;
 use Pagekit\Widget\Event\WidgetEvent;
@@ -26,10 +26,9 @@ class WidgetListener implements EventSubscriberInterface
             return;
         }
 
-        $view     = App::view();
         $settings = $this->getSettings();
-        $event->addSettings(__('Theme'), function($widget) use ($view, $tmpl, $theme, $settings) {
-            return $view->render($tmpl, compact('widget', 'settings', 'theme'));
+        $event->addSettings(__('Theme'), function($widget) use ($tmpl, $theme, $settings) {
+            return App::view()->render($tmpl, compact('widget', 'settings', 'theme'));
         });
     }
 

@@ -2,9 +2,9 @@
 
 namespace Pagekit\User\Widget;
 
+use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
-use Pagekit\Application as App;
 use Pagekit\Widget\Model\TypeInterface;
 use Pagekit\Widget\Model\WidgetInterface;
 

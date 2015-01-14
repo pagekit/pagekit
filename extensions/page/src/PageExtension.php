@@ -2,8 +2,8 @@
 
 namespace Pagekit\Page;
 
-use Pagekit\Extension\Extension;
 use Pagekit\Application as App;
+use Pagekit\Extension\Extension;
 use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;

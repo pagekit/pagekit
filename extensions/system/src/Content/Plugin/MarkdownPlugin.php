@@ -2,8 +2,8 @@
 
 namespace Pagekit\Content\Plugin;
 
-use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Application as App;
+use Pagekit\Content\Event\ContentEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MarkdownPlugin implements EventSubscriberInterface

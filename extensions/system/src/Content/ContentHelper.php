@@ -2,8 +2,8 @@
 
 namespace Pagekit\Content;
 
-use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Application as App;
+use Pagekit\Content\Event\ContentEvent;
 
 class ContentHelper
 {

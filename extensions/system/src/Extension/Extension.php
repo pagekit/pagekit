@@ -2,8 +2,8 @@
 
 namespace Pagekit\Extension;
 
-use Pagekit\Routing\Controller\ControllerCollection;
 use Pagekit\Application as App;
+use Pagekit\Routing\Controller\ControllerCollection;
 
 class Extension
 {

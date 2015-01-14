@@ -2,9 +2,9 @@
 
 namespace Pagekit\User\Event;
 
+use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthenticateEvent;
 use Pagekit\Auth\Exception\AuthException;
-use Pagekit\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LoginAttemptListener implements EventSubscriberInterface

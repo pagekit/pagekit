@@ -3,13 +3,13 @@
 namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
+use Pagekit\Application as App;
 use Pagekit\Package\Downloader\PackageDownloader;
 use Pagekit\Package\Exception\ArchiveExtractionException;
 use Pagekit\Package\Exception\ChecksumVerificationException;
 use Pagekit\Package\Exception\DownloadErrorException;
 use Pagekit\Package\Exception\NotWritableException;
 use Pagekit\Package\Exception\UnauthorizedDownloadException;
-use Pagekit\Application as App;
 use Pagekit\Framework\Controller\Exception;
 
 /**
