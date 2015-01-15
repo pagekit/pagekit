@@ -26,7 +26,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return new FileLocator($app['path']);
         };
 
-        $app['finder'] = $app->factory(function() {
+        $app->factory('finder', function() {
             return Finder::create();
         });
 
