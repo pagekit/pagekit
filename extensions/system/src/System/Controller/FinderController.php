@@ -183,7 +183,7 @@ class FinderController
 
     protected function getMode($path)
     {
-        $mode = App::events()->dispatch('system.finder', new FileAccessEvent)->mode($path);
+        $mode = App::trigger('system.finder', new FileAccessEvent)->mode($path);
 
         if ('w' == $mode && !is_writable($path)) {
             $mode = 'r';

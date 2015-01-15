@@ -136,7 +136,7 @@ class SiteController extends Controller
             }
 
             // check for spam
-            App::events()->dispatch('system.comment.spam_check', new CommentEvent($comment));
+            App::trigger('system.comment.spam_check', new CommentEvent($comment));
 
             $comment->save($data);
 

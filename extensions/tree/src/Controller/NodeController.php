@@ -88,7 +88,7 @@ class NodeController
                 'roles' => Role::findAll()
             ];
 
-            $this->config = App::events()->dispatch('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
+            $this->config = App::trigger('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
 
         } catch (Exception $e) {
 

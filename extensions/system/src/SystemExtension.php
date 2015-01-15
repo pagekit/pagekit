@@ -43,25 +43,25 @@ class SystemExtension extends Extension
     public function boot(App $app)
     {
         if (!(isset($app['config']) ? $app['config']['app.debug'] : true)) {
-            $app['events']->addSubscriber(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
+            $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
-        $app['events']->addSubscriber(new AccessListener);
-        $app['events']->addSubscriber(new AdminMenuListener);
-        $app['events']->addSubscriber(new AuthorizationListener);
-        $app['events']->addSubscriber(new CanonicalListener);
-        $app['events']->addSubscriber(new FrontpageListener);
-        $app['events']->addSubscriber(new LocaleListener);
-        $app['events']->addSubscriber(new LoginAttemptListener);
-        $app['events']->addSubscriber(new MaintenanceListener);
-        $app['events']->addSubscriber(new MenuListener);
-        $app['events']->addSubscriber(new MigrationListener);
-        $app['events']->addSubscriber(new ResponseListener);
-        $app['events']->addSubscriber(new SystemListener);
-        $app['events']->addSubscriber(new UserListener);
-        $app['events']->addSubscriber(new WidgetListener);
-        $app['events']->addSubscriber(new ThemeListener);
-        $app['events']->addSubscriber(new ThemeWidgetListener);
+        $app->subscribe(new AccessListener);
+        $app->subscribe(new AdminMenuListener);
+        $app->subscribe(new AuthorizationListener);
+        $app->subscribe(new CanonicalListener);
+        $app->subscribe(new FrontpageListener);
+        $app->subscribe(new LocaleListener);
+        $app->subscribe(new LoginAttemptListener);
+        $app->subscribe(new MaintenanceListener);
+        $app->subscribe(new MenuListener);
+        $app->subscribe(new MigrationListener);
+        $app->subscribe(new ResponseListener);
+        $app->subscribe(new SystemListener);
+        $app->subscribe(new UserListener);
+        $app->subscribe(new WidgetListener);
+        $app->subscribe(new ThemeListener);
+        $app->subscribe(new ThemeWidgetListener);
 
         parent::boot($app);
 
@@ -83,7 +83,7 @@ class SystemExtension extends Extension
         };
 
         $app['permissions'] = function($app) {
-            return $app['events']->dispatch('system.permission', new PermissionEvent)->getPermissions();
+            return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
         };
 
         $app['content'] = function() {

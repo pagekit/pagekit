@@ -55,11 +55,11 @@ class SystemListener implements EventSubscriberInterface
         App::get('tmpl.php')->addHelpers([$helper]);
         App::get('tmpl.razr')->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 
-        App::events()->addSubscriber(new CommentPlugin);
-        App::events()->addSubscriber(new Editor);
-        App::events()->addSubscriber(new MarkdownPlugin);
-        App::events()->addSubscriber(new SimplePlugin);
-        App::events()->addSubscriber(new VideoPlugin);
+        App::subscribe(new CommentPlugin);
+        App::subscribe(new Editor);
+        App::subscribe(new MarkdownPlugin);
+        App::subscribe(new SimplePlugin);
+        App::subscribe(new VideoPlugin);
 
         App::menus()->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
         App::menus()->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
@@ -84,7 +84,7 @@ class SystemListener implements EventSubscriberInterface
         App::menus()->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
         App::menus()->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        App::events()->dispatch('system.admin_menu', new MenuEvent($menu));
+        App::trigger('system.admin_menu', new MenuEvent($menu));
 
         App::set('admin.menu', App::menus()->getTree($menu, ['access' => true]));
     }

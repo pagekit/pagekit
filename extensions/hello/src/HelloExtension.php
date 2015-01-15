@@ -17,7 +17,7 @@ class HelloExtension extends Extension
     {
         parent::boot($app);
 
-        $app['events']->addSubscriber(new HelloListener());
+        $app->subscribe(new HelloListener());
 
         $app->on('system.widget', function(RegisterWidgetEvent $event) {
             $event->register('Pagekit\Hello\HelloWidget');
@@ -32,7 +32,7 @@ class HelloExtension extends Extension
         });
 
         // dispatch event (check Hello\Event\HelloListener to see how subscribers work)
-        $app['events']->dispatch('hello.boot');
+        $app->trigger('hello.boot');
     }
 
     public function enable()

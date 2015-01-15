@@ -16,6 +16,6 @@ class ContentHelper
      */
     public function applyPlugins($content, $parameters = [])
     {
-        return App::events()->dispatch('content.plugins', new ContentEvent($content, $parameters))->getContent();
+        return App::trigger('content.plugins', new ContentEvent($content, $parameters))->getContent();
     }
 }

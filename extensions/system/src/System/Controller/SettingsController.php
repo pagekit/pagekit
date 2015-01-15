@@ -97,7 +97,7 @@ class SettingsController extends Controller
         }
 
         if ($data['cache.cache.storage'] != App::config()->get('cache.cache.storage') || $data['app.debug'] != App::config()->get('app.debug')) {
-            App::system()->clearCache();
+            App::extension('system')->clearCache();
         }
 
         if (function_exists('opcache_invalidate')) {

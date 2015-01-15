@@ -28,7 +28,7 @@ class WidgetsController extends Controller
      */
     public function __construct()
     {
-        $this->positions = App::events()->dispatch('system.positions', new RegisterPositionEvent)->getPositions();
+        $this->positions = App::trigger('system.positions', new RegisterPositionEvent)->getPositions();
     }
 
     /**
@@ -103,7 +103,7 @@ class WidgetsController extends Controller
 
             $widget->save($data);
 
-            App::events()->dispatch('system.widget.save', new WidgetEvent($widget));
+            App::trigger('system.widget.save', new WidgetEvent($widget));
 
             $id = $widget->getId();
 
@@ -151,7 +151,7 @@ class WidgetsController extends Controller
             $copy->setTitle($widget->getTitle().' - '.__('Copy'));
             $copy->save();
 
-            App::events()->dispatch('system.widget.copy', new WidgetCopyEvent($widget, $copy));
+            App::trigger('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
         return $this->redirect('@system/widgets');
@@ -207,7 +207,7 @@ class WidgetsController extends Controller
 
     protected function triggerEditEvent($widget)
     {
-        $event = App::events()->dispatch('system.widget.edit', new WidgetEditEvent($widget));
+        $event = App::trigger('system.widget.edit', new WidgetEditEvent($widget));
 
         return $event->getSettings();
     }

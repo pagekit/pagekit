@@ -75,11 +75,11 @@ class ProfileController extends Controller
             $user->setName($name);
             $user->setEmail($email);
 
-            App::events()->dispatch('system.user.profile.save', new ProfileSaveEvent($user, $data));
+            App::trigger('system.user.profile.save', new ProfileSaveEvent($user, $data));
 
             $user->save();
 
-            App::events()->dispatch('system.user.profile.saved', new ProfileSaveEvent($user, $data));
+            App::trigger('system.user.profile.saved', new ProfileSaveEvent($user, $data));
 
             App::message()->success(__('Profile updated.'));
 

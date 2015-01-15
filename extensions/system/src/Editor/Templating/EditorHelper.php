@@ -2,22 +2,12 @@
 
 namespace Pagekit\Editor\Templating;
 
+use Pagekit\Application as App;
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 class EditorHelper extends Helper
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $events;
-
-    public function __construct(EventDispatcherInterface $events)
-    {
-        $this->events = $events;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -37,7 +27,7 @@ class EditorHelper extends Helper
      */
     public function render($name, $value, array $attributes = [], $parameters = [])
     {
-        if ($editor = $this->events->dispatch('editor.load', new EditorLoadEvent)->getEditor()) {
+        if ($editor = App::trigger('editor.load', new EditorLoadEvent)->getEditor()) {
             return $editor->render($value, array_merge($attributes, compact('name')));
         }
 

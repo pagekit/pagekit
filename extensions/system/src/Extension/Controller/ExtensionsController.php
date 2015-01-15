@@ -121,7 +121,7 @@ class ExtensionsController extends Controller
 
             $this->disable($extension);
 
-            App::system()->clearCache();
+            App::extension('system')->clearCache();
 
             return ['message' => __('Extension disabled.')];
 
@@ -157,7 +157,7 @@ class ExtensionsController extends Controller
 
             $this->extensions->getInstaller()->uninstall($this->extensions->getRepository()->findPackage($name));
 
-            App::system()->clearCache();
+            App::extension('system')->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
 
@@ -178,7 +178,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = App::events()->dispatch('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
+            $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
 
             $title = $this->extensions->getRepository()->findPackage($extension->getName())->getTitle();
 
@@ -202,7 +202,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = App::events()->dispatch('system.extension.save', new ExtensionEvent($extension, $params));
+            $event = App::trigger('system.extension.save', new ExtensionEvent($extension, $params));
 
             App::option()->set("$name:settings", $event->getParams(), true);
             App::message()->success(__('Settings saved.'));

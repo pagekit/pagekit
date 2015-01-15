@@ -76,7 +76,7 @@ class LinkController
     protected function getTypes($context = '')
     {
         if (null == $this->types) {
-            $this->types = App::events()->dispatch('system.link', new LinkEvent($context))->getLinks();
+            $this->types = App::trigger('system.link', new LinkEvent($context))->getLinks();
         }
 
         return $this->types;

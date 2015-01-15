@@ -20,7 +20,7 @@ class PageExtension extends Extension
     {
         parent::boot($app);
 
-        $app['events']->addSubscriber(new NodeListener);
+        $app->subscribe(new NodeListener);
 
         $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');

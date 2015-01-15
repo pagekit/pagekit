@@ -79,7 +79,7 @@ class SystemController extends Controller
      */
     public function localeAction()
     {
-        App::events()->dispatch('system.locale', $event = new LocaleEvent);
+        App::trigger('system.locale', $event = new LocaleEvent);
 
         return $event->getMessages();
     }
@@ -91,7 +91,7 @@ class SystemController extends Controller
     public function tmplAction($templates = '')
     {
         $response = [];
-        $event = App::events()->dispatch('system.tmpl', new TmplEvent);
+        $event = App::trigger('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
@@ -109,7 +109,7 @@ class SystemController extends Controller
      */
     public function clearCacheAction($caches)
     {
-        App::system()->clearCache($caches);
+        App::extension('system')->clearCache($caches);
 
         return App::request()->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
     }

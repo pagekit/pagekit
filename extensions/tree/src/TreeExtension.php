@@ -18,11 +18,11 @@ class TreeExtension extends Extension
     {
         parent::boot($app);
 
-        $app['events']->addSubscriber(new JsonRequestListener);
-        $app['events']->addSubscriber(new RouteListener);
+        $app->subscribe(new JsonRequestListener);
+        $app->subscribe(new RouteListener);
 
         $app['tree.types'] = function($app) {
-            return $app['events']->dispatch('tree.types', new NodeTypeEvent);
+            return $app->trigger('tree.types', new NodeTypeEvent);
         };
 
         $app->on('tree.types', function (NodeTypeEvent $event) {

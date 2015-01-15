@@ -46,7 +46,7 @@ class WidgetListener implements EventSubscriberInterface
      */
     public function onSystemLoaded()
     {
-        TypesTrait::setWidgetTypes(App::events()->dispatch('system.widget', new RegisterWidgetEvent)->getTypes());
+        TypesTrait::setWidgetTypes(App::trigger('system.widget', new RegisterWidgetEvent)->getTypes());
     }
 
     /**

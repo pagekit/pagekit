@@ -25,7 +25,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->types = App::events()->dispatch('system.dashboard', new RegisterWidgetEvent);
+        $this->types = App::trigger('system.dashboard', new RegisterWidgetEvent);
     }
 
     /**
@@ -221,7 +221,7 @@ class DashboardController extends Controller
      */
     protected function getWidgets()
     {
-        return App::user()->get('dashboard', App::system()->getConfig('dashboard.default'));
+        return App::user()->get('dashboard', App::extension('system')->getConfig('dashboard.default'));
     }
 
     protected function chunkList($list, $p) {

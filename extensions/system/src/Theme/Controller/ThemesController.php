@@ -117,7 +117,7 @@ class ThemesController extends Controller
             }
 
             $this->themes->getInstaller()->uninstall($theme);
-            App::system()->clearCache();
+            App::extension('system')->clearCache();
 
             return ['message' => __('Theme uninstalled.')];
 
@@ -138,7 +138,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = App::events()->dispatch('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
+            $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
 
             return App::view()->render($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 
@@ -161,7 +161,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = App::events()->dispatch('system.theme.save', new ThemeEvent($theme, $params));
+            $event = App::trigger('system.theme.save', new ThemeEvent($theme, $params));
 
             App::option()->set("$name:settings", $event->getParams(), true);
             App::message()->success(__('Settings saved.'));

@@ -163,7 +163,7 @@ class CommentController extends Controller
                 $comment->setStatus($status);
                 $comment->save();
 
-                App::events()->dispatch('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
+                App::trigger('system.comment.spam_mark', new MarkSpamEvent($comment, $previous));
             }
         }
 

@@ -44,7 +44,7 @@ class MenuListener implements EventSubscriberInterface
      */
     public function onSystemSite(GetResponseEvent $event)
     {
-        $event->getRequest()->attributes->set('_menu', App::events()->dispatch('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', App::trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
