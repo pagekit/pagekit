@@ -3,7 +3,7 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\Database\Event\EntityEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class FrontpageListener implements EventSubscriberInterface

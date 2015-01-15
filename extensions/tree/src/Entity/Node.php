@@ -3,7 +3,6 @@
 namespace Pagekit\Tree\Entity;
 
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\Tree\Model\NodeInterface;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
@@ -129,10 +128,8 @@ class Node implements NodeInterface, \JsonSerializable
 
     /**
      * @PreSave
-     *
-     * @param EntityEvent $event
      */
-    public function preSave(EntityEvent $event)
+    public function preSave()
     {
         $db = self::getConnection();
 

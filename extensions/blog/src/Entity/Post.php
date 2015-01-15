@@ -4,7 +4,6 @@ namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\CommentsTrait;
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
@@ -224,7 +223,7 @@ class Post
     /**
      * @PreDelete
      */
-    public function preDelete(EntityEvent $event)
+    public function preDelete()
     {
         self::getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
     }

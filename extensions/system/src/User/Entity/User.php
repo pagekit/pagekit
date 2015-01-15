@@ -3,7 +3,6 @@
 namespace Pagekit\User\Entity;
 
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\Framework\Database\Event\EntityEvent;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\User as BaseUser;
 use Pagekit\User\Model\UserInterface;
@@ -164,19 +163,18 @@ class User extends BaseUser
      *
      * @PostSave
      */
-    public function postSave(EntityEvent $event)
+    public function postSave()
     {
         if (is_array($this->roles)) {
 
-            $connection = $event->getConnection();
-            $connection->delete('@system_user_role', ['user_id' => $this->getId()]);
+            self::getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
 
             if (!array_key_exists(Role::ROLE_AUTHENTICATED, $this->roles)) {
-                $this->roles[Role::ROLE_AUTHENTICATED] = $event->getEntityManager()->find('Pagekit\User\Entity\Role', Role::ROLE_AUTHENTICATED);
+                $this->roles[Role::ROLE_AUTHENTICATED] = self::getManager()->find('Pagekit\User\Entity\Role', Role::ROLE_AUTHENTICATED);
             }
 
             foreach ($this->roles as $role) {
-                $connection->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
+                self::getConnection()->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
             }
         }
     }
