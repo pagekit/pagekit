@@ -3,7 +3,7 @@
 namespace Pagekit\Comment\Event;
 
 use Pagekit\Comment\Model\CommentInterface;
-use Pagekit\Framework\Event\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 class CommentEvent extends Event
 {

@@ -3,7 +3,7 @@
 namespace Pagekit\Editor\Event;
 
 use Pagekit\Editor\EditorInterface;
-use Pagekit\Framework\Event\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 class EditorLoadEvent extends Event
 {

@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Link;
 
-abstract class Route extends Link
+abstract class Route implements LinkInterface
 {
     /**
      * Returns the route for this link type

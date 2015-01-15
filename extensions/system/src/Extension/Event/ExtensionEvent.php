@@ -3,7 +3,7 @@
 namespace Pagekit\Extension\Event;
 
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Event\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 class ExtensionEvent extends Event
 {

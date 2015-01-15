@@ -2,9 +2,9 @@
 
 namespace Pagekit\User\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\UserInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 class ProfileSaveEvent extends Event
 {

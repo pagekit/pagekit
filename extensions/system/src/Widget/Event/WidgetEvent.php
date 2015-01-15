@@ -2,8 +2,8 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\Entity\Widget;
+use Symfony\Component\EventDispatcher\Event;
 
 class WidgetEvent extends Event
 {

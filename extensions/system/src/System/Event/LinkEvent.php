@@ -2,8 +2,8 @@
 
 namespace Pagekit\System\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\System\Link\LinkInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 class LinkEvent extends Event implements \IteratorAggregate
 {
@@ -15,7 +15,7 @@ class LinkEvent extends Event implements \IteratorAggregate
     /**
      * @var LinkInterface[]
      */
-    protected $parameters;
+    protected $links = [];
 
     public function __construct($context = '')
     {
@@ -48,9 +48,9 @@ class LinkEvent extends Event implements \IteratorAggregate
             $link = new $link;
         }
 
-        $this->parameters[$link->getId()] = $link;
+        $this->links[$link->getId()] = $link;
 
-        uasort($this->parameters, function(LinkInterface $typeA, LinkInterface $typeB) { return strcmp($typeA->getLabel(), $typeB->getLabel()); });
+        uasort($this->links, function(LinkInterface $typeA, LinkInterface $typeB) { return strcmp($typeA->getLabel(), $typeB->getLabel()); });
     }
 
     /**
@@ -58,6 +58,6 @@ class LinkEvent extends Event implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->parameters);
+        return new \ArrayIterator($this->links);
     }
 }

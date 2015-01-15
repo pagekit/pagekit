@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Event;
 
-use Pagekit\Framework\Event\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 class ActiveMenuEvent extends Event
 {

@@ -2,8 +2,8 @@
 
 namespace Pagekit\Menu\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Menu\Model\MenuInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 class MenuEvent extends Event
 {

@@ -2,8 +2,8 @@
 
 namespace Pagekit\Theme\Event;
 
-use Pagekit\Framework\Event\Event;
 use Pagekit\Theme\Theme;
+use Symfony\Component\EventDispatcher\Event;
 
 class ThemeEvent extends Event
 {
