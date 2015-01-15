@@ -2,8 +2,8 @@
 
 namespace Pagekit\Widget\Event;
 
+use Pagekit\Framework\Event\Event;
 use Pagekit\Widget\Model\TypeInterface;
-use Symfony\Component\EventDispatcher\Event;
 
 class RegisterWidgetEvent extends Event implements \IteratorAggregate
 {
