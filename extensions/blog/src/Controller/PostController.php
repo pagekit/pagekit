@@ -24,9 +24,9 @@ class PostController extends Controller
     /**
      * Constructor.
      */
-    public function __construct(BlogExtension $extension)
+    public function __construct()
     {
-        $this->extension = $extension;
+        $this->extension = App::extensions()->get('blog');
     }
 
     /**

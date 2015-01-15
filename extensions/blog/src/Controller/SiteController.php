@@ -26,12 +26,10 @@ class SiteController extends Controller
 
     /**
      * Constructor.
-     *
-     * @param BlogExtension $extension
      */
-    public function __construct(BlogExtension $extension)
+    public function __construct()
     {
-        $this->extension = $extension;
+        $this->extension = App::extensions()->get('blog');
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 

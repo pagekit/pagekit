@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
@@ -15,19 +14,6 @@ use Pagekit\Framework\Controller\Exception;
  */
 class CommentController extends Controller
 {
-    /**
-     * @var BlogExtension
-     */
-    protected $extension;
-
-    /**
-     * Constructor.
-     */
-    public function __construct(BlogExtension $extension)
-    {
-        $this->extension = $extension;
-    }
-
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
      * @Response("extensions/blog/views/admin/comment/index.razr")
@@ -62,7 +48,7 @@ class CommentController extends Controller
             });
         }
 
-        $limit    = $this->extension->getParams('comments.comments_per_page');
+        $limit    = App::extensions()->get('blog')->getParams('comments.comments_per_page');
         $count    = $query->count();
         $total    = ceil($count / $limit);
         $page     = max(0, min($total - 1, $page));

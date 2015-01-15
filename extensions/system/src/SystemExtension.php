@@ -163,7 +163,7 @@ class SystemExtension extends Extension
      */
     public function clearCache(array $options = [])
     {
-        App::app()->on('kernel.terminate', function() use ($options) {
+        App::on('kernel.terminate', function() use ($options) {
             $this->doClearCache($options);
         }, -512);
     }
