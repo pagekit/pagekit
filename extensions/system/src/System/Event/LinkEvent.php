@@ -54,6 +54,14 @@ class LinkEvent extends Event implements \IteratorAggregate
     }
 
     /**
+     * @return \Pagekit\System\Link\LinkInterface[]
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getIterator()
