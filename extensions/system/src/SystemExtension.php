@@ -46,22 +46,24 @@ class SystemExtension extends Extension
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
-        $app->subscribe(new AccessListener);
-        $app->subscribe(new AdminMenuListener);
-        $app->subscribe(new AuthorizationListener);
-        $app->subscribe(new CanonicalListener);
-        $app->subscribe(new FrontpageListener);
-        $app->subscribe(new LocaleListener);
-        $app->subscribe(new LoginAttemptListener);
-        $app->subscribe(new MaintenanceListener);
-        $app->subscribe(new MenuListener);
-        $app->subscribe(new MigrationListener);
-        $app->subscribe(new ResponseListener);
-        $app->subscribe(new SystemListener);
-        $app->subscribe(new UserListener);
-        $app->subscribe(new WidgetListener);
-        $app->subscribe(new ThemeListener);
-        $app->subscribe(new ThemeWidgetListener);
+        $app->subscribe(
+            new AccessListener,
+            new AdminMenuListener,
+            new AuthorizationListener,
+            new CanonicalListener,
+            new FrontpageListener,
+            new LocaleListener,
+            new LoginAttemptListener,
+            new MaintenanceListener,
+            new MenuListener,
+            new MigrationListener,
+            new ResponseListener,
+            new SystemListener,
+            new UserListener,
+            new WidgetListener,
+            new ThemeListener,
+            new ThemeWidgetListener
+        );
 
         parent::boot($app);
 

@@ -23,9 +23,11 @@ class BlogExtension extends Extension
     {
         parent::boot($app);
 
-        $app->subscribe(new RouteListener);
-        $app->subscribe(new CommentListener);
-        $app->subscribe(new ReadmorePlugin);
+        $app->subscribe(
+            new RouteListener,
+            new CommentListener,
+            new ReadmorePlugin
+        );
 
         $app->on('system.init', function() use ($app) {
             $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/site');
