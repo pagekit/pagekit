@@ -135,7 +135,7 @@ class PackageController
 
     protected function installTheme($json, $package)
     {
-        $installer = App::themes()->getInstaller();
+        $installer = App::theme()->getInstaller();
 
         if ($installer->isInstalled($package)) {
             $installer->update($json);
@@ -150,8 +150,8 @@ class PackageController
             throw new Exception(__('Core extensions may not be installed.'));
         }
 
-        $installer = App::extensions()->getInstaller();
-        $extension = App::extensions()->get($name);
+        $installer = App::extension()->getInstaller();
+        $extension = App::extension($name);
 
         if ($installer->isInstalled($package)) {
 

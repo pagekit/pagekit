@@ -139,7 +139,7 @@ class InstallerController
                     'role_id' => RoleInterface::ROLE_ADMINISTRATOR
                 ]);
 
-                App::extensions()->get('system')->enable();
+                App::extension('system')->enable();
 
                 // sample data
                 $sql = file_get_contents('extensions/installer/sample_data.sql');

@@ -46,7 +46,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return $view;
         });
 
-        $app['extensions'] = function($app) {
+        $app['extension'] = function($app) {
 
             $loader     = new ExtensionLoader;
             $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
@@ -67,7 +67,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         foreach (array_unique($app['extensions.boot']) as $extension) {
             try {
-                $app['extensions']->load($extension)->boot($app);
+                $app['extension']->load($extension)->boot($app);
             } catch (ExtensionLoadException $e) {
                 $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
             }

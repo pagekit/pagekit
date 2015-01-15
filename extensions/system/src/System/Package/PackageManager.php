@@ -35,6 +35,17 @@ abstract class PackageManager implements \IteratorAggregate
     }
 
     /**
+     * Get shortcut.
+     *
+     * @see get()
+     * @return mixed|null
+     */
+    public function __invoke($name)
+    {
+        return $this->get($name);
+    }
+
+    /**
      * Gets an instance by name.
      *
      * @param  string $name

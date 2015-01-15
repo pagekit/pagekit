@@ -201,7 +201,7 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemPermission(PermissionEvent $event)
     {
-        foreach (App::extensions() as $extension) {
+        foreach (App::extension() as $extension) {
             if ($permissions = $extension->getConfig('permissions')) {
                 $event->setPermissions($extension->getName(), $permissions);
             }

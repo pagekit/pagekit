@@ -16,7 +16,7 @@ class FrontpageListener implements EventSubscriberInterface
         if ($frontpage = App::config()->get('app.frontpage')) {
             App::aliases()->add('/', $frontpage);
         } else {
-            App::callbacks()->get('/', '_frontpage', function() use ($frontpage) {
+            App::callbacks()->get('/', '_frontpage', function() {
                 return __('No Frontpage assigned.');
             });
         }

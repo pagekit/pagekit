@@ -16,11 +16,11 @@ class MarketplaceController
     {
         $packages = [];
 
-        foreach (App::extensions()->getRepository()->getPackages() as $package) {
+        foreach (App::extension()->getRepository()->getPackages() as $package) {
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        foreach (App::themes()->getRepository()->getPackages() as $package) {
+        foreach (App::theme()->getRepository()->getPackages() as $package) {
             $packages[$package->getName()] = $package->getVersion();
         }
 

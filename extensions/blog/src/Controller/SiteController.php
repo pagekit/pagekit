@@ -29,7 +29,7 @@ class SiteController extends Controller
      */
     public function __construct()
     {
-        $this->extension = App::extensions()->get('blog');
+        $this->extension = App::extension('blog');
 
         $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
 

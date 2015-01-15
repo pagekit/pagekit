@@ -21,7 +21,7 @@ class ThemesController extends Controller
      */
     public function __construct()
     {
-        $this->themes = App::themes();
+        $this->themes = App::theme();
         $this->api    = App::config()->get('api.url');
         $this->apiKey = App::option()->get('system:api.key');
     }

@@ -22,7 +22,7 @@ class ExtensionsController extends Controller
      */
     public function __construct()
     {
-        $this->extensions = App::extensions();
+        $this->extensions = App::extension();
         $this->api        = App::config()->get('api.url');
         $this->apiKey     = App::option()->get('system:api.key');
     }

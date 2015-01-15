@@ -67,9 +67,7 @@ class SystemExtension extends Extension
 
         $this->mergeOptions();
 
-        $app['system'] = $this;
-
-        $app['menus'] = function($app) {
+        $app['menus'] = function() {
             return new MenuProvider;
         };
 
@@ -152,7 +150,7 @@ class SystemExtension extends Extension
         }
 
         foreach (['blog', 'page'] as $extension) {
-            if ($extension = App::extensions()->get($extension)) {
+            if ($extension = App::extension($extension)) {
                 $extension->enable();
             }
         }

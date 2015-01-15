@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Framework\Controller\Controller;
@@ -16,19 +15,6 @@ use Pagekit\User\Entity\User;
  */
 class PostController extends Controller
 {
-    /**
-     * @var BlogExtension
-     */
-    protected $extension;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->extension = App::extensions()->get('blog');
-    }
-
     /**
      * @Request({"filter": "array", "page":"int"})
      * @Response("extensions/blog/views/admin/post/index.razr")
@@ -53,7 +39,7 @@ class PostController extends Controller
             });
         }
 
-        $limit = $this->extension->getParams('posts.posts_per_page');
+        $limit = App::extension('blog')->getParams('posts.posts_per_page');
         $count = $query->count();
         $total = ceil($count / $limit);
         $page  = max(0, min($total - 1, $page));
@@ -86,11 +72,13 @@ class PostController extends Controller
      */
     public function addAction()
     {
+        $params = App::extension('blog')->getParams();
+
         $post = new Post;
         $post->setUser(App::user());
-        $post->setCommentStatus((bool) $this->extension->getParams('posts.comments_enabled'));
-        $post->set('title', $this->extension->getParams('posts.show_title'));
-        $post->set('markdown', $this->extension->getParams('posts.markdown_enabled'));
+        $post->setCommentStatus((bool) $params['posts.comments_enabled']);
+        $post->set('title', $params['posts.show_title']);
+        $post->set('markdown', $params['posts.markdown_enabled']);
 
         return ['head.title' => __('Add Post'), 'post' => $post, 'statuses' => Post::getStatuses(), 'roles' => Role::findAll(), 'users' => User::findAll()];
     }

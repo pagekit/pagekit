@@ -18,22 +18,18 @@ class ThemeListener implements EventSubscriberInterface
     {
         try {
 
-            $app = App::getInstance();
+            $app        = App::getInstance();
+            $loader     = new ThemeLoader;
+            $repository = new ThemeRepository($app['config']['theme.path'], $loader);
+            $installer  = new PackageInstaller($repository, $loader);
+            $file       = isset($app['file']) ? $app['file'] : null;
 
-            $app['themes'] = function ($app) {
+            $app['theme'] = new ThemeManager($repository, $installer, $file);
 
-                $loader     = new ThemeLoader;
-                $repository = new ThemeRepository($app['config']['theme.path'], $loader);
-                $installer  = new PackageInstaller($repository, $loader);
-                $file       = isset($app['file']) ? $app['file'] : null;
-
-                return new ThemeManager($repository, $installer, $file);
-            };
-
-            $app['theme.admin'] = $app['themes']->load('system', 'extensions/system/theme');
+            $app['theme.admin'] = $app['theme']->load('system', 'extensions/system/theme');
             $app['theme.admin']->boot($app);
 
-            $app['theme.site'] = $app['themes']->load($app['config']->get('theme.site'));
+            $app['theme.site'] = $app['theme']->load($app['config']->get('theme.site'));
             $app['theme.site']->boot($app);
 
         } catch (\Exception $e) {}

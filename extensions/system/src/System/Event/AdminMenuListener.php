@@ -17,7 +17,7 @@ class AdminMenuListener implements EventSubscriberInterface
         $menu = $event->getMenu();
         $meta = App::user()->get('admin.menu', []);
 
-        foreach (App::extensions() as $extension) {
+        foreach (App::extension() as $extension) {
             foreach ($extension->getConfig('menu', []) as $id => $properties) {
 
                 $properties['parentId'] = isset($properties['parent']) ? $properties['parent'] : 0;

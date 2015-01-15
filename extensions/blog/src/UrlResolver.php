@@ -32,7 +32,7 @@ class UrlResolver implements ParamsResolverInterface
      */
     public function __construct()
     {
-        $extension = App::extensions()->get('blog');
+        $extension = App::extension('blog');
 
         $this->permalink = $extension->getParams('permalink');
 

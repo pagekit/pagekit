@@ -59,7 +59,7 @@ class RouteListener implements EventSubscriberInterface
     {
         if (null === $this->permalink) {
 
-            $extension       = App::extensions()->get('blog');
+            $extension       = App::extension('blog');
             $this->permalink = $extension->getParams('permalink', '');
 
             if ($this->permalink === 'custom') {

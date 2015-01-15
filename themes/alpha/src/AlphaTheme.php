@@ -2,7 +2,7 @@
 
 namespace Pagekit\Alpha;
 
-use Pagekit\Application;
+use Pagekit\Application as App;
 use Pagekit\Theme\Theme;
 
 class AlphaTheme extends Theme
@@ -15,7 +15,7 @@ class AlphaTheme extends Theme
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
@@ -50,7 +50,7 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $sections = $this['view.sections'];
+        $sections = App::get('view.sections');
         foreach ($sidebars as $name => $sidebar) {
             if (!$sections->has($name)) {
                 unset($sidebars[$name]);
