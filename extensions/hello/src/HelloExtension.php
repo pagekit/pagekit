@@ -38,7 +38,7 @@ class HelloExtension extends Extension
     public function enable()
     {
         // run all migrations that are newer than the current version
-        if ($version = App::migrator()->create('extensions/hello/migrations', App::option()->get('hello:version'))->run()) {
+        if ($version = App::migrator()->create('extensions/hello/migrations', App::option('hello:version'))->run()) {
             App::option()->set('hello:version', $version);
         }
     }

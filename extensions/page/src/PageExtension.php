@@ -52,7 +52,7 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/page/migrations', App::option()->get('page:version'))->run()) {
+        if ($version = App::migrator()->create('extensions/page/migrations', App::option('page:version'))->run()) {
             App::option()->set('page:version', $version);
         }
     }

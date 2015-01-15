@@ -66,7 +66,7 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/blog/migrations', App::option()->get('blog:version'))->run()) {
+        if ($version = App::migrator()->create('extensions/blog/migrations', App::option('blog:version'))->run()) {
             App::option()->set('blog:version', $version);
         }
     }

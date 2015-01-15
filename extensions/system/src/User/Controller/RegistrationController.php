@@ -23,7 +23,7 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        if (App::option()->get('system:user.registration', 'admin') == 'admin') {
+        if (App::option('system:user.registration', 'admin') == 'admin') {
             App::message()->info(__('Public user registration is disabled.'));
             return $this->redirect('/');
         }
@@ -42,7 +42,7 @@ class RegistrationController extends Controller
 
         try {
 
-            if (App::user()->isAuthenticated() || App::option()->get('system:user.registration', 'admin') == 'admin') {
+            if (App::user()->isAuthenticated() || App::option('system:user.registration', 'admin') == 'admin') {
                 return $this->redirect('/');
             }
 
@@ -93,9 +93,9 @@ class RegistrationController extends Controller
             $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 
             $token = App::get('auth.random')->generateString(32);
-            $admin = App::option()->get('system:user.registration') == 'approval';
+            $admin = App::option('system:user.registration') == 'approval';
 
-            if ($verify = App::option()->get('system:user.require_verification')) {
+            if ($verify = App::option('system:user.require_verification')) {
 
                 $user->setActivation($token);
 
@@ -165,7 +165,7 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        if ($admin = App::option()->get('system:user.registration') == 'approval' and !$user->get('verified')) {
+        if ($admin = App::option('system:user.registration') == 'approval' and !$user->get('verified')) {
 
             $user->setActivation(App::get('auth.random')->generateString(32));
             $this->sendApproveMail($user);
@@ -197,7 +197,7 @@ class RegistrationController extends Controller
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::option()->get('system:app.site_title')]))
+                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::option('system:app.site_title')]))
                  ->setBody(App::view()->render('extensions/system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -210,7 +210,7 @@ class RegistrationController extends Controller
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::option()->get('system:app.site_title')]))
+                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::option('system:app.site_title')]))
                  ->setBody(App::view()->render('extensions/system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -224,8 +224,8 @@ class RegistrationController extends Controller
         try {
 
             $mail = App::mailer()->create();
-            $mail->setTo(App::option()->get('system:mail.from.address'))
-                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::option()->get('system:app.site_title')]))
+            $mail->setTo(App::option('system:mail.from.address'))
+                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::option('system:app.site_title')]))
                  ->setBody(App::view()->render('extensions/system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 

@@ -24,6 +24,6 @@ class MarketplaceController
             $packages[$package->getName()] = $package->getVersion();
         }
 
-        return ['head.title' => __('Marketplace'), 'api' => App::config()->get('api.url'), 'key' => App::option()->get('system:api.key'), 'packages' => json_encode($packages)];
+        return ['head.title' => __('Marketplace'), 'api' => App::config('api.url'), 'key' => App::option('system:api.key'), 'packages' => json_encode($packages)];
     }
 }

@@ -145,7 +145,7 @@ class SystemExtension extends Extension
      */
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/system/migrations', App::option()->get('system:version'))->run()) {
+        if ($version = App::migrator()->create('extensions/system/migrations', App::option('system:version'))->run()) {
             App::option()->set('system:version', $version);
         }
 
@@ -216,7 +216,7 @@ class SystemExtension extends Extension
         ];
 
         foreach ($keys as $key) {
-            App::config()->set($key, App::option()->get("system:$key", App::config()->get($key)));
+            App::config()->set($key, App::option("system:$key", App::config($key)));
         }
     }
 }

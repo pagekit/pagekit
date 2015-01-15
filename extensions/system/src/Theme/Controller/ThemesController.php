@@ -22,8 +22,8 @@ class ThemesController extends Controller
     public function __construct()
     {
         $this->themes = App::theme();
-        $this->api    = App::config()->get('api.url');
-        $this->apiKey = App::option()->get('system:api.key');
+        $this->api    = App::config('api.url');
+        $this->apiKey = App::option('system:api.key');
     }
 
     /**
@@ -39,7 +39,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if (App::config()->get('theme.site') == $name) {
+            if (App::config('theme.site') == $name) {
                 $current = $package;
             }
 

@@ -90,7 +90,7 @@ class PackageController
                 $path = sha1(json_encode($package));
 
                 $client = new Client;
-                $client->setDefaultOption('query/api_key', App::option()->get('system:api.key'));
+                $client->setDefaultOption('query/api_key', App::option('system:api.key'));
 
                 $downloader = new PackageDownloader($client);
                 $downloader->downloadFile("{$temp}/{$path}", $package['dist']['url'], $package['dist']['shasum']);
@@ -201,6 +201,6 @@ class PackageController
 
     protected function isCore($name)
     {
-        return in_array($name, App::config()->get('extension.core', []));
+        return in_array($name, App::config('extension.core', []));
     }
 }

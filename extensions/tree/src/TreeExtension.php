@@ -42,7 +42,7 @@ class TreeExtension extends Extension
      */
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/tree/migrations', App::option()->get('tree:version'))->run()) {
+        if ($version = App::migrator()->create('extensions/tree/migrations', App::option('tree:version'))->run()) {
             App::option()->set('tree:version', $version);
         }
     }

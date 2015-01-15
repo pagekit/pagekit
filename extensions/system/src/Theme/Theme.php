@@ -62,7 +62,7 @@ class Theme
                 $this->parameters = array_replace($this->parameters, $defaults);
             }
 
-            if (is_array($settings = App::option()->get("{$this->name}:settings"))) {
+            if (is_array($settings = App::option("{$this->name}:settings"))) {
                 $this->parameters = array_replace($this->parameters, $settings);
             }
         }

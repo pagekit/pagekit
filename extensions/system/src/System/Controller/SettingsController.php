@@ -96,7 +96,7 @@ class SettingsController extends Controller
             App::option()->set($key, $value, true);
         }
 
-        if ($data['cache.cache.storage'] != App::config()->get('cache.cache.storage') || $data['app.debug'] != App::config()->get('app.debug')) {
+        if ($data['cache.cache.storage'] != App::config('cache.cache.storage') || $data['app.debug'] != App::config('app.debug')) {
             App::extension('system')->clearCache();
         }
 

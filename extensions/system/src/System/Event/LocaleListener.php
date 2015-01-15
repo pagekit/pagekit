@@ -12,7 +12,7 @@ class LocaleListener implements  EventSubscriberInterface
      */
     public function onSystemInit()
     {
-        App::translator()->setLocale(App::config()->get('app.locale'.(App::isAdmin() ? '_admin' : '')));
+        App::translator()->setLocale(App::config('app.locale'.(App::isAdmin() ? '_admin' : '')));
     }
 
     /**

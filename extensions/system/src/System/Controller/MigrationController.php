@@ -23,7 +23,7 @@ class MigrationController extends Controller
      */
     public function migrateAction()
     {
-        if (App::migrator()->create('extensions/system/migrations', App::option()->get('system:version'))->get()) {
+        if (App::migrator()->create('extensions/system/migrations', App::option('system:version'))->get()) {
             App::extension('system')->enable();
             App::message()->success(__('Your Pagekit database has been updated successfully.'));
         } else {

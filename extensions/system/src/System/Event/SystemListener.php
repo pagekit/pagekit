@@ -184,7 +184,7 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onExtensionLoadException(LoadFailureEvent $event)
     {
-        $extensions = App::option()->get('system:extensions', []);
+        $extensions = App::option('system:extensions', []);
 
         if (false !== $index = array_search($event->getExtensionName(), $extensions)) {
             unset($extensions[$index]);

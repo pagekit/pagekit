@@ -22,7 +22,7 @@ class UpdateController
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update'), 'api' => App::config()->get('api.url'), 'channel' => App::option()->get('system:app.release_channel', 'stable'), 'version' => App::config()->get('app.version')];
+        return ['head.title' => __('Update'), 'api' => App::config('api.url'), 'channel' => App::option('system:app.release_channel', 'stable'), 'version' => App::config('app.version')];
     }
 
     /**
@@ -42,7 +42,7 @@ class UpdateController
             App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
 
             $client = new Client;
-            $client->setDefaultOption('query/api_key', App::option()->get('system:api.key'));
+            $client->setDefaultOption('query/api_key', App::option('system:api.key'));
 
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);

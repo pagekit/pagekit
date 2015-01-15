@@ -23,8 +23,8 @@ class ExtensionsController extends Controller
     public function __construct()
     {
         $this->extensions = App::extension();
-        $this->api        = App::config()->get('api.url');
-        $this->apiKey     = App::option()->get('system:api.key');
+        $this->api        = App::config('api.url');
+        $this->apiKey     = App::option('system:api.key');
     }
 
     /**
@@ -91,7 +91,7 @@ class ExtensionsController extends Controller
 
             $extension->boot(App::getInstance());
 
-            App::option()->set('system:extensions', array_unique(array_merge(App::option()->get('system:extensions', []), [$extension->getName()])), true);
+            App::option()->set('system:extensions', array_unique(array_merge(App::option('system:extensions', []), [$extension->getName()])), true);
 
             App::exception()->setHandler($handler);
 
@@ -219,13 +219,13 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        App::option()->set('system:extensions', array_values(array_diff(App::option()->get('system:extensions', []), [$extension->getName()])), true);
+        App::option()->set('system:extensions', array_values(array_diff(App::option('system:extensions', []), [$extension->getName()])), true);
 
         $extension->disable();
     }
 
     protected function isCore($name)
     {
-        return in_array($name, App::config()->get('extension.core', []));
+        return in_array($name, App::config('extension.core', []));
     }
 }

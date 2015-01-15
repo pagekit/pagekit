@@ -69,7 +69,7 @@ class WidgetListener implements EventSubscriberInterface
 
     protected function getSettings()
     {
-        return App::option()->get($this->getOptionsName(), []);
+        return App::option($this->getOptionsName(), []);
     }
 
     protected function setSettings($settings)

@@ -107,7 +107,7 @@ class OAuthHelper
      */
     public function getConfig($provider)
     {
-        $oauth = App::option()->get("system:oauth", []);
+        $oauth = App::option("system:oauth", []);
         return isset($oauth[$provider]) ? $oauth[$provider] : [];
     }
 
@@ -132,7 +132,7 @@ class OAuthHelper
     public function getToken($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
-        $data     = App::option()->get('oauth:token:'.$provider.':'.$key);
+        $data     = App::option('oauth:token:'.$provider.':'.$key);
 
         if ($data &&
             array_key_exists('accessToken', $data) &&

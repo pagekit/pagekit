@@ -29,7 +29,7 @@ class SystemInfoHelper
         $info['phpversion']    = phpversion();
         $info['server']        = $server->get('SERVER_SOFTWARE', getenv('SERVER_SOFTWARE'));
         $info['sapi_name']     = php_sapi_name();
-        $info['version']       = App::config()->get('app.version');
+        $info['version']       = App::config('app.version');
         $info['useragent']     = $server->get('HTTP_USER_AGENT');
         $info['extensions']    = implode(", ", get_loaded_extensions());
         $info['directories']   = $this->getDirectories();
