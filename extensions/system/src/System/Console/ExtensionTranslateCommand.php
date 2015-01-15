@@ -2,11 +2,11 @@
 
 namespace Pagekit\System\Console;
 
-use Pagekit\Translation\Loader\PoFileLoader;
 use Pagekit\Framework\Console\Command;
 use Pagekit\System\Console\NodeVisitor\NodeVisitor;
 use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
 use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
+use Pagekit\Translation\Loader\PoFileLoader;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

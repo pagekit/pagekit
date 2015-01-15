@@ -2,11 +2,8 @@
 
 namespace Pagekit\Tree\Event;
 
-use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use Pagekit\Routing\Event\ConfigureRouteEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Pagekit\Tree\Annotation\Route;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class JsonRequestListener implements EventSubscriberInterface

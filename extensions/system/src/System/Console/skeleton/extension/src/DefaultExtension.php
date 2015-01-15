@@ -2,7 +2,7 @@
 
 namespace %NAMESPACE%;
 
-use Pagekit\Application;
+use Pagekit\Application as App;
 use Pagekit\Extension\Extension;
 
 class %CLASSNAME% extends Extension
@@ -10,7 +10,7 @@ class %CLASSNAME% extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function boot(App $app)
     {
         parent::boot($app);
 
