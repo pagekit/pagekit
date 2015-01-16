@@ -277,6 +277,6 @@ class OAuthHelper
      */
     public function getRedirectUrl()
     {
-        return App::url()->route('@system/oauth/connect', [], UrlGenerator::ABSOLUTE_URL);
+        return App::url('@system/oauth/connect', [], UrlGenerator::ABSOLUTE_URL);
     }
 }

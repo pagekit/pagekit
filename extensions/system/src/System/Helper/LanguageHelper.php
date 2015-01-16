@@ -85,6 +85,7 @@ class LanguageHelper
             'oc'          => [__('Occitan'), 'Occitan'],
             'pa'          => [__('Punjabi'), 'ਪੰਜਾਬੀ'],
             'pl'          => [__('Polish'), 'Polski'],
+            'pt'          => [__('Portuguese'), 'Português'],
             'pt-br'       => [__('Portuguese, Brazil'), 'Português, Brasil'],
             'pt-pt'       => [__('Portuguese, Portugal'), 'Português, Portugal'],
             'ro'          => [__('Romanian'), 'Română'],
@@ -109,6 +110,7 @@ class LanguageHelper
             'ur'          => [__('Urdu'), 'اردو', self::DIRECTION_RTL],
             'vi'          => [__('Vietnamese'), 'Tiếng Việt'],
             'xx-lolspeak' => [__('Lolspeak'), 'Lolspeak'],
+            'zh'          => [__('Chinese'), '中国'],
             'zh-hans'     => [__('Chinese, Simplified'), '简体中文'],
             'zh-hant'     => [__('Chinese, Traditional'), '繁體中文'],
         ];

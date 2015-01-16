@@ -49,25 +49,19 @@ class SettingsController extends Controller
 
         $countries = App::countries();
         $languages = App::languages();
-
-        $codes = ['en_US'];
+        $timezones = $this->getTimezones();
+        $codes     = ['en_US'];
+        $locales   = [];
 
         foreach (App::finder()->directories()->depth(0)->in('extensions/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
-            $codes[] = $dir->getFileName();
-        }
+            $code = $codes[] = $dir->getFileName();
 
-        $locales = [];
-
-        foreach ($codes as $code) {
             list($lang, $country) = explode('_', $code);
 
             $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
         }
 
-        $timezones = $this->getTimezones();
-
-        $ssl = extension_loaded('openssl');
-
+        $ssl    = extension_loaded('openssl');
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
         return ['head.title' => __('Settings'), 'option' => App::option(), 'config' => $this->config, 'cache' => $this->config->get('cache.cache.storage', 'auto'), 'caches' => $caches, 'locales' => $locales, 'timezones' => $timezones, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite];

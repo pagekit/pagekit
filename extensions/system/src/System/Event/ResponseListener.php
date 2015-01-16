@@ -39,7 +39,7 @@ class ResponseListener implements EventSubscriberInterface
      */
     public function replaceUrlCallback($matches)
     {
-        return sprintf('%s="%s"', $matches['attr'], App::url()->to($matches['url']));
+        return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
     }
 
     /**

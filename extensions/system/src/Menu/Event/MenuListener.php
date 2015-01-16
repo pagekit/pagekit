@@ -56,7 +56,7 @@ class MenuListener implements EventSubscriberInterface
     {
         $request  = App::request();
         $route    = $request->attributes->get('_route');
-        $internal = App::url()->route($route, $request->attributes->get('_route_params', []), 'link');
+        $internal = App::url($route, $request->attributes->get('_route_params', []), 'link');
 
         foreach ($event->get($route) as $id => $path) {
             if ($path == $internal || substr($path, strlen($internal), 1) == '&') {

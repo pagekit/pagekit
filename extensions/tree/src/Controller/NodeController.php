@@ -36,8 +36,8 @@ class NodeController
 
         $this->config = ['config' => [
             'url'          => App::url()->base(),
-            'route'        => App::url()->route('@tree/node'),
-            'url.template' => App::url()->route('@tree/template')
+            'route'        => App::url('@tree/node'),
+            'url.template' => App::url('@tree/template')
         ]];
     }
 

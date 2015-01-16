@@ -100,15 +100,17 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
-        $this->app['file']->registerAdapter('file', new FileAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
-        $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $event->getRequest()->getBaseUrl()));
+        $request = $event->getRequest();
+        $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
+        $this->app['file']->registerAdapter('file', new FileAdapter($this->app['path'], $baseUrl));
+        $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $baseUrl));
 
         $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
         $this->app['view.sections']->prepend('head', function() {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 
-        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
         $dispatcher->dispatch('system.init', $event);
     }

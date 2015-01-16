@@ -33,7 +33,7 @@ class FinderController
             $info = [
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => htmlspecialchars(App::url()->to($file->getPathname()), ENT_QUOTES),
+                'url'      => htmlspecialchars(App::url($file->getPathname()), ENT_QUOTES),
                 'writable' => $mode == 'w'
             ];
 

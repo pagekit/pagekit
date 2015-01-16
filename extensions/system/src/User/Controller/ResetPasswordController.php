@@ -54,7 +54,7 @@ class ResetPasswordController extends Controller
 
             $user->setActivation(App::get('auth.random')->generateString(32));
 
-            $url = App::url()->route('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
+            $url = App::url('@system/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
 
             try {
 

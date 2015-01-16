@@ -58,7 +58,7 @@ class LinkController
             try {
 
                 if (!in_array($context, ['frontpage', 'urlalias'])) {
-                    $url = urldecode(App::url()->to($url, [], 'base'));
+                    $url = urldecode(App::url($url, [], 'base'));
                 }
 
                 $result = ['type' => $type->getLabel(), 'url' => $url];

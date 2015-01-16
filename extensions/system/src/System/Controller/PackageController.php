@@ -49,9 +49,9 @@ class PackageController
             $extra = $package->getExtra();
 
             if (isset($extra['image'])) {
-                $extra['image'] = App::url()->to("{$temp}/$path/".$extra['image']);
+                $extra['image'] = App::url("{$temp}/$path/".$extra['image']);
             } else {
-                $extra['image'] = App::url()->to('extensions/system/assets/images/placeholder-icon.svg');
+                $extra['image'] = App::url('extensions/system/assets/images/placeholder-icon.svg');
             }
 
             $response = [

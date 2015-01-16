@@ -66,7 +66,7 @@ class SiteController extends Controller
         return [
             'head.title'          => __('Blog'),
             'head.link.alternate' => [
-                'href'  => App::url()->route('@blog/site/feed', [], true),
+                'href'  => App::url('@blog/site/feed', [], true),
                 'title' => App::option('system:app.site_title'),
                 'type'  => App::feed()->create($this->extension->getParams('feed.type'))->getMIMEType()
             ],
@@ -142,7 +142,7 @@ class SiteController extends Controller
 
             App::message()->info(__('Thanks for commenting!'));
 
-            return $this->redirect(App::url()->route('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
+            return $this->redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
@@ -200,10 +200,10 @@ class SiteController extends Controller
     {
         $feed = App::feed()->create($type ?: $this->extension->getParams('feed.type'), [
             'title'       => App::option('system:app.site_title'),
-            'link'        => App::url()->route('@blog/site', [], true),
+            'link'        => App::url('@blog/site', [], true),
             'description' => App::option('system:app.site_description'),
             'element'     => ['language', App::option('system:app.locale')],
-            'selfLink'    => App::url()->route('@blog/site/feed', [], true)
+            'selfLink'    => App::url('@blog/site/feed', [], true)
         ]);
 
         if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
@@ -214,11 +214,11 @@ class SiteController extends Controller
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),
-                    'link'        => App::url()->route('@blog/id', ['id' => $post->getId()], true),
+                    'link'        => App::url('@blog/id', ['id' => $post->getId()], true),
                     'description' => App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
                     'date'        => $post->getDate(),
                     'author'      => [$post->getUser()->getName(), $post->getUser()->getEmail()],
-                    'id'          => App::url()->route('@blog/id', ['id' => $post->getId()], true)
+                    'id'          => App::url('@blog/id', ['id' => $post->getId()], true)
                 ])
             );
         }
