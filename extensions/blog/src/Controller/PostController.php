@@ -59,7 +59,7 @@ class PostController extends Controller
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view()->render('extensions/blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => Role::findAll(), 'pending' => $pending]),
+                'table' => App::view('extensions/blog/views/admin/post/table.razr', ['count' => $count, 'posts' => $posts, 'roles' => Role::findAll(), 'pending' => $pending]),
                 'total' => $total
             ]);
         }

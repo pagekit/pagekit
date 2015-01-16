@@ -67,7 +67,7 @@ class SystemListener implements EventSubscriberInterface
         App::menus()->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
         App::get('view.sections')->set('messages', function() {
-            return App::view()->render('extensions/system/views/messages/messages.razr');
+            return App::view('extensions/system/views/messages/messages.razr');
         });
 
         $dispatcher->dispatch(App::isAdmin() ? 'system.admin' : 'system.site', $event);

@@ -53,7 +53,7 @@ class NodeController
         ];
 
         $this->config['templates'] = [
-            'tree.item' => App::view()->render('extensions/tree/views/tmpl/item.razr')
+            'tree.item' => App::view('extensions/tree/views/tmpl/item.razr')
         ];
 
         return ['head.title' => __('Nodes')];

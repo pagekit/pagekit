@@ -59,7 +59,7 @@ class ThemesController extends Controller
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view()->render('extensions/system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
+                'table' => App::view('extensions/system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
             ]);
         }
 
@@ -140,7 +140,7 @@ class ThemesController extends Controller
 
             $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
 
-            return App::view()->render($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
+            return App::view($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
 

@@ -78,7 +78,7 @@ class UserController
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view()->render('extensions/system/views/admin/user/table.razr', ['users' => $users]),
+                'table' => App::view('extensions/system/views/admin/user/table.razr', ['users' => $users]),
                 'total' => $total
             ]);
         }

@@ -45,6 +45,6 @@ class TextWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view()->render('extensions/system/views/widgets/text/edit.razr', compact('widget'));
+        return App::view('extensions/system/views/widgets/text/edit.razr', compact('widget'));
     }
 }

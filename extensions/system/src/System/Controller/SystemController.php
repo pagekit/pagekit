@@ -95,7 +95,7 @@ class SystemController extends Controller
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
-                $response[$template] = App::view()->render($event->get($template));
+                $response[$template] = App::view($event->get($template));
             }
         }
 

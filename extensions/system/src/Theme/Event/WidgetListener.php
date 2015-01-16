@@ -28,7 +28,7 @@ class WidgetListener implements EventSubscriberInterface
 
         $settings = $this->getSettings();
         $event->addSettings(__('Theme'), function($widget) use ($tmpl, $theme, $settings) {
-            return App::view()->render($tmpl, compact('widget', 'settings', 'theme'));
+            return App::view($tmpl, compact('widget', 'settings', 'theme'));
         });
     }
 

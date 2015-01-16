@@ -41,7 +41,7 @@ class SiteController
     {
         $view = 'extensions/hello/views/view.razr';
         $data = ['head.title' => __('View article'), 'id' => 1];
-        return App::view()->render($view, $data);
+        return App::view($view, $data);
     }
 
     public function redirectAction()

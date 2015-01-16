@@ -43,13 +43,13 @@ class LoginWidget implements TypeInterface
 
         if ($user->isAuthenticated()) {
             $redirect = $widget->get('redirect.logout') ?: App::url()->current(true);
-            return App::view()->render('extensions/system/views/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
+            return App::view('extensions/system/views/widgets/login/logout.razr', compact('widget', 'user', 'options', 'redirect'));
         }
 
         $redirect          = $widget->get('redirect.login') ?: App::url()->current(true);
         $last_username     = App::session()->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
-        return App::view()->render('extensions/system/views/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return App::view('extensions/system/views/widgets/login/login.razr', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 
     /**
@@ -57,6 +57,6 @@ class LoginWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view()->render('extensions/system/views/widgets/login/edit.razr', compact('widget'));
+        return App::view('extensions/system/views/widgets/login/edit.razr', compact('widget'));
     }
 }
