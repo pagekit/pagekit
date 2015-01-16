@@ -30,13 +30,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return Finder::create();
         });
 
-        // -TODO-
-
-        // $app->extend('migrator', function($migrator, $app) {
-        //     $migrator->setLoader(new FilesystemLoader($app['locator']));
-        //     return $migrator;
-        // });
-
         $app->extend('view', function($view, $app) {
 
             $view->setEngine($app['tmpl']);

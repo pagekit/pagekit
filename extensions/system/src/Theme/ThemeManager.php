@@ -12,7 +12,7 @@ class ThemeManager extends PackageManager
      */
     public function load($name, $path = null)
     {
-        $root = $path ? App::file()->getPath($path, true) : $this->repository->getPath()."/$name";
+        $root = $path ?: $this->repository->getPath()."/$name";
 
         if (!is_string($name)) {
             throw new \InvalidArgumentException('Theme name must be of type string.');

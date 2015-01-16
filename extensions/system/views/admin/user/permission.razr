@@ -17,7 +17,7 @@
             <tbody>
                 @foreach ($permissions as $extension => $permission)
                 <tr id="ext-@( $extension )">
-                    <th class="pk-table-min-width-200">@( $app.extensions.repository.findPackage($extension).title )</th>
+                    <th class="pk-table-min-width-200">@( $app.extension.repository.findPackage($extension).title )</th>
                     @foreach ($roles as $role)
                     <th class="pk-table-width-100 pk-table-min-width-100"></th>
                     @endforeach

@@ -47,7 +47,7 @@
                     <tbody>
                         @foreach ($permissions as $extension => $permission)
                         <tr>
-                            <th colspan="2">@( $app.extensions.repository.findPackage($extension).title )</th>
+                            <th colspan="2">@( $app.extension.repository.findPackage($extension).title )</th>
                         </tr>
                             @foreach ($permission as $name => $data)
                             <tr>
