@@ -5,7 +5,7 @@ use Pagekit\Application as App;
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';
 
-$app = App::getInstance($config);
+$app = new App($config);
 $app['autoloader'] = $loader;
 $app['autoloader']->addPsr4('Pagekit\\', $app['path.extensions'].'/system/src');
 
