@@ -5,8 +5,8 @@ namespace Pagekit\Installer\Controller;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
-use Pagekit\Config\Config;
 use Pagekit\Application\Exception;
+use Pagekit\Config\Config;
 use Pagekit\User\Model\RoleInterface;
 
 /**
@@ -194,7 +194,7 @@ class InstallerController
      */
     protected function createDatabase()
     {
-        $params = App::config()['database.connections'][App::config()['database.default']];
+        $params = App::config('database.connections')[App::config('database.default')];
         $dbname = App::db()->quoteIdentifier($params['dbname']);
 
         unset($params['dbname']);

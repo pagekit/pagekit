@@ -72,7 +72,7 @@ class ExtensionsController extends Controller
 
                 $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
 
-                if (App::config()['app.debug']) {
+                if (App::config('app.debug')) {
                     $message .= '<br><br>'.$exception->getMessage();
                 }
 
