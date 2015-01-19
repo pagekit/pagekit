@@ -8,7 +8,7 @@ use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
-use Pagekit\Filesystem\FileLocator;
+use Pagekit\Filesystem\Locator;
 use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
@@ -24,7 +24,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $this->app = $app;
 
         $app['locator'] = function($app) {
-            return new FileLocator($app['path']);
+            return new Locator($app['path']);
         };
 
         $app->factory('finder', function() {
