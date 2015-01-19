@@ -65,11 +65,11 @@ class ExtensionsController extends Controller
                 App::response()->json(['error' => true, 'message' => $message])->send();
             });
 
-            if (!App::extension()->get($name)) {
+            if (!App::extension($name)) {
                 App::extension()->load($name);
             }
 
-            if (!$extension = App::extension()->get($name)) {
+            if (!$extension = App::extension($name)) {
                 throw new Exception(__('Unable to enable extension "%name%".', ['%name%' => $name]));
             }
 
@@ -100,7 +100,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Core extensions may not be disabled.'));
             }
 
-            if (!$extension = App::extension()->get($name)) {
+            if (!$extension = App::extension($name)) {
                 throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
             }
 
@@ -128,11 +128,11 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Core extensions may not be uninstalled.'));
             }
 
-            if (!App::extension()->get($name)) {
+            if (!App::extension($name)) {
                 App::extension()->load($name);
             }
 
-            if (!$extension = App::extension()->get($name)) {
+            if (!$extension = App::extension($name)) {
                 throw new Exception(__('Unable to uninstall extension "%name%".', ['%name%' => $name]));
             }
 
@@ -158,7 +158,7 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = App::extension()->get($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
+            if (!$extension = App::extension($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid extension.'));
             }
 
@@ -181,7 +181,7 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = App::extension()->get($name)) {
+            if (!$extension = App::extension($name)) {
                 throw new Exception(__('Invalid extension.'));
             }
 
