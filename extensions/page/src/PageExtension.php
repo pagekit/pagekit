@@ -8,8 +8,8 @@ use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\Tree\Event\NodeEditEvent;
-use Pagekit\Tree\Event\NodeTypeEvent;
+use Pagekit\Site\Event\NodeEditEvent;
+use Pagekit\Site\Event\NodeTypeEvent;
 
 class PageExtension extends Extension
 {
@@ -30,15 +30,15 @@ class PageExtension extends Extension
             $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
         });
 
-        $app->on('tree.types', function (NodeTypeEvent $event) {
+        $app->on('site.types', function (NodeTypeEvent $event) {
             $event->register('page', 'Page', [
                 'tmpl.edit'   => 'page.edit'
             ]);
         });
 
-        $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
+        $app->on('site.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'page') {
-                $app['scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
+                $app['scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
             }
         });
 

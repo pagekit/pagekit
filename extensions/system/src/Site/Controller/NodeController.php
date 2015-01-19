@@ -1,17 +1,19 @@
 <?php
 
-namespace Pagekit\Tree\Controller;
+namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
-use Pagekit\Tree\Entity\Node;
-use Pagekit\Tree\Event\NodeEditEvent;
+use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Event\NodeEditEvent;
 use Pagekit\User\Entity\Role;
 
 /**
- * @Access("tree: manage nodes", admin=true)
+ * @Route("/site")
+ * @Access("system: manage site", admin=true)
  */
-class NodeController
+class NodeController extends Controller
 {
     /**
      * @var array
@@ -24,35 +26,35 @@ class NodeController
     public function __construct()
     {
         App::scripts('angular-resource');
-        App::scripts('application', 'extensions/tree/assets/js/application.js', 'uikit');
-        App::scripts('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
-        App::scripts('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
-        App::scripts('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
+        App::scripts('application', 'extensions/system/app/application.js', 'uikit');
+        App::scripts('site-application', 'extensions/system/app/site.js', ['application', 'uikit-nestable']);
+        App::scripts('site-directives', 'extensions/system/app/directives.js', 'site-application');
+        App::scripts('site-controllers', 'extensions/system/app/controllers.js', 'site-application');
 
         App::on('kernel.view', function () {
-            App::scripts('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
+            App::scripts('site-config', sprintf('var %s = %s;', 'site', json_encode($this->config)), [], 'string');
         });
 
         $this->config = ['config' => [
             'url'          => App::url()->base(),
-            'route'        => App::url('@tree/node'),
-            'url.template' => App::url('@tree/template')
+            'route'        => App::url('@system/node'),
+            'url.template' => App::url('@system/template')
         ]];
     }
 
     /**
      * @Route("/", methods="GET")
-     * @Response("extensions/tree/views/admin/index.razr")
+     * @Response("extensions/system/views/admin/site/index.razr")
      */
     public function indexAction()
     {
         $this->config['data'] = [
-            'types' => App::get('tree.types')->getTypes(),
+            'types' => App::get('site.types')->getTypes(),
             'nodes' => Node::findAll()
         ];
 
         $this->config['templates'] = [
-            'tree.item' => App::view('extensions/tree/views/tmpl/item.razr')
+            'site.item' => App::view('extensions/system/views/tmpl/site.item.razr')
         ];
 
         return ['head.title' => __('Nodes')];
@@ -62,7 +64,7 @@ class NodeController
      * @Route("/{id}", methods="GET", requirements={"id"="\d+"})
      * @Route("/{type}", methods="GET")
      * @Request({"id": "int"})
-     * @Response("extensions/tree/views/admin/edit.razr")
+     * @Response("extensions/system/views/admin/site/edit.razr")
      */
     public function editAction($id = 0, $type = '')
     {
@@ -77,23 +79,23 @@ class NodeController
                 throw new Exception(__('Invalid node id.'));
             }
 
-            if (!isset(App::get('tree.types')[$node->getType()])) {
+            if (!$type = App::get('site.types')[$node->getType()]) {
                 throw new Exception(__('Invalid node type.'));
             }
 
             $this->config['data'] = [
-                'type'  => App::get('tree.types')[$node->getType()],
+                'type'  => $type,
                 'node'  => $node,
                 'roles' => Role::findAll()
             ];
 
-            $this->config = App::trigger('tree.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
+            $this->config = App::trigger('site.node.edit', new NodeEditEvent($node, $this->config))->getConfig();
 
         } catch (Exception $e) {
 
             App::message()->error($e->getMessage());
 
-            return $this->redirect('@tree/node');
+            return $this->redirect('@system/node');
         }
 
         return ['head.title' => $node->getId() ? __('Edit Node') : __('Add Node')];

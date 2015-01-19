@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Tree\Event;
+namespace Pagekit\Site\Event;
 
-use Pagekit\Tree\Entity\Node;
+use Pagekit\Site\Entity\Node;
 use Symfony\Component\EventDispatcher\Event;
 
 class NodeEditEvent extends Event

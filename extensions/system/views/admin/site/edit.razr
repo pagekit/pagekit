@@ -1,4 +1,4 @@
-<div data-app="tree" ng-controller="editCtrl as vm" ng-cloak>
+<div data-app="site" ng-controller="editCtrl as vm" ng-cloak>
 
     <h2></h2>
 
@@ -6,7 +6,7 @@
 
         @section('toolbar', 'show')
             <button ng-click="vm.save()" class="uk-button uk-button-primary">@trans('Save')</button>
-            <a class="uk-button js-cancel" href="@url('@tree/node')">{{ node.id ? "@trans('Close')" : "@trans('Cancel')" }}</a>
+            <a class="uk-button js-cancel" href="@url('@system/node')">{{ node.id ? "@trans('Close')" : "@trans('Cancel')" }}</a>
         @endsection
 
         <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>

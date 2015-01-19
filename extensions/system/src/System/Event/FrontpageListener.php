@@ -42,8 +42,8 @@ class FrontpageListener implements EventSubscriberInterface
     {
         return [
             'system.init'          => ['onSystemInit', -15],
-            'tree.node.postSave'   => 'onSave',
-            'tree.node.postDelete' => 'onDelete'
+            'system.node.postSave'   => 'onSave',
+            'system.node.postDelete' => 'onDelete'
         ];
     }
 }

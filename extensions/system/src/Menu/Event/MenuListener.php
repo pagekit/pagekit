@@ -116,8 +116,8 @@ class MenuListener implements EventSubscriberInterface
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',
-            'tree.node.postSave'         => 'clearCache',
-            'tree.node.postDelete'       => 'clearCache'
+            'system.node.postSave'       => 'clearCache',
+            'system.node.postDelete'     => 'clearCache'
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Tree\Controller;
+namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
 

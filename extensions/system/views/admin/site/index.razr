@@ -1,4 +1,4 @@
-<div data-app="tree" ng-controller="indexCtrl as vm" ng-cloak>
+<div data-app="site" ng-controller="indexCtrl as vm" ng-cloak>
 
     @section('toolbar', 'show')
     <div class="uk-float-left">
@@ -31,7 +31,7 @@
     </div>
 
     <ul class="uk-nestable" data-uk-nestable>
-        <li class="uk-nestable-list-item" ng-repeat="node in vm.getChildren(0)" ng-include="'tree.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
+        <li class="uk-nestable-list-item" ng-repeat="node in vm.getChildren(0)" ng-include="'site.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
     </ul>
 
 <pre>{{ nodes | json }}</pre>

@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\Tree\Event;
+namespace Pagekit\Site\Event;
 
 use Pagekit\Application as App;
-use Pagekit\Tree\Entity\Node;
+use Pagekit\Site\Entity\Node;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class RouteListener implements EventSubscriberInterface
 {
-    const CACHE_KEY = 'tree.nodes';
+    const CACHE_KEY = 'site.nodes';
 
     /**
      * Register node routes.
@@ -43,9 +43,9 @@ class RouteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.init'          => ['onSystemInit', 10],
-            'tree.node.postSave'   => 'clearCache',
-            'tree.node.postDelete' => 'clearCache'
+            'system.init'            => ['onSystemInit', 10],
+            'system.node.postSave'   => 'clearCache',
+            'system.node.postDelete' => 'clearCache'
         ];
     }
 
@@ -57,7 +57,7 @@ class RouteListener implements EventSubscriberInterface
         if (!$nodes = App::get('cache.phpfile')->fetch(self::CACHE_KEY) ?: []) {
 
             $nodes = [];
-            $types = App::get('tree.types');
+            $types = App::get('site.types');
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
 
                 if (!$type = $types[$node->getType()]) {

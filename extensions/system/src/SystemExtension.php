@@ -7,6 +7,9 @@ use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
+use Pagekit\Site\Event\AliasListener;
+use Pagekit\Site\Event\NodeTypeEvent;
+use Pagekit\Site\Event\RouteListener;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
@@ -49,6 +52,7 @@ class SystemExtension extends Extension
         $app->subscribe(
             new AccessListener,
             new AdminMenuListener,
+            new AliasListener,
             new AuthorizationListener,
             new CanonicalListener,
             new FrontpageListener,
@@ -58,11 +62,12 @@ class SystemExtension extends Extension
             new MenuListener,
             new MigrationListener,
             new ResponseListener,
+            new RouteListener,
             new SystemListener,
-            new UserListener,
-            new WidgetListener,
             new ThemeListener,
-            new ThemeWidgetListener
+            new ThemeWidgetListener,
+            new UserListener,
+            new WidgetListener
         );
 
         parent::boot($app);
@@ -86,6 +91,10 @@ class SystemExtension extends Extension
 
         $app['permissions'] = function($app) {
             return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
+        };
+
+        $app['site.types'] = function($app) {
+            return $app->trigger('site.types', new NodeTypeEvent);
         };
 
         $app['content'] = function() {

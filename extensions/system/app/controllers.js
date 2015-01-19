@@ -1,4 +1,4 @@
-angular.module('tree')
+angular.module('site')
 
     .controller('indexCtrl', ['$scope', '$filter', '$timeout', 'Application', 'Node', 'UIkit', function ($scope, $filter, $timeout, App, Node, UIkit) {
 

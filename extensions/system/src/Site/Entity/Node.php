@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\Tree\Entity;
+namespace Pagekit\Site\Entity;
 
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
-use Pagekit\Tree\Model\NodeInterface;
+use Pagekit\Site\Model\NodeInterface;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
- * @Entity(tableClass="@tree_node", eventPrefix="tree.node")
+ * @Entity(tableClass="@system_node", eventPrefix="system.node")
  */
 class Node implements NodeInterface, \JsonSerializable
 {
@@ -167,7 +167,7 @@ class Node implements NodeInterface, \JsonSerializable
             // Set priority
             $this->priority = 1 + $db->createQueryBuilder()
                     ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
-                    ->from('@tree_node')
+                    ->from('@system_node')
                     ->where('parent_id = ?', [$this->parentId])
                     ->execute()->fetchColumn();
         }

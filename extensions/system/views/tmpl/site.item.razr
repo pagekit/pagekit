@@ -16,5 +16,5 @@
 </div>
 
 <ul ng-if="children.length" class="uk-nestable-list">
-    <li class="uk-nestable-list-item" ng-repeat="node in children" ng-include="'tree.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
+    <li class="uk-nestable-list-item" ng-repeat="node in children" ng-include="'site.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
 </ul>

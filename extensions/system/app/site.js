@@ -1,6 +1,6 @@
-angular.module('tree', ['Application', 'ngResource'])
+angular.module('site', ['Application', 'ngResource'])
 
-    .value('name', 'tree')
+    .value('name', 'site')
 
     .value('UIkit', jQuery.UIkit)
 

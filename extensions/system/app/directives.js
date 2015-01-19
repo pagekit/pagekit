@@ -1,4 +1,4 @@
-angular.module('tree')
+angular.module('site')
     .directive('checkAll', ['$filter', function($filter) {
         return {
             restrict  : 'A',

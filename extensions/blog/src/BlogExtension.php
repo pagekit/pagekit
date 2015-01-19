@@ -11,8 +11,8 @@ use Pagekit\Extension\Extension;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\Tree\Event\NodeEditEvent;
-use Pagekit\Tree\Event\NodeTypeEvent;
+use Pagekit\Site\Event\NodeEditEvent;
+use Pagekit\Site\Event\NodeTypeEvent;
 
 class BlogExtension extends Extension
 {
@@ -41,7 +41,7 @@ class BlogExtension extends Extension
             $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
         });
 
-        $app->on('tree.types', function (NodeTypeEvent $event) {
+        $app->on('site.types', function (NodeTypeEvent $event) {
             $event->register('blog', 'Blog', [
                 'type'        => 'mount',
                 'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
@@ -58,9 +58,9 @@ class BlogExtension extends Extension
             $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.razr');
         });
 
-        $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
+        $app->on('site.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'blog.post') {
-                $app['scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
+                $app['scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'site-application');
                 $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, Post::findAll())]]);
             }
         });

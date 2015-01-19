@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Tree\Model;
+namespace Pagekit\Site\Model;
 
 interface NodeInterface
 {
