@@ -23,8 +23,7 @@ class NodeController
      */
     public function __construct()
     {
-        App::scripts('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
-        App::scripts('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
+        App::scripts('angular-resource');
         App::scripts('application', 'extensions/tree/assets/js/application.js', 'uikit');
         App::scripts('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
         App::scripts('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');

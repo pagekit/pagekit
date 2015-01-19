@@ -33,14 +33,23 @@ class SystemListener implements EventSubscriberInterface
     public function onSystemLoaded($event, $name, $dispatcher)
     {
         $scripts = App::scripts();
-        $scripts->register('jquery', 'vendor/assets/jquery/jquery.js', [], ['requirejs' => true]);
+        $scripts->register('angular', 'vendor/assets/angular/angular.min.js', 'jquery');
+        $scripts->register('angular-animate', 'vendor/assets/angular-animate/angular-animate.min.js', 'angular');
+        $scripts->register('angular-cookies', 'vendor/assets/angular-cookies/angular-cookies.min.js', 'angular');
+        $scripts->register('angular-loader', 'vendor/assets/angular-loader/angular-loader.min.js', 'angular');
+        $scripts->register('angular-messages', 'vendor/assets/angular-messages/angular-messages.min.js', 'angular');
+        $scripts->register('angular-resource', 'vendor/assets/angular-resource/angular-resource.min.js', 'angular');
+        $scripts->register('angular-route', 'vendor/assets/angular-route/angular-route.min.js', 'angular');
+        $scripts->register('angular-sanitize', 'vendor/assets/angular-sanitize/angular-sanitize.min.js', 'angular');
+        $scripts->register('angular-touch', 'vendor/assets/angular-touch/angular-touch.min.js', 'angular');
+        $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
         $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', ['requirejs-config']);
         $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js');
-        $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', [], ['requirejs' => true]);
-        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
         $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', [], ['requirejs' => true]);
+        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', [], ['requirejs' => true]);
 
         $helper = new DateHelper(App::dates());
         App::get('tmpl.php')->addHelpers([$helper]);
