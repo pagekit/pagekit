@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>@trans('Pagekit Installer')</title>
-        <link href="@url_static('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url_static('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@static_url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@static_url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @section('head')
         @style('theme', 'extensions/installer/assets/css/installer.css')
         @script('installer', 'extensions/installer/assets/js/installer.js', 'requirejs')
@@ -18,7 +18,7 @@
 
                     <form action="@url('@installer/installer/createconfig')" method="post">
 
-                        <img class="uk-margin-top" src="@url_static('extensions/system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                        <img class="uk-margin-top" src="@static_url('extensions/system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                         <p>
                             <button class="uk-button" type="submit">@trans('Begin')</button>
