@@ -60,7 +60,7 @@ class BlogExtension extends Extension
 
         $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'blog.post') {
-                $app['view.scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
+                $app['scripts']->queue('blog-controllers', 'extensions/blog/assets/js/controllers.js', 'tree-application');
                 $event->addConfig(['data' => ['posts' => array_map(function($post) { return $post->getTitle(); }, Post::findAll())]]);
             }
         });

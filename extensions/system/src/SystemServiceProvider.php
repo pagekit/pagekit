@@ -98,8 +98,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $this->app['file']->registerAdapter('file', new FileAdapter($this->app['path'], $baseUrl));
         $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $baseUrl));
 
-        $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
-        $this->app['view.sections']->prepend('head', function() {
+        $this->app['sections']->register('head', ['renderer' => 'delayed']);
+        $this->app['sections']->prepend('head', function() {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 
@@ -132,7 +132,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $require = [];
         $requeue = [];
 
-        foreach ($scripts = $this->app['view.scripts'] as $script) {
+        foreach ($scripts = $this->app['scripts'] as $script) {
             if ($script['requirejs']) {
                 $require[] = $script;
             } elseif (array_key_exists('requirejs', $scripts->resolveDependencies($script))) {

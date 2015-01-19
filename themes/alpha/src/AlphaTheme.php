@@ -50,7 +50,7 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $sections = App::get('view.sections');
+        $sections = App::sections();
         foreach ($sidebars as $name => $sidebar) {
             if (!$sections->has($name)) {
                 unset($sidebars[$name]);

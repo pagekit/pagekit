@@ -82,7 +82,7 @@ class Editor implements EditorInterface, EventSubscriberInterface
      */
     public function render($value, array $attributes = [])
     {
-        App::get('view.scripts')->queue('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
+        App::scripts('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
             'data-editor' => json_encode(array_values($this->getPlugins()))
         ]);
 

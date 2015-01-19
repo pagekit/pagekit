@@ -17,7 +17,7 @@ class WidgetListener implements EventSubscriberInterface
         $request   = App::request();
         $active    = (array) $request->attributes->get('_menu');
         $user      = App::user();
-        $sections  = App::get('view.sections');
+        $sections  = App::sections();
 
         foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 

@@ -5,7 +5,7 @@ $app->on('system.admin', function() use ($app) {
     $app->on('kernel.view', function() use ($app) {
 
         // set title
-        $app['view.sections']->prepend('head', function() use ($app) {
+        $app['sections']->prepend('head', function() use ($app) {
 
             $title = $app['view']->get('head.title');
 
@@ -25,10 +25,10 @@ $app->on('system.admin', function() use ($app) {
         $app['view']->set('subset', 'latin,latin-ext');
     });
 
-    $app['view.sections']->addRenderer('toolbar', function($name, $value, $options = []) use ($app) {
+    $app['sections']->addRenderer('toolbar', function($name, $value, $options = []) use ($app) {
         return $app['view']->render('extensions/system/theme/views/renderer/toolbar.razr', compact('name', 'value', 'options'));
     });
 
-    $app['view.sections']->register('toolbar', ['renderer' => 'toolbar']);
+    $app['sections']->register('toolbar', ['renderer' => 'toolbar']);
 
 });

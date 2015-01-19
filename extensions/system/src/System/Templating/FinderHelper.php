@@ -21,7 +21,7 @@ class FinderHelper extends Helper
      */
     public function render($root)
     {
-        App::get('view.scripts')->queue('finder.init', 'require(["system!finder", "domReady!"], function(system) { $("[data-finder]").each(function() { system.finder(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
+        App::scripts('finder.init', 'require(["system!finder", "domReady!"], function(system) { $("[data-finder]").each(function() { system.finder(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
 
         return "<div data-finder='".json_encode(compact('root'))."'></div>";
     }

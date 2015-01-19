@@ -68,7 +68,7 @@ class Theme
         }
 
         $app->on('system.site', function() use ($app) {
-            $this->registerRenderer($app['view.sections'], $app['view']);
+            $this->registerRenderer($app['sections'], $app['view']);
         });
 
         $app->on('system.positions', function($event) {

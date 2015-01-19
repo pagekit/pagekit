@@ -32,7 +32,7 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemLoaded($event, $name, $dispatcher)
     {
-        $scripts = App::get('view.scripts');
+        $scripts = App::scripts();
         $scripts->register('jquery', 'vendor/assets/jquery/jquery.js', [], ['requirejs' => true]);
         $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', ['requirejs-config']);
         $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js');
@@ -66,7 +66,7 @@ class SystemListener implements EventSubscriberInterface
         App::menus()->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
         App::menus()->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
 
-        App::get('view.sections')->set('messages', function() {
+        App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');
         });
 

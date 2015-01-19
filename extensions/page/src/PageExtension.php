@@ -38,7 +38,7 @@ class PageExtension extends Extension
 
         $app->on('tree.node.edit', function (NodeEditEvent $event) use ($app) {
             if ($event->getNode()->getType() == 'page') {
-                $app['view.scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
+                $app['scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'tree-application');
             }
         });
 

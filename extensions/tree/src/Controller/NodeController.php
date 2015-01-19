@@ -23,15 +23,15 @@ class NodeController
      */
     public function __construct()
     {
-        App::get('view.scripts')->queue('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
-        App::get('view.scripts')->queue('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
-        App::get('view.scripts')->queue('application', 'extensions/tree/assets/js/application.js', 'uikit');
-        App::get('view.scripts')->queue('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
-        App::get('view.scripts')->queue('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
-        App::get('view.scripts')->queue('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
+        App::scripts('angular', 'extensions/tree/assets/angular/angular.min.js', 'jquery');
+        App::scripts('angular-resource', 'extensions/tree/assets/angular-resource/angular-resource.min.js', 'angular');
+        App::scripts('application', 'extensions/tree/assets/js/application.js', 'uikit');
+        App::scripts('tree-application', 'extensions/tree/assets/js/tree.js', ['application', 'uikit-nestable']);
+        App::scripts('tree-directives', 'extensions/tree/assets/js/directives.js', 'tree-application');
+        App::scripts('tree-controllers', 'extensions/tree/assets/js/controllers.js', 'tree-application');
 
         App::on('kernel.view', function () {
-            App::get('view.scripts')->queue('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
+            App::scripts('tree-config', sprintf('var %s = %s;', 'tree', json_encode($this->config)), [], 'string');
         });
 
         $this->config = ['config' => [
