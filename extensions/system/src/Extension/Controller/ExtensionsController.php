@@ -5,8 +5,8 @@ namespace Pagekit\Extension\Controller;
 use Pagekit\Application as App;
 use Pagekit\Extension\Event\ExtensionEvent;
 use Pagekit\Extension\Extension;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 
 /**
  * @Access("system: manage extensions", admin=true)

@@ -3,8 +3,8 @@
 namespace Pagekit\Theme\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\Theme\Event\ThemeEvent;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Event\Event;
+use Pagekit\Application\Event;
 use Pagekit\Widget\Model\TypeInterface;
 
 class RegisterWidgetEvent extends Event implements \IteratorAggregate

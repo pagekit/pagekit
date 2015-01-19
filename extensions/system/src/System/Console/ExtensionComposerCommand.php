@@ -11,7 +11,7 @@ use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Pagekit\Framework\Console\Command;
+use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

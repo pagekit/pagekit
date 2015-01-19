@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Framework\Event\Event;
+use Pagekit\Application\Event;
 
 class RegisterPositionEvent extends Event
 {

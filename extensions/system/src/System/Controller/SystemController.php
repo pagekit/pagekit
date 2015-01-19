@@ -3,8 +3,8 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\User\Entity\User;

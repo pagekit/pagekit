@@ -2,7 +2,7 @@
 
 namespace Pagekit\Tree\Event;
 
-use Pagekit\Framework\Event\Event;
+use Pagekit\Application\Event;
 
 class NodeTypeEvent extends Event implements \IteratorAggregate
 {

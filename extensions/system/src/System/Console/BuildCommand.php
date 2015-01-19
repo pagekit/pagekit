@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Console;
 
-use Pagekit\Framework\Console\Command;
+use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Hello\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application\Controller;
 
 /**
  * @Route("/hello")

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Content\Event;
 
-use Pagekit\Framework\Event\Event;
+use Pagekit\Application\Event;
 
 class ContentEvent extends Event
 {

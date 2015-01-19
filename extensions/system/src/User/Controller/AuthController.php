@@ -7,7 +7,7 @@ use Pagekit\Auth\Auth;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Auth\Exception\BadCredentialsException;
 use Pagekit\Auth\RememberMe;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application\Controller;
 
 /**
  * @Route("/user")

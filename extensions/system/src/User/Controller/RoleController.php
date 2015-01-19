@@ -3,7 +3,7 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application\Controller;
 use Pagekit\User\Entity\Role;
 
 /**

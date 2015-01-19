@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application\Controller;
 
 /**
  * @Access("system: software updates", admin=true)

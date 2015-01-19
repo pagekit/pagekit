@@ -4,7 +4,7 @@ namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Exception;
 use Pagekit\Package\Downloader\PackageDownloader;
 use Pagekit\Package\Exception\ArchiveExtractionException;
 use Pagekit\Package\Exception\ChecksumVerificationException;

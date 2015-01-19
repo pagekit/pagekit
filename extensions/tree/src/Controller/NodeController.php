@@ -3,7 +3,7 @@
 namespace Pagekit\Tree\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Exception;
 use Pagekit\Tree\Entity\Node;
 use Pagekit\Tree\Event\NodeEditEvent;
 use Pagekit\User\Entity\Role;

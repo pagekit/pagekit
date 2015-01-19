@@ -3,8 +3,8 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Application\Controller;
 use Pagekit\Config\Config;
-use Pagekit\Framework\Controller\Controller;
 
 /**
  * @Access("system: access settings", admin=true)

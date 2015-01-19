@@ -3,8 +3,8 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Event\RegisterPositionEvent;

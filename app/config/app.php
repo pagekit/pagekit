@@ -18,9 +18,9 @@ return [
 
         'providers' => [
 
-            'Pagekit\Framework\Provider\ExceptionServiceProvider',
-            'Pagekit\Framework\Provider\RazrServiceProvider',
-            'Pagekit\Framework\Provider\TemplatingServiceProvider',
+            'Pagekit\Application\Provider\ExceptionServiceProvider',
+            'Pagekit\Application\Provider\RazrServiceProvider',
+            'Pagekit\Application\Provider\TemplatingServiceProvider',
             'Pagekit\Profiler\ProfilerServiceProvider',
             'Pagekit\Cache\CacheServiceProvider',
             'Pagekit\Cookie\CookieServiceProvider',

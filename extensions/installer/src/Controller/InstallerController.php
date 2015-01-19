@@ -6,7 +6,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Exception;
 use Pagekit\User\Model\RoleInterface;
 
 /**

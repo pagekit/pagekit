@@ -2,7 +2,7 @@
 
 namespace Pagekit\Hello\Event;
 
-use Pagekit\Framework\Event\EventSubscriberInterface;
+use Pagekit\Application\Event\EventSubscriberInterface;
 
 class HelloListener implements EventSubscriberInterface
 {

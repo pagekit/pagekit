@@ -3,8 +3,8 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Model\UserInterface;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
