@@ -3,30 +3,16 @@
 namespace Pagekit\Extension\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Extension\Event\ExtensionEvent;
-use Pagekit\Extension\Extension;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
+use Pagekit\Extension\Event\ExtensionEvent;
+use Pagekit\Extension\Extension;
 
 /**
  * @Access("system: manage extensions", admin=true)
  */
 class ExtensionsController extends Controller
 {
-    protected $extensions;
-    protected $api;
-    protected $apiKey;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->extensions = App::extension();
-        $this->api        = App::config('api.url');
-        $this->apiKey     = App::option('system:api.key');
-    }
-
     /**
      * @Response("extensions/system/views/admin/extensions/index.razr")
      */
@@ -35,7 +21,7 @@ class ExtensionsController extends Controller
         $packages = [];
         $packagesJson = [];
 
-        foreach ($this->extensions->getRepository()->getPackages() as $package) {
+        foreach (App::extension()->getRepository()->getPackages() as $package) {
             if (!$this->isCore($name = $package->getName())) {
                 $packages[$name] = $package;
                 $packagesJson[$name] = $package->getVersion();
@@ -48,7 +34,7 @@ class ExtensionsController extends Controller
             ]);
         }
 
-        return ['head.title' => __('Extensions'), 'api' => $this->api, 'key' => $this->apiKey, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        return ['head.title' => __('Extensions'), 'api' => App::config('api.url'), 'key' => App::option('system:api.key'), 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**
@@ -79,16 +65,15 @@ class ExtensionsController extends Controller
                 App::response()->json(['error' => true, 'message' => $message])->send();
             });
 
-            if (!$this->extensions->get($name)) {
-                $this->extensions->load($name);
+            if (!App::extension()->get($name)) {
+                App::extension()->load($name);
             }
 
-            if (!$extension = $this->extensions->get($name)) {
+            if (!$extension = App::extension()->get($name)) {
                 throw new Exception(__('Unable to enable extension "%name%".', ['%name%' => $name]));
             }
 
             $extension->enable();
-
             $extension->boot(App::getInstance());
 
             App::option()->set('system:extensions', array_unique(array_merge(App::option('system:extensions', []), [$extension->getName()])), true);
@@ -115,7 +100,7 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Core extensions may not be disabled.'));
             }
 
-            if (!$extension = $this->extensions->get($name)) {
+            if (!$extension = App::extension()->get($name)) {
                 throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
             }
 
@@ -143,11 +128,11 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Core extensions may not be uninstalled.'));
             }
 
-            if (!$this->extensions->get($name)) {
-                $this->extensions->load($name);
+            if (!App::extension()->get($name)) {
+                App::extension()->load($name);
             }
 
-            if (!$extension = $this->extensions->get($name)) {
+            if (!$extension = App::extension()->get($name)) {
                 throw new Exception(__('Unable to uninstall extension "%name%".', ['%name%' => $name]));
             }
 
@@ -155,8 +140,7 @@ class ExtensionsController extends Controller
 
             $extension->uninstall();
 
-            $this->extensions->getInstaller()->uninstall($this->extensions->getRepository()->findPackage($name));
-
+            App::extension()->getInstaller()->uninstall(App::extension()->getRepository()->findPackage($name));
             App::extension('system')->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
@@ -174,13 +158,12 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = $this->extensions->get($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
+            if (!$extension = App::extension()->get($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid extension.'));
             }
 
             $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
-
-            $title = $this->extensions->getRepository()->findPackage($extension->getName())->getTitle();
+            $title = App::extension()->getRepository()->findPackage($extension->getName())->getTitle();
 
             return App::view($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 
@@ -198,7 +181,7 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = $this->extensions->get($name)) {
+            if (!$extension = App::extension()->get($name)) {
                 throw new Exception(__('Invalid extension.'));
             }
 
