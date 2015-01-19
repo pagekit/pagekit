@@ -24,7 +24,7 @@ class MaintenanceListener implements EventSubscriberInterface
 
             $attributes->set('_disable_profiler_toolbar', true);
 
-            $event->setResponse(App::response()->create($response));
+            $event->setResponse(App::response($response));
         }
     }
 

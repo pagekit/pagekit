@@ -95,7 +95,7 @@ class AccessListener implements EventSubscriberInterface
         if ($access = $event->getRequest()->attributes->get('_access')) {
             foreach ($access as $expression) {
                 if (!App::user()->hasAccess($expression)) {
-                    $event->setResponse(App::response()->create(__('Insufficient User Rights.'), 403));
+                    $event->setResponse(App::response(__('Insufficient User Rights.'), 403));
                     break;
                 }
             }

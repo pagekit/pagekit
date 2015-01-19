@@ -40,7 +40,7 @@ class ExceptionController
 
         $response = App::view('extensions/system/theme/templates/error.razr', compact('title', 'exception', 'currentContent'));
 
-        return App::response()->create($response, $exception->getStatusCode(), $exception->getHeaders());
+        return App::response($response, $exception->getStatusCode(), $exception->getHeaders());
     }
 
     /**

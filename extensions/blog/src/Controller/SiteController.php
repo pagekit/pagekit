@@ -223,6 +223,6 @@ class SiteController extends Controller
             );
         }
 
-        return App::response()->create($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
+        return App::response($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
     }
 }

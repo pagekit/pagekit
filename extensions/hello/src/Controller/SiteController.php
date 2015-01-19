@@ -62,6 +62,6 @@ class SiteController
 
     function forbiddenAction()
     {
-        return App::response()->create(__('Permission denied.'), 401);
+        return App::response(__('Permission denied.'), 401);
     }
 }
