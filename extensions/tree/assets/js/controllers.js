@@ -71,8 +71,7 @@ angular.module('tree')
             });
         });
 
-        UIkit.$doc.on('uk.nestable.change', function () {
-
+        UIkit.$doc.on('stop.uk.nestable', function () {
             $timeout(function () {
                 var nodes = [];
 
