@@ -10,7 +10,8 @@
     "angular-route": "1.3.*",
     "angular-sanitize": "1.3.*",
     "angular-touch": "1.3.*",
-    "uikit": "2.*"
+    "angular-translate": "2.5.*",
+    "uikit": "~2.16.2"
   },
   "private": true
 }
