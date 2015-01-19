@@ -109,7 +109,7 @@ class SystemExtension extends Extension
             return new CountryHelper;
         };
 
-        $app['system.info'] = function() {
+        $app['systemInfo'] = function() {
             return new SystemInfoHelper;
         };
 
@@ -145,7 +145,7 @@ class SystemExtension extends Extension
 
         if (isset($app['profiler'])) {
             $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['system.info']), 'extensions/system/views/profiler/toolbar/system.php', 'extensions/system/views/profiler/panel/system.php', 50);
+                $app['profiler']->add(new SystemDataCollector($app['systemInfo']), 'extensions/system/views/profiler/toolbar/system.php', 'extensions/system/views/profiler/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'extensions/system/views/profiler/toolbar/user.php', null, -20);
             });
         }

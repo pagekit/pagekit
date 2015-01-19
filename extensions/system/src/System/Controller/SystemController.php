@@ -71,7 +71,7 @@ class SystemController extends Controller
      */
     public function infoAction()
     {
-        return ['head.title' => __('System Information'), 'info' => App::get('system.info')->get()];
+        return ['head.title' => __('System Information'), 'info' => App::systemInfo()->get()];
     }
 
     /**
