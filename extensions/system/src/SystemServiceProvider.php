@@ -2,6 +2,7 @@
 
 namespace Pagekit;
 
+use Pagekit\Application\ServiceProviderInterface;
 use Pagekit\Extension\ExtensionManager;
 use Pagekit\Extension\Package\ExtensionLoader;
 use Pagekit\Extension\Package\ExtensionRepository;
