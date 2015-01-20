@@ -51,6 +51,7 @@ class SystemListener implements EventSubscriberInterface
         $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', ['uikit'], ['requirejs' => true]);
         $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', ['uikit'], ['requirejs' => true]);
         $scripts->register('application', 'extensions/system/app/application.js', 'angular');
+        $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
 
         $helper = new DateHelper(App::dates());
         App::get('tmpl.php')->addHelpers([$helper]);
