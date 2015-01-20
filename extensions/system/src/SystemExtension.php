@@ -36,6 +36,7 @@ use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
 use Pagekit\Widget\Event\WidgetListener;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class SystemExtension extends Extension
@@ -73,6 +74,8 @@ class SystemExtension extends Extension
         parent::boot($app);
 
         $this->mergeOptions();
+
+        $app['db.em']; // -TODO- fix me
 
         $app['menus'] = function() {
             return new MenuProvider;
@@ -141,6 +144,10 @@ class SystemExtension extends Extension
             $mailer->registerPlugin(new ImpersonatePlugin($address, $name));
 
             return $mailer;
+        });
+
+        $app->factory('finder', function() {
+            return Finder::create();
         });
 
         if (isset($app['profiler'])) {

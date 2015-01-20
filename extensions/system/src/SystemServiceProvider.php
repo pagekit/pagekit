@@ -13,7 +13,6 @@ use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Finder\Finder;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
@@ -26,10 +25,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $app['locator'] = function($app) {
             return new Locator($app['path']);
         };
-
-        $app->factory('finder', function() {
-            return Finder::create();
-        });
 
         $app->extend('view', function($view, $app) {
 
