@@ -1,4 +1,4 @@
-require(['jquery', 'uikit!form-password'], function($, uikit) {
+(function($, uikit) {
 
     var Installer = {
 
@@ -215,4 +215,4 @@ require(['jquery', 'uikit!form-password'], function($, uikit) {
         window.Installer = Installer;
     });
 
-});
+}(jQuery, UIkit));

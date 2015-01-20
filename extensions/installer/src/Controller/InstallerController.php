@@ -37,8 +37,7 @@ class InstallerController
      */
     public function indexAction()
     {
-        $redirect = App::router()->getContext()->getBaseUrl().'/admin';
-        return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config, 'redirect' => $redirect];
+        return ['config' => (int) $this->config, 'redirect' => App::url('/admin')];
     }
 
     /**
@@ -104,7 +103,7 @@ class InstallerController
         try {
 
             foreach (['blog', 'page', 'system'] as $extension) {
-                App::extensions()->load($extension);
+                App::extension()->load($extension);
             }
 
             if ('no-connection' == $status) {

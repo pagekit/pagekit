@@ -22,13 +22,9 @@ class InstallerExtension extends Extension
             });
 
             $app->on('system.loaded', function() use ($app) {
-
                 if ($locale = $app['request']->getPreferredLanguage()) {
                     $app['translator']->setLocale($locale);
                 }
-
-                $app['scripts']->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
-                $app['scripts']->register('requirejs-config', 'extensions/system/assets/js/require.js');
             });
         }
     }
