@@ -1,3 +1,0 @@
-<div data-app="site" ng-cloak>
-    <div ng-view></div>
-</div>

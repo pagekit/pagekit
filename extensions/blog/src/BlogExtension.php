@@ -54,7 +54,7 @@ class BlogExtension extends Extension
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.razr');
+            $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.php');
         });
 
         $app->on('site.config', function (ConfigEvent $event) use ($app) {

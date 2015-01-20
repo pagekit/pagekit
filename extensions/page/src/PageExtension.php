@@ -41,7 +41,7 @@ class PageExtension extends Extension
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('page.edit', 'extensions/page/views/tmpl/edit.razr');
+            $event->register('page.edit', 'extensions/page/views/tmpl/edit.php');
         });
     }
 

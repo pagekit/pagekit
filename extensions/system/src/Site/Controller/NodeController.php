@@ -17,17 +17,10 @@ class NodeController extends Controller
 {
     /**
      * @Route("/", methods="GET")
-     * @Response("extensions/system/views/admin/site/index.razr")
+     * @Response("extensions/system/views/admin/site/index.php")
      */
     public function indexAction()
     {
-        App::scripts('angular-resource');
-        App::scripts('angular-route');
-        App::scripts('application', 'extensions/system/app/application.js', 'uikit');
-        App::scripts('site-application', 'extensions/system/app/site.js', ['application', 'uikit-nestable']);
-        App::scripts('site-directives', 'extensions/system/app/directives.js', 'site-application');
-        App::scripts('site-controllers', 'extensions/system/app/controllers.js', 'site-application');
-
         $config = App::trigger('site.config', new ConfigEvent([
             'config'    => [
                 'url'          => App::url()->base(),
@@ -39,9 +32,9 @@ class NodeController extends Controller
                 'roles' => Role::findAll()
             ],
             'templates' => [
-                'site.edit' => App::view('extensions/system/views/tmpl/site.edit.razr'),
-                'site.item' => App::view('extensions/system/views/tmpl/site.item.razr'),
-                'site.list' => App::view('extensions/system/views/tmpl/site.list.razr')
+                'site.edit' => App::view('extensions/system/views/tmpl/site.edit.php'),
+                'site.item' => App::view('extensions/system/views/tmpl/site.item.php'),
+                'site.list' => App::view('extensions/system/views/tmpl/site.list.php')
             ]
         ]))->getConfig();
 

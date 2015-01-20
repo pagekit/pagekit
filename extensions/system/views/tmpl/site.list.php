@@ -1,8 +1,8 @@
-@section('toolbar', 'show')
+<?php $this['sections']->start('toolbar', 'show') ?>
 <div class="uk-float-left">
 
     <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-        <button class="uk-button uk-button-primary" type="button">@trans('Add')</button>
+        <button class="uk-button uk-button-primary" type="button"><?php echo __('Add') ?></button>
         <div class="uk-dropdown uk-dropdown-small">
             <ul class="uk-nav uk-nav-dropdown">
                 <li ng-repeat="type in types"><a ng-href="#/create/{{type.id}}">{{ type.label }}</a></li>
@@ -10,11 +10,11 @@
         </div>
     </div>
 
-    <a class="uk-button pk-button-danger" ng-click="vm.deleteNodes()" ng-show="(selections | truthy).length">@trans('Delete')</a>
-    <a class="uk-button" ng-click="vm.makeFrontpage()" ng-show="(selections | truthy).length === 1">@trans('Make Frontpage')</a>
+    <a class="uk-button pk-button-danger" ng-click="vm.deleteNodes()" ng-show="(selections | truthy).length"><?php echo __('Delete') ?></a>
+    <a class="uk-button" ng-click="vm.makeFrontpage()" ng-show="(selections | truthy).length === 1"><?php echo __('Make Frontpage') ?></a>
 
 </div>
-@endsection
+<?php $this['sections']->end() ?>
 
 <div class="uk-overflow-container">
 
@@ -31,7 +31,3 @@
 <ul class="uk-nestable" data-uk-nestable ng-if="nodes | length">
     <li class="uk-nestable-list-item" ng-repeat="node in vm.getChildren(0)" ng-include="'site.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
 </ul>
-
-<pre>{{ nodes | json }}</pre>
-<pre>{{ types | json }}</pre>
-<pre>{{ selections | json }}</pre>
