@@ -116,10 +116,6 @@ class NodeController extends Controller
                 unset($data['id']);
             }
 
-//            if ($node->get('frontpage')) {
-//                App::option()->set('system:app.frontpage', $node->)
-//            }
-
             $node->save($data);
 
             return $node;

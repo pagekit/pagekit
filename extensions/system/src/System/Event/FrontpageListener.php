@@ -24,14 +24,14 @@ class FrontpageListener implements EventSubscriberInterface
 
     public function onSave(EntityEvent $event) {
         $node = $event->getEntity();
-        if ($node->get('homepage')) {
-            App::option()->set('system:app.frontpage', $node->get('url'));
+        if ($node->get('frontpage')) {
+            App::option()->set('system:app.frontpage', $node->get('url'), true);
         }
     }
 
     public function onDelete(EntityEvent $event) {
-        if ($event->getEntity()->get('homepage')) {
-            App::option()->set('system:app.frontpage', null);
+        if ($event->getEntity()->get('frontpage')) {
+            App::option()->remove('system:app.frontpage');
         }
     }
 
