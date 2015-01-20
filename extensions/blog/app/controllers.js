@@ -1,4 +1,4 @@
-angular.module('tree')
+angular.module('site')
 
     .controller('postEditCtrl', ['$scope', '$resource', 'Application', function ($scope, $resource, App) {
 
