@@ -4,7 +4,7 @@ namespace Pagekit\Site\Event;
 
 use Pagekit\Application\Event;
 
-class NodeTypeEvent extends Event implements \IteratorAggregate
+class TypeEvent extends Event implements \IteratorAggregate
 {
     /**
      * Registers a node type.

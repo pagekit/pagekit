@@ -1,7 +1,7 @@
 angular.module('site')
     .directive('checkAll', ['$filter', function($filter) {
         return {
-            restrict  : 'A',
+            restrict: 'A',
             scope: {
                 checkboxes: '=',
                 all       : '='
@@ -20,7 +20,7 @@ angular.module('site')
                         all      = $filter('toArray')($scope.all);
 
                     $element.prop('indeterminate', selected.length && selected.length !== all.length);
-                    $element.prop('checked', selected.length === all.length);
+                    $element.prop('checked', all.length && selected.length === all.length);
 
                 }, true);
             }

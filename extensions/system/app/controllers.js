@@ -4,12 +4,10 @@ angular.module('site')
 
         var vm = this;
 
-        $scope.nodes = App.data.nodes;
+        $scope.nodes = Node.query(function() {
+            setTypes();
+        });
         $scope.selections = {};
-
-        vm.editNode = function (id) {
-            window.location = App.url('/' + id);
-        };
 
         vm.deleteNodes = function () {
             Node.delete({ id: 'bulk', ids: JSON.stringify(Object.keys($scope.selections)) }, function (data) {
@@ -59,18 +57,7 @@ angular.module('site')
             });
         };
 
-        $scope.$watch('nodes', function() {
-            angular.forEach(($scope.types = angular.copy(App.data.types)), function(type, index) {
-                if (type.type == 'mount') {
-                    angular.forEach($scope.nodes, function(node) {
-                        if (node.type === type.id) {
-                            delete $scope.types[index];
-                        }
-                    });
-                }
-            });
-        });
-
+        // -TODO- listen to "change", currently "change" gets triggered by checkboxes too
         UIkit.$doc.on('stop.uk.nestable', function () {
             $timeout(function () {
                 var nodes = [];
@@ -91,22 +78,44 @@ angular.module('site')
                 vm.bulkSave(nodes);
             });
         });
+
+        $scope.$watch('nodes', function() {
+            setTypes();
+        });
+
+        function setTypes() {
+            angular.forEach(($scope.types = angular.copy(App.data.types)), function(type, index) {
+                if (type.type == 'mount') {
+                    angular.forEach($scope.nodes, function(node) {
+                        if (node.type === type.id) {
+                            delete $scope.types[index];
+                        }
+                    });
+                }
+            });
+        }
+
     }])
 
-    .controller('editCtrl', ['$scope', 'Application', 'Node', function ($scope, App, Node) {
+    .controller('editCtrl', ['$scope', '$routeParams', 'Application', 'Node', function ($scope, $routeParams, App, Node) {
 
-        var vm = this, node = $scope.node = App.data.node;
+        var vm = this;
 
-        $scope.type  = App.data.type;
+        $scope.node = $routeParams['id'] ? Node.query({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type']});
+
         $scope.roles = App.data.roles;
 
         vm.getPath = function () {
-            return (node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + (node.slug || ''));
+            return ($scope.node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + ($scope.node.slug || ''));
+        };
+
+        vm.getType = function() {
+            return App.data.types[$scope.node.type] || {};
         };
 
         vm.save = function () {
-            Node.save({ id: node.id }, { node: node }, function (data) {
-                $scope.node = node = data.toJSON();
+            Node.save({ id: $scope.node.id }, { node: $scope.node }, function (data) {
+                $scope.node = data.toJSON();
             });
         };
 

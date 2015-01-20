@@ -8,7 +8,7 @@ use Pagekit\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\Site\Event\AliasListener;
-use Pagekit\Site\Event\NodeTypeEvent;
+use Pagekit\Site\Event\TypeEvent;
 use Pagekit\Site\Event\RouteListener;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
@@ -97,7 +97,7 @@ class SystemExtension extends Extension
         };
 
         $app['site.types'] = function($app) {
-            return $app->trigger('site.types', new NodeTypeEvent);
+            return $app->trigger('site.types', new TypeEvent);
         };
 
         $app['content'] = function() {

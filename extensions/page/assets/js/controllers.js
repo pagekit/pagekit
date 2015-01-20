@@ -1,4 +1,4 @@
-angular.module('tree')
+angular.module('site')
 
     .controller('pageEditCtrl', ['$scope', 'Application', function ($scope, App) {
 

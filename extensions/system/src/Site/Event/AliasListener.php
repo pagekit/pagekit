@@ -11,7 +11,7 @@ class AliasListener implements EventSubscriberInterface
     /**
      * Registers alias type.
      */
-    public function onSiteTypes(NodeTypeEvent $event)
+    public function onSiteTypes(TypeEvent $event)
     {
         $event->register('alias', 'Alias', [
             'type'      => 'url',
