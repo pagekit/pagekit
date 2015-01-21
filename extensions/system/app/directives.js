@@ -1,5 +1,5 @@
 angular.module('Application')
-    
+
     .directive('checkAll', ['$filter', function($filter) {
         return {
             restrict: 'A',

@@ -28,6 +28,8 @@
 
 </div>
 
-<ul class="uk-nestable" data-uk-nestable ng-if="nodes | length">
+<ul class="uk-nestable" data-uk-nestable>
+<   <!-- -TODO- temporary fix to hide the empty <li>-->
+    <li class="uk-nestable-list-item" ng-hide="nodes | length"></li>
     <li class="uk-nestable-list-item" ng-repeat="node in vm.getChildren(0)" ng-include="'site.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
 </ul>
