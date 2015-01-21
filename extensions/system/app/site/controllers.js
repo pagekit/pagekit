@@ -16,13 +16,13 @@ angular.module('site')
         };
 
         vm.makeFrontpage = function () {
-            bulkSave($filter('filter')($filter('toArray')($scope.nodes), function(node) {
+            bulkSave($filter('toArray')($scope.nodes).filter(function(node) {
                 if (node.data['frontpage']) {
                     delete node.data['frontpage'];
                     return true;
                 }
 
-                if (node.id === $scope.selected[0]) {
+                if (node.id == $scope.selected[0]) {
                     node.data = angular.extend($filter('toObject')(node.data), { frontpage: true });
                     return true;
                 }

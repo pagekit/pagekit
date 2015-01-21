@@ -25,7 +25,8 @@ class NodeController extends Controller
             'config'    => [
                 'url'          => App::url()->base(),
                 'route'        => App::url('@system/node'),
-                'url.template' => App::url('@system/template')
+                'url.template' => App::url('@system/template'),
+                'csrf'         => App::csrf()->generate()
             ],
             'data'   => [
                 'types' => App::get('site.types')->getTypes(),
@@ -58,7 +59,7 @@ class NodeController extends Controller
     /**
      * @Route("/node/", methods="POST")
      * @Route("/node/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"node": "array", "id": "int"})
+     * @Request({"node": "array", "id": "int"}, csrf=true)
      * @Response("json")
      */
     public function saveAction($data, $id = 0)
@@ -81,7 +82,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/node/{id}", methods="DELETE", requirements={"id"="\d+"})
-     * @Request({"id": "int"})
+     * @Request({"id": "int"}, csrf=true)
      * @Response("json")
      */
     public function deleteAction($id)
@@ -101,7 +102,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/node/bulk", methods="POST")
-     * @Request({"nodes": "json"})
+     * @Request({"nodes": "json"}, csrf=true)
      * @Response("json")
      */
     public function bulkSaveAction($nodes = [])
@@ -115,7 +116,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/node/bulk", methods="DELETE")
-     * @Request({"ids": "json"})
+     * @Request({"ids": "json"}, csrf=true)
      * @Response("json")
      */
     public function bulkDeleteAction($ids = [])

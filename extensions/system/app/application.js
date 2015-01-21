@@ -75,7 +75,7 @@
             };
         })
 
-        .config(['$provide', function($provide) {
+        .config(['$provide', '$httpProvider', function($provide, $httpProvider) {
 
             $provide.decorator('$templateCache', ['$delegate', 'Application', function($delegate, App) {
 
@@ -95,6 +95,26 @@
                     }
 
                     return $delegate(tpl, ignoreRequestError);
+                };
+            }]);
+
+            $httpProvider.interceptors.push(['Application', function(App) {
+
+                return {
+
+                    request: function(config) {
+
+                        if (config.method == 'PUT' || config.method == 'DELETE') {
+                            config.headers['X-HTTP-Method-Override'] = config.method;
+                            config.method = 'POST';
+                        }
+
+                        if (config.method == 'POST') {
+                            config.headers['X-XSRF-TOKEN'] = App.config.csrf;
+                        }
+
+                        return config;
+                    }
                 };
             }]);
 
