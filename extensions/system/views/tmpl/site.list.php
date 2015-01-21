@@ -5,7 +5,7 @@
         <button class="uk-button uk-button-primary" type="button"><?php echo __('Add') ?></button>
         <div class="uk-dropdown uk-dropdown-small">
             <ul class="uk-nav uk-nav-dropdown">
-                <li ng-repeat="type in types"><a ng-href="#/create/{{type.id}}">{{ type.label }}</a></li>
+                <li ng-repeat="type in types" ng-if="!vm.isMounted(type)"><a ng-href="#/create/{{type.id}}">{{ type.label }}</a></li>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
 </div>
 
 <ul class="uk-nestable" data-uk-nestable>
-<   <!-- -TODO- temporary fix to hide the empty <li>-->
+    <!-- -TODO- temporary fix to hide the empty <li>-->
     <li class="uk-nestable-list-item" ng-hide="nodes | length"></li>
     <li class="uk-nestable-list-item" ng-repeat="node in vm.getChildren(0)" ng-include="'site.item'" ng-init="children = vm.getChildren(node.id)" ng-class="{ 'uk-parent': children.length }"></li>
 </ul>

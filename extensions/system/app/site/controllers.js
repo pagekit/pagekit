@@ -4,10 +4,9 @@ angular.module('site')
 
         var vm = this;
 
-        $scope.nodes = Node.query(function() {
-            setTypes();
-        });
+        $scope.nodes = Node.query();
         $scope.selections = {};
+        $scope.types = App.data.types;
 
         vm.deleteNodes = function () {
             Node.delete({ id: 'bulk', ids: JSON.stringify(Object.keys($scope.selections)) }, function (data) {
@@ -57,6 +56,10 @@ angular.module('site')
             });
         };
 
+        vm.isMounted = function(type) {
+            return type.type === 'mount' && $filter('toArray')($scope.nodes).filter(function(node) { return type.id === node.type; }).length;
+        };
+
         // -TODO- listen to "change", currently "change" gets triggered by checkboxes too
         UIkit.$doc.on('stop.uk.nestable', function () {
             $timeout(function () {
@@ -78,23 +81,6 @@ angular.module('site')
                 vm.bulkSave(nodes);
             });
         });
-
-        $scope.$watch('nodes', function() {
-            setTypes();
-        });
-
-        function setTypes() {
-            angular.forEach(($scope.types = angular.copy(App.data.types)), function(type, index) {
-                if (type.type == 'mount') {
-                    angular.forEach($scope.nodes, function(node) {
-                        if (node.type === type.id) {
-                            delete $scope.types[index];
-                        }
-                    });
-                }
-            });
-        }
-
     }])
 
     .controller('editCtrl', ['$scope', '$routeParams', 'Application', 'Node', function ($scope, $routeParams, App, Node) {
