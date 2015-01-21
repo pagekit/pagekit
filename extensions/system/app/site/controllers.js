@@ -5,31 +5,29 @@ angular.module('site')
         var vm = this;
 
         $scope.nodes = Node.query();
-        $scope.selections = {};
+        $scope.selected = [];
         $scope.types = App.data.types;
 
         vm.deleteNodes = function () {
-            Node.delete({ id: 'bulk', ids: JSON.stringify(Object.keys($scope.selections)) }, function (data) {
+            Node.delete({ id: 'bulk', ids: JSON.stringify($scope.selected) }, function (data) {
                 $scope.nodes = data;
             });
-            $scope.selections = {};
+            $scope.selected = [];
         };
 
         vm.makeFrontpage = function () {
+            bulkSave($filter('filter')($filter('toArray')($scope.nodes), function(node) {
+                if (node.data['frontpage']) {
+                    delete node.data['frontpage'];
+                    return true;
+                }
 
-            var nodes = $filter('filter')($filter('toArray')($scope.nodes), function(node) {
-                    if (node.data['frontpage']) {
-                        delete node.data['frontpage'];
-                        return true;
-                    }
-                }),
-                node  = $filter('first')($scope.selections);
-
-            node.data = angular.extend($filter('toObject')(node.data), { frontpage: true });
-            nodes.push(node);
-
-            vm.bulkSave(nodes);
-            $scope.selections = {};
+                if (node.id === $scope.selected[0]) {
+                    node.data = angular.extend($filter('toObject')(node.data), { frontpage: true });
+                    return true;
+                }
+            }));
+            $scope.selected = [];
         };
 
         vm.toggleStatus = function (node) {
@@ -50,26 +48,25 @@ angular.module('site')
             return App.config.url + vm.getNodePath(node);
         };
 
-        vm.bulkSave = function(nodes) {
-            Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) }, function (data) {
-                $scope.nodes = data;
-            });
-        };
-
         vm.isMounted = function(type) {
             return type.type === 'mount' && $filter('toArray')($scope.nodes).filter(function(node) { return type.id === node.type; }).length;
         };
 
+        function bulkSave(nodes) {
+            Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) }, function (data) {
+                $scope.nodes = data;
+            });
+        }
+
         // -TODO- listen to "change", currently "change" gets triggered by checkboxes too
-        UIkit.$doc.on('stop.uk.nestable', function () {
+        UIkit.$doc.on('stop.uk.nestable', 'ul.uk-nestable:first', function () {
+            var list = angular.element(this);
             $timeout(function () {
                 var nodes = [];
 
-                angular.forEach(angular.element('ul.uk-nestable:first li'), function (element, priority) {
+                list.find('li').each(function(priority, element) {
 
-                    element = angular.element(element);
-
-                    var node = angular.copy(element.scope().node), parent = element.parent().parent().scope().node;
+                    var elem = angular.element(element), node = elem.scope().node, parent = elem.parent().parent().scope().node;
 
                     node.priority = priority;
                     node.parentId = parent && parent.id || 0;
@@ -78,7 +75,7 @@ angular.module('site')
                     nodes.push(node);
                 });
 
-                vm.bulkSave(nodes);
+                bulkSave(nodes);
             });
         });
     }])

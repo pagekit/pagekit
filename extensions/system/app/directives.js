@@ -1,27 +1,54 @@
 angular.module('Application')
 
-    .directive('checkAll', ['$filter', function($filter) {
+    .directive('checkList', function () {
         return {
-            restrict: 'A',
-            scope: {
-                checkboxes: '=',
-                all       : '='
+            restrict  : 'A',
+            scope     : {
+                list : '=checkList',
+                value: '@'
             },
-            controller: function($scope, $element) {
+            controller: function ($scope, $element) {
 
-                $element.bind('change', function() {
-                    $scope.$apply(function() {
-                        $scope.checkboxes = $element.is(':checked') ? angular.copy($scope.all) : (angular.isObject($scope.all) ? {} : []);
+                $element.on('change', function () {
+                    $scope.$apply(function () {
+                        var checked = $element.prop('checked'), index = $scope.list.indexOf($scope.value);
+
+                        if (checked && index == -1) {
+                            $scope.list.push($scope.value);
+                        } else if (!checked && index != -1) {
+                            $scope.list.splice(index, 1);
+                        }
                     });
                 });
 
-                $scope.$watch('checkboxes', function() {
+                $scope.$watch('list', function () {
+                    $element.prop('checked', -1 !== $scope.list.indexOf($scope.value));
+                }, true);
+            }
+        };
+    })
 
-                    var selected = $filter('truthy')($filter('toArray')($scope.checkboxes)),
-                        all      = $filter('toArray')($scope.all);
+    .directive('checkAll', ['$filter', function ($filter) {
+        return {
+            restrict: 'A',
+            scope   : {
+                all     : '=checkAll',
+                selected: '=checkSelected'
+            },
+            controller: function ($scope, $element) {
 
-                    $element.prop('indeterminate', selected.length && selected.length !== all.length);
-                    $element.prop('checked', all.length && selected.length === all.length);
+                $element.on('change', function () {
+                    $scope.$apply(function () {
+                        $scope.selected = $element.is(':checked') ? Object.keys($scope.all).filter($filter('number')) : [];
+                    });
+                });
+
+                $scope.$watch('selected', function () {
+                    var selected = $filter('length')($scope.selected),
+                        all = $filter('length')($scope.all);
+
+                    $element.prop('indeterminate', selected && selected !== all);
+                    $element.prop('checked', all && selected === all);
 
                 }, true);
             }

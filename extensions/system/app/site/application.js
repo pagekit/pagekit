@@ -10,14 +10,6 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
         });
     }])
 
-    .filter('truthy', ['$filter', function($filter) {
-        return function(collection) {
-            return $filter('toArray')(collection).filter(function(value) {
-                return !!value;
-            });
-        };
-    }])
-
     .config(['$routeProvider', function($routeProvider) {
 
         $routeProvider.when("/create/:type", {
