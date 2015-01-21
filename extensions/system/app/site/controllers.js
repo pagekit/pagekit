@@ -49,7 +49,7 @@ angular.module('site')
         };
 
         vm.isMounted = function(type) {
-            return type.type === 'mount' && $filter('toArray')($scope.nodes).filter(function(node) { return type.id === node.type; }).length;
+            return type.type === 'mount' && $filter('filter')($filter('toArray')($scope.nodes), { type: type.id }, true).length;
         };
 
         function bulkSave(nodes) {
