@@ -6,7 +6,6 @@ use Pagekit\Application\Console\Command;
 use Pagekit\System\Console\NodeVisitor\NodeVisitor;
 use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
 use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
-use Pagekit\Translation\Loader\PoFileLoader;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,20 +47,11 @@ class ExtensionTranslateCommand extends Command
     protected $xgettext;
 
     /**
-     * The .po file loader.
-     *
-     * @var PoFileLoader
-     */
-    protected $loader;
-
-    /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this->addArgument('extension', InputArgument::OPTIONAL, 'Extension name');
-        $this->addOption('merge', null, InputOption::VALUE_NONE, 'Merge new translations with existing languages');
-        $this->addOption('compile', null, InputOption::VALUE_NONE, 'Compile .po files to .php files');
     }
 
     /**
@@ -77,7 +67,6 @@ class ExtensionTranslateCommand extends Command
             'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
         ];
         $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
-        $this->loader     = new PoFileLoader;
     }
 
     /**
@@ -124,7 +113,7 @@ class ExtensionTranslateCommand extends Command
         // remove strings already present in system "messages"
         if ($extension != 'system') {
 
-            $messages = $this->loader->load($this->getPath('system').'/languages/en_US/messages.po', 'en_US');
+            $messages = require($this->getPath('system').'/languages/en_US/messages.php');
 
             foreach ($result as $domain => $strings) {
 
@@ -133,7 +122,7 @@ class ExtensionTranslateCommand extends Command
                 }
 
                 foreach (array_keys($strings) as $string) {
-                    if ($messages->has($string)) {
+                    if (isset($messages[$string])) {
                         unset($result[$domain][$string]);
                     }
                 }
@@ -214,42 +203,6 @@ class ExtensionTranslateCommand extends Command
             if (!file_exists($refFile) || !($compare = preg_replace('/^"POT-Creation-Date: (.*)$/im', '', [file_get_contents($refFile), $data]) and $compare[0] === $compare[1])) {
                 file_put_contents($refFile, $data);
             }
-
-            $files = Finder::create()->files()->in($path)->name("$domain.po");
-
-            if ($this->option('merge') && $this->xgettext) {
-                $this->line("Merging new translations with existing languages");
-                $progress = new ProgressBar($this->output, $files->count());
-                $progress->start();
-
-                foreach ($files as $file) {
-                    exec('msgmerge --update --no-fuzzy-matching --backup=off '.$file->getPathname().' '.$refFile.' 2> /dev/null');
-                    $progress->advance();
-                }
-
-                $progress->finish();
-                $this->line("\n");
-            }
-
-            if ($this->option('compile')) {
-                $this->line("Compiling .po files to .php files");
-                $progress = new ProgressBar($this->output, $files->count());
-                $progress->start();
-
-                foreach ($files as $file) {
-
-                    $messages = $this->loader->load($file->getPathname(), 'en', $domain);
-
-                    file_put_contents(preg_replace('/\.po$/', '.php', $file->getPathname()), '<?php return '.var_export($messages->all($domain), true).';');
-
-                    $progress->advance();
-                }
-
-                $progress->finish();
-            }
-
-
-            $this->line("\n");
         }
     }
 
