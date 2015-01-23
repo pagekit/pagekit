@@ -4,7 +4,6 @@ namespace Pagekit\System\Console\Translate;
 
 use GuzzleHttp\Client;
 
-
 /**
 * Access the Api of transifex.com to fetch ressources and translated strings.
 */
