@@ -81,10 +81,13 @@ class InstallerController
         } catch (\Exception $e) {
 
             $message = __('Database connection failed!');
-
+            
             if ($e->getCode() == 1045) {
                 $message = __('Database access denied!');
+            } else {
+                $message .= " " . __('Message was: ') . $e->getMessage();
             }
+
         }
 
         return ['status' => $status, 'message' => $message];
