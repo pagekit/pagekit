@@ -86,11 +86,11 @@
                 return $delegate;
             }]);
 
-            $provide.decorator('$templateRequest', ['$delegate', 'Application', function($delegate, App) {
+            $provide.decorator('$templateRequest', ['$delegate', '$templateCache', 'Application', function($delegate, $templateCache, App) {
 
                 return function(tpl, ignoreRequestError) {
 
-                    if (!App.templates || !App.templates[tpl]) {
+                    if (!$templateCache.get(tpl) || !App.templates || !App.templates[tpl]) {
                         tpl = App.templateUrl(tpl);
                     }
 

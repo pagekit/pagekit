@@ -38,6 +38,9 @@ class Node implements NodeInterface, \JsonSerializable
     /** @Column(type="string") */
     protected $type;
 
+    /** @Column(type="string") */
+    protected $menu = '';
+
     /** @Column(type="json_array") */
     protected $data;
 
@@ -119,6 +122,16 @@ class Node implements NodeInterface, \JsonSerializable
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
     }
 
     public function jsonSerialize()

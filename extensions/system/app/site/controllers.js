@@ -6,7 +6,9 @@ angular.module('site')
 
         $scope.nodes = Node.query();
         $scope.selected = [];
-        $scope.types = App.data.types;
+        $scope.types = angular.copy(App.data.types);
+        $scope.menus = angular.copy(App.data.menus);
+        $scope.menus.push('');
 
         vm.deleteNodes = function () {
             Node.delete({ id: 'bulk', ids: JSON.stringify($scope.selected) }, function (data) {
@@ -16,7 +18,7 @@ angular.module('site')
         };
 
         vm.makeFrontpage = function () {
-            bulkSave($filter('toArray')($scope.nodes).filter(function(node) {
+            bulkSave($filter('toArray')($scope.nodes).filter(function (node) {
                 if (node.data['frontpage']) {
                     delete node.data['frontpage'];
                     return true;
@@ -36,47 +38,56 @@ angular.module('site')
             });
         };
 
-        vm.getChildren = function (id) {
-            return $filter('orderBy')($filter('filter')($filter('toArray')($scope.nodes), { parentId: id }, true), 'priority');
-        };
-
-        vm.getNodePath = function(node) {
+        vm.getNodePath = function (node) {
             return node.data['frontpage'] ? '/' : node.path;
         };
 
-        vm.getNodeUrl = function(node) {
+        vm.getNodeUrl = function (node) {
             return App.config.url + vm.getNodePath(node);
         };
 
-        vm.isMounted = function(type) {
+        vm.isMounted = function (type) {
             return type.type === 'mount' && $filter('filter')($filter('toArray')($scope.nodes), { type: type.id }, true).length;
         };
 
         function bulkSave(nodes) {
-            Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) }, function (data) {
-                $scope.nodes = data;
-            });
+            Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) });
         }
 
-        // -TODO- listen to "change", currently "change" gets triggered by checkboxes too
-        UIkit.$doc.on('stop.uk.nestable', 'ul.uk-nestable:first', function () {
-            var list = angular.element(this);
-            $timeout(function () {
-                var nodes = [];
+        $scope.$watch('nodes', function (nodes) {
 
-                list.find('li').each(function(priority, element) {
-
-                    var elem = angular.element(element), node = elem.scope().node, parent = elem.parent().parent().scope().node;
-
-                    node.priority = priority;
-                    node.parentId = parent && parent.id || 0;
-                    node.path = (parent && parent.path || '') + '/' + node.slug;
-
-                    nodes.push(node);
-                });
-
-                bulkSave(nodes);
+            var tree = { 0: { children: [] } };
+            angular.forEach($filter('orderBy')($filter('toArray')(nodes), 'priority'), function (node) {
+                tree[node.id] = tree[node.id] || { node: node, children: [] };
+                (tree[node.parentId] = tree[node.parentId] || { node: nodes[node.parentId], children: [] }).children.push(tree[node.id]);
             });
+
+            $scope.tree = {};
+            angular.forEach($scope.menus, function (menu) {
+                $scope.tree[menu] = tree[0].children.filter(function (item) {
+                    return menu == item.node.menu;
+                });
+            });
+
+        }, true);
+
+        var debounce;
+        $scope.$on('change.nestable', function (event, items) {
+
+            items.forEach(function (item) {
+
+                var node = item.node, parent = $scope.nodes[item.parent_id];
+
+                node.priority = item.order;
+                node.parentId = item.parent_id || 0;
+                node.path = (parent && parent.path || '') + '/' + node.slug;
+                node.menu = event.targetScope.group;
+            });
+
+            $timeout.cancel(debounce);
+            debounce = $timeout(function () {
+                bulkSave($scope.nodes);
+            }, 100);
         });
     }])
 
@@ -84,7 +95,7 @@ angular.module('site')
 
         var vm = this;
 
-        $scope.node = $routeParams['id'] ? Node.query({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type']});
+        $scope.node = $routeParams['id'] ? Node.query({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type'] });
 
         $scope.roles = App.data.roles;
 
@@ -92,7 +103,7 @@ angular.module('site')
             return ($scope.node.path || '').replace(/^((.*)\/[^/]*)?$/, '$2/' + ($scope.node.slug || ''));
         };
 
-        vm.getType = function() {
+        vm.getType = function () {
             return App.data.types[$scope.node.type] || {};
         };
 

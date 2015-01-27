@@ -30,11 +30,11 @@ class NodeController extends Controller
             ],
             'data'   => [
                 'types' => App::get('site.types')->getTypes(),
-                'roles' => Role::findAll()
+                'roles' => Role::findAll(),
+                'menus'  => ['Main']
             ],
             'templates' => [
                 'site.edit' => App::view('extensions/system/views/tmpl/site.edit.php'),
-                'site.item' => App::view('extensions/system/views/tmpl/site.item.php'),
                 'site.list' => App::view('extensions/system/views/tmpl/site.list.php')
             ]
         ]))->getConfig();

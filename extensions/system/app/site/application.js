@@ -2,7 +2,7 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
 
     .value('name', 'site')
 
-    .value('UIkit', jQuery.UIkit)
+    .value('UIkit', UIkit)
 
     .factory('Node', ['$resource', 'Application', function($resource, App) {
         return $resource(App.url('/node/:id'), {}, {
