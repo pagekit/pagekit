@@ -3,20 +3,11 @@
 namespace Pagekit\Extension;
 
 use Pagekit\Application as App;
+use Pagekit\Module\ModuleInterface;
 use Pagekit\Routing\Controller\ControllerCollection;
 
-class Extension
+class Extension implements ModuleInterface
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $path;
-
     /**
      * @var array
      */
@@ -33,24 +24,12 @@ class Extension
     protected $reflected;
 
     /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $path
-     * @param array  $config
+     * Loads the extension.
      */
-    public function __construct($name, $path, array $config = [])
+    public function load(App $app, array $config)
     {
-        $this->name   = $name;
-        $this->path   = $path;
         $this->config = $config;
-    }
 
-    /**
-     * Boots the extension.
-     */
-    public function boot(App $app)
-    {
         $this->registerControllers($app['controllers']);
 
         $this->registerLanguages();
@@ -64,7 +43,7 @@ class Extension
                 $this->parameters = array_replace($this->parameters, $defaults);
             }
 
-            if (is_array($settings = App::option("{$this->name}:settings"))) {
+            if (is_array($settings = App::option("{$config['name']}:settings"))) {
                 $this->parameters = array_replace($this->parameters, $settings);
             }
         }
@@ -75,7 +54,7 @@ class Extension
      */
     public function getName()
     {
-        return $this->name;
+        return $this->config['name'];
     }
 
     /**
@@ -83,7 +62,7 @@ class Extension
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->config['path'];
     }
 
     /**

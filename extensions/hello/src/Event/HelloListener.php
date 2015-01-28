@@ -2,7 +2,7 @@
 
 namespace Pagekit\Hello\Event;
 
-use Pagekit\Application\Event\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class HelloListener implements EventSubscriberInterface
 {

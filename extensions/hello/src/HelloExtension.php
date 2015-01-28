@@ -13,9 +13,9 @@ class HelloExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function boot(App $app)
+    public function load(App $app, array $config)
     {
-        parent::boot($app);
+        parent::load($app, $config);
 
         $app->subscribe(new HelloListener());
 

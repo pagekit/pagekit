@@ -9,6 +9,7 @@ use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Filesystem\Locator;
+use Pagekit\Module\ModuleManager;
 use Pagekit\Package\Installer\PackageInstaller;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Package\Exception\ExtensionLoadException;
@@ -21,6 +22,10 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     public function register(Application $app)
     {
         $this->app = $app;
+
+        $app['module'] = function() {
+            return new ModuleManager;
+        };
 
         $app['locator'] = function($app) {
             return new Locator($app['path']);
@@ -54,14 +59,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function boot(Application $app)
     {
-        foreach (array_unique($app['extensions.boot']) as $extension) {
-            try {
-                $app['extension']->load($extension)->boot($app);
-            } catch (ExtensionLoadException $e) {
-                $app->trigger('extension.load_failure', new LoadFailureEvent($extension));
-            }
-        }
-
         if ($app->runningInConsole()) {
 
             $app['isAdmin'] = false;
