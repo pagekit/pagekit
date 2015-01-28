@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console\Translate;
+namespace Pagekit\Console\Translate;
 
 use GuzzleHttp\Client;
 

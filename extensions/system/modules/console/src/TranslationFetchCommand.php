@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Pagekit\System\Console\Translate\TransifexApi;
+use Pagekit\Console\Translate\TransifexApi;
 
 class TranslationFetchCommand extends Command
 {

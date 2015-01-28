@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Composer\Factory;
 use Composer\Installer;

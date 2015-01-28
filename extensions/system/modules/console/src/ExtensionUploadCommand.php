@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;

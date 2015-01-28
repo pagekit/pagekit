@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Pagekit\Application\Console\Command;
-use Pagekit\System\Console\NodeVisitor\NodeVisitor;
-use Pagekit\System\Console\NodeVisitor\PhpNodeVisitor;
-use Pagekit\System\Console\NodeVisitor\RazrNodeVisitor;
+use Pagekit\Console\NodeVisitor\NodeVisitor;
+use Pagekit\Console\NodeVisitor\PhpNodeVisitor;
+use Pagekit\Console\NodeVisitor\RazrNodeVisitor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -61,21 +61,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         // $app['option']->get('system:extensions', [])
 
         if ($app->runningInConsole()) {
-
             $app['isAdmin'] = false;
-
             $app->trigger('system.init');
-            $app->on('console.init', function($event) {
-
-                $console = $event->getConsole();
-                $namespace = 'Pagekit\\System\\Console\\';
-
-                foreach (glob(__DIR__.'/System/Console/*Command.php') as $file) {
-                    $class = $namespace.basename($file, '.php');
-                    $console->add(new $class);
-                }
-
-            });
         }
 
         $app->subscribe($this);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,17 +8,25 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 
-class ThemeGenerateCommand extends Command
+class ExtensionGenerateCommand extends Command
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'theme:generate';
+    protected $name = 'extension:generate';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Builds a theme skeleton with minimum requirements.';
+    protected $description = 'Builds an extension skeleton with minimum requirements.';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->addArgument('extension', InputArgument::REQUIRED, 'Extension name');
+    }
 
     /**
      * {@inheritdoc}
@@ -27,29 +35,29 @@ class ThemeGenerateCommand extends Command
     {
         $name = $this->argument('extension');
 
-        if (is_dir($path = $this->pagekit['path.themes']."/$name")) {
-            $this->abort("Theme already exists '$path'");
+        if (is_dir($path = $this->pagekit['path.extensions']."/$name")) {
+            $this->abort("Extension already exists '$path'");
         }
 
         $title     = $this->ask('Title: ');
         $author    = $this->ask('Author: ');
         $email     = $this->ask('Email: ');
         $namespace = $this->ask('PHP Namespace: ');
-        $classname = ucfirst($name).'Theme';
+        $classname = ucfirst($name).'Extension';
 
         $replace = [
-            '%NAME%'   => $name,
-            '%TITLE%'  => $title,
-            '%AUTHOR%' => $author,
-            '%EMAIL%'  => $email,
+            '%NAME%'          => $name,
+            '%TITLE%'         => $title,
+            '%AUTHOR%'        => $author,
+            '%EMAIL%'         => $email,
             '%CLASSNAME%'     => $classname,
             '%NAMESPACE%'     => $namespace,
             '%NAMESPACE_ESC%' => addslashes($namespace)
         ];
 
-        foreach (Finder::create()->files()->in(__DIR__.'/skeleton/theme') as $file) {
+        foreach (Finder::create()->files()->in(dirname(__DIR__).'/skeleton/extension') as $file) {
 
-            if ($file->getFilename() == 'DefaultTheme.php') {
+            if ($file->getFilename() == 'DefaultExtension.php') {
                 $filename = "$path/src/$classname.php";
             } else {
                 $filename = "$path/".$file->getRelativepathname();
@@ -64,13 +72,5 @@ class ThemeGenerateCommand extends Command
 
             file_put_contents($filename, $content);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this->addArgument('extension', InputArgument::REQUIRED, 'Theme name');
     }
 }

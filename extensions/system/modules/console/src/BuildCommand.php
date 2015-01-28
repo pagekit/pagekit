@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Console;
+namespace Pagekit\Console;
 
 use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Input\ArrayInput;
