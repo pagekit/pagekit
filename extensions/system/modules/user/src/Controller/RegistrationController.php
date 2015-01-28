@@ -14,7 +14,7 @@ use Pagekit\User\Entity\User;
 class RegistrationController extends Controller
 {
     /**
-     * @Response("extensions/system/views/user/registration.razr")
+     * @Response("extensions/system/modules/user/views/registration.razr")
      */
     public function indexAction()
     {
@@ -198,7 +198,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Welcome to %site%!', ['%site%' => App::option('system:app.site_title')]))
-                 ->setBody(App::view('extensions/system/views/user/mails/welcome.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('extensions/system/modules/user/views/mails/welcome.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -211,7 +211,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Activate your %site% account.', ['%site%' => App::option('system:app.site_title')]))
-                 ->setBody(App::view('extensions/system/views/user/mails/verification.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('extensions/system/modules/user/views/mails/verification.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -226,7 +226,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo(App::option('system:mail.from.address'))
                  ->setSubject(__('Approve an account at %site%.', ['%site%' => App::option('system:app.site_title')]))
-                 ->setBody(App::view('extensions/system/views/user/mails/approve.razr', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('extensions/system/modules/user/views/mails/approve.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

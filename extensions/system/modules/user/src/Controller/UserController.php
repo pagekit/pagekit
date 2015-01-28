@@ -16,7 +16,7 @@ class UserController
 
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("extensions/system/views/admin/user/index.razr")
+     * @Response("extensions/system/modules/user/views/admin/index.razr")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -78,7 +78,7 @@ class UserController
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view('extensions/system/views/admin/user/table.razr', ['users' => $users]),
+                'table' => App::view('extensions/system/modules/user/views/admin/table.razr', ['users' => $users]),
                 'total' => $total
             ]);
         }
@@ -87,7 +87,7 @@ class UserController
     }
 
     /**
-     * @Response("extensions/system/views/admin/user/edit.razr")
+     * @Response("extensions/system/modules/user/views/admin/edit.razr")
      */
     public function addAction()
     {
@@ -101,7 +101,7 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("extensions/system/views/admin/user/edit.razr")
+     * @Response("extensions/system/modules/user/views/admin/edit.razr")
      */
     public function editAction($id)
     {

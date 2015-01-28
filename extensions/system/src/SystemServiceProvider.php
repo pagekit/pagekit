@@ -53,12 +53,13 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
         $app['path.storage'] = $app['config']['locator.paths.storage'] = rtrim($app['path'] . '/' . $app['config']['app.storage'], '/');
-
-        $app['extensions.boot'] = [];
     }
 
     public function boot(Application $app)
     {
+        $app['module']->load($app);
+        // $app['option']->get('system:extensions', [])
+
         if ($app->runningInConsole()) {
 
             $app['isAdmin'] = false;

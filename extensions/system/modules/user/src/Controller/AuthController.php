@@ -17,7 +17,7 @@ class AuthController extends Controller
     /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
-     * @Response("extensions/system/views/user/login.razr")
+     * @Response("extensions/system/modules/user/views/login.razr")
      */
     public function loginAction($redirect = '')
     {

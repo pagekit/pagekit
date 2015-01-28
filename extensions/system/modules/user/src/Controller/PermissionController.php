@@ -12,7 +12,7 @@ use Pagekit\User\Entity\Role;
 class PermissionController
 {
     /**
-     * @Response("extensions/system/views/admin/user/permission.razr")
+     * @Response("extensions/system/modules/user/views/admin/permission.razr")
      */
     public function indexAction()
     {

@@ -35,9 +35,6 @@ try {
     }
 
     $app['module']->addPath($app['path.extensions'].'/*/extension.php');
-    $app['module']->load($app);
-
-    // $app['option']->get('system:extensions', [])
 
 } catch (InstallerException $e) {
 

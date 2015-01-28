@@ -28,13 +28,7 @@ use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
-use Pagekit\User\Entity\Role;
-use Pagekit\User\Entity\User as UserEntity;
-use Pagekit\User\Event\AccessListener;
-use Pagekit\User\Event\AuthorizationListener;
-use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\PermissionEvent;
-use Pagekit\User\Event\UserListener;
 use Pagekit\Widget\Event\WidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
@@ -51,14 +45,11 @@ class SystemExtension extends Extension
         }
 
         $app->subscribe(
-            new AccessListener,
             new AdminMenuListener,
             new AliasListener,
-            new AuthorizationListener,
             new CanonicalListener,
             new FrontpageListener,
             new LocaleListener,
-            new LoginAttemptListener,
             new MaintenanceListener,
             new MenuListener,
             new MigrationListener,
@@ -67,7 +58,6 @@ class SystemExtension extends Extension
             new SystemListener,
             new ThemeListener,
             new ThemeWidgetListener,
-            new UserListener,
             new WidgetListener
         );
 
@@ -79,21 +69,6 @@ class SystemExtension extends Extension
 
         $app['menus'] = function() {
             return new MenuProvider;
-        };
-
-        $app['user'] = function($app) {
-
-            if (!$user = $app['auth']->getUser()) {
-                $user  = new UserEntity;
-                $roles = Role::where(['id' => Role::ROLE_ANONYMOUS])->get();
-                $user->setRoles($roles);
-            }
-
-            return $user;
-        };
-
-        $app['permissions'] = function($app) {
-            return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
         };
 
         $app['site.types'] = function($app) {
