@@ -10,9 +10,6 @@ use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\FinderHelper;
 use Pagekit\System\Widget\TextWidget;
-use Pagekit\User\Dashboard\UserWidget;
-use Pagekit\User\Event\PermissionEvent;
-use Pagekit\User\Widget\LoginWidget;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\Directive\FunctionDirective;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -89,7 +86,6 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemWidget(RegisterWidgetEvent $event)
     {
-        $event->register(new LoginWidget);
         $event->register(new MenuWidget);
         $event->register(new TextWidget);
     }

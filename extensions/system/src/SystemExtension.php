@@ -23,7 +23,6 @@ use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
-use Pagekit\Widget\Event\WidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -48,8 +47,7 @@ class SystemExtension extends Extension
             new ResponseListener,
             new SystemListener,
             new ThemeListener,
-            new ThemeWidgetListener,
-            new WidgetListener
+            new ThemeWidgetListener
         );
 
         parent::load($app, $config);

@@ -23,22 +23,13 @@ return [
             'Pagekit\\System\\Controller\\SettingsController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController',
-            'Pagekit\\Theme\\Controller\\ThemesController',
-            'Pagekit\\Widget\\Controller\\WidgetsController'
+            'Pagekit\\Theme\\Controller\\ThemesController'
         ]
 
     ],
 
     'menu' => [
 
-        'system: widgets' => [
-            'label'    => 'Widgets',
-            'icon'     => 'extensions/system/assets/images/icon-widgets.svg',
-            'url'      => '@system/widgets',
-            'active'   => '@system/widgets*',
-            'access'   => 'system: manage widgets',
-            'priority' => 5
-        ],
         'system: menu' => [
             'label'    => 'Menus',
             'icon'     => 'extensions/system/assets/images/icon-menus.svg',
@@ -61,9 +52,6 @@ return [
 
         'system: manage menus' => [
             'title' => 'Manage menus'
-        ],
-        'system: manage widgets' => [
-            'title' => 'Manage widgets'
         ],
         'system: manage themes' => [
             'title' => 'Manage themes'

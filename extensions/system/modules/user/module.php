@@ -8,6 +8,7 @@ use Pagekit\User\Event\AuthorizationListener;
 use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\PermissionEvent;
 use Pagekit\User\Event\UserListener;
+use Pagekit\User\Widget\LoginWidget;
 
 return [
 
@@ -45,6 +46,10 @@ return [
 
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
+        });
+
+        $app->on('system.widget', function ($event) {
+            $event->register(new LoginWidget);
         });
 
         $app->on('system.dashboard', function ($event) {
