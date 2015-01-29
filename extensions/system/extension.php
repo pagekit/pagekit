@@ -9,8 +9,7 @@ return [
     'controllers' => [
 
         '@system: /' => [
-            'Pagekit\\System\\Controller\\AdminController',
-            'Pagekit\\System\\Controller\\OAuthController'
+            'Pagekit\\System\\Controller\\AdminController'
         ],
 
         '@system: /system' => [

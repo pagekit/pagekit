@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Helper;
+namespace Pagekit\OAuth\Helper;
 
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Storage\Memory;
@@ -9,7 +9,6 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 use OAuth\ServiceFactory;
 use Pagekit\Application as App;
 use Pagekit\Routing\Generator\UrlGenerator;
-
 
 class OAuthHelper
 {

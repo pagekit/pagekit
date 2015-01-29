@@ -15,7 +15,6 @@ use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
-use Pagekit\System\Helper\OAuthHelper;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
@@ -61,10 +60,6 @@ class SystemExtension extends Extension
 
         $app['systemInfo'] = function() {
             return new SystemInfoHelper;
-        };
-
-        $app['oauth'] = function() {
-            return new OAuthHelper;
         };
 
         $app->extend('mailer', function($mailer, $app) {
