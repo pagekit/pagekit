@@ -19,11 +19,6 @@ class Extension implements ModuleInterface
     protected $parameters = [];
 
     /**
-     * @var \ReflectionObject
-     */
-    protected $reflected;
-
-    /**
      * Loads the extension.
      */
     public function load(App $app, array $config)
@@ -34,10 +29,9 @@ class Extension implements ModuleInterface
 
         $this->registerControllers($app['controllers']);
 
-        $this->registerLanguages();
-        // -TODO- $this->registerResources($app['locator']);
-
-        $app->on('system.init', [$this, 'registerLanguages']);
+        $app->on('system.init', function () use ($app, $config) {
+            $app['system']->loadLanguages($config['path']);
+        });
 
         if ($menu = $this->getConfig('menu')) {
 
@@ -162,69 +156,6 @@ class Extension implements ModuleInterface
             $collection->mount($prefix, $controllers, "$namespace/");
         }
     }
-
-    /**
-     * Finds and registers languages.
-     *
-     * Override this method if your extension does not follow the conventions:
-     *
-     *  - Languages are in the 'languages' sub-directory
-     *  - The naming convention '/locale/domain.format', example: /en_GB/hello.php
-     */
-    public function registerLanguages()
-    {
-        $locale = App::translator()->getLocale();
-        $domains = [];
-        foreach (glob($this->getPath().'/languages/'.$locale.'/*') ?: [] as $file) {
-
-            $format = substr(strrchr($file, '.'), 1);
-            $domain = basename($file, '.'.$format);
-
-            if (in_array($domain, $domains)) {
-                continue;
-            }
-
-            $domains[] = $domain;
-
-            App::translator()->addResource($format, $file, $locale, $domain);
-            App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
-        }
-    }
-
-    /**
-     * Finds and adds extension file resources.
-     *
-     * @param ResourceLocator $locator
-     */
-    // public function registerResources(ResourceLocator $locator)
-    // {
-    //     $root = $this->getPath();
-
-    //     $addResources = function($config, $prefix = '') use ($root, $locator) {
-    //         foreach ($config as $scheme => $resources) {
-
-    //             if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
-    //                 list($scheme, $prefix)  = $segments;
-    //             }
-
-    //             $resources = (array) $resources;
-
-    //             array_walk($resources, function(&$resource) use ($root) {
-    //                 $resource = "$root/$resource";
-    //             });
-
-    //             $locator->addPath($scheme, $prefix, $resources);
-    //         }
-    //     };
-
-    //     $addResources($this->getConfig('resources.export', []), $this->getName());
-
-    //     if ($config = $this->getConfig('resources.override')) {
-    //         App::on('system.init', function() use ($config, $addResources) {
-    //             $addResources($config);
-    //         }, 20);
-    //     }
-    // }
 
     /**
      * Extension's enable hook

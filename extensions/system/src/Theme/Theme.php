@@ -53,8 +53,7 @@ class Theme
      */
     public function boot(App $app)
     {
-        $this->registerLanguages($app['translator']);
-        // -TODO- $this->registerResources($app['locator']);
+        $app['system']->loadLanguages($this->getPath());
 
         if ($this->getConfig('parameters.settings')) {
 
@@ -162,66 +161,6 @@ class Theme
 
         return $array;
     }
-
-    /**
-     * Finds and registers languages.
-     *
-     * Override this method if your theme does not follow the conventions:
-     *
-     *  - Languages are in the 'languages' sub-directory
-     *  - The naming convention '/locale/domain.format', example: /en_GB/mytheme.mo
-     *
-     * @param Translator $translator
-     */
-    public function registerLanguages(Translator $translator)
-    {
-        $files = glob($this->getPath().'/languages/*/*') ?: [];
-
-        foreach ($files as $file) {
-            if (preg_match('/languages\/(.+)\/(.+)\.(mo|po|php)$/', $file, $matches)) {
-
-                list(, $locale, $domain, $format) = $matches;
-
-                if ($format == 'php') {
-                    $format = 'array';
-                    $file = require $file;
-                }
-
-                $translator->addResource($format, $file, $locale, $domain);
-                $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
-            }
-        }
-    }
-
-    /**
-     * Finds and adds theme file resources.
-     *
-     * @param ResourceLocator $locator
-     */
-    // public function registerResources(ResourceLocator $locator)
-    // {
-    //     $root = $this->getPath();
-
-    //     $addResources = function($config, $prefix = '') use ($root, $locator) {
-    //         foreach ($config as $scheme => $resources) {
-
-    //             if (strpos($scheme, '://') > 0 && $segments = explode('://', $scheme, 2)) {
-    //                 list($scheme, $prefix)  = $segments;
-    //             }
-
-    //             $resources = (array) $resources;
-
-    //             array_walk($resources, function(&$resource) use ($root) {
-    //                 $resource = "$root/$resource";
-    //             });
-
-    //             $locator->addPath($scheme, $prefix, $resources);
-    //         }
-    //     };
-
-    //     $addResources($this->getConfig('resources.export', []), $this->getName());
-    //     $addResources($this->getConfig('resources.override', []), $this->getName());
-    // }
 
     /**
      * Adds section renderer.

@@ -151,6 +151,32 @@ class SystemExtension extends Extension
         }
     }
 
+    /**
+     * Load languages.
+     *
+     * @param string $path
+     */
+    public function loadLanguages($path)
+    {
+        $locale  = App::translator()->getLocale();
+        $domains = [];
+
+        foreach (glob($path.'/languages/'.$locale.'/*') ?: [] as $file) {
+
+            $format = substr(strrchr($file, '.'), 1);
+            $domain = basename($file, '.'.$format);
+
+            if (in_array($domain, $domains)) {
+                continue;
+            }
+
+            $domains[] = $domain;
+
+            App::translator()->addResource($format, $file, $locale, $domain);
+            App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
+        }
+    }
+
     protected function mergeOptions()
     {
         $keys = [
