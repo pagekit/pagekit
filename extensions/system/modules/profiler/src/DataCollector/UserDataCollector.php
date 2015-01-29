@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\DataCollector;
+namespace Pagekit\Profiler\DataCollector;
 
 use Pagekit\Auth\Auth;
 use Symfony\Component\HttpFoundation\Request;

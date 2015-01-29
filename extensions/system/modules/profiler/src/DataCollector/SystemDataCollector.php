@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\DataCollector;
+namespace Pagekit\Profiler\DataCollector;
 
 use Pagekit\System\Helper\SystemInfoHelper;
 use Symfony\Component\HttpFoundation\Request;

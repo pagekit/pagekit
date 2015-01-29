@@ -6,8 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
-use Pagekit\System\DataCollector\SystemDataCollector;
-use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
@@ -75,13 +73,6 @@ class SystemExtension extends Extension
         $app->factory('finder', function() {
             return Finder::create();
         });
-
-        if (isset($app['profiler'])) {
-            $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['systemInfo']), 'extensions/system/views/profiler/toolbar/system.php', 'extensions/system/views/profiler/panel/system.php', 50);
-                $app['profiler']->add(new UserDataCollector($app['auth']), 'extensions/system/views/profiler/toolbar/user.php', null, -20);
-            });
-        }
     }
 
     /**
