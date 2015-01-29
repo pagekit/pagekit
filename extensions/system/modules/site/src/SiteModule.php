@@ -5,15 +5,9 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Extension\Extension;
 use Pagekit\Site\Event\AliasListener;
+use Pagekit\Site\Event\MenuEvent;
 use Pagekit\Site\Event\RouteListener;
 use Pagekit\Site\Event\TypeEvent;
-use Pagekit\User\Entity\Role;
-use Pagekit\User\Entity\User;
-use Pagekit\User\Event\AccessListener;
-use Pagekit\User\Event\AuthorizationListener;
-use Pagekit\User\Event\LoginAttemptListener;
-use Pagekit\User\Event\PermissionEvent;
-use Pagekit\User\Event\UserListener;
 
 class SiteModule extends Extension
 {
@@ -30,7 +24,17 @@ class SiteModule extends Extension
         );
 
         $app['site.types'] = function($app) {
-            return $app->trigger('site.types', new TypeEvent);
+            return $app->trigger('site.types', new TypeEvent)->getTypes();
         };
+
+        $app['site.menus'] = function($app) {
+            return $app->trigger('site.menus', new MenuEvent)->getMenus();
+        };
+
+        $app->on('site.menus', function($event) {
+            foreach(App::option('system:site.menus', []) as $menu) {
+                $event->register($menu['id'], $menu['label']);
+            }
+        }, -8);
     }
 }

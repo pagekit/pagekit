@@ -20,14 +20,13 @@ class SiteController extends Controller
         $config = App::trigger('site.config', new ConfigEvent([
             'config'    => [
                 'url'          => App::url()->base(),
-                'route'        => App::url('@system/node'),
+                'route'        => App::url('@system/site'),
                 'url.template' => App::url('@system/template'),
                 'csrf'         => App::csrf()->generate()
             ],
             'data'   => [
-                'types' => App::get('site.types')->getTypes(),
-                'roles' => Role::findAll(),
-                'menus'  => ['Main', 'Sidebar']
+                'types' => App::get('site.types'),
+                'roles' => Role::findAll()
             ],
             'templates' => [
                 'site.edit' => App::view('extensions/system/modules/site/views/tmpl/site.edit.php'),

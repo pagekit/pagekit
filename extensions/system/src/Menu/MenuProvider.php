@@ -2,8 +2,6 @@
 
 namespace Pagekit\Menu;
 
-use Pagekit\Menu\Entity\Item;
-use Pagekit\Menu\Entity\Menu;
 use Pagekit\Menu\Model\FilterManager;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\Menu\Model\Node;
@@ -14,11 +12,6 @@ class MenuProvider implements \IteratorAggregate
      * @var MenuInterface[]
      */
     protected $menus = [];
-
-    /**
-     * @var MenuInterface[]
-     */
-    protected $loaded;
 
     /**
      * @var FilterManager
@@ -40,17 +33,6 @@ class MenuProvider implements \IteratorAggregate
      */
     public function has($id)
     {
-        if (isset($this->menus[$id])) {
-            return true;
-        }
-
-        $this->load();
-
-        if (isset($this->loaded[$id])) {
-            $this->menus[$id] = $this->loaded[$id];
-            $this->menus[$id]->setItems(Item::findByMenu($this->loaded[$id]));
-        }
-
         return isset($this->menus[$id]);
     }
 
@@ -130,19 +112,6 @@ class MenuProvider implements \IteratorAggregate
      */
     public function getIterator()
     {
-        $this->load();
-
-        foreach (array_keys($this->loaded) as $id) {
-            $this->has($id);
-        }
-
         return new \ArrayIterator($this->menus);
-    }
-
-    protected function load()
-    {
-        if (!$this->loaded) {
-            $this->loaded = Menu::findAll();
-        }
     }
 }

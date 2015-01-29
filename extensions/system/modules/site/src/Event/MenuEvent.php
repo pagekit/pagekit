@@ -4,10 +4,10 @@ namespace Pagekit\Site\Event;
 
 use Pagekit\Application\Event;
 
-class TypeEvent extends Event implements \IteratorAggregate
+class MenuEvent extends Event implements \IteratorAggregate
 {
     /**
-     * Registers a node type.
+     * Registers a menu.
      *
      * @param string $id
      * @param string $label
@@ -19,11 +19,11 @@ class TypeEvent extends Event implements \IteratorAggregate
     }
 
     /**
-     * Get list of node types.
+     * Get list of menus.
      *
      * @return array
      */
-    public function getTypes()
+    public function getMenus()
     {
         return $this->parameters;
     }

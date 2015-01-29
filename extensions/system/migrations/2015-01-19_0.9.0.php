@@ -22,6 +22,14 @@ return [
                 $table->setPrimaryKey(['id']);
             });
         }
+
+        if ($util->tableExists('@system_menu') !== false) {
+            $util->dropTable('@system_menu');
+        }
+
+        if ($util->tableExists('@system_menu_item') !== false) {
+            $util->dropTable('@system_menu_item');
+        }
     }
 
 ];

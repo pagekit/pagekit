@@ -5,8 +5,15 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
     .value('UIkit', UIkit)
 
     .factory('Node', ['$resource', 'Application', function($resource, App) {
-        return $resource(App.url('/:id'), {}, {
+        return $resource(App.url('/node/:id'), {}, {
             query: { method: 'GET', responseType: 'json' }
+        });
+    }])
+
+    .factory('Menu', ['$resource', 'Application', function($resource, App) {
+        return $resource(App.url('/menu/:id'), {}, {
+            query: { method: 'GET', responseType: 'json', isArray: true },
+            update: { method: 'PUT', isArray: false }
         });
     }])
 

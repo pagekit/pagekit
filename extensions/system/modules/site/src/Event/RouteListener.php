@@ -60,9 +60,11 @@ class RouteListener implements EventSubscriberInterface
             $types = App::get('site.types');
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
 
-                if (!$type = $types[$node->getType()]) {
+                if (!isset($types[$node->getType()])) {
                     continue;
                 }
+
+                $type = $types[$node->getType()];
 
                 $nodes[$node->getPath()] = [
                     'id'          => $type['id'],

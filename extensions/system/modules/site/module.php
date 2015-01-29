@@ -15,6 +15,7 @@ return [
     'controllers' => [
 
         '@system: /system' => [
+            'Pagekit\\Site\\Controller\\MenuController',
             'Pagekit\\Site\\Controller\\NodeController',
             'Pagekit\\Site\\Controller\\SiteController',
             'Pagekit\\Site\\Controller\\TemplateController',
@@ -28,7 +29,7 @@ return [
             'label'    => 'Site',
             'icon'     => 'extensions/page/extension.svg',
             'url'      => '@system/site',
-            'active'   => '@system/site/*',
+            'active'   => '@system/site*',
             'priority' => 0
         ]
 

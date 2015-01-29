@@ -30,10 +30,14 @@
 
 <div ng-repeat="menu in menus">
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
-        <div>{{ menu || 'Not Linked' }}</div>
+        <div>
+            {{ menu.label }}
+            <a ng-click="vm.editMenu(menu)" ng-if="!menu.fixed"><i class="uk-icon-cog"></i></a>
+            <a ng-click="vm.deleteMenu(menu)" ng-if="!menu.fixed"><i class="uk-icon-times-circle"></i></a>
+        </div>
     </div>
 
-    <div nestable ng-model="tree[menu]" group="{{ menu }}">
+    <div nestable ng-model="tree[menu.id]" group="{{ menu.id }}">
         <div class="uk-nestable-item pk-table-fake">
 
             <div class="pk-table-width-minimum"><div class="uk-nestable-handle"></div></div>
@@ -53,17 +57,20 @@
     </div>
 </div>
 <p>
-    <a ng-click="vm.openModal()"><i class="uk-icon-th-list"></i> <?php echo __('Create Menu') ?></a>
+    <a ng-click="vm.createMenu()"><i class="uk-icon-th-list"></i> <?php echo __('Create Menu') ?></a>
 </p>
 
 <div id="modal-menu" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-slide">
 
         <p>
-            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu" placeholder="<?php echo __('Enter Menu Name') ?>">
+            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.label" placeholder="<?php echo __('Enter Menu Name') ?>">
+        <p>
+        </p>
+            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.newId" placeholder="<?php echo __('Enter Menu Slug') ?>">
         </p>
 
-        <button class="uk-button uk-button-primary" ng-click="vm.addMenu()"><?php echo __('Save') ?></button>
+        <button class="uk-button uk-button-primary" ng-click="vm.saveMenu()"><?php echo __('Save') ?></button>
         <button class="uk-button uk-modal-close"><?php echo __('Cancel') ?></button>
 
     </div>

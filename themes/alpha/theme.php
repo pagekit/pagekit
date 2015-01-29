@@ -75,6 +75,16 @@ return [
         'offcanvas' => 'themes/alpha/views/renderer/position.offcanvas.razr',
         'panel'     => 'themes/alpha/views/renderer/position.panel.razr'
 
+    ],
+
+    /**
+     * List of fixed menus provided by this theme.
+     */
+    'menus' => [
+
+        'main'    => 'Main',
+        'sidebar' => 'Sidebar'
+
     ]
 
 ];

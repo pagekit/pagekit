@@ -76,6 +76,12 @@ class Theme
                 $event->register($id, $name, $description);
             }
         });
+
+        $app->on('site.menus', function($event) use ($app) {
+            foreach ($this->getConfig('menus', []) as $id => $menu) {
+                $event->register($id, $menu, ['fixed' => true]);
+            }
+        });
     }
 
     /**

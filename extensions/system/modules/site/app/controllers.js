@@ -1,19 +1,16 @@
 angular.module('site')
 
-    .controller('indexCtrl', ['$scope', '$filter', '$timeout', 'Application', 'Node', 'UIkit', function ($scope, $filter, $timeout, App, Node, UIkit) {
+    .controller('indexCtrl', ['$scope', '$filter', '$timeout', 'Application', 'Node', 'Menu', 'UIkit', function ($scope, $filter, $timeout, App, Node, Menu, UIkit) {
 
         var vm = this;
 
         $scope.nodes = Node.query();
-        $scope.selected = [];
+        $scope.menus = Menu.query();
         $scope.types = angular.copy(App.data.types);
-        $scope.menus = angular.copy(App.data.menus);
-        $scope.menus.push('');
+        $scope.selected = [];
 
         vm.deleteNodes = function () {
-            Node.delete({ id: 'bulk', ids: JSON.stringify($scope.selected) }, function (data) {
-                $scope.nodes = data;
-            });
+            Node.delete({ id: 'bulk', ids: JSON.stringify($scope.selected) });
             $scope.selected = [];
         };
 
@@ -58,17 +55,12 @@ angular.module('site')
             var tree = {}, nodes = {};
 
             angular.forEach($scope.menus, function (menu) {
-                tree[menu] = [];
+                tree[menu.id] = [];
             });
 
             angular.forEach($filter('orderBy')($filter('toArray')($scope.nodes), 'priority'), function (node) {
 
-                var menu = tree[node.menu];
-
-                if (!menu) {
-                    $scope.menus.splice(-1, 0, node.menu);
-                    return;
-                }
+                var menu = tree[node.menu] || tree[''];
 
                 parent = !node.parentId && menu || (nodes[node.parentId] = nodes[node.parentId] || { node: $scope.nodes[node.parentId], children: [] }).children;
 
@@ -82,9 +74,9 @@ angular.module('site')
             updateTree();
         }, true);
 
-        $scope.$watchCollection('menus', function () {
+        $scope.$watch('menus', function () {
             updateTree();
-        });
+        }, true);
 
         var debounce;
         $scope.$on('change.nestable', function (event, items) {
@@ -106,14 +98,40 @@ angular.module('site')
         });
 
         var modal;
-        vm.openModal = function() {
-            $scope.menu = '';
+        vm.createMenu = function () {
+            vm.editMenu(new Menu);
+        };
+
+        vm.editMenu = function (menu) {
+            $scope.menu = menu;
+            menu.newId = menu.id;
             modal = UIkit.modal('#modal-menu').show();
         };
 
-        vm.addMenu = function() {
-            $scope.menus.splice(-1, 0, $scope.menu);
+        vm.saveMenu = function () {
+            var menu = $scope.menu, newId = menu.newId, oldId = menu.id;
+
+            if (!newId) return;
+
+            if (oldId) {
+                $scope.menu.$update({ id: oldId }, function() {
+
+                    if (menu.id == oldId) return;
+
+                    $filter('filter')($filter('toArray')($scope.nodes), { menu: oldId }).forEach(function(node) {
+                        node.menu = menu.id;
+                    });
+                });
+            } else {
+                menu.$save({ id: newId });
+                $scope.menus.splice(-1, 0, menu);
+            }
             modal.hide();
+        };
+
+        vm.deleteMenu = function (menu) {
+            menu.$delete({ id: menu.id });
+            $scope.menus.splice($scope.menus.lastIndexOf(menu), 1);
         }
     }])
 

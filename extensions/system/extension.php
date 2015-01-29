@@ -29,14 +29,6 @@ return [
 
     'menu' => [
 
-        'system: menu' => [
-            'label'    => 'Menus',
-            'icon'     => 'extensions/system/assets/images/icon-menus.svg',
-            'url'      => '@system/menu',
-            'active'   => '@system/(menu|item)*',
-            'access'   => 'system: manage menus',
-            'priority' => 10
-        ],
         'system: settings' => [
             'label'    => 'Settings',
             'icon'     => 'extensions/system/assets/images/icon-settings.svg',
@@ -49,9 +41,6 @@ return [
 
     'permissions' => [
 
-        'system: manage menus' => [
-            'title' => 'Manage menus'
-        ],
         'system: manage themes' => [
             'title' => 'Manage themes'
         ],
