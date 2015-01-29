@@ -24,8 +24,8 @@ return [
             return $app->trigger('site.menus', new MenuEvent)->getMenus();
         };
 
-        $app->on('site.menus', function($event) {
-            foreach(App::option('system:site.menus', []) as $menu) {
+        $app->on('site.menus', function($event) use ($app) {
+            foreach($app['option']->get('system:site.menus', []) as $menu) {
                 $event->register($menu['id'], $menu['label']);
             }
         }, -8);
