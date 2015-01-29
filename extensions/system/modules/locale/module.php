@@ -34,6 +34,10 @@ return [
             return $manager;
         };
 
+        $app->on('system.init', function() use ($app) {
+            $app['translator']->setLocale($app['config']->get('app.locale'.($app['isAdmin'] ? '_admin' : '')));
+        }, 10);
+
     },
 
     'autoload' => [

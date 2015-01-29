@@ -8,7 +8,6 @@ use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
-use Pagekit\System\Event\LocaleListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\ResponseListener;
@@ -34,7 +33,6 @@ class SystemExtension extends Extension
         $app->subscribe(
             new CanonicalListener,
             new FrontpageListener,
-            new LocaleListener,
             new MaintenanceListener,
             new MenuListener,
             new MigrationListener,
