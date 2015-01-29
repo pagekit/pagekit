@@ -2,7 +2,7 @@
 
 namespace Pagekit\System\Templating;
 
-use Pagekit\System\Helper\DateHelper as DateManager;
+use Pagekit\Locale\Helper\DateHelper as DateManager;
 use Symfony\Component\Templating\Helper\Helper;
 
 class DateHelper extends Helper
@@ -38,4 +38,4 @@ class DateHelper extends Helper
 
         return $this->manager->format($date, isset($formats[$format]) ? $formats[$format] : $format, $timezone, $format);
     }
-} 
+}

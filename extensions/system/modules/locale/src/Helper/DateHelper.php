@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Helper;
+namespace Pagekit\Locale\Helper;
 
 use DateInterval;
 use DateTime;
