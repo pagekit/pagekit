@@ -21,7 +21,7 @@ var require = (function(win, doc) {
                         'gravatar':   'vendor/assets/requirejs/plugins/gravatar',
                         'uikit':      'vendor/assets/uikit/js/uikit.min',
                         'rowselect':  'extensions/system/assets/js/rowselect.js?ver=' + vers,
-                        'editor':     'extensions/system/assets/js/editor/editor.js?ver=' + vers
+                        'editor':     'extensions/system/modules/editor/assets/js/editor.js?ver=' + vers
                     },
                     shim: {
                         'uikit': {

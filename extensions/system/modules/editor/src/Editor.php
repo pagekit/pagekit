@@ -82,7 +82,7 @@ class Editor implements EditorInterface, EventSubscriberInterface
      */
     public function render($value, array $attributes = [])
     {
-        App::scripts('editor', 'extensions/system/assets/js/editor/editor.js', 'requirejs', [
+        App::scripts('editor', 'extensions/system/modules/editor/assets/js/editor.js', 'requirejs', [
             'data-editor' => json_encode(array_values($this->getPlugins()))
         ]);
 
@@ -122,10 +122,10 @@ class Editor implements EditorInterface, EventSubscriberInterface
 
         $event->setEditor($this);
 
-        $this->addPlugin('link', 'extensions/system/assets/js/editor/link');
-        $this->addPlugin('video', 'extensions/system/assets/js/editor/video');
-        $this->addPlugin('image', 'extensions/system/assets/js/editor/image');
-        $this->addPlugin('urlresolver', 'extensions/system/assets/js/editor/urlresolver');
+        $this->addPlugin('link', 'extensions/system/modules/editor/assets/js/link');
+        $this->addPlugin('video', 'extensions/system/modules/editor/assets/js/video');
+        $this->addPlugin('image', 'extensions/system/modules/editor/assets/js/image');
+        $this->addPlugin('urlresolver', 'extensions/system/modules/editor/assets/js/urlresolver');
     }
 
     /**
