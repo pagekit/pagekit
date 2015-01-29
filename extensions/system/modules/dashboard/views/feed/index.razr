@@ -1,4 +1,4 @@
-@script('feed', 'extensions/system/assets/js/dashboard/feed.js', ['requirejs'])
+@script('feed', 'extensions/system/modules/dashboard/assets/js/feed.js', ['requirejs'])
 
 @if ($widget.settings.title)
 <h1 class="uk-h3">@( $widget.settings.title )</h1>

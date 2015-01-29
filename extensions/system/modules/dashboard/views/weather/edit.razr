@@ -1,4 +1,4 @@
-@script('weather', 'extensions/system/assets/js/dashboard/weather.js', ['requirejs'])
+@script('weather', 'extensions/system/modules/dashboard/assets/js/weather.js', ['requirejs'])
 
 <div class="uk-form-row">
     <label for="form-weather-location" class="uk-form-label">@trans('Location')</label>

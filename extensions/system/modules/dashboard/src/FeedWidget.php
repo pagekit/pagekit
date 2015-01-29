@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Dashboard;
+namespace Pagekit\Dashboard;
 
 use Pagekit\Application as App;
 use Pagekit\Widget\Model\TypeInterface;
@@ -41,7 +41,7 @@ class FeedWidget implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('extensions/system/views/admin/dashboard/feed/index.razr', compact('widget', 'options'));
+        return App::view('extensions/system/modules/dashboard/views/feed/index.razr', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class FeedWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/views/admin/dashboard/feed/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/dashboard/views/feed/edit.razr', compact('widget'));
     }
 }

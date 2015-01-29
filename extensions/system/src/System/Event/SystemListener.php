@@ -11,8 +11,6 @@ use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
-use Pagekit\System\Dashboard\FeedWidget;
-use Pagekit\System\Dashboard\WeatherWidget;
 use Pagekit\System\Package\Event\LoadFailureEvent;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\FinderHelper;
@@ -117,9 +115,7 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemDashboard(RegisterWidgetEvent $event)
     {
-        $event->register(new FeedWidget);
         $event->register(new UserWidget);
-        $event->register(new WeatherWidget);
     }
 
     /**
