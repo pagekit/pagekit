@@ -91,27 +91,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers locales.
-     *
-     * @param LocaleEvent $event
-     */
-    public function onSystemLocale(LocaleEvent $event)
-    {
-        $event->addMessages([
-
-            'short'       => __('DATE_SHORT'),
-            'medium'      => __('DATE_MEDIUM'),
-            'long'        => __('DATE_LONG'),
-            'full'        => __('DATE_FULL'),
-            'shortdays'   => [__('Mon'), __('Tue'), __('Wed'), __('Thu'), __('Fri'), __('Sat'), __('Sun')],
-            'longdays'    => [__('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday'), __('Saturday'), __('Sunday')],
-            'shortmonths' => [__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')],
-            'longmonths'  => [__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December')]
-
-        ], 'date');
-    }
-
-    /**
      * Registers links.
      *
      * @param LinkEvent $event
@@ -181,7 +160,6 @@ class SystemListener implements EventSubscriberInterface
             'system.finder'          => 'onSystemFinder',
             'system.link'            => 'onSystemLink',
             'system.loaded'          => 'onSystemLoaded',
-            'system.locale'          => 'onSystemLocale',
             'system.tmpl'            => 'onSystemTmpl',
             'system.widget'          => 'onSystemWidget',
             'extension.load_failure' => 'onExtensionLoadException'
