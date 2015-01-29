@@ -12,20 +12,6 @@ use Pagekit\Theme\Event\ThemeEvent;
  */
 class ThemesController extends Controller
 {
-    protected $themes;
-    protected $api;
-    protected $apiKey;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->themes = App::theme();
-        $this->api    = App::config('api.url');
-        $this->apiKey = App::option('system:api.key');
-    }
-
     /**
      * @Response("extensions/system/views/admin/themes/index.razr")
      */
@@ -35,7 +21,7 @@ class ThemesController extends Controller
         $packages = [];
         $packagesJson = [];
 
-        foreach ($this->themes->getRepository()->getPackages() as $package) {
+        foreach (App::package()->getRepository('theme')->getPackages() as $package) {
 
             $name = $package->getName();
 
@@ -63,7 +49,7 @@ class ThemesController extends Controller
             ]);
         }
 
-        return ['head.title' => __('Themes'), 'api' => $this->api, 'key' => $this->apiKey, 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        return ['head.title' => __('Themes'), 'api' => App::config('api.url'), 'key' => App::option('system:api.key'), 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**
@@ -85,9 +71,9 @@ class ThemesController extends Controller
                 App::response()->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
             });
 
-            $this->themes->load($name);
+            App::module()->load($name);
 
-            if (!$theme = $this->themes->get($name)) {
+            if (!$theme = App::module()->get($name)) {
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
@@ -112,11 +98,11 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = $this->themes->getRepository()->findPackage($name)) {
+            if (!$theme = App::package()->getRepository('theme')->findPackage($name)) {
                 throw new Exception(__('Unable to uninstall theme "%name%".', ['%name%' => $name]));
             }
 
-            $this->themes->getInstaller()->uninstall($theme);
+            App::package()->getInstaller('theme')->uninstall($theme);
             App::module('system')->clearCache();
 
             return ['message' => __('Theme uninstalled.')];
@@ -134,7 +120,7 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = $this->themes->get($name) or !$tmpl = $theme->getConfig('parameters.settings.view')) {
+            if (!$theme = App::module()->get($name) or !$tmpl = $theme->getConfig('parameters.settings.view')) {
                 throw new Exception(__('Invalid theme.'));
             }
 
@@ -157,7 +143,7 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = $this->themes->get($name)) {
+            if (!$theme = App::module()->get($name)) {
                 throw new Exception(__('Invalid theme.'));
             }
 
