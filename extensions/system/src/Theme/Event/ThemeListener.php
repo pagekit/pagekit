@@ -16,21 +16,10 @@ class ThemeListener implements EventSubscriberInterface
 
             $app = App::getInstance();
 
-            $app['theme.admin'] = $app['theme']->load('system', 'extensions/system/theme');
-            $app['theme.admin']->boot($app);
-
             $app['theme.site'] = $app['theme']->load($app['config']->get('theme.site'));
             $app['theme.site']->boot($app);
 
         } catch (\Exception $e) {}
-    }
-
-    /**
-     * Sets the admin layout.
-     */
-    public function onSystemAdmin()
-    {
-        App::view()->setLayout(App::get('theme.admin')->getLayout());
     }
 
     /**
@@ -48,7 +37,6 @@ class ThemeListener implements EventSubscriberInterface
     {
         return [
             'system.init'  => ['onSystemInit', 10],
-            'system.admin' => 'onSystemAdmin',
             'system.site'  => 'onSystemSite'
         ];
     }

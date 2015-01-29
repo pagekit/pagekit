@@ -15,7 +15,7 @@ var fs = require('fs'),
 // paths of the packages for the compile-task
 var pkgs = [
     'extensions/installer/',
-    'extensions/system/theme/',
+    'extensions/system/modules/theme/',
     'themes/alpha/'
 ];
 

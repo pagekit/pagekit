@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>@trans('Pagekit Installer')</title>
-        <link href="@static_url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@static_url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@static_url('extensions/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@static_url('extensions/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         <link href="@static_url('extensions/installer/assets/css/installer.css')" rel="stylesheet">
         <script src="@static_url('vendor/assets/jquery/dist/jquery.min.js')"></script>
         <script src="@static_url('vendor/assets/uikit/js/uikit.min.js')"></script>

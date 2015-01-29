@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@static_url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@static_url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@static_url('extensions/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@static_url('extensions/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=@($subset)" rel="stylesheet">
         @section('head')
-        @style('theme', 'extensions/system/theme/css/theme.css')
-        @script('theme', 'extensions/system/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
+        @style('theme', 'extensions/system/modules/theme/css/theme.css')
+        @script('theme', 'extensions/system/modules/theme/js/theme.js', ['jquery', 'uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable'])
     </head>
     <body>
 

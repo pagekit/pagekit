@@ -35,6 +35,7 @@ try {
     }
 
     $app['module']->addPath($app['path.extensions'].'/*/extension.php');
+    $app['module']->addPath($app['path.themes'].'/*/theme.php');
 
 } catch (InstallerException $e) {
 

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html class="uk-height-1-1">
     <head>
+        <title>@trans('Error')</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@static_url('extensions/system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@static_url('extensions/system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        @section('head')
-        @script('uikit')
-        @style('theme', 'extensions/system/theme/css/theme.css')
+        <meta name="robots" content="noindex,nofollow">
+        <link href="@static_url('extensions/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@static_url('extensions/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@static_url('extensions/system/modules/theme/css/theme.css')" rel="stylesheet">
     </head>
     <body class="uk-height-1-1">
 
@@ -20,8 +20,7 @@
                     <img class="uk-margin-bottom" src="@static_url('extensions/system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                     <div class="uk-panel uk-panel-box">
-                        <h1>@trans('Maintenance')</h1>
-                        <p>@( $message )</p>
+                        <h1 class="uk-h2">@( $title )</h1>
                     </div>
 
                 </div>
