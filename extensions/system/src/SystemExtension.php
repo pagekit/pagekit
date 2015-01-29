@@ -3,7 +3,6 @@
 namespace Pagekit;
 
 use Pagekit\Application as App;
-use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
@@ -63,10 +62,6 @@ class SystemExtension extends Extension
 
         $app['menus'] = function() {
             return new MenuProvider;
-        };
-
-        $app['content'] = function() {
-            return new ContentHelper;
         };
 
         $app['languages'] = function() {
