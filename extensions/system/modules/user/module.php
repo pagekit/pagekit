@@ -40,12 +40,12 @@ return [
 
         $app['system']->loadControllers($config);
 
-        $app->on('system.permission', function ($event) use ($config) {
-            $event->setPermissions($config['name'], $config['permissions']);
-        });
-
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
+        });
+
+        $app->on('system.permission', function ($event) use ($config) {
+            $event->setPermissions($config['name'], $config['permissions']);
         });
 
         $app->on('system.widget', function ($event) {

@@ -1,10 +1,45 @@
 <?php
 
+use Pagekit\Site\Event\AliasListener;
+use Pagekit\Site\Event\MenuEvent;
+use Pagekit\Site\Event\RouteListener;
+use Pagekit\Site\Event\TypeEvent;
+
 return [
 
     'name' => 'system/site',
 
-    'main' => 'Pagekit\\Site\\SiteModule',
+    'main' => function ($app, $config) {
+
+        $app->subscribe(
+            new AliasListener,
+            new RouteListener
+        );
+
+        $app['site.types'] = function($app) {
+            return $app->trigger('site.types', new TypeEvent)->getTypes();
+        };
+
+        $app['site.menus'] = function($app) {
+            return $app->trigger('site.menus', new MenuEvent)->getMenus();
+        };
+
+        $app->on('site.menus', function($event) {
+            foreach(App::option('system:site.menus', []) as $menu) {
+                $event->register($menu['id'], $menu['label']);
+            }
+        }, -8);
+
+        $app['system']->loadControllers($config);
+
+        $app->on('system.admin_menu', function ($event) use ($config) {
+            $event->register($config['menu']);
+        });
+
+        $app->on('system.permission', function ($event) use ($config) {
+            $event->setPermissions($config['name'], $config['permissions']);
+        });
+    },
 
     'autoload' => [
 
