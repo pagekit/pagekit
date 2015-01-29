@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Theme\Package;
+namespace Pagekit\Package\Repository;
 
+use Pagekit\Package\Loader\JsonLoader;
 use Pagekit\Package\Loader\LoaderInterface;
-use Pagekit\Package\Repository\InstalledRepository;
 
 class ThemeRepository extends InstalledRepository
 {
@@ -18,11 +18,11 @@ class ThemeRepository extends InstalledRepository
      * @param string          $path
      * @param LoaderInterface $loader
      */
-    public function __construct($path, LoaderInterface $loader)
+    public function __construct($path, LoaderInterface $loader = null)
     {
         parent::__construct($path);
 
-        $this->loader = $loader;
+        $this->loader = $loader ?: new JsonLoader();
     }
 
     /**

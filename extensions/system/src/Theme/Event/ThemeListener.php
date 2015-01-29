@@ -3,10 +3,6 @@
 namespace Pagekit\Theme\Event;
 
 use Pagekit\Application as App;
-use Pagekit\Package\Installer\PackageInstaller;
-use Pagekit\Theme\Package\ThemeLoader;
-use Pagekit\Theme\Package\ThemeRepository;
-use Pagekit\Theme\ThemeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ThemeListener implements EventSubscriberInterface
@@ -18,13 +14,7 @@ class ThemeListener implements EventSubscriberInterface
     {
         try {
 
-            $app        = App::getInstance();
-            $loader     = new ThemeLoader;
-            $repository = new ThemeRepository($app['config']['theme.path'], $loader);
-            $installer  = new PackageInstaller($repository, $loader);
-            $file       = isset($app['file']) ? $app['file'] : null;
-
-            $app['theme'] = new ThemeManager($repository, $installer, $file);
+            $app = App::getInstance();
 
             $app['theme.admin'] = $app['theme']->load('system', 'extensions/system/theme');
             $app['theme.admin']->boot($app);

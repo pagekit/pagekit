@@ -2,20 +2,12 @@
 
 namespace Pagekit\System\Package;
 
-use Pagekit\Package\Installer\InstallerInterface;
-use Pagekit\Package\Repository\InstalledRepository;
-
 abstract class PackageManager implements \IteratorAggregate
 {
     /**
-     * @var InstalledRepository
+     * @var string
      */
-    protected $repository;
-
-    /**
-     * @var InstallerInterface
-     */
-    protected $installer;
+    protected $path;
 
     /**
      * @var array
@@ -25,13 +17,11 @@ abstract class PackageManager implements \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param InstalledRepository $repository
-     * @param InstallerInterface  $installer
+     * @param string $path
      */
-    public function __construct(InstalledRepository $repository, InstallerInterface $installer)
+    public function __construct($path)
     {
-        $this->repository = $repository;
-        $this->installer  = $installer;
+        $this->path = $path;
     }
 
     /**
@@ -54,26 +44,6 @@ abstract class PackageManager implements \IteratorAggregate
     public function get($name)
     {
         return isset($this->loaded[$name]) ? $this->loaded[$name] : null;
-    }
-
-    /**
-     * Gets a repository instance.
-     *
-     * @return InstalledRepository
-     */
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
-    /**
-     * Gets a installer instance.
-     *
-     * @return InstallerInterface
-     */
-    public function getInstaller()
-    {
-        return $this->installer;
     }
 
     /**

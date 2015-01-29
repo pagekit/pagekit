@@ -21,7 +21,7 @@ class ExtensionsController extends Controller
         $packages = [];
         $packagesJson = [];
 
-        foreach (App::extension()->getRepository()->getPackages() as $package) {
+        foreach (App::package()->getRepository('extension')->getPackages() as $package) {
             if (!$this->isCore($name = $package->getName())) {
                 $packages[$name] = $package;
                 $packagesJson[$name] = $package->getVersion();
@@ -140,7 +140,7 @@ class ExtensionsController extends Controller
 
             $extension->uninstall();
 
-            App::extension()->getInstaller()->uninstall(App::extension()->getRepository()->findPackage($name));
+            App::package()->getInstaller('extension')->uninstall(App::package()->getRepository('extension')->findPackage($name));
             App::extension('system')->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
@@ -163,7 +163,7 @@ class ExtensionsController extends Controller
             }
 
             $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
-            $title = App::extension()->getRepository()->findPackage($extension->getName())->getTitle();
+            $title = App::package()->getRepository('extension')->findPackage($extension->getName())->getTitle();
 
             return App::view($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 

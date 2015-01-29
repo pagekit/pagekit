@@ -4,15 +4,14 @@ namespace Pagekit;
 
 use Pagekit\Application\ServiceProviderInterface;
 use Pagekit\Extension\ExtensionManager;
-use Pagekit\Extension\Package\ExtensionLoader;
-use Pagekit\Extension\Package\ExtensionRepository;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Filesystem\Locator;
 use Pagekit\Module\ModuleManager;
-use Pagekit\Package\Installer\PackageInstaller;
-use Pagekit\System\Package\Event\LoadFailureEvent;
-use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Pagekit\Package\PackageManager;
+use Pagekit\Package\Repository\ExtensionRepository;
+use Pagekit\Package\Repository\ThemeRepository;
+use Pagekit\Theme\ThemeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
@@ -24,7 +23,24 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $this->app = $app;
 
         $app['module'] = function() {
-            return new ModuleManager;
+            return new ModuleManager();
+        };
+
+        $app['package'] = function($app) {
+
+            $manager = new PackageManager();
+            $manager->addRepository('extension', new ExtensionRepository($app['path.extensions']));
+            $manager->addRepository('theme', new ThemeRepository($app['path.themes']));
+
+            return $manager;
+        };
+
+        $app['extension'] = function($app) {
+            return new ExtensionManager($app['path.extensions']);
+        };
+
+        $app['theme'] = function($app) {
+            return new ThemeManager($app['path.themes']);
         };
 
         $app['locator'] = function($app) {
@@ -39,17 +55,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
             return $view;
         });
-
-        $app['extension'] = function($app) {
-
-            $loader     = new ExtensionLoader;
-            $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
-            $file       = isset($app['file']) ? $app['file'] : null;
-
-            $installer  = new PackageInstaller($repository, $loader, $file);
-
-            return new ExtensionManager($repository, $installer);
-        };
 
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
         $app['path.storage'] = $app['config']['locator.paths.storage'] = rtrim($app['path'] . '/' . $app['config']['app.storage'], '/');

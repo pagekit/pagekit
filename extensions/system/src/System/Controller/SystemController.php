@@ -24,7 +24,7 @@ class SystemController extends Controller
 
         foreach (App::extension() as $extension) {
             if (is_object($extension) && $extension->getConfig('parameters.settings.view')) {
-                $packages[$extension->getName()] = App::extension()->getRepository()->findPackage($extension->getName());
+                $packages[$extension->getName()] = App::package()->getRepository('extension')->findPackage($extension->getName());
             }
         }
 
