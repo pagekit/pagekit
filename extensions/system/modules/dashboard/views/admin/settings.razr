@@ -1,4 +1,4 @@
-@script('dashboard', 'extensions/modules/dashboard/assets/js/settings.js', 'requirejs')
+@script('dashboard', 'extensions/system/modules/dashboard/assets/js/settings.js', 'requirejs')
 
 <form id="js-dashboard" class="uk-form" action="@url('@system/admin')" method="post" data-reorder="@url('@system/dashboard/reorder')">
 
