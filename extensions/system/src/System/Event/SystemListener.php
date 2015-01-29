@@ -109,16 +109,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers dashboard widgets.
-     *
-     * @param RegisterWidgetEvent $event
-     */
-    public function onSystemDashboard(RegisterWidgetEvent $event)
-    {
-        $event->register(new UserWidget);
-    }
-
-    /**
      * Registers locales.
      *
      * @param LocaleEvent $event
@@ -200,37 +190,16 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers the extension permissions
-     *
-     * @param PermissionEvent $event
-     */
-    public function onSystemPermission(PermissionEvent $event)
-    {
-        foreach (App::extension() as $extension) {
-
-            if (!is_object($extension)) {
-                continue;
-            }
-
-            if ($permissions = $extension->getConfig('permissions')) {
-                $event->setPermissions($extension->getName(), $permissions);
-            }
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
             'system.admin'           => 'onSystemAdmin',
-            'system.dashboard'       => 'onSystemDashboard',
             'system.finder'          => 'onSystemFinder',
             'system.link'            => 'onSystemLink',
             'system.loaded'          => 'onSystemLoaded',
             'system.locale'          => 'onSystemLocale',
-            'system.permission'      => 'onSystemPermission',
             'system.tmpl'            => 'onSystemTmpl',
             'system.widget'          => 'onSystemWidget',
             'extension.load_failure' => 'onExtensionLoadException'

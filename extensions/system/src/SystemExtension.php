@@ -9,7 +9,6 @@ use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
-use Pagekit\System\Event\AdminMenuListener;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\LocaleListener;
@@ -41,7 +40,6 @@ class SystemExtension extends Extension
         }
 
         $app->subscribe(
-            new AdminMenuListener,
             new CanonicalListener,
             new FrontpageListener,
             new LocaleListener,
@@ -60,6 +58,8 @@ class SystemExtension extends Extension
         $this->mergeOptions();
 
         $app['db.em']; // -TODO- fix me
+
+        $app['system'] = $this;
 
         $app['menus'] = function() {
             return new MenuProvider;
@@ -173,6 +173,31 @@ class SystemExtension extends Extension
             foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
                 App::file()->delete($file->getPathname());
             }
+        }
+    }
+
+    /**
+     * Load controllers.
+     *
+     * @param array $config
+     */
+    public function loadControllers(array $config)
+    {
+        if (!isset($config['controllers'])) {
+            return;
+        }
+
+        $name = $config['name'];
+
+        foreach ((array) $config['controllers'] as $prefix => $controllers) {
+
+            if (false === strpos($prefix, ':')) {
+                $namespace = "@{$name}";
+            } else {
+                list($namespace, $prefix) = explode(':', $prefix);
+            }
+
+            App::controllers()->mount($prefix, $controllers, "$namespace/");
         }
     }
 

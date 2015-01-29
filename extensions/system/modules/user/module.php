@@ -1,10 +1,57 @@
 <?php
 
+use Pagekit\User\Dashboard\UserWidget;
+use Pagekit\User\Entity\Role;
+use Pagekit\User\Entity\User;
+use Pagekit\User\Event\AccessListener;
+use Pagekit\User\Event\AuthorizationListener;
+use Pagekit\User\Event\LoginAttemptListener;
+use Pagekit\User\Event\PermissionEvent;
+use Pagekit\User\Event\UserListener;
+
 return [
 
     'name' => 'system/user',
 
-    'main' => 'Pagekit\\User\\UserModule',
+    'main' => function ($app, $config) {
+
+        $app->subscribe(
+            new AccessListener,
+            new AuthorizationListener,
+            new LoginAttemptListener,
+            new UserListener
+        );
+
+        $app['user'] = function ($app) {
+
+            if (!$user = $app['auth']->getUser()) {
+                $user  = new User;
+                $roles = Role::where(['id' => Role::ROLE_ANONYMOUS])->get();
+                $user->setRoles($roles);
+            }
+
+            return $user;
+        };
+
+        $app['permissions'] = function ($app) {
+            return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
+        };
+
+        $app['system']->loadControllers($config);
+
+        $app->on('system.permission', function ($event) use ($config) {
+            $event->setPermissions($config['name'], $config['permissions']);
+        });
+
+        $app->on('system.admin_menu', function ($event) use ($config) {
+            $event->register($config['menu']);
+        });
+
+        $app->on('system.dashboard', function ($event) {
+            $event->register(new UserWidget);
+        });
+
+    },
 
     'autoload' => [
 

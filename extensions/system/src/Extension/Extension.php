@@ -28,6 +28,8 @@ class Extension implements ModuleInterface
      */
     public function load(App $app, array $config)
     {
+        $self = $this;
+
         $this->config = $config;
 
         $this->registerControllers($app['controllers']);
@@ -36,6 +38,20 @@ class Extension implements ModuleInterface
         // -TODO- $this->registerResources($app['locator']);
 
         $app->on('system.init', [$this, 'registerLanguages']);
+
+        if ($menu = $this->getConfig('menu')) {
+
+            $app->on('system.admin_menu', function ($event) use ($menu) {
+                $event->register($menu);
+            });
+        }
+
+        if ($permissions = $this->getConfig('permissions')) {
+
+            $app->on('system.permission', function ($event) use ($self, $permissions) {
+                $event->setPermissions($self->getName(), $permissions);
+            });
+        }
 
         if ($this->getConfig('parameters.settings')) {
 

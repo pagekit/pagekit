@@ -15,7 +15,6 @@ return [
 
         '@system: /system' => [
             'Pagekit\\Extension\\Controller\\ExtensionsController',
-            'Pagekit\\System\\Controller\\DashboardController',
             'Pagekit\\System\\Controller\\FinderController',
             'Pagekit\\System\\Controller\\LinkController',
             'Pagekit\\System\\Controller\\MarketplaceController',
@@ -32,13 +31,6 @@ return [
 
     'menu' => [
 
-        'system: dashboard' => [
-            'label'    => 'Dashboard',
-            'icon'     => 'extensions/system/assets/images/icon-dashboard.svg',
-            'url'      => '@system/dashboard',
-            'active'   => '@system/dashboard',
-            'priority' => 0
-        ],
         'system: widgets' => [
             'label'    => 'Widgets',
             'icon'     => 'extensions/system/assets/images/icon-widgets.svg',

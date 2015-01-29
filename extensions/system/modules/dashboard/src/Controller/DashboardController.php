@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Dashboard\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
@@ -29,7 +29,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extensions/system/views/admin/dashboard/index.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/index.razr")
      */
     public function indexAction()
     {
@@ -49,7 +49,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extensions/system/views/admin/dashboard/settings.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/settings.razr")
      */
     public function settingsAction()
     {
@@ -71,7 +71,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("extensions/system/views/admin/dashboard/edit.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/edit.razr")
      */
     public function addAction($id)
     {
@@ -95,7 +95,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("extensions/system/views/admin/dashboard/edit.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/edit.razr")
      */
     public function editAction($id)
     {
