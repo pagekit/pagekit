@@ -109,7 +109,7 @@ class SystemController extends Controller
      */
     public function clearCacheAction($caches)
     {
-        App::extension('system')->clearCache($caches);
+        App::module('system')->clearCache($caches);
 
         return App::request()->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
     }

@@ -23,7 +23,7 @@ class SiteController extends Controller
      */
     public function __construct()
     {
-        $autoclose = App::extension('blog')->getParams('comments.autoclose') ? App::extension('blog')->getParams('comments.autoclose.days') : 0;
+        $autoclose = App::module('blog')->getParams('comments.autoclose') ? App::module('blog')->getParams('comments.autoclose.days') : 0;
 
         App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
@@ -45,7 +45,7 @@ class SiteController extends Controller
 
         $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
-        if (!$limit = App::extension('blog')->getParams('posts_per_page')) {
+        if (!$limit = App::module('blog')->getParams('posts_per_page')) {
             $limit = 10;
         }
 
@@ -60,10 +60,10 @@ class SiteController extends Controller
             'head.link.alternate' => [
                 'href'  => App::url('@blog/site/feed', [], true),
                 'title' => App::option('system:app.site_title'),
-                'type'  => App::feed()->create(App::extension('blog')->getParams('feed.type'))->getMIMEType()
+                'type'  => App::feed()->create(App::module('blog')->getParams('feed.type'))->getMIMEType()
             ],
             'posts'               => $query->get(),
-            'params'              => App::extension('blog')->getParams(),
+            'params'              => App::module('blog')->getParams(),
             'total'               => $total,
             'page'                => $page
         ];
@@ -85,7 +85,7 @@ class SiteController extends Controller
 
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
-                and $minidle = App::extension('blog')->getParams('comments.minidle')
+                and $minidle = App::module('blog')->getParams('comments.minidle')
                 and $comment = Comment::where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
@@ -109,7 +109,7 @@ class SiteController extends Controller
                 $data['author'] = $user->getName();
                 $data['email']  = $user->getEmail();
                 $data['url']    = $user->getUrl();
-            } elseif (App::extension('blog')->getParams('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
+            } elseif (App::module('blog')->getParams('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
                 throw new Exception(__('Please provide valid name and email.'));
             }
 
@@ -123,7 +123,7 @@ class SiteController extends Controller
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == Comment::STATUS_APPROVED && App::extension('blog')->getParams('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            if ($comment->getStatus() == Comment::STATUS_APPROVED && App::module('blog')->getParams('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
                 $comment->setStatus(Comment::STATUS_PENDING);
             }
 
@@ -181,7 +181,7 @@ class SiteController extends Controller
             $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => App::extension('blog')->getParams()];
+        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => App::module('blog')->getParams()];
     }
 
     /**
@@ -190,7 +190,7 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = App::feed()->create($type ?: App::extension('blog')->getParams('feed.type'), [
+        $feed = App::feed()->create($type ?: App::module('blog')->getParams('feed.type'), [
             'title'       => App::option('system:app.site_title'),
             'link'        => App::url('@blog/site', [], true),
             'description' => App::option('system:app.site_description'),
@@ -202,7 +202,7 @@ class SiteController extends Controller
             $feed->setDate($last->getModified());
         }
 
-        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit(App::extension('blog')->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit(App::module('blog')->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),

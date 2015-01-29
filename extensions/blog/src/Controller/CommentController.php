@@ -48,7 +48,7 @@ class CommentController extends Controller
             });
         }
 
-        $limit    = App::extension('blog')->getParams('comments.comments_per_page');
+        $limit    = App::module('blog')->getParams('comments.comments_per_page');
         $count    = $query->count();
         $total    = ceil($count / $limit);
         $page     = max(0, min($total - 1, $page));

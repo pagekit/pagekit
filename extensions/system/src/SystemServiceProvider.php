@@ -22,8 +22,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         $this->app = $app;
 
-        $app['module'] = function() {
-            return new ModuleManager();
+        $app['module'] = function($app) {
+            return new ModuleManager($app);
         };
 
         $app['package'] = function($app) {
@@ -62,8 +62,9 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function boot(Application $app)
     {
-        $app['module']->load($app);
-        // $app['option']->get('system:extensions', [])
+        $extensions = $app['option']->get('system:extensions', []);
+
+        $app['module']->load(array_merge($extensions, ['system']));
 
         if ($app->runningInConsole()) {
             $app['isAdmin'] = false;
