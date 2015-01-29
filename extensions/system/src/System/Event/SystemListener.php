@@ -3,11 +3,6 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
-use Pagekit\Content\Plugin\MarkdownPlugin;
-use Pagekit\Content\Plugin\SimplePlugin;
-use Pagekit\Content\Plugin\VideoPlugin;
-use Pagekit\Editor\Editor;
-use Pagekit\Editor\Templating\EditorHelper;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\Menu\Widget\MenuWidget;
@@ -55,18 +50,9 @@ class SystemListener implements EventSubscriberInterface
         App::get('tmpl.razr')->addDirective(new FunctionDirective('date', [$helper, 'format']));
         App::get('tmpl.razr')->addFunction('date', [$helper, 'format']);
 
-        $helper = new EditorHelper(App::events());
-        App::get('tmpl.php')->addHelpers([$helper]);
-        App::get('tmpl.razr')->addDirective(new FunctionDirective('editor', [$helper, 'render']));
-
         $helper = new FinderHelper();
         App::get('tmpl.php')->addHelpers([$helper]);
         App::get('tmpl.razr')->addDirective(new FunctionDirective('finder', [$helper, 'render']));
-
-        App::subscribe(new Editor);
-        App::subscribe(new MarkdownPlugin);
-        App::subscribe(new SimplePlugin);
-        App::subscribe(new VideoPlugin);
 
         App::menus()->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
         App::menus()->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
