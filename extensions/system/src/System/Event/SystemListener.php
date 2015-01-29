@@ -131,35 +131,17 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Deactivate extension on load failure.
-     *
-     * @param LoadFailureEvent $event
-     */
-    public function onExtensionLoadException(LoadFailureEvent $event)
-    {
-        $extensions = App::option('system:extensions', []);
-
-        if (false !== $index = array_search($event->getExtensionName(), $extensions)) {
-            unset($extensions[$index]);
-            $extensions = array_values($extensions);
-        }
-
-        App::option()->set('system:extensions', $extensions);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'system.admin'           => 'onSystemAdmin',
-            'system.finder'          => 'onSystemFinder',
-            'system.link'            => 'onSystemLink',
-            'system.loaded'          => 'onSystemLoaded',
-            'system.tmpl'            => 'onSystemTmpl',
-            'system.widget'          => 'onSystemWidget',
-            'extension.load_failure' => 'onExtensionLoadException'
+            'system.admin'  => 'onSystemAdmin',
+            'system.finder' => 'onSystemFinder',
+            'system.link'   => 'onSystemLink',
+            'system.loaded' => 'onSystemLoaded',
+            'system.tmpl'   => 'onSystemTmpl',
+            'system.widget' => 'onSystemWidget'
         ];
     }
 }
