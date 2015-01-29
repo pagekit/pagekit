@@ -1,4 +1,4 @@
-@script('user', 'extensions/system/modules/user/js/user.js', 'requirejs')
+@script('user', 'extensions/system/modules/user/assets/js/user.js', 'requirejs')
 
 <form id="js-user" class="uk-form" method="post">
 

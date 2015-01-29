@@ -1,5 +1,5 @@
 @style('user', 'extensions/system/assets/css/user.css')
-@script('user', 'extensions/system/modules/user/js/role.js', ['requirejs'])
+@script('user', 'extensions/system/modules/user/assets/js/role.js', ['requirejs'])
 
 <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
     <div class="uk-width-medium-1-4 pk-sidebar-left">
