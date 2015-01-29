@@ -136,7 +136,14 @@ class Extension implements ModuleInterface
         }
 
         foreach ((array) $this->config['controllers'] as $prefix => $controllers) {
-            $collection->mount($prefix, $controllers, "@{$this->getName()}/");
+
+            if (false === strpos($prefix, ':')) {
+                $namespace = "@{$this->getName()}";
+            } else {
+                list($namespace, $prefix) = explode(':', $prefix);
+            }
+
+            $collection->mount($prefix, $controllers, "$namespace/");
         }
     }
 

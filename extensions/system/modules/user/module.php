@@ -14,12 +14,12 @@ return [
 
     'controllers' => [
 
-        '/' => [
+        '@system: /' => [
             'Pagekit\\User\\Controller\\AuthController',
             'Pagekit\\User\\Controller\\ProfileController'
         ],
 
-        '/system' => [
+        '@system: /system' => [
             'Pagekit\\User\\Controller\\PermissionController',
             'Pagekit\\User\\Controller\\RegistrationController',
             'Pagekit\\User\\Controller\\ResetPasswordController',

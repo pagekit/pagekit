@@ -24,7 +24,7 @@ class AliasListener implements EventSubscriberInterface
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('alias.edit', 'extensions/system/views/tmpl/site.alias.php');
+        $event->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
     }
 
     /**

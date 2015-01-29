@@ -21,7 +21,7 @@ return [
 
     'controllers' => [
 
-        '/blog' => [
+        '@blog: /blog' => [
             'Pagekit\\Blog\\Controller\\CommentController',
             'Pagekit\\Blog\\Controller\\PostController'
         ]

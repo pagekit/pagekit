@@ -12,7 +12,7 @@ return [
 
     'controllers' => [
 
-        '/hello' => [
+        '@hello: /hello' => [
             'Pagekit\\Hello\\Controller\\HelloController',
             'Pagekit\\Hello\\Controller\\SiteController'
         ]

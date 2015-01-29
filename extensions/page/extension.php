@@ -12,7 +12,7 @@ return [
 
     'controllers' => [
 
-        '/page' => 'Pagekit\\Page\\Controller\\SiteController'
+        '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController'
 
     ],
 

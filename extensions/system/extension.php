@@ -8,17 +8,13 @@ return [
 
     'controllers' => [
 
-        '/' => [
+        '@system: /' => [
             'Pagekit\\System\\Controller\\AdminController',
             'Pagekit\\System\\Controller\\OAuthController'
         ],
 
-        '/system' => [
+        '@system: /system' => [
             'Pagekit\\Extension\\Controller\\ExtensionsController',
-            'Pagekit\\Menu\\Controller\\ItemController',
-            'Pagekit\\Menu\\Controller\\MenuController',
-            'Pagekit\\Site\\Controller\\NodeController',
-            'Pagekit\\Site\\Controller\\TemplateController',
             'Pagekit\\System\\Controller\\DashboardController',
             'Pagekit\\System\\Controller\\FinderController',
             'Pagekit\\System\\Controller\\LinkController',
@@ -41,13 +37,6 @@ return [
             'icon'     => 'extensions/system/assets/images/icon-dashboard.svg',
             'url'      => '@system/dashboard',
             'active'   => '@system/dashboard',
-            'priority' => 0
-        ],
-        'system: site' => [
-            'label'    => 'Site',
-            'icon'     => 'extensions/page/extension.svg',
-            'url'      => '@system/node',
-            'active'   => '@system/node*',
             'priority' => 0
         ],
         'system: widgets' => [
@@ -107,9 +96,6 @@ return [
         ],
         'system: maintenance access' => [
             'title' => 'Use the site in maintenance mode'
-        ],
-        'system: manage site' => [
-            'title' => 'Manage site'
         ]
 
     ],

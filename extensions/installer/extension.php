@@ -13,7 +13,7 @@ return [
 
     'controllers' => [
 
-        '/installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
+        '@installer: /installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
 
     ]
 

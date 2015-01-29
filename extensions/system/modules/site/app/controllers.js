@@ -54,22 +54,37 @@ angular.module('site')
             Node.save({ id: 'bulk' }, { nodes: JSON.stringify(nodes) });
         }
 
-        $scope.$watch('nodes', function (nodes) {
+        function updateTree() {
+            var tree = {}, nodes = {};
 
-            var tree = { 0: { children: [] } };
-            angular.forEach($filter('orderBy')($filter('toArray')(nodes), 'priority'), function (node) {
-                tree[node.id] = tree[node.id] || { node: node, children: [] };
-                (tree[node.parentId] = tree[node.parentId] || { node: nodes[node.parentId], children: [] }).children.push(tree[node.id]);
-            });
-
-            $scope.tree = {};
             angular.forEach($scope.menus, function (menu) {
-                $scope.tree[menu] = tree[0].children.filter(function (item) {
-                    return menu == item.node.menu;
-                });
+                tree[menu] = [];
             });
 
+            angular.forEach($filter('orderBy')($filter('toArray')($scope.nodes), 'priority'), function (node) {
+
+                var menu = tree[node.menu];
+
+                if (!menu) {
+                    $scope.menus.splice(-1, 0, node.menu);
+                    return;
+                }
+
+                parent = !node.parentId && menu || (nodes[node.parentId] = nodes[node.parentId] || { node: $scope.nodes[node.parentId], children: [] }).children;
+
+                parent.push(nodes[node.id] = nodes[node.id] || { node: node, children: [] });
+            });
+
+            $scope.tree = tree;
+        }
+
+        $scope.$watch('nodes', function () {
+            updateTree();
         }, true);
+
+        $scope.$watchCollection('menus', function () {
+            updateTree();
+        });
 
         var debounce;
         $scope.$on('change.nestable', function (event, items) {
@@ -89,13 +104,24 @@ angular.module('site')
                 bulkSave($scope.nodes);
             }, 100);
         });
+
+        var modal;
+        vm.openModal = function() {
+            $scope.menu = '';
+            modal = UIkit.modal('#modal-menu').show();
+        };
+
+        vm.addMenu = function() {
+            $scope.menus.splice(-1, 0, $scope.menu);
+            modal.hide();
+        }
     }])
 
     .controller('editCtrl', ['$scope', '$routeParams', 'Application', 'Node', function ($scope, $routeParams, App, Node) {
 
         var vm = this;
 
-        $scope.node = $routeParams['id'] ? Node.query({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type'] });
+        $scope.node = $routeParams['id'] ? Node.get({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type'] });
 
         $scope.roles = App.data.roles;
 

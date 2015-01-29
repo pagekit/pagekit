@@ -7,9 +7,6 @@ use Pagekit\Content\ContentHelper;
 use Pagekit\Extension\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
-use Pagekit\Site\Event\AliasListener;
-use Pagekit\Site\Event\TypeEvent;
-use Pagekit\Site\Event\RouteListener;
 use Pagekit\System\DataCollector\SystemDataCollector;
 use Pagekit\System\DataCollector\UserDataCollector;
 use Pagekit\System\Event\AdminMenuListener;
@@ -28,7 +25,6 @@ use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\Theme\Event\ThemeListener;
 use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
-use Pagekit\User\Event\PermissionEvent;
 use Pagekit\Widget\Event\WidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
@@ -46,7 +42,6 @@ class SystemExtension extends Extension
 
         $app->subscribe(
             new AdminMenuListener,
-            new AliasListener,
             new CanonicalListener,
             new FrontpageListener,
             new LocaleListener,
@@ -54,7 +49,6 @@ class SystemExtension extends Extension
             new MenuListener,
             new MigrationListener,
             new ResponseListener,
-            new RouteListener,
             new SystemListener,
             new ThemeListener,
             new ThemeWidgetListener,
@@ -69,10 +63,6 @@ class SystemExtension extends Extension
 
         $app['menus'] = function() {
             return new MenuProvider;
-        };
-
-        $app['site.types'] = function($app) {
-            return $app->trigger('site.types', new TypeEvent);
         };
 
         $app['content'] = function() {

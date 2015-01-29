@@ -5,7 +5,7 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
     .value('UIkit', UIkit)
 
     .factory('Node', ['$resource', 'Application', function($resource, App) {
-        return $resource(App.url('/node/:id'), {}, {
+        return $resource(App.url('/:id'), {}, {
             query: { method: 'GET', responseType: 'json' }
         });
     }])

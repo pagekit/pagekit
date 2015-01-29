@@ -52,3 +52,19 @@
         </div>
     </div>
 </div>
+<p>
+    <a ng-click="vm.openModal()"><i class="uk-icon-th-list"></i> <?php echo __('Create Menu') ?></a>
+</p>
+
+<div id="modal-menu" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-slide">
+
+        <p>
+            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu" placeholder="<?php echo __('Enter Menu Name') ?>">
+        </p>
+
+        <button class="uk-button uk-button-primary" ng-click="vm.addMenu()"><?php echo __('Save') ?></button>
+        <button class="uk-button uk-modal-close"><?php echo __('Cancel') ?></button>
+
+    </div>
+</div>

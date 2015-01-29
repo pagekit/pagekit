@@ -6,59 +6,33 @@ use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Event\ConfigEvent;
-use Pagekit\User\Entity\Role;
 
 /**
- * @Route("/site")
+ * @Route("/site/node")
  * @Access("system: manage site", admin=true)
  */
 class NodeController extends Controller
 {
     /**
-     * @Route("/", methods="GET")
-     * @Response("extensions/system/views/admin/site/index.php")
+     * @Response("json")
      */
     public function indexAction()
     {
-        $config = App::trigger('site.config', new ConfigEvent([
-            'config'    => [
-                'url'          => App::url()->base(),
-                'route'        => App::url('@system/node'),
-                'url.template' => App::url('@system/template'),
-                'csrf'         => App::csrf()->generate()
-            ],
-            'data'   => [
-                'types' => App::get('site.types')->getTypes(),
-                'roles' => Role::findAll(),
-                'menus'  => ['Main']
-            ],
-            'templates' => [
-                'site.edit' => App::view('extensions/system/views/tmpl/site.edit.php'),
-                'site.list' => App::view('extensions/system/views/tmpl/site.list.php')
-            ]
-        ]))->getConfig();
-
-        App::on('kernel.view', function () use ($config) {
-            App::scripts('site-config', sprintf('var %s = %s;', 'site', json_encode($config)), [], 'string');
-        });
-
-        return ['head.title' => __('Nodes')];
+        return Node::findAll();
     }
 
     /**
-     * @Route("/node/", methods="GET")
-     * @Route("/node/{id}", methods="GET", requirements={"id"="\d+"})
+     * @Route("/{id}", methods="GET", requirements={"id"="\d+"})
      * @Response("json")
      */
-    public function getAction($id = 0)
+    public function getAction($id)
     {
-        return $id ? Node::find($id) : Node::findAll();
+        return Node::find($id);
     }
 
     /**
-     * @Route("/node/", methods="POST")
-     * @Route("/node/{id}", methods="POST", requirements={"id"="\d+"})
+     * @Route("/", methods="POST")
+     * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
      * @Request({"node": "array", "id": "int"}, csrf=true)
      * @Response("json")
      */
@@ -81,7 +55,7 @@ class NodeController extends Controller
     }
 
     /**
-     * @Route("/node/{id}", methods="DELETE", requirements={"id"="\d+"})
+     * @Route("/{id}", methods="DELETE", requirements={"id"="\d+"})
      * @Request({"id": "int"}, csrf=true)
      * @Response("json")
      */
@@ -101,7 +75,7 @@ class NodeController extends Controller
     }
 
     /**
-     * @Route("/node/bulk", methods="POST")
+     * @Route("/bulk", methods="POST")
      * @Request({"nodes": "json"}, csrf=true)
      * @Response("json")
      */
@@ -115,7 +89,7 @@ class NodeController extends Controller
     }
 
     /**
-     * @Route("/node/bulk", methods="DELETE")
+     * @Route("/bulk", methods="DELETE")
      * @Request({"ids": "json"}, csrf=true)
      * @Response("json")
      */
