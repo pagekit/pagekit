@@ -107,8 +107,6 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('feed.error', 'extensions/system/views/tmpl/feed.error.razr');
-        $event->register('feed.list', 'extensions/system/views/tmpl/feed.list.razr');
         $event->register('finder.main', 'extensions/system/views/tmpl/finder.main.razr');
         $event->register('finder.table', 'extensions/system/views/tmpl/finder.table.razr');
         $event->register('finder.thumbnail', 'extensions/system/views/tmpl/finder.thumbnail.razr');
@@ -118,7 +116,6 @@ class SystemListener implements EventSubscriberInterface
         $event->register('marketplace.table', 'extensions/system/views/tmpl/marketplace.table.razr');
         $event->register('package.updates', 'extensions/system/views/tmpl/package.updates.razr');
         $event->register('package.upload', 'extensions/system/views/tmpl/package.upload.razr');
-        $event->register('settings.oauth', 'extensions/system/views/tmpl/settings.oauth.razr');
     }
 
     /**

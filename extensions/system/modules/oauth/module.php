@@ -14,6 +14,10 @@ return [
 
         $app['system']->loadControllers($config);
 
+        $app->on('system.tmpl', function ($event) {
+            $event->register('settings.oauth', 'extensions/system/modules/oauth/views/tmpl/settings.razr');
+        });
+
     },
 
     'autoload' => [
