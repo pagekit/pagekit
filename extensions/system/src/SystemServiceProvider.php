@@ -21,11 +21,11 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         $this->app = $app;
 
-        $app['module'] = function($app) {
+        $app['module'] = function ($app) {
             return new ModuleManager($app);
         };
 
-        $app['package'] = function($app) {
+        $app['package'] = function ($app) {
 
             $manager = new PackageManager();
             $manager->addRepository('extension', new ExtensionRepository($app['path.extensions']));
@@ -34,11 +34,11 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return $manager;
         };
 
-        $app['locator'] = function($app) {
+        $app['locator'] = function ($app) {
             return new Locator($app['path']);
         };
 
-        $app->extend('view', function($view, $app) {
+        $app->extend('view', function ($view, $app) {
 
             $view->setEngine($app['tmpl']);
             $view->set('app', $app);
@@ -48,7 +48,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         });
 
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
-        $app['path.storage'] = $app['config']['locator.paths.storage'] = rtrim($app['path'] . '/' . $app['config']['app.storage'], '/');
+        $app['path.storage']          = $app['config']['locator.paths.storage'] = rtrim($app['path'].'/'.$app['config']['app.storage'], '/');
     }
 
     public function boot(Application $app)
@@ -75,7 +75,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $baseUrl));
 
         $this->app['sections']->register('head', ['renderer' => 'delayed']);
-        $this->app['sections']->prepend('head', function() {
+        $this->app['sections']->prepend('head', function () {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 
@@ -150,13 +150,13 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.request' => [
+            'kernel.request'       => [
                 ['onKernelRequest', 50],
                 ['onRequestMatched', 0]
             ],
             'templating.reference' => 'onTemplateReference',
             'kernel.response'      => ['onKernelResponse', 15],
-            'system.init' => 'onSystemInit'
+            'system.init'          => 'onSystemInit'
         ];
     }
 }

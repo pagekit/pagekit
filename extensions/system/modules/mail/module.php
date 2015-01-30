@@ -2,17 +2,6 @@
 
 use Pagekit\Mail\Mailer;
 use Pagekit\Mail\ImpersonatePlugin;
-use Swift_Events_SimpleEventDispatcher;
-use Swift_MailTransport;
-use Swift_MemorySpool;
-use Swift_SpoolTransport;
-use Swift_StreamFilters_StringReplacementFilterFactory;
-use Swift_Transport_Esmtp_Auth_CramMd5Authenticator;
-use Swift_Transport_Esmtp_Auth_LoginAuthenticator;
-use Swift_Transport_Esmtp_Auth_PlainAuthenticator;
-use Swift_Transport_Esmtp_AuthHandler;
-use Swift_Transport_EsmtpTransport;
-use Swift_Transport_StreamBuffer;
 
 return [
 
