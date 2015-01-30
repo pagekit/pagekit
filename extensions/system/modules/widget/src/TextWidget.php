@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Widget;
+namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Widget\Model\TypeInterface;
@@ -45,6 +45,6 @@ class TextWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/views/widgets/text/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/widget/views/widgets/text/edit.razr', compact('widget'));
     }
 }

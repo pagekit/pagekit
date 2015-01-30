@@ -7,8 +7,6 @@ use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\FinderHelper;
-use Pagekit\System\Widget\TextWidget;
-use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Razr\Directive\FunctionDirective;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -73,16 +71,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers widgets.
-     *
-     * @param RegisterWidgetEvent $event
-     */
-    public function onSystemWidget(RegisterWidgetEvent $event)
-    {
-        $event->register(new TextWidget);
-    }
-
-    /**
      * Registers links.
      *
      * @param LinkEvent $event
@@ -132,8 +120,7 @@ class SystemListener implements EventSubscriberInterface
             'system.finder' => 'onSystemFinder',
             'system.link'   => 'onSystemLink',
             'system.loaded' => 'onSystemLoaded',
-            'system.tmpl'   => 'onSystemTmpl',
-            'system.widget' => 'onSystemWidget'
+            'system.tmpl'   => 'onSystemTmpl'
         ];
     }
 }

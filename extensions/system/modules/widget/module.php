@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Widget\Event\WidgetListener;
+use Pagekit\Widget\TextWidget;
 
 return [
 
@@ -14,6 +15,10 @@ return [
 
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
+        });
+
+        $app->on('system.widget', function ($event) {
+            $event->register(new TextWidget);
         });
     },
 

@@ -17,7 +17,7 @@
         @if ($item.hasChildren && ($item.attribute('active') || $widget.get('mode', 'all') == 'all' || !$root.depth == 0))
             <div class="uk-dropdown uk-dropdown-navbar">
                 <ul class="uk-nav uk-nav-navbar">
-                    @include('extensions/system/views/widgets/menu/nav.razr', ['root' => $item])
+                    @include('extensions/system/modules/menu/views/widgets/menu/nav.razr', ['root' => $item])
                 </ul>
             </div>
         @endif

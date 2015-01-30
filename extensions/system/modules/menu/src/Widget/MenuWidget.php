@@ -41,7 +41,7 @@ class MenuWidget implements TypeInterface
             ini_set('xdebug.max_nesting_level', 1000);
         }
 
-        $layout = isset($options['layout']) ? $options['layout'] : 'extensions/system/views/widgets/menu/nav.razr';
+        $layout = isset($options['layout']) ? $options['layout'] : 'extensions/system/modules/menu/views/widgets/menu/nav.razr';
 
         $root = App::menus()->getTree($widget->get('menu', 0), [
             'access' => true,
@@ -87,6 +87,6 @@ class MenuWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/views/widgets/menu/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/menu/views/widgets/menu/edit.razr', compact('widget'));
     }
 }
