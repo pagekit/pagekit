@@ -118,18 +118,6 @@ return [
 
     ],
 
-    'mail' => [
-
-        'driver'     => 'mail',
-        'host'       => 'localhost',
-        'port'       => 25,
-        'encryption' => null,
-        'username'   => null,
-        'password'   => null,
-        'from'       => ['address' => null, 'name' => null]
-
-    ],
-
     'option' => [
 
         'table' => '@system_option'

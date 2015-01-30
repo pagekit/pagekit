@@ -7,28 +7,23 @@ return [
 
     'name' => 'system/mail',
 
-    'main' => function ($app) {
+    'main' => function ($app, $config) {
 
-        $app['mailer'] = function ($app) {
+        $app['mailer'] = function ($app) use ($config) {
 
             $app['mailer.initialized'] = true;
 
-            $address = $app['config']->get('mail.from.address');
-            $name    = $app['config']->get('mail.from.name');
-
             $mailer = new Mailer($app['swift.transport'], $app['swift.spooltransport']);
-            $mailer->registerPlugin(new ImpersonatePlugin($address, $name));
+            $mailer->registerPlugin(new ImpersonatePlugin($config['from_address'], $config['from_name']));
 
             return $mailer;
         };
 
         $app['mailer.initialized'] = false;
 
-        $app['swift.transport'] = function ($app) {
+        $app['swift.transport'] = function ($app) use ($config) {
 
-            $driver = $app['config']->get('mail.driver');
-
-            if ('smtp' == $driver) {
+            if ('smtp' == $config['driver']) {
 
                 $transport = new Swift_Transport_EsmtpTransport(
                     $app['swift.transport.buffer'],
@@ -36,26 +31,17 @@ return [
                     $app['swift.transport.eventdispatcher']
                 );
 
-                $options = array_replace([
-                    'host'       => 'localhost',
-                    'port'       => 25,
-                    'username'   => '',
-                    'password'   => '',
-                    'encryption' => null,
-                    'auth_mode'  => null,
-                ], $app['config']->get('mail', []));
-
-                $transport->setHost($options['host']);
-                $transport->setPort($options['port']);
-                $transport->setEncryption($options['encryption']);
-                $transport->setUsername($options['username']);
-                $transport->setPassword($options['password']);
-                $transport->setAuthMode($options['auth_mode']);
+                $transport->setHost($config['host']);
+                $transport->setPort($config['port']);
+                $transport->setUsername($config['username']);
+                $transport->setPassword($config['password']);
+                $transport->setEncryption($config['encryption']);
+                $transport->setAuthMode($config['auth_mode']);
 
                 return $transport;
             }
 
-            if ('mail' == $driver) {
+            if ('mail' == $config['driver']) {
                 return Swift_MailTransport::newInstance();
             }
 
@@ -99,6 +85,16 @@ return [
 
         'Pagekit\\Mail\\' => 'src'
 
-    ]
+    ],
+
+    'driver'       => 'mail',
+    'host'         => 'localhost',
+    'port'         => 25,
+    'username'     => null,
+    'password'     => null,
+    'encryption'   => null,
+    'auth_mode'    => null,
+    'from_name'    => null,
+    'from_address' => null
 
 ];
