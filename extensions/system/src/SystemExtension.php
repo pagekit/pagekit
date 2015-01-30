@@ -129,25 +129,19 @@ class SystemExtension extends Extension
     /**
      * Load controllers.
      *
-     * @param array $config
+     * @param array $controllers
      */
-    public function loadControllers(array $config)
+    public function loadControllers(array $controllers)
     {
-        if (!isset($config['controllers'])) {
-            return;
-        }
+        foreach ($controllers as $prefix => $controller) {
 
-        $name = $config['name'];
+            $namespace = '';
 
-        foreach ((array) $config['controllers'] as $prefix => $controllers) {
-
-            if (false === strpos($prefix, ':')) {
-                $namespace = "@{$name}";
-            } else {
+            if (strpos($prefix, ':') !== false) {
                 list($namespace, $prefix) = explode(':', $prefix);
             }
 
-            App::controllers()->mount($prefix, $controllers, "$namespace/");
+            App::controllers()->mount($prefix, $controller, "$namespace/");
         }
     }
 
