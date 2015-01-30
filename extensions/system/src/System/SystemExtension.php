@@ -10,7 +10,6 @@ use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Helper\SystemInfoHelper;
-use Pagekit\System\Mail\ImpersonatePlugin;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener as ThemeWidgetListener;
 use Symfony\Component\Finder\Finder;
@@ -49,16 +48,6 @@ class SystemExtension extends Extension
         $app['systemInfo'] = function() {
             return new SystemInfoHelper;
         };
-
-        $app->extend('mailer', function($mailer, $app) {
-
-            $address = $app['config']->get('mail.from.address');
-            $name    = $app['config']->get('mail.from.name');
-
-            $mailer->registerPlugin(new ImpersonatePlugin($address, $name));
-
-            return $mailer;
-        });
 
         $app->factory('finder', function() {
             return Finder::create();

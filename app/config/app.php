@@ -29,7 +29,6 @@ return [
             'Pagekit\Auth\RememberMeServiceProvider',
             'Pagekit\Feed\FeedServiceProvider',
             'Pagekit\Filesystem\FilesystemServiceProvider',
-            'Pagekit\Mail\MailServiceProvider',
             'Pagekit\Markdown\MarkdownServiceProvider',
             'Pagekit\Migration\MigrationServiceProvider',
             'Pagekit\Option\OptionServiceProvider',
