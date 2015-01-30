@@ -15,6 +15,9 @@ foreach ($app['config']['app.providers'] as $provider) {
     $app->register($provider);
 }
 
+$app['module']->addPath($app['path.extensions'].'/*/extension.php');
+$app['module']->addPath($app['path.themes'].'/*/theme.php');
+
 try {
 
     class InstallerException extends RuntimeException {}
@@ -34,8 +37,7 @@ try {
         $app['cache']->save('installed', true);
     }
 
-    $app['module']->addPath($app['path.extensions'].'/*/extension.php');
-    $app['module']->addPath($app['path.themes'].'/*/theme.php');
+    $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 } catch (InstallerException $e) {
 
@@ -47,6 +49,7 @@ try {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
+    $app['modules'] = ['installer'];
 
 }
 

@@ -30,7 +30,7 @@ class Extension implements ModuleInterface
         $this->registerControllers($app['controllers']);
 
         $app->on('system.init', function () use ($app, $config) {
-            $app['system']->loadLanguages($config['path']);
+            // $app['system']->loadLanguages($config['path']);
         });
 
         if ($menu = $this->getConfig('menu')) {

@@ -53,9 +53,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function boot(Application $app)
     {
-        $extensions = $app['option']->get('system:extensions', []);
-
-        $app['module']->load(array_merge($extensions, ['system']));
+        $app['module']->load($app['modules']);
 
         if ($app->runningInConsole()) {
             $app['isAdmin'] = false;
