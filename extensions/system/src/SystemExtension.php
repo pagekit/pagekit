@@ -83,7 +83,7 @@ class SystemExtension extends Extension
         }
 
         foreach (['blog', 'page'] as $extension) {
-            if ($extension = App::extension($extension)) {
+            if ($extension = App::module($extension)) {
                 $extension->enable();
             }
         }

@@ -140,14 +140,12 @@ return [
 
     'extension' => [
 
-        'path' => '%path.extensions%',
         'core' => ['installer', 'system']
 
     ],
 
     'theme' => [
 
-        'path' => '%path.themes%',
         'site' => 'alpha'
 
     ]

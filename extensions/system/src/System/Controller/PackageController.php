@@ -151,7 +151,7 @@ class PackageController
         }
 
         $installer = App::package()->getInstaller('extension');
-        $extension = App::extension($name);
+        $extension = App::module($name);
 
         if ($installer->isInstalled($package)) {
 

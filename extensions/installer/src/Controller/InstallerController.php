@@ -102,9 +102,7 @@ class InstallerController
 
         try {
 
-            foreach (['blog', 'page', 'system'] as $extension) {
-                App::extension()->load($extension);
-            }
+            App::module()->load(['blog', 'page', 'system']);
 
             if ('no-connection' == $status) {
                 throw new Exception(__('No database connection.'));

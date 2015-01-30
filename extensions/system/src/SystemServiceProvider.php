@@ -3,7 +3,6 @@
 namespace Pagekit;
 
 use Pagekit\Application\ServiceProviderInterface;
-use Pagekit\Extension\ExtensionManager;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Filesystem\Locator;
@@ -32,10 +31,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             $manager->addRepository('theme', new ThemeRepository($app['path.themes']));
 
             return $manager;
-        };
-
-        $app['extension'] = function($app) {
-            return new ExtensionManager($app['path.extensions']);
         };
 
         $app['locator'] = function($app) {
