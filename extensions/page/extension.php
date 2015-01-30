@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'page',
+
     'main' => 'Pagekit\\Page\\PageExtension',
 
     'autoload' => [

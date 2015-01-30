@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'blog',
+
     'main' => 'Pagekit\\Blog\\BlogExtension',
 
     'autoload' => [

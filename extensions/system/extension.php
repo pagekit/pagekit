@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'system',
+
     'main' => 'Pagekit\\System\\SystemExtension',
 
     'include' => __DIR__.'/modules/*/module.php',

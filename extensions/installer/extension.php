@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'installer',
+
     'main' => 'Pagekit\\Installer\\InstallerExtension',
 
     'autoload' => [

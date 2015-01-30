@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'hello',
+
     'main' => 'Pagekit\\Hello\\HelloExtension',
 
     'autoload' => [
