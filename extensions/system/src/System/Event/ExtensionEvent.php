@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Extension\Event;
+namespace Pagekit\System\Event;
 
-use Pagekit\Extension\Extension;
+use Pagekit\System\Extension;
 use Symfony\Component\EventDispatcher\Event;
 
 class ExtensionEvent extends Event

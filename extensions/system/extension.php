@@ -13,7 +13,7 @@ return [
         ],
 
         '@system: /system' => [
-            'Pagekit\\Extension\\Controller\\ExtensionsController',
+            'Pagekit\\System\\Controller\\ExtensionsController',
             'Pagekit\\System\\Controller\\FinderController',
             'Pagekit\\System\\Controller\\LinkController',
             'Pagekit\\System\\Controller\\MarketplaceController',

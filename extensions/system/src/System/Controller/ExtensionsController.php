@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Extension\Controller;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
-use Pagekit\Extension\Event\ExtensionEvent;
-use Pagekit\Extension\Extension;
+use Pagekit\System\Extension;
+use Pagekit\System\Event\ExtensionEvent;
 
 /**
  * @Access("system: manage extensions", admin=true)

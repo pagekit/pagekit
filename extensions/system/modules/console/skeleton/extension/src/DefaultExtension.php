@@ -3,7 +3,7 @@
 namespace %NAMESPACE%;
 
 use Pagekit\Application as App;
-use Pagekit\Extension\Extension;
+use Pagekit\System\Extension;
 
 class %CLASSNAME% extends Extension
 {

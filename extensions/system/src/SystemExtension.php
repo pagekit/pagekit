@@ -3,7 +3,7 @@
 namespace Pagekit;
 
 use Pagekit\Application as App;
-use Pagekit\Extension\Extension;
+use Pagekit\System\Extension;
 use Pagekit\Menu\Event\MenuListener;
 use Pagekit\Menu\MenuProvider;
 use Pagekit\System\Event\CanonicalListener;
