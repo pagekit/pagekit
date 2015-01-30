@@ -7,9 +7,9 @@ use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Filesystem\Locator;
 use Pagekit\Module\ModuleManager;
-use Pagekit\Package\PackageManager;
-use Pagekit\Package\Repository\ExtensionRepository;
-use Pagekit\Package\Repository\ThemeRepository;
+use Pagekit\System\Package\PackageManager;
+use Pagekit\System\Package\Repository\ExtensionRepository;
+use Pagekit\System\Package\Repository\ThemeRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface

@@ -2,66 +2,51 @@
 
 namespace Pagekit\System\Package;
 
-abstract class PackageManager implements \IteratorAggregate
-{
-    /**
-     * @var string
-     */
-    protected $path;
+use Pagekit\Package\Installer\InstallerInterface;
+use Pagekit\Package\Installer\PackageInstaller;
+use Pagekit\Package\Repository\InstalledRepository;
 
+class PackageManager
+{
     /**
      * @var array
      */
-    protected $loaded = [];
+    protected $repositories = [];
 
     /**
-     * Constructor.
-     *
-     * @param string $path
-     */
-    public function __construct($path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * Get shortcut.
-     *
-     * @see get()
-     * @return mixed|null
-     */
-    public function __invoke($name)
-    {
-        return $this->get($name);
-    }
-
-    /**
-     * Gets an instance by name.
+     * Gets a installer instance.
      *
      * @param  string $name
-     * @return mixed|null
+     * @return InstallerInterface
      */
-    public function get($name)
+    public function getInstaller($name)
     {
-        return isset($this->loaded[$name]) ? $this->loaded[$name] : null;
+        if (!$repository = $this->getRepository($name)) {
+            throw new \InvalidArgumentException("Invalid repository '$name'");
+        }
+
+        return new PackageInstaller($repository);
     }
 
     /**
-     * Implements the \IteratorAggregate.
-     *
-     * @return \Iterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->loaded);
-    }
-
-    /**
-     * Loads an package bootstrap file.
+     * Gets a repository instance.
      *
      * @param  string $name
-     * @param  string $path
-     * @return mixed
+     * @return InstalledRepository
      */
-    abstract public function load($name, $path = null);
+    public function getRepository($name)
+    {
+        return isset($this->repositories[$name]) ? $this->repositories[$name] : null;
+    }
+
+    /**
+     * Adds a repository instance.
+     *
+     * @param string              $name
+     * @param InstalledRepository $repository
+     */
+    public function addRepository($name, InstalledRepository $repository)
+    {
+        $this->repositories[$name] = $repository;
+    }
 }

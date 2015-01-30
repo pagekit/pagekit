@@ -1,11 +1,12 @@
 <?php
 
-namespace Pagekit\Package\Repository;
+namespace Pagekit\System\Package\Repository;
 
+use Pagekit\Package\Repository\InstalledRepository;
 use Pagekit\Package\Loader\JsonLoader;
 use Pagekit\Package\Loader\LoaderInterface;
 
-class ExtensionRepository extends InstalledRepository
+class ThemeRepository extends InstalledRepository
 {
     /**
      * @var LoaderInterface
@@ -32,10 +33,8 @@ class ExtensionRepository extends InstalledRepository
     {
         parent::initialize();
 
-        if (empty($this->packages)) {
-            foreach (glob("{$this->path}/*/extension.json") as $config) {
-                $this->addPackage($this->loader->load($config));
-            }
+        foreach (glob("{$this->path}/*/theme.json") as $config) {
+            $this->addPackage($this->loader->load($config));
         }
     }
 }
