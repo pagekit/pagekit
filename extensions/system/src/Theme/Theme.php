@@ -3,22 +3,13 @@
 namespace Pagekit\Theme;
 
 use Pagekit\Application as App;
+use Pagekit\Module\ModuleInterface;
 use Pagekit\View\Section\SectionManager;
 use Pagekit\View\ViewInterface;
 use Symfony\Component\Translation\Translator;
 
-class Theme
+class Theme implements ModuleInterface
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $path;
-
     /**
      * @var array
      */
@@ -35,24 +26,12 @@ class Theme
     protected $layout = '/templates/template.razr';
 
     /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $path
-     * @param array  $config
-     */
-    public function __construct($name, $path, array $config = [])
-    {
-        $this->name   = $name;
-        $this->path   = $path;
-        $this->config = $config;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function boot(App $app)
+    public function load(App $app, array $config)
     {
+        $this->config = $config;
+
         $app['system']->loadLanguages($this->getPath());
 
         if ($this->getConfig('parameters.settings')) {
@@ -61,7 +40,7 @@ class Theme
                 $this->parameters = array_replace($this->parameters, $defaults);
             }
 
-            if (is_array($settings = App::option("{$this->name}:settings"))) {
+            if (is_array($settings = App::option("{$config['name']}:settings"))) {
                 $this->parameters = array_replace($this->parameters, $settings);
             }
         }
@@ -91,7 +70,7 @@ class Theme
      */
     public function getName()
     {
-        return $this->name;
+        return $this->config['name'];
     }
 
     /**
@@ -101,7 +80,7 @@ class Theme
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->config['path'];
     }
 
     /**
@@ -111,7 +90,7 @@ class Theme
      */
     public function getLayout()
     {
-        return $this->path.$this->layout;
+        return $this->getPath().$this->layout;
     }
 
     /**

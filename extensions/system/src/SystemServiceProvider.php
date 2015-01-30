@@ -11,7 +11,6 @@ use Pagekit\Module\ModuleManager;
 use Pagekit\Package\PackageManager;
 use Pagekit\Package\Repository\ExtensionRepository;
 use Pagekit\Package\Repository\ThemeRepository;
-use Pagekit\Theme\ThemeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
@@ -37,10 +36,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
         $app['extension'] = function($app) {
             return new ExtensionManager($app['path.extensions']);
-        };
-
-        $app['theme'] = function($app) {
-            return new ThemeManager($app['path.themes']);
         };
 
         $app['locator'] = function($app) {

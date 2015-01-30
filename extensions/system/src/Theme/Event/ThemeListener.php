@@ -15,9 +15,10 @@ class ThemeListener implements EventSubscriberInterface
         try {
 
             $app = App::getInstance();
+            $theme = $app['config']->get('theme.site');
 
-            $app['theme.site'] = $app['theme']->load($app['config']->get('theme.site'));
-            $app['theme.site']->boot($app);
+            $app['module']->load($theme);
+            $app['theme.site'] = $app['module']->get($theme);
 
         } catch (\Exception $e) {}
     }

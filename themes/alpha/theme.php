@@ -9,6 +9,11 @@
 return [
 
     /**
+     * The main theme class to be loaded when the theme is booted.
+     */
+    'main' => 'Pagekit\\Alpha\\AlphaTheme',
+
+    /**
      * Namespace to autoload theme classes.
      */
     'autoload' => [
@@ -16,11 +21,6 @@ return [
         'Pagekit\\Alpha\\' => 'src'
 
     ],
-
-    /**
-     * The main theme class to be loaded when the theme is booted.
-     */
-    'main' => 'Pagekit\\Alpha\\AlphaTheme',
 
     /**
      * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.

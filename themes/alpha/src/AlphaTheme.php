@@ -15,18 +15,14 @@ class AlphaTheme extends Theme
     /**
      * {@inheritdoc}
      */
-    public function boot(App $app)
+    public function load(App $app, array $config)
     {
-        parent::boot($app);
+        parent::load($app, $config);
 
         $app->on('system.site', function() use ($app) {
-
             $app->on('view.layout', function($event) use ($app) {
-
                 $event->setParameter('theme', $app['theme.site']);
-
             });
-
         });
     }
 
