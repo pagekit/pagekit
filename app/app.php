@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Application as App;
+use Pagekit\Module\ModuleManager;
 
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';
@@ -15,8 +16,14 @@ foreach ($app['config']['app.providers'] as $provider) {
     $app->register($provider);
 }
 
-$app['module']->addPath($app['path.extensions'].'/*/extension.php');
-$app['module']->addPath($app['path.themes'].'/*/theme.php');
+$app['module'] = function ($app) {
+
+    $manager = new ModuleManager($app, $app['config']->getValues());
+    $manager->addPath($app['path.extensions'].'/*/extension.php');
+    $manager->addPath($app['path.themes'].'/*/theme.php');
+
+    return $manager;
+};
 
 try {
 

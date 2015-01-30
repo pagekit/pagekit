@@ -7,7 +7,6 @@ use Pagekit\Application\ServiceProviderInterface;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\Filesystem\Locator;
-use Pagekit\Module\ModuleManager;
 use Pagekit\System\Package\PackageManager;
 use Pagekit\System\Package\Repository\ExtensionRepository;
 use Pagekit\System\Package\Repository\ThemeRepository;
@@ -20,10 +19,6 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     public function register(Application $app)
     {
         $this->app = $app;
-
-        $app['module'] = function ($app) {
-            return new ModuleManager($app);
-        };
 
         $app['package'] = function ($app) {
 
