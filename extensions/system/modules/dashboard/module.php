@@ -9,8 +9,6 @@ return [
 
     'main' => function ($app, $config) {
 
-        $app['system']->loadControllers($config['controllers']);
-
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
         });

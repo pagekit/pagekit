@@ -114,4 +114,19 @@ angular.module('Application')
                 }, true);
             }
         };
+    }])
+
+    .directive('autofocus', ['$timeout', function($timeout) {
+
+        var elements = [];
+
+        return {
+            restrict: 'A',
+            link: function($scope, element) {
+                elements.push(element);
+                $timeout(function() {
+                    elements[0][0].focus();
+                });
+            }
+        };
     }]);

@@ -131,6 +131,22 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         }
     }
 
+    public function onSystemInit()
+    {
+        foreach ($this->app['module']->all() as $module) {
+            foreach ($module->getConfig('controllers', []) as $prefix => $controller) {
+
+                $namespace = '';
+
+                if (strpos($prefix, ':') !== false) {
+                    list($namespace, $prefix) = explode(':', $prefix);
+                }
+
+                $this->app['controllers']->mount($prefix, $controller, "$namespace/");
+            }
+        }
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -139,7 +155,8 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
                 ['onRequestMatched', 0]
             ],
             'templating.reference' => 'onTemplateReference',
-            'kernel.response'      => ['onKernelResponse', 15]
+            'kernel.response'      => ['onKernelResponse', 15],
+            'system.init' => 'onSystemInit'
         ];
     }
 }

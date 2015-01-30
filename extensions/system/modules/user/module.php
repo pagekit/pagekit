@@ -38,14 +38,14 @@ return [
             return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
         };
 
-        $app['system']->loadControllers($config['controllers']);
-
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
         });
 
-        $app->on('system.permission', function ($event) use ($config) {
-            $event->setPermissions($config['name'], $config['permissions']);
+        $app->on('system.permission', function ($event) use ($app) {
+            foreach ($app['module']->all() as $module) {
+                $event->setPermissions($module->getName(), $module->getConfig('permissions', []));
+            }
         });
 
         $app->on('system.widget', function ($event) {

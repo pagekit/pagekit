@@ -53,7 +53,33 @@ return [
         };
 
         $app->on('system.init', function() use ($app) {
-            $app['translator']->setLocale($app['config']->get('app.locale'.($app['isAdmin'] ? '_admin' : '')));
+
+            $translator = $app['translator'];
+            $locale     = $app['config']->get('app.locale'.($app['isAdmin'] ? '_admin' : ''));
+
+            $translator->setLocale($locale);
+
+            foreach ($app['module']->all() as $module) {
+
+                $domains = [];
+
+                foreach (glob($module->getConfig('path').'/languages/'.$locale.'/*') ?: [] as $file) {
+
+                    $format = substr(strrchr($file, '.'), 1);
+                    $domain = basename($file, '.'.$format);
+
+                    if (in_array($domain, $domains)) {
+                        continue;
+                    }
+
+                    $domains[] = $domain;
+
+                    $translator->addResource($format, $file, $locale, $domain);
+                    $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
+                }
+
+            }
+
         }, 10);
 
         $app->on('system.locale', function($event) {

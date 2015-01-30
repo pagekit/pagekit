@@ -63,15 +63,18 @@
 <div id="modal-menu" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-slide">
 
-        <p>
-            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.label" placeholder="<?php echo __('Enter Menu Name') ?>">
-        <p>
-        </p>
-            <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.newId" placeholder="<?php echo __('Enter Menu Slug') ?>">
-        </p>
+        <form ng-submit="vm.saveMenu()" name="form" novalidate>
 
-        <button class="uk-button uk-button-primary" ng-click="vm.saveMenu()"><?php echo __('Save') ?></button>
-        <button class="uk-button uk-modal-close"><?php echo __('Cancel') ?></button>
+            <p>
+                <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.label" placeholder="<?php echo __('Enter Menu Name') ?>" required autofocus>
+            <p>
+            </p>
+                <input class="uk-width-1-1 uk-form-large" type="text" ng-model="menu.newId" placeholder="<?php echo __('Enter Menu Slug') ?>" required>
+            </p>
 
+            <button class="uk-button uk-button-primary" ng-click="vm.saveMenu()" ng-disabled="form.$invalid"><?php echo __('Save') ?></button>
+            <button class="uk-button uk-modal-close"><?php echo __('Cancel') ?></button>
+
+        </form>
     </div>
 </div>

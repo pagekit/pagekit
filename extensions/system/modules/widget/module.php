@@ -12,16 +12,9 @@ return [
             new WidgetListener
         );
 
-        $app['system']->loadControllers($config['controllers']);
-
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
         });
-
-        $app->on('system.permission', function ($event) use ($config) {
-            $event->setPermissions($config['name'], $config['permissions']);
-        });
-
     },
 
     'autoload' => [

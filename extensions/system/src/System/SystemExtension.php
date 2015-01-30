@@ -3,9 +3,6 @@
 namespace Pagekit\System;
 
 use Pagekit\Application as App;
-use Pagekit\System\Extension;
-use Pagekit\Menu\Event\MenuListener;
-use Pagekit\Menu\MenuProvider;
 use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\MaintenanceListener;
@@ -34,7 +31,6 @@ class SystemExtension extends Extension
             new CanonicalListener,
             new FrontpageListener,
             new MaintenanceListener,
-//            new MenuListener,
             new MigrationListener,
             new ResponseListener,
             new SystemListener,
@@ -49,10 +45,6 @@ class SystemExtension extends Extension
         $app['db.em']; // -TODO- fix me
 
         $app['system'] = $this;
-
-        $app['menus'] = function() {
-            return new MenuProvider;
-        };
 
         $app['systemInfo'] = function() {
             return new SystemInfoHelper;
@@ -123,51 +115,6 @@ class SystemExtension extends Extension
             foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
                 App::file()->delete($file->getPathname());
             }
-        }
-    }
-
-    /**
-     * Load controllers.
-     *
-     * @param array $controllers
-     */
-    public function loadControllers(array $controllers)
-    {
-        foreach ($controllers as $prefix => $controller) {
-
-            $namespace = '';
-
-            if (strpos($prefix, ':') !== false) {
-                list($namespace, $prefix) = explode(':', $prefix);
-            }
-
-            App::controllers()->mount($prefix, $controller, "$namespace/");
-        }
-    }
-
-    /**
-     * Load languages.
-     *
-     * @param string $path
-     */
-    public function loadLanguages($path)
-    {
-        $locale  = App::translator()->getLocale();
-        $domains = [];
-
-        foreach (glob($path.'/languages/'.$locale.'/*') ?: [] as $file) {
-
-            $format = substr(strrchr($file, '.'), 1);
-            $domain = basename($file, '.'.$format);
-
-            if (in_array($domain, $domains)) {
-                continue;
-            }
-
-            $domains[] = $domain;
-
-            App::translator()->addResource($format, $file, $locale, $domain);
-            App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
         }
     }
 

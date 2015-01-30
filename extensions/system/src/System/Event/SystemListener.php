@@ -5,7 +5,6 @@ namespace Pagekit\System\Event;
 use Pagekit\Application as App;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
-use Pagekit\Menu\Widget\MenuWidget;
 use Pagekit\System\Templating\DateHelper;
 use Pagekit\System\Templating\FinderHelper;
 use Pagekit\System\Widget\TextWidget;
@@ -50,11 +49,6 @@ class SystemListener implements EventSubscriberInterface
         App::get('tmpl.php')->addHelpers([$helper]);
         App::get('tmpl.razr')->addDirective(new FunctionDirective('finder', [$helper, 'render']));
 
-        App::menus()->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
-        App::menus()->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
-        App::menus()->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');
-        App::menus()->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
-
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');
         });
@@ -85,7 +79,6 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemWidget(RegisterWidgetEvent $event)
     {
-        $event->register(new MenuWidget);
         $event->register(new TextWidget);
     }
 
