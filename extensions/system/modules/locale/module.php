@@ -3,12 +3,30 @@
 use Pagekit\Locale\Helper\CountryHelper;
 use Pagekit\Locale\Helper\DateHelper;
 use Pagekit\Locale\Helper\LanguageHelper;
+use Pagekit\Locale\Loader\MoFileLoader;
+use Pagekit\Locale\Loader\PhpFileLoader;
+use Pagekit\Locale\Loader\PoFileLoader;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
 return [
 
     'name' => 'system/locale',
 
     'main' => function ($app) {
+
+        require __DIR__.'/src/functions.php';
+
+        $app['translator'] = function($app) {
+
+            $translator = new Translator($app['config']['app.locale']);
+            $translator->addLoader('php', new PhpFileLoader);
+            $translator->addLoader('mo', new MoFileLoader);
+            $translator->addLoader('po', new PoFileLoader);
+            $translator->addLoader('array', new ArrayLoader);
+
+            return $translator;
+        };
 
         $app['languages'] = function() {
             return new LanguageHelper;

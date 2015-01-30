@@ -35,7 +35,6 @@ return [
             'Pagekit\Option\OptionServiceProvider',
             'Pagekit\Session\CsrfServiceProvider',
             'Pagekit\Session\SessionServiceProvider',
-            'Pagekit\Translation\TranslationServiceProvider',
             'Pagekit\View\AssetServiceProvider',
             'Pagekit\View\ViewServiceProvider',
             'Pagekit\System\SystemServiceProvider'
