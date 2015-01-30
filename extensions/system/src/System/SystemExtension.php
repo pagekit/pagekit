@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit;
+namespace Pagekit\System;
 
 use Pagekit\Application as App;
 use Pagekit\System\Extension;

@@ -38,7 +38,7 @@ return [
             'Pagekit\Translation\TranslationServiceProvider',
             'Pagekit\View\AssetServiceProvider',
             'Pagekit\View\ViewServiceProvider',
-            'Pagekit\SystemServiceProvider'
+            'Pagekit\System\SystemServiceProvider'
 
         ]
 

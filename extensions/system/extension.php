@@ -2,7 +2,7 @@
 
 return [
 
-    'main' => 'Pagekit\\SystemExtension',
+    'main' => 'Pagekit\\System\\SystemExtension',
 
     'include' => __DIR__.'/modules/*/module.php',
 

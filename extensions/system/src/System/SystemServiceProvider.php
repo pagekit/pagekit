@@ -1,7 +1,8 @@
 <?php
 
-namespace Pagekit;
+namespace Pagekit\System;
 
+use Pagekit\Application;
 use Pagekit\Application\ServiceProviderInterface;
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
