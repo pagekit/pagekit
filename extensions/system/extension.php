@@ -22,7 +22,7 @@ return [
             'Pagekit\\System\\Controller\\SettingsController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController',
-            'Pagekit\\Theme\\Controller\\ThemesController'
+            'Pagekit\\System\\Controller\\ThemesController'
         ]
 
     ],

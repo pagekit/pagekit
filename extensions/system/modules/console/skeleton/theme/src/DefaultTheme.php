@@ -3,7 +3,7 @@
 namespace %NAMESPACE%;
 
 use Pagekit\Application as App;
-use Pagekit\Theme\Theme;
+use Pagekit\System\Theme;
 
 class %CLASSNAME% extends Theme
 {

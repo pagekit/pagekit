@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Theme\Event;
+namespace Pagekit\System\Event;
 
-use Pagekit\Theme\Theme;
+use Pagekit\System\Theme;
 use Symfony\Component\EventDispatcher\Event;
 
 class ThemeEvent extends Event

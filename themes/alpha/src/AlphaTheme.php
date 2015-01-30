@@ -3,7 +3,7 @@
 namespace Pagekit\Alpha;
 
 use Pagekit\Application as App;
-use Pagekit\Theme\Theme;
+use Pagekit\System\Theme;
 
 class AlphaTheme extends Theme
 {

@@ -14,8 +14,8 @@ use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Mail\ImpersonatePlugin;
-use Pagekit\Theme\Event\ThemeListener;
-use Pagekit\Theme\Event\WidgetListener as ThemeWidgetListener;
+use Pagekit\System\Event\ThemeListener;
+use Pagekit\System\Event\WidgetListener as ThemeWidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 

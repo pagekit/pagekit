@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Theme\Event;
+namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

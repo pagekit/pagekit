@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Theme\Controller;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
-use Pagekit\Theme\Event\ThemeEvent;
+use Pagekit\System\Event\ThemeEvent;
 
 /**
  * @Access("system: manage themes", admin=true)
