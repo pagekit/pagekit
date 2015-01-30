@@ -34,7 +34,7 @@ class SystemExtension extends Extension
             new CanonicalListener,
             new FrontpageListener,
             new MaintenanceListener,
-            new MenuListener,
+//            new MenuListener,
             new MigrationListener,
             new ResponseListener,
             new SystemListener,
