@@ -27,7 +27,7 @@ $app['module'] = function ($app) {
 
 try {
 
-    $app['module']->load(['system/cache', 'system/option', 'system/profiler']);
+    $app['module']->load(['system/cache', 'system/option', 'system/profiler', 'system/templating']);
 
     class InstallerException extends RuntimeException {}
 

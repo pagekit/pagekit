@@ -23,8 +23,6 @@ return [
             'Pagekit\View\AssetServiceProvider',
             'Pagekit\View\ViewServiceProvider',
             'Pagekit\System\SystemServiceProvider',
-            'Pagekit\Application\Provider\RazrServiceProvider',
-            'Pagekit\Application\Provider\TemplatingServiceProvider',
 
         ]
 

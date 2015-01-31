@@ -62,11 +62,9 @@ class ProfilerModule extends Module implements EventSubscriberInterface
             return new TraceableEventDispatcher($dispatcher, $app['profiler.stopwatch']);
         });
 
-        if (isset($app['view'])) {
-            $view = $app['view'];
-            unset($app['view']);
-            $app['view'] = new TraceableView($view, $app['profiler.stopwatch']);
-        }
+        $app->extend('view', function($view, $app) {
+            return new TraceableView($view, $app['profiler.stopwatch']);
+        });
 
         $toolbar = $this->path.'/views/toolbar/';
         $panel   = $this->path.'/views/panel/';
@@ -129,7 +127,7 @@ class ProfilerModule extends Module implements EventSubscriberInterface
      */
     protected function injectToolbar(Response $response)
     {
-        $content  = $response->getContent();
+        $content = $response->getContent();
 
         if (false === $pos = strripos($content, '</body>')) {
             return;
