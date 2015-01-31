@@ -1949,22 +1949,22 @@ msgstr "Geen voorpagina toegekend."
 #: extensions/system/src/System/Event/SystemListener.php:134
 #: extensions/system/src/SystemExtension.php:127
 msgid "DATE_SHORT"
-msgstr ""
+msgstr "d n y"
 
 #: extensions/system/src/System/Event/SystemListener.php:135
 #: extensions/system/src/SystemExtension.php:126
 msgid "DATE_MEDIUM"
-msgstr ""
+msgstr "d M, Y"
 
 #: extensions/system/src/System/Event/SystemListener.php:136
 #: extensions/system/src/SystemExtension.php:125
 msgid "DATE_LONG"
-msgstr ""
+msgstr "d F, y"
 
 #: extensions/system/src/System/Event/SystemListener.php:137
 #: extensions/system/src/SystemExtension.php:124
 msgid "DATE_FULL"
-msgstr ""
+msgstr "l, d F, y"
 
 #: extensions/system/src/System/Event/SystemListener.php:138
 msgid "Mon"
