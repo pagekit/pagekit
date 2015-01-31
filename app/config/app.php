@@ -13,7 +13,6 @@ return [
         'providers' => [
 
             'Pagekit\Application\Provider\ExceptionServiceProvider',
-            'Pagekit\Profiler\ProfilerServiceProvider',
             'Pagekit\Cookie\CookieServiceProvider',
             'Pagekit\Database\DatabaseServiceProvider',
             'Pagekit\Auth\AuthServiceProvider',
@@ -37,12 +36,6 @@ return [
 
     ],
 
-    'profiler' => [
-
-        'file' => '%path%/app/temp/profiler.db'
-
-    ],
-
     'system/cache' => [
 
         'config' => [
@@ -63,6 +56,13 @@ return [
             ]
 
         ]
+
+    ],
+
+    'system/profiler' => [
+
+        'file'    => '%path%/app/temp/profiler.db',
+        'enabled' => true
 
     ],
 

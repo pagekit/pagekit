@@ -27,13 +27,13 @@ $app['module'] = function ($app) {
 
 try {
 
+    $app['module']->load(['system/cache', 'system/option', 'system/profiler']);
+
     class InstallerException extends RuntimeException {}
 
     if (!$app['config.file']) {
         throw new InstallerException('No config.');
     }
-
-    $app['module']->load(['system/cache', 'system/option']);
 
     $app['db']->connect();
 
