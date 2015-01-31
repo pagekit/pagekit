@@ -1,10 +1,19 @@
 <?php
 
+use Pagekit\Page\PageExtension;
+
 return [
 
     'name' => 'page',
 
-    'main' => 'Pagekit\\Page\\PageExtension',
+    'main' => function ($app, $config) {
+
+        $extension = new PageExtension();
+        $extension->setConfig($config);
+        $extension->load($app, $config);
+
+        return $extension;
+    },
 
     'autoload' => [
 

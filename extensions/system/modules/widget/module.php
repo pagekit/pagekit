@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Module\Module;
 use Pagekit\Widget\Event\WidgetListener;
 use Pagekit\Widget\TextWidget;
 
@@ -20,6 +21,11 @@ return [
         $app->on('system.widget', function ($event) {
             $event->register(new TextWidget);
         });
+
+        $module = new Module;
+        $module->setConfig($config);
+
+        return $module;
     },
 
     'autoload' => [

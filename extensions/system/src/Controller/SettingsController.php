@@ -36,7 +36,7 @@ class SettingsController extends Controller
      */
     public function indexAction($tab = 0)
     {
-        $supported = App::cache()->supports();
+        $supported = App::module('system/cache')->supports();
 
         $caches = [
             'auto'   => ['name' => '', 'supported' => true],

@@ -1,10 +1,19 @@
 <?php
 
+use Pagekit\Blog\BlogExtension;
+
 return [
 
     'name' => 'blog',
 
-    'main' => 'Pagekit\\Blog\\BlogExtension',
+    'main' => function ($app, $config) {
+
+        $extension = new BlogExtension();
+        $extension->setConfig($config);
+        $extension->load($app, $config);
+
+        return $extension;
+    },
 
     'autoload' => [
 

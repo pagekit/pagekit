@@ -1,10 +1,19 @@
 <?php
 
+use Pagekit\Hello\HelloExtension;
+
 return [
 
     'name' => 'hello',
 
-    'main' => 'Pagekit\\Hello\\HelloExtension',
+    'main' => function ($app, $config) {
+
+        $extension = new HelloExtension();
+        $extension->setConfig($config);
+        $extension->load($app, $config);
+
+        return $extension;
+    },
 
     'autoload' => [
 

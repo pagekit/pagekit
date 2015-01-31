@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Alpha\AlphaTheme;
+
 /**
  * Theme configuration file.
  *
@@ -8,10 +10,19 @@
  */
 return [
 
+    'name' => 'alpha',
+
     /**
-     * The main theme class to be loaded when the theme is booted.
+     * The main function.
      */
-    'main' => 'Pagekit\\Alpha\\AlphaTheme',
+    'main' => function ($app, $config) {
+
+        $theme = new AlphaTheme();
+        $theme->setConfig($config);
+        $theme->load($app, $config);
+
+        return $theme;
+    },
 
     /**
      * Namespace to autoload theme classes.

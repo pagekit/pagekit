@@ -1,10 +1,19 @@
 <?php
 
+use Pagekit\Installer\InstallerExtension;
+
 return [
 
     'name' => 'installer',
 
-    'main' => 'Pagekit\\Installer\\InstallerExtension',
+    'main' => function ($app, $config) {
+
+        $extension = new InstallerExtension();
+        $extension->setConfig($config);
+        $extension->load($app, $config);
+
+        return $extension;
+    },
 
     'autoload' => [
 

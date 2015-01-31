@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Module\Module;
 use Pagekit\Site\Event\AliasListener;
 use Pagekit\Site\Event\MenuEvent;
 use Pagekit\Site\Event\RouteListener;
@@ -33,6 +34,11 @@ return [
         $app->on('system.admin_menu', function ($event) use ($config) {
             $event->register($config['menu']);
         });
+
+        $module = new Module;
+        $module->setConfig($config);
+
+        return $module;
     },
 
     'autoload' => [
