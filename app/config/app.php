@@ -8,12 +8,6 @@ return [
 
         'debug' => true,
 
-        'timezone' => 'UTC',
-
-        'locale' => 'en_US',
-
-        'locale_admin' => 'en_US',
-
         'storage' => '/storage',
 
         'providers' => [

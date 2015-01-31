@@ -13,13 +13,13 @@ return [
 
     'name' => 'system/locale',
 
-    'main' => function ($app) {
+    'main' => function ($app, $config) {
 
         require __DIR__.'/src/functions.php';
 
-        $app['translator'] = function($app) {
+        $app['translator'] = function ($app) use ($config) {
 
-            $translator = new Translator($app['config']['app.locale']);
+            $translator = new Translator($config['locale']);
             $translator->addLoader('php', new PhpFileLoader);
             $translator->addLoader('mo', new MoFileLoader);
             $translator->addLoader('po', new PoFileLoader);
@@ -28,18 +28,18 @@ return [
             return $translator;
         };
 
-        $app['languages'] = function() {
+        $app['languages'] = function () {
             return new LanguageHelper;
         };
 
-        $app['countries'] = function() {
+        $app['countries'] = function () {
             return new CountryHelper;
         };
 
-        $app['dates'] = function($app) {
+        $app['dates'] = function ($app) use ($config) {
 
             $manager = new DateHelper;
-            $manager->setTimezone($app['option']->get('system:app.timezone', 'UTC'));
+            $manager->setTimezone($config['timezone']);
             $manager->setFormats([
                 DateHelper::NONE      => '',
                 DateHelper::FULL      => __('DATE_FULL'),
@@ -52,12 +52,9 @@ return [
             return $manager;
         };
 
-        $app->on('system.init', function() use ($app) {
+        $app->on('system.init', function () use ($app, $config) {
 
-            $translator = $app['translator'];
-            $locale     = $app['config']->get('app.locale'.($app['isAdmin'] ? '_admin' : ''));
-
-            $translator->setLocale($locale);
+            $app['translator']->setLocale($locale = $config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
 
             foreach ($app['module']->all() as $module) {
 
@@ -74,15 +71,15 @@ return [
 
                     $domains[] = $domain;
 
-                    $translator->addResource($format, $file, $locale, $domain);
-                    $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
+                    $app['translator']->addResource($format, $file, $locale, $domain);
+                    $app['translator']->addResource($format, $file, substr($locale, 0, 2), $domain);
                 }
 
             }
 
         }, 10);
 
-        $app->on('system.locale', function($event) {
+        $app->on('system.locale', function ($event) {
             $event->addMessages([
 
                 'short'       => __('DATE_SHORT'),
@@ -103,6 +100,10 @@ return [
 
         'Pagekit\\Locale\\' => 'src'
 
-    ]
+    ],
+
+    'timezone'     => 'UTC',
+    'locale'       => 'en_US',
+    'locale_admin' => 'en_US'
 
 ];

@@ -10,7 +10,7 @@ $app = new App($config);
 $app['autoloader'] = $loader;
 $app['autoloader']->addPsr4('Pagekit\\System\\', $app['path.extensions'].'/system/src');
 
-date_default_timezone_set($app['config']['app.timezone']);
+date_default_timezone_set('UTC');
 
 foreach ($app['config']['app.providers'] as $provider) {
     $app->register($provider);
