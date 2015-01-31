@@ -3,8 +3,8 @@
 namespace Pagekit\Menu\Event;
 
 use Pagekit\Application as App;
-use Pagekit\Cache\CacheInterface;
 use Pagekit\Menu\Entity\Item;
+use Doctrine\Common\Cache\Cache;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -13,7 +13,7 @@ class MenuListener implements EventSubscriberInterface
     /**
      * The menu item cache.
      *
-     * @var CacheInterface
+     * @var Cache
      */
     protected $cache;
 
@@ -30,9 +30,9 @@ class MenuListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param CacheInterface $cache
+     * @param Cache $cache
      */
-    public function __construct(CacheInterface $cache = null)
+    public function __construct(Cache $cache = null)
     {
         $this->cache = $cache ?: App::cache();
     }

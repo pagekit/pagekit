@@ -14,7 +14,6 @@ return [
 
             'Pagekit\Application\Provider\ExceptionServiceProvider',
             'Pagekit\Profiler\ProfilerServiceProvider',
-            'Pagekit\Cache\CacheServiceProvider',
             'Pagekit\Cookie\CookieServiceProvider',
             'Pagekit\Database\DatabaseServiceProvider',
             'Pagekit\Auth\AuthServiceProvider',
@@ -47,20 +46,24 @@ return [
 
     ],
 
-    'cache' => [
+    'system/cache' => [
 
-        'cache' => [
+        'config' => [
 
-            'storage' => 'auto',
-            'path'    => '%path%/app/cache',
-            'prefix'  => sha1(__DIR__)
+            'cache' => [
 
-        ],
+                'storage' => 'auto',
+                'path'    => '%path%/app/cache',
+                'prefix'  => sha1(__DIR__)
 
-        'cache.phpfile' => [
+            ],
 
-            'storage' => 'phpfile',
-            'path'    => '%path%/app/cache'
+            'cache.phpfile' => [
+
+                'storage' => 'phpfile',
+                'path'    => '%path%/app/cache'
+
+            ]
 
         ]
 

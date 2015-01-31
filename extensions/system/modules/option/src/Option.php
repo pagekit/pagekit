@@ -2,8 +2,8 @@
 
 namespace Pagekit\Option;
 
+use Doctrine\Common\Cache\Cache;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Pagekit\Cache\CacheInterface;
 use Pagekit\Database\Connection;
 
 class Option implements \IteratorAggregate
@@ -14,7 +14,7 @@ class Option implements \IteratorAggregate
     protected $connection;
 
     /**
-     * @var CacheInterface $cache
+     * @var Cache $cache
      */
     protected $cache;
 
@@ -60,11 +60,11 @@ class Option implements \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param Connection     $connection
-     * @param CacheInterface $cache
-     * @param string         $table
+     * @param Connection $connection
+     * @param Cache      $cache
+     * @param string     $table
      */
-    public function __construct(Connection $connection, CacheInterface $cache, $table)
+    public function __construct(Connection $connection, Cache $cache, $table)
     {
         $this->connection = $connection;
         $this->cache      = $cache;

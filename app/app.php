@@ -33,6 +33,8 @@ try {
         throw new InstallerException('No config.');
     }
 
+    $app['module']->load(['system/cache', 'system/option']);
+
     $app['db']->connect();
 
     if (!$app['cache']->fetch('installed')) {
@@ -44,7 +46,6 @@ try {
         $app['cache']->save('installed', true);
     }
 
-    $app['module']->load('system/option');
     $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 } catch (InstallerException $e) {
