@@ -19,7 +19,6 @@ return [
             'Pagekit\Auth\AuthServiceProvider',
             'Pagekit\Auth\RememberMeServiceProvider',
             'Pagekit\Filesystem\FilesystemServiceProvider',
-            'Pagekit\Migration\MigrationServiceProvider',
             'Pagekit\Session\CsrfServiceProvider',
             'Pagekit\Session\SessionServiceProvider',
             'Pagekit\View\AssetServiceProvider',
