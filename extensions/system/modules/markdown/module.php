@@ -8,8 +8,6 @@ return [
 
     'main' => function ($app, $config) {
 
-        var_dump($config);
-
         $app['markdown'] = function() {
             return new Markdown;
         };
