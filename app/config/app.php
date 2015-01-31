@@ -61,8 +61,7 @@ return [
 
     'system/profiler' => [
 
-        'file'    => '%path%/app/temp/profiler.db',
-        'enabled' => true
+        'file' => '%path%/app/temp/profiler.db'
 
     ],
 
