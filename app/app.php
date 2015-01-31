@@ -44,6 +44,7 @@ try {
         $app['cache']->save('installed', true);
     }
 
+    $app['module']->load('system/option');
     $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 } catch (InstallerException $e) {

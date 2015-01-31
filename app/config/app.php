@@ -23,7 +23,6 @@ return [
             'Pagekit\Filesystem\FilesystemServiceProvider',
             'Pagekit\Markdown\MarkdownServiceProvider',
             'Pagekit\Migration\MigrationServiceProvider',
-            'Pagekit\Option\OptionServiceProvider',
             'Pagekit\Session\CsrfServiceProvider',
             'Pagekit\Session\SessionServiceProvider',
             'Pagekit\View\AssetServiceProvider',
@@ -109,12 +108,6 @@ return [
             ],
 
         ]
-
-    ],
-
-    'option' => [
-
-        'table' => '@system_option'
 
     ],
 
