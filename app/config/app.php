@@ -12,11 +12,7 @@ return [
 
         'providers' => [
 
-            'Pagekit\Cookie\CookieServiceProvider',
-            'Pagekit\Database\DatabaseServiceProvider',
-            'Pagekit\Auth\AuthServiceProvider',
             'Pagekit\Auth\RememberMeServiceProvider',
-            'Pagekit\Filesystem\FilesystemServiceProvider',
             'Pagekit\System\SystemServiceProvider',
 
         ]
