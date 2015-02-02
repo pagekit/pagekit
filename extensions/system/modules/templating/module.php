@@ -114,10 +114,12 @@ return [
             return $engine;
         };
 
-        $app['tmpl']->addEngine($app['tmpl.php']);
-        $app['tmpl']->addEngine($app['tmpl.razr']);
+        $app->on('system.init', function() use ($app) {
+            $app['tmpl']->addEngine($app['tmpl.php']);
+            $app['tmpl']->addEngine($app['tmpl.razr']);
 
-        $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
+            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
+        });
     },
 
     'autoload' => [

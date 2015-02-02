@@ -17,7 +17,7 @@ return [
 
         require __DIR__.'/src/functions.php';
 
-        $app['translator'] = function ($app) use ($config) {
+        $app['translator'] = function () use ($config) {
 
             $translator = new Translator($config['locale']);
             $translator->addLoader('php', new PhpFileLoader);
@@ -36,7 +36,7 @@ return [
             return new CountryHelper;
         };
 
-        $app['dates'] = function ($app) use ($config) {
+        $app['dates'] = function () use ($config) {
 
             $manager = new DateHelper;
             $manager->setTimezone($config['timezone']);
