@@ -2,9 +2,7 @@
 
 namespace Pagekit\Cache;
 
-use Pagekit\Application as App;
-
-class CacheModule
+class Cache
 {
     /**
      * Returns list of supported caches or boolean for individual cache.

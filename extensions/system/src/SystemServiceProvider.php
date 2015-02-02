@@ -22,7 +22,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
         $app['package'] = function ($app) {
 
-            $manager = new PackageManager();
+            $manager = new PackageManager;
             $manager->addRepository('extension', new ExtensionRepository($app['path.extensions']));
             $manager->addRepository('theme', new ThemeRepository($app['path.themes']));
 

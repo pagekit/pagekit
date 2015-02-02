@@ -3,7 +3,7 @@
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\XcacheCache;
-use Pagekit\Cache\CacheModule;
+use Pagekit\Cache\Cache;
 use Pagekit\Cache\FilesystemCache;
 use Pagekit\Cache\PhpFileCache;
 
@@ -13,7 +13,7 @@ return [
 
     'main' => function ($app, $config) {
 
-        $module = new CacheModule();
+        $module = new Cache;
 
         foreach ($config['config'] as $name => $config) {
             $app[$name] = function() use ($config, $module) {

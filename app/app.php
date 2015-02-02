@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Application as App;
-use Pagekit\Module\ModuleManager;
 
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';
@@ -16,18 +15,12 @@ foreach ($app['config']['app.providers'] as $provider) {
     $app->register($provider);
 }
 
-$app['module'] = function ($app) {
-
-    $manager = new ModuleManager($app, $app['config']->getValues());
-    $manager->addPath($app['path.extensions'].'/*/extension.php');
-    $manager->addPath($app['path.themes'].'/*/theme.php');
-
-    return $manager;
-};
-
 try {
 
-    $app['module']->load(['system/cache', 'system/option', 'system/profiler', 'system/templating']);
+    $app['module']
+        ->setConfig($app['config']->getValues())
+        ->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php'])
+        ->load(['framework', 'system/cache', 'system/option', 'system/profiler', 'system/templating']);
 
     class InstallerException extends RuntimeException {}
 

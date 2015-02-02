@@ -12,16 +12,11 @@ return [
 
         'providers' => [
 
-            'Pagekit\Application\Provider\ExceptionServiceProvider',
             'Pagekit\Cookie\CookieServiceProvider',
             'Pagekit\Database\DatabaseServiceProvider',
             'Pagekit\Auth\AuthServiceProvider',
             'Pagekit\Auth\RememberMeServiceProvider',
             'Pagekit\Filesystem\FilesystemServiceProvider',
-            'Pagekit\Session\CsrfServiceProvider',
-            'Pagekit\Session\SessionServiceProvider',
-            'Pagekit\View\AssetServiceProvider',
-            'Pagekit\View\ViewServiceProvider',
             'Pagekit\System\SystemServiceProvider',
 
         ]
