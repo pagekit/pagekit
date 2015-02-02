@@ -3,9 +3,9 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Application as App;
-use Pagekit\System\Extension;
 use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Event\LinkEvent;
+use Pagekit\System\Extension;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 
 class HelloExtension extends Extension

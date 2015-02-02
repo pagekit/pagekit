@@ -3,11 +3,11 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Application\Controller;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Auth\Exception\BadCredentialsException;
 use Pagekit\Auth\RememberMe;
-use Pagekit\Application\Controller;
 
 /**
  * @Route("/user")

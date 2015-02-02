@@ -2,9 +2,9 @@
 
 namespace Pagekit\System\Package\Repository;
 
-use Pagekit\Package\Repository\InstalledRepository;
 use Pagekit\Package\Loader\JsonLoader;
 use Pagekit\Package\Loader\LoaderInterface;
+use Pagekit\Package\Repository\InstalledRepository;
 
 class ExtensionRepository extends InstalledRepository
 {

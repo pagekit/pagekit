@@ -6,8 +6,8 @@ use Pagekit\Locale\Helper\LanguageHelper;
 use Pagekit\Locale\Loader\MoFileLoader;
 use Pagekit\Locale\Loader\PhpFileLoader;
 use Pagekit\Locale\Loader\PoFileLoader;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 
 return [
 

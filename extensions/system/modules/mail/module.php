@@ -1,7 +1,7 @@
 <?php
 
-use Pagekit\Mail\Mailer;
 use Pagekit\Mail\ImpersonatePlugin;
+use Pagekit\Mail\Mailer;
 
 return [
 

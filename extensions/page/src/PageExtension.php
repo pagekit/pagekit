@@ -3,13 +3,13 @@
 namespace Pagekit\Page;
 
 use Pagekit\Application as App;
-use Pagekit\System\Extension;
 use Pagekit\Page\Event\NodeListener;
+use Pagekit\Site\Event\ConfigEvent;
+use Pagekit\Site\Event\TypeEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\Site\Event\ConfigEvent;
-use Pagekit\Site\Event\TypeEvent;
+use Pagekit\System\Extension;
 
 class PageExtension extends Extension
 {

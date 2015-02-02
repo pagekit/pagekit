@@ -3,11 +3,11 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\MarkSpamEvent;
-use Pagekit\Application\Controller;
-use Pagekit\Application\Exception;
 
 /**
  * @Access("blog: manage comments", admin=true)

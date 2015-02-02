@@ -6,12 +6,12 @@ use Pagekit\Application as App;
 use Pagekit\Blog\Content\ReadmorePlugin;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
-use Pagekit\System\Extension;
+use Pagekit\Site\Event\ConfigEvent;
+use Pagekit\Site\Event\TypeEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\Site\Event\ConfigEvent;
-use Pagekit\Site\Event\TypeEvent;
+use Pagekit\System\Extension;
 
 class BlogExtension extends Extension
 {

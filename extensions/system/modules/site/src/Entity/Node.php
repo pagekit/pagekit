@@ -3,8 +3,8 @@
 namespace Pagekit\Site\Entity;
 
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Entity\DataTrait;
 use Pagekit\Site\Model\NodeInterface;
+use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**

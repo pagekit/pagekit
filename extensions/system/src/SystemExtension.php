@@ -9,9 +9,9 @@ use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
-use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener as ThemeWidgetListener;
+use Pagekit\System\Helper\SystemInfoHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
