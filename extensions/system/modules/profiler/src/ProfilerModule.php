@@ -7,7 +7,6 @@ use Pagekit\Database\DataCollector\DatabaseDataCollector;
 use Pagekit\Module\Module;
 use Pagekit\Profiler\DataCollector\SystemDataCollector;
 use Pagekit\Profiler\DataCollector\UserDataCollector;
-use Pagekit\Profiler\Event\ToolbarListener;
 use Pagekit\Routing\DataCollector\RoutesDataCollector;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -50,7 +49,7 @@ class ProfilerModule extends Module implements EventSubscriberInterface
             return $profiler;
         };
 
-        $app['profiler.storage'] = function($app) use ($config) {
+        $app['profiler.storage'] = function() use ($config) {
             return new SqliteProfilerStorage('sqlite:'.$config['file'], '', '', 86400);
         };
 

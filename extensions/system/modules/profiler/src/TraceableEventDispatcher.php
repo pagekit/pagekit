@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Profiler\Profile;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Symfony\Component\HttpKernel\Profiler\Profiler as BaseProfiler;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
@@ -50,9 +50,9 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
     /**
      * Sets the profiler.
      *
-     * @param Profiler|null $profiler A Profiler instance
+     * @param BaseProfiler|null $profiler A Profiler instance
      */
-    public function setProfiler(Profiler $profiler = null)
+    public function setProfiler(BaseProfiler $profiler = null)
     {
         $this->profiler = $profiler;
     }
