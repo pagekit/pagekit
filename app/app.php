@@ -1,21 +1,26 @@
 <?php
 
-use Pagekit\Framework\Application;
+use Pagekit\Application as App;
 
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';
 
-$app = new Application($config);
+$app = new App($config);
 $app['autoloader'] = $loader;
-$app['autoloader']->addPsr4('Pagekit\\', $app['path.extensions'].'/system/src');
+$app['autoloader']->addPsr4('Pagekit\\System\\', $app['path.extensions'].'/system/src');
 
-date_default_timezone_set($app['config']['app.timezone']);
+date_default_timezone_set('UTC');
 
 foreach ($app['config']['app.providers'] as $provider) {
     $app->register($provider);
 }
 
 try {
+
+    $app['module']
+        ->setConfig($app['config']->getValues())
+        ->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php'])
+        ->load(['framework', 'system/cache', 'system/option', 'system/profiler', 'system/templating']);
 
     class InstallerException extends RuntimeException {}
 
@@ -34,9 +39,7 @@ try {
         $app['cache']->save('installed', true);
     }
 
-    $app['extensions.boot'] = function($app) {
-        return array_merge($app['config']->get('extension.core', []), $app['option']->get('system:extensions', []));
-    };
+    $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 } catch (InstallerException $e) {
 
@@ -48,7 +51,7 @@ try {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
-    $app['extensions.boot'] = ['installer'];
+    $app['modules'] = ['installer'];
 
 }
 

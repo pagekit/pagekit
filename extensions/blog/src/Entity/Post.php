@@ -3,16 +3,16 @@
 namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\CommentsTrait;
-use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
- * @Entity(repositoryClass="Pagekit\Blog\Entity\PostRepository", tableClass="@blog_post", eventPrefix="blog.post")
+ * @Entity(tableClass="@blog_post", eventPrefix="blog.post")
  */
 class Post
 {
-    use AccessTrait, DataTrait, CommentsTrait;
+    use AccessTrait, CommentsTrait, DataTrait, ModelTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
@@ -208,16 +208,14 @@ class Post
     /**
      * @PreSave
      */
-    public function preSave(EntityEvent $event)
+    public function preSave()
     {
         $this->modified = new \DateTime;
-
-        $repository = $event->getEntityManager()->getRepository(get_class($this));
 
         $i = 2;
         $id = $this->id;
 
-        while ($repository->query()->where('slug = ?', [$this->slug])->where(function($query) use($id) { if ($id) $query->where('id <> ?', [$id]); })->first()) {
+        while (self::where('slug = ?', [$this->slug])->where(function($query) use($id) { if ($id) $query->where('id <> ?', [$id]); })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
     }
@@ -225,8 +223,23 @@ class Post
     /**
      * @PreDelete
      */
-    public function preDelete(EntityEvent $event)
+    public function preDelete()
     {
-        $event->getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
+        self::getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
+    }
+
+    /**
+     * Updates the comments info on post.
+     *
+     * @param int $id
+     */
+    public static function updateCommentInfo($id)
+    {
+        $query = Comment::where(['post_id' => $id, 'status' => Comment::STATUS_APPROVED]);
+
+        self::where(compact('id'))->update([
+                'comment_count' => $query->count()
+            ]
+        );
     }
 }

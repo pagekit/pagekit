@@ -2,15 +2,15 @@
 
 namespace Pagekit\Hello\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application as App;
 
 /**
  * @Route("/hello")
  */
-class SiteController extends Controller
+class SiteController
 {
     /**
-     * @Response("extension://hello/views/index.razr")
+     * @Response("extensions/hello/views/index.razr")
      */
     public function indexAction()
     {
@@ -20,7 +20,7 @@ class SiteController extends Controller
     /**
      * @Route("/greet", name="@hello/greet/world")
      * @Route("/greet/{name}", name="@hello/greet/name")
-     * @Response("extension://hello/views/greet.razr")
+     * @Response("extensions/hello/views/greet.razr")
      */
     public function greetAction($name = 'World')
     {
@@ -30,7 +30,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     * @Response("extension://hello/views/view.razr")
+     * @Response("extensions/hello/views/view.razr")
      */
     public function viewAction($id = 1)
     {
@@ -39,29 +39,29 @@ class SiteController extends Controller
 
     public function anotherViewAction()
     {
-        $view = 'extension://hello/views/view.razr';
+        $view = 'extensions/hello/views/view.razr';
         $data = ['head.title' => __('View article'), 'id' => 1];
-        return $this['view']->render($view, $data);
+        return App::view($view, $data);
     }
 
     public function redirectAction()
     {
-        return $this['response']->redirect('@hello/greet/name', ['name' => 'Someone']);
+        return App::response()->redirect('@hello/greet/name', ['name' => 'Someone']);
     }
 
     public function jsonAction()
     {
         $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
-        return $this['response']->json($data);
+        return App::response()->json($data);
     }
 
     public function downloadAction()
     {
-        return $this['response']->download('extension://hello/extension.svg');
+        return App::response()->download('extensions/hello/extension.svg');
     }
 
     function forbiddenAction()
     {
-        return $this['response']->create(__('Permission denied.'), 401);
+        return App::response(__('Permission denied.'), 401);
     }
 }

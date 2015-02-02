@@ -2,8 +2,8 @@
 
 namespace Pagekit\Alpha;
 
-use Pagekit\Framework\Application;
-use Pagekit\Theme\Theme;
+use Pagekit\Application as App;
+use Pagekit\System\Theme;
 
 class AlphaTheme extends Theme
 {
@@ -15,18 +15,14 @@ class AlphaTheme extends Theme
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function load(App $app, array $config)
     {
-        parent::boot($app);
+        parent::load($app, $config);
 
         $app->on('system.site', function() use ($app) {
-
             $app->on('view.layout', function($event) use ($app) {
-
                 $event->setParameter('theme', $app['theme.site']);
-
             });
-
         });
     }
 
@@ -50,7 +46,7 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $sections = $this['view.sections'];
+        $sections = App::sections();
         foreach ($sidebars as $name => $sidebar) {
             if (!$sections->has($name)) {
                 unset($sidebars[$name]);

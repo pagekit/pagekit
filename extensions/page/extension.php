@@ -1,8 +1,16 @@
 <?php
 
+use Pagekit\Page\PageExtension;
+
 return [
 
-    'main' => 'Pagekit\\Page\\PageExtension',
+    'name' => 'page',
+
+    'main' => function ($app, $config) {
+
+        return new PageExtension($app, $config);
+
+    },
 
     'autoload' => [
 
@@ -10,18 +18,9 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
 
-    'menu' => [
-
-        'page' => [
-            'label'    => 'Pages',
-            'icon'     => 'extension://page/extension.svg',
-            'url'      => '@page/page',
-            'active'   => '@page/page*',
-            'access'   => 'page: manage pages',
-            'priority' => 0
-        ]
+        '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController'
 
     ],
 

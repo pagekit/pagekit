@@ -2,72 +2,50 @@
 
 namespace Pagekit\Blog\Controller;
 
-use Pagekit\Blog\BlogExtension;
+use Pagekit\Application as App;
+use Pagekit\Application\Controller;
+use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
-use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
-use Pagekit\Framework\Database\Event\EntityEvent;
+use Pagekit\Database\Event\EntityEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @Route("/blog")
+ * @Route("/")
  */
 class SiteController extends Controller
 {
     /**
-     * @var BlogExtension
-     */
-    protected $extension;
-
-    /**
-     * @var Repository
-     */
-    protected $posts;
-
-    /**
-     * @var Repository
-     */
-    protected $comments;
-
-    /**
      * Constructor.
-     *
-     * @param BlogExtension $extension
      */
-    public function __construct(BlogExtension $extension)
+    public function __construct()
     {
-        $this->extension = $extension;
-        $this->posts     = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        $this->comments  = $this['db.em']->getRepository('Pagekit\Blog\Entity\Comment');
+        $autoclose = App::module('blog')->getParams('comments.autoclose') ? App::module('blog')->getParams('comments.autoclose.days') : 0;
 
-        $autoclose = $this->extension->getParams('comments.autoclose') ? $this->extension->getParams('comments.autoclose.days') : 0;
-
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event) use ($autoclose){
+        App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
             $post->setCommentable($post->getCommentStatus() && (!$autoclose or $post->getDate() >= new \DateTime("-{$autoclose} day")));
         });
     }
 
     /**
-     * @Route("/page/{page}", name="@blog/page", requirements={"page" = "\d+"})
-     * @Route("/", name="@blog/site")
-     * @Response("extension://blog/views/post/index.razr")
+     * @Route("/", name="site")
+     * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
+     * @Response("extensions/blog/views/post/index.razr")
      */
     public function indexAction($page = 1)
     {
-        $this['events']->addListener('blog.post.postLoad', function (EntityEvent $event){
+        App::on('blog.post.postLoad', function (EntityEvent $event) {
             $post = $event->getEntity();
-            $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
+            $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
 
-        $query = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
-        if (!$limit = $this->extension->getParams('posts_per_page')) {
+        if (!$limit = App::module('blog')->getParams('posts_per_page')) {
             $limit = 10;
         }
 
@@ -80,12 +58,12 @@ class SiteController extends Controller
         return [
             'head.title'          => __('Blog'),
             'head.link.alternate' => [
-                'href'  => $this['url']->route('@blog/site/feed', [], true),
-                'title' => $this['option']->get('system:app.site_title'),
-                'type'  => $this['feed']->create($this->extension->getParams('feed.type'))->getMIMEType()
+                'href'  => App::url('@blog/site/feed', [], true),
+                'title' => App::option('system:app.site_title'),
+                'type'  => App::feed()->create(App::module('blog')->getParams('feed.type'))->getMIMEType()
             ],
             'posts'               => $query->get(),
-            'params'              => $this->extension->getParams(),
+            'params'              => App::module('blog')->getParams(),
             'total'               => $total,
             'page'                => $page
         ];
@@ -99,7 +77,7 @@ class SiteController extends Controller
     {
         try {
 
-            $user = $this['user'];
+            $user = App::user();
 
             if (!$user->hasAccess('blog: post comments')) {
                 throw new Exception(__('Insufficient User Rights.'));
@@ -107,8 +85,8 @@ class SiteController extends Controller
 
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
-                and $minidle = $this->extension->getParams('comments.minidle')
-                and $comment = $this->comments->query()->where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => $this['request']->getClientIp()])->orderBy('created', 'DESC')->first()
+                and $minidle = App::module('blog')->getParams('comments.minidle')
+                and $comment = Comment::where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
@@ -118,7 +96,7 @@ class SiteController extends Controller
                 }
             }
 
-            if (!$post = $this->posts->query()->where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
+            if (!$post = Post::where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
                 throw new Exception(__('Insufficient User Rights.'));
             }
 
@@ -131,79 +109,79 @@ class SiteController extends Controller
                 $data['author'] = $user->getName();
                 $data['email']  = $user->getEmail();
                 $data['url']    = $user->getUrl();
-            } elseif ($this->extension->getParams('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
+            } elseif (App::module('blog')->getParams('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
                 throw new Exception(__('Please provide valid name and email.'));
             }
 
             $comment = new Comment;
             $comment->setUserId((int)$user->getId());
-            $comment->setIp($this['request']->getClientIp());
+            $comment->setIp(App::request()->getClientIp());
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
-            $approved_once = (boolean)$this->comments->query()->where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+            $approved_once = (boolean)Comment::where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->extension->getParams('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            if ($comment->getStatus() == Comment::STATUS_APPROVED && App::module('blog')->getParams('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
                 $comment->setStatus(Comment::STATUS_PENDING);
             }
 
             // check for spam
-            $this['events']->dispatch('system.comment.spam_check', new CommentEvent($comment));
+            App::trigger('system.comment.spam_check', new CommentEvent($comment));
 
-            $this->comments->save($comment, $data);
+            $comment->save($data);
 
-            $this['message']->info(__('Thanks for commenting!'));
+            App::message()->info(__('Thanks for commenting!'));
 
-            return $this->redirect($this['url']->route('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
+            return $this->redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
-            $this['message']->error($e->getMessage());
-
-            return $this->redirect($this['url']->previous());
+            $message = $e->getMessage();
 
         } catch (\Exception $e) {
 
-            $this['message']->error(__('Whoops, something went wrong!'));
+            $message = __('Whoops, something went wrong!');
 
-            return $this->redirect($this['url']->previous());
         }
+
+        App::message()->error($message);
+
+        return $this->redirect(App::url()->previous());
     }
 
     /**
-     * @Route("/{id}", name="@blog/id")
-     * @Response("extension://blog/views/post/post.razr")
+     * @Route("/{id}", name="id")
+     * @Response("extensions/blog/views/post/post.razr")
      */
     public function postAction($id = 0)
     {
-        if (!$post = $this->posts->where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
+        if (!$post = Post::where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
             throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
-        if (!$post->hasAccess($this['user'])) {
+        if (!$post->hasAccess(App::user())) {
             throw new AccessDeniedHttpException(__('Unable to access this post!'));
         }
 
-        $user  = $this['user'];
-        $query = $this->comments->query()->where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
+        $query = Comment::where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
 
-        if ($user->isAuthenticated()) {
-            $query->orWhere(function ($query) use ($user){
-                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, $user->getId()]);
+        if (App::user()->isAuthenticated()) {
+            $query->orWhere(function ($query) {
+                $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, App::user()->getId()]);
             });
         }
 
-        $this['db.em']->related($post, 'comments', $query);
+        App::get('db.em')->related($post, 'comments', $query);
 
-        $post->setContent($this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
+        $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
 
         foreach ($post->getComments() as $comment) {
-            $comment->setContent($this['content']->applyPlugins($comment->getContent(), ['comment' => true]));
+            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => $this->extension->getParams()];
+        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => App::module('blog')->getParams()];
     }
 
     /**
@@ -212,31 +190,31 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = $this['feed']->create($type ?: $this->extension->getParams('feed.type'), [
-            'title'       => $this['option']->get('system:app.site_title'),
-            'link'        => $this['url']->route('@blog/site', [], true),
-            'description' => $this['option']->get('system:app.site_description'),
-            'element'     => ['language', $this['option']->get('system:app.locale')],
-            'selfLink'    => $this['url']->route('@blog/site/feed', [], true)
+        $feed = App::feed()->create($type ?: App::module('blog')->getParams('feed.type'), [
+            'title'       => App::option('system:app.site_title'),
+            'link'        => App::url('@blog/site', [], true),
+            'description' => App::option('system:app.site_description'),
+            'element'     => ['language', App::option('system:app.locale')],
+            'selfLink'    => App::url('@blog/site/feed', [], true)
         ]);
 
-        if ($last = $this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+        if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
             $feed->setDate($last->getModified());
         }
 
-        foreach ($this->posts->query()->where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->extension->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit(App::module('blog')->getParams('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),
-                    'link'        => $this['url']->route('@blog/id', ['id' => $post->getId()], true),
-                    'description' => $this['content']->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
+                    'link'        => App::url('@blog/id', ['id' => $post->getId()], true),
+                    'description' => App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
                     'date'        => $post->getDate(),
                     'author'      => [$post->getUser()->getName(), $post->getUser()->getEmail()],
-                    'id'          => $this['url']->route('@blog/id', ['id' => $post->getId()], true)
+                    'id'          => App::url('@blog/id', ['id' => $post->getId()], true)
                 ])
             );
         }
 
-        return $this['response']->create($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
+        return App::response($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
     }
 }

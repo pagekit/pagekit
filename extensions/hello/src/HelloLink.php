@@ -2,6 +2,7 @@
 
 namespace Pagekit\Hello;
 
+use Pagekit\Application as App;
 use Pagekit\System\Link\Route;
 
 class HelloLink extends Route
@@ -27,6 +28,6 @@ class HelloLink extends Route
      */
     public function renderForm($link, $params = [], $context = '')
     {
-        return $this['view']->render('extension://hello/views/admin/link.razr', compact('link', 'params'));
+        return App::view('extensions/hello/views/admin/link.razr', compact('link', 'params'));
     }
 }

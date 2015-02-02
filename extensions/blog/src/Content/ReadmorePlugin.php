@@ -3,9 +3,9 @@
 namespace Pagekit\Blog\Content;
 
 use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Framework\Event\EventSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ReadmorePlugin extends EventSubscriber
+class ReadmorePlugin implements EventSubscriberInterface
 {
     /**
      * Content plugins callback.

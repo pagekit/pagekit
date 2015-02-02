@@ -2,6 +2,8 @@
 
 namespace Pagekit\Page;
 
+use Pagekit\Application as App;
+use Pagekit\Page\Entity\Page;
 use Pagekit\System\Link\Route;
 
 class PageLink extends Route
@@ -27,8 +29,8 @@ class PageLink extends Route
      */
     public function renderForm($link, $params = [], $context = '')
     {
-        $pages = $this['db.em']->getRepository('Pagekit\Page\Entity\Page')->findAll();
+        $pages = Page::findAll();
 
-        return $this['view']->render('extension://page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
+        return App::view('extensions/page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
     }
 }

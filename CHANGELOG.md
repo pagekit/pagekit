@@ -1,5 +1,10 @@
 # Changelog
 
+### WIP
+
+- Translations are compiled to php arrays now
+- New Feed component
+
 ### 0.8.8 (November 17, 2014)
 
 - Added pagination in Blog extension

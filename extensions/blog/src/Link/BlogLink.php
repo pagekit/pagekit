@@ -2,9 +2,11 @@
 
 namespace Pagekit\Blog\Link;
 
-use Pagekit\System\Link\Link;
+use Pagekit\Application as App;
+use Pagekit\Blog\Entity\Post;
+use Pagekit\System\Link\LinkInterface;
 
-class BlogLink extends Link
+class BlogLink implements LinkInterface
 {
     /**
      * @{inheritdoc}
@@ -35,8 +37,8 @@ class BlogLink extends Link
      */
     public function renderForm($link, $params = [], $context = '')
     {
-        $posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post')->findAll();
+        $posts = Post::findAll();
 
-        return $this['view']->render('extension://blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
+        return App::view('extensions/blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
     }
 }

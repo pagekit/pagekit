@@ -1,7 +1,7 @@
-require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!oauth.data,settings.oauth', 'domReady!'], function($, req, system, uikit, tmpl) {
+require(['jquery', 'require', 'system', 'uikit!form-password', 'tmpl!oauth.data,settings.oauth', 'domReady!'], function($, req, system, uikit, tmpl) {
 
     // switcher
-    var tabs = $('[data-tabs]').on('uk.switcher.show', function(e, active) {
+    var tabs = $('[data-tabs]').on('show.uk.switcher', function(e, active) {
         $('input[name=tab]').val(active.prevAll().length);
     });
 
@@ -47,9 +47,6 @@ require(['jquery', 'require', 'system!linkpicker', 'uikit!form-password', 'tmpl!
             uikit.notify('Ajax request to server failed.', 'danger');
         });
     });
-
-    // URL picker
-    system.linkpicker('[name="option[system:app.frontpage]"]', { context: 'frontpage' });
 
     // OAuth
     var oauthData = $.parseJSON(tmpl.get('oauth.data')),

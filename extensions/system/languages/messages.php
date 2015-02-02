@@ -35,7 +35,6 @@ __('Manage menus');
 __('Manage widgets');
 __('Manage themes');
 __('Manage extensions');
-__('Manage url aliases');
 __('Apply system updates');
 __('Access admin area');
 __('Access system settings');

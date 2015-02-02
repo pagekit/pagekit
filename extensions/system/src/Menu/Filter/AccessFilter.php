@@ -1,6 +1,9 @@
 <?php
 
-namespace Pagekit\Menu\Filter;
+namespace Pagekit\System\Menu\Filter;
+
+use Pagekit\Application as App;
+use Pagekit\Menu\Filter\FilterIterator;
 
 class AccessFilter extends FilterIterator
 {
@@ -9,6 +12,10 @@ class AccessFilter extends FilterIterator
      */
     public function accept()
     {
-        return !isset($this->options['access']) || !$this->options['access'] || parent::current()->hasAccess($this['user']);
+        if (!isset($this->options['access']) or !$this->options['access']) {
+            return true;
+        }
+
+        return App::user()->hasAccess(parent::current()->getAccess());
     }
 }

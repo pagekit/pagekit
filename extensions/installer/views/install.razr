@@ -3,11 +3,13 @@
     <head>
         <meta charset="utf-8">
         <title>@trans('Pagekit Installer')</title>
-        <link href="@url('extension://system/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url('extension://system/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        @section('head')
-        @style('theme', 'extension://installer/assets/css/installer.css')
-        @script('installer', 'extension://installer/assets/js/installer.js', 'requirejs')
+        <link href="@static_url('extensions/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@static_url('extensions/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@static_url('extensions/installer/assets/css/installer.css')" rel="stylesheet">
+        <script src="@static_url('vendor/assets/jquery/dist/jquery.min.js')"></script>
+        <script src="@static_url('vendor/assets/uikit/js/uikit.min.js')"></script>
+        <script src="@static_url('vendor/assets/uikit/js/components/form-password.min.js')"></script>
+        <script src="@static_url('extensions/installer/assets/js/installer.js')"></script>
     </head>
     <body>
 
@@ -18,7 +20,7 @@
 
                     <form action="@url('@installer/installer/createconfig')" method="post">
 
-                        <img class="uk-margin-top" src="@url('extension://system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
+                        <img class="uk-margin-top" src="@static_url('extensions/system/assets/images/pagekit-logo-large.svg')" width="120" height="120" alt="Pagekit">
 
                         <p>
                             <button class="uk-button" type="submit">@trans('Begin')</button>

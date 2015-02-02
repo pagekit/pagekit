@@ -4,15 +4,15 @@ namespace Pagekit\Installer\Controller;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
-use Pagekit\Component\Config\Config;
-use Pagekit\Framework\Controller\Controller;
-use Pagekit\Framework\Controller\Exception;
+use Pagekit\Application as App;
+use Pagekit\Application\Exception;
+use Pagekit\Config\Config;
 use Pagekit\User\Model\RoleInterface;
 
 /**
  * @Route("/installer")
  */
-class InstallerController extends Controller
+class InstallerController
 {
     /**
      * @var bool
@@ -33,12 +33,11 @@ class InstallerController extends Controller
     }
 
     /**
-     * @Response("extension://installer/views/install.razr")
+     * @Response("extensions/installer/views/install.razr")
      */
     public function indexAction()
     {
-        $redirect = $this['router']->getContext()->getBaseUrl() . '/admin';
-        return ['head.title' => __('Pagekit Installer'), 'config' => (int) $this->config, 'redirect' => $redirect];
+        return ['config' => (int) $this->config, 'redirect' => App::url('/admin')];
     }
 
     /**
@@ -56,14 +55,14 @@ class InstallerController extends Controller
 
                 if (!$this->config) {
                     foreach ($config as $key => $value) {
-                        $this['config']->set($key, $value);
+                        App::config()->set($key, $value);
                     }
                 }
 
-                $this['db']->connect();
+                App::db()->connect();
 
-                if ($this['db']->getUtility()->tableExists('@system_option')) {
-                    $status = 'tables-exist';
+                if (App::db()->getUtility()->tableExists('@system_option')) {
+                    $status  = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
                     $status = 'no-tables';
@@ -103,9 +102,7 @@ class InstallerController extends Controller
 
         try {
 
-            foreach (['blog', 'page', 'system'] as $extension) {
-                $this['extensions']->load($extension);
-            }
+            App::module()->load(['blog', 'page', 'system']);
 
             if ('no-connection' == $status) {
                 throw new Exception(__('No database connection.'));
@@ -115,38 +112,38 @@ class InstallerController extends Controller
                 throw new Exception($message);
             } else {
 
-                $this['option']->set('system:version', $this['migrator']->create('extension://system/migrations')->run());
-                $this['option']->set('system:extensions', ['blog', 'page'], true);
+                App::option()->set('system:version', App::migrator()->create('extensions/system/migrations')->run());
+                App::option()->set('system:extensions', ['blog', 'page'], true);
 
-                $this['db']->insert('@system_user', [
-                    'name' => $user['username'],
-                    'username' => $user['username'],
-                    'password' => $this['auth.password']->hash($user['password']),
-                    'status' => 1,
-                    'email' => $user['email'],
+                App::db()->insert('@system_user', [
+                    'name'       => $user['username'],
+                    'username'   => $user['username'],
+                    'password'   => App::get('auth.password')->hash($user['password']),
+                    'status'     => 1,
+                    'email'      => $user['email'],
                     'registered' => new \DateTime
                 ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
 
-                $id = $this['db']->lastInsertId();
+                $id = App::db()->lastInsertId();
 
-                $this['db']->insert('@system_user_role', [
+                App::db()->insert('@system_user_role', [
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_AUTHENTICATED
                 ]);
 
-                $this['db']->insert('@system_user_role', [
+                App::db()->insert('@system_user_role', [
                     'user_id' => $id,
                     'role_id' => RoleInterface::ROLE_ADMINISTRATOR
                 ]);
 
-                $this['extensions']->get('system')->enable();
+                App::module('system')->enable();
 
                 // sample data
-                $sql = file_get_contents('extension://installer/sample_data.sql');
+                $sql = file_get_contents('extensions/installer/sample_data.sql');
 
                 foreach (explode(';', $sql) as $query) {
                     if ($query = trim($query)) {
-                        $this['db']->executeUpdate($query);
+                        App::db()->executeUpdate($query);
                     }
                 }
             }
@@ -159,7 +156,7 @@ class InstallerController extends Controller
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('app.key', $this['auth.random']->generateString(64));
+                $configuration->set('app.key', App::get('auth.random')->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 
@@ -170,7 +167,7 @@ class InstallerController extends Controller
             }
 
             foreach ($option as $key => $value) {
-                $this['option']->set($key, $value, true);
+                App::option()->set($key, $value, true);
             }
 
             $status = 'success';
@@ -194,8 +191,8 @@ class InstallerController extends Controller
      */
     protected function createDatabase()
     {
-        $params = $this['config']['database.connections'][$this['config']['database.default']];
-        $dbname = $this['db']->quoteIdentifier($params['dbname']);
+        $params = App::config('database.connections')[App::config('database.default')];
+        $dbname = App::db()->quoteIdentifier($params['dbname']);
 
         unset($params['dbname']);
 

@@ -1,71 +1,47 @@
 <?php
 
+use Pagekit\System\SystemExtension;
+
 return [
 
-    'main' => 'Pagekit\\SystemExtension',
+    'name' => 'system',
 
-    'controllers' => 'src/*/Controller/*Controller.php',
+    'main' => function ($app, $config) {
+
+        return new SystemExtension($app, $config);
+
+    },
+
+    'include' => __DIR__.'/modules/*/module.php',
+
+    'controllers' => [
+
+        '@system: /' => [
+            'Pagekit\\System\\Controller\\AdminController'
+        ],
+
+        '@system: /system' => [
+            'Pagekit\\System\\Controller\\ExtensionsController',
+            'Pagekit\\System\\Controller\\FinderController',
+            'Pagekit\\System\\Controller\\LinkController',
+            'Pagekit\\System\\Controller\\MarketplaceController',
+            'Pagekit\\System\\Controller\\MigrationController',
+            'Pagekit\\System\\Controller\\PackageController',
+            'Pagekit\\System\\Controller\\SettingsController',
+            'Pagekit\\System\\Controller\\UpdateController',
+            'Pagekit\\System\\Controller\\SystemController',
+            'Pagekit\\System\\Controller\\ThemesController'
+        ]
+
+    ],
 
     'menu' => [
 
-        'system: dashboard' => [
-            'label'    => 'Dashboard',
-            'icon'     => 'extension://system/assets/images/icon-dashboard.svg',
-            'url'      => '@system/dashboard',
-            'active'   => '@system/dashboard',
-            'priority' => 0
-        ],
-        'system: widgets' => [
-            'label'    => 'Widgets',
-            'icon'     => 'extension://system/assets/images/icon-widgets.svg',
-            'url'      => '@system/widgets',
-            'active'   => '@system/widgets*',
-            'access'   => 'system: manage widgets',
-            'priority' => 5
-        ],
-        'system: menu' => [
-            'label'    => 'Menus',
-            'icon'     => 'extension://system/assets/images/icon-menus.svg',
-            'url'      => '@system/menu',
-            'active'   => '@system/(menu|item)*',
-            'access'   => 'system: manage menus',
-            'priority' => 10
-        ],
-        'system: user' => [
-            'label'    => 'Users',
-            'icon'     => 'extension://system/assets/images/icon-users.svg',
-            'url'      => '@system/user',
-            'active'   => '@system/user*',
-            'access'   => 'system: manage users || system: manage user permissions',
-            'priority' => 15
-        ],
-        'system: sub-user' => [
-            'label'    => 'Users',
-            'parent'   => 'system: user',
-            'url'      => '@system/user',
-            'active'   => '@system/user*',
-            'access'   => 'system: manage users',
-            'priority' => 15
-        ],
-        'system: user permissions' => [
-            'label'    => 'Permissions',
-            'parent'   => 'system: user',
-            'url'      => '@system/permission',
-            'active'   => '@system/permission*',
-            'access'   => 'system: manage user permissions'
-        ],
-        'system: user roles' => [
-            'label'    => 'Roles',
-            'parent'   => 'system: user',
-            'url'      => '@system/role',
-            'active'   => '@system/role*',
-            'access'   => 'system: manage user permissions'
-        ],
         'system: settings' => [
             'label'    => 'Settings',
-            'icon'     => 'extension://system/assets/images/icon-settings.svg',
+            'icon'     => 'extensions/system/assets/images/icon-settings.svg',
             'url'      => '@system/system',
-            'active'   => '@system/(system|settings|themes|extensions|storage|alias|update|info|marketplace|dashboard)*',
+            'active'   => '@system/(system|settings|themes|extensions|storage|update|info|marketplace|dashboard)*',
             'priority' => 110
         ]
 
@@ -73,32 +49,11 @@ return [
 
     'permissions' => [
 
-        'system: manage menus' => [
-            'title' => 'Manage menus'
-        ],
-        'system: manage widgets' => [
-            'title' => 'Manage widgets'
-        ],
         'system: manage themes' => [
             'title' => 'Manage themes'
         ],
         'system: manage extensions' => [
             'title' => 'Manage extensions'
-        ],
-        'system: manage url aliases' => [
-            'title' => 'Manage url aliases'
-        ],
-        'system: manage users' => [
-            'title' => 'Manage users',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ],
-        'system: manage user permissions' => [
-            'title' => 'Manage user permissions',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ],
-        'system: access admin area' => [
-            'title' => 'Access admin area',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ],
         'system: access settings' => [
             'title' => 'Access system settings',

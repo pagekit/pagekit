@@ -1,19 +1,16 @@
 <?php
 
-namespace Pagekit;
+namespace Pagekit\System;
 
-use Pagekit\Component\File\Exception\InvalidArgumentException;
-use Pagekit\Component\Package\Installer\PackageInstaller;
-use Pagekit\Extension\ExtensionManager;
-use Pagekit\Extension\Package\ExtensionLoader;
-use Pagekit\Extension\Package\ExtensionRepository;
-use Pagekit\Framework\Application;
-use Pagekit\Framework\Event\EventSubscriberInterface;
-use Pagekit\Framework\ServiceProviderInterface;
-use Pagekit\System\FileProvider;
-use Pagekit\System\Migration\FilesystemLoader;
-use Pagekit\System\Package\Event\LoadFailureEvent;
-use Pagekit\System\Package\Exception\ExtensionLoadException;
+use Pagekit\Application;
+use Pagekit\Application\ServiceProviderInterface;
+use Pagekit\Filesystem\Adapter\FileAdapter;
+use Pagekit\Filesystem\Adapter\StreamAdapter;
+use Pagekit\Filesystem\Locator;
+use Pagekit\System\Package\PackageManager;
+use Pagekit\System\Package\Repository\ExtensionRepository;
+use Pagekit\System\Package\Repository\ThemeRepository;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemServiceProvider implements ServiceProviderInterface, EventSubscriberInterface
 {
@@ -23,16 +20,20 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
     {
         $this->app = $app;
 
-        $app['file'] = function($app) {
-            return new FileProvider($app);
+        $app['package'] = function ($app) {
+
+            $manager = new PackageManager;
+            $manager->addRepository('extension', new ExtensionRepository($app['path.extensions']));
+            $manager->addRepository('theme', new ThemeRepository($app['path.themes']));
+
+            return $manager;
         };
 
-        $app->extend('migrator', function($migrator, $app) {
-            $migrator->setLoader(new FilesystemLoader($app['locator']));
-            return $migrator;
-        });
+        $app['locator'] = function ($app) {
+            return new Locator($app['path']);
+        };
 
-        $app->extend('view', function($view, $app) {
+        $app->extend('view', function ($view, $app) {
 
             $view->setEngine($app['tmpl']);
             $view->set('app', $app);
@@ -41,50 +42,20 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return $view;
         });
 
-        $app['extensions'] = function($app) {
-
-            $loader     = new ExtensionLoader;
-            $repository = new ExtensionRepository($app['config']['extension.path'], $loader);
-            $installer  = new PackageInstaller($repository, $loader);
-
-            return new ExtensionManager($app, $repository, $installer, $app['autoloader'], $app['locator']);
-        };
-
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
-        $app['path.storage'] = $app['config']['locator.paths.storage'] = rtrim($app['path'] . '/' . $app['config']['app.storage'], '/');
-
-        $app['extensions.boot'] = [];
+        $app['path.storage']          = $app['config']['locator.paths.storage'] = rtrim($app['path'].'/'.$app['config']['app.storage'], '/');
     }
 
     public function boot(Application $app)
     {
-        foreach (array_unique($app['extensions.boot']) as $extension) {
-            try {
-                $app['extensions']->load($extension)->boot($app);
-            } catch (ExtensionLoadException $e) {
-                $app['events']->dispatch('extension.load_failure', new LoadFailureEvent($extension));
-            }
-        }
+        $app['module']->load($app['modules']);
 
         if ($app->runningInConsole()) {
-
             $app['isAdmin'] = false;
-
-            $app['events']->dispatch('system.init');
-            $app['events']->addListener('console.init', function($event) {
-
-                $console = $event->getConsole();
-                $namespace = 'Pagekit\\System\\Console\\';
-
-                foreach (glob(__DIR__.'/System/Console/*Command.php') as $file) {
-                    $class = $namespace.basename($file, '.php');
-                    $console->add(new $class);
-                }
-
-            });
+            $app->trigger('system.init');
         }
 
-        $app['events']->addSubscriber($this);
+        $app->subscribe($this);
     }
 
     public function onKernelRequest($event, $name, $dispatcher)
@@ -93,12 +64,17 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
             return;
         }
 
-        $this->app['view.sections']->register('head', ['renderer' => 'delayed']);
-        $this->app['view.sections']->prepend('head', function() {
+        $request = $event->getRequest();
+        $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
+        $this->app['file']->registerAdapter('file', new FileAdapter($this->app['path'], $baseUrl));
+        $this->app['file']->registerAdapter('app', new StreamAdapter($this->app['path'], $baseUrl));
+
+        $this->app['sections']->register('head', ['renderer' => 'delayed']);
+        $this->app['sections']->prepend('head', function () {
             return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $this->app['config']['app.version'], $this->app['router']->getContext()->getBaseUrl(), $this->app['csrf']->generate());
         });
 
-        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+        $this->app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
         $dispatcher->dispatch('system.init', $event);
     }
@@ -114,15 +90,12 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function onTemplateReference($event)
     {
-        try {
+        $template = $event->getTemplateReference();
 
-            $template = $event->getTemplateReference();
-
-            if (filter_var($path = $template->get('path'), FILTER_VALIDATE_URL) !== false) {
-                $template->set('path', $this->app['locator']->findResource($path));
-            }
-
-        } catch (InvalidArgumentException $e) {}
+        if ($path = $this->app['locator']->get($template->get('path'))) {
+            $template->set('name', $path); // php engine uses name
+            $template->set('path', $path);
+        }
     }
 
     public function onKernelResponse()
@@ -130,7 +103,7 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         $require = [];
         $requeue = [];
 
-        foreach ($scripts = $this->app['view.scripts'] as $script) {
+        foreach ($scripts = $this->app['scripts'] as $script) {
             if ($script['requirejs']) {
                 $require[] = $script;
             } elseif (array_key_exists('requirejs', $scripts->resolveDependencies($script))) {
@@ -153,15 +126,37 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
         }
     }
 
+    public function onSystemInit()
+    {
+        foreach ($this->app['module']->getConfigs() as $config) {
+
+            if (!isset($config['controllers'])) {
+                continue;
+            }
+
+            foreach ($config['controllers'] as $prefix => $controller) {
+
+                $namespace = '';
+
+                if (strpos($prefix, ':') !== false) {
+                    list($namespace, $prefix) = explode(':', $prefix);
+                }
+
+                $this->app['controllers']->mount($prefix, $controller, "$namespace/");
+            }
+        }
+    }
+
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.request' => [
+            'kernel.request'       => [
                 ['onKernelRequest', 50],
                 ['onRequestMatched', 0]
             ],
             'templating.reference' => 'onTemplateReference',
-            'kernel.response'      => ['onKernelResponse', 15]
+            'kernel.response'      => ['onKernelResponse', 15],
+            'system.init'          => 'onSystemInit'
         ];
     }
 }

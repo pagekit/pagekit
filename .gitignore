@@ -4,10 +4,14 @@
 !/extensions/installer
 !/extensions/page
 !/extensions/system
+!/extensions/tree
 /themes/*
 !/themes/alpha
 /vendor/*
 !/vendor/assets
+/vendor/assets/angular*
+/vendor/assets/jquery
+/vendor/assets/uikit
 /config.php
 /composer.phar
 /composer.lock
@@ -15,4 +19,3 @@
 /.idea
 node_modules
 .DS_Store
-*.mo

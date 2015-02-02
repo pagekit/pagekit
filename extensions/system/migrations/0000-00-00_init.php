@@ -9,27 +9,18 @@ return [
         $db = $app['db'];
         $util = $app['db']->getUtility();
 
-        if ($util->tableExists('@system_menu') === false) {
-            $util->createTable('@system_menu', function($table) {
+        if ($util->tableExists('@system_node') === false) {
+            $util->createTable('@system_node', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('name', 'string', ['length' => 255]);
-                $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_MENU_NAME');
-            });
-        }
-
-        if ($util->tableExists('@system_menu_item') === false) {
-            $util->createTable('@system_menu_item', function($table) {
-                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('menu_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
-                $table->addColumn('roles', 'simple_array', ['notnull' => false]);
-                $table->addColumn('name', 'string', ['length' => 255]);
-                $table->addColumn('url', 'string', ['length' => 1023]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('status', 'smallint');
-                $table->addColumn('depth', 'smallint');
-                $table->addColumn('pages', 'text');
+                $table->addColumn('title', 'string', ['length' => 255]);
+                $table->addColumn('slug', 'string', ['length' => 1023]);
+                $table->addColumn('path', 'string', ['length' => 1023]);
+                $table->addColumn('type', 'string', ['length' => 255]);
+                $table->addColumn('menu', 'string', ['length' => 255]);
+                $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });
@@ -68,17 +59,6 @@ return [
                 $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->addColumn('time', 'datetime');
                 $table->setPrimaryKey(['id']);
-            });
-        }
-
-        if ($util->tableExists('@system_url_alias') === false) {
-            $util->createTable('@system_url_alias', function($table) {
-                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('source', 'string', ['length' => 255]);
-                $table->addColumn('alias', 'string', ['length' => 255]);
-                $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['alias'], 'SYSTEM_URL_ALIAS');
-                $table->addIndex(['source'], 'SYSTEM_URL_ALIAS_SOURCE');
             });
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Alpha\AlphaTheme;
+
 /**
  * Theme configuration file.
  *
@@ -7,6 +9,17 @@
  * @link http://pagekit.com/docs/configuration - full documentation of config options
  */
 return [
+
+    'name' => 'alpha',
+
+    /**
+     * The main function.
+     */
+    'main' => function ($app, $config) {
+
+        return new AlphaTheme($app, $config);
+
+    },
 
     /**
      * Namespace to autoload theme classes.
@@ -18,17 +31,12 @@ return [
     ],
 
     /**
-     * The main theme class to be loaded when the theme is booted.
-     */
-    'main' => 'Pagekit\\Alpha\\AlphaTheme',
-
-    /**
      * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.
      */
     'resources' => [
 
         'override' => [
-            'extension://system/theme/templates' => 'templates/system'
+            'extensions/system/theme/templates' => 'templates/system'
         ]
 
     ],
@@ -39,11 +47,11 @@ return [
     'parameters' => [
 
         'settings' => [
-            'view' => 'theme://alpha/views/admin/settings.razr'
+            'view' => 'themes/alpha/views/admin/settings.razr'
         ],
 
         'widgets'  => [
-            'view' => 'theme://alpha/views/admin/widgets/edit.razr'
+            'view' => 'themes/alpha/views/admin/widgets/edit.razr'
         ]
 
     ],
@@ -69,11 +77,21 @@ return [
      */
     'renderer' => [
 
-        'blank'     => 'theme://alpha/views/renderer/position.blank.razr',
-        'grid'      => 'theme://alpha/views/renderer/position.grid.php',
-        'navbar'    => 'theme://alpha/views/renderer/position.navbar.razr',
-        'offcanvas' => 'theme://alpha/views/renderer/position.offcanvas.razr',
-        'panel'     => 'theme://alpha/views/renderer/position.panel.razr'
+        'blank'     => 'themes/alpha/views/renderer/position.blank.razr',
+        'grid'      => 'themes/alpha/views/renderer/position.grid.php',
+        'navbar'    => 'themes/alpha/views/renderer/position.navbar.razr',
+        'offcanvas' => 'themes/alpha/views/renderer/position.offcanvas.razr',
+        'panel'     => 'themes/alpha/views/renderer/position.panel.razr'
+
+    ],
+
+    /**
+     * List of fixed menus provided by this theme.
+     */
+    'menus' => [
+
+        'main'    => 'Main',
+        'sidebar' => 'Sidebar'
 
     ]
 
