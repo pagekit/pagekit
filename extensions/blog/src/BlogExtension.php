@@ -18,9 +18,9 @@ class BlogExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(App $app, array $config)
+    public function __construct(App $app, array $config)
     {
-        parent::load($app, $config);
+        parent::__construct($app, $config);
 
         $app->subscribe(
             new RouteListener,

@@ -3,18 +3,9 @@
 namespace Pagekit\Cache;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Module;
 
-class CacheModule extends Module
+class CacheModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(App $app, array $config)
-    {
-
-    }
-
     /**
      * Returns list of supported caches or boolean for individual cache.
      *

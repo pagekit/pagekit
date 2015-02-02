@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\Module\Module;
 use Pagekit\User\Dashboard\UserWidget;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
@@ -59,10 +58,6 @@ return [
             $event->register(new UserWidget);
         });
 
-        $module = new Module;
-        $module->setConfig($config);
-
-        return $module;
     },
 
     'autoload' => [

@@ -7,7 +7,6 @@ use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
-use Pagekit\System\Extension;
 use Pagekit\User\Entity\User;
 
 /**
@@ -23,8 +22,8 @@ class SystemController extends Controller
     {
         $packages = [];
 
-        foreach (App::module()->all() as $extension) {
-            if ($extension instanceof Extension && $extension->getConfig('parameters.settings.view')) {
+        foreach (App::option('system:extensions', []) as $name) {
+            if ($extension = App::module($name) and $extension->getConfig('parameters.settings.view')) {
                 $packages[$extension->getName()] = App::package()->getRepository('extension')->findPackage($extension->getName());
             }
         }

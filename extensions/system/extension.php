@@ -8,11 +8,8 @@ return [
 
     'main' => function ($app, $config) {
 
-        $extension = new SystemExtension();
-        $extension->setConfig($config);
-        $extension->load($app, $config);
+        return new SystemExtension($app, $config);
 
-        return $extension;
     },
 
     'include' => __DIR__.'/modules/*/module.php',

@@ -17,11 +17,8 @@ return [
      */
     'main' => function ($app, $config) {
 
-        $theme = new AlphaTheme();
-        $theme->setConfig($config);
-        $theme->load($app, $config);
+        return new AlphaTheme($app, $config);
 
-        return $theme;
     },
 
     /**

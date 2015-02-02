@@ -2,7 +2,6 @@
 
 use Pagekit\Dashboard\FeedWidget;
 use Pagekit\Dashboard\WeatherWidget;
-use Pagekit\Module\Module;
 
 return [
 
@@ -24,10 +23,6 @@ return [
             $event->register('feed.list', 'extensions/system/modules/dashboard/views/feed/tmpl/list.razr');
         });
 
-        $module = new Module;
-        $module->setConfig($config);
-
-        return $module;
     },
 
     'autoload' => [

@@ -8,11 +8,8 @@ return [
 
     'main' => function ($app, $config) {
 
-        $extension = new HelloExtension();
-        $extension->setConfig($config);
-        $extension->load($app, $config);
+        return new HelloExtension($app, $config);
 
-        return $extension;
     },
 
     'autoload' => [

@@ -22,10 +22,6 @@ return [
             $event->register(new TextWidget);
         });
 
-        $module = new Module;
-        $module->setConfig($config);
-
-        return $module;
     },
 
     'autoload' => [
