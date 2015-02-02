@@ -128,8 +128,13 @@ class SystemServiceProvider implements ServiceProviderInterface, EventSubscriber
 
     public function onSystemInit()
     {
-        foreach ($this->app['module']->all() as $module) {
-            foreach ($module->getConfig('controllers', []) as $prefix => $controller) {
+        foreach ($this->app['module']->getConfigs() as $config) {
+
+            if (!isset($config['controllers'])) {
+                continue;
+            }
+
+            foreach ($config['controllers'] as $prefix => $controller) {
 
                 $namespace = '';
 

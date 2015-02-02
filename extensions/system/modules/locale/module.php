@@ -56,11 +56,11 @@ return [
 
             $app['translator']->setLocale($locale = $config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
 
-            foreach ($app['module']->all() as $module) {
+            foreach ($app['module']->getConfigs() as $config) {
 
                 $domains = [];
 
-                foreach (glob($module->getConfig('path').'/languages/'.$locale.'/*') ?: [] as $file) {
+                foreach (glob($config['path'].'/languages/'.$locale.'/*') ?: [] as $file) {
 
                     $format = substr(strrchr($file, '.'), 1);
                     $domain = basename($file, '.'.$format);

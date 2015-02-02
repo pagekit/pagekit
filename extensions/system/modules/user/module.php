@@ -44,8 +44,10 @@ return [
         });
 
         $app->on('system.permission', function ($event) use ($app) {
-            foreach ($app['module']->all() as $module) {
-                $event->setPermissions($module->getName(), $module->getConfig('permissions', []));
+            foreach ($app['module']->getConfigs() as $config) {
+                if (isset($config['permissions'])) {
+                    $event->setPermissions($config['name'], $config['permissions']);
+                }
             }
         });
 
