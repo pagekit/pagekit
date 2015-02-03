@@ -8,7 +8,9 @@ return [
 
     'main' => function ($app, $config) {
 
-        return new InstallerExtension($app, $config);
+        if ($app['config']['app.installer']) {
+            return new InstallerExtension($app, $config);
+        }
 
     },
 
