@@ -2,43 +2,18 @@
 
 use Pagekit\Application as App;
 
-$loader = require __DIR__.'/autoload.php';
-$config = require __DIR__.'/config.php';
+$loader  = require __DIR__.'/autoload.php';
+$config  = require __DIR__.'/config.php';
+$modules = ['framework', 'system/core', 'system/cache', 'system/option', 'system/profiler', 'system/templating', 'system/locale'];
 
 $app = new App($config);
 $app['autoloader'] = $loader;
 
 date_default_timezone_set('UTC');
 
-try {
+$app['module']->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php']);
 
-    $app['module']
-        ->setConfig($app['config']->getValues())
-        ->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php'])
-        ->load(['framework', 'system/core', 'system/cache', 'system/option', 'system/profiler', 'system/templating', 'system/locale']);
-
-    class InstallerException extends RuntimeException {}
-
-    if (!$app['config.file']) {
-        throw new InstallerException('No config.');
-    }
-
-    $app['db']->connect();
-
-    if (!$app['cache']->fetch('installed')) {
-
-        if (!$app['db']->getSchemaManager()->tablesExist($app['db']->getPrefix().'system_option')) {
-            throw new InstallerException('Not installed.');
-        }
-
-        $app['cache']->save('installed', true);
-    }
-
-    $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
-
-} catch (InstallerException $e) {
-
-    // TODO fix installer
+if (!$app['config.file']) {
 
     $requirements = require __DIR__.'/requirements.php';
 
@@ -48,7 +23,15 @@ try {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
+    $app['module']->setConfig($app['config']->getValues());
+    $app['module']->load($modules);
     $app['modules'] = ['installer'];
+
+} else {
+
+    $app['module']->setConfig($app['config']->getValues());
+    $app['module']->load($modules);
+    $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 }
 
