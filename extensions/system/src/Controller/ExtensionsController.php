@@ -72,6 +72,8 @@ class ExtensionsController extends Controller
             }
 
             $extension->enable();
+
+            // TODO boot is no longer part of the Extension
             $extension->boot(App::getInstance());
 
             App::option()->set('system:extensions', array_unique(array_merge(App::option('system:extensions', []), [$extension->getName()])), true);

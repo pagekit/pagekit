@@ -7,7 +7,6 @@ $config = require __DIR__.'/config.php';
 
 $app = new App($config);
 $app['autoloader'] = $loader;
-$app['autoloader']->addPsr4('Pagekit\\System\\', $app['path.extensions'].'/system/src');
 
 date_default_timezone_set('UTC');
 
@@ -16,9 +15,7 @@ try {
     $app['module']
         ->setConfig($app['config']->getValues())
         ->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php'])
-        ->load(['framework', 'system/cache', 'system/option', 'system/profiler', 'system/templating']);
-
-    $app->register('Pagekit\System\SystemServiceProvider');
+        ->load(['framework', 'system/core', 'system/cache', 'system/option', 'system/profiler', 'system/templating', 'system/locale']);
 
     class InstallerException extends RuntimeException {}
 
@@ -40,6 +37,8 @@ try {
     $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
 } catch (InstallerException $e) {
+
+    // TODO fix installer
 
     $requirements = require __DIR__.'/requirements.php';
 

@@ -77,6 +77,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
+            // TODO boot is no longer part of the Extension
             $theme->boot(App::getInstance());
 
             App::option()->set('system:theme.site', $theme->getName(), true);

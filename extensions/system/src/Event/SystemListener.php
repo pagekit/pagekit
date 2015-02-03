@@ -13,6 +13,30 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SystemListener implements EventSubscriberInterface
 {
     /**
+     * Registers extension's controllers
+     */
+    public function onSystemInit()
+    {
+        foreach (App::module()->getConfigs() as $config) {
+
+            if (!isset($config['controllers'])) {
+                continue;
+            }
+
+            foreach ($config['controllers'] as $prefix => $controller) {
+
+                $namespace = '';
+
+                if (strpos($prefix, ':') !== false) {
+                    list($namespace, $prefix) = explode(':', $prefix);
+                }
+
+                App::controllers()->mount($prefix, $controller, "$namespace/");
+            }
+        }
+    }
+
+    /**
      * Dispatches the 'system.site' or 'system.admin' event.
      */
     public function onSystemLoaded($event, $name, $dispatcher)
@@ -111,16 +135,64 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
+     * Triggers the system.loaded event, after the request was matched.
+     */
+    public function onRequestMatched($event, $name, $dispatcher)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $dispatcher->dispatch('system.loaded', $event);
+    }
+
+    /**
+     * Resolves requirejs dependencies.
+     *
+     * TODO remove with full switch to angular
+     */
+    public function onKernelResponse()
+    {
+        $require = [];
+        $requeue = [];
+
+        foreach ($scripts = App::scripts() as $script) {
+            if ($script['requirejs']) {
+                $require[] = $script;
+            } elseif (array_key_exists('requirejs', $scripts->resolveDependencies($script))) {
+                $requeue[] = $script;
+            }
+        }
+
+        if (!$requeue) {
+            return;
+        }
+
+        foreach ($require as $script) {
+            $script['dependencies'] = array_merge((array) $script['dependencies'], ['requirejs']);
+            $scripts->queue($script->getName());
+        }
+
+        foreach ($requeue as $script) {
+            $scripts->dequeue($name = $script->getName());
+            $scripts->queue($name);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'system.admin'  => 'onSystemAdmin',
-            'system.finder' => 'onSystemFinder',
-            'system.link'   => 'onSystemLink',
-            'system.loaded' => 'onSystemLoaded',
-            'system.tmpl'   => 'onSystemTmpl'
+            'system.admin'    => 'onSystemAdmin',
+            'system.finder'   => 'onSystemFinder',
+            'system.init'     => 'onSystemInit',
+            'system.link'     => 'onSystemLink',
+            'system.loaded'   => 'onSystemLoaded',
+            'system.tmpl'     => 'onSystemTmpl',
+            'kernel.request'  => 'onRequestMatched',
+            'kernel.response' => ['onKernelResponse', 15]
         ];
     }
 }

@@ -12,6 +12,14 @@ return [
 
     },
 
+    'autoload' => [
+
+        'Pagekit\\System\\' => 'src'
+
+    ],
+
+    'priority' => 8,
+
     'include' => __DIR__.'/modules/*/module.php',
 
     'controllers' => [

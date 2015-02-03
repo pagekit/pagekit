@@ -120,6 +120,20 @@ return [
 
             $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
+
+        $app->on('templating.reference', function($event) use ($app) {
+
+            if (!isset($app['locator'])) {
+                return;
+            }
+
+            $template = $event->getTemplateReference();
+
+            if ($path = $app['locator']->get($template->get('path'))) {
+                $template->set('name', $path); // php engine uses name
+                $template->set('path', $path);
+            }
+        });
     },
 
     'autoload' => [

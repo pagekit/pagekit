@@ -14,14 +14,8 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\' => '../system/src',
+        'Pagekit\\System\\' => '../system/src',
         'Pagekit\\Installer\\' => 'src'
-
-    ],
-
-    'controllers' => [
-
-        '@installer: /installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
 
     ]
 

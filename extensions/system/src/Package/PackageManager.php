@@ -42,11 +42,14 @@ class PackageManager
     /**
      * Adds a repository instance.
      *
-     * @param string              $name
-     * @param InstalledRepository $repository
+     * @param  string              $name
+     * @param  InstalledRepository $repository
+     * @return self
      */
     public function addRepository($name, InstalledRepository $repository)
     {
         $this->repositories[$name] = $repository;
+
+        return $this;
     }
 }
