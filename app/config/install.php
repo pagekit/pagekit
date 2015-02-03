@@ -8,19 +8,19 @@ return [
 
     ],
 
-    'cache' => [
+    'system/cache' => [
 
         'storage' => 'array'
 
     ],
 
-    'session' => [
+    'framework/session' => [
 
         'storage' => 'array'
 
     ],
 
-    'profiler' => [
+    'system/profiler' => [
 
         'enabled' => false
 

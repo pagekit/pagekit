@@ -57,11 +57,13 @@ return [
             return new TraceableEventDispatcher($dispatcher, $app['profiler.stopwatch']);
         });
 
-        $app->extend('view', function($view, $app) {
-            return new TraceableView($view, $app['profiler.stopwatch']);
-        });
-
         $app->on('kernel.boot', function() use ($app) {
+
+            if (isset($app['view'])) {
+                $view = $app['view'];
+                unset($app['view']);
+                $app['view'] = new TraceableView($view, $app['profiler.stopwatch']);
+            }
 
             $toolbar = $this->path.'/views/toolbar/';
             $panel   = $this->path.'/views/panel/';
@@ -94,6 +96,8 @@ return [
         'Pagekit\\Profiler\\' => 'src'
 
     ],
+
+    'priority' => 16,
 
     'file'    => null,
     'enabled' => false

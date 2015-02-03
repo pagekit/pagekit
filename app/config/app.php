@@ -8,14 +8,7 @@ return [
 
         'debug' => true,
 
-        'storage' => '/storage',
-
-        'providers' => [
-
-            'Pagekit\Auth\RememberMeServiceProvider',
-            'Pagekit\System\SystemServiceProvider',
-
-        ]
+        'storage' => '/storage'
 
     ],
 
@@ -54,7 +47,7 @@ return [
 
     ],
 
-    'session' => [
+    'framework/session' => [
 
         'storage'  => 'database',
         'lifetime' => 900,
@@ -66,25 +59,9 @@ return [
 
     ],
 
-    'database' => [
-
-        'default' => 'mysql',
+    'framework/database' => [
 
         'connections' => [
-
-            'mysql' => [
-
-                'driver'   => 'pdo_mysql',
-                'dbname'   => '',
-                'host'     => 'localhost',
-                'user'     => 'root',
-                'password' => '',
-                'engine'   => 'InnoDB',
-                'charset'  => 'utf8',
-                'collate'  => 'utf8_unicode_ci',
-                'prefix'   => ''
-
-            ],
 
             'sqlite' => [
 

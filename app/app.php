@@ -11,16 +11,14 @@ $app['autoloader']->addPsr4('Pagekit\\System\\', $app['path.extensions'].'/syste
 
 date_default_timezone_set('UTC');
 
-foreach ($app['config']['app.providers'] as $provider) {
-    $app->register($provider);
-}
-
 try {
 
     $app['module']
         ->setConfig($app['config']->getValues())
         ->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php'])
         ->load(['framework', 'system/cache', 'system/option', 'system/profiler', 'system/templating']);
+
+    $app->register('Pagekit\System\SystemServiceProvider');
 
     class InstallerException extends RuntimeException {}
 
