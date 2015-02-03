@@ -38,10 +38,6 @@ return [
             return $app->trigger('system.permission', new PermissionEvent)->getPermissions();
         };
 
-        $app->on('system.admin_menu', function ($event) use ($config) {
-            $event->register($config['menu']);
-        });
-
         $app->on('system.permission', function ($event) use ($app) {
             foreach ($app['module']->getConfigs() as $config) {
                 if (isset($config['permissions'])) {

@@ -23,6 +23,15 @@ return [
         $app->on('system.widget', function($event) {
             $event->register(new MenuWidget);
         });
+
+        $app->on('system.admin_menu', function ($event) use ($app) {
+            foreach ($app['module']->getConfigs() as $config) {
+                if (isset($config['menu'])) {
+                    $event->register($config['menu']);
+                }
+            }
+        });
+
     },
 
     'autoload' => [

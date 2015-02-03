@@ -14,10 +14,6 @@ return [
             new WidgetListener
         );
 
-        $app->on('system.admin_menu', function ($event) use ($config) {
-            $event->register($config['menu']);
-        });
-
         $app->on('system.widget', function ($event) {
             $event->register(new TextWidget);
         });

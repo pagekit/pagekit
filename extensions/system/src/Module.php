@@ -23,13 +23,6 @@ class Module
     {
         $this->config = $config;
 
-        if ($menu = $this->getConfig('menu')) {
-
-            $app->on('system.admin_menu', function ($event) use ($menu) {
-                $event->register($menu);
-            });
-        }
-
         if ($this->getConfig('parameters.settings')) {
 
             if (is_array($defaults = $this->getConfig('parameters.settings.defaults'))) {

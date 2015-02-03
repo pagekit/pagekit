@@ -9,10 +9,6 @@ return [
 
     'main' => function ($app, $config) {
 
-        $app->on('system.admin_menu', function ($event) use ($config) {
-            $event->register($config['menu']);
-        });
-
         $app->on('system.dashboard', function ($event) {
             $event->register(new FeedWidget);
             $event->register(new WeatherWidget);

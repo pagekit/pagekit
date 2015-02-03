@@ -30,9 +30,6 @@ return [
             }
         }, -8);
 
-        $app->on('system.admin_menu', function ($event) use ($config) {
-            $event->register($config['menu']);
-        });
     },
 
     'autoload' => [
