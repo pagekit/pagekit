@@ -76,6 +76,12 @@ return [
 
     ],
 
+    'framework/filesystem' => [
+
+        'config.path' => '%path%'
+
+    ],
+
     'extension' => [
 
         'core' => ['installer', 'system']
