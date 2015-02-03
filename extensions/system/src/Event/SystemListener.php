@@ -13,30 +13,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SystemListener implements EventSubscriberInterface
 {
     /**
-     * Registers extension's controllers
-     */
-    public function onSystemInit()
-    {
-        foreach (App::module()->getConfigs() as $config) {
-
-            if (!isset($config['controllers'])) {
-                continue;
-            }
-
-            foreach ($config['controllers'] as $prefix => $controller) {
-
-                $namespace = '';
-
-                if (strpos($prefix, ':') !== false) {
-                    list($namespace, $prefix) = explode(':', $prefix);
-                }
-
-                App::controllers()->mount($prefix, $controller, "$namespace/");
-            }
-        }
-    }
-
-    /**
      * Dispatches the 'system.site' or 'system.admin' event.
      */
     public function onSystemLoaded($event, $name, $dispatcher)
@@ -187,7 +163,6 @@ class SystemListener implements EventSubscriberInterface
         return [
             'system.admin'    => 'onSystemAdmin',
             'system.finder'   => 'onSystemFinder',
-            'system.init'     => 'onSystemInit',
             'system.link'     => 'onSystemLink',
             'system.loaded'   => 'onSystemLoaded',
             'system.tmpl'     => 'onSystemTmpl',

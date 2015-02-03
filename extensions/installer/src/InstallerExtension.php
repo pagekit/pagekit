@@ -23,8 +23,6 @@ class InstallerExtension extends Extension
             return $app['response']->redirect('@installer/installer');
         });
 
-        $app['controllers']->mount('/installer', 'Pagekit\\Installer\\Controller\\InstallerController', "@installer/");
-
         $app->on('system.loaded', function () use ($app) {
             if ($locale = $app['request']->getPreferredLanguage()) {
                 $app['translator']->setLocale($locale);
