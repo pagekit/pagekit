@@ -1,59 +1,25 @@
 <?php
 
-use Doctrine\Common\Cache\ApcCache;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\XcacheCache;
-use Pagekit\Cache\Cache;
-use Pagekit\Cache\FilesystemCache;
-use Pagekit\Cache\PhpFileCache;
+use Pagekit\Cache\CacheProviderCollection;
 
 return [
 
     'name' => 'system/cache',
 
     'main' => function ($app, $config) {
-
-        $module = new Cache;
-
+        $providerCollection = new CacheProviderCollection();
+        $app['cache.providers'] = $providerCollection;
         foreach ($config['config'] as $name => $config) {
-            $app[$name] = function() use ($config, $module) {
-
-                $supports = $module->supports();
+            $app[$name] = function() use ($config, $providerCollection) {
 
                 if (!isset($config['storage'])) {
                     throw new \RuntimeException('Cache storage missing.');
                 }
-
-                if ($config['storage'] == 'auto' || !in_array($config['storage'], $supports)) {
-                    $config['storage'] = end($supports);
+                $provider = $providerCollection->get($config['storage']);
+                if (!$provider){
+                    throw new \RuntimeException('Unknown cache storage.');
                 }
-
-                switch ($config['storage']) {
-
-                    case 'array':
-                        $cache = new ArrayCache;
-                        break;
-
-                    case 'apc':
-                        $cache = new ApcCache;
-                        break;
-
-                    case 'xcache':
-                        $cache = new XcacheCache;
-                        break;
-
-                    case 'file':
-                        $cache = new FilesystemCache($config['path']);
-                        break;
-
-                    case 'phpfile':
-                        $cache = new PhpFileCache($config['path']);
-                        break;
-
-                    default:
-                        throw new \RuntimeException('Unknown cache storage.');
-                        break;
-                }
+                $cache = $provider->createCache($config);
 
                 if ($prefix = isset($config['prefix']) ? $config['prefix'] : false) {
                     $cache->setNamespace($prefix);
@@ -62,8 +28,6 @@ return [
                 return $cache;
             };
         }
-
-        return $module;
     },
 
     'autoload' => [
