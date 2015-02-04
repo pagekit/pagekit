@@ -178,6 +178,13 @@
             });
 
         }).trigger('change');
+        
+        // toggle mysql connection mode
+        $('#form-mysql-mode').on('change', function(){
+            var value = $(this).val();
+            $('.js-tcp, .js-unix_socket').toggleClass('uk-hidden').prop('disabled', true);
+            $('.js-' + value).find(':input').prop('disabled', false)
+        }).trigger('change');
 
         // prevent input html5 validation bubble
         $(':input').bind('invalid', function(e) {
