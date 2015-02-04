@@ -18,6 +18,9 @@ class Module
 
     /**
      * Constructor.
+     *
+     * @param App   $app
+     * @param array $config
      */
     public function __construct(App $app, array $config)
     {
@@ -25,13 +28,15 @@ class Module
 
         if ($this->getConfig('parameters.settings')) {
 
-            if (is_array($defaults = $this->getConfig('parameters.settings.defaults'))) {
-                $this->parameters = array_replace($this->parameters, $defaults);
-            }
+            // TODO
 
-            if (is_array($settings = App::option("{$config['name']}:settings"))) {
-                $this->parameters = array_replace($this->parameters, $settings);
-            }
+//            if (is_array($defaults = $this->getConfig('parameters.settings.defaults'))) {
+//                $this->parameters = array_replace($this->parameters, $defaults);
+//            }
+
+//            if (is_array($settings = $app['option']->get("{$config['name']}:settings"))) {
+//                $this->parameters = array_replace($this->parameters, $settings);
+//            }
         }
     }
 
@@ -52,7 +57,11 @@ class Module
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the extension's config.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
      */
     public function getConfig($key = null, $default = null)
     {
@@ -62,15 +71,21 @@ class Module
     /**
      * Returns the extension's parameters.
      *
-     * @param  mixed $key
-     * @param  mixed $default
-     * @return array
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
      */
     public function getParams($key = null, $default = null)
     {
         return $this->fetch($this->parameters, $key, $default);
     }
 
+    /**
+     * @param  array  $array
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
     protected function fetch($array, $key = null, $default = null)
     {
         if (null === $key) {

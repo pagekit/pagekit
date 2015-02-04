@@ -123,7 +123,7 @@ class Option implements \IteratorAggregate
             $this->ignore = $ignore ?: [];
         }
 
-        if (isset($this->ignore[$name]) || !$this->connection->isConnected()) {
+        if (isset($this->ignore[$name])) {
             return $default;
         }
 
@@ -166,10 +166,6 @@ class Option implements \IteratorAggregate
 
         if (in_array($name, $this->protected)) {
             throw new \InvalidArgumentException(sprintf('"%s" is a protected option and may not be modified.', $name));
-        }
-
-        if (!$this->connection->isConnected()) {
-            throw new \RuntimeException('Database is not connected.');
         }
 
         $old_value = $this->get($name);
@@ -225,10 +221,6 @@ class Option implements \IteratorAggregate
 
         if (in_array($name, $this->protected)) {
             throw new \InvalidArgumentException(sprintf('"%s" is a protected option and may not be modified.', $name));
-        }
-
-        if (!$this->connection->isConnected()) {
-            throw new \RuntimeException('Database is not connected.');
         }
 
         $this->initialize(true);

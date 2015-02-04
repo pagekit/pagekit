@@ -79,11 +79,23 @@ return [
                 } catch (\Exception $e) {}
             }
         });
+
+        $app->on('system.settings.edit', function ($event) use ($app, $config) {
+            $event->add('system/mail', __('Mail'), $app['view']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $config]));
+        });
     },
 
     'autoload' => [
 
         'Pagekit\\Mail\\' => 'src'
+
+    ],
+
+    'controllers' => [
+
+        '@system/mail: /system/mail' => [
+            'Pagekit\\Mail\\Controller\\TestController'
+        ]
 
     ],
 

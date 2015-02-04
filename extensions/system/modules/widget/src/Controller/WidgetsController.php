@@ -207,8 +207,6 @@ class WidgetsController extends Controller
 
     protected function triggerEditEvent($widget)
     {
-        $event = App::trigger('system.widget.edit', new WidgetEditEvent($widget));
-
-        return $event->getSettings();
+        return App::trigger('system.widget.edit', new WidgetEditEvent($widget))->getSettings();
     }
 }

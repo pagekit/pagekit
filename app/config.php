@@ -21,10 +21,6 @@ if ($values['config.file']) {
     $config->load($values['config.file']);
 }
 
-if ($config['app.nocache']) {
-    $config->set('cache.storage', 'array');
-}
-
 $values['config'] = $config;
 
 return $values;

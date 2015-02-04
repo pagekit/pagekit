@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Application as App;
+use Pagekit\Module\Config\ConfigLoader;
 
 $loader  = require __DIR__.'/autoload.php';
 $config  = require __DIR__.'/config.php';
@@ -23,13 +24,13 @@ if (!$app['config.file']) {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
-    $app['module']->getConfig()->import($app['config']->getValues());
+    $app['module']->addLoader(new ConfigLoader($app['config']));
     $app['module']->load($modules);
     $app['modules'] = ['installer'];
 
 } else {
 
-    $app['module']->getConfig()->import($app['config']->getValues());
+    $app['module']->addLoader(new ConfigLoader($app['config']));
     $app['module']->load($modules);
     $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 

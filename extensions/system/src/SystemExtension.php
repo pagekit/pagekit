@@ -107,23 +107,15 @@ class SystemExtension extends Extension
         }
     }
 
+    /**
+     * TODO remove
+     */
     protected function mergeOptions()
     {
         $keys = [
             'app.frontpage',
-            'app.locale',
-            'app.locale_admin',
             'app.site_description',
             'app.site_title',
-            'app.timezone',
-            'mail.driver',
-            'mail.encryption',
-            'mail.from.address',
-            'mail.from.name',
-            'mail.host',
-            'mail.password',
-            'mail.port',
-            'mail.username',
             'maintenance.enabled',
             'maintenance.msg',
             'theme.site'

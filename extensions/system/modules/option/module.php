@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Option\Loader\OptionLoader;
 use Pagekit\Option\Option;
 
 return [
@@ -12,7 +13,11 @@ return [
             return new Option($app['db'], $app['cache'], $config['table']);
         };
 
+        $app['module']->addLoader(new OptionLoader);
+
     },
+
+    'priority' => 8,
 
     'autoload' => [
 

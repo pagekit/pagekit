@@ -3,10 +3,10 @@
 use Pagekit\Locale\Helper\CountryHelper;
 use Pagekit\Locale\Helper\DateHelper;
 use Pagekit\Locale\Helper\LanguageHelper;
+use Pagekit\Locale\Loader\ArrayLoader;
 use Pagekit\Locale\Loader\MoFileLoader;
 use Pagekit\Locale\Loader\PhpFileLoader;
 use Pagekit\Locale\Loader\PoFileLoader;
-use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
 
 return [
@@ -92,6 +92,41 @@ return [
                 'longmonths'  => [__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December')]
 
             ], 'date');
+        });
+
+        $app->on('system.settings.edit', function ($event) use ($app, $config) {
+
+            $countries = $app['countries'];
+            $languages = $app['languages'];
+            $locales   = [];
+            foreach ($app['finder']->directories()->depth(0)->in('extensions/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+                $code = $dir->getFileName();
+
+                list($lang, $country) = explode('_', $code);
+
+                $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
+            }
+
+            $timezones = [];
+            foreach (\DateTimeZone::listIdentifiers() as $timezone) {
+
+                $parts = explode('/', $timezone);
+
+                if (count($parts) > 2) {
+                    $region = $parts[0];
+                    $name = $parts[1].' - '.$parts[2];
+                } elseif (count($parts) > 1) {
+                    $region = $parts[0];
+                    $name = $parts[1];
+                } else {
+                    $region = 'Other';
+                    $name = $parts[0];
+                }
+
+                $timezones[$region][$timezone] = str_replace('_', ' ', $name);
+            }
+
+            $event->add('system/locale', __('Localization'), $app['view']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $config, 'locales' => $locales, 'timezones' => $timezones]));
         });
 
     },

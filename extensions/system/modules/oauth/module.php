@@ -16,6 +16,11 @@ return [
             $event->register('settings.oauth', 'extensions/system/modules/oauth/views/tmpl/settings.razr');
         });
 
+
+        $app->on('system.settings.edit', function ($event) use ($app, $config) {
+            $event->add('system/oauth', __('OAuth'), $app['view']->render('extensions/system/modules/oauth/views/admin/settings.razr', ['config' => $config]));
+        });
+
     },
 
     'autoload' => [

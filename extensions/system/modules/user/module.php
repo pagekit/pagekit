@@ -54,6 +54,10 @@ return [
             $event->register(new UserWidget);
         });
 
+        $app->on('system.settings.edit', function ($event) use ($app, $config) {
+            $event->add('system/user', __('User'), $app['view']->render('extensions/system/modules/user/views/admin/settings.razr', ['config' => $config]));
+        });
+
     },
 
     'autoload' => [
@@ -129,6 +133,9 @@ return [
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ]
 
-    ]
+    ],
+
+    'registration' => 'admin',
+    'require_verification' => true
 
 ];

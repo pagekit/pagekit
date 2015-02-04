@@ -15,20 +15,22 @@ return [
 
         $module = new Cache;
 
-        foreach ($config['config'] as $name => $config) {
-            $app[$name] = function() use ($config, $module) {
+        foreach ($config['config'] as $name => $conf)  {
+            $app[$name] = function() use ($config, $module, $conf) {
 
                 $supports = $module->supports();
 
-                if (!isset($config['storage'])) {
+                if (!isset($conf['storage'])) {
                     throw new \RuntimeException('Cache storage missing.');
                 }
 
-                if ($config['storage'] == 'auto' || !in_array($config['storage'], $supports)) {
-                    $config['storage'] = end($supports);
+                if ($config['nocache']) {
+                    $conf['storage'] = 'array';
+                } else if ($conf['storage'] == 'auto' || !in_array($conf['storage'], $supports)) {
+                    $conf['storage'] = end($supports);
                 }
 
-                switch ($config['storage']) {
+                switch ($conf['storage']) {
 
                     case 'array':
                         $cache = new ArrayCache;
@@ -43,11 +45,11 @@ return [
                         break;
 
                     case 'file':
-                        $cache = new FilesystemCache($config['path']);
+                        $cache = new FilesystemCache($conf['path']);
                         break;
 
                     case 'phpfile':
-                        $cache = new PhpFileCache($config['path']);
+                        $cache = new PhpFileCache($conf['path']);
                         break;
 
                     default:
@@ -55,13 +57,29 @@ return [
                         break;
                 }
 
-                if ($prefix = isset($config['prefix']) ? $config['prefix'] : false) {
+                if ($prefix = isset($conf['prefix']) ? $conf['prefix'] : false) {
                     $cache->setNamespace($prefix);
                 }
 
                 return $cache;
             };
         }
+
+        $app->on('system.settings.edit', function ($event) use ($app, $config, $module) {
+
+            $supported = $module->supports();
+
+            $caches = [
+                'auto'   => ['name' => '', 'supported' => true],
+                'apc'    => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
+                'xcache' => ['name' => 'XCache', 'supported' => in_array('xcache', $supported)],
+                'file'   => ['name' => 'File', 'supported' => in_array('file', $supported)]
+            ];
+
+            $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
+
+            $event->add('system/cache', __('Cache'), $app['view']->render('extensions/system/modules/cache/views/admin/settings.razr', ['config' => $config, 'cache' => $config['cache']['storage'] ?: 'auto', 'caches' => $caches]));
+        });
 
         return $module;
     },
@@ -72,8 +90,12 @@ return [
 
     ],
 
+    'priority' => 12,
+
     'config' => [
 
-    ]
+    ],
+
+    'nocache' => false
 
 ];

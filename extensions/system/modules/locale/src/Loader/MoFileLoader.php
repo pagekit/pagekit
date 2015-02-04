@@ -4,13 +4,11 @@ namespace Pagekit\Locale\Loader;
 
 use Symfony\Component\Translation\Exception\InvalidResourceException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
-use Symfony\Component\Translation\Loader\ArrayLoader;
-use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
  * @copyright Copyright (c) 2010, Union of RAD http://union-of-rad.org (http://lithify.me/)
  */
-class MoFileLoader extends ArrayLoader implements LoaderInterface
+class MoFileLoader extends ArrayLoader
 {
     /**
      * Magic used for validating the format of a MO file as well as

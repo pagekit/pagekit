@@ -1,0 +1,35 @@
+<h2 class="pk-form-heading">@trans('Localization')</h2>
+<div class="uk-form-row">
+    <label for="form-sitelocale" class="uk-form-label">@trans('Site Locale')</label>
+    <div class="uk-form-controls">
+        <select id="form-sitelocale" class="uk-form-width-large" name="option[system/locale:settings][locale]">
+            @foreach ($locales as $value => $name)
+            <option value="@($value)"@($value == $config['locale'] ? ' selected' : '')>@( $name )</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="uk-form-row">
+    <label for="form-adminlocale" class="uk-form-label">@trans('Admin Locale')</label>
+    <div class="uk-form-controls">
+        <select id="form-adminlocale" class="uk-form-width-large" name="option[system/locale:settings][locale_admin]">
+            @foreach ($locales as $value => $name)
+            <option value="@($value)"@($value == $config['locale_admin'] ? ' selected' : '')>@( $name )</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="uk-form-row">
+    <label for="form-timezone" class="uk-form-label">@trans('Time Zone')</label>
+    <div class="uk-form-controls">
+        <select id="form-timezone" class="uk-form-width-large" name="option[system/locale:settings][timezone]">
+            @foreach ($timezones as $region => $rtimezones)
+            <optgroup label="@($region)">
+                @foreach ($rtimezones as $value => $name)
+                <option value="@($value)"@($value == $config['timezone'] ? ' selected' : '')>@( $name )</option>
+                @endforeach
+            </optgroup>
+            @endforeach
+        </select>
+    </div>
+</div>
