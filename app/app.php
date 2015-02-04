@@ -23,13 +23,13 @@ if (!$app['config.file']) {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
-    $app['module']->setConfig($app['config']->getValues());
+    $app['module']->getConfig()->import($app['config']->getValues());
     $app['module']->load($modules);
     $app['modules'] = ['installer'];
 
 } else {
 
-    $app['module']->setConfig($app['config']->getValues());
+    $app['module']->getConfig()->import($app['config']->getValues());
     $app['module']->load($modules);
     $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
 
