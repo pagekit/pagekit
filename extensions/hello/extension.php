@@ -6,11 +6,7 @@ return [
 
     'name' => 'hello',
 
-    'main' => function ($app, $config) {
-
-        return new HelloExtension($app, $config);
-
-    },
+    'main' => 'Pagekit\\Hello\\HelloExtension',
 
     'autoload' => [
 

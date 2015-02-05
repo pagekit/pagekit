@@ -6,11 +6,7 @@ return [
 
     'name' => 'system',
 
-    'main' => function ($app, $config) {
-
-        return new SystemExtension($app, $config);
-
-    },
+    'main' => 'Pagekit\\System\\SystemExtension',
 
     'autoload' => [
 

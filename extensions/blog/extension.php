@@ -6,11 +6,7 @@ return [
 
     'name' => 'blog',
 
-    'main' => function ($app, $config) {
-
-        return new BlogExtension($app, $config);
-
-    },
+    'main' => 'Pagekit\\Blog\\BlogExtension',
 
     'autoload' => [
 

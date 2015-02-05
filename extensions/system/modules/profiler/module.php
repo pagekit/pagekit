@@ -23,9 +23,6 @@ return [
 
     'main' => function ($app, $config) {
 
-        $this->app  = $app;
-        $this->path = $config['path'];
-
         if (!$config['enabled'] || !$config['file']) {
             return;
         }

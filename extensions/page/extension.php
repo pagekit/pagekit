@@ -6,11 +6,7 @@ return [
 
     'name' => 'page',
 
-    'main' => function ($app, $config) {
-
-        return new PageExtension($app, $config);
-
-    },
+    'main' => 'Pagekit\\Page\\PageExtension',
 
     'autoload' => [
 

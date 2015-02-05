@@ -18,10 +18,8 @@ class BlogExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function __construct(App $app, array $config)
+    public function main(App $app, array $config)
     {
-        parent::__construct($app, $config);
-
         $app->subscribe(
             new RouteListener,
             new CommentListener,

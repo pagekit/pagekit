@@ -16,10 +16,8 @@ class PageExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function __construct(App $app, array $config)
+    public function main(App $app, array $config)
     {
-        parent::__construct($app, $config);
-
         $app->subscribe(new NodeListener);
 
         $app->on('system.link', function (LinkEvent $event) {

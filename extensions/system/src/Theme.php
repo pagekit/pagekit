@@ -16,10 +16,8 @@ class Theme extends Module
     /**
      * {@inheritdoc}
      */
-    public function __construct(App $app, array $config)
+    public function main(App $app, array $config)
     {
-        parent::__construct($app, $config);
-
         $app->on('system.site', function() use ($app) {
             $this->registerRenderer($app['sections'], $app['view']);
         });

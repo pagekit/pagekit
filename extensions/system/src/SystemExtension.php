@@ -20,7 +20,7 @@ class SystemExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function __construct(App $app, array $config)
+    public function main(App $app, array $config)
     {
         if (!(isset($app['config']) ? $app['config']['app.debug'] : true)) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
@@ -36,8 +36,6 @@ class SystemExtension extends Extension
             new ThemeListener,
             new ThemeWidgetListener
         );
-
-        parent::__construct($app, $config);
 
         $this->mergeOptions();
 

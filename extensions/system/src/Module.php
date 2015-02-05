@@ -3,8 +3,9 @@
 namespace Pagekit\System;
 
 use Pagekit\Application as App;
+use Pagekit\Module\Module as BaseModule;
 
-class Module
+class Module extends BaseModule
 {
     /**
      * @var array
@@ -22,11 +23,11 @@ class Module
      * @param App   $app
      * @param array $config
      */
-    public function __construct(App $app, array $config)
-    {
-        $this->config = $config;
+    // public function __construct(App $app, array $config)
+    // {
+    //     $this->config = $config;
 
-        if ($this->getConfig('parameters.settings')) {
+    //     if ($this->getConfig('parameters.settings')) {
 
             // TODO
 
@@ -37,8 +38,8 @@ class Module
 //            if (is_array($settings = $app['option']->get("{$config['name']}:settings"))) {
 //                $this->parameters = array_replace($this->parameters, $settings);
 //            }
-        }
-    }
+    //     }
+    // }
 
     /**
      * {@inheritdoc}
