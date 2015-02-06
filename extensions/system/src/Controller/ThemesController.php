@@ -25,7 +25,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if (App::config('system:settings.theme.site') == $name) {
+            if (App::system()->config('theme.site') == $name) {
                 $current = $package;
             }
 

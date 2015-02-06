@@ -197,7 +197,7 @@ class RegistrationController extends Controller
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::config('system:settings.site_title')]))
+                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::system()->config('site_title')]))
                  ->setBody(App::view('extensions/system/modules/user/views/mails/welcome.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -210,7 +210,7 @@ class RegistrationController extends Controller
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::config('system:settings.site_title')]))
+                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::system()->config('site_title')]))
                  ->setBody(App::view('extensions/system/modules/user/views/mails/verification.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -225,7 +225,7 @@ class RegistrationController extends Controller
 
             $mail = App::mailer()->create();
             $mail->setTo(App::option('system:mail.from.address'))
-                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::config('system:settings.site_title')]))
+                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::module('system')->config('site_title')]))
                  ->setBody(App::view('extensions/system/modules/user/views/mails/approve.razr', compact('user', 'mail')), 'text/html')
                  ->send();
 

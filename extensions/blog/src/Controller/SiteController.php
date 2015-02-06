@@ -60,7 +60,7 @@ class SiteController extends Controller
             'head.title'          => __('Blog'),
             'head.link.alternate' => [
                 'href'  => App::url('@blog/site/feed', [], true),
-                'title' => App::config('system:settings.site_title'),
+                'title' => App::system()->config('site_title'),
                 'type'  => App::feed()->create(App::module('blog')->config('feed.type'))->getMIMEType()
             ],
             'posts'               => $query->get(),
@@ -192,9 +192,9 @@ class SiteController extends Controller
     public function feedAction($type = '')
     {
         $feed = App::feed()->create($type ?: App::module('blog')->config('feed.type'), [
-            'title'       => App::config('system:settings.site_title'),
+            'title'       => App::system()->config('site_title'),
             'link'        => App::url('@blog/site', [], true),
-            'description' => App::config('system:settings.site_description'),
+            'description' => App::system()->config('site_description'),
             'element'     => ['language', App::option('system:app.locale')],
             'selfLink'    => App::url('@blog/site/feed', [], true)
         ]);

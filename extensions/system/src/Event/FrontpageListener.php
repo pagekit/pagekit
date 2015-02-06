@@ -13,7 +13,7 @@ class FrontpageListener implements EventSubscriberInterface
      */
     public function onSystemInit()
     {
-        if ($frontpage = App::config('system:settings.frontpage')) {
+        if ($frontpage = App::system()->config('frontpage')) {
             App::aliases()->add('/', $frontpage);
         } else {
             App::callbacks()->get('/', '_frontpage', function() {

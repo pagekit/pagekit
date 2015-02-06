@@ -30,6 +30,7 @@ INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `prior
 INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `priority`, `status`, `pages`, `menu_items`, `data`) VALUES
 (3, NULL, 'widget.text', 'Copyright', 'footer', 0, 1, '', NULL, '{"content":"Powered by <a href=\\"\\">Pagekit<\\/a>"}');
 
+# TODO fix frontpage setting
 INSERT INTO `@system_option` (`name`, `value`, `autoload`) VALUES
 ('system:settings.frontpage', '"@page/id?id=1"', 1);
 

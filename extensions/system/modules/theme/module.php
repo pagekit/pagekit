@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Application;
-
 return [
 
     'name' => 'system/theme',
@@ -25,7 +23,7 @@ return [
 
                     $title = $app['view']->get('head.title');
 
-                    if ($site = Application::config('system:settings.site_title')) {
+                    if ($site = $app['system']->config('site_title')) {
                         $title = "$title &lsaquo; $site";
                     }
 

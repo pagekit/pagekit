@@ -27,8 +27,7 @@ class BlogExtension extends Extension
         );
 
         $app->on('system.init', function() use ($app) {
-            // TODO fix setting
-            $app['config']->set('system:settings.frontpage', $app['config']->get('system:settings.frontpage') ?: '@blog/site');
+            $app['system']->config['frontpage'] = $app['system']->config['frontpage'] ?: '@blog/site';
         }, 10);
 
         $app->on('system.link', function(LinkEvent $event) {

@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\System\SystemExtension;
-
 return [
 
     'name' => 'system',
@@ -92,6 +90,7 @@ return [
     
         ],
 
+        'frontpage' => '',
         'site_title' => '',
         'site_description' => '',
         'maintenance.enabled' => false,
