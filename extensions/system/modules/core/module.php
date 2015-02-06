@@ -14,15 +14,6 @@ return [
             return Finder::create();
         });
 
-        $app->extend('view', function ($view, $app) {
-
-            $view->setEngine($app['tmpl']);
-            $view->set('app', $app);
-            $view->set('url', $app['url']);
-
-            return $view;
-        });
-
         $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
         $app['path.storage']          = $app['config']['locator.paths.storage'] = rtrim($app['path'].'/'.$app['config']['app.storage'], '/');
 
@@ -66,7 +57,8 @@ return [
         'system/cache',
         'system/locale',
         'system/option',
-        'system/templating'
+        'system/templating',
+        'system/view'
 
     ],
 

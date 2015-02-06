@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Templating\Helper\DateHelper;
+use Pagekit\Templating\Helper\FinderHelper;
 use Pagekit\Templating\Helper\GravatarHelper;
 use Pagekit\Templating\Helper\MarkdownHelper;
 use Pagekit\Templating\Helper\ScriptHelper;
@@ -38,7 +40,7 @@ return [
 
         $app['tmpl.php'] = function($app) {
 
-            $helpers = [new SlotsHelper, new GravatarHelper];
+            $helpers = [new SlotsHelper, new GravatarHelper, new FinderHelper];
 
             if (isset($app['styles'])) {
                 $helpers[] = new StyleHelper($app['styles']);
@@ -58,6 +60,10 @@ return [
 
             if (isset($app['markdown'])) {
                 $helpers[] = new MarkdownHelper($app['markdown']);
+            }
+
+            if (isset($app['dates'])) {
+                $helpers[] = new DateHelper($app['dates']);
             }
 
             $engine = new PhpEngine($app['tmpl.parser'], new FilesystemLoader([]));
@@ -81,6 +87,8 @@ return [
 
             $engine->addDirective(new FunctionDirective('static_url', [$app['url'], 'getStatic']));
             $engine->addFunction('static_url', [$app['url'], 'getStatic']);
+
+            $engine->addDirective(new FunctionDirective('finder', [new FinderHelper, 'render']));
 
             if (isset($app['styles'])) {
                 $engine->addDirective(new FunctionDirective('style', function($name, $asset = null, $dependencies = [], $options = []) use ($app) {
@@ -111,10 +119,17 @@ return [
                 $engine->addDirective(new TransDirective);
             }
 
+            if (isset($app['dates'])) {
+                $helper = new DateHelper($app['dates']);
+                $engine->addDirective(new FunctionDirective('date', [$helper, 'format']));
+                $engine->addFunction('date', [$helper, 'format']);
+            }
+
             return $engine;
         };
 
         $app->on('system.init', function() use ($app) {
+
             $app['tmpl']->addEngine($app['tmpl.php']);
             $app['tmpl']->addEngine($app['tmpl.razr']);
 

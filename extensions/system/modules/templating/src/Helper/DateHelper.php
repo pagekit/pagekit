@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Templating;
+namespace Pagekit\Templating\Helper;
 
 use Pagekit\Locale\Helper\DateHelper as DateManager;
 use Symfony\Component\Templating\Helper\Helper;

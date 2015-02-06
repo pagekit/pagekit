@@ -5,9 +5,6 @@ namespace Pagekit\System\Event;
 use Pagekit\Application as App;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
-use Pagekit\System\Templating\DateHelper;
-use Pagekit\System\Templating\FinderHelper;
-use Razr\Directive\FunctionDirective;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemListener implements EventSubscriberInterface
@@ -17,40 +14,6 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemLoaded($event, $name, $dispatcher)
     {
-        $scripts = App::scripts();
-        $scripts->register('angular', 'vendor/assets/angular/angular.min.js', 'jquery');
-        $scripts->register('angular-animate', 'vendor/assets/angular-animate/angular-animate.min.js', 'angular');
-        $scripts->register('angular-cookies', 'vendor/assets/angular-cookies/angular-cookies.min.js', 'angular');
-        $scripts->register('angular-loader', 'vendor/assets/angular-loader/angular-loader.min.js', 'angular');
-        $scripts->register('angular-messages', 'vendor/assets/angular-messages/angular-messages.min.js', 'angular');
-        $scripts->register('angular-resource', 'vendor/assets/angular-resource/angular-resource.min.js', 'angular');
-        $scripts->register('angular-route', 'vendor/assets/angular-route/angular-route.min.js', 'angular');
-        $scripts->register('angular-sanitize', 'vendor/assets/angular-sanitize/angular-sanitize.min.js', 'angular');
-        $scripts->register('angular-touch', 'vendor/assets/angular-touch/angular-touch.min.js', 'angular');
-        $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
-        $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', ['requirejs-config']);
-        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js');
-        $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
-        $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('application', 'extensions/system/app/application.js', 'angular');
-        $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
-
-        $helper = new DateHelper(App::dates());
-        App::get('tmpl.php')->addHelpers([$helper]);
-        App::get('tmpl.razr')->addDirective(new FunctionDirective('date', [$helper, 'format']));
-        App::get('tmpl.razr')->addFunction('date', [$helper, 'format']);
-
-        $helper = new FinderHelper();
-        App::get('tmpl.php')->addHelpers([$helper]);
-        App::get('tmpl.razr')->addDirective(new FunctionDirective('finder', [$helper, 'render']));
-
-        App::sections()->set('messages', function() {
-            return App::view('extensions/system/views/messages/messages.razr');
-        });
-
         $dispatcher->dispatch(App::isAdmin() ? 'system.admin' : 'system.site', $event);
     }
 
@@ -123,39 +86,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Resolves requirejs dependencies.
-     *
-     * TODO remove with full switch to angular
-     */
-    public function onKernelResponse()
-    {
-        $require = [];
-        $requeue = [];
-
-        foreach ($scripts = App::scripts() as $script) {
-            if ($script['requirejs']) {
-                $require[] = $script;
-            } elseif (array_key_exists('requirejs', $scripts->resolveDependencies($script))) {
-                $requeue[] = $script;
-            }
-        }
-
-        if (!$requeue) {
-            return;
-        }
-
-        foreach ($require as $script) {
-            $script['dependencies'] = array_merge((array) $script['dependencies'], ['requirejs']);
-            $scripts->queue($script->getName());
-        }
-
-        foreach ($requeue as $script) {
-            $scripts->dequeue($name = $script->getName());
-            $scripts->queue($name);
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -166,8 +96,7 @@ class SystemListener implements EventSubscriberInterface
             'system.link'     => 'onSystemLink',
             'system.loaded'   => 'onSystemLoaded',
             'system.tmpl'     => 'onSystemTmpl',
-            'kernel.request'  => 'onRequestMatched',
-            'kernel.response' => ['onKernelResponse', 15]
+            'kernel.request'  => 'onRequestMatched'
         ];
     }
 }
