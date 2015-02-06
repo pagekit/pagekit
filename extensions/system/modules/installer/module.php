@@ -1,19 +1,14 @@
 <?php
 
-namespace Pagekit\Installer;
-
-use Pagekit\Application as App;
-use Pagekit\System\Extension;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class InstallerExtension extends Extension
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(App $app, array $config)
-    {
-        if (!$config['enabled']) {
+return [
+
+    'name' => 'system/installer',
+
+    'main' => function ($app) {
+
+        if (!$this->config['enabled']) {
             return false;
         }
 
@@ -26,5 +21,26 @@ class InstallerExtension extends Extension
                 $app['translator']->setLocale($locale);
             }
         });
-    }
-}
+
+    },
+
+    'autoload' => [
+
+        'Pagekit\\System\\' => '../system/src',
+        'Pagekit\\Installer\\' => 'src'
+
+    ],
+
+    'controllers' => [
+
+        '@installer: /installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
+
+    ],
+
+    'config' => [
+
+        'enabled' => false
+
+    ]
+
+];
