@@ -19,6 +19,7 @@
         "lusitanian/oauth": "~0.3",
         "nikic/php-parser": "1.*",
         "swiftmailer/swiftmailer": "5.*",
-        "symfony/translation": "2.6.*"
+        "symfony/translation": "2.6.*",
+        "symfony/var-dumper": "2.6.*"
     }
 }
