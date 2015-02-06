@@ -24,6 +24,12 @@ return [
 
     },
 
+    'require' => [
+
+        'system/core'
+
+    ],
+
     'autoload' => [
 
         'Pagekit\\System\\' => '../system/src',

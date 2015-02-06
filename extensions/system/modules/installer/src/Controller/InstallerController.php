@@ -33,7 +33,7 @@ class InstallerController
     }
 
     /**
-     * @Response("extensions/installer/views/install.razr")
+     * @Response("extensions/system/modules/installer/views/install.razr")
      */
     public function indexAction()
     {

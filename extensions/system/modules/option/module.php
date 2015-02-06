@@ -13,7 +13,9 @@ return [
             return new Option($app['db'], $app['cache'], $this->config['table']);
         };
 
-        $app['module']->addLoader(new OptionLoader);
+        if ($app['config.file']) {
+            $app['module']->addLoader(new OptionLoader);
+        }
 
     },
 
