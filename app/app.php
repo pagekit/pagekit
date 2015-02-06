@@ -5,7 +5,6 @@ use Pagekit\Module\Config\ConfigLoader;
 
 $loader  = require __DIR__.'/autoload.php';
 $config  = require __DIR__.'/config.php';
-$modules = ['system/profiler', 'system/core'];
 
 $app = new App($config);
 $app['autoloader'] = $loader;
@@ -13,6 +12,7 @@ $app['autoloader'] = $loader;
 date_default_timezone_set('UTC');
 
 $app['module']->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php']);
+$app['module']->addLoader(new ConfigLoader($app['config']));
 
 if (!$app['config.file']) {
 
@@ -24,15 +24,12 @@ if (!$app['config.file']) {
     }
 
     $app['config']->load(__DIR__.'/config/install.php');
-    $app['module']->addLoader(new ConfigLoader($app['config']));
-    $app['module']->load($modules);
-    $app['modules'] = ['installer'];
+
+    $app['module']->load('system/installer');
 
 } else {
 
-    $app['module']->addLoader(new ConfigLoader($app['config']));
-    $app['module']->load($modules);
-    $app['modules'] = array_merge(['system'], $app['option']->get('system:extensions', []));
+    $app['module']->load('system');
 
 }
 

@@ -28,7 +28,7 @@ return [
 
         $app->on('kernel.boot', function() use ($app) {
 
-            $app['module']->load($app['modules']);
+            $app['module']->load($app['option']->get('system:extensions', []));
 
             if ($app->runningInConsole()) {
                 $app['isAdmin'] = false;

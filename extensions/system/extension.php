@@ -8,6 +8,7 @@ return [
 
     'require' => [
 
+        'system/profiler',
         'system/core',
         'system/comment',
         'system/console',
