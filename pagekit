@@ -10,5 +10,5 @@ if (PHP_SAPI != 'cli') {
 $app = require_once __DIR__.'/app/app.php';
 $app->boot();
 
-$console = new Console($app);
+$console = new Console($app, 'Pagekit', $app['version']);
 $console->run();

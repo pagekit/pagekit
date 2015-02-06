@@ -63,7 +63,7 @@ class BuildCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $vers = $this->getApplication()->getVersion();
-        $root = $this->pagekit['path'];
+        $root = $this->container['path'];
         $path = $this->option('output') ?: $root;
         $dev  = preg_replace_callback('/(\d+)$/', function ($matches) { return $matches[1] + 1; }, $vers).'-dev';
 

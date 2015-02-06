@@ -2,12 +2,6 @@
 
 return [
 
-    'system' => [
-
-        'version' => '0.8.8',
-
-    ],
-
     'system/cache' => [
 
         'caches' => [

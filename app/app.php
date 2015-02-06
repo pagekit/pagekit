@@ -6,13 +6,13 @@ use Pagekit\Module\Config\ConfigLoader;
 $loader  = require __DIR__.'/autoload.php';
 $config  = require __DIR__.'/config.php';
 
-$app = new App($config);
+$app = new App($config['values']);
 $app['autoloader'] = $loader;
 
 date_default_timezone_set('UTC');
 
 $app['module']->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php']);
-$app['module']->addLoader(new ConfigLoader($app['config']));
+$app['module']->addLoader(new ConfigLoader($config));
 
 if (!$app['config.file']) {
 

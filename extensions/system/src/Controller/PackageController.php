@@ -40,10 +40,6 @@ class PackageController
                 throw new Exception(__('Invalid package type.'));
             }
 
-            if ($this->isCore($package->getName())) {
-                throw new Exception(__('Core extensions may not be installed.'));
-            }
-
             Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
 
             $extra = $package->getExtra();
@@ -146,9 +142,7 @@ class PackageController
 
     protected function installExtension($json, $package)
     {
-        if ($this->isCore($name = $package->getName())) {
-            throw new Exception(__('Core extensions may not be installed.'));
-        }
+        $name = $package->getName();
 
         $installer = App::package()->getInstaller('extension');
         $extension = App::module($name);
@@ -197,10 +191,5 @@ class PackageController
         } catch (\Exception $e) {
             throw new Exception(__('Can\'t load json file from package.'));
         }
-    }
-
-    protected function isCore($name)
-    {
-        return in_array($name, App::config('extension.core', []));
     }
 }

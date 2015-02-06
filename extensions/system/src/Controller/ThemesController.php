@@ -49,7 +49,7 @@ class ThemesController extends Controller
             ]);
         }
 
-        return ['head.title' => __('Themes'), 'api' => App::config('api.url'), 'key' => App::option('system:api.key'), 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        return ['head.title' => __('Themes'), 'api' => App::system()->config('api.url'), 'key' => App::option('system:api.key'), 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**

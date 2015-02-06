@@ -10,12 +10,13 @@ return [
 
     'main' => function ($app) {
 
+        $app['version'] = function() {
+            return $this->config['version'];
+        };
+
         $app->factory('finder', function() {
             return Finder::create();
         });
-
-        $app['config']['app.storage'] = ltrim(($app['config']['app.storage'] ?: 'storage'), '/');
-        $app['path.storage']          = $app['config']['locator.paths.storage'] = rtrim($app['path'].'/'.$app['config']['app.storage'], '/');
 
         $app->on('kernel.boot', function() use ($app) {
 
@@ -41,7 +42,7 @@ return [
 
             $app['sections']->register('head', ['renderer' => 'delayed']);
             $app['sections']->prepend('head', function () use ($app) {
-                return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $app['config']['app.version'], $app['router']->getContext()->getBaseUrl(), $app['csrf']->generate());
+                return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $app['version'], $app['router']->getContext()->getBaseUrl(), $app['csrf']->generate());
             });
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
@@ -70,7 +71,8 @@ return [
 
     'config' => [
 
-        'extensions' => []
+        'extensions' => [],
+        'version' => '0.8.8'
 
     ]
 

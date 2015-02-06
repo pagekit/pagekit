@@ -25,13 +25,6 @@ class ExtensionTranslateCommand extends Command
     protected $description = 'Generates extension\'s translation .pot/.po/.php files';
 
     /**
-     * The core extensions.
-     *
-     * @var array
-     */
-    protected $extensions;
-
-    /**
      * Node visitors.
      *
      * @var NodeVisitor[]
@@ -60,10 +53,9 @@ class ExtensionTranslateCommand extends Command
     {
         parent::initialize($input, $output);
 
-        $this->extensions = $this->pagekit['config']['extension.core'];
         $this->visitors   = [
-            'razr' => new RazrNodeVisitor($this->pagekit['tmpl.razr']),
-            'php'  => new PhpNodeVisitor($this->pagekit['tmpl.php'])
+            'razr' => new RazrNodeVisitor($this->container['tmpl.razr']),
+            'php'  => new PhpNodeVisitor($this->container['tmpl.php'])
         ];
         $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
     }
@@ -79,7 +71,7 @@ class ExtensionTranslateCommand extends Command
 
         $this->line("Extracting strings for extension '$extension'");
 
-        chdir($this->pagekit['path']);
+        chdir($this->container['path']);
 
         if (!is_dir($languages)) {
             mkdir($languages, 0777, true);
@@ -164,7 +156,7 @@ class ExtensionTranslateCommand extends Command
      */
     protected function getPath($path)
     {
-        $root = $this->pagekit['path.extensions'];
+        $root = $this->container['path.extensions'];
 
         if (!is_dir($path = "$root/$path")) {
             $this->abort("Can't find extension in '$path'");
@@ -241,7 +233,7 @@ EOD;
      */
     protected function getRelativePath($path)
     {
-        $root = $this->pagekit['path'];
+        $root = $this->container['path'];
 
         if (0 === strpos($path, $root)) {
             $path = ltrim(str_replace('\\', '/', substr($path, strlen($root))), '/');

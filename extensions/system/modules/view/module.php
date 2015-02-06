@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\ViewListener;
 
 return [

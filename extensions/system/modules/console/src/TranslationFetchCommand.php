@@ -99,7 +99,7 @@ class TranslationFetchCommand extends Command
      */
     protected function getPath($path)
     {
-        $root = $this->pagekit['path.extensions'];
+        $root = $this->container['path.extensions'];
 
         if (!is_dir($path = "$root/$path")) {
             $this->abort("Can't find extension in '$path'");

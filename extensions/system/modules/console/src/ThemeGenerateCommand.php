@@ -27,7 +27,7 @@ class ThemeGenerateCommand extends Command
     {
         $name = $this->argument('extension');
 
-        if (is_dir($path = $this->pagekit['path.themes']."/$name")) {
+        if (is_dir($path = $this->container['path.themes']."/$name")) {
             $this->abort("Theme already exists '$path'");
         }
 

@@ -46,7 +46,7 @@ class ExtensionComposerCommand extends Command
         $name   = $this->argument('extension');
         $update = $this->option('update');
 
-        if (!is_dir($path = $this->pagekit['path.extensions']."/$name") && file_exists("$path/extension.json")) {
+        if (!is_dir($path = $this->container['path.extensions']."/$name") && file_exists("$path/extension.json")) {
             $this->abort("Extension not exists '$path'");
         }
 
@@ -64,7 +64,7 @@ class ExtensionComposerCommand extends Command
         $locker   = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($package['composer'])));
         $composer->setLocker($locker);
 
-        $installed = new JsonFile($this->pagekit['path'].'/vendor/composer/installed.json');
+        $installed = new JsonFile($this->container['path'].'/vendor/composer/installed.json');
         $internal  = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
@@ -82,12 +82,12 @@ class ExtensionComposerCommand extends Command
      */
     protected function loadComposer($path)
     {
-        $composer = $this->pagekit['path.temp'].'/composer.phar';
+        $composer = $this->container['path.temp'].'/composer.phar';
         $memory   = trim(ini_get('memory_limit'));
 
         // set environment
-        putenv('COMPOSER_HOME='.$this->pagekit['path.temp']);
-        putenv('COMPOSER_CACHE_DIR='.$this->pagekit['path.cache'].'/composer');
+        putenv('COMPOSER_HOME='.$this->container['path.temp']);
+        putenv('COMPOSER_CACHE_DIR='.$this->container['path.cache'].'/composer');
         putenv('COMPOSER_VENDOR_DIR='.$path.'/vendor');
 
         // set memory limit, if < 512M

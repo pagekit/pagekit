@@ -22,7 +22,7 @@ class UpdateController
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update'), 'api' => App::config('api.url'), 'channel' => App::option('system:app.release_channel', 'stable'), 'version' => App::config('app.version')];
+        return ['head.title' => __('Update'), 'api' => App::system()->config('api.url'), 'channel' => App::system()->config('release_channel', 'stable'), 'version' => App::version()];
     }
 
     /**

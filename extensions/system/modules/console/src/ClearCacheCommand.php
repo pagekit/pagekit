@@ -23,6 +23,6 @@ class ClearCacheCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->pagekit['system']->doClearCache();
+        $this->container['system']->doClearCache();
     }
 }

@@ -156,7 +156,7 @@ class InstallerController
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('app.key', App::get('auth.random')->generateString(64));
+                $configuration->set('system.key', App::get('auth.random')->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 
@@ -191,7 +191,8 @@ class InstallerController
      */
     protected function createDatabase()
     {
-        $params = App::config('database.connections')[App::config('database.default')];
+        $module = App::module('framework/database');
+        $params = $module->config('database.connections')[$module->config('database.default')];
         $dbname = App::db()->quoteIdentifier($params['dbname']);
 
         unset($params['dbname']);

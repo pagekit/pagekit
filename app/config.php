@@ -21,6 +21,6 @@ if ($values['config.file']) {
     $config->load($values['config.file']);
 }
 
-$values['config'] = $config;
+$config->set('values', $values);
 
-return $values;
+return $config;

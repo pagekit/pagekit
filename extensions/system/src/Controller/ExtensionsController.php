@@ -22,7 +22,7 @@ class ExtensionsController extends Controller
         $packagesJson = [];
 
         foreach (App::package()->getRepository('extension')->getPackages() as $package) {
-            if (!$this->isCore($name = $package->getName())) {
+            if ('system' != $name = $package->getName()) {
                 $packages[$name] = $package;
                 $packagesJson[$name] = $package->getVersion();
             }
@@ -34,7 +34,7 @@ class ExtensionsController extends Controller
             ]);
         }
 
-        return ['head.title' => __('Extensions'), 'api' => App::config('api.url'), 'key' => App::option('system:api.key'), 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        return ['head.title' => __('Extensions'), 'api' => App::system()->config('api.url'), 'key' => App::system()->config('api.key'), 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
     }
 
     /**
@@ -45,10 +45,6 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if ($this->isCore($name)) {
-                throw new Exception(__('Core extensions may not be enabled.'));
-            }
-
             ini_set('display_errors', 0);
             $handler = App::exception()->setHandler(function($exception) {
 
@@ -58,7 +54,7 @@ class ExtensionsController extends Controller
 
                 $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
 
-                if (App::config('framework/application.debug')) {
+                if (App::module('framework')->config('debug')) {
                     $message .= '<br><br>'.$exception->getMessage();
                 }
 
@@ -95,10 +91,6 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if ($this->isCore($name)) {
-                throw new Exception(__('Core extensions may not be disabled.'));
-            }
-
             if (!$extension = App::module($name)) {
                 throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
             }
@@ -122,10 +114,6 @@ class ExtensionsController extends Controller
     public function uninstallAction($name)
     {
         try {
-
-            if ($this->isCore($name)) {
-                throw new Exception(__('Core extensions may not be uninstalled.'));
-            }
 
             if (!App::module($name)) {
                 App::module()->load($name);
@@ -206,10 +194,5 @@ class ExtensionsController extends Controller
         App::option()->set('system/core:settings', $settings, true);
 
         $extension->disable();
-    }
-
-    protected function isCore($name)
-    {
-        return in_array($name, App::config('extension.core', []));
     }
 }

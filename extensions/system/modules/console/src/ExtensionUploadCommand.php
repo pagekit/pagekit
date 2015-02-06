@@ -57,7 +57,7 @@ class ExtensionUploadCommand extends Command
         parent::initialize($input, $output);
 
         $this->package = $this->argument('name');
-        $this->path    = $this->pagekit['path.extensions'];
+        $this->path    = $this->container['path.extensions'];
     }
 
     /**
@@ -65,14 +65,14 @@ class ExtensionUploadCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $temp = $this->pagekit['path'].'/app/temp';
-        $api  = $this->pagekit['config']['api.url'];
+        $temp = $this->container['path'].'/app/temp';
+        $api  = $this->container['system']->config('api.url');
 
         if (!is_dir($path = "{$this->path}/{$this->package}")) {
             $this->abort("Can't find {$this->json} in '{$this->path}'");
         }
 
-        if (!$key = $this->pagekit['option']->get('system:api.key')) {
+        if (!$key = $this->container['option']->get('system:api.key')) {
             $this->abort("Please set your api key");
         }
 

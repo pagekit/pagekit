@@ -112,6 +112,7 @@ return [
 
         ],
 
+        'key' => '',
         'frontpage' => '',
 
         'site_title' => '',

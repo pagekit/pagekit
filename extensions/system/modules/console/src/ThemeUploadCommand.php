@@ -29,6 +29,6 @@ class ThemeUploadCommand extends ExtensionUploadCommand
     {
         parent::initialize($input, $output);
 
-        $this->path = $this->pagekit['path.themes'];
+        $this->path = $this->container['path.themes'];
     }
 }

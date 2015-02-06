@@ -62,7 +62,7 @@ class SystemController extends Controller
      */
     public function storageAction()
     {
-        return ['head.title' => __('Storage'), 'root' => App::config('app.storage'), 'mode' => 'write'];
+        return ['head.title' => __('Storage'), 'root' => App::system()->config('storage'), 'mode' => 'write'];
     }
 
     /**
