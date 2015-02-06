@@ -26,7 +26,8 @@ return [
 
     'require' => [
 
-        'system/core'
+        'system/core',
+        'system/migration'
 
     ],
 
@@ -45,7 +46,8 @@ return [
 
     'config' => [
 
-        'enabled' => false
+        'enabled'    => false,
+        'sampleData' => __DIR__.'/sample_data.sql'
 
     ]
 

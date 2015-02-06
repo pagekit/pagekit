@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\User\Model\RoleInterface;
-
 return [
 
     'up' => function() use ($app) {
@@ -48,9 +46,9 @@ return [
                 $table->addIndex(['name', 'priority'], 'SYSTEM_ROLE_NAME_PRIORITY');
             });
 
-            $db->insert('@system_role', ['id' => RoleInterface::ROLE_ANONYMOUS, 'name' => 'Anonymous', 'priority' => 0]);
-            $db->insert('@system_role', ['id' => RoleInterface::ROLE_AUTHENTICATED, 'name' => 'Authenticated', 'priority' => 1]);
-            $db->insert('@system_role', ['id' => RoleInterface::ROLE_ADMINISTRATOR, 'name' => 'Administrator', 'priority' => 2]);
+            $db->insert('@system_role', ['id' => 1, 'name' => 'Anonymous', 'priority' => 0]);
+            $db->insert('@system_role', ['id' => 2, 'name' => 'Authenticated', 'priority' => 1]);
+            $db->insert('@system_role', ['id' => 3, 'name' => 'Administrator', 'priority' => 2]);
         }
 
         if ($util->tableExists('@system_session') === false) {

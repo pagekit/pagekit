@@ -1,8 +1,8 @@
-INSERT INTO `@system_menu` (`id`, `name`) VALUES
-(1, 'Main');
+# INSERT INTO `@system_menu` (`id`, `name`) VALUES
+# (1, 'Main');
 
-INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `roles`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
-(1, 1, 0, NULL, 'Home', '/', 0, 1, 0, '', '[]');
+# INSERT INTO `@system_menu_item` (`id`, `menu_id`, `parent_id`, `roles`, `name`, `url`, `priority`, `status`, `depth`, `pages`, `data`) VALUES
+# (1, 1, 0, NULL, 'Home', '/', 0, 1, 0, '', '[]');
 
 # INSERT INTO `@page_page` (`id`, `roles`, `url`, `title`, `status`, `content`, `data`) VALUES
 # (1, NULL, 'home', 'Home', 1, 'Now you are ready to build awesome websites and benefit from the latest web technologies behind Pagekit. This is an alpha version, which means the system is still in development.

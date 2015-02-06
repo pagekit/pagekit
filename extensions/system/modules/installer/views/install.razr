@@ -42,7 +42,7 @@
                         <div class="uk-form-row">
                             <label for="form-dbdriver" class="uk-form-label">@trans('Driver')</label>
                             <div class="uk-form-controls">
-                                <select id="form-dbdriver" class="uk-width-1-1" name="config[database.default]">
+                                <select id="form-dbdriver" class="uk-width-1-1" name="config[framework/database][default]">
                                     <option value="mysql" selected>MySql</option>
                                     <option value="sqlite">SQLite</option>
                                 </select>
@@ -53,7 +53,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbhost" class="uk-form-label">@trans('Hostname')</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="config[database.connections.mysql.host]" value="localhost" required>
+                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="config[framework/database][connections][mysql][host]" value="localhost" required>
                                     <p class="uk-form-help-block uk-text-danger">@trans('Host cannot be blank.')</p>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbuser" class="uk-form-label">@trans('User')</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="config[database.connections.mysql.user]" value="" required>
+                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="config[framework/database][connections][mysql][user]" value="" required>
                                     <p class="uk-form-help-block uk-text-danger">@trans('User cannot be blank.')</p>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <label for="form-mysql-dbpassword" class="uk-form-label">@trans('Password')</label>
                                 <div class="uk-form-controls">
                                     <div class="uk-form-password uk-width-1-1">
-                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="config[database.connections.mysql.password]" value="" autocomplete="off">
+                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="config[framework/database][connections][mysql][password]" value="" autocomplete="off">
                                         <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbname" class="uk-form-label">@trans('Database Name')</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="config[database.connections.mysql.dbname]" value="pagekit" required>
+                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="config[framework/database][connections][mysql][dbname]" value="pagekit" required>
                                     <p class="uk-form-help-block uk-text-danger">@trans('Database name cannot be blank.')</p>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbprefix" class="uk-form-label">@trans('Table Prefix')</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="config[database.connections.mysql.prefix]" value="pk_">
+                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="config[framework/database][connections][mysql][prefix]" value="pk_">
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             <div class="uk-form-row">
                                 <label for="form-sqlite-dbprefix" class="uk-form-label">@trans('Table Prefix')</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="config[database.connections.sqlite.prefix]" value="pk_">
+                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="config[framework/database][connections][sqlite][prefix]" value="pk_">
                                 </div>
                             </div>
                         </div>

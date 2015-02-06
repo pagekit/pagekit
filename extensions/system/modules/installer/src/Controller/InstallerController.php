@@ -7,7 +7,6 @@ use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
 use Pagekit\Config\Config;
-use Pagekit\User\Model\RoleInterface;
 
 /**
  * @Route("/installer")
@@ -54,8 +53,10 @@ class InstallerController
             try {
 
                 if (!$this->config) {
-                    foreach ($config as $key => $value) {
-                        App::config()->set($key, $value);
+                    foreach ($config as $name => $values) {
+                        if ($module = App::module($name)) {
+                            $module->config = array_replace_recursive($module->config, $values);
+                        }
                     }
                 }
 
@@ -102,8 +103,6 @@ class InstallerController
 
         try {
 
-            App::module()->load(['blog', 'page', 'system']);
-
             if ('no-connection' == $status) {
                 throw new Exception(__('No database connection.'));
             }
@@ -126,24 +125,17 @@ class InstallerController
 
                 $id = App::db()->lastInsertId();
 
-                App::db()->insert('@system_user_role', [
-                    'user_id' => $id,
-                    'role_id' => RoleInterface::ROLE_AUTHENTICATED
-                ]);
+                App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 2]);
+                App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 3]);
 
-                App::db()->insert('@system_user_role', [
-                    'user_id' => $id,
-                    'role_id' => RoleInterface::ROLE_ADMINISTRATOR
-                ]);
+                if ($sampleData = App::module('system/installer')->config('sampleData')) {
 
-                App::module('system')->enable();
+                    $sql = file_get_contents($sampleData);
 
-                // sample data
-                $sql = file_get_contents('extensions/installer/sample_data.sql');
-
-                foreach (explode(';', $sql) as $query) {
-                    if ($query = trim($query)) {
-                        App::db()->executeUpdate($query);
+                    foreach (explode(';', $sql) as $query) {
+                        if ($query = trim($query)) {
+                            App::db()->executeUpdate($query);
+                        }
                     }
                 }
             }
