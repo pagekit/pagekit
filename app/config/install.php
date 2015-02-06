@@ -2,9 +2,9 @@
 
 return [
 
-    'app' => [
+    'installer' => [
 
-        'installer' => true
+        'enabled' => true
 
     ],
 

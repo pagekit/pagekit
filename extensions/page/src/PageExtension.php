@@ -4,7 +4,6 @@ namespace Pagekit\Page;
 
 use Pagekit\Application as App;
 use Pagekit\Page\Event\NodeListener;
-use Pagekit\Site\Event\ConfigEvent;
 use Pagekit\Site\Event\TypeEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
@@ -16,7 +15,7 @@ class PageExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function main(App $app, array $config)
+    public function main(App $app)
     {
         $app->subscribe(new NodeListener);
 
@@ -34,7 +33,7 @@ class PageExtension extends Extension
             ]);
         });
 
-        $app->on('site.config', function (ConfigEvent $event) use ($app) {
+        $app->on('site.config', function () use ($app) {
             $app['scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
         });
 

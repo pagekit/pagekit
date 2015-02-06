@@ -22,7 +22,7 @@ class WidgetListener implements EventSubscriberInterface
 
     public function onWidgetEdit(WidgetEditEvent $event)
     {
-        if (!$theme = App::get('theme.site') or !$tmpl = $theme->getConfig('parameters.widgets.view')) {
+        if (!$theme = App::get('theme.site') or !$tmpl = $theme->config('widgets.view')) {
             return;
         }
 
@@ -79,6 +79,6 @@ class WidgetListener implements EventSubscriberInterface
 
     protected function getOptionsName()
     {
-        return App::get('theme.site')->getName().':settings.widgets';
+        return App::get('theme.site')->name.':settings.widgets';
     }
 }

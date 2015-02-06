@@ -6,7 +6,7 @@ return [
 
     'name' => 'system/oauth',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['oauth'] = function() {
             return new OAuthHelper;
@@ -17,8 +17,8 @@ return [
         });
 
 
-        $app->on('system.settings.edit', function ($event) use ($app, $config) {
-            $event->add('system/oauth', __('OAuth'), $app['view']->render('extensions/system/modules/oauth/views/admin/settings.razr', ['config' => $config]));
+        $app->on('system.settings.edit', function ($event) use ($app) {
+            $event->add('system/oauth', __('OAuth'), $app['view']->render('extensions/system/modules/oauth/views/admin/settings.razr', ['config' => $this->config]));
         });
 
     },

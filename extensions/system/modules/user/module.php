@@ -14,7 +14,7 @@ return [
 
     'name' => 'system/user',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app->subscribe(
             new AccessListener,
@@ -54,8 +54,8 @@ return [
             $event->register(new UserWidget);
         });
 
-        $app->on('system.settings.edit', function ($event) use ($app, $config) {
-            $event->add('system/user', __('User'), $app['view']->render('extensions/system/modules/user/views/admin/settings.razr', ['config' => $config]));
+        $app->on('system.settings.edit', function ($event) use ($app) {
+            $event->add('system/user', __('User'), $app['view']->render('extensions/system/modules/user/views/admin/settings.razr', ['config' => $this->config]));
         });
 
     },
@@ -135,7 +135,11 @@ return [
 
     ],
 
-    'registration' => 'admin',
-    'require_verification' => true
+    'config' => [
+
+        'registration' => 'admin',
+        'require_verification' => true
+
+    ]
 
 ];

@@ -13,7 +13,9 @@ class InstallerExtension extends Extension
      */
     public function __construct(App $app, array $config)
     {
-        parent::__construct($app, $config);
+        if (!$config['enabled']) {
+            return false;
+        }
 
         $app->error(function (NotFoundHttpException $e) use ($app) {
             return $app['response']->redirect('@installer/installer');

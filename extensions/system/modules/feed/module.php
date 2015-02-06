@@ -6,7 +6,7 @@ return [
 
     'name' => 'system/feed',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['feed'] = function () {
             return new FeedFactory;

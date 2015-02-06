@@ -13,7 +13,7 @@ class HelloExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function main(App $app, array $config)
+    public function main(App $app)
     {
         $app->subscribe(new HelloListener());
 

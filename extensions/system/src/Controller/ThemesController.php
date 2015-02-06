@@ -25,7 +25,7 @@ class ThemesController extends Controller
 
             $name = $package->getName();
 
-            if (App::config('theme.site') == $name) {
+            if (App::config('system:settings.theme.site') == $name) {
                 $current = $package;
             }
 
@@ -73,14 +73,14 @@ class ThemesController extends Controller
 
             App::module()->load($name);
 
-            if (!$theme = App::module()->get($name)) {
+            if (!$theme = App::module($name)) {
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
-            // TODO boot is no longer part of the Extension
-            $theme->boot(App::getInstance());
+            $settings = App::option('system:settings', []);
+            $settings['theme.site'] = $theme->name;
+            App::option()->set('system:settings', $settings, true);
 
-            App::option()->set('system:theme.site', $theme->getName(), true);
             App::exception()->setHandler($handler);
 
             return ['message' => __('Theme enabled.')];
@@ -121,11 +121,11 @@ class ThemesController extends Controller
     {
         try {
 
-            if (!$theme = App::module()->get($name) or !$tmpl = $theme->getConfig('parameters.settings.view')) {
+            if (!$theme = App::module($name) or !$tmpl = $theme->config('settings.view')) {
                 throw new Exception(__('Invalid theme.'));
             }
 
-            $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->getParams()));
+            $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->config));
 
             return App::view($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 

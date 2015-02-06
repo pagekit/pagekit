@@ -80,13 +80,26 @@ return [
 
     ],
 
-    'dashboard' => [
+    'config' => [
 
-        'default' => [
-            '1' => [
-                'type' => 'widget.user'
+        'dashboard' => [
+
+            'default' => [
+                '1' => [
+                    'type' => 'widget.user'
+                ]
             ]
-        ]
+    
+        ],
+
+        'site_title' => '',
+        'site_description' => '',
+        'maintenance.enabled' => false,
+        'maintenance.msg' => '',
+        'api.key' => '',
+        'release_channel' => 'stable',
+        'storage' => '',
+        'theme.site' => 'alpha'
 
     ]
 

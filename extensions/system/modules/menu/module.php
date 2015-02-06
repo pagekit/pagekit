@@ -7,7 +7,7 @@ return [
 
     'name' => 'system/menu',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['menus'] = function() {
             return new MenuProvider;
@@ -25,9 +25,9 @@ return [
         });
 
         $app->on('system.admin_menu', function ($event) use ($app) {
-            foreach ($app['module']->getConfigs() as $config) {
-                if (isset($config['menu'])) {
-                    $event->register($config['menu']);
+            foreach ($app['module']->all() as $module) {
+                if (isset($module->menu)) {
+                    $event->register($module->menu);
                 }
             }
         });

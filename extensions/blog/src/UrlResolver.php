@@ -34,10 +34,10 @@ class UrlResolver implements ParamsResolverInterface
     {
         $extension = App::module('blog');
 
-        $this->permalink = $extension->getParams('permalink');
+        $this->permalink = $extension->config('permalink');
 
         if ($this->permalink == 'custom') {
-            $this->permalink = $extension->getParams('permalink.custom');
+            $this->permalink = $extension->config('permalink.custom');
         }
 
         $this->cacheEntries = App::cache()->fetch(self::CACHE_KEY) ?: [];

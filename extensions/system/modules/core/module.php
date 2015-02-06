@@ -2,12 +2,17 @@
 
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
+use Symfony\Component\Finder\Finder;
 
 return [
 
     'name' => 'system/core',
 
     'main' => function ($app) {
+
+        $app->factory('finder', function() {
+            return Finder::create();
+        });
 
         $app->extend('view', function ($view, $app) {
 

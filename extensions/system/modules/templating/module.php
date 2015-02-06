@@ -22,7 +22,7 @@ return [
 
     'name' => 'system/templating',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['tmpl'] = function() {
             return new DelegatingEngine;

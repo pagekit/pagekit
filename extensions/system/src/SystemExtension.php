@@ -12,7 +12,6 @@ use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener as ThemeWidgetListener;
 use Pagekit\System\Helper\SystemInfoHelper;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class SystemExtension extends Extension
@@ -20,9 +19,9 @@ class SystemExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function main(App $app, array $config)
+    public function main(App $app)
     {
-        if (!(isset($app['config']) ? $app['config']['app.debug'] : true)) {
+        if (!$app['module']['framework/application']->config('debug')) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
@@ -37,8 +36,6 @@ class SystemExtension extends Extension
             new ThemeWidgetListener
         );
 
-        $this->mergeOptions();
-
         $app['db.em']; // -TODO- fix me
 
         $app['system'] = $this;
@@ -46,10 +43,6 @@ class SystemExtension extends Extension
         $app['systemInfo'] = function() {
             return new SystemInfoHelper;
         };
-
-        $app->factory('finder', function() {
-            return Finder::create();
-        });
     }
 
     /**
@@ -102,25 +95,6 @@ class SystemExtension extends Extension
             foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
                 App::file()->delete($file->getPathname());
             }
-        }
-    }
-
-    /**
-     * TODO remove
-     */
-    protected function mergeOptions()
-    {
-        $keys = [
-            'app.frontpage',
-            'app.site_description',
-            'app.site_title',
-            'maintenance.enabled',
-            'maintenance.msg',
-            'theme.site'
-        ];
-
-        foreach ($keys as $key) {
-            App::config()->set($key, App::option("system:$key", App::config($key)));
         }
     }
 }

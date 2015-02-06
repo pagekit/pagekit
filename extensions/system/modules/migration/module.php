@@ -6,11 +6,11 @@ return [
 
     'name' => 'system/migration',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['migrator'] = function ($app) {
 
-            $migrator = new Migrator();
+            $migrator = new Migrator;
             $migrator->addGlobal('app', $app);
 
             return $migrator;

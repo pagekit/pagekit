@@ -8,7 +8,7 @@ return [
 
     'name' => 'system/widget',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app->subscribe(
             new WidgetListener
@@ -16,6 +16,21 @@ return [
 
         $app->on('system.widget', function ($event) {
             $event->register(new TextWidget);
+        });
+
+        $app->on('system.positions', function($event) use ($app) {
+
+            foreach ($app['module']->getConfigs() as $config) {
+                if (!isset($config['positions']) || !is_array($config['positions'])) {
+                    continue;
+                }
+
+                foreach ($config['positions'] as $id => $position) {
+                    list($name, $description) = array_merge((array) $position, ['']);
+                    $event->register($id, $name, $description);
+                }
+            }
+
         });
 
     },

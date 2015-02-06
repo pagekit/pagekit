@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Alpha\AlphaTheme;
-
 /**
  * Theme configuration file.
  *
@@ -15,11 +13,7 @@ return [
     /**
      * The main function.
      */
-    'main' => function ($app, $config) {
-
-        return new AlphaTheme($app, $config);
-
-    },
+    'main' => 'Pagekit\\Alpha\\AlphaTheme',
 
     /**
      * Namespace to autoload theme classes.
@@ -44,15 +38,10 @@ return [
     /**
      * Define default settings values and views where end users can change these values.
      */
-    'parameters' => [
+    'config' => [
 
-        'settings' => [
-            'view' => 'themes/alpha/views/admin/settings.razr'
-        ],
-
-        'widgets'  => [
-            'view' => 'themes/alpha/views/admin/widgets/edit.razr'
-        ]
+        'settings.view' => 'themes/alpha/views/admin/settings.razr',
+        'widgets.view' => 'themes/alpha/views/admin/widgets/edit.razr'
 
     ],
 

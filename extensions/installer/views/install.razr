@@ -167,7 +167,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitename" class="uk-form-label">@trans('Name')</label>
                             <div class="uk-form-controls">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="option[system:app.site_title]" required>
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="option[system:settings][site_title]" required>
                                 <p class="uk-form-help-block uk-text-danger">@trans('Site name cannot be blank.')</p>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">@trans('Description')</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" name="option[system:app.site_description]"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" name="option[system:settings][site_description]"></textarea>
                             </div>
                         </div>
 

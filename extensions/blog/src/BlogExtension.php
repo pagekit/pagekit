@@ -18,7 +18,7 @@ class BlogExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function main(App $app, array $config)
+    public function main(App $app)
     {
         $app->subscribe(
             new RouteListener,
@@ -27,7 +27,8 @@ class BlogExtension extends Extension
         );
 
         $app->on('system.init', function() use ($app) {
-            $app['config']->set('app.frontpage', $app['config']->get('app.frontpage') ?: '@blog/site');
+            // TODO fix setting
+            $app['config']->set('system:settings.frontpage', $app['config']->get('system:settings.frontpage') ?: '@blog/site');
         }, 10);
 
         $app->on('system.link', function(LinkEvent $event) {

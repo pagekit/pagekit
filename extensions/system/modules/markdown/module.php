@@ -6,7 +6,7 @@ return [
 
     'name' => 'system/markdown',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['markdown'] = function() {
             return new Markdown;

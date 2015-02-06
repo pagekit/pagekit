@@ -13,13 +13,13 @@ return [
 
     'name' => 'system/locale',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         require __DIR__.'/src/functions.php';
 
-        $app['translator'] = function () use ($config) {
+        $app['translator'] = function () {
 
-            $translator = new Translator($config['locale']);
+            $translator = new Translator($this->config['locale']);
             $translator->addLoader('php', new PhpFileLoader);
             $translator->addLoader('mo', new MoFileLoader);
             $translator->addLoader('po', new PoFileLoader);
@@ -36,10 +36,10 @@ return [
             return new CountryHelper;
         };
 
-        $app['dates'] = function () use ($config) {
+        $app['dates'] = function () {
 
             $manager = new DateHelper;
-            $manager->setTimezone($config['timezone']);
+            $manager->setTimezone($this->config['timezone']);
             $manager->setFormats([
                 DateHelper::NONE      => '',
                 DateHelper::FULL      => __('DATE_FULL'),
@@ -52,15 +52,15 @@ return [
             return $manager;
         };
 
-        $app->on('system.init', function () use ($app, $config) {
+        $app->on('system.init', function () use ($app) {
 
-            $app['translator']->setLocale($locale = $config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
+            $app['translator']->setLocale($locale = $this->config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
 
-            foreach ($app['module']->getConfigs() as $config) {
+            foreach ($app['module']->all() as $module) {
 
                 $domains = [];
 
-                foreach (glob($config['path'].'/languages/'.$locale.'/*') ?: [] as $file) {
+                foreach (glob($module->path.'/languages/'.$locale.'/*') ?: [] as $file) {
 
                     $format = substr(strrchr($file, '.'), 1);
                     $domain = basename($file, '.'.$format);
@@ -94,7 +94,7 @@ return [
             ], 'date');
         });
 
-        $app->on('system.settings.edit', function ($event) use ($app, $config) {
+        $app->on('system.settings.edit', function ($event) use ($app) {
 
             $countries = $app['countries'];
             $languages = $app['languages'];
@@ -126,7 +126,7 @@ return [
                 $timezones[$region][$timezone] = str_replace('_', ' ', $name);
             }
 
-            $event->add('system/locale', __('Localization'), $app['view']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $config, 'locales' => $locales, 'timezones' => $timezones]));
+            $event->add('system/locale', __('Localization'), $app['view']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $this->config, 'locales' => $locales, 'timezones' => $timezones]));
         });
 
     },
@@ -137,8 +137,12 @@ return [
 
     ],
 
-    'timezone'     => 'UTC',
-    'locale'       => 'en_US',
-    'locale_admin' => 'en_US'
+    'config' => [
+
+        'timezone'     => 'UTC',
+        'locale'       => 'en_US',
+        'locale_admin' => 'en_US'
+
+    ]
 
 ];

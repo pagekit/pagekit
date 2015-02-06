@@ -12,23 +12,15 @@ class ThemeListener implements EventSubscriberInterface
      */
     public function onSystemInit()
     {
-        try {
+        $app = App::getInstance();
+        $theme = $app['module']['system']->config('theme.site');
 
-            $app = App::getInstance();
-            $theme = $app['config']->get('theme.site');
-
-            $app['module']->load($theme);
-            $app['theme.site'] = $app['module']->get($theme);
-
-        } catch (\Exception $e) {}
-    }
-
-    /**
-     * Sets the site layout.
-     */
-    public function onSystemSite()
-    {
-        App::view()->setLayout(App::get('theme.site')->getLayout());
+        $app['module']->load($theme);
+        if ($app['theme.site'] = $app['module']->get($theme)) {
+            $app->on('system.site', function () use ($app) {
+                $app['view']->setLayout($app['theme.site']->getLayout());
+            });
+        }
     }
 
     /**
@@ -37,8 +29,7 @@ class ThemeListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.init'  => ['onSystemInit', 10],
-            'system.site'  => 'onSystemSite'
+            'system.init' => ['onSystemInit', 10]
         ];
     }
 }

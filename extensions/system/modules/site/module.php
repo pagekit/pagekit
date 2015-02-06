@@ -9,7 +9,7 @@ return [
 
     'name' => 'system/site',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app->subscribe(
             new AliasListener,
@@ -29,6 +29,19 @@ return [
                 $event->register($menu['id'], $menu['label']);
             }
         }, -8);
+
+        $app->on('site.menus', function($event) use ($app) {
+            foreach ($app['module']->all() as $module) {
+
+                if (!isset($module->menus)) {
+                    continue;
+                }
+
+                foreach ($module->menus as $id => $menu) {
+                    $event->register($id, $menu, ['fixed' => true]);
+                }
+            }
+        });
 
     },
 

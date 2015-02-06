@@ -7,7 +7,7 @@ return [
 
     'name' => 'system/dashboard',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app->on('system.dashboard', function ($event) {
             $event->register(new FeedWidget);

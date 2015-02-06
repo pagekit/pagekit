@@ -58,7 +58,7 @@ class ExtensionsController extends Controller
 
                 $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
 
-                if (App::config('app.debug')) {
+                if (App::config('framework/application.debug')) {
                     $message .= '<br><br>'.$exception->getMessage();
                 }
 
@@ -158,11 +158,11 @@ class ExtensionsController extends Controller
     {
         try {
 
-            if (!$extension = App::module($name) or !$tmpl = $extension->getConfig('parameters.settings.view')) {
+            if (!$extension = App::module($name) or !$tmpl = $extension->config('settings.view')) {
                 throw new Exception(__('Invalid extension.'));
             }
 
-            $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->getParams()));
+            $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->config));
             $title = App::package()->getRepository('extension')->findPackage($extension->getName())->getTitle();
 
             return App::view($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);

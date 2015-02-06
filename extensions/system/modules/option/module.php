@@ -7,10 +7,10 @@ return [
 
     'name' => 'system/option',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
-        $app['option'] = function ($app) use ($config) {
-            return new Option($app['db'], $app['cache'], $config['table']);
+        $app['option'] = function ($app) {
+            return new Option($app['db'], $app['cache'], $this->config['table']);
         };
 
         $app['module']->addLoader(new OptionLoader);
@@ -25,6 +25,10 @@ return [
 
     ],
 
-    'table' => '@system_option'
+    'config' => [
+
+        'table' => '@system_option'
+
+    ]
 
 ];

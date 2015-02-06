@@ -1,18 +1,10 @@
 <?php
 
-use Pagekit\Installer\InstallerExtension;
-
 return [
 
     'name' => 'installer',
 
-    'main' => function ($app, $config) {
-
-        if ($app['config']['app.installer']) {
-            return new InstallerExtension($app, $config);
-        }
-
-    },
+    'main' => 'Pagekit\\Installer\\InstallerExtension',
 
     'autoload' => [
 
@@ -24,6 +16,12 @@ return [
     'controllers' => [
 
         '@installer: /installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
+
+    ],
+
+    'config' => [
+
+        'enabled' => false
 
     ]
 

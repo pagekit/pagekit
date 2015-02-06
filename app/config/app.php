@@ -2,25 +2,29 @@
 
 return [
 
-    'app' => [
+    'system' => [
 
         'version' => '0.8.8',
 
-        'debug' => true,
+        'storage' => '/storage',
 
-        'storage' => '/storage'
+        'theme' => [
 
-    ],
+            'site' => 'alpha'
 
-    'api' => [
+        ],
 
-        'url' => 'http://pagekit.com/api'
+        'api' => [
+
+            'url' => 'http://pagekit.com/api'
+
+        ]
 
     ],
 
     'system/cache' => [
 
-        'config' => [
+        'caches' => [
 
             'cache' => [
 
@@ -78,19 +82,13 @@ return [
 
     'framework/filesystem' => [
 
-        'config.path' => '%path%'
+        'path' => '%path%'
 
     ],
 
     'extension' => [
 
         'core' => ['installer', 'system']
-
-    ],
-
-    'theme' => [
-
-        'site' => 'alpha'
 
     ]
 

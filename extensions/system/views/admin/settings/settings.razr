@@ -30,27 +30,27 @@
                     <div class="uk-form-row">
                         <label for="form-title" class="uk-form-label">@trans('Title')</label>
                         <div class="uk-form-controls">
-                            <input id="form-title" class="uk-form-width-large" type="text" name="option[system:app.site_title]" value="@( $option.get('system:app.site_title') )">
+                            <input id="form-title" class="uk-form-width-large" type="text" name="option[system:settings][site_title]" value="@($system['site_title'])">
                         </div>
                     </div>
                     <div class="uk-form-row">
                         <label for="form-description" class="uk-form-label">@trans('Description')</label>
                         <div class="uk-form-controls">
-                            <textarea id="form-description" class="uk-form-width-large" name="option[system:app.site_description]" rows="5">@( $option.get('system:app.site_description') )</textarea>
+                            <textarea id="form-description" class="uk-form-width-large" name="option[system:settings][site_description]" rows="5">@($system['site_description'])</textarea>
                         </div>
                     </div>
                     <div class="uk-form-row">
                         <span class="uk-form-label">@trans('Maintenance')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" name="option[system:maintenance.enabled]" value="1" @($option.get('system:maintenance.enabled') ? 'checked' : '')> @trans('Put the site offline and show the offline message.')</label>
+                                <label><input type="checkbox" name="option[system:settings][maintenance.enabled]" value="1" @($system['maintenance.enabled'] ? 'checked' : '')> @trans('Put the site offline and show the offline message.')</label>
                             </p>
                         </div>
                     </div>
                     <div class="uk-form-row">
                         <label for="form-offlinemessage" class="uk-form-label">@trans('Offline Message')</label>
                         <div class="uk-form-controls">
-                            <textarea id="form-offlinemessage" class="uk-form-width-large" name="option[system:maintenance.msg]" placeholder="@trans("We'll be back soon.")" rows="5">@( $option.get('system:maintenance.msg') )</textarea>
+                            <textarea id="form-offlinemessage" class="uk-form-width-large" name="option[system:settings][maintenance.msg]" placeholder="@trans("We'll be back soon.")" rows="5">@($system['maintenance.msg'])</textarea>
                         </div>
                     </div>
 
@@ -61,15 +61,15 @@
                     <div class="uk-form-row">
                         <label for="form-apikey" class="uk-form-label">@trans('API Key')</label>
                         <div class="uk-form-controls">
-                            <textarea id="form-apikey" class="uk-form-width-large" name="option[system:api.key]" placeholder="@trans('Enter your API key')" rows="6">@( $option.get('system:api.key') )</textarea>
+                            <textarea id="form-apikey" class="uk-form-width-large" name="option[system:settings][api.key]" placeholder="@trans('Enter your API key')" rows="6">@($system['api.key'])</textarea>
                         </div>
                     </div>
                     <div class="uk-form-row">
                         <label for="form-channel" class="uk-form-label">@trans('Release Channel')</label>
                         <div class="uk-form-controls">
-                            <select id="form-channel" class="uk-form-width-large" name="option[system:app.release_channel]">
+                            <select id="form-channel" class="uk-form-width-large" name="option[system:settings][release_channel]">
                                 @foreach (['stable' => __('Stable'), 'nightly' => __('Nightly')] as $id => $channel)
-                                <option value="@( $id )"@( $id == $option.get('system:app.release_channel', 'stable') ? ' selected' : '' )>@( $channel )</option>
+                                <option value="@( $id )"@($id == $system['release_channel'] ? ' selected' : '')>@($channel)</option>
                                 @endforeach
                             </select>
                         </div>
@@ -77,17 +77,19 @@
                     <div class="uk-form-row">
                         <label for="form-uploadfolder" class="uk-form-label">@trans('Storage')</label>
                         <div class="uk-form-controls">
-                            <input id="form-uploadfolder" class="uk-form-width-large" type="text" name="config[app.storage]" value="@( $config.app.storage )" placeholder="/storage">
+                            <input id="form-uploadfolder" class="uk-form-width-large" type="text" name="config[system][storage]" value="@( $config.system.storage )" placeholder="/storage">
                         </div>
                     </div>
                     <div class="uk-form-row">
                         <span class="uk-form-label">@trans('Developer')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" name="config[app.debug]" value="1"@($config.app.debug ? ' checked' : '')> @trans('Enable debug mode')</label>
+                                <input type="hidden" value="0" name="config[framework/application][debug]">
+                                <label><input type="checkbox" name="config[framework/application][debug]" value="1"@($config['framework/application']['debug'] ? ' checked' : '')> @trans('Enable debug mode')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" name="config[profiler.enabled]" value="1"@($config.profiler.enabled ? ' checked' : '')@(!$sqlite ? ' disabled' : '')> @trans('Enable debug toolbar')</label>
+                                <input type="hidden" value="0" name="config[system/profiler][enabled]">
+                                <label><input type="checkbox" name="config[system/profiler][enabled]" value="1"@($config['system/profiler']['enabled'] ? ' checked' : '')@(!$sqlite ? ' disabled' : '')> @trans('Enable debug toolbar')</label>
                             </p>
                             @if (!$sqlite)
                             <p class="uk-form-help-block">@trans('Please enable the SQLite database extension.')</p>

@@ -15,10 +15,8 @@ class AlphaTheme extends Theme
     /**
      * {@inheritdoc}
      */
-    public function load(App $app, array $config)
+    public function main(App $app)
     {
-        parent::load($app, $config);
-
         $app->on('system.site', function() use ($app) {
             $app->on('view.layout', function($event) use ($app) {
                 $event->setParameter('theme', $app['theme.site']);
@@ -35,7 +33,7 @@ class AlphaTheme extends Theme
         $sidebars = array_replace_recursive([
             'sidebar-a' => ['width' => 12, 'alignment' => 'left'],
             'sidebar-b' => ['width' => 12, 'alignment' => 'right']
-        ], $this->getParams('sidebars', []));
+        ], $this->config('sidebars', []));
         $columns  = ['main' => ['width' => 60, 'alignment' => 'right']];
 
         $gcf = function($a, $b = 60) use(&$gcf) {

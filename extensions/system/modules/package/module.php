@@ -8,7 +8,7 @@ return [
 
     'name' => 'system/package',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
         $app['package'] = function ($app) {
             return (new PackageManager)

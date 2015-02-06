@@ -221,7 +221,7 @@ class DashboardController extends Controller
      */
     protected function getWidgets()
     {
-        return App::user()->get('dashboard', App::module('system')->getConfig('dashboard.default'));
+        return App::user()->get('dashboard', App::module('system')->config('dashboard.default'));
     }
 
     protected function chunkList($list, $p) {

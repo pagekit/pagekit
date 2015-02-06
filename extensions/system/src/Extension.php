@@ -3,6 +3,7 @@
 namespace Pagekit\System;
 
 use Pagekit\Application as App;
+use Pagekit\Module\Module;
 
 class Extension extends Module
 {

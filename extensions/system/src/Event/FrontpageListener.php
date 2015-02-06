@@ -13,7 +13,7 @@ class FrontpageListener implements EventSubscriberInterface
      */
     public function onSystemInit()
     {
-        if ($frontpage = App::config('app.frontpage')) {
+        if ($frontpage = App::config('system:settings.frontpage')) {
             App::aliases()->add('/', $frontpage);
         } else {
             App::callbacks()->get('/', '_frontpage', function() {
@@ -25,13 +25,17 @@ class FrontpageListener implements EventSubscriberInterface
     public function onSave(EntityEvent $event) {
         $node = $event->getEntity();
         if ($node->get('frontpage')) {
-            App::option()->set('system:app.frontpage', $node->get('url'), true);
+            $settings = App::option('system:settings', []);
+            $settings['frontpage'] = $node->get('url');
+            App::option()->set('system:settings', $settings, true);
         }
     }
 
     public function onDelete(EntityEvent $event) {
         if ($event->getEntity()->get('frontpage')) {
-            App::option()->remove('system:app.frontpage');
+            $settings = App::option('system:settings', []);
+            unset($settings['frontpage']);
+            App::option()->set('system:settings', $settings, true);
         }
     }
 

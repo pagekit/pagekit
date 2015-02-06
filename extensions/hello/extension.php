@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Hello\HelloExtension;
-
 return [
 
     'name' => 'hello',
@@ -22,16 +20,10 @@ return [
         ]
     ],
 
-    'parameters' => [
+    'config' => [
 
-        'settings' => [
-
-            'view' => 'extensions/hello/views/admin/settings.razr',
-            'defaults' => [
-                'message' => 'World'
-            ]
-
-        ]
+        'settings.view' => 'extensions/hello/views/admin/settings.razr',
+        'message' => 'World'
 
     ],
 

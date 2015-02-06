@@ -21,13 +21,14 @@ return [
 
     'name' => 'system/profiler',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
-        if (!$config['enabled'] || !$config['file']) {
-            return;
-        }
-
-        if (!(class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)))) {
+        if (!($this->config['enabled']
+            && $this->config['file']
+            && class_exists('SQLite3')
+            && class_exists('PDO')
+            && in_array('sqlite', \PDO::getAvailableDrivers(), true)
+        )) {
             return;
         }
 
@@ -42,8 +43,8 @@ return [
             return $profiler;
         };
 
-        $app['profiler.storage'] = function() use ($config) {
-            return new SqliteProfilerStorage('sqlite:'.$config['file'], '', '', 86400);
+        $app['profiler.storage'] = function() {
+            return new SqliteProfilerStorage('sqlite:'.$this->config['file'], '', '', 86400);
         };
 
         $app['profiler.stopwatch'] = function() {
@@ -96,7 +97,11 @@ return [
 
     'priority' => 16,
 
-    'file'    => null,
-    'enabled' => false
+    'config' => [
+
+        'file'    => null,
+        'enabled' => false
+
+    ]
 
 ];

@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Page\PageExtension;
-
 return [
 
     'name' => 'page',

@@ -41,7 +41,7 @@ class SettingsController extends Controller
         $ssl    = extension_loaded('openssl');
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
-        return ['head.title' => __('Settings'), 'option' => App::option(), 'config' => $this->config, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite, 'additionals' => App::trigger('system.settings.edit', new SettingsEvent)->get()];
+        return ['head.title' => __('Settings'), 'system' => App::module('system')->config, 'config' => $this->config, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite, 'additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
     }
 
     /**
@@ -49,14 +49,6 @@ class SettingsController extends Controller
      */
     public function saveAction($data, $option, $tab = 0)
     {
-        // TODO: validate
-        $data['app.debug'] = @$data['app.debug'] ?: '0';
-
-        // TODO remove
-        $data['profiler.enabled'] = @$data['profiler.enabled'] ?: '0';
-        $option['system:app.site_title'] = @$option['system:app.site_title'] ?: '';
-        $option['system:maintenance.enabled'] = @$option['system:maintenance.enabled'] ?: '0';
-
         foreach ($data as $key => $value) {
             $this->config->set($key, $value);
         }
@@ -67,7 +59,8 @@ class SettingsController extends Controller
             App::option()->set($key, $value, true);
         }
 
-        if ($data['cache.cache.storage'] != App::config('cache.cache.storage') || $data['app.debug'] != App::config('app.debug')) {
+        // TODO fix
+        if ($data['system/cache']['cache']['storage'] != App::config('system/cache.cache.storage') || $data['framework/application']['debug'] != App::config('framework/application.debug')) {
             App::module('system')->clearCache();
         }
 

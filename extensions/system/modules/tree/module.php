@@ -4,7 +4,7 @@ return [
 
     'name' => 'system/tree',
 
-    'main' => function ($app, $config) {},
+    'main' => function ($app) {},
 
     'autoload' => [
 

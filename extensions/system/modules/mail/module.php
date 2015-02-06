@@ -7,23 +7,23 @@ return [
 
     'name' => 'system/mail',
 
-    'main' => function ($app, $config) {
+    'main' => function ($app) {
 
-        $app['mailer'] = function ($app) use ($config) {
+        $app['mailer'] = function ($app) {
 
             $app['mailer.initialized'] = true;
 
             $mailer = new Mailer($app['swift.transport'], $app['swift.spooltransport']);
-            $mailer->registerPlugin(new ImpersonatePlugin($config['from_address'], $config['from_name']));
+            $mailer->registerPlugin(new ImpersonatePlugin($this->config['from_address'], $this->config['from_name']));
 
             return $mailer;
         };
 
         $app['mailer.initialized'] = false;
 
-        $app['swift.transport'] = function ($app) use ($config) {
+        $app['swift.transport'] = function ($app) {
 
-            if ('smtp' == $config['driver']) {
+            if ('smtp' == $this->config['driver']) {
 
                 $transport = new Swift_Transport_EsmtpTransport(
                     $app['swift.transport.buffer'],
@@ -31,17 +31,17 @@ return [
                     $app['swift.transport.eventdispatcher']
                 );
 
-                $transport->setHost($config['host']);
-                $transport->setPort($config['port']);
-                $transport->setUsername($config['username']);
-                $transport->setPassword($config['password']);
-                $transport->setEncryption($config['encryption']);
-                $transport->setAuthMode($config['auth_mode']);
+                $transport->setHost($this->config['host']);
+                $transport->setPort($this->config['port']);
+                $transport->setUsername($this->config['username']);
+                $transport->setPassword($this->config['password']);
+                $transport->setEncryption($this->config['encryption']);
+                $transport->setAuthMode($this->config['auth_mode']);
 
                 return $transport;
             }
 
-            if ('mail' == $config['driver']) {
+            if ('mail' == $this->config['driver']) {
                 return Swift_MailTransport::newInstance();
             }
 
@@ -80,8 +80,8 @@ return [
             }
         });
 
-        $app->on('system.settings.edit', function ($event) use ($app, $config) {
-            $event->add('system/mail', __('Mail'), $app['view']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $config]));
+        $app->on('system.settings.edit', function ($event) use ($app) {
+            $event->add('system/mail', __('Mail'), $app['view']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $this->config]));
         });
     },
 
@@ -99,14 +99,17 @@ return [
 
     ],
 
-    'driver'       => 'mail',
-    'host'         => 'localhost',
-    'port'         => 25,
-    'username'     => null,
-    'password'     => null,
-    'encryption'   => null,
-    'auth_mode'    => null,
-    'from_name'    => null,
-    'from_address' => null
+    'config' => [
 
+        'driver'       => 'mail',
+        'host'         => 'localhost',
+        'port'         => 25,
+        'username'     => null,
+        'password'     => null,
+        'encryption'   => null,
+        'auth_mode'    => null,
+        'from_name'    => null,
+        'from_address' => null
+
+    ]
 ];
