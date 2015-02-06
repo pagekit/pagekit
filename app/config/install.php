@@ -2,7 +2,7 @@
 
 return [
 
-    'installer' => [
+    'system/installer' => [
 
         'enabled' => true
 
@@ -17,12 +17,6 @@ return [
     'framework/session' => [
 
         'storage' => 'array'
-
-    ],
-
-    'system/profiler' => [
-
-        'enabled' => false
 
     ]
 
