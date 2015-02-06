@@ -20,12 +20,13 @@ return [
 
         $app->on('system.positions', function($event) use ($app) {
 
-            foreach ($app['module']->getConfigs() as $config) {
-                if (!isset($config['positions']) || !is_array($config['positions'])) {
+            foreach ($app['module'] as $module) {
+
+                if (!isset($module->positions) || !is_array($module->positions)) {
                     continue;
                 }
 
-                foreach ($config['positions'] as $id => $position) {
+                foreach ($module->positions as $id => $position) {
                     list($name, $description) = array_merge((array) $position, ['']);
                     $event->register($id, $name, $description);
                 }

@@ -39,9 +39,9 @@ return [
         };
 
         $app->on('system.permission', function ($event) use ($app) {
-            foreach ($app['module']->getConfigs() as $config) {
-                if (isset($config['permissions'])) {
-                    $event->setPermissions($config['name'], $config['permissions']);
+            foreach ($app['module'] as $module) {
+                if (isset($module->permissions)) {
+                    $event->setPermissions($module->name, $module->permissions);
                 }
             }
         });
