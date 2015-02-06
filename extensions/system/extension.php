@@ -113,13 +113,19 @@ return [
         ],
 
         'frontpage' => '',
+
         'site_title' => '',
         'site_description' => '',
+
         'maintenance.enabled' => false,
         'maintenance.msg' => '',
+
         'api.key' => '',
+        'api.url' => 'http://pagekit.com/api',
         'release_channel' => 'stable',
-        'storage' => '',
+
+        'storage' => '/storage',
+
         'theme.site' => 'alpha'
 
     ]

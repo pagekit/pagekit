@@ -73,10 +73,9 @@ class ExtensionsController extends Controller
 
             $extension->enable();
 
-            // TODO boot is no longer part of the Extension
-            $extension->boot(App::getInstance());
-
-            App::option()->set('system:extensions', array_unique(array_merge(App::option('system:extensions', []), [$extension->getName()])), true);
+            $settings = App::option('system/core:settings', []);
+            $settings['extensions'] = array_unique(array_merge($settings['extensions'], ['extensions' => [$extension->name]]));
+            App::option()->set('system/core:settings', $settings, true);
 
             App::exception()->setHandler($handler);
 
@@ -202,7 +201,9 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        App::option()->set('system:extensions', array_values(array_diff(App::option('system:extensions', []), [$extension->getName()])), true);
+        $settings = App::option('system/core:settings', []);
+        $settings['extensions'] = array_values(array_diff($settings['extensions'], [$extension->getName()]));
+        App::option()->set('system/core:settings', $settings, true);
 
         $extension->disable();
     }

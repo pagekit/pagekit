@@ -6,20 +6,6 @@ return [
 
         'version' => '0.8.8',
 
-        'storage' => '/storage',
-
-        'theme' => [
-
-            'site' => 'alpha'
-
-        ],
-
-        'api' => [
-
-            'url' => 'http://pagekit.com/api'
-
-        ]
-
     ],
 
     'system/cache' => [
@@ -83,12 +69,6 @@ return [
     'framework/filesystem' => [
 
         'path' => '%path%'
-
-    ],
-
-    'extension' => [
-
-        'core' => ['installer', 'system']
 
     ]
 
