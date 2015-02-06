@@ -83,7 +83,7 @@ class UpdateController
             App::file()->delete("$updateDir/.htaccess");
             App::file()->copyDir($updateDir, App::path());
             App::file()->delete($updateDir);
-            App::module('system')->clearCache();
+            App::system()->clearCache();
             App::session()->remove('system.updateDir');
 
             $response = ['message' => __('Updating database...'), 'step' => App::url('@system/update/database'), 'progress' => 66];
@@ -107,8 +107,8 @@ class UpdateController
                 throw new Exception(__('You may not call this step directly.'));
             }
 
-            App::module('system')->enable();
-            App::module('system')->clearCache();
+            App::system()->enable();
+            App::system()->clearCache();
             App::session()->remove('system.update');
 
             $response = ['message' => __('Installed successfully.'), 'redirect' => App::url('@system/admin'), 'progress' => 100];

@@ -41,7 +41,7 @@ class SettingsController extends Controller
         $ssl    = extension_loaded('openssl');
         $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
 
-        return ['head.title' => __('Settings'), 'system' => App::module('system')->config, 'config' => $this->config, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite, 'additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
+        return ['head.title' => __('Settings'), 'system' => App::system()->config, 'config' => $this->config, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite, 'additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
     }
 
     /**
@@ -61,7 +61,7 @@ class SettingsController extends Controller
 
         // TODO fix
         if ($data['system/cache']['cache']['storage'] != App::module('cache')->config('caches.cache.storage') || $data['framework/application']['debug'] != App::module('framework')->config('debug')) {
-            App::module('system')->clearCache();
+            App::system()->clearCache();
         }
 
         if (function_exists('opcache_invalidate')) {
