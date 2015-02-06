@@ -31,7 +31,7 @@ return [
         }, -8);
 
         $app->on('site.menus', function($event) use ($app) {
-            foreach ($app['module']->all() as $module) {
+            foreach ($app['module'] as $module) {
 
                 if (!isset($module->menus)) {
                     continue;

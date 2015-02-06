@@ -56,7 +56,7 @@ return [
 
             $app['translator']->setLocale($locale = $this->config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
 
-            foreach ($app['module']->all() as $module) {
+            foreach ($app['module'] as $module) {
 
                 $domains = [];
 

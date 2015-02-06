@@ -25,7 +25,7 @@ return [
         });
 
         $app->on('system.admin_menu', function ($event) use ($app) {
-            foreach ($app['module']->all() as $module) {
+            foreach ($app['module'] as $module) {
                 if (isset($module->menu)) {
                     $event->register($module->menu);
                 }
