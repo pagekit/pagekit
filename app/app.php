@@ -5,7 +5,7 @@ use Pagekit\Module\Config\ConfigLoader;
 
 $loader  = require __DIR__.'/autoload.php';
 $config  = require __DIR__.'/config.php';
-$modules = ['framework', 'system/core', 'system/cache', 'system/option', 'system/profiler', 'system/templating', 'system/locale'];
+$modules = ['system/profiler', 'system/core'];
 
 $app = new App($config);
 $app['autoloader'] = $loader;
@@ -32,7 +32,7 @@ if (!$app['config.file']) {
 
     $app['module']->addLoader(new ConfigLoader($app['config']));
     $app['module']->load($modules);
-    $app['modules'] = array_merge($app['option']->get('system:extensions', []), ['system']);
+    $app['modules'] = array_merge(['system'], $app['option']->get('system:extensions', []));
 
 }
 

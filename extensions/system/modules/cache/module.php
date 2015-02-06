@@ -12,11 +12,9 @@ return [
 
     ],
 
-    'priority' => 12,
-
     'config' => [
 
-        'caches' => [],
+        'caches'  => [],
         'nocache' => false
 
     ]

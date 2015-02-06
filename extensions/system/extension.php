@@ -6,15 +6,36 @@ return [
 
     'main' => 'Pagekit\\System\\SystemExtension',
 
+    'require' => [
+
+        'system/core',
+        'system/comment',
+        'system/console',
+        'system/content',
+        'system/dashboard',
+        'system/editor',
+        'system/feed',
+        'system/mail',
+        'system/markdown',
+        'system/menu',
+        'system/migration',
+        'system/oauth',
+        'system/package',
+        'system/site',
+        'system/theme',
+        'system/tree',
+        'system/user',
+        'system/widget'
+
+    ],
+
+    'include' => 'modules/*/module.php',
+
     'autoload' => [
 
         'Pagekit\\System\\' => 'src'
 
     ],
-
-    'priority' => 8,
-
-    'include' => __DIR__.'/modules/*/module.php',
 
     'controllers' => [
 
@@ -87,7 +108,7 @@ return [
                     'type' => 'widget.user'
                 ]
             ]
-    
+
         ],
 
         'frontpage' => '',

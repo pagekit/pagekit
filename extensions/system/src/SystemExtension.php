@@ -21,7 +21,7 @@ class SystemExtension extends Extension
      */
     public function main(App $app)
     {
-        if (!$app['module']['framework/application']->config('debug')) {
+        if (!$app['module']['framework']->config('debug')) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 

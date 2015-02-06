@@ -95,8 +95,6 @@ return [
 
     ],
 
-    'priority' => 16,
-
     'config' => [
 
         'file'    => null,

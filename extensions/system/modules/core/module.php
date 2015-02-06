@@ -60,6 +60,16 @@ return [
         }, 50);
     },
 
+    'require' => [
+
+        'framework',
+        'system/cache',
+        'system/locale',
+        'system/option',
+        'system/templating'
+
+    ],
+
     'autoload' => [
 
         'Pagekit\\Content\\' => 'src'

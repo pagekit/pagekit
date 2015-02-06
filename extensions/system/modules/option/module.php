@@ -17,7 +17,12 @@ return [
 
     },
 
-    'priority' => 8,
+    'require' => [
+
+        'framework/database',
+        'system/cache'
+
+    ],
 
     'autoload' => [
 
