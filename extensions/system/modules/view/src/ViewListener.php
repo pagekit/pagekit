@@ -39,16 +39,22 @@ class ViewListener implements EventSubscriberInterface
     }
 
     /**
-     * Resolves requirejs dependencies.
-     *
-     * TODO remove with full switch to angular
+     * Registers exports and resolves requirejs dependencies.
      */
     public function onKernelResponse()
     {
+        $scripts = App::scripts();
+
+        foreach (App::exports() as $name => $export) {
+            $scripts->queue("export-$name", sprintf('var %s = %s;', $name, json_encode($export)), [], 'string');
+        }
+
+        // -TODO- remove with full switch to angular
+
         $require = [];
         $requeue = [];
 
-        foreach ($scripts = App::scripts() as $script) {
+        foreach ($scripts as $script) {
             if ($script['requirejs']) {
                 $require[] = $script;
             } elseif (array_key_exists('requirejs', $scripts->resolveDependencies($script))) {
