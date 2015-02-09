@@ -29,7 +29,14 @@ class SiteModule extends Module implements EventSubscriberInterface
     public function getTypes()
     {
         if (!$this->types) {
-            $this->types = App::trigger('site.types', new TypeEvent)->getTypes();
+
+            $event = new TypeEvent;
+            $event->register('alias', 'Alias', [
+                'type'      => 'url',
+                'tmpl.edit' => 'alias.edit'
+            ]);
+
+            $this->types = App::trigger('site.types', $event)->getTypes();
         }
 
         return $this->types;
@@ -89,39 +96,12 @@ class SiteModule extends Module implements EventSubscriberInterface
     }
 
     /**
-     * Registers alias type.
-     */
-    public function onSiteTypes(TypeEvent $event)
-    {
-        $event->register('alias', 'Alias', [
-            'type'      => 'url',
-            'tmpl.edit' => 'alias.edit'
-        ]);
-    }
-
-    /**
-     * Registers alias type.
+     * Registers menus option.
      */
     public function onSiteMenus(MenuEvent $event)
     {
         foreach (App::option('system:site.menus', []) as $menu) {
             $event->register($menu['id'], $menu['label']);
-        }
-    }
-
-    /**
-     * Register node routes.
-     */
-    public function onSystemInit()
-    {
-        foreach ($this->getNodes() as $path => $node) {
-
-            if ($node['controllers']) {
-                App::controllers()->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
-            } elseif ($node['url']) {
-                App::aliases()->add($path, $node['url'], $node['defaults']);
-            }
-
         }
     }
 
@@ -134,15 +114,28 @@ class SiteModule extends Module implements EventSubscriberInterface
     }
 
     /**
+     * Registers node routes.
+     */
+    public function onKernelRequest()
+    {
+        foreach ($this->getNodes() as $path => $node) {
+            if ($node['controllers']) {
+                App::controllers()->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
+            } elseif ($node['url']) {
+                App::aliases()->add($path, $node['url'], $node['defaults']);
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'site.types'  => 'onSiteTypes',
-            'site.menus'  => 'onSiteMenus',
-            'system.init' => ['onSystemInit', 10],
-            'system.tmpl' => 'onSystemTmpl'
+            'site.menus'     => 'onSiteMenus',
+            'system.tmpl'    => 'onSystemTmpl',
+            'kernel.request' => ['onKernelRequest', 35]
         ];
     }
 }
