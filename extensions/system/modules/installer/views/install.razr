@@ -10,10 +10,11 @@
         <script src="@static_url('vendor/assets/uikit/js/uikit.min.js')"></script>
         <script src="@static_url('vendor/assets/uikit/js/components/form-password.min.js')"></script>
         <script src="@static_url('extensions/system/modules/installer/assets/js/installer.js')"></script>
+        @section('head')
     </head>
     <body>
 
-        <div id="installer" data-route="@url('@installer/installer/install')" data-config="@( $config )">
+        <div id="installer">
 
             <div data-step="start" class="tm-slide uk-vertical-align uk-text-center uk-hidden">
                 <div class="js-panel uk-vertical-align-middle tm-panel">

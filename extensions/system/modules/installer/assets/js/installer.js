@@ -10,7 +10,6 @@
             var $this = this;
 
             this.installer    = $(container);
-            this.configexists = this.installer.data('config');
             this.steps        = this.installer.find('[data-step]').hide().removeClass('uk-hidden');
 
             this.steps.each(function() {
@@ -64,12 +63,12 @@
             }
         },
         install: function(fn) {
-            return $.post(this.installer.data("route"), this.installer.find("form").serialize(), fn, 'json');
+            return $.post(installer.url, this.installer.find("form").serialize(), fn, 'json');
         },
 
         // form submission callbacks
         onstart: function() {
-            this.gotoStep(this.configexists ? 'user' : 'database');
+            this.gotoStep(installer.config ? 'user' : 'database');
         },
         ondatabase: function(frm) {
 
@@ -117,7 +116,7 @@
             }, "json");
         },
         onuser: function() {
-            this.gotoStep(this.configexists ? 'finish' : 'site');
+            this.gotoStep(installer.config ? 'finish' : 'site');
         },
         onsite: function(frm) {
             this.gotoStep('finish');
