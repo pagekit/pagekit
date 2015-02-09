@@ -12,20 +12,39 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteModule extends Module implements EventSubscriberInterface
 {
+    protected $types;
+    protected $menus;
+
     /**
      * {@inheritdoc}
      */
     public function main(App $app)
     {
-        $app['site.types'] = function($app) {
-            return $app->trigger('site.types', new TypeEvent)->getTypes();
-        };
+        $app->subscribe($this);
+    }
 
-        $app['site.menus'] = function($app) {
+    /**
+     * @return array
+     */
+    public function getTypes()
+    {
+        if (!$this->types) {
+            $this->types = App::trigger('site.types', new TypeEvent)->getTypes();
+        }
+
+        return $this->types;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMenus()
+    {
+        if (!$this->menus) {
 
             $event = new MenuEvent;
 
-            foreach ($app['module'] as $module) {
+            foreach (App::module() as $module) {
 
                 if (!isset($module->menus)) {
                     continue;
@@ -36,10 +55,10 @@ class SiteModule extends Module implements EventSubscriberInterface
                 }
             }
 
-            return $app->trigger('site.menus', $event)->getMenus();
-        };
+            $this->menus = App::trigger('site.menus', $event)->getMenus();
+        }
 
-        $app->subscribe($this);
+        return $this->menus;
     }
 
     /**
@@ -48,7 +67,7 @@ class SiteModule extends Module implements EventSubscriberInterface
     public function getNodes()
     {
         $nodes = [];
-        $types = App::get('site.types');
+        $types = $this->getTypes();
 
         foreach (Node::where(['status = ?'], [1])->get() as $node) {
 

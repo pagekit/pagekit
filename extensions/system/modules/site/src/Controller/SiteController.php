@@ -25,7 +25,7 @@ class SiteController extends Controller
                 'csrf'         => App::csrf()->generate()
             ],
             'data'   => [
-                'types' => App::get('site.types'),
+                'types' => App::module('system/site')->getTypes(),
                 'roles' => Role::findAll()
             ],
             'templates' => [

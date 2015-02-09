@@ -18,7 +18,7 @@ class MenuController extends Controller
      */
     public function indexAction()
     {
-        return array_values(App::get('site.menus') + [['id' => '', 'label' => 'Not Linked', 'fixed' => true]]);
+        return array_values(App::module('system/site')->getMenus() + [['id' => '', 'label' => 'Not Linked', 'fixed' => true]]);
     }
 
     /**
