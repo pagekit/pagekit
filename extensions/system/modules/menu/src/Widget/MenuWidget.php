@@ -37,6 +37,9 @@ class MenuWidget implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = [])
     {
+        // -TODO- fix menu render
+        return 'Menu';
+
         if (ini_get('xdebug.max_nesting_level') < 1000) {
             ini_set('xdebug.max_nesting_level', 1000);
         }
