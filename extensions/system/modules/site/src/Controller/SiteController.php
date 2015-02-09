@@ -4,7 +4,6 @@ namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
-use Pagekit\Site\Event\ConfigEvent;
 use Pagekit\User\Entity\Role;
 
 /**
@@ -17,7 +16,7 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        $config = App::trigger('site.config', new ConfigEvent([
+        App::exports('site')->add([
             'config'    => [
                 'url'          => App::url()->base(),
                 'route'        => App::url('@system/site'),
@@ -32,11 +31,7 @@ class SiteController extends Controller
                 'site.edit' => App::view('extensions/system/modules/site/views/tmpl/site.edit.php'),
                 'site.list' => App::view('extensions/system/modules/site/views/tmpl/site.list.php')
             ]
-        ]))->getConfig();
-
-        App::on('kernel.view', function () use ($config) {
-            App::scripts('site-config', sprintf('var %s = %s;', 'site', json_encode($config)), [], 'string');
-        });
+        ]);
 
         return ['head.title' => __('Nodes')];
     }
