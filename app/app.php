@@ -23,7 +23,8 @@ if (!$app['config.file']) {
         exit;
     }
 
-    $app['config']->load(__DIR__.'/config/install.php');
+    $config->load(__DIR__.'/config/install.php');
+
     $app['module']->load('system/installer');
 
 } else {
