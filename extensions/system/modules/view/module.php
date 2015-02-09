@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\View\Asset\AssetManager;
+use Pagekit\View\Export\ExportManager;
 use Pagekit\View\ViewListener;
 
 return [
@@ -17,6 +18,10 @@ return [
 
             return $view;
         });
+
+        $app['exports'] = function() {
+            return new ExportManager();
+        };
 
         $app->subscribe(new ViewListener);
 
