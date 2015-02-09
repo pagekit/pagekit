@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pagekit 0.8.8 (blog, messages)\n"
-"POT-Creation-Date: 2014-11-25 16:05+0000\n"
+"POT-Creation-Date: 2015-02-09 16:41+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,6 +62,7 @@ msgid "Post"
 msgstr ""
 
 #: extensions/blog/views/admin/link/blog.razr:18
+#: extensions/blog/views/tmpl/edit.php:3
 msgid "- Select Post -"
 msgstr ""
 
@@ -86,17 +87,13 @@ msgstr ""
 msgid "Publish on"
 msgstr ""
 
-#: extensions/blog/views/admin/post/edit.razr:73
-msgid "Slug"
-msgstr ""
-
 #: extensions/blog/views/admin/post/edit.razr:96
 #: extensions/blog/views/admin/settings.razr:86
 msgid "Enable Comments"
 msgstr ""
 
 #: extensions/blog/views/admin/post/index.razr:8
-#: extensions/blog/src/Controller/PostController.php:112
+#: extensions/blog/src/Controller/PostController.php:83
 msgid "Add Post"
 msgstr ""
 
@@ -116,7 +113,7 @@ msgstr ""
 #: extensions/blog/views/admin/settings.razr:16
 #: extensions/blog/views/admin/settings.razr:94
 #: extensions/blog/views/admin/settings.razr:96
-#: extensions/blog/src/Controller/CommentController.php:106
+#: extensions/blog/src/Controller/CommentController.php:80
 msgid "Comments"
 msgstr ""
 
@@ -277,109 +274,109 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: extensions/blog/src/BlogExtension.php:35
+#: extensions/blog/src/BlogExtension.php:38
 msgid "You've made some changes! Leaving the post without saving will discard all changes."
 msgstr ""
 
-#: extensions/blog/src/Controller/CommentController.php:106
+#: extensions/blog/src/Controller/CommentController.php:80
 msgid "Comments on %title%"
 msgstr ""
 
-#: extensions/blog/src/Controller/CommentController.php:157
+#: extensions/blog/src/Controller/CommentController.php:131
 msgid "Comment saved."
 msgstr ""
 
-#: extensions/blog/src/Controller/CommentController.php:157
+#: extensions/blog/src/Controller/CommentController.php:131
 msgid "Comment created."
 msgstr ""
 
-#: extensions/blog/src/Controller/CommentController.php:177
+#: extensions/blog/src/Controller/CommentController.php:151
 msgid "{0} No comment deleted.|{1} Comment deleted.|]1,Inf[ Comments deleted."
 msgstr ""
 
-#: extensions/blog/src/Controller/CommentController.php:196
+#: extensions/blog/src/Controller/CommentController.php:170
 msgid "{0} No comment status updated.|{1} Comment status updated.|]1,Inf[ Comment statuses updated."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:98
+#: extensions/blog/src/Controller/PostController.php:67
 msgid "Posts"
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:124
+#: extensions/blog/src/Controller/PostController.php:95
 msgid "Invalid post id."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:134
+#: extensions/blog/src/Controller/PostController.php:105
 msgid "Edit Post"
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:161
+#: extensions/blog/src/Controller/PostController.php:129
 msgid "Post saved."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:161
+#: extensions/blog/src/Controller/PostController.php:129
 msgid "Post created."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:182
+#: extensions/blog/src/Controller/PostController.php:150
 msgid "{0} No post deleted.|{1} Post deleted.|]1,Inf[ Posts deleted."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:205
+#: extensions/blog/src/Controller/PostController.php:171
 msgid "{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:222
+#: extensions/blog/src/Controller/PostController.php:188
 msgid "{0} No post published.|{1} Post published.|]1,Inf[ Posts published."
 msgstr ""
 
-#: extensions/blog/src/Controller/PostController.php:224
+#: extensions/blog/src/Controller/PostController.php:190
 msgid "{0} No post unpublished.|{1} Post unpublished.|]1,Inf[ Posts unpublished."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:81
-#: extensions/blog/src/Link/BlogLink.php:22
+#: extensions/blog/src/Controller/SiteController.php:60
+#: extensions/blog/src/Link/BlogLink.php:24
 msgid "Blog"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:117
+#: extensions/blog/src/Controller/SiteController.php:96
 msgid "Please wait another %seconds% seconds before commenting again."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:126
+#: extensions/blog/src/Controller/SiteController.php:105
 msgid "Comments have been disabled for this post."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:135
+#: extensions/blog/src/Controller/SiteController.php:114
 msgid "Please provide valid name and email."
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:157
+#: extensions/blog/src/Controller/SiteController.php:136
 msgid "Thanks for commenting!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:169
+#: extensions/blog/src/Controller/SiteController.php:146
 msgid "Whoops, something went wrong!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:182
-#: extensions/blog/src/Event/RouteListener.php:83
+#: extensions/blog/src/Controller/SiteController.php:162
+#: extensions/blog/src/UrlResolver.php:77
 msgid "Post with id \"%id%\" not found!"
 msgstr ""
 
-#: extensions/blog/src/Controller/SiteController.php:186
+#: extensions/blog/src/Controller/SiteController.php:166
 msgid "Unable to access this post!"
 msgstr ""
 
-#: extensions/blog/src/Entity/Comment.php:114
+#: extensions/blog/src/Entity/Comment.php:117
 msgid "Approved"
 msgstr ""
 
-#: extensions/blog/src/Entity/Comment.php:115
+#: extensions/blog/src/Entity/Comment.php:118
 msgid "Pending"
 msgstr ""
 
-#: extensions/blog/src/Entity/Comment.php:116
+#: extensions/blog/src/Entity/Comment.php:119
 msgid "Spam"
 msgstr ""
 
@@ -399,7 +396,7 @@ msgstr ""
 msgid "Pending Review"
 msgstr ""
 
-#: extensions/blog/src/Event/RouteListener.php:108
+#: extensions/blog/src/UrlResolver.php:56
 msgid "Post with slug \"%slug%\" not found!"
 msgstr ""
 
