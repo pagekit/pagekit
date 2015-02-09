@@ -23,13 +23,13 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('angular-sanitize', 'vendor/assets/angular-sanitize/angular-sanitize.min.js', 'angular');
         $scripts->register('angular-touch', 'vendor/assets/angular-touch/angular-touch.min.js', 'angular');
         $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
-        $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', ['requirejs-config']);
-        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js');
+        $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
+        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js', 'export-pagekit');
         $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
-        $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', ['uikit'], ['requirejs' => true]);
-        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', ['uikit'], ['requirejs' => true]);
+        $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('application', 'extensions/system/app/application.js', 'angular');
         $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
 

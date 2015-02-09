@@ -29,7 +29,7 @@ return [
 
         });
 
-        $app->on('kernel.request', function($event, $name, $dispatcher) use ($app) {
+        $app->on('kernel.request', function($event) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;
@@ -42,12 +42,14 @@ return [
 
             $app['sections']->register('head', ['renderer' => 'delayed']);
             $app['sections']->prepend('head', function () use ($app) {
-                return sprintf('        <meta name="generator" content="Pagekit %1$s" data-version="%1$s" data-url="%2$s" data-csrf="%3$s">', $app['version'], $app['router']->getContext()->getBaseUrl(), $app['csrf']->generate());
+                return sprintf('        <meta name="generator" content="Pagekit %1$s">', $app['version']);
             });
+
+            $app['exports']->get('pagekit')->add(['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
-            $dispatcher->dispatch('system.init', $event);
+            $app->trigger('system.init', $event);
 
         }, 50);
     },
