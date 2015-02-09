@@ -5,12 +5,12 @@
         current   : false,
         resetanims: "uk-animation-shake uk-animation-slide-right uk-animation-slide-left uk-animation-reverse",
 
-        init: function(container) {
+        init: function(element) {
 
             var $this = this;
 
-            this.installer    = $(container);
-            this.steps        = this.installer.find('[data-step]').hide().removeClass('uk-hidden');
+            this.element = $(element);
+            this.steps   = this.element.find('[data-step]').hide().removeClass('uk-hidden');
 
             this.steps.each(function() {
 
@@ -63,7 +63,7 @@
             }
         },
         install: function(fn) {
-            return $.post(installer.url, this.installer.find("form").serialize(), fn, 'json');
+            return $.post(installer.url, this.element.find("form").serialize(), fn, 'json');
         },
 
         // form submission callbacks
