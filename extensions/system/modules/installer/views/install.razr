@@ -5,11 +5,14 @@
         <title>@trans('Pagekit Installer')</title>
         <link href="@static_url('extensions/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
         <link href="@static_url('extensions/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
-        <link href="@static_url('extensions/system/modules/installer/assets/css/installer.css')" rel="stylesheet">
-        <script src="@static_url('vendor/assets/jquery/dist/jquery.min.js')"></script>
-        <script src="@static_url('vendor/assets/uikit/js/uikit.min.js')"></script>
-        <script src="@static_url('vendor/assets/uikit/js/components/form-password.min.js')"></script>
-        <script src="@static_url('extensions/system/modules/installer/assets/js/installer.js')"></script>
+
+        @style('installer', 'extensions/system/modules/installer/assets/css/installer.css')
+
+        @script('jquery', 'vendor/assets/jquery/dist/jquery.min.js')
+        @script('uikit', 'vendor/assets/uikit/js/uikit.min.js', ['jquery'])
+        @script('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', ['uikit'])
+        @script('installer', 'extensions/system/modules/installer/assets/js/installer.js', ['jquery', 'uikit', 'uikit-form-password'])
+
         @section('head')
     </head>
     <body>
