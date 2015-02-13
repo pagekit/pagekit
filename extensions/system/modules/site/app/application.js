@@ -5,13 +5,13 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
     .value('UIkit', UIkit)
 
     .factory('Node', ['$resource', 'Application', function($resource, App) {
-        return $resource(App.url('/node/:id'), {}, {
+        return $resource(App.config['url.node']+'/:id', {}, {
             query: { method: 'GET', responseType: 'json' }
         });
     }])
 
     .factory('Menu', ['$resource', 'Application', function($resource, App) {
-        return $resource(App.url('/menu/:id'), {}, {
+        return $resource(App.config['url.menu']+'/:id', {}, {
             query: { method: 'GET', responseType: 'json', isArray: true },
             update: { method: 'PUT', isArray: false }
         });
@@ -19,13 +19,13 @@ angular.module('site', ['Application', 'ngResource', 'ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
 
-        $routeProvider.when("/create/:type", {
+        $routeProvider.when('/create/:type', {
             templateUrl: 'site.edit',
             controllerAs: 'vm',
             controller: 'editCtrl'
         });
 
-        $routeProvider.when("/edit/:id", {
+        $routeProvider.when('/edit/:id', {
             templateUrl: 'site.edit',
             controllerAs: 'vm',
             controller: 'editCtrl'

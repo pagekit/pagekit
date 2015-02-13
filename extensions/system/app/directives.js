@@ -60,7 +60,6 @@ angular.module('Application')
         };
     })
 
-
     .directive('checkList', function () {
         return {
             restrict  : 'A',

@@ -18,12 +18,13 @@ class SiteController extends Controller
     {
         App::exports('site')->add([
             'config'    => [
-                'url'          => App::url()->base(),
-                'route'        => App::url('@system/site'),
-                'url.template' => App::url('@system/template'),
-                'csrf'         => App::csrf()->generate()
+                'url'      => App::url()->base(),
+                'url.node' => App::url('@system/node'),
+                'url.menu' => App::url('@system/menu'),
+                'url.tmpl' => App::url('@system/template'),
+                'csrf'     => App::csrf()->generate()
             ],
-            'data'   => [
+            'data'      => [
                 'types' => App::module('system/site')->getTypes(),
                 'roles' => Role::findAll()
             ],

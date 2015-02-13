@@ -7,8 +7,7 @@ use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
 
 /**
- * @Route("/site/menu")
- * @Access("system: manage site", admin=true)
+ * @Access("system: manage site")
  * @Response("json")
  */
 class MenuController extends Controller

@@ -15,10 +15,13 @@ return [
     'controllers' => [
 
         '@system: /system' => [
-            'Pagekit\\Site\\Controller\\MenuController',
-            'Pagekit\\Site\\Controller\\NodeController',
             'Pagekit\\Site\\Controller\\SiteController',
             'Pagekit\\Site\\Controller\\TemplateController',
+        ],
+
+        '@system: /api/system' => [
+            'Pagekit\\Site\\Controller\\MenuController',
+            'Pagekit\\Site\\Controller\\NodeController'
         ]
 
     ],

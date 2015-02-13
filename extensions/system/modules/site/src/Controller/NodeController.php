@@ -8,8 +8,7 @@ use Pagekit\Application\Exception;
 use Pagekit\Site\Entity\Node;
 
 /**
- * @Route("/site/node")
- * @Access("system: manage site", admin=true)
+ * @Access("system: manage site")
  * @Response("json")
  */
 class NodeController extends Controller

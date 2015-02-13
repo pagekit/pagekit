@@ -79,6 +79,11 @@ return [
             'Pagekit\\User\\Controller\\ResetPasswordController',
             'Pagekit\\User\\Controller\\RoleController',
             'Pagekit\\User\\Controller\\UserController'
+        ],
+
+        '@api/system: /api/system' => [
+            'Pagekit\\User\\Controller\\Api\\RoleController',
+            'Pagekit\\User\\Controller\\Api\\UserController'
         ]
 
     ],

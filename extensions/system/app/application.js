@@ -26,7 +26,7 @@
                 },
 
                 templateUrl: function(name) {
-                    var url = this.config['url.template'];
+                    var url = this.config['url.tmpl'];
 
                     return url += (url.indexOf('?') != -1 ? '&' : '?') + 'name=' +name;
                 }

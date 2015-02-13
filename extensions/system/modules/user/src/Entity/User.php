@@ -10,7 +10,7 @@ use Pagekit\User\Model\UserInterface;
 /**
  * @Entity(tableClass="@system_user", eventPrefix="system.user")
  */
-class User extends BaseUser
+class User extends BaseUser implements \JsonSerializable
 {
     use DataTrait, ModelTrait;
 
@@ -156,6 +156,11 @@ class User extends BaseUser
     public function isNew()
     {
         return $this->isBlocked() && !$this->access;
+    }
+
+    public function jsonSerialize()
+    {
+        return array_diff_key(get_object_vars($this), array_flip(['password', 'activation']));
     }
 
     /**
