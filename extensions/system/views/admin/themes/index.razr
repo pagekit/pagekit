@@ -20,7 +20,7 @@
     </div>
     <div class="uk-width-medium-3-4">
 
-        <ul id="tab-content" class="uk-switcher uk-margin">
+        <ul id="tab-content" class="uk-switcher uk-margin" data-uk-observe>
             <li>
 
                 <div class="js-installed uk-grid uk-grid-width-large-1-2" data-url="@url('@system/themes')" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
