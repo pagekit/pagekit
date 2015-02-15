@@ -2,8 +2,8 @@
 
 namespace Pagekit\Alpha;
 
-use Pagekit\Framework\Application;
-use Pagekit\Theme\Theme;
+use Pagekit\Application as App;
+use Pagekit\System\Theme;
 
 class AlphaTheme extends Theme
 {
@@ -15,18 +15,12 @@ class AlphaTheme extends Theme
     /**
      * {@inheritdoc}
      */
-    public function boot(Application $app)
+    public function main(App $app)
     {
-        parent::boot($app);
-
         $app->on('system.site', function() use ($app) {
-
             $app->on('view.layout', function($event) use ($app) {
-
                 $event->setParameter('theme', $app['theme.site']);
-
             });
-
         });
     }
 
@@ -39,7 +33,7 @@ class AlphaTheme extends Theme
         $sidebars = array_replace_recursive([
             'sidebar-a' => ['width' => 12, 'alignment' => 'left'],
             'sidebar-b' => ['width' => 12, 'alignment' => 'right']
-        ], $this->getParams('sidebars', []));
+        ], $this->config('sidebars', []));
         $columns  = ['main' => ['width' => 60, 'alignment' => 'right']];
 
         $gcf = function($a, $b = 60) use(&$gcf) {
@@ -50,7 +44,7 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $sections = $this['view.sections'];
+        $sections = App::sections();
         foreach ($sidebars as $name => $sidebar) {
             if (!$sections->has($name)) {
                 unset($sidebars[$name]);

@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'blog',
+
     'main' => 'Pagekit\\Blog\\BlogExtension',
 
     'autoload' => [
@@ -19,36 +21,38 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
 
-    'parameters' => [
-
-        'settings' => [
-            'view' => 'extension://blog/views/admin/settings.razr',
-            'defaults' => [
-                'comments.autoclose'              => false,
-                'comments.autoclose.days'         => 14,
-                'comments.blacklist'              => '',
-                'comments.comments_per_page'      => 20,
-                'comments.gravatar'               => true,
-                'comments.max_depth'              => 3,
-                'comments.maxlinks'               => 2,
-                'comments.minidle'                => 120,
-                'comments.nested'                 => true,
-                'comments.notifications'          => 'always',
-                'comments.order'                  => 'ASC',
-                'comments.replymail'              => true,
-                'comments.require_name_and_email' => true,
-                'posts.posts_per_page'            => 20,
-                'posts.comments_enabled'          => true,
-                'posts.markdown_enabled'          => true,
-                'posts.show_title'                => true,
-                'permalink'                       => '',
-                'permalink.custom'                => 'blog/{slug}',
-                'feed.type'                       => 'rss2',
-                'feed.limit'                      => 20
-            ]
+        '@blog: /blog' => [
+            'Pagekit\\Blog\\Controller\\CommentController',
+            'Pagekit\\Blog\\Controller\\PostController'
         ]
+    ],
+
+    'config' => [
+
+        'settings.view'                   => 'extensions/blog/views/admin/settings.razr',
+        'comments.autoclose'              => false,
+        'comments.autoclose.days'         => 14,
+        'comments.blacklist'              => '',
+        'comments.comments_per_page'      => 20,
+        'comments.gravatar'               => true,
+        'comments.max_depth'              => 3,
+        'comments.maxlinks'               => 2,
+        'comments.minidle'                => 120,
+        'comments.nested'                 => true,
+        'comments.notifications'          => 'always',
+        'comments.order'                  => 'ASC',
+        'comments.replymail'              => true,
+        'comments.require_name_and_email' => true,
+        'posts.posts_per_page'            => 20,
+        'posts.comments_enabled'          => true,
+        'posts.markdown_enabled'          => true,
+        'posts.show_title'                => true,
+        'permalink'                       => '',
+        'permalink.custom'                => '{slug}',
+        'feed.type'                       => 'rss2',
+        'feed.limit'                      => 20
 
     ],
 
@@ -56,7 +60,7 @@ return [
 
         'blog' => [
             'label'  => 'Blog',
-            'icon'   => 'extension://blog/extension.svg',
+            'icon'   => 'extensions/blog/extension.svg',
             'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'

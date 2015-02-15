@@ -1,4 +1,4 @@
-@script('blog.posts-index', 'extension://blog/assets/js/post/index.js', 'requirejs')
+@script('blog.posts-index', 'extensions/blog/assets/js/post/index.js', 'requirejs')
 
 <form id="js-posts" class="uk-form" action="@url('@blog/post')" method="post">
 
@@ -38,7 +38,7 @@
     <p class="uk-alert uk-alert-info @( $posts ? 'uk-hidden' : '' )">@trans('No posts found.')</p>
 
     <div class="js-table uk-overflow-container">
-        @include('extension://blog/views/admin/post/table.razr')
+        @include('extensions/blog/views/admin/post/table.razr')
     </div>
 
     <ul class="uk-pagination @( $total < 2 ? 'uk-hidden' : '' )" data-uk-pagination="{ pages: @( $total ) }"></ul>

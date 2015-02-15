@@ -1,0 +1,23 @@
+@script('form-password', 'vendor/assets/uikit/js/addons/form-password.js', ['jquery', 'uikit'])
+
+<form class="uk-article uk-form" action="@url('@system/resetpassword/confirm', ['user' => $username, 'key' => $activation])" method="post">
+
+    <h1 class="uk-article-title">@trans('Password confirmation')</h1>
+
+    <div class="uk-form-row js-password">
+        <label for="form-password" class="uk-form-label">@trans('Enter your new password below.')</label>
+        <div class="uk-form-controls">
+            <div class="uk-form-password">
+                <input id="form-password" class="uk-form-width-large" type="password" name="password" value="">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '@trans('Show')', lblHide: '@trans('Hide')' }">@trans('Show')</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <button class="uk-button uk-button-primary" type="submit">@trans('Submit')</button>
+    </div>
+
+    @token
+
+</form>

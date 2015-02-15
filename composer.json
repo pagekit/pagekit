@@ -15,7 +15,11 @@
         "php": ">=5.4.0",
         "pagekit/framework": "0.9.*@dev",
         "pagekit/razr": "0.9.*@dev",
-        "lusitanian/oauth": "0.1.*@dev",
-        "nikic/php-parser": "1.*"
+        "guzzlehttp/guzzle": "4.*",
+        "lusitanian/oauth": "~0.3",
+        "nikic/php-parser": "1.*",
+        "swiftmailer/swiftmailer": "5.*",
+        "symfony/translation": "2.6.*",
+        "symfony/var-dumper": "2.6.*"
     }
 }

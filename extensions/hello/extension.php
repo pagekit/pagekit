@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'hello',
+
     'main' => 'Pagekit\\Hello\\HelloExtension',
 
     'autoload' => [
@@ -10,18 +12,18 @@ return [
 
     ],
 
-    'controllers' => 'src/Controller/*Controller.php',
+    'controllers' => [
 
-    'parameters' => [
-
-        'settings' => [
-
-            'view' => 'extension://hello/views/admin/settings.razr',
-            'defaults' => [
-                'message' => 'World'
-            ]
-
+        '@hello: /hello' => [
+            'Pagekit\\Hello\\Controller\\HelloController',
+            'Pagekit\\Hello\\Controller\\SiteController'
         ]
+    ],
+
+    'config' => [
+
+        'settings.view' => 'extensions/hello/views/admin/settings.razr',
+        'message' => 'World'
 
     ],
 
@@ -29,7 +31,7 @@ return [
 
         'hello' => [
             'label'  => 'Hello',
-            'icon'   => 'extension://hello/extension.svg',
+            'icon'   => 'extensions/hello/extension.svg',
             'url'    => '@hello/hello',
             'active' => '@hello/hello*',
             'access' => 'hello: manage hellos'

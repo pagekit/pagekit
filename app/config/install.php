@@ -2,27 +2,21 @@
 
 return [
 
-    'app' => [
+    'system/installer' => [
 
-        'installer' => true
+        'enabled' => true
 
     ],
 
-    'cache' => [
+    'system/cache' => [
 
         'storage' => 'array'
 
     ],
 
-    'session' => [
+    'framework/session' => [
 
         'storage' => 'array'
-
-    ],
-
-    'profiler' => [
-
-        'enabled' => false
 
     ]
 

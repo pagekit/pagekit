@@ -2,7 +2,7 @@
 
 namespace Pagekit\Hello\Controller;
 
-use Pagekit\Framework\Controller\Controller;
+use Pagekit\Application\Controller;
 
 /**
  * @Route("/hello")
@@ -11,7 +11,7 @@ use Pagekit\Framework\Controller\Controller;
 class HelloController extends Controller
 {
     /**
-     * @Response("extension://hello/views/admin/index.razr")
+     * @Response("extensions/hello/views/admin/index.razr")
      */
     public function indexAction()
     {

@@ -1,0 +1,67 @@
+@script('user', 'extensions/system/modules/user/assets/js/user.js', 'requirejs')
+
+<form id="js-user" class="uk-form" method="post">
+
+    @section('toolbar', 'show')
+        <div class="uk-float-left">
+
+            <a class="uk-button uk-button-primary" href="@url('@system/user/add')">@trans('Add User')</a>
+            <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url('@system/user/delete')">@trans('Delete')</a>
+
+            <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">@trans('More') <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a href="#" data-action="@url('@system/user/status', ['status' => 1])">@trans('Activate')</a></li>
+                        <li><a href="#" data-action="@url('@system/user/status', ['status' => 0])">@trans('Block')</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="uk-float-right uk-hidden-small">
+
+            <select name="filter[status]">
+
+                <option value="">@trans('- Status -')</option>
+                <option value="new"@( $filter['status'] == 'new' ? ' selected' : '' )>@trans('New')</option>
+                @foreach ($statuses as $id => $status)
+                <option value="@( $id )"@( is_numeric($filter['status']) && $filter['status'] === $id ? ' selected' : '' )>@( $status )</option>
+                @endforeach
+            </select>
+
+            <select name="filter[role]">
+                <option value="">@trans('- Role -')</option>
+                @foreach ($roles as $role)
+                <option value="@( $role.id )"@( $filter['role'] == $role.id ? ' selected' : '')>@( $role.name )</option>
+                @endforeach
+            </select>
+
+            <select class="uk-form-width-medium" name="filter[permission]">
+                <option value="">@trans('- Permission -')</option>
+                @foreach ($permissions as $ext => $permission)
+                <optgroup label="@( $ext )">
+                    @foreach ($permission as $id => $perm)
+                    <option value="@( $id )"@( $filter['permission'] == $id ? ' selected' : '')>@trans($perm['title'])</option>
+                    @endforeach
+                </optgroup>
+                @endforeach
+            </select>
+
+            <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
+
+        </div>
+    @endsection
+
+    <p class="uk-alert uk-alert-info @( $users ? 'uk-hidden' : '' )">@trans('No user found.')</p>
+
+    <div class="js-table uk-overflow-container">
+        @include('extensions/system/modules/user/views/admin/table.razr', ['users' => $users])
+    </div>
+
+    <ul class="uk-pagination @( $total < 2 ? 'uk-hidden' : '' )" data-uk-pagination="{ pages: @( $total ) }"></ul>
+    <input type="hidden" name="page" value="0">
+
+    @token
+
+</form>

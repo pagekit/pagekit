@@ -9,10 +9,10 @@
     </thead>
     <tbody>
         @foreach ($packages as $name => $package)
-        @set ($extension = $app.extensions.get($name))
+        @set ($extension = $app.extension.get($name))
         <tr class="@if (!$extension)uk-visible-hover-inline pk-table-disable@endif">
             <td class="pk-table-width-minimum">
-                <img class="uk-img-preserve" src="@($package.extra.image ? url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : url('extension://system/assets/images/placeholder-icon.svg'))" width="50" height="50" alt="@( $package.title )">
+                <img class="uk-img-preserve" src="@($package.extra.image ? static_url($package.repository.path . '/' . $package.name . '/' . $package.extra.image) : static_url('extensions/system/assets/images/placeholder-icon.svg'))" width="50" height="50" alt="@( $package.title )">
             </td>
             <td class="uk-text-nowrap">
                 <h2 class="uk-h3 uk-margin-remove">@( $package.title )</h2>

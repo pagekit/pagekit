@@ -1,4 +1,4 @@
-@style('hello-site', 'extension://hello/assets/css/hello.css')
+@style('hello-site', 'extensions/hello/assets/css/hello.css')
 
 <article>
     <h1>You are viewing article number @( $id )</h1>

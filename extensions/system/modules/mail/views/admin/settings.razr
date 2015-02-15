@@ -1,0 +1,74 @@
+@script('system/mail:settings', 'extensions/system/modules/mail/assets/js/settings.js', 'requirejs')
+
+<h2 class="pk-form-heading">@trans('Email')</h2>
+<div class="uk-form-row">
+    <label for="form-emailaddress" class="uk-form-label">@trans('From Email')</label>
+    <div class="uk-form-controls">
+        <input id="form-emailaddress" class="uk-form-width-large" type="text" name="option[system/mail:settings][from_address]" value="@( $config['from_address'] )">
+    </div>
+</div>
+<div class="uk-form-row">
+    <label for="form-fromname" class="uk-form-label">@trans('From Name')</label>
+    <div class="uk-form-controls">
+        <input id="form-fromname" class="uk-form-width-large" type="text" name="option[system/mail:settings][from_name]" value="@( $config['from_name'] )">
+    </div>
+</div>
+<div class="uk-form-row">
+    <label for="form-mailer" class="uk-form-label">@trans('Mailer')</label>
+    <div class="uk-form-controls">
+        <select id="form-mailer" class="uk-form-width-large" name="option[system/mail:settings][driver]">
+            @foreach (['mail' => __('PHP Mailer'), 'smtp' => __('SMTP Mailer')] as $key => $name)
+            <option value="@( $key )"@( $key == $config['driver'] ? ' selected' : '' )>@( $name )</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="uk-form-row" data-smtp>
+    <div class="uk-form-row">
+        <label for="form-smtpport" class="uk-form-label">@trans('SMTP Port')</label>
+        <div class="uk-form-controls">
+            <input id="form-smtpport" class="uk-form-width-large" type="text" name="option[system/mail:settings][port]" value="@( $config['port'] )">
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label for="form-smtphost" class="uk-form-label">@trans('SMTP Host')</label>
+        <div class="uk-form-controls">
+            <input id="form-smtphost" class="uk-form-width-large" type="text" name="option[system/mail:settings][host]" value="@( $config['host'] )">
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label for="form-smtpuser" class="uk-form-label">@trans('SMTP User')</label>
+        <div class="uk-form-controls">
+            <input id="form-smtpuser" class="uk-form-width-large" type="text" name="option[system/mail:settings][username]" value="@( $config['username'] )">
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label for="form-smtppassword" class="uk-form-label">@trans('SMTP Password')</label>
+        <div class="uk-form-controls js-password">
+            <div class="uk-form-password">
+                <input id="form-smtppassword" class="uk-form-width-large" type="password" name="option[system/mail:settings][password]" value="@( $config['password'] )">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password>@trans('Show')</a>
+            </div>
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label for="form-smtpencryption" class="uk-form-label">@trans('SMTP Encryption')</label>
+        <div class="uk-form-controls">
+            <select id="form-smtpencryption" class="uk-form-width-large" name="option[system/mail:settings][encryption]">
+                <option value="">@trans('None')</option>
+                @foreach (['ssl' => __('SSL'), 'tls' => __('TLS')] as $key => $name)
+                <option value="@($key)"@( !$ssl ? 'disabled' : '' ) @( $key == $config['encryption'] ? ' selected' : '')>@( $name )</option>
+                @endforeach
+            </select>
+            @if (!$ssl)
+            <p class="uk-form-help-block">@trans('Please enable the PHP Open SSL extension.')</p>
+            @endif
+        </div>
+    </div>
+</div>
+<div class="uk-form-row">
+    <div class="uk-form-controls">
+        <button type="button" class="uk-button" data-smtp data-smtp-test="@url('@system/mail/test/smtp')">@trans('Check Connection')</button>
+        <button type="button" class="uk-button" data-mail-test="@url('@system/mail/test/email')">@trans('Send Test Email')</button>
+    </div>
+</div>

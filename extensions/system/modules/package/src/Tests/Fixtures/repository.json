@@ -1,0 +1,13 @@
+{
+    "name": "test",
+    "versions": [{
+        "name": "test",
+        "version": "0.0.1",
+        "type": "extension",
+        "title": "Test",
+        "description": "Test Extension Package ...",
+        "homepage": "http://pagekit.com",
+        "license": "MIT",
+        "authors": []
+    }]
+}

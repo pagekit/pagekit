@@ -1,13 +1,16 @@
 <?php
 
-namespace Pagekit\Menu\Filter;
+namespace Pagekit\System\Menu\Filter;
+
+use Pagekit\Application as App;
+use Pagekit\Menu\Filter\FilterIterator;
 
 class ActiveFilter extends FilterIterator
 {
     /**
-     * @var array
+     * @var string
      */
-    protected $active;
+    protected $route;
 
     /**
      * {@inheritdoc}
@@ -16,9 +19,7 @@ class ActiveFilter extends FilterIterator
     {
         parent::__construct($iterator, $options);
 
-        if (isset($options['active']) && $options['active']) {
-            $this->active = $this['request']->attributes->get('_menu', []);
-        }
+        $this->route = App::request()->attributes->get('_route');
     }
 
     /**
@@ -26,14 +27,19 @@ class ActiveFilter extends FilterIterator
      */
     public function accept()
     {
-        if (null === $this->active) {
-            return true;
-        }
-
         $item = parent::current();
 
-        if (in_array($item->getId(), $this->active)) {
-            $item->setAttribute('active', true);
+        if ($active = $item->getAttribute('active') and is_string($active)) {
+
+            $active = (bool) preg_match('#^'.str_replace('*', '.*', $active).'$#', $this->route);
+
+            $item->setAttribute('active', $active);
+
+            if ($active) {
+                while ($item->getParentId() && $item = $item->getMenu()->getItem($item->getParentId())) {
+                    $item->setAttribute('active', $active);
+                }
+            }
         }
 
         return true;

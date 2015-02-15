@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Component\Config\Config;
+use Pagekit\Config\Config;
 
 $values = array_map('realpath', [
     'path'            => __DIR__.'/..',
@@ -21,10 +21,6 @@ if ($values['config.file']) {
     $config->load($values['config.file']);
 }
 
-if ($config['app.nocache']) {
-    $config->set('cache.storage', 'array');
-}
+$config->set('values', $values);
 
-$values['config'] = $config;
-
-return $values;
+return $config;

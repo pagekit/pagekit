@@ -2,21 +2,15 @@
 
 namespace Pagekit\Blog\Event;
 
-use Pagekit\Blog\Entity\PostRepository;
-use Pagekit\Component\Database\Event\EntityEvent;
-use Pagekit\Component\Database\ORM\Repository;
-use Pagekit\Framework\Event\EventSubscriber;
+use Pagekit\Blog\Entity\Post;
+use Pagekit\Database\Event\EntityEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CommentListener extends EventSubscriber
+class CommentListener implements EventSubscriberInterface
 {
-    /**
-     * @var PostRepository
-     */
-    protected $posts;
-
     public function onCommentChange(EntityEvent $event)
     {
-        $this->getPosts()->updateCommentInfo($event->getEntity()->getPostId());
+        Post::updateCommentInfo($event->getEntity()->getPostId());
     }
 
     /**
@@ -28,17 +22,5 @@ class CommentListener extends EventSubscriber
             'blog.comment.postSave' => 'onCommentChange',
             'blog.comment.postDelete' => 'onCommentChange'
         ];
-    }
-
-    /**
-     * @return Repository
-     */
-    protected function getPosts()
-    {
-        if (!$this->posts) {
-            $this->posts = $this['db.em']->getRepository('Pagekit\Blog\Entity\Post');
-        }
-
-        return $this->posts;
     }
 }

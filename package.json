@@ -1,0 +1,10 @@
+{
+  "name": "pagekit",
+  "devDependencies": {
+    "merge-stream": "^0.1.7",
+    "gulp": "^3.8.10",
+    "gulp-header": "^1.2.2",
+    "gulp-less": "^2.0.1",
+    "gulp-rename": "^1.2.0"
+  }
+}
