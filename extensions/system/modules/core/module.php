@@ -45,7 +45,7 @@ return [
                 return sprintf('        <meta name="generator" content="Pagekit %1$s">', $app['version']);
             });
 
-            $app['exports']->get('pagekit')->add(['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+            $app['scripts']->queue('pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()], [], 'export');
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 

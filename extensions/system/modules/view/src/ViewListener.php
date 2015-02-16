@@ -22,6 +22,8 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('angular-route', 'vendor/assets/angular-route/angular-route.min.js', 'angular');
         $scripts->register('angular-sanitize', 'vendor/assets/angular-sanitize/angular-sanitize.min.js', 'angular');
         $scripts->register('angular-touch', 'vendor/assets/angular-touch/angular-touch.min.js', 'angular');
+        $scripts->register('application', 'extensions/system/app/application.js', 'angular');
+        $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
         $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
         $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
         $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js', 'export-pagekit');
@@ -30,8 +32,6 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
-        $scripts->register('application', 'extensions/system/app/application.js', 'angular');
-        $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');
@@ -39,17 +39,13 @@ class ViewListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers exports and resolves requirejs dependencies.
+     * Resolves requirejs dependencies.
      */
     public function onKernelResponse()
     {
         $scripts = App::scripts();
 
-        foreach (App::exports() as $name => $export) {
-            $scripts->queue("export-$name", sprintf('var %s = %s;', $name, json_encode($export)), [], 'string');
-        }
-
-        // -TODO- remove with full switch to angular
+        // -TODO- remove when alternative is agreed upon
 
         $require = [];
         $requeue = [];

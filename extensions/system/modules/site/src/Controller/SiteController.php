@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        App::exports('site')->add([
+        App::scripts('site', [
             'config'    => [
                 'url'      => App::url()->base(),
                 'url.node' => App::url('@system/node'),
@@ -32,7 +32,7 @@ class SiteController extends Controller
                 'site.edit' => App::view('extensions/system/modules/site/views/tmpl/site.edit.php'),
                 'site.list' => App::view('extensions/system/modules/site/views/tmpl/site.list.php')
             ]
-        ]);
+        ], [], 'export');
 
         return ['head.title' => __('Nodes')];
     }

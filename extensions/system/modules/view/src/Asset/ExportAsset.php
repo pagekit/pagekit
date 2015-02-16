@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\View\Export;
+namespace Pagekit\View\Asset;
 
-class Export implements \JsonSerializable
+class ExportAsset extends StringAsset
 {
     /**
      * @var array
      */
-    protected $values = [];
+    protected $asset = [];
 
     /**
      * Gets a value.
@@ -18,7 +18,7 @@ class Export implements \JsonSerializable
      */
     public function get($key, $default = null)
     {
-        return isset($this->values[$key]) ? $this->values[$key] : $default;
+        return isset($this->asset[$key]) ? $this->asset[$key] : $default;
     }
 
     /**
@@ -30,7 +30,7 @@ class Export implements \JsonSerializable
      */
     public function set($key, $value)
     {
-        $this->values[$key] = $value;
+        $this->asset[$key] = $value;
 
         return $this;
     }
@@ -43,18 +43,16 @@ class Export implements \JsonSerializable
      */
     public function add(array $values)
     {
-        $this->values = array_replace_recursive($this->values, $values);
+        $this->asset = array_replace_recursive($this->asset, $values);
 
         return $this;
     }
 
     /**
-     * Gets values for JSON serialize.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function jsonSerialize()
+    public function __toString()
     {
-        return $this->values;
+        return sprintf('var %s = %s;', $this->name, json_encode($this->asset));
     }
 }
