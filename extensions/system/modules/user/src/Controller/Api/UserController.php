@@ -84,7 +84,7 @@ class UserController
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
      * @Request({"id": "int", "user": "array", "password", "roles": "array"}, csrf=true)
      */
-    public function saveAction($id, $data, $password, $roles = null)
+    public function saveAction($id, $data, $password = null, $roles = null)
     {
         try {
 
@@ -152,12 +152,14 @@ class UserController
                 $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
             }
 
+            unset($data['access'], $data['login'], $data['registered']);
+
             $user->save($data);
 
-            return $user;
+            return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
 
         } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+            return ['error' => $e->getMessage()];
         }
     }
 
