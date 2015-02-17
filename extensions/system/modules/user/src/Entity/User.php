@@ -160,7 +160,15 @@ class User extends BaseUser implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        return array_diff_key(get_object_vars($this), array_flip(['password', 'activation']));
+        $user = array_diff_key(get_object_vars($this), array_flip(['password', 'activation']));
+
+        foreach (['access', 'login', 'registered'] as $date) {
+
+            $user[$date] = $user[$date] ? $user[$date]->format(\DateTime::ISO8601) : null;
+
+        }
+
+        return $user;
     }
 
     /**
