@@ -41,26 +41,26 @@ class UserController
         }
 
         if (isset($filter['search']) && strlen($filter['search'])) {
-            $query->where(function($query) use ($filter) {
+            $query->where(function ($query) use ($filter) {
                 $query->orWhere(['username LIKE :search', 'name LIKE :search', 'email LIKE :search'], ['search' => "%{$filter['search']}%"]);
             });
         }
 
-        $role = isset($filter['role']) && is_numeric($filter['role']) ? intval($filter['role']) : null;
+        $role       = isset($filter['role']) && is_numeric($filter['role']) ? intval($filter['role']) : null;
         $permission = isset($filter['permission']) && strlen($filter['permission']) ? $filter['permission'] : null;
 
         if ($role || $permission) {
 
             if ($role) {
-                $query->whereExists(function($query) use ($role) {
+                $query->whereExists(function ($query) use ($role) {
                     $query->from('@system_user_role u')
-                          ->where(['@system_user.id = u.user_id', 'u.role_id' => $role]);
+                        ->where(['@system_user.id = u.user_id', 'u.role_id' => $role]);
                 });
             }
 
             if ($permission) {
                 $sql = $this->getPermissionSql($permission);
-                $query->whereExists(function($query) use ($sql) {
+                $query->whereExists(function ($query) use ($sql) {
                     $query->from('@system_user_role ur')
                         ->join('@system_role r', 'ur.role_id = r.id')
                         ->where(['@system_user.id = ur.user_id', $sql]);
@@ -101,14 +101,34 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("extensions/system/modules/user/views/admin/edit.razr")
+     * @Response("extensions/system/modules/user/views/admin/edit.php")
      */
     public function editAction($id)
     {
-        $user  = User::where(compact('id'))->related('roles')->first();
-        $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : [];
+        $user  = User::find($id);
+        $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : false;
+        $user->setRoles(null);
 
-        return ['head.title' => __('Edit User'), 'user' => $user, 'roles' => $roles];
+        App::scripts('user', [
+            'config' => [
+                'emailVerification' => App::option('system:user.require_verification'),
+                'currentUser'       => App::user()->getId(),
+                'urls'              => [
+                    'base'  => App::url()->base(),
+                    'index' => App::url('@system/user'),
+                    'user'  => App::url('@api/system/user'),
+                    'role'  => App::url('@api/system/role'),
+                    'tmpl'  => App::url('@system/template')
+                ]
+            ],
+            'data'   => [
+                'user'     => $user,
+                'statuses' => User::getStatuses(),
+                'roles'    => array_values($roles)
+            ]
+        ], [], 'export');
+
+        return ['head.title' => __('Edit User')];
     }
 
     /**
@@ -151,15 +171,17 @@ class UserController
                 throw new Exception(__('Email is invalid.'));
             }
 
-            if (User::where(['id <> :id', ], compact('id'))->where(function($query) use ($name) {
+            if (User::where(['id <> :id',], compact('id'))->where(function ($query) use ($name) {
                 $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
-            })->first()) {
+            })->first()
+            ) {
                 throw new Exception(__('Username not available.'));
             }
 
-            if (User::where(['id <> :id'], compact('id'))->where(function($query) use ($email) {
+            if (User::where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
                 $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
-            })->first()) {
+            })->first()
+            ) {
                 throw new Exception(__('Email not available.'));
             }
 
@@ -281,6 +303,10 @@ class UserController
 
             if ($user && $user->getId() == App::user()->getId() && $user->isAdministrator() && $role->isAdministrator()) {
                 $role->disabled = true;
+            }
+
+            if ($user && $user->hasRole($role)) {
+                $role->selected = true;
             }
         }
 
