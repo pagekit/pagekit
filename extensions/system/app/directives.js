@@ -39,7 +39,7 @@ angular.module('Application')
             model.forEach(function (item) {
                 var listItem = angular.element('<li nestable-item class="uk-nestable-list-item" data-id="{{ node.id }}"></li>').append(tpl).data('node', item.node);
 
-                var children = item['children'];
+                var children = item.children;
                 if (angular.isArray(children) && children.length) {
                     getHtml(children, angular.element('<ul class="uk-nestable-list"></ul>'), tpl).appendTo(listItem);
                 }
@@ -55,7 +55,7 @@ angular.module('Application')
             restrict: 'A',
             scope   : true,
             link    : function ($scope, $element) {
-                $scope['node'] = $element.data('node');
+                $scope.node = $element.data('node');
             }
         };
     })

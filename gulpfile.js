@@ -10,7 +10,9 @@ var fs = require('fs'),
     gulp = require('gulp'),
     header = require('gulp-header'),
     less = require('gulp-less'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish');
 
 // paths of the packages for the compile-task
 var pkgs = [
@@ -21,7 +23,6 @@ var pkgs = [
 
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
-
 
 /**
  * Default gulp task
@@ -69,4 +70,13 @@ gulp.task('compile-less', function() {
  */
 gulp.task('watch', function() {
     gulp.watch('**/*.less', ['compile-less']);
+});
+
+/**
+ * Runs jshint on all .js files
+ */
+gulp.task('lint', function() {
+    return gulp.src(['extensions/**/*.js', 'themes/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish));
 });
