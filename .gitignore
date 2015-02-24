@@ -6,11 +6,10 @@
 /themes/*
 !/themes/alpha
 /vendor/*
-!/vendor/assets
-/vendor/assets/angular*
-/vendor/assets/jquery
-/vendor/assets/uikit
-/vendor/assets/vue
+!/vendor/assets/codemirror
+!/vendor/assets/handlebars
+!/vendor/assets/marked
+!/vendor/assets/requirejs
 /config.php
 /composer.phar
 /composer.lock

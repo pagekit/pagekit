@@ -1,11 +1,4 @@
-<?php
-
-$this['scripts']->queue('vue');
-$this['scripts']->queue('user-edit', 'extensions/system/modules/user/assets/app/edit.js', 'requirejs');
-
-?>
-
-<style> [v-cloak] { display: none; } </style>
+<?php $this['scripts']->queue('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']); ?>
 
 <form id="js-user-edit" class="uk-form uk-form-horizontal" v-on="submit: save" v-cloak>
 

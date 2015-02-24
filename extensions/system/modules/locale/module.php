@@ -7,6 +7,7 @@ use Pagekit\Locale\Loader\ArrayLoader;
 use Pagekit\Locale\Loader\MoFileLoader;
 use Pagekit\Locale\Loader\PhpFileLoader;
 use Pagekit\Locale\Loader\PoFileLoader;
+use Pagekit\System\Event\LocaleEvent;
 use Symfony\Component\Translation\Translator;
 
 return [
@@ -78,6 +79,15 @@ return [
             }
 
         }, 10);
+
+        $app->on('system.loaded', function () use ($app) {
+
+            $event = $app->trigger('system.locale', new LocaleEvent);
+
+            $app['scripts']->get('pagekit')->add(['locale' => $event->getMessages()]);
+            $app['scripts']->register('locale', 'extensions/system/modules/locale/assets/js/locale.js');
+
+        });
 
         $app->on('system.locale', function ($event) {
             $event->addMessages([

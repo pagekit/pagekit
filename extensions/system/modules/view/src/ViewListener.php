@@ -32,7 +32,11 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
+        $scripts->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
         $scripts->register('vue', 'vendor/assets/vue/dist/vue.min.js');
+        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system']);
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');
