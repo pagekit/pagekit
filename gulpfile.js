@@ -2,7 +2,8 @@
  * Popular Tasks
  * -------------
  *
- * compile-less: compiles the less files of the specified packages
+ * compile: compiles the .less files of the specified packages
+ * lint: runs jshint on all .js files
  */
 
 var fs      = require('fs'),
@@ -27,19 +28,19 @@ var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT
 /**
  * Default gulp task
  */
-gulp.task('default', ['compile-less']);
+gulp.task('default', ['compile', 'lint']);
 
 
 /**
- * Compile all main less files of the packages and banner them
+ * Compile all main .less files of the packages and banner them
  */
-gulp.task('compile-less', function () {
+gulp.task('compile', function () {
 
     return merge.apply(null, pkgs.map(function (path) {
 
         var data = {};
 
-        // search for the json file
+        // search for the correct json file used for the banner
         if (fs.existsSync(path + 'theme.json')) {
             data = require('./' + path + 'theme.json');
         } else if (fs.existsSync(path + 'extension.json')) {
@@ -62,10 +63,10 @@ gulp.task('compile-less', function () {
 
 
 /**
- * Watch for changes in all less files
+ * Watch for changes in all .less files
  */
 gulp.task('watch', function () {
-    gulp.watch('**/*.less', ['compile-less']);
+    gulp.watch('**/*.less', ['compile']);
 });
 
 
