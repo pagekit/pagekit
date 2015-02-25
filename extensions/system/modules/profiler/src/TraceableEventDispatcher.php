@@ -489,7 +489,15 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
 
             $event->setDispatcher($self);
 
-            call_user_func($listener, $event, $eventName, $self);
+            $arguments = [];
+
+            if ($event instanceof \Pagekit\Event\Event && $args = $event->getArguments()) {
+                $arguments = array_values($args);
+            }
+
+            array_unshift($arguments, $event);
+
+            call_user_func_array($listener, $arguments);
 
             $e->stop();
 

@@ -16,8 +16,8 @@ angular.module('site')
 
         vm.makeFrontpage = function () {
             bulkSave($filter('toArray')($scope.nodes).filter(function (node) {
-                if (node.data['frontpage']) {
-                    delete node.data['frontpage'];
+                if (node.data.frontpage) {
+                    delete node.data.frontpage;
                     return true;
                 }
 
@@ -36,7 +36,7 @@ angular.module('site')
         };
 
         vm.getNodePath = function (node) {
-            return node.data['frontpage'] ? '/' : node.path;
+            return node.data.frontpage ? '/' : node.path;
         };
 
         vm.getNodeUrl = function (node) {
@@ -99,7 +99,7 @@ angular.module('site')
 
         var modal;
         vm.createMenu = function () {
-            vm.editMenu(new Menu);
+            vm.editMenu(new Menu());
         };
 
         vm.editMenu = function (menu) {
@@ -132,14 +132,14 @@ angular.module('site')
         vm.deleteMenu = function (menu) {
             menu.$delete({ id: menu.id });
             $scope.menus.splice($scope.menus.lastIndexOf(menu), 1);
-        }
+        };
     }])
 
     .controller('editCtrl', ['$scope', '$routeParams', 'Application', 'Node', function ($scope, $routeParams, App, Node) {
 
         var vm = this;
 
-        $scope.node = $routeParams['id'] ? Node.get({ id: $routeParams['id'] }) : new Node({ type: $routeParams['type'] });
+        $scope.node = $routeParams.id ? Node.get({ id: $routeParams.id }) : new Node({ type: $routeParams.type });
 
         $scope.roles = App.data.roles;
 
