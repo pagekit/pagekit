@@ -113,11 +113,11 @@
                 val = params.hasOwnProperty(urlParam) ? params[urlParam] : action.params[urlParam];
 
                 if (typeof val !== 'undefined' && val !== null) {
-                    url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
-                        return val + p1;
+                    url = url.replace(new RegExp(':' + urlParam + '(\\W|$)', 'g'), function(match, p1) {
+                        return encodeUriSegment(val) + p1;
                     });
                 } else {
-                    url = url.replace(new RegExp("(\/?):" + urlParam + "(\\W|$)", "g"), function(match, leadingSlashes, tail) {
+                    url = url.replace(new RegExp('(\/?):' + urlParam + '(\\W|$)', 'g'), function(match, leadingSlashes, tail) {
                         return tail.charAt(0) == '/' ? tail : leadingSlashes + tail;
                     });
                 }
@@ -141,6 +141,22 @@
             return url;
         }
 
+        function encodeUriSegment(val) {
+            return encodeUriQuery(val, true).
+            replace(/%26/gi, '&').
+            replace(/%3D/gi, '=').
+            replace(/%2B/gi, '+');
+        }
+
+        function encodeUriQuery(val, spaces) {
+            return encodeURIComponent(val).
+            replace(/%40/gi, '@').
+            replace(/%3A/gi, ':').
+            replace(/%24/g, '$').
+            replace(/%2C/gi, ',').
+            replace(/%20/g, (spaces ? '%20' : '+'));
+        }
+
     };
 
     Resource.defaults = {
@@ -160,7 +176,7 @@
 
     };
 
-    $.resource = function (url, params, actions, options) {
+    $.resource = function(url, params, actions, options) {
         return new Resource(url, params, actions, options);
     };
 
