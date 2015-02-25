@@ -121,7 +121,7 @@
 
             val = params.hasOwnProperty(urlParam) ? params[urlParam] : action.params[urlParam];
 
-            if ($.type(val) !== 'undefined' && val !== null) {
+            if (typeof val !== 'undefined' && val !== null) {
                 url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
                     return val + p1;
                 });
