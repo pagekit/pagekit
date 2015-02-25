@@ -23,7 +23,7 @@
 
             resource[name] = function(a1, a2, a3, a4) {
 
-                var options = $.extend({dataType: 'json', contentType: 'application/json'}, action), params = {}, data, success, error;
+                var options = $.extend({dataType: 'json', contentType: 'application/json;charset=utf-8'}, action), params = {}, data, success, error;
 
                 switch (arguments.length) {
 
@@ -75,7 +75,7 @@
                 }
 
                 if (data) {
-                    options.data = data;
+                    options.data = JSON.stringify(data);
                 }
 
                 if (success) {
@@ -131,7 +131,7 @@
             }
         });
 
-        if (query) {
+        if (Object.keys(query).length) {
             url += (url.indexOf('?') >= 0 ? '&' : '?') + $.param(query);
         }
 
