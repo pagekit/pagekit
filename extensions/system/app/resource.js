@@ -10,20 +10,23 @@
                 'remove': {type: 'DELETE'},
                 'delete': {type: 'DELETE'}
             },
-            params: {},
-            useMethodOverride: false,
-            stripTrailingSlashes: true
+            options: {
+                useMethodOverride: false,
+                stripTrailingSlashes: true
+            }
         };
 
-        var resource = $.extend(true, {}, defaults, options, {url: url, actions: actions, params: params});
+        var self = $.extend(true, {}, defaults, {actions: actions, options: options});
 
-        $.each(resource.actions, function(name, action) {
+        $.each(self.actions, function(name, action) {
+
+            action = $.extend(true, {url: url, params: params || {}}, action);
 
             var hasBody = /^(POST|PUT|PATCH)$/i.test(action.type);
 
-            resource[name] = function(a1, a2, a3, a4) {
+            self[name] = function(a1, a2, a3, a4) {
 
-                var options = $.extend({dataType: 'json', contentType: 'application/json;charset=utf-8'}, action), params = {}, data, success, error;
+                var options = {}, params = {}, data, success, error;
 
                 switch (arguments.length) {
 
@@ -74,6 +77,8 @@
                     throw "Expected up to 4 arguments [params, data, success, error], got " + arguments.length + " arguments";
                 }
 
+                $.extend(options, {headers: {}, dataType: 'json', contentType: 'application/json;charset=utf-8'}, action);
+
                 if (data) {
                     options.data = JSON.stringify(data);
                 }
@@ -86,16 +91,23 @@
                     options.error = error;
                 }
 
-                return $.ajax(getUrl(resource, params), options);
+                if (self.options.useMethodOverride && /^(PUT|PATCH|DELETE)$/i.test(options.type)) {
+                    options.headers['X-HTTP-Method-Override'] = options.type;
+                    options.type = 'POST';
+                }
+
+                return $.ajax(getUrl(action, params, self.options), options);
             };
         });
 
-        return resource;
+        console.log(self);
+
+        return self;
     };
 
-    function getUrl(resource, params) {
+    function getUrl(action, params, options) {
 
-        var url = resource.url, urlParams = {}, query = {}, val;
+        var url = action.url, urlParams = {}, query = {}, val;
 
         $.each(url.split(/\W/), function(i, param) {
             if (!(new RegExp("^\\d+$").test(param)) && param && (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
@@ -107,7 +119,7 @@
 
         $.each(urlParams, function(urlParam) {
 
-            val = params.hasOwnProperty(urlParam) ? params[urlParam] : resource.params[urlParam];
+            val = params.hasOwnProperty(urlParam) ? params[urlParam] : action.params[urlParam];
 
             if ($.type(val) !== 'undefined' && val !== null) {
                 url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
@@ -121,7 +133,7 @@
 
         });
 
-        if (resource.stripTrailingSlashes) {
+        if (options.stripTrailingSlashes) {
             url = url.replace(/\/+$/, '') || '/';
         }
 
