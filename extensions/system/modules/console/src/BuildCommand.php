@@ -71,7 +71,7 @@ class BuildCommand extends Command
         try {
 
             $cmd = $this->getApplication()->get('extension:translate');
-            foreach (['system', 'page', 'blog', 'installer'] as $extension) {
+            foreach (['system', 'page', 'blog'] as $extension) {
                 $cmd->run(new ArrayInput(['extension' => $extension, '--compile' => true]), $output);
             }
 
