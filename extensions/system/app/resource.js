@@ -100,8 +100,6 @@
             };
         });
 
-        console.log(self);
-
         return self;
     };
 
