@@ -1,6 +1,6 @@
 jQuery(function ($) {
 
-    var vm = new Vue({
+    var User, vm = new Vue({
 
         el: '#js-user-edit',
 
@@ -13,8 +13,10 @@ jQuery(function ($) {
 
         ready: function () {
 
+            User = $.resource(this.config.urls.user);
+
             this.$watch('user.status', function (status) {
-                if ('string' === typeof status) {
+                if (typeof status === 'string') {
                     vm.user.status = parseInt(status);
                 }
             });
@@ -44,7 +46,7 @@ jQuery(function ($) {
 
                 var roles = this.roles.filter(function (role) { return role.selected; }).map(function (role) { return role.id; });
 
-                $.post(this.config.urls.user, { id: this.user.id, user: this.user, password: this.password, roles: roles }, function (data) {
+                User.save({ id: this.user.id, user: this.user, password: this.password, roles: roles }, function (data) {
 
                     if (data.user) {
                         vm.user = data.user;
