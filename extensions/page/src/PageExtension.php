@@ -4,7 +4,6 @@ namespace Pagekit\Page;
 
 use Pagekit\Application as App;
 use Pagekit\Page\Event\NodeListener;
-use Pagekit\Site\Event\TypeEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
@@ -27,8 +26,8 @@ class PageExtension extends Extension
             $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
         });
 
-        $app->on('site.types', function (TypeEvent $event) {
-            $event->register('page', 'Page', [
+        $app->on('site.types', function ($event, $site) {
+            $site->registerType('page', 'Page', [
                 'tmpl.edit'   => 'page.edit'
             ]);
         });

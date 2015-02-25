@@ -7,7 +7,6 @@ use Pagekit\Blog\Content\ReadmorePlugin;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Site\Event\ConfigEvent;
-use Pagekit\Site\Event\TypeEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
@@ -38,17 +37,19 @@ class BlogExtension extends Extension
             $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
         });
 
-        $app->on('site.types', function (TypeEvent $event) {
-            $event->register('blog', 'Blog', [
+        $app->on('site.types', function ($event, $site) {
+
+            $site->registerType('blog', 'Blog', [
                 'type'        => 'mount',
                 'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
                 'url'         => '@blog/site'
             ]);
 
-            $event->register('blog.post', 'Blog Post', [
+            $site->registerType('blog.post', 'Blog Post', [
                 'type'      => 'url',
                 'tmpl.edit' => 'blog.post.edit'
             ]);
+
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {

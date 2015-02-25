@@ -30,16 +30,27 @@ class SiteModule extends Module implements EventSubscriberInterface
     {
         if (!$this->types) {
 
-            $event = new TypeEvent;
-            $event->register('alias', 'Alias', [
+            $this->registerType('alias', 'Alias', [
                 'type'      => 'url',
                 'tmpl.edit' => 'alias.edit'
             ]);
 
-            $this->types = App::trigger('site.types', $event)->getTypes();
+            App::trigger('site.types', [$this]);
         }
 
         return $this->types;
+    }
+
+    /**
+     * Registers a node type.
+     *
+     * @param string $id
+     * @param string $label
+     * @param array  $options
+     */
+    public function registerType($id, $label, array $options = [])
+    {
+        $this->types[$id] = array_merge($options, compact('id', 'label'));
     }
 
     /**
@@ -49,8 +60,6 @@ class SiteModule extends Module implements EventSubscriberInterface
     {
         if (!$this->menus) {
 
-            $event = new MenuEvent;
-
             foreach (App::module() as $module) {
 
                 if (!isset($module->menus)) {
@@ -58,14 +67,30 @@ class SiteModule extends Module implements EventSubscriberInterface
                 }
 
                 foreach ($module->menus as $id => $menu) {
-                    $event->register($id, $menu, ['fixed' => true]);
+                    $this->registerMenu($id, $menu, ['fixed' => true]);
                 }
             }
 
-            $this->menus = App::trigger('site.menus', $event)->getMenus();
+            foreach (App::option('system:site.menus', []) as $menu) {
+                $this->registerMenu($menu['id'], $menu['label']);
+            }
+
+            App::trigger('site.menus', [$this]);
         }
 
         return $this->menus;
+    }
+
+    /**
+     * Registers a menu.
+     *
+     * @param string $id
+     * @param string $label
+     * @param array  $options
+     */
+    public function registerMenu($id, $label, array $options = [])
+    {
+        $this->menus[$id] = array_merge($options, compact('id', 'label'));
     }
 
     /**
@@ -96,16 +121,6 @@ class SiteModule extends Module implements EventSubscriberInterface
     }
 
     /**
-     * Registers menus option.
-     */
-    public function onSiteMenus(MenuEvent $event)
-    {
-        foreach (App::option('system:site.menus', []) as $menu) {
-            $event->register($menu['id'], $menu['label']);
-        }
-    }
-
-    /**
      * Registers alias edit template.
      */
     public function onSystemTmpl(TmplEvent $event)
@@ -133,7 +148,6 @@ class SiteModule extends Module implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'site.menus'     => 'onSiteMenus',
             'system.tmpl'    => 'onSystemTmpl',
             'kernel.request' => ['onKernelRequest', 35]
         ];
