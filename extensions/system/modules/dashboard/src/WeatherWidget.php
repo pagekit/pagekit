@@ -41,7 +41,7 @@ class WeatherWidget implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('extensions/system/modules/dashboard/views/weather/index.razr', compact('widget', 'options'));
+        return App::view('extensions/system/modules/dashboard/views/weather/index.php', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class WeatherWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/modules/dashboard/views/weather/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/dashboard/views/weather/edit.php', compact('widget'));
     }
 }

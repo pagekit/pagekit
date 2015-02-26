@@ -41,7 +41,7 @@ class FeedWidget implements TypeInterface
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('extensions/system/modules/dashboard/views/feed/index.razr', compact('widget', 'options'));
+        return App::view('extensions/system/modules/dashboard/views/feed/index.php', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class FeedWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/modules/dashboard/views/feed/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/dashboard/views/feed/edit.php', compact('widget'));
     }
 }

@@ -15,8 +15,8 @@ return [
         });
 
         $app->on('system.tmpl', function ($event) {
-            $event->register('feed.error', 'extensions/system/modules/dashboard/views/feed/tmpl/error.razr');
-            $event->register('feed.list', 'extensions/system/modules/dashboard/views/feed/tmpl/list.razr');
+            $event->register('feed.error', 'extensions/system/modules/dashboard/views/feed/tmpl/error.php');
+            $event->register('feed.list', 'extensions/system/modules/dashboard/views/feed/tmpl/list.php');
         });
 
     },
