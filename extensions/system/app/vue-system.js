@@ -111,24 +111,26 @@
 
             bind: function() {
 
-                var self = this, expr = this.expression, el = $(this.el), root = $(this.vm.$el);
+                var self = this, vm = this.vm, el = $(this.el), keypath = this.arg, selector = this.expression;
 
                 el.on('change.check-all', function() {
-                    $(expr, root).prop('checked', $(this).prop('checked'));
+                    $(selector, vm.$el).prop('checked', $(this).prop('checked'));
+                    vm.$set(keypath, self.checked());
                 });
 
-                root.on('change.check-all', expr, function() {
+                $(vm.$el).on('change.check-all', selector, function() {
 
                     var checked = self.checked();
 
                     if (checked.length === 0) {
                         el.prop('checked', false).prop('indeterminate', false);
-                    } else if (checked.length == $(expr, root).length) {
+                    } else if (checked.length == $(selector, vm.$el).length) {
                         el.prop('checked', true).prop('indeterminate', false);
                     } else {
                         el.prop('indeterminate', true);
                     }
 
+                    vm.$set(keypath, checked);
                 });
 
             },

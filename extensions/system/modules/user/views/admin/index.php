@@ -38,7 +38,7 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input v-check-all=".js-select" type="checkbox" class="js-select-all"></th>
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th colspan="2">{{ 'User' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
                     <th class="pk-table-width-200">{{ 'Email' | trans }}</th>
@@ -47,7 +47,7 @@
             </thead>
             <tbody>
                 <tr v-repeat="user: users">
-                    <td><input class="js-select" type="checkbox" name="ids[]" value="{{ user.id }}"></td>
+                    <td><input type="checkbox" name="id" value="{{ user.id }}"></td>
                     <td class="pk-table-width-minimum">
                         <img v-gravatar="user.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="">
                     </td>

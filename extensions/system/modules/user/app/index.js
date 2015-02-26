@@ -10,7 +10,8 @@ jQuery(function ($) {
             pages      : user.data.users.pages,
             roles      : user.data.roles,
             statuses   : user.data.statuses,
-            permissions: user.data.permissions
+            permissions: user.data.permissions,
+            selected   : []
         },
 
         ready: function () {
