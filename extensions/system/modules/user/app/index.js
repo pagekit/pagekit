@@ -39,9 +39,12 @@ jQuery(function ($) {
                 vm.permissions.push({ label: group, options: options });
             });
 
+            this.$watch('config.page', function (page) {
+                vm.updateUsers(page);
+            }, true);
 
             this.$watch('config.filter', function () {
-                vm.updateUsers();
+                vm.updateUsers(0);
             }, true);
         },
 
@@ -79,8 +82,8 @@ jQuery(function ($) {
                     .join(', ');
             },
 
-            updateUsers: function () {
-                this.User.query({ filter: this.config.filter, page: this.page }, function (data) {
+            updateUsers: function (page) {
+                this.User.query({ filter: this.config.filter, page: page }, function (data) {
 
                     if (data.users) {
                         vm.$set('users', data.users);
@@ -89,6 +92,8 @@ jQuery(function ($) {
                     if (data.pages) {
                         vm.pages = data.pages;
                     }
+
+                    vm.config.page = page;
 
                 });
             }

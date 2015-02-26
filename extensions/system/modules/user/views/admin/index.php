@@ -72,6 +72,6 @@
         </table>
     </div>
 
-    <ul v-show="pages > 1" class="uk-pagination" data-uk-pagination="{ pages: {{ pages }} }"></ul>
+    <pk-pagination v-with="page: config.page, pages: pages"></pk-pagination>
 
 </div>

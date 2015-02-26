@@ -18,6 +18,9 @@ class UserController
      */
     public function indexAction($filter = null, $page = 0)
     {
+        $roles = $this->getRoles();
+        unset($roles[Role::ROLE_AUTHENTICATED]);
+
         App::scripts('user', [
             'config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
@@ -36,7 +39,7 @@ class UserController
                 'users'       => json_decode(App::router()->call('@api/system/user', compact('filter', 'page'))->getContent()),
                 'statuses'    => User::getStatuses(),
                 'permissions' => App::permissions(),
-                'roles'       => $this->getRoles()
+                'roles'       => $roles
             ]
         ], [], 'export');
 
