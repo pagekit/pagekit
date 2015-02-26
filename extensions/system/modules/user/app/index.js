@@ -1,6 +1,6 @@
 jQuery(function ($) {
 
-    var vm = new Vue({
+    var User, vm = new Vue({
 
         el: '#js-user',
 
@@ -17,8 +17,9 @@ jQuery(function ($) {
 
             var vm = this;
 
+            User = this.$resource(this.config.urls.user);
+
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
-            this.User = $.resource(this.config.urls.user);
 
             this.statuses = [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }];
             $.each(user.data.statuses, function (id, status) {
@@ -51,7 +52,7 @@ jQuery(function ($) {
         methods: {
 
             save: function (user) {
-                this.User.save({ id: user.id }, { id: user.id, user: user }, function (data) {
+                User.save({ id: user.id }, { id: user.id, user: user }, function (data) {
                     vm.updateUsers();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });
@@ -83,7 +84,7 @@ jQuery(function ($) {
             },
 
             updateUsers: function (page) {
-                this.User.query({ filter: this.config.filter, page: page }, function (data) {
+                User.query({ filter: this.config.filter, page: page }, function (data) {
 
                     if (data.users) {
                         vm.$set('users', data.users);
@@ -94,7 +95,6 @@ jQuery(function ($) {
                     }
 
                     vm.config.page = page;
-
                 });
             }
 

@@ -72,6 +72,6 @@
         </table>
     </div>
 
-    <pk-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></pk-pagination>
+    <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
 
 </div>

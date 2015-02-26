@@ -35,12 +35,9 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
         $scripts->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
-        $scripts->register('resource', 'extensions/system/app/resource.js', ['jquery']);
-        $scripts->register('system', 'extensions/system/app/system.js', ['locale', 'resource']);
+        $scripts->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
         $scripts->register('vue', 'vendor/assets/vue/dist/vue.min.js');
-        $scripts->register('vue-components', 'extensions/system/app/vue-components.js', ['vue', 'jquery', 'uikit-pagination']);
-        $scripts->register('vue-directives', 'extensions/system/app/vue-directives.js', ['vue', 'jquery']);
-        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue-directives', 'vue-components', 'system']);
+        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');

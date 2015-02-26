@@ -13,7 +13,7 @@ jQuery(function ($) {
 
         ready: function () {
 
-            User = $.resource(this.config.urls.user);
+            User = this.$resource(this.config.urls.user);
 
             this.$watch('user.status', function (status) {
                 if (typeof status === 'string') {

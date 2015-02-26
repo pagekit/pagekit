@@ -1,10 +1,15 @@
-(function ($) {
+(function($, UIkit) {
 
     function install (Vue) {
 
         Vue.prototype.$date = System.date;
         Vue.prototype.$trans = System.trans;
         Vue.prototype.$transChoice = System.transChoice;
+        Vue.prototype.$resource = System.resource;
+
+        /**
+         * Filters
+         */
 
         Vue.filter('trans', function(id, parameters, domain, locale) {
             return this.$trans(id, parameters, domain, locale);
@@ -36,14 +41,50 @@
                     });
             }
 
-            return $.isArray(collection) ? collection : [];
+            return Array.isArray(collection) ? collection : [];
         });
 
-        Vue.filter('toObject', function (collection) {
-            return $.isArray(collection) ? collection.reduce(function (obj, value, key) {
+        Vue.filter('toObject', function(collection) {
+            return Array.isArray(collection) ? collection.reduce(function(obj, value, key) {
                 obj[key] = value;
                 return obj;
             }, {}) : collection;
+        });
+
+        /**
+         * Pagination component
+         */
+
+        Vue.component('v-pagination', {
+
+            data: function() {
+                return {
+                    page: 1,
+                    pages: 1
+                };
+            },
+
+            replace: true,
+            template: '<ul class="uk-pagination"></ul>',
+
+            ready: function() {
+
+                var vm = this, pagination = UIkit.pagination(this.$el, { pages: this.pages });
+
+                pagination.on('select.uk.pagination', function(e, page) {
+                    vm.$set('page', page);
+                });
+
+                this.$watch('page', function(page) {
+                    pagination.selectPage(page);
+                }, true);
+
+                this.$watch('pages', function(pages) {
+                    pagination.render(pages);
+                }, true);
+
+                pagination.selectPage(this.page);
+            }
         });
 
     }
@@ -52,4 +93,4 @@
         Vue.use(install);
     }
 
-})(jQuery);
+})(jQuery, UIkit);
