@@ -63,10 +63,6 @@ jQuery(function ($) {
                 this.save(user);
             },
 
-            showGravatar: function (user) {
-                return gravatar(user.email, { size: 80, backup: 'mm', rating: 'g' });
-            },
-
             showVerified: function (user) {
                 return this.config.emailVerification && user.data.verified;
             },

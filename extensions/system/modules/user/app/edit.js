@@ -25,10 +25,6 @@ jQuery(function ($) {
 
         computed: {
 
-            gravatar: function () {
-                return gravatar(this.user.email, { size: 300, backup: 'mm', rating: 'g' });
-            },
-
             loginText: function () {
                 return this.$trans('Last login: %date%', { date: this.user.login ? this.$date('medium', this.user.login) : this.$trans('Never') });
             },

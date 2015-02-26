@@ -49,7 +49,7 @@
                 <tr v-repeat="user: users">
                     <td><input class="js-select" type="checkbox" name="ids[]" value="{{ user.id }}"></td>
                     <td class="pk-table-width-minimum">
-                        <img v-attr="src: showGravatar(user)" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="">
+                        <img v-gravatar="user.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="">
                     </td>
                     <td class="uk-text-nowrap">
                         <a v-attr="href: config.urls.edit + user.id">{{ user.username }}</a>

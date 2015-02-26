@@ -11,10 +11,10 @@
         <div class="uk-width-medium-1-4 pk-sidebar-left">
 
             <div class="uk-panel uk-panel-divider uk-text-center">
-                <p>
-                    <img v-attr="src: gravatar" class="uk-border-circle" height="150" width="150">
-                </p>
 
+                <p>
+                    <img v-gravatar="user.email" class="uk-border-circle" height="150" width="150">
+                </p>
                 <ul v-show="user.id" class="uk-list">
                     <li v-if="user.isNew"><span class="uk-badge">{{ 'New' | trans }}</span></li>
                     <li v-if="!user.isNew"><span class="uk-badge uk-badge-{{ user.status ? 'success' : 'danger' }}">{{ statuses[user.status] }}</span></li>
