@@ -8,7 +8,7 @@
         <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <?= $app['sections']->render('head') ?>
         <?php $app['styles']->queue('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->queue('login', 'extensions/system/assets/js/login.js', ['jquery', 'uikit', 'requirejs']) ?>
+        <?php $app['scripts']->queue('login', 'extensions/system/modules/theme/js/login.js', ['uikit']) ?>
     </head>
     <body class="uk-height-1-1">
 

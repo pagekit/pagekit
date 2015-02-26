@@ -1,4 +1,4 @@
-require(['jquery', 'domReady!'], function($) {
+jQuery(function($) {
 
     var login = $('.js-login'), messages = $('.pk-system-messages').children();
 
