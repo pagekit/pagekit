@@ -23,12 +23,12 @@ jQuery(function ($) {
 
             this.statuses = [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }];
             $.each(user.data.statuses, function (id, status) {
-                vm.statuses.push({ text: status, value: id })
+                vm.statuses.push({ text: status, value: id });
             });
 
             this.roles = [{ text: this.$trans('- Role -'), value: '' }];
             $.each(user.data.roles, function (id, role) {
-                vm.roles.push({ text: role.name, value: id })
+                vm.roles.push({ text: role.name, value: id });
             });
 
             this.permissions = [{ text: this.$trans('- Permission -'), value: '' }];
