@@ -1,4 +1,4 @@
-@script('settings', 'extensions/system/assets/js/settings/settings.js', 'requirejs')
+@script('settings', 'extensions/system/assets/js/settings/settings.js', 'uikit')
 
 <form class="uk-form uk-form-horizontal" action="@url('@system/settings/save')" method="post">
 
