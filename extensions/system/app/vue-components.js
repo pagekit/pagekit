@@ -12,7 +12,7 @@
         replace: true,
         template: '<ul class="uk-pagination"></ul>',
 
-        attached: function() {
+        ready: function() {
 
             var vm = this, pagination = UI.pagination(this.$el, { pages: this.pages });
 
