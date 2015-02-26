@@ -13,7 +13,7 @@
     "angular-translate": "2.5.*",
     "gravatarjs": "~1.0.0",
     "uikit": "~2.16.2",
-    "vue": "0.11.*"
+    "vue": "~0.11.5"
   },
   "private": true
 }
