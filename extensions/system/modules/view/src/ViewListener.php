@@ -26,12 +26,21 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('application-directives', 'extensions/system/app/directives.js', 'application');
         $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
         $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
-        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js', 'export-pagekit');
+        $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js', 'pagekit');
         $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
         $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
+        $scripts->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
+        $scripts->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
+        $scripts->register('resource', 'extensions/system/app/resource.js', ['jquery']);
+        $scripts->register('system', 'extensions/system/app/system.js', ['locale', 'resource']);
+        $scripts->register('vue', 'vendor/assets/vue/dist/vue.min.js');
+        $scripts->register('vue-components', 'extensions/system/app/vue-components.js', ['vue', 'jquery', 'uikit-pagination']);
+        $scripts->register('vue-directives', 'extensions/system/app/vue-directives.js', ['vue', 'jquery']);
+        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue-directives', 'vue-components', 'system']);
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');

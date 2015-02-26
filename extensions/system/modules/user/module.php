@@ -143,7 +143,8 @@ return [
     'config' => [
 
         'registration' => 'admin',
-        'require_verification' => true
+        'require_verification' => true,
+        'users_per_page' => 2
 
     ]
 

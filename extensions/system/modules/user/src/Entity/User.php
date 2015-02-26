@@ -168,6 +168,9 @@ class User extends BaseUser implements \JsonSerializable
 
         }
 
+        $user['isNew'] = $this->isNew();
+        $user['statusText'] = $this->isNew() ? __('New') : $this->getStatusText();
+
         return $user;
     }
 
