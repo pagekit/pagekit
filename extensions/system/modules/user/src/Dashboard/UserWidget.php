@@ -52,7 +52,7 @@ class UserWidget implements TypeInterface
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return App::view('extensions/system/modules/user/views/dashboard/index.razr', compact('widget', 'users', 'options'));
+        return App::view('extensions/system/modules/user/views/dashboard/index.php', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -60,6 +60,6 @@ class UserWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/modules/user/views/dashboard/edit.razr', compact('widget'));
+        return App::view('extensions/system/modules/user/views/dashboard/edit.php', compact('widget'));
     }
 }
