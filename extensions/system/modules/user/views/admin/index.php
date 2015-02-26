@@ -38,7 +38,7 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" class="js-select-all"></th>
+                    <th class="pk-table-width-minimum"><input v-check-all=".js-select" type="checkbox" class="js-select-all"></th>
                     <th colspan="2">{{ 'User' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
                     <th class="pk-table-width-200">{{ 'Email' | trans }}</th>
