@@ -1,4 +1,4 @@
-require(['jquery', 'domReady!'], function($) {
+jQuery(function($) {
 
     var page = $('#js-update'), params = page.data();
 

@@ -1,4 +1,4 @@
-require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
+jQuery(function($) {
 
     var modal;
 
@@ -6,15 +6,15 @@ require(['jquery', 'uikit', 'domReady!'], function($, uikit) {
         e.preventDefault();
 
         if (!modal) {
-            modal = uikit.modal('#modal-clearcache');
+            modal = UIkit.modal('#modal-clearcache');
 
             modal.element.find('form').on('submit', function(e) {
                 e.preventDefault();
 
                 $.post($(this).attr('action'), $(this).serialize(),function(data) {
-                    uikit.notify(data.message, 'success');
+                    UIkit.notify(data.message, 'success');
                 }).fail(function() {
-                    uikit.notify('Clearing cache failed.', 'danger');
+                    UIkit.notify('Clearing cache failed.', 'danger');
                 }).always(function() {
                     modal.hide();
                 });

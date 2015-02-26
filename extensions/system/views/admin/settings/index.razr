@@ -1,5 +1,5 @@
 @style('system', 'extensions/system/assets/css/system.css')
-@script('settings', 'extensions/system/assets/js/settings/index.js', 'requirejs')
+@script('settings', 'extensions/system/assets/js/settings/index.js', 'uikit')
 
 <h2 class="uk-h3">@trans('System')</h2>
 
