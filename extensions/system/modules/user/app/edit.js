@@ -46,10 +46,10 @@ jQuery(function ($) {
 
                 var roles = this.roles.filter(function (role) { return role.selected; }).map(function (role) { return role.id; });
 
-                User.save({ id: this.user.id, user: this.user, password: this.password, roles: roles }, function (data) {
+                User.save({ user: this.user, password: this.password, roles: roles, id: this.user.id }, function (data) {
 
                     if (data.user) {
-                        vm.user = data.user;
+                        vm.$set('user', data.user);
                     }
 
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');

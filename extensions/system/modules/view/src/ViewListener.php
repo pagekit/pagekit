@@ -37,7 +37,8 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('resource', 'extensions/system/app/resource.js', ['jquery']);
         $scripts->register('system', 'extensions/system/app/system.js', ['locale', 'resource']);
         $scripts->register('vue', 'vendor/assets/vue/dist/vue.min.js');
-        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system']);
+        $scripts->register('vue-directives', 'extensions/system/app/vue-directives.js', ['vue']);
+        $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue-directives', 'system']);
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.razr');
