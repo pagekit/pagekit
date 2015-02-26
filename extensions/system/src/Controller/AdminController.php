@@ -22,7 +22,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/login", defaults={"_maintenance"=true})
-     * @Response("extensions/system/modules/theme/templates/login.razr", layout=false)
+     * @Response("extensions/system/modules/theme/templates/login.php", layout=false)
      */
     public function loginAction()
     {

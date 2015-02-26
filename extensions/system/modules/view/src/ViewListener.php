@@ -40,7 +40,7 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
 
         App::sections()->set('messages', function() {
-            return App::view('extensions/system/views/messages/messages.razr');
+            return App::view('extensions/system/views/messages/messages.php');
         });
     }
 

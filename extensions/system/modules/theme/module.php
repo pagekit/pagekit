@@ -8,10 +8,10 @@ return [
 
         $app->on('system.admin', function () use ($app) {
 
-            $app['view']->setLayout($this->path.'/templates/template.razr');
+            $app['view']->setLayout($this->path.'/templates/template.php');
 
             $app['sections']->addRenderer('toolbar', function ($name, $value, $options = []) use ($app) {
-                return $app['view']->render('extensions/system/modules/theme/views/renderer/toolbar.razr', compact('name', 'value', 'options'));
+                return $app['view']->render('extensions/system/modules/theme/views/renderer/toolbar.php', compact('name', 'value', 'options'));
             });
 
             $app['sections']->register('toolbar', ['renderer' => 'toolbar']);
@@ -31,12 +31,16 @@ return [
 
                 });
 
+                // set user
+                $app['view']->set('user', $app['user']);
+
                 // set menus
                 $app['view']->set('nav', $app['admin.menu']);
                 $app['view']->set('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
 
                 // set font subset
                 $app['view']->set('subset', 'latin,latin-ext');
+
             });
 
         });

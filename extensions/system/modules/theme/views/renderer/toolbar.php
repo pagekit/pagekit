@@ -1,5 +1,5 @@
 <div class="tm-toolbar">
     <div class="uk-clearfix uk-container uk-container-center">
-        @raw( $value )
+        <?= $value ?>
     </div>
 </div>
