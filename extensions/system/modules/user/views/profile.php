@@ -1,4 +1,4 @@
-<?php $app['scripts']->queue('form-password', 'vendor/assets/uikit/js/addons/form-password.js', ['jquery', 'uikit']) ?>
+<?php $app['scripts']->queue('uikit-form-password') ?>
 
 <form class="uk-article uk-form uk-form-stacked" action="<?= $app['url']->get('@system/profile/save') ?>" method="post">
 

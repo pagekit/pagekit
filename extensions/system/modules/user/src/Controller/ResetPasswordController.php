@@ -13,7 +13,7 @@ use Pagekit\User\Entity\User;
 class ResetPasswordController extends Controller
 {
     /**
-     * @Response("extensions/system/modules/user/views/reset/request.razr")
+     * @Response("extensions/system/modules/user/views/reset/request.php")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"email"})
-     * @Response("extensions/system/modules/user/views/reset/request.razr")
+     * @Response("extensions/system/modules/user/views/reset/request.php")
      */
     public function resetAction($email)
     {
@@ -61,7 +61,7 @@ class ResetPasswordController extends Controller
                 $mail = App::mailer()->create();
                 $mail->setTo($user->getEmail())
                      ->setSubject(__('Reset password for %site%.', ['%site%' => App::system()->config('site_title')]))
-                     ->setBody(App::view('extensions/system/modules/user/views/mails/reset.razr', compact('user', 'url', 'mail')), 'text/html')
+                     ->setBody(App::view('extensions/system/modules/user/views/mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
                      ->send();
 
             } catch (\Exception $e) {
@@ -83,7 +83,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"user", "key"})
-     * @Response("extensions/system/modules/user/views/reset/confirm.razr")
+     * @Response("extensions/system/modules/user/views/reset/confirm.php")
      */
     public function confirmAction($username = "", $activation = "")
     {

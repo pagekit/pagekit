@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
-        
+
             /*
              * Client-specific
              */
@@ -22,7 +22,7 @@
             .ExternalClass span,
             .ExternalClass font,
             .ExternalClass td,
-            .ExternalClass div { line-height: 100%; } 
+            .ExternalClass div { line-height: 100%; }
 
             /* Prevent WebKit and Windows mobile changing default text sizes */
             body, table, td, p, a, li, blockquote {
@@ -34,7 +34,7 @@
             table, td {
                 mso-table-lspace: 0pt;
                 mso-table-rspace: 0pt;
-            } 
+            }
 
             /* Help Microsoft platforms smoothly render resized images */
             img { -ms-interpolation-mode: bicubic; }
@@ -67,7 +67,7 @@
              * All declarations have to be important to override the inline styles
              */
 
-            @@media (max-width: 480px) {
+            @media (max-width: 480px) {
 
                 #panel-table {
                     max-width: 480px !important;
@@ -87,18 +87,16 @@
                     <table cellpadding="0" cellspacing="0" border="0" width="600" id="panel-table">
                         <tr>
                             <td valign="top" align="center" style="font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666;">
-                                
-                                <h1 style="margin: 0 0 30px 0; padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; font-size: 34px; line-height: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333 !important;">@trans('Hello!')</h1>
 
-                                <p style="margin: 20px 0; text-align: left;">@trans('A new user signed up for %site% with the username %username%. Please click the button below to approve the account.', ['%site%' => '<strong style="color: #444">'.$app.module.system.config.site_title.'</strong>', '%username%' => '<strong style="color: #444">'.$user.username.'</strong>'])</p>
+                                <h1 style="margin: 0 0 30px 0; padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; font-size: 34px; line-height: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333 !important;"><?= __('Hi %name%!', ['%name%' => $user->getName()]) ?></h1>
 
-                                @set($link = url('@system/registration/activate', ['user' => $user.username, 'key' => $user.activation], true))
+                                <p style="margin: 20px 0; text-align: left;"><?= __('Thank you for signing up for %site%. Just one more step! Please click the button below to activate your account.', ['%site%' => '<strong style="color: #444">'.$app['module']['system']->config('site_title').'</strong>']) ?></p>
 
                                 <p style="margin: 40px 0 0 0; text-align: center;">
-                                    <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="@($link)">@trans('Appove Account')</a>
+                                    <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="<?= $app['url']->get('@system/registration/activate', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true) ?>"><?= __('Activate Account') ?></a>
                                 </p>
 
-                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="@($app.url.base(true))">@($app.url.base(true))</a></p>
+                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="<?= $app['url']->base(true) ?>"><?= $app['url']->base(true) ?></a></p>
 
                             </td>
                         </tr>
