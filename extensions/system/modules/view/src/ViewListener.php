@@ -28,6 +28,7 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
         $scripts->register('requirejs-config', 'extensions/system/assets/js/require.js', 'pagekit');
         $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
+        $scripts->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);

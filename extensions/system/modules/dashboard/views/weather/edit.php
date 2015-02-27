@@ -1,4 +1,4 @@
-<?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/assets/js/weather.js', ['requirejs']) ?>
+<?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/app/weather.js', ['vue-system', 'uikit-autocomplete']) ?>
 
 <div class="uk-form-row">
     <label for="form-weather-location" class="uk-form-label"><?= __('Location') ?></label>

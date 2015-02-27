@@ -1,14 +1,14 @@
-<?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/assets/js/weather.js', ['requirejs']) ?>
+<?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/app/weather.js', 'vue-system') ?>
 
 <div class="uk-text-center" data-weather="<?= $this->escape(json_encode(['id' => $widget->get('id'), 'units' => $widget->get('units'), 'location' => $widget->get('location')])) ?>">
-    <div class="js-spinner uk-text-center"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
-    <div class="pk-weather-image">
-    	<img class="js-weather-icon uk-text-top">
-    	<span class="js-weather-temperature uk-text-large uk-text-muted pk-weather-temperature"></span>
+    <div class="uk-text-center" v-show="status == 'loading'">
+        <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
     </div>
-    <h1 class="js-weather-city uk-h2 uk-margin-remove"></h1>
-    <h2 class="js-weather-country uk-h3 uk-margin-remove uk-text-muted"></h2>
-
-    <h1 class="js-error uk-hidden uk-h3"><?= __('Weather') ?></h1>
-    <div class="js-error uk-hidden uk-alert uk-alert-danger"><?= __('Unable to retrieve weather data.') ?></div>
+    <div class="pk-weather-image">
+    	<img class="uk-text-top" v-attr="src: icon">
+    	<span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>
+    </div>
+    <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
+    <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
+    <div class="uk-alert uk-alert-danger" v-show="status == 'error'"><?= __('Unable to retrieve weather data.') ?></div>
 </div>
