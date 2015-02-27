@@ -18,7 +18,7 @@ jQuery(function ($) {
 
             var vm = this;
 
-            User = this.$resource(this.config.urls.user);
+            User = this.$resource(this.config.urls.user+'/:id');
 
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
 
@@ -54,7 +54,28 @@ jQuery(function ($) {
 
             save: function (user) {
                 User.save({ id: user.id }, { id: user.id, user: user }, function (data) {
-                    vm.updateUsers();
+                    vm.updateUsers(vm.config.page);
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                });
+            },
+
+            status: function(status) {
+
+                var users = this.getSelected();
+
+                users.forEach(function(user) {
+                    user.status = status;
+                });
+
+                User.save({ id: 'bulk' }, { users: users }, function (data) {
+                    vm.updateUsers(vm.config.page);
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                });
+            },
+
+            remove: function() {
+                User.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                    vm.updateUsers(vm.config.page);
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });
             },
@@ -94,6 +115,10 @@ jQuery(function ($) {
                     vm.config.page = page;
                     vm.selected = [];
                 });
+            },
+
+            getSelected: function() {
+                return this.users.filter(function(user) { return -1 !== vm.selected.indexOf(user.id.toString()) });
             }
 
         }

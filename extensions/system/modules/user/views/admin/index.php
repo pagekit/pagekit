@@ -7,9 +7,9 @@
     <div class="uk-float-left">
 
         <a class="uk-button uk-button-primary" v-attr="href: config.urls.edit">{{ 'Add User' | trans }}</a>
-        <a class="uk-button pk-button-danger uk-hidden js-show-on-select" v-on="click: delete">{{ 'Delete' | trans }}</a>
+        <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
-        <div class="uk-button-dropdown uk-hidden js-show-on-select" data-uk-dropdown="{ mode: 'click' }">
+        <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
             <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
             <div class="uk-dropdown uk-dropdown-small">
                 <ul class="uk-nav uk-nav-dropdown">

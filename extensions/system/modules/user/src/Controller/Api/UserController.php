@@ -21,7 +21,7 @@ class UserController
     public function indexAction($filter = [], $page = 0)
     {
         $query  = User::query();
-        $filter = array_merge(['status' => '', 'search' => '', 'permission' => '', 'role' => ''], $filter);
+        $filter = array_merge(array_fill_keys(['status', 'search', 'permission', 'role'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
         if (is_numeric($status)) {
@@ -182,18 +182,20 @@ class UserController
 
     /**
      * @Route("/bulk", methods="POST")
-     * @Request({"users": "json"}, csrf=true)
+     * @Request({"users": "array"}, csrf=true)
      */
     public function bulkSaveAction($users = [])
     {
-        // -TODO-
+        foreach ($users as $data) {
+            $this->saveAction($data, null, null, isset($data['id']) ? $data['id'] : 0);
+        }
 
-        return User::findAll();
+        return ['message' => __('Users saved.')];
     }
 
     /**
      * @Route("/bulk", methods="DELETE")
-     * @Request({"ids": "json"}, csrf=true)
+     * @Request({"ids": "array"}, csrf=true)
      */
     public function bulkDeleteAction($ids = [])
     {
@@ -201,7 +203,7 @@ class UserController
             $this->deleteAction($id);
         }
 
-        return User::findAll();
+        return ['message' => __('Users deleted.')];
     }
 
     /**

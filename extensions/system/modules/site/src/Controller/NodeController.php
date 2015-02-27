@@ -73,7 +73,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/bulk", methods="POST")
-     * @Request({"nodes": "json"}, csrf=true)
+     * @Request({"nodes": "array"}, csrf=true)
      */
     public function bulkSaveAction($nodes = [])
     {
@@ -86,7 +86,7 @@ class NodeController extends Controller
 
     /**
      * @Route("/bulk", methods="DELETE")
-     * @Request({"ids": "json"}, csrf=true)
+     * @Request({"ids": "array"}, csrf=true)
      */
     public function bulkDeleteAction($ids = [])
     {

@@ -126,7 +126,7 @@
 
                 vm.$watch(keypath, function(selected) {
 
-                    $(selector, vm.$el).prop('checked', function(i, value) {
+                    $(selector, vm.$el).prop('checked', function() {
                         return selected.indexOf($(this).val()) !== -1;
                     });
 
