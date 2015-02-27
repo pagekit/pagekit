@@ -54,62 +54,61 @@
 
         });
 
-
         function getOptions(action, args) {
 
-            var options = $.extend({headers: {}, dataType: 'json', contentType: 'application/json;charset=utf-8'}, action), params = {}, data, success, error;
+            var options = $.extend({ headers: {}, dataType: 'json', contentType: 'application/json;charset=utf-8' }, action), params = {}, data, success, error;
 
             switch (args.length) {
 
-              case 4:
+                case 4:
 
-                error = args[3];
-                success = args[2];
-
-              case 3:
-              case 2:
-
-                if ($.isFunction(args[1])) {
-
-                  if ($.isFunction(args[0])) {
-
-                    success = args[0];
-                    error = args[1];
-
-                    break;
-                  }
-
-                  success = args[1];
-                  error = args[2];
-
-                } else {
-
-                    params = args[0];
-                    data = args[1];
+                    error = args[3];
                     success = args[2];
 
+                case 3:
+                case 2:
+
+                    if ($.isFunction(args[1])) {
+
+                        if ($.isFunction(args[0])) {
+
+                            success = args[0];
+                            error = args[1];
+
+                            break;
+                        }
+
+                        success = args[1];
+                        error = args[2];
+
+                    } else {
+
+                        params = args[0];
+                        data = args[1];
+                        success = args[2];
+
+                        break;
+                    }
+
+                case 1:
+
+                    if ($.isFunction(args[0])) {
+                        success = args[0];
+                    } else if (/^(POST|PUT|PATCH)$/i.test(options.type)) {
+                        data = args[0];
+                    } else {
+                        params = args[0];
+                    }
+
                     break;
-                }
 
-              case 1:
+                case 0:
 
-                if ($.isFunction(args[0])) {
-                    success = args[0];
-                } else if (/^(POST|PUT|PATCH)$/i.test(options.type)) {
-                    data = args[0];
-                } else {
-                    params = args[0];
-                }
+                    break;
 
-                break;
+                default:
 
-              case 0:
-
-                break;
-
-              default:
-
-                throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
+                    throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
             }
 
             options.url = getUrl(action, params);
