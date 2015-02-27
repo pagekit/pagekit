@@ -109,6 +109,8 @@
 
         Vue.directive('check-all', {
 
+            isLiteral: true,
+
             bind: function() {
 
                 var self = this, vm = this.vm, el = $(this.el), keypath = this.arg, selector = this.expression;
@@ -119,18 +121,17 @@
                 });
 
                 $(vm.$el).on('change.check-all', selector, function() {
+                    self.state();
+                    vm.$set(keypath, self.checked());
+                });
 
-                    var checked = self.checked();
+                vm.$watch(keypath, function(selected) {
+                    $(selector, vm.$el).each(function() {
+                        var el = $(this);
+                        el.prop('checked', -1 !== selected.indexOf(el.val()));
+                    });
 
-                    if (checked.length === 0) {
-                        el.prop('checked', false).prop('indeterminate', false);
-                    } else if (checked.length == $(selector, vm.$el).length) {
-                        el.prop('checked', true).prop('indeterminate', false);
-                    } else {
-                        el.prop('indeterminate', true);
-                    }
-
-                    vm.$set(keypath, checked);
+                    self.state();
                 });
 
             },
@@ -155,7 +156,19 @@
                 return checked;
             },
 
-            isLiteral: true
+            state: function() {
+
+                var checked = this.checked(), el = $(this.el);
+
+                if (checked.length === 0) {
+                    el.prop('checked', false).prop('indeterminate', false);
+                } else if (checked.length == $(this.expression, this.vm.$el).length) {
+                    el.prop('checked', true).prop('indeterminate', false);
+                } else {
+                    el.prop('indeterminate', true);
+                }
+            }
+
         });
 
     }

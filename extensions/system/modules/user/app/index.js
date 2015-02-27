@@ -92,6 +92,7 @@ jQuery(function ($) {
                     }
 
                     vm.config.page = page;
+                    vm.selected = [];
                 });
             }
 
