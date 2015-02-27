@@ -1,2 +1,0 @@
-@trans('Hi') @( $user.username )<br>
-<a href="@url('@system/auth/logout', ['redirect' => $redirect])">@trans('Logout')</a>

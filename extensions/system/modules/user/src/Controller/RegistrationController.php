@@ -14,7 +14,7 @@ use Pagekit\User\Entity\User;
 class RegistrationController extends Controller
 {
     /**
-     * @Response("extensions/system/modules/user/views/registration.razr")
+     * @Response("extensions/system/modules/user/views/registration.php")
      */
     public function indexAction()
     {

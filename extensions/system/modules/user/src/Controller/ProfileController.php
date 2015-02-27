@@ -14,7 +14,7 @@ use Pagekit\User\Event\ProfileSaveEvent;
 class ProfileController extends Controller
 {
     /**
-     * @Response("extensions/system/modules/user/views/profile.razr")
+     * @Response("extensions/system/modules/user/views/profile.php")
      */
     public function indexAction()
     {
