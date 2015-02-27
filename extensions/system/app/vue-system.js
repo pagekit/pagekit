@@ -172,6 +172,49 @@
 
         });
 
+        /**
+         * Checkbox directive
+         */
+
+        Vue.directive('checkbox', {
+
+            twoWay: true,
+
+            bind: function() {
+
+                var el = $(this.el), model = this.vm.$get(this.expression);
+
+                el.on('change.checkbox', function() {
+
+                    var contains = model.indexOf(el.val());
+
+                    if (el.prop('checked')) {
+                        if (-1 === contains) {
+                            model.push(el.val());
+                        }
+                    } else if (-1 !== contains) {
+                        model.splice(contains, 1);
+                    }
+                });
+
+            },
+
+            update: function(value) {
+
+                if (undefined === value) {
+                    this.set([]);
+                    return;
+                }
+
+                $(this.el).prop('checked', -1 !== value.indexOf(this.el.value));
+            },
+
+            unbind: function() {
+                $(this.el).off('.checkbox');
+            }
+
+        });
+
     }
 
     if (window.Vue) {

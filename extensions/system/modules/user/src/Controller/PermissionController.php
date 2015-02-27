@@ -12,26 +12,23 @@ use Pagekit\User\Entity\Role;
 class PermissionController
 {
     /**
-     * @Response("extensions/system/modules/user/views/admin/permission.razr")
+     * @Response("extensions/system/modules/user/views/admin/permission.php")
      */
     public function indexAction()
     {
-        $roles = Role::query()->orderBy('priority')->get();
+        App::scripts('permission', [
+            'config' => [
+                'urls' => [
+                    'base' => App::url()->base(),
+                    'role' => App::url('@api/system/role'),
+                ]
+            ],
+            'data'   => [
+                'permissions' => App::permissions(),
+                'roles'       => Role::query()->orderBy('priority')->get()
+            ]
+        ], [], 'export');
 
-        return ['head.title' => __('Permissions'), 'roles' => $roles, 'permissions' => App::permissions()];
-    }
-
-    /**
-     * @Request({"permissions": "array"}, csrf=true)
-     * @Response("json")
-     */
-    public function saveAction($permissions = [])
-    {
-        foreach (Role::findAll() as $role) {
-            $role->setPermissions(isset($permissions[$role->getId()]) ? $permissions[$role->getId()] : []);
-            $role->save();
-        }
-
-        return App::request()->isXmlHttpRequest() ? ['message' => __('Permissions saved!')] : $this->redirect('@system/permission');
+        return ['head.title' => __('Permissions')];
     }
 }

@@ -31,21 +31,16 @@ class RoleController extends Controller
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"id": "int", "name", "permissions": "array"}, csrf=true)
+     * @Request({"role": "array", "id": "int"}, csrf=true)
      */
-    public function saveAction($id, $name = '', $permissions = [])
+    public function saveAction($data, $id = 0)
     {
         // is new ?
         if (!$role = Role::find($id)) {
             $role = new Role;
         }
 
-        if ($name !== '') {
-            $role->setName($name);
-        }
-
-        $role->setPermissions($permissions);
-        $role->save();
+        $role->save($data);
 
         return $role;
     }
@@ -65,7 +60,7 @@ class RoleController extends Controller
 
     /**
      * @Route("/bulk", methods="POST")
-     * @Request({"roles": "json"}, csrf=true)
+     * @Request({"roles": "array"}, csrf=true)
      */
     public function bulkSaveAction($roles = [])
     {
@@ -73,12 +68,12 @@ class RoleController extends Controller
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return Role::findAll();
+        return ['message' => 'Success'];
     }
 
     /**
      * @Route("/bulk", methods="DELETE")
-     * @Request({"ids": "json"}, csrf=true)
+     * @Request({"ids": "array"}, csrf=true)
      */
     public function bulkDeleteAction($ids = [])
     {
