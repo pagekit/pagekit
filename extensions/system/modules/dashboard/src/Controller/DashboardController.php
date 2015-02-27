@@ -29,7 +29,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extensions/system/modules/dashboard/views/admin/index.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/index.php")
      */
     public function indexAction()
     {
@@ -49,7 +49,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("extensions/system/modules/dashboard/views/admin/settings.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/settings.php")
      */
     public function settingsAction()
     {
@@ -71,7 +71,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("extensions/system/modules/dashboard/views/admin/edit.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/edit.php")
      */
     public function addAction($id)
     {
@@ -95,7 +95,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("extensions/system/modules/dashboard/views/admin/edit.razr")
+     * @Response("extensions/system/modules/dashboard/views/admin/edit.php")
      */
     public function editAction($id)
     {
