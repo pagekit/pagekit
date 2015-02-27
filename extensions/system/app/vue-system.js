@@ -121,14 +121,13 @@
                 });
 
                 $(vm.$el).on('change.check-all', selector, function() {
-                    self.state();
-                    vm.$set(keypath, self.checked());
+                    vm.$set(keypath, self.state());
                 });
 
                 vm.$watch(keypath, function(selected) {
-                    $(selector, vm.$el).each(function() {
-                        var el = $(this);
-                        el.prop('checked', -1 !== selected.indexOf(el.val()));
+
+                    $(selector, vm.$el).prop('checked', function(i, value) {
+                        return selected.indexOf($(this).val()) !== -1;
                     });
 
                     self.state();
@@ -143,6 +142,21 @@
 
             },
 
+            state: function() {
+
+                var el = $(this.el), checked = this.checked();
+
+                if (checked.length === 0) {
+                    el.prop('checked', false).prop('indeterminate', false);
+                } else if (checked.length == $(this.expression, this.vm.$el).length) {
+                    el.prop('checked', true).prop('indeterminate', false);
+                } else {
+                    el.prop('indeterminate', true);
+                }
+
+                return checked;
+            },
+
             checked: function() {
 
                 var checked = [];
@@ -154,19 +168,6 @@
                 });
 
                 return checked;
-            },
-
-            state: function() {
-
-                var checked = this.checked(), el = $(this.el);
-
-                if (checked.length === 0) {
-                    el.prop('checked', false).prop('indeterminate', false);
-                } else if (checked.length == $(this.expression, this.vm.$el).length) {
-                    el.prop('checked', true).prop('indeterminate', false);
-                } else {
-                    el.prop('indeterminate', true);
-                }
             }
 
         });
