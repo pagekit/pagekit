@@ -173,6 +173,8 @@
 
             var self = this, urlParams = {}, query = {}, val;
 
+            params = params || {};
+
             $.each(url.split(/\W/), function(i, param) {
                 if (!(new RegExp("^\\d+$").test(param)) && param && (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
                     urlParams[param] = true;
