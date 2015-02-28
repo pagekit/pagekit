@@ -6,16 +6,24 @@
 
         version: config.version,
 
-        url: function(url, params) {
+        url: function(url, params, static) {
+
+            var base = config.url;
+
+            if (params === true) {
+                params = {}; static = true;
+            }
+
+            if (static === true) {
+                base = base.replace(/\/index.php$/i, '');
+            }
 
             if (!url.match(/^(https?:)?\//)) {
-                url = config.url + '/' + url;
+                url = base + '/' + url;
             }
 
             return Url.get(url, params);
         },
-
-        path: config.url.replace(/\/index.php$/i, ''),
 
         trans: Translator.trans,
 

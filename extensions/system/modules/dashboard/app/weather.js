@@ -83,7 +83,7 @@ jQuery(function($) {
 
                 };
 
-                return System.path + '/extensions/system/assets/images/weather-' + icons[icon];
+                return System.url('extensions/system/assets/images/weather-:icon', {icon: icons[icon]}, true);
             }
 
         }
