@@ -2,6 +2,7 @@
 
     function install (Vue) {
 
+        Vue.prototype.$url = System.url;
         Vue.prototype.$date = System.date;
         Vue.prototype.$trans = System.trans;
         Vue.prototype.$transChoice = System.transChoice;

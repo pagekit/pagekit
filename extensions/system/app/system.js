@@ -2,7 +2,18 @@
 
     var config = $.extend({}, pagekit), locale = config.locale;
 
-    window.System = $.extend({
+    window.System = {
+
+        version: config.version,
+
+        url: function(url, params) {
+
+            if (!url.match(/^(https?:)?\//)) {
+                url = config.url + '/' + url;
+            }
+
+            return Url.get(url, params);
+        },
 
         path: config.url.replace(/\/index.php$/i, ''),
 
@@ -27,7 +38,7 @@
             return new Resource(url, params, actions, options);
         }
 
-    }, config);
+    };
 
     $(document).on('ajaxSend', function(e, xhr){
         xhr.setRequestHeader('X-XSRF-TOKEN', config.csrf);
@@ -111,7 +122,7 @@
                     throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
             }
 
-            options.url = getUrl(action, params);
+            options.url = Url.get(action.url, $.extend({}, action.params, params));
 
             if (data) {
                 options.data = (typeof data === 'object') ? JSON.stringify(data) : data;
@@ -133,67 +144,6 @@
             return options;
         }
 
-        function getUrl(action, params) {
-
-            var url = action.url, urlParams = {}, query = {}, val;
-
-            $.each(url.split(/\W/), function(i, param) {
-                if (!(new RegExp("^\\d+$").test(param)) && param && (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
-                    urlParams[param] = true;
-                }
-            });
-
-            url = url.replace(/\\:/g, ':');
-
-            $.each(urlParams, function(urlParam) {
-
-                val = params.hasOwnProperty(urlParam) ? params[urlParam] : action.params[urlParam];
-
-                if (typeof val !== 'undefined' && val !== null) {
-                    url = url.replace(new RegExp(':' + urlParam + '(\\W|$)', 'g'), function(match, p1) {
-                        return encodeUriSegment(val) + p1;
-                    });
-                } else {
-                    url = url.replace(new RegExp('(\/?):' + urlParam + '(\\W|$)', 'g'), function(match, leadingSlashes, tail) {
-                        return (tail.charAt(0) == '/') ? tail : leadingSlashes + tail;
-                    });
-                }
-
-            });
-
-            if (self.options.stripTrailingSlashes) {
-                url = url.replace(/\/+$/, '') || '/';
-            }
-
-            $.each(params, function(key, value) {
-                if (!urlParams[key]) {
-                    query[key] = value;
-                }
-            });
-
-            if (Object.keys(query).length) {
-                url += (url.indexOf('?') >= 0 ? '&' : '?') + $.param(query);
-            }
-
-            return url;
-        }
-
-        function encodeUriSegment(val) {
-            return encodeUriQuery(val, true).
-            replace(/%26/gi, '&').
-            replace(/%3D/gi, '=').
-            replace(/%2B/gi, '+');
-        }
-
-        function encodeUriQuery(val, spaces) {
-            return encodeURIComponent(val).
-            replace(/%40/gi, '@').
-            replace(/%3A/gi, ':').
-            replace(/%24/g, '$').
-            replace(/%2C/gi, ',').
-            replace(/%20/g, (spaces ? '%20' : '+'));
-        }
-
     };
 
     Resource.defaults = {
@@ -207,8 +157,91 @@
         },
 
         options: {
-            useMethodOverride: false,
-            stripTrailingSlashes: true
+            useMethodOverride: false
+        }
+
+    };
+
+
+    /**
+     * The Url provides URL templating
+     */
+
+    var Url = {
+
+        get: function(url, params) {
+
+            var self = this, urlParams = {}, query = {}, val;
+
+            $.each(url.split(/\W/), function(i, param) {
+                if (!(new RegExp("^\\d+$").test(param)) && param && (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
+                    urlParams[param] = true;
+                }
+            });
+
+            url = url.replace(/\\:/g, ':');
+
+            $.each(urlParams, function(urlParam) {
+
+                val = params[urlParam];
+
+                if (typeof val !== 'undefined' && val !== null) {
+                    url = url.replace(new RegExp(':' + urlParam + '(\\W|$)', 'g'), function(match, part) {
+                        return self.encodeUriSegment(val) + part;
+                    });
+                } else {
+                    url = url.replace(new RegExp('(\/?):' + urlParam + '(\\W|$)', 'g'), function(match, slashes, tail) {
+                        return (tail.charAt(0) == '/') ? tail : slashes + tail;
+                    });
+                }
+
+            });
+
+            url = url.replace(/\/+$/, '') || '/';
+
+            $.each(params, function(key, value) {
+                if (!urlParams[key]) {
+                    query[key] = value;
+                }
+            });
+
+            if (Object.keys(query).length) {
+                url += (url.indexOf('?') >= 0 ? '&' : '?') + $.param(query);
+            }
+
+            return url;
+        },
+
+        parse: function(url) {
+
+            var pattern = RegExp("^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?"), matches = url.match(pattern);
+
+            return {
+                url: url,
+                scheme: matches[1] || '',
+                host: matches[2] || '',
+                path: matches[3] || '',
+                query: matches[4] || '',
+                fragment: matches[5] || ''
+            };
+        },
+
+        encodeUriSegment: function(val) {
+
+            return this.encodeUriQuery(val, true).
+                replace(/%26/gi, '&').
+                replace(/%3D/gi, '=').
+                replace(/%2B/gi, '+');
+        },
+
+        encodeUriQuery: function(val, spaces) {
+
+            return encodeURIComponent(val).
+                replace(/%40/gi, '@').
+                replace(/%3A/gi, ':').
+                replace(/%24/g, '$').
+                replace(/%2C/gi, ',').
+                replace(/%20/g, (spaces ? '%20' : '+'));
         }
 
     };
