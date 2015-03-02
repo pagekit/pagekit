@@ -156,8 +156,8 @@ class DashboardController extends Controller
      */
     public function reorderAction($order = [])
     {
-        $reordered = [];
         $widgets = $this->dashboard->getWidgets();
+        $reordered = [];
 
         foreach ($order as $id) {
             if ($widget = $this->dashboard->getWidget($id)) {
@@ -165,7 +165,9 @@ class DashboardController extends Controller
             }
         }
 
-        $this->dashboard->saveWidgets($reordered);
+        if (count($widgets) == count($reordered)) {
+            $this->dashboard->saveWidgets($reordered);
+        }
 
         return ['message' => __('Widgets reordered.')];
     }
