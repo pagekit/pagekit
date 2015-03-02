@@ -122,7 +122,7 @@ class DashboardController extends Controller
                 $id = uniqid();
             }
 
-            $this->save(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
+            $this->dashboard->saveWidgets(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
 
             App::message()->success($new ? __('Widget created.') : __('Widget saved.'));
 
@@ -145,7 +145,7 @@ class DashboardController extends Controller
             unset($widgets[$id]);
         }
 
-        $this->save($widgets);
+        $this->dashboard->saveWidgets($widgets);
 
         return ['message' => _c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)), 'widgets' => $widgets];
     }
@@ -156,17 +156,17 @@ class DashboardController extends Controller
      */
     public function reorderAction($order = [])
     {
-        // $reordered = [];
-        // $widgets = $this->dashboard->getWidgets();
+        $reordered = [];
+        $widgets = $this->dashboard->getWidgets();
 
-        // foreach ($order as $data) {
-        //     $id = $data['id'];
-        //     if (isset($widgets[$id])) {
-        //         $reordered[$id] = $widgets[$id];
-        //     }
-        // }
+        foreach ($order as $data) {
+            $id = $data['id'];
+            if (isset($widgets[$id])) {
+                $reordered[$id] = $widgets[$id];
+            }
+        }
 
-        // $this->save($reordered);
+        $this->dashboard->saveWidgets($reordered);
 
         return ['message' => __('Widgets reordered.')];
     }
@@ -184,22 +184,6 @@ class DashboardController extends Controller
         $widget->setSettings($data);
 
         return $widget;
-    }
-
-    /**
-     * @param string[]      $dashboard
-     * @param UserInterface $user
-     */
-    protected function save($dashboard, $user = null)
-    {
-        if (null === $user) {
-            $user = App::user();
-        }
-
-        // make sure user is registered in the entity manager
-        $user = User::find($user->getId());
-        $user->set('dashboard', $dashboard);
-        $user->save();
     }
 
     protected function chunkList($list, $p) {

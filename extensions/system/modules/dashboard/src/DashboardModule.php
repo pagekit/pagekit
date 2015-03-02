@@ -6,6 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Dashboard\Widget\FeedWidget;
 use Pagekit\Dashboard\Widget\WeatherWidget;
+use Pagekit\User\Entity\User;
 
 class DashboardModule extends Module
 {
@@ -20,6 +21,8 @@ class DashboardModule extends Module
     }
 
     /**
+     * Gets a widget.
+     *
      * @return array
      */
     public function getWidget($id)
@@ -30,6 +33,8 @@ class DashboardModule extends Module
     }
 
     /**
+     * Gets all user widgets.
+     *
      * @return array
      */
     public function getWidgets()
@@ -47,6 +52,23 @@ class DashboardModule extends Module
     }
 
     /**
+     * Save widgets on user.
+     *
+     * @param array $widgets
+     */
+    public function saveWidgets(array $widgets)
+    {
+        $id = App::user()->getId();
+
+        if ($user = User::find($id)) {
+            $user->set('dashboard', $widgets);
+            $user->save();
+        }
+    }
+
+    /**
+     * Gets a widget type.
+     *
      * @return Type
      */
     public function getType($id)
@@ -57,6 +79,8 @@ class DashboardModule extends Module
     }
 
     /**
+     * Gets registered widget types.
+     *
      * @return array
      */
     public function getTypes()
