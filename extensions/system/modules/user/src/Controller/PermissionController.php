@@ -17,12 +17,6 @@ class PermissionController
     public function indexAction()
     {
         App::scripts('permission', [
-            'config' => [
-                'urls' => [
-                    'base' => App::url()->base(),
-                    'role' => App::url('@api/system/role'),
-                ]
-            ],
             'data'   => [
                 'permissions' => App::permissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()

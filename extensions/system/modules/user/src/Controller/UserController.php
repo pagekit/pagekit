@@ -24,15 +24,7 @@ class UserController
             'config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
                 'filter'            => $filter,
-                'page'              => $page,
-                'urls'              => [
-                    'base'  => App::url()->base(),
-                    'user'  => App::url('@api/system/user'),
-                    'role'  => App::url('@api/system/role'),
-                    'tmpl'  => App::url('@system/template'),
-                    'index' => App::url('@system/user'),
-                    'edit'  => App::url('@system/user/edit', ['id' => ''])
-                ]
+                'page'              => $page
             ],
             'data'   => [
                 'users'       => json_decode(App::router()->call('@api/system/user', compact('filter', 'page'))->getContent()),
@@ -62,14 +54,7 @@ class UserController
         App::scripts('user', [
             'config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
-                'currentUser'       => App::user()->getId(),
-                'urls'              => [
-                    'base'  => App::url()->base(),
-                    'index' => App::url('@system/user'),
-                    'user'  => App::url('@api/system/user'),
-                    'role'  => App::url('@api/system/role'),
-                    'tmpl'  => App::url('@system/template')
-                ]
+                'currentUser'       => App::user()->getId()
             ],
             'data'   => [
                 'user'     => $user,

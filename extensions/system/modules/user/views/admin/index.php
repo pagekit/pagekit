@@ -6,7 +6,7 @@
 
     <div class="uk-float-left">
 
-        <a class="uk-button uk-button-primary" v-attr="href: config.urls.edit">{{ 'Add User' | trans }}</a>
+        <a class="uk-button uk-button-primary" v-attr="href: $url('admin/system/user/edit')">{{ 'Add User' | trans }}</a>
         <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
         <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
@@ -52,7 +52,7 @@
                         <img v-gravatar="user.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="">
                     </td>
                     <td class="uk-text-nowrap">
-                        <a v-attr="href: config.urls.edit + user.id">{{ user.username }}</a>
+                        <a v-attr="href: $url('admin/system/user/edit', { id: user.id})">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">

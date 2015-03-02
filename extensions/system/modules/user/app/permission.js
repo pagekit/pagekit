@@ -5,14 +5,13 @@ jQuery(function ($) {
         el: '#js-permission',
 
         data: {
-            config: permission.config,
             roles: permission.data.roles,
             permissions: permission.data.permissions
         },
 
         ready: function () {
 
-            Role = this.$resource(this.config.urls.role+'/:id');
+            Role = this.$resource(this.$url('api/system/role')+'/:id');
 
             var save = UIkit.Utils.debounce(this.save, 1000);
             this.$watch('roles', function () {

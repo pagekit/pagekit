@@ -18,7 +18,7 @@ jQuery(function ($) {
 
             var vm = this;
 
-            User = this.$resource(this.config.urls.user+'/:id');
+            User = this.$resource(this.$url('api/system/user')+'/:id');
 
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
 
