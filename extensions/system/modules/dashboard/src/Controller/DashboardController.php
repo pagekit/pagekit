@@ -7,7 +7,6 @@ use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Model\UserInterface;
-use Pagekit\Widget\Event\RegisterWidgetEvent;
 use Pagekit\Widget\Model\Widget;
 
 /**
@@ -16,7 +15,7 @@ use Pagekit\Widget\Model\Widget;
 class DashboardController extends Controller
 {
     /**
-     * @var RegisterWidgetEvent
+     * @var array
      */
     protected $types;
 
@@ -25,7 +24,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->types = App::trigger('system.dashboard', new RegisterWidgetEvent);
+        $this->types = App::module('system/dashboard')->getTypes();
     }
 
     /**
@@ -215,7 +214,7 @@ class DashboardController extends Controller
     {
         $types = [];
 
-        foreach (App::trigger('system.dashboard', new RegisterWidgetEvent) as $type) {
+        foreach (App::module('system/dashboard')->getTypes() as $type) {
             $types[$type->getId()] = $type;
         }
 

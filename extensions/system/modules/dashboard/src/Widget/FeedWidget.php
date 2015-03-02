@@ -1,19 +1,19 @@
 <?php
 
-namespace Pagekit\Dashboard;
+namespace Pagekit\Dashboard\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class WeatherWidget extends Type
+class FeedWidget extends Type
 {
     /**
      * {@inheritdoc}
      */
     public function getId()
     {
-        return 'widget.weather';
+        return 'widget.feed';
     }
 
     /**
@@ -21,7 +21,7 @@ class WeatherWidget extends Type
      */
     public function getName()
     {
-        return __('Weather');
+        return __('Feed');
     }
 
     /**
@@ -30,10 +30,10 @@ class WeatherWidget extends Type
     public function getDescription(WidgetInterface $widget = null)
     {
         if (null === $widget) {
-            return __('Weather Widget');
+            return __('Feed Widget');
         }
 
-        return $widget->get('location', __('No location chosen.'));
+        return $widget->get('title', __('No title given.'));
     }
 
     /**
@@ -41,7 +41,7 @@ class WeatherWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('extensions/system/modules/dashboard/views/weather/index.php', compact('widget', 'options'));
+        return App::view('extensions/system/modules/dashboard/views/feed/index.php', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class WeatherWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/modules/dashboard/views/weather/edit.php', compact('widget'));
+        return App::view('extensions/system/modules/dashboard/views/feed/edit.php', compact('widget'));
     }
 }

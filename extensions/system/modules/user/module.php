@@ -50,8 +50,8 @@ return [
             $event->register(new LoginWidget);
         });
 
-        $app->on('system.dashboard', function ($event) {
-            $event->register(new UserWidget);
+        $app->on('system.dashboard', function ($event, $dashboard) {
+            $dashboard->registerType(new UserWidget);
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {

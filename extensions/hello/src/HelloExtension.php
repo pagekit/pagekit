@@ -21,8 +21,8 @@ class HelloExtension extends Extension
             $event->register('Pagekit\Hello\HelloWidget');
         });
 
-        $app->on('system.dashboard', function(RegisterWidgetEvent $event) {
-            $event->register('Pagekit\Hello\HelloWidget');
+        $app->on('system.dashboard', function($event, $dashboard) {
+            $dashboard->registerType('Pagekit\Hello\HelloWidget');
         });
 
         $app->on('system.link', function(LinkEvent $event) {
