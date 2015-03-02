@@ -22,6 +22,27 @@ jQuery(function ($) {
         },
 
         methods: {
+
+            getAuthenticatedRole: function () {
+                return Vue.filter('toArray')(this.roles).filter(function(role) { return role.isAuthenticated; })[0];
+            },
+
+            addPermission: function(role, permission) {
+                return !role.isAdministrator ? role.permissions.push(permission) : null;
+            },
+
+            hasPermission: function(role, permission) {
+                return -1 !== role.permissions.indexOf(permission);
+            },
+
+            isInherited: function(role, permission) {
+                return !role.isLocked && this.hasPermission(this.getAuthenticatedRole(), permission);
+            },
+
+            showFakeCheckbox: function(role, permission) {
+                return role.isAdministrator || (this.isInherited(role, permission) && !this.hasPermission(role, permission))
+            },
+
             save: function () {
 
                 var self = this;

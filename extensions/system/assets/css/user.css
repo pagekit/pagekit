@@ -2,33 +2,20 @@
    User extension
  ========================================================================== */
 
-/* Fake click
- ========================================================================== */
+/* Fake click*/
+ /*========================================================================== */
 
 .pk-checkbox-fake {
-    display: none;
-    position: relative;
-    cursor: pointer;
+    position:relative;
 }
 
-.pk-checkbox-fake > div {
+.pk-checkbox-fake > span {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 }
-
-
-/* Permission view
- ========================================================================== */
-
-.pk-permission-inherited .pk-checkbox { display: none; }
-.pk-permission-inherited .pk-checkbox-fake { display: inline; }
-
-.pk-permission-enabled .pk-checkbox-fake { display: none; }
-.pk-permission-enabled .pk-checkbox { display: inline; }
-
 
 /* Role view
  ========================================================================== */
