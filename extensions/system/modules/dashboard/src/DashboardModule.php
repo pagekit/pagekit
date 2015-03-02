@@ -16,6 +16,44 @@ class DashboardModule extends Module
      */
     public function main(App $app)
     {
+        $this->types = [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getWidget($id)
+    {
+        $widgets = $this->getWidgets();
+
+        return isset($widgets[$id]) ? $widgets[$id] : null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWidgets()
+    {
+        $widgets  = [];
+        $defaults = App::system()->config('dashboard.default');
+
+        foreach (App::user()->get('dashboard', $defaults) as $id => $widget) {
+            if ($type = $this->getType($widget['type'])) {
+                $widgets[$id] = array_merge(['title' => $type->getName()], $widget);
+            }
+        }
+
+        return $widgets;
+    }
+
+    /**
+     * @return Type
+     */
+    public function getType($id)
+    {
+        $types = $this->getTypes();
+
+        return isset($types[$id]) ? $types[$id] : null;
     }
 
     /**

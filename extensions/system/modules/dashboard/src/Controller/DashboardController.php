@@ -15,16 +15,16 @@ use Pagekit\Widget\Model\Widget;
 class DashboardController extends Controller
 {
     /**
-     * @var array
+     * @var DashboardModule
      */
-    protected $types;
+    protected $dashboard;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->types = App::module('system/dashboard')->getTypes();
+        $this->dashboard = App::module('system/dashboard');
     }
 
     /**
@@ -35,8 +35,8 @@ class DashboardController extends Controller
         $widgets = [];
         $columns = [];
 
-        foreach ($this->getWidgets() as $id => $data) {
-            if ($type = $this->types[$data['type']]) {
+        foreach ($this->dashboard->getWidgets() as $id => $data) {
+            if ($type = $this->dashboard->getType($data['type'])) {
                 $widgets[$id] = $type->render($this->create($id, $data));
                 $columns[] = $id;
             }
@@ -53,8 +53,8 @@ class DashboardController extends Controller
     public function settingsAction()
     {
         App::scripts('dashboard', [
-            'types' => $this->getTypes(),
-            'widgets' => $this->getWidgets()
+            'types' => $this->dashboard->getTypes(),
+            'widgets' => $this->dashboard->getWidgets()
         ], [], 'export');
 
         return ['head.title' => __('Dashboard Settings')];
@@ -68,7 +68,7 @@ class DashboardController extends Controller
     {
         try {
 
-            if (!$type = $this->types[$id]) {
+            if (!$type = $this->dashboard->getType($id)) {
                 throw new Exception(__('Invalid widget type.'));
             }
 
@@ -92,17 +92,15 @@ class DashboardController extends Controller
     {
         try {
 
-            $widgets = $this->getWidgets();
-
-            if (!isset($widgets[$id]) or !isset($widgets[$id]['type'])) {
+            if (!$widget = $this->dashboard->getWidget($id)) {
                 throw new Exception(__('Invalid widget id.'));
             }
 
-            if (!$type = $this->types[$widgets[$id]['type']]) {
+            if (!$type = $this->dashboard->getType($widget['type'])) {
                 throw new Exception(__('Invalid widget type.'));
             }
 
-            $widget = $this->create($id, $widgets[$id]);
+            $widget = $this->create($id, $widget);
 
             return ['head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget];
 
@@ -124,10 +122,7 @@ class DashboardController extends Controller
                 $id = uniqid();
             }
 
-            $widgets      = $this->getWidgets();
-            $widgets[$id] = $widget;
-
-            $this->save($widgets);
+            $this->save(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
 
             App::message()->success($new ? __('Widget created.') : __('Widget saved.'));
 
@@ -144,7 +139,7 @@ class DashboardController extends Controller
      */
     public function deleteAction($ids = [])
     {
-        $widgets = $this->getWidgets();
+        $widgets = $this->dashboard->getWidgets();
 
         foreach ($ids as $id) {
             unset($widgets[$id]);
@@ -161,17 +156,17 @@ class DashboardController extends Controller
      */
     public function reorderAction($order = [])
     {
-        $reordered = [];
-        $widgets = $this->getWidgets();
+        // $reordered = [];
+        // $widgets = $this->dashboard->getWidgets();
 
-        foreach ($order as $data) {
-            $id = $data['id'];
-            if (isset($widgets[$id])) {
-                $reordered[$id] = $widgets[$id];
-            }
-        }
+        // foreach ($order as $data) {
+        //     $id = $data['id'];
+        //     if (isset($widgets[$id])) {
+        //         $reordered[$id] = $widgets[$id];
+        //     }
+        // }
 
-        $this->save($reordered);
+        // $this->save($reordered);
 
         return ['message' => __('Widgets reordered.')];
     }
@@ -205,41 +200,6 @@ class DashboardController extends Controller
         $user = User::find($user->getId());
         $user->set('dashboard', $dashboard);
         $user->save();
-    }
-
-    /**
-     * @return array
-     */
-    protected function getTypes($id = null)
-    {
-        $types = [];
-
-        foreach (App::module('system/dashboard')->getTypes() as $type) {
-            $types[$type->getId()] = $type;
-        }
-
-        if ($id !== null) {
-            return isset($types[$id]) ? $types[$id] : null;
-        }
-
-        return $types;
-    }
-
-    /**
-     * @return array
-     */
-    protected function getWidgets()
-    {
-        $widgets  = [];
-        $defaults = App::system()->config('dashboard.default');
-
-        foreach (App::user()->get('dashboard', $defaults) as $id => $widget) {
-            if ($type = $this->getTypes($widget['type'])) {
-                $widgets[$id] = array_merge(['title' => $type->getName()], $widget);
-            }
-        }
-
-        return $widgets;
     }
 
     protected function chunkList($list, $p) {
