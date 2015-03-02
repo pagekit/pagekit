@@ -5,8 +5,6 @@ namespace Pagekit\Dashboard\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
-use Pagekit\User\Entity\User;
-use Pagekit\User\Model\UserInterface;
 use Pagekit\Widget\Model\Widget;
 
 /**
