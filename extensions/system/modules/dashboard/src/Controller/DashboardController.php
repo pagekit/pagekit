@@ -159,10 +159,9 @@ class DashboardController extends Controller
         $reordered = [];
         $widgets = $this->dashboard->getWidgets();
 
-        foreach ($order as $data) {
-            $id = $data['id'];
-            if (isset($widgets[$id])) {
-                $reordered[$id] = $widgets[$id];
+        foreach ($order as $id) {
+            if ($widget = $this->dashboard->getWidget($id)) {
+                $reordered[$id] = $widget;
             }
         }
 

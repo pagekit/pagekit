@@ -1,4 +1,4 @@
-<?php $this['scripts']->queue('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', ['vue-system']) ?>
+<?php $this['scripts']->queue('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', ['vue-system', 'uikit-nestable']) ?>
 
 <div id="dashboard" class="uk-form">
 
@@ -26,7 +26,7 @@
     </div>
 
     <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }">
-        <li v-repeat="widget: widgets">
+        <li v-repeat="widget: widgets" data-id="{{ $key }}">
             <div class="uk-nestable-item pk-table-fake">
                 <div class="pk-table-width-minimum"><div class="uk-nestable-handle">​</div></div>
                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ $key }}"></div>

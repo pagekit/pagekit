@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-    new Vue({
+    var vm = new Vue({
 
         el: '#dashboard',
 
@@ -8,16 +8,7 @@ jQuery(function($) {
 
         ready: function() {
 
-            var self = this, el = $(this.$el);
-
-            // save widgets order on nestable change
-            // el.on('change.uk.nestable', 'ul.uk-nestable', function() {
-            //     $.post(self.config.url.reorder, {order: $(this).data('nestable').serialize()}, function(data) {
-            //         UIkit.notify(data.message || 'Widgets order updated', 'success');
-            //     }).fail(function() {
-            //         UIkit.notify('Unable to reorder widgets.', 'danger');
-            //     });
-            // });
+            $(this.$el).on('change.uk.nestable', 'ul.uk-nestable', this.reorder);
 
         },
 
@@ -25,14 +16,25 @@ jQuery(function($) {
 
             remove: function() {
 
-                var self = this;
-
                 $.post(this.$url('admin/system/dashboard/delete'), {ids: this.selected}, function(data) {
 
-                    self.$set('widgets', data.widgets);
-                    self.$set('selected', []);
+                    vm.$set('widgets', data.widgets);
+                    vm.$set('selected', []);
 
                     UIkit.notify(data.message, 'success');
+                });
+            },
+
+            reorder: function() {
+
+                var order = $.map($('[data-uk-nestable]', this.$el).data('nestable').serialize(), function(data) {
+                    return data.id;
+                });
+
+                $.post(this.$url('admin/system/dashboard/reorder'), {order: order}, function(data) {
+                    UIkit.notify(data.message || vm.$trans('Widgets order updated'), 'success');
+                }).fail(function() {
+                    UIkit.notify(vm.$trans('Unable to reorder widgets.'), 'danger');
                 });
             }
 
