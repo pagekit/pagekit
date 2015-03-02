@@ -1,1 +1,0 @@
-<div class="js-error uk-alert uk-alert-danger"><?= __('Unable to retrieve feed data.') ?></div>

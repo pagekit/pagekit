@@ -1,4 +1,11 @@
 <div class="uk-form-row">
+    <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>
+    <div class="uk-form-controls">
+        <input id="form-feed-title" class="uk-form-width-large" type="search" name="widget[title]" value="<?= $widget->get('title') ?>" required>
+    </div>
+</div>
+
+<div class="uk-form-row">
     <span class="uk-form-label"><?= __('User Type') ?></span>
     <div class="uk-form-controls uk-form-controls-text">
         <?php foreach (['login' => __('Logged in'), 'registered' => __('Last registered')] as $value => $option): ?>
@@ -8,6 +15,7 @@
         <?php endforeach ?>
     </div>
 </div>
+
 <div class="uk-form-row">
     <label class="uk-form-label"><?= __('Number of Users') ?></label>
     <div class="uk-form-controls">

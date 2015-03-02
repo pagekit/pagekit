@@ -53,20 +53,12 @@ class DashboardController extends Controller
      */
     public function settingsAction()
     {
-        $widgets = [];
+        App::scripts('dashboard', [
+            'types' => $this->getTypes(),
+            'widgets' => $this->getWidgets()
+        ], [], 'export');
 
-        foreach ($this->getWidgets() as $id => $data) {
-            if ($type = $this->types[$data['type']]) {
-
-                $widget = $this->create($id, $data);
-                $widget->setType($type->getName());
-                $widget->setTitle($type->getDescription($widget));
-
-                $widgets[$id] = $widget;
-            }
-        }
-
-        return ['head.title' => __('Dashboard Settings'), 'types' => $this->types, 'widgets' => $widgets];
+        return ['head.title' => __('Dashboard Settings')];
     }
 
     /**
@@ -143,11 +135,13 @@ class DashboardController extends Controller
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
         }
+
         return $this->redirect($id ? '@system/dashboard/edit' : '@system/dashboard/add', compact('id'));
     }
 
     /**
      * @Request({"ids": "array"}, csrf=true)
+     * @Response("json")
      */
     public function deleteAction($ids = [])
     {
@@ -159,9 +153,7 @@ class DashboardController extends Controller
 
         $this->save($widgets);
 
-        App::message()->success(_c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
-
-        return $this->redirect('@system/dashboard/settings');
+        return ['message' => _c('{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)), 'widgets' => $widgets];
     }
 
     /**
@@ -219,9 +211,36 @@ class DashboardController extends Controller
     /**
      * @return array
      */
+    protected function getTypes($id = null)
+    {
+        $types = [];
+
+        foreach (App::trigger('system.dashboard', new RegisterWidgetEvent) as $type) {
+            $types[$type->getId()] = $type;
+        }
+
+        if ($id !== null) {
+            return isset($types[$id]) ? $types[$id] : null;
+        }
+
+        return $types;
+    }
+
+    /**
+     * @return array
+     */
     protected function getWidgets()
     {
-        return App::user()->get('dashboard', App::system()->config('dashboard.default'));
+        $widgets  = [];
+        $defaults = App::system()->config('dashboard.default');
+
+        foreach (App::user()->get('dashboard', $defaults) as $id => $widget) {
+            if ($type = $this->getTypes($widget['type'])) {
+                $widgets[$id] = array_merge(['title' => $type->getName()], $widget);
+            }
+        }
+
+        return $widgets;
     }
 
     protected function chunkList($list, $p) {

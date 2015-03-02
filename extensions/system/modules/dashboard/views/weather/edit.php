@@ -1,6 +1,13 @@
 <?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/app/weather.js', ['vue-system', 'uikit-autocomplete']) ?>
 
 <div class="uk-form-row">
+    <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>
+    <div class="uk-form-controls">
+        <input id="form-feed-title" class="uk-form-width-large" type="search" name="widget[title]" value="<?= $widget->get('title') ?>" required>
+    </div>
+</div>
+
+<div class="uk-form-row">
     <label for="form-weather-location" class="uk-form-label"><?= __('Location') ?></label>
     <div class="uk-form-controls">
         <div class="uk-autocomplete">

@@ -4,10 +4,10 @@ namespace Pagekit\User\Dashboard;
 
 use Pagekit\Application as App;
 use Pagekit\User\Entity\User;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class UserWidget implements TypeInterface
+class UserWidget extends Type
 {
     /**
      * {@inheritdoc}

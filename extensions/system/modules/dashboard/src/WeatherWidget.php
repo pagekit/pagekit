@@ -3,10 +3,10 @@
 namespace Pagekit\Dashboard;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class WeatherWidget implements TypeInterface
+class WeatherWidget extends Type
 {
     /**
      * {@inheritdoc}

@@ -3,10 +3,10 @@
 namespace Pagekit\Dashboard;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class FeedWidget implements TypeInterface
+class FeedWidget extends Type
 {
     /**
      * {@inheritdoc}
