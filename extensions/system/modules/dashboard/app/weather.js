@@ -6,7 +6,7 @@ jQuery(function($) {
 
     $('[data-weather]').each(function() {
 
-        new Vue({
+        var vm = new Vue({
 
             el: this,
 
@@ -17,9 +17,9 @@ jQuery(function($) {
 
             ready: function() {
 
-                var self = this, config = $(this.$el).data('weather'), location = config.location.split(',');
+                var vm = this, config = $(this.$el).data('weather'), location = config.location.split(',');
 
-                self.loadData(config).then(function(data, status, jqxhr) {
+                vm.loadData(config).then(function(data, status, jqxhr) {
 
                     if (data.cod != 200) {
                         return $.Deferred().reject(data);
@@ -29,15 +29,15 @@ jQuery(function($) {
 
                 }).done(function(data) {
 
-                    self.$add('city', location[0]);
-                    self.$add('country', location[1]);
-                    self.$add('temperature', Math.round(data.main.temp) + (config.units == 'metric' ? ' °C' : ' °F'));
-                    self.$add('icon', self.getIconUrl(data.weather[0].icon));
-                    self.$set('status', 'done');
+                    vm.$add('city', location[0]);
+                    vm.$add('country', location[1]);
+                    vm.$add('temperature', Math.round(data.main.temp) + (config.units == 'metric' ? ' °C' : ' °F'));
+                    vm.$add('icon', vm.getIconUrl(data.weather[0].icon));
+                    vm.$set('status', 'done');
 
                 }).fail(function() {
 
-                    self.$set('status', 'error');
+                    vm.$set('status', 'error');
 
                 });
 
@@ -47,7 +47,7 @@ jQuery(function($) {
 
                 loadData: function(config) {
 
-                    var self = this, key = 'weather-' + config.id + config.units[0], cache = self.storage[key];
+                    var key = 'weather-' + config.id + config.units[0], cache = this.storage[key];
 
                     if (cache) {
                         return $.Deferred().resolve(JSON.parse(cache)).promise();
@@ -55,7 +55,7 @@ jQuery(function($) {
 
                     return $.getJSON(api + '/weather?callback=?', { id: config.id, units: config.units }, function(data) {
                         if (data.cod == 200) {
-                            self.storage[key] = JSON.stringify(data);
+                            vm.storage[key] = JSON.stringify(data);
                         }
                     });
                 },
@@ -85,7 +85,7 @@ jQuery(function($) {
 
                     };
 
-                    return System.url('extensions/system/assets/images/weather-:icon', {icon: icons[icon]}, true);
+                    return this.$url('extensions/system/assets/images/weather-:icon', {icon: icons[icon]}, true);
                 }
 
             }
@@ -102,7 +102,7 @@ jQuery(function($) {
         autocomplete = UIkit.autocomplete(location.parent(), {
 
             source: function(release) {
-                $.getJSON(api + '/find?callback=?', { q: this.input.val(), type: 'like' }, function(data) {
+                $.getJSON(api + '/find?callback=?', {q: this.input.val(), type: 'like'}, function(data) {
                     if (data.cod == 200) {
                         release(data.list);
                     } else {

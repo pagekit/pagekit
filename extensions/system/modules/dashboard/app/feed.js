@@ -4,7 +4,7 @@ jQuery(function($) {
 
     $('[data-feed]').each(function() {
 
-        new Vue({
+        var vm = new Vue({
 
             el: this,
 
@@ -16,22 +16,20 @@ jQuery(function($) {
 
             ready: function() {
 
-                var self = this;
-
                 this.$set('config', $(this.$el).data('feed'));
 
                 $.getJSON(api, {q: this.config.url, num: this.config.count}, function(data) {
 
                     if (data.responseStatus == 200) {
-                        self.$set('feed', data.responseData.feed);
-                        self.$set('status', 'done');
+                        vm.$set('feed', data.responseData.feed);
+                        vm.$set('status', 'done');
                     } else {
-                        self.$set('status', 'error');
+                        vm.$set('status', 'error');
                     }
 
                 }, function() {
 
-                    self.$set('status', 'error');
+                    vm.$set('status', 'error');
 
                 });
             }
