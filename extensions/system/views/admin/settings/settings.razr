@@ -84,8 +84,8 @@
                         <span class="uk-form-label">@trans('Developer')</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <input type="hidden" value="0" name="config[framework/application][debug]">
-                                <label><input type="checkbox" name="config[framework/application][debug]" value="1"@($config['framework/application']['debug'] ? ' checked' : '')> @trans('Enable debug mode')</label>
+                                <input type="hidden" value="0" name="config[framework][debug]">
+                                <label><input type="checkbox" name="config[framework][debug]" value="1"@($config['framework']['debug'] ? ' checked' : '')> @trans('Enable debug mode')</label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <input type="hidden" value="0" name="config[system/profiler][enabled]">

@@ -12,6 +12,8 @@ class ViewListener implements EventSubscriberInterface
      */
     public function onSystemLoaded()
     {
+        $debug = App::module('framework')->config('debug');
+
         $scripts = App::scripts();
         $scripts->register('angular', 'vendor/assets/angular/angular.min.js', 'jquery');
         $scripts->register('angular-animate', 'vendor/assets/angular-animate/angular-animate.min.js', 'angular');
@@ -37,7 +39,7 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
         $scripts->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
         $scripts->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
-        $scripts->register('vue', 'vendor/assets/vue/dist/vue.min.js');
+        $scripts->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
         $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
 
         App::sections()->set('messages', function() {

@@ -59,8 +59,7 @@ class SettingsController extends Controller
             App::option()->set($key, $value, true);
         }
 
-        // TODO fix
-        if ($data['system/cache']['cache']['storage'] != App::module('cache')->config('caches.cache.storage') || $data['framework/application']['debug'] != App::module('framework')->config('debug')) {
+        if ($data['system/cache']['caches']['cache']['storage'] != App::module('system/cache')->config('caches.cache.storage') || $data['framework']['debug'] != App::module('framework')->config('debug')) {
             App::system()->clearCache();
         }
 
