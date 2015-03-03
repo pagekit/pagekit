@@ -13,17 +13,22 @@ jQuery(function ($) {
 
             Role = this.$resource('api/system/role/:id');
 
-            var save = UIkit.Utils.debounce(this.save, 1000);
-            this.$watch('roles', function () {
-                save();
-            }, true);
+            this.$watch('roles', UIkit.Utils.debounce(this.save, 1000), true);
+
+        },
+
+        computed: {
+
+            sorted: function() {
+                return Vue.filter('toArray')(this.roles);
+            }
 
         },
 
         methods: {
 
             getAuthenticatedRole: function () {
-                return Vue.filter('toArray')(this.roles).filter(function(role) { return role.isAuthenticated; })[0];
+                return this.sorted.filter(function(role) { return role.isAuthenticated; })[0];
             },
 
             addPermission: function(role, permission) {
@@ -43,14 +48,11 @@ jQuery(function ($) {
             },
 
             save: function () {
-
-                var self = this;
-
                 Role.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
                     if (!data.error) {
-                        UIkit.notify(self.$trans('Permissions saved'), 'success');
+                        UIkit.notify(vm.$trans('Permissions saved'), 'success');
                     } else {
-                        UIkit.notify(self.$trans('Failed to save permissions.'), 'danger');
+                        UIkit.notify(vm.$trans('Failed to save permissions.'), 'danger');
                     }
                 });
             }

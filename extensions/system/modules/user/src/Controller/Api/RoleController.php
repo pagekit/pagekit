@@ -55,7 +55,7 @@ class RoleController extends Controller
             $role->delete();
         }
 
-        return $this->redirect('@system/role');
+        return ['message' => 'Success'];
     }
 
     /**

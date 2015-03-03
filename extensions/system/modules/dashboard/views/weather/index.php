@@ -1,6 +1,6 @@
 <?php $app['scripts']->queue('weather', 'extensions/system/modules/dashboard/app/weather.js', 'vue-system') ?>
 
-<div class="uk-text-center" data-weather="<?= $this->escape(json_encode(['id' => $widget->get('id'), 'units' => $widget->get('units'), 'location' => $widget->get('location')])) ?>">
+<div class="uk-text-center" data-weather="<?= $this->escape(json_encode(['id' => $widget->get('id'), 'units' => $widget->get('units'), 'location' => $widget->get('location')])) ?>" v-cloak>
     <div class="uk-text-center" v-show="status == 'loading'">
         <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
     </div>

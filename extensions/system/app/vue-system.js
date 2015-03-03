@@ -183,11 +183,11 @@
 
             bind: function() {
 
-                var el = $(this.el), model = this.vm.$get(this.expression);
+                var vm = this.vm, expression = this.expression, el = $(this.el);
 
                 el.on('change.checkbox', function() {
 
-                    var contains = model.indexOf(el.val());
+                    var model = vm.$get(expression), contains = model.indexOf(el.val());
 
                     if (el.prop('checked')) {
                         if (-1 === contains) {
