@@ -71,8 +71,10 @@ jQuery(function ($) {
             },
 
             remove: function(role) {
-                Role.remove({ id: role.id }, function () {
-                    vm.roles.$delete(role.id.toString());
+                UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
+                    Role.remove({ id: role.id }, function () {
+                        vm.roles.$delete(role.id.toString());
+                    });
                 });
             },
 
