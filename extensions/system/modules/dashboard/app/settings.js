@@ -8,7 +8,7 @@ jQuery(function($) {
 
         ready: function() {
 
-            $(this.$el).on('change.uk.nestable', 'ul.uk-nestable', this.reorder);
+            $(this.$el).on('change.uk.sortable', this.reorder);
 
         },
 
@@ -25,11 +25,14 @@ jQuery(function($) {
                 });
             },
 
-            reorder: function() {
+            reorder: function(e, sortable) {
 
-                var order = $.map($('[data-uk-nestable]', this.$el).data('nestable').serialize(), function(data) {
-                    return data.id;
-                });
+                if (!sortable) return;
+
+                var ordered = vm.$.ordered,
+                    order = sortable.element.children().toArray().map(function(el) {
+                        return ordered.filter(function(model) { return model.$el == el; })[0].$key;
+                    });
 
                 $.post(this.$url('admin/system/dashboard/reorder'), {order: order}, function(data) {
                     UIkit.notify(data.message || vm.$trans('Widgets order updated'), 'success');

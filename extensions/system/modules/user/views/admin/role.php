@@ -1,14 +1,14 @@
 <?php
 $this['styles']->queue('role-index', 'extensions/system/assets/css/user.css');
-$this['scripts']->queue('role-index', 'extensions/system/modules/user/app/role.js', ['vue-system']);
+$this['scripts']->queue('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system');
 ?>
 
 <div id="js-role" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match v-cloak>
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">
 
-        <div class="uk-panel uk-panel-divider pk-panel-marginless" v-on="'change.uk.sortable': reorder">
-            <ul class="pk-nestable" data-uk-sortable>
+        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+            <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
                 <li v-repeat="role: sorted | orderBy 'priority'" track-by="id" v-ref="ordered">
                     <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">
                         <div class="pk-nestable-handle"></div>

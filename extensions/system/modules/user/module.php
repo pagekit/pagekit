@@ -144,7 +144,7 @@ return [
 
         'registration' => 'admin',
         'require_verification' => true,
-        'users_per_page' => 2, // TODO set to 20, 2 is just for demonstration
+        'users_per_page' => 20
 
     ]
 

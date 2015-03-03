@@ -1,4 +1,4 @@
-<?php $this['scripts']->queue('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', ['vue-system', 'uikit-nestable']) ?>
+<?php $this['scripts']->queue('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', 'vue-system') ?>
 
 <div id="dashboard" class="uk-form">
 
@@ -25,8 +25,9 @@
         <div class="pk-table-width-100">{{ 'Type' | trans }}</div>
     </div>
 
-    <ul class="uk-nestable" data-uk-nestable="{ maxDepth: 1 }">
-        <li v-repeat="widget: widgets" data-id="{{ $key }}">
+    <!-- TODO: the classes need to be updated for sortable-->
+    <ul class="uk-nestable" data-uk-sortable="{ handleClass: 'uk-nestable-handle', childClass: 'uk-nestable-list-item', placeholderClass: 'uk-nestable-placeholder' }">
+        <li v-repeat="widget: widgets" v-ref="ordered">
             <div class="uk-nestable-item pk-table-fake">
                 <div class="pk-table-width-minimum"><div class="uk-nestable-handle">​</div></div>
                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ $key }}"></div>
