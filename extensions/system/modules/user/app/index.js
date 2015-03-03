@@ -1,5 +1,7 @@
 jQuery(function ($) {
 
+
+
     var User, vm = new Vue({
 
         el: '#js-user',
@@ -14,7 +16,7 @@ jQuery(function ($) {
             selected   : []
         },
 
-        ready: function () {
+        created: function () {
 
             var vm = this;
 
