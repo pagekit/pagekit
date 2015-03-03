@@ -4,7 +4,7 @@
 <h1 class="uk-h3"><?= $title ?></h1>
 <?php endif ?>
 
-<div data-feed="<?= $this->escape(json_encode(['url' => $widget->get('url'), 'count' => $widget->get('count'), 'content' => $widget->get('content')])) ?>">
+<div data-feed="<?= $this->escape(json_encode(['url' => $widget->get('url'), 'count' => $widget->get('count'), 'content' => $widget->get('content')])) ?>" v-cloak>
     <div class="uk-text-center" v-show="status == 'loading'">
         <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
     </div>
