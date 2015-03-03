@@ -11,7 +11,7 @@ jQuery(function ($) {
 
         ready: function () {
 
-            Role = this.$resource(this.$url('api/system/role')+'/:id');
+            Role = this.$resource('api/system/role/:id');
 
             var save = UIkit.Utils.debounce(this.save, 1000);
             this.$watch('roles', function () {

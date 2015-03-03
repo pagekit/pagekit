@@ -8,21 +8,17 @@
 
         url: function(url, params, static) {
 
-            var base = config.url;
+            var baseUrl = config.url;
 
             if (params === true) {
                 params = {}; static = true;
             }
 
             if (static === true) {
-                base = base.replace(/\/index.php$/i, '');
+                baseUrl = baseUrl.replace(/\/index.php$/i, '');
             }
 
-            if (!url.match(/^(https?:)?\//)) {
-                url = base + '/' + url;
-            }
-
-            return Url.get(url, params);
+            return Url.get(url, params, {baseUrl: baseUrl});
         },
 
         trans: Translator.trans,
@@ -47,6 +43,10 @@
         }
 
     };
+
+    $(function(){
+        Resource.defaults.options.baseUrl = config.url;
+    });
 
     $(document).on('ajaxSend', function(e, xhr){
         xhr.setRequestHeader('X-XSRF-TOKEN', config.csrf);
@@ -75,7 +75,7 @@
 
         function getOptions(action, args) {
 
-            var options = $.extend({ headers: {}, dataType: 'json', contentType: 'application/json;charset=utf-8' }, action), params = {}, data, success, error;
+            var options = $.extend({headers: {}, dataType: 'json', contentType: 'application/json;charset=utf-8'}, action), params = {}, data, success, error;
 
             switch (args.length) {
 
@@ -130,7 +130,7 @@
                     throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
             }
 
-            options.url = Url.get(action.url, $.extend({}, action.params, params));
+            options.url = Url.get(action.url, $.extend({}, action.params, params), {baseUrl: self.options.baseUrl});
 
             if (data) {
                 options.data = (typeof data === 'object') ? JSON.stringify(data) : data;
@@ -165,6 +165,7 @@
         },
 
         options: {
+            baseUrl: '',
             useMethodOverride: false
         }
 
@@ -177,11 +178,12 @@
 
     var Url = {
 
-        get: function(url, params) {
+        get: function(url, params, options) {
 
             var self = this, urlParams = {}, query = {}, val;
 
-            params = params || {};
+            params  = params || {};
+            options = $.extend({baseUrl: ''}, options);
 
             $.each(url.split(/\W/), function(i, param) {
                 if (!(new RegExp("^\\d+$").test(param)) && param && (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
@@ -208,6 +210,10 @@
             });
 
             url = url.replace(/\/+$/, '') || '/';
+
+            if (!url.match(/^(https?:)?\//)) {
+                url = options.baseUrl + '/' + url;
+            }
 
             $.each(params, function(key, value) {
                 if (!urlParams[key]) {

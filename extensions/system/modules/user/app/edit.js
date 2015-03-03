@@ -13,7 +13,7 @@ jQuery(function ($) {
 
         ready: function () {
 
-            User = this.$resource(this.$url('api/system/user')+'/:id');
+            User = this.$resource('api/system/user/:id');
 
             this.$watch('user.status', function (status) {
                 if (typeof status === 'string') {
