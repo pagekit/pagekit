@@ -1,7 +1,5 @@
 jQuery(function ($) {
 
-
-
     var User, vm = new Vue({
 
         el: '#js-user',
@@ -10,15 +8,12 @@ jQuery(function ($) {
             config     : user.config,
             users      : user.data.users.users,
             pages      : user.data.users.pages,
-            roles      : user.data.roles,
-            statuses   : user.data.statuses,
-            permissions: user.data.permissions,
             selected   : []
         },
 
         created: function () {
 
-            var vm = this;
+            var self = this;
 
             User = this.$resource('api/system/user/:id');
 
@@ -26,12 +21,12 @@ jQuery(function ($) {
 
             this.statuses = [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }];
             $.each(user.data.statuses, function (id, status) {
-                vm.statuses.push({ text: status, value: id });
+                self.statuses.push({ text: status, value: id });
             });
 
             this.roles = [{ text: this.$trans('- Role -'), value: '' }];
             $.each(user.data.roles, function (id, role) {
-                vm.roles.push({ text: role.name, value: id });
+                self.roles.push({ text: role.name, value: id });
             });
 
             this.permissions = [{ text: this.$trans('- Permission -'), value: '' }];
@@ -40,7 +35,7 @@ jQuery(function ($) {
                 $.each(permissions, function (id, permission) {
                     options.push({ text: permission.title, value: id });
                 });
-                vm.permissions.push({ label: group, options: options });
+                self.permissions.push({ label: group, options: options });
             });
 
             this.$watch('config.page', function (page) {
