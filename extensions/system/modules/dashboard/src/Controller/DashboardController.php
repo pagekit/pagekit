@@ -53,7 +53,7 @@ class DashboardController extends Controller
         App::scripts('dashboard', [
             'types' => $this->dashboard->getTypes(),
             'widgets' => $this->dashboard->getWidgets()
-        ], [], 'export');
+        ]);
 
         return ['head.title' => __('Dashboard Settings')];
     }

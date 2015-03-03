@@ -21,7 +21,7 @@ class PermissionController
                 'permissions' => App::permissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()
             ]
-        ], [], 'export');
+        ]);
 
         return ['head.title' => __('Permissions')];
     }

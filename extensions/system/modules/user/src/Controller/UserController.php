@@ -32,7 +32,7 @@ class UserController
                 'permissions' => App::permissions(),
                 'roles'       => $roles
             ]
-        ], [], 'export');
+        ]);
 
         return ['head.title' => __('Users')];
     }
@@ -61,7 +61,7 @@ class UserController
                 'statuses' => User::getStatuses(),
                 'roles'    => array_values($roles)
             ]
-        ], [], 'export');
+        ]);
 
         return ['head.title' => $id ? __('Edit User') : __('Add User')];
     }

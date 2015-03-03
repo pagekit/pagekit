@@ -36,7 +36,7 @@ class InstallerController
      */
     public function indexAction()
     {
-        App::scripts('installer', ['config' => $this->config, 'url' => App::url('@installer/installer/install')], [], 'export');
+        App::scripts('installer', ['config' => $this->config, 'url' => App::url('@installer/installer/install')]);
 
         return ['redirect' => App::url('/admin')];
     }
