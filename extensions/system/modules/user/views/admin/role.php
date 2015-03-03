@@ -3,20 +3,20 @@ $this['styles']->queue('role-index', 'extensions/system/assets/css/user.css');
 $this['scripts']->queue('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system');
 ?>
 
-<div id="js-role" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match v-cloak>
+<div id="js-role" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match v-cloak >
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">
 
         <div class="uk-panel uk-panel-divider pk-panel-marginless">
             <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
-                <li v-repeat="role: sorted | orderBy 'priority'" track-by="id" v-ref="ordered">
+                <li v-repeat="role: rolesArray | orderBy 'priority'" v-ref="ordered">
                     <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">
                         <div class="pk-nestable-handle"></div>
                         <ol v.show="!role.isLocked" class="uk-subnav pk-subnav-icon uk-hidden">
                             <li><a v-on="click: edit(role)" title="{{ 'Edit' | trans }}"><i class="uk-icon-pencil"></i></a></li>
                             <li><a v-on="click: remove(role)" title="{{ 'Delete' | trans }}"><i class="uk-icon-minus-circle"></i></a></li>
                         </ol>
-                        <a v-on="click: setCurrent(role)">{{ role.name }}</a>
+                        <a v-on="click: config.role = role.id">{{ role.name }}</a>
                     </div>
                 </li>
             </ul>
@@ -32,10 +32,10 @@ $this['scripts']->queue('role-index', 'extensions/system/modules/user/app/role.j
 
         <table class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent uk-margin-remove">
             <thead>
-            <tr>
-                <th class="pk-table-min-width-200">{{ 'Permission' | trans }}</th>
-                <th class="pk-table-width-minimum"></th>
-            </tr>
+                <tr>
+                    <th class="pk-table-min-width-200">{{ 'Permission' | trans }}</th>
+                    <th class="pk-table-width-minimum"></th>
+                </tr>
             </thead>
         </table>
 
@@ -52,14 +52,12 @@ $this['scripts']->queue('role-index', 'extensions/system/modules/user/app/role.j
                     </td>
                     <td class="uk-text-center">
 
-                            <span v-show="showFakeCheckbox(current, $key)" class="pk-checkbox-fake">
-                                <input type="checkbox" checked disabled>
-                                <span v-if="!current.isAdministrator" v-on="click: addPermission(current, $key)"></span>
-                            </span>
+                        <span v-show="showFakeCheckbox(current, $key)" class="pk-checkbox-fake">
+                            <input type="checkbox" checked disabled>
+                            <span v-if="!current.isAdministrator" v-on="click: addPermission(current, $key)"></span>
+                        </span>
 
                         <input v-show="!showFakeCheckbox(current, $key)" type="checkbox" v-checkbox="current.permissions" value="{{ $key }}">
-
-
 
                     </td>
                 </tr>
