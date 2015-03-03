@@ -17,10 +17,6 @@ return [
             return $view;
         });
 
-        $app->extend('assets', function($assets) {
-            return $assets->register('export', 'Pagekit\View\Asset\ExportAsset');
-        });
-
         $app->subscribe(new ViewListener);
     },
 
