@@ -7,7 +7,6 @@ use Pagekit\Locale\Loader\ArrayLoader;
 use Pagekit\Locale\Loader\MoFileLoader;
 use Pagekit\Locale\Loader\PhpFileLoader;
 use Pagekit\Locale\Loader\PoFileLoader;
-use Pagekit\System\Event\LocaleEvent;
 use Symfony\Component\Translation\Translator;
 
 return [
@@ -37,18 +36,22 @@ return [
             return new CountryHelper;
         };
 
-        $app['dates'] = function () {
+        $formats = [
+
+            DateHelper::NONE     => '',
+            DateHelper::FULL     => 'DATE_FULL',
+            DateHelper::LONG     => 'DATE_LONG',
+            DateHelper::MEDIUM   => 'DATE_MEDIUM',
+            DateHelper::SHORT    => 'DATE_SHORT',
+            DateHelper::INTERVAL => 'DATE_INTERVAL'
+
+        ];
+
+        $app['dates'] = function () use ($formats) {
 
             $manager = new DateHelper;
             $manager->setTimezone($this->config['timezone']);
-            $manager->setFormats([
-                DateHelper::NONE      => '',
-                DateHelper::FULL      => __('DATE_FULL'),
-                DateHelper::LONG      => __('DATE_LONG'),
-                DateHelper::MEDIUM    => __('DATE_MEDIUM'),
-                DateHelper::SHORT     => __('DATE_SHORT'),
-                DateHelper::INTERVAL  => __('DATE_INTERVAL')
-            ]);
+            $manager->setFormats(array_map('__', $formats));
 
             return $manager;
         };
@@ -80,22 +83,15 @@ return [
 
         }, 10);
 
-        $app->on('system.loaded', function () use ($app) {
+        $app->on('system.loaded', function () use ($app, $formats) {
 
             $locale = $app['translator']->getLocale();
 
             $app['scripts']->register('localeConfig', [
-                'locale' => $locale,
-                'fallback' =>'en',
+                'locale'        => $locale,
+                'fallback'      => 'en',
                 'defaultDomain' => 'messages',
-                'formats' => [
-                    'none'     => '',
-                    'short'    => 'DATE_SHORT',
-                    'medium'   => 'DATE_MEDIUM',
-                    'long'     => 'DATE_LONG',
-                    'full'     => 'DATE_FULL',
-                    'interval' => 'DATE_INTERVAL'
-                ]
+                'formats'       => $formats
             ]);
 
             $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $locale]));

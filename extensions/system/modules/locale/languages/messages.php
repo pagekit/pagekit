@@ -4,6 +4,7 @@ __('DATE_SHORT');
 __('DATE_MEDIUM');
 __('DATE_LONG');
 __('DATE_FULL');
+__('DATE_INTERVAL');
 
 __('Mon');
 __('Tue');

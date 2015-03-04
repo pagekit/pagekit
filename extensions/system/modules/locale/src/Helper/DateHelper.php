@@ -9,12 +9,12 @@ use DateTimeZone;
 class DateHelper
 {
     /* date/time format types */
-    const NONE     = -1;
-    const FULL     = 0;
-    const LONG     = 1;
-    const MEDIUM   = 2;
-    const SHORT    = 3;
-    const INTERVAL = 4;
+    const NONE     = 'none';
+    const FULL     = 'full';
+    const LONG     = 'long';
+    const MEDIUM   = 'medium';
+    const SHORT    = 'short';
+    const INTERVAL = 'interval';
 
     /**
      * @var DateTimeZone
@@ -71,7 +71,7 @@ class DateHelper
 
     /**
      * @param  string|DateTime|\DateTimeInterface $date
-     * @param  int|string                         $format
+     * @param  string                             $format
      * @param  DateTimeZone|string                $timezone
      * @param  bool                               $translate
      * @return mixed|string
@@ -132,7 +132,7 @@ class DateHelper
 
     /**
      * @param  DateTime $date
-     * @param  $format
+     * @param  string   $format
      * @return mixed
      */
     protected function translate(DateTime $date, $format)
