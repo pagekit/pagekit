@@ -1,5 +1,3 @@
-<?php $this['scripts']->queue('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', 'vue-system') ?>
-
 <div id="dashboard" class="uk-form">
 
    <?php $this['sections']->start('toolbar', 'show') ?>

@@ -1,4 +1,4 @@
-<?php $app['scripts']->queue('uikit-form-password') ?>
+<?php $app['scripts']->add('uikit-form-password') ?>
 
 <form class="uk-article uk-form" action="<?= $app['url']->get('@system/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
 

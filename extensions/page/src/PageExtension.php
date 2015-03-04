@@ -28,7 +28,7 @@ class PageExtension extends Extension
         });
 
         $app->on('site.config', function () use ($app) {
-            $app['scripts']->queue('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
+            $app['scripts']->add('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
         });
 
         $app->on('system.tmpl', function (TmplEvent $event) {

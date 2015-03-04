@@ -92,13 +92,13 @@ return [
 
             if (isset($app['styles'])) {
                 $engine->addDirective(new FunctionDirective('style', function($name, $asset = null, $dependencies = [], $options = []) use ($app) {
-                    $app['styles']->queue($name, $asset, $dependencies, $options);
+                    $app['styles']->add($name, $asset, $dependencies, $options);
                 }));
             }
 
             if (isset($app['scripts'])) {
                 $engine->addDirective(new FunctionDirective('script', function($name, $asset = null, $dependencies = [], $options = []) use ($app) {
-                    $app['scripts']->queue($name, $asset, $dependencies, $options);
+                    $app['scripts']->add($name, $asset, $dependencies, $options);
                 }));
             }
 

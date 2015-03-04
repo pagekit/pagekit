@@ -1,4 +1,4 @@
-<?php $app['scripts']->queue('feed', 'extensions/system/modules/dashboard/app/feed.js', 'vue-system') ?>
+<?php $app['scripts']->add('feed', 'extensions/system/modules/dashboard/app/feed.js', 'vue-system') ?>
 
 <?php if ($title = $widget->get('title')): ?>
 <h1 class="uk-h3"><?= $title ?></h1>

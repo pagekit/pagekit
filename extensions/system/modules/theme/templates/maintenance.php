@@ -7,8 +7,8 @@
         <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
         <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <?= $app['sections']->render('head') ?>
-        <?php $app['styles']->queue('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->queue('uikit') ?>
+        <?php $app['styles']->add('theme', 'extensions/system/modules/theme/css/theme.css') ?>
+        <?php $app['scripts']->add('uikit') ?>
     </head>
     <body class="uk-height-1-1">
 

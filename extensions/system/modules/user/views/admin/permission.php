@@ -1,8 +1,3 @@
-<?php
-$this['styles']->queue('permission-index', 'extensions/system/assets/css/user.css');
-$this['scripts']->queue('permission-index', 'extensions/system/modules/user/app/role.js', ['vue-system', 'uikit-sticky']);
-?>
-
 <div id="js-permission" class="uk-form" v-cloak>
 
     <div class="uk-overflow-container">

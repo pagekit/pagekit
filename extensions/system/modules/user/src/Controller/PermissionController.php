@@ -16,7 +16,8 @@ class PermissionController
      */
     public function indexAction()
     {
-        App::scripts('permission', [
+        App::styles('permission-index', 'extensions/system/assets/css/user.css');
+        App::scripts('permission-index', 'extensions/system/modules/user/app/role.js', ['vue-system', 'uikit-sticky'])->addData('permission', [
             'data'   => [
                 'permissions' => App::permissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()

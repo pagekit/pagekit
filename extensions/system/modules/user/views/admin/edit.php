@@ -1,5 +1,3 @@
-<?php $this['scripts']->queue('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']); ?>
-
 <form id="js-user-edit" class="uk-form uk-form-horizontal" v-on="submit: save" v-cloak>
 
     <?php $this['sections']->start('toolbar', 'show') ?>

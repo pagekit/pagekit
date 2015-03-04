@@ -53,7 +53,7 @@ class BlogExtension extends Extension
 
         // TODO fix
         $app->on('site.config', function (ConfigEvent $event) use ($app) {
-            $app['scripts']->queue('blog-controllers', 'extensions/blog/app/controllers.js', 'site-application');
+            $app['scripts']->add('blog-controllers', 'extensions/blog/app/controllers.js', 'site-application');
             $event->addConfig(['data' => ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]]);
         });
     }

@@ -1,5 +1,3 @@
-<?php $this['scripts']->queue('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']) ?>
-
 <div id="js-user" class="uk-form" v-cloak>
 
     <?php $this['sections']->start('toolbar', 'show') ?>

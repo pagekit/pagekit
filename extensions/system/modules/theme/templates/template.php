@@ -8,8 +8,8 @@
         <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
         <?= $app['sections']->render('head') ?>
-        <?php $app['styles']->queue('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->queue('theme', 'extensions/system/modules/theme/js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable']) ?>
+        <?php $app['styles']->add('theme', 'extensions/system/modules/theme/css/theme.css') ?>
+        <?php $app['scripts']->add('theme', 'extensions/system/modules/theme/js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable']) ?>
     </head>
     <body>
 

@@ -1,4 +1,4 @@
-<?php $app['scripts']->queue('settings', 'extensions/system/modules/user/assets/js/login.js', 'requirejs') ?>
+<?php $app['scripts']->add('settings', 'extensions/system/modules/user/assets/js/login.js', 'requirejs') ?>
 
 <div class="uk-form-row">
     <label class="uk-form-label"><?= __('Login Redirect') ?></label>

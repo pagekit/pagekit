@@ -50,7 +50,7 @@ class DashboardController extends Controller
      */
     public function settingsAction()
     {
-        App::scripts('dashboard', [
+        App::scripts('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', 'vue-system')->addData('dashboard', [
             'types' => $this->dashboard->getTypes(),
             'widgets' => $this->dashboard->getWidgets()
         ]);
