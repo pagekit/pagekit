@@ -58,8 +58,8 @@ return [
 
         'framework',
         'system/cache',
-        'system/locale',
         'system/option',
+        'system/locale',
         'system/templating',
         'system/view'
 
