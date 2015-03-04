@@ -2,11 +2,15 @@
 
     function install (Vue) {
 
+        /**
+         * Methods
+         */
+
         Vue.prototype.$url = System.url;
+        Vue.prototype.$resource = System.resource;
         Vue.prototype.$date = Locale.date;
         Vue.prototype.$trans = Locale.trans;
         Vue.prototype.$transChoice = Locale.transChoice;
-        Vue.prototype.$resource = System.resource;
 
         /**
          * Filters
@@ -30,7 +34,7 @@
 
         Vue.filter('toArray', function(collection) {
 
-            if ($.isPlainObject(collection)) {
+            if (Vue.util.isPlainObject(collection)) {
                 return Object.keys(collection)
 
                     .filter(function(key) {
@@ -42,11 +46,11 @@
                     });
             }
 
-            return Array.isArray(collection) ? collection : [];
+            return Vue.util.isArray(collection) ? collection : [];
         });
 
         Vue.filter('toObject', function(collection) {
-            return Array.isArray(collection) ? collection.reduce(function(obj, value, key) {
+            return Vue.util.isArray(collection) ? collection.reduce(function(obj, value, key) {
                 obj[key] = value;
                 return obj;
             }, {}) : collection;
@@ -236,7 +240,6 @@
                     header.css({ position: 'absolute', top: 0, left: 0 }).appendTo(table);
 
                     $(window).on('scroll', function() {
-
                         if (UIkit.Utils.isInView(thead)) {
                             header.hide();
                         } else {

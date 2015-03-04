@@ -3,7 +3,6 @@
 namespace Pagekit\Locale\Controller;
 
 use Pagekit\Application as App;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Access(admin=true)
@@ -20,8 +19,7 @@ class LocaleController
             'formats' => App::module('system/locale')->config('formats')
         ]);
 
-        $response = new Response;
-        $response->headers->set('Content-Type', 'application/javascript');
+        $response = App::response('', 200, ['Content-Type' =>'application/javascript']);
         $response->setETag(md5($messages));
         $response->setPublic();
 
@@ -29,8 +27,6 @@ class LocaleController
             return $response;
         }
 
-        $response->setContent(sprintf('var locale = %s;', $messages));
-
-        return $response;
+        return $response->setContent(sprintf('var locale = %s;', $messages));
     }
 }
