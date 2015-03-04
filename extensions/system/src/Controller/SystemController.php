@@ -5,7 +5,6 @@ namespace Pagekit\System\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
-use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\User\Entity\User;
 
@@ -72,16 +71,6 @@ class SystemController extends Controller
     public function infoAction()
     {
         return ['head.title' => __('System Information'), 'info' => App::systemInfo()->get()];
-    }
-
-    /**
-     * @Response("json")
-     */
-    public function localeAction()
-    {
-        App::trigger('system.locale', $event = new LocaleEvent);
-
-        return $event->getMessages();
     }
 
     /**

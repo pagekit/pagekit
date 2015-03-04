@@ -56,7 +56,7 @@
 
     };
 
-    jQuery(function ($) {
+    $(function ($) {
 
         var modal;
 

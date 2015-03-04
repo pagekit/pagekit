@@ -1,4 +1,4 @@
-require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
+require(['jquery', 'system', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-post'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -35,7 +35,7 @@ require(['jquery', 'system!locale', 'uikit!form-select,datepicker,autocomplete,t
         });
 
         return function(e) {
-            if (dirty) return system.trans('post.unsaved-form');
+            if (dirty) return system.trans('You\'ve made some changes! Leaving the post without saving will discard all changes.');
         };
 
     })();

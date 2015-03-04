@@ -8,7 +8,6 @@ use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Site\Event\ConfigEvent;
 use Pagekit\System\Event\LinkEvent;
-use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\System\Extension;
 
@@ -33,10 +32,6 @@ class BlogExtension extends Extension
             $event->register('Pagekit\Blog\Link\BlogLink');
         });
 
-        $app->on('system.locale', function(LocaleEvent $event) {
-            $event->addMessages(['post.unsaved-form' => __('You\'ve made some changes! Leaving the post without saving will discard all changes.')]);
-        });
-
         $app->on('site.types', function ($event, $site) {
 
             $site->registerType('blog', 'Blog', [
@@ -56,6 +51,7 @@ class BlogExtension extends Extension
             $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.php');
         });
 
+        // TODO fix
         $app->on('site.config', function (ConfigEvent $event) use ($app) {
             $app['scripts']->queue('blog-controllers', 'extensions/blog/app/controllers.js', 'site-application');
             $event->addConfig(['data' => ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]]);

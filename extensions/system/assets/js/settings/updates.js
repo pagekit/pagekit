@@ -1,4 +1,4 @@
-require(['jquery', 'marketplace', 'system!locale', 'tmpl!package.updates,package.upload', 'uikit!upload', 'domReady!'], function($, marketplace, system, tmpl, uikit) {
+require(['jquery', 'marketplace', 'system', 'tmpl!package.updates,package.upload', 'uikit!upload', 'domReady!'], function($, marketplace, system, tmpl, uikit) {
 
     var page = $('#js-extensions, #js-themes'), update = $('.js-update', page), upload = $('.js-upload', page), market = $('.js-marketplace', page), params = page.data(), packages = {}, modal;
 

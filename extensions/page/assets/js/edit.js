@@ -1,4 +1,4 @@
-require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
+require(['jquery', 'system', 'uikit!form-select', 'domReady!'], function($, system, uikit) {
 
     var form = $('#js-page'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -32,7 +32,7 @@ require(['jquery', 'system!locale', 'uikit!form-select', 'domReady!'], function(
         });
 
         return function(e) {
-            if (dirty) return system.trans('page.unsaved-form');
+            if (dirty) return system.trans('You\'ve made some changes! Leaving the page without saving will discard all changes.');
         };
 
     })();

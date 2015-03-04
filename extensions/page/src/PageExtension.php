@@ -5,7 +5,6 @@ namespace Pagekit\Page;
 use Pagekit\Application as App;
 use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
-use Pagekit\System\Event\LocaleEvent;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\System\Extension;
 
@@ -20,10 +19,6 @@ class PageExtension extends Extension
 
         $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');
-        });
-
-        $app->on('system.locale', function (LocaleEvent $event) {
-            $event->addMessages(['page.unsaved-form' => __('You\'ve made some changes! Leaving the page without saving will discard all changes.')]);
         });
 
         $app->on('site.types', function ($event, $site) {

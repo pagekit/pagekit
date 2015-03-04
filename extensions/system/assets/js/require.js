@@ -35,7 +35,6 @@ var require = (function() {
             },
             'system': {
                 base: 'extensions/system/assets/js/system/',
-                locale: 'json!' + url + '/system/locale',
                 finder: url + '/system/finder/',
                 link: url + '/admin/system/link'
             }
