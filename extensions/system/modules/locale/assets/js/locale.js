@@ -826,21 +826,19 @@
         return this.date(format, timestamp);
     }
 
-    var config = window.localeConfig || {};
-
-    if (window.messages) {
-        config.translations = window.messages;
-    }
-
-    Translator.fromJSON(config);
+    var config = window.locale || { translations: {}, formats: {}};
 
     window.Locale = {
 
-        Translator: Translator,
+        Translator: Translator.fromJSON({ translations: config.translations }),
+
+        trans: Translator.trans.bind(Translator),
+
+        transChoice: Translator.transChoice.bind(Translator),
 
         date: function(format, timestamp){
 
-            if (config.formats && config.formats.hasOwnProperty(format)) {
+            if (config.formats.hasOwnProperty(format)) {
                 format = Translator.trans(config.formats[format]);
             }
 

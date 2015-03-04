@@ -21,12 +21,6 @@
             return Url.get(url, params, {baseUrl: baseUrl});
         },
 
-        trans: Locale.Translator.trans.bind(Locale.Translator),
-
-        transChoice: Locale.Translator.transChoice.bind(Locale.Translator),
-
-        date: Locale.date,
-
         resource: function(url, params, actions, options) {
             return new Resource(url, params, actions, options);
         }

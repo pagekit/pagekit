@@ -36,22 +36,11 @@ return [
             return new CountryHelper;
         };
 
-        $formats = [
-
-            DateHelper::NONE     => '',
-            DateHelper::FULL     => 'DATE_FULL',
-            DateHelper::LONG     => 'DATE_LONG',
-            DateHelper::MEDIUM   => 'DATE_MEDIUM',
-            DateHelper::SHORT    => 'DATE_SHORT',
-            DateHelper::INTERVAL => 'DATE_INTERVAL'
-
-        ];
-
-        $app['dates'] = function () use ($formats) {
+        $app['dates'] = function () {
 
             $manager = new DateHelper;
             $manager->setTimezone($this->config['timezone']);
-            $manager->setFormats(array_map('__', $formats));
+            $manager->setFormats(array_map('__', $this->config('formats', [])));
 
             return $manager;
         };
@@ -83,18 +72,9 @@ return [
 
         }, 10);
 
-        $app->on('system.loaded', function () use ($app, $formats) {
+        $app->on('system.loaded', function () use ($app) {
 
-            $locale = $app['translator']->getLocale();
-
-            $app['scripts']->register('localeConfig', [
-                'locale'        => $locale,
-                'fallback'      => 'en',
-                'defaultDomain' => 'messages',
-                'formats'       => $formats
-            ]);
-
-            $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $locale]));
+            $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $app['translator']->getLocale()]));
             $app['scripts']->register('locale', 'extensions/system/modules/locale/assets/js/locale.js', ['localeConfig', 'messages']);
 
         });
@@ -154,7 +134,17 @@ return [
 
         'timezone'     => 'UTC',
         'locale'       => 'en_US',
-        'locale_admin' => 'en_US'
+        'locale_admin' => 'en_US',
+        'formats'      => [
+
+            'none'     => '',
+            'full'     => 'DATE_FULL',
+            'long'     => 'DATE_LONG',
+            'medium'   => 'DATE_MEDIUM',
+            'short'    => 'DATE_SHORT',
+            'interval' => 'DATE_INTERVAL'
+
+        ]
 
     ]
 

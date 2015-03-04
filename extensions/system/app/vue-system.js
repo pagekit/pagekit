@@ -3,9 +3,9 @@
     function install (Vue) {
 
         Vue.prototype.$url = System.url;
-        Vue.prototype.$date = System.date;
-        Vue.prototype.$trans = System.trans;
-        Vue.prototype.$transChoice = System.transChoice;
+        Vue.prototype.$date = Locale.date;
+        Vue.prototype.$trans = Locale.trans;
+        Vue.prototype.$transChoice = Locale.transChoice;
         Vue.prototype.$resource = System.resource;
 
         /**

@@ -15,7 +15,10 @@ class LocaleController
      */
     public function indexAction($locale = null)
     {
-        $messages = json_encode([$locale => App::translator()->getCatalogue($locale)->all()]);
+        $messages = json_encode([
+            'translations' => [$locale => App::translator()->getCatalogue($locale)->all()],
+            'formats' => App::module('system/locale')->config('formats')
+        ]);
 
         $response = new Response;
         $response->headers->set('Content-Type', 'application/javascript');
@@ -26,7 +29,7 @@ class LocaleController
             return $response;
         }
 
-        $response->setContent(sprintf('var messages = %s;', $messages));
+        $response->setContent(sprintf('var locale = %s;', $messages));
 
         return $response;
     }
