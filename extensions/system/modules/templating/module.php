@@ -26,8 +26,13 @@ return [
 
     'main' => function ($app) {
 
-        $app['tmpl'] = function() {
-            return new DelegatingEngine;
+        $app['tmpl'] = function($app) {
+
+            $engine = new DelegatingEngine();
+            $engine->addEngine($app['tmpl.php']);
+            $engine->addEngine($app['tmpl.razr']);
+
+            return $engine;
         };
 
         $app['tmpl.parser'] = function($app) {
@@ -129,11 +134,11 @@ return [
         };
 
         $app->on('system.init', function() use ($app) {
-
-            $app['tmpl']->addEngine($app['tmpl.php']);
-            $app['tmpl']->addEngine($app['tmpl.razr']);
-
             $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
+        });
+
+        $app->on('view.render', function($event) use ($app) {
+            $event->setOutput($app['tmpl']->render($event->getTemplate(), $event->getParameters()));
         });
 
         $app->on('templating.reference', function($event) use ($app) {

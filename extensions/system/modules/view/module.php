@@ -10,7 +10,6 @@ return [
 
         $app->extend('view', function ($view, $app) {
 
-            $view->setEngine($app['tmpl']);
             $view->set('app', $app);
             $view->set('url', $app['url']);
 
