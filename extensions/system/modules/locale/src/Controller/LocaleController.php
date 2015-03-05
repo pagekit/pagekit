@@ -19,9 +19,9 @@ class LocaleController
             'formats' => App::module('system/locale')->config('formats')
         ]);
 
-        $response = App::response('', 200, ['Content-Type' =>'application/javascript']);
-        $response->setETag(md5($messages));
-        $response->setPublic();
+        $response = App::response('', 200, ['Content-Type' =>'application/javascript'])
+            ->setETag(md5($messages))
+            ->setPublic();
 
         if ($response->isNotModified(App::request())) {
             return $response;

@@ -79,16 +79,24 @@ class SystemController extends Controller
      */
     public function tmplAction($templates = '')
     {
-        $response = [];
+        $rendered = [];
         $event = App::trigger('system.tmpl', new TmplEvent);
 
         foreach (explode(',', $templates) as $template) {
             if ($event->has($template)) {
-                $response[$template] = App::view($event->get($template));
+                $rendered[$template] = App::view($event->get($template));
             }
         }
 
-        return $response;
+        $response = App::response()->json()
+            ->setETag(md5(implode('', $rendered)))
+            ->setPublic();
+
+        if ($response->isNotModified(App::request())) {
+            return $response;
+        }
+
+        return $response->setData($rendered);
     }
 
     /**
