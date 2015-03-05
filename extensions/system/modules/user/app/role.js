@@ -1,6 +1,10 @@
-(function($, UIkit) {
+(function (window, $, UIkit) {
 
-    var mixin = {
+    var config = window.role || window.permission, Component = Vue.extend({
+
+        data: function () {
+            return config.data;
+        },
 
         resource: null,
 
@@ -14,12 +18,14 @@
 
         computed: {
 
-            rolesArray: function() {
+            rolesArray: function () {
                 return Vue.filter('toArray')(this.roles);
             },
 
-            authenticated: function() {
-                return this.rolesArray.filter(function(role) { return role.isAuthenticated; })[0]
+            authenticated: function () {
+                return this.rolesArray.filter(function (role) {
+                    return role.isAuthenticated;
+                })[0]
             }
 
         },
@@ -36,58 +42,41 @@
                 }.bind(this));
             },
 
-            addPermission: function(role, permission) {
+            addPermission: function (role, permission) {
                 return !role.isAdministrator ? role.permissions.push(permission) : null;
             },
 
-            hasPermission: function(role, permission) {
+            hasPermission: function (role, permission) {
                 return -1 !== role.permissions.indexOf(permission);
             },
 
-            isInherited: function(role, permission) {
+            isInherited: function (role, permission) {
                 return !role.isLocked && this.hasPermission(this.authenticated, permission);
             },
 
-            showFakeCheckbox: function(role, permission) {
+            showFakeCheckbox: function (role, permission) {
                 return role.isAdministrator || (this.isInherited(role, permission) && !this.hasPermission(role, permission))
             }
 
         }
 
-    };
+    });
 
     $(function ($) {
 
-        var modal;
-
         if (window.permission) {
 
-            new Vue({
-
-                el: '#js-permission',
-
-                mixins: [mixin],
-
-                data: {
-                    roles      : permission.data.roles,
-                    permissions: permission.data.permissions
-                }
-
-            });
+            new Component({ el: '#js-permission' });
 
         } else {
 
-            new Vue({
+            new Component({
 
                 el: '#js-role',
 
-                mixins: [mixin],
-
                 data: {
-                    role       : {},
-                    config     : role.config,
-                    roles      : role.data.roles,
-                    permissions: role.data.permissions
+                    role  : {},
+                    config: config.config
                 },
 
                 ready: function () {
@@ -108,12 +97,12 @@
 
                     edit: function (role) {
 
-                        if (!modal) {
-                            modal = UIkit.modal('#modal-role');
+                        if (!this.modal) {
+                            this.modal = UIkit.modal('#modal-role');
                         }
 
                         this.$set('role', $.extend({}, role));
-                        modal.show();
+                        this.modal.show();
 
                     },
 
@@ -123,7 +112,7 @@
 
                         if (!this.role) return;
 
-                        modal.hide();
+                        this.modal.hide();
 
                         this.resource.save({ id: this.role.id }, { role: this.role }, function (data) {
 
@@ -140,7 +129,7 @@
                     remove: function (role) {
                         var self = this;
                         UIkit.modal.confirm(this.$trans('Are you sure?'), function () {
-                            Role.remove({ id: role.id }, function () {
+                            self.resource.remove({ id: role.id }, function () {
                                 self.roles.$delete(role.id.toString());
                             });
                         });
@@ -163,4 +152,4 @@
 
     });
 
-})(jQuery, UIkit);
+})(window, jQuery, UIkit);
