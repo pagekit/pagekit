@@ -12,8 +12,7 @@ class ViewListener implements EventSubscriberInterface
      */
     public function onSystemLoaded()
     {
-        $debug   = App::module('framework')->config('debug');
-        $pagekit = ['version' => App::version(), 'url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()];
+        $debug = App::module('framework')->config('debug');
 
         $scripts = App::scripts();
         $scripts->register('angular', 'vendor/assets/angular/angular.min.js', 'jquery');
@@ -39,9 +38,11 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
         $scripts->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
         $scripts->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
-        $scripts->register('system', 'extensions/system/app/system.js', ['jquery', 'locale'])->addData('pagekit', $pagekit);
+        $scripts->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
         $scripts->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
         $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
+
+        App::view()->addData('pagekit', ['version' => App::version(), 'url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()]);
 
         App::sections()->set('messages', function() {
             return App::view('extensions/system/views/messages/messages.php');

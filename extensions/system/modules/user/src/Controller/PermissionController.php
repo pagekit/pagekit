@@ -16,14 +16,15 @@ class PermissionController
      */
     public function indexAction()
     {
-        App::styles('permission-index', 'extensions/system/assets/css/user.css');
-        App::scripts('permission-index', 'extensions/system/modules/user/app/role.js', ['vue-system', 'uikit-sticky'])->addData('permission', [
-            'data'   => [
-                'permissions' => App::permissions(),
-                'roles'       => Role::query()->orderBy('priority')->get()
-            ]
-        ]);
-
-        return ['head.title' => __('Permissions')];
+        App::view()
+            ->setTitle(__('Permissions'))
+            ->addStyle('permission-index', 'extensions/system/assets/css/user.css')
+            ->addScript('permission-index', 'extensions/system/modules/user/app/role.js', ['vue-system', 'uikit-sticky'])
+            ->addData('permission', [
+                'data'   => [
+                    'permissions' => App::permissions(),
+                    'roles'       => Role::query()->orderBy('priority')->get()
+                ]
+            ]);
     }
 }

@@ -20,21 +20,22 @@ class UserController
         $roles = $this->getRoles();
         unset($roles[Role::ROLE_AUTHENTICATED]);
 
-        App::scripts('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar'])->addData('user', [
-            'config' => [
-                'emailVerification' => App::option('system:user.require_verification'),
-                'filter'            => $filter,
-                'page'              => $page
-            ],
-            'data'   => [
-                'users'       => json_decode(App::router()->call('@api/system/user', compact('filter', 'page'))->getContent()),
-                'statuses'    => User::getStatuses(),
-                'permissions' => App::permissions(),
-                'roles'       => $roles
-            ]
-        ]);
-
-        return ['head.title' => __('Users')];
+        App::view()
+            ->setTitle(__('Users'))
+            ->addScript('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar'])
+            ->addData('user', [
+                'config' => [
+                    'emailVerification' => App::option('system:user.require_verification'),
+                    'filter'            => $filter,
+                    'page'              => $page
+                ],
+                'data'   => [
+                    'users'       => json_decode(App::router()->call('@api/system/user', compact('filter', 'page'))->getContent()),
+                    'statuses'    => User::getStatuses(),
+                    'permissions' => App::permissions(),
+                    'roles'       => $roles
+                ]
+            ]);
     }
 
     /**
@@ -51,19 +52,20 @@ class UserController
         $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : false;
         $user->setRoles(null);
 
-        App::scripts('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar'])->addData('user', [
-            'config' => [
-                'emailVerification' => App::option('system:user.require_verification'),
-                'currentUser'       => App::user()->getId()
-            ],
-            'data'   => [
-                'user'     => $user,
-                'statuses' => User::getStatuses(),
-                'roles'    => array_values($roles)
-            ]
-        ]);
-
-        return ['head.title' => $id ? __('Edit User') : __('Add User')];
+        App::view()
+            ->setTitle($id ? __('Edit User') : __('Add User'))
+            ->addScript('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar'])
+            ->addData('user', [
+                'config' => [
+                    'emailVerification' => App::option('system:user.require_verification'),
+                    'currentUser'       => App::user()->getId()
+                ],
+                'data'   => [
+                    'user'     => $user,
+                    'statuses' => User::getStatuses(),
+                    'roles'    => array_values($roles)
+                ]
+            ]);
     }
 
     /**
