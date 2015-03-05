@@ -1,5 +1,7 @@
 (function(window) {
 
+    var config = window.locale || { translations: {}, formats: {}};
+
     /**
      * Copyright (c) William DURAND <william.durand1@gmail.com> (https://github.com/willdurand/BazingaJsTranslationBundle)
      */
@@ -596,10 +598,11 @@
      * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
      */
 
-    function date(format, timestamp) {
+    var date = (function (trans, formats) {
 
-        var that = this;
-        var jsdate, f;
+        var jsdate, f,
+            days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            months  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         // trailing backslash -> (dropped)
         // a backslash followed by any character (including backslash) -> the character
@@ -623,7 +626,7 @@
             },
             D: function () {
                 // Shorthand day name; Mon...Sun
-                return locale.date.shortdays[f.w()-1];
+                return trans(days[f.w()-1].slice(0, 3));
             },
             j: function () {
                 // Day of month; 1..31
@@ -631,7 +634,7 @@
             },
             l: function () {
                 // Full day name; Monday...Sunday
-                return locale.date.longdays[f.w()-1];
+                return trans(days[f.w()-1]);
             },
             N: function () {
                 // ISO-8601 day of week; 1[Mon]..7[Sun]
@@ -668,7 +671,7 @@
             // Month
             F: function () {
                 // Full month name; January...December
-                return locale.date.longmonths[f.n() - 1];
+                return trans(months[f.n() - 1]);
             },
             m: function () {
                 // Month w/leading 0; 01...12
@@ -676,7 +679,7 @@
             },
             M: function () {
                 // Shorthand month name; Jan...Dec
-                return locale.date.shortmonths[f.n() - 1];
+                return trans(months[f.n() - 1].slice(0, 3));
             },
             n: function () {
                 // Month; 1...12
@@ -814,19 +817,21 @@
             }
         };
 
-        this.date = function (format, timestamp) {
-            that = this;
+        return function (format, timestamp) {
+
             jsdate = (timestamp === undefined ? new Date() : // Not provided
-                (timestamp instanceof Date) ? new Date(timestamp) : // JS Date()
+                (typeof timestamp === 'string' || timestamp instanceof Date) ? new Date(timestamp) : // JS Date()
                     new Date(timestamp * 1000) // UNIX timestamp (auto-convert to int)
             );
+
+            if (formats.hasOwnProperty(format)) {
+                format = trans(formats[format]);
+            }
+
             return format.replace(formatChr, formatChrCb);
         };
 
-        return this.date(format, timestamp);
-    }
-
-    var config = window.locale || { translations: {}, formats: {}};
+    })(Translator.trans.bind(Translator), config.formats);
 
     window.Locale = {
 
@@ -836,18 +841,7 @@
 
         transChoice: Translator.transChoice.bind(Translator),
 
-        date: function(format, timestamp){
-
-            if (config.formats.hasOwnProperty(format)) {
-                format = Translator.trans(config.formats[format]);
-            }
-
-            if (typeof timestamp === 'string') {
-                timestamp = new Date(timestamp);
-            }
-
-            return date(format, timestamp);
-        }
+        date: date
 
     };
 
