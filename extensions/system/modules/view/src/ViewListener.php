@@ -42,7 +42,7 @@ class ViewListener implements EventSubscriberInterface
         $scripts->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
         $scripts->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
 
-        App::view()->addData('pagekit', ['version' => App::version(), 'url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()]);
+        App::view()->data('pagekit', ['version' => App::version(), 'url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()]);
 
         App::sections()->set('messages', function() {
             return App::tmpl('extensions/system/views/messages/messages.php');

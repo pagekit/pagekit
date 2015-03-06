@@ -22,7 +22,7 @@ class UserController
 
         App::view()->meta(['title' => __('Users')]);
         App::view()->script('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']);
-        App::view()->addData('user', [
+        App::view()->data('user', [
                 'config' => [
                     'emailVerification' => App::option('system:user.require_verification'),
                     'filter'            => $filter,
@@ -53,7 +53,7 @@ class UserController
 
         App::view()->meta(['title' => $id ? __('Edit User') : __('Add User')]);
         App::view()->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']);
-        App::view()->addData('user', [
+        App::view()->data('user', [
                 'config' => [
                     'emailVerification' => App::option('system:user.require_verification'),
                     'currentUser'       => App::user()->getId()

@@ -52,7 +52,7 @@ class DashboardController extends Controller
     {
         App::view()->meta(['title' => __('Dashboard Settings')]);
         App::view()->script('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', 'vue-system');
-        App::view()->addData('dashboard', [
+        App::view()->data('dashboard', [
                 'types' => $this->dashboard->getTypes(),
                 'widgets' => $this->dashboard->getWidgets()
             ]);

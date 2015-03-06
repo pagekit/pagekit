@@ -21,7 +21,7 @@ class RoleController extends Controller
         App::view()->meta(['title' => __('Roles')]);
         App::view()->style('role-index', 'extensions/system/assets/css/user.css');
         App::view()->script('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system');
-        App::view()->addData('role', [
+        App::view()->data('role', [
                 'config' => [
                     'role' => $id
                 ],
