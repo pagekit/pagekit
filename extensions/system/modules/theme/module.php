@@ -19,17 +19,17 @@ return [
             $app->on('kernel.view', function () use ($app) {
 
                 // set title
-                // $app['sections']->prepend('head', function () use ($app) {
+                $app['sections']->prepend('head', function () use ($app) {
 
-                //     $title = $app['view']->get('head.title');
+                    $title = $app['view']->meta()->get('title');
 
-                //     if ($site = $app['system']->config('site_title')) {
-                //         $title = "$title &lsaquo; $site";
-                //     }
+                    if ($site = $app['system']->config('site_title')) {
+                        $title = "$title &lsaquo; $site";
+                    }
 
-                //     $app['view']->set('head.title', "$title &#8212; Pagekit");
+                    $app['view']->meta(['title' => "$title &#8212; Pagekit"]);
 
-                // });
+                });
 
                 // set user
                 $app['tmpl']->addGlobal('user', $app['user']);
