@@ -7,15 +7,6 @@ return [
     'name' => 'system/view',
 
     'main' => function ($app) {
-
-        $app->extend('view', function ($view, $app) {
-
-            $view->set('app', $app);
-            $view->set('url', $app['url']);
-
-            return $view;
-        });
-
         $app->subscribe(new ViewListener);
     },
 

@@ -12,6 +12,7 @@ use Pagekit\Templating\Razr\Directive\SectionDirective;
 use Pagekit\Templating\Razr\Directive\TransDirective;
 use Pagekit\Templating\RazrEngine;
 use Pagekit\Templating\Section\DelayedRenderer;
+use Pagekit\Templating\TemplateEngine;
 use Pagekit\Templating\TemplateNameParser;
 use Razr\Directive\FunctionDirective;
 use Razr\Loader\FilesystemLoader as RazrFilesystemLoader;
@@ -28,7 +29,9 @@ return [
 
         $app['tmpl'] = function($app) {
 
-            $engine = new DelegatingEngine();
+            $engine = new TemplateEngine();
+            $engine->addGlobal('app', $app);
+            $engine->addGlobal('url', $app['url']);
             $engine->addEngine($app['tmpl.php']);
             $engine->addEngine($app['tmpl.razr']);
 
