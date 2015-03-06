@@ -30,7 +30,7 @@ class ExtensionsController extends Controller
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view('extensions/system/views/admin/extensions/table.razr', compact('packages'))
+                'table' => App::tmpl('extensions/system/views/admin/extensions/table.razr', compact('packages'))
             ]);
         }
 
@@ -152,7 +152,7 @@ class ExtensionsController extends Controller
             $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->config));
             $title = App::package()->getRepository('extension')->findPackage($extension->getName())->getTitle();
 
-            return App::view($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
+            return App::tmpl($tmpl, ['head.title' => __('%extension% Settings', ['%extension%' => $title]), 'extension' => $extension, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());

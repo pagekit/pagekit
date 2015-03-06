@@ -72,7 +72,7 @@ class CommentController extends Controller
 
         if (App::request()->isXmlHttpRequest()) {
             return App::response()->json([
-                'table' => App::view('extensions/blog/views/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
+                'table' => App::tmpl('extensions/blog/views/admin/comment/table.razr', ['count' => $count, 'comments' => $comments, 'post' => $post, 'pending' => $pending]),
                 'total' => $total
             ]);
         }

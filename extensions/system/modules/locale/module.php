@@ -111,7 +111,7 @@ return [
                 $timezones[$region][$timezone] = str_replace('_', ' ', $name);
             }
 
-            $event->add('system/locale', __('Localization'), $app['view']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $this->config, 'locales' => $locales, 'timezones' => $timezones]));
+            $event->add('system/locale', __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $this->config, 'locales' => $locales, 'timezones' => $timezones]));
         });
 
     },

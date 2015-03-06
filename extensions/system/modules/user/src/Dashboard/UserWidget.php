@@ -52,7 +52,7 @@ class UserWidget extends Type
 
         $users = $query->limit($widget->get('count') ?: 8)->get();
 
-        return App::view('extensions/system/modules/user/views/dashboard/index.php', compact('widget', 'users', 'options'));
+        return App::tmpl('extensions/system/modules/user/views/dashboard/index.php', compact('widget', 'users', 'options'));
     }
 
     /**
@@ -60,6 +60,6 @@ class UserWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('extensions/system/modules/user/views/dashboard/edit.php', compact('widget'));
+        return App::tmpl('extensions/system/modules/user/views/dashboard/edit.php', compact('widget'));
     }
 }

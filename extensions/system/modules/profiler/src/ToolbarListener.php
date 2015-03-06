@@ -17,7 +17,7 @@ class ToolbarListener implements EventSubscriberInterface
                 return new Response;
             }
 
-            return new Response(App::view()->render(__DIR__.'/../views/toolbar.php', ['profiler' => App::profiler(), 'profile' => $profile, 'token' => $token]));
+            return new Response(App::tmpl(__DIR__.'/../views/toolbar.php', ['profiler' => App::profiler(), 'profile' => $profile, 'token' => $token]));
 
         })->setDefault('_maintenance', true);
     }

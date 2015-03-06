@@ -85,7 +85,7 @@ class SystemController extends Controller
             throw new NotFoundHttpException(__('Template not found.'));
         }
 
-        $output = App::view($event->get($template));
+        $output = App::tmpl($event->get($template));
 
         $response = App::response()->create()
             ->setETag(md5($output))

@@ -81,7 +81,7 @@ return [
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $event->add('system/mail', __('Mail'), $app['view']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $this->config]));
+            $event->add('system/mail', __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $this->config]));
         });
     },
 

@@ -24,7 +24,7 @@ class CanonicalListener implements EventSubscriberInterface
         $route = App::url($request->attributes->get('_route'), $request->attributes->get('_route_params', []));
 
         if ($route != $request->getRequestUri()) {
-            App::view()->set('head.link.canonical', ['href' => $route]);
+            App::view()->metas(['canonical' => $route]);
         }
     }
 

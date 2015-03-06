@@ -29,8 +29,8 @@ class SiteController extends Controller
                 'roles' => Role::findAll()
             ],
             'templates' => [
-                'site.edit' => App::view('extensions/system/modules/site/views/tmpl/site.edit.php'),
-                'site.list' => App::view('extensions/system/modules/site/views/tmpl/site.list.php')
+                'site.edit' => App::tmpl('extensions/system/modules/site/views/tmpl/site.edit.php'),
+                'site.list' => App::tmpl('extensions/system/modules/site/views/tmpl/site.list.php')
             ]
         ]);
 

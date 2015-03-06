@@ -61,7 +61,7 @@ class ResetPasswordController extends Controller
                 $mail = App::mailer()->create();
                 $mail->setTo($user->getEmail())
                      ->setSubject(__('Reset password for %site%.', ['%site%' => App::system()->config('site_title')]))
-                     ->setBody(App::view('extensions/system/modules/user/views/mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
+                     ->setBody(App::tmpl('extensions/system/modules/user/views/mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
                      ->send();
 
             } catch (\Exception $e) {

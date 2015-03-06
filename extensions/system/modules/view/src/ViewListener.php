@@ -45,7 +45,7 @@ class ViewListener implements EventSubscriberInterface
         App::view()->addData('pagekit', ['version' => App::version(), 'url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()]);
 
         App::sections()->set('messages', function() {
-            return App::view('extensions/system/views/messages/messages.php');
+            return App::tmpl('extensions/system/views/messages/messages.php');
         });
     }
 

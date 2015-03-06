@@ -12,6 +12,16 @@ class TemplateEngine extends DelegatingEngine
     protected $globals = [];
 
     /**
+     * Render shortcut.
+     *
+     * @see render()
+     */
+    public function __invoke($name, array $parameters = [])
+    {
+        return $this->render($name, $parameters);
+    }
+
+    /**
      * Gets the global parameters.
      *
      * @return array
