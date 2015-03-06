@@ -19,6 +19,6 @@
     </p>
 
     <input type="hidden" name="redirect" value="<?= $redirect ?>">
-    <?php $this['token']->generate() ?>
+    <?php $view->token()->get() ?>
 
 </form>

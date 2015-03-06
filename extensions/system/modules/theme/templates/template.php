@@ -58,7 +58,7 @@
 
                         <div class="uk-navbar-content uk-hidden-small">
                             <div class="uk-display-inline-block" data-uk-dropdown>
-                                <?= $this['gravatar']->get($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                                <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
                                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li class="uk-nav-header"><?= $user->getUsername() ?></li>
@@ -71,7 +71,7 @@
                         </div>
 
                         <a class="uk-navbar-content uk-visible-small" href="#offcanvas-flip" data-uk-offcanvas>
-                            <?= $this['gravatar']->get($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                            <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
                         </a>
 
                     </div>

@@ -46,6 +46,6 @@
         <button class="uk-button uk-button-primary" type="submit"><?= __('Save') ?></button>
     </div>
 
-    <?php $this['token']->generate() ?>
+    <?php $view->token()->get() ?>
 
 </form>

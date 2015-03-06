@@ -1,5 +1,9 @@
 <?php
 
+use Pagekit\Templating\RazrEngine;
+use Pagekit\Templating\PhpEngine;
+use Pagekit\Templating\TemplateEngine;
+use Pagekit\Templating\TemplateNameParser;
 use Pagekit\Templating\Helper\DateHelper;
 use Pagekit\Templating\Helper\FinderHelper;
 use Pagekit\Templating\Helper\GravatarHelper;
@@ -7,16 +11,12 @@ use Pagekit\Templating\Helper\MarkdownHelper;
 use Pagekit\Templating\Helper\TokenHelper;
 use Pagekit\Templating\Razr\Directive\SectionDirective;
 use Pagekit\Templating\Razr\Directive\TransDirective;
-use Pagekit\Templating\RazrEngine;
 use Pagekit\Templating\Section\DelayedRenderer;
-use Pagekit\Templating\TemplateEngine;
-use Pagekit\Templating\TemplateNameParser;
 use Razr\Directive\FunctionDirective;
 use Razr\Loader\FilesystemLoader as RazrFilesystemLoader;
 use Symfony\Component\Templating\DelegatingEngine;
 use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
-use Symfony\Component\Templating\PhpEngine;
 
 return [
 
@@ -28,6 +28,7 @@ return [
 
             $engine = new TemplateEngine();
             $engine->addGlobal('app', $app);
+            $engine->addGlobal('view', $app['view']);
             $engine->addGlobal('url', $app['url']);
             $engine->addEngine($app['tmpl.php']);
             $engine->addEngine($app['tmpl.razr']);
@@ -45,22 +46,8 @@ return [
 
         $app['tmpl.php'] = function($app) {
 
-            $helpers = [new SlotsHelper, new GravatarHelper, new FinderHelper];
-
-            if (isset($app['csrf'])) {
-                $helpers[] = new TokenHelper($app['csrf']);
-            }
-
-            if (isset($app['markdown'])) {
-                $helpers[] = new MarkdownHelper($app['markdown']);
-            }
-
-            if (isset($app['dates'])) {
-                $helpers[] = new DateHelper($app['dates']);
-            }
-
             $engine = new PhpEngine($app['tmpl.parser'], new FilesystemLoader([]));
-            $engine->addHelpers($helpers);
+            $engine->addHelpers([new SlotsHelper]);
 
             return $engine;
         };

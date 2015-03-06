@@ -1,4 +1,4 @@
-<?php $app['styles']->add('system', 'extensions/system/assets/css/system.css') ?>
+<?php $view->style('system', 'extensions/system/assets/css/system.css') ?>
 
 <div class="uk-grid pk-grid-small uk-grid-preserve" data-uk-grid-margin>
 

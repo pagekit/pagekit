@@ -39,7 +39,7 @@
                             <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Forgot Password?') ?></a>
                         </div>
 
-                        <?php $this['token']->generate() ?>
+                        <?php $view->token()->get() ?>
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
 
                     </form>
@@ -53,7 +53,7 @@
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
                         </div>
 
-                        <?php $this['token']->generate() ?>
+                        <?php $view->token()->get() ?>
 
                     </form>
 

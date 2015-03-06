@@ -8,6 +8,6 @@
     <?= $type->renderForm($widget) ?>
 
     <input type="hidden" name="widget[type]" value="<?= $type->getId() ?>">
-    <?php $this['token']->generate() ?>
+    <?php $view->token()->get() ?>
 
 </form>

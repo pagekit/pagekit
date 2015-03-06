@@ -24,7 +24,7 @@
                         <p><?= __('Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.') ?></p>
                         <p>
                             <button class="uk-button uk-button-primary" type="submit" value=""><?= __('Update') ?></button>
-                            <?php $this['token']->generate() ?>
+                            <?php $view->token()->get() ?>
                         </p>
                     </form>
 

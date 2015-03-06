@@ -18,6 +18,6 @@
         <button class="uk-button uk-button-primary" type="submit"><?= __('Submit') ?></button>
     </div>
 
-    <?php $this['token']->generate() ?>
+    <?php $view->token()->get() ?>
 
 </form>
