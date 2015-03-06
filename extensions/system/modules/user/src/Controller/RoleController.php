@@ -18,11 +18,10 @@ class RoleController extends Controller
      */
     public function indexAction($id = null)
     {
-        App::view()
-            ->setTitle(__('Roles'))
-            ->addStyle('role-index', 'extensions/system/assets/css/user.css')
-            ->addScript('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system')
-            ->addData('role', [
+        App::view()->metas(['title' => __('Roles')]);
+        App::view()->styles('role-index', 'extensions/system/assets/css/user.css');
+        App::view()->scripts('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system');
+        App::view()->addData('role', [
                 'config' => [
                     'role' => $id
                 ],
