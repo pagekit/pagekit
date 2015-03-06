@@ -592,7 +592,7 @@
             }
         };
 
-    })(document, undefined);
+    })(document, undefined).fromJSON({ translations: config.translations });
 
     /**
      * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
@@ -835,7 +835,7 @@
 
     window.Locale = {
 
-        Translator: Translator.fromJSON({ translations: config.translations }),
+        Translator: Translator,
 
         trans: Translator.trans.bind(Translator),
 

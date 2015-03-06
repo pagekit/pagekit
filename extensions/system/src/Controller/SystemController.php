@@ -7,6 +7,7 @@ use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\System\Event\TmplEvent;
 use Pagekit\User\Entity\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Route("/")
@@ -74,29 +75,27 @@ class SystemController extends Controller
     }
 
     /**
-     * @Route("/tmpl/{templates}")
-     * @Response("json")
+     * @Route("/tmpl/{template}")
      */
-    public function tmplAction($templates = '')
+    public function tmplAction($template = '')
     {
-        $rendered = [];
         $event = App::trigger('system.tmpl', new TmplEvent);
 
-        foreach (explode(',', $templates) as $template) {
-            if ($event->has($template)) {
-                $rendered[$template] = App::view($event->get($template));
-            }
+        if (!$event->has($template)) {
+            throw new NotFoundHttpException(__('Template not found.'));
         }
 
-        $response = App::response()->json()
-            ->setETag(md5(implode('', $rendered)))
+        $output = App::view($event->get($template));
+
+        $response = App::response()->create()
+            ->setETag(md5($output))
             ->setPublic();
 
         if ($response->isNotModified(App::request())) {
             return $response;
         }
 
-        return $response->setData($rendered);
+        return $response->setContent($output);
     }
 
     /**

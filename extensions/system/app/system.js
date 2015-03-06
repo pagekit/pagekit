@@ -18,11 +18,15 @@
                 baseUrl = baseUrl.replace(/\/index.php$/i, '');
             }
 
-            return Url.get(url, params, {baseUrl: baseUrl});
+            return Url.get(url, params, { baseUrl: baseUrl });
         },
 
         resource: function(url, params, actions, options) {
             return new Resource(url, params, actions, options);
+        },
+
+        template: function(name) {
+            return $.get(this.url('system/tmpl/:template', { template: name } ));
         }
 
     };
