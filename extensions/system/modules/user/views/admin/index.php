@@ -1,6 +1,6 @@
 <div id="js-user" class="uk-form" v-cloak>
 
-    <?php $this['sections']->start('toolbar', 'show') ?>
+    <?php $app['sections']->start('toolbar', 'show') ?>
 
     <div class="uk-float-left">
 
@@ -28,7 +28,7 @@
 
     </div>
 
-    <?php $this['sections']->end() ?>
+    <?php $app['sections']->end() ?>
 
     <p v-show="!users.length" class="uk-alert uk-alert-info">{{ 'No user found.' | trans }}</p>
 

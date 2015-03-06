@@ -58,10 +58,6 @@ return [
                 $helpers[] = new ScriptHelper($app['scripts']);
             }
 
-            if (isset($app['sections'])) {
-                $helpers[] = new SectionHelper($app['sections']);
-            }
-
             if (isset($app['csrf'])) {
                 $helpers[] = new TokenHelper($app['csrf']);
             }

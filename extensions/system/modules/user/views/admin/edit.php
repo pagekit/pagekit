@@ -1,9 +1,9 @@
 <form id="js-user-edit" class="uk-form uk-form-horizontal" v-on="submit: save" v-cloak>
 
-    <?php $this['sections']->start('toolbar', 'show') ?>
+    <?php $app['sections']->start('toolbar', 'show') ?>
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
         <a class="uk-button" v-attr="href: $url('admin/system/user')">{{ user.id ? 'Close' : 'Cancel' | trans }}</a>
-    <?php $this['sections']->end() ?>
+    <?php $app['sections']->end() ?>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
         <div class="uk-width-medium-1-4 pk-sidebar-left">
