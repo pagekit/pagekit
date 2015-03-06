@@ -22,10 +22,10 @@
                         <div class="uk-display-inline-block" data-uk-dropdown>
                             <img class="tm-logo" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
                             <div class="uk-dropdown tm-dropdown">
-                                <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $app['url']->get('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                                <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 <?php foreach ($nav as $item): ?>
                                     <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
-                                        <a class="uk-panel pk-panel-icon" href="<?= $app['url']->get($item->getUrl()) ?>">
+                                        <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
                                             <img src="<?= $app['url']->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
                                             <p><?= __($item) ?></p>
                                         </a>
@@ -43,12 +43,12 @@
                     <ul class="uk-navbar-nav uk-hidden-small">
                         <?php if (!$subnav->getChildren()): ?>
                         <li<?= $subnav->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $app['url']->get($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
+                            <a href="<?= $view->url($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
                         </li>
                         <?php else: ?>
                         <?php foreach ($subnav->getChildren() as $item): ?>
                         <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $app['url']->get($item->getUrl()) ?>"><?= __($item) ?></a>
+                            <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
                         </li>
                         <?php endforeach ?>
                         <?php endif ?>
@@ -62,9 +62,9 @@
                                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li class="uk-nav-header"><?= $user->getUsername() ?></li>
-                                        <li><a href="<?= $app['url']->get() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                                        <li><a href="<?= $app['url']->get('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                                        <li><a href="<?= $app['url']->get('@system/auth/logout', ['redirect' => $app['url']->get('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
+                                        <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
+                                        <li><a href="<?= $view->url('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
+                                        <li><a href="<?= $view->url('@system/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -104,11 +104,11 @@
                     <?php if ($subnav->getChildren()): ?>
                         <li class="uk-nav-header"><?= __($subnav) ?></li>
                         <li<?= $subnav->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $app['url']->get($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
+                            <a href="<?= $view->url($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
                         </li>
                         <?php foreach ($subnav->getChildren() as $item): ?>
                             <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                                <a href="<?= $app['url']->get($item->getUrl()) ?>"><?= __($item) ?></a>
+                                <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
                             </li>
                         <?php endforeach ?>
                         <li class="uk-nav-divider"></li>
@@ -116,7 +116,7 @@
                     <li class="uk-nav-header"><?= __('Extensions') ?></li>
                     <?php foreach ($nav->getChildren() as $item): ?>
                         <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $app['url']->get($item->getUrl()) ?>">
+                            <a href="<?= $view->url($item->getUrl()) ?>">
                                 <img class="uk-margin-small-right" src="<?= $app['url']->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="34" height="34" alt="<?= __($item) ?>">
                                 <?= __($item) ?>
                             </a>
@@ -132,9 +132,9 @@
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header"><?= $user->getUsername() ?></li>
-                    <li><a href="<?= $app['url']->get() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                    <li><a href="<?= $app['url']->get('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                    <li><a href="<?= $app['url']->get('@system/auth/logout', ['redirect' => $app['url']->get('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
+                    <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
+                    <li><a href="<?= $view->url('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
+                    <li><a href="<?= $view->url('@system/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
                 </ul>
 
             </div>

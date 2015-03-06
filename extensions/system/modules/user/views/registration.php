@@ -1,6 +1,6 @@
 <?php $app['scripts']->add('uikit-form-password') ?>
 
-<form class="uk-article uk-form uk-form-stacked" action="<?= $app['url']->get('@system/registration/register') ?>" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@system/registration/register') ?>" method="post">
 
     <h1 class="uk-article-title"><?= __('Registration') ?></h1>
 

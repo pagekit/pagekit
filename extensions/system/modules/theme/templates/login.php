@@ -21,7 +21,7 @@
 
                     <?= $app['sections']->render('messages') ?>
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $app['url']->get('@system/auth/authenticate') ?>" method="post">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@system/auth/authenticate') ?>" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
@@ -44,7 +44,7 @@
 
                     </form>
 
-                    <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="<?= $app['url']->get('@system/resetpassword/reset') ?>" method="post">
+                    <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>

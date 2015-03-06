@@ -1,4 +1,4 @@
-<form class="uk-article uk-form uk-form-stacked" action="<?= $app['url']->get('@system/auth/authenticate') ?>" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@system/auth/authenticate') ?>" method="post">
 
     <h1 class="uk-article-title"><?= __('Login') ?></h1>
 
@@ -10,7 +10,7 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-password" class="uk-form-label"><?= __('Password') ?> <a href="<?= $app['url']->get('@system/resetpassword') ?>"><?= __('(Forgot Password?)') ?></a></label>
+        <label for="form-password" class="uk-form-label"><?= __('Password') ?> <a href="<?= $view->url('@system/resetpassword') ?>"><?= __('(Forgot Password?)') ?></a></label>
         <div class="uk-form-controls">
             <input id="form-password" type="password" name="credentials[password]" value="" required>
         </div>

@@ -19,7 +19,7 @@
 
                     <img class="uk-margin-bottom" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
 
-                    <form class="uk-panel uk-panel-box" action="<?= $app['url']->get('@system/migration/migrate') ?>">
+                    <form class="uk-panel uk-panel-box" action="<?= $view->url('@system/migration/migrate') ?>">
                         <h1><?= __('Update Pagekit') ?></h1>
                         <p><?= __('Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.') ?></p>
                         <p>
