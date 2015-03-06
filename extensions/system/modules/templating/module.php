@@ -4,9 +4,6 @@ use Pagekit\Templating\Helper\DateHelper;
 use Pagekit\Templating\Helper\FinderHelper;
 use Pagekit\Templating\Helper\GravatarHelper;
 use Pagekit\Templating\Helper\MarkdownHelper;
-use Pagekit\Templating\Helper\ScriptHelper;
-use Pagekit\Templating\Helper\SectionHelper;
-use Pagekit\Templating\Helper\StyleHelper;
 use Pagekit\Templating\Helper\TokenHelper;
 use Pagekit\Templating\Razr\Directive\SectionDirective;
 use Pagekit\Templating\Razr\Directive\TransDirective;
@@ -49,14 +46,6 @@ return [
         $app['tmpl.php'] = function($app) {
 
             $helpers = [new SlotsHelper, new GravatarHelper, new FinderHelper];
-
-            if (isset($app['styles'])) {
-                $helpers[] = new StyleHelper($app['styles']);
-            }
-
-            if (isset($app['scripts'])) {
-                $helpers[] = new ScriptHelper($app['scripts']);
-            }
 
             if (isset($app['csrf'])) {
                 $helpers[] = new TokenHelper($app['csrf']);
