@@ -37,12 +37,13 @@ return [
 
             $request = $event->getRequest();
             $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
+
             $app['file']->registerAdapter('file', new FileAdapter($app['path'], $baseUrl));
             $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
 
             $app['sections']->register('head', ['renderer' => 'delayed']);
             $app['sections']->prepend('head', function () use ($app) {
-                return sprintf('        <meta name="generator" content="Pagekit %1$s">', $app['version']);
+                $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
             });
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
