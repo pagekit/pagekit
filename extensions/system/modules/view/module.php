@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\View\ViewListener;
+use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\FinderHelper;
 use Pagekit\View\Helper\GravatarHelper;
@@ -34,6 +35,8 @@ return [
 
             return $view->addHelpers($helpers);
         });
+
+        $app->subscribe(new ResponseListener);
 
         $app->on('system.init', function() use ($app) {
 
