@@ -2,10 +2,10 @@
 
 <form class="uk-form uk-form-stacked">
 
-    <?php $app['sections']->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar', 'show') ?>
         <button ng-click="vm.save()" class="uk-button uk-button-primary"><?php echo __('Save') ?></button>
         <a class="uk-button js-cancel" ng-href="#/">{{ node.id ? "<?php echo __('Close') ?>" : "<?php echo __('Cancel') ?>" }}</a>
-    <?php $app['sections']->end() ?>
+    <?php $view->section()->end() ?>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
 

@@ -1,6 +1,8 @@
+<?php $view->script('dashboard-settings', 'extensions/system/modules/dashboard/app/settings.js', 'vue-system') ?>
+
 <div id="dashboard" class="uk-form">
 
-   <?php $app['sections']->start('toolbar', 'show') ?>
+   <?php $view->section()->start('toolbar', 'show') ?>
 
         <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
             <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
@@ -15,7 +17,7 @@
 
         <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
-    <?php $app['sections']->end() ?>
+    <?php $view->section()->end() ?>
 
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent">
         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>

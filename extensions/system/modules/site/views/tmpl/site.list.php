@@ -1,4 +1,4 @@
-<?php $app['sections']->start('toolbar', 'show') ?>
+<?php $view->section()->start('toolbar', 'show') ?>
 <div class="uk-float-left">
 
     <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
@@ -14,7 +14,7 @@
     <a class="uk-button" ng-click="vm.makeFrontpage()" ng-show="selected.length === 1"><?php echo __('Make Frontpage') ?></a>
 
 </div>
-<?php $app['sections']->end() ?>
+<?php $view->section()->end() ?>
 
 <div class="uk-overflow-container">
 

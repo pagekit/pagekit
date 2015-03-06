@@ -1,9 +1,9 @@
 <form class="uk-form uk-form-horizontal" action="<?= $app['url']->get('@system/dashboard/save', ['id' => $widget->getId()]) ?>" method="post">
 
-    <?php $app['sections']->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar', 'show') ?>
         <button class="uk-button uk-button-primary" type="submit"><?= __('Save') ?></button>
         <a class="uk-button" href="<?= $app['url']->get('@system/dashboard/settings') ?>"><?= $widget->getId() ? __('Close') : __('Cancel') ?></a>
-    <?php $app['sections']->end() ?>
+    <?php $view->section()->end() ?>
 
     <?= $type->renderForm($widget) ?>
 
