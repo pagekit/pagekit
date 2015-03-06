@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
-        <?= $app['sections']->render('head') ?>
-        <?php $app['styles']->add('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->add('theme', 'extensions/system/modules/theme/js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable']) ?>
+        <?= $view->section()->render('head') ?>
+        <?php $view->style('theme', 'extensions/system/modules/theme/css/theme.css') ?>
+        <?php $view->script('theme', 'extensions/system/modules/theme/js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable']) ?>
     </head>
     <body>
 
@@ -20,13 +20,13 @@
 
                     <div class="uk-navbar-content uk-hidden-small">
                         <div class="uk-display-inline-block" data-uk-dropdown>
-                            <img class="tm-logo" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
+                            <img class="tm-logo" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
                             <div class="uk-dropdown tm-dropdown">
                                 <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 <?php foreach ($nav as $item): ?>
                                     <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
                                         <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
-                                            <img src="<?= $app['url']->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
+                                            <img src="<?= $view->url()->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
                                             <p><?= __($item) ?></p>
                                         </a>
                                     </li>
@@ -37,7 +37,7 @@
                     </div>
 
                     <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img class="tm-logo" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
+                        <img class="tm-logo" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
@@ -93,9 +93,9 @@
             </div>
         </div>
 
-        <div class="tm-main uk-container uk-container-center"><?= $app['sections']->render('content') ?></div>
+        <div class="tm-main uk-container uk-container-center"><?= $view->section()->render('content') ?></div>
 
-        <div class="uk-hidden"><?= $app['sections']->render('messages') ?></div>
+        <div class="uk-hidden"><?= $view->section()->render('messages') ?></div>
 
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
@@ -117,7 +117,7 @@
                     <?php foreach ($nav->getChildren() as $item): ?>
                         <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
                             <a href="<?= $view->url($item->getUrl()) ?>">
-                                <img class="uk-margin-small-right" src="<?= $app['url']->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="34" height="34" alt="<?= __($item) ?>">
+                                <img class="uk-margin-small-right" src="<?= $view->url()->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="34" height="34" alt="<?= __($item) ?>">
                                 <?= __($item) ?>
                             </a>
                         </li>

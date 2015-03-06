@@ -1,4 +1,4 @@
-<?php $app['scripts']->add('user', 'extensions/system/modules/user/app/dashboard.js', ['vue-system', 'gravatar']) ?>
+<?php $view->script('user', 'extensions/system/modules/user/app/dashboard.js', ['vue-system', 'gravatar']) ?>
 
 <?php if ($widget->get('show') == 'registered'): ?>
 <h1 class="uk-h3"><?= _c('{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users', count($users), ['%users%' => count($users)]) ?></h1>

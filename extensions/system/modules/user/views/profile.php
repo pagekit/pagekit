@@ -1,4 +1,4 @@
-<?php $app['scripts']->add('uikit-form-password') ?>
+<?php $view->script('uikit-form-password') ?>
 
 <form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@system/profile/save') ?>" method="post">
 

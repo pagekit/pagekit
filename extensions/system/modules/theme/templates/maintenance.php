@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
-        <?= $app['sections']->render('head') ?>
-        <?php $app['styles']->add('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->add('uikit') ?>
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
+        <?= $view->section()->render('head') ?>
+        <?php $view->style('theme', 'extensions/system/modules/theme/css/theme.css') ?>
+        <?php $view->script('uikit') ?>
     </head>
     <body class="uk-height-1-1">
 
@@ -17,7 +17,7 @@
 
                 <div class="tm-container">
 
-                    <img class="uk-margin-bottom" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
+                    <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
 
                     <div class="uk-panel uk-panel-box">
                         <h1><?= __('Maintenance') ?></h1>

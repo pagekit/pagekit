@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
-        <link href="<?= $app['url']->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
-        <?= $app['sections']->render('head') ?>
-        <?php $app['styles']->add('theme', 'extensions/system/modules/theme/css/theme.css') ?>
-        <?php $app['scripts']->add('login', 'extensions/system/modules/theme/js/login.js', ['uikit']) ?>
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
+        <link href="<?= $view->url()->getStatic('extensions/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
+        <?= $view->section()->render('head') ?>
+        <?php $view->style('theme', 'extensions/system/modules/theme/css/theme.css') ?>
+        <?php $view->script('login', 'extensions/system/modules/theme/js/login.js', ['uikit']) ?>
     </head>
     <body class="uk-height-1-1">
 
@@ -17,9 +17,9 @@
 
                 <div class="tm-container tm-container-small">
 
-                    <img class="uk-margin-bottom" src="<?= $app['url']->getStatic('extensions/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
+                    <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
 
-                    <?= $app['sections']->render('messages') ?>
+                    <?= $view->section()->render('messages') ?>
 
                     <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@system/auth/authenticate') ?>" method="post">
 
