@@ -12,7 +12,7 @@
         Vue.prototype.$trans = Locale.trans;
         Vue.prototype.$transChoice = Locale.transChoice;
 
-        var component = Vue.directive('component'), bind = component.bind, templates = {};
+        var component = Vue.directive('component'), bind = component.bind;
 
         component.bind = function() {
 
@@ -26,11 +26,7 @@
                 return bind.call(this);
             }
 
-            if (!templates[template]) {
-                templates[template] = System.template(template.slice(1));
-            }
-
-            templates[template].done(function(tmpl) {
+            System.template(template.slice(1)).done(function(tmpl) {
                 options.template = tmpl;
             }).always(function() {
                 bind.call(directive);

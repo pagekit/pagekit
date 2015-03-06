@@ -1,6 +1,6 @@
 (function($) {
 
-    var config = $.extend({}, pagekit);
+    var config = $.extend({}, pagekit), templates = {};
 
     window.System = {
 
@@ -26,7 +26,12 @@
         },
 
         template: function(name) {
-            return $.get(this.url('system/tmpl/:template', { template: name } ));
+
+            if (!templates[name]) {
+                templates[name] = $.get(this.url('system/tmpl/:template', { template: name } ));
+            }
+
+            return templates[name];
         }
 
     };
