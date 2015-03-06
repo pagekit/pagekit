@@ -32,13 +32,14 @@ class InstallerController
     }
 
     /**
-     * @Response("extensions/system/modules/installer/views/install.razr")
+     * @Response("extensions/system/modules/installer/views/install.php")
      */
     public function indexAction()
     {
-        App::scripts('installer', ['config' => $this->config, 'url' => App::url('@installer/installer/install')]);
+       App::view()->meta(['title' => 'Pagekit Installer']);
+       App::view()->data('installer', ['config' => $this->config]);
 
-        return ['redirect' => App::url('/admin')];
+       return ['redirect' => App::url('/admin')];
     }
 
     /**

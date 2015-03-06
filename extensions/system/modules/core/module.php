@@ -41,10 +41,8 @@ return [
             $app['file']->registerAdapter('file', new FileAdapter($app['path'], $baseUrl));
             $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
 
-            $app['sections']->register('head', ['renderer' => 'delayed']);
-            $app['sections']->prepend('head', function () use ($app) {
-                $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
-            });
+            $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
+            $app['view']->section()->register('head', ['renderer' => 'delayed']);
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
