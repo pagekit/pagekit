@@ -20,8 +20,8 @@ class UserController
         $roles = $this->getRoles();
         unset($roles[Role::ROLE_AUTHENTICATED]);
 
-        App::view()->metas(['title' => __('Users')]);
-        App::view()->scripts('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']);
+        App::view()->meta(['title' => __('Users')]);
+        App::view()->script('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']);
         App::view()->addData('user', [
                 'config' => [
                     'emailVerification' => App::option('system:user.require_verification'),
@@ -51,8 +51,8 @@ class UserController
         $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : false;
         $user->setRoles(null);
 
-        App::view()->metas(['title' => $id ? __('Edit User') : __('Add User')]);
-        App::view()->scripts('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']);
+        App::view()->meta(['title' => $id ? __('Edit User') : __('Add User')]);
+        App::view()->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']);
         App::view()->addData('user', [
                 'config' => [
                     'emailVerification' => App::option('system:user.require_verification'),
