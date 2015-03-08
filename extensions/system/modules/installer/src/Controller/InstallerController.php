@@ -37,7 +37,6 @@ class InstallerController
     public function indexAction()
     {
        App::view()->meta(['title' => 'Pagekit Installer']);
-       App::view()->data('installer', ['config' => $this->config]);
 
        return ['redirect' => App::url('/admin')];
     }
@@ -112,33 +111,32 @@ class InstallerController
 
             if ('tables-exist' == $status) {
                 throw new Exception($message);
-            } else {
+            }
 
-                App::option()->set('system:version', App::migrator()->create('extensions/system/migrations')->run());
-                App::option()->set('system/core:settings', array_merge_recursive(App::option('system/core:settings', []), ['extensions' => ['blog', 'page']]), true);
+            App::option()->set('system:version', App::migrator()->create('extensions/system/migrations')->run());
+            App::option()->set('system/core:settings', array_merge_recursive(App::option('system/core:settings', []), ['extensions' => ['blog', 'page']]), true);
 
-                App::db()->insert('@system_user', [
-                    'name'       => $user['username'],
-                    'username'   => $user['username'],
-                    'password'   => App::get('auth.password')->hash($user['password']),
-                    'status'     => 1,
-                    'email'      => $user['email'],
-                    'registered' => new \DateTime
-                ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
+            App::db()->insert('@system_user', [
+                'name'       => $user['username'],
+                'username'   => $user['username'],
+                'password'   => App::get('auth.password')->hash($user['password']),
+                'status'     => 1,
+                'email'      => $user['email'],
+                'registered' => new \DateTime
+            ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
 
-                $id = App::db()->lastInsertId();
+            $id = App::db()->lastInsertId();
 
-                App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 2]);
-                App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 3]);
+            App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 2]);
+            App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 3]);
 
-                if ($sampleData = App::module('system/installer')->config('sampleData')) {
+            if ($sampleData = App::module('system/installer')->config('sampleData')) {
 
-                    $sql = file_get_contents($sampleData);
+                $sql = file_get_contents($sampleData);
 
-                    foreach (explode(';', $sql) as $query) {
-                        if ($query = trim($query)) {
-                            App::db()->executeUpdate($query);
-                        }
+                foreach (explode(';', $sql) as $query) {
+                    if ($query = trim($query)) {
+                        App::db()->executeUpdate($query);
                     }
                 }
             }

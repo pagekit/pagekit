@@ -28,9 +28,9 @@
 
                     <h1>{{ 'Connect database' | trans }}</h1>
                     <p>{{ 'Enter your database connection details.' | trans }}</p>
-                    <div class="uk-alert uk-alert-danger uk-margin" v-show="error"><p>{{ error }}</p></div>
+                    <div class="uk-alert uk-alert-danger uk-margin" v-show="message"><p>{{ message }}</p></div>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" v-on="submit: stepDatabase">
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="submit: stepDatabase" novalidate>
 
                         <div class="uk-form-row">
                             <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
@@ -46,16 +46,16 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" value="localhost" v-model="config['framework/database'].connections.mysql.host" required>
-                                    <p class="uk-form-help-block uk-text-danger">{{ 'Host cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" value="localhost" name="host" v-model="config['framework/database'].connections.mysql.host" required>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.host.required">{{ 'Host cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.mysql.user" value="" required>
-                                    <p class="uk-form-help-block uk-text-danger">{{ 'User cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.mysql.user" value="" name="user" required>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.user.required">{{ 'User cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
@@ -72,8 +72,8 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.mysql.dbname" value="pagekit" required>
-                                    <p class="uk-form-help-block uk-text-danger">{{ 'Database name cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" value="pagekit" name="dbname" v-model="config['framework/database'].connections.mysql.dbname" required>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.dbname.required">{{ 'Database name cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
@@ -109,13 +109,13 @@
                     <h1>{{ 'Create your account' | trans }}</h1>
                     <p>{{ 'You will be the site administrator.' | trans }}</p>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" v-on="submit: stepUser">
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formUser" v-on="submit: stepUser" novalidate>
 
                         <div class="uk-form-row">
                             <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-username" class="uk-width-1-1" type="text" v-model="user.username" value="admin" required>
-                                <p class="uk-form-help-block uk-text-danger">{{ 'Username cannot be blank.' | trans }}</p>
+                                <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" required>
+                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.user.required">{{ 'Username cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
@@ -123,18 +123,18 @@
                             <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
-                                    <input id="form-password" class="uk-width-1-1" type="password" v-model="user.password" required>
+                                    <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" required>
                                     <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                 </div>
-                                <p class="uk-form-help-block uk-text-danger">{{ 'Password cannot be blank.' | trans }}</p>
+                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.password.required">{{ 'Password cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
                             <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-email" class="uk-width-1-1" type="email" v-model="user.email" required>
-                                <p class="uk-form-help-block uk-text-danger">{{ 'Field must be a valid email address.' | trans }}</p>
+                                <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" required>
+                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.email.email">{{ 'Field must be a valid email address.' | trans }}</p>
                             </div>
                         </div>
 
@@ -153,20 +153,20 @@
                     <h1>{{ 'Setup your site' | trans }}</h1>
                     <p>{{ 'Enter your website details.' | trans }}</p>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" v-on="submit: stepSite">
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formSite" v-on="submit: stepSite" novalidate>
 
                         <div class="uk-form-row">
                             <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="option[system:settings][site_title]" required>
-                                <p class="uk-form-help-block uk-text-danger">{{ 'Site name cannot be blank.' | trans }}</p>
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site_title" required>
+                                <p class="uk-form-help-block uk-text-danger" v-show="!formSite.name.required">{{ 'Site name cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" name="option[system:settings][site_description]"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" v-model="option.site_description"></textarea>
                             </div>
                         </div>
 
@@ -182,31 +182,31 @@
             <div v-show="step == 'finish'" class="tm-slide uk-vertical-align uk-text-center">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
-                    <div data-status="install">
+                    <div v-show="status == 'install'">
                         <h1>{{ 'Installing Pagekit...' | trans }}</h1>
                         <p>
                             <i class="uk-icon-spinner uk-icon-spin uk-icon-large"></i>
                         </p>
                     </div>
 
-                    <div data-status="fail">
-                        <h1>{{ 'Installation failed!' | trans }}</h1>
-                        <div class="uk-alert uk-alert-danger"></div>
-                        <p>
-                            <i class="uk-icon-times-circle uk-icon-large"></i>
-                        </p>
-                        <p>
-                            <button type="button" class="uk-button uk-button-primary" onclick="Installer.onfinish()">{{ 'Retry' | trans }}</button>
-                        </p>
-                    </div>
-
-                    <div data-status="finished">
+                    <div v-show="status == 'finished'">
                         <h1>{{ 'Finished!' | trans }}</h1>
                         <p>
                             <i class="uk-icon-check-circle uk-icon-large"></i>
                         </p>
                         <p>
-                            <a class="uk-button uk-button-primary" href="@($redirect)">{{ 'Login now' | trans }}</a>
+                            <a class="uk-button uk-button-primary" href="<?= $redirect ?>">{{ 'Login now' | trans }}</a>
+                        </p>
+                    </div>
+
+                    <div v-show="status == 'failed'">
+                        <h1>{{ 'Installation failed!' | trans }}</h1>
+                        <div class="uk-alert uk-alert-danger">{{ message }}</div>
+                        <p>
+                            <i class="uk-icon-times-circle uk-icon-large"></i>
+                        </p>
+                        <p>
+                            <button type="button" class="uk-button uk-button-primary">{{ 'Retry' | trans }}</button>
                         </p>
                     </div>
 
