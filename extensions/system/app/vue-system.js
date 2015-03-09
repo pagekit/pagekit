@@ -12,13 +12,24 @@
         Vue.prototype.$trans = Locale.trans;
         Vue.prototype.$transChoice = Locale.transChoice;
 
-        var component = Vue.directive('component'), bind = component.bind;
+        /**
+         * TODO remove with vuejs > 0.11.5
+         */
+        Vue.prototype.$toOptions = function(collection) {
+            return Vue.filter('toOptions')(collection);
+        };
 
+        var component = Vue.directive('component'), bind = component.bind;
         component.bind = function() {
 
             var directive = this,
-                options   = this.vm.$options.components[this.expression].options,
-                template  = options.template,
+                options   = this.vm.$options.components[this.expression].options;
+
+            if (!options.template) {
+                return bind.call(this);
+            }
+
+            var template  = options.template,
                 frag      = Vue.parsers.template.parse(template);
 
             if (frag) {
@@ -30,6 +41,28 @@
                 options.template = tmpl;
             }).always(function() {
                 bind.call(directive);
+            });
+        };
+
+        var partial = Vue.directive('partial'), insert = partial.insert;
+        partial.insert = function(id) {
+
+            var self = this, partial = this.vm.$options.partials[id];
+
+            if (partial) {
+                return insert.call(this, id);
+            }
+
+            var frag = Vue.parsers.template.parse(id);
+            if (frag) {
+                this.vm.$options.partials[id] = frag;
+                return insert.call(this, id);
+            }
+
+            System.template(id.slice(1)).done(function(tmpl) {
+                self.vm.$options.partials[id] = tmpl;
+            }).always(function() {
+                insert.call(self, id);
             });
         };
 
@@ -56,15 +89,9 @@
         Vue.filter('toArray', function(collection) {
 
             if (Vue.util.isPlainObject(collection)) {
-                return Object.keys(collection)
-
-                    .filter(function(key) {
-                        return key.charAt(0) !== '$';
-                    })
-
-                    .map(function(key) {
-                        return collection[key];
-                    });
+                return Object.keys(collection).map(function(key) {
+                    return collection[key];
+                });
             }
 
             return Vue.util.isArray(collection) ? collection : [];
@@ -75,6 +102,19 @@
                 obj[key] = value;
                 return obj;
             }, {}) : collection;
+        });
+
+        Vue.filter('toOptions', function(collection) {
+            return Object.keys(collection).map(function (key) {
+
+                var op = collection[key];
+                if (typeof op === 'string') {
+                    return { text: op, value: key };
+                } else {
+                    return { label: key, options: Vue.prototype.$toOptions(op) }
+                }
+
+            });
         });
 
         /**

@@ -5,6 +5,7 @@ namespace Pagekit\Locale\Controller;
 use Pagekit\Application as App;
 
 /**
+ * TODO should this be available in the frontend as well?
  * @Access(admin=true)
  */
 class LocaleController
@@ -19,14 +20,17 @@ class LocaleController
             'formats' => App::module('system/locale')->config('formats')
         ]);
 
-        $response = App::response('', 200, ['Content-Type' =>'application/javascript'])
-            ->setETag(md5($messages))
-            ->setPublic();
+        $request = App::request();
 
-        if ($response->isNotModified(App::request())) {
+        $json = $request->isXmlHttpRequest();
+
+        $response = ($json ? App::response()->json() : App::response('', 200, ['Content-Type' =>'application/javascript']));
+        $response->setETag(md5($json.$messages))->setPublic();
+
+        if ($response->isNotModified($request)) {
             return $response;
         }
 
-        return $response->setContent(sprintf('var locale = %s;', $messages));
+        return $response->setContent($json ? $messages : sprintf('var locale = %s;', $messages));
     }
 }

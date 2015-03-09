@@ -32,6 +32,13 @@
             }
 
             return templates[name];
+        },
+
+        loadLanguage: function(locale) {
+            return $.getJSON(this.url('admin/system/locale', { locale: locale }, function(data) {
+                data.locale = locale;
+                Locale.Translator.fromJSON(data);
+            }));
         }
 
     };

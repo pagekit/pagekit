@@ -21,14 +21,14 @@ class TestController extends Controller
         try {
 
             $option = array_merge([
-                'system:mail.port' => '',
-                'system:mail.host' => '',
-                'system:mail.username' => '',
-                'system:mail.password' => '',
-                'system:mail.encryption' => ''
+                'port' => '',
+                'host' => '',
+                'username' => '',
+                'password' => '',
+                'encryption' => ''
             ], $option);
 
-            App::mailer()->testSmtpConnection($option['system:mail.host'], $option['system:mail.port'], $option['system:mail.username'], $option['system:mail.password'], $option['system:mail.encryption']);
+            App::mailer()->testSmtpConnection($option['host'], $option['port'], $option['username'], $option['password'], $option['encryption']);
 
             return ['success' => true, 'message' => __('Connection established!')];
 
@@ -48,21 +48,21 @@ class TestController extends Controller
         try {
 
             $option = array_merge([
-                'system:mail.driver' => '',
-                'system:mail.port' => '',
-                'system:mail.host' => '',
-                'system:mail.username' => '',
-                'system:mail.password' => '',
-                'system:mail.encryption' => '',
-                'system:mail.from.name' => '',
-                'system:mail.from.address' => ''
+                'driver' => '',
+                'port' => '',
+                'host' => '',
+                'username' => '',
+                'password' => '',
+                'encryption' => '',
+                'from.name' => '',
+                'from.address' => ''
             ], $option);
 
             foreach ($option as $key => $value) {
                 App::option()->set($key, $value);
             }
 
-            $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $option['system:mail.from.address'])->send();
+            $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $option['from.address'])->send();
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
 
         } catch (\Exception $e) {

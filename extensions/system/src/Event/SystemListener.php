@@ -86,17 +86,36 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
+     * Add system settings screens.
+     */
+    public function onSystemSettings($event)
+    {
+        App::view()->data('settings', [
+            'option' => [
+                'system' => App::system()->config
+            ],
+            'system' => [
+                'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
+            ]
+        ]);
+
+        $event->add('site',   __('Site'),   App::tmpl('extensions/system/views/admin/settings/site.php'));
+        $event->add('system', __('System'), App::tmpl('extensions/system/views/admin/settings/system.php'));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'system.admin'    => 'onSystemAdmin',
-            'system.finder'   => 'onSystemFinder',
-            'system.link'     => 'onSystemLink',
-            'system.loaded'   => 'onSystemLoaded',
-            'system.tmpl'     => 'onSystemTmpl',
-            'kernel.request'  => 'onRequestMatched'
+            'system.admin'         => 'onSystemAdmin',
+            'system.finder'        => 'onSystemFinder',
+            'system.link'          => 'onSystemLink',
+            'system.loaded'        => 'onSystemLoaded',
+            'system.tmpl'          => 'onSystemTmpl',
+            'kernel.request'       => 'onRequestMatched',
+            'system.settings.edit' => ['onSystemSettings', 8]
         ];
     }
 }

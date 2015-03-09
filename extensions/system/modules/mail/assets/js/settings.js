@@ -1,44 +1,22 @@
-require(['jquery', 'system', 'uikit', 'domReady!'], function($, system, uikit) {
+Vue.component('v-mail', {
 
-    // change mailer
-    $('[name="option[system:mail.driver]"]').on('change',function() {
-        $('[data-smtp]').toggle($(this).val() === 'smtp');
-    }).trigger('change');
+    inherit: true,
+    replace: true,
 
-    // test SMTP
-    $('[data-smtp-test]').on('click', function() {
+    template: '#template-mail',
 
-        var data = {};
+    methods: {
 
-        $('[name^="option[system:mail"]').each(function() {
-            data[$(this).attr('name')] = $(this).val();
-        });
+        test: function(driver) {
+            $.getJSON(this.$url('admin/system/mail/test/'+driver), { option: this.option['system/mail'] }, function(data) {
+                if (data) {
+                    UIkit.notify(data.message, data.success ? 'success' : 'danger');
+                }
+            }).fail(function () {
+                UIkit.notify('Ajax request to server failed.', 'danger');
+            });
+        }
 
-        $.post($(this).data('smtp-test'), $.extend(data, system.csrf.params), function(data) {
-            if (data) {
-                uikit.notify(data.message, data.success ? 'success' : 'danger');
-            }
-        }, 'json').fail(function() {
-            uikit.notify('Ajax request to server failed.', 'danger');
-        });
-    });
-
-    // test mail
-    $('[data-mail-test]').on('click', function() {
-
-        var data = {};
-
-        $('[name^="option[system:mail"]').each(function() {
-            data[$(this).attr('name')] = $(this).val();
-        });
-
-        $.post($(this).data('mail-test'), $.extend(data, system.csrf.params), function(data) {
-            if (data) {
-                uikit.notify(data.message, data.success ? 'success' : 'danger');
-            }
-        }, 'json').fail(function() {
-            uikit.notify('Ajax request to server failed.', 'danger');
-        });
-    });
+    }
 
 });

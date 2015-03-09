@@ -92,6 +92,8 @@ return [
                 $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
             }
 
+            ksort($locales);
+
             $timezones = [];
             foreach (\DateTimeZone::listIdentifiers() as $timezone) {
 
@@ -111,7 +113,18 @@ return [
                 $timezones[$region][$timezone] = str_replace('_', ' ', $name);
             }
 
-            $event->add('system/locale', __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.razr', ['config' => $this->config, 'locales' => $locales, 'timezones' => $timezones]));
+            $app['view']->script('locale-settings', 'extensions/system/modules/locale/assets/js/settings.js', 'vue-system');
+            $app['view']->data('settings', [
+                'option' => [
+                    'system/locale' => $this->config
+                ],
+                'locale' => [
+                    'locales' => $locales,
+                    'timezones' => $timezones
+                ]
+            ]);
+
+            $event->add('system/locale', __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
         });
 
     },

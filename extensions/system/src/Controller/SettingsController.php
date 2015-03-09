@@ -33,33 +33,41 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Request({"tab": "int"})
-     * @Response("extensions/system/views/admin/settings/settings.razr")
+     * @Response("extensions/system/views/admin/settings/settings.php")
      */
-    public function indexAction($tab = 0)
+    public function indexAction()
     {
-        $ssl    = extension_loaded('openssl');
-        $sqlite = class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true));
+        App::view()->meta(['title' => __('Settings')]);
+        App::view()->script('settings', 'extensions/system/app/settings.js', 'vue-system');
+        App::view()->data('settings', [
+            'config' => $this->config->getValues(),
+        ]);
 
-        return ['head.title' => __('Settings'), 'system' => App::system()->config, 'config' => $this->config, 'tab' => $tab, 'ssl' => $ssl, 'sqlite' => $sqlite, 'additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
+        return ['additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
     }
 
     /**
-     * @Request({"config": "array", "option": "array", "tab": "int"}, csrf=true)
+     * @Request({"config": "array", "option": "array"}, csrf=true)
+     * @Response("json")
      */
-    public function saveAction($data, $option, $tab = 0)
+    public function saveAction($config, $option)
     {
-        foreach ($data as $key => $value) {
-            $this->config->set($key, $value);
+        foreach ($config as $module => $value) {
+            $this->config->set($module, $value);
         }
 
         file_put_contents($this->configFile, $this->config->dump());
 
-        foreach ($option as $key => $value) {
-            App::option()->set($key, $value, true);
+        foreach ($option as $module => $value) {
+
+            if (!preg_match('/:settings$/i', $module)) {
+                $module .= ':settings';
+            }
+
+            App::option()->set($module, $value, true);
         }
 
-        if ($data['system/cache']['caches']['cache']['storage'] != App::module('system/cache')->config('caches.cache.storage') || $data['framework']['debug'] != App::module('framework')->config('debug')) {
+        if ($config['system/cache']['caches']['cache']['storage'] != App::module('system/cache')->config('caches.cache.storage') || $config['framework']['debug'] != App::module('framework')->config('debug')) {
             App::system()->clearCache();
         }
 
@@ -67,8 +75,6 @@ class SettingsController extends Controller
             opcache_invalidate($this->configFile);
         }
 
-        App::message()->success(__('Settings saved.'));
-
-        return $this->redirect('@system/settings', compact('tab'));
+        return ['success'];
     }
 }

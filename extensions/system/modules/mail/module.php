@@ -81,7 +81,12 @@ return [
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $event->add('system/mail', __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.razr', ['config' => $this->config]));
+            $app['view']->script('mail-settings', 'extensions/system/modules/mail/assets/js/settings.js', 'vue-system');
+            $app['view']->data('settings', [
+                'option' => [ 'system/mail' => $this->config ],
+                'mail' => [ 'ssl' => extension_loaded('openssl') ]
+            ]);
+            $event->add('system/mail', __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.php'));
         });
     },
 

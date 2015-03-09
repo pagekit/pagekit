@@ -18,7 +18,11 @@ return [
 
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $event->add('system/oauth', __('OAuth'), $app['tmpl']->render('extensions/system/modules/oauth/views/admin/settings.razr', ['config' => $this->config]));
+
+            // TODO transform to vuejs
+
+            $app['view']->data('settings', [ 'option' => [ 'system/oauth' => $this->config ] ]);
+            $event->add('system/oauth', __('OAuth'), $app['tmpl']->render('extensions/system/modules/oauth/views/admin/settings.php'));
         });
 
     },

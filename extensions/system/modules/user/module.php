@@ -55,7 +55,8 @@ return [
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $event->add('system/user', __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.razr', ['config' => $this->config]));
+            $app['view']->data('settings', [ 'option' => [ 'system/user' => $this->config ] ]);
+            $event->add('system/user', __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.php'));
         });
 
     },
