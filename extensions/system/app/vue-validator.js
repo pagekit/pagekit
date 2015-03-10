@@ -2,7 +2,7 @@
 
     var install = function (Vue) {
 
-        var _ = Vue.util;
+        var _ = Vue.util.extend({}, Vue.util);
 
         Vue.prototype.$validator = {
 
@@ -20,7 +20,6 @@
 
                 if (!this.validators[form]) {
                     this.validators[form] = [];
-                    _.nextTick(function () { self.validate(form); });
                     _.on(el.form, 'submit', function (e) {
                         e.preventDefault();
                         _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
@@ -45,14 +44,17 @@
 
             validate: function (form, submit) {
 
-                var results = {}, result, name, keys;
+                var results = {}, keys;
 
                 this.validators[form].forEach(function (directive) {
 
-                    name   = directive.attr('name');
-                    result = directive.validate();
+                    var name = _.attr(directive.el, 'name'), valid = directive.validate();
 
-                    if (!submit && !directive.touched) {
+                    if (submit) {
+                        directive.touched = true;
+                    }
+
+                    if (!directive.touched) {
                         return;
                     }
 
@@ -65,9 +67,9 @@
                         };
                     }
 
-                    results[name][directive.type] = result;
+                    results[name][directive.type] = !valid;
 
-                    if (results[name].valid && result) {
+                    if (results[name].valid && !valid) {
                         results[name].valid = results.valid = false;
                         results[name].invalid = results.invalid = true;
                     }
@@ -92,13 +94,13 @@
 
             bind: function () {
 
-                var self = this, form = this.el.form;
+                var self = this, form = _.attr(this.el.form, 'name');
 
                 if (!form) {
                     return;
                 }
 
-                this.form    = form.getAttribute('name');
+                this.form    = _.camelize(form);
                 this.type    = this.arg || this.expression;
                 this.args    = this.arg ? this.expression : '';
                 this.value   = this.el.value;
@@ -127,15 +129,11 @@
                 }
             },
 
-            attr: function (name) {
-                return this.el.getAttribute(name);
-            },
-
             validate: function () {
 
                 var validator = Vue.validators[this.type];
 
-                return validator ? !validator(this.el.value, this.args) : undefined;
+                return validator ? validator(this.el.value, this.args) : undefined;
             }
 
         });
@@ -188,10 +186,12 @@
             }
         };
 
+        _.attr = function (el, attr) {
+            return el ? el.getAttribute(attr) : null;
+        };
+
         _.trigger = function(el, event) {
-
             var e = document.createEvent('HTMLEvents');
-
             e.initEvent(event, true, false);
             el.dispatchEvent(e);
         };
