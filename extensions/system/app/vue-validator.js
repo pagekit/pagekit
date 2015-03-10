@@ -21,6 +21,10 @@
                 if (!this.validators[directive.form]) {
                     this.validators[directive.form] = [];
                     _.nextTick(function () { self.validate(directive.form); });
+                    _.on(directive.el.form, 'submit', function (e) {
+                        e.preventDefault();
+                        _.trigger(e.target, self.validate(directive.form, true) ? 'valid' : 'invalid');
+                    });
                 }
 
                 if (this.elements.indexOf(directive.el) == -1) {
@@ -39,7 +43,7 @@
                 validators = validators.splice(validators.indexOf(this), 1);
             },
 
-            validate: function (form) {
+            validate: function (form, submit) {
 
                 var results = {}, result, name, keys;
 
@@ -48,7 +52,7 @@
                     name   = directive.attr('name');
                     result = directive.validate();
 
-                    if (!directive.touched) {
+                    if (!submit && !directive.touched) {
                         return;
                     }
 
@@ -78,6 +82,8 @@
                 }
 
                 this.vm.$set(form, results);
+
+                return results.valid;
             }
 
         };
@@ -180,6 +186,14 @@
                 var regex = new RegExp(match[1], match[2]);
                 return regex.test(value);
             }
+        };
+
+        _.trigger = function(el, event) {
+
+            var e = document.createEvent('HTMLEvents');
+
+            e.initEvent(event, true, false);
+            el.dispatchEvent(e);
         };
 
     };
