@@ -68,6 +68,7 @@ return [
             $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
             $app['scripts']->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
+            $app['scripts']->register('vue-validator', 'extensions/system/app/vue-validator.js', ['vue']);
 
             $app['view']->data('pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
             $app['view']->section()->set('messages', function() use ($app) {
