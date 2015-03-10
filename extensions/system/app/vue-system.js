@@ -49,7 +49,7 @@
 
             var self = this, partial = this.vm.$options.partials[id];
 
-            if (partial) {
+            if (undefined === id || partial) {
                 return insert.call(this, id);
             }
 
