@@ -12,28 +12,28 @@
 
             bind: function (directive) {
 
-                var self = this;
+                var self = this, el = directive.el, form = directive.form;
 
                 if (!this.vm) {
                     this.vm = directive.vm;
                 }
 
-                if (!this.validators[directive.form]) {
-                    this.validators[directive.form] = [];
-                    _.nextTick(function () { self.validate(directive.form); });
-                    _.on(directive.el.form, 'submit', function (e) {
+                if (!this.validators[form]) {
+                    this.validators[form] = [];
+                    _.nextTick(function () { self.validate(form); });
+                    _.on(el.form, 'submit', function (e) {
                         e.preventDefault();
-                        _.trigger(e.target, self.validate(directive.form, true) ? 'valid' : 'invalid');
+                        _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
                     });
                 }
 
-                if (this.elements.indexOf(directive.el) == -1) {
-                    this.elements.push(directive.el);
-                    _.on(directive.el, 'blur', directive.listener);
-                    _.on(directive.el, 'input', directive.listener);
+                if (this.elements.indexOf(el) == -1) {
+                    this.elements.push(el);
+                    _.on(el, 'blur', directive.listener);
+                    _.on(el, 'input', directive.listener);
                 }
 
-                this.validators[directive.form].push(directive);
+                this.validators[form].push(directive);
             },
 
             unbind: function (directive) {
