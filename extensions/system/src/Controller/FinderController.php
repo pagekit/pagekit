@@ -4,12 +4,15 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\System\Event\FileAccessEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+/**
+ * @Response("json")
+ */
 class FinderController
 {
     /**
      * @Request({"path"})
-     * @Response("json")
      */
     public function listAction($path)
     {
@@ -18,7 +21,7 @@ class FinderController
         }
 
         if (!is_dir($dir) || '-' === $mode = $this->getMode($dir)) {
-            return $this->error(__('Permission denied.'));
+            throw new AccessDeniedHttpException(__('Permission denied.'));
         }
 
         $data = array_fill_keys(['folders', 'files'], []);
@@ -52,7 +55,6 @@ class FinderController
 
     /**
      * @Request({"name"})
-     * @Response("json")
      */
     public function createFolderAction($name)
     {
@@ -69,7 +71,7 @@ class FinderController
         }
 
         if ('w' !== $this->getMode(dirname($path))) {
-            return $this->error(__('Permission denied.'));
+            throw new AccessDeniedHttpException(__('Permission denied.'));
         }
 
         try {
@@ -86,7 +88,6 @@ class FinderController
 
     /**
      * @Request({"oldname", "newname"})
-     * @Response("json")
      */
     public function renameAction($oldname, $newname)
     {
@@ -99,7 +100,7 @@ class FinderController
         }
 
         if ('w' !== $this->getMode($source) || file_exists($target) || 'w' !== $this->getMode(dirname($target))) {
-            return $this->error(__('Permission denied.'));
+            throw new AccessDeniedHttpException(__('Permission denied.'));
         }
 
         try {
@@ -116,7 +117,6 @@ class FinderController
 
     /**
      * @Request({"names": "array"})
-     * @Response("json")
      */
     public function removeFilesAction($names)
     {
@@ -127,7 +127,7 @@ class FinderController
             }
 
             if ('w' !== $this->getMode($path)) {
-                return $this->error(__('Permission denied.'));
+                throw new AccessDeniedHttpException(__('Permission denied.'));
             }
 
             try {
@@ -143,9 +143,6 @@ class FinderController
         return $this->success(__('Removed selected.'));
     }
 
-    /**
-     * @Response("json")
-     */
     public function uploadAction()
     {
         try {
@@ -155,7 +152,7 @@ class FinderController
             }
 
             if (!is_dir($path) || 'w' !== $mode = $this->getMode($path)) {
-                return $this->error(__('Permission denied.'));
+                throw new AccessDeniedHttpException(__('Permission denied.'));
             }
 
             $files = App::request()->files->get('files');

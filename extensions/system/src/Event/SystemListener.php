@@ -88,7 +88,7 @@ class SystemListener implements EventSubscriberInterface
     /**
      * Add system settings screens.
      */
-    public function onSystemSettings($event)
+    public function onSettingsEdit($event)
     {
         App::view()->data('settings', [
             'option' => [
@@ -104,6 +104,20 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
+     * Add system settings screens.
+     */
+    public function onSettingsSave($event, $config, $option)
+    {
+        if (!$option['system']['storage']) {
+            unset($option['system']['storage']);
+        }
+
+        if ($config['framework.debug'] != App::module('framework')->config('debug')) {
+            App::system()->clearCache();
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -115,7 +129,8 @@ class SystemListener implements EventSubscriberInterface
             'system.loaded'        => 'onSystemLoaded',
             'system.tmpl'          => 'onSystemTmpl',
             'kernel.request'       => 'onRequestMatched',
-            'system.settings.edit' => ['onSystemSettings', 8]
+            'system.settings.edit' => ['onSettingsEdit', 8],
+            'system.settings.save' => 'onSettingsSave'
         ];
     }
 }

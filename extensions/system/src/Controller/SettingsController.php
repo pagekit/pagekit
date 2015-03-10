@@ -52,9 +52,13 @@ class SettingsController extends Controller
      */
     public function saveAction($config, $option)
     {
+        $option = new \ArrayObject($option);
+
         foreach ($config as $module => $value) {
             $this->config->set($module, $value);
         }
+
+        App::trigger('system.settings.save', [$this->config, $option]);
 
         file_put_contents($this->configFile, $this->config->dump());
 
@@ -65,10 +69,6 @@ class SettingsController extends Controller
             }
 
             App::option()->set($module, $value, true);
-        }
-
-        if ($config['system/cache']['caches']['cache']['storage'] != App::module('system/cache')->config('caches.cache.storage') || $config['framework']['debug'] != App::module('framework')->config('debug')) {
-            App::system()->clearCache();
         }
 
         if (function_exists('opcache_invalidate')) {

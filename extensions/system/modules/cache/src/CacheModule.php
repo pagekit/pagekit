@@ -85,6 +85,12 @@ class CacheModule extends Module
 
             $event->add('system/cache', __('Cache'), $app['tmpl']->render('extensions/system/modules/cache/views/admin/settings.php'));
         });
+
+        $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
+            if ($config->get('system/cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
+                $app['system']->clearCache();
+            }
+        });
     }
 
     /**
