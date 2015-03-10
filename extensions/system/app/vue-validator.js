@@ -25,6 +25,7 @@
 
                 if (this.elements.indexOf(directive.el) == -1) {
                     this.elements.push(directive.el);
+                    _.on(directive.el, 'blur', directive.listener);
                     _.on(directive.el, 'input', directive.listener);
                 }
 
@@ -40,15 +41,24 @@
 
             validate: function (form) {
 
-                var results = {valid: true, invalid: false}, result, name;
+                var results = {}, result, name, keys;
 
                 this.validators[form].forEach(function (directive) {
 
                     name   = directive.attr('name');
                     result = directive.validate();
 
+                    if (!directive.touched) {
+                        return;
+                    }
+
                     if (!results[name]) {
-                        results[name] = {valid: true, invalid: false, modified: directive.modified()};
+                        results[name] = {
+                            valid: true,
+                            invalid: false,
+                            touched: directive.touched,
+                            dirty: directive.dirty
+                        };
                     }
 
                     results[name][directive.type] = result;
@@ -59,6 +69,13 @@
                     }
 
                 });
+
+                keys = Object.keys(results);
+
+                if (keys.length && keys.indexOf('valid') == -1) {
+                    results.valid = true;
+                    results.invalid = false;
+                }
 
                 this.vm.$set(form, results);
             }
@@ -75,12 +92,23 @@
                     return;
                 }
 
-                this.form  = form.getAttribute('name');
-                this.type  = this.arg || this.expression;
-                this.args  = this.arg ? this.expression : '';
-                this.value = this.el.value;
+                this.form    = form.getAttribute('name');
+                this.type    = this.arg || this.expression;
+                this.args    = this.arg ? this.expression : '';
+                this.value   = this.el.value;
+                this.dirty   = false;
+                this.touched = false;
 
-                this.listener = function () {
+                this.listener = function (e) {
+
+                    if (e.type == 'blur') {
+                        self.touched = true;
+                    }
+
+                    if (self.el.value != self.value) {
+                        self.dirty = true;
+                    }
+
                     self.vm.$validator.validate(self.form);
                 };
 
@@ -95,10 +123,6 @@
 
             attr: function (name) {
                 return this.el.getAttribute(name);
-            },
-
-            modified: function () {
-                return this.el.value != this.value;
             },
 
             validate: function () {
