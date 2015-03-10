@@ -12,6 +12,14 @@ return [
 
     ],
 
+    'controllers' => [
+
+        '@system: /system' => [
+            'Pagekit\\Cache\\Controller\\CacheController'
+        ],
+
+    ],
+
     'config' => [
 
         'caches'  => [],

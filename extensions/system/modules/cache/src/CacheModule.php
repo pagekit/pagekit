@@ -88,7 +88,7 @@ class CacheModule extends Module
 
         $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
             if ($config->get('system/cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
-                $app['system']->clearCache();
+                $this->clearCache();
             }
         });
     }
@@ -114,5 +114,42 @@ class CacheModule extends Module
         }
 
         return $name? in_array($name, $supports) : $supports;
+    }
+
+    /**
+     * Clear cache on kernel terminate event.
+     */
+    public function clearCache(array $options = [])
+    {
+        App::on('kernel.terminate', function() use ($options) {
+            $this->doClearCache($options);
+        }, -512);
+    }
+
+    /**
+     * TODO: clear opcache
+     */
+    public function doClearCache(array $options = [])
+    {
+        // clear cache
+        if (empty($options) || isset($options['cache'])) {
+            App::cache()->flushAll();
+
+            foreach (glob(App::get('path.cache') . '/*.cache') as $file) {
+                @unlink($file);
+            }
+        }
+
+        // clear compiled template files
+        if (empty($options) || isset($options['templates'])) {
+            App::file()->delete(App::get('path.cache').'/templates');
+        }
+
+        // clear temp folder
+        if (isset($options['temp'])) {
+            foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
+                App::file()->delete($file->getPathname());
+            }
+        }
     }
 }

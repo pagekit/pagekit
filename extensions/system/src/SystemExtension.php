@@ -62,41 +62,4 @@ class SystemExtension extends Extension
             }
         }
     }
-
-    /**
-     * Clear cache on kernel terminate event.
-     */
-    public function clearCache(array $options = [])
-    {
-        App::on('kernel.terminate', function() use ($options) {
-            $this->doClearCache($options);
-        }, -512);
-    }
-
-    /**
-     * TODO: clear opcache
-     */
-    public function doClearCache(array $options = [])
-    {
-        // clear cache
-        if (empty($options) || isset($options['cache'])) {
-            App::cache()->flushAll();
-
-            foreach (glob(App::get('path.cache') . '/*.cache') as $file) {
-                @unlink($file);
-            }
-        }
-
-        // clear compiled template files
-        if (empty($options) || isset($options['templates'])) {
-            App::file()->delete(App::get('path.cache').'/templates');
-        }
-
-        // clear temp folder
-        if (isset($options['temp'])) {
-            foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
-                App::file()->delete($file->getPathname());
-            }
-        }
-    }
 }

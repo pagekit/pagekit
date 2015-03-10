@@ -83,7 +83,7 @@ class UpdateController
             App::file()->delete("$updateDir/.htaccess");
             App::file()->copyDir($updateDir, App::path());
             App::file()->delete($updateDir);
-            App::system()->clearCache();
+            App::module('system/cache')->clearCache();
             App::session()->remove('system.updateDir');
 
             $response = ['message' => __('Updating database...'), 'step' => App::url('@system/update/database'), 'progress' => 66];
@@ -108,7 +108,7 @@ class UpdateController
             }
 
             App::system()->enable();
-            App::system()->clearCache();
+            App::module('system/cache')->clearCache();
             App::session()->remove('system.update');
 
             $response = ['message' => __('Installed successfully.'), 'redirect' => App::url('@system/admin'), 'progress' => 100];

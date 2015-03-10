@@ -101,16 +101,4 @@ class SystemController extends Controller
 
         return $response->setContent($output);
     }
-
-    /**
-     * @Access(admin=true)
-     * @Request({"caches": "array"}, csrf=true)
-     * @Response("json")
-     */
-    public function clearCacheAction($caches)
-    {
-        App::system()->clearCache($caches);
-
-        return App::request()->isXmlHttpRequest() ? ['message' => __('Cache cleared!')] : $this->redirect('@system/system');
-    }
 }

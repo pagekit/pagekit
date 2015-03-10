@@ -65,7 +65,7 @@
     </li>
 
     <li class="uk-width">
-        <a id="clearCache" class="uk-panel pk-panel-icon" href="@url('@system/settings/clearcache')">
+        <a id="clearCache" class="uk-panel pk-panel-icon">
             <img src="@static_url('extensions/system/assets/images/icon-cache.svg')" width="50" height="50" alt="@trans('Clear Cache')">
             <p>@trans('Clear Cache')</p>
         </a>
@@ -97,7 +97,7 @@
 
         <h4>@trans('Select caches to clear:')</h4>
 
-        <form class="uk-form" action="@url('@system/system/clearcache')" method="post">
+        <form class="uk-form" action="@url('@system/cache/clear')" method="post">
 
             <div class="uk-form-row">
                 <div class="uk-form-controls uk-form-controls-text">

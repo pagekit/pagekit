@@ -113,7 +113,7 @@ class SystemListener implements EventSubscriberInterface
         }
 
         if ($config['framework.debug'] != App::module('framework')->config('debug')) {
-            App::system()->clearCache();
+            App::module('system/cache')->clearCache();
         }
     }
 
