@@ -67,11 +67,15 @@ class SystemController extends Controller
 
     /**
      * @Access(admin=true)
-     * @Response("extensions/system/views/admin/settings/info.razr")
+     * @Response("extensions/system/views/admin/settings/info.php")
      */
     public function infoAction()
     {
-        return ['head.title' => __('System Information'), 'info' => App::systemInfo()->get()];
+        App::view()->meta(['title' => __('System Information')]);
+        App::view()->script('system-info', 'extensions/system/app/info.js', 'vue-system');
+        App::view()->data('info', [
+            'info' => App::systemInfo()->get(),
+        ]);
     }
 
     /**
