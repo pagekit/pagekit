@@ -44,7 +44,7 @@
 
             validate: function (form, submit) {
 
-                var results = {}, keys;
+                var results = {}, focus, keys;
 
                 this.validators[form].forEach(function (directive) {
 
@@ -65,6 +65,11 @@
                             touched: directive.touched,
                             dirty: directive.dirty
                         };
+                    }
+
+                    if (submit && !focus && !valid) {
+                        directive.el.focus();
+                        focus = true;
                     }
 
                     results[name][directive.type] = !valid;
