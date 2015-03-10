@@ -1,4 +1,4 @@
-<form id="js-settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save($event)">
+<form id="js-settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 
     <?php $app['sections']->start('toolbar', 'show') ?>
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>

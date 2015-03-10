@@ -28,34 +28,11 @@ jQuery(function ($) {
 
     });
 
-    function parse_str(str, array) {
+    /**
+     * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
+     */
 
-        // http://kevin.vanzonneveld.net
-        // +   original by: Cagri Ekin
-        // +   improved by: Michael White (http://getsprink.com)
-        // +    tweaked by: Jack
-        // +   bugfixed by: Onno Marsman
-        // +   reimplemented by: stag019
-        // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-        // +   bugfixed by: stag019
-        // +   input by: Dreamer
-        // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-        // +   bugfixed by: MIO_KODUKI (http://mio-koduki.blogspot.com/)
-        // +   input by: Zaide (http://zaidesthings.com/)
-        // +   input by: David Pesta (http://davidpesta.com/)
-        // +   input by: jeicquest
-        // +   improved by: Brett Zamir (http://brett-zamir.me)
-        // %        note 1: When no argument is specified, will put variables in global scope.
-        // %        note 1: When a particular argument has been passed, and the returned value is different parse_str of PHP. For example, a=b=c&d====c
-        // *     example 1: var arr = {};
-        // *     example 1: parse_str('first=foo&second=bar', arr);
-        // *     results 1: arr == { first: 'foo', second: 'bar' }
-        // *     example 2: var arr = {};
-        // *     example 2: parse_str('str_a=Jack+and+Jill+didn%27t+see+the+well.', arr);
-        // *     results 2: arr == { str_a: "Jack and Jill didn't see the well." }
-        // *     example 3: var abc = {3:'a'};
-        // *     example 3: parse_str('abc[a][b]["c"]=def&abc[q]=t+5');
-        // *     results 3: JSON.stringify(abc) === '{"3":"a","a":{"b":{"c":"def"}},"q":"t 5"}';
+    function parse_str(str, array) {
 
         var strArr = String(str).replace(/^&/, '').replace(/&$/, '').split('&'),
             sal = strArr.length,

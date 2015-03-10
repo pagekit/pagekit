@@ -110,7 +110,6 @@ class Mailer implements MailerInterface
             ->setUsername($username)
             ->setPassword($password)
             ->setEncryption($encryption)
-            ->start()
-        ;
+            ->start();
     }
 }

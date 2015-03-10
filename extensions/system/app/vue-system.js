@@ -104,14 +104,14 @@
             }, {}) : collection;
         });
 
-        Vue.filter('toOptions', function(collection) {
+        Vue.filter('toOptions', function toOptions(collection) {
             return Object.keys(collection).map(function (key) {
 
                 var op = collection[key];
                 if (typeof op === 'string') {
                     return { text: op, value: key };
                 } else {
-                    return { label: key, options: Vue.prototype.$toOptions(op) }
+                    return { label: key, options: toOptions(op) }
                 }
 
             });
