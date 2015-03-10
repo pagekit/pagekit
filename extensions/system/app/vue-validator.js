@@ -39,7 +39,7 @@
 
                 var validators = this.validators[directive.form];
 
-                validators = validators.splice(validators.indexOf(this), 1);
+                validators = validators.splice(validators.indexOf(directive), 1);
             },
 
             validate: function (form, submit) {
