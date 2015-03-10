@@ -1,4 +1,4 @@
-<form id="js-user-edit" class="uk-form uk-form-horizontal" v-on="submit: save" v-cloak>
+<form id="js-user-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 
     <?php $view->section()->start('toolbar', 'show') ?>
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
@@ -31,21 +31,24 @@
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-username" class="uk-form-width-large" type="text" v-model="user.username" required>
+                    <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-valid="required">
+                    <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid">{{ 'Username cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-form-width-large" type="text" v-model="user.name" required>
+                    <input id="form-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-valid="required">
+                    <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-email" class="uk-form-width-large" type="email" v-model="user.email" required lazy>
+                    <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="user.email" v-valid="email" lazy>
+                    <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                 </div>
             </div>
 

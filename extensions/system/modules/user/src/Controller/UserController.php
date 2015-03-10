@@ -52,7 +52,7 @@ class UserController
         $user->setRoles(null);
 
         App::view()->meta(['title' => $id ? __('Edit User') : __('Add User')]);
-        App::view()->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'uikit-form-password', 'gravatar']);
+        App::view()->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'vue-validator', 'uikit-form-password', 'gravatar']);
         App::view()->data('user', [
                 'config' => [
                     'emailVerification' => App::option('system:user.require_verification'),
