@@ -26,10 +26,6 @@ jQuery(function($) {
             stepDatabase: function(e) {
                 e.preventDefault();
 
-                if (!this.validate('formDatabase')) {
-                    return;
-                }
-
                 Installer.post({action: 'check'}, {config: this.config}, function(data) {
 
                     if (!Vue.util.isPlainObject(data)) {
@@ -50,19 +46,11 @@ jQuery(function($) {
             stepUser: function(e) {
                 e.preventDefault();
 
-                if (!this.validate('formUser')) {
-                    return;
-                }
-
                 this.$set('step', 'site');
             },
 
             stepSite: function(e) {
                 e.preventDefault();
-
-                if (!this.validate('formSite')) {
-                    return;
-                }
 
                 this.$set('step', 'finish');
                 this.$set('status', 'install');
@@ -82,47 +70,6 @@ jQuery(function($) {
 
                 });
 
-            },
-
-            validate: function(name) {
-
-                var form = $('form[name="' + name + '"]'), validation = true;
-
-                $('input', form).each(function() {
-
-                    var el = $(this), key = el.attr('name'), value = el.val(), check;
-
-                    if (!key) {
-                        return;
-                    }
-
-                    key = name + '.' + key + '.';
-
-                    if (el.attr('required')) {
-
-                        check = !!value;
-
-                        if (validation && !check) {
-                            validation = false;
-                        }
-
-                        vm.$set(key + 'required', check);
-                    }
-
-                    if (el.attr('type') == 'email') {
-
-                        check = Email.test(value);
-
-                        if (validation && !check) {
-                            validation = false;
-                        }
-
-                        vm.$set(key + 'email', check);
-                    }
-
-                });
-
-                return validation;
             }
 
         }

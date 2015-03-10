@@ -30,7 +30,7 @@
                     <p>{{ 'Enter your database connection details.' | trans }}</p>
                     <div class="uk-alert uk-alert-danger uk-margin" v-show="message"><p>{{ message }}</p></div>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="submit: stepDatabase" novalidate>
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="valid: stepDatabase">
 
                         <div class="uk-form-row">
                             <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
@@ -46,16 +46,16 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" value="localhost" name="host" v-model="config['framework/database'].connections.mysql.host" required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.host.required">{{ 'Host cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" value="localhost" name="host" v-model="config['framework/database'].connections.mysql.host" v-valid="required">
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.host.invalid">{{ 'Host cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.mysql.user" value="" name="user" required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.user.required">{{ 'User cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" value="" name="user" v-model="config['framework/database'].connections.mysql.user" v-valid="required">
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.user.invalid">{{ 'User cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@
                                 <label for="form-mysql-dbpassword" class="uk-form-label">{{ 'Password' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <div class="uk-form-password uk-width-1-1">
-                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" v-model="config['framework/database'].connections.mysql.password" value="" autocomplete="off">
+                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" value="" autocomplete="off" v-model="config['framework/database'].connections.mysql.password">
                                         <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                     </div>
                                 </div>
@@ -72,15 +72,15 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" value="pagekit" name="dbname" v-model="config['framework/database'].connections.mysql.dbname" required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="!formDatabase.dbname.required">{{ 'Database name cannot be blank.' | trans }}</p>
+                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" value="pagekit" name="dbname" v-model="config['framework/database'].connections.mysql.dbname" v-valid="required">
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.dbname.invalid">{{ 'Database name cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.mysql.prefix" value="pk_">
+                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" value="pk_" v-model="config['framework/database'].connections.mysql.prefix">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="uk-form-row">
                                 <label for="form-sqlite-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" v-model="config['framework/database'].connections.sqlite.prefix" value="pk_">
+                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" value="pk_" v-model="config['framework/database'].connections.sqlite.prefix">
                                 </div>
                             </div>
                         </div>
@@ -109,13 +109,13 @@
                     <h1>{{ 'Create your account' | trans }}</h1>
                     <p>{{ 'You will be the site administrator.' | trans }}</p>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" name="formUser" v-on="submit: stepUser" novalidate>
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formUser" v-on="valid: stepUser">
 
                         <div class="uk-form-row">
                             <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" required>
-                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.user.required">{{ 'Username cannot be blank.' | trans }}</p>
+                                <input id="form-username" class="uk-width-1-1" type="text" value="admin" name="user" v-model="user.username" v-valid="required">
+                                <p class="uk-form-help-block uk-text-danger" v-show="formUser.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
@@ -123,18 +123,18 @@
                             <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
-                                    <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" required>
+                                    <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-valid="required">
                                     <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                 </div>
-                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.password.required">{{ 'Password cannot be blank.' | trans }}</p>
+                                <p class="uk-form-help-block uk-text-danger" v-show="formUser.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
                         <div class="uk-form-row">
                             <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" required>
-                                <p class="uk-form-help-block uk-text-danger" v-show="!formUser.email.email">{{ 'Field must be a valid email address.' | trans }}</p>
+                                <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-valid="email">
+                                <p class="uk-form-help-block uk-text-danger" v-show="formUser.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                             </div>
                         </div>
 
@@ -153,13 +153,13 @@
                     <h1>{{ 'Setup your site' | trans }}</h1>
                     <p>{{ 'Enter your website details.' | trans }}</p>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" name="formSite" v-on="submit: stepSite" novalidate>
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formSite" v-on="valid: stepSite">
 
                         <div class="uk-form-row">
                             <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site_title" required>
-                                <p class="uk-form-help-block uk-text-danger" v-show="!formSite.name.required">{{ 'Site name cannot be blank.' | trans }}</p>
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site_title" v-valid="required">
+                                <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
                             </div>
                         </div>
 
