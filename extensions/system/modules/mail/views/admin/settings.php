@@ -47,8 +47,8 @@
             <label for="form-smtppassword" class="uk-form-label">{{ 'SMTP Password' | trans }}</label>
             <div class="uk-form-controls js-password">
                 <div class="uk-form-password">
-                    <input id="form-smtppassword" class="uk-form-width-large" type="password" v-model="option['system/mail'.password]">
-                    <a href="" class="uk-form-password-toggle" data-uk-form-password>{{ 'Show' | trans }}</a>
+                    <input id="form-smtppassword" class="uk-form-width-large" type="password" v-model="option['system/mail'].password">
+                    <a class="uk-form-password-toggle" data-uk-form-password>{{ 'Show' | trans }}</a>
                 </div>
             </div>
         </div>
