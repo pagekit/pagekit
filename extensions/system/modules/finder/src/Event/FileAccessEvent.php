@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\Finder\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Finder\Expression\Expression;

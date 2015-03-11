@@ -82,13 +82,13 @@ class Editor implements EditorInterface, EventSubscriberInterface
      */
     public function render($value, array $attributes = [])
     {
-        App::scripts('editor', 'extensions/system/modules/editor/assets/js/editor.js', 'requirejs', [
+        App::scripts('editor', 'extensions/system/modules/editor/assets/js/editor.js', ['requirejs', 'finder'], [
             'data-editor' => json_encode(array_values($this->getPlugins()))
         ]);
 
         $this->addAttribute([
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
-            'data-finder' => json_encode(['root' => App::system()->config('storage')])
+            'data-finder-options' => json_encode(['root' => App::system()->config('storage')])
         ]);
 
         return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes(array_merge($this->attributes, $attributes)), htmlspecialchars($value));

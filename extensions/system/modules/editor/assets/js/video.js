@@ -1,4 +1,4 @@
-define(['jquery', 'system!finder', 'tmpl!video.modal,video.replace', 'uikit', 'editor'], function($, system, tmpl, uikit, editor) {
+define(['jquery', 'system', 'tmpl!video.modal,video.replace', 'uikit', 'editor'], function($, system, tmpl, uikit, editor) {
 
     var VideoPopup = {
 
@@ -63,7 +63,7 @@ define(['jquery', 'system!finder', 'tmpl!video.modal,video.replace', 'uikit', 'e
         getPicker: function() {
 
             if (!this.picker) {
-                this.finder = system.finder(this.element, this.options);
+                this.finder = new Finder(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
                 this.picker = uikit.modal(this.modal);
             }
@@ -155,7 +155,7 @@ define(['jquery', 'system!finder', 'tmpl!video.modal,video.replace', 'uikit', 'e
 
         init: function(editor) {
 
-            var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
+            var options = editor.element.data('finder-options'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
 
             VideoPopup.init(options);
 

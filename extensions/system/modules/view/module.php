@@ -3,7 +3,6 @@
 use Pagekit\View\ViewListener;
 use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\DateHelper;
-use Pagekit\View\Helper\FinderHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\TokenHelper;
@@ -17,7 +16,6 @@ return [
         $app->extend('view', function($view, $app) {
 
             $helpers = [
-                'finder'   => new FinderHelper(),
                 'gravatar' => new GravatarHelper(),
             ];
 
@@ -58,12 +56,13 @@ return [
             $app['scripts']->register('requirejs-config', 'extensions/system/assets/js/require.js', 'pagekit');
             $app['scripts']->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
             $app['scripts']->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit', ['requirejs' => true]);
+            $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
             $app['scripts']->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit', ['requirejs' => true]);
             $app['scripts']->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
+            $app['scripts']->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
             $app['scripts']->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
             $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
+            $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
             $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));

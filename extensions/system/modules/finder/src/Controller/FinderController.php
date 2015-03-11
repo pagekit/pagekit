@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Finder\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\System\Event\FileAccessEvent;
+use Pagekit\Finder\Event\FileAccessEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -14,7 +14,7 @@ class FinderController
     /**
      * @Request({"path"})
      */
-    public function listAction($path)
+    public function indexAction($path)
     {
         if (!$dir = $this->getPath()) {
             return $this->error(__('Invalid path.'));
@@ -36,7 +36,7 @@ class FinderController
             $info = [
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => htmlspecialchars(App::url($file->getPathname()), ENT_QUOTES),
+                'url'      => App::url()->getStatic($file->getPathname(), [], true),
                 'writable' => $mode == 'w'
             ];
 
@@ -103,16 +103,11 @@ class FinderController
             throw new AccessDeniedHttpException(__('Permission denied.'));
         }
 
-        try {
-
-            App::file()->rename($source, $target);
-
-            return $this->success(__('Renamed.'));
-
-        } catch(\Exception $e) {
-
+        if (!rename($source, $target)) {
             return $this->error(__('Unable to rename.'));
         }
+
+        return $this->success(__('Renamed.'));
     }
 
     /**

@@ -1,4 +1,4 @@
-define(['jquery', 'system!finder', 'tmpl!image.modal,image.replace', 'uikit', 'editor'], function($, system, tmpl, uikit, editor) {
+define(['jquery', 'system', 'tmpl!image.modal,image.replace', 'uikit', 'editor'], function($, system, tmpl, uikit, editor) {
 
     var ImagePopup = {
 
@@ -64,7 +64,7 @@ define(['jquery', 'system!finder', 'tmpl!image.modal,image.replace', 'uikit', 'e
         getPicker: function() {
 
             if (!this.picker) {
-                this.finder = system.finder(this.element, this.options);
+                this.finder = new Finder(this.element, this.options);
                 this.element.find('.js-finder-files').addClass('uk-overflow-container');
                 this.picker = uikit.modal(this.modal);
             }
@@ -133,7 +133,7 @@ define(['jquery', 'system!finder', 'tmpl!image.modal,image.replace', 'uikit', 'e
 
         init: function(editor) {
 
-            var options = editor.element.data('finder'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
+            var options = editor.element.data('finder-options'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
 
             ImagePopup.init(options);
 

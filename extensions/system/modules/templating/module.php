@@ -7,14 +7,12 @@ use Pagekit\Templating\TemplateNameParser;
 use Pagekit\Templating\Helper\DateHelper;
 use Pagekit\Templating\Helper\FinderHelper;
 use Pagekit\Templating\Helper\GravatarHelper;
-use Pagekit\Templating\Helper\MarkdownHelper;
 use Pagekit\Templating\Helper\TokenHelper;
 use Pagekit\Templating\Razr\Directive\SectionDirective;
 use Pagekit\Templating\Razr\Directive\TransDirective;
 use Pagekit\Templating\Section\DelayedRenderer;
 use Razr\Directive\FunctionDirective;
 use Razr\Loader\FilesystemLoader as RazrFilesystemLoader;
-use Symfony\Component\Templating\DelegatingEngine;
 use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 

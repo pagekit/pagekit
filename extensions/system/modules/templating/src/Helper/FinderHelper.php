@@ -17,12 +17,13 @@ class FinderHelper extends Helper
 
     /**
      * @param  string $root
+     * @param  string $mode
      * @return string
      */
-    public function render($root)
+    public function render($root, $mode = 'r')
     {
-        App::scripts('finder.init', 'require(["system!finder", "domReady!"], function(system) { $("[data-finder]").each(function() { system.finder(this, $(this).data("finder")).loadPath(); }); });', 'requirejs', 'string');
+        App::scripts('finder');
 
-        return "<div data-finder='".json_encode(compact('root'))."'></div>";
+        return "<div data-finder='".json_encode(compact('root', 'mode'))."'></div>";
     }
 }

@@ -16,6 +16,7 @@ return [
         'system/dashboard',
         'system/editor',
         'system/feed',
+        'system/finder',
         'system/mail',
         'system/markdown',
         'system/menu',
@@ -46,7 +47,6 @@ return [
 
         '@system: /system' => [
             'Pagekit\\System\\Controller\\ExtensionsController',
-            'Pagekit\\System\\Controller\\FinderController',
             'Pagekit\\System\\Controller\\LinkController',
             'Pagekit\\System\\Controller\\MarketplaceController',
             'Pagekit\\System\\Controller\\MigrationController',

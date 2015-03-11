@@ -3,6 +3,7 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
+use Pagekit\Finder\Event\FileAccessEvent;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -50,9 +51,6 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSystemTmpl(TmplEvent $event)
     {
-        $event->register('finder.main', 'extensions/system/views/tmpl/finder.main.razr');
-        $event->register('finder.table', 'extensions/system/views/tmpl/finder.table.razr');
-        $event->register('finder.thumbnail', 'extensions/system/views/tmpl/finder.thumbnail.razr');
         $event->register('linkpicker.modal', 'extensions/system/views/tmpl/linkpicker.modal.razr');
         $event->register('linkpicker.replace', 'extensions/system/views/tmpl/linkpicker.replace.razr');
         $event->register('marketplace.details', 'extensions/system/views/tmpl/marketplace.details.razr');
@@ -108,8 +106,8 @@ class SystemListener implements EventSubscriberInterface
      */
     public function onSettingsSave($event, $config, $option)
     {
-        if (!$option['system']['storage']) {
-            unset($option['system']['storage']);
+        if (!$config['system']['storage']) {
+            unset($config['system']['storage']);
         }
 
         if ($config['framework.debug'] != App::module('framework')->config('debug')) {
