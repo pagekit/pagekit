@@ -23,18 +23,6 @@ jQuery(function ($) {
 
         },
 
-        computed: {
-
-            loginText: function () {
-                return this.$trans('Last login: %date%', { date: this.user.login ? this.$date('medium', this.user.login) : this.$trans('Never') });
-            },
-
-            registeredText: function () {
-                return this.$trans('Registered since: %date%', { date: this.$date('medium', this.user.registered) });
-            }
-
-        },
-
         methods: {
 
             save: function (e) {

@@ -19,8 +19,8 @@
 
                     <li>{{ user.name }} ({{ user.username }})</li>
                     <li><a href="mailto:{{ user.email }}">{{ user.email }}</a><i v-show="config.emailVerification && user.data.verified" title="{{ 'Verified email address' | trans }}" class="uk-icon-check"></i></li>
-                    <li>{{ loginText }}</li>
-                    <li>{{ registeredText }}</li>
+                    <li>{{ $trans('Last login: %date%', { date: user.login ? $date('medium', user.login) : $trans('Never') }) }}</li>
+                    <li>{{ $trans('Registered since: %date%', { date: $date('medium', user.registered) }) }}</li>
                 </ul>
 
             </div>
