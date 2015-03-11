@@ -34,10 +34,6 @@ return [
             'Pagekit\\Finder\\Controller\\FinderController'
         ],
 
-    ],
-
-    'config' => [
-
     ]
-
+    
 ];
