@@ -10,12 +10,12 @@
 
             validators: {},
 
-            bind: function (directive) {
+            bind: function (dir) {
 
-                var self = this, el = directive.el, form = directive.form;
+                var self = this, el = dir.el, form = dir.form;
 
                 if (!this.vm) {
-                    this.vm = directive.vm;
+                    this.vm = dir.vm;
                 }
 
                 if (!this.validators[form]) {
@@ -28,33 +28,35 @@
 
                 if (this.elements.indexOf(el) == -1) {
                     this.elements.push(el);
-                    _.on(el, 'blur', directive.listener);
-                    _.on(el, 'input', directive.listener);
+                    _.on(el, 'blur', dir.listener);
+                    _.on(el, 'input', dir.listener);
                 }
 
-                this.validators[form].push(directive);
+                this.vm.$set(form + '.' + dir.name, {});
+                this.validators[form].push(dir);
             },
 
-            unbind: function (directive) {
+            unbind: function (dir) {
 
-                var validators = this.validators[directive.form];
+                var form = dir.form, validators = this.validators[form];
 
-                validators = validators.splice(validators.indexOf(directive), 1);
+                this.validators[form] = validators.splice(validators.indexOf(dir), 1);
             },
 
             validate: function (form, submit) {
 
                 var results = {}, focus, keys;
 
-                this.validators[form].forEach(function (directive) {
+                this.validators[form].forEach(function (dir) {
 
-                    var name = _.attr(directive.el, 'name'), valid = directive.validate();
+                    var name = dir.name, valid = dir.validate();
 
                     if (submit) {
-                        directive.touched = true;
+                        dir.touched = true;
                     }
 
-                    if (!directive.touched) {
+                    if (!dir.touched) {
+                        results[name] = {};
                         return;
                     }
 
@@ -62,17 +64,17 @@
                         results[name] = {
                             valid: true,
                             invalid: false,
-                            touched: directive.touched,
-                            dirty: directive.dirty
+                            touched: dir.touched,
+                            dirty: dir.dirty
                         };
                     }
 
                     if (submit && !focus && !valid) {
-                        directive.el.focus();
+                        dir.el.focus();
                         focus = true;
                     }
 
-                    results[name][directive.type] = !valid;
+                    results[name][dir.type] = !valid;
 
                     if (results[name].valid && !valid) {
                         results[name].valid = results.valid = false;
@@ -99,12 +101,13 @@
 
             bind: function () {
 
-                var self = this, form = _.attr(this.el.form, 'name');
+                var self = this, name = _.attr(this.el, 'name'), form = _.attr(this.el.form, 'name');
 
-                if (!form) {
+                if (!name || !form) {
                     return;
                 }
 
+                this.name    = _.camelize(name);
                 this.form    = _.camelize(form);
                 this.type    = this.arg || this.expression;
                 this.args    = this.arg ? this.expression : '';
