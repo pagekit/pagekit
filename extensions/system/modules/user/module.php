@@ -55,8 +55,8 @@ return [
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $app['view']->data('settings', [ 'option' => [ 'system/user' => $this->config ] ]);
-            $event->add('system/user', __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.php'));
+            $app['view']->data('settings', [ 'option' => [ $this->name => $this->config ] ]);
+            $event->add($this->name, __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.php'));
         });
 
     },

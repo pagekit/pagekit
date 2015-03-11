@@ -9,7 +9,7 @@ return [
     'main' => function ($app) {
 
         $app->on('system.init', function() use ($app) {
-            $app['view']->addHelpers(['finder' => new FinderHelper]);
+            $app['view']->addHelper('finder', new FinderHelper);
 
             $app['scripts']->register('finder', 'extensions/system/modules/finder/app/finder.js', ['uikit-upload', 'vue-system']);
         });

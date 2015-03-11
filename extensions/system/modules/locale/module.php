@@ -116,7 +116,7 @@ return [
             $app['view']->script('locale-settings', 'extensions/system/modules/locale/assets/js/settings.js', 'vue-system');
             $app['view']->data('settings', [
                 'option' => [
-                    'system/locale' => $this->config
+                    $this->name => $this->config
                 ],
                 'locale' => [
                     'locales' => $locales,
@@ -124,7 +124,7 @@ return [
                 ]
             ]);
 
-            $event->add('system/locale', __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
+            $event->add($this->name, __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
         });
 
     },
