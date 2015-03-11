@@ -78,6 +78,10 @@
             return this.$transChoice(id, number, parameters, domain, locale);
         });
 
+        Vue.filter('date', function(date, format) {
+            return this.$date(format, date);
+        });
+
         Vue.filter('first', function(collection) {
             return Vue.filter('toArray')(collection)[0];
         });
@@ -186,7 +190,7 @@
                     vm.$set(keypath, self.state());
                 });
 
-                vm.$watch(keypath, function(selected) {
+                this.unbindWatcher = vm.$watch(keypath, function(selected) {
 
                     $(selector, vm.$el).prop('checked', function() {
                         return selected.indexOf($(this).val()) !== -1;
@@ -202,6 +206,9 @@
                 $(this.el).off('.check-all');
                 $(this.vm.$el).off('.check-all');
 
+                if (this.unbindWatcher) {
+                    this.unbindWatcher();
+                }
             },
 
             state: function() {
@@ -278,7 +285,8 @@
             bind: function() {
 
                 var el = $(this.el);
-                this.vm.$on('hook:ready', function() {
+
+                this.handler = function() {
 
                     var table = el.css('position', 'relative'),
                         thead = table.find('thead tr'),
@@ -297,7 +305,13 @@
                         }
                     });
 
-                });
+                };
+
+                this.vm.$on('hook:ready', this.handler);
+            },
+
+            unbind: function() {
+                this.vm.$off('hook:ready', this.handler);
             }
 
         });
