@@ -49,14 +49,18 @@ class TemplateHelper
     }
 
     /**
-     * Adds a registered template to the queue.
+     * Adds one or more registered template to the queue.
      *
-     * @param string $name
+     * @param string|array $name
      */
     public function add($name)
     {
-        if (isset($this->templates[$name])) {
-            $this->queued[$name] = true;
+        $templates = (array) $name;
+
+        foreach ($templates as $name) {
+            if (isset($this->templates[$name])) {
+                $this->queued[$name] = true;
+            }
         }
     }
 

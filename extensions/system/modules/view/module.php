@@ -55,6 +55,7 @@ return [
             $app['scripts']->register('application', 'extensions/system/app/application.js', 'angular');
             $app['scripts']->register('application-directives', 'extensions/system/app/directives.js', 'application');
             $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
+            $app['scripts']->register('handlebars', 'vendor/assets/handlebars/handlebars.js');
             $app['scripts']->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js');
             $app['scripts']->register('marked', 'vendor/assets/marked/marked.js');
             $app['scripts']->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
@@ -70,7 +71,7 @@ return [
             $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
-            $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
+            $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'tmpl', 'locale']);
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
             $app['scripts']->register('vue-system', 'extensions/system/app/vue-system.js', ['vue', 'system', 'uikit-pagination']);
             $app['scripts']->register('vue-validator', 'extensions/system/app/vue-validator.js', ['vue']);
