@@ -1,11 +1,23 @@
 (function ($, window) {
 
+    var defaults = {
+        root    : '/',
+        mode    : 'write',
+        view    : 'table',
+        path    : '/',
+        selected: [],
+        upload  : {}
+    };
+
     Vue.component('v-finder', {
 
-        inherit : true,
         replace : true,
         template: '#finder.main',
         resource: null,
+
+        data: function() {
+            return Vue.util.extend({}, defaults);
+        },
 
         ready: function () {
 
@@ -172,21 +184,12 @@
 
     });
 
-    var defaults = {
-        root    : '/',
-        mode    : 'write',
-        view    : 'table',
-        path    : '/',
-        selected: [],
-        upload  : {}
-    };
-
     var Finder = function(element, options) {
 
         var vm = new Vue({
             el      : element,
             data    : $.extend(true, {}, defaults, options),
-            template: '<div v-component="v-finder"></div>'
+            template: '<div v-component="v-finder" v-with="$data"></div>'
         });
 
         return {

@@ -115,14 +115,21 @@ return [
         'key' => '',
         'frontpage' => '',
 
-        'site_title' => '',
-        'site_description' => '',
+        'site' => [
+            'title' => '',
+            'description' => ''
+        ],
 
-        'maintenance.enabled' => false,
-        'maintenance.msg' => '',
+        'maintenance' => [
+            'enabled' => false,
+            'msg' => ''
+        ],
 
-        'api.key' => '',
-        'api.url' => 'http://pagekit.com/api',
+        'api' => [
+            'key' => '',
+            'url' => 'http://pagekit.com/api',
+        ],
+
         'release_channel' => 'stable',
 
         'storage' => '/storage',

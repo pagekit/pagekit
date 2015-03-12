@@ -86,7 +86,7 @@ class PackageController
                 $path = sha1(json_encode($package));
 
                 $client = new Client;
-                $client->setDefaultOption('query/api_key', App::option('system:api.key'));
+                $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
 
                 $downloader = new PackageDownloader($client);
                 $downloader->downloadFile("{$temp}/{$path}", $package['dist']['url'], $package['dist']['shasum']);

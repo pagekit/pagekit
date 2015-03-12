@@ -23,7 +23,7 @@ return [
 
                     $title = $app['view']->meta()->get('title');
 
-                    if ($site = $app['system']->config('site_title')) {
+                    if ($site = $app['system']->config('site.title')) {
                         $title = "$title &lsaquo; $site";
                     }
 

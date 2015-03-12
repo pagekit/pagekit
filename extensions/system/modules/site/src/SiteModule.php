@@ -7,7 +7,6 @@ use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
 use Pagekit\Site\Event\MenuEvent;
 use Pagekit\Site\Event\TypeEvent;
-use Pagekit\System\Event\TmplEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteModule extends Module implements EventSubscriberInterface
@@ -123,9 +122,9 @@ class SiteModule extends Module implements EventSubscriberInterface
     /**
      * Registers alias edit template.
      */
-    public function onSystemTmpl(TmplEvent $event)
+    public function onSystemLoaded()
     {
-        $event->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
+        App::view()->tmpl()->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
     }
 
     /**
@@ -148,7 +147,7 @@ class SiteModule extends Module implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.tmpl'    => 'onSystemTmpl',
+            'system.loaded'  => 'onSystemLoaded',
             'kernel.request' => ['onKernelRequest', 35]
         ];
     }

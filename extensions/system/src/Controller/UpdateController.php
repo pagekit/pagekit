@@ -42,7 +42,7 @@ class UpdateController
             App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
 
             $client = new Client;
-            $client->setDefaultOption('query/api_key', App::option('system:api.key'));
+            $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
 
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);

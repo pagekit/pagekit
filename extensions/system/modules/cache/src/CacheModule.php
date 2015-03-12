@@ -65,7 +65,7 @@ class CacheModule extends Module
             };
         }
 
-        $app->on('system.settings.edit', function ($event) use ($app) {
+        $app->on('system.settings.edit', function ($event, $config) use ($app) {
 
             $supported = $this->supports();
 
@@ -79,7 +79,7 @@ class CacheModule extends Module
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
             $event->data('caches', $caches);
-            $event->config($this->name, ['caches' => ['cache' => ['storage' => $this->config('caches.cache.storage', 'auto')]]]);
+            $event->config($this->name, $this->config, ['caches.cache.storage', 'nocache']);
             $event->view($this->name, __('Cache'), $app['tmpl']->render('extensions/system/modules/cache/views/admin/settings.php'));
         });
 
