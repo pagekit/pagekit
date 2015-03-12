@@ -8,7 +8,6 @@ use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Site\Event\ConfigEvent;
 use Pagekit\System\Event\LinkEvent;
-use Pagekit\System\Event\TmplEvent;
 use Pagekit\System\Extension;
 
 class BlogExtension extends Extension

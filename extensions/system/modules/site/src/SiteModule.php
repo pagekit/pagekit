@@ -7,7 +7,6 @@ use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
 use Pagekit\Site\Event\MenuEvent;
 use Pagekit\Site\Event\TypeEvent;
-use Pagekit\System\Event\TmplEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteModule extends Module implements EventSubscriberInterface

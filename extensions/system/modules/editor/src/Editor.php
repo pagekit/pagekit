@@ -4,7 +4,6 @@ namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Pagekit\System\Event\TmplEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class Editor implements EditorInterface, EventSubscriberInterface

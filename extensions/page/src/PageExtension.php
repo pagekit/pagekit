@@ -5,7 +5,6 @@ namespace Pagekit\Page;
 use Pagekit\Application as App;
 use Pagekit\Page\Event\NodeListener;
 use Pagekit\System\Event\LinkEvent;
-use Pagekit\System\Event\TmplEvent;
 use Pagekit\System\Extension;
 
 class PageExtension extends Extension
