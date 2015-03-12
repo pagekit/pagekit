@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="uk-form-row uk-margin-top">
-                <button class="uk-button uk-button-primary" type="button">{{ 'Update' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" v-on="click: update">{{ 'Update' | trans }}</button>
                 <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
             </div>
         </div>
