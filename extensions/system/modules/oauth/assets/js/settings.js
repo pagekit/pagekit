@@ -1,45 +1,37 @@
-//require(['jquery', 'tmpl!oauth.data,settings.oauth', 'domReady!'], function ($, tmpl) {
-//
-//    // OAuth
-//    var oauthData = $.parseJSON(tmpl.get('oauth.data')),
-//        list = $("#oauth-service-list"),
-//        dropdown = $("#oauth-service-dropdown");
-//
-//    $.each(oauthData, function (service, data) {
-//        var li;
-//
-//        data.service = service;
-//        dropdown.append(li = $('<li id="' + data.service + '_link"><a href="#">' + data.service + '</a></li>').click(function () {
-//            $(this).hide();
-//            appendService(data);
-//        }));
-//
-//        if ('client_id' in data) {
-//            appendService(data);
-//            li.hide();
-//        }
-//    });
-//
-//    $("form").submit(function (e) {
-//        e.preventDefault();
-//        $.each($(this).find("[name='service-container']"), function () {
-//            if (!$(this).find(".js-client-id").val() && !$(this).find(".js-client-secret").val()) {
-//                $(this).remove();
-//            }
-//        });
-//        $(this).unbind('submit').submit();
-//    });
-//
-//    function appendService(data) {
-//        var container;
-//
-//        $("#" + data.service + "-container", list).remove();
-//        list.append(container = $(tmpl.render('settings.oauth', data)));
-//        $("[data-info][data-info!='" + data.service + "']", container).remove();
-//        $(".js-remove", container).click(function (e) {
-//            e.preventDefault();
-//            $(this).parent().remove();
-//            $("#" + data.service + "_link").show();
-//        });
-//    }
-//});
+Vue.component('v-oauth', {
+
+    inherit: true,
+    replace: true,
+
+    template: '#template-oauth',
+
+    ready: function () {
+        if (Vue.util.isArray(this.option['system/oauth'].provider)) {
+            this.option['system/oauth'].$delete('provider');
+            this.option['system/oauth'].$add('provider', {});
+        }
+        this.oauth.sort();
+    },
+
+    methods: {
+        addProvider: function (provider) {
+            this.option['system/oauth'].provider.$add(provider, {'client_id': '', 'client_secret': ''});
+        },
+        removeProvider: function (provider) {
+            this.option['system/oauth'].provider.$delete(provider);
+        }
+    },
+    filters: {
+        configured: function (services) {
+            var results = [],
+                self = this;
+
+            services.forEach(function (service) {
+                if (!self.option['system/oauth'].provider.hasOwnProperty(service)) {
+                    results.push(service);
+                }
+            });
+            return results;
+        }
+    }
+});

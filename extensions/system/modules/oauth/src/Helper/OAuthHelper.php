@@ -65,6 +65,7 @@ class OAuthHelper
      *
      * @param  string $provider
      * @param  int $key
+     * @return Provider|false
      */
     public function get($provider, $key)
     {
@@ -103,6 +104,7 @@ class OAuthHelper
      * Get provider credentials
      *
      * @param  string $provider
+     * @return array
      */
     public function getConfig($provider)
     {
@@ -228,27 +230,11 @@ class OAuthHelper
     }
 
     /**
-     * Generate json data for settings page
-     *
-     * @return string
-     */
-    public function getJsonData()
-    {
-        $provider = $this->getProvider();
-        $data     = [];
-
-        foreach ($provider as $service) {
-            $data[$service] = $this->getConfig($service);
-        }
-
-        return json_encode($data);
-    }
-
-    /**
      * Get provider credentials
      *
      * @param  string $provider
      * @return Credentials
+     * @throws \Exception
      */
     public function getCredentials($provider)
     {
