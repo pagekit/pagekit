@@ -18,39 +18,12 @@ jQuery(function($) {
 
 
 /**
- * URL resolver plugin
- */
-
-UIkit.plugin('htmleditor', 'urlresolver', {
-
-    init: function(editor) {
-
-        editor.element.on('renderLate', function() {
-
-            editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
-
-                var replacement = data.matches[0];
-
-                if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
-                    replacement = replacement.replace(data.matches[1], System.url(data.matches[1], true));
-                }
-
-                return replacement;
-            });
-
-        });
-
-        return editor;
-    }
-
-});
-
-
-/**
  * Link plugin
  */
 
 (function($) {
+
+    return; // todo
 
     var modal  = $(templates['link.modal']).appendTo('body'),
         picker = UIkit.modal(modal),
@@ -175,141 +148,60 @@ UIkit.plugin('htmleditor', 'urlresolver', {
 
 (function($) {
 
-    var ImagePopup = {
+    var ImageVm = {
 
-        init: function(options){
+        el: '#editor-image',
 
-            var $this = this;
+        data: {
+            url: '',
+            alt: '',
+            img: '',
+            view: 'settings'
+        },
 
-            this.options   = options;
-            this.base      = pagekit.url;
-            this.modal     = $(templates['image.modal']).appendTo('body');
-            this.element   = this.modal.find('.js-finder');
-            this.image     = this.modal.find('.js-url');
-            this.title     = this.modal.find('.js-title');
-            this.preview   = this.modal.find('.js-img-preview');
-            this.btnselect = this.modal.find('.js-select-image');
-            this.screens   = this.modal.find('[data-screen]').css({'animation-duration':'0.1s', '-webkit-animation-duration':'0.1s'});
-            this.finder    = null;
-            this.picker    = null;
-            this.handler   = null;
+        ready: function () {
 
-            // events
-            this.modal.on('click', '.js-update', function() {
-                $this.handler();
-            });
+            var vm = this, img = new Image(), src = '';
 
-            this.modal.on('click', '[data-goto]', function(e){
-                e.preventDefault();
-                $this.goto($(this).data('goto'));
-            });
+            this.$watch('url', function(url) {
 
-            this.element.on('selected-rows', function(e, rows) {
-
-                if (rows.length === 1) {
-
-                    var data = $(rows[0]).data();
-
-                    if (data.type == 'file' && data.url.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
-                        $this.btnselect.prop('disabled', false).data('url', data.url);
-                    }
-
-                } else {
-                    $this.btnselect.prop('disabled', true);
-                }
-            });
-
-            this.btnselect.on('click', function() {
-
-                var url = $this.btnselect.data('url');
-
-                $this.updatePreview(url);
-
-                // convert to relative urls
-                if (url.indexOf($this.base) === 0) {
-                    url = url.replace($this.base, '');
+                if (url) {
+                    src = vm.$url(url, true);
                 }
 
-                $this.image.val(url);
-                $this.goto('settings');
+                img.src = src;
             });
-        },
 
-        getPicker: function() {
-
-            if (!this.picker) {
-                this.finder = new Finder(this.element, this.options);
-                this.element.find('.js-finder-files').addClass('uk-overflow-container');
-                this.picker = UIkit.modal(this.modal);
-            }
-
-            return this.picker;
-        },
-
-        goto: function(screen){
-            var next = this.screens.filter('[data-screen="'+screen+'"]');
-
-            if (screen=='settings') {
-                this.modal.find('.uk-modal-dialog').removeClass('uk-modal-dialog-large');
-            } else {
-                this.modal.find('.uk-modal-dialog').addClass('uk-modal-dialog-large');
-            }
-
-            this.screens.addClass('uk-hidden');
-            next.removeClass('uk-hidden');
-
-            this.getPicker().updateScrollable();
-        },
-
-        updatePreview: function(url) {
-
-            var $this = this;
-
-            // convert to relative urls
-            if (url && !url.match(/^(\/|http\:|https\:|ftp\:)/i)) {
-                url = this.base + '/' + url;
-            }
-
-            var pimg = new Image();
-
-            pimg.onerror = function(){
-                $this.preview.css('background-image', '').css('background-size', '');
+            img.onerror = function() {
+                vm.img = '';
             };
 
-            pimg.onload = function(){
-                $this.preview.css('background-image', 'url("'+url+'")').css('background-size', 'contain');
+            img.onload  = function() {
+                vm.img = 'background-image: url("' + src + '"); background-size: contain';
             };
 
-            pimg.src = url;
+        },
+
+        methods: {
+
+            openFinder: function () {
+                this.view = 'finder';
+            },
+
+            closeFinder: function () {
+                this.url  = this.$.finder.selected[0];
+                this.view = 'settings';
+            }
+
         }
 
     };
-
-    function openImageModal(data, rootpath) {
-
-        ImagePopup.handler = data.handler;
-
-        ImagePopup.title.val(data.alt);
-        ImagePopup.image.val(data.src);
-
-        //load finder in image dir
-
-        ImagePopup.updatePreview(ImagePopup.image.val());
-        ImagePopup.goto('settings');
-        ImagePopup.getPicker().show();
-
-        ImagePopup.finder.loadPath(data.src.trim && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-
-        setTimeout(function() { ImagePopup.image.focus(); }, 10);
-    }
 
     UIkit.plugin('htmleditor', 'image', {
 
         init: function(editor) {
 
             var options = editor.element.data('finder-options'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
-
-            ImagePopup.init(options);
 
             editor.element.on('render', function() {
 
@@ -352,16 +244,27 @@ UIkit.plugin('htmleditor', 'urlresolver', {
                 });
             });
 
-            editor.preview.on('click', '.js-editor-image .js-config', function() {
-                openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
-            });
+            // editor.preview.on('click', '.js-editor-image .js-config', function() {
+            //     openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
+            // });
 
-            editor.preview.on('click', '.js-editor-image .js-remove', function() {
-                images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
-            });
+            // editor.preview.on('click', '.js-editor-image .js-remove', function() {
+            //     images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
+            // });
 
             editor.element.off('action.image');
             editor.element.on('action.image', function() {
+
+                var modal = $(templates['image.modal']).appendTo('body'), vm = new Vue(ImageVm);
+
+                modal.on('hide.uk.modal', function() {
+                    console.log(vm);
+                    $(this).remove();
+                });
+
+                UIkit.modal(modal).show();
+
+                return;
 
                 var cursor = editor.editor.getCursor(), data;
                 images.every(function(image) {
@@ -398,8 +301,8 @@ UIkit.plugin('htmleditor', 'urlresolver', {
             });
 
             return editor;
-
         }
+
     });
 
 })(jQuery);
@@ -410,6 +313,8 @@ UIkit.plugin('htmleditor', 'urlresolver', {
  */
 
 (function($) {
+
+    return; // todo
 
     var VideoPopup = {
 
@@ -624,3 +529,32 @@ UIkit.plugin('htmleditor', 'urlresolver', {
     });
 
 })(jQuery);
+
+
+/**
+ * URL resolver plugin
+ */
+
+UIkit.plugin('htmleditor', 'urlresolver', {
+
+    init: function(editor) {
+
+        editor.element.on('renderLate', function() {
+
+            editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
+
+                var replacement = data.matches[0];
+
+                if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
+                    replacement = replacement.replace(data.matches[1], System.url(data.matches[1], true));
+                }
+
+                return replacement;
+            });
+
+        });
+
+        return editor;
+    }
+
+});

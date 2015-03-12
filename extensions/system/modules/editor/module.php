@@ -24,7 +24,7 @@ return [
             $app['view']->tmpl()->register('video.modal', 'extensions/system/modules/editor/views/video.modal.php');
             $app['view']->tmpl()->register('video.replace', 'extensions/system/modules/editor/views/video.replace.php');
 
-            $app['scripts']->register('editor', 'extensions/system/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder', 'handlebars']);
+            $app['scripts']->register('editor', 'extensions/system/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder']);
 
             $app['tmpl.razr']->addDirective(new FunctionDirective('editor', [$helper, 'render']));
         });
