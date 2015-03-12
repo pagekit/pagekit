@@ -158,7 +158,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site_title" v-valid="required">
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site.title" v-valid="required">
                                 <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" v-model="option.site_description"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" v-model="option.site.description"></textarea>
                             </div>
                         </div>
 

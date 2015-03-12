@@ -72,7 +72,7 @@ class ExtensionUploadCommand extends Command
             $this->abort("Can't find {$this->json} in '{$this->path}'");
         }
 
-        if (!$key = $this->container['option']->get('system:api.key')) {
+        if (!$key = $this->container['system']->config('api.key')) {
             $this->abort("Please set your api key");
         }
 
