@@ -86,30 +86,20 @@ class SystemListener implements EventSubscriberInterface
     /**
      * Add system settings screens.
      */
-    public function onSettingsEdit($event)
+    public function onSettingsEdit($event, $config)
     {
-        App::view()->data('settings', [
-            'option' => [
-                'system' => App::system()->config
-            ],
-            'system' => [
-                'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
-            ]
-        ]);
-
-        $event->add('site',   __('Site'),   App::tmpl('extensions/system/views/admin/settings/site.php'));
-        $event->add('system', __('System'), App::tmpl('extensions/system/views/admin/settings/system.php'));
+        $event->config('system', $config, ['storage']);
+        $event->options('system', App::system()->config, ['api.key', 'release_channel', 'site_title', 'site_description', 'maintenance.enabled', 'maintenance.msg']);
+        $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
+        $event->view('site',   __('Site'),   App::tmpl('extensions/system/views/admin/settings/site.php'));
+        $event->view('system', __('System'), App::tmpl('extensions/system/views/admin/settings/system.php'));
     }
 
     /**
      * Add system settings screens.
      */
-    public function onSettingsSave($event, $config, $option)
+    public function onSettingsSave($event, $config)
     {
-        if (!$config['system']['storage']) {
-            unset($config['system']['storage']);
-        }
-
         if ($config['framework.debug'] != App::module('framework')->config('debug')) {
             App::module('system/cache')->clearCache();
         }

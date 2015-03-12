@@ -55,8 +55,8 @@ return [
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $app['view']->data('settings', [ 'option' => [ $this->name => $this->config ] ]);
-            $event->add($this->name, __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.php'));
+            $event->options($this->name, $this->config, ['registration', 'require_verification']);
+            $event->view($this->name, __('User'), $app['tmpl']->render('extensions/system/modules/user/views/admin/settings.php'));
         });
 
     },

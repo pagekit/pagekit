@@ -82,11 +82,10 @@ return [
 
         $app->on('system.settings.edit', function ($event) use ($app) {
             $app['view']->script('mail-settings', 'extensions/system/modules/mail/assets/js/settings.js', 'vue-system');
-            $app['view']->data('settings', [
-                'option' => [ $this->name => $this->config ],
-                'mail' => [ 'ssl' => extension_loaded('openssl') ]
-            ]);
-            $event->add($this->name, __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.php'));
+
+            $event->options($this->name, $this->config);
+            $event->data('ssl', extension_loaded('openssl'));
+            $event->view($this->name, __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.php'));
         });
     },
 

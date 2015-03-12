@@ -21,8 +21,8 @@ return [
 
             // TODO transform to vuejs
 
-            $app['view']->data('settings', [ 'option' => [ $this->name => $this->config ] ]);
-            $event->add($this->name, __('OAuth'), $app['tmpl']->render('extensions/system/modules/oauth/views/admin/settings.php'));
+            $event->options($this->name, $this->config);
+            $event->view($this->name, __('OAuth'), $app['tmpl']->render('extensions/system/modules/oauth/views/admin/settings.php'));
         });
 
     },

@@ -114,17 +114,11 @@ return [
             }
 
             $app['view']->script('locale-settings', 'extensions/system/modules/locale/assets/js/settings.js', 'vue-system');
-            $app['view']->data('settings', [
-                'option' => [
-                    $this->name => $this->config
-                ],
-                'locale' => [
-                    'locales' => $locales,
-                    'timezones' => $timezones
-                ]
-            ]);
 
-            $event->add($this->name, __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
+            $event->data('locales', $locales);
+            $event->data('timezones', $timezones);
+            $event->options($this->name, $this->config, ['timezone', 'locale', 'locale_admin']);
+            $event->view($this->name, __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
         });
 
     },

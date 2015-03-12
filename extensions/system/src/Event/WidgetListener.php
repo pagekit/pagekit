@@ -79,6 +79,6 @@ class WidgetListener implements EventSubscriberInterface
 
     protected function getOptionsName()
     {
-        return App::get('theme.site')->name.':settings.widgets';
+        return App::get('theme.site')->name.':config.widgets';
     }
 }

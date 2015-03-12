@@ -77,9 +77,9 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
-            $settings = App::option('system:settings', []);
-            $settings['theme.site'] = $theme->name;
-            App::option()->set('system:settings', $settings, true);
+            $config = App::option('system:config', []);
+            $config['theme.site'] = $theme->name;
+            App::option()->set('system:config', $config, true);
 
             App::exception()->setHandler($handler);
 
@@ -150,7 +150,7 @@ class ThemesController extends Controller
 
             $event = App::trigger('system.theme.save', new ThemeEvent($theme, $params));
 
-            App::option()->set("$name:settings", $event->getParams(), true);
+            App::option()->set("$name:config", $event->getParams(), true);
             App::message()->success(__('Settings saved.'));
 
             return $this->redirect('@system/themes/settings', compact('name'));

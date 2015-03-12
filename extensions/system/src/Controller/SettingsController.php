@@ -39,11 +39,8 @@ class SettingsController extends Controller
     {
         App::view()->meta(['title' => __('Settings')]);
         App::view()->script('settings', 'extensions/system/app/settings.js', 'vue-system');
-        App::view()->data('settings', [
-            'config' => $this->config->getValues(),
-        ]);
 
-        return ['additionals' => App::trigger('system.settings.edit', new SettingsEvent($this->config))->get()];
+        return ['views' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getViews()];
     }
 
     /**
@@ -64,8 +61,8 @@ class SettingsController extends Controller
 
         foreach ($option as $module => $value) {
 
-            if (!preg_match('/:settings$/i', $module)) {
-                $module .= ':settings';
+            if (!preg_match('/:config$/i', $module)) {
+                $module .= ':config';
             }
 
             App::option()->set($module, $value, true);

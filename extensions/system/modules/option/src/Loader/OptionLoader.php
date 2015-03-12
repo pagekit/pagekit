@@ -12,8 +12,8 @@ class OptionLoader implements LoaderInterface
      */
     public function load($name, array $config)
     {
-        if (is_array($settings = App::option("$name:settings", []))) {
-            $config = array_replace_recursive($config, ['config' => $settings]);
+        if (is_array($options = App::option("$name:config", []))) {
+            $config = array_replace_recursive($config, ['config' => $options]);
         }
 
         return $config;

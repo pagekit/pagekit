@@ -55,7 +55,7 @@ jQuery(function($) {
                 this.$set('step', 'finish');
                 this.$set('status', 'install');
 
-                Installer.post({action: 'install'}, {config: this.config, option: {'system:settings': this.option}, user: this.user}, function(data) {
+                Installer.post({action: 'install'}, {config: this.config, option: {'system:config': this.option}, user: this.user}, function(data) {
 
                     if (!Vue.util.isPlainObject(data)) {
                         data = {message: 'Whoops, something went wrong'};

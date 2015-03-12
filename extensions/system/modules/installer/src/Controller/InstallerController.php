@@ -114,7 +114,7 @@ class InstallerController
             }
 
             App::option()->set('system:version', App::migrator()->create('extensions/system/migrations')->run());
-            App::option()->set('system/core:settings', array_merge_recursive(App::option('system/core:settings', []), ['extensions' => ['blog', 'page']]), true);
+            App::option()->set('system/core:config', array_merge_recursive(App::option('system/core:config', []), ['extensions' => ['blog', 'page']]), true);
 
             App::db()->insert('@system_user', [
                 'name'       => $user['username'],

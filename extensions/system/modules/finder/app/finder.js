@@ -186,7 +186,7 @@
         var vm = new Vue({
             el      : element,
             data    : $.extend(true, {}, defaults, options),
-            template: '<div v-component="v-finder" v-ref="finder"></div>'
+            template: '<div v-component="v-finder"></div>'
         });
 
         return {

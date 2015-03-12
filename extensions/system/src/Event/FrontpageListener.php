@@ -25,17 +25,17 @@ class FrontpageListener implements EventSubscriberInterface
     public function onSave(EntityEvent $event) {
         $node = $event->getEntity();
         if ($node->get('frontpage')) {
-            $settings = App::option('system:settings', []);
-            $settings['frontpage'] = $node->get('url');
-            App::option()->set('system:settings', $settings, true);
+            $config = App::option('system:config', []);
+            $config['frontpage'] = $node->get('url');
+            App::option()->set('system:config', $config, true);
         }
     }
 
     public function onDelete(EntityEvent $event) {
         if ($event->getEntity()->get('frontpage')) {
-            $settings = App::option('system:settings', []);
-            unset($settings['frontpage']);
-            App::option()->set('system:settings', $settings, true);
+            $config = App::option('system:config', []);
+            unset($config['frontpage']);
+            App::option()->set('system:config', $config, true);
         }
     }
 

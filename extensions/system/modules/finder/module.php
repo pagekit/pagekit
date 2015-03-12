@@ -32,8 +32,8 @@ return [
 
         '@system: /system' => [
             'Pagekit\\Finder\\Controller\\FinderController'
-        ],
+        ]
 
     ]
-    
+
 ];

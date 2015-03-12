@@ -57,10 +57,10 @@
             <div class="uk-form-controls">
                 <select id="form-smtpencryption" class="uk-form-width-large" v-model="option['system/mail'].encryption">
                     <option value="">{{ 'None' | trans }}</option>
-                    <option v-attr="disabled: !mail.ssl" value="ssl">{{ 'SSL' | trans }}</option>
-                    <option v-attr="disabled: !mail.ssl" value="tls">{{ 'TLS' | trans }}</option>
+                    <option v-attr="disabled: !ssl" value="ssl">{{ 'SSL' | trans }}</option>
+                    <option v-attr="disabled: !ssl" value="tls">{{ 'TLS' | trans }}</option>
                 </select>
-                <p v-if="!mail.ssl" class="uk-form-help-block">{{ 'Please enable the PHP Open SSL extension.' | trans }}</p>
+                <p v-if="!ssl" class="uk-form-help-block">{{ 'Please enable the PHP Open SSL extension.' | trans }}</p>
             </div>
         </div>
     </div>

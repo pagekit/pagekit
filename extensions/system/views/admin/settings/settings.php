@@ -11,8 +11,8 @@
 
             <div class="uk-panel pk-panel-marginless">
                 <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
-                    <?php foreach($additionals as $settings) : ?>
-                    <li><a><?= $settings['label'] ?></a></li>
+                    <?php foreach($views as $view) : ?>
+                    <li><a><?= $view['label'] ?></a></li>
                     <?php endforeach ?>
                 </ul>
             </div>
@@ -22,8 +22,8 @@
 
             <ul id="tab-content" class="uk-switcher uk-margin">
 
-                <?php foreach ($additionals as $settings) : ?>
-                <li><?= $settings['view'] ?></li>
+                <?php foreach ($views as $view) : ?>
+                <li><?= $view['view'] ?></li>
                 <?php endforeach ?>
 
             </ul>

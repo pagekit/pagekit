@@ -78,12 +78,9 @@ class CacheModule extends Module
 
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
-            $app['view']->data('settings', [
-                'config' => [ $this->name => ['caches' => ['cache' => ['storage' => $this->config('caches.cache.storage', 'auto')]]]],
-                'cache' => [ 'caches' => $caches ]
-            ]);
-
-            $event->add($this->name, __('Cache'), $app['tmpl']->render('extensions/system/modules/cache/views/admin/settings.php'));
+            $event->data('caches', $caches);
+            $event->config($this->name, ['caches' => ['cache' => ['storage' => $this->config('caches.cache.storage', 'auto')]]]);
+            $event->view($this->name, __('Cache'), $app['tmpl']->render('extensions/system/modules/cache/views/admin/settings.php'));
         });
 
         $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
