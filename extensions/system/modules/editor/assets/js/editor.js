@@ -1,42 +1,56 @@
-define('editor', ['jquery', 'uikit!htmleditor', 'marked', 'codemirror'], function($, uikit, marked, codemirror) {
+(function($) {
 
-    return {
+    $(function() {
 
-        attach: function(element, options) {
-            options.markdown = ('markdown' in options) && (options.markdown === "" || options.markdown);
+        $(document).on('htmleditor-save', function(e, editor) {
+            if (editor.element[0].form) {
+                $(editor.element[0].form).submit();
+            }
+        });
 
-            return uikit.htmleditor(element, $.extend({}, { marked: marked, CodeMirror: codemirror }, options));
-        }
-    };
-});
+        $('textarea[data-editor]').each(function() {
 
-require(['jquery', 'editor', 'uikit', 'domReady!'], function($, editor, uikit, doc) {
+            var options = $(this).data();
 
-    $(doc).on('htmleditor-save', function(e, editor) {
-        if (editor.element[0].form) {
-            $(editor.element[0].form).submit();
-        }
+            options.markdown = ('markdown' in options) && (options.markdown === '' || options.markdown);
+            UIkit.htmleditor(this, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, options));
+        });
+
     });
 
-    var editors = $('textarea[data-editor]').each(function() {
-        editor.attach(this, $(this).data());
-    });
+    UIkit.plugin('htmleditor', 'urlresolver', {
 
-    require($('script[data-editor]').data('editor'), function() {
+        init: function(editor) {
 
-        editors.each(function(){
+            editor.element.on('renderLate', function() {
 
-            var editor = $(this).data('htmleditor');
+                editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
 
-            $.each(uikit.components.htmleditor.plugins, function(name, plugin){
-                if ((!editor.options.plugins.length || editor.options.plugins.indexOf(name) >= 0) && !editor.plugins[name]) {
-                    plugin.init(editor);
-                    editor.plugins[name] = true;
-                }
+                    var replacement = data.matches[0];
+
+                    if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
+                        replacement = replacement.replace(data.matches[1], System.url(data.matches[1], true));
+                    }
+
+                    return replacement;
+                });
+
             });
 
-            editor.debouncedRedraw();
-        });
+            return editor;
+        }
+
     });
 
-});
+    UIkit.plugin('htmleditor', 'image', {
+
+        init: function(editor) {
+
+            System.template('image.modal');
+
+            return editor;
+        }
+
+    });
+
+})(jQuery);

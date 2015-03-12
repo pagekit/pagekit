@@ -123,9 +123,9 @@ class SiteModule extends Module implements EventSubscriberInterface
     /**
      * Registers alias edit template.
      */
-    public function onSystemTmpl(TmplEvent $event)
+    public function onSystemLoaded()
     {
-        $event->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
+        App::view()->tmpl()->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
     }
 
     /**
@@ -148,7 +148,7 @@ class SiteModule extends Module implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.tmpl'    => 'onSystemTmpl',
+            'system.loaded'  => 'onSystemLoaded',
             'kernel.request' => ['onKernelRequest', 35]
         ];
     }

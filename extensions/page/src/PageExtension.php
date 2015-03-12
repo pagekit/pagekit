@@ -17,6 +17,10 @@ class PageExtension extends Extension
     {
         $app->subscribe(new NodeListener);
 
+        $app->on('system.loaded', function () use ($app) {
+            $app['view']->tmpl()->register('page.edit', 'extensions/page/views/tmpl/edit.php');
+        });
+
         $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');
         });
@@ -29,10 +33,6 @@ class PageExtension extends Extension
 
         $app->on('site.config', function () use ($app) {
             $app['scripts']->add('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
-        });
-
-        $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('page.edit', 'extensions/page/views/tmpl/edit.php');
         });
     }
 

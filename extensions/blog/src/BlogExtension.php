@@ -28,6 +28,10 @@ class BlogExtension extends Extension
             $app['system']->config['frontpage'] = $app['system']->config['frontpage'] ?: '@blog/site';
         }, 10);
 
+        $app->on('system.loaded', function () use ($app) {
+            $app['view']->tmpl()->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.php');
+        });
+
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Blog\Link\BlogLink');
         });
@@ -45,10 +49,6 @@ class BlogExtension extends Extension
                 'tmpl.edit' => 'blog.post.edit'
             ]);
 
-        });
-
-        $app->on('system.tmpl', function (TmplEvent $event) {
-            $event->register('blog.post.edit', 'extensions/blog/views/tmpl/edit.php');
         });
 
         // TODO fix

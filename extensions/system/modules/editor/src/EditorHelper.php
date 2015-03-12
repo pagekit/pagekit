@@ -1,19 +1,20 @@
 <?php
 
-namespace Pagekit\Editor\Templating;
+namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Symfony\Component\Templating\Helper\Helper;
 
-class EditorHelper extends Helper
+class EditorHelper
 {
     /**
-     * {@inheritdoc}
+     * Render shortcut.
+     *
+     * @see render()
      */
-    public function getName()
+    public function __invoke($name, $value, array $attributes = [], $parameters = [])
     {
-        return 'editor';
+        return $this->render($name, $value, $attributes, $parameters);
     }
 
     /**

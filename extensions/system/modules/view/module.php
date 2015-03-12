@@ -5,6 +5,7 @@ use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
+use Pagekit\View\Helper\TemplateHelper;
 use Pagekit\View\Helper\TokenHelper;
 
 return [
@@ -17,6 +18,7 @@ return [
 
             $helpers = [
                 'gravatar' => new GravatarHelper(),
+                'tmpl'     => new TemplateHelper()
             ];
 
             if (isset($app['dates'])) {
@@ -40,6 +42,7 @@ return [
 
             $debug = $app['module']['framework']->config('debug');
 
+            $app['styles']->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
             $app['scripts']->register('angular', 'vendor/assets/angular/angular.min.js', 'jquery');
             $app['scripts']->register('angular-animate', 'vendor/assets/angular-animate/angular-animate.min.js', 'angular');
             $app['scripts']->register('angular-cookies', 'vendor/assets/angular-cookies/angular-cookies.min.js', 'angular');
@@ -51,17 +54,20 @@ return [
             $app['scripts']->register('angular-touch', 'vendor/assets/angular-touch/angular-touch.min.js', 'angular');
             $app['scripts']->register('application', 'extensions/system/app/application.js', 'angular');
             $app['scripts']->register('application-directives', 'extensions/system/app/directives.js', 'application');
-            $app['scripts']->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js', [], ['requirejs' => true]);
+            $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
+            $app['scripts']->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js');
+            $app['scripts']->register('marked', 'vendor/assets/marked/marked.js');
             $app['scripts']->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
             $app['scripts']->register('requirejs-config', 'extensions/system/assets/js/require.js', 'pagekit');
-            $app['scripts']->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery', ['requirejs' => true]);
-            $app['scripts']->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit', ['requirejs' => true]);
+            $app['scripts']->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery');
+            $app['scripts']->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit');
+            $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit');
+            $app['scripts']->register('uikit-htmleditor', 'vendor/assets/uikit/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
             $app['scripts']->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
-            $app['scripts']->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit', ['requirejs' => true]);
-            $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit', ['requirejs' => true]);
+            $app['scripts']->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit');
+            $app['scripts']->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit');
+            $app['scripts']->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit');
+            $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
             $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'locale']);
@@ -70,8 +76,15 @@ return [
             $app['scripts']->register('vue-validator', 'extensions/system/app/vue-validator.js', ['vue']);
 
             $app['view']->data('pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+
             $app['view']->section()->set('messages', function() use ($app) {
                 return $app['tmpl']->render('extensions/system/views/messages/messages.php');
+            });
+
+            $app['view']->section()->prepend('head', function () use ($app) {
+                if ($templates = $app['view']->tmpl()->queued()) {
+                    $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
+                }
             });
 
         });

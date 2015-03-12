@@ -16,6 +16,13 @@ class SystemListener implements EventSubscriberInterface
     public function onSystemLoaded($event)
     {
         App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', $event);
+
+        App::view()->tmpl()->register('linkpicker.modal', 'extensions/system/views/tmpl/linkpicker.modal.razr');
+        App::view()->tmpl()->register('linkpicker.replace', 'extensions/system/views/tmpl/linkpicker.replace.razr');
+        App::view()->tmpl()->register('marketplace.details', 'extensions/system/views/tmpl/marketplace.details.razr');
+        App::view()->tmpl()->register('marketplace.table', 'extensions/system/views/tmpl/marketplace.table.razr');
+        App::view()->tmpl()->register('package.updates', 'extensions/system/views/tmpl/package.updates.razr');
+        App::view()->tmpl()->register('package.upload', 'extensions/system/views/tmpl/package.upload.razr');
     }
 
     /**
@@ -42,21 +49,6 @@ class SystemListener implements EventSubscriberInterface
     public function onSystemLink(LinkEvent $event)
     {
         $event->register('Pagekit\System\Link\System');
-    }
-
-    /**
-     * Registers templates.
-     *
-     * @param TmplEvent $event
-     */
-    public function onSystemTmpl(TmplEvent $event)
-    {
-        $event->register('linkpicker.modal', 'extensions/system/views/tmpl/linkpicker.modal.razr');
-        $event->register('linkpicker.replace', 'extensions/system/views/tmpl/linkpicker.replace.razr');
-        $event->register('marketplace.details', 'extensions/system/views/tmpl/marketplace.details.razr');
-        $event->register('marketplace.table', 'extensions/system/views/tmpl/marketplace.table.razr');
-        $event->register('package.updates', 'extensions/system/views/tmpl/package.updates.razr');
-        $event->register('package.upload', 'extensions/system/views/tmpl/package.upload.razr');
     }
 
     /**
@@ -115,7 +107,6 @@ class SystemListener implements EventSubscriberInterface
             'system.finder'        => 'onSystemFinder',
             'system.link'          => 'onSystemLink',
             'system.loaded'        => 'onSystemLoaded',
-            'system.tmpl'          => 'onSystemTmpl',
             'kernel.request'       => 'onRequestMatched',
             'system.settings.edit' => ['onSettingsEdit', 8],
             'system.settings.save' => 'onSettingsSave'

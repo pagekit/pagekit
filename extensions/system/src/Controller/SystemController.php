@@ -83,14 +83,13 @@ class SystemController extends Controller
      */
     public function tmplAction($template = '')
     {
-        $event = App::trigger('system.tmpl', new TmplEvent);
+        $file = App::view()->tmpl()->get($template);
 
-        if (!$event->has($template)) {
+        if (!$file) {
             throw new NotFoundHttpException(__('Template not found.'));
         }
 
-        $output = App::tmpl($event->get($template));
-
+        $output   = App::tmpl($file);
         $response = App::response()->create()
             ->setETag(md5($output))
             ->setPublic();
@@ -100,5 +99,21 @@ class SystemController extends Controller
         }
 
         return $response->setContent($output);
+    }
+
+    /**
+     * @Route("/tmpls/{templates}")
+     */
+    public function tmplsAction($templates = '')
+    {
+        $data = [];
+
+        foreach (explode(',', $templates) as $template) {
+            if ($file = App::view()->tmpl()->get($template)) {
+                $data[$template] = App::tmpl($file);
+            }
+        }
+
+        return App::response(sprintf('var templates = %s;', json_encode($data)), 200, ['Content-Type' =>'application/javascript']);
     }
 }
