@@ -154,11 +154,9 @@ jQuery(function($) {
 
         data: {
             view: 'settings',
-            src: '',
-            alt: '',
-            img: '',
-            root: '',
-            select: ''
+            style: '',
+            image: {src: '', alt: ''},
+            finder: {root: '', select: ''}
         },
 
         ready: function () {
@@ -167,13 +165,13 @@ jQuery(function($) {
 
             this.$on('select.finder', function(selected) {
                 if (selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
-                    vm.select = selected[0];
+                    vm.finder.select = selected[0];
                 } else {
-                    vm.select = '';
+                    vm.finder.select = '';
                 }
             });
 
-            this.$watch('src', this.preview);
+            this.$watch('image.src', this.preview);
             this.preview();
         },
 
@@ -181,22 +179,25 @@ jQuery(function($) {
 
             update: function () {
 
+                var img = this.image;
+
+                img.replace(img.tag.template({src: img.src, alt: img.alt}));
             },
 
             preview: function () {
 
                 var vm = this, img = new Image(), src = '';
 
-                if (this.src) {
-                    src = this.$url(this.src, true);
+                if (this.image.src) {
+                    src = this.$url(this.image.src, true);
                 }
 
                 img.onerror = function() {
-                    vm.img = '';
+                    vm.style = '';
                 };
 
                 img.onload  = function() {
-                    vm.img = 'background-image: url("' + src + '"); background-size: contain';
+                    vm.style = 'background-image: url("' + src + '"); background-size: contain';
                 };
 
                 img.src = src;
@@ -209,7 +210,7 @@ jQuery(function($) {
 
             closeFinder: function (select) {
                 this.view = 'settings';
-                if (select) this.src = select;
+                if (select) this.image.src = select;
             }
 
         }
@@ -220,11 +221,14 @@ jQuery(function($) {
 
         init: function(editor) {
 
-            var self = this, options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [], regexp;
+            var self = this;
+
+            this.editor = editor;
+            this.images = [];
 
             editor.element.on('render', function() {
-                regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
-                images = editor.replaceInPreview(regexp, self.replaceInPreview);
+                var regexp  = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+                self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
             });
 
             // editor.preview.on('click', '.js-editor-image .js-config', function() {
@@ -236,100 +240,68 @@ jQuery(function($) {
             // });
 
             editor.element.off('action.image');
-            editor.element.on('action.image', function() {
-
-                var modal = $(templates['image.modal']).appendTo('body'), cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm);
-
-                images.every(function(img) {
-
-                    if (img.inRange(cursor)) {
-
-                        vm.data.src  = img.src;
-                        vm.data.alt  = img.alt;
-                        vm.data.root = root;
-
-                        return false;
-                    }
-
-                    return true;
-                });
-
-                UIkit.modal(modal).show();
-
-                modal.on('hide.uk.modal', function() {
-                    console.log(vm);
-                    $(this).remove();
-                });
-
-                vm = new Vue(vm);
-
-                return;
-
-                if (!data) {
-                    data = {
-                        src: '',
-                        alt: '',
-                        handler: function() {
-
-                            var repl;
-
-                            ImagePopup.getPicker().hide();
-
-                            if (editor.getCursorMode() == 'html') {
-                                repl = '<img src="' + ImagePopup.image.val() + '" alt="' + ImagePopup.title.val() + '">';
-                            } else {
-                                repl = '![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')';
-                            }
-
-                            editor.editor.replaceSelection(repl, 'end');
-                        },
-                        replace: function(value) { editor.editor.replaceRange(value, cursor); }
-                    };
-                }
-
-            });
+            editor.element.on('action.image', this.openModal.bind(this));
 
             return editor;
+        },
+
+        openModal: function() {
+
+            var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm), image, modal;
+            var options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+
+            this.images.every(function(img) {
+
+                if (img.inRange(cursor)) {
+                    image = img;
+                    return false;
+                }
+
+                return true;
+            });
+
+            if (!image) {
+                image = {
+                    tag: editor.getCursorMode() == 'html' ? '<img src="${src}" alt="${alt}">' : '![${alt}](${src})',
+                    replace: function (value) {
+                        editor.editor.replaceRange(value, cursor);
+                    }
+                };
+            }
+
+            modal = $(templates['image.modal']).appendTo('body');
+            modal.on('hide.uk.modal', function() {
+                $(this).remove();
+            });
+
+            UIkit.modal(modal).show();
+
+            $.extend(vm.data.image, image);
+            vm.data.finder.root = root;
+            vm = new Vue(vm);
         },
 
         replaceInPreview: function(data) {
 
             if (data.matches[0][0] == '<') {
 
-                if (data.matches[0].match(/js\-no\-parse/)) return false;
+                if (data.matches[0].match(/js\-no\-parse/)) {
+                    return false;
+                }
 
-                var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
-                    matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
+                var src = data.matches[0].match(/src="(.*?)"/), alt = data.matches[0].match(/alt="(.*?)"/);
 
-                data['src'] = matchesSrc ? matchesSrc[1] : '';
-                data['alt'] = matchesAlt ? matchesAlt[1] : '';
-                data['handler'] = function() {
-                    ImagePopup.getPicker().hide();
-
-                    var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
-
-                    output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
-                    output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
-
-                    data.replace(output);
-                };
+                data.src = src ? src[1] : '';
+                data.alt = alt ? alt[1] : '';
+                data.tag = data.matches[0].replace(/src="(.*?)"/, 'src="${src}"').replace(/alt="(.*?)"/, 'alt="${alt}"');
 
             } else {
-
-                data['src'] = data.matches[3].trim();
-                data['alt'] = data.matches[2];
-                data['handler'] = function() {
-                    ImagePopup.getPicker().hide();
-                    data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
-                };
-
+                data.src = data.matches[3].trim();
+                data.alt = data.matches[2];
+                data.tag = '![${alt}](${src})';
             }
 
-            return '[img]';
-
-            return Handlebars.compile(templates['image.replace'])({ src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
-
-
+            return templates['image.replace'].template({src: data.src, alt: data.alt}).replace(/(\r\n|\n|\r)/gm, '');
         }
 
     });
