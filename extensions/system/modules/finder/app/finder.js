@@ -104,7 +104,7 @@
             },
 
             getFullPath: function() {
-                return (this.root+this.path).replace(/^(\/)+|(\/)+$/g, '')+'/';
+                return (this.root+this.path).replace(/^\/+|\/+$/g, '')+'/';
             },
 
             getSelected: function() {
