@@ -21,7 +21,8 @@
 
         ready: function () {
 
-            System.template('finder.table');
+            var self = this;
+
             System.template('finder.thumbnail');
 
             this.resource = this.$resource('system/finder/:cmd');
@@ -30,6 +31,12 @@
 
             this.loadPath();
             this._initUpload();
+
+            this.$watch('selected', function(selected, old) {
+                if (selected != old) self.$emit('select.finder', self.getSelected());
+            });
+
+            this.$dispatch('ready.finder', this);
         },
 
         filters: {
@@ -68,7 +75,7 @@
         methods: {
 
             encodeURI: function (url) {
-                return encodeURI(url).replace("'", '%27');
+                return encodeURI(url).replace(/'/g, '%27');
             },
 
             isWritable: function () {
@@ -93,6 +100,17 @@
                     self.$set('files', data.files || []);
 
                 });
+            },
+
+            getFullPath: function() {
+                return (this.root+this.path).replace(/^\/|\/$/g, '')+'/';
+            },
+
+            getSelected: function() {
+                var path = this.getFullPath();
+                this.$dispatch('select.finder', this.selected.map(function(name) {
+                    return path+name;
+                }));
             },
 
             command: function (cmd, params) {
@@ -186,23 +204,20 @@
 
     var Finder = function(element, options) {
 
-        var vm = new Vue({
+        var deferred = $.Deferred();
+
+        new Vue({
             el      : element,
             data    : $.extend(true, {}, defaults, options),
-            template: '<div v-component="v-finder" v-with="$data"></div>'
+            template: '<div v-component="v-finder" v-with="$data"></div>',
+            created: function() {
+                this.$on('ready.finder', function(finder) {
+                    deferred.resolve(finder);
+                });
+            }
         });
 
-        return {
-
-            loadPath: function(path) {
-                return vm.$set('path', path);
-            },
-
-            getSelected: function() {
-                return vm.$get('selected');
-            }
-
-        };
+        return deferred;
     };
 
     $(function () {
