@@ -118,7 +118,7 @@ return [
             $event->data('locales', $locales);
             $event->data('timezones', $timezones);
             $event->options($this->name, $this->config, ['timezone', 'locale', 'locale_admin']);
-            $event->view($this->name, __('Localization'), $app['tmpl']->render('extensions/system/modules/locale/views/admin/settings.php'));
+            $event->view($this->name, 'Localization', 'extensions/system/modules/locale/views/admin/settings.php');
         });
 
     },

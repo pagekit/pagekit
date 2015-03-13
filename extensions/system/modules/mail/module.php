@@ -85,7 +85,7 @@ return [
 
             $event->options($this->name, $this->config);
             $event->data('ssl', extension_loaded('openssl'));
-            $event->view($this->name, __('Mail'), $app['tmpl']->render('extensions/system/modules/mail/views/admin/settings.php'));
+            $event->view($this->name, 'Mail', 'extensions/system/modules/mail/views/admin/settings.php');
         });
     },
 

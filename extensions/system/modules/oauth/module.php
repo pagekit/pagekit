@@ -20,9 +20,9 @@ return [
             $app['view']->script('oauth-settings', 'extensions/system/modules/oauth/assets/js/settings.js', 'vue-system');
 
             $event->options($this->name, $this->config);
-            $event->view($this->name, __('OAuth'), $app['tmpl']->render('extensions/system/modules/oauth/views/admin/settings.php'));
             $event->data('oauth', $app['oauth']->getProvider());
             $event->data('redirect_url', $app['oauth']->getRedirectUrl());
+            $event->view($this->name, 'OAuth', 'extensions/system/modules/oauth/views/admin/settings.php');
         });
     },
 

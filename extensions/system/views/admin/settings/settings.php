@@ -12,7 +12,7 @@
             <div class="uk-panel pk-panel-marginless">
                 <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
                     <?php foreach($views as $view) : ?>
-                    <li><a><?= $view['label'] ?></a></li>
+                    <li><a>{{ '<?= $view['label'] ?>' | trans }}</a></li>
                     <?php endforeach ?>
                 </ul>
             </div>

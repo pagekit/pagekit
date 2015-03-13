@@ -29,11 +29,7 @@ class SettingsEvent extends Event
      */
     public function view($name, $label, $view)
     {
-        if (is_callable($view)) {
-            $view = call_user_func($view);
-        }
-
-        $this->views[$name] = ['label' => $label, 'view' => $view];
+        $this->views[$name] = ['label' => $label, 'view' => is_callable($view) ? call_user_func($view) : App::tmpl($view)];
     }
 
     /**
