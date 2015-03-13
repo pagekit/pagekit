@@ -27,7 +27,7 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.$watch('path', this.loadPath);
+            this.$watch('path', function() { this.loadPath(); });
 
             this.loadPath();
             this._initUpload();
@@ -86,9 +86,13 @@
                 return url.match(/\.(?:gif|jpe?g|png|svg)/i);
             },
 
-            loadPath: function (path) {
+            loadPath: function (path, e) {
 
                 var self = this;
+
+                if (e) {
+                    e.stopPropagation();
+                }
 
                 this.$set('selected', []);
 
@@ -158,6 +162,20 @@
 
             removeSelected: function () {
                 this.remove(this.selected);
+            },
+
+            toggleSelect: function(name) {
+
+                if (name.targetVM) {
+                    name = name.targetVM.$data.name;
+                }
+
+                var index  = this.selected.indexOf(name);
+                -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
+            },
+
+            stopPropagation: function(e) {
+                e.stopPropagation();
             },
 
             _initUpload: function () {
