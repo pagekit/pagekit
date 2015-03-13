@@ -1,5 +1,6 @@
 <div id="editor-image" class="uk-modal">
     <div class="uk-modal-dialog uk-form uk-form-stacked" v-class="uk-modal-dialog-large: view == 'finder'">
+
         <div v-show="view == 'settings'">
             <h1 class="uk-h3">{{ 'Image' | trans }}</h1>
             <div class="uk-form-row">
@@ -25,6 +26,7 @@
                 <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
             </div>
         </div>
+
         <div v-if="view == 'finder'">
             <h1 class="uk-h3">{{ 'Select Image' | trans }}</h1>
             <div v-component="v-finder" v-ref="finder" v-with="root: finder.root"></div>
@@ -33,5 +35,6 @@
                 <button class="uk-button" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
             </div>
         </div>
+
     </div>
 </div>
