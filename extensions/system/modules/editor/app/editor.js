@@ -227,38 +227,51 @@ jQuery(function($) {
             this.images = [];
 
             editor.element.on('render', function() {
-                var regexp  = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+
+                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+
                 self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
             });
 
-            // editor.preview.on('click', '.js-editor-image .js-config', function() {
-            //     openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], root);
-            // });
+            editor.preview.on('click', '.js-editor-image .js-config', function() {
 
-            // editor.preview.on('click', '.js-editor-image .js-remove', function() {
-            //     images[editor.preview.find('.js-editor-image .js-remove').index(this)].replace('');
-            // });
+                var index = editor.preview.find('.js-editor-image .js-config').index(this);
+
+                self.openModal(self.images[index]);
+            });
+
+            editor.preview.on('click', '.js-editor-image .js-remove', function() {
+
+                var index = editor.preview.find('.js-editor-image .js-remove').index(this);
+
+                self.images[index].replace('');
+            });
 
             editor.element.off('action.image');
-            editor.element.on('action.image', this.openModal.bind(this));
+            editor.element.on('action.image', function() {
+
+                var cursor = editor.editor.getCursor(), image;
+
+                self.images.every(function(img) {
+
+                    if (img.inRange(cursor)) {
+                        image = img;
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                self.openModal(image);
+            });
 
             return editor;
         },
 
-        openModal: function() {
+        openModal: function(image) {
 
-            var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm), image, modal;
+            var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm), modal;
             var options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/';
-
-            this.images.every(function(img) {
-
-                if (img.inRange(cursor)) {
-                    image = img;
-                    return false;
-                }
-
-                return true;
-            });
 
             if (!image) {
                 image = {
