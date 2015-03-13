@@ -153,33 +153,28 @@ jQuery(function($) {
         el: '#editor-image',
 
         data: {
-            url: '',
+            view: 'settings',
+            src: '',
             alt: '',
             img: '',
-            view: 'settings'
+            root: '',
+            select: ''
         },
 
         ready: function () {
 
-            var vm = this, img = new Image(), src = '';
+            var vm = this;
 
-            this.$watch('url', function(url) {
-
-                if (url) {
-                    src = vm.$url(url, true);
+            this.$on('select.finder', function(selected) {
+                if (selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+                    vm.select = selected[0];
+                } else {
+                    vm.select = '';
                 }
-
-                img.src = src;
             });
 
-            img.onerror = function() {
-                vm.img = '';
-            };
-
-            img.onload  = function() {
-                vm.img = 'background-image: url("' + src + '"); background-size: contain';
-            };
-
+            this.$watch('src', this.preview);
+            this.preview();
         },
 
         methods: {
@@ -188,13 +183,33 @@ jQuery(function($) {
 
             },
 
-            openFinder: function () {
-                this.view = 'finder';
+            preview: function () {
+
+                var vm = this, img = new Image(), src = '';
+
+                if (this.src) {
+                    src = this.$url(this.src, true);
+                }
+
+                img.onerror = function() {
+                    vm.img = '';
+                };
+
+                img.onload  = function() {
+                    vm.img = 'background-image: url("' + src + '"); background-size: contain';
+                };
+
+                img.src = src;
             },
 
-            closeFinder: function () {
-                this.url  = this.$.finder.selected[0];
+            openFinder: function () {
+                this.view = 'finder';
+                this.select = '';
+            },
+
+            closeFinder: function (select) {
                 this.view = 'settings';
+                if (select) this.src = select;
             }
 
         }
@@ -205,51 +220,15 @@ jQuery(function($) {
 
         init: function(editor) {
 
-            var options = editor.element.data('finder-options'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [];
+            var self = this, options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/', images = [], regexp;
 
             editor.element.on('render', function() {
-
-                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
-
-                images = editor.replaceInPreview(regexp, function(data) {
-
-                    if (data.matches[0][0] == '<') {
-
-                        if (data.matches[0].match(/js\-no\-parse/)) return false;
-
-                        var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
-                            matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
-
-                        data['src'] = matchesSrc ? matchesSrc[1] : '';
-                        data['alt'] = matchesAlt ? matchesAlt[1] : '';
-                        data['handler'] = function() {
-                            ImagePopup.getPicker().hide();
-
-                            var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
-
-                            output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
-                            output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
-
-                            data.replace(output);
-                        };
-
-                    } else {
-
-                        data['src'] = data.matches[3].trim();
-                        data['alt'] = data.matches[2];
-                        data['handler'] = function() {
-                            ImagePopup.getPicker().hide();
-                            data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
-                        };
-
-                    }
-
-                    return Handlebars.compile(templates['image.replace'])({ src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
-                });
+                regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+                images = editor.replaceInPreview(regexp, self.replaceInPreview);
             });
 
             // editor.preview.on('click', '.js-editor-image .js-config', function() {
-            //     openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], rootpath);
+            //     openImageModal(images[editor.preview.find('.js-editor-image .js-config').index(this)], root);
             // });
 
             // editor.preview.on('click', '.js-editor-image .js-remove', function() {
@@ -259,25 +238,32 @@ jQuery(function($) {
             editor.element.off('action.image');
             editor.element.on('action.image', function() {
 
-                var modal = $(templates['image.modal']).appendTo('body'), vm = new Vue(ImageVm);
+                var modal = $(templates['image.modal']).appendTo('body'), cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm);
+
+                images.every(function(img) {
+
+                    if (img.inRange(cursor)) {
+
+                        vm.data.src  = img.src;
+                        vm.data.alt  = img.alt;
+                        vm.data.root = root;
+
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                UIkit.modal(modal).show();
 
                 modal.on('hide.uk.modal', function() {
                     console.log(vm);
                     $(this).remove();
                 });
 
-                UIkit.modal(modal).show();
+                vm = new Vue(vm);
 
                 return;
-
-                var cursor = editor.editor.getCursor(), data;
-                images.every(function(image) {
-                    if (image.inRange(cursor)) {
-                        data = image;
-                        return false;
-                    }
-                    return true;
-                });
 
                 if (!data) {
                     data = {
@@ -301,10 +287,49 @@ jQuery(function($) {
                     };
                 }
 
-                openImageModal(data, rootpath);
             });
 
             return editor;
+        },
+
+        replaceInPreview: function(data) {
+
+            if (data.matches[0][0] == '<') {
+
+                if (data.matches[0].match(/js\-no\-parse/)) return false;
+
+                var matchesSrc = data.matches[0].match(/\ssrc="(.*?)"/),
+                    matchesAlt = data.matches[0].match(/\salt="(.*?)"/);
+
+                data['src'] = matchesSrc ? matchesSrc[1] : '';
+                data['alt'] = matchesAlt ? matchesAlt[1] : '';
+                data['handler'] = function() {
+                    ImagePopup.getPicker().hide();
+
+                    var src = ' src="' + ImagePopup.image.val()+'"', alt = ' alt="'+ImagePopup.title.val() + '"', output = data.matches[0];
+
+                    output = matchesSrc ? output.replace(matchesSrc[0], src) : [output.slice(0, 4), src, output.slice(4)].join('');
+                    output = matchesAlt ? output.replace(matchesAlt[0], alt) : [output.slice(0, 4), alt, output.slice(4)].join('');
+
+                    data.replace(output);
+                };
+
+            } else {
+
+                data['src'] = data.matches[3].trim();
+                data['alt'] = data.matches[2];
+                data['handler'] = function() {
+                    ImagePopup.getPicker().hide();
+                    data.replace('![' + ImagePopup.title.val() + '](' + ImagePopup.image.val() + ')');
+                };
+
+            }
+
+            return '[img]';
+
+            return Handlebars.compile(templates['image.replace'])({ src: ('http://' !== data['src'] ? data['src'] : ''), alt: data['alt']  }).replace(/(\r\n|\n|\r)/gm, '');
+
+
         }
 
     });

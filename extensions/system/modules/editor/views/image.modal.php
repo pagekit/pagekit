@@ -9,15 +9,15 @@
                 </div>
             </div>
             <div class="uk-form-row">
-                <label for="form2-url" class="uk-form-label">{{ 'URL' | trans }}</label>
+                <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form2-url" type="text" class="uk-width-1-1" v-model="url">
+                    <input id="form-src" type="text" class="uk-width-1-1" v-model="src">
                 </div>
             </div>
             <div class="uk-form-row">
-                <label for="form2-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
+                <label for="form-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form2-alt" type="text" class="uk-width-1-1" v-model="alt">
+                    <input id="form-alt" type="text" class="uk-width-1-1" v-model="alt">
                 </div>
             </div>
             <div class="uk-form-row uk-margin-top">
@@ -25,12 +25,12 @@
                 <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
             </div>
         </div>
-        <div v-show="view == 'finder'">
+        <div v-if="view == 'finder'">
             <h1 class="uk-h3">{{ 'Select Image' | trans }}</h1>
-            <div v-component="v-finder" v-ref="finder"></div>
+            <div v-component="v-finder" v-ref="finder" v-with="root: root"></div>
             <div class="uk-margin-top">
-                <button class="uk-button uk-button-primary" type="button" v-on="click: closeFinder">{{ 'Select' | trans }}</button>
-                <button class="uk-button" type="button" v-on="click: closeFinder">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !select" v-on="click: closeFinder(select)">{{ 'Select' | trans }}</button>
+                <button class="uk-button" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
             </div>
         </div>
     </div>
