@@ -213,18 +213,7 @@
             template: '<div v-component="v-finder" v-with="$data"></div>',
             created: function() {
                 this.$on('ready.finder', function(finder) {
-
-                    console.log('ready');
-
                     deferred.resolve(finder);
-                });
-
-                this.$on('select.finder', function(selected) {
-                    console.log(selected);
-                });
-
-                this.$on('path.finder', function(path) {
-                    console.log(path);
                 });
             }
         });
