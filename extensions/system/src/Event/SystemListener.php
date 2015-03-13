@@ -16,13 +16,6 @@ class SystemListener implements EventSubscriberInterface
     public function onSystemLoaded($event)
     {
         App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', $event);
-
-        App::view()->tmpl()->register('linkpicker.modal', 'extensions/system/views/tmpl/linkpicker.modal.razr');
-        App::view()->tmpl()->register('linkpicker.replace', 'extensions/system/views/tmpl/linkpicker.replace.razr');
-        App::view()->tmpl()->register('marketplace.details', 'extensions/system/views/tmpl/marketplace.details.razr');
-        App::view()->tmpl()->register('marketplace.table', 'extensions/system/views/tmpl/marketplace.table.razr');
-        App::view()->tmpl()->register('package.updates', 'extensions/system/views/tmpl/package.updates.razr');
-        App::view()->tmpl()->register('package.upload', 'extensions/system/views/tmpl/package.upload.razr');
     }
 
     /**

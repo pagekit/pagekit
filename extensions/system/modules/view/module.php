@@ -88,6 +88,16 @@ return [
                 }
             });
 
+            $app->on('system.loaded', function () use ($app) {
+                foreach ($app['module'] as $module) {
+                    if (isset($module->templates)) {
+                        foreach ($module->templates as $name => $tmpl) {
+                            $app['view']->tmpl()->register($name, $tmpl);
+                        }
+                    }
+                }
+            });
+
         });
 
     },

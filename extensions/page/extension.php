@@ -24,6 +24,11 @@ return [
             'title' => 'Manage pages'
         ]
 
-    ]
+    ],
 
+    'templates' => [
+
+        'page.edit' => 'extensions/page/views/tmpl/edit.php'
+
+    ]
 ];

@@ -5,8 +5,6 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Event\MenuEvent;
-use Pagekit\Site\Event\TypeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteModule extends Module implements EventSubscriberInterface
@@ -120,14 +118,6 @@ class SiteModule extends Module implements EventSubscriberInterface
     }
 
     /**
-     * Registers alias edit template.
-     */
-    public function onSystemLoaded()
-    {
-        App::view()->tmpl()->register('alias.edit', 'extensions/system/modules/site/views/tmpl/site.alias.php');
-    }
-
-    /**
      * Registers node routes.
      */
     public function onKernelRequest()
@@ -147,7 +137,6 @@ class SiteModule extends Module implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.loaded'  => 'onSystemLoaded',
             'kernel.request' => ['onKernelRequest', 35]
         ];
     }

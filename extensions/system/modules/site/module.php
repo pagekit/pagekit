@@ -44,6 +44,12 @@ return [
             'title' => 'Manage site'
         ]
 
+    ],
+
+    'templates' => [
+
+        'alias.edit' => 'extensions/system/modules/site/views/tmpl/site.alias.php'
+
     ]
 
 ];

@@ -14,12 +14,6 @@ return [
             $app['scripts']->register('finder', 'extensions/system/modules/finder/app/finder.js', ['uikit-upload', 'vue-system']);
         });
 
-        $app->on('system.loaded', function ($event) use ($app) {
-            $app['view']->tmpl()->register('finder.main', 'extensions/system/modules/finder/views/main.php');
-            $app['view']->tmpl()->register('finder.table', 'extensions/system/modules/finder/views/table.php');
-            $app['view']->tmpl()->register('finder.thumbnail', 'extensions/system/modules/finder/views/thumbnail.php');
-        });
-
     },
 
     'autoload' => [
@@ -33,6 +27,14 @@ return [
         '@system: /system' => [
             'Pagekit\\Finder\\Controller\\FinderController'
         ]
+
+    ],
+
+    'templates' => [
+
+        'finder.main'      => 'extensions/system/modules/finder/views/main.php',
+        'finder.table'     => 'extensions/system/modules/finder/views/table.php',
+        'finder.thumbnail' => 'extensions/system/modules/finder/views/thumbnail.php'
 
     ]
 

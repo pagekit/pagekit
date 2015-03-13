@@ -17,12 +17,6 @@ return [
             $helper = new EditorHelper();
 
             $app['view']->addHelper('editor', $helper);
-            $app['view']->tmpl()->register('image.modal', 'extensions/system/modules/editor/views/image.modal.php');
-            $app['view']->tmpl()->register('image.replace', 'extensions/system/modules/editor/views/image.replace.php');
-            $app['view']->tmpl()->register('link.modal', 'extensions/system/modules/editor/views/link.modal.php');
-            $app['view']->tmpl()->register('link.replace', 'extensions/system/modules/editor/views/link.replace.php');
-            $app['view']->tmpl()->register('video.modal', 'extensions/system/modules/editor/views/video.modal.php');
-            $app['view']->tmpl()->register('video.replace', 'extensions/system/modules/editor/views/video.replace.php');
 
             $app['scripts']->register('editor', 'extensions/system/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder']);
 
@@ -34,6 +28,17 @@ return [
     'autoload' => [
 
         'Pagekit\\Editor\\' => 'src'
+
+    ],
+
+    'templates' => [
+
+        'image.modal'   => 'extensions/system/modules/editor/views/image.modal.php',
+        'image.replace' => 'extensions/system/modules/editor/views/image.replace.php',
+        'link.modal'    => 'extensions/system/modules/editor/views/link.modal.php',
+        'link.replace'  => 'extensions/system/modules/editor/views/link.replace.php',
+        'video.modal'   => 'extensions/system/modules/editor/views/video.modal.php',
+        'video.replace' => 'extensions/system/modules/editor/views/video.replace.php'
 
     ]
 

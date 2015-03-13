@@ -100,6 +100,18 @@ return [
 
     ],
 
+    'templates' => [
+
+        'linkpicker.modal'    => 'extensions/system/views/tmpl/linkpicker.modal.razr',
+        'linkpicker.replace'  => 'extensions/system/views/tmpl/linkpicker.replace.razr',
+        'marketplace.details' => 'extensions/system/views/tmpl/marketplace.details.razr',
+        'marketplace.table'   => 'extensions/system/views/tmpl/marketplace.table.razr',
+        'package.updates'     => 'extensions/system/views/tmpl/package.updates.razr',
+        'package.upload'      => 'extensions/system/views/tmpl/package.upload.razr'
+
+    ],
+
+
     'config' => [
 
         'dashboard' => [
