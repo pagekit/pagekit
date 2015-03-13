@@ -33,7 +33,7 @@
             this._initUpload();
 
             this.$watch('selected', function(selected, old) {
-                if (selected != old) self.$emit('select.finder', self.getSelected());
+                if (selected != old) self.$dispatch('select.finder', self.getSelected(), self)
             });
 
             this.$dispatch('ready.finder', this);
@@ -99,18 +99,19 @@
                     self.$set('folders', data.folders || []);
                     self.$set('files', data.files || []);
 
+                    self.$dispatch('path.finder', self.getFullPath(), self)
                 });
             },
 
             getFullPath: function() {
-                return (this.root+this.path).replace(/^\/|\/$/g, '')+'/';
+                return (this.root+this.path).replace(/^(\/)+|(\/)+$/g, '')+'/';
             },
 
             getSelected: function() {
                 var path = this.getFullPath();
-                this.$dispatch('select.finder', this.selected.map(function(name) {
+                return this.selected.map(function(name) {
                     return path+name;
-                }));
+                });
             },
 
             command: function (cmd, params) {
@@ -212,7 +213,18 @@
             template: '<div v-component="v-finder" v-with="$data"></div>',
             created: function() {
                 this.$on('ready.finder', function(finder) {
+
+                    console.log('ready');
+
                     deferred.resolve(finder);
+                });
+
+                this.$on('select.finder', function(selected) {
+                    console.log(selected);
+                });
+
+                this.$on('path.finder', function(path) {
+                    console.log(path);
                 });
             }
         });

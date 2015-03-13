@@ -36,7 +36,8 @@ class SystemExtension extends Extension
 
         $app['module']['framework/auth']->config['rememberme.key'] = $this->config('key');
 
-        $app['path.storage'] = rtrim($app['path'].'/'.ltrim(($this->config['storage']), '/'), '/');
+        $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
+        $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
 
         $app['db.em']; // -TODO- fix me
 
