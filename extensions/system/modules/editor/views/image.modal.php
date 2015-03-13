@@ -1,7 +1,7 @@
 <div id="editor-image" class="uk-modal">
     <div class="uk-modal-dialog uk-form uk-form-stacked" v-class="uk-modal-dialog-large: view == 'finder'">
         <div v-show="view == 'settings'">
-            <h1 class="uk-h3">{{ 'Add Image' | trans }}</h1>
+            <h1 class="uk-h3">{{ 'Image' | trans }}</h1>
             <div class="uk-form-row">
                 <div class="uk-form-controls">
                     <div class="pk-thumbnail pk-thumbnail-image" v-attr="style: style"></div>

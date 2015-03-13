@@ -205,7 +205,7 @@ jQuery(function($) {
 
             openFinder: function () {
                 this.view = 'finder';
-                this.select = '';
+                this.finder.select = '';
             },
 
             closeFinder: function (select) {
@@ -226,27 +226,6 @@ jQuery(function($) {
             this.editor = editor;
             this.images = [];
 
-            editor.element.on('render', function() {
-
-                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
-
-                self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
-            });
-
-            editor.preview.on('click', '.js-editor-image .js-config', function() {
-
-                var index = editor.preview.find('.js-editor-image .js-config').index(this);
-
-                self.openModal(self.images[index]);
-            });
-
-            editor.preview.on('click', '.js-editor-image .js-remove', function() {
-
-                var index = editor.preview.find('.js-editor-image .js-remove').index(this);
-
-                self.images[index].replace('');
-            });
-
             editor.element.off('action.image');
             editor.element.on('action.image', function() {
 
@@ -263,6 +242,21 @@ jQuery(function($) {
                 });
 
                 self.openModal(image);
+            });
+
+            editor.element.on('render', function() {
+                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+                self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
+            });
+
+            editor.preview.on('click', '.js-editor-image .js-config', function() {
+                var index = editor.preview.find('.js-editor-image .js-config').index(this);
+                self.openModal(self.images[index]);
+            });
+
+            editor.preview.on('click', '.js-editor-image .js-remove', function() {
+                var index = editor.preview.find('.js-editor-image .js-remove').index(this);
+                self.images[index].replace('');
             });
 
             return editor;
@@ -328,36 +322,27 @@ jQuery(function($) {
 
 (function($) {
 
-    function openVideoModal(data, rootpath) {
-
-        VideoPopup.video.val(data.src);
-        VideoPopup.updatePreview(VideoPopup.video.val());
-        VideoPopup.goto('settings');
-        VideoPopup.getPicker().show();
-
-        setTimeout(function() {
-            VideoPopup.video.focus();
-        }, 10);
-
-        VideoPopup.handler = function() {
-            VideoPopup.getPicker().hide();
-
-            data.replace('(video)' + JSON.stringify({ src: VideoPopup.video.val() }));
-        };
-
-        VideoPopup.finder.loadPath(data.src.trim() && data.src.indexOf(rootpath) === 0 ? data.src.replace(rootpath, '').split('/').slice(0, -1).join('/') : '');
-    }
-
     var VideoVm = {
 
         el: '#editor-video',
 
         data: {
-            url: '',
-            view: 'settings'
+            view: 'settings',
+            video: {src: ''},
+            finder: {root: '', select: ''}
         },
 
         ready: function () {
+
+            var vm = this;
+
+            this.$on('select.finder', function(selected) {
+                if (selected.length == 1 && selected[0].match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
+                    vm.finder.select = selected[0];
+                } else {
+                    vm.finder.select = '';
+                }
+            });
 
         },
 
@@ -365,6 +350,9 @@ jQuery(function($) {
 
             update: function () {
 
+                var vid = this.video;
+
+                vid.replace('(video)' + JSON.stringify({src: vid.src}));
             },
 
             preview: function (url) {
@@ -409,11 +397,12 @@ jQuery(function($) {
 
             openFinder: function () {
                 this.view = 'finder';
+                this.finder.select = '';
             },
 
-            closeFinder: function () {
-                this.url  = this.$.finder.selected[0];
+            closeFinder: function (select) {
                 this.view = 'settings';
+                if (select) this.video.src = select;
             }
 
         }
@@ -424,9 +413,11 @@ jQuery(function($) {
 
         init: function(editor) {
 
-            var options = editor.element.data('finder-options'), rootpath = options.root.replace(/^\/+|\/+$/g, '')+'/', videos = [];
+            var self = this;
 
-            // videos
+            this.editor = editor;
+            this.videos = [];
+
             editor.addButton('video', {
                 title: 'Video',
                 label: '<i class="uk-icon-video-camera"></i>'
@@ -434,61 +425,81 @@ jQuery(function($) {
 
             editor.element.on('action.video', function(e, editor) {
 
-                var modal = $(templates['video.modal']).appendTo('body'), vm = new Vue(VideoVm);
+                var cursor = editor.getCursor(), video;
 
-                modal.on('hide.uk.modal', function() {
-                    console.log(vm);
-                    $(this).remove();
-                });
+                self.videos.every(function(vid) {
 
-                UIkit.modal(modal).show();
-
-                return;
-
-                var cursor = editor.getCursor(), data;
-                videos.every(function(video) {
-                    if (video.inRange(cursor)) {
-                        data = video;
+                    if (vid.inRange(cursor)) {
+                        video = vid;
                         return false;
                     }
+
                     return true;
                 });
 
-                if (!data) {
-                    data = { src: '', replace: function(value) { editor.replaceRange(value, cursor); } };
-                }
-
-                openVideoModal(data, rootpath);
+                self.openModal(video);
             });
 
             editor.options.toolbar.push('video');
 
-            // editor.element.on('render', function() {
+            editor.element.on('render', function() {
+                self.videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, self.replaceInPreview);
+            });
 
-            //     videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, function(data) {
+            editor.preview.on('click', '.js-editor-video .js-config', function() {
+                var index = editor.preview.find('.js-editor-video .js-config').index(this);
+                self.openModal(self.videos[index]);
+            });
 
-            //         try {
-
-            //             var settings = $.parseJSON(data.matches[1]);
-
-            //         } catch (e) {}
-
-            //         $.extend(data, (settings || { src: '' }));
-
-            //         return Handlebars.compile(templates['video.replace'])({ preview: getVideoPreview(data.src), src: data.src }).replace(/(\r\n|\n|\r)/gm, '');
-            //     });
-            // });
-
-            // editor.preview.on('click', '.js-editor-video .js-config', function() {
-            //     openVideoModal(videos[editor.preview.find('.js-editor-video .js-config').index(this)], rootpath);
-            // });
-
-            // editor.preview.on('click', '.js-editor-video .js-remove', function() {
-            //     videos[editor.preview.find('.js-editor-video .js-remove').index(this)].replace('');
-            // });
+            editor.preview.on('click', '.js-editor-video .js-remove', function() {
+                var index = editor.preview.find('.js-editor-video .js-remove').index(this);
+                self.videos[index].replace('');
+            });
 
             return editor;
+        },
+
+        openModal: function(video) {
+
+            var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, VideoVm), modal;
+            var options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+
+            if (!video) {
+                video = {
+                    src: '',
+                    replace: function (value) {
+                        editor.editor.replaceRange(value, cursor);
+                    }
+                };
+            }
+
+            modal = $(templates['video.modal']).appendTo('body');
+            modal.on('hide.uk.modal', function() {
+                $(this).remove();
+            });
+
+            UIkit.modal(modal).show();
+
+            $.extend(vm.data.video, video);
+            vm.data.finder.root = root;
+            vm = new Vue(vm);
+        },
+
+        replaceInPreview: function(data) {
+
+            var settings;
+
+            try {
+
+                settings = JSON.parse(data.matches[1]);
+
+            } catch (e) {}
+
+            $.extend(data, settings || { src: '' });
+
+            return templates['video.replace'].template({src: data.src, preview: VideoVm.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
         }
+
     });
 
 })(jQuery);
