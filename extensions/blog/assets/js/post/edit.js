@@ -1,4 +1,4 @@
-require(['jquery', 'system', 'uikit!form-select,datepicker,autocomplete,timepicker', 'domReady!'], function($, system, uikit) {
+jQuery(function($) {
 
     var form = $('#js-post'), id = $('input[name="id"]', form), cancel = $('.js-cancel', form), spinner = $('.js-spinner', form), dirty = false;
 
@@ -16,7 +16,7 @@ require(['jquery', 'system', 'uikit!form-select,datepicker,autocomplete,timepick
         $.post(form.attr('action'), form.serialize(), function(response) {
 
             dirty = false;
-            uikit.notify(response.message, response.error ? 'danger' : 'success');
+            UIkit.notify(response.message, response.error ? 'danger' : 'success');
 
             if (response.id) {
                 id.val(response.id);
@@ -35,7 +35,7 @@ require(['jquery', 'system', 'uikit!form-select,datepicker,autocomplete,timepick
         });
 
         return function(e) {
-            if (dirty) return system.trans('You\'ve made some changes! Leaving the post without saving will discard all changes.');
+            if (dirty) return System.trans('You\'ve made some changes! Leaving the post without saving will discard all changes.');
         };
 
     })();

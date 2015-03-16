@@ -9,17 +9,17 @@
         <tbody>
 
             <tr v-repeat="folders | searched" class="uk-visible-hover" v-on="click: toggleSelect">
-                <td><input type="checkbox" name="name" value="{{ name }}" v-on="click: stopPropagation"></td>
+                <td><input type="checkbox" name="name" value="{{ name }}"></td>
                 <td class="pk-table-width-minimum">
                     <i class="uk-icon-folder-o pk-finder-icon-folder"></i>
                 </td>
-                <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: loadPath(path, $event)">{{ name }}</a></td>
+                <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: loadPath(path)">{{ name }}</a></td>
                 <td></td>
                 <td></td>
             </tr>
 
             <tr v-repeat="files | searched" class="uk-visible-hover" v-on="click: toggleSelect">
-                <td><input type="checkbox" name="name" value="{{ name }}" v-on="click: stopPropagation"></td>
+                <td><input type="checkbox" name="name" value="{{ name }}"></td>
                 <td class="pk-table-width-minimum">
                     <i v-if="isImage(url)" class="pk-thumbnail-icon pk-finder-icon-file" style="background-image: url('{{ encodeURI(url) }}');"></i>
                     <i v-if="!isImage(url)" class="uk-icon-file-o pk-finder-icon-file"></i>

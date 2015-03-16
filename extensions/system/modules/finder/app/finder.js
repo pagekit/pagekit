@@ -27,7 +27,7 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.$watch('path', function() { this.loadPath(); });
+            this.$watch('path', this.loadPath);
 
             this.loadPath();
             this._initUpload();
@@ -86,13 +86,9 @@
                 return url.match(/\.(?:gif|jpe?g|png|svg)/i);
             },
 
-            loadPath: function (path, e) {
+            loadPath: function (path) {
 
                 var self = this;
-
-                if (e) {
-                    e.stopPropagation();
-                }
 
                 this.$set('selected', []);
 
@@ -167,6 +163,11 @@
             toggleSelect: function(name) {
 
                 if (name.targetVM) {
+
+                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A') {
+                        return;
+                    }
+
                     name = name.targetVM.$data.name;
                 }
 
