@@ -1,57 +1,63 @@
 jQuery(function ($) {
 
-    var User, vm = new Vue({
+    var vm = new Vue({
 
         el: '#js-user',
 
         data: {
-            config     : user.config,
-            users      : user.data.users.users,
-            pages      : user.data.users.pages,
-            selected   : []
+            config  : user.config,
+            data    : user.data,
+            users   : [],
+            pages   : 0,
+            selected: []
         },
 
         created: function () {
 
-            var self = this;
-
-            User = this.$resource('api/system/user/:id');
+            this.resource = this.$resource('api/system/user/:id');
 
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
 
-            this.statuses = [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }];
-            $.each(user.data.statuses, function (id, status) {
-                self.statuses.push({ text: status, value: id });
-            });
+            this.$watch('config.page', this.load, true);
+            this.$watch('config.filter', function() { this.load(0) }, true);
 
-            this.roles = [{ text: this.$trans('- Role -'), value: '' }];
-            $.each(user.data.roles, function (id, role) {
-                self.roles.push({ text: role.name, value: id });
-            });
+            this.load();
+        },
 
-            this.permissions = [{ text: this.$trans('- Permission -'), value: '' }];
-            $.each(user.data.permissions, function (group, permissions) {
-                var options = [];
-                $.each(permissions, function (id, permission) {
-                    options.push({ text: permission.title, value: id });
-                });
-                self.permissions.push({ label: group, options: options });
-            });
+        computed: {
 
-            this.$watch('config.page', function (page) {
-                vm.updateUsers(page);
-            }, true);
+            statuses: function() {
+                return [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }].concat(
+                    Vue.filter('toArray')($.map(this.data.statuses, function(status, id) { return { text: status, value: id }; }))
+                );
+            },
 
-            this.$watch('config.filter', function () {
-                vm.updateUsers(0);
-            }, true);
+            roles: function() {
+                return [{ text: this.$trans('- Role -'), value: '' }].concat(
+                    this.data.roles.map(function(role) { return { text: role.name, value: role.id }; })
+                );
+            },
+
+            permissions: function() {
+                return [{ text: this.$trans('- Permission -'), value: '' }].concat(
+                    Vue.filter('toArray')($.map(this.data.permissions, function (permissions, group) {
+                        return {
+                            label: group,
+                            options: Vue.filter('toArray')($.map(permissions, function (permission, id) {
+                                return { text: permission.title, value: id };
+                            }))
+                        };
+                    }))
+                );
+            }
+
         },
 
         methods: {
 
             save: function (user) {
-                User.save({ id: user.id }, { id: user.id, user: user }, function (data) {
-                    vm.updateUsers(vm.config.page);
+                this.resource.save({ id: user.id }, { id: user.id, user: user }, function (data) {
+                    vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });
             },
@@ -64,15 +70,15 @@ jQuery(function ($) {
                     user.status = status;
                 });
 
-                User.save({ id: 'bulk' }, { users: users }, function (data) {
-                    vm.updateUsers(vm.config.page);
+                this.resource.save({ id: 'bulk' }, { users: users }, function (data) {
+                    vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });
             },
 
             remove: function() {
-                User.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                    vm.updateUsers(vm.config.page);
+                this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                    vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });
             },
@@ -98,19 +104,15 @@ jQuery(function ($) {
                     .join(', ');
             },
 
-            updateUsers: function (page) {
-                User.query({ filter: this.config.filter, page: page }, function (data) {
+            load: function (page) {
 
-                    if (data.users) {
-                        vm.$set('users', data.users);
-                    }
+                page = page !== undefined ? page : this.config.page;
 
-                    if (data.pages) {
-                        vm.pages = data.pages;
-                    }
-
-                    vm.config.page = page;
-                    vm.selected = [];
+                this.resource.query({ filter: this.config.filter, page: page }, function (data) {
+                    vm.$set('users', data.users);
+                    vm.$set('pages', data.pages);
+                    vm.$set('config.page', page);
+                    vm.$set('selected', []);
                 });
             },
 

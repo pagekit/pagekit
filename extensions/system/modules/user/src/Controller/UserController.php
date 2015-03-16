@@ -23,18 +23,17 @@ class UserController
         App::view()->meta(['title' => __('Users')]);
         App::view()->script('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']);
         App::view()->data('user', [
-                'config' => [
-                    'emailVerification' => App::option('system:user.require_verification'),
-                    'filter'            => $filter,
-                    'page'              => $page
-                ],
-                'data'   => [
-                    'users'       => json_decode(App::router()->call('@api/system/user', compact('filter', 'page'))->getContent()),
-                    'statuses'    => User::getStatuses(),
-                    'permissions' => App::permissions(),
-                    'roles'       => $roles
-                ]
-            ]);
+            'config' => [
+                'emailVerification' => App::option('system:user.require_verification'),
+                'filter'            => $filter,
+                'page'              => $page
+            ],
+            'data'   => [
+                'statuses'    => User::getStatuses(),
+                'permissions' => App::permissions(),
+                'roles'       => array_values($roles)
+            ]
+        ]);
     }
 
     /**

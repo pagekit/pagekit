@@ -59,8 +59,9 @@ class UserController
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
+        $users = array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy('name')->get());
 
-        return ['users' => array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy('name')->get()), 'pages' => $pages];
+        return compact('users', 'pages');
     }
 
     /**
