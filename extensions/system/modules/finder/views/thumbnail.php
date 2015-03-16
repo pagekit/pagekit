@@ -7,7 +7,7 @@
             </div>
             <div class="uk-text-truncate">
                 <input type="checkbox" value="{{ name }}" v-checkbox="selected">
-                <a v-on="click: loadPath(path, $event)">{{ name }}</a>
+                <a v-on="click: setPath(path, $event)">{{ name }}</a>
             </div>
         </div>
     </li>

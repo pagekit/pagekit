@@ -13,7 +13,6 @@
 
         replace : true,
         template: '#finder.main',
-        resource: null,
 
         data: function() {
             return Vue.util.extend({}, defaults);
@@ -21,22 +20,26 @@
 
         ready: function () {
 
-            var self = this;
-
             System.template('finder.thumbnail');
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.$watch('path', this.loadPath);
+            this.load().done(function() {
+                this.$dispatch('ready.finder', this);
+            }.bind(this));
 
-            this.loadPath();
-            this._initUpload();
+        },
 
-            this.$watch('selected', function(selected, old) {
-                if (selected != old) self.$dispatch('select.finder', self.getSelected(), self)
-            });
+        watch: {
 
-            this.$dispatch('ready.finder', this);
+            path: function() {
+                this.load();
+            },
+
+            selected: function() {
+                this.$dispatch('select.finder', this.getSelected(), this)
+            }
+
         },
 
         filters: {
@@ -74,33 +77,16 @@
 
         methods: {
 
-            encodeURI: function (url) {
-                return encodeURI(url).replace(/'/g, '%27');
+            /**
+             * API
+             */
+
+            setPath: function (path) {
+                this.$set('path', path);
             },
 
-            isWritable: function () {
-                return this.mode === 'w' || this.mode === 'write';
-            },
-
-            isImage: function (url) {
-                return url.match(/\.(?:gif|jpe?g|png|svg)/i);
-            },
-
-            loadPath: function (path) {
-
-                var self = this;
-
-                this.$set('selected', []);
-
-                this.path = path || this.path;
-
-                return this.resource.get({ path: this.path, root: this.root }, function (data) {
-
-                    self.$set('folders', data.folders || []);
-                    self.$set('files', data.files || []);
-
-                    self.$dispatch('path.finder', self.getFullPath(), self)
-                });
+            getPath: function () {
+                return this.path;
             },
 
             getFullPath: function() {
@@ -114,19 +100,15 @@
                 });
             },
 
-            command: function (cmd, params) {
+            toggleSelect: function(name) {
 
-                var self = this;
+                if (name.targetVM) {
+                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A')  return;
+                    name = name.targetVM.$data.name;
+                }
 
-                return this.resource.save({ cmd: cmd }, $.extend({ path: this.path, root: this.root }, params), function (data) {
-
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
-
-                    self.loadPath();
-
-                }).fail(function (jqXHR) {
-                    UIkit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
-                });
+                var index  = this.selected.indexOf(name);
+                -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
             },
 
             createFolder: function () {
@@ -138,83 +120,124 @@
             },
 
             rename: function (oldname) {
+
+                if (oldname.target) {
+                    oldname = this.selected[0];
+                }
+
+                if (!oldname) return;
+
                 var newname = prompt(this.$trans('New Name'), oldname);
 
-                if (!newname || !oldname) return;
+                if (!newname) return;
 
                 this.command('rename', { oldname: oldname, newname: newname });
             },
 
-            renameSelected: function () {
-                var name = this.selected[0];
-                if (name) this.rename(name);
-            },
-
             remove: function (names) {
+
+                if (names.target) {
+                    names = this.selected;
+                }
+
                 if (!names || !confirm(this.$trans('Are you sure?'))) return;
 
                 this.command('removefiles', { names: names });
             },
 
-            removeSelected: function () {
-                this.remove(this.selected);
+            /**
+             * Helper functions
+             */
+
+            encodeURI: function (url) {
+                return encodeURI(url).replace(/'/g, '%27');
             },
 
-            toggleSelect: function(name) {
-
-                if (name.targetVM) {
-
-                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A') {
-                        return;
-                    }
-
-                    name = name.targetVM.$data.name;
-                }
-
-                var index  = this.selected.indexOf(name);
-                -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
+            isWritable: function () {
+                return this.mode === 'w' || this.mode === 'write';
             },
 
-            stopPropagation: function(e) {
-                e.stopPropagation();
+            isImage: function (url) {
+                return url.match(/\.(?:gif|jpe?g|png|svg)/i);
             },
 
-            _initUpload: function () {
-                var self = this,
+            command: function (cmd, params) {
+
+                var self = this;
+
+                return this.resource.save({ cmd: cmd }, $.extend({ path: this.path, root: this.root }, params), function (data) {
+
+                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
+
+                    self.load();
+
+                }).fail(function (jqXHR) {
+                    UIkit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
+                });
+            },
+
+            load: function () {
+
+                var self = this;
+
+                this.$set('selected', []);
+
+                return this.resource.get({ path: this.path, root: this.root }, function (data) {
+
+                    self.$set('folders', data.folders || []);
+                    self.$set('files', data.files || []);
+
+                    self.$dispatch('path.finder', self.getFullPath(), self)
+                });
+            }
+
+        },
+
+        events: {
+
+            /**
+             * Init upload
+             */
+
+            'hook:ready': function() {
+
+                var finder = this,
                     settings = {
 
                         action: this.$url('system/finder/upload'),
 
                         before: function (options) {
-                            $.extend(options.params, { path: self.path, root: self.root });
+                            $.extend(options.params, { path: finder.path, root: finder.root });
                         },
 
                         loadstart: function () {
-                            self.$set('upload.running', true);
-                            self.$set('upload.progress', 0);
+                            finder.$set('upload.running', true);
+                            finder.$set('upload.progress', 0);
                         },
 
                         progress: function (percent) {
-                            self.$set('upload.progress', Math.ceil(percent));
+                            finder.$set('upload.progress', Math.ceil(percent));
                         },
 
                         allcomplete: function (response) {
 
                             var data = $.parseJSON(response);
 
-                            self.loadPath();
+                            finder.load();
 
                             UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                            self.$set('upload.progress', 100);
+                            finder.$set('upload.progress', 100);
                             setTimeout(function () {
-                                self.$set('upload.running', false);
+                                finder.$set('upload.running', false);
                             }, 1500);
                         }
 
                     };
 
-                UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'));
+                console.log(this.$el.querySelector('.uk-form-file > input'));
+
+                UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'), settings);
                 UIkit.uploadDrop(this.$el, settings);
             }
 
