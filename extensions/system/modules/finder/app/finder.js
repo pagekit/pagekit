@@ -24,11 +24,9 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.$once('select.finder', function() {
+            this.load().done(function() {
                 this.$dispatch('ready.finder', this);
-            });
-
-            this.load();
+            }.bind(this));
         },
 
         watch: {
@@ -178,7 +176,7 @@
             },
 
             load: function () {
-                this.resource.get({ path: this.path, root: this.root }, function (data) {
+                return this.resource.get({ path: this.path, root: this.root }, function (data) {
 
                     this.$set('selected', []);
                     this.$set('folders', data.folders || []);
@@ -250,7 +248,7 @@
             data    : $.extend(true, {}, defaults, options),
             template: '<div v-component="v-finder" v-with="$data"></div>',
             created: function() {
-                this.$on('ready.finder', function(finder) {
+                this.$once('ready.finder', function(finder) {
                     deferred.resolve(finder);
                 });
             }
