@@ -6,7 +6,7 @@
                 <div class="pk-thumbnail pk-thumbnail-folder"></div>
             </div>
             <div class="uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected" v-on="click: stopPropagation">
+                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
                 <a v-on="click: loadPath(path, $event)">{{ name }}</a>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <div v-if="!isImage(url)" class="pk-thumbnail pk-thumbnail-file"></div>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected" v-on="click: stopPropagation">
+                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
                 {{ name }}
             </div>
         </div>
