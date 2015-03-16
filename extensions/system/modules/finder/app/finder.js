@@ -235,8 +235,6 @@
 
                     };
 
-                console.log(this.$el.querySelector('.uk-form-file > input'));
-
                 UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'), settings);
                 UIkit.uploadDrop(this.$el, settings);
             }
