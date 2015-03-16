@@ -9,7 +9,7 @@
         upload  : {}
     };
 
-    Vue.component('v-finder', {
+    var definition = {
 
         replace : true,
         template: '#finder.main',
@@ -237,24 +237,12 @@
 
         }
 
-    });
+    };
+
+    Vue.component('v-finder', Vue.util.extend({}, definition));
 
     var Finder = function(element, options) {
-
-        var deferred = $.Deferred();
-
-        new Vue({
-            el      : element,
-            data    : $.extend(true, {}, defaults, options),
-            template: '<div v-component="v-finder" v-with="$data"></div>',
-            created: function() {
-                this.$once('ready.finder', function(finder) {
-                    deferred.resolve(finder);
-                });
-            }
-        });
-
-        return deferred;
+        return new Vue($.extend(true, {}, definition, { el: element, data: $.extend(true, {}, defaults, options)} ));
     };
 
     $(function () {

@@ -19,29 +19,37 @@
             return Vue.filter('toOptions')(collection);
         };
 
-        var component = Vue.directive('component'), bind = component.bind;
-        component.bind = function() {
-
-            var directive = this,
-                options   = this.vm.$options.components[this.expression].options;
-
+        var getTemplate = function(options, fn, args) {
             if (!options.template) {
-                return bind.call(this);
+                return fn.call(this, args);
             }
 
-            var template  = options.template,
+            var self      = this,
+                template  = options.template,
                 frag      = Vue.parsers.template.parse(template);
 
             if (frag) {
                 options.template = frag;
-                return bind.call(this);
+                return fn.call(this, args);
             }
 
             System.template(template.slice(1)).done(function(tmpl) {
                 options.template = tmpl;
             }).always(function() {
-                bind.call(directive);
+                fn.call(self, args);
             });
+
+            return this;
+        };
+
+        var $mount = Vue.prototype.$mount;
+        Vue.prototype.$mount = function(el) {
+            return getTemplate.call(this, this.$options, $mount, el);
+        };
+
+        var component = Vue.directive('component'), bind = component.bind;
+        component.bind = function() {
+            return getTemplate.call(this, this.vm.$options.components[this.expression].options, bind);
         };
 
         var partial = Vue.directive('partial'), insert = partial.insert;
