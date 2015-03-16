@@ -1,6 +1,6 @@
 <?php $view->style('system', 'extensions/system/assets/css/system.css') ?>
 
-<div class="uk-grid pk-grid-small uk-grid-preserve" data-uk-grid-margin>
+<div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
 
     <?php foreach ($columns as $column): ?>
     <div class="uk-width-medium-1-3">
