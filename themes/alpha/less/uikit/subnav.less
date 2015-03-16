@@ -7,9 +7,9 @@
 // Variables
 // ========================================================================
 
-@subnav-color:                                  @global-link-color;
-@subnav-hover-color:                            @global-link-hover-color;
-@subnav-disabled-color:                         @global-muted-color;
+@subnav-color:                                  @global-color;
+@subnav-hover-color:                            @global-link-color;
+@subnav-active-color:                           @global-link-color;
 
 @subnav-line-border:                            @global-border;
 
@@ -17,6 +17,8 @@
 @subnav-pill-hover-color:                       @global-color;
 @subnav-pill-active-background:                 @global-primary-background;
 @subnav-pill-active-color:                      @global-contrast-color;
+
+@subnav-disabled-color:                         @global-muted-color;
 
 //
 // New
@@ -28,34 +30,23 @@
 // Component
 // ========================================================================
 
-//
-// Items
-//
-
-.hook-subnav-item() {
-	font-size: @subnav-font-size;
-	text-transform: uppercase;
+.hook-subnav() {
+    font-size: @subnav-font-size;
+    text-transform: uppercase;
 }
 
-// Link
-.hook-subnav-link() {}
+.hook-subnav-hover() {}
 
-.hook-subnav-link-hover() {}
-
-// Active
 .hook-subnav-active() {}
 
-// Disabled
-.hook-subnav-disabled() {}
 
-
-// Modifier: `uk-subnav-line'
+// Modifier: `uk-subnav-line`
 // ========================================================================
 
 .hook-subnav-line-divider() {}
 
 
-// Modifier: `uk-subnav-pill'
+// Modifier: `uk-subnav-pill`
 // ========================================================================
 
 .hook-subnav-pill() { border-radius: @global-border-radius; }
@@ -65,6 +56,12 @@
 
 // Active
 .hook-subnav-pill-active() { box-shadow: none; }
+
+
+// Disabled state
+// ========================================================================
+
+.hook-subnav-disabled() { box-shadow: none; }
 
 
 // Miscellaneous

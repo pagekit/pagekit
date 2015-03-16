@@ -17,6 +17,7 @@
 @panel-box-background:                          @global-background;
 @panel-box-color:                               @global-color;
 @panel-box-title-color:                         #333335;
+@panel-box-teaser-margin:                       -(@panel-box-padding + 1);
 
 @panel-box-primary-background:                  @global-default-hover-background;
 @panel-box-primary-color:                       @global-color;
@@ -25,6 +26,12 @@
 @panel-box-secondary-background:                #333335;
 @panel-box-secondary-color:                		@global-contrast-color;
 @panel-box-secondary-title-color:               @global-contrast-color;
+
+@panel-hover-padding:                           @global-margin;
+@panel-hover-color:                             @global-color;
+@panel-hover-hover-color:                       @global-color;
+@panel-hover-hover-background:                  @global-background;
+@panel-hover-teaser-margin:                     -(@panel-hover-padding + 1);
 
 @panel-header-title-border:                     @global-border;
 @panel-header-title-color:                      @global-color;
@@ -38,6 +45,8 @@
 //
 
 @panel-box-border:                              @global-border;
+
+@panel-hover-border:                            @global-border;
 
 
 // Sub-object: `uk-panel-title`
@@ -60,9 +69,26 @@
     border-radius: @global-border-radius;
 }
 
+.hook-panel-box-hover() {}
+
 .hook-panel-box-primary() {}
 
+.hook-panel-box-primary-hover() {}
+
 .hook-panel-box-secondary() {}
+
+.hook-panel-box-secondary-hover() {}
+
+
+// Modifier: `uk-panel-hover`
+// ========================================================================
+
+.hook-panel-hover() {
+    border: 1px solid transparent;
+    border-radius: @global-border-radius;
+}
+
+.hook-panel-hover-hover() { border-color: @panel-hover-border; }
 
 
 // Modifier: `uk-panel-header`
