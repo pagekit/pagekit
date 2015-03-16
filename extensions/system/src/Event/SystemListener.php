@@ -57,18 +57,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Triggers the system.loaded event, after the request was matched.
-     */
-    public function onRequestMatched($event)
-    {
-        if (!$event->isMasterRequest()) {
-            return;
-        }
-
-        App::trigger('system.loaded', $event);
-    }
-
-    /**
      * Add system settings screens.
      */
     public function onSettingsEdit($event, $config)
@@ -100,7 +88,6 @@ class SystemListener implements EventSubscriberInterface
             'system.finder'        => 'onSystemFinder',
             'system.link'          => 'onSystemLink',
             'system.loaded'        => 'onSystemLoaded',
-            'kernel.request'       => 'onRequestMatched',
             'system.settings.edit' => ['onSettingsEdit', 8],
             'system.settings.save' => 'onSettingsSave'
         ];

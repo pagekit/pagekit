@@ -49,6 +49,17 @@ return [
             $app->trigger('system.init', $event);
 
         }, 50);
+
+        $app->on('kernel.request', function($event) use ($app) {
+
+            if (!$event->isMasterRequest()) {
+                return;
+            }
+
+            $app->trigger('system.loaded', $event);
+
+        });
+
     },
 
     'require' => [
