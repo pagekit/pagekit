@@ -9,8 +9,8 @@
 
             <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
 
-            <button class="uk-button pk-button-danger" v-show="selected.length" v-on="click: removeSelected()">{{ 'Delete' | trans }}</button>
-            <button class="uk-button" v-show="selected.length === 1" v-on="click: renameSelected()">{{ 'Rename' | trans }}</button>
+            <button class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</button>
+            <button class="uk-button" v-show="selected.length === 1" v-on="click: rename">{{ 'Rename' | trans }}</button>
 
         </div>
         <div class="uk-float-right uk-hidden-small">
@@ -28,7 +28,7 @@
     <ul class="uk-breadcrumb pk-breadcrumb">
         <li v-repeat="breadcrumbs" v-class="'uk-active': current">
             <span v-show="current">{{ title }}</span>
-            <a v-show="!current" v-on="click: loadPath(path)">{{ title }}</a>
+            <a v-show="!current" v-on="click: setPath(path)">{{ title }}</a>
         </li>
     </ul>
 

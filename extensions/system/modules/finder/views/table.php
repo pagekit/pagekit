@@ -13,7 +13,7 @@
                 <td class="pk-table-width-minimum">
                     <i class="uk-icon-folder-o pk-finder-icon-folder"></i>
                 </td>
-                <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: loadPath(path)">{{ name }}</a></td>
+                <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: setPath(path)">{{ name }}</a></td>
                 <td></td>
                 <td></td>
             </tr>
