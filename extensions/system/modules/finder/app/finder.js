@@ -24,10 +24,11 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.load().done(function() {
+            this.$once('select.finder', function() {
                 this.$dispatch('ready.finder', this);
-            }.bind(this));
+            });
 
+            this.load();
         },
 
         watch: {
@@ -177,18 +178,15 @@
             },
 
             load: function () {
+                this.resource.get({ path: this.path, root: this.root }, function (data) {
 
-                var self = this;
+                    this.$set('selected', []);
+                    this.$set('folders', data.folders || []);
+                    this.$set('files', data.files || []);
 
-                this.$set('selected', []);
+                    this.$dispatch('path.finder', this.getFullPath(), this);
 
-                return this.resource.get({ path: this.path, root: this.root }, function (data) {
-
-                    self.$set('folders', data.folders || []);
-                    self.$set('files', data.files || []);
-
-                    self.$dispatch('path.finder', self.getFullPath(), self)
-                });
+                }.bind(this));
             }
 
         },
