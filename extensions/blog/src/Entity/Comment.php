@@ -8,7 +8,7 @@ use Pagekit\Database\ORM\ModelTrait;
 /**
  * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")
  */
-class Comment extends BaseComment
+class Comment extends BaseComment implements \JsonSerializable
 {
     use ModelTrait;
 
@@ -118,5 +118,13 @@ class Comment extends BaseComment
             self::STATUS_PENDING  => __('Pending'),
             self::STATUS_SPAM     => __('Spam')
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return get_object_vars($this);
     }
 }

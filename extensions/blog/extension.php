@@ -26,6 +26,11 @@ return [
         '@blog: /blog' => [
             'Pagekit\\Blog\\Controller\\CommentController',
             'Pagekit\\Blog\\Controller\\PostController'
+        ],
+
+        '@api/blog: /api/blog' => [
+            'Pagekit\\Blog\\Controller\\Api\\PostController',
+            'Pagekit\\Blog\\Controller\\Api\\CommentController'
         ]
     ],
 

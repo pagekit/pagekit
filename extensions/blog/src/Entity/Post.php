@@ -2,6 +2,7 @@
 
 namespace Pagekit\Blog\Entity;
 
+use Pagekit\Application as App;
 use Pagekit\Comment\CommentsTrait;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
@@ -10,7 +11,7 @@ use Pagekit\User\Entity\AccessTrait;
 /**
  * @Entity(tableClass="@blog_post", eventPrefix="blog.post")
  */
-class Post
+class Post implements \JsonSerializable
 {
     use AccessTrait, CommentsTrait, DataTrait, ModelTrait;
 
@@ -42,10 +43,10 @@ class Post
     protected $date;
 
     /** @Column(type="text") */
-    protected $content;
+    protected $content = '';
 
     /** @Column(type="text") */
-    protected $excerpt;
+    protected $excerpt = '';
 
     /** @Column(type="smallint") */
     protected $status;
@@ -193,6 +194,7 @@ class Post
     public function setUser($user)
     {
         $this->user = $user;
+        $this->user_id = $user->getId();
     }
 
     public function isCommentable()
@@ -203,6 +205,44 @@ class Post
     public function setCommentable($commentable)
     {
         $this->commentable = $commentable;
+    }
+
+    public function isPublished()
+    {
+        return $this->status === self::STATUS_PUBLISHED && $this->date < new \DateTime;
+    }
+
+    public function isAccessible()
+    {
+        return $this->isPublished() && $this->hasAccess(App::user());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        $post = get_object_vars($this);
+
+        foreach (['date', 'modified'] as $date) {
+            $post[$date] = $post[$date] ? $post[$date]->format(\DateTime::ISO8601) : null;
+        }
+
+        if ($post['user']) {
+            $post['author'] = $post['user']->getUsername();
+            unset($post['user']);
+        }
+
+        if ($post['comments']) {
+            $post['comments_pending'] = count(array_filter($post['comments'], function($comment) { return $comment->getStatus() == Comment::STATUS_PENDING; }));
+            unset($post['comments']);
+        }
+
+        $post['isPublished']  = $this->isPublished();
+        $post['isAccessible'] = $this->isAccessible();
+        $post['url']          = App::url('@blog/id', ['id' => $this->id]);
+
+        return $post;
     }
 
     /**

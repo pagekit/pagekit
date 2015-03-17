@@ -80,7 +80,7 @@
             <div v-show="" class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p v-repeat="role: roles" track-by="id" class="uk-form-controls-condensed">
+                    <p v-repeat="role: roles" class="uk-form-controls-condensed">
                         <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
                     </p>
                 </div>
