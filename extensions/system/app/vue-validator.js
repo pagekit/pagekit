@@ -121,6 +121,8 @@
 
                 this.listener = function (e) {
 
+                    if (!self.el) return;
+
                     if (e.type == 'blur') {
                         self.touched = true;
                     }
