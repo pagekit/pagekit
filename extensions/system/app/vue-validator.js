@@ -14,10 +14,6 @@
 
                 var self = this, el = dir.el, form = dir.form;
 
-                if (!this.vm) {
-                    this.vm = dir.vm;
-                }
-
                 if (!this.validators[form]) {
                     this.validators[form] = [];
                     _.on(el.form, 'submit', function (e) {
@@ -32,7 +28,7 @@
                     _.on(el, 'input', dir.listener);
                 }
 
-                this.vm.$set(form + '.' + dir.name, {});
+                dir.vm.$set(form + '.' + dir.name, {});
                 this.validators[form].push(dir);
             },
 
@@ -40,14 +36,22 @@
 
                 var form = dir.form, validators = this.validators[form];
 
-                this.validators[form] = validators.splice(validators.indexOf(dir), 1);
+                validators.splice(validators.indexOf(dir), 1);
+
+                if (!validators.length) {
+                    delete this.validators[form];
+                }
             },
 
             validate: function (form, submit) {
 
-                var results = {}, focus, keys;
+                var results = {}, focus, keys, vm;
+
+                if (!this.validators[form]) return results;
 
                 this.validators[form].forEach(function (dir) {
+
+                    vm = dir.vm;
 
                     var name = dir.name, valid = dir.validate();
 
@@ -90,7 +94,7 @@
                     results.invalid = false;
                 }
 
-                this.vm.$set(form, results);
+                if (vm) vm.$set(form, results);
 
                 return results.valid;
             }

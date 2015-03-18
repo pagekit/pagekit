@@ -101,16 +101,18 @@
         <img v-gravatar="comment.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}">
     </td>
     <td colspan="3">
-        <div class="uk-form uk-form-stacked">
+        <form name="editform" class="uk-form uk-form-stacked" v-on="valid: submit">
 
             <div class="uk-grid uk-grid-width-small-1-3" data-uk-grid-margin>
                 <div>
                     <label for="form-author" class="uk-form-label">{{ 'Name' | trans }}</label>
-                    <input id="form-author" class="uk-width-1-1" type="text" v-model="comment.author">
+                    <input id="form-author" class="uk-width-1-1" name="author" type="text" v-model="comment.author" v-valid="required">
+                    <p class="uk-form-help-block uk-text-danger" v-show="editform.author.invalid">{{ 'Author cannot be blank.' | trans }}</p>
                 </div>
                 <div>
                     <label for="form-email" class="uk-form-label">{{ 'E-mail' | trans }}</label>
-                    <input id="form-email" class="uk-width-1-1" type="text" v-model="comment.email">
+                    <input id="form-email" class="uk-width-1-1" name="email" type="text" v-model="comment.email" lazy v-valid="email">
+                    <p class="uk-form-help-block uk-text-danger" v-show="editform.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                 </div>
                 <div>
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
@@ -120,16 +122,17 @@
 
             <div class="uk-grid uk-grid-width-1-1">
                 <div>
-                    <textarea class="uk-width-1-1" v-model="comment.content" rows="6"></textarea>
+                    <textarea class="uk-width-1-1" name="content" v-model="comment.content" rows="6" v-valid="required"></textarea>
+                    <p class="uk-form-help-block uk-text-danger" v-show="editform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
             <p>
-                <button class="uk-button uk-button-primary" v-on="click: save(comment)">{{ 'Save' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
                 <button class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</button>
             </p>
 
-        </div>
+        </form>
     </td>
 
 </script>
@@ -141,18 +144,19 @@
         <img v-gravatar="comment.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}">
     </td>
     <td colspan="3">
-        <div class="uk-form">
+        <form name="replyform" class="uk-form" v-on="valid: submit">
 
             <div class="uk-form-row">
-                <textarea class="uk-width-1-1" v-model="comment.content" rows="6"></textarea>
+                <textarea class="uk-width-1-1" name="content" v-model="comment.content" rows="6" v-valid="required"></textarea>
+                <p class="uk-form-help-block uk-text-danger" v-show="replyform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
             </div>
 
             <p>
-                <button class="uk-button uk-button-primary" v-on="click: save(comment)">{{ 'Reply' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
                 <button class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</button>
             </p>
 
-        </div>
+        </form>
     </td>
 
 </script>

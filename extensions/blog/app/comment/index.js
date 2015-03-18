@@ -39,6 +39,14 @@ jQuery(function ($) {
 
         methods: {
 
+            submit: function (e) {
+                e.preventDefault();
+
+                if (this.editing) {
+                    this.save(this.editing);
+                }
+            },
+
             save: function (comment) {
                 this.resource.save({ id: comment.id }, { comment: comment }, function (data) {
                     vm.load();
