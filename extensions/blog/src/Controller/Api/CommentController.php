@@ -37,7 +37,7 @@ class CommentController extends Controller
 
         if ($search) {
             $query->where(function($query) use ($search) {
-                $query->orWhere(['author LIKE :search', 'email LIKE :search', 'url LIKE :search', 'ip LIKE :search', 'content LIKE :search'], ['search' => "%{$search}%"]);
+                $query->orWhere(['author LIKE ?', 'email LIKE ?', 'url LIKE ?', 'ip LIKE ?', 'content LIKE ?'], array_fill(0, 5, "%{$search}%"));
             });
         }
 
