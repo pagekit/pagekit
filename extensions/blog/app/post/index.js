@@ -7,7 +7,7 @@ jQuery(function ($) {
         data: {
             config  : post.config,
             data    : post.data,
-            posts   : [],
+            posts   : null,
             pages   : 0,
             selected: []
         },

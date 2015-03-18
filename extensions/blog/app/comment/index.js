@@ -7,7 +7,7 @@ jQuery(function ($) {
         data: {
             config  : comment.config,
             data    : comment.data,
-            comments: [],
+            comments: null,
             pages   : 0,
             selected: [],
             editing : null

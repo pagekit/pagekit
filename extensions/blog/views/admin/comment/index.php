@@ -27,7 +27,7 @@
 
     <?php $view->section()->end() ?>
 
-    <p v-show="!comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
+    <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
 
     <div v-show="comments.length" class="uk-overflow-container">
         <table class="uk-table">
