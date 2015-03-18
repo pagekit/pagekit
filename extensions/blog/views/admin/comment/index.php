@@ -129,7 +129,7 @@
 
             <p>
                 <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-                <button class="uk-button" v-on="mousedown: $event.preventDefault(), click: cancel()">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button" v-on="mousedown: cancel">{{ 'Cancel' | trans }}</button>
             </p>
 
         </form>
@@ -153,7 +153,7 @@
 
             <p>
                 <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
-                <button class="uk-button" v-on="mousedown: $event.preventDefault(), click: cancel()">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button" v-on="mousedown: cancel">{{ 'Cancel' | trans }}</button>
             </p>
 
         </form>
