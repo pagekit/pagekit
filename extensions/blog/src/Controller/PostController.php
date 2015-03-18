@@ -46,16 +46,16 @@ class PostController extends Controller
                     throw new Exception(__('Invalid post id.'));
                 }
 
-                $params = App::module('blog')->config;
+                $module = App::module('blog');
 
                 $post = new Post;
                 $post->setUser(App::user());
                 $post->setStatus(Post::STATUS_DRAFT);
                 $post->setDate(new \DateTime);
                 $post->setUser(App::user());
-                $post->setCommentStatus((bool) $params['posts.comments_enabled']);
-                $post->set('title', $params['posts.show_title']);
-                $post->set('markdown', $params['posts.markdown_enabled']);
+                $post->setCommentStatus((bool) $module->config('posts.comments_enabled'));
+                $post->set('title', $module->config('posts.show_title'));
+                $post->set('markdown', $module->config('posts.markdown_enabled'));
             }
 
             App::view()->meta(['title' => $id ? __('Edit Post') : __('Add Post')]);
