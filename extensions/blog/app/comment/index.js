@@ -123,14 +123,6 @@ jQuery(function ($) {
                 }
             }
 
-        },
-
-        filters: {
-
-            baseUrl: function (url) {
-                return url.substr(pagekit.url.length);
-            }
-
         }
 
     });

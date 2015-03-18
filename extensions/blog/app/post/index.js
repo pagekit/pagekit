@@ -103,7 +103,7 @@ jQuery(function ($) {
         filters: {
 
             baseUrl: function (url) {
-                return url.substr(pagekit.url.length);
+                return url ? url.substr(pagekit.url.length) : url;
             }
 
         }

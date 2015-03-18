@@ -1,4 +1,4 @@
-<div id="js-comments" class="uk-form">
+<div id="js-comments" class="uk-form" v-cloak>
 
     <?php $view->section()->start('toolbar', 'show') ?>
 
