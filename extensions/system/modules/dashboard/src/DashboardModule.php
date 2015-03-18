@@ -3,9 +3,9 @@
 namespace Pagekit\Dashboard;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Module;
 use Pagekit\Dashboard\Widget\FeedWidget;
 use Pagekit\Dashboard\Widget\WeatherWidget;
+use Pagekit\Module\Module;
 use Pagekit\User\Entity\User;
 
 class DashboardModule extends Module

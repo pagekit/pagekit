@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\Module\Module;
 use Pagekit\Widget\Event\WidgetListener;
 use Pagekit\Widget\TextWidget;
 

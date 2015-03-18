@@ -3,8 +3,8 @@
 namespace Pagekit\Templating;
 
 use Symfony\Component\Templating\PhpEngine as BasePhpEngine;
-use Symfony\Component\Templating\Storage\Storage;
 use Symfony\Component\Templating\Storage\FileStorage;
+use Symfony\Component\Templating\Storage\Storage;
 use Symfony\Component\Templating\Storage\StringStorage;
 
 class PhpEngine extends BasePhpEngine

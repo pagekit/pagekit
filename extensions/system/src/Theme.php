@@ -5,7 +5,6 @@ namespace Pagekit\System;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\View\Section\SectionManager;
-use Pagekit\View\ViewInterface;
 
 class Theme extends Module
 {

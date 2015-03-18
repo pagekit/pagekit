@@ -1,12 +1,12 @@
 <?php
 
-use Pagekit\View\ViewListener;
 use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\TemplateHelper;
 use Pagekit\View\Helper\TokenHelper;
+use Pagekit\View\ViewListener;
 
 return [
 
