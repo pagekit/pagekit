@@ -36,28 +36,44 @@ return [
 
     'config' => [
 
-        'settings.view'                   => 'extensions/blog/views/admin/settings.razr',
-        'comments.autoclose'              => false,
-        'comments.autoclose.days'         => 14,
-        'comments.blacklist'              => '',
-        'comments.comments_per_page'      => 20,
-        'comments.gravatar'               => true,
-        'comments.max_depth'              => 3,
-        'comments.maxlinks'               => 2,
-        'comments.minidle'                => 120,
-        'comments.nested'                 => true,
-        'comments.notifications'          => 'always',
-        'comments.order'                  => 'ASC',
-        'comments.replymail'              => true,
-        'comments.require_name_and_email' => true,
-        'posts.posts_per_page'            => 20,
-        'posts.comments_enabled'          => true,
-        'posts.markdown_enabled'          => true,
-        'posts.show_title'                => true,
-        'permalink'                       => '',
-        'permalink.custom'                => '{slug}',
-        'feed.type'                       => 'rss2',
-        'feed.limit'                      => 20
+        'settings.view' => 'extensions/blog/views/admin/settings.razr',
+
+        'comments'      => [
+
+            'autoclose'              => false,
+            'autoclose.days'         => 14,
+            'blacklist'              => '',
+            'comments_per_page'      => 20,
+            'gravatar'               => true,
+            'max_depth'              => 3,
+            'maxlinks'               => 2,
+            'minidle'                => 120,
+            'nested'                 => true,
+            'notifications'          => 'always',
+            'order'                  => 'ASC',
+            'replymail'              => true,
+            'require_name_and_email' => true,
+
+        ],
+
+        'posts'         => [
+
+            'posts_per_page'   => 20,
+            'comments_enabled' => true,
+            'markdown_enabled' => true,
+            'show_title'       => true
+
+        ],
+
+        'permalink'     => [
+            'type'   => '',
+            'custom' => '{slug}'
+        ],
+
+        'feed'          => [
+            'type'  => 'rss2',
+            'limit' => 20
+        ]
 
     ],
 
