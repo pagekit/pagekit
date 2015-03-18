@@ -23,11 +23,11 @@ class PostController extends Controller
         App::view()->script('post-index', 'extensions/blog/app/post/index.js', ['vue-system']);
         App::view()->data('post', [
             'config' => [
-                'filter'            => $filter,
-                'page'              => $page
+                'filter' => $filter,
+                'page'   => $page
             ],
             'data'   => [
-                'statuses'    => Post::getStatuses()
+                'statuses' => Post::getStatuses()
             ]
         ]);
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
             App::view()->meta(['title' => $id ? __('Edit Post') : __('Add Post')]);
             App::view()->script('post-edit', 'extensions/blog/app/post/edit.js', ['vue-system', 'vue-validator', 'uikit-datepicker', 'uikit-timepicker']);
             App::view()->data('post', [
-                'data'   => [
+                'data' => [
                     'post'     => $post,
                     'statuses' => Post::getStatuses(),
                     'roles'    => array_values(Role::findAll()),
@@ -69,7 +69,7 @@ class PostController extends Controller
                         ->from('@system_user')
                         ->execute('id, username')
                         ->fetchAll()
-                    ]
+                ]
             ]);
 
             return compact('post');

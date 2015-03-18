@@ -3,15 +3,12 @@
 namespace Pagekit\Blog\Entity;
 
 use Pagekit\Comment\Entity\Comment as BaseComment;
-use Pagekit\Database\ORM\ModelTrait;
 
 /**
  * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")
  */
 class Comment extends BaseComment implements \JsonSerializable
 {
-    use ModelTrait;
-
     /** @Column(type="integer") */
     protected $post_id;
 
@@ -125,6 +122,10 @@ class Comment extends BaseComment implements \JsonSerializable
      */
     function jsonSerialize()
     {
-        return get_object_vars($this);
+        $comment = get_object_vars($this);
+
+        $comment['created'] = $comment['created'] ? $comment['created']->format(\DateTime::ISO8601) : null;
+
+        return $comment;
     }
 }

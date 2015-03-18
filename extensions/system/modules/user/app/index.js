@@ -56,7 +56,7 @@ jQuery(function ($) {
         methods: {
 
             save: function (user) {
-                this.resource.save({ id: user.id }, { id: user.id, user: user }, function (data) {
+                this.resource.save({ id: user.id }, { user: user }, function (data) {
                     vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });

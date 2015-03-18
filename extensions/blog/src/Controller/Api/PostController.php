@@ -60,7 +60,12 @@ class PostController extends Controller
     {
         try {
 
-            if (!$post = Post::find($id)) {
+            if (!$id || !$post = Post::find($id)) {
+
+                if ($id) {
+                    throw new Exception('Post not found.');
+                }
+
                 $post = new Post;
             }
 

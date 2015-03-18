@@ -176,7 +176,7 @@
 
                 var el = $(this.el), options = { size: (el.attr('height') || 50) * 2, backup: 'mm', rating: 'g' };
 
-                el.attr('src', gravatar(value, options));
+                el.attr('src', gravatar(value || '', options));
             }
 
         });

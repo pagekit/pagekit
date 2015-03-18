@@ -4,12 +4,15 @@ namespace Pagekit\Comment\Entity;
 
 use Pagekit\Comment\Model\Comment as BaseComment;
 use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Database\ORM\ModelTrait;
 
 /**
  * @MappedSuperclass
  */
 abstract class Comment extends BaseComment
 {
+    use ModelTrait;
+
     /** @Column(type="integer") @Id */
     protected $id;
 

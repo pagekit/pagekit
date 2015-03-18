@@ -37,7 +37,7 @@ jQuery(function ($) {
         methods: {
 
             save: function (post) {
-                this.resource.save({ id: post.id }, { id: post.id, post: post }, function (data) {
+                this.resource.save({ id: post.id }, { post: post }, function (data) {
                     vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
                 });

@@ -1,0 +1,158 @@
+<div id="js-comments" class="uk-form">
+
+    <?php $view->section()->start('toolbar', 'show') ?>
+
+        <div class="uk-float-left">
+
+            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
+
+            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a v-on="click: status(1)">{{ 'Approve' | trans }}</a></li>
+                        <li><a v-on="click: status(0)">{{ 'Unapprove' | trans }}</a></li>
+                        <li><a v-on="click: status(2)">{{ 'Mark as spam' | trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="uk-float-right uk-hidden-small">
+
+            <select v-model="config.filter.status" options="statusesFilter"></select>
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
+
+        </div>
+
+    <?php $view->section()->end() ?>
+
+    <p v-show="!comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
+
+    <div v-show="comments.length" class="uk-overflow-container">
+        <table class="uk-table">
+            <thead>
+                <tr>
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
+                    <th class="pk-table-min-width-300" colspan="2">{{ 'Comment' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
+                    <th class="pk-table-width-200">
+                        <span v-if="!config.post">{{ 'In response to' | trans }}</span>
+                        <span v-if="config.post">{{ 'In response to %post%' | trans { post: post.title } }}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-repeat="comment: comments" v-show="!editing || editing.id !== comment.id || editing === comment" v-partial="#comment.{{ !comment.id ? 'reply' : ( editing === comment ? 'edit' : 'default') }}"></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
+
+</div>
+
+<script id="comment.default" type="text/tmpl">
+
+    <td>
+        <input class="pk-blog-comments-margin" type="checkbox" name="id" value="{{ comment.id }}">
+    </td>
+    <td class="pk-table-width-minimum">
+        <img v-gravatar="comment.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}">
+    </td>
+    <td>
+        <div class="uk-margin uk-clearfix">
+            <div class="uk-float-left uk-width-large-1-2">
+                {{ comment.author }}
+                <br>
+                <a class="uk-link-reset uk-text-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
+            </div>
+            <div class="uk-float-left uk-width-large-1-2 pk-text-right-large">
+                <a v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | date long }}</a>
+                <span v-if="!comment.post.isAccessible"></span>
+            </div>
+        </div>
+        <div>{{ comment.content }}</div>
+        <ul class="uk-subnav uk-subnav-line">
+            <li><a v-on="click: edit(comment)">{{ 'Edit' | trans }}</a></li>
+            <li><a v-on="click: reply(comment)">{{ 'Reply' | trans }}</a></li>
+        </ul>
+    </td>
+    <td class="uk-text-center">
+        <a v-on="click: toggleStatus(comment)" title="{{ getStatusText(comment) }}">
+            <i class="uk-icon-circle" v-class="
+                uk-text-success: comment.status == 1,
+                uk-text-warning: comment.status == 0,
+                uk-text-danger:  comment.status == 2
+            "></i>
+        </a>
+    </td>
+    <td>
+        <a v-attr="href: $url('admin/blog/post/edit', { id: comment.post.id })">{{ comment.post.title }}</a>
+        <a class="uk-badge uk-badge-notification" v-class="pk-badge: comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice comment.post.comments_pending { comments: comment.post.comments_pending } }}">{{ comment.post.comment_count }}</a>
+    </td>
+
+</script>
+
+<script id="comment.edit" type="text/tmpl">
+
+    <td></td>
+    <td class="pk-table-width-minimum">
+        <img v-gravatar="comment.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}">
+    </td>
+    <td colspan="3">
+        <div class="uk-form uk-form-stacked">
+
+            <div class="uk-grid uk-grid-width-small-1-3" data-uk-grid-margin>
+                <div>
+                    <label for="form-author" class="uk-form-label">{{ 'Name' | trans }}</label>
+                    <input id="form-author" class="uk-width-1-1" type="text" v-model="comment.author">
+                </div>
+                <div>
+                    <label for="form-email" class="uk-form-label">{{ 'E-mail' | trans }}</label>
+                    <input id="form-email" class="uk-width-1-1" type="text" v-model="comment.email">
+                </div>
+                <div>
+                    <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
+                    <select id="form-status" class="uk-width-1-1" v-model="comment.status" options="statuses"></select>
+                </div>
+            </div>
+
+            <div class="uk-grid uk-grid-width-1-1">
+                <div>
+                    <textarea class="uk-width-1-1" v-model="comment.content" rows="6"></textarea>
+                </div>
+            </div>
+
+            <p>
+                <button class="uk-button uk-button-primary" v-on="click: save(comment)">{{ 'Save' | trans }}</button>
+                <button class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</button>
+            </p>
+
+        </div>
+    </td>
+
+</script>
+
+<script id="comment.reply" type="text/tmpl">
+
+    <td></td>
+    <td class="pk-table-width-minimum">
+        <img v-gravatar="comment.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}">
+    </td>
+    <td colspan="3">
+        <div class="uk-form">
+
+            <div class="uk-form-row">
+                <textarea class="uk-width-1-1" v-model="comment.content" rows="6"></textarea>
+            </div>
+
+            <p>
+                <button class="uk-button uk-button-primary" v-on="click: save(comment)">{{ 'Reply' | trans }}</button>
+                <button class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</button>
+            </p>
+
+        </div>
+    </td>
+
+</script>
