@@ -62,25 +62,15 @@
 @button-link-hover-text-decoration:             none;
 @button-link-disabled-color:                    @global-muted-color;
 
-//
-// New
-//
-
-@button-border:                                 rgba(0,0,0,0.1);
-@button-hover-border:                           rgba(0,0,0,0.15);
-
 
 // Component
 // ========================================================================
 
-.hook-button() {
-    border: 1px solid @button-border;
-    border-radius: @global-border-radius;
-}
+.hook-button() { border-radius: @global-border-radius; }
 
-.hook-button-hover() { border-color: @button-hover-border; }
+.hook-button-hover() {}
 
-.hook-button-active() { box-shadow: inset 0 1px 5px -1px rgba(0,0,0,0.1); }
+.hook-button-active() {}
 
 
 // Color modifiers
@@ -90,55 +80,43 @@
 // Modifier: `uk-button-primary`
 //
 
-.hook-button-primary() { border-color: transparent; }
+.hook-button-primary() {}
 
-.hook-button-primary-hover() { border-color: transparent; }
+.hook-button-primary-hover() {}
 
-.hook-button-primary-active() {
-    border-color: fade(darken(@button-primary-active-background, 15%), 50%);
-    box-shadow: inset 0 1px 5px -1px fade(darken(@button-primary-active-background, 15%), 70%);
-}
+.hook-button-primary-active() {}
 
 //
 // Modifier: `uk-button-success`
 //
 
-.hook-button-success() { border-color: transparent; }
+.hook-button-success() {}
 
-.hook-button-success-hover() { border-color: transparent; }
+.hook-button-success-hover() {}
 
-.hook-button-success-active() {
-    border-color: fade(darken(@button-success-active-background, 15%), 50%);
-    box-shadow: inset 0 1px 5px -1px fade(darken(@button-success-active-background, 15%), 70%);
-}
+.hook-button-success-active() {}
 
 //
 // Modifier: `uk-button-danger`
 //
 
-.hook-button-danger() { border-color: transparent; }
+.hook-button-danger() {}
 
-.hook-button-danger-hover() { border-color: transparent; }
+.hook-button-danger-hover() {}
 
-.hook-button-danger-active() {
-    border-color: fade(darken(@button-danger-active-background, 20%), 50%);
-    box-shadow: inset 0 1px 5px -1px fade(darken(@button-danger-active-background, 20%), 70%);
-}
+.hook-button-danger-active() {}
 
 
 // Disabled state
 // ========================================================================
 
-.hook-button-disable() {
-    border-color: @button-border;
-    box-shadow: none;
-}
+.hook-button-disable() {}
 
 
 // Modifier: `uk-button-link`
 // ========================================================================
 
-.hook-button-link() { box-shadow: none; }
+.hook-button-link() {}
 
 
 // Size modifiers
@@ -173,22 +151,5 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-
-    /*
-     * Collapse border
-     */
-
-    .uk-button-group > .uk-button:nth-child(n+2),
-    .uk-button-group > div:nth-child(n+2) .uk-button { margin-left: -1px; }
-
-    /*
-     * Create position context to superimpose the successor elements border
-     * Known issue: If you use an `a` element as button and an icon inside,
-     * the active state will not work if you click the icon inside the button
-     * Workaround: Just use a `button` or `input` element as button
-     */
-
-    .uk-button-group .uk-button:hover,
-    .uk-button-group .uk-button:active { position: relative; }
 
 }

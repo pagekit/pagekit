@@ -14,20 +14,22 @@
 @panel-title-text-transform:                    uppercase;
 
 @panel-box-padding:                             @global-margin;
-@panel-box-background:                          @global-background;
+@panel-box-background:                          #fff;
 @panel-box-color:                               @global-color;
 @panel-box-title-color:                         @global-color;
 
-@panel-box-primary-background:                  @global-default-hover-background;
+@panel-box-primary-background:                  #f5f5f5;
 @panel-box-primary-color:                       @global-color;
 @panel-box-primary-title-color:                 @global-color;
 
-@panel-box-secondary-background:                @global-default-background;
+@panel-box-secondary-background:                @global-background;
+@panel-box-secondary-color:                     @global-color;
+@panel-box-secondary-title-color:               @global-color;
 
 @panel-hover-padding:                           @global-margin;
 @panel-hover-color:                             @global-color;
 @panel-hover-hover-color:                       @global-color;
-@panel-hover-hover-background:                  @global-background;
+@panel-hover-hover-background:                  #fff;
 
 @panel-header-title-border:                     @global-border;
 @panel-header-title-color:                      @global-color;
@@ -60,16 +62,21 @@
 // Modifier: `uk-panel-box`
 // ========================================================================
 
-.hook-panel-box() {
-	border: 1px solid @panel-box-border;
-    border-radius: @global-border-radius;
-}
+.hook-panel-box() { border: 1px solid @panel-box-border; }
 
 .hook-panel-box-hover() {}
+
+//
+// Sub-modifier: `uk-panel-box-primary`
+//
 
 .hook-panel-box-primary() {}
 
 .hook-panel-box-primary-hover() {}
+
+//
+// Sub-modifier: `uk-panel-box-secondary`
+//
 
 .hook-panel-box-secondary() {}
 
@@ -79,10 +86,7 @@
 // Modifier: `uk-panel-hover`
 // ========================================================================
 
-.hook-panel-hover() {
-    border: 1px solid transparent;
-    border-radius: @global-border-radius;
-}
+.hook-panel-hover() { border: 1px solid transparent; }
 
 .hook-panel-hover-hover() { border-color: @panel-hover-border; }
 
@@ -101,10 +105,5 @@
 	.uk-panel-box .uk-panel-teaser {
 		border-bottom: 1px solid #eee;
 	}
-
-    .uk-panel-box .uk-panel-teaser > * {
-        border-top-left-radius: @global-border-radius;
-        border-top-right-radius: @global-border-radius;
-    }
 
 }

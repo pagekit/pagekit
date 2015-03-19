@@ -14,6 +14,12 @@
 
 @modal-dialog-large-width-large:                1150px;
 
+@modal-header-margin-bottom:                    @global-margin;
+
+@modal-footer-margin-top:                       @global-margin;
+
+@modal-caption-color:                           @global-contrast-color;
+
 
 // Component
 // ========================================================================
@@ -25,7 +31,7 @@
 // ========================================================================
 
 .hook-modal-dialog() {
-	border: 1px solid @global-border;
+    border: 1px solid @global-border;
     border-radius: @global-border-radius;
     box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
@@ -40,13 +46,25 @@
 // Sub-object: `uk-modal-header`
 // ========================================================================
 
-.hook-modal-header() {}
+.hook-modal-header() {
+    margin: (-@modal-dialog-padding) (-@modal-dialog-padding) @modal-header-margin-bottom (-@modal-dialog-padding);
+    padding: @modal-dialog-padding;
+    border-bottom: 1px solid @global-border;
+    border-radius: @global-border-radius @global-border-radius 0 0;
+    background: #fafafa;
+}
 
 
 // Sub-object: `uk-modal-footer`
 // ========================================================================
 
-.hook-modal-footer() {}
+.hook-modal-footer() {
+    margin: @modal-footer-margin-top (-@modal-dialog-padding) (-@modal-dialog-padding) (-@modal-dialog-padding);
+    padding: @modal-dialog-padding;
+    border-top: 1px solid @global-border;
+    border-radius: 0 0 @global-border-radius @global-border-radius;
+    background: #fafafa;
+}
 
 
 // Sub-object: `uk-modal-caption`

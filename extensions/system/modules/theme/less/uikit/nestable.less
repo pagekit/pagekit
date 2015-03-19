@@ -11,7 +11,7 @@
 
 @nestable-item-margin-bottom:                   0;
 @nestable-item-padding:                         10px;
-@nestable-item-background:                      #fff;
+@nestable-item-background:                      @global-background;
 
 @nestable-placeholder-border:                   #99baca;
 
@@ -48,7 +48,7 @@
 	display: inline-block;
 	width: 10px;
 	height: 20px;
-	background: url("../../../assets/images/nestable-handle-large.svg") 0 0 no-repeat;
+    background: url("../../../assets/images/nestable-handle-large.svg") 0 0 no-repeat;
     vertical-align: middle;
 }
 
@@ -61,6 +61,6 @@
 .hook-nestable-misc() {
 
     .uk-nestable-item:hover,
-    .uk-nestable-list-dragged .uk-nestable-item { background: @global-hover-background; }
+    .uk-nestable-list-dragged .uk-nestable-item { background: #fff; }
 
 }

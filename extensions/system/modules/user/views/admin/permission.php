@@ -11,12 +11,14 @@
             </thead>
         </table>
 
-        <table v-repeat="group: permissions" class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent uk-margin-remove">
-            <tbody>
+        <table v-repeat="group: permissions" class="uk-table uk-table-hover uk-table-middle pk-table-subheading pk-table-indent">
+            <thead>
                 <tr>
                     <th class="pk-table-min-width-200">{{ $key }}</th>
                     <th v-repeat="roles" class="pk-table-width-100 pk-table-min-width-100"></th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr v-repeat="permission: group">
                     <td class="pk-table-text-break">
                         {{ permission.title | trans }}

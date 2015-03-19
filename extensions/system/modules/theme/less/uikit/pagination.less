@@ -23,13 +23,6 @@
 @pagination-disabled-background:                @global-default-hover-background;
 @pagination-disabled-color:                     @global-muted-color;
 
-//
-// New
-//
-
-@pagination-border:                             rgba(0,0,0,0.1);
-@pagination-hover-border:                       rgba(0,0,0,0.15);
-
 
 // Component
 // ========================================================================
@@ -38,23 +31,20 @@
 // Items
 //
 
-.hook-pagination-item() {
-    border: 1px solid @pagination-border;
-    border-radius: @global-border-radius;
-}
+.hook-pagination-item() { border-radius: @global-border-radius; }
 
 // Link
 .hook-pagination-link() {}
 
-.hook-pagination-link-hover() { border-color: @pagination-hover-border; }
+.hook-pagination-link-hover() {}
 
-.hook-pagination-link-active() { box-shadow: inset 0 1px 5px -1px rgba(0,0,0,0.1); }
+.hook-pagination-link-active() {}
 
 // Active
-.hook-pagination-active() { border-color: transparent; }
+.hook-pagination-active() {}
 
 // Disabled
-.hook-pagination-disabled() { border: 1px solid @pagination-border; }
+.hook-pagination-disabled() {}
 
 
 // Miscellaneous

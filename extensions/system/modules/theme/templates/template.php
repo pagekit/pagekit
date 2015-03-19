@@ -13,31 +13,34 @@
     </head>
     <body>
 
-        <div class="tm-navbar <?= $app['sections']->has('toolbar') ? 'tm-navbar-margin' : '' ?>">
+        <div class="tm-navbar">
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
 
-                    <div class="uk-navbar-content uk-hidden-small">
-                        <div class="uk-display-inline-block" data-uk-dropdown>
-                            <img class="tm-logo" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
-                            <div class="uk-dropdown tm-dropdown">
-                                <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                                <?php foreach ($nav as $item): ?>
-                                    <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
-                                        <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
-                                            <img src="<?= $view->url()->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
-                                            <p><?= __($item) ?></p>
-                                        </a>
-                                    </li>
-                                <?php endforeach ?>
-                                </ul>
-                            </div>
+                    <div class="uk-navbar-brand uk-hidden-small" data-uk-dropdown="{mode:'click'}">
+
+                        <img class="uk-margin-right" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
+                        
+                        <?= __($subnav) ?>
+
+                        <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
+                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                            <?php foreach ($nav as $item): ?>
+                                <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
+                                    <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
+                                        <img src="<?= $view->url()->getStatic($item->getIcon() ?: 'extensions/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
+                                        <p><?= __($item) ?></p>
+                                    </a>
+                                </li>
+                            <?php endforeach ?>
+                            </ul>
                         </div>
+
                     </div>
 
                     <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img class="tm-logo" src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
+                        <img src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
                     </a>
 
                     <ul class="uk-navbar-nav uk-hidden-small">
@@ -57,7 +60,7 @@
                     <div class="uk-navbar-flip">
 
                         <div class="uk-navbar-content uk-hidden-small">
-                            <div class="uk-display-inline-block" data-uk-dropdown>
+                            <div class="uk-display-inline-block" data-uk-dropdown="{mode:'click'}">
                                 <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
                                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                     <ul class="uk-nav uk-nav-dropdown">
@@ -92,8 +95,10 @@
 
             </div>
         </div>
-
-        <div class="tm-main uk-container uk-container-center"><?= $view->section()->render('content') ?></div>
+        
+        <div class="tm-main uk-container uk-container-center">
+            <?= $view->section()->render('content') ?>
+        </div>
 
         <div class="uk-hidden"><?= $view->section()->render('messages') ?></div>
 

@@ -8,18 +8,19 @@
 // ========================================================================
 
 @breadcrumb-disabled-color:                     @global-muted-color;
+@breadcrumb-divider-margin:                     12px;
 
 
 // Component
 // ========================================================================
 
-.hook-breadcrumb() {}
+.hook-breadcrumb() { text-transform: uppercase; }
 
 
 // Items
 // ========================================================================
 
-.hook-breadcrumb-divider() { color: #999; }
+.hook-breadcrumb-divider() { color: @global-muted-color; }
 
 
 // Miscellaneous
@@ -27,7 +28,7 @@
 
 .hook-breadcrumb-misc() {
 
-	.uk-breadcrumb > li > a { color: #999; }
-	.uk-breadcrumb > li > a:hover { color: #444; }
+	.uk-breadcrumb > li > a { color: @global-muted-color; }
+	.uk-breadcrumb > li > a:hover { color: @global-color; }
 
 }

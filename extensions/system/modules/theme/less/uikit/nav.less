@@ -23,7 +23,7 @@
 @nav-parent-icon-width:                         @global-line-height;
 
 @nav-side-color:                                @global-muted-color;
-@nav-side-hover-background:                     @global-hover-background;
+@nav-side-hover-background:                     #fff;
 @nav-side-hover-color:                          @global-color;
 @nav-side-active-background:                    @global-default-background;
 @nav-side-active-color:                         @global-color;
@@ -40,13 +40,13 @@
 @nav-dropdown-nested-color:                     @global-link-color;
 @nav-dropdown-nested-hover-color:               @global-link-hover-color;
 
-@nav-navbar-color:                              @global-navbar-color;
+@nav-navbar-color:                              @global-color;
 @nav-navbar-hover-background:                   transparent;
-@nav-navbar-hover-color:                        @global-navbar-hover-color;
+@nav-navbar-hover-color:                        @global-link-color;
 @nav-navbar-header-color:                       @global-muted-color;
 @nav-navbar-divider-border:                     @global-border;
-@nav-navbar-nested-color:                       @global-navbar-color;
-@nav-navbar-nested-hover-color:                 @global-navbar-hover-color;
+@nav-navbar-nested-color:                       @global-link-color;
+@nav-navbar-nested-hover-color:                 @global-link-hover-color;
 
 @nav-offcanvas-color:                           @global-color;
 @nav-offcanvas-hover-background:                #f5f5f5;
@@ -55,8 +55,8 @@
 @nav-offcanvas-active-color:                    @global-color;
 @nav-offcanvas-header-color:                    @global-muted-color;
 @nav-offcanvas-divider-border:                  #ddd;
-@nav-offcanvas-nested-color:                    @offcanvas-panel-link-color;
-@nav-offcanvas-nested-hover-color:              @offcanvas-panel-link-hover-color;
+@nav-offcanvas-nested-color:                    @global-muted-color;
+@nav-offcanvas-nested-hover-color:              @global-muted-color;
 
 
 // Sub-object: `uk-nav-header`
@@ -165,6 +165,7 @@
 // ========================================================================
 
 .hook-nav-offcanvas-link() {}
+
 .hook-nav-offcanvas-link-hover() {}
 
 //
@@ -172,6 +173,9 @@
 //
 
 .hook-nav-offcanvas() {}
+
+// Hover
+.hook-nav-offcanvas-hover() {}
 
 // Active
 .hook-nav-offcanvas-active() {}

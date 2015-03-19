@@ -7,13 +7,14 @@
 // Variables
 // ========================================================================
 
+@subnav-margin-horizontal:                      20px;
 @subnav-color:                                  @global-color;
 @subnav-hover-color:                            @global-link-color;
 @subnav-active-color:                           @global-link-color;
 
 @subnav-line-border:                            @global-border;
 
-@subnav-pill-hover-background:                  @global-default-hover-background;
+@subnav-pill-hover-background:                  @global-default-background;
 @subnav-pill-hover-color:                       @global-color;
 @subnav-pill-active-background:                 @global-primary-background;
 @subnav-pill-active-color:                      @global-contrast-color;
@@ -42,15 +43,15 @@
 
 .hook-subnav-pill() { border-radius: @global-border-radius; }
 
-.hook-subnav-pill-hover() { box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
+.hook-subnav-pill-hover() {}
 
-.hook-subnav-pill-active() { box-shadow: none; }
+.hook-subnav-pill-active() {}
 
 
 // Disabled state
 // ========================================================================
 
-.hook-subnav-disabled() { box-shadow: none; }
+.hook-subnav-disabled() {}
 
 
 // Miscellaneous

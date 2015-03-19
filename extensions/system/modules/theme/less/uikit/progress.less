@@ -22,10 +22,7 @@
 // Component
 // ========================================================================
 
-.hook-progress() {
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
-    border-radius: @global-border-radius;
-}
+.hook-progress() { border-radius: 500px; }
 
 
 // Sub-object: `progress-bar`
@@ -34,15 +31,17 @@
 .hook-progress-bar() {}
 
 
+// Color modifiers
+// ========================================================================
+
+.hook-progress-bar-success() {}
+
+.hook-progress-bar-warning() {}
+
+.hook-progress-bar-danger() {}
+
+
 // Miscellaneous
 // ========================================================================
 
-.hook-progress-misc() {
-
-    /* Size modifiers
-     ========================================================================== */
-
-    .uk-progress-mini,
-    .uk-progress-small { border-radius: 500px; }
-
-}
+.hook-progress-misc() {}
