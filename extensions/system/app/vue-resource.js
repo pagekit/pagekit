@@ -4,32 +4,25 @@
 
         var _ = Vue.util.extend({}, Vue.util);
 
-        var parse = function (request) {
 
-            var result;
+        /**
+         * The Http provides a service for sending XMLHttpRequests
+         */
 
-            try {
-                result = JSON.parse(request.responseText);
-            } catch (e) {
-                result = request.responseText;
-            }
-
-            return [result, request];
-        };
-
-        var http = function (config) {
+        var Http = function (config) {
 
             var request = new XMLHttpRequest(),
-                headers = http.defaults.headers,
+                headers = Http.defaults.headers,
                 methods = {
                     success: function () {},
                     error: function () {}
                 };
 
             config = _.extend({
-                url: '',
                 method: 'GET',
-                data: ''
+                url: '',
+                data: '',
+                params: {}
             }, config);
 
             headers = _.extend({},
@@ -42,10 +35,10 @@
                 config.data = JSON.stringify(config.data);
             }
 
-            request.open(config.method, config.url, true);
+            request.open(config.method, Url(config.url, config.params), true);
 
-            Object.keys(headers).forEach(function (header) {
-                request.setRequestHeader(header, headers[header]);
+            _.each(headers, function (value, header) {
+                request.setRequestHeader(header, value);
             });
 
             request.onreadystatechange = function () {
@@ -74,7 +67,7 @@
             return callbacks;
         };
 
-        _.extend(http, {
+        _.extend(Http, {
 
             defaults: {
 
@@ -87,24 +80,158 @@
             },
 
             get: function (url, config) {
-                return http(_.extend({method: 'GET', url: url}, config));
+                return Http(_.extend({method: 'GET', url: url}, config));
             },
 
             post: function (url, data, config) {
-                return http(_.extend({method: 'POST', url: url, data: data}, config));
+                return Http(_.extend({method: 'POST', url: url, data: data}, config));
             },
 
             put: function (url, data, config) {
-                return http(_.extend({method: 'PUT', url: url, data: data}, config));
+                return Http(_.extend({method: 'PUT', url: url, data: data}, config));
             },
 
             'delete': function (url, config) {
-                return http(_.extend({method: 'DELETE', url: url}, config));
+                return Http(_.extend({method: 'DELETE', url: url}, config));
             }
 
         });
 
-        Vue.prototype.$http = http;
+        var parse = function (request) {
+
+            var result;
+
+            try {
+                result = JSON.parse(request.responseText);
+            } catch (e) {
+                result = request.responseText;
+            }
+
+            return [result, request];
+        };
+
+
+        /**
+         * The Url provides URL templating
+         */
+
+        var Url = function (url, params, base) {
+
+            var urlParams = {}, query = [];
+
+            if (!_.isPlainObject(params)) {
+                params = {};
+            }
+
+            if (!base) {
+                base = Url.defaults.base;
+            }
+
+            url = url.replace(/:([a-z]\w*)/gi, function (match, name) {
+
+                if (params[name]) {
+                    urlParams[name] = true;
+                    return encodeUriSegment(params[name]);
+                }
+
+                return '';
+            });
+
+            if (!url.match(/^(https?:)?\//) && base) {
+                url = base + '/' + url;
+            }
+
+            url = url.replace(/(^|[^:])[\/]{2,}/g, '$1/');
+            url = url.replace(/(\w+)\/+$/, '$1');
+
+            _.each(params, function (value, key) {
+                if (!urlParams[key]) {
+                    query.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
+                }
+            });
+
+            if (query.length) {
+                url += (url.indexOf('?') >= 0 ? '&' : '?') + query.join('&');
+            }
+
+            return url;
+        };
+
+        _.extend(Url, {
+
+            defaults: {
+                base: ''
+            },
+
+            params: function (params) {
+
+                var query = [];
+
+                _.each(params, function (value, key) {
+                    query.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
+                });
+
+                return query.join('&');
+            },
+
+            parse: function (url) {
+
+                var pattern = RegExp("^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?"),
+                    matches = url.match(pattern);
+
+                return {
+                    url: url,
+                    scheme: matches[1] || '',
+                    host: matches[2] || '',
+                    path: matches[3] || '',
+                    query: matches[4] || '',
+                    fragment: matches[5] || ''
+                };
+            }
+
+        });
+
+        var encodeUriQuery = function (value, spaces) {
+
+            return encodeURIComponent(value).
+                replace(/%40/gi, '@').
+                replace(/%3A/gi, ':').
+                replace(/%24/g, '$').
+                replace(/%2C/gi, ',').
+                replace(/%20/g, (spaces ? '%20' : '+'));
+        };
+
+        var encodeUriSegment = function (value) {
+
+            return encodeUriQuery(value, true).
+                replace(/%26/gi, '&').
+                replace(/%3D/gi, '=').
+                replace(/%2B/gi, '+');
+        };
+
+
+        /**
+         * The Utility functions
+         */
+
+        _.each = function (obj, iterator) {
+
+            var i, key;
+
+            if (typeof obj.length == 'number') {
+                for (i = 0; i < obj.length; i++) {
+                    iterator.call(obj[i], obj[i], i);
+                }
+            } else if (_.isObject(obj)) {
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        iterator.call(obj[key], obj[key], key);
+                    }
+                }
+            }
+
+            return obj;
+        };
 
         _.extend = function (target) {
 
@@ -122,7 +249,7 @@
             return target;
         };
 
-        function extend(target, source, deep) {
+        var extend = function(target, source, deep) {
             for (var key in source) {
                 if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
                     if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
@@ -136,8 +263,15 @@
                     target[key] = source[key];
                 }
             }
-        }
+        };
 
+
+        /**
+         * Add Vue functions
+         */
+
+        Vue.http = Http;
+        Vue.prototype.$http = Http;
     };
 
     if (typeof exports == 'object') {
