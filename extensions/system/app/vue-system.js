@@ -78,12 +78,28 @@
          * Filters
          */
 
+        var eval = function(expression) {
+
+            try {
+
+                return expression && Vue.parsers.expression.parse(expression).get.call(this, this) || undefined;
+
+            } catch (e) {
+                if (Vue.config.warnExpressionErrors) {
+                    Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e)
+                }
+
+                return undefined;
+            }
+
+        };
+
         Vue.filter('trans', function(id, parameters, domain, locale) {
-            return this.$trans(id, parameters, domain, locale);
+            return this.$trans(id, eval.call(this, parameters), eval.call(this, domain), eval.call(this, locale));
         });
 
         Vue.filter('transChoice', function(id, number, parameters, domain, locale) {
-            return this.$transChoice(id, number, parameters, domain, locale);
+            return this.$transChoice(id, eval.call(this, number) || 0, eval.call(this, parameters), eval.call(this, domain), eval.call(this, locale));
         });
 
         Vue.filter('date', function(date, format) {

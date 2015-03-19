@@ -86,7 +86,7 @@ jQuery(function ($) {
 
                 this.cancel();
 
-                this.resource.query({ filter: this.config.filter, post: this.config.post, page: page }, function (data) {
+                this.resource.query({ filter: this.config.filter, post: this.config.post.id, page: page }, function (data) {
                     vm.$set('comments', data.comments);
                     vm.$set('pages', data.pages);
                     vm.$set('config.page', page);

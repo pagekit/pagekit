@@ -38,7 +38,7 @@
                     <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
                     <th class="pk-table-width-200">
                         <span v-if="!config.post">{{ 'In response to' | trans }}</span>
-                        <span v-if="config.post">{{ 'In response to %post%' | trans { post: post.title } }}</span>
+                        <span v-if="config.post">{{ 'In response to %title%' | trans config.post }}</span>
                     </th>
                 </tr>
             </thead>
@@ -89,7 +89,7 @@
     </td>
     <td>
         <a v-attr="href: $url('admin/blog/post/edit', { id: comment.post.id })">{{ comment.post.title }}</a>
-        <a class="uk-badge uk-badge-notification" v-class="pk-badge: comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice comment.post.comments_pending { comments: comment.post.comments_pending } }}">{{ comment.post.comment_count }}</a>
+        <a class="uk-badge uk-badge-notification" v-class="pk-badge: comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}">{{ comment.post.comment_count }}</a>
     </td>
 
 </script>
