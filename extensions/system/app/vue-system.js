@@ -82,14 +82,12 @@
 
             try {
 
-                return expression && Vue.parsers.expression.parse(expression).get.call(this, this) || undefined;
+                return undefined === expression ? expression : Vue.parsers.expression.parse(expression).get.call(this, this);
 
             } catch (e) {
                 if (Vue.config.warnExpressionErrors) {
                     Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e)
                 }
-
-                return undefined;
             }
 
         };
