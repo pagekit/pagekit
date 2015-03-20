@@ -18,15 +18,23 @@ use Pagekit\Package\Exception\UnauthorizedDownloadException;
 class UpdateController
 {
     /**
-     * @Response("extensions/system/views/admin/settings/update.razr")
+     * @Response("extensions/system/views/admin/settings/update.php")
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update'), 'api' => App::system()->config('api.url'), 'channel' => App::system()->config('release_channel', 'stable'), 'version' => App::version()];
+        App::view()->meta(['title' => __('Update')]);
+        App::view()->script('update', 'extensions/system/app/update.js', ['vue-system']);
+        App::view()->data('update', [
+            'config' => [
+                'api' => App::system()->config('api.url'),
+                'channel' => App::system()->config('release_channel', 'stable'),
+                'version' => App::version()
+            ]
+        ]);
     }
 
     /**
-     * @Request({"update": "json"})
+     * @Request({"update": "array"})
      * @Response("json")
      */
     public function downloadAction($update = null)
@@ -47,23 +55,23 @@ class UpdateController
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            $response = ['message' => __('Copying files...'), 'step' => App::url('@system/update/copy'), 'progress' => 33];
+            return 'success';
 
         } catch (ArchiveExtractionException $e) {
-            $response = ['error' => __('Package extraction failed.')];
+            $error = __('Package extraction failed.');
         } catch (ChecksumVerificationException $e) {
-            $response = ['error' => __('Package checksum verification failed.')];
+            $error = __('Package checksum verification failed.');
         } catch (UnauthorizedDownloadException $e) {
-            $response = ['error' => __('Invalid API key.')];
+            $error = __('Invalid API key.');
         } catch (DownloadErrorException $e) {
-            $response = ['error' => __('Package download failed.')];
+            $error = __('Package download failed.');
         } catch (NotWritableException $e) {
-            $response = ['error' => __('Path is not writable.')];
+            $error = __('Path is not writable.');
         } catch (Exception $e) {
-            $response = ['error' => $e->getMessage()];
+            $error = $e->getMessage();
         }
 
-        return $response;
+        return compact('error');
     }
 
     /**
@@ -86,14 +94,11 @@ class UpdateController
             App::module('system/cache')->clearCache();
             App::session()->remove('system.updateDir');
 
-            $response = ['message' => __('Updating database...'), 'step' => App::url('@system/update/database'), 'progress' => 66];
+            return 'success';
 
         } catch (\Exception $e) {
-
-            $response = ['error' => $e->getMessage()];
+            return ['error' => $e->getMessage()];
         }
-
-        return $response;
     }
 
     /**
@@ -111,13 +116,10 @@ class UpdateController
             App::module('system/cache')->clearCache();
             App::session()->remove('system.update');
 
-            $response = ['message' => __('Installed successfully.'), 'redirect' => App::url('@system/admin'), 'progress' => 100];
+            return 'success';
 
         } catch (\Exception $e) {
-
-            $response = ['error' => $e->getMessage()];
+            return ['error' => $e->getMessage()];
         }
-
-        return $response;
     }
 }

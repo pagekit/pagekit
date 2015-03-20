@@ -32,8 +32,8 @@
         </li>
     </ul>
 
-    <div v-show="upload.running" class="uk-progress uk-progress-striped">
-        <div class="uk-progress-bar" style="width: {{ upload.progress }}%;">{{ upload.progress }}%</div>
+    <div v-show="upload.running" class="uk-progress uk-progress-striped uk-active">
+        <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
     </div>
 
     <div v-partial="#finder.{{ view }}"></div>
