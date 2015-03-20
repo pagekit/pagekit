@@ -39,10 +39,6 @@
 
                     </div>
 
-                    <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
-                    </a>
-
                     <?php if ($subnav->getChildren()) : ?>
                     <ul class="uk-navbar-nav uk-hidden-small">
                         <?php foreach ($subnav->getChildren() as $item): ?>
@@ -52,6 +48,10 @@
                         <?php endforeach ?>
                     </ul>
                     <?php endif ?>
+
+                    <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
+                        <img src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
+                    </a>
 
                     <div class="uk-navbar-flip">
 

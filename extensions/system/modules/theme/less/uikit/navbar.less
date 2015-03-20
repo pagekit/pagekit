@@ -73,22 +73,25 @@
      */
 
     .uk-navbar-brand {
-        position: relative;
         line-height: @navbar-nav-height;
         font-weight: 300;
         text-transform: uppercase;
     }
 
     .uk-navbar-brand > * {
-    	line-height: @global-line-height;
-    	font-weight: normal;
+        line-height: @global-line-height;
+        font-weight: normal;
         text-transform: none;
     }
 
-    .uk-navbar-brand:after {
+    /*
+     * Divider
+     */
+
+    .uk-navbar-brand + .uk-navbar-nav > :first-child > :before {
         content: "";
         position: absolute;
-        right: 0;
+        left: -1px;
         top: 50%;
         height: 20px;
         margin-top: -10px;
