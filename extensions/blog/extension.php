@@ -87,7 +87,7 @@ return [
             'access' => 'blog: manage content || blog: manage comments'
         ],
         'blog: post list' => [
-            'label'  => 'Blog',
+            'label'  => 'Posts',
             'parent' => 'blog',
             'url'    => '@blog/post',
             'active' => '@blog/post*',

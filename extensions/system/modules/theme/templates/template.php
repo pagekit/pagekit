@@ -43,19 +43,15 @@
                         <img src="<?= $view->url()->getStatic('extensions/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
                     </a>
 
+                    <?php if ($subnav->getChildren()) : ?>
                     <ul class="uk-navbar-nav uk-hidden-small">
-                        <?php if (!$subnav->getChildren()): ?>
-                        <li<?= $subnav->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $view->url($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
-                        </li>
-                        <?php else: ?>
                         <?php foreach ($subnav->getChildren() as $item): ?>
                         <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
                             <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
                         </li>
                         <?php endforeach ?>
-                        <?php endif ?>
                     </ul>
+                    <?php endif ?>
 
                     <div class="uk-navbar-flip">
 
