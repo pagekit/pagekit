@@ -11,7 +11,7 @@
 
         var Url = function (url, params, root) {
 
-            var urlParams = {}, query = [];
+            var urlParams = {}, queryParams = {}, query;
 
             if (!_.isPlainObject(params)) {
                 params = {};
@@ -40,12 +40,14 @@
 
             _.each(params, function (value, key) {
                 if (!urlParams[key]) {
-                    query.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
+                    queryParams[key] = value;
                 }
             });
 
-            if (query.length) {
-                url += (url.indexOf('?') == -1 ? '?' : '&') + query.join('&');
+            query = Url.params(queryParams);
+
+            if (query) {
+                url += (url.indexOf('?') == -1 ? '?' : '&') + query;
             }
 
             return url;
@@ -55,15 +57,26 @@
 
             root: '',
 
-            params: function (params) {
+            params: function (obj) {
 
-                var query = [];
+                var params = [];
 
-                _.each(params, function (value, key) {
-                    query.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
-                });
+                params.add = function(key, value) {
 
-                return query.join('&');
+                    if (_.isFunction(value)) {
+                        value = value();
+                    }
+
+                    if (value == null) {
+                        value = '';
+                    }
+
+                    this.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
+                };
+
+                serialize(params, obj);
+
+                return params.join('&');
             },
 
             parse: function (url) {
@@ -83,14 +96,26 @@
 
         });
 
-        var encodeUriQuery = function (value, spaces) {
+        var serialize = function (params, obj, scope) {
 
-            return encodeURIComponent(value).
-                replace(/%40/gi, '@').
-                replace(/%3A/gi, ':').
-                replace(/%24/g, '$').
-                replace(/%2C/gi, ',').
-                replace(/%20/g, (spaces ? '%20' : '+'));
+            var array = _.isArray(obj), plain = _.isPlainObject(obj), hash;
+
+            _.each(obj, function(value, key) {
+
+                hash = _.isObject(value) || _.isArray(value);
+
+                if (scope) {
+                    key = scope + '[' + (plain || hash ? key : '') + ']';
+                }
+
+                if (!scope && array) {
+                    params.add(value.name, value.value);
+                } else if (hash) {
+                    serialize(params, value, key);
+                } else {
+                    params.add(key, value);
+                }
+            });
         };
 
         var encodeUriSegment = function (value) {
@@ -99,6 +124,16 @@
                 replace(/%26/gi, '&').
                 replace(/%3D/gi, '=').
                 replace(/%2B/gi, '+');
+        };
+
+        var encodeUriQuery = function (value, spaces) {
+
+            return encodeURIComponent(value).
+                replace(/%40/gi, '@').
+                replace(/%3A/gi, ':').
+                replace(/%24/g, '$').
+                replace(/%2C/gi, ',').
+                replace(/%20/g, (spaces ? '%20' : '+'));
         };
 
 
@@ -113,24 +148,36 @@
                 methods = {success: [], error: []},
                 status  = null, result, method;
 
-            config = _.extend({},
+            headers = _.extend({},
+                headers.common,
+                headers[config.method.toLowerCase()]
+            );
+
+            config = _.extend(true, {headers: headers},
                 Http.defaults.config,
                 config
             );
 
-            headers = _.extend({},
-                headers.common,
-                headers[config.method.toLowerCase()],
-                config.headers
-            );
-
-            if ((headers['Content-Type'] || '').indexOf('json') != -1 && _.isObject(config.data)) {
-                config.data = JSON.stringify(config.data);
+            if (config.success) {
+                methods.success.push(config.success);
             }
 
-            if (config.methodOverride && /^(PUT|PATCH|DELETE)$/i.test(config.method)) {
+            if (config.error) {
+                methods.error.push(config.error);
+            }
+
+            if (config.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(config.method)) {
                 headers['X-HTTP-Method-Override'] = config.method;
                 config.method = 'POST';
+            }
+
+            if (config.emulateJSON && _.isObject(config.data)) {
+                headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                config.data = Url.params(config.data);
+            }
+
+            if (_.isObject(config.data)) {
+                config.data = JSON.stringify(config.data);
             }
 
             request.open(config.method, Url(config.url, config.params, config.urlRoot), true);
@@ -193,7 +240,7 @@
             return callbacks;
         };
 
-        var contentType = {'Content-Type': 'application/json;charset=utf-8'};
+        var jsonType = {'Content-Type': 'application/json;charset=utf-8'};
 
         _.extend(Http, {
 
@@ -205,13 +252,14 @@
                     urlRoot: '',
                     data: '',
                     params: {},
-                    methodOverride: false
+                    emulateHTTP: false,
+                    emulateJSON: false
                 },
 
                 headers: {
-                    put: contentType,
-                    post: contentType,
-                    patch: contentType,
+                    put: jsonType,
+                    post: jsonType,
+                    patch: jsonType,
                     common: {}
                 }
 
@@ -317,6 +365,7 @@
                 }
 
                 config.url = action.url;
+                config.data = data;
                 config.params = _.extend({}, action.params, params);
 
                 if (success) {
@@ -385,7 +434,7 @@
 
         _.extend = function (target) {
 
-            var deep, args = Array.slice(arguments, 1);
+            var array = [], args = array.slice.call(arguments, 1), deep;
 
             if (typeof target == 'boolean') {
                 deep = target;
