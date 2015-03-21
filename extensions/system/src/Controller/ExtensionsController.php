@@ -14,27 +14,19 @@ use Pagekit\System\Extension;
 class ExtensionsController extends Controller
 {
     /**
-     * @Response("extensions/system/views/admin/extensions/index.razr")
+     * @Response("extensions/system/views/admin/extensions.php")
      */
     public function indexAction()
     {
-        $packages = [];
-        $packagesJson = [];
+        $packages = App::package()->getRepository('extension')->getPackages();
 
-        foreach (App::package()->getRepository('extension')->getPackages() as $package) {
-            if ('system' != $name = $package->getName()) {
-                $packages[$name] = $package;
-                $packagesJson[$name] = $package->getVersion();
-            }
+        foreach ($packages as $package) {
+            $package->enabled = App::module($package->getName()) != null;
         }
 
-        if (App::request()->isXmlHttpRequest()) {
-            return App::response()->json([
-                'table' => App::tmpl('extensions/system/views/admin/extensions/table.razr', compact('packages'))
-            ]);
-        }
-
-        return ['head.title' => __('Extensions'), 'api' => App::system()->config('api.url'), 'key' => App::system()->config('api.key'), 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        App::view()->meta(['title' => __('Extensions')]);
+        App::view()->script('extensions-index', 'extensions/system/app/extensions.js', 'marketplace');
+        App::view()->data('extensions', ['api' => App::system()->config('api'), 'packages' => $packages]);
     }
 
     /**
