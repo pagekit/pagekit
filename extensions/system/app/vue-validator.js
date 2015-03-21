@@ -1,8 +1,13 @@
-(function () {
+(function (window) {
 
     var install = function (Vue) {
 
         var _ = Vue.util.extend({}, Vue.util);
+
+
+        /**
+         * The Validator for form input validation
+         */
 
         Vue.prototype.$validator = {
 
@@ -200,6 +205,10 @@
             }
         };
 
+        /**
+         * The Utility functions
+         */
+
         _.attr = function (el, attr) {
             return el ? el.getAttribute(attr) : null;
         };
@@ -220,4 +229,4 @@
         Vue.use(install);
     }
 
-})();
+})(this);

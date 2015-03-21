@@ -3,6 +3,13 @@
     function install (Vue) {
 
         /**
+         * Config
+         */
+
+        Vue.url.root = pagekit.url;
+        Vue.http.defaults.config.methodOverride = true;
+
+        /**
          * Methods
          */
 

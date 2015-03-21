@@ -1,4 +1,4 @@
-(function () {
+(function (window) {
 
     var install = function (Vue) {
 
@@ -6,116 +6,10 @@
 
 
         /**
-         * The Http provides a service for sending XMLHttpRequests
-         */
-
-        var Http = function (config) {
-
-            var request = new XMLHttpRequest(),
-                headers = Http.defaults.headers,
-                methods = {
-                    success: function () {},
-                    error: function () {}
-                };
-
-            config = _.extend({
-                method: 'GET',
-                url: '',
-                data: '',
-                params: {}
-            }, config);
-
-            headers = _.extend({},
-                headers.common,
-                headers[config.method.toLowerCase()],
-                config.headers
-            );
-
-            if ((headers['Content-Type'] || '').indexOf('json') != -1 && _.isObject(config.data)) {
-                config.data = JSON.stringify(config.data);
-            }
-
-            request.open(config.method, Url(config.url, config.params), true);
-
-            _.each(headers, function (value, header) {
-                request.setRequestHeader(header, value);
-            });
-
-            request.onreadystatechange = function () {
-                if (request.readyState === 4) {
-                    if (request.status >= 200 && request.status < 300) {
-                        methods.success.apply(methods, parse(request));
-                    } else {
-                        methods.error.apply(methods, parse(request));
-                    }
-                }
-            };
-
-            request.send(config.data);
-
-            var callbacks = {
-                success: function (callback) {
-                    methods.success = callback;
-                    return callbacks;
-                },
-                error: function (callback) {
-                    methods.error = callback;
-                    return callbacks;
-                }
-            };
-
-            return callbacks;
-        };
-
-        _.extend(Http, {
-
-            defaults: {
-
-                headers: {
-                    put: {'Content-Type': 'application/json'},
-                    post: {'Content-Type': 'application/json'},
-                    common: {}
-                }
-
-            },
-
-            get: function (url, config) {
-                return Http(_.extend({method: 'GET', url: url}, config));
-            },
-
-            post: function (url, data, config) {
-                return Http(_.extend({method: 'POST', url: url, data: data}, config));
-            },
-
-            put: function (url, data, config) {
-                return Http(_.extend({method: 'PUT', url: url, data: data}, config));
-            },
-
-            'delete': function (url, config) {
-                return Http(_.extend({method: 'DELETE', url: url}, config));
-            }
-
-        });
-
-        var parse = function (request) {
-
-            var result;
-
-            try {
-                result = JSON.parse(request.responseText);
-            } catch (e) {
-                result = request.responseText;
-            }
-
-            return [result, request];
-        };
-
-
-        /**
          * The Url provides URL templating
          */
 
-        var Url = function (url, params, base) {
+        var Url = function (url, params, root) {
 
             var urlParams = {}, query = [];
 
@@ -123,8 +17,8 @@
                 params = {};
             }
 
-            if (!base) {
-                base = Url.defaults.base;
+            if (!root) {
+                root = Url.root;
             }
 
             url = url.replace(/:([a-z]\w*)/gi, function (match, name) {
@@ -137,8 +31,8 @@
                 return '';
             });
 
-            if (!url.match(/^(https?:)?\//) && base) {
-                url = base + '/' + url;
+            if (!url.match(/^(https?:)?\//) && root) {
+                url = root + '/' + url;
             }
 
             url = url.replace(/(^|[^:])[\/]{2,}/g, '$1/');
@@ -151,7 +45,7 @@
             });
 
             if (query.length) {
-                url += (url.indexOf('?') >= 0 ? '&' : '?') + query.join('&');
+                url += (url.indexOf('?') == -1 ? '?' : '&') + query.join('&');
             }
 
             return url;
@@ -159,9 +53,7 @@
 
         _.extend(Url, {
 
-            defaults: {
-                base: ''
-            },
+            root: '',
 
             params: function (params) {
 
@@ -208,6 +100,264 @@
                 replace(/%3D/gi, '=').
                 replace(/%2B/gi, '+');
         };
+
+
+        /**
+         * The Http provides a service for sending XMLHttpRequests
+         */
+
+        var Http = function (config) {
+
+            var request = new window.XMLHttpRequest(),
+                headers = Http.defaults.headers,
+                methods = {success: [], error: []},
+                status  = null, result, method;
+
+            config = _.extend({},
+                Http.defaults.config,
+                config
+            );
+
+            headers = _.extend({},
+                headers.common,
+                headers[config.method.toLowerCase()],
+                config.headers
+            );
+
+            if ((headers['Content-Type'] || '').indexOf('json') != -1 && _.isObject(config.data)) {
+                config.data = JSON.stringify(config.data);
+            }
+
+            if (config.methodOverride && /^(PUT|PATCH|DELETE)$/i.test(config.method)) {
+                headers['X-HTTP-Method-Override'] = config.method;
+                config.method = 'POST';
+            }
+
+            request.open(config.method, Url(config.url, config.params, config.urlRoot), true);
+
+            _.each(headers, function (value, header) {
+                request.setRequestHeader(header, value);
+            });
+
+            request.onreadystatechange = function () {
+                if (request.readyState === 4) {
+
+                    status = request.status >= 200 && request.status < 300;
+                    method = methods[status ? 'success' : 'error'];
+                    result = parse(request);
+
+                    for (i = 0; i < method.length; i++) {
+                        method[i].apply(method[i], result);
+                    }
+                }
+            };
+
+            request.send(config.data);
+
+            var parse = function (request) {
+
+                var result;
+
+                try {
+                    result = JSON.parse(request.responseText);
+                } catch (e) {
+                    result = request.responseText;
+                }
+
+                return [result, request.status, request];
+            };
+
+            var callbacks = {
+                success: function (callback) {
+
+                    if (status === null) {
+                        methods.success.push(callback);
+                    } else {
+                        callback.apply(callback, result);
+                    }
+
+                    return callbacks;
+                },
+                error: function (callback) {
+
+                    if (status === null) {
+                        methods.error.push(callback);
+                    } else {
+                        callback.apply(callback, result);
+                    }
+
+                    return callbacks;
+                }
+            };
+
+            return callbacks;
+        };
+
+        var contentType = {'Content-Type': 'application/json;charset=utf-8'};
+
+        _.extend(Http, {
+
+            defaults: {
+
+                config: {
+                    method: 'GET',
+                    url: '',
+                    urlRoot: '',
+                    data: '',
+                    params: {},
+                    methodOverride: false
+                },
+
+                headers: {
+                    put: contentType,
+                    post: contentType,
+                    patch: contentType,
+                    common: {}
+                }
+
+            },
+
+            get: function (url, config) {
+                return Http(_.extend({method: 'GET', url: url}, config));
+            },
+
+            put: function (url, data, config) {
+                return Http(_.extend({method: 'PUT', url: url, data: data}, config));
+            },
+
+            post: function (url, data, config) {
+                return Http(_.extend({method: 'POST', url: url, data: data}, config));
+            },
+
+            patch: function (url, data, config) {
+                return Http(_.extend({method: 'PATCH', url: url, data: data}, config));
+            },
+
+            'delete': function (url, config) {
+                return Http(_.extend({method: 'DELETE', url: url}, config));
+            }
+
+        });
+
+
+        /**
+         * The Resource provides interaction support with RESTful services
+         */
+
+        var Resource = function(url, params, actions) {
+
+            var self = this;
+
+            _.extend(true, this, Resource.defaults, {actions: actions});
+
+            _.each(this.actions, function(action, name) {
+
+                action = _.extend(true, {url: url, params: params || {}}, action);
+
+                self[name] = function() {
+                    return Http(getConfig(action, arguments));
+                };
+            });
+
+            function getConfig(action, args) {
+
+                var config = _.extend({}, action), params = {}, data, success, error;
+
+                switch (args.length) {
+
+                    case 4:
+
+                        error = args[3];
+                        success = args[2];
+
+                    case 3:
+                    case 2:
+
+                        if (_.isFunction(args[1])) {
+
+                            if (_.isFunction(args[0])) {
+
+                                success = args[0];
+                                error = args[1];
+
+                                break;
+                            }
+
+                            success = args[1];
+                            error = args[2];
+
+                        } else {
+
+                            params = args[0];
+                            data = args[1];
+                            success = args[2];
+
+                            break;
+                        }
+
+                    case 1:
+
+                        if (_.isFunction(args[0])) {
+                            success = args[0];
+                        } else if (/^(POST|PUT|PATCH)$/i.test(config.method)) {
+                            data = args[0];
+                        } else {
+                            params = args[0];
+                        }
+
+                        break;
+
+                    case 0:
+
+                        break;
+
+                    default:
+
+                        throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
+                }
+
+                config.url = action.url;
+                config.params = _.extend({}, action.params, params);
+
+                if (success) {
+                    config.success = success;
+                }
+
+                if (error) {
+                    config.error = error;
+                }
+
+                return config;
+            }
+
+        };
+
+        Resource.defaults = {
+
+            actions: {
+                'get': {method: 'GET'},
+                'save': {method: 'POST'},
+                'query': {method: 'GET'},
+                'remove': {method: 'DELETE'},
+                'delete': {method: 'DELETE'}
+            }
+
+        };
+
+
+        /**
+         * The Vue functions
+         */
+
+        Vue.url = Url;
+        Vue.http = Http;
+        Vue.resource = function(url, params, actions) {
+            return new Resource(url, params, actions);
+        };
+
+        Vue.prototype.$url = Vue.url;
+        Vue.prototype.$http = Vue.http;
+        Vue.prototype.$resource = Vue.resource;
 
 
         /**
@@ -265,13 +415,9 @@
             }
         };
 
-
-        /**
-         * Add Vue functions
-         */
-
-        Vue.http = Http;
-        Vue.prototype.$http = Http;
+        _.isFunction = function (obj) {
+            return obj && typeof obj === 'function';
+        };
     };
 
     if (typeof exports == 'object') {
@@ -282,4 +428,4 @@
         Vue.use(install);
     }
 
-})();
+})(this);
