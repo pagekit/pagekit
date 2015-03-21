@@ -13,43 +13,29 @@ use Pagekit\System\Event\ThemeEvent;
 class ThemesController extends Controller
 {
     /**
-     * @Response("extensions/system/views/admin/themes/index.razr")
+     * @Response("extensions/system/views/admin/themes.php")
      */
     public function indexAction()
     {
-        $current = null;
-        $packages = [];
-        $packagesJson = [];
+        $packages = App::package()->getRepository('theme')->getPackages();
 
-        foreach (App::package()->getRepository('theme')->getPackages() as $package) {
-
-            $name = $package->getName();
-
-            if (App::system()->config('theme.site') == $name) {
-                $current = $package;
-            }
-
-            $packages[$name] = $package;
-            $packagesJson[$name] = $package->getVersion();
+        foreach ($packages as $package) {
+            $package->enabled = App::system()->config('theme.site') == $package->getName();
         }
 
-        uasort($packages, function($themeA, $themeB) use ($current) {
-            if ($current === $themeA) {
-                return -1;
-            } elseif ($current === $themeB) {
-                return 1;
-            }
+        // uasort($packages, function($themeA, $themeB) use ($current) {
+        //     if ($current === $themeA) {
+        //         return -1;
+        //     } elseif ($current === $themeB) {
+        //         return 1;
+        //     }
 
-            return strcmp($themeA->getName(), $themeB->getName());
-        });
+        //     return strcmp($themeA->getName(), $themeB->getName());
+        // });
 
-        if (App::request()->isXmlHttpRequest()) {
-            return App::response()->json([
-                'table' => App::tmpl('extensions/system/views/admin/themes/table.razr', ['packages' => $packages, 'current' => $current])
-            ]);
-        }
-
-        return ['head.title' => __('Themes'), 'api' => App::system()->config('api.url'), 'key' => App::system()->config('api.key'), 'current' => $current, 'packages' => $packages, 'packagesJson' => json_encode($packagesJson)];
+        App::view()->meta(['title' => __('Themes')]);
+        App::view()->script('themes-index', 'extensions/system/app/themes.js', 'marketplace');
+        App::view()->data('themes', ['api' => App::system()->config('api'), 'packages' => $packages]);
     }
 
     /**

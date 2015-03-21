@@ -15,6 +15,9 @@ class HelloExtension extends Extension
      */
     public function main(App $app)
     {
+        // TODO fixme
+        return;
+
         $app->subscribe(new HelloListener());
 
         $app->on('system.widget', function(RegisterWidgetEvent $event) {

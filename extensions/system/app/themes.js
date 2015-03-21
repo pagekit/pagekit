@@ -2,9 +2,9 @@ jQuery(function ($) {
 
     var vm = new Vue({
 
-        el: '#extensions',
+        el: '#themes',
 
-        data: $.extend(extensions, {
+        data: $.extend(themes, {
             updates: null,
             search: '',
             status: ''
@@ -21,9 +21,9 @@ jQuery(function ($) {
                 var img;
 
                 if (pkg.extra.image) {
-                    img = this.$url('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image}, true);
+                    img = this.$url('themes/:name/:image', {name: pkg.name, image: pkg.extra.image}, true);
                 } else {
-                    img = this.$url('extensions/system/assets/images/placeholder-icon.svg', true);
+                    img = this.$url('extensions/system/assets/images/placeholder-800x600.svg', true);
                 }
 
                 return img;
@@ -48,22 +48,12 @@ jQuery(function ($) {
             },
 
             enable: function (pkg) {
-                $.post(this.$url('admin/system/extensions/enable'), {name: pkg.name}, function (data) {
+                $.post(this.$url('admin/system/themes/enable'), {name: pkg.name}, function (data) {
 
                     if (!data.error) {
-                        pkg.enabled = true;
-                    }
-
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
-
-                }, 'json');
-            },
-
-            disable: function (pkg) {
-                $.post(this.$url('admin/system/extensions/disable'), {name: pkg.name}, function (data) {
-
-                    if (!data.error) {
-                        pkg.enabled = false;
+                        vm.packages.forEach(function (p) {
+                            p.enabled = p === pkg;
+                        });
                     }
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
@@ -72,7 +62,7 @@ jQuery(function ($) {
             },
 
             uninstall: function (pkg) {
-                $.post(this.$url('admin/system/extensions/uninstall'), {name: pkg.name}, function (data) {
+                $.post(this.$url('admin/system/themes/uninstall'), {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         vm.packages.splice(vm.packages.indexOf(pkg), 1);

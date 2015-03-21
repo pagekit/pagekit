@@ -5,7 +5,12 @@
         <div class="uk-panel uk-panel-divider pk-panel-marginless">
             <ul class="uk-nav uk-nav-side" data-uk-switcher="{connect:'#tab-content', toggle:' > *:not(.uk-nav-header)'}">
                 <li class="uk-active"><a href="#">{{ 'Installed' | trans }}</a></li>
-                <li><a href="#">{{ 'Updates' | trans }} <i class="uk-icon-spinner uk-icon-spin" v-show="loading"></i></a></li>
+                <li>
+                    <a href="#">{{ 'Updates' | trans }}
+                        <i class="uk-icon-spinner uk-icon-spin" v-show="status == 'loading'"></i>
+                        <span class="uk-badge" v-show="updates.length">{{ updates.length }}</span>
+                    </a>
+                </li>
                 <li><a href="#">{{ 'Install' | trans }}</a></li>
                 <li class="uk-nav-header">{{ 'Marketplace' | trans }}</li>
                 <li><a href="#">{{ 'All' | trans }}</a></li>
@@ -48,11 +53,11 @@
                                     </ul>
                                 </td>
                                 <td class="uk-text-center">
-                                    <a class="uk-button uk-button-success" v-show="pkg.enabled" v-on="click: enable">{{ 'Enabled' | trans }}</a>
-                                    <a class="uk-button" v-show="!pkg.enabled" v-on="click: disable">{{ 'Disabled' | trans }}</a>
+                                    <a class="uk-button uk-button-success" v-show="pkg.enabled" v-on="click: disable(pkg)">{{ 'Enabled' | trans }}</a>
+                                    <a class="uk-button" v-show="!pkg.enabled" v-on="click: enable(pkg)">{{ 'Disabled' | trans }}</a>
                                 </td>
                                 <td>
-                                    <a class="uk-button pk-button-danger uk-invisible" v-on="click: uninstall">{{ 'Delete' | trans }}</a>
+                                    <a class="uk-button pk-button-danger" v-show="!pkg.enabled" v-on="click: uninstall(pkg)">{{ 'Delete' | trans }}</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -96,7 +101,7 @@
                     {{ 'No extension updates found.' | trans }}
                 </div>
 
-                <div class="uk-alert uk-alert-warning uk-margin-remove" v-show="error">
+                <div class="uk-alert uk-alert-warning uk-margin-remove" v-show="status == 'error'">
                     {{ 'An error occurred in retrieving update information. Please try again later.' | trans }}
                 </div>
 

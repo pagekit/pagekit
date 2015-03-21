@@ -182,7 +182,7 @@ class ExtensionsController extends Controller
     protected function disable(Extension $extension)
     {
         $config = App::option('system/core:config', ['extensions' => []]);
-        $config['extensions'] = array_values(array_diff($config['extensions'], [$extension->getName()]));
+        $config['extensions'] = array_values(array_diff($config['extensions'], [$extension->name]));
         App::option()->set('system/core:config', $config, true);
 
         $extension->disable();
