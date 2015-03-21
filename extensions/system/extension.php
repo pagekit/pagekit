@@ -19,6 +19,7 @@ return [
         'system/finder',
         'system/mail',
         'system/markdown',
+        'system/marketplace',
         'system/menu',
         'system/migration',
         'system/oauth',

@@ -4,7 +4,7 @@ namespace Pagekit\Package;
 
 use Pagekit\Package\Repository\RepositoryInterface;
 
-interface PackageInterface
+interface PackageInterface extends \JsonSerializable
 {
     /**
      * @return array

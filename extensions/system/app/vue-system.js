@@ -338,6 +338,26 @@
 
         });
 
+        /**
+         * Utilities
+         */
+
+        Vue.util.findBy = function (arr, key, val) {
+
+            var value;
+
+            for (var i = 0; i < arr.length; i++) {
+
+                value = arr[i];
+
+                if (value.hasOwnProperty(key) && value[key] === val) {
+                    return value;
+                }
+            }
+
+            return undefined;
+        };
+
     }
 
     if (window.Vue) {

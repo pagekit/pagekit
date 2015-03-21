@@ -1,7 +1,6 @@
 @style('system', 'extensions/system/assets/css/system.css')
 @script('packages', 'extensions/system/assets/js/settings/packages.js', 'requirejs')
-@script('updates', 'extensions/system/assets/js/settings/updates.js', 'marketplace')
-@script('marketplace', 'extensions/system/assets/js/settings/marketplace.js', 'requirejs')
+@script('updates', 'extensions/system/assets/js/settings/updates.js')
 
 <div id="js-themes" class="uk-grid uk-grid-divider" data-api="@($api)" data-key="@($key)" data-url="@url('@system/package/install')" data-installed="@($packagesJson)" data-uk-grid-margin data-uk-grid-match>
 
