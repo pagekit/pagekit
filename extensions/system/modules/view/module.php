@@ -55,11 +55,8 @@ return [
             $app['scripts']->register('application', 'extensions/system/app/application.js', 'angular');
             $app['scripts']->register('application-directives', 'extensions/system/app/directives.js', 'application');
             $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
-            $app['scripts']->register('handlebars', 'vendor/assets/handlebars/handlebars.js');
             $app['scripts']->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js');
             $app['scripts']->register('marked', 'vendor/assets/marked/marked.js');
-            $app['scripts']->register('requirejs', 'extensions/system/assets/js/require.min.js', 'requirejs-config');
-            $app['scripts']->register('requirejs-config', 'extensions/system/assets/js/require.js', 'pagekit');
             $app['scripts']->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery');
             $app['scripts']->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit');
             $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit');

@@ -29,6 +29,7 @@ class BuildCommand extends Command
         '^extensions\/(?!(installer|page|blog|system)\/).*',
         '^extensions\/.+\/languages\/.+\.(po|pot)',
         '^themes\/(?!(alpha)\/).*',
+        '^vendor\/assets\/(jquery|vue)\/(src|dist\/jquery.js)',
         '^vendor\/doctrine\/(annotations|cache|collections|common|dbal|inflector|lexer)\/(bin|docs|tests|build|phpunit|run|upgrade|composer\.lock)',
         '^vendor\/guzzlehttp\/(guzzle|streams)\/(docs|tests|makefile|phpunit)',
         '^vendor\/ircmaxell\/.+\/(test|phpunit|version-test|composer\.lock)',
