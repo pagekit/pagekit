@@ -7,9 +7,7 @@
 !/themes/alpha
 /vendor/*
 !/vendor/assets/codemirror
-!/vendor/assets/handlebars
 !/vendor/assets/marked
-!/vendor/assets/requirejs
 /config.php
 /composer.phar
 /composer.lock
