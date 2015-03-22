@@ -48,7 +48,7 @@ jQuery(function ($) {
             },
 
             enable: function (pkg) {
-                $.post(this.$url('admin/system/themes/enable'), {name: pkg.name}, function (data) {
+                this.$http.post('admin/system/themes/enable', {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         vm.packages.forEach(function (p) {
@@ -58,11 +58,11 @@ jQuery(function ($) {
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                }, 'json');
+                });
             },
 
             uninstall: function (pkg) {
-                $.post(this.$url('admin/system/themes/uninstall'), {name: pkg.name}, function (data) {
+                this.$http.post('admin/system/themes/uninstall', {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         vm.packages.splice(vm.packages.indexOf(pkg), 1);
@@ -70,7 +70,7 @@ jQuery(function ($) {
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                }, 'json');
+                });
             }
 
         }

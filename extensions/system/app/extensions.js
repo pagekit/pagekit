@@ -48,7 +48,7 @@ jQuery(function ($) {
             },
 
             enable: function (pkg) {
-                $.post(this.$url('admin/system/extensions/enable'), {name: pkg.name}, function (data) {
+                this.$http.post('admin/system/extensions/enable', {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         pkg.enabled = true;
@@ -56,11 +56,11 @@ jQuery(function ($) {
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                }, 'json');
+                });
             },
 
             disable: function (pkg) {
-                $.post(this.$url('admin/system/extensions/disable'), {name: pkg.name}, function (data) {
+                this.$http.post('admin/system/extensions/disable', {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         pkg.enabled = false;
@@ -68,11 +68,11 @@ jQuery(function ($) {
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                }, 'json');
+                });
             },
 
             uninstall: function (pkg) {
-                $.post(this.$url('admin/system/extensions/uninstall'), {name: pkg.name}, function (data) {
+                this.$http.post('admin/system/extensions/uninstall', {name: pkg.name}, function (data) {
 
                     if (!data.error) {
                         vm.packages.splice(vm.packages.indexOf(pkg), 1);
@@ -80,7 +80,7 @@ jQuery(function ($) {
 
                     UIkit.notify(data.message, data.error ? 'danger' : 'success');
 
-                }, 'json');
+                });
             }
 
         }

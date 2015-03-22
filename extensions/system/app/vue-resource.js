@@ -141,46 +141,51 @@
          * The Http provides a service for sending XMLHttpRequests
          */
 
-        var Http = function (config) {
+        var Http = function (url, options) {
 
             var request = new window.XMLHttpRequest(),
                 headers = Http.defaults.headers,
                 methods = {success: [], error: []},
                 status  = null, result, method;
 
+            if (_.isObject(url)) {
+                options = url;
+                url = '';
+            }
+
             headers = _.extend({},
                 headers.common,
-                headers[config.method.toLowerCase()]
+                headers[options.method.toLowerCase()]
             );
 
-            config = _.extend(true, {headers: headers},
-                Http.defaults.config,
-                config
+            options = _.extend(true, {url: url, headers: headers},
+                Http.defaults.options,
+                options
             );
 
-            if (config.success) {
-                methods.success.push(config.success);
+            if (options.success) {
+                methods.success.push(options.success);
             }
 
-            if (config.error) {
-                methods.error.push(config.error);
+            if (options.error) {
+                methods.error.push(options.error);
             }
 
-            if (config.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(config.method)) {
-                headers['X-HTTP-Method-Override'] = config.method;
-                config.method = 'POST';
+            if (options.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
+                headers['X-HTTP-Method-Override'] = options.method;
+                options.method = 'POST';
             }
 
-            if (config.emulateJSON && _.isObject(config.data)) {
+            if (options.emulateJSON && _.isObject(options.data)) {
                 headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                config.data = Url.params(config.data);
+                options.data = Url.params(options.data);
             }
 
-            if (_.isObject(config.data)) {
-                config.data = JSON.stringify(config.data);
+            if (_.isObject(options.data)) {
+                options.data = JSON.stringify(options.data);
             }
 
-            request.open(config.method, Url(config.url, config.params, config.urlRoot), true);
+            request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
 
             _.each(headers, function (value, header) {
                 request.setRequestHeader(header, value);
@@ -199,7 +204,7 @@
                 }
             };
 
-            request.send(config.data);
+            request.send(options.data);
 
             var parse = function (request) {
 
@@ -248,10 +253,9 @@
 
                 config: {
                     method: 'GET',
-                    url: '',
-                    urlRoot: '',
-                    data: '',
                     params: {},
+                    data: '',
+                    urlRoot: '',
                     emulateHTTP: false,
                     emulateJSON: false
                 },
@@ -265,24 +269,24 @@
 
             },
 
-            get: function (url, config) {
-                return Http(_.extend({method: 'GET', url: url}, config));
+            get: function (url, success, options) {
+                return Http(url, _.extend({method: 'GET', success: success}, options));
             },
 
-            put: function (url, data, config) {
-                return Http(_.extend({method: 'PUT', url: url, data: data}, config));
+            put: function (url, data, success, options) {
+                return Http(url, _.extend({method: 'PUT', data: data, success: success}, options));
             },
 
-            post: function (url, data, config) {
-                return Http(_.extend({method: 'POST', url: url, data: data}, config));
+            post: function (url, data, success, options) {
+                return Http(url, _.extend({method: 'POST', data: data, success: success}, options));
             },
 
-            patch: function (url, data, config) {
-                return Http(_.extend({method: 'PATCH', url: url, data: data}, config));
+            patch: function (url, data, success, options) {
+                return Http(url, _.extend({method: 'PATCH', data: data, success: success}, options));
             },
 
-            'delete': function (url, config) {
-                return Http(_.extend({method: 'DELETE', url: url}, config));
+            'delete': function (url, success, options) {
+                return Http(url, _.extend({method: 'DELETE', success: success}, options));
             }
 
         });
@@ -303,13 +307,13 @@
                 action = _.extend(true, {url: url, params: params || {}}, action);
 
                 self[name] = function() {
-                    return Http(getConfig(action, arguments));
+                    return Http(getOptions(action, arguments));
                 };
             });
 
-            function getConfig(action, args) {
+            function getOptions(action, args) {
 
-                var config = _.extend({}, action), params = {}, data, success, error;
+                var options = _.extend({}, action), params = {}, data, success, error;
 
                 switch (args.length) {
 
@@ -347,7 +351,7 @@
 
                         if (_.isFunction(args[0])) {
                             success = args[0];
-                        } else if (/^(POST|PUT|PATCH)$/i.test(config.method)) {
+                        } else if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
                             data = args[0];
                         } else {
                             params = args[0];
@@ -364,19 +368,19 @@
                         throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
                 }
 
-                config.url = action.url;
-                config.data = data;
-                config.params = _.extend({}, action.params, params);
+                options.url = action.url;
+                options.data = data;
+                options.params = _.extend({}, action.params, params);
 
                 if (success) {
-                    config.success = success;
+                    options.success = success;
                 }
 
                 if (error) {
-                    config.error = error;
+                    options.error = error;
                 }
 
-                return config;
+                return options;
             }
 
         };
