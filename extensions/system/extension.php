@@ -105,7 +105,7 @@ return [
 
         'linkpicker.modal'    => 'extensions/system/views/tmpl/linkpicker.modal.razr',
         'linkpicker.replace'  => 'extensions/system/views/tmpl/linkpicker.replace.razr',
-        'package.upload'      => 'extensions/system/views/tmpl/package.upload.razr'
+        'package.upload'      => 'extensions/system/views/admin/upload.php'
 
     ],
 

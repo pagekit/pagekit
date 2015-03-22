@@ -1,61 +1,76 @@
-jQuery(function ($) {
+(function ($, Vue) {
 
-    // upload package
-    var progressbar = $(".js-upload-progressbar"),
-        bar         = $('.uk-progress-bar', progressbar),
-        dialog      = $('.js-upload-modal', upload),
-        settings    = {
+    Vue.component('v-upload', {
 
-        action: upload.data("action"),
-        type  : 'json',
-        params: system.csrf.params,
-        param : 'file',
+        replace: true,
 
-        loadstart: function() {
-            bar.css("width", "0%").text("0%");
-            progressbar.removeClass("uk-hidden");
+        template: '#package.upload',
+
+        data: function () {
+            return {
+                pkg: {},
+                action: '',
+                progress: ''
+            };
         },
 
-        progress: function(percent) {
-            percent = Math.ceil(percent);
-            bar.css("width", percent+"%").text(percent+"%");
+        ready: function () {
+
+            var settings = {
+                action: this.action,
+                type: 'json',
+                param: 'file',
+                loadstart: this.onStart,
+                progress: this.onProgress,
+                allcomplete: this.onComplete
+            };
+
+            UIkit.uploadSelect(this.$$.select, settings);
+            UIkit.uploadDrop(this.$$.drop, settings);
+
+            this.modal = UIkit.modal(this.$$.modal);
         },
 
-        allcomplete: function(data) {
+        methods: {
 
-            bar.css("width", "100%").text("100%");
+            onStart: function () {
+                this.progress = '1%';
+            },
 
-            setTimeout(function(){
-                progressbar.addClass("uk-hidden");
-            }, 250);
+            onProgress: function (percent) {
+                this.progress = Math.ceil(percent) + '%';
+            },
 
-            if (data.error) {
-                UIkit.notify(data.error, 'danger');
-                return;
-            }
+            onComplete: function (data) {
 
-            $.post(params.api + '/package/' + data.package.name, function(info) {
+                var self = this;
 
-                var version = info.versions[data.package.version];
+                this.progress = '100%';
 
-                if (version && version.dist.shasum != data.package.shasum) {
-                    show('checksum-mismatch', upload);
+                setTimeout(function (){
+                    self.progress = '';
+                }, 250);
+
+                if (data.error) {
+                    UIkit.notify(data.error, 'danger');
+                    return;
                 }
 
-            }, 'jsonp');
+                // $.post(params.api + '/package/' + data.package.name, function (info) {
 
-            dialog.html(tmpl.render('package.upload', data));
+                //     var version = info.versions[data.package.version];
 
-            if (!modal) {
-                modal = UIkit.modal(dialog);
+                //     if (version && version.dist.shasum != data.package.shasum) {
+                //         show('checksum-mismatch', upload);
+                //     }
+
+                // }, 'jsonp');
+
+                this.modal.show();
             }
 
-            modal.show();
         }
-    };
 
-    // upload objects
-    UIkit.uploadSelect($(".js-upload-select"), settings);
-    UIkit.uploadDrop($(".js-upload-drop"), settings);
+    });
 
-});
+})(jQuery, Vue);

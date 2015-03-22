@@ -63,18 +63,10 @@
             </li>
             <li class="js-upload" data-action="@url('@system/package/upload', ['type' => 'theme'])">
 
-                <h2 class="pk-form-heading">{{ 'Install a theme' | trans }}</h2>
+                <h2 class="pk-form-heading">{{ 'Install an theme' | trans }}</h2>
 
-                <div class="uk-placeholder uk-text-center uk-text-muted js-upload-drop">
-                    <img src="<?= $view->url()->getStatic('extensions/system/assets/images/finder-droparea.svg') ?>" width="22" height="22" alt="{{ 'Droparea' | trans }}">
-                    <?= __('Drop files here or <a class="uk-form-file">select one<input class="js-upload-select" type="file" name="file"></a>') ?>
-                </div>
+                <v-upload v-with="action: 'extension'"></v-upload>
 
-                <div class="js-upload-progressbar uk-progress uk-hidden">
-                    <div class="uk-progress-bar" style="width: 0%;">...</div>
-                </div>
-
-                <div class="js-upload-modal uk-modal"></div>
             </li>
             <li>
 

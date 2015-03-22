@@ -25,6 +25,7 @@ class ExtensionsController extends Controller
         }
 
         App::view()->meta(['title' => __('Extensions')]);
+        App::view()->script('extensions-upload', 'extensions/system/app/upload.js', ['vue-system', 'uikit-upload']);
         App::view()->script('extensions-index', 'extensions/system/app/extensions.js', 'marketplace');
         App::view()->data('extensions', ['api' => App::system()->config('api'), 'packages' => $packages]);
     }
