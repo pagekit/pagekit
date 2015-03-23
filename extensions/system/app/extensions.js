@@ -4,7 +4,7 @@ jQuery(function ($) {
 
         el: '#extensions',
 
-        data: $.extend(extensions, {
+        data: $.extend($extensions, {
             updates: null,
             search: '',
             status: ''

@@ -1,3 +1,6 @@
+<?php $view->script('extensions-upload', 'extensions/system/app/upload.js', ['vue-system', 'uikit-upload']) ?>
+<?php $view->script('extensions-index', 'extensions/system/app/themes.js', 'marketplace') ?>
+
 <div id="themes" class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">
@@ -65,7 +68,7 @@
 
                 <h2 class="pk-form-heading">{{ 'Install an theme' | trans }}</h2>
 
-                <v-upload v-with="action: 'extension'"></v-upload>
+                <v-upload v-with="action: 'theme'"></v-upload>
 
             </li>
             <li>

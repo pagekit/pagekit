@@ -1,3 +1,6 @@
+<?php $view->script('extensions-upload', 'extensions/system/app/upload.js', ['vue-system', 'uikit-upload']) ?>
+<?php $view->script('extensions-index', 'extensions/system/app/extensions.js', 'marketplace') ?>
+
 <div id="extensions" class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">

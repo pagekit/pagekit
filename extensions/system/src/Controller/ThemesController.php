@@ -34,8 +34,8 @@ class ThemesController extends Controller
         // });
 
         App::view()->meta(['title' => __('Themes')]);
-        App::view()->script('themes-index', 'extensions/system/app/themes.js', 'marketplace');
-        App::view()->data('themes', ['api' => App::system()->config('api'), 'packages' => $packages]);
+
+        return ['$themes' => ['api' => App::system()->config('api'), 'packages' => $packages]];
     }
 
     /**

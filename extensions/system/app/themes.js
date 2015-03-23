@@ -4,7 +4,7 @@ jQuery(function ($) {
 
         el: '#themes',
 
-        data: $.extend(themes, {
+        data: $.extend($themes, {
             updates: null,
             search: '',
             status: ''
