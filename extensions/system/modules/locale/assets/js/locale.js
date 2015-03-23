@@ -1,6 +1,6 @@
 (function(window) {
 
-    var config = window.locale || { translations: {}, formats: {}};
+    var config = window.$locale || { translations: {}, formats: {}};
 
     /**
      * Copyright (c) William DURAND <william.durand1@gmail.com> (https://github.com/willdurand/BazingaJsTranslationBundle)

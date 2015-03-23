@@ -31,6 +31,6 @@ class LocaleController
             return $response;
         }
 
-        return $response->setContent($json ? $messages : sprintf('var locale = %s;', $messages));
+        return $response->setContent($json ? $messages : sprintf('var $locale = %s;', $messages));
     }
 }
