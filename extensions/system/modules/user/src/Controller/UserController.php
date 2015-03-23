@@ -21,19 +21,19 @@ class UserController
         unset($roles[Role::ROLE_AUTHENTICATED]);
 
         App::view()->meta(['title' => __('Users')]);
-        App::view()->script('user-index', 'extensions/system/modules/user/app/index.js', ['vue-system', 'gravatar']);
-        App::view()->data('user', [
-            'config' => [
+
+        return [
+            '$config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
                 'filter'            => $filter,
                 'page'              => $page
             ],
-            'data'   => [
+            '$data' => [
                 'statuses'    => User::getStatuses(),
                 'permissions' => App::permissions(),
                 'roles'       => array_values($roles)
             ]
-        ]);
+        ];
     }
 
     /**
@@ -51,18 +51,18 @@ class UserController
         $user->setRoles(null);
 
         App::view()->meta(['title' => $id ? __('Edit User') : __('Add User')]);
-        App::view()->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'vue-validator', 'uikit-form-password', 'gravatar']);
-        App::view()->data('user', [
-                'config' => [
-                    'emailVerification' => App::option('system:user.require_verification'),
-                    'currentUser'       => App::user()->getId()
-                ],
-                'data'   => [
-                    'user'     => $user,
-                    'statuses' => User::getStatuses(),
-                    'roles'    => array_values($roles)
-                ]
-            ]);
+
+        return [
+            '$config' => [
+                'emailVerification' => App::option('system:user.require_verification'),
+                'currentUser'       => App::user()->getId()
+            ],
+            '$data' => [
+                'user'     => $user,
+                'statuses' => User::getStatuses(),
+                'roles'    => array_values($roles)
+            ]
+        ];
     }
 
     /**

@@ -5,8 +5,8 @@ jQuery(function ($) {
         el: '#js-user',
 
         data: {
-            config  : user.config,
-            data    : user.data,
+            config  : $config,
+            data    : $data,
             users   : [],
             pages   : 0,
             selected: []
@@ -19,7 +19,7 @@ jQuery(function ($) {
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true);
-            this.$watch('config.filter', function() { this.load(0) }, true);
+            this.$watch('config.filter', function() { this.load(0); }, true);
 
             this.load();
         },

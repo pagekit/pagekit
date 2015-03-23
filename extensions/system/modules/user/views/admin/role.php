@@ -1,3 +1,6 @@
+<?php $view->style('role-index', 'extensions/system/assets/css/user.css') ?>
+<?php $view->script('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system') ?>
+
 <div id="js-role" class="uk-form uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match v-cloak >
 
     <div class="uk-width-medium-1-4 pk-sidebar-left">

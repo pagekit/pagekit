@@ -5,10 +5,10 @@ jQuery(function ($) {
         el: '#js-user-edit',
 
         data: {
-            config: user.config,
-            user: user.data.user,
-            roles: user.data.roles,
-            statuses: user.data.statuses
+            config: $config,
+            user: $data.user,
+            roles: $data.roles,
+            statuses: $data.statuses
         },
 
         ready: function () {

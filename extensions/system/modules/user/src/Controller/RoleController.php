@@ -19,16 +19,15 @@ class RoleController extends Controller
     public function indexAction($id = null)
     {
         App::view()->meta(['title' => __('Roles')]);
-        App::view()->style('role-index', 'extensions/system/assets/css/user.css');
-        App::view()->script('role-index', 'extensions/system/modules/user/app/role.js', 'vue-system');
-        App::view()->data('role', [
-                'config' => [
-                    'role' => $id
-                ],
-                'data'   => [
-                    'permissions' => App::permissions(),
-                    'roles'       => Role::query()->orderBy('priority')->get()
-                ]
-            ]);
+
+        return [
+            '$config' => [
+                'role' => $id
+            ],
+            '$data' => [
+                'permissions' => App::permissions(),
+                'roles'       => Role::query()->orderBy('priority')->get()
+            ]
+        ];
     }
 }

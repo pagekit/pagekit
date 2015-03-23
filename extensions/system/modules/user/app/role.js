@@ -1,9 +1,9 @@
-(function (window, $, UIkit) {
+(function ($, UIkit) {
 
-    var config = window.role || window.permission, Component = Vue.extend({
+    var Component = Vue.extend({
 
         data: function () {
-            return config.data;
+            return $data;
         },
 
         resource: null,
@@ -11,7 +11,6 @@
         created: function () {
 
             this.resource = this.$resource('api/system/role/:id');
-
             this.$watch('roles', UIkit.Utils.debounce(this.save, 1000), true);
 
         },
@@ -62,9 +61,9 @@
 
     });
 
-    $(function ($) {
+    $(function () {
 
-        if (window.permission) {
+        if (document.getElementById('js-permission')) {
 
             new Component({ el: '#js-permission' });
 
@@ -75,8 +74,8 @@
                 el: '#js-role',
 
                 data: {
-                    role  : {},
-                    config: config.config
+                    role: {},
+                    config: $config
                 },
 
                 ready: function () {
@@ -153,4 +152,4 @@
 
     });
 
-})(window, jQuery, UIkit);
+})(jQuery, UIkit);

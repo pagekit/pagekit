@@ -1,3 +1,5 @@
+<?php $view->script('user-edit', 'extensions/system/modules/user/app/edit.js', ['vue-system', 'vue-validator', 'uikit-form-password', 'gravatar']) ?>
+
 <form id="js-user-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 
     <?php $view->section()->start('toolbar', 'show') ?>
