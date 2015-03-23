@@ -87,17 +87,26 @@ return [
                     $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
                 }
             });
+        });
 
-            $app->on('system.loaded', function () use ($app) {
-                foreach ($app['module'] as $module) {
-                    if (isset($module->templates)) {
-                        foreach ($module->templates as $name => $tmpl) {
-                            $app['view']->tmpl()->register($name, $tmpl);
-                        }
+        $app->on('system.loaded', function () use ($app) {
+            foreach ($app['module'] as $module) {
+                if (isset($module->templates)) {
+                    foreach ($module->templates as $name => $tmpl) {
+                        $app['view']->tmpl()->register($name, $tmpl);
                     }
                 }
-            });
+            }
+        });
 
+        $app->on('kernel.view', function ($event) use ($app) {
+            if (is_array($result = $event->getControllerResult())) {
+                foreach ($result as $key => $value) {
+                    if ($key[0] == '$') {
+                        $app['view']->data($key, $value);
+                    }
+                }
+            }
         });
 
     },
