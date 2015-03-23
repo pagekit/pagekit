@@ -18,9 +18,11 @@ class CommentController extends Controller
      */
     public function indexAction($filter = [], $post = 0, $page = 0)
     {
+        $post = Post::find($post);
+
         return [
             '$meta' => [
-                'title' => ($post = Post::find($post)) ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments')
+                'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments')
             ],
             '$config' => [
                 'filter' => $filter,
