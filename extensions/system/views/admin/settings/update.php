@@ -1,3 +1,5 @@
+<?php $view->script('update', 'extensions/system/app/update.js', 'vue-system') ?>
+
 <div id="js-update" v-cloak>
 
     <p v-repeat="errors" class="uk-alert uk-alert-warning">{{ $value }}</p>

@@ -102,7 +102,9 @@ return [
         $app->on('kernel.view', function ($event) use ($app) {
             if (is_array($result = $event->getControllerResult())) {
                 foreach ($result as $key => $value) {
-                    if ($key[0] == '$') {
+                    if ($key == '$meta') {
+                        $app['view']->meta($value);
+                    } elseif ($key[0] == '$') {
                         $app['view']->data($key, $value);
                     }
                 }

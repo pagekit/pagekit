@@ -1,3 +1,5 @@
+<?php $view->script('post-index', 'extensions/blog/app/post/index.js', ['vue-system']) ?>
+
 <div id="js-post" class="uk-form" v-cloak>
 
     <?php $view->section()->start('toolbar', 'show') ?>

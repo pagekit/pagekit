@@ -70,11 +70,10 @@ class SystemController extends Controller
      */
     public function infoAction()
     {
-        App::view()->meta(['title' => __('System Information')]);
-        App::view()->script('system-info', 'extensions/system/app/info.js', 'vue-system');
-        App::view()->data('info', [
-            'info' => App::systemInfo()->get(),
-        ]);
+        return [
+            '$meta' => ['title' => __('System Information')],
+            '$info' => App::systemInfo()->get()
+        ];
     }
 
     /**

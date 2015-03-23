@@ -33,9 +33,15 @@ class ThemesController extends Controller
         //     return strcmp($themeA->getName(), $themeB->getName());
         // });
 
-        App::view()->meta(['title' => __('Themes')]);
-
-        return ['$themes' => ['api' => App::system()->config('api'), 'packages' => $packages]];
+        return [
+            '$meta' => [
+                'title' => __('Themes')
+            ],
+            '$themes' => [
+                'api' => App::system()->config('api'),
+                'packages' => $packages
+            ]
+        ];
     }
 
     /**

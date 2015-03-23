@@ -7,8 +7,8 @@ jQuery(function ($) {
         el: '#js-post',
 
         data: {
-            data    : post.data,
-            post    : post.data.post
+            data: $data,
+            post: $data.post
         },
 
         created: function () {

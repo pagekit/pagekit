@@ -5,8 +5,8 @@ jQuery(function ($) {
         el: '#js-post',
 
         data: {
-            config  : post.config,
-            data    : post.data,
+            config  : $config,
+            data    : $data,
             posts   : null,
             pages   : 0,
             selected: []

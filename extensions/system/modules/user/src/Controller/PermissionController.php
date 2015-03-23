@@ -16,9 +16,10 @@ class PermissionController
      */
     public function indexAction()
     {
-        App::view()->meta(['title' => __('Permissions')]);
-
         return [
+            '$meta' => [
+                'title' => __('Permissions')
+            ],
             '$data' => [
                 'permissions' => App::permissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()

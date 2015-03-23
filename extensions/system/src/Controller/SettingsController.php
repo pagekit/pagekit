@@ -37,10 +37,10 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        App::view()->meta(['title' => __('Settings')]);
-        App::view()->script('settings', 'extensions/system/app/settings.js', 'vue-system');
-
-        return ['views' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getViews()];
+        return [
+            '$meta' => ['title' => __('Settings')],
+            'views' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getViews()
+        ];
     }
 
     /**

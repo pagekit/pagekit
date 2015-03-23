@@ -1,3 +1,5 @@
+<?php $view->script('system-info', 'extensions/system/app/info.js', 'vue-system') ?>
+
 <div id="js-system-info">
 
     <ul class="uk-tab" data-uk-tab="{ connect:'#tab-content' }">

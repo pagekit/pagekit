@@ -24,9 +24,15 @@ class ExtensionsController extends Controller
             $package->enabled = App::module($package->getName()) != null;
         }
 
-        App::view()->meta(['title' => __('Extensions')]);
-
-        return ['$extensions' => ['api' => App::system()->config('api'), 'packages' => $packages]];
+        return [
+            '$meta' => [
+                'title' => __('Extensions')
+            ],
+            '$extensions' => [
+                'api' => App::system()->config('api'),
+                'packages' => $packages
+            ]
+        ];
     }
 
     /**

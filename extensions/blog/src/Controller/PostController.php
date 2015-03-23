@@ -19,17 +19,18 @@ class PostController extends Controller
      */
     public function indexAction($filter = null, $page = 0)
     {
-        App::view()->meta(['title' => __('Posts')]);
-        App::view()->script('post-index', 'extensions/blog/app/post/index.js', ['vue-system']);
-        App::view()->data('post', [
-            'config' => [
+        return [
+            '$meta' => [
+                'title' => __('Posts')
+            ],
+            '$config' => [
                 'filter' => $filter,
                 'page'   => $page
             ],
-            'data'   => [
+            '$data' => [
                 'statuses' => Post::getStatuses()
             ]
-        ]);
+        ];
     }
 
     /**
@@ -58,10 +59,11 @@ class PostController extends Controller
                 $post->set('markdown', $module->config('posts.markdown_enabled'));
             }
 
-            App::view()->meta(['title' => $id ? __('Edit Post') : __('Add Post')]);
-            App::view()->script('post-edit', 'extensions/blog/app/post/edit.js', ['vue-system', 'vue-validator', 'uikit-datepicker', 'uikit-timepicker']);
-            App::view()->data('post', [
-                'data' => [
+            return [
+                '$meta' => [
+                    'title' => $id ? __('Edit Post') : __('Add Post')
+                ],
+                '$data' => [
                     'post'     => $post,
                     'statuses' => Post::getStatuses(),
                     'roles'    => array_values(Role::findAll()),
@@ -69,10 +71,9 @@ class PostController extends Controller
                         ->from('@system_user')
                         ->execute('id, username')
                         ->fetchAll()
-                ]
-            ]);
-
-            return compact('post');
+                ],
+                'post' => $post
+            ];
 
         } catch (Exception $e) {
 

@@ -4,7 +4,7 @@ jQuery(function($) {
 
         el: '#dashboard',
 
-        data: $.extend(dashboard, {selected: []}),
+        data: $.extend($dashboard, {selected: []}),
 
         ready: function() {
 

@@ -18,9 +18,10 @@ class RoleController extends Controller
      */
     public function indexAction($id = null)
     {
-        App::view()->meta(['title' => __('Roles')]);
-
         return [
+            '$meta' => [
+                'title' => __('Roles')
+            ],
             '$config' => [
                 'role' => $id
             ],

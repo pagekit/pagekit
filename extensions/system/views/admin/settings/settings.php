@@ -1,3 +1,5 @@
+<?php $view->script('settings', 'extensions/system/app/settings.js', 'vue-system') ?>
+
 <form id="js-settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 
     <?php $app['sections']->start('toolbar', 'show') ?>

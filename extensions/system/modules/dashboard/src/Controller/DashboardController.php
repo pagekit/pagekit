@@ -50,11 +50,15 @@ class DashboardController extends Controller
      */
     public function settingsAction()
     {
-        App::view()->meta(['title' => __('Dashboard Settings')]);
-        App::view()->data('dashboard', [
+        return [
+            '$meta' => [
+                'title' => __('Dashboard Settings')
+            ],
+            '$dashboard' => [
                 'types' => $this->dashboard->getTypes(),
                 'widgets' => $this->dashboard->getWidgets()
-            ]);
+            ]
+        ];
     }
 
     /**

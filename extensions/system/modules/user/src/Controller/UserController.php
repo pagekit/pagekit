@@ -20,9 +20,10 @@ class UserController
         $roles = $this->getRoles();
         unset($roles[Role::ROLE_AUTHENTICATED]);
 
-        App::view()->meta(['title' => __('Users')]);
-
         return [
+            '$meta' => [
+                'title' => __('Users')
+            ],
             '$config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
                 'filter'            => $filter,
@@ -50,9 +51,10 @@ class UserController
         $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : false;
         $user->setRoles(null);
 
-        App::view()->meta(['title' => $id ? __('Edit User') : __('Add User')]);
-
         return [
+            '$meta' => [
+                'title' => $id ? __('Edit User') : __('Add User')
+            ],
             '$config' => [
                 'emailVerification' => App::option('system:user.require_verification'),
                 'currentUser'       => App::user()->getId()

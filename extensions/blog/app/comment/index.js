@@ -5,8 +5,8 @@ jQuery(function ($) {
         el: '#js-comments',
 
         data: {
-            config  : comment.config,
-            data    : comment.data,
+            config  : $config,
+            data    : $data,
             comments: null,
             pages   : 0,
             selected: [],

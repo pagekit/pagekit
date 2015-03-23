@@ -22,15 +22,16 @@ class UpdateController
      */
     public function indexAction()
     {
-        App::view()->meta(['title' => __('Update')]);
-        App::view()->script('update', 'extensions/system/app/update.js', ['vue-system']);
-        App::view()->data('update', [
-            'config' => [
+        return [
+            '$meta' => [
+                'title' => __('Update')
+            ],
+            '$config' => [
                 'api' => App::system()->config('api.url'),
                 'channel' => App::system()->config('release_channel', 'stable'),
                 'version' => App::version()
             ]
-        ]);
+        ];
     }
 
     /**

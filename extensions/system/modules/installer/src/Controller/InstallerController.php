@@ -36,9 +36,10 @@ class InstallerController
      */
     public function indexAction()
     {
-       App::view()->meta(['title' => 'Pagekit Installer']);
-
-       return ['redirect' => App::url('/admin')];
+        return [
+            '$meta' => ['title' => 'Pagekit Installer'],
+            'redirect' => App::url('/admin')
+        ];
     }
 
     /**

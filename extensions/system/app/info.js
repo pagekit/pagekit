@@ -4,7 +4,9 @@ jQuery(function ($) {
 
         el: '#js-system-info',
 
-        data: window.info
+        data: {
+            info: $info
+        }
 
     });
 

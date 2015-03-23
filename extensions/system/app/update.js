@@ -5,7 +5,7 @@ jQuery(function ($) {
         el: '#js-update',
 
         data: {
-            config: update.config,
+            config: $config,
             view: 'index',
             version: false,
             progress: 0,
