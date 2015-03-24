@@ -1,22 +1,7 @@
 (function($) {
 
-    var config = $.extend({}, $pagekit), templates = {};
-
-    window.System = {
-
-        version: config.version,
-
-        loadLanguage: function(locale) {
-            return $.getJSON(this.url('admin/system/locale', { locale: locale }, function(data) {
-                data.locale = locale;
-                Locale.Translator.fromJSON(data);
-            }));
-        }
-
-    };
-
     $(document).on('ajaxSend', function(e, xhr){
-        xhr.setRequestHeader('X-XSRF-TOKEN', config.csrf);
+        xhr.setRequestHeader('X-XSRF-TOKEN', $pagekit.csrf);
     });
 
     /**

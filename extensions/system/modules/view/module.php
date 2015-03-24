@@ -72,7 +72,7 @@ return [
             $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
             $app['scripts']->register('system', 'extensions/system/app/system.js', ['jquery', 'tmpl', 'locale']);
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
-            $app['scripts']->register('vue-system', 'extensions/system/app/vue-system.js', ['vue-resource', 'system', 'uikit-pagination']);
+            $app['scripts']->register('vue-system', 'extensions/system/app/vue-system.js', ['vue-resource', 'locale', 'uikit-pagination']);
             $app['scripts']->register('vue-resource', 'extensions/system/app/vue-resource.js', ['vue']);
             $app['scripts']->register('vue-validator', 'extensions/system/app/vue-validator.js', ['vue']);
 

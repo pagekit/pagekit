@@ -98,14 +98,6 @@ jQuery(function ($) {
                 return this.data.statuses[post.status];
             }
 
-        },
-
-        filters: {
-
-            baseUrl: function (url) {
-                return url ? url.substr(pagekit.url.length) : url;
-            }
-
         }
 
     });
