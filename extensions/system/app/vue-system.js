@@ -2,6 +2,8 @@
 
     function install (Vue) {
 
+        var templates = {};
+
         /**
          * Config
          */
@@ -14,8 +16,24 @@
          * Methods
          */
 
-        Vue.prototype.$url = System.url;
-        Vue.prototype.$resource = System.resource;
+        Vue.template = function(name) {
+
+            if (!templates[name]) {
+                templates[name] = Vue.http.get(Vue.url('system/tmpl/:template', {template: name}));
+            }
+
+            return templates[name];
+        };
+
+        Vue.url.static = function(url, params, root) {
+
+            if (!root) {
+                root = Vue.url.root;
+            }
+
+            return Vue.url(url, params, root.replace(/\/index.php$/i, ''));
+        };
+
         Vue.prototype.$date = Locale.date;
         Vue.prototype.$trans = Locale.trans;
         Vue.prototype.$transChoice = Locale.transChoice;
@@ -28,6 +46,7 @@
         };
 
         var getTemplate = function(options, fn, args) {
+
             if (!options.template) {
                 return fn.call(this, args);
             }
@@ -41,7 +60,7 @@
                 return fn.call(this, args);
             }
 
-            System.template(template.slice(1)).done(function(tmpl) {
+            Vue.template(template.slice(1)).success(function(tmpl) {
                 options.template = tmpl;
             }).always(function() {
                 fn.call(self, args);
@@ -70,12 +89,13 @@
             }
 
             var frag = Vue.parsers.template.parse(id);
+
             if (frag) {
                 this.vm.$options.partials[id] = frag;
                 return insert.call(this, id);
             }
 
-            System.template(id.slice(1)).done(function(tmpl) {
+            Vue.template(id.slice(1)).success(function(tmpl) {
                 self.vm.$options.partials[id] = tmpl;
             }).always(function() {
                 insert.call(self, id);
@@ -86,7 +106,7 @@
          * Filters
          */
 
-        var eval = function(expression) {
+        var evalExp = function(expression) {
 
             try {
 
@@ -94,18 +114,18 @@
 
             } catch (e) {
                 if (Vue.config.warnExpressionErrors) {
-                    Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e)
+                    Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
                 }
             }
 
         };
 
         Vue.filter('trans', function(id, parameters, domain, locale) {
-            return this.$trans(id, eval.call(this, parameters), eval.call(this, domain), eval.call(this, locale));
+            return this.$trans(id, evalExp.call(this, parameters), evalExp.call(this, domain), evalExp.call(this, locale));
         });
 
         Vue.filter('transChoice', function(id, number, parameters, domain, locale) {
-            return this.$transChoice(id, eval.call(this, number) || 0, eval.call(this, parameters), eval.call(this, domain), eval.call(this, locale));
+            return this.$transChoice(id, evalExp.call(this, number) || 0, evalExp.call(this, parameters), evalExp.call(this, domain), evalExp.call(this, locale));
         });
 
         Vue.filter('date', function(date, format) {

@@ -20,7 +20,7 @@
 
         ready: function () {
 
-            System.template('finder.thumbnail');
+            Vue.template('finder.thumbnail');
 
             this.resource = this.$resource('system/finder/:cmd');
 

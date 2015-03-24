@@ -189,7 +189,7 @@ jQuery(function($) {
                 var vm = this, img = new Image(), src = '';
 
                 if (this.image.src) {
-                    src = this.$url(this.image.src, true);
+                    src = this.$url.static(this.image.src);
                 }
 
                 img.onerror = function() {

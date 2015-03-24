@@ -21,9 +21,9 @@ jQuery(function ($) {
                 var img;
 
                 if (pkg.extra.image) {
-                    img = this.$url('themes/:name/:image', {name: pkg.name, image: pkg.extra.image}, true);
+                    img = this.$url.static('themes/:name/:image', {name: pkg.name, image: pkg.extra.image});
                 } else {
-                    img = this.$url('extensions/system/assets/images/placeholder-800x600.svg', true);
+                    img = this.$url.static('extensions/system/assets/images/placeholder-800x600.svg');
                 }
 
                 return img;

@@ -198,14 +198,23 @@
 
             _.extend(promise, {
                 success: function (onSuccess) {
-                    return promise.then(function(request) {
+                    promise.then(function(request) {
                         onSuccess.apply(onSuccess, parseReq(request));
                     });
+
+                    return promise;
                 },
                 error: function (onError) {
-                    return promise.then(function(request) {
+                    promise.catch(function(request) {
                         onError.apply(onError, parseReq(request));
                     });
+
+                    return promise;
+                },
+                always: function (onAlways) {
+                    promise.then(onAlways, onAlways);
+
+                    return promise;
                 }
             });
 
@@ -470,8 +479,8 @@
 
     if (!window.Promise) {
 
-        function Promise (executor) {
-            this._executor = executor(this.resolve.bind(this), this.reject.bind(this));
+        function Promise(executor) {
+            executor(this.resolve.bind(this), this.reject.bind(this));
             this._thens = [];
         }
 
