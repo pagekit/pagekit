@@ -61,9 +61,9 @@
 
                 var params = [];
 
-                params.add = function(key, value) {
+                params.add = function (key, value) {
 
-                    if (_.isFunction(value)) {
+                    if (_.isFunction (value)) {
                         value = value();
                     }
 
@@ -100,7 +100,7 @@
 
             var array = _.isArray(obj), plain = _.isPlainObject(obj), hash;
 
-            _.each(obj, function(value, key) {
+            _.each(obj, function (value, key) {
 
                 hash = _.isObject(value) || _.isArray(value);
 
@@ -143,10 +143,8 @@
 
         var Http = function (url, options) {
 
-            var request = new window.XMLHttpRequest(),
-                headers = Http.defaults.headers,
-                methods = {success: [], error: []},
-                status  = null, result, method;
+            var request = new XMLHttpRequest(),
+                headers = Http.defaults.headers;
 
             if (_.isObject(url)) {
                 options = url;
@@ -163,14 +161,6 @@
                 options
             );
 
-            if (options.success) {
-                methods.success.push(options.success);
-            }
-
-            if (options.error) {
-                methods.error.push(options.error);
-            }
-
             if (options.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
                 headers['X-HTTP-Method-Override'] = options.method;
                 options.method = 'POST';
@@ -185,64 +175,62 @@
                 options.data = JSON.stringify(options.data);
             }
 
-            request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
+            var promise = new Promise(function (resolve, reject) {
 
-            _.each(headers, function (value, header) {
-                request.setRequestHeader(header, value);
+                request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
+
+                _.each(headers, function (value, header) {
+                    request.setRequestHeader(header, value);
+                });
+
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4) {
+                        if (request.status >= 200 && request.status < 300) {
+                            resolve(request);
+                        } else {
+                            reject(request);
+                        }
+                    }
+                };
+
+                request.send(options.data);
             });
 
-            request.onreadystatechange = function () {
-                if (request.readyState === 4) {
-
-                    status = request.status >= 200 && request.status < 300;
-                    method = methods[status ? 'success' : 'error'];
-                    result = parse(request);
-
-                    for (i = 0; i < method.length; i++) {
-                        method[i].apply(method[i], result);
-                    }
-                }
-            };
-
-            request.send(options.data);
-
-            var parse = function (request) {
-
-                var result;
-
-                try {
-                    result = JSON.parse(request.responseText);
-                } catch (e) {
-                    result = request.responseText;
-                }
-
-                return [result, request.status, request];
-            };
-
-            var callbacks = {
-                success: function (callback) {
-
-                    if (status === null) {
-                        methods.success.push(callback);
-                    } else {
-                        callback.apply(callback, result);
-                    }
-
-                    return callbacks;
+            _.extend(promise, {
+                success: function (onSuccess) {
+                    return promise.then(function(request) {
+                        onSuccess.apply(onSuccess, parseReq(request));
+                    });
                 },
-                error: function (callback) {
-
-                    if (status === null) {
-                        methods.error.push(callback);
-                    } else {
-                        callback.apply(callback, result);
-                    }
-
-                    return callbacks;
+                error: function (onError) {
+                    return promise.then(function(request) {
+                        onError.apply(onError, parseReq(request));
+                    });
                 }
-            };
+            });
 
-            return callbacks;
+            if (options.success) {
+                promise.success(options.success);
+            }
+
+            if (options.error) {
+                promise.error(options.error);
+            }
+
+            return promise;
+        };
+
+        var parseReq = function (request) {
+
+            var result;
+
+            try {
+                result = JSON.parse(request.responseText);
+            } catch (e) {
+                result = request.responseText;
+            }
+
+            return [result, request.status, request];
         };
 
         var jsonType = {'Content-Type': 'application/json;charset=utf-8'};
@@ -296,17 +284,17 @@
          * The Resource provides interaction support with RESTful services
          */
 
-        var Resource = function(url, params, actions) {
+        var Resource = function (url, params, actions) {
 
             var self = this;
 
             _.extend(true, this, Resource.defaults, {actions: actions});
 
-            _.each(this.actions, function(action, name) {
+            _.each(this.actions, function (action, name) {
 
                 action = _.extend(true, {url: url, params: params || {}}, action);
 
-                self[name] = function() {
+                self[name] = function () {
                     return Http(getOptions(action, arguments));
                 };
             });
@@ -326,9 +314,9 @@
                     case 3:
                     case 2:
 
-                        if (_.isFunction(args[1])) {
+                        if (_.isFunction (args[1])) {
 
-                            if (_.isFunction(args[0])) {
+                            if (_.isFunction (args[0])) {
 
                                 success = args[0];
                                 error = args[1];
@@ -350,7 +338,7 @@
 
                     case 1:
 
-                        if (_.isFunction(args[0])) {
+                        if (_.isFunction (args[0])) {
                             success = args[0];
                         } else if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
                             data = args[0];
@@ -406,7 +394,7 @@
 
         Vue.url = Url;
         Vue.http = Http;
-        Vue.resource = function(url, params, actions) {
+        Vue.resource = function (url, params, actions) {
             return new Resource(url, params, actions);
         };
 
@@ -454,7 +442,7 @@
             return target;
         };
 
-        var extend = function(target, source, deep) {
+        var extend = function (target, source, deep) {
             for (var key in source) {
                 if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
                     if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
@@ -474,6 +462,65 @@
             return obj && typeof obj === 'function';
         };
     };
+
+
+    /**
+     * The Promise polyfill (https://gist.github.com/briancavalier/814313)
+     */
+
+    if (!window.Promise) {
+
+        function Promise (executor) {
+            this._executor = executor(this.resolve.bind(this), this.reject.bind(this));
+            this._thens = [];
+        }
+
+        Promise.prototype = {
+
+            then: function (onResolve, onReject, onProgress) {
+                this._thens.push({resolve: onResolve, reject: onReject, progress: onProgress});
+            },
+
+            'catch': function (onReject) {
+                this._thens.push({reject: onReject});
+            },
+
+            resolve: function (value) {
+                this._complete('resolve', value);
+            },
+
+            reject: function (reason) {
+                this._complete('reject', reason);
+            },
+
+            progress: function (status) {
+
+                var i = 0, aThen;
+
+                while (aThen = this._thens[i++]) {
+                    aThen.progress && aThen.progress(status);
+                }
+            },
+
+            _complete: function (which, arg) {
+
+                this.then = which === 'resolve' ?
+                    function (resolve, reject) { resolve && resolve(arg); } :
+                    function (resolve, reject) { reject && reject(arg); };
+
+                this.resolve = this.reject = this.progress =
+                    function () { throw new Error('Promise already completed.'); };
+
+                var aThen, i = 0;
+
+                while (aThen = this._thens[i++]) {
+                    aThen[which] && aThen[which](arg);
+                }
+
+                delete this._thens;
+            }
+        };
+    }
 
     if (typeof exports == 'object') {
         module.exports = install;
