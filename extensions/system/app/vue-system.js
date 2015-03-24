@@ -6,9 +6,9 @@
          * Config
          */
 
-        Vue.url.root = pagekit.url;
+        Vue.url.root = $pagekit.url;
         Vue.http.defaults.config.emulateHTTP = true;
-        Vue.http.defaults.headers.common['X-XSRF-TOKEN'] = pagekit.csrf;
+        Vue.http.defaults.headers.common['X-XSRF-TOKEN'] = $pagekit.csrf;
 
         /**
          * Methods

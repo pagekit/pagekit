@@ -1,6 +1,6 @@
 (function($) {
 
-    var config = $.extend({}, pagekit), templates = {};
+    var config = $.extend({}, $pagekit), templates = {};
 
     window.System = {
 

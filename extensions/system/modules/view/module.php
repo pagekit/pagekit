@@ -76,7 +76,7 @@ return [
             $app['scripts']->register('vue-resource', 'extensions/system/app/vue-resource.js', ['vue']);
             $app['scripts']->register('vue-validator', 'extensions/system/app/vue-validator.js', ['vue']);
 
-            $app['view']->data('pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+            $app['view']->data('$pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
             $app['view']->section()->set('messages', function() use ($app) {
                 return $app['tmpl']->render('extensions/system/views/messages/messages.php');
