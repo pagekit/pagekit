@@ -175,7 +175,7 @@
                 options.data = JSON.stringify(options.data);
             }
 
-            var promise = new Promise(function (resolve, reject) {
+            var promise = new _.Promise(function (resolve, reject) {
 
                 request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
 
@@ -470,66 +470,69 @@
         _.isFunction = function (obj) {
             return obj && typeof obj === 'function';
         };
-    };
 
 
-    /**
-     * The Promise polyfill (https://gist.github.com/briancavalier/814313)
-     */
+        /**
+         * The Promise polyfill (https://gist.github.com/briancavalier/814313)
+         */
 
-    if (!window.Promise) {
+        _.Promise = window.Promise;
 
-        function Promise(executor) {
-            executor(this.resolve.bind(this), this.reject.bind(this));
-            this._thens = [];
+        if (!_.Promise) {
+
+            _.Promise = function (executor) {
+                executor(this.resolve.bind(this), this.reject.bind(this));
+                this._thens = [];
+            };
+
+            _.Promise.prototype = {
+
+                then: function (onResolve, onReject, onProgress) {
+                    this._thens.push({resolve: onResolve, reject: onReject, progress: onProgress});
+                },
+
+                'catch': function (onReject) {
+                    this._thens.push({reject: onReject});
+                },
+
+                resolve: function (value) {
+                    this._complete('resolve', value);
+                },
+
+                reject: function (reason) {
+                    this._complete('reject', reason);
+                },
+
+                progress: function (status) {
+
+                    var i = 0, aThen;
+
+                    while (aThen = this._thens[i++]) {
+                        aThen.progress && aThen.progress(status);
+                    }
+                },
+
+                _complete: function (which, arg) {
+
+                    this.then = which === 'resolve' ?
+                        function (resolve, reject) { resolve && resolve(arg); } :
+                        function (resolve, reject) { reject && reject(arg); };
+
+                    this.resolve = this.reject = this.progress =
+                        function () { throw new Error('Promise already completed.'); };
+
+                    var aThen, i = 0;
+
+                    while (aThen = this._thens[i++]) {
+                        aThen[which] && aThen[which](arg);
+                    }
+
+                    delete this._thens;
+                }
+            };
         }
 
-        Promise.prototype = {
-
-            then: function (onResolve, onReject, onProgress) {
-                this._thens.push({resolve: onResolve, reject: onReject, progress: onProgress});
-            },
-
-            'catch': function (onReject) {
-                this._thens.push({reject: onReject});
-            },
-
-            resolve: function (value) {
-                this._complete('resolve', value);
-            },
-
-            reject: function (reason) {
-                this._complete('reject', reason);
-            },
-
-            progress: function (status) {
-
-                var i = 0, aThen;
-
-                while (aThen = this._thens[i++]) {
-                    aThen.progress && aThen.progress(status);
-                }
-            },
-
-            _complete: function (which, arg) {
-
-                this.then = which === 'resolve' ?
-                    function (resolve, reject) { resolve && resolve(arg); } :
-                    function (resolve, reject) { reject && reject(arg); };
-
-                this.resolve = this.reject = this.progress =
-                    function () { throw new Error('Promise already completed.'); };
-
-                var aThen, i = 0;
-
-                while (aThen = this._thens[i++]) {
-                    aThen[which] && aThen[which](arg);
-                }
-
-                delete this._thens;
-            }
-        };
-    }
+    };
 
     if (typeof exports == 'object') {
         module.exports = install;
