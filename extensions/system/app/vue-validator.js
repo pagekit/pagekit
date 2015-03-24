@@ -159,8 +159,8 @@
 
         Vue.validators = {
             required: function (value) {
-                if(typeof value == 'boolean') return value;
-                return !((value == null) || (value.length == 0));
+                if (typeof value == 'boolean') return value;
+                return !((value === null) || (value.length === 0));
             },
             numeric: function (value) {
                 return (/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/).test(value);

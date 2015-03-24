@@ -67,7 +67,7 @@
                         value = value();
                     }
 
-                    if (value == null) {
+                    if (value === null) {
                         value = '';
                     }
 
@@ -315,6 +315,7 @@
 
                 var options = _.extend({}, action), params = {}, data, success, error;
 
+                /* jshint -W086 */ /* (fall through case statements) */
                 switch (args.length) {
 
                     case 4:
@@ -367,6 +368,7 @@
 
                         throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
                 }
+                /* jshint +W086 */
 
                 options.url = action.url;
                 options.data = data;

@@ -19,7 +19,7 @@ jQuery(function ($) {
             this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true);
-            this.$watch('config.filter', function() { this.load(0) }, true);
+            this.$watch('config.filter', function() { this.load(0); }, true);
 
             this.load();
         },
@@ -91,7 +91,7 @@ jQuery(function ($) {
             },
 
             getSelected: function() {
-                return this.posts.filter(function(post) { return -1 !== vm.selected.indexOf(post.id.toString()) });
+                return this.posts.filter(function(post) { return -1 !== vm.selected.indexOf(post.id.toString()); });
             },
 
             getStatusText: function(post) {
