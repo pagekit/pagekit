@@ -20,7 +20,7 @@
 
         <div class="uk-grid">
             <div class="uk-width-1-1">
-                <img class="uk-align-left uk-margin-bottom-remove" src="{{ pkg.extra.image }}" width="50" height="50" alt="{{ pkg.title }}">
+                <img class="uk-align-left uk-margin-bottom-remove" width="50" height="50" alt="{{ pkg.title }}" v-attr="src: pkg.extra.image">
                 <h1 class="uk-h2 uk-margin-remove">{{ pkg.title }}</h1>
                 <ul class="uk-subnav uk-subnav-line uk-margin-top-remove">
                     <li>{{ pkg.author.name }}</li>
@@ -42,7 +42,7 @@
         </div>
 
         <p>
-            <button class="uk-button uk-button-primary" data-install="{{ install }}">{{ 'Install' | trans }}</button>
+            <button class="uk-button uk-button-primary">{{ 'Install' | trans }}</button>
             <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
         </p>
 
