@@ -12,10 +12,6 @@ return [
             return new OAuthHelper;
         };
 
-        $app->on('system.tmpl', function ($event) {
-            $event->register('settings.oauth', 'extensions/system/modules/oauth/views/tmpl/settings.razr');
-        });
-
         $app->on('system.settings.edit', function ($event) use ($app) {
             $app['view']->script('oauth-settings', 'extensions/system/modules/oauth/assets/js/settings.js', 'vue-system');
 

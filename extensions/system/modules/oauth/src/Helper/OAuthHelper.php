@@ -108,8 +108,8 @@ class OAuthHelper
      */
     public function getConfig($provider)
     {
-        $oauth = App::option("system:oauth", []);
-        return isset($oauth[$provider]) ? $oauth[$provider] : [];
+        $providerConfig = App::module('system/oauth')->config('provider');
+        return isset($providerConfig[$provider]) ? $providerConfig[$provider] : [];
     }
 
     /**
