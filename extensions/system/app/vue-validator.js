@@ -128,7 +128,7 @@
 
                 this.listener = function (e) {
 
-                    if (!el) return;
+                    if (!el || e.relatedTarget && (e.relatedTarget.tagName === 'A' || e.relatedTarget.tagName === 'BUTTON')) return;
 
                     if (e.type == 'blur') {
                         el._touched = true;
@@ -154,7 +154,7 @@
 
                 var validator = Vue.validators[this.type];
 
-                return validator ? validator(this.el.value, this.args) : undefined;
+                return validator ? validator.call(this.vm, this.el.value, this.args) : undefined;
             }
 
         });
