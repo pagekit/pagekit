@@ -50,21 +50,22 @@
 
             validate: function (form, submit) {
 
-                var results = {}, focus, keys, vm;
+                var results = {}, focus, keys, vm, el;
 
                 if (!this.validators[form]) return results;
 
                 this.validators[form].forEach(function (dir) {
 
                     vm = dir.vm;
+                    el = dir.el;
 
                     var name = dir.name, valid = dir.validate();
 
                     if (submit) {
-                        dir.touched = true;
+                        el._touched = true;
                     }
 
-                    if (!dir.touched) {
+                    if (!el._touched) {
                         results[name] = {};
                         return;
                     }
@@ -73,8 +74,8 @@
                         results[name] = {
                             valid: true,
                             invalid: false,
-                            touched: dir.touched,
-                            dirty: dir.dirty
+                            touched: el._touched,
+                            dirty: el._dirty
                         };
                     }
 
@@ -110,7 +111,7 @@
 
             bind: function () {
 
-                var self = this, name = _.attr(this.el, 'name'), form = _.attr(this.el.form, 'name');
+                var self = this, el = this.el, name = _.attr(el, 'name'), form = _.attr(el.form, 'name');
 
                 if (!name || !form) {
                     return;
@@ -120,20 +121,21 @@
                 this.form    = _.camelize(form);
                 this.type    = this.arg || this.expression;
                 this.args    = this.arg ? this.expression : '';
-                this.value   = this.el.value;
-                this.dirty   = false;
-                this.touched = false;
+                this.value   = el.value;
+
+                el._dirty   = false;
+                el._touched = false;
 
                 this.listener = function (e) {
 
-                    if (!self.el) return;
+                    if (!el) return;
 
                     if (e.type == 'blur') {
-                        self.touched = true;
+                        el._touched = true;
                     }
 
-                    if (self.el.value != self.value) {
-                        self.dirty = true;
+                    if (el.value != self.value) {
+                        el._dirty = true;
                     }
 
                     self.vm.$validator.validate(self.form);
@@ -175,7 +177,7 @@
                 return (/^[a-zA-Z]+$/).test(value);
             },
             alphaNum: function (value) {
-                return !(/\W/).test(value);
+                return (/\w/).test(value);
             },
             email: function (value) {
                 return (/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i).test(value);
