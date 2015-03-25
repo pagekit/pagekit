@@ -258,6 +258,7 @@
                 },
 
                 headers: {
+                    get: { Accept: 'application/json, text/plain, * / *' },
                     put: jsonType,
                     post: jsonType,
                     patch: jsonType,
