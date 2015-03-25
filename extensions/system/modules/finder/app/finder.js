@@ -24,7 +24,7 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.load().done(function() {
+            this.load().success(function() {
                 this.$dispatch('ready.finder', this);
             }.bind(this));
         },
