@@ -11,6 +11,7 @@
         Vue.url.root = config.url;
         Vue.http.defaults.config.emulateHTTP = true;
         Vue.http.defaults.headers.common['X-XSRF-TOKEN'] = config.csrf;
+        Vue.http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
         /**
          * Methods
