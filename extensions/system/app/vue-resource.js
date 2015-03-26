@@ -184,11 +184,11 @@
                 });
 
                 request.onreadystatechange = function () {
-                    if (request.readyState === 4) {
-                        if (request.status >= 200 && request.status < 300) {
-                            resolve(request);
+                    if (this.readyState === 4) {
+                        if (this.status >= 200 && this.status < 300) {
+                            resolve(this);
                         } else {
-                            reject(request);
+                            reject(this);
                         }
                     }
                 };
@@ -198,23 +198,23 @@
 
             _.extend(promise, {
                 success: function (onSuccess) {
-                    promise.then(function(request) {
+                    this.then(function(request) {
                         onSuccess.apply(onSuccess, parseReq(request));
-                    });
+                    }, function() {});
 
-                    return promise;
+                    return this;
                 },
                 error: function (onError) {
-                    promise.catch(function(request) {
+                    this.catch(function(request) {
                         onError.apply(onError, parseReq(request));
                     });
 
-                    return promise;
+                    return this;
                 },
                 always: function (onAlways) {
-                    promise.then(onAlways, onAlways);
+                    this.then(onAlways, onAlways);
 
-                    return promise;
+                    return this;
                 }
             });
 
