@@ -14,8 +14,8 @@ source_lang = en
 type = PO
 
 [pagekit-cms.system]
-file_filter = extensions/system/languages/<lang>/messages.po
-source_file = extensions/system/languages/messages.pot
+file_filter = app/modules/system/languages/<lang>/messages.po
+source_file = app/modules/system/languages/messages.pot
 source_lang = en
 type = PO
 

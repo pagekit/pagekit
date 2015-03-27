@@ -11,7 +11,7 @@ $app['autoloader'] = $loader;
 
 date_default_timezone_set('UTC');
 
-$app['module']->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php']);
+$app['module']->addPath([$app['path.vendor'].'/pagekit/framework/*/module.php', __DIR__.'/modules/*/module.php', $app['path.extensions'].'/*/extension.php', $app['path.themes'].'/*/theme.php']);
 $app['module']->addLoader(new ConfigLoader($config));
 
 if (!$app['config.file']) {

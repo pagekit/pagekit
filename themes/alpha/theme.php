@@ -30,7 +30,7 @@ return [
     'resources' => [
 
         'override' => [
-            'extensions/system/theme/templates' => 'templates/system'
+            'app/modules/system/theme/templates' => 'templates/system'
         ]
 
     ],

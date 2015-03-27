@@ -2,7 +2,6 @@
 !/extensions/blog
 !/extensions/hello
 !/extensions/page
-!/extensions/system
 /themes/*
 !/themes/alpha
 /vendor/*
