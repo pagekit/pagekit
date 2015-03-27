@@ -13,7 +13,7 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
         <div class="uk-panel uk-panel-box uk-width-3-4" v-component="node-edit"></div>
 
     </div>
-<!--<pre>{{ $data | json }}</pre>-->
+
 </div>
 
 <script id="menu-list" type="text/template">
@@ -89,7 +89,7 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
 
 <script id="node-edit" type="text/template">
 
-    <form class="uk-form uk-form-stacked" v-on="submit: save">
+    <form class="uk-form uk-form-stacked" name="form" v-on="valid: save">
 
         <div class="uk-clearfix uk-margin">
 
@@ -103,7 +103,7 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
             <div class="uk-float-right">
 
                 <a class="uk-button" v-on="click: reset()">{{ 'Cancel' | trans }}</a>
-                <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="submit" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
 
             </div>
 
@@ -112,7 +112,8 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
         <div class="uk-form-row">
             <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-title" class="uk-form-width-large" type="text" v-model="node.title" required>
+                <input id="form-title" class="uk-form-width-large" type="text" name="title" v-model="node.title" v-valid="alphaNum">
+                <span class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Invalid name.' | trans }}</span>
             </div>
         </div>
 
@@ -120,7 +121,8 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
             <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
             <div class="uk-form-controls">
                 <span>{{ getPath() }}</span><br>
-                <input id="form-slug" class="uk-form-width-large" type="text" v-model="node.slug">
+                <input id="form-slug" class="uk-form-width-large" type="text" name="slug" v-model="node.slug" v-valid="alphaNum">
+                <span class="uk-form-help-block uk-text-danger" v-show="form.slug.invalid">{{ 'Invalid slug.' | trans }}</span>
             </div>
         </div>
 
