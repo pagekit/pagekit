@@ -13,7 +13,7 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
         <div class="uk-panel uk-panel-box uk-width-3-4" v-component="node-edit"></div>
 
     </div>
-
+<!--<pre>{{ $data | json }}</pre>-->
 </div>
 
 <script id="menu-list" type="text/template">
@@ -57,7 +57,7 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
 
                 <button class="uk-button uk-button-primary" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
                 <button class="uk-button uk-modal-close" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                <button v-show="menu.id" class="uk-button uk-button-danger uk-float-right" v-on="click: delete">{{ 'Delete' | trans }}</button>
+                <button v-show="menu.oldId" class="uk-button uk-button-danger uk-float-right" v-on="click: delete">{{ 'Delete' | trans }}</button>
 
             </form>
 
@@ -95,7 +95,8 @@ $view->script('site', 'extensions/system/modules/site/app/site.js', ['vue-system
 
             <div class="uk-float-left">
 
-                <h2 class="uk-h2">{{ node.title }} ({{ node.type }})</h2>
+                <h2 v-if="node.id" class="uk-h2">{{ node.title }} ({{ type }})</h2>
+                <h2 v-if="!node.id" class="uk-h2">{{ 'Add %type%' | trans {type:type} }}</h2>
 
             </div>
 

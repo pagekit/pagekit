@@ -9,7 +9,7 @@ jQuery(function () {
         created: function () {
 
             Vue.validators['unique'] = function(value) {
-                var menu = _.find(this.menus, 'id', value);
+                var menu = _.find(this.menus, { id: value });
                 return !menu || this.menu.oldId == menu.id;
             };
 
@@ -26,7 +26,7 @@ jQuery(function () {
         watch: {
 
             nodes: function() {
-                this.select(_.find(this.nodes, 'id', this.current.id))
+                this.select(_.find(this.nodes, { id: this.current.id }) || this.nodes[0]);
             }
 
         },
@@ -160,6 +160,14 @@ jQuery(function () {
 
                 },
 
+                computed: {
+
+                    type: function() {
+                        return (_.find(this.types, { id: this.node.type }) || {}).label;
+                    }
+
+                },
+
                 methods: {
 
                     reset: function() {
@@ -167,7 +175,8 @@ jQuery(function () {
                     },
 
                     getPath: function() {
-                        return this.node.path ? this.node.path.replace(/^((.*)\/[^/]*)?$/, '$2/') + this.node.slug : '';
+                        var parent = _.find(this.nodes, { 'id': this.node.parentId });
+                        return (parent ? parent.path : '') + '/' + (this.node.slug || '');
                     },
 
                     save: function (e) {
