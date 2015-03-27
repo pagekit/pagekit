@@ -53,11 +53,11 @@ class ExtensionTranslateCommand extends Command
     {
         parent::initialize($input, $output);
 
-        $this->visitors   = [
-            'razr' => new RazrNodeVisitor($this->container['tmpl.razr']),
+        $this->visitors = [
             'php'  => new PhpNodeVisitor($this->container['tmpl.php'])
         ];
-        $this->xgettext   = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
+
+        $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
     }
 
     /**

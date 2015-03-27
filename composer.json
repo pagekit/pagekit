@@ -14,7 +14,6 @@
     "require": {
         "php": ">=5.4.0",
         "pagekit/framework": "0.9.*@dev",
-        "pagekit/razr": "0.9.*@dev",
         "guzzlehttp/guzzle": "4.*",
         "lusitanian/oauth": "~0.3",
         "nikic/php-parser": "1.*",

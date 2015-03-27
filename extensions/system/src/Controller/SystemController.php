@@ -15,7 +15,7 @@ class SystemController extends Controller
 {
     /**
      * @Access(admin=true)
-     * @Response("extensions/system/views/admin/settings/index.razr")
+     * @Response("extensions/system/views/admin/settings/index.php")
      */
     public function indexAction()
     {

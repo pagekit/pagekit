@@ -17,10 +17,7 @@ return [
             $helper = new EditorHelper();
 
             $app['view']->addHelper('editor', $helper);
-
             $app['scripts']->register('editor', 'extensions/system/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder']);
-
-            $app['tmpl.razr']->addDirective(new FunctionDirective('editor', [$helper, 'render']));
         });
 
     },
