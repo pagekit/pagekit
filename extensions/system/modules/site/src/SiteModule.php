@@ -68,7 +68,7 @@ class SiteModule extends Module implements EventSubscriberInterface
                 }
             }
 
-            foreach (App::option('system:site.menus', []) as $menu) {
+            foreach ($this->config('menus') as $menu) {
                 $this->registerMenu($menu['id'], $menu['label']);
             }
 

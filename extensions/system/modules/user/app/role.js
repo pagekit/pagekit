@@ -81,6 +81,7 @@
                 ready: function () {
 
                     $(this.$el).on('change.uk.sortable', this.reorder);
+                    this.modal = UIkit.modal('#modal-role');
 
                 },
 
@@ -95,14 +96,8 @@
                 methods: {
 
                     edit: function (role) {
-
-                        if (!this.modal) {
-                            this.modal = UIkit.modal('#modal-role');
-                        }
-
                         this.$set('role', $.extend({}, role));
                         this.modal.show();
-
                     },
 
                     update: function (e) {

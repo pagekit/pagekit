@@ -5,6 +5,7 @@ namespace Pagekit\Site\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 /**
  * @Access("system: manage site")
@@ -26,22 +27,27 @@ class MenuController extends Controller
      */
     public function createAction($id, $label)
     {
-        $menus = App::option('system:site.menus', []);
+        $menus = $this->get();
         $menus[$id] = compact('id', 'label');
-        App::option()->set('system:site.menus', $menus);
+        $this->update($menus);
 
-        return $menus[$id];
+        return 'success';
     }
 
     /**
      * @Route("/{id}", methods="PUT")
-     * @Request({"id", "label", "newId"}, csrf=true)
+     * @Request({"id", "label", "oldId"}, csrf=true)
      */
-    public function updateAction($oldId, $label, $id)
+    public function updateAction($id, $label, $oldId)
     {
-        $menus = App::option('system:site.menus', []);
+        $menus = $this->get();
 
         if ($id != $oldId) {
+
+            if (array_key_exists($id, $menus)) {
+                throw new ConflictHttpException(__('Duplicate Menu Id.'));
+            }
+
             $keys = array_keys($menus);
             $keys[array_search($oldId, $keys)] = $id;
             $menus = array_combine($keys, $menus);
@@ -50,19 +56,41 @@ class MenuController extends Controller
         }
 
         $menus[$id] = compact('id', 'label');
-        App::option()->set('system:site.menus', $menus);
+        $this->update($menus);
 
-        return $menus[$id];
+        return 'success';
     }
 
     /**
      * @Route("/{id}", methods="DELETE")
      * @Request({"id"}, csrf=true)
+     *
+     * TODO: what happens to the nodes?
      */
     public function deleteAction($id)
     {
-        $menus = App::option('system:site.menus', []);
+        $menus = $this->get();
         unset($menus[$id]);
-        App::option()->set('system:site.menus', $menus);
+        $this->update($menus);
+
+        return 'success';
+    }
+
+    /**
+     * @return array
+     */
+    protected function get()
+    {
+        return App::module('system/site')->config('menus');
+    }
+
+    /**
+     * @param array $menus
+     */
+    protected function update($menus = [])
+    {
+        $config = App::option()->get('system/site:config', []);
+        $config['menus'] = $menus;
+        App::option()->set('system/site:config', $config);
     }
 }

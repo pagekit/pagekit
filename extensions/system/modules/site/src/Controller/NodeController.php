@@ -4,7 +4,6 @@ namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
-use Pagekit\Application\Exception;
 use Pagekit\Site\Entity\Node;
 
 /**
@@ -18,7 +17,7 @@ class NodeController extends Controller
      */
     public function indexAction()
     {
-        return Node::findAll();
+        return array_values(Node::findAll());
     }
 
     /**
@@ -36,20 +35,14 @@ class NodeController extends Controller
      */
     public function saveAction($data, $id = 0)
     {
-        try {
-
-            if (!$node = Node::find($id)) {
-                $node = new Node;
-                unset($data['id']);
-            }
-
-            $node->save($data);
-
-            return $node;
-
-        } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!$node = Node::find($id)) {
+            $node = new Node;
+            unset($data['id']);
         }
+
+        $node->save($data);
+
+        return 'success';
     }
 
     /**
@@ -58,17 +51,11 @@ class NodeController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-
-            if ($node = Node::find($id)) {
-                $node->delete();
-            }
-
-        } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+        if ($node = Node::find($id)) {
+            $node->delete();
         }
 
-        return ['message' => __('Success')];
+        return 'success';
     }
 
     /**
@@ -81,7 +68,7 @@ class NodeController extends Controller
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return Node::findAll();
+        return 'success';
     }
 
     /**
@@ -94,6 +81,25 @@ class NodeController extends Controller
             $this->deleteAction($id);
         }
 
-        return Node::findAll();
+        return 'success';
+    }
+
+    /**
+     * @Route("/updateOrder", methods="POST")
+     * @Request({"menu", "nodes": "array"}, csrf=true)
+     */
+    public function updateOrderAction($menu, $nodes = []) {
+        foreach ($nodes as $data) {
+            if ($node = Node::find($data['id'])) {
+
+                $node->setParentId($data['parent_id']);
+                $node->setPriority($data['order']);
+                $node->setMenu($menu);
+
+                $node->save();
+            }
+        }
+
+        return 'success';
     }
 }

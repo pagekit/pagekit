@@ -197,6 +197,7 @@
             });
 
             _.extend(promise, {
+
                 success: function (onSuccess) {
                     this.then(function(request) {
                         onSuccess.apply(onSuccess, parseReq(request));
@@ -204,6 +205,7 @@
 
                     return this;
                 },
+
                 error: function (onError) {
                     this.catch(function(request) {
                         onError.apply(onError, parseReq(request));
@@ -211,11 +213,13 @@
 
                     return this;
                 },
+
                 always: function (onAlways) {
                     this.then(onAlways, onAlways);
 
                     return this;
                 }
+
             });
 
             if (options.success) {
@@ -242,7 +246,7 @@
             return [result, request.status, request];
         };
 
-        var jsonType = {'Content-Type': 'application/json;charset=utf-8'};
+        var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
         _.extend(Http, {
 
@@ -258,11 +262,14 @@
                 },
 
                 headers: {
-                    get: { Accept: 'application/json, text/plain, * / *' },
                     put: jsonType,
                     post: jsonType,
                     patch: jsonType,
                     common: {}
+                },
+
+                options: {
+                    headers: { Accept: 'application/json, text/plain, * / *' }
                 }
 
             },

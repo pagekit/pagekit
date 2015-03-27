@@ -107,22 +107,8 @@
          * Filters
          */
 
-        var evalExp = function(expression) {
-
-            try {
-
-                return undefined === expression ? expression : Vue.parsers.expression.parse(expression).get.call(this, this);
-
-            } catch (e) {
-                if (Vue.config.warnExpressionErrors) {
-                    Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
-                }
-            }
-
-        };
-
         Vue.filter('baseUrl', function(url) {
-            return url ? url.substr(config.url.length) : url;
+            return _.startsWith(url, config.url) ? url.substr(config.url.length) : url;
         });
 
         Vue.filter('trans', function(id, parameters, domain, locale) {
@@ -175,6 +161,20 @@
 
             });
         });
+
+        var evalExp = function(expression) {
+
+            try {
+
+                return undefined === expression ? expression : Vue.parsers.expression.parse(expression).get.call(this, this);
+
+            } catch (e) {
+                if (Vue.config.warnExpressionErrors) {
+                    Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
+                }
+            }
+
+        };
 
         /**
          * Components

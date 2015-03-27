@@ -46,6 +46,10 @@ return [
 
     ],
 
+    'config' => [
+        'menus' => []
+    ],
+
     'templates' => [
 
         'alias.edit' => 'extensions/system/modules/site/views/tmpl/site.alias.php'

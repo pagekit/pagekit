@@ -116,7 +116,10 @@ jQuery(function ($) {
                 this.comments.splice(this.comments.indexOf(comment), 0, this.editing);
             },
 
-            cancel: function() {
+            cancel: function(e) {
+
+                if (e) e.preventDefault();
+
                 if (this.editing) {
                     this.comments.splice(this.comments.indexOf(this.editing), 1);
                     this.$set('editing', null);

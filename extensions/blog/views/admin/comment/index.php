@@ -55,7 +55,7 @@
 
 </div>
 
-<script id="comment.default" type="text/tmpl">
+<script id="comment.default" type="text/template">
 
     <td>
         <input class="pk-blog-comments-margin" type="checkbox" name="id" value="{{ comment.id }}">
@@ -97,7 +97,7 @@
 
 </script>
 
-<script id="comment.edit" type="text/tmpl">
+<script id="comment.edit" type="text/template">
 
     <td></td>
     <td class="pk-table-width-minimum">
@@ -132,7 +132,7 @@
 
             <p>
                 <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-                <button class="uk-button" v-on="mousedown: $event.preventDefault(), click: cancel()">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
             </p>
 
         </form>
@@ -140,7 +140,7 @@
 
 </script>
 
-<script id="comment.reply" type="text/tmpl">
+<script id="comment.reply" type="text/template">
 
     <td></td>
     <td class="pk-table-width-minimum">
@@ -156,7 +156,7 @@
 
             <p>
                 <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
-                <button class="uk-button" v-on="mousedown: $event.preventDefault(), click: cancel()">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
             </p>
 
         </form>

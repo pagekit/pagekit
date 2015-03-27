@@ -161,7 +161,7 @@ class Node implements NodeInterface, \JsonSerializable
 
         // Update own path
         $path = '/'.$this->getSlug();
-        if ($parent = self::find($this->getParentId())) {
+        if ($this->getParentId() && $parent = self::find($this->getParentId())) {
             $path = $parent->getPath().$path;
         } else {
             // set Parent to 0, if old parent is not found

@@ -16,24 +16,14 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        App::scripts('site', [
-            'config'    => [
-                'url'      => App::url()->base(),
-                'url.node' => App::url('@system/node'),
-                'url.menu' => App::url('@system/menu'),
-                'url.tmpl' => App::url('@system/template'),
-                'csrf'     => App::csrf()->generate()
+        return [
+            '$meta' => [
+                'title' => __('Nodes')
             ],
-            'data'      => [
-                'types' => App::module('system/site')->getTypes(),
+            '$data'      => [
+                'types' => array_values(App::module('system/site')->getTypes()),
                 'roles' => Role::findAll()
-            ],
-            'templates' => [
-                'site.edit' => App::tmpl('extensions/system/modules/site/views/tmpl/site.edit.php'),
-                'site.list' => App::tmpl('extensions/system/modules/site/views/tmpl/site.list.php')
             ]
-        ]);
-
-        return ['head.title' => __('Nodes')];
+        ];
     }
 }
