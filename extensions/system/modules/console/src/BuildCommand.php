@@ -25,7 +25,7 @@ class BuildCommand extends Command
      * @var string[]
      */
     protected $excludes = [
-        '^(app\/cache|app\/database|app\/logs|app\/sessions|app\/temp|storage|config\.php|pagekit.+\.zip)',
+        '^(tmp|app\/database|storage|config\.php|pagekit.+\.zip)',
         '^extensions\/(?!(installer|page|blog|system)\/).*',
         '^extensions\/.+\/languages\/.+\.(po|pot)',
         '^themes\/(?!(alpha)\/).*',
@@ -98,11 +98,11 @@ class BuildCommand extends Command
             $zip->addFile($file->getPathname(), $file->getRelativePathname());
         }
 
-        $zip->addEmptyDir('app/cache');
+        $zip->addEmptyDir('tmp');
+        $zip->addEmptyDir('tmp/cache');
+        $zip->addEmptyDir('tmp/logs');
+        $zip->addEmptyDir('tmp/sessions');
         $zip->addEmptyDir('app/database');
-        $zip->addEmptyDir('app/logs');
-        $zip->addEmptyDir('app/sessions');
-        $zip->addEmptyDir('app/temp');
         $zip->addEmptyDir('storage');
         $zip->addFile($root.'/.htaccess', '.htaccess');
         $zip->addFile($root.'/app/database/.htaccess', 'app/database/.htaccess');

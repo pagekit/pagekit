@@ -444,7 +444,7 @@ class PagekitRequirements extends RequirementCollection
         }
 
         $path = $app['path'];
-        $writable_directories = ["$path/app/cache", "$path/app/logs", "$path/app/sessions", "$path/app/temp"];
+        $writable_directories = ["$path/tmp", "$path/tmp/cache", "$path/tmp/logs", "$path/tmp/sessions"];
 
         if (!file_exists("$path/config.php")) {
           // If config.php doesn't exist, we need the root directory of the app

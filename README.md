@@ -39,7 +39,7 @@ git pull
 composer update
 ```
 
-You may also clear the `app/cache` folder.
+You may also clear the `tmp/cache` folder.
 
 ### CLI
 

@@ -109,13 +109,6 @@
             <div class="uk-form-row">
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed">
-                        <label><input type="checkbox" name="caches[templates]" value="1" checked> <?= __('Rendered Templates') ?></label>
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
                         <label><input type="checkbox" name="caches[temp]" value="1"> <?= __('Temporary Files') ?></label>
                     </p>
                 </div>

@@ -4,9 +4,9 @@ use Pagekit\Config\Config;
 
 $values = array_map('realpath', [
     'path'            => __DIR__.'/..',
-    'path.cache'      => __DIR__.'/cache',
-    'path.logs'       => __DIR__.'/logs',
-    'path.temp'       => __DIR__.'/temp',
+    'path.temp'       => __DIR__.'/../tmp',
+    'path.cache'      => __DIR__.'/../tmp/cache',
+    'path.logs'       => __DIR__.'/../tmp/logs',
     'path.extensions' => __DIR__.'/../extensions',
     'path.storage'    => __DIR__.'/../storage',
     'path.themes'     => __DIR__.'/../themes',

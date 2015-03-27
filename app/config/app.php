@@ -9,7 +9,7 @@ return [
             'cache' => [
 
                 'storage' => 'auto',
-                'path'    => '%path%/app/cache',
+                'path'    => '%path%/tmp/cache',
                 'prefix'  => sha1(__DIR__)
 
             ],
@@ -17,7 +17,7 @@ return [
             'cache.phpfile' => [
 
                 'storage' => 'phpfile',
-                'path'    => '%path%/app/cache'
+                'path'    => '%path%/tmp/cache'
 
             ]
 
@@ -27,7 +27,7 @@ return [
 
     'system/profiler' => [
 
-        'file' => '%path%/app/temp/profiler.db'
+        'file' => '%path%/app/database/profiler.db'
 
     ],
 
@@ -35,7 +35,7 @@ return [
 
         'storage'  => 'database',
         'lifetime' => 900,
-        'files'    => '%path%/app/sessions',
+        'files'    => '%path%/tmp/sessions',
         'table'    => '@system_session',
         'cookie'   => [
             'name' => 'pagekit_session',

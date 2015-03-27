@@ -137,11 +137,6 @@ class CacheModule extends Module
             }
         }
 
-        // clear compiled template files
-        if (empty($options) || isset($options['templates'])) {
-            App::file()->delete(App::get('path.cache').'/templates');
-        }
-
         // clear temp folder
         if (isset($options['temp'])) {
             foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
