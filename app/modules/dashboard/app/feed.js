@@ -20,7 +20,7 @@ jQuery(function($) {
 
                 $.getJSON(api, {q: this.config.url, num: this.config.count}, function(data) {
 
-                    if (data.responseStatus == 200) {
+                    if (data.responseStatus === 200) {
                         vm.$set('feed', data.responseData.feed);
                         vm.$set('status', 'done');
                     } else {

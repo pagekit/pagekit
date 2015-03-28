@@ -1,3 +1,5 @@
+/*global $dashboard*/
+
 jQuery(function($) {
 
     var vm = new Vue({
@@ -27,11 +29,13 @@ jQuery(function($) {
 
             reorder: function(e, sortable) {
 
-                if (!sortable) return;
+                if (!sortable) {
+                    return;
+                }
 
                 var ordered = vm.$.ordered,
                     order = sortable.element.children().toArray().map(function(el) {
-                        return ordered.filter(function(model) { return model.$el == el; })[0].$key;
+                        return ordered.filter(function(model) { return model.$el === el; })[0].$key;
                     });
 
                 $.post(this.$url('admin/system/dashboard/reorder'), {order: order}, function(data) {

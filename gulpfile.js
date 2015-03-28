@@ -73,7 +73,7 @@ gulp.task('watch', function () {
  * Runs jshint on all .js files
  */
 gulp.task('lint', function () {
-    return gulp.src(['extensions/**/*.js', 'themes/**/*.js'])
+    return gulp.src(['app/modules/**/*.js', 'extensions/**/*.js', 'themes/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
