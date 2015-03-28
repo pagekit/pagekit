@@ -3,7 +3,7 @@
 namespace Pagekit\Option\Loader;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Config\LoaderInterface;
+use Pagekit\Module\Loader\LoaderInterface;
 
 class OptionLoader implements LoaderInterface
 {
