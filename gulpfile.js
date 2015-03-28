@@ -12,8 +12,7 @@ var fs      = require('fs'),
     header  = require('gulp-header'),
     less    = require('gulp-less'),
     rename  = require('gulp-rename'),
-    jshint  = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    eslint  = require('gulp-eslint');
 
 // paths of the packages for the compile-task
 var pkgs = [
@@ -75,6 +74,7 @@ gulp.task('watch', function () {
  */
 gulp.task('lint', function () {
     return gulp.src(['extensions/**/*.js', 'themes/**/*.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish));
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
 });

@@ -1,3 +1,5 @@
+/*global $config, $data*/
+
 jQuery(function ($) {
 
     var vm = new Vue({
@@ -5,12 +7,12 @@ jQuery(function ($) {
         el: '#js-comments',
 
         data: {
-            config  : $config,
-            data    : $data,
+            config: $config,
+            data: $data,
             comments: null,
-            pages   : 0,
+            pages: 0,
             selected: [],
-            editing : null
+            editing: null
         },
 
         created: function () {
@@ -20,7 +22,7 @@ jQuery(function ($) {
             this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true);
-            this.$watch('config.filter', function() { this.load(0) }, true);
+            this.$watch('config.filter', function() { this.load(0); }, true);
 
             this.load();
         },
@@ -95,7 +97,7 @@ jQuery(function ($) {
             },
 
             getSelected: function() {
-                return this.comments.filter(function(comment) { return -1 !== vm.selected.indexOf(comment.id.toString()) });
+                return this.comments.filter(function(comment) { return vm.selected.indexOf(comment.id.toString()) !== -1; });
             },
 
             getStatusText: function(comment) {
@@ -118,7 +120,9 @@ jQuery(function ($) {
 
             cancel: function(e) {
 
-                if (e) e.preventDefault();
+                if (e) {
+                    e.preventDefault();
+                }
 
                 if (this.editing) {
                     this.comments.splice(this.comments.indexOf(this.editing), 1);

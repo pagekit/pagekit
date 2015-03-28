@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "_": true,
+    "Vue": true,
+    "jQuery": true,
+    "UIkit": true
+  },
+  "rules": {
+    "quotes": [2, "single", "avoid-escape"],
+    "eqeqeq": [2, "smart"],
+    "guard-for-in": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-trailing-spaces": 2,
+    "no-undef": 2,
+    "no-unused-vars": [2, {"vars": "local", "args": "none"}],
+    "strict": 0,
+    "new-cap": 0,
+    "camelcase": 0,
+    "no-underscore-dangle": 0,
+    "no-new": 0,
+    "no-alert": 0,
+    "no-use-before-define": 0,
+    "consistent-return": 0
+  }
+}

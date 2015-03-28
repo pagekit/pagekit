@@ -1,3 +1,5 @@
+/*global $data*/
+
 jQuery(function ($) {
 
     var _ = Vue.util.extend({}, Vue.util);
@@ -44,7 +46,7 @@ jQuery(function ($) {
                 },
 
                 set: function(date) {
-                    var prev  = new Date(this.post.date);
+                    var prev = new Date(this.post.date);
                     date = new Date(date);
                     date.setHours(prev.getHours(), prev.getMinutes());
                     this.$set('post.date', date.toISOString());
@@ -60,7 +62,7 @@ jQuery(function ($) {
 
                 set: function(time) {
                     var date = new Date(this.post.date);
-                    date.setHours(time.substr(0, 2), time.substr(3,2));
+                    date.setHours(time.substr(0, 2), time.substr(3, 2));
                     this.$set('post.date', date.toISOString());
                 }
 

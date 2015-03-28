@@ -1,3 +1,5 @@
+/*global $config, $data*/
+
 jQuery(function ($) {
 
     var vm = new Vue({
@@ -5,10 +7,10 @@ jQuery(function ($) {
         el: '#js-post',
 
         data: {
-            config  : $config,
-            data    : $data,
-            posts   : null,
-            pages   : 0,
+            config: $config,
+            data: $data,
+            posts: null,
+            pages: 0,
             selected: []
         },
 
@@ -65,12 +67,15 @@ jQuery(function ($) {
             },
 
             toggleStatus: function (post) {
-                post.status = post.status == 2 ? 3 : 2;
+                post.status = post.status === 2 ? 3 : 2;
                 this.save(post);
             },
 
             copy: function() {
-                if (!this.selected.length) return;
+
+                if (!this.selected.length) {
+                    return;
+                }
 
                 this.resource.save({ id: 'copy' }, { ids: this.selected }, function (data) {
                     vm.load();
@@ -91,7 +96,7 @@ jQuery(function ($) {
             },
 
             getSelected: function() {
-                return this.posts.filter(function(post) { return -1 !== vm.selected.indexOf(post.id.toString()); });
+                return this.posts.filter(function(post) { return vm.selected.indexOf(post.id.toString()) !== -1; });
             },
 
             getStatusText: function(post) {
