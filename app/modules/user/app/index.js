@@ -7,7 +7,7 @@ jQuery(function ($) {
         data: {
             config  : $config,
             data    : $data,
-            users   : [],
+            users   : null,
             pages   : 0,
             selected: []
         },
@@ -117,7 +117,9 @@ jQuery(function ($) {
             },
 
             getSelected: function() {
-                return this.users.filter(function(user) { return -1 !== vm.selected.indexOf(user.id.toString()) });
+                return this.users.filter(function(user) {
+                    return vm.selected.indexOf(user.id.toString()) !== -1;
+                });
             }
 
         }

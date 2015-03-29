@@ -26,13 +26,11 @@
         <select v-model="config.filter.status" options="statuses"></select>
         <select v-model="config.filter.role" options="roles"></select>
         <select v-model="config.filter.permission" options="permissions"></select>
-        <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
+        <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}">
 
     </div>
 
     <?php $view->section()->end() ?>
-
-    <p v-show="!users.length" class="uk-alert uk-alert-info">{{ 'No user found.' | trans }}</p>
 
     <div v-show="users.length" class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">
@@ -71,6 +69,8 @@
             </tbody>
         </table>
     </div>
+
+    <p v-show="users && !users.length" class="uk-alert uk-alert-info">{{ 'No user found.' | trans }}</p>
 
     <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
 
