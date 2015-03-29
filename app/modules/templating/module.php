@@ -26,7 +26,7 @@ return [
                 if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
                     $event->setTemplate($template);
                 }
-            });
+            }, 10);
 
             $view->on('view.render', function($event) use ($app) {
                 $event->setResult($app['templating']->render($event->getTemplate(), $event->getParameters()));
