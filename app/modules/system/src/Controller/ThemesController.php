@@ -119,7 +119,7 @@ class ThemesController extends Controller
 
             $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->config));
 
-            return App::tmpl($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
+            return App::view($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
 
         } catch (Exception $e) {
 

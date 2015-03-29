@@ -39,7 +39,7 @@ class HelloWidget implements TypeInterface
     {
         $user = App::user();
 
-        return App::tmpl('extensions/hello/views/widget.razr', compact('user'));
+        return App::view('extensions/hello/views/widget.razr', compact('user'));
     }
 
     /**

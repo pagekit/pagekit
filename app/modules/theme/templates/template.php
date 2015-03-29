@@ -21,7 +21,7 @@
                     <div class="uk-navbar-brand uk-hidden-small" data-uk-dropdown="{mode:'click'}">
 
                         <img class="uk-margin-right" src="<?= $view->url()->getStatic('app/modules/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
-                        
+
                         <?= __($subnav) ?>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
@@ -91,7 +91,7 @@
 
             </div>
         </div>
-        
+
         <div class="tm-main uk-container uk-container-center">
             <?= $view->section()->render('content') ?>
         </div>

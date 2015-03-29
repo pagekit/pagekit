@@ -87,7 +87,7 @@ class SystemController extends Controller
             throw new NotFoundHttpException(__('Template not found.'));
         }
 
-        $output   = App::tmpl($file);
+        $output   = App::view($file);
         $response = App::response()->create()
             ->setETag(md5($output))
             ->setPublic();
@@ -108,7 +108,7 @@ class SystemController extends Controller
 
         foreach (explode(',', $templates) as $template) {
             if ($file = App::view()->tmpl()->get($template)) {
-                $data[$template] = App::tmpl($file);
+                $data[$template] = App::view($file);
             }
         }
 

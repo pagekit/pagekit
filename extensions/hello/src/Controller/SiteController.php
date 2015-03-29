@@ -40,7 +40,7 @@ class SiteController
     public function anotherViewAction()
     {
         $data = ['head.title' => __('View article'), 'id' => 1];
-        return App::tmpl('extensions/hello/views/view.razr', $data);
+        return App::view('extensions/hello/views/view.razr', $data);
     }
 
     public function redirectAction()

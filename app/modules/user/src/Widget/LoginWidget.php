@@ -43,14 +43,14 @@ class LoginWidget implements TypeInterface
 
         if ($user->isAuthenticated()) {
             $redirect = $widget->get('redirect.logout') ?: App::url()->current(true);
-            return App::tmpl('app/modules/user/views/login/logout.php', compact('widget', 'user', 'options', 'redirect'));
+            return App::view('app/modules/user/views/login/logout.php', compact('widget', 'user', 'options', 'redirect'));
         }
 
         $redirect          = $widget->get('redirect.login') ?: App::url()->current(true);
         $last_username     = App::session()->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
 
-        return App::tmpl('app/modules/user/views/login/login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return App::view('app/modules/user/views/login/login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 
     /**
@@ -58,6 +58,6 @@ class LoginWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::tmpl('app/modules/user/views/login/edit.php', compact('widget'));
+        return App::view('app/modules/user/views/login/edit.php', compact('widget'));
     }
 }

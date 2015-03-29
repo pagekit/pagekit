@@ -40,12 +40,17 @@ return [
             return $engine;
         };
 
-        $app->on('system.init', function() use ($app) {
-            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
+        $app->extend('view', function($view, $app) {
+
+            $view->on('view.render', function($event) use ($app) {
+                $event->setOutput($app['tmpl']->render($event->getTemplate(), $event->getParameters()));
+            });
+
+            return $view;
         });
 
-        $app->on('view.render', function($event) use ($app) {
-            $event->setOutput($app['tmpl']->render($event->getTemplate(), $event->getParameters()));
+        $app->on('system.init', function() use ($app) {
+            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
 
         $app->on('templating.reference', function($event) use ($app) {

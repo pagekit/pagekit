@@ -82,7 +82,7 @@ class MenuWidget implements TypeInterface
 
         $root->setParent();
 
-        return App::tmpl($layout, compact('widget', 'options', 'root'));
+        return App::view($layout, compact('widget', 'options', 'root'));
     }
 
     /**
@@ -90,6 +90,6 @@ class MenuWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::tmpl('app/modules/menu/views/widgets/menu/edit.razr', compact('widget'));
+        return App::view('app/modules/menu/views/widgets/menu/edit.razr', compact('widget'));
     }
 }

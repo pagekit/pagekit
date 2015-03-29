@@ -38,7 +38,7 @@ class ExceptionController
                 $title = __('Whoops, looks like something went wrong.');
         }
 
-        $response = App::tmpl('app/modules/theme/templates/error.php', compact('title', 'exception', 'currentContent'));
+        $response = App::view('app/modules/theme/templates/error.php', compact('title', 'exception', 'currentContent'));
 
         return App::response($response, $exception->getStatusCode(), $exception->getHeaders());
     }

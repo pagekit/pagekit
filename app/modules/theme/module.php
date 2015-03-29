@@ -11,7 +11,7 @@ return [
             $app['view']->setLayout($this->path.'/templates/template.php');
 
             $app['sections']->addRenderer('toolbar', function ($name, $value, $options = []) use ($app) {
-                return $app['tmpl']->render('app/modules/theme/views/renderer/toolbar.php', compact('name', 'value', 'options'));
+                return $app['view']->render('app/modules/theme/views/renderer/toolbar.php', compact('name', 'value', 'options'));
             });
 
             $app['sections']->register('toolbar', ['renderer' => 'toolbar']);

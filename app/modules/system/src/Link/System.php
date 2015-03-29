@@ -41,7 +41,7 @@ class System implements LinkInterface
             unset($routes['/']);
         }
 
-        return App::tmpl('app/modules/system/views/admin/link/system.razr', compact('link', 'params', 'routes'));
+        return App::view('app/modules/system/views/admin/link/system.razr', compact('link', 'params', 'routes'));
     }
 
     protected function getRoutes()
