@@ -54,7 +54,7 @@ class ExtensionTranslateCommand extends Command
         parent::initialize($input, $output);
 
         $this->visitors = [
-            'php'  => new PhpNodeVisitor($this->container['tmpl.php'])
+            'php'  => new PhpNodeVisitor($this->container['templating'])
         ];
 
         $this->xgettext = !defined('PHP_WINDOWS_VERSION_MAJOR') && (bool) exec('which xgettext');
