@@ -68,7 +68,6 @@ return [
         'system/cache',
         'system/option',
         'system/locale',
-        'system/templating',
         'system/view'
 
     ],

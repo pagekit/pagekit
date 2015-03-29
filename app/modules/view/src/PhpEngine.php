@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Templating;
+namespace Pagekit\View;
 
 use Symfony\Component\Templating\PhpEngine as BasePhpEngine;
 use Symfony\Component\Templating\Storage\FileStorage;

@@ -1,18 +1,26 @@
 <?php
 
+use Pagekit\View\PhpEngine;
+use Pagekit\View\ViewListener;
 use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\TemplateHelper;
 use Pagekit\View\Helper\TokenHelper;
-use Pagekit\View\ViewListener;
+use Pagekit\View\Section\DelayedRenderer;
+use Symfony\Component\Templating\TemplateNameParser;
+use Symfony\Component\Templating\Loader\FilesystemLoader;
 
 return [
 
     'name' => 'system/view',
 
     'main' => function ($app) {
+
+        $app['templating'] = function() {
+            return new PhpEngine(new TemplateNameParser(), new FilesystemLoader([]));
+        };
 
         $app->extend('view', function($view, $app) {
 
@@ -37,7 +45,19 @@ return [
                 $helpers['token'] = new TokenHelper($app['csrf']);
             }
 
-            return $view->addHelpers($helpers);
+            $view->addHelpers($helpers);
+
+            $view->on('view.render', function($event) use ($app) {
+                if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
+                    $event->setTemplate($template);
+                }
+            }, 10);
+
+            $view->on('view.render', function($event) use ($app) {
+                $event->setResult($app['templating']->render($event->getTemplate(), $event->getParameters()));
+            }, -10);
+
+            return $view;
         });
 
         $app->subscribe(new ResponseListener);
@@ -81,6 +101,8 @@ return [
                     $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
                 }
             });
+
+            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
 
         $app->on('system.loaded', function () use ($app) {

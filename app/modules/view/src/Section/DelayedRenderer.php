@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Templating\Section;
+namespace Pagekit\View\Section;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
