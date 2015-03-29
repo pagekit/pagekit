@@ -3,8 +3,8 @@
 use Pagekit\Application as App;
 use Pagekit\Module\Loader\ConfigLoader;
 
-$loader  = require __DIR__.'/autoload.php';
-$config  = require __DIR__.'/config.php';
+$loader = require __DIR__.'/autoload.php';
+$config = require __DIR__.'/config.php';
 
 $app = new App($config['values']);
 $app['autoloader'] = $loader;
