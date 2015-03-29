@@ -32,14 +32,14 @@ return [
                 });
 
                 // set user
-                $app['tmpl']->addGlobal('user', $app['user']);
+                $app['view']->addGlobal('user', $app['user']);
 
                 // set menus
-                $app['tmpl']->addGlobal('nav', $app['admin.menu']);
-                $app['tmpl']->addGlobal('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
+                $app['view']->addGlobal('nav', $app['admin.menu']);
+                $app['view']->addGlobal('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
 
                 // set font subset
-                $app['tmpl']->addGlobal('subset', 'latin,latin-ext');
+                $app['view']->addGlobal('subset', 'latin,latin-ext');
 
             });
 

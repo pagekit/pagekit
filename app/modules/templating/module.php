@@ -2,8 +2,8 @@
 
 use Pagekit\Templating\PhpEngine;
 use Pagekit\Templating\Section\DelayedRenderer;
-use Pagekit\Templating\TemplateEngine;
 use Pagekit\Templating\TemplateNameParser;
+use Symfony\Component\Templating\DelegatingEngine;
 use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 
@@ -15,10 +15,7 @@ return [
 
         $app['tmpl'] = function($app) {
 
-            $engine = new TemplateEngine();
-            $engine->addGlobal('app', $app);
-            $engine->addGlobal('view', $app['view']);
-            $engine->addGlobal('url', $app['url']);
+            $engine = new DelegatingEngine();
             $engine->addEngine($app['tmpl.php']);
 
             return $engine;

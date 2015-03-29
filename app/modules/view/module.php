@@ -16,6 +16,10 @@ return [
 
         $app->extend('view', function($view, $app) {
 
+            $view->addGlobal('app', $app);
+            $view->addGlobal('view', $view);
+            $view->addGlobal('url', $app['url']);
+
             $helpers = [
                 'gravatar' => new GravatarHelper(),
                 'tmpl'     => new TemplateHelper()
