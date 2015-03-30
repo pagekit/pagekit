@@ -32,8 +32,6 @@ return [
 
     ],
 
-    'include' => 'modules/*/module.php',
-
     'autoload' => [
 
         'Pagekit\\System\\' => 'src'

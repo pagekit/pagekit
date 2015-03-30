@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link href="app/modules/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link href="app/modules/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
+        <link href="app/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <link href="app/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
         <?php $view->style('installer', 'app/modules/installer/assets/css/installer.css') ?>
         <?php $view->script('installer', 'app/modules/installer/app/installer.js', ['vue-system', 'vue-validator', 'uikit-form-password']) ?>
         <?= $view->section()->render('head') ?>

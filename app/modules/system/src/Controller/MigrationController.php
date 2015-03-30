@@ -11,7 +11,7 @@ use Pagekit\Application\Controller;
 class MigrationController extends Controller
 {
     /**
-     * @Response("app/modules/system/modules/theme/templates/migration.php", layout=false)
+     * @Response("app/modules/theme/templates/migration.php", layout=false)
      */
     public function indexAction()
     {
