@@ -17,7 +17,7 @@ class AuthController extends Controller
     /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
-     * @Response("app/modules/user/views/login.php")
+     * @Response("system/user: views/login.php")
      */
     public function loginAction($redirect = '')
     {

@@ -14,7 +14,7 @@ use Pagekit\System\Extension;
 class ExtensionsController extends Controller
 {
     /**
-     * @Response("app/modules/system/views/admin/extensions.php")
+     * @Response("system: views/admin/extensions.php")
      */
     public function indexAction()
     {

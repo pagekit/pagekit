@@ -19,7 +19,7 @@ class LinkController
 
     /**
      * @Request({"context"})
-     * @Response("app/modules/system/views/admin/link/link.types.razr", layout=false)
+     * @Response("system: views/admin/link/link.types.razr", layout=false)
      */
     public function indexAction($context = '')
     {

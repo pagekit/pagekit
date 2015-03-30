@@ -64,8 +64,8 @@ class SystemListener implements EventSubscriberInterface
         $event->options('system', App::system()->config, ['api.key', 'release_channel', 'site.', 'maintenance.']);
         $event->data('config', $config, ['framework.debug', 'system.storage', 'profiler.enabled']);
         $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
-        $event->view('site',   'Site', 'app/modules/system/views/admin/settings/site.php');
-        $event->view('system', 'System', 'app/modules/system/views/admin/settings/system.php');
+        $event->view('site',   'Site', 'system: views/admin/settings/site.php');
+        $event->view('system', 'System', 'system: views/admin/settings/system.php');
     }
 
     /**

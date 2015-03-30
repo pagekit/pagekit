@@ -26,7 +26,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("app/modules/dashboard/views/admin/index.php")
+     * @Response("system/dashboard: views/admin/index.php")
      */
     public function indexAction()
     {
@@ -46,7 +46,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("app/modules/dashboard/views/admin/settings.php")
+     * @Response("system/dashboard: views/admin/settings.php")
      */
     public function settingsAction()
     {
@@ -63,7 +63,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("app/modules/dashboard/views/admin/edit.php")
+     * @Response("system/dashboard: views/admin/edit.php")
      */
     public function addAction($id)
     {
@@ -87,7 +87,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("app/modules/dashboard/views/admin/edit.php")
+     * @Response("system/dashboard: views/admin/edit.php")
      */
     public function editAction($id)
     {

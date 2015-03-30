@@ -22,7 +22,7 @@ return [
 
     'config' => [
 
-        'settings.view' => 'extensions/hello/views/admin/settings.razr',
+        'settings.view' => 'hello: views/admin/settings.razr',
         'message' => 'World'
 
     ],

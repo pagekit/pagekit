@@ -101,9 +101,9 @@ return [
 
     'templates' => [
 
-        'linkpicker.modal'    => 'app/modules/system/views/tmpl/linkpicker.modal.razr',
-        'linkpicker.replace'  => 'app/modules/system/views/tmpl/linkpicker.replace.razr',
-        'package.upload'      => 'app/modules/system/views/admin/upload.php'
+        'linkpicker.modal'    => 'system: views/tmpl/linkpicker.modal.razr',
+        'linkpicker.replace'  => 'system: views/tmpl/linkpicker.replace.razr',
+        'package.upload'      => 'system: views/admin/upload.php'
 
     ],
 

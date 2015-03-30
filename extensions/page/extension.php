@@ -28,7 +28,7 @@ return [
 
     'templates' => [
 
-        'page.edit' => 'extensions/page/views/tmpl/edit.php'
+        'page.edit' => 'page: views/tmpl/edit.php'
 
     ]
 ];

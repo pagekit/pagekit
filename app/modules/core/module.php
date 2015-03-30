@@ -60,6 +60,12 @@ return [
 
         });
 
+        $app->on('system.loaded', function () use ($app) {
+            foreach ($app['module'] as $module) {
+                $app['locator']->add("$module->name:", $module->path);
+            }
+        });
+
     },
 
     'require' => [

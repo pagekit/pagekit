@@ -159,7 +159,7 @@ return [
             $app['view']->data('$pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
             $app['view']->section()->set('messages', function() use ($app) {
-                return $app['view']->render('app/modules/system/views/messages/messages.php');
+                return $app['view']->render('system: views/messages/messages.php');
             });
 
             $app['view']->section()->prepend('head', function () use ($app) {

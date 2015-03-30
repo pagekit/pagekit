@@ -41,7 +41,7 @@ class FeedWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('app/modules/dashboard/views/feed/index.php', compact('widget', 'options'));
+        return App::view('system/dashboard: views/feed/index.php', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class FeedWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('app/modules/dashboard/views/feed/edit.php', compact('widget'));
+        return App::view('system/dashboard: views/feed/edit.php', compact('widget'));
     }
 }

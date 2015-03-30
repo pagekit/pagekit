@@ -32,7 +32,7 @@ class WidgetsController extends Controller
     }
 
     /**
-     * @Response("app/modules/widget/views/admin/index.razr")
+     * @Response("system/widget: views/admin/index.razr")
      */
     public function indexAction()
     {
@@ -50,7 +50,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("app/modules/widget/views/admin/edit.razr")
+     * @Response("system/widget: views/admin/edit.razr")
      */
     public function addAction($type)
     {
@@ -62,7 +62,7 @@ class WidgetsController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("app/modules/widget/views/admin/edit.razr")
+     * @Response("system/widget: views/admin/edit.razr")
      */
     public function editAction($id)
     {

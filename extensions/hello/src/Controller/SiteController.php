@@ -10,7 +10,7 @@ use Pagekit\Application as App;
 class SiteController
 {
     /**
-     * @Response("extensions/hello/views/index.razr")
+     * @Response("hello: views/index.razr")
      */
     public function indexAction()
     {
@@ -20,7 +20,7 @@ class SiteController
     /**
      * @Route("/greet", name="@hello/greet/world")
      * @Route("/greet/{name}", name="@hello/greet/name")
-     * @Response("extensions/hello/views/greet.razr")
+     * @Response("hello: views/greet.razr")
      */
     public function greetAction($name = 'World')
     {
@@ -30,7 +30,7 @@ class SiteController
 
     /**
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     * @Response("extensions/hello/views/view.razr")
+     * @Response("hello: views/view.razr")
      */
     public function viewAction($id = 1)
     {
@@ -40,7 +40,7 @@ class SiteController
     public function anotherViewAction()
     {
         $data = ['head.title' => __('View article'), 'id' => 1];
-        return App::view('extensions/hello/views/view.razr', $data);
+        return App::view('hello: views/view.razr', $data);
     }
 
     public function redirectAction()

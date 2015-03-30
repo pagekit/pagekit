@@ -39,6 +39,6 @@ class BlogLink implements LinkInterface
     {
         $posts = Post::findAll();
 
-        return App::view('extensions/blog/views/admin/link/blog.razr', compact('link', 'params', 'posts'));
+        return App::view('blog: views/admin/link/blog.razr', compact('link', 'params', 'posts'));
     }
 }

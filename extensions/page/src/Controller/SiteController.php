@@ -14,7 +14,7 @@ class SiteController
     /**
      * @Route("/{id}", name="id")
      * @Request({"id" : "int"})
-     * @Response("extensions/page/views/index.razr")
+     * @Response("page: views/index.razr")
      */
     public function indexAction($id = 0)
     {

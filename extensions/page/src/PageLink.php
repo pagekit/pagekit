@@ -31,6 +31,6 @@ class PageLink extends Route
     {
         $pages = Page::findAll();
 
-        return App::view('extensions/page/views/admin/link/page.razr', compact('link', 'params', 'pages'));
+        return App::view('page: views/admin/link/page.razr', compact('link', 'params', 'pages'));
     }
 }
