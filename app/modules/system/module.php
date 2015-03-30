@@ -8,8 +8,8 @@ return [
 
     'require' => [
 
-        'comment',
         'profiler',
+        'comment',
         'feed',
         'mail',
         'markdown',

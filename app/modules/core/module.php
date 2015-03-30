@@ -67,8 +67,7 @@ return [
         'application',
         'cache',
         'option',
-        'locale',
-        'view'
+        'locale'
 
     ],
 
