@@ -64,7 +64,7 @@ return [
 
     'require' => [
 
-        'framework',
+        'application',
         'system/cache',
         'system/option',
         'system/locale',

@@ -31,7 +31,7 @@ return [
 
     ],
 
-    'framework/session' => [
+    'session' => [
 
         'storage'  => 'database',
         'lifetime' => 900,
@@ -43,7 +43,7 @@ return [
 
     ],
 
-    'framework/database' => [
+    'database' => [
 
         'connections' => [
 
@@ -60,7 +60,7 @@ return [
 
     ],
 
-    'framework/filesystem' => [
+    'filesystem' => [
 
         'path' => '%path%'
 

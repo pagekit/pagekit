@@ -14,7 +14,7 @@ return [
 
     ],
 
-    'framework/session' => [
+    'session' => [
 
         'storage' => 'array'
 

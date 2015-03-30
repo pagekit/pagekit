@@ -1,0 +1,19 @@
+{
+    "name": "pagekit/cookie",
+    "homepage": "http://pagekit.com",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/http-foundation": "2.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pagekit\\Cookie\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9-dev"
+        }
+    }
+}

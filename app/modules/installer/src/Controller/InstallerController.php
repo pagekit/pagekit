@@ -185,7 +185,7 @@ class InstallerController
      */
     protected function createDatabase()
     {
-        $module = App::module('framework/database');
+        $module = App::module('database');
         $params = $module->config('database.connections')[$module->config('database.default')];
         $dbname = App::db()->quoteIdentifier($params['dbname']);
 

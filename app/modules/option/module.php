@@ -21,7 +21,7 @@ return [
 
     'require' => [
 
-        'framework/database',
+        'database',
         'system/cache'
 
     ],

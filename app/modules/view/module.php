@@ -130,7 +130,7 @@ return [
 
         $app->on('system.init', function() use ($app) {
 
-            $debug = $app['module']['framework']->config('debug');
+            $debug = $app['module']['application']->config('debug');
 
             $app['styles']->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
             $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');

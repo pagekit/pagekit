@@ -21,7 +21,7 @@ class SystemModule extends Module
      */
     public function main(App $app)
     {
-        if (!$app['module']['framework']->config('debug')) {
+        if (!$app['module']['application']->config('debug')) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
@@ -35,7 +35,7 @@ class SystemModule extends Module
             new ThemeWidgetListener
         );
 
-        $app['module']['framework/auth']->config['rememberme.key'] = $this->config('key');
+        $app['module']['auth']->config['rememberme.key'] = $this->config('key');
 
         $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
         $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
