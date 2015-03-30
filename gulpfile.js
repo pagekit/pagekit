@@ -16,9 +16,9 @@ var fs      = require('fs'),
 
 // paths of the packages for the compile-task
 var pkgs = [
-    'app/modules/installer/',
-    'app/modules/theme/',
-    'themes/alpha/'
+    { path: 'app/modules/installer/', data: '../../../composer.json' },
+    { path: 'app/modules/theme/', data: '../../../composer.json' },
+    { path: 'themes/alpha/', data: 'theme.json' }
 ];
 
 // banner for the css files
@@ -35,27 +35,15 @@ gulp.task('default', ['compile', 'lint']);
  */
 gulp.task('compile', function () {
 
-    return merge.apply(null, pkgs.map(function (path) {
-
-        var data = {};
-
-        // search for the correct json file used for the banner
-        if (fs.existsSync(path + 'theme.json')) {
-            data = require('./' + path + 'theme.json');
-        } else if (fs.existsSync(path + 'extension.json')) {
-            data = require('./' + path + 'extension.json');
-        } else if (fs.existsSync(path + '../../extension.json')) {
-            data = require('./' + path + '../../extension.json');
-        }
-
-        return gulp.src(path + '**/less/*.less')
-            .pipe(less({ compress: true }))
-            .pipe(header(banner, { data: data }))
+    return merge.apply(null, pkgs.map(function (pkg) {
+        return gulp.src(pkg.path + '**/less/*.less', {base: pkg.path})
+            .pipe(less({ compress: true, relativeUrls: true }))
+            .pipe(header(banner, { data: require('./' + pkg.path + pkg.data) }))
             .pipe(rename(function (file) {
                 // the compiled less file should be stored in the css/ folder instead of the less/ folder
                 file.dirname = file.dirname.replace('less', 'css');
             }))
-            .pipe(gulp.dest(path));
+            .pipe(gulp.dest(pkg.path));
     }));
 
 });
