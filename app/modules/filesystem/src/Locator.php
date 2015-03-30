@@ -75,7 +75,7 @@ class Locator
             }
 
             if (($part = substr($file, strlen($prefix))) !== false) {
-                $path .= ltrim($part, '/');
+                $path .= ltrim(trim($part), '/');
             }
 
             if (file_exists($path)) {
