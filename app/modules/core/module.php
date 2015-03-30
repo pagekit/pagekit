@@ -65,10 +65,10 @@ return [
     'require' => [
 
         'application',
-        'system/cache',
-        'system/option',
-        'system/locale',
-        'system/view'
+        'cache',
+        'option',
+        'locale',
+        'view'
 
     ],
 

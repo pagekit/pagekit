@@ -11,7 +11,7 @@ use Symfony\Component\Translation\Translator;
 
 return [
 
-    'name' => 'system/locale',
+    'name' => 'locale',
 
     'main' => function ($app) {
 

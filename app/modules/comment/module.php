@@ -4,7 +4,7 @@ use Pagekit\Comment\CommentPlugin;
 
 return [
 
-    'name' => 'system/comment',
+    'name' => 'comment',
 
     'main' => function ($app) {
 

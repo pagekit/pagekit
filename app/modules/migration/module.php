@@ -4,7 +4,7 @@ use Pagekit\Migration\Migrator;
 
 return [
 
-    'name' => 'system/migration',
+    'name' => 'migration',
 
     'main' => function ($app) {
 

@@ -2,13 +2,13 @@
 
 return [
 
-    'system/installer' => [
+    'installer' => [
 
         'enabled' => true
 
     ],
 
-    'system/cache' => [
+    'cache' => [
 
         'storage' => 'array'
 

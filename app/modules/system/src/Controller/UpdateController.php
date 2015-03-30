@@ -92,7 +92,7 @@ class UpdateController
             App::file()->delete("$updateDir/.htaccess");
             App::file()->copyDir($updateDir, App::path());
             App::file()->delete($updateDir);
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
             App::session()->remove('system.updateDir');
 
             return 'success';
@@ -114,7 +114,7 @@ class UpdateController
             }
 
             App::system()->enable();
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
             App::session()->remove('system.update');
 
             return 'success';

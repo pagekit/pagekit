@@ -4,7 +4,7 @@ use Pagekit\OAuth\Helper\OAuthHelper;
 
 return [
 
-    'name' => 'system/oauth',
+    'name' => 'oauth',
 
     'main' => function ($app) {
 

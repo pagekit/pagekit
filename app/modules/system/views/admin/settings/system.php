@@ -27,7 +27,7 @@
             <label><input type="checkbox" value="1" v-model="config.framework.debug"> {{ 'Enable debug mode' | trans }}</label>
         </p>
         <p class="uk-form-controls-condensed">
-            <label><input type="checkbox" value="1" v-model="config['system/profiler'].enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
+            <label><input type="checkbox" value="1" v-model="config['profiler'].enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
         </p>
         <p v-if="!sqlite" class="uk-form-help-block">{{ 'Please enable the SQLite database extension.' | trans }}</p>
     </div>

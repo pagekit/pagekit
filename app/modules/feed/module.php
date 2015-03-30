@@ -4,7 +4,7 @@ use Pagekit\Feed\FeedFactory;
 
 return [
 
-    'name' => 'system/feed',
+    'name' => 'feed',
 
     'main' => function ($app) {
 

@@ -6,7 +6,7 @@ use Pagekit\System\Package\Repository\ThemeRepository;
 
 return [
 
-    'name' => 'system/package',
+    'name' => 'package',
 
     'main' => function ($app) {
 

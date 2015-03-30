@@ -13,7 +13,7 @@ class CacheController
      */
     public function clearAction($caches)
     {
-        App::module('system/cache')->clearCache($caches);
+        App::module('cache')->clearCache($caches);
 
         return ['message' => __('Cache cleared!')];
     }

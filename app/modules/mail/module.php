@@ -5,7 +5,7 @@ use Pagekit\Mail\Mailer;
 
 return [
 
-    'name' => 'system/mail',
+    'name' => 'mail',
 
     'main' => function ($app) {
 

@@ -5,7 +5,7 @@ use Pagekit\Option\Option;
 
 return [
 
-    'name' => 'system/option',
+    'name' => 'option',
 
     'main' => function ($app) {
 
@@ -22,7 +22,7 @@ return [
     'require' => [
 
         'database',
-        'system/cache'
+        'cache'
 
     ],
 

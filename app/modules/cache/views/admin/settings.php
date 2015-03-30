@@ -4,7 +4,7 @@
     <span class="uk-form-label">{{ 'Cache' | trans }}</span>
     <div class="uk-form-controls uk-form-controls-text">
         <p v-repeat="cache: caches" class="uk-form-controls-condensed">
-            <label><input type="radio" v-model="config['system/cache'].caches.cache.storage" value="{{ $key }}" v-attr="disabled: !cache.supported"> {{ cache.name }}</label>
+            <label><input type="radio" v-model="config['cache'].caches.cache.storage" value="{{ $key }}" v-attr="disabled: !cache.supported"> {{ cache.name }}</label>
         </p>
     </div>
 </div>
@@ -12,7 +12,7 @@
     <span class="uk-form-label">{{ 'Developer' | trans }}</span>
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
-            <label><input type="checkbox" v-model="config['system/cache'].nocache" value="1"> {{ 'Disable cache' | trans }}</label>
+            <label><input type="checkbox" v-model="config['cache'].nocache" value="1"> {{ 'Disable cache' | trans }}</label>
         </p>
     </div>
 </div>

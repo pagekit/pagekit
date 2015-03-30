@@ -23,7 +23,7 @@ use Symfony\Component\Templating\Loader\FilesystemLoader;
 
 return [
 
-    'name' => 'system/view',
+    'name' => 'view',
 
     'main' => function ($app) {
 

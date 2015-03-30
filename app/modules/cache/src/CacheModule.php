@@ -84,7 +84,7 @@ class CacheModule extends Module
         });
 
         $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
-            if ($config->get('system/cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
+            if ($config->get('cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
                 $this->clearCache();
             }
         });

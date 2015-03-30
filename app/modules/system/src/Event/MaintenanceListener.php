@@ -20,7 +20,7 @@ class MaintenanceListener implements EventSubscriberInterface
         if (App::system()->config('maintenance.enabled') && !(App::isAdmin() || $attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
 
             $message  = App::system()->config('maintenance.msg') ? : __("We'll be back soon.");
-            $response = App::view('app/modules/theme/templates/maintenance.php', compact('message'));
+            $response = App::view('app/modules/system/modules/theme/templates/maintenance.php', compact('message'));
 
             $attributes->set('_disable_profiler_toolbar', true);
 

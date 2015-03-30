@@ -27,7 +27,7 @@ return [
     'require' => [
 
         'system/core',
-        'system/migration'
+        'migration'
 
     ],
 

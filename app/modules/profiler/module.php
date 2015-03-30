@@ -19,7 +19,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 return [
 
-    'name' => 'system/profiler',
+    'name' => 'profiler',
 
     'main' => function ($app) {
 

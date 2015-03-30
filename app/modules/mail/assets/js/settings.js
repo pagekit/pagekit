@@ -8,7 +8,7 @@ Vue.component('v-mail', {
     methods: {
 
         test: function(driver) {
-            $.getJSON(this.$url('admin/system/mail/test/'+driver), { option: this.option['system/mail'] }, function(data) {
+            $.getJSON(this.$url('admin/system/mail/test/'+driver), { option: this.option['mail'] }, function(data) {
                 if (data) {
                     UIkit.notify(data.message, data.success ? 'success' : 'danger');
                 }

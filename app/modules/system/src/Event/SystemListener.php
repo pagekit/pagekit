@@ -62,7 +62,7 @@ class SystemListener implements EventSubscriberInterface
     public function onSettingsEdit($event, $config)
     {
         $event->options('system', App::system()->config, ['api.key', 'release_channel', 'site.', 'maintenance.']);
-        $event->data('config', $config, ['framework.debug', 'system.storage', 'system/profiler.enabled']);
+        $event->data('config', $config, ['framework.debug', 'system.storage', 'profiler.enabled']);
         $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
         $event->view('site',   'Site', 'app/modules/system/views/admin/settings/site.php');
         $event->view('system', 'System', 'app/modules/system/views/admin/settings/system.php');
@@ -74,7 +74,7 @@ class SystemListener implements EventSubscriberInterface
     public function onSettingsSave($event, $config)
     {
         if ($config['framework.debug'] != App::module('framework')->config('debug')) {
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
         }
     }
 

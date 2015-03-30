@@ -2,7 +2,7 @@
 
 return [
 
-    'system/cache' => [
+    'cache' => [
 
         'caches' => [
 
@@ -25,7 +25,7 @@ return [
 
     ],
 
-    'system/profiler' => [
+    'profiler' => [
 
         'file' => '%path%/app/database/profiler.db'
 

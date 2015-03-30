@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/cache',
+    'name' => 'cache',
 
     'main' => 'Pagekit\\Cache\\CacheModule',
 

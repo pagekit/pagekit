@@ -95,7 +95,7 @@ class ExtensionsController extends Controller
 
             $this->disable($extension);
 
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
 
             return ['message' => __('Extension disabled.')];
 
@@ -126,7 +126,7 @@ class ExtensionsController extends Controller
             $extension->uninstall();
 
             App::package()->getInstaller('extension')->uninstall(App::package()->getRepository('extension')->findPackage($name));
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
 

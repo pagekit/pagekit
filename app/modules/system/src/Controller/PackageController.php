@@ -104,7 +104,7 @@ class PackageController
                 $this->installExtension("$path/extension.json", $package);
             }
 
-            App::module('system/cache')->clearCache();
+            App::module('cache')->clearCache();
 
             $response = ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
 

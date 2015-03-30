@@ -18,7 +18,7 @@
     <div id="oauth-service-list" class="uk-form-row">
         <input type="hidden" name="option[system/oauth]" value="">
 
-        <div v-repeat="provider: option['system/oauth'].provider" id="{{ $key }}-container">
+        <div v-repeat="provider: option['oauth'].provider" id="{{ $key }}-container">
             <h2 class="pk-form-heading">{{ $key }}</h2>
             <a class="uk-close uk-close-alt uk-float-right" v-on="click: removeProvider($key)" href="#"></a>
 

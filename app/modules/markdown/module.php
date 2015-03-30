@@ -4,7 +4,7 @@ use Pagekit\Markdown\Markdown;
 
 return [
 
-    'name' => 'system/markdown',
+    'name' => 'markdown',
 
     'main' => function ($app) {
 
