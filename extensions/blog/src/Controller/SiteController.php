@@ -195,7 +195,7 @@ class SiteController extends Controller
             'title'       => App::system()->config('site.title'),
             'link'        => App::url('@blog/site', [], true),
             'description' => App::system()->config('site.description'),
-            'element'     => ['language', App::module('system/locale')->config('locale')],
+            'element'     => ['language', App::module('locale')->config('locale')],
             'selfLink'    => App::url('@blog/site/feed', [], true)
         ]);
 
