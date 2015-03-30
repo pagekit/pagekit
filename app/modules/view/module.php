@@ -1,13 +1,22 @@
 <?php
 
 use Pagekit\View\PhpEngine;
-use Pagekit\View\ViewListener;
+use Pagekit\View\View;
+use Pagekit\View\Asset\AssetFactory;
+use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Event\ResponseListener;
+use Pagekit\View\Event\ViewListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\TemplateHelper;
 use Pagekit\View\Helper\TokenHelper;
+use Pagekit\View\Helper\DataHelper;
+use Pagekit\View\Helper\MetaHelper;
+use Pagekit\View\Helper\ScriptHelper;
+use Pagekit\View\Helper\SectionHelper;
+use Pagekit\View\Helper\StyleHelper;
+use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\Section\DelayedRenderer;
 use Symfony\Component\Templating\TemplateNameParser;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
@@ -17,6 +26,33 @@ return [
     'name' => 'system/view',
 
     'main' => function ($app) {
+
+        $app['view'] = function ($app) {
+
+            $view = new View();
+            $view->addHelpers([
+                'data'    => new DataHelper(),
+                'meta'    => new MetaHelper(),
+                'style'   => new StyleHelper($app['styles']),
+                'script'  => new ScriptHelper($app['scripts']),
+                'section' => $app['sections'],
+                'url'     => new UrlHelper($app['url'])
+            ]);
+
+            return $view;
+        };
+
+        $app['styles'] = function () {
+            return new AssetManager();
+        };
+
+        $app['scripts'] = function () {
+            return new AssetManager();
+        };
+
+        $app['sections'] = function () {
+            return new SectionHelper();
+        };
 
         $app['templating'] = function() {
             return new PhpEngine(new TemplateNameParser(), new FilesystemLoader([]));
@@ -61,6 +97,36 @@ return [
         });
 
         $app->subscribe(new ResponseListener);
+
+        $app->on('kernel.boot', function () use ($app) {
+
+            $app->subscribe(new ViewListener($app['view']));
+
+            $app['sections']->append('head', function () use ($app) {
+
+                $head  = $app['view']->meta()->render();
+                $head .= $app['view']->style()->render();
+                $head .= $app['view']->data()->render();
+                $head .= $app['view']->script()->render();
+
+                return $head;
+            });
+        });
+
+        $app->on('kernel.controller', function () use ($app) {
+            foreach ($app['module'] as $module) {
+
+                if (!isset($module->renderer)) {
+                    continue;
+                }
+
+                foreach ($module->renderer as $name => $template) {
+                    $app['sections']->addRenderer($name, function ($name, $value, $options = []) use ($app, $template) {
+                        return $app['tmpl']->render($template, compact('name', 'value', 'options'));
+                    });
+                }
+            }
+        });
 
         $app->on('system.init', function() use ($app) {
 
