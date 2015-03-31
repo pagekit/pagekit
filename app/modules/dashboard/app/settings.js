@@ -18,7 +18,7 @@ jQuery(function($) {
 
             remove: function() {
 
-                $.post(this.$url('admin/system/dashboard/delete'), {ids: this.selected}, function(data) {
+                $.post(this.$url('admin/dashboard/delete'), {ids: this.selected}, function(data) {
 
                     vm.$set('widgets', data.widgets);
                     vm.$set('selected', []);
@@ -38,7 +38,7 @@ jQuery(function($) {
                         return ordered.filter(function(model) { return model.$el === el; })[0].$key;
                     });
 
-                $.post(this.$url('admin/system/dashboard/reorder'), {order: order}, function(data) {
+                $.post(this.$url('admin/dashboard/reorder'), {order: order}, function(data) {
                     UIkit.notify(data.message || vm.$trans('Widgets order updated'), 'success');
                 }).fail(function() {
                     UIkit.notify(vm.$trans('Unable to reorder widgets.'), 'danger');

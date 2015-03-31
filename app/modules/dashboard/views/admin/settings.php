@@ -9,7 +9,7 @@
             <div class="uk-dropdown uk-dropdown-small">
                 <ul class="uk-nav uk-nav-dropdown">
                     <li v-repeat="type: types">
-                        <a href="{{ $url('admin/system/dashboard/add', {type: type.id}) }}">{{ type.name }}</a>
+                        <a href="{{ $url('admin/dashboard/add', {type: type.id}) }}">{{ type.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
             <div class="uk-nestable-item pk-table-fake">
                 <div class="pk-table-width-minimum"><div class="uk-nestable-handle">​</div></div>
                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ $key }}"></div>
-                <div><a href="{{ $url('admin/system/dashboard/edit', {id: $key}) }}">{{ widget.title }}</a></div>
+                <div><a href="{{ $url('admin/dashboard/edit', {id: $key}) }}">{{ widget.title }}</a></div>
                 <div class="pk-table-width-100">{{ types[widget.type].name }}</div>
             </div>
         </li>

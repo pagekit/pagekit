@@ -17,7 +17,7 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        return $this->redirect('@system/dashboard');
+        return $this->redirect('@dashboard');
     }
 
     /**

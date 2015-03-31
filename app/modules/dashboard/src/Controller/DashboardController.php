@@ -5,15 +5,17 @@ namespace Pagekit\Dashboard\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
+use Pagekit\Module\Module;
 use Pagekit\Widget\Model\Widget;
 
 /**
  * @Access(admin=true)
+ * @Route(name="")
  */
 class DashboardController extends Controller
 {
     /**
-     * @var DashboardModule
+     * @var Module
      */
     protected $dashboard;
 
@@ -22,11 +24,11 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->dashboard = App::module('system/dashboard');
+        $this->dashboard = App::module('dashboard');
     }
 
     /**
-     * @Response("system/dashboard: views/admin/index.php")
+     * @Response("dashboard: views/admin/index.php")
      */
     public function indexAction()
     {
@@ -46,7 +48,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("system/dashboard: views/admin/settings.php")
+     * @Response("dashboard: views/admin/settings.php")
      */
     public function settingsAction()
     {
@@ -63,7 +65,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("system/dashboard: views/admin/edit.php")
+     * @Response("dashboard: views/admin/edit.php")
      */
     public function addAction($id)
     {
@@ -82,12 +84,12 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@system/dashboard/settings');
+        return $this->redirect('@dashboard/settings');
     }
 
     /**
      * @Request({"id"})
-     * @Response("system/dashboard: views/admin/edit.php")
+     * @Response("dashboard: views/admin/edit.php")
      */
     public function editAction($id)
     {
@@ -109,7 +111,7 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@system/dashboard/settings');
+        return $this->redirect('@dashboard/settings');
     }
 
     /**
@@ -131,7 +133,7 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect($id ? '@system/dashboard/edit' : '@system/dashboard/add', compact('id'));
+        return $this->redirect($id ? '@dashboard/edit' : '@dashboard/add', compact('id'));
     }
 
     /**

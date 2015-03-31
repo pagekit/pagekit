@@ -10,6 +10,7 @@ return [
 
         'profiler',
         'comment',
+        'dashboard',
         'feed',
         'mail',
         'markdown',
@@ -20,7 +21,6 @@ return [
         'system/core',
         'system/console',
         'system/content',
-        'system/dashboard',
         'system/editor',
         'system/finder',
         'system/marketplace',
@@ -64,7 +64,7 @@ return [
             'label'    => 'Settings',
             'icon'     => 'app/modules/system/assets/images/icon-settings.svg',
             'url'      => '@system/system',
-            'active'   => '@system/(system|settings|themes|extensions|storage|update|info|marketplace|dashboard)*',
+            'active'   => '(@system|@dashboard)/(system|settings|themes|extensions|storage|update|info|marketplace)*',
             'priority' => 110
         ]
 

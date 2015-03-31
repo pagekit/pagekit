@@ -41,7 +41,7 @@ class WeatherWidget extends Type
      */
     public function render(WidgetInterface $widget, $options = [])
     {
-        return App::view('system/dashboard: views/weather/index.php', compact('widget', 'options'));
+        return App::view('dashboard: views/weather/index.php', compact('widget', 'options'));
     }
 
     /**
@@ -49,6 +49,6 @@ class WeatherWidget extends Type
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('system/dashboard: views/weather/edit.php', compact('widget'));
+        return App::view('dashboard: views/weather/edit.php', compact('widget'));
     }
 }

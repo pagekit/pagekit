@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/dashboard',
+    'name' => 'dashboard',
 
     'main' => 'Pagekit\\Dashboard\\DashboardModule',
 
@@ -14,7 +14,7 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
+        '@dashboard: /' => [
             'Pagekit\\Dashboard\\Controller\\DashboardController'
         ]
 
@@ -22,11 +22,11 @@ return [
 
     'menu' => [
 
-        'system: dashboard' => [
+        'dashboard' => [
             'label'    => 'Dashboard',
-            'icon'     => 'app/modules/system/assets/images/icon-dashboard.svg',
-            'url'      => '@system/dashboard',
-            'active'   => '@system/dashboard',
+            'icon'     => 'app/modules/dashboard/assets/images/icon-dashboard.svg',
+            'url'      => '@dashboard',
+            'active'   => '@dashboard',
             'priority' => 0
         ]
 
