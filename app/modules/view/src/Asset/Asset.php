@@ -37,7 +37,7 @@ abstract class Asset implements AssetInterface, \ArrayAccess
      * @param array  $dependencies
      * @param array  $options
      */
-    public function __construct($name, $source, array $dependencies = array(), array $options = array())
+    public function __construct($name, $source, array $dependencies = [], array $options = [])
     {
         $this->name = $name;
         $this->source = $source;
@@ -112,7 +112,7 @@ abstract class Asset implements AssetInterface, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function dump(array $filters = array())
+    public function dump(array $filters = [])
     {
         $asset = clone $this;
 

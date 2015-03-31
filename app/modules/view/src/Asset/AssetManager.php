@@ -10,14 +10,9 @@ class AssetManager implements \IteratorAggregate
     protected $filters;
 
     /**
-     * @var string
+     * @var AssetFactory
      */
-    protected $version;
-
-    /**
-     * @var string
-     */
-    protected $cache;
+    protected $factory;
 
     /**
      * @var AssetCollection
@@ -27,24 +22,32 @@ class AssetManager implements \IteratorAggregate
     /**
      * @var array
      */
-    protected $queued = array();
+    protected $queued = [];
 
     /**
      * @var array
      */
-    protected $combine = array();
+    protected $combine = [];
+
+    /**
+     * @var string
+     */
+    protected $cache;
 
     /**
      * Constructor.
      *
-     * @param string $version
-     * @param string $cache
+     * @param AssetFactory $factory
+     * @param string       $cache
      */
-    public function __construct($version = null, $cache = null)
+    public function __construct(AssetFactory $factory = null, $cache = null)
     {
-        $this->version    = $version;
-        $this->cache      = $cache;
+        $this->factory    = $factory ?: new AssetFactory;
         $this->registered = new AssetCollection;
+
+        if ($cache) {
+            $this->cache = $cache;
+        }
     }
 
     /**
@@ -77,10 +80,10 @@ class AssetManager implements \IteratorAggregate
      * @param  array  $options
      * @return AssetInterface
      */
-    public function add($name, $source = null, $dependencies = array(), $options = array())
+    public function add($name, $source = null, $dependencies = [], $options = [])
     {
         if ($source !== null) {
-            $this->registered->add($asset = $this->create($name, $source, $dependencies, $options));
+            $this->registered->add($asset = $this->factory->create($name, $source, $dependencies, $options));
         } else {
             $asset = $this->registered->get($name);
         }
@@ -112,7 +115,7 @@ class AssetManager implements \IteratorAggregate
      */
     public function removeAll()
     {
-        $this->queued = array();
+        $this->queued = [];
 
         return $this;
     }
@@ -126,9 +129,9 @@ class AssetManager implements \IteratorAggregate
      * @param  array  $options
      * @return AssetInterface
      */
-    public function register($name, $source, $dependencies = array(), $options = array())
+    public function register($name, $source, $dependencies = [], $options = [])
     {
-        $this->registered->add($asset = $this->create($name, $source, $dependencies, $options));
+        $this->registered->add($asset = $this->factory->create($name, $source, $dependencies, $options));
 
         return $asset;
     }
@@ -155,7 +158,7 @@ class AssetManager implements \IteratorAggregate
      * @param  array  $filters
      * @return self
      */
-    public function combine($name, $pattern, $filters = array())
+    public function combine($name, $pattern, $filters = [])
     {
         $this->combine[$name] = compact('pattern', 'filters');
 
@@ -174,7 +177,7 @@ class AssetManager implements \IteratorAggregate
             return $this->registered;
         }
 
-        $assets = array();
+        $assets = [];
 
         foreach (array_keys($this->queued) as $name) {
             $this->resolveDependencies($this->registered->get($name), $assets);
@@ -190,6 +193,22 @@ class AssetManager implements \IteratorAggregate
     }
 
     /**
+     * IteratorAggregate interface implementation.
+     */
+    public function getIterator()
+    {
+        return $this->all()->getIterator();
+    }
+
+    /**
+     * Gets the asset factory.
+     */
+    public function getFactory()
+    {
+        return $this->factory;
+    }
+
+    /**
      * Resolves asset dependencies.
      *
      * @param  AssetInterface   $asset
@@ -198,7 +217,7 @@ class AssetManager implements \IteratorAggregate
      * @return AssetInterface[]
      * @throws \RuntimeException
      */
-    public function resolveDependencies($asset, &$resolved = array(), &$unresolved = array())
+    protected function resolveDependencies($asset, &$resolved = [], &$unresolved = [])
     {
         $unresolved[$asset->getName()] = $asset;
 
@@ -222,53 +241,6 @@ class AssetManager implements \IteratorAggregate
     }
 
     /**
-     * IteratorAggregate interface implementation.
-     */
-    public function getIterator()
-    {
-        return $this->all()->getIterator();
-    }
-
-    /**
-     * Create an asset instance.
-     *
-     * @param  string $name
-     * @param  mixed  $source
-     * @param  mixed  $dependencies
-     * @param  mixed  $options
-     * @return AssetInterface
-     * @throws \InvalidArgumentException
-     */
-    protected function create($name, $source, $dependencies = array(), $options = array())
-    {
-        if (is_string($dependencies)) {
-            $dependencies = array($dependencies);
-        }
-
-        if (is_string($options)) {
-            $options = array('type' => $options);
-        }
-
-        if (!isset($options['type'])) {
-            $options['type'] = 'file';
-        }
-
-        if (!isset($options['version'])) {
-            $options['version'] = $this->version;
-        }
-
-        if ('string' == $options['type']) {
-            return new StringAsset($name, $source, $dependencies, $options);
-        }
-
-        if ('file' == $options['type']) {
-            return new FileAsset($name, $source, $dependencies, $options);
-        }
-
-        throw new \InvalidArgumentException('Unable to determine asset type.');
-    }
-
-    /**
      * Combines assets matching a pattern to a single file asset, optionally applies filters.
      *
      * @param  AssetCollection $assets
@@ -276,7 +248,7 @@ class AssetManager implements \IteratorAggregate
      * @param  array           $options
      * @return AssetCollection
      */
-    protected function doCombine(AssetCollection $assets, $name, $options = array())
+    protected function doCombine(AssetCollection $assets, $name, $options = [])
     {
         extract($options);
 
@@ -289,11 +261,11 @@ class AssetManager implements \IteratorAggregate
             }
         }
 
-        $file = strtr($this->cache, array('%name%' => $name));
+        $file = strtr($this->cache, ['%name%' => $name]);
 
         if ($names = $combine->names() and $file = $this->doCache($combine, $file, $filters)) {
             $assets->remove(array_slice($names, 1));
-            $assets->replace(array_shift($names), $this->create($name, $file));
+            $assets->replace(array_shift($names), $this->factory->create($name, $file));
         }
 
         return $assets;
@@ -307,13 +279,13 @@ class AssetManager implements \IteratorAggregate
      * @param  array           $filters
      * @return string|false
      */
-    protected function doCache(AssetCollection $assets, $file, $filters = array())
+    protected function doCache(AssetCollection $assets, $file, $filters = [])
     {
         $filters = $this->filters->get($filters);
 
         if (count($assets)) {
 
-            $salt = array_merge(array($_SERVER['SCRIPT_NAME']), array_keys($filters));
+            $salt = array_merge([$_SERVER['SCRIPT_NAME']], array_keys($filters));
             $file = preg_replace('/(.*?)(\.[^\.]+)?$/i', '$1-'.$assets->hash(implode(',', $salt)).'$2', $file, 1);
 
             if (!file_exists($file)) {

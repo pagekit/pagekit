@@ -14,7 +14,7 @@ class AssetCollection implements \IteratorAggregate, \Countable
      *
      * @param array $assets
      */
-    public function __construct(array $assets = array())
+    public function __construct(array $assets = [])
     {
         $this->assets = $assets;
     }
@@ -48,7 +48,7 @@ class AssetCollection implements \IteratorAggregate, \Countable
      */
     public function replace($name, AssetInterface $asset)
     {
-        $assets = array();
+        $assets = [];
 
         foreach ($this->assets as $key => $val) {
             if ($key == $name) {
@@ -83,7 +83,7 @@ class AssetCollection implements \IteratorAggregate, \Countable
      */
     public function hash($salt = '')
     {
-        $hashes = array();
+        $hashes = [];
 
         foreach ($this as $asset) {
             $hashes[] = $asset->hash($salt);
@@ -98,7 +98,7 @@ class AssetCollection implements \IteratorAggregate, \Countable
      * @param  array $filters
      * @return string
      */
-    public function dump(array $filters = array())
+    public function dump(array $filters = [])
     {
         $data = '';
 
