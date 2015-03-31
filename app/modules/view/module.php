@@ -17,8 +17,6 @@ use Pagekit\View\Helper\ScriptHelper;
 use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
 use Pagekit\View\Helper\UrlHelper;
-use Symfony\Component\Templating\TemplateNameParser;
-use Symfony\Component\Templating\Loader\FilesystemLoader;
 
 return [
 
@@ -58,7 +56,7 @@ return [
         };
 
         $app['templating'] = function() {
-            return new PhpEngine(new TemplateNameParser(), new FilesystemLoader([]));
+            return new PhpEngine();
         };
 
         $app->extend('view', function($view, $app) {
@@ -97,7 +95,7 @@ return [
                 $event->setResult($result);
             });
 
-            $view->on('view.render', function($event) use ($app) {
+            $view->on('render', function($event) use ($app) {
 
                 if ($event->getTemplate() == 'head') {
 
@@ -117,14 +115,16 @@ return [
 
             }, 15);
 
-            $view->on('view.render', function($event) use ($app) {
+            $view->on('render', function($event) use ($app) {
                 if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
                     $event->setTemplate($template);
                 }
             }, 10);
 
-            $view->on('view.render', function($event) use ($app) {
-                $event->setResult($app['templating']->render($event->getTemplate(), $event->getParameters()));
+            $view->on('render', function($event) use ($app) {
+                if ($app['templating']->supports($template = $event->getTemplate())) {
+                    $event->setResult($app['templating']->render($template, $event->getParameters()));
+                }
             }, -10);
 
             return $view;

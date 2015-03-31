@@ -3,12 +3,27 @@
 namespace Pagekit\View;
 
 use Symfony\Component\Templating\PhpEngine as BasePhpEngine;
+use Symfony\Component\Templating\TemplateNameParser;
+use Symfony\Component\Templating\TemplateNameParserInterface;
+use Symfony\Component\Templating\Loader\LoaderInterface;
+use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\Storage\FileStorage;
 use Symfony\Component\Templating\Storage\Storage;
 use Symfony\Component\Templating\Storage\StringStorage;
 
 class PhpEngine extends BasePhpEngine
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(TemplateNameParserInterface $parser = null, LoaderInterface $loader = null, array $helpers = array())
+    {
+        $parser = $parser ?: new TemplateNameParser();
+        $loader = $loader ?: new FilesystemLoader([]);
+
+        parent::__construct($parser, $loader, $helpers);
+    }
+
     /**
      * {@inheritdoc}
      */

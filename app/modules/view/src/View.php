@@ -149,7 +149,7 @@ class View implements ViewInterface
     public function render($name, array $parameters = [])
     {
         $param = array_replace($this->globals, $parameters);
-        $event = $this->events->dispatch('view.render', new RenderEvent($name, $param));
+        $event = $this->events->dispatch('render', new RenderEvent($name, $param));
 
         if (!$event->isPropagationStopped()) {
             $event->dispatch();
