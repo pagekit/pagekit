@@ -25,7 +25,7 @@ return [
         $app['exception'] = $handler;
 
         $app['url'] = function($app) {
-            return new UrlProvider($app['router'], $app['file'], $app['path']);
+            return new UrlProvider($app['router'], $app['file'], $app['locator']);
         };
 
         $app['response'] = function($app) {

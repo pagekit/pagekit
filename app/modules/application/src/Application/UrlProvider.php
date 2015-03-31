@@ -3,6 +3,7 @@
 namespace Pagekit\Application;
 
 use Pagekit\Filesystem\Filesystem;
+use Pagekit\Filesystem\Locator;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Router;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -25,14 +26,20 @@ class UrlProvider
     protected $file;
 
     /**
+     * @var Locator
+     */
+    protected $locator;
+
+    /**
      * Constructor.
      *
      * @param Router $router
      */
-    public function __construct(Router $router, Filesystem $file)
+    public function __construct(Router $router, Filesystem $file, Locator $locator)
     {
         $this->router = $router;
         $this->file   = $file;
+        $this->locator   = $locator;
     }
 
     /**
@@ -154,7 +161,7 @@ class UrlProvider
      */
     public function getStatic($path, $parameters = [], $referenceType = UrlGenerator::ABSOLUTE_PATH)
     {
-        return $this->parseQuery($this->file->getUrl($path, $referenceType), $parameters);
+        return $this->parseQuery($this->file->getUrl($this->locator->get($path), $referenceType), $parameters);
     }
 
     /**
