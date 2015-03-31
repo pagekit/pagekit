@@ -115,6 +115,8 @@ return [
 
                 return $head;
             });
+
+            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
 
         $app->on('kernel.controller', function () use ($app) {
@@ -171,8 +173,6 @@ return [
                     $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
                 }
             });
-
-            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
 
         $app->on('system.loaded', function () use ($app) {

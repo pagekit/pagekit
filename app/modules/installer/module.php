@@ -4,7 +4,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return [
 
-    'name' => 'system/installer',
+    'name' => 'installer',
 
     'main' => function ($app) {
 
@@ -16,18 +16,20 @@ return [
             return $app['response']->redirect('@installer/installer');
         });
 
-        $app->on('system.loaded', function () use ($app) {
+        $app->on('kernel.request', function ($event) use ($app) {
             if ($locale = $app['request']->getPreferredLanguage()) {
                 $app['translator']->setLocale($locale);
             }
         });
-
     },
 
     'require' => [
 
-        'system/core',
-        'migration'
+        'application',
+        'locale',
+        'cache',
+        'migration',
+        'option'
 
     ],
 

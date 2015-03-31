@@ -25,7 +25,7 @@ if (!$app['config.file']) {
 
     $config->load(__DIR__.'/config/install.php');
 
-    $app['module']->load('system/installer');
+    $app['module']->load('installer');
 
 } else {
 

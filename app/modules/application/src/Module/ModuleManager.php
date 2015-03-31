@@ -89,6 +89,11 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $this->registerModules();
 
         foreach ($modules as $name) {
+
+            if (!isset($this->registered[$name])) {
+                throw new \RuntimeException("Undefined module: $name");
+            }
+
             $this->resolveModules($this->registered[$name], $resolved);
         }
 

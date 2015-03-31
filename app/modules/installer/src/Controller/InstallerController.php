@@ -21,7 +21,7 @@ class InstallerController
     /**
      * @var string
      */
-    protected $configFile = 'app://config.php';
+    protected $configFile = 'config.php';
 
     /**
      * Constructor.
@@ -38,6 +38,7 @@ class InstallerController
     {
         return [
             '$meta' => ['title' => 'Pagekit Installer'],
+            '$pagekit' => ['url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()],
             'redirect' => App::url('/admin')
         ];
     }
@@ -131,7 +132,7 @@ class InstallerController
             App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 2]);
             App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 3]);
 
-            if ($sampleData = App::module('system/installer')->config('sampleData')) {
+            if ($sampleData = App::module('installer')->config('sampleData')) {
 
                 $sql = file_get_contents($sampleData);
 
