@@ -72,6 +72,6 @@ class SettingsController extends Controller
             opcache_invalidate($this->configFile);
         }
 
-        return ['success'];
+        return 'success';
     }
 }

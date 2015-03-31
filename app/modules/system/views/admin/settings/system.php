@@ -24,7 +24,7 @@
     <span class="uk-form-label">{{ 'Developer' | trans }}</span>
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
-            <label><input type="checkbox" value="1" v-model="config.framework.debug"> {{ 'Enable debug mode' | trans }}</label>
+            <label><input type="checkbox" value="1" v-model="config.application.debug"> {{ 'Enable debug mode' | trans }}</label>
         </p>
         <p class="uk-form-controls-condensed">
             <label><input type="checkbox" value="1" v-model="config['profiler'].enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
