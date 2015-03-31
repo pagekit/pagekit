@@ -12,6 +12,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'page:' => ''
+
+    ],
+
     'controllers' => [
 
         '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController'

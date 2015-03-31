@@ -12,6 +12,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'hello:' => ''
+
+    ],
+
     'controllers' => [
 
         '@hello: /hello' => [

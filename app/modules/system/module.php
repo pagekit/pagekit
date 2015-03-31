@@ -41,6 +41,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'system:' => ''
+
+    ],
+
     'controllers' => [
 
         '@system: /' => [

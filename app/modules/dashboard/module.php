@@ -12,6 +12,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'dashboard:' => ''
+
+    ],
+
     'controllers' => [
 
         '@dashboard: /' => [

@@ -107,7 +107,14 @@ class SystemModule extends Module
 
         $app->on('system.loaded', function () use ($app) {
             foreach ($app['module'] as $module) {
-                $app['locator']->add("$module->name:", $module->path);
+
+                if (!isset($module->resources)) {
+                    continue;
+                }
+
+                foreach ($module->resources as $prefix => $path) {
+                    $app['locator']->add($prefix, "$module->path/$path");
+                }
             }
         });
     }

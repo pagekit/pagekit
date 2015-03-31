@@ -29,9 +29,9 @@ return [
      */
     'resources' => [
 
-        'override' => [
-            'app/modules/system/theme/templates' => 'templates/system'
-        ]
+        // 'override' => [
+        //     'app/modules/system/theme/templates' => 'templates/system'
+        // ]
 
     ],
 

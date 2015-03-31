@@ -41,6 +41,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'system/widget:' => ''
+
+    ],
+
     'controllers' => [
 
         '@system: /system' => [

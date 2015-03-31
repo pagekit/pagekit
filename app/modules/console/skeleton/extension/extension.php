@@ -11,11 +11,7 @@ return [
     ],
 
     'resources' => [
-
-        'export' => [
-            'view' => 'views'
-        ]
-
+        // your resources here...
     ],
 
     'controllers' => 'src/Controller/*Controller.php',

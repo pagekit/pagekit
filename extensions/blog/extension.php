@@ -14,10 +14,7 @@ return [
 
     'resources' => [
 
-        'export' => [
-            'view'  => 'views',
-            'asset' => 'assets'
-        ]
+        'blog:' => ''
 
     ],
 

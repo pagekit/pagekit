@@ -67,6 +67,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'user:' => ''
+
+    ],
+
     'controllers' => [
 
         '@user: /' => [
