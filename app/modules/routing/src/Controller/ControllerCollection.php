@@ -54,7 +54,7 @@ class ControllerCollection implements EventSubscriberInterface
 
                     try {
 
-                        $routes->add($route->getOption('namespace').$name, $r
+                        $routes->add(trim($route->getOption('namespace').'/'.$name, '/'), $r
                             ->setPath(rtrim($route->getPath().$r->getPath(), '/'))
                             ->addDefaults($route->getDefaults())
                             ->addRequirements($route->getRequirements())

@@ -186,13 +186,11 @@ class ControllerReader implements ControllerReaderInterface
      */
     protected function getDefaultRouteName(ReflectionClass $class, ReflectionMethod $method, array $globals)
     {
-        $action = strtolower('/'.$this->parseControllerActionName($method));
-
-        if ($action == '/index') {
+        if ('index' === $action = strtolower($this->parseControllerActionName($method))) {
             $action = '';
         }
 
-        $name = $globals['name'].$action;
+        $name = $globals['name'].'/'.$action;
 
         if ($this->routeIndex > 0) {
             $name .= '_'.$this->routeIndex;
@@ -200,7 +198,7 @@ class ControllerReader implements ControllerReaderInterface
 
         $this->routeIndex++;
 
-        return $name;
+        return trim($name, '/');
     }
 
     /**
