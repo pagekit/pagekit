@@ -44,7 +44,13 @@ class DashboardController extends Controller
 
         $columns = $this->chunkList($columns, 3);
 
-        return ['head.title' => __('Dashboard'), 'theme.boxed' => false, 'widgets' => $widgets, 'columns' => $columns];
+        return [
+            '$meta' => [
+                'title' => __('Dashboard')
+            ],
+            'widgets' => $widgets,
+            'columns' => $columns
+        ];
     }
 
     /**
