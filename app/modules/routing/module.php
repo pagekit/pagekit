@@ -83,7 +83,7 @@ return [
                         list($namespace, $prefix) = explode(':', $prefix);
                     }
 
-                    $app['controllers']->mount($prefix, $controller, "$namespace/");
+                    $app['controllers']->mount($prefix, $controller, $namespace);
                 }
 
             }
