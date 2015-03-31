@@ -88,7 +88,7 @@
                         <tr>
                             <td valign="top" align="center" style="font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666;">
 
-                                <h1 style="margin: 0 0 30px 0; padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; font-size: 34px; line-height: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333 !important;"><?= __('Welcome to %site%!', ['%site%' => $app['module']['system']->config('site.title')]) ?></h1>
+                                <h1 style="margin: 0 0 30px 0; padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; font-size: 34px; line-height: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333 !important;"><?= __('Welcome to %site%!', ['%site%' => $app['system']->config('site.title')]) ?></h1>
 
                                 <p style="margin: 20px 0; text-align: left;"><?= __("We're really happy to have you, %name%! Just login with the username %username%.", ['%name%' => $user->getName(), '%username%' => '<strong style="color: #444">'.$user->getUsername().'</strong>']) ?></p>
 

@@ -7,13 +7,14 @@ use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
 /**
- * @Access("system: manage users", admin=true)
+ * @Access("user: manage users", admin=true)
+ * @Route(name="")
  */
 class UserController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("system/user:views/admin/index.php")
+     * @Response("user:views/admin/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -25,7 +26,7 @@ class UserController
                 'title' => __('Users')
             ],
             '$config' => [
-                'emailVerification' => App::option('system:user.require_verification'),
+                'emailVerification' => App::module('user')->config('require_verification'),
                 'filter'            => $filter,
                 'page'              => $page
             ],
@@ -39,7 +40,7 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/user:views/admin/edit.php")
+     * @Response("user:views/admin/edit.php")
      */
     public function editAction($id = 0)
     {
@@ -48,7 +49,7 @@ class UserController
             $user->setRoles([Role::find(Role::ROLE_AUTHENTICATED)]);
         }
 
-        $roles = App::user()->hasAccess('system: manage user permissions') ? $this->getRoles($user) : false;
+        $roles = App::user()->hasAccess('user: manage user permissions') ? $this->getRoles($user) : false;
         $user->setRoles(null);
 
         return [
@@ -56,7 +57,7 @@ class UserController
                 'title' => $id ? __('Edit User') : __('Add User')
             ],
             '$config' => [
-                'emailVerification' => App::option('system:user.require_verification'),
+                'emailVerification' => App::module('user')->config('require_verification'),
                 'currentUser'       => App::user()->getId()
             ],
             '$data' => [

@@ -9,7 +9,7 @@
 <ul data-user class="uk-grid uk-grid-small uk-grid-medium uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
     <?php foreach ($users as $user): ?>
     <li>
-        <a href="<?= $view->url('@system/user/edit', ['id' => $user->getId()]) ?>" title="<?= $user->getUsername() ?>">
+        <a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>" title="<?= $user->getUsername() ?>">
             <img v-gravatar="'<?= $user->getEmail() ?>'" class="uk-border-rounded" width="200" height="200" alt="<?= $user->getUsername() ?>">
         </a>
     </li>

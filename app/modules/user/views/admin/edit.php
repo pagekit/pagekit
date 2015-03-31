@@ -4,7 +4,7 @@
 
     <?php $view->section()->start('toolbar', 'show') ?>
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-        <a class="uk-button" v-attr="href: $url('admin/system/user')">{{ user.id ? 'Close' : 'Cancel' | trans }}</a>
+        <a class="uk-button" v-attr="href: $url('admin/user')">{{ user.id ? 'Close' : 'Cancel' | trans }}</a>
     <?php $view->section()->end() ?>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>

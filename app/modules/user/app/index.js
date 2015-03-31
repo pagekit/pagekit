@@ -14,7 +14,7 @@ jQuery(function ($) {
 
         created: function () {
 
-            this.resource = this.$resource('api/system/user/:id');
+            this.resource = this.$resource('api/user/:id');
 
             this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
 

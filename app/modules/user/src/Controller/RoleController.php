@@ -8,13 +8,13 @@ use Pagekit\User\Entity\Role;
 
 /**
  * @Route("/user/role")
- * @Access("system: manage user permissions", admin=true)
+ * @Access("user: manage user permissions", admin=true)
  */
 class RoleController extends Controller
 {
     /**
      * @Request({"id": "int"})
-     * @Response("system/user:views/admin/role.php")
+     * @Response("user:views/admin/role.php")
      */
     public function indexAction($id = null)
     {

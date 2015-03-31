@@ -18,6 +18,7 @@ return [
         'oauth',
         'package',
         'tree',
+        'user',
         'system/core',
         'system/console',
         'system/content',
@@ -27,7 +28,6 @@ return [
         'system/menu',
         'system/site',
         'system/theme',
-        'system/user',
         'system/widget'
 
     ],

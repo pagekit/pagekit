@@ -8,7 +8,7 @@ use Pagekit\User\Model\User as BaseUser;
 use Pagekit\User\Model\UserInterface;
 
 /**
- * @Entity(tableClass="@system_user", eventPrefix="system.user")
+ * @Entity(tableClass="@system_user", eventPrefix="user")
  */
 class User extends BaseUser implements \JsonSerializable
 {

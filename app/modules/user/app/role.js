@@ -10,7 +10,7 @@
 
         created: function () {
 
-            this.resource = this.$resource('api/system/role/:id');
+            this.resource = this.$resource('api/user/role/:id');
             this.$watch('roles', UIkit.Utils.debounce(this.save, 1000), true);
 
         },

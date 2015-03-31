@@ -1,6 +1,6 @@
 <?php $view->script('uikit-form-password') ?>
 
-<form class="uk-article uk-form" action="<?= $view->url('@system/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
+<form class="uk-article uk-form" action="<?= $view->url('@user/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
 
     <h1 class="uk-article-title"><?= __('Password confirmation') ?></h1>
 

@@ -90,7 +90,7 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onSystemLoaded(GetResponseEvent $event)
+    public function onLateSystemLoaded(GetResponseEvent $event)
     {
         if ($access = $event->getRequest()->attributes->get('_access')) {
             foreach ($access as $expression) {
@@ -107,7 +107,7 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onLoadAdmin(GetResponseEvent $event)
+    public function onSystemLoaded(GetResponseEvent $event)
     {
         $request = $event->getRequest();
 
@@ -148,8 +148,8 @@ class AccessListener implements EventSubscriberInterface
             'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
             'system.loaded'    => [
-                ['onSystemLoaded', -512],
-                ['onLoadAdmin', -256]
+                ['onLateSystemLoaded', -512],
+                ['onSystemLoaded', -256]
             ]
         ];
     }

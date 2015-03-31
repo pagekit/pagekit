@@ -14,12 +14,12 @@ use Pagekit\User\Event\ProfileSaveEvent;
 class ProfileController extends Controller
 {
     /**
-     * @Response("system/user:views/profile.php")
+     * @Response("user:views/profile.php")
      */
     public function indexAction()
     {
         if (!App::user()->isAuthenticated()) {
-            return $this->redirect('@system/auth/login', ['redirect' => App::url()->current()]);
+            return $this->redirect('@user/auth/login', ['redirect' => App::url()->current()]);
         }
 
         return ['head.title' => __('Your Profile'), 'user' => App::user()];
@@ -75,11 +75,11 @@ class ProfileController extends Controller
             $user->setName($name);
             $user->setEmail($email);
 
-            App::trigger('system.user.profile.save', new ProfileSaveEvent($user, $data));
+            App::trigger('user.profile.save', new ProfileSaveEvent($user, $data));
 
             $user->save();
 
-            App::trigger('system.user.profile.saved', new ProfileSaveEvent($user, $data));
+            App::trigger('user.profile.saved', new ProfileSaveEvent($user, $data));
 
             App::message()->success(__('Profile updated.'));
 
@@ -87,6 +87,6 @@ class ProfileController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@system/profile');
+        return $this->redirect('@user/profile');
     }
 }

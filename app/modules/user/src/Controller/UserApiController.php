@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\User\Controller\Api;
+namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
@@ -9,10 +9,11 @@ use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
 /**
- * @Access("system: manage users")
+ * @Access("user: manage users")
+ * @Route("", name="")
  * @Response("json")
  */
-class UserController
+class UserApiController
 {
     /**
      * @Route("/", methods="GET")
@@ -55,7 +56,7 @@ class UserController
             });
         }
 
-        $limit = App::module('system/user')->config('users_per_page');
+        $limit = App::module('user')->config('users_per_page');
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
@@ -138,7 +139,7 @@ class UserController
                 $user->setPassword(App::get('auth.password')->hash($password));
             }
 
-            if (null !== $roles && App::user()->hasAccess('system: manage user permissions')) {
+            if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
 
                 if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
                     $roles[] = Role::ROLE_ADMINISTRATOR;

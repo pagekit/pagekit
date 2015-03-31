@@ -6,7 +6,7 @@ use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\User\Model\Role as BaseRole;
 
 /**
- * @Entity(tableClass="@system_role", eventPrefix="system.role")
+ * @Entity(tableClass="@system_role", eventPrefix="user.role")
  */
 class Role extends BaseRole implements \JsonSerializable
 {

@@ -5,6 +5,7 @@ namespace Pagekit\User\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
+use Pagekit\Module\Module;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
@@ -14,7 +15,17 @@ use Pagekit\User\Entity\User;
 class RegistrationController extends Controller
 {
     /**
-     * @Response("system/user:views/registration.php")
+     * @var Module
+     */
+    protected $module;
+
+    public function __construct()
+    {
+        $this->module = App::module('user');
+    }
+
+    /**
+     * @Response("user:views/registration.php")
      */
     public function indexAction()
     {
@@ -23,7 +34,7 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        if (App::option('system:user.registration', 'admin') == 'admin') {
+        if ($this->module->config('registration') == 'admin') {
             App::message()->info(__('Public user registration is disabled.'));
             return $this->redirect('/');
         }
@@ -42,7 +53,7 @@ class RegistrationController extends Controller
 
         try {
 
-            if (App::user()->isAuthenticated() || App::option('system:user.registration', 'admin') == 'admin') {
+            if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
                 return $this->redirect('/');
             }
 
@@ -93,9 +104,9 @@ class RegistrationController extends Controller
             $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 
             $token = App::get('auth.random')->generateString(32);
-            $admin = App::option('system:user.registration') == 'approval';
+            $admin = $this->module->config('registration') == 'approval';
 
-            if ($verify = App::option('system:user.require_verification')) {
+            if ($verify = $this->module->config('require_verification')) {
 
                 $user->setActivation($token);
 
@@ -136,7 +147,7 @@ class RegistrationController extends Controller
             if (!App::request()->isXmlHttpRequest()) {
 
                 App::message()->success($response['success']);
-                return $this->redirect('@system/auth/login');
+                return $this->redirect('@user/auth/login');
             }
 
         } catch (Exception $e) {
@@ -152,7 +163,7 @@ class RegistrationController extends Controller
             }
         }
 
-        return App::request()->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@system/registration' : '@system/auth/login');
+        return App::request()->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@user/registration' : '@user/auth/login');
     }
 
     /**
@@ -165,7 +176,7 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        if ($admin = App::option('system:user.registration') == 'approval' and !$user->get('verified')) {
+        if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
 
             $user->setActivation(App::get('auth.random')->generateString(32));
             $this->sendApproveMail($user);
@@ -188,7 +199,7 @@ class RegistrationController extends Controller
 
         $user->save();
 
-        return $this->redirect('@system/auth/login');
+        return $this->redirect('@user/auth/login');
     }
 
     protected function sendWelcomeEmail($user)
@@ -198,7 +209,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Welcome to %site%!', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -211,7 +222,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Activate your %site% account.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -224,9 +235,9 @@ class RegistrationController extends Controller
         try {
 
             $mail = App::mailer()->create();
-            $mail->setTo(App::option('system:mail.from.address'))
+            $mail->setTo(App::module('mail')->config('from_address'))
                  ->setSubject(__('Approve an account at %site%.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

@@ -7,12 +7,12 @@ use Pagekit\User\Entity\Role;
 
 /**
  * @Route("/user/permission")
- * @Access("system: manage user permissions", admin=true)
+ * @Access("user: manage user permissions", admin=true)
  */
 class PermissionController
 {
     /**
-     * @Response("system/user:views/admin/permission.php")
+     * @Response("user:views/admin/permission.php")
      */
     public function indexAction()
     {

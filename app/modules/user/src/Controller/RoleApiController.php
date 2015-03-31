@@ -1,16 +1,17 @@
 <?php
 
-namespace Pagekit\User\Controller\Api;
+namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\User\Entity\Role;
 
 /**
- * @Access("system: manage user permissions")
+ * @Access("user: manage user permissions")
+ * @Route("role", name="role")
  * @Response("json")
  */
-class RoleController extends Controller
+class RoleApiController extends Controller
 {
     /**
      * @Route("/", methods="GET")

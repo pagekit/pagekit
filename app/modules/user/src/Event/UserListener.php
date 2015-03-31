@@ -43,12 +43,12 @@ class UserListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'auth.login'             => 'onUserLogin',
-            'kernel.terminate'       => 'onUserAccess',
-            'system.role.postSave'   => 'onUserChange',
-            'system.role.postDelete' => 'onUserChange',
-            'system.user.postSave'   => 'onUserChange',
-            'system.user.postDelete' => 'onUserChange'
+            'auth.login'           => 'onUserLogin',
+            'kernel.terminate'     => 'onUserAccess',
+            'user.role.postSave'   => 'onUserChange',
+            'user.role.postDelete' => 'onUserChange',
+            'user.postSave'        => 'onUserChange',
+            'user.postDelete'      => 'onUserChange'
         ];
     }
 }
