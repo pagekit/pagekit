@@ -63,7 +63,6 @@ return [
 
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
-            $view->addGlobal('url', $app['url']);
 
             $helpers = [
                 'gravatar' => new GravatarHelper(),
