@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?= $view->url()->getStatic('app/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
         <link href="<?= $view->url()->getStatic('app/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
-        <?= $view->section()->render('head') ?>
+        <?= $view->render('head') ?>
         <?php $view->style('theme', 'app/modules/theme/css/theme.css') ?>
         <?php $view->script('uikit') ?>
     </head>

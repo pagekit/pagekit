@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?= $view->url()->getStatic('app/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
         <link href="<?= $view->url()->getStatic('app/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
-        <?= $view->section()->render('head') ?>
+        <?= $view->render('head') ?>
         <?php $view->style('theme', 'app/modules/theme/css/theme.css') ?>
         <?php $view->script('login', 'app/modules/theme/js/login.js', ['uikit']) ?>
     </head>
@@ -21,7 +21,7 @@
 
                     <?= $view->section()->render('messages') ?>
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@system/auth/authenticate') ?>" method="post">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@user/auth/authenticate') ?>" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>

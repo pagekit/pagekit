@@ -14,7 +14,7 @@
         <?php $view->script('vue-resource', 'app/modules/system/app/vue-resource.js') ?>
         <?php $view->script('vue-system', 'app/modules/system/app/vue-system.js') ?>
         <?php $view->script('installer', 'app/modules/installer/app/installer.js') ?>
-        <?= $view->section()->render('head') ?>
+        <?= $view->render('head') ?>
     </head>
     <body>
 

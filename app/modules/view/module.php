@@ -17,7 +17,6 @@ use Pagekit\View\Helper\ScriptHelper;
 use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
 use Pagekit\View\Helper\UrlHelper;
-use Pagekit\View\Section\DelayedRenderer;
 use Symfony\Component\Templating\TemplateNameParser;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 
@@ -87,6 +86,37 @@ return [
 
             $view->addHelpers($helpers);
 
+            $view->on('head', function($event) use ($app) {
+
+                $result  = $event->getResult();
+                $result .= $app['view']->meta()->render();
+                $result .= $app['view']->style()->render();
+                $result .= $app['view']->data()->render();
+                $result .= $app['view']->script()->render();
+
+                $event->setResult($result);
+            });
+
+            $view->on('view.render', function($event) use ($app) {
+
+                if ($event->getTemplate() == 'head') {
+
+                    $renderEvent = clone $event;
+                    $placeholder = sprintf('<!-- %s -->', uniqid());
+
+                    $app->on('kernel.response', function($event) use ($renderEvent, $placeholder) {
+
+                        $response = $event->getResponse();
+                        $response->setContent(str_replace($placeholder, $renderEvent->dispatch()->getResult(), $response->getContent()));
+
+                    }, 10);
+
+                    $event->setResult($placeholder);
+                    $event->stopPropagation();
+                }
+
+            }, 15);
+
             $view->on('view.render', function($event) use ($app) {
                 if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
                     $event->setTemplate($template);
@@ -103,20 +133,7 @@ return [
         $app->subscribe(new ResponseListener);
 
         $app->on('kernel.boot', function () use ($app) {
-
             $app->subscribe(new ViewListener($app['view']));
-
-            $app['sections']->append('head', function () use ($app) {
-
-                $head  = $app['view']->meta()->render();
-                $head .= $app['view']->style()->render();
-                $head .= $app['view']->data()->render();
-                $head .= $app['view']->script()->render();
-
-                return $head;
-            });
-
-            $app['sections']->addRenderer('delayed', new DelayedRenderer($app['events']));
         });
 
         $app->on('kernel.controller', function () use ($app) {

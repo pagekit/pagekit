@@ -48,8 +48,8 @@ class System implements LinkInterface
     {
         return [
             '/'                     => __('Frontpage'),
-            '@system/auth/login'    => __('User Login'),
-            '@system/auth/logout'   => __('User Logout'),
+            '@user/auth/login'    => __('User Login'),
+            '@user/auth/logout'   => __('User Logout'),
             '@system/registration'  => __('User Registration'),
             '@system/profile'       => __('User Profile'),
             '@system/resetpassword' => __('User Password Reset')

@@ -88,6 +88,14 @@ class RenderEvent extends Event
     }
 
     /**
+     * @return self
+     */
+    public function dispatch()
+    {
+       return $this->getDispatcher()->dispatch($this->template, $this);
+    }
+
+    /**
      * @return string
      */
     public function __toString()

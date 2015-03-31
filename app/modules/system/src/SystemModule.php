@@ -87,7 +87,6 @@ class SystemModule extends Module
             $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
 
             $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
-            $app['view']->section()->register('head', ['renderer' => 'delayed']);
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 

@@ -7,9 +7,9 @@
         <link href="<?= $view->url()->getStatic('app/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
         <link href="<?= $view->url()->getStatic('app/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
-        <?= $view->section()->render('head') ?>
         <?php $view->style('theme', 'app/modules/theme/css/theme.css') ?>
         <?php $view->script('theme', 'app/modules/theme/js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable']) ?>
+        <?= $view->render('head') ?>
     </head>
     <body>
 
@@ -62,8 +62,8 @@
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li class="uk-nav-header"><?= $user->getUsername() ?></li>
                                         <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                                        <li><a href="<?= $view->url('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                                        <li><a href="<?= $view->url('@system/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
+                                        <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
+                                        <li><a href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -134,8 +134,8 @@
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header"><?= $user->getUsername() ?></li>
                     <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                    <li><a href="<?= $view->url('@system/user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                    <li><a href="<?= $view->url('@system/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
+                    <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
+                    <li><a href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
                 </ul>
 
             </div>
