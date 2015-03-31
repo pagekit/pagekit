@@ -9,9 +9,6 @@ use Pagekit\Module\Module;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
-/**
- * @Route("/user/registration")
- */
 class RegistrationController extends Controller
 {
     /**

@@ -9,9 +9,6 @@ use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Auth\Exception\BadCredentialsException;
 use Pagekit\Auth\RememberMe;
 
-/**
- * @Route("/user")
- */
 class AuthController extends Controller
 {
     /**

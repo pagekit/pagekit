@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Blog\Controller\Api;
+namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
@@ -9,9 +9,10 @@ use Pagekit\Blog\Entity\Post;
 
 /**
  * @Access("blog: manage content")
+ * @Route("post", name="post")
  * @Response("json")
  */
-class PostController extends Controller
+class PostApiController extends Controller
 {
     /**
      * @Route("/", methods="GET")
@@ -108,7 +109,6 @@ class PostController extends Controller
 
     /**
      * @Request({"ids": "int[]"}, csrf=true)
-     * @Response("json")
      */
     public function copyAction($ids = [])
     {

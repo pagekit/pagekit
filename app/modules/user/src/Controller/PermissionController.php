@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\User\Entity\Role;
 
 /**
- * @Route("/user/permission")
  * @Access("user: manage user permissions", admin=true)
  */
 class PermissionController

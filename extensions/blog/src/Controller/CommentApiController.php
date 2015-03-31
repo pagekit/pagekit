@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Blog\Controller\Api;
+namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
@@ -9,9 +9,10 @@ use Pagekit\Blog\Entity\Comment;
 
 /**
  * @Access("blog: manage comments")
+ * @Route("comment", name="comment")
  * @Response("json")
  */
-class CommentController extends Controller
+class CommentApiController extends Controller
 {
     /**
      * @Route("/", methods="GET")

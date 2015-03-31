@@ -31,7 +31,7 @@
 
     <?php $view->section()->end() ?>
 
-    <p v-show="posts && !posts.length" class="uk-alert uk-alert-info">{{ 'No posts found.' | trans }}</p>
+    <p v-show="!posts.length" class="uk-alert uk-alert-info">{{ 'No posts found.' | trans }}</p>
 
     <div v-show="posts.length" class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">

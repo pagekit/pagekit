@@ -7,9 +7,6 @@ use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 
-/**
- * @Route("/user/password")
- */
 class ResetPasswordController extends Controller
 {
     /**

@@ -8,9 +8,6 @@ use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Event\ProfileSaveEvent;
 
-/**
- * @Route("/user/profile")
- */
 class ProfileController extends Controller
 {
     /**

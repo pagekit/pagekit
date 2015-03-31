@@ -70,16 +70,19 @@ return [
     'controllers' => [
 
         '@user: /' => [
+            'Pagekit\\User\\Controller\\UserController'
+        ],
+
+        '@user: /user' => [
             'Pagekit\\User\\Controller\\AuthController',
             'Pagekit\\User\\Controller\\PermissionController',
             'Pagekit\\User\\Controller\\ProfileController',
             'Pagekit\\User\\Controller\\RegistrationController',
             'Pagekit\\User\\Controller\\ResetPasswordController',
-            'Pagekit\\User\\Controller\\RoleController',
-            'Pagekit\\User\\Controller\\UserController'
+            'Pagekit\\User\\Controller\\RoleController'
         ],
 
-        '@api/user: /api/user' => [
+        '@user/api: /api/user' => [
             'Pagekit\\User\\Controller\\RoleApiController',
             'Pagekit\\User\\Controller\\UserApiController'
         ]
@@ -90,7 +93,7 @@ return [
 
         'user' => [
             'label'    => 'Users',
-            'icon'     => 'user: assets/images/icon-users.svg',
+            'icon'     => 'user:assets/images/icon-users.svg',
             'url'      => '@user',
             'active'   => '@user*',
             'access'   => 'user: manage users || user: manage user permissions',
