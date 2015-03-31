@@ -49,11 +49,14 @@ class AssetFactory
     /**
      * Registers an asset type.
      *
-     * @param string $name
-     * @param string $class
+     * @param  string $name
+     * @param  string $class
+     * @return self
      */
     public function register($name, $class)
     {
         $this->types[$name] = $class;
+
+        return $this;
     }
 }

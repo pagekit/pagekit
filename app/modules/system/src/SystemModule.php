@@ -47,6 +47,10 @@ class SystemModule extends Module
         $app['systemInfo'] = function() {
             return new SystemInfoHelper;
         };
+
+        $app->extend('assets', function ($assets) use ($app) {
+            return $assets->register('file', 'Pagekit\System\Asset\FileAsset');
+        });
     }
 
     /**

@@ -42,12 +42,16 @@ return [
             return $view;
         };
 
-        $app['styles'] = function () {
-            return new AssetManager();
+        $app['assets'] = function () {
+            return new AssetFactory();
         };
 
-        $app['scripts'] = function () {
-            return new AssetManager();
+        $app['styles'] = function ($app) {
+            return new AssetManager($app['assets']);
+        };
+
+        $app['scripts'] = function ($app) {
+            return new AssetManager($app['assets']);
         };
 
         $app['sections'] = function () {
