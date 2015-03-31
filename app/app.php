@@ -19,7 +19,7 @@ if (!$app['config.file']) {
     $requirements = require __DIR__.'/requirements.php';
 
     if ($failed = $requirements->getFailedRequirements()) {
-        require $app['path.extensions'].'/installer/views/requirements.php';
+        require __DIR__.'/modules/installer/views/requirements.php';
         exit;
     }
 
