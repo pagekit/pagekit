@@ -67,9 +67,9 @@ class ExtensionsController extends Controller
 
             $extension->enable();
 
-            $config = App::option('system/core:config', ['extensions' => []]);
+            $config = App::option('system:config', ['extensions' => []]);
             $config['extensions'] = array_unique(array_merge($config['extensions'], [$extension->name]));
-            App::option()->set('system/core:config', $config, true);
+            App::option()->set('system:config', $config, true);
 
             App::exception()->setHandler($handler);
 
@@ -187,9 +187,9 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        $config = App::option('system/core:config', ['extensions' => []]);
+        $config = App::option('system:config', ['extensions' => []]);
         $config['extensions'] = array_values(array_diff($config['extensions'], [$extension->name]));
-        App::option()->set('system/core:config', $config, true);
+        App::option()->set('system:config', $config, true);
 
         $extension->disable();
     }

@@ -9,6 +9,10 @@ return [
     'require' => [
 
         'profiler',
+        'application',
+        'cache',
+        'option',
+        'locale',
         'comment',
         'dashboard',
         'feed',
@@ -19,7 +23,6 @@ return [
         'package',
         'tree',
         'user',
-        'system/core',
         'system/console',
         'system/content',
         'system/editor',
@@ -107,8 +110,11 @@ return [
 
     ],
 
-
     'config' => [
+
+        'extensions' => [],
+
+        'version' => '0.8.8',
 
         'dashboard' => [
 

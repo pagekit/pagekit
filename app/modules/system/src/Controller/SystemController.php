@@ -21,7 +21,7 @@ class SystemController extends Controller
     {
         $packages = [];
 
-        foreach (App::module('system/core')->config('extensions') as $name) {
+        foreach (App::system()->config('extensions') as $name) {
             if ($extension = App::module($name) and $extension->config('settings.view')) {
                 $packages[$extension->name] = App::package()->getRepository('extension')->findPackage($extension->name);
             }
