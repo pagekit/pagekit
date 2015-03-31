@@ -9,14 +9,14 @@
     <ul class="uk-comment-list">
 
         @foreach ($post.commentsTree(['order' => $params['comments.order']]) as $child)
-        @include('blog: views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @include('blog:views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
 
     </ul>
     @endif
 
     @if ($post.isCommentable)
-    @include('blog: views/comment/respond.razr')
+    @include('blog:views/comment/respond.razr')
     @else
     @trans('Comments are closed.')
     @endif

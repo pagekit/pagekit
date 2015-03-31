@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("blog: views/admin/post/index.php")
+     * @Response("blog:views/admin/post/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -35,7 +35,7 @@ class PostController extends Controller
 
     /**
      * @Request({"id": "int"})
-     * @Response("blog: views/admin/post/edit.php")
+     * @Response("blog:views/admin/post/edit.php")
      */
     public function editAction($id = 0)
     {

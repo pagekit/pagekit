@@ -28,6 +28,6 @@ class HelloLink extends Route
      */
     public function renderForm($link, $params = [], $context = '')
     {
-        return App::view('hello: views/admin/link.razr', compact('link', 'params'));
+        return App::view('hello:views/admin/link.razr', compact('link', 'params'));
     }
 }

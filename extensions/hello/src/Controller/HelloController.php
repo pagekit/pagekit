@@ -11,7 +11,7 @@ use Pagekit\Application\Controller;
 class HelloController extends Controller
 {
     /**
-     * @Response("hello: views/admin/index.razr")
+     * @Response("hello:views/admin/index.razr")
      */
     public function indexAction()
     {

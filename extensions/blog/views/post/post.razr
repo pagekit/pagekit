@@ -5,7 +5,7 @@
     <div>@raw( $post.content )</div>
 
     @if ($post.isCommentable || $post.commentCount)
-    @include('blog: views/comment/comments.razr')
+    @include('blog:views/comment/comments.razr')
     @endif
 
 </article>

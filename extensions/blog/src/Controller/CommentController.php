@@ -14,7 +14,7 @@ class CommentController extends Controller
 {
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @Response("blog: views/admin/comment/index.php")
+     * @Response("blog:views/admin/comment/index.php")
      */
     public function indexAction($filter = [], $post = 0, $page = 0)
     {

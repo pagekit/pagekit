@@ -36,7 +36,7 @@ return [
 
     'config' => [
 
-        'settings.view' => 'blog: views/admin/settings.razr',
+        'settings.view' => 'blog:views/admin/settings.razr',
 
         'comments'      => [
 
@@ -134,7 +134,7 @@ return [
 
     'templates' => [
 
-        'blog.post.edit' => 'blog: views/tmpl/edit.php'
+        'blog.post.edit' => 'blog:views/tmpl/edit.php'
 
     ]
 

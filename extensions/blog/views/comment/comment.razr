@@ -35,7 +35,7 @@
     @if ($node.hasChildren() && !$maxlevel)
     <ul>
         @foreach ($node.children as $child)
-        @include('blog: views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @include('blog:views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
         @endforeach
     </ul>
     @endif
@@ -44,6 +44,6 @@
 
 @if ($node.hasChildren() && $maxlevel)
     @foreach ($node.children as $child)
-    @include('blog: views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+    @include('blog:views/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
     @endforeach
 @endif
