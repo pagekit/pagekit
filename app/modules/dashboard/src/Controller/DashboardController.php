@@ -84,7 +84,13 @@ class DashboardController extends Controller
             $widget = new Widget;
             $widget->setType($id);
 
-            return ['head.title' => __('Add Widget'), 'type' => $type, 'widget' => $widget];
+            return [
+                '$meta' => [
+                    'title' => __('Add Widget')
+                ],
+                'type' => $type,
+                'widget' => $widget
+            ];
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
@@ -111,7 +117,13 @@ class DashboardController extends Controller
 
             $widget = $this->create($id, $widget);
 
-            return ['head.title' => __('Edit Widget'), 'type' => $type, 'widget' => $widget];
+            return [
+                '$meta' => [
+                    'title' => __('Edit Widget')
+                ],
+                'type' => $type,
+                'widget' => $widget
+            ];
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
