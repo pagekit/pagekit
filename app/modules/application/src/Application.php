@@ -127,7 +127,7 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
      *
      * @return bool
      */
-    public function runningInConsole()
+    public function inConsole()
     {
         return PHP_SAPI == 'cli';
     }

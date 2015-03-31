@@ -18,7 +18,7 @@ return [
 
         ErrorHandler::register(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
 
-        if ($cli = $app->runningInConsole() or $debug) {
+        if ($cli = $app->inConsole() or $debug) {
             ini_set('display_errors', 1);
         }
 
@@ -33,7 +33,7 @@ return [
         };
 
         // redirect the request if it has a trailing slash
-        if (!$app->runningInConsole()) {
+        if (!$app->inConsole()) {
 
             $app->on('kernel.request', function(GetResponseEvent $event) {
 

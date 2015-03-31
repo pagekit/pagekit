@@ -37,9 +37,9 @@ class UrlProvider
      */
     public function __construct(Router $router, Filesystem $file, Locator $locator)
     {
-        $this->router = $router;
-        $this->file   = $file;
-        $this->locator   = $locator;
+        $this->router  = $router;
+        $this->file    = $file;
+        $this->locator = $locator;
     }
 
     /**

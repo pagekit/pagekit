@@ -67,7 +67,7 @@ class SystemModule extends Module
 
             $app['module']->load($this->config['extensions']);
 
-            if ($app->runningInConsole()) {
+            if ($app->inConsole()) {
                 $app['isAdmin'] = false;
                 $app->trigger('system.init');
             }
