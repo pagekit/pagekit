@@ -33,7 +33,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Response("system: views/admin/settings/settings.php")
+     * @Response("system:views/admin/settings/settings.php")
      */
     public function indexAction()
     {

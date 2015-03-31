@@ -14,7 +14,7 @@ use Pagekit\User\Entity\User;
 class RegistrationController extends Controller
 {
     /**
-     * @Response("system/user: views/registration.php")
+     * @Response("system/user:views/registration.php")
      */
     public function indexAction()
     {
@@ -198,7 +198,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Welcome to %site%!', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user: views/mails/welcome.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -211,7 +211,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Activate your %site% account.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user: views/mails/verification.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -226,7 +226,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo(App::option('system:mail.from.address'))
                  ->setSubject(__('Approve an account at %site%.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('system/user: views/mails/approve.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

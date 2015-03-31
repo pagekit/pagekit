@@ -15,7 +15,7 @@ class SystemController extends Controller
 {
     /**
      * @Access(admin=true)
-     * @Response("system: views/admin/settings/index.php")
+     * @Response("system:views/admin/settings/index.php")
      */
     public function indexAction()
     {
@@ -57,7 +57,7 @@ class SystemController extends Controller
 
     /**
      * @Access("system: manage storage", admin=true)
-     * @Response("system: views/admin/settings/storage.php")
+     * @Response("system:views/admin/settings/storage.php")
      */
     public function storageAction()
     {
@@ -66,7 +66,7 @@ class SystemController extends Controller
 
     /**
      * @Access(admin=true)
-     * @Response("system: views/admin/settings/info.php")
+     * @Response("system:views/admin/settings/info.php")
      */
     public function infoAction()
     {

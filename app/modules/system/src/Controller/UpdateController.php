@@ -18,7 +18,7 @@ use Pagekit\Package\Exception\UnauthorizedDownloadException;
 class UpdateController
 {
     /**
-     * @Response("system: views/admin/settings/update.php")
+     * @Response("system:views/admin/settings/update.php")
      */
     public function indexAction()
     {

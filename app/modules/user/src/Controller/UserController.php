@@ -13,7 +13,7 @@ class UserController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("system/user: views/admin/index.php")
+     * @Response("system/user:views/admin/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -39,7 +39,7 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/user: views/admin/edit.php")
+     * @Response("system/user:views/admin/edit.php")
      */
     public function editAction($id = 0)
     {

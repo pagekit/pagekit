@@ -13,7 +13,7 @@ use Pagekit\System\Event\ThemeEvent;
 class ThemesController extends Controller
 {
     /**
-     * @Response("system: views/admin/themes.php")
+     * @Response("system:views/admin/themes.php")
      */
     public function indexAction()
     {
