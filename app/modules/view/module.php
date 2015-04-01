@@ -4,7 +4,6 @@ use Pagekit\View\PhpEngine;
 use Pagekit\View\View;
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Event\ViewListener;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\GravatarHelper;
@@ -36,8 +35,21 @@ return [
                 new ScriptHelper($view, $app['scripts']),
                 new UrlHelper($app['url']),
                 new GravatarHelper(),
+                new TemplateHelper(),
                 $app['sections']
             ]);
+
+            if (isset($app['csrf'])) {
+                $view->addHelper(new TokenHelper($app['csrf']));
+            }
+
+            if (isset($app['dates'])) {
+                $view->addHelper(new DateHelper($app['dates']));
+            }
+
+            if (isset($app['markdown'])) {
+                $view->addHelper(new MarkdownHelper($app['markdown']));
+            }
 
             return $view;
         };
@@ -61,61 +73,6 @@ return [
         $app['templating'] = function() {
             return new PhpEngine();
         };
-
-        $app->extend('view', function($view, $app) {
-
-            $view->addHelper(new TemplateHelper());
-
-            if (isset($app['dates'])) {
-                $view->addHelper(new DateHelper($app['dates']));
-            }
-
-            if (isset($app['markdown'])) {
-                $view->addHelper(new MarkdownHelper($app['markdown']));
-            }
-
-            if (isset($app['csrf'])) {
-                $view->addHelper(new TokenHelper($app['csrf']));
-            }
-
-            $view->on('render', function($event) use ($app) {
-
-                $template = $event->getTemplate();
-
-                if ($template == 'head') {
-
-                    $renderEvent = clone $event;
-                    $placeholder = sprintf('<!-- %s -->', uniqid());
-
-                    $app->on('kernel.response', function($event) use ($renderEvent, $template, $placeholder) {
-
-                        $response = $event->getResponse();
-                        $response->setContent(str_replace($placeholder, $renderEvent->dispatch($template)->getResult(), $response->getContent()));
-
-                    }, 10);
-
-                    $event->setResult($placeholder);
-                    $event->stopPropagation();
-                }
-
-            }, 15);
-
-            $view->on('render', function($event) use ($app) {
-                if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
-                    $event->setTemplate($template);
-                }
-            }, 10);
-
-            $view->on('render', function($event) use ($app) {
-                if ($app['templating']->supports($template = $event->getTemplate())) {
-                    $event->setResult($app['templating']->render($template, $event->getParameters()));
-                }
-            }, -10);
-
-            return $view;
-        });
-
-        $app->subscribe(new ResponseListener);
 
         $app->on('kernel.boot', function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));

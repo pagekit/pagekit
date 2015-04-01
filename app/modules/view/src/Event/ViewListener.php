@@ -2,6 +2,7 @@
 
 namespace Pagekit\View\Event;
 
+use Pagekit\Application as App;
 use Pagekit\View\ViewInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,6 +24,52 @@ class ViewListener implements EventSubscriberInterface
     public function __construct(ViewInterface $view)
     {
         $this->view = $view;
+    }
+
+    /**
+     * Renders view layout.
+     *
+     * @param GetResponseForControllerResultEvent $event
+     * @param string                              $name
+     * @param EventDispatcherInterface            $dispatcher
+     */
+    public function onKernelBoot()
+    {
+        $app = App::getInstance();
+
+        $this->view->on('render', function($event) use ($app) {
+
+            $template = $event->getTemplate();
+
+            if ($template == 'head') {
+
+                $renderEvent = clone $event;
+                $placeholder = sprintf('<!-- %s -->', uniqid());
+
+                $app->on('kernel.response', function($event) use ($renderEvent, $template, $placeholder) {
+
+                    $response = $event->getResponse();
+                    $response->setContent(str_replace($placeholder, $renderEvent->dispatch($template)->getResult(), $response->getContent()));
+
+                }, 10);
+
+                $event->setResult($placeholder);
+                $event->stopPropagation();
+            }
+
+        }, 15);
+
+        $this->view->on('render', function($event) use ($app) {
+            if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
+                $event->setTemplate($template);
+            }
+        }, 10);
+
+        $this->view->on('render', function($event) use ($app) {
+            if ($app['templating']->supports($template = $event->getTemplate())) {
+                $event->setResult($app['templating']->render($template, $event->getParameters()));
+            }
+        }, -10);
     }
 
     /**
@@ -60,6 +107,7 @@ class ViewListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            'kernel.boot' => 'onKernelBoot',
             'kernel.view' => ['onKernelView', -5]
         ];
     }

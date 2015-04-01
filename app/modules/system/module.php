@@ -6,6 +6,7 @@ use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
+use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\ViewListener;
@@ -29,6 +30,7 @@ return [
             new FrontpageListener,
             new MaintenanceListener,
             new MigrationListener,
+            new ResponseListener,
             new SystemListener,
             new ThemeListener,
             new ViewListener,
