@@ -80,15 +80,17 @@ return [
 
             $view->on('render', function($event) use ($app) {
 
-                if ($event->getTemplate() == 'head') {
+                $template = $event->getTemplate();
+
+                if ($template == 'head') {
 
                     $renderEvent = clone $event;
                     $placeholder = sprintf('<!-- %s -->', uniqid());
 
-                    $app->on('kernel.response', function($event) use ($renderEvent, $placeholder) {
+                    $app->on('kernel.response', function($event) use ($renderEvent, $template, $placeholder) {
 
                         $response = $event->getResponse();
-                        $response->setContent(str_replace($placeholder, $renderEvent->dispatch()->getResult(), $response->getContent()));
+                        $response->setContent(str_replace($placeholder, $renderEvent->dispatch($template)->getResult(), $response->getContent()));
 
                     }, 10);
 

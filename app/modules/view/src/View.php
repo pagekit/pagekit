@@ -143,7 +143,7 @@ class View implements ViewInterface
         $event = $this->events->dispatch('render', new RenderEvent($name, $param));
 
         if (!$event->isPropagationStopped()) {
-            $event->dispatch();
+            $event->dispatch($name);
         }
 
         return $event->getResult();
