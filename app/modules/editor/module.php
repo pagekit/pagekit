@@ -13,10 +13,7 @@ return [
         $app->subscribe(new Editor);
 
         $app->on('system.loaded', function ($event) use ($app) {
-
-            $helper = new EditorHelper();
-
-            $app['view']->addHelper('editor', $helper);
+            $app['view']->addHelper(new EditorHelper());
             $app['scripts']->register('editor', 'app/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder']);
         });
 

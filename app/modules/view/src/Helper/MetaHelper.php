@@ -2,12 +2,26 @@
 
 namespace Pagekit\View\Helper;
 
-class MetaHelper implements \IteratorAggregate
+use Pagekit\View\View;
+
+class MetaHelper implements HelperInterface, \IteratorAggregate
 {
     /**
      * @var array
      */
     protected $metas = [];
+
+    /**
+     * Constructor.
+     *
+     * @param View $view
+     */
+    public function __construct(View $view)
+    {
+        $view->on('head', function ($event) {
+            $event->setResult($event->getResult().$this->render());
+        }, 20);
+    }
 
     /**
      * Adds meta tags.
@@ -88,5 +102,13 @@ class MetaHelper implements \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->metas);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'meta';
     }
 }

@@ -3,8 +3,9 @@
 namespace Pagekit\Finder;
 
 use Pagekit\Application as App;
+use Pagekit\View\Helper\HelperInterface;
 
-class FinderHelper
+class FinderHelper implements HelperInterface
 {
     /**
      * @param  string $root
@@ -16,5 +17,13 @@ class FinderHelper
         App::scripts('finder');
 
         return "<div data-finder='".json_encode(compact('root', 'mode'))."'></div>";
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'finder';
     }
 }

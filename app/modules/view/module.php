@@ -30,12 +30,13 @@ return [
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
             $view->addHelpers([
-                'data'    => new DataHelper(),
-                'meta'    => new MetaHelper(),
-                'style'   => new StyleHelper($app['styles']),
-                'script'  => new ScriptHelper($app['scripts']),
-                'section' => $app['sections'],
-                'url'     => new UrlHelper($app['url'])
+                new MetaHelper($view),
+                new DataHelper($view),
+                new StyleHelper($view, $app['styles']),
+                new ScriptHelper($view, $app['scripts']),
+                new UrlHelper($app['url']),
+                new GravatarHelper(),
+                $app['sections']
             ]);
 
             return $view;
@@ -63,35 +64,19 @@ return [
 
         $app->extend('view', function($view, $app) {
 
-            $helpers = [
-                'gravatar' => new GravatarHelper(),
-                'tmpl'     => new TemplateHelper()
-            ];
+            $view->addHelper(new TemplateHelper());
 
             if (isset($app['dates'])) {
-                $helpers['date'] = new DateHelper($app['dates']);
+                $view->addHelper(new DateHelper($app['dates']));
             }
 
             if (isset($app['markdown'])) {
-                $helpers['markdown'] = new MarkdownHelper($app['markdown']);
+                $view->addHelper(new MarkdownHelper($app['markdown']));
             }
 
             if (isset($app['csrf'])) {
-                $helpers['token'] = new TokenHelper($app['csrf']);
+                $view->addHelper(new TokenHelper($app['csrf']));
             }
-
-            $view->addHelpers($helpers);
-
-            $view->on('head', function($event) use ($app) {
-
-                $result  = $event->getResult();
-                $result .= $app['view']->meta()->render();
-                $result .= $app['view']->style()->render();
-                $result .= $app['view']->data()->render();
-                $result .= $app['view']->script()->render();
-
-                $event->setResult($result);
-            });
 
             $view->on('render', function($event) use ($app) {
 

@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Markdown\Markdown;
 
-class MarkdownHelper
+class MarkdownHelper implements HelperInterface
 {
     /**
      * @var Markdown
@@ -30,5 +30,13 @@ class MarkdownHelper
     public function __invoke($text)
     {
         return $this->parser->parse($text);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'markdown';
     }
 }

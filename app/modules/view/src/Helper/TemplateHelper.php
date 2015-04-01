@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Application as App;
 
-class TemplateHelper
+class TemplateHelper implements HelperInterface
 {
     /**
      * @var array
@@ -93,5 +93,13 @@ class TemplateHelper
     public function queued()
     {
         return array_keys($this->queued);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'tmpl';
     }
 }

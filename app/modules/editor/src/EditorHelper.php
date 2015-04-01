@@ -4,8 +4,9 @@ namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
 use Pagekit\Editor\Event\EditorLoadEvent;
+use Pagekit\View\Helper\HelperInterface;
 
-class EditorHelper
+class EditorHelper implements HelperInterface
 {
     /**
      * Render shortcut.
@@ -33,5 +34,13 @@ class EditorHelper
         }
 
         return __('Editor not found.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'editor';
     }
 }

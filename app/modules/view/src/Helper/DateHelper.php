@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Locale\Helper\DateHelper as DateManager;
 
-class DateHelper
+class DateHelper implements HelperInterface
 {
     /**
      * @var DateManager
@@ -29,5 +29,13 @@ class DateHelper
     public function __invoke($date, $format = 'medium', $timezone = null)
     {
         return $this->manager->format($date, $format, $timezone);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'date';
     }
 }

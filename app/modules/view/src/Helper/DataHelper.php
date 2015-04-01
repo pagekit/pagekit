@@ -2,12 +2,26 @@
 
 namespace Pagekit\View\Helper;
 
-class DataHelper
+use Pagekit\View\View;
+
+class DataHelper implements HelperInterface
 {
     /**
      * @var array
      */
     protected $data = [];
+
+    /**
+     * Constructor.
+     *
+     * @param View $view
+     */
+    public function __construct(View $view)
+    {
+        $view->on('head', function ($event) {
+            $event->setResult($event->getResult().$this->render());
+        }, 10);
+    }
 
     /**
      * Add shortcut.
@@ -63,5 +77,13 @@ class DataHelper
         }
 
         return $output;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'data';
     }
 }

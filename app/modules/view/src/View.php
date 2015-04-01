@@ -3,6 +3,7 @@
 namespace Pagekit\View;
 
 use Pagekit\View\Event\RenderEvent;
+use Pagekit\View\Helper\HelperInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -86,16 +87,20 @@ class View implements ViewInterface
     }
 
     /**
-     * Sets the helpers.
+     * Adds a helper.
      *
-     * @param  array $helpers
+     * @param  HelperInterface $helper
      * @return self
      */
-    public function setHelpers(array $helpers)
+    public function addHelper($helper)
     {
-        $this->helpers = [];
+        if (!$helper instanceof HelperInterface) {
+            throw new \InvalidArgumentException(sprintf('%s does not implement HelperInterface', get_class($helper)));
+        }
 
-        return $this->addHelpers($helpers);
+        $this->helpers[$helper->getName()] = $helper;
+
+        return $this;
     }
 
     /**
@@ -106,23 +111,9 @@ class View implements ViewInterface
      */
     public function addHelpers(array $helpers)
     {
-        foreach ($helpers as $name => $helper) {
-            $this->helpers[$name] = $helper;
+        foreach ($helpers as $helper) {
+            $this->addHelper($helper);
         }
-
-        return $this;
-    }
-
-    /**
-     * Adds a helper.
-     *
-     * @param  string $name
-     * @param  mixed  $helper
-     * @return self
-     */
-    public function addHelper($name, $helper)
-    {
-        $this->helpers[$name] = $helper;
 
         return $this;
     }

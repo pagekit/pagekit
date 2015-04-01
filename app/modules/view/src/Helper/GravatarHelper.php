@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-class GravatarHelper
+class GravatarHelper implements HelperInterface
 {
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.
@@ -44,5 +44,13 @@ class GravatarHelper
         }
 
         return $url;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'gravatar';
     }
 }

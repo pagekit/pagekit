@@ -2,9 +2,10 @@
 
 namespace Pagekit\View\Helper;
 
+use Pagekit\View\View;
 use Pagekit\View\Asset\AssetManager;
 
-class ScriptHelper implements \IteratorAggregate
+class ScriptHelper implements HelperInterface, \IteratorAggregate
 {
     /**
      * @var AssetManager
@@ -14,11 +15,16 @@ class ScriptHelper implements \IteratorAggregate
     /**
      * Constructor.
      *
+     * @param View         $view
      * @param AssetManager $manager
      */
-    public function __construct(AssetManager $manager = null)
+    public function __construct(View $view, AssetManager $manager = null)
     {
         $this->manager = $manager ?: new AssetManager();
+
+        $view->on('head', function ($event) {
+            $event->setResult($event->getResult().$this->render());
+        }, 5);
     }
 
     /**
@@ -29,6 +35,22 @@ class ScriptHelper implements \IteratorAggregate
     public function __invoke($name, $source = null, $dependencies = [], $options = [])
     {
         return $this->manager->add($name, $source, $dependencies, $options);
+    }
+
+    /**
+     * Proxies all method calls to the manager.
+     *
+     * @param  string $method
+     * @param  array  $args
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+        if (!is_callable($callable = [$this->manager, $method])) {
+            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->manager), $method));
+        }
+
+        return call_user_func_array($callable, $args);
     }
 
     /**
@@ -62,18 +84,10 @@ class ScriptHelper implements \IteratorAggregate
     }
 
     /**
-     * Proxies all method calls to the manager.
-     *
-     * @param  string $method
-     * @param  array  $args
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function __call($method, $args)
+    public function getName()
     {
-        if (!is_callable($callable = [$this->manager, $method])) {
-            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->manager), $method));
-        }
-
-        return call_user_func_array($callable, $args);
+        return 'script';
     }
 }

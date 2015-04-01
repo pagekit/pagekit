@@ -5,7 +5,7 @@ namespace Pagekit\View\Helper;
 use Pagekit\Application\UrlProvider;
 use Pagekit\Routing\Generator\UrlGenerator;
 
-class UrlHelper
+class UrlHelper implements HelperInterface
 {
     /**
      * @var UrlProvider
@@ -46,5 +46,13 @@ class UrlHelper
         }
 
         return call_user_func_array($callable, $args);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'url';
     }
 }

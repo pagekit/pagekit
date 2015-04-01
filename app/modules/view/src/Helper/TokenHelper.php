@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Session\Csrf\Provider\CsrfProviderInterface;
 
-class TokenHelper
+class TokenHelper implements HelperInterface
 {
     /**
      * @var CsrfProviderInterface
@@ -29,5 +29,13 @@ class TokenHelper
     public function get($name = '_csrf')
     {
         printf('<input type="hidden" name="%s" value="%s">', $name, $this->provider->generate());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'token';
     }
 }

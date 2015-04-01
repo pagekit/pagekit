@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-class SectionHelper
+class SectionHelper implements HelperInterface
 {
     protected $sections     = [];
     protected $openSections = [];
@@ -190,6 +190,14 @@ class SectionHelper
     public function output($name, array $options = [])
     {
         echo $this->render($name, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'section';
     }
 
     /**
