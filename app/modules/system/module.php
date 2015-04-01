@@ -8,6 +8,7 @@ use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
+use Pagekit\System\Event\ViewListener;
 use Pagekit\System\Event\WidgetListener;
 use Pagekit\System\Helper\SystemInfoHelper;
 use Symfony\Component\Finder\Finder;
@@ -30,6 +31,7 @@ return [
             new MigrationListener,
             new SystemListener,
             new ThemeListener,
+            new ViewListener,
             new WidgetListener
         );
 
