@@ -15,7 +15,7 @@ $values = array_map('realpath', [
 ]);
 
 $config = new Config($values);
-$config->load(__DIR__.'/config/app.php');
+$config->load(__DIR__.'/system/config.php');
 
 if ($values['config.file']) {
     $config->load($values['config.file']);
