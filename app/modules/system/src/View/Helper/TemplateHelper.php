@@ -1,8 +1,9 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Pagekit\System\View\Helper;
 
 use Pagekit\Application as App;
+use Pagekit\View\Helper\HelperInterface;
 
 class TemplateHelper implements HelperInterface
 {

@@ -1,8 +1,9 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\System\View;
 
 use Pagekit\Application as App;
+use Pagekit\System\View\Helper\TemplateHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ViewListener implements EventSubscriberInterface
@@ -41,15 +42,17 @@ class ViewListener implements EventSubscriberInterface
 
         $app['view']->data('$pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
-        // $app['view']->section()->set('messages', function() use ($app) {
-        //     return $app['view']->render('system:views/messages/messages.php');
-        // });
+        $app['view']->on('messages', function ($event) use ($app) {
+            $event->setTemplate('system:views/messages/messages.php');
+        });
 
-        // $app['view']->section()->prepend('head', function () use ($app) {
-        //     if ($templates = $app['view']->tmpl()->queued()) {
-        //         $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
-        //     }
-        // });
+        $app['view']->addHelper(new TemplateHelper());
+
+        $app['view']->on('head', function ($event) use ($app) {
+            if ($templates = $app['view']->tmpl()->queued()) {
+                $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
+            }
+        }, 10);
 
         foreach ($app['module'] as $module) {
             if (isset($module->templates)) {

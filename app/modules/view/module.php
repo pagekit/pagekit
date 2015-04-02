@@ -9,7 +9,6 @@ use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\DeferredHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
-use Pagekit\View\Helper\TemplateHelper;
 use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\DataHelper;
 use Pagekit\View\Helper\MetaHelper;
@@ -37,8 +36,7 @@ return [
                 new ScriptHelper($view, $app['scripts']),
                 new DeferredHelper($view, $app),
                 new UrlHelper($app['url']),
-                new GravatarHelper(),
-                new TemplateHelper()
+                new GravatarHelper()
             ]);
 
             if (isset($app['csrf'])) {
