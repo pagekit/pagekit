@@ -34,7 +34,6 @@ class ViewListener implements EventSubscriberInterface
         $app['scripts']->register('uikit-datepicker', 'vendor/assets/uikit/js/components/datepicker.min.js', 'uikit');
         $app['scripts']->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
         $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
-        $app['scripts']->register('system', 'app/system/app/system.js', ['jquery', 'tmpl', 'locale']);
         $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
         $app['scripts']->register('vue-system', 'app/system/app/vue-system.js', ['vue-resource', 'jquery', 'lodash', 'locale']);
         $app['scripts']->register('vue-resource', 'app/system/app/vue-resource.js', 'vue');
