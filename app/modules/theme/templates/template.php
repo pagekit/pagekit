@@ -93,10 +93,10 @@
         </div>
 
         <div class="tm-main uk-container uk-container-center">
-            <?= $view->section()->render('content') ?>
+            <?= $view->render('content') ?>
         </div>
 
-        <div class="uk-hidden"><?= $view->section()->render('messages') ?></div>
+        <div class="uk-hidden"><?= $view->render('messages') ?></div>
 
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">

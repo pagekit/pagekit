@@ -2,7 +2,7 @@
 
 <div id="js-user" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar') ?>
 
     <div class="uk-float-left">
 
@@ -30,7 +30,7 @@
 
     </div>
 
-    <?php $view->section()->end() ?>
+    <?php $view->section()->stop(true) ?>
 
     <div v-show="users.length" class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">

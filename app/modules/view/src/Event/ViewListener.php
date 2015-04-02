@@ -33,7 +33,7 @@ class ViewListener implements EventSubscriberInterface
      * @param string                              $name
      * @param EventDispatcherInterface            $dispatcher
      */
-    public function onKernelBoot()
+    public function onKernelRequest()
     {
         $app = App::getInstance();
 
@@ -107,8 +107,8 @@ class ViewListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.boot' => 'onKernelBoot',
-            'kernel.view' => ['onKernelView', -5]
+            'kernel.request' => 'onKernelRequest',
+            'kernel.view'    => ['onKernelView', -5]
         ];
     }
 }

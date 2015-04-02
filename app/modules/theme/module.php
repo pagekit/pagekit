@@ -10,26 +10,11 @@ return [
 
             $app['view']->setLayout($this->path.'/templates/template.php');
 
-            $app['sections']->addRenderer('toolbar', function ($name, $value, $options = []) use ($app) {
-                return $app['view']->render('app/modules/theme/views/renderer/toolbar.php', compact('name', 'value', 'options'));
+            $app['view']->on('toolbar', function ($event) {
+                $event->setResult(sprintf('<div class="uk-clearfix uk-margin">%s</div>', $event->getResult()));
             });
 
-            $app['sections']->register('toolbar', ['renderer' => 'toolbar']);
-
             $app->on('kernel.view', function () use ($app) {
-
-                // set title
-                $app['sections']->prepend('head', function () use ($app) {
-
-                    $title = $app['view']->meta()->get('title');
-
-                    if ($site = $app['system']->config('site.title')) {
-                        $title = "$title &lsaquo; $site";
-                    }
-
-                    $app['view']->meta(['title' => "$title &#8212; Pagekit"]);
-
-                });
 
                 // set user
                 $app['view']->addGlobal('user', $app['user']);

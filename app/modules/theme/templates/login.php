@@ -19,7 +19,7 @@
 
                     <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('app/modules/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
 
-                    <?= $view->section()->render('messages') ?>
+                    <?= $view->render('messages') ?>
 
                     <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@user/auth/authenticate') ?>" method="post">
 

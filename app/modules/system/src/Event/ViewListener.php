@@ -41,15 +41,15 @@ class ViewListener implements EventSubscriberInterface
 
         $app['view']->data('$pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
-        $app['view']->section()->set('messages', function() use ($app) {
-            return $app['view']->render('system:views/messages/messages.php');
-        });
+        // $app['view']->section()->set('messages', function() use ($app) {
+        //     return $app['view']->render('system:views/messages/messages.php');
+        // });
 
-        $app['view']->section()->prepend('head', function () use ($app) {
-            if ($templates = $app['view']->tmpl()->queued()) {
-                $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
-            }
-        });
+        // $app['view']->section()->prepend('head', function () use ($app) {
+        //     if ($templates = $app['view']->tmpl()->queued()) {
+        //         $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
+        //     }
+        // });
 
         foreach ($app['module'] as $module) {
             if (isset($module->templates)) {

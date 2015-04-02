@@ -2,7 +2,7 @@
 
 <div id="dashboard" class="uk-form">
 
-   <?php $view->section()->start('toolbar', 'show') ?>
+   <?php $view->section()->start('toolbar') ?>
 
         <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
             <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
@@ -17,7 +17,7 @@
 
         <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
-    <?php $view->section()->end() ?>
+    <?php $view->section()->stop(true) ?>
 
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent">
         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>

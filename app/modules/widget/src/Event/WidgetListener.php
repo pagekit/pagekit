@@ -14,6 +14,8 @@ class WidgetListener implements EventSubscriberInterface
      */
     public function onSystemSite()
     {
+        return;
+
         $request   = App::request();
         $active    = (array) $request->attributes->get('_menu');
         $user      = App::user();

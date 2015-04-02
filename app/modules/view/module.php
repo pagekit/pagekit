@@ -31,12 +31,12 @@ return [
             $view->addHelpers([
                 new MetaHelper($view),
                 new DataHelper($view),
+                new SectionHelper($view),
                 new StyleHelper($view, $app['styles']),
                 new ScriptHelper($view, $app['scripts']),
                 new UrlHelper($app['url']),
                 new GravatarHelper(),
-                new TemplateHelper(),
-                $app['sections']
+                new TemplateHelper()
             ]);
 
             if (isset($app['csrf'])) {
@@ -66,31 +66,12 @@ return [
             return new AssetManager($app['assets']);
         };
 
-        $app['sections'] = function () {
-            return new SectionHelper();
-        };
-
         $app['templating'] = function() {
             return new PhpEngine();
         };
 
         $app->on('kernel.boot', function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));
-        });
-
-        $app->on('kernel.controller', function () use ($app) {
-            foreach ($app['module'] as $module) {
-
-                if (!isset($module->renderer)) {
-                    continue;
-                }
-
-                foreach ($module->renderer as $name => $template) {
-                    $app['sections']->addRenderer($name, function ($name, $value, $options = []) use ($app, $template) {
-                        return $app['tmpl']->render($template, compact('name', 'value', 'options'));
-                    });
-                }
-            }
         });
 
         $app->on('kernel.view', function ($event) use ($app) {

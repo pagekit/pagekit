@@ -2,10 +2,10 @@
 
 <form id="js-settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 
-    <?php $app['sections']->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar') ?>
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
         <a class="uk-button" v-attr="href: $url('admin/system')">{{ 'Close' | trans }}</a>
-    <?php $app['sections']->end() ?>
+    <?php $view->section()->stop(true) ?>
 
     <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
 
