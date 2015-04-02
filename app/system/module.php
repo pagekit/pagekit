@@ -225,9 +225,7 @@ return [
 
     'templates' => [
 
-        'linkpicker.modal'    => 'system:views/tmpl/linkpicker.modal.razr',
-        'linkpicker.replace'  => 'system:views/tmpl/linkpicker.replace.razr',
-        'package.upload'      => 'system:views/admin/upload.php'
+        'package.upload' => 'system:views/admin/upload.php'
 
     ],
 

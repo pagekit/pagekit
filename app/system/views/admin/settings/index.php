@@ -1,5 +1,4 @@
 <?php $view->style('system', 'app/system/assets/css/system.css') ?>
-<?php $view->script('settings', 'app/system/assets/js/settings/index.js', 'uikit') ?>
 
 <h2 class="uk-h3"><?= __('System') ?></h2>
 
@@ -122,3 +121,35 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+
+    jQuery(function($) {
+
+        var modal;
+
+        $('#clearCache').on('click', function(e) {
+            e.preventDefault();
+
+            if (!modal) {
+                modal = UIkit.modal('#modal-clearcache');
+
+                modal.element.find('form').on('submit', function(e) {
+                    e.preventDefault();
+
+                    $.post($(this).attr('action'), $(this).serialize(),function(data) {
+                        UIkit.notify(data.message, 'success');
+                    }).fail(function() {
+                        UIkit.notify('Clearing cache failed.', 'danger');
+                    }).always(function() {
+                        modal.hide();
+                    });
+                });
+            }
+
+            modal.show();
+        });
+
+    });
+
+</script>

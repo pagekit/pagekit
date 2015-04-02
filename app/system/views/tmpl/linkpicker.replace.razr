@@ -1,1 +1,0 @@
-<span>{{type}}{{#unless type}}@trans('Select Link'){{/unless}} <a class="js-linkpicker-trigger" href="#">{{url}} <i class="uk-icon-pencil"></i></a></span>

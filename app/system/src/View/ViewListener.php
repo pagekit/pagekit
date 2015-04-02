@@ -41,10 +41,6 @@ class ViewListener implements EventSubscriberInterface
 
         $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
-        $app['view']->on('messages', function ($event) use ($app) {
-            $event->setTemplate('system:views/messages/messages.php');
-        });
-
         $app['view']->addHelper(new TemplateHelper($app['view'], $app));
 
         foreach ($app['module'] as $module) {
