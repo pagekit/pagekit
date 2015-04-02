@@ -21,13 +21,17 @@ class PageExtension extends Extension
         });
 
         $app->on('site.types', function ($event, $site) {
-            $site->registerType('page', 'Page', [
-                'tmpl.edit'   => 'page.edit'
-            ]);
+            $site->registerType('page', 'Page', 'url');
         });
 
         $app->on('site.config', function () use ($app) {
             $app['scripts']->add('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
+        });
+
+        $app->on('site.sections', function ($event, $site) {
+            $site->registerSection('Settings', function() {
+                return App::view('blog:views/admin/site.post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
+            }, 'blog.post');
         });
     }
 

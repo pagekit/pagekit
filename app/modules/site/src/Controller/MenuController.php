@@ -8,7 +8,7 @@ use Pagekit\Site\Entity\Node;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 /**
- * @Access("system: manage site")
+ * @Access("site: manage site")
  * @Response("json")
  */
 class MenuController extends Controller
@@ -18,7 +18,7 @@ class MenuController extends Controller
      */
     public function indexAction()
     {
-        return array_values(App::module('system/site')->getMenus() + [['id' => '', 'label' => 'Not Linked', 'fixed' => true]]);
+        return array_values(App::module('site')->getMenus() + [['id' => '', 'label' => 'Not Linked', 'fixed' => true]]);
     }
 
     /**
@@ -81,7 +81,7 @@ class MenuController extends Controller
      */
     protected function get()
     {
-        return App::module('system/site')->config('menus');
+        return App::module('site')->config('menus');
     }
 
     /**
@@ -89,8 +89,8 @@ class MenuController extends Controller
      */
     protected function update($menus = [])
     {
-        $config = App::option()->get('system/site:config', []);
+        $config = App::option()->get('site:config', []);
         $config['menus'] = $menus;
-        App::option()->set('system/site:config', $config);
+        App::option()->set('site:config', $config);
     }
 }

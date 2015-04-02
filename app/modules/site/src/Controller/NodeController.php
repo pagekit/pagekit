@@ -7,7 +7,7 @@ use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
 
 /**
- * @Access("system: manage site")
+ * @Access("site: manage site")
  * @Response("json")
  */
 class NodeController extends Controller
@@ -42,7 +42,7 @@ class NodeController extends Controller
 
         $node->save($data);
 
-        return 'success';
+        return $node;
     }
 
     /**

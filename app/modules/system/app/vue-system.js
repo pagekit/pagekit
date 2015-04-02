@@ -52,9 +52,9 @@
                 return fn.call(this, args);
             }
 
-            var self      = this,
-                template  = options.template,
-                frag      = Vue.parsers.template.parse(template);
+            var self     = this,
+                template = options.template,
+                frag     = Vue.parsers.template.parse(template);
 
             if (frag) {
                 options.template = frag;

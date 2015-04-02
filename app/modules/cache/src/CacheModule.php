@@ -80,7 +80,7 @@ class CacheModule extends Module
 
             $event->data('caches', $caches);
             $event->config($this->name, $this->config, ['caches.cache.storage', 'nocache']);
-            $event->view($this->name, 'Cache', 'app/modules/cache/views/admin/settings.php');
+            $event->section($this->name, 'Cache', 'app/modules/cache/views/admin/settings.php');
         });
 
         $app->on('system.settings.save', function ($event, $config, $option) use ($app) {

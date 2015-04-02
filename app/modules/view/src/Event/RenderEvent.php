@@ -47,6 +47,14 @@ class RenderEvent extends Event
     }
 
     /**
+     * @param string $result
+     */
+    public function addResult($result)
+    {
+        $this->result .= $result;
+    }
+
+    /**
      * @return string
      */
     public function getTemplate()
@@ -76,6 +84,15 @@ class RenderEvent extends Event
     public function setParameters($parameters)
     {
         $this->parameters = $parameters;
+    }
+
+    /**
+     * @param  string $key
+     * @return mixed  $value
+     */
+    public function getParameter($key)
+    {
+        return isset($this->parameters[$key]) ? $this->parameters[$key] : null;
     }
 
     /**

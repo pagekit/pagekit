@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Blog\Content\ReadmorePlugin;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
-use Pagekit\Site\Event\ConfigEvent;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 
@@ -24,7 +23,13 @@ class BlogExtension extends Extension
         );
 
         $app->on('system.init', function() use ($app) {
+
             $app['system']->config['frontpage'] = $app['system']->config['frontpage'] ?: '@blog/site';
+
+            $app['view']->on('site:views/admin/index.php', function() use ($app) {
+                $app['view']->script('blog-post', 'extensions/blog/app/page.js', ['vue-system', 'vue-validator', 'uikit-nestable']);
+            });
+
         }, 10);
 
         $app->on('system.link', function(LinkEvent $event) {
@@ -33,23 +38,19 @@ class BlogExtension extends Extension
 
         $app->on('site.types', function ($event, $site) {
 
-            $site->registerType('blog', 'Blog', [
-                'type'        => 'mount',
+            $site->registerType('blog', 'Blog', 'mount', [
                 'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
                 'url'         => '@blog/site'
             ]);
 
-            $site->registerType('blog.post', 'Blog Post', [
-                'type'      => 'url',
-                'tmpl.edit' => 'blog.post.edit'
-            ]);
+            $site->registerType('blog.post', 'Blog Post', 'url');
 
         });
 
-        // TODO fix
-        $app->on('site.config', function (ConfigEvent $event) use ($app) {
-            $app['scripts']->add('blog-controllers', 'extensions/blog/app/controllers.js', 'site-application');
-            $event->addConfig(['data' => ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]]);
+        $app->on('site.sections', function ($event, $site) {
+            $site->registerSection('Settings', function() {
+                return App::view('blog:views/admin/site.post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
+            }, 'blog.post');
         });
     }
 

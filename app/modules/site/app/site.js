@@ -1,10 +1,14 @@
-jQuery(function () {
+jQuery(function ($) {
 
     var vm = new Vue({
 
         el: '#js-site',
 
-        data: _.merge({ current: {} }, $data),
+        data: _.merge({
+            current: {},
+            nodes: null,
+            menus: null
+        }, $data),
 
         created: function () {
 
@@ -13,22 +17,14 @@ jQuery(function () {
                 return !menu || this.menu.oldId == menu.id;
             };
 
-            this.Nodes = this.$resource('api/system/node/:id');
-            this.Menus = this.$resource('api/system/menu/:id', {}, { 'update': { method: 'PUT' }});
+            this.Nodes = this.$resource('api/site/node/:id');
+            this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
 
             Vue.http.defaults.options = _.extend({}, Vue.http.defaults.options, { error: function (msg) {
                 UIkit.notify(msg, 'danger');
             }});
 
             this.load();
-        },
-
-        watch: {
-
-            nodes: function() {
-                this.select(_.find(this.nodes, { id: this.current.id }) || this.nodes[0]);
-            }
-
         },
 
         methods: {
@@ -41,12 +37,12 @@ jQuery(function () {
 
                 this.Nodes.query(function (nodes) {
                     vm.$set('nodes', nodes);
+                    vm.select(_.find(nodes, { id: vm.current.id }) || nodes[0]);
                 });
 
                 this.Menus.query(function (menus) {
                     vm.$set('menus', menus);
                 });
-
             }
 
         },
@@ -56,7 +52,10 @@ jQuery(function () {
             'menu-list': {
 
                 inherit : true,
-                template: '#menu-list',
+
+                data: function() {
+                    return { menu: {} };
+                },
 
                 methods: {
 
@@ -72,14 +71,19 @@ jQuery(function () {
                         if (menu.fixed) return;
 
                         if (!this.modal) {
-                            this.modal = UIkit.modal('#modal-menu');
+                            this.modal = UIkit.modal(this.$$.modal);
                         }
 
                         this.modal.show();
                         this.$set('menu', menu);
                     },
 
-                    save: function () {
+                    save: function (e) {
+
+                        if (e) {
+                            e.preventDefault();
+                        }
+
                         this.Menus[this.menu.oldId ? 'update' : 'save']({ id: this.menu.id }, this.menu, vm.load);
                         this.cancel();
                     },
@@ -92,7 +96,7 @@ jQuery(function () {
 
                     cancel: function (e) {
                         if (e) e.preventDefault();
-                        this.$set('menu', null);
+                        this.$set('menu', {});
                         this.modal.hide();
                     }
 
@@ -102,16 +106,15 @@ jQuery(function () {
             'node-list': {
 
                 inherit: true,
-                replace: true,
-                template: '#node-list',
+                template: '<node-item v-repeat="node: children"></node-item>',
 
                 ready: function () {
 
+                    var self = this;
+
                     if (this.node) return;
 
-                    var self = this, nestable = UIkit.nestable(this.$el);
-
-                    nestable.element.on('change.uk.nestable', function (e, el, type) {
+                    UIkit.nestable(this.$el).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
                         if (type !== 'removed') {
                             vm.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, vm.load);
                         }
@@ -124,20 +127,35 @@ jQuery(function () {
                         return _(this.nodes).filter({ menu: this.menu.id, parentId: this.node ? this.node.id : 0 }).sortBy('priority').value();
                     }
 
+                }
+            },
+
+            'node-item': {
+
+                inherit: true,
+                replace: true,
+                template: '#node-item',
+
+                computed: {
+
+                    isActive: function() {
+                        return this.node === this.current;
+                    },
+
+                    isParent: function() {
+                        return _(this.nodes).filter({ menu: this.menu.id, parentId: this.node.id }).value().length;
+                    }
+
                 },
 
                 methods: {
-
-                    hasChildren: function(node) {
-                        return _(this.nodes).filter({ menu: this.menu.id, parentId: node.id }).value().length;
-                    },
 
                     'delete': function(e) {
 
                         e.preventDefault();
                         e.stopPropagation();
 
-                        this.Nodes.delete({ id: e.targetVM.node.id }, vm.load);
+                        this.Nodes.delete({ id: this.node.id }, vm.load);
                     }
 
                 }
@@ -146,7 +164,6 @@ jQuery(function () {
             'node-edit': {
 
                 inherit: true,
-                template: '#node-edit',
 
                 data: function() {
                     return { node: {} }
@@ -155,7 +172,7 @@ jQuery(function () {
                 watch: {
 
                     current: function() {
-                        this.reset();
+                        this.reload();
                     }
 
                 },
@@ -163,15 +180,44 @@ jQuery(function () {
                 computed: {
 
                     type: function() {
-                        return (_.find(this.types, { id: this.node.type }) || {}).label;
+                        return (_.find(this.types, { id: this.node.type }) || {});
                     }
 
                 },
 
                 methods: {
 
-                    reset: function() {
-                        this.$set('node', _.extend({}, this.current));
+                    reload: function() {
+
+                        var self = this;
+
+                        if (!this.current.id && !this.current.type) {
+                            return;
+                        }
+
+                        this.$http.get(this.$url('admin/site/edit', { id: this.current.id, type: this.current.type }), function(data) {
+
+                            if (self.edit) {
+                                self.edit.$destroy();
+                            }
+
+                            data.node.data = _.isArray(data.node.data) ? {} : data.node.data || {};
+
+                            self.$set('node', data.node);
+
+                            self.edit = self.$addChild({
+
+                                inherit: true,
+                                el: self.$$.edit,
+                                template: data.view,
+
+                                ready: function() {
+                                    UIkit.tab(this.$$.tab, { connect: this.$$.content });
+                                }
+
+                            });
+
+                        });
                     },
 
                     getPath: function() {
@@ -183,7 +229,10 @@ jQuery(function () {
 
                         e.preventDefault();
 
-                        this.Nodes.save({ id: this.node.id }, { node: this.node }, vm.load);
+                        this.Nodes.save({ id: this.node.id }, { node: this.node }, function(node) {
+                            vm.current.id = parseInt(node.id);
+                            vm.load();
+                        });
                     }
 
                 }

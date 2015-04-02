@@ -21,10 +21,13 @@
 
                 if (!this.validators[form]) {
                     this.validators[form] = [];
-                    _.on(el.form, 'submit', function (e) {
+
+                    this.validators[form].handler = function (e) {
                         e.preventDefault();
                         _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
-                    });
+                    };
+
+                    _.on(el.form, 'submit', this.validators[form].handler);
                 }
 
                 if (this.elements.indexOf(el) == -1) {
@@ -44,6 +47,7 @@
                 validators.splice(validators.indexOf(dir), 1);
 
                 if (!validators.length) {
+                    _.off(dir.el.form, 'submit', validators.handler);
                     delete this.validators[form];
                 }
             },

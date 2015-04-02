@@ -4,20 +4,20 @@ namespace Pagekit\Site;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Site\Entity\Node;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Site\Event\RouteListener;
 
-class SiteModule extends Module implements EventSubscriberInterface
+class SiteModule extends Module
 {
     protected $types;
     protected $menus;
+    protected $sections;
 
     /**
      * {@inheritdoc}
      */
     public function main(App $app)
     {
-        $app->subscribe($this);
+        $app->subscribe(new RouteListener());
     }
 
     /**
@@ -27,10 +27,7 @@ class SiteModule extends Module implements EventSubscriberInterface
     {
         if (!$this->types) {
 
-            $this->registerType('alias', 'Alias', [
-                'type'      => 'url',
-                'tmpl.edit' => 'alias.edit'
-            ]);
+            $this->registerType('alias', 'Alias', 'url');
 
             App::trigger('site.types', [$this]);
         }
@@ -43,11 +40,12 @@ class SiteModule extends Module implements EventSubscriberInterface
      *
      * @param string $id
      * @param string $label
+     * @param string $type
      * @param array  $options
      */
-    public function registerType($id, $label, array $options = [])
+    public function registerType($id, $label, $type, array $options = [])
     {
-        $this->types[$id] = array_merge($options, compact('id', 'label'));
+        $this->types[$id] = array_merge($options, compact('id', 'label', 'type'));
     }
 
     /**
@@ -91,53 +89,34 @@ class SiteModule extends Module implements EventSubscriberInterface
     }
 
     /**
+     * @param  string $type
      * @return array
      */
-    public function getNodes()
+    public function getSections($type = '')
     {
-        $nodes = [];
-        $types = $this->getTypes();
+        if (!$this->sections) {
 
-        foreach (Node::where(['status = ?'], [1])->get() as $node) {
+            $this->registerSection('Settings', 'site:views/admin/settings.php');
+            $this->registerSection('Settings', 'site:views/admin/alias.php', 'alias');
 
-            if (!isset($types[$node->getType()])) {
-                continue;
-            }
-
-            $type = $types[$node->getType()];
-
-            $nodes[$node->getPath()] = [
-                'id'          => $type['id'],
-                'url'         => $node->get('url', ''),
-                'controllers' => isset($type['controllers']) ? $type['controllers'] : '',
-                'defaults'    => array_merge_recursive(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []))
-            ];
+            App::trigger('site.sections', [$this]);
         }
 
-        return $nodes;
+        return array_map(function($subsections) use ($type) {
+            return array_filter($subsections, function($section) use ($type) { return in_array($section['type'], ['', $type]); });
+        }, $this->sections);
     }
 
     /**
-     * Registers node routes.
+     * Registers a settings section.
+     *
+     * @param string $name
+     * @param string $view
+     * @param string $type
+     * @param array  $options
      */
-    public function onKernelRequest()
+    public function registerSection($name, $view, $type = '', array $options = [])
     {
-        foreach ($this->getNodes() as $path => $node) {
-            if ($node['controllers']) {
-                App::controllers()->mount($path, $node['controllers'], "@{$node['id']}/", $node['defaults']);
-            } elseif ($node['url']) {
-                App::aliases()->add($path, $node['url'], $node['defaults']);
-            }
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            'kernel.request' => ['onKernelRequest', 35]
-        ];
+        $this->sections[$name][] = array_merge($options, compact('name', 'view', 'type'));
     }
 }

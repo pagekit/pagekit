@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/site',
+    'name' => 'site',
 
     'main' => 'Pagekit\\Site\\SiteModule',
 
@@ -14,12 +14,11 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
-            'Pagekit\\Site\\Controller\\SiteController',
-            'Pagekit\\Site\\Controller\\TemplateController',
+        '@site: /' => [
+            'Pagekit\\Site\\Controller\\SiteController'
         ],
 
-        '@system: /api/system' => [
+        '@site/api: /api/site' => [
             'Pagekit\\Site\\Controller\\MenuController',
             'Pagekit\\Site\\Controller\\NodeController'
         ]
@@ -28,11 +27,11 @@ return [
 
     'menu' => [
 
-        'system: site' => [
+        'site' => [
             'label'    => 'Site',
-            'icon'     => 'extensions/page/extension.svg',
-            'url'      => '@system/site',
-            'active'   => '@system/site*',
+            'icon'     => 'site:assets/images/icon-site.svg',
+            'url'      => '@site',
+            'active'   => '@site*',
             'priority' => 0
         ]
 
@@ -40,7 +39,7 @@ return [
 
     'permissions' => [
 
-        'system: manage site' => [
+        'site: manage site' => [
             'title' => 'Manage site'
         ]
 
@@ -50,9 +49,15 @@ return [
         'menus' => []
     ],
 
+    'resources' => [
+
+        'site:' => ''
+
+    ],
+
     'templates' => [
 
-        'alias.edit' => 'app/modules/site/views/tmpl/site.alias.php'
+        'alias.edit' => 'site:views/tmpl/alias.php'
 
     ]
 

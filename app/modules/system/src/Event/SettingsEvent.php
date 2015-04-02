@@ -10,30 +10,30 @@ class SettingsEvent extends Event
     /**
      * @var array
      */
-    protected $views = [];
+    protected $sections = [];
 
     /**
      * @return array
      */
-    public function getViews()
+    public function getSections()
     {
-        return $this->views;
+        return $this->sections;
     }
 
     /**
-     * Add settings view.
+     * Adds settings section.
      *
      * @param string          $name
      * @param string          $label
-     * @param string|callable $view
+     * @param string|callable $section
      */
-    public function view($name, $label, $view)
+    public function section($name, $label, $section)
     {
-        $this->views[$name] = ['label' => $label, 'view' => is_callable($view) ? call_user_func($view) : App::view($view)];
+        $this->sections[$name] = ['label' => $label, 'view' => is_callable($section) ? call_user_func($section) : App::view($section)];
     }
 
     /**
-     * Add settings options.
+     * Adds settings options.
      *
      * @param string $name
      * @param array  $data
@@ -47,7 +47,7 @@ class SettingsEvent extends Event
     }
 
     /**
-     * Add settings config.
+     * Adds settings config.
      *
      * @param string $name
      * @param array  $data
@@ -61,7 +61,7 @@ class SettingsEvent extends Event
     }
 
     /**
-     * Add settings data.
+     * Adds settings data.
      *
      * @param string $name
      * @param mixed  $data

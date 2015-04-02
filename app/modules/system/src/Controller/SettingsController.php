@@ -39,7 +39,7 @@ class SettingsController extends Controller
     {
         return [
             '$meta' => ['title' => __('Settings')],
-            'views' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getViews()
+            'sections' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getSections()
         ];
     }
 

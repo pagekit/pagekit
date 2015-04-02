@@ -85,7 +85,7 @@ return [
 
             $event->options($this->name, $this->config);
             $event->data('ssl', extension_loaded('openssl'));
-            $event->view($this->name, 'Mail', 'app/modules/mail/views/admin/settings.php');
+            $event->section($this->name, 'Mail', 'app/modules/mail/views/admin/settings.php');
         });
     },
 

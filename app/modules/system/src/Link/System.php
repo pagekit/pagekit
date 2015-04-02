@@ -50,9 +50,9 @@ class System implements LinkInterface
             '/'                     => __('Frontpage'),
             '@user/auth/login'    => __('User Login'),
             '@user/auth/logout'   => __('User Logout'),
-            '@system/registration'  => __('User Registration'),
-            '@system/profile'       => __('User Profile'),
-            '@system/resetpassword' => __('User Password Reset')
+            '@user/registration'  => __('User Registration'),
+            '@user/profile'       => __('User Profile'),
+            '@user/resetpassword' => __('User Password Reset')
         ];
     }
 }

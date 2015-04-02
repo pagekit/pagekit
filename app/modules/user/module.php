@@ -56,7 +56,7 @@ return [
 
         $app->on('system.settings.edit', function ($event) use ($app) {
             $event->options($this->name, $this->config, ['registration', 'require_verification']);
-            $event->view($this->name, 'User', 'app/modules/user/views/admin/settings.php');
+            $event->section($this->name, 'User', 'app/modules/user/views/admin/settings.php');
         });
 
     },

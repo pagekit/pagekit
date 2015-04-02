@@ -32,7 +32,7 @@ class View implements ViewInterface
     /**
      * Constructor.
      *
-     * @param AssetManager $manager
+     * @param EventDispatcherInterface $events
      */
     public function __construct(EventDispatcherInterface $events = null)
     {

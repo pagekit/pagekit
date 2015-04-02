@@ -18,7 +18,7 @@ return [
             $event->options($this->name, $this->config);
             $event->data('oauth', $app['oauth']->getProvider());
             $event->data('redirect_url', $app['oauth']->getRedirectUrl());
-            $event->view($this->name, 'OAuth', 'app/modules/oauth/views/admin/settings.php');
+            $event->section($this->name, 'OAuth', 'app/modules/oauth/views/admin/settings.php');
         });
     },
 

@@ -134,6 +134,7 @@ return [
         'migration',
         'oauth',
         'package',
+        'site',
         'tree',
         'user',
         'system/console',
@@ -142,7 +143,6 @@ return [
         'system/finder',
         'system/marketplace',
         'system/menu',
-        'system/site',
         'system/theme',
         'system/widget'
 

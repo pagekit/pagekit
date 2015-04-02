@@ -8,7 +8,7 @@ use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
- * @Entity(tableClass="@system_node", eventPrefix="system.node")
+ * @Entity(tableClass="@system_node", eventPrefix="site.node")
  */
 class Node implements NodeInterface, \JsonSerializable
 {

@@ -127,12 +127,6 @@ return [
             'title' => 'Skip comment minimum idle time'
         ]
 
-    ],
-
-    'templates' => [
-
-        'blog.post.edit' => 'blog:views/tmpl/edit.php'
-
     ]
 
 ];
