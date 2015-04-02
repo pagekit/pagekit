@@ -1,4 +1,4 @@
-(function($, UIkit) {
+(function($) {
 
     function install (Vue) {
 
@@ -397,4 +397,4 @@
         Vue.use(install);
     }
 
-})(jQuery, UIkit);
+})(jQuery);

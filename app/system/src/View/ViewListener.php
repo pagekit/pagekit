@@ -36,9 +36,9 @@ class ViewListener implements EventSubscriberInterface
         $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
         $app['scripts']->register('system', 'app/system/app/system.js', ['jquery', 'tmpl', 'locale']);
         $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($debug ? 'vue.js' : 'vue.min.js'));
-        $app['scripts']->register('vue-system', 'app/system/app/vue-system.js', ['vue-resource', 'lodash', 'locale', 'uikit-pagination']);
-        $app['scripts']->register('vue-resource', 'app/system/app/vue-resource.js', ['vue']);
-        $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', ['vue']);
+        $app['scripts']->register('vue-system', 'app/system/app/vue-system.js', ['vue-resource', 'jquery', 'lodash', 'locale']);
+        $app['scripts']->register('vue-resource', 'app/system/app/vue-resource.js', 'vue');
+        $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', 'vue');
 
         $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 

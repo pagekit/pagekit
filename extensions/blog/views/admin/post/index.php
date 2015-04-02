@@ -1,4 +1,4 @@
-<?php $view->script('post-index', 'extensions/blog/app/post/index.js', ['vue-system']) ?>
+<?php $view->script('post-index', 'extensions/blog/app/post/index.js', ['vue-system', 'uikit-pagination']) ?>
 
 <div id="js-post" class="uk-form" v-cloak>
 
