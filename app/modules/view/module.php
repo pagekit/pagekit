@@ -53,6 +53,18 @@ return [
                 $view->addHelper(new MarkdownHelper($app['markdown']));
             }
 
+            $view->on('render', function($event) use ($app) {
+                if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
+                    $event->setTemplate($template);
+                }
+            }, 10);
+
+            $view->on('render', function($event) use ($app) {
+                if ($app['templating']->supports($template = $event->getTemplate())) {
+                    $event->setResult($app['templating']->render($template, $event->getParameters()));
+                }
+            }, -10);
+
             return $view;
         };
 

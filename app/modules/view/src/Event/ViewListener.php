@@ -33,30 +33,6 @@ class ViewListener implements EventSubscriberInterface
      * @param string                              $name
      * @param EventDispatcherInterface            $dispatcher
      */
-    public function onKernelRequest()
-    {
-        $app = App::getInstance();
-
-        $this->view->on('render', function($event) use ($app) {
-            if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
-                $event->setTemplate($template);
-            }
-        }, 10);
-
-        $this->view->on('render', function($event) use ($app) {
-            if ($app['templating']->supports($template = $event->getTemplate())) {
-                $event->setResult($app['templating']->render($template, $event->getParameters()));
-            }
-        }, -10);
-    }
-
-    /**
-     * Renders view layout.
-     *
-     * @param GetResponseForControllerResultEvent $event
-     * @param string                              $name
-     * @param EventDispatcherInterface            $dispatcher
-     */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
         $request = $event->getRequest();
@@ -85,8 +61,7 @@ class ViewListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.request' => 'onKernelRequest',
-            'kernel.view'    => ['onKernelView', -5]
+            'kernel.view' => ['onKernelView', -5]
         ];
     }
 }
