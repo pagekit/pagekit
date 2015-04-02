@@ -17,7 +17,7 @@ jQuery(function($) {
 
         ready: function() {
 
-            Installer = this.$resource('installer/installer/:action', {}, {'post': {method: 'POST'}});
+            Installer = this.$resource('installer/:action', {}, {'post': {method: 'POST'}});
 
         },
 
