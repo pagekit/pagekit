@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\View;
+use Pagekit\View\ViewInterface;
 use Pagekit\View\Asset\AssetManager;
 
 class ScriptHelper implements HelperInterface, \IteratorAggregate
@@ -15,10 +15,10 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param View         $view
-     * @param AssetManager $manager
+     * @param ViewInterface $view
+     * @param AssetManager  $manager
      */
-    public function __construct(View $view, AssetManager $manager = null)
+    public function __construct(ViewInterface $view, AssetManager $manager = null)
     {
         $this->manager = $manager ?: new AssetManager();
 

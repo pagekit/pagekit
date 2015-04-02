@@ -2,12 +2,12 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\View;
+use Pagekit\View\ViewInterface;
 
 class SectionHelper implements HelperInterface
 {
     /**
-     * @var View
+     * @var ViewInterface
      */
     protected $view;
 
@@ -24,9 +24,9 @@ class SectionHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param View $view
+     * @param ViewInterface $view
      */
-    public function __construct(View $view)
+    public function __construct(ViewInterface $view)
     {
         $this->view = $view;
         $this->view->on('render', function ($event) {

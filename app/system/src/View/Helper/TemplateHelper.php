@@ -3,7 +3,7 @@
 namespace Pagekit\System\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\View;
+use Pagekit\View\ViewInterface;
 use Pagekit\View\Helper\HelperInterface;
 
 class TemplateHelper implements HelperInterface
@@ -21,9 +21,9 @@ class TemplateHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param View $view
+     * @param ViewInterface $view
      */
-    public function __construct(View $view, Application $app)
+    public function __construct(ViewInterface $view, Application $app)
     {
         $view->on('head', function ($event) use ($view, $app) {
             if ($templates = $this->queued()) {

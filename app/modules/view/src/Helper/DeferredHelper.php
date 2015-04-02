@@ -3,7 +3,7 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\View;
+use Pagekit\View\ViewInterface;
 
 class DeferredHelper implements HelperInterface
 {
@@ -15,9 +15,9 @@ class DeferredHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param View $view
+     * @param ViewInterface $view
      */
-    public function __construct(View $view, Application $app)
+    public function __construct(ViewInterface $view, Application $app)
     {
         $view->on('render', function ($event) use ($app) {
 

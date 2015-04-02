@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\View;
+use Pagekit\View\ViewInterface;
 
 class DataHelper implements HelperInterface
 {
@@ -14,9 +14,9 @@ class DataHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param View $view
+     * @param ViewInterface $view
      */
-    public function __construct(View $view)
+    public function __construct(ViewInterface $view)
     {
         $view->on('head', function ($event) {
             $event->setResult($event->getResult().$this->render());
