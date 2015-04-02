@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Installer\Controller;
+namespace Pagekit\Installer;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
@@ -32,7 +32,7 @@ class InstallerController
     }
 
     /**
-     * @Response("app/modules/installer/views/install.php")
+     * @Response("app/installer/views/install.php")
      */
     public function indexAction()
     {

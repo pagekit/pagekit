@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link href="app/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="app/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
-        <?php $view->style('installer', 'app/modules/installer/assets/css/installer.css') ?>
+        <?php $view->style('installer', 'app/installer/assets/css/installer.css') ?>
         <?php $view->script('locale', 'app/modules/locale/assets/js/locale.js') ?>
         <?php $view->script('jquery', 'vendor/assets/jquery/dist/jquery.min.js') ?>
         <?php $view->script('uikit', 'vendor/assets/uikit/js/uikit.min.js') ?>
@@ -13,7 +13,7 @@
         <?php $view->script('vue-validator', 'app/modules/system/app/vue-validator.js') ?>
         <?php $view->script('vue-resource', 'app/modules/system/app/vue-resource.js') ?>
         <?php $view->script('vue-system', 'app/modules/system/app/vue-system.js') ?>
-        <?php $view->script('installer', 'app/modules/installer/app/installer.js') ?>
+        <?php $view->script('installer', 'app/installer/app/installer.js') ?>
         <?= $view->render('head') ?>
     </head>
     <body>

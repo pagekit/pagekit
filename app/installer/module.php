@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\System\Event\ResponseListener;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return [
@@ -12,15 +13,17 @@ return [
             return false;
         }
 
-        $app->error(function (NotFoundHttpException $e) use ($app) {
-            return $app['response']->redirect('@installer/installer');
-        });
-
         $app->on('kernel.request', function ($event) use ($app) {
             if ($locale = $app['request']->getPreferredLanguage()) {
                 $app['translator']->setLocale($locale);
             }
         });
+
+        $app->error(function (NotFoundHttpException $e) use ($app) {
+            return $app['response']->redirect('@installer/installer');
+        });
+
+        $app->subscribe(new ResponseListener());
     },
 
     'require' => [
@@ -35,14 +38,14 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\' => '../system/src',
+        'Pagekit\\System\\' => '../modules/system/src',
         'Pagekit\\Installer\\' => 'src'
 
     ],
 
     'controllers' => [
 
-        '@installer: /installer' => 'Pagekit\\Installer\\Controller\\InstallerController'
+        '@installer: /installer' => 'Pagekit\\Installer\\InstallerController'
 
     ],
 
