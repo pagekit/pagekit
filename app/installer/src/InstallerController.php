@@ -38,7 +38,6 @@ class InstallerController
     {
         return [
             '$meta' => ['title' => 'Pagekit Installer'],
-            '$pagekit' => ['url' => App::router()->getContext()->getBaseUrl(), 'csrf' => App::csrf()->generate()],
             'redirect' => App::url('/admin')
         ];
     }

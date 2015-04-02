@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\System\Event\ResponseListener;
+use Pagekit\System\View\ViewListener;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return [
@@ -23,7 +24,10 @@ return [
             return $app['response']->redirect('@installer/installer');
         });
 
-        $app->subscribe(new ResponseListener());
+        $app->subscribe(
+            new ResponseListener(),
+            new ViewListener()
+        );
     },
 
     'require' => [
@@ -38,7 +42,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\' => '../modules/system/src',
+        'Pagekit\\System\\' => '../system/src',
         'Pagekit\\Installer\\' => 'src'
 
     ],

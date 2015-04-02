@@ -40,7 +40,7 @@ class ViewListener implements EventSubscriberInterface
         $app['scripts']->register('vue-resource', 'app/system/app/vue-resource.js', ['vue']);
         $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', ['vue']);
 
-        $app['view']->data('$pagekit', ['version' => $app['version'], 'url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+        $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
         $app['view']->on('messages', function ($event) use ($app) {
             $event->setTemplate('system:views/messages/messages.php');

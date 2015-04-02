@@ -5,15 +5,7 @@
         <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="app/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
         <?php $view->style('installer', 'app/installer/assets/css/installer.css') ?>
-        <?php $view->script('locale', 'app/modules/locale/assets/js/locale.js') ?>
-        <?php $view->script('jquery', 'vendor/assets/jquery/dist/jquery.min.js') ?>
-        <?php $view->script('uikit', 'vendor/assets/uikit/js/uikit.min.js') ?>
-        <?php $view->script('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js') ?>
-        <?php $view->script('vue', 'vendor/assets/vue/dist/vue.min.js') ?>
-        <?php $view->script('vue-validator', 'app/system/app/vue-validator.js') ?>
-        <?php $view->script('vue-resource', 'app/system/app/vue-resource.js') ?>
-        <?php $view->script('vue-system', 'app/system/app/vue-system.js') ?>
-        <?php $view->script('installer', 'app/installer/app/installer.js') ?>
+        <?php $view->script('installer', 'app/installer/app/installer.js', ['vue-system', 'vue-validator', 'uikit-form-password']) ?>
         <?= $view->render('head') ?>
     </head>
     <body>
