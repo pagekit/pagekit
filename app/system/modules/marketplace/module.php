@@ -7,14 +7,14 @@ return [
     'main' => function ($app) {
 
         $app->on('system.init', function() use ($app) {
-            $app['scripts']->register('marketplace', 'app/modules/marketplace/app/marketplace.js', 'vue-system');
+            $app['scripts']->register('marketplace', 'app/system/modules/marketplace/app/marketplace.js', 'vue-system');
         });
 
     },
 
     'templates' => [
 
-        'marketplace.main' => 'app/modules/marketplace/views/main.php'
+        'marketplace.main' => 'app/system/modules/marketplace/views/main.php'
 
     ]
 

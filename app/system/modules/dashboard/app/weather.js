@@ -85,7 +85,7 @@ jQuery(function($) {
 
                     };
 
-                    return this.$url.static('app/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
+                    return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
                 }
 
             }

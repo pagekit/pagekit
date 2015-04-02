@@ -1,4 +1,4 @@
-<?php $view->script('weather', 'app/modules/dashboard/app/weather.js', ['vue-system', 'uikit-autocomplete']) ?>
+<?php $view->script('weather', 'app/system/modules/dashboard/app/weather.js', ['vue-system', 'uikit-autocomplete']) ?>
 
 <div class="uk-form-row">
     <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>

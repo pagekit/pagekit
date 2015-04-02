@@ -30,7 +30,7 @@ return [
 
         'dashboard' => [
             'label'    => 'Dashboard',
-            'icon'     => 'app/modules/dashboard/assets/images/icon-dashboard.svg',
+            'icon'     => 'app/system/modules/dashboard/assets/images/icon-dashboard.svg',
             'url'      => '@dashboard',
             'active'   => '@dashboard',
             'priority' => 0

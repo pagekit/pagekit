@@ -1,4 +1,4 @@
-<?php $view->script('user-index', 'app/modules/user/app/index.js', ['vue-system', 'gravatar']) ?>
+<?php $view->script('user-index', 'app/system/modules/user/app/index.js', ['vue-system', 'gravatar']) ?>
 
 <div id="js-user" class="uk-form" v-cloak>
 

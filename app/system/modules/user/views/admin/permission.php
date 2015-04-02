@@ -1,5 +1,5 @@
-<?php $view->style('permission-index', 'app/modules/user/assets/css/user.css') ?>
-<?php $view->script('permission-index', 'app/modules/user/app/role.js', ['vue-system', 'uikit-sticky']) ?>
+<?php $view->style('permission-index', 'app/system/modules/user/assets/css/user.css') ?>
+<?php $view->script('permission-index', 'app/system/modules/user/app/role.js', ['vue-system', 'uikit-sticky']) ?>
 
 <div id="js-permission" class="uk-form" v-cloak>
 

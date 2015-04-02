@@ -10,7 +10,7 @@ return [
 
         $app->on('system.init', function() use ($app) {
             $app['view']->addHelper(new FinderHelper());
-            $app['scripts']->register('finder', 'app/modules/finder/app/finder.js', ['uikit-upload', 'vue-system']);
+            $app['scripts']->register('finder', 'app/system/modules/finder/app/finder.js', ['uikit-upload', 'vue-system']);
         });
 
     },
@@ -31,9 +31,9 @@ return [
 
     'templates' => [
 
-        'finder.main'      => 'app/modules/finder/views/main.php',
-        'finder.table'     => 'app/modules/finder/views/table.php',
-        'finder.thumbnail' => 'app/modules/finder/views/thumbnail.php'
+        'finder.main'      => 'app/system/modules/finder/views/main.php',
+        'finder.table'     => 'app/system/modules/finder/views/table.php',
+        'finder.thumbnail' => 'app/system/modules/finder/views/thumbnail.php'
 
     ]
 
