@@ -2,17 +2,17 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link href="app/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link href="app/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
+        <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <link href="app/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
         <?php $view->style('installer', 'app/installer/assets/css/installer.css') ?>
         <?php $view->script('locale', 'app/modules/locale/assets/js/locale.js') ?>
         <?php $view->script('jquery', 'vendor/assets/jquery/dist/jquery.min.js') ?>
         <?php $view->script('uikit', 'vendor/assets/uikit/js/uikit.min.js') ?>
         <?php $view->script('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js') ?>
         <?php $view->script('vue', 'vendor/assets/vue/dist/vue.min.js') ?>
-        <?php $view->script('vue-validator', 'app/modules/system/app/vue-validator.js') ?>
-        <?php $view->script('vue-resource', 'app/modules/system/app/vue-resource.js') ?>
-        <?php $view->script('vue-system', 'app/modules/system/app/vue-system.js') ?>
+        <?php $view->script('vue-validator', 'app/system/app/vue-validator.js') ?>
+        <?php $view->script('vue-resource', 'app/system/app/vue-resource.js') ?>
+        <?php $view->script('vue-system', 'app/system/app/vue-system.js') ?>
         <?php $view->script('installer', 'app/installer/app/installer.js') ?>
         <?= $view->render('head') ?>
     </head>
@@ -23,7 +23,7 @@
             <div v-show="step == 'start'" class="tm-slide uk-vertical-align uk-text-center">
                 <div class="uk-vertical-align-middle tm-panel">
 
-                    <img class="uk-margin-top" src="app/modules/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
+                    <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
                     <p>
                         <button class="uk-button" v-on="click: step = 'database'">{{ 'Begin' | trans }}</button>
                     </p>

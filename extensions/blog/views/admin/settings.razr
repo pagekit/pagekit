@@ -1,4 +1,4 @@
-@script('blog.settings', 'app/modules/system/assets/js/settings/settings.js', 'requirejs')
+@script('blog.settings', 'app/system/assets/js/settings/settings.js', 'requirejs')
 
 <form class="uk-form uk-form-horizontal" action="@url('@system/extensions/savesettings', ['name' => 'blog'])" method="post">
 

@@ -1,0 +1,108 @@
+@import "uikit/uikit.less";
+@import "../../../assets/less/pagekit.less";
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html { overflow-y: scroll; }
+
+
+/* Navbar
+ ========================================================================== */
+
+.tm-navbar {
+    margin-bottom: 50px;
+    border-bottom: 1px solid darken(@navbar-background, 5%);
+    background: @navbar-background;
+    box-shadow: 0 1px 3px #ccc;
+}
+
+.tm-navbar .uk-navbar > .uk-navbar-content { padding-left: 10px; }
+.tm-navbar .uk-navbar-flip > .uk-navbar-content { padding-right: 10px; }
+
+
+/* Dropdown
+ ========================================================================== */
+
+/*
+ *
+ */
+
+[data-uk-dropdown*='click'] { cursor: pointer; }
+
+/*
+ * Navbar Dropdown Toggle
+ */
+
+
+
+/*
+ * Dropdown with Sortable Icons
+ */
+
+.tm-dropdown { width: 350px; }
+
+/* Phone landscape and smaller */
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-dropdown {
+        left: -10px;
+        right: -10px;
+        width: auto;
+        margin-top: 0;
+    }
+
+}
+
+.tm-sortable-dragged .pk-panel-icon {
+    background: @dropdown-background;
+    border: 1px solid @global-border;
+    border-radius: 3px;
+}
+
+
+/* Option toolbar
+========================================================================== */
+
+.tm-toolbar {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/* Main
+ ========================================================================== */
+
+.tm-main { margin-bottom: 25px; }
+
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-main { margin-bottom: 15px; }
+
+}
+
+
+/* Pages for login, error, etc
+ ========================================================================== */
+
+/*
+ * Helper class
+ */
+
+.tm-height-4-5 { height: 80%; }
+
+/*
+ * Container
+ */
+
+.tm-container {
+    width: 500px;
+    max-width: ~"calc(100% - 40px)";
+    padding: 20px;
+}
+
+.tm-container-small { width: 300px; }

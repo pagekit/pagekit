@@ -16,8 +16,8 @@ var fs      = require('fs'),
 
 // paths of the packages for the compile-task
 var pkgs = [
-    { path: 'app/modules/installer/', data: '../../../composer.json' },
-    { path: 'app/modules/theme/', data: '../../../composer.json' },
+    { path: 'app/installer/', data: '../../composer.json' },
+    { path: 'app/system/modules/theme/', data: '../../../../composer.json' },
     { path: 'themes/alpha/', data: 'theme.json' }
 ];
 

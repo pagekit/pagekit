@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="@url('app/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
-        <link href="@url('app/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
+        <link href="@url('app/system/modules/theme/favicon.ico')" rel="shortcut icon" type="image/x-icon">
+        <link href="@url('app/system/modules/theme/apple_touch_icon.png')" rel="apple-touch-icon-precomposed">
         @section('head')
         @style('theme', 'themes/alpha/css/theme.css')
         @script('jquery')

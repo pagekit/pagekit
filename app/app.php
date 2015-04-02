@@ -14,6 +14,7 @@ date_default_timezone_set('UTC');
 $app['module']->addPath([
     __DIR__.'/modules/*/module.php',
     __DIR__.'/installer/module.php',
+    __DIR__.'/system/module.php',
     $app['path.extensions'].'/*/extension.php',
     $app['path.themes'].'/*/theme.php'
 ]);
