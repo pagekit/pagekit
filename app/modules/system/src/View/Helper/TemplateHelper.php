@@ -2,7 +2,8 @@
 
 namespace Pagekit\System\View\Helper;
 
-use Pagekit\Application as App;
+use Pagekit\Application;
+use Pagekit\View\View;
 use Pagekit\View\Helper\HelperInterface;
 
 class TemplateHelper implements HelperInterface
@@ -16,6 +17,20 @@ class TemplateHelper implements HelperInterface
      * @var array
      */
     protected $queued = [];
+
+    /**
+     * Constructor.
+     *
+     * @param View $view
+     */
+    public function __construct(View $view, Application $app)
+    {
+        $view->on('head', function ($event) use ($view, $app) {
+            if ($templates = $this->queued()) {
+                $view->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
+            }
+        }, 10);
+    }
 
     /**
      * Add shortcut.

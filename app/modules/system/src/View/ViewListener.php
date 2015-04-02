@@ -46,13 +46,7 @@ class ViewListener implements EventSubscriberInterface
             $event->setTemplate('system:views/messages/messages.php');
         });
 
-        $app['view']->addHelper(new TemplateHelper());
-
-        $app['view']->on('head', function ($event) use ($app) {
-            if ($templates = $app['view']->tmpl()->queued()) {
-                $app['view']->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
-            }
-        }, 10);
+        $app['view']->addHelper(new TemplateHelper($app['view'], $app));
 
         foreach ($app['module'] as $module) {
             if (isset($module->templates)) {
