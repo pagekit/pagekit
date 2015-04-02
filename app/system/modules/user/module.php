@@ -106,7 +106,7 @@ return [
             'priority' => 15
         ],
         'user: sub-user' => [
-            'label'    => 'Users',
+            'label'    => 'List',
             'parent'   => 'user',
             'url'      => '@user',
             'active'   => '@user*',

@@ -15,11 +15,6 @@ class View implements ViewInterface
     protected $events;
 
     /**
-     * @var string|false
-     */
-    protected $layout = false;
-
-    /**
      * @var array
      */
     protected $globals = [];
@@ -47,22 +42,6 @@ class View implements ViewInterface
     public function __invoke($name, array $parameters = [])
     {
         return $this->render($name, $parameters);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLayout()
-    {
-        return $this->layout;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLayout($layout)
-    {
-        $this->layout = $layout;
     }
 
     /**

@@ -8,8 +8,6 @@ return [
 
         $app->on('system.admin', function () use ($app) {
 
-            $app['view']->setLayout($this->path.'/templates/template.php');
-
             $app['view']->on('toolbar', function ($event) {
                 $event->setResult(sprintf('<div class="uk-clearfix uk-margin">%s</div>', $event->getResult()));
             });
@@ -33,6 +31,8 @@ return [
                 }
 
             });
+
+            $app['view']->map('layout', $this->path.'/templates/template.php');
 
             $app->on('kernel.view', function () use ($app) {
 
