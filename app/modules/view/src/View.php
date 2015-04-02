@@ -45,6 +45,22 @@ class View implements ViewInterface
     }
 
     /**
+     * Gets a helper or calls the helpers invoke method.
+     *
+     * @param  string $name
+     * @param  array  $args
+     * @return mixed
+     */
+    public function __call($name, $args)
+    {
+        if (!isset($this->helpers[$name])) {
+            throw new \InvalidArgumentException(sprintf('Undefined helper "%s"', $name));
+        }
+
+        return $args ? call_user_func_array($this->helpers[$name], $args) : $this->helpers[$name];
+    }
+
+    /**
      * Gets the global parameters.
      *
      * @return array
@@ -110,11 +126,7 @@ class View implements ViewInterface
     }
 
     /**
-     * Renders a view.
-     *
-     * @param  string $name
-     * @param  array  $parameters
-     * @return string
+     * {@inheritdoc}
      */
     public function render($name, array $parameters = [])
     {
@@ -126,21 +138,5 @@ class View implements ViewInterface
         }
 
         return $event->getResult();
-    }
-
-    /**
-     * Gets a helper or calls the helpers invoke method.
-     *
-     * @param  string $name
-     * @param  array  $args
-     * @return mixed
-     */
-    public function __call($name, $args)
-    {
-        if (!isset($this->helpers[$name])) {
-            throw new \InvalidArgumentException(sprintf('Undefined helper "%s"', $name));
-        }
-
-        return $args ? call_user_func_array($this->helpers[$name], $args) : $this->helpers[$name];
     }
 }

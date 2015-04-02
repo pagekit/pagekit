@@ -18,7 +18,7 @@ class ThemeListener implements EventSubscriberInterface
         $app['module']->load($theme);
         if ($app['theme.site'] = $app['module']->get($theme)) {
             $app->on('system.site', function () use ($app) {
-                $app['view']->setLayout($app['theme.site']->getLayout());
+                $app['view']->map('layout', $app['theme.site']->getLayout());
             });
         }
     }
