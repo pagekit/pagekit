@@ -8,7 +8,7 @@
     <?php if ($user->hasAccess('system: access settings')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/settings') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-settings.svg') ?>" width="50" height="50" alt="<?= __('Settings') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-settings.svg') ?>" width="50" height="50" alt="<?= __('Settings') ?>">
             <p><?= __('Settings') ?></p>
         </a>
     </li>
@@ -17,7 +17,7 @@
     <?php if ($user->hasAccess('system: manage extensions')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/extensions') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-extensions.svg') ?>" width="50" height="50" alt="<?= __('Extensions') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-extensions.svg') ?>" width="50" height="50" alt="<?= __('Extensions') ?>">
             <p><?= __('Extensions') ?></p>
         </a>
     </li>
@@ -26,7 +26,7 @@
     <?php if ($user->hasAccess('system: manage themes')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/themes') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-themes.svg') ?>" width="50" height="50" alt="<?= __('Themes') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-themes.svg') ?>" width="50" height="50" alt="<?= __('Themes') ?>">
             <p><?= __('Themes') ?></p>
         </a>
     </li>
@@ -34,7 +34,7 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@dashboard/settings') ?>">
-            <img src="<?= $view->url()->getStatic('dashboard: assets/images/icon-dashboard.svg') ?>" width="50" height="50" alt="<?= __('Dashboard') ?>">
+            <img src="<?= $view->url()->getStatic('system/dashboard:assets/images/icon-dashboard.svg') ?>" width="50" height="50" alt="<?= __('Dashboard') ?>">
             <p><?= __('Dashboard') ?></p>
         </a>
     </li>
@@ -42,7 +42,7 @@
     <?php if ($user->hasAccess('system: manage storage')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/system/storage') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-storage.svg') ?>" width="50" height="50" alt="<?= __('Storage') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-storage.svg') ?>" width="50" height="50" alt="<?= __('Storage') ?>">
             <p><?= __('Storage') ?></p>
         </a>
     </li>
@@ -51,7 +51,7 @@
     <?php if ($user->hasAccess('system: software updates')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/update') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-update.svg') ?>" width="50" height="50" alt="<?= __('Update') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-update.svg') ?>" width="50" height="50" alt="<?= __('Update') ?>">
             <p><?= __('Update') ?></p>
         </a>
     </li>
@@ -59,14 +59,14 @@
 
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/system/info') ?>">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-info.svg') ?>" width="50" height="50" alt="<?= __('Info') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-info.svg') ?>" width="50" height="50" alt="<?= __('Info') ?>">
             <p><?= __('Info') ?></p>
         </a>
     </li>
 
     <li class="uk-width">
         <a id="clearCache" class="uk-panel pk-panel-icon">
-            <img src="<?= $view->url()->getStatic('system: assets/images/icon-cache.svg') ?>" width="50" height="50" alt="<?= __('Clear Cache') ?>">
+            <img src="<?= $view->url()->getStatic('system:assets/images/icon-cache.svg') ?>" width="50" height="50" alt="<?= __('Clear Cache') ?>">
             <p><?= __('Clear Cache') ?></p>
         </a>
     </li>
@@ -83,7 +83,7 @@
     <?php foreach ($packages as $extension => $package): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/extensions/settings', ['name' => $extension]) ?>">
-            <img class="uk-img-preserve" src="<?= $view->url()->getStatic('system: assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= $package->getTitle() ?>">
+            <img class="uk-img-preserve" src="<?= $view->url()->getStatic('system:assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= $package->getTitle() ?>">
             <p><?= $package->getTitle() ?></p>
         </a>
     </li>
