@@ -2,7 +2,7 @@
 
 <div id="js-post" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar') ?>
 
     <div class="uk-float-left">
 
@@ -29,7 +29,7 @@
 
     </div>
 
-    <?php $view->section()->end() ?>
+    <?php $view->section()->stop(true) ?>
 
     <p v-show="!posts.length" class="uk-alert uk-alert-info">{{ 'No posts found.' | trans }}</p>
 

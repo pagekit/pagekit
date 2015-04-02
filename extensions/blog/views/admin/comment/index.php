@@ -3,7 +3,7 @@
 
 <div id="js-comments" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar', 'show') ?>
+    <?php $view->section()->start('toolbar') ?>
 
         <div class="uk-float-left">
 
@@ -28,7 +28,7 @@
 
         </div>
 
-    <?php $view->section()->end() ?>
+    <?php $view->section()->stop(true) ?>
 
     <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
 
