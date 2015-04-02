@@ -9,12 +9,13 @@
 
 @navbar-background:                             #3a94e0;
 @navbar-color:                                  @global-contrast-color;
-@navbar-link-color:                             rgba(255,255,255,0.6);
+@navbar-link-color:                             rgba(255,255,255,0.7);
 @navbar-link-hover-color:                       @global-contrast-color;
 
-@navbar-nav-height:                             64px;
-@navbar-nav-line-height:                        @navbar-nav-height;
-@navbar-nav-color:                              rgba(255,255,255,0.6);
+@navbar-nav-height:                             40px;
+@navbar-nav-line-height:                        30px;
+@navbar-nav-padding-horizontal:                 30px;
+@navbar-nav-color:                              rgba(255,255,255,0.7);
 @navbar-nav-font-size:                          @global-font-size;
 @navbar-nav-font-weight:                        300;
 @navbar-nav-font-family:                        "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -43,7 +44,10 @@
 // Sub-object: `uk-navbar-nav`
 // ========================================================================
 
-.hook-navbar-nav() { text-transform: uppercase; }
+.hook-navbar-nav() {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 // Hover
 .hook-navbar-nav-hover() {}
@@ -66,6 +70,19 @@
 
 .hook-navbar-misc() {
 
+    .uk-navbar-nav > .uk-active:after {
+        content: "";
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        bottom: 0;
+        border-bottom: 2px solid #f0f657;
+    }
+
+    /*
+     * `uk-navbar-brand`
+     */
+
     .uk-navbar-content > a:hover { text-decoration: none; }
 
     /*
@@ -73,29 +90,8 @@
      */
 
     .uk-navbar-brand {
-        line-height: @navbar-nav-height;
         font-weight: 300;
         text-transform: uppercase;
-    }
-
-    .uk-navbar-brand > * {
-        line-height: @global-line-height;
-        font-weight: normal;
-        text-transform: none;
-    }
-
-    /*
-     * Divider
-     */
-
-    .uk-navbar-brand + .uk-navbar-nav > :first-child > :before {
-        content: "";
-        position: absolute;
-        left: -1px;
-        top: 50%;
-        height: 20px;
-        margin-top: -10px;
-        border-left: 1px solid rgba(255,255,255,0.6);;
     }
 
 }

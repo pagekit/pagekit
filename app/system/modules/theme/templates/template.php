@@ -13,16 +13,15 @@
     </head>
     <body>
 
-        <div class="tm-navbar">
+        <header class="tm-header">
             <div class="uk-container uk-container-center">
 
-                <nav class="uk-navbar">
+                <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-hidden-small">
+                    <div class="tm-header-primary uk-flex uk-flex-middle" data-uk-dropdown="{mode:'click'}">
 
-                    <div class="uk-navbar-brand uk-hidden-small" data-uk-dropdown="{mode:'click'}">
+                        <img class="tm-icon" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
 
-                        <img class="uk-margin-right" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
-
-                        <?= __($subnav) ?>
+                        <h1 class="tm-heading"><?= __($subnav) ?></h1>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
@@ -38,6 +37,21 @@
                         </div>
 
                     </div>
+                    <div class="tm-contrast">
+
+                        <ul class="uk-grid uk-grid-small uk-flex-middle">
+                            <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="<?= $view->url()->base() ?>" title="<?= __('Visit Site') ?>" target="_blank"></a></li>
+                            <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>" title="<?= __('Logout') ?>"></a></li>
+                            <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>" title="<?= __('Profile') ?>">
+                                <?= $view->gravatar($user->getEmail(), ['size' => 64, 'attrs' => ['width' => '32', 'height' => '32', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                                <?= $user->getUsername() ?>
+                            </a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <nav class="uk-navbar tm-navbar">
 
                     <?php if ($subnav->getChildren()) : ?>
                     <ul class="uk-navbar-nav uk-hidden-small">
@@ -54,20 +68,6 @@
                     </a>
 
                     <div class="uk-navbar-flip">
-
-                        <div class="uk-navbar-content uk-hidden-small">
-                            <div class="uk-display-inline-block" data-uk-dropdown="{mode:'click'}">
-                                <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
-                                <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
-                                    <ul class="uk-nav uk-nav-dropdown">
-                                        <li class="uk-nav-header"><?= $user->getUsername() ?></li>
-                                        <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                                        <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                                        <li><a href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
 
                         <a class="uk-navbar-content uk-visible-small" href="#offcanvas-flip" data-uk-offcanvas>
                             <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
@@ -90,11 +90,11 @@
                 </nav>
 
             </div>
-        </div>
+        </header>
 
-        <div class="tm-main uk-container uk-container-center">
+        <main class="tm-main uk-container uk-container-center">
             <?= $view->render('content') ?>
-        </div>
+        </main>
 
         <div class="uk-hidden"><?= $view->render('messages') ?></div>
 

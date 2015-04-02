@@ -12,34 +12,73 @@
 html { overflow-y: scroll; }
 
 
-/* Navbar
+/* Header
  ========================================================================== */
 
-.tm-navbar {
-    margin-bottom: 50px;
-    border-bottom: 1px solid darken(@navbar-background, 5%);
+.tm-header {
+    margin-bottom: 70px;
     background: @navbar-background;
-    box-shadow: 0 1px 3px #ccc;
+    box-shadow: 0 1px 3px #eee;
+    color: @global-contrast-color;
 }
 
-.tm-navbar .uk-navbar > .uk-navbar-content { padding-left: 10px; }
-.tm-navbar .uk-navbar-flip > .uk-navbar-content { padding-right: 10px; }
+.tm-headerbar {
+    margin: 60px 0;
+}
+
+.tm-header-primary {
+    position: relative;
+    margin-left: -(24px + 30px);
+}
+
+/*
+ * Icon
+ */
+
+.tm-icon {
+    margin-right: 30px;
+}
+
+/*
+ * Heading
+ */
+
+.tm-heading {
+    margin: 0;
+    color: @global-contrast-color;
+}
+
+
+/*
+ * Navbar
+ */
+
+.tm-navbar {
+    margin-top: -(@navbar-nav-height);
+    margin-left: -(@navbar-nav-padding-horizontal - 1px);
+}
+
+/* Contrast
+ ========================================================================== */
+
+.tm-contrast a { color: rgba(255,255,255,0.7); }
+
+.tm-contrast a:hover { color: @global-contrast-color; }
+
+
+/*
+ * Icon Hover
+ */
+
+.tm-contrast .uk-icon-hover { color: rgba(255,255,255,0.5); }
+
+.tm-contrast .uk-icon-hover:hover { color: @global-contrast-color; }
 
 
 /* Dropdown
  ========================================================================== */
 
-/*
- *
- */
-
 [data-uk-dropdown*='click'] { cursor: pointer; }
-
-/*
- * Navbar Dropdown Toggle
- */
-
-
 
 /*
  * Dropdown with Sortable Icons
