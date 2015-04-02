@@ -24,11 +24,11 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->dashboard = App::module('dashboard');
+        $this->dashboard = App::module('system/dashboard');
     }
 
     /**
-     * @Response("dashboard:views/admin/index.php")
+     * @Response("system/dashboard:views/admin/index.php")
      */
     public function indexAction()
     {
@@ -54,7 +54,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @Response("dashboard:views/admin/settings.php")
+     * @Response("system/dashboard:views/admin/settings.php")
      */
     public function settingsAction()
     {
@@ -71,7 +71,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"type"})
-     * @Response("dashboard:views/admin/edit.php")
+     * @Response("system/dashboard:views/admin/edit.php")
      */
     public function addAction($id)
     {
@@ -101,7 +101,7 @@ class DashboardController extends Controller
 
     /**
      * @Request({"id"})
-     * @Response("dashboard:views/admin/edit.php")
+     * @Response("system/dashboard:views/admin/edit.php")
      */
     public function editAction($id)
     {

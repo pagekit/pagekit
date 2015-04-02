@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'dashboard',
+    'name' => 'system/dashboard',
 
     'main' => 'Pagekit\\Dashboard\\DashboardModule',
 
@@ -14,7 +14,7 @@ return [
 
     'resources' => [
 
-        'dashboard:' => ''
+        'system/dashboard:' => ''
 
     ],
 
@@ -30,7 +30,7 @@ return [
 
         'dashboard' => [
             'label'    => 'Dashboard',
-            'icon'     => 'app/system/modules/dashboard/assets/images/icon-dashboard.svg',
+            'icon'     => 'system/dashboard:assets/images/icon-dashboard.svg',
             'url'      => '@dashboard',
             'active'   => '@dashboard',
             'priority' => 0
