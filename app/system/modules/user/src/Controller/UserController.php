@@ -14,7 +14,7 @@ class UserController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("user:views/admin/index.php")
+     * @Response("system/user:views/admin/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -26,7 +26,7 @@ class UserController
                 'title' => __('Users')
             ],
             '$config' => [
-                'emailVerification' => App::module('user')->config('require_verification'),
+                'emailVerification' => App::module('system/user')->config('require_verification'),
                 'filter'            => $filter,
                 'page'              => $page
             ],
@@ -40,7 +40,7 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("user:views/admin/edit.php")
+     * @Response("system/user:views/admin/edit.php")
      */
     public function editAction($id = 0)
     {
@@ -57,7 +57,7 @@ class UserController
                 'title' => $id ? __('Edit User') : __('Add User')
             ],
             '$config' => [
-                'emailVerification' => App::module('user')->config('require_verification'),
+                'emailVerification' => App::module('system/user')->config('require_verification'),
                 'currentUser'       => App::user()->getId()
             ],
             '$data' => [

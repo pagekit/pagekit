@@ -11,7 +11,7 @@ use Pagekit\User\Entity\Role;
 class PermissionController
 {
     /**
-     * @Response("user:views/admin/permission.php")
+     * @Response("system/user:views/admin/permission.php")
      */
     public function indexAction()
     {

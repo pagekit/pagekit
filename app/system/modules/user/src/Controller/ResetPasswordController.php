@@ -10,7 +10,7 @@ use Pagekit\User\Entity\User;
 class ResetPasswordController extends Controller
 {
     /**
-     * @Response("user:views/reset/request.php")
+     * @Response("system/user:views/reset/request.php")
      */
     public function indexAction()
     {
@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"email"})
-     * @Response("user:views/reset/request.php")
+     * @Response("system/user:views/reset/request.php")
      */
     public function resetAction($email)
     {
@@ -58,7 +58,7 @@ class ResetPasswordController extends Controller
                 $mail = App::mailer()->create();
                 $mail->setTo($user->getEmail())
                      ->setSubject(__('Reset password for %site%.', ['%site%' => App::system()->config('site.title')]))
-                     ->setBody(App::view('user:views/mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
+                     ->setBody(App::view('system/user:views/mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
                      ->send();
 
             } catch (\Exception $e) {
@@ -80,7 +80,7 @@ class ResetPasswordController extends Controller
 
     /**
      * @Request({"user", "key"})
-     * @Response("user:views/reset/confirm.php")
+     * @Response("system/user:views/reset/confirm.php")
      */
     public function confirmAction($username = "", $activation = "")
     {

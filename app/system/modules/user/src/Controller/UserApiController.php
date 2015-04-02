@@ -56,7 +56,7 @@ class UserApiController
             });
         }
 
-        $limit = App::module('user')->config('users_per_page');
+        $limit = App::module('system/user')->config('users_per_page');
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));

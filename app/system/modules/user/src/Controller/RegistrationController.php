@@ -18,11 +18,11 @@ class RegistrationController extends Controller
 
     public function __construct()
     {
-        $this->module = App::module('user');
+        $this->module = App::module('system/user');
     }
 
     /**
-     * @Response("user:views/registration.php")
+     * @Response("system/user:views/registration.php")
      */
     public function indexAction()
     {
@@ -206,7 +206,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Welcome to %site%!', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}
@@ -219,7 +219,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
                  ->setSubject(__('Activate your %site% account.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {
@@ -234,7 +234,7 @@ class RegistrationController extends Controller
             $mail = App::mailer()->create();
             $mail->setTo(App::module('mail')->config('from_address'))
                  ->setSubject(__('Approve an account at %site%.', ['%site%' => App::system()->config('site.title')]))
-                 ->setBody(App::view('user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
+                 ->setBody(App::view('system/user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
         } catch (\Exception $e) {}

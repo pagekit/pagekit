@@ -12,7 +12,7 @@ use Pagekit\User\Widget\LoginWidget;
 
 return [
 
-    'name' => 'user',
+    'name' => 'system/user',
 
     'main' => function ($app) {
 
@@ -69,7 +69,7 @@ return [
 
     'resources' => [
 
-        'user:' => ''
+        'system/user:' => ''
 
     ],
 
@@ -99,7 +99,7 @@ return [
 
         'user' => [
             'label'    => 'Users',
-            'icon'     => 'user:assets/images/icon-users.svg',
+            'icon'     => 'system/user:assets/images/icon-users.svg',
             'url'      => '@user',
             'active'   => '@user*',
             'access'   => 'user: manage users || user: manage user permissions',

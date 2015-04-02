@@ -136,7 +136,6 @@ return [
         'package',
         'site',
         'tree',
-        'user',
         'system/console',
         'system/content',
         'system/editor',
@@ -144,6 +143,7 @@ return [
         'system/marketplace',
         'system/menu',
         'system/theme',
+        'system/user',
         'system/widget'
 
     ],
