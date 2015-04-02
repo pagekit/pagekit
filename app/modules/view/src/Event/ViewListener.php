@@ -38,28 +38,6 @@ class ViewListener implements EventSubscriberInterface
         $app = App::getInstance();
 
         $this->view->on('render', function($event) use ($app) {
-
-            $template = $event->getTemplate();
-
-            if ($template == 'head') {
-
-                $renderEvent = clone $event;
-                $placeholder = sprintf('<!-- %s -->', uniqid());
-
-                $app->on('kernel.response', function($event) use ($renderEvent, $template, $placeholder) {
-
-                    $response = $event->getResponse();
-                    $response->setContent(str_replace($placeholder, $renderEvent->dispatch($template)->getResult(), $response->getContent()));
-
-                }, 10);
-
-                $event->setResult($placeholder);
-                $event->stopPropagation();
-            }
-
-        }, 15);
-
-        $this->view->on('render', function($event) use ($app) {
             if (isset($app['locator']) and $template = $app['locator']->get($event->getTemplate())) {
                 $event->setTemplate($template);
             }

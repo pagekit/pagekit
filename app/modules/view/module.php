@@ -6,6 +6,7 @@ use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Event\ViewListener;
 use Pagekit\View\Helper\DateHelper;
+use Pagekit\View\Helper\DeferredHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\TemplateHelper;
@@ -34,6 +35,7 @@ return [
                 new SectionHelper($view),
                 new StyleHelper($view, $app['styles']),
                 new ScriptHelper($view, $app['scripts']),
+                new DeferredHelper($view, $app),
                 new UrlHelper($app['url']),
                 new GravatarHelper(),
                 new TemplateHelper()

@@ -86,6 +86,7 @@ return [
             $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
 
             $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
+            $app['view']->defer('head');
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
