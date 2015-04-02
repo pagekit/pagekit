@@ -20,8 +20,8 @@
                 var self = this, el = dir.el, form = dir.form;
 
                 if (!this.validators[form]) {
-                    this.validators[form] = [];
 
+                    this.validators[form] = [];
                     this.validators[form].handler = function (e) {
                         e.preventDefault();
                         _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
@@ -31,7 +31,9 @@
                 }
 
                 if (this.elements.indexOf(el) == -1) {
+
                     this.elements.push(el);
+
                     _.on(el, 'blur', dir.listener);
                     _.on(el, 'input', dir.listener);
                 }
