@@ -12,35 +12,25 @@
 @dropdown-color:                                @global-color;
 @dropdown-divider-border:                       @global-border;
 
-@dropdown-navbar-margin:                        5px;
+@dropdown-navbar-margin:                        20px;
 @dropdown-navbar-background:                    #fff;
 @dropdown-navbar-color:                         @global-color;
 @dropdown-navbar-animation:                     uk-fade;
-
-//
-// New
-//
-
-@dropdown-border:                               @global-border;
 
 
 // Component
 // ========================================================================
 
 .hook-dropdown() {
-    border: 1px solid @dropdown-border;
-    border-radius: @global-border-radius;
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
 }
 
 
 // Modifier: `uk-dropdown-navbar`
 // ========================================================================
 
-.hook-dropdown-navbar() {
-    min-width: 150px;
-    width: auto;
-    white-space: nowrap;
-}
+.hook-dropdown-navbar() { border-radius: 0; }
 
 
 // Miscellaneous

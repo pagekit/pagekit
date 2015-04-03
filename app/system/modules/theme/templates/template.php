@@ -14,17 +14,22 @@
     <body>
 
         <header class="tm-header">
+
+            <!-- <div class="tm-brand uk-flex uk-flex-middle">
+                <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
+            </div> -->
+
             <div class="uk-container uk-container-center">
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-hidden-small">
-                    <div class="tm-header-primary uk-flex uk-flex-middle" data-uk-dropdown="{mode:'click'}">
+                    <div class="tm-headerbar-primary uk-flex uk-flex-middle" data-uk-dropdown="{mode:'click'}">
 
-                        <img class="tm-icon" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
+                        <i class="tm-icon-menu uk-icon-bars"></i>
 
                         <h1 class="tm-heading"><?= __($subnav) ?></h1>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
-                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-admin-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                             <?php foreach ($nav as $item): ?>
                                 <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
                                     <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
@@ -39,11 +44,11 @@
                     </div>
                     <div class="tm-contrast">
 
-                        <ul class="uk-grid uk-grid-small uk-flex-middle">
+                        <ul class="uk-grid uk-grid-medium uk-flex-middle">
                             <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="<?= $view->url()->base() ?>" title="<?= __('Visit Site') ?>" target="_blank"></a></li>
                             <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>" title="<?= __('Logout') ?>"></a></li>
                             <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>" title="<?= __('Profile') ?>">
-                                <?= $view->gravatar($user->getEmail(), ['size' => 64, 'attrs' => ['width' => '32', 'height' => '32', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                                <?= $view->gravatar($user->getEmail(), ['size' => 64, 'attrs' => ['width' => '32', 'height' => '32', 'class' => 'uk-border-circle uk-margin-small-right', 'alt' => $user->getUsername()]]) ?>
                                 <?= $user->getUsername() ?>
                             </a></li>
                         </ul>
@@ -51,43 +56,29 @@
                     </div>
                 </div>
 
-                <nav class="uk-navbar tm-navbar">
-
-                    <?php if ($subnav->getChildren()) : ?>
-                    <ul class="uk-navbar-nav uk-hidden-small">
+                <?php if ($subnav->getChildren()) : ?>
+                <nav class="uk-navbar tm-navbar uk-hidden-small">
+                    <ul class="uk-navbar-nav">
                         <?php foreach ($subnav->getChildren() as $item): ?>
                         <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
                             <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
                         </li>
                         <?php endforeach ?>
                     </ul>
-                    <?php endif ?>
+                </nav>
+                <?php endif ?>
 
-                    <a class="uk-navbar-content uk-visible-small" href="#offcanvas" data-uk-offcanvas>
-                        <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>">
+                <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-visible-small">
+                    <a href="#offcanvas" data-uk-offcanvas>
+                        <i class="tm-icon-menu uk-icon-bars"></i>
                     </a>
 
-                    <div class="uk-navbar-flip">
+                    <h1 class="tm-heading uk-h3"><?= __($subnav) ?></h1>
 
-                        <a class="uk-navbar-content uk-visible-small" href="#offcanvas-flip" data-uk-offcanvas>
-                            <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
-                        </a>
-
-                    </div>
-
-                    <div class="uk-navbar-content uk-navbar-center uk-visible-small">
-                        <?php
-                            if ($subnav->getChildren()) {
-                                foreach ($subnav->getChildren() as $item) {
-                                    echo $subnav->getAttribute('active') ? __($item) : '';
-                                }
-                            } else {
-                                echo __($subnav);
-                            }
-                        ?>
-                    </div>
-
-                </nav>
+                    <a href="#offcanvas-flip" data-uk-offcanvas>
+                        <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                    </a>
+                </div>
 
             </div>
         </header>
@@ -100,6 +91,8 @@
 
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
+
+                <!-- <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>"> -->
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <?php if ($subnav->getChildren()): ?>

@@ -16,32 +16,71 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 .tm-header {
-    margin-bottom: 70px;
+    position: relative;
+    margin-bottom: 65px;
     background: @navbar-background;
-    box-shadow: 0 1px 3px #eee;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     color: @global-contrast-color;
 }
 
-.tm-headerbar {
-    margin: 60px 0;
+
+/* Brand
+ ========================================================================== */
+
+.tm-brand {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50px;
 }
 
-.tm-header-primary {
-    position: relative;
-    margin-left: -(24px + 30px);
+
+/* Headerbar
+ ========================================================================== */
+
+.tm-headerbar { height: 60px; }
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-headerbar { height: 150px; }
+
 }
 
-/*
- * Icon
- */
+.tm-headerbar-primary { position: relative; }
 
-.tm-icon {
-    margin-right: 30px;
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    .tm-headerbar-primary { margin-left: -(19px + 20px); }
+    
 }
 
-/*
- * Heading
- */
+
+/* Icon Menu
+ ========================================================================== */
+
+.tm-icon-menu {
+    color: @global-contrast-color;
+    font-size: 22px;
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-icon-menu {
+        margin-right: 20px;
+        color: rgba(255,255,255,0.5);
+    }
+
+    .tm-headerbar-primary:hover .tm-icon-menu,
+    .tm-headerbar-primary.uk-open .tm-icon-menu { color: @global-contrast-color; }
+
+}
+
+
+/* Heading
+ ========================================================================== */
 
 .tm-heading {
     margin: 0;
@@ -49,14 +88,14 @@ html { overflow-y: scroll; }
 }
 
 
-/*
- * Navbar
- */
+/* Navbar
+ ========================================================================== */
 
 .tm-navbar {
     margin-top: -(@navbar-nav-height);
     margin-left: -(@navbar-nav-padding-horizontal - 1px);
 }
+
 
 /* Contrast
  ========================================================================== */
@@ -85,18 +124,6 @@ html { overflow-y: scroll; }
  */
 
 .tm-dropdown { width: 350px; }
-
-/* Phone landscape and smaller */
-@media (max-width: @breakpoint-small-max) {
-
-    .tm-dropdown {
-        left: -10px;
-        right: -10px;
-        width: auto;
-        margin-top: 0;
-    }
-
-}
 
 .tm-sortable-dragged .pk-panel-icon {
     background: @dropdown-background;

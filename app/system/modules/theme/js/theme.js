@@ -45,7 +45,7 @@ jQuery(function($) {
     });
 
     // save current menu order
-    $('.js-admin-menu').on('stop.uk.sortable', function() {
+    $('.js-menu').on('stop.uk.sortable', function() {
 
         var data = {};
 
