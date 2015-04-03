@@ -8,6 +8,14 @@ return [
 
         $app->on('system.admin', function () use ($app) {
 
+            $app['view']->on('layout', function ($event) use ($app) {
+                $event->setTemplate($this->path.'/templates/template.php');
+                $event->setParameter('user', $app['user']);
+                $event->setParameter('nav', $app['admin.menu']);
+                $event->setParameter('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
+                $event->setParameter('subset', 'latin,latin-ext');
+            });
+
             $app['view']->on('toolbar', function ($event) {
                 $event->setResult(sprintf('<div class="uk-clearfix uk-margin">%s</div>', $event->getResult()));
             });
@@ -29,22 +37,6 @@ return [
                 if ($result) {
                     $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
                 }
-
-            });
-
-            $app['view']->map('layout', $this->path.'/templates/template.php');
-
-            $app->on('kernel.view', function () use ($app) {
-
-                // set user
-                $app['view']->addGlobal('user', $app['user']);
-
-                // set menus
-                $app['view']->addGlobal('nav', $app['admin.menu']);
-                $app['view']->addGlobal('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
-
-                // set font subset
-                $app['view']->addGlobal('subset', 'latin,latin-ext');
 
             });
 
