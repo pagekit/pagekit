@@ -27,6 +27,7 @@ return [
         $app['view'] = function ($app) {
 
             $view = new View();
+            $view->addEngine(new PhpEngine());
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
             $view->addHelpers([
@@ -59,12 +60,6 @@ return [
                 }
             }, 10);
 
-            $view->on('render', function($event) use ($app) {
-                if ($app['templating']->supports($template = $event->getTemplate())) {
-                    $event->setResult($app['templating']->render($template, $event->getParameters()));
-                }
-            }, -10);
-
             return $view;
         };
 
@@ -78,10 +73,6 @@ return [
 
         $app['scripts'] = function ($app) {
             return new AssetManager($app['assets']);
-        };
-
-        $app['templating'] = function() {
-            return new PhpEngine();
         };
 
         $app->on('kernel.boot', function () use ($app) {

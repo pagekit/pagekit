@@ -6,6 +6,8 @@ use Pagekit\View\Event\RenderEvent;
 use Pagekit\View\Helper\HelperInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Templating\DelegatingEngine;
+use Symfony\Component\Templating\EngineInterface;
 
 class View implements ViewInterface
 {
@@ -13,6 +15,11 @@ class View implements ViewInterface
      * @var EventDispatcherInterface
      */
     protected $events;
+
+    /**
+     * @var EngineInterface
+     */
+    protected $engine;
 
     /**
      * @var array
@@ -28,10 +35,12 @@ class View implements ViewInterface
      * Constructor.
      *
      * @param EventDispatcherInterface $events
+     * @param EngineInterface          $engine
      */
-    public function __construct(EventDispatcherInterface $events = null)
+    public function __construct(EventDispatcherInterface $events = null, EngineInterface $engine = null)
     {
         $this->events = $events ?: new EventDispatcher();
+        $this->engine = $engine ?: new DelegatingEngine();
     }
 
     /**
@@ -61,6 +70,26 @@ class View implements ViewInterface
     }
 
     /**
+     * Gets the templating engine.
+     *
+     * @return array
+     */
+    public function getEngine()
+    {
+        return $this->engine;
+    }
+
+    /**
+     * Adds a templating engine.
+     *
+     * @param EngineInterface $engine
+     */
+    public function addEngine(EngineInterface $engine)
+    {
+        $this->engine->addEngine($engine);
+    }
+
+    /**
      * Gets the global parameters.
      *
      * @return array
@@ -82,7 +111,7 @@ class View implements ViewInterface
     }
 
     /**
-     * Adds a helper.
+     * Adds a view helper.
      *
      * @param  HelperInterface $helper
      * @return self
@@ -99,7 +128,7 @@ class View implements ViewInterface
     }
 
     /**
-     * Adds multiple helpers.
+     * Adds multiple view helpers.
      *
      * @param  array $helpers
      * @return self
@@ -135,6 +164,10 @@ class View implements ViewInterface
 
         if (!$event->isPropagationStopped()) {
             $event->dispatch($name);
+        }
+
+        if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {
+            return $this->engine->render($event->getTemplate(), $event->getParameters());
         }
 
         return $event->getResult();

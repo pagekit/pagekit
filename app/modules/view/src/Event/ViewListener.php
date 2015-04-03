@@ -33,21 +33,20 @@ class ViewListener implements EventSubscriberInterface
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        $request = $event->getRequest();
-        $result  = $event->getControllerResult();
+        $template = $event->getRequest()->attributes->get('_response[value]', null, true);
+        $layout   = $event->getRequest()->attributes->get('_response[layout]', true, true);
+        $result   = $event->getControllerResult();
 
-        if (null !== $template = $request->attributes->get('_response[value]', null, true) and (null === $result || is_array($result))) {
+        if ($template !== null && ($result === null || is_array($result))) {
             $response = $result = $this->view->render($template, $result ?: []);
         }
 
-        $this->view->section()->set('content', (string) $result);
+        if (is_string($layout)) {
+            $this->view->map('layout', $layout);
+        }
 
-        if ($layout = $request->attributes->get('_response[layout]', true, true)) {
-
-            if (is_string($layout)) {
-                $this->view->map('layout', $layout);
-            }
-
+        if ($layout) {
+            $this->view->section()->set('content', (string) $result);
             $response = $this->view->render('layout');
         }
 
