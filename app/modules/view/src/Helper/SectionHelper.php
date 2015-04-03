@@ -37,6 +37,16 @@ class SectionHelper implements HelperInterface
     }
 
     /**
+     * Set shortcut.
+     *
+     * @see set()
+     */
+    public function __invoke($name, $content)
+    {
+        $this->set($name, $content);
+    }
+
+    /**
      * Gets a section.
      *
      * @param  string $name

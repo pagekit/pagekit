@@ -46,7 +46,7 @@ class ViewListener implements EventSubscriberInterface
         }
 
         if ($layout) {
-            $this->view->section()->set('content', (string) $result);
+            $this->view->section('content', (string) $result);
             $response = $this->view->render('layout');
         }
 
