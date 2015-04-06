@@ -78,7 +78,7 @@
             </div>
 
         </div>
-        <div class="uk-width-medium-1-4 pk-sidebar-left">
+        <div class="uk-width-medium-1-4">
 
             <div class="uk-panel uk-panel-divider uk-text-center">
 

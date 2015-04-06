@@ -18,9 +18,9 @@
 
     <div class="uk-grid" data-uk-grid-margin>
 
-        <div class="uk-width-medium-1-4 pk-sidebar-left">
+        <div class="uk-width-medium-1-4">
 
-            <div class="uk-panel pk-panel-marginless">
+            <div class="uk-panel">
                 <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
                     <?php foreach($sections as $section) : ?>
                     <li><a>{{ '<?= $section['label'] ?>' | trans }}</a></li>

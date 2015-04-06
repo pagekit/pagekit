@@ -75,7 +75,7 @@
             <input type="hidden" name="widget[type]" value="@( $widget.type )">
 
         </div>
-        <div class="uk-width-medium-1-4 pk-sidebar-right uk-form-stacked">
+        <div class="uk-width-medium-1-4 uk-form-stacked">
             <div class="uk-panel uk-panel-divider">
 
                 <div class="uk-form-row">

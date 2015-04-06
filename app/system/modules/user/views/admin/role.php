@@ -3,9 +3,9 @@
 
 <div id="js-role" class="uk-form uk-grid" data-uk-grid-margin v-cloak >
 
-    <div class="uk-width-medium-1-4 pk-sidebar-left">
+    <div class="uk-width-medium-1-4">
 
-        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+        <div class="uk-panel uk-panel-divider">
             <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
                 <li v-repeat="role: rolesArray | orderBy 'priority'" v-ref="ordered">
                     <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">

@@ -3,9 +3,9 @@
 
 <div id="extensions" class="uk-grid" data-uk-grid-margin>
 
-    <div class="uk-width-medium-1-4 pk-sidebar-left">
+    <div class="uk-width-medium-1-4">
 
-        <div class="uk-panel uk-panel-divider pk-panel-marginless">
+        <div class="uk-panel uk-panel-divider">
             <ul class="uk-nav uk-nav-side" data-uk-switcher="{connect:'#tab-content', toggle:' > *:not(.uk-nav-header)'}">
                 <li class="uk-active"><a href="#">{{ 'Installed' | trans }}</a></li>
                 <li>
