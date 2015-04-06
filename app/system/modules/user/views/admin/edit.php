@@ -16,8 +16,8 @@
         </div>
     </div>
 
-    <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-3-4">
+    <div class="uk-grid uk-flex-middle" data-uk-grid-margin>
+        <div class="uk-width-medium-2-3">
 
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
@@ -78,7 +78,7 @@
             </div>
 
         </div>
-        <div class="uk-width-medium-1-4">
+        <div class="uk-width-medium-1-3">
 
             <div class="uk-panel uk-panel-divider uk-text-center">
 
