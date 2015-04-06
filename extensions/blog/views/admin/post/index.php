@@ -2,34 +2,32 @@
 
 <div id="js-post" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar') ?>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-    <div class="uk-float-left">
+            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
+            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
-        <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
-        <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
-
-        <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
-            <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
-            <div class="uk-dropdown uk-dropdown-small">
-                <ul class="uk-nav uk-nav-dropdown">
-                    <li><a v-on="click: status(2)">{{ 'Publish' | trans }}</a></li>
-                    <li><a v-on="click: status(3)">{{ 'Unpublish' | trans }}</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a  v-on="click: copy">{{ 'Copy' | trans }}</a></li>
-                </ul>
+            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a v-on="click: status(2)">{{ 'Publish' | trans }}</a></li>
+                        <li><a v-on="click: status(3)">{{ 'Unpublish' | trans }}</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a  v-on="click: copy">{{ 'Copy' | trans }}</a></li>
+                    </ul>
+                </div>
             </div>
+
         </div>
+        <div data-uk-margin>
 
+            <select v-model="config.filter.status" options="statuses"></select>
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
+
+        </div>
     </div>
-    <div class="uk-float-right uk-hidden-small">
-
-        <select v-model="config.filter.status" options="statuses"></select>
-        <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
-
-    </div>
-
-    <?php $view->section()->stop(true) ?>
 
     <p v-show="!posts.length" class="uk-alert uk-alert-info">{{ 'No posts found.' | trans }}</p>
 

@@ -2,12 +2,21 @@
 
 <form class="uk-form uk-form-horizontal" action="@url('@system/extensions/savesettings', ['name' => 'blog'])" method="post">
 
-    @section('toolbar', 'show')
-        <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
-        <a class="uk-button" href="@url('@system/system')">@trans('Close')</a>
-    @endsection
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-    <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
+            <h2 class="uk-margin-remove">{{ 'Edit Settings' | trans }}</h2>
+
+        </div>
+        <div data-uk-margin>
+
+            <button class="uk-button uk-button-primary" type="submit">@trans('Save')</button>
+            <a class="uk-button" href="@url('@system/system')">@trans('Close')</a>
+
+        </div>
+    </div>
+
+    <div class="uk-grid" data-uk-grid-margin>
         <div class="uk-width-medium-1-4 pk-sidebar-left">
 
             <div class="uk-panel pk-panel-marginless">

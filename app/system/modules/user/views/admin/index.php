@@ -2,35 +2,32 @@
 
 <div id="js-user" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar') ?>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-    <div class="uk-float-left">
+            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/user/edit')">{{ 'Add User' | trans }}</a>
+            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
-        <a class="uk-button uk-button-primary" v-attr="href: $url('admin/user/edit')">{{ 'Add User' | trans }}</a>
-        <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
-
-        <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
-            <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
-            <div class="uk-dropdown uk-dropdown-small">
-                <ul class="uk-nav uk-nav-dropdown">
-                    <li><a v-on="click: status(1)">{{ 'Activate' | trans }}</a></li>
-                    <li><a v-on="click: status(0)">{{ 'Block' | trans }}</a></li>
-                </ul>
+            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a v-on="click: status(1)">{{ 'Activate' | trans }}</a></li>
+                        <li><a v-on="click: status(0)">{{ 'Block' | trans }}</a></li>
+                    </ul>
+                </div>
             </div>
+
         </div>
+        <div data-uk-margin>
 
+            <select v-model="config.filter.status" options="statuses"></select>
+            <select v-model="config.filter.role" options="roles"></select>
+            <select v-model="config.filter.permission" options="permissions"></select>
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}">
+
+        </div>
     </div>
-
-    <div class="uk-float-right uk-hidden-small">
-
-        <select v-model="config.filter.status" options="statuses"></select>
-        <select v-model="config.filter.role" options="roles"></select>
-        <select v-model="config.filter.permission" options="permissions"></select>
-        <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}">
-
-    </div>
-
-    <?php $view->section()->stop(true) ?>
 
     <div v-show="users.length" class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">

@@ -2,8 +2,8 @@
 
 <form id="js-widgets" class="uk-form" method="post" data-reorder="@url('@system/widgets/reorder')">
 
-    @section('toolbar', 'show')
-        <div class="uk-float-left">
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button uk-button-primary" type="button">@trans('Add Widget')</button>
@@ -31,7 +31,7 @@
             </div>
 
         </div>
-        <div class="uk-float-right uk-hidden-small">
+        <div data-uk-margin>
 
             <select id="filter-status" name="filter[status]" data-filter="status">
                 <option value="">@trans('- Status -')</option>
@@ -56,7 +56,7 @@
             <input id="filter-title" type="text" name="filter[search]" placeholder="@trans('Search')" value="">
 
         </div>
-    @endsection
+    </div>
 
     <div class="uk-overflow-container">
 

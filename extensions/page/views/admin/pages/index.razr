@@ -2,8 +2,8 @@
 
 <form id="js-pages" class="uk-form" action="@url('@page/page')" method="post">
 
-    @section('toolbar', 'show')
-        <div class="uk-float-left">
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
             <a class="uk-button uk-button-primary" href="@url('@page/page/add')">@trans('Add Page')</a>
             <a class="uk-button pk-button-danger uk-hidden js-show-on-select" href="#" data-action="@url('@page/page/delete')">@trans('Delete')</a>
@@ -21,7 +21,7 @@
             </div>
 
         </div>
-        <div class="uk-float-right uk-hidden-small">
+        <div data-uk-margin>
 
             <select name="filter[status]">
                 <option value="">@trans('- Status -')</option>
@@ -33,7 +33,7 @@
             <input type="text" name="filter[search]" placeholder="@trans('Search')" value="@( $filter['search'] )">
 
         </div>
-    @endsection
+    </div>
 
     <p class="uk-alert uk-alert-info @( $pages ? 'uk-hidden' : '' )">@trans('No pages found.')</p>
 

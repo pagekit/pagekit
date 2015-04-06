@@ -2,12 +2,21 @@
 
 <form id="js-post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
-    <?php $view->section()->start('toolbar') ?>
-        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-        <a class="uk-button" v-attr="href: $url('admin/blog/post')">{{ post.id ? 'Close' : 'Cancel' | trans }}</a>
-    <?php $view->section()->stop(true) ?>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-    <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
+            <h2 class="uk-margin-remove">{{ 'Edit Post' | trans }}</h2>
+
+        </div>
+        <div data-uk-margin>
+
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
+            <a class="uk-button" v-attr="href: $url('admin/blog/post')">{{ post.id ? 'Close' : 'Cancel' | trans }}</a>
+
+        </div>
+    </div>
+
+    <div class="uk-grid" data-uk-grid-margin>
         <div class="uk-width-medium-3-4">
 
             <div class="uk-form-row">

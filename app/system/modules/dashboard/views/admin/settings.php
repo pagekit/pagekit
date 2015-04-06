@@ -2,22 +2,24 @@
 
 <div id="dashboard" class="uk-form">
 
-   <?php $view->section()->start('toolbar') ?>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-        <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-            <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
-            <div class="uk-dropdown uk-dropdown-small">
-                <ul class="uk-nav uk-nav-dropdown">
-                    <li v-repeat="type: types">
-                        <a href="{{ $url('admin/dashboard/add', {type: type.id}) }}">{{ type.name }}</a>
-                    </li>
-                </ul>
+            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+                <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li v-repeat="type: types">
+                            <a href="{{ $url('admin/dashboard/add', {type: type.id}) }}">{{ type.name }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
+            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
+
         </div>
-
-        <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
-
-    <?php $view->section()->stop(true) ?>
+    </div>
 
     <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent">
         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>

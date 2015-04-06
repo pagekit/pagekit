@@ -16,10 +16,6 @@ return [
                 $event->setParameter('subset', 'latin,latin-ext');
             });
 
-            $app['view']->on('toolbar', function ($event) {
-                $event->setResult(sprintf('<div class="uk-clearfix uk-margin">%s</div>', $event->getResult()));
-            });
-
             $app['view']->on('messages', function ($event) use ($app) {
 
                 $result = '';

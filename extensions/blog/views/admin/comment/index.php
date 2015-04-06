@@ -3,9 +3,8 @@
 
 <div id="js-comments" class="uk-form" v-cloak>
 
-    <?php $view->section()->start('toolbar') ?>
-
-        <div class="uk-float-left">
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
             <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
@@ -21,14 +20,13 @@
             </div>
 
         </div>
-        <div class="uk-float-right uk-hidden-small">
+        <div data-uk-margin>
 
             <select v-model="config.filter.status" options="statusesFilter"></select>
             <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
 
         </div>
-
-    <?php $view->section()->stop(true) ?>
+    </div>
 
     <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
 

@@ -2,32 +2,21 @@
 
 <form id="js-user-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 
-    <?php $view->section()->start('toolbar') ?>
-        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-        <a class="uk-button" v-attr="href: $url('admin/user')">{{ user.id ? 'Close' : 'Cancel' | trans }}</a>
-    <?php $view->section()->stop(true) ?>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div data-uk-margin>
 
-    <div class="uk-grid uk-grid-divider" data-uk-grid-margin data-uk-grid-match>
-        <div class="uk-width-medium-1-4 pk-sidebar-left">
-
-            <div class="uk-panel uk-panel-divider uk-text-center">
-
-                <p>
-                    <img v-gravatar="user.email" class="uk-border-circle" height="150" width="150">
-                </p>
-                <ul v-show="user.id" class="uk-list">
-                    <li v-if="user.isNew"><span class="uk-badge">{{ 'New' | trans }}</span></li>
-                    <li v-if="!user.isNew"><span class="uk-badge uk-badge-{{ user.status ? 'success' : 'danger' }}">{{ statuses[user.status] }}</span></li>
-
-                    <li>{{ user.name }} ({{ user.username }})</li>
-                    <li><a href="mailto:{{ user.email }}">{{ user.email }}</a><i v-show="config.emailVerification && user.data.verified" title="{{ 'Verified email address' | trans }}" class="uk-icon-check"></i></li>
-                    <li>{{ $trans('Last login: %date%', { date: user.login ? $date('medium', user.login) : $trans('Never') }) }}</li>
-                    <li>{{ $trans('Registered since: %date%', { date: $date('medium', user.registered) }) }}</li>
-                </ul>
-
-            </div>
+            <h2 class="uk-margin-remove">{{ 'Edit User' | trans }}</h2>
 
         </div>
+        <div data-uk-margin>
+
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
+            <a class="uk-button" v-attr="href: $url('admin/user')">{{ user.id ? 'Close' : 'Cancel' | trans }}</a>
+
+        </div>
+    </div>
+
+    <div class="uk-grid" data-uk-grid-margin>
         <div class="uk-width-medium-3-4">
 
             <div class="uk-form-row">
@@ -86,6 +75,26 @@
                         <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
                     </p>
                 </div>
+            </div>
+
+        </div>
+        <div class="uk-width-medium-1-4 pk-sidebar-left">
+
+            <div class="uk-panel uk-panel-divider uk-text-center">
+
+                <p>
+                    <img v-gravatar="user.email" class="uk-border-circle" height="150" width="150">
+                </p>
+                <ul v-show="user.id" class="uk-list">
+                    <li v-if="user.isNew"><span class="uk-badge">{{ 'New' | trans }}</span></li>
+                    <li v-if="!user.isNew"><span class="uk-badge uk-badge-{{ user.status ? 'success' : 'danger' }}">{{ statuses[user.status] }}</span></li>
+
+                    <li>{{ user.name }} ({{ user.username }})</li>
+                    <li><a href="mailto:{{ user.email }}">{{ user.email }}</a><i v-show="config.emailVerification && user.data.verified" title="{{ 'Verified email address' | trans }}" class="uk-icon-check"></i></li>
+                    <li>{{ $trans('Last login: %date%', { date: user.login ? $date('medium', user.login) : $trans('Never') }) }}</li>
+                    <li>{{ $trans('Registered since: %date%', { date: $date('medium', user.registered) }) }}</li>
+                </ul>
+
             </div>
 
         </div>
