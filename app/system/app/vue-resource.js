@@ -144,7 +144,7 @@
         var Http = function (url, options) {
 
             var request = new XMLHttpRequest(),
-                headers = Http.defaults.headers;
+                headers = Http.headers;
 
             if (_.isObject(url)) {
                 options = url;
@@ -157,21 +157,29 @@
             );
 
             options = _.extend(true, {url: url, headers: headers},
-                Http.defaults.options,
+                Http.options,
                 options
             );
+
+            if (_.isFunction(options.beforeSend)) {
+                options.beforeSend(request, options);
+            }
+
+            if (_.isObject(options.data) && /FormData/i.test(options.data.toString())) {
+                delete headers['Content-Type'];
+            }
 
             if (options.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
                 headers['X-HTTP-Method-Override'] = options.method;
                 options.method = 'POST';
             }
 
-            if (options.emulateJSON && _.isObject(options.data)) {
+            if (options.emulateJSON && _.isPlainObject(options.data)) {
                 headers['Content-Type'] = 'application/x-www-form-urlencoded';
                 options.data = Url.params(options.data);
             }
 
-            if (_.isObject(options.data)) {
+            if (_.isPlainObject(options.data)) {
                 options.data = JSON.stringify(options.data);
             }
 
@@ -199,15 +207,17 @@
             _.extend(promise, {
 
                 success: function (onSuccess) {
-                    this.then(function(request) {
+
+                    this.then(function (request) {
                         onSuccess.apply(onSuccess, parseReq(request));
-                    }, function() {});
+                    }, function () {});
 
                     return this;
                 },
 
                 error: function (onError) {
-                    this.catch(function(request) {
+
+                    this.catch(function (request) {
                         onError.apply(onError, parseReq(request));
                     });
 
@@ -215,7 +225,12 @@
                 },
 
                 always: function (onAlways) {
-                    this.then(onAlways, onAlways);
+
+                    var cb = function (request) {
+                        onAlways.apply(onAlways, parseReq(request));
+                    };
+
+                    this.then(cb, cb);
 
                     return this;
                 }
@@ -250,28 +265,21 @@
 
         _.extend(Http, {
 
-            defaults: {
+            options: {
+                method: 'GET',
+                params: {},
+                data: '',
+                urlRoot: '',
+                beforeSend: null,
+                emulateHTTP: false,
+                emulateJSON: false
+            },
 
-                config: {
-                    method: 'GET',
-                    params: {},
-                    data: '',
-                    urlRoot: '',
-                    emulateHTTP: false,
-                    emulateJSON: false
-                },
-
-                headers: {
-                    put: jsonType,
-                    post: jsonType,
-                    patch: jsonType,
-                    common: {}
-                },
-
-                options: {
-                    headers: { Accept: 'application/json, text/plain, * / *' }
-                }
-
+            headers: {
+                put: jsonType,
+                post: jsonType,
+                patch: jsonType,
+                common: { 'Accept': 'application/json, text/plain, */*' }
             },
 
             get: function (url, success, options) {
@@ -303,11 +311,14 @@
 
         var Resource = function (url, params, actions) {
 
-            var self = this;
+            var self = this, acts;
 
-            _.extend(true, this, Resource.defaults, {actions: actions});
+            acts = _.extend({},
+                Resource.actions,
+                actions
+            );
 
-            _.each(this.actions, function (action, name) {
+            _.each(acts, function (action, name) {
 
                 action = _.extend(true, {url: url, params: params || {}}, action);
 
@@ -320,7 +331,6 @@
 
                 var options = _.extend({}, action), params = {}, data, success, error;
 
-                /* jshint -W086 */ /* (fall through case statements) */
                 switch (args.length) {
 
                     case 4:
@@ -373,7 +383,6 @@
 
                         throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
                 }
-                /* jshint +W086 */
 
                 options.url = action.url;
                 options.data = data;
@@ -392,15 +401,13 @@
 
         };
 
-        Resource.defaults = {
+        Resource.actions = {
 
-            actions: {
-                'get': {method: 'GET'},
-                'save': {method: 'POST'},
-                'query': {method: 'GET'},
-                'remove': {method: 'DELETE'},
-                'delete': {method: 'DELETE'}
-            }
+            'get': {method: 'GET'},
+            'save': {method: 'POST'},
+            'query': {method: 'GET'},
+            'remove': {method: 'DELETE'},
+            'delete': {method: 'DELETE'}
 
         };
 
