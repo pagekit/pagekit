@@ -30,7 +30,8 @@ return [
 
     'templates' => [
 
-        'marketplace.main' => 'app/system/modules/package/views/marketplace.php'
+        'marketplace.main' => 'system/package:views/marketplace.php',
+        'package.upload'   => 'system/package:views/upload.php'
 
     ],
 

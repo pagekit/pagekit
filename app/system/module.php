@@ -204,12 +204,6 @@ return [
 
     ],
 
-    'templates' => [
-
-        'package.upload' => 'system:views/admin/upload.php'
-
-    ],
-
     'config' => [
 
         'extensions' => [],
