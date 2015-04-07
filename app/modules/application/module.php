@@ -13,17 +13,6 @@ return [
 
     'main' => function ($app) {
 
-        $debug   = (bool) $this->config('debug');
-        $handler = ExceptionHandler::register($debug);
-
-        ErrorHandler::register(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
-
-        if ($cli = $app->inConsole() or $debug) {
-            ini_set('display_errors', 1);
-        }
-
-        $app['exception'] = $handler;
-
         $app['url'] = function($app) {
             return new UrlProvider($app['router'], $app['file'], $app['locator']);
         };
@@ -31,6 +20,16 @@ return [
         $app['response'] = function($app) {
             return new Response($app['url']);
         };
+
+        $app['debug'] = (bool) $this->config('debug');
+
+        $app['exception'] = ExceptionHandler::register($app['debug']);
+
+        ErrorHandler::register(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
+
+        if ($cli = $app->inConsole() or $app['debug']) {
+            ini_set('display_errors', 1);
+        }
 
         // redirect the request if it has a trailing slash
         if (!$app->inConsole()) {

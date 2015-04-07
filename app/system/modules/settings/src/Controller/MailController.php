@@ -1,9 +1,8 @@
 <?php
 
-namespace Pagekit\Mail\Controller;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 
 /**
  * TODO needs to be updated
@@ -11,7 +10,7 @@ use Pagekit\Application\Controller;
  * @Access("system: access settings", admin=true)
  * @Response("json")
  */
-class TestController extends Controller
+class MailController
 {
     /**
      * @Request({"option": "array"}, csrf=true)

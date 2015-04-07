@@ -50,7 +50,7 @@ return [
         };
 
         $app['controllers'] = function($app) {
-            return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader']);
+            return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
         };
 
         $app->on('kernel.boot', function() use ($app) {

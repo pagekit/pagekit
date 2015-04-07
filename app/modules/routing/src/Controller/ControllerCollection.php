@@ -12,6 +12,7 @@ class ControllerCollection implements EventSubscriberInterface
 {
     protected $reader;
     protected $loader;
+    protected $debug;
     protected $routes = [];
 
     /**
@@ -20,10 +21,11 @@ class ControllerCollection implements EventSubscriberInterface
      * @param ControllerReaderInterface $reader
      * @param ClassLoader               $loader
      */
-    public function __construct(ControllerReaderInterface $reader, ClassLoader $loader)
+    public function __construct(ControllerReaderInterface $reader, ClassLoader $loader, $debug = false)
     {
         $this->reader = $reader;
         $this->loader = $loader;
+        $this->debug  = $debug;
     }
 
     /**
@@ -50,18 +52,22 @@ class ControllerCollection implements EventSubscriberInterface
         $routes = $event->getRoutes();
         foreach ($this->routes as $route) {
             foreach ((array) $route->getOption('controllers') as $controller) {
-                foreach ($this->reader->read($controller) as $name => $r) {
+                try {
 
-                    try {
-
+                    foreach ($this->reader->read($controller) as $name => $r) {
                         $routes->add(trim($route->getOption('namespace').'/'.$name, '/'), $r
                             ->setPath(rtrim($route->getPath().$r->getPath(), '/'))
                             ->addDefaults($route->getDefaults())
                             ->addRequirements($route->getRequirements())
                         );
-
-                    } catch (\InvalidArgumentException $e) {
                     }
+
+                } catch (\InvalidArgumentException $e) {
+
+                    if ($this->debug) {
+                        throw $e;
+                    }
+
                 }
             }
         }

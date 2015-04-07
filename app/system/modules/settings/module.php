@@ -6,9 +6,23 @@ return [
 
     'main' => function ($app) {
 
+        $mail  = $app['module']['mail'];
         $cache = $app['module']['cache'];
 
+        // mail
+        $app->on('system.settings.edit', function ($event) use ($app, $mail) {
+
+            $app['view']->script('settings-mail', 'app/system/modules/settings/app/mail.js');
+
+            $event->options($mail->name, $mail->config);
+            $event->data('ssl', extension_loaded('openssl'));
+            $event->section($mail->name, 'Mail', 'app/system/modules/settings/views/mail.php');
+        });
+
+        // cache
         $app->on('system.settings.edit', function ($event, $config) use ($app, $cache) {
+
+            $app['view']->script('settings-cache', 'app/system/modules/settings/app/cache.js');
 
             $supported = $cache->supports();
 
@@ -20,8 +34,6 @@ return [
             ];
 
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
-
-            $app['scripts']->add('cache', 'app/system/modules/settings/app/cache.js');
 
             $event->data('caches', $caches);
             $event->config($cache->name, $cache->config, ['caches.cache.storage', 'nocache']);
@@ -46,6 +58,7 @@ return [
 
         '@system: /system' => [
             'Pagekit\\System\\Controller\\CacheController',
+            'Pagekit\\System\\Controller\\MailController',
             'Pagekit\\System\\Controller\\SettingsController'
         ]
 

@@ -79,27 +79,11 @@ return [
                 } catch (\Exception $e) {}
             }
         });
-
-        $app->on('system.settings.edit', function ($event) use ($app) {
-            $app['view']->script('mail-settings', 'app/modules/mail/assets/js/settings.js', 'vue-system');
-
-            $event->options($this->name, $this->config);
-            $event->data('ssl', extension_loaded('openssl'));
-            $event->section($this->name, 'Mail', 'app/modules/mail/views/admin/settings.php');
-        });
     },
 
     'autoload' => [
 
         'Pagekit\\Mail\\' => 'src'
-
-    ],
-
-    'controllers' => [
-
-        '@system/mail: /system/mail' => [
-            'Pagekit\\Mail\\Controller\\TestController'
-        ]
 
     ],
 
