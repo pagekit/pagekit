@@ -6,8 +6,9 @@ return [
 
     'main' => function ($app) {
 
-        $mail  = $app['module']['mail'];
-        $cache = $app['module']['cache'];
+        $mail   = $app['module']['mail'];
+        $cache  = $app['module']['cache'];
+        $locale = $app['module']['locale'];
 
         // mail
         $app->on('system.settings.edit', function ($event) use ($app, $mail) {
@@ -22,8 +23,6 @@ return [
         // cache
         $app->on('system.settings.edit', function ($event, $config) use ($app, $cache) {
 
-            $app['view']->script('settings-cache', 'app/system/modules/settings/app/cache.js');
-
             $supported = $cache->supports();
 
             $caches = [
@@ -35,6 +34,8 @@ return [
 
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
+            $app['view']->script('settings-cache', 'app/system/modules/settings/app/cache.js');
+
             $event->data('caches', $caches);
             $event->config($cache->name, $cache->config, ['caches.cache.storage', 'nocache']);
             $event->section($cache->name, 'Cache', 'app/system/modules/settings/views/cache.php');
@@ -44,6 +45,49 @@ return [
             if ($config->get('cache.caches.cache.storage') != $cache->config('caches.cache.storage')) {
                 $cache->clearCache();
             }
+        });
+
+        // locale
+        $app->on('system.settings.edit', function ($event) use ($app, $locale) {
+
+            $countries = $app['countries'];
+            $languages = $app['languages'];
+            $locales   = [];
+            foreach ($app['finder']->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+                $code = $dir->getFileName();
+
+                list($lang, $country) = explode('_', $code);
+
+                $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
+            }
+
+            ksort($locales);
+
+            $timezones = [];
+            foreach (\DateTimeZone::listIdentifiers() as $timezone) {
+
+                $parts = explode('/', $timezone);
+
+                if (count($parts) > 2) {
+                    $region = $parts[0];
+                    $name = $parts[1].' - '.$parts[2];
+                } elseif (count($parts) > 1) {
+                    $region = $parts[0];
+                    $name = $parts[1];
+                } else {
+                    $region = 'Other';
+                    $name = $parts[0];
+                }
+
+                $timezones[$region][$timezone] = str_replace('_', ' ', $name);
+            }
+
+            $app['view']->script('settings-locale', 'app/system/modules/settings/app/locale.js');
+
+            $event->data('locales', $locales);
+            $event->data('timezones', $timezones);
+            $event->options($locale->name, $locale->config, ['timezone', 'locale', 'locale_admin']);
+            $event->section($locale->name, 'Localization', 'app/system/modules/settings/views/locale.php');
         });
 
     },
