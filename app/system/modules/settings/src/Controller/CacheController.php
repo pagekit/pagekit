@@ -1,13 +1,15 @@
 <?php
 
-namespace Pagekit\Cache\Controller;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 
+/**
+ * @Access(admin=true)
+ */
 class CacheController
 {
     /**
-     * @Access(admin=true)
      * @Request({"caches": "array"}, csrf=true)
      * @Response("json")
      */

@@ -64,30 +64,6 @@ class CacheModule extends Module
                 return $cache;
             };
         }
-
-        $app->on('system.settings.edit', function ($event, $config) use ($app) {
-
-            $supported = $this->supports();
-
-            $caches = [
-                'auto'   => ['name' => '', 'supported' => true],
-                'apc'    => ['name' => 'APC', 'supported' => in_array('apc', $supported)],
-                'xcache' => ['name' => 'XCache', 'supported' => in_array('xcache', $supported)],
-                'file'   => ['name' => 'File', 'supported' => in_array('file', $supported)]
-            ];
-
-            $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
-
-            $event->data('caches', $caches);
-            $event->config($this->name, $this->config, ['caches.cache.storage', 'nocache']);
-            $event->section($this->name, 'Cache', 'app/modules/cache/views/admin/settings.php');
-        });
-
-        $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
-            if ($config->get('cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
-                $this->clearCache();
-            }
-        });
     }
 
     /**
