@@ -23,7 +23,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
         $this->manager = $manager ?: new AssetManager();
 
         $view->on('head', function ($event) {
-            $event->setResult($event->getResult().$this->render());
+            $event->addResult($this->render());
         }, 5);
     }
 

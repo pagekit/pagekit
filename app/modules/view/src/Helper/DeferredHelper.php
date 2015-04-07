@@ -16,6 +16,7 @@ class DeferredHelper implements HelperInterface
      * Constructor.
      *
      * @param ViewInterface $view
+     * @param Application   $app
      */
     public function __construct(ViewInterface $view, Application $app)
     {

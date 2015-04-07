@@ -32,7 +32,7 @@ class MapHelper implements HelperInterface, \IteratorAggregate
      */
     public function __invoke($name, $path = null)
     {
-        return $this->add($name, $path);
+        $this->add($name, $path);
     }
 
     /**

@@ -23,6 +23,9 @@ class RenderEvent extends Event
 
     /**
      * Constructor.
+     *
+     * @param string $template
+     * @param array  $parameters
      */
     public function __construct($template, array $parameters = [])
     {

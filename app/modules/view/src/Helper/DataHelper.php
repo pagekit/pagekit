@@ -19,7 +19,7 @@ class DataHelper implements HelperInterface
     public function __construct(ViewInterface $view)
     {
         $view->on('head', function ($event) {
-            $event->setResult($event->getResult().$this->render());
+            $event->addResult($this->render());
         }, 10);
     }
 
