@@ -56,9 +56,9 @@ class ToolbarListener implements EventSubscriberInterface
         $route    = App::url()->getRoute('_profiler', compact('token'));
         $url      = App::file()->getUrl(__DIR__.'/../assets');
         $markup[] = "<div id=\"profiler\" data-url=\"{$url}\" data-route=\"{$route}\" style=\"display: none;\"></div>";
-        $markup[] = "<script src=\"{$url}/js/profiler.js\"></script>";
+        $markup[] = "<script src=\"{$url}/js/profiler.js\"></script>\n";
 
-        $response->setContent(substr_replace($content, implode("\n", $markup), $pos));
+        $response->setContent(substr_replace($content, implode("\n", $markup), $pos, 0));
     }
 
     /**
