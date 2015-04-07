@@ -11,7 +11,7 @@ class Theme extends Module
     /**
      * @var string
      */
-    protected $layout = '/templates/template.razr';
+    protected $layout = '/templates/template.php';
 
     /**
      * Returns the theme layout absolute path.

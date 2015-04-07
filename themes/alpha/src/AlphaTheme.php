@@ -18,7 +18,8 @@ class AlphaTheme extends Theme
     public function main(App $app)
     {
         $app->on('system.site', function() use ($app) {
-            $app->on('view.layout', function($event) use ($app) {
+            $app['view']->on('layout', function($event) use ($app) {
+                $event->setTemplate($this->getLayout());
                 $event->setParameter('theme', $app['theme.site']);
             });
         });
@@ -44,9 +45,9 @@ class AlphaTheme extends Theme
             return $nominator / ($factor = $gcf($nominator, $divider)) .'-'. $divider / $factor;
         };
 
-        $sections = App::sections();
+        $sections = App::view()->section();
         foreach ($sidebars as $name => $sidebar) {
-            if (!$sections->has($name)) {
+            if (!$sections->exists($name)) {
                 unset($sidebars[$name]);
                 continue;
             }
