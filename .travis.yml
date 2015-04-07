@@ -7,7 +7,7 @@ php:
     - hhvm
 
 install:
-    - composer install --prefer-source --dev
+    - composer install --prefer-source
 
 script:
     - php vendor/bin/phpunit
