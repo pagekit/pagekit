@@ -1,5 +1,7 @@
 # Pagekit
 
+[![Build Status](https://travis-ci.org/pagekit/pagekit.svg?branch=develop)](https://travis-ci.org/pagekit/pagekit)
+
 Pagekit is a modular and lightweight CMS built with Symfony components.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
