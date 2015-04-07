@@ -4,7 +4,11 @@ namespace Pagekit\Site;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Site\Entity\Node;
 use Pagekit\Site\Event\RouteListener;
+use Pagekit\Site\Model\AliasType;
+use Pagekit\Site\Model\Type;
+use Pagekit\Site\Model\TypeInterface;
 
 class SiteModule extends Module
 {
@@ -17,7 +21,17 @@ class SiteModule extends Module
      */
     public function main(App $app)
     {
-        $app->subscribe(new RouteListener());
+        $app->on('kernel.request', function() {
+
+            $types = $this->getTypes();
+
+            foreach (Node::where(['status = ?'], [1])->get() as $node) {
+                if (isset($types[$node->getType()])) {
+                    $types[$node->getType()]->attach($node);
+                }
+            }
+
+        }, 35);
     }
 
     /**
@@ -27,7 +41,7 @@ class SiteModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType('alias', 'Alias', 'url');
+            $this->registerType(new AliasType('alias', __('Alias')));
 
             App::trigger('site.types', [$this]);
         }
@@ -38,14 +52,11 @@ class SiteModule extends Module
     /**
      * Registers a node type.
      *
-     * @param string $id
-     * @param string $label
-     * @param string $type
-     * @param array  $options
+     * @param TypeInterface $type
      */
-    public function registerType($id, $label, $type, array $options = [])
+    public function registerType(TypeInterface $type)
     {
-        $this->types[$id] = array_merge($options, compact('id', 'label', 'type'));
+        $this->types[$type->getId()] = $type;
     }
 
     /**
@@ -102,9 +113,9 @@ class SiteModule extends Module
             App::trigger('site.sections', [$this]);
         }
 
-        return array_map(function($subsections) use ($type) {
+        return array_filter(array_map(function($subsections) use ($type) {
             return array_filter($subsections, function($section) use ($type) { return in_array($section['type'], ['', $type]); });
-        }, $this->sections);
+        }, $this->sections));
     }
 
     /**

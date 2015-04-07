@@ -6,6 +6,8 @@ use Pagekit\Application as App;
 use Pagekit\Blog\Content\ReadmorePlugin;
 use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
+use Pagekit\Site\Model\MountType;
+use Pagekit\Site\Model\UrlType;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 
@@ -26,10 +28,6 @@ class BlogExtension extends Extension
 
             $app['system']->config['frontpage'] = $app['system']->config['frontpage'] ?: '@blog/site';
 
-            $app['view']->on('site:views/admin/index.php', function() use ($app) {
-                $app['view']->script('blog-post', 'extensions/blog/app/page.js', ['vue-system', 'vue-validator', 'uikit-nestable']);
-            });
-
         }, 10);
 
         $app->on('system.link', function(LinkEvent $event) {
@@ -37,19 +35,13 @@ class BlogExtension extends Extension
         });
 
         $app->on('site.types', function ($event, $site) {
-
-            $site->registerType('blog', 'Blog', 'mount', [
-                'controllers' => 'Pagekit\\Blog\\Controller\\SiteController',
-                'url'         => '@blog/site'
-            ]);
-
-            $site->registerType('blog.post', 'Blog Post', 'url');
-
+            $site->registerType(new UrlType('blog.post', 'Blog Post', '@blog/id'));
+            $site->registerType(new MountType('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController'));
         });
 
         $app->on('site.sections', function ($event, $site) {
             $site->registerSection('Settings', function() {
-                return App::view('blog:views/admin/site.post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
+                return App::view('blog:views/admin/site/post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
             }, 'blog.post');
         });
     }

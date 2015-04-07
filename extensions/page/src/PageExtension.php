@@ -3,7 +3,7 @@
 namespace Pagekit\Page;
 
 use Pagekit\Application as App;
-use Pagekit\Page\Event\NodeListener;
+use Pagekit\Page\Event\SiteListener;
 use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 
@@ -14,24 +14,10 @@ class PageExtension extends Extension
      */
     public function main(App $app)
     {
-        $app->subscribe(new NodeListener);
+        $app->subscribe(new SiteListener);
 
         $app->on('system.link', function (LinkEvent $event) {
             $event->register('Pagekit\Page\PageLink');
-        });
-
-        $app->on('site.types', function ($event, $site) {
-            $site->registerType('page', 'Page', 'url');
-        });
-
-        $app->on('site.config', function () use ($app) {
-            $app['scripts']->add('page-controllers', 'extensions/page/assets/js/controllers.js', 'site-application');
-        });
-
-        $app->on('site.sections', function ($event, $site) {
-            $site->registerSection('Settings', function() {
-                return App::view('blog:views/admin/site.post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
-            }, 'blog.post');
         });
     }
 

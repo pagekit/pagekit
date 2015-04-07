@@ -11,9 +11,9 @@
             foreach ($subsections as $section) {
                 $params = array_merge($section, ['node' => $node]);
                 if (is_callable($section['view'])) {
-                    echo call_user_func_array($section['view'], $params);
+                    echo call_user_func($section['view'], $node);
                 } else {
-                    echo $view->render($section['view'], $params);
+                    echo $view->render($section['view'], ['node' => $node]);
                 }
             }
         ?>

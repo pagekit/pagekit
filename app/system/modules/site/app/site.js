@@ -20,7 +20,7 @@ jQuery(function ($) {
             this.Nodes = this.$resource('api/site/node/:id');
             this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
 
-            Vue.http.defaults.options = _.extend({}, Vue.http.defaults.options, { error: function (msg) {
+            Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
                 UIkit.notify(msg, 'danger');
             }});
 
@@ -229,7 +229,7 @@ jQuery(function ($) {
 
                         e.preventDefault();
 
-                        this.Nodes.save({ id: this.node.id }, { node: this.node }, function(node) {
+                        this.Nodes.save({ id: this.node.id }, _.merge($(":input", e.target).serialize().parse(), { node: this.node }), function(node) {
                             vm.current.id = parseInt(node.id);
                             vm.load();
                         });

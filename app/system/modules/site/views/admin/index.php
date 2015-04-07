@@ -55,8 +55,6 @@
 
                 <div v-el="edit"></div>
 
-                <pre>{{ node | json }}</pre>
-
             </form>
 
         </div>
