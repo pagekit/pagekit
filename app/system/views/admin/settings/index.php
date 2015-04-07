@@ -13,24 +13,6 @@
     </li>
     <?php endif ?>
 
-    <?php if ($user->hasAccess('system: manage extensions')): ?>
-    <li class="uk-width">
-        <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/extensions') ?>">
-            <img src="<?= $view->url()->getStatic('system:assets/images/icon-extensions.svg') ?>" width="50" height="50" alt="<?= __('Extensions') ?>">
-            <p><?= __('Extensions') ?></p>
-        </a>
-    </li>
-    <?php endif ?>
-
-    <?php if ($user->hasAccess('system: manage themes')): ?>
-    <li class="uk-width">
-        <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/themes') ?>">
-            <img src="<?= $view->url()->getStatic('system:assets/images/icon-themes.svg') ?>" width="50" height="50" alt="<?= __('Themes') ?>">
-            <p><?= __('Themes') ?></p>
-        </a>
-    </li>
-    <?php endif ?>
-
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@dashboard/settings') ?>">
             <img src="<?= $view->url()->getStatic('system/dashboard:assets/images/icon-dashboard.svg') ?>" width="50" height="50" alt="<?= __('Dashboard') ?>">

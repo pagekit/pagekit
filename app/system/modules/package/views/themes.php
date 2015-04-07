@@ -1,5 +1,5 @@
-<?php $view->script('extensions-upload', 'app/system/app/upload.js', ['vue-system', 'uikit-upload']) ?>
-<?php $view->script('extensions-index', 'app/system/app/themes.js', 'marketplace') ?>
+<?php $view->script('extensions-upload', 'app/system/modules/package/app/upload.js', ['vue-system', 'uikit-upload']) ?>
+<?php $view->script('extensions-index', 'app/system/modules/package/app/themes.js', 'marketplace') ?>
 
 <div id="themes" class="uk-grid" data-uk-grid-margin>
 

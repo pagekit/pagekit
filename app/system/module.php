@@ -137,7 +137,7 @@ return [
         'system/editor',
         'system/finder',
         'system/info',
-        'system/marketplace',
+        'system/package',
         'system/menu',
         'system/theme',
         'system/user',
@@ -166,15 +166,12 @@ return [
         ],
 
         '@system: /system' => [
-            'Pagekit\\System\\Controller\\ExtensionsController',
             'Pagekit\\System\\Controller\\LinkController',
             'Pagekit\\System\\Controller\\MarketplaceController',
             'Pagekit\\System\\Controller\\MigrationController',
-            'Pagekit\\System\\Controller\\PackageController',
             'Pagekit\\System\\Controller\\SettingsController',
             'Pagekit\\System\\Controller\\UpdateController',
-            'Pagekit\\System\\Controller\\SystemController',
-            'Pagekit\\System\\Controller\\ThemesController'
+            'Pagekit\\System\\Controller\\SystemController'
         ]
 
     ],
