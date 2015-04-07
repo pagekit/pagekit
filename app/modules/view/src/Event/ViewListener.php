@@ -47,7 +47,9 @@ class ViewListener implements EventSubscriberInterface
 
         if ($layout) {
             $this->view->section('content', (string) $result);
-            $response = $this->view->render('layout');
+            if (null !== $result = $this->view->render('layout') ) {
+                $response = $result;
+            }
         }
 
         if (isset($response)) {

@@ -279,6 +279,7 @@
                 put: jsonType,
                 post: jsonType,
                 patch: jsonType,
+                'delete': jsonType,
                 common: { 'Accept': 'application/json, text/plain, */*' }
             },
 
