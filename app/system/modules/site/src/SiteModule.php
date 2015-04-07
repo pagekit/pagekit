@@ -5,9 +5,7 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Event\RouteListener;
 use Pagekit\Site\Model\AliasType;
-use Pagekit\Site\Model\Type;
 use Pagekit\Site\Model\TypeInterface;
 
 class SiteModule extends Module
@@ -22,16 +20,24 @@ class SiteModule extends Module
     public function main(App $app)
     {
         $app->on('kernel.request', function() {
-
-            $types = $this->getTypes();
-
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
-                if (isset($types[$node->getType()])) {
-                    $types[$node->getType()]->attach($node);
+                if ($type = $this->getType($node->getType())) {
+                    $type->bind($node);
                 }
             }
 
         }, 35);
+    }
+
+    /**
+     * @param  string $type
+     * @return TypeInterface
+     */
+    public function getType($type)
+    {
+        $types = $this->getTypes();
+
+        return isset($types[$type]) ? $types[$type] : null;
     }
 
     /**
