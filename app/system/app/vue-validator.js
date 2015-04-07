@@ -28,6 +28,8 @@
                     };
 
                     _.on(el.form, 'submit', this.validators[form].handler);
+
+                    dir.vm.$set(form, {});
                 }
 
                 if (this.elements.indexOf(el) == -1) {
@@ -38,7 +40,7 @@
                     _.on(el, 'input', dir.listener);
                 }
 
-                dir.vm.$set(form + '.' + dir.name, {});
+                dir.vm[form].$add(dir.name, {});
                 this.validators[form].push(dir);
             },
 
