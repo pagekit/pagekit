@@ -3,8 +3,6 @@ Vue.component('v-locale', {
     inherit: true,
     replace: true,
 
-    template: '#template-locale',
-
     ready: function() {
 
         var changed = false;

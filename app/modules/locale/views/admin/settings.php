@@ -1,6 +1,4 @@
-<div v-component="v-locale"></div>
-
-<script id="template-locale" type="x-template">
+<div v-component="v-locale" inline-template>
 
     <h2 class="pk-form-heading">{{ 'Localization' | trans }}</h2>
     <div class="uk-form-row">
@@ -23,4 +21,4 @@
         </div>
     </div>
 
-</script>
+</div>
