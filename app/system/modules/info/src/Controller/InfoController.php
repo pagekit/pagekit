@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Info;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
@@ -17,7 +17,7 @@ class InfoController extends Controller
     {
         return [
             '$meta' => ['title' => __('System Information')],
-            '$info' => App::systemInfo()->get()
+            '$info' => App::info()->get()
         ];
     }
 }

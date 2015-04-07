@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\System\Info\InfoHelper;
+use Pagekit\System\InfoHelper;
 
 return [
 
@@ -8,7 +8,7 @@ return [
 
     'main' => function ($app) {
 
-        $app['systemInfo'] = function() {
+        $app['info'] = function() {
             return new InfoHelper();
         };
 
@@ -16,14 +16,14 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\Info\\' => 'src'
+        'Pagekit\\System\\' => 'src'
 
     ],
 
     'controllers' => [
 
         '@system: /system' => [
-            'Pagekit\\System\\Info\\InfoController'
+            'Pagekit\\System\\Controller\\InfoController'
         ]
 
     ],

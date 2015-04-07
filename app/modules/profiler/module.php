@@ -78,7 +78,7 @@ return [
             }
 
             $app->on('system.init', function() use ($app) {
-                $app['profiler']->add(new SystemDataCollector($app['systemInfo']), 'app/modules/profiler/views/toolbar/system.php', 'app/modules/profiler/views/panel/system.php', 50);
+                $app['profiler']->add(new SystemDataCollector($app['info']), 'app/modules/profiler/views/toolbar/system.php', 'app/modules/profiler/views/panel/system.php', 50);
                 $app['profiler']->add(new UserDataCollector($app['auth']), 'app/modules/profiler/views/toolbar/user.php', null, -20);
             });
 
