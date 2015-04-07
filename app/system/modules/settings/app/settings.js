@@ -2,7 +2,7 @@ jQuery(function ($) {
 
     var vm = new Vue({
 
-        el: '#js-settings',
+        el: '#settings',
 
         data: $.extend({ config: {}, option: {} }, settings),
 

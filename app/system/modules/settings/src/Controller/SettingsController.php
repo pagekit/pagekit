@@ -7,7 +7,6 @@ use Pagekit\Application\Controller;
 use Pagekit\Config\Config;
 use Pagekit\System\Event\SettingsEvent;
 
-
 /**
  * @Access("system: access settings", admin=true)
  */
@@ -33,7 +32,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Response("system:views/admin/settings/settings.php")
+     * @Response("system:modules/settings/views/settings.php")
      */
     public function indexAction()
     {

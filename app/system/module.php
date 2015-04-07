@@ -139,6 +139,7 @@ return [
         'system/info',
         'system/package',
         'system/menu',
+        'system/settings',
         'system/theme',
         'system/user',
         'system/widget'
@@ -167,23 +168,9 @@ return [
 
         '@system: /system' => [
             'Pagekit\\System\\Controller\\LinkController',
-            'Pagekit\\System\\Controller\\MarketplaceController',
             'Pagekit\\System\\Controller\\MigrationController',
-            'Pagekit\\System\\Controller\\SettingsController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController'
-        ]
-
-    ],
-
-    'menu' => [
-
-        'system: settings' => [
-            'label'    => 'Settings',
-            'icon'     => 'app/system/assets/images/icon-settings.svg',
-            'url'      => '@system/system',
-            'active'   => '(@system|@dashboard)/(system|settings|themes|extensions|storage|update|info|marketplace)*',
-            'priority' => 110
         ]
 
     ],

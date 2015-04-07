@@ -38,7 +38,7 @@ return [
 
         'system: extensions' => [
             'label'    => 'Extensions',
-            'parent'   => 'system: settings',
+            'parent'   => 'system: system',
             'url'      => '@system/extensions',
             'access'   => 'system: manage extensions',
             'priority' => 130
@@ -46,7 +46,7 @@ return [
 
         'system: themes' => [
             'label'    => 'Themes',
-            'parent'   => 'system: settings',
+            'parent'   => 'system: system',
             'url'      => '@system/themes',
             'access'   => 'system: manage themes',
             'priority' => 130

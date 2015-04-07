@@ -32,7 +32,7 @@ return [
 
         'system: info' => [
             'label'    => 'Info',
-            'parent'   => 'system: settings',
+            'parent'   => 'system: system',
             'url'      => '@system/info',
             'priority' => 150
         ]

@@ -1,6 +1,6 @@
-<?php $view->script('settings', 'app/system/app/settings.js', 'vue-system') ?>
+<?php $view->script('settings', 'app/system/modules/settings/app/settings.js', 'vue-system') ?>
 
-<form id="js-settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
+<form id="settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>

@@ -42,7 +42,7 @@ return [
 
         'system: storage' => [
             'label'    => 'Storage',
-            'parent'   => 'system: settings',
+            'parent'   => 'system: system',
             'url'      => '@system/storage',
             'access'   => 'system: manage storage',
             'priority' => 140

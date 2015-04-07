@@ -15,23 +15,6 @@ class SystemController extends Controller
 {
     /**
      * @Access(admin=true)
-     * @Response("system:views/admin/settings/index.php")
-     */
-    public function indexAction()
-    {
-        $packages = [];
-
-        foreach (App::system()->config('extensions') as $name) {
-            if ($extension = App::module($name) and $extension->config('settings.view')) {
-                $packages[$extension->name] = App::package()->getRepository('extension')->findPackage($extension->name);
-            }
-        }
-
-        return ['head.title' => __('Settings'), 'user' => App::user(), 'packages' => $packages];
-    }
-
-    /**
-     * @Access(admin=true)
      * @Request({"order": "array"})
      * @Response("json")
      */
