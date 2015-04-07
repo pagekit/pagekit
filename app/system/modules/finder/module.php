@@ -24,7 +24,8 @@ return [
     'controllers' => [
 
         '@system: /system' => [
-            'Pagekit\\Finder\\Controller\\FinderController'
+            'Pagekit\\Finder\\Controller\\FinderController',
+            'Pagekit\\Finder\\Controller\\StorageController'
         ]
 
     ],
@@ -34,6 +35,18 @@ return [
         'finder.main'      => 'app/system/modules/finder/views/main.php',
         'finder.table'     => 'app/system/modules/finder/views/table.php',
         'finder.thumbnail' => 'app/system/modules/finder/views/thumbnail.php'
+
+    ],
+
+    'menu' => [
+
+        'system: storage' => [
+            'label'    => 'Storage',
+            'parent'   => 'system: settings',
+            'url'      => '@system/storage',
+            'access'   => 'system: manage storage',
+            'priority' => 140
+        ]
 
     ]
 

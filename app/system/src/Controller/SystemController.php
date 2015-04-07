@@ -56,15 +56,6 @@ class SystemController extends Controller
     }
 
     /**
-     * @Access("system: manage storage", admin=true)
-     * @Response("system:views/admin/settings/storage.php")
-     */
-    public function storageAction()
-    {
-        return ['head.title' => __('Storage'), 'root' => App::system()->config('storage'), 'mode' => 'write'];
-    }
-
-    /**
      * @Route("/tmpl/{template}")
      */
     public function tmplAction($template = '')

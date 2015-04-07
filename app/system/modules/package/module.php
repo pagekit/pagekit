@@ -28,27 +28,29 @@ return [
 
     ],
 
+    'templates' => [
+
+        'marketplace.main' => 'app/system/modules/package/views/marketplace.php'
+
+    ],
+
     'menu' => [
 
         'system: extensions' => [
             'label'    => 'Extensions',
             'parent'   => 'system: settings',
             'url'      => '@system/extensions',
-            'access'   => 'system: manage extensions'
+            'access'   => 'system: manage extensions',
+            'priority' => 130
         ],
 
         'system: themes' => [
             'label'    => 'Themes',
             'parent'   => 'system: settings',
             'url'      => '@system/themes',
-            'access'   => 'system: manage themes'
+            'access'   => 'system: manage themes',
+            'priority' => 130
         ]
-
-    ],
-
-    'templates' => [
-
-        'marketplace.main' => 'app/system/modules/package/views/marketplace.php'
 
     ]
 

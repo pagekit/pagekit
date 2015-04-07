@@ -20,15 +20,6 @@
         </a>
     </li>
 
-    <?php if ($user->hasAccess('system: manage storage')): ?>
-    <li class="uk-width">
-        <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/system/storage') ?>">
-            <img src="<?= $view->url()->getStatic('system:assets/images/icon-storage.svg') ?>" width="50" height="50" alt="<?= __('Storage') ?>">
-            <p><?= __('Storage') ?></p>
-        </a>
-    </li>
-    <?php endif ?>
-
     <?php if ($user->hasAccess('system: software updates')): ?>
     <li class="uk-width">
         <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/update') ?>">
