@@ -105,22 +105,22 @@ return [
             'access'   => 'user: manage users || user: manage user permissions',
             'priority' => 15
         ],
-        'user: sub-user' => [
+        'user: users' => [
             'label'    => 'List',
             'parent'   => 'user',
             'url'      => '@user',
-            'active'   => '@user*',
+            'active'   => '@user(?!permission|role)',
             'access'   => 'user: manage users',
             'priority' => 15
         ],
-        'user: user permissions' => [
+        'user: permissions' => [
             'label'    => 'Permissions',
             'parent'   => 'user',
             'url'      => '@user/permission',
             'active'   => '@user/permission*',
             'access'   => 'user: manage user permissions'
         ],
-        'user: user roles' => [
+        'user: roles' => [
             'label'    => 'Roles',
             'parent'   => 'user',
             'url'      => '@user/role',
