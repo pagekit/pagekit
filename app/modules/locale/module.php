@@ -84,7 +84,7 @@ return [
             $countries = $app['countries'];
             $languages = $app['languages'];
             $locales   = [];
-            foreach ($app['finder']->directories()->depth(0)->in('app/modules/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+            foreach ($app['finder']->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
                 $code = $dir->getFileName();
 
                 list($lang, $country) = explode('_', $code);
