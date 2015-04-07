@@ -57,13 +57,6 @@
     <?php endif ?>
 
     <li class="uk-width">
-        <a class="uk-panel pk-panel-icon" href="<?= $view->url('@system/system/info') ?>">
-            <img src="<?= $view->url()->getStatic('system:assets/images/icon-info.svg') ?>" width="50" height="50" alt="<?= __('Info') ?>">
-            <p><?= __('Info') ?></p>
-        </a>
-    </li>
-
-    <li class="uk-width">
         <a id="clearCache" class="uk-panel pk-panel-icon">
             <img src="<?= $view->url()->getStatic('system:assets/images/icon-cache.svg') ?>" width="50" height="50" alt="<?= __('Clear Cache') ?>">
             <p><?= __('Clear Cache') ?></p>

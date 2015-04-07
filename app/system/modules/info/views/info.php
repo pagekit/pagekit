@@ -1,6 +1,6 @@
-<?php $view->script('system-info', 'app/system/app/info.js', 'vue-system') ?>
+<?php $view->script('system-info', 'app/system/modules/info/app/info.js', 'vue-system') ?>
 
-<div id="js-system-info">
+<div id="info">
 
     <ul class="uk-tab" data-uk-tab="{ connect:'#tab-content' }">
         <li class="uk-active"><a>{{ 'System' | trans }}</a></li>

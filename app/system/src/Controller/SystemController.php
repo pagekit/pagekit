@@ -65,18 +65,6 @@ class SystemController extends Controller
     }
 
     /**
-     * @Access(admin=true)
-     * @Response("system:views/admin/settings/info.php")
-     */
-    public function infoAction()
-    {
-        return [
-            '$meta' => ['title' => __('System Information')],
-            '$info' => App::systemInfo()->get()
-        ];
-    }
-
-    /**
      * @Route("/tmpl/{template}")
      */
     public function tmplAction($template = '')

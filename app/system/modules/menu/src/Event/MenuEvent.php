@@ -56,6 +56,10 @@ class MenuEvent extends Event
                 $properties['priority'] = 100;
             }
 
+            if (!isset($properties['active'])) {
+                $properties['active'] = $properties['url'];
+            }
+
             $this->menu->addItem(new Item(array_merge($properties, ['id' => $id, 'name' => isset($properties['label']) ? $properties['label'] : $id, 'menu' => $this->menu])));
         }
     }

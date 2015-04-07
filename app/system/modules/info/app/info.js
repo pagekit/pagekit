@@ -2,7 +2,7 @@ jQuery(function () {
 
     new Vue({
 
-        el: '#js-system-info',
+        el: '#info',
 
         data: {
             info: $info

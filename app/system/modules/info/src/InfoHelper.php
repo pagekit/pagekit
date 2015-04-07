@@ -1,12 +1,11 @@
 <?php
 
-namespace Pagekit\System\Helper;
+namespace Pagekit\System\Info;
 
 use Doctrine\DBAL\Driver\PDOConnection;
 use Pagekit\Application as App;
-use PDO;
 
-class SystemInfoHelper
+class InfoHelper
 {
     /**
      * Method to get the system information
@@ -21,9 +20,9 @@ class SystemInfoHelper
         $info['php']           = php_uname();
 
         if ($pdo = App::db()->getWrappedConnection() and $pdo instanceof PDOConnection) {
-            $info['dbdriver']  = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
-            $info['dbversion'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
-            $info['dbclient']  = $pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
+            $info['dbdriver']  = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
+            $info['dbversion'] = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            $info['dbclient']  = $pdo->getAttribute(\PDO::ATTR_CLIENT_VERSION);
         }
 
         $info['phpversion']    = phpversion();

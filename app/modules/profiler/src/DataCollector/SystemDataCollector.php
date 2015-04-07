@@ -2,7 +2,7 @@
 
 namespace Pagekit\Profiler\DataCollector;
 
-use Pagekit\System\Helper\SystemInfoHelper;
+use Pagekit\System\Info\InfoHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -10,16 +10,16 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 class SystemDataCollector extends DataCollector
 {
     /**
-     * @var SystemInfoHelper
+     * @var InfoHelper
      */
     protected $info;
 
     /**
      * Constructor.
      *
-     * @param SystemInfoHelper $info
+     * @param InfoHelper $info
      */
-    function __construct(SystemInfoHelper $info)
+    function __construct(InfoHelper $info)
     {
         $this->info = $info;
     }

@@ -54,10 +54,6 @@ return [
 
         $app['system'] = $this;
 
-        $app['systemInfo'] = function() {
-            return new SystemInfoHelper;
-        };
-
         $app->extend('assets', function ($assets) use ($app) {
             return $assets->register('file', 'Pagekit\System\Asset\FileAsset');
         });
@@ -140,6 +136,7 @@ return [
         'system/dashboard',
         'system/editor',
         'system/finder',
+        'system/info',
         'system/marketplace',
         'system/menu',
         'system/theme',
