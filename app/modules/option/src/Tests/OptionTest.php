@@ -4,7 +4,6 @@ namespace Pagekit\Option\Tests;
 
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Pagekit\Cache\Cache;
 use Pagekit\Option\Option;
 
 class OptionTest extends \PHPUnit_Framework_TestCase
@@ -184,7 +183,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
 
     protected function getCache()
     {
-        return new Cache(new ArrayCache());
+        return new ArrayCache();
     }
 
     protected function getOptions($connection = null, $cache = null)
