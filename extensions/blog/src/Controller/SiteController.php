@@ -30,7 +30,7 @@ class SiteController extends Controller
     public function __construct()
     {
         $this->module = App::module('blog');
-        $autoclose = $this->module->config('comments.autoclose') ? $this->module->config('comments.autoclose.days') : 0;
+        $autoclose = $this->module->config('comments.autoclose') ? $this->module->config('comments.autoclose_days') : 0;
 
         App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();

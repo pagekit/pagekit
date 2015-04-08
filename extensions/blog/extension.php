@@ -22,7 +22,8 @@ return [
 
         '@blog: /blog' => [
             'Pagekit\\Blog\\Controller\\CommentController',
-            'Pagekit\\Blog\\Controller\\PostController'
+            'Pagekit\\Blog\\Controller\\PostController',
+            'Pagekit\\Blog\\Controller\\SettingsController'
         ],
 
         '@blog/api: /api/blog' => [
@@ -33,12 +34,10 @@ return [
 
     'config' => [
 
-        'settings.view' => 'blog:views/admin/settings.razr',
-
         'comments'      => [
 
             'autoclose'              => false,
-            'autoclose.days'         => 14,
+            'autoclose_days'         => 14,
             'blacklist'              => '',
             'comments_per_page'      => 20,
             'gravatar'               => true,
@@ -83,20 +82,27 @@ return [
             'active' => '@blog/post*',
             'access' => 'blog: manage content || blog: manage comments'
         ],
-        'blog: post list' => [
+        'blog: posts' => [
             'label'  => 'Posts',
             'parent' => 'blog',
             'url'    => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content'
         ],
-        'blog: comment list' => [
+        'blog: comments' => [
             'label'  => 'Comments',
             'parent' => 'blog',
             'url'    => '@blog/comment',
             'active' => '@blog/comment*',
             'access' => 'blog: manage comments'
         ],
+        'blog: settings' => [
+            'label'  => 'Settings',
+            'parent' => 'blog',
+            'url'    => '@blog/settings',
+            'active' => '@blog/settings*',
+            'access' => 'blog: manage settings'
+        ]
 
     ],
 
