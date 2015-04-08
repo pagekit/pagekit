@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\OAuth\Controller;
+namespace Pagekit\System\Controller;
 
 use OAuth\Common\Storage\Memory;
 use Pagekit\Application as App;

@@ -1,10 +1,10 @@
 <?php
 
-use Pagekit\OAuth\Helper\OAuthHelper;
+use Pagekit\System\OAuthHelper;
 
 return [
 
-    'name' => 'oauth',
+    'name' => 'system/oauth',
 
     'main' => function ($app) {
 
@@ -13,25 +13,26 @@ return [
         };
 
         $app->on('system.settings.edit', function ($event) use ($app) {
-            $app['view']->script('oauth-settings', 'app/modules/oauth/assets/js/settings.js', 'vue-system');
+
+            $app['view']->script('settings-oauth', 'app/system/modules/oauth/app/oauth.js', 'settings');
 
             $event->options($this->name, $this->config);
             $event->data('oauth', $app['oauth']->getProvider());
             $event->data('redirect_url', $app['oauth']->getRedirectUrl());
-            $event->section($this->name, 'OAuth', 'app/modules/oauth/views/admin/settings.php');
+            $event->section($this->name, 'OAuth', 'app/system/modules/oauth/views/oauth.php');
         });
     },
 
     'autoload' => [
 
-        'Pagekit\\OAuth\\' => 'src'
+        'Pagekit\\System\\' => 'src'
 
     ],
 
     'controllers' => [
 
         '@system: /' => [
-            'Pagekit\\OAuth\\Controller\\OAuthController'
+            'Pagekit\\System\\Controller\\OAuthController'
         ]
 
     ],

@@ -11,7 +11,6 @@
         <div data-uk-margin>
 
             <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-            <a class="uk-button" v-attr="href: $url('admin/system')">{{ 'Close' | trans }}</a>
 
         </div>
     </div>

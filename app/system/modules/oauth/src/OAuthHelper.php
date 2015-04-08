@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\OAuth\Helper;
+namespace Pagekit\System;
 
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Storage\Memory;
