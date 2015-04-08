@@ -20,7 +20,7 @@ return [
 
     'main' => function ($app) {
 
-        if (!$app['module']['application']->config('debug')) {
+        if (!$app['debug']) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
         }
 
