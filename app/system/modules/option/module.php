@@ -1,11 +1,11 @@
 <?php
 
-use Pagekit\Option\Loader\OptionLoader;
 use Pagekit\Option\Option;
+use Pagekit\Option\Loader\OptionLoader;
 
 return [
 
-    'name' => 'option',
+    'name' => 'system/option',
 
     'main' => function ($app) {
 
