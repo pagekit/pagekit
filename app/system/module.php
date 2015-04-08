@@ -81,14 +81,22 @@ return [
             $app['file']->registerAdapter('file', new FileAdapter($app['path'], $baseUrl));
             $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
 
-            $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
-            $app['view']->defer('head');
-
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
             $app->trigger('system.init', $event);
 
         }, 50);
+
+        $app->on('kernel.view', function($event) use ($app) {
+
+            if (!$event->isMasterRequest()) {
+                return;
+            }
+
+            $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
+            $app['view']->defer('head');
+
+        });
 
         $app->on('kernel.request', function($event) use ($app) {
 

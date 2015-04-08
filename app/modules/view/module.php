@@ -75,7 +75,7 @@ return [
             return new AssetManager($app['assets']);
         };
 
-        $app->on('kernel.boot', function () use ($app) {
+        $app->on('kernel.controller', function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));
         });
 

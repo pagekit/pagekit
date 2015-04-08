@@ -24,6 +24,9 @@ class DateHelper implements HelperInterface
     /**
      * Formats a date.
      *
+     * @param  string|\DateTime|\DateTimeInterface $date
+     * @param  string                              $format
+     * @param  \DateTimeZone|string                $timezone
      * @return string
      */
     public function __invoke($date, $format = 'medium', $timezone = null)
