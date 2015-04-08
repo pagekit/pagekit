@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\System\InfoHelper;
+use Pagekit\Info\InfoHelper;
 
 return [
 
@@ -16,14 +16,14 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\' => 'src'
+        'Pagekit\\Info\\' => 'src'
 
     ],
 
     'controllers' => [
 
         '@system: /system' => [
-            'Pagekit\\System\\Controller\\InfoController'
+            'Pagekit\\Info\\Controller\\InfoController'
         ]
 
     ],

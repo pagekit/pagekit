@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\System\OAuthHelper;
+use Pagekit\OAuth\OAuthHelper;
 
 return [
 
@@ -25,14 +25,14 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\' => 'src'
+        'Pagekit\\OAuth\\' => 'src'
 
     ],
 
     'controllers' => [
 
         '@system: /' => [
-            'Pagekit\\System\\Controller\\OAuthController'
+            'Pagekit\\OAuth\\Controller\\OAuthController'
         ]
 
     ],

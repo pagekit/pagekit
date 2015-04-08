@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System;
+namespace Pagekit\Info;
 
 use Doctrine\DBAL\Driver\PDOConnection;
 use Pagekit\Application as App;
