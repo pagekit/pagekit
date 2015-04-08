@@ -12,7 +12,7 @@ class SiteListener implements EventSubscriberInterface
 {
     public function onSiteTypes($event, $site)
     {
-        $site->registerType(new UrlType('page', __('Page'), '@site/id'));
+        $site->registerType(new UrlType('page', __('Page'), '@page/id'));
     }
 
     public function onSiteSections($event, $site)
@@ -36,9 +36,9 @@ class SiteListener implements EventSubscriberInterface
         $page = $this->getPage($node);
         $page->save($data);
 
-        $defaults       = $node->get('defaults', []);
+        $defaults       = $node->get('variables', []);
         $defaults['id'] = $page->getId();
-        $node->set('defaults', $defaults);
+        $node->set('variables', $defaults);
     }
 
     public function onDelete(EntityEvent $event)
@@ -58,7 +58,7 @@ class SiteListener implements EventSubscriberInterface
 
     protected function getPage($node)
     {
-        $defaults = $node->get('defaults', []);
+        $defaults = $node->get('variables', []);
 
         if (!isset($defaults['id']) or !$page = Page::find($defaults['id'])) {
             $page = new Page();

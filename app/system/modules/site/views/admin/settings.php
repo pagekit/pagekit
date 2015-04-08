@@ -14,3 +14,13 @@
         <span class="uk-form-help-block uk-text-danger" v-show="form['node[slug]'].invalid">{{ 'Invalid slug.' | trans }}</span>
     </div>
 </div>
+
+<div class="uk-form-row">
+    <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
+    <div class="uk-form-controls">
+        <select id="form-status" class="uk-form-width-large" v-model="node.status">
+            <option value="0">{{ 'Disabled' | trans }}</option>
+            <option value="1">{{ 'Enabled' | trans }}</option>
+        </select>
+    </div>
+</div>

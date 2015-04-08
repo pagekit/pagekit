@@ -8,6 +8,6 @@ class AliasType extends Type
 {
     public function bind(NodeInterface $node)
     {
-        App::aliases()->add($node->getPath(), $node->get('url'), $node->get('defaults'));
+        App::aliases()->add($node->getPath(), $node->get('url'), $node->get('defaults', []));
     }
 }

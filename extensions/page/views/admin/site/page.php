@@ -12,4 +12,4 @@
     </div>
 </div>
 
-<input type="hidden" name="node[data][defaults][id]" value="<?= $page->getId() ?>">
+<input type="hidden" name="node[data][variables][id]" value="<?= $page->getId() ?>">

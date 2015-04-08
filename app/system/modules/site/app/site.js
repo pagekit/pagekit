@@ -195,13 +195,14 @@ jQuery(function ($) {
                             return;
                         }
 
-                        this.$http.get(this.$url('admin/site/edit', { id: this.current.id, type: this.current.type }), function(data) {
+                        this.$http.get(this.$url('admin/site/edit', { id: this.current.id || 0, type: this.current.type }), function(data) {
 
                             if (self.edit) {
                                 self.edit.$destroy();
                             }
 
                             data.node.data = _.isArray(data.node.data) ? {} : data.node.data || {};
+                            data.node.menu = self.current.menu;
 
                             self.$set('node', data.node);
 

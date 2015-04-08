@@ -5,6 +5,7 @@ namespace Pagekit\Blog\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
+use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
@@ -19,12 +20,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class SiteController extends Controller
 {
     /**
+     * @var BlogExtension
+     */
+    protected $blog;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $config = App::module('blog')->config;
-        $autoclose = $config['comments.autoclose'] ? $config['comments.autoclose.days'] : 0;
+        $this->module = App::module('blog');
+        $autoclose = $this->module->config('comments.autoclose') ? $this->module->config('comments.autoclose.days') : 0;
 
         App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
@@ -33,9 +39,9 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/", name="site")
+     * @Route("/")
      * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
-     * @Response("blog:views/post/index.razr")
+     * @Response("blog:views/post/index.php")
      */
     public function indexAction($page = 1)
     {
@@ -46,7 +52,7 @@ class SiteController extends Controller
 
         $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
-        if (!$limit = App::module('blog')->config('posts_per_page')) {
+        if (!$limit = $this->module->config('posts_per_page')) {
             $limit = 10;
         }
 
@@ -57,14 +63,18 @@ class SiteController extends Controller
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
 
         return [
-            'head.title'          => __('Blog'),
-            'head.link.alternate' => [
-                'href'  => App::url('@blog/site/feed', [], true),
-                'title' => App::system()->config('site.title'),
-                'type'  => App::feed()->create(App::module('blog')->config('feed.type'))->getMIMEType()
+            '$meta' => [
+                'title' => __('Blog'),
+                'link' => [
+                    'alternate' => [
+                        'href'  => App::url('@blog/site/feed', [], true),
+                        'title' => App::system()->config('site.title'),
+                        'type'  => App::feed()->create($this->module->config('feed.type'))->getMIMEType()
+                    ]
+                ]
             ],
             'posts'               => $query->get(),
-            'params'              => App::module('blog')->config,
+            'params'              => $this->module->config,
             'total'               => $total,
             'page'                => $page
         ];
@@ -86,7 +96,7 @@ class SiteController extends Controller
 
             // check minimum idle time in between user comments
             if (!$user->hasAccess('blog: skip comment min idle')
-                and $minidle = App::module('blog')->config('comments.minidle')
+                and $minidle = $this->module->config('comments.minidle')
                 and $comment = Comment::where($user->isAuthenticated() ? ['user_id' => $user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
             ) {
 
@@ -110,7 +120,7 @@ class SiteController extends Controller
                 $data['author'] = $user->getName();
                 $data['email']  = $user->getEmail();
                 $data['url']    = $user->getUrl();
-            } elseif (App::module('blog')->config('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
+            } elseif ($this->module->config('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
                 throw new Exception(__('Please provide valid name and email.'));
             }
 
@@ -124,7 +134,7 @@ class SiteController extends Controller
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
-            if ($comment->getStatus() == Comment::STATUS_APPROVED && App::module('blog')->config('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->module->config('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
                 $comment->setStatus(Comment::STATUS_PENDING);
             }
 
@@ -154,7 +164,7 @@ class SiteController extends Controller
 
     /**
      * @Route("/{id}", name="id")
-     * @Response("blog:views/post/post.razr")
+     * @Response("blog:views/post/post.php")
      */
     public function postAction($id = 0)
     {
@@ -182,7 +192,13 @@ class SiteController extends Controller
             $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return ['head.title' => __($post->getTitle()), 'post' => $post, 'params' => App::module('blog')->config];
+        return [
+            '$meta' => [
+                'title' => __($post->getTitle())
+            ],
+            'post' => $post,
+            'blog' => $this->module
+        ];
     }
 
     /**
@@ -191,7 +207,7 @@ class SiteController extends Controller
      */
     public function feedAction($type = '')
     {
-        $feed = App::feed()->create($type ?: App::module('blog')->config('feed.type'), [
+        $feed = App::feed()->create($type ?: $this->module->config('feed.type'), [
             'title'       => App::system()->config('site.title'),
             'link'        => App::url('@blog/site', [], true),
             'description' => App::system()->config('site.description'),
@@ -203,7 +219,7 @@ class SiteController extends Controller
             $feed->setDate($last->getModified());
         }
 
-        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit(App::module('blog')->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->module->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
                     'title'       => $post->getTitle(),

@@ -25,7 +25,6 @@ class SiteModule extends Module
                     $type->bind($node);
                 }
             }
-
         }, 35);
     }
 

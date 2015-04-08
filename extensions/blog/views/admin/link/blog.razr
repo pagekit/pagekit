@@ -2,7 +2,7 @@
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
             <label>
-                <input class="js-posts" type="radio" name="blog-radio" value="@@blog/site"@( $link == '@blog/site' ? ' checked' : '' )> @trans('Posts View')
+                <input class="js-posts" type="radio" name="blog-radio" value="@@blog/site"@( $link == '@blog/site' ? ' checked' : '' )> <?= __('Posts View') ?>
             </label>
         </p>
     </div>
@@ -12,13 +12,13 @@
     <div class="uk-form-controls uk-form-controls-text">
         <p class="uk-form-controls-condensed">
             <label>
-                <input type="radio" name="blog-radio" value=""@( $link != '@blog/site' ? ' checked' : '' )> @trans('Post')
+                <input type="radio" name="blog-radio" value=""@( $link != '@blog/site' ? ' checked' : '' )> <?= __('Post') ?>
             </label>
             <select class="js-post" name="">
-                <option value=""@( !in_array($params.id, array_keys($posts)) ? ' selected' : '' )>@trans('- Select Post -')</option>
+                <option value=""@( !in_array($params.id, array_keys($posts)) ? ' selected' : '' )><?= __('- Select Post -') ?></option>
                 @foreach ($posts as $post)
                 <option value="@@blog/id?id=@( $post.id )"@( $params.id == $post.id ? ' selected' : '' )>@( $post.title )</option>
-                @endforeach
+                <?php endforeach ?>
             </select>
         </p>
     </div>

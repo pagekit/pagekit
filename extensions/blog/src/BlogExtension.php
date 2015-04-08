@@ -19,7 +19,7 @@ class BlogExtension extends Extension
     public function main(App $app)
     {
         $app->subscribe(
-            new RouteListener,
+//            new RouteListener,
             new CommentListener,
             new ReadmorePlugin
         );

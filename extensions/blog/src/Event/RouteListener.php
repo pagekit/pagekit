@@ -20,7 +20,7 @@ class RouteListener implements EventSubscriberInterface
     }
 
     /**
-     * Register alias routes
+     * Register alias routes.
      */
     public function onRouteCollection(RouteCollectionEvent $event)
     {
@@ -32,7 +32,7 @@ class RouteListener implements EventSubscriberInterface
     }
 
     /**
-     * Clears resolver cache
+     * Clears resolver cache.
      */
     public function clearCache()
     {

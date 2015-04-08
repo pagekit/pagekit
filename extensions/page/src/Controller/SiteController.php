@@ -6,15 +6,12 @@ use Pagekit\Application as App;
 use Pagekit\Page\Entity\Page;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @Route("/")
- */
 class SiteController
 {
     /**
      * @Route("/{id}", name="id")
      * @Request({"id" : "int"})
-     * @Response("page:views/index.razr")
+     * @Response("page:views/index.php")
      */
     public function indexAction($id = 0)
     {
@@ -24,6 +21,11 @@ class SiteController
 
         $page->setContent(App::content()->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
 
-        return ['head.title' => __($page->getTitle()), 'page' => $page];
+        return [
+            '$meta' => [
+                'title' => __($page->getTitle())
+            ],
+            'page' => $page
+        ];
     }
 }
