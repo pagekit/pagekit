@@ -80,7 +80,7 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
      */
     public static function error($callback, $priority = -8)
     {
-        self::on(KernelEvents::EXCEPTION, new ExceptionListenerWrapper(static::getInstance(), $callback), $priority);
+        self::on(KernelEvents::EXCEPTION, new ExceptionListenerWrapper($callback), $priority);
     }
 
     /**

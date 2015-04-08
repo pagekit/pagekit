@@ -99,7 +99,7 @@ return [
                 return new JsonResponse($e->getMessage(), $e->getStatusCode());
             }
 
-        });
+        }, -10);
 
     },
 

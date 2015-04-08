@@ -4,25 +4,20 @@ namespace Pagekit\Application;
 
 use Pagekit\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 class ExceptionListenerWrapper
 {
-    protected $app;
     protected $callback;
 
     /**
      * Constructor.
      *
-     * @param Application $app An Application instance
-     * @param mixed       $callback
+     * @param mixed $callback
      */
-    public function __construct(Application $app, $callback)
+    public function __construct($callback)
     {
-        $this->app = $app;
         $this->callback = $callback;
     }
 
@@ -38,7 +33,9 @@ class ExceptionListenerWrapper
 
         $response = call_user_func($this->callback, $exception, $code);
 
-        $this->ensureResponse($response, $event);
+        if ($response instanceof Response) {
+            $event->setResponse($response);
+        }
     }
 
     protected function shouldRun(\Exception $exception)
@@ -61,19 +58,5 @@ class ExceptionListenerWrapper
         }
 
         return true;
-    }
-
-    protected function ensureResponse($response, GetResponseForExceptionEvent $event)
-    {
-        if ($response instanceof Response) {
-            $event->setResponse($response);
-        } else {
-            $viewEvent = new GetResponseForControllerResultEvent($this->app['kernel'], $event->getRequest(), $event->getRequestType(), $response);
-            $this->app['events']->dispatch(KernelEvents::VIEW, $viewEvent);
-
-            if ($viewEvent->hasResponse()) {
-                $event->setResponse($viewEvent->getResponse());
-            }
-        }
     }
 }
