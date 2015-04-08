@@ -33,10 +33,10 @@ return [
     'require' => [
 
         'application',
-        'locale',
         'cache',
         'migration',
-        'option'
+        'system/locale',
+        'system/option'
 
     ],
 
