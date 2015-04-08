@@ -22,7 +22,7 @@ jQuery(function ($) {
             this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true);
-            this.$watch('config.filter', function() { this.load(0); }, true);
+            this.$watch('config.filter', _.debounce(function() { this.load(0); }, 200), true);
 
             this.load();
         },

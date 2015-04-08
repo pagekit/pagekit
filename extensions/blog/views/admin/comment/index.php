@@ -23,7 +23,7 @@
         <div data-uk-margin>
 
             <select v-model="config.filter.status" options="statusesFilter"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" lazy>
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}">
 
         </div>
     </div>
