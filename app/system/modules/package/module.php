@@ -28,6 +28,12 @@ return [
 
     ],
 
+    'resources' => [
+
+        'system/package:' => ''
+
+    ],
+
     'controllers' => [
 
         '@system: /system' => [
