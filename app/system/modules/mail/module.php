@@ -1,11 +1,11 @@
 <?php
 
-use Pagekit\Mail\ImpersonatePlugin;
 use Pagekit\Mail\Mailer;
+use Pagekit\Mail\Plugin\ImpersonatePlugin;
 
 return [
 
-    'name' => 'mail',
+    'name' => 'system/mail',
 
     'main' => function ($app) {
 
@@ -79,11 +79,29 @@ return [
                 } catch (\Exception $e) {}
             }
         });
+
+        $app->on('system.settings.edit', function ($event) use ($app) {
+
+            $app['view']->script('settings-mail', 'app/system/modules/mail/app/settings.js', 'settings');
+
+            $event->options($this->name, $this->config);
+            $event->data('ssl', extension_loaded('openssl'));
+            $event->section($this->name, 'Mail', 'app/system/modules/mail/views/settings.php');
+        });
+
     },
 
     'autoload' => [
 
         'Pagekit\\Mail\\' => 'src'
+
+    ],
+
+    'controllers' => [
+
+        '@system: /system' => [
+            'Pagekit\\Mail\\Controller\\MailController'
+        ]
 
     ],
 

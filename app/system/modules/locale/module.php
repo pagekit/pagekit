@@ -11,11 +11,11 @@ use Symfony\Component\Translation\Translator;
 
 return [
 
-    'name' => 'locale',
+    'name' => 'system/locale',
 
     'main' => function ($app) {
 
-        require __DIR__.'/src/functions.php';
+        require __DIR__.'/functions.php';
 
         $app['translator'] = function () {
 
@@ -75,8 +75,50 @@ return [
         $app->on('system.loaded', function () use ($app) {
 
             $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $app['translator']->getLocale()]));
-            $app['scripts']->register('locale', 'app/modules/locale/assets/js/locale.js', ['localeConfig', 'messages']);
+            $app['scripts']->register('locale', 'app/system/modules/locale/app/locale.js', ['localeConfig', 'messages']);
 
+        });
+
+        $app->on('system.settings.edit', function ($event) use ($app) {
+
+            $countries = $app['countries'];
+            $languages = $app['languages'];
+            $locales   = [];
+            foreach ($app['finder']->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
+                $code = $dir->getFileName();
+
+                list($lang, $country) = explode('_', $code);
+
+                $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
+            }
+
+            ksort($locales);
+
+            $timezones = [];
+            foreach (\DateTimeZone::listIdentifiers() as $timezone) {
+
+                $parts = explode('/', $timezone);
+
+                if (count($parts) > 2) {
+                    $region = $parts[0];
+                    $name = $parts[1].' - '.$parts[2];
+                } elseif (count($parts) > 1) {
+                    $region = $parts[0];
+                    $name = $parts[1];
+                } else {
+                    $region = 'Other';
+                    $name = $parts[0];
+                }
+
+                $timezones[$region][$timezone] = str_replace('_', ' ', $name);
+            }
+
+            $app['view']->script('settings-locale', 'app/system/modules/locale/app/settings.js', 'settings');
+
+            $event->data('locales', $locales);
+            $event->data('timezones', $timezones);
+            $event->options($this->name, $this->config, ['timezone', 'locale', 'locale_admin']);
+            $event->section($this->name, 'Localization', 'app/system/modules/locale/views/settings.php');
         });
 
     },

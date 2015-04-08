@@ -22,7 +22,7 @@ Vue.component('v-locale', {
     computed: {
 
         adminLocale: function() {
-            return this.option['locale'].locale_admin;
+            return this.option['system/locale'].locale_admin;
         }
 
     }

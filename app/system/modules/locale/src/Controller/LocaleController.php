@@ -17,7 +17,7 @@ class LocaleController
     {
         $messages = json_encode([
             'translations' => [$locale => App::translator()->getCatalogue($locale)->all()],
-            'formats' => App::module('locale')->config('formats')
+            'formats' => App::module('system/locale')->config('formats')
         ]);
 
         $request = App::request();

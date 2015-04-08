@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Mail\Controller;
 
 use Pagekit\Application as App;
 
