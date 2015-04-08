@@ -95,7 +95,7 @@ return [
             $request = $app['router']->getRequest();
             $types   = $request->getAcceptableContentTypes();
 
-            if ($request->isXmlHttpRequest() && 'json' == $request->getFormat(array_shift($types))) {
+            if ('json' == $request->getFormat(array_shift($types))) {
                 return new JsonResponse($e->getMessage(), $e->getStatusCode());
             }
 
