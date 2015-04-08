@@ -24,18 +24,10 @@ class ExceptionController
     {
         $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
 
-        switch ($exception->getClass()) {
-            case 'Pagekit\Session\Csrf\Exception\BadTokenException':
-                $title = __('Invalid CSRF token.');
-                break;
-            case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
-                $title = __('Sorry, the page you are looking for could not be found.');
-                break;
-            case 'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException':
-                $title = $exception->getMessage();
-                break;
-            default:
-                $title = __('Whoops, looks like something went wrong.');
+        if (is_subclass_of($exception->getClass(), 'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface')) {
+            $title = $exception->getMessage();
+        } else {
+            $title = __('Whoops, looks like something went wrong.');
         }
 
         $response = App::view('app/system/modules/theme/templates/error.php', compact('title', 'exception', 'currentContent'));
@@ -44,7 +36,7 @@ class ExceptionController
     }
 
     /**
-     * @param int     $startObLevel
+     * @param int $startObLevel
      *
      * @return string
      */
