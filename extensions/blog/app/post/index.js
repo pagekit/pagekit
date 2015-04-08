@@ -17,13 +17,10 @@ jQuery(function ($) {
         created: function () {
 
             this.resource = this.$resource('api/blog/post/:id');
-
             this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
-            this.$watch('config.page', this.load, true);
+            this.$watch('config.page', this.load, true, true);
             this.$watch('config.filter', _.debounce(function() { this.load(0); }, 200), true);
-
-            this.load();
         },
 
         computed: {
