@@ -72,22 +72,40 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
     {
         $output = '';
 
-        if (isset($this->metas['title'])) {
-            $output .= sprintf("        <title>%s</title>\n", $this->metas['title']);
-        }
-
         foreach ($this->metas as $name => $value) {
 
-            $value = htmlspecialchars($value);
+            if ($name == 'link') {
 
-            if ($name == 'title') {
-                continue;
-            } elseif ($name == 'canonical') {
-                $output .= sprintf("        <link rel=\"%s\" href=\"%s\">\n", $name, $value);
-            } elseif (preg_match('/^(og|twitter):/i', $name)) {
-                $output .= sprintf("        <meta property=\"%s\" content=\"%s\">\n", $name, $value);
+                foreach ($value as $rel => $attributes) {
+
+                    if (!$attributes) {
+                        continue;
+                    }
+
+                    if (!isset($attributes['rel'])) {
+                        $attributes['rel'] = $rel;
+                    }
+
+                    $attrs = '';
+                    foreach ($attributes as $name => $value) {
+                        $attrs .= sprintf(' %s="%s"', $name, htmlspecialchars($value));
+                    }
+                    $output .= sprintf("        <link%s>\n", $attrs);
+                }
+
             } else {
-                $output .= sprintf("        <meta name=\"%s\" content=\"%s\">\n", $name, $value);
+
+                $value = htmlspecialchars($value);
+
+                if ($name == 'title') {
+                    $output .= sprintf("        <title>%s</title>\n", $value);
+                } else if ($name == 'canonical') {
+                    $output .= sprintf("        <link rel=\"%s\" href=\"%s\">\n", $name, $value);
+                } elseif (preg_match('/^(og|twitter):/i', $name)) {
+                    $output .= sprintf("        <meta property=\"%s\" content=\"%s\">\n", $name, $value);
+                } else {
+                    $output .= sprintf("        <meta name=\"%s\" content=\"%s\">\n", $name, $value);
+                }
             }
         }
 

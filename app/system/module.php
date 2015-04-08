@@ -10,7 +10,6 @@ use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener;
-use Pagekit\System\Helper\SystemInfoHelper;
 use Pagekit\System\View\ViewListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
