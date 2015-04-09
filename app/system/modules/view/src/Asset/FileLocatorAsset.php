@@ -15,6 +15,6 @@ class FileLocatorAsset extends FileAsset
             $options['path'] = $path;
         }
 
-        parent::__construct($name, $source, $dependencies, $options);
+        parent::__construct($name, App::url()->getStatic($source), $dependencies, $options);
     }
 }

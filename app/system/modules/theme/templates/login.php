@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="<?= $view->url()->getStatic('app/system/modules/theme/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
-        <link href="<?= $view->url()->getStatic('app/system/modules/theme/apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
+        <link href="<?= $view->url()->getStatic('system/theme:favicon.ico') ?>" rel="shortcut icon" type="image/x-icon">
+        <link href="<?= $view->url()->getStatic('system/theme:apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <?= $view->render('head') ?>
-        <?php $view->style('theme', 'app/system/modules/theme/css/theme.css') ?>
-        <?php $view->script('login', 'app/system/modules/theme/js/login.js', ['uikit']) ?>
+        <?php $view->style('theme', 'system/theme:css/theme.css') ?>
+        <?php $view->script('login', 'system/theme:js/login.js', ['uikit']) ?>
     </head>
     <body class="uk-height-1-1">
 

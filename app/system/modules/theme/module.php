@@ -38,6 +38,12 @@ return [
 
         });
 
-    }
+    },
+
+    'resources' => [
+
+        'system/theme:' => ''
+
+    ]
 
 ];
