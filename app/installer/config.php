@@ -8,13 +8,13 @@ return [
 
     ],
 
-    'cache' => [
+    'session' => [
 
         'storage' => 'array'
 
     ],
 
-    'session' => [
+    'system/cache' => [
 
         'storage' => 'array'
 

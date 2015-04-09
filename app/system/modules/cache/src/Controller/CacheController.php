@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Cache\Controller;
 
 use Pagekit\Application as App;
 
@@ -15,7 +15,7 @@ class CacheController
      */
     public function clearAction($caches)
     {
-        App::module('cache')->clearCache($caches);
+        App::module('system/cache')->clearCache($caches);
 
         return ['message' => __('Cache cleared!')];
     }

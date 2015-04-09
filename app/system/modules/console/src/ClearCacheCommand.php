@@ -23,6 +23,6 @@ class ClearCacheCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->container['module']->get('cache')->doClearCache();
+        $this->container['module']->get('system/cache')->doClearCache();
     }
 }

@@ -74,7 +74,7 @@ class SystemListener implements EventSubscriberInterface
     public function onSettingsSave($event, $config)
     {
         if ($config['application.debug'] != App::module('application')->config('debug')) {
-            App::module('cache')->clearCache();
+            App::module('system/cache')->clearCache();
         }
     }
 

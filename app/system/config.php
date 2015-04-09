@@ -2,35 +2,6 @@
 
 return [
 
-    'cache' => [
-
-        'caches' => [
-
-            'cache' => [
-
-                'storage' => 'auto',
-                'path'    => '%path%/tmp/cache',
-                'prefix'  => sha1(__DIR__)
-
-            ],
-
-            'cache.phpfile' => [
-
-                'storage' => 'phpfile',
-                'path'    => '%path%/tmp/cache'
-
-            ]
-
-        ]
-
-    ],
-
-    'profiler' => [
-
-        'file' => '%path%/app/database/profiler.db'
-
-    ],
-
     'session' => [
 
         'storage'  => 'database',
@@ -63,6 +34,35 @@ return [
     'filesystem' => [
 
         'path' => '%path%'
+
+    ],
+
+    'profiler' => [
+
+        'file' => '%path%/app/database/profiler.db'
+
+    ],
+
+    'system/cache' => [
+
+        'caches' => [
+
+            'cache' => [
+
+                'storage' => 'auto',
+                'path'    => '%path%/tmp/cache',
+                'prefix'  => sha1(__DIR__)
+
+            ],
+
+            'cache.phpfile' => [
+
+                'storage' => 'phpfile',
+                'path'    => '%path%/tmp/cache'
+
+            ]
+
+        ]
 
     ]
 

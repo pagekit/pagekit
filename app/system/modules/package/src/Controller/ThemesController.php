@@ -96,7 +96,7 @@ class ThemesController extends Controller
             }
 
             App::package()->getInstaller('theme')->uninstall($theme);
-            App::module('cache')->clearCache();
+            App::module('system/cache')->clearCache();
 
             return ['message' => __('Theme uninstalled.')];
 

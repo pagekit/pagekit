@@ -130,7 +130,6 @@ return [
 
         'profiler',
         'application',
-        'cache',
         'comment',
         'feed',
         'markdown',
@@ -138,6 +137,7 @@ return [
         'package',
         'site',
         'tree',
+        'system/cache',
         'system/console',
         'system/content',
         'system/dashboard',
