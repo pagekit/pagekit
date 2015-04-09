@@ -1,7 +1,7 @@
 <?php
 
 use Pagekit\System\Event\ResponseListener;
-use Pagekit\System\View\ViewListener;
+use Pagekit\View\ViewListener;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return [
@@ -36,7 +36,8 @@ return [
         'migration',
         'system/cache',
         'system/locale',
-        'system/option'
+        'system/option',
+        'system/view'
 
     ],
 

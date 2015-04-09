@@ -1,11 +1,10 @@
 <?php
 
-namespace Pagekit\System\View\Asset;
+namespace Pagekit\View\Asset;
 
 use Pagekit\Application as App;
-use Pagekit\View\Asset\FileAsset as BaseFileAsset;
 
-class FileAsset extends BaseFileAsset
+class FileLocatorAsset extends FileAsset
 {
     /**
      * {@inheritdoc}

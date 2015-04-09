@@ -1,8 +1,6 @@
 <?php
 
-namespace Pagekit\System\View\Asset;
-
-use Pagekit\View\Asset\Asset;
+namespace Pagekit\View\Asset;
 
 class TemplateAsset extends Asset
 {

@@ -57,28 +57,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Add system settings screens.
-     */
-    public function onSettingsEdit($event, $config)
-    {
-        $event->options('system', App::system()->config, ['api.key', 'release_channel', 'site.', 'maintenance.']);
-        $event->data('config', $config, ['application.debug', 'system.storage', 'profiler.enabled']);
-        $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
-        $event->section('site',   'Site', 'system:views/admin/settings/site.php');
-        $event->section('system', 'System', 'system:views/admin/settings/system.php');
-    }
-
-    /**
-     * Add system settings screens.
-     */
-    public function onSettingsSave($event, $config)
-    {
-        if ($config['application.debug'] != App::module('application')->config('debug')) {
-            App::module('system/cache')->clearCache();
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -87,9 +65,7 @@ class SystemListener implements EventSubscriberInterface
             'system.admin'         => 'onSystemAdmin',
             'system.finder'        => 'onSystemFinder',
             'system.link'          => 'onSystemLink',
-            'system.loaded'        => 'onSystemLoaded',
-            'system.settings.edit' => ['onSettingsEdit', 8],
-            'system.settings.save' => 'onSettingsSave'
+            'system.loaded'        => 'onSystemLoaded'
         ];
     }
 }

@@ -10,7 +10,6 @@ use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener;
-use Pagekit\System\View\ViewListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -32,7 +31,6 @@ return [
             new ResponseListener,
             new SystemListener,
             new ThemeListener,
-            new ViewListener,
             new WidgetListener
         );
 
@@ -52,14 +50,6 @@ return [
         $app['db.em']; // -TODO- fix me
 
         $app['system'] = $this;
-
-        $app->extend('assets', function ($assets) use ($app) {
-
-            $assets->register('file', 'Pagekit\System\View\Asset\FileAsset');
-            $assets->register('template', 'Pagekit\System\View\Asset\TemplateAsset');
-
-            return $assets;
-        });
 
         $app->on('kernel.boot', function() use ($app) {
 
@@ -153,6 +143,7 @@ return [
         'system/site',
         'system/theme',
         'system/user',
+        'system/view',
         'system/widget'
 
     ],
