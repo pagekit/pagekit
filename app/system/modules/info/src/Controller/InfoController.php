@@ -16,7 +16,7 @@ class InfoController extends Controller
     public function indexAction()
     {
         return [
-            '$meta' => ['title' => __('System Information')],
+            '$meta' => ['title' => __('Info')],
             '$info' => App::info()->get()
         ];
     }
