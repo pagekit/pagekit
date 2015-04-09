@@ -15,6 +15,7 @@
     <testsuites>
         <testsuite name="Pagekit Tests">
     		<directory>./app/modules/*/src/</directory>
+            <directory>./app/system/modules/*/src/</directory>
         </testsuite>
     </testsuites>
 
