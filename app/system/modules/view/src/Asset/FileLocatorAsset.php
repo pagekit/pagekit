@@ -12,9 +12,10 @@ class FileLocatorAsset extends FileAsset
     public function __construct($name, $source, array $dependencies = [], array $options = [])
     {
         if (!isset($options['path']) && $path = App::locator()->get($source)) {
+            $source = App::file()->getUrl($path);
             $options['path'] = $path;
         }
 
-        parent::__construct($name, App::url()->getStatic($source), $dependencies, $options);
+        parent::__construct($name, $source, $dependencies, $options);
     }
 }
