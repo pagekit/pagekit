@@ -22,7 +22,12 @@ class AssetManager implements \IteratorAggregate
     /**
      * @var array
      */
-    protected $queued = [];
+    protected $queue = [];
+
+    /**
+     * @var array
+     */
+    protected $lazy = [];
 
     /**
      * @var array
@@ -89,7 +94,7 @@ class AssetManager implements \IteratorAggregate
         }
 
         if ($asset) {
-            $this->queued[$name] = true;
+            $this->queue[$name] = true;
         }
 
         return $asset;
@@ -103,7 +108,8 @@ class AssetManager implements \IteratorAggregate
      */
     public function remove($name)
     {
-        unset($this->queued[$name]);
+        unset($this->queue[$name]);
+        unset($this->lazy[$name]);
 
         return $this;
     }
@@ -115,7 +121,8 @@ class AssetManager implements \IteratorAggregate
      */
     public function removeAll()
     {
-        $this->queued = [];
+        $this->queue = [];
+        $this->lazy = [];
 
         return $this;
     }
@@ -132,6 +139,13 @@ class AssetManager implements \IteratorAggregate
     public function register($name, $source, $dependencies = [], $options = [])
     {
         $this->registered->add($asset = $this->factory->create($name, $source, $dependencies, $options));
+
+        foreach ($asset->getDependencies() as $dependency) {
+            if ($dependency[0] === '~') {
+                $this->lazy[$name] = true;
+                break;
+            }
+        }
 
         return $asset;
     }
@@ -179,12 +193,12 @@ class AssetManager implements \IteratorAggregate
 
         $assets = [];
 
-        foreach (array_keys($this->queued) as $name) {
+        foreach (array_keys($this->queue) as $name) {
             $this->resolveDependencies($this->registered->get($name), $assets);
         }
 
-        foreach ($this->registered as $name => $asset) {
-            $this->resolveLateDependencies($asset, $assets);
+        foreach (array_keys($this->lazy) as $name) {
+            $this->resolveLazyDependencies($this->registered->get($name), $assets);
         }
 
         $assets = new AssetCollection($assets);
@@ -226,6 +240,11 @@ class AssetManager implements \IteratorAggregate
         $unresolved[$asset->getName()] = $asset;
 
         foreach ($asset->getDependencies() as $dependency) {
+
+            if ($dependency[0] === '~' && !isset($resolved[$dependency = ltrim($dependency, '~')])) {
+                continue;
+            }
+
             if (!isset($resolved[$dependency])) {
 
                 if (isset($unresolved[$dependency])) {
@@ -245,20 +264,19 @@ class AssetManager implements \IteratorAggregate
     }
 
     /**
-     * Resolves late asset dependencies.
+     * Resolves lazy asset dependencies.
      *
      * @param  AssetInterface   $asset
      * @param  AssetInterface[] $resolved
      * @return AssetInterface[]
      */
-    protected function resolveLateDependencies($asset, &$resolved = [])
+    protected function resolveLazyDependencies($asset, &$resolved = [])
     {
         if (!isset($resolved[$asset->getName()])) {
             foreach ($asset->getDependencies() as $dependency) {
-                if ($dependency[0] === '~') {
-                    if (isset($resolved[substr($dependency, 1)])) {
-                        $this->resolveDependencies($asset, $resolved);
-                    }
+                if ($dependency[0] === '~' && isset($resolved[ltrim($dependency, '~')])) {
+                    $this->resolveDependencies($asset, $resolved);
+                    break;
                 }
             }
         }

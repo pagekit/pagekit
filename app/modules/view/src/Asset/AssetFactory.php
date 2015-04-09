@@ -28,12 +28,6 @@ class AssetFactory
             $dependencies = [$dependencies];
         }
 
-        foreach ($dependencies as $dependency) {
-            if ($dependency[0] === '~') {
-                $dependencies[] = substr($dependency, 1);
-            }
-        }
-
         if (is_string($options)) {
             $options = ['type' => $options];
         }
