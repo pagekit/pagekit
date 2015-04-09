@@ -257,7 +257,7 @@ class AssetManager implements \IteratorAggregate
             foreach ($asset->getDependencies() as $dependency) {
                 if ($dependency[0] === '~') {
                     if (isset($resolved[substr($dependency, 1)])) {
-                        $this->resolveDependencies($asset, $assets);
+                        $this->resolveDependencies($asset, $resolved);
                     }
                 }
             }
