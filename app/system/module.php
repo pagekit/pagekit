@@ -159,7 +159,6 @@ return [
         ],
 
         '@system: /system' => [
-            'Pagekit\\System\\Controller\\LinkController',
             'Pagekit\\System\\Controller\\MigrationController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController'
