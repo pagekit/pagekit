@@ -4,7 +4,6 @@ namespace Pagekit\Page;
 
 use Pagekit\Application as App;
 use Pagekit\Page\Event\SiteListener;
-use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 
 class PageExtension extends Extension
@@ -15,10 +14,6 @@ class PageExtension extends Extension
     public function main(App $app)
     {
         $app->subscribe(new SiteListener);
-
-        $app->on('system.link', function (LinkEvent $event) {
-            $event->register('Pagekit\Page\PageLink');
-        });
     }
 
     /**

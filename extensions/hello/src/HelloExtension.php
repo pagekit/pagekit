@@ -4,7 +4,6 @@ namespace Pagekit\Hello;
 
 use Pagekit\Application as App;
 use Pagekit\Hello\Event\HelloListener;
-use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 use Pagekit\Widget\Event\RegisterWidgetEvent;
 
@@ -26,10 +25,6 @@ class HelloExtension extends Extension
 
         $app->on('system.dashboard', function($event, $dashboard) {
             $dashboard->registerType('Pagekit\Hello\HelloWidget');
-        });
-
-        $app->on('system.link', function(LinkEvent $event) {
-            $event->register('Pagekit\Hello\HelloLink');
         });
 
         // dispatch event (check Hello\Event\HelloListener to see how subscribers work)

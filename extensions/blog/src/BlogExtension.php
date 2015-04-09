@@ -8,7 +8,6 @@ use Pagekit\Blog\Event\CommentListener;
 use Pagekit\Blog\Event\RouteListener;
 use Pagekit\Site\Model\MountType;
 use Pagekit\Site\Model\UrlType;
-use Pagekit\System\Event\LinkEvent;
 use Pagekit\System\Extension;
 
 class BlogExtension extends Extension
@@ -27,10 +26,6 @@ class BlogExtension extends Extension
         $app->on('system.init', function() use ($app) {
             $site = $app['module']->get('system/site');
             $site->config['frontpage'] = $site->config['frontpage'] ?: '@blog/site';
-        });
-
-        $app->on('system.link', function(LinkEvent $event) {
-            $event->register('Pagekit\Blog\Link\BlogLink');
         });
 
         $app->on('site.types', function ($event, $site) {

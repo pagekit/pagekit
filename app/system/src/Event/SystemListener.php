@@ -35,16 +35,6 @@ class SystemListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers links.
-     *
-     * @param LinkEvent $event
-     */
-    public function onSystemLink(LinkEvent $event)
-    {
-        $event->register('Pagekit\System\Link\System');
-    }
-
-    /**
      * Registers the media storage folder
      *
      * @param FileAccessEvent $event
@@ -64,7 +54,6 @@ class SystemListener implements EventSubscriberInterface
         return [
             'system.admin'         => 'onSystemAdmin',
             'system.finder'        => 'onSystemFinder',
-            'system.link'          => 'onSystemLink',
             'system.loaded'        => 'onSystemLoaded'
         ];
     }
