@@ -24,10 +24,6 @@ return [
             new SystemListener
         );
 
-        $app['version'] = function() {
-            return $this->config['version'];
-        };
-
         $app->factory('finder', function() {
             return Finder::create();
         });
@@ -69,17 +65,6 @@ return [
             $app->trigger('system.init', $event);
 
         }, 50);
-
-        $app->on('kernel.view', function($event) use ($app) {
-
-            if (!$event->isMasterRequest()) {
-                return;
-            }
-
-            $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
-            $app['view']->defer('head');
-
-        });
 
         $app->on('kernel.request', function($event) use ($app) {
 
@@ -198,8 +183,6 @@ return [
     'config' => [
 
         'extensions' => [],
-
-        'version' => '0.8.8',
 
         'dashboard' => [
 

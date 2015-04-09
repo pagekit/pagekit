@@ -13,15 +13,21 @@ return [
 
     'main' => function ($app) {
 
-        $app['url'] = function($app) {
+        $app['version'] = function () {
+            return $this->config['version'];
+        };
+
+        $app['debug'] = function () {
+            return $this->config['debug'];
+        };
+
+        $app['url'] = function ($app) {
             return new UrlProvider($app['router'], $app['file'], $app['locator']);
         };
 
-        $app['response'] = function($app) {
+        $app['response'] = function ($app) {
             return new Response($app['url']);
         };
-
-        $app['debug'] = (bool) $this->config('debug');
 
         $app['exception'] = ExceptionHandler::register($app['debug']);
 
@@ -34,7 +40,7 @@ return [
         // redirect the request if it has a trailing slash
         if (!$app->inConsole()) {
 
-            $app->on('kernel.request', function(GetResponseEvent $event) {
+            $app->on('kernel.request', function (GetResponseEvent $event) {
 
                 $path = $event->getRequest()->getPathInfo();
 
@@ -62,7 +68,8 @@ return [
 
     'config' => [
 
-        'debug' => true
+        'version' => '',
+        'debug'   => false
 
     ]
 

@@ -2,6 +2,12 @@
 
 return [
 
+    'application' => [
+
+        'version' => '0.8.8'
+
+    ],
+
     'session' => [
 
         'storage'  => 'database',

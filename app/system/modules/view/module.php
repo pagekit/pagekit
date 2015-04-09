@@ -20,6 +20,8 @@ return [
 
         $app->on('system.init', function() use ($app) {
 
+            $app['view']->defer('head');
+            $app['view']->meta(['generator' => 'Pagekit '.$app['version']]);
             $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
             $app['view']->addHelper(new TemplateHelper($app['view'], $app));
 
