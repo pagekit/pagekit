@@ -4,7 +4,7 @@
 
         <div class="uk-panel uk-panel-box uk-width-1-4" v-component="menu-list" inline-template>
 
-            <!-- Remark: v-transition is added to force a complete refresh after the nodes have been updated-->
+            <!-- Remark: v-transition is added to force a complete refresh after the nodes have been updated -->
             <div class="uk-margin" v-repeat="menu: menus" v-transition="">
                 <div class="uk-flex">
                     <span class="uk-panel-title uk-flex-item-1" v-on="click: edit(menu)">{{ menu.label }}</span>
@@ -46,7 +46,7 @@
 
                     <div class="uk-float-right">
 
-                        <a class="uk-button" v-on="click: reset()">{{ 'Cancel' | trans }}</a>
+                        <a class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</a>
                         <button class="uk-button uk-button-primary" type="submit" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
 
                     </div>
@@ -54,6 +54,8 @@
                 </div>
 
                 <div v-el="edit"></div>
+
+                <pre>{{ node | json }}</pre>
 
             </form>
 

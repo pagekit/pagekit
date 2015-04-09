@@ -187,6 +187,14 @@ jQuery(function ($) {
 
                 methods: {
 
+                    cancel: function() {
+                        if (this.node.id) {
+                            this.reload();
+                        } else {
+                            this.select(this.nodes[0]);
+                        }
+                    },
+
                     reload: function() {
 
                         var self = this;
@@ -222,7 +230,7 @@ jQuery(function ($) {
                     },
 
                     getPath: function() {
-                        return this.node.path.split('/').slice(0, -1).join('/') + '/' + (this.node.slug || '');
+                        return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
                     },
 
                     save: function (e) {

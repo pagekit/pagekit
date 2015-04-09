@@ -7,6 +7,7 @@ use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
 use Pagekit\Site\Model\AliasType;
 use Pagekit\Site\Model\TypeInterface;
+use Pagekit\Site\Model\UrlType;
 
 class SiteModule extends Module
 {
@@ -46,7 +47,7 @@ class SiteModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new AliasType('alias', __('Alias')));
+            $this->registerType(new UrlType('alias', __('Alias'), ''));
 
             App::trigger('site.types', [$this]);
         }

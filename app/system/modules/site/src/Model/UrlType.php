@@ -24,8 +24,8 @@ class UrlType extends Type
     {
         App::aliases()->add(
             $node->getPath(),
-            $this->parseQuery($this->getUrl(), $node->get('variables', [])),
-            array_merge($node->get('variables', []), $node->get('defaults', []))
+            $this->parseQuery($node->get('url', $this->getUrl()), $node->get('variables', [])),
+            $node->get('defaults', [])
         );
     }
 
