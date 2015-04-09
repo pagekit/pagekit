@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Exception;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Symfony\Component\Debug\Exception\FlattenException;

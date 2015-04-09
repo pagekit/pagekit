@@ -20,7 +20,7 @@ return [
     'main' => function ($app) {
 
         if (!$app['debug']) {
-            $app->subscribe(new ExceptionListener('Pagekit\System\Exception\ExceptionController::showAction'));
+            $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
         }
 
         $app->subscribe(
