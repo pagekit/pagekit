@@ -5,7 +5,6 @@ use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
-use Pagekit\System\Event\WidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
@@ -22,8 +21,7 @@ return [
         $app->subscribe(
             new MaintenanceListener,
             new MigrationListener,
-            new SystemListener,
-            new WidgetListener
+            new SystemListener
         );
 
         $app['version'] = function() {

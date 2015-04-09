@@ -3,7 +3,7 @@ Vue.component('v-oauth', {
     inherit: true,
     replace: true,
 
-    template: '#template-oauth',
+    template: '#oauth-tmpl',
 
     ready: function () {
 

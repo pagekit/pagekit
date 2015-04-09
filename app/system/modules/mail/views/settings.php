@@ -1,6 +1,6 @@
 <div v-component="v-mail"></div>
 
-<script id="template-mail" type="x-template">
+<script id="mail-tmpl" type="text/template">
 
     <h2 class="pk-form-heading">{{ 'Email' | trans }}</h2>
     <div class="uk-form-row">

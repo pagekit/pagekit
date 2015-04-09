@@ -14,12 +14,12 @@ return [
 
         $app->on('system.settings.edit', function ($event) use ($app) {
 
-            $app['view']->script('settings-oauth', 'app/system/modules/oauth/app/oauth.js', 'settings');
+            $app['view']->script('settings-oauth', 'app/system/modules/oauth/app/settings.js', 'settings');
 
             $event->options($this->name, $this->config);
             $event->data('oauth', $app['oauth']->getProvider());
             $event->data('redirect_url', $app['oauth']->getRedirectUrl());
-            $event->section($this->name, 'OAuth', 'app/system/modules/oauth/views/oauth.php');
+            $event->section($this->name, 'OAuth', 'app/system/modules/oauth/views/settings.php');
         });
     },
 

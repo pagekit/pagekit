@@ -3,7 +3,7 @@ Vue.component('v-mail', {
     inherit: true,
     replace: true,
 
-    template: '#template-mail',
+    template: '#mail-tmpl',
 
     methods: {
 
