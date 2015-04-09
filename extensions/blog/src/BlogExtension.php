@@ -25,7 +25,8 @@ class BlogExtension extends Extension
         );
 
         $app->on('system.init', function() use ($app) {
-            $app['system/site']->config['frontpage'] = $app['system/site']->config['frontpage'] ?: '@blog/site';
+            $site = $app['module']->get('system/site');
+            $site->config['frontpage'] = $site->config['frontpage'] ?: '@blog/site';
         });
 
         $app->on('system.link', function(LinkEvent $event) {

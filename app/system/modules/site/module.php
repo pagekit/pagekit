@@ -46,7 +46,8 @@ return [
     ],
 
     'config' => [
-        'menus' => []
+        'menus'     => [],
+        'frontpage' => false
     ],
 
     'resources' => [
