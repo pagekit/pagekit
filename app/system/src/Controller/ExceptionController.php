@@ -22,31 +22,29 @@ class ExceptionController
      */
     public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null, $_format = 'html')
     {
-        $currentContent = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
-
         if (is_subclass_of($exception->getClass(), 'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface')) {
             $title = $exception->getMessage();
         } else {
             $title = __('Whoops, looks like something went wrong.');
         }
 
-        $response = App::view('system/theme:templates/error.php', compact('title', 'exception', 'currentContent'));
+        $content  = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
+        $response = App::view('system/theme:templates/error.php', compact('title', 'exception', 'content'));
 
         return App::response($response, $exception->getStatusCode(), $exception->getHeaders());
     }
 
     /**
-     * @param int $startObLevel
-     *
+     * @param  int    $level
      * @return string
      */
-    protected function getAndCleanOutputBuffering($startObLevel)
+    protected function getAndCleanOutputBuffering($level)
     {
-        if (ob_get_level() <= $startObLevel) {
+        if (ob_get_level() <= $level) {
             return '';
         }
 
-        Response::closeOutputBuffers($startObLevel + 1, true);
+        Response::closeOutputBuffers($level + 1, true);
 
         return ob_get_clean();
     }
