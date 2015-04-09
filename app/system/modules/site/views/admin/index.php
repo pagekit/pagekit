@@ -1,4 +1,4 @@
-<div id="js-site">
+<div id="js-site" v-cloak>
 
     <div class="uk-grid">
 
@@ -85,7 +85,7 @@
 
 <script id="modal-menu" type="text/template">
 
-    <div class="uk-modal-dialog uk-modal-dialog-slide">
+    <div v-if="menu" class="uk-modal-dialog uk-modal-dialog-slide">
 
         <form v-on="valid: save" name="menuform">
 

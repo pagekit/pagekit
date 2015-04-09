@@ -56,7 +56,7 @@ jQuery(function ($) {
                 inherit : true,
 
                 data: function() {
-                    return { menu: {} };
+                    return { menu: null };
                 },
 
                 methods: {
@@ -72,33 +72,27 @@ jQuery(function ($) {
 
                         if (menu.fixed) return;
 
-                        if (!this.modal) {
-                            this.modal = UIkit.modal(this.$$.modal);
-                        }
-
-                        this.modal.show();
                         this.$set('menu', menu);
+
+                        this.modal = UIkit.modal(this.$$.modal);
+                        this.modal.show();
                     },
 
                     save: function (e) {
-
-                        if (e) {
-                            e.preventDefault();
-                        }
-
+                        if (e) e.preventDefault();
                         this.Menus[this.menu.oldId ? 'update' : 'save']({ id: this.menu.id }, this.menu, vm.load);
                         this.cancel();
                     },
 
-                    'delete': function () {
+                    'delete': function (e) {
+                        if (e) e.preventDefault();
                         this.Menus.delete({ id: this.menu.id }, vm.load);
-
                         this.cancel();
                     },
 
                     cancel: function (e) {
                         if (e) e.preventDefault();
-                        this.$set('menu', {});
+                        this.$set('menu', null);
                         this.modal.hide();
                     }
 
