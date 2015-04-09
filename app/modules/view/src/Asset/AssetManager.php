@@ -183,6 +183,10 @@ class AssetManager implements \IteratorAggregate
             $this->resolveDependencies($this->registered->get($name), $assets);
         }
 
+        foreach ($this->registered as $name => $asset) {
+            $this->resolveLateDependencies($asset, $assets);
+        }
+
         $assets = new AssetCollection($assets);
 
         foreach ($this->combine as $name => $options) {
@@ -236,6 +240,28 @@ class AssetManager implements \IteratorAggregate
 
         $resolved[$asset->getName()] = $asset;
         unset($unresolved[$asset->getName()]);
+
+        return $resolved;
+    }
+
+    /**
+     * Resolves late asset dependencies.
+     *
+     * @param  AssetInterface   $asset
+     * @param  AssetInterface[] $resolved
+     * @return AssetInterface[]
+     */
+    protected function resolveLateDependencies($asset, &$resolved = [])
+    {
+        if (!isset($resolved[$asset->getName()])) {
+            foreach ($asset->getDependencies() as $dependency) {
+                if ($dependency[0] === '~') {
+                    if (isset($resolved[substr($dependency, 1)])) {
+                        $this->resolveDependencies($asset, $assets);
+                    }
+                }
+            }
+        }
 
         return $resolved;
     }
