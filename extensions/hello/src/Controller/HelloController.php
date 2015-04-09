@@ -15,6 +15,10 @@ class HelloController extends Controller
      */
     public function indexAction()
     {
-        return ['head.title' => __('Hello')];
+        return [
+           '$meta' => [
+                'title' => __('Hello')
+            ]
+        ];
     }
 }

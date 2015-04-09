@@ -30,6 +30,13 @@ class AdminController extends Controller
             return $this->redirect('@system/admin');
         }
 
-        return ['head.title' => __('Login'), 'last_username' => App::session()->get(Auth::LAST_USERNAME), 'redirect' => App::request()->get('redirect') ? : App::url('@system/admin', [], true), 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
+        return [
+            '$meta' => [
+                'title' => __('Login')
+            ],
+            'last_username' => App::session()->get(Auth::LAST_USERNAME),
+            'redirect' => App::request()->get('redirect') ? : App::url('@system/admin', [], true),
+            'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
+        ];
     }
 }

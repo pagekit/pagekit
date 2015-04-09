@@ -19,7 +19,12 @@ class ProfileController extends Controller
             return $this->redirect('@user/auth/login', ['redirect' => App::url()->current()]);
         }
 
-        return ['head.title' => __('Your Profile'), 'user' => App::user()];
+        return [
+            '$meta' => [
+                'title' => __('Your Profile')
+            ],
+            'user' => App::user()
+        ];
     }
 
     /**

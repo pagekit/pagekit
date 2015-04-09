@@ -45,7 +45,14 @@ class WidgetsController extends Controller
             $widgets[isset($this->positions[$position]) ? $position : ''][] = $widget;
         }
 
-        return ['head.title' => __('Widgets'), 'widgets' => $widgets, 'positions' => $this->positions, 'types' => TypesTrait::getWidgetTypes()];
+        return [
+            '$meta' => [
+                'title' => __('Widgets')
+            ],
+            'widgets' => $widgets,
+            'positions' => $this->positions,
+            'types' => TypesTrait::getWidgetTypes()
+        ];
     }
 
     /**
@@ -57,7 +64,15 @@ class WidgetsController extends Controller
         $widget = new Widget;
         $widget->setType($type);
 
-        return ['head.title' => __('Add Widget'), 'widget' => $widget, 'roles' => Role::findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
+        return [
+            '$meta' => [
+                'title' => __('Add Widget')
+            ],
+            'widget' => $widget,
+            'roles' => Role::findAll(),
+            'positions' => $this->positions,
+            'additionals' => $this->triggerEditEvent($widget)
+        ];
     }
 
     /**
@@ -72,7 +87,15 @@ class WidgetsController extends Controller
                 throw new Exception(__('Invalid widget id'));
             }
 
-            return ['head.title' => __('Edit Widget'), 'widget' => $widget, 'roles' => Role::findAll(), 'positions' => $this->positions, 'additionals' => $this->triggerEditEvent($widget)];
+            return [
+                '$meta' => [
+                    'title' => __('Edit Widget')
+                ],
+                'widget' => $widget,
+                'roles' => Role::findAll(),
+                'positions' => $this->positions,
+                'additionals' => $this->triggerEditEvent($widget)
+            ];
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());

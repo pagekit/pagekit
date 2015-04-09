@@ -23,7 +23,14 @@ class AuthController extends Controller
             return $this->redirect('/');
         }
 
-        return ['head.title' => __('Login'), 'last_username' => App::session()->get(Auth::LAST_USERNAME), 'redirect' => $redirect, 'remember_me_param' => RememberMe::REMEMBER_ME_PARAM];
+        return [
+            '$meta' => [
+                'title' => __('Login')
+            ],
+            'last_username' => App::session()->get(Auth::LAST_USERNAME),
+            'redirect' => $redirect,
+            'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
+        ];
     }
 
     /**

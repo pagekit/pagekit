@@ -15,7 +15,11 @@ class MigrationController extends Controller
      */
     public function indexAction()
     {
-        return ['head.title' => __('Update Pagekit')];
+        return [
+           '$meta' => [
+                'title' => __('Update Pagekit')
+            ]
+        ];
     }
 
     /**

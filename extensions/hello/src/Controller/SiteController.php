@@ -14,7 +14,11 @@ class SiteController
      */
     public function indexAction()
     {
-        return ['head.title' => 'Hello World'];
+        return [
+            '$meta' => [
+                'title' => __('Hello World')
+            ]
+        ];
     }
 
     /**
@@ -25,7 +29,13 @@ class SiteController
     public function greetAction($name = 'World')
     {
         $names = explode(',', $name);
-        return ['head.title' => __('Hello %name%', ['%name%' => $names[0]]), 'names' => $names];
+
+        return [
+            '$meta' => [
+                'title' => __('Hello %name%', ['%name%' => $names[0]])
+            ],
+            'names' => $names
+        ];
     }
 
     /**
@@ -34,12 +44,23 @@ class SiteController
      */
     public function viewAction($id = 1)
     {
-        return ['head.title' => __('View article'), 'id' => $id];
+        return [
+            '$meta' => [
+                'title' => __('View article')
+            ],
+            'id' => $id
+        ];
     }
 
     public function anotherViewAction()
     {
-        $data = ['head.title' => __('View article'), 'id' => 1];
+        $data = [
+           '$meta' => [
+                'title' => __('View article')
+            ],
+            'id' => 1
+        ];
+
         return App::view('hello:views/view.razr', $data);
     }
 

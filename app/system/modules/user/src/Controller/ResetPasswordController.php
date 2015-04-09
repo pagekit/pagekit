@@ -18,7 +18,11 @@ class ResetPasswordController extends Controller
             return $this->redirect('/');
         }
 
-        return ['head.title' => __('Reset')];
+        return [
+            '$meta' => [
+                'title' => __('Reset')
+            ]
+        ];
     }
 
     /**
@@ -124,6 +128,12 @@ class ResetPasswordController extends Controller
             }
         }
 
-        return ['head.title' => __('Reset Confirm'), 'username' => $username, 'activation' => $activation];
+        return [
+            '$meta' => [
+                'title' => __('Reset Confirm')
+            ],
+            'username' => $username,
+            'activation' => $activation
+        ];
     }
 }

@@ -36,7 +36,11 @@ class RegistrationController extends Controller
             return $this->redirect('/');
         }
 
-        return ['head.title' => __('User Registration')];
+        return [
+            '$meta' => [
+                'title' => __('User Registration')
+            ]
+        ];
     }
 
     /**
