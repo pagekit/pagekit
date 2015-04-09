@@ -23,6 +23,20 @@ return [
             $app['scripts']->register('upload-tmpl', 'app/system/modules/package/views/upload.php', '~upload', 'template');
         });
 
+        $app->on('system.init', function() use ($app) {
+
+            $theme = $app['module']['system']->config('theme.site');
+
+            $app['module']->load($theme);
+
+            if ($app['theme.site'] = $app['module']->get($theme)) {
+                $app->on('system.site', function () use ($app) {
+                    $app['view']->map('layout', $app['theme.site']->getLayout());
+                });
+            }
+
+        }, 10);
+
     },
 
     'autoload' => [

@@ -2,13 +2,10 @@
 
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
-use Pagekit\System\Event\CanonicalListener;
 use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
-use Pagekit\System\Event\ResponseListener;
 use Pagekit\System\Event\SystemListener;
-use Pagekit\System\Event\ThemeListener;
 use Pagekit\System\Event\WidgetListener;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
@@ -24,13 +21,10 @@ return [
         }
 
         $app->subscribe(
-            new CanonicalListener,
             new FrontpageListener,
             new MaintenanceListener,
             new MigrationListener,
-            new ResponseListener,
             new SystemListener,
-            new ThemeListener,
             new WidgetListener
         );
 

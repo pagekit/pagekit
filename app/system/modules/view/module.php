@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\View\Event\CanonicalListener;
+use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\TemplateHelper;
 
 return [
@@ -45,6 +47,8 @@ return [
             $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', 'vue');
 
         }, 10);
+
+        $app->subscribe(new CanonicalListener(), new ResponseListener());
 
     },
 
