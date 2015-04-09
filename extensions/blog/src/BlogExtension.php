@@ -25,10 +25,8 @@ class BlogExtension extends Extension
         );
 
         $app->on('system.init', function() use ($app) {
-
-            $app['system']->config['frontpage'] = $app['system']->config['frontpage'] ?: '@blog/site';
-
-        }, 10);
+            $app['system/site']->config['frontpage'] = $app['system/site']->config['frontpage'] ?: '@blog/site';
+        });
 
         $app->on('system.link', function(LinkEvent $event) {
             $event->register('Pagekit\Blog\Link\BlogLink');

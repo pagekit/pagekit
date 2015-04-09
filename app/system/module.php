@@ -2,7 +2,6 @@
 
 use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Adapter\StreamAdapter;
-use Pagekit\System\Event\FrontpageListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
@@ -21,7 +20,6 @@ return [
         }
 
         $app->subscribe(
-            new FrontpageListener,
             new MaintenanceListener,
             new MigrationListener,
             new SystemListener,

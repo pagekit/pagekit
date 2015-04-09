@@ -27,6 +27,16 @@ class SiteModule extends Module
                 }
             }
         }, 35);
+
+        $app->on('system.init', function() use ($app) {
+            if ($frontpage = $this->config('frontpage')) {
+                $app['aliases']->add('/', $frontpage);
+            } else {
+                $app['callbacks']->get('/', '_frontpage', function() {
+                    return __('No Frontpage assigned.');
+                });
+            }
+        }, -15);
     }
 
     /**
