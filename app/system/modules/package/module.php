@@ -17,7 +17,10 @@ return [
         };
 
         $app->on('system.init', function() use ($app) {
-            $app['scripts']->register('marketplace', 'app/system/modules/package/app/marketplace.js', 'vue-system');
+            $app['scripts']->register('marketplace', 'app/system/modules/package/app/marketplace.js', ['vue-system', 'marketplace-tmpl']);
+            $app['scripts']->register('marketplace-tmpl', 'app/system/modules/package/views/marketplace.php', [], 'template');
+            $app['scripts']->register('upload', 'app/system/modules/package/app/upload.js', ['vue-system', 'uikit-upload', 'upload-tmpl']);
+            $app['scripts']->register('upload-tmpl', 'app/system/modules/package/views/upload.php', [], 'template');
         });
 
     },
@@ -41,13 +44,6 @@ return [
             'Pagekit\\System\\Controller\\ExtensionsController',
             'Pagekit\\System\\Controller\\ThemesController'
         ]
-
-    ],
-
-    'templates' => [
-
-        'marketplace.main' => 'system/package:views/marketplace.php',
-        'package.upload'   => 'system/package:views/upload.php'
 
     ],
 

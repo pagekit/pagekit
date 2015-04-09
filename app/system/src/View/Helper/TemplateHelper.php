@@ -9,14 +9,14 @@ use Pagekit\View\Helper\HelperInterface;
 class TemplateHelper implements HelperInterface
 {
     /**
-     * @var array
+     * @var ViewInterface
      */
-    protected $templates = [];
+    protected $view;
 
     /**
-     * @var array
+     * @var AssetManager
      */
-    protected $queued = [];
+    protected $manager;
 
     /**
      * Constructor.
@@ -25,90 +25,44 @@ class TemplateHelper implements HelperInterface
      */
     public function __construct(ViewInterface $view, Application $app)
     {
-        $view->on('head', function ($event) use ($view, $app) {
-            if ($templates = $this->queued()) {
-                $view->script('tmpl', $app['url']->get('@system/system/tmpls', ['templates' => implode(',', $templates)]));
+        $this->view = $view;
+        $this->manager = $app['scripts'];
+
+        $app->on('kernel.response', function ($event) use ($app) {
+
+            $request   = $event->getRequest();
+            $response  = $event->getResponse();
+            $templates = $this->render();
+
+            if (!$templates || !$event->isMasterRequest() || $request->isXmlHttpRequest() || $response->isRedirection()) {
+                return;
             }
+
+            if (false === $pos = strripos($content = $response->getContent(), '</body>')) {
+                return;
+            }
+
+            $response->setContent(substr_replace($content, $templates, $pos, 0));
+
         }, 10);
     }
 
     /**
-     * Add shortcut.
+     * Renders the template tags.
      *
-     * @see add()
-     */
-    public function __invoke($name)
-    {
-        $this->add($name);
-    }
-
-    /**
-     * Checks if a template is registered.
-     *
-     * @param  string  $name
-     * @return boolean
-     */
-    public function has($name)
-    {
-        return isset($this->templates[$name]);
-    }
-
-    /**
-     * Gets a template.
-     *
-     * @param  string $name
      * @return string
      */
-    public function get($name)
+    public function render()
     {
-        return $this->has($name) ? $this->templates[$name] : null;
-    }
+        $output = '';
 
-    /**
-     * Adds one or more registered template to the queue.
-     *
-     * @param string|array $name
-     */
-    public function add($name)
-    {
-        $templates = (array) $name;
-
-        foreach ($templates as $name) {
-            if (isset($this->templates[$name])) {
-                $this->queued[$name] = true;
+        foreach ($this->manager as $asset) {
+            if ($template = $asset['template']) {
+                $output .= sprintf("<script id=\"%s\" type=\"text/template\">%s</script>\n", $asset->getName(), $this->view->render($template));
             }
         }
-    }
 
-    /**
-     * Registers template.
-     *
-     * @param string $name
-     * @param string $template
-     */
-    public function register($name, $template)
-    {
-        $this->templates[$name] = $template;
-    }
-
-    /**
-     * Unregisters a template.
-     *
-     * @param string $name
-     */
-    public function unregister($name)
-    {
-        unset($this->templates[$name]);
-    }
-
-    /**
-     * Gets the queued templates.
-     *
-     * @return string
-     */
-    public function queued()
-    {
-        return array_keys($this->queued);
+        return $output;
     }
 
     /**

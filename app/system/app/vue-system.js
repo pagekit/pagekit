@@ -17,15 +17,6 @@
          * Methods
          */
 
-        Vue.template = function(name) {
-
-            if (!templates[name]) {
-                templates[name] = Vue.http.get(Vue.url('system/tmpl/:template', {template: name}));
-            }
-
-            return templates[name];
-        };
-
         Vue.url.static = function(url, params, root) {
 
             if (!root) {
@@ -46,41 +37,8 @@
             return Vue.filter('toOptions')(collection);
         };
 
-        var getTemplate = function(options, fn, args) {
-
-            if (!options.template) {
-                return fn.call(this, args);
-            }
-
-            var self     = this,
-                template = options.template,
-                frag     = Vue.parsers.template.parse(template);
-
-            if (frag) {
-                options.template = frag;
-                return fn.call(this, args);
-            }
-
-            Vue.template(template.slice(1)).success(function(tmpl) {
-                options.template = tmpl;
-            }).always(function() {
-                fn.call(self, args);
-            });
-
-            return this;
-        };
-
-        var $mount = Vue.prototype.$mount;
-        Vue.prototype.$mount = function(el) {
-            return getTemplate.call(this, this.$options, $mount, el);
-        };
-
-        var component = Vue.directive('component'), bind = component.bind;
-        component.bind = function() {
-            return getTemplate.call(this, this.vm.$options.components[this.expression].options, bind);
-        };
-
         var partial = Vue.directive('partial'), insert = partial.insert;
+
         partial.insert = function(id) {
 
             var self = this, partial = this.vm.$options.partials[id];
@@ -95,12 +53,6 @@
                 this.vm.$options.partials[id] = frag;
                 return insert.call(this, id);
             }
-
-            Vue.template(id.slice(1)).success(function(tmpl) {
-                self.vm.$options.partials[id] = tmpl;
-            }).always(function() {
-                insert.call(self, id);
-            });
         };
 
         /**

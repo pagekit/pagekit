@@ -36,7 +36,7 @@
         <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
     </div>
 
-    <div v-partial="#finder.{{ view }}"></div>
+    <div v-partial="#finder-{{ view }}"></div>
 
     <div v-if="isWritable()" class="uk-placeholder uk-text-center uk-text-muted">
         <img v-attr="src: $url('app/system/assets/images/finder-droparea.svg', true)" width="22" height="22" alt="{{ 'Droparea' | trans }}"> {{ 'Drop files here.' | trans }}

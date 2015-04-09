@@ -54,7 +54,11 @@ return [
         $app['system'] = $this;
 
         $app->extend('assets', function ($assets) use ($app) {
-            return $assets->register('file', 'Pagekit\System\Asset\FileAsset');
+
+            $assets->register('file', 'Pagekit\System\View\Asset\FileAsset');
+            $assets->register('template', 'Pagekit\System\View\Asset\TemplateAsset');
+
+            return $assets;
         });
 
         $app->on('kernel.boot', function() use ($app) {

@@ -15,7 +15,6 @@ class Editor implements EditorInterface, EventSubscriberInterface
     {
         App::view()->style('codemirror');
         App::view()->script('editor');
-        App::view()->tmpl(['image.modal', 'image.replace', 'link.modal', 'link.replace', 'video.modal', 'video.replace']);
 
         $attributes = array_merge([
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',

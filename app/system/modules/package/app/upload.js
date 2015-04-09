@@ -4,7 +4,7 @@
 
         replace: true,
 
-        template: '#package.upload',
+        template: '#upload-tmpl',
 
         data: function () {
             return {

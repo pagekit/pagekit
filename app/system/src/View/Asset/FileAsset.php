@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Asset;
+namespace Pagekit\System\View\Asset;
 
 use Pagekit\Application as App;
 use Pagekit\View\Asset\FileAsset as BaseFileAsset;

@@ -11,7 +11,7 @@ class ViewListener implements EventSubscriberInterface
     /**
      * Registers view styles/scripts.
      */
-    public function onKernelRequest($event)
+    public function onSystemInit($event)
     {
         $app   = App::getInstance();
         $debug = $app['module']['application']->config('debug');
@@ -40,16 +40,7 @@ class ViewListener implements EventSubscriberInterface
         $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', 'vue');
 
         $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
-
         $app['view']->addHelper(new TemplateHelper($app['view'], $app));
-
-        foreach ($app['module'] as $module) {
-            if (isset($module->templates)) {
-                foreach ($module->templates as $name => $tmpl) {
-                    $app['view']->tmpl()->register($name, $tmpl);
-                }
-            }
-        }
     }
 
     /**
@@ -58,7 +49,7 @@ class ViewListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'kernel.request' => 'onKernelRequest'
+            'system.init' => ['onSystemInit', 10]
         ];
     }
 }

@@ -6,7 +6,7 @@
 
         replace: true,
 
-        template: '#marketplace.main',
+        template: '#marketplace-tmpl',
 
         data: function () {
             return {

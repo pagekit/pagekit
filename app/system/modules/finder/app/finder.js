@@ -12,15 +12,13 @@
     var definition = {
 
         replace : true,
-        template: '#finder.main',
+        template: '#finder-main',
 
         data: function() {
             return Vue.util.extend({}, defaults);
         },
 
         ready: function () {
-
-            Vue.template('finder.thumbnail');
 
             this.resource = this.$resource('system/finder/:cmd');
 
