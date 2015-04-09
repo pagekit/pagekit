@@ -134,7 +134,6 @@ return [
         'markdown',
         'migration',
         'package',
-        'site',
         'tree',
         'system/cache',
         'system/comment',
@@ -151,6 +150,7 @@ return [
         'system/option',
         'system/package',
         'system/settings',
+        'system/site',
         'system/theme',
         'system/user',
         'system/widget'

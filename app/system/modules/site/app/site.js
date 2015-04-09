@@ -1,3 +1,5 @@
+/*global $data*/
+
 jQuery(function ($) {
 
     var vm = new Vue({
@@ -5,7 +7,7 @@ jQuery(function ($) {
         el: '#js-site',
 
         data: _.merge({
-            current: {},
+            selected: null,
             nodes: null,
             menus: null
         }, $data),
@@ -30,14 +32,14 @@ jQuery(function ($) {
         methods: {
 
             select: function(node) {
-                this.$set('current', node || {});
+                this.$set('selected', node);
             },
 
             load: function() {
 
                 this.Nodes.query(function (nodes) {
                     vm.$set('nodes', nodes);
-                    vm.select(_.find(nodes, { id: vm.current.id }) || nodes[0]);
+                    vm.select(vm.selected && _.find(nodes, { id: vm.selected.id }) || nodes[0]);
                 });
 
                 this.Menus.query(function (menus) {
@@ -139,7 +141,7 @@ jQuery(function ($) {
                 computed: {
 
                     isActive: function() {
-                        return this.node === this.current;
+                        return this.node === this.selected;
                     },
 
                     isParent: function() {
@@ -171,9 +173,7 @@ jQuery(function ($) {
 
                 watch: {
 
-                    current: function() {
-                        this.reload();
-                    }
+                    selected: 'reload'
 
                 },
 
@@ -191,18 +191,18 @@ jQuery(function ($) {
 
                         var self = this;
 
-                        if (!this.current.id && !this.current.type) {
+                        if (!this.selected) {
                             return;
                         }
 
-                        this.$http.get(this.$url('admin/site/edit', { id: this.current.id || 0, type: this.current.type }), function(data) {
+                        this.$http.get(this.$url('admin/site/edit', { id: this.selected.id || 0, type: this.selected.type }), function(data) {
 
                             if (self.edit) {
                                 self.edit.$destroy();
                             }
 
                             data.node.data = _.isArray(data.node.data) ? {} : data.node.data || {};
-                            data.node.menu = self.current.menu;
+                            data.node.menu = self.selected.menu;
 
                             self.$set('node', data.node);
 
@@ -222,8 +222,7 @@ jQuery(function ($) {
                     },
 
                     getPath: function() {
-                        var parent = _.find(this.nodes, { 'id': this.node.parentId });
-                        return (parent ? parent.path : '') + '/' + (this.node.slug || '');
+                        return this.node.path.split('/').slice(0, -1).join('/') + '/' + (this.node.slug || '');
                     },
 
                     save: function (e) {
@@ -231,7 +230,7 @@ jQuery(function ($) {
                         e.preventDefault();
 
                         this.Nodes.save({ id: this.node.id }, _.merge($(":input", e.target).serialize().parse(), { node: this.node }), function(node) {
-                            vm.current.id = parseInt(node.id);
+                            vm.selected.id = parseInt(node.id);
                             vm.load();
                         });
                     }

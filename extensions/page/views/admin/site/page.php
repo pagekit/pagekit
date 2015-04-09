@@ -8,8 +8,6 @@
 <div class="uk-form-row">
     <label for="form-url" class="uk-form-label"><?php echo __('Content') ?></label>
     <div class="uk-form-controls">
-        <textarea name="page[content]"><?= $page->getContent() ?></textarea>
+        <textarea name="page[content]" class="uk-form-width-large"><?= $page->getContent() ?></textarea>
     </div>
 </div>
-
-<input type="hidden" name="node[data][variables][id]" value="<?= $page->getId() ?>">

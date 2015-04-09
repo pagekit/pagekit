@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'site',
+    'name' => 'system/site',
 
     'main' => 'Pagekit\\Site\\SiteModule',
 
@@ -52,12 +52,6 @@ return [
     'resources' => [
 
         'site:' => ''
-
-    ],
-
-    'templates' => [
-
-        'alias.edit' => 'site:views/tmpl/alias.php'
 
     ]
 

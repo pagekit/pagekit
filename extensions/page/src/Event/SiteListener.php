@@ -36,9 +36,7 @@ class SiteListener implements EventSubscriberInterface
         $page = $this->getPage($node);
         $page->save($data);
 
-        $defaults       = $node->get('variables', []);
-        $defaults['id'] = $page->getId();
-        $node->set('variables', $defaults);
+        $node->set('variables', ['id' => $page->getId()]);
     }
 
     public function onDelete(EntityEvent $event)
@@ -58,9 +56,9 @@ class SiteListener implements EventSubscriberInterface
 
     protected function getPage($node)
     {
-        $defaults = $node->get('variables', []);
+        $variables = $node->get('variables', []);
 
-        if (!isset($defaults['id']) or !$page = Page::find($defaults['id'])) {
+        if (!isset($variables['id']) or !$page = Page::find($variables['id'])) {
             $page = new Page();
         }
 

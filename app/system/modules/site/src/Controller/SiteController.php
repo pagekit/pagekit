@@ -27,7 +27,7 @@ class SiteController extends Controller
                 'title' => __('Nodes')
             ],
             '$data'      => [
-                'types' => array_values(App::module('site')->getTypes()),
+                'types' => array_values(App::module('system/site')->getTypes()),
                 'roles' => Role::findAll()
             ]
         ];
@@ -51,7 +51,7 @@ class SiteController extends Controller
 
         return [
             'node' => $node,
-            'view' => App::view('site:views/admin/edit.php', ['sections' => App::module('site')->getSections($node->getType()), 'node' => $node])
+            'view' => App::view('site:views/admin/edit.php', ['sections' => App::module('system/site')->getSections($node->getType()), 'node' => $node])
         ];
     }
 }
