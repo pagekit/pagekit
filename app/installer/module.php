@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\System\Event\ResponseListener;
-use Pagekit\View\ViewListener;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return [
@@ -24,10 +22,6 @@ return [
             return $app['response']->redirect('@installer/installer');
         });
 
-        $app->subscribe(
-            new ResponseListener(),
-            new ViewListener()
-        );
     },
 
     'require' => [
