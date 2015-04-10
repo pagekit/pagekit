@@ -3,6 +3,7 @@
 use Pagekit\Filesystem\Filesystem;
 use Pagekit\Filesystem\Locator;
 use Pagekit\Filesystem\StreamWrapper;
+use Pagekit\Filesystem\Adapter\FileAdapter;
 
 return [
 
@@ -20,6 +21,15 @@ return [
 
         $app->on('kernel.boot', function () use ($app) {
             StreamWrapper::setFilesystem($app['file']);
+        });
+
+        $app->on('kernel.request', function ($event) use ($app) {
+
+            $request = $event->getRequest();
+            $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
+
+            $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));
+
         });
 
     },

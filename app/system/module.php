@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Filesystem\Adapter\FileAdapter;
-use Pagekit\Filesystem\Adapter\StreamAdapter;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
@@ -54,13 +52,7 @@ return [
                 return;
             }
 
-            $request = $event->getRequest();
-            $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
-
-            $app['file']->registerAdapter('file', new FileAdapter($app['path'], $baseUrl));
-            $app['file']->registerAdapter('app', new StreamAdapter($app['path'], $baseUrl));
-
-            $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+            $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
 
             $app->trigger('system.init', $event);
 

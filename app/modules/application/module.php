@@ -18,7 +18,7 @@ return [
         };
 
         $app['debug'] = function () {
-            return $this->config['debug'];
+            return (bool) $this->config['debug'];
         };
 
         $app['url'] = function ($app) {
@@ -33,7 +33,7 @@ return [
 
         ErrorHandler::register(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
 
-        if ($app->inConsole() or $app['debug']) {
+        if ($app->inConsole() || $app['debug']) {
             ini_set('display_errors', 1);
         }
 
