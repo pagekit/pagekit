@@ -21,7 +21,7 @@ class Page implements \JsonSerializable
     /** @Column */
     protected $content = '';
 
-    /** @Column(type="json_array") */
+    /** @Column(type="json_object") */
     protected $data;
 
     public function getId()

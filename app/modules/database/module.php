@@ -1,6 +1,7 @@
 <?php
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Types\Type;
 use Pagekit\Database\Logging\DebugStack;
 use Pagekit\Database\ORM\EntityManager;
 use Pagekit\Database\ORM\Loader\AnnotationLoader;
@@ -39,6 +40,9 @@ return [
         };
 
         $app['db.em'] = function ($app) {
+
+            Type::addType('json_object', 'Pagekit\Database\Types\JsonObjectType');
+
             return new EntityManager($app['db'], $app['db.metas']);
         };
 

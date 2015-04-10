@@ -19,7 +19,7 @@ return [
                 $table->addColumn('type', 'string', ['length' => 255]);
                 $table->addColumn('menu', 'string', ['length' => 255]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
-                $table->addColumn('data', 'json_array', ['notnull' => false]);
+                $table->addColumn('data', 'json_object', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });
         }

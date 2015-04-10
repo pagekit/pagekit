@@ -41,7 +41,7 @@ class Node implements NodeInterface, \JsonSerializable
     /** @Column(type="string") */
     protected $menu = '';
 
-    /** @Column(type="json_array") */
+    /** @Column(type="json_object") */
     protected $data;
 
     public function getId()
