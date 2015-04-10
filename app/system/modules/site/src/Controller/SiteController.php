@@ -51,7 +51,8 @@ class SiteController extends Controller
 
         return [
             'node' => $node,
-            'view' => App::view('site:views/admin/edit.php', ['sections' => App::module('system/site')->getSections($node->getType()), 'node' => $node])
+            'view' => App::view('site:views/admin/edit.php', ['sections' => App::module('system/site')->getSections($node->getType()), 'node' => $node]),
+            'data' => App::view()->data()->get('site')
         ];
     }
 }

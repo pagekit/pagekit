@@ -32,21 +32,39 @@ jQuery(function ($) {
         methods: {
 
             select: function(node) {
+                if (!node) {
+                    node = this.selected && _.find(this.nodes, { id: vm.selected.id }) || this.selectFirst();
+                }
+
                 this.$set('selected', node);
+            },
+
+            selectFirst: function() {
+                var first = null;
+                if (this.menus) {
+                    this.menus.some(function (menu) {
+                        return first = vm.filterNodes(menu.id, 0)[0];
+                    });
+                }
+                return first;
             },
 
             load: function() {
 
                 this.Nodes.query(function (nodes) {
                     vm.$set('nodes', nodes);
-                    vm.select(vm.selected && _.find(nodes, { id: vm.selected.id }) || nodes[0]);
+                    vm.select();
                 });
 
                 this.Menus.query(function (menus) {
                     vm.$set('menus', menus);
+                    vm.select();
                 });
-            }
+            },
 
+            filterNodes: function (menu, parent) {
+                return _(this.nodes).filter({ menu: menu, parentId: parent || 0 }).sortBy('priority').value();
+            }
         },
 
         components: {
@@ -120,7 +138,7 @@ jQuery(function ($) {
                 computed: {
 
                     children: function() {
-                        return _(this.nodes).filter({ menu: this.menu.id, parentId: this.node ? this.node.id : 0 }).sortBy('priority').value();
+                        return this.filterNodes(this.menu.id, this.node ? this.node.id : 0);
                     }
 
                 }
@@ -139,7 +157,7 @@ jQuery(function ($) {
                     },
 
                     isParent: function() {
-                        return _(this.nodes).filter({ menu: this.menu.id, parentId: this.node.id }).value().length;
+                        return this.filterNodes(this.menu.id, this.node.id).length;
                     }
 
                 },
@@ -175,19 +193,15 @@ jQuery(function ($) {
 
                     type: function() {
                         return (_.find(this.types, { id: this.node.type }) || {});
+                    },
+
+                    path: function() {
+                        return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
                     }
 
                 },
 
                 methods: {
-
-                    cancel: function() {
-                        if (this.node.id) {
-                            this.reload();
-                        } else {
-                            this.select(this.nodes[0]);
-                        }
-                    },
 
                     reload: function() {
 
@@ -203,16 +217,17 @@ jQuery(function ($) {
                                 self.edit.$destroy();
                             }
 
-                            data.node.data = _.isArray(data.node.data) ? {} : data.node.data || {};
                             data.node.menu = self.selected.menu;
 
                             self.$set('node', data.node);
 
+                            $(self.$$.edit).empty().html(data.view);
+
                             self.edit = self.$addChild({
 
                                 inherit: true,
+                                data: data.data,
                                 el: self.$$.edit,
-                                template: data.view,
 
                                 ready: function() {
                                     UIkit.tab(this.$$.tab, { connect: this.$$.content });
@@ -223,18 +238,26 @@ jQuery(function ($) {
                         });
                     },
 
-                    getPath: function() {
-                        return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
-                    },
-
                     save: function (e) {
 
                         e.preventDefault();
 
-                        this.Nodes.save({ id: this.node.id }, _.merge($(":input", e.target).serialize().parse(), { node: this.node }), function(node) {
+                        var data = _.merge($(":input", e.target).serialize().parse(), { node: this.node });
+
+                        this.$broadcast('save', data);
+
+                        this.Nodes.save({ id: this.node.id }, data, function(node) {
                             vm.selected.id = parseInt(node.id);
                             vm.load();
                         });
+                    },
+
+                    cancel: function() {
+                        if (this.node.id) {
+                            this.reload();
+                        } else {
+                            this.select();
+                        }
                     }
 
                 }

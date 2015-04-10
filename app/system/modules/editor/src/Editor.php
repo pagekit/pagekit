@@ -13,9 +13,6 @@ class Editor implements EditorInterface, EventSubscriberInterface
      */
     public function render($value, array $attributes = [])
     {
-        App::view()->style('codemirror');
-        App::view()->script('editor');
-
         $attributes = array_merge([
             'data-editor' => true, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;',
             'data-finder-options' => json_encode(['root' => App::system()->config('storage')])
@@ -49,6 +46,9 @@ class Editor implements EditorInterface, EventSubscriberInterface
         if ($event->getEditor()) {
             return;
         }
+
+        App::view()->style('codemirror');
+        App::view()->script('editor');
 
         $event->setEditor($this);
     }

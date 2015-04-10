@@ -4,12 +4,18 @@ namespace Pagekit\Page\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Database\Event\EntityEvent;
+use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Page\Entity\Page;
 use Pagekit\Site\Model\UrlType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteListener implements EventSubscriberInterface
 {
+    public function onSite($event)
+    {
+        App::trigger('editor.load', new EditorLoadEvent);
+    }
+
     public function onSiteTypes($event, $site)
     {
         $site->registerType(new UrlType('page', __('Page'), '@page/id'));
@@ -18,6 +24,8 @@ class SiteListener implements EventSubscriberInterface
     public function onSiteSections($event, $site)
     {
         $site->registerSection('Content', function ($node) {
+
+            App::view()->data('site', ['page' => $this->getPage($node)]);
 
             return App::view('page:views/admin/site/page.php', ['page' => $this->getPage($node)]);
 
@@ -71,6 +79,7 @@ class SiteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            'view.site:views/admin/index.php' => 'onSite',
             'site.types'           => 'onSiteTypes',
             'site.sections'        => 'onSiteSections',
             'site.node.preSave'    => 'onSave',
