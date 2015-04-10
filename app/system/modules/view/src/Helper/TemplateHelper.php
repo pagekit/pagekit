@@ -4,6 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
 use Pagekit\View\ViewInterface;
+use Pagekit\View\Asset\AssetManager;
 
 class TemplateHelper implements HelperInterface
 {
@@ -21,29 +22,16 @@ class TemplateHelper implements HelperInterface
      * Constructor.
      *
      * @param ViewInterface $view
+     * @param AssetManager  $manager
      */
-    public function __construct(ViewInterface $view, Application $app)
+    public function __construct(ViewInterface $view, AssetManager $manager = null)
     {
         $this->view = $view;
-        $this->manager = $app['scripts'];
+        $this->manager = $manager ?: new AssetManager();
 
-        $app->on('kernel.response', function ($event) use ($app) {
-
-            $request   = $event->getRequest();
-            $response  = $event->getResponse();
-            $templates = $this->render();
-
-            if (!$templates || !$event->isMasterRequest() || $request->isXmlHttpRequest() || $response->isRedirection()) {
-                return;
-            }
-
-            if (false === $pos = strripos($content = $response->getContent(), '</body>')) {
-                return;
-            }
-
-            $response->setContent(substr_replace($content, $templates, $pos, 0));
-
-        }, 10);
+        $view->on('head', function ($event) {
+            $event->addResult($this->render());
+        }, 5);
     }
 
     /**
@@ -61,7 +49,7 @@ class TemplateHelper implements HelperInterface
             }
         }
 
-        return $output;
+        return preg_replace('/^.*/m', '        $0', $output);
     }
 
     /**

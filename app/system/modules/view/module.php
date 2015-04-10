@@ -15,7 +15,7 @@ return [
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
             $view->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
-            $view->addHelper(new TemplateHelper($view, $app));
+            $view->addHelper(new TemplateHelper($view, $app['scripts']));
 
             return $view;
         });

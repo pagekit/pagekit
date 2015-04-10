@@ -4,7 +4,7 @@ jQuery(function ($) {
 
         el: '#settings',
 
-        data: $.extend({ config: {}, option: {} }, settings),
+        data: $.extend({ config: {}, option: {} }, window.$settings),
 
         methods: {
 

@@ -70,7 +70,7 @@ class SettingsEvent extends Event
     public function data($name, $data, array $keys = null)
     {
         if ($data = is_array($data) ? $this->filter($data, $keys) : $data) {
-            App::view()->data('settings', [$name => $data]);
+            App::view()->data('$settings', [$name => $data]);
         }
     }
 
