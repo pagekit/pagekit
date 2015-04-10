@@ -1,7 +1,7 @@
 <?php
 
-use Pagekit\Option\Option;
 use Pagekit\Option\Loader\OptionLoader;
+use Pagekit\Option\Option;
 
 return [
 

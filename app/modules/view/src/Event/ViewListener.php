@@ -4,7 +4,6 @@ namespace Pagekit\View\Event;
 
 use Pagekit\Application as App;
 use Pagekit\View\ViewInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;

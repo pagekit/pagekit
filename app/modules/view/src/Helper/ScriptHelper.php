@@ -2,8 +2,8 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\ViewInterface;
 use Pagekit\View\Asset\AssetManager;
+use Pagekit\View\ViewInterface;
 
 class ScriptHelper implements HelperInterface, \IteratorAggregate
 {

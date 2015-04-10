@@ -1,22 +1,22 @@
 <?php
 
-use Pagekit\View\PhpEngine;
-use Pagekit\View\View;
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Event\ViewListener;
+use Pagekit\View\Helper\DataHelper;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\DeferredHelper;
 use Pagekit\View\Helper\GravatarHelper;
-use Pagekit\View\Helper\MarkdownHelper;
-use Pagekit\View\Helper\TokenHelper;
-use Pagekit\View\Helper\DataHelper;
 use Pagekit\View\Helper\MapHelper;
+use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\MetaHelper;
 use Pagekit\View\Helper\ScriptHelper;
 use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
+use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
+use Pagekit\View\PhpEngine;
+use Pagekit\View\View;
 
 return [
 
@@ -26,7 +26,7 @@ return [
 
         $app['view'] = function ($app) {
 
-            $view = new View();
+            $view = new View($app['events']);
             $view->addEngine(new PhpEngine());
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);

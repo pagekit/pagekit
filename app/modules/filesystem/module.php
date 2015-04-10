@@ -1,9 +1,9 @@
 <?php
 
+use Pagekit\Filesystem\Adapter\FileAdapter;
 use Pagekit\Filesystem\Filesystem;
 use Pagekit\Filesystem\Locator;
 use Pagekit\Filesystem\StreamWrapper;
-use Pagekit\Filesystem\Adapter\FileAdapter;
 
 return [
 
