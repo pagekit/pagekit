@@ -32,7 +32,8 @@ class DeferredHelper implements HelperInterface
                 $app->on('kernel.response', function ($event) use ($renderEvent, $template, $placeholder) {
 
                     $response = $event->getResponse();
-                    $response->setContent(str_replace($placeholder, $renderEvent->dispatch($template)->getResult(), $response->getContent()));
+                    // TODO: fix prefix
+                    $response->setContent(str_replace($placeholder, $renderEvent->dispatch('view.'.$template)->getResult(), $response->getContent()));
 
                 }, 10);
 

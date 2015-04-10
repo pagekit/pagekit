@@ -32,6 +32,11 @@ class View implements ViewInterface
     protected $helpers = [];
 
     /**
+     * @var string
+     */
+    protected $prefix = 'view.';
+
+    /**
      * Constructor.
      *
      * @param EventDispatcherInterface $events
@@ -151,7 +156,7 @@ class View implements ViewInterface
      */
     public function on($event, $listener, $priority = 0)
     {
-        $this->events->addListener($event, $listener, $priority);
+        $this->events->addListener($this->prefix.$event, $listener, $priority);
     }
 
     /**
@@ -160,10 +165,10 @@ class View implements ViewInterface
     public function render($name, array $parameters = [])
     {
         $param = array_replace($this->globals, $parameters);
-        $event = $this->events->dispatch('render', new RenderEvent($name, $param));
+        $event = $this->events->dispatch($this->prefix.'render', new RenderEvent($name, $param));
 
         if (!$event->isPropagationStopped()) {
-            $event->dispatch($name);
+            $event->dispatch($this->prefix.$name);
         }
 
         if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {
