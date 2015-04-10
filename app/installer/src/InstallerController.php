@@ -114,8 +114,7 @@ class InstallerController
                 throw new Exception($message);
             }
 
-            App::option()->set('system:version', App::migrator()->create('app/modules/system/migrations')->run());
-            App::option()->set('system:config', array_merge_recursive(App::option('system:config', []), ['extensions' => ['blog', 'page']]), true);
+            App::option()->set('system:version', App::migrator()->create('app/system/migrations')->run());
 
             App::db()->insert('@system_user', [
                 'name'       => $user['username'],
