@@ -30,7 +30,7 @@ return [
 
             $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));
 
-        });
+        }, 100);
 
     },
 
