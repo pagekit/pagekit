@@ -1,16 +1,13 @@
 # Pagekit
 
 [![Build Status](https://travis-ci.org/pagekit/pagekit.svg?branch=develop)](https://travis-ci.org/pagekit/pagekit)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
 
 Pagekit is a modular and lightweight CMS built with Symfony components.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
-
-Join our developer chat. We are online every work day between 8:00 and 18:00 UTC
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
 
 ## Getting started
 
