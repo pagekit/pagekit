@@ -58,7 +58,7 @@ class MailController
             ], $option);
 
             foreach ($option as $key => $value) {
-                App::option()->set($key, $value);
+                App::config()->set($key, $value);
             }
 
             $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $option['from.address'])->send();

@@ -56,6 +56,7 @@ return [
     'require' => [
 
         'auth',
+        'config',
         'cookie',
         'database',
         'filesystem',

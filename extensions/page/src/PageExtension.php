@@ -21,8 +21,8 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/page/migrations', App::option('page:version'))->run()) {
-            App::option()->set('page:version', $version);
+        if ($version = App::migrator()->create('extensions/page/migrations', App::config('page:version'))->run()) {
+            App::config()->set('page:version', $version);
         }
     }
 }

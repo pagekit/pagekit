@@ -64,7 +64,7 @@ class SettingsController extends Controller
                 $module .= ':config';
             }
 
-            App::option()->set($module, $value, true);
+            App::config()->set($module, $value, true);
         }
 
         if (function_exists('opcache_invalidate')) {

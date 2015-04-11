@@ -42,13 +42,13 @@ class BlogExtension extends Extension
 
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/blog/migrations', App::option('blog:version'))->run()) {
-            App::option()->set('blog:version', $version);
+        if ($version = App::migrator()->create('extensions/blog/migrations', App::config('blog:version'))->run()) {
+            App::config()->set('blog:version', $version);
         }
     }
 
     public function uninstall()
     {
-        App::option()->remove('blog:version');
+        App::config()->remove('blog:version');
     }
 }

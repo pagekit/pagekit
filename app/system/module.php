@@ -104,7 +104,6 @@ return [
         'system/mail',
         'system/menu',
         'system/oauth',
-        'system/option',
         'system/package',
         'system/settings',
         'system/site',

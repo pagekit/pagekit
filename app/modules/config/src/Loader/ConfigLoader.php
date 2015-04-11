@@ -1,18 +1,18 @@
 <?php
 
-namespace Pagekit\Option\Loader;
+namespace Pagekit\Config\Loader;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Loader\LoaderInterface;
 
-class OptionLoader implements LoaderInterface
+class ConfigLoader implements LoaderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function load($name, array $config)
     {
-        if (is_array($options = App::option("$name:config", []))) {
+        if (is_array($options = App::config("$name:config", []))) {
             $config = array_replace_recursive($config, ['config' => $options]);
         }
 

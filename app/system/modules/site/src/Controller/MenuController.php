@@ -89,8 +89,8 @@ class MenuController extends Controller
      */
     protected function update($menus = [])
     {
-        $config = App::option()->get('system/site:config', []);
+        $config = App::config()->get('system/site:config', []);
         $config['menus'] = $menus;
-        App::option()->set('system/site:config', $config);
+        App::config()->set('system/site:config', $config);
     }
 }

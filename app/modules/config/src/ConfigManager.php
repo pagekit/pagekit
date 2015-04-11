@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Option;
+namespace Pagekit\Config;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Pagekit\Database\Connection;
 
-class Option implements \IteratorAggregate
+class ConfigManager implements \IteratorAggregate
 {
     /**
      * @var Connection $connection

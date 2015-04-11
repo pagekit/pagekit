@@ -133,7 +133,7 @@ class OAuthHelper
     public function getToken($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
-        $data     = App::option('oauth:token:'.$provider.':'.$key);
+        $data     = App::config('oauth:token:'.$provider.':'.$key);
 
         if ($data &&
             array_key_exists('accessToken', $data) &&
@@ -173,7 +173,7 @@ class OAuthHelper
     public function deleteToken($provider, $key)
     {
         $provider = ucfirst(strtolower($provider));
-        App::option()->remove('oauth:token:'.$provider.':'.$key);
+        App::config()->remove('oauth:token:'.$provider.':'.$key);
     }
 
     /**
@@ -203,7 +203,7 @@ class OAuthHelper
             $data['extraParams']  = $token->getExtraParams();
         }
 
-        App::option()->set('oauth:token:'.$provider.':'.$key, $data);
+        App::config()->set('oauth:token:'.$provider.':'.$key, $data);
     }
 
     /**

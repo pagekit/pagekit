@@ -67,7 +67,7 @@ class ExtensionsController extends Controller
 
             $extension->enable();
 
-            $config = App::option('system:config', []);
+            $config = App::config('system:config', []);
 
             if (!isset($config['extensions'])) {
                 $config['extensions'] = [];
@@ -75,7 +75,7 @@ class ExtensionsController extends Controller
 
             $config['extensions'] = array_unique(array_merge($config['extensions'], [$extension->name]));
 
-            App::option()->set('system:config', $config, true);
+            App::config()->set('system:config', $config, true);
 
             App::exception()->setHandler($handler);
 
@@ -184,7 +184,7 @@ class ExtensionsController extends Controller
 
             $event = App::trigger('system.extension.save', new ExtensionEvent($extension, $params));
 
-            App::option()->set("$name:config", $event->getParams(), true);
+            App::config()->set("$name:config", $event->getParams(), true);
             App::message()->success(__('Settings saved.'));
 
             return $this->redirect('@system/extensions/settings', compact('name'));
@@ -199,7 +199,7 @@ class ExtensionsController extends Controller
 
     protected function disable(Extension $extension)
     {
-        $config = App::option('system:config', []);
+        $config = App::config('system:config', []);
 
         if (!isset($config['extensions'])) {
             $config['extensions'] = [];
@@ -207,7 +207,7 @@ class ExtensionsController extends Controller
 
         $config['extensions'] = array_values(array_diff($config['extensions'], [$extension->name]));
 
-        App::option()->set('system:config', $config, true);
+        App::config()->set('system:config', $config, true);
 
         $extension->disable();
     }

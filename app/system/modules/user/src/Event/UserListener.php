@@ -16,7 +16,7 @@ class UserListener implements EventSubscriberInterface
      */
     public function onUserChange()
     {
-        App::option()->set(self::REFRESH_TOKEN, time(), true);
+        App::config()->set(self::REFRESH_TOKEN, time(), true);
     }
 
     /**

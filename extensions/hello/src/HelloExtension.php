@@ -34,8 +34,8 @@ class HelloExtension extends Extension
     public function enable()
     {
         // run all migrations that are newer than the current version
-        if ($version = App::migrator()->create('extensions/hello/migrations', App::option('hello:version'))->run()) {
-            App::option()->set('hello:version', $version);
+        if ($version = App::migrator()->create('extensions/hello/migrations', App::config('hello:version'))->run()) {
+            App::config()->set('hello:version', $version);
         }
     }
 
@@ -51,6 +51,6 @@ class HelloExtension extends Extension
         $util->dropTable('@hello_greetings');
 
         // remove the options setting
-        App::option()->remove('hello:version');
+        App::config()->remove('hello:version');
     }
 }

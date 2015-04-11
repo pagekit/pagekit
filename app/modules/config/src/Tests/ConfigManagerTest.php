@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Option\Tests;
+namespace Pagekit\Config\Tests;
 
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Pagekit\Option\Option;
+use Pagekit\Config\ConfigManager;
 
-class OptionTest extends \PHPUnit_Framework_TestCase
+class ConfigManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGet()
     {
@@ -15,7 +15,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
                    ->method('fetchAssoc')
                    ->will($this->returnValue(['value' => json_encode('bar')]));
 
-        $options = $this->getOptions($connection, $cache = $this->getCache());
+        $options = $this->getConfig($connection, $cache = $this->getCache());
 
         // get from database
         $this->assertEquals('bar', $options->get('foo'));
@@ -24,7 +24,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cache->contains('Options:foo'));
 
         // get from cache
-        $options = $this->getOptions($connection, $cache);
+        $options = $this->getConfig($connection, $cache);
         $this->assertEquals('bar', $options->get('foo'));
     }
 
@@ -35,7 +35,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
                    ->method('fetchAll')
                    ->will($this->returnValue([['name' => 'foo', 'value' => json_encode('bar'), 'autoload' => 1]]));
 
-        $options = $this->getOptions($connection, $cache = $this->getCache());
+        $options = $this->getConfig($connection, $cache = $this->getCache());
 
         // get from database
         $this->assertEquals('bar', $options->get('foo'));
@@ -44,14 +44,14 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cache->contains('Options:Autoload'));
 
         // get from cache
-        $options = $this->getOptions($connection, $cache);
+        $options = $this->getConfig($connection, $cache);
         $this->assertEquals('bar', $options->get('foo'));
     }
 
     public function testGetIgnored()
     {
         $connection = $this->getConnection();
-        $options = $this->getOptions($connection, $cache = $this->getCache());
+        $options = $this->getConfig($connection, $cache = $this->getCache());
         $cache->save('Options.Ignore', ['Ignored' => 'value']);
 
         $this->assertEquals(null, $options->get('Ignored'));
@@ -63,7 +63,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEmptyOptionName()
     {
-        $options = $this->getOptions();
+        $options = $this->getConfig();
         $options->get(null);
     }
 
@@ -79,7 +79,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
                         return new MySqlPlatform;
                    }));
 
-        $options = $this->getOptions($connection);
+        $options = $this->getConfig($connection);
         $options->set('foo', 'bar');
 
         $this->assertEquals('bar', $options->get('foo'));
@@ -97,7 +97,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
                         return new MySqlPlatform;
                    }));
 
-        $options = $this->getOptions($connection);
+        $options = $this->getConfig($connection);
         $options->set('foo', 'bar', true);
 
         $this->assertEquals('bar', $options->get('foo'));
@@ -108,7 +108,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetEmptyOptionName()
     {
-        $options = $this->getOptions();
+        $options = $this->getConfig();
         $options->set(null, null);
     }
 
@@ -117,7 +117,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetProtectedOption()
     {
-        $options = $this->getOptions();
+        $options = $this->getConfig();
         $options->set('Autoload', null);
     }
 
@@ -128,7 +128,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
                    ->method('delete')
                    ->will($this->returnValue(1));
 
-        $options = $this->getOptions($connection);
+        $options = $this->getConfig($connection);
         $options->set('foo', 'bar');
 
         $this->assertEquals('bar', $options->get('foo'));
@@ -143,7 +143,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveEmptyOptionName()
     {
-        $options = $this->getOptions();
+        $options = $this->getConfig();
         $options->remove(null);
     }
 
@@ -152,7 +152,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveProtectedOption()
     {
-        $options = $this->getOptions();
+        $options = $this->getConfig();
         $options->remove('Autoload');
     }
 
@@ -186,11 +186,11 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         return new ArrayCache();
     }
 
-    protected function getOptions($connection = null, $cache = null)
+    protected function getConfig($connection = null, $cache = null)
     {
         $connection = $connection ?: $this->getConnection();
         $cache = $cache ?: $this->getCache();
 
-        return new Option($connection, $cache, 'test');
+        return new ConfigManager($connection, $cache, 'test');
     }
 }

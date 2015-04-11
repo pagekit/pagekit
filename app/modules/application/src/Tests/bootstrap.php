@@ -2,12 +2,12 @@
 
 $autoload = [
     'Pagekit\\Auth\\' => '/modules/auth/src',
+    'Pagekit\\Config\\' => '/modules/config/src',
     'Pagekit\\Cookie\\' => '/modules/cookie/src',
     'Pagekit\\Database\\' => '/modules/database/src',
     'Pagekit\\Filesystem\\' => '/modules/filesystem/src',
     'Pagekit\\Filter\\' => '/modules/filter/src',
     'Pagekit\\Migration\\' => '/modules/migration/src',
-    'Pagekit\\Option\\' => '/system/modules/option/src',
     'Pagekit\\Package\\' => '/modules/package/src',
     'Pagekit\\Routing\\' => '/modules/routing/src',
     'Pagekit\\Session\\' => '/modules/session/src',

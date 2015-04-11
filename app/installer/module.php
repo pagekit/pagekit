@@ -30,7 +30,6 @@ return [
         'migration',
         'system/cache',
         'system/locale',
-        'system/option',
         'system/view'
 
     ],

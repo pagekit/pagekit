@@ -114,7 +114,7 @@ class InstallerController
                 throw new Exception($message);
             }
 
-            App::option()->set('system:version', App::migrator()->create('app/system/migrations')->run());
+            App::config()->set('system:version', App::migrator()->create('app/system/migrations')->run());
 
             App::db()->insert('@system_user', [
                 'name'       => $user['username'],
@@ -160,7 +160,7 @@ class InstallerController
             }
 
             foreach ($option as $key => $value) {
-                App::option()->set($key, $value, true);
+                App::config()->set($key, $value, true);
             }
 
             $status = 'success';
