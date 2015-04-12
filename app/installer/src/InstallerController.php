@@ -65,7 +65,7 @@ class InstallerController
 
                 App::db()->connect();
 
-                if (App::db()->getUtility()->tableExists('@system_option')) {
+                if (App::db()->getUtility()->tableExists('@system_config')) {
                     $status  = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {

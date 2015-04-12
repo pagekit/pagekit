@@ -24,14 +24,14 @@ return [
             });
         }
 
-        if ($util->tableExists('@system_option') === false) {
-            $util->createTable('@system_option', function($table) {
+        if ($util->tableExists('@system_config') === false) {
+            $util->createTable('@system_config', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 64, 'default' => '']);
                 $table->addColumn('value', 'text');
                 $table->addColumn('autoload', 'boolean', ['default' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_OPTION_NAME');
+                $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
             });
         }
 

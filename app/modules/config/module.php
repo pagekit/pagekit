@@ -34,7 +34,7 @@ return [
 
     'config' => [
 
-        'table' => '@system_option'
+        'table' => '@system_config'
 
     ]
 
