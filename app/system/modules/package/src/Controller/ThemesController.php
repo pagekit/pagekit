@@ -69,10 +69,10 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
-            $config = App::config('system:config', []);
+            $config = App::config('system', []);
             $config['theme.site'] = $theme->name;
-            App::config()->set('system:config', $config, true);
 
+            App::config()->set('system', $config, true);
             App::exception()->setHandler($handler);
 
             return ['message' => __('Theme enabled.')];
@@ -142,7 +142,7 @@ class ThemesController extends Controller
 
             $event = App::trigger('system.theme.save', new ThemeEvent($theme, $params));
 
-            App::config()->set("$name:config", $event->getParams(), true);
+            App::config()->set($name, $event->getParams(), true);
             App::message()->success(__('Settings saved.'));
 
             return $this->redirect('@system/themes/settings', compact('name'));

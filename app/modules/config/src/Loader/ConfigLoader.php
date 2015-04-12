@@ -12,7 +12,7 @@ class ConfigLoader implements LoaderInterface
      */
     public function load($name, array $config)
     {
-        if (is_array($options = App::config("$name:config", []))) {
+        if (is_array($options = App::config($name, []))) {
             $config = array_replace_recursive($config, ['config' => $options]);
         }
 

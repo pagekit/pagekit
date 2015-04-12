@@ -59,11 +59,6 @@ class SettingsController extends Controller
         file_put_contents($this->configFile, $this->config->dump());
 
         foreach ($option as $module => $value) {
-
-            if (!preg_match('/:config$/i', $module)) {
-                $module .= ':config';
-            }
-
             App::config()->set($module, $value, true);
         }
 
