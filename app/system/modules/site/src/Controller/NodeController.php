@@ -46,7 +46,7 @@ class NodeController extends Controller
             $config = App::config('system/site', []);
             $config['frontpage_node'] = $node->getId();
             $config['frontpage'] = $type->getLink($node);
-            App::config()->set('system/site', $config);
+            App::config()->set('system/site', $config, true);
         }
 
         return $node;

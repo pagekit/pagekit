@@ -277,8 +277,13 @@ jQuery(function ($) {
                         this.$broadcast('save', data);
 
                         this.Nodes.save({ id: this.node.id }, data, function(node) {
+                            
                             vm.selected.id = parseInt(node.id);
                             vm.load();
+
+                            if (data.frontpage) {
+                                vm.$set('frontpage', node.id);
+                            }
                         });
                     },
 
