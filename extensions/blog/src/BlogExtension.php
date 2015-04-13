@@ -30,7 +30,7 @@ class BlogExtension extends Extension
 
         $app->on('site.types', function ($event, $site) {
             $site->registerType(new UrlType('blog.post', 'Blog Post', '@blog/id'));
-            $site->registerType(new MountType('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController'));
+            $site->registerType(new MountType('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController', '@blog/site'));
         });
 
         $app->on('site.sections', function ($event, $site) {
@@ -50,5 +50,16 @@ class BlogExtension extends Extension
     public function uninstall()
     {
         App::config()->remove('blog:version');
+    }
+
+    public function getPermalink()
+    {
+        $permalink = $this->config('permalink.type');
+
+        if ($permalink == 'custom') {
+            $permalink = $this->config('permalink.custom');
+        }
+
+        return $permalink;
     }
 }

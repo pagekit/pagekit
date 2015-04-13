@@ -20,13 +20,13 @@ class SiteModule extends Module
      */
     public function main(App $app)
     {
-        $app->on('kernel.request', function() {
+        $app->on('system.init', function() {
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
                 if ($type = $this->getType($node->getType())) {
                     $type->bind($node);
                 }
             }
-        }, 35);
+        }, 0);
 
         $app->on('system.init', function() use ($app) {
             if ($frontpage = $this->config('frontpage')) {
@@ -37,6 +37,11 @@ class SiteModule extends Module
                 });
             }
         }, -15);
+
+        if (!$app['config']->get('system/site')) {
+            $app['config']->set('system/site', [], true);
+        }
+
     }
 
     /**
@@ -57,7 +62,7 @@ class SiteModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new UrlType('alias', __('Alias'), ''));
+            $this->registerType(new UrlType('alias', __('Alias')));
 
             App::trigger('site.types', [$this]);
         }

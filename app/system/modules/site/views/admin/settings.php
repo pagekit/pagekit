@@ -24,3 +24,10 @@
         </select>
     </div>
 </div>
+
+<div class="uk-form-row" v-if="type.url">
+    <span class="uk-form-label">{{ 'Options' | trans }}</span>
+    <div class="uk-form-controls">
+        <label><input type="checkbox" name="frontpage" v-model="isFrontpage"> {{ 'Frontpage' | trans }}</label>
+    </div>
+</div>

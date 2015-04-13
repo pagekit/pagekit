@@ -16,7 +16,7 @@ class RouteListener implements EventSubscriberInterface
      */
     public function onSystemInit()
     {
-        App::router()->setOption('blog.permalink', $this->getPermalink());
+        App::router()->setOption('blog.permalink', $this->permalink = App::module('blog')->getPermalink());
     }
 
     /**
@@ -24,11 +24,11 @@ class RouteListener implements EventSubscriberInterface
      */
     public function onRouteCollection(RouteCollectionEvent $event)
     {
-        if (!$route = $event->getRoutes()->get('@blog/id')) {
+        if (!$this->permalink or !$route = $event->getRoutes()->get('@blog/id')) {
             return;
         }
 
-        App::aliases()->add(dirname($route->getPath()).'/'.ltrim($this->getPermalink(), '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
+        App::aliases()->add(dirname($route->getPath()).'/'.ltrim($this->permalink, '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
     }
 
     /**
@@ -45,28 +45,10 @@ class RouteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'system.init'          => ['onSystemInit', 10],
+            'system.init'          => 'onSystemInit',
             'route.collection'     => 'onRouteCollection',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'
         ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPermalink()
-    {
-        if (null === $this->permalink) {
-
-            $extension = App::module('blog');
-            $this->permalink = $extension->config('permalink.type', '');
-
-            if ($this->permalink === 'custom') {
-                $this->permalink = $extension->config('permalink.custom');
-            }
-        }
-
-        return $this->permalink;
     }
 }

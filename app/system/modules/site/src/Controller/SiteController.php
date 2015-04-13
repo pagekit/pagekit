@@ -5,8 +5,6 @@ namespace Pagekit\Site\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Event\EditEvent;
-use Pagekit\User\Entity\Role;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -22,13 +20,15 @@ class SiteController extends Controller
     {
         App::view()->script('site', 'app/system/modules/site/app/site.js', ['vue-system', 'vue-validator', 'uikit-nestable']);
 
+        $site = App::module('system/site');
+
         return [
             '$meta' => [
                 'title' => __('Nodes')
             ],
-            '$data'      => [
-                'types' => array_values(App::module('system/site')->getTypes()),
-                'roles' => Role::findAll()
+            '$data' => [
+                'types'     => array_values($site->getTypes()),
+                'frontpage' => $site->config('frontpage_node')
             ]
         ];
     }

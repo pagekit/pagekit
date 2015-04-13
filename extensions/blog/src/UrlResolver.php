@@ -32,14 +32,7 @@ class UrlResolver implements ParamsResolverInterface
      */
     public function __construct()
     {
-        $extension = App::module('blog');
-
-        $this->permalink = $extension->config('permalink.type');
-
-        if ($this->permalink == 'custom') {
-            $this->permalink = $extension->config('permalink.custom');
-        }
-
+        $this->permalink    = App::module('blog')->getPermalink();
         $this->cacheEntries = App::cache()->fetch(self::CACHE_KEY) ?: [];
     }
 

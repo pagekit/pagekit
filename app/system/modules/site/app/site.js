@@ -65,6 +65,7 @@ jQuery(function ($) {
             filterNodes: function (menu, parent) {
                 return _(this.nodes).filter({ menu: menu, parentId: parent || 0 }).sortBy('priority').value();
             }
+
         },
 
         components: {
@@ -74,7 +75,7 @@ jQuery(function ($) {
                 inherit : true,
 
                 data: function() {
-                    return { menu: null };
+                    return { menu: null, unmounted: [] };
                 },
 
                 methods: {
@@ -112,6 +113,28 @@ jQuery(function ($) {
                         if (e) e.preventDefault();
                         this.$set('menu', null);
                         this.modal.hide();
+                    }
+
+                },
+
+                components: {
+
+                    'type-dropdown': {
+
+                        inherit: true,
+
+                        filters: {
+
+                            unmounted: function(types) {
+
+                                return types.filter(function(type) {
+                                    return !type.controllers || !_.some(vm.nodes, { type: type.id });
+                                })
+
+                            }
+
+                        }
+
                     }
 
                 }
@@ -158,6 +181,10 @@ jQuery(function ($) {
 
                     isParent: function() {
                         return this.filterNodes(this.menu.id, this.node.id).length;
+                    },
+
+                    isFrontpage: function() {
+                        return this.node.id === this.frontpage;
                     }
 
                 },
@@ -197,6 +224,10 @@ jQuery(function ($) {
 
                     path: function() {
                         return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
+                    },
+
+                    isFrontpage: function() {
+                        return this.node.id === this.frontpage;
                     }
 
                 },
@@ -234,7 +265,6 @@ jQuery(function ($) {
                                 }
 
                             });
-
                         });
                     },
 

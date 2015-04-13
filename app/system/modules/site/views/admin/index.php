@@ -9,11 +9,11 @@
                 <div class="uk-flex">
                     <span class="uk-panel-title uk-flex-item-1" v-on="click: edit(menu)">{{ menu.label }}</span>
 
-                    <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+                    <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }" v-component="type-dropdown" inline-template>
                         <a v-on="click: $event.preventDefault()"><i class="uk-icon uk-icon-plus"></i></a>
                         <div class="uk-dropdown uk-dropdown-small">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="type: types"><a v-on="click: add(menu, type)">{{ type.label }}</a></li>
+                                <li v-repeat="type: types | unmounted"><a v-on="click: add(menu, type)">{{ type.label }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -72,6 +72,7 @@
             <div data-nestable-action="toggle"></div>
             {{ node.title }}
 
+            <i v-show="isFrontpage" class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}"></i>
             <a class="uk-hidden uk-float-right" v-on="click: delete" title="{{ 'Delete' | trans }}"><i class="uk-icon-minus-circle"></i></a>
         </div>
 

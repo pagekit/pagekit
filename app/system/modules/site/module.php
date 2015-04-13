@@ -47,7 +47,8 @@ return [
 
     'config' => [
         'menus'     => [],
-        'frontpage' => false
+        'frontpage' => false,
+        'frontpage_node' => 0
     ],
 
     'resources' => [

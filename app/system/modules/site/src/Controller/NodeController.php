@@ -31,9 +31,9 @@ class NodeController extends Controller
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"node": "array", "id": "int"}, csrf=true)
+     * @Request({"node": "array", "id": "int", "frontpage": "bool"}, csrf=true)
      */
-    public function saveAction($data, $id = 0)
+    public function saveAction($data, $id = 0, $frontpage = false)
     {
         if (!$node = Node::find($id)) {
             $node = new Node;
@@ -41,6 +41,13 @@ class NodeController extends Controller
         }
 
         $node->save($data);
+
+        if ($frontpage && $type = App::module('system/site')->getType($node->getType())) {
+            $config = App::config('system/site', []);
+            $config['frontpage_node'] = $node->getId();
+            $config['frontpage'] = $type->getLink($node);
+            App::config()->set('system/site', $config);
+        }
 
         return $node;
     }
