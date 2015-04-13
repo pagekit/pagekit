@@ -168,8 +168,16 @@ class Arr
         }
 
         foreach ($array2 as $key => $value) {
-            if (isset($array1[$key]) && is_array($value)) {
-                $array1[$key] = static::merge($array1[$key], $value);
+            if (isset($array1[$key])) {
+
+                if (is_int($key)) {
+                    $array1[] = $value;
+                } else if (is_array($value) && is_array($array1[$key])) {
+                    $array1[$key] = static::merge($array1[$key], $value);
+                } else {
+                    $array1[$key] = $value;
+                }
+
             } else {
                 $array1[$key] = $value;
             }
