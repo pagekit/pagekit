@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Config\Config;
-
 $values = array_map('realpath', [
     'path'            => __DIR__.'/..',
     'path.temp'       => __DIR__.'/../tmp',
@@ -14,13 +12,6 @@ $values = array_map('realpath', [
     'config.file'     => __DIR__.'/../config.php'
 ]);
 
-$config = new Config($values);
-$config->load(__DIR__.'/system/config.php');
+extract($values);
 
-if ($values['config.file']) {
-    $config->load($values['config.file']);
-}
-
-$config->set('values', $values);
-
-return $config;
+return array_replace(compact('values'), require __DIR__.'/system/config.php');

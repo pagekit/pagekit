@@ -12,7 +12,7 @@ return [
 
         'storage'  => 'database',
         'lifetime' => 900,
-        'files'    => '%path%/tmp/sessions',
+        'files'    => $path.'/tmp/sessions',
         'table'    => '@system_session',
         'cookie'   => [
             'name' => 'pagekit_session',
@@ -27,7 +27,7 @@ return [
             'sqlite' => [
 
                 'driver'  => 'pdo_sqlite',
-                'path'    => '%path%/app/database/pagekit.db',
+                'path'    => $path.'/app/database/pagekit.db',
                 'charset' => 'utf8',
                 'prefix'  => ''
 
@@ -39,13 +39,13 @@ return [
 
     'filesystem' => [
 
-        'path' => '%path%'
+        'path' => $path
 
     ],
 
     'profiler' => [
 
-        'file' => '%path%/app/database/profiler.db'
+        'file' => $path.'/app/database/profiler.db'
 
     ],
 
@@ -56,15 +56,15 @@ return [
             'cache' => [
 
                 'storage' => 'auto',
-                'path'    => '%path%/tmp/cache',
-                'prefix'  => sha1(__DIR__)
+                'path'    => $path.'/tmp/cache',
+                'prefix'  => sha1($path)
 
             ],
 
             'cache.phpfile' => [
 
                 'storage' => 'phpfile',
-                'path'    => '%path%/tmp/cache'
+                'path'    => $path.'/tmp/cache'
 
             ]
 
