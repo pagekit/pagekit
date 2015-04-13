@@ -37,7 +37,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Pagekit\\": "app/modules/application/src"
+            "Pagekit\\": "app/modules/application/src",
+            "Pagekit\\Config\\": "app/modules/config/src"
         }
     }
 }
