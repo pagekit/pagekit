@@ -38,18 +38,24 @@ class BlogExtension extends Extension
                 return App::view('blog:views/admin/site/post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
             }, 'blog.post');
         });
+
+        if (!$app['config']->get($this->name)) {
+            $app['config']->set($this->name, [], true);
+        }
     }
 
     public function enable()
     {
-        if ($version = App::migrator()->create('extensions/blog/migrations', App::config('blog:version'))->run()) {
-            App::config()->set('blog:version', $version);
+        $config = App::config($this->name);
+
+        if ($version = App::migrator()->create('extensions/blog/migrations', $config->get('version'))->run()) {
+            $config->set('version', $version);
         }
     }
 
     public function uninstall()
     {
-        App::config()->remove('blog:version');
+        App::config()->remove($this->name);
     }
 
     public function getPermalink()

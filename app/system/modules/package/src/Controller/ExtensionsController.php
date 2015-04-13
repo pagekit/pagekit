@@ -67,16 +67,7 @@ class ExtensionsController extends Controller
 
             $extension->enable();
 
-            $config = App::config('system', []);
-
-            if (!isset($config['extensions'])) {
-                $config['extensions'] = [];
-            }
-
-            $config['extensions'] = array_unique(array_merge($config['extensions'], [$extension->name]));
-
-            App::config()->set('system', $config, true);
-
+            App::config('system')->push('extensions', $extension->name);
             App::exception()->setHandler($handler);
 
             return ['message' => __('Extension enabled.')];
@@ -99,8 +90,9 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
             }
 
-            $this->disable($extension);
+            $extension->disable();
 
+            App::config('system')->pull('extensions', $extension->name);
             App::module('system/cache')->clearCache();
 
             return ['message' => __('Extension disabled.')];
@@ -127,11 +119,12 @@ class ExtensionsController extends Controller
                 throw new Exception(__('Unable to uninstall extension "%name%".', ['%name%' => $name]));
             }
 
-            $this->disable($extension);
-
+            $extension->disable();
             $extension->uninstall();
 
             App::package()->getInstaller('extension')->uninstall(App::package()->getRepository('extension')->findPackage($name));
+
+            App::config('system')->pull('extensions', $extension->name);
             App::module('system/cache')->clearCache();
 
             return ['message' => __('Extension uninstalled.')];
@@ -140,75 +133,5 @@ class ExtensionsController extends Controller
 
             return ['message' => $e->getMessage(), 'error' => true];
         }
-    }
-
-    /**
-     * @Request({"name"})
-     */
-    public function settingsAction($name)
-    {
-        try {
-
-            if (!$extension = App::module($name) or !$tmpl = $extension->config('settings.view')) {
-                throw new Exception(__('Invalid extension.'));
-            }
-
-            $event = App::trigger('system.extension.edit', new ExtensionEvent($extension, $extension->config));
-            $title = App::package()->getRepository('extension')->findPackage($extension->getName())->getTitle();
-
-            return App::view($tmpl, [
-                '$meta' => [
-                    'title' => __('%extension% Settings', ['%extension%' => $title])
-                ],
-                'extension' => $extension,
-                'params' => $event->getParams()
-            ]);
-
-        } catch (Exception $e) {
-            App::message()->error($e->getMessage());
-        }
-
-        return $this->redirect('@system/system');
-    }
-
-    /**
-     * @Request({"name", "params": "array"})
-     */
-    public function saveSettingsAction($name, $params = [])
-    {
-        try {
-
-            if (!$extension = App::module($name)) {
-                throw new Exception(__('Invalid extension.'));
-            }
-
-            $event = App::trigger('system.extension.save', new ExtensionEvent($extension, $params));
-
-            App::config()->set($name, $event->getParams(), true);
-            App::message()->success(__('Settings saved.'));
-
-            return $this->redirect('@system/extensions/settings', compact('name'));
-
-        } catch (Exception $e) {
-
-            App::message()->error($e->getMessage());
-        }
-
-        return $this->redirect('@system/system');
-    }
-
-    protected function disable(Extension $extension)
-    {
-        $config = App::config('system', []);
-
-        if (!isset($config['extensions'])) {
-            $config['extensions'] = [];
-        }
-
-        $config['extensions'] = array_values(array_diff($config['extensions'], [$extension->name]));
-
-        App::config()->set('system', $config, true);
-
-        $extension->disable();
     }
 }

@@ -12,6 +12,11 @@ class Config implements \ArrayAccess, \JsonSerializable
     protected $values = [];
 
     /**
+     * @var bool
+     */
+    protected $dirty = false;
+
+    /**
      * Constructor.
      *
      * @param mixed $values
@@ -55,6 +60,8 @@ class Config implements \ArrayAccess, \JsonSerializable
     {
         Arr::set($this->values, $key, $value);
 
+        $this->dirty = true;
+
         return $this;
     }
 
@@ -67,6 +74,8 @@ class Config implements \ArrayAccess, \JsonSerializable
     public function remove($keys)
     {
         Arr::remove($this->values, $keys);
+
+        $this->dirty = true;
 
         return $this;
     }
@@ -113,8 +122,19 @@ class Config implements \ArrayAccess, \JsonSerializable
     public function merge($values, $replace = false)
     {
         $this->values = Arr::merge($this->values, $values, $replace);
+        $this->dirty  = true;
 
         return $this;
+    }
+
+    /**
+     * Checks if the values are modified.
+     *
+     * @return array
+     */
+    public function dirty()
+    {
+        return $this->dirty;
     }
 
     /**

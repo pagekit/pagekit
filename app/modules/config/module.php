@@ -15,13 +15,19 @@ return [
         if ($app['config.file']) {
             $app['module']->addLoader(function($name, array $config) use ($app) {
 
-                if (is_array($values = $app['config']->get($name, []))) {
-                    $config = array_replace_recursive($config, ['config' => $values]);
+                if ($values = $app['config']->get($name)) {
+                    $config = array_replace_recursive($config, ['config' => $values->toArray()]);
                 }
 
                 return $config;
             });
         }
+
+        $app->on('kernel.terminate', function () use ($app) {
+            foreach ($app['config'] as $name => $config) {
+                $app['config']->set($name, $config);
+            }
+        });
 
     },
 

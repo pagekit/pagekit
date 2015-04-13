@@ -114,7 +114,11 @@ class InstallerController
                 throw new Exception($message);
             }
 
-            App::config()->set('system:version', App::migrator()->create('app/system/migrations')->run());
+            App::config()->set('system', [], true);
+
+            if ($version = App::migrator()->create('app/system/migrations', App::config('system')->get('version'))->run()) {
+                App::config('system')->set('version', $version);
+            }
 
             App::db()->insert('@system_user', [
                 'name'       => $user['username'],
@@ -143,7 +147,7 @@ class InstallerController
 
             if (!$this->config) {
 
-                $configuration = new Config;
+                $configuration = new Config();
 
                 foreach ($config as $key => $value) {
                     $configuration->set($key, $value);
@@ -157,10 +161,6 @@ class InstallerController
 
                     throw new Exception(__('Can\'t write config.'));
                 }
-            }
-
-            foreach ($option as $key => $value) {
-                App::config()->set($key, $value, true);
             }
 
             $status = 'success';

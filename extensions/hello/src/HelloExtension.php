@@ -29,13 +29,19 @@ class HelloExtension extends Extension
 
         // dispatch event (check Hello\Event\HelloListener to see how subscribers work)
         $app->trigger('hello.boot');
+
+        if (!$app['config']->get($this->name)) {
+            $app['config']->set($this->name, [], true);
+        }
     }
 
     public function enable()
     {
+        $config = App::config($this->name);
+
         // run all migrations that are newer than the current version
-        if ($version = App::migrator()->create('extensions/hello/migrations', App::config('hello:version'))->run()) {
-            App::config()->set('hello:version', $version);
+        if ($version = App::migrator()->create('extensions/hello/migrations', $config->get('version'))->run()) {
+            $config->set('version', $version);
         }
     }
 
@@ -50,7 +56,7 @@ class HelloExtension extends Extension
         $util = App::db()->getUtility();
         $util->dropTable('@hello_greetings');
 
-        // remove the options setting
-        App::config()->remove('hello:version');
+        // remove the config
+        App::config()->remove($this->name);
     }
 }

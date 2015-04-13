@@ -69,10 +69,7 @@ class ThemesController extends Controller
                 throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
             }
 
-            $config = App::config('system', []);
-            $config['theme.site'] = $theme->name;
-
-            App::config()->set('system', $config, true);
+            App::config('system')->set('theme.site', $theme->name);
             App::exception()->setHandler($handler);
 
             return ['message' => __('Theme enabled.')];
@@ -104,54 +101,5 @@ class ThemesController extends Controller
 
             return ['message' => $e->getMessage(), 'error' => true];
         }
-    }
-
-    /**
-     * @Request({"name"})
-     */
-    public function settingsAction($name)
-    {
-        try {
-
-            if (!$theme = App::module($name) or !$tmpl = $theme->config('settings.view')) {
-                throw new Exception(__('Invalid theme.'));
-            }
-
-            $event = App::trigger('system.theme.edit', new ThemeEvent($theme, $theme->config));
-
-            return App::view($tmpl, ['theme' => $theme, 'params' => $event->getParams()]);
-
-        } catch (Exception $e) {
-
-            App::message()->error($e->getMessage());
-        }
-
-        return $this->redirect('@system/system');
-    }
-
-    /**
-     * @Request({"name", "params": "array"})
-     */
-    public function saveSettingsAction($name, $params = [])
-    {
-        try {
-
-            if (!$theme = App::module()->get($name)) {
-                throw new Exception(__('Invalid theme.'));
-            }
-
-            $event = App::trigger('system.theme.save', new ThemeEvent($theme, $params));
-
-            App::config()->set($name, $event->getParams(), true);
-            App::message()->success(__('Settings saved.'));
-
-            return $this->redirect('@system/themes/settings', compact('name'));
-
-        } catch (Exception $e) {
-
-            App::message()->error($e->getMessage());
-        }
-
-        return $this->redirect('@system/system');
     }
 }

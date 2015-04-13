@@ -9,45 +9,41 @@ use Pagekit\Database\Connection;
 class ConfigManager implements \IteratorAggregate
 {
     /**
-     * @var Connection $connection
+     * @var Connection
      */
     protected $connection;
 
     /**
-     * @var Cache $cache
+     * @var Cache
      */
     protected $cache;
 
     /**
-     * The cache prefix
-     *
-     * @var string $prefix
+     * @var string
      */
     protected $prefix = 'Options:';
 
     /**
-     * @var array $ignore
+     * @var array
      */
     protected $ignore = [];
 
     /**
-     * @var array $autoload
+     * @var array
      */
     protected $autoload = [];
 
     /**
-     * @var array $options
+     * @var array
      */
-    protected $options = [];
+    protected $configs = [];
 
     /**
-     * @var array $protected
+     * @var array
      */
     protected $protected = ['Ignore', 'Autoload'];
 
 	/**
-	 * The name of the options table.
-	 *
 	 * @var string
 	 */
 	protected $table;
@@ -82,7 +78,7 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Gets all option values.
+     * Gets all configs.
      *
      * @return array
      */
@@ -90,11 +86,11 @@ class ConfigManager implements \IteratorAggregate
     {
         $this->initialize();
 
-        return $this->options;
+        return $this->configs;
     }
 
     /**
-     * Gets all option keys.
+     * Gets all config names.
      *
      * @return array
      */
@@ -104,59 +100,54 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Gets an option value.
+     * Gets a config.
      *
      * @param  string $name
-     * @param  mixed $default
      * @throws \InvalidArgumentException
      * @return mixed
      */
-    public function get($name, $default = null)
+    public function get($name)
     {
         $name = trim($name);
-
-        if (empty($name)) {
-            throw new \InvalidArgumentException('Empty option name given.');
-        }
 
         if (empty($this->ignore) && $ignore = $this->cache->fetch($this->prefix.'Ignore')) {
             $this->ignore = $ignore ?: [];
         }
 
-        if (isset($this->ignore[$name])) {
-            return $default;
+        if (empty($name) || isset($this->ignore[$name])) {
+            return null;
         }
 
         $this->initialize(true);
 
-        if (isset($this->options[$name])) {
-            return $this->options[$name];
+        if (isset($this->configs[$name])) {
+            return $this->configs[$name];
         }
 
-        if ($option = $this->cache->fetch($this->prefix.$name)) {
-            return $this->options[$name] = json_decode($option, true);
+        if ($config = $this->cache->fetch($this->prefix.$name)) {
+            return $this->configs[$name] = new Config(json_decode($config, true));
         }
 
-        if ($option = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
-            $this->cache->save($this->prefix.$name, $option['value']);
-            return $this->options[$name] = json_decode($option['value'], true);
+        if ($config = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
+            $this->cache->save($this->prefix.$name, $config['value']);
+            return $this->configs[$name] = new Config(json_decode($config['value'], true));
         }
 
         $this->ignore[$name] = true;
         $this->cache->save($this->prefix.'Ignore', $this->ignore);
 
-        return $default;
+        return null;
     }
 
     /**
-     * Sets an option value.
+     * Sets a config.
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param  string  $name
+     * @param  mixed   $config
      * @param  boolean $autoload
      * @throws \InvalidArgumentException
      */
-    public function set($name, $value, $autoload = null)
+    public function set($name, $config, $autoload = null)
     {
         $name = trim($name);
 
@@ -168,13 +159,15 @@ class ConfigManager implements \IteratorAggregate
             throw new \InvalidArgumentException(sprintf('"%s" is a protected option and may not be modified.', $name));
         }
 
-        $old_value = $this->get($name);
+        if (is_array($config)) {
+            $config = new Config($config);
+        }
 
-        if ($value !== $old_value) {
+        $this->configs[$name] = $config;
 
-            $this->options[$name] = $value;
+        if ($config->dirty()) {
 
-            $data = ['name' => $name, 'value' => json_encode($value)];
+            $data = ['name' => $name, 'value' => json_encode($config)];
 
             if ($autoload !== null) {
                 $data['autoload'] = $autoload ? '1' : '0';
@@ -206,9 +199,9 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Removes a stored option.
+     * Removes a config.
      *
-     * @param  string $name The name of the option to be removed.
+     * @param  string $name
      * @throws \InvalidArgumentException
      */
     public function remove($name)
@@ -216,23 +209,23 @@ class ConfigManager implements \IteratorAggregate
         $name = trim($name);
 
         if (empty($name)) {
-            throw new \InvalidArgumentException('Empty option name given.');
+            throw new \InvalidArgumentException('Empty name given.');
         }
 
         if (in_array($name, $this->protected)) {
-            throw new \InvalidArgumentException(sprintf('"%s" is a protected option and may not be modified.', $name));
+            throw new \InvalidArgumentException(sprintf('"%s" is a protected and may not be modified.', $name));
         }
 
         $this->initialize(true);
 
         if ($this->connection->delete($this->table, ['name' => $name])) {
-            unset($this->options[$name]);
+            unset($this->configs[$name]);
             $this->cache->delete($this->prefix.(isset($this->autoload[$name]) ? 'Autoload' : $name));
         }
     }
 
     /**
-     * Returns an iterator for options.
+     * Returns an iterator.
      *
      * @return \ArrayIterator
      */
@@ -242,20 +235,23 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Initialize the all or only autoload options.
+     * Initialize the all or only autoloads.
      *
      * @param bool $autoload
      */
     protected function initialize($autoload = false)
     {
+        // TODO fix autoload
+        return;
+
         if ($this->initialized) {
             return;
         }
 
         if ($autoload) {
 
-            if (!$this->autoload and $options = $this->cache->fetch($this->prefix.'Autoload')) {
-                $this->options = $this->autoload = $options;
+            if (!$this->autoload and $configs = $this->cache->fetch($this->prefix.'Autoload')) {
+                $this->configs = $this->autoload = $configs;
             }
 
             if ($this->autoload) {
@@ -269,14 +265,14 @@ class ConfigManager implements \IteratorAggregate
             $query = "SELECT name, value, autoload FROM {$this->table}";
         }
 
-        if ($options = $this->connection->fetchAll($query)) {
+        if ($configs = $this->connection->fetchAll($query)) {
 
-            foreach ($options as $option) {
+            foreach ($configs as $config) {
 
-                $this->options[$option['name']] = json_decode($option['value'], true);
+                $this->configs[$config['name']] = json_decode($config['value'], true);
 
-                if ($option['autoload']) {
-                    $this->autoload[$option['name']] = $this->options[$option['name']];
+                if ($config['autoload']) {
+                    $this->autoload[$config['name']] = $this->configs[$config['name']];
                 }
             }
 
