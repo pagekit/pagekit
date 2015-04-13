@@ -186,7 +186,7 @@ class Arr
      * @param  int      $flag
      * @return array
      */
-    public static function filter($array, callable $callback, $flag = 2)
+    public static function filter($array, callable $callback, $flag = 1)
     {
         if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
             return array_filter($array, $callback, $flag);

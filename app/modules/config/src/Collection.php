@@ -79,7 +79,8 @@ class Collection implements \ArrayAccess, \JsonSerializable
     /**
      * Selects a key.
      *
-     * @param string $key
+     * @param  string $key
+     * @return self
      */
     public function select($key = null)
     {
@@ -99,7 +100,7 @@ class Collection implements \ArrayAccess, \JsonSerializable
         if ($this->key) {
             $values = $this->get($this->key);
         } else {
-            $values &= $this->values;
+            $values =& $this->values;
         }
 
         foreach (func_get_args() as $value) {
@@ -124,7 +125,7 @@ class Collection implements \ArrayAccess, \JsonSerializable
         if ($this->key) {
             $values = $this->get($this->key);
         } else {
-            $values &= $this->values;
+            $values =& $this->values;
         }
 
         Arr::pull($values, $value);
