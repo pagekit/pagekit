@@ -221,4 +221,55 @@ class Arr
 
         return $filtered;
     }
+
+    /**
+     * Flattens an array.
+     *
+     * @param  array $array
+     * @param  string $path
+     * @return array
+     */
+    public static function flatten($array, $path = '')
+    {
+        $results = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $results = array_merge($results, self::flatten($value, $path.$key.'.'));
+            } else {
+                $results[$path.$key] = $value;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * Expands an array.
+     *
+     * @param  array $array
+     * @return array
+     */
+    public static function expand($array)
+    {
+        $result = [];
+        foreach ($array as $key => $value) {
+
+            $values =& $result;
+            $keys = explode('.', $key);
+            while (count($keys) > 1) {
+
+                $key = array_shift($keys);
+
+                if (!isset($values[$key]) || !is_array($values[$key])) {
+                    $values[$key] = [];
+                }
+
+                $values =& $values[$key];
+            }
+
+            $values[array_shift($keys)] = $value;
+        }
+        return $result;
+    }
 }

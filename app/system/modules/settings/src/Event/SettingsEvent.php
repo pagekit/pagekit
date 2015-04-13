@@ -4,6 +4,7 @@ namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Event\Event;
+use Pagekit\Util\Arr;
 
 class SettingsEvent extends Event
 {
@@ -87,7 +88,7 @@ class SettingsEvent extends Event
             return $data;
         }
 
-        $data = $this->flatten($data);
+        $data = Arr::flatten($data);
 
         $result = [];
         foreach($data as $keypath => $value) {
@@ -98,57 +99,6 @@ class SettingsEvent extends Event
             }
         }
 
-        return $this->expand($result);
-    }
-
-    /**
-     * Flattens an array.
-     *
-     * @param  array $array
-     * @param  string $path
-     * @return array
-     */
-    protected function flatten(array $array, $path = '')
-    {
-        $results = [];
-
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $results = array_merge($results, $this->flatten($value, $path.$key.'.'));
-            } else {
-                $results[$path.$key] = $value;
-            }
-        }
-
-        return $results;
-    }
-
-    /**
-     * Expands an array.
-     *
-     * @param  array $values
-     * @return array
-     */
-    protected function expand(array $values)
-    {
-        $result = [];
-        foreach ($values as $key => $value) {
-
-            $array =& $result;
-            $keys = explode('.', $key);
-            while (count($keys) > 1) {
-
-                $key = array_shift($keys);
-
-                if (!isset($array[$key]) || !is_array($array[$key])) {
-                    $array[$key] = [];
-                }
-
-                $array =& $array[$key];
-            }
-
-            $array[array_shift($keys)] = $value;
-        }
-        return $result;
+        return Arr::expand($result);
     }
 }
