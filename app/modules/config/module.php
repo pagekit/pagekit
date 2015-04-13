@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Config\ConfigManager;
-use Pagekit\Config\Loader\ConfigLoader;
 
 return [
 
@@ -14,7 +13,14 @@ return [
         };
 
         if ($app['config.file']) {
-            $app['module']->addLoader(new ConfigLoader());
+            $app['module']->addLoader(function($name, array $config) use ($app) {
+
+                if (is_array($values = $app['config']->get($name, []))) {
+                    $config = array_replace_recursive($config, ['config' => $values]);
+                }
+
+                return $config;
+            });
         }
 
     },

@@ -28,7 +28,7 @@ class SettingsController extends Controller
     public function __construct()
     {
         $this->config = new Config;
-        $this->config->load($this->configFile = App::get('config.file'));
+        $this->config->merge(include $this->configFile = App::get('config.file'));
     }
 
     /**
@@ -38,7 +38,7 @@ class SettingsController extends Controller
     {
         return [
             '$meta' => ['title' => __('Settings')],
-            'sections' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->getValues()]))->getSections()
+            'sections' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->toArray()]))->getSections()
         ];
     }
 

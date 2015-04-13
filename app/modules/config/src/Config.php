@@ -2,10 +2,9 @@
 
 namespace Pagekit\Config;
 
-use Pagekit\Config\Loader\LoaderInterface;
-use Pagekit\Config\Loader\PhpLoader;
+use Pagekit\Util\Arr;
 
-class Config implements \ArrayAccess
+class Config implements \ArrayAccess, \JsonSerializable
 {
     /**
      * @var array
@@ -13,65 +12,28 @@ class Config implements \ArrayAccess
     protected $values = [];
 
     /**
-     * @var array
-     */
-    protected $replace = [];
-
-    /**
-     * @var LoaderInterface
-     */
-    protected $loader;
-
-    /**
-     * Create a new configuration.
+     * Constructor.
      *
-     * @param array           $replace
-     * @param LoaderInterface $loader
+     * @param mixed $values
      */
-    public function __construct(array $replace = [], LoaderInterface $loader = null)
+    public function __construct($values = [])
     {
-        foreach ($replace as $name => $value) {
-            $this->replace['%'.$name.'%'] = $value;
-        }
-
-        $this->loader = $loader ?: new PhpLoader;
+        $this->values = (array) $values;
     }
 
     /**
-     * Get shortcut.
-     *
-     * @see get()
-     */
-    public function __invoke($key, $default = null)
-    {
-        return $this->get($key, $default);
-    }
-
-    /**
-     * Get all configuration values.
-     *
-     * @return array
-     */
-    public function getValues()
-    {
-        return $this->values;
-    }
-
-    /**
-     * Determine if the given configuration value exists.
+     * Checks if the given key exists.
      *
      * @param  string $key
      * @return bool
      */
     public function has($key)
     {
-        $default = microtime(true);
-
-        return $this->get($key, $default) != $default;
+        return Arr::has($this->values, $key);
     }
 
     /**
-     * Get the specified configuration value.
+     * Gets a value by key.
      *
      * @param  string $key
      * @param  mixed  $default
@@ -79,115 +41,84 @@ class Config implements \ArrayAccess
      */
     public function get($key, $default = null)
     {
-        $array = $this->values;
-
-        if (isset($array[$key])) {
-            return $array[$key];
-        }
-
-        foreach (explode('.', $key) as $segment) {
-
-            if (!is_array($array) || !array_key_exists($segment, $array)) {
-                return $default;
-            }
-
-            $array = $array[$segment];
-        }
-
-        return $array;
+        return Arr::get($this->values, $key, $default);
     }
 
     /**
-     * Set a given configuration value.
+     * Sets a value.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $key
+     * @param  mixed  $value
+     * @return self
      */
     public function set($key, $value)
     {
-        $keys = explode('.', $key);
-        $array =& $this->values;
+        Arr::set($this->values, $key, $value);
 
-        while (count($keys) > 1) {
-
-            $key = array_shift($keys);
-
-            if (!isset($array[$key]) || !is_array($array[$key])) {
-                $array[$key] = [];
-            }
-
-            $array =& $array[$key];
-        }
-
-        $array[array_shift($keys)] = $value;
+        return $this;
     }
 
     /**
-     * Determine if the given configuration value exists.
+     * Removes one or more values.
+     *
+     * @param  array|string $keys
+     * @return self
+     */
+    public function remove($keys)
+    {
+        Arr::remove($this->values, $keys);
+
+        return $this;
+    }
+
+    /**
+     * Push value to the end of array.
      *
      * @param  string $key
-     * @return bool
+     * @param  mixed  $value
+     * @return self
      */
-    public function offsetExists($key)
+    public function push($key, $value)
     {
-        return $this->has($key);
+        $values = $this->get($this->key);
+
+        $values[] = $value;
+
+        return $this->set($this->key, $values);
     }
 
     /**
-     * Get a configuration value.
+     * Removes a value from array.
      *
      * @param  string $key
-     * @return bool
+     * @param  mixed  $value
+     * @return self
      */
-    public function offsetGet($key)
+    public function pull($key, $value)
     {
-        return $this->get($key);
+        $values = $this->get($this->key);
+
+        Arr::pull($values, $value);
+
+        return $this->set($this->key, $values);
     }
 
     /**
-     * Set a configuration value.
+     * Merges a values from another array.
      *
-     * @param string $key
-     * @param string $value
+     * @param  mixed $values
+     * @param  bool  $replace
+     * @return self
      */
-    public function offsetSet($key, $value)
+    public function merge($values, $replace = false)
     {
-        $this->set($key, $value);
+        $this->values = Arr::merge($this->values, $values, $replace);
+
+        return $this;
     }
 
     /**
-     * Unset a configuration value.
-     *
-     * @param string $key
-     */
-    public function offsetUnset($key)
-    {
-        $this->set($key, null);
-    }
-
-    /**
-     * Load a configuration file or array of files.
-     *
-     * @param string|array $files
-     */
-    public function load($files)
-    {
-        foreach ((array) $files as $file) {
-
-            $values = $this->loader->load($file);
-
-            foreach ($values as $name => $value) {
-                if ('%' === substr($name, 0, 1)) {
-                    $this->replace[$name] = (string) $value;
-                }
-            }
-
-            $this->values = $this->merge($this->values, $values);
-        }
-    }
-
-    /**
-     * Dumps the configuration values.
+     * Dumps the values as php.
      *
      * @return string
      */
@@ -197,50 +128,62 @@ class Config implements \ArrayAccess
     }
 
     /**
-     * Merge two arrays recursively and overwrite existing keys.
+     * Gets the values as a plain array.
      *
-     * @param  array $current
-     * @param  array $new
      * @return array
      */
-    protected function merge(array $current, array $new)
+    public function toArray()
     {
-        foreach ($new as $key => $value) {
-            if (isset($current[$key]) && is_array($value)) {
-                $current[$key] = $this->merge($current[$key], $value);
-            } else {
-                $current[$key] = $this->replace($value);
-            }
-        }
-
-        return $current;
+        return $this->values;
     }
 
     /**
-     * Replace "%foo%" placeholders with the actual value.
+     * Implements JsonSerializable interface.
      *
-     * @param  mixed $value
-     * @return mixed
+     * @return array
      */
-    protected function replace($value)
+    public function jsonSerialize()
     {
-        if (!$this->replace) {
-            return $value;
-        }
+        return $this->values;
+    }
 
-        if (is_array($value)) {
+    /**
+     * Implements ArrayAccess interface.
+     *
+     * @see has()
+     */
+    public function offsetExists($key)
+    {
+        return $this->has($key);
+    }
 
-            foreach ($value as $k => $v) {
-                $value[$k] = $this->replace($v);
-            }
+    /**
+     * Implements ArrayAccess interface.
+     *
+     * @see get()
+     */
+    public function offsetGet($key)
+    {
+        return $this->get($key);
+    }
 
-            return $value;
-        }
+    /**
+     * Implements ArrayAccess interface.
+     *
+     * @see set()
+     */
+    public function offsetSet($key, $value)
+    {
+        $this->set($key, $value);
+    }
 
-        if (is_string($value)) {
-            return strtr($value, $this->replace);
-        }
-
-        return $value;
+    /**
+     * Implements ArrayAccess interface.
+     *
+     * @see remove()
+     */
+    public function offsetUnset($key)
+    {
+        $this->remove($key);
     }
 }

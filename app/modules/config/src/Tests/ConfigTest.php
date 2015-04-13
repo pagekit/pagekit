@@ -12,52 +12,46 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected $config;
 
+    /**
+     * @var array
+     */
+    protected $values;
+
     public function setUp()
 	{
-	    $this->config = new Config;
-	    $this->config->load(__DIR__.'/Fixtures/config.php');
+		$values = [
+	    	'foo' => [
+	    		'bar' => 'test'
+	    	]
+	    ];
+
+	    $this->config = new Config($values);
+	    $this->values = $values;
 	}
 
 	public function testHas()
 	{
-		$this->assertTrue(!$this->config->has('Foo'));
-		$this->assertTrue($this->config->has('app'));
+		$this->assertTrue($this->config->has('foo'));
+		$this->assertTrue(!$this->config->has('none'));
 	}
 
 	public function testGet()
 	{
-		$this->assertEquals($this->config->get('app.site_title'), 'Demo');
+		$this->assertEquals($this->config->get('foo.bar'), 'test');
 	}
 
-	public function testLoadReplace()
+	public function testToArray()
 	{
-		$config = new Config(['replacement' => 'de']);
-		$config->load(__DIR__.'/Fixtures/config2.php');
-
-		$this->assertEquals($config->get('app.locale'), 'de');
-		$this->assertEquals($config->get('profiler.enabled'), '0');
-	}
-
-	public function testGetValues()
-	{
-		$loader = new PhpLoader;
-
-		if ($supports = $loader->supports(__DIR__.'/Fixtures/config.php')) {
-			$config = $loader->load(__DIR__.'/Fixtures/config.php');
-			$this->assertEquals($this->config->getValues(), $config);
-		}
-
-		$this->assertTrue($supports);
+		$this->assertEquals($this->config->toArray(), $this->values);
 	}
 
 	public function testSet()
 	{
-		$this->config->load(__DIR__.'/Fixtures/config2.php');
-		$this->config->set('mail.from.address', 'admin@test.de');
-		$this->assertEquals($this->config->get('mail.from.address'), 'admin@test.de');
-		$this->config->offsetSet('foo.bar', 'fooBar');
+		$this->config->set('foo.bar2', 'test2');
+		$this->assertEquals($this->config->get('foo.bar2'), 'test2');
+		$this->config->offsetSet('foo.bar', 'test3');
 		$this->assertTrue($this->config->offsetExists('foo.bar'));
-		$this->assertEquals($this->config->offsetGet('foo.bar'), 'fooBar');
+		$this->assertEquals($this->config->offsetGet('foo.bar'), 'test3');
 		$this->config->offsetUnset('foo.bar');
 		$this->assertEquals($this->config->offsetGet('foo.bar'), null);
 	}

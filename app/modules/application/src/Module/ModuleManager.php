@@ -3,6 +3,7 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application;
+use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
 
 class ModuleManager implements \ArrayAccess, \IteratorAggregate
@@ -109,11 +110,15 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Adds a module config loader.
      *
-     * @param  LoaderInterface $loader
+     * @param  LoaderInterface|callable $loader
      * @return self
      */
-    public function addLoader(LoaderInterface $loader)
+    public function addLoader($loader)
     {
+        if (is_callable($loader)) {
+            $loader = new CallableLoader($loader);
+        }
+
         $this->loaders[] = $loader;
 
         return $this;
