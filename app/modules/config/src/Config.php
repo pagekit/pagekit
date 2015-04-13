@@ -80,11 +80,11 @@ class Config implements \ArrayAccess, \JsonSerializable
      */
     public function push($key, $value)
     {
-        $values = $this->get($this->key);
+        $values = $this->get($key);
 
         $values[] = $value;
 
-        return $this->set($this->key, $values);
+        return $this->set($key, $values);
     }
 
     /**
@@ -96,11 +96,11 @@ class Config implements \ArrayAccess, \JsonSerializable
      */
     public function pull($key, $value)
     {
-        $values = $this->get($this->key);
+        $values = $this->get($key);
 
         Arr::pull($values, $value);
 
-        return $this->set($this->key, $values);
+        return $this->set($key, $values);
     }
 
     /**
