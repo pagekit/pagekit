@@ -3,9 +3,9 @@
 namespace Pagekit\Config\Loader;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Loader\LoaderInterface;
+use Pagekit\Module\Loader\LoaderInterface as ModuleLoaderInterface;
 
-class ConfigLoader implements LoaderInterface
+class ConfigLoader implements ModuleLoaderInterface
 {
     /**
      * {@inheritdoc}
