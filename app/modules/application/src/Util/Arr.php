@@ -253,6 +253,7 @@ class Arr
     public static function expand($array)
     {
         $result = [];
+
         foreach ($array as $key => $value) {
 
             $values =& $result;
@@ -270,6 +271,7 @@ class Arr
 
             $values[array_shift($keys)] = $value;
         }
+
         return $result;
     }
 }

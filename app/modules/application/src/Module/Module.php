@@ -3,6 +3,7 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application as App;
+use Pagekit\Util\Arr;
 
 class Module
 {
@@ -41,25 +42,6 @@ class Module
      */
     public function config($key = null, $default = null)
     {
-        if (null === $key) {
-            return $this->config;
-        }
-
-        $array = $this->config;
-
-        if (isset($array[$key])) {
-            return $array[$key];
-        }
-
-        foreach (explode('.', $key) as $segment) {
-
-            if (!is_array($array) || !array_key_exists($segment, $array)) {
-                return $default;
-            }
-
-            $array = $array[$segment];
-        }
-
-        return $array;
+        return Arr::get($this->config, $key, $default);
     }
 }
