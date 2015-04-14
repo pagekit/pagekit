@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Profiler;
+namespace Pagekit\Profiler\Event;
 
 use Pagekit\Application as App;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -17,7 +17,7 @@ class ToolbarListener implements EventSubscriberInterface
                 return new Response;
             }
 
-            return new Response(App::view(__DIR__.'/../views/toolbar.php', ['profiler' => App::profiler(), 'profile' => $profile, 'token' => $token]));
+            return new Response(App::view(__DIR__.'/../../views/toolbar.php', ['profiler' => App::profiler(), 'profile' => $profile, 'token' => $token]));
 
         })->setDefault('_maintenance', true);
     }
@@ -54,7 +54,7 @@ class ToolbarListener implements EventSubscriberInterface
 
         $token    = $response->headers->get('X-Debug-Token');
         $route    = App::url()->getRoute('_profiler', compact('token'));
-        $url      = App::file()->getUrl(__DIR__.'/../assets');
+        $url      = App::file()->getUrl(__DIR__.'/../../assets');
         $markup[] = "<div id=\"profiler\" data-url=\"{$url}\" data-route=\"{$route}\" style=\"display: none;\"></div>";
         $markup[] = "<script src=\"{$url}/js/profiler.js\"></script>\n";
 
@@ -64,7 +64,7 @@ class ToolbarListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'kernel.request'  => ['onKernelRequest', 100],

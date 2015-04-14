@@ -2,24 +2,23 @@
 
 namespace Pagekit\Routing\Event;
 
-use Pagekit\Event\EventDispatcher as BaseEventDisptacher;
+use Pagekit\Event\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class EventDispatcher implements EventDispatcherInterface
+class EventDispatcher implements \Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     /**
-     * @var BaseEventDisptacher
+     * @var EventDispatcherInterface
      */
     protected $dispatcher;
 
     /**
      * Constructor.
      *
-     * @param BaseEventDisptacher $dispatcher
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(BaseEventDisptacher $dispatcher)
+    public function __construct(EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
@@ -42,7 +41,7 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function hasListeners($eventName = null)
     {
-        return (bool) count($this->getListeners($eventName));
+        return $this->dispatcher->hasListeners($eventName);
     }
 
     /**
@@ -50,7 +49,7 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function getListeners($eventName = null)
     {
-        return $this->dispatcher->listeners($eventName);
+        return $this->dispatcher->getListeners($eventName);
     }
 
     /**

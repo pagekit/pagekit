@@ -1,19 +1,18 @@
 <?php
 
 use Pagekit\Database\DataCollector\DatabaseDataCollector;
+use Pagekit\Profiler\DataCollector\RequestDataCollector;
 use Pagekit\Profiler\DataCollector\SystemDataCollector;
 use Pagekit\Profiler\DataCollector\UserDataCollector;
 use Pagekit\Profiler\Profiler;
-use Pagekit\Profiler\ToolbarListener;
-use Pagekit\Profiler\TraceableEventDispatcher;
 use Pagekit\Profiler\TraceableView;
+use Pagekit\Profiler\Event\ProfilerListener;
+use Pagekit\Profiler\Event\ToolbarListener;
+use Pagekit\Profiler\Event\TraceableEventDispatcher;
 use Pagekit\Routing\DataCollector\RoutesDataCollector;
-use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface;
 use Symfony\Component\HttpKernel\DataCollector\EventDataCollector;
 use Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector;
-use Symfony\Component\HttpKernel\DataCollector\RequestDataCollector;
 use Symfony\Component\HttpKernel\DataCollector\TimeDataCollector;
-use Symfony\Component\HttpKernel\EventListener\ProfilerListener;
 use Symfony\Component\HttpKernel\Profiler\SqliteProfilerStorage;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -36,7 +35,7 @@ return [
 
             $profiler = new Profiler($app['profiler.storage']);
 
-            if ($app['events'] instanceof TraceableEventDispatcherInterface) {
+            if ($app['events'] instanceof TraceableEventDispatcher) {
                 $app['events']->setProfiler($profiler);
             }
 

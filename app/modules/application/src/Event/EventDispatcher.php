@@ -2,7 +2,7 @@
 
 namespace Pagekit\Event;
 
-class EventDispatcher
+class EventDispatcher implements EventDispatcherInterface
 {
     /**
      * @var string
@@ -30,11 +30,7 @@ class EventDispatcher
     }
 
     /**
-     * Adds an event listener.
-     *
-     * @param string   $event
-     * @param callable $listener
-     * @param int      $priority
+     * {@inheritdoc}
      */
     public function on($event, $listener, $priority = 0)
     {
@@ -43,10 +39,7 @@ class EventDispatcher
     }
 
     /**
-     * Removes one or more event listeners.
-     *
-     * @param string   $event
-     * @param callable $listener
+     * {@inheritdoc}
      */
     public function off($event, $listener = null)
     {
@@ -67,9 +60,7 @@ class EventDispatcher
     }
 
     /**
-     * Adds an event subscriber.
-     *
-     * @param EventSubscriberInterface $subscriber
+     * {@inheritdoc}
      */
     public function subscribe(EventSubscriberInterface $subscriber)
     {
@@ -87,9 +78,7 @@ class EventDispatcher
     }
 
     /**
-     * Removes an event subscriber.
-     *
-     * @param EventSubscriberInterface $subscriber
+     * {@inheritdoc}
      */
     public function unsubscribe(EventSubscriberInterface $subscriber)
     {
@@ -105,11 +94,7 @@ class EventDispatcher
     }
 
     /**
-     * Triggers an event.
-     *
-     * @param  string $event
-     * @param  array  $arguments
-     * @return EventInterface
+     * {@inheritdoc}
      */
     public function trigger($event, array $arguments = [])
     {
@@ -121,7 +106,7 @@ class EventDispatcher
 
         array_unshift($arguments, $e);
 
-        foreach ($this->listeners($e->getName()) as $listener) {
+        foreach ($this->getListeners($e->getName()) as $listener) {
 
             call_user_func_array($listener, $arguments);
 
@@ -134,12 +119,17 @@ class EventDispatcher
     }
 
     /**
-     * Gets all listeners of an event.
-     *
-     * @param  string $event
-     * @return array
+     * {@inheritdoc}
      */
-    public function listeners($event = null)
+    public function hasListeners($event = null)
+    {
+        return (bool) count($this->getListeners($event));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListeners($event = null)
     {
         if ($event !== null) {
             return isset($this->sorted[$event]) ? $this->sorted[$event] : $this->sortListeners($event);

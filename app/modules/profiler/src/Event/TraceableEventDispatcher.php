@@ -1,12 +1,11 @@
 <?php
 
-namespace Pagekit\Profiler;
+namespace Pagekit\Profiler\Event;
 
+use Pagekit\Event\Event;
+use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Event\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -18,16 +17,16 @@ use Symfony\Component\Stopwatch\Stopwatch;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEventDispatcherInterface
+class TraceableEventDispatcher implements EventDispatcherInterface
 {
-    private $logger;
-    private $called;
-    private $stopwatch;
-    private $profiler;
-    private $dispatcher;
-    private $wrappedListeners;
-    private $firstCalledEvent;
-    private $id;
+    protected $logger;
+    protected $called;
+    protected $stopwatch;
+    protected $profiler;
+    protected $dispatcher;
+    protected $wrappedListeners;
+    protected $firstCalledEvent;
+    protected $id;
     protected $priorities;
 
     /**
@@ -60,7 +59,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
     /**
      * {@inheritdoc}
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function on($event, $listener, $priority = 0)
     {
         if (is_array($listener)) {
             $class = get_class($listener[0]);
@@ -82,16 +81,25 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
             $this->priorities[$file.'::'.$line] = $priority;
         }
 
-        $this->dispatcher->addListener($eventName, $listener, $priority);
+        $this->dispatcher->on($event, $listener, $priority);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(EventSubscriberInterface $subscriber)
+    public function off($event, $listener = null)
+    {
+        return $this->dispatcher->off($event, $listener);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function subscribe(EventSubscriberInterface $subscriber)
     {
         $class = get_class($subscriber);
-        foreach ($subscriber->getSubscribedEvents() as $params) {
+
+        foreach ($subscriber->subscribe() as $params) {
             if (is_string($params)) {
                 $this->priorities[$class.'::'.$params] = 0;
             } elseif (is_string($params[0])) {
@@ -103,53 +111,31 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
             }
         }
 
-        $this->dispatcher->addSubscriber($subscriber);
+        $this->dispatcher->subscribe($subscriber);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeListener($eventName, $listener)
+    public function unsubscribe(EventSubscriberInterface $subscriber)
     {
-        return $this->dispatcher->removeListener($eventName, $listener);
+        return $this->dispatcher->unsubscribe($subscriber);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(EventSubscriberInterface $subscriber)
+    public function trigger($event, array $arguments = [])
     {
-        return $this->dispatcher->removeSubscriber($subscriber);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getListeners($eventName = null)
-    {
-        return $this->dispatcher->getListeners($eventName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasListeners($eventName = null)
-    {
-        return $this->dispatcher->hasListeners($eventName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function dispatch($eventName, Event $event = null)
-    {
-        if (null === $event) {
-            $event = new Event();
+        if (is_string($event)) {
+            $event = new Event($event);
         }
+
+        $eventName = $event->getName();
 
         $this->id = spl_object_hash($event);
 
-        $this->preDispatch($eventName, $event);
+        $this->preDispatch($eventName, $event, $arguments);
 
         $e = $this->stopwatch->start($eventName, 'section');
 
@@ -159,7 +145,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
             $this->firstCalledEvent[$eventName]->stop();
         }
 
-        $this->dispatcher->dispatch($eventName, $event);
+        $this->dispatcher->trigger($event, $arguments);
 
         // reset the id as another event might have been dispatched during the dispatching of this event
         $this->id = spl_object_hash($event);
@@ -171,6 +157,22 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
         $this->postDispatch($eventName, $event);
 
         return $event;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasListeners($event = null)
+    {
+        return $this->dispatcher->hasListeners($event);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListeners($event = null)
+    {
+        return $this->dispatcher->getListeners($event);
     }
 
     /**
@@ -220,7 +222,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
      * Whenever Symfony will require PHP 5.4, this could be changed
      * to a proper private method.
      */
-    public function logSkippedListeners($eventName, Event $event, $listener)
+    public function logSkippedListeners($eventName, $event, $listener)
     {
         if (null === $this->logger) {
             return;
@@ -281,7 +283,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
      *
      * @return array Information about the listener
      */
-    private function getListenerInfo($listener, $eventName)
+    protected function getListenerInfo($listener, $eventName)
     {
         $listener = $this->unwrapListener($listener);
 
@@ -357,7 +359,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
      * @param string  $token          Profile token
      * @param Boolean $updateChildren Whether to update the children altogether
      */
-    private function updateProfiles($token, $updateChildren)
+    protected function updateProfiles($token, $updateChildren)
     {
         if (!$this->profiler || !$profile = $this->profiler->loadProfile($token)) {
             return;
@@ -372,7 +374,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
      * @param Profile $profile        The root profile
      * @param Boolean $updateChildren Whether to update the children altogether
      */
-    private function saveInfoInProfile(Profile $profile, $updateChildren)
+    protected function saveInfoInProfile(Profile $profile, $updateChildren)
     {
         try {
             $collector = $profile->getCollector('memory');
@@ -402,7 +404,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
         }
     }
 
-    private function preDispatch($eventName, Event $event)
+    protected function preDispatch($eventName, $event, array $arguments)
     {
         // wrap all listeners before they are called
         $this->wrappedListeners[$this->id] = new \SplObjectStorage();
@@ -410,10 +412,10 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
         $listeners = $this->dispatcher->getListeners($eventName);
 
         foreach ($listeners as $listener) {
-            $this->dispatcher->removeListener($eventName, $listener);
-            $wrapped = $this->wrapListener($eventName, $listener);
+            $this->dispatcher->off($eventName, $listener);
+            $wrapped = $this->wrapListener($eventName, $listener, $arguments);
             $this->wrappedListeners[$this->id][$wrapped] = $listener;
-            $this->dispatcher->addListener($eventName, $wrapped);
+            $this->dispatcher->on($eventName, $wrapped);
         }
 
         switch ($eventName) {
@@ -441,7 +443,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
         }
     }
 
-    private function postDispatch($eventName, Event $event)
+    protected function postDispatch($eventName, $event)
     {
         switch ($eventName) {
             case KernelEvents::CONTROLLER:
@@ -472,42 +474,31 @@ class TraceableEventDispatcher implements EventDispatcherInterface, TraceableEve
 
         if (isset($this->wrappedListeners[$this->id])) {
             foreach ($this->wrappedListeners[$this->id] as $wrapped) {
-                $this->dispatcher->removeListener($eventName, $wrapped);
-                $this->dispatcher->addListener($eventName, $this->wrappedListeners[$this->id][$wrapped]);
+                $this->dispatcher->off($eventName, $wrapped);
+                $this->dispatcher->on($eventName, $this->wrappedListeners[$this->id][$wrapped]);
             }
         }
 
         unset($this->wrappedListeners[$this->id]);
     }
 
-    private function wrapListener($eventName, $listener)
+    protected function wrapListener($eventName, $listener, array $arguments)
     {
-        $self = $this;
-
-        return function (Event $event) use ($self, $eventName, $listener) {
-            $e = $self->preListenerCall($eventName, $listener);
-
-            $event->setDispatcher($self);
-
-            $arguments = [];
-
-            if ($event instanceof \Pagekit\Event\Event && $args = $event->getArguments()) {
-                $arguments = array_values($args);
-            }
+        return function ($event) use ($eventName, $listener, $arguments) {
+            $e = $this->preListenerCall($eventName, $listener);
 
             array_unshift($arguments, $event);
-
             call_user_func_array($listener, $arguments);
 
             $e->stop();
 
             if ($event->isPropagationStopped()) {
-                $self->logSkippedListeners($eventName, $event, $listener);
+                $this->logSkippedListeners($eventName, $event, $listener);
             }
         };
     }
 
-    private function unwrapListener($listener)
+    protected function unwrapListener($listener)
     {
         // get the original listener
         if (is_object($listener) && isset($this->wrappedListeners[$this->id][$listener])) {
