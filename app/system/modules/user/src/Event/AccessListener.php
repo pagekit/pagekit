@@ -7,10 +7,10 @@ use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class AccessListener implements EventSubscriberInterface
@@ -141,13 +141,13 @@ class AccessListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'route.configure'  => 'onConfigureRoute',
             'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
-            'system.loaded'    => [
+            'kernel.request'    => [
                 ['onLateSystemLoaded', -512],
                 ['onSystemLoaded', -256]
             ]

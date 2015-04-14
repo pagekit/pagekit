@@ -18,7 +18,7 @@ return [
     'main' => function ($app) {
 
         $app['auth'] = function ($app) {
-            return new Auth($app['events'], $app['session']);
+            return new Auth($app['kernel.events'], $app['session']);
         };
 
         $app['auth.password'] = function () {

@@ -3,9 +3,9 @@
 namespace Pagekit\Widget\Event;
 
 use Pagekit\Application as App;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypesTrait;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WidgetListener implements EventSubscriberInterface
 {
@@ -48,13 +48,13 @@ class WidgetListener implements EventSubscriberInterface
      */
     public function onSystemLoaded()
     {
-        TypesTrait::setWidgetTypes(App::trigger('system.widget', new RegisterWidgetEvent)->getTypes());
+        TypesTrait::setWidgetTypes(App::trigger(new RegisterWidgetEvent('system.widget'))->getTypes());
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'system.loaded' => ['onSystemLoaded', 5],

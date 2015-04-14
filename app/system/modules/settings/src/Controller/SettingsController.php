@@ -38,7 +38,7 @@ class SettingsController extends Controller
     {
         return [
             '$meta' => ['title' => __('Settings')],
-            'sections' => App::trigger('system.settings.edit', new SettingsEvent(['config' => $this->config->toArray()]))->getSections()
+            'sections' => App::trigger(new SettingsEvent('system.settings.edit'), [$this->config->toArray()])->getSections()
         ];
     }
 

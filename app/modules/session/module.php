@@ -134,7 +134,7 @@ return [
 
             }, 100);
 
-            $app->subscribe(new CsrfListener($app['csrf']));
+            $app['kernel.events']->addSubscriber(new CsrfListener($app['csrf']));
 
         });
     },

@@ -3,9 +3,9 @@
 namespace Pagekit\Menu\Event;
 
 use Pagekit\Application as App;
+use Pagekit\Event\Event;
 use Pagekit\Menu\Model\MenuInterface;
 use Pagekit\System\Menu\Item;
-use Symfony\Component\EventDispatcher\Event;
 
 class MenuEvent extends Event
 {
@@ -19,8 +19,10 @@ class MenuEvent extends Event
      *
      * @param MenuInterface $menu
      */
-    public function __construct(MenuInterface $menu)
+    public function __construct($name, MenuInterface $menu)
     {
+        parent::__construct($name);
+
         $this->menu = $menu;
     }
 

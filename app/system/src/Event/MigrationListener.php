@@ -4,7 +4,7 @@ namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\LoginEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class MigrationListener implements EventSubscriberInterface
 {
@@ -23,7 +23,7 @@ class MigrationListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'auth.login' => ['onLogin', 8]

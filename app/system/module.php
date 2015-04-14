@@ -54,7 +54,7 @@ return [
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
 
-            $app->trigger('system.init', $event);
+            $app->trigger('system.init');
 
         }, 50);
 
@@ -64,7 +64,7 @@ return [
                 return;
             }
 
-            $app->trigger('system.loaded', $event);
+            $app->trigger('system.loaded');
 
         });
 

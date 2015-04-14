@@ -26,7 +26,7 @@ return [
                 $params = array_replace($default, $params);
 
                 if ($this->config['default'] === $name) {
-                    $params['events'] = $app['events'];
+                    $params['events'] = $app['kernel.events'];
                 }
 
                 $dbs[$name] = DriverManager::getConnection($params);

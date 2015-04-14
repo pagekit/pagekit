@@ -5,7 +5,7 @@ namespace Pagekit\User\Event;
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthenticateEvent;
 use Pagekit\Auth\Exception\AuthException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class LoginAttemptListener implements EventSubscriberInterface
 {
@@ -68,7 +68,7 @@ class LoginAttemptListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'auth.pre_authenticate' => 'onPreAuthenticate',

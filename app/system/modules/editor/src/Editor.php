@@ -4,7 +4,7 @@ namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
 use Pagekit\Editor\Event\EditorLoadEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class Editor implements EditorInterface, EventSubscriberInterface
 {
@@ -56,7 +56,7 @@ class Editor implements EditorInterface, EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'editor.load' => ['onEditorLoad', -8]

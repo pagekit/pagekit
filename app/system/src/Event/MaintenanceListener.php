@@ -3,18 +3,19 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Pagekit\Event\EventSubscriberInterface;
 
 class MaintenanceListener implements EventSubscriberInterface
 {
     /**
      * Puts the page in maintenance mode.
-     *
-     * @param GetResponseEvent $event
      */
-    public function onSystemLoaded(GetResponseEvent $event)
+    public function onKernelRequest($event)
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
         $attributes = $event->getRequest()->attributes;
 
         if (App::system()->config('maintenance.enabled') && !(App::isAdmin() || $attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
@@ -31,10 +32,10 @@ class MaintenanceListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
-            'system.loaded' => ['onSystemLoaded', 20]
+            'kernel.request' => ['onKernelRequest', 10]
         ];
     }
 }

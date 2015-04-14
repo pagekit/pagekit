@@ -65,7 +65,7 @@ class CacheModule extends Module
             };
         }
 
-        $app->on('system.settings.edit', function ($event, $config) use ($app) {
+        $app->on('system.settings.edit', function ($event) use ($app) {
 
             $supported = $this->supports();
 

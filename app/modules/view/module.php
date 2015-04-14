@@ -26,7 +26,7 @@ return [
 
         $app['view'] = function ($app) {
 
-            $view = new View($app['events']);
+            $view = new View($app['kernel.events']);
             $view->addEngine(new PhpEngine());
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
@@ -76,7 +76,7 @@ return [
         };
 
         $app->on('kernel.controller', function () use ($app) {
-            $app->subscribe(new ViewListener($app['view']));
+            $app['kernel.events']->addSubscriber(new ViewListener($app['view']));
         });
 
         $app->on('kernel.view', function ($event) use ($app) {

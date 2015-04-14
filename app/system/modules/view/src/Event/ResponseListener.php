@@ -3,8 +3,7 @@
 namespace Pagekit\View\Event;
 
 use Pagekit\Application as App;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Pagekit\Event\EventSubscriberInterface;
 
 class ResponseListener implements EventSubscriberInterface
 {
@@ -18,10 +17,8 @@ class ResponseListener implements EventSubscriberInterface
 
     /**
      * Filter the response content.
-     *
-     * @param FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse($event)
     {
         $response = $event->getResponse();
 
@@ -45,7 +42,7 @@ class ResponseListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'kernel.response' => ['onKernelResponse', -10]

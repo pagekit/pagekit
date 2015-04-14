@@ -55,13 +55,13 @@ return [
 
     'require' => [
 
+        'routing',
         'auth',
         'config',
         'cookie',
         'database',
         'filesystem',
         'filter',
-        'routing',
         'session',
         'view'
 

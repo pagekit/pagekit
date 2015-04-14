@@ -34,7 +34,7 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
         parent::__construct($values);
 
         $this['events'] = function() {
-            return new EventDispatcher;
+            return new EventDispatcher();
         };
 
         $this['module'] = function() {
@@ -54,7 +54,8 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
             return;
         }
 
-        $this['events']->dispatch('kernel.boot');
+        $this['events']->trigger('kernel.boot');
+
         $this->booted = true;
     }
 

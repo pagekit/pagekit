@@ -35,7 +35,7 @@ return [
         };
 
         $app['permissions'] = function ($app) {
-            return $app->trigger('user.permission', new PermissionEvent)->getPermissions();
+            return $app->trigger(new PermissionEvent('user.permission'))->getPermissions();
         };
 
         $app->on('user.permission', function ($event) use ($app) {

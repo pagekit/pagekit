@@ -2,16 +2,11 @@
 
 namespace Pagekit\Widget\Event;
 
-use Pagekit\Application\Event;
+use Pagekit\Event\Event;
 use Pagekit\Widget\Model\TypeInterface;
 
 class RegisterWidgetEvent extends Event implements \IteratorAggregate
 {
-    /**
-     * @var TypeInterface[]
-     */
-    protected $parameters = [];
-
     /**
      * Register a widget type.
      *

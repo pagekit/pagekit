@@ -3,19 +3,19 @@
 namespace Pagekit\System\Event;
 
 use Pagekit\Application as App;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Finder\Event\FileAccessEvent;
 use Pagekit\Menu\Event\MenuEvent;
 use Pagekit\Menu\Model\Menu;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SystemListener implements EventSubscriberInterface
 {
     /**
      * Dispatches the 'system.site' or 'system.admin' event.
      */
-    public function onSystemLoaded($event)
+    public function onSystemLoaded()
     {
-        App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', $event);
+        App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', [App::request()]);
     }
 
     /**
@@ -29,7 +29,7 @@ class SystemListener implements EventSubscriberInterface
         App::menus()->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
         App::menus()->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
 
-        App::trigger('system.admin_menu', new MenuEvent($menu));
+        App::trigger(new MenuEvent('system.admin_menu', $menu));
 
         App::set('admin.menu', App::menus()->getTree($menu, ['access' => true]));
     }
@@ -49,12 +49,12 @@ class SystemListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
-            'system.admin'         => 'onSystemAdmin',
-            'system.finder'        => 'onSystemFinder',
-            'system.loaded'        => 'onSystemLoaded'
+            'system.admin'  => 'onSystemAdmin',
+            'system.finder' => 'onSystemFinder',
+            'system.loaded' => 'onSystemLoaded'
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace Pagekit\User\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\LoginEvent;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\User\Entity\User;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserListener implements EventSubscriberInterface
 {
@@ -40,7 +40,7 @@ class UserListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'auth.login'           => 'onUserLogin',

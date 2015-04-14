@@ -8,8 +8,8 @@ use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Exception\AuthException;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\User\Auth\UserProvider;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AuthorizationListener implements EventSubscriberInterface
 {
@@ -68,7 +68,7 @@ class AuthorizationListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'system.init'    => ['onSystemInit', 20],

@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 
 class PermissionEvent extends Event
 {

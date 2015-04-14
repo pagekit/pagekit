@@ -3,7 +3,7 @@
 namespace Pagekit\Comment;
 
 use Pagekit\Content\Event\ContentEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class CommentPlugin implements EventSubscriberInterface
 {
@@ -50,7 +50,7 @@ class CommentPlugin implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'content.plugins' => 'onContentPlugins'

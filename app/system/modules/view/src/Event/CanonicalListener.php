@@ -3,8 +3,7 @@
 namespace Pagekit\View\Event;
 
 use Pagekit\Application as App;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Pagekit\Event\EventSubscriberInterface;
 
 class CanonicalListener implements EventSubscriberInterface
 {
@@ -13,10 +12,8 @@ class CanonicalListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onSystemSite(GetResponseEvent $event)
+    public function onSystemSite($event, $request)
     {
-        $request = $event->getRequest();
-
         if ($request->getRequestFormat() != 'html') {
             return;
         }
@@ -31,7 +28,7 @@ class CanonicalListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'system.site' => 'onSystemSite'

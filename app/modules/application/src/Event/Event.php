@@ -2,140 +2,130 @@
 
 namespace Pagekit\Event;
 
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
-
-class Event extends BaseEvent implements \ArrayAccess, \IteratorAggregate
+class Event implements EventInterface, \ArrayAccess
 {
+    /**
+     * @var string
+     */
+    protected $name;
+
     /**
      * @var array
      */
-    protected $arguments;
+    protected $parameters;
+
+    /**
+     * @var bool
+     */
+    protected $propagationStopped = false;
 
     /**
      * Constructor.
      *
-     * @param array $arguments
+     * @param string $name
+     * @param array  $parameters
      */
-    public function __construct(array $arguments = [])
+    public function __construct($name, array $parameters = [])
     {
-        $this->arguments = $arguments;
+        $this->name = $name;
+        $this->parameters = $parameters;
     }
 
     /**
-     * Get argument by key.
-     *
-     * @param  string $key
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getArgument($key)
+    public function getName()
     {
-        if ($this->hasArgument($key)) {
-            return $this->arguments[$key];
-        }
-
-        throw new \InvalidArgumentException(sprintf('%s not found in %s', $key, $this->getName()));
+        return $this->name;
     }
 
     /**
-     * Add argument to event.
+     * Sets the event name.
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @return self
+     * @param string $name
      */
-    public function setArgument($key, $value)
+    public function setName($name)
     {
-        $this->arguments[$key] = $value;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
-     * Getter for all arguments.
+     * Gets all parameters.
      *
+     * @return array|object|\ArrayAccess
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * Sets all parameters.
+     *
+     * @param  array
      * @return array
      */
-    public function getArguments()
+    public function setParameters(array $parameters)
     {
-        return $this->arguments;
+        return $this->parameters = $parameters;
     }
 
     /**
-     * Set args property.
-     *
-     * @param  array $args
-     * @return self
+     * {@inheritdoc}
      */
-    public function setArguments(array $args = [])
+    public function isPropagationStopped()
     {
-        $this->arguments = $args;
-
-        return $this;
+        return $this->propagationStopped;
     }
 
     /**
-     * Has argument.
-     *
-     * @param  string $key
-     * @return bool
+     * {@inheritdoc}
      */
-    public function hasArgument($key)
+    public function stopPropagation()
     {
-        return array_key_exists($key, $this->arguments);
+        $this->propagationStopped = true;
     }
 
     /**
-     * ArrayAccess for argument getter.
+     * Checks if a parameter exists.
      *
-     * @param  string $key
+     * @param  string $name
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetExists($name)
     {
-        return $this->getArgument($key);
+        return isset($this->parameters[$name]);
     }
 
     /**
-     * ArrayAccess for argument setter.
+     * Gets a parameter.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param  string $name
+     * @return mixed
      */
-    public function offsetSet($key, $value)
+    public function offsetGet($name)
     {
-        $this->setArgument($key, $value);
+        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
     }
 
     /**
-     * ArrayAccess for unset argument.
+     * Sets a parameter.
      *
-     * @param string $key
+     * @param  string   $name
+     * @param  callable $callback
      */
-    public function offsetUnset($key)
+    public function offsetSet($name, $callback)
     {
-        if ($this->hasArgument($key)) {
-            unset($this->arguments[$key]);
-        }
+        $this->parameters[$name] = $callback;
     }
 
     /**
-     * ArrayAccess has argument.
+     * Unsets a parameter.
      *
-     * @param  string $key
-     * @return bool
+     * @param string $name
      */
-    public function offsetExists($key)
+    public function offsetUnset($name)
     {
-        return $this->hasArgument($key);
-    }
-
-    /**
-     * IteratorAggregate for iterating over the object like an array.
-     *
-     * @return \ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->arguments);
+        unset($this->parameters[$name]);
     }
 }

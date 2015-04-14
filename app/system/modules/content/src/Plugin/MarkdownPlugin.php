@@ -4,7 +4,7 @@ namespace Pagekit\Content\Plugin;
 
 use Pagekit\Application as App;
 use Pagekit\Content\Event\ContentEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class MarkdownPlugin implements EventSubscriberInterface
 {
@@ -28,7 +28,7 @@ class MarkdownPlugin implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'content.plugins' => ['onContentPlugins', 5]
