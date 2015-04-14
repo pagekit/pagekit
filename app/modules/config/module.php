@@ -9,11 +9,16 @@ return [
     'main' => function ($app) {
 
         $app['config'] = function ($app) {
-            return new ConfigManager($app['db'], $app['cache'], $this->config['table']);
+
+            if (!$this->config['cache']) {
+                $this->config['cache'] = $app['path.cache'];
+            }
+
+            return new ConfigManager($app['db'], $this->config);
         };
 
         if ($app['config.file']) {
-            $app['module']->addLoader(function($name, array $config) use ($app) {
+            $app['module']->addLoader(function ($name, array $config) use ($app) {
 
                 if ($values = $app['config']->get($name)) {
                     $config = array_replace_recursive($config, ['config' => $values->toArray()]);
@@ -33,8 +38,7 @@ return [
 
     'require' => [
 
-        'database',
-        'system/cache'
+        'database'
 
     ],
 
@@ -46,7 +50,9 @@ return [
 
     'config' => [
 
-        'table' => '@system_config'
+        'table'  => '@system_config',
+        'prefix' => 'config.',
+        'cache'  => ''
 
     ]
 

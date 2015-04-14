@@ -2,7 +2,6 @@
 
 namespace Pagekit\Config;
 
-use Doctrine\Common\Cache\Cache;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Pagekit\Database\Connection;
 
@@ -14,24 +13,24 @@ class ConfigManager implements \IteratorAggregate
     protected $connection;
 
     /**
-     * @var Cache
+     * @var string
+     */
+    protected $table;
+
+    /**
+     * @var string
      */
     protected $cache;
 
     /**
      * @var string
      */
-    protected $prefix = 'Options:';
+    protected $prefix;
 
     /**
-     * @var array
+     * @var Config
      */
-    protected $ignore = [];
-
-    /**
-     * @var array
-     */
-    protected $autoload = [];
+    protected $ignore;
 
     /**
      * @var array
@@ -39,32 +38,18 @@ class ConfigManager implements \IteratorAggregate
     protected $configs = [];
 
     /**
-     * @var array
-     */
-    protected $protected = ['Ignore', 'Autoload'];
-
-	/**
-	 * @var string
-	 */
-	protected $table;
-
-    /**
-     * @var bool $initialized
-     */
-    protected $initialized = false;
-
-    /**
      * Constructor.
      *
      * @param Connection $connection
-     * @param Cache      $cache
-     * @param string     $table
+     * @param array      $config
      */
-    public function __construct(Connection $connection, Cache $cache, $table)
+    public function __construct(Connection $connection, array $config)
     {
         $this->connection = $connection;
-        $this->cache      = $cache;
-        $this->table      = $table;
+        $this->table      = $config['table'];
+        $this->cache      = $config['cache'];
+        $this->prefix     = $config['prefix'];
+        $this->ignore     = new Config($this->getCache('_ignore') ?: []);
     }
 
     /**
@@ -72,69 +57,38 @@ class ConfigManager implements \IteratorAggregate
      *
      * @see get()
      */
-    public function __invoke($name, $default = null)
+    public function __invoke($name)
     {
-        return $this->get($name, $default);
-    }
-
-    /**
-     * Gets all configs.
-     *
-     * @return array
-     */
-    public function all()
-    {
-        $this->initialize();
-
-        return $this->configs;
-    }
-
-    /**
-     * Gets all config names.
-     *
-     * @return array
-     */
-    public function keys()
-    {
-        return array_keys($this->all());
+        return $this->get($name);
     }
 
     /**
      * Gets a config.
      *
      * @param  string $name
-     * @throws \InvalidArgumentException
-     * @return mixed
+     * @return Config
      */
     public function get($name)
     {
-        $name = trim($name);
-
-        if (empty($this->ignore) && $ignore = $this->cache->fetch($this->prefix.'Ignore')) {
-            $this->ignore = $ignore ?: [];
-        }
-
         if (empty($name) || isset($this->ignore[$name])) {
             return null;
         }
-
-        $this->initialize(true);
 
         if (isset($this->configs[$name])) {
             return $this->configs[$name];
         }
 
-        if ($config = $this->cache->fetch($this->prefix.$name)) {
-            return $this->configs[$name] = new Config(json_decode($config, true));
+        if ($values = $this->getCache($name)) {
+            return $this->configs[$name] = new Config($values);
         }
 
-        if ($config = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
-            $this->cache->save($this->prefix.$name, $config['value']);
-            return $this->configs[$name] = new Config(json_decode($config['value'], true));
+        if ($data = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
+            $this->writeCache($name, $config = new Config(json_decode($data['value'], true)));
+            return $this->configs[$name] = $config;
         }
 
         $this->ignore[$name] = true;
-        $this->cache->save($this->prefix.'Ignore', $this->ignore);
+        $this->writeCache('_ignore', $this->ignore);
 
         return null;
     }
@@ -142,25 +96,13 @@ class ConfigManager implements \IteratorAggregate
     /**
      * Sets a config.
      *
-     * @param  string  $name
-     * @param  mixed   $config
-     * @param  boolean $autoload
-     * @throws \InvalidArgumentException
+     * @param string $name
+     * @param mixed  $config
      */
-    public function set($name, $config, $autoload = null)
+    public function set($name, $config)
     {
-        $name = trim($name);
-
-        if (empty($name)) {
-            throw new \InvalidArgumentException('Empty option name given.');
-        }
-
-        if (in_array($name, $this->protected)) {
-            throw new \InvalidArgumentException(sprintf('"%s" is a protected option and may not be modified.', $name));
-        }
-
         if (is_array($config)) {
-            $config = new Config($config);
+            $config = (new Config())->merge($config);
         }
 
         $this->configs[$name] = $config;
@@ -169,58 +111,30 @@ class ConfigManager implements \IteratorAggregate
 
             $data = ['name' => $name, 'value' => json_encode($config)];
 
-            if ($autoload !== null) {
-                $data['autoload'] = $autoload ? '1' : '0';
-            }
-
             if ($this->connection->getDatabasePlatform() instanceof MySqlPlatform) {
-
-                if ($autoload === null) {
-                    $query = "INSERT INTO {$this->table} (name, value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE value = :value";
-                } else {
-                    $query = "INSERT INTO {$this->table} (name, value, autoload) VALUES (:name, :value, :autoload) ON DUPLICATE KEY UPDATE value = :value, autoload = :autoload";
-                }
-
-                $this->connection->executeQuery($query, $data);
-
+                $this->connection->executeQuery("INSERT INTO {$this->table} (name, value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE value = :value", $data);
             } elseif (!$this->connection->update($this->table, $data, compact('name'))) {
-
                 $this->connection->insert($this->table, $data);
-
             }
 
-            $this->cache->delete($this->prefix.(isset($this->autoload[$name]) ? 'Autoload' : $name));
+            $this->removeCache($name);
         }
 
         if (isset($this->ignore[$name])) {
             unset($this->ignore[$name]);
-            $this->cache->save($this->prefix.'Ignore', $this->ignore);
+            $this->writeCache('_ignore', $this->ignore);
         }
     }
 
     /**
      * Removes a config.
      *
-     * @param  string $name
-     * @throws \InvalidArgumentException
+     * @param string $name
      */
     public function remove($name)
     {
-        $name = trim($name);
-
-        if (empty($name)) {
-            throw new \InvalidArgumentException('Empty name given.');
-        }
-
-        if (in_array($name, $this->protected)) {
-            throw new \InvalidArgumentException(sprintf('"%s" is a protected and may not be modified.', $name));
-        }
-
-        $this->initialize(true);
-
         if ($this->connection->delete($this->table, ['name' => $name])) {
-            unset($this->configs[$name]);
-            $this->cache->delete($this->prefix.(isset($this->autoload[$name]) ? 'Autoload' : $name));
+            $this->removeCache($name);
         }
     }
 
@@ -231,56 +145,59 @@ class ConfigManager implements \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->all());
+        return new \ArrayIterator($this->configs);
     }
 
     /**
-     * Initialize the all or only autoloads.
+     * Gets cache data.
      *
-     * @param bool $autoload
+     * @param  string $name
+     * @return array|null
      */
-    protected function initialize($autoload = false)
+    protected function getCache($name)
     {
-        // TODO fix autoload
-        return;
+        $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
 
-        if ($this->initialized) {
-            return;
+        if ($this->cache && file_exists($file)) {
+            return require $file;
+        }
+    }
+
+    /**
+     * Writes cache file.
+     *
+     * @param  string $name
+     * @param  Config $config
+     * @throws \RuntimeException
+     */
+    protected function writeCache($name, $config)
+    {
+        $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
+
+        if (!file_put_contents($file, $config->dump())) {
+            throw new \RuntimeException("Failed to write cache file ($file).");
         }
 
-        if ($autoload) {
+        if (function_exists('opcache_invalidate')) {
+            opcache_invalidate($file);
+        }
+    }
 
-            if (!$this->autoload and $configs = $this->cache->fetch($this->prefix.'Autoload')) {
-                $this->configs = $this->autoload = $configs;
-            }
+    /**
+     * Removes cache file.
+     *
+     * @param string $name
+     */
+    protected function removeCache($name)
+    {
+        $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
 
-            if ($this->autoload) {
-                return;
-            }
-
-            $query = "SELECT name, value, autoload FROM {$this->table} WHERE autoload = 1";
-
-        } else {
-
-            $query = "SELECT name, value, autoload FROM {$this->table}";
+        if ($this->cache && file_exists($file)) {
+            unlink($file);
         }
 
-        if ($configs = $this->connection->fetchAll($query)) {
-
-            foreach ($configs as $config) {
-
-                $this->configs[$config['name']] = json_decode($config['value'], true);
-
-                if ($config['autoload']) {
-                    $this->autoload[$config['name']] = $this->configs[$config['name']];
-                }
-            }
-
-            $this->cache->save($this->prefix.'Autoload', $this->autoload);
-
-            if (!$autoload) {
-                $this->initialized = true;
-            }
+        if (function_exists('opcache_invalidate')) {
+            opcache_invalidate($file);
         }
     }
 }
