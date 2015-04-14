@@ -174,7 +174,7 @@ class ConfigManager implements \IteratorAggregate
     {
         $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
 
-        if (!file_put_contents($file, $config->dump())) {
+        if (count($config) && !file_put_contents($file, $config->dump())) {
             throw new \RuntimeException("Failed to write cache file ($file).");
         }
 

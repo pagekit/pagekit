@@ -4,7 +4,7 @@ namespace Pagekit\Config;
 
 use Pagekit\Util\Arr;
 
-class Config implements \ArrayAccess, \JsonSerializable
+class Config implements \ArrayAccess, \Countable, \JsonSerializable
 {
     /**
      * @var array
@@ -145,6 +145,16 @@ class Config implements \ArrayAccess, \JsonSerializable
     public function dump()
     {
         return '<?php return '.var_export($this->values, true).';';
+    }
+
+    /**
+     * Gets the value count.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->values);
     }
 
     /**
