@@ -3,9 +3,9 @@
 namespace Pagekit\Routing\Controller;
 
 use Composer\Autoload\ClassLoader;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Routing\Event\RouteResourcesEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Route;
 
 class ControllerCollection implements EventSubscriberInterface
@@ -94,7 +94,7 @@ class ControllerCollection implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'route.collection' => ['getRoutes', 8],

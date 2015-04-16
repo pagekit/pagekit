@@ -104,6 +104,8 @@ class EventDispatcher implements EventDispatcherInterface
             $e = $event;
         }
 
+        $e->setDispatcher($this);
+
         array_unshift($arguments, $e);
 
         foreach ($this->getListeners($e->getName()) as $listener) {

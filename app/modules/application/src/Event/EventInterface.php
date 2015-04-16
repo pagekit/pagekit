@@ -5,11 +5,18 @@ namespace Pagekit\Event;
 interface EventInterface
 {
     /**
-     * Gets event name.
+     * Gets the event name.
      *
      * @return string
      */
     public function getName();
+
+    /**
+     * Gets the event dispatcher.
+     *
+     * @return EventDispatcherInterface
+     */
+    public function getDispatcher();
 
     /**
      * Is propagation stopped?

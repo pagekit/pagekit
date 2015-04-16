@@ -3,7 +3,7 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class DeferredHelper implements HelperInterface
 {
@@ -15,29 +15,31 @@ class DeferredHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
-     * @param Application   $app
+     * @param ViewManager $view
+     * @param Application $app
      */
-    public function __construct(ViewInterface $view, Application $app)
+    public function __construct(ViewManager $view, Application $app)
     {
-        $view->on('render', function ($event) use ($app) {
+        $view->on('render', function ($event, $view) use ($app) {
 
-            $template = $event->getTemplate();
+            $name = $view->getName();
 
-            if (isset($this->defer[$template])) {
+            if (isset($this->defer[$name])) {
 
-                $renderEvent = clone $event;
+                $dispatcher  = $event->getDispatcher();
                 $placeholder = sprintf('<!-- %s -->', uniqid());
 
-                $app->on('kernel.response', function ($event) use ($renderEvent, $template, $placeholder) {
+                $app->on('kernel.response', function ($event) use ($view, $name, $placeholder, $dispatcher) {
+
+                    // TODO fix prefix
+                    $dispatcher->trigger("view.$name", [$view]);
 
                     $response = $event->getResponse();
-                    // TODO: fix prefix
-                    $response->setContent(str_replace($placeholder, $renderEvent->dispatch('view.'.$template)->getResult(), $response->getContent()));
+                    $response->setContent(str_replace($placeholder, $view->getResult(), $response->getContent()));
 
                 }, 10);
 
-                $event->setResult($placeholder);
+                $view->setResult($placeholder);
                 $event->stopPropagation();
             }
 

@@ -311,7 +311,7 @@ class EntityManager
     public function dispatchEvent($name, $entity, Metadata $metadata)
     {
         $prefix = $metadata->getEventPrefix();
-        $event  = new $this->eventClass($entity, $metadata, $this);
+        $event  = new $this->eventClass(($prefix ? $prefix.'.' : '').$name, $entity, $metadata, $this);
 
         if ($events = $metadata->getEvents() and isset($events[$name])) {
             foreach ($events[$name] as $callback) {
@@ -319,7 +319,7 @@ class EntityManager
             }
         }
 
-        $this->connection->getEventDispatcher()->dispatch(($prefix ? $prefix.'.' : '').$name, $event);
+        $this->connection->getEventDispatcher()->trigger($event);
     }
 
     /**

@@ -5,11 +5,11 @@ namespace Pagekit\Routing\Controller;
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
+use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Routing\Annotation\Route as RouteAnnotation;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
 use ReflectionClass;
 use ReflectionMethod;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -154,7 +154,7 @@ class ControllerReader implements ControllerReaderInterface
     protected function configureRoute(Route $route, ReflectionClass $class, ReflectionMethod $method, array $options)
     {
         $route->setDefault('_controller', $class->name.'::'.$method->name);
-        return $this->events->dispatch('route.configure', new ConfigureRouteEvent($route, $class, $method, $options))->getRoute();
+        return $this->events->trigger(new ConfigureRouteEvent($route, $class, $method, $options))->getRoute();
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Pagekit\Menu\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 
 class ActiveMenuEvent extends Event
 {
@@ -21,6 +21,7 @@ class ActiveMenuEvent extends Event
      */
     public function __construct(array $items)
     {
+        $this->name = 'system.menu';
         $this->items = $items + $this->items;
     }
 

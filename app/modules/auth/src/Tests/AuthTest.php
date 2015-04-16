@@ -8,7 +8,7 @@ use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Tests\Fixtures\User;
 use Pagekit\Auth\Tests\Fixtures\UserProvider;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Pagekit\Event\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthTest extends \PHPUnit_Framework_TestCase
@@ -16,15 +16,15 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 	protected $auth;
 	protected $user;
 
-	public function setUp() 
+	public function setUp()
 	{
-		$this->eventDispatcher = new EventDispatcher;
+		$this->events = new EventDispatcher;
 		$this->session = $this->mockSession();
-		$this->auth = new Auth($this->eventDispatcher, $this->session);
+		$this->auth = new Auth($this->events, $this->session);
 		$this->user = new User;
 	}
 
-	public function testSetGetUser() 
+	public function testSetGetUser()
 	{
 		$this->auth->setUser($this->user);
 		$this->assertInstanceOf('Pagekit\Auth\UserInterface', $this->auth->getUser());
@@ -54,9 +54,9 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 	public function testGetUserProviderException()
 	{
 		$this->auth->getUserProvider();
-	} 
+	}
 
-	public function testSetGetUserProvider() 
+	public function testSetGetUserProvider()
 	{
 		$this->auth->setUserProvider($this->mockUserProvider());
 		$this->assertInstanceOf('Pagekit\Auth\UserProviderInterface', $this->auth->getUserProvider());
@@ -90,7 +90,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
 	public function testLogin()
 	{
-		$this->eventDispatcher->addListener(AuthEvents::LOGIN, function(LoginEvent $event) {
+		$this->events->on(AuthEvents::LOGIN, function(LoginEvent $event) {
 			$event->setResponse(new Response);
 		});
 		$response = $this->auth->login($this->user);
@@ -99,7 +99,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
 	public function testLogout()
 	{
-		$this->eventDispatcher->addListener(AuthEvents::LOGOUT, function(LogoutEvent $event) {
+		$this->events->on(AuthEvents::LOGOUT, function(LogoutEvent $event) {
 			$event->setResponse(new Response);
 		});
 		$response = $this->auth->logout($this->user);
@@ -131,5 +131,5 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 		{
 			return 'validToken';
 		}
-	}	
+	}
 }

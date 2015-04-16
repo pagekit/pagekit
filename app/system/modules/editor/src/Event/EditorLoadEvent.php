@@ -2,8 +2,8 @@
 
 namespace Pagekit\Editor\Event;
 
+use Pagekit\Event\Event;
 use Pagekit\Editor\EditorInterface;
-use Symfony\Component\EventDispatcher\Event;
 
 class EditorLoadEvent extends Event
 {

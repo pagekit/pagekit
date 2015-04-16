@@ -2,12 +2,12 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class SectionHelper implements HelperInterface
 {
     /**
-     * @var ViewInterface
+     * @var ViewManager
      */
     protected $view;
 
@@ -24,14 +24,14 @@ class SectionHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
+     * @param ViewManager $view
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(ViewManager $view)
     {
         $this->view = $view;
-        $this->view->on('render', function ($event) {
-            if ($this->exists($template = $event->getTemplate())) {
-                $event->setResult($this->get($template));
+        $this->view->on('render', function ($event, $view) {
+            if ($this->exists($name = $view->getName())) {
+                $view->setResult($this->get($name));
             }
         }, 10);
     }

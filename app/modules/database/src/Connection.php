@@ -7,8 +7,8 @@ use Doctrine\DBAL\Cache\QueryCacheProfile;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection as BaseConnection;
 use Doctrine\DBAL\Driver;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Pagekit\Event\EventDispatcher;
+use Pagekit\Event\EventDispatcherInterface;
 
 class Connection extends BaseConnection
 {
@@ -181,7 +181,7 @@ class Connection extends BaseConnection
     public function connect()
     {
         if (!parent::isConnected()) {
-            $this->events->dispatch(Events::postConnect, new Event\ConnectionEvent($this));
+            $this->events->trigger(new Event\ConnectionEvent($this));
         }
 
         return parent::connect();

@@ -1,6 +1,8 @@
 <?php
 
 use Pagekit\Filter\FilterManager;
+use Pagekit\Kernel\Event\ResponseListener;
+use Pagekit\Kernel\Event\RouterListener;
 use Pagekit\Routing\Controller\AliasCollection;
 use Pagekit\Routing\Controller\CallbackCollection;
 use Pagekit\Routing\Controller\ControllerCollection;
@@ -14,8 +16,6 @@ use Pagekit\Routing\Request\Event\ParamFetcherListener;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Router;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\EventListener\ResponseListener;
-use Symfony\Component\HttpKernel\EventListener\RouterListener;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 return [
@@ -25,7 +25,7 @@ return [
     'main' => function ($app) {
 
         $app['router'] = function ($app) {
-            return new Router($app['kernel.events'], $app['request.stack'], ['cache' => $app['path.cache']]);
+            return new Router($app['events'], $app['request.stack'], ['cache' => $app['path.cache']]);
         };
 
         $app['aliases'] = function () {
@@ -37,25 +37,26 @@ return [
         };
 
         $app['controllers'] = function ($app) {
-            return new ControllerCollection(new ControllerReader($app['kernel.events']), $app['autoloader'], $app['debug']);
+            return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
         };
 
-        $app['middleware'] = function($app) {
-            return new Middleware($app['kernel.events']);
+        $app['middleware'] = function ($app) {
+            return new Middleware($app['events']);
         };
 
         $app->on('kernel.boot', function () use ($app) {
 
-            $events = $app['kernel.events'];
-            $events->addSubscriber(new ConfigureRouteListener);
-            $events->addSubscriber(new ParamFetcherListener(new ParamFetcher(new FilterManager)));
-            $events->addSubscriber(new RouterListener($app['router'], null, null, $app['request.stack']));
-            $events->addSubscriber(new ResponseListener('UTF-8'));
-            $events->addSubscriber(new JsonListener);
-            $events->addSubscriber(new StringResponseListener);
-            $events->addSubscriber($app['aliases']);
-            $events->addSubscriber($app['callbacks']);
-            $events->addSubscriber($app['controllers']);
+            $app->subscribe(
+                new ConfigureRouteListener,
+                new ParamFetcherListener(new ParamFetcher(new FilterManager)),
+                new RouterListener($app['router'], null, null, $app['request.stack']),
+                new ResponseListener('UTF-8'),
+                new JsonListener,
+                new StringResponseListener,
+                $app['aliases'],
+                $app['callbacks'],
+                $app['controllers']
+            );
 
             $app['middleware'];
 

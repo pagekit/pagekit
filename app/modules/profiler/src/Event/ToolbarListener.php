@@ -5,7 +5,6 @@ namespace Pagekit\Profiler\Event;
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ToolbarListener implements EventSubscriberInterface
 {
@@ -22,7 +21,7 @@ class ToolbarListener implements EventSubscriberInterface
         })->setDefault('_maintenance', true);
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse($event)
     {
         $response = $event->getResponse();
         $request  = $event->getRequest();

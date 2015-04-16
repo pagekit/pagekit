@@ -4,7 +4,6 @@ namespace Pagekit\Application;
 
 use Pagekit\Application;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ExceptionListenerWrapper
@@ -21,7 +20,7 @@ class ExceptionListenerWrapper
         $this->callback = $callback;
     }
 
-    public function __invoke(GetResponseForExceptionEvent $event)
+    public function __invoke($event)
     {
         $exception = $event->getException();
 

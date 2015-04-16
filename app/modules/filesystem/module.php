@@ -23,9 +23,8 @@ return [
             StreamWrapper::setFilesystem($app['file']);
         });
 
-        $app->on('kernel.request', function ($event) use ($app) {
+        $app->on('kernel.request', function ($event, $request) use ($app) {
 
-            $request = $event->getRequest();
             $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
 
             $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));

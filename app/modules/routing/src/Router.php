@@ -2,13 +2,13 @@
 
 namespace Pagekit\Routing;
 
+use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Routing\Event\RouteResourcesEvent;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Generator\UrlGeneratorDumper;
 use Pagekit\Routing\Generator\UrlGeneratorInterface;
 use Pagekit\Routing\RequestContext as Context;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -165,7 +165,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
     public function getRouteCollection()
     {
         if (!$this->routes) {
-            $this->routes = $this->events->dispatch('route.collection', new RouteCollectionEvent)->getRoutes();
+            $this->routes = $this->events->trigger(new RouteCollectionEvent)->getRoutes();
         }
 
         return $this->routes;
@@ -338,7 +338,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
         if (!$this->cache) {
 
             $modified  = 0;
-            $resources = $this->events->dispatch('route.resources', new RouteResourcesEvent)->getResources();
+            $resources = $this->events->trigger(new RouteResourcesEvent)->getResources();
 
             foreach ($resources as $controller) {
                 if (isset($controller['file']) && ($time = filemtime($controller['file'])) > $modified) {

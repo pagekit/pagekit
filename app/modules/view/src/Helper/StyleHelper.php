@@ -3,27 +3,27 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class StyleHelper implements HelperInterface, \IteratorAggregate
 {
     /**
      * @var AssetManager
      */
-    protected $manager;
+    protected $styles;
 
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
-     * @param AssetManager  $manager
+     * @param ViewManager  $view
+     * @param AssetManager $styles
      */
-    public function __construct(ViewInterface $view, AssetManager $manager = null)
+    public function __construct(ViewManager $view, AssetManager $styles = null)
     {
-        $this->manager = $manager ?: new AssetManager();
+        $this->styles = $styles ?: new AssetManager();
 
-        $view->on('head', function ($event) {
-            $event->addResult($this->render());
+        $view->on('head', function ($event, $view) {
+            $view->addResult($this->render());
         }, 15);
     }
 
@@ -34,7 +34,7 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
      */
     public function __invoke($name, $source = null, $dependencies = [], $options = [])
     {
-        return $this->manager->add($name, $source, $dependencies, $options);
+        return $this->styles->add($name, $source, $dependencies, $options);
     }
 
     /**
@@ -46,8 +46,8 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
      */
     public function __call($method, $args)
     {
-        if (!is_callable($callable = [$this->manager, $method])) {
-            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->manager), $method));
+        if (!is_callable($callable = [$this->styles, $method])) {
+            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->styles), $method));
         }
 
         return call_user_func_array($callable, $args);
@@ -62,7 +62,7 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
     {
         $output = '';
 
-        foreach ($this->manager as $style) {
+        foreach ($this->styles as $style) {
             if ($source = $style->getSource()) {
                 $output .= sprintf("        <link href=\"%s\" rel=\"stylesheet\">\n", $source);
             } elseif ($content = $style->getContent()) {
@@ -80,7 +80,7 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
      */
     public function getIterator()
     {
-        return $this->manager->getIterator();
+        return $this->styles->getIterator();
     }
 
     /**

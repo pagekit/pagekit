@@ -2,179 +2,114 @@
 
 namespace Pagekit\View;
 
-use Pagekit\View\Event\RenderEvent;
-use Pagekit\View\Helper\HelperInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Templating\DelegatingEngine;
-use Symfony\Component\Templating\EngineInterface;
-
-class View implements ViewInterface
+class View
 {
     /**
-     * @var EventDispatcherInterface
+     * @var string
      */
-    protected $events;
-
-    /**
-     * @var EngineInterface
-     */
-    protected $engine;
+    protected $name;
 
     /**
      * @var array
      */
-    protected $globals = [];
-
-    /**
-     * @var array
-     */
-    protected $helpers = [];
+    protected $parameters;
 
     /**
      * @var string
      */
-    protected $prefix = 'view.';
+    protected $result;
 
     /**
      * Constructor.
      *
-     * @param EventDispatcherInterface $events
-     * @param EngineInterface          $engine
-     */
-    public function __construct(EventDispatcherInterface $events = null, EngineInterface $engine = null)
-    {
-        $this->events = $events ?: new EventDispatcher();
-        $this->engine = $engine ?: new DelegatingEngine();
-    }
-
-    /**
-     * Render shortcut.
-     *
-     * @see render()
-     */
-    public function __invoke($name, array $parameters = [])
-    {
-        return $this->render($name, $parameters);
-    }
-
-    /**
-     * Gets a helper or calls the helpers invoke method.
-     *
-     * @param  string $name
-     * @param  array  $args
-     * @return mixed
-     */
-    public function __call($name, $args)
-    {
-        if (!isset($this->helpers[$name])) {
-            throw new \InvalidArgumentException(sprintf('Undefined helper "%s"', $name));
-        }
-
-        return $args ? call_user_func_array($this->helpers[$name], $args) : $this->helpers[$name];
-    }
-
-    /**
-     * Gets the templating engine.
-     *
-     * @return array
-     */
-    public function getEngine()
-    {
-        return $this->engine;
-    }
-
-    /**
-     * Adds a templating engine.
-     *
-     * @param EngineInterface $engine
-     */
-    public function addEngine(EngineInterface $engine)
-    {
-        $this->engine->addEngine($engine);
-    }
-
-    /**
-     * Gets the global parameters.
-     *
-     * @return array
-     */
-    public function getGlobals()
-    {
-        return $this->globals;
-    }
-
-    /**
-     * Adds a global parameter.
-     *
      * @param string $name
+     * @param array  $parameters
+     */
+    public function __construct($name, array $parameters = [])
+    {
+        $this->name = $name;
+        $this->parameters = $parameters;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
+    /**
+     * @param  string $key
+     * @return mixed  $value
+     */
+    public function getParameter($key)
+    {
+        return isset($this->parameters[$key]) ? $this->parameters[$key] : null;
+    }
+
+    /**
+     * @param string $key
      * @param mixed  $value
      */
-    public function addGlobal($name, $value)
+    public function setParameter($key, $value)
     {
-        $this->globals[$name] = $value;
+        $this->parameters[$key] = $value;
     }
 
     /**
-     * Adds a view helper.
-     *
-     * @param  HelperInterface $helper
-     * @return self
+     * @return string
      */
-    public function addHelper($helper)
+    public function getResult()
     {
-        if (!$helper instanceof HelperInterface) {
-            throw new \InvalidArgumentException(sprintf('%s does not implement HelperInterface', get_class($helper)));
-        }
-
-        $this->helpers[$helper->getName()] = $helper;
-
-        return $this;
+        return $this->result;
     }
 
     /**
-     * Adds multiple view helpers.
-     *
-     * @param  array $helpers
-     * @return self
+     * @param string $result
      */
-    public function addHelpers(array $helpers)
+    public function setResult($result)
     {
-        foreach ($helpers as $helper) {
-            $this->addHelper($helper);
-        }
-
-        return $this;
+        $this->result = $result;
     }
 
     /**
-     * Adds an event listener.
-     *
-     * @param  string   $event
-     * @param  callable $listener
-     * @param  int      $priority
+     * @param string $result
      */
-    public function on($event, $listener, $priority = 0)
+    public function addResult($result)
     {
-        $this->events->addListener($this->prefix.$event, $listener, $priority);
+        $this->result .= $result;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function render($name, array $parameters = [])
+    public function __toString()
     {
-        $param = array_replace($this->globals, $parameters);
-        $event = $this->events->dispatch($this->prefix.'render', new RenderEvent($name, $param));
-
-        if (!$event->isPropagationStopped()) {
-            $event->dispatch($this->prefix.$name);
-        }
-
-        if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {
-            return $this->engine->render($event->getTemplate(), $event->getParameters());
-        }
-
-        return $event->getResult();
+        return $this->result;
     }
 }

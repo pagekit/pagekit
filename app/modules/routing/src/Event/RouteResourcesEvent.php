@@ -2,8 +2,8 @@
 
 namespace Pagekit\Routing\Event;
 
+use Pagekit\Event\Event;
 use Pagekit\Routing\Router;
-use Symfony\Component\EventDispatcher\Event;
 
 class RouteResourcesEvent extends Event
 {
@@ -14,6 +14,7 @@ class RouteResourcesEvent extends Event
      */
     public function __construct()
     {
+        $this->name = 'route.resources';
         $this->resources = [];
     }
 

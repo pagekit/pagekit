@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 return [
 
@@ -88,30 +85,29 @@ return [
 
             if ($app['session.test']) {
 
-                $app->on(KernelEvents::REQUEST, function (GetResponseEvent $event) use ($app) {
+                $app->on('kernel.request', function ($event, $request) use ($app) {
 
                     if (!$event->isMasterRequest() || !isset($app['session'])) {
                         return;
                     }
 
                     $session = $app['session'];
-                    $cookies = $event->getRequest()->cookies;
 
-                    if ($cookies->has($session->getName())) {
-                        $session->setId($cookies->get($session->getName()));
+                    if ($request->cookies->has($session->getName())) {
+                        $session->setId($request->cookies->get($session->getName()));
                     } else {
                         $session->migrate(false);
                     }
 
                 }, 100);
 
-                $app->on(KernelEvents::RESPONSE, function (FilterResponseEvent $event) {
+                $app->on('kernel.response', function ($event, $request) {
 
                     if (!$event->isMasterRequest()) {
                         return;
                     }
 
-                    if ($session = $event->getRequest()->getSession() and $session->isStarted()) {
+                    if ($session = $request->getSession() and $session->isStarted()) {
 
                         $session->save();
 
@@ -124,17 +120,17 @@ return [
                 }, -100);
             }
 
-            $app->on(KernelEvents::REQUEST, function (GetResponseEvent $event) use ($app) {
+            $app->on('kernel.request', function ($event, $request) use ($app) {
 
                 if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
-                    $app['session.storage']->setOptions(['cookie_path' => $event->getRequest()->getBasePath() ?: '/']);
+                    $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
                 }
 
-                $event->getRequest()->setSession($app['session']);
+                $request->setSession($app['session']);
 
             }, 100);
 
-            $app['kernel.events']->addSubscriber(new CsrfListener($app['csrf']));
+            $app->subscribe(new CsrfListener($app['csrf']));
 
         });
     },

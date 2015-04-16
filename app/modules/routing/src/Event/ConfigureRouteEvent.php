@@ -4,7 +4,7 @@ namespace Pagekit\Routing\Event;
 
 use ReflectionClass;
 use ReflectionMethod;
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 use Symfony\Component\Routing\Route;
 
 class ConfigureRouteEvent extends Event
@@ -24,6 +24,7 @@ class ConfigureRouteEvent extends Event
      */
     public function __construct(Route $route, ReflectionClass $class, ReflectionMethod $method, array $options)
     {
+        $this->name    = 'route.configure';
         $this->route   = $route;
         $this->class   = $class;
         $this->method  = $method;

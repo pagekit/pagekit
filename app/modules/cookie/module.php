@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Cookie\CookieJar;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 return [
 
@@ -20,7 +19,7 @@ return [
             return new CookieJar($app['request'], $path, $this->config['domain']);
         };
 
-        $app->on('kernel.response', function (FilterResponseEvent $event) use ($app) {
+        $app->on('kernel.response', function ($event) use ($app) {
             if (isset($app['cookie.init'])) {
                 foreach ($app['cookie']->getQueuedCookies() as $cookie) {
                     $event->getResponse()->headers->setCookie($cookie);

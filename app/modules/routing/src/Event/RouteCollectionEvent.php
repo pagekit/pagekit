@@ -2,7 +2,7 @@
 
 namespace Pagekit\Routing\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 use Symfony\Component\Routing\RouteCollection;
 
 class RouteCollectionEvent extends Event
@@ -14,6 +14,7 @@ class RouteCollectionEvent extends Event
      */
     public function __construct()
     {
+        $this->name = 'route.collection';
         $this->routes = new RouteCollection;
     }
 

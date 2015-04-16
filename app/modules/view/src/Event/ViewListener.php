@@ -3,24 +3,23 @@
 namespace Pagekit\View\Event;
 
 use Pagekit\Application as App;
-use Pagekit\View\ViewInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
+use Pagekit\View\ViewManager;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
 class ViewListener implements EventSubscriberInterface
 {
     /**
-     * @var ViewInterface
+     * @var ViewManager
      */
     protected $view;
 
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
+     * @param ViewManager $view
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(ViewManager $view)
     {
         $this->view = $view;
     }
@@ -28,9 +27,9 @@ class ViewListener implements EventSubscriberInterface
     /**
      * Renders view layout.
      *
-     * @param GetResponseForControllerResultEvent $event
+     * @param $event
      */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView($event)
     {
         $template = $event->getRequest()->attributes->get('_response[value]', null, true);
         $layout   = $event->getRequest()->attributes->get('_response[layout]', true, true);
@@ -59,7 +58,7 @@ class ViewListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'kernel.view' => ['onKernelView', -5]

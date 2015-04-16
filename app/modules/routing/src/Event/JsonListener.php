@@ -2,20 +2,17 @@
 
 namespace Pagekit\Routing\Event;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 class JsonListener implements EventSubscriberInterface
 {
     /**
      * Transforms the body of a json request to POST parameters.
      *
-     * @param  GetResponseEvent $event
+     * @param $event
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest($event)
     {
         $request = $event->getRequest();
 
@@ -27,9 +24,9 @@ class JsonListener implements EventSubscriberInterface
     /**
      * Handles responses in JSON format.
      *
-     * @param GetResponseForControllerResultEvent $event
+     * @param $event
      */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView($event)
     {
         $request = $event->getRequest();
         $result  = $event->getControllerResult();
@@ -42,11 +39,11 @@ class JsonListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
-            KernelEvents::REQUEST => 'onKernelRequest',
-            KernelEvents::VIEW    => 'onKernelView'
+            'kernel.request' => 'onKernelRequest',
+            'kernel.view'    => 'onKernelView'
         ];
     }
 }

@@ -9,7 +9,6 @@ use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\RememberMe;
 use RandomLib\Factory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 return [
 
@@ -18,7 +17,7 @@ return [
     'main' => function ($app) {
 
         $app['auth'] = function ($app) {
-            return new Auth($app['kernel.events'], $app['session']);
+            return new Auth($app['events'], $app['session']);
         };
 
         $app['auth.password'] = function () {
@@ -47,7 +46,7 @@ return [
                 return;
             }
 
-            $app->on(KernelEvents::REQUEST, function () use ($app) {
+            $app->on('kernel.request', function () use ($app) {
 
                 try {
 
@@ -58,7 +57,6 @@ return [
                     $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
 
                     $app['auth']->setUser($user);
-
                     $app['events']->dispatch(AuthEvents::LOGIN, new LoginEvent($user));
 
                 } catch (\Exception $e) {}

@@ -7,7 +7,6 @@ use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Event\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler as BaseProfiler;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -419,17 +418,17 @@ class TraceableEventDispatcher implements EventDispatcherInterface
         }
 
         switch ($eventName) {
-            case KernelEvents::REQUEST:
+            case 'kernel.request':
                 $this->stopwatch->openSection();
                 break;
-            case KernelEvents::VIEW:
-            case KernelEvents::RESPONSE:
+            case 'kernel.view':
+            case 'kernel.response':
                 // stop only if a controller has been executed
                 if ($this->stopwatch->isStarted('controller')) {
                     $this->stopwatch->stop('controller');
                 }
                 break;
-            case KernelEvents::TERMINATE:
+            case 'kernel.terminate':
                 $token = $event->getResponse()->headers->get('X-Debug-Token');
                 // There is a very special case when using builtin AppCache class as kernel wrapper, in the case
                 // of an ESI request leading to a `stale` response [B]  inside a `fresh` cached response [A].
@@ -446,10 +445,10 @@ class TraceableEventDispatcher implements EventDispatcherInterface
     protected function postDispatch($eventName, $event)
     {
         switch ($eventName) {
-            case KernelEvents::CONTROLLER:
+            case 'kernel.controller':
                 $this->stopwatch->start('controller', 'section');
                 break;
-            case KernelEvents::RESPONSE:
+            case 'kernel.response':
                 $token = $event->getResponse()->headers->get('X-Debug-Token');
                 $this->stopwatch->stopSection($token);
                 if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
@@ -458,7 +457,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface
                     $this->updateProfiles($token, true);
                 }
                 break;
-            case KernelEvents::TERMINATE:
+            case 'kernel.terminate':
                 $token = $event->getResponse()->headers->get('X-Debug-Token');
                 // In the special case described in the `preDispatch` method above, the `$token` section
                 // does not exist, then closing it throws an exception which must be caught.

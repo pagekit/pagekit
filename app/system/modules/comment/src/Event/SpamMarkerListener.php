@@ -4,7 +4,7 @@ namespace Pagekit\Comment\Event;
 
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Comment\SpamDetection\SpamMarkerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 /**
  * A listener that tells spam markers to mark comments as spam or ham
@@ -41,7 +41,7 @@ class SpamMarkerListener implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return ['system.comment.spam_mark' => 'mark'];
     }

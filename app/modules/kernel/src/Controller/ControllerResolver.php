@@ -2,9 +2,9 @@
 
 namespace Pagekit\Kernel\Controller;
 
-use Pagekit\Routing\Event\GetControllerEvent;
+use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Kernel\Event\GetControllerEvent;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver as BaseResolver;
 
@@ -30,6 +30,6 @@ class ControllerResolver extends BaseResolver
      */
     public function getController(Request $request)
     {
-        return $this->events->dispatch('controller.resolve', new GetControllerEvent($request))->getController() ?: parent::getController($request);
+        return $this->events->trigger(new GetControllerEvent($request), [$request])->getController() ?: parent::getController($request);
     }
 }

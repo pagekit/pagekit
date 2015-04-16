@@ -7,7 +7,7 @@ use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Exception\BadCredentialsException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Pagekit\Event\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -156,17 +156,17 @@ class Auth
      */
     public function authenticate(array $credentials)
     {
-        $this->events->dispatch(AuthEvents::PRE_AUTHENTICATE, new AuthenticateEvent($credentials));
+        $this->events->trigger(new AuthenticateEvent(AuthEvents::PRE_AUTHENTICATE, $credentials));
 
         if (!$user = $this->getUserProvider()->findByCredentials($credentials) or !$this->getUserProvider()->validateCredentials($user, $credentials)) {
 
             $this->session->set(self::LAST_USERNAME, $credentials[self::USERNAME_PARAM]);
-            $this->events->dispatch(AuthEvents::FAILURE, new AuthenticateEvent($credentials, $user));
+            $this->events->trigger(new AuthenticateEvent(AuthEvents::FAILURE, $credentials, $user));
 
             throw new BadCredentialsException($credentials);
         }
 
-        $this->events->dispatch(AuthEvents::SUCCESS, new AuthenticateEvent($credentials, $user));
+        $this->events->trigger(new AuthenticateEvent(AuthEvents::SUCCESS, $credentials, $user));
         $this->session->remove(self::LAST_USERNAME);
 
         return $user;
@@ -180,7 +180,7 @@ class Auth
      */
     public function authorize(UserInterface $user)
     {
-        $this->events->dispatch(AuthEvents::AUTHORIZE, $event = new AuthorizeEvent($user));
+        $this->events->trigger(new AuthorizeEvent(AuthEvents::AUTHORIZE, $user));
     }
 
     /**
@@ -192,10 +192,9 @@ class Auth
     public function login(UserInterface $user)
     {
         $this->session->migrate();
-
         $this->setUser($user);
 
-        return $this->events->dispatch(AuthEvents::LOGIN, new LoginEvent($user))->getResponse();
+        return $this->events->trigger(new LoginEvent(AuthEvents::LOGIN, $user))->getResponse();
     }
 
     /**
@@ -205,10 +204,9 @@ class Auth
      */
     public function logout()
     {
-        $this->events->dispatch(AuthEvents::LOGOUT, $event = new LogoutEvent($this->user));
+        $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->user));
 
         $this->user = null;
-
         $this->session->invalidate();
 
         return $event->getResponse();

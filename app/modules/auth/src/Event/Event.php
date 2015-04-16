@@ -3,7 +3,7 @@
 namespace Pagekit\Auth\Event;
 
 use Pagekit\Auth\UserInterface;
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
+use Pagekit\Event\Event as BaseEvent;
 
 class Event extends BaseEvent
 {
@@ -17,8 +17,10 @@ class Event extends BaseEvent
      *
      * @param UserInterface $user
      */
-    public function __construct(UserInterface $user = null)
+    public function __construct($name, UserInterface $user = null)
     {
+        parent::__construct($name);
+
         $this->user = $user;
     }
 

@@ -3,27 +3,27 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class ScriptHelper implements HelperInterface, \IteratorAggregate
 {
     /**
      * @var AssetManager
      */
-    protected $manager;
+    protected $scripts;
 
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
-     * @param AssetManager  $manager
+     * @param ViewManager  $view
+     * @param AssetManager $scripts
      */
-    public function __construct(ViewInterface $view, AssetManager $manager = null)
+    public function __construct(ViewManager $view, AssetManager $scripts = null)
     {
-        $this->manager = $manager ?: new AssetManager();
+        $this->scripts = $scripts ?: new AssetManager();
 
-        $view->on('head', function ($event) {
-            $event->addResult($this->render());
+        $view->on('head', function ($event, $view) {
+            $view->addResult($this->render());
         }, 5);
     }
 
@@ -34,7 +34,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
      */
     public function __invoke($name, $source = null, $dependencies = [], $options = [])
     {
-        return $this->manager->add($name, $source, $dependencies, $options);
+        return $this->scripts->add($name, $source, $dependencies, $options);
     }
 
     /**
@@ -46,8 +46,8 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
      */
     public function __call($method, $args)
     {
-        if (!is_callable($callable = [$this->manager, $method])) {
-            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->manager), $method));
+        if (!is_callable($callable = [$this->scripts, $method])) {
+            throw new \InvalidArgumentException(sprintf('Undefined method call "%s::%s"', get_class($this->scripts), $method));
         }
 
         return call_user_func_array($callable, $args);
@@ -62,7 +62,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
     {
         $output = '';
 
-        foreach ($this->manager as $script) {
+        foreach ($this->scripts as $script) {
             if ($source = $script->getSource()) {
                 $output .= sprintf("        <script src=\"%s\"></script>\n", $source);
             } elseif ($content = $script->getContent()) {
@@ -80,7 +80,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
      */
     public function getIterator()
     {
-        return $this->manager->getIterator();
+        return $this->scripts->getIterator();
     }
 
     /**

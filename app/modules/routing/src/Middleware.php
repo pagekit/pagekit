@@ -2,10 +2,7 @@
 
 namespace Pagekit\Routing;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Pagekit\Event\EventDispatcherInterface;
 
 class Middleware
 {
@@ -17,21 +14,21 @@ class Middleware
     /**
      * Constructor.
      *
-     * @param EventDispatcherInterface $events
+     * @param $events
      */
     public function __construct(EventDispatcherInterface $events)
     {
         $this->events = $events;
 
-        $events->addListener(KernelEvents::REQUEST, function (GetResponseEvent $event) use ($events) {
-            if ($name = $event->getRequest()->attributes->get('_route', '')) {
-                $events->dispatch('before'.$name, $event);
+        $events->on('kernel.request', function ($event, $request) {
+            if ($name = $request->attributes->get('_route', '')) {
+                $event->getDispatcher()->trigger('before'.$name);
             }
         });
 
-        $events->addListener(KernelEvents::RESPONSE, function (FilterResponseEvent $event) use ($events) {
-            if ($name = $event->getRequest()->attributes->get('_route', '')) {
-                $events->dispatch('after'.$name, $event);
+        $events->on('kernel.response', function ($event, $request) {
+            if ($name = $request->attributes->get('_route', '')) {
+                $event->getDispatcher()->trigger('after'.$name);
             }
         });
     }
@@ -45,7 +42,7 @@ class Middleware
      */
     public function before($name, $callback, $priority)
     {
-        $this->events->addListener('before'.$name, $callback, $priority);
+        $this->events->on('before'.$name, $callback, $priority);
     }
 
     /**
@@ -55,6 +52,6 @@ class Middleware
      */
     public function after($name, $callback, $priority)
     {
-        $this->events->addListener('after'.$name, $callback, $priority);
+        $this->events->on('after'.$name, $callback, $priority);
     }
 }

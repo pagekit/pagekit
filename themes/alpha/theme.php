@@ -41,7 +41,7 @@ return [
     'config' => [
 
         'settings.view' => 'themes/alpha/views/admin/settings.razr',
-        'widgets.view' => 'themes/alpha/views/admin/widgets/edit.razr'
+        'widgets.view'  => 'themes/alpha/views/admin/widgets/edit.razr'
 
     ],
 

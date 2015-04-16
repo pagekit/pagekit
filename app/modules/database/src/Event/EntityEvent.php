@@ -5,7 +5,7 @@ namespace Pagekit\Database\Event;
 use Pagekit\Database\Connection;
 use Pagekit\Database\ORM\EntityManager;
 use Pagekit\Database\ORM\Metadata;
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 
 class EntityEvent extends Event
 {
@@ -27,12 +27,14 @@ class EntityEvent extends Event
     /**
      * Constructor.
      *
+     * @param string        $name
      * @param object        $entity
      * @param Metadata      $metadata
      * @param EntityManager $manager
      */
-    public function __construct($entity, Metadata $metadata, EntityManager $manager)
+    public function __construct($name, $entity, Metadata $metadata, EntityManager $manager)
     {
+        $this->name     = $name;
         $this->entity   = $entity;
         $this->metadata = $metadata;
         $this->manager  = $manager;

@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class MapHelper implements HelperInterface, \IteratorAggregate
 {
@@ -14,13 +14,13 @@ class MapHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
+     * @param ViewManager $view
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(ViewManager $view)
     {
-        $view->on('render', function ($event) {
-            if ($this->has($template = $event->getTemplate())) {
-                $event->setTemplate($this->get($template));
+        $view->on('render', function ($event, $view) {
+            if ($this->has($name = $view->getName())) {
+                $view->setName($this->get($name));
             }
         }, 10);
     }

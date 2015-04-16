@@ -4,7 +4,7 @@ namespace Pagekit\Routing\Event;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class ConfigureRouteListener implements EventSubscriberInterface
 {
@@ -46,7 +46,7 @@ class ConfigureRouteListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'route.configure' => 'onConfigureRoute'

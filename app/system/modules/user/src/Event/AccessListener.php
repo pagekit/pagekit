@@ -8,10 +8,11 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
+use Pagekit\Kernel\Event\GetResponseEvent;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+
 
 class AccessListener implements EventSubscriberInterface
 {

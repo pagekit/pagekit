@@ -22,7 +22,7 @@ return [
             new SystemListener
         );
 
-        $app->factory('finder', function() {
+        $app->factory('finder', function () {
             return Finder::create();
         });
 
@@ -35,7 +35,7 @@ return [
 
         $app['system'] = $this;
 
-        $app->on('kernel.boot', function() use ($app) {
+        $app->on('kernel.boot', function () use ($app) {
 
             $app['module']->load($this->config['extensions']);
 
@@ -46,19 +46,19 @@ return [
 
         });
 
-        $app->on('kernel.request', function($event) use ($app) {
+        $app->on('kernel.request', function ($event, $request) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;
             }
 
-            $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $event->getRequest()->getPathInfo());
+            $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
             $app->trigger('system.init');
 
         }, 50);
 
-        $app->on('kernel.request', function($event) use ($app) {
+        $app->on('kernel.request', function ($event) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;

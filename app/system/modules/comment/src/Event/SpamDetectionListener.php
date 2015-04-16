@@ -4,8 +4,8 @@ namespace Pagekit\Comment\Event;
 
 use Pagekit\Comment\Model\CommentInterface;
 use Pagekit\Comment\SpamDetection\SpamDetectionInterface;
+use Pagekit\Event\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * A listener that checks if a comment is spam based on a service that implements SpamDetectionInterface.
@@ -51,7 +51,7 @@ class SpamDetectionListener implements EventSubscriberInterface
         $event->stopPropagation();
     }
 
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return ['system.comment.spam_check' => 'spamCheck'];
     }

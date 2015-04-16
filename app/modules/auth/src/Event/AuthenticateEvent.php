@@ -17,9 +17,9 @@ class AuthenticateEvent extends Event
      * @param string[]      $credentials
      * @param UserInterface $user
      */
-    public function __construct(array $credentials, UserInterface $user = null)
+    public function __construct($name, array $credentials, UserInterface $user = null)
     {
-        parent::__construct($user);
+        parent::__construct($name, $user);
 
         $this->credentials = $credentials;
     }

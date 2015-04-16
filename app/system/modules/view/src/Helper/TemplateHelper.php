@@ -3,34 +3,34 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 use Pagekit\View\Asset\AssetManager;
 
 class TemplateHelper implements HelperInterface
 {
     /**
-     * @var ViewInterface
+     * @var ViewManager
      */
     protected $view;
 
     /**
      * @var AssetManager
      */
-    protected $manager;
+    protected $assets;
 
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
-     * @param AssetManager  $manager
+     * @param ViewManager  $view
+     * @param AssetManager $assets
      */
-    public function __construct(ViewInterface $view, AssetManager $manager = null)
+    public function __construct(ViewManager $view, AssetManager $assets = null)
     {
         $this->view = $view;
-        $this->manager = $manager ?: new AssetManager();
+        $this->assets = $assets ?: new AssetManager();
 
-        $view->on('head', function ($event) {
-            $event->addResult($this->render());
+        $view->on('head', function ($event, $view) {
+            $view->addResult($this->render());
         }, 5);
     }
 
@@ -43,7 +43,7 @@ class TemplateHelper implements HelperInterface
     {
         $output = '';
 
-        foreach ($this->manager as $asset) {
+        foreach ($this->assets as $asset) {
             if ($template = $asset['template']) {
                 $output .= sprintf("<script id=\"%s\" type=\"text/template\">%s</script>\n", $asset->getName(), $this->view->render($template));
             }

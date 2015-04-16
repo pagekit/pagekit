@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\ViewInterface;
+use Pagekit\View\ViewManager;
 
 class MetaHelper implements HelperInterface, \IteratorAggregate
 {
@@ -14,12 +14,12 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param ViewInterface $view
+     * @param ViewManager $view
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(ViewManager $view)
     {
-        $view->on('head', function ($event) {
-            $event->addResult($this->render());
+        $view->on('head', function ($event, $view) {
+            $view->addResult($this->render());
         }, 20);
     }
 

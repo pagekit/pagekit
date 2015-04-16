@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Routing\Event;
+namespace Pagekit\Kernel\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 class GetControllerEvent extends Event
@@ -17,6 +17,7 @@ class GetControllerEvent extends Event
      */
     public function __construct(Request $request)
     {
+        $this->name = 'controller.resolve';
         $this->request = $request;
     }
 

@@ -2,19 +2,17 @@
 
 namespace Pagekit\Routing\Event;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 class StringResponseListener implements EventSubscriberInterface
 {
     /**
      * Handles string responses.
      *
-     * @param GetResponseForControllerResultEvent $event
+     * @param $event
      */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView($event)
     {
         $result = $event->getControllerResult();
 
@@ -26,10 +24,10 @@ class StringResponseListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
-            KernelEvents::VIEW => ['onKernelView', -10],
+            'kernel.view' => ['onKernelView', -10],
         ];
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Pagekit\Routing\Request\Event;
 
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class ParamFetcherListener implements EventSubscriberInterface
 {
@@ -24,9 +23,9 @@ class ParamFetcherListener implements EventSubscriberInterface
     /**
      * Maps the parameters to request attributes.
      *
-     * @param FilterControllerEvent $event
+     * @param $event
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController($event)
     {
         $request    = $event->getRequest();
         $controller = $event->getController();
@@ -51,7 +50,7 @@ class ParamFetcherListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'kernel.controller' => 'onKernelController'

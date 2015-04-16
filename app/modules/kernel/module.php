@@ -13,15 +13,11 @@ return [
     'main' => function ($app) {
 
         $app['kernel'] = function ($app) {
-            return new HttpKernel($app['kernel.events'], $app['resolver'], $app['request.stack']);
-        };
-
-        $app['kernel.events'] = function ($app) {
-            return new EventDispatcher($app['events']);
+            return new HttpKernel($app['events'], $app['resolver'], $app['request.stack']);
         };
 
         $app['resolver'] = function ($app) {
-            return new ControllerResolver($app['kernel.events']);
+            return new ControllerResolver($app['events']);
         };
 
         $app['request'] = function ($app) {
@@ -39,12 +35,12 @@ return [
         // redirect the request if it has a trailing slash
         if (!$app->inConsole()) {
 
-            $app->on('kernel.request', function ($event) {
+            $app->on('kernel.request', function ($event, $request) {
 
-                $path = $event->getRequest()->getPathInfo();
+                $path = $request->getPathInfo();
 
                 if ('/' != $path && '/' == substr($path, -1) && '//' != substr($path, -2)) {
-                    $event->setResponse(new RedirectResponse(rtrim($event->getRequest()->getUriForPath($path), '/'), 301));
+                    $event->setResponse(new RedirectResponse(rtrim($request->getUriForPath($path), '/'), 301));
                 }
 
             }, 200);

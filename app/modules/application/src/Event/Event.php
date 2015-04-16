@@ -20,6 +20,11 @@ class Event implements EventInterface, \ArrayAccess
     protected $propagationStopped = false;
 
     /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher;
+
+    /**
      * Constructor.
      *
      * @param string $name
@@ -68,6 +73,24 @@ class Event implements EventInterface, \ArrayAccess
     public function setParameters(array $parameters)
     {
         return $this->parameters = $parameters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDispatcher()
+    {
+        return $this->dispatcher;
+    }
+
+    /**
+     * Sets the event dispatcher.
+     *
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function setDispatcher(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
     }
 
     /**

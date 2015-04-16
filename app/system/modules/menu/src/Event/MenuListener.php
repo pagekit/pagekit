@@ -4,9 +4,8 @@ namespace Pagekit\Menu\Event;
 
 use Doctrine\Common\Cache\Cache;
 use Pagekit\Application as App;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Menu\Entity\Item;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class MenuListener implements EventSubscriberInterface
 {
@@ -40,11 +39,11 @@ class MenuListener implements EventSubscriberInterface
     /**
      * Sets the active menu items.
      *
-     * @param GetResponseEvent $event
+     * @param $event
      */
-    public function onSystemSite(GetResponseEvent $event)
+    public function onSystemSite($event)
     {
-        $event->getRequest()->attributes->set('_menu', App::trigger('system.menu', new ActiveMenuEvent($this->getItems()))->getActive());
+        $event->getRequest()->attributes->set('_menu', App::trigger(new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -109,7 +108,7 @@ class MenuListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'system.site'                => 'onSystemSite',
