@@ -29,7 +29,7 @@ class EditorHelper implements HelperInterface
      */
     public function render($name, $value, array $attributes = [], $parameters = [])
     {
-        if ($editor = App::trigger('editor.load', new EditorLoadEvent)->getEditor()) {
+        if ($editor = App::trigger(new EditorLoadEvent('editor.load'))->getEditor()) {
             return $editor->render($value, array_merge($attributes, compact('name')));
         }
 
