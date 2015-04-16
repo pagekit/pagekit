@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing\Controller;
+namespace Pagekit\Kernel\Controller;
 
 use Pagekit\Routing\Event\GetControllerEvent;
 use Psr\Log\LoggerInterface;

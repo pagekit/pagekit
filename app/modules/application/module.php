@@ -36,21 +36,6 @@ return [
         if ($app->inConsole() || $app['debug']) {
             ini_set('display_errors', 1);
         }
-
-        // redirect the request if it has a trailing slash
-        if (!$app->inConsole()) {
-
-            $app->on('kernel.request', function (GetResponseEvent $event) {
-
-                $path = $event->getRequest()->getPathInfo();
-
-                if ('/' != $path && '/' == substr($path, -1) && '//' != substr($path, -2)) {
-                    $event->setResponse(new RedirectResponse(rtrim($event->getRequest()->getUriForPath($path), '/'), 301));
-                }
-
-            }, 200);
-
-        }
     },
 
     'require' => [

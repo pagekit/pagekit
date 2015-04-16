@@ -7,8 +7,10 @@ use Pagekit\Routing\Event\RouteResourcesEvent;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Generator\UrlGeneratorDumper;
 use Pagekit\Routing\Generator\UrlGeneratorInterface;
+use Pagekit\Routing\RequestContext as Context;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,14 +30,9 @@ class Router implements RouterInterface, UrlGeneratorInterface
     protected $events;
 
     /**
-     * @var HttpKernelInterface
+     * @var RequestStack
      */
-    protected $kernel;
-
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected $stack;
 
     /**
      * @var RequestContext
@@ -76,15 +73,14 @@ class Router implements RouterInterface, UrlGeneratorInterface
      * Constructor.
      *
      * @param EventDispatcherInterface $events
-     * @param HttpKernelInterface      $kernel
+     * @param RequestStack             $stack
      * @param array                    $options
      */
-    public function __construct(EventDispatcherInterface $events, HttpKernelInterface $kernel, array $options = [])
+    public function __construct(EventDispatcherInterface $events, RequestStack $stack, array $options = [])
     {
         $this->events  = $events;
-        $this->kernel  = $kernel;
-        $this->context = new RequestContext;
-
+        $this->stack   = $stack;
+        $this->context = new Context();
         $this->options = array_replace([
             'cache'     => null,
             'matcher'   => 'Symfony\Component\Routing\Matcher\UrlMatcher',
@@ -99,7 +95,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
      */
     public function getRequest()
     {
-        return $this->request;
+        return $this->stack->getCurrentRequest();
     }
 
     /**
@@ -256,35 +252,6 @@ class Router implements RouterInterface, UrlGeneratorInterface
     }
 
     /**
-     * Terminates a request/response cycle.
-     *
-     * @param Request  $request
-     * @param Response $response
-     */
-    public function terminate(Request $request, Response $response)
-    {
-        $this->kernel->terminate($request, $response);
-    }
-
-    /**
-     * Handles a Request to convert it to a Response.
-     *
-     * @param  Request $request
-     * @param  int     $type
-     * @param  bool    $catch
-     * @return Response
-     */
-    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
-    {
-        $this->request = $request;
-        $this->context
-            ->fromRequest($request)
-            ->setBaseUrl($request->server->get('HTTP_MOD_REWRITE') == 'On' ? $request->getBasePath() : "{$request->getBasePath()}/index.php");
-
-        return $this->kernel->handle($request, $type, $catch);
-    }
-
-    /**
      * Handles a Subrequest to call an action internally.
      *
      * @param  string $name
@@ -294,15 +261,15 @@ class Router implements RouterInterface, UrlGeneratorInterface
      */
     public function call($name, $parameters = [])
     {
-        if (empty($this->request)) {
+        if (empty($request = $this->getRequest())) {
             throw new \RuntimeException('No Request set.');
         }
 
         return $this->kernel->handle(
             Request::create(
                 $this->generate($name, $parameters), 'GET', [],
-                $this->request->cookies->all(), [],
-                $this->request->server->all()
+                $request->cookies->all(), [],
+                $request->server->all()
             ), HttpKernelInterface::SUB_REQUEST);
     }
 

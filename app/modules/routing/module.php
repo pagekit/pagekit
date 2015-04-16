@@ -5,7 +5,6 @@ use Pagekit\Routing\Controller\AliasCollection;
 use Pagekit\Routing\Controller\CallbackCollection;
 use Pagekit\Routing\Controller\ControllerCollection;
 use Pagekit\Routing\Controller\ControllerReader;
-use Pagekit\Routing\Controller\ControllerResolver;
 use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\JsonListener;
@@ -14,11 +13,9 @@ use Pagekit\Routing\Request\Event\ParamFetcherListener;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Router;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\EventListener\ResponseListener;
 use Symfony\Component\HttpKernel\EventListener\RouterListener;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\HttpKernel\HttpKernel;
 
 return [
 
@@ -27,31 +24,15 @@ return [
     'main' => function ($app) {
 
         $app['router'] = function ($app) {
-            return new Router($app['kernel.events'], $app['kernel'], ['cache' => $app['path.cache']]);
-        };
-
-        $app['kernel'] = function ($app) {
-            return new HttpKernel($app['kernel.events'], $app['resolver'], $app['request_stack']);
-        };
-
-        $app['kernel.events'] = function ($app) {
-            return new EventDispatcher($app['events']);
-        };
-
-        $app['request_stack'] = function () {
-            return new RequestStack;
-        };
-
-        $app['resolver'] = function ($app) {
-            return new ControllerResolver($app['kernel.events']);
+            return new Router($app['kernel.events'], $app['request.stack'], ['cache' => $app['path.cache']]);
         };
 
         $app['aliases'] = function () {
-            return new AliasCollection;
+            return new AliasCollection();
         };
 
         $app['callbacks'] = function () {
-            return new CallbackCollection;
+            return new CallbackCollection();
         };
 
         $app['controllers'] = function ($app) {
@@ -63,7 +44,7 @@ return [
             $events = $app['kernel.events'];
             $events->addSubscriber(new ConfigureRouteListener);
             $events->addSubscriber(new ParamFetcherListener(new ParamFetcher(new FilterManager)));
-            $events->addSubscriber(new RouterListener($app['router'], null, null, $app['request_stack']));
+            $events->addSubscriber(new RouterListener($app['router'], null, null, $app['request.stack']));
             $events->addSubscriber(new ResponseListener('UTF-8'));
             $events->addSubscriber(new JsonListener);
             $events->addSubscriber(new StringResponseListener);
@@ -108,6 +89,12 @@ return [
         }, -10);
 
     },
+
+    'require' => [
+
+        'kernel'
+
+    ],
 
     'autoload' => [
 

@@ -14,7 +14,6 @@ return [
 
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
-            $view->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
             $view->addHelper(new TemplateHelper($view, $app['scripts']));
 
             return $view;
@@ -29,6 +28,8 @@ return [
         });
 
         $app->on('kernel.request', function ($event) use ($app) {
+
+            $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
             $app['styles']->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
             $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
@@ -53,7 +54,7 @@ return [
             $app['scripts']->register('vue-resource', 'app/system/app/vue-resource.js', 'vue');
             $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', 'vue');
 
-        }, 90);
+        }, 30);
 
         $app->subscribe(new CanonicalListener(), new ResponseListener());
 

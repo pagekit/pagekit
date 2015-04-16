@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing\Event;
+namespace Pagekit\Kernel;
 
 use Pagekit\Event\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
