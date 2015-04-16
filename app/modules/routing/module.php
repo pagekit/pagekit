@@ -9,6 +9,7 @@ use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\JsonListener;
 use Pagekit\Routing\Event\StringResponseListener;
+use Pagekit\Routing\Middleware;
 use Pagekit\Routing\Request\Event\ParamFetcherListener;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Router;
@@ -39,6 +40,10 @@ return [
             return new ControllerCollection(new ControllerReader($app['kernel.events']), $app['autoloader'], $app['debug']);
         };
 
+        $app['middleware'] = function($app) {
+            return new Middleware($app['kernel.events']);
+        };
+
         $app->on('kernel.boot', function () use ($app) {
 
             $events = $app['kernel.events'];
@@ -51,6 +56,8 @@ return [
             $events->addSubscriber($app['aliases']);
             $events->addSubscriber($app['callbacks']);
             $events->addSubscriber($app['controllers']);
+
+            $app['middleware'];
 
         });
 
