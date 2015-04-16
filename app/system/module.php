@@ -25,6 +25,8 @@ return [
 
         $app['system'] = $this;
 
+        $app['module']->load($this->config['extensions']);
+
     },
 
     'boot' => function ($app) {
@@ -38,8 +40,6 @@ return [
             new MigrationListener,
             new SystemListener
         );
-
-        $app['module']->load($this->config['extensions']);
 
         if ($app->inConsole()) {
             $app['isAdmin'] = false;
