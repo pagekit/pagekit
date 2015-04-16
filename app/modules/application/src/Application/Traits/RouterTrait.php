@@ -13,7 +13,7 @@ trait RouterTrait
      */
     public static function redirect($url, $parameters = [], $status = 302, $headers = [])
     {
-        static::router()->redirect($url, $parameters, $status, $headers);
+        return static::router()->redirect($url, $parameters, $status, $headers);
     }
 
     /**
