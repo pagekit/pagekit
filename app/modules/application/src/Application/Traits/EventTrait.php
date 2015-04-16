@@ -2,7 +2,6 @@
 
 namespace Pagekit\Application\Traits;
 
-use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
 
 trait EventTrait
@@ -12,7 +11,7 @@ trait EventTrait
      */
     public static function on($event, $callback, $priority = 0)
     {
-        App::events()->on($event, $callback, $priority);
+        static::events()->on($event, $callback, $priority);
     }
 
     /**
@@ -23,7 +22,7 @@ trait EventTrait
         $subscribers = func_num_args() > 1 ? func_get_args() : [$subscriber];
 
         foreach ($subscribers as $sub) {
-            App::events()->subscribe($sub);
+            static::events()->subscribe($sub);
         }
     }
 
@@ -32,6 +31,6 @@ trait EventTrait
      */
     public static function trigger($event, array $arguments = [])
     {
-        return App::events()->trigger($event, $arguments);
+        return static::events()->trigger($event, $arguments);
     }
 }

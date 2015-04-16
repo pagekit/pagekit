@@ -252,28 +252,6 @@ class Router implements RouterInterface, UrlGeneratorInterface
     }
 
     /**
-     * Handles a Subrequest to call an action internally.
-     *
-     * @param  string $name
-     * @param  array  $parameters
-     * @throws \RuntimeException
-     * @return Response
-     */
-    public function call($name, $parameters = [])
-    {
-        if (empty($request = $this->getRequest())) {
-            throw new \RuntimeException('No Request set.');
-        }
-
-        return $this->kernel->handle(
-            Request::create(
-                $this->generate($name, $parameters), 'GET', [],
-                $request->cookies->all(), [],
-                $request->server->all()
-            ), HttpKernelInterface::SUB_REQUEST);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function match($pathinfo)
