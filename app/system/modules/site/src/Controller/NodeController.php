@@ -3,14 +3,13 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
 
 /**
  * @Access("site: manage site")
  * @Response("json")
  */
-class NodeController extends Controller
+class NodeController
 {
     /**
      * @Route("/", methods="GET")

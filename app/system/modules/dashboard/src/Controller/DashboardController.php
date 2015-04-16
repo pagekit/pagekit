@@ -3,7 +3,6 @@
 namespace Pagekit\Dashboard\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Module\Module;
 use Pagekit\Widget\Model\Widget;
@@ -12,7 +11,7 @@ use Pagekit\Widget\Model\Widget;
  * @Access(admin=true)
  * @Route(name="")
  */
-class DashboardController extends Controller
+class DashboardController
 {
     /**
      * @var Module
@@ -96,7 +95,7 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@dashboard/settings');
+        return App::redirect('@dashboard/settings');
     }
 
     /**
@@ -129,7 +128,7 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@dashboard/settings');
+        return App::redirect('@dashboard/settings');
     }
 
     /**
@@ -151,7 +150,7 @@ class DashboardController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect($id ? '@dashboard/edit' : '@dashboard/add', compact('id'));
+        return App::redirect($id ? '@dashboard/edit' : '@dashboard/add', compact('id'));
     }
 
     /**

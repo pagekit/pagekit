@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Comment;
 
@@ -12,7 +11,7 @@ use Pagekit\Blog\Entity\Comment;
  * @Route("comment", name="comment")
  * @Response("json")
  */
-class CommentApiController extends Controller
+class CommentApiController
 {
     /**
      * @Route("/", methods="GET")

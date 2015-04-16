@@ -3,12 +3,11 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 
 /**
  * @Access("blog: manage settings", admin=true)
  */
-class SettingsController extends Controller
+class SettingsController
 {
     /**
      * @Response("blog:views/admin/settings.php")

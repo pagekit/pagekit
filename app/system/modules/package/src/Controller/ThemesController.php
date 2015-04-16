@@ -3,14 +3,13 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\System\Event\ThemeEvent;
 
 /**
  * @Access("system: manage themes", admin=true)
  */
-class ThemesController extends Controller
+class ThemesController
 {
     /**
      * @Response("system:modules/package/views/themes.php")

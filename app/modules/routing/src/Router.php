@@ -9,6 +9,7 @@ use Pagekit\Routing\Generator\UrlGeneratorDumper;
 use Pagekit\Routing\Generator\UrlGeneratorInterface;
 use Pagekit\Routing\RequestContext as Context;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -231,6 +232,20 @@ class Router implements RouterInterface, UrlGeneratorInterface
         }
 
         return $this->generator;
+    }
+
+    /**
+     * Returns a redirect response.
+     *
+     * @param  string  $url
+     * @param  array   $parameters
+     * @param  int     $status
+     * @param  array   $headers
+     * @return RedirectResponse
+     */
+    public function redirect($url, $parameters = [], $status = 302, $headers = [])
+    {
+        return new RedirectResponse($this->generate($url, $parameters), $status, $headers);
     }
 
     /**

@@ -3,12 +3,11 @@
 namespace Pagekit\Info\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 
 /**
  * @Access(admin=true)
  */
-class InfoController extends Controller
+class InfoController
 {
     /**
      * @Response("system:modules/info/views/info.php")

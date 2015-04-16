@@ -3,11 +3,10 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController
 {
     /**
      * @Response("system/user:views/reset/request.php")
@@ -15,7 +14,7 @@ class ResetPasswordController extends Controller
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         return [
@@ -34,7 +33,7 @@ class ResetPasswordController extends Controller
         try {
 
             if (App::user()->isAuthenticated()) {
-                return $this->redirect('/');
+                return App::redirect('/');
             }
 
             if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
@@ -73,13 +72,13 @@ class ResetPasswordController extends Controller
 
             App::message()->success(__('Check your email for the confirmation link.'));
 
-            return $this->redirect('/');
+            return App::redirect('/');
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@user/resetpassword');
+        return App::redirect('@user/resetpassword');
     }
 
     /**
@@ -90,12 +89,12 @@ class ResetPasswordController extends Controller
     {
         if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
             App::message()->error(__('Invalid key.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         if ($user->isBlocked()) {
             App::message()->error(__('Your account has not been activated or is blocked.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         if ('POST' === App::request()->getMethod()) {
@@ -121,7 +120,7 @@ class ResetPasswordController extends Controller
                 $user->save();
 
                 App::message()->success(__('Your password has been reset.'));
-                return $this->redirect('/');
+                return App::redirect('/');
 
             } catch (Exception $e) {
                 App::message()->error($e->getMessage());

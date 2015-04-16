@@ -3,13 +3,12 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Auth\Exception\BadCredentialsException;
 use Pagekit\Auth\RememberMe;
 
-class AuthController extends Controller
+class AuthController
 {
     /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
@@ -20,7 +19,7 @@ class AuthController extends Controller
     {
         if (App::user()->isAuthenticated()) {
             App::message()->info(__('You are already logged in.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         return [
@@ -63,6 +62,6 @@ class AuthController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect(App::url()->previous());
+        return App::redirect(App::url()->previous());
     }
 }

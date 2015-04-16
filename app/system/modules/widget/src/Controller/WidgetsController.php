@@ -3,7 +3,6 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\Role;
 use Pagekit\Widget\Entity\Widget;
@@ -16,7 +15,7 @@ use Pagekit\Widget\Model\TypesTrait;
 /**
  * @Access("system: manage widgets", admin=true)
  */
-class WidgetsController extends Controller
+class WidgetsController
 {
     /**
      * @var array
@@ -101,7 +100,7 @@ class WidgetsController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@system/widgets');
+        return App::redirect('@system/widgets');
     }
 
     /**
@@ -137,7 +136,7 @@ class WidgetsController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $id ? $this->redirect('@system/widgets/edit', compact('id')) : $this->redirect('@system/widgets/add', ['type' => $data['type']]);
+        return $id ? App::redirect('@system/widgets/edit', compact('id')) : App::redirect('@system/widgets/add', ['type' => $data['type']]);
     }
 
     /**
@@ -153,7 +152,7 @@ class WidgetsController extends Controller
 
         App::message()->success(_c('{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted.', count($ids)));
 
-        return $this->redirect('@system/widgets');
+        return App::redirect('@system/widgets');
     }
 
 
@@ -177,7 +176,7 @@ class WidgetsController extends Controller
             App::trigger('system.widget.copy', new WidgetCopyEvent($widget, $copy));
         }
 
-        return $this->redirect('@system/widgets');
+        return App::redirect('@system/widgets');
     }
 
     /**
@@ -191,7 +190,7 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this->redirect('@system/widgets');
+        return App::redirect('@system/widgets');
     }
 
     /**
@@ -205,7 +204,7 @@ class WidgetsController extends Controller
             }
         }
 
-        return $this->redirect('@system/widgets');
+        return App::redirect('@system/widgets');
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -11,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @Access("site: manage site", admin=true)
  * @Route(name="")
  */
-class SiteController extends Controller
+class SiteController
 {
     /**
      * @Response("site:views/admin/index.php")

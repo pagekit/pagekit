@@ -3,12 +3,11 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 
 /**
  * @Access("system: software updates", admin=true)
  */
-class MigrationController extends Controller
+class MigrationController
 {
     /**
      * @Response("system/theme:templates/migration.php", layout=false)
@@ -36,6 +35,6 @@ class MigrationController extends Controller
             App::message()->warning(__('Your Pagekit database is already up-to-date!'));
         }
 
-        return $this->redirect('@system/admin');
+        return App::redirect('@system/admin');
     }
 }

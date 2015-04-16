@@ -2,11 +2,10 @@
 
 namespace Pagekit\OAuth\Controller;
 
-use OAuth\Common\Storage\Memory;
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
+use OAuth\Common\Storage\Memory;
 
-class OAuthController extends Controller
+class OAuthController
 {
     public function connectAction()
     {
@@ -56,13 +55,13 @@ class OAuthController extends Controller
             }
 
         } catch (\Exception $e) {
-            return $this->redirect($redirect, array_merge($additionalParms, ['error' => true, 'message' => $e->getMessage()]));
+            return App::redirect($redirect, array_merge($additionalParms, ['error' => true, 'message' => $e->getMessage()]));
         }
 
         if ($tokenKey) {
             App::oauth()->saveToken($provider, $tokenKey, $token);
         }
 
-        return $this->redirect($redirect, array_merge($additionalParms, ['success' => true]));
+        return App::redirect($redirect, array_merge($additionalParms, ['success' => true]));
     }
 }

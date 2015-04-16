@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Post;
 
@@ -12,7 +11,7 @@ use Pagekit\Blog\Entity\Post;
  * @Route("post", name="post")
  * @Response("json")
  */
-class PostApiController extends Controller
+class PostApiController
 {
     /**
      * @Route("/", methods="GET")

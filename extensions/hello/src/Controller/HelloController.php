@@ -2,13 +2,11 @@
 
 namespace Pagekit\Hello\Controller;
 
-use Pagekit\Application\Controller;
-
 /**
  * @Route("/hello")
  * @Access(admin=true)
  */
-class HelloController extends Controller
+class HelloController
 {
     /**
      * @Response("hello:views/admin/index.razr")

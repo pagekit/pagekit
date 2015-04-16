@@ -9,6 +9,14 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 trait RouterTrait
 {
     /**
+     * @see Router::redirect()
+     */
+    public static function redirect($url, $parameters = [], $status = 302, $headers = [])
+    {
+        static::router()->redirect($url, $parameters, $status, $headers);
+    }
+
+    /**
      * @see Router::abort()
      */
     public static function abort($code, $message = '', array $headers = [])
@@ -28,14 +36,14 @@ trait RouterTrait
     }
 
     /**
-     * Handles a Subrequest to call an action internally.
+     * Handles a subrequest to forward an action internally.
      *
      * @param  string $name
      * @param  array  $parameters
      * @throws \RuntimeException
      * @return Response
      */
-    public static function call($name, $parameters = [])
+    public static function forward($name, $parameters = [])
     {
         if (empty(static::request())) {
             throw new \RuntimeException('No Request set.');
@@ -43,7 +51,7 @@ trait RouterTrait
 
         return static::kernel()->handle(
             Request::create(
-                $this->generate($name, $parameters), 'GET', [],
+                static::router()->generate($name, $parameters), 'GET', [],
                 $request->cookies->all(), [],
                 $request->server->all()
             ), HttpKernelInterface::SUB_REQUEST);

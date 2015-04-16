@@ -3,14 +3,13 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 
 /**
  * @Route("/")
  */
-class SystemController extends Controller
+class SystemController
 {
     /**
      * @Access(admin=true)

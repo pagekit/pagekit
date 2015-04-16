@@ -3,12 +3,11 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Event\ProfileSaveEvent;
 
-class ProfileController extends Controller
+class ProfileController
 {
     /**
      * @Response("system/user:views/profile.php")
@@ -16,7 +15,7 @@ class ProfileController extends Controller
     public function indexAction()
     {
         if (!App::user()->isAuthenticated()) {
-            return $this->redirect('@user/auth/login', ['redirect' => App::url()->current()]);
+            return App::redirect('@user/auth/login', ['redirect' => App::url()->current()]);
         }
 
         return [
@@ -89,6 +88,6 @@ class ProfileController extends Controller
             App::message()->error($e->getMessage());
         }
 
-        return $this->redirect('@user/profile');
+        return App::redirect('@user/profile');
     }
 }

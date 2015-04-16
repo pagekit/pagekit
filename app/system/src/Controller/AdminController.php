@@ -3,21 +3,20 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
 
 /**
  * @Route("/")
  */
-class AdminController extends Controller
+class AdminController
 {
     /**
      * @Access(admin=true)
      */
     public function indexAction()
     {
-        return $this->redirect('@dashboard');
+        return App::redirect('@dashboard');
     }
 
     /**
@@ -27,7 +26,7 @@ class AdminController extends Controller
     public function loginAction()
     {
         if (App::user()->isAuthenticated()) {
-            return $this->redirect('@system/admin');
+            return App::redirect('@system/admin');
         }
 
         return [

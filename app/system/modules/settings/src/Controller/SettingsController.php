@@ -3,14 +3,13 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Config\Config;
 use Pagekit\System\Event\SettingsEvent;
 
 /**
  * @Access("system: access settings", admin=true)
  */
-class SettingsController extends Controller
+class SettingsController
 {
     /**
      * @var Config

@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\User\Entity\Role;
@@ -11,7 +10,7 @@ use Pagekit\User\Entity\Role;
 /**
  * @Access("blog: manage content", admin=true)
  */
-class PostController extends Controller
+class PostController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
@@ -79,7 +78,7 @@ class PostController extends Controller
 
             App::message()->error($e->getMessage());
 
-            return $this->redirect('@blog/post');
+            return App::redirect('@blog/post');
         }
     }
 }

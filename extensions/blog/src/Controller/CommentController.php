@@ -3,14 +3,13 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 
 /**
  * @Access("blog: manage comments", admin=true)
  */
-class CommentController extends Controller
+class CommentController
 {
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})

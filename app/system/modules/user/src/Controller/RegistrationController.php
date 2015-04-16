@@ -3,13 +3,12 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Module\Module;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
-class RegistrationController extends Controller
+class RegistrationController
 {
     /**
      * @var Module
@@ -28,12 +27,12 @@ class RegistrationController extends Controller
     {
         if (App::user()->isAuthenticated()) {
             App::message()->info(__('You are already logged in.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         if ($this->module->config('registration') == 'admin') {
             App::message()->info(__('Public user registration is disabled.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         return [
@@ -55,7 +54,7 @@ class RegistrationController extends Controller
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
-                return $this->redirect('/');
+                return App::redirect('/');
             }
 
             if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
@@ -148,7 +147,7 @@ class RegistrationController extends Controller
             if (!App::request()->isXmlHttpRequest()) {
 
                 App::message()->success($response['success']);
-                return $this->redirect('@user/auth/login');
+                return App::redirect('@user/auth/login');
             }
 
         } catch (Exception $e) {
@@ -164,7 +163,7 @@ class RegistrationController extends Controller
             }
         }
 
-        return App::request()->isXmlHttpRequest() ? $response : $this->redirect(count($errors) ? '@user/registration' : '@user/auth/login');
+        return App::request()->isXmlHttpRequest() ? $response : App::redirect(count($errors) ? '@user/registration' : '@user/auth/login');
     }
 
     /**
@@ -174,7 +173,7 @@ class RegistrationController extends Controller
     {
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             App::message()->error(__('Invalid key.'));
-            return $this->redirect('/');
+            return App::redirect('/');
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -200,7 +199,7 @@ class RegistrationController extends Controller
 
         $user->save();
 
-        return $this->redirect('@user/auth/login');
+        return App::redirect('@user/auth/login');
     }
 
     protected function sendWelcomeEmail($user)

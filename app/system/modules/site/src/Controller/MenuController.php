@@ -3,7 +3,6 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Site\Entity\Node;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -11,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
  * @Access("site: manage site")
  * @Response("json")
  */
-class MenuController extends Controller
+class MenuController
 {
     /**
      * @Route("/", methods="GET")

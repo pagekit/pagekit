@@ -3,7 +3,6 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\System\Event\ExtensionEvent;
 use Pagekit\System\Extension;
@@ -11,7 +10,7 @@ use Pagekit\System\Extension;
 /**
  * @Access("system: manage extensions", admin=true)
  */
-class ExtensionsController extends Controller
+class ExtensionsController
 {
     /**
      * @Response("system:modules/package/views/extensions.php")

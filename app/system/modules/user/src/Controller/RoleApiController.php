@@ -3,7 +3,6 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\User\Entity\Role;
 
 /**
@@ -11,7 +10,7 @@ use Pagekit\User\Entity\Role;
  * @Route("role", name="role")
  * @Response("json")
  */
-class RoleApiController extends Controller
+class RoleApiController
 {
     /**
      * @Route("/", methods="GET")

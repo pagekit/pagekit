@@ -3,13 +3,12 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\User\Entity\Role;
 
 /**
  * @Access("user: manage user permissions", admin=true)
  */
-class RoleController extends Controller
+class RoleController
 {
     /**
      * @Request({"id": "int"})

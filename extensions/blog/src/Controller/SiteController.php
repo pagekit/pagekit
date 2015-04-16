@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Controller;
 use Pagekit\Application\Exception;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
@@ -17,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @Route("/")
  */
-class SiteController extends Controller
+class SiteController
 {
     /**
      * @var BlogExtension
@@ -145,7 +144,7 @@ class SiteController extends Controller
 
             App::message()->info(__('Thanks for commenting!'));
 
-            return $this->redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
+            return App::redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
         } catch (Exception $e) {
 
@@ -159,7 +158,7 @@ class SiteController extends Controller
 
         App::message()->error($message);
 
-        return $this->redirect(App::url()->previous());
+        return App::redirect(App::url()->previous());
     }
 
     /**
