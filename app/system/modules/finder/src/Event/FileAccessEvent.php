@@ -2,7 +2,7 @@
 
 namespace Pagekit\Finder\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Pagekit\Event\Event;
 use Symfony\Component\Finder\Expression\Expression;
 
 class FileAccessEvent extends Event
