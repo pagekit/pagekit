@@ -64,7 +64,7 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function subscribe(EventSubscriberInterface $subscriber)
     {
-        foreach ($subscriber->subscribe($this) as $event => $params) {
+        foreach ($subscriber->subscribe() as $event => $params) {
             if (is_string($params)) {
                 $this->on($event, [$subscriber, $params]);
             } elseif (is_string($params[0])) {
@@ -82,13 +82,13 @@ class EventDispatcher implements EventDispatcherInterface
      */
     public function unsubscribe(EventSubscriberInterface $subscriber)
     {
-        foreach ($subscriber->subscribe($this) as $event => $params) {
+        foreach ($subscriber->subscribe() as $event => $params) {
             if (is_array($params) && is_array($params[0])) {
                 foreach ($params as $listener) {
-                    $this->unsubscribe($event, [$subscriber, $listener[0]]);
+                    $this->off($event, [$subscriber, $listener[0]]);
                 }
             } else {
-                $this->unsubscribe($event, [$subscriber, is_string($params) ? $params : $params[0]]);
+                $this->off($event, [$subscriber, is_string($params) ? $params : $params[0]]);
             }
         }
     }
