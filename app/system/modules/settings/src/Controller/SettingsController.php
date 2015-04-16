@@ -58,7 +58,11 @@ class SettingsController
         file_put_contents($this->configFile, $this->config->dump());
 
         foreach ($option as $module => $value) {
-            App::config()->set($module, $value, true);
+            if ($module == 'system') {
+                App::config($module)->merge($value);
+            } else {
+                App::config()->set($module, $value, true);
+            }
         }
 
         if (function_exists('opcache_invalidate')) {
