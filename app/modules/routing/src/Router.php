@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -243,9 +244,20 @@ class Router implements RouterInterface, UrlGeneratorInterface
      * @param  array   $headers
      * @return RedirectResponse
      */
-    public function redirect($url, $parameters = [], $status = 302, $headers = [])
+    public function redirect($url = '', $parameters = [], $status = 302, $headers = [])
     {
-        return new RedirectResponse($this->generate($url, $parameters), $status, $headers);
+        try {
+
+            $url = $this->generate($url, $parameters);
+
+        } catch (RouteNotFoundException $e) {
+
+            if (filter_var($url, FILTER_VALIDATE_URL) === false && strpos($url, '/') !== 0) {
+                $url = $this->getRequest()->getBasePath()."/$url";
+            }
+        }
+
+        return new RedirectResponse($url, $status, $headers);
     }
 
     /**
@@ -289,6 +301,8 @@ class Router implements RouterInterface, UrlGeneratorInterface
      */
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
+        $generator = $this->getGenerator();
+
         if ($fragment = strstr($name, '#')) {
             $name = strstr($name, '#', true);
         }
@@ -299,7 +313,6 @@ class Router implements RouterInterface, UrlGeneratorInterface
             $parameters = array_replace($parameters, $params);
         }
 
-        $generator = $this->getGenerator();
         if ($referenceType !== self::LINK_URL
             && ($props = $generator->getRouteProperties($generator->generate($name, $parameters, 'link')) or $props = $generator->getRouteProperties($name))
             && $resolver = $this->getResolver($props[1])

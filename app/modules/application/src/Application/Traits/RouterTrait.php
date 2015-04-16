@@ -11,7 +11,7 @@ trait RouterTrait
     /**
      * @see Router::redirect()
      */
-    public static function redirect($url, $parameters = [], $status = 302, $headers = [])
+    public static function redirect($url = '', $parameters = [], $status = 302, $headers = [])
     {
         return static::router()->redirect($url, $parameters, $status, $headers);
     }

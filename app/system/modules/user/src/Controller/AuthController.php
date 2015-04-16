@@ -19,7 +19,7 @@ class AuthController
     {
         if (App::user()->isAuthenticated()) {
             App::message()->info(__('You are already logged in.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         return [

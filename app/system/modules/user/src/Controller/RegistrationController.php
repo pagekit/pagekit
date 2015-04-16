@@ -27,12 +27,12 @@ class RegistrationController
     {
         if (App::user()->isAuthenticated()) {
             App::message()->info(__('You are already logged in.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         if ($this->module->config('registration') == 'admin') {
             App::message()->info(__('Public user registration is disabled.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         return [
@@ -54,7 +54,7 @@ class RegistrationController
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
-                return App::redirect('/');
+                return App::redirect();
             }
 
             if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
@@ -173,7 +173,7 @@ class RegistrationController
     {
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'access IS NULL'])->first()) {
             App::message()->error(__('Invalid key.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {

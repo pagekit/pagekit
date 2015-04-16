@@ -14,7 +14,7 @@ class ResetPasswordController
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
-            return App::redirect('/');
+            return App::redirect();
         }
 
         return [
@@ -33,7 +33,7 @@ class ResetPasswordController
         try {
 
             if (App::user()->isAuthenticated()) {
-                return App::redirect('/');
+                return App::redirect();
             }
 
             if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
@@ -72,7 +72,7 @@ class ResetPasswordController
 
             App::message()->success(__('Check your email for the confirmation link.'));
 
-            return App::redirect('/');
+            return App::redirect();
 
         } catch (Exception $e) {
             App::message()->error($e->getMessage());
@@ -89,12 +89,12 @@ class ResetPasswordController
     {
         if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
             App::message()->error(__('Invalid key.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         if ($user->isBlocked()) {
             App::message()->error(__('Your account has not been activated or is blocked.'));
-            return App::redirect('/');
+            return App::redirect();
         }
 
         if ('POST' === App::request()->getMethod()) {
@@ -120,7 +120,8 @@ class ResetPasswordController
                 $user->save();
 
                 App::message()->success(__('Your password has been reset.'));
-                return App::redirect('/');
+
+                return App::redirect();
 
             } catch (Exception $e) {
                 App::message()->error($e->getMessage());
