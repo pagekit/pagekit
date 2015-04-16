@@ -28,6 +28,14 @@ return [
             return (new Factory)->getMediumStrengthGenerator();
         };
 
+        $app['auth.remember'] = function($app) {
+            return new RememberMe($this->config('rememberme.key'), $this->config('rememberme.cookie.name') ?: 'remember_'.md5($app['request']->getUriForPath('')), $app['cookie']);
+        };
+
+    },
+
+    'boot' => function ($app) {
+
         $app->on('auth.login', function (LoginEvent $event) use ($app) {
             $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
         }, -32);
@@ -36,45 +44,37 @@ return [
             $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
         }, -32);
 
-        $app['auth.remember'] = function($app) {
-            return new RememberMe($this->config('rememberme.key'), $this->config('rememberme.cookie.name') ?: 'remember_'.md5($app['request']->getUriForPath('')), $app['cookie']);
-        };
+        if (!$this->config('rememberme.enabled') || !$this->config('rememberme.key')) {
+            return;
+        }
 
-        $app->on('kernel.boot', function() use ($app) {
+        $app->on('kernel.request', function () use ($app) {
 
-            if (!$this->config('rememberme.enabled') || !$this->config('rememberme.key')) {
-                return;
-            }
+            try {
 
-            $app->on('kernel.request', function () use ($app) {
+                if (null !== $app['auth']->getUser()) {
+                    return;
+                }
 
-                try {
+                $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
 
-                    if (null !== $app['auth']->getUser()) {
-                        return;
-                    }
+                $app['auth']->setUser($user);
+                $app['events']->dispatch(AuthEvents::LOGIN, new LoginEvent($user));
 
-                    $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
+            } catch (\Exception $e) {}
 
-                    $app['auth']->setUser($user);
-                    $app['events']->dispatch(AuthEvents::LOGIN, new LoginEvent($user));
+        }, 20);
 
-                } catch (\Exception $e) {}
+        $app->on(AuthEvents::SUCCESS, function (AuthenticateEvent $event) use ($app) {
+            $app['auth.remember']->set($app['request'], $event->getUser());
+        });
 
-            }, 20);
+        $app->on(AuthEvents::FAILURE, function () use ($app) {
+            $app['auth.remember']->remove();
+        });
 
-            $app->on(AuthEvents::SUCCESS, function (AuthenticateEvent $event) use ($app) {
-                $app['auth.remember']->set($app['request'], $event->getUser());
-            });
-
-            $app->on(AuthEvents::FAILURE, function () use ($app) {
-                $app['auth.remember']->remove();
-            });
-
-            $app->on(AuthEvents::LOGOUT, function () use ($app) {
-                $app['auth.remember']->remove();
-            });
-
+        $app->on(AuthEvents::LOGOUT, function () use ($app) {
+            $app['auth.remember']->remove();
         });
 
     },

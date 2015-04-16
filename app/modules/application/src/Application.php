@@ -14,6 +14,11 @@ class Application extends Container
     use StaticTrait, EventTrait, RouterTrait;
 
     /**
+     * @var bool
+     */
+    protected $booted = false;
+
+    /**
      * Constructor.
      *
      * @param array $values
@@ -32,7 +37,24 @@ class Application extends Container
     }
 
     /**
-     * Handles the request and delivers the response.
+     * Boots all modules.
+     */
+    public function boot()
+    {
+        if (!$this->booted) {
+
+            foreach ($this['module'] as $module) {
+                if (isset($module->boot)) {
+                    call_user_func($module->boot, $this);
+                }
+            }
+
+            $this->booted = true;
+        }
+    }
+
+    /**
+     * Handles the request.
      *
      * @param Request $request
      */
@@ -42,6 +64,10 @@ class Application extends Container
             $request = Request::createFromGlobals();
         }
 
+        if (!$this->booted) {
+            $this->boot();
+        }
+
         $response = $this['kernel']->handle($request);
         $response->send();
 
@@ -49,7 +75,7 @@ class Application extends Container
     }
 
     /**
-     * Determine if we are running in the console.
+     * Checks if running in the console.
      *
      * @return bool
      */

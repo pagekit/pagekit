@@ -48,10 +48,6 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      */
     public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
     {
-        if ($type == HttpKernelInterface::MASTER_REQUEST) {
-            $this->events->trigger('kernel.boot');
-        }
-
         try {
 
             return $this->handleRaw($request, $type);

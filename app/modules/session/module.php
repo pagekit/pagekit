@@ -16,17 +16,17 @@ return [
 
     'main' => function ($app) {
 
-        $app['session'] = function($app) {
+        $app['session'] = function ($app) {
             $session = new Session($app['session.storage']);
             $session->registerBag($app['message']);
             return $session;
         };
 
-        $app['message'] = function() {
+        $app['message'] = function () {
             return new Message;
         };
 
-        $app['session.storage'] = function($app) {
+        $app['session.storage'] = function ($app) {
 
             switch ($this->config['storage']) {
 
@@ -55,7 +55,7 @@ return [
             return $storage;
         };
 
-        $app['session.options'] = function() {
+        $app['session.options'] = function () {
 
             $options = array_diff_key($this->config, array_fill_keys(['name', 'main'], null));
 
@@ -77,62 +77,63 @@ return [
 
         $app['session.test'] = false;
 
-        $app['csrf'] = function($app) {
+        $app['csrf'] = function ($app) {
             return new SessionCsrfProvider($app['session']);
         };
 
-        $app->on('kernel.boot', function() use ($app) {
+    },
 
-            if ($app['session.test']) {
+    'boot' => function ($app) {
 
-                $app->on('kernel.request', function ($event, $request) use ($app) {
-
-                    if (!$event->isMasterRequest() || !isset($app['session'])) {
-                        return;
-                    }
-
-                    $session = $app['session'];
-
-                    if ($request->cookies->has($session->getName())) {
-                        $session->setId($request->cookies->get($session->getName()));
-                    } else {
-                        $session->migrate(false);
-                    }
-
-                }, 100);
-
-                $app->on('kernel.response', function ($event, $request) {
-
-                    if (!$event->isMasterRequest()) {
-                        return;
-                    }
-
-                    if ($session = $request->getSession() and $session->isStarted()) {
-
-                        $session->save();
-
-                        $params = session_get_cookie_params();
-                        $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-
-                        $event->getResponse()->headers->setCookie($cookie);
-                    }
-
-                }, -100);
-            }
+        if ($app['session.test']) {
 
             $app->on('kernel.request', function ($event, $request) use ($app) {
 
-                if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
-                    $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
+                if (!$event->isMasterRequest() || !isset($app['session'])) {
+                    return;
                 }
 
-                $request->setSession($app['session']);
+                $session = $app['session'];
+
+                if ($request->cookies->has($session->getName())) {
+                    $session->setId($request->cookies->get($session->getName()));
+                } else {
+                    $session->migrate(false);
+                }
 
             }, 100);
 
-            $app->subscribe(new CsrfListener($app['csrf']));
+            $app->on('kernel.response', function ($event, $request) {
 
-        });
+                if (!$event->isMasterRequest()) {
+                    return;
+                }
+
+                if ($session = $request->getSession() and $session->isStarted()) {
+
+                    $session->save();
+
+                    $params = session_get_cookie_params();
+                    $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+
+                    $event->getResponse()->headers->setCookie($cookie);
+                }
+
+            }, -100);
+        }
+
+        $app->on('kernel.request', function ($event, $request) use ($app) {
+
+            if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
+                $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
+            }
+
+            $request->setSession($app['session']);
+
+        }, 100);
+
+        $app->subscribe(new CsrfListener($app['csrf']));
+
     },
 
     'autoload' => [

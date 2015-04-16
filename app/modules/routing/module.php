@@ -44,23 +44,23 @@ return [
             return new Middleware($app['events']);
         };
 
-        $app->on('kernel.boot', function () use ($app) {
+    },
 
-            $app->subscribe(
-                new ConfigureRouteListener,
-                new ParamFetcherListener(new ParamFetcher(new FilterManager)),
-                new RouterListener($app['router'], null, null, $app['request.stack']),
-                new ResponseListener('UTF-8'),
-                new JsonListener,
-                new StringResponseListener,
-                $app['aliases'],
-                $app['callbacks'],
-                $app['controllers']
-            );
+    'boot' => function ($app) {
 
-            $app['middleware'];
+        $app->subscribe(
+            new ConfigureRouteListener,
+            new ParamFetcherListener(new ParamFetcher(new FilterManager)),
+            new RouterListener($app['router'], null, null, $app['request.stack']),
+            new ResponseListener('UTF-8'),
+            new JsonListener,
+            new StringResponseListener,
+            $app['aliases'],
+            $app['callbacks'],
+            $app['controllers']
+        );
 
-        });
+        $app['middleware'];
 
         $app->on('kernel.request', function () use ($app) {
 

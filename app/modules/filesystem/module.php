@@ -19,9 +19,9 @@ return [
             return new Locator($this->config['path']);
         };
 
-        $app->on('kernel.boot', function () use ($app) {
-            StreamWrapper::setFilesystem($app['file']);
-        });
+    },
+
+    'boot' => function ($app) {
 
         $app->on('kernel.request', function ($event, $request) use ($app) {
 
@@ -30,6 +30,8 @@ return [
             $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));
 
         }, 100);
+
+        StreamWrapper::setFilesystem($app['file']);
 
     },
 

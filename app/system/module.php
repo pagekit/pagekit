@@ -12,16 +12,6 @@ return [
 
     'main' => function ($app) {
 
-        if (!$app['debug']) {
-            $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
-        }
-
-        $app->subscribe(
-            new MaintenanceListener,
-            new MigrationListener,
-            new SystemListener
-        );
-
         $app->factory('finder', function () {
             return Finder::create();
         });
@@ -35,16 +25,26 @@ return [
 
         $app['system'] = $this;
 
-        $app->on('kernel.boot', function () use ($app) {
+    },
 
-            $app['module']->load($this->config['extensions']);
+    'boot' => function ($app) {
 
-            if ($app->inConsole()) {
-                $app['isAdmin'] = false;
-                $app->trigger('system.init');
-            }
+        if (!$app['debug']) {
+            $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
+        }
 
-        });
+        $app->subscribe(
+            new MaintenanceListener,
+            new MigrationListener,
+            new SystemListener
+        );
+
+        $app['module']->load($this->config['extensions']);
+
+        if ($app->inConsole()) {
+            $app['isAdmin'] = false;
+            $app->trigger('system.init');
+        }
 
         $app->on('kernel.request', function ($event, $request) use ($app) {
 
