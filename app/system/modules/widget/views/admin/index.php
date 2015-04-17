@@ -40,7 +40,7 @@
         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
     </div>
 
-    <div v-repeat="position: positions | assignable" v-ref="positions">
+    <div v-repeat="position: positions | assignable" v-show="sorted[position.id]">
 
         <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
             <div>
@@ -49,24 +49,25 @@
             </div>
         </div>
 
-        <ul v-el="nestable" class="uk-nestable">
+        <ul class="uk-nestable" v-component="widget-list" inline-template>
 
-            <li data-id="{{ widget.id }}" v-repeat="widget: widgets | position" class="uk-form uk-nestable-list-item" v-ref="widgets">
+            <li data-id="{{ widget.id }}" v-repeat="widget: sorted[position.id]" class="uk-form uk-nestable-list-item">
 
-                <div class="uk-nestable-item pk-table-fake">
+                <div class="uk-nestable-item pk-table-fake" v-component="widget-item" inline-template>
+
                     <div class="pk-table-width-minimum">
                         <div class="uk-nestable-handle">​</div>
                     </div>
                     <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                     <div class="pk-table-min-width-100">
-                        <a v-show="getType(widget.type)" v-on="click: edit(widget)">{{ widget.title }}</a>
-                        <span v-show="!getType(widget.type)">{{ widget.title }}</span>
+                        <a v-show="type" v-on="click: edit(widget)">{{ widget.title }}</a>
+                        <span v-show="!type">{{ widget.title }}</span>
                     </div>
                     <div class="pk-table-width-100 uk-text-center">
                         <a class="uk-icon-circle" v-class="
                             uk-text-success: widget.status,
                             uk-text-danger: !widget.status
-                        " v-on="click: toggleStatus(widget)" title="{{ widget.statusText }}"></a>
+                        " v-on="click: toggleStatus" title="{{ widget.statusText }}"></a>
                     </div>
                     <div class="pk-table-width-150">
                         <div class="uk-form-select" v-el="select">
@@ -74,7 +75,8 @@
                             <select v-model="widget.position" class="uk-width-1-1" options="positionOptions" v-on="input: save(widget)"></select>
                         </div>
                     </div>
-                    <div class="pk-table-width-150">{{ getTypeName(widget.type) }}</div>
+                    <div class="pk-table-width-150">{{ typeName }}</div>
+
                 </div>
 
             </li>

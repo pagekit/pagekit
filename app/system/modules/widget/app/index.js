@@ -7,6 +7,7 @@ Vue.component('widgets-index', {
             search: '',
             widgets: [],
             selected: [],
+            sorted: {},
             widget: null
         }, window.$widgets)
     },
@@ -17,18 +18,6 @@ Vue.component('widgets-index', {
     },
 
     ready: function() {
-
-        var self = this;
-        this.$.positions.forEach(function(pos) {
-
-            UIkit.nestable(pos.$$.nestable, { maxDepth: 1, group: 'widgets' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
-                if (type !== 'removed' && e.target.tagName == 'UL') {
-                    self.Widgets.save({ id: 'updateOrder' }, { position: pos.position.id, widgets: nestable.list() }, self.load);
-                }
-            });
-
-        });
-
         this.modal = UIkit.modal(this.$$.modal);
         this.modal.on('hide.uk.modal', this.cancel);
     },
@@ -72,16 +61,9 @@ Vue.component('widgets-index', {
             var self = this;
 
             this.Widgets.query((this.search ? { search: this.search } : {}), function (widgets) {
-                self.$set('widgets', widgets);
                 self.$set('selected', []);
-
-                Vue.nextTick(function() {
-                    self.$.positions.forEach(function(pos) {
-                        pos.$.widgets.forEach(function(widget) {
-                            UIkit.formSelect(widget.$$.select, { target: 'a' });
-                        });
-                    });
-                })
+                self.$set('widgets', widgets);
+                self.$set('sorted', _.groupBy(self.widgets, 'position'));
             });
         },
 
@@ -117,11 +99,6 @@ Vue.component('widgets-index', {
             }.bind(this));
         },
 
-        toggleStatus: function (widget) {
-            widget.status = !!widget.status ? 0 : 1;
-            this.save(widget);
-        },
-
         save: function (widget) {
             var self = this;
             _.defer(function() {
@@ -129,44 +106,68 @@ Vue.component('widgets-index', {
             });
         },
 
-        getType: function(type) {
-            return _.find(this.types, { id: type });
-        },
-
-        getTypeName: function(type) {
-            type = this.getType(type);
-            return type ? type.name : this.$trans('Extension not loaded');
-        },
-
         preventSubmit: function(e) {
             if (e.keyCode == '13') {
                 e.preventDefault()
             }
-        },
-
-        test: function() {
-            console.log('Test');
         }
 
     },
 
     filters: {
 
-        position: function(widgets) {
+        assignable: function() {
+            return this.positions.concat([{ id: '', name: this.$trans('Unassigned Widgets') }]);
+        }
 
-            var self = this;
+    },
 
-            if (this.position.id === '') {
-                return widgets.filter(function(widget) {
-                    return widget.position === '' || !_.some(self.positions, { id: widget.position });
+    components: {
+
+        'widget-list': {
+
+            inherit: true,
+
+            ready: function() {
+                var self = this;
+                UIkit.nestable(this.$el, { maxDepth: 1, group: 'widgets' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+                    if (type !== 'removed' && e.target.tagName == 'UL') {
+                        self.Widgets.save({ id: 'updateOrder' }, { position: self.position.id, widgets: nestable.list() }, self.load);
+                    }
                 });
             }
 
-            return _.filter(widgets, { position: this.position.id })
         },
 
-        assignable: function() {
-            return this.positions.concat([{ id: '', name: this.$trans('Unassigned Widgets') }]);
+        'widget-item': {
+
+            inherit: true,
+
+            ready: function() {
+                UIkit.formSelect(this.$$.select, { target: 'a' });
+            },
+
+            computed: {
+
+                type: function() {
+                    return _.find(this.types, { id: this.widget.type });
+                },
+
+                typeName: function() {
+                    return this.type ? this.type.name : this.$trans('Extension not loaded');
+                }
+
+            },
+
+            methods: {
+
+                toggleStatus: function () {
+                    this.widget.status = !!this.widget.status ? 0 : 1;
+                    this.save(this.widget);
+                }
+
+            }
+
         }
 
     }

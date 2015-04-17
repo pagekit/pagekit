@@ -28,6 +28,7 @@ jQuery(function ($) {
         methods: {
 
             select: function(node) {
+
                 if (!node) {
                     node = this.selected && _.find(this.nodes, { id: vm.selected.id }) || this.selectFirst();
                 }
@@ -206,6 +207,7 @@ jQuery(function ($) {
                         var self = this;
 
                         if (!this.selected) {
+                            this.node = {};
                             return;
                         }
 
