@@ -32,8 +32,6 @@ return [
                 $dbs[$name] = DriverManager::getConnection($params);
             }
 
-            Type::addType('json_object', 'Pagekit\Database\Types\JsonObjectType');
-
             return $dbs;
         };
 

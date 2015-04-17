@@ -29,7 +29,7 @@ class Role extends BaseRole implements \JsonSerializable
      */
     function jsonSerialize()
     {
-        $role = get_object_vars($this);
+        $role = $this->toJson();
 
         $role['isLocked'] = $this->isLocked();
         $role['isAnonymous'] = $this->isAnonymous();

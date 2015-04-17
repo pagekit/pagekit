@@ -37,7 +37,7 @@ class Widget extends BaseWidget
     /** @Column(name="nodes", type="simple_array") */
     protected $nodes = [];
 
-    /** @Column(type="json_object", name="data") */
+    /** @Column(type="json_array", name="data") */
     protected $settings = [];
 
     public function getShowTitle()

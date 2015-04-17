@@ -116,16 +116,4 @@ class Comment extends BaseComment implements \JsonSerializable
             self::STATUS_SPAM     => __('Spam')
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    function jsonSerialize()
-    {
-        $comment = get_object_vars($this);
-
-        $comment['created'] = $comment['created'] ? $comment['created']->format(\DateTime::ISO8601) : null;
-
-        return $comment;
-    }
 }

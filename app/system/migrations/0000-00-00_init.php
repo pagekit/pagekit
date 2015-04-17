@@ -19,7 +19,7 @@ return [
                 $table->addColumn('type', 'string', ['length' => 255]);
                 $table->addColumn('menu', 'string', ['length' => 255]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
-                $table->addColumn('data', 'json_object', ['notnull' => false]);
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });
         }
@@ -99,7 +99,7 @@ return [
                 $table->addColumn('status', 'boolean');
                 $table->addColumn('pages', 'text');
                 $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
-                $table->addColumn('data', 'json_object', ['notnull' => false]);
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
                 $table->addIndex(['status', 'priority'], 'SYSTEM_WIDGET_STATUS_PRIORITY');
             });

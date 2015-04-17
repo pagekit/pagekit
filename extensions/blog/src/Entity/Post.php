@@ -222,11 +222,7 @@ class Post implements \JsonSerializable
      */
     function jsonSerialize()
     {
-        $post = get_object_vars($this);
-
-        foreach (['date', 'modified'] as $date) {
-            $post[$date] = $post[$date] ? $post[$date]->format(\DateTime::ISO8601) : null;
-        }
+        $post = $this->toJson();
 
         if ($post['user']) {
             $post['author'] = $post['user']->getUsername();

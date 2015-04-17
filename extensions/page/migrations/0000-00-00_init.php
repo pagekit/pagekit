@@ -11,7 +11,7 @@ return [
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('title', 'string', ['length' => 255]);
                 $table->addColumn('content', 'text');
-                $table->addColumn('data', 'json_object', ['notnull' => false]);
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });
         }

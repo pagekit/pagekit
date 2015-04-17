@@ -160,13 +160,10 @@ class User extends BaseUser implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        $user = array_diff_key(get_object_vars($this), array_flip(['password', 'activation']));
+        $user = $this->toJson();
 
-        foreach (['access', 'login', 'registered'] as $date) {
-
-            $user[$date] = $user[$date] ? $user[$date]->format(\DateTime::ISO8601) : null;
-
-        }
+        unset($user['password']);
+        unset($user['activation']);
 
         $user['isNew'] = $this->isNew();
         $user['statusText'] = $this->isNew() ? __('New') : $this->getStatusText();
