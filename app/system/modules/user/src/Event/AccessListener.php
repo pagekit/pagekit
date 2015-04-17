@@ -8,7 +8,6 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Kernel\Event\GetResponseEvent;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
@@ -91,9 +90,9 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onLateSystemLoaded(GetResponseEvent $event)
+    public function onLateSystemLoaded($event, $request)
     {
-        if ($access = $event->getRequest()->attributes->get('_access')) {
+        if ($access = $request->attributes->get('_access')) {
             foreach ($access as $expression) {
                 if (!App::user()->hasAccess($expression)) {
                     $event->setResponse(App::response(__('Insufficient User Rights.'), 403));
@@ -108,10 +107,8 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onSystemLoaded(GetResponseEvent $event)
+    public function onSystemLoaded($event, $request)
     {
-        $request = $event->getRequest();
-
         if (!App::auth()->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
 
             $params = [];

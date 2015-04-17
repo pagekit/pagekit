@@ -3,6 +3,9 @@
 use Pagekit\Kernel\EventDispatcher;
 use Pagekit\Kernel\HttpKernel;
 use Pagekit\Kernel\Controller\ControllerResolver;
+use Pagekit\Kernel\Controller\ControllerListener;
+use Pagekit\Kernel\Event\ResponseListener;
+use Pagekit\Kernel\Event\StringResponseListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -13,11 +16,18 @@ return [
     'main' => function ($app) {
 
         $app['kernel'] = function ($app) {
-            return new HttpKernel($app['events'], $app['resolver'], $app['request.stack']);
+
+            $app->subscribe(
+                new ControllerListener($app['resolver']),
+                new ResponseListener(),
+                new StringResponseListener()
+            );
+
+            return new HttpKernel($app['events'], $app['request.stack']);
         };
 
         $app['resolver'] = function ($app) {
-            return new ControllerResolver($app['events']);
+            return new ControllerResolver();
         };
 
         $app['request'] = function ($app) {

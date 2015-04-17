@@ -10,9 +10,17 @@ use Pagekit\Event\EventSubscriberInterface;
  */
 class ResponseListener implements EventSubscriberInterface
 {
-    private $charset;
+    /**
+     * @var string
+     */
+    protected $charset;
 
-    public function __construct($charset)
+    /**
+     * Constructor.
+     *
+     * @param string $charset
+     */
+    public function __construct($charset = 'UTF-8')
     {
         $this->charset = $charset;
     }
@@ -20,27 +28,25 @@ class ResponseListener implements EventSubscriberInterface
     /**
      * Filters the Response.
      *
-     * @param FilterResponseEvent $event A FilterResponseEvent instance
+     * @param $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onResponse($event, $request)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMasterRequest() || !$response = $event->getResponse()) {
             return;
         }
 
-        $response = $event->getResponse();
-
-        if (null === $response->getCharset()) {
+        if ($response->getCharset() === null) {
             $response->setCharset($this->charset);
         }
 
-        $response->prepare($event->getRequest());
+        $response->prepare($request);
     }
 
     public function subscribe()
     {
-        return array(
-            'kernel.response' => 'onKernelResponse',
-        );
+        return [
+            'kernel.response' => ['onResponse', -10]
+        ];
     }
 }

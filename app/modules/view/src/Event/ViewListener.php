@@ -29,11 +29,15 @@ class ViewListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onKernelView($event)
+    public function onResponse($event, $request)
     {
-        $template = $event->getRequest()->attributes->get('_response[value]', null, true);
-        $layout   = $event->getRequest()->attributes->get('_response[layout]', true, true);
-        $result   = $event->getControllerResult();
+        $template = $request->attributes->get('_response[value]', null, true);
+        $layout   = $request->attributes->get('_response[layout]', true, true);
+        $result   = $event->getResponse();
+
+        if ($result instanceof Response) {
+            return;
+        }
 
         if ($template !== null && ($result === null || is_array($result))) {
             $response = $result = $this->view->render($template, $result ?: []);
@@ -44,7 +48,9 @@ class ViewListener implements EventSubscriberInterface
         }
 
         if ($layout) {
+
             $this->view->section('content', (string) $result);
+
             if (null !== $result = $this->view->render('layout') ) {
                 $response = $result;
             }
@@ -61,7 +67,7 @@ class ViewListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.view' => ['onKernelView', -5]
+            'kernel.response' => ['onResponse', 20]
         ];
     }
 }

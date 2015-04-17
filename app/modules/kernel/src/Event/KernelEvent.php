@@ -3,77 +3,67 @@
 namespace Pagekit\Kernel\Event;
 
 use Pagekit\Event\Event;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Pagekit\Kernel\HttpKernel;
 
-/**
- * @author Bernhard Schussek <bschussek@gmail.com>
- * @copyright Copyright (c) 2004-2015 Fabien Potencier
- */
 class KernelEvent extends Event
 {
     /**
-     * The kernel in which this event was thrown.
-     *
-     * @var HttpKernelInterface
+     * @var mixed
      */
-    private $kernel;
+    protected $response;
 
     /**
-     * The request the kernel is currently processing.
-     *
-     * @var Request
-     */
-    private $request;
-
-    /**
-     * The request type the kernel is currently processing.  One of
-     * HttpKernelInterface::MASTER_REQUEST and HttpKernelInterface::SUB_REQUEST.
-     *
      * @var int
      */
-    private $requestType;
+    protected $requestType;
 
-    public function __construct($name, HttpKernelInterface $kernel, Request $request, $requestType)
+    /**
+     * Constructor.
+     *
+     * @param string $name
+     * @param int    $requestType
+     */
+    public function __construct($name, $requestType)
     {
         parent::__construct($name);
 
-        $this->kernel = $kernel;
-        $this->request = $request;
         $this->requestType = $requestType;
     }
 
     /**
-     * Returns the kernel in which this event was thrown.
+     * Checks if a response was set.
      *
-     * @return HttpKernelInterface
-     *
-     * @api
+     * @return bool
      */
-    public function getKernel()
+    public function hasResponse()
     {
-        return $this->kernel;
+        return $this->response !== null;
     }
 
     /**
-     * Returns the request the kernel is currently processing.
+     * Gets the response.
      *
-     * @return Request
-     *
-     * @api
+     * @return mixed
      */
-    public function getRequest()
+    public function getResponse()
     {
-        return $this->request;
+        return $this->response;
     }
 
     /**
-     * Returns the request type the kernel is currently processing.
+     * Sets the response.
      *
-     * @return int One of HttpKernelInterface::MASTER_REQUEST and
-     *             HttpKernelInterface::SUB_REQUEST
+     * @param mixed $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * Gets the request type.
      *
-     * @api
+     * @return int
      */
     public function getRequestType()
     {
@@ -83,12 +73,10 @@ class KernelEvent extends Event
     /**
      * Checks if this is a master request.
      *
-     * @return bool True if the request is a master request
-     *
-     * @api
+     * @return bool
      */
     public function isMasterRequest()
     {
-        return HttpKernelInterface::MASTER_REQUEST === $this->requestType;
+        return HttpKernel::MASTER_REQUEST === $this->requestType;
     }
 }

@@ -93,12 +93,12 @@ class CallbackCollection implements EventSubscriberInterface
      *
      * @param GetControllerEvent $event
      */
-    public function getController(GetControllerEvent $event)
+    public function getController($event, $request)
     {
-        $name = $event->getRequest()->attributes->get('_route', '');
+        $name = $request->attributes->get('_route', '');
 
         if ($route = $this->routes->get($name) and $callback = $route->getOption('__callback')) {
-            $event->setController($callback);
+            $request->attributes->set('_controller', $callback);
         };
     }
 
@@ -109,8 +109,8 @@ class CallbackCollection implements EventSubscriberInterface
     {
         return [
             'route.collection' => ['getRoutes', -8],
-            'route.resources' => 'getResources',
-            'controller.resolve' => 'getController'
+            'route.resources'  => 'getResources',
+            'kernel.request'   => ['getController', 30]
         ];
     }
 }

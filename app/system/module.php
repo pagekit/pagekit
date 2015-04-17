@@ -58,13 +58,13 @@ return [
 
         }, 50);
 
-        $app->on('kernel.request', function ($event) use ($app) {
+        $app->on('kernel.request', function ($event, $request) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;
             }
 
-            $app->trigger('system.loaded');
+            $app->trigger('system.loaded', [$request]);
 
         });
 

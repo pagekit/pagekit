@@ -1,13 +1,14 @@
 <?php
 
-namespace Pagekit\Routing\Request\Event;
+namespace Pagekit\Routing\Request;
 
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Routing\Request\ParamFetcher;
-use Pagekit\Routing\Request\ParamFetcherInterface;
 
 class ParamFetcherListener implements EventSubscriberInterface
 {
+    /**
+     * @var ParamFetcherInterface
+     */
     protected $paramFetcher;
 
     /**
@@ -25,9 +26,8 @@ class ParamFetcherListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onKernelController($event)
+    public function onResponse($event, $request)
     {
-        $request    = $event->getRequest();
         $controller = $event->getController();
         $parameters = $request->attributes->get('_request[value]', [], true);
         $options    = $request->attributes->get('_request[options]', [], true);
@@ -53,7 +53,7 @@ class ParamFetcherListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.controller' => 'onKernelController'
+            'kernel.response' => ['onResponse', 110]
         ];
     }
 }

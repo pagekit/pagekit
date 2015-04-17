@@ -2,7 +2,6 @@
 
 use Pagekit\Filter\FilterManager;
 use Pagekit\Kernel\Event\ResponseListener;
-use Pagekit\Kernel\Event\RouterListener;
 use Pagekit\Routing\Controller\AliasCollection;
 use Pagekit\Routing\Controller\CallbackCollection;
 use Pagekit\Routing\Controller\ControllerCollection;
@@ -10,10 +9,11 @@ use Pagekit\Routing\Controller\ControllerReader;
 use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\JsonListener;
+use Pagekit\Routing\Event\RouterListener;
 use Pagekit\Routing\Event\StringResponseListener;
 use Pagekit\Routing\Middleware;
-use Pagekit\Routing\Request\Event\ParamFetcherListener;
 use Pagekit\Routing\Request\ParamFetcher;
+use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -51,16 +51,14 @@ return [
         $app->subscribe(
             new ConfigureRouteListener,
             new ParamFetcherListener(new ParamFetcher(new FilterManager)),
-            new RouterListener($app['router'], null, null, $app['request.stack']),
-            new ResponseListener('UTF-8'),
+            new RouterListener($app['router']),
             new JsonListener,
-            new StringResponseListener,
             $app['aliases'],
             $app['callbacks'],
             $app['controllers']
         );
 
-        $app['middleware'];
+        // $app['middleware'];
 
         $app->on('kernel.request', function () use ($app) {
 
@@ -83,18 +81,18 @@ return [
 
             }
 
-        }, 35);
+        }, 110);
 
-        $app->error(function (HttpExceptionInterface $e) use ($app) {
+        // $app->error(function (HttpExceptionInterface $e) use ($app) {
 
-            $request = $app['router']->getRequest();
-            $types   = $request->getAcceptableContentTypes();
+        //     $request = $app['router']->getRequest();
+        //     $types   = $request->getAcceptableContentTypes();
 
-            if ('json' == $request->getFormat(array_shift($types))) {
-                return new JsonResponse($e->getMessage(), $e->getStatusCode());
-            }
+        //     if ('json' == $request->getFormat(array_shift($types))) {
+        //         return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        //     }
 
-        }, -10);
+        // }, -10);
 
     },
 

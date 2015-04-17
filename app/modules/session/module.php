@@ -132,7 +132,7 @@ return [
 
         }, 100);
 
-        $app->subscribe(new CsrfListener($app['csrf']));
+        // $app->subscribe(new CsrfListener($app['csrf']));
 
     },
 

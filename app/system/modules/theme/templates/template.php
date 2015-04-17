@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <?php if ($subnav->getChildren()) : ?>
+                <?php if ($subnav && $subnav->getChildren()) : ?>
                 <nav class="uk-navbar tm-navbar uk-hidden-small">
                     <ul class="uk-navbar-nav">
                         <?php foreach ($subnav->getChildren() as $item): ?>

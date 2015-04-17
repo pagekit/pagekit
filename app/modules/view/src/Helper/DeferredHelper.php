@@ -10,7 +10,12 @@ class DeferredHelper implements HelperInterface
     /**
      * @var array
      */
-    protected $defer = [];
+    protected $deferred = [];
+
+    /**
+     * @var array
+     */
+    protected $placeholder = [];
 
     /**
      * Constructor.
@@ -24,26 +29,33 @@ class DeferredHelper implements HelperInterface
 
             $name = $view->getName();
 
-            if (isset($this->defer[$name])) {
+            if (isset($this->placeholder[$name])) {
 
-                $dispatcher  = $event->getDispatcher();
-                $placeholder = sprintf('<!-- %s -->', uniqid());
+                $this->deferred[$name] = $view;
+                $view->setResult($this->placeholder[$name]);
 
-                $app->on('kernel.response', function ($event) use ($view, $name, $placeholder, $dispatcher) {
-
-                    // TODO fix prefix
-                    $dispatcher->trigger("view.$name", [$view]);
-
-                    $response = $event->getResponse();
-                    $response->setContent(str_replace($placeholder, $view->getResult(), $response->getContent()));
-
-                }, 10);
-
-                $view->setResult($placeholder);
                 $event->stopPropagation();
             }
 
         }, 15);
+
+        $app->on('kernel.response', function ($event) {
+
+            $dispatcher = $event->getDispatcher();
+            $response   = $event->getResponse();
+
+            if (!$response) {
+                return;
+            }
+
+            foreach ($this->deferred as $name => $view) {
+
+                // TODO fix prefix
+                $dispatcher->trigger("view.$name", [$view]);
+                $response->setContent(str_replace($this->placeholder[$name], $view->getResult(), $response->getContent()));
+            }
+
+        }, 10);
     }
 
     /**
@@ -53,7 +65,7 @@ class DeferredHelper implements HelperInterface
      */
     public function __invoke($name)
     {
-        $this->defer[$name] = true;
+        $this->placeholder[$name] = sprintf('<!-- %s -->', uniqid());
     }
 
     /**

@@ -75,13 +75,17 @@ return [
             return new AssetManager($app['assets']);
         };
 
-        $app->on('kernel.controller', function () use ($app) {
-            $app['events']->subscribe(new ViewListener($app['view']));
+    },
+
+    'boot' => function ($app) {
+
+        $app->on('kernel.request', function () use ($app) {
+            $app->subscribe(new ViewListener($app['view']));
         });
 
-        $app->on('kernel.view', function ($event) use ($app) {
-            if (is_array($result = $event->getControllerResult())) {
-                foreach ($result as $key => $value) {
+        $app->on('kernel.response', function ($event) use ($app) {
+            if (is_array($response = $event->getResponse())) {
+                foreach ($response as $key => $value) {
                     if ($key === '$meta') {
                         $app['view']->meta($value);
                     } elseif ($key[0] === '$') {
@@ -89,7 +93,7 @@ return [
                     }
                 }
             }
-        });
+        }, 90);
 
     },
 

@@ -5,8 +5,8 @@ namespace Pagekit\Profiler\Event;
 use Pagekit\Event\Event;
 use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Event\EventSubscriberInterface;
+use Pagekit\Kernel\HttpKernel;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler as BaseProfiler;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -451,7 +451,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface
             case 'kernel.response':
                 $token = $event->getResponse()->headers->get('X-Debug-Token');
                 $this->stopwatch->stopSection($token);
-                if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
+                if (HttpKernel::MASTER_REQUEST === $event->getRequestType()) {
                     // The profiles can only be updated once they have been created
                     // that is after the 'kernel.response' event of the main request
                     $this->updateProfiles($token, true);

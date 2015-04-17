@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -283,6 +282,8 @@ class Router implements RouterInterface, UrlGeneratorInterface
      */
     public function match($pathinfo)
     {
+        $this->context->fromRequest($this->getRequest());
+
         $params = $this->getMatcher()->match($pathinfo);
 
         if ($resolver = $this->getResolver($params)) {

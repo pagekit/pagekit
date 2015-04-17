@@ -10,20 +10,18 @@ class MaintenanceListener implements EventSubscriberInterface
     /**
      * Puts the page in maintenance mode.
      */
-    public function onKernelRequest($event)
+    public function onKernelRequest($event, $request)
     {
         if (!$event->isMasterRequest()) {
             return;
         }
 
-        $attributes = $event->getRequest()->attributes;
-
-        if (App::system()->config('maintenance.enabled') && !(App::isAdmin() || $attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
+        if (App::system()->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
 
             $message  = App::system()->config('maintenance.msg') ? : __("We'll be back soon.");
             $response = App::view('system/theme:templates/maintenance.php', compact('message'));
 
-            $attributes->set('_disable_profiler_toolbar', true);
+            $request->attributes->set('_disable_profiler_toolbar', true);
 
             $event->setResponse(App::response($response));
         }

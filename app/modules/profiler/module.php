@@ -6,7 +6,7 @@ use Pagekit\Profiler\DataCollector\SystemDataCollector;
 use Pagekit\Profiler\DataCollector\UserDataCollector;
 use Pagekit\Profiler\Profiler;
 use Pagekit\Profiler\TraceableView;
-use Pagekit\Profiler\Event\ProfilerListener;
+use Pagekit\Kernel\Event\ProfilerListener;
 use Pagekit\Profiler\Event\ToolbarListener;
 use Pagekit\Profiler\Event\TraceableEventDispatcher;
 use Pagekit\Routing\DataCollector\RoutesDataCollector;
@@ -58,20 +58,20 @@ return [
             return;
         }
 
-        if (isset($app['view'])) {
-            $app->extend('view', function ($view, $app) {
-                return new TraceableView($view, $app['profiler.stopwatch']);
-            });
-        }
+        // if (isset($app['view'])) {
+        //     $app->extend('view', function ($view, $app) {
+        //         return new TraceableView($view, $app['profiler.stopwatch']);
+        //     });
+        // }
 
         $toolbar = $this->path.'/views/toolbar/';
         $panel   = $this->path.'/views/panel/';
 
-        $app['profiler']->add($request = new RequestDataCollector, "$toolbar/request.php", "$panel/request.php", 40);
+        // $app['profiler']->add($request = new RequestDataCollector, "$toolbar/request.php", "$panel/request.php", 40);
         $app['profiler']->add(new RoutesDataCollector($app['router'], $app['path.cache']), "$toolbar/routes.php", "$panel/routes.php", 35);
-        $app['profiler']->add(new TimeDataCollector, "$toolbar/time.php", "$panel/time.php", 20);
-        $app['profiler']->add(new MemoryDataCollector, "$toolbar/memory.php");
-        $app['profiler']->add(new EventDataCollector, "$toolbar/events.php", "$panel/events.php", 30);
+        // $app['profiler']->add(new TimeDataCollector, "$toolbar/time.php", "$panel/time.php", 20);
+        // $app['profiler']->add(new MemoryDataCollector, "$toolbar/memory.php");
+        // $app['profiler']->add(new EventDataCollector, "$toolbar/events.php", "$panel/events.php", 30);
 
         if (isset($app['db']) && isset($app['db.debug_stack'])) {
             $app['profiler']->add(new DatabaseDataCollector($app['db'], $app['db.debug_stack']), "$toolbar/db.php", "$panel/db.php", -10);
@@ -84,7 +84,7 @@ return [
         });
 
         $app->subscribe(new ProfilerListener($app['profiler']));
-        $app->subscribe($request);
+        // $app->subscribe($request);
         $app->subscribe(new ToolbarListener);
 
     },
