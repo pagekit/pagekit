@@ -2,7 +2,7 @@
 
 namespace Pagekit\Content\Event;
 
-use Pagekit\Application\Event;
+use Pagekit\Event\Event;
 
 class ContentEvent extends Event
 {
@@ -19,12 +19,13 @@ class ContentEvent extends Event
     /**
      * Constructor.
      *
+     * @param string $name
      * @param string $content
      * @param array  $parameters
      */
-    public function __construct($content, array $parameters = [])
+    public function __construct($name, $content, array $parameters = [])
     {
-        parent::__construct($parameters);
+        parent::__construct($name, $parameters);
 
         $this->content = $content;
     }
