@@ -10,6 +10,8 @@ interface TypeInterface extends \JsonSerializable
 
     public function getOptions();
 
+    public function getDefaults(NodeInterface $node);
+
     public function getLink(NodeInterface $node);
 
     public function bind(NodeInterface $node);

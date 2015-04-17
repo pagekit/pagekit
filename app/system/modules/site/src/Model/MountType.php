@@ -21,6 +21,6 @@ class MountType extends Type
 
     public function bind(NodeInterface $node)
     {
-        App::controllers()->mount($node->getPath(), $this->getControllers(), "@{$this->getId()}", $node->get('defaults', []));
+        App::controllers()->mount($node->getPath(), $this->getControllers(), "@{$this->getId()}", $this->getDefaults($node));
     }
 }

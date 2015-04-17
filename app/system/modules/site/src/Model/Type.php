@@ -34,6 +34,11 @@ abstract class Type implements TypeInterface
         return $this->url;
     }
 
+    public function getDefaults(NodeInterface $node)
+    {
+        return array_merge($node->get('defaults', []), ['_node' => $node->getId()]);
+    }
+
     public function getLink(NodeInterface $node)
     {
         return $this->parseQuery($node->get('url', $this->getUrl()), $node->get('variables', []));

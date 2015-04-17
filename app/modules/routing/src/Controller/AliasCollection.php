@@ -58,8 +58,9 @@ class AliasCollection implements EventSubscriberInterface
         $routes = $event->getRoutes();
         foreach ($this->aliases as $source => $alias) {
 
-            $name   = $source;
-            $params = $alias[1];
+            $name     = $source;
+            $defaults = $alias[1];
+            $params   = [];
 
             if ($query = substr(strstr($name, '?'), 1)) {
                 parse_str($query, $params);
@@ -67,7 +68,7 @@ class AliasCollection implements EventSubscriberInterface
             }
 
             if ($route = $routes->get($name)) {
-                $routes->add($source, new Route($alias[0], array_merge($route->getDefaults(), $params, ['_variables' => $route->compile()->getPathVariables()])));
+                $routes->add($source, new Route($alias[0], array_merge($route->getDefaults(), $params, $defaults, ['_variables' => $route->compile()->getPathVariables()])));
             }
         }
     }

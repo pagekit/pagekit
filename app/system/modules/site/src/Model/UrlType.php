@@ -8,6 +8,6 @@ class UrlType extends Type
 {
     public function bind(NodeInterface $node)
     {
-        App::aliases()->add($node->getPath(), $this->getLink($node), $node->get('defaults', []));
+        App::aliases()->add($node->getPath(), $this->getLink($node), $this->getDefaults($node));
     }
 }
