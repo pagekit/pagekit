@@ -41,10 +41,17 @@ class SiteModule extends Module
             $app['scripts']->register('site-tree', 'site:app/tree.js', ['vue-system']);
         });
 
+        $app['node'] = function($app) {
+            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
+                return $node;
+            }
+
+            return new Node;
+        };
+
         if (!$app['config']->get('system/site')) {
             $app['config']->set('system/site', [], true);
         }
-
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module
@@ -38,6 +39,22 @@ class WidgetModule extends Module
 
             ]);
 
+        });
+
+        $app->on('kernel.request', function($event) use ($app) {
+
+            $active = (array) $app['request']->attributes->get('_node');
+            $user   = $app['user'];
+            $view   = $app['view'];
+
+            foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
+
+                if (!$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
+                    continue;
+                }
+
+                $view->on($widget->getPosition(), $widget);
+            }
         });
     }
 
