@@ -98,8 +98,8 @@ return [
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('status', 'boolean');
                 $table->addColumn('pages', 'text');
-                $table->addColumn('menu_items', 'simple_array', ['notnull' => false]);
-                $table->addColumn('data', 'json_array', ['notnull' => false]);
+                $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
+                $table->addColumn('data', 'json_object', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
                 $table->addIndex(['status', 'priority'], 'SYSTEM_WIDGET_STATUS_PRIORITY');
             });
