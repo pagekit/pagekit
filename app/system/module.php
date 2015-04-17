@@ -68,7 +68,7 @@ return [
 
         });
 
-        $app->on('system.loaded', function () use ($app) {
+        $app->on('kernel.request', function () use ($app) {
             foreach ($app['module'] as $module) {
 
                 if (!isset($module->resources)) {
@@ -79,7 +79,7 @@ return [
                     $app['locator']->add($prefix, "$module->path/$path");
                 }
             }
-        });
+        }, 2);
 
     },
 

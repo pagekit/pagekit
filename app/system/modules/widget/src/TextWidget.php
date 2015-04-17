@@ -3,35 +3,11 @@
 namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class TextWidget implements TypeInterface
+class TextWidget extends Type
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return 'widget.text';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Text');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescription(WidgetInterface $widget = null)
-    {
-        return __('Text Widget');
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -45,6 +21,6 @@ class TextWidget implements TypeInterface
      */
     public function renderForm(WidgetInterface $widget)
     {
-        return App::view('system/widget:views/widgets/text/edit.razr', compact('widget'));
+        return App::view('widget:views/widgets/text/edit.razr', compact('widget'));
     }
 }

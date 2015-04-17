@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Model;
 
-interface TypeInterface
+interface TypeInterface extends \JsonSerializable
 {
     /**
      * Get widget id.

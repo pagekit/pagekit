@@ -5,7 +5,6 @@ namespace Pagekit\Widget\Event;
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Widget\Entity\Widget;
-use Pagekit\Widget\Model\TypesTrait;
 
 class WidgetListener implements EventSubscriberInterface
 {
@@ -14,8 +13,6 @@ class WidgetListener implements EventSubscriberInterface
      */
     public function onSystemSite()
     {
-        return;
-
         $request   = App::request();
         $active    = (array) $request->attributes->get('_menu');
         $user      = App::user();
@@ -44,20 +41,11 @@ class WidgetListener implements EventSubscriberInterface
     }
 
     /**
-     * Registers widget types.
-     */
-    public function onSystemLoaded()
-    {
-        TypesTrait::setWidgetTypes(App::trigger(new RegisterWidgetEvent('system.widget'))->getTypes());
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function subscribe()
     {
         return [
-            'system.loaded' => ['onSystemLoaded', 5],
             'system.site'   => ['onSystemSite', -16]
         ];
     }

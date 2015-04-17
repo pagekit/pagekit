@@ -2,7 +2,7 @@
 
 namespace Pagekit\Widget\Model;
 
-interface WidgetInterface
+interface WidgetInterface extends \JsonSerializable
 {
     /**
      * @var int
@@ -74,7 +74,7 @@ interface WidgetInterface
     public function set($name, $value);
 
     /**
-     * Remove a widget setting.
+     * Removes a widget setting.
      *
      * @param string $name
      */

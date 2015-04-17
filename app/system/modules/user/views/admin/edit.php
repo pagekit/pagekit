@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div v-show="" class="uk-form-row">
+            <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p v-repeat="role: roles" class="uk-form-controls-condensed">

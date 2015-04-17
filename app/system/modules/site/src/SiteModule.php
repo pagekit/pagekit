@@ -5,7 +5,6 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Model\AliasType;
 use Pagekit\Site\Model\TypeInterface;
 use Pagekit\Site\Model\UrlType;
 
@@ -20,13 +19,13 @@ class SiteModule extends Module
      */
     public function main(App $app)
     {
-        $app->on('system.init', function() {
+        $app->on('system.init', function() use ($app) {
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
                 if ($type = $this->getType($node->getType())) {
                     $type->bind($node);
                 }
             }
-        }, 0);
+        });
 
         $app->on('system.init', function() use ($app) {
             if ($frontpage = $this->config('frontpage')) {
@@ -37,6 +36,10 @@ class SiteModule extends Module
                 });
             }
         }, -15);
+
+        $app->on('system.loaded', function() use ($app) {
+            $app['scripts']->register('site-tree', 'site:app/tree.js', ['vue-system']);
+        });
 
         if (!$app['config']->get('system/site')) {
             $app['config']->set('system/site', [], true);

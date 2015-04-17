@@ -2,31 +2,27 @@
 
 jQuery(function ($) {
 
+    Vue.validators['unique'] = function(value) {
+        var menu = _.find(this.menus, { id: value });
+        return !menu || this.menu.oldId == menu.id;
+    };
+
+    Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
+        UIkit.notify(msg, 'danger');
+    }});
+
     var vm = new Vue({
 
         el: '#js-site',
 
-        data: _.merge({
-            selected: null,
-            nodes: null,
-            menus: null
-        }, $data),
+        mixins: [Vue.mixins['site-tree']],
 
-        created: function () {
+        data: _.merge({ selected: null }, $data),
 
-            Vue.validators['unique'] = function(value) {
-                var menu = _.find(this.menus, { id: value });
-                return !menu || this.menu.oldId == menu.id;
-            };
+        events: {
 
-            this.Nodes = this.$resource('api/site/node/:id');
-            this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
+            loaded: 'select'
 
-            Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
-                UIkit.notify(msg, 'danger');
-            }});
-
-            this.load();
         },
 
         methods: {
@@ -41,29 +37,11 @@ jQuery(function ($) {
 
             selectFirst: function() {
                 var first = null;
-                if (this.menus) {
-                    this.menus.some(function (menu) {
-                        return first = vm.filterNodes(menu.id, 0)[0];
-                    });
-                }
-                return first;
-            },
-
-            load: function() {
-
-                this.Nodes.query(function (nodes) {
-                    vm.$set('nodes', nodes);
-                    vm.select();
+                this.menus.some(function (menu) {
+                    return first = vm.tree[menu.id][0];
                 });
 
-                this.Menus.query(function (menus) {
-                    vm.$set('menus', menus);
-                    vm.select();
-                });
-            },
-
-            filterNodes: function (menu, parent) {
-                return _(this.nodes).filter({ menu: menu, parentId: parent || 0 }).sortBy('priority').value();
+                return first ? first.node : undefined;
             }
 
         },
@@ -115,55 +93,40 @@ jQuery(function ($) {
                         this.modal.hide();
                     }
 
-                },
+                }
 
-                components: {
+            },
 
-                    'type-dropdown': {
+            'type-dropdown': {
 
-                        inherit: true,
+                inherit: true,
 
-                        filters: {
+                filters: {
 
-                            unmounted: function(types) {
+                    unmounted: function(types) {
 
-                                return types.filter(function(type) {
-                                    return !type.controllers || !_.some(vm.nodes, { type: type.id });
-                                })
-
-                            }
-
-                        }
+                        return types.filter(function(type) {
+                            return !type.controllers || !_.some(vm.nodes, { type: type.id });
+                        })
 
                     }
 
                 }
+
             },
 
             'node-list': {
 
                 inherit: true,
-                template: '<node-item v-repeat="node: children"></node-item>',
+                template: '<node-item v-repeat="item: tree[menu.id]"></node-item>',
 
                 ready: function () {
-
                     var self = this;
-
-                    if (this.node) return;
-
-                    UIkit.nestable(this.$el).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+                    UIkit.nestable(this.$el, { maxDepth: 20, group: 'site.nodes' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
                         if (type !== 'removed') {
                             vm.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, vm.load);
                         }
                     });
-                },
-
-                computed: {
-
-                    children: function() {
-                        return this.filterNodes(this.menu.id, this.node ? this.node.id : 0);
-                    }
-
                 }
             },
 
@@ -175,12 +138,16 @@ jQuery(function ($) {
 
                 computed: {
 
+                    node: function() {
+                        return this.item.node;
+                    },
+
                     isActive: function() {
                         return this.node === this.selected;
                     },
 
                     isParent: function() {
-                        return this.filterNodes(this.menu.id, this.node.id).length;
+                        return this.item.children.length;
                     },
 
                     isFrontpage: function() {
@@ -242,7 +209,7 @@ jQuery(function ($) {
                             return;
                         }
 
-                        this.$http.get(this.$url('admin/site/edit', { id: this.selected.id || 0, type: this.selected.type }), function(data) {
+                        this.$http.get(this.$url('admin/site/edit', (this.selected.id ? { id: this.selected.id } : { type: this.selected.type })), function(data) {
 
                             if (self.edit) {
                                 self.edit.$destroy();
@@ -277,7 +244,7 @@ jQuery(function ($) {
                         this.$broadcast('save', data);
 
                         this.Nodes.save({ id: this.node.id }, data, function(node) {
-                            
+
                             vm.selected.id = parseInt(node.id);
                             vm.load();
 

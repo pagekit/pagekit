@@ -8,8 +8,10 @@ return [
 
         $app->on('system.admin', function () use ($app) {
 
+            $app['view']->map('layout', $this->path.'/templates/template.php');
+            $app['view']->map('component', $this->path.'/templates/template.php');
+
             $app['view']->on('layout', function ($event, $view) use ($app) {
-                $view->setName($this->path.'/templates/template.php');
                 $view->setParameter('user', $app['user']);
                 $view->setParameter('nav', $app['admin.menu']);
                 $view->setParameter('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));

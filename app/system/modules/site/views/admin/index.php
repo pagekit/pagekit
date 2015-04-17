@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <ul class="uk-nestable" v-el="nestable" v-component="node-list"></ul>
+                <node-list class="uk-nestable"></node-list>
 
             </div>
 
@@ -76,7 +76,9 @@
             <a class="uk-hidden uk-float-right" v-on="click: delete" title="{{ 'Delete' | trans }}"><i class="uk-icon-minus-circle"></i></a>
         </div>
 
-        <ul v-if="isParent" class="uk-nestable-list" v-component="node-list"></ul>
+        <ul v-if="isParent" class="uk-nestable-list">
+            <node-item v-repeat="item: item.children"></node-item>
+        </ul>
 
     </li>
 

@@ -11,9 +11,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteListener implements EventSubscriberInterface
 {
-    public function onSite($event)
+    public function onSite()
     {
-        App::trigger('editor.load', new EditorLoadEvent);
+        App::trigger(new EditorLoadEvent('editor.load'));
     }
 
     public function onSiteTypes($event, $site)
@@ -79,7 +79,7 @@ class SiteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'view.site:views/admin/index.php' => 'onSite',
+            'before@site'          => 'onSite',
             'site.types'           => 'onSiteTypes',
             'site.sections'        => 'onSiteSections',
             'site.node.preSave'    => 'onSave',

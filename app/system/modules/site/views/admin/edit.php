@@ -4,9 +4,9 @@
     <?php endforeach ?>
 </ul>
 
-<ul class="uk-switcher uk-margin" v-el="content">
+<div class="uk-switcher uk-margin" v-el="content">
     <?php foreach ($sections as $subsections) : ?>
-    <li>
+    <div>
         <?php
             foreach ($subsections as $section) {
                 $params = array_merge($section, ['node' => $node]);
@@ -17,6 +17,6 @@
                 }
             }
         ?>
-    </li>
+    </div>
     <?php endforeach ?>
-</ul>
+</div>

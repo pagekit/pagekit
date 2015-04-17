@@ -2,8 +2,8 @@
 
 namespace Pagekit\Editor\Event;
 
-use Pagekit\Event\Event;
 use Pagekit\Editor\EditorInterface;
+use Pagekit\Event\Event;
 
 class EditorLoadEvent extends Event
 {

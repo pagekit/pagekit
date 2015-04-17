@@ -4,8 +4,6 @@ namespace Pagekit\Widget\Model;
 
 class Widget implements WidgetInterface
 {
-    use TypesTrait;
-
     /**
      * @var mixed
      */
@@ -194,5 +192,17 @@ class Widget implements WidgetInterface
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        $widget = get_object_vars($this);
+
+        $widget['statusText'] = $this->getStatusText();
+
+        return $widget;
     }
 }

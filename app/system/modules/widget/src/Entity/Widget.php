@@ -34,10 +34,10 @@ class Widget extends BaseWidget
     /** @Column(type="text") */
     protected $pages = '';
 
-    /** @Column(name="menu_items", type="simple_array") */
-    protected $menuItems = [];
+    /** @Column(name="nodes", type="simple_array") */
+    protected $nodes = [];
 
-    /** @Column(type="json_array", name="data") */
+    /** @Column(type="json_object", name="data") */
     protected $settings = [];
 
     public function getShowTitle()
@@ -70,19 +70,19 @@ class Widget extends BaseWidget
         $this->pages = $pages;
     }
 
-    public function getMenuItems()
+    public function getNodes()
     {
-        return (array) $this->menuItems;
+        return (array) $this->nodes;
     }
 
-    public function setMenuItems($menuItems)
+    public function setNodes($nodes)
     {
-        $this->menuItems = $menuItems;
+        $this->nodes = $nodes;
     }
 
-    public function hasMenuItem($id)
+    public function hasNode($id)
     {
-        return in_array($id, $this->getMenuItems());
+        return in_array($id, $this->getNodes());
     }
 
     public function getStatusText()
