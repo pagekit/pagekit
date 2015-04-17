@@ -38,7 +38,7 @@ jQuery(function ($) {
             selectFirst: function() {
                 var first = null;
                 this.menus.some(function (menu) {
-                    return first = vm.tree[menu.id][0];
+                    return first = _.first(vm.tree[menu.id]);
                 });
 
                 return first ? first.node : undefined;

@@ -33,7 +33,7 @@
 
         <div class="uk-panel uk-panel-box uk-width-3-4" v-component="node-edit" inline-template>
 
-            <form class="uk-form uk-form-horizontal" name="form" v-on="valid: save">
+            <form v-show="node.type" class="uk-form uk-form-horizontal" name="form" v-on="valid: save">
 
                 <div class="uk-clearfix uk-margin">
 
