@@ -91,7 +91,7 @@ class RouterListener implements EventSubscriberInterface
     public function subscribe()
     {
         return array(
-            'kernel.request' => ['onKernelRequest', 32]
+            'kernel.request' => ['onKernelRequest', 100]
         );
     }
 }

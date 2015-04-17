@@ -58,7 +58,7 @@ return [
             $app['controllers']
         );
 
-        // $app['middleware'];
+        $app['middleware'];
 
         $app->on('kernel.request', function () use ($app) {
 

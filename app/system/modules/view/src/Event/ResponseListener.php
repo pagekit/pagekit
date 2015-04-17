@@ -18,7 +18,7 @@ class ResponseListener implements EventSubscriberInterface
     /**
      * Filter the response content.
      */
-    public function onKernelResponse($event)
+    public function onResponse($event)
     {
         $response = $event->getResponse();
 
@@ -45,7 +45,7 @@ class ResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onKernelResponse', -10]
+            'kernel.response' => ['onResponse', -10]
         ];
     }
 }

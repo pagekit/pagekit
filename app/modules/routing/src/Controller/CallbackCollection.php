@@ -82,9 +82,11 @@ class CallbackCollection implements EventSubscriberInterface
     public function getResources(RouteResourcesEvent $event)
     {
         $resources = [];
+
         foreach ($this->routes as $name => $route) {
             $resources[] = ['callback' => $name.$route->getPath()];
         }
+
         $event->addResources($resources);
     }
 

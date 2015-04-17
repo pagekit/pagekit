@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ToolbarListener implements EventSubscriberInterface
 {
-    public function onKernelRequest()
+    public function onRequest()
     {
         App::callbacks()->get('_profiler/{token}', '_profiler', function ($token) {
 
@@ -21,7 +21,7 @@ class ToolbarListener implements EventSubscriberInterface
         })->setDefault('_maintenance', true);
     }
 
-    public function onKernelResponse($event)
+    public function onResponse($event)
     {
         $response = $event->getResponse();
         $request  = $event->getRequest();
@@ -66,8 +66,8 @@ class ToolbarListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.request'  => ['onKernelRequest', 100],
-            'kernel.response' => ['onKernelResponse', -100]
+            'kernel.request'  => ['onRequest', 100],
+            'kernel.response' => ['onResponse', -100]
         ];
     }
 }

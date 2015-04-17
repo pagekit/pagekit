@@ -22,15 +22,15 @@ class Middleware
 
         $events->on('kernel.request', function ($event, $request) {
             if ($name = $request->attributes->get('_route', '')) {
-                $event->getDispatcher()->trigger('before'.$name);
+                $event->getDispatcher()->trigger('before'.$name, [$request]);
             }
-        });
+        }, 50);
 
         $events->on('kernel.response', function ($event, $request) {
             if ($name = $request->attributes->get('_route', '')) {
-                $event->getDispatcher()->trigger('after'.$name);
+                $event->getDispatcher()->trigger('after'.$name, [$request]);
             }
-        });
+        }, 50);
     }
 
     /**
