@@ -2,6 +2,8 @@
 
 namespace Pagekit\System\Entity;
 
+use Pagekit\Util\Arr;
+
 trait DataTrait
 {
     /**
@@ -27,7 +29,7 @@ trait DataTrait
      */
     public function get($key, $default = null)
     {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
+        return Arr::get($this->data, $key, $default);
     }
 
     /**
@@ -36,6 +38,6 @@ trait DataTrait
      */
     public function set($key, $value)
     {
-        $this->data[$key] = $value;
+        Arr::set($this->data, $key, $value);
     }
 }
