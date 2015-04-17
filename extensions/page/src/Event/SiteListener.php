@@ -5,9 +5,9 @@ namespace Pagekit\Page\Event;
 use Pagekit\Application as App;
 use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Editor\Event\EditorLoadEvent;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Page\Entity\Page;
 use Pagekit\Site\Model\UrlType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SiteListener implements EventSubscriberInterface
 {
@@ -76,7 +76,7 @@ class SiteListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'before@site'          => 'onSite',

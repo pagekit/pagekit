@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Content;
 
 use Pagekit\Content\Event\ContentEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class ReadmorePlugin implements EventSubscriberInterface
 {
@@ -27,7 +27,7 @@ class ReadmorePlugin implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'content.plugins' => ['onContentPlugins', 10]

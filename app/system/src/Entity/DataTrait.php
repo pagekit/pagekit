@@ -5,7 +5,7 @@ namespace Pagekit\System\Entity;
 trait DataTrait
 {
     /**
-     * @return array|\ArrayObject
+     * @return array
      */
     public function getData()
     {
@@ -13,7 +13,7 @@ trait DataTrait
     }
 
     /**
-     * @param array|\ArrayObject $data
+     * @param array $data
      */
     public function setData($data)
     {

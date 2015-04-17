@@ -4,8 +4,8 @@ namespace Pagekit\Blog\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\UrlResolver;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Routing\Event\RouteCollectionEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class RouteListener implements EventSubscriberInterface
 {
@@ -42,7 +42,7 @@ class RouteListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'system.init'          => 'onSystemInit',

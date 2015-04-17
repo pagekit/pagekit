@@ -4,7 +4,7 @@ namespace Pagekit\Blog\Event;
 
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Database\Event\EntityEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class CommentListener implements EventSubscriberInterface
 {
@@ -16,7 +16,7 @@ class CommentListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
             'blog.comment.postSave' => 'onCommentChange',
