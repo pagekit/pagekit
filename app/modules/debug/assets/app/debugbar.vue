@@ -29,6 +29,7 @@
     events: require('./collectors/events.vue'),
     time: require('./collectors/time.vue'),
     memory: require('./collectors/memory.vue'),
+    database: require('./collectors/database.vue'),
     request: require('./collectors/request.vue'),
     auth: require('./collectors/auth.vue')
 

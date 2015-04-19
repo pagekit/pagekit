@@ -1,8 +1,8 @@
 <?php
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\DBAL\Types\Type;
-use Pagekit\Database\Logging\DebugStack;
 use Pagekit\Database\ORM\EntityManager;
 use Pagekit\Database\ORM\Loader\AnnotationLoader;
 use Pagekit\Database\ORM\MetadataManager;
@@ -53,7 +53,7 @@ return [
         };
 
         $app['db.debug_stack'] = function ($app) {
-            return new DebugStack($app['profiler.stopwatch']);
+            return new DebugStack();
         };
 
     },

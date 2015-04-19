@@ -1,10 +1,11 @@
 <?php
 
-use DebugBar\Storage\FileStorage;
 use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
+use DebugBar\Storage\FileStorage;
 use Pagekit\Debug\DebugBar;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
+use Pagekit\Debug\DataCollector\DatabaseDataCollector;
 use Pagekit\Debug\DataCollector\SystemDataCollector;
 use Pagekit\Debug\Storage\SqliteStorage;
 
@@ -22,10 +23,21 @@ return [
 
             $debugbar = new DebugBar();
             $debugbar->setStorage($app['debugbar.storage']);
-            $debugbar->addCollector(new AuthDataCollector($app['auth']));
             $debugbar->addCollector(new MemoryCollector());
-            $debugbar->addCollector(new SystemDataCollector($app['info']));
             $debugbar->addCollector(new TimeDataCollector());
+
+            if (isset($app['auth'])) {
+                $debugbar->addCollector(new AuthDataCollector($app['auth']));
+            }
+
+            if (isset($app['db'])) {
+                $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);
+                $debugbar->addCollector(new DatabaseDataCollector($app['db'], $app['db.debug_stack']));
+            }
+
+            if (isset($app['info'])) {
+                $debugbar->addCollector(new SystemDataCollector($app['info']));
+            }
 
             return $debugbar;
         };

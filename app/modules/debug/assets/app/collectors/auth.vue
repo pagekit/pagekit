@@ -4,7 +4,7 @@
 
         <a title="User"><div class="pf-icon pf-icon-auth" v-class="pf-parent: user"></div> {{ label }}</a>
 
-        <div class="pf-dropdown">
+        <div class="pf-dropdown" v-show="user">
 
             <table class="pf-table pf-table-dropdown">
                 <tbody>
