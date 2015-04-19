@@ -39,6 +39,7 @@ return [
 
     'require' => [
 
+        'debug',
         'routing',
         'auth',
         'config',

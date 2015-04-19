@@ -9,7 +9,7 @@ return [
         $app->on('system.settings.edit', function ($event, $config) use ($app) {
 
             $event->options('system', $app['system']->config, ['api.key', 'release_channel', 'site.', 'maintenance.']);
-            $event->data('config', $config, ['application.debug', 'system.storage', 'profiler.enabled']);
+            $event->data('config', $config, ['application.debug', 'debug.enabled', 'system.storage']);
             $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
             $event->section('site',   'Site', 'app/system/modules/settings/views/site.php');
             $event->section('system', 'System', 'app/system/modules/settings/views/system.php');

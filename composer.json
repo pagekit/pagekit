@@ -21,6 +21,7 @@
         "ircmaxell/password-compat": "~1.0.0",
         "ircmaxell/random-lib": "~1.0.0",
         "lusitanian/oauth": "~0.3.5",
+        "maximebf/debugbar": "~1.10.4",
         "nikic/php-parser": "~1.2.2",
         "swiftmailer/swiftmailer": "~5.4.0",
         "symfony/console": "~2.6.6",

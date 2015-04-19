@@ -85,7 +85,6 @@ return [
 
     'require' => [
 
-        'profiler',
         'application',
         'feed',
         'markdown',
