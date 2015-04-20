@@ -9,9 +9,8 @@ use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Database\Event\EntityEvent;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagekit\Kernel\Exception\AccessDeniedException;
+use Pagekit\Kernel\Exception\NotFoundException;
 
 /**
  * @Route("/")
@@ -168,11 +167,11 @@ class SiteController
     public function postAction($id = 0)
     {
         if (!$post = Post::where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
-            throw new NotFoundHttpException(__('Post with id "%id%" not found!', ['%id%' => $id]));
+            throw new NotFoundException(__('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
         if (!$post->hasAccess(App::user())) {
-            throw new AccessDeniedHttpException(__('Unable to access this post!'));
+            throw new AccessDeniedException(__('Unable to access this post!'));
         }
 
         $query = Comment::where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
@@ -231,6 +230,6 @@ class SiteController
             );
         }
 
-        return App::response($feed->generate(), Response::HTTP_OK, ['Content-Type' => $feed->getMIMEType()]);
+        return App::response($feed->generate(), 200, ['Content-Type' => $feed->getMIMEType()]);
     }
 }

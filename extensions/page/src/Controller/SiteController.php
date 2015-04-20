@@ -4,7 +4,7 @@ namespace Pagekit\Page\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Page\Entity\Page;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagekit\Kernel\Exception\NotFoundException;
 
 class SiteController
 {
@@ -16,7 +16,7 @@ class SiteController
     public function indexAction($id = 0)
     {
         if (!$page = Page::find($id)) {
-            throw new NotFoundHttpException(__('Page not found!'));
+            throw new NotFoundException(__('Page not found!'));
         }
 
         $page->setContent(App::content()->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
