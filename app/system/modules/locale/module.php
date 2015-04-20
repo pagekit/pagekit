@@ -72,7 +72,7 @@ return [
 
         }, 10);
 
-        $app->on('system.loaded', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
 
             $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $app['translator']->getLocale()]));
             $app['scripts']->register('locale', 'app/system/modules/locale/app/locale.js', ['localeConfig', 'messages']);

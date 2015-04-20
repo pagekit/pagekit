@@ -17,7 +17,7 @@ class AlphaTheme extends Theme
      */
     public function main(App $app)
     {
-        $app->on('system.site', function () use ($app) {
+        $app->on('app.site', function () use ($app) {
             $app['view']->on('layout', function ($event, $view) use ($app) {
                 $view->setName($this->getLayout());
                 $view->setParameter('theme', $app['theme.site']);

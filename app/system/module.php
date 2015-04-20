@@ -58,16 +58,6 @@ return [
 
         }, 50);
 
-        $app->on('app.request', function ($event, $request) use ($app) {
-
-            if (!$event->isMasterRequest()) {
-                return;
-            }
-
-            $app->trigger('system.loaded', [$request]);
-
-        });
-
         $app->on('app.request', function () use ($app) {
             foreach ($app['module'] as $module) {
 

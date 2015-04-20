@@ -25,7 +25,7 @@ class AuthorizationListener implements EventSubscriberInterface
     /**
      * Logout blocked users.
      */
-    public function onSystemLoaded()
+    public function onRequest()
     {
         if ($user = App::auth()->getUser() and $user->isBlocked()) {
             App::auth()->logout($user);
@@ -72,7 +72,7 @@ class AuthorizationListener implements EventSubscriberInterface
     {
         return [
             'system.init'    => ['onSystemInit', 20],
-            'system.loaded'  => 'onSystemLoaded',
+            'app.request'    => 'onRequest',
             'auth.authorize' => 'onAuthorize',
             'auth.login'     => ['onLogin', -8],
             'auth.logout'    => ['onLogout', -8]

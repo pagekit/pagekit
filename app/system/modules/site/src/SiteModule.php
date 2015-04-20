@@ -37,7 +37,7 @@ class SiteModule extends Module
             }
         }, 125);
 
-        $app->on('system.loaded', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
             $app['scripts']->register('site-tree', 'site:app/tree.js', ['vue-system']);
         });
 

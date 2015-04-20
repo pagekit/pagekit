@@ -30,7 +30,7 @@ return [
             $app['module']->load($theme);
 
             if ($app['theme.site'] = $app['module']->get($theme)) {
-                $app->on('system.site', function () use ($app) {
+                $app->on('app.site', function () use ($app) {
                     $app['view']->map('layout', $app['theme.site']->getLayout());
                 });
             }

@@ -12,7 +12,7 @@ class CanonicalListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onSystemSite($event, $request)
+    public function onSite($event, $request)
     {
         if ($request->getRequestFormat() != 'html') {
             return;
@@ -31,7 +31,7 @@ class CanonicalListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'system.site' => 'onSystemSite'
+            'app.site' => 'onSite'
         ];
     }
 }

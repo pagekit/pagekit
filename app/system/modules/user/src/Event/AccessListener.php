@@ -90,7 +90,7 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onLateSystemLoaded($event, $request)
+    public function onLateRequest($event, $request)
     {
         if ($access = $request->attributes->get('_access')) {
             foreach ($access as $expression) {
@@ -107,7 +107,7 @@ class AccessListener implements EventSubscriberInterface
      *
      * @param GetResponseEvent $event
      */
-    public function onSystemLoaded($event, $request)
+    public function onRequest($event, $request)
     {
         if (!App::auth()->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
 
@@ -146,8 +146,8 @@ class AccessListener implements EventSubscriberInterface
             'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
             'app.request'      => [
-                ['onLateSystemLoaded', -512],
-                ['onSystemLoaded', -256]
+                ['onLateRequest', -512],
+                ['onRequest', -256]
             ]
         ];
     }
