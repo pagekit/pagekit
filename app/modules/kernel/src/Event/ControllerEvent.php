@@ -2,8 +2,10 @@
 
 namespace Pagekit\Kernel\Event;
 
-class ControllerEvent extends ResponseEvent
+class ControllerEvent extends KernelEvent
 {
+    use ResponseTrait;
+
     /**
      * @var callable
      */

@@ -6,7 +6,7 @@ use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Kernel\Event\ControllerEvent;
 use Pagekit\Kernel\Event\ExceptionEvent;
 use Pagekit\Kernel\Event\KernelEvent;
-use Pagekit\Kernel\Event\ResponseEvent;
+use Pagekit\Kernel\Event\RequestEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +45,7 @@ class HttpKernel
     {
         try {
 
-            $event = new ResponseEvent('app.request', $type);
+            $event = new RequestEvent('app.request', $type);
 
             $this->requestStack->push($request);
             $this->events->trigger($event, [$request]);

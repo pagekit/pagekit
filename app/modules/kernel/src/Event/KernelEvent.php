@@ -15,8 +15,8 @@ class KernelEvent extends Event
     /**
      * Constructor.
      *
-     * @param string   $name
-     * @param int      $requestType
+     * @param string $name
+     * @param int    $requestType
      */
     public function __construct($name, $requestType)
     {

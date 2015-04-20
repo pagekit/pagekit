@@ -4,6 +4,8 @@ namespace Pagekit\Kernel\Event;
 
 class ExceptionEvent extends KernelEvent
 {
+    use ResponseTrait;
+
     /**
      * @var \Exception
      */

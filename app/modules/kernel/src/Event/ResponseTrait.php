@@ -4,7 +4,7 @@ namespace Pagekit\Kernel\Event;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class ResponseEvent extends KernelEvent
+trait ResponseTrait
 {
     /**
      * @var Response
