@@ -3,6 +3,7 @@
 namespace Pagekit\Kernel;
 
 use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Kernel\Event\ControllerEvent;
 use Pagekit\Kernel\Event\ExceptionEvent;
 use Pagekit\Kernel\Event\KernelEvent;
 use Pagekit\Kernel\Event\ResponseEvent;
@@ -44,12 +45,18 @@ class HttpKernel
     {
         try {
 
-            $event = new KernelEvent('kernel.request', $type);
+            $event = new ResponseEvent('app.request', $type);
 
             $this->requestStack->push($request);
             $this->events->trigger($event, [$request]);
 
-            return $this->handleResponse($event, $request, $type);
+            if ($event->hasResponse()) {
+                $response = $event->getResponse();
+            } else {
+                $response = $this->handleController($request, $type);
+            }
+
+            return $this->handleResponse($request, $response, $type);
 
         } catch (\Exception $exception) {
 
@@ -59,21 +66,48 @@ class HttpKernel
     }
 
     /**
-     * Handles the response.
+     * Handles the controller event.
      *
-     * @param  mixed $response
      * @param  Request  $request
      * @param  int      $type
      * @return Response
-     *
-     * @throws \RuntimeException
      */
-    protected function handleResponse($e, $request, $type)
+    protected function handleController(Request $request, $type)
     {
-        $event = new ResponseEvent('kernel.response', $type);
-        $event->setResponse($e->getResponse());
+        $event = new ControllerEvent('app.controller', $type);
+        $this->events->trigger($event, [$request]);
 
-        return $this->events->trigger($event, [$request])->getResponse();
+        $response = $event->getResponse();
+
+        if (!$response instanceof Response) {
+
+            $msg = 'The controller must return a response.';
+
+            if ($response === null) {
+                $msg .= ' Did you forget to add a return statement somewhere in your controller?';
+            }
+
+            throw new \LogicException($msg);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Handles the response event.
+     *
+     * @param  Request  $request
+     * @param  Response $response
+     * @param  int      $type
+     * @return Response
+     */
+    protected function handleResponse(Request $request, Response $response, $type)
+    {
+        $event = new KernelEvent('app.response', $type, $response);
+        $this->events->trigger($event, [$request, $response]);
+        $this->requestStack->pop();
+
+        return $response;
     }
 
     /**
@@ -88,7 +122,7 @@ class HttpKernel
      */
     protected function handleException(\Exception $e, $request, $type)
     {
-        $event = new ExceptionEvent('kernel.exception', $type, $e);
+        $event = new ExceptionEvent('app.exception', $type, $e);
         $this->events->trigger($event, [$request]);
 
         // a listener might have replaced the exception

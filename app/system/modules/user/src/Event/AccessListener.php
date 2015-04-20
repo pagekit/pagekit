@@ -145,7 +145,7 @@ class AccessListener implements EventSubscriberInterface
             'route.configure'  => 'onConfigureRoute',
             'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
-            'kernel.request'    => [
+            'app.request'      => [
                 ['onLateSystemLoaded', -512],
                 ['onSystemLoaded', -256]
             ]

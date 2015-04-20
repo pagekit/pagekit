@@ -2,7 +2,6 @@
 
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\Event\ViewListener;
 use Pagekit\View\Helper\DataHelper;
 use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\DeferredHelper;
@@ -17,6 +16,7 @@ use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\PhpEngine;
 use Pagekit\View\ViewManager;
+use Pagekit\View\ViewListener;
 
 return [
 
@@ -79,13 +79,13 @@ return [
 
     'boot' => function ($app) {
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));
         });
 
-        $app->on('kernel.response', function ($event) use ($app) {
-            if (is_array($response = $event->getResponse())) {
-                foreach ($response as $key => $value) {
+        $app->on('app.controller', function ($event) use ($app) {
+            if (is_array($result = $event->getControllerResult())) {
+                foreach ($result as $key => $value) {
                     if ($key === '$meta') {
                         $app['view']->meta($value);
                     } elseif ($key[0] === '$') {
@@ -93,7 +93,7 @@ return [
                     }
                 }
             }
-        }, 90);
+        }, 60);
 
     },
 

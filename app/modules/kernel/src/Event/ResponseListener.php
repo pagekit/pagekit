@@ -29,10 +29,12 @@ class ResponseListener implements EventSubscriberInterface
      * Filters the Response.
      *
      * @param $event
+     * @param $request
+     * @param $response
      */
-    public function onResponse($event, $request)
+    public function onResponse($event, $request, $response)
     {
-        if (!$event->isMasterRequest() || !$response = $event->getResponse()) {
+        if (!$event->isMasterRequest()) {
             return;
         }
 
@@ -46,7 +48,7 @@ class ResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onResponse', -10]
+            'app.response' => ['onResponse', -10]
         ];
     }
 }

@@ -27,7 +27,7 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onResponse', -1000]
+            'app.response' => ['onResponse', -1000]
         ];
     }
 }

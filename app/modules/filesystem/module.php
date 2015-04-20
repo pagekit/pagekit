@@ -23,7 +23,7 @@ return [
 
     'boot' => function ($app) {
 
-        $app->on('kernel.request', function ($event, $request) use ($app) {
+        $app->on('app.request', function ($event, $request) use ($app) {
 
             $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
 

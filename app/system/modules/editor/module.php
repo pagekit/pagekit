@@ -12,7 +12,7 @@ return [
 
         $app->subscribe(new Editor);
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
             $app['view']->addHelper(new EditorHelper());
             $app['scripts']->register('editor', 'app/system/modules/editor/app/editor.js', ['uikit-htmleditor', 'finder']);
         });

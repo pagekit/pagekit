@@ -41,7 +41,7 @@ class WidgetModule extends Module
 
         });
 
-        $app->on('kernel.request', function($event) use ($app) {
+        $app->on('app.request', function($event) use ($app) {
 
             $active = (array) $app['request']->attributes->get('_node');
             $user   = $app['user'];

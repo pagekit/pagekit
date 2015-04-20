@@ -56,7 +56,7 @@ return [
 
         $app->subscribe($app['debugbar']);
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
             $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
             $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
             $app['view']->script('debugbar', 'app/modules/debug/assets/app/debugbar.min.js', ['vue', 'jquery']);

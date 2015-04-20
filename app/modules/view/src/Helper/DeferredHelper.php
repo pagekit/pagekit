@@ -39,14 +39,9 @@ class DeferredHelper implements HelperInterface
 
         }, 15);
 
-        $app->on('kernel.response', function ($event) {
+        $app->on('app.response', function ($event, $request, $response) {
 
             $dispatcher = $event->getDispatcher();
-            $response   = $event->getResponse();
-
-            if (!$response) {
-                return;
-            }
 
             foreach ($this->deferred as $name => $view) {
 

@@ -2,31 +2,57 @@
 
 namespace Pagekit\Kernel\Event;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class ResponseEvent extends KernelEvent
 {
     /**
-     * @var callable
+     * @var Response
      */
-    protected $controller;
+    protected $response;
 
     /**
-     * Gets the controller.
+     * Constructor.
      *
-     * @return callable
+     * @param string   $name
+     * @param int      $requestType
+     * @param Response $response
      */
-    public function getController()
+    public function __construct($name, $requestType, Response $response = null)
     {
-        return $this->controller;
+        parent::__construct($name, $requestType);
+
+        $this->response = $response;
     }
 
     /**
-     * Sets the controller.
+     * Checks if a response was set.
      *
-     * @param  callable $controller
-     * @throws \LogicException
+     * @return bool
      */
-    public function setController(callable $controller)
+    public function hasResponse()
     {
-        $this->controller = $controller;
+        return $this->response !== null;
+    }
+
+    /**
+     * Gets the response.
+     *
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Sets the response.
+     *
+     * @param Response $response
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+        $this->stopPropagation();
     }
 }

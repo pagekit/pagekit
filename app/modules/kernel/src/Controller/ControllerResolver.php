@@ -110,7 +110,6 @@ class ControllerResolver
      *
      * @param  string $controller A Controller string
      * @return mixed A PHP callable
-     *
      * @throws \InvalidArgumentException
      */
     protected function createController($controller)

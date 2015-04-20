@@ -25,12 +25,12 @@ class JsonListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onResponse($event, $request)
+    public function onController($event, $request)
     {
-        $response = $event->getResponse();
+        $result = $event->getControllerResult();
 
-        if (!$response instanceof Response && strtolower($request->attributes->get('_response[value]', '', true)) == 'json') {
-            $event->setResponse(new JsonResponse($response));
+        if (strtolower($request->attributes->get('_response[value]', '', true)) == 'json') {
+            $event->setResponse(new JsonResponse($result));
         }
     }
 
@@ -40,8 +40,8 @@ class JsonListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.request'  => ['onRequest', 130],
-            'kernel.response' => ['onResponse', 30]
+            'app.request'    => ['onRequest', 130],
+            'app.controller' => ['onController', 70]
         ];
     }
 }

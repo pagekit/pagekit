@@ -32,7 +32,7 @@ trait RouterTrait
      */
     public static function error($callback, $priority = -8)
     {
-        static::events()->on('kernel.exception', new ExceptionListenerWrapper($callback), $priority);
+        static::events()->on('app.exception', new ExceptionListenerWrapper($callback), $priority);
     }
 
     /**

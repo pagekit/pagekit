@@ -65,6 +65,20 @@ class CallbackCollection implements EventSubscriberInterface
     }
 
     /**
+     * Resolves the callback as controller.
+     *
+     * @param GetControllerEvent $event
+     */
+    public function getController($event, $request)
+    {
+        $name = $request->attributes->get('_route', '');
+
+        if ($route = $this->routes->get($name) and $callback = $route->getOption('__callback')) {
+            $request->attributes->set('_controller', $callback);
+        };
+    }
+
+    /**
      * Adds this instances routes to the collection.
      *
      * @param RouteCollectionEvent $event
@@ -91,28 +105,14 @@ class CallbackCollection implements EventSubscriberInterface
     }
 
     /**
-     * Resolves the callback as controller.
-     *
-     * @param GetControllerEvent $event
-     */
-    public function getController($event, $request)
-    {
-        $name = $request->attributes->get('_route', '');
-
-        if ($route = $this->routes->get($name) and $callback = $route->getOption('__callback')) {
-            $request->attributes->set('_controller', $callback);
-        };
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function subscribe()
     {
         return [
+            'app.controller'   => ['getController', 130],
             'route.collection' => ['getRoutes', -8],
-            'route.resources'  => 'getResources',
-            'kernel.request'   => ['getController', 30]
+            'route.resources'  => 'getResources'
         ];
     }
 }

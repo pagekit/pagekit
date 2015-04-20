@@ -60,7 +60,7 @@ return [
 
         $app['middleware'];
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
 
             foreach ($app['module'] as $module) {
 

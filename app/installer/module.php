@@ -12,7 +12,7 @@ return [
             return false;
         }
 
-        $app->on('kernel.request', function ($event) use ($app) {
+        $app->on('app.request', function ($event) use ($app) {
             if ($locale = $app['request']->getPreferredLanguage()) {
                 $app['translator']->setLocale($locale);
             }

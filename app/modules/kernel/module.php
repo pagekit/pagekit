@@ -45,7 +45,7 @@ return [
         // redirect the request if it has a trailing slash
         if (!$app->inConsole()) {
 
-            $app->on('kernel.request', function ($event, $request) {
+            $app->on('app.request', function ($event, $request) {
 
                 $path = $request->getPathInfo();
 

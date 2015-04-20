@@ -27,7 +27,7 @@ return [
             return $assets;
         });
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
 
             $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 

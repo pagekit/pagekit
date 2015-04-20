@@ -87,7 +87,7 @@ return [
 
         if ($app['session.test']) {
 
-            $app->on('kernel.request', function ($event, $request) use ($app) {
+            $app->on('app.request', function ($event, $request) use ($app) {
 
                 if (!$event->isMasterRequest() || !isset($app['session'])) {
                     return;
@@ -103,7 +103,7 @@ return [
 
             }, 100);
 
-            $app->on('kernel.response', function ($event, $request) {
+            $app->on('app.response', function ($event, $request) {
 
                 if (!$event->isMasterRequest()) {
                     return;
@@ -122,7 +122,7 @@ return [
             }, -100);
         }
 
-        $app->on('kernel.request', function ($event, $request) use ($app) {
+        $app->on('app.request', function ($event, $request) use ($app) {
 
             if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
                 $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
@@ -132,7 +132,7 @@ return [
 
         }, 100);
 
-        // $app->subscribe(new CsrfListener($app['csrf']));
+        $app->subscribe(new CsrfListener($app['csrf']));
 
     },
 

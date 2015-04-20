@@ -26,7 +26,7 @@ class ParamFetcherListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onResponse($event, $request)
+    public function onController($event, $request)
     {
         $controller = $event->getController();
         $parameters = $request->attributes->get('_request[value]', [], true);
@@ -53,7 +53,7 @@ class ParamFetcherListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onResponse', 110]
+            'app.controller' => ['onController', 110]
         ];
     }
 }

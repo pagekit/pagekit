@@ -1,10 +1,9 @@
 <?php
 
-namespace Pagekit\View\Event;
+namespace Pagekit\View;
 
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\View\ViewManager;
 use Symfony\Component\HttpFoundation\Response;
 
 class ViewListener implements EventSubscriberInterface
@@ -29,15 +28,11 @@ class ViewListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onResponse($event, $request)
+    public function onController($event, $request)
     {
         $template = $request->attributes->get('_response[value]', null, true);
         $layout   = $request->attributes->get('_response[layout]', true, true);
-        $result   = $event->getResponse();
-
-        if ($result instanceof Response) {
-            return;
-        }
+        $result   = $event->getControllerResult();
 
         if ($template !== null && ($result === null || is_array($result))) {
             $response = $result = $this->view->render($template, $result ?: []);
@@ -67,7 +62,7 @@ class ViewListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onResponse', 20]
+            'app.controller' => ['onController', 50]
         ];
     }
 }

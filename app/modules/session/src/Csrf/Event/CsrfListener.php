@@ -4,7 +4,6 @@ namespace Pagekit\Session\Csrf\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Session\Csrf\Provider\CsrfProviderInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class CsrfListener implements EventSubscriberInterface
 {
@@ -27,16 +26,14 @@ class CsrfListener implements EventSubscriberInterface
      * Checks for the CSRF token and throws 401 exception if invalid.
      *
      * @param  $event
-     * @throws AccessDeniedHttpException
+     * @throws \RuntimeException
      */
-    public function onKernelRequest($event)
+    public function onRequest($event, $request)
     {
-        $request = $event->getRequest();
-
         if ($csrf = $request->attributes->get('_request[csrf]', false, true)
             and !$this->provider->validate($request->get(is_string($csrf) ? $csrf : '_csrf', $request->headers->get(is_string($csrf) ? $csrf : 'X-XSRF-TOKEN')))
         ) {
-            throw new AccessDeniedHttpException('Invalid CSRF token.');
+            throw new \RuntimeException('Invalid CSRF token.');
         }
     }
 
@@ -46,7 +43,7 @@ class CsrfListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.request' => ['onKernelRequest', -10]
+            'app.request' => ['onRequest', -10]
         ];
     }
 }

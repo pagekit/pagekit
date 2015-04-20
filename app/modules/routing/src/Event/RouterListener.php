@@ -37,7 +37,7 @@ class RouterListener implements EventSubscriberInterface
         $this->logger  = $logger;
     }
 
-    public function onKernelRequest($event, $request)
+    public function onRequest($event, $request)
     {
         if ($request->attributes->has('_controller')) {
             return;
@@ -91,7 +91,7 @@ class RouterListener implements EventSubscriberInterface
     public function subscribe()
     {
         return array(
-            'kernel.request' => ['onKernelRequest', 100]
+            'app.request' => ['onRequest', 100]
         );
     }
 }

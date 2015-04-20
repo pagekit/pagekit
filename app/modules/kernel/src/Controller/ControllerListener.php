@@ -3,6 +3,7 @@
 namespace Pagekit\Kernel\Controller;
 
 use Pagekit\Event\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class ControllerListener implements EventSubscriberInterface
 {
@@ -36,7 +37,7 @@ class ControllerListener implements EventSubscriberInterface
      */
     public function resolveController($event, $request)
     {
-        if ($event->hasResponse() || !$controller = $this->resolver->getController($request)) {
+        if (!$controller = $this->resolver->getController($request)) {
             return;
         }
 
@@ -51,14 +52,18 @@ class ControllerListener implements EventSubscriberInterface
      */
     public function executeController($event, $request)
     {
-        if ($event->hasResponse() || !$controller = $event->getController()) {
+        if (!$controller = $event->getController()) {
             return;
         }
 
         $arguments = $this->resolver->getArguments($request, $controller);
         $response  = call_user_func_array($controller, $arguments);
 
-        $event->setResponse($response);
+        if ($response instanceof Response) {
+            $event->setResponse($response);
+        } else {
+            $event->setControllerResult($response);
+        }
     }
 
     /**
@@ -67,7 +72,7 @@ class ControllerListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => [
+            'app.controller' => [
                 ['resolveController', 120],
                 ['executeController', 100]
             ]

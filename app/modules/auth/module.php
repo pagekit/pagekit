@@ -48,7 +48,7 @@ return [
             return;
         }
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
 
             try {
 

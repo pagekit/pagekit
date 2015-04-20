@@ -46,7 +46,7 @@ return [
             $app->trigger('system.init');
         }
 
-        $app->on('kernel.request', function ($event, $request) use ($app) {
+        $app->on('app.request', function ($event, $request) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;
@@ -58,7 +58,7 @@ return [
 
         }, 50);
 
-        $app->on('kernel.request', function ($event, $request) use ($app) {
+        $app->on('app.request', function ($event, $request) use ($app) {
 
             if (!$event->isMasterRequest()) {
                 return;
@@ -68,7 +68,7 @@ return [
 
         });
 
-        $app->on('kernel.request', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
             foreach ($app['module'] as $module) {
 
                 if (!isset($module->resources)) {

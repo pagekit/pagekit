@@ -18,10 +18,8 @@ class ResponseListener implements EventSubscriberInterface
     /**
      * Filter the response content.
      */
-    public function onResponse($event)
+    public function onResponse($event, $request, $response)
     {
-        $response = $event->getResponse();
-
         if (strpos($response->headers->get('Content-Type'), 'html') !== false) {
             $content = preg_replace_callback(self::REGEX_URL, [$this, 'replaceUrlCallback'], $response->getContent());
             $response->setContent($content);
@@ -45,7 +43,7 @@ class ResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'kernel.response' => ['onResponse', -10]
+            'app.response' => ['onResponse', -10]
         ];
     }
 }
