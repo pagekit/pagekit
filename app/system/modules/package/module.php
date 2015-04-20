@@ -23,7 +23,7 @@ return [
             $app['scripts']->register('upload-tmpl', 'app/system/modules/package/views/upload.php', '~upload', 'template');
         });
 
-        $app->on('system.init', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
 
             $theme = $app['module']['system']->config('theme.site');
 
@@ -35,7 +35,7 @@ return [
                 });
             }
 
-        }, 10);
+        }, 120);
 
     },
 
