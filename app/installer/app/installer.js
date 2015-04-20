@@ -1,4 +1,4 @@
-jQuery(function($) {
+jQuery(function ($) {
 
     var Installer, Email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -15,7 +15,7 @@ jQuery(function($) {
             user: {}
         },
 
-        ready: function() {
+        ready: function () {
 
             Installer = this.$resource('installer/:action', {}, {'post': {method: 'POST'}});
 
@@ -23,10 +23,10 @@ jQuery(function($) {
 
         methods: {
 
-            stepDatabase: function(e) {
+            stepDatabase: function (e) {
                 e.preventDefault();
 
-                Installer.post({action: 'check'}, {config: this.config}, function(data) {
+                Installer.post({action: 'check'}, {config: this.config}, function (data) {
 
                     if (!Vue.util.isPlainObject(data)) {
                         data = {message: 'Whoops, something went wrong'};
@@ -40,22 +40,26 @@ jQuery(function($) {
                     }
 
                 });
-
             },
 
-            stepUser: function(e) {
+            stepUser: function (e) {
                 e.preventDefault();
 
                 this.$set('step', 'site');
             },
 
-            stepSite: function(e) {
+            stepSite: function (e) {
                 e.preventDefault();
 
                 this.$set('step', 'finish');
+                this.stepInstall();
+            },
+
+            stepInstall: function () {
+
                 this.$set('status', 'install');
 
-                Installer.post({action: 'install'}, {config: this.config, option: {'system': this.option}, user: this.user}, function(data) {
+                Installer.post({action: 'install'}, {config: this.config, option: {'system': this.option}, user: this.user}, function (data) {
 
                     if (!Vue.util.isPlainObject(data)) {
                         data = {message: 'Whoops, something went wrong'};
@@ -69,7 +73,6 @@ jQuery(function($) {
                     }
 
                 });
-
             }
 
         }

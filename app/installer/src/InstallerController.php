@@ -114,10 +114,8 @@ class InstallerController
                 throw new Exception($message);
             }
 
-            App::config()->set('system', [], true);
-
-            if ($version = App::migrator()->create('app/system/migrations', App::config('system')->get('version'))->run()) {
-                App::config('system')->set('version', $version);
+            if ($version = App::migrator()->create('app/system/migrations')->run()) {
+                App::config()->set('system', compact('version'));
             }
 
             App::db()->insert('@system_user', [

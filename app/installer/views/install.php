@@ -206,7 +206,7 @@
                             <i class="uk-icon-times-circle uk-icon-large"></i>
                         </p>
                         <p>
-                            <button type="button" class="uk-button uk-button-primary">{{ 'Retry' | trans }}</button>
+                            <button type="button" class="uk-button uk-button-primary" v-on="click: stepInstall">{{ 'Retry' | trans }}</button>
                         </p>
                     </div>
 
