@@ -5,14 +5,10 @@ namespace Pagekit\Kernel\Exception;
 class MethodNotAllowedException extends HttpException
 {
     /**
-     * Constructor.
-     *
-     * @param string     $message
-     * @param int        $code
-     * @param \Exception $previous
+     * {@inheritdoc}
      */
-    public function __construct($message = null, $code = 405, $previous = null)
+    public function __construct($message = null, $previous = null, $code = 405)
     {
-        parent::__construct($message ?: 'Method Not Allowed', $code, $previous);
+        parent::__construct($message ?: 'Method Not Allowed', $previous, $code);
     }
 }

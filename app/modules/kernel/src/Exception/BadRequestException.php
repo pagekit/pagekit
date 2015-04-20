@@ -5,14 +5,10 @@ namespace Pagekit\Kernel\Exception;
 class BadRequestException extends HttpException
 {
     /**
-     * Constructor.
-     *
-     * @param string     $message
-     * @param int        $code
-     * @param \Exception $previous
+     * {@inheritdoc}
      */
-    public function __construct($message = null, $code = 400, $previous = null)
+    public function __construct($message = null, $previous = null, $code = 400)
     {
-        parent::__construct($message ?: 'Bad Request', $code, $previous);
+        parent::__construct($message ?: 'Bad Request', $previous, $code);
     }
 }

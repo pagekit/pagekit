@@ -5,14 +5,10 @@ namespace Pagekit\Kernel\Exception;
 class UnauthorizedException extends HttpException
 {
     /**
-     * Constructor.
-     *
-     * @param string     $message
-     * @param int        $code
-     * @param \Exception $previous
+     * {@inheritdoc}
      */
-    public function __construct($message = null, $code = 401, $previous = null)
+    public function __construct($message = null, $previous = null, $code = 401)
     {
-        parent::__construct($message ?: 'Unauthorized', $code, $previous);
+        parent::__construct($message ?: 'Unauthorized', $previous, $code);
     }
 }

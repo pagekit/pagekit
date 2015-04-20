@@ -5,14 +5,10 @@ namespace Pagekit\Kernel\Exception;
 class ForbiddenException extends HttpException
 {
     /**
-     * Constructor.
-     *
-     * @param string     $message
-     * @param int        $code
-     * @param \Exception $previous
+     * {@inheritdoc}
      */
-    public function __construct($message = null, $code = 403, $previous = null)
+    public function __construct($message = null, $previous = null, $code = 403)
     {
-        parent::__construct($message ?: 'Forbidden', $code, $previous);
+        parent::__construct($message ?: 'Forbidden', $previous, $code);
     }
 }
