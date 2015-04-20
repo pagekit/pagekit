@@ -6,9 +6,8 @@ return [
 
     'main' => function ($app) {
 
-        $app->on('console.init', function ($event) {
+        $app->on('console.init', function ($event, $console) {
 
-            $console = $event->getConsole();
             $namespace = 'Pagekit\\Console\\';
 
             foreach (glob(__DIR__.'/src/*Command.php') as $file) {
