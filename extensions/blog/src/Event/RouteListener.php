@@ -14,7 +14,7 @@ class RouteListener implements EventSubscriberInterface
     /**
      * Adds cache breaker to router.
      */
-    public function onSystemInit()
+    public function onAppRequest()
     {
         App::router()->setOption('blog.permalink', $this->permalink = App::module('blog')->getPermalink());
     }
@@ -45,7 +45,7 @@ class RouteListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'system.init'          => 'onSystemInit',
+            'app.request'          => ['onAppRequest', 130],
             'route.collection'     => 'onRouteCollection',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'

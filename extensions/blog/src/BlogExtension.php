@@ -23,10 +23,10 @@ class BlogExtension extends Extension
             new ReadmorePlugin
         );
 
-        $app->on('system.init', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
             $site = $app['module']->get('system/site');
             $site->config['frontpage'] = $site->config['frontpage'] ?: '@blog/site';
-        });
+        }, 130);
 
         $app->on('site.types', function ($event, $site) {
             $site->registerType(new UrlType('blog.post', 'Blog Post', '@blog/id'));

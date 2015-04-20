@@ -19,15 +19,15 @@ class SiteModule extends Module
      */
     public function main(App $app)
     {
-        $app->on('system.init', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
                 if ($type = $this->getType($node->getType())) {
                     $type->bind($node);
                 }
             }
-        });
+        }, 150);
 
-        $app->on('system.init', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
             if ($frontpage = $this->config('frontpage')) {
                 $app['aliases']->add('/', $frontpage);
             } else {
@@ -35,7 +35,7 @@ class SiteModule extends Module
                     return __('No Frontpage assigned.');
                 });
             }
-        }, -15);
+        }, 125);
 
         $app->on('system.loaded', function() use ($app) {
             $app['scripts']->register('site-tree', 'site:app/tree.js', ['vue-system']);
