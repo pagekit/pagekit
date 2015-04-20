@@ -11,7 +11,7 @@ use Pagekit\Menu\Model\Menu;
 class SystemListener implements EventSubscriberInterface
 {
     /**
-     * Dispatches the 'system.site' or 'system.admin' event.
+     * Dispatches the 'app.site' or 'app.admin' event.
      */
     public function onRequest($event)
     {
@@ -19,13 +19,13 @@ class SystemListener implements EventSubscriberInterface
             return;
         }
 
-        App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', [App::request()]);
+        App::trigger(App::isAdmin() ? 'app.admin' : 'app.site', [App::request()]);
     }
 
     /**
      * Creates the menu instance and dispatches the 'system.admin_menu' event.
      */
-    public function onSystemAdmin()
+    public function onAdmin()
     {
         $menu = new Menu;
         $menu->setId('admin');
@@ -57,7 +57,7 @@ class SystemListener implements EventSubscriberInterface
     {
         return [
             'app.request'   => 'onRequest',
-            'system.admin'  => 'onSystemAdmin',
+            'app.admin'     => 'onAdmin',
             'system.finder' => 'onSystemFinder'
         ];
     }

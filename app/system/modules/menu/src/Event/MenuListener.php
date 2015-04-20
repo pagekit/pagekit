@@ -41,9 +41,9 @@ class MenuListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onSystemSite($event)
+    public function onSite($event, $request)
     {
-        $event->getRequest()->attributes->set('_menu', App::trigger(new ActiveMenuEvent($this->getItems()))->getActive());
+        $request->attributes->set('_menu', App::trigger(new ActiveMenuEvent($this->getItems()))->getActive());
     }
 
     /**
@@ -111,7 +111,7 @@ class MenuListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'system.site'                => 'onSystemSite',
+            'app.site'                   => 'onSite',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',

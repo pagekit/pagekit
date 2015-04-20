@@ -6,7 +6,7 @@ return [
 
     'main' => function ($app) {
 
-        $app->on('system.admin', function () use ($app) {
+        $app->on('app.admin', function () use ($app) {
 
             $app['view']->map('layout', $this->path.'/templates/template.php');
             $app['view']->map('component', $this->path.'/templates/template.php');
