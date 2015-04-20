@@ -49,9 +49,9 @@
             </div>
         </div>
 
-        <ul class="uk-nestable" v-component="widget-list" inline-template>
+        <ul class="uk-nestable uk-form" v-component="widget-list" inline-template>
 
-            <li data-id="{{ widget.id }}" v-repeat="widget: sorted[position.id]" class="uk-form uk-nestable-list-item">
+            <li data-id="{{ widget.id }}" v-repeat="widget: sorted[position.id]" class="uk-nestable-list-item">
 
                 <div class="uk-nestable-item pk-table-fake" v-component="widget-item" inline-template>
 

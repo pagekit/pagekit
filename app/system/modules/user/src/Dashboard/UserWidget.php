@@ -12,22 +12,6 @@ class UserWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return 'widget.user';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName($settings = null)
-    {
-        return __('Users');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(WidgetInterface $widget = null)
     {
         if (null === $widget) {

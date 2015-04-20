@@ -5,35 +5,11 @@ namespace Pagekit\User\Widget;
 use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class LoginWidget implements TypeInterface
+class LoginWidget extends Type
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return 'widget.user.login';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Login');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescription(WidgetInterface $widget = null)
-    {
-        return __('Displays a user login form.');
-    }
-
     /**
      * {@inheritdoc}
      */

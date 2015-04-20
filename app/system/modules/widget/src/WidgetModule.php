@@ -9,9 +9,9 @@ use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module
 {
-    protected $types;
-    protected $positions;
-    protected $sections;
+    protected $types = [];
+    protected $positions = [];
+    protected $sections = [];
 
     /**
      * {@inheritdoc}

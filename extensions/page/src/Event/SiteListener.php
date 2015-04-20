@@ -79,11 +79,11 @@ class SiteListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'before@site'          => 'onSite',
-            'site.types'           => 'onSiteTypes',
-            'site.sections'        => 'onSiteSections',
-            'site.node.preSave'    => 'onSave',
-            'site.node.postDelete' => 'onDelete'
+            'view.site:views/admin/index.php' => 'onSite',
+            'site.types'                      => 'onSiteTypes',
+            'site.sections'                   => 'onSiteSections',
+            'site.node.preSave'               => 'onSave',
+            'site.node.postDelete'            => 'onDelete'
         ];
     }
 }

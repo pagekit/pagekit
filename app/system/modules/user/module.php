@@ -47,11 +47,11 @@ return [
         });
 
         $app->on('system.widget', function ($event) {
-            $event->register(new LoginWidget);
+            $event->register(new LoginWidget('widget.user.login', __('Login'), __('Displays a user login form.')));
         });
 
         $app->on('system.dashboard', function ($event, $dashboard) {
-            $dashboard->registerType(new UserWidget);
+            $dashboard->registerType(new UserWidget('widget.user', __('Users')));
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {

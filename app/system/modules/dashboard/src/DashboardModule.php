@@ -87,8 +87,8 @@ class DashboardModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new FeedWidget);
-            $this->registerType(new WeatherWidget);
+            $this->registerType(new FeedWidget('widget.feed', __('Feed')));
+            $this->registerType(new WeatherWidget('widget.weather', __('Weather')));
 
             App::trigger('system.dashboard', [$this]);
         }

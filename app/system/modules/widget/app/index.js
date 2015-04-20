@@ -67,6 +67,13 @@ Vue.component('widgets-index', {
             });
         },
 
+        save: function (widget) {
+            var self = this;
+            _.defer(function() {
+                self.Widgets.save({ id: widget.id }, { widget: widget }, self.load)
+            });
+        },
+
         status: function(status) {
 
             var widgets = this.getSelected();
@@ -97,13 +104,6 @@ Vue.component('widgets-index', {
             return this.widgets.filter(function(widgets) {
                 return this.selected.indexOf(widgets.id.toString()) !== -1;
             }.bind(this));
-        },
-
-        save: function (widget) {
-            var self = this;
-            _.defer(function() {
-                self.Widgets.save({ id: widget.id }, { widget: widget }, self.load)
-            });
         },
 
         preventSubmit: function(e) {

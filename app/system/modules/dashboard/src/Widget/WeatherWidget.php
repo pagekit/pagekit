@@ -11,22 +11,6 @@ class WeatherWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return 'widget.weather';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Weather');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(WidgetInterface $widget = null)
     {
         if (null === $widget) {

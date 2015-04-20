@@ -11,22 +11,6 @@ class FeedWidget extends Type
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return 'widget.feed';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Feed');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(WidgetInterface $widget = null)
     {
         if (null === $widget) {
