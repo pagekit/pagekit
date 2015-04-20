@@ -2,6 +2,7 @@
 
 use Pagekit\Filter\FilterManager;
 use Pagekit\Kernel\Event\ResponseListener;
+use Pagekit\Kernel\Exception\HttpException;
 use Pagekit\Routing\Controller\AliasCollection;
 use Pagekit\Routing\Controller\CallbackCollection;
 use Pagekit\Routing\Controller\ControllerCollection;
@@ -16,7 +17,6 @@ use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 return [
 
@@ -83,16 +83,16 @@ return [
 
         }, 110);
 
-        // $app->error(function (HttpExceptionInterface $e) use ($app) {
+        $app->error(function (HttpException $e) use ($app) {
 
-        //     $request = $app['router']->getRequest();
-        //     $types   = $request->getAcceptableContentTypes();
+            $request = $app['router']->getRequest();
+            $types   = $request->getAcceptableContentTypes();
 
-        //     if ('json' == $request->getFormat(array_shift($types))) {
-        //         return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        //     }
+            if ('json' == $request->getFormat(array_shift($types))) {
+                return new JsonResponse($e->getMessage(), $e->getStatusCode());
+            }
 
-        // }, -10);
+        }, -10);
 
     },
 

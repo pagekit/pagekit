@@ -1,6 +1,6 @@
 <?php
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagekit\Kernel\Exception\NotFoundException;
 
 return [
 
@@ -18,7 +18,7 @@ return [
             }
         });
 
-        $app->error(function (NotFoundHttpException $e) use ($app) {
+        $app->error(function (NotFoundException $e) use ($app) {
             return $app['response']->redirect('@installer/installer');
         });
 

@@ -3,17 +3,13 @@
 namespace Pagekit\Routing\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
+use Pagekit\Kernel\Exception\MethodNotAllowedException as MethodNotAllowedHttpException;
+use Pagekit\Kernel\Exception\NotFoundException as NotFoundHttpException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
-use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RequestContextAwareInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class RouterListener implements EventSubscriberInterface
 {
@@ -67,13 +63,13 @@ class RouterListener implements EventSubscriberInterface
                 $message .= sprintf(' (from "%s")', $referer);
             }
 
-            throw new NotFoundHttpException($message, $e);
+            throw new NotFoundHttpException($message, 404, $e);
 
         } catch (MethodNotAllowedException $e) {
 
             $message = sprintf('No route found for "%s %s": Method Not Allowed (Allow: %s)', $request->getMethod(), $request->getPathInfo(), implode(', ', $e->getAllowedMethods()));
 
-            throw new MethodNotAllowedHttpException($e->getAllowedMethods(), $message, $e);
+            throw new MethodNotAllowedHttpException($message, 405, $e);
         }
     }
 

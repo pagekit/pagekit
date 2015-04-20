@@ -3,8 +3,8 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Site\Entity\Node;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Access("site: manage site", admin=true)
@@ -41,7 +41,7 @@ class SiteController
         if (!$node = Node::find($id)) {
 
             if (!$type || $id) {
-                throw new NotFoundHttpException;
+                throw new NotFoundException;
             }
 
             $node = new Node;

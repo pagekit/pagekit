@@ -3,9 +3,9 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Access("user: manage users", admin=true)
@@ -51,7 +51,7 @@ class UserController
             $user->setRoles([Role::find(Role::ROLE_AUTHENTICATED)]);
 
         } else if (!$user = User::find($id)) {
-            throw new NotFoundHttpException(__('User not found.'));
+            throw new NotFoundException(__('User not found.'));
         }
 
         $roles = App::user()->hasAccess('user: manage user permissions') ? $this->getRoles($user) : false;

@@ -3,8 +3,8 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Exception\ConflictException;
 use Pagekit\Site\Entity\Node;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 /**
  * @Access("site: manage site")
@@ -44,7 +44,7 @@ class MenuController
         if ($id != $oldId) {
 
             if (array_key_exists($id, $menus)) {
-                throw new ConflictHttpException(__('Duplicate Menu Id.'));
+                throw new ConflictException(__('Duplicate Menu Id.'));
             }
 
             $keys = array_keys($menus);

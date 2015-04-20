@@ -3,8 +3,8 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Widget\Entity\Widget;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Access("system: manage widgets")
@@ -28,7 +28,7 @@ class WidgetsApiController
     public function getAction($id)
     {
         if (!$widget = Widget::find($id)) {
-            throw new NotFoundHttpException('Widget not found.');
+            throw new NotFoundException('Widget not found.');
         }
 
         return $widget;
@@ -45,7 +45,7 @@ class WidgetsApiController
         if ($id) {
 
             if (!$widget = Widget::find($id)) {
-                throw new NotFoundHttpException('Widget not found.');
+                throw new NotFoundException('Widget not found.');
             }
 
         } else {
@@ -68,7 +68,7 @@ class WidgetsApiController
         if ($widget = Widget::find($id)) {
             $widget->delete();
         } else {
-            throw new NotFoundHttpException('Widget not found.');
+            throw new NotFoundException('Widget not found.');
         }
 
         return 'success';

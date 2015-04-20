@@ -3,8 +3,8 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Widget\Entity\Widget;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Access("system: manage widgets", admin=true)
@@ -20,7 +20,7 @@ class WidgetsController
         if (!$widget = Widget::find($id)) {
 
             if (!$type || $id) {
-                throw new NotFoundHttpException;
+                throw new NotFoundException;
             }
 
             $widget = new Widget;

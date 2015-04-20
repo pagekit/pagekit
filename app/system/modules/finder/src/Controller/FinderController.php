@@ -4,7 +4,7 @@ namespace Pagekit\Finder\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Finder\Event\FileAccessEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Pagekit\Kernel\Exception\ForbiddenException;
 
 /**
  * @Response("json")
@@ -21,7 +21,7 @@ class FinderController
         }
 
         if (!is_dir($dir) || '-' === $mode = $this->getMode($dir)) {
-            throw new AccessDeniedHttpException(__('Permission denied.'));
+            throw new ForbiddenException(__('Permission denied.'));
         }
 
         $data = array_fill_keys(['folders', 'files'], []);
@@ -71,7 +71,7 @@ class FinderController
         }
 
         if ('w' !== $this->getMode(dirname($path))) {
-            throw new AccessDeniedHttpException(__('Permission denied.'));
+            throw new ForbiddenException(__('Permission denied.'));
         }
 
         try {
@@ -100,7 +100,7 @@ class FinderController
         }
 
         if ('w' !== $this->getMode($source) || file_exists($target) || 'w' !== $this->getMode(dirname($target))) {
-            throw new AccessDeniedHttpException(__('Permission denied.'));
+            throw new ForbiddenException(__('Permission denied.'));
         }
 
         if (!rename($source, $target)) {
@@ -122,7 +122,7 @@ class FinderController
             }
 
             if ('w' !== $this->getMode($path)) {
-                throw new AccessDeniedHttpException(__('Permission denied.'));
+                throw new ForbiddenException(__('Permission denied.'));
             }
 
             try {
@@ -147,7 +147,7 @@ class FinderController
             }
 
             if (!is_dir($path) || 'w' !== $mode = $this->getMode($path)) {
-                throw new AccessDeniedHttpException(__('Permission denied.'));
+                throw new ForbiddenException(__('Permission denied.'));
             }
 
             $files = App::request()->files->get('files');

@@ -3,6 +3,10 @@
 namespace Pagekit\Routing;
 
 use Pagekit\Event\EventDispatcherInterface;
+
+use Pagekit\Kernel\Exception\HttpException;
+use Pagekit\Kernel\Exception\NotFoundException;
+
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Routing\Event\RouteResourcesEvent;
 use Pagekit\Routing\Generator\UrlGenerator;
@@ -13,8 +17,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -266,14 +268,14 @@ class Router implements RouterInterface, UrlGeneratorInterface
      * @param  string $message
      * @param  array  $headers
      * @throws HttpException
-     * @throws NotFoundHttpException
+     * @throws NotFoundException
      */
     public function abort($code, $message = '', array $headers = [])
     {
         if ($code == 404) {
-            throw new NotFoundHttpException($message);
+            throw new NotFoundException($message);
         } else {
-            throw new HttpException($code, $message, null, $headers);
+            throw new HttpException($message, $code);
         }
     }
 
