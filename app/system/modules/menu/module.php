@@ -13,7 +13,7 @@ return [
             return new MenuProvider;
         };
 
-        $app->on('system.loaded', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
             $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
             $app['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);
             $app['menus']->registerFilter('priority', 'Pagekit\Menu\Filter\PriorityFilter');

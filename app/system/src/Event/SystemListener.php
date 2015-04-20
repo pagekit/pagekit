@@ -13,8 +13,12 @@ class SystemListener implements EventSubscriberInterface
     /**
      * Dispatches the 'system.site' or 'system.admin' event.
      */
-    public function onSystemLoaded()
+    public function onRequest($event)
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
         App::trigger(App::isAdmin() ? 'system.admin' : 'system.site', [App::request()]);
     }
 
@@ -52,9 +56,9 @@ class SystemListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
+            'app.request'   => 'onRequest',
             'system.admin'  => 'onSystemAdmin',
-            'system.finder' => 'onSystemFinder',
-            'system.loaded' => 'onSystemLoaded'
+            'system.finder' => 'onSystemFinder'
         ];
     }
 }
