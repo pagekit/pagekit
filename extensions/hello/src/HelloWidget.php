@@ -3,25 +3,17 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class HelloWidget implements TypeInterface
+class HelloWidget extends Type
 {
     /**
-     * {@inheritdoc}
+     * Constructor.
      */
-    public function getId()
+    public function __construct()
     {
-        return 'widget.hello';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Hello Widget!');
+        parent::__construct('widget.hello', __('Hello Widget!'));
     }
 
     /**

@@ -3,25 +3,17 @@
 namespace Pagekit\Menu\Widget;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\Type;
 use Pagekit\Widget\Model\WidgetInterface;
 
-class MenuWidget implements TypeInterface
+class MenuWidget extends Type
 {
     /**
-     * {@inheritdoc}
+     * Constructor.
      */
-    public function getId()
+    public function __construct()
     {
-        return 'widget.menu';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return __('Menu');
+        parent::__construct('widget.menu', __('Menu'));
     }
 
     /**
