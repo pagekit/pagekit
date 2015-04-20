@@ -31,14 +31,10 @@ class FileAsset extends Asset
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getPath()
+    public function getPath()
     {
-        if (!isset($this->options['path']) && file_exists($this->source)) {
-            return $this->source;
-        }
-
-        return $this->getOption('path');
+        return file_exists($this->source) ? $this->source : false;
     }
 }

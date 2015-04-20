@@ -64,6 +64,14 @@ abstract class Asset implements AssetInterface, \ArrayAccess
     /**
      * {@inheritdoc}
      */
+    public function getPath()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDependencies()
     {
         return $this->dependencies;

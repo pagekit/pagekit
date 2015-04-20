@@ -17,12 +17,8 @@ class FileLocatorAsset extends FileAsset
     /**
      * {@inheritdoc}
      */
-    protected function getPath()
+    public function getPath()
     {
-        if (!isset($this->options['path']) && $path = App::locator()->get($this->source)) {
-            return $path;
-        }
-
-        return parent::getPath();
+        return App::locator()->get($this->source) ?: false;
     }
 }

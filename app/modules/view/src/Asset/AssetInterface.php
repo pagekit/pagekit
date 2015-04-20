@@ -19,6 +19,13 @@ interface AssetInterface
     public function getSource();
 
     /**
+     * Gets the path.
+     *
+     * @return string
+     */
+    public function getPath();
+
+    /**
      * Gets the dependencies.
      *
      * @return array
