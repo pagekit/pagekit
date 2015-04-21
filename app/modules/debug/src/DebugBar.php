@@ -24,6 +24,18 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrentRequestId()
+    {
+        if ($this->requestId == null) {
+            $this->requestId = sha1(parent::getCurrentRequestId());
+        }
+
+        return $this->requestId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function subscribe()
     {
         return [

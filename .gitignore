@@ -5,8 +5,11 @@
 /themes/*
 !/themes/alpha
 /vendor/*
+!/vendor/assets
+/vendor/assets/*
 !/vendor/assets/codemirror
 !/vendor/assets/marked
+!/vendor/assets/vue-resource
 /config.php
 /composer.phar
 /composer.lock
