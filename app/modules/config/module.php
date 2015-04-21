@@ -9,11 +9,6 @@ return [
     'main' => function ($app) {
 
         $app['config'] = function ($app) {
-
-            if (!$this->config['cache']) {
-                $this->config['cache'] = $app['path.cache'];
-            }
-
             return new ConfigManager($app['db'], $this->config);
         };
 
@@ -28,11 +23,11 @@ return [
             });
         }
 
-        $app->on('kernel.terminate', function () use ($app) {
+        $app->on('app.response', function () use ($app) {
             foreach ($app['config'] as $name => $config) {
                 $app['config']->set($name, $config);
             }
-        });
+        }, 100);
 
     },
 

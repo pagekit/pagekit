@@ -13,7 +13,7 @@ return [
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('status', 'smallint');
-                $table->addColumn('title', 'string', ['length' => 255]);
+                $table->addColumn('title', 'string', ['length' => 1023]);
                 $table->addColumn('slug', 'string', ['length' => 1023]);
                 $table->addColumn('path', 'string', ['length' => 1023]);
                 $table->addColumn('type', 'string', ['length' => 255]);
@@ -27,9 +27,8 @@ return [
         if ($util->tableExists('@system_config') === false) {
             $util->createTable('@system_config', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('name', 'string', ['length' => 64, 'default' => '']);
+                $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('value', 'text');
-                $table->addColumn('autoload', 'boolean', ['default' => false]);
                 $table->setPrimaryKey(['id']);
                 $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
             });
@@ -38,7 +37,7 @@ return [
         if ($util->tableExists('@system_role') === false) {
             $util->createTable('@system_role', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('name', 'string', ['length' => 64]);
+                $table->addColumn('name', 'string', ['length' => 255]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('permissions', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
@@ -64,10 +63,10 @@ return [
             $util->createTable('@system_user', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
-                $table->addColumn('username', 'string', ['length' => 150, 'default' => '']);
-                $table->addColumn('email', 'string', ['length' => 100, 'default' => '']);
+                $table->addColumn('username', 'string', ['length' => 255, 'default' => '']);
+                $table->addColumn('email', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('password', 'string', ['length' => 255, 'default' => '']);
-                $table->addColumn('url', 'string', ['length' => 100, 'default' => '']);
+                $table->addColumn('url', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('status', 'smallint', ['default' => 0]);
                 $table->addColumn('registered', 'datetime');
                 $table->addColumn('login', 'datetime', ['notnull' => false]);

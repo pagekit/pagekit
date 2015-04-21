@@ -8,6 +8,18 @@ return [
 
     ],
 
+    'config' => [
+
+        'cache' => "$path/tmp/cache"
+
+    ],
+
+    'debug' => [
+
+        'file' => "sqlite:$path/app/database/debug.db"
+
+    ],
+
     'session' => [
 
         'storage'  => 'database',
@@ -40,12 +52,6 @@ return [
     'filesystem' => [
 
         'path' => $path
-
-    ],
-
-    'debug' => [
-
-        'file' => "sqlite:$path/app/database/debug.db"
 
     ],
 

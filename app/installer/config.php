@@ -8,6 +8,18 @@ return [
 
     ],
 
+    'application' => [
+
+        'debug' => true
+
+    ],
+
+    'config' => [
+
+        'cache' => ''
+
+    ],
+
     'session' => [
 
         'storage' => 'array'
