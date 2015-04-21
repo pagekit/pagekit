@@ -9,14 +9,12 @@ use Pagekit\User\Entity\User;
 
 class UserListener implements EventSubscriberInterface
 {
-    const REFRESH_TOKEN = 'user:auth.refresh_token';
-
     /**
      * Updates the user in the corresponding session.
      */
     public function onUserChange()
     {
-        App::config()->set(self::REFRESH_TOKEN, time(), true);
+        App::config('system/user')->set('auth.refresh_token', time());
     }
 
     /**

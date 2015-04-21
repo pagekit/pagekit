@@ -7,6 +7,8 @@ use Pagekit\Dashboard\Widget\FeedWidget;
 use Pagekit\Dashboard\Widget\WeatherWidget;
 use Pagekit\Module\Module;
 use Pagekit\User\Entity\User;
+use Pagekit\Widget\Model\Type;
+use Pagekit\Widget\Model\TypeInterface;
 
 class DashboardModule extends Module
 {
@@ -23,6 +25,7 @@ class DashboardModule extends Module
     /**
      * Gets a widget.
      *
+     * @param  string $id
      * @return array
      */
     public function getWidget($id)
@@ -69,6 +72,7 @@ class DashboardModule extends Module
     /**
      * Gets a widget type.
      *
+     * @param  string $id
      * @return Type
      */
     public function getType($id)
@@ -87,10 +91,10 @@ class DashboardModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new FeedWidget('widget.feed', __('Feed')));
-            $this->registerType(new WeatherWidget('widget.weather', __('Weather')));
+            $this->registerType(new FeedWidget());
+            $this->registerType(new WeatherWidget());
 
-            App::trigger('system.dashboard', [$this]);
+            App::trigger('dashboard.types', [$this]);
         }
 
         return $this->types;
@@ -99,18 +103,10 @@ class DashboardModule extends Module
     /**
      * Register a widget type.
      *
-     * @param string|TypeInterface $type
+     * @param TypeInterface $type
      */
-    public function registerType($type)
+    public function registerType(TypeInterface $type)
     {
-        if (!is_subclass_of($type, 'Pagekit\Widget\Model\TypeInterface')) {
-            throw new \RuntimeException(sprintf('The widget %s does not implement TypeInterface', $type));
-        }
-
-        if (is_string($type)) {
-            $type = new $type;
-        }
-
         $this->types[$type->getId()] = $type;
     }
 }

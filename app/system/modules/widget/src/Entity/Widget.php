@@ -99,4 +99,16 @@ class Widget extends BaseWidget
             self::STATUS_ENABLED  => __('Enabled')
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        $widget = $this->toJson();
+
+        $widget['statusText'] = $this->getStatusText();
+
+        return $widget;
+    }
 }

@@ -8,6 +8,11 @@ use Pagekit\Widget\Model\WidgetInterface;
 
 class FeedWidget extends Type
 {
+    public function __construct()
+    {
+        parent::__construct('widget.feed', __('Feed'));
+    }
+
     /**
      * {@inheritdoc}
      */

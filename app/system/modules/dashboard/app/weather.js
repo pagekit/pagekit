@@ -93,31 +93,4 @@ jQuery(function($) {
         });
     });
 
-    // settings
-
-    var location = $('#form-weather-location'), autocomplete;
-
-    if (location.length) {
-
-        autocomplete = UIkit.autocomplete(location.parent(), {
-
-            source: function(release) {
-                $.getJSON(api + '/find?callback=?', {q: this.input.val(), type: 'like'}, function(data) {
-                    if (data.cod == 200) {
-                        release(data.list);
-                    } else {
-                        release([]);
-                    }
-                });
-            },
-
-            template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
-
-        });
-
-        autocomplete.element.on('autocomplete-select', function(e, data){
-            autocomplete.input.next().val(data.id);
-        });
-    }
-
 });

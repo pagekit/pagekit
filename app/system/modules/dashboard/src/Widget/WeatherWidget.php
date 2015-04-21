@@ -8,6 +8,11 @@ use Pagekit\Widget\Model\WidgetInterface;
 
 class WeatherWidget extends Type
 {
+    public function __construct()
+    {
+        parent::__construct('widget.weather', __('Weather'));
+    }
+
     /**
      * {@inheritdoc}
      */

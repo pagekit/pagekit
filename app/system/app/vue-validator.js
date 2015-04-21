@@ -27,9 +27,11 @@
                         _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
                     };
 
+                    this.validators[form].model = dir.model;
+
                     _.on(el.form, 'submit', this.validators[form].handler);
 
-                    dir.vm.$set(form, {});
+                    dir.model.$set(form, {});
                 }
 
                 if (this.elements.indexOf(el) == -1) {
@@ -40,7 +42,7 @@
                     _.on(el, 'input', dir.listener);
                 }
 
-                dir.vm[form].$add(dir.name, {});
+                dir.model[form].$add(dir.name, {});
                 this.validators[form].push(dir);
             },
 
@@ -58,16 +60,13 @@
 
             validate: function (form, submit) {
 
-                var results = {}, focus, keys, vm, el;
+                var results = {}, focus, keys;
 
                 if (!this.validators[form]) return results;
 
                 this.validators[form].forEach(function (dir) {
 
-                    vm = dir.vm;
-                    el = dir.el;
-
-                    var name = dir.name, valid = dir.validate();
+                    var el = dir.el, name = dir.name, valid = dir.validate();
 
                     if (submit) {
                         el._touched = true;
@@ -88,7 +87,7 @@
                     }
 
                     if (submit && !focus && !valid) {
-                        dir.el.focus();
+                        el.focus();
                         focus = true;
                     }
 
@@ -108,7 +107,7 @@
                     results.invalid = false;
                 }
 
-                if (vm) vm.$set(form, results);
+                this.validators[form].model.$set(form, results);
 
                 return results.valid;
             }
@@ -118,6 +117,23 @@
         Vue.directive('valid', {
 
             bind: function () {
+                this.vm.$on('hook:attached', function() { this.init(); }.bind(this));
+            },
+
+            unbind: function () {
+                if (this.form) {
+                    this.vm.$validator.unbind(this);
+                }
+            },
+
+            validate: function () {
+
+                var validator = Vue.validators[this.type];
+
+                return validator ? validator.call(this.vm, this.el.value, this.args) : undefined;
+            },
+
+            init: function() {
 
                 var self = this, el = this.el, name = _.attr(el, 'name'), form = _.attr(el.form, 'name');
 
@@ -130,6 +146,7 @@
                 this.type    = this.arg || this.expression;
                 this.args    = this.arg ? this.expression : '';
                 this.value   = el.value;
+                this.model   = el.form.__vue__;
 
                 el._dirty   = false;
                 el._touched = false;
@@ -150,19 +167,6 @@
                 };
 
                 this.vm.$validator.bind(this);
-            },
-
-            unbind: function () {
-                if (this.form) {
-                    this.vm.$validator.unbind(this);
-                }
-            },
-
-            validate: function () {
-
-                var validator = Vue.validators[this.type];
-
-                return validator ? validator.call(this.vm, this.el.value, this.args) : undefined;
             }
 
         });

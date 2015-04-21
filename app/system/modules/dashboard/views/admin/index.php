@@ -1,5 +1,9 @@
 <?php $view->style('system', 'app/system/assets/css/system.css') ?>
 
+<div class="uk-margin uk-clearfix">
+    <a  class="uk-float-right uk-icon-hover uk-icon-small uk-icon-cog" href="<?= $view->url('@dashboard/settings') ?>" title="<?= __('Dashboard Settings') ?>"></a>
+</div>
+
 <div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
 
     <?php foreach ($columns as $column): ?>

@@ -199,9 +199,11 @@ class Widget implements WidgetInterface
      */
     public function jsonSerialize()
     {
-        $widget = $this->toJson();
+        $widget = get_object_vars($this);
 
-        $widget['statusText'] = $this->getStatusText();
+        if (!$widget['settings']) {
+            $widget['settings'] = new \stdClass;
+        }
 
         return $widget;
     }

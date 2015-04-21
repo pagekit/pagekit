@@ -20,8 +20,8 @@ return [
             $app['menus']->registerFilter('active', 'Pagekit\Menu\Filter\ActiveFilter');
         });
 
-        $app->on('system.widget', function($event) {
-            $event->register(new MenuWidget);
+        $app->on('widget.types', function($event, $widgets) {
+            $widgets->registerType(new MenuWidget);
         });
 
         $app->on('system.admin_menu', function ($event) use ($app) {

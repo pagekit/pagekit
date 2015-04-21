@@ -5,7 +5,6 @@ namespace Pagekit\Hello;
 use Pagekit\Application as App;
 use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Extension;
-use Pagekit\Widget\Event\RegisterWidgetEvent;
 
 class HelloExtension extends Extension
 {
@@ -14,17 +13,14 @@ class HelloExtension extends Extension
      */
     public function main(App $app)
     {
-        // TODO fixme
-        return;
-
         $app->subscribe(new HelloListener());
 
-        $app->on('system.widget', function(RegisterWidgetEvent $event) {
-            $event->register('Pagekit\Hello\HelloWidget');
+        $app->on('widget.types', function($event, $widgets) {
+            $widgets->registerType(new HelloWidget());
         });
 
-        $app->on('system.dashboard', function($event, $dashboard) {
-            $dashboard->registerType('Pagekit\Hello\HelloWidget');
+        $app->on('dashboard.types', function($event, $dashboard) {
+            $dashboard->registerType(new HelloWidget());
         });
 
         // dispatch event (check Hello\Event\HelloListener to see how subscribers work)

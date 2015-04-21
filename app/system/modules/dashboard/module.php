@@ -32,7 +32,7 @@ return [
             'label'    => 'Dashboard',
             'icon'     => 'system/dashboard:assets/images/icon-dashboard.svg',
             'url'      => '@dashboard',
-            'active'   => '@dashboard',
+            'active'   => '@dashboard*',
             'priority' => 0
         ]
 

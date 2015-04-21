@@ -46,11 +46,11 @@ return [
             }
         });
 
-        $app->on('system.widget', function ($event) {
-            $event->register(new LoginWidget('widget.user.login', __('Login'), __('Displays a user login form.')));
+        $app->on('widget.types', function ($event, $widgets) {
+            $widgets->registerType(new LoginWidget('widget.user.login', __('Login'), __('Displays a user login form.')));
         });
 
-        $app->on('system.dashboard', function ($event, $dashboard) {
+        $app->on('dashboard.types', function ($event, $dashboard) {
             $dashboard->registerType(new UserWidget('widget.user', __('Users')));
         });
 
@@ -58,6 +58,10 @@ return [
             $event->options($this->name, $this->config, ['registration', 'require_verification']);
             $event->section($this->name, 'User', 'app/system/modules/user/views/admin/settings.php');
         });
+
+        if (!$app['config']->get('system/user')) {
+            $app['config']->set('system/user', [], true);
+        }
 
     },
 
@@ -151,8 +155,10 @@ return [
 
         'registration' => 'admin',
         'require_verification' => true,
-        'users_per_page' => 20
-
+        'users_per_page' => 20,
+        'auth' => [
+            'refresh_token' => false
+        ]
     ]
 
 ];

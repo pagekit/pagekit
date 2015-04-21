@@ -95,7 +95,7 @@
                 <!-- <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>"> -->
 
                 <ul class="uk-nav uk-nav-offcanvas">
-                    <?php if ($subnav->getChildren()): ?>
+                    <?php if ($subnav && $subnav->getChildren()): ?>
                         <li class="uk-nav-header"><?= __($subnav) ?></li>
                         <li<?= $subnav->getAttribute('active') ? ' class="uk-active"' : '' ?>>
                             <a href="<?= $view->url($subnav->getUrl()) ?>"><?= __($subnav) ?></a>

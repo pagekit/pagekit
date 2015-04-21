@@ -102,7 +102,7 @@ class WidgetModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new TextWidget('widget.text', __('Text'), __('Text Widget')));
+            $this->registerType(new TextWidget());
 
             App::trigger('widget.types', [$this]);
         }
@@ -113,8 +113,7 @@ class WidgetModule extends Module
     /**
      * Registers a type.
      *
-     * @param  TypeInterface $type
-     * @throws \RuntimeException
+     * @param TypeInterface $type
      */
     public function registerType(TypeInterface $type)
     {

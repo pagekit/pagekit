@@ -1,39 +1,64 @@
-<div class="uk-form-row">
-    <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>
-    <div class="uk-form-controls">
-        <input id="form-feed-title" class="uk-form-width-large" type="search" name="widget[title]" value="<?= $widget->get('title') ?>" required>
+<div class="uk-form-row" v-component="feed-edit" inline-template>
+
+    <div class="uk-form-row">
+        <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
+        <div class="uk-form-controls">
+            <input id="form-feed-url" class="uk-form-width-large" type="text" name="url" v-model="widget.settings.url" v-valid="required">
+            <p class="uk-form-help-block uk-text-danger" v-show="form.url.invalid">{{ 'URL cannot be blank.' | trans }}</p>
+        </div>
     </div>
+
+    <div class="uk-form-row">
+        <label for="form-feed-count" class="uk-form-label">{{ 'Number of Posts' | trans }}</label>
+        <div class="uk-form-controls">
+            <select id="form-weather-count" class="uk-form-width-large" v-model="widget.settings.count">
+                <?php foreach ([1,2,3,4,5,6,7,8,9,10] as $value): ?>
+                <option value="<?= $value ?>" number><?= $value ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <span class="uk-form-label">{{ 'Post Content' | trans }}</span>
+        <div class="uk-form-controls uk-form-controls-text">
+            <p class="uk-form-controls-condensed">
+                <label><input type="radio" v-model="widget.settings.content" value=""> {{ "Don't show" | trans }}</label>
+            </p>
+            <p class="uk-form-controls-condensed">
+                <label><input type="radio" v-model="widget.settings.content" value="1"> {{ 'Show on all posts' | trans }}</label>
+            </p>
+            <p class="uk-form-controls-condensed">
+                <label><input type="radio" v-model="widget.settings.content" value="2"> {{ 'Only show on first post.' | trans }}</label>
+            </p>
+        </div>
+    </div>
+
 </div>
 
-<div class="uk-form-row">
-    <label for="form-feed-url" class="uk-form-label"><?= __('URL') ?></label>
-    <div class="uk-form-controls">
-        <input id="form-feed-url" class="uk-form-width-large" type="search" name="widget[url]" value="<?= $widget->get('url') ?>">
-    </div>
-</div>
+<script>
 
-<div class="uk-form-row">
-    <label for="form-feed-count" class="uk-form-label"><?= __('Number of Posts') ?></label>
-    <div class="uk-form-controls">
-        <select id="form-weather-count" class="uk-form-width-large" name="widget[count]">
-            <?php foreach ([1,2,3,4,5,6,7,8,9,10] as $value): ?>
-            <option value="<?= $value ?>" <?= $widget->get('count') == $value ? 'selected' : '' ?>><?= $value ?></option>
-            <?php endforeach ?>
-        </select>
-    </div>
-</div>
+    Vue.component('feed-edit', {
 
-<div class="uk-form-row">
-    <span class="uk-form-label"><?= __('Post Content') ?></span>
-    <div class="uk-form-controls uk-form-controls-text">
-        <p class="uk-form-controls-condensed">
-            <label><input type="radio" name="widget[content]" value="0" <?= $widget->get('content') == '0' || $widget->get('content') == '' ? 'checked' : '' ?>> <?= __('Don\'t show') ?></label>
-        </p>
-        <p class="uk-form-controls-condensed">
-            <label><input type="radio" name="widget[content]" value="1" <?= $widget->get('content') == '1' ? 'checked' : '' ?>> <?= __('Show on all posts') ?></label>
-        </p>
-        <p class="uk-form-controls-condensed">
-            <label><input type="radio" name="widget[content]" value="2" <?= $widget->get('content') == '2' ? 'checked' : '' ?>> <?= __('Only show on first post.') ?></label>
-        </p>
-    </div>
-</div>
+        inherit: true,
+
+        ready: function() {
+
+            var self = this;
+
+            this.$watch('widget', function(widget) {
+
+                if (!widget.settings.content) {
+                    self.$set('widget.settings.content', '');
+                }
+
+                if (!widget.settings.count) {
+                    self.$set('widget.settings.count', '5');
+                }
+
+            }, true, true);
+        }
+
+    });
+
+</script>

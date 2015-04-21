@@ -1,22 +1,29 @@
-<form class="uk-form uk-form-horizontal" action="<?= $view->url('@dashboard/save', ['id' => $widget->getId()]) ?>" method="post">
+<?php $view->script('widget-edit', 'app/system/modules/dashboard/app/edit.js', ['vue-system', 'vue-validator']) ?>
+
+<form id="js-widget-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ 'Edit Widget' | trans }}</h2>
+            <h2 class="uk-margin-remove">{{ widget.id ? $trans('Edit Widget') : $trans('Add Widget') }} ({{ type.name }})</h2>
 
         </div>
         <div data-uk-margin>
 
-            <button class="uk-button uk-button-primary" type="submit"><?= __('Save') ?></button>
-            <a class="uk-button" href="<?= $view->url('@dashboard/settings') ?>"><?= $widget->getId() ? __('Close') : __('Cancel') ?></a>
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
+            <a class="uk-button" v-attr="href: $url('admin/dashboard/settings')">{{ widget.id ? 'Close' : 'Cancel' | trans }}</a>
 
         </div>
     </div>
 
-    <?= $type->renderForm($widget) ?>
+    <div class="uk-form-row">
+        <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>
+        <div class="uk-form-controls">
+            <input id="form-feed-title" class="uk-form-width-large" type="text" name="widget[title]" v-model="widget.title" v-valid="required">
+            <p class="uk-form-help-block uk-text-danger" v-show="form['widget[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</p>
+        </div>
+    </div>
 
-    <input type="hidden" name="widget[type]" value="<?= $type->getId() ?>">
-    <?php $view->token()->get() ?>
+    <?= $type->renderForm($widget) ?>
 
 </form>

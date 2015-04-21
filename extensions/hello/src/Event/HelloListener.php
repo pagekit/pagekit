@@ -2,11 +2,11 @@
 
 namespace Pagekit\Hello\Event;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Pagekit\Event\EventSubscriberInterface;
 
 class HelloListener implements EventSubscriberInterface
 {
-    public function onBoot($event, $eventName, $dispatcher)
+    public function onBoot($event)
     {
         // do something
     }
@@ -16,7 +16,7 @@ class HelloListener implements EventSubscriberInterface
         // do something
     }
 
-    public static function getSubscribedEvents()
+    public function subscribe()
     {
         return [
              // call onBoot in case of hello.boot event

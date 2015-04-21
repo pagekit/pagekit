@@ -3,7 +3,7 @@
 namespace Pagekit\Dashboard\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
+use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Module\Module;
 use Pagekit\Widget\Model\Widget;
 
@@ -27,6 +27,7 @@ class DashboardController
     }
 
     /**
+     * @Route("/", methods="GET")
      * @Response("system/dashboard:views/admin/index.php")
      */
     public function indexAction()
@@ -35,8 +36,11 @@ class DashboardController
         $columns = [];
 
         foreach ($this->dashboard->getWidgets() as $id => $data) {
-            if ($type = $this->dashboard->getType($data['type'])) {
-                $widgets[$id] = $type->render($this->create($id, $data));
+
+            $widget = $this->create($data);
+
+            if ($type = $this->dashboard->getType($widget->getType())) {
+                $widgets[$id] = $type->render($widget);
                 $columns[] = $id;
             }
         }
@@ -74,28 +78,24 @@ class DashboardController
      */
     public function addAction($id)
     {
-        try {
-
-            if (!$type = $this->dashboard->getType($id)) {
-                throw new Exception(__('Invalid widget type.'));
-            }
-
-            $widget = new Widget;
-            $widget->setType($id);
-
-            return [
-                '$meta' => [
-                    'title' => __('Add Widget')
-                ],
-                'type' => $type,
-                'widget' => $widget
-            ];
-
-        } catch (Exception $e) {
-            App::message()->error($e->getMessage());
+        if (!$type = $this->dashboard->getType($id)) {
+            throw new NotFoundException(__('Widget type not found.'));
         }
 
-        return App::redirect('@dashboard/settings');
+        $widget = new Widget;
+        $widget->setType($id);
+
+        return [
+            '$meta' => [
+                'title' => __('Add Widget')
+            ],
+            'type' => $type,
+            'widget' => $widget,
+            '$data' => [
+                'type' => $type,
+                'widget' => $widget
+            ]
+        ];
     }
 
     /**
@@ -104,53 +104,46 @@ class DashboardController
      */
     public function editAction($id)
     {
-        try {
-
-            if (!$widget = $this->dashboard->getWidget($id)) {
-                throw new Exception(__('Invalid widget id.'));
-            }
-
-            if (!$type = $this->dashboard->getType($widget['type'])) {
-                throw new Exception(__('Invalid widget type.'));
-            }
-
-            $widget = $this->create($id, $widget);
-
-            return [
-                '$meta' => [
-                    'title' => __('Edit Widget')
-                ],
-                'type' => $type,
-                'widget' => $widget
-            ];
-
-        } catch (Exception $e) {
-            App::message()->error($e->getMessage());
+        if (!$widget = $this->dashboard->getWidget($id)) {
+            throw new NotFoundException(__('Widget not found.'));
         }
 
-        return App::redirect('@dashboard/settings');
+        if (!$type = $this->dashboard->getType($widget['type'])) {
+            throw new NotFoundException(__('Widget type not found.'));
+        }
+
+        $widget = $this->create($widget);
+
+        return [
+            '$meta' => [
+                'title' => __('Edit Widget')
+            ],
+            'type' => $type,
+            'widget' => $widget,
+            '$data' => [
+                'type' => $type,
+                'widget' => $widget
+            ]
+        ];
     }
 
     /**
+     * @Route("/", methods="POST")
+     * @Route("/{id}", methods="POST")
      * @Request({"id", "widget": "array"}, csrf=true)
+     * @Response("json")
      */
     public function saveAction($id = 0, $widget = [])
     {
-        try {
-
-            if ($new = !$id) {
-                $id = uniqid();
-            }
-
-            $this->dashboard->saveWidgets(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
-
-            App::message()->success($new ? __('Widget created.') : __('Widget saved.'));
-
-        } catch (Exception $e) {
-            App::message()->error($e->getMessage());
+        if ($new = !$id) {
+            $id = uniqid();
         }
 
-        return App::redirect($id ? '@dashboard/edit' : '@dashboard/add', compact('id'));
+        $widget['id'] = $id;
+
+        $this->dashboard->saveWidgets(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
+
+        return $widget;
     }
 
     /**
@@ -193,22 +186,26 @@ class DashboardController
     }
 
     /**
-     * @param string $id
-     * @param array  $data
+     * @param  array $data
      * @return Widget
      */
-    protected function create($id, $data)
+    protected function create($data)
     {
         $widget = new Widget;
-        $widget->setId($id);
-        $widget->setType($data['type']);
-        $widget->setSettings($data);
+
+        foreach ($data as $key => $value) {
+            if (method_exists($widget, $method = 'set'.$key)) {
+                $widget->$method($value);
+            } else {
+                $widget->set($key, $value);
+            }
+        }
 
         return $widget;
     }
 
-    protected function chunkList($list, $p) {
-
+    protected function chunkList($list, $p)
+    {
         $listlen   = count($list);
         $partlen   = floor($listlen / $p);
         $partrem   = $listlen % $p;

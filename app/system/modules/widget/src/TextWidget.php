@@ -8,6 +8,11 @@ use Pagekit\Widget\Model\WidgetInterface;
 
 class TextWidget extends Type
 {
+    public function __construct()
+    {
+        parent::__construct('widget.text', __('Text'), __('Text Widget'));
+    }
+
     /**
      * {@inheritdoc}
      */
