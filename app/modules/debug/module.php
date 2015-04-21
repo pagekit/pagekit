@@ -2,7 +2,6 @@
 
 use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
-use DebugBar\Storage\FileStorage;
 use Pagekit\Debug\DebugBar;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
 use Pagekit\Debug\DataCollector\DatabaseDataCollector;
@@ -25,10 +24,6 @@ return [
             $debugbar->setStorage($app['debugbar.storage']);
             $debugbar->addCollector(new MemoryCollector());
             $debugbar->addCollector(new TimeDataCollector());
-
-            if (isset($app['auth'])) {
-                $debugbar->addCollector(new AuthDataCollector($app['auth']));
-            }
 
             if (isset($app['db'])) {
                 $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);
@@ -57,6 +52,11 @@ return [
         $app->subscribe($app['debugbar']);
 
         $app->on('app.request', function () use ($app) {
+
+            if (isset($app['auth'])) {
+                $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
+            }
+
             $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
             $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
             $app['view']->script('debugbar', 'app/modules/debug/assets/app/debugbar.min.js', ['vue', 'jquery']);

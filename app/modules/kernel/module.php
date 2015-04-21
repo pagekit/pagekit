@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\Kernel\EventDispatcher;
 use Pagekit\Kernel\HttpKernel;
 use Pagekit\Kernel\Controller\ControllerResolver;
 use Pagekit\Kernel\Controller\ControllerListener;
@@ -26,7 +25,7 @@ return [
             return new HttpKernel($app['events'], $app['request.stack']);
         };
 
-        $app['resolver'] = function ($app) {
+        $app['resolver'] = function () {
             return new ControllerResolver();
         };
 
@@ -36,10 +35,6 @@ return [
 
         $app['request.stack'] = function () {
             return new RequestStack();
-        };
-
-        $app['request.context'] = function ($app) {
-            return new RequestContext();
         };
 
         // redirect the request if it has a trailing slash
