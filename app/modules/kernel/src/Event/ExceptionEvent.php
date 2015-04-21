@@ -2,6 +2,8 @@
 
 namespace Pagekit\Kernel\Event;
 
+use Pagekit\Kernel\HttpKernelInterface;
+
 class ExceptionEvent extends KernelEvent
 {
     use ResponseTrait;
@@ -14,13 +16,13 @@ class ExceptionEvent extends KernelEvent
     /**
      * Construct.
      *
-     * @param string     $name
-     * @param int        $requestType
+     * @param string              $name
+     * @param HttpKernelInterface $kernel
      * @param \Exception $e
      */
-    public function __construct($name, $requestType, \Exception $e)
+    public function __construct($name, HttpKernelInterface $kernel, \Exception $e)
     {
-        parent::__construct($name, $requestType);
+        parent::__construct($name, $kernel);
 
         $this->setException($e);
     }

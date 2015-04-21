@@ -11,11 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
-class HttpKernel
+class HttpKernel implements HttpKernelInterface
 {
-    const MASTER_REQUEST = 1;
-    const SUB_REQUEST    = 2;
-
     /**
      * @var EventDispatcherInterface
      */
@@ -24,43 +21,59 @@ class HttpKernel
     /**
      * @var RequestStack
      */
-    protected $requestStack;
+    protected $stack;
 
     /**
      * Constructor.
      *
      * @param EventDispatcherInterface $events
-     * @param RequestStack             $requestStack
+     * @param RequestStack             $stack
      */
-    public function __construct(EventDispatcherInterface $events, RequestStack $requestStack = null)
+    public function __construct(EventDispatcherInterface $events, RequestStack $stack = null)
     {
         $this->events = $events;
-        $this->requestStack = $requestStack ?: new RequestStack();
+        $this->stack  = $stack ?: new RequestStack();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
+    public function getRequest()
+    {
+        return $this->stack->getCurrentRequest();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isMasterRequest()
+    {
+        return $this->getRequest() === $this->stack->getMasterRequest();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(Request $request)
     {
         try {
 
-            $event = new RequestEvent('app.request', $type);
+            $event = new RequestEvent('app.request', $this);
 
-            $this->requestStack->push($request);
+            $this->stack->push($request);
             $this->events->trigger($event, [$request]);
 
             if ($event->hasResponse()) {
                 $response = $event->getResponse();
             } else {
-                $response = $this->handleController($request, $type);
+                $response = $this->handleController();
             }
 
-            return $this->handleResponse($request, $response, $type);
+            return $this->handleResponse($response);
 
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
 
-            return $this->handleException($exception, $request, $type);
+            return $this->handleException($e);
 
         }
     }
@@ -68,14 +81,12 @@ class HttpKernel
     /**
      * Handles the controller event.
      *
-     * @param  Request  $request
-     * @param  int      $type
      * @return Response
      */
-    protected function handleController(Request $request, $type)
+    protected function handleController()
     {
-        $event = new ControllerEvent('app.controller', $type);
-        $this->events->trigger($event, [$request]);
+        $event = new ControllerEvent('app.controller', $this);
+        $this->events->trigger($event, [$this->getRequest()]);
 
         $response = $event->getResponse();
 
@@ -96,16 +107,14 @@ class HttpKernel
     /**
      * Handles the response event.
      *
-     * @param  Request  $request
      * @param  Response $response
-     * @param  int      $type
      * @return Response
      */
-    protected function handleResponse(Request $request, Response $response, $type)
+    protected function handleResponse(Response $response)
     {
-        $event = new KernelEvent('app.response', $type, $response);
-        $this->events->trigger($event, [$request, $response]);
-        $this->requestStack->pop();
+        $event = new KernelEvent('app.response', $this);
+        $this->events->trigger($event, [$this->getRequest(), $response]);
+        $this->stack->pop();
 
         return $response;
     }
@@ -114,21 +123,17 @@ class HttpKernel
      * Handles an exception by trying to convert it to a Response.
      *
      * @param  \Exception $e
-     * @param  Request    $request
-     * @param  int        $type
      * @return Response
-     *
-     * @throws \Exception
      */
-    protected function handleException(\Exception $e, $request, $type)
+    protected function handleException(\Exception $e)
     {
-        $event = new ExceptionEvent('app.exception', $type, $e);
-        $this->events->trigger($event, [$request]);
+        $event = new ExceptionEvent('app.exception', $this, $e);
+        $this->events->trigger($event, [$this->getRequest()]);
 
-        // a listener might have replaced the exception
         $e = $event->getException();
 
         if (!$event->hasResponse()) {
+
             // $this->finishRequest($request, $type);
 
             throw $e;

@@ -3,36 +3,36 @@
 namespace Pagekit\Kernel\Event;
 
 use Pagekit\Event\Event;
-use Pagekit\Kernel\HttpKernel;
+use Pagekit\Kernel\HttpKernelInterface;
 
 class KernelEvent extends Event
 {
     /**
-     * @var int
+     * @var HttpKernelInterface
      */
-    protected $requestType;
+    protected $kernel;
 
     /**
      * Constructor.
      *
-     * @param string $name
-     * @param int    $requestType
+     * @param string              $name
+     * @param HttpKernelInterface $kernel
      */
-    public function __construct($name, $requestType)
+    public function __construct($name, HttpKernelInterface $kernel)
     {
         parent::__construct($name);
 
-        $this->requestType = $requestType;
+        $this->kernel = $kernel;
     }
 
     /**
-     * Gets the request type.
+     * Gets the kernel.
      *
-     * @return int
+     * @return HttpKernelInterface
      */
-    public function getRequestType()
+    public function getKernel()
     {
-        return $this->requestType;
+        return $this->kernel;
     }
 
     /**
@@ -42,6 +42,6 @@ class KernelEvent extends Event
      */
     public function isMasterRequest()
     {
-        return HttpKernel::MASTER_REQUEST === $this->requestType;
+        return $this->kernel->isMasterRequest();
     }
 }
