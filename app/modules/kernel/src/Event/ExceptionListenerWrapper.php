@@ -1,10 +1,9 @@
 <?php
 
-namespace Pagekit\Application;
+namespace Pagekit\Kernel\Event;
 
-use Pagekit\Application;
+use Pagekit\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ExceptionListenerWrapper
 {
@@ -28,7 +27,7 @@ class ExceptionListenerWrapper
             return;
         }
 
-        $code = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
+        $code = $exception instanceof HttpException ? $exception->getCode() : 500;
 
         $response = call_user_func($this->callback, $exception, $code);
 

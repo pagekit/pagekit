@@ -2,7 +2,7 @@
 
 namespace Pagekit\Application\Traits;
 
-use Pagekit\Application\ExceptionListenerWrapper;
+use Pagekit\Kernel\Event\ExceptionListenerWrapper;
 use Symfony\Component\HttpFoundation\Request;
 
 trait RouterTrait
