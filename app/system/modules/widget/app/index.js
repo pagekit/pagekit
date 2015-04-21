@@ -14,7 +14,7 @@ Vue.component('widgets-index', {
 
     created: function () {
         this.Widgets = this.$resource('api/widget/:id');
-        this.$watch('search', _.debounce(this.load, 200), false, true);
+        this.$watch('search', this.load, false, true);
     },
 
     ready: function() {

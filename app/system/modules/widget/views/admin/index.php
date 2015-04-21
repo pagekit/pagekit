@@ -26,7 +26,7 @@
 
     </div>
     <div data-uk-margin>
-        <input type="text" v-model="search" placeholder="{{ 'Search' | trans }}" v-on="keypress: preventSubmit">
+        <input type="text" v-model="search" placeholder="{{ 'Search' | trans }}" v-on="keypress: preventSubmit" debounce="500">
     </div>
 </div>
 

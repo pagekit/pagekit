@@ -24,7 +24,7 @@
             <select v-model="config.filter.status" options="statuses"></select>
             <select v-model="config.filter.role" options="roles"></select>
             <select v-model="config.filter.permission" options="permissions"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}">
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="500">
 
         </div>
     </div>
