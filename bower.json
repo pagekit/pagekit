@@ -3,8 +3,8 @@
   "dependencies": {
     "gravatarjs": "~1.0.0",
     "uikit": "~2.18",
-    "vue": "~0.11.5",
-    "lodash": "~3.6.0"
+    "vue": "~0.11.7",
+    "lodash": "~3.7.0"
   },
   "private": true
 }
