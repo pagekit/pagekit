@@ -6,23 +6,19 @@ use Pagekit\Application as App;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 class ExceptionController
 {
     /**
      * Converts an Exception to a Response.
      *
-     * @param  Request              $request
-     * @param  FlattenException     $exception
-     * @param  DebugLoggerInterface $logger
-     * @param  string               $_format
-     * @throws \InvalidArgumentException
+     * @param  Request          $request
+     * @param  FlattenException $exception
      * @return Response
      */
-    public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null, $_format = 'html')
+    public function showAction(Request $request, FlattenException $exception)
     {
-        if (is_subclass_of($exception->getClass(), 'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface')) {
+        if (is_subclass_of($exception->getClass(), 'Pagekit\Kernel\Exception\HttpException')) {
             $title = $exception->getMessage();
         } else {
             $title = __('Whoops, looks like something went wrong.');
@@ -31,10 +27,12 @@ class ExceptionController
         $content  = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
         $response = App::view('system/theme:templates/error.php', compact('title', 'exception', 'content'));
 
-        return App::response($response, $exception->getStatusCode(), $exception->getHeaders());
+        return App::response($response, $exception->getCode(), $exception->getHeaders());
     }
 
     /**
+     * Cleans output buffer.
+     *
      * @param  int    $level
      * @return string
      */

@@ -1,10 +1,10 @@
 <?php
 
+use Pagekit\Kernel\Event\ExceptionListener;
 use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 return [
 

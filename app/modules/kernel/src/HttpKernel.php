@@ -3,6 +3,7 @@
 namespace Pagekit\Kernel;
 
 use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Exception\HttpException;
 use Pagekit\Kernel\Event\ControllerEvent;
 use Pagekit\Kernel\Event\ExceptionEvent;
 use Pagekit\Kernel\Event\KernelEvent;
@@ -74,7 +75,6 @@ class HttpKernel implements HttpKernelInterface
         } catch (\Exception $e) {
 
             return $this->handleException($e);
-
         }
     }
 
@@ -120,7 +120,7 @@ class HttpKernel implements HttpKernelInterface
     }
 
     /**
-     * Handles an exception by trying to convert it to a Response.
+     * Handles the exception event.
      *
      * @param  \Exception $e
      * @return Response
@@ -133,34 +133,25 @@ class HttpKernel implements HttpKernelInterface
         $e = $event->getException();
 
         if (!$event->hasResponse()) {
-
-            // $this->finishRequest($request, $type);
-
             throw $e;
         }
 
         $response = $event->getResponse();
 
-        // the developer asked for a specific status code
-        if ($response->headers->has('X-Status-Code')) {
-
-            $response->setStatusCode($response->headers->get('X-Status-Code'));
-            $response->headers->remove('X-Status-Code');
-
-        } elseif (!$response->isClientError() && !$response->isServerError() && !$response->isRedirect()) {
-            // ensure that we actually have an error response
-            if ($e instanceof HttpExceptionInterface) {
-                // keep the HTTP status code and headers
-                $response->setStatusCode($e->getStatusCode());
-                $response->headers->add($e->getHeaders());
+        if (!$response->isClientError() && !$response->isServerError() && !$response->isRedirect()) {
+            if ($e instanceof HttpException) {
+                $response->setStatusCode($e->getCode());
             } else {
                 $response->setStatusCode(500);
             }
         }
 
         try {
-            return $this->handleResponse($response, $request, $type);
+
+            return $this->handleResponse($response);
+
         } catch (\Exception $e) {
+
             return $response;
         }
     }

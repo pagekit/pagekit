@@ -4,7 +4,6 @@ namespace Pagekit\Application\Traits;
 
 use Pagekit\Application\ExceptionListenerWrapper;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 trait RouterTrait
 {
@@ -54,6 +53,6 @@ trait RouterTrait
                 static::router()->generate($name, $parameters), 'GET', [],
                 $request->cookies->all(), [],
                 $request->server->all()
-            ), HttpKernelInterface::SUB_REQUEST);
+            ));
     }
 }
