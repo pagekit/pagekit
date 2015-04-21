@@ -5,6 +5,7 @@ use DebugBar\DataCollector\TimeDataCollector;
 use Pagekit\Debug\DebugBar;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
 use Pagekit\Debug\DataCollector\DatabaseDataCollector;
+use Pagekit\Debug\DataCollector\RoutesDataCollector;
 use Pagekit\Debug\DataCollector\SystemDataCollector;
 use Pagekit\Debug\Storage\SqliteStorage;
 
@@ -24,6 +25,7 @@ return [
             $debugbar->setStorage($app['debugbar.storage']);
             $debugbar->addCollector(new MemoryCollector());
             $debugbar->addCollector(new TimeDataCollector());
+            $debugbar->addCollector(new RoutesDataCollector($app['router']));
 
             if (isset($app['db'])) {
                 $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);

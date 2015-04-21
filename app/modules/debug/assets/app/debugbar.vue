@@ -53,7 +53,7 @@
 
             $.each(collectors, function (name) {
                 if (data[name]) {
-                    self.panels.unshift(name);
+                    self.panels.push(name);
                 }
             });
 
