@@ -10,6 +10,7 @@
 !/vendor/assets/codemirror
 !/vendor/assets/marked
 !/vendor/assets/vue-resource
+!/vendor/assets/vue-validator
 /config.php
 /composer.phar
 /composer.lock

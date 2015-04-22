@@ -53,7 +53,7 @@ return [
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
             $app['scripts']->register('vue-system', 'app/system/app/vue-system.js', ['vue-resource', 'jquery', 'lodash', 'locale']);
             $app['scripts']->register('vue-resource', 'vendor/assets/vue-resource/dist/vue-resource.min.js', 'vue');
-            $app['scripts']->register('vue-validator', 'app/system/app/vue-validator.js', 'vue');
+            $app['scripts']->register('vue-validator', 'vendor/assets/vue-validator/dist/vue-validator.min.js', 'vue');
 
         }, 30);
 

@@ -78,7 +78,8 @@ gulp.task('browserify', function () {
 
   var files = [
     {src: './app/modules/debug/assets/app/debugbar.js', dest: 'debugbar.min.js'},
-    {src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.min.js'}
+    {src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.min.js'},
+    {src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.min.js'}
   ];
 
   files.map(function (file) {
@@ -94,6 +95,6 @@ gulp.task('browserify', function () {
       .pipe(uglify())
       .on('error', util.log)
       .pipe(gulp.dest('.'));
-  };
+  }
 
 });
