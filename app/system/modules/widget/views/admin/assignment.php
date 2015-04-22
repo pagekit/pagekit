@@ -8,7 +8,6 @@
     </div>
 </div>
 
-<pre>{{ widget | json }}</pre>
 <script id="node-item" type="text/template">
 
     <label>

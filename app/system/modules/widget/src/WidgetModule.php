@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
-use Pagekit\Widget\View\PositionHelper;
 
 class WidgetModule extends Module
 {
@@ -46,7 +45,7 @@ class WidgetModule extends Module
 
             $active    = (array) $app['request']->attributes->get('_node');
             $user      = $app['user'];
-            $positions = new PositionHelper($app['view']);
+            $positions = $app['view']->position();
 
             $app['view']->addHelper($positions);
 
@@ -72,6 +71,8 @@ class WidgetModule extends Module
                     $app['view']->map('position.'.$id, $renderer);
                 }
             }
+
+            $app['view']->map('position.default', 'widget:views/widgets.php');
 
         });
     }

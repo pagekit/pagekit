@@ -1,18 +1,12 @@
 <?php
 
-namespace Pagekit\Widget\View;
+namespace Pagekit\View\Helper;
 
-use Pagekit\View\Helper\HelperInterface;
 use Pagekit\View\ViewManager;
 use Pagekit\Widget\Model\WidgetInterface;
 
 class PositionHelper implements HelperInterface
 {
-    /**
-     * @var ViewManager
-     */
-    protected $view;
-
     /**
      * @var array
      */
@@ -25,11 +19,7 @@ class PositionHelper implements HelperInterface
      */
     public function __construct(ViewManager $view)
     {
-        $this->view = $view;
-
-        $view->map('position.default', 'widget:views/widgets.php');
-
-        $this->view->on('render', function ($event, $tmpl) use ($view) {
+        $view->on('render', function ($event, $tmpl) use ($view) {
             if ($this->exists($name = $tmpl->getName())) {
                 $tmpl->setResult($view->render(
                     'position.'.($tmpl->getParameter('renderer') ?: 'default'),

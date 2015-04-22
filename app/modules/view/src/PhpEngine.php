@@ -26,6 +26,7 @@ class PhpEngine extends BasePhpEngine
 
     /**
      * {@inheritdoc}
+     * TODO: evalTemplate and evalParameters have private access
      */
     protected function evaluate(Storage $template, array $parameters = array())
     {
