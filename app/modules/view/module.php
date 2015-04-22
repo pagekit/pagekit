@@ -31,15 +31,15 @@ return [
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
             $view->addHelpers([
-                new MetaHelper($view),
                 new DataHelper($view),
+                new DeferredHelper($view, $app),
+                new GravatarHelper(),
                 new MapHelper($view),
+                new MetaHelper($view),
+                new ScriptHelper($view, $app['scripts']),
                 new SectionHelper($view),
                 new StyleHelper($view, $app['styles']),
-                new ScriptHelper($view, $app['scripts']),
-                new DeferredHelper($view, $app),
-                new UrlHelper($app['url']),
-                new GravatarHelper()
+                new UrlHelper($app['url'])
             ]);
 
             if (isset($app['csrf'])) {

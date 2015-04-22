@@ -6,6 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\View\PositionHelper;
 
 class WidgetModule extends Module
 {
@@ -43,9 +44,11 @@ class WidgetModule extends Module
 
         $app->on('app.request', function($event) use ($app) {
 
-            $active = (array) $app['request']->attributes->get('_node');
-            $user   = $app['user'];
-            $view   = $app['view'];
+            $active    = (array) $app['request']->attributes->get('_node');
+            $user      = $app['user'];
+            $positions = new PositionHelper($app['view']);
+
+            $app['view']->addHelper($positions);
 
             foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
 
@@ -53,8 +56,23 @@ class WidgetModule extends Module
                     continue;
                 }
 
-                $view->on($widget->getPosition(), $widget);
+                $positions->add($widget);
             }
+        });
+
+        $app->on('app.site', function($event) use ($app) {
+
+            foreach ($app['module'] as $module) {
+
+                if (!isset($module->renderer) || !is_array($module->renderer)) {
+                    continue;
+                }
+
+                foreach ($module->renderer as $id => $renderer) {
+                    $app['view']->map('position.'.$id, $renderer);
+                }
+            }
+
         });
     }
 
@@ -93,6 +111,17 @@ class WidgetModule extends Module
     public function registerPosition($id, $name, $description = '')
     {
         $this->positions[$id] = compact('id', 'name', 'description');
+    }
+
+    /**
+     * @param  string $type
+     * @return TypeInterface
+     */
+    public function getType($type)
+    {
+        $types = $this->getTypes();
+
+        return isset($types[$type]) ? $types[$type] : null;
     }
 
     /**

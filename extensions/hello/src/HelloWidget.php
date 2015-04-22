@@ -31,7 +31,7 @@ class HelloWidget extends Type
     {
         $user = App::user();
 
-        return App::view('hello:views/widget.razr', compact('user'));
+        return App::view('hello:views/widget.php', compact('user'));
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Pagekit\Widget\Model;
 
+use Pagekit\Application as App;
+use Pagekit\Util\Arr;
+
 class Widget implements WidgetInterface
 {
     /**
@@ -155,7 +158,7 @@ class Widget implements WidgetInterface
      */
     public function get($name, $default = null)
     {
-        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+        return Arr::get($this->settings, $name, $default);
     }
 
     /**
@@ -163,7 +166,7 @@ class Widget implements WidgetInterface
      */
     public function set($name, $value)
     {
-        $this->settings[$name] = $value;
+        Arr::set($this->settings, $name, $value);
     }
 
     /**
@@ -171,9 +174,7 @@ class Widget implements WidgetInterface
      */
     public function remove($name)
     {
-        if (isset($this->settings)) {
-            unset($this->settings[$name]);
-        }
+        Arr::remove($this->settings, $name);
     }
 
     /**
@@ -181,7 +182,7 @@ class Widget implements WidgetInterface
      */
     public function render($options = [])
     {
-        $type = $this->getWidgetType($this->type);
+        $type = App::module('system/widget')->getType($this->type);
 
         return $type ? $type->render($this, $options) : '';
     }

@@ -66,11 +66,11 @@ return [
      */
     'renderer' => [
 
-        'blank'     => 'themes/alpha/views/renderer/position.blank.razr',
+        'blank'     => 'themes/alpha/views/renderer/position.blank.php',
         'grid'      => 'themes/alpha/views/renderer/position.grid.php',
-        'navbar'    => 'themes/alpha/views/renderer/position.navbar.razr',
-        'offcanvas' => 'themes/alpha/views/renderer/position.offcanvas.razr',
-        'panel'     => 'themes/alpha/views/renderer/position.panel.razr'
+        'navbar'    => 'themes/alpha/views/renderer/position.navbar.php',
+        'offcanvas' => 'themes/alpha/views/renderer/position.offcanvas.php',
+        'panel'     => 'themes/alpha/views/renderer/position.panel.php'
 
     ],
 

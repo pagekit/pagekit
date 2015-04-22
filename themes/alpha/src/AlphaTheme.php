@@ -4,6 +4,7 @@ namespace Pagekit\Alpha;
 
 use Pagekit\Application as App;
 use Pagekit\System\Theme;
+use Pagekit\Util\Arr;
 
 class AlphaTheme extends Theme
 {
@@ -25,12 +26,21 @@ class AlphaTheme extends Theme
         });
     }
 
-    public function getClasses()
+    public function getClasses($key = null)
     {
-        if (null !== $this->classes) {
+        if (null === $this->classes) {
+            $this->buildClasses();
+        }
+
+        if (null === $key) {
             return $this->classes;
         }
 
+        return Arr::get($this->classes, $key);
+    }
+
+    protected function buildClasses()
+    {
         $sidebars = array_replace_recursive([
             'sidebar-a' => ['width' => 12, 'alignment' => 'left'],
             'sidebar-b' => ['width' => 12, 'alignment' => 'right']
@@ -72,6 +82,5 @@ class AlphaTheme extends Theme
         }
 
         $this->classes = compact('columns');
-        return $this->classes;
     }
 }

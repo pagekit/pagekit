@@ -146,7 +146,7 @@
                 this.type    = this.arg || this.expression;
                 this.args    = this.arg ? this.expression : '';
                 this.value   = el.value;
-                this.model   = el.form.__vue__;
+                this.model   = el.form.__vue__ || this.vm;
 
                 el._dirty   = false;
                 el._touched = false;

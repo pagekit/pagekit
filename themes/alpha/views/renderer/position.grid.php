@@ -11,10 +11,10 @@ $widths = [
 
 $i      = 0;
 $output = [];
-$count  = count($value);
+$count  = count($widgets);
 $width  = isset($widths[($count-1)]) ? $widths[($count-1)] : array_pad([], $count, '1-6');
 
-foreach ($value as $widget) {
+foreach ($widgets as $widget) {
 
     $class     = $width[$i];
 

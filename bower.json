@@ -2,7 +2,7 @@
   "name": "pagekit",
   "dependencies": {
     "gravatarjs": "~1.0.0",
-    "uikit": "~2.18",
+    "uikit": "~2.19",
     "vue": "~0.11.7",
     "lodash": "~3.7.0"
   },
