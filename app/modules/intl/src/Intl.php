@@ -38,16 +38,6 @@ class Intl extends Data implements \ArrayAccess
     }
 
     /**
-     * Get shortcut.
-     *
-     * @see offsetGet()
-     */
-    public function __invoke($name)
-    {
-        return $this->offsetGet($name);
-    }
-
-    /**
      * Magic method to access the class in a static context.
      *
      * @param  string $name
@@ -59,6 +49,16 @@ class Intl extends Data implements \ArrayAccess
         $helper = static::getInstance()->offsetGet($name);
 
         return $args ? call_user_func_array($helper, $args) : $helper;
+    }
+
+    /**
+     * Get shortcut.
+     *
+     * @see offsetGet()
+     */
+    public function __invoke($name)
+    {
+        return $this->offsetGet($name);
     }
 
     /**
