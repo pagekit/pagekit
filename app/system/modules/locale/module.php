@@ -1,56 +1,12 @@
 <?php
 
-use Pagekit\Locale\Intl;
-use Pagekit\Locale\Helper\CountryHelper;
-use Pagekit\Locale\Helper\DateHelper;
-use Pagekit\Locale\Helper\LanguageHelper;
-use Pagekit\Locale\Loader\ArrayLoader;
-use Pagekit\Locale\Loader\MoFileLoader;
-use Pagekit\Locale\Loader\PhpFileLoader;
-use Pagekit\Locale\Loader\PoFileLoader;
-use Symfony\Component\Translation\Translator;
+use Pagekit\Intl\Intl;
 
 return [
 
     'name' => 'system/locale',
 
     'main' => function ($app) {
-
-        require __DIR__.'/functions.php';
-
-        $app['intl'] = function () {
-            return Intl::getInstance();
-        };
-
-        $app['translator'] = function () {
-
-            $translator = new Translator($this->config['locale']);
-            $translator->addLoader('php', new PhpFileLoader);
-            $translator->addLoader('mo', new MoFileLoader);
-            $translator->addLoader('po', new PoFileLoader);
-            $translator->addLoader('array', new ArrayLoader);
-
-            return $translator;
-        };
-
-        $app['languages'] = function () {
-            return new LanguageHelper;
-        };
-
-        $app['countries'] = function () {
-            return new CountryHelper;
-        };
-
-        $app['dates'] = function () {
-
-            $manager = new DateHelper;
-            $manager->setTimezone($this->config['timezone']);
-            $manager->setFormats(array_map('__', $this->config('formats', [])));
-
-            return $manager;
-        };
-
-        $app['intl']->setDefaultLocale($this->config['locale']);
 
         $app->on('system.init', function () use ($app) {
 
@@ -88,20 +44,20 @@ return [
 
         $app->on('system.settings.edit', function ($event) use ($app) {
 
-            $countries = $app['countries'];
-            $languages = $app['languages'];
-            $locales   = [];
+            $locales = [];
+
             foreach ($app['finder']->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
                 $code = $dir->getFileName();
 
                 list($lang, $country) = explode('_', $code);
 
-                $locales[$code] = $languages->isoToName($lang).' - '.$countries->isoToName($country);
+                $locales[$code] = Intl::language()->getName($lang).' - '.Intl::territory()->getName($country);
             }
 
             ksort($locales);
 
             $timezones = [];
+
             foreach (\DateTimeZone::listIdentifiers() as $timezone) {
 
                 $parts = explode('/', $timezone);
@@ -148,17 +104,7 @@ return [
 
         'timezone'     => 'UTC',
         'locale'       => 'en_US',
-        'locale_admin' => 'en_US',
-        'formats'      => [
-
-            'none'     => '',
-            'full'     => 'DATE_FULL',
-            'long'     => 'DATE_LONG',
-            'medium'   => 'DATE_MEDIUM',
-            'short'    => 'DATE_SHORT',
-            'interval' => 'DATE_INTERVAL'
-
-        ]
+        'locale_admin' => 'en_US'
 
     ]
 

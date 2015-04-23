@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Locale\Loader;
+namespace Pagekit\Intl\Loader;
 
 use Symfony\Component\Translation\Exception\InvalidResourceException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Locale\Loader;
+namespace Pagekit\Intl\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\MessageCatalogue;

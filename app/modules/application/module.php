@@ -47,6 +47,7 @@ return [
         'database',
         'filesystem',
         'filter',
+        'intl',
         'session',
         'view'
 

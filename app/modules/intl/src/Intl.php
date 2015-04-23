@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Locale;
+namespace Pagekit\Intl;
 
 use Punic\Data;
 
@@ -9,13 +9,11 @@ class Intl extends Data implements \ArrayAccess
     /**
      * @var array
      */
-    protected $providers = [
+    protected $helpers = [
         'calendar'  => 'Punic\Calendar',
         'currency'  => 'Punic\Currency',
         'language'  => 'Punic\Language',
         'number'    => 'Punic\Number',
-        'phone'     => 'Punic\Phone',
-        'plural'    => 'Punic\Plural',
         'territory' => 'Punic\Territory',
         'unit'      => 'Punic\Unit'
     ];
@@ -58,58 +56,60 @@ class Intl extends Data implements \ArrayAccess
      */
     public static function __callStatic($name, $args)
     {
-        return static::$instance->offsetGet($name);
+        $helper = static::getInstance()->offsetGet($name);
+
+        return $args ? call_user_func_array($helper, $args) : $helper;
     }
 
     /**
-     * Sets a provider.
+     * Sets a helper.
      *
      * @param string $name
-     * @param mixed  $provider
+     * @param mixed  $helper
      */
-    public function offsetSet($name, $provider)
+    public function offsetSet($name, $helper)
     {
-        $this->providers[$name] = $provider;
+        $this->helpers[$name] = $helper;
     }
 
     /**
-     * Gets a provider.
+     * Gets a helper.
      *
      * @param  string $name
      * @return mixed
      */
     public function offsetGet($name)
     {
-        if (isset($this->providers[$name])) {
+        if (isset($this->helpers[$name])) {
 
-            $provider = $this->providers[$name];
+            $helper = $this->helpers[$name];
 
-            if (is_string($provider)) {
-                $this->providers[$name] = new $provider;
+            if (is_string($helper)) {
+                $this->helpers[$name] = new $helper;
             }
 
-            return $this->providers[$name];
+            return $this->helpers[$name];
         }
     }
 
     /**
-     * Checks if the provider exists.
+     * Checks if the helper exists.
      *
      * @param  string $name
      * @return bool
      */
     public function offsetExists($name)
     {
-        return isset($this->providers[$name]);
+        return isset($this->helpers[$name]);
     }
 
     /**
-     * Removes a provider.
+     * Removes a helper.
      *
      * @param string $name
      */
     public function offsetUnset($name)
     {
-        unset($this->providers[$name]);
+        unset($this->helpers[$name]);
     }
 }
