@@ -64,6 +64,10 @@ return [
             }
         }
 
+        $app->extend('view', function ($view) use ($app) {
+            return $view->addGlobal('intl', $app['intl']);
+        });
+
     },
 
     'autoload' => [

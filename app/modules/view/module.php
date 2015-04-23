@@ -48,10 +48,6 @@ return [
                 $view->addHelper(new TokenHelper($app['csrf']));
             }
 
-            if (isset($app['dates'])) {
-                $view->addHelper(new DateHelper($app['dates']));
-            }
-
             if (isset($app['markdown'])) {
                 $view->addHelper(new MarkdownHelper($app['markdown']));
             }

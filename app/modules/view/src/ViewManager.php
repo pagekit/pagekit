@@ -86,11 +86,14 @@ class ViewManager
     /**
      * Adds a templating engine.
      *
-     * @param EngineInterface $engine
+     * @param  EngineInterface $engine
+     * @return self
      */
     public function addEngine(EngineInterface $engine)
     {
         $this->engine->addEngine($engine);
+
+        return $this;
     }
 
     /**
@@ -106,12 +109,15 @@ class ViewManager
     /**
      * Adds a global parameter.
      *
-     * @param string $name
-     * @param mixed  $value
+     * @param  string $name
+     * @param  mixed  $value
+     * @return self
      */
     public function addGlobal($name, $value)
     {
         $this->globals[$name] = $value;
+
+        return $this;
     }
 
     /**

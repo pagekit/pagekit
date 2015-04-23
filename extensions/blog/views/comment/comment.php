@@ -11,7 +11,7 @@
 
             <ul class="uk-comment-meta uk-subnav uk-subnav-line">
                 <li>
-                    <time datetime="<?= $view->date($comment->getCreated(), 'Y-m-d H:i:s') ?>"><?= __('%date% at %time%', ['%date%' => $view->date($comment->getCreated()), '%time%' => $view->date($comment->getCreated(), 'H:i:s')]) ?></time>
+                    <time datetime="<?= $intl->date($comment->getCreated(), 'Y-m-d H:i:s') ?>"><?= __('%date% at %time%', ['%date%' => $intl->date($comment->getCreated()), '%time%' => $intl->date($comment->getCreated(), 'H:i:s')]) ?></time>
                 </li>
                 <li>
                     <a href="<?= $view->url('@blog/id', ['id' => $comment->getPostId()]) ?>#comment-<?= $comment->getId() ?>">#</a>
