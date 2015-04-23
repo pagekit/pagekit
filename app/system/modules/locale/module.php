@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Locale\Intl;
 use Pagekit\Locale\Helper\CountryHelper;
 use Pagekit\Locale\Helper\DateHelper;
 use Pagekit\Locale\Helper\LanguageHelper;
@@ -16,6 +17,10 @@ return [
     'main' => function ($app) {
 
         require __DIR__.'/functions.php';
+
+        $app['intl'] = function () {
+            return Intl::getInstance();
+        };
 
         $app['translator'] = function () {
 
@@ -44,6 +49,8 @@ return [
 
             return $manager;
         };
+
+        $app['intl']->setDefaultLocale($this->config['locale']);
 
         $app->on('system.init', function () use ($app) {
 
