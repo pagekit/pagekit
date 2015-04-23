@@ -36,7 +36,7 @@ module.exports = {
         this.type    = this.arg || this.expression;
         this.args    = this.arg ? this.expression : '';
         this.value   = el.value;
-        this.model   = el.form.__vue__;
+        this.model   = findVM(el.form);
 
         el._dirty   = false;
         el._touched = false;
@@ -60,3 +60,15 @@ module.exports = {
     }
 
 };
+
+function findVM(el) {
+    do {
+
+        if (el.__vue__) {
+            return el.__vue__;
+        }
+
+        el = el.parentNode;
+
+    } while (el);
+}
