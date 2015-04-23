@@ -3,7 +3,6 @@
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Helper\DataHelper;
-use Pagekit\View\Helper\DateHelper;
 use Pagekit\View\Helper\DeferredHelper;
 use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MapHelper;
