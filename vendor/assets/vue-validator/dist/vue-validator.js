@@ -74,12 +74,12 @@ module.exports = {
             return;
         }
 
-        this.name    = _.camelize(name);
-        this.form    = _.camelize(form);
-        this.type    = this.arg || this.expression;
-        this.args    = this.arg ? this.expression : '';
-        this.value   = el.value;
-        this.model   = findVM(el.form);
+        this.name  = _.camelize(name);
+        this.form  = _.camelize(form);
+        this.type  = this.arg || this.expression;
+        this.args  = this.arg ? this.expression : '';
+        this.value = el.value;
+        this.model = findVM(el.form);
 
         el._dirty   = false;
         el._touched = false;

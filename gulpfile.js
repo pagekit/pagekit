@@ -76,25 +76,29 @@ gulp.task('lint', function () {
  */
 gulp.task('browserify', function () {
 
-  var files = [
-    {src: './app/modules/debug/assets/app/debugbar.js', dest: 'debugbar.min.js'},
-    {src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.min.js'},
-    {src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.min.js'}
-  ];
+    var files = [
+        { src: './app/modules/debug/assets/app/index.js', dest: 'debugbar.js' },
+        { src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.js' },
+        { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
+    ];
 
-  files.map(function (file) {
-    browserified(file.src, file.dest);
-  });
+    files.map(function (file) {
+        browserified(file.src, file.dest);
+    });
 
-  function browserified (src, dest) {
-    return browserify(src)
-      .transform(vueify)
-      .bundle()
-      .pipe(source(path.join(path.dirname(src), dest)))
-      .pipe(buffer())
-      .pipe(uglify())
-      .on('error', util.log)
-      .pipe(gulp.dest('.'));
-  }
+    function browserified(src, dest) {
+        return browserify(src)
+            .transform(vueify)
+            .bundle()
+            .pipe(source(path.join(path.dirname(src), dest)))
+            .pipe(buffer())
+            .on('error', util.log)
+            .pipe(gulp.dest('.'))
+            .pipe(uglify())
+            .pipe(rename(function (file) {
+                file.basename += '.min';
+            }))
+            .pipe(gulp.dest('.'));
+    }
 
 });
