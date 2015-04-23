@@ -43,7 +43,6 @@ return [
 
         if ($app->inConsole()) {
             $app['isAdmin'] = false;
-            $app->trigger('system.init');
         }
 
         $app->on('app.request', function ($event, $request) use ($app) {
@@ -53,8 +52,7 @@ return [
             }
 
             $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
-
-            $app->trigger('system.init');
+            // $app['translator']->setLocale($locale = $this->config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
 
         }, 50);
 
@@ -89,7 +87,6 @@ return [
         'system/editor',
         'system/finder',
         'system/info',
-        'system/locale',
         'system/mail',
         'system/menu',
         'system/oauth',
@@ -124,6 +121,7 @@ return [
         ],
 
         '@system: /system' => [
+            'Pagekit\\System\\Controller\\LocaleController',
             'Pagekit\\System\\Controller\\MigrationController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController'

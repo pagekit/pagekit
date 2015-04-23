@@ -22,8 +22,43 @@ jQuery(function ($) {
 
             }
 
+        },
+
+        components: {
+            'v-locale': locale
         }
 
     });
+
+    var locale = {
+
+        inherit: true,
+        replace: true,
+
+        ready: function() {
+
+            var changed = false;
+
+            this.$watch('adminLocale', function() {
+                changed = true;
+            }, true);
+
+            this.$on('save', function() {
+                if (changed) {
+                    window.location.reload();
+                }
+            }, true);
+
+        },
+
+        computed: {
+
+            adminLocale: function() {
+                return this.option['system/locale'].locale_admin;
+            }
+
+        }
+
+    };
 
 });

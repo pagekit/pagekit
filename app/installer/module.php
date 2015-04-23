@@ -29,7 +29,6 @@ return [
         'application',
         'migration',
         'system/cache',
-        'system/locale',
         'system/view'
 
     ],

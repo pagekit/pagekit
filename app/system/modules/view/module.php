@@ -54,6 +54,9 @@ return [
             $app['scripts']->register('vue-system', 'app/system/app/vue-system.js', ['vue-resource', 'jquery', 'lodash', 'locale']);
             $app['scripts']->register('vue-resource', 'vendor/assets/vue-resource/dist/vue-resource.min.js', 'vue');
             $app['scripts']->register('vue-validator', 'vendor/assets/vue-validator/dist/vue-validator.min.js', 'vue');
+            $app['scripts']->register('messages', $app['url']->getRoute('@system/locale', ['locale' => $app['translator']->getLocale()]));
+            $app['scripts']->register('locale', 'app/system/app/locale.js', ['localeConfig', 'messages']);
+
 
         }, 30);
 

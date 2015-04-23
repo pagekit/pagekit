@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Locale\Controller;
+namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 
@@ -17,7 +17,7 @@ class LocaleController
     {
         $messages = json_encode([
             'translations' => [$locale => App::translator()->getCatalogue($locale)->all()],
-            'formats' => App::module('system/locale')->config('formats')
+            'formats' => []
         ]);
 
         $request = App::request();

@@ -1,4 +1,4 @@
-<div v-component="v-locale" inline-template>
+<div inline-template>
 
     <h2 class="pk-form-heading">{{ 'Localization' | trans }}</h2>
     <div class="uk-form-row">

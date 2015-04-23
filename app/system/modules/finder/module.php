@@ -8,7 +8,7 @@ return [
 
     'main' => function ($app) {
 
-        $app->on('system.init', function() use ($app) {
+        $app->on('app.request', function() use ($app) {
 
             $app['view']->addHelper(new FinderHelper());
             $app['scripts']->register('finder', 'app/system/modules/finder/app/finder.js', ['vue-system', 'uikit-upload']);

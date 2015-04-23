@@ -16,14 +16,12 @@ return [
                 ->addRepository('theme', new ThemeRepository($app['path.themes']));
         };
 
-        $app->on('system.init', function () use ($app) {
+        $app->on('app.request', function () use ($app) {
+
             $app['scripts']->register('marketplace', 'app/system/modules/package/app/marketplace.js', 'vue-system');
             $app['scripts']->register('marketplace-tmpl', 'app/system/modules/package/views/marketplace.php', '~marketplace', 'template');
             $app['scripts']->register('upload', 'app/system/modules/package/app/upload.js', ['vue-system', 'uikit-upload']);
             $app['scripts']->register('upload-tmpl', 'app/system/modules/package/views/upload.php', '~upload', 'template');
-        });
-
-        $app->on('app.request', function () use ($app) {
 
             $theme = $app['module']['system']->config('theme.site');
 
