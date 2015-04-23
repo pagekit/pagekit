@@ -40,6 +40,16 @@ class Intl extends Data implements \ArrayAccess
     }
 
     /**
+     * Get shortcut.
+     *
+     * @see offsetGet()
+     */
+    public function __invoke($name)
+    {
+        return $this->offsetGet($name);
+    }
+
+    /**
      * Magic method to access the class in a static context.
      *
      * @param  string $name
