@@ -15,9 +15,15 @@ class LocaleController
      */
     public function indexAction($locale = null)
     {
+        $formats = [];
+
+        foreach (['full', 'long', 'medium', 'short'] as $name) {
+            $formats[$name] = App::intl('calendar')->getDateFormat($name);
+        }
+
         $messages = json_encode([
             'translations' => [$locale => App::translator()->getCatalogue($locale)->all()],
-            'formats' => []
+            'formats' => $formats
         ]);
 
         $request = App::request();
