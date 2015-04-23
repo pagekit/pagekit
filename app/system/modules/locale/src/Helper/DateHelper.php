@@ -96,7 +96,7 @@ class DateHelper
     /**
      * @param  string|DateTime|\DateTimeInterface $date
      * @param  DateTimeZone|string                $timezone
-     * @return DateTime|null|string
+     * @return DateTime|null
      */
     public function getDateTime($date = null, $timezone = null)
     {

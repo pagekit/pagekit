@@ -26,9 +26,9 @@ class Middleware
             }
         }, 50);
 
-        $events->on('app.response', function ($event, $request) {
+        $events->on('app.response', function ($event, $request, $response) {
             if ($name = $request->attributes->get('_route', '')) {
-                $event->getDispatcher()->trigger('after'.$name, [$request]);
+                $event->getDispatcher()->trigger('after'.$name, [$request, $response]);
             }
         }, 50);
     }

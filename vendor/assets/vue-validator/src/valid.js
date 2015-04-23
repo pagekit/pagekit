@@ -7,7 +7,7 @@ var _ = require('./util');
 module.exports = {
 
     bind: function () {
-        this.vm.$on('hook:attached', function() { this.init(); }.bind(this));
+        this.vm.$on('hook:ready', function() { this.init(); }.bind(this));
     },
 
     unbind: function () {
@@ -36,7 +36,7 @@ module.exports = {
         this.type    = this.arg || this.expression;
         this.args    = this.arg ? this.expression : '';
         this.value   = el.value;
-        this.model   = el.form.__vue__ || this.vm;
+        this.model   = el.form.__vue__;
 
         el._dirty   = false;
         el._touched = false;
