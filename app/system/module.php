@@ -162,19 +162,7 @@ return [
 
         'extensions' => [],
 
-        'dashboard' => [
-
-            'default' => [
-                '1' => [
-                    'id' => '1',
-                    'type' => 'widget.user'
-                ]
-            ]
-
-        ],
-
         'key' => '',
-        'frontpage' => '',
 
         'site' => [
             'title' => '',
