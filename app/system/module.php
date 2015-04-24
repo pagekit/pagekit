@@ -26,7 +26,6 @@ return [
         $app['system'] = $this;
 
         $app['module']->load($this->config['extensions']);
-
     },
 
     'boot' => function ($app) {
@@ -51,8 +50,8 @@ return [
                 return;
             }
 
-            $app['isAdmin'] = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
-            // $app['translator']->setLocale($locale = $this->config[$app['isAdmin'] ? 'locale_admin' : 'locale']);
+            $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+            $app['intl']->setDefaultLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
         }, 50);
 
