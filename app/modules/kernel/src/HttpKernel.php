@@ -79,6 +79,15 @@ class HttpKernel implements HttpKernelInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function terminate(Request $request, Response $response)
+    {
+        $event = new KernelEvent('app.terminate', $this);
+        $this->events->trigger($event, [$request, $response]);
+    }
+
+    /**
      * Handles the controller event.
      *
      * @return Response

@@ -24,7 +24,16 @@ interface HttpKernelInterface
     /**
      * Handles a Request.
      *
+     * @param  Request $request
      * @return Response
      */
     public function handle(Request $request);
+
+    /**
+     * Terminates a Request.
+     *
+     * @param Request  $request
+     * @param Response $response
+     */
+    public function terminate(Request $request, Response $response);
 }

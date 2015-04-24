@@ -10,7 +10,7 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
     /**
      * Collect and save debug data.
      */
-    public function onResponse($event, $request)
+    public function onTerminate($event, $request)
     {
         $route = $request->attributes->get('_route');
 
@@ -39,7 +39,7 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.response' => ['onResponse', -1000]
+            'app.terminate' => ['onTerminate', -1000]
         ];
     }
 }

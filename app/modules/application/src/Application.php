@@ -71,7 +71,7 @@ class Application extends Container
         $response = $this['kernel']->handle($request);
         $response->send();
 
-        // $this['kernel']->terminate($request, $response);
+        $this['kernel']->terminate($request, $response);
     }
 
     /**

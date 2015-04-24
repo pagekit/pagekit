@@ -116,11 +116,11 @@ class CacheModule extends Module
     }
 
     /**
-     * Clear cache on kernel terminate event.
+     * Clear cache on terminate event.
      */
     public function clearCache(array $options = [])
     {
-        App::on('kernel.terminate', function() use ($options) {
+        App::on('app.terminate', function() use ($options) {
             $this->doClearCache($options);
         }, -512);
     }

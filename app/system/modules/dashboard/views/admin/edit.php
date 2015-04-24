@@ -1,4 +1,4 @@
-<?php $view->script('widget-edit', 'app/system/modules/dashboard/app/edit.js', ['vue-system', 'vue-validator']) ?>
+<?php $view->script('widget-edit', 'app/system/modules/dashboard/assets/app/edit.js', ['vue-system', 'vue-validator']) ?>
 
 <form id="js-widget-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 

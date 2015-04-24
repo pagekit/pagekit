@@ -1,4 +1,4 @@
-<?php $view->script('weather', 'app/system/modules/dashboard/app/weather.js', 'vue-system') ?>
+<?php $view->script('weather', 'app/system/modules/dashboard/assets/app/weather.js', 'vue-system') ?>
 
 <div class="uk-text-center" data-weather="<?= $this->escape(json_encode(['id' => $widget->get('id'), 'units' => $widget->get('units'), 'location' => $widget->get('location')])) ?>" v-cloak>
     <div class="uk-text-center" v-show="status == 'loading'">

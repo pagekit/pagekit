@@ -72,7 +72,7 @@ return [
             return new Swift_SpoolTransport($app['swift.spool']);
         };
 
-        $app->on('kernel.terminate', function () use ($app) {
+        $app->on('app.terminate', function () use ($app) {
             if ($app['mailer.initialized']) {
                 try {
                     $app['swift.spooltransport']->getSpool()->flushQueue($app['swift.transport']);

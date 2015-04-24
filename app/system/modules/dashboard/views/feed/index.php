@@ -1,4 +1,4 @@
-<?php $view->script('feed', 'app/system/modules/dashboard/app/feed.js', 'vue-system') ?>
+<?php $view->script('feed', 'app/system/modules/dashboard/assets/app/feed.js', 'vue-system') ?>
 
 <?php if ($title = $widget->get('title')): ?>
 <h1 class="uk-h3"><?= $title ?></h1>
