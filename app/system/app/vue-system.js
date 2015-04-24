@@ -38,13 +38,6 @@
         Vue.prototype.$trans = Globalize.trans;
         Vue.prototype.$transChoice = Globalize.transChoice;
 
-        /**
-         * TODO remove with vuejs > 0.11.5
-         */
-        Vue.prototype.$toOptions = function(collection) {
-            return Vue.filter('toOptions')(collection);
-        };
-
         var partial = Vue.directive('partial'), insert = partial.insert;
 
         partial.insert = function(id) {
