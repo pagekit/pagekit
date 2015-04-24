@@ -7,12 +7,14 @@ abstract class Type implements TypeInterface
     protected $id;
     protected $name;
     protected $description;
+    protected $defaults;
 
-    public function __construct($id, $name, $description = '')
+    public function __construct($id, $name, $description = '', $defaults = [])
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->defaults = $defaults;
     }
 
     /**
@@ -37,6 +39,14 @@ abstract class Type implements TypeInterface
     public function getDescription(WidgetInterface $widget = null)
     {
         return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaults()
+    {
+        return $this->defaults;
     }
 
     /**

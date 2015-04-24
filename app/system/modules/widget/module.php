@@ -36,6 +36,18 @@ return [
             'title' => 'Manage widgets'
         ]
 
+    ],
+
+    'config' => [
+
+        'widget' => [
+
+            'positions' => [],
+            'config' => [],
+            'defaults' => []
+            
+        ]
+
     ]
 
 ];

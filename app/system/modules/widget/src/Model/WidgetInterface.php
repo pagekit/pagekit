@@ -5,16 +5,6 @@ namespace Pagekit\Widget\Model;
 interface WidgetInterface extends \JsonSerializable
 {
     /**
-     * @var int
-     */
-    const STATUS_DISABLED = 0;
-
-    /**
-     * @var int
-     */
-    const STATUS_ENABLED = 1;
-
-    /**
      * Returns the widget id.
      *
      * @return mixed
@@ -34,20 +24,6 @@ interface WidgetInterface extends \JsonSerializable
      * @return string $type
      */
     public function getType();
-
-    /**
-     * Returns the position.
-     *
-     * @return string
-     */
-    public function getPosition();
-
-    /**
-     * Returns the status.
-     *
-     * @return bool
-     */
-    public function getStatus();
 
     /**
      * Returns the widget settings.

@@ -29,19 +29,7 @@ return [
      */
     'resources' => [
 
-        // 'override' => [
-        //     'app/modules/system/theme/templates' => 'templates/system'
-        // ]
-
-    ],
-
-    /**
-     * Define default settings values and views where end users can change these values.
-     */
-    'config' => [
-
-        'settings.view' => 'themes/alpha/views/admin/settings.razr',
-        'widgets.view'  => 'themes/alpha/views/admin/widgets/edit.razr'
+        'alpha:' => ''
 
     ],
 
@@ -81,6 +69,26 @@ return [
 
         'main'    => 'Main',
         'sidebar' => 'Sidebar'
+
+    ],
+
+    /**
+     * Define default settings values and views where end users can change these values.
+     */
+    'config' => [
+
+        'settings.view' => 'themes/alpha/views/admin/settings.razr',
+
+        'widget.defaults' => [
+
+            'panel' => '',
+            'badge' => [
+                'text' => '',
+                'type' => 'uk-panel-badge uk-badge'
+            ],
+            'alignment' => ''
+
+        ]
 
     ]
 

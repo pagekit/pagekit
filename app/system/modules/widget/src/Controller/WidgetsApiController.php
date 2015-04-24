@@ -15,11 +15,37 @@ class WidgetsApiController
 {
     /**
      * @Route("/", methods="GET")
-     * @Request({"search"})
+     * @Request({"grouped": "bool"})
      */
-    public function indexAction($search = '')
+    public function indexAction($grouped = false)
     {
-        return array_values($search ? Widget::where('title LIKE :search', ['search' => "%{$search}%"])->get() : Widget::findAll());
+        $widgets = Widget::findAll();
+
+        if (!$grouped) {
+            return $widgets;
+        }
+
+        $module = App::module('system/widget');
+
+        $positions = ['' => []];
+
+        foreach ($module->config('widget.positions') as $position => $assigned) {
+
+            if (!$module->hasPosition($position)) {
+                $position = '';
+            }
+
+            foreach ($assigned as $id) {
+                if (isset($widgets[$id])) {
+                    $positions[$position][] = $widgets[$id];
+                    unset($widgets[$id]);
+                }
+            }
+        }
+
+        $positions[''] = array_merge($positions[''], array_values($widgets));
+
+        return $positions;
     }
 
     /**
@@ -34,13 +60,12 @@ class WidgetsApiController
         return $widget;
     }
 
-
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"widget": "array", "id": "int"}, csrf=true)
+     * @Request({"widget": "array", "id": "int", "position", "config": "array", "foo": "array"}, csrf=true)
      */
-    public function saveAction($data, $id = 0)
+    public function saveAction($data, $id = 0, $position = false, $config = false, $foo = false)
     {
         if ($id) {
 
@@ -55,6 +80,18 @@ class WidgetsApiController
         }
 
         $widget->save($data);
+
+        if (false !== $config) {
+            App::config('system/widget')->set('widget.config.' . $widget->getId(), $config);
+        }
+
+        $positions = App::module('system/widget')->config('widget.positions');
+
+        if ($position && !isset($positions[$position]) || !in_array($widget->getId(), $positions[$position])) {
+            $positions = $this->filterPositions($positions, [$widget->getId()]);
+            $positions[$position][] = $widget->getId();
+            App::config('system/widget')->set('widget.positions', $positions);
+        }
 
         return $widget;
     }
@@ -81,7 +118,7 @@ class WidgetsApiController
     public function bulkSaveAction($widgets = [])
     {
         foreach ($widgets as $data) {
-            $this->saveAction($data, null, null, isset($data['id']) ? $data['id'] : 0);
+            $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
         return 'success';
@@ -101,20 +138,31 @@ class WidgetsApiController
     }
 
     /**
-     * @Route("/updateOrder", methods="POST")
+     * @Route("/positions", methods="POST")
      * @Request({"position", "widgets": "array"}, csrf=true)
      */
-    public function updateOrderAction($position, $widgets = []) {
-        foreach ($widgets as $data) {
-            if ($widget = Widget::find($data['id'])) {
+    public function positionsAction($position, $widgets = [])
+    {
+        $positions = App::module('system/widget')->config('widget.positions');
+        $positions = $this->filterPositions($positions, $widgets);
 
-                $widget->setPriority($data['order']);
-                $widget->setPosition($position);
+        $positions[$position] = $widgets;
 
-                $widget->save();
-            }
-        }
+        App::config('system/widget')->set('widget.positions', $positions);
 
         return 'success';
+    }
+
+    /**
+     * @param  array $positions
+     * @param  array $widgets
+     * @return mixed
+     */
+    protected function filterPositions(array $positions = [], $widgets = [])
+    {
+        foreach ($positions as $pos => $ids) {
+            $positions[$pos] = array_diff($ids, $widgets);
+        }
+        return $positions;
     }
 }

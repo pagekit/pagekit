@@ -32,11 +32,16 @@ class PositionHelper implements HelperInterface
     /**
      * Set shortcut.
      *
+     * @see get()
      * @see add()
      */
-    public function __invoke($widget)
+    public function __invoke($name, WidgetInterface $widget = null)
     {
-        $this->set($widget);
+        if (null === $widget) {
+            return $this->get($name);
+        }
+
+        $this->add($name, $widget);
     }
 
     /**
@@ -53,13 +58,12 @@ class PositionHelper implements HelperInterface
     /**
      * Adds a widget to a position.
      *
-     * @param  WidgetInterface $widget
      * @param  string          $name
-     * @return WidgetInterface[]
+     * @param  WidgetInterface $widget
      */
-    public function add(WidgetInterface $widget, $name = '')
+    public function add($name, WidgetInterface $widget)
     {
-        $this->positions[$name ?: $widget->getPosition()][] = $widget;
+        $this->positions[$name][] = $widget;
     }
 
     /**

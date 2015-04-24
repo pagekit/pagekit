@@ -24,6 +24,10 @@ class AlphaTheme extends Theme
                 $view->setParameter('theme', $app['theme.site']);
             });
         });
+
+        $app->on('widget.sections', function ($event, $widgets) {
+            $widgets->registerSection('Theme', 'alpha:views/admin/widgets/edit.php');
+        });
     }
 
     public function getClasses($key = null)

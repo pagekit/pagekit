@@ -52,19 +52,9 @@
             <div class="uk-panel uk-panel-divider">
 
                 <div class="uk-form-row">
-                    <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
-                    <div class="uk-form-controls">
-                        <select id="form-status" class="uk-width-1-1" v-model="widget.status">
-                            <option value="1">{{ 'Enabled' | trans }}</option>
-                            <option value="0">{{ 'Disabled' | trans }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" v-model="widget.position" class="uk-width-1-1" options="positionOptions"></select>
+                        <select id="form-position" name="position" v-model="position" class="uk-width-1-1" options="positionOptions"></select>
 
                     </div>
                 </div>

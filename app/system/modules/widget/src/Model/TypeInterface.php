@@ -5,21 +5,21 @@ namespace Pagekit\Widget\Model;
 interface TypeInterface extends \JsonSerializable
 {
     /**
-     * Get widget id.
+     * Gets widget id.
      *
      * @return mixed
      */
     public function getId();
 
     /**
-     * Get widget name.
+     * Gets widget name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Get widget description - optionally with additional information from current widget.
+     * Gets widget description - optionally with additional information from current widget.
      *
      * @param  WidgetInterface $widget
      * @return string
@@ -27,7 +27,14 @@ interface TypeInterface extends \JsonSerializable
     public function getDescription(WidgetInterface $widget = null);
 
     /**
-     * Render the widget.
+     * Gets the widget default settings.
+     *
+     * @return array
+     */
+    public function getDefaults();
+
+    /**
+     * Renders the widget.
      *
      * @param WidgetInterface $widget
      * @param array           $options
@@ -35,7 +42,7 @@ interface TypeInterface extends \JsonSerializable
     public function render(WidgetInterface $widget, $options = []);
 
     /**
-     * Render widget form.
+     * Renders widget form.
      *
      * @param WidgetInterface $widget
      */

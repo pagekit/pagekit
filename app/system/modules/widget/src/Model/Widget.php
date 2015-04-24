@@ -23,27 +23,9 @@ class Widget implements WidgetInterface
     protected $title;
 
     /**
-     * @var string
-     */
-    protected $position;
-
-    /**
-     * @var int
-     */
-    protected $status;
-
-    /**
      * @var array
      */
     protected $settings = [];
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->status = self::STATUS_DISABLED;
-    }
 
     /**
      * {@inheritdoc}
@@ -102,42 +84,6 @@ class Widget implements WidgetInterface
     /**
      * {@inheritdoc}
      */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * Sets the position.
-     *
-     * @param string $position
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Sets the status.
-     *
-     * @param bool $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getSettings()
     {
         return $this->settings;
@@ -151,6 +97,26 @@ class Widget implements WidgetInterface
     public function setSettings(array $settings = [])
     {
         $this->settings = $settings;
+    }
+
+    /**
+     * Merges the passed settings.
+     *
+     * @param array $settings
+     */
+    public function mergeSettings(array $settings = [])
+    {
+        $this->setSettings(Arr::merge($this->settings, $settings));
+    }
+
+    /**
+     * Merges the passed settings.
+     *
+     * @param array $settings
+     */
+    public function setDefaults(array $settings = [])
+    {
+        $this->setSettings(Arr::merge($settings, $this->settings));
     }
 
     /**
@@ -203,8 +169,31 @@ class Widget implements WidgetInterface
         $widget = get_object_vars($this);
 
         if (!$widget['settings']) {
-            $widget['settings'] = new \stdClass;
+            $widget['settings'] = null;
         }
+
+        return $widget;
+    }
+
+    /**
+     * Creates a Widget instance.
+     *
+     * @param  array $data
+     * @return static
+     */
+    public static function create(array $data = [])
+    {
+        $widget = new static;
+
+        foreach ($data as $key => $value) {
+            if (property_exists($widget, $key)) {
+                $widget->$key = $value;
+            } else {
+                $widget->set($key, $value);
+            }
+        }
+
+        App::trigger('widget.create', [$widget]);
 
         return $widget;
     }

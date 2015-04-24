@@ -37,7 +37,7 @@ class DashboardController
 
         foreach ($this->dashboard->getWidgets() as $id => $data) {
 
-            $widget = $this->create($data);
+            $widget = Widget::create($data);
 
             if ($type = $this->dashboard->getType($widget->getType())) {
                 $widgets[$id] = $type->render($widget);
@@ -82,8 +82,7 @@ class DashboardController
             throw new NotFoundException(__('Widget type not found.'));
         }
 
-        $widget = new Widget;
-        $widget->setType($id);
+        $widget = Widget::create(['type' => $id]);
 
         return [
             '$meta' => [
@@ -112,7 +111,7 @@ class DashboardController
             throw new NotFoundException(__('Widget type not found.'));
         }
 
-        $widget = $this->create($widget);
+        $widget = Widget::create($widget);
 
         return [
             '$meta' => [
@@ -183,25 +182,6 @@ class DashboardController
         }
 
         return ['message' => __('Widgets reordered.')];
-    }
-
-    /**
-     * @param  array $data
-     * @return Widget
-     */
-    protected function create($data)
-    {
-        $widget = new Widget;
-
-        foreach ($data as $key => $value) {
-            if (method_exists($widget, $method = 'set'.$key)) {
-                $widget->$method($value);
-            } else {
-                $widget->set($key, $value);
-            }
-        }
-
-        return $widget;
     }
 
     protected function chunkList($list, $p)

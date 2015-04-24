@@ -5,11 +5,8 @@ jQuery(function ($) {
         el: '#js-user',
 
         data: {
-            config  : $config,
-            data    : $data,
-            users   : null,
-            pages   : 0,
-            selected: []
+            config: window.$config,
+            data  : window.$data
         },
 
         created: function () {

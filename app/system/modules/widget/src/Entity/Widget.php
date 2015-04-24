@@ -2,6 +2,7 @@
 
 namespace Pagekit\Widget\Entity;
 
+use Pagekit\Application as App;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\User\Entity\AccessTrait;
 use Pagekit\Widget\Model\Widget as BaseWidget;
@@ -22,15 +23,6 @@ class Widget extends BaseWidget
     /** @Column */
     protected $title = '';
 
-    /** @Column */
-    protected $position = '';
-
-    /** @Column(type="integer") */
-    protected $priority = 0;
-
-    /** @Column(type="boolean") */
-    protected $status;
-
     /** @Column(type="text") */
     protected $pages = '';
 
@@ -48,16 +40,6 @@ class Widget extends BaseWidget
     public function setShowTitle($showTitle)
     {
         $this->set('show_title', (bool) $showTitle);
-    }
-
-    public function getPriority()
-    {
-        return (int) $this->priority;
-    }
-
-    public function setPriority($priority)
-    {
-        $this->priority = (int) $priority;
     }
 
     public function getPages()
@@ -85,30 +67,11 @@ class Widget extends BaseWidget
         return in_array($id, $this->getNodes());
     }
 
-    public function getStatusText()
-    {
-        $statuses = self::getStatuses();
-
-        return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
-    }
-
-    public static function getStatuses()
-    {
-        return [
-            self::STATUS_DISABLED => __('Disabled'),
-            self::STATUS_ENABLED  => __('Enabled')
-        ];
-    }
-
     /**
-     * {@inheritdoc}
+     * @postLoad
      */
-    public function jsonSerialize()
+    public function postLoad()
     {
-        $widget = $this->toJson();
-
-        $widget['statusText'] = $this->getStatusText();
-
-        return $widget;
+        App::trigger('widget.create', [$this]);
     }
 }

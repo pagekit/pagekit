@@ -4,6 +4,7 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Util\Arr;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
 
@@ -41,26 +42,9 @@ class WidgetModule extends Module
 
         });
 
-        $app->on('app.request', function($event) use ($app) {
+        $app->on('app.site', function($event, $request) use ($app) {
 
-            $active    = (array) $app['request']->attributes->get('_node');
-            $user      = $app['user'];
-            $positions = $app['view']->position();
-
-            $app['view']->addHelper($positions);
-
-            foreach (Widget::where('status = ?', [Widget::STATUS_ENABLED])->orderBy('priority')->get() as $widget) {
-
-                if (!$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
-                    continue;
-                }
-
-                $positions->add($widget);
-            }
-        });
-
-        $app->on('app.site', function($event) use ($app) {
-
+            // register renderer
             foreach ($app['module'] as $module) {
 
                 if (!isset($module->renderer) || !is_array($module->renderer)) {
@@ -74,7 +58,57 @@ class WidgetModule extends Module
 
             $app['view']->map('position.default', 'widget:views/widgets.php');
 
+            // assign widgets
+            $active    = (array) $request->attributes->get('_node');
+            $user      = $app['user'];
+            $positions = $app['view']->position();
+            $widgets   = Widget::findAll();
+
+            foreach ($this->config('widget.positions') as $position => $ids) {
+
+                if (!$this->hasPosition($position)) {
+                    continue;
+                }
+
+                foreach ($ids as $id) {
+
+                    if (!$widget = $widgets[$id] or !$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
+                        continue;
+                    }
+
+                    $widget->mergeSettings($this->getWidgetConfig($widget->getId()));
+
+                    $positions($position, $widget);
+                }
+            }
+
         });
+
+        $app->on('widget.create', function($event, $widget) {
+            if ($type = $this->getType($widget->getType())) {
+                $widget->setDefaults($type->getDefaults());
+            }
+        });
+
+        $app->on('app.request', function() use ($app) {
+            $this->config['widget']['defaults'] = Arr::merge($this->config['widget']['defaults'], $app['theme.site']->config('widget.defaults', []));
+        });
+
+        if (!$app['config']->get('system/widget')) {
+            $app['config']->set('system/widget', [], true);
+        }
+
+    }
+
+    /**
+     * @param  string $name
+     * @return bool
+     */
+    public function hasPosition($name)
+    {
+        $positions = $this->getPositions();
+
+        return isset($positions[$name]);
     }
 
     /**
@@ -181,5 +215,16 @@ class WidgetModule extends Module
     public function registerSection($name, $view, $type = '', array $options = [])
     {
         $this->sections[$name][] = array_merge($options, compact('name', 'view', 'type'));
+    }
+
+    /**
+     * Gets the widget config.
+     *
+     * @param  int $id
+     * @return array
+     */
+    public function getWidgetConfig($id = 0)
+    {
+        return Arr::merge($this->config('widget.defaults'), $this->config('widget.config.'.$id, []), true);
     }
 }

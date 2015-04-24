@@ -93,17 +93,14 @@ return [
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('type', 'string', ['length' => 255]);
                 $table->addColumn('title', 'string', ['length' => 255]);
-                $table->addColumn('position', 'string', ['length' => 255]);
-                $table->addColumn('priority', 'integer', ['default' => 0]);
-                $table->addColumn('status', 'boolean');
                 $table->addColumn('pages', 'text');
                 $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addIndex(['status', 'priority'], 'SYSTEM_WIDGET_STATUS_PRIORITY');
             });
         }
 
+        // TODO use data from package.json
         // skip migrations and return latest version
         return '2014-08-28_0.8.6';
     }

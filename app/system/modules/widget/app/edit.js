@@ -8,9 +8,7 @@ jQuery(function ($) {
 
         mixins: [Vue.mixins['site-tree']],
 
-        data: _.merge({
-
-        }, $data),
+        data: _.merge({}, $data),
 
         created: function () {
             this.Widgets = this.$resource('api/widget/:id');
@@ -18,14 +16,6 @@ jQuery(function ($) {
 
         ready: function() {
             UIkit.tab(this.$$.tab, { connect: this.$$.content });
-
-            var h = -1;
-            setInterval(function() {
-                if (h != document.body.offsetHeight) {
-                    h = window.frameElement.style.height = document.body.offsetHeight + 'px';
-                }
-            }, 120);
-
         },
 
         computed: {
@@ -60,7 +50,7 @@ jQuery(function ($) {
 
                 e.preventDefault();
 
-                var data = _.merge($(":input", e.target).serialize().parse(), { widget: this.widget });
+                var data = _.merge($(":input", e.target).serialize().parse(), { widget: this.widget, config: this.config });
 
                 this.$broadcast('save', data);
 
