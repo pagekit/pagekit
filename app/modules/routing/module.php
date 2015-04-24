@@ -89,7 +89,7 @@ return [
             $types   = $request->getAcceptableContentTypes();
 
             if ('json' == $request->getFormat(array_shift($types))) {
-                return new JsonResponse($e->getMessage(), $e->getStatusCode());
+                return new JsonResponse($e->getMessage(), $e->getCode());
             }
 
         }, -10);
