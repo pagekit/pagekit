@@ -24,7 +24,7 @@ jQuery(function ($) {
         computed: {
 
             adminLocale: function() {
-                return this.option['system/locale'].locale_admin;
+                return this.option.system.admin.locale;
             }
 
         }

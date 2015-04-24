@@ -23,9 +23,7 @@ return [
             $app['scripts']->register('upload', 'app/system/modules/package/app/upload.js', ['vue-system', 'uikit-upload']);
             $app['scripts']->register('upload-tmpl', 'app/system/modules/package/views/upload.php', '~upload', 'template');
 
-            $theme = $app['module']['system']->config('theme.site');
-
-            $app['module']->load($theme);
+            $app['module']->load($theme = $app['system']->config('site.theme'));
 
             if ($app['theme.site'] = $app['module']->get($theme)) {
                 $app->on('app.site', function () use ($app) {

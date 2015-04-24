@@ -109,7 +109,7 @@
                 if (typeof op === 'string') {
                     return { text: op, value: key };
                 } else {
-                    return { label: key, options: toOptions(op) }
+                    return { label: key, options: toOptions(op) };
                 }
 
             });

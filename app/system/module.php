@@ -160,13 +160,22 @@ return [
 
     'config' => [
 
-        'extensions' => [],
-
         'key' => '',
+
+        'api' => [
+            'key' => '',
+            'url' => 'http://pagekit.com/api',
+        ],
 
         'site' => [
             'title' => '',
-            'description' => ''
+            'description' => '',
+            'locale' => 'en_US',
+            'theme' => 'alpha'
+        ],
+
+        'admin' => [
+            'locale' => 'en_US'
         ],
 
         'maintenance' => [
@@ -174,16 +183,13 @@ return [
             'msg' => ''
         ],
 
-        'api' => [
-            'key' => '',
-            'url' => 'http://pagekit.com/api',
-        ],
-
-        'release_channel' => 'stable',
+        'timezone' => 'UTC',
 
         'storage' => '/storage',
 
-        'theme.site' => 'alpha'
+        'extensions' => [],
+
+        'release_channel' => 'stable'
 
     ]
 

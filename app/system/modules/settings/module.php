@@ -45,9 +45,7 @@ return [
             $event->data('config', $config, ['application.debug', 'debug.enabled', 'system.storage']);
             $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
 
-            $event->options('system', $app['system']->config, ['api.key', 'release_channel', 'site.', 'maintenance.']);
-            $event->options('system/locale', $app['system']->config, ['timezone', 'locale', 'locale_admin']);
-
+            $event->options('system', $app['config']->get('system')->toArray());
             $event->section('site', 'Site', 'app/system/modules/settings/views/site.php');
             $event->section('system', 'System', 'app/system/modules/settings/views/system.php');
             $event->section('system/locale', 'Localization', 'app/system/modules/settings/views/locale.php');
