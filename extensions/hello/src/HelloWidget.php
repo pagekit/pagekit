@@ -11,9 +11,9 @@ class HelloWidget extends Type
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct($type)
     {
-        parent::__construct('widget.hello', __('Hello Widget!'));
+        parent::__construct($type.'.hello', __('Hello Widget!'));
     }
 
     /**

@@ -13,7 +13,7 @@ class MenuWidget extends Type
      */
     public function __construct()
     {
-        parent::__construct('widget.menu', __('Menu'));
+        parent::__construct('site.menu', __('Menu'));
     }
 
     /**

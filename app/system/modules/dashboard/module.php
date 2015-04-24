@@ -36,6 +36,19 @@ return [
             'priority' => 0
         ]
 
+    ],
+
+    'config' => [
+
+        'default' => [
+
+            '1' => [
+                'id' => '1',
+                'type' => 'widget.user'
+            ]
+
+        ]
+
     ]
 
 ];

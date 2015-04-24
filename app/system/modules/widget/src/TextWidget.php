@@ -10,7 +10,7 @@ class TextWidget extends Type
 {
     public function __construct()
     {
-        parent::__construct('widget.text', __('Text'), __('Text Widget'));
+        parent::__construct('site.text', __('Text'), __('Text Widget'));
     }
 
     /**

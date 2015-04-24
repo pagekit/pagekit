@@ -1,4 +1,4 @@
-<div class="uk-form-row" v-component="feed-edit" inline-template>
+<div class="uk-form-row">
 
     <div class="uk-form-row">
         <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
@@ -35,30 +35,3 @@
     </div>
 
 </div>
-
-<script>
-
-    Vue.component('feed-edit', {
-
-        inherit: true,
-
-        ready: function() {
-
-            var self = this;
-
-            this.$watch('widget', function(widget) {
-
-                if (!widget.settings.content) {
-                    self.$set('widget.settings.content', '');
-                }
-
-                if (!widget.settings.count) {
-                    self.$set('widget.settings.count', '5');
-                }
-
-            }, true, true);
-        }
-
-    });
-
-</script>

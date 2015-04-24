@@ -1,4 +1,4 @@
-<div class="uk-form-row" v-component="user-edit" inline-template>
+<div class="uk-form-row">
 
     <div class="uk-form-row">
         <span class="uk-form-label">{{ 'User Type' | trans }}</span>
@@ -24,31 +24,3 @@
     </div>
 
 </div>
-
-<script>
-
-    Vue.component('user-edit', {
-
-        inherit: true,
-
-        ready: function() {
-
-            var self = this;
-
-            this.$watch('widget', function(widget) {
-
-                if (!widget.settings.show) {
-                    self.$set('widget.settings.show', 'login');
-                }
-
-                if (!widget.settings.count) {
-                    self.$set('widget.settings.count', '1');
-                }
-
-            }, true, true);
-
-        }
-
-    });
-
-</script>

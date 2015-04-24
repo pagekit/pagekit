@@ -10,7 +10,9 @@ class WeatherWidget extends Type
 {
     public function __construct()
     {
-        parent::__construct('widget.weather', __('Weather'));
+        parent::__construct('dashboard.weather', __('Weather'), null, [
+            'units' => 'metric'
+        ]);
     }
 
     /**

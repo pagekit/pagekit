@@ -10,6 +10,11 @@ use Pagekit\Widget\Model\WidgetInterface;
 
 class LoginWidget extends Type
 {
+    public function __construct()
+    {
+        parent::__construct('site.user.login', __('Login'), __('Displays a user login form.'));
+    }
+
     /**
      * {@inheritdoc}
      */

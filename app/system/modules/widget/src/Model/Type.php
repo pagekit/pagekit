@@ -6,6 +6,7 @@ abstract class Type implements TypeInterface
 {
     protected $id;
     protected $name;
+    protected $type;
     protected $description;
     protected $defaults;
 

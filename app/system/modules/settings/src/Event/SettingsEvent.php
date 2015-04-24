@@ -91,7 +91,7 @@ class SettingsEvent extends Event
         $data = Arr::flatten($data);
 
         $result = [];
-        foreach($data as $keypath => $value) {
+        foreach ($data as $keypath => $value) {
             foreach ($keys as $key) {
                 if (0 === strpos($keypath, $key)) {
                     $result[$keypath] = $value;

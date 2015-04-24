@@ -16,11 +16,8 @@ class HelloExtension extends Extension
         $app->subscribe(new HelloListener());
 
         $app->on('widget.types', function($event, $widgets) {
-            $widgets->registerType(new HelloWidget());
-        });
-
-        $app->on('dashboard.types', function($event, $dashboard) {
-            $dashboard->registerType(new HelloWidget());
+            $widgets->registerType(new HelloWidget('site'));
+            $widgets->registerType(new HelloWidget('dashboard'));
         });
 
         // dispatch event (check Hello\Event\HelloListener to see how subscribers work)

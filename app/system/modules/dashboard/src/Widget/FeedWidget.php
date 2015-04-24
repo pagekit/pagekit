@@ -10,7 +10,10 @@ class FeedWidget extends Type
 {
     public function __construct()
     {
-        parent::__construct('widget.feed', __('Feed'));
+        parent::__construct('dashboard.feed', __('Feed'), null, [
+            'count' => 5,
+            'content' => ''
+        ]);
     }
 
     /**

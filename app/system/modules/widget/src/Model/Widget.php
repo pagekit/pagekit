@@ -169,7 +169,7 @@ class Widget implements WidgetInterface
         $widget = get_object_vars($this);
 
         if (!$widget['settings']) {
-            $widget['settings'] = null;
+            $widget['settings'] = new \stdClass();
         }
 
         return $widget;

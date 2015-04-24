@@ -36,7 +36,7 @@ class WidgetModule extends Module
             $app['view']->data('$widgets', [
 
                 'positions' => array_values($this->getPositions()),
-                'types' => array_values($this->getTypes())
+                'types' => array_values($this->getTypes('site'))
 
             ]);
 
@@ -72,7 +72,7 @@ class WidgetModule extends Module
 
                 foreach ($ids as $id) {
 
-                    if (!$widget = $widgets[$id] or !$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
+                    if (!isset($widgets[$id]) or !$widget = $widgets[$id] or !$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
                         continue;
                     }
 
@@ -162,7 +162,7 @@ class WidgetModule extends Module
     /**
      * @return array
      */
-    public function getTypes()
+    public function getTypes($filter = '')
     {
         if (!$this->types) {
 
@@ -171,7 +171,7 @@ class WidgetModule extends Module
             App::trigger('widget.types', [$this]);
         }
 
-        return $this->types;
+        return $filter ? array_filter($this->types, function($type) use($filter) { return 0 === strpos($type->getId(), $filter); }) : $this->types;
     }
 
     /**

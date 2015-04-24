@@ -45,7 +45,7 @@ class WidgetsController
                 'widget'    => $widget,
                 'position'  => $position,
                 'config'    => $module->getWidgetConfig($widget->getId()) ?: new \stdClass(),
-                'types'     => array_values($module->getTypes()),
+                'types'     => array_values($module->getTypes('site')),
                 'positions' => array_values($module->getPositions())
             ]
         ];

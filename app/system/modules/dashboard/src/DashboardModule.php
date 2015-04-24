@@ -20,6 +20,11 @@ class DashboardModule extends Module
     public function main(App $app)
     {
         $this->types = [];
+
+        $app->on('widget.types', function($event, $widgets) {
+            $widgets->registerType(new FeedWidget());
+            $widgets->registerType(new WeatherWidget());
+        });
     }
 
     /**
@@ -77,9 +82,7 @@ class DashboardModule extends Module
      */
     public function getType($id)
     {
-        $types = $this->getTypes();
-
-        return isset($types[$id]) ? $types[$id] : null;
+        return App::module('system/widget')->getType($id);
     }
 
     /**
@@ -89,24 +92,6 @@ class DashboardModule extends Module
      */
     public function getTypes()
     {
-        if (!$this->types) {
-
-            $this->registerType(new FeedWidget());
-            $this->registerType(new WeatherWidget());
-
-            App::trigger('dashboard.types', [$this]);
-        }
-
-        return $this->types;
-    }
-
-    /**
-     * Register a widget type.
-     *
-     * @param TypeInterface $type
-     */
-    public function registerType(TypeInterface $type)
-    {
-        $this->types[$type->getId()] = $type;
+        return App::module('system/widget')->getTypes('dashboard');
     }
 }

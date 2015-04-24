@@ -9,6 +9,14 @@ use Pagekit\Widget\Model\WidgetInterface;
 
 class UserWidget extends Type
 {
+    public function __construct()
+    {
+        parent::__construct('dashboard.user', __('Users'), null, [
+            'show' => 'login',
+            'count' => 5
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -37,14 +37,6 @@
 
             var self = this, api = 'http://api.openweathermap.org/data/2.5';
 
-            this.$watch('widget', function(widget) {
-
-                if (!widget.settings.units) {
-                    self.$set('widget.settings.units', 'metric');
-                }
-
-            }, true, true);
-
             UIkit.autocomplete(this.$$.location, {
 
                 source: function(release) {

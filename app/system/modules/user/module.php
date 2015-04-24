@@ -47,11 +47,8 @@ return [
         });
 
         $app->on('widget.types', function ($event, $widgets) {
-            $widgets->registerType(new LoginWidget('widget.user.login', __('Login'), __('Displays a user login form.')));
-        });
-
-        $app->on('dashboard.types', function ($event, $dashboard) {
-            $dashboard->registerType(new UserWidget('widget.user', __('Users')));
+            $widgets->registerType(new LoginWidget());
+            $widgets->registerType(new UserWidget());
         });
 
         $app->on('system.settings.edit', function ($event) use ($app) {
