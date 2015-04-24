@@ -3,6 +3,7 @@
   "devDependencies": {
     "browserify": "^9.0.8",
     "gulp": "^3.8.10",
+    "gulp-concat": "^2.5.2",
     "gulp-eslint": "^0.7.0",
     "gulp-header": "^1.2.2",
     "gulp-less": "^3.0.0",

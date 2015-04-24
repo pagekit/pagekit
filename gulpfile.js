@@ -13,6 +13,7 @@ var fs         = require('fs'),
     buffer     = require('vinyl-buffer'),
     browserify = require('browserify'),
     gulp       = require('gulp'),
+    concat     = require('gulp-concat'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
     rename     = require('gulp-rename'),
@@ -52,6 +53,25 @@ gulp.task('compile', function () {
             .pipe(gulp.dest(pkg.path));
     }));
 
+});
+
+/**
+ * Compile all main .js
+ */
+gulp.task('compile-js', function(){
+
+    var globalize = [
+        './vendor/assets/cldrjs/dist/cldr.js',
+        './vendor/assets/cldrjs/dist/cldr/*.js',
+        './vendor/assets/globalize/dist/globalize.js',
+        './vendor/assets/globalize/dist/globalize/number.js',
+        './vendor/assets/globalize/dist/globalize/date.js'
+    ];
+
+    return gulp.src(globalize)
+        .pipe(concat('globalize.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./vendor/assets/globalize/dist'));
 });
 
 /**

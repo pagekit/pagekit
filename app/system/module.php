@@ -121,7 +121,7 @@ return [
         ],
 
         '@system: /system' => [
-            'Pagekit\\System\\Controller\\LocaleController',
+            'Pagekit\\System\\Controller\\IntlController',
             'Pagekit\\System\\Controller\\MigrationController',
             'Pagekit\\System\\Controller\\UpdateController',
             'Pagekit\\System\\Controller\\SystemController'

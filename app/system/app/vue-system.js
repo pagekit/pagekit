@@ -26,9 +26,17 @@
             return Vue.url(url, params, root.replace(/\/index.php$/i, ''));
         };
 
-        Vue.prototype.$date = Locale.date;
-        Vue.prototype.$trans = Locale.trans;
-        Vue.prototype.$transChoice = Locale.transChoice;
+        Vue.prototype.$date = function(date, format) {
+
+            if (typeof date == 'string') {
+                date = new Date(date);
+            }
+
+            return Globalize.formatDate(date, {date: format});
+        };
+
+        Vue.prototype.$trans = Globalize.trans;
+        Vue.prototype.$transChoice = Globalize.transChoice;
 
         /**
          * TODO remove with vuejs > 0.11.5
@@ -72,7 +80,7 @@
         });
 
         Vue.filter('date', function(date, format) {
-            return this.$date(format, date);
+            return this.$date(date, format);
         });
 
         Vue.filter('first', function(collection) {
