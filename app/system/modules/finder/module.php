@@ -11,10 +11,7 @@ return [
         $app->on('app.request', function() use ($app) {
 
             $app['view']->addHelper(new FinderHelper());
-            $app['scripts']->register('finder', 'app/system/modules/finder/app/finder.js', ['vue-system', 'uikit-upload']);
-            $app['scripts']->register('finder-main', 'app/system/modules/finder/views/main.php', '~finder', 'template');
-            $app['scripts']->register('finder-table', 'app/system/modules/finder/views/table.php', '~finder', 'template');
-            $app['scripts']->register('finder-thumbnail', 'app/system/modules/finder/views/thumbnail.php', '~finder', 'template');
+            $app['scripts']->register('finder', 'system/finder:assets/components/finder.js', ['vue-system', 'uikit-upload']);
 
         });
 
@@ -23,6 +20,12 @@ return [
     'autoload' => [
 
         'Pagekit\\Finder\\' => 'src'
+
+    ],
+
+    'resources' => [
+
+        'system/finder:' => ''
 
     ],
 

@@ -12,6 +12,8 @@ var fs         = require('fs'),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
     browserify = require('browserify'),
+    partialify = require('partialify'),
+    vueify     = require('vueify'),
     gulp       = require('gulp'),
     concat     = require('gulp-concat'),
     header     = require('gulp-header'),
@@ -19,8 +21,7 @@ var fs         = require('fs'),
     rename     = require('gulp-rename'),
     eslint     = require('gulp-eslint'),
     util       = require('gulp-util'),
-    uglify     = require('gulp-uglify'),
-    vueify     = require('vueify');
+    uglify     = require('gulp-uglify');
 
 // paths of the packages for the compile-task
 var pkgs = [
@@ -77,8 +78,9 @@ gulp.task('compile-js', function(){
 
     var files = [
         { src: './app/modules/debug/assets/app/index.js', dest: 'debugbar.js' },
-        { src: './app/system/modules/package/assets/app/components/marketplace.vue', dest: 'marketplace.js' },
-        { src: './app/system/modules/package/assets/app/components/upload.vue', dest: 'upload.js' },
+        { src: './app/system/modules/finder/assets/components/finder.vue', dest: 'finder.js' },
+        { src: './app/system/modules/package/assets/components/marketplace.vue', dest: 'marketplace.js' },
+        { src: './app/system/modules/package/assets/components/upload.vue', dest: 'upload.js' },
         { src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.js' },
         { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
     ];
@@ -89,6 +91,7 @@ gulp.task('compile-js', function(){
 
     function compile(src, dest) {
         return browserify(src)
+            .transform(partialify)
             .transform(vueify)
             .bundle()
             .pipe(source(path.join(path.dirname(src), dest)))

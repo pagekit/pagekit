@@ -24,7 +24,7 @@
         <div data-uk-margin>
 
             <select v-model="config.filter.status" options="statuses"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="500">
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
 
         </div>
     </div>

@@ -45,13 +45,14 @@
 
 <script>
 
-    var $ = jQuery, _ = Vue.util, tmpl = __vue_template__;
+    var $ = jQuery,
+        _ = Vue.util;
 
     module.exports = {
 
         replace: true,
 
-        template: tmpl,
+        template: __vue_template__,
 
         data: function () {
             return {

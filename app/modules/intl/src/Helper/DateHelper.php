@@ -28,6 +28,10 @@ class DateHelper
     {
         $calendar = Intl::calendar();
 
+        if (!$value instanceof \DateTime) {
+            $value = $calendar->toDateTime($value);
+        }
+
         if (in_array($width, ['full', 'long', 'medium', 'short'])) {
             return $calendar->formatDate($value, $width, $locale);
         }
