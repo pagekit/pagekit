@@ -78,6 +78,7 @@ gulp.task('compile-js', function(){
 
     var files = [
         { src: './app/modules/debug/app/app.js', dest: 'debugbar.js' },
+        { src: './app/system/modules/editor/app/app.js', dest: 'editor.js' },
         { src: './app/system/modules/finder/app/components/finder.vue', dest: 'finder.js' },
         { src: './app/system/modules/package/app/components/marketplace.vue', dest: 'marketplace.js' },
         { src: './app/system/modules/package/app/components/upload.vue', dest: 'upload.js' },

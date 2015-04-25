@@ -42,7 +42,7 @@ jQuery(function ($) {
             date: {
 
                 get: function() {
-                    return this.$date('Y-m-d', this.post.date);
+                    return this.$date(this.post.date, 'short');
                 },
 
                 set: function(date) {
@@ -57,7 +57,7 @@ jQuery(function ($) {
             time: {
 
                 get: function() {
-                    return this.$date('H:i', this.post.date);
+                    return this.$date(this.post.date, {time: 'short'});
                 },
 
                 set: function(time) {
