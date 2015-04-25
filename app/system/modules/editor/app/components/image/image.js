@@ -1,5 +1,5 @@
 /**
- * Image plugin
+ * Editor Image plugin.
  */
 
 var $ = jQuery;

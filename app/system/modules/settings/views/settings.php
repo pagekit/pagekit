@@ -1,4 +1,4 @@
-<?php $view->script('settings', 'app/system/modules/settings/app/settings.js', 'vue-system') ?>
+<?php $view->script('settings', 'app/system/modules/settings/app/settings.js', 'system') ?>
 
 <form id="settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 

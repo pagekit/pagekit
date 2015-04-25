@@ -1,5 +1,5 @@
 /**
- * Video plugin
+ * Editor Video plugin.
  */
 
 var $ = jQuery;

@@ -1,5 +1,5 @@
 <?php $view->style('role-index', 'app/system/modules/user/assets/css/user.css') ?>
-<?php $view->script('role-index', 'app/system/modules/user/app/role.js', ['vue-system', 'uikit']) ?>
+<?php $view->script('role-index', 'app/system/modules/user/app/role.js', ['system', 'uikit']) ?>
 
 <div id="js-role" class="uk-form uk-grid" data-uk-grid-margin v-cloak >
 

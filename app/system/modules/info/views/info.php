@@ -1,4 +1,4 @@
-<?php $view->script('system-info', 'app/system/modules/info/app/info.js', 'vue-system') ?>
+<?php $view->script('system-info', 'app/system/modules/info/app/info.js', 'system') ?>
 
 <div id="info">
 

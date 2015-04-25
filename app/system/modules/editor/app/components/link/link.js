@@ -1,10 +1,10 @@
 /**
- * Link plugin
+ * Editor Link plugin.
  */
 
 var $ = jQuery;
 
-return; // todo
+/* TODO
 
 var modal  = $(require('./modal.html')).appendTo('body'),
     picker = UIkit.modal(modal),
@@ -119,3 +119,5 @@ UIkit.plugin('htmleditor', 'link', {
         return editor;
     }
 });
+
+*/

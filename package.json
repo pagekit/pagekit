@@ -1,6 +1,7 @@
 {
   "name": "pagekit",
   "devDependencies": {
+    "aliasify": "^1.7.2",
     "browserify": "^9.0.8",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.5.2",

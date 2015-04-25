@@ -11,6 +11,7 @@ var fs         = require('fs'),
     merge      = require('merge-stream'),
     source     = require('vinyl-source-stream'),
     buffer     = require('vinyl-buffer'),
+    aliasify   = require('aliasify'),
     browserify = require('browserify'),
     partialify = require('partialify'),
     vueify     = require('vueify'),
@@ -78,6 +79,8 @@ gulp.task('compile-js', function(){
 
     var files = [
         { src: './app/modules/debug/app/app.js', dest: 'debugbar.js' },
+        { src: './app/system/app/app.system.js', dest: 'system.js' },
+        { src: './app/system/app/app.globalize.js', dest: 'globalize.js' },
         { src: './app/system/modules/editor/app/app.js', dest: 'editor.js' },
         { src: './app/system/modules/finder/app/components/finder.vue', dest: 'finder.js' },
         { src: './app/system/modules/package/app/components/marketplace.vue', dest: 'marketplace.js' },
@@ -86,12 +89,22 @@ gulp.task('compile-js', function(){
         { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
     ];
 
+    var aliases = {'aliases': {
+        'cldrjs': './vendor/assets/cldrjs/dist/cldr.js',
+        'cldrjs/event': './vendor/assets/cldrjs/dist/cldr/event.js',
+        'cldrjs/supplemental': './vendor/assets/cldrjs/dist/cldr/supplemental.js',
+        'globalize': './vendor/assets/globalize/dist/globalize.js',
+        'globalize/number': './vendor/assets/globalize/dist/globalize/number.js',
+        'globalize/date': './vendor/assets/globalize/dist/globalize/date.js'
+    }};
+
     return merge.apply(null, files.map(function (file) {
         return compile(file.src, file.dest);
     }));
 
     function compile(src, dest) {
         return browserify(src)
+            .transform(aliasify, aliases)
             .transform(partialify)
             .transform(vueify)
             .bundle()
@@ -100,34 +113,6 @@ gulp.task('compile-js', function(){
             .on('error', util.log)
             .pipe(uglify())
             .pipe(gulp.dest('.'));
-    }
-
-});
-
-/**
- * Compress all script files
- */
-gulp.task('compress-js', function(){
-
-    var files = [
-        { src: [
-            './vendor/assets/cldrjs/dist/cldr.js',
-            './vendor/assets/cldrjs/dist/cldr/*.js',
-            './vendor/assets/globalize/dist/globalize.js',
-            './vendor/assets/globalize/dist/globalize/number.js',
-            './vendor/assets/globalize/dist/globalize/date.js'
-        ], dest: './vendor/assets/globalize/dist/globalize.min.js' }
-    ];
-
-    return merge.apply(null, files.map(function (file) {
-        return compress(file.src, file.dest);
-    }));
-
-    function compress(src, dest) {
-        return gulp.src(src)
-            .pipe(concat(path.basename(dest)))
-            .pipe(uglify())
-            .pipe(gulp.dest(path.dirname(dest)));
     }
 
 });

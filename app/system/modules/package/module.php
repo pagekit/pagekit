@@ -18,8 +18,8 @@ return [
 
         $app->on('app.request', function () use ($app) {
 
-            $app['scripts']->register('marketplace', 'system/package:app/components/marketplace.js', 'vue-system');
-            $app['scripts']->register('upload', 'system/package:app/components/upload.js', ['vue-system', 'uikit-upload']);
+            $app['scripts']->register('marketplace', 'system/package:app/components/marketplace.js', 'system');
+            $app['scripts']->register('upload', 'system/package:app/components/upload.js', ['system', 'uikit-upload']);
 
             $app['module']->load($theme = $app['system']->config('site.theme'));
 
