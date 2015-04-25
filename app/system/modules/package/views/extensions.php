@@ -1,4 +1,4 @@
-<?php $view->script('extensions', 'app/system/modules/package/app/extensions.js', ['marketplace', 'upload']) ?>
+<?php $view->script('extensions', 'system/package:assets/app/extensions.js', ['marketplace', 'upload']) ?>
 
 <div id="extensions" class="uk-grid" data-uk-grid-margin>
 

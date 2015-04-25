@@ -1,4 +1,4 @@
-<?php $view->script('themes', 'app/system/modules/package/app/themes.js', ['marketplace', 'upload']) ?>
+<?php $view->script('themes', 'system/package:assets/app/themes.js', ['marketplace', 'upload']) ?>
 
 <div id="themes" class="uk-grid" data-uk-grid-margin>
 

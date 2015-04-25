@@ -32,13 +32,10 @@ var pkgs = [
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
 
-/**
- * Default gulp task
- */
 gulp.task('default', ['compile', 'lint']);
 
 /**
- * Compile all main .less files of the packages and banner them
+ * Compile all less files
  */
 gulp.task('compile', function () {
 
@@ -56,35 +53,17 @@ gulp.task('compile', function () {
 });
 
 /**
- * Compile all main .js
- */
-gulp.task('compile-js', function(){
-
-    var globalize = [
-        './vendor/assets/cldrjs/dist/cldr.js',
-        './vendor/assets/cldrjs/dist/cldr/*.js',
-        './vendor/assets/globalize/dist/globalize.js',
-        './vendor/assets/globalize/dist/globalize/number.js',
-        './vendor/assets/globalize/dist/globalize/date.js'
-    ];
-
-    return gulp.src(globalize)
-        .pipe(concat('globalize.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./vendor/assets/globalize/dist'));
-});
-
-/**
- * Watch for changes in all .less files
+ * Watch for changes in files
  */
 gulp.task('watch', function () {
     gulp.watch('**/*.less', ['compile']);
+    gulp.watch(['app/**/*.js', 'app/**/*.vue'], ['compile-js']);
 });
 
 /**
- * Runs eshint
+ * Lint all script files
  */
-gulp.task('lint', function () {
+gulp.task('lint-js', function () {
     return gulp.src(['app/modules/**/*.js', 'extensions/**/*.js', 'themes/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
@@ -92,33 +71,59 @@ gulp.task('lint', function () {
 });
 
 /**
- * Runs browserify
+ * Compile all script files
  */
-gulp.task('browserify', function () {
+gulp.task('compile-js', function(){
 
     var files = [
         { src: './app/modules/debug/assets/app/index.js', dest: 'debugbar.js' },
+        { src: './app/system/modules/package/assets/app/components/marketplace.vue', dest: 'marketplace.js' },
+        { src: './app/system/modules/package/assets/app/components/upload.vue', dest: 'upload.js' },
         { src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.js' },
         { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
     ];
 
-    files.map(function (file) {
-        browserified(file.src, file.dest);
-    });
+    return merge.apply(null, files.map(function (file) {
+        return compile(file.src, file.dest);
+    }));
 
-    function browserified(src, dest) {
+    function compile(src, dest) {
         return browserify(src)
             .transform(vueify)
             .bundle()
             .pipe(source(path.join(path.dirname(src), dest)))
             .pipe(buffer())
             .on('error', util.log)
-            .pipe(gulp.dest('.'))
             .pipe(uglify())
-            .pipe(rename(function (file) {
-                file.basename += '.min';
-            }))
             .pipe(gulp.dest('.'));
+    }
+
+});
+
+/**
+ * Compress all script files
+ */
+gulp.task('compress-js', function(){
+
+    var files = [
+        { src: [
+            './vendor/assets/cldrjs/dist/cldr.js',
+            './vendor/assets/cldrjs/dist/cldr/*.js',
+            './vendor/assets/globalize/dist/globalize.js',
+            './vendor/assets/globalize/dist/globalize/number.js',
+            './vendor/assets/globalize/dist/globalize/date.js'
+        ], dest: './vendor/assets/globalize/dist/globalize.min.js' }
+    ];
+
+    return merge.apply(null, files.map(function (file) {
+        return compress(file.src, file.dest);
+    }));
+
+    function compress(src, dest) {
+        return gulp.src(src)
+            .pipe(concat(path.basename(dest)))
+            .pipe(uglify())
+            .pipe(gulp.dest(path.dirname(dest)));
     }
 
 });
