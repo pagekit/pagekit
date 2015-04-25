@@ -1,4 +1,4 @@
-<?php $view->script('dashboard-settings', 'app/system/modules/dashboard/assets/app/settings.js', 'vue-system') ?>
+<?php $view->script('dashboard-settings', 'system/dashboard:app/settings.js', 'vue-system') ?>
 
 <div id="dashboard" class="uk-form">
 

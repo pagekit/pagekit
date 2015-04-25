@@ -11,7 +11,7 @@ return [
         $app->on('app.request', function() use ($app) {
 
             $app['view']->addHelper(new FinderHelper());
-            $app['scripts']->register('finder', 'system/finder:assets/components/finder.js', ['vue-system', 'uikit-upload']);
+            $app['scripts']->register('finder', 'system/finder:app/components/finder.js', ['vue-system', 'uikit-upload']);
 
         });
 

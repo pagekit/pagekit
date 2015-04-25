@@ -77,10 +77,10 @@ gulp.task('lint-js', function () {
 gulp.task('compile-js', function(){
 
     var files = [
-        { src: './app/modules/debug/assets/app/index.js', dest: 'debugbar.js' },
-        { src: './app/system/modules/finder/assets/components/finder.vue', dest: 'finder.js' },
-        { src: './app/system/modules/package/assets/components/marketplace.vue', dest: 'marketplace.js' },
-        { src: './app/system/modules/package/assets/components/upload.vue', dest: 'upload.js' },
+        { src: './app/modules/debug/app/app.js', dest: 'debugbar.js' },
+        { src: './app/system/modules/finder/app/components/finder.vue', dest: 'finder.js' },
+        { src: './app/system/modules/package/app/components/marketplace.vue', dest: 'marketplace.js' },
+        { src: './app/system/modules/package/app/components/upload.vue', dest: 'upload.js' },
         { src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.js' },
         { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
     ];

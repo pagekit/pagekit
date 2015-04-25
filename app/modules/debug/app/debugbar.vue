@@ -24,14 +24,14 @@
 
   var $ = window.jQuery, config = window.$debugbar, collectors = {
 
-    system: require('./collectors/system.vue'),
-    routes: require('./collectors/routes.vue'),
-    events: require('./collectors/events.vue'),
-    time: require('./collectors/time.vue'),
-    memory: require('./collectors/memory.vue'),
-    database: require('./collectors/database.vue'),
-    request: require('./collectors/request.vue'),
-    auth: require('./collectors/auth.vue')
+    system: require('./components/system.vue'),
+    routes: require('./components/routes.vue'),
+    events: require('./components/events.vue'),
+    time: require('./components/time.vue'),
+    memory: require('./components/memory.vue'),
+    database: require('./components/database.vue'),
+    request: require('./components/request.vue'),
+    auth: require('./components/auth.vue')
 
   };
 
