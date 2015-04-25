@@ -118,15 +118,19 @@ return [
             'label'    => 'Permissions',
             'parent'   => 'user',
             'url'      => '@user/permission',
-            'active'   => '@user/permission*',
             'access'   => 'user: manage user permissions'
         ],
         'user: roles' => [
             'label'    => 'Roles',
             'parent'   => 'user',
             'url'      => '@user/role',
-            'active'   => '@user/role*',
             'access'   => 'user: manage user permissions'
+        ],
+        'user: settings' => [
+            'label'    => 'Settings',
+            'parent'   => 'user',
+            'url'      => '@user/settings',
+            'access'   => 'user: manage user settings'
         ]
 
     ],
@@ -153,9 +157,11 @@ return [
         'registration' => 'admin',
         'require_verification' => true,
         'users_per_page' => 20,
+
         'auth' => [
             'refresh_token' => false
         ]
+
     ]
 
 ];

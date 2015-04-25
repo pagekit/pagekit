@@ -70,7 +70,7 @@
                         <a class="uk-badge uk-badge-notification" v-class="pk-badge: post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}">{{ post.comment_count }}</a>
                     </td>
                     <td>
-                        {{ post.date | date long }}
+                        {{ post.date | date medium }}
                     </td>
                     <td class="pk-table-text-break">
                         <a v-if="post.isAccessible" v-attr="href: post.url" target="_blank">{{ post.url | baseUrl }}</a>

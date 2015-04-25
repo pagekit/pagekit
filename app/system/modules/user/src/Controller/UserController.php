@@ -74,6 +74,21 @@ class UserController
     }
 
     /**
+     * @Response("system/user:views/admin/settings.php")
+     */
+    public function settingsAction()
+    {
+        return [
+            '$meta' => [
+                'title' => __('User Settings')
+            ],
+            '$data' => [
+                'config' => App::module('system/user')->config()
+            ]
+        ];
+    }
+
+    /**
      * Gets the user roles.
      *
      * @param  User $user
