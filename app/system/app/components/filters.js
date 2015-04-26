@@ -3,7 +3,7 @@
  */
 
 Vue.filter('baseUrl', function(url) {
-    return _.startsWith(url, config.url) ? url.substr(config.url.length) : url;
+    return _.startsWith(url, Vue.url.root) ? url.substr(Vue.url.root.length) : url;
 });
 
 Vue.filter('trans', function(id, parameters, domain, locale) {

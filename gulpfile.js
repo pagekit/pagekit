@@ -9,20 +9,11 @@
 var fs         = require('fs'),
     path       = require('path'),
     merge      = require('merge-stream'),
-    source     = require('vinyl-source-stream'),
-    buffer     = require('vinyl-buffer'),
-    aliasify   = require('aliasify'),
-    browserify = require('browserify'),
-    partialify = require('partialify'),
-    vueify     = require('vueify'),
     gulp       = require('gulp'),
-    concat     = require('gulp-concat'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
     rename     = require('gulp-rename'),
-    eslint     = require('gulp-eslint'),
-    util       = require('gulp-util'),
-    uglify     = require('gulp-uglify');
+    eslint     = require('gulp-eslint');
 
 // paths of the packages for the compile-task
 var pkgs = [
@@ -34,7 +25,7 @@ var pkgs = [
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
 
-gulp.task('default', ['compile', 'lint']);
+gulp.task('default', ['compile']);
 
 /**
  * Compile all less files
@@ -59,60 +50,14 @@ gulp.task('compile', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('**/*.less', ['compile']);
-    gulp.watch(['app/**/*.js', 'app/**/*.vue'], ['compile-js']);
 });
 
 /**
  * Lint all script files
  */
-gulp.task('lint-js', function () {
+gulp.task('lint', function () {
     return gulp.src(['app/modules/**/*.js', 'extensions/**/*.js', 'themes/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
-});
-
-/**
- * Compile all script files
- */
-gulp.task('compile-js', function(){
-
-    var files = [
-        { src: './app/modules/debug/app/app.js', dest: 'debugbar.js' },
-        { src: './app/system/app/app.system.js', dest: 'system.js' },
-        { src: './app/system/app/app.globalize.js', dest: 'globalize.js' },
-        { src: './app/system/modules/editor/app/app.js', dest: 'editor.js' },
-        { src: './app/system/modules/finder/app/components/finder.vue', dest: 'finder.js' },
-        { src: './app/system/modules/package/app/components/marketplace.vue', dest: 'marketplace.js' },
-        { src: './app/system/modules/package/app/components/upload.vue', dest: 'upload.js' },
-        { src: './vendor/assets/vue-resource/index.js', dest: 'dist/vue-resource.js' },
-        { src: './vendor/assets/vue-validator/index.js', dest: 'dist/vue-validator.js' }
-    ];
-
-    var aliases = {'aliases': {
-        'cldrjs': './vendor/assets/cldrjs/dist/cldr.js',
-        'cldrjs/event': './vendor/assets/cldrjs/dist/cldr/event.js',
-        'cldrjs/supplemental': './vendor/assets/cldrjs/dist/cldr/supplemental.js',
-        'globalize': './vendor/assets/globalize/dist/globalize.js',
-        'globalize/number': './vendor/assets/globalize/dist/globalize/number.js',
-        'globalize/date': './vendor/assets/globalize/dist/globalize/date.js'
-    }};
-
-    return merge.apply(null, files.map(function (file) {
-        return compile(file.src, file.dest);
-    }));
-
-    function compile(src, dest) {
-        return browserify(src)
-            .transform(aliasify, aliases)
-            .transform(partialify)
-            .transform(vueify)
-            .bundle()
-            .pipe(source(path.join(path.dirname(src), dest)))
-            .pipe(buffer())
-            .on('error', util.log)
-            .pipe(uglify())
-            .pipe(gulp.dest('.'));
-    }
-
 });

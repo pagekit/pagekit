@@ -592,8 +592,6 @@ var Translator = (function(document, undefined) {
 
 })(document, undefined).fromJSON({ translations: config.translations });
 
-require('cldrjs/event');
-require('cldrjs/supplemental');
 require('globalize/number');
 require('globalize/date');
 
