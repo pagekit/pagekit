@@ -52,7 +52,7 @@ html { overflow-y: scroll; }
 /* Large screen and bigger */
 @media (min-width: @breakpoint-xlarge) {
 
-    .tm-headerbar-primary { margin-left: -(19px + 20px); }
+    .tm-headerbar-primary { margin-left: -(22px + 28px); } // Icon Width + Margin
     
 }
 
@@ -69,8 +69,8 @@ html { overflow-y: scroll; }
 @media (min-width: @breakpoint-medium) {
 
     .tm-icon-menu {
-        margin-right: 20px;
-        color: rgba(255,255,255,0.5);
+        margin-right: 28px;
+        color: rgba(255,255,255,0.6);
     }
 
     .tm-headerbar-primary:hover .tm-icon-menu,
@@ -93,7 +93,7 @@ html { overflow-y: scroll; }
 
 .tm-navbar {
     margin-top: -(@navbar-nav-height);
-    margin-left: -(@navbar-nav-padding-horizontal - 1px);
+    margin-left: -(@navbar-nav-padding-horizontal);
 }
 
 
