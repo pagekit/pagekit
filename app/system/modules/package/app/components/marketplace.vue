@@ -45,8 +45,9 @@
 
 <script>
 
-    var $ = jQuery,
-        _ = Vue.util;
+    var $ = require('jquery');
+    var _ = require('lodash');
+    var Vue = require('vue');
 
     module.exports = {
 
@@ -114,11 +115,11 @@
 
             install: function (pkg) {
 
-                var vm = this, url = this.$url('admin/system/package/install');
+                var vm = this;
 
                 vm.$set('status', 'installing');
 
-                $.post(url, {'package': JSON.stringify(pkg.version)}, function (data) {
+                this.$http.post('admin/system/package/install', {'package': pkg.version}, function (data) {
 
                     if (data.message) {
                         vm.installed.push(pkg);
@@ -131,7 +132,7 @@
             },
 
             isInstalled: function (pkg) {
-                return _.isObject(pkg) ? _.findBy(this.installed, 'name', pkg.name) : undefined;
+                return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
             }
         }
 
