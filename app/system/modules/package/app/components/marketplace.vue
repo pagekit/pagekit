@@ -123,9 +123,13 @@
 
                     if (data.message) {
                         vm.installed.push(pkg);
-                    } else {
-                        UIkit.notify(data.error, 'danger');
                     }
+
+                    vm.$set('status', '');
+
+                }, function (data) {
+
+                    UIkit.notify(data, 'danger');
 
                     vm.$set('status', '');
                 });

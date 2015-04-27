@@ -4,7 +4,6 @@ namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Filesystem\Archive\Zip;
 use Pagekit\Package\Downloader\PackageDownloader;
 use Pagekit\Package\Exception\ArchiveExtractionException;
@@ -24,50 +23,42 @@ class PackageController
      */
     public function uploadAction($type = null)
     {
-        try {
+        $temp = App::get('path.temp');
+        $file = App::request()->files->get('file');
 
-            $temp = App::get('path.temp');
-            $file = App::request()->files->get('file');
-
-            if ($file === null || !$file->isValid()) {
-                throw new Exception(__('No file uploaded.'));
-            }
-
-            $package = $this->loadPackage($upload = $file->getPathname());
-
-            if ($type != $package->getType()) {
-                throw new Exception(__('Invalid package type.'));
-            }
-
-            Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
-
-            $extra = $package->getExtra();
-
-            if (isset($extra['image'])) {
-                $extra['image'] = App::url("{$temp}/$path/".$extra['image']);
-            } else {
-                $extra['image'] = App::url('app/system/assets/images/placeholder-icon.svg');
-            }
-
-            $response = [
-                'package' => [
-                    'name' => $package->getName(),
-                    'type' => $package->getType(),
-                    'title' => $package->getTitle(),
-                    'description' => $package->getDescription(),
-                    'version' => $package->getVersion(),
-                    'author' => $package->getAuthor(),
-                    'shasum' => sha1_file($upload),
-                    'extra' => $extra
-                ],
-                'install' => $path
-            ];
-
-        } catch (Exception $e) {
-            $response = ['error' => $e->getMessage()];
+        if ($file === null || !$file->isValid()) {
+            App::abort(400, __('No file uploaded.'));
         }
 
-        return $response;
+        $package = $this->loadPackage($upload = $file->getPathname());
+
+        if ($type != $package->getType()) {
+            App::abort(400, __('Invalid package type.'));
+        }
+
+        Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
+
+        $extra = $package->getExtra();
+
+        if (isset($extra['image'])) {
+            $extra['image'] = App::url("{$temp}/$path/".$extra['image']);
+        } else {
+            $extra['image'] = App::url('app/system/assets/images/placeholder-icon.svg');
+        }
+
+        return [
+            'package' => [
+                'name' => $package->getName(),
+                'type' => $package->getType(),
+                'title' => $package->getTitle(),
+                'description' => $package->getDescription(),
+                'version' => $package->getVersion(),
+                'author' => $package->getAuthor(),
+                'shasum' => sha1_file($upload),
+                'extra' => $extra
+            ],
+            'install' => $path
+        ];
     }
 
     /**
@@ -91,7 +82,7 @@ class PackageController
             }
 
             if (!$path) {
-                throw new Exception(__('Path not found.'));
+                throw new \Exception(__('Path not found.'));
             }
 
             $package = $this->loadPackage($path = "{$temp}/{$path}");
@@ -104,27 +95,29 @@ class PackageController
 
             App::module('system/cache')->clearCache();
 
-            $response = ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
+            return ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
 
         } catch (ArchiveExtractionException $e) {
-            $response = ['error' => __('Package extraction failed.')];
+            $error = __('Package extraction failed.');
         } catch (ChecksumVerificationException $e) {
-            $response = ['error' => __('Package checksum verification failed.')];
+            $error = __('Package checksum verification failed.');
         } catch (UnauthorizedDownloadException $e) {
-            $response = ['error' => __('Invalid API key.')];
+            $error = __('Invalid API key.');
         } catch (DownloadErrorException $e) {
-            $response = ['error' => __('Package download failed.')];
+            $error = __('Package download failed.');
         } catch (NotWritableException $e) {
-            $response = ['error' => __('Path is not writable.')];
-        } catch (Exception $e) {
-            $response = ['error' => $e->getMessage()];
+            $error = __('Path is not writable.');
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
         }
 
         if (strpos($path, $temp) === 0 && file_exists($path)) {
             App::file()->delete($path);
         }
 
-        return $response;
+        if (isset($error)) {
+            App::abort(400, $error);
+        }
     }
 
     protected function installTheme($json, $package)
@@ -184,10 +177,11 @@ class PackageController
                 return $package;
             }
 
-            throw new Exception;
+            App::abort(400);
 
         } catch (\Exception $e) {
-            throw new Exception(__('Can\'t load json file from package.'));
+
+            App::abort(400, __('Can\'t load json file from package.'));
         }
     }
 }
