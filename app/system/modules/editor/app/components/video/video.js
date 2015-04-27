@@ -2,7 +2,9 @@
  * Editor Video plugin.
  */
 
-var $ = jQuery;
+var $ = require('jquery');
+var Vue = require('vue');
+var UIkit = require('uikit');
 
 var VideoVm = {
 

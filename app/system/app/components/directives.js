@@ -2,7 +2,8 @@
  * Vue Directives
  */
 
-var $ = jQuery;
+var $ = require('jquery');
+var Vue = require('vue');
 
 Vue.directive('gravatar', {
 

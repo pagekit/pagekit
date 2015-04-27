@@ -2,7 +2,9 @@
  * Editor Link plugin.
  */
 
-var $ = jQuery;
+var $ = require('jquery');
+var Vue = require('vue');
+var UIkit = require('uikit');
 
 /* TODO
 

@@ -2,6 +2,8 @@
  * URL resolver plugin
  */
 
+var UIkit = require('uikit');
+
 UIkit.plugin('htmleditor', 'urlresolver', {
 
     init: function(editor) {

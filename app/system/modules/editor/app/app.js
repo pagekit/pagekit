@@ -4,15 +4,18 @@ require('./components/video/video.js');
 require('./components/url.js');
 require('./components/util.js');
 
-jQuery(function($) {
+var $ = require('jquery');
+var UIkit = require('uikit');
 
-    $(document).on('htmleditor-save', function(e, editor) {
+$(function () {
+
+    $(document).on('htmleditor-save', function (e, editor) {
         if (editor.element[0].form) {
             $(editor.element[0].form).submit();
         }
     });
 
-    $('textarea[data-editor]').each(function() {
+    $('textarea[data-editor]').each(function () {
 
         var options = $(this).data();
 

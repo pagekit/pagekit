@@ -21,6 +21,12 @@ module.exports = [{
       "globalize/date$": __dirname + "/vendor/assets/globalize/dist/globalize/date.js"
     }
   },
+  externals: {
+      "lodash": "_",
+      "jquery": "jQuery",
+      "uikit": "UIkit",
+      "vue": "Vue"
+  },
   module: {
     loaders: [
       { test: /\.html$/, loader: "html" },

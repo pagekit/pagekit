@@ -2,6 +2,8 @@
  * Vue Pagination component.
  */
 
+var Vue = require('vue');
+
 Vue.component('v-pagination', {
 
     replace: true,

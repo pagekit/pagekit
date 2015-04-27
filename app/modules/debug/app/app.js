@@ -1,4 +1,7 @@
-jQuery(function ($) {
+var $ = require('jquery');
+var Vue = require('vue');
+
+$(function () {
 
   $('body').append('<div id="profiler"></div>');
 

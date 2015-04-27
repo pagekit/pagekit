@@ -2,6 +2,10 @@
  * Vue Filters
  */
 
+var $ = require('jquery');
+var _ = require('lodash');
+var Vue = require('vue');
+
 Vue.filter('baseUrl', function(url) {
     return _.startsWith(url, Vue.url.root) ? url.substr(Vue.url.root.length) : url;
 });

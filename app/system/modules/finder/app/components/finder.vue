@@ -50,8 +50,9 @@
 
 <script>
 
-    var $ = jQuery,
-        _ = Vue.util;
+    var $ = require('jquery');
+    var Vue = require('vue');
+    var UIkit = require('uikit');
 
     var defaults = {
         root    : '/',
@@ -68,26 +69,26 @@
 
         template: __vue_template__,
 
-        data: function() {
-            return _.extend({}, defaults);
+        data: function () {
+            return Vue.util.extend({}, defaults);
         },
 
         ready: function () {
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.load().success(function() {
+            this.load().success(function () {
                 this.$dispatch('ready.finder', this);
             }.bind(this));
         },
 
         watch: {
 
-            path: function() {
+            path: function () {
                 this.load();
             },
 
-            selected: function() {
+            selected: function () {
                 this.$dispatch('select.finder', this.getSelected(), this)
             }
 
@@ -140,18 +141,18 @@
                 return this.path;
             },
 
-            getFullPath: function() {
+            getFullPath: function () {
                 return (this.root+this.path).replace(/^\/+|\/+$/g, '')+'/';
             },
 
-            getSelected: function() {
+            getSelected: function () {
                 var path = this.getFullPath();
-                return this.selected.map(function(name) {
+                return this.selected.map(function (name) {
                     return path+name;
                 });
             },
 
-            toggleSelect: function(name) {
+            toggleSelect: function (name) {
 
                 if (name.targetVM) {
                     if (name.target.tagName == 'INPUT' || name.target.tagName == 'A')  return;
@@ -247,7 +248,7 @@
              * Init upload
              */
 
-            'hook:ready': function() {
+            'hook:ready': function () {
 
                 var finder = this,
                     settings = {
@@ -298,9 +299,9 @@
 
     };
 
-    Vue.component('v-finder', _.extend({}, definition));
+    Vue.component('v-finder', Vue.util.extend({}, definition));
 
-    var Finder = function(element, options) {
+    var Finder = function (element, options) {
         return new Vue($.extend(true, {}, definition, { el: element, data: $.extend(true, {}, defaults, options)} ));
     };
 

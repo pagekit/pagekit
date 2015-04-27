@@ -22,7 +22,7 @@
 
 <script>
 
-  var $ = window.jQuery, config = window.$debugbar, collectors = {
+  var $ = require('jquery'), config = window.$debugbar, collectors = {
 
     system: require('./components/system.vue'),
     routes: require('./components/routes.vue'),
