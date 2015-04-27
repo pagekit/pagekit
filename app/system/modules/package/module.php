@@ -18,8 +18,8 @@ return [
 
         $app->on('app.request', function () use ($app) {
 
-            $app['scripts']->register('marketplace', 'system/package:app/bundle/marketplace.js', 'system');
-            $app['scripts']->register('upload', 'system/package:app/bundle/upload.js', ['system', 'uikit-upload']);
+            $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'system');
+            $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['system', 'uikit-upload']);
 
             $app['module']->load($theme = $app['system']->config('site.theme'));
 
@@ -56,6 +56,13 @@ return [
     ],
 
     'menu' => [
+
+        'system: marketplace' => [
+            'label'    => 'Marketplace',
+            'icon'     => 'system/package:assets/images/icon-marketplace.svg',
+            'url'      => '@system/package/marketplace',
+            'priority' => 15
+        ],
 
         'system: extensions' => [
             'label'    => 'Extensions',

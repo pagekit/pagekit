@@ -18,6 +18,21 @@ use Pagekit\Package\Loader\JsonLoader;
  */
 class PackageController
 {
+
+    public function marketplaceAction()
+    {
+        return [
+            '$view' => [
+                'title' => __('Marketplace'),
+                'name'  => 'system/package:views/marketplace.php'
+            ],
+            '$marketplace' => [
+                'api' => App::system()->config('api'),
+                'packages' => []
+            ]
+        ];
+    }
+
     /**
      * @Request({"type"}, csrf=true)
      */
