@@ -36,7 +36,11 @@ jQuery(function ($) {
                         vm.$set('user', data.user);
                     }
 
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message,'success');
+
+                }, function (data) {
+
+                    UIkit.notify(data, 'danger');
                 });
             }
 

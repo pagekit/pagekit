@@ -3,8 +3,8 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Database\Connection;
+use Pagekit\Kernel\Exception\BadRequestException;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
@@ -79,83 +79,77 @@ class UserApiController
      */
     public function saveAction($data, $password = null, $roles = null, $id = 0)
     {
-        try {
+        // is new ?
+        if (!$user = User::find($id)) {
 
-            // is new ?
-            if (!$user = User::find($id)) {
-
-                if ($id) {
-                    throw new Exception(__('User not found.'));
-                }
-
-                if (!$password) {
-                    throw new Exception(__('Password required.'));
-                }
-
-                $user = new User;
-                $user->setRegistered(new \DateTime);
+            if ($id) {
+                throw new BadRequestException(__('User not found.'));
             }
 
-            $self = App::user()->getId() == $user->getId();
-
-            if ($self && @$data['status'] == User::STATUS_BLOCKED) {
-                throw new Exception(__('Unable to block yourself.'));
+            if (!$password) {
+                throw new BadRequestException(__('Password required.'));
             }
 
-            $name  = trim(@$data['username']);
-            $email = trim(@$data['email']);
-
-            if (strlen($name) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $name)) {
-                throw new Exception(__('Username is invalid.'));
-            }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new Exception(__('Email is invalid.'));
-            }
-
-            if (User::where(['id <> :id',], compact('id'))->where(function ($query) use ($name) {
-                $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
-            })->first()
-            ) {
-                throw new Exception(__('Username not available.'));
-            }
-
-            if (User::where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
-                $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
-            })->first()
-            ) {
-                throw new Exception(__('Email not available.'));
-            }
-
-            $data['username'] = $name;
-            $data['email']    = $email;
-
-            if ($email != $user->getEmail()) {
-                $user->set('verified', false);
-            }
-
-            if (!empty($password)) {
-                $user->setPassword(App::get('auth.password')->hash($password));
-            }
-
-            if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
-
-                if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
-                    $roles[] = Role::ROLE_ADMINISTRATOR;
-                }
-
-                $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
-            }
-
-            unset($data['access'], $data['login'], $data['registered']);
-
-            $user->save($data);
-
-            return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
-
-        } catch (Exception $e) {
-            return ['error' => $e->getMessage()];
+            $user = new User;
+            $user->setRegistered(new \DateTime);
         }
+
+        $self = App::user()->getId() == $user->getId();
+
+        if ($self && @$data['status'] == User::STATUS_BLOCKED) {
+            throw new BadRequestException(__('Unable to block yourself.'));
+        }
+
+        $name  = trim(@$data['username']);
+        $email = trim(@$data['email']);
+
+        if (strlen($name) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $name)) {
+            throw new BadRequestException(__('Username is invalid.'));
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new BadRequestException(__('Email is invalid.'));
+        }
+
+        if (User::where(['id <> :id',], compact('id'))->where(function ($query) use ($name) {
+            $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
+        })->first()
+        ) {
+            throw new BadRequestException(__('Username not available.'));
+        }
+
+        if (User::where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
+            $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
+        })->first()
+        ) {
+            throw new BadRequestException(__('Email not available.'));
+        }
+
+        $data['username'] = $name;
+        $data['email']    = $email;
+
+        if ($email != $user->getEmail()) {
+            $user->set('verified', false);
+        }
+
+        if (!empty($password)) {
+            $user->setPassword(App::get('auth.password')->hash($password));
+        }
+
+        if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
+
+            if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
+                $roles[] = Role::ROLE_ADMINISTRATOR;
+            }
+
+            $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
+        }
+
+        unset($data['access'], $data['login'], $data['registered']);
+
+        $user->save($data);
+
+        return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
     }
 
     /**
@@ -164,18 +158,12 @@ class UserApiController
      */
     public function deleteAction($id)
     {
-        try {
+        if (App::user()->getId() == $id) {
+            throw new BadRequestException(__('Unable to delete yourself.'));
+        }
 
-            if (App::user()->getId() == $id) {
-                throw new Exception(__('Unable to delete yourself.'));
-            }
-
-            if ($user = User::find($id)) {
-                $user->delete();
-            }
-
-        } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+        if ($user = User::find($id)) {
+            $user->delete();
         }
 
         return ['message' => __('Success')];
