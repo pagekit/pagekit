@@ -4,7 +4,7 @@
 
         <div class="pf-navbar">
 
-            <ul class="pf-navbar-nav" v-repeat="navbar">
+            <ul class="pf-navbar-nav" v-repeat="navbar | orderBy 'priority'">
                 <li v-html="html" v-on="click: open(panel)"></li>
             </ul>
 
@@ -22,7 +22,10 @@
 
 <script>
 
-  var $ = require('jquery'), config = window.$debugbar, collectors = {
+  var $ = require('jquery');
+  var Vue = require('vue');
+  var config = window.$debugbar;
+  var collectors = {
 
     system: require('./components/system.vue'),
     routes: require('./components/routes.vue'),
@@ -63,10 +66,11 @@
 
     methods: {
 
-        add: function (collector, navbar, panel) {
+        add: function (collector, navbar, options) {
 
-            this.navbar.push({panel: panel, html: collector.$interpolate(navbar || '')});
+            this.navbar.push(Vue.util.extend({html: collector.$interpolate(navbar || '')}, options));
 
+            console.log(this.navbar);
         },
 
         open: function (panel) {

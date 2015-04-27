@@ -26,7 +26,7 @@
   module.exports = {
 
     ready: function () {
-      this.$parent.add(this, '<a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>', 'routes');
+      this.$parent.add(this, '<a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>', {priority: 20, panel: 'routes'});
     },
 
     filters: {

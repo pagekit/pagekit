@@ -38,7 +38,7 @@
   module.exports = {
 
     ready: function () {
-      this.$parent.add(this, $(this.$$.navbar).html());
+      this.$parent.add(this, $(this.$$.navbar).html(), {priority: 60});
     },
 
     computed: {

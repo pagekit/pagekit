@@ -53,7 +53,7 @@
   module.exports = {
 
     ready: function () {
-      this.$parent.add(this, $(this.$$.navbar).html(), 'database');
+      this.$parent.add(this, $(this.$$.navbar).html(), {priority: 50, panel: 'database'});
     }
 
   };

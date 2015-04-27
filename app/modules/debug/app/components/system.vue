@@ -67,7 +67,7 @@
   module.exports = {
 
     ready: function () {
-      this.$parent.add(this, '<a title="System Information"><div class="pf-icon-large pf-icon-pagekit"></div></a>', 'system');
+      this.$parent.add(this, '<a title="System Information"><div class="pf-icon-large pf-icon-pagekit"></div></a>', {priority: 10, panel: 'system'});
     }
 
   };
