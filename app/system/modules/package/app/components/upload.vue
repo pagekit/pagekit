@@ -54,8 +54,8 @@
 
 <script>
 
-    var $ = jQuery,
-        _ = Vue.util;
+    var $ = require('jquery');
+    var Vue = require('vue');
 
     module.exports = {
 
