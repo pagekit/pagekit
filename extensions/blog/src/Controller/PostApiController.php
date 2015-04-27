@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Post;
 
 /**
@@ -57,33 +56,25 @@ class PostApiController
      */
     public function saveAction($data, $id = 0)
     {
-        try {
+        if (!$id || !$post = Post::find($id)) {
 
-            if (!$id || !$post = Post::find($id)) {
-
-                if ($id) {
-                    throw new Exception('Post not found.');
-                }
-
-                $post = new Post;
+            if ($id) {
+                App::abort(404, __('Post not found.'));
             }
 
-            if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
-                throw new Exception('Invalid slug.');
-            }
-
-            $data['date'] = App::dates()->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
-            $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
-
-            $post->save($data);
-
-            return ['message' => $id ? __('Post saved.') : __('Post created.'), 'post' => $post];
-
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
-
+            $post = new Post;
         }
+
+        if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
+            App::abort(404, __('Invalid slug.'));
+        }
+
+        $data['date'] = App::dates()->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+        $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
+
+        $post->save($data);
+
+        return ['message' => $id ? __('Post saved.') : __('Post created.'), 'post' => $post];
     }
 
     /**
@@ -92,14 +83,8 @@ class PostApiController
      */
     public function deleteAction($id)
     {
-        try {
-
-            if ($post = Post::find($id)) {
-                $post->delete();
-            }
-
-        } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+        if ($post = Post::find($id)) {
+            $post->delete();
         }
 
         return ['message' => __('Success')];

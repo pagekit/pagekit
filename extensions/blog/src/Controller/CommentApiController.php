@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Comment;
 
 /**
@@ -62,41 +61,34 @@ class CommentApiController
      */
     public function saveAction($data, $id = 0)
     {
-        try {
+        $user = App::user();
 
-            $user = App::user();
+        if (!$id || !$comment = Comment::find($id)) {
 
-            if (!$id || !$comment = Comment::find($id)) {
-
-                if ($id) {
-                    throw new Exception('Comment not found.');
-                }
-
-                if (!$parent = Comment::find((int) @$data['parent_id'])) {
-                    throw new Exception('Invalid comment reply.');
-                }
-
-                $comment = new Comment;
-                $comment->setUserId((int) $user->getId());
-                $comment->setIp(App::request()->getClientIp());
-                $comment->setAuthor($user->getName());
-                $comment->setEmail($user->getEmail());
-                $comment->setUrl($user->getUrl());
-                $comment->setStatus(Comment::STATUS_APPROVED);
-                $comment->setPostId($parent->getPostId());
-                $comment->setParent($parent);
+            if ($id) {
+                App::abort(400, __('Comment not found.'));
             }
 
-            unset($data['created']);
+            if (!$parent = Comment::find((int) @$data['parent_id'])) {
+                App::abort(400, __('Invalid comment reply.'));
+            }
 
-            $comment->save($data);
-
-            return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
-
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
+            $comment = new Comment;
+            $comment->setUserId((int) $user->getId());
+            $comment->setIp(App::request()->getClientIp());
+            $comment->setAuthor($user->getName());
+            $comment->setEmail($user->getEmail());
+            $comment->setUrl($user->getUrl());
+            $comment->setStatus(Comment::STATUS_APPROVED);
+            $comment->setPostId($parent->getPostId());
+            $comment->setParent($parent);
         }
+
+        unset($data['created']);
+
+        $comment->save($data);
+
+        return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
     }
 
     /**
@@ -105,14 +97,8 @@ class CommentApiController
      */
     public function deleteAction($id)
     {
-        try {
-
-            if ($comment = Comment::find($id)) {
-                $comment->delete();
-            }
-
-        } catch (Exception $e) {
-            return ['message' => $e->getMessage(), 'error' => true];
+        if ($comment = Comment::find($id)) {
+            $comment->delete();
         }
 
         return ['message' => __('Success')];

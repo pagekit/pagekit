@@ -4,7 +4,6 @@ namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Package\Downloader\PackageDownloader;
 use Pagekit\Package\Exception\ArchiveExtractionException;
 use Pagekit\Package\Exception\ChecksumVerificationException;
@@ -42,7 +41,7 @@ class UpdateController
             if ($update) {
                 App::session()->set('system.update', $update);
             } else {
-                throw new Exception(__('Unable to find update.'));
+                App::abort(400, __('Unable to find update.'));
             }
 
             App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
@@ -65,7 +64,7 @@ class UpdateController
             $error = __('Package download failed.');
         } catch (NotWritableException $e) {
             $error = __('Path is not writable.');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
@@ -74,46 +73,32 @@ class UpdateController
 
     public function copyAction()
     {
-        try {
-
-            if (!$update = App::session()->get('system.update') or !$updateDir = App::session()->get('system.updateDir')) {
-                throw new Exception(__('You may not call this step directly.'));
-            }
-
-            // TODO: create maintenance file
-            // TODO: cleanup old files
-
-            App::file()->delete("$updateDir/.htaccess");
-            App::file()->copyDir($updateDir, App::path());
-            App::file()->delete($updateDir);
-            App::module('system/cache')->clearCache();
-            App::session()->remove('system.updateDir');
-
-            return 'success';
-
-        } catch (\Exception $e) {
-
-            return ['error' => $e->getMessage()];
+        if (!$update = App::session()->get('system.update') or !$updateDir = App::session()->get('system.updateDir')) {
+            App::abort(400, __('You may not call this step directly.'));
         }
+
+        // TODO: create maintenance file
+        // TODO: cleanup old files
+
+        App::file()->delete("$updateDir/.htaccess");
+        App::file()->copyDir($updateDir, App::path());
+        App::file()->delete($updateDir);
+        App::module('system/cache')->clearCache();
+        App::session()->remove('system.updateDir');
+
+        return 'success';
     }
 
     public function databaseAction()
     {
-        try {
-
-            if (!$update = App::session()->get('system.update')) {
-                throw new Exception(__('You may not call this step directly.'));
-            }
-
-            App::system()->enable();
-            App::module('system/cache')->clearCache();
-            App::session()->remove('system.update');
-
-            return 'success';
-
-        } catch (\Exception $e) {
-
-            return ['error' => $e->getMessage()];
+        if (!$update = App::session()->get('system.update')) {
+            App::abort(400, __('You may not call this step directly.'));
         }
+
+        App::system()->enable();
+        App::module('system/cache')->clearCache();
+        App::session()->remove('system.update');
+
+        return 'success';
     }
 }

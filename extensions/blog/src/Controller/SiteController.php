@@ -3,14 +3,11 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Database\Event\EntityEvent;
-use Pagekit\Kernel\Exception\AccessDeniedException;
-use Pagekit\Kernel\Exception\NotFoundException;
 
 /**
  * @Route("/")
@@ -89,7 +86,7 @@ class SiteController
             $user = App::user();
 
             if (!$user->hasAccess('blog: post comments')) {
-                throw new Exception(__('Insufficient User Rights.'));
+                App::abort(403, __('Insufficient User Rights.'));
             }
 
             // check minimum idle time in between user comments
@@ -101,16 +98,16 @@ class SiteController
                 $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
 
                 if ($diff->invert) {
-                    throw new Exception(__('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s + $diff->i * 60 + $diff->h * 3600]));
+                    App::abort(429, __('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s + $diff->i * 60 + $diff->h * 3600]));
                 }
             }
 
             if (!$post = Post::where(['id' => $id, 'status' => Post::STATUS_PUBLISHED])->first()) {
-                throw new Exception(__('Insufficient User Rights.'));
+                App::abort(403, __('Insufficient User Rights.'));
             }
 
             if (!$post->isCommentable()) {
-                throw new Exception(__('Comments have been disabled for this post.'));
+                App::abort(403, __('Comments have been disabled for this post.'));
             }
 
             // retrieve user data
@@ -119,7 +116,7 @@ class SiteController
                 $data['email']  = $user->getEmail();
                 $data['url']    = $user->getUrl();
             } elseif ($this->module->config('comments.require_name_and_email') && (!$data['author'] || !$data['email'])) {
-                throw new Exception(__('Please provide valid name and email.'));
+                App::abort(400, __('Please provide valid name and email.'));
             }
 
             $comment = new Comment;
@@ -128,7 +125,7 @@ class SiteController
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
 
-            $approved_once = (boolean)Comment::where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+            $approved_once = (boolean) Comment::where(['user_id' => $user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
             $comment->setStatus($user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
 
             // check the max links rule
@@ -145,13 +142,9 @@ class SiteController
 
             return App::redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
 
-        } catch (Exception $e) {
-
-            $message = $e->getMessage();
-
         } catch (\Exception $e) {
 
-            $message = __('Whoops, something went wrong!');
+            $message = $e->getMessage();
 
         }
 
@@ -166,11 +159,11 @@ class SiteController
     public function postAction($id = 0)
     {
         if (!$post = Post::where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
-            throw new NotFoundException(__('Post with id "%id%" not found!', ['%id%' => $id]));
+            App::abort(404, __('Post with id "%id%" not found!', ['%id%' => $id]));
         }
 
         if (!$post->hasAccess(App::user())) {
-            throw new AccessDeniedException(__('Unable to access this post!'));
+            App::abort(403, __('Unable to access this post!'));
         }
 
         $query = Comment::where(['status = ?'], [Comment::STATUS_APPROVED])->orderBy('created');
