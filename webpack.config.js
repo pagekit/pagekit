@@ -1,12 +1,12 @@
 module.exports = [{
   entry: {
-    "app/modules/debug/app/debugbar": "./app/modules/debug/app/app",
-    "app/system/app/system": "./app/system/app/app.system",
-    "app/system/app/globalize": "./app/system/app/app.globalize",
-    "app/system/modules/editor/app/editor": "./app/system/modules/editor/app/app",
-    "app/system/modules/finder/app/components/finder": "./app/system/modules/finder/app/components/finder.vue",
-    "app/system/modules/package/app/components/marketplace": "./app/system/modules/package/app/components/marketplace.vue",
-    "app/system/modules/package/app/components/upload": "./app/system/modules/package/app/components/upload.vue"
+    "app/modules/debug/app/bundle/debugbar": "./app/modules/debug/app/debugbar",
+    "app/system/app/bundle/system": "./app/system/app/system",
+    "app/system/app/bundle/globalize": "./app/system/app/globalize",
+    "app/system/modules/editor/app/bundle/editor": "./app/system/modules/editor/app/editor",
+    "app/system/modules/finder/app/bundle/finder": "./app/system/modules/finder/app/components/finder.vue",
+    "app/system/modules/package/app/bundle/marketplace": "./app/system/modules/package/app/components/marketplace.vue",
+    "app/system/modules/package/app/bundle/upload": "./app/system/modules/package/app/components/upload.vue"
   },
   output: {
     filename: "./[name].js"

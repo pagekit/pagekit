@@ -53,9 +53,9 @@ return [
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
             $app['scripts']->register('vue-resource', 'vendor/assets/vue-resource/dist/vue-resource.js', 'vue');
             $app['scripts']->register('vue-validator', 'vendor/assets/vue-validator/dist/vue-validator.js', 'vue');
-            $app['scripts']->register('globalize', 'app/system/app/globalize.js', 'globalize-data');
+            $app['scripts']->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
             $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
-            $app['scripts']->register('system', 'app/system/app/system.js', ['vue-resource', 'jquery', 'lodash', 'globalize']);
+            $app['scripts']->register('system', 'app/system/app/bundle/system.js', ['vue-resource', 'jquery', 'lodash', 'globalize']);
 
         }, 30);
 

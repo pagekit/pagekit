@@ -61,7 +61,7 @@ return [
 
             $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
             $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
-            $app['view']->script('debugbar', 'app/modules/debug/app/debugbar.js', ['vue', 'jquery']);
+            $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
         });
 
         $app['callbacks']->get('_debugbar/{id}', '_debugbar', function ($id) use ($app) {

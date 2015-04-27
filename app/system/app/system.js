@@ -1,1 +1,189 @@
-!function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={exports:{},id:i,loaded:!1};return t[i].call(r.exports,r,r.exports,e),r.loaded=!0,r.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}({0:function(t,e,n){function i(t){var e=$pagekit;t.url.root=e.url,t.http.options.emulateHTTP=!0,t.http.headers.common["X-XSRF-TOKEN"]=e.csrf,t.http.headers.common["X-Requested-With"]="XMLHttpRequest",t.url["static"]=function(e,n,i){return i||(i=t.url.root),t.url(e,n,i.replace(/\/index.php$/i,""))};var n=["full","long","medium","short"];t.prototype.$date=function(t,e){var i=e;return"string"==typeof t&&(t=new Date(t)),"string"==typeof i&&(i=-1!=n.indexOf(e)?{date:e}:{skeleton:e}),Globalize.formatDate(t,i)},t.prototype.$trans=Globalize.trans,t.prototype.$transChoice=Globalize.transChoice;var i=t.directive("partial"),r=i.insert;i.insert=function(e){var n=this.vm.$options.partials[e];if(void 0===e||n)return r.call(this,e);var i=t.parsers.template.parse(e);return i?(this.vm.$options.partials[e]=i,r.call(this,e)):void 0},t.util.findBy=function(t,e,n){for(var i,r=0;r<t.length;r++)if(i=t[r],i.hasOwnProperty(e)&&i[e]===n)return i;return void 0}}n(9),n(10),n(11),window.Vue&&Vue.use(i),String.prototype.parse=function(t){var e,n,i,r,a,o,s,c,d,l,u,p,h,f,v,m=this.replace(/^&/,"").replace(/&$/,"").split("&"),g=m.length,b=function(t){return decodeURIComponent(t.replace(/\+/g,"%20"))};for(t||(t={}),e=0;g>e;e++){for(l=m[e].split("="),u=b(l[0]),p=l.length<2?"":b(l[1]);" "===u.charAt(0);)u=u.slice(1);if(u.indexOf("\x00")>-1&&(u=u.slice(0,u.indexOf("\x00"))),u&&"["!==u.charAt(0)){for(f=[],h=0,n=0;n<u.length;n++)if("["!==u.charAt(n)||h){if("]"===u.charAt(n)&&h&&(f.length||f.push(u.slice(0,h-1)),f.push(u.substr(h,n-h)),h=0,"["!==u.charAt(n+1)))break}else h=n+1;for(f.length||(f=[u]),n=0;n<f[0].length&&(d=f[0].charAt(n),(" "===d||"."===d||"["===d)&&(f[0]=f[0].substr(0,n)+"_"+f[0].substr(n+1)),"["!==d);n++);for(o=t,n=0,v=f.length;v>n;n++)if(u=f[n].replace(/^['"]/,"").replace(/['"]$/,""),s=n!==f.length-1,a=o,""!==u&&" "!==u||0===n)o[u]===c&&(o[u]={}),o=o[u];else{i=-1;for(r in o)o.hasOwnProperty(r)&&+r>i&&r.match(/^\d+$/g)&&(i=+r);u=i+1}a[u]=p}}return t}},1:function(t,e,n){t.exports=jQuery},2:function(t,e,n){t.exports=Vue},9:function(t,e,n){var i=n(1),r=n(2);r.directive("gravatar",{update:function(t){var e=i(this.el),n={size:2*(e.attr("height")||50),backup:"mm",rating:"g"};e.attr("src",gravatar(t||"",n))}}),r.directive("check-all",{isLiteral:!0,bind:function(){var t=this,e=this.vm,n=i(this.el),r=this.arg,a=this.expression;n.on("change.check-all",function(){i(a,e.$el).prop("checked",i(this).prop("checked")),e.$set(r,t.checked())}),i(e.$el).on("change.check-all",a,function(){e.$set(r,t.state())}),this.unbindWatcher=e.$watch(r,function(n){i(a,e.$el).prop("checked",function(){return-1!==n.indexOf(i(this).val())}),t.state()})},unbind:function(){i(this.el).off(".check-all"),i(this.vm.$el).off(".check-all"),this.unbindWatcher&&this.unbindWatcher()},state:function(){var t=i(this.el),e=this.checked();return 0===e.length?t.prop("checked",!1).prop("indeterminate",!1):e.length==i(this.expression,this.vm.$el).length?t.prop("checked",!0).prop("indeterminate",!1):t.prop("indeterminate",!0),e},checked:function(){var t=[];return i(this.expression,this.vm.$el).each(function(){i(this).prop("checked")&&t.push(i(this).val())}),t}}),r.directive("checkbox",{twoWay:!0,bind:function(){var t=this.vm,e=this.expression,n=i(this.el);n.on("change.checkbox",function(){var i=t.$get(e),r=i.indexOf(n.val());n.prop("checked")?-1===r&&i.push(n.val()):-1!==r&&i.splice(r,1)})},update:function(t){return void 0===t?void this.set([]):void i(this.el).prop("checked",-1!==t.indexOf(this.el.value))},unbind:function(){i(this.el).off(".checkbox")}}),r.directive("sticky-table-header",{bind:function(){var t=i(this.el);this.handler=function(){var e=t.css("position","relative"),n=e.find("thead tr"),r=n.clone().addClass("pk-table-head-sticky").css("z-index",1).hide(),a=n.find("th:first"),o=r.find("th:first");r.css({position:"absolute",top:0,left:0}).appendTo(e),i(window).on("scroll",function(){UIkit.Utils.isInView(n)?r.hide():(o.css("width",a.width()),r.css({width:n.width(),top:window.scrollY-n.offset().top}).show())})},this.vm.$on("hook:ready",this.handler)},unbind:function(){this.vm.$off("hook:ready",this.handler)}})},10:function(t,e,n){var i=(n(1),n(31)),r=n(2);r.filter("baseUrl",function(t){return i.startsWith(t,r.url.root)?t.substr(r.url.root.length):t}),r.filter("trans",function(t,e,n,i){return this.$trans(t,a.call(this,e),a.call(this,n),a.call(this,i))}),r.filter("transChoice",function(t,e,n,i,r){return this.$transChoice(t,a.call(this,e)||0,a.call(this,n),a.call(this,i),a.call(this,r))}),r.filter("date",function(t,e){return this.$date(t,e)}),r.filter("first",function(t){return r.filter("toArray")(t)[0]}),r.filter("length",function(t){return r.filter("toArray")(t).length}),r.filter("toArray",function(t){return i.isPlainObject(t)?Object.keys(t).map(function(e){return t[e]}):i.isArray(t)?t:[]}),r.filter("toObject",function(t){return i.isArray(t)?t.reduce(function(t,e,n){return t[n]=e,t},{}):t}),r.filter("toOptions",function o(t){return Object.keys(t).map(function(e){var n=t[e];return"string"==typeof n?{text:n,value:e}:{label:e,options:o(n)}})});var a=function(t){try{return void 0===t?t:r.parsers.expression.parse(t).get.call(this,this)}catch(e){r.config.warnExpressionErrors&&r.util.warn('Error when evaluating expression "'+t+'":\n   '+e)}}},11:function(t,e,n){var i=n(2);i.component("v-pagination",{replace:!0,template:'<ul class="uk-pagination"></ul>',data:function(){return{page:1,pages:1}},ready:function(){var t=this,e=UIkit.pagination(this.$el,{pages:this.pages});e.on("select.uk.pagination",function(e,n){t.$set("page",n)}),this.$watch("page",function(t){e.selectPage(t)},!0),this.$watch("pages",function(t){e.render(t)},!0),e.selectPage(this.page)}})},31:function(t,e,n){t.exports=_}});
+require('./components/directives.js');
+require('./components/filters.js');
+require('./components/pagination.js');
+
+function install (Vue) {
+
+    var config = $pagekit, templates = {};
+
+    /**
+     * Config
+     */
+
+    Vue.url.root = config.url;
+    Vue.http.options.emulateHTTP = true;
+    Vue.http.headers.common['X-XSRF-TOKEN'] = config.csrf;
+    Vue.http.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+    /**
+     * Methods
+     */
+
+    Vue.url.static = function(url, params, root) {
+
+        if (!root) {
+            root = Vue.url.root;
+        }
+
+        return Vue.url(url, params, root.replace(/\/index.php$/i, ''));
+    };
+
+    var formats = ['full', 'long', 'medium', 'short'];
+
+    Vue.prototype.$date = function(date, format) {
+
+        var options = format;
+
+        if (typeof date == 'string') {
+            date = new Date(date);
+        }
+
+        if (typeof options == 'string') {
+            if (formats.indexOf(format) != -1) {
+                options = {date: format};
+            } else {
+                options = {skeleton: format};
+            }
+        }
+
+        return Globalize.formatDate(date, options);
+    };
+
+    Vue.prototype.$trans = Globalize.trans;
+    Vue.prototype.$transChoice = Globalize.transChoice;
+
+    var partial = Vue.directive('partial'), insert = partial.insert;
+
+    partial.insert = function(id) {
+
+        var self = this, partial = this.vm.$options.partials[id];
+
+        if (undefined === id || partial) {
+            return insert.call(this, id);
+        }
+
+        var frag = Vue.parsers.template.parse(id);
+
+        if (frag) {
+            this.vm.$options.partials[id] = frag;
+            return insert.call(this, id);
+        }
+    };
+
+    /**
+     * Utilities
+     */
+
+    Vue.util.findBy = function (arr, key, val) {
+
+        var value;
+
+        for (var i = 0; i < arr.length; i++) {
+
+            value = arr[i];
+
+            if (value.hasOwnProperty(key) && value[key] === val) {
+                return value;
+            }
+        }
+
+        return undefined;
+    };
+
+}
+
+if (window.Vue) {
+    Vue.use(install);
+}
+
+/**
+ * Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) and Contributors (http://phpjs.org/authors)
+ */
+
+String.prototype.parse = function (array) {
+
+    var strArr = this.replace(/^&/, '').replace(/&$/, '').split('&'),
+        sal = strArr.length,
+        i, j, ct, p, lastObj, obj, lastIter, undef, chr, tmp, key, value,
+        postLeftBracketPos, keys, keysLen,
+        fixStr = function(str) {
+            return decodeURIComponent(str.replace(/\+/g, '%20'));
+        };
+
+    if (!array) {
+        array = {};
+    }
+
+    for (i = 0; i < sal; i++) {
+        tmp = strArr[i].split('=');
+        key = fixStr(tmp[0]);
+        value = (tmp.length < 2) ? '' : fixStr(tmp[1]);
+
+        while (key.charAt(0) === ' ') {
+            key = key.slice(1);
+        }
+        if (key.indexOf('\x00') > -1) {
+            key = key.slice(0, key.indexOf('\x00'));
+        }
+        if (key && key.charAt(0) !== '[') {
+            keys = [];
+            postLeftBracketPos = 0;
+            for (j = 0; j < key.length; j++) {
+                if (key.charAt(j) === '[' && !postLeftBracketPos) {
+                    postLeftBracketPos = j + 1;
+                }
+                else if (key.charAt(j) === ']') {
+                    if (postLeftBracketPos) {
+                        if (!keys.length) {
+                            keys.push(key.slice(0, postLeftBracketPos - 1));
+                        }
+                        keys.push(key.substr(postLeftBracketPos, j - postLeftBracketPos));
+                        postLeftBracketPos = 0;
+                        if (key.charAt(j + 1) !== '[') {
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!keys.length) {
+                keys = [key];
+            }
+            for (j = 0; j < keys[0].length; j++) {
+                chr = keys[0].charAt(j);
+                if (chr === ' ' || chr === '.' || chr === '[') {
+                    keys[0] = keys[0].substr(0, j) + '_' + keys[0].substr(j + 1);
+                }
+                if (chr === '[') {
+                    break;
+                }
+            }
+
+            obj = array;
+            for (j = 0, keysLen = keys.length; j < keysLen; j++) {
+                key = keys[j].replace(/^['"]/, '').replace(/['"]$/, '');
+                lastIter = j !== keys.length - 1;
+                lastObj = obj;
+                if ((key !== '' && key !== ' ') || j === 0) {
+                    if (obj[key] === undef) {
+                        obj[key] = {};
+                    }
+                    obj = obj[key];
+                }
+                else { // To insert new dimension
+                    ct = -1;
+                    for (p in obj) {
+                        if (obj.hasOwnProperty(p)) {
+                            if (+p > ct && p.match(/^\d+$/g)) {
+                                ct = +p;
+                            }
+                        }
+                    }
+                    key = ct + 1;
+                }
+            }
+            lastObj[key] = value;
+        }
+    }
+
+    return array;
+};
