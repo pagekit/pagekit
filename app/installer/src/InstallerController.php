@@ -5,7 +5,6 @@ namespace Pagekit\Installer;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Config\Config;
 
 /**
@@ -105,11 +104,11 @@ class InstallerController
         try {
 
             if ('no-connection' == $status) {
-                throw new Exception(__('No database connection.'));
+                App::abort(400, __('No database connection.'));
             }
 
             if ('tables-exist' == $status) {
-                throw new Exception($message);
+                App::abort(400, $message);
             }
 
             if ($version = App::migrator()->create('app/system/migrations')->run()) {
@@ -155,7 +154,7 @@ class InstallerController
 
                     $status = 'write-failed';
 
-                    throw new Exception(__('Can\'t write config.'));
+                    App::abort(400, __('Can\'t write config.'));
                 }
             }
 

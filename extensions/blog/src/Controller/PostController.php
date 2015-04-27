@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\User\Entity\Role;
 
@@ -42,7 +41,7 @@ class PostController
             if (!$post = Post::where(compact('id'))->related('user')->first()) {
 
                 if ($id) {
-                    throw new Exception(__('Invalid post id.'));
+                    App::abort(404, __('Invalid post id.'));
                 }
 
                 $module = App::module('blog');
@@ -74,7 +73,7 @@ class PostController
                 'post' => $post
             ];
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
             App::message()->error($e->getMessage());
 
