@@ -28,7 +28,6 @@ class DashboardController
 
     /**
      * @Route("/", methods="GET")
-     * @Response("system/dashboard:views/admin/index.php")
      */
     public function indexAction()
     {
@@ -48,22 +47,21 @@ class DashboardController
         $columns = $this->chunkList($columns, 3);
 
         return [
-            '$meta' => [
-                'title' => __('Dashboard')
+            '$view' => [
+                'title' => __('Dashboard'),
+                'name'  => 'system/dashboard:views/admin/index.php'
             ],
             'widgets' => $widgets,
             'columns' => $columns
         ];
     }
 
-    /**
-     * @Response("system/dashboard:views/admin/settings.php")
-     */
     public function settingsAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Dashboard Settings')
+            '$view' => [
+                'title' => __('Dashboard Settings'),
+                'name'  => 'system/dashboard:views/admin/settings.php'
             ],
             '$dashboard' => [
                 'types' => $this->dashboard->getTypes(),
@@ -74,7 +72,6 @@ class DashboardController
 
     /**
      * @Request({"type"})
-     * @Response("system/dashboard:views/admin/edit.php")
      */
     public function addAction($id)
     {
@@ -85,21 +82,21 @@ class DashboardController
         $widget = Widget::create(['type' => $id]);
 
         return [
-            '$meta' => [
-                'title' => __('Add Widget')
+            '$view' => [
+                'title' => __('Add Widget'),
+                'name'  => 'system/dashboard:views/admin/edit.php'
             ],
-            'type' => $type,
-            'widget' => $widget,
             '$data' => [
                 'type' => $type,
                 'widget' => $widget
-            ]
+            ],
+            'type' => $type,
+            'widget' => $widget
         ];
     }
 
     /**
      * @Request({"id"})
-     * @Response("system/dashboard:views/admin/edit.php")
      */
     public function editAction($id)
     {
@@ -114,15 +111,16 @@ class DashboardController
         $widget = Widget::create($widget);
 
         return [
-            '$meta' => [
-                'title' => __('Edit Widget')
+            '$view' => [
+                'title' => __('Edit Widget'),
+                'name'  => 'system/dashboard:views/admin/edit.php'
             ],
-            'type' => $type,
-            'widget' => $widget,
             '$data' => [
                 'type' => $type,
                 'widget' => $widget
-            ]
+            ],
+            'type' => $type,
+            'widget' => $widget
         ];
     }
 
@@ -130,7 +128,6 @@ class DashboardController
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST")
      * @Request({"id", "widget": "array"}, csrf=true)
-     * @Response("json")
      */
     public function saveAction($id = 0, $widget = [])
     {
@@ -147,7 +144,6 @@ class DashboardController
 
     /**
      * @Request({"ids": "array"}, csrf=true)
-     * @Response("json")
      */
     public function deleteAction($ids = [])
     {
@@ -164,7 +160,6 @@ class DashboardController
 
     /**
      * @Request({"order": "array"}, csrf=true)
-     * @Response("json")
      */
     public function reorderAction($order = [])
     {

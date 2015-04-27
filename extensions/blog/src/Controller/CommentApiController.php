@@ -9,7 +9,6 @@ use Pagekit\Blog\Entity\Comment;
 /**
  * @Access("blog: manage comments")
  * @Route("comment", name="comment")
- * @Response("json")
  */
 class CommentApiController
 {
@@ -53,7 +52,7 @@ class CommentApiController
             $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return App::response()->json(compact('comments', 'pages'));
+        return compact('comments', 'pages');
     }
 
     /**

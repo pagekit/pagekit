@@ -20,9 +20,6 @@ class RegistrationController
         $this->module = App::module('system/user');
     }
 
-    /**
-     * @Response("system/user:views/registration.php")
-     */
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
@@ -36,15 +33,15 @@ class RegistrationController
         }
 
         return [
-            '$meta' => [
-                'title' => __('User Registration')
+            '$view' => [
+                'title' => __('User Registration'),
+                'name'  => 'system/user:views/registration.php'
             ]
         ];
     }
 
     /**
      * @Request({"user": "array"})
-     * @Response("json")
      */
     public function registerAction($data)
     {

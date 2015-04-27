@@ -9,14 +9,13 @@ use Pagekit\Application as App;
  */
 class MigrationController
 {
-    /**
-     * @Response("system/theme:templates/migration.php", layout=false)
-     */
     public function indexAction()
     {
         return [
-           '$meta' => [
-                'title' => __('Update Pagekit')
+            '$view' => [
+                'title'  => __('Update Pagekit'),
+                'name'   => 'system/theme:templates/migration.php',
+                'layout' => false
             ]
         ];
     }

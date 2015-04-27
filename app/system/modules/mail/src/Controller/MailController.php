@@ -8,7 +8,6 @@ use Pagekit\Application as App;
  * TODO needs to be updated
  *
  * @Access("system: access settings", admin=true)
- * @Response("json")
  */
 class MailController
 {

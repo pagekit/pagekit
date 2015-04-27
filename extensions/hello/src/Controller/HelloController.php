@@ -8,14 +8,12 @@ namespace Pagekit\Hello\Controller;
  */
 class HelloController
 {
-    /**
-     * @Response("hello:views/admin/index.razr")
-     */
     public function indexAction()
     {
         return [
-           '$meta' => [
-                'title' => __('Hello')
+           '$view' => [
+                'title' => __('Hello'),
+                'name'  => 'hello:views/admin/index.razr'
             ]
         ];
     }

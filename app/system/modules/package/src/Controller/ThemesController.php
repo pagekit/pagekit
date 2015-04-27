@@ -10,9 +10,6 @@ use Pagekit\Application\Exception;
  */
 class ThemesController
 {
-    /**
-     * @Response("system:modules/package/views/themes.php")
-     */
     public function indexAction()
     {
         $packages = App::package()->getRepository('theme')->getPackages();
@@ -32,8 +29,9 @@ class ThemesController
         // });
 
         return [
-            '$meta' => [
-                'title' => __('Themes')
+            '$view' => [
+                'title' => __('Themes'),
+                'name'  => 'system:modules/package/views/themes.php'
             ],
             '$themes' => [
                 'api' => App::system()->config('api'),
@@ -44,7 +42,6 @@ class ThemesController
 
     /**
      * @Request({"name"}, csrf=true)
-     * @Response("json")
      */
     public function enableAction($name)
     {
@@ -80,7 +77,6 @@ class ThemesController
 
     /**
      * @Request({"name"}, csrf=true)
-     * @Response("json")
      */
     public function uninstallAction($name)
     {

@@ -30,12 +30,39 @@ class ViewListener implements EventSubscriberInterface
      */
     public function onController($event, $request)
     {
-        $template = $request->attributes->get('_response[value]', null, true);
-        $layout   = $request->attributes->get('_response[layout]', true, true);
-        $result   = $event->getControllerResult();
+        $name = null;
+        $layout = true;
 
-        if ($template !== null && ($result === null || is_array($result))) {
-            $response = $result = $this->view->render($template, $result ?: []);
+        if (is_array($result = $event->getControllerResult())) {
+
+            if (!isset($result['$view'])) {
+                return;
+            }
+
+            foreach ($result as $key => $value) {
+                if ($key === '$view') {
+
+                    if (isset($value['name'])) {
+                        $name = $value['name'];
+                        unset($value['name']);
+                    }
+
+                    if (isset($value['layout'])) {
+                        $layout = $value['layout'];
+                        unset($value['layout']);
+                    }
+
+                    $this->view->meta($value);
+
+                } elseif ($key[0] === '$') {
+
+                    $this->view->data($key, $value);
+                }
+            }
+        }
+
+        if ($name != null) {
+            $response = $result = $this->view->render($name, $result);
         }
 
         if (is_string($layout)) {
@@ -46,7 +73,7 @@ class ViewListener implements EventSubscriberInterface
 
             $this->view->section('content', (string) $result);
 
-            if (null !== $result = $this->view->render('layout') ) {
+            if (null !== $result = $this->view->render('layout')) {
                 $response = $result;
             }
         }

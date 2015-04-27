@@ -14,13 +14,13 @@ class PostController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("blog:views/admin/post/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
         return [
-            '$meta' => [
-                'title' => __('Posts')
+            '$view' => [
+                'title' => __('Posts'),
+                'name'  => 'blog:views/admin/post/index.php'
             ],
             '$config' => [
                 'filter' => $filter,
@@ -34,7 +34,6 @@ class PostController
 
     /**
      * @Request({"id": "int"})
-     * @Response("blog:views/admin/post/edit.php")
      */
     public function editAction($id = 0)
     {
@@ -59,8 +58,9 @@ class PostController
             }
 
             return [
-                '$meta' => [
-                    'title' => $id ? __('Edit Post') : __('Add Post')
+                '$view' => [
+                    'title' => $id ? __('Edit Post') : __('Add Post'),
+                    'name'  => 'blog:views/admin/post/edit.php'
                 ],
                 '$data' => [
                     'post'     => $post,

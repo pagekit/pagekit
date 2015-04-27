@@ -13,7 +13,6 @@ class WidgetsController
 {
     /**
      * @Request({"type", "id": "int"})
-     * @Response("widget:views/admin/edit.php", layout="app/system/modules/theme/templates/component.php")
      */
     public function editAction($type = '', $id = 0)
     {
@@ -39,15 +38,19 @@ class WidgetsController
         }
 
         return [
-            'widget'   => $widget,
-            'sections' => $module->getSections($widget->getType()),
-            '$data'    => [
+            '$view' => [
+                'name' => 'widget:views/admin/edit.php',
+                'layout' => 'app/system/modules/theme/templates/component.php'
+            ],
+            '$data' => [
                 'widget'    => $widget,
                 'position'  => $position,
                 'config'    => $module->getWidgetConfig($widget->getId()) ?: new \stdClass(),
                 'types'     => array_values($module->getTypes('site')),
                 'positions' => array_values($module->getPositions())
-            ]
+            ],
+            'widget'   => $widget,
+            'sections' => $module->getSections($widget->getType())
         ];
     }
 }

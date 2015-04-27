@@ -21,7 +21,6 @@ class PackageController
 {
     /**
      * @Request({"type"}, csrf=true)
-     * @Response("json")
      */
     public function uploadAction($type = null)
     {
@@ -73,7 +72,6 @@ class PackageController
 
     /**
      * @Request({"package": "json", "path": "alnum"}, csrf=true)
-     * @Response("json")
      */
     public function installAction($package = null, $path = '')
     {

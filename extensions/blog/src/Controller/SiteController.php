@@ -39,7 +39,6 @@ class SiteController
     /**
      * @Route("/")
      * @Route("/page/{page}", name="page", requirements={"page" = "\d+"})
-     * @Response("blog:views/post/index.php")
      */
     public function indexAction($page = 1)
     {
@@ -61,9 +60,10 @@ class SiteController
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
 
         return [
-            '$meta' => [
+            '$view' => [
                 'title' => __('Blog'),
-                'link' => [
+                'name'  => 'blog:views/post/index.php',
+                'link'  => [
                     'alternate' => [
                         'href'  => App::url('@blog/site/feed', [], true),
                         'title' => App::system()->config('site.title'),
@@ -162,7 +162,6 @@ class SiteController
 
     /**
      * @Route("/{id}", name="id")
-     * @Response("blog:views/post/post.php")
      */
     public function postAction($id = 0)
     {
@@ -191,8 +190,9 @@ class SiteController
         }
 
         return [
-            '$meta' => [
-                'title' => __($post->getTitle())
+            '$view' => [
+                'title' => __($post->getTitle()),
+                'name'  => 'blog:views/post/post.php'
             ],
             'post' => $post,
             'blog' => $this->module

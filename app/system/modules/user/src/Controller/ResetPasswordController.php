@@ -8,9 +8,6 @@ use Pagekit\User\Entity\User;
 
 class ResetPasswordController
 {
-    /**
-     * @Response("system/user:views/reset/request.php")
-     */
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
@@ -18,15 +15,15 @@ class ResetPasswordController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Reset')
+            '$view' => [
+                'title' => __('Reset'),
+                'name'  => 'system/user:views/reset/request.php'
             ]
         ];
     }
 
     /**
      * @Request({"email"})
-     * @Response("system/user:views/reset/request.php")
      */
     public function resetAction($email)
     {
@@ -83,7 +80,6 @@ class ResetPasswordController
 
     /**
      * @Request({"user", "key"})
-     * @Response("system/user:views/reset/confirm.php")
      */
     public function confirmAction($username = "", $activation = "")
     {
@@ -129,8 +125,9 @@ class ResetPasswordController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Reset Confirm')
+            '$view' => [
+                'title' => __('Reset Confirm'),
+                'name'  => 'system/user:views/reset/confirm.php'
             ],
             'username' => $username,
             'activation' => $activation

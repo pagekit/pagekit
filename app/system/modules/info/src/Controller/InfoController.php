@@ -9,13 +9,13 @@ use Pagekit\Application as App;
  */
 class InfoController
 {
-    /**
-     * @Response("system:modules/info/views/info.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => ['title' => __('Info')],
+            '$view' => [
+                'title' => __('Info'),
+                'name'  => 'system:modules/info/views/info.php'
+            ],
             '$info' => App::info()->get()
         ];
     }

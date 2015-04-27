@@ -9,9 +9,6 @@ use Pagekit\User\Event\ProfileSaveEvent;
 
 class ProfileController
 {
-    /**
-     * @Response("system/user:views/profile.php")
-     */
     public function indexAction()
     {
         if (!App::user()->isAuthenticated()) {
@@ -19,8 +16,9 @@ class ProfileController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Your Profile')
+            '$view' => [
+                'title' => __('Your Profile'),
+                'name'  => 'system/user:views/profile.php'
             ],
             'user' => App::user()
         ];

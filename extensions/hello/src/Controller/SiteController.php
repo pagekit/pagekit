@@ -9,14 +9,12 @@ use Pagekit\Application as App;
  */
 class SiteController
 {
-    /**
-     * @Response("hello:views/index.razr")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Hello World')
+            '$view' => [
+                'title' => __('Hello World'),
+                'name'  => 'hello:views/index.razr'
             ]
         ];
     }
@@ -24,15 +22,15 @@ class SiteController
     /**
      * @Route("/greet", name="@hello/greet/world")
      * @Route("/greet/{name}", name="@hello/greet/name")
-     * @Response("hello:views/greet.razr")
      */
     public function greetAction($name = 'World')
     {
         $names = explode(',', $name);
 
         return [
-            '$meta' => [
-                'title' => __('Hello %name%', ['%name%' => $names[0]])
+            '$view' => [
+                'title' => __('Hello %name%', ['%name%' => $names[0]]),
+                'name'  => 'hello:views/greet.razr'
             ],
             'names' => $names
         ];
@@ -40,13 +38,13 @@ class SiteController
 
     /**
      * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     * @Response("hello:views/view.razr")
      */
     public function viewAction($id = 1)
     {
         return [
-            '$meta' => [
-                'title' => __('View article')
+            '$view' => [
+                'title' => __('View article'),
+                'name'  => 'hello:views/view.razr'
             ],
             'id' => $id
         ];
@@ -55,7 +53,7 @@ class SiteController
     public function anotherViewAction()
     {
         $data = [
-           '$meta' => [
+           '$view' => [
                 'title' => __('View article')
             ],
             'id' => 1
@@ -72,6 +70,7 @@ class SiteController
     public function jsonAction()
     {
         $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
+
         return App::response()->json($data);
     }
 

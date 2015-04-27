@@ -12,13 +12,13 @@ class RoleController
 {
     /**
      * @Request({"id": "int"})
-     * @Response("system/user:views/admin/role.php")
      */
     public function indexAction($id = null)
     {
         return [
-            '$meta' => [
-                'title' => __('Roles')
+            '$view' => [
+                'title' => __('Roles'),
+                'name'  => 'system/user:views/admin/role.php'
             ],
             '$config' => [
                 'role' => $id

@@ -17,14 +17,12 @@ use Pagekit\Package\Exception\UnauthorizedDownloadException;
  */
 class UpdateController
 {
-    /**
-     * @Response("system:views/admin/settings/update.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Update')
+            '$view' => [
+                'title' => __('Update'),
+                'name'  => 'system:views/admin/settings/update.php'
             ],
             '$config' => [
                 'api' => App::system()->config('api.url'),
@@ -36,7 +34,6 @@ class UpdateController
 
     /**
      * @Request({"update": "array"})
-     * @Response("json")
      */
     public function downloadAction($update = null)
     {
@@ -75,9 +72,6 @@ class UpdateController
         return compact('error');
     }
 
-    /**
-     * @Response("json")
-     */
     public function copyAction()
     {
         try {
@@ -98,13 +92,11 @@ class UpdateController
             return 'success';
 
         } catch (\Exception $e) {
+
             return ['error' => $e->getMessage()];
         }
     }
 
-    /**
-     * @Response("json")
-     */
     public function databaseAction()
     {
         try {
@@ -120,6 +112,7 @@ class UpdateController
             return 'success';
 
         } catch (\Exception $e) {
+
             return ['error' => $e->getMessage()];
         }
     }

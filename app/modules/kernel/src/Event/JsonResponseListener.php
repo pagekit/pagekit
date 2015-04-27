@@ -1,27 +1,27 @@
 <?php
 
-namespace Pagekit\Routing\Event;
+namespace Pagekit\Kernel\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class JsonListener implements EventSubscriberInterface
+class JsonResponseListener implements EventSubscriberInterface
 {
     /**
-     * Transforms the body of a json request to POST parameters.
+     * Transforms the body of a JSON request to POST parameters.
      *
      * @param $event
      */
     public function onRequest($event, $request)
     {
-        if ('json' === $request->getContentType() && $data = json_decode($request->getContent(), true)) {
+        if ('json' === $request->getContentType() && $data = @json_decode($request->getContent(), true)) {
             $request->request->replace($data);
         }
     }
 
     /**
-     * Handles responses in JSON format.
+     * Converts a array to a JSON response.
      *
      * @param $event
      */
@@ -29,7 +29,7 @@ class JsonListener implements EventSubscriberInterface
     {
         $result = $event->getControllerResult();
 
-        if (strtolower($request->attributes->get('_response[value]', '', true)) == 'json') {
+        if (is_array($result)) {
             $event->setResponse(new JsonResponse($result));
         }
     }
@@ -41,7 +41,7 @@ class JsonListener implements EventSubscriberInterface
     {
         return [
             'app.request'    => ['onRequest', 130],
-            'app.controller' => ['onController', 70]
+            'app.controller' => ['onController', 20]
         ];
     }
 }

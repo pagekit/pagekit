@@ -6,9 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Finder\Event\FileAccessEvent;
 use Pagekit\Kernel\Exception\ForbiddenException;
 
-/**
- * @Response("json")
- */
 class FinderController
 {
     /**

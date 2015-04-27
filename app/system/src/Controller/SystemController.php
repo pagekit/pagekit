@@ -14,7 +14,6 @@ class SystemController
     /**
      * @Access(admin=true)
      * @Request({"order": "array"})
-     * @Response("json")
      */
     public function adminMenuAction($order)
     {

@@ -9,7 +9,6 @@ use Pagekit\Widget\Entity\Widget;
 /**
  * @Access("system: manage widgets")
  * @Route("", name="")
- * @Response("json")
  */
 class WidgetsApiController
 {

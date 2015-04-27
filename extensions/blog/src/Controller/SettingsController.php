@@ -9,14 +9,12 @@ use Pagekit\Application as App;
  */
 class SettingsController
 {
-    /**
-     * @Response("blog:views/admin/settings.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Blog Settings')
+            '$view' => [
+                'title' => __('Blog Settings'),
+                'name'  => 'blog:views/admin/settings.php'
             ],
             '$data' => [
                 'config' => App::module('blog')->config()

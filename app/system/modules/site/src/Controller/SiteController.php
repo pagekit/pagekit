@@ -12,9 +12,6 @@ use Pagekit\Site\Entity\Node;
  */
 class SiteController
 {
-    /**
-     * @Response("site:views/admin/index.php")
-     */
     public function indexAction()
     {
         App::view()->script('site', 'site:app/site.js', ['system', 'vue-validator', 'uikit-nestable', 'site-tree']);
@@ -22,8 +19,9 @@ class SiteController
         $site = App::module('system/site');
 
         return [
-            '$meta' => [
-                'title' => __('Nodes')
+            '$view' => [
+                'title' => __('Nodes'),
+                'name'  => 'site:views/admin/index.php'
             ],
             '$data' => [
                 'types'     => array_values($site->getTypes()),
@@ -34,7 +32,6 @@ class SiteController
 
     /**
      * @Request({"type", "id": "int"})
-     * @Response("json")
      */
     public function editAction($type = '', $id = 0)
     {

@@ -9,7 +9,6 @@ use Pagekit\Blog\Entity\Post;
 /**
  * @Access("blog: manage content")
  * @Route("post", name="post")
- * @Response("json")
  */
 class PostApiController
 {

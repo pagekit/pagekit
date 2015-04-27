@@ -30,20 +30,20 @@ class SettingsController
         $this->config->merge(include $this->configFile = App::get('config.file'));
     }
 
-    /**
-     * @Response("system:modules/settings/views/settings.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => ['title' => __('Settings')],
+            '$view' => [
+                'title' => __('Settings'),
+                'name'  => 'system:modules/settings/views/settings.php'
+
+            ],
             'sections' => App::trigger(new SettingsEvent('system.settings.edit'), [$this->config->toArray()])->getSections()
         ];
     }
 
     /**
      * @Request({"config": "array", "option": "array"}, csrf=true)
-     * @Response("json")
      */
     public function saveAction($config, $option)
     {

@@ -10,14 +10,12 @@ use Pagekit\User\Entity\Role;
  */
 class PermissionController
 {
-    /**
-     * @Response("system/user:views/admin/permission.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Permissions')
+            '$view' => [
+                'title' => __('Permissions'),
+                'name'  => 'system/user:views/admin/permission.php'
             ],
             '$data' => [
                 'permissions' => App::permissions(),

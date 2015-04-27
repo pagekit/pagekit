@@ -11,7 +11,6 @@ class CacheController
 {
     /**
      * @Request({"caches": "array"}, csrf=true)
-     * @Response("json")
      */
     public function clearAction($caches)
     {

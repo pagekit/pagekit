@@ -9,7 +9,6 @@ use Pagekit\Routing\Controller\ControllerCollection;
 use Pagekit\Routing\Controller\ControllerReader;
 use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\EventDispatcher;
-use Pagekit\Routing\Event\JsonListener;
 use Pagekit\Routing\Event\RouterListener;
 use Pagekit\Routing\Event\StringResponseListener;
 use Pagekit\Routing\Middleware;
@@ -52,7 +51,6 @@ return [
             new ConfigureRouteListener,
             new ParamFetcherListener(new ParamFetcher(new FilterManager)),
             new RouterListener($app['router']),
-            new JsonListener,
             $app['aliases'],
             $app['callbacks'],
             $app['controllers']

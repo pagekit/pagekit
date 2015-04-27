@@ -15,7 +15,6 @@ class UserController
 {
     /**
      * @Request({"filter": "array", "page":"int"})
-     * @Response("system/user:views/admin/index.php")
      */
     public function indexAction($filter = null, $page = 0)
     {
@@ -23,8 +22,9 @@ class UserController
         unset($roles[Role::ROLE_AUTHENTICATED]);
 
         return [
-            '$meta' => [
-                'title' => __('Users')
+            '$view' => [
+                'title' => __('Users'),
+                'name'  => 'system/user:views/admin/index.php'
             ],
             '$config' => [
                 'emailVerification' => App::module('system/user')->config('require_verification'),
@@ -41,7 +41,6 @@ class UserController
 
     /**
      * @Request({"id": "int"})
-     * @Response("system/user:views/admin/edit.php")
      */
     public function editAction($id = 0)
     {
@@ -58,8 +57,9 @@ class UserController
         $user->setRoles(null);
 
         return [
-            '$meta' => [
-                'title' => $id ? __('Edit User') : __('Add User')
+            '$view' => [
+                'title' => $id ? __('Edit User') : __('Add User'),
+                'name'  => 'system/user:views/admin/edit.php'
             ],
             '$config' => [
                 'emailVerification' => App::module('system/user')->config('require_verification'),
@@ -73,14 +73,12 @@ class UserController
         ];
     }
 
-    /**
-     * @Response("system/user:views/admin/settings.php")
-     */
     public function settingsAction()
     {
         return [
-            '$meta' => [
-                'title' => __('User Settings')
+            '$view' => [
+                'title' => __('User Settings'),
+                'name'  => 'system/user:views/admin/settings.php'
             ],
             '$data' => [
                 'config' => App::module('system/user')->config()

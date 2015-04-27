@@ -4,6 +4,7 @@ use Pagekit\Kernel\HttpKernel;
 use Pagekit\Kernel\Controller\ControllerResolver;
 use Pagekit\Kernel\Controller\ControllerListener;
 use Pagekit\Kernel\Event\ResponseListener;
+use Pagekit\Kernel\Event\JsonResponseListener;
 use Pagekit\Kernel\Event\StringResponseListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,6 +20,7 @@ return [
             $app->subscribe(
                 new ControllerListener($app['resolver']),
                 new ResponseListener(),
+                new JsonResponseListener(),
                 new StringResponseListener()
             );
 

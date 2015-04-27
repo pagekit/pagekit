@@ -11,9 +11,6 @@ use Pagekit\System\Extension;
  */
 class ExtensionsController
 {
-    /**
-     * @Response("system:modules/package/views/extensions.php")
-     */
     public function indexAction()
     {
         $packages = App::package()->getRepository('extension')->getPackages();
@@ -23,8 +20,9 @@ class ExtensionsController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Extensions')
+            '$view' => [
+                'title' => __('Extensions'),
+                'name'  => 'system:modules/package/views/extensions.php'
             ],
             '$extensions' => [
                 'api' => App::system()->config('api'),
@@ -35,7 +33,6 @@ class ExtensionsController
 
     /**
      * @Request({"name"}, csrf=true)
-     * @Response("json")
      */
     public function enableAction($name)
     {
@@ -78,7 +75,6 @@ class ExtensionsController
 
     /**
      * @Request({"name"}, csrf=true)
-     * @Response("json")
      */
     public function disableAction($name)
     {
@@ -103,7 +99,6 @@ class ExtensionsController
 
     /**
      * @Request({"name"}, csrf=true)
-     * @Response("json")
      */
     public function uninstallAction($name)
     {

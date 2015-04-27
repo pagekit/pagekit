@@ -11,7 +11,6 @@ use Pagekit\User\Entity\User;
 /**
  * @Access("user: manage users")
  * @Route("", name="")
- * @Response("json")
  */
 class UserApiController
 {

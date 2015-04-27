@@ -8,7 +8,6 @@ use Pagekit\Site\Entity\Node;
 
 /**
  * @Access("site: manage site")
- * @Response("json")
  */
 class MenuController
 {

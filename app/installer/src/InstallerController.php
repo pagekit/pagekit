@@ -31,20 +31,19 @@ class InstallerController
         $this->config = file_exists($this->configFile);
     }
 
-    /**
-     * @Response("app/installer/views/install.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => ['title' => 'Pagekit Installer'],
+            '$view' => [
+                'title' => __('Pagekit Installer'),
+                'name'  => 'app/installer/views/install.php'
+            ],
             'redirect' => App::url('/admin')
         ];
     }
 
     /**
      * @Request({"config": "array"})
-     * @Response("json")
      */
     public function checkAction($config = [])
     {
@@ -96,7 +95,6 @@ class InstallerController
 
     /**
      * @Request({"config": "array", "option": "array", "user": "array"})
-     * @Response("json")
      */
     public function installAction($config = [], $option = [], $user = [])
     {

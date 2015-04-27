@@ -13,7 +13,6 @@ class AuthController
     /**
      * @Route(methods="POST", defaults={"_maintenance"=true})
      * @Request({"redirect"})
-     * @Response("system/user:views/login.php")
      */
     public function loginAction($redirect = '')
     {
@@ -23,12 +22,13 @@ class AuthController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Login')
+            '$view' => [
+                'title' => __('Login'),
+                'name'  => 'system/user:views/login.php'
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'redirect' => $redirect,
-            'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
+            'remember_me_param' => RememberMe::REMEMBER_ME_PARAM,
+            'redirect' => $redirect
         ];
     }
 

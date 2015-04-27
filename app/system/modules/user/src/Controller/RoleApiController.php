@@ -8,7 +8,6 @@ use Pagekit\User\Entity\Role;
 /**
  * @Access("user: manage user permissions")
  * @Route("role", name="role")
- * @Response("json")
  */
 class RoleApiController
 {

@@ -13,15 +13,15 @@ class CommentController
 {
     /**
      * @Request({"filter": "array", "post":"int", "page":"int"})
-     * @Response("blog:views/admin/comment/index.php")
      */
     public function indexAction($filter = [], $post = 0, $page = 0)
     {
         $post = Post::find($post);
 
         return [
-            '$meta' => [
-                'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments')
+            '$view' => [
+                'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments'),
+                'name'  => 'blog:views/admin/comment/index.php'
             ],
             '$config' => [
                 'filter' => $filter,

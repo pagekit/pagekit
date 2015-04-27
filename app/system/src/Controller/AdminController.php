@@ -21,7 +21,6 @@ class AdminController
 
     /**
      * @Route("/admin/login", defaults={"_maintenance"=true})
-     * @Response("system/theme:templates/login.php", layout=false)
      */
     public function loginAction()
     {
@@ -30,8 +29,10 @@ class AdminController
         }
 
         return [
-            '$meta' => [
-                'title' => __('Login')
+            '$view' => [
+                'title'  => __('Login'),
+                'name'   => 'system/theme:templates/login.php',
+                'layout' => false
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
             'redirect' => App::request()->get('redirect') ? : App::url('@system/admin', [], true),

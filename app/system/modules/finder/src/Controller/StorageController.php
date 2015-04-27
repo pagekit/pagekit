@@ -9,14 +9,12 @@ use Pagekit\Application as App;
  */
 class StorageController
 {
-    /**
-     * @Response("system:modules/finder/views/storage.php")
-     */
     public function indexAction()
     {
         return [
-            '$meta' => [
-                'title' => __('Storage')
+            '$view' => [
+                'title' => __('Storage'),
+                'name'  => 'system:modules/finder/views/storage.php'
             ],
             'root' => App::system()->config('storage'),
             'mode' => 'write'

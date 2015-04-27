@@ -80,18 +80,6 @@ return [
             $app->subscribe(new ViewListener($app['view']));
         });
 
-        $app->on('app.controller', function ($event) use ($app) {
-            if (is_array($result = $event->getControllerResult())) {
-                foreach ($result as $key => $value) {
-                    if ($key === '$meta') {
-                        $app['view']->meta($value);
-                    } elseif ($key[0] === '$') {
-                        $app['view']->data($key, $value);
-                    }
-                }
-            }
-        }, 60);
-
     },
 
     'autoload' => [

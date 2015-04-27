@@ -23,7 +23,7 @@ class ConfigureRouteListener implements EventSubscriberInterface
     }
 
     /**
-     * Reads the @Request and @Response annotations.
+     * Reads the @Request annotations.
      *
      * @param ConfigureRouteEvent $event
      */
@@ -31,7 +31,7 @@ class ConfigureRouteListener implements EventSubscriberInterface
     {
         $reader = $this->getReader();
 
-        foreach (['_request' => 'Request', '_response' => 'Response'] as $name => $class) {
+        foreach (['_request' => 'Request'] as $name => $class) {
 
             $class = "{$this->namespace}\\$class";
 

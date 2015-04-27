@@ -11,7 +11,6 @@ class SiteController
     /**
      * @Route("/{id}", name="id")
      * @Request({"id" : "int"})
-     * @Response("page:views/index.php")
      */
     public function indexAction($id = 0)
     {
@@ -22,8 +21,9 @@ class SiteController
         $page->setContent(App::content()->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
 
         return [
-            '$meta' => [
-                'title' => __($page->getTitle())
+            '$view' => [
+                'title' => __($page->getTitle()),
+                'name'  => 'page:views/index.php'
             ],
             'page' => $page
         ];
