@@ -3,11 +3,18 @@
 namespace Pagekit\Kernel;
 
 use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Exception\HttpException;
 use Pagekit\Kernel\Event\ControllerEvent;
 use Pagekit\Kernel\Event\ExceptionEvent;
 use Pagekit\Kernel\Event\KernelEvent;
 use Pagekit\Kernel\Event\RequestEvent;
+use Pagekit\Kernel\Exception\BadRequestException;
+use Pagekit\Kernel\Exception\ConflictException;
+use Pagekit\Kernel\Exception\ForbiddenException;
+use Pagekit\Kernel\Exception\HttpException;
+use Pagekit\Kernel\Exception\InternalErrorException;
+use Pagekit\Kernel\Exception\MethodNotAllowedException;
+use Pagekit\Kernel\Exception\NotFoundException;
+use Pagekit\Kernel\Exception\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,6 +83,49 @@ class HttpKernel implements HttpKernelInterface
 
             return $this->handleException($e);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function abort($code, $message = null, array $headers = [])
+    {
+        switch ($code) {
+
+            case 400:
+                $exception = new BadRequestException($message);
+                break;
+
+            case 401:
+                $exception = new UnauthorizedException($message);
+                break;
+
+            case 403:
+                $exception = new ForbiddenException($message);
+                break;
+
+            case 404:
+                $exception = new NotFoundException($message);
+                break;
+
+            case 405:
+                $exception = new MethodNotAllowedException($message);
+                break;
+
+            case 409:
+                $exception = new ConflictException($message);
+                break;
+
+            case 500:
+                $exception = new InternalErrorException($message);
+                break;
+
+            default:
+                $exception = new HttpException($message);
+                break;
+        }
+
+        throw $exception;
     }
 
     /**

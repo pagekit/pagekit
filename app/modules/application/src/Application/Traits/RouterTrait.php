@@ -8,19 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 trait RouterTrait
 {
     /**
-     * @see Router::redirect()
+     * @see HttpKernel::abort()
      */
-    public static function redirect($url = '', $parameters = [], $status = 302, $headers = [])
+    public static function abort($code, $message = null, array $headers = [])
     {
-        return static::router()->redirect($url, $parameters, $status, $headers);
-    }
-
-    /**
-     * @see Router::abort()
-     */
-    public static function abort($code, $message = '', array $headers = [])
-    {
-        static::router()->abort($code, $message, $headers);
+        static::kernel()->abort($code, $message, $headers);
     }
 
     /**
@@ -32,6 +24,14 @@ trait RouterTrait
     public static function error($callback, $priority = -8)
     {
         static::events()->on('app.exception', new ExceptionListenerWrapper($callback), $priority);
+    }
+
+    /**
+     * @see Router::redirect()
+     */
+    public static function redirect($url = '', $parameters = [], $status = 302, $headers = [])
+    {
+        return static::router()->redirect($url, $parameters, $status, $headers);
     }
 
     /**

@@ -22,7 +22,7 @@ interface HttpKernelInterface
     public function isMasterRequest();
 
     /**
-     * Handles a Request.
+     * Handles the request.
      *
      * @param  Request $request
      * @return Response
@@ -30,7 +30,17 @@ interface HttpKernelInterface
     public function handle(Request $request);
 
     /**
-     * Terminates a Request.
+     * Aborts the current request with HTTP exception.
+     *
+     * @param  int    $code
+     * @param  string $message
+     * @param  array  $headers
+     * @throws HttpException
+     */
+    public function abort($code, $message = null, array $headers = []);
+
+    /**
+     * Terminates the current request.
      *
      * @param Request  $request
      * @param Response $response

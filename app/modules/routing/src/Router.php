@@ -262,24 +262,6 @@ class Router implements RouterInterface, UrlGeneratorInterface
     }
 
     /**
-     * Aborts the current request by sending a proper HTTP error.
-     *
-     * @param  int    $code
-     * @param  string $message
-     * @param  array  $headers
-     * @throws HttpException
-     * @throws NotFoundException
-     */
-    public function abort($code, $message = '', array $headers = [])
-    {
-        if ($code == 404) {
-            throw new NotFoundException($message);
-        } else {
-            throw new HttpException($message, $code);
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function match($pathinfo)

@@ -4,7 +4,6 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Database\Connection;
-use Pagekit\Kernel\Exception\BadRequestException;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
@@ -83,11 +82,11 @@ class UserApiController
         if (!$user = User::find($id)) {
 
             if ($id) {
-                throw new BadRequestException(__('User not found.'));
+                App::abort(400, __('User not found.'));
             }
 
             if (!$password) {
-                throw new BadRequestException(__('Password required.'));
+                App::abort(400, __('Password required.'));
             }
 
             $user = new User;
@@ -97,32 +96,32 @@ class UserApiController
         $self = App::user()->getId() == $user->getId();
 
         if ($self && @$data['status'] == User::STATUS_BLOCKED) {
-            throw new BadRequestException(__('Unable to block yourself.'));
+            App::abort(400, __('Unable to block yourself.'));
         }
 
         $name  = trim(@$data['username']);
         $email = trim(@$data['email']);
 
         if (strlen($name) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $name)) {
-            throw new BadRequestException(__('Username is invalid.'));
+            App::abort(400, __('Username is invalid.'));
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new BadRequestException(__('Email is invalid.'));
+            App::abort(400, __('Email is invalid.'));
         }
 
         if (User::where(['id <> :id',], compact('id'))->where(function ($query) use ($name) {
             $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
         })->first()
         ) {
-            throw new BadRequestException(__('Username not available.'));
+            App::abort(400, __('Username not available.'));
         }
 
         if (User::where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
             $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
         })->first()
         ) {
-            throw new BadRequestException(__('Email not available.'));
+            App::abort(400, __('Email not available.'));
         }
 
         $data['username'] = $name;
@@ -159,7 +158,7 @@ class UserApiController
     public function deleteAction($id)
     {
         if (App::user()->getId() == $id) {
-            throw new BadRequestException(__('Unable to delete yourself.'));
+            App::abort(400, __('Unable to delete yourself.'));
         }
 
         if ($user = User::find($id)) {
