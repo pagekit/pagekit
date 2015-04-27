@@ -3,7 +3,6 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 
 /**
  * @Access("system: manage themes", admin=true)
@@ -45,34 +44,27 @@ class ThemesController
      */
     public function enableAction($name)
     {
-        try {
+        ini_set('display_errors', 0);
 
-            ini_set('display_errors', 0);
+        $handler = App::exception()->setHandler(function ($exception) {
 
-            $handler = App::exception()->setHandler(function($exception) {
-
-                while (ob_get_level()) {
-                    ob_get_clean();
-                }
-
-                App::response()->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
-            });
-
-            App::module()->load($name);
-
-            if (!$theme = App::module($name)) {
-                throw new Exception(__('Unable to enable theme "%name%".', ['%name%' => $name]));
+            while (ob_get_level()) {
+                ob_get_clean();
             }
 
-            App::config('system')->set('theme.site', $theme->name);
-            App::exception()->setHandler($handler);
+            App::response()->json(['error' => true, 'message' => __('Unable to activate theme.<br>The theme triggered a fatal error.')])->send();
+        });
 
-            return ['message' => __('Theme enabled.')];
+        App::module()->load($name);
 
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!$theme = App::module($name)) {
+            App::abort(400, __('Unable to enable theme "%name%".', ['%name%' => $name]));
         }
+
+        App::config('system')->set('theme.site', $theme->name);
+        App::exception()->setHandler($handler);
+
+        return ['message' => __('Theme enabled.')];
     }
 
     /**
@@ -80,20 +72,13 @@ class ThemesController
      */
     public function uninstallAction($name)
     {
-        try {
-
-            if (!$theme = App::package()->getRepository('theme')->findPackage($name)) {
-                throw new Exception(__('Unable to uninstall theme "%name%".', ['%name%' => $name]));
-            }
-
-            App::package()->getInstaller('theme')->uninstall($theme);
-            App::module('system/cache')->clearCache();
-
-            return ['message' => __('Theme uninstalled.')];
-
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!$theme = App::package()->getRepository('theme')->findPackage($name)) {
+            App::abort(400, __('Unable to uninstall theme "%name%".', ['%name%' => $name]));
         }
+
+        App::package()->getInstaller('theme')->uninstall($theme);
+        App::module('system/cache')->clearCache();
+
+        return ['message' => __('Theme uninstalled.')];
     }
 }

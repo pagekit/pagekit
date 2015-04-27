@@ -54,8 +54,11 @@ jQuery(function ($) {
                         pkg.enabled = true;
                     }
 
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message, 'success');
 
+                }, function (data) {
+
+                    UIkit.notify(data, 'danger');
                 });
             },
 
@@ -66,8 +69,11 @@ jQuery(function ($) {
                         pkg.enabled = false;
                     }
 
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message, 'success');
 
+                }, function (data) {
+
+                    UIkit.notify(data, 'danger');
                 });
             },
 
@@ -78,8 +84,11 @@ jQuery(function ($) {
                         vm.packages.splice(vm.packages.indexOf(pkg), 1);
                     }
 
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message, 'success');
 
+                }, function (data) {
+
+                    UIkit.notify(data, 'danger');
                 });
             }
 

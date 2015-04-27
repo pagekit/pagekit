@@ -3,7 +3,6 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Application\Exception;
 use Pagekit\System\Extension;
 
 /**
@@ -36,41 +35,35 @@ class ExtensionsController
      */
     public function enableAction($name)
     {
-        try {
+        ini_set('display_errors', 0);
 
-            ini_set('display_errors', 0);
-            $handler = App::exception()->setHandler(function($exception) {
+        $handler = App::exception()->setHandler(function ($exception) {
 
-                while (ob_get_level()) {
-                    ob_get_clean();
-                }
-
-                $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
-
-                if (App::module('application')->config('debug')) {
-                    $message .= '<br><br>'.$exception->getMessage();
-                }
-
-                App::response()->json(['error' => true, 'message' => $message])->send();
-            });
-
-            App::module()->load($name);
-
-            if (!$extension = App::module($name)) {
-                throw new Exception(__('Unable to enable extension "%name%".', ['%name%' => $name]));
+            while (ob_get_level()) {
+                ob_get_clean();
             }
 
-            $extension->enable();
+            $message = __('Unable to activate extension.<br>The extension triggered a fatal error.');
 
-            App::config('system')->push('extensions', $extension->name);
-            App::exception()->setHandler($handler);
+            if (App::module('application')->config('debug')) {
+                $message .= '<br><br>'.$exception->getMessage();
+            }
 
-            return ['message' => __('Extension enabled.')];
+            App::response()->json(['error' => true, 'message' => $message])->send();
+        });
 
-        } catch (Exception $e) {
+        App::module()->load($name);
 
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!$extension = App::module($name)) {
+            App::abort(400, __('Unable to enable extension "%name%".', ['%name%' => $name]));
         }
+
+        $extension->enable();
+
+        App::config('system')->push('extensions', $extension->name);
+        App::exception()->setHandler($handler);
+
+        return ['message' => __('Extension enabled.')];
     }
 
     /**
@@ -78,23 +71,16 @@ class ExtensionsController
      */
     public function disableAction($name)
     {
-        try {
-
-            if (!$extension = App::module($name)) {
-                throw new Exception(__('Extension "%name%" has not been loaded.', ['%name%' => $name]));
-            }
-
-            $extension->disable();
-
-            App::config('system')->pull('extensions', $extension->name);
-            App::module('system/cache')->clearCache();
-
-            return ['message' => __('Extension disabled.')];
-
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!$extension = App::module($name)) {
+            App::abort(400, __('Extension "%name%" has not been loaded.', ['%name%' => $name]));
         }
+
+        $extension->disable();
+
+        App::config('system')->pull('extensions', $extension->name);
+        App::module('system/cache')->clearCache();
+
+        return ['message' => __('Extension disabled.')];
     }
 
     /**
@@ -102,29 +88,22 @@ class ExtensionsController
      */
     public function uninstallAction($name)
     {
-        try {
-
-            if (!App::module($name)) {
-                App::module()->load($name);
-            }
-
-            if (!$extension = App::module($name)) {
-                throw new Exception(__('Unable to uninstall extension "%name%".', ['%name%' => $name]));
-            }
-
-            $extension->disable();
-            $extension->uninstall();
-
-            App::package()->getInstaller('extension')->uninstall(App::package()->getRepository('extension')->findPackage($name));
-
-            App::config('system')->pull('extensions', $extension->name);
-            App::module('system/cache')->clearCache();
-
-            return ['message' => __('Extension uninstalled.')];
-
-        } catch (Exception $e) {
-
-            return ['message' => $e->getMessage(), 'error' => true];
+        if (!App::module($name)) {
+            App::module()->load($name);
         }
+
+        if (!$extension = App::module($name)) {
+            App::abort(400, __('Unable to uninstall extension "%name%".', ['%name%' => $name]));
+        }
+
+        $extension->disable();
+        $extension->uninstall();
+
+        App::package()->getInstaller('extension')->uninstall(App::package()->getRepository('extension')->findPackage($name));
+
+        App::config('system')->pull('extensions', $extension->name);
+        App::module('system/cache')->clearCache();
+
+        return ['message' => __('Extension uninstalled.')];
     }
 }
