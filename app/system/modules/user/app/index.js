@@ -49,6 +49,10 @@ jQuery(function ($) {
 
         methods: {
 
+            active: function (user) {
+                return this.selected.indexOf(user.id.toString()) != -1;
+            },
+
             save: function (user) {
                 this.resource.save({ id: user.id }, { user: user }, function (data) {
                     vm.load();
