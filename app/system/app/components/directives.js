@@ -122,39 +122,3 @@ Vue.directive('checkbox', {
     }
 
 });
-
-Vue.directive('sticky-table-header', {
-
-    bind: function() {
-
-        var el = $(this.el);
-
-        this.handler = function() {
-
-            var table = el.css('position', 'relative'),
-                thead = table.find('thead tr'),
-                header = thead.clone().addClass('pk-table-head-sticky').css('z-index', 1).hide(),
-                th = thead.find('th:first'),
-                thclone = header.find('th:first');
-
-            header.css({ position: 'absolute', top: 0, left: 0 }).appendTo(table);
-
-            $(window).on('scroll', function() {
-                if (UIkit.Utils.isInView(thead)) {
-                    header.hide();
-                } else {
-                    thclone.css('width', th.width());
-                    header.css({ width: thead.width(), top: window.scrollY - thead.offset().top }).show();
-                }
-            });
-
-        };
-
-        this.vm.$on('hook:ready', this.handler);
-    },
-
-    unbind: function() {
-        this.vm.$off('hook:ready', this.handler);
-    }
-
-});
