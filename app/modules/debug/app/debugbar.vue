@@ -23,7 +23,6 @@
 <script>
 
   var $ = require('jquery');
-  var Vue = require('vue');
   var config = window.$debugbar;
   var collectors = {
 
@@ -68,9 +67,8 @@
 
         add: function (collector, navbar, options) {
 
-            this.navbar.push(Vue.util.extend({html: collector.$interpolate(navbar || '')}, options));
+            this.navbar.push($.extend({html: collector.$interpolate(navbar || '')}, options));
 
-            console.log(this.navbar);
         },
 
         open: function (panel) {
