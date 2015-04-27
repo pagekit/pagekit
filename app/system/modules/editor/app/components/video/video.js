@@ -179,7 +179,7 @@ UIkit.plugin('htmleditor', 'video', {
 
         $.extend(data, settings || { src: '' });
 
-        return templates['video.replace'].template({src: data.src, preview: VideoVm.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
+        return $('#editor-video-replace').text().template({src: data.src, preview: VideoVm.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
     }
 
 });

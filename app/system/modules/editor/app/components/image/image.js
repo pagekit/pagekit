@@ -164,7 +164,7 @@ UIkit.plugin('htmleditor', 'image', {
             data.tag = '![${alt}](${src})';
         }
 
-        return templates['image.replace'].template({src: data.src, alt: data.alt}).replace(/(\r\n|\n|\r)/gm, '');
+        return $('#editor-image-replace').text().template({src: data.src, alt: data.alt}).replace(/(\r\n|\n|\r)/gm, '');
     }
 
 });
