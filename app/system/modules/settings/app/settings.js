@@ -47,7 +47,7 @@ jQuery(function ($) {
 
                 this.$resource('admin/system/settings/save').save({ config: $.extend(data.config, this.config), option: $.extend(data.option, this.option) }, function() {
 
-                    UIkit.notify(vm.$trans('Settings saved.'), 'success');
+                    UIkit.notify(vm.$trans('Settings saved.'));
                     vm.$broadcast('save');
                 });
 

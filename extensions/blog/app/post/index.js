@@ -38,7 +38,7 @@ jQuery(function ($) {
             save: function (post) {
                 this.resource.save({ id: post.id }, { post: post }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
@@ -52,14 +52,14 @@ jQuery(function ($) {
 
                 this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
             remove: function() {
                 this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
@@ -76,7 +76,7 @@ jQuery(function ($) {
 
                 this.resource.save({ id: 'copy' }, { ids: this.selected }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 

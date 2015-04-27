@@ -56,7 +56,7 @@ jQuery(function ($) {
             save: function (user) {
                 this.resource.save({ id: user.id }, { user: user }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
@@ -70,14 +70,14 @@ jQuery(function ($) {
 
                 this.resource.save({ id: 'bulk' }, { users: users }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
             remove: function() {
                 this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 

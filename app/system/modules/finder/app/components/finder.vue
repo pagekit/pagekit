@@ -219,7 +219,7 @@
 
                 return this.resource.save({ cmd: cmd }, $.extend({ path: this.path, root: this.root }, params), function (data) {
 
-                    UIkit.notify(data.message, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message, data.error ? 'danger' : '');
 
                     self.load();
 
@@ -274,7 +274,7 @@
 
                             finder.load();
 
-                            UIkit.notify(data.message, data.error ? 'danger' : 'success');
+                            UIkit.notify(data.message, data.error ? 'danger' : '');
 
                             finder.$set('upload.progress', 100);
                             setTimeout(function () {

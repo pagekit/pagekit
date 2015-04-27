@@ -54,7 +54,7 @@ jQuery(function ($) {
                         pkg.enabled = true;
                     }
 
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(data.message);
 
                 }, function (data) {
 
@@ -69,7 +69,7 @@ jQuery(function ($) {
                         pkg.enabled = false;
                     }
 
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(data.message);
 
                 }, function (data) {
 
@@ -84,7 +84,7 @@ jQuery(function ($) {
                         vm.packages.splice(vm.packages.indexOf(pkg), 1);
                     }
 
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(data.message);
 
                 }, function (data) {
 

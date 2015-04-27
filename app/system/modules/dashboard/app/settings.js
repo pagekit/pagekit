@@ -23,7 +23,7 @@ jQuery(function($) {
                     vm.$set('widgets', data.widgets);
                     vm.$set('selected', []);
 
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(data.message);
                 });
             },
 
@@ -39,7 +39,7 @@ jQuery(function($) {
                     });
 
                 $.post(this.$url('admin/dashboard/reorder'), {order: order}, function(data) {
-                    UIkit.notify(data.message || vm.$trans('Widgets order updated'), 'success');
+                    UIkit.notify(data.message || vm.$trans('Widgets order updated'));
                 }).fail(function() {
                     UIkit.notify(vm.$trans('Unable to reorder widgets.'), 'danger');
                 });

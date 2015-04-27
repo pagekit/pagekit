@@ -11,7 +11,7 @@ jQuery(function($) {
                 e.preventDefault();
 
                 $.post($(this).attr('action'), $(this).serialize(),function(data) {
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(data.message);
                 }).fail(function() {
                     UIkit.notify('Clearing cache failed.', 'danger');
                 }).always(function() {

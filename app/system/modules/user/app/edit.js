@@ -36,7 +36,7 @@ jQuery(function ($) {
                         vm.$set('user', data.user);
                     }
 
-                    UIkit.notify(data.message,'success');
+                    UIkit.notify(data.message);
 
                 }, function (data) {
 

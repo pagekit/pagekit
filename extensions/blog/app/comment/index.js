@@ -49,7 +49,7 @@ jQuery(function ($) {
             save: function (comment) {
                 this.resource.save({ id: comment.id }, { comment: comment }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
@@ -63,14 +63,14 @@ jQuery(function ($) {
 
                 this.resource.save({ id: 'bulk' }, { comments: comments }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
             remove: function() {
                 this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                     vm.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 

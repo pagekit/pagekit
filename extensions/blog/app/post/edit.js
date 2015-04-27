@@ -81,7 +81,7 @@ jQuery(function ($) {
                         vm.$set('post', data.post);
                     }
 
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : 'success');
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             }
 

@@ -34,7 +34,7 @@
             save: function () {
                 this.resource.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
                     if (!data.error) {
-                        UIkit.notify(this.$trans('Roles saved'), 'success');
+                        UIkit.notify(this.$trans('Roles saved'));
                     } else {
                         UIkit.notify(this.$trans('Failed to save roles.'), 'danger');
                     }
