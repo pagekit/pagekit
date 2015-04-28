@@ -21,6 +21,9 @@ class PackageController
 
     public function marketplaceAction()
     {
+        $themes = App::package()->getRepository('theme');
+        $extensions = App::package()->getRepository('extension');
+
         return [
             '$view' => [
                 'title' => __('Marketplace'),
@@ -28,7 +31,7 @@ class PackageController
             ],
             '$marketplace' => [
                 'api' => App::system()->config('api'),
-                'packages' => []
+                'packages' => array_merge($themes->getPackages(), $extensions->getPackages())
             ]
         ];
     }
@@ -77,7 +80,7 @@ class PackageController
     }
 
     /**
-     * @Request({"package": "json", "path": "alnum"}, csrf=true)
+     * @Request({"package": "array", "path": "alnum"}, csrf=true)
      */
     public function installAction($package = null, $path = '')
     {
@@ -110,8 +113,6 @@ class PackageController
 
             App::module('system/cache')->clearCache();
 
-            return ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
-
         } catch (ArchiveExtractionException $e) {
             $error = __('Package extraction failed.');
         } catch (ChecksumVerificationException $e) {
@@ -133,6 +134,8 @@ class PackageController
         if (isset($error)) {
             App::abort(400, $error);
         }
+
+        return ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
     }
 
     protected function installTheme($json, $package)

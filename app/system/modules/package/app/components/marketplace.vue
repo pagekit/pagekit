@@ -48,12 +48,15 @@
     var $ = require('jquery');
     var _ = require('lodash');
     var Vue = require('vue');
+    var Pkg = require('./package');
 
     module.exports = {
 
         replace: true,
 
         template: __vue_template__,
+
+        mixins: [Pkg],
 
         data: function () {
             return {
@@ -62,6 +65,7 @@
                 type: 'extension',
                 pkg: null,
                 packages: null,
+                updates: null,
                 installed: [],
                 page: 0,
                 pages: 0,
@@ -71,12 +75,22 @@
         },
 
         ready: function () {
+
+            var vm = this;
+
             this.query();
+            this.queryUpdates(this.api, this.installed).done(function (data) {
+                vm.$set('updates', data.packages.length ? data.packages : null);
+            });
         },
 
         watch: {
 
             search: function () {
+                this.query();
+            },
+
+            type: function () {
                 this.query();
             },
 
@@ -119,18 +133,9 @@
 
                 vm.$set('status', 'installing');
 
-                this.$http.post('admin/system/package/install', {'package': pkg.version}, function (data) {
-
-                    if (data.message) {
-                        vm.installed.push(pkg);
-                    }
-
-                    vm.$set('status', '');
-
-                }, function (data) {
-
+                this.installPackage(pkg, this.installed).error(function (data) {
                     UIkit.notify(data, 'danger');
-
+                }).always(function (data) {
                     vm.$set('status', '');
                 });
             },

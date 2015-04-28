@@ -11,12 +11,19 @@
         <div data-uk-margin>
 
             <form class="uk-form">
-                <input type="text" name="q" placeholder="{{ 'Search' | trans }}" v-model="search">
+
+                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search" debounce="300">
+
+                <select v-model="type">
+                    <option value="extension">{{ 'Extensions' | trans }}</option>
+                    <option value="theme">{{ 'Themes' | trans }}</option>
+                </select>
+
             </form>
 
         </div>
     </div>
 
-    <v-marketplace v-with="api: api, search: search, installed: packages"></v-marketplace>
+    <v-marketplace v-with="api: api, search: search, type: type, installed: packages"></v-marketplace>
 
 </div>

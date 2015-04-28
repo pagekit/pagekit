@@ -5,14 +5,9 @@ jQuery(function ($) {
         el: '#marketplace',
 
         data: $.extend(window.$marketplace, {
-            updates: null,
             search: '',
-            status: ''
-        }),
-
-        ready: function () {
-
-        }
+            type: 'extension'
+        })
 
     });
 
