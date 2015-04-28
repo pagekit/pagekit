@@ -64,7 +64,7 @@
                         </a>
                     </td>
                     <td>
-                        <a v-attr="href: $url('admin/system/user/edit', { id: post.user_id })">{{ post.author }}</a>
+                        <a v-attr="href: $url('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a class="uk-badge uk-badge-notification" v-class="pk-badge: post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}">{{ post.comment_count }}</a>
