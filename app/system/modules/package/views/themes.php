@@ -1,4 +1,4 @@
-<?php $view->script('themes', 'system/package:app/themes.js', ['v-marketplace', 'v-upload']) ?>
+<?php $view->script('themes', 'system/package:app/bundle/themes.js', 'v-upload') ?>
 
 <div id="themes">
 
@@ -10,15 +10,15 @@
         </div>
         <div data-uk-margin>
 
-            <form class="uk-form">
-                <input type="text" name="q" placeholder="{{ 'Search' | trans }}" v-model="search">
-            </form>
+            <div class="uk-form">
+                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search">
+            </div>
 
         </div>
     </div>
 
    <div class="uk-grid uk-grid-width-large-1-2" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
-        <div v-repeat="pkg: packages">
+        <div v-repeat="pkg: packages | filterBy search in 'title'">
             <div class="uk-panel uk-panel-box">
                 <div class="uk-panel-teaser">
                     <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: icon(pkg)">

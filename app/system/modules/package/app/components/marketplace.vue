@@ -48,7 +48,6 @@
     var $ = require('jquery');
     var _ = require('lodash');
     var Vue = require('vue');
-    var Pkg = require('./package');
 
     module.exports = {
 
@@ -56,7 +55,9 @@
 
         template: __vue_template__,
 
-        mixins: [Pkg],
+        mixins: [
+            require('./package')
+        ],
 
         data: function () {
             return {

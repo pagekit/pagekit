@@ -595,8 +595,7 @@ var Translator = (function(document, undefined) {
 require('globalize/number');
 require('globalize/date');
 
-// export
-window.Globalize = require('globalize');
+var Globalize = require('globalize');
 
 // load cldr
 if (config.locale) {
@@ -607,3 +606,6 @@ if (config.locale) {
 // add translator
 Globalize.trans = Translator.trans.bind(Translator);
 Globalize.transChoice = Translator.transChoice.bind(Translator);
+
+// export
+module.exports = Globalize;

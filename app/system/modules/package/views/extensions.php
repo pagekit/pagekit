@@ -1,4 +1,4 @@
-<?php $view->script('extensions', 'system/package:app/extensions.js', ['v-marketplace', 'v-upload']) ?>
+<?php $view->script('extensions', 'system/package:app/bundle/extensions.js', 'v-upload') ?>
 
 <div id="extensions">
 
@@ -10,9 +10,9 @@
         </div>
         <div data-uk-margin>
 
-            <form class="uk-form">
-                <input type="text" name="q" placeholder="{{ 'Search' | trans }}" v-model="search">
-            </form>
+            <div class="uk-form">
+                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search">
+            </div>
 
         </div>
     </div>
@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-repeat="pkg: packages">
+            <tr v-repeat="pkg: packages | filterBy search in 'title'">
                 <td class="pk-table-width-minimum">
                     <img class="uk-img-preserve" width="50" height="50" alt="{{ pkg.title }}" v-attr="src: icon(pkg)">
                 </td>
