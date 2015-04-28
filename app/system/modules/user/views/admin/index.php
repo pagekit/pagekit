@@ -3,9 +3,10 @@
 <div id="js-user" class="uk-form" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
+        <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/user/edit')">{{ 'Add User' | trans }}</a>
+            <h2 class="uk-margin-remove">{{ users.length + ' Users' | trans }}</h2><!-- TODO: User Count -->
+
             <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
             <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
@@ -18,26 +19,35 @@
                 </div>
             </div>
 
+            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
+
         </div>
         <div data-uk-margin>
 
-            <select v-model="config.filter.status" options="statuses"></select>
-            <select v-model="config.filter.role" options="roles"></select>
-            <select v-model="config.filter.permission" options="permissions"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
+            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/user/edit')">{{ 'Add User' | trans }}</a>
 
         </div>
     </div>
 
-    <div v-show="users.length" class="uk-overflow-container">
+    <div class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th colspan="2">{{ 'User' | trans }}</th>
-                    <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center">
+                        <div class="uk-form-select" data-uk-form-select>
+                            <span>{{ 'Status' | trans }}</span>
+                            <select v-model="config.filter.status" options="statuses"></select>
+                        </div>
+                    </th>
                     <th class="pk-table-width-200">{{ 'Email' | trans }}</th>
-                    <th class="pk-table-width-100">{{ 'Roles' | trans }}</th>
+                    <th class="pk-table-width-100">
+                        <div class="uk-form-select" data-uk-form-select>
+                            <span>{{ 'Roles' | trans }}</span>
+                            <select v-model="config.filter.role" options="roles"></select>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
