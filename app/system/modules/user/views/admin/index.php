@@ -5,7 +5,7 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ users.length + ' Users' | trans }}</h2><!-- TODO: User Count -->
+            <h2 class="uk-margin-remove">{{ count + ' Users' | trans }}</h2><!-- TODO: User Count -->
 
             <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 

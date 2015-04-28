@@ -12,7 +12,7 @@ jQuery(function ($) {
         created: function () {
 
             this.resource = this.$resource('api/user/:id');
-            this.config.filter = $.extend({ status: '', role: '', permission: '' }, this.config.filter ? this.config.filter : {});
+            this.config.filter = $.extend({status: '', role: ''}, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true, true);
             this.$watch('config.filter', function() { this.load(0); }, true);
@@ -29,19 +29,6 @@ jQuery(function ($) {
             roles: function() {
                 return [{ text: this.$trans('- Role -'), value: '' }].concat(
                     this.data.roles.map(function(role) { return { text: role.name, value: role.id }; })
-                );
-            },
-
-            permissions: function() {
-                return [{ text: this.$trans('- Permission -'), value: '' }].concat(
-                    Vue.filter('toArray')($.map(this.data.permissions, function (permissions, group) {
-                        return {
-                            label: group,
-                            options: Vue.filter('toArray')($.map(permissions, function (permission, id) {
-                                return { text: permission.title, value: id };
-                            }))
-                        };
-                    }))
                 );
             }
 
@@ -109,6 +96,7 @@ jQuery(function ($) {
                 this.resource.query({ filter: this.config.filter, page: page }, function (data) {
                     vm.$set('users', data.users);
                     vm.$set('pages', data.pages);
+                    vm.$set('count', data.count);
                     vm.$set('config.page', page);
                     vm.$set('selected', []);
                 });

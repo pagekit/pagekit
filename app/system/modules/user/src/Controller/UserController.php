@@ -32,9 +32,8 @@ class UserController
                 'page'              => $page
             ],
             '$data' => [
-                'statuses'    => User::getStatuses(),
-                'permissions' => App::permissions(),
-                'roles'       => array_values($roles)
+                'statuses' => User::getStatuses(),
+                'roles'    => array_values($roles)
             ]
         ];
     }

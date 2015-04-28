@@ -20,7 +20,7 @@ class UserApiController
     public function indexAction($filter = [], $page = 0)
     {
         $query  = User::query();
-        $filter = array_merge(array_fill_keys(['status', 'search', 'permission', 'role'], ''), $filter);
+        $filter = array_merge(array_fill_keys(['status', 'search', 'role'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
         if (is_numeric($status)) {
@@ -45,22 +45,13 @@ class UserApiController
             });
         }
 
-        if ($permission) {
-            $sql = $this->getPermissionSql($permission);
-            $query->whereExists(function ($query) use ($sql) {
-                $query->from('@system_user_role ur')
-                    ->join('@system_role r', 'ur.role_id = r.id')
-                    ->where(['@system_user.id = ur.user_id', $sql]);
-            });
-        }
-
         $limit = App::module('system/user')->config('users_per_page');
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
         $users = array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy('name')->get());
 
-        return compact('users', 'pages');
+        return compact('users', 'pages', 'count');
     }
 
     /**

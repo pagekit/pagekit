@@ -506,7 +506,7 @@ class QueryBuilder
      */
     public function count($column = '*')
     {
-        return $this->aggregate('count', $column);
+        return (int) $this->aggregate('count', $column);
     }
 
     /**

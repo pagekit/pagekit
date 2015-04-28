@@ -83,7 +83,7 @@ class CompositeExpression implements \Countable
     /**
      * Retrieves the amount of expressions on composite expression.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
