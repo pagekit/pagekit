@@ -48,7 +48,7 @@ class DashboardModule extends Module
     public function getWidgets()
     {
         $widgets  = [];
-        $defaults = App::system()->config('dashboard.default');
+        $defaults = $this->config('defaults');
 
         foreach (App::user()->get('dashboard', $defaults) as $id => $widget) {
             if ($type = $this->getType($widget['type'])) {

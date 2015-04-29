@@ -40,7 +40,7 @@ return [
 
     'config' => [
 
-        'default' => [
+        'defaults' => [
 
             '1' => [
                 'id' => '1',
