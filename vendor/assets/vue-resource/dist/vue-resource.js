@@ -44,9 +44,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Url = __webpack_require__(4);
-	var Http = __webpack_require__(5);
-	var Resource = __webpack_require__(6);
+	var Url = __webpack_require__(1);
+	var Http = __webpack_require__(2);
+	var Resource = __webpack_require__(3);
 
 	/**
 	 * Install plugin.
@@ -74,13 +74,10 @@
 
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(8);
+	var _ = __webpack_require__(7);
 
 	/**
 	 * Url provides URL templating.
@@ -233,11 +230,11 @@
 
 
 /***/ },
-/* 5 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(8);
-	var Url = __webpack_require__(4);
+	var _ = __webpack_require__(7);
+	var Url = __webpack_require__(1);
 	var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 	/**
@@ -406,11 +403,11 @@
 
 
 /***/ },
-/* 6 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(8);
-	var Http = __webpack_require__(5);
+	var _ = __webpack_require__(7);
+	var Http = __webpack_require__(2);
 
 	/**
 	 * Resource provides interaction support with RESTful services.
@@ -521,8 +518,10 @@
 
 
 /***/ },
-/* 7 */,
-/* 8 */
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = Vue.util.extend({}, Vue.util);
