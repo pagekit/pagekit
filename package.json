@@ -1,6 +1,7 @@
 {
   "name": "pagekit",
   "devDependencies": {
+    "glob": "^5.0.5",
     "gulp": "^3.8.10",
     "gulp-eslint": "^0.7.0",
     "gulp-header": "^1.2.2",

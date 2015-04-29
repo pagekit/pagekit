@@ -44,9 +44,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Directive = __webpack_require__(1);
-	var Validator = __webpack_require__(2);
-	var Validators = __webpack_require__(3);
+	var Directive = __webpack_require__(4);
+	var Validator = __webpack_require__(5);
+	var Validators = __webpack_require__(6);
 
 	/**
 	 * Install plugin.
@@ -69,10 +69,13 @@
 
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(7);
+	var _ = __webpack_require__(8);
 
 	/**
 	 * Valid directive.
@@ -149,10 +152,10 @@
 
 
 /***/ },
-/* 2 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(7);
+	var _ = __webpack_require__(8);
 
 	/**
 	 * Validator for form input validation.
@@ -265,7 +268,7 @@
 
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -349,10 +352,8 @@
 
 
 /***/ },
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 7 */,
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = Vue.util.extend({}, Vue.util);

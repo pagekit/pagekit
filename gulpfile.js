@@ -6,9 +6,7 @@
  * lint: runs jshint on all .js files
  */
 
-var fs         = require('fs'),
-    path       = require('path'),
-    merge      = require('merge-stream'),
+var merge      = require('merge-stream'),
     gulp       = require('gulp'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
@@ -58,6 +56,7 @@ gulp.task('watch', function () {
 gulp.task('lint', function () {
     return gulp.src([
             'app/modules/**/*.js',
+            'app/system/**/*.js',
             'extensions/**/*.js',
             'themes/**/*.js',
             '!**/bundle/*',
