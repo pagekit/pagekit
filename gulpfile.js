@@ -56,7 +56,13 @@ gulp.task('watch', function () {
  * Lint all script files
  */
 gulp.task('lint', function () {
-    return gulp.src(['app/modules/**/*.js', 'extensions/**/*.js', 'themes/**/*.js'])
+    return gulp.src([
+            'app/modules/**/*.js',
+            'extensions/**/*.js',
+            'themes/**/*.js',
+            '!**/bundle/*',
+            '!**/vendor/**/*'
+        ])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
