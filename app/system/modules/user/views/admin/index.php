@@ -7,19 +7,17 @@
 
             <h2 class="uk-margin-remove">{{ count + ' Users' | trans }}</h2><!-- TODO: User Count -->
 
-            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
-
-            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a v-on="click: status(1)">{{ 'Activate' | trans }}</a></li>
-                        <li><a v-on="click: status(0)">{{ 'Block' | trans }}</a></li>
-                    </ul>
-                </div>
+            <div class="uk-margin-left" v-show="selected.length">
+                <a class="uk-icon-hover uk-icon-small uk-icon-trash-o uk-margin-small-right" v-on="click: remove"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-check-circle-o uk-margin-small-right" v-on="click: status(1)"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-times-circle-o" v-on="click: status(0)"></a>
             </div>
 
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
+            <div class="pk-search">
+                <div class="uk-search">
+                    <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
+                </div>
+            </div>
 
         </div>
         <div data-uk-margin>
@@ -54,20 +52,20 @@
                 <tr v-repeat="user: users" v-class="uk-active: active(user)">
                     <td><input type="checkbox" name="id" value="{{ user.id }}"></td>
                     <td class="pk-table-width-minimum">
-                        <img v-gravatar="user.email" class="uk-img-preserve uk-border-circle" width="40" height="40" alt="">
+                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
                         <a v-attr="href: $url('admin/user/edit', { id: user.id})">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a href="#" v-class="
+                        <a class="uk-icon-circle" href="#" title="{{ user.statusText }}" v-class="
                             uk-text-success: !user.isNew && user.status,
                             uk-text-danger: !user.isNew && !user.status
-                        " class="uk-icon-circle" v-on="click: toggleStatus(user)" title="{{ user.statusText }}"></a>
+                        " v-on="click: toggleStatus(user)"></a>
                     </td>
                     <td>
-                        <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i v-if="showVerified(user)" title="{{ 'Verified Email Address' | trans }}" class="uk-icon-check"></i>
+                        <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" title="{{ 'Verified Email Address' | trans }}" v-if="showVerified(user)"></i>
                     </td>
                     <td>
                         {{ showRoles(user) }}
@@ -77,7 +75,7 @@
         </table>
     </div>
 
-    <p v-show="users && !users.length" class="uk-alert uk-alert-info">{{ 'No user found.' | trans }}</p>
+    <p class="uk-alert uk-alert-info" v-show="users && !users.length">{{ 'No user found.' | trans }}</p>
 
     <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
 
