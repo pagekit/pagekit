@@ -14,16 +14,52 @@ use Pagekit\Package\Exception\UnauthorizedDownloadException;
 use Pagekit\Package\Loader\JsonLoader;
 
 /**
- * @Access("system: manage extensions", admin=true)
+ * @Access("system: manage packages", admin=true)
  */
 class PackageController
 {
+    public function themesAction()
+    {
+        $packages = App::package()->getRepository('theme')->getPackages();
+
+        foreach ($packages as $package) {
+            $package->enabled = App::module($package->getName()) != null;
+        }
+
+        return [
+            '$view' => [
+                'title' => __('Themes'),
+                'name'  => 'system:modules/package/views/themes.php'
+            ],
+            '$themes' => [
+                'api' => App::system()->config('api'),
+                'packages' => $packages
+            ]
+        ];
+    }
+
+    public function extensionsAction()
+    {
+        $packages = App::package()->getRepository('extension')->getPackages();
+
+        foreach ($packages as $package) {
+            $package->enabled = App::module($package->getName()) != null;
+        }
+
+        return [
+            '$view' => [
+                'title' => __('Extensions'),
+                'name'  => 'system:modules/package/views/extensions.php'
+            ],
+            '$extensions' => [
+                'api' => App::system()->config('api'),
+                'packages' => $packages
+            ]
+        ];
+    }
 
     public function marketplaceAction()
     {
-        $themes = App::package()->getRepository('theme');
-        $extensions = App::package()->getRepository('extension');
-
         return [
             '$view' => [
                 'title' => __('Marketplace'),
@@ -31,9 +67,69 @@ class PackageController
             ],
             '$marketplace' => [
                 'api' => App::system()->config('api'),
-                'packages' => array_merge($themes->getPackages(), $extensions->getPackages())
+                'packages' => App::package()->getPackages()
             ]
         ];
+    }
+
+    /**
+     * @Request({"name"}, csrf=true)
+     */
+    public function enableAction($name)
+    {
+        $handler = $this->errorHandler($name);
+
+        if (!$package = App::package()->findPackage($name)) {
+            App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
+        }
+
+        App::module()->load($name);
+
+        if (!$module = App::module($name)) {
+            App::abort(400, __('Unable to enable "%name%".', ['%name%' => $name]));
+        }
+
+        if ($package->getType() == 'theme') {
+
+            App::config('system')->set('theme.site', $name);
+            App::exception()->setHandler($handler);
+
+            return ['message' => __('Theme "%name%" enabled.', ['%name%' => $name])];
+        }
+
+        if ($package->getType() == 'extension') {
+
+            $module->enable();
+
+            App::config('system')->push('extensions', $name);
+            App::exception()->setHandler($handler);
+
+            return ['message' => __('Extension "%name%" enabled.', ['%name%' => $name])];
+        }
+    }
+
+    /**
+     * @Request({"name"}, csrf=true)
+     */
+    public function disableAction($name)
+    {
+        if (!$package = App::package()->findPackage($name)) {
+            App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
+        }
+
+        if (!$module = App::module($name)) {
+            App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $name]));
+        }
+
+        if ($package->getType() == 'extension') {
+
+            $module->disable();
+
+            App::config('system')->pull('extensions', $name);
+            App::module('system/cache')->clearCache();
+
+            return ['message' => __('Extension "%name%" disabled.', ['%name%' => $name])];
+        }
     }
 
     /**
@@ -138,6 +234,39 @@ class PackageController
         return ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
     }
 
+    /**
+     * @Request({"name"}, csrf=true)
+     */
+    public function uninstallAction($name)
+    {
+        if (!$package = App::package()->findPackage($name)) {
+            App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
+        }
+
+        $type = $package->getType();
+
+        if ($type == 'extension') {
+
+            if (!App::module($name)) {
+                App::module()->load($name);
+            }
+
+            if (!$module = App::module($name)) {
+                App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $name]));
+            }
+
+            $module->disable();
+            $module->uninstall();
+
+            App::config('system')->pull('extensions', $name);
+        }
+
+        App::package()->getInstaller($type)->uninstall($package);
+        App::module('system/cache')->clearCache();
+
+        return ['message' => __('%name% uninstalled.', ['%name%' => $name])];
+    }
+
     protected function installTheme($json, $package)
     {
         $installer = App::package()->getInstaller('theme');
@@ -201,5 +330,25 @@ class PackageController
 
             App::abort(400, __('Can\'t load json file from package.'));
         }
+    }
+
+    protected function errorHandler($name)
+    {
+        ini_set('display_errors', 0);
+
+        return App::exception()->setHandler(function ($exception) use ($name) {
+
+            while (ob_get_level()) {
+                ob_get_clean();
+            }
+
+            $message = __('Unable to activate "%name%".<br>A fatal error occured.', ['%name%' => $name]);
+
+            if (App::debug()) {
+                $message .= '<br><br>'.$exception->getMessage();
+            }
+
+            App::response()->json(['error' => true, 'message' => $message])->send();
+        });
     }
 }

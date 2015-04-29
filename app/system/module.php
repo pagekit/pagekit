@@ -130,12 +130,6 @@ return [
 
     'permissions' => [
 
-        'system: manage themes' => [
-            'title' => 'Manage themes'
-        ],
-        'system: manage extensions' => [
-            'title' => 'Manage extensions'
-        ],
         'system: access settings' => [
             'title' => 'Access system settings',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
