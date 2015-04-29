@@ -76,6 +76,19 @@ return [
 
         ]
 
+    ],
+
+    'system/dashboard' => [
+
+        'defaults' => [
+
+            '1' => [
+                'id' => '1',
+                'type' => 'dashboard.user'
+            ]
+
+        ]
+
     ]
 
 ];

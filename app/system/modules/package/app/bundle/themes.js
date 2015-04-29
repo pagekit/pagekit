@@ -49,7 +49,7 @@
 
 	$(function () {
 
-	  var opts = __webpack_require__(12);
+	  var opts = __webpack_require__(13);
 	  var app  = new Vue(opts).$mount('#themes');
 
 	});
@@ -77,7 +77,8 @@
 /* 9 */,
 /* 10 */,
 /* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);
@@ -152,7 +153,6 @@
 
 
 /***/ },
-/* 13 */,
 /* 14 */,
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
@@ -178,7 +178,7 @@
 	        },
 
 	        enablePackage: function (pkg) {
-	            return this.$http.post('admin/system/extensions/enable', {name: pkg.name}, function (data) {
+	            return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
 	                if (!data.error) {
 	                    pkg.enabled = true;
 	                }
@@ -186,7 +186,7 @@
 	        },
 
 	        disablePackage: function (pkg) {
-	            return this.$http.post('admin/system/extensions/disable', {name: pkg.name}, function (data) {
+	            return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
 	                if (!data.error) {
 	                    pkg.enabled = false;
 	                }
@@ -202,7 +202,7 @@
 	        },
 
 	        uninstallPackage: function (pkg, packages) {
-	            return this.$http.post('admin/system/extensions/uninstall', {name: pkg.name}, function (data) {
+	            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
 	                if (packages && !data.error) {
 	                    packages.splice(packages.indexOf(pkg), 1);
 	                }

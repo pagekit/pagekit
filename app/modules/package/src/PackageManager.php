@@ -1,12 +1,13 @@
 <?php
 
-namespace Pagekit\System\Package;
+namespace Pagekit\Package;
 
 use Pagekit\Package\Installer\InstallerInterface;
 use Pagekit\Package\Installer\PackageInstaller;
+use Pagekit\Package\Repository\ArrayRepository;
 use Pagekit\Package\Repository\InstalledRepository;
 
-class PackageManager
+class PackageManager extends ArrayRepository
 {
     /**
      * @var array
@@ -51,5 +52,19 @@ class PackageManager
         $this->repositories[$name] = $repository;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPackages()
+    {
+        $packages = [];
+
+        foreach ($this->repositories as $repository) {
+            $packages = array_merge($packages, $repository->getPackages());
+        }
+
+        return $packages;
     }
 }

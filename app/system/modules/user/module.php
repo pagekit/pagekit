@@ -51,11 +51,6 @@ return [
             $widgets->registerType(new UserWidget());
         });
 
-        $app->on('system.settings.edit', function ($event) use ($app) {
-            $event->options($this->name, $this->config, ['registration', 'require_verification']);
-            $event->section($this->name, 'User', 'app/system/modules/user/views/admin/settings.php');
-        });
-
         if (!$app['config']->get('system/user')) {
             $app['config']->set('system/user', [], true);
         }

@@ -51,8 +51,7 @@
 
 	  $('body').append('<div id="profiler"></div>');
 
-	  var opts = __webpack_require__(3);
-	  var app  = new Vue(opts).$mount('#profiler');
+	  new Vue(__webpack_require__(3)).$mount('#profiler');
 
 	});
 

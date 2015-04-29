@@ -50,7 +50,7 @@
 
 	function install (Vue) {
 
-	    var config = $pagekit, templates = {};
+	    var config = window.$pagekit;
 
 	    /**
 	     * Config
@@ -102,7 +102,7 @@
 
 	    partial.insert = function(id) {
 
-	        var self = this, partial = this.vm.$options.partials[id];
+	        var partial = this.vm.$options.partials[id];
 
 	        if (undefined === id || partial) {
 	            return insert.call(this, id);

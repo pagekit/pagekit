@@ -11,9 +11,9 @@ class DateHelper
      *
      * @see format()
      */
-    public function __invoke($name)
+    public function __invoke($value, $width = 'medium', $locale = '')
     {
-        return $this->offsetGet($name);
+        return $this->format($value, $width, $locale);
     }
 
     /**
@@ -37,5 +37,16 @@ class DateHelper
         }
 
         return $calendar->format($value, $width, $locale);
+    }
+
+    /**
+     * Converts a date/time representation.
+     *
+     * @param  mixed $value
+     * @return \DateTime
+     */
+    public function parse($value)
+    {
+        return Intl::calendar()->toDateTime($value);
     }
 }

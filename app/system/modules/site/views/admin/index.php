@@ -4,8 +4,7 @@
 
         <div class="uk-panel uk-panel-box uk-width-1-4" v-component="menu-list" inline-template>
 
-            <!-- Remark: v-transition is added to force a complete refresh after the nodes have been updated -->
-            <div class="uk-margin" v-repeat="menu: menus" v-transition="">
+            <div class="uk-margin" v-repeat="menu: menus">
                 <div class="uk-flex">
                     <span class="uk-panel-title uk-flex-item-1" v-on="click: edit(menu)">{{ menu.label }}</span>
 

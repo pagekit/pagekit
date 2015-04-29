@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\System\Package\PackageManager;
-use Pagekit\System\Package\Repository\ExtensionRepository;
-use Pagekit\System\Package\Repository\ThemeRepository;
+use Pagekit\Package\PackageManager;
+use Pagekit\System\ExtensionRepository;
+use Pagekit\System\ThemeRepository;
 
 return [
 
@@ -48,9 +48,15 @@ return [
     'controllers' => [
 
         '@system: /system' => [
-            'Pagekit\\System\\Controller\\PackageController',
-            'Pagekit\\System\\Controller\\ExtensionsController',
-            'Pagekit\\System\\Controller\\ThemesController'
+            'Pagekit\\System\\Controller\\PackageController'
+        ]
+
+    ],
+
+    'permissions' => [
+
+        'system: manage packages' => [
+            'title' => 'Manage extensions and themes'
         ]
 
     ],
@@ -67,16 +73,16 @@ return [
         'system: extensions' => [
             'label'    => 'Extensions',
             'parent'   => 'system: system',
-            'url'      => '@system/extensions',
-            'access'   => 'system: manage extensions',
+            'url'      => '@system/package/extensions',
+            'access'   => 'system: manage packages',
             'priority' => 130
         ],
 
         'system: themes' => [
             'label'    => 'Themes',
             'parent'   => 'system: system',
-            'url'      => '@system/themes',
-            'access'   => 'system: manage themes',
+            'url'      => '@system/package/themes',
+            'access'   => 'system: manage packages',
             'priority' => 130
         ]
 

@@ -194,7 +194,7 @@ class WidgetModule extends Module
 
             $this->registerSection('Settings', 'widget:views/admin/settings.php');
             $this->registerSection('Assignment', 'widget:views/admin/assignment.php');
-            $this->registerSection('Settings', 'widget:views/widgets/text/edit.php', 'widget.text');
+            $this->registerSection('Settings', 'widget:views/widgets/text/edit.php', 'site.text');
 
             App::trigger('widget.sections', [$this]);
         }
