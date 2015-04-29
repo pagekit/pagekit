@@ -5,17 +5,24 @@ namespace Pagekit\Hello\Controller;
 use Pagekit\Application as App;
 
 /**
- * @Route("/hello")
+ * @Route("/")
  */
 class SiteController
 {
-    public function indexAction()
+    /**
+     * @Route("/", name="@hello/world")
+     * @Route("/{name}", name="@hello/name")
+     */
+    public function indexAction($name = "World")
     {
+        $names = explode(',', $name);
+
         return [
             '$view' => [
-                'title' => __('Hello World'),
-                'name'  => 'hello:views/index.razr'
-            ]
+                'title' => __('Hello %name%', ['%name%' => $names[0]]),
+                'name'  => 'hello:views/index.php'
+            ],
+            'names' => $names
         ];
     }
 
@@ -30,36 +37,10 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Hello %name%', ['%name%' => $names[0]]),
-                'name'  => 'hello:views/greet.razr'
+                'name'  => 'hello:views/index.php'
             ],
             'names' => $names
         ];
-    }
-
-    /**
-     * @Route("/view/{id}", name="@hello/view/id", requirements={"id"="\d+"})
-     */
-    public function viewAction($id = 1)
-    {
-        return [
-            '$view' => [
-                'title' => __('View article'),
-                'name'  => 'hello:views/view.razr'
-            ],
-            'id' => $id
-        ];
-    }
-
-    public function anotherViewAction()
-    {
-        $data = [
-           '$view' => [
-                'title' => __('View article')
-            ],
-            'id' => 1
-        ];
-
-        return App::view('hello:views/view.razr', $data);
     }
 
     public function redirectAction()

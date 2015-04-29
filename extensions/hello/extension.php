@@ -20,7 +20,7 @@ return [
 
     'controllers' => [
 
-        '@hello: /hello' => [
+        '@hello: /' => [
             'Pagekit\\Hello\\Controller\\HelloController',
             'Pagekit\\Hello\\Controller\\SiteController'
         ]
@@ -38,10 +38,18 @@ return [
         'hello' => [
             'label'  => 'Hello',
             'icon'   => 'extensions/hello/extension.svg',
-            'url'    => '@hello/hello',
-            'active' => '@hello/hello*',
-            'access' => 'hello: manage hellos'
+            'url'    => '@hello',
+            'active' => '@hello*',
+            // 'access' => 'hello: manage hellos'
+        ],
+
+        'hello: settings' => [
+            'label'  => 'Settings',
+            'url'    => '@hello/settings',
+            'parent' => '@hello',
+            // 'access' => 'hello: manage hellos'
         ]
+
 
     ]
 

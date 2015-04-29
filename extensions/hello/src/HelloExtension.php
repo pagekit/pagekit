@@ -3,7 +3,6 @@
 namespace Pagekit\Hello;
 
 use Pagekit\Application as App;
-use Pagekit\Hello\Event\HelloListener;
 use Pagekit\System\Extension;
 
 class HelloExtension extends Extension
@@ -13,16 +12,6 @@ class HelloExtension extends Extension
      */
     public function main(App $app)
     {
-        $app->subscribe(new HelloListener());
-
-        $app->on('widget.types', function($event, $widgets) {
-            $widgets->registerType(new HelloWidget('site'));
-            $widgets->registerType(new HelloWidget('dashboard'));
-        });
-
-        // dispatch event (check Hello\Event\HelloListener to see how subscribers work)
-        $app->trigger('hello.boot');
-
         if (!$app['config']->get($this->name)) {
             $app['config']->set($this->name, [], true);
         }
