@@ -12,6 +12,7 @@ use Pagekit\Package\Exception\DownloadErrorException;
 use Pagekit\Package\Exception\NotWritableException;
 use Pagekit\Package\Exception\UnauthorizedDownloadException;
 use Pagekit\Package\Loader\JsonLoader;
+use Pagekit\System\Extension;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -99,7 +100,9 @@ class PackageController
 
         if ($package->getType() == 'extension') {
 
-            $module->enable();
+            if ($module instanceof Extension) {
+                $module->enable();
+            }
 
             App::config('system')->push('extensions', $name);
             App::exception()->setHandler($handler);
