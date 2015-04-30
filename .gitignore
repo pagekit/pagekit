@@ -15,6 +15,7 @@
 /composer.phar
 /composer.lock
 /pagekit*.zip
+/app/cache/*
 node_modules
 .DS_Store
 .idea
