@@ -13,7 +13,10 @@
         </div>
 
         <div v-repeat="panels">
-            <div class="pf-profiler-panel" data-panel="{{ $value }}" v-component="{{ $value }}" v-with="data[$value]"></div>
+            <div class="pf-profiler-panel" v-style="
+                display: $value === panel ? 'block' : 'none',
+                height: height
+            " v-component="{{ $value }}" v-with="data[$value]"></div>
         </div>
 
     </div>
@@ -36,7 +39,8 @@
             return {
                 data: {},
                 navbar: [],
-                panels: []
+                panels: [],
+                panel: null
             }
         },
 
@@ -48,13 +52,21 @@
 
                 self.$set('data', data);
 
-                Object.keys(self.$options.components).forEach(function (name) {
+                $.each(self.$options.components, function (name) {
                     if (data[name]) {
                         self.panels.push(name);
                     }
                 });
 
             });
+
+        },
+
+        computed: {
+
+            height: function() {
+                return Math.ceil(window.innerHeight / 2) + 'px';
+            }
 
         },
 
@@ -68,28 +80,15 @@
 
             open: function (panel) {
 
-                if (!panel) {
-                    return;
+                if (panel) {
+                    this.$set('panel', panel);
                 }
-
-                $('[data-panel]', this.$el).each(function () {
-
-                    var el = $(this).attr('style', null);
-
-                    if (el.data('panel') == panel) {
-                        el.css({
-                            display: 'block',
-                            height: Math.ceil(window.innerHeight / 2)
-                        });
-                    }
-
-                });
 
             },
 
             close: function () {
 
-                $('[data-panel]', this.$el).attr('style', null);
+                this.$set('panel', null);
 
             }
 
