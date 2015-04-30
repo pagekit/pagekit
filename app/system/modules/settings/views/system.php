@@ -1,10 +1,23 @@
-<h2 class="pk-form-heading">{{ 'System' | trans }}</h2>
+<div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+    <div data-uk-margin>
+
+        <h2 class="uk-margin-remove">{{ 'System' | trans }}</h2>
+
+    </div>
+    <div data-uk-margin>
+
+        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
+
+    </div>
+</div>
+
 <div class="uk-form-row">
     <label for="form-apikey" class="uk-form-label">{{ 'API Key' | trans }}</label>
     <div class="uk-form-controls">
         <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="option.system.api.key"></textarea>
     </div>
 </div>
+
 <div class="uk-form-row">
     <label for="form-channel" class="uk-form-label">{{ 'Release Channel' | trans }}</label>
     <div class="uk-form-controls">
@@ -14,12 +27,14 @@
         </select>
     </div>
 </div>
+
 <div class="uk-form-row">
     <label for="form-uploadfolder" class="uk-form-label">{{ 'Storage' | trans }}</label>
     <div class="uk-form-controls">
-        <input id="form-uploadfolder" class="uk-form-width-large" type="text" v-model="config.system.storage" placeholder="/storage">
+        <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="config.system.storage">
     </div>
 </div>
+
 <div class="uk-form-row">
     <span class="uk-form-label">{{ 'Developer' | trans }}</span>
     <div class="uk-form-controls uk-form-controls-text">
@@ -29,6 +44,6 @@
         <p class="uk-form-controls-condensed">
             <label><input type="checkbox" value="1" v-model="config.debug.enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
         </p>
-        <p v-if="!sqlite" class="uk-form-help-block">{{ 'Please enable the SQLite database extension.' | trans }}</p>
+        <p class="uk-form-help-block" v-if="!sqlite">{{ 'Please enable the SQLite database extension.' | trans }}</p>
     </div>
 </div>
