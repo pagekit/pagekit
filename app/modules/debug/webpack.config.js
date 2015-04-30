@@ -4,7 +4,7 @@ module.exports = [{
     },
     output: {
         filename: "./app/bundle/[name].js",
-        library: "Debug"
+        library: "Debugbar"
     },
     externals: {
         "jquery": "jQuery",

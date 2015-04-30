@@ -1,4 +1,4 @@
-var Debug =
+var Debugbar =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -45,24 +45,24 @@ var Debug =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Debug = __webpack_require__(1);
+	var Debugbar = __webpack_require__(1);
 
-	Debug.register('system', __webpack_require__(2));
-	Debug.register('routes', __webpack_require__(3));
-	Debug.register('events', __webpack_require__(4));
-	Debug.register('time', __webpack_require__(5));
-	Debug.register('memory', __webpack_require__(6));
-	Debug.register('database', __webpack_require__(7));
-	Debug.register('request', __webpack_require__(8));
-	Debug.register('auth', __webpack_require__(9));
+	Debugbar.register('system', __webpack_require__(2));
+	Debugbar.register('routes', __webpack_require__(3));
+	Debugbar.register('events', __webpack_require__(4));
+	Debugbar.register('time', __webpack_require__(5));
+	Debugbar.register('memory', __webpack_require__(6));
+	Debugbar.register('database', __webpack_require__(7));
+	Debugbar.register('request', __webpack_require__(8));
+	Debugbar.register('auth', __webpack_require__(9));
 
 	$(function () {
 
-	    new Debug().$appendTo('body');
+	    new Debugbar().$appendTo('body');
 
 	});
 
-	module.exports = Debug;
+	module.exports = Debugbar;
 
 
 /***/ },
