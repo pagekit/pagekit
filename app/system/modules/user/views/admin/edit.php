@@ -46,7 +46,7 @@
             <div class="uk-form-row">
                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
 
-                <div v-show="user.id" class="uk-form-controls uk-form-controls-text js-password">
+                <div class="uk-form-controls uk-form-controls-text js-password" v-show="user.id">
                     <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
                 </div>
 
@@ -62,7 +62,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p v-repeat="statuses" class="uk-form-controls-condensed">
+                    <p class="uk-form-controls-condensed" v-repeat="statuses">
                         <label><input type="radio" v-model="user.status" value="{{ $key }}" v-attr="disabled: config.currentUser == user.id"> {{ $value }}</label>
                     </p>
                 </div>
@@ -71,7 +71,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p v-repeat="role: roles" class="uk-form-controls-condensed">
+                    <p class="uk-form-controls-condensed" v-repeat="role: roles">
                         <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
                     </p>
                 </div>
@@ -83,14 +83,14 @@
             <div class="uk-panel uk-panel-divider uk-text-center">
 
                 <p>
-                    <img v-gravatar="user.email" class="uk-border-circle" height="150" width="150">
+                    <img class="uk-border-circle" height="150" width="150" v-gravatar="user.email">
                 </p>
-                <ul v-show="user.id" class="uk-list">
+                <ul class="uk-list" v-show="user.id">
                     <li v-if="user.isNew"><span class="uk-badge">{{ 'New' | trans }}</span></li>
                     <li v-if="!user.isNew"><span class="uk-badge uk-badge-{{ user.status ? 'success' : 'danger' }}">{{ statuses[user.status] }}</span></li>
 
                     <li>{{ user.name }} ({{ user.username }})</li>
-                    <li><a href="mailto:{{ user.email }}">{{ user.email }}</a><i v-show="config.emailVerification && user.data.verified" title="{{ 'Verified email address' | trans }}" class="uk-icon-check"></i></li>
+                    <li><a href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" title="{{ 'Verified email address' | trans }}" v-show="config.emailVerification && user.data.verified"></i></li>
                     <li>{{ $trans('Last login: %date%', { date: user.login ? $date(user.login, 'medium') : $trans('Never') }) }}</li>
                     <li>{{ $trans('Registered since: %date%', { date: $date(user.registered, 'medium') }) }}</li>
                 </ul>
