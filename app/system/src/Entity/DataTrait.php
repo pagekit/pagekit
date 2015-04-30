@@ -29,7 +29,7 @@ trait DataTrait
      */
     public function get($key, $default = null)
     {
-        return Arr::get($this->data, $key, $default);
+        return Arr::get((array) $this->data, $key, $default);
     }
 
     /**
