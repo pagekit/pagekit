@@ -1,26 +1,21 @@
-<form class="uk-form uk-form-horizontal" action="@url('@system/extensions/savesettings', ['name' => 'hello'])" method="post">
+<?php $view->script('settings', 'hello:assets/js/settings.js', 'system') ?>
+
+<div id="js-settings" class="uk-form uk-form-horizontal">
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
-
-            <h2 class="uk-margin-remove"><?= __('Edit Settings') ?></h2>
-
+            <h2 class="uk-margin-remove">{{ 'Edit Settings' | trans }}</h2>
         </div>
         <div data-uk-margin>
-
-            <button class="uk-button uk-button-primary" type="submit"><?= __('Save') ?></button>
-            <a class="uk-button" href="@url('@system/system')"><?= __('Close') ?></a>
-
+            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
         </div>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-hello-message" class="uk-form-label"><?= __('Message') ?></label>
+        <label class="uk-form-label">{{ 'Default name' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-hello-message" type="text" name="params[message]" value="@($params['message'])">
+            <input type="text" v-model="config.default">
         </div>
     </div>
 
-    <p><?= __('This settings page is just for demonstration purposes.') ?></p>
-
-</form>
+</div>

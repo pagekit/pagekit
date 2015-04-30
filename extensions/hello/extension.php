@@ -28,8 +28,8 @@ return [
 
     'config' => [
 
-        'settings.view' => 'hello:views/admin/settings.razr',
-        'message' => 'World'
+        // 'settings.view' => 'hello:views/admin/settings.razr',
+        'default' => 'World'
 
     ],
 
@@ -39,14 +39,21 @@ return [
             'label'  => 'Hello',
             'icon'   => 'extensions/hello/extension.svg',
             'url'    => '@hello',
-            'active' => '@hello*',
+            // 'access' => 'hello: manage hellos'
+        ],
+
+        'hello: index' => [
+            'label'  => 'Hello',
+            'icon'   => 'extensions/hello/extension.svg',
+            'url'    => '@hello',
+            'parent' => 'hello'
             // 'access' => 'hello: manage hellos'
         ],
 
         'hello: settings' => [
             'label'  => 'Settings',
             'url'    => '@hello/settings',
-            'parent' => '@hello',
+            'parent' => 'hello',
             // 'access' => 'hello: manage hellos'
         ]
 

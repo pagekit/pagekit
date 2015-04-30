@@ -19,14 +19,18 @@ class HelloController
 
     public function settingsAction()
     {
+        $config = App::module('hello')->config();
+
         return [
             '$view' => [
                 'title' => __('Hello Settings'),
                 'name'  => 'hello:views/admin/settings.php'
             ],
             '$data' => [
-                'config' => App::module('system/hello')->config()
-            ]
+                'config' => $config
+            ],
+
+            'config' => $config
         ];
     }
 }

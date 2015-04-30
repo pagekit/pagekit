@@ -9,13 +9,16 @@ use Pagekit\Application as App;
  */
 class SiteController
 {
+
     /**
-     * @Route("/", name="@hello/world")
-     * @Route("/{name}", name="@hello/name")
+     * @Route("/greet")
+     * @Route("/greet/{name}", name="site/greet/name")
      */
-    public function indexAction($name = "World")
+    public function greetAction($name='')
     {
-        $names = explode(',', $name);
+        $config = App::module('hello')->config();
+
+        $names = explode(',', $name ?: $config['message']);
 
         return [
             '$view' => [
@@ -27,11 +30,12 @@ class SiteController
     }
 
     /**
-     * @Route("/greet", name="@hello/greet/world")
-     * @Route("/greet/{name}", name="@hello/greet/name")
+     * @Route("/")
+     * @Route("/{name}")
      */
-    public function greetAction($name = 'World')
+    public function indexAction($name)
     {
+
         $names = explode(',', $name);
 
         return [
