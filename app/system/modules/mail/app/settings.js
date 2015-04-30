@@ -3,8 +3,6 @@ Vue.component('v-mail', {
     inherit: true,
     replace: true,
 
-    template: '#mail-tmpl',
-
     methods: {
 
         test: function (driver) {

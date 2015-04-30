@@ -1,7 +1,4 @@
-<div v-component="v-mail"></div>
-
-<script id="mail-tmpl" type="text/template">
-
+<div v-component="v-mail" inline-template>
     <h2 class="pk-form-heading">{{ 'Email' | trans }}</h2>
     <div class="uk-form-row">
         <label for="form-emailaddress" class="uk-form-label">{{ 'From Email' | trans }}</label>
@@ -70,5 +67,4 @@
             <button type="button" class="uk-button" v-on="click: test('email')">{{ 'Send Test Email' | trans }}</button>
         </div>
     </div>
-
-</script>
+</div>

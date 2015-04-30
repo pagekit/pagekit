@@ -1,6 +1,5 @@
-<div v-component="v-oauth"></div>
+<div v-component="v-oauth" inline-template>
 
-<script id="oauth-tmpl" type="text/template">
     <h2 class="pk-form-heading">{{ 'OAuth' | trans }}</h2>
     <div class="uk-button-dropdown" data-uk-dropdown>
         <div class="uk-button">{{ 'Add Service' | trans }} <i class="uk-icon-caret-down"></i></div>
@@ -41,4 +40,5 @@
             </br>
         </div>
     </div>
-</script>
+
+</div>

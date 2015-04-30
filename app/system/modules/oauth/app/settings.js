@@ -3,8 +3,6 @@ Vue.component('v-oauth', {
     inherit: true,
     replace: true,
 
-    template: '#oauth-tmpl',
-
     ready: function () {
 
         if (Vue.util.isArray(this.option['system/oauth'].provider)) {
