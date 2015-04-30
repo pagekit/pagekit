@@ -59,20 +59,6 @@ class PackageController
         ];
     }
 
-    public function marketplaceAction()
-    {
-        return [
-            '$view' => [
-                'title' => __('Marketplace'),
-                'name'  => 'system/package:views/marketplace.php'
-            ],
-            '$marketplace' => [
-                'api' => App::system()->config('api'),
-                'packages' => App::package()->getPackages()
-            ]
-        ];
-    }
-
     /**
      * @Request({"name"}, csrf=true)
      */

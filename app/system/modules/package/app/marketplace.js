@@ -5,8 +5,7 @@ jQuery(function ($) {
         el: '#marketplace',
 
         data: $.extend(window.$marketplace, {
-            search: '',
-            type: 'extension'
+            search: ''
         })
 
     });

@@ -48,6 +48,7 @@ return [
     'controllers' => [
 
         '@system: /system' => [
+            'Pagekit\\System\\Controller\\MarketplaceController',
             'Pagekit\\System\\Controller\\PackageController'
         ]
 
@@ -66,8 +67,20 @@ return [
         'system: marketplace' => [
             'label'    => 'Marketplace',
             'icon'     => 'system/package:assets/images/icon-marketplace.svg',
-            'url'      => '@system/package/marketplace',
+            'url'      => '@system/marketplace/extensions',
             'priority' => 15
+        ],
+
+        'system: marketplace extensions' => [
+            'label'    => 'Extensions',
+            'parent'   => 'system: marketplace',
+            'url'      => '@system/marketplace/extensions'
+        ],
+
+        'system: marketplace themes' => [
+            'label'    => 'Themes',
+            'parent'   => 'system: marketplace',
+            'url'      => '@system/marketplace/themes'
         ],
 
         'system: extensions' => [

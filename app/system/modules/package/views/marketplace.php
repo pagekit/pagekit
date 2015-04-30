@@ -5,20 +5,13 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ 'Marketplace' | trans }}</h2>
+            <h2 class="uk-margin-remove">{{ title | trans }}</h2>
 
         </div>
         <div data-uk-margin>
 
             <form class="uk-form">
-
                 <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search" debounce="300">
-
-                <select v-model="type">
-                    <option value="extension">{{ 'Extensions' | trans }}</option>
-                    <option value="theme">{{ 'Themes' | trans }}</option>
-                </select>
-
             </form>
 
         </div>
