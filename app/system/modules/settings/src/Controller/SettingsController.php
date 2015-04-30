@@ -45,7 +45,7 @@ class SettingsController
     /**
      * @Request({"config": "array", "option": "array"}, csrf=true)
      */
-    public function saveAction($config, $option)
+    public function saveAction($config = [], $option = [])
     {
         $option = new \ArrayObject($option);
 
@@ -69,6 +69,6 @@ class SettingsController
             opcache_invalidate($this->configFile);
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 }
