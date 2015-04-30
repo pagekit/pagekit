@@ -19,7 +19,7 @@
             <li>
                 <h2>{{ 'System' | trans }}</h2>
                 <div class="uk-overflow-container">
-                    <table class="uk-table uk-table-striped">
+                    <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
                                 <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
@@ -46,7 +46,7 @@
             <li>
                 <h2>{{ 'PHP' | trans }}</h2>
                 <div class="uk-overflow-container">
-                    <table class="uk-table uk-table-striped">
+                    <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
                                 <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
@@ -77,7 +77,7 @@
             <li>
                 <h2>{{ 'Database' | trans }}</h2>
                 <div class="uk-overflow-container">
-                    <table class="uk-table uk-table-striped">
+                    <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
                                 <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
@@ -104,7 +104,7 @@
             <li>
                 <h2>{{ 'Permisssion' | trans }}</h2>
                 <div class="uk-overflow-container">
-                    <table class="uk-table uk-table-striped">
+                    <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
                                 <th>{{ 'Path' | trans }}</th>
