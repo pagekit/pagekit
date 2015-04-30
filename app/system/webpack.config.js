@@ -3,7 +3,6 @@ var assets = __dirname + "/../../vendor/assets";
 module.exports = [
 
   {
-    context: __dirname,
     entry: {
       "app/bundle/system": "./app/system",
       "modules/editor/app/bundle/editor": "./modules/editor/app/editor",
@@ -14,7 +13,6 @@ module.exports = [
       "modules/package/app/bundle/upload": "./modules/package/app/components/upload.vue"
     },
     output: {
-      path: __dirname,
       filename: "./[name].js"
     },
     externals: {
@@ -32,12 +30,10 @@ module.exports = [
   },
 
   {
-    context: __dirname,
     entry: {
       "globalize": "./app/globalize"
     },
     output: {
-      path: __dirname,
       filename: "./app/bundle/[name].js",
       library: "Globalize"
     },
