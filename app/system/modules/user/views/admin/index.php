@@ -5,7 +5,7 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ count + ' Users' | trans }}</h2><!-- TODO: User Count -->
+            <h2 class="uk-margin-remove">{{ count + ' Users' | trans }}</h2>
 
             <div class="uk-margin-left" v-show="selected.length">
                 <a class="uk-icon-hover uk-icon-small uk-icon-trash-o uk-margin-small-right" v-on="click: remove"></a>
