@@ -14,7 +14,7 @@ class Arr
      * @param  string $key
      * @return bool
      */
-    public static function has($array, $key)
+    public static function has(array $array, $key)
     {
         if (!$array || $key === null) {
             return false;
@@ -46,7 +46,7 @@ class Arr
      * @param  mixed  $default
      * @return mixed
      */
-    public static function get($array, $key, $default = null)
+    public static function get(array $array, $key, $default = null)
     {
         if ($key === null) {
             return $array;
@@ -78,7 +78,7 @@ class Arr
      * @param  mixed  $value
      * @return array
      */
-    public static function set(&$array, $key, $value)
+    public static function set(array &$array, $key, $value)
     {
         if ($key === null) {
             return $array = $value;
@@ -108,7 +108,7 @@ class Arr
      * @param array        $array
      * @param array|string $keys
      */
-    public static function remove(&$array, $keys)
+    public static function remove(array &$array, $keys)
     {
         $original =& $array;
 
@@ -139,7 +139,7 @@ class Arr
      * @param  bool  $strict
      * @return array
      */
-    public static function pull(&$array, $value, $strict = false)
+    public static function pull(array &$array, $value, $strict = false)
     {
         if ($keys = array_keys($array, $value, $strict)) {
 
@@ -161,7 +161,7 @@ class Arr
      * @param  bool  $replace
      * @return array
      */
-    public static function merge($array1, $array2, $replace = false)
+    public static function merge(array $array1, array $array2, $replace = false)
     {
         if ($replace) {
             return array_replace_recursive($array1, $array2);
@@ -194,7 +194,7 @@ class Arr
      * @param  int      $flag
      * @return array
      */
-    public static function filter($array, callable $callback, $flag = 1)
+    public static function filter(array $array, callable $callback, $flag = 1)
     {
         if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
             return array_filter($array, $callback, $flag);
@@ -223,13 +223,40 @@ class Arr
     }
 
     /**
+     * Extracts values by keys.
+     *
+     * @param  array $data
+     * @param  array $keys
+     * @return array
+     */
+    public static function extract(array $data, array $keys = null)
+    {
+        if (!$keys) {
+            return $data;
+        }
+
+        $data = self::flatten($data);
+
+        $result = [];
+        foreach ($data as $keypath => $value) {
+            foreach ($keys as $key) {
+                if (0 === strpos($keypath, $key)) {
+                    $result[$keypath] = $value;
+                }
+            }
+        }
+
+        return self::expand($result);
+    }
+
+    /**
      * Flattens an array.
      *
      * @param  array $array
      * @param  string $path
      * @return array
      */
-    public static function flatten($array, $path = '')
+    public static function flatten(array $array, $path = '')
     {
         $results = [];
 
@@ -250,7 +277,7 @@ class Arr
      * @param  array $array
      * @return array
      */
-    public static function expand($array)
+    public static function expand(array $array)
     {
         $result = [];
 

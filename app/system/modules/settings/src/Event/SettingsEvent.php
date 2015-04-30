@@ -42,7 +42,7 @@ class SettingsEvent extends Event
      */
     public function options($name, array $data, array $keys = null)
     {
-        if ($data = $this->filter($data, $keys)) {
+        if ($data = Arr::extract($data, $keys)) {
             $this->data('option', [$name => $data]);
         }
     }
@@ -56,7 +56,7 @@ class SettingsEvent extends Event
      */
     public function config($name, array $data, array $keys = null)
     {
-        if ($data = $this->filter($data, $keys)) {
+        if ($data = Arr::extract($data, $keys)) {
             $this->data('config', [$name => $data]);
         }
     }
@@ -70,35 +70,8 @@ class SettingsEvent extends Event
      */
     public function data($name, $data, array $keys = null)
     {
-        if ($data = is_array($data) ? $this->filter($data, $keys) : $data) {
+        if ($data = is_array($data) ? Arr::extract($data, $keys) : $data) {
             App::view()->data('$settings', [$name => $data]);
         }
-    }
-
-    /**
-     * Filters data by keys.
-     *
-     * @param  array $data
-     * @param  array $keys
-     * @return array
-     */
-    protected function filter(array $data, array $keys = null)
-    {
-        if (!$keys) {
-            return $data;
-        }
-
-        $data = Arr::flatten($data);
-
-        $result = [];
-        foreach ($data as $keypath => $value) {
-            foreach ($keys as $key) {
-                if (0 === strpos($keypath, $key)) {
-                    $result[$keypath] = $value;
-                }
-            }
-        }
-
-        return Arr::expand($result);
     }
 }
