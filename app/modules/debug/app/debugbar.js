@@ -8,6 +8,7 @@ Debugbar.register('memory', require('./components/memory.vue'));
 Debugbar.register('database', require('./components/database.vue'));
 Debugbar.register('request', require('./components/request.vue'));
 Debugbar.register('auth', require('./components/auth.vue'));
+Debugbar.register('log', require('./components/log.vue'));
 
 $(function () {
 

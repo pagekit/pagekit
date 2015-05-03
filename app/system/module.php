@@ -26,14 +26,10 @@ return [
         $app['system'] = $this;
 
         foreach ($this->config['extensions'] as $module) {
-
             try {
-
                 $app['module']->load($module);
-
             } catch (\RuntimeException $e) {
-
-                // TODO log exception
+                $app['log']->warn("Unable to load extension: $module");
             }
         }
     },

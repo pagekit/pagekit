@@ -55,6 +55,7 @@ var Debugbar =
 	Debugbar.register('database', __webpack_require__(7));
 	Debugbar.register('request', __webpack_require__(8));
 	Debugbar.register('auth', __webpack_require__(9));
+	Debugbar.register('log', __webpack_require__(10));
 
 	$(function () {
 
@@ -70,8 +71,8 @@ var Debugbar =
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<div id=\"pk-profiler\" class=\"pf-profiler\">\n\n        <div class=\"pf-navbar\">\n\n            <ul class=\"pf-navbar-nav\" v-repeat=\"navbar | orderBy 'priority'\">\n                <li v-html=\"html\" v-on=\"click: open(panel)\"></li>\n            </ul>\n\n            <a class=\"pf-close\" v-on=\"click: close\"></a>\n\n        </div>\n\n        <div v-repeat=\"panels\">\n            <div class=\"pf-profiler-panel\" v-style=\"\n                display: $value === panel ? 'block' : 'none',\n                height: height\n            \" v-component=\"{{ $value }}\" v-with=\"data[$value]\"></div>\n        </div>\n\n    </div>";
-	var $ = __webpack_require__(10);
-	    var Vue = __webpack_require__(11);
+	var $ = __webpack_require__(11);
+	    var Vue = __webpack_require__(12);
 	    var config = window.$debugbar;
 
 	    module.exports = Vue.extend({
@@ -292,10 +293,25 @@ var Debugbar =
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = jQuery;
+	var __vue_template__ = "<h1>Logs</h1>\n\n    <table class=\"pf-table\">\n        <thead>\n            <tr>\n                <th>Message</th>\n                <th>Level</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr v-repeat=\"records\">\n                <td>{{ message }}</td>\n                <td>{{ level_name }}</td>\n            </tr>\n        </tbody>\n    </table>";
+	module.exports = {
+
+	    ready: function () {
+	      this.$parent.add(this, '<a title="Log">Log ({{ records.length }})</a>', {priority: 70, panel: 'log'});
+	    }
+
+	  };
+	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
+
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = jQuery;
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;

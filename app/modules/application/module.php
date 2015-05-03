@@ -48,6 +48,7 @@ return [
         'filesystem',
         'filter',
         'intl',
+        'log',
         'session',
         'view'
 
