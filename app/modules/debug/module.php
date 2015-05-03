@@ -1,12 +1,10 @@
 <?php
 
-use DebugBar\DataCollector\DataCollectorInterface;
 use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use Pagekit\Debug\DebugBar;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
 use Pagekit\Debug\DataCollector\DatabaseDataCollector;
-use Pagekit\Debug\DataCollector\LogDataCollector;
 use Pagekit\Debug\DataCollector\RoutesDataCollector;
 use Pagekit\Debug\DataCollector\SystemDataCollector;
 use Pagekit\Debug\Storage\SqliteStorage;
