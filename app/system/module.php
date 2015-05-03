@@ -25,7 +25,17 @@ return [
 
         $app['system'] = $this;
 
-        $app['module']->load($this->config['extensions']);
+        foreach ($this->config['extensions'] as $module) {
+
+            try {
+
+                $app['module']->load($module);
+
+            } catch (\RuntimeException $e) {
+
+                // TODO log exception
+            }
+        }
     },
 
     'boot' => function ($app) {

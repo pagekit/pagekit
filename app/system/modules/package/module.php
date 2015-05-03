@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\Package\PackageManager;
 use Pagekit\System\ExtensionRepository;
 use Pagekit\System\ThemeRepository;
+use Pagekit\System\Package\PackageManager;
 
 return [
 
@@ -12,8 +12,8 @@ return [
 
         $app['package'] = function ($app) {
             return (new PackageManager)
-                ->addRepository('extension', new ExtensionRepository($app['path.extensions']))
-                ->addRepository('theme', new ThemeRepository($app['path.themes']));
+                ->addPath($app['path.extensions'].'/*/extension.json')
+                ->addPath($app['path.themes'].'/*/theme.json');
         };
 
         $app->on('app.request', function () use ($app) {

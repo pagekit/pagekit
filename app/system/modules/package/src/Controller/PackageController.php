@@ -5,26 +5,31 @@ namespace Pagekit\System\Controller;
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
-use Pagekit\Package\Downloader\PackageDownloader;
-use Pagekit\Package\Exception\ArchiveExtractionException;
-use Pagekit\Package\Exception\ChecksumVerificationException;
-use Pagekit\Package\Exception\DownloadErrorException;
-use Pagekit\Package\Exception\NotWritableException;
-use Pagekit\Package\Exception\UnauthorizedDownloadException;
-use Pagekit\Package\Loader\JsonLoader;
 use Pagekit\System\Extension;
+use Pagekit\System\Package\PackageDownloader;
+use Pagekit\System\Package\PackageInstaller;
 
 /**
  * @Access("system: manage packages", admin=true)
  */
 class PackageController
 {
+    protected $installer;
+
+    public function __construct()
+    {
+        $client = new Client;
+        $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
+
+        $this->installer = new PackageInstaller($client);
+    }
+
     public function themesAction()
     {
-        $packages = App::package()->getRepository('theme')->getPackages();
+        $packages = App::package()->all('theme');
 
         foreach ($packages as $package) {
-            $package->enabled = App::module($package->getName()) != null;
+            $package->set('enabled', App::module($package->getName()) != null);
         }
 
         return [
@@ -41,10 +46,10 @@ class PackageController
 
     public function extensionsAction()
     {
-        $packages = App::package()->getRepository('extension')->getPackages();
+        $packages = App::package()->all('extension');
 
         foreach ($packages as $package) {
-            $package->enabled = App::module($package->getName()) != null;
+            $package->set('enabled', App::module($package->getName()) != null);
         }
 
         return [
@@ -66,7 +71,7 @@ class PackageController
     {
         $handler = $this->errorHandler($name);
 
-        if (!$package = App::package()->findPackage($name)) {
+        if (!$package = App::package($name)) {
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
@@ -102,7 +107,7 @@ class PackageController
      */
     public function disableAction($name)
     {
-        if (!$package = App::package()->findPackage($name)) {
+        if (!$package = App::package($name)) {
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
@@ -173,15 +178,9 @@ class PackageController
 
             $temp = App::get('path.temp');
 
-            if ($package !== null && isset($package['dist'])) {
-
+            if ($package = App::package()->load($package)) {
                 $path = sha1(json_encode($package));
-
-                $client = new Client;
-                $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
-
-                $downloader = new PackageDownloader($client);
-                $downloader->downloadFile("{$temp}/{$path}", $package['dist']['url'], $package['dist']['shasum']);
+                $this->installer->download($package, "{$temp}/{$path}");
             }
 
             if (!$path) {
@@ -190,24 +189,16 @@ class PackageController
 
             $package = $this->loadPackage($path = "{$temp}/{$path}");
 
+            if ($package->getType() == 'extension') {
+                $this->installer->install($package, App::get('path.extensions'));
+            }
+
             if ($package->getType() == 'theme') {
-                $this->installTheme("$path/theme.json", $package);
-            } else {
-                $this->installExtension("$path/extension.json", $package);
+                $this->installer->install($package, App::get('path.themes'));
             }
 
             App::module('system/cache')->clearCache();
 
-        } catch (ArchiveExtractionException $e) {
-            $error = __('Package extraction failed.');
-        } catch (ChecksumVerificationException $e) {
-            $error = __('Package checksum verification failed.');
-        } catch (UnauthorizedDownloadException $e) {
-            $error = __('Invalid API key.');
-        } catch (DownloadErrorException $e) {
-            $error = __('Package download failed.');
-        } catch (NotWritableException $e) {
-            $error = __('Path is not writable.');
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
@@ -228,7 +219,7 @@ class PackageController
      */
     public function uninstallAction($name)
     {
-        if (!$package = App::package()->findPackage($name)) {
+        if (!$package = App::package($name)) {
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
@@ -250,41 +241,11 @@ class PackageController
             App::config('system')->pull('extensions', $name);
         }
 
-        App::package()->getInstaller($type)->uninstall($package);
+        $this->installer->uninstall($package);
+
         App::module('system/cache')->clearCache();
 
         return ['message' => __('%name% uninstalled.', ['%name%' => $name])];
-    }
-
-    protected function installTheme($json, $package)
-    {
-        $installer = App::package()->getInstaller('theme');
-
-        if ($installer->isInstalled($package)) {
-            $installer->update($json);
-        } else {
-            $installer->install($json);
-        }
-    }
-
-    protected function installExtension($json, $package)
-    {
-        $name = $package->getName();
-
-        $installer = App::package()->getInstaller('extension');
-        $extension = App::module($name);
-
-        if ($installer->isInstalled($package)) {
-
-            if (isset($extension)) {
-               $extension->disable();
-            }
-
-            $installer->update($json);
-
-        } else {
-            $installer->install($json);
-        }
     }
 
     protected function loadPackage($file)
@@ -306,11 +267,7 @@ class PackageController
             }
 
             if (isset($json) && $json) {
-
-                $loader  = new JsonLoader;
-                $package = $loader->load($json);
-
-                return $package;
+                return App::package()->load($json);
             }
 
             App::abort(400);

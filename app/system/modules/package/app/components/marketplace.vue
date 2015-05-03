@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <p class="uk-alert uk-alert-info" v-show="!packages.length">{{ 'No extensions found.' | trans }}</p>
+        <p class="uk-alert uk-alert-info" v-show="!packages.length">{{ 'Nothing found.' | trans }}</p>
         <p class="uk-alert uk-alert-warning" v-show="status == 'error'">{{ 'Cannot connect to the marketplace. Please try again later.' | trans }}</p>
 
     </div>
