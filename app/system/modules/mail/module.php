@@ -80,13 +80,13 @@ return [
             }
         });
 
-        $app->on('system.settings.edit', function ($event) use ($app) {
+        $app->on('view.system:modules/settings/views/settings.php', function ($event, $tmpl, $view) use ($app) {
 
-            $app['view']->script('settings-mail', 'app/system/modules/mail/app/settings.js', 'settings');
+            $view->script('settings-mail', 'app/system/modules/mail/app/bundle/settings.js', 'settings');
 
-            $event->options($this->name, $this->config);
-            $event->data('ssl', extension_loaded('openssl'));
-            $event->section($this->name, 'Mail', 'app/system/modules/mail/views/settings.php');
+            $view->data('$mail', ['ssl' => extension_loaded('openssl')]);
+            $view->data('$settings', [ 'options' => [ $this->name => $this->config ]]);
+
         });
 
     },

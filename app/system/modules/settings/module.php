@@ -6,7 +6,7 @@ return [
 
     'main' => function ($app) {
 
-        $app->on('system.settings.edit', function ($event, $config) use ($app) {
+        $app->on('view.system:modules/settings/views/settings.php', function ($event, $tmpl, $view) use ($app) {
 
             $locales = [];
 
@@ -40,23 +40,18 @@ return [
                 $timezones[$region][$timezone] = str_replace('_', ' ', $name);
             }
 
-            $event->data('locales', $locales);
-            $event->data('timezones', $timezones);
-            $event->data('config', $config, ['application.debug', 'debug.enabled', 'system.storage']);
-            $event->data('sqlite', class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true)));
+            $view->data('$system', [
+                'locales' => $locales,
+                'timezones' => $timezones,
+                'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
+            ]);
 
-            $event->options('system', $app['config']->get('system')->toArray());
-            $event->section('site', 'Site', 'app/system/modules/settings/views/site.php');
-            $event->section('system', 'System', 'app/system/modules/settings/views/system.php');
-            $event->section('system/locale', 'Localization', 'app/system/modules/settings/views/locale.php');
-
-        }, 8);
-
-        $app->on('system.settings.save', function ($event, $config) use ($app) {
-
-            if ($config['application.debug'] != $app['module']['application']->config('debug')) {
-                $app['module']['system/cache']->clearCache();
-            }
+            $view->data('$settings', [ 'options' => [ 'system' => $app['config']->get('system')->extract(['api.', 'site.', 'admin.', 'maintenance.', 'timezone', 'release_channel']) ]]);
+            $view->data('$settings', [ 'config' => [
+                'system' => $app['config']->get('system')->extract(['storage']),
+                'application' => ['debug' => $app['module']->get('application')->config('debug')],
+                'debug' => ['enabled' => $app['module']->get('debug')->config('enabled')]
+            ]]);
 
         });
 

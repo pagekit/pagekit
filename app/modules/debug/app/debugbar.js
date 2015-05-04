@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var Debugbar = require('./debugbar.vue');
 
 Debugbar.register('system', require('./components/system.vue'));

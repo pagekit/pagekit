@@ -1,64 +1,77 @@
-jQuery(function ($) {
+var $ = require('jquery');
+var _ = require('lodash');
+var UIkit = require('uikit');
 
-    var locale = {
+var Settings = Vue.extend({
 
-        inherit: true,
-        replace: true,
+    data: function () {
+        return _.merge({
 
-        ready: function() {
+            sections: [],
+            labels: [],
+            config: {},
+            options: {}
 
-            var changed = false;
+        }, window.$settings)
+    },
 
-            this.$watch('adminLocale', function() {
-                changed = true;
-            }, true);
+    created: function () {
 
-            this.$on('save', function() {
-                if (changed) {
-                    window.location.reload();
-                }
-            }, true);
+        var self = this;
 
-        },
+        _(this.$options.components).pairs()
+            .filter(function(component) {
+                return component[1].options.isSection;
+            }).sortBy(function(component) {
+                return component[1].options.priority;
+            }).value().forEach(function(component) {
+                self.labels.push(component[1].options.label);
+                self.sections.push(component[0]);
+            });
+    },
 
-        computed: {
+    ready: function() {
 
-            adminLocale: function() {
-                return this.option.system.admin.locale;
-            }
+        UIkit.tab(this.$$.tab, { connect: this.$$.content})
+
+    },
+
+    methods: {
+
+        save: function(e) {
+
+            e.preventDefault();
+
+            var self = this;
+
+            this.$broadcast('save', this.$data);
+
+            this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
+                UIkit.notify(self.$trans('Settings saved.'));
+
+                self.$broadcast('saved');
+            });
 
         }
 
-    };
-
-    var vm = new Vue({
-
-        el: '#settings',
-
-        data: $.extend({ config: {}, option: {} }, window.$settings),
-
-        methods: {
-
-            save: function(e) {
-
-                e.preventDefault();
-
-                var data = $(":input", e.target).serialize().parse();
-
-                this.$resource('admin/system/settings/save').save({ config: $.extend(data.config, this.config), option: $.extend(data.option, this.option) }, function() {
-
-                    UIkit.notify(vm.$trans('Settings saved.'));
-                    vm.$broadcast('save');
-                });
-
-            }
-
-        },
-
-        components: {
-            'v-locale': locale
-        }
-
-    });
+    }
 
 });
+
+Settings.register = function (name, options) {
+    options.isSection = true;
+    this.options.components[name] = Vue.extend(options);
+};
+
+Settings.register('site', require('./components/site.vue'));
+Settings.register('system', require('./components/system.vue'));
+Settings.register('locale', require('./components/locale.vue'));
+
+$(function () {
+
+    var settings = new Settings();
+    settings.$mount('#settings');
+
+});
+
+module.exports = Settings;

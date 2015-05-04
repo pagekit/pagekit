@@ -1,4 +1,4 @@
-<div v-component="v-oauth" inline-template>
+<template>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
@@ -17,7 +17,7 @@
         <div class="uk-button">{{ 'Add Service' | trans }} <i class="uk-icon-caret-down"></i></div>
         <div class="uk-dropdown uk-dropdown-scrollable">
             <ul class="uk-nav uk-nav-dropdown" id="oauth-service-dropdown">
-                <li id="{{ $value }}_link" v-repeat="oauth | configured">
+                <li id="{{ $value }}_link" v-repeat="providers | configured">
                     <a href="#" v-on="click: addProvider($value)">{{ $value }}</a>
                 </li>
             </ul>
@@ -28,9 +28,7 @@
 
     <div id="oauth-service-list" class="uk-form-row">
 
-        <input type="hidden" name="option[system/oauth]" value="">
-
-        <div id="{{ $key }}-container" v-repeat="provider: option['oauth'].provider">
+        <div id="{{ $key }}-container" v-repeat="provider: options.provider">
 
             <h2>{{ $key }}</h2>
             <a class="uk-close uk-close-alt uk-float-right" href="#" v-on="click: removeProvider($key)"></a>
@@ -53,4 +51,64 @@
 
     </div>
 
-</div>
+</template>
+
+<script>
+
+    var Settings = require('settings');
+
+    module.exports = {
+
+        label: 'OAuth',
+        priority: 50,
+
+        data: function() {
+            return window.$oauth
+        },
+
+        template: __vue_template__,
+
+        ready: function () {
+
+            if (Vue.util.isArray(this.options.provider)) {
+                this.options.$delete('provider');
+                this.options.$add('provider', {});
+            }
+
+            this.providers.sort();
+        },
+
+        methods: {
+
+            addProvider: function (provider) {
+                this.options.provider.$add(provider, {'client_id': '', 'client_secret': ''});
+            },
+
+            removeProvider: function (provider) {
+                this.options.provider.$delete(provider);
+            }
+
+        },
+
+        filters: {
+
+            configured: function (services) {
+
+                var results = [], self = this;
+
+                services.forEach(function (service) {
+                    if (!self.options.provider.hasOwnProperty(service)) {
+                        results.push(service);
+                    }
+                });
+
+                return results;
+            }
+
+        }
+
+    };
+
+    Settings.register('system/oauth', module.exports);
+
+</script>

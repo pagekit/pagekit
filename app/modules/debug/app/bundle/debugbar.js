@@ -45,17 +45,18 @@ var Debugbar =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Debugbar = __webpack_require__(1);
+	var $ = __webpack_require__(1);
+	var Debugbar = __webpack_require__(2);
 
-	Debugbar.register('system', __webpack_require__(2));
-	Debugbar.register('routes', __webpack_require__(3));
-	Debugbar.register('events', __webpack_require__(4));
-	Debugbar.register('time', __webpack_require__(5));
-	Debugbar.register('memory', __webpack_require__(6));
-	Debugbar.register('database', __webpack_require__(7));
-	Debugbar.register('request', __webpack_require__(8));
-	Debugbar.register('auth', __webpack_require__(9));
-	Debugbar.register('log', __webpack_require__(10));
+	Debugbar.register('system', __webpack_require__(3));
+	Debugbar.register('routes', __webpack_require__(4));
+	Debugbar.register('events', __webpack_require__(5));
+	Debugbar.register('time', __webpack_require__(6));
+	Debugbar.register('memory', __webpack_require__(7));
+	Debugbar.register('database', __webpack_require__(8));
+	Debugbar.register('request', __webpack_require__(9));
+	Debugbar.register('auth', __webpack_require__(10));
+	Debugbar.register('log', __webpack_require__(11));
 
 	$(function () {
 
@@ -70,8 +71,14 @@ var Debugbar =
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = jQuery;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_template__ = "<div id=\"pk-profiler\" class=\"pf-profiler\">\n\n        <div class=\"pf-navbar\">\n\n            <ul class=\"pf-navbar-nav\" v-repeat=\"navbar | orderBy 'priority'\">\n                <li v-html=\"html\" v-on=\"click: open(panel)\"></li>\n            </ul>\n\n            <a class=\"pf-close\" v-on=\"click: close\"></a>\n\n        </div>\n\n        <div v-repeat=\"panels\">\n            <div class=\"pf-profiler-panel\" v-style=\"\n                display: $value === panel ? 'block' : 'none',\n                height: height\n            \" v-component=\"{{ $value }}\" v-with=\"data[$value]\"></div>\n        </div>\n\n    </div>";
-	var $ = __webpack_require__(11);
+	var $ = __webpack_require__(1);
 	    var Vue = __webpack_require__(12);
 	    var config = window.$debugbar;
 
@@ -144,12 +151,12 @@ var Debugbar =
 
 	    module.exports.register = function (name, options) {
 	        this.options.components[name] = Vue.extend(options);
-	    }
+	    };
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<h1>Information</h1>\n\n    <h2>System</h2>\n    <table class=\"pf-table pf-table-dropdown\">\n        <tbody>\n            <tr>\n                <td>Pagekit</td>\n                <td>{{ version }}</td>\n            </tr>\n            <tr>\n                <td>Server</td>\n                <td>{{ server }}</td>\n            </tr>\n            <tr>\n                <td>Useragent</td>\n                <td>{{ useragent }}</td>\n            </tr>\n        </tbody>\n    </table>\n\n    <h2>PHP</h2>\n    <table class=\"pf-table pf-table-dropdown\">\n        <tbody>\n            <tr>\n                <td>PHP</td>\n                <td>{{ phpversion }}</td>\n            </tr>\n            <tr>\n                <td>PHP SAPI</td>\n                <td>{{ sapi_name }}</td>\n            </tr>\n            <tr>\n                <td>System</td>\n                <td>{{ php }}</td>\n            </tr>\n            <tr>\n                <td>Extensions</td>\n                <td>{{ extensions }}</td>\n            </tr>\n        </tbody>\n    </table>\n\n    <h2>Database</h2>\n    <table class=\"pf-table pf-table-dropdown\">\n        <tbody>\n            <tr>\n                <td>Driver</td>\n                <td>{{ dbdriver }}</td>\n            </tr>\n            <tr>\n                <td>Version</td>\n                <td>{{ dbversion }}</td>\n            </tr>\n            <tr>\n                <td>Client</td>\n                <td>{{ dbclient }}</td>\n            </tr>\n        </tbody>\n    </table>";
@@ -164,7 +171,7 @@ var Debugbar =
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<h1>Routes</h1>\n\n    <table class=\"pf-table\">\n        <thead>\n            <tr>\n                <th>Name</th>\n                <th>Pattern</th>\n                <th>Controller</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr v-repeat=\"routes\">\n                <td>{{ name }}</td>\n                <td>{{ pattern }} {{ methods | str }}</td>\n                <td><abbr title=\"{{ controller }}\">{{ controller | short }}</abbr></td>\n            </tr>\n        </tbody>\n    </table>";
@@ -191,7 +198,7 @@ var Debugbar =
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "";
@@ -205,7 +212,7 @@ var Debugbar =
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "";
@@ -219,7 +226,7 @@ var Debugbar =
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "";
@@ -233,7 +240,7 @@ var Debugbar =
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<h1>Queries</h1>\n\n    <p v-show=\"!nb_statements\">\n        <em>No queries.</em>\n    </p>\n\n    <div v-repeat=\"statements\">\n\n        <pre><code>{{ sql }}</code></pre>\n\n        <p class=\"pf-submenu\">\n            <span>{{ duration_str }}</span>\n            <span>{{ params | json }}</span>\n        </p>\n\n    </div>\n\n    <div v-el=\"navbar\" style=\"display: none\">\n\n        <a title=\"Database\" class=\"pf-parent\">\n            <div class=\"pf-icon pf-icon-database\"></div> {{ nb_statements }}\n        </a>\n\n        <div class=\"pf-dropdown\">\n\n            <table class=\"pf-table pf-table-dropdown\">\n                <tbody>\n                    <tr>\n                        <td>Queries</td>\n                        <td>{{ nb_statements }}</td>\n                    </tr>\n                    <tr>\n                        <td>Time</td>\n                        <td>{{ accumulated_duration_str }}</td>\n                    </tr>\n                    <tr>\n                        <td>Driver</td>\n                        <td>{{ driver }}</td>\n                    </tr>\n                </tbody>\n            </table>\n\n        </div>\n\n    </div>";
@@ -248,7 +255,7 @@ var Debugbar =
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "";
@@ -262,7 +269,7 @@ var Debugbar =
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<div v-el=\"navbar\" style=\"display: none\">\n\n        <a title=\"User\"><div class=\"pf-icon pf-icon-auth\" v-class=\"pf-parent: user\"></div> {{ label }}</a>\n\n        <div class=\"pf-dropdown\" v-show=\"user\">\n\n            <table class=\"pf-table pf-table-dropdown\">\n                <tbody>\n                    <tr>\n                        <td>Username</td>\n                        <td>{{ user }}</td>\n                    </tr>\n                    <tr>\n                        <td>Roles</td>\n                        <td>{{ roles | json }}</td>\n                    </tr>\n                    <tr>\n                        <td>Authenticated</td>\n                        <td>{{ authenticated ? 'yes' : 'no' }}</td>\n                    </tr>\n                    <tr>\n                        <td>Class</td>\n                        <td>{{ user_class }}</td>\n                    </tr>\n                </tbody>\n            </table>\n\n        </div>\n\n    </div>";
@@ -290,7 +297,7 @@ var Debugbar =
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<h1>Logs</h1>\n\n    <table class=\"pf-table\">\n        <thead>\n            <tr>\n                <th>Message</th>\n                <th>Level</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr v-repeat=\"records\">\n                <td>{{ message }}</td>\n                <td>{{ level_name }}</td>\n            </tr>\n        </tbody>\n    </table>";
@@ -303,12 +310,6 @@ var Debugbar =
 	  };
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = jQuery;
 
 /***/ },
 /* 12 */
