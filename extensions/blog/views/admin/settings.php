@@ -31,7 +31,7 @@
             <ul id="tab-content" class="uk-switcher uk-margin">
                 <li>
 
-                    <h2 class="pk-form-heading">{{ 'General' | trans }}</h2>
+                    <h2>{{ 'General' | trans }}</h2>
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Permalink' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
@@ -96,7 +96,7 @@
                 </li>
                 <li>
 
-                    <h2 class="pk-form-heading">{{ 'Comments' | trans }}</h2>
+                    <h2>{{ 'Comments' | trans }}</h2>
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Comments' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
