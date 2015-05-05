@@ -46,12 +46,14 @@ return [
                 'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
             ]);
 
-            $view->data('$settings', [ 'options' => [ 'system' => $app['config']->get('system')->extract(['api.', 'site.', 'admin.', 'maintenance.', 'timezone', 'release_channel']) ]]);
-            $view->data('$settings', [ 'config' => [
-                'system' => $app['config']->get('system')->extract(['storage']),
-                'application' => ['debug' => $app['module']->get('application')->config('debug')],
-                'debug' => ['enabled' => $app['module']->get('debug')->config('enabled')]
-            ]]);
+            $view->data('$settings', [
+                'options' => [ 'system' => $app['system']->config->extract(['api.', 'site.', 'admin.', 'maintenance.', 'timezone', 'release_channel']) ],
+                'config' => [
+                    'system' => $app['system']->config->extract(['storage']),
+                    'application' => $app['module']->get('application')->config->extract(['debug']),
+                    'debug' => $app['module']->get('debug')->config->extract(['enabled'])
+                ]
+            ]);
 
         });
 

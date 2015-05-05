@@ -44,9 +44,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(9);
-	__webpack_require__(10);
-	__webpack_require__(11);
+	__webpack_require__(4);
+	__webpack_require__(5);
+	__webpack_require__(6);
 
 	function install (Vue) {
 
@@ -229,12 +229,7 @@
 	module.exports = Vue;
 
 /***/ },
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -364,7 +359,7 @@
 
 
 /***/ },
-/* 10 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -446,7 +441,7 @@
 
 
 /***/ },
-/* 11 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -491,6 +486,11 @@
 
 
 /***/ },
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */

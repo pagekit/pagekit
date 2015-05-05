@@ -51,10 +51,6 @@ return [
             $widgets->registerType(new UserWidget());
         });
 
-        if (!$app['config']->get('system/user')) {
-            $app['config']->set('system/user', [], true);
-        }
-
     },
 
     'autoload' => [

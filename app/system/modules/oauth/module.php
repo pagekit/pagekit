@@ -14,7 +14,7 @@ return [
 
         $app->on('view.system:modules/settings/views/settings.php', function ($event, $tmpl, $view) use ($app) {
 
-            $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
+            //$view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
 
             $view->data('$settings', [ 'options' => [ $this->name => $this->config ]]);
             $view->data('$oauth', [

@@ -9,7 +9,7 @@ var Settings = Vue.extend({
 
             sections: [],
             labels: [],
-            config: {},
+            configs: {},
             options: {}
 
         }, window.$settings)
@@ -47,9 +47,12 @@ var Settings = Vue.extend({
             this.$broadcast('save', this.$data);
 
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
+
                 UIkit.notify(self.$trans('Settings saved.'));
 
-                self.$broadcast('saved');
+            }, function (data) {
+
+                UIkit.notify(data, 'danger');
             });
 
         }
@@ -63,9 +66,9 @@ Settings.register = function (name, options) {
     this.options.components[name] = Vue.extend(options);
 };
 
-Settings.register('site', require('./components/site.vue'));
-Settings.register('system', require('./components/system.vue'));
-Settings.register('locale', require('./components/locale.vue'));
+Settings.register('settings-site', require('./components/site.vue'));
+Settings.register('settings-system', require('./components/system.vue'));
+Settings.register('settings-locale', require('./components/locale.vue'));
 
 $(function () {
 

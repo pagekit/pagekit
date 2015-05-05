@@ -227,9 +227,10 @@ class Arr
      *
      * @param  array $data
      * @param  array $keys
+     * @param  bool  $include
      * @return array
      */
-    public static function extract(array $data, array $keys = null)
+    public static function extract(array $data, array $keys = null, $include = true)
     {
         if (!$keys) {
             return $data;
@@ -240,7 +241,7 @@ class Arr
         $result = [];
         foreach ($data as $keypath => $value) {
             foreach ($keys as $key) {
-                if (0 === strpos($keypath, $key)) {
+                if (0 !== strpos($keypath, $key) XOR $include) {
                     $result[$keypath] = $value;
                 }
             }

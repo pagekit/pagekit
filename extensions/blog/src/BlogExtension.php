@@ -39,17 +39,12 @@ class BlogExtension extends Extension
             }, 'blog.post');
         });
 
-        if (!$app['config']->get($this->name)) {
-            $app['config']->set($this->name, [], true);
-        }
     }
 
     public function enable()
     {
-        $config = App::config($this->name);
-
-        if ($version = App::migrator()->create('extensions/blog/migrations', $config->get('version'))->run()) {
-            $config->set('version', $version);
+        if ($version = App::migrator()->create('extensions/blog/migrations', $this->config('version'))->run()) {
+            App::config($this->name)->set('version', $version);
         }
     }
 

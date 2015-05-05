@@ -49,9 +49,6 @@ class SiteModule extends Module
             return new Node;
         };
 
-        if (!$app['config']->get('system/site')) {
-            $app['config']->set('system/site', [], true);
-        }
     }
 
     /**

@@ -7,7 +7,6 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\XcacheCache;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Util\Arr;
 
 class CacheModule extends Module
 {
@@ -81,7 +80,7 @@ class CacheModule extends Module
 
             $view->script('settings-cache', 'app/system/modules/cache/app/bundle/settings.js', 'settings');
             $view->data('$caches', $caches);
-            $view->data('$settings', [ 'config' => [ $this->name => Arr::extract($this->config, ['caches.cache.storage', 'nocache']) ]]);
+            $view->data('$settings', [ 'config' => [ $this->name => $this->config->extract(['caches.cache.storage', 'nocache'])]]);
 
         });
 

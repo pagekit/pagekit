@@ -57,7 +57,7 @@ return [
 
         $app['session.options'] = function () {
 
-            $options = array_diff_key($this->config, array_fill_keys(['name', 'main'], null));
+            $options = $this->config->extract(['name', 'main'], false);
 
             if (isset($options['cookie'])) {
 

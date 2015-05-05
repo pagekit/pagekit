@@ -44,11 +44,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(4);
-	__webpack_require__(5);
-	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
+	__webpack_require__(9);
+	__webpack_require__(10);
+	__webpack_require__(11);
 
 	var $ = __webpack_require__(1);
 	var UIkit = __webpack_require__(2);
@@ -91,7 +91,10 @@
 	module.exports = Vue;
 
 /***/ },
-/* 4 */
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -230,7 +233,7 @@
 	            };
 	        }
 
-	        modal = $(__webpack_require__(18)).appendTo('body');
+	        modal = $(__webpack_require__(17)).appendTo('body');
 	        modal.on('hide.uk.modal', function() {
 	            $(this).remove();
 	        });
@@ -269,7 +272,7 @@
 
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -399,7 +402,7 @@
 	*/
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -561,7 +564,7 @@
 	            };
 	        }
 
-	        modal = $(__webpack_require__(17)).appendTo('body');
+	        modal = $(__webpack_require__(18)).appendTo('body');
 	        modal.on('hide.uk.modal', function() {
 	            $(this).remove();
 	        });
@@ -592,7 +595,7 @@
 
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -627,7 +630,7 @@
 
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -660,9 +663,6 @@
 
 
 /***/ },
-/* 9 */,
-/* 10 */,
-/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -671,13 +671,13 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div id=\"editor-video\" class=\"uk-modal\">\n    <div class=\"uk-modal-dialog uk-modal-dialog-large uk-form\" v-class=\"uk-modal-dialog-large: view == 'finder'\">\n\n        <div v-show=\"view == 'settings'\">\n            <h1 class=\"uk-h3\">{{ 'Video' | trans }}</h1>\n            <div class=\"uk-grid\">\n                <div class=\"uk-width-1-3 uk-text-center\">\n                    <div>{{{ preview(video.src) }}}</div>\n                </div>\n\n                <div class=\"uk-width-2-3\">\n\n                    <div class=\"uk-form-row\">\n                        <input type=\"text\" class=\"uk-width-4-5\" placeholder=\"{{ 'URL' | trans }}\" v-model=\"video.src\">\n                        <button type=\"button\" class=\"uk-button uk-float-right uk-width-1-6\" v-on=\"click: openFinder\">{{ 'Select video' | trans }}</button>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"uk-form-row uk-margin-top\">\n                <button class=\"uk-button uk-button-primary uk-modal-close\" type=\"button\" v-on=\"click: update\">{{ 'Update' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\" type=\"button\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n        <div v-if=\"view == 'finder'\">\n            <h1 class=\"uk-h3\">{{ 'Select Video' | trans }}</h1>\n            <div v-component=\"v-finder\" v-ref=\"finder\" v-with=\"root: finder.root\"></div>\n            <div class=\"uk-margin-top\">\n                <button class=\"uk-button uk-button-primary\" type=\"button\" v-attr=\"disabled: !finder.select\" v-on=\"click: closeFinder(finder.select)\">{{ 'Select' | trans }}</button>\n                <button class=\"uk-button\" type=\"button\" v-on=\"click: closeFinder(false)\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n    </div>\n</div>";
+	module.exports = "<div id=\"editor-image\" class=\"uk-modal\">\n    <div class=\"uk-modal-dialog uk-form uk-form-stacked\" v-class=\"uk-modal-dialog-large: view == 'finder'\">\n\n        <div v-show=\"view == 'settings'\">\n            <h1 class=\"uk-h3\">{{ 'Image' | trans }}</h1>\n            <div class=\"uk-form-row\">\n                <div class=\"uk-form-controls\">\n                    <div class=\"pk-thumbnail pk-thumbnail-image\" v-attr=\"style: style\"></div>\n                    <p class=\"uk-margin-small-top\"><a v-on=\"click: openFinder\">{{ 'Select image' | trans }}</a></p>\n                </div>\n            </div>\n            <div class=\"uk-form-row\">\n                <label for=\"form-src\" class=\"uk-form-label\">{{ 'URL' | trans }}</label>\n                <div class=\"uk-form-controls\">\n                    <input id=\"form-src\" type=\"text\" class=\"uk-width-1-1\" v-model=\"image.src\">\n                </div>\n            </div>\n            <div class=\"uk-form-row\">\n                <label for=\"form-alt\" class=\"uk-form-label\">{{ 'Alt' | trans }}</label>\n                <div class=\"uk-form-controls\">\n                    <input id=\"form-alt\" type=\"text\" class=\"uk-width-1-1\" v-model=\"image.alt\">\n                </div>\n            </div>\n            <div class=\"uk-form-row uk-margin-top\">\n                <button class=\"uk-button uk-button-primary uk-modal-close\" type=\"button\" v-on=\"click: update\">{{ 'Update' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\" type=\"button\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n        <div v-if=\"view == 'finder'\">\n            <h1 class=\"uk-h3\">{{ 'Select Image' | trans }}</h1>\n            <div v-component=\"v-finder\" v-ref=\"finder\" v-with=\"root: finder.root\"></div>\n            <div class=\"uk-margin-top\">\n                <button class=\"uk-button uk-button-primary\" type=\"button\" v-attr=\"disabled: !finder.select\" v-on=\"click: closeFinder(finder.select)\">{{ 'Select' | trans }}</button>\n                <button class=\"uk-button\" type=\"button\" v-on=\"click: closeFinder(false)\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n    </div>\n</div>";
 
 /***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div id=\"editor-image\" class=\"uk-modal\">\n    <div class=\"uk-modal-dialog uk-form uk-form-stacked\" v-class=\"uk-modal-dialog-large: view == 'finder'\">\n\n        <div v-show=\"view == 'settings'\">\n            <h1 class=\"uk-h3\">{{ 'Image' | trans }}</h1>\n            <div class=\"uk-form-row\">\n                <div class=\"uk-form-controls\">\n                    <div class=\"pk-thumbnail pk-thumbnail-image\" v-attr=\"style: style\"></div>\n                    <p class=\"uk-margin-small-top\"><a v-on=\"click: openFinder\">{{ 'Select image' | trans }}</a></p>\n                </div>\n            </div>\n            <div class=\"uk-form-row\">\n                <label for=\"form-src\" class=\"uk-form-label\">{{ 'URL' | trans }}</label>\n                <div class=\"uk-form-controls\">\n                    <input id=\"form-src\" type=\"text\" class=\"uk-width-1-1\" v-model=\"image.src\">\n                </div>\n            </div>\n            <div class=\"uk-form-row\">\n                <label for=\"form-alt\" class=\"uk-form-label\">{{ 'Alt' | trans }}</label>\n                <div class=\"uk-form-controls\">\n                    <input id=\"form-alt\" type=\"text\" class=\"uk-width-1-1\" v-model=\"image.alt\">\n                </div>\n            </div>\n            <div class=\"uk-form-row uk-margin-top\">\n                <button class=\"uk-button uk-button-primary uk-modal-close\" type=\"button\" v-on=\"click: update\">{{ 'Update' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\" type=\"button\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n        <div v-if=\"view == 'finder'\">\n            <h1 class=\"uk-h3\">{{ 'Select Image' | trans }}</h1>\n            <div v-component=\"v-finder\" v-ref=\"finder\" v-with=\"root: finder.root\"></div>\n            <div class=\"uk-margin-top\">\n                <button class=\"uk-button uk-button-primary\" type=\"button\" v-attr=\"disabled: !finder.select\" v-on=\"click: closeFinder(finder.select)\">{{ 'Select' | trans }}</button>\n                <button class=\"uk-button\" type=\"button\" v-on=\"click: closeFinder(false)\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n    </div>\n</div>";
+	module.exports = "<div id=\"editor-video\" class=\"uk-modal\">\n    <div class=\"uk-modal-dialog uk-modal-dialog-large uk-form\" v-class=\"uk-modal-dialog-large: view == 'finder'\">\n\n        <div v-show=\"view == 'settings'\">\n            <h1 class=\"uk-h3\">{{ 'Video' | trans }}</h1>\n            <div class=\"uk-grid\">\n                <div class=\"uk-width-1-3 uk-text-center\">\n                    <div>{{{ preview(video.src) }}}</div>\n                </div>\n\n                <div class=\"uk-width-2-3\">\n\n                    <div class=\"uk-form-row\">\n                        <input type=\"text\" class=\"uk-width-4-5\" placeholder=\"{{ 'URL' | trans }}\" v-model=\"video.src\">\n                        <button type=\"button\" class=\"uk-button uk-float-right uk-width-1-6\" v-on=\"click: openFinder\">{{ 'Select video' | trans }}</button>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"uk-form-row uk-margin-top\">\n                <button class=\"uk-button uk-button-primary uk-modal-close\" type=\"button\" v-on=\"click: update\">{{ 'Update' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\" type=\"button\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n        <div v-if=\"view == 'finder'\">\n            <h1 class=\"uk-h3\">{{ 'Select Video' | trans }}</h1>\n            <div v-component=\"v-finder\" v-ref=\"finder\" v-with=\"root: finder.root\"></div>\n            <div class=\"uk-margin-top\">\n                <button class=\"uk-button uk-button-primary\" type=\"button\" v-attr=\"disabled: !finder.select\" v-on=\"click: closeFinder(finder.select)\">{{ 'Select' | trans }}</button>\n                <button class=\"uk-button\" type=\"button\" v-on=\"click: closeFinder(false)\">{{ 'Cancel' | trans }}</button>\n            </div>\n        </div>\n\n    </div>\n</div>";
 
 /***/ }
 /******/ ]);

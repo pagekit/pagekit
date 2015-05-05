@@ -14,10 +14,6 @@ class PageExtension extends Extension
     public function main(App $app)
     {
         $app->subscribe(new SiteListener);
-
-        if (!$app['config']->get($this->name)) {
-            $app['config']->set($this->name, [], true);
-        }
     }
 
     /**
@@ -25,10 +21,8 @@ class PageExtension extends Extension
      */
     public function enable()
     {
-        $config = App::config($this->name);
-
-        if ($version = App::migrator()->create('extensions/page/migrations', $config->get('version'))->run()) {
-            $config->set('version', $version);
+        if ($version = App::migrator()->create('extensions/page/migrations', $this->config('version'))->run()) {
+            App::config($this->name)->set('version', $version);
         }
     }
 }

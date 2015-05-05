@@ -131,11 +131,12 @@ class Config implements \ArrayAccess, \Countable, \JsonSerializable
      * Extracts config values.
      *
      * @param  array $keys
+     * @param  bool  $include
      * @return array
      */
-    public function extract($keys)
+    public function extract($keys, $include = true)
     {
-        return Arr::extract($this->values, $keys);
+        return Arr::extract($this->values, $keys, $include);
     }
 
     /**

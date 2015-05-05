@@ -16,14 +16,14 @@
     <div class="uk-form-row">
         <label for="form-apikey" class="uk-form-label">{{ 'API Key' | trans }}</label>
         <div class="uk-form-controls">
-            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$parent.options.system.api.key"></textarea>
+            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$root.options.system.api.key"></textarea>
         </div>
     </div>
 
     <div class="uk-form-row">
         <label for="form-channel" class="uk-form-label">{{ 'Release Channel' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-channel" class="uk-form-width-large" v-model="$parent.options.system.release_channel">
+            <select id="form-channel" class="uk-form-width-large" v-model="$root.options.system.release_channel">
                 <option value="stable">{{ 'Stable' | trans }}</option>
                 <option value="nightly">{{ 'Nightly' | trans }}</option>
             </select>
@@ -33,7 +33,7 @@
     <div class="uk-form-row">
         <label for="form-uploadfolder" class="uk-form-label">{{ 'Storage' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$parent.config.system.storage">
+            <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config.system.storage">
         </div>
     </div>
 
@@ -41,15 +41,14 @@
         <span class="uk-form-label">{{ 'Developer' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
-                <label><input type="checkbox" value="1" v-model="$parent.config.application.debug"> {{ 'Enable debug mode' | trans }}</label>
+                <label><input type="checkbox" value="1" v-model="$root.config.application.debug"> {{ 'Enable debug mode' | trans }}</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="checkbox" value="1" v-model="$parent.config.debug.enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
+                <label><input type="checkbox" value="1" v-model="$root.config.debug.enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
             </p>
             <p class="uk-form-help-block" v-if="!sqlite">{{ 'Please enable the SQLite database extension.' | trans }}</p>
         </div>
     </div>
-
 
 </template>
 
@@ -61,7 +60,7 @@
         priority: 10,
 
         data: function() {
-            return window.$system
+            return window.$system;
         }
 
     };

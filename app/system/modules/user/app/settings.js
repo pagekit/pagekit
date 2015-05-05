@@ -10,7 +10,7 @@ jQuery(function ($) {
 
             save: function(e) {
 
-                this.$http.post('admin/system/settings/save', {option: {'system/user': this.config}}, function() {
+                this.$http.post('admin/system/settings/config', { name: 'system/user', config: this.config }, function() {
                      UIkit.notify(vm.$trans('Settings saved.'));
                 }).error(function(data) {
                      UIkit.notify(data, 'danger');

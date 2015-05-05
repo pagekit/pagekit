@@ -1,6 +1,6 @@
 <?php $view->script('settings', 'hello:assets/js/settings.js', 'system') ?>
 
-<div id="js-settings" class="uk-form uk-form-horizontal">
+<div id="settings" class="uk-form uk-form-horizontal">
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>

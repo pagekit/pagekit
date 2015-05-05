@@ -3,7 +3,7 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application as App;
-use Pagekit\Util\Arr;
+use Pagekit\Config\Config;
 
 class Module
 {
@@ -25,6 +25,8 @@ class Module
         if (!isset($this->config)) {
             $this->config = [];
         }
+
+        $this->config = new Config($this->config);
     }
 
     /**
@@ -42,6 +44,6 @@ class Module
      */
     public function config($key = null, $default = null)
     {
-        return Arr::get($this->config, $key, $default);
+        return $this->config->get($key, $default);
     }
 }

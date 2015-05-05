@@ -63,34 +63,41 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Gets a config.
+     * Checks if a config exists.
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        if (isset($this->ignore[$name])) {
+            return false;
+        }
+
+        return isset($this->configs[$name]) || $this->getCache($name) || $this->fetch($name);
+    }
+
+    /**
+     * Gets a config, creates a new config if none existent.
      *
      * @param  string $name
      * @return Config
      */
     public function get($name)
     {
-        if (empty($name) || isset($this->ignore[$name])) {
-            return null;
+        if (!$this->has($name)) {
+            $this->set($name, new Config());
         }
 
         if (isset($this->configs[$name])) {
             return $this->configs[$name];
         }
 
-        if ($values = $this->getCache($name)) {
-            return $this->configs[$name] = new Config($values);
+        if ($config = $this->getCache($name)) {
+            return $config;
         }
 
-        if ($data = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
-            $this->writeCache($name, $config = new Config(json_decode($data['value'], true)));
-            return $this->configs[$name] = $config;
-        }
-
-        $this->ignore[$name] = true;
-        $this->writeCache('_ignore', $this->ignore);
-
-        return null;
+        return $this->fetch($name);
     }
 
     /**
@@ -159,7 +166,7 @@ class ConfigManager implements \IteratorAggregate
         $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
 
         if ($this->cache && file_exists($file)) {
-            return require $file;
+            return $this->configs[$name] = new Config(require $file);
         }
     }
 
@@ -199,5 +206,24 @@ class ConfigManager implements \IteratorAggregate
         if (function_exists('opcache_invalidate')) {
             opcache_invalidate($file);
         }
+    }
+
+    /**
+     * Fetches config values from database.
+     *
+     * @param  string $name
+     * @return null|Config
+     */
+    protected function fetch($name)
+    {
+        if ($data = $this->connection->fetchAssoc("SELECT value FROM {$this->table} WHERE name = ?", [$name])) {
+            $this->writeCache($name, $config = new Config(json_decode($data['value'], true)));
+            return $this->configs[$name] = $config;
+        }
+
+        $this->ignore[$name] = true;
+        $this->writeCache('_ignore', $this->ignore);
+
+        return null;
     }
 }

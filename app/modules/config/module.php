@@ -9,14 +9,14 @@ return [
     'main' => function ($app) {
 
         $app['config'] = function ($app) {
-            return new ConfigManager($app['db'], $this->config);
+            return new ConfigManager($app['db'], $this->config->toArray());
         };
 
         if ($app['config.file']) {
             $app['module']->addLoader(function ($name, array $config) use ($app) {
 
-                if ($values = $app['config']->get($name)) {
-                    $config = array_replace_recursive($config, ['config' => $values->toArray()]);
+                if ($app['config']->has($name)) {
+                    $config = array_replace_recursive($config, ['config' => $app['config']->get($name)->toArray()]);
                 }
 
                 return $config;

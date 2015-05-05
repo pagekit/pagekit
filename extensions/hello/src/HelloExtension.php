@@ -12,18 +12,13 @@ class HelloExtension extends Extension
      */
     public function main(App $app)
     {
-        if (!$app['config']->get($this->name)) {
-            $app['config']->set($this->name, [], true);
-        }
     }
 
     public function enable()
     {
-        $config = App::config($this->name);
-
         // run all migrations that are newer than the current version
-        if ($version = App::migrator()->create('extensions/hello/migrations', $config->get('version'))->run()) {
-            $config->set('version', $version);
+        if ($version = App::migrator()->create('extensions/hello/migrations', $this->config('version'))->run()) {
+            App::config($this->name)->set('version', $version);
         }
     }
 
