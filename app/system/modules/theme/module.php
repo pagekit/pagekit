@@ -11,14 +11,14 @@ return [
             $app['view']->map('layout', $this->path.'/templates/template.php');
             $app['view']->map('component', $this->path.'/templates/template.php');
 
-            $app['view']->on('layout', function ($event, $view) use ($app) {
-                $view->setParameter('user', $app['user']);
-                $view->setParameter('nav', $app['admin.menu']);
-                $view->setParameter('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
-                $view->setParameter('subset', 'latin,latin-ext');
+            $app['view']->on('layout', function ($event) use ($app) {
+                $event->setParameter('user', $app['user']);
+                $event->setParameter('nav', $app['admin.menu']);
+                $event->setParameter('subnav', current(array_filter($app['admin.menu']->getChildren(), function ($item) { return $item->getAttribute('active'); })));
+                $event->setParameter('subset', 'latin,latin-ext');
             });
 
-            $app['view']->on('messages', function ($event, $view) use ($app) {
+            $app['view']->on('messages', function ($event) use ($app) {
 
                 $result = '';
 
@@ -33,7 +33,7 @@ return [
                 }
 
                 if ($result) {
-                    $view->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+                    $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
                 }
 
             });

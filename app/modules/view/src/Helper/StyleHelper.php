@@ -3,7 +3,7 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\ViewManager;
+use Pagekit\View\View;
 
 class StyleHelper implements HelperInterface, \IteratorAggregate
 {
@@ -15,15 +15,15 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param ViewManager  $view
+     * @param View         $view
      * @param AssetManager $styles
      */
-    public function __construct(ViewManager $view, AssetManager $styles = null)
+    public function __construct(View $view, AssetManager $styles = null)
     {
         $this->styles = $styles ?: new AssetManager();
 
-        $view->on('head', function ($event, $view) {
-            $view->addResult($this->render());
+        $view->on('head', function ($event) {
+            $event->addResult($this->render());
         }, 15);
     }
 

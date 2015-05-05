@@ -3,7 +3,7 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\ViewManager;
+use Pagekit\View\View;
 
 class DeferredHelper implements HelperInterface
 {
@@ -20,36 +20,34 @@ class DeferredHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param ViewManager $manager
+     * @param View        $view
      * @param Application $app
      */
-    public function __construct(ViewManager $manager, Application $app)
+    public function __construct(View $view, Application $app)
     {
-        $manager->on('render', function ($event, $view) use ($app) {
+        $view->on('render', function ($event) use ($app) {
 
-            $name = $view->getName();
+            $name = $event->getTemplate();
 
             if (isset($this->placeholder[$name])) {
 
-                $this->deferred[$name] = $view;
-                $view->setResult($this->placeholder[$name]);
+                $this->deferred[$name] = clone $event;
 
+                $event->setResult($this->placeholder[$name]);
                 $event->stopPropagation();
             }
 
         }, 15);
 
-        $app->on('app.response', function ($event, $request, $response) use ($manager) {
+        $app->on('app.response', function ($e, $request, $response) use ($view) {
 
-            $dispatcher = $event->getDispatcher();
+            $dispatcher = $e->getDispatcher();
 
-            foreach ($this->deferred as $name => $view) {
-
-                $view->setResult('');
+            foreach ($this->deferred as $name => $event) {
 
                 // TODO fix prefix
-                $dispatcher->trigger("view.$name", [$view, $manager]);
-                $response->setContent(str_replace($this->placeholder[$name], $view->getResult(), $response->getContent()));
+                $dispatcher->trigger($event->setName("view.$name"), [$view]);
+                $response->setContent(str_replace($this->placeholder[$name], $event->getResult(), $response->getContent()));
             }
 
         }, 10);

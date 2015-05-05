@@ -47,11 +47,14 @@ class Event implements EventInterface, \ArrayAccess
     /**
      * Sets the event name.
      *
-     * @param string $name
+     * @param  string $name
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -68,11 +71,13 @@ class Event implements EventInterface, \ArrayAccess
      * Sets all parameters.
      *
      * @param  array
-     * @return array
+     * @return self
      */
     public function setParameters(array $parameters)
     {
-        return $this->parameters = $parameters;
+        $this->parameters = $parameters;
+
+        return $this;
     }
 
     /**

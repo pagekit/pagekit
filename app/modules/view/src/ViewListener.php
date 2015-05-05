@@ -9,16 +9,16 @@ use Symfony\Component\HttpFoundation\Response;
 class ViewListener implements EventSubscriberInterface
 {
     /**
-     * @var ViewManager
+     * @var View
      */
     protected $view;
 
     /**
      * Constructor.
      *
-     * @param ViewManager $view
+     * @param View $view
      */
-    public function __construct(ViewManager $view)
+    public function __construct(View $view)
     {
         $this->view = $view;
     }

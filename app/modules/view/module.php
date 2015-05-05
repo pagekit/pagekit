@@ -15,7 +15,7 @@ use Pagekit\View\Helper\StyleHelper;
 use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\PhpEngine;
-use Pagekit\View\ViewManager;
+use Pagekit\View\View;
 use Pagekit\View\ViewListener;
 
 return [
@@ -26,7 +26,7 @@ return [
 
         $app['view'] = function ($app) {
 
-            $view = new ViewManager($app['events']);
+            $view = new View($app['events']);
             $view->addEngine(new PhpEngine());
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
@@ -51,9 +51,9 @@ return [
                 $view->addHelper(new MarkdownHelper($app['markdown']));
             }
 
-            $view->on('render', function ($event, $view) use ($app) {
-                if (isset($app['locator']) and $name = $app['locator']->get($view->getName())) {
-                    $view->setName($name);
+            $view->on('render', function ($event) use ($app) {
+                if (isset($app['locator']) and $name = $app['locator']->get($event->getTemplate())) {
+                    $event->setTemplate($name);
                 }
             }, 10);
 

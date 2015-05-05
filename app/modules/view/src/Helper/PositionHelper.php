@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\View\ViewManager;
+use Pagekit\View\View;
 use Pagekit\Widget\Model\WidgetInterface;
 
 class PositionHelper implements HelperInterface
@@ -15,15 +15,15 @@ class PositionHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param ViewManager $view
+     * @param View $view
      */
-    public function __construct(ViewManager $view)
+    public function __construct(View $view)
     {
-        $view->on('render', function ($event, $tmpl) use ($view) {
-            if ($this->exists($name = $tmpl->getName())) {
-                $tmpl->setResult($view->render(
-                    'position.'.($tmpl->getParameter('renderer') ?: 'default'),
-                    ['widgets' => $this->positions[$name], 'options' => $tmpl->getParameters()]
+        $view->on('render', function ($event, $view) {
+            if ($this->exists($name = $event->getTemplate())) {
+                $event->setResult($view->render(
+                    'position.'.($event->getParameter('renderer') ?: 'default'),
+                    ['widgets' => $this->positions[$name], 'options' => $event->getParameters()]
                 ));
             }
         }, 10);
