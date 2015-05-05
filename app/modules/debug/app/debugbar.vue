@@ -96,8 +96,4 @@
 
     });
 
-    module.exports.register = function (name, options) {
-        this.options.components[name] = Vue.extend(options);
-    };
-
 </script>

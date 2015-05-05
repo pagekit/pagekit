@@ -48,15 +48,15 @@ var Debugbar =
 	var $ = __webpack_require__(1);
 	var Debugbar = __webpack_require__(2);
 
-	Debugbar.register('system', __webpack_require__(3));
-	Debugbar.register('routes', __webpack_require__(4));
-	Debugbar.register('events', __webpack_require__(5));
-	Debugbar.register('time', __webpack_require__(6));
-	Debugbar.register('memory', __webpack_require__(7));
-	Debugbar.register('database', __webpack_require__(8));
-	Debugbar.register('request', __webpack_require__(9));
-	Debugbar.register('auth', __webpack_require__(10));
-	Debugbar.register('log', __webpack_require__(11));
+	Debugbar.component('system', __webpack_require__(3));
+	Debugbar.component('routes', __webpack_require__(4));
+	Debugbar.component('events', __webpack_require__(5));
+	Debugbar.component('time', __webpack_require__(6));
+	Debugbar.component('memory', __webpack_require__(7));
+	Debugbar.component('database', __webpack_require__(8));
+	Debugbar.component('request', __webpack_require__(9));
+	Debugbar.component('auth', __webpack_require__(10));
+	Debugbar.component('log', __webpack_require__(11));
 
 	$(function () {
 
@@ -148,10 +148,6 @@ var Debugbar =
 	        }
 
 	    });
-
-	    module.exports.register = function (name, options) {
-	        this.options.components[name] = Vue.extend(options);
-	    };
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
 
