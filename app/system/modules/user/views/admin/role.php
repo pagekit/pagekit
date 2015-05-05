@@ -1,5 +1,5 @@
-<?php $view->style('role-index', 'app/system/modules/user/assets/css/user.css') ?>
-<?php $view->script('role-index', 'app/system/modules/user/app/role.js', ['system', 'uikit']) ?>
+<?php $view->style('role-index', 'system/user:assets/css/user.css') ?>
+<?php $view->script('role-index', 'system/user:app/role.js', ['system', 'uikit']) ?>
 
 <div id="js-role" class="uk-form" v-cloak>
 
