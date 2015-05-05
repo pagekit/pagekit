@@ -44,14 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(7);
-	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11);
+	__webpack_require__(12);
+	__webpack_require__(13);
 
 	var $ = __webpack_require__(1);
-	var UIkit = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	$(function () {
 
@@ -82,19 +82,21 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = UIkit;
+	module.exports = Vue;
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = Vue;
+	module.exports = UIkit;
 
 /***/ },
 /* 4 */,
 /* 5 */,
 /* 6 */,
-/* 7 */
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -102,8 +104,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(3);
-	var UIkit = __webpack_require__(2);
+	var Vue = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	var ImageVm = {
 
@@ -272,7 +274,7 @@
 
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -280,8 +282,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(3);
-	var UIkit = __webpack_require__(2);
+	var Vue = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	/* TODO
 
@@ -402,7 +404,7 @@
 	*/
 
 /***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -410,8 +412,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(3);
-	var UIkit = __webpack_require__(2);
+	var Vue = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	var VideoVm = {
 
@@ -595,14 +597,14 @@
 
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL resolver plugin
 	 */
 
-	var UIkit = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	UIkit.plugin('htmleditor', 'urlresolver', {
 
@@ -630,7 +632,7 @@
 
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -663,8 +665,6 @@
 
 
 /***/ },
-/* 12 */,
-/* 13 */,
 /* 14 */,
 /* 15 */,
 /* 16 */,

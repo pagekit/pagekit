@@ -1,0 +1,32 @@
+<template>
+
+    <node-item v-repeat="item: tree[menu.id]"></node-item>
+
+</template>
+
+<script>
+
+    module.exports = {
+
+        inherit: true,
+
+        ready: function () {
+
+            var self = this;
+
+            UIkit.nestable(this.$el, { maxDepth: 20, group: 'site.nodes' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+                if (type !== 'removed') {
+                    self.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, self.load);
+                }
+            });
+
+        },
+
+        components: {
+
+            'node-item': require('./item.vue')
+
+        }
+    }
+
+</script>

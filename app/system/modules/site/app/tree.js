@@ -1,65 +1,63 @@
-(function($) {
+var $ = require('jquery');
+var _ = require('lodash');
 
-    Vue.mixins = Vue.mixins || {};
+module.exports = {
 
-    Vue.mixins['site-tree'] = {
+    created: function () {
 
-        created: function () {
+        this.Nodes = this.$resource('api/site/node/:id');
+        this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
 
-            this.Nodes = this.$resource('api/site/node/:id');
-            this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
+        this.$add('nodes', []);
+        this.$add('menus', []);
+        this.$add('tree', {});
 
-            this.$add('nodes', []);
-            this.$add('menus', []);
-            this.$add('tree', {});
+        this.load();
 
-            this.load();
+    },
 
-        },
+    events: {
 
-        events: {
+        loaded: function() {
 
-            loaded: function() {
+            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
+                build = function (collection) {
+                    return collection.map(function(node) {
+                        return { node: node, children: build(parents[node.id] || [])}
+                    })
+                };
 
-                var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
-                    build = function (collection) {
-                        return collection.map(function(node) {
-                            return { node: node, children: build(parents[node.id] || [])}
-                        })
-                    };
+            this.$set('tree', _.groupBy(build(parents[0] || []), function(node) { return node.node.menu }));
+        }
 
-                this.$set('tree', _.groupBy(build(parents[0] || []), function(node) { return node.node.menu }));
-            }
+    },
 
-        },
+    methods: {
 
-        methods: {
+        load: function () {
 
-            load: function () {
+            var d1 = $.Deferred(), d2 = $.Deferred(), deferred = $.when(d1, d2);
 
-                var d1 = $.Deferred(), d2 = $.Deferred(), deferred = $.when(d1, d2);
+            deferred.done(function(nodes, menus) {
 
-                deferred.done(function(nodes, menus) {
+                this.$set('nodes', nodes);
+                this.$set('menus', menus);
 
-                    this.$set('nodes', nodes);
-                    this.$set('menus', menus);
+                this.$emit('loaded');
 
-                    this.$emit('loaded');
+            }.bind(this));
 
-                }.bind(this));
+            this.Nodes.query(function (nodes) {
+                d1.resolve(nodes);
+            });
 
-                this.Nodes.query(function (nodes) {
-                    d1.resolve(nodes);
-                });
+            this.Menus.query(function (menus) {
+                d2.resolve(menus);
+            });
 
-                this.Menus.query(function (menus) {
-                    d2.resolve(menus);
-                });
-
-                return deferred;
-            }
-
+            return deferred;
         }
 
     }
-})(jQuery);
+
+};

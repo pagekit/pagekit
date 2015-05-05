@@ -1,0 +1,63 @@
+<template>
+
+    <li class="uk-nestable-list-item" v-class="uk-parent: isParent, uk-active: isActive" data-id="{{ node.id }}">
+
+        <div class="uk-nestable-item uk-visible-hover-inline" v-on="click: select(node)">
+            <div class="uk-nestable-handle"></div>
+            <div data-nestable-action="toggle"></div>
+            {{ node.title }}
+
+            <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="isFrontpage"></i>
+            <a class="uk-hidden uk-float-right" title="{{ 'Delete' | trans }}" v-on="click: delete"><i class="uk-icon-minus-circle"></i></a>
+        </div>
+
+        <ul class="uk-nestable-list" v-if="isParent">
+            <node-item v-repeat="item: item.children"></node-item>
+        </ul>
+
+    </li>
+
+</template>
+
+<script>
+
+    module.exports = {
+
+        inherit: true,
+        replace: true,
+
+        computed: {
+
+            node: function() {
+                return this.item.node;
+            },
+
+            isActive: function() {
+                return this.node === this.selected;
+            },
+
+            isParent: function() {
+                return this.item.children.length;
+            },
+
+            isFrontpage: function() {
+                return this.node.id === this.frontpage;
+            }
+
+        },
+
+        methods: {
+
+            'delete': function(e) {
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                this.Nodes.delete({ id: this.node.id }, this.load);
+            }
+
+        }
+
+    }
+
+</script>

@@ -14,8 +14,6 @@ class SiteController
 {
     public function indexAction()
     {
-        App::view()->script('site', 'site:app/site.js', ['system', 'vue-validator', 'uikit-nestable', 'site-tree']);
-
         $site = App::module('system/site');
 
         return [

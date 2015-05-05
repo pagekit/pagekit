@@ -222,13 +222,13 @@
 	module.exports = jQuery;
 
 /***/ },
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;
 
 /***/ },
+/* 3 */,
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -237,7 +237,7 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.directive('gravatar', {
 
@@ -368,7 +368,7 @@
 
 	var $ = __webpack_require__(1);
 	var _ = __webpack_require__(14);
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.filter('baseUrl', function(url) {
 	    return _.startsWith(url, Vue.url.root) ? url.substr(Vue.url.root.length) : url;
@@ -448,7 +448,7 @@
 	 * Vue Pagination component.
 	 */
 
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.component('v-pagination', {
 
