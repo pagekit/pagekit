@@ -240,10 +240,16 @@ class Arr
 
         $result = [];
         foreach ($data as $keypath => $value) {
+            $add = !$include;
             foreach ($keys as $key) {
-                if (0 !== strpos($keypath, $key) XOR $include) {
-                    $result[$keypath] = $value;
+                if (0 === strpos($keypath, $key)) {
+                    $add = $include;
+                    break;
                 }
+            }
+
+            if ($add) {
+                $result[$keypath] = $value;
             }
         }
 
