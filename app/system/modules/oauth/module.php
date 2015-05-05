@@ -12,7 +12,7 @@ return [
             return new OAuthHelper;
         };
 
-        $app->on('view.system:modules/settings/views/settings.php', function ($event, $view) use ($app) {
+        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
 
             $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
 

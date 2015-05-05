@@ -58,15 +58,11 @@ return [
             return $translator;
         };
 
-        require __DIR__.'/functions.php';
-
-    },
-
-    'boot' => function ($app) {
-
         $app->extend('view', function ($view) use ($app) {
             return $view->addGlobal('intl', $app['intl']);
         });
+
+        require __DIR__.'/functions.php';
 
     },
 

@@ -176,6 +176,7 @@ class View
         $this->events->trigger($event, [$this]);
 
         if (!$event->isPropagationStopped()) {
+            $name = preg_replace('/\.php$/i', '', $name);
             $this->events->trigger($event->setName($this->prefix.$name), [$this]);
         }
 

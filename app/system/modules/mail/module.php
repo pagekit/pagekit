@@ -80,7 +80,7 @@ return [
             }
         });
 
-        $app->on('view.system:modules/settings/views/settings.php', function ($event, $view) use ($app) {
+        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
 
             $view->script('settings-mail', 'app/system/modules/mail/app/bundle/settings.js', 'settings');
 

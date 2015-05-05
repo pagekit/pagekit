@@ -65,7 +65,7 @@ class CacheModule extends Module
             };
         }
 
-        $app->on('view.system:modules/settings/views/settings.php', function ($event, $view) use ($app) {
+        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
 
             $supported = $this->supports();
 

@@ -84,6 +84,7 @@ return [
         'migration',
         'package',
         'tree',
+        'system/view',
         'system/cache',
         'system/comment',
         'system/console',
@@ -100,7 +101,6 @@ return [
         'system/site',
         'system/theme',
         'system/user',
-        'system/view',
         'system/widget'
 
     ],
