@@ -102,7 +102,7 @@
                 </div>
             </li>
             <li>
-                <h2>{{ 'Permisssion' | trans }}</h2>
+                <h2>{{ 'Permission' | trans }}</h2>
                 <div class="uk-overflow-container">
                     <table class="uk-table uk-table-hover">
                         <thead>
