@@ -45,26 +45,26 @@ var Site =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*global $data*/
+	var $ = __webpack_require__(2);
+	var _ = __webpack_require__(3);
+	var UIkit = __webpack_require__(8);
 
-	jQuery(function ($) {
+	Vue.validators['unique'] = function(value) {
+	    var menu = _.find(this.menus, { id: value });
+	    return !menu || this.menu.oldId == menu.id;
+	};
 
-	    Vue.validators['unique'] = function(value) {
-	        var menu = _.find(this.menus, { id: value });
-	        return !menu || this.menu.oldId == menu.id;
-	    };
+	Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
+	    UIkit.notify(msg, 'danger');
+	}});
 
-	    Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
-	        UIkit.notify(msg, 'danger');
-	    }});
-
-	    var vm = new Vue({
-
-	        el: '#site',
+	var Site = Vue.extend({
 
 	        mixins: [__webpack_require__(1)],
 
-	        data: _.merge({ selected: null }, $data),
+	        data: function() {
+	            return _.merge({ selected: null }, window.$data);
+	        },
 
 	        events: {
 
@@ -77,16 +77,16 @@ var Site =
 	            select: function(node) {
 
 	                if (!node) {
-	                    node = this.selected && _.find(this.nodes, { id: vm.selected.id }) || this.selectFirst();
+	                    node = this.selected && _.find(this.nodes, { id: this.selected.id }) || this.selectFirst();
 	                }
 
 	                this.$set('selected', node);
 	            },
 
 	            selectFirst: function() {
-	                var first = null;
+	                var self = this, first = null;
 	                this.menus.some(function (menu) {
-	                    return first = _.first(vm.tree[menu.id]);
+	                    return first = _.first(self.tree[menu.id]);
 	                });
 
 	                return first ? first.node : undefined;
@@ -101,7 +101,14 @@ var Site =
 
 	    });
 
+	$(function () {
+
+	    var site = new Site();
+	    site.$mount('#site');
+
 	});
+
+	module.exports = Site;
 
 
 /***/ },
@@ -283,7 +290,7 @@ var Site =
 	        computed: {
 
 	            type: function() {
-	                return (_.find(this.types, { id: this.node.type }) || {});
+	                return _.find(this.types, { id: this.node.type }) || {};
 	            },
 
 	            path: function() {
@@ -442,6 +449,12 @@ var Site =
 	    }
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = UIkit;
 
 /***/ }
 /******/ ]);

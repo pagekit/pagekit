@@ -45,7 +45,7 @@
         computed: {
 
             type: function() {
-                return (_.find(this.types, { id: this.node.type }) || {});
+                return _.find(this.types, { id: this.node.type }) || {};
             },
 
             path: function() {
