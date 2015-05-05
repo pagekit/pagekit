@@ -56,6 +56,7 @@
 
     module.exports = {
 
+        name: 'settings-system',
         label: 'System',
         priority: 10,
 

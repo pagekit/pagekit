@@ -4,30 +4,10 @@ var UIkit = require('uikit');
 
 var Settings = Vue.extend({
 
+    sections: [],
+
     data: function () {
-        return _.merge({
-
-            labels: [],
-            sections: [],
-            config: {},
-            options: {}
-
-        }, window.$settings)
-    },
-
-    created: function () {
-
-        var self = this;
-
-        _(this.$options.components).pairs()
-            .filter(function(component) {
-                return component[1].options.isSection;
-            }).sortBy(function(component) {
-                return component[1].options.priority;
-            }).value().forEach(function(component) {
-                self.labels.push(component[1].options.label);
-                self.sections.push(component[0]);
-            });
+        return window.$settings;
     },
 
     ready: function() {
@@ -61,14 +41,14 @@ var Settings = Vue.extend({
 
 });
 
-Settings.register = function (name, options) {
-    options.isSection = true;
-    this.options.components[name] = Vue.extend(options);
+Settings.register = function (options) {
+    this.component(options.name, options);
+    this.options.sections.push(options);
 };
 
-Settings.register('settings-site', require('./components/site.vue'));
-Settings.register('settings-system', require('./components/system.vue'));
-Settings.register('settings-locale', require('./components/locale.vue'));
+Settings.register(require('./components/site.vue'));
+Settings.register(require('./components/system.vue'));
+Settings.register(require('./components/locale.vue'));
 
 $(function () {
 

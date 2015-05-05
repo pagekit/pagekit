@@ -50,6 +50,7 @@
 
 	    module.exports = {
 
+	        name: 'system/oauth',
 	        label: 'OAuth',
 	        priority: 50,
 
@@ -100,7 +101,7 @@
 
 	    };
 
-	    Settings.register('system/oauth', module.exports);
+	    Settings.register(module.exports);
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
 

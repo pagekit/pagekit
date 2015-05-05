@@ -50,6 +50,7 @@
 
 	    module.exports = {
 
+	        name: 'system/mail',
 	        label: 'Mail',
 	        priority: 40,
 
@@ -75,7 +76,7 @@
 
 	    };
 
-	    Settings.register('system/mail', module.exports);
+	    Settings.register(module.exports);
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
 

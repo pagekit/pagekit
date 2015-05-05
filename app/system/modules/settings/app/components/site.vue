@@ -49,6 +49,7 @@
 
     module.exports = {
 
+        name: 'settings-site',
         label: 'Site',
         priority: 0,
 

@@ -40,6 +40,7 @@
 
     module.exports = {
 
+        name: 'settings-locale',
         label: 'Localization',
         priority: 20,
 

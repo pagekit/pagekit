@@ -77,6 +77,7 @@
             return { caches: window.$caches };
         },
 
+        name: 'system/cache',
         label: 'Cache',
         priority: 30,
 
@@ -110,6 +111,6 @@
 
     };
 
-    Settings.register('system/cache', module.exports);
+    Settings.register(module.exports);
 
 </script>

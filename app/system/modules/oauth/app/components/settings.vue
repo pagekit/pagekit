@@ -59,6 +59,7 @@
 
     module.exports = {
 
+        name: 'system/oauth',
         label: 'OAuth',
         priority: 50,
 
@@ -109,6 +110,6 @@
 
     };
 
-    Settings.register('system/oauth', module.exports);
+    Settings.register(module.exports);
 
 </script>

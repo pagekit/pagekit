@@ -99,6 +99,7 @@
 
     module.exports = {
 
+        name: 'system/mail',
         label: 'Mail',
         priority: 40,
 
@@ -124,6 +125,6 @@
 
     };
 
-    Settings.register('system/mail', module.exports);
+    Settings.register(module.exports);
 
 </script>

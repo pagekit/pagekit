@@ -54,6 +54,7 @@
 	            return { caches: window.$caches };
 	        },
 
+	        name: 'system/cache',
 	        label: 'Cache',
 	        priority: 30,
 
@@ -87,7 +88,7 @@
 
 	    };
 
-	    Settings.register('system/cache', module.exports);
+	    Settings.register(module.exports);
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
 

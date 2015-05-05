@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side" v-el="tab">
-                    <li v-repeat="labels"><a>{{ $value | trans }}</a></li>
+                    <li v-repeat="section: $options.sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
                 </ul>
 
             </div>
@@ -18,8 +18,8 @@
         <div class="uk-width-medium-3-4">
 
             <ul class="uk-switcher uk-margin" v-el="content">
-                <li v-repeat="sections">
-                    <div v-component="{{ $value }}" v-with="options: options[$value], config: config[$value]"></div>
+                <li v-repeat="section: $options.sections | orderBy 'priority'">
+                    <div v-component="{{ section.name }}" v-with="options: options[section.name], config: config[section.name]"></div>
                 </li>
             </ul>
 
