@@ -32,7 +32,7 @@ return [
             $view->addGlobal('view', $view);
             $view->addHelpers([
                 new DataHelper($view),
-                new DeferredHelper($view, $app),
+                new DeferredHelper($view, $app['events']),
                 new GravatarHelper(),
                 new MapHelper($view),
                 new MetaHelper($view),
