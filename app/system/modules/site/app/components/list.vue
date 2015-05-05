@@ -1,6 +1,8 @@
 <template>
 
-    <node-item v-repeat="item: tree[menu.id]"></node-item>
+    <ul class="uk-nestable">
+        <node-item v-repeat="item: tree[menu.id]"></node-item>
+    </ul>
 
 </template>
 
@@ -9,6 +11,7 @@
     module.exports = {
 
         inherit: true,
+        replace: true,
 
         ready: function () {
 

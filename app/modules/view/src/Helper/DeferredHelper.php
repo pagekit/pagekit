@@ -2,7 +2,6 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\Application;
 use Pagekit\Event\EventDispatcher;
 use Pagekit\View\View;
 

@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <node-list class="uk-nestable"></node-list>
+        <node-list></node-list>
 
     </div>
 
