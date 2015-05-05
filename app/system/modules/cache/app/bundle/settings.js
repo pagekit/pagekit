@@ -45,13 +45,13 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	var __vue_template__ = "<div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin=\"\">\n        <div data-uk-margin=\"\">\n\n            <h2 class=\"uk-margin-remove\">{{ 'Cache' | trans }}</h2>\n\n        </div>\n        <div data-uk-margin=\"\">\n\n            <button class=\"uk-button uk-button-primary\" type=\"submit\">{{ 'Save' | trans }}</button>\n\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Cache' | trans }}</span>\n        <div class=\"uk-form-controls uk-form-controls-text\">\n            <p class=\"uk-form-controls-condensed\" v-repeat=\"cache: caches\">\n                <label><input type=\"radio\" value=\"{{ $key }}\" v-model=\"config.caches.cache.storage\" v-attr=\"disabled: !cache.supported\"> {{ cache.name }}</label>\n            </p>\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Developer' | trans }}</span>\n        <div class=\"uk-form-controls uk-form-controls-text\">\n            <p class=\"uk-form-controls-condensed\">\n                <label><input type=\"checkbox\" value=\"1\" v-model=\"config.nocache\"> {{ 'Disable cache' | trans }}</label>\n            </p>\n            <p>\n                <button id=\"clearcache\" class=\"uk-button uk-button-primary\">{{ 'Clear Cache' | trans }}</button>\n            </p>\n        </div>\n    </div>\n\n    <!-- TODO: fix form in form + vueify-->\n    <div id=\"modal-clearcache\" class=\"uk-modal\">\n        <div class=\"uk-modal-dialog\">\n\n            <h4>{{ 'Select caches to clear:' | trans }}</h4>\n\n            <form class=\"uk-form\" action=\"{{ $url('admin/system/cache/clear') }}\" method=\"post\">\n\n                <div class=\"uk-form-row\">\n                    <div class=\"uk-form-controls uk-form-controls-text\">\n                        <p class=\"uk-form-controls-condensed\">\n                            <label><input type=\"checkbox\" name=\"caches[cache]\" value=\"1\" checked=\"checked\"> {{ 'System Cache' | trans }}</label>\n                        </p>\n                    </div>\n                </div>\n                <div class=\"uk-form-row\">\n                    <div class=\"uk-form-controls uk-form-controls-text\">\n                        <p class=\"uk-form-controls-condensed\">\n                            <label><input type=\"checkbox\" name=\"caches[temp]\" value=\"1\"> {{ 'Temporary Files' | trans }}</label>\n                        </p>\n                    </div>\n                </div>\n                <p>\n                    <button class=\"uk-button uk-button-primary\" type=\"submit\">{{ 'Clear' | trans }}</button>\n                    <button class=\"uk-button uk-modal-close\" type=\"submit\">{{ 'Cancel' | trans }}</button>\n                </p>\n\n            </form>\n\n        </div>\n    </div>";
+	var __vue_template__ = "<div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin=\"\">\n        <div data-uk-margin=\"\">\n\n            <h2 class=\"uk-margin-remove\">{{ 'Cache' | trans }}</h2>\n\n        </div>\n        <div data-uk-margin=\"\">\n\n            <button class=\"uk-button uk-button-primary\" type=\"submit\">{{ 'Save' | trans }}</button>\n\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Cache' | trans }}</span>\n        <div class=\"uk-form-controls uk-form-controls-text\">\n            <p class=\"uk-form-controls-condensed\" v-repeat=\"cache: caches\">\n                <label><input type=\"radio\" value=\"{{ $key }}\" v-model=\"config.caches.cache.storage\" v-attr=\"disabled: !cache.supported\"> {{ cache.name }}</label>\n            </p>\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Developer' | trans }}</span>\n        <div class=\"uk-form-controls uk-form-controls-text\">\n            <p class=\"uk-form-controls-condensed\">\n                <label><input type=\"checkbox\" value=\"1\" v-model=\"config.nocache\"> {{ 'Disable cache' | trans }}</label>\n            </p>\n            <p>\n                <button class=\"uk-button uk-button-primary\" v-on=\"click: open\">{{ 'Clear Cache' | trans }}</button>\n            </p>\n        </div>\n    </div>\n\n    <div class=\"uk-modal\" v-el=\"modal\">\n        <div class=\"uk-modal-dialog\">\n\n            <h4>{{ 'Select caches to clear:' | trans }}</h4>\n\n            <div class=\"uk-form\">\n\n                <div class=\"uk-form-row\">\n                    <div class=\"uk-form-controls uk-form-controls-text\">\n                        <p class=\"uk-form-controls-condensed\">\n                            <label><input type=\"checkbox\" v-model=\"clear.cache\"> {{ 'System Cache' | trans }}</label>\n                        </p>\n                    </div>\n                </div>\n                <div class=\"uk-form-row\">\n                    <div class=\"uk-form-controls uk-form-controls-text\">\n                        <p class=\"uk-form-controls-condensed\">\n                            <label><input type=\"checkbox\" v-model=\"clear.temp\"> {{ 'Temporary Files' | trans }}</label>\n                        </p>\n                    </div>\n                </div>\n                <p>\n                    <button class=\"uk-button uk-button-primary\" type=\"submit\" v-on=\"click: clearCache\">{{ 'Clear' | trans }}</button>\n                    <button class=\"uk-button uk-modal-close\" type=\"submit\" v-on=\"click: cancel\">{{ 'Cancel' | trans }}</button>\n                </p>\n\n            </div>\n\n        </div>\n    </div>";
 	var Settings = __webpack_require__(15);
 
 	    module.exports = {
 
 	        data: function() {
-	            return { caches: window.$caches }
+	            return { caches: window.$caches };
 	        },
 
 	        label: 'Cache',
@@ -59,34 +59,29 @@
 
 	        template: __vue_template__,
 
-	        ready: function() {
+	        methods: {
 
-	//            jQuery(function($) {
-	//
-	//                var modal;
-	//
-	//                $('#clearcache').on('click', function(e) {
-	//                    e.preventDefault();
-	//
-	//                    if (!modal) {
-	//                        modal = UIkit.modal('#modal-clearcache');
-	//                        modal.element.find('form').on('submit', function(e) {
-	//                            e.preventDefault();
-	//
-	//                            $.post($(this).attr('action'), $(this).serialize(),function(data) {
-	//                                UIkit.notify(data.message);
-	//                            }).fail(function() {
-	//                                UIkit.notify('Clearing cache failed.', 'danger');
-	//                            }).always(function() {
-	//                                modal.hide();
-	//                            });
-	//                        });
-	//                    }
-	//
-	//                    modal.show();
-	//                });
-	//
-	//            });
+	            open: function(e) {
+	                e.preventDefault();
+
+	                this.$set('clear', { cache: true });
+
+	                this.modal = UIkit.modal(this.$$.modal);
+	                this.modal.show();
+	            },
+
+	            clearCache: function(e) {
+	                e.preventDefault();
+
+	                this.$http.post('admin/system/cache/clear', { caches: this.clear });
+	                this.cancel(e);
+	            },
+
+	            cancel: function(e) {
+	                e.preventDefault();
+
+	                this.modal.hide();
+	            }
 
 	        }
 

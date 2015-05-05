@@ -19,7 +19,7 @@
 
             <ul class="uk-switcher uk-margin" v-el="content">
                 <li v-repeat="sections">
-                    <div v-component="{{ $value }}" v-with="option: options[$value], config: config[$value]"></div>
+                    <div v-component="{{ $value }}" v-with="options: options[$value], config: config[$value]"></div>
                 </li>
             </ul>
 

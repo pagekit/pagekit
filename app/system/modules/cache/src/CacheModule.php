@@ -128,7 +128,7 @@ class CacheModule extends Module
     public function doClearCache(array $options = [])
     {
         // clear cache
-        if (empty($options) || isset($options['cache'])) {
+        if (empty($options) || @$options['cache']) {
             App::cache()->flushAll();
 
             foreach (glob(App::get('path.cache') . '/*.cache') as $file) {
@@ -137,7 +137,7 @@ class CacheModule extends Module
         }
 
         // clear temp folder
-        if (isset($options['temp'])) {
+        if (@$options['temp']) {
             foreach (App::finder()->in(App::get('path.temp'))->depth(0)->ignoreDotFiles(true) as $file) {
                 App::file()->delete($file->getPathname());
             }

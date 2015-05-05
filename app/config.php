@@ -2,7 +2,7 @@
 
 $values = array_map('realpath', [
     'path'            => __DIR__.'/..',
-    'path.temp'       => __DIR__.'/../tmp',
+    'path.temp'       => __DIR__.'/../tmp/temp',
     'path.cache'      => __DIR__.'/../tmp/cache',
     'path.logs'       => __DIR__.'/../tmp/logs',
     'path.extensions' => __DIR__.'/../extensions',

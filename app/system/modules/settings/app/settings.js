@@ -7,9 +7,9 @@ var Settings = Vue.extend({
     data: function () {
         return _.merge({
 
-            sections: [],
             labels: [],
-            configs: {},
+            sections: [],
+            config: {},
             options: {}
 
         }, window.$settings)
