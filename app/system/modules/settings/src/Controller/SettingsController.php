@@ -4,70 +4,53 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\System\Event\SettingsEvent;
 
 /**
  * @Access("system: access settings", admin=true)
  */
 class SettingsController
 {
-    /**
-     * @var Config
-     */
-    protected $config;
-
-    /**
-     * @var string
-     */
-    protected $configFile;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->config = new Config;
-        $this->config->merge(include $this->configFile = App::get('config.file'));
-    }
-
     public function indexAction()
     {
         return [
             '$view' => [
                 'title' => __('Settings'),
                 'name'  => 'system:modules/settings/views/settings.php'
-
-            ],
-            'sections' => App::trigger(new SettingsEvent('system.settings.edit'), [$this->config->toArray()])->getSections()
+            ]
         ];
     }
 
     /**
-     * @Request({"config": "array", "option": "array"}, csrf=true)
+     * @Request({"config": "array", "options": "array"}, csrf=true)
      */
-    public function saveAction($config = [], $option = [])
+    public function saveAction($values = [], $options = [])
     {
-        $option = new \ArrayObject($option);
+        $config = new Config;
+        $config->merge(include $file = App::get('config.file'));
 
-        foreach ($config as $module => $value) {
-            $this->config->set($module, $value);
+        foreach ($values as $module => $value) {
+            $config->set($module, $value);
         }
 
-        App::trigger('system.settings.save', [$this->config, $option]);
+        file_put_contents($file, $config->dump());
 
-        file_put_contents($this->configFile, $this->config->dump());
-
-        foreach ($option as $module => $value) {
-            if ($module == 'system') {
-                App::config($module)->merge($value);
-            } else {
-                App::config()->set($module, $value, true);
-            }
+        foreach ($options as $module => $value) {
+            $this->configAction($module, $value);
         }
 
         if (function_exists('opcache_invalidate')) {
-            opcache_invalidate($this->configFile);
+            opcache_invalidate($file);
         }
+
+        return ['message' => 'success'];
+    }
+
+    /**
+     * @Request({"name", "config": "array"}, csrf=true)
+     */
+    public function configAction($name, $config = [])
+    {
+        App::config($name)->merge($config, true);
 
         return ['message' => 'success'];
     }

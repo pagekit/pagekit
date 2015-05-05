@@ -12,14 +12,15 @@ return [
             return new OAuthHelper;
         };
 
-        $app->on('system.settings.edit', function ($event) use ($app) {
+        $app->on('view.system:modules/settings/views/settings.php', function ($event, $tmpl, $view) use ($app) {
 
-            $app['view']->script('settings-oauth', 'app/system/modules/oauth/app/settings.js', 'settings');
+            $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
 
-            $event->options($this->name, $this->config);
-            $event->data('oauth', $app['oauth']->getProvider());
-            $event->data('redirect_url', $app['oauth']->getRedirectUrl());
-            $event->section($this->name, 'OAuth', 'app/system/modules/oauth/views/settings.php');
+            $view->data('$settings', [ 'options' => [ $this->name => $this->config ]]);
+            $view->data('$oauth', [
+                'providers' => $app['oauth']->getProvider(),
+                'redirect_url' => $app['oauth']->getRedirectUrl()
+            ]);
         });
     },
 

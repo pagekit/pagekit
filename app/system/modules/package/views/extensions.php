@@ -3,16 +3,20 @@
 <div id="extensions">
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
+        <div class="uk-flex uk-flex-middle uk-flex-wrap"  data-uk-margin>
 
             <h2 class="uk-margin-remove">{{ 'Extensions' | trans }}</h2>
+
+            <div class="pk-search">
+                <div class="uk-search">
+                    <input class="uk-search-field" type="text" v-model="search">
+                </div>
+            </div>
 
         </div>
         <div data-uk-margin>
 
-            <div class="uk-form">
-                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search">
-            </div>
+            <a class="uk-button uk-button-primary">{{ 'Upload' | trans }}</a>
 
         </div>
     </div>
@@ -33,7 +37,7 @@
                 </td>
                 <td class="uk-text-nowrap">
                     <h2 class="uk-h3 uk-margin-remove">{{ pkg.title }}</h2>
-                    <ul class="uk-subnav uk-subnav-line uk-margin-remove">
+                    <ul class="uk-subnav uk-subnav-line uk-margin-remove" v-show="pkg.enabled">
                         <li><a>{{ 'Details' | trans }}</a></li>
                         <li><a>{{ 'Settings' | trans }}</a></li>
                         <li><a v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})">{{ 'Permissions' | trans }}</a></li>

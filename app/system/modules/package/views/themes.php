@@ -3,16 +3,20 @@
 <div id="themes">
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
+        <div class="uk-flex uk-flex-middle uk-flex-wrap"  data-uk-margin>
 
             <h2 class="uk-margin-remove">{{ 'Themes' | trans }}</h2>
+
+            <div class="pk-search">
+                <div class="uk-search">
+                    <input class="uk-search-field" type="text" v-model="search">
+                </div>
+            </div>
 
         </div>
         <div data-uk-margin>
 
-            <div class="uk-form">
-                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search">
-            </div>
+            <a class="uk-button uk-button-primary">{{ 'Upload' | trans }}</a>
 
         </div>
     </div>

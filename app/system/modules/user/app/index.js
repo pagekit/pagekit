@@ -6,7 +6,8 @@ jQuery(function ($) {
 
         data: {
             config: window.$config,
-            data  : window.$data
+            data: window.$data,
+            count: ''
         },
 
         created: function () {

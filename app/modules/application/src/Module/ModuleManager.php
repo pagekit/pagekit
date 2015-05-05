@@ -137,7 +137,6 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         return $this;
     }
 
-
     /**
      * Checks if a module exists.
      *

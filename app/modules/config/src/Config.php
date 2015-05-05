@@ -128,6 +128,17 @@ class Config implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     /**
+     * Extracts config values.
+     *
+     * @param  array $keys
+     * @return array
+     */
+    public function extract($keys)
+    {
+        return Arr::extract($this->values, $keys);
+    }
+
+    /**
      * Checks if the values are modified.
      *
      * @return array

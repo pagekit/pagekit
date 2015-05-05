@@ -7,6 +7,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\XcacheCache;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Util\Arr;
 
 class CacheModule extends Module
 {
@@ -65,7 +66,7 @@ class CacheModule extends Module
             };
         }
 
-        $app->on('system.settings.edit', function ($event) use ($app) {
+        $app->on('view.system:modules/settings/views/settings.php', function ($event, $tmpl, $view) use ($app) {
 
             $supported = $this->supports();
 
@@ -78,17 +79,14 @@ class CacheModule extends Module
 
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
-            $app['view']->script('settings-cache', 'app/system/modules/cache/app/settings.js', 'settings');
+            $view->script('settings-cache', 'app/system/modules/cache/app/bundle/settings.js', 'settings');
+            $view->data('$caches', $caches);
+            $view->data('$settings', [ 'config' => [ $this->name => Arr::extract($this->config, ['caches.cache.storage', 'nocache']) ]]);
 
-            $event->data('caches', $caches);
-            $event->config($this->name, $this->config, ['caches.cache.storage', 'nocache']);
-            $event->section($this->name, 'Cache', 'app/system/modules/cache/views/settings.php');
         });
 
-        $app->on('system.settings.save', function ($event, $config, $option) use ($app) {
-            if ($config->get('cache.caches.cache.storage') != $this->config('caches.cache.storage')) {
-                $this->clearCache();
-            }
+        $app->on('after@system/settings/save', function () {
+            $this->clearCache();
         });
     }
 

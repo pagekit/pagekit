@@ -27,13 +27,17 @@ return [
             $debugbar->addCollector(new TimeDataCollector());
             $debugbar->addCollector(new RoutesDataCollector($app['router']));
 
+            if (isset($app['info'])) {
+                $debugbar->addCollector(new SystemDataCollector($app['info']));
+            }
+
             if (isset($app['db'])) {
                 $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);
                 $debugbar->addCollector(new DatabaseDataCollector($app['db'], $app['db.debug_stack']));
             }
 
-            if (isset($app['info'])) {
-                $debugbar->addCollector(new SystemDataCollector($app['info']));
+            if (isset($app['log.debug'])) {
+                $debugbar->addCollector($app['log.debug']);
             }
 
             return $debugbar;

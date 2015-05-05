@@ -288,8 +288,8 @@
 
 	        partials: {
 
-	            'table': __webpack_require__(18),
-	            'thumbnail': __webpack_require__(19)
+	            'table': __webpack_require__(19),
+	            'thumbnail': __webpack_require__(20)
 
 	        }
 
@@ -334,14 +334,14 @@
 
 /***/ },
 
-/***/ 18:
+/***/ 19:
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<div v-if=\"files || folders\" class=\"uk-overflow-container\">\n    <table class=\"uk-table uk-table-hover uk-table-middle pk-finder-table\">\n        <thead>\n            <th class=\"pk-table-width-minimum\"><input type=\"checkbox\" v-check-all=\"selected: input[name=name]\"></th>\n            <th colspan=\"2\">{{ 'Name' | trans }}</th>\n            <th class=\"pk-table-width-minimum uk-text-center\">{{ 'Size' | trans }}</th>\n            <th class=\"pk-table-width-minimum\">{{ 'Modified' | trans }}</th>\n        </thead>\n        <tbody>\n\n            <tr v-repeat=\"folders | searched\" class=\"uk-visible-hover\" v-on=\"click: toggleSelect\">\n                <td><input type=\"checkbox\" name=\"name\" value=\"{{ name }}\"></td>\n                <td class=\"pk-table-width-minimum\">\n                    <i class=\"uk-icon-folder-o pk-finder-icon-folder\"></i>\n                </td>\n                <td class=\"pk-table-text-break pk-table-min-width-200\"><a v-on=\"click: setPath(path)\">{{ name }}</a></td>\n                <td></td>\n                <td></td>\n            </tr>\n\n            <tr v-repeat=\"files | searched\" class=\"uk-visible-hover\" v-on=\"click: toggleSelect\">\n                <td><input type=\"checkbox\" name=\"name\" value=\"{{ name }}\"></td>\n                <td class=\"pk-table-width-minimum\">\n                    <i v-if=\"isImage(url)\" class=\"pk-thumbnail-icon pk-finder-icon-file\" style=\"background-image: url('{{ encodeURI(url) }}');\"></i>\n                    <i v-if=\"!isImage(url)\" class=\"uk-icon-file-o pk-finder-icon-file\"></i>\n                </td>\n                <td class=\"pk-table-text-break pk-table-min-width-200\">{{ name }}</td>\n                <td class=\"uk-text-right uk-text-nowrap\">{{ size }}</td>\n                <td class=\"uk-text-nowrap\">{{ lastmodified | date medium }}</td>\n            </tr>\n\n        </tbody>\n    </table>\n</div>\n";
 
 /***/ },
 
-/***/ 19:
+/***/ 20:
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<ul v-if=\"files || folders\" class=\"uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4 pk-thumbnail-border-remove\" data-uk-grid-margin data-uk-grid-match=\"{ target:'.uk-panel' }\">\n\n    <li v-repeat=\"folders | searched\" v-on=\"click: toggleSelect\">\n        <div class=\"uk-panel uk-panel-box uk-text-center uk-visible-hover\">\n            <div class=\"uk-panel-teaser\">\n                <div class=\"pk-thumbnail pk-thumbnail-folder\"></div>\n            </div>\n            <div class=\"uk-text-truncate\">\n                <input type=\"checkbox\" value=\"{{ name }}\" v-checkbox=\"selected\">\n                <a v-on=\"click: setPath(path, $event)\">{{ name }}</a>\n            </div>\n        </div>\n    </li>\n\n    <li v-repeat=\"files | searched\" v-on=\"click: toggleSelect\">\n        <div class=\"uk-panel uk-panel-box uk-text-center uk-visible-hover\">\n            <div class=\"uk-panel-teaser\">\n                <div v-if=\"isImage(url)\" class=\"pk-thumbnail\" style=\"background-image: url('{{ encodeURI(url) }}');\"></div>\n                <div v-if=\"!isImage(url)\" class=\"pk-thumbnail pk-thumbnail-file\"></div>\n            </div>\n            <div class=\"uk-text-nowrap uk-text-truncate\">\n                <input type=\"checkbox\" value=\"{{ name }}\" v-checkbox=\"selected\">\n                {{ name }}\n            </div>\n        </div>\n    </li>\n\n</ul>\n";

@@ -20,12 +20,12 @@ class DeferredHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param ViewManager $view
+     * @param ViewManager $manager
      * @param Application $app
      */
-    public function __construct(ViewManager $view, Application $app)
+    public function __construct(ViewManager $manager, Application $app)
     {
-        $view->on('render', function ($event, $view) use ($app) {
+        $manager->on('render', function ($event, $view) use ($app) {
 
             $name = $view->getName();
 
@@ -39,7 +39,7 @@ class DeferredHelper implements HelperInterface
 
         }, 15);
 
-        $app->on('app.response', function ($event, $request, $response) {
+        $app->on('app.response', function ($event, $request, $response) use ($manager) {
 
             $dispatcher = $event->getDispatcher();
 
@@ -48,7 +48,7 @@ class DeferredHelper implements HelperInterface
                 $view->setResult('');
 
                 // TODO fix prefix
-                $dispatcher->trigger("view.$name", [$view]);
+                $dispatcher->trigger("view.$name", [$view, $manager]);
                 $response->setContent(str_replace($this->placeholder[$name], $view->getResult(), $response->getContent()));
             }
 

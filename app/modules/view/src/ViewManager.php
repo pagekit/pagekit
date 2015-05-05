@@ -170,10 +170,10 @@ class ViewManager
     public function render($name, array $parameters = [])
     {
         $view  = new View($name, array_replace($this->globals, $parameters));
-        $event = $this->events->trigger($this->prefix.'render', [$view]);
+        $event = $this->events->trigger($this->prefix.'render', [$view, $this]);
 
         if (!$event->isPropagationStopped()) {
-            $this->events->trigger($this->prefix.$name, [$view]);
+            $this->events->trigger($this->prefix.$name, [$view, $this]);
         }
 
         if ($view->getResult() === null && $this->engine->supports($view->getName())) {

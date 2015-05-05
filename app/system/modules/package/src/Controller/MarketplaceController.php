@@ -20,7 +20,7 @@ class MarketplaceController
                 'title' => 'Themes',
                 'type' => 'theme',
                 'api' => App::system()->config('api'),
-                'packages' => App::package()->getPackages()
+                'packages' => App::package()->all()
             ]
         ];
     }
@@ -36,7 +36,7 @@ class MarketplaceController
                 'title' => 'Extensions',
                 'type' => 'extension',
                 'api' => App::system()->config('api'),
-                'packages' => App::package()->getPackages()
+                'packages' => App::package()->all()
             ]
         ];
     }
