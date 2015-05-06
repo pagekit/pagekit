@@ -49,7 +49,7 @@ class ConfigManager implements \IteratorAggregate
         $this->table      = $config['table'];
         $this->cache      = $config['cache'];
         $this->prefix     = $config['prefix'];
-        $this->ignore     = new Config($this->getCache('_ignore') ?: []);
+        $this->ignore     = new Config($this->readCache('_ignore') ?: []);
     }
 
     /**
@@ -74,7 +74,7 @@ class ConfigManager implements \IteratorAggregate
             return false;
         }
 
-        return isset($this->configs[$name]) || $this->getCache($name) || $this->fetch($name);
+        return isset($this->configs[$name]) || $this->getCached($name) || $this->fetch($name);
     }
 
     /**
@@ -93,7 +93,7 @@ class ConfigManager implements \IteratorAggregate
             return $this->configs[$name];
         }
 
-        if ($config = $this->getCache($name)) {
+        if ($config = $this->getCached($name)) {
             return $config;
         }
 
@@ -156,17 +156,30 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Gets cache data.
+     * Gets config from cache.
+     *
+     * @param  string $name
+     * @return Config|null
+     */
+    protected function getCached($name)
+    {
+        if ($values = $this->readCache($name)) {
+            return new Config($values);
+        }
+    }
+
+    /**
+     * Reads cache file.
      *
      * @param  string $name
      * @return array|null
      */
-    protected function getCache($name)
+    protected function readCache($name)
     {
         $file = sprintf('%s/%s.cache', $this->cache, sha1($this->prefix.$name));
 
         if ($this->cache && file_exists($file)) {
-            return $this->configs[$name] = new Config(require $file);
+            return require $file;
         }
     }
 
@@ -209,7 +222,7 @@ class ConfigManager implements \IteratorAggregate
     }
 
     /**
-     * Fetches config values from database.
+     * Fetches config from database.
      *
      * @param  string $name
      * @return null|Config
