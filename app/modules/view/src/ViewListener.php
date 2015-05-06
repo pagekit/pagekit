@@ -33,6 +33,11 @@ class ViewListener implements EventSubscriberInterface
         $name = null;
         $layout = true;
 
+        // TODO quickfix for Json responses
+        if (is_a($event->getControllerResult(), '\JsonSerializable')) {
+            return;
+        }
+
         if (is_array($result = $event->getControllerResult())) {
 
             if (!isset($result['$view'])) {

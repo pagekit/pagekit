@@ -3,7 +3,6 @@
 namespace Pagekit\Kernel\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class JsonResponseListener implements EventSubscriberInterface
@@ -29,7 +28,7 @@ class JsonResponseListener implements EventSubscriberInterface
     {
         $result = $event->getControllerResult();
 
-        if (is_array($result)) {
+        if (is_array($result) || is_a($result, '\JsonSerializable')) {
             $event->setResponse(new JsonResponse($result));
         }
     }
