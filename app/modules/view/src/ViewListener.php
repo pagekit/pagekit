@@ -30,19 +30,10 @@ class ViewListener implements EventSubscriberInterface
      */
     public function onController($event, $request)
     {
-        $name = null;
         $layout = true;
+        $result = $event->getControllerResult();
 
-        // TODO quickfix for Json responses
-        if (is_a($event->getControllerResult(), '\JsonSerializable')) {
-            return;
-        }
-
-        if (is_array($result = $event->getControllerResult())) {
-
-            if (!isset($result['$view'])) {
-                return;
-            }
+        if (is_array($result) && isset($result['$view'])) {
 
             foreach ($result as $key => $value) {
                 if ($key === '$view') {
@@ -64,10 +55,14 @@ class ViewListener implements EventSubscriberInterface
                     $this->view->data($key, $value);
                 }
             }
+
+            if (isset($name)) {
+                $response = $result = $this->view->render($name, $result);
+            }
         }
 
-        if ($name != null) {
-            $response = $result = $this->view->render($name, $result);
+        if (!is_string($result)) {
+            return;
         }
 
         if (is_string($layout)) {
