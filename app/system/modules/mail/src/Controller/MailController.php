@@ -5,8 +5,6 @@ namespace Pagekit\Mail\Controller;
 use Pagekit\Application as App;
 
 /**
- * TODO needs to be updated
- *
  * @Access("system: access settings", admin=true)
  */
 class MailController
@@ -17,14 +15,6 @@ class MailController
     public function smtpAction($option = [])
     {
         try {
-
-            $option = array_merge([
-                'port' => '',
-                'host' => '',
-                'username' => '',
-                'password' => '',
-                'encryption' => ''
-            ], $option);
 
             App::mailer()->testSmtpConnection($option['host'], $option['port'], $option['username'], $option['password'], $option['encryption']);
 
@@ -45,22 +35,9 @@ class MailController
     {
         try {
 
-            $option = array_merge([
-                'driver' => '',
-                'port' => '',
-                'host' => '',
-                'username' => '',
-                'password' => '',
-                'encryption' => '',
-                'from.name' => '',
-                'from.address' => ''
-            ], $option);
+            $config = App::module('system/mail')->config->merge($option);
 
-            foreach ($option as $key => $value) {
-                App::config()->set($key, $value);
-            }
-
-            $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $option['from.address'])->send();
+            $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $config['from_address'])->send();
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');
 
         } catch (\Exception $e) {
