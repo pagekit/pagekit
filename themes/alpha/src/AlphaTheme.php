@@ -20,8 +20,8 @@ class AlphaTheme extends Theme
     {
         $app->on('app.site', function () use ($app) {
             $app['view']->on('layout', function ($event, $view) use ($app) {
-                $view->setName($this->getLayout());
-                $view->setParameter('theme', $app['theme.site']);
+                $event->setName($this->getLayout());
+                $event->setParameter('theme', $app['theme.site']);
             });
         });
 
