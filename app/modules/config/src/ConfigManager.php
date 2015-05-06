@@ -164,7 +164,7 @@ class ConfigManager implements \IteratorAggregate
     protected function getCached($name)
     {
         if ($values = $this->readCache($name)) {
-            return new Config($values);
+            return $this->configs[$name] = new Config($values);
         }
     }
 
