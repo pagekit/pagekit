@@ -30,7 +30,7 @@ class WidgetModule extends Module
 
         $app->on('view.site:views/admin/index', function($event, $view) {
 
-            $view->script('widget-index', 'widget:app/bundle/site.widgets.js', ['site', 'uikit-form-select']);
+            $view->script('widget-site', 'widget:app/bundle/site.js', ['site', 'uikit-form-select']);
 
             $view->data('$widgets', [
 

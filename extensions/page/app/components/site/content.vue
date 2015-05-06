@@ -1,4 +1,5 @@
-<div v-component="site-page" inline-template>
+<template>
+
     <div class="uk-form-row">
         <label for="form-page-title" class="uk-form-label">{{ 'Page Title' | trans }}</label>
         <div class="uk-form-controls">
@@ -9,7 +10,8 @@
     <div class="uk-form-row">
         <label for="form-url" class="uk-form-label">{{ 'Content' | trans }}</label>
         <div class="uk-form-controls">
-            <?= $view->editor('page[content]', '', ['v-model' => 'page.content', 'v-el' => 'editor']) ?>
+            <!-- TODO: integrate editor-->
+            <textarea id="post-content" name="page[content]" autocomplete="off" style="visibility:hidden; height:543px;" data-finder-options="{root:'\/storage'}" v-model="page.content" v-el="editor"></textarea>
         </div>
     </div>
 
@@ -23,16 +25,25 @@
         </div>
     </div>
 
-</div>
+</template>
 
 <script>
 
-    Vue.component('site-page', {
+    module.exports = {
 
-        inherit: true,
+        name: 'page-content',
+        label: 'Content',
+        priority: 10,
+        active: 'page',
+        template: __vue_template__,
+
+        data: function() {
+            // TODO test
+            return { page: {} }
+        },
 
         ready: function() {
-            this.editor = UIkit.htmleditor(this.$$.editor, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, { markdown: this.page.data.markdown }));
+            this.editor = UIkit.htmleditor(this.$$.editor, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, { markdown: this.$get('page.data.markdown') }));
         },
 
         events: {
@@ -51,6 +62,6 @@
 
         }
 
-    });
+    };
 
 </script>

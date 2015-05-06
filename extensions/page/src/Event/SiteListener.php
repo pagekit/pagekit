@@ -13,8 +13,7 @@ class SiteListener implements EventSubscriberInterface
 {
     public function onSite($event, $view)
     {
-        $view->script('page-site-content', 'page:app/bundle/site.content.js', 'site');
-        $view->script('page-site-settings', 'page:app/bundle/site.settings.js', 'site');
+        $view->script('page-site', 'page:app/bundle/site.js', 'site');
         App::trigger(new EditorLoadEvent('editor.load'));
     }
 

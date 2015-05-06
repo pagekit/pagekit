@@ -47,8 +47,8 @@
 
 	var __vue_template__ = "<div v-cloak=\"\">\n        <div class=\"pk-toolbar uk-form uk-clearfix\">\n            <div v-if=\"isWritable()\" class=\"uk-float-left\">\n\n                <button class=\"uk-button uk-button-primary uk-form-file\">\n                    {{ 'Upload' | trans }}\n                    <input type=\"file\" name=\"files[]\" multiple=\"multiple\">\n                </button>\n\n                <button class=\"uk-button\" v-on=\"click: createFolder()\">{{ 'Add Folder' | trans }}</button>\n\n                <button class=\"uk-button pk-button-danger\" v-show=\"selected.length\" v-on=\"click: remove\">{{ 'Delete' | trans }}</button>\n                <button class=\"uk-button\" v-show=\"selected.length === 1\" v-on=\"click: rename\">{{ 'Rename' | trans }}</button>\n\n            </div>\n            <div class=\"uk-float-right uk-hidden-small\">\n\n                <input type=\"text\" placeholder=\"{{ 'Search' | trans }}\" v-model=\"search\">\n\n                <div class=\"uk-button-group\">\n                    <button class=\"uk-button uk-icon-bars\" v-class=\"'uk-active': view == 'table'\" v-on=\"click: view = 'table'\"></button>\n                    <button class=\"uk-button uk-icon-th\" v-class=\"'uk-active': view == 'thumbnail'\" v-on=\"click: view = 'thumbnail'\"></button>\n                </div>\n\n            </div>\n        </div>\n\n        <ul class=\"uk-breadcrumb pk-breadcrumb\">\n            <li v-repeat=\"breadcrumbs\" v-class=\"'uk-active': current\">\n                <span v-show=\"current\">{{ title }}</span>\n                <a v-show=\"!current\" v-on=\"click: setPath(path)\">{{ title }}</a>\n            </li>\n        </ul>\n\n        <div v-show=\"upload.running\" class=\"uk-progress uk-progress-striped uk-active\">\n            <div class=\"uk-progress-bar\" v-style=\"width: upload.progress + '%'\">{{ upload.progress }}%</div>\n        </div>\n\n        <div v-partial=\"{{ view }}\"></div>\n\n        <div v-if=\"isWritable()\" class=\"uk-placeholder uk-text-center uk-text-muted\">\n            <img v-attr=\"src: $url('app/system/assets/images/finder-droparea.svg', true)\" width=\"22\" height=\"22\" alt=\"{{ 'Droparea' | trans }}\"> {{ 'Drop files here.' | trans }}\n        </div>\n\n    </div>";
 	var $ = __webpack_require__(1);
-	    var Vue = __webpack_require__(2);
-	    var UIkit = __webpack_require__(3);
+	    var Vue = __webpack_require__(3);
+	    var UIkit = __webpack_require__(2);
 
 	    var defaults = {
 	        root    : '/',
@@ -323,14 +323,14 @@
 /***/ 2:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = Vue;
+	module.exports = UIkit;
 
 /***/ },
 
 /***/ 3:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = UIkit;
+	module.exports = Vue;
 
 /***/ },
 

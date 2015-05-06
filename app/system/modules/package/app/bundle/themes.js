@@ -46,7 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(2);
+	var Vue = __webpack_require__(3);
 
 	$(function () {
 
@@ -65,7 +65,7 @@
 
 /***/ },
 
-/***/ 2:
+/***/ 3:
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;

@@ -17,8 +17,6 @@
 
 <script>
 
-    var Site = require('site');
-
     module.exports = {
 
         name: 'blog-post',
@@ -29,7 +27,5 @@
         template: __vue_template__
 
     };
-
-    Site.register(module.exports);
 
 </script>

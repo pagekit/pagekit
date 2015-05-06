@@ -44,10 +44,42 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __vue_template__ = "<div class=\"uk-form-row\">\n        <label for=\"form-page-title\" class=\"uk-form-label\">{{ 'Page Title' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <input id=\"form-page-title\" class=\"uk-form-width-large\" type=\"text\" name=\"page[title]\" v-model=\"page.title\">\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-url\" class=\"uk-form-label\">{{ 'Content' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <!-- TODO: integrate editor-->\n            <textarea id=\"post-content\" name=\"page[content]\" autocomplete=\"off\" style=\"visibility:hidden; height:543px\" data-finder-options=\"{root:'\/storage'}\" v-model=\"page.content\" v-el=\"editor\"></textarea>\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Options' | trans }}</span>\n        <div class=\"uk-form-controls\">\n            <label><input type=\"checkbox\" name=\"page[data][title]\" v-model=\"page.data.title\"> {{ 'Show Title' | trans }}</label>\n        </div>\n        <div class=\"uk-form-controls\">\n            <label><input type=\"checkbox\" name=\"page[data][markdown]\" v-model=\"page.data.markdown\"> {{ 'Enable Markdown' | trans }}</label>\n        </div>\n    </div>";
 	var Site = __webpack_require__(1);
 
-	    module.exports = {
+	Site.register(__webpack_require__(2));
+	Site.register(__webpack_require__(3));
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = Site;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_template__ = "{{&gt; settings-fields}}";
+	module.exports = {
+
+	        name: 'page-settings',
+	        label: 'Settings',
+	        priority: 0,
+	        active: 'page',
+
+	        template: __vue_template__
+
+	    };
+	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_template__ = "<div class=\"uk-form-row\">\n        <label for=\"form-page-title\" class=\"uk-form-label\">{{ 'Page Title' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <input id=\"form-page-title\" class=\"uk-form-width-large\" type=\"text\" name=\"page[title]\" v-model=\"page.title\">\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-url\" class=\"uk-form-label\">{{ 'Content' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <!-- TODO: integrate editor-->\n            <textarea id=\"post-content\" name=\"page[content]\" autocomplete=\"off\" style=\"visibility:hidden; height:543px\" data-finder-options=\"{root:'\/storage'}\" v-model=\"page.content\" v-el=\"editor\"></textarea>\n        </div>\n    </div>\n\n    <div class=\"uk-form-row\">\n        <span class=\"uk-form-label\">{{ 'Options' | trans }}</span>\n        <div class=\"uk-form-controls\">\n            <label><input type=\"checkbox\" name=\"page[data][title]\" v-model=\"page.data.title\"> {{ 'Show Title' | trans }}</label>\n        </div>\n        <div class=\"uk-form-controls\">\n            <label><input type=\"checkbox\" name=\"page[data][markdown]\" v-model=\"page.data.markdown\"> {{ 'Enable Markdown' | trans }}</label>\n        </div>\n    </div>";
+	module.exports = {
 
 	        name: 'page-content',
 	        label: 'Content',
@@ -57,7 +89,7 @@
 
 	        data: function() {
 	            // TODO test
-	            return { page: {}}
+	            return { page: {} }
 	        },
 
 	        ready: function() {
@@ -81,16 +113,8 @@
 	        }
 
 	    };
-
-	    Site.register(module.exports);
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = Site;
 
 /***/ }
 /******/ ]);

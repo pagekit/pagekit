@@ -374,7 +374,7 @@ var Site =
 
 	        partials: {
 
-	            'settings-fields': '#settings-fields'
+	            'settings-fields': __webpack_require__(9)
 
 	        }
 
@@ -422,7 +422,7 @@ var Site =
 
 	        components: {
 
-	            'node-item': __webpack_require__(9)
+	            'node-item': __webpack_require__(10)
 
 	        }
 	    }
@@ -431,6 +431,12 @@ var Site =
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<div class=\"uk-form-row\">\n    <label for=\"form-title\" class=\"uk-form-label\">{{ 'Title' | trans }}</label>\n    <div class=\"uk-form-controls\">\n        <input id=\"form-title\" class=\"uk-form-width-large\" type=\"text\" name=\"node[title]\" v-model=\"node.title\" v-valid=\"alphaNum\">\n        <span class=\"uk-form-help-block uk-text-danger\" v-show=\"form['node[title]'].invalid\">{{ 'Invalid name.' | trans }}</span>\n    </div>\n</div>\n\n<div class=\"uk-form-row\">\n    <label for=\"form-slug\" class=\"uk-form-label\">{{ 'Slug' | trans }}</label>\n    <div class=\"uk-form-controls\">\n        <span>{{ path }}</span><br>\n        <input id=\"form-slug\" class=\"uk-form-width-large\" type=\"text\" name=\"node[slug]\" v-model=\"node.slug\" v-valid=\"alphaNum\">\n        <span class=\"uk-form-help-block uk-text-danger\" v-show=\"form['node[slug]'].invalid\">{{ 'Invalid slug.' | trans }}</span>\n    </div>\n</div>\n\n<div class=\"uk-form-row\">\n    <label for=\"form-status\" class=\"uk-form-label\">{{ 'Status' | trans }}</label>\n    <div class=\"uk-form-controls\">\n        <select id=\"form-status\" class=\"uk-form-width-large\" v-model=\"node.status\">\n            <option value=\"0\">{{ 'Disabled' | trans }}</option>\n            <option value=\"1\">{{ 'Enabled' | trans }}</option>\n        </select>\n    </div>\n</div>\n\n<div class=\"uk-form-row\" v-if=\"type.url\">\n    <span class=\"uk-form-label\">{{ 'Options' | trans }}</span>\n    <div class=\"uk-form-controls\">\n        <label><input type=\"checkbox\" name=\"frontpage\" v-model=\"isFrontpage\"> {{ 'Frontpage' | trans }}</label>\n    </div>\n</div>\n";
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<li class=\"uk-nestable-list-item\" v-class=\"uk-parent: isParent, uk-active: isActive\" data-id=\"{{ node.id }}\">\n\n        <div class=\"uk-nestable-item uk-visible-hover-inline\" v-on=\"click: select(node)\">\n            <div class=\"uk-nestable-handle\"></div>\n            <div data-nestable-action=\"toggle\"></div>\n            {{ node.title }}\n\n            <i class=\"uk-float-right uk-icon-home\" title=\"{{ 'Frontpage' | trans }}\" v-show=\"isFrontpage\"></i>\n            <a class=\"uk-hidden uk-float-right\" title=\"{{ 'Delete' | trans }}\" v-on=\"click: delete\"><i class=\"uk-icon-minus-circle\"></i></a>\n        </div>\n\n        <ul class=\"uk-nestable-list\" v-if=\"isParent\">\n            <node-item v-repeat=\"item: item.children\"></node-item>\n        </ul>\n\n    </li>";

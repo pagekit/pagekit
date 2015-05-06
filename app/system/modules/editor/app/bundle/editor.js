@@ -44,14 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11);
-	__webpack_require__(12);
 
 	var $ = __webpack_require__(1);
-	var UIkit = __webpack_require__(3);
+	var UIkit = __webpack_require__(2);
 
 	$(function () {
 
@@ -82,20 +82,19 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = Vue;
+	module.exports = UIkit;
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = UIkit;
+	module.exports = Vue;
 
 /***/ },
 /* 4 */,
 /* 5 */,
 /* 6 */,
-/* 7 */,
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -103,8 +102,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(2);
-	var UIkit = __webpack_require__(3);
+	var Vue = __webpack_require__(3);
+	var UIkit = __webpack_require__(2);
 
 	var ImageVm = {
 
@@ -273,7 +272,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -281,8 +280,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(2);
-	var UIkit = __webpack_require__(3);
+	var Vue = __webpack_require__(3);
+	var UIkit = __webpack_require__(2);
 
 	/* TODO
 
@@ -403,7 +402,7 @@
 	*/
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -411,8 +410,8 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(2);
-	var UIkit = __webpack_require__(3);
+	var Vue = __webpack_require__(3);
+	var UIkit = __webpack_require__(2);
 
 	var VideoVm = {
 
@@ -596,14 +595,14 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL resolver plugin
 	 */
 
-	var UIkit = __webpack_require__(3);
+	var UIkit = __webpack_require__(2);
 
 	UIkit.plugin('htmleditor', 'urlresolver', {
 
@@ -631,7 +630,7 @@
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -664,6 +663,7 @@
 
 
 /***/ },
+/* 12 */,
 /* 13 */,
 /* 14 */,
 /* 15 */,

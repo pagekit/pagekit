@@ -122,7 +122,7 @@
 
         partials: {
 
-            'settings-fields': '#settings-fields'
+            'settings-fields': require('./settings.html')
 
         }
 

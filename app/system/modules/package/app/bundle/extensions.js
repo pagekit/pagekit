@@ -46,11 +46,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(2);
+	var Vue = __webpack_require__(3);
 
 	$(function () {
 
-	  var opts = __webpack_require__(4);
+	  var opts = __webpack_require__(12);
 	  var app  = new Vue(opts).$mount('#extensions');
 
 	});
@@ -65,14 +65,14 @@
 
 /***/ },
 
-/***/ 2:
+/***/ 3:
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;
 
 /***/ },
 
-/***/ 4:
+/***/ 12:
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);

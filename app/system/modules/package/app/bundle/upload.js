@@ -46,7 +46,7 @@
 
 	var __vue_template__ = "<div class=\"uk-placeholder uk-text-center uk-text-muted\" v-el=\"drop\">\n        <img v-attr=\"src: $url.static('app/system/assets/images/finder-droparea.svg')\" width=\"22\" height=\"22\" alt=\"{{ 'Droparea' | trans }}\"> {{ 'Drop files here or' | trans }} <a class=\"uk-form-file\">{{ 'select one' | trans }}<input type=\"file\" name=\"file\" v-el=\"select\"></a>\n    </div>\n\n    <div class=\"uk-progress\" v-show=\"progress\">\n        <div class=\"uk-progress-bar\" v-style=\"width: progress\">{{ progress }}</div>\n    </div>\n\n    <div class=\"uk-modal\" v-el=\"modal\">\n        <div class=\"uk-modal-dialog\">\n\n            <div class=\"uk-alert uk-alert-danger uk-hidden\" data-msg=\"checksum-mismatch\">\n                {{ 'The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated.' | trans }}\n            </div>\n\n            <div class=\"uk-alert uk-alert-success uk-hidden\" data-msg=\"update-available\">\n                {{ 'There is an update available for the uploaded package. Please consider installing it instead.' | trans }}\n            </div>\n\n            <div class=\"uk-grid\">\n                <div class=\"uk-width-1-1\">\n                    <img class=\"uk-align-left uk-margin-bottom-remove\" width=\"50\" height=\"50\" alt=\"{{ pkg.title }}\" v-attr=\"src: pkg.extra.image\">\n                    <h1 class=\"uk-h2 uk-margin-remove\">{{ pkg.title }}</h1>\n                    <ul class=\"uk-subnav uk-subnav-line uk-margin-top-remove\">\n                        <li>{{ pkg.author.name }}</li>\n                        <li>{{ 'Version' | trans }} {{ pkg.version }}</li>\n                    </ul>\n                </div>\n            </div>\n\n            <hr class=\"uk-grid-divider\">\n\n            <div class=\"uk-grid\">\n                <div class=\"uk-width-1-2\">\n                    <div>{{ pkg.description }}</div>\n                    <ul>\n                        <li>{{ 'Path:' | trans }} {{ pkg.name }}</li>\n                        <li>{{ 'Type:' | trans }} {{ pkg.type }}</li>\n                    </ul>\n                </div>\n            </div>\n\n            <p>\n                <button class=\"uk-button uk-button-primary\">{{ 'Install' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\">{{ 'Cancel' | trans }}</button>\n            </p>\n\n        </div>\n    </div>";
 	var $ = __webpack_require__(1);
-	    var Vue = __webpack_require__(2);
+	    var Vue = __webpack_require__(3);
 
 	    module.exports = {
 
@@ -132,7 +132,8 @@
 	module.exports = jQuery;
 
 /***/ },
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;
