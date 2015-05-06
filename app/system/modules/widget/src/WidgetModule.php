@@ -28,12 +28,11 @@ class WidgetModule extends Module
             $site->registerSection('Widgets', function() { return '<div v-component="widgets-index"></div>'; });
         });
 
-        $app->on('before@site', function () use ($app) {
+        $app->on('view.site:views/admin/index', function($event, $view) {
 
-            $app['scripts']->add('widget-index', 'widget:app/index.js', ['site', 'uikit-form-select']);
-            $app['scripts']->add('widget-index-tmpl', 'widget:views/admin/index.php', 'widget-index', 'template');
+            $view->script('widget-index', 'widget:app/bundle/site.widgets.js', ['site', 'uikit-form-select']);
 
-            $app['view']->data('$widgets', [
+            $view->data('$widgets', [
 
                 'positions' => array_values($this->getPositions()),
                 'types' => array_values($this->getTypes('site'))

@@ -45,9 +45,9 @@ var Site =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(2);
-	var _ = __webpack_require__(3);
-	var UIkit = __webpack_require__(8);
+	var $ = __webpack_require__(1);
+	var _ = __webpack_require__(2);
+	var UIkit = __webpack_require__(3);
 
 	Vue.validators['unique'] = function(value) {
 	    var menu = _.find(this.menus, { id: value });
@@ -60,46 +60,55 @@ var Site =
 
 	var Site = Vue.extend({
 
-	        mixins: [__webpack_require__(1)],
+	    sections: [],
 
-	        data: function() {
-	            return _.merge({ selected: null }, window.$data);
-	        },
+	    mixins: [__webpack_require__(4)],
 
-	        events: {
+	    data: function() {
+	        return _.merge({ selected: null }, window.$data);
+	    },
 
-	            loaded: 'select'
+	    events: {
 
-	        },
+	        loaded: 'select'
 
-	        methods: {
+	    },
 
-	            select: function(node) {
+	    methods: {
 
-	                if (!node) {
-	                    node = this.selected && _.find(this.nodes, { id: this.selected.id }) || this.selectFirst();
-	                }
+	        select: function(node) {
 
-	                this.$set('selected', node);
-	            },
-
-	            selectFirst: function() {
-	                var self = this, first = null;
-	                this.menus.some(function (menu) {
-	                    return first = _.first(self.tree[menu.id]);
-	                });
-
-	                return first ? first.node : undefined;
+	            if (!node) {
+	                node = this.selected && _.find(this.nodes, { id: this.selected.id }) || this.selectFirst();
 	            }
 
+	            this.$set('selected', node);
 	        },
 
-	        components: {
-	            'menu-list': __webpack_require__(4),
-	            'node-edit': __webpack_require__(5)
+	        selectFirst: function() {
+	            var self = this, first = null;
+	            this.menus.some(function (menu) {
+	                return first = _.first(self.tree[menu.id]);
+	            });
+
+	            return first ? first.node : undefined;
 	        }
 
-	    });
+	    },
+
+	    components: {
+	        'menu-list': __webpack_require__(5),
+	        'node-edit': __webpack_require__(6)
+	    }
+
+	});
+
+	Site.register = function (options) {
+	    this.component(options.name, options);
+	    this.options.sections.push(options);
+	};
+
+	Site.register(__webpack_require__(7));
 
 	$(function () {
 
@@ -115,8 +124,26 @@ var Site =
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(2);
-	var _ = __webpack_require__(3);
+	module.exports = jQuery;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = _;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = UIkit;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+	var _ = __webpack_require__(2);
 
 	module.exports = {
 
@@ -181,19 +208,7 @@ var Site =
 
 
 /***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = jQuery;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = _;
-
-/***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<div class=\"uk-margin\" v-repeat=\"menu: menus\">\n        <div class=\"uk-flex\">\n            <span class=\"uk-panel-title uk-flex-item-1\" v-on=\"click: edit(menu)\">{{ menu.label }}</span>\n\n            <div class=\"uk-button-dropdown\" data-uk-dropdown=\"{ mode: 'click' }\">\n                <a v-on=\"click: $event.preventDefault()\"><i class=\"uk-icon uk-icon-plus\"></i></a>\n                <div class=\"uk-dropdown uk-dropdown-small\">\n                    <ul class=\"uk-nav uk-nav-dropdown\">\n                        <li v-repeat=\"type: types | unmounted\"><a v-on=\"click: add(menu, type)\">{{ type.label }}</a></li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n\n        <node-list></node-list>\n\n    </div>\n\n    <p>\n        <a v-on=\"click: edit()\"><i class=\"uk-icon-th-list\"></i> {{ 'Create Menu' | trans }}</a>\n    </p>\n\n    <div class=\"uk-modal\" v-el=\"modal\">\n\n        <div class=\"uk-modal-dialog uk-modal-dialog-slide\" v-if=\"menu\">\n\n            <form name=\"menuform\" v-on=\"valid: save\">\n\n                <p>\n                    <input class=\"uk-width-1-1 uk-form-large\" name=\"label\" type=\"text\" placeholder=\"{{ 'Enter Menu Name' | trans }}\" v-model=\"menu.label\" v-valid=\"alphaNum\">\n                    <span class=\"uk-form-help-block uk-text-danger\" v-show=\"menuform.label.invalid\">{{ 'Invalid name.' | trans }}</span>\n                </p>\n                <p>\n                    <input class=\"uk-width-1-1 uk-form-large\" name=\"id\" type=\"text\" placeholder=\"{{ 'Enter Menu Slug' | trans }}\" v-model=\"menu.id\" v-valid=\"alphaNum, unique\">\n                    <span class=\"uk-form-help-block uk-text-danger\" v-show=\"menuform.id.invalid\">{{ 'Invalid slug.' | trans }}</span>\n                </p>\n\n                <button class=\"uk-button uk-button-primary\" v-attr=\"disabled: menuform.invalid\">{{ 'Save' | trans }}</button>\n                <button class=\"uk-button uk-modal-close\" v-on=\"click: cancel\">{{ 'Cancel' | trans }}</button>\n                <button class=\"uk-button uk-button-danger uk-float-right\" v-show=\"menu.oldId\" v-on=\"click: delete\">{{ 'Delete' | trans }}</button>\n\n            </form>\n        </div>\n\n    </div>";
@@ -260,7 +275,7 @@ var Site =
 
 	        components: {
 
-	            'node-list': __webpack_require__(6)
+	            'node-list': __webpack_require__(8)
 
 	        }
 
@@ -269,11 +284,14 @@ var Site =
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __vue_template__ = "<form class=\"uk-form uk-form-horizontal\" name=\"form\" v-show=\"node.type\" v-on=\"valid: save\">\n\n        <div class=\"uk-clearfix uk-margin\">\n\n            <div class=\"uk-float-left\">\n\n                <h2 class=\"uk-h2\" v-if=\"node.id\">{{ node.title }} ({{ type.label }})</h2>\n                <h2 class=\"uk-h2\" v-if=\"!node.id\">{{ 'Add %type%' | trans {type:type.label} }}</h2>\n\n            </div>\n\n            <div class=\"uk-float-right\">\n\n                <a class=\"uk-button\" v-on=\"click: cancel()\">{{ 'Cancel' | trans }}</a>\n                <button class=\"uk-button uk-button-primary\" type=\"submit\" v-attr=\"disabled: form.invalid\">{{ 'Save' | trans }}</button>\n\n            </div>\n\n        </div>\n\n        <div v-el=\"edit\"></div>\n\n    </form>";
-	module.exports = {
+	var __vue_template__ = "<form class=\"uk-form uk-form-horizontal\" name=\"form\" v-show=\"node.type\" v-on=\"valid: save\">\n\n        <div class=\"uk-clearfix uk-margin\">\n\n            <div class=\"uk-float-left\">\n\n                <h2 class=\"uk-h2\" v-if=\"node.id\">{{ node.title }} ({{ type.label }})</h2>\n                <h2 class=\"uk-h2\" v-if=\"!node.id\">{{ 'Add %type%' | trans {type:type.label} }}</h2>\n\n            </div>\n\n            <div class=\"uk-float-right\">\n\n                <a class=\"uk-button\" v-on=\"click: cancel()\">{{ 'Cancel' | trans }}</a>\n                <button class=\"uk-button uk-button-primary\" type=\"submit\" v-attr=\"disabled: form.invalid\">{{ 'Save' | trans }}</button>\n\n            </div>\n\n        </div>\n\n        <ul class=\"uk-tab\" v-el=\"tab\">\n            <li v-repeat=\"section: sections | active | orderBy 'priority'\"><a>{{ section.label | trans }}</a></li>\n        </ul>\n\n        <div class=\"uk-switcher uk-margin\" v-el=\"content\">\n            <div v-repeat=\"section: sections | active | orderBy 'priority'\">\n                <div v-component=\"{{ section.name }}\" v-with=\"node: node\"></div>\n            </div>\n        </div>\n\n    </form>";
+	var _ = __webpack_require__(2);
+	    var UIkit = __webpack_require__(3);
+
+	    module.exports = {
 
 	        inherit: true,
 
@@ -281,9 +299,29 @@ var Site =
 	            return { node: {} }
 	        },
 
+	        ready: function() {
+	            this.tab = UIkit.tab(this.$$.tab, { connect: this.$$.content });
+	        },
+
 	        watch: {
 
-	            selected: 'reload'
+	            selected: function(node) {
+	                this.$set('node', _.extend({}, node));
+	                this.tab.switcher.show(0);
+	            }
+
+	        },
+
+	        filters: {
+
+	            active: function(sections) {
+
+	                var type = this.$get('type');
+
+	                return sections.filter(function(section) {
+	                    return !section.active || type.id && type.id.match(section.active);
+	                });
+	            }
 
 	        },
 
@@ -299,73 +337,44 @@ var Site =
 
 	            isFrontpage: function() {
 	                return this.node.id === this.frontpage;
+	            },
+
+	            sections: function() {
+	                return this.$root.$options.sections
 	            }
 
 	        },
 
 	        methods: {
 
-	            reload: function() {
-
-	                var self = this;
-
-	                if (!this.selected) {
-	                    this.node = {};
-	                    return;
-	                }
-
-	                this.$http.get(this.$url('admin/site/edit', (this.selected.id ? { id: this.selected.id } : { type: this.selected.type })), function(data) {
-
-	                    if (self.edit) {
-	                        self.edit.$destroy();
-	                    }
-
-	                    data.node.menu = self.selected.menu;
-
-	                    self.$set('node', data.node);
-
-	                    $(self.$$.edit).empty().html(data.view);
-
-	                    self.edit = self.$addChild({
-
-	                        inherit: true,
-	                        data: data.data,
-	                        el: self.$$.edit,
-
-	                        ready: function() {
-	                            UIkit.tab(this.$$.tab, { connect: this.$$.content });
-	                        }
-
-	                    });
-	                });
-	            },
-
 	            save: function (e) {
 
 	                e.preventDefault();
 
-	                var data = _.merge($(":input", e.target).serialize().parse(), { node: this.node });
+	                var self = this, data = { node: this.node };
 
 	                this.$broadcast('save', data);
 
 	                this.Nodes.save({ id: this.node.id }, data, function(node) {
 
-	                    vm.selected.id = parseInt(node.id);
-	                    vm.load();
+	                    self.selected.id = parseInt(node.id);
+	                    self.load();
 
 	                    if (data.frontpage) {
-	                        vm.$set('frontpage', node.id);
+	                        self.$set('frontpage', node.id);
 	                    }
 	                });
 	            },
 
 	            cancel: function() {
-	                if (this.node.id) {
-	                    this.reload();
-	                } else {
-	                    this.select();
-	                }
+	                this.load()
 	            }
+
+	        },
+
+	        partials: {
+
+	            'settings-fields': '#settings-fields'
 
 	        }
 
@@ -374,7 +383,23 @@ var Site =
 
 
 /***/ },
-/* 6 */
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_template__ = "{{&gt; settings-fields}}\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-alias-url\" class=\"uk-form-label\">{{ 'Url' | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input id=\"form-alias-url\" class=\"uk-form-width-large\" type=\"text\" v-model=\"node.data.url\">\n        </div>\n    </div>";
+	module.exports = {
+
+	        name: 'alias',
+	        label: 'Settings',
+	        priority: 0,
+	        active: 'alias'
+
+	    }
+	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<ul class=\"uk-nestable\">\n        <node-item v-repeat=\"item: tree[menu.id]\"></node-item>\n    </ul>";
@@ -397,7 +422,7 @@ var Site =
 
 	        components: {
 
-	            'node-item': __webpack_require__(7)
+	            'node-item': __webpack_require__(9)
 
 	        }
 	    }
@@ -405,7 +430,7 @@ var Site =
 
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_template__ = "<li class=\"uk-nestable-list-item\" v-class=\"uk-parent: isParent, uk-active: isActive\" data-id=\"{{ node.id }}\">\n\n        <div class=\"uk-nestable-item uk-visible-hover-inline\" v-on=\"click: select(node)\">\n            <div class=\"uk-nestable-handle\"></div>\n            <div data-nestable-action=\"toggle\"></div>\n            {{ node.title }}\n\n            <i class=\"uk-float-right uk-icon-home\" title=\"{{ 'Frontpage' | trans }}\" v-show=\"isFrontpage\"></i>\n            <a class=\"uk-hidden uk-float-right\" title=\"{{ 'Delete' | trans }}\" v-on=\"click: delete\"><i class=\"uk-icon-minus-circle\"></i></a>\n        </div>\n\n        <ul class=\"uk-nestable-list\" v-if=\"isParent\">\n            <node-item v-repeat=\"item: item.children\"></node-item>\n        </ul>\n\n    </li>";
@@ -449,12 +474,6 @@ var Site =
 	    }
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
 
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = UIkit;
 
 /***/ }
 /******/ ]);

@@ -50,7 +50,7 @@
 
 	$(function () {
 
-	  var opts = __webpack_require__(7);
+	  var opts = __webpack_require__(4);
 	  var app  = new Vue(opts).$mount('#extensions');
 
 	});
@@ -72,7 +72,7 @@
 
 /***/ },
 
-/***/ 7:
+/***/ 4:
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1);

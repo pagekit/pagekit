@@ -13,46 +13,55 @@ Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
 
 var Site = Vue.extend({
 
-        mixins: [require('./tree')],
+    sections: [],
 
-        data: function() {
-            return _.merge({ selected: null }, window.$data);
-        },
+    mixins: [require('./tree')],
 
-        events: {
+    data: function() {
+        return _.merge({ selected: null }, window.$data);
+    },
 
-            loaded: 'select'
+    events: {
 
-        },
+        loaded: 'select'
 
-        methods: {
+    },
 
-            select: function(node) {
+    methods: {
 
-                if (!node) {
-                    node = this.selected && _.find(this.nodes, { id: this.selected.id }) || this.selectFirst();
-                }
+        select: function(node) {
 
-                this.$set('selected', node);
-            },
-
-            selectFirst: function() {
-                var self = this, first = null;
-                this.menus.some(function (menu) {
-                    return first = _.first(self.tree[menu.id]);
-                });
-
-                return first ? first.node : undefined;
+            if (!node) {
+                node = this.selected && _.find(this.nodes, { id: this.selected.id }) || this.selectFirst();
             }
 
+            this.$set('selected', node);
         },
 
-        components: {
-            'menu-list': require('./components/menus.vue'),
-            'node-edit': require('./components/edit.vue')
+        selectFirst: function() {
+            var self = this, first = null;
+            this.menus.some(function (menu) {
+                return first = _.first(self.tree[menu.id]);
+            });
+
+            return first ? first.node : undefined;
         }
 
-    });
+    },
+
+    components: {
+        'menu-list': require('./components/menus.vue'),
+        'node-edit': require('./components/edit.vue')
+    }
+
+});
+
+Site.register = function (options) {
+    this.component(options.name, options);
+    this.options.sections.push(options);
+};
+
+Site.register(require('./components/alias.vue'));
 
 $(function () {
 

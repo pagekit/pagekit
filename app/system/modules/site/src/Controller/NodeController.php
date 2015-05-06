@@ -41,10 +41,9 @@ class NodeController
         $node->save($data);
 
         if ($frontpage && $type = App::module('system/site')->getType($node->getType())) {
-            $config = App::config('system/site', []);
-            $config['frontpage_node'] = $node->getId();
-            $config['frontpage'] = $type->getLink($node);
-            App::config()->set('system/site', $config, true);
+            $config = App::config('system/site');
+            $config->set('frontpage_node', $node->getId());
+            $config->set('frontpage', $type->getLink($node));
         }
 
         return $node;

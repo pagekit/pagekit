@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <p>
-                    <button class="uk-button uk-button-primary" type="submit" v-on="click: clearCache">{{ 'Clear' | trans }}</button>
+                    <button class="uk-button uk-button-primary" type="submit" v-on="click: clear">{{ 'Clear' | trans }}</button>
                     <button class="uk-button uk-modal-close" type="submit" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
                 </p>
 
@@ -94,7 +94,7 @@
                 this.modal.show();
             },
 
-            clearCache: function(e) {
+            clear: function(e) {
                 e.preventDefault();
 
                 this.$http.post('admin/system/cache/clear', { caches: this.clear });

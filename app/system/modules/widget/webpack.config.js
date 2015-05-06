@@ -2,17 +2,17 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/site"
+            "site.widgets": "./app/components/site.widgets.vue"
         },
         output: {
-            filename: "./app/bundle/site.js",
-            library: "Site"
+            filename: "./app/bundle/[name].js"
         },
         externals: {
             "lodash": "_",
             "jquery": "jQuery",
             "uikit": "UIkit",
-            "vue": "Vue"
+            "vue": "Vue",
+            "site": "Site"
         },
         module: {
             loaders: [

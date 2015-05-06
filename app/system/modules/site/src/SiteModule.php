@@ -12,13 +12,20 @@ class SiteModule extends Module
 {
     protected $types;
     protected $menus;
-    protected $sections;
 
     /**
      * {@inheritdoc}
      */
     public function main(App $app)
     {
+        $app['node'] = function($app) {
+            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
+                return $node;
+            }
+
+            return new Node;
+        };
+
         $app->on('app.request', function() use ($app) {
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
                 if ($type = $this->getType($node->getType())) {
@@ -36,18 +43,6 @@ class SiteModule extends Module
                 });
             }
         }, 125);
-
-        $app->on('app.request', function() use ($app) {
-            $app['scripts']->register('site-tree', 'site:app/tree.js', ['system']);
-        });
-
-        $app['node'] = function($app) {
-            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
-                return $node;
-            }
-
-            return new Node;
-        };
 
     }
 
@@ -125,37 +120,5 @@ class SiteModule extends Module
     public function registerMenu($id, $label, array $options = [])
     {
         $this->menus[$id] = array_merge($options, compact('id', 'label'));
-    }
-
-    /**
-     * @param  string $type
-     * @return array
-     */
-    public function getSections($type = '')
-    {
-        if (!$this->sections) {
-
-            $this->registerSection('Settings', 'site:views/admin/settings.php');
-            $this->registerSection('Settings', 'site:views/admin/alias.php', 'alias');
-
-            App::trigger('site.sections', [$this]);
-        }
-
-        return array_filter(array_map(function($subsections) use ($type) {
-            return array_filter($subsections, function($section) use ($type) { return in_array($section['type'], ['', $type]); });
-        }, $this->sections));
-    }
-
-    /**
-     * Registers a settings section.
-     *
-     * @param string $name
-     * @param string $view
-     * @param string $type
-     * @param array  $options
-     */
-    public function registerSection($name, $view, $type = '', array $options = [])
-    {
-        $this->sections[$name][] = array_merge($options, compact('name', 'view', 'type'));
     }
 }

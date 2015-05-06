@@ -28,15 +28,14 @@ class BlogExtension extends Extension
             $site->config['frontpage'] = $site->config['frontpage'] ?: '@blog/site';
         }, 130);
 
-        $app->on('site.types', function ($event, $site) {
-            $site->registerType(new UrlType('blog.post', 'Blog Post', '@blog/id'));
-            $site->registerType(new MountType('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController', '@blog/site'));
+        $app->on('app.request', function() use ($app) {
+            $app['scripts']->register('blog-site', 'blog:app/bundle/site.blog.js', '~site');
+            $app['scripts']->register('blog-site-post', 'blog:app/bundle/site.post.js', '~site');
         });
 
-        $app->on('site.sections', function ($event, $site) {
-            $site->registerSection('Settings', function() {
-                return App::view('blog:views/admin/site/post.php', ['posts' => App::db()->createQueryBuilder()->from('@blog_post')->execute('id, title')->fetchAll(\PDO::FETCH_KEY_PAIR)]);
-            }, 'blog.post');
+        $app->on('site.types', function ($event, $site) {
+            $site->registerType(new UrlType('blog-post', 'Blog Post', '@blog/id'));
+            $site->registerType(new MountType('blog', 'Blog', 'Pagekit\\Blog\\Controller\\SiteController', '@blog/site'));
         });
 
     }

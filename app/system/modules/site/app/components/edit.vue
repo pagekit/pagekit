@@ -20,13 +20,24 @@
 
         </div>
 
-        <div v-el="edit"></div>
+        <ul class="uk-tab" v-el="tab">
+            <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+        </ul>
+
+        <div class="uk-switcher uk-margin" v-el="content">
+            <div v-repeat="section: sections | active | orderBy 'priority'">
+                <div v-component="{{ section.name }}" v-with="node: node"></div>
+            </div>
+        </div>
 
     </form>
 
 </template>
 
 <script>
+
+    var _ = require('lodash');
+    var UIkit = require('uikit');
 
     module.exports = {
 
@@ -36,9 +47,29 @@
             return { node: {} }
         },
 
+        ready: function() {
+            this.tab = UIkit.tab(this.$$.tab, { connect: this.$$.content });
+        },
+
         watch: {
 
-            selected: 'reload'
+            selected: function(node) {
+                this.$set('node', _.extend({}, node));
+                this.tab.switcher.show(0);
+            }
+
+        },
+
+        filters: {
+
+            active: function(sections) {
+
+                var type = this.$get('type');
+
+                return sections.filter(function(section) {
+                    return !section.active || type.id && type.id.match(section.active);
+                });
+            }
 
         },
 
@@ -54,73 +85,44 @@
 
             isFrontpage: function() {
                 return this.node.id === this.frontpage;
+            },
+
+            sections: function() {
+                return this.$root.$options.sections
             }
 
         },
 
         methods: {
 
-            reload: function() {
-
-                var self = this;
-
-                if (!this.selected) {
-                    this.node = {};
-                    return;
-                }
-
-                this.$http.get(this.$url('admin/site/edit', (this.selected.id ? { id: this.selected.id } : { type: this.selected.type })), function(data) {
-
-                    if (self.edit) {
-                        self.edit.$destroy();
-                    }
-
-                    data.node.menu = self.selected.menu;
-
-                    self.$set('node', data.node);
-
-                    $(self.$$.edit).empty().html(data.view);
-
-                    self.edit = self.$addChild({
-
-                        inherit: true,
-                        data: data.data,
-                        el: self.$$.edit,
-
-                        ready: function() {
-                            UIkit.tab(this.$$.tab, { connect: this.$$.content });
-                        }
-
-                    });
-                });
-            },
-
             save: function (e) {
 
                 e.preventDefault();
 
-                var data = _.merge($(":input", e.target).serialize().parse(), { node: this.node });
+                var self = this, data = { node: this.node };
 
                 this.$broadcast('save', data);
 
                 this.Nodes.save({ id: this.node.id }, data, function(node) {
 
-                    vm.selected.id = parseInt(node.id);
-                    vm.load();
+                    self.selected.id = parseInt(node.id);
+                    self.load();
 
                     if (data.frontpage) {
-                        vm.$set('frontpage', node.id);
+                        self.$set('frontpage', node.id);
                     }
                 });
             },
 
             cancel: function() {
-                if (this.node.id) {
-                    this.reload();
-                } else {
-                    this.select();
-                }
+                this.load()
             }
+
+        },
+
+        partials: {
+
+            'settings-fields': '#settings-fields'
 
         }
 

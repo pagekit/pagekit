@@ -11,25 +11,16 @@ use Pagekit\Site\Model\UrlType;
 
 class SiteListener implements EventSubscriberInterface
 {
-    public function onSite()
+    public function onSite($event, $view)
     {
+        $view->script('page-site-content', 'page:app/bundle/site.content.js', 'site');
+        $view->script('page-site-settings', 'page:app/bundle/site.settings.js', 'site');
         App::trigger(new EditorLoadEvent('editor.load'));
     }
 
     public function onSiteTypes($event, $site)
     {
         $site->registerType(new UrlType('page', __('Page'), '@page/id'));
-    }
-
-    public function onSiteSections($event, $site)
-    {
-        $site->registerSection('Content', function ($node) {
-
-            App::view()->data('site', ['page' => $this->getPage($node)]);
-
-            return App::view('page:views/admin/site/page.php', ['page' => $this->getPage($node)]);
-
-        }, 'page');
     }
 
     public function onSave(EntityEvent $event)
@@ -79,11 +70,10 @@ class SiteListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'view.site:views/admin/index.php' => 'onSite',
-            'site.types'                      => 'onSiteTypes',
-            'site.sections'                   => 'onSiteSections',
-            'site.node.preSave'               => 'onSave',
-            'site.node.postDelete'            => 'onDelete'
+            'view.site:views/admin/index' => 'onSite',
+            'site.types'                  => 'onSiteTypes',
+            'site.node.preSave'           => 'onSave',
+            'site.node.postDelete'        => 'onDelete'
         ];
     }
 }
