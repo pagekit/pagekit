@@ -23,11 +23,9 @@ jQuery(function ($) {
 
             statuses: function () {
 
-                var options = [{ text: this.$trans('New'), value: 'new' }].concat(
-                    Vue.filter('toArray')($.map(this.data.statuses, function (status, id) {
-                        return { text: status, value: id };
-                    }))
-                );
+                var options = [{ text: this.$trans('New'), value: 'new' }].concat(_.map(this.data.statuses, function (status, id) {
+                    return { text: status, value: id };
+                }));
 
                 return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
             },
