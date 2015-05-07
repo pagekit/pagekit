@@ -1,4 +1,3 @@
-<?php $view->style('permission-index', 'system/user:assets/css/user.css') ?>
 <?php $view->script('permission-index', 'system/user:app/role.js', ['system', 'uikit-sticky']) ?>
 
 <div id="js-permission" class="uk-form" v-cloak>
@@ -21,9 +20,9 @@
                     </td>
                     <td class="uk-text-center" v-repeat="role: roles">
 
-                        <span class="pk-checkbox-fake" v-show="showFakeCheckbox(role, $parent.$key)">
+                        <span class="uk-position-relative" v-show="showFakeCheckbox(role, $parent.$key)">
                             <input type="checkbox" checked disabled>
-                            <span v-if="!role.isAdministrator" v-on="click: addPermission(role, $parent.$key)"></span>
+                            <span class="uk-position-cover" v-if="!role.isAdministrator" v-on="click: addPermission(role, $parent.$key)"></span>
                         </span>
 
                         <input type="checkbox" value="{{ $parent.$key }}" v-show="!showFakeCheckbox(role, $parent.$key)" v-checkbox="role.permissions">

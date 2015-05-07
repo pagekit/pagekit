@@ -1,4 +1,3 @@
-<?php $view->style('role-index', 'system/user:assets/css/user.css') ?>
 <?php $view->script('role-index', 'system/user:app/role.js', ['system', 'uikit']) ?>
 
 <div id="js-role" class="uk-form" v-cloak>
@@ -46,9 +45,9 @@
                             </td>
                             <td class="uk-text-center">
 
-                                <span class="pk-checkbox-fake" v-show="showFakeCheckbox(current, $key)">
+                                <span class="uk-position-relative" v-show="showFakeCheckbox(current, $key)">
                                     <input type="checkbox" checked disabled>
-                                    <span v-if="!current.isAdministrator" v-on="click: addPermission(current, $key)"></span>
+                                    <span class="uk-position-cover" v-if="!current.isAdministrator" v-on="click: addPermission(current, $key)"></span>
                                 </span>
 
                                 <input type="checkbox" value="{{ $key }}" v-show="!showFakeCheckbox(current, $key)" v-checkbox="current.permissions">
