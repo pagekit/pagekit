@@ -5,11 +5,14 @@ namespace Pagekit\Session\Csrf\Provider;
 class DefaultCsrfProvider implements CsrfProviderInterface
 {
     /**
-     * The session attribute name for the token.
-     *
      * @var string
      */
     protected $name;
+
+    /**
+     * @var string
+     */
+    protected $token;
 
     /**
      * Constructor.
@@ -32,9 +35,21 @@ class DefaultCsrfProvider implements CsrfProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function validate($token)
+    public function validate($token = null)
     {
+        if ($token === null) {
+            $token = $this->token;
+        }
+
         return $token === $this->generate();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
     /**

@@ -30,9 +30,9 @@ class CsrfListener implements EventSubscriberInterface
      */
     public function onRequest($event, $request)
     {
-        if ($csrf = $request->attributes->get('_request[csrf]', false, true)
-            and !$this->provider->validate($request->get(is_string($csrf) ? $csrf : '_csrf', $request->headers->get(is_string($csrf) ? $csrf : 'X-XSRF-TOKEN')))
-        ) {
+        $this->provider->setToken($request->get('_csrf', $request->headers->get('X-XSRF-TOKEN')));
+
+        if ($csrf = $request->attributes->get('_request[csrf]', false, true) and !$this->provider->validate()) {
             throw new \RuntimeException('Invalid CSRF token.');
         }
     }
