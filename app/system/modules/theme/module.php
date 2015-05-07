@@ -18,26 +18,6 @@ return [
                 $event->setParameter('subset', 'latin,latin-ext');
             });
 
-            $app['view']->on('messages', function ($event) use ($app) {
-
-                $result = '';
-
-                if ($app['message']->peekAll()) {
-                    foreach ($app['message']->levels() as $level) {
-                        if ($messages = $app['message']->get($level)) {
-                            foreach ($messages as $message) {
-                                $result .= sprintf('<div class="uk-alert uk-alert-%1$s" data-status="%1$s">%2$s</div>', $level == 'error' ? 'danger' : $level, $message);
-                            }
-                        }
-                    }
-                }
-
-                if ($result) {
-                    $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
-                }
-
-            });
-
         });
 
     },

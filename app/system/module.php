@@ -25,6 +25,26 @@ return [
 
         $app['system'] = $this;
 
+        $app['view']->on('messages', function ($event) use ($app) {
+
+            $result = '';
+
+            if ($app['message']->peekAll()) {
+                foreach ($app['message']->levels() as $level) {
+                    if ($messages = $app['message']->get($level)) {
+                        foreach ($messages as $message) {
+                            $result .= sprintf('<div class="uk-alert uk-alert-%1$s" data-status="%1$s">%2$s</div>', $level == 'error' ? 'danger' : $level, $message);
+                        }
+                    }
+                }
+            }
+
+            if ($result) {
+                $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+            }
+
+        });
+
         foreach ($this->config['extensions'] as $module) {
             try {
                 $app['module']->load($module);
@@ -32,6 +52,15 @@ return [
                 $app['log']->warn("Unable to load extension: $module");
             }
         }
+
+        $app['module']->load($theme = $app['system']->config('site.theme'));
+
+        if ($app['theme.site'] = $app['module']->get($theme)) {
+            $app->on('app.site', function () use ($app) {
+                $app['view']->map('layout', $app['theme.site']->getLayout());
+            });
+        }
+
     },
 
     'boot' => function ($app) {

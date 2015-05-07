@@ -21,14 +21,6 @@ return [
             $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'system');
             $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['system', 'uikit-upload']);
 
-            $app['module']->load($theme = $app['system']->config('site.theme'));
-
-            if ($app['theme.site'] = $app['module']->get($theme)) {
-                $app->on('app.site', function () use ($app) {
-                    $app['view']->map('layout', $app['theme.site']->getLayout());
-                });
-            }
-
         }, 120);
 
     },
