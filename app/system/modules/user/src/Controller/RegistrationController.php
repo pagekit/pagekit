@@ -45,58 +45,22 @@ class RegistrationController
      */
     public function registerAction($data)
     {
-        $response = ['success' => false];
-        $errors   = [];
-
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
                 return App::redirect();
             }
 
-            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
+            if (!App::csrf()->validate()) {
                 throw new Exception(__('Invalid token. Please try again.'));
-            }
-
-            $name     = trim(@$data['name']);
-            $username = trim(@$data['username']);
-            $email    = trim(@$data['email']);
-            $password = @$data['password'];
-
-            if (empty($name)) {
-                $errors[] = ['field'=> 'name', 'message' => __('Name required.')];
-            }
-
-            if (empty($password)) {
-                $errors[] = ['field'=> 'password', 'message' => __('Password required.')];
-            }
-
-            if (strlen($username) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $username)) {
-                $errors[] = ['field'=> 'username', 'message' => __('Username is invalid.')];
-            }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = ['field'=> 'email', 'message' => __('Email is invalid.')];
-            }
-
-            if (User::query()->orWhere(['username = :username', 'email = :username'], ['username' => $username])->first()) {
-                $errors[] = ['field'=> 'username', 'message' => __('Username not available.'), 'dynamic' => true];
-            }
-
-            if (User::query()->orWhere(['username = :email', 'email = :email'], ['email' => $email])->first()) {
-                $errors[] = ['field'=> 'email', 'message' => __('Email not available.'), 'dynamic' => true];
-            }
-
-            if (count($errors)) {
-                throw new Exception(__('Signup failed'));
             }
 
             $user = new User;
             $user->setRegistered(new \DateTime);
-            $user->setName($name);
-            $user->setUsername($username);
-            $user->setEmail($email);
-            $user->setPassword(App::get('auth.password')->hash($password));
+            $user->setName(@$data['name']);
+            $user->setUsername(@$data['username']);
+            $user->setEmail(@$data['email']);
+            $user->setPassword(App::get('auth.password')->hash(@$data['password']));
             $user->setStatus(User::STATUS_BLOCKED);
             $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 
@@ -118,49 +82,33 @@ class RegistrationController
 
             }
 
+            $user->validate();
             $user->save();
 
             if ($verify) {
 
                 $this->sendVerificationMail($user);
-                $response['success'] = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
+                $message = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
 
             } elseif ($admin) {
 
                 $this->sendApproveMail($user);
-                $response['success'] = __('Your user account has been created and is pending approval by the site administrator.');
+                $message = __('Your user account has been created and is pending approval by the site administrator.');
 
             } else {
 
                 $this->sendWelcomeEmail($user);
-                $response['success'] = __('Your user account has been created.');
+                $message = __('Your user account has been created.');
 
-            }
-
-            if (!$response['success']) {
-                $response['success'] = true;
-            }
-
-            if (!App::request()->isXmlHttpRequest()) {
-
-                App::message()->success($response['success']);
-                return App::redirect('@user/auth/login');
             }
 
         } catch (Exception $e) {
-
-            if (!App::request()->isXmlHttpRequest()) {
-
-                foreach ($errors as $error) {
-                    App::message()->error($error['message']);
-                }
-
-            } else {
-                $response['errors'] = $errors;
-            }
+            App::abort(400, $e->getMessage());
         }
 
-        return App::request()->isXmlHttpRequest() ? $response : App::redirect(count($errors) ? '@user/registration' : '@user/auth/login');
+        App::message()->success($message);
+
+        return ['redirect' => App::url('@user/auth/login', [], true)];
     }
 
     /**

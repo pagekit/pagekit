@@ -33,7 +33,7 @@ class ResetPasswordController
                 return App::redirect();
             }
 
-            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
+            if (!App::csrf()->validate()) {
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
@@ -97,7 +97,7 @@ class ResetPasswordController
 
             try {
 
-                if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
+                if (!App::csrf()->validate()) {
                     throw new Exception(__('Invalid token. Please try again.'));
                 }
 

@@ -11,7 +11,7 @@ use Pagekit\Auth\RememberMe;
 class AuthController
 {
     /**
-     * @Route(methods="POST", defaults={"_maintenance"=true})
+     * @Route(defaults={"_maintenance"=true})
      * @Request({"redirect"})
      */
     public function loginAction($redirect = '')
@@ -48,7 +48,7 @@ class AuthController
     {
         try {
 
-            if (!App::csrf()->validate(App::request()->request->get('_csrf'))) {
+            if (!App::csrf()->validate()) {
                 throw new AuthException(__('Invalid token. Please try again.'));
             }
 

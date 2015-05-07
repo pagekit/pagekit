@@ -275,79 +275,63 @@
 	 * Validate functions.
 	 */
 
-	function required (value) {
+	exports.required = function (value) {
 	    if (typeof value == 'boolean') return value;
 	    return !((value === null) || (value.length === 0));
-	}
+	};
 
-	function numeric (value) {
+	exports.numeric = function (value) {
 	    return (/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/).test(value);
-	}
+	};
 
-	function integer (value) {
+	exports.integer = function (value) {
 	    return (/^(-?[1-9]\d*|0)$/).test(value);
-	}
+	};
 
-	function digits (value) {
+	exports.digits = function (value) {
 	    return (/^[\d() \.\:\-\+#]+$/).test(value);
-	}
+	};
 
-	function alpha (value) {
+	exports.alpha = function (value) {
 	    return (/^[a-zA-Z]+$/).test(value);
-	}
+	};
 
-	function alphaNum (value) {
+	exports.alphaNum = function (value) {
 	    return (/\w/).test(value);
-	}
+	};
 
-	function email (value) {
+	exports.email = function (value) {
 	    return (/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i).test(value);
-	}
+	};
 
-	function url (value) {
+	exports.url = function (value) {
 	    return (/^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/).test(value);
-	}
+	};
 
-	function minLength (value, arg) {
+	exports.minLength = function (value, arg) {
 	    return value && value.length && value.length >= +arg;
-	}
+	};
 
-	function maxLength (value, arg) {
+	exports.maxLength = function (value, arg) {
 	    return value && value.length && value.length <= +arg;
-	}
+	};
 
-	function length (value) {
+	exports.length = function (value) {
 	    return value && value.length == +arg;
-	}
+	};
 
-	function min (value, arg) {
+	exports.min = function (value, arg) {
 	    return value >= +arg;
-	}
+	};
 
-	function max (value, arg) {
+	exports.max = function (value, arg) {
 	    return value <= +arg;
-	}
+	};
 
-	function pattern (value, arg) {
+	exports.pattern = function (value, arg) {
 	    var match = arg.match(new RegExp('^/(.*?)/([gimy]*)$'));
 	    var regex = new RegExp(match[1], match[2]);
 	    return regex.test(value);
-	}
-
-	module.exports = {
-	    required: required,
-	    numeric: numeric,
-	    integer: integer,
-	    digits: digits,
-	    alpha: alpha,
-	    alphaNum: alphaNum,
-	    email: email,
-	    url: url,
-	    minLength: minLength,
-	    maxLength: maxLength,
-	    min: min,
-	    max: max,
-	    pattern: pattern
 	};
 
 

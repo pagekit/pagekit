@@ -2,6 +2,7 @@
 
 namespace Pagekit\User\Entity;
 
+use Pagekit\Application\Exception;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Model\User as BaseUser;
@@ -156,6 +157,39 @@ class User extends BaseUser implements \JsonSerializable
     public function isNew()
     {
         return $this->isBlocked() && !$this->access;
+    }
+
+    public function validate()
+    {
+        if (empty($this->name)) {
+            throw new Exception(__('Name required.'));
+        }
+
+        if (empty($this->password)) {
+            throw new Exception(__('Password required.'));
+        }
+
+        if (strlen($this->username) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $this->username)) {
+            throw new Exception(__('Username is invalid.'));
+        }
+
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception(__('Email is invalid.'));
+        }
+
+        if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
+            $query->orWhere(['username = :username', 'email = :username'], ['username' => $this->username]);
+        })->first()) {
+            throw new Exception(__('Username not available.'));
+        }
+
+        if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
+            $query->orWhere(['username = :email', 'email = :email'], ['email' => $this->email]);
+        })->first()) {
+            throw new Exception(__('Email not available.'));
+        }
+
+        return true;
     }
 
     public function jsonSerialize()
