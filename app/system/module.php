@@ -53,7 +53,7 @@ return [
             }
         }
 
-        $app['module']->load($theme = $app['system']->config('site.theme'));
+        $app['module']->load($theme = $this->config['site.theme']);
 
         if ($app['theme.site'] = $app['module']->get($theme)) {
             $app->on('app.site', function () use ($app) {
