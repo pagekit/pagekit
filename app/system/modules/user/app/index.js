@@ -16,21 +16,29 @@ jQuery(function ($) {
             this.config.filter = $.extend({status: '', role: ''}, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true, true);
-            this.$watch('config.filter', function() { this.load(0); }, true);
+            this.$watch('config.filter', function () { this.load(0); }, true);
         },
 
         computed: {
 
-            statuses: function() {
-                return [{ text: this.$trans('- Status -'), value: '' }, { text: this.$trans('New'), value: 'new' }].concat(
-                    Vue.filter('toArray')($.map(this.data.statuses, function(status, id) { return { text: status, value: id }; }))
+            statuses: function () {
+
+                var options = [{ text: this.$trans('New'), value: 'new' }].concat(
+                    Vue.filter('toArray')($.map(this.data.statuses, function (status, id) {
+                        return { text: status, value: id };
+                    }))
                 );
+
+                return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
             },
 
-            roles: function() {
-                return [{ text: this.$trans('- Role -'), value: '' }].concat(
-                    this.data.roles.map(function(role) { return { text: role.name, value: role.id }; })
-                );
+            roles: function () {
+
+                var options = this.data.roles.map(function (role) {
+                    return { text: role.name, value: role.id };
+                });
+
+                return [{ text: this.$trans('Role'), value: '' }, { label: this.$trans('Filter by'), options: options }];
             }
 
         },
@@ -48,11 +56,11 @@ jQuery(function ($) {
                 });
             },
 
-            status: function(status) {
+            status: function (status) {
 
                 var users = this.getSelected();
 
-                users.forEach(function(user) {
+                users.forEach(function (user) {
                     user.status = status;
                 });
 
@@ -62,7 +70,7 @@ jQuery(function ($) {
                 });
             },
 
-            remove: function() {
+            remove: function () {
                 this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                     vm.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
@@ -103,8 +111,8 @@ jQuery(function ($) {
                 });
             },
 
-            getSelected: function() {
-                return this.users.filter(function(user) {
+            getSelected: function () {
+                return this.users.filter(function (user) {
                     return vm.selected.indexOf(user.id.toString()) !== -1;
                 });
             }
