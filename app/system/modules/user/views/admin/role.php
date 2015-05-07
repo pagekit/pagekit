@@ -2,8 +2,8 @@
 
 <div id="js-role" class="uk-form" v-cloak>
 
-    <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-1-4">
+    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
+        <div class="pk-width-sidebar">
 
             <div class="uk-panel uk-panel-divider">
                 <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
@@ -25,7 +25,7 @@
             </div>
 
         </div>
-        <div class="uk-width-medium-3-4">
+        <div class="uk-flex-item-1">
 
             <h2>{{ current.name }}</h2>
 

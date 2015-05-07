@@ -5,6 +5,75 @@
 [v-cloak] { display: none; }
 
 
+/* Sidebar
+========================================================================== */
+
+.pk-width-sidebar {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (200px + @global-grid-gutter); }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    /*
+     * Gutter
+     */
+
+    /* Horizontal */
+    .pk-grid-large { margin-left: -40px; }
+    .pk-grid-large > * { padding-left: 40px; }
+
+    /* Vertical */
+    .pk-grid-large + .pk-grid-large,
+    .pk-grid-large > .uk-grid-margin,
+    .pk-grid-large > * > .uk-panel + .uk-panel { margin-top: 40px; }
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (250px + 40px); }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    /*
+     * Gutter
+     */
+
+    /* Horizontal */
+    .pk-grid-large { margin-left: -70px; }
+    .pk-grid-large > * { padding-left: 70px; }
+
+    /* Vertical */
+    .pk-grid-large + .pk-grid-large,
+    .pk-grid-large > .uk-grid-margin,
+    .pk-grid-large > * > .uk-panel + .uk-panel { margin-top: 70px; }
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (250px + 70px); }
+
+}
+
+
 /* Toolbar
 ========================================================================== */
 
@@ -178,6 +247,15 @@
 
 .pk-table-max-width-100 { max-width: 100px; }
 .pk-table-max-width-150 { max-width: 150px; }
+
+
+/* Sub-modifier `pk-table-sort`
+========================================================================== */
+
+.pk-table-sort:hover { cursor: pointer; }
+
+.pk-table-sort:hover,
+.pk-table-sort.uk-active { color: #666; }
 
 
 /* Sub-modifier `pk-table-fake`
