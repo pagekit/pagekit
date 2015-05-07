@@ -2,20 +2,20 @@
 
 <form id="settings" class="uk-form uk-form-horizontal" v-cloak v-on="submit: save">
 
-    <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-1-4">
+    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
+        <div class="pk-width-sidebar">
 
             <div class="uk-panel">
 
-                <ul class="uk-nav uk-nav-side" v-el="tab">
-                    <li v-repeat="section: $options.sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+                <ul class="uk-nav uk-nav-side pk-nav-large" v-el="tab">
+                    <li v-repeat="section: $options.sections | orderBy 'priority'"><a><i class="uk-icon-file-text-o uk-icon-small uk-margin-right"></i> {{ section.label | trans }}</a></li>
                 </ul>
 
             </div>
 
         </div>
 
-        <div class="uk-width-medium-3-4">
+        <div class="uk-flex-item-1">
 
             <ul class="uk-switcher uk-margin" v-el="content">
                 <li v-repeat="section: $options.sections | orderBy 'priority'">
