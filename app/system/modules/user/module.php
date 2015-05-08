@@ -51,6 +51,10 @@ return [
             $widgets->registerType(new UserWidget());
         });
 
+        $app->on('app.request', function () use ($app) {
+            $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
+        });
+
     },
 
     'autoload' => [

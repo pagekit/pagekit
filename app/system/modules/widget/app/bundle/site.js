@@ -503,7 +503,7 @@
 	        priority: 100,
 	        template: __vue_template__,
 
-	        mixins: [__webpack_require__(13)]
+	        mixins: [__webpack_require__(12)]
 
 	    }
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
@@ -516,12 +516,11 @@
 	module.exports = "<div class=\"uk-form-row\">\n    <label for=\"form-title\" class=\"uk-form-label\">{{ 'Title' | trans }}</label>\n    <div class=\"uk-form-controls\">\n        <input id=\"form-title\" class=\"uk-form-width-large\" type=\"text\" name=\"title\" v-model=\"widget.title\" v-valid=\"required\">\n        <p class=\"uk-form-help-block uk-text-danger\" v-show=\"form.title.invalid\">{{ 'Title cannot be blank.' | trans }}</p>\n    </div>\n</div>\n";
 
 /***/ },
-/* 12 */,
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(3);
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(13);
 
 	module.exports = {
 
@@ -586,7 +585,7 @@
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = _;

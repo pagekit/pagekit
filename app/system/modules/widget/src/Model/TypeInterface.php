@@ -40,11 +40,4 @@ interface TypeInterface extends \JsonSerializable
      * @param array           $options
      */
     public function render(WidgetInterface $widget, $options = []);
-
-    /**
-     * Renders widget form.
-     *
-     * @param WidgetInterface $widget
-     */
-    public function renderForm(WidgetInterface $widget);
 }

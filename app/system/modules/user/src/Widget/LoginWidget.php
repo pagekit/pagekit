@@ -33,12 +33,4 @@ class LoginWidget extends Type
 
         return App::view('system/user:views/login/login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderForm(WidgetInterface $widget)
-    {
-        return App::view('system/user:views/login/edit.php', compact('widget'));
-    }
 }
