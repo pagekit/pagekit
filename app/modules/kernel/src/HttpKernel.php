@@ -183,6 +183,7 @@ class HttpKernel implements HttpKernelInterface
      *
      * @param  \Exception $e
      * @return Response
+     * @throws \Exception
      */
     protected function handleException(\Exception $e)
     {

@@ -31,9 +31,9 @@ return [
             return new ControllerResolver();
         };
 
-        $app['request'] = function ($app) {
+        $app->factory('request', function ($app) {
             return $app['request.stack']->getCurrentRequest();
-        };
+        });
 
         $app['request.stack'] = function () {
             return new RequestStack();

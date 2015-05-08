@@ -4,6 +4,7 @@ namespace Pagekit\Info;
 
 use Doctrine\DBAL\Driver\PDOConnection;
 use Pagekit\Application as App;
+use Symfony\Component\HttpFoundation\ServerBag;
 
 class InfoHelper
 {
@@ -14,7 +15,7 @@ class InfoHelper
      */
     public function get()
     {
-        $server = App::request()->server;
+        $server = new ServerBag($GLOBALS['_SERVER']);
 
         $info                  = [];
         $info['php']           = php_uname();
