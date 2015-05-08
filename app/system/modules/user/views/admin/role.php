@@ -5,7 +5,8 @@
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
 
-            <div class="uk-panel uk-panel-divider">
+            <div class="uk-panel">
+
                 <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
                     <li v-repeat="role: rolesArray | orderBy 'priority'" v-ref="ordered">
                         <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">
@@ -18,10 +19,11 @@
                         </div>
                     </li>
                 </ul>
-            </div>
 
-            <div class="uk-panel uk-panel-divider">
-                <a class="uk-button" v-on="click: edit()">{{ 'Add Role' | trans }}</a>
+                <p>
+                    <a class="uk-button" v-on="click: edit()">{{ 'Add Role' | trans }}</a>
+                </p>
+
             </div>
 
         </div>
@@ -62,14 +64,23 @@
     </div>
 
     <div id="modal-role" class="uk-modal">
-        <form class="uk-modal-dialog uk-modal-dialog-slide" v-on="submit: update">
+        <form class="uk-modal-dialog uk-form-stacked" v-on="submit: update">
 
-            <p>
-                <input class="uk-width-1-1 uk-form-large" type="text" placeholder="{{ 'Enter Role Name' | trans }}" v-model="role.name">
-            </p>
+            <div class="uk-modal-header">
+                <h2>Add Role</h2>
+            </div>
 
-            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-            <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
+            <div class="uk-form-row">
+                <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
+                <div class="uk-form-controls">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" v-model="role.name">
+                </div>
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-link uk-modal-close">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" type="submit">{{ 'Save' | trans }}</button>
+            </div>
 
         </form>
     </div>

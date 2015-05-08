@@ -45,18 +45,15 @@
 
             <div class="uk-form-row">
                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
-
                 <div class="uk-form-controls uk-form-controls-text js-password" v-show="user.id">
                     <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
                 </div>
-
                 <div class="uk-form-controls js-password" v-class="'uk-hidden' : user.id">
                     <div class="uk-form-password">
                         <input id="form-password" class="uk-form-width-large" type="password" v-model="password">
                         <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
                     </div>
                 </div>
-
             </div>
 
             <div class="uk-form-row">
