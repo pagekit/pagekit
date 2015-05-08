@@ -1,3 +1,4 @@
+**/app/bundle/**/*.js
 /extensions/*
 !/extensions/blog
 !/extensions/hello
