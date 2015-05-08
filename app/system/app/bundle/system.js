@@ -56,22 +56,27 @@
 	     * Config
 	     */
 
-	    Vue.url.root = config.url;
-	    Vue.http.options.emulateHTTP = true;
-	    Vue.http.headers.common['X-XSRF-TOKEN'] = config.csrf;
-	    Vue.http.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+	    Vue.options.url.root = config.url;
+	    Vue.options.http.emulateHTTP = true;
+	    Vue.options.http.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
 
 	    /**
 	     * Methods
 	     */
 
-	    Vue.url.static = function(url, params, root) {
+	    Vue.url.static = function(url, params) {
 
-	        if (!root) {
-	            root = Vue.url.root;
+	        var options = url;
+
+	        if (!_.isPlainObject(options)) {
+	            options = {url: url, params: params};
 	        }
 
-	        return Vue.url(url, params, root.replace(/\/index.php$/i, ''));
+	        Vue.util.extend(options, {
+	            root: Vue.options.url.root.replace(/\/index.php$/i, '')
+	        });
+
+	        return Vue.url(options);
 	    };
 
 	    var formats = ['full', 'long', 'medium', 'short'];
@@ -222,13 +227,13 @@
 	module.exports = jQuery;
 
 /***/ },
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = Vue;
 
 /***/ },
+/* 3 */,
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -237,7 +242,7 @@
 	 */
 
 	var $ = __webpack_require__(1);
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.directive('gravatar', {
 
@@ -368,7 +373,7 @@
 
 	var $ = __webpack_require__(1);
 	var _ = __webpack_require__(14);
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.filter('baseUrl', function(url) {
 	    return _.startsWith(url, Vue.url.root) ? url.substr(Vue.url.root.length) : url;
@@ -448,7 +453,7 @@
 	 * Vue Pagination component.
 	 */
 
-	var Vue = __webpack_require__(3);
+	var Vue = __webpack_require__(2);
 
 	Vue.component('v-pagination', {
 

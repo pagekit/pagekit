@@ -1,5 +1,4 @@
 var _ = require('./util');
-var Url = require('./url');
 var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 /**
@@ -8,10 +7,9 @@ var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 function Http (url, options) {
 
-    var request = new XMLHttpRequest(),
-        headers = Http.headers;
+    var $ = _.plugins(this), headers = Http.headers, request = new XMLHttpRequest();
 
-    if (_.isObject(url)) {
+    if (_.isPlainObject(url)) {
         options = url;
         url = '';
     }
@@ -22,8 +20,7 @@ function Http (url, options) {
     );
 
     options = _.extend(true, {url: url, headers: headers},
-        Http.options,
-        options
+        Http.options, _.options('http', this, options)
     );
 
     if (_.isFunction(options.beforeSend)) {
@@ -41,16 +38,16 @@ function Http (url, options) {
 
     if (options.emulateJSON && _.isPlainObject(options.data)) {
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        options.data = Url.params(options.data);
+        options.data = $.url.params(options.data);
     }
 
     if (_.isPlainObject(options.data)) {
         options.data = JSON.stringify(options.data);
     }
 
-    var promise = new _.Promise(function (resolve, reject) {
+    var self = this, promise = new _.Promise(function (resolve, reject) {
 
-        request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
+        request.open(options.method, $.url(options), true);
 
         _.each(headers, function (value, header) {
             request.setRequestHeader(header, value);
@@ -74,7 +71,7 @@ function Http (url, options) {
         success: function (onSuccess) {
 
             this.then(function (request) {
-                onSuccess.apply(onSuccess, parseReq(request));
+                onSuccess.apply(self, parseReq(request));
             }, function () {});
 
             return this;
@@ -83,7 +80,7 @@ function Http (url, options) {
         error: function (onError) {
 
             this.catch(function (request) {
-                onError.apply(onError, parseReq(request));
+                onError.apply(self, parseReq(request));
             });
 
             return this;
@@ -92,7 +89,7 @@ function Http (url, options) {
         always: function (onAlways) {
 
             var cb = function (request) {
-                onAlways.apply(onAlways, parseReq(request));
+                onAlways.apply(self, parseReq(request));
             };
 
             this.then(cb, cb);
@@ -130,7 +127,6 @@ Http.options = {
     method: 'GET',
     params: {},
     data: '',
-    urlRoot: '',
     beforeSend: null,
     emulateHTTP: false,
     emulateJSON: false

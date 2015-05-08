@@ -3,7 +3,6 @@ var glob = require("glob");
 var path = require("path");
 
 var exports = [
-    // Vue Resource, Validator
     {
         entry: {
             "vue-resource": "./vendor/assets/vue-resource/index",

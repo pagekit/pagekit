@@ -10,9 +10,9 @@ function install (Vue) {
 
     Vue.url = Url;
     Vue.http = Http;
-    Vue.resource = function (url, params, actions) {
-        return new Resource(url, params, actions);
-    };
+    Vue.resource = Resource;
+    Vue.options.url = {};
+    Vue.options.http = {};
 
     Vue.prototype.$url = Vue.url;
     Vue.prototype.$http = Vue.http;

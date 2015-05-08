@@ -4,6 +4,25 @@ var _ = Vue.util.extend({}, Vue.util);
  * Utility functions.
  */
 
+_.plugins = function (obj) {
+    return {
+        url: Vue.url.bind(obj),
+        http: Vue.http.bind(obj),
+        resource: Vue.resource.bind(obj)
+    };
+};
+
+_.options = function (key, obj, options) {
+
+    var opts = obj.$options || {};
+
+    return _.extend({},
+        Vue.options[key],
+        opts[key],
+        options
+    );
+};
+
 _.each = function (obj, iterator) {
 
     var i, key;

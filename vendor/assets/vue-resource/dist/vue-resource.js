@@ -56,9 +56,9 @@
 
 	    Vue.url = Url;
 	    Vue.http = Http;
-	    Vue.resource = function (url, params, actions) {
-	        return new Resource(url, params, actions);
-	    };
+	    Vue.resource = Resource;
+	    Vue.options.url = {};
+	    Vue.options.http = {};
 
 	    Vue.prototype.$url = Vue.url;
 	    Vue.prototype.$http = Vue.http;
@@ -84,39 +84,36 @@
 	 *
 	 * @param {String} url
 	 * @param {Object} params
-	 * @param {String} root
 	 */
 
-	function Url (url, params, root) {
+	function Url (url, params) {
 
-	    var urlParams = {}, queryParams = {}, query;
+	    var urlParams = {}, queryParams = {}, options = url, query;
 
-	    if (!_.isPlainObject(params)) {
-	        params = {};
+	    if (!_.isPlainObject(options)) {
+	        options = {url: url, params: params};
 	    }
 
-	    if (!root) {
-	        root = Url.root;
-	    }
+	    options = _.extend({}, Url.options, _.options('url', this, options));
 
-	    url = url.replace(/:([a-z]\w*)/gi, function (match, name) {
+	    url = options.url.replace(/:([a-z]\w*)/gi, function (match, name) {
 
-	        if (params[name]) {
+	        if (options.params[name]) {
 	            urlParams[name] = true;
-	            return encodeUriSegment(params[name]);
+	            return encodeUriSegment(options.params[name]);
 	        }
 
 	        return '';
 	    });
 
-	    if (!url.match(/^(https?:)?\//) && root) {
-	        url = root + '/' + url;
+	    if (!url.match(/^(https?:)?\//) && options.root) {
+	        url = options.root + '/' + url;
 	    }
 
 	    url = url.replace(/(^|[^:])[\/]{2,}/g, '$1/');
 	    url = url.replace(/(\w+)\/+$/, '$1');
 
-	    _.each(params, function (value, key) {
+	    _.each(options.params, function (value, key) {
 	        if (!urlParams[key]) {
 	            queryParams[key] = value;
 	        }
@@ -132,10 +129,13 @@
 	}
 
 	/**
-	 * Url root path.
+	 * Url options.
 	 */
 
-	Url.root = '';
+	Url.options = {
+	    root: '',
+	    params: {}
+	};
 
 	/**
 	 * Encodes a Url parameter string.
@@ -234,7 +234,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(7);
-	var Url = __webpack_require__(1);
 	var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 	/**
@@ -243,10 +242,9 @@
 
 	function Http (url, options) {
 
-	    var request = new XMLHttpRequest(),
-	        headers = Http.headers;
+	    var $ = _.plugins(this), headers = Http.headers, request = new XMLHttpRequest();
 
-	    if (_.isObject(url)) {
+	    if (_.isPlainObject(url)) {
 	        options = url;
 	        url = '';
 	    }
@@ -257,8 +255,7 @@
 	    );
 
 	    options = _.extend(true, {url: url, headers: headers},
-	        Http.options,
-	        options
+	        Http.options, _.options('http', this, options)
 	    );
 
 	    if (_.isFunction(options.beforeSend)) {
@@ -276,16 +273,16 @@
 
 	    if (options.emulateJSON && _.isPlainObject(options.data)) {
 	        headers['Content-Type'] = 'application/x-www-form-urlencoded';
-	        options.data = Url.params(options.data);
+	        options.data = $.url.params(options.data);
 	    }
 
 	    if (_.isPlainObject(options.data)) {
 	        options.data = JSON.stringify(options.data);
 	    }
 
-	    var promise = new _.Promise(function (resolve, reject) {
+	    var self = this, promise = new _.Promise(function (resolve, reject) {
 
-	        request.open(options.method, Url(options.url, options.params, options.urlRoot), true);
+	        request.open(options.method, $.url(options), true);
 
 	        _.each(headers, function (value, header) {
 	            request.setRequestHeader(header, value);
@@ -309,7 +306,7 @@
 	        success: function (onSuccess) {
 
 	            this.then(function (request) {
-	                onSuccess.apply(onSuccess, parseReq(request));
+	                onSuccess.apply(self, parseReq(request));
 	            }, function () {});
 
 	            return this;
@@ -318,7 +315,7 @@
 	        error: function (onError) {
 
 	            this.catch(function (request) {
-	                onError.apply(onError, parseReq(request));
+	                onError.apply(self, parseReq(request));
 	            });
 
 	            return this;
@@ -327,7 +324,7 @@
 	        always: function (onAlways) {
 
 	            var cb = function (request) {
-	                onAlways.apply(onAlways, parseReq(request));
+	                onAlways.apply(self, parseReq(request));
 	            };
 
 	            this.then(cb, cb);
@@ -365,7 +362,6 @@
 	    method: 'GET',
 	    params: {},
 	    data: '',
-	    urlRoot: '',
 	    beforeSend: null,
 	    emulateHTTP: false,
 	    emulateJSON: false
@@ -407,7 +403,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(7);
-	var Http = __webpack_require__(2);
 
 	/**
 	 * Resource provides interaction support with RESTful services.
@@ -415,21 +410,23 @@
 
 	function Resource (url, params, actions) {
 
-	    var self = this, acts;
+	    var $ = _.plugins(this), resource = {};
 
-	    acts = _.extend({},
+	    actions = _.extend({},
 	        Resource.actions,
 	        actions
 	    );
 
-	    _.each(acts, function (action, name) {
+	    _.each(actions, function (action, name) {
 
 	        action = _.extend(true, {url: url, params: params || {}}, action);
 
-	        self[name] = function () {
-	            return Http(opts(action, arguments));
+	        resource[name] = function () {
+	            return $.http(opts(action, arguments));
 	        };
 	    });
+
+	    return resource;
 	}
 
 	function opts (action, args) {
@@ -529,6 +526,25 @@
 	/**
 	 * Utility functions.
 	 */
+
+	_.plugins = function (obj) {
+	    return {
+	        url: Vue.url.bind(obj),
+	        http: Vue.http.bind(obj),
+	        resource: Vue.resource.bind(obj)
+	    };
+	};
+
+	_.options = function (key, obj, options) {
+
+	    var opts = obj.$options || {};
+
+	    return _.extend({},
+	        Vue.options[key],
+	        opts[key],
+	        options
+	    );
+	};
 
 	_.each = function (obj, iterator) {
 

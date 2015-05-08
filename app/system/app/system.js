@@ -10,22 +10,27 @@ function install (Vue) {
      * Config
      */
 
-    Vue.url.root = config.url;
-    Vue.http.options.emulateHTTP = true;
-    Vue.http.headers.common['X-XSRF-TOKEN'] = config.csrf;
-    Vue.http.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    Vue.options.url.root = config.url;
+    Vue.options.http.emulateHTTP = true;
+    Vue.options.http.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
 
     /**
      * Methods
      */
 
-    Vue.url.static = function(url, params, root) {
+    Vue.url.static = function(url, params) {
 
-        if (!root) {
-            root = Vue.url.root;
+        var options = url;
+
+        if (!_.isPlainObject(options)) {
+            options = {url: url, params: params};
         }
 
-        return Vue.url(url, params, root.replace(/\/index.php$/i, ''));
+        Vue.util.extend(options, {
+            root: Vue.options.url.root.replace(/\/index.php$/i, '')
+        });
+
+        return Vue.url(options);
     };
 
     var formats = ['full', 'long', 'medium', 'short'];

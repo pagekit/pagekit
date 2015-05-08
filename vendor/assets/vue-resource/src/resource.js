@@ -1,5 +1,4 @@
 var _ = require('./util');
-var Http = require('./http');
 
 /**
  * Resource provides interaction support with RESTful services.
@@ -7,21 +6,23 @@ var Http = require('./http');
 
 function Resource (url, params, actions) {
 
-    var self = this, acts;
+    var $ = _.plugins(this), resource = {};
 
-    acts = _.extend({},
+    actions = _.extend({},
         Resource.actions,
         actions
     );
 
-    _.each(acts, function (action, name) {
+    _.each(actions, function (action, name) {
 
         action = _.extend(true, {url: url, params: params || {}}, action);
 
-        self[name] = function () {
-            return Http(opts(action, arguments));
+        resource[name] = function () {
+            return $.http(opts(action, arguments));
         };
     });
+
+    return resource;
 }
 
 function opts (action, args) {

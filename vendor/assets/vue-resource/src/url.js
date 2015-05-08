@@ -5,39 +5,36 @@ var _ = require('./util');
  *
  * @param {String} url
  * @param {Object} params
- * @param {String} root
  */
 
-function Url (url, params, root) {
+function Url (url, params) {
 
-    var urlParams = {}, queryParams = {}, query;
+    var urlParams = {}, queryParams = {}, options = url, query;
 
-    if (!_.isPlainObject(params)) {
-        params = {};
+    if (!_.isPlainObject(options)) {
+        options = {url: url, params: params};
     }
 
-    if (!root) {
-        root = Url.root;
-    }
+    options = _.extend({}, Url.options, _.options('url', this, options));
 
-    url = url.replace(/:([a-z]\w*)/gi, function (match, name) {
+    url = options.url.replace(/:([a-z]\w*)/gi, function (match, name) {
 
-        if (params[name]) {
+        if (options.params[name]) {
             urlParams[name] = true;
-            return encodeUriSegment(params[name]);
+            return encodeUriSegment(options.params[name]);
         }
 
         return '';
     });
 
-    if (!url.match(/^(https?:)?\//) && root) {
-        url = root + '/' + url;
+    if (!url.match(/^(https?:)?\//) && options.root) {
+        url = options.root + '/' + url;
     }
 
     url = url.replace(/(^|[^:])[\/]{2,}/g, '$1/');
     url = url.replace(/(\w+)\/+$/, '$1');
 
-    _.each(params, function (value, key) {
+    _.each(options.params, function (value, key) {
         if (!urlParams[key]) {
             queryParams[key] = value;
         }
@@ -53,10 +50,13 @@ function Url (url, params, root) {
 }
 
 /**
- * Url root path.
+ * Url options.
  */
 
-Url.root = '';
+Url.options = {
+    root: '',
+    params: {}
+};
 
 /**
  * Encodes a Url parameter string.
