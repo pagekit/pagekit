@@ -67,7 +67,7 @@
         <form class="uk-modal-dialog uk-form-stacked" v-on="submit: update">
 
             <div class="uk-modal-header">
-                <h2>Add Role</h2>
+                <h2>{{ 'Add Role' | trans }}</h2>
             </div>
 
             <div class="uk-form-row">

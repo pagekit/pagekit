@@ -35,31 +35,24 @@
     </div>
 
     <div class="uk-modal" v-el="modal">
-        <div class="uk-modal-dialog">
+        <div class="uk-modal-dialog uk-form-stacked">
 
-            <h4>{{ 'Select caches to clear:' | trans }}</h4>
+            <div class="uk-modal-header">
+                <h2>{{ 'Select Cache to Clear' | trans }}</h2>
+            </div>
 
-            <div class="uk-form">
-
-                <div class="uk-form-row">
-                    <div class="uk-form-controls uk-form-controls-text">
-                        <p class="uk-form-controls-condensed">
-                            <label><input type="checkbox" v-model="clear.cache"> {{ 'System Cache' | trans }}</label>
-                        </p>
-                    </div>
-                </div>
-                <div class="uk-form-row">
-                    <div class="uk-form-controls uk-form-controls-text">
-                        <p class="uk-form-controls-condensed">
-                            <label><input type="checkbox" v-model="clear.temp"> {{ 'Temporary Files' | trans }}</label>
-                        </p>
-                    </div>
-                </div>
-                <p>
-                    <button class="uk-button uk-button-primary" type="submit" v-on="click: clear">{{ 'Clear' | trans }}</button>
-                    <button class="uk-button uk-modal-close" type="submit" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+            <div class="uk-form-row">
+                <p class="uk-form-controls-condensed">
+                    <label><input type="checkbox" v-model="clear.cache"> {{ 'System Cache' | trans }}</label>
                 </p>
+                <p class="uk-form-controls-condensed">
+                    <label><input type="checkbox" v-model="clear.temp"> {{ 'Temporary Files' | trans }}</label>
+                </p>
+            </div>
 
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-link uk-modal-close" type="submit" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" type="submit" v-on="click: clear">{{ 'Clear' | trans }}</button>
             </div>
 
         </div>
