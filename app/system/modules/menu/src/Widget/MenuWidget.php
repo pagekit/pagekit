@@ -13,15 +13,7 @@ class MenuWidget extends Type
      */
     public function __construct()
     {
-        parent::__construct('site.menu', __('Menu'));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescription(WidgetInterface $widget = null)
-    {
-        return __('Menu Widget');
+        parent::__construct('site.menu', __('Menu'), __('Menu Widget'), ['mode' => 'all']);
     }
 
     /**
@@ -75,13 +67,5 @@ class MenuWidget extends Type
         $root->setParent();
 
         return App::view($layout, compact('widget', 'options', 'root'));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderForm(WidgetInterface $widget)
-    {
-        return App::view('app/system/modules/menu/views/widgets/menu/edit.razr', compact('widget'));
     }
 }
