@@ -24,7 +24,7 @@
 
     <div class="uk-modal" v-el="modal">
 
-        <div class="uk-modal-dialog uk-modal-dialog-slide" v-if="menu">
+        <div class="uk-modal-dialog" v-if="menu">
 
             <form name="menuform" v-on="valid: save">
 
