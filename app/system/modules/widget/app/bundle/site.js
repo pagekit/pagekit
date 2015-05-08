@@ -47,13 +47,15 @@
 	var Site = __webpack_require__(1);
 	var Widgets = __webpack_require__(2);
 
-	Site.register(Widgets.extend({
+	Site.component('widgets', Widgets.extend({
 
-	    name: 'widgets',
-	    label: 'Widgets',
-	    priority: 20
+	    section: {
+	        name: 'widgets',
+	        label: 'Widgets',
+	        priority: 20
+	    }
 
-	}).options);
+	}));
 
 
 /***/ },
@@ -544,8 +546,8 @@
 	            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
 	                build = function (collection) {
 	                    return collection.map(function(node) {
-	                        return { node: node, children: build(parents[node.id] || [])}
-	                    })
+	                        return { node: node, children: build(parents[node.id] || [])};
+	                    });
 	                };
 
 	            this.$set('tree', _.groupBy(build(parents[0] || []), function(node) { return node.node.menu }));

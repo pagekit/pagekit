@@ -1,4 +1,4 @@
 var Site = require('site');
 
-Site.register(require('./blog.vue'));
-Site.register(require('./post.vue'));
+Site.component('blog', require('./blog.vue'));
+Site.component('blog-post', require('./post.vue'));

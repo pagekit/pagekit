@@ -44,7 +44,7 @@
         inherit: true,
 
         data: function() {
-            return { node: {} }
+            return {node: {}};
         },
 
         ready: function() {
@@ -88,7 +88,7 @@
             },
 
             sections: function() {
-                return this.$root.$options.sections
+                return this.$root.sections
             }
 
         },

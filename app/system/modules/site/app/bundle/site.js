@@ -60,12 +60,27 @@ var Site =
 
 	var Site = Vue.extend({
 
-	    sections: [],
-
 	    mixins: [__webpack_require__(4)],
 
 	    data: function() {
-	        return _.merge({ selected: null }, window.$data);
+	        return _.merge({selected: null}, window.$data);
+	    },
+
+	    computed: {
+
+	        sections: function () {
+
+	            var sections = [];
+
+	            _.each(this.$options.components, function (component) {
+	                if (component.options.section) {
+	                    sections.push(component.options.section);
+	                }
+	            });
+
+	            return sections;
+	        }
+
 	    },
 
 	    events: {
@@ -86,7 +101,9 @@ var Site =
 	        },
 
 	        selectFirst: function() {
+
 	            var self = this, first = null;
+
 	            this.menus.some(function (menu) {
 	                return first = _.first(self.tree[menu.id]);
 	            });
@@ -98,22 +115,15 @@ var Site =
 
 	    components: {
 	        'menu-list': __webpack_require__(5),
-	        'node-edit': __webpack_require__(6)
+	        'node-edit': __webpack_require__(6),
+	        'alias':     __webpack_require__(7)
 	    }
 
 	});
 
-	Site.register = function (options) {
-	    this.component(options.name, options);
-	    this.options.sections.push(options);
-	};
-
-	Site.register(__webpack_require__(7));
-
 	$(function () {
 
-	    var site = new Site();
-	    site.$mount('#site');
+	    new Site().$mount('#site');
 
 	});
 
@@ -167,8 +177,8 @@ var Site =
 	            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
 	                build = function (collection) {
 	                    return collection.map(function(node) {
-	                        return { node: node, children: build(parents[node.id] || [])}
-	                    })
+	                        return { node: node, children: build(parents[node.id] || [])};
+	                    });
 	                };
 
 	            this.$set('tree', _.groupBy(build(parents[0] || []), function(node) { return node.node.menu }));
@@ -296,7 +306,7 @@ var Site =
 	        inherit: true,
 
 	        data: function() {
-	            return { node: {} }
+	            return {node: {}};
 	        },
 
 	        ready: function() {
@@ -340,7 +350,7 @@ var Site =
 	            },
 
 	            sections: function() {
-	                return this.$root.$options.sections
+	                return this.$root.sections
 	            }
 
 	        },
@@ -389,10 +399,12 @@ var Site =
 	var __vue_template__ = "{{&gt; settings}}\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-alias-url\" class=\"uk-form-label\">{{ 'Url' | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input id=\"form-alias-url\" class=\"uk-form-width-large\" type=\"text\" v-model=\"node.data.url\">\n        </div>\n    </div>";
 	module.exports = {
 
-	        name: 'alias',
-	        label: 'Settings',
-	        priority: 0,
-	        active: 'alias'
+	        section: {
+	            name: 'alias',
+	            label: 'Settings',
+	            priority: 0,
+	            active: 'alias'
+	        }
 
 	    }
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;

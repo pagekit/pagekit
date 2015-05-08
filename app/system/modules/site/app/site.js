@@ -13,12 +13,27 @@ Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
 
 var Site = Vue.extend({
 
-    sections: [],
-
     mixins: [require('./tree')],
 
     data: function() {
-        return _.merge({ selected: null }, window.$data);
+        return _.merge({selected: null}, window.$data);
+    },
+
+    computed: {
+
+        sections: function () {
+
+            var sections = [];
+
+            _.each(this.$options.components, function (component) {
+                if (component.options.section) {
+                    sections.push(component.options.section);
+                }
+            });
+
+            return sections;
+        }
+
     },
 
     events: {
@@ -39,7 +54,9 @@ var Site = Vue.extend({
         },
 
         selectFirst: function() {
+
             var self = this, first = null;
+
             this.menus.some(function (menu) {
                 return first = _.first(self.tree[menu.id]);
             });
@@ -51,22 +68,15 @@ var Site = Vue.extend({
 
     components: {
         'menu-list': require('./components/menus.vue'),
-        'node-edit': require('./components/edit.vue')
+        'node-edit': require('./components/edit.vue'),
+        'alias':     require('./components/alias.vue')
     }
 
 });
 
-Site.register = function (options) {
-    this.component(options.name, options);
-    this.options.sections.push(options);
-};
-
-Site.register(require('./components/alias.vue'));
-
 $(function () {
 
-    var site = new Site();
-    site.$mount('#site');
+    new Site().$mount('#site');
 
 });
 

@@ -31,11 +31,12 @@
 
     module.exports = {
 
-        name: 'page-content',
-        label: 'Content',
-        priority: 10,
-        active: 'page',
-        template: __vue_template__,
+        section: {
+            name: 'page-content',
+            label: 'Content',
+            priority: 10,
+            active: 'page'
+        },
 
         data: function() {
             // TODO test

@@ -19,12 +19,12 @@
 
     module.exports = {
 
-        name: 'blog-post',
-        label: 'Settings',
-        priority: 0,
-        active: 'blog-post',
-
-        template: __vue_template__
+        section: {
+            name: 'blog-post',
+            label: 'Settings',
+            priority: 0,
+            active: 'blog-post'
+        }
 
     };
 

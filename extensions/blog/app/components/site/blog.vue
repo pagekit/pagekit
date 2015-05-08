@@ -8,12 +8,12 @@
 
     module.exports = {
 
-        name: 'blog',
-        label: 'Settings',
-        priority: 0,
-        active: 'blog$',
-
-        template: __vue_template__
+        section: {
+            name: 'blog',
+            label: 'Settings',
+            priority: 0,
+            active: 'blog$'
+        }
 
     };
 

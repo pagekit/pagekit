@@ -46,8 +46,8 @@
 
 	var Site = __webpack_require__(1);
 
-	Site.register(__webpack_require__(2));
-	Site.register(__webpack_require__(3));
+	Site.component('blog', __webpack_require__(2));
+	Site.component('blog-post', __webpack_require__(3));
 
 
 /***/ },
@@ -63,12 +63,12 @@
 	var __vue_template__ = "{{&gt; settings}}";
 	module.exports = {
 
-	        name: 'blog',
-	        label: 'Settings',
-	        priority: 0,
-	        active: 'blog$',
-
-	        template: __vue_template__
+	        section: {
+	            name: 'blog',
+	            label: 'Settings',
+	            priority: 0,
+	            active: 'blog$'
+	        }
 
 	    };
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
@@ -81,12 +81,12 @@
 	var __vue_template__ = "{{&gt; settings}}\n\n    <div class=\"uk-form-row\">\n\n        <label for=\"form-post\" class=\"uk-form-label\">{{ 'Post' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <select class=\"uk-form-width-large\" v-model=\"node.data.variables.id\">\n                <option value=\"\">- {{ 'Select Post' | trans }} -</option>\n            </select>\n        </div>\n\n    </div>";
 	module.exports = {
 
-	        name: 'blog-post',
-	        label: 'Settings',
-	        priority: 0,
-	        active: 'blog-post',
-
-	        template: __vue_template__
+	        section: {
+	            name: 'blog-post',
+	            label: 'Settings',
+	            priority: 0,
+	            active: 'blog-post'
+	        }
 
 	    };
 	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;

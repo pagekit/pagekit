@@ -16,10 +16,12 @@
 
     module.exports = {
 
-        name: 'alias',
-        label: 'Settings',
-        priority: 0,
-        active: 'alias'
+        section: {
+            name: 'alias',
+            label: 'Settings',
+            priority: 0,
+            active: 'alias'
+        }
 
     }
 
