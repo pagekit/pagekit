@@ -60,7 +60,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __vue_template__ = "{{&gt; settings-fields}}";
+	var __vue_template__ = "{{&gt; settings}}";
 	module.exports = {
 
 	        name: 'page-settings',

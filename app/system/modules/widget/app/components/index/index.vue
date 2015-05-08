@@ -47,29 +47,19 @@
                 </div>
             </div>
 
-            <widget-list v-ref="nestables"></widget-list>
+            <widget-list></widget-list>
 
         </div>
 
-    </div>
-
-    <div v-el="modal" class="uk-modal" v-on="close: cancel()">
-        <div class="uk-modal-dialog uk-modal-dialog-large">
-            <iframe v-attr="src: editUrl" class="uk-width-1-1" height="800"></iframe>
-        </div>
     </div>
 
 </template>
 
 <script>
 
-    var Site = require('site');
+    var $ = require('jquery');
 
-    module.exports = {
-
-        name: 'widgets',
-        label: 'Widgets',
-        priority: 20,
+    module.exports = Vue.extend({
 
         template: __vue_template__,
 
@@ -84,13 +74,11 @@
         },
 
         created: function() {
+
+            this.$addChild(require('./edit.vue'));
+
             this.Widgets = this.$resource('api/widget/:id');
             this.load();
-        },
-
-        ready: function() {
-            this.modal = UIkit.modal(this.$$.modal);
-            this.modal.on('hide.uk.modal', this.cancel);
         },
 
         computed: {
@@ -134,6 +122,10 @@
 
                     self.$set('positions', positions);
                 });
+
+                this.Widgets.query({ id: 'config' }, function (data) {
+                    self.$set('config.configs', data);
+                });
             },
 
             copy: function() {
@@ -166,21 +158,7 @@
             },
 
             edit: function(widget) {
-                var edit = _.extend({}, widget);
-
-                this.$set('editUrl', this.$url('admin/widgets/edit', (widget.id ? { id: widget.id } : { type: widget.type })));
-
-                this.modal.show();
-            },
-
-            cancel: function() {
-                if (this.modal) {
-                    this.modal.hide();
-                }
-
-                this.editUrl = null;
-
-                this.load();
+                this.$set('widget', _.extend({}, widget));
             }
 
         },
@@ -191,8 +169,6 @@
 
         }
 
-    };
-
-    Site.register(module.exports);
+    });
 
 </script>

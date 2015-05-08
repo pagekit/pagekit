@@ -316,10 +316,10 @@ var Site =
 
 	            active: function(sections) {
 
-	                var type = this.$get('type');
+	                var type = this.$get('type.id');
 
 	                return sections.filter(function(section) {
-	                    return !section.active || type.id && type.id.match(section.active);
+	                    return !section.active || type && type.match(section.active);
 	                });
 	            }
 
@@ -374,7 +374,7 @@ var Site =
 
 	        partials: {
 
-	            'settings-fields': __webpack_require__(9)
+	            'settings': __webpack_require__(9)
 
 	        }
 
@@ -386,7 +386,7 @@ var Site =
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __vue_template__ = "{{&gt; settings-fields}}\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-alias-url\" class=\"uk-form-label\">{{ 'Url' | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input id=\"form-alias-url\" class=\"uk-form-width-large\" type=\"text\" v-model=\"node.data.url\">\n        </div>\n    </div>";
+	var __vue_template__ = "{{&gt; settings}}\n\n    <div class=\"uk-form-row\">\n        <label for=\"form-alias-url\" class=\"uk-form-label\">{{ 'Url' | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input id=\"form-alias-url\" class=\"uk-form-width-large\" type=\"text\" v-model=\"node.data.url\">\n        </div>\n    </div>";
 	module.exports = {
 
 	        name: 'alias',

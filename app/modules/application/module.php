@@ -4,7 +4,6 @@ use Pagekit\Application\Response;
 use Pagekit\Application\UrlProvider;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 return [
 

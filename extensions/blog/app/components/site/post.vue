@@ -1,6 +1,6 @@
 <template>
 
-    {{> settings-fields}}
+    {{> settings}}
 
     <div class="uk-form-row">
 

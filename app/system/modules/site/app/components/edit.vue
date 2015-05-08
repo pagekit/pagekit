@@ -64,10 +64,10 @@
 
             active: function(sections) {
 
-                var type = this.$get('type');
+                var type = this.$get('type.id');
 
                 return sections.filter(function(section) {
-                    return !section.active || type.id && type.id.match(section.active);
+                    return !section.active || type && type.match(section.active);
                 });
             }
 
@@ -122,7 +122,7 @@
 
         partials: {
 
-            'settings-fields': require('./settings.html')
+            'settings': require('./settings.html')
 
         }
 

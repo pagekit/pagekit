@@ -62,9 +62,9 @@ class WidgetsApiController
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"widget": "array", "id": "int", "position", "config": "array", "foo": "array"}, csrf=true)
+     * @Request({"widget": "array", "id": "int", "position", "config": "array"}, csrf=true)
      */
-    public function saveAction($data, $id = 0, $position = false, $config = false, $foo = false)
+    public function saveAction($data, $id = 0, $position = false, $config = false)
     {
         if ($id) {
 
@@ -134,6 +134,14 @@ class WidgetsApiController
         }
 
         return 'success';
+    }
+
+    /**
+     * @Route("/config", methods="GET")
+     */
+    public function configAction()
+    {
+        return App::module('system/widget')->config('widget.config', new \stdClass());
     }
 
     /**

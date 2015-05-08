@@ -10,38 +10,32 @@ use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module
 {
-    protected $types = [];
+    protected $types     = [];
     protected $positions = [];
-    protected $sections = [];
 
     /**
      * {@inheritdoc}
      */
     public function main(App $app)
     {
-        $app->on('site.sections', function ($event, $site) use ($app) {
+        $app->on('view.site:views/admin/index', function ($event, $view) use ($app) {
 
             if (!$app['user']->hasAccess('system: manage widgets')) {
                 return;
             }
 
-            $site->registerSection('Widgets', function() { return '<div v-component="widgets-index"></div>'; });
-        });
-
-        $app->on('view.site:views/admin/index', function($event, $view) {
-
-            $view->script('widget-site', 'widget:app/bundle/site.js', ['site', 'uikit-form-select']);
+            $view->script('widget-site', 'widget:app/bundle/site.js', ['site', 'widgets', 'uikit-form-select']);
 
             $view->data('$widgets', [
 
                 'positions' => array_values($this->getPositions()),
-                'types' => array_values($this->getTypes('site'))
+                'types'     => array_values($this->getTypes('site'))
 
             ]);
 
         });
 
-        $app->on('app.site', function($event, $request) use ($app) {
+        $app->on('app.site', function ($event, $request) use ($app) {
 
             // register renderer
             foreach ($app['module'] as $module) {
@@ -83,13 +77,16 @@ class WidgetModule extends Module
 
         });
 
-        $app->on('widget.create', function($event, $widget) {
+        $app->on('widget.create', function ($event, $widget) {
             if ($type = $this->getType($widget->getType())) {
                 $widget->setDefaults($type->getDefaults());
             }
         });
 
-        $app->on('app.request', function() use ($app) {
+        $app->on('app.request', function () use ($app) {
+
+            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js');
+
             $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
         });
 
@@ -162,11 +159,13 @@ class WidgetModule extends Module
         if (!$this->types) {
 
             $this->registerType(new TextWidget());
-
             App::trigger('widget.types', [$this]);
+
         }
 
-        return $filter ? array_filter($this->types, function($type) use($filter) { return 0 === strpos($type->getId(), $filter); }) : $this->types;
+        return $filter ? array_filter($this->types, function ($type) use ($filter) {
+            return 0 === strpos($type->getId(), $filter);
+        }) : $this->types;
     }
 
     /**
@@ -180,39 +179,6 @@ class WidgetModule extends Module
     }
 
     /**
-     * @param  string $type
-     * @return array
-     */
-    public function getSections($type = '')
-    {
-        if (!$this->sections) {
-
-            $this->registerSection('Settings', 'widget:views/admin/settings.php');
-            $this->registerSection('Assignment', 'widget:views/admin/assignment.php');
-            $this->registerSection('Settings', 'widget:views/widgets/text/edit.php', 'site.text');
-
-            App::trigger('widget.sections', [$this]);
-        }
-
-        return array_filter(array_map(function($subsections) use ($type) {
-            return array_filter($subsections, function($section) use ($type) { return in_array($section['type'], ['', $type]); });
-        }, $this->sections));
-    }
-
-    /**
-     * Registers a settings section.
-     *
-     * @param string $name
-     * @param string $view
-     * @param string $type
-     * @param array  $options
-     */
-    public function registerSection($name, $view, $type = '', array $options = [])
-    {
-        $this->sections[$name][] = array_merge($options, compact('name', 'view', 'type'));
-    }
-
-    /**
      * Gets the widget config.
      *
      * @param  int $id
@@ -220,6 +186,6 @@ class WidgetModule extends Module
      */
     public function getWidgetConfig($id = 0)
     {
-        return Arr::merge($this->config('widget.defaults'), $this->config('widget.config.'.$id, []), true);
+        return Arr::merge($this->config('widget.defaults'), $this->config("widget.config.$id", []), true);
     }
 }

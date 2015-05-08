@@ -1,3 +1,4 @@
+var Widgets =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -44,52 +45,21 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Site = __webpack_require__(1);
+	/**
+	 * Widgets manager.
+	 */
 
-	Site.register(__webpack_require__(2));
-	Site.register(__webpack_require__(3));
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = Site;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_template__ = "{{&gt; settings}}";
 	module.exports = {
 
-	        name: 'blog',
-	        label: 'Settings',
-	        priority: 0,
-	        active: 'blog$',
+	    sections: [],
+	    components: {},
+	    
+	    addSection: function(options) {
+	        this.components[options.name] = options;
+	        this.sections.push(options);
+	    }
 
-	        template: __vue_template__
-
-	    };
-	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_template__ = "{{&gt; settings}}\n\n    <div class=\"uk-form-row\">\n\n        <label for=\"form-post\" class=\"uk-form-label\">{{ 'Post' | trans }}</label>\n        <div class=\"uk-form-controls\">\n            <select class=\"uk-form-width-large\" v-model=\"node.data.variables.id\">\n                <option value=\"\">- {{ 'Select Post' | trans }} -</option>\n            </select>\n        </div>\n\n    </div>";
-	module.exports = {
-
-	        name: 'blog-post',
-	        label: 'Settings',
-	        priority: 0,
-	        active: 'blog-post',
-
-	        template: __vue_template__
-
-	    };
-	;(typeof module.exports === "function"? module.exports.options: module.exports).template = __vue_template__;
+	};
 
 
 /***/ }

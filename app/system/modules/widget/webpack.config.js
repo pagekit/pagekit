@@ -2,7 +2,17 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/components/site/site.vue"
+            "widgets": "./app/components/widgets"
+        },
+        output: {
+            filename: "./app/bundle/[name].js",
+            library: "Widgets"
+        }
+    },
+
+    {
+        entry: {
+            "site": "./app/components/site"
         },
         output: {
             filename: "./app/bundle/[name].js"
@@ -12,10 +22,12 @@ module.exports = [
             "jquery": "jQuery",
             "uikit": "UIkit",
             "vue": "Vue",
-            "site": "Site"
+            "site": "Site",
+            "widgets": "Widgets"
         },
         module: {
             loaders: [
+                { test: /\.html$/, loader: "html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
         }

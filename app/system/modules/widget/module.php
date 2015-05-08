@@ -20,10 +20,6 @@ return [
 
     'controllers' => [
 
-        '@widget: /' => [
-            'Pagekit\\Widget\\Controller\\WidgetsController'
-        ],
-
         '@widget/api: /api/widget' => [
             'Pagekit\\Widget\\Controller\\WidgetsApiController'
         ]

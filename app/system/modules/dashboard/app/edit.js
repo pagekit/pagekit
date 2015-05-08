@@ -4,7 +4,7 @@ jQuery(function ($) {
 
     var vm = new Vue({
 
-        el: '#js-widget-edit',
+        el: '#widget-edit',
 
         data: $data,
 

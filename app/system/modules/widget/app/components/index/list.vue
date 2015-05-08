@@ -4,7 +4,7 @@
 
         <li data-id="{{ widget.id }}" v-repeat="widget: position.widgets" class="uk-nestable-list-item" v-show="widget | showWidget">
 
-            <div class="uk-nestable-item pk-table-fake" v-component="widget-item"></div>
+            <widget-item></widget-item>
 
         </li>
 

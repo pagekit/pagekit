@@ -25,8 +25,8 @@ class AlphaTheme extends Theme
             });
         });
 
-        $app->on('widget.sections', function ($event, $widgets) {
-            $widgets->registerSection('Theme', 'alpha:views/admin/widgets/edit.php');
+        $app->on('app.request', function () use ($app) {
+            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widgets.js', '~widgets');
         });
     }
 
