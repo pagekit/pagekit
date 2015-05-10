@@ -21,7 +21,7 @@
         </div>
     </div>
 
-   <div class="uk-grid uk-grid-width-large-1-2" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+   <div class="uk-grid uk-grid-width-medium-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
         <div v-repeat="pkg: packages | filterBy search in 'title'">
             <div class="uk-panel uk-panel-box">
                 <div class="uk-panel-teaser">
