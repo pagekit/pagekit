@@ -10,7 +10,7 @@
             <div class="uk-margin-left" v-show="selected.length">
                 <a class="uk-icon-hover uk-icon-small uk-icon-trash-o uk-margin-small-right" v-on="click: remove"></a>
                 <a class="uk-icon-hover uk-icon-small uk-icon-check-circle-o uk-margin-small-right" v-on="click: status(1)"></a>
-                <a class="uk-icon-hover uk-icon-small uk-icon-times-circle-o" v-on="click: status(0)"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-ban" v-on="click: status(0)"></a>
             </div>
 
             <div class="pk-search">
