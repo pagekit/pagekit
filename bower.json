@@ -4,7 +4,7 @@
     "gravatarjs": "~1.0.0",
     "lodash": "~3.7.0",
     "uikit": "~2.19",
-    "vue": "~0.11.9"
+    "vue": "~0.11.10"
   },
   "devDependencies": {
     "globalize": "~1.0.0"
