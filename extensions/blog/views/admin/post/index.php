@@ -3,41 +3,43 @@
 <div id="js-post" class="uk-form" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
+        <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
-            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
+            <h2 class="uk-margin-remove">{{ $trans('%count% Posts', {count: count}) }}</h2>
 
-            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a v-on="click: status(2)">{{ 'Publish' | trans }}</a></li>
-                        <li><a v-on="click: status(3)">{{ 'Unpublish' | trans }}</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a  v-on="click: copy">{{ 'Copy' | trans }}</a></li>
-                    </ul>
+            <div class="uk-margin-left" v-show="selected.length">
+                <a class="uk-icon-hover uk-icon-small uk-icon-trash-o uk-margin-small-right" v-show="selected.length" v-on="click: remove"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-copy uk-margin-small-right" v-on="click: copy"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-check-circle-o uk-margin-small-right" v-on="click: status(2)"></a>
+                <a class="uk-icon-hover uk-icon-small uk-icon-ban" v-on="click: status(3)"></a>
+            </div>
+
+            <div class="pk-search">
+                <div class="uk-search">
+                    <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
                 </div>
             </div>
 
         </div>
         <div data-uk-margin>
 
-            <select v-model="config.filter.status" options="statuses"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
+            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
 
         </div>
     </div>
 
-    <p v-show="!posts.length" class="uk-alert uk-alert-info">{{ 'No posts found.' | trans }}</p>
-
-    <div v-show="posts.length" class="uk-overflow-container">
+    <div class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th class="pk-table-min-width-200">{{ 'Title' | trans }}</th>
-                    <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center">
+                        <div class="uk-form-select pk-filter" data-uk-form-select>
+                            <span>{{ 'Status' | trans }}</span>
+                            <select v-model="config.filter.status" options="statuses"></select>
+                        </div>
+                    </th>
                     <th class="pk-table-width-100">{{ 'Author' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">{{ 'Comments' | trans }}</th>
                     <th class="pk-table-width-100">{{ 'Date' | trans }}</th>
@@ -51,17 +53,14 @@
                         <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
                     </td>
                     <td class="uk-text-center">
-
-                        <a v-on="click: toggleStatus(post)" title="{{ getStatusText(post) }}">
-                            <i v-class="
+                        <a title="{{ getStatusText(post) }}" v-class="
                                 uk-text-muted:   post.status == 0,
                                 uk-text-warning: post.status == 1,
                                 uk-text-success: post.status == 2,
                                 uk-text-danger:  post.status == 3,
                                 uk-icon-circle:  post.status != 2 || !post.isPublished,
                                 uk-icon-clock-o: post.status == 2 && post.isPublished
-                            "></i>
-                        </a>
+                            " v-on="click: toggleStatus(post)"></a>
                     </td>
                     <td>
                         <a v-attr="href: $url('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
@@ -73,13 +72,15 @@
                         {{ post.date | date medium }}
                     </td>
                     <td class="pk-table-text-break">
-                        <a v-if="post.isAccessible" v-attr="href: post.url" target="_blank">{{ post.url | baseUrl }}</a>
+                        <a target="_blank" v-if="post.isAccessible" v-attr="href: post.url">{{ post.url | baseUrl }}</a>
                         <span v-if="!post.isAccessible">{{ post.url | baseUrl }}</span>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <p class="uk-alert uk-alert-info" v-show="!posts.length">{{ 'No posts found.' | trans }}</p>
 
     <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
 
