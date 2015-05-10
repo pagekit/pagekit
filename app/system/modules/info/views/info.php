@@ -1,19 +1,19 @@
 <?php $view->script('system-info', 'app/system/modules/info/app/info.js', 'system') ?>
 
-<div id="info" class="uk-grid" data-uk-grid-margin>
-    <div class="uk-width-medium-1-4">
+<div id="info" class="uk-grid pk-grid-large" data-uk-grid-margin>
+    <div class="pk-width-sidebar">
 
         <div class="uk-panel">
-            <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
-                <li class="uk-active"><a>{{ 'System' | trans }}</a></li>
-                <li><a>{{ 'PHP' | trans }}</a></li>
-                <li><a>{{ 'Database' | trans }}</a></li>
-                <li><a>{{ 'Permissions' | trans }}</a></li>
+            <ul class="uk-nav uk-nav-side pk-nav-large" data-uk-tab="{ connect: '#tab-content' }">
+                <li class="uk-active"><a> <i class="uk-icon-hdd-o uk-icon-small uk-margin-right"></i>{{ 'System' | trans }}</a></li>
+                <li><a><i class="uk-icon-code uk-icon-small uk-margin-right"></i> {{ 'PHP' | trans }}</a></li>
+                <li><a><i class="uk-icon-database uk-icon-small uk-margin-right"></i> {{ 'Database' | trans }}</a></li>
+                <li><a><i class="uk-icon-file-text-o uk-icon-small uk-margin-right"></i> {{ 'Permissions' | trans }}</a></li>
             </ul>
         </div>
 
     </div>
-    <div class="uk-width-medium-3-4">
+    <div class="uk-flex-item-1">
 
         <ul id="tab-content" class="uk-switcher uk-margin">
             <li>
