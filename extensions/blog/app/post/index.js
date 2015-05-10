@@ -11,6 +11,7 @@ jQuery(function ($) {
             data: $data,
             posts: null,
             pages: 0,
+            count: '',
             selected: []
         },
 
@@ -87,6 +88,7 @@ jQuery(function ($) {
                 this.resource.query({ filter: this.config.filter, page: page }, function (data) {
                     vm.$set('posts', data.posts);
                     vm.$set('pages', data.pages);
+                    vm.$set('count', data.count);
                     vm.$set('config.page', page);
                     vm.$set('selected', []);
                 });

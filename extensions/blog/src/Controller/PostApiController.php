@@ -38,7 +38,7 @@ class PostApiController
 
         $posts = array_values($query->offset($page * $limit)->related('user', 'comments')->limit($limit)->orderBy('date', 'DESC')->get());
 
-        return compact('posts', 'pages');
+        return compact('posts', 'pages', 'count');
     }
 
     /**
