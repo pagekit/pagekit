@@ -26,8 +26,9 @@
             <thead>
                 <tr>
                     <th colspan="2">{{ 'Name' | trans }}</th>
-                    <th class="pk-table-width-100">{{ 'Version' | trans }}</th>
                     <th class="pk-table-width-minimum uk-text-center">{{ 'Status' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center">{{ 'Version' | trans }}</th>
+                    <th class="pk-table-width-100">{{ 'Folder' | trans }}</th>
                     <th class="pk-table-width-minimum"></th>
                 </tr>
             </thead>
@@ -38,22 +39,20 @@
                     </td>
                     <td class="uk-text-nowrap">
                         <h2 class="uk-h3 uk-margin-remove">{{ pkg.title }}</h2>
-                        <ul class="uk-subnav uk-subnav-line uk-margin-remove" v-show="pkg.enabled">
-                            <li><a>{{ 'Details' | trans }}</a></li>
-                            <li><a>{{ 'Settings' | trans }}</a></li>
-                            <li><a v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})">{{ 'Permissions' | trans }}</a></li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul class="uk-list uk-margin-remove">
-                            <li class="uk-text-truncate">{{ pkg.version }}</li>
-                            <li class="uk-text-truncate">/{{ pkg.name }}</li>
-                        </ul>
+                        <div class="uk-margin-small-top">
+                            <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove" v-show="pkg.enabled">
+                                <li><a>{{ 'Details' | trans }}</a></li>
+                                <li><a>{{ 'Settings' | trans }}</a></li>
+                                <li><a v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})">{{ 'Permissions' | trans }}</a></li>
+                            </ul>
+                        </div>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-button uk-button-success" v-show="pkg.enabled" v-on="click: disable(pkg)">{{ 'Enabled' | trans }}</a>
-                        <a class="uk-button" v-show="!pkg.enabled" v-on="click: enable(pkg)">{{ 'Disabled' | trans }}</a>
+                        <a class="uk-icon-circle uk-text-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
+                        <a class="uk-icon-circle uk-text-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
                     </td>
+                    <td class="uk-text-center">{{ pkg.version }}</td>
+                    <td>/{{ pkg.name }}</td>
                     <td>
                         <a class="uk-button pk-button-danger" v-show="!pkg.enabled" v-on="click: uninstall(pkg)">{{ 'Delete' | trans }}</a>
                     </td>
