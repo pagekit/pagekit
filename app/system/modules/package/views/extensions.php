@@ -45,7 +45,7 @@
                         <a class="uk-icon-circle uk-text-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
-                    <td>/{{ pkg.name }}</td>
+                    <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>
                     <td class="uk-text-right">
                         <ul class="uk-subnav pk-subnav-icon uk-flex-inline uk-invisible" style="flex-wrap: nowrap;">
                             <li v-show="!pkg.enabled"><a class="uk-icon-users" v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})"></a></li>
