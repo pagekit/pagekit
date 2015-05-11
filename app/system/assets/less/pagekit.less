@@ -191,16 +191,35 @@
 /* Modifier `pk-subnav-icon`
 ========================================================================== */
 
+/*
+ * 1. Needed if in table width minimum
+ * 2. Gutter
+ * 3. Needed if no `href`
+ */
+
 .pk-subnav-icon {
-    margin: 0;
-    /* Needed if in table width minimum */
-    white-space: nowrap;
-    /* Needed if no `href` */
+    /* 1 */
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    /* 2 */
+    margin-left: -15px;
+    margin-top: -15px;
+    margin-bottom: 0;
+    /* 3 */
     cursor: pointer;
+    font-size: 16px;
 }
 
-.pk-subnav-icon > li > a { color: @global-muted-color; }
-.pk-subnav-icon > li > a:hover { color: @global-color; }
+.pk-subnav-icon > * {
+    padding-left: 15px;
+    margin-top: 15px;
+}
+
+.pk-subnav-icon > * > * { color: @global-muted-color; }
+
+.pk-subnav-icon > * > :hover,
+.pk-subnav-icon > * > :focus { color: @global-color; }
 
 
 /* Sub-modifier `pk-overlay-border`
