@@ -33,19 +33,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="pkg: packages | filterBy search in 'title'">
+                <tr class="uk-visible-hover-inline" v-repeat="pkg: packages | filterBy search in 'title'">
                     <td class="pk-table-width-minimum">
                         <img class="uk-img-preserve" width="50" height="50" alt="{{ pkg.title }}" v-attr="src: icon(pkg)">
                     </td>
                     <td class="uk-text-nowrap">
-                        <h2 class="uk-h3 uk-margin-remove">{{ pkg.title }}</h2>
-                        <div class="uk-margin-small-top">
-                            <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove" v-show="pkg.enabled">
-                                <li><a>{{ 'Details' | trans }}</a></li>
-                                <li><a>{{ 'Settings' | trans }}</a></li>
-                                <li><a v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})">{{ 'Permissions' | trans }}</a></li>
-                            </ul>
-                        </div>
+                        <a>{{ pkg.title }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a class="uk-icon-circle uk-text-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
@@ -53,8 +46,12 @@
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
                     <td>/{{ pkg.name }}</td>
-                    <td>
-                        <a class="uk-button pk-button-danger" v-show="!pkg.enabled" v-on="click: uninstall(pkg)">{{ 'Delete' | trans }}</a>
+                    <td class="uk-text-right">
+                        <ul class="uk-subnav pk-subnav-icon uk-flex-inline uk-invisible" style="flex-wrap: nowrap;">
+                            <li v-show="!pkg.enabled"><a class="uk-icon-users" v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})"></a></li>
+                            <li><a class="uk-icon-info-circle"></a></li>
+                            <li v-show="!pkg.enabled"><a class="uk-icon-trash" v-on="click: uninstall(pkg)"></a></li>
+                        </ul>
                     </td>
                 </tr>
             </tbody>
