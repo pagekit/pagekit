@@ -59,7 +59,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Blog'),
-                'name'  => 'blog:views/post/index.php',
+                'name'  => 'blog:views/site/post/index.php',
                 'link'  => [
                     'alternate' => [
                         'href'  => App::url('@blog/site/feed', [], true),
@@ -185,7 +185,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __($post->getTitle()),
-                'name'  => 'blog:views/post/post.php'
+                'name'  => 'blog:views/site/post/post.php'
             ],
             'post' => $post,
             'blog' => $this->module

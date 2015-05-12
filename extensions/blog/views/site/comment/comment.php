@@ -35,7 +35,7 @@
     <?php if ($node->hasChildren() && !$maxlevel) : ?>
     <ul>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <?= $view->render('blog:views/comment/comment.php', ['node' => $child, 'comment' => $child->getComment(), 'post' => $post, 'blog' => $blog]) ?>
+        <?= $view->render('blog:views/site/comment/comment.php', ['node' => $child, 'comment' => $child->getComment(), 'post' => $post, 'blog' => $blog]) ?>
         <?php endforeach ?>
     </ul>
     <?php endif ?>
@@ -44,6 +44,6 @@
 
 <?php if ($node->hasChildren() && $maxlevel) : ?>
     <?php foreach ($node->getChildren() as $child) : ?>
-    <?= $view->render('blog:views/comment/comment.php', ['node' => $child, 'comment' => $child->getComment(), 'post' => $post, 'blog' => $blog]) ?>
+    <?= $view->render('blog:views/site/comment/comment.php', ['node' => $child, 'comment' => $child->getComment(), 'post' => $post, 'blog' => $blog]) ?>
     <?php endforeach ?>
 <?php endif ?>
