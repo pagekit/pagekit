@@ -1,5 +1,4 @@
 var $ = require('jquery');
-var data = window.$extensions;
 
 module.exports = {
 
@@ -7,7 +6,7 @@ module.exports = {
         require('./package')
     ],
 
-    data: $.extend(data, {
+    data: $.extend(window.$data, {
         updates: null,
         search: '',
         status: ''

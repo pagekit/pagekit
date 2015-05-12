@@ -37,7 +37,7 @@ class PackageController
                 'title' => __('Themes'),
                 'name'  => 'system:modules/package/views/themes.php'
             ],
-            '$themes' => [
+            '$data' => [
                 'api' => App::system()->config('api'),
                 'packages' => $packages
             ]
@@ -57,7 +57,7 @@ class PackageController
                 'title' => __('Extensions'),
                 'name'  => 'system:modules/package/views/extensions.php'
             ],
-            '$extensions' => [
+            '$data' => [
                 'api' => App::system()->config('api'),
                 'packages' => $packages
             ]

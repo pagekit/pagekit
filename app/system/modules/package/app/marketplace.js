@@ -4,9 +4,13 @@ jQuery(function ($) {
 
         el: '#marketplace',
 
-        data: $.extend(window.$marketplace, {
+        data: $.extend(window.$data, {
             search: ''
-        })
+        }),
+
+        components: {
+            'v-marketplace': require('./components/marketplace.vue')
+        }
 
     });
 

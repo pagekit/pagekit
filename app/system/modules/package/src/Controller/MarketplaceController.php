@@ -16,7 +16,7 @@ class MarketplaceController
                 'title' => __('Marketplace'),
                 'name'  => 'system/package:views/marketplace.php'
             ],
-            '$marketplace' => [
+            '$data' => [
                 'title' => 'Themes',
                 'type' => 'theme',
                 'api' => App::system()->config('api'),
@@ -32,7 +32,7 @@ class MarketplaceController
                 'title' => __('Marketplace'),
                 'name'  => 'system/package:views/marketplace.php'
             ],
-            '$marketplace' => [
+            '$data' => [
                 'title' => 'Extensions',
                 'type' => 'extension',
                 'api' => App::system()->config('api'),

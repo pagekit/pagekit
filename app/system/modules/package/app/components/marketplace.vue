@@ -47,13 +47,10 @@
 
     var $ = require('jquery');
     var _ = require('lodash');
-    var Vue = require('vue');
 
     module.exports = {
 
         replace: true,
-
-        template: __vue_template__,
 
         mixins: [
             require('./package')
@@ -147,7 +144,5 @@
         }
 
     };
-
-    Vue.component('v-marketplace', module.exports);
 
 </script>
