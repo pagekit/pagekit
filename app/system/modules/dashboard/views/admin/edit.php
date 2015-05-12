@@ -1,4 +1,4 @@
-<?php $view->script('widget-edit', 'system/dashboard:app/edit.js', ['system', 'vue-validator']) ?>
+<?php $view->script('dashboard-widget-edit', 'system/dashboard:app/bundle/admin/edit.js', ['system', 'vue-validator', 'uikit-autocomplete']) ?>
 
 <form id="widget-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 
@@ -17,13 +17,15 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-feed-title" class="uk-form-label"><?= __('Title') ?></label>
+        <label for="form-feed-title" class="uk-form-label">{{ 'Title' | trans }}</label>
         <div class="uk-form-controls">
             <input id="form-feed-title" class="uk-form-width-large" type="text" name="widget[title]" v-model="widget.title" v-valid="required">
             <p class="uk-form-help-block uk-text-danger" v-show="form['widget[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</p>
         </div>
     </div>
 
-    <?= $type->renderForm($widget) ?>
+    <div class="uk-form-row" v-repeat="section: sections | active | orderBy 'priority'">
+        <div v-component="{{ section.name }}" v-with="widget: widget"></div>
+    </div>
 
 </form>

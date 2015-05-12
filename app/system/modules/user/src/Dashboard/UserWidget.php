@@ -46,12 +46,4 @@ class UserWidget extends Type
 
         return App::view('system/user:views/widgets/user/index.php', compact('widget', 'users', 'options'));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderForm(WidgetInterface $widget)
-    {
-        return App::view('system/user:views/widgets/user/edit.php', compact('widget'));
-    }
 }
