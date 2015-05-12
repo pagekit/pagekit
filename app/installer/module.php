@@ -49,7 +49,7 @@ return [
     'config' => [
 
         'enabled'    => false,
-        'sampleData' => __DIR__.'/sample_data.sql'
+        'sampleData' => ''
 
     ]
 
