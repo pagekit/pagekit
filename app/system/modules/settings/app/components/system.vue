@@ -56,9 +56,12 @@
 
     module.exports = {
 
-        name: 'settings-system',
-        label: 'System',
-        priority: 10,
+        section: {
+            name: 'settings-system',
+            label: 'System',
+            icon: 'uk-icon-cog',
+            priority: 10
+        },
 
         data: function() {
             return window.$system;

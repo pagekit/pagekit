@@ -99,9 +99,12 @@
 
     module.exports = {
 
-        name: 'system/mail',
-        label: 'Mail',
-        priority: 40,
+        section: {
+            name: 'system/mail',
+            label: 'Mail',
+            icon: 'uk-icon-cog',
+            priority: 40
+        },
 
         data: function() {
             return window.$mail;
@@ -125,6 +128,6 @@
 
     };
 
-    Settings.register(module.exports);
+    Settings.component('system/mail', module.exports);
 
 </script>

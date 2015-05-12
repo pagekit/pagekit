@@ -59,9 +59,12 @@
 
     module.exports = {
 
-        name: 'system/oauth',
-        label: 'OAuth',
-        priority: 50,
+        section: {
+            name: 'system/oauth',
+            label: 'OAuth',
+            icon: 'uk-icon-cog',
+            priority: 50
+        },
 
         data: function() {
             return window.$oauth
@@ -110,6 +113,6 @@
 
     };
 
-    Settings.register(module.exports);
+    Settings.component('system/oauth', module.exports);
 
 </script>

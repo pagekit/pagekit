@@ -26,7 +26,7 @@
             <select id="form-adminlocale" class="uk-form-width-large" v-model="option.admin.locale" options="locales | toOptions"></select>
         </div>
     </div>
-    
+
     <div class="uk-form-row">
         <label for="form-timezone" class="uk-form-label">{{ 'Time Zone' | trans }}</label>
         <div class="uk-form-controls">
@@ -40,9 +40,12 @@
 
     module.exports = {
 
-        name: 'settings-locale',
-        label: 'Localization',
-        priority: 20,
+        section: {
+            name: 'settings-locale',
+            label: 'Localization',
+            icon: 'uk-icon-cog',
+            priority: 20
+        },
 
         data: function() {
             return window.$system;

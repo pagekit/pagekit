@@ -43,9 +43,12 @@
 
     module.exports = {
 
-        name: 'settings-site',
-        label: 'Site',
-        priority: 0,
+        section: {
+            name: 'settings-site',
+            label: 'Site',
+            icon: 'uk-icon-cog',
+            priority: 0
+        },
 
         computed: {
 

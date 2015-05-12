@@ -66,13 +66,16 @@
 
     module.exports = {
 
+        section: {
+            name: 'system/cache',
+            label: 'Cache',
+            icon: 'uk-icon-cog',
+            priority: 30
+        },
+
         data: function() {
             return { caches: window.$caches };
         },
-
-        name: 'system/cache',
-        label: 'Cache',
-        priority: 30,
 
         template: __vue_template__,
 
@@ -104,6 +107,6 @@
 
     };
 
-    Settings.register(module.exports);
+    Settings.component('system/cache', module.exports);
 
 </script>
