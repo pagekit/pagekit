@@ -1,10 +1,10 @@
 <template>
 
-    <li class="uk-nestable-list-item" v-class="uk-parent: isParent, uk-active: isActive" data-id="{{ node.id }}">
+    <li class="uk-nestable-item" v-class="uk-parent: isParent, uk-active: isActive" data-id="{{ node.id }}">
 
-        <div class="uk-nestable-item uk-visible-hover-inline" v-on="click: select(node)">
+        <div class="uk-nestable-panel uk-visible-hover-inline" v-on="click: select(node)">
             <div class="uk-nestable-handle"></div>
-            <div data-nestable-action="toggle"></div>
+            <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
             {{ node.title }}
 
             <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="isFrontpage"></i>

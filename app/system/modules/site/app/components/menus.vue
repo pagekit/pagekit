@@ -26,22 +26,23 @@
 
         <div class="uk-modal-dialog" v-if="menu">
 
-            <form name="menuform" v-on="valid: save">
+            <form name="menuForm" v-on="valid: save">
 
                 <p>
-                    <input class="uk-width-1-1 uk-form-large" name="label" type="text" placeholder="{{ 'Enter Menu Name' | trans }}" v-model="menu.label"  v-valid="alphaNum">
-                    <span class="uk-form-help-block uk-text-danger" v-show="menuform.label.invalid">{{ 'Invalid name.' | trans }}</span>
+                    <input class="uk-width-1-1 uk-form-large" name="label" type="text" placeholder="{{ 'Enter Menu Name' | trans }}" v-model="menu.label" v-valid="alphaNum">
+                    <span class="uk-form-help-block uk-text-danger" v-show="menuForm.label.invalid">{{ 'Invalid name.' | trans }}</span>
                 </p>
                 <p>
                     <input class="uk-width-1-1 uk-form-large" name="id" type="text" placeholder="{{ 'Enter Menu Slug' | trans }}" v-model="menu.id" v-valid="alphaNum, unique">
-                    <span class="uk-form-help-block uk-text-danger" v-show="menuform.id.invalid">{{ 'Invalid slug.' | trans }}</span>
+                    <span class="uk-form-help-block uk-text-danger" v-show="menuForm.id.invalid">{{ 'Invalid slug.' | trans }}</span>
                 </p>
 
-                <button class="uk-button uk-button-primary" v-attr="disabled: menuform.invalid">{{ 'Save' | trans }}</button>
+                <button class="uk-button uk-button-primary" v-attr="disabled: menuForm.invalid">{{ 'Save' | trans }}</button>
                 <button class="uk-button uk-modal-close" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
                 <button class="uk-button uk-button-danger uk-float-right" v-show="menu.oldId" v-on="click: delete">{{ 'Delete' | trans }}</button>
 
             </form>
+
         </div>
 
     </div>

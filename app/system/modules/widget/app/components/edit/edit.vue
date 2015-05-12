@@ -60,8 +60,6 @@
 
     module.exports = {
 
-        sections: [],
-
         data: function() {
             return _.merge({}, window.$widgets);
         },

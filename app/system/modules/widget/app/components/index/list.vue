@@ -1,12 +1,8 @@
 <template>
 
-    <ul class="uk-nestable uk-form">
+    <ul v-el="nestable" class="uk-nestable uk-form">
 
-        <li data-id="{{ widget.id }}" v-repeat="widget: position.widgets" class="uk-nestable-list-item" v-show="widget | showWidget">
-
-            <widget-item></widget-item>
-
-        </li>
+        <widget-item v-repeat="widget: position.widgets"  v-show="widget | showWidget"></widget-item>
 
     </ul>
 
@@ -21,7 +17,7 @@
         ready: function() {
             var self = this;
 
-            UIkit.nestable(this.$el, { maxDepth: 1, group: 'widgets' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+            UIkit.nestable(this.$$.nestable, { maxDepth: 1, group: 'widgets' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
                 if (type !== 'removed' && e.target.tagName == 'UL') {
                     self.reorder(self.position.id, nestable.list());
                 }

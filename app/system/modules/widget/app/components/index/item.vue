@@ -1,24 +1,28 @@
 <template>
 
-    <div class="uk-nestable-item pk-table-fake">
+    <li class="uk-nestable-item" data-id="{{ widget.id }}">
 
-        <div class="pk-table-width-minimum">
-            <div class="uk-nestable-handle">​</div>
-        </div>
-        <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
-        <div class="pk-table-min-width-100">
-            <a v-show="type" v-on="click: edit(widget)">{{ widget.title }}</a>
-            <span v-show="!type">{{ widget.title }}</span>
-        </div>
-        <div class="pk-table-width-150">
-            <div class="uk-form-select" v-el="select">
-                <a></a>
-                <select v-model="position.id" class="uk-width-1-1" options="positionOptions" v-on="input: reassign"></select>
+        <div class="uk-nestable-panel pk-table-fake">
+
+            <div class="pk-table-width-minimum">
+                <div class="uk-nestable-handle">​</div>
             </div>
-        </div>
-        <div class="pk-table-width-150">{{ typeName }}</div>
+            <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
+            <div class="pk-table-min-width-100">
+                <a v-if="type" v-on="click: edit(widget)">{{ widget.title }}</a>
+                <span v-if="!type">{{ widget.title }}</span>
+            </div>
+            <div class="pk-table-width-150">
+                <div class="uk-form-select uk-nestable-nodrag" v-el="select">
+                    <a></a>
+                    <select v-model="position.id" class="uk-width-1-1" options="positionOptions" v-on="input: reassign"></select>
+                </div>
+            </div>
+            <div class="pk-table-width-150">{{ typeName }}</div>
 
-    </div>
+        </div>
+
+    </li>
 
 </template>
 
@@ -27,6 +31,7 @@
     module.exports = {
 
         inherit: true,
+        replace: true,
 
         ready: function() {
             UIkit.formSelect(this.$$.select, { target: 'a' });

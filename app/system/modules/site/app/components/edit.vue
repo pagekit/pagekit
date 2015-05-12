@@ -1,6 +1,6 @@
 <template>
 
-    <form class="uk-form uk-form-horizontal" name="form" v-show="node.type" v-on="valid: save">
+    <form class="uk-form uk-form-horizontal" name="nodeForm" v-show="node.type" v-on="valid: save">
 
         <div class="uk-clearfix uk-margin">
 
@@ -26,7 +26,7 @@
 
         <div class="uk-switcher uk-margin" v-el="content">
             <div v-repeat="section: sections | active | orderBy 'priority'">
-                <div v-component="{{ section.name }}" v-with="node: node"></div>
+                <div v-component="{{ section.name }}" v-with="node: node, form: nodeForm"></div>
             </div>
         </div>
 

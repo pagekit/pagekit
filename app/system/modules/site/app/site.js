@@ -2,15 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash');
 var UIkit = require('uikit');
 
-Vue.validators['unique'] = function(value) {
-    var menu = _.find(this.menus, { id: value });
-    return !menu || this.menu.oldId == menu.id;
-};
-
-Vue.http.options = _.extend({}, Vue.http.options, { error: function (msg) {
-    UIkit.notify(msg, 'danger');
-}});
-
 var Site = Vue.extend({
 
     mixins: [require('./tree')],
@@ -32,6 +23,23 @@ var Site = Vue.extend({
             });
 
             return sections;
+        }
+
+    },
+
+    http: {
+
+        error: function (msg) {
+            UIkit.notify(msg, 'danger');
+        }
+
+    },
+
+    validators: {
+
+        unique: function(value) {
+            var menu = _.find(this.menus, { id: value });
+            return !menu || this.menu.oldId == menu.id;
         }
 
     },

@@ -4,6 +4,7 @@ namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Kernel\Exception\ConflictException;
+use Pagekit\Kernel\Exception\HttpException;
 use Pagekit\Site\Entity\Node;
 
 /**
