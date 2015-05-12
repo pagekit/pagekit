@@ -7,20 +7,16 @@ var _ = require('./util');
 module.exports = {
 
     bind: function () {
-        this.vm.$on('hook:ready', function() { this.init(); }.bind(this));
+        Vue.nextTick(this.init.bind(this));
     },
 
     unbind: function () {
-        if (this.form) {
-            this.vm.$validator.unbind(this);
-        }
-    },
 
-    validate: function () {
+        this.vm.$validator.unbind(this);
 
-        var validator = Vue.validators[this.type];
+        _.off(this.el, 'input', this.listener);
+        _.off(this.el, 'blur', this.listener);
 
-        return validator ? validator.call(this.vm, this.el.value, this.args) : undefined;
     },
 
     init: function() {
@@ -31,19 +27,25 @@ module.exports = {
             return;
         }
 
-        this.name  = _.camelize(name);
-        this.form  = _.camelize(form);
-        this.type  = this.arg || this.expression;
-        this.args  = this.arg ? this.expression : '';
-        this.value = el.value;
-        this.model = findVM(el.form);
+        this.name      = _.camelize(name);
+        this.form      = _.camelize(form);
+        this.type      = this.arg || this.expression;
+        this.args      = this.arg ? this.expression : '';
+        this.value     = el.value;
+        this.validator = getValidators(this.vm)[this.type];
+
+        if (!this.validator) {
+            return;
+        }
 
         el._dirty   = false;
         el._touched = false;
 
         this.listener = function (e) {
 
-            if (!el || e.relatedTarget && (e.relatedTarget.tagName === 'A' || e.relatedTarget.tagName === 'BUTTON')) return;
+            if (e.relatedTarget && (e.relatedTarget.tagName === 'A' || e.relatedTarget.tagName === 'BUTTON')) {
+                return;
+            }
 
             if (e.type == 'blur') {
                 el._touched = true;
@@ -56,19 +58,37 @@ module.exports = {
             self.vm.$validator.validate(self.form);
         };
 
+        if (!el._bound) {
+            _.on(el, 'input', this.listener);
+            _.on(el, 'blur', this.listener);
+            el._bound = true;
+        }
+
         this.vm.$validator.bind(this);
+    },
+
+    validate: function () {
+        return this.validator.call(this.vm, this.el.value, this.args);
     }
 
 };
 
-function findVM(el) {
+function getValidators(vm) {
+
+    var validators = {};
+
     do {
 
-        if (el.__vue__) {
-            return el.__vue__;
-        }
+        validators = defaults(validators, vm.$options.validators || {});
 
-        el = el.parentNode;
+        vm = vm.$parent;
 
-    } while (el);
+    } while (vm);
+
+    return defaults(validators, Vue.validators);
+}
+
+function defaults(target, source) {
+
+    return _.extend(_.extend({}, source), target)
 }

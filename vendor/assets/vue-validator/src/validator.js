@@ -6,62 +6,58 @@ var _ = require('./util');
 
 module.exports = {
 
-    elements: [],
-
     validators: {},
 
     bind: function (dir) {
 
-        var self = this, el = dir.el, form = dir.form;
+        var self = this, name = dir.form;
 
-        if (!this.validators[form]) {
+        if (!this.validators[name]) {
 
-            this.validators[form] = [];
-            this.validators[form].handler = function (e) {
-                e.preventDefault();
-                _.trigger(e.target, self.validate(form, true) ? 'valid' : 'invalid');
+            this.validators[name] = {
+                form: dir.el.form,
+                vm: dir.vm.$root,
+                handler: function (e) {
+                    e.preventDefault();
+                    _.trigger(e.target, self.validate(name, true) ? 'valid' : 'invalid');
+                },
+                dirs: []
             };
 
-            this.validators[form].model = dir.model;
-
-            _.on(el.form, 'submit', this.validators[form].handler);
-
-            dir.model.$set(form, {});
+            dir.vm.$root.$set(name, {});
+            _.on(dir.el.form, 'submit', this.validators[name].handler);
         }
 
-        if (this.elements.indexOf(el) == -1) {
-
-            this.elements.push(el);
-
-            _.on(el, 'blur', dir.listener);
-            _.on(el, 'input', dir.listener);
-        }
-
-        dir.model[form].$add(dir.name, {});
-        this.validators[form].push(dir);
+        this.validators[name].dirs.push(dir);
     },
 
     unbind: function (dir) {
 
-        var form = dir.form, validators = this.validators[form];
+        var form = this.validators[dir.form];
 
-        validators.splice(validators.indexOf(dir), 1);
+        if (!form) {
+            return;
+        }
 
-        if (!validators.length) {
-            _.off(dir.el.form, 'submit', validators.handler);
-            delete this.validators[form];
+        form.dirs.splice(form.dirs.indexOf(dir), 1);
+
+        if (!form.dirs.length) {
+            _.off(dir.el.form, 'submit', form.handler);
+            delete this.validators[dir.form];
         }
     },
 
     validate: function (form, submit) {
 
-        var results = {}, focus, keys;
+        var validator = this.validators[form], results = { valid: true, invalid: false };
 
-        if (!this.validators[form]) return results;
+        if (!validator) {
+            return true;
+        }
 
-        this.validators[form].forEach(function (dir) {
+        validator.dirs.forEach(function(dir) {
 
-            var el = dir.el, name = dir.name, valid = dir.validate();
+            var valid = dir.validate(), el = dir.el, name = dir.name;
 
             if (submit) {
                 el._touched = true;
@@ -81,28 +77,19 @@ module.exports = {
                 };
             }
 
-            if (submit && !focus && !valid) {
-                el.focus();
-                focus = true;
-            }
-
             results[name][dir.type] = !valid;
+
+            if (submit && results.valid && !valid) {
+                el.focus();
+            }
 
             if (results[name].valid && !valid) {
                 results[name].valid = results.valid = false;
                 results[name].invalid = results.invalid = true;
             }
-
         });
 
-        keys = Object.keys(results);
-
-        if (keys.length && keys.indexOf('valid') == -1) {
-            results.valid = true;
-            results.invalid = false;
-        }
-
-        this.validators[form].model.$set(form, results);
+        validator.vm.$set(form, results);
 
         return results.valid;
     }
