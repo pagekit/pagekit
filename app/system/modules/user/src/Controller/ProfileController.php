@@ -18,7 +18,7 @@ class ProfileController
         return [
             '$view' => [
                 'title' => __('Your Profile'),
-                'name'  => 'system/user:views/profile.php'
+                'name'  => 'system/user:views/site/profile.php'
             ],
             'user' => App::user()
         ];

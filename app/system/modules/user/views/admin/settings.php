@@ -1,4 +1,4 @@
-<?php $view->script('settings', 'system/user:app/settings.js', 'system') ?>
+<?php $view->script('settings', 'system/user:app/admin/settings.js', 'system') ?>
 
 <div id="settings" class="uk-form uk-form-horizontal">
 

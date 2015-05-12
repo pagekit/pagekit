@@ -24,13 +24,13 @@ class LoginWidget extends Type
 
         if ($user->isAuthenticated()) {
             $redirect = $widget->get('redirect.logout') ?: App::url()->current(true);
-            return App::view('system/user:views/login/logout.php', compact('widget', 'user', 'options', 'redirect'));
+            return App::view('system/user:views/widgets/login/logout.php', compact('widget', 'user', 'options', 'redirect'));
         }
 
         $redirect          = $widget->get('redirect.login') ?: App::url()->current(true);
         $last_username     = App::session()->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
 
-        return App::view('system/user:views/login/login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return App::view('system/user:views/widgets/login/login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
     }
 }

@@ -24,7 +24,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Users'),
-                'name'  => 'system/user:views/admin/index.php'
+                'name'  => 'system/user:views/admin/user/index.php'
             ],
             '$data' => [
                 'statuses' => User::getStatuses(),
@@ -58,7 +58,7 @@ class UserController
         return [
             '$view' => [
                 'title' => $id ? __('Edit User') : __('Add User'),
-                'name'  => 'system/user:views/admin/edit.php'
+                'name'  => 'system/user:views/admin/user/edit.php'
             ],
             '$data' => [
                 'user'     => $user,

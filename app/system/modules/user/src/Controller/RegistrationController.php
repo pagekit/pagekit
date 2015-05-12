@@ -35,7 +35,7 @@ class RegistrationController
         return [
             '$view' => [
                 'title' => __('User Registration'),
-                'name'  => 'system/user:views/registration.php'
+                'name'  => 'system/user:views/site/registration.php'
             ]
         ];
     }

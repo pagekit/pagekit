@@ -1,4 +1,4 @@
-<?php $view->script('permission-index', 'system/user:app/role.js', ['system', 'uikit-sticky']) ?>
+<?php $view->script('permission-index', 'system/user:app/admin/role.js', ['system', 'uikit-sticky']) ?>
 
 <div id="js-permission" class="uk-form" v-cloak>
 

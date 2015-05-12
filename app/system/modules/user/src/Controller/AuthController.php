@@ -24,7 +24,7 @@ class AuthController
         return [
             '$view' => [
                 'title' => __('Login'),
-                'name'  => 'system/user:views/login.php'
+                'name'  => 'system/user:views/site/login.php'
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
             'remember_me_param' => RememberMe::REMEMBER_ME_PARAM,
