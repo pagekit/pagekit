@@ -51,7 +51,7 @@ class CommentApiController
             $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
         }
 
-        return compact('comments', 'pages');
+        return compact('comments', 'pages', 'count');
     }
 
     /**

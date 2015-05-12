@@ -6,14 +6,13 @@ jQuery(function ($) {
 
         el: '#js-comments',
 
-        data: {
-            config: $config,
-            data: $data,
+        data: $.extend(window.$data, {
             comments: null,
             pages: 0,
+            count: '',
             selected: [],
             editing: null
-        },
+        }),
 
         created: function () {
 
@@ -27,11 +26,16 @@ jQuery(function ($) {
         computed: {
 
             statuses: function() {
-                return Vue.filter('toArray')($.map(this.data.statuses, function(status, id) { return { text: status, value: id }; }));
+                return Vue.filter('toArray')($.map(this.$data.statuses, function(status, id) { return { text: status, value: id }; }));
             },
 
-            statusesFilter: function() {
-                return [{ text: this.$trans('- Status -'), value: '' }].concat(this.statuses);
+            statusesFilter: function () {
+
+                var options = _.map(this.$data.statuses, function (status, id) {
+                    return { text: status, value: id };
+                });
+
+                return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
             }
 
         },
@@ -88,6 +92,7 @@ jQuery(function ($) {
                 this.resource.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page }, function (data) {
                     vm.$set('comments', data.comments);
                     vm.$set('pages', data.pages);
+                    vm.$set('count', data.count);
                     vm.$set('config.page', page);
                     vm.$set('selected', []);
                 });

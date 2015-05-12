@@ -4,12 +4,7 @@ jQuery(function ($) {
 
         el: '#js-user-edit',
 
-        data: {
-            config: $config,
-            user: $data.user,
-            roles: $data.roles,
-            statuses: $data.statuses
-        },
+        data: window.$data,
 
         ready: function () {
 

@@ -21,12 +21,12 @@ class PostController
                 'title' => __('Posts'),
                 'name'  => 'blog:views/admin/post/index.php'
             ],
-            '$config' => [
-                'filter' => $filter,
-                'page'   => $page
-            ],
             '$data' => [
-                'statuses' => Post::getStatuses()
+                'statuses' => Post::getStatuses(),
+                'config'   => [
+                    'filter' => $filter,
+                    'page'   => $page
+                ]
             ]
         ];
     }

@@ -4,11 +4,9 @@ jQuery(function ($) {
 
         el: '#js-user',
 
-        data: {
-            config: window.$config,
-            data: window.$data,
+        data: $.extend(window.$data, {
             count: ''
-        },
+        }),
 
         created: function () {
 
@@ -23,7 +21,7 @@ jQuery(function ($) {
 
             statuses: function () {
 
-                var options = [{ text: this.$trans('New'), value: 'new' }].concat(_.map(this.data.statuses, function (status, id) {
+                var options = [{ text: this.$trans('New'), value: 'new' }].concat(_.map(this.$data.statuses, function (status, id) {
                     return { text: status, value: id };
                 }));
 
@@ -32,7 +30,7 @@ jQuery(function ($) {
 
             roles: function () {
 
-                var options = this.data.roles.map(function (role) {
+                var options = this.$data.roles.map(function (role) {
                     return { text: role.name, value: role.id };
                 });
 

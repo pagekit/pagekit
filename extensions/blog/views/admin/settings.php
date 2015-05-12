@@ -5,7 +5,7 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ 'Edit Settings' | trans }}</h2>
+            <h2 class="uk-margin-remove">{{ 'Settings' | trans }}</h2>
 
         </div>
         <div data-uk-margin>

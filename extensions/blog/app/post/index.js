@@ -6,14 +6,12 @@ jQuery(function ($) {
 
         el: '#js-post',
 
-        data: {
-            config: $config,
-            data: $data,
+        data: $.extend(window.$data, {
             posts: null,
             pages: 0,
             count: '',
             selected: []
-        },
+        }),
 
         created: function () {
 
@@ -28,7 +26,7 @@ jQuery(function ($) {
 
             statuses: function() {
                 return [{ text: this.$trans('- Status -'), value: '' }].concat(
-                    Vue.filter('toArray')($.map(this.data.statuses, function(status, id) { return { text: status, value: id }; }))
+                    Vue.filter('toArray')($.map(this.$data.statuses, function(status, id) { return { text: status, value: id }; }))
                 );
             }
 

@@ -26,14 +26,14 @@ class UserController
                 'title' => __('Users'),
                 'name'  => 'system/user:views/admin/index.php'
             ],
-            '$config' => [
-                'emailVerification' => App::module('system/user')->config('require_verification'),
-                'filter'            => $filter,
-                'page'              => $page
-            ],
             '$data' => [
                 'statuses' => User::getStatuses(),
-                'roles'    => array_values($roles)
+                'roles' => array_values($roles),
+                'config' => [
+                    'emailVerification' => App::module('system/user')->config('require_verification'),
+                    'filter' => $filter,
+                    'page' => $page
+                ]
             ]
         ];
     }
@@ -60,14 +60,14 @@ class UserController
                 'title' => $id ? __('Edit User') : __('Add User'),
                 'name'  => 'system/user:views/admin/edit.php'
             ],
-            '$config' => [
-                'emailVerification' => App::module('system/user')->config('require_verification'),
-                'currentUser'       => App::user()->getId()
-            ],
             '$data' => [
                 'user'     => $user,
                 'statuses' => User::getStatuses(),
-                'roles'    => array_values($roles)
+                'roles'    => array_values($roles),
+                'config'  => [
+                    'emailVerification' => App::module('system/user')->config('require_verification'),
+                    'currentUser'       => App::user()->getId()
+                ]
             ]
         ];
     }

@@ -4,39 +4,40 @@
 <div id="js-comments" class="uk-form" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
+        <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
+            <h2 class="uk-margin-remove">{{ $trans('%count% Comments', {count: count}) }}</h2>
 
-            <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
-                <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a v-on="click: status(1)">{{ 'Approve' | trans }}</a></li>
-                        <li><a v-on="click: status(0)">{{ 'Unapprove' | trans }}</a></li>
-                        <li><a v-on="click: status(2)">{{ 'Mark as spam' | trans }}</a></li>
-                    </ul>
+            <div class="uk-margin-left" v-show="selected.length">
+                <ul class="uk-subnav pk-subnav-icon">
+                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove"></a></li>
+                    <li><a class="uk-icon-check-circle-o" title="{{ 'Approve' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                    <li><a class="uk-icon-ban" title="{{ 'Unapprove' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="uk-icon-frown-o" title="{{ 'Mark as spam' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
+                </ul>
+            </div>
+
+            <div class="pk-search">
+                <div class="uk-search">
+                    <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
                 </div>
             </div>
 
         </div>
-        <div data-uk-margin>
-
-            <select v-model="config.filter.status" options="statusesFilter"></select>
-            <input type="text" v-model="config.filter.search" placeholder="{{ 'Search' | trans }}" debounce="300">
-
-        </div>
     </div>
 
-    <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
-
-    <div v-show="comments.length" class="uk-overflow-container">
+    <div class="uk-overflow-container">
         <table class="uk-table">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th class="pk-table-min-width-300" colspan="2">{{ 'Comment' | trans }}</th>
-                    <th class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center">
+                        <div class="uk-form-select pk-filter" data-uk-form-select>
+                            <span>{{ 'Status' | trans }}</span>
+                            <select v-model="config.filter.status" options="statusesFilter"></select>
+                        </div>
+                    </th>
                     <th class="pk-table-width-200">
                         <span v-if="!config.post">{{ 'In response to' | trans }}</span>
                         <span v-if="config.post">{{ 'In response to %title%' | trans config.post }}</span>
@@ -48,6 +49,8 @@
             </tbody>
         </table>
     </div>
+
+    <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
 
     <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
 

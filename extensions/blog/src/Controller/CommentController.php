@@ -23,13 +23,13 @@ class CommentController
                 'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments'),
                 'name'  => 'blog:views/admin/comment/index.php'
             ],
-            '$config' => [
-                'filter' => $filter,
-                'page'   => $page,
-                'post'   => $post
-            ],
             '$data'   => [
-                'statuses' => Comment::getStatuses()
+                'statuses' => Comment::getStatuses(),
+                'config'   => [
+                    'filter' => $filter,
+                    'page'   => $page,
+                    'post'   => $post
+                ]
             ]
         ];
     }
