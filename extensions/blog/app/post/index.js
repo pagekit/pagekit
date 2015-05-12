@@ -24,10 +24,13 @@ jQuery(function ($) {
 
         computed: {
 
-            statuses: function() {
-                return [{ text: this.$trans('- Status -'), value: '' }].concat(
-                    Vue.filter('toArray')($.map(this.$data.statuses, function(status, id) { return { text: status, value: id }; }))
-                );
+            statusOptions: function () {
+
+                var options = _.map(this.$data.statuses, function (status, id) {
+                    return { text: status, value: id };
+                });
+
+                return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
             }
 
         },
