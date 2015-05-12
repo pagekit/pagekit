@@ -1,5 +1,3 @@
-<?php $view->style('system', 'app/system/assets/css/system.css') ?>
-
 <div class="uk-margin uk-clearfix">
     <a  class="uk-float-right uk-icon-hover uk-icon-small uk-icon-cog" href="<?= $view->url('@dashboard/settings') ?>" title="<?= __('Dashboard Settings') ?>"></a>
 </div>

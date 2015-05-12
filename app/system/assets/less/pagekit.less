@@ -524,3 +524,61 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
+
+
+
+
+/* ========================================================================
+   System extension
+ ========================================================================== */
+
+/* Marketplace table template
+ ========================================================================== */
+
+.pk-marketplace-panel .uk-overlay-area { border-radius: 2px; }
+
+
+/* Marketplace details template
+ ========================================================================== */
+
+/*
+ * Position installer buttons
+ */
+
+.uk-modal-dialog.pk-marketplace-modal-dialog { height: 600px; }
+
+@media (max-width: 767px) {
+
+    .uk-modal-dialog.pk-marketplace-modal-dialog {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+
+}
+
+.pk-marketplace-modal-action {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+/* Dashboard view
+ ========================================================================== */
+
+.pk-weather-image {
+    position: relative;
+    display: inline-block;
+}
+
+.pk-weather-temperature {
+    position: absolute;
+    top: 0;
+    right: -20px;
+}
