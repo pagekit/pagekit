@@ -8,7 +8,7 @@
         <link href="<?= $view->url()->getStatic('system/theme:apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
         <?php $view->style('theme', 'system/theme:css/theme.css') ?>
-        <?php $view->script('theme', 'system/theme:js/theme.js', ['uikit', 'uikit-notify', 'uikit-sticky', 'uikit-sortable', 'uikit-pagination', 'uikit-form-select']) ?>
+        <?php $view->script('theme', 'system/theme:js/theme.js', ['uikit', 'uikit-notify', 'uikit-tooltip', 'uikit-sticky', 'uikit-sortable', 'uikit-pagination', 'uikit-form-select']) ?>
         <?= $view->render('head') ?>
     </head>
     <body>
