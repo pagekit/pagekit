@@ -7,7 +7,7 @@ var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 function Http (url, options) {
 
-    var $ = _.plugins(this), headers = Http.headers, request = new XMLHttpRequest();
+    var headers = Http.headers, request = new XMLHttpRequest();
 
     if (_.isPlainObject(url)) {
         options = url;
@@ -38,7 +38,7 @@ function Http (url, options) {
 
     if (options.emulateJSON && _.isPlainObject(options.data)) {
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        options.data = $.url.params(options.data);
+        options.data = Vue.url.params(options.data);
     }
 
     if (_.isPlainObject(options.data)) {
@@ -47,7 +47,7 @@ function Http (url, options) {
 
     var self = this, promise = new _.Promise(function (resolve, reject) {
 
-        request.open(options.method, $.url(options), true);
+        request.open(options.method, (self.$url || Vue.url)(options), true);
 
         _.each(headers, function (value, header) {
             request.setRequestHeader(header, value);
@@ -141,23 +141,23 @@ Http.headers = {
 };
 
 Http.get = function (url, success, options) {
-    return Http(url, _.extend({method: 'GET', success: success}, options));
+    return this(url, _.extend({method: 'GET', success: success}, options));
 };
 
 Http.put = function (url, data, success, options) {
-    return Http(url, _.extend({method: 'PUT', data: data, success: success}, options));
+    return this(url, _.extend({method: 'PUT', data: data, success: success}, options));
 };
 
 Http.post = function (url, data, success, options) {
-    return Http(url, _.extend({method: 'POST', data: data, success: success}, options));
+    return this(url, _.extend({method: 'POST', data: data, success: success}, options));
 };
 
 Http.patch = function (url, data, success, options) {
-    return Http(url, _.extend({method: 'PATCH', data: data, success: success}, options));
+    return this(url, _.extend({method: 'PATCH', data: data, success: success}, options));
 };
 
 Http.delete = function (url, success, options) {
-    return Http(url, _.extend({method: 'DELETE', success: success}, options));
+    return this(url, _.extend({method: 'DELETE', success: success}, options));
 };
 
 module.exports = Http;

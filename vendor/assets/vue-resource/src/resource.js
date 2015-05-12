@@ -6,7 +6,7 @@ var _ = require('./util');
 
 function Resource (url, params, actions) {
 
-    var $ = _.plugins(this), resource = {};
+    var self = this, resource = {};
 
     actions = _.extend({},
         Resource.actions,
@@ -18,7 +18,7 @@ function Resource (url, params, actions) {
         action = _.extend(true, {url: url, params: params || {}}, action);
 
         resource[name] = function () {
-            return $.http(opts(action, arguments));
+            return (self.$http || Vue.http)(opts(action, arguments));
         };
     });
 

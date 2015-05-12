@@ -44,9 +44,10 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Url = __webpack_require__(1);
-	var Http = __webpack_require__(2);
-	var Resource = __webpack_require__(3);
+	var _ = __webpack_require__(1);
+	var Url = __webpack_require__(2);
+	var Http = __webpack_require__(3);
+	var Resource = __webpack_require__(4);
 
 	/**
 	 * Install plugin.
@@ -60,9 +61,27 @@
 	    Vue.options.url = {};
 	    Vue.options.http = {};
 
-	    Vue.prototype.$url = Vue.url;
-	    Vue.prototype.$http = Vue.http;
-	    Vue.prototype.$resource = Vue.resource;
+	    Object.defineProperties(Vue.prototype, {
+
+	        $url: {
+	            get: function () {
+	                return _.extend(Url.bind(this), Url);
+	            }
+	        },
+
+	        $http: {
+	            get: function () {
+	                return _.extend(Http.bind(this), Http);
+	            }
+	        },
+
+	        $resource: {
+	            get: function () {
+	                return Resource.bind(this);
+	            }
+	        }
+
+	    });
 
 	}
 
@@ -77,7 +96,146 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(7);
+	var _ = Vue.util.extend({}, Vue.util);
+
+	/**
+	 * Utility functions.
+	 */
+
+	_.options = function (key, obj, options) {
+
+	    var opts = obj.$options || {};
+
+	    return _.extend({},
+	        Vue.options[key],
+	        opts[key],
+	        options
+	    );
+	};
+
+	_.each = function (obj, iterator) {
+
+	    var i, key;
+
+	    if (typeof obj.length == 'number') {
+	        for (i = 0; i < obj.length; i++) {
+	            iterator.call(obj[i], obj[i], i);
+	        }
+	    } else if (_.isObject(obj)) {
+	        for (key in obj) {
+	            if (obj.hasOwnProperty(key)) {
+	                iterator.call(obj[key], obj[key], key);
+	            }
+	        }
+	    }
+
+	    return obj;
+	};
+
+	_.extend = function (target) {
+
+	    var array = [], args = array.slice.call(arguments, 1), deep;
+
+	    if (typeof target == 'boolean') {
+	        deep = target;
+	        target = args.shift();
+	    }
+
+	    args.forEach(function (arg) {
+	        extend(target, arg, deep);
+	    });
+
+	    return target;
+	};
+
+	function extend (target, source, deep) {
+	    for (var key in source) {
+	        if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
+	            if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
+	                target[key] = {};
+	            }
+	            if (_.isArray(source[key]) && !_.isArray(target[key])) {
+	                target[key] = [];
+	            }
+	            extend(target[key], source[key], deep);
+	        } else if (source[key] !== undefined) {
+	            target[key] = source[key];
+	        }
+	    }
+	}
+
+	_.isFunction = function (obj) {
+	    return obj && typeof obj === 'function';
+	};
+
+	/**
+	 * Promise polyfill (https://gist.github.com/briancavalier/814313)
+	 */
+
+	_.Promise = window.Promise;
+
+	if (!_.Promise) {
+
+	    _.Promise = function (executor) {
+	        executor(this.resolve.bind(this), this.reject.bind(this));
+	        this._thens = [];
+	    };
+
+	    _.Promise.prototype = {
+
+	        then: function (onResolve, onReject, onProgress) {
+	            this._thens.push({resolve: onResolve, reject: onReject, progress: onProgress});
+	        },
+
+	        'catch': function (onReject) {
+	            this._thens.push({reject: onReject});
+	        },
+
+	        resolve: function (value) {
+	            this._complete('resolve', value);
+	        },
+
+	        reject: function (reason) {
+	            this._complete('reject', reason);
+	        },
+
+	        progress: function (status) {
+
+	            var i = 0, aThen;
+
+	            while (aThen = this._thens[i++]) {
+	                aThen.progress && aThen.progress(status);
+	            }
+	        },
+
+	        _complete: function (which, arg) {
+
+	            this.then = which === 'resolve' ?
+	                function (resolve, reject) { resolve && resolve(arg); } :
+	                function (resolve, reject) { reject && reject(arg); };
+
+	            this.resolve = this.reject = this.progress =
+	                function () { throw new Error('Promise already completed.'); };
+
+	            var aThen, i = 0;
+
+	            while (aThen = this._thens[i++]) {
+	                aThen[which] && aThen[which](arg);
+	            }
+
+	            delete this._thens;
+	        }
+	    };
+	}
+
+	module.exports = _;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1);
 
 	/**
 	 * Url provides URL templating.
@@ -230,10 +388,10 @@
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(7);
+	var _ = __webpack_require__(1);
 	var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 	/**
@@ -242,7 +400,7 @@
 
 	function Http (url, options) {
 
-	    var $ = _.plugins(this), headers = Http.headers, request = new XMLHttpRequest();
+	    var headers = Http.headers, request = new XMLHttpRequest();
 
 	    if (_.isPlainObject(url)) {
 	        options = url;
@@ -273,7 +431,7 @@
 
 	    if (options.emulateJSON && _.isPlainObject(options.data)) {
 	        headers['Content-Type'] = 'application/x-www-form-urlencoded';
-	        options.data = $.url.params(options.data);
+	        options.data = Vue.url.params(options.data);
 	    }
 
 	    if (_.isPlainObject(options.data)) {
@@ -282,7 +440,7 @@
 
 	    var self = this, promise = new _.Promise(function (resolve, reject) {
 
-	        request.open(options.method, $.url(options), true);
+	        request.open(options.method, (self.$url || Vue.url)(options), true);
 
 	        _.each(headers, function (value, header) {
 	            request.setRequestHeader(header, value);
@@ -376,33 +534,33 @@
 	};
 
 	Http.get = function (url, success, options) {
-	    return Http(url, _.extend({method: 'GET', success: success}, options));
+	    return this(url, _.extend({method: 'GET', success: success}, options));
 	};
 
 	Http.put = function (url, data, success, options) {
-	    return Http(url, _.extend({method: 'PUT', data: data, success: success}, options));
+	    return this(url, _.extend({method: 'PUT', data: data, success: success}, options));
 	};
 
 	Http.post = function (url, data, success, options) {
-	    return Http(url, _.extend({method: 'POST', data: data, success: success}, options));
+	    return this(url, _.extend({method: 'POST', data: data, success: success}, options));
 	};
 
 	Http.patch = function (url, data, success, options) {
-	    return Http(url, _.extend({method: 'PATCH', data: data, success: success}, options));
+	    return this(url, _.extend({method: 'PATCH', data: data, success: success}, options));
 	};
 
 	Http.delete = function (url, success, options) {
-	    return Http(url, _.extend({method: 'DELETE', success: success}, options));
+	    return this(url, _.extend({method: 'DELETE', success: success}, options));
 	};
 
 	module.exports = Http;
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(7);
+	var _ = __webpack_require__(1);
 
 	/**
 	 * Resource provides interaction support with RESTful services.
@@ -410,7 +568,7 @@
 
 	function Resource (url, params, actions) {
 
-	    var $ = _.plugins(this), resource = {};
+	    var self = this, resource = {};
 
 	    actions = _.extend({},
 	        Resource.actions,
@@ -422,7 +580,7 @@
 	        action = _.extend(true, {url: url, params: params || {}}, action);
 
 	        resource[name] = function () {
-	            return $.http(opts(action, arguments));
+	            return (self.$http || Vue.http)(opts(action, arguments));
 	        };
 	    });
 
@@ -512,156 +670,6 @@
 	};
 
 	module.exports = Resource;
-
-
-/***/ },
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = Vue.util.extend({}, Vue.util);
-
-	/**
-	 * Utility functions.
-	 */
-
-	_.plugins = function (obj) {
-	    return {
-	        url: Vue.url.bind(obj),
-	        http: Vue.http.bind(obj),
-	        resource: Vue.resource.bind(obj)
-	    };
-	};
-
-	_.options = function (key, obj, options) {
-
-	    var opts = obj.$options || {};
-
-	    return _.extend({},
-	        Vue.options[key],
-	        opts[key],
-	        options
-	    );
-	};
-
-	_.each = function (obj, iterator) {
-
-	    var i, key;
-
-	    if (typeof obj.length == 'number') {
-	        for (i = 0; i < obj.length; i++) {
-	            iterator.call(obj[i], obj[i], i);
-	        }
-	    } else if (_.isObject(obj)) {
-	        for (key in obj) {
-	            if (obj.hasOwnProperty(key)) {
-	                iterator.call(obj[key], obj[key], key);
-	            }
-	        }
-	    }
-
-	    return obj;
-	};
-
-	_.extend = function (target) {
-
-	    var array = [], args = array.slice.call(arguments, 1), deep;
-
-	    if (typeof target == 'boolean') {
-	        deep = target;
-	        target = args.shift();
-	    }
-
-	    args.forEach(function (arg) {
-	        extend(target, arg, deep);
-	    });
-
-	    return target;
-	};
-
-	function extend (target, source, deep) {
-	    for (var key in source) {
-	        if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
-	            if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
-	                target[key] = {};
-	            }
-	            if (_.isArray(source[key]) && !_.isArray(target[key])) {
-	                target[key] = [];
-	            }
-	            extend(target[key], source[key], deep);
-	        } else if (source[key] !== undefined) {
-	            target[key] = source[key];
-	        }
-	    }
-	}
-
-	_.isFunction = function (obj) {
-	    return obj && typeof obj === 'function';
-	};
-
-	/**
-	 * Promise polyfill (https://gist.github.com/briancavalier/814313)
-	 */
-
-	_.Promise = window.Promise;
-
-	if (!_.Promise) {
-
-	    _.Promise = function (executor) {
-	        executor(this.resolve.bind(this), this.reject.bind(this));
-	        this._thens = [];
-	    };
-
-	    _.Promise.prototype = {
-
-	        then: function (onResolve, onReject, onProgress) {
-	            this._thens.push({resolve: onResolve, reject: onReject, progress: onProgress});
-	        },
-
-	        'catch': function (onReject) {
-	            this._thens.push({reject: onReject});
-	        },
-
-	        resolve: function (value) {
-	            this._complete('resolve', value);
-	        },
-
-	        reject: function (reason) {
-	            this._complete('reject', reason);
-	        },
-
-	        progress: function (status) {
-
-	            var i = 0, aThen;
-
-	            while (aThen = this._thens[i++]) {
-	                aThen.progress && aThen.progress(status);
-	            }
-	        },
-
-	        _complete: function (which, arg) {
-
-	            this.then = which === 'resolve' ?
-	                function (resolve, reject) { resolve && resolve(arg); } :
-	                function (resolve, reject) { reject && reject(arg); };
-
-	            this.resolve = this.reject = this.progress =
-	                function () { throw new Error('Promise already completed.'); };
-
-	            var aThen, i = 0;
-
-	            while (aThen = this._thens[i++]) {
-	                aThen[which] && aThen[which](arg);
-	            }
-
-	            delete this._thens;
-	        }
-	    };
-	}
-
-	module.exports = _;
 
 
 /***/ }

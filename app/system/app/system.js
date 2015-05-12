@@ -30,7 +30,7 @@ function install (Vue) {
             root: Vue.options.url.root.replace(/\/index.php$/i, '')
         });
 
-        return Vue.url(options);
+        return this(options);
     };
 
     var formats = ['full', 'long', 'medium', 'short'];
