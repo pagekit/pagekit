@@ -69,7 +69,7 @@
         section: {
             name: 'system/cache',
             label: 'Cache',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-bolt',
             priority: 30
         },
 

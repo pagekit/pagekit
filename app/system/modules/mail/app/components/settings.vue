@@ -102,7 +102,7 @@
         section: {
             name: 'system/mail',
             label: 'Mail',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-envelope-o',
             priority: 40
         },
 

@@ -59,7 +59,7 @@
         section: {
             name: 'settings-system',
             label: 'System',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-wrench',
             priority: 10
         },
 

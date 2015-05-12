@@ -46,7 +46,7 @@
         section: {
             name: 'settings-site',
             label: 'Site',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-star-o',
             priority: 0
         },
 

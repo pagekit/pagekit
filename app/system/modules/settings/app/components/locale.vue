@@ -43,7 +43,7 @@
         section: {
             name: 'settings-locale',
             label: 'Localization',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-globe',
             priority: 20
         },
 

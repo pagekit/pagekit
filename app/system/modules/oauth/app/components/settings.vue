@@ -62,7 +62,7 @@
         section: {
             name: 'system/oauth',
             label: 'OAuth',
-            icon: 'uk-icon-cog',
+            icon: 'uk-icon-key',
             priority: 50
         },
 
