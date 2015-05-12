@@ -25,11 +25,7 @@ jQuery(function ($) {
 
         computed: {
 
-            statuses: function() {
-                return Vue.filter('toArray')($.map(this.$data.statuses, function(status, id) { return { text: status, value: id }; }));
-            },
-
-            statusesFilter: function () {
+            statusOptions: function () {
 
                 var options = _.map(this.$data.statuses, function (status, id) {
                     return { text: status, value: id };

@@ -35,7 +35,7 @@
                     <th class="pk-table-width-100 uk-text-center">
                         <div class="uk-form-select pk-filter" data-uk-form-select>
                             <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statusesFilter"></select>
+                            <select v-model="config.filter.status" options="statusOptions"></select>
                         </div>
                     </th>
                     <th class="pk-table-width-200">
@@ -120,7 +120,8 @@
                 </div>
                 <div>
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
-                    <select id="form-status" class="uk-width-1-1" v-model="comment.status" options="statuses"></select>
+                    <select id="form-status" class="uk-width-1-1" v-model="comment.status" options="statuses | toOptions
+                    "></select>
                 </div>
             </div>
 
