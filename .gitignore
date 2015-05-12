@@ -11,7 +11,9 @@
 !/vendor/assets/codemirror
 !/vendor/assets/marked
 !/vendor/assets/vue-resource
+/vendor/assets/vue-resource/dist/vue-resource.js
 !/vendor/assets/vue-validator
+/vendor/assets/vue-validator/dist/vue-validator.js
 /config.php
 /composer.phar
 /composer.lock
