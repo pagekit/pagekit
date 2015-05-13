@@ -133,9 +133,8 @@ Vue.directive('sort', {
         this.el.classList.add('pk-table-sort');
 
         // add toggle indicator
-        this.indicator = document.createElement('i');
-        this.indicator.setAttribute('class', 'uk-icon-justify uk-margin-small-left');
-        this.el.appendChild(this.indicator);
+        this.indicator = $('<i class="uk-icon-justify uk-margin-small-left"></i>');
+        this.el.appendChild(this.indicator[0]);
 
         // handle click
         this.el.addEventListener('click', function(){
@@ -150,14 +149,13 @@ Vue.directive('sort', {
             field = parts[0],
             dir   = parts[1] || 'asc';
 
-        this.indicator.classList.remove('uk-icon-long-arrow-up');
-        this.indicator.classList.remove('uk-icon-long-arrow-down');
+        this.indicator.removeClass('uk-icon-long-arrow-up uk-icon-long-arrow-down');
 
         if (field == this.arg) {
             this.active = true;
             this.dir    = dir;
 
-            this.indicator.classList.add(dir == 'asc' ? 'uk-icon-long-arrow-down':'uk-icon-long-arrow-up');
+            this.indicator.addClass(dir == 'asc' ? 'uk-icon-long-arrow-down':'uk-icon-long-arrow-up');
         } else {
             this.active = false;
             this.dir    = '';
