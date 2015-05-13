@@ -158,8 +158,6 @@ Vue.directive('order', {
             this.active = false;
             this.dir    = '';
         }
-
-        this.el.classList[this.active ? 'add':'remove']('uk-active');
     },
 
     unbind: function() {
