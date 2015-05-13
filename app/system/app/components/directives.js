@@ -123,7 +123,7 @@ Vue.directive('checkbox', {
 
 });
 
-Vue.directive('sort', {
+Vue.directive('order', {
 
     bind: function () {
 

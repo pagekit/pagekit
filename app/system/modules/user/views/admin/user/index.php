@@ -34,7 +34,7 @@
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
-                    <th colspan="2" v-sort="name: config.filter.sort">
+                    <th colspan="2" v-order="name: config.filter.order">
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
@@ -43,7 +43,7 @@
                             <select v-model="config.filter.status" options="statuses"></select>
                         </div>
                     </th>
-                    <th class="pk-table-width-200 pk-table-sort" v-sort="email: config.filter.sort">
+                    <th class="pk-table-width-200 pk-table-sort" v-order="email: config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
