@@ -34,19 +34,32 @@
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
-                    <th colspan="2" class="pk-table-sort">{{ 'User' | trans }} <i class="uk-icon uk-icon-long-arrow-up uk-margin-small-left"></i></th>
+                    <th colspan="2" class="pk-table-sort">
+                        {{ 'User' | trans }}
+                        <i class="uk-icon uk-icon-arrows-v uk-icon-justify uk-margin-small-left" v-sorter="name: config.filter.sort"></i>
+                    </th>
                     <th class="pk-table-width-100 uk-text-center">
                         <div class="uk-form-select pk-filter" data-uk-form-select>
                             <span>{{ 'Status' | trans }}</span>
                             <select v-model="config.filter.status" options="statuses"></select>
                         </div>
+
+                        <i class="uk-icon uk-icon-arrows-v uk-icon-justify uk-margin-small-left" v-sorter="status: config.filter.sort"></i>
+
                     </th>
-                    <th class="pk-table-width-200 pk-table-sort">{{ 'Email' | trans }}</th>
+                    <th class="pk-table-width-200 pk-table-sort">
+                        {{ 'Email' | trans }}
+
+                        <i class="uk-icon uk-icon-arrows-v uk-icon-justify uk-margin-small-left" v-sorter="email: config.filter.sort"></i>
+                    </th>
                     <th class="pk-table-width-100">
                         <div class="uk-form-select pk-filter" data-uk-form-select>
                             <span>{{ 'Roles' | trans }}</span>
                             <select v-model="config.filter.role" options="roles"></select>
                         </div>
+
+                        <i class="uk-icon uk-icon-arrows-v uk-icon-justify uk-margin-small-left" v-sorter="role: config.filter.sort"></i>
+
                     </th>
                 </tr>
             </thead>

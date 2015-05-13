@@ -1,5 +1,37 @@
 jQuery(function ($) {
 
+    Vue.directive('sorter', {
+
+        bind: function () {
+
+            this.dir    = 'desc';
+            this.active = false;
+
+            this.el.style.cursor = 'pointer';
+
+            this.el.addEventListener('click', function(){
+
+                this.dir    = (this.dir == 'asc' && this.active) ? 'desc':'asc';
+                this.active = true;
+                this.vm.$set(this.expression, [this.arg, this.dir].join(' '));
+
+            }.bind(this));
+        },
+
+        update: function (data) {
+
+            var parts = data.split(' '),
+                field = parts[0],
+                dir   = parts[1] || 'asc';
+
+            if (field != this.arg) {
+                this.active = false;
+            }
+
+            this.el.classList[this.active ? 'add':'remove']('uk-text-danger');
+        }
+    });
+
     var vm = new Vue({
 
         el: '#js-user',
@@ -11,7 +43,7 @@ jQuery(function ($) {
         created: function () {
 
             this.resource = this.$resource('api/user/:id');
-            this.config.filter = $.extend({status: '', role: ''}, this.config.filter ? this.config.filter : {});
+            this.config.filter = $.extend({status: '', role: '', sort:''}, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true, true);
             this.$watch('config.filter', function () { this.load(0); }, true);
