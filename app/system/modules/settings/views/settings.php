@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side pk-nav-large" v-el="tab">
-                    <li v-repeat="section: sections | orderBy 'priority'"><a><i class="uk-icon-small uk-margin-right {{ section.icon }}"></i> {{ section.label | trans }}</a></li>
+                    <li v-repeat="section: sections | orderBy 'priority'"><a><i class="uk-icon-justify uk-icon-small uk-margin-right {{ section.icon }}"></i> {{ section.label | trans }}</a></li>
                 </ul>
 
             </div>

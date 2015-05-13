@@ -35,12 +35,4 @@ class FeedWidget extends Type
     {
         return App::view('system/dashboard:views/feed/index.php', compact('widget', 'options'));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderForm(WidgetInterface $widget)
-    {
-        return App::view('system/dashboard:views/feed/edit.php', compact('widget'));
-    }
 }

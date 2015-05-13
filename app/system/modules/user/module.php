@@ -53,6 +53,7 @@ return [
 
         $app->on('app.request', function () use ($app) {
             $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
+            $app['scripts']->register('widget-user', 'system/user:app/bundle/admin/widgets/user.js', '~dashboard-widget-edit');
         });
 
     },

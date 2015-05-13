@@ -1,6 +1,4 @@
-<?php $view->script('uikit-autocomplete') ?>
-
-<div class="uk-form-row" v-component="weather-edit" inline-template>
+<template>
 
     <div class="uk-form-row">
         <label for="form-weather-location" class="uk-form-label">{{ 'Location' | trans }}</label>
@@ -25,13 +23,19 @@
 
     </div>
 
-</div>
+</template>
 
 <script>
 
-    Vue.component('weather-edit', {
+    module.exports = {
 
-        inherit: true,
+        section: {
+            name: 'weather',
+            priority: 0,
+            active: 'dashboard.weather'
+        },
+
+        template: __vue_template__,
 
         ready: function() {
 
@@ -52,11 +56,11 @@
                 template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
 
             }).element.on('select.uk.autocomplete', function(e, data) {
-                self.$set('widget.settings.id', data.id);
-            });
+                    self.$set('widget.settings.id', data.id);
+                });
 
         }
 
-    });
+    }
 
 </script>

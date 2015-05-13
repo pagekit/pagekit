@@ -1,4 +1,4 @@
-<div class="uk-form-row">
+<template>
 
     <div class="uk-form-row">
         <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
@@ -11,10 +11,17 @@
     <div class="uk-form-row">
         <label for="form-feed-count" class="uk-form-label">{{ 'Number of Posts' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-weather-count" class="uk-form-width-large" v-model="widget.settings.count">
-                <?php foreach ([1,2,3,4,5,6,7,8,9,10] as $value): ?>
-                <option value="<?= $value ?>" number><?= $value ?></option>
-                <?php endforeach ?>
+            <select id="form-weather-count" class="uk-form-width-large" v-model="widget.settings.count" number>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
             </select>
         </div>
     </div>
@@ -34,4 +41,18 @@
         </div>
     </div>
 
-</div>
+</template>
+
+<script>
+
+    module.exports = {
+
+        section: {
+            name: 'feed',
+            priority: 0,
+            active: 'dashboard.feed'
+        }
+
+    }
+
+</script>
