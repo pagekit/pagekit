@@ -122,3 +122,47 @@ Vue.directive('checkbox', {
     }
 
 });
+
+Vue.directive('sort', {
+
+    bind: function () {
+
+        this.dir    = '';
+        this.active = false;
+
+        this.el.classList.add('pk-table-sort');
+
+        // add toggle indicator
+        this.indicator = document.createElement('i');
+        this.indicator.setAttribute('class', 'uk-icon-justify uk-margin-small-left');
+        this.el.appendChild(this.indicator);
+
+        // handle click
+        this.el.addEventListener('click', function(){
+            this.dir = (this.dir == 'asc') ? 'desc':'asc';
+            this.vm.$set(this.expression, [this.arg, this.dir].join(' '));
+        }.bind(this));
+    },
+
+    update: function (data) {
+
+        var parts = data.split(' '),
+            field = parts[0],
+            dir   = parts[1] || 'asc';
+
+        this.indicator.classList.remove('uk-icon-long-arrow-up');
+        this.indicator.classList.remove('uk-icon-long-arrow-down');
+
+        if (field == this.arg) {
+            this.active = true;
+            this.dir    = dir;
+
+            this.indicator.classList.add(dir == 'asc' ? 'uk-icon-long-arrow-down':'uk-icon-long-arrow-up');
+        } else {
+            this.active = false;
+            this.dir    = '';
+        }
+
+        this.el.classList[this.active ? 'add':'remove']('uk-active');
+    }
+});
