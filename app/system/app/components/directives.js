@@ -127,20 +127,18 @@ Vue.directive('order', {
 
     bind: function () {
 
-        this.dir    = '';
-        this.active = false;
+        var self = this;
 
-        this.el.classList.add('pk-table-sort');
-
-        // add toggle indicator
+        this.dir       = '';
+        this.active    = false;
         this.indicator = $('<i class="uk-icon-justify uk-margin-small-left"></i>');
-        this.el.appendChild(this.indicator[0]);
 
-        // handle click
-        this.el.addEventListener('click', function(){
-            this.dir = (this.dir == 'asc') ? 'desc':'asc';
-            this.vm.$set(this.expression, [this.arg, this.dir].join(' '));
-        }.bind(this));
+        $(this.el).addClass('pk-table-sort').on('click.order', function(){
+
+            self.dir = (self.dir == 'asc') ? 'desc':'asc';
+            self.vm.$set(self.expression, [self.arg, self.dir].join(' '));
+
+        }).append(this.indicator);
     },
 
     update: function (data) {
@@ -162,5 +160,10 @@ Vue.directive('order', {
         }
 
         this.el.classList[this.active ? 'add':'remove']('uk-active');
+    },
+
+    unbind: function() {
+        $(this.el).removeClass('pk-table-sort').off('.order');
+        this.indicator.remove();
     }
 });

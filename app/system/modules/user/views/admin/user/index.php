@@ -43,7 +43,7 @@
                             <select v-model="config.filter.status" options="statuses"></select>
                         </div>
                     </th>
-                    <th class="pk-table-width-200 pk-table-sort" v-order="email: config.filter.order">
+                    <th class="pk-table-width-200" v-order="email: config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
