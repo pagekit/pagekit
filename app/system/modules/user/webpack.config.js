@@ -3,7 +3,7 @@ module.exports = [
     {
         entry: {
             "widgets/login": "./app/widgets/login.vue",
-            "admin/widgets/user": "./app/admin/widgets/user.vue"
+            "widgets/user": "./app/widgets/user.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

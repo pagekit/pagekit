@@ -15,13 +15,12 @@ class UserApiController
 {
     /**
      * @Route("/", methods="GET")
-     * @Request({"filter": "array", "page":"int"})
+     * @Request({"filter": "array", "page":"int", "limit":"int"})
      */
-    public function indexAction($filter = [], $page = 0)
+    public function indexAction($filter = [], $page = 0, $limit = 0)
     {
         $query  = User::query();
-        $filter = array_merge(array_fill_keys(['status', 'search', 'role', 'order'], ''), $filter);
-
+        $filter = array_merge(array_fill_keys(['status', 'search', 'role', 'order', 'access'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
         if (is_numeric($status)) {
@@ -46,15 +45,20 @@ class UserApiController
             });
         }
 
+        if ($access) {
+            $query->where('access > ?', [date('Y-m-d H:i:s', time() - min(0, $access))]);
+        }
+
         if (!preg_match('/^(name|email)\s(asc|desc)$/i', $order, $order)) {
             $order = [1 => 'name', 2 => 'asc'];
         }
 
-        $limit = App::module('system/user')->config('users_per_page');
-        $count = $query->count();
-        $pages = ceil($count / $limit);
-        $page  = max(0, min($pages - 1, $page));
-        $users = array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy($order[1], $order[2])->get());
+        $default = App::module('system/user')->config('users_per_page');
+        $limit   = min(max(0, $limit), $default) ?: $default;
+        $count   = $query->count();
+        $pages   = ceil($count / $limit);
+        $page    = max(0, min($pages - 1, $page));
+        $users   = array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy($order[1], $order[2])->get());
 
         return compact('users', 'pages', 'count');
     }

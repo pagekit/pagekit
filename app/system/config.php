@@ -84,7 +84,7 @@ return [
 
             '1' => [
                 'id' => '1',
-                'type' => 'dashboard.user'
+                'type' => 'user'
             ]
 
         ]

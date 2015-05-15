@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\User\Dashboard\UserWidget;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 use Pagekit\User\Event\AccessListener;
@@ -48,12 +47,11 @@ return [
 
         $app->on('widget.types', function ($event, $widgets) {
             $widgets->registerType(new LoginWidget());
-            $widgets->registerType(new UserWidget());
         });
 
         $app->on('app.request', function () use ($app) {
             $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
-            $app['scripts']->register('widget-user', 'system/user:app/bundle/admin/widgets/user.js', '~dashboard-widget-edit');
+            $app['scripts']->register('widget-user', 'system/user:app/bundle/widgets/user.js', ['~dashboard', 'gravatar']);
         });
 
     },

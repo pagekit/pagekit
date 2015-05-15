@@ -29,7 +29,7 @@ class WidgetModule extends Module
             $view->data('$widgets', [
 
                 'positions' => array_values($this->getPositions()),
-                'types'     => array_values($this->getTypes('site'))
+                'types'     => array_values($this->getTypes())
 
             ]);
 
@@ -154,7 +154,7 @@ class WidgetModule extends Module
     /**
      * @return array
      */
-    public function getTypes($filter = '')
+    public function getTypes()
     {
         if (!$this->types) {
 
@@ -163,9 +163,7 @@ class WidgetModule extends Module
 
         }
 
-        return $filter ? array_filter($this->types, function ($type) use ($filter) {
-            return 0 === strpos($type->getId(), $filter);
-        }) : $this->types;
+        return $this->types;
     }
 
     /**

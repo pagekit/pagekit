@@ -7,6 +7,8 @@ use Pagekit\Util\Arr;
 trait DataTrait
 {
     /**
+     * Gets data.
+     *
      * @return array
      */
     public function getData()
@@ -15,6 +17,8 @@ trait DataTrait
     }
 
     /**
+     * Sets data.
+     *
      * @param array $data
      */
     public function setData($data)
@@ -23,6 +27,8 @@ trait DataTrait
     }
 
     /**
+     * Gets a data value.
+     *
      * @param  string $key
      * @param  mixed  $default
      * @return mixed
@@ -33,6 +39,8 @@ trait DataTrait
     }
 
     /**
+     * Sets a data value.
+     *
      * @param string $key
      * @param mixed  $value
      */
