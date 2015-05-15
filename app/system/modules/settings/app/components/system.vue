@@ -63,6 +63,8 @@
             priority: 10
         },
 
+        paramAttributes: ['config', 'options'],
+
         data: function() {
             return window.$system;
         }

@@ -19,7 +19,7 @@
 
             <ul class="uk-switcher uk-margin" v-el="content">
                 <li v-repeat="section: sections | orderBy 'priority'">
-                    <div v-component="{{ section.name }}" v-with="options: options[section.name], config: config[section.name]"></div>
+                    <div v-component="{{ section.name }}" config="{{ config[section.name] }}" options="{{ options[section.name] }}"></div>
                 </li>
             </ul>
 

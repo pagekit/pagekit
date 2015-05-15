@@ -73,6 +73,8 @@
             priority: 30
         },
 
+        paramAttributes: ['config', 'options'],
+
         data: function() {
             return { caches: window.$caches };
         },

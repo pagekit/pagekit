@@ -50,6 +50,8 @@
             priority: 0
         },
 
+        paramAttributes: ['config', 'options'],
+
         computed: {
 
             option: function() {

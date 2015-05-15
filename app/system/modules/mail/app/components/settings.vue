@@ -106,6 +106,8 @@
             priority: 40
         },
 
+        paramAttributes: ['config', 'options'],
+
         data: function() {
             return window.$mail;
         },

@@ -3,7 +3,7 @@ var $ = require('jquery');
 var Dashboard = Vue.extend({
 
     data: function() {
-        return window.$data
+        return window.$data;
     },
 
     created: function () {
