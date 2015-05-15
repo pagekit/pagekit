@@ -55,7 +55,7 @@ module.exports = {
 
         disable: function (pkg) {
             this.disablePackage(pkg).success(function (data) {
-                UIkit.notify(data.message);
+                UIkit.notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
             }).error(function (data) {
                 UIkit.notify(data, 'danger');
             });

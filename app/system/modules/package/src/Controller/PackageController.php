@@ -29,7 +29,9 @@ class PackageController
         $packages = App::package()->all('theme');
 
         foreach ($packages as $package) {
-            $package->set('enabled', App::module($package->getName()) != null);
+            if ($module = App::module($package->getName())) {
+                $package->set('enabled', true);
+            }
         }
 
         return [
@@ -49,7 +51,10 @@ class PackageController
         $packages = App::package()->all('extension');
 
         foreach ($packages as $package) {
-            $package->set('enabled', App::module($package->getName()) != null);
+            if ($module = App::module($package->getName())) {
+                $package->set('enabled', true);
+                $package->set('permissions', isset($module->permissions));
+            }
         }
 
         return [
@@ -86,7 +91,7 @@ class PackageController
             App::config('system')->set('theme.site', $name);
             App::exception()->setHandler($handler);
 
-            return ['message' => __('Theme "%name%" enabled.', ['%name%' => $name])];
+            return ['message' => 'success'];
         }
 
         if ($package->getType() == 'extension') {
@@ -98,7 +103,7 @@ class PackageController
             App::config('system')->push('extensions', $name);
             App::exception()->setHandler($handler);
 
-            return ['message' => __('Extension "%name%" enabled.', ['%name%' => $name])];
+            return ['message' => 'success'];
         }
     }
 

@@ -13,13 +13,13 @@ module.exports = {
             });
 
             return $.ajax(api.url + '/package/update', {
-                data: {'api_key': api.key, 'packages': JSON.stringify(pkgs)},
+                data: {api_key: api.key, packages: JSON.stringify(pkgs)},
                 dataType: 'jsonp'
             });
         },
 
         enablePackage: function (pkg) {
-            return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/enable', {'name': pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.enabled = true;
                 }
@@ -27,7 +27,7 @@ module.exports = {
         },
 
         disablePackage: function (pkg) {
-            return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/disable', {'name': pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.enabled = false;
                 }
@@ -43,7 +43,7 @@ module.exports = {
         },
 
         uninstallPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/uninstall', {'name': pkg.name}, function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }

@@ -48,9 +48,9 @@
                     <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>
                     <td class="uk-text-right">
                         <ul class="uk-subnav pk-subnav-icon uk-flex-inline uk-invisible">
-                            <li v-show="!pkg.enabled"><a class="uk-icon-users" title="View Permissions" data-uk-tooltip="{delay: 500}" v-attr="href: $url('admin/system/user/permission#ext-:name',{name:pkg.name})"></a></li>
-                            <li><a class="uk-icon-info-circle" title="View Details" data-uk-tooltip="{delay: 500}"></a></li>
-                            <li v-show="!pkg.enabled"><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)"></a></li>
+                            <li><a class="uk-icon-info-circle" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}"></a></li>
+                            <li v-show="pkg.enabled && pkg.permissions"><a class="uk-icon-users" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url('admin/user/permission#ext-:name',{name:pkg.name})"></a></li>
+                            <li v-show="!pkg.enabled"><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)"></a></li>
                         </ul>
                     </td>
                 </tr>
