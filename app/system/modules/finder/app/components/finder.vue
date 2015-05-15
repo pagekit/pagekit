@@ -51,26 +51,21 @@
 <script>
 
     var $ = require('jquery');
-    var Vue = require('vue');
     var UIkit = require('uikit');
 
-    var defaults = {
-        root    : '/',
-        mode    : 'write',
-        view    : 'table',
-        path    : '/',
-        selected: [],
-        upload  : {}
-    };
-
-    var definition = {
+    module.exports = {
 
         replace : true,
 
-        template: __vue_template__,
-
         data: function () {
-            return Vue.util.extend({}, defaults);
+            return {
+                root: '/',
+                path: '/',
+                mode: 'write',
+                view: 'table',
+                upload: {},
+                selected: []
+            };
         },
 
         ready: function () {
@@ -277,6 +272,7 @@
                             UIkit.notify(data.message, data.error ? 'danger' : '');
 
                             finder.$set('upload.progress', 100);
+
                             setTimeout(function () {
                                 finder.$set('upload.running', false);
                             }, 1500);
@@ -298,19 +294,5 @@
         }
 
     };
-
-    Vue.component('v-finder', Vue.util.extend({}, definition));
-
-    var Finder = function (element, options) {
-        return new Vue($.extend(true, {}, definition, { el: element, data: $.extend(true, {}, defaults, options)} ));
-    };
-
-    $(function () {
-        $('[data-finder]').each(function () {
-            new Finder(this, $(this).data('finder'));
-        });
-    });
-
-    window.Finder = window.Finder || Finder;
 
 </script>

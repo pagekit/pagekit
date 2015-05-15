@@ -6,7 +6,7 @@ module.exports = [
         entry: {
             "app/bundle/system": "./app/system",
             "modules/editor/app/bundle/editor": "./modules/editor/app/editor",
-            "modules/finder/app/bundle/finder": "./modules/finder/app/components/finder.vue",
+            "modules/finder/app/bundle/finder": "./modules/finder/app/finder",
             "modules/package/app/bundle/extensions": "./modules/package/app/extensions",
             "modules/package/app/bundle/themes": "./modules/package/app/themes",
             "modules/package/app/bundle/marketplace": "./modules/package/app/marketplace",
