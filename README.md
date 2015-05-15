@@ -36,10 +36,10 @@ composer install
 php path/to/composer.phar install
 ```
 
-Pagekit use [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) for front-end and JavaScript dependencies.
+Pagekit uses [npm](https://www.npmjs.com/) for JavaScript dependencies. Make sure you also have 
+[Bower](http://bower.io/) installed, which is called automatically during `npm install`.
 
 ```
-bower install
 npm install
 ```
 

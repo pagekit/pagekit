@@ -1,7 +1,7 @@
 {
   "name": "pagekit",
   "scripts": {
-    "install": "webpack"
+    "install": "bower install && webpack"
   },
   "devDependencies": {
     "glob": "^5.0.5",
