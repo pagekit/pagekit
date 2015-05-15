@@ -127,14 +127,12 @@
 
             install: function (pkg) {
 
-                var vm = this;
-
-                vm.$set('status', 'installing');
+                this.$set('status', 'installing');
 
                 this.installPackage(pkg, this.installed).error(function (data) {
                     UIkit.notify(data, 'danger');
                 }).always(function (data) {
-                    vm.$set('status', '');
+                    this.$set('status', '');
                 });
             },
 

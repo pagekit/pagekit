@@ -127,7 +127,7 @@ class PackageController
             App::config('system')->pull('extensions', $name);
             App::module('system/cache')->clearCache();
 
-            return ['message' => __('Extension "%name%" disabled.', ['%name%' => $name])];
+            return ['message' => 'success'];
         }
     }
 
@@ -250,7 +250,7 @@ class PackageController
 
         App::module('system/cache')->clearCache();
 
-        return ['message' => __('%name% uninstalled.', ['%name%' => $name])];
+        return ['message' => 'success'];
     }
 
     protected function loadPackage($file)

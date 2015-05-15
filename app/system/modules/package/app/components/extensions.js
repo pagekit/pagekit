@@ -47,7 +47,7 @@ module.exports = {
 
         enable: function (pkg) {
             this.enablePackage(pkg).success(function (data) {
-                UIkit.notify(data.message);
+                UIkit.notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
             }).error(function (data) {
                 UIkit.notify(data, 'danger');
             });
@@ -63,7 +63,7 @@ module.exports = {
 
         uninstall: function (pkg) {
             this.uninstallPackage(pkg, this.packages).success(function (data) {
-                UIkit.notify(data.message);
+                UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
             }).error(function (data) {
                 UIkit.notify(data, 'danger');
             });
