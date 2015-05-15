@@ -19,7 +19,7 @@
             </li>
         </ul>
 
-        <v-pagination v-with="page: page, pages: pages" v-show="pages > 1"></v-pagination>
+        <v-pagination page="{{ page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
         <div class="uk-modal" v-el="modal">
             <div class="uk-modal-dialog uk-modal-dialog-large pk-marketplace-modal-dialog">
@@ -55,6 +55,8 @@
         mixins: [
             require('./package')
         ],
+
+        paramAttributes: ['api', 'search', 'type', 'installed'],
 
         data: function () {
             return {

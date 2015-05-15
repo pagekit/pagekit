@@ -52,8 +52,11 @@
 
   module.exports = {
 
+    paramAttributes: ['data'],
+
     ready: function () {
-      this.$parent.add(this, $(this.$$.navbar).html(), {priority: 50, panel: 'database'});
+        this.$data = this.data;
+        this.$parent.add(this, $(this.$$.navbar).html(), {priority: 50, panel: 'database'});
     }
 
   };

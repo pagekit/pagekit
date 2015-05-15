@@ -13,10 +13,7 @@
         </div>
 
         <div v-repeat="panels">
-            <div class="pf-profiler-panel" v-style="
-                display: $value === panel ? 'block' : 'none',
-                height: height
-            " v-component="{{ $value }}" v-with="data[$value]"></div>
+            <div class="pf-profiler-panel" v-style="display: $value === panel ? 'block' : 'none', height: height" v-component="{{ $value }}" data="{{ data[$value] }}"></div>
         </div>
 
     </div>

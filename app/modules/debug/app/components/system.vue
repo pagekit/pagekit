@@ -66,8 +66,11 @@
 
   module.exports = {
 
+    paramAttributes: ['data'],
+
     ready: function () {
-      this.$parent.add(this, '<a title="System Information"><div class="pf-icon-large pf-icon-pagekit"></div></a>', {priority: 10, panel: 'system'});
+        this.$data = this.data;
+        this.$parent.add(this, '<a title="System Information"><div class="pf-icon-large pf-icon-pagekit"></div></a>', {priority: 10, panel: 'system'});
     }
 
   };

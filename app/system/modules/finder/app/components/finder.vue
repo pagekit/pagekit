@@ -68,6 +68,8 @@
 
         replace : true,
 
+        paramAttributes: ['root', 'path', 'mode', 'view'],
+
         data: function () {
             return {
                 root: '/',

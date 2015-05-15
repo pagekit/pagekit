@@ -25,8 +25,11 @@
 
   module.exports = {
 
+    paramAttributes: ['data'],
+
     ready: function () {
-      this.$parent.add(this, '<a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>', {priority: 20, panel: 'routes'});
+        this.$data = this.data;
+        this.$parent.add(this, '<a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>', {priority: 20, panel: 'routes'});
     },
 
     filters: {

@@ -83,6 +83,6 @@
 
     <p class="uk-alert uk-alert-info" v-show="users && !users.length">{{ 'No user found.' | trans }}</p>
 
-    <v-pagination v-with="page: config.page, pages: pages" v-show="pages > 1"></v-pagination>
+    <v-pagination page="{{ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
 </div>

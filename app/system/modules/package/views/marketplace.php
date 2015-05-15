@@ -19,6 +19,6 @@
         </div>
     </div>
 
-    <v-marketplace v-with="api: api, search: search, type: type, installed: packages"></v-marketplace>
+    <v-marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ packages }}"></v-marketplace>
 
 </div>

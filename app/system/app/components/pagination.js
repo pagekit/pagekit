@@ -10,6 +10,8 @@ Vue.component('v-pagination', {
 
     template: '<ul class="uk-pagination"></ul>',
 
+    paramAttributes: ['page', 'pages'],
+
     data: function() {
         return {
             page: 1,

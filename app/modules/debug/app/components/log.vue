@@ -23,8 +23,11 @@
 
   module.exports = {
 
+    paramAttributes: ['data'],
+
     ready: function () {
-      this.$parent.add(this, '<a title="Log">Log ({{ records.length }})</a>', {priority: 70, panel: 'log'});
+        this.$data = this.data;
+        this.$parent.add(this, '<a title="Log">Log ({{ records.length }})</a>', {priority: 70, panel: 'log'});
     }
 
   };
