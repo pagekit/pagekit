@@ -1,8 +1,27 @@
 <template>
 
     <div v-cloak>
-        <div class="pk-toolbar uk-form uk-clearfix">
-            <div v-if="isWritable()" class="uk-float-left">
+
+        <div class="pk-toolbar uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+            <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+
+                <h2 class="uk-margin-remove">{{ 'Finder' | trans }}</h2>
+
+                <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
+                    <ul class="uk-subnav pk-subnav-icon">
+                        <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                        <li><a class="uk-icon-mail-forward" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: rename" v-show="selected.length === 1"></a></li>
+                    </ul>
+                </div>
+
+                <div class="pk-search">
+                    <div class="uk-search">
+                        <input class="uk-search-field" type="text" v-model="search">
+                    </div>
+                </div>
+
+            </div>
+            <div data-uk-margin>
 
                 <button class="uk-button uk-button-primary uk-form-file">
                     {{ 'Upload' | trans }}
@@ -10,14 +29,6 @@
                 </button>
 
                 <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
-
-                <button class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</button>
-                <button class="uk-button" v-show="selected.length === 1" v-on="click: rename">{{ 'Rename' | trans }}</button>
-
-            </div>
-            <div class="uk-float-right uk-hidden-small">
-
-                <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search">
 
                 <div class="uk-button-group">
                     <button class="uk-button uk-icon-bars" v-class="'uk-active': view == 'table'"     v-on="click: view = 'table'"></button>
@@ -74,7 +85,7 @@
 
             this.load().success(function () {
                 this.$dispatch('ready.finder', this);
-            }.bind(this));
+            });
         },
 
         watch: {
@@ -92,7 +103,9 @@
         filters: {
 
             searched: function (files) {
+
                 var query = this.search;
+
                 return query ? files.filter(function (file) {
                     return file.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
                 }) : files;
@@ -105,7 +118,7 @@
             breadcrumbs: function () {
 
                 var path = '',
-                    crumbs = [{ path: '/', title: this.$trans('Home') }]
+                    crumbs = [{path: '/', title: this.$trans('Home')}]
                         .concat(this.path.substr(1).split('/')
                             .filter(function (str) {
                                 return str.length;
@@ -141,7 +154,9 @@
             },
 
             getSelected: function () {
+
                 var path = this.getFullPath();
+
                 return this.selected.map(function (name) {
                     return path+name;
                 });
@@ -209,30 +224,26 @@
             },
 
             command: function (cmd, params) {
+                return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.root}, params), function (data) {
 
-                var self = this;
-
-                return this.resource.save({ cmd: cmd }, $.extend({ path: this.path, root: this.root }, params), function (data) {
-
+                    this.load();
                     UIkit.notify(data.message, data.error ? 'danger' : '');
 
-                    self.load();
+                }).error(function (data, status) {
 
-                }).fail(function (jqXHR) {
-                    UIkit.notify(jqXHR.status == 500 ? 'Unknown error.' : jqXHR.responseText, 'danger');
+                    UIkit.notify(status == 500 ? this.$trans('Unknown error.') : data, 'danger');
                 });
             },
 
             load: function () {
-                return this.resource.get({ path: this.path, root: this.root }, function (data) {
+                return this.resource.get({path: this.path, root: this.root}, function (data) {
 
                     this.$set('selected', []);
                     this.$set('folders', data.folders || []);
                     this.$set('files', data.files || []);
-
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
-                }.bind(this));
+                });
             }
 
         },
