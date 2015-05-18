@@ -51,8 +51,6 @@
             </div>
         </div>
 
-        <hr>
-
     </form>
 
     <h1 class="uk-h3" v-show="widget.title">{{ widget.title }}</h1>
@@ -62,6 +60,7 @@
             <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
         </div>
         <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</div>
+        <div class="uk-alert uk-alert-warning" v-show="!widget.url">{{ 'No URL given.' | trans }}</div>
         <ul class="uk-list uk-list-line">
             <li v-repeat="entry: feed.entries | count">
                 <a v-attr="href: entry.link">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate }}</span>

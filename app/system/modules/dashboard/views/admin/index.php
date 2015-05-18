@@ -19,17 +19,19 @@
 
     <div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
 
-        <div v-repeat="column: columns" class="uk-width-medium-1-3">
+        <div class="uk-width-medium-1-3" v-repeat="column: columns">
 
-            <div v-repeat="widget: column" class="uk-panel uk-panel-box">
+            <div class="uk-panel uk-panel-box uk-visible-hover-inline" v-repeat="widget: column">
 
                 <div v-component="widget-panel" inline-template>
-                    <span class="uk-position-top-right " style="top: 15px; right: 15px;">
-                        <a class="uk-icon-hover uk-icon-small uk-icon-remove" title="{{ 'Delete' | trans }}" v-on="click: remove()"></a>
-                        <a class="uk-icon-hover uk-icon-small uk-icon-edit" title="{{ 'Edit' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
-                    </span>
+
+                    <div class="uk-position-top-right uk-margin-small-top uk-margin-small-right uk-text-large">
+                        <a class="uk-invisible uk-icon-hover uk-icon-remove" title="{{ 'Delete' | trans }}" v-on="click: remove()"></a>
+                        <a class="uk-invisible uk-icon-hover uk-icon-pencil" title="{{ 'Edit' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
+                    </div>
 
                     <div v-component="{{ component }}" v-with="widget: widget, editing: isEditing"></div>
+
                 </div>
 
             </div>

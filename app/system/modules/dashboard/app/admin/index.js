@@ -61,6 +61,7 @@ var Dashboard = Vue.extend({
 
         'widget-panel': {
 
+            replace: true,
             inherit: true,
 
             ready: function() {

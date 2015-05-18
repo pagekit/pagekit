@@ -28,10 +28,10 @@
 
     <div class="uk-text-center">
 
-        <div v-show="status == 'loading'">
-            <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
-        </div>
+        <div v-show="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
         <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
+        <div class="uk-alert uk-alert-warning" v-show="!widget.uid">{{ 'No location given.' | trans }}</div>
+
         <div class="pk-weather-image">
             <img class="uk-text-top" v-attr="src: icon">
             <span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>

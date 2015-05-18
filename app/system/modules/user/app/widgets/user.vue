@@ -6,10 +6,10 @@
             <span class="uk-form-label">{{ 'User Type' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed">
-                    <label><input type="radio" v-model="widget.show" value="login"> {{ 'Logged in' | trans }}</label>
+                    <label><input type="radio" value="login" v-model="widget.show"> {{ 'Logged in' | trans }}</label>
                 </p>
                 <p class="uk-form-controls-condensed">
-                    <label><input type="radio" v-model="widget.show" value="registered"> {{ 'Last registered' | trans }}</label>
+                    <label><input type="radio" value="registered" v-model="widget.show"> {{ 'Last registered' | trans }}</label>
                 </p>
             </div>
         </div>

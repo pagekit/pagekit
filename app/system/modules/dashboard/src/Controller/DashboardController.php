@@ -3,9 +3,7 @@
 namespace Pagekit\Dashboard\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Module\Module;
-use Pagekit\Widget\Model\Widget;
 
 /**
  * @Access(admin=true)
