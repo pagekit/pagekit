@@ -9,7 +9,6 @@ _.options = function (key, obj, options) {
     var opts = obj.$options || {};
 
     return _.extend({},
-        Vue.options[key],
         opts[key],
         options
     );

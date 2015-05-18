@@ -10,9 +10,9 @@ function install (Vue) {
      * Config
      */
 
-    Vue.options.url.root = config.url;
-    Vue.options.http.emulateHTTP = true;
-    Vue.options.http.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
+    Vue.url.options.root = config.url;
+    Vue.http.options.emulateHTTP = true;
+    Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
 
     /**
      * Methods
