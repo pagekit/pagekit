@@ -226,7 +226,6 @@
             },
 
             isImage: function (url) {
-                console.log(url)
                 return url.match(/\.(?:gif|jpe?g|png|svg)/i);
             },
 
