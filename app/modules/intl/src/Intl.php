@@ -46,11 +46,11 @@ class Intl extends Data implements \ArrayAccess
      */
     public function __call($name, $args)
     {
-        if (!isset($this->helpers[$name])) {
+        if (!$helper = $this->offsetGet($name)) {
             throw new \InvalidArgumentException(sprintf('Undefined helper "%s"', $name));
         }
 
-        return $args ? call_user_func_array($this->helpers[$name], $args) : $this->helpers[$name];
+        return $args ? call_user_func_array($helper, $args) : $helper;
     }
 
     /**
@@ -62,9 +62,7 @@ class Intl extends Data implements \ArrayAccess
      */
     public static function __callStatic($name, $args)
     {
-        $helper = static::getInstance()->offsetGet($name);
-
-        return $args ? call_user_func_array($helper, $args) : $helper;
+        return call_user_func_array([static::getInstance(), $name], $args);
     }
 
     /**
