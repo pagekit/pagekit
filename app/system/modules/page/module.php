@@ -2,9 +2,9 @@
 
 return [
 
-    'name' => 'page',
+    'name' => 'system/page',
 
-    'main' => 'Pagekit\\Page\\PageExtension',
+    'main' => 'Pagekit\\Page\\PageModule',
 
     'autoload' => [
 
@@ -14,7 +14,7 @@ return [
 
     'resources' => [
 
-        'page:' => ''
+        'system/page:' => ''
 
     ],
 
@@ -34,7 +34,7 @@ return [
 
     'templates' => [
 
-        'page.edit' => 'page:views/tmpl/edit.php'
+        'page.edit' => 'system/page:views/tmpl/edit.php'
 
     ]
 ];

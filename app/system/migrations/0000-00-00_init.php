@@ -100,6 +100,16 @@ return [
             });
         }
 
+        if ($util->tableExists('@system_page') === false) {
+            $util->createTable('@system_page', function($table) {
+                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+                $table->addColumn('title', 'string', ['length' => 255]);
+                $table->addColumn('content', 'text');
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
+                $table->setPrimaryKey(['id']);
+            });
+        }
+
         // TODO use data from package.json
         // skip migrations and return latest version
         return '2014-08-28_0.8.6';

@@ -6,7 +6,7 @@ use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 
 /**
- * @Entity(tableClass="@page_page", eventPrefix="page.page")
+ * @Entity(tableClass="@system_page", eventPrefix="page.page")
  */
 class Page implements \JsonSerializable
 {

@@ -71,8 +71,9 @@ class BuildCommand extends Command
         // compile translation files
         try {
 
+            // TODO system is no longer an extension
             $cmd = $this->getApplication()->get('extension:translate');
-            foreach (['system', 'page', 'blog'] as $extension) {
+            foreach (['system', 'blog'] as $extension) {
                 $cmd->run(new ArrayInput(['extension' => $extension, '--compile' => true]), $output);
             }
 

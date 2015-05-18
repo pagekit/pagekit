@@ -50,7 +50,8 @@ class TranslationFetchCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'installer', 'blog', 'page'];
+        // TODO system and installer are no longer extensions
+        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'installer', 'blog'];
         $username   = $this->option('username');
         $password   = $this->option('password');
 
