@@ -1,8 +1,8 @@
 <?php
 
 use Pagekit\System\ExtensionRepository;
-use Pagekit\System\ThemeRepository;
 use Pagekit\System\Package\PackageManager;
+use Pagekit\System\ThemeRepository;
 
 return [
 

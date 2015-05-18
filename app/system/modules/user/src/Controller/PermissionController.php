@@ -18,7 +18,7 @@ class PermissionController
                 'name'  => 'system/user:views/admin/permission.php'
             ],
             '$data' => [
-                'permissions' => App::permissions(),
+                'permissions' => App::module('system/user')->getPermissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()
             ]
         ];

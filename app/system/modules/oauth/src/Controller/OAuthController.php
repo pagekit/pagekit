@@ -2,8 +2,8 @@
 
 namespace Pagekit\OAuth\Controller;
 
-use Pagekit\Application as App;
 use OAuth\Common\Storage\Memory;
+use Pagekit\Application as App;
 
 class OAuthController
 {

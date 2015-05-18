@@ -1,60 +1,10 @@
 <?php
 
-use Pagekit\User\Entity\Role;
-use Pagekit\User\Entity\User;
-use Pagekit\User\Event\AccessListener;
-use Pagekit\User\Event\AuthorizationListener;
-use Pagekit\User\Event\LoginAttemptListener;
-use Pagekit\User\Event\PermissionEvent;
-use Pagekit\User\Event\UserListener;
-use Pagekit\User\Widget\LoginWidget;
-
 return [
 
     'name' => 'system/user',
 
-    'main' => function ($app) {
-
-        $app->subscribe(
-            new AccessListener,
-            new AuthorizationListener,
-            new LoginAttemptListener,
-            new UserListener
-        );
-
-        $app['user'] = function ($app) {
-
-            if (!$user = $app['auth']->getUser()) {
-                $user  = new User;
-                $roles = Role::where(['id' => Role::ROLE_ANONYMOUS])->get();
-                $user->setRoles($roles);
-            }
-
-            return $user;
-        };
-
-        $app['permissions'] = function ($app) {
-            return $app->trigger(new PermissionEvent('user.permission'))->getPermissions();
-        };
-
-        $app->on('user.permission', function ($event) use ($app) {
-            foreach ($app['module'] as $module) {
-                if (isset($module->permissions)) {
-                    $event->setPermissions($module->name, $module->permissions);
-                }
-            }
-        });
-
-        $app->on('widget.types', function ($event, $widgets) {
-            $widgets->registerType(new LoginWidget());
-        });
-
-        $app->on('app.request', function () use ($app) {
-            $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
-            $app['scripts']->register('widget-user', 'system/user:app/bundle/widgets/user.js', ['~dashboard', 'gravatar']);
-        });
-
-    },
+    'main' => 'Pagekit\\User\\UserModule',
 
     'autoload' => [
 

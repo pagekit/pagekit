@@ -25,6 +25,7 @@ return [
 
         $app['system'] = $this;
 
+        // TODO access "view" to early
         $app['view']->on('messages', function ($event) use ($app) {
 
             $result = '';

@@ -3,8 +3,8 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application;
-use Pagekit\View\View;
 use Pagekit\View\Asset\AssetManager;
+use Pagekit\View\View;
 
 class TemplateHelper implements HelperInterface
 {

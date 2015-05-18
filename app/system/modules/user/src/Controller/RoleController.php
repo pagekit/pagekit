@@ -24,7 +24,7 @@ class RoleController
                 'role' => $id
             ],
             '$data' => [
-                'permissions' => App::permissions(),
+                'permissions' => App::module('system/user')->getPermissions(),
                 'roles'       => Role::query()->orderBy('priority')->get()
             ]
         ];
