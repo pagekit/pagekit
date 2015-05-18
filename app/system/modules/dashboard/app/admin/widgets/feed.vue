@@ -60,7 +60,7 @@
             <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
         </div>
         <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</div>
-        <div class="uk-alert uk-alert-warning" v-show="!widget.url">{{ 'No URL given.' | trans }}</div>
+        <div class="uk-alert uk-alert-warning" v-show="!widget.url && !editing">{{ 'No URL given.' | trans }}</div>
         <ul class="uk-list uk-list-line">
             <li v-repeat="entry: feed.entries | count">
                 <a v-attr="href: entry.link">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate }}</span>
@@ -104,7 +104,12 @@
 
         watch: {
 
-            'widget.url': function() {
+            'widget.url': function(url) {
+
+                if (!url) {
+                    this.$parent.edit(true);
+                }
+
                 this.load();
             },
 
@@ -124,6 +129,12 @@
                 var self = this;
 
                 this.$set('feed', {});
+                this.$set('status', '');
+
+                if (!this.$get('widget.url')) {
+                    return;
+                }
+
                 this.$set('status', 'loading');
 
                 $.getJSON(api, {q: this.$get('widget.url'), num: this.$get('widget.count')}, function(data) {

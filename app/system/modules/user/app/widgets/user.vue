@@ -79,24 +79,36 @@
 
         ready: function() {
 
-            var query;
+            this.$watch('widget.show', this.load, false, true);
+            this.$watch('widget.count', this.load, false, false);
 
-            if (this.$get('widget.show') === 'registered') {
-                query = {
-                    sort: 'registered',
-                    order: 'DESC'
+        },
+
+        methods: {
+
+            load: function() {
+
+                var query;
+
+                if (this.$get('widget.show') === 'registered') {
+                    query = {
+                        sort: 'registered',
+                        order: 'DESC'
+                    }
+                } else {
+                    query = {
+                        filter: { access: 300 }
+                    }
                 }
-            } else {
-                query = {
-                    filter: { access: 300 }
-                }
+
+                query.limit = this.$get('widget.count');
+
+                this.$resource('api/user/:id').query(query, function(data) {
+                    this.$set('users', data.users);
+                });
+
             }
 
-            query.limit = this.$get('widget.count');
-
-            this.$resource('api/user/:id').query(query, function(data) {
-                this.$set('users', data.users);
-            });
         }
 
     };

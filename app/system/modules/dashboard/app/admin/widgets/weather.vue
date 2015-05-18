@@ -30,7 +30,7 @@
 
         <div v-show="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
         <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
-        <div class="uk-alert uk-alert-warning" v-show="!widget.uid">{{ 'No location given.' | trans }}</div>
+        <div class="uk-alert uk-alert-warning" v-show="!widget.uid && !editing">{{ 'No location given.' | trans }}</div>
 
         <div class="pk-weather-image">
             <img class="uk-text-top" v-attr="src: icon">
@@ -93,7 +93,16 @@
                 self.$set('widget.location', data.value);
             });
 
-            this.$watch('widget.uid', this.load, false, true);
+            this.$watch('widget.uid', function(uid) {
+
+                if (!uid) {
+                    this.$parent.edit(true);
+                }
+
+                this.load();
+
+            }, false, true);
+
             this.$watch('widget.units', this.load, false, false);
         },
 

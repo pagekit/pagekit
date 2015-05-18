@@ -89,11 +89,11 @@ var Dashboard = Vue.extend({
 
             methods: {
 
-                edit: function() {
+                edit: function(force) {
 
                     var id = this.widget.id;
                     
-                    if (this.editing[id]) {
+                    if (!force && this.editing[id]) {
                         this.editing.$delete(id);
                     } else {
                         this.editing.$set(id, true);
