@@ -15,8 +15,8 @@
     <li v-repeat="files | searched" v-on="click: toggleSelect">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover">
             <div class="uk-panel-teaser">
-                <div v-if="isImage(url)" class="pk-thumbnail" style="background-image: url('{{ encodeURI(url) }}');"></div>
-                <div v-if="!isImage(url)" class="pk-thumbnail pk-thumbnail-file"></div>
+                <div v-if="isImage(path)" class="pk-thumbnail" style="background-image: url('{{ encodeURI(url) }}');"></div>
+                <div v-if="!isImage(path)" class="pk-thumbnail pk-thumbnail-file"></div>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
                 <input type="checkbox" value="{{ name }}" v-checkbox="selected">

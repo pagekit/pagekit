@@ -33,14 +33,14 @@ class FinderController
             $info = [
                 'name'     => $file->getFilename(),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => App::url()->getStatic($file->getPathname(), [], true),
+                'url'      => App::url()->getStatic($file->getPathname()),
                 'writable' => $mode == 'w'
             ];
 
             if (!$isDir = $file->isDir()) {
                 $info = array_merge($info, [
                     'size'         => $this->formatFileSize($file->getSize()),
-                    'lastmodified' => App::intl('date')->parse($file->getMTime())->format(\DateTime::ISO8601)
+                    'lastmodified' => date(\DateTime::ISO8601, $file->getMTime())
                 ]);
             }
 

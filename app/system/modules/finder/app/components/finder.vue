@@ -23,10 +23,10 @@
             </div>
             <div data-uk-margin>
 
-                <button class="uk-button uk-button-primary uk-form-file">
+                <span class="uk-button uk-button-primary uk-form-file">
                     {{ 'Upload' | trans }}
                     <input type="file" name="files[]" multiple="multiple">
-                </button>
+                </span>
 
                 <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
 
@@ -49,7 +49,11 @@
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
         </div>
 
-        <div v-partial="{{ view }}"></div>
+        <div v-partial="{{ view }}" v-if="files.length || folders.length"></div>
+
+        <div class="uk-alert" v-if="!files.length && !folders.length">
+            {{ 'No files.' | trans }}
+        </div>
 
         <div v-if="isWritable()" class="uk-placeholder uk-text-center uk-text-muted">
             <img v-attr="src: $url('app/system/assets/images/finder-droparea.svg', true)" width="22" height="22" alt="{{ 'Droparea' | trans }}"> {{ 'Drop files here.' | trans }}
@@ -222,6 +226,7 @@
             },
 
             isImage: function (url) {
+                console.log(url)
                 return url.match(/\.(?:gif|jpe?g|png|svg)/i);
             },
 
