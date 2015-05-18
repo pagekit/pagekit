@@ -38,6 +38,22 @@ class Intl extends Data implements \ArrayAccess
     }
 
     /**
+     * Gets a helper or calls the helpers invoke method.
+     *
+     * @param  string $name
+     * @param  array  $args
+     * @return mixed
+     */
+    public function __call($name, $args)
+    {
+        if (!isset($this->helpers[$name])) {
+            throw new \InvalidArgumentException(sprintf('Undefined helper "%s"', $name));
+        }
+
+        return $args ? call_user_func_array($this->helpers[$name], $args) : $this->helpers[$name];
+    }
+
+    /**
      * Magic method to access the class in a static context.
      *
      * @param  string $name
@@ -49,16 +65,6 @@ class Intl extends Data implements \ArrayAccess
         $helper = static::getInstance()->offsetGet($name);
 
         return $args ? call_user_func_array($helper, $args) : $helper;
-    }
-
-    /**
-     * Get shortcut.
-     *
-     * @see offsetGet()
-     */
-    public function __invoke($name)
-    {
-        return $this->offsetGet($name);
     }
 
     /**
