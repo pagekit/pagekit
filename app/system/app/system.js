@@ -27,7 +27,7 @@ function install (Vue) {
         }
 
         Vue.util.extend(options, {
-            root: Vue.options.url.root.replace(/\/index.php$/i, '')
+            root: Vue.url.options.root.replace(/\/index.php$/i, '')
         });
 
         return this(options);
