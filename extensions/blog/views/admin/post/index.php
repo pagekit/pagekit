@@ -5,7 +5,8 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ '{0} %count% Posts|{1} %count% Post|]1,Inf[ %count% Posts' | transChoice count {count:count} }}</h2>
+            <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Posts|{1} %count% Post|]1,Inf[ %count% Posts' | transChoice count {count:count} }}</h2>
+            <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% Post selected|]1,Inf[ %count% Posts selected' | transChoice selected.length {count:selected.length} }}</h2>
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
