@@ -39,7 +39,6 @@ class SiteModule extends Module
                 $app['aliases']->add('/', $frontpage);
             } else {
                 $app['callbacks']->get('/', '_frontpage', function() {
-                    // TODO: app abort
                     return __('No Frontpage assigned.');
                 });
             }

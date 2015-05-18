@@ -19,23 +19,23 @@ module.exports = {
         },
 
         enablePackage: function (pkg) {
-            return this.$http.post('admin/system/package/enable', {'name': pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
                 if (!data.error) {
-                    pkg.enabled = true;
+                    pkg.$set('enabled', true);
                 }
             });
         },
 
         disablePackage: function (pkg) {
-            return this.$http.post('admin/system/package/disable', {'name': pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
                 if (!data.error) {
-                    pkg.enabled = false;
+                    pkg.$set('enabled', false);
                 }
             });
         },
 
         installPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/install',  {'package': pkg.version}, function (data) {
+            return this.$http.post('admin/system/package/install',  {package: pkg.version}, function (data) {
                 if (packages && data.message) {
                     packages.push(pkg);
                 }
@@ -43,7 +43,7 @@ module.exports = {
         },
 
         uninstallPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/uninstall', {'name': pkg.name}, function (data) {
+            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }

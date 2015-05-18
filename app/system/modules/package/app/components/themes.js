@@ -19,16 +19,11 @@ module.exports = {
     methods: {
 
         icon: function (pkg) {
-
-            var img;
-
             if (pkg.extra.image) {
-                img = this.$url.static('themes/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                return this.$url.static('themes/:name/:image', {name: pkg.name, image: pkg.extra.image});
             } else {
-                img = this.$url.static('app/system/assets/images/placeholder-800x600.svg');
+                return this.$url.static('app/system/assets/images/placeholder-800x600.svg');
             }
-
-            return img;
         },
 
         load: function () {

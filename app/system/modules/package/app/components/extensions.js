@@ -20,15 +20,12 @@ module.exports = {
 
         icon: function (pkg) {
 
-            var img;
-
             if (pkg.extra.image) {
-                img = this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
             } else {
-                img = this.$url.static('app/system/assets/images/placeholder-icon.svg');
+                return this.$url.static('app/system/assets/images/placeholder-icon.svg');
             }
 
-            return img;
         },
 
         load: function () {
