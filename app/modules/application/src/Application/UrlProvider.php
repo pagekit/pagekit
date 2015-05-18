@@ -161,7 +161,7 @@ class UrlProvider
      */
     public function getStatic($path, $parameters = [], $referenceType = UrlGenerator::ABSOLUTE_PATH)
     {
-        return $this->parseQuery($this->file->getUrl($this->locator->get($path), $referenceType), $parameters);
+        return $this->parseQuery($this->file->getUrl($this->locator->get($path) ?: $path, $referenceType), $parameters);
     }
 
     /**
