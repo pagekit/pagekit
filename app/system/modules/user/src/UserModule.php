@@ -14,7 +14,7 @@ use Pagekit\User\Widget\LoginWidget;
 
 class UserModule extends Module
 {
-    protected $permissions = [];
+    protected $perms = [];
 
     /**
      * {@inheritdoc}
@@ -55,7 +55,7 @@ class UserModule extends Module
      */
     public function getPermissions()
     {
-        if (!$this->permissions) {
+        if (!$this->perms) {
 
             foreach (App::module() as $module) {
                 if (isset($module->permissions)) {
@@ -66,7 +66,7 @@ class UserModule extends Module
             App::trigger('user.permission', [$this]);
         }
 
-        return $this->permissions;
+        return $this->perms;
     }
 
     /**
@@ -77,6 +77,6 @@ class UserModule extends Module
      */
     public function registerPermissions($extension, array $permissions = [])
     {
-        $this->permissions[$extension] = $permissions;
+        $this->perms[$extension] = $permissions;
     }
 }
