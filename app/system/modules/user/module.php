@@ -20,17 +20,12 @@ return [
 
     'controllers' => [
 
-        '@user: /' => [
-            'Pagekit\\User\\Controller\\UserController'
-        ],
-
         '@user: /user' => [
             'Pagekit\\User\\Controller\\AuthController',
-            'Pagekit\\User\\Controller\\PermissionController',
             'Pagekit\\User\\Controller\\ProfileController',
             'Pagekit\\User\\Controller\\RegistrationController',
             'Pagekit\\User\\Controller\\ResetPasswordController',
-            'Pagekit\\User\\Controller\\RoleController'
+            'Pagekit\\User\\Controller\\UserController'
         ],
 
         '@user/api: /api/user' => [
@@ -61,13 +56,13 @@ return [
         'user: permissions' => [
             'label'    => 'Permissions',
             'parent'   => 'user',
-            'url'      => '@user/permission',
+            'url'      => '@user/permissions',
             'access'   => 'user: manage user permissions'
         ],
         'user: roles' => [
             'label'    => 'Roles',
             'parent'   => 'user',
-            'url'      => '@user/role',
+            'url'      => '@user/roles',
             'access'   => 'user: manage user permissions'
         ],
         'user: settings' => [
@@ -87,6 +82,10 @@ return [
         ],
         'user: manage user permissions' => [
             'title' => 'Manage user permissions',
+            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+        ],
+        'user: manage settings' => [
+            'title' => 'Manage settings',
             'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ],
         'system: access admin area' => [

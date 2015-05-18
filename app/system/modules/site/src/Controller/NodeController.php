@@ -59,7 +59,7 @@ class NodeController
             $node->delete();
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -72,7 +72,7 @@ class NodeController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -85,7 +85,7 @@ class NodeController
             $this->deleteAction($id);
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -104,6 +104,6 @@ class NodeController
             }
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 }

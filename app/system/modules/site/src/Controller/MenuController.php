@@ -29,7 +29,7 @@ class MenuController
         $menus[$id] = compact('id', 'label');
         $this->update($menus);
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -56,7 +56,7 @@ class MenuController
         $menus[$id] = compact('id', 'label');
         $this->update($menus);
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -71,7 +71,7 @@ class MenuController
         unset($menus[$id]);
         $this->update($menus);
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**

@@ -8,12 +8,12 @@ use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
 /**
- * @Access("user: manage users", admin=true)
- * @Route(name="")
+ * @Route("/", name="")
  */
 class UserController
 {
     /**
+     * @Access("user: manage users", admin=true)
      * @Request({"filter": "array", "page":"int"})
      */
     public function indexAction($filter = null, $page = 0)
@@ -39,6 +39,7 @@ class UserController
     }
 
     /**
+     * @Access("user: manage users", admin=true)
      * @Request({"id": "int"})
      */
     public function editAction($id = 0)
@@ -72,6 +73,47 @@ class UserController
         ];
     }
 
+    /**
+     * @Access("user: manage user permissions", admin=true)
+     */
+    public function permissionsAction()
+    {
+        return [
+            '$view' => [
+                'title' => __('Permissions'),
+                'name'  => 'system/user:views/admin/permission.php'
+            ],
+            '$data' => [
+                'permissions' => App::module('system/user')->getPermissions(),
+                'roles'       => Role::query()->orderBy('priority')->get()
+            ]
+        ];
+    }
+
+    /**
+     * @Access("user: manage user permissions", admin=true)
+     * @Request({"id": "int"})
+     */
+    public function rolesAction($id = null)
+    {
+        return [
+            '$view' => [
+                'title' => __('Roles'),
+                'name'  => 'system/user:views/admin/role.php'
+            ],
+            '$config' => [
+                'role' => $id
+            ],
+            '$data' => [
+                'permissions' => App::module('system/user')->getPermissions(),
+                'roles'       => Role::query()->orderBy('priority')->get()
+            ]
+        ];
+    }
+
+    /**
+     * @Access("user: manage settings", admin=true)
+     */
     public function settingsAction()
     {
         return [
