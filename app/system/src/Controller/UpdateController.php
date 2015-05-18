@@ -52,7 +52,7 @@ class UpdateController
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
 
-            return 'success';
+            return ['message' => 'success'];
 
         } catch (ArchiveExtractionException $e) {
             $error = __('Package extraction failed.');
@@ -86,7 +86,7 @@ class UpdateController
         App::module('system/cache')->clearCache();
         App::session()->remove('system.updateDir');
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     public function databaseAction()
@@ -99,6 +99,6 @@ class UpdateController
         App::module('system/cache')->clearCache();
         App::session()->remove('system.update');
 
-        return 'success';
+        return ['message' => 'success'];
     }
 }

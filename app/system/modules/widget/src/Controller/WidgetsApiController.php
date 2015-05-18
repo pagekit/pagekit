@@ -112,7 +112,7 @@ class WidgetsApiController
             throw new NotFoundException('Widget not found.');
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -125,7 +125,7 @@ class WidgetsApiController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -138,7 +138,7 @@ class WidgetsApiController
             $this->deleteAction($id);
         }
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
@@ -162,7 +162,7 @@ class WidgetsApiController
 
         App::config('system/widget')->set('widget.positions', $positions);
 
-        return 'success';
+        return ['message' => 'success'];
     }
 
     /**
