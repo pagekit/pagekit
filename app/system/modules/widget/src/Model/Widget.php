@@ -174,27 +174,4 @@ class Widget implements WidgetInterface
 
         return $widget;
     }
-
-    /**
-     * Creates a Widget instance.
-     *
-     * @param  array $data
-     * @return static
-     */
-    public static function create(array $data = [])
-    {
-        $widget = new static;
-
-        foreach ($data as $key => $value) {
-            if (property_exists($widget, $key)) {
-                $widget->$key = $value;
-            } else {
-                $widget->set($key, $value);
-            }
-        }
-
-        App::trigger('widget.create', [$widget]);
-
-        return $widget;
-    }
 }

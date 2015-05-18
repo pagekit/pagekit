@@ -23,7 +23,7 @@
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" name="position" v-model="position" class="uk-width-1-1" options="positionOptions"></select>
+                        <select id="form-position" name="position" class="uk-width-1-1" v-model="position"  options="positionOptions"></select>
                     </div>
                 </div>
 
@@ -99,6 +99,7 @@
                 return sections.filter(function(section) {
                     return !section.active || type && type.match(section.active);
                 });
+
             }
 
         },

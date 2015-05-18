@@ -66,12 +66,4 @@ class Widget extends BaseWidget
     {
         return in_array($id, $this->getNodes());
     }
-
-    /**
-     * @postLoad
-     */
-    public function postLoad()
-    {
-        App::trigger('widget.create', [$this]);
-    }
 }

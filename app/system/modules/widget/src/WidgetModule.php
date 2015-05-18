@@ -77,12 +77,6 @@ class WidgetModule extends Module
 
         });
 
-        $app->on('widget.create', function ($event, $widget) {
-            if ($type = $this->getType($widget->getType())) {
-                $widget->setDefaults($type->getDefaults());
-            }
-        });
-
         $app->on('app.request', function () use ($app) {
 
             $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js');

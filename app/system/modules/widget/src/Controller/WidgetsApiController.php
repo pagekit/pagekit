@@ -12,6 +12,13 @@ use Pagekit\Widget\Entity\Widget;
  */
 class WidgetsApiController
 {
+    protected $widgets;
+
+    public function __construct()
+    {
+        $this->widgets = App::module('system/widget');
+    }
+
     /**
      * @Route("/", methods="GET")
      * @Request({"grouped": "bool"})
@@ -24,13 +31,11 @@ class WidgetsApiController
             return $widgets;
         }
 
-        $module = App::module('system/widget');
-
         $positions = ['' => []];
 
-        foreach ($module->config('widget.positions') as $position => $assigned) {
+        foreach ($this->widgets->config('widget.positions') as $position => $assigned) {
 
-            if (!$module->hasPosition($position)) {
+            if (!$this->widgets->hasPosition($position)) {
                 $position = '';
             }
 
@@ -84,7 +89,7 @@ class WidgetsApiController
             App::config('system/widget')->set('widget.config.' . $widget->getId(), $config);
         }
 
-        $positions = App::module('system/widget')->config('widget.positions');
+        $positions = $this->widgets->config('widget.positions');
 
         if ($position && !isset($positions[$position]) || !in_array($widget->getId(), $positions[$position])) {
             $positions = $this->filterPositions($positions, [$widget->getId()]);
@@ -141,7 +146,7 @@ class WidgetsApiController
      */
     public function configAction()
     {
-        return App::module('system/widget')->config('widget.config', new \stdClass());
+        return array_merge($this->widgets->config('widget.config', new \stdClass()), ['defaults' => $this->widgets->config('widget.defaults')]);
     }
 
     /**
@@ -150,7 +155,7 @@ class WidgetsApiController
      */
     public function positionsAction($position, $widgets = [])
     {
-        $positions = App::module('system/widget')->config('widget.positions');
+        $positions = $this->widgets->config('widget.positions');
         $positions = $this->filterPositions($positions, $widgets);
 
         $positions[$position] = $widgets;

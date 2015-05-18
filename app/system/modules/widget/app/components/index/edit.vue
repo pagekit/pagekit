@@ -35,6 +35,9 @@
 
 <script>
 
+    var _ = require('lodash');
+    var UIkit = require('uikit');
+
     module.exports = {
 
         inherit: true,
@@ -91,7 +94,7 @@
             },
 
             widgetConfig: function() {
-                return this.config.configs[this.widget.id] || {};
+                return _.defaults({}, this.config.configs[this.widget.id], this.config.configs.defaults);
             }
 
         },
