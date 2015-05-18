@@ -1,6 +1,6 @@
 <template>
 
-    <form class="uk-form uk-margin" v-if="editing" v-on="valid: save">
+    <form class="uk-form uk-margin" v-if="editing">
 
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'User Type' | trans }}</span>

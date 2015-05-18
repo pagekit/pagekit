@@ -32,6 +32,10 @@ class DateHelper
             $value = $calendar->toDateTime($value);
         }
 
+        if ($width === 'iso') {
+            $width = 'yyyy-MM-ddTHH:mm:ssZZZZ';
+        }
+
         if (in_array($width, ['full', 'long', 'medium', 'short'])) {
             return $calendar->formatDate($value, $width, $locale);
         }

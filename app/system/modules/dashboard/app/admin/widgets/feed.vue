@@ -1,20 +1,18 @@
 <template>
 
-    <form class="uk-form uk-margin" v-if="editing" v-on="valid: save">
+    <form class="uk-form uk-margin" v-if="editing">
 
         <div class="uk-form-row">
             <label for="form-feed-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-feed-title" class="uk-form-width-large" type="text" name="widget[title]" v-model="widget.title" v-valid="required">
-                <p class="uk-form-help-block uk-text-danger" v-show="form['widget[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</p>
+                <input id="form-feed-title" class="uk-form-width-large" type="text" name="widget[title]" v-model="widget.title">
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-feed-url" class="uk-form-width-large" type="text" name="url" v-model="widget.url" v-valid="required" lazy>
-                <p class="uk-form-help-block uk-text-danger" v-show="form.url.invalid">{{ 'URL cannot be blank.' | trans }}</p>
+                <input id="form-feed-url" class="uk-form-width-large" type="text" name="url" v-model="widget.url" lazy>
             </div>
         </div>
 

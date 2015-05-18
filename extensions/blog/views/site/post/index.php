@@ -4,7 +4,7 @@
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->getId()]) ?>"><?= $post->getTitle() ?></a></h1>
 
     <p class="uk-article-meta">
-        <?= __('Written by %name% on %date%', ['%name%' => $post->getUser()->getName(), '%date%' => '<time datetime="'.$intl->date($post->getDate(), 'Y-m-d H:i:s').'">'.$intl->date($post->getDate()).'</time>' ]) ?>
+        <?= __('Written by %name% on %date%', ['%name%' => $post->getUser()->getName(), '%date%' => '<time datetime="'.$intl['date']->format($post->getDate(), 'iso').'">'.$intl['date']->format($post->getDate()).'</time>' ]) ?>
     </p>
 
     <?php if ($post->getExcerpt()) : ?>

@@ -1,6 +1,6 @@
 <template>
 
-    <form class="uk-form uk-margin" v-show="editing" v-on="valid: save">
+    <form class="uk-form uk-margin" v-show="editing" v-on="submit: $event.preventDefault()">
 
         <div class="uk-form-row">
             <label for="form-weather-location" class="uk-form-label">{{ 'Location' | trans }}</label>
@@ -8,7 +8,6 @@
                 <div v-el="location" class="uk-autocomplete">
                     <input id="form-weather-location" class="uk-form-width-large" type="text" v-model="widget.location" autocomplete="off">
                 </div>
-                <p class="uk-form-help-block">{{ 'Enter the name of the city you want to get weather information for.' | trans }}</p>
             </div>
         </div>
 
