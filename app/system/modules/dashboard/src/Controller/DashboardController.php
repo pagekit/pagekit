@@ -7,7 +7,6 @@ use Pagekit\Module\Module;
 
 /**
  * @Access(admin=true)
- * @Route(name="")
  */
 class DashboardController
 {

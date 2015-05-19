@@ -68,6 +68,8 @@ var evalExp = function(expression) {
         return undefined === expression ? expression : Vue.parsers.expression.parse(expression).get.call(this, this);
 
     } catch (e) {
+
+        // TODO fix when not in debug
         if (Vue.config.warnExpressionErrors) {
             Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
         }

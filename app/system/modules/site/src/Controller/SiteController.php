@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 
 /**
  * @Access("site: manage site", admin=true)
- * @Route(name="")
  */
 class SiteController
 {

@@ -14,12 +14,15 @@ return [
 
     'controllers' => [
 
-        '@site: /' => [
+        '@site: /site' => [
             'Pagekit\\Site\\Controller\\SiteController'
         ],
 
-        '@site/api: /api/site' => [
-            'Pagekit\\Site\\Controller\\MenuController',
+        '@site/api/menu: /api/site/menu' => [
+            'Pagekit\\Site\\Controller\\MenuController'
+        ],
+
+        '@site/api/node: /api/site/node' => [
             'Pagekit\\Site\\Controller\\NodeController'
         ]
 
