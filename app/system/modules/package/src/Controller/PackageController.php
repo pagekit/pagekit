@@ -10,6 +10,7 @@ use Pagekit\System\Package\PackageDownloader;
 use Pagekit\System\Package\PackageInstaller;
 
 /**
+ * @Route("package", name="package")
  * @Access("system: manage packages", admin=true)
  */
 class PackageController
