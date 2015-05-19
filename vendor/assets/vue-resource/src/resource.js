@@ -99,11 +99,11 @@ function opts (action, args) {
 
 Resource.actions = {
 
-    'get': {method: 'GET'},
-    'save': {method: 'POST'},
-    'query': {method: 'GET'},
-    'remove': {method: 'DELETE'},
-    'delete': {method: 'DELETE'}
+    get: {method: 'GET'},
+    save: {method: 'POST'},
+    query: {method: 'GET'},
+    remove: {method: 'DELETE'},
+    delete: {method: 'DELETE'}
 
 };
 

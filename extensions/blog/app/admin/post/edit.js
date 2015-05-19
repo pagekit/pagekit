@@ -2,7 +2,7 @@
 
 jQuery(function ($) {
 
-    var vm = new Vue({
+    new Vue({
 
         el: '#js-post',
 
@@ -64,7 +64,7 @@ jQuery(function ($) {
                 this.resource.save({ id: this.post.id }, { post: this.post, id: this.post.id }, function (data) {
 
                     if (data.post) {
-                        vm.$set('post', data.post);
+                        this.$set('post', data.post);
                     }
 
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');

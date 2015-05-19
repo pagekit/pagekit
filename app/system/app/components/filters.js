@@ -7,7 +7,7 @@ var _ = require('lodash');
 var Vue = require('vue');
 
 Vue.filter('baseUrl', function(url) {
-    return _.startsWith(url, Vue.url.root) ? url.substr(Vue.url.root.length) : url;
+    return _.startsWith(url, Vue.url.options.root) ? url.substr(Vue.url.options.root.length) : url;
 });
 
 Vue.filter('trans', function(id, parameters, domain, locale) {
