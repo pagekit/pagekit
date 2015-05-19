@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= str_replace('_', '-', $app['translator']->getLocale()) ?>">
+<html lang="<?= str_replace('_', '-', $app['intl']->getDefaultLocale()) ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
         <link href="<?= $view->url()->getStatic('system/theme:apple_touch_icon.png') ?>" rel="apple-touch-icon-precomposed">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
         <?php $view->style('theme', 'system/theme:css/theme.css') ?>
-        <?php $view->script('theme', 'system/theme:js/theme.js', ['uikit', 'uikit-notify', 'uikit-tooltip', 'uikit-sticky', 'uikit-sortable', 'uikit-pagination', 'uikit-form-select']) ?>
+        <?php $view->script('theme', 'system/theme:js/theme.js', ['system', 'uikit', 'uikit-notify', 'uikit-tooltip', 'uikit-sticky', 'uikit-sortable', 'uikit-pagination', 'uikit-form-select']) ?>
         <?= $view->render('head') ?>
     </head>
     <body>
@@ -45,8 +45,7 @@
                         <ul class="uk-grid uk-grid-medium uk-flex-middle">
                             <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="{{ url }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
                             <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="{{ $url('user/logout', {redirect: 'admin/login'}) }}" title="{{ 'Logout' | trans }}"></a></li>
-                            <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}">
-                                <img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.username }}" v-gravatar="user.email"> {{ user.username }}</a></li>
+                            <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.username }}" v-gravatar="user.email"> {{ user.username }}</a></li>
                         </ul>
 
                     </div>
