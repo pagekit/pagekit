@@ -5,9 +5,6 @@ namespace Pagekit\System\Controller;
 use Pagekit\Application as App;
 use Pagekit\User\Entity\User;
 
-/**
- * @Route("/")
- */
 class SystemController
 {
     /**

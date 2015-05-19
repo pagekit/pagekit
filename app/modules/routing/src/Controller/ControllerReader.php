@@ -202,22 +202,6 @@ class ControllerReader implements ControllerReaderInterface
     }
 
     /**
-     * Parses the controller name.
-     *
-     * @param  ReflectionClass $class
-     * @throws \LogicException
-     * @return string
-     */
-    protected function parseControllerName(ReflectionClass $class)
-    {
-        if (!preg_match('/([a-zA-Z0-9]+)Controller$/', $class->name, $matches)) {
-            throw new \LogicException(sprintf('Unable to retrieve controller name. The controller class %s does not follow the naming convention. (e.g. MyController)', $class->name));
-        }
-
-        return $matches[1];
-    }
-
-    /**
      * Parses the controller action name.
      *
      * @param  ReflectionMethod $method
@@ -258,14 +242,6 @@ class ControllerReader implements ControllerReaderInterface
                     $globals[$option] = $value;
                 }
             }
-        }
-
-        if ($globals['path'] === null) {
-            $globals['path'] = strtolower($this->parseControllerName($class));
-        }
-
-        if ($globals['name'] === null) {
-            $globals['name'] = strtolower($this->parseControllerName($class));
         }
 
         return $globals;

@@ -4,21 +4,16 @@ namespace Pagekit\Hello\Controller;
 
 use Pagekit\Application as App;
 
-/**
- * @Route("/")
- */
 class SiteController
 {
-
     /**
-     * @Route("/greet")
-     * @Route("/greet/{name}", name="site/greet/name")
+     * @Route("/")
+     * @Route("/{name}")
      */
-    public function greetAction($name='')
+    public function indexAction($name)
     {
-        $config = App::module('hello')->config();
 
-        $names = explode(',', $name ?: $config['message']);
+        $names = explode(',', $name);
 
         return [
             '$view' => [
@@ -30,13 +25,14 @@ class SiteController
     }
 
     /**
-     * @Route("/")
-     * @Route("/{name}")
+     * @Route("/greet")
+     * @Route("/greet/{name}", name="site/greet/name")
      */
-    public function indexAction($name)
+    public function greetAction($name='')
     {
+        $config = App::module('hello')->config();
 
-        $names = explode(',', $name);
+        $names = explode(',', $name ?: $config['message']);
 
         return [
             '$view' => [

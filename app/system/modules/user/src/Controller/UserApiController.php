@@ -9,7 +9,6 @@ use Pagekit\User\Entity\User;
 
 /**
  * @Access("user: manage users")
- * @Route("", name="")
  */
 class UserApiController
 {

@@ -6,9 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
 
-/**
- * @Route("/")
- */
 class AdminController
 {
     /**

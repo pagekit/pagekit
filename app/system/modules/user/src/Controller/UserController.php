@@ -7,9 +7,6 @@ use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
-/**
- * @Route("/", name="")
- */
 class UserController
 {
     /**
