@@ -20,8 +20,8 @@ return [
 
     'controllers' => [
 
-        '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController'
-
+        '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController',
+        '@page/api: /api/page' => 'Pagekit\\Page\\Controller\\PageController'
     ],
 
     'permissions' => [

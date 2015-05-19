@@ -99,21 +99,10 @@ return [
 
     'controllers' => [
 
-        '@system: /' => [
-            'Pagekit\\System\\Controller\\AdminController'
-        ],
-
-        '@system/intl: /system/intl' => [
-            'Pagekit\\System\\Controller\\IntlController'
-        ],
-
-        '@system/migration: /system/migration' => [
-            'Pagekit\\System\\Controller\\MigrationController',
-        ],
-
-        '@system/update: /system/update' => [
-            'Pagekit\\System\\Controller\\UpdateController',
-        ]
+        '@system: /' => 'Pagekit\\System\\Controller\\AdminController',
+        '@system/intl: /system/intl' => 'Pagekit\\System\\Controller\\IntlController',
+        '@system/migration: /system/migration' => 'Pagekit\\System\\Controller\\MigrationController',
+        '@system/update: /system/update' => 'Pagekit\\System\\Controller\\UpdateController'
 
     ],
 

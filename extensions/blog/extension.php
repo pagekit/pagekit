@@ -20,9 +20,7 @@ return [
 
     'controllers' => [
 
-        '@blog: /blog' => [
-            'Pagekit\\Blog\\Controller\\BlogController'
-        ],
+        '@blog: /blog' => 'Pagekit\\Blog\\Controller\\BlogController',
 
         '@blog/api: /api/blog' => [
             'Pagekit\\Blog\\Controller\\PostApiController',

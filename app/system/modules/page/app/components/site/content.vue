@@ -25,22 +25,21 @@
         </div>
     </div>
 
+    <pre>{{ page | json }}</pre>
+
 </template>
 
 <script>
 
     module.exports = {
 
+        paramAttributes: ['node', 'form'],
+
         section: {
             name: 'page-content',
             label: 'Content',
             priority: 10,
             active: 'page'
-        },
-
-        data: function() {
-            // TODO test
-            return { page: {} }
         },
 
         ready: function() {
@@ -56,6 +55,17 @@
         },
 
         watch: {
+
+            'node.data.variables.id': function(id) {
+
+                if (!id) {
+                    this.$set('page', {});
+                }
+
+                this.$resource('api/page/:id').get({ id: id}, function (page) {
+                    this.$set('page', page);
+                });
+            },
 
             'page.data.markdown': function(markdown) {
                 this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');

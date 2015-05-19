@@ -8,6 +8,8 @@
 
     module.exports = {
 
+        paramAttributes: ['node', 'form'],
+
         section: {
             name: 'page-settings',
             label: 'Settings',

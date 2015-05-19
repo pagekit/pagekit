@@ -32,9 +32,7 @@ return [
 
     'controllers' => [
 
-        '@system: /' => [
-            'Pagekit\\OAuth\\Controller\\OAuthController'
-        ]
+        '@system: /' => 'Pagekit\\OAuth\\Controller\\OAuthController'
 
     ],
 

@@ -14,9 +14,7 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
-            'Pagekit\\Cache\\Controller\\CacheController'
-        ]
+        '@system: /system' => 'Pagekit\\Cache\\Controller\\CacheController'
 
     ],
 

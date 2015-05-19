@@ -20,9 +20,7 @@ return [
 
     'controllers' => [
 
-        '@dashboard: /dashboard' => [
-            'Pagekit\\Dashboard\\Controller\\DashboardController'
-        ]
+        '@dashboard: /dashboard' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
 
     ],
 

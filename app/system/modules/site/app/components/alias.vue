@@ -16,6 +16,8 @@
 
     module.exports = {
 
+        paramAttributes: ['node', 'form'],
+
         section: {
             name: 'alias',
             label: 'Settings',

@@ -19,6 +19,8 @@
 
     module.exports = {
 
+        paramAttributes: ['node', 'form'],
+
         section: {
             name: 'blog-post',
             label: 'Settings',

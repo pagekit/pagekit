@@ -26,7 +26,7 @@
 
         <div class="uk-switcher uk-margin" v-el="content">
             <div v-repeat="section: sections | active | orderBy 'priority'">
-                <div v-component="{{ section.name }}" v-with="node: node, form: nodeForm"></div>
+                <div v-component="{{ section.name }}" node="{{ node }}" form="{{ nodeForm }}"></div>
             </div>
         </div>
 

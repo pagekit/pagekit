@@ -67,9 +67,7 @@ return [
 
     'controllers' => [
 
-        '@system/settings: /system/settings' => [
-            'Pagekit\\System\\Controller\\SettingsController'
-        ]
+        '@system/settings: /system/settings' => 'Pagekit\\System\\Controller\\SettingsController'
 
     ],
 

@@ -99,9 +99,7 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
-            'Pagekit\\Mail\\Controller\\MailController'
-        ]
+        '@system: /system' => 'Pagekit\\Mail\\Controller\\MailController'
 
     ],
 
