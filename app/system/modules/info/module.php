@@ -22,7 +22,7 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
+        '@system/info: /system/info' => [
             'Pagekit\\Info\\Controller\\InfoController'
         ]
 

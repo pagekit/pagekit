@@ -31,8 +31,11 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
-            'Pagekit\\Finder\\Controller\\FinderController',
+        '@system/finder: /system/finder' => [
+            'Pagekit\\Finder\\Controller\\FinderController'
+        ],
+
+        '@system/storage: /system/storage' => [
             'Pagekit\\Finder\\Controller\\StorageController'
         ]
 
