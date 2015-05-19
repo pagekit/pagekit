@@ -29,7 +29,7 @@
                         <h1 class="tm-heading">{{ item.label | trans }}</h1>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
-                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 <li v-repeat="item: nav">
                                     <a class="uk-panel pk-panel-icon" v-attr="href: item.url">
                                         <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">

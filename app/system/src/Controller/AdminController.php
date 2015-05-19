@@ -5,6 +5,7 @@ namespace Pagekit\System\Controller;
 use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
+use Pagekit\User\Entity\User;
 
 class AdminController
 {
@@ -35,5 +36,22 @@ class AdminController
             'redirect' => App::request()->get('redirect') ? : App::url('@system/admin', [], true),
             'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
         ];
+    }
+
+    /**
+     * @Access(admin=true)
+     * @Request({"order": "array"})
+     */
+    public function adminMenuAction($order)
+    {
+        if (!$order) {
+            App::abort(400, __('Missing order data.'));
+        }
+
+        $user = User::find(App::user()->getId());
+        $user->set('admin.menu', $order);
+        $user->save();
+
+        return ['message' => __('Order saved.')];
     }
 }
