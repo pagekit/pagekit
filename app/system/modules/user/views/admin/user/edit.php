@@ -1,4 +1,4 @@
-<?php $view->script('user-edit', 'system/user:app/admin/user/edit.js', ['system', 'vue-validator', 'uikit-form-password', 'gravatar']) ?>
+<?php $view->script('user-edit', 'system/user:app/admin/user/edit.js', ['system', 'vue-validator', 'uikit-form-password']) ?>
 
 <form id="js-user-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
 

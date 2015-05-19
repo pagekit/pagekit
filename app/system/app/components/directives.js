@@ -4,14 +4,19 @@
 
 var $ = require('jquery');
 var Vue = require('vue');
+var md5 = require('md5');
 
 Vue.directive('gravatar', {
 
     update: function(value) {
 
-        var el = $(this.el), options = { size: (el.attr('height') || 50) * 2, backup: 'mm', rating: 'g' };
+        var el = $(this.el), url = '//gravatar.com/avatar/', params = [];
 
-        el.attr('src', gravatar(value || '', options));
+        params.push('r=g');
+        params.push('d=mm');
+        params.push('s=' + (el.attr('height') || 50) * 2);
+
+        el.attr('src', url + md5(value) + '?' + params.join('&'));
     }
 
 });

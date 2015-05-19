@@ -26,7 +26,7 @@ class GravatarHelper implements HelperInterface
             'attrs'   => []
         ], $params);
 
-        $url = sprintf('//www.gravatar.com/avatar/%s?s=%s&d=%s&r=%s', md5(strtolower(trim($email))), $params['size'], $params['default'], $params['rating']);
+        $url = sprintf('//gravatar.com/avatar/%s?s=%s&d=%s&r=%s', md5(strtolower(trim($email))), $params['size'], $params['default'], $params['rating']);
 
         if ($params['img']) {
 

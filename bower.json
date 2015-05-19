@@ -7,7 +7,8 @@
     "vue": "~0.11.10"
   },
   "devDependencies": {
-    "globalize": "~1.0.0"
+    "globalize": "~1.0.0",
+    "js-md5": "~1.1.0"
   },
   "private": true
 }

@@ -25,6 +25,11 @@ module.exports = [
             "vue": "Vue",
             "settings": "Settings"
         },
+        resolve: {
+            alias: {
+                "md5$": assets + "/js-md5/js/md5.min.js"
+            }
+        },
         module: {
             loaders: [
                 { test: /\.html$/, loader: "html" },

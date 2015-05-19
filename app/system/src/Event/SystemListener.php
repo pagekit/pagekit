@@ -5,8 +5,6 @@ namespace Pagekit\System\Event;
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Finder\Event\FileAccessEvent;
-use Pagekit\Menu\Event\MenuEvent;
-use Pagekit\Menu\Model\Menu;
 
 class SystemListener implements EventSubscriberInterface
 {
@@ -20,22 +18,6 @@ class SystemListener implements EventSubscriberInterface
         }
 
         App::trigger(App::isAdmin() ? 'app.admin' : 'app.site', [App::request()]);
-    }
-
-    /**
-     * Creates the menu instance and dispatches the 'system.admin_menu' event.
-     */
-    public function onAdmin()
-    {
-        $menu = new Menu;
-        $menu->setId('admin');
-
-        App::menus()->registerFilter('access', 'Pagekit\System\Menu\Filter\AccessFilter', 16);
-        App::menus()->registerFilter('active', 'Pagekit\System\Menu\Filter\ActiveFilter');
-
-        App::trigger(new MenuEvent('system.admin_menu', $menu));
-
-        App::set('admin.menu', App::menus()->getTree($menu, ['access' => true]));
     }
 
     /**
@@ -57,7 +39,6 @@ class SystemListener implements EventSubscriberInterface
     {
         return [
             'app.request'   => 'onRequest',
-            'app.admin'     => 'onAdmin',
             'system.finder' => 'onSystemFinder'
         ];
     }

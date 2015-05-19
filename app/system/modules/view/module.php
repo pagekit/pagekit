@@ -50,7 +50,6 @@ return [
             $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $app['scripts']->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
-            $app['scripts']->register('gravatar', 'vendor/assets/gravatarjs/gravatar.js');
             $app['scripts']->register('vue', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
             $app['scripts']->register('vue-resource', 'vendor/assets/vue-resource/dist/vue-resource.js', 'vue');
             $app['scripts']->register('vue-validator', 'vendor/assets/vue-validator/dist/vue-validator.js', 'vue');

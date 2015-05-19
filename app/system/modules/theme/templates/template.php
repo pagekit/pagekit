@@ -13,7 +13,7 @@
     </head>
     <body>
 
-        <header class="tm-header">
+        <header id="header" class="tm-header">
 
             <!-- <div class="tm-brand uk-flex uk-flex-middle">
                 <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
@@ -26,18 +26,16 @@
 
                         <i class="tm-icon-menu uk-icon-bars"></i>
 
-                        <h1 class="tm-heading"><?= __($subnav) ?></h1>
+                        <h1 class="tm-heading">{{ item.label | trans }}</h1>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
-                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3 js-menu" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                            <?php foreach ($nav as $item): ?>
-                                <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?> data-id="<?= $item->getId() ?>">
-                                    <a class="uk-panel pk-panel-icon" href="<?= $view->url($item->getUrl()) ?>">
-                                        <img src="<?= $view->url()->getStatic($item->getIcon() ?: 'app/system/assets/images/placeholder-icon.svg') ?>" width="50" height="50" alt="<?= __($item) ?>">
-                                        <p><?= __($item) ?></p>
+                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                                <li v-repeat="item: nav">
+                                    <a class="uk-panel pk-panel-icon" v-attr="href: item.url">
+                                        <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
+                                        <p>{{ item.label | trans }}</p>
                                     </a>
                                 </li>
-                            <?php endforeach ?>
                             </ul>
                         </div>
 
@@ -45,38 +43,32 @@
                     <div class="tm-contrast">
 
                         <ul class="uk-grid uk-grid-medium uk-flex-middle">
-                            <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="<?= $view->url()->base() ?>" title="<?= __('Visit Site') ?>" target="_blank"></a></li>
-                            <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>" title="<?= __('Logout') ?>"></a></li>
-                            <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>" title="<?= __('Profile') ?>">
-                                <?= $view->gravatar($user->getEmail(), ['size' => 64, 'attrs' => ['width' => '32', 'height' => '32', 'class' => 'uk-border-circle uk-margin-small-right', 'alt' => $user->getUsername()]]) ?>
-                                <?= $user->getUsername() ?>
-                            </a></li>
+                            <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="{{ url }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
+                            <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>" title="{{ 'Logout' | trans }}"></a></li>
+                            <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}">
+                                <img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.username }}" v-gravatar="user.email"> {{ user.username }}</a></li>
                         </ul>
 
                     </div>
                 </div>
 
-                <?php if ($subnav && $subnav->getChildren()) : ?>
-                <nav class="uk-navbar tm-navbar uk-hidden-small">
+                <nav class="uk-navbar tm-navbar uk-hidden-small" v-show="subnav">
                     <ul class="uk-navbar-nav">
-                        <?php foreach ($subnav->getChildren() as $item): ?>
-                        <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
+                        <li v-class="uk-active: item.active" v-repeat="item: subnav">
+                            <a v-attr="href: item.url">{{ item.label | trans }}</a>
                         </li>
-                        <?php endforeach ?>
                     </ul>
                 </nav>
-                <?php endif ?>
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-visible-small">
                     <a href="#offcanvas" data-uk-offcanvas>
                         <i class="tm-icon-menu uk-icon-bars"></i>
                     </a>
 
-                    <h1 class="tm-heading uk-h3"><?= __($subnav) ?></h1>
+                    <h1 class="tm-heading uk-h3">{{ item.label | trans }}</h1>
 
                     <a href="#offcanvas-flip" data-uk-offcanvas>
-                        <?= $view->gravatar($user->getEmail(), ['size' => 72, 'attrs' => ['width' => '36', 'height' => '36', 'class' => 'uk-border-circle', 'alt' => $user->getUsername()]]) ?>
+                        <img class="uk-border-circle" height="36" width="36" alt="{{ user.username }}" v-gravatar="user.email">
                     </a>
                 </div>
 
@@ -95,27 +87,17 @@
                 <!-- <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>"> -->
 
                 <ul class="uk-nav uk-nav-offcanvas">
-                    <?php if ($subnav && $subnav->getChildren()): ?>
-                        <li class="uk-nav-header"><?= __($subnav) ?></li>
-                        <li<?= $subnav->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $view->url($subnav->getUrl()) ?>"><?= __($subnav) ?></a>
-                        </li>
-                        <?php foreach ($subnav->getChildren() as $item): ?>
-                            <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                                <a href="<?= $view->url($item->getUrl()) ?>"><?= __($item) ?></a>
-                            </li>
-                        <?php endforeach ?>
-                        <li class="uk-nav-divider"></li>
-                    <?php endif ?>
-                    <li class="uk-nav-header"><?= __('Extensions') ?></li>
-                    <?php foreach ($nav->getChildren() as $item): ?>
-                        <li<?= $item->getAttribute('active') ? ' class="uk-active"' : '' ?>>
-                            <a href="<?= $view->url($item->getUrl()) ?>">
-                                <img class="uk-margin-small-right" src="<?= $view->url()->getStatic($item->getIcon() ?: 'app/system/assets/images/placeholder-icon.svg') ?>" width="34" height="34" alt="<?= __($item) ?>">
-                                <?= __($item) ?>
-                            </a>
-                        </li>
-                    <?php endforeach ?>
+                    <li class="uk-nav-header" v-show="subnav">{{ item.label | trans }}</li>
+                    <li v-class="uk-active: item.active" v-repeat="item: subnav">
+                        <a v-attr="href: item.url">{{ item.label | trans }}</a>
+                    </li>
+                    <li class="uk-nav-divider" v-show="subnav"></li>
+                    <li class="uk-nav-header">{{ 'Extensions' | trans }}</li>
+                    <li v-class="uk-active: item.active" v-repeat="item: nav">
+                        <a v-attr="href: item.url">
+                            <img class="uk-margin-small-right" width="34" height="34" alt="{{ item.label | trans }}" v-attr="src: item.icon"> {{ item.label | trans }}
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -125,10 +107,10 @@
             <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
 
                 <ul class="uk-nav uk-nav-offcanvas">
-                    <li class="uk-nav-header"><?= $user->getUsername() ?></li>
-                    <li><a href="<?= $view->url()->base() ?>" target="_blank"><?= __('Visit Site') ?></a></li>
-                    <li><a href="<?= $view->url('@user/edit', ['id' => $user->getId()]) ?>"><?= __('Settings') ?></a></li>
-                    <li><a href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>"><?= __('Logout') ?></a></li>
+                    <li class="uk-nav-header">{{ user.username }}</li>
+                    <li><a href="{{ url }}" target="_blank">{{ 'Visit Site' | trans }}</a></li>
+                    <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}">{{ 'Settings' | trans }}</a></li>
+                    <li><a href="<?= $view->url('@user/auth/logout', ['redirect' => $view->url('@system/admin', [], true)]) ?>">{{ 'Logout' | trans }}</a></li>
                 </ul>
 
             </div>

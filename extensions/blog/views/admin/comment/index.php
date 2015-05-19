@@ -1,5 +1,5 @@
 <?php $view->style('comment-index', 'blog:assets/css/blog.admin.css') ?>
-<?php $view->script('comment-index', 'blog:app/admin/comment/index.js', ['system', 'vue-validator', 'gravatar']) ?>
+<?php $view->script('comment-index', 'blog:app/admin/comment/index.js', ['system', 'vue-validator']) ?>
 
 <div id="js-comments" class="uk-form" v-cloak>
 
