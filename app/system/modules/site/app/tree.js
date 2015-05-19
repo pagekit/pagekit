@@ -19,15 +19,8 @@ module.exports = {
     events: {
 
         loaded: function() {
-
-            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
-                build = function (collection) {
-                    return collection.map(function(node) {
-                        return { node: node, children: build(parents[node.id] || [])};
-                    });
-                };
-
-            this.$set('tree', _.groupBy(build(parents[0] || []), function(node) { return node.node.menu }));
+            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value();
+            this.$set('tree', _.merge(parents, _.groupBy(parents[0] || [], 'menu')));
         }
 
     },

@@ -12,7 +12,7 @@
         </div>
 
         <ul class="uk-nestable-list" v-if="isParent">
-            <node-item v-repeat="item: item.children"></node-item>
+            <node-item v-repeat="node: tree[node.id]"></node-item>
         </ul>
 
     </li>
@@ -28,16 +28,12 @@
 
         computed: {
 
-            node: function() {
-                return this.item.node;
-            },
-
             isActive: function() {
                 return this.node === this.selected;
             },
 
             isParent: function() {
-                return this.item.children.length;
+                return this.tree[this.node.id];
             },
 
             isFrontpage: function() {

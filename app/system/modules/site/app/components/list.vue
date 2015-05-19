@@ -1,7 +1,7 @@
 <template>
 
     <ul class="uk-nestable">
-        <node-item v-repeat="item: tree[menu.id]"></node-item>
+        <node-item v-repeat="node: tree[menu.id]"></node-item>
     </ul>
 
 </template>

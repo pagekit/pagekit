@@ -69,7 +69,7 @@ var Site = Vue.extend({
                 return first = _.first(self.tree[menu.id]);
             });
 
-            return first ? first.node : undefined;
+            return first;
         }
 
     },

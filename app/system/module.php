@@ -74,6 +74,7 @@ return [
         'system/menu',
         'system/oauth',
         'system/package',
+        'system/page',
         'system/settings',
         'system/site',
         'system/theme',

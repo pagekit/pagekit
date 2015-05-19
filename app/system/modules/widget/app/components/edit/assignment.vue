@@ -5,7 +5,7 @@
         <div class="uk-form-controls uk-form-controls-text">
 
             <ul class="uk-list uk-margin-top-remove">
-                <li v-partial="#node-item" v-repeat="item: tree[menu.id]"></li>
+                <li v-partial="#node-item" v-repeat="node: tree[menu.id]"></li>
             </ul>
         </div>
     </div>
@@ -13,12 +13,12 @@
     <script id="node-item" type="text/template">
 
         <label>
-            <input type="checkbox" value="{{ item.node.id }}" v-checkbox="widget.nodes">
-            {{ item.node.title }}
+            <input type="checkbox" value="{{ node.id }}" v-checkbox="widget.nodes">
+            {{ node.title }}
         </label>
 
-        <ul v-if="item.children.length" class="uk-list">
-            <li v-partial="#node-item" v-repeat="item: item.children"></li>
+        <ul v-if="tree[node.id].length" class="uk-list">
+            <li v-partial="#node-item" v-repeat="node: tree[node.id]"></li>
         </ul>
 
     </script>
