@@ -26,7 +26,9 @@
         label: 'Settings',
         active: 'site.user.login',
         priority: 0,
-        template: __vue_template__
+
+        template: __vue_template__,
+        paramAttributes: ['widget', 'config', 'form']
 
     };
 

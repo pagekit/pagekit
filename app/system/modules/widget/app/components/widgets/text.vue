@@ -24,7 +24,9 @@
         label: 'Settings',
         active: 'site.text',
         priority: 0,
+
         template: __vue_template__,
+        paramAttributes: ['widget', 'config', 'form'],
 
         ready: function() {
             this.editor = UIkit.htmleditor(this.$$.editor, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, { markdown: this.$get('widget.settings.markdown') }));

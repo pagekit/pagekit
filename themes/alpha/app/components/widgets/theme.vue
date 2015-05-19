@@ -47,7 +47,9 @@
         name: 'theme-settings',
         label: 'Theme',
         priority: 50,
-        template: __vue_template__
+
+        template: __vue_template__,
+        paramAttributes: ['widget', 'config', 'form']
 
     };
 

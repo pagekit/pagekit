@@ -10,7 +10,7 @@
 
             <div class="uk-switcher uk-margin" v-el="content">
                 <div v-repeat="section: sections | active | orderBy 'priority'">
-                    <div v-component="{{ section.name }}" v-with="widget: widget, form: form, config: config"></div>
+                    <div v-component="{{ section.name }}" widget="{{ widget }}" config="{{ widgetConfig }}" form="{{ form }}"></div>
                 </div>
             </div>
 
@@ -59,6 +59,8 @@
     Widgets.addSection(require('../edit/assignment.vue'));
 
     module.exports = {
+
+        paramAttributes: ['widget', 'config', 'position', 'form'],
 
         data: function() {
             return _.merge({}, window.$widgets);

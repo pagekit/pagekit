@@ -32,7 +32,9 @@
         name: 'assignment',
         label: 'Assignment',
         priority: 100,
+
         template: __vue_template__,
+        paramAttributes: ['widget', 'config', 'form'],
 
         mixins: [require('../../../../site/app/tree.js')]
 

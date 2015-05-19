@@ -67,7 +67,9 @@
         label: 'Settings',
         active: 'site.menu',
         priority: 0,
+
         template: __vue_template__,
+        paramAttributes: ['widget', 'config', 'form'],
 
         data: function () {
             return { menus: window.$menus };

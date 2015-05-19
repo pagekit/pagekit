@@ -24,7 +24,7 @@
 
                 </div>
 
-                <widget-edit v-with="widget: widget, config: widgetConfig, position: position, form: widgetform" v-ref="edit"></widget-edit>
+                <widget-edit widget="{{ widget }}" config="{{ widgetConfig }}" position="{{ position }}" form="{{ widgetform }}" v-ref="edit"></widget-edit>
 
             </form>
 
