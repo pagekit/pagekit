@@ -39,10 +39,8 @@ return [
 
     'controllers' => [
 
-        '@system: /system' => [
-            'Pagekit\\System\\Controller\\MarketplaceController',
-            'Pagekit\\System\\Controller\\PackageController'
-        ]
+        '@system/package: /system/package' => 'Pagekit\\System\\Controller\\PackageController',
+        '@system/marketplace: /system/marketplace' => 'Pagekit\\System\\Controller\\MarketplaceController'
 
     ],
 

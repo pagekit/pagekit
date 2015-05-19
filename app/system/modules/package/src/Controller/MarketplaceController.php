@@ -5,7 +5,6 @@ namespace Pagekit\System\Controller;
 use Pagekit\Application as App;
 
 /**
- * @Route("marketplace", name="marketplace")
  * @Access("system: manage packages", admin=true)
  */
 class MarketplaceController
