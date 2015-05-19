@@ -49,7 +49,7 @@ class User extends BaseUser implements \JsonSerializable
     protected $activation;
 
     /** @Column(type="json_array") */
-    protected $data;
+    protected $data = [];
 
     /** @ManyToMany(targetEntity="Role", keyFrom="id", keyTo="id", tableThrough="@system_user_role", keyThroughFrom="user_id", keyThroughTo="role_id") */
     protected $roles;

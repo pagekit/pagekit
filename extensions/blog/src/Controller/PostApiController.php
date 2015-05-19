@@ -4,6 +4,7 @@ namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\Entity\Post;
+use Pagekit\Intl\Intl;
 
 /**
  * @Access("blog: manage content")
@@ -69,7 +70,7 @@ class PostApiController
             App::abort(404, __('Invalid slug.'));
         }
 
-        $data['date'] = App::dates()->getDateTime($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+        $data['date'] = Intl::date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
         $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
         $post->save($data);

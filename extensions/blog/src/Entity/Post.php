@@ -61,7 +61,7 @@ class Post implements \JsonSerializable
     protected $comment_count = 0;
 
     /** @Column(type="json_array") */
-    protected $data;
+    protected $data = [];
 
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
