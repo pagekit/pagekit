@@ -1,6 +1,6 @@
 jQuery(function ($) {
 
-    var vm = new Vue({
+    new Vue({
 
         el: '#marketplace',
 

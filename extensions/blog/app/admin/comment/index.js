@@ -2,7 +2,7 @@
 
 jQuery(function ($) {
 
-    var vm = new Vue({
+    new Vue({
 
         el: '#js-comments',
 
@@ -16,10 +16,10 @@ jQuery(function ($) {
 
         created: function () {
 
-            this.resource = this.$resource('api/blog/comment/:id');
+            this.Comments = this.$resource('api/blog/comment/:id');
             this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
-            this.$watch('config.page', this.load, true, true);
+            this.$watch('config.page', this.load, false, true);
             this.$watch('config.filter', function() { this.load(0); }, true);
         },
 
@@ -47,8 +47,8 @@ jQuery(function ($) {
             },
 
             save: function (comment) {
-                this.resource.save({ id: comment.id }, { comment: comment }, function (data) {
-                    vm.load();
+                this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -61,15 +61,15 @@ jQuery(function ($) {
                     comment.status = status;
                 });
 
-                this.resource.save({ id: 'bulk' }, { comments: comments }, function (data) {
-                    vm.load();
+                this.Comments.save({ id: 'bulk' }, { comments: comments }, function (data) {
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
             remove: function() {
-                this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                    vm.load();
+                this.Comments.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -85,21 +85,22 @@ jQuery(function ($) {
 
                 this.cancel();
 
-                this.resource.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page }, function (data) {
-                    vm.$set('comments', data.comments);
-                    vm.$set('pages', data.pages);
-                    vm.$set('count', data.count);
-                    vm.$set('config.page', page);
-                    vm.$set('selected', []);
+                this.Comments.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page }, function (data) {
+                    this.$set('comments', data.comments);
+                    this.$set('pages', data.pages);
+                    this.$set('count', data.count);
+                    this.$set('config.page', page);
+                    this.$set('selected', []);
                 });
             },
 
             getSelected: function() {
+                var vm = this;
                 return this.comments.filter(function(comment) { return vm.selected.indexOf(comment.id.toString()) !== -1; });
             },
 
             getStatusText: function(comment) {
-                return this.data.statuses[comment.status];
+                return this.statuses[comment.status];
             },
 
             reply: function(comment) {

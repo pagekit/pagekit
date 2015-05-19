@@ -1,6 +1,6 @@
-<?php $view->script('role-index', 'system/user:app/admin/role.js', ['system', 'uikit']) ?>
+<?php $view->script('role-index', 'system/user:app/bundle/admin/roles.js', ['system', 'uikit']) ?>
 
-<div id="js-role" class="uk-form" v-cloak>
+<div id="roles" class="uk-form" v-cloak>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="pk-nestable" data-uk-sortable="{ handleClass: 'pk-nestable-handle', childClass: 'pk-nestable-item' }">
-                    <li v-repeat="role: rolesArray | orderBy 'priority'" v-ref="ordered">
+                    <li v-repeat="role: roles | orderBy 'priority'" v-ref="ordered">
                         <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">
                             <div class="pk-nestable-handle"></div>
                             <ol class="uk-subnav pk-subnav-icon uk-hidden" v.show="!role.isLocked">
@@ -49,10 +49,10 @@
 
                                 <span class="uk-position-relative" v-show="showFakeCheckbox(current, $key)">
                                     <input type="checkbox" checked disabled>
-                                    <span class="uk-position-cover" v-if="!current.isAdministrator" v-on="click: addPermission(current, $key)"></span>
+                                    <span class="uk-position-cover" v-if="!current.isAdministrator" v-on="click: addPermission(current, $key), click: savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" value="{{ $key }}" v-show="!showFakeCheckbox(current, $key)" v-checkbox="current.permissions">
+                                <input type="checkbox" value="{{ $key }}" v-show="!showFakeCheckbox(current, $key)" v-checkbox="current.permissions" v-on="click: savePermissions(current)">
 
                             </td>
                         </tr>
@@ -64,7 +64,7 @@
     </div>
 
     <div id="modal-role" class="uk-modal">
-        <form class="uk-modal-dialog uk-form-stacked" v-on="submit: update">
+        <form class="uk-modal-dialog uk-form-stacked" v-on="submit: save">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Add Role' | trans }}</h2>

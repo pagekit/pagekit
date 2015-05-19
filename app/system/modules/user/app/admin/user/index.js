@@ -1,6 +1,6 @@
 jQuery(function ($) {
 
-    var vm = new Vue({
+    new Vue({
 
         el: '#js-user',
 
@@ -47,7 +47,7 @@ jQuery(function ($) {
 
             save: function (user) {
                 this.resource.save({ id: user.id }, { user: user }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -61,14 +61,14 @@ jQuery(function ($) {
                 });
 
                 this.resource.save({ id: 'bulk' }, { users: users }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
 
             remove: function () {
                 this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -83,8 +83,7 @@ jQuery(function ($) {
             },
 
             showRoles: function (user) {
-                return Vue
-                    .filter('toArray')(user.roles)
+                return user.roles
                     .filter(function (role) {
                         return role.id != 2;
                     })
@@ -99,15 +98,17 @@ jQuery(function ($) {
                 page = page !== undefined ? page : this.config.page;
 
                 this.resource.query({ filter: this.config.filter, page: page }, function (data) {
-                    vm.$set('users', data.users);
-                    vm.$set('pages', data.pages);
-                    vm.$set('count', data.count);
-                    vm.$set('config.page', page);
-                    vm.$set('selected', []);
+                    this.$set('users', data.users);
+                    this.$set('pages', data.pages);
+                    this.$set('count', data.count);
+                    this.$set('config.page', page);
+                    this.$set('selected', []);
                 });
             },
 
             getSelected: function () {
+                var vm = this;
+
                 return this.users.filter(function (user) {
                     return vm.selected.indexOf(user.id.toString()) !== -1;
                 });

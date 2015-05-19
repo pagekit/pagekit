@@ -16,7 +16,7 @@ class RoleApiController
      */
     public function indexAction()
     {
-        return Role::findAll();
+        return array_values(Role::findAll());
     }
 
     /**
@@ -80,6 +80,6 @@ class RoleApiController
             $this->deleteAction($id);
         }
 
-        return Role::findAll();
+        return ['message' => 'Success'];
     }
 }

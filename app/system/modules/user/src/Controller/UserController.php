@@ -85,7 +85,7 @@ class UserController
             ],
             '$data' => [
                 'permissions' => App::module('system/user')->getPermissions(),
-                'roles'       => Role::query()->orderBy('priority')->get()
+                'roles'       => array_values(Role::query()->orderBy('priority')->get())
             ]
         ];
     }
@@ -106,7 +106,7 @@ class UserController
             ],
             '$data' => [
                 'permissions' => App::module('system/user')->getPermissions(),
-                'roles'       => Role::query()->orderBy('priority')->get()
+                'roles'       => array_values(Role::query()->orderBy('priority')->get())
             ]
         ];
     }
