@@ -23,13 +23,8 @@ jQuery(function ($) {
     });
 
     // offcanvas menu
-    menu.$addChild({
-
-        el: '#offcanvas',
-
-        inherit: true
-
-    });
+    menu.$addChild({el: '#offcanvas', inherit: true});
+    menu.$addChild({el: '#offcanvas-flip', inherit: true});
 
     // main menu order
     // $('.js-menu').on('stop.uk.sortable', function () {
