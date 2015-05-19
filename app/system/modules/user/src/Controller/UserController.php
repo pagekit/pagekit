@@ -7,10 +7,13 @@ use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\User\Entity\Role;
 use Pagekit\User\Entity\User;
 
+/**
+ * @Access(admin=true)
+ */
 class UserController
 {
     /**
-     * @Access("user: manage users", admin=true)
+     * @Access("user: manage users")
      * @Request({"filter": "array", "page":"int"})
      */
     public function indexAction($filter = null, $page = 0)
@@ -36,7 +39,7 @@ class UserController
     }
 
     /**
-     * @Access("user: manage users", admin=true)
+     * @Access("user: manage users")
      * @Request({"id": "int"})
      */
     public function editAction($id = 0)
@@ -71,7 +74,7 @@ class UserController
     }
 
     /**
-     * @Access("user: manage user permissions", admin=true)
+     * @Access("user: manage user permissions")
      */
     public function permissionsAction()
     {
@@ -88,7 +91,7 @@ class UserController
     }
 
     /**
-     * @Access("user: manage user permissions", admin=true)
+     * @Access("user: manage user permissions")
      * @Request({"id": "int"})
      */
     public function rolesAction($id = null)
@@ -109,7 +112,7 @@ class UserController
     }
 
     /**
-     * @Access("user: manage settings", admin=true)
+     * @Access("user: manage settings")
      */
     public function settingsAction()
     {

@@ -15,7 +15,7 @@ class Access
     /**
      * @var bool
      */
-    protected $admin = false;
+    protected $admin = null;
 
     /**
      * Constructor.

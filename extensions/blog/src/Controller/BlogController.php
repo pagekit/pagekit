@@ -7,10 +7,13 @@ use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
 use Pagekit\User\Entity\Role;
 
+/**
+ * @Access(admin=true)
+ */
 class BlogController
 {
     /**
-     * @Access("blog: manage content", admin=true)
+     * @Access("blog: manage content")
      * @Request({"filter": "array", "page":"int"})
      */
     public function postAction($filter = null, $page = 0)
@@ -32,7 +35,7 @@ class BlogController
 
     /**
      * @Route("/post/edit", name="post/edit")
-     * @Access("blog: manage content", admin=true)
+     * @Access("blog: manage content")
      * @Request({"id": "int"})
      */
     public function editAction($id = 0)
@@ -83,7 +86,7 @@ class BlogController
     }
 
     /**
-     * @Access("blog: manage comments", admin=true)
+     * @Access("blog: manage comments")
      * @Request({"filter": "array", "post":"int", "page":"int"})
      */
     public function commentAction($filter = [], $post = 0, $page = 0)
@@ -107,7 +110,7 @@ class BlogController
     }
 
     /**
-     * @Access("blog: manage settings", admin=true)
+     * @Access("blog: manage settings")
      */
     public function settingsAction()
     {

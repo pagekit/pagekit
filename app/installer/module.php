@@ -19,7 +19,7 @@ return [
         });
 
         $app->error(function (NotFoundException $e) use ($app) {
-            return $app['response']->redirect('@installer/installer');
+            return $app['response']->redirect('@installer');
         });
 
     },
@@ -42,7 +42,7 @@ return [
 
     'controllers' => [
 
-        '@installer: /' => 'Pagekit\\Installer\\InstallerController'
+        '@installer: /installer' => 'Pagekit\\Installer\\InstallerController'
 
     ],
 

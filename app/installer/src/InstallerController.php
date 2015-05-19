@@ -7,9 +7,6 @@ use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
 
-/**
- * @Route("/installer")
- */
 class InstallerController
 {
     /**
