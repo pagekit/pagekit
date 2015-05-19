@@ -180,11 +180,14 @@
             },
 
             createFolder: function () {
-                var name = prompt(this.$trans('Folder Name'), '');
 
-                if (!name) return;
+                UIkit.modal.prompt(this.$trans('Folder Name'), '', function(name){
 
-                this.command('createfolder', { name: name });
+                    if (!name) return;
+
+                    this.command('createfolder', { name: name });
+
+                }.bind(this));
             },
 
             rename: function (oldname) {
@@ -208,9 +211,12 @@
                     names = this.selected;
                 }
 
-                if (!names || !confirm(this.$trans('Are you sure?'))) return;
+                if (!names) return;
 
-                this.command('removefiles', { names: names });
+                if (UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
+                    this.command('removefiles', { names: names });
+                }.bind(this)));
+
             },
 
             /**
@@ -298,7 +304,7 @@
                     };
 
                 UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'), settings);
-                UIkit.uploadDrop(this.$el, settings);
+                UIkit.uploadDrop($(this.$el).parents('.uk-modal').length ? this.$el: $('html'), settings);
             }
 
         },
