@@ -108,7 +108,7 @@ class RegistrationController
 
         App::message()->success($message);
 
-        return ['redirect' => App::url('@user/auth/login', [], true)];
+        return ['redirect' => App::url('@user/login', [], true)];
     }
 
     /**
@@ -144,7 +144,7 @@ class RegistrationController
 
         $user->save();
 
-        return App::redirect('@user/auth/login');
+        return App::redirect('@user/login');
     }
 
     protected function sendWelcomeEmail($user)

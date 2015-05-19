@@ -80,7 +80,7 @@ class AccessListener implements EventSubscriberInterface
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
-        if (strpos(App::request()->get('redirect'), App::url('@system/admin', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
+        if (strpos(App::request()->get('redirect'), App::url('@system', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
             throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
@@ -114,11 +114,11 @@ class AccessListener implements EventSubscriberInterface
             $params = [];
 
             // redirect to default URL for POST requests and don't explicitly redirect the default URL
-            if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system/admin') {
+            if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system') {
                 $params['redirect'] = App::url()->current(true);
             }
 
-            $event->setResponse(App::response()->redirect('@system/admin/login', $params));
+            $event->setResponse(App::response()->redirect('@system/login', $params));
         }
     }
 

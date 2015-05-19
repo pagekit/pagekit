@@ -1,4 +1,4 @@
-<form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@user/auth/authenticate') ?>" method="post">
+<form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
     <h1 class="uk-article-title"><?= __('Login') ?></h1>
 

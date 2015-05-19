@@ -34,6 +34,6 @@ class MigrationController
             App::message()->warning(__('Your Pagekit database is already up-to-date!'));
         }
 
-        return App::redirect('@system/admin');
+        return App::redirect('@system');
     }
 }

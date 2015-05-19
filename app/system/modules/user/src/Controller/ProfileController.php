@@ -12,7 +12,7 @@ class ProfileController
     public function indexAction()
     {
         if (!App::user()->isAuthenticated()) {
-            return App::redirect('@user/auth/login', ['redirect' => App::url()->current()]);
+            return App::redirect('@user/login', ['redirect' => App::url()->current()]);
         }
 
         return [

@@ -21,7 +21,7 @@
 
                     <?= $view->render('messages') ?>
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@user/auth/authenticate') ?>" method="post">
+                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>

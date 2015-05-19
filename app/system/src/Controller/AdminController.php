@@ -23,7 +23,7 @@ class AdminController
     public function loginAction()
     {
         if (App::user()->isAuthenticated()) {
-            return App::redirect('@system/admin');
+            return App::redirect('@system');
         }
 
         return [
@@ -33,7 +33,7 @@ class AdminController
                 'layout' => false
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'redirect' => App::request()->get('redirect') ? : App::url('@system/admin', [], true),
+            'redirect' => App::request()->get('redirect') ? : App::url('@system', [], true),
             'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
         ];
     }
