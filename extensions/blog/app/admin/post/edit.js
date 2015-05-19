@@ -2,8 +2,6 @@
 
 jQuery(function ($) {
 
-    var _ = Vue.util.extend({}, Vue.util);
-
     var vm = new Vue({
 
         el: '#js-post',
@@ -17,22 +15,10 @@ jQuery(function ($) {
             this.resource = this.$resource('api/blog/post/:id');
         },
 
-        ready: function() {
-
-            $(this.$el).on('change', function(e) {
-                _.trigger(e.target, 'change');
-            });
-
-            $(this.$el).on('input', function(e) {
-                _.trigger(e.target, 'input');
-            });
-
-        },
-
         computed: {
 
             statuses: function() {
-                return Vue.filter('toArray')($.map(this.data.statuses, function(status, id) { return { text: status, value: id }; }));
+                return _.map(this.data.statuses, function(status, id) { return { text: status, value: id }; } );
             },
 
             authors: function() {
@@ -88,11 +74,5 @@ jQuery(function ($) {
         }
 
     });
-
-    _.trigger = function(el, event) {
-        var e = document.createEvent('HTMLEvents');
-        e.initEvent(event, false, false);
-        el.dispatchEvent(e);
-    };
 
 });

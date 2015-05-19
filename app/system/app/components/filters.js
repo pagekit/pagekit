@@ -22,32 +22,6 @@ Vue.filter('date', function(date, format) {
     return this.$date(date, format);
 });
 
-Vue.filter('first', function(collection) {
-    return Vue.filter('toArray')(collection)[0];
-});
-
-Vue.filter('length', function(collection) {
-    return Vue.filter('toArray')(collection).length;
-});
-
-Vue.filter('toArray', function(collection) {
-
-    if (_.isPlainObject(collection)) {
-        return Object.keys(collection).map(function(key) {
-            return collection[key];
-        });
-    }
-
-    return _.isArray(collection) ? collection : [];
-});
-
-Vue.filter('toObject', function(collection) {
-    return _.isArray(collection) ? collection.reduce(function(obj, value, key) {
-        obj[key] = value;
-        return obj;
-    }, {}) : collection;
-});
-
 Vue.filter('toOptions', function toOptions(collection) {
     return Object.keys(collection).map(function (key) {
 
