@@ -57,11 +57,7 @@
 
 <script>
 
-    var $ = require('jquery');
-
     module.exports = Vue.extend({
-
-        template: __vue_template__,
 
         data: function() {
 
@@ -75,7 +71,7 @@
 
         created: function() {
 
-            this.$addChild(require('./edit.vue'));
+            this.$addChild(require('../edit/modal.vue'));
 
             this.Widgets = this.$resource('api/widget/:id');
             this.load();
@@ -165,7 +161,9 @@
 
         components: {
 
-            'widget-list': require('./list.vue')
+            'widget-list': require('./list.vue'),
+            'site-text': require('../widgets/text.vue'),
+            'assignment': require('../edit/assignment.vue')
 
         }
 

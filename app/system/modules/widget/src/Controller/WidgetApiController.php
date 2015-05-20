@@ -9,7 +9,7 @@ use Pagekit\Widget\Entity\Widget;
 /**
  * @Access("system: manage widgets")
  */
-class WidgetsApiController
+class WidgetApiController
 {
     protected $widgets;
 
@@ -145,7 +145,7 @@ class WidgetsApiController
      */
     public function configAction()
     {
-        return array_merge($this->widgets->config('widget.config', new \stdClass()), ['defaults' => $this->widgets->config('widget.defaults')]);
+        return $this->widgets->config('widget.config', []) + ['defaults' => $this->widgets->config('widget.defaults')];
     }
 
     /**

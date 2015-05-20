@@ -44,15 +44,17 @@
 
     module.exports = {
 
-        name: 'theme-settings',
-        label: 'Theme',
-        priority: 50,
+        section: {
+            name: 'theme-settings',
+            label: 'Theme',
+            priority: 50
+        },
 
         template: __vue_template__,
         paramAttributes: ['widget', 'config', 'form']
 
     };
 
-    window.Widgets.addSection(module.exports)
+    window.Widgets.component('theme-settings', module.exports)
 
 </script>

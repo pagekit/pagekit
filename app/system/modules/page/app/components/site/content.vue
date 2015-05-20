@@ -25,8 +25,6 @@
         </div>
     </div>
 
-    <pre>{{ page | json }}</pre>
-
 </template>
 
 <script>

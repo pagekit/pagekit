@@ -63,10 +63,12 @@
 
     module.exports = {
 
-        name: 'site-menu',
-        label: 'Settings',
-        active: 'site.menu',
-        priority: 0,
+        section: {
+            name: 'site-menu',
+            label: 'Settings',
+            active: 'site.menu',
+            priority: 0
+        },
 
         template: __vue_template__,
         paramAttributes: ['widget', 'config', 'form'],
@@ -85,6 +87,6 @@
 
     };
 
-    window.Widgets.addSection(module.exports)
+    window.Widgets.component('site-menu', module.exports)
 
 </script>

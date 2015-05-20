@@ -20,12 +20,13 @@
 
     module.exports = {
 
-        name: 'site-text',
-        label: 'Settings',
-        active: 'site.text',
-        priority: 0,
+        section: {
+            name: 'site-text',
+            label: 'Settings',
+            active: 'site.text',
+            priority: 0
+        },
 
-        template: __vue_template__,
         paramAttributes: ['widget', 'config', 'form'],
 
         ready: function() {

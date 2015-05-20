@@ -22,16 +22,18 @@
 
     module.exports = {
 
-        name: 'site-user-login',
-        label: 'Settings',
-        active: 'site.user.login',
-        priority: 0,
+        section: {
+            name: 'site-user-login',
+            label: 'Settings',
+            active: 'site.user.login',
+            priority: 0
+        },
 
         template: __vue_template__,
         paramAttributes: ['widget', 'config', 'form']
 
     };
 
-    window.Widgets.addSection(module.exports)
+    window.Widgets.component('site-user-login', module.exports)
 
 </script>

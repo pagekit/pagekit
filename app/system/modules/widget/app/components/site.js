@@ -1,7 +1,7 @@
 var Site = require('site');
 var Widgets = require('./index/index.vue');
 
-Site.component('widgets', Widgets.extend({
+module.exports = Widgets.extend({
 
     section: {
         name: 'widgets',
@@ -9,4 +9,6 @@ Site.component('widgets', Widgets.extend({
         priority: 20
     }
 
-}));
+});
+
+Site.component('widgets', module.exports);

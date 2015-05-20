@@ -28,11 +28,12 @@
 
     module.exports = {
 
-        name: 'assignment',
-        label: 'Assignment',
-        priority: 100,
+        section: {
+            name: 'assignment',
+            label: 'Assignment',
+            priority: 100
+        },
 
-        template: __vue_template__,
         paramAttributes: ['widget'],
 
         partials: {

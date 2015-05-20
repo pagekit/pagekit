@@ -24,7 +24,7 @@ class WidgetModule extends Module
                 return;
             }
 
-            $view->script('widget-site', 'widget:app/bundle/site.js', ['site', 'widgets', 'uikit-form-select']);
+            $view->script('widgets', 'widget:app/bundle/site.js', ['site', 'uikit-form-select']);
 
             $view->data('$widgets', [
 
@@ -78,9 +78,6 @@ class WidgetModule extends Module
         });
 
         $app->on('app.request', function () use ($app) {
-
-            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js');
-
             $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
         });
 

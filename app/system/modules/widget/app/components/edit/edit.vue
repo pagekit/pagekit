@@ -1,94 +1,65 @@
 <template>
 
-    <div class="uk-grid" data-uk-grid-margin>
+    <form class="uk-form uk-container uk-container-center" name="widgetForm" v-on="valid: save">
 
-        <div class="uk-width-medium-3-4 uk-form-horizontal">
+        <div class="uk-clearfix uk-margin" data-uk-margin>
 
-            <ul class="uk-tab" v-el="tab">
-                <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
-            </ul>
+            <div class="uk-float-left">
 
-            <div class="uk-switcher uk-margin" v-el="content">
-                <div v-repeat="section: sections | active | orderBy 'priority'">
-                    <div v-component="{{ section.name }}" widget="{{ widget }}" config="{{ widgetConfig }}" form="{{ form }}"></div>
-                </div>
+                <h2 class="uk-h2" v-if="widget.id">{{ widget.title }} ({{ type.name }})</h2>
+                <h2 class="uk-h2" v-if="!widget.id">{{ 'Add %type%' | trans {type:type.name} }}</h2>
+
             </div>
 
-        </div>
+            <div class="uk-float-right">
 
-        <div class="uk-width-medium-1-4">
-
-            <div class="uk-panel uk-panel-divider uk-form-stacked">
-
-                <div class="uk-form-row">
-                    <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
-                    <div class="uk-form-controls">
-                        <select id="form-position" name="position" class="uk-width-1-1" v-model="position" options="positionOptions"></select>
-                    </div>
-                </div>
-
-                <div class="uk-form-row">
-                    <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
-                    <div class="uk-form-controls uk-form-controls-text">
-                        <p v-repeat="role: roles" class="uk-form-controls-condensed">
-                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="widget.roles"> {{ role.name }}</label>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="uk-form-row">
-                    <span class="uk-form-label">{{ 'Options' | trans }}</span>
-                    <div class="uk-form-controls">
-                        <label><input type="checkbox" v-model="widget.settings.show_title"> {{ 'Show Title' | trans }}</label>
-                    </div>
-                </div>
+                <a class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</a>
+                <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="uk-grid" data-uk-grid-margin>
+
+            <div class="uk-width-medium-3-4 uk-form-horizontal">
+
+                <ul class="uk-tab" v-el="tab">
+                    <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+                </ul>
+
+                <div class="uk-switcher uk-margin" v-el="content">
+                    <div v-repeat="section: sections | active | orderBy 'priority'">
+                        <div v-component="{{ section.name }}" widget="{{ widget }}" type="{{ type }}" config="{{ config }}" form="{{ widgetForm }}"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="uk-width-medium-1-4" v-component="sidebar"></div>
+
+        </div>
+
+    </form>
 
 </template>
 
 <script>
 
-    var Widgets = require('widgets');
-
-    Widgets.addSection(require('../widgets/text.vue'));
-    Widgets.addSection(require('../edit/assignment.vue'));
-
     module.exports = {
 
-        paramAttributes: ['widget', 'config', 'position', 'form'],
+        paramAttributes: ['widget', 'type', 'config', 'position'],
 
         data: function() {
+
             return _.merge({}, window.$widgets);
+
         },
 
-        created: function () {
-            var self = this;
+        ready: function () {
 
-            Widgets.sections.forEach(function(options) {
-                self.$options.components[options.name] = Vue.extend(options);
-            });
-
-            this.Widgets = this.$resource('api/widget/:id');
-        },
-
-        ready: function() {
             UIkit.tab(this.$$.tab, { connect: this.$$.content });
-        },
-
-        watch: {
-
-            widget: function(widget) {
-
-                if (widget) {
-                    this.$set('widget.settings', _.defaults({}, widget.settings, this.type.defaults));
-                }
-
-            }
+            this.$set('widget.settings', _.defaults({}, this.widget.settings, this.type.defaults));
 
         },
 
@@ -108,24 +79,18 @@
 
         computed: {
 
-            positionOptions: function() {
-                return [{ text: this.$trans('- Assign -'), value: '' }].concat(
-                    _.map(this.positions, function(position) {
-                        return { text: this.$trans(position.name), value: position.id };
-                    }.bind(this))
-                );
-            },
+            sections: function () {
 
-            type: function() {
-                return _.find(this.types, { id: this.widget.type });
-            },
+                var sections = [];
 
-            typeName: function() {
-                return this.type ? this.type.name : this.$trans('Extension not loaded');
-            },
+                // TODO pass components from parent
+                _.each(this.$parent.$parent.$options.components, function (component) {
+                    if (component.options.section) {
+                        sections.push(component.options.section);
+                    }
+                });
 
-            sections: function() {
-                return Widgets.sections;
+                return sections;
             }
 
         },
@@ -136,12 +101,12 @@
 
                 e.preventDefault();
 
-                var data = { widget: this.widget, config: this.config, position: this.position };
+                var data = { widget: this.widget, config: this.config };
 
                 this.$broadcast('save', data);
 
-                this.Widgets.save({ id: this.widget.id }, data, function() {
-                    this.$dispatch('saved', data);
+                this.$resource('api/widget/:id').save({ id: this.widget.id }, data, function() {
+                    this.$dispatch('saved');
                 });
 
             }
@@ -152,8 +117,13 @@
 
             settings: require('./settings.html')
 
-        }
+        },
 
+        components: {
+
+            sidebar: require('./sidebar.vue')
+
+        }
     };
 
 </script>
