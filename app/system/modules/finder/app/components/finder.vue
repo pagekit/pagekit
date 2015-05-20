@@ -5,7 +5,8 @@
         <div class="pk-toolbar uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-                <h2 class="uk-margin-remove">{{ 'Finder' | trans }}</h2>
+                <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice count {count:count} }}</h2>
+                <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice selected.length {count:selected.length} }}</h2>
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
@@ -80,6 +81,7 @@
                 path: '/',
                 mode: 'write',
                 view: 'table',
+                count: '',
                 upload: {},
                 selected: []
             };
@@ -250,9 +252,10 @@
             load: function () {
                 return this.resource.get({path: this.path, root: this.root}, function (data) {
 
-                    this.$set('selected', []);
-                    this.$set('folders', data.folders || []);
                     this.$set('files', data.files || []);
+                    this.$set('folders', data.folders || []);
+                    this.$set('count', this.files.length + this.folders.length);
+                    this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
                 });
