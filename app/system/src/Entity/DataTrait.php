@@ -46,6 +46,10 @@ trait DataTrait
      */
     public function set($key, $value)
     {
+        if (null === $this->data) {
+            $this->data = [];
+        }
+
         Arr::set($this->data, $key, $value);
     }
 }

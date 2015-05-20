@@ -19,8 +19,19 @@ module.exports = {
     events: {
 
         loaded: function() {
-            var parents = _(this.nodes).sortBy('priority').groupBy('parentId').value();
-            this.$set('tree', _.merge(parents, _.groupBy(parents[0] || [], 'menu')));
+
+            var vm = this,
+                tree = _(this.nodes).sortBy('priority').groupBy('parentId').value(),
+                menus = _.groupBy(tree[0] || [], 'menu');
+
+            _.forEach(menus, function(nodes, menu) {
+                if (!_.find(vm.menus, {id: menu})) {
+                    menus[''] = menus[''].concat(nodes);
+                    delete menus[menu];
+                }
+            });
+
+            this.$set('tree', _.merge(tree, menus));
         }
 
     },

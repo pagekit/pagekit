@@ -180,4 +180,16 @@ class Node implements NodeInterface, \JsonSerializable
                     ->execute()->fetchColumn();
         }
     }
+
+    /**
+     * @PreDelete
+     */
+    public function preDelete()
+    {
+        // Update children's parents
+        foreach (self::where('parent_id = ?', [$this->id])->get() as $child) {
+            $child->setParentId($this->parentId);
+            $child->save();
+        }
+    }
 }
