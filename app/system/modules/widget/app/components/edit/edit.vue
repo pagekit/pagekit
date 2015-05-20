@@ -51,9 +51,7 @@
         paramAttributes: ['widget', 'type', 'config', 'position'],
 
         data: function() {
-
             return _.merge({}, window.$widgets);
-
         },
 
         ready: function () {
@@ -83,8 +81,7 @@
 
                 var sections = [];
 
-                // TODO pass components from parent
-                _.each(this.$parent.$parent.$options.components, function (component) {
+                _.each(window.Widgets.options.components, function (component) {
                     if (component.options.section) {
                         sections.push(component.options.section);
                     }

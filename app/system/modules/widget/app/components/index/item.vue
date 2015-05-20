@@ -1,6 +1,6 @@
 <template>
 
-    <li class="uk-nestable-item" data-id="{{ widget.id }}">
+    <li class="uk-nestable-item" data-id="{{ widget.id }}" v-show="widget | showWidget">
 
         <div class="uk-nestable-panel pk-table-fake">
 
