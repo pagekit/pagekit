@@ -19,8 +19,7 @@ class SiteController
                 'name'  => 'site:views/admin/index.php'
             ],
             '$data' => [
-                'types'     => array_values($site->getTypes()),
-                'frontpage' => $site->config('frontpage_node')
+                'types' => array_values($site->getTypes())
             ]
         ];
     }

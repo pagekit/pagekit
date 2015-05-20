@@ -37,13 +37,11 @@ var Settings = Vue.extend({
 
             e.preventDefault();
 
-            var self = this;
-
             this.$broadcast('save', this.$data);
 
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
 
-                UIkit.notify(self.$trans('Settings saved.'));
+                UIkit.notify(this.$trans('Settings saved.'));
 
             }, function (data) {
 

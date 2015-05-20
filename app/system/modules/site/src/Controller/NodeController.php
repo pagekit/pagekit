@@ -29,9 +29,9 @@ class NodeController
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"node": "array", "id": "int", "frontpage": "bool"}, csrf=true)
+     * @Request({"node": "array", "id": "int"}, csrf=true)
      */
-    public function saveAction($data, $id = 0, $frontpage = false)
+    public function saveAction($data, $id = 0)
     {
         if (!$node = Node::find($id)) {
             $node = new Node;
@@ -39,12 +39,6 @@ class NodeController
         }
 
         $node->save($data);
-
-        if ($frontpage && $type = App::module('system/site')->getType($node->getType())) {
-            $config = App::config('system/site');
-            $config->set('frontpage_node', $node->getId());
-            $config->set('frontpage', $type->getLink($node));
-        }
 
         return $node;
     }

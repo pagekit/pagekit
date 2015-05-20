@@ -2,10 +2,11 @@
 
 namespace Pagekit\Routing\Controller;
 
+use Pagekit\Event\Event;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Kernel\Event\GetControllerEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Routing\Event\RouteResourcesEvent;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -67,7 +68,8 @@ class CallbackCollection implements EventSubscriberInterface
     /**
      * Resolves the callback as controller.
      *
-     * @param GetControllerEvent $event
+     * @param Event   $event
+     * @param Request $request
      */
     public function getController($event, $request)
     {

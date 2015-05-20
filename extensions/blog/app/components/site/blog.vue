@@ -8,7 +8,7 @@
 
     module.exports = {
 
-        paramAttributes: ['node', 'form'],
+        paramAttributes: ['node', 'form', 'type'],
 
         section: {
             name: 'blog',

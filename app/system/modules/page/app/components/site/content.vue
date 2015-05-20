@@ -64,7 +64,7 @@
 
                 this.$resource('api/page/:id').get({ id: id}, function (page) {
                     this.$set('page', page);
-                    this.editor.editor.setValue(page.content);
+                    this.editor.editor.setValue(page.content || '');
                 });
             },
 

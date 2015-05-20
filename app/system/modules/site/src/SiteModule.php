@@ -12,6 +12,7 @@ class SiteModule extends Module
 {
     protected $types;
     protected $menus;
+    protected $frontpage;
 
     /**
      * {@inheritdoc}
@@ -29,14 +30,20 @@ class SiteModule extends Module
         $app->on('app.request', function() use ($app) {
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
                 if ($type = $this->getType($node->getType())) {
+
+                    if ($node->get('frontpage')) {
+                        $this->setFrontpage($type->getLink($node));
+                    }
+
                     $type->bind($node);
                 }
             }
+
         }, 150);
 
         $app->on('app.request', function() use ($app) {
-            if ($frontpage = $this->config('frontpage')) {
-                $app['aliases']->add('/', $frontpage);
+            if ($this->frontpage) {
+                $app['aliases']->add('/', $this->frontpage);
             } else {
                 $app['callbacks']->get('/', '_frontpage', function() {
                     return __('No Frontpage assigned.');
@@ -120,5 +127,25 @@ class SiteModule extends Module
     public function registerMenu($id, $label, array $options = [])
     {
         $this->menus[$id] = array_merge($options, compact('id', 'label'));
+    }
+
+    /**
+     * Gets the sites frontpage route.
+     *
+     * @return string
+     */
+    public function getFrontpage()
+    {
+        return $this->frontpage;
+    }
+
+    /**
+     * Sets the sites frontpage route.
+     *
+     * @param string $name
+     */
+    public function setFrontpage($name)
+    {
+        $this->frontpage = $name;
     }
 }

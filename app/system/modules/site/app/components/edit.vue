@@ -26,7 +26,7 @@
 
         <div class="uk-switcher uk-margin" v-el="content">
             <div v-repeat="section: sections | active | orderBy 'priority'">
-                <div v-component="{{ section.name }}" node="{{ node }}" form="{{ nodeForm }}"></div>
+                <div v-component="{{ section.name }}" node="{{ node }}" form="{{ nodeForm }}" type="{{ type }}"></div>
             </div>
         </div>
 
@@ -43,10 +43,6 @@
 
         inherit: true,
 
-        data: function() {
-            return {node: {}};
-        },
-
         ready: function() {
             this.tab = UIkit.tab(this.$$.tab, { connect: this.$$.content });
         },
@@ -54,7 +50,7 @@
         watch: {
 
             selected: function(node) {
-                this.$set('node', _.extend({}, node));
+                this.$set('node', _.merge({}, node));
                 this.tab.switcher.show(0);
             }
 
@@ -83,12 +79,22 @@
                 return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
             },
 
-            isFrontpage: function() {
-                return this.node.id === this.frontpage;
-            },
-
             sections: function() {
                 return this.$root.sections
+            }
+
+        },
+
+        events: {
+
+            save: function() {
+
+                var prev = _.find(this.nodes, 'data.frontpage');
+                if (this.$get('node.data.frontpage') && prev && prev !== this.node) {
+                    delete prev.data.frontpage;
+                    this.Nodes.save({ id: prev.id }, {node: prev});
+                }
+
             }
 
         },
@@ -99,18 +105,18 @@
 
                 e.preventDefault();
 
-                var self = this, data = { node: this.node };
+                var data = { node: this.node }, type = this.type;
 
+                this.$emit('save', data);
                 this.$broadcast('save', data);
 
                 this.Nodes.save({ id: this.node.id }, data, function(node) {
 
-                    self.selected.id = parseInt(node.id);
-                    self.load();
+                    this.selected.id = parseInt(node.id);
+                    this.load();
 
-                    if (data.frontpage) {
-                        self.$set('frontpage', node.id);
-                    }
+                    UIkit.notify(this.$trans('%type% saved.', {type: type.label}));
+
                 });
             },
 

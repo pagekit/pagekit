@@ -28,6 +28,6 @@
 <div class="uk-form-row" v-if="type.url">
     <span class="uk-form-label">{{ 'Options' | trans }}</span>
     <div class="uk-form-controls">
-        <label><input type="checkbox" name="frontpage" v-model="isFrontpage"> {{ 'Frontpage' | trans }}</label>
+        <label><input type="checkbox" v-model="node.data.frontpage"> {{ 'Frontpage' | trans }}</label>
     </div>
 </div>

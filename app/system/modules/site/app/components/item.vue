@@ -7,7 +7,7 @@
             <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
             {{ node.title }}
 
-            <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="isFrontpage"></i>
+            <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="node.data.frontpage"></i>
             <a class="uk-hidden uk-float-right" title="{{ 'Delete' | trans }}" v-on="click: delete"><i class="uk-icon-minus-circle"></i></a>
         </div>
 
@@ -34,10 +34,6 @@
 
             isParent: function() {
                 return this.tree[this.node.id];
-            },
-
-            isFrontpage: function() {
-                return this.node.id === this.frontpage;
             }
 
         },

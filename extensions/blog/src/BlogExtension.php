@@ -24,9 +24,8 @@ class BlogExtension extends Extension
         );
 
         $app->on('app.request', function() use ($app) {
-            $site = $app['module']->get('system/site');
-            $site->config['frontpage'] = $site->config['frontpage'] ?: '@blog/site';
-        }, 130);
+            $app['module']->get('system/site')->setFrontpage('@blog/site');
+        }, 175);
 
         $app->on('app.request', function() use ($app) {
             $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site');
