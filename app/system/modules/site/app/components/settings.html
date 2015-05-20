@@ -9,7 +9,7 @@
 <div class="uk-form-row">
     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
     <div class="uk-form-controls">
-        <span>{{ path }}</span><br>
+        <span>{{ $parent.path }}</span><br>
         <input id="form-slug" class="uk-form-width-large" type="text" name="node[slug]" v-model="node.slug" v-valid="alphaNum">
         <span class="uk-form-help-block uk-text-danger" v-show="form['node[slug]'].invalid">{{ 'Invalid slug.' | trans }}</span>
     </div>

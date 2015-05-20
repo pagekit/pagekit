@@ -19,7 +19,11 @@
 
             UIkit.nestable(this.$el, { maxDepth: 20, group: 'site.nodes' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
                 if (type !== 'removed') {
-                    self.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, self.load);
+                    self.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, function() {
+                        self.load();
+
+                        UIkit.notify(this.$trans('Order updated.'));
+                    });
                 }
             });
 
