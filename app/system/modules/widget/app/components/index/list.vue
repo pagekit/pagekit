@@ -1,8 +1,8 @@
 <template>
 
-    <ul v-el="nestable" class="uk-nestable uk-form">
+    <ul class="uk-nestable uk-form" v-el="nestable">
 
-        <widget-item v-repeat="widget: position.widgets"  v-show="widget | showWidget"></widget-item>
+        <widget-item v-repeat="widget: position.widgets" v-show="widget | showWidget"></widget-item>
 
     </ul>
 

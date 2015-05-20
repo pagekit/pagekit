@@ -25,7 +25,7 @@
 
         </div>
         <div data-uk-margin>
-            <input type="text" v-model="search" placeholder="{{ 'Search' | trans }}" v-on="keypress: $event.preventDefault() | key enter" debounce="200">
+            <input type="text" placeholder="{{ 'Search' | trans }}" v-model="search" v-on="keypress: $event.preventDefault() | key enter" debounce="200">
         </div>
     </div>
 
@@ -43,7 +43,7 @@
             <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
                 <div>
                     {{ position.name | trans }}
-                    <span v-if="position.description" class="uk-text-muted">{{ position.description | trans }}</span>
+                    <span class="uk-text-muted" v-if="position.description">{{ position.description | trans }}</span>
                 </div>
             </div>
 

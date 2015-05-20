@@ -1,11 +1,10 @@
 <template>
 
-    <div v-show="tree[menu.id].length" v-repeat="menu: menus" class="uk-form-row">
+    <div class="uk-form-row" v-show="$root.tree[menu.id].length" v-repeat="menu: $root.menus">
         <label for="form-h-it" class="uk-form-label">{{ menu.label }} {{ 'Menu' | trans }}</label>
         <div class="uk-form-controls uk-form-controls-text">
-
             <ul class="uk-list uk-margin-top-remove">
-                <li v-partial="#node-item" v-repeat="node: tree[menu.id]"></li>
+                <li v-partial="node-item" v-repeat="node: $root.tree[menu.id]"></li>
             </ul>
         </div>
     </div>
@@ -17,8 +16,8 @@
             {{ node.title }}
         </label>
 
-        <ul v-if="tree[node.id].length" class="uk-list">
-            <li v-partial="#node-item" v-repeat="node: tree[node.id]"></li>
+        <ul class="uk-list" v-if="$root.tree[node.id].length">
+            <li v-partial="node-item" v-repeat="node: $root.tree[node.id]"></li>
         </ul>
 
     </script>
@@ -34,9 +33,13 @@
         priority: 100,
 
         template: __vue_template__,
-        paramAttributes: ['widget', 'config', 'form'],
+        paramAttributes: ['widget'],
 
-        mixins: [require('../../../../site/app/tree.js')]
+        partials: {
+
+            'node-item': require('./item.html')
+
+        }
 
     }
 

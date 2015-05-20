@@ -23,7 +23,7 @@
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" name="position" class="uk-width-1-1" v-model="position"  options="positionOptions"></select>
+                        <select id="form-position" name="position" class="uk-width-1-1" v-model="position" options="positionOptions"></select>
                     </div>
                 </div>
 
@@ -136,12 +136,12 @@
 
                 e.preventDefault();
 
-                var self = this, data = { widget: this.widget, config: this.config, position: this.position };
+                var data = { widget: this.widget, config: this.config, position: this.position };
 
                 this.$broadcast('save', data);
 
                 this.Widgets.save({ id: this.widget.id }, data, function() {
-                    self.$dispatch('saved', data);
+                    this.$dispatch('saved', data);
                 });
 
             }

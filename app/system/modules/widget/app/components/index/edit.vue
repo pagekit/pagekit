@@ -49,14 +49,21 @@
         },
 
         ready: function() {
+
+            var self = this;
+
             this.modal = UIkit.modal(this.$$.modal);
-            this.modal.on('hide.uk.modal', this.cancel);
+            this.modal.on('hide.uk.modal', function() {
+                self.$set('widget', null);
+            });
         },
 
         watch: {
 
             widget: function (widget) {
-                this.modal[widget ? 'show' : 'hide']();
+                if (widget) {
+                    this.modal.show();
+                }
             }
 
         },
@@ -106,7 +113,7 @@
             },
 
             cancel: function() {
-                this.$set('widget', null);
+                this.modal.hide();
             }
 
         },
