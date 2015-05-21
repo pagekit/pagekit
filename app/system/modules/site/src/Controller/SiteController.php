@@ -10,6 +10,7 @@ use Pagekit\Application as App;
 class SiteController
 {
     /**
+     * @Route("site")
      * @Access(admin=true)
      */
     public function indexAction()
