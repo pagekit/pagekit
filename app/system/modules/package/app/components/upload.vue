@@ -10,12 +10,8 @@
     <div class="uk-modal" v-el="modal">
         <div class="uk-modal-dialog">
 
-            <div class="uk-alert uk-alert-danger uk-hidden" data-msg="checksum-mismatch">
-                {{ 'The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated.' | trans }}
-            </div>
-
-            <div class="uk-alert uk-alert-success uk-hidden" data-msg="update-available">
-                {{ 'There is an update available for the uploaded package. Please consider installing it instead.' | trans }}
+            <div class="uk-alert" v-class="uk-alert-danger:apiserver.error" v-show="apiserver.message">
+                {{ apiserver.message | trans }}
             </div>
 
             <div class="uk-grid">
@@ -69,7 +65,12 @@
                 pkg: {},
                 upload: null,
                 action: '',
-                progress: ''
+                progress: '',
+                apiserver: {
+                    requesting: false,
+                    message: '',
+                    error: false
+                }
             };
         },
 
@@ -106,8 +107,6 @@
 
             onComplete: function (data) {
 
-                console.log(data)
-
                 var self = this;
 
                 this.progress = '100%';
@@ -124,15 +123,42 @@
                 this.$set('upload', data);
                 this.$set('pkg', data.package);
 
-                // $.post(params.api + '/package/' + data.package.name, function (info) {
+                this.apiserver.requesting = true;
+                this.apiserver.message    = '';
+                this.apiserver.error      = false;
 
-                //     var version = info.versions[data.package.version];
+                $.post('//pagekit.com/api/package/' + data.package.name, function (info) {
 
-                //     if (version && version.dist.shasum != data.package.shasum) {
-                //         show('checksum-mismatch', upload);
-                //     }
+                    var package = info.versions[data.package.version];
 
-                // }, 'jsonp');
+                    if (package) {
+
+                        if (package.dist.shasum != data.package.shasum) {
+
+                            self.apiserver.message = 'The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated.';
+                            self.apiserver.error = true;
+
+                        } else {
+
+                            var currentversion = data.package.version;
+
+                            Object.keys(info.versions).forEach(function(version){
+
+                                if (version_compare(version, currentversion, '>')) {
+                                    currentversion = version;
+                                }
+                            });
+
+                            if (currentversion != data.package.version) {
+                                self.apiserver.message = 'There is an update available for the uploaded package. Please consider installing it instead.';
+                            }
+                        }
+                    }
+
+                }, 'jsonp').always(function(){
+
+                    self.apiserver.requesting = false;
+                });
 
                 this.modal.show();
             },
@@ -158,6 +184,74 @@
         }
 
     };
+
+    // source: https://raw.githubusercontent.com/kvz/phpjs/master/functions/info/version_compare.js
+    function version_compare(v1, v2, operator) {
+
+        var i = 0, x = 0, compare = 0, vm = { 'dev': -6, 'alpha': -5, 'a': -5, 'beta': -4, 'b': -4,'RC': -3, 'rc': -3, '#': -2, 'p': 1, 'pl': 1 };
+
+        var prepVersion = function (v) {
+            v = ('' + v).replace(/[_\-+]/g, '.');
+            v = v.replace(/([^.\d]+)/g, '.$1.').replace(/\.{2,}/g, '.');
+            return (!v.length ? [-8] : v.split('.'));
+        };
+
+        numVersion = function (v) {
+            return !v ? 0 : (isNaN(v) ? vm[v] || -7 : parseInt(v, 10));
+        };
+
+        v1 = prepVersion(v1);
+        v2 = prepVersion(v2);
+        x  = Math.max(v1.length, v2.length);
+
+        for (i = 0; i < x; i++) {
+
+            if (v1[i] == v2[i]) {
+                continue;
+            }
+
+            v1[i] = numVersion(v1[i]);
+            v2[i] = numVersion(v2[i]);
+
+            if (v1[i] < v2[i]) {
+                compare = -1;
+                break;
+            } else if (v1[i] > v2[i]) {
+                compare = 1;
+                break;
+            }
+        }
+
+        if (!operator) {
+            return compare;
+        }
+
+        switch (operator) {
+            case '>':
+            case 'gt':
+                return (compare > 0);
+            case '>=':
+            case 'ge':
+                return (compare >= 0);
+            case '<=':
+            case 'le':
+                return (compare <= 0);
+            case '==':
+            case '=':
+            case 'eq':
+                return (compare === 0);
+            case '<>':
+            case '!=':
+            case 'ne':
+                return (compare !== 0);
+            case '':
+            case '<':
+            case 'lt':
+                return (compare < 0);
+            default:
+                return null;
+        }
+    }
 
     Vue.component('v-upload', module.exports);
 
