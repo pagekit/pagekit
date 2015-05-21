@@ -43,8 +43,7 @@ var evalExp = function(expression) {
 
     } catch (e) {
 
-        // TODO fix when not in debug
-        if (Vue.config.warnExpressionErrors) {
+        if (Vue.config.debug) {
             Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
         }
     }
