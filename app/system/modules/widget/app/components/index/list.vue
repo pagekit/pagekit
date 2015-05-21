@@ -17,7 +17,7 @@
         ready: function() {
             var self = this;
 
-            UIkit.nestable(this.$$.nestable, { maxDepth: 1, group: 'widgets' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+            UIkit.nestable(this.$$.nestable, { maxDepth: 1, group: 'widgets' }).on('change.uk.nestable', function (e, el, type, root, nestable) {
                 if (type !== 'removed' && e.target.tagName == 'UL') {
                     self.reorder(self.position.id, nestable.list());
                 }

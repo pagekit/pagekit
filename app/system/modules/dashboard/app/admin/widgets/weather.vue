@@ -76,18 +76,17 @@
                         } else {
                             release([]);
                         }
+                    }).fail(function() {
+
+                        release([]);
+
                     });
                 },
 
                 template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
 
             })
-            .element.on('select.uk.autocomplete', function(e, data) {
-
-                if (!data) {
-                    return;
-                }
-
+            .on('selectitem.uk.autocomplete', function(e, data) {
                 self.$set('widget.uid', data.id);
                 self.$set('widget.location', data.value);
             });

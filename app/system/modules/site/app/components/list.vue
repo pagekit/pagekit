@@ -17,7 +17,7 @@
 
             var self = this;
 
-            UIkit.nestable(this.$el, { maxDepth: 20, group: 'site.nodes' }).element.on('change.uk.nestable', function (e, el, type, root, nestable) {
+            UIkit.nestable(this.$el, { maxDepth: 20, group: 'site.nodes' }).on('change.uk.nestable', function (e, el, type, root, nestable) {
                 if (type !== 'removed') {
                     self.Nodes.save({ id: 'updateOrder' }, { menu: self.menu.id, nodes: nestable.list() }, function() {
                         self.load();
