@@ -12,7 +12,7 @@ class SiteController
     /**
      * @Access(admin=true)
      */
-    public function siteAction()
+    public function indexAction()
     {
         $site = App::module('system/site');
 
@@ -28,7 +28,7 @@ class SiteController
     }
 
     /**
-     * @Route("/api/site", name="/api/site")
+     * @Route("api/site", name="api/site")
      * @Access("site: manage site")
      */
     public function apiSiteAction()
