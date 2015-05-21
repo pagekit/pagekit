@@ -127,7 +127,7 @@
                 this.apiserver.message    = '';
                 this.apiserver.error      = false;
 
-                $.post('//pagekit.com/api/package/' + data.package.name, function (info) {
+                this.$http('//pagekit.com/api/package/' + data.package.name, {jsonp:true}).success(function(info){
 
                     var package = info.versions[data.package.version];
 
@@ -155,7 +155,7 @@
                         }
                     }
 
-                }, 'jsonp').always(function(){
+                }).always(function(){
 
                     self.apiserver.requesting = false;
                 });
