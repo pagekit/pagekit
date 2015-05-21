@@ -12,8 +12,6 @@ function install (Vue) {
     Vue.url = Url;
     Vue.http = Http;
     Vue.resource = Resource;
-    Vue.options.url = {};
-    Vue.options.http = {};
 
     Object.defineProperties(Vue.prototype, {
 
