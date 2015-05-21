@@ -151,25 +151,19 @@ class PackageController
 
         Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
 
-        $extra = $package->getExtra();
+        $extra = $package->get('extra');
 
         if (isset($extra['image'])) {
-            $extra['image'] = App::url("{$temp}/$path/".$extra['image']);
+            $extra['image'] = App::url()->getStatic("{$temp}/$path/".$extra['image']);
         } else {
             $extra['image'] = App::url('app/system/assets/images/placeholder-icon.svg');
         }
 
+        $package->set('extra', $extra);
+        $package->set('shasum', sha1_file($upload));
+
         return [
-            'package' => [
-                'name' => $package->getName(),
-                'type' => $package->getType(),
-                'title' => $package->getTitle(),
-                'description' => $package->getDescription(),
-                'version' => $package->getVersion(),
-                'author' => $package->getAuthor(),
-                'shasum' => sha1_file($upload),
-                'extra' => $extra
-            ],
+            'package' => $package,
             'install' => $path
         ];
     }
@@ -194,11 +188,11 @@ class PackageController
 
             $package = $this->loadPackage($path = "{$temp}/{$path}");
 
-            if ($package->getType() == 'extension') {
+            if ($package->get('type') == 'extension') {
                 $this->installer->install($package, App::get('path.extensions'));
             }
 
-            if ($package->getType() == 'theme') {
+            if ($package->get('type') == 'theme') {
                 $this->installer->install($package, App::get('path.themes'));
             }
 

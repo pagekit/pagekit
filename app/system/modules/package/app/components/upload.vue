@@ -1,12 +1,11 @@
 <template>
 
-    <div class="uk-placeholder uk-text-center uk-text-muted" v-el="drop">
-        <img v-attr="src: $url.static('app/system/assets/images/finder-droparea.svg')" width="22" height="22" alt="{{ 'Droparea' | trans }}"> {{ 'Drop files here or' | trans }} <a class="uk-form-file">{{ 'select one' | trans }}<input type="file" name="file" v-el="select"></a>
-    </div>
+    <a class="uk-button uk-button-primary uk-form-file">
+        <span v-show="!progress">{{ 'Upload' | trans }}</span>
+        <span v-show="progress"><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
+        <input id="upload-extension" type="file" name="file">
+    </a>
 
-    <div class="uk-progress" v-show="progress">
-        <div class="uk-progress-bar" v-style="width: progress">{{ progress }}</div>
-    </div>
 
     <div class="uk-modal" v-el="modal">
         <div class="uk-modal-dialog">
@@ -43,7 +42,7 @@
             </div>
 
             <p>
-                <button class="uk-button uk-button-primary">{{ 'Install' | trans }}</button>
+                <button class="uk-button uk-button-primary" v-on="click: install()">{{ 'Install' | trans }}</button>
                 <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
             </p>
 
@@ -63,9 +62,12 @@
 
         template: __vue_template__,
 
+        paramAttributes: ['type'],
+
         data: function () {
             return {
                 pkg: {},
+                upload: null,
                 action: '',
                 progress: ''
             };
@@ -73,17 +75,21 @@
 
         ready: function () {
 
+            var vm = this;
+
             var settings = {
-                action: this.action,
+                action: this.$url('admin/system/package/upload'),
                 type: 'json',
                 param: 'file',
+                before: function (options) {
+                    $.extend(options.params, { _csrf: $pagekit.csrf, type: vm.type });
+                },
                 loadstart: this.onStart,
                 progress: this.onProgress,
                 allcomplete: this.onComplete
             };
 
-            UIkit.uploadSelect(this.$$.select, settings);
-            UIkit.uploadDrop(this.$$.drop, settings);
+            UIkit.uploadSelect($('#upload-extension'), settings);
 
             this.modal = UIkit.modal(this.$$.modal);
         },
@@ -100,6 +106,8 @@
 
             onComplete: function (data) {
 
+                console.log(data)
+
                 var self = this;
 
                 this.progress = '100%';
@@ -113,6 +121,9 @@
                     return;
                 }
 
+                this.$set('upload', data);
+                this.$set('pkg', data.package);
+
                 // $.post(params.api + '/package/' + data.package.name, function (info) {
 
                 //     var version = info.versions[data.package.version];
@@ -124,6 +135,24 @@
                 // }, 'jsonp');
 
                 this.modal.show();
+            },
+
+            install: function() {
+
+                var vm = this;
+
+                vm.modal.hide();
+
+                this.$http.post('admin/system/package/install', {path: this.upload.install}, function (data) {
+
+                    UIkit.notify(data.message, 'success');
+
+                    setTimeout(function() { location.reload(); }, 600);
+
+                }).error(function(msg) {
+
+                    UIkit.notify(msg, 'danger');
+                });
             }
 
         }

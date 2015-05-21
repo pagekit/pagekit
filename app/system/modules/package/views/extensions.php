@@ -16,7 +16,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary">{{ 'Upload' | trans }}</a>
+            <v-upload type="extension"></v-upload>
 
         </div>
     </div>
@@ -56,6 +56,41 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="uk-modal" id="modal-package">
+
+        <div class="uk-modal-dialog">
+
+            <h3>{{ upload.package.title }}</h3>
+
+            <div class="uk-grid">
+
+                <div class="uk-width-medium-2-3">
+                    {{ upload.package.description }}
+                </div>
+
+                <div class="uk-width-medium-1-3">
+
+                    <div class="uk-margin uk-text-center">
+                        <img src="{{ upload.package.extra.image }}" alt="{{ upload.package.title }}" />
+                    </div>
+
+                    <div class="uk-margin">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-primary" v-on="click: install(upload)">{{ 'Install Package' | trans }}</button>
+                <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
