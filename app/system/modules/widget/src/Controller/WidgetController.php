@@ -9,7 +9,7 @@ use Pagekit\Widget\Entity\Widget;
 /**
  * @Access("system: manage widgets")
  */
-class WidgetApiController
+class WidgetController
 {
     protected $widgets;
 
