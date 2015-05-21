@@ -43,7 +43,7 @@
                     <div class="tm-contrast">
 
                         <ul class="uk-grid uk-grid-medium uk-flex-middle">
-                            <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="{{ url }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
+                            <li><a class="uk-icon-hover uk-icon-small uk-icon-home" href="{{ $url() }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
                             <li><a class="uk-icon-hover uk-icon-small uk-icon-sign-out" href="{{ $url('user/logout', {redirect: 'admin/login'}) }}" title="{{ 'Logout' | trans }}"></a></li>
                             <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.username }}" v-gravatar="user.email"> {{ user.username }}</a></li>
                         </ul>
@@ -107,7 +107,7 @@
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header">{{ user.username }}</li>
-                    <li><a href="{{ url }}" target="_blank">{{ 'Visit Site' | trans }}</a></li>
+                    <li><a href="{{ $url() }}" target="_blank">{{ 'Visit Site' | trans }}</a></li>
                     <li><a href="{{ $url('admin/user/edit', {id: user.id}) }}">{{ 'Settings' | trans }}</a></li>
                     <li><a href="{{ $url('user/logout', {redirect: 'admin/login'}) }}">{{ 'Logout' | trans }}</a></li>
                 </ul>

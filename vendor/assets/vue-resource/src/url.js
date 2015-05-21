@@ -54,6 +54,7 @@ function Url (url, params) {
  */
 
 Url.options = {
+    url: '',
     root: '',
     params: {}
 };
