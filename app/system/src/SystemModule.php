@@ -4,6 +4,7 @@ namespace Pagekit\System;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Util\ArrObject;
 use Symfony\Component\Finder\Finder;
 
 class SystemModule extends Module
@@ -92,9 +93,9 @@ class SystemModule extends Module
                     continue;
                 }
 
-                while (isset($item['parent'], $this->_menu[$item['parent']])) {
-                    $this->_menu[$item['parent']]['active'] = true;
+                while (isset($this->_menu[$item['parent']])) {
                     $item = $this->_menu[$item['parent']];
+                    $item['active'] = true;
                 }
             }
         }
@@ -113,7 +114,14 @@ class SystemModule extends Module
         $meta  = App::user()->get('admin.menu', []);
         $route = App::request()->attributes->get('_route');
 
-        if (isset($item['access']) && !App::user()->hasAccess($item['access'])) {
+        $item = new ArrObject($item, [
+            'id' => $id,
+            'label' => $id,
+            'parent' => 'root',
+            'priority' => 100
+        ]);
+
+        if (!App::user()->hasAccess($item['access'])) {
             return;
         }
 
@@ -121,26 +129,13 @@ class SystemModule extends Module
             $item['priority'] = $meta[$id];
         }
 
-        if (!isset($item['priority'])) {
-            $item['priority'] = 100;
-        }
-
-        if (!isset($item['active'])) {
-            $item['active'] = $item['url'];
-        }
-
-        if (isset($item['active'])) {
-            $item['active'] = (bool) preg_match('#^'.str_replace('*', '.*', $item['active']).'$#', $route);
-        }
-
-        if (isset($item['url'])) {
-            $item['url'] = App::url($item['url']);
-        }
-
-        if (isset($item['icon'])) {
+        if ($item['icon']) {
             $item['icon'] = App::url()->getStatic($item['icon']);
         }
 
-        $this->_menu[$id] = array_replace(['id' => $id, 'label' => $id, 'parent' => 'root'], $item);
+        $item['active'] = (bool) preg_match('#^'.str_replace('*', '.*', $item['active'] ?: $item['url']).'$#', $route);
+        $item['url'] = App::url($item['url']);
+
+        $this->_menu[$id] = $item;
     }
 }
