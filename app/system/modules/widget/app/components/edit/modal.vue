@@ -39,7 +39,10 @@
             saved: function() {
                 this.cancel();
                 this.load();
-                return false;
+            },
+
+            cancel: function() {
+                this.cancel();
             }
 
         },

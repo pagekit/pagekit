@@ -1,6 +1,3 @@
-var $ = require('jquery');
-var _ = require('lodash');
-
 module.exports = {
 
     created: function () {
@@ -40,26 +37,14 @@ module.exports = {
 
         load: function () {
 
-            var d1 = $.Deferred(), d2 = $.Deferred(), deferred = $.when(d1, d2);
-
-            deferred.done(function(nodes, menus) {
-
-                this.$set('nodes', nodes);
-                this.$set('menus', menus);
+            return this.$resource('api/site/').query(function(data) {
+                this.$set('nodes', data.nodes);
+                this.$set('menus', data.menus);
 
                 this.$emit('loaded');
 
-            }.bind(this));
-
-            this.Nodes.query(function (nodes) {
-                d1.resolve(nodes);
             });
 
-            this.Menus.query(function (menus) {
-                d2.resolve(menus);
-            });
-
-            return deferred;
         }
 
     }

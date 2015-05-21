@@ -5,11 +5,14 @@ namespace Pagekit\Site\Controller;
 use Pagekit\Application as App;
 
 /**
- * @Access("site: manage site", admin=true)
+ * @Access("site: manage site")
  */
 class SiteController
 {
-    public function indexAction()
+    /**
+     * @Access(admin=true)
+     */
+    public function siteAction()
     {
         $site = App::module('system/site');
 
@@ -21,6 +24,18 @@ class SiteController
             '$data' => [
                 'types' => array_values($site->getTypes())
             ]
+        ];
+    }
+
+    /**
+     * @Route("/api/site", name="/api/site")
+     * @Access("site: manage site")
+     */
+    public function apiSiteAction()
+    {
+        return [
+            'menus' => json_decode(App::forward('@site/api/menu')->getContent()),
+            'nodes' => json_decode(App::forward('@site/api/node')->getContent())
         ];
     }
 }

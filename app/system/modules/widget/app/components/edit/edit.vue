@@ -13,7 +13,7 @@
 
             <div class="uk-float-right">
 
-                <a class="uk-button" v-on="click: cancel()">{{ 'Cancel' | trans }}</a>
+                <a class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</a>
                 <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
             </div>
@@ -105,6 +105,14 @@
                 this.$resource('api/widget/:id').save({ id: this.widget.id }, data, function() {
                     this.$dispatch('saved');
                 });
+
+            },
+
+            cancel: function (e) {
+
+                e.preventDefault();
+
+                this.$dispatch('cancel');
 
             }
 
