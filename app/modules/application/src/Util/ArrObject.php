@@ -138,6 +138,16 @@ class ArrObject implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     /**
+     * Gets the keys as array.
+     *
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->values);
+    }
+
+    /**
      * Gets the values as a numerically indexed array.
      *
      * @return array
