@@ -4,6 +4,7 @@ namespace Pagekit\Application\Traits;
 
 use Pagekit\Kernel\Event\ExceptionListenerWrapper;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 trait RouterTrait
 {
@@ -44,7 +45,7 @@ trait RouterTrait
      */
     public static function forward($name, $parameters = [])
     {
-        if (empty(static::request())) {
+        if (!$request = static::request()) {
             throw new \RuntimeException('No Request set.');
         }
 
