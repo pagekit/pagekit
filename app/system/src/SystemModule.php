@@ -4,13 +4,10 @@ namespace Pagekit\System;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Util\ArrObject;
 use Symfony\Component\Finder\Finder;
 
 class SystemModule extends Module
 {
-    protected $_menu = [];
-
     /**
      * {@inheritdoc}
      */
@@ -68,13 +65,17 @@ class SystemModule extends Module
     }
 
     /**
-     * Gets the menu.
+     * Gets the system menu.
      *
      * @return array
      */
     public function getMenu()
     {
-        if (!$this->_menu) {
+        static $menu;
+
+        if (!$menu) {
+
+            $menu = new SystemMenu();
 
             foreach (App::module() as $module) {
 
@@ -83,59 +84,11 @@ class SystemModule extends Module
                 }
 
                 foreach ($module->menu as $id => $item) {
-                    $this->registerMenu($id, $item);
-                }
-            }
-
-            foreach ($this->_menu as $item) {
-
-                if ($item['active'] !== true) {
-                    continue;
-                }
-
-                while (isset($this->_menu[$item['parent']])) {
-                    $item = $this->_menu[$item['parent']];
-                    $item['active'] = true;
+                    $menu->addItem($id, $item);
                 }
             }
         }
 
-        return $this->_menu;
-    }
-
-    /**
-     * Registers a menu item.
-     *
-     * @param string $id
-     * @param array  $item
-     */
-    public function registerMenu($id, array $item)
-    {
-        $meta  = App::user()->get('admin.menu', []);
-        $route = App::request()->attributes->get('_route');
-
-        $item = new ArrObject($item, [
-            'id' => $id,
-            'label' => $id,
-            'parent' => 'root',
-            'priority' => 100
-        ]);
-
-        if (!App::user()->hasAccess($item['access'])) {
-            return;
-        }
-
-        if (isset($meta[$id])) {
-            $item['priority'] = $meta[$id];
-        }
-
-        if ($item['icon']) {
-            $item['icon'] = App::url()->getStatic($item['icon']);
-        }
-
-        $item['active'] = (bool) preg_match('#^'.str_replace('*', '.*', $item['active'] ?: $item['url']).'$#', $route);
-        $item['url'] = App::url($item['url']);
-
-        $this->_menu[$id] = $item;
+        return $menu;
     }
 }

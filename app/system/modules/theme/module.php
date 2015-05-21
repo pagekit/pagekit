@@ -20,7 +20,7 @@ return [
                     'username' => $app['user']->getUsername()
                 ];
 
-                $view->data('$pagekit', ['user' => $user, 'menu' => $app['system']->getMenu()]);
+                $view->data('$pagekit', ['user' => $user, 'menu' => array_values($app['system']->getMenu()->getItems())]);
                 $event->setParameter('subset', 'latin,latin-ext');
             });
 
