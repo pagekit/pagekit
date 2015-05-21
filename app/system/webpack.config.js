@@ -4,7 +4,6 @@ module.exports = [
 
     {
         entry: {
-            "app/bundle/system": "./app/system",
             "modules/editor/app/bundle/editor": "./modules/editor/app/editor",
             "modules/finder/app/bundle/finder": "./modules/finder/app/finder",
             "modules/package/app/bundle/extensions": "./modules/package/app/extensions",
@@ -19,16 +18,11 @@ module.exports = [
             filename: "./[name].js"
         },
         externals: {
+            "vue": "Vue",
             "lodash": "_",
             "jquery": "jQuery",
             "uikit": "UIkit",
-            "vue": "Vue",
             "settings": "Settings"
-        },
-        resolve: {
-            alias: {
-                "md5$": assets + "/js-md5/js/md5.min.js"
-            }
         },
         module: {
             loaders: [
@@ -47,16 +41,37 @@ module.exports = [
             library: "Settings"
         },
         externals: {
+            "vue": "Vue",
             "lodash": "_",
             "jquery": "jQuery",
-            "uikit": "UIkit",
-            "vue": "Vue"
+            "uikit": "UIkit"
         },
         module: {
             loaders: [
                 { test: /\.html$/, loader: "html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
+        }
+    },
+
+    {
+        entry: {
+            "vue": "./app/vue"
+        },
+        output: {
+            filename: "./app/bundle/[name].js",
+        },
+        externals: {
+            "vue": "Vue",
+            "lodash": "_",
+            "jquery": "jQuery",
+        },
+        resolve: {
+            alias: {
+                "md5$": assets + "/js-md5/js/md5.min.js",
+                "vue-resource$": assets + "/vue-resource/index.js",
+                "vue-validator$": assets + "/vue-validator/index.js",
+            }
         }
     },
 

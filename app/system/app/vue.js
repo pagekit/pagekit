@@ -1,6 +1,8 @@
 require('./components/directives.js');
 require('./components/filters.js');
 require('./components/pagination.js');
+require('vue-resource');
+require('vue-validator');
 
 function install (Vue) {
 

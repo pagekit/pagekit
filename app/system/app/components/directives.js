@@ -3,8 +3,8 @@
  */
 
 var $ = require('jquery');
-var Vue = require('vue');
 var md5 = require('md5');
+var Vue = require('vue');
 
 Vue.directive('gravatar', {
 

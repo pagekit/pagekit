@@ -1,4 +1,4 @@
-<?php $view->script('settings', 'system/user:app/admin/settings.js', 'system') ?>
+<?php $view->script('settings', 'system/user:app/admin/settings.js', 'vue') ?>
 
 <div id="settings" class="uk-form uk-form-horizontal">
 

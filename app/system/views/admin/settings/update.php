@@ -1,4 +1,4 @@
-<?php $view->script('update', 'app/system/app/update.js', 'system') ?>
+<?php $view->script('update', 'app/system/app/update.js', 'vue') ?>
 
 <div id="js-update" v-cloak>
 
