@@ -57,7 +57,11 @@ return [
 
         $app->subscribe($app['debugbar']);
 
-        $app->on('app.request', function () use ($app) {
+        $app->on('app.request', function ($event) use ($app) {
+
+            if (!$event->isMasterRequest()) {
+                return;
+            }
 
             if (isset($app['auth'])) {
                 $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
