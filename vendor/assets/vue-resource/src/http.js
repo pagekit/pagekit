@@ -1,6 +1,5 @@
 var _ = require('./util');
 var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
-var jsonpCallID = 0;
 
 /**
  * Http provides a service for sending XMLHttpRequests.
@@ -8,18 +7,18 @@ var jsonpCallID = 0;
 
 function Http (url, options) {
 
-    var headers = Http.headers;
+    var headers, self = this, promise;
+
+    options = options || {};
 
     if (_.isPlainObject(url)) {
         options = url;
         url = '';
     }
 
-    options = options || {};
-
     headers = _.extend({},
-        headers.common,
-        headers[options.method ? options.method.toLowerCase() : 'post']
+        Http.headers.common,
+        Http.headers[options.method ? options.method.toLowerCase() : 'post']
     );
 
     options = _.extend(true, {url: url, headers: headers, jsonp: false},
@@ -31,16 +30,16 @@ function Http (url, options) {
     }
 
     if (_.isObject(options.data) && /FormData/i.test(options.data.toString())) {
-        delete headers['Content-Type'];
+        delete options.headers['Content-Type'];
     }
 
     if (options.emulateHTTP && options.method && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
-        headers['X-HTTP-Method-Override'] = options.method;
+        options.headers['X-HTTP-Method-Override'] = options.method;
         options.method = 'POST';
     }
 
     if (options.emulateJSON && _.isPlainObject(options.data)) {
-        headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         options.data = Vue.url.params(options.data);
     }
 
@@ -48,82 +47,7 @@ function Http (url, options) {
         options.data = JSON.stringify(options.data);
     }
 
-    var self = this, promise = new _.Promise(function (resolve, reject) {
-
-        if (options.jsonp) {
-
-            var src        = url,
-                head       = document.getElementsByTagName('head')[0],
-                script     = document.createElement('script'),
-                callbackID = '_jsonpcallback'+(++jsonpCallID),
-                data       = options.data || {},
-                cleanup    = function() {
-                    // API call clean-up
-            		delete window[callbackID];
-                    head.removeChild(script);
-                };
-
-            if (src.indexOf('?')==-1) {
-                src += '?';
-            }
-
-            // no-cache
-            src += (src.indexOf('?') ==-1 ? '?':'&')+'_nocache='+(new Date().getTime())+"RAND"+(Math.ceil(Math.random() * 100000));
-
-            // data params
-            if (typeof(data) == 'string') {
-                src += '&callback='+callbackID;
-            } else {
-                data.callback = callbackID;
-                src += '&'+Vue.url.params(data);
-            }
-
-			script.async = true;
-			script.type  = 'text/javascript';
-			script.src   = src;
-
-            script.onerror = function() {
-
-                var response = { responseText: '', status: 404 };
-
-        		cleanup();
-                reject(response);
-            };
-
-            window[callbackID] = function(data) {
-
-                var response = { responseText: data, status: 200 };
-
-        		cleanup();
-                resolve(response);
-            };
-
-			// Appending the script to the head makes the request!
-			head.appendChild(script);
-
-        } else {
-
-            var request = new XMLHttpRequest();
-
-            request.open(options.method, (self.$url || Vue.url)(options), true);
-
-            _.each(headers, function (value, header) {
-                request.setRequestHeader(header, value);
-            });
-
-            request.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.status >= 200 && this.status < 300) {
-                        resolve(this);
-                    } else {
-                        reject(this);
-                    }
-                }
-            };
-
-            request.send(options.data);
-        }
-    });
+    promise = (options.jsonp ? requestjsonp : requestxhr).apply(this, [url, options]);
 
     _.extend(promise, {
 
@@ -165,6 +89,89 @@ function Http (url, options) {
     if (options.error) {
         promise.error(options.error);
     }
+
+    return promise;
+}
+
+
+function requestjsonp(url, options) {
+
+    var promise = new _.Promise(function (resolve, reject) {
+
+        var src        = url,
+            head       = document.getElementsByTagName('head')[0],
+            script     = document.createElement('script'),
+            callbackID = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000)),
+            data       = options.data || {},
+            cleanup    = function(fn, data, status) {
+
+                // API call clean-up
+                delete window[callbackID];
+                head.removeChild(script);
+
+                // reject / resolve
+                fn({ responseText: data, status: status });
+            };
+
+        if (src.indexOf('?')==-1) {
+            src += '?';
+        }
+
+        src += src.indexOf('?') ==-1 ? '?':'&';
+
+        // data params
+        if (typeof(data) == 'string') {
+            src += '&callback='+callbackID;
+        } else {
+            data.callback = callbackID;
+            src += '&'+Vue.url.params(data);
+        }
+
+		script.async = true;
+		script.type  = 'text/javascript';
+		script.src   = src;
+
+        script.onerror = function() {
+    		cleanup(reject, '', 404);
+        };
+
+        window[callbackID] = function(data) {
+    		cleanup(resolve, data, 200);
+        };
+
+		// Appending the script to the head makes the request!
+		head.appendChild(script);
+    });
+
+    return promise;
+}
+
+function requestxhr(url, options) {
+
+    var self = this, promise = new _.Promise(function (resolve, reject) {
+
+        var request = new XMLHttpRequest();
+
+        request.open(options.method, (self.$url || Vue.url)(options), true);
+
+        _.each(options.headers, function (value, header) {
+            request.setRequestHeader(header, value);
+        });
+
+        request.onreadystatechange = function () {
+
+            if (this.readyState === 4) {
+
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(this);
+                } else {
+                    reject(this);
+                }
+            }
+        };
+
+        request.send(options.data);
+    });
 
     return promise;
 }
