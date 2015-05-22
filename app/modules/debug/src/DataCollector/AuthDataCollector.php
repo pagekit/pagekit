@@ -2,8 +2,8 @@
 
 namespace Pagekit\Debug\DataCollector;
 
-use Pagekit\Auth\Auth;
 use DebugBar\DataCollector\DataCollectorInterface;
+use Pagekit\Auth\Auth;
 
 class AuthDataCollector implements DataCollectorInterface
 {

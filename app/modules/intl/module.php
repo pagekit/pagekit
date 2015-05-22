@@ -1,7 +1,7 @@
 <?php
 
-use Pagekit\Intl\Intl;
 use Pagekit\Intl\Helper\DateHelper;
+use Pagekit\Intl\Intl;
 use Pagekit\Intl\Loader\ArrayLoader;
 use Pagekit\Intl\Loader\MoFileLoader;
 use Pagekit\Intl\Loader\PhpFileLoader;

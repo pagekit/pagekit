@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Filter\FilterManager;
-use Pagekit\Kernel\Event\ResponseListener;
 use Pagekit\Kernel\Exception\HttpException;
 use Pagekit\Routing\Controller\AliasCollection;
 use Pagekit\Routing\Controller\CallbackCollection;

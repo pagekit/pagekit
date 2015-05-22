@@ -2,8 +2,8 @@
 
 namespace Pagekit\Debug\DataCollector;
 
-use Pagekit\Info\InfoHelper;
 use DebugBar\DataCollector\DataCollectorInterface;
+use Pagekit\Info\InfoHelper;
 
 class SystemDataCollector implements DataCollectorInterface
 {

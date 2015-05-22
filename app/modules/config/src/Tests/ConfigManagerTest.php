@@ -3,7 +3,6 @@
 namespace Pagekit\Config\Tests;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Pagekit\Config\ConfigManager;
 
 class ConfigManagerTest extends \PHPUnit_Framework_TestCase

@@ -1,7 +1,7 @@
 <?php
 
-use Pagekit\Log\Logger;
 use Pagekit\Log\Handler\DebugBarHandler;
+use Pagekit\Log\Logger;
 
 return [
 

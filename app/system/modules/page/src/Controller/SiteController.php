@@ -3,8 +3,8 @@
 namespace Pagekit\Page\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Page\Entity\Page;
 use Pagekit\Kernel\Exception\NotFoundException;
+use Pagekit\Page\Entity\Page;
 
 class SiteController
 {

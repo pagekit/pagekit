@@ -3,10 +3,6 @@
 namespace Pagekit\Routing;
 
 use Pagekit\Event\EventDispatcherInterface;
-
-use Pagekit\Kernel\Exception\HttpException;
-use Pagekit\Kernel\Exception\NotFoundException;
-
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\Routing\Event\RouteResourcesEvent;
 use Pagekit\Routing\Generator\UrlGenerator;
@@ -16,7 +12,6 @@ use Pagekit\Routing\RequestContext as Context;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Symfony\Component\Routing\Matcher\UrlMatcher;

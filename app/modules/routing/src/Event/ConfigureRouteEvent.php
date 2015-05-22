@@ -2,9 +2,9 @@
 
 namespace Pagekit\Routing\Event;
 
+use Pagekit\Event\Event;
 use ReflectionClass;
 use ReflectionMethod;
-use Pagekit\Event\Event;
 use Symfony\Component\Routing\Route;
 
 class ConfigureRouteEvent extends Event

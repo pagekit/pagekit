@@ -2,8 +2,8 @@
 
 namespace Pagekit\Debug\DataCollector;
 
-use Monolog\Handler\AbstractHandler;
 use DebugBar\DataCollector\DataCollectorInterface;
+use Monolog\Handler\AbstractHandler;
 
 class LogDataCollector extends AbstractHandler implements DataCollectorInterface
 {
