@@ -21,13 +21,9 @@ function Http (url, options) {
         Http.headers[options.method ? options.method.toLowerCase() : 'post']
     );
 
-    options = _.extend(true, {url: url, headers: headers, jsonp: false, data: {}},
+    options = _.extend(true, {url: url, headers: headers, jsonp: false},
         Http.options, _.options('http', this, options)
     );
-
-    if (_.isFunction(options.beforeSend)) {
-        options.beforeSend(request, options);
-    }
 
     if (_.isObject(options.data) && /FormData/i.test(options.data.toString())) {
         delete options.headers['Content-Type'];
@@ -38,16 +34,7 @@ function Http (url, options) {
         options.method = 'POST';
     }
 
-    if (!options.jsonp && options.emulateJSON && _.isPlainObject(options.data)) {
-        options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        options.data = Vue.url.params(options.data);
-    }
-
-    if (!options.jsonp && _.isPlainObject(options.data)) {
-        options.data = JSON.stringify(options.data);
-    }
-
-    promise = (options.jsonp ? requestjsonp : requestxhr).apply(this, [url, options]);
+    promise = new _.Promise((options.jsonp ? jsonp : xhr).bind(this, (this.$url || Vue.url), options));
 
     _.extend(promise, {
 
@@ -93,76 +80,95 @@ function Http (url, options) {
     return promise;
 }
 
+function xhr(url, options, resolve, reject) {
 
-function requestjsonp(url, options) {
+    var request = new XMLHttpRequest();
 
-    var self = this;
+    if (_.isFunction(options.beforeSend)) {
+        options.beforeSend(request, options);
+    }
 
-    return new _.Promise(function (resolve, reject) {
+    if (options.emulateJSON && _.isPlainObject(options.data)) {
+        options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        options.data = Vue.url.params(options.data);
+    }
 
-        var head       = document.getElementsByTagName('head')[0],
-            script     = document.createElement('script'),
-            callbackID = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000)),
-            cleanup    = function(fn, data, status) {
+    if (_.isPlainObject(options.data)) {
+        options.data = JSON.stringify(options.data);
+    }
 
-                // API call clean-up
-                delete window[callbackID];
-                head.removeChild(script);
+    request.open(options.method, url(options), true);
 
-                // reject / resolve
-                fn({ responseText: data, status: status });
-            };
-
-        options.data.callback = callbackID;
-
-		script.async = true;
-		script.type  = 'text/javascript';
-		script.src   = (self.$url || Vue.url)(url, options.data);
-
-        script.onerror = function() {
-    		cleanup(reject, '', 404);
-        };
-
-        window[callbackID] = function(data) {
-            cleanup(resolve, data, 200);
-        };
-
-		// Appending the script to the head makes the request!
-		head.appendChild(script);
+    _.each(options.headers, function (value, header) {
+        request.setRequestHeader(header, value);
     });
-}
 
-function requestxhr(url, options) {
+    request.onreadystatechange = function () {
 
-    var self = this;
+        if (this.readyState === 4) {
 
-    return new _.Promise(function (resolve, reject) {
-
-        var request = new XMLHttpRequest();
-
-        request.open(options.method, (self.$url || Vue.url)(options), true);
-
-        _.each(options.headers, function (value, header) {
-            request.setRequestHeader(header, value);
-        });
-
-        request.onreadystatechange = function () {
-
-            if (this.readyState === 4) {
-
-                if (this.status >= 200 && this.status < 300) {
-                    resolve(this);
-                } else {
-                    reject(this);
-                }
+            if (this.status >= 200 && this.status < 300) {
+                resolve(this);
+            } else {
+                reject(this);
             }
-        };
+        }
+    };
 
-        request.send(options.data);
-    });
+    request.send(options.data);
 }
 
-function parseReq (request) {
+function jsonp(url, options, resolve, reject) {
+
+    var head = document.getElementsByTagName('head')[0],
+        script = document.createElement('script'),
+        callback = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000)),
+        overwritten;
+
+    if (options.jsonp === true) {
+        options.jsonp = 'callback';
+    }
+
+    if (options.jsonCallback) {
+        callback = options.jsonCallback;
+    }
+
+    options.params = options.params || {};
+
+    options.params[options.jsonp] = callback;
+
+    if (_.isFunction(options.beforeSend)) {
+        options.beforeSend({}, options);
+    }
+
+    script.async = true;
+    script.type  = 'text/javascript';
+    script.src   = url(options.url, options.params);
+
+    script.onerror = function() {
+        cleanup(reject, '', 404);
+    };
+
+    overwritten = window[callback];
+    window[callback] = function(data) {
+        cleanup(resolve, data, 200);
+    };
+
+    // Appending the script to the head makes the request!
+    head.appendChild(script);
+
+    function cleanup(fn, data, status) {
+
+        // API call clean-up
+        window[callback] = overwritten;
+        head.removeChild(script);
+
+        // reject / resolve
+        fn({ responseText: data, status: status });
+    }
+}
+
+function parseReq(request) {
 
     var result;
 
@@ -188,7 +194,7 @@ Http.headers = {
     put: jsonType,
     post: jsonType,
     patch: jsonType,
-    'delete': jsonType,
+    delete: jsonType,
     common: { 'Accept': 'application/json, text/plain, */*' }
 };
 
@@ -212,8 +218,8 @@ Http.delete = function (url, success, options) {
     return this(url, _.extend({method: 'DELETE', success: success}, options));
 };
 
-Http.jsonp = function (url, options, success) {
-    return this(url, _.extend({method: 'GET', success: success, jsonp:true}, options));
+Http.jsonp = function (url, success, options) {
+    return this(url, _.extend({method: 'GET', success: success, jsonp: true}, options));
 };
 
 module.exports = Http;

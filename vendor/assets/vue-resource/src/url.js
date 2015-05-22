@@ -31,7 +31,7 @@ function Url (url, params) {
         url = options.root + '/' + url;
     }
 
-    url = url.replace(/(^|[^:])[\/]{2,}/g, '$1/');
+    url = url.replace(/([^:])[\/]{2,}/g, '$1/');
     url = url.replace(/(\w+)\/+$/, '$1');
 
     _.each(options.params, function (value, key) {
@@ -95,7 +95,7 @@ Url.params = function (obj) {
 
 Url.parse = function (url) {
 
-    var pattern = RegExp("^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?"),
+    var pattern = new RegExp("^(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*)(?:\\?([^#]*))?(?:#(.*))?"),
         matches = url.match(pattern);
 
     return {

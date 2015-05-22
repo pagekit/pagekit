@@ -17,6 +17,7 @@
             <div class="uk-grid">
                 <div class="uk-width-1-1">
                     <img class="uk-align-left uk-margin-bottom-remove" width="50" height="50" alt="{{ pkg.title }}" v-attr="src: pkg.extra.image">
+
                     <h1 class="uk-h2 uk-margin-remove">{{ pkg.title }}</h1>
                     <ul class="uk-subnav uk-subnav-line uk-margin-top-remove">
                         <li>{{ pkg.author.name }}</li>
@@ -111,7 +112,7 @@
 
                 this.progress = '100%';
 
-                setTimeout(function (){
+                setTimeout(function () {
                     self.progress = '';
                 }, 250);
 
@@ -124,16 +125,16 @@
                 this.$set('pkg', data.package);
 
                 this.apiserver.requesting = true;
-                this.apiserver.message    = '';
-                this.apiserver.error      = false;
+                this.apiserver.message = '';
+                this.apiserver.error = false;
 
-                this.$http.jsonp('http://pagekit.com/api/package/' + data.package.name).success(function(info){
+                this.$http.jsonp('http://pagekit.com/api/package/' + data.package.name, function (info) {
 
-                    var package = info.versions[data.package.version];
+                    var pkg = info.versions[data.package.version];
 
-                    if (package) {
+                    if (pkg) {
 
-                        if (package.dist.shasum != data.package.shasum) {
+                        if (pkg.dist.shasum != data.package.shasum) {
 
                             self.apiserver.message = 'The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated.';
                             self.apiserver.error = true;
@@ -142,7 +143,7 @@
 
                             var currentversion = data.package.version;
 
-                            Object.keys(info.versions).forEach(function(version){
+                            Object.keys(info.versions).forEach(function (version) {
 
                                 if (version_compare(version, currentversion, '>')) {
                                     currentversion = version;
@@ -155,27 +156,28 @@
                         }
                     }
 
-                }).always(function(){
-
+                }).always(function () {
                     self.apiserver.requesting = false;
                 });
 
                 this.modal.show();
             },
 
-            install: function() {
+            install: function () {
 
                 var vm = this;
 
                 vm.modal.hide();
 
-                this.$http.post('admin/system/package/install', {path: this.upload.install}, function (data) {
+                this.$http.post('admin/system/package/install', { path: this.upload.install }, function (data) {
 
                     UIkit.notify(data.message, 'success');
 
-                    setTimeout(function() { location.reload(); }, 600);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 600);
 
-                }).error(function(msg) {
+                }).error(function (msg) {
 
                     UIkit.notify(msg, 'danger');
                 });
@@ -188,7 +190,7 @@
     // source: https://raw.githubusercontent.com/kvz/phpjs/master/functions/info/version_compare.js
     function version_compare(v1, v2, operator) {
 
-        var i = 0, x = 0, compare = 0, vm = { 'dev': -6, 'alpha': -5, 'a': -5, 'beta': -4, 'b': -4,'RC': -3, 'rc': -3, '#': -2, 'p': 1, 'pl': 1 };
+        var i = 0, x = 0, compare = 0, vm = { 'dev': -6, 'alpha': -5, 'a': -5, 'beta': -4, 'b': -4, 'RC': -3, 'rc': -3, '#': -2, 'p': 1, 'pl': 1 };
 
         var prepVersion = function (v) {
             v = ('' + v).replace(/[_\-+]/g, '.');
@@ -202,7 +204,7 @@
 
         v1 = prepVersion(v1);
         v2 = prepVersion(v2);
-        x  = Math.max(v1.length, v2.length);
+        x = Math.max(v1.length, v2.length);
 
         for (i = 0; i < x; i++) {
 
