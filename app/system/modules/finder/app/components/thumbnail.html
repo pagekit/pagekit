@@ -1,6 +1,5 @@
-<ul v-if="files || folders" class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4 pk-thumbnail-border-remove" data-uk-grid-margin data-uk-grid-match="{ target:'.uk-panel' }">
-
-    <li v-repeat="folders | searched" v-on="click: toggleSelect">
+<ul v-if="items.length" class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4 pk-thumbnail-border-remove" data-uk-grid-margin data-uk-grid-match="{ target:'.uk-panel' }">
+    <li v-repeat="items | folders | searched" v-on="click: toggleSelect">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover">
             <div class="uk-panel-teaser">
                 <div class="pk-thumbnail pk-thumbnail-folder"></div>
@@ -12,7 +11,7 @@
         </div>
     </li>
 
-    <li v-repeat="files | searched" v-on="click: toggleSelect">
+    <li v-repeat="items | files | searched" v-on="click: toggleSelect">
         <div class="uk-panel uk-panel-box uk-text-center uk-visible-hover">
             <div class="uk-panel-teaser">
                 <div v-if="isImage(path)" class="pk-thumbnail" style="background-image: url('{{ encodeURI(url) }}');"></div>

@@ -1,4 +1,4 @@
-<div v-if="files || folders" class="uk-overflow-container">
+<div v-if="items.length" class="uk-overflow-container">
     <table class="uk-table uk-table-hover uk-table-middle pk-finder-table">
         <thead>
             <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=name]"></th>
@@ -8,7 +8,7 @@
         </thead>
         <tbody>
 
-            <tr v-repeat="folders | searched" class="uk-visible-hover" v-on="click: toggleSelect">
+            <tr v-repeat="items | folders | searched" class="uk-visible-hover" v-on="click: toggleSelect">
                 <td><input type="checkbox" name="name" value="{{ name }}"></td>
                 <td class="pk-table-width-minimum">
                     <i class="uk-icon-folder-o pk-finder-icon-folder"></i>
@@ -18,7 +18,7 @@
                 <td></td>
             </tr>
 
-            <tr v-repeat="files | searched" class="uk-visible-hover" v-on="click: toggleSelect">
+            <tr v-repeat="items | files | searched" class="uk-visible-hover" v-on="click: toggleSelect">
                 <td><input type="checkbox" name="name" value="{{ name }}"></td>
                 <td class="pk-table-width-minimum">
                     <i v-if="isImage(url)" class="pk-thumbnail-icon pk-finder-icon-file" style="background-image: url('{{ encodeURI(url) }}');"></i>

@@ -50,9 +50,9 @@
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
         </div>
 
-        <div v-partial="{{ view }}" v-if="files.length || folders.length"></div>
+        <div v-partial="{{ view }}" v-if="items.length"></div>
 
-        <div class="uk-alert" v-if="!files.length && !folders.length">
+        <div class="uk-alert" v-if="!items.length">
             {{ 'No files.' | trans }}
         </div>
 
@@ -117,6 +117,20 @@
                 return query ? files.filter(function (file) {
                     return file.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
                 }) : files;
+            },
+
+            folders: function (items) {
+
+                return items ? items.filter(function (item) {
+                    return item.mime === 'application/folder';
+                }) : [];
+            },
+
+            files: function (items) {
+
+                return items ? items.filter(function (item) {
+                    return item.mime === 'application/file';
+                }) : [];
             }
 
         },
@@ -218,7 +232,6 @@
                 if (UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
                     this.command('removefiles', { names: names });
                 }.bind(this)));
-
             },
 
             /**
@@ -238,6 +251,7 @@
             },
 
             command: function (cmd, params) {
+
                 return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.root}, params), function (data) {
 
                     this.load();
@@ -250,11 +264,11 @@
             },
 
             load: function () {
+
                 return this.resource.get({path: this.path, root: this.root}, function (data) {
 
-                    this.$set('files', _.filter(data.items || [], {mime:'application/file'}));
-                    this.$set('folders', _.filter(data.items || [], {mime:'application/folder'}));
-                    this.$set('count', this.files.length + this.folders.length);
+                    this.$set('items', data.items || []);
+                    this.$set('count', this.items.length);
                     this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
