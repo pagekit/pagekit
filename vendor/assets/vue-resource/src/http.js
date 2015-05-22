@@ -212,4 +212,8 @@ Http.delete = function (url, success, options) {
     return this(url, _.extend({method: 'DELETE', success: success}, options));
 };
 
+Http.jsonp = function (url, options, success) {
+    return this(url, _.extend({method: 'GET', success: success, jsonp:true}, options));
+};
+
 module.exports = Http;

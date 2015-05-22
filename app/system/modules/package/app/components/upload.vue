@@ -127,7 +127,7 @@
                 this.apiserver.message    = '';
                 this.apiserver.error      = false;
 
-                this.$http('http://pagekit.com/api/package/' + data.package.name, {data:{test:1, huhu:2}, jsonp:true}).success(function(info){
+                this.$http.jsonp('http://pagekit.com/api/package/' + data.package.name).success(function(info){
 
                     var package = info.versions[data.package.version];
 
