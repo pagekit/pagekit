@@ -117,8 +117,6 @@ function requestjsonp(url, options) {
             src += '?';
         }
 
-        src += src.indexOf('?') ==-1 ? '?':'&';
-
         // data params
         if (typeof(data) == 'string') {
             src += '&callback='+callbackID;
