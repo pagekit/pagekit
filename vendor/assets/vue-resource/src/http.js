@@ -122,15 +122,10 @@ function jsonp(url, options, resolve, reject) {
 
     var head = document.getElementsByTagName('head')[0],
         script = document.createElement('script'),
-        callback = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000)),
-        overwritten;
+        callback = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000));
 
     if (options.jsonp === true) {
         options.jsonp = 'callback';
-    }
-
-    if (options.jsonCallback) {
-        callback = options.jsonCallback;
     }
 
     options.params = options.params || {};
@@ -149,7 +144,6 @@ function jsonp(url, options, resolve, reject) {
         cleanup(reject, '', 404);
     };
 
-    overwritten = window[callback];
     window[callback] = function(data) {
         cleanup(resolve, data, 200);
     };
@@ -160,7 +154,7 @@ function jsonp(url, options, resolve, reject) {
     function cleanup(fn, data, status) {
 
         // API call clean-up
-        window[callback] = overwritten;
+        delete window[callback];
         head.removeChild(script);
 
         // reject / resolve
