@@ -31,12 +31,14 @@
         <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
         <div class="uk-alert uk-alert-warning" v-show="!widget.uid && !editing">{{ 'No location given.' | trans }}</div>
 
-        <div class="pk-weather-image">
-            <img class="uk-text-top" v-attr="src: icon">
-            <span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>
+        <div v-show="status != 'error'">
+            <div class="pk-weather-image">
+                <img class="uk-text-top" v-attr="src: icon">
+                <span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>
+            </div>
+            <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
+            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
         </div>
-        <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
-        <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
 
     </div>
 

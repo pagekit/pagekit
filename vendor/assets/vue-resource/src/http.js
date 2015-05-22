@@ -120,9 +120,9 @@ function xhr(url, options, resolve, reject) {
 
 function jsonp(url, options, resolve, reject) {
 
-    var head = document.getElementsByTagName('head')[0],
-        script = document.createElement('script'),
-        callback = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000));
+    var script = document.createElement('script'),
+        callback = '_jsonp' + Math.random().toString(36).substr(2),
+        result;
 
     if (options.jsonp === true) {
         options.jsonp = 'callback';
@@ -140,26 +140,31 @@ function jsonp(url, options, resolve, reject) {
     script.type  = 'text/javascript';
     script.src   = url(options.url, options.params);
 
-    script.onerror = function() {
-        cleanup(reject, '', 404);
+    window[callback] = function(data) {
+        result = data;
     };
 
-    window[callback] = function(data) {
-        cleanup(resolve, data, 200);
+    var handler = function (event) {
+
+        delete window[callback];
+        document.body.removeChild(script);
+
+        if (event.type === 'load' && !result) {
+            event.type = 'error';
+        }
+
+        var text = result ? result : event.type,
+            status = event.type === 'error' ? 404 : 200;
+
+        (status === 200 ? resolve : reject)({ responseText: text, status: status });
     };
+
+    script.onload = handler;
+    script.onerror = handler;
 
     // Appending the script to the head makes the request!
-    head.appendChild(script);
+    document.body.appendChild(script);
 
-    function cleanup(fn, data, status) {
-
-        // API call clean-up
-        delete window[callback];
-        head.removeChild(script);
-
-        // reject / resolve
-        fn({ responseText: data, status: status });
-    }
 }
 
 function parseReq(request) {
