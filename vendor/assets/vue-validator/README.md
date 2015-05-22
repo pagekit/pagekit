@@ -2,7 +2,7 @@
 
 Validator plugin for Vue.js (v.0.11).
 
-The vue-validator ships with a couple of built-in validators.
+The plugin ships with a couple of built-in validators.
 
 * required
 * pattern
@@ -25,12 +25,9 @@ It is model independent and uses the actual element value instead.
 
 ## Usage
 
-The validators are applied through the _v-valid_ directive.
-Any change to the content will trigger form validation.
+The validators are applied through the `v-valid` directive. Any change to the content will trigger form validation.
 
-The validator will catch any _submit_ events and in turn triggers _valid_ and _invalid_ events on the form.
-The form validation state is published to the current scope using the forms _name_ attribute.
-Similarly, the _name_ attributes of the _input_ fields specify their properties.
+The validator will catch any `submit` events and in turn triggers `valid` and `invalid` events on the form. The form validation state is published to the current scope using the forms `name` attribute. Similarly, the `name` attributes of the `input` fields specify their properties.
 
 ```html
 <form name="form" v-on="valid: save">
@@ -72,10 +69,6 @@ new Vue({
 It can then be used like this:
 
 ```html
-    <input type="text" name="url" v-valid="myUrl" />
-    <span v-show="form.url.myUrl">URL is invalid.</span>
+<input type="text" name="url" v-valid="myUrl" />
+<span v-show="form.url.myUrl">URL is invalid.</span>
 ```
-
-## Copyright and License
-
-Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE.md).
