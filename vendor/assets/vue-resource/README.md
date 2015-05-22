@@ -20,7 +20,6 @@ List of methods:
 ### Usage
 
 ```javascript
-
   new Vue({
 
       ready: {
@@ -38,7 +37,6 @@ List of methods:
       }
 
   })
-
 ```
 
 ## Resource
@@ -49,9 +47,18 @@ List of methods:
 
 * `Vue.resource(url, [params], [actions])`
 
+List of default actions:
+
+```javascript
+get: {method: 'GET'},
+save: {method: 'POST'},
+query: {method: 'GET'},
+remove: {method: 'DELETE'},
+delete: {method: 'DELETE'}
+```
+
 ### Usage
 ```javascript
-
   new Vue({
 
       ready: {
@@ -80,6 +87,4 @@ List of methods:
       }
 
   })
-
-
 ```
