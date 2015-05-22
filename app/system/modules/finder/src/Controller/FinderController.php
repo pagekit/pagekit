@@ -21,7 +21,7 @@ class FinderController
             throw new ForbiddenException(__('Permission denied.'));
         }
 
-        $data = array_fill_keys(['folders', 'files'], []);
+        $data = array_fill_keys(['items'], []);
         $data['mode'] = $mode;
 
         foreach (App::finder()->depth(0)->in($dir) as $file) {
@@ -32,19 +32,20 @@ class FinderController
 
             $info = [
                 'name'     => $file->getFilename(),
+                'mime'     => 'application/'.($file->isDir() ? 'folder':'file'),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
                 'url'      => App::url()->getStatic($file->getPathname()),
                 'writable' => $mode == 'w'
             ];
 
-            if (!$isDir = $file->isDir()) {
+            if (!$file->isDir()) {
                 $info = array_merge($info, [
                     'size'         => $this->formatFileSize($file->getSize()),
                     'lastmodified' => date(\DateTime::ISO8601, $file->getMTime())
                 ]);
             }
 
-            $data[$isDir ? 'folders' : 'files'][] = $info;
+            $data['items'][] = $info;
         }
 
         return $data;

@@ -252,8 +252,8 @@
             load: function () {
                 return this.resource.get({path: this.path, root: this.root}, function (data) {
 
-                    this.$set('files', data.files || []);
-                    this.$set('folders', data.folders || []);
+                    this.$set('files', _.filter(data.items || [], {mime:'application/file'}));
+                    this.$set('folders', _.filter(data.items || [], {mime:'application/folder'}));
                     this.$set('count', this.files.length + this.folders.length);
                     this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
