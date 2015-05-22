@@ -21,7 +21,7 @@ function Http (url, options) {
         Http.headers[options.method ? options.method.toLowerCase() : 'post']
     );
 
-    options = _.extend(true, {url: url, headers: headers, jsonp: false},
+    options = _.extend(true, {url: url, headers: headers, jsonp: false, data: {}},
         Http.options, _.options('http', this, options)
     );
 
@@ -96,13 +96,13 @@ function Http (url, options) {
 
 function requestjsonp(url, options) {
 
-    var promise = new _.Promise(function (resolve, reject) {
+    var self = this;
 
-        var src        = url,
-            head       = document.getElementsByTagName('head')[0],
+    return new _.Promise(function (resolve, reject) {
+
+        var head       = document.getElementsByTagName('head')[0],
             script     = document.createElement('script'),
             callbackID = '_jsonpcallback'+(new Date().getTime())+(Math.ceil(Math.random() * 100000)),
-            data       = options.data || {},
             cleanup    = function(fn, data, status) {
 
                 // API call clean-up
@@ -113,40 +113,31 @@ function requestjsonp(url, options) {
                 fn({ responseText: data, status: status });
             };
 
-        if (src.indexOf('?')==-1) {
-            src += '?';
-        }
-
-        // data params
-        if (typeof(data) == 'string') {
-            src += data+'&callback='+callbackID;
-        } else {
-            data.callback = callbackID;
-            src += '&'+Vue.url.params(data);
-        }
+        options.data.callback = callbackID;
 
 		script.async = true;
 		script.type  = 'text/javascript';
-		script.src   = src;
+		script.src   = (self.$url || Vue.url)(url, options.data);
 
         script.onerror = function() {
     		cleanup(reject, '', 404);
         };
 
         window[callbackID] = function(data) {
-    		cleanup(resolve, data, 200);
+    		console.log(data);
+            cleanup(resolve, data, 200);
         };
 
 		// Appending the script to the head makes the request!
 		head.appendChild(script);
     });
-
-    return promise;
 }
 
 function requestxhr(url, options) {
 
-    var self = this, promise = new _.Promise(function (resolve, reject) {
+    var self = this;
+
+    return new _.Promise(function (resolve, reject) {
 
         var request = new XMLHttpRequest();
 
@@ -170,8 +161,6 @@ function requestxhr(url, options) {
 
         request.send(options.data);
     });
-
-    return promise;
 }
 
 function parseReq (request) {
