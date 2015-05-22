@@ -74,8 +74,8 @@
                 source: function(release) {
 
                     self.$http(api + '/find', {
+                        method: 'JSONP',
                         params: {q: this.input.val(), type: 'like'},
-                        jsonp: true,
                         success: function(data) {
 
                             if (data.cod == 200) {

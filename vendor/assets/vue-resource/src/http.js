@@ -7,7 +7,7 @@ var jsonType = { 'Content-Type': 'application/json;charset=utf-8' };
 
 function Http (url, options) {
 
-    var headers, self = this, promise;
+    var self = this, headers, promise;
 
     options = options || {};
 
@@ -18,10 +18,10 @@ function Http (url, options) {
 
     headers = _.extend({},
         Http.headers.common,
-        Http.headers[options.method ? options.method.toLowerCase() : 'post']
+        Http.headers[options.method.toLowerCase()]
     );
 
-    options = _.extend(true, {url: url, headers: headers, jsonp: false},
+    options = _.extend(true, {url: url, headers: headers},
         Http.options, _.options('http', this, options)
     );
 
@@ -29,12 +29,7 @@ function Http (url, options) {
         delete options.headers['Content-Type'];
     }
 
-    if (options.emulateHTTP && options.method && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
-        options.headers['X-HTTP-Method-Override'] = options.method;
-        options.method = 'POST';
-    }
-
-    promise = new _.Promise((options.jsonp ? jsonp : xhr).bind(this, (this.$url || Vue.url), options));
+    promise = new _.Promise((options.method.toLowerCase() == 'jsonp' ? jsonp : xhr).bind(this, (this.$url || Vue.url), options));
 
     _.extend(promise, {
 
@@ -88,6 +83,11 @@ function xhr(url, options, resolve, reject) {
         options.beforeSend(request, options);
     }
 
+    if (options.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(options.method)) {
+        options.headers['X-HTTP-Method-Override'] = options.method;
+        options.method = 'POST';
+    }
+
     if (options.emulateJSON && _.isPlainObject(options.data)) {
         options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         options.data = Vue.url.params(options.data);
@@ -120,15 +120,7 @@ function xhr(url, options, resolve, reject) {
 
 function jsonp(url, options, resolve, reject) {
 
-    var script = document.createElement('script'),
-        callback = '_jsonp' + Math.random().toString(36).substr(2),
-        result;
-
-    if (options.jsonp === true) {
-        options.jsonp = 'callback';
-    }
-
-    options.params = options.params || {};
+    var callback = '_jsonp' + Math.random().toString(36).substr(2), script, result;
 
     options.params[options.jsonp] = callback;
 
@@ -136,11 +128,12 @@ function jsonp(url, options, resolve, reject) {
         options.beforeSend({}, options);
     }
 
+    script = document.createElement('script');
+    script.src = url(options.url, options.params);
+    script.type = 'text/javascript';
     script.async = true;
-    script.type  = 'text/javascript';
-    script.src   = url(options.url, options.params);
 
-    window[callback] = function(data) {
+    window[callback] = function (data) {
         result = data;
     };
 
@@ -153,8 +146,7 @@ function jsonp(url, options, resolve, reject) {
             event.type = 'error';
         }
 
-        var text = result ? result : event.type,
-            status = event.type === 'error' ? 404 : 200;
+        var text = result ? result : event.type, status = event.type === 'error' ? 404 : 200;
 
         (status === 200 ? resolve : reject)({ responseText: text, status: status });
     };
@@ -162,9 +154,7 @@ function jsonp(url, options, resolve, reject) {
     script.onload = handler;
     script.onerror = handler;
 
-    // Appending the script to the head makes the request!
     document.body.appendChild(script);
-
 }
 
 function parseReq(request) {
@@ -184,9 +174,10 @@ Http.options = {
     method: 'GET',
     params: {},
     data: '',
+    jsonp: 'callback',
     beforeSend: null,
     emulateHTTP: false,
-    emulateJSON: false
+    emulateJSON: false,
 };
 
 Http.headers = {
@@ -218,7 +209,7 @@ Http.delete = function (url, success, options) {
 };
 
 Http.jsonp = function (url, success, options) {
-    return this(url, _.extend({method: 'GET', success: success, jsonp: true}, options));
+    return this(url, _.extend({method: 'JSONP', success: success}, options));
 };
 
 module.exports = Http;
