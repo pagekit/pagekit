@@ -38,12 +38,12 @@ function Http (url, options) {
         options.method = 'POST';
     }
 
-    if (options.emulateJSON && _.isPlainObject(options.data)) {
+    if (!options.jsonp && options.emulateJSON && _.isPlainObject(options.data)) {
         options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         options.data = Vue.url.params(options.data);
     }
 
-    if (_.isPlainObject(options.data)) {
+    if (!options.jsonp && _.isPlainObject(options.data)) {
         options.data = JSON.stringify(options.data);
     }
 
@@ -119,7 +119,7 @@ function requestjsonp(url, options) {
 
         // data params
         if (typeof(data) == 'string') {
-            src += '&callback='+callbackID;
+            src += data+'&callback='+callbackID;
         } else {
             data.callback = callbackID;
             src += '&'+Vue.url.params(data);
