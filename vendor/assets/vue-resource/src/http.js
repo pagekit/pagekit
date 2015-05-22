@@ -124,7 +124,6 @@ function requestjsonp(url, options) {
         };
 
         window[callbackID] = function(data) {
-    		console.log(data);
             cleanup(resolve, data, 200);
         };
 
