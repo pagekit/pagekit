@@ -4,9 +4,21 @@ Resource plugin for Vue.js (v0.11).
 
 The plugin provides services for making web requests and handle responses using a XMLHttpRequest or JSONP.
 
-## Usage
+## HTTP
 
-### HTTP
+The http service can be used globally `Vue.http` or in a Vue instance `this.$http`.
+
+List of methods:
+
+* `Vue.http.get(url, [success], [options])`
+* `Vue.http.post(url, data, [success], [options])`
+* `Vue.http.put(url, data, [success], [options])`
+* `Vue.http.patch(url, data, [success], [options])`
+* `Vue.http.delete(url, [success], [options])`
+* `Vue.http.jsonp(url, [success], [options])`
+
+### Usage
+
 ```javascript
 
   new Vue({
@@ -29,7 +41,15 @@ The plugin provides services for making web requests and handle responses using 
 
 ```
 
-### Resource
+## Resource
+
+The resource service can be used globally `Vue.resource` or in a Vue instance `this.$resource`.
+
+List of methods:
+
+* `Vue.resource(url, [params], [actions])`
+
+### Usage
 ```javascript
 
   new Vue({
@@ -39,7 +59,7 @@ The plugin provides services for making web requests and handle responses using 
         var resource = this.$resource('someItem/:id');
 
         // get item
-        resource.get({id: 1}, function (data, status, request) {
+        resource.get({id: 1}, function (item, status, request) {
             this.$set('item', item)
         })
 
