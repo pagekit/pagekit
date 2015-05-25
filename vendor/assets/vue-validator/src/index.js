@@ -1,6 +1,6 @@
-var Directive = require('./src/valid');
-var Validator = require('./src/validator');
-var Validators = require('./src/validators');
+var Directive = require('./valid');
+var Validator = require('./validator');
+var Validators = require('./validators');
 
 /**
  * Install plugin.

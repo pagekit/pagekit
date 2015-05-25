@@ -1,7 +1,7 @@
 module.exports = {
 
     entry: {
-        "vue-validator": "./index",
+        "vue-validator": "./src/index",
     },
 
     output: {

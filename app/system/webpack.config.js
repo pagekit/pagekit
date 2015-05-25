@@ -69,8 +69,8 @@ module.exports = [
         resolve: {
             alias: {
                 "md5$": assets + "/js-md5/js/md5.min.js",
-                "vue-resource$": assets + "/vue-resource/index.js",
-                "vue-validator$": assets + "/vue-validator/index.js",
+                "vue-resource$": assets + "/vue-resource/src/index.js",
+                "vue-validator$": assets + "/vue-validator/src/index.js",
             }
         }
     },
