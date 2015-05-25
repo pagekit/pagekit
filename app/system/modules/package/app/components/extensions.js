@@ -34,10 +34,10 @@ module.exports = {
 
             this.$set('status', 'loading');
 
-            this.queryUpdates(this.api, this.packages).done(function (data) {
+            this.queryUpdates(this.api, this.packages).success(function (data) {
                 vm.$set('updates', data.packages.length ? data.packages : null);
                 vm.$set('status', '');
-            }).fail(function () {
+            }).error(function () {
                 vm.$set('status', 'error');
             });
         },

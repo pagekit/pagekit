@@ -10,12 +10,12 @@ The http service can be used globally `Vue.http` or in a Vue instance `this.$htt
 
 List of methods:
 
-* `Vue.http.get(url, [success], [options])`
-* `Vue.http.post(url, data, [success], [options])`
-* `Vue.http.put(url, data, [success], [options])`
-* `Vue.http.patch(url, data, [success], [options])`
-* `Vue.http.delete(url, [success], [options])`
-* `Vue.http.jsonp(url, [success], [options])`
+* `Vue.http.get(url, [data], [success], [options])`
+* `Vue.http.post(url, [data], [success], [options])`
+* `Vue.http.put(url, [data], [success], [options])`
+* `Vue.http.patch(url, [data], [success], [options])`
+* `Vue.http.delete(url, [data], [success], [options])`
+* `Vue.http.jsonp(url, [data], [success], [options])`
 
 ### Usage
 

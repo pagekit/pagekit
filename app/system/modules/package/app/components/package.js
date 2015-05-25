@@ -12,10 +12,7 @@ module.exports = {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return $.ajax(api.url + '/package/update', {
-                data: {api_key: api.key, packages: JSON.stringify(pkgs)},
-                dataType: 'jsonp'
-            });
+            return this.$http.jsonp(api.url + '/package/update', {api_key: api.key, packages: JSON.stringify(pkgs)});
         },
 
         enablePackage: function (pkg) {

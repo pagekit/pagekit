@@ -122,6 +122,7 @@ function jsonp(url, options, resolve, reject) {
 
     var callback = '_jsonp' + Math.random().toString(36).substr(2), script, result;
 
+    _.extend(options.params, options.data);
     options.params[options.jsonp] = callback;
 
     if (_.isFunction(options.beforeSend)) {
@@ -188,28 +189,18 @@ Http.headers = {
     common: { 'Accept': 'application/json, text/plain, */*' }
 };
 
-Http.get = function (url, success, options) {
-    return this(url, _.extend({method: 'GET', success: success}, options));
-};
+['get', 'put', 'post', 'patch', 'delete', 'jsonp'].forEach(function (method) {
 
-Http.put = function (url, data, success, options) {
-    return this(url, _.extend({method: 'PUT', data: data, success: success}, options));
-};
+    Http[method] = function (url, data, success, options) {
 
-Http.post = function (url, data, success, options) {
-    return this(url, _.extend({method: 'POST', data: data, success: success}, options));
-};
+        if (_.isFunction(data)) {
+            options = success;
+            success = data;
+            data = undefined;
+        }
 
-Http.patch = function (url, data, success, options) {
-    return this(url, _.extend({method: 'PATCH', data: data, success: success}, options));
-};
-
-Http.delete = function (url, success, options) {
-    return this(url, _.extend({method: 'DELETE', success: success}, options));
-};
-
-Http.jsonp = function (url, success, options) {
-    return this(url, _.extend({method: 'JSONP', success: success}, options));
-};
+        return this(url, _.extend({method: method, data: data, success: success}, options));
+    };
+});
 
 module.exports = Http;

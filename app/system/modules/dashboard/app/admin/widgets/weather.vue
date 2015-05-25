@@ -73,20 +73,16 @@
 
                 source: function(release) {
 
-                    self.$http(api + '/find', {
-                        method: 'JSONP',
-                        params: {q: this.input.val(), type: 'like'},
-                        success: function(data) {
+                    self.$http.jsonp(api + '/find', {q: this.input.val(), type: 'like'}, function(data) {
 
-                            if (data.cod == 200) {
-                                release(data.list);
-                            } else {
-                                release([]);
-                            }
-                        },
-                        error: function() {
+                        if (data.cod == 200) {
+                            release(data.list);
+                        } else {
                             release([]);
                         }
+
+                    }).error(function() {
+                        release([]);
                     });
 
                 },
@@ -120,8 +116,7 @@
                     return;
                 }
 
-                var self = this,
-                    key = 'weather-' + this.widget.uid + this.widget.units,
+                var key = 'weather-' + this.widget.uid + this.widget.units,
                     cache = storage[key];
 
                 if (cache) {
@@ -130,19 +125,17 @@
 
                 } else {
 
-                    $.getJSON(api + '/weather?callback=?', { id: this.widget.uid, units: this.widget.units }, function(data) {
+                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: this.widget.units }, function(data) {
 
                         if (data.cod == 200) {
                             storage[key] = JSON.stringify(data);
-                            self.init(data)
+                            this.init(data)
                         } else {
-                            self.$set('status', 'error');
+                            this.$set('status', 'error');
                         }
 
-                    }).fail(function() {
-
-                        self.$set('status', 'error');
-
+                    }).error(function() {
+                        this.$set('status', 'error');
                     });
 
                 }

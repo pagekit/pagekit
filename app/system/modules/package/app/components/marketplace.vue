@@ -79,7 +79,7 @@
             var vm = this;
 
             this.query();
-            this.queryUpdates(this.api, this.installed).done(function (data) {
+            this.queryUpdates(this.api, this.installed).success(function (data) {
                 vm.$set('updates', data.packages.length ? data.packages : null);
             });
         },
@@ -104,14 +104,14 @@
 
             query: function (page) {
 
-                var vm = this, url = this.api.url + '/package/search';
+                var url = this.api.url + '/package/search';
 
-                $.post(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
-                    vm.$set('packages', data.packages);
-                    vm.$set('pages', data.pages);
-                }, 'jsonp').fail(function () {
-                    vm.$set('packages', null);
-                    vm.$set('status', 'error');
+                this.$http.jsonp(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
+                    this.$set('packages', data.packages);
+                    this.$set('pages', data.pages);
+                }).error(function () {
+                    this.$set('packages', null);
+                    this.$set('status', 'error');
                 });
             },
 
