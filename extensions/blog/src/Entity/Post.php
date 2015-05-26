@@ -236,7 +236,7 @@ class Post implements \JsonSerializable
 
         $post['isPublished']  = $this->isPublished();
         $post['isAccessible'] = $this->isAccessible();
-        $post['url']          = App::url('@blog/id', ['id' => $this->id]);
+        $post['url']          = App::url('@blog/id', ['id' => $this->id ?: 0]);
 
         return $post;
     }
