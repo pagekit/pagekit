@@ -35,7 +35,7 @@
                         <div class="uk-form-row">
                             <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                             <div class="uk-form-controls">
-                                <select id="form-dbdriver" class="uk-width-1-1" v-model="config.database.default">
+                                <select id="form-dbdriver" name="dbdriver" class="uk-width-1-1" v-model="config.database.default">
                                     <option value="mysql" selected>MySql</option>
                                     <option value="sqlite">SQLite</option>
                                 </select>
@@ -46,7 +46,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" value="localhost" name="host" v-model="config.database.connections.mysql.host" v-valid="required">
+                                    <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.mysql.host" v-valid="required">
                                     <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.host.invalid">{{ 'Host cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" value="" name="user" v-model="config.database.connections.mysql.user" v-valid="required">
+                                    <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-valid="required">
                                     <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.user.invalid">{{ 'User cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <label for="form-mysql-dbpassword" class="uk-form-label">{{ 'Password' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <div class="uk-form-password uk-width-1-1">
-                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" value="" autocomplete="off" v-model="config.database.connections.mysql.password">
+                                        <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="password" value="" autocomplete="off" v-model="config.database.connections.mysql.password">
                                         <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" value="pagekit" name="dbname" v-model="config.database.connections.mysql.dbname" v-valid="required">
+                                    <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="dbname" value="pagekit" v-model="config.database.connections.mysql.dbname" v-valid="required">
                                     <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.dbname.invalid">{{ 'Database name cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" value="pk_" v-model="config.database.connections.mysql.prefix">
+                                    <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.mysql.prefix">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="uk-form-row">
                                 <label for="form-sqlite-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" value="pk_" v-model="config.database.connections.sqlite.prefix">
+                                    <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="sqliteprefix" value="pk_" v-model="config.database.connections.sqlite.prefix">
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                         <div class="uk-form-row">
                             <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-username" class="uk-width-1-1" type="text" value="admin" name="user" v-model="user.username" v-valid="required">
+                                <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-valid="required">
                                 <p class="uk-form-help-block uk-text-danger" v-show="formUser.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" v-model="option.site.description"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" name="description" v-model="option.site.description"></textarea>
                             </div>
                         </div>
 
