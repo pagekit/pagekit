@@ -20,7 +20,7 @@ module.exports = {
 
         icon: function (pkg) {
 
-            if (pkg.extra.image) {
+            if (pkg.extra && pkg.extra.image) {
                 return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
             } else {
                 return this.$url.static('app/system/assets/images/placeholder-icon.svg');
