@@ -1,18 +1,17 @@
 <template>
 
-    <div class="uk-margin" v-repeat="menu: menus">
-        <div class="uk-flex">
-            <span class="uk-panel-title uk-flex-item-1" v-on="click: edit(menu)">{{ menu.label }}</span>
+    <div class="uk-panel" v-repeat="menu: menus">
 
-            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <a v-on="click: $event.preventDefault()"><i class="uk-icon uk-icon-plus"></i></a>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li v-repeat="type: types | unmounted"><a v-on="click: add(menu, type)">{{ type.label }}</a></li>
-                    </ul>
-                </div>
+        <div class="uk-panel-badge" data-uk-dropdown="{ mode: 'click' }">
+            <a v-on="click: $event.preventDefault()"><i class="uk-icon uk-icon-plus"></i></a>
+            <div class="uk-dropdown uk-dropdown-small">
+                <ul class="uk-nav uk-nav-dropdown">
+                    <li v-repeat="type: types | unmounted"><a v-on="click: add(menu, type)">{{ type.label }}</a></li>
+                </ul>
             </div>
         </div>
+
+        <h3 class="uk-panel-title uk-flex-item-1" v-on="click: edit(menu)">{{ menu.label }}</h3>
 
         <node-list></node-list>
 

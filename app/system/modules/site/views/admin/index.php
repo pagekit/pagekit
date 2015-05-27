@@ -2,10 +2,11 @@
 
 <div id="site" v-cloak>
 
-    <div class="uk-grid">
+    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
 
-        <div class="uk-panel uk-panel-box uk-width-1-4" v-component="menu-list"></div>
-        <div class="uk-panel uk-panel-box uk-width-3-4" v-component="node-edit"></div>
+        <div class="pk-width-sidebar" v-component="menu-list"></div>
+
+        <div class="uk-flex-item-1" v-component="node-edit"></div>
 
     </div>
 
