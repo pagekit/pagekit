@@ -138,7 +138,7 @@ Vue.directive('order', {
         this.active    = false;
         this.indicator = $('<i class="uk-icon-justify uk-margin-small-left"></i>');
 
-        $(this.el).addClass('pk-table-sort').on('click.order', function(){
+        $(this.el).addClass('pk-table-order').on('click.order', function(){
 
             self.dir = (self.dir == 'asc') ? 'desc':'asc';
             self.vm.$set(self.expression, [self.arg, self.dir].join(' '));
@@ -166,7 +166,7 @@ Vue.directive('order', {
     },
 
     unbind: function() {
-        $(this.el).removeClass('pk-table-sort').off('.order');
+        $(this.el).removeClass('pk-table-order').off('.order');
         this.indicator.remove();
     }
 });
