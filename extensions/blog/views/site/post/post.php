@@ -5,7 +5,7 @@
     <div><?= $post->getContent() ?></div>
 
     <?php if ($post->isCommentable() || $post->getCommentCount()) : ?>
-    <?= $view->render('blog:views/site/comment/comments.php', ['post' => $post, 'blog' => $blog]) ?>
+    <?= $view->render('blog:views/site/comment/vuecomments.php', ['post' => $post, 'blog' => $blog]) ?>
     <?php endif ?>
 
 </article>

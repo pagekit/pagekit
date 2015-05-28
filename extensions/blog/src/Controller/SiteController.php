@@ -134,23 +134,16 @@ class SiteController
             }
 
             // check for spam
-            App::trigger('system.comment.spam_check', new CommentEvent($comment));
+            //App::trigger('system.comment.spam_check', new CommentEvent($comment));
 
             $comment->save($data);
 
-            App::message()->info(__('Thanks for commenting!'));
-
-            return App::redirect(App::url('@blog/id', ['id' => $post->getId()], true).'#comment-'.$comment->getId());
+            return $comment;
 
         } catch (\Exception $e) {
 
-            $message = $e->getMessage();
-
+            App::abort(500, $e->getMessage());
         }
-
-        App::message()->error($message);
-
-        return App::redirect(App::url()->previous());
     }
 
     /**
@@ -188,7 +181,17 @@ class SiteController
                 'name'  => 'blog:views/site/post/post.php'
             ],
             'post' => $post,
-            'blog' => $this->module
+            'blog' => $this->module,
+            '$comments' => [
+                'user' => App::user(),
+                'enabled' => $post->isCommentable(),
+                'access' => [
+                    'view' => App::user()->hasAccess('blog: view comments'),
+                    'post' => App::user()->hasAccess('blog: post comments'),
+                ],
+                'entries' => array_values($post->getComments()),
+                'requireinfo' => $this->module->config('comments.require_name_and_email')
+            ]
         ];
     }
 
