@@ -50,10 +50,10 @@ return [
             $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $app['scripts']->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
-            $app['scripts']->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
-            $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
-            $app['scripts']->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'globalize']);
+            $app['scripts']->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash']);
             $app['scripts']->register('vue-dist', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
+            $app['scripts']->add('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
+            $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
 
         }, 30);
 
