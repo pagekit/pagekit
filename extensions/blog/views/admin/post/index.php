@@ -1,4 +1,4 @@
-<?php $view->script('post-index', 'blog:app/admin/post/index.js', 'system') ?>
+<?php $view->script('post-index', 'blog:app/admin/post/index.js', 'vue') ?>
 
 <div id="js-post" class="uk-form" v-cloak>
 

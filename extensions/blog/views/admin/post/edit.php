@@ -1,4 +1,4 @@
-<?php $view->script('post-edit', 'blog:app/admin/post/edit.js', ['system', 'vue-validator', 'uikit-datepicker', 'uikit-timepicker']) ?>
+<?php $view->script('post-edit', 'blog:app/admin/post/edit.js', ['vue', 'uikit-datepicker', 'uikit-timepicker']) ?>
 
 <form id="js-post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
