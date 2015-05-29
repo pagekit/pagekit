@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => '%NAME%',
+
     'main' => '%NAMESPACE_ESC%\\%CLASSNAME%',
 
     'autoload' => [
