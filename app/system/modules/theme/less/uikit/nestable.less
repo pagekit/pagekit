@@ -7,11 +7,14 @@
 // Variables
 // ========================================================================
 
+@nestable-item-margin:                          0;
+
 @nestable-dragged-z-index:                      @global-z-index + 50;
 
-@nestable-placeholder-border:                   @global-border;
+@nestable-placeholder-border:                   #99baca;
 
-@nestable-panel-background:                     @global-default-background;
+@nestable-panel-padding:                        16px 12px;
+@nestable-panel-background:                     @global-background;
 
 
 // Component
@@ -23,15 +26,25 @@
 
 .hook-nestable-dragged() {}
 
-.hook-nestable-placeholder() {}
+.hook-nestable-placeholder() { background: #f5fbfe; }
 
-.hook-nestable-empty() {}
+.hook-nestable-empty() { border: 1px dashed @global-border; }
 
 .hook-nestable-handle() {}
 
 .hook-nestable-toggle() {}
 
-.hook-nestable-panel() {}
+.hook-nestable-panel() {
+    margin-top: -1px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+    &:hover,
+    .uk-nestable-dragged & {
+        background: #fff;
+    }
+
+}
 
 
 // Miscellaneous
