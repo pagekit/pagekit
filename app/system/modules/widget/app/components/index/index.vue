@@ -31,7 +31,7 @@
 
     <div class="uk-overflow-container">
 
-        <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent pk-table-fake-border">
+        <div class="pk-table-fake pk-table-fake-header pk-table-fake-border">
             <div class="pk-table-width-minimum"><input type="checkbox"  v-check-all="selected: input[name=id]"></div>
             <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
             <div class="pk-table-width-150">{{ 'Position' | trans }}</div>

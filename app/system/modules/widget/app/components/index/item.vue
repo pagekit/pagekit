@@ -4,9 +4,6 @@
 
         <div class="uk-nestable-panel pk-table-fake">
 
-            <div class="pk-table-width-minimum">
-                <div class="uk-nestable-handle">​</div>
-            </div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
             <div class="pk-table-min-width-100">
                 <a v-if="type" v-on="click: edit(widget)">{{ widget.title }}</a>
