@@ -12,23 +12,21 @@ return [
 
     ],
 
+    'routes' => [
+
+        '@hello' => [
+            'path' => '/',
+            'controller' => [
+                'Pagekit\\Hello\\Controller\\HelloController',
+                'Pagekit\\Hello\\Controller\\SiteController'
+            ]
+        ]
+
+    ],
+
     'resources' => [
 
         'hello:' => ''
-
-    ],
-
-    'controllers' => [
-
-        '@hello: /' => [
-            'Pagekit\\Hello\\Controller\\HelloController',
-            'Pagekit\\Hello\\Controller\\SiteController'
-        ]
-    ],
-
-    'config' => [
-
-        'default' => 'World'
 
     ],
 
@@ -56,6 +54,11 @@ return [
             // 'access' => 'hello: manage hellos'
         ]
 
+    ],
+
+    'config' => [
+
+        'default' => 'World'
 
     ]
 

@@ -31,16 +31,22 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system/package:' => ''
+        '@system/package' => [
+            'path' => '/system/package',
+            'controller' => 'Pagekit\\System\\Controller\\PackageController'
+        ],
+        '@system/marketplace' => [
+            'path' => '/system/marketplace',
+            'controller' => 'Pagekit\\System\\Controller\\MarketplaceController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@system/package: /system/package' => 'Pagekit\\System\\Controller\\PackageController',
-        '@system/marketplace: /system/marketplace' => 'Pagekit\\System\\Controller\\MarketplaceController'
+        'system/package:' => ''
 
     ],
 

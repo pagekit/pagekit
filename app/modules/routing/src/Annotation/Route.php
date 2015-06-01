@@ -7,12 +7,12 @@ use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 /**
  * @Annotation
  */
-class Route extends BaseRoute {
-
+class Route extends BaseRoute
+{
     /**
      * {@inheritdoc}
      */
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         if (isset($data['value'])) {
             $data['path'] = $data['value'];

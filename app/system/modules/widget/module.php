@@ -12,15 +12,18 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'widget:' => ''
+        '@widget/api' => [
+            'path' => '/api/widget',
+            'controller' => 'Pagekit\\Widget\\Controller\\WidgetController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@widget/api: /api/widget' => 'Pagekit\\Widget\\Controller\\WidgetController'
+        'widget:' => ''
 
     ],
 
@@ -39,7 +42,7 @@ return [
             'positions' => [],
             'config' => [],
             'defaults' => []
-            
+
         ]
 
     ]

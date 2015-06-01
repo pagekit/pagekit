@@ -3,76 +3,87 @@
 namespace Pagekit\Routing\Event;
 
 use Pagekit\Event\Event;
-use ReflectionClass;
-use ReflectionMethod;
 use Symfony\Component\Routing\Route;
 
 class ConfigureRouteEvent extends Event
 {
+    /**
+     * @var Route
+     */
     protected $route;
-    protected $class;
-    protected $method;
-    protected $options;
 
     /**
-     * Constructs an event.
+     * Constructor.
      *
-     * @param Route            $route
-     * @param ReflectionClass  $class
-     * @param ReflectionMethod $method
-     * @param array            $options
+     * @param Route $route
      */
-    public function __construct(Route $route, ReflectionClass $class, ReflectionMethod $method, array $options)
+    public function __construct(Route $route)
     {
-        $this->name    = 'route.configure';
-        $this->route   = $route;
-        $this->class   = $class;
-        $this->method  = $method;
-        $this->options = $options;
+        $this->name  = 'route.configure';
+        $this->route = $route;
     }
 
     /**
-     * Returns the route for this event.
+     * Gets the route.
      *
-     * @return Route|null
+     * @return Route
      */
     public function getRoute()
     {
         return $this->route;
     }
 
-    public function setRoute(Route $route = null)
+    /**
+     * Sets the route.
+     *
+     * @param Route
+     */
+    public function setRoute(Route $route)
     {
         $this->route = $route;
     }
 
     /**
-     * Returns the reflection class for this event.
+     * Gets the controller.
      *
-     * @return ReflectionClass
+     * @return mixed
      */
-    public function getClass()
+    public function getController()
     {
-        return $this->class;
+        $controller = $this->route->getDefault('_controller');
+
+        if (is_string($controller)) {
+            return explode('::', $controller, 2);
+        }
+
+        return $controller;
     }
 
     /**
-     * Returns the reflection method for this event.
+     * Gets the controller reflection class.
      *
-     * @return ReflectionMethod
+     * @return \ReflectionClass
      */
-    public function getMethod()
+    public function getControllerClass()
     {
-        return $this->method;
+        $controller = $this->getController();
+
+        if (is_array($controller)) {
+            return new \ReflectionClass($controller[0]);
+        }
     }
 
     /**
-     * Returns the options for this event.
+     * Gets the controller reflection method.
      *
-     * @return array
+     * @return \ReflectionMethod
      */
-    public function getOptions()
+    public function getControllerMethod()
     {
-        return $this->options;
+        $controller = $this->getController();
+
+        if (is_array($controller)) {
+            return new \ReflectionMethod($controller[0], $controller[1]);
+        }
     }
 }

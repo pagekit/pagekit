@@ -12,11 +12,34 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@site: /' => 'Pagekit\\Site\\Controller\\SiteController',
-        '@site/api/menu: /api/site/menu' => 'Pagekit\\Site\\Controller\\MenuController',
-        '@site/api/node: /api/site/node' => 'Pagekit\\Site\\Controller\\NodeController'
+        '@site' => [
+            'path' => '/',
+            'controller' => 'Pagekit\\Site\\Controller\\SiteController'
+        ],
+        '@site/api/menu' => [
+            'path' => '/api/site/node',
+            'controller' => 'Pagekit\\Site\\Controller\\MenuController'
+        ],
+        '@site/api/node' => [
+            'path' => '/api/site/menu',
+            'controller' => 'Pagekit\\Site\\Controller\\NodeController'
+        ]
+
+    ],
+
+    'resources' => [
+
+        'site:' => ''
+
+    ],
+
+    'permissions' => [
+
+        'site: manage site' => [
+            'title' => 'Manage site'
+        ]
 
     ],
 
@@ -32,22 +55,8 @@ return [
 
     ],
 
-    'permissions' => [
-
-        'site: manage site' => [
-            'title' => 'Manage site'
-        ]
-
-    ],
-
     'config' => [
         'menus' => []
-    ],
-
-    'resources' => [
-
-        'site:' => ''
-
     ]
 
 ];

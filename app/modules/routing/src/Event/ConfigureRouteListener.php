@@ -35,7 +35,7 @@ class ConfigureRouteListener implements EventSubscriberInterface
 
             $class = "{$this->namespace}\\$class";
 
-            if (($annotation = $reader->getClassAnnotation($event->getClass(), $class) or $annotation = $reader->getMethodAnnotation($event->getMethod(), $class))
+            if (($annotation = $reader->getClassAnnotation($event->getControllerClass(), $class) or $annotation = $reader->getMethodAnnotation($event->getControllerMethod(), $class))
                 and $data = $annotation->getData()
             ) {
                 $event->getRoute()->setDefault($name, $data);

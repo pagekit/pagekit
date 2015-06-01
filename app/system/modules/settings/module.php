@@ -65,9 +65,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system/settings: /system/settings' => 'Pagekit\\System\\Controller\\SettingsController'
+        '@system/settings' => [
+            'path' => '/system/settings',
+            'controller' => 'Pagekit\\System\\Controller\\SettingsController'
+        ]
 
     ],
 

@@ -10,10 +10,12 @@ use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\RouterListener;
 use Pagekit\Routing\Event\StringResponseListener;
+use Pagekit\Routing\Loader\RoutesLoader;
 use Pagekit\Routing\Middleware;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
+use Pagekit\Routing\Routes;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 return [
@@ -22,25 +24,31 @@ return [
 
     'main' => function ($app) {
 
+        $app['routes'] = function () {
+            return new Routes();
+        };
+
         $app['router'] = function ($app) {
-            return new Router($app['events'], $app['request.stack'], ['cache' => $app['path.cache']]);
+            return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack']);
         };
 
-        $app['aliases'] = function () {
-            return new AliasCollection();
-        };
+        // , ['cache' => $app['path.cache']]
 
-        $app['callbacks'] = function () {
-            return new CallbackCollection();
-        };
+        // $app['aliases'] = function () {
+        //     return new AliasCollection();
+        // };
 
-        $app['controllers'] = function ($app) {
-            return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
-        };
+        // $app['callbacks'] = function () {
+        //     return new CallbackCollection();
+        // };
 
-        $app['middleware'] = function ($app) {
-            return new Middleware($app['events']);
-        };
+        // $app['controllers'] = function ($app) {
+        //     return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
+        // };
+
+        // $app['middleware'] = function ($app) {
+        //     return new Middleware($app['events']);
+        // };
 
     },
 
@@ -49,31 +57,21 @@ return [
         $app->subscribe(
             new ConfigureRouteListener,
             new ParamFetcherListener(new ParamFetcher(new FilterManager)),
-            new RouterListener($app['router']),
-            $app['aliases'],
-            $app['callbacks'],
-            $app['controllers']
+            new RouterListener($app['router'])
         );
 
-        $app['middleware'];
+        // $app['middleware'];
 
         $app->on('app.request', function () use ($app) {
 
             foreach ($app['module'] as $module) {
 
-                if (!isset($module->controllers)) {
+                if (!isset($module->routes)) {
                     continue;
                 }
 
-                foreach ($module->controllers as $prefix => $controller) {
-
-                    $namespace = '';
-
-                    if (strpos($prefix, ':') !== false) {
-                        list($namespace, $prefix) = explode(':', $prefix);
-                    }
-
-                    $app['controllers']->mount($prefix, $controller, $namespace);
+                foreach ($module->routes as $name => $route) {
+                    $app['routes']->add($name, $route);
                 }
 
             }

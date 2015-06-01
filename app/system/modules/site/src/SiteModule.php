@@ -19,38 +19,37 @@ class SiteModule extends Module
      */
     public function main(App $app)
     {
-        $app['node'] = function($app) {
-            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
-                return $node;
-            }
+        // $app['node'] = function($app) {
+        //     if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
+        //         return $node;
+        //     }
 
-            return new Node;
-        };
+        //     return new Node;
+        // };
 
-        $app->on('app.request', function() use ($app) {
-            foreach (Node::where(['status = ?'], [1])->get() as $node) {
-                if ($type = $this->getType($node->getType())) {
+        // $app->on('app.request', function() use ($app) {
+        //     foreach (Node::where(['status = ?'], [1])->get() as $node) {
+        //         if ($type = $this->getType($node->getType())) {
 
-                    if ($node->get('frontpage')) {
-                        $this->setFrontpage($type->getLink($node));
-                    }
+        //             if ($node->get('frontpage')) {
+        //                 $this->setFrontpage($type->getLink($node));
+        //             }
 
-                    $type->bind($node);
-                }
-            }
+        //             $type->bind($node);
+        //         }
+        //     }
 
-        }, 150);
+        // }, 150);
 
-        $app->on('app.request', function() use ($app) {
-            if ($this->frontpage) {
-                $app['aliases']->add('/', $this->frontpage);
-            } else {
-                $app['callbacks']->get('/', '_frontpage', function() {
-                    return __('No Frontpage assigned.');
-                });
-            }
-        }, 125);
-
+        // $app->on('app.request', function() use ($app) {
+        //     if ($this->frontpage) {
+        //         $app['aliases']->add('/', $this->frontpage);
+        //     } else {
+        //         $app['callbacks']->get('/', '_frontpage', function() {
+        //             return __('No Frontpage assigned.');
+        //         });
+        //     }
+        // }, 125);
     }
 
     /**

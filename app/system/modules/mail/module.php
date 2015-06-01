@@ -97,9 +97,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system: /system' => 'Pagekit\\Mail\\Controller\\MailController'
+        '@system' => [
+            'path' => '/system',
+            'controller' => 'Pagekit\\Mail\\Controller\\MailController'
+        ]
 
     ],
 
@@ -116,4 +119,5 @@ return [
         'from_address' => null
 
     ]
+
 ];

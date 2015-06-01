@@ -20,9 +20,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system/info: /system/info' => 'Pagekit\\Info\\Controller\\InfoController'
+        '@system/info' => [
+            'path' => '/system/info',
+            'controller' => 'Pagekit\\Info\\Controller\\InfoController'
+        ]
 
     ],
 

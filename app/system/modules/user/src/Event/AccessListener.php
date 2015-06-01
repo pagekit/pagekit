@@ -12,7 +12,6 @@ use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
 
-
 class AccessListener implements EventSubscriberInterface
 {
     /**
@@ -45,17 +44,18 @@ class AccessListener implements EventSubscriberInterface
         $access = [];
         $route  = $event->getRoute();
 
-        foreach (array_merge($this->reader->getClassAnnotations($event->getClass()), $this->reader->getMethodAnnotations($event->getMethod())) as $annot) {
+        foreach (array_merge($this->reader->getClassAnnotations($event->getControllerClass()), $this->reader->getMethodAnnotations($event->getControllerMethod())) as $annot) {
             if ($annot instanceof Access) {
 
                 if ($expression = $annot->getExpression()) {
                     $access[] = $expression;
                 }
 
-                if (null !== $annot->getAdmin()) {
-                    $route->setDefault('_admin', $admin = $annot->getAdmin());
+                if ($admin = $annot->getAdmin() !== null) {
 
+                    $route->setPath('admin'.rtrim($route->getPath(), '/'));
                     $permission = 'system: access admin area';
+
                     if ($admin) {
                         $access[] = $permission;
                     } else {
@@ -123,27 +123,12 @@ class AccessListener implements EventSubscriberInterface
     }
 
     /**
-     * Prepends "/admin" path.
-     *
-     * @param RouteCollectionEvent $event
-     */
-    public function getRoutes(RouteCollectionEvent $event)
-    {
-        foreach ($event->getRoutes() as $route) {
-            if ($route->getDefault('_admin')) {
-                $route->setPath('admin'.rtrim($route->getPath(), '/'));
-            }
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function subscribe()
     {
         return [
             'route.configure'  => 'onConfigureRoute',
-            'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
             'app.request'      => [
                 ['onLateRequest', -512],

@@ -30,14 +30,19 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system: /' => 'Pagekit\\OAuth\\Controller\\OAuthController'
+        '@system' => [
+            'path' => '/',
+            'controller' => 'Pagekit\\OAuth\\Controller\\OAuthController'
+        ]
 
     ],
 
     'config' => [
+
         'provider' => [],
+
     ]
 
 ];

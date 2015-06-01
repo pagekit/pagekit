@@ -12,15 +12,18 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system/dashboard:' => ''
+        '@dashboard' => [
+            'path' => '/dashboard',
+            'controller' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@dashboard: /dashboard' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
+        'system/dashboard:' => ''
 
     ],
 

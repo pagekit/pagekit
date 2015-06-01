@@ -12,25 +12,51 @@ return [
 
     ],
 
+    'routes' => [
+
+        '@user' => [
+            'path' => '/user',
+            'controller' => [
+                'Pagekit\\User\\Controller\\AuthController',
+                'Pagekit\\User\\Controller\\ProfileController',
+                'Pagekit\\User\\Controller\\RegistrationController',
+                'Pagekit\\User\\Controller\\ResetPasswordController',
+                'Pagekit\\User\\Controller\\UserController'
+            ]
+        ],
+        '@user/api' => [
+            'path' => '/api/user',
+            'controller' => [
+                'Pagekit\\User\\Controller\\RoleApiController',
+                'Pagekit\\User\\Controller\\UserApiController'
+            ]
+        ]
+
+    ],
+
     'resources' => [
 
         'system/user:' => ''
 
     ],
 
-    'controllers' => [
+    'permissions' => [
 
-        '@user: /user' => [
-            'Pagekit\\User\\Controller\\AuthController',
-            'Pagekit\\User\\Controller\\ProfileController',
-            'Pagekit\\User\\Controller\\RegistrationController',
-            'Pagekit\\User\\Controller\\ResetPasswordController',
-            'Pagekit\\User\\Controller\\UserController'
+        'user: manage users' => [
+            'title' => 'Manage users',
+            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ],
-
-        '@user/api: /api/user' => [
-            'Pagekit\\User\\Controller\\RoleApiController',
-            'Pagekit\\User\\Controller\\UserApiController'
+        'user: manage user permissions' => [
+            'title' => 'Manage user permissions',
+            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+        ],
+        'user: manage settings' => [
+            'title' => 'Manage settings',
+            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+        ],
+        'system: access admin area' => [
+            'title' => 'Access admin area',
+            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ]
 
     ],
@@ -70,27 +96,6 @@ return [
             'parent'   => 'user',
             'url'      => '@user/settings',
             'access'   => 'user: manage user settings'
-        ]
-
-    ],
-
-    'permissions' => [
-
-        'user: manage users' => [
-            'title' => 'Manage users',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ],
-        'user: manage user permissions' => [
-            'title' => 'Manage user permissions',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ],
-        'user: manage settings' => [
-            'title' => 'Manage settings',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
-        ],
-        'system: access admin area' => [
-            'title' => 'Access admin area',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
         ]
 
     ],

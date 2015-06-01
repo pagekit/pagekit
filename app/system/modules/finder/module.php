@@ -23,16 +23,22 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system/finder:' => ''
+        '@system/finder' => [
+            'path' => '/system/finder',
+            'controller' => 'Pagekit\\Finder\\Controller\\FinderController'
+        ],
+        '@system/storage' => [
+            'path' => '/system/storage',
+            'controller' => 'Pagekit\\Finder\\Controller\\StorageController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@system/finder: /system/finder' => 'Pagekit\\Finder\\Controller\\FinderController',
-        '@system/storage: /system/storage' => 'Pagekit\\Finder\\Controller\\StorageController'
+        'system/finder:' => ''
 
     ],
 
