@@ -2,8 +2,6 @@
 
 namespace Pagekit\Routing;
 
-use Symfony\Component\Routing\Route;
-
 class Routes implements \IteratorAggregate
 {
     /**
@@ -21,10 +19,10 @@ class Routes implements \IteratorAggregate
     public function add($name, $route)
     {
         if (is_array($route)) {
-            $route = $this->createRoute($route);
+            $route = $this->createRoute($name, $route);
         }
 
-        return $this->routes[$name] = $route;
+        return $this->routes[] = $route;
     }
 
     /**
@@ -79,10 +77,11 @@ class Routes implements \IteratorAggregate
     /**
      * Creates a route from array definition.
      *
-     * @param  array $config
+     * @param  string $name
+     * @param  array  $config
      * @return Route
      */
-    protected function createRoute(array $config)
+    protected function createRoute($name, array $config)
     {
         $defaults = isset($config['defaults']) ? $config['defaults'] : [];
         $requirements = isset($config['requirements']) ? $config['requirements'] : [];
@@ -96,6 +95,6 @@ class Routes implements \IteratorAggregate
             $options['controller'] = $config['controller'];
         }
 
-        return new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
+        return (new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition))->setName($name);
     }
 }

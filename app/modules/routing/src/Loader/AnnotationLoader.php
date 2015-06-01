@@ -5,8 +5,8 @@ namespace Pagekit\Routing\Loader;
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
+use Pagekit\Routing\Annotation\Route as RouteAnnotation;
+use Pagekit\Routing\Route;
 
 class AnnotationLoader implements LoaderInterface
 {
@@ -24,6 +24,11 @@ class AnnotationLoader implements LoaderInterface
      * @var string
      */
     protected $routeAnnotation = 'Pagekit\Routing\Annotation\Route';
+
+    /**
+     * @var array
+     */
+    protected $routes = [];
 
     /**
      * Constructor.
@@ -50,7 +55,7 @@ class AnnotationLoader implements LoaderInterface
             throw new \InvalidArgumentException(sprintf('Annotations from class "%s" cannot be read as it is abstract.', $class->getName()));
         }
 
-        $routes = new RouteCollection();
+        $this->routes = [];
         $globals = $this->getGlobals($class);
 
         foreach ($class->getMethods() as $method) {
@@ -59,47 +64,45 @@ class AnnotationLoader implements LoaderInterface
 
             if ($method->isPublic() && 'Action' == substr($method->name, -6)) {
 
-                $count = count($routes);
+                $count = count($this->routes);
 
                 foreach ($this->getAnnotationReader()->getMethodAnnotations($method) as $annotation) {
                     if ($annotation instanceof $this->routeAnnotation) {
-                        $this->addRoute($routes, $class, $method, $annotation, $globals);
+                        $this->addRoute($class, $method, $annotation, $globals);
                     }
                 }
 
-                if ($count == count($routes)) {
-                    $this->addRoute($routes, $class, $method, new $this->routeAnnotation(), $globals);
+                if ($count == count($this->routes)) {
+                    $this->addRoute($class, $method, new $this->routeAnnotation(), $globals);
                 }
             }
         }
 
-        return $routes;
+        return $this->routes;
     }
 
     /**
      * Adds a new route.
      *
-     * @param RouteCollection   $routes
      * @param \ReflectionClass  $class
      * @param \ReflectionMethod $method
      * @param RouteAnnotation   $annotation
      * @param array             $globals
      */
-    protected function addRoute(RouteCollection $routes, \ReflectionClass $class, \ReflectionMethod $method, $annotation, $globals)
+    protected function addRoute(\ReflectionClass $class, \ReflectionMethod $method, $annotation, $globals)
     {
         $name = $annotation->getName() ?: $this->getDefaultRouteName($class, $method);
         $path = $annotation->getPath() ?: $this->getDefaultRoutePath($class, $method);
 
-        $route = new Route(rtrim($globals['path'].$path, '/'));
-        $route->setDefaults(array_replace($globals['defaults'], $annotation->getDefaults(), ['_controller' => $class->name.'::'.$method->name]));
-        $route->setRequirements(array_replace($globals['requirements'], $annotation->getRequirements()));
-        $route->setOptions(array_replace($globals['options'], $annotation->getOptions()));
-        $route->setHost($annotation->getHost() ?: $globals['host']);
-        $route->setSchemes(array_replace($globals['schemes'], $annotation->getSchemes()));
-        $route->setMethods(array_replace($globals['methods'], $annotation->getMethods()));
-        $route->setCondition($annotation->getCondition() ?: $globals['condition']);
-
-        $routes->add($globals['name'].$name, $route);
+        $this->routes[] = (new Route(rtrim($globals['path'].$path, '/')))
+            ->setName($globals['name'].$name)
+            ->setDefaults(array_replace($globals['defaults'], $annotation->getDefaults(), ['_controller' => $class->name.'::'.$method->name]))
+            ->setRequirements(array_replace($globals['requirements'], $annotation->getRequirements()))
+            ->setOptions(array_replace($globals['options'], $annotation->getOptions()))
+            ->setHost($annotation->getHost() ?: $globals['host'])
+            ->setSchemes(array_replace($globals['schemes'], $annotation->getSchemes()))
+            ->setMethods(array_replace($globals['methods'], $annotation->getMethods()))
+            ->setCondition($annotation->getCondition() ?: $globals['condition']);
     }
 
     /**

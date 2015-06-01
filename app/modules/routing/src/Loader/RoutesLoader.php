@@ -4,7 +4,7 @@ namespace Pagekit\Routing\Loader;
 
 use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Routing\Event\ConfigureRouteEvent;
-use Symfony\Component\Routing\Route;
+use Pagekit\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 class RoutesLoader implements LoaderInterface
@@ -43,13 +43,13 @@ class RoutesLoader implements LoaderInterface
     {
         $this->routes = new RouteCollection();
 
-        foreach ($routes as $name => $route) {
+        foreach ($routes as $route) {
             foreach ((array) $route->getOption('controller') as $controller) {
 
                 if (is_callable($controller)) {
-                    $this->addRoute($name, $route);
+                    $this->addRoute($route);
                 } elseif (class_exists($controller)) {
-                    $this->addController($name, $route, $controller);
+                    $this->addController($route->getName(), $route, $controller);
                 }
 
             }
@@ -61,13 +61,12 @@ class RoutesLoader implements LoaderInterface
     /**
      * Adds a route.
      *
-     * @param string $name
-     * @param Route  $route
+     * @param Route $route
      */
-    protected function addRoute($name, $route)
+    protected function addRoute($route)
     {
         if ($route = $this->events->trigger(new ConfigureRouteEvent($route))->getRoute()) {
-            $this->routes->add($name, $route);
+            $this->routes->add($route->getName(), $route);
         }
     }
 
@@ -80,11 +79,12 @@ class RoutesLoader implements LoaderInterface
      */
     protected function addController($prefix, $route, $controller)
     {
-       try {
+        try {
 
             foreach ($this->loader->load($controller) as $name => $r) {
 
-                $this->addRoute(trim("$prefix/$name", "/"), $r
+                $this->addRoute($r
+                    ->setName(trim("$prefix/$name", "/"))
                     ->setPath(rtrim($route->getPath().$r->getPath(), '/'))
                     ->addDefaults($route->getDefaults())
                     ->addRequirements($route->getRequirements())
