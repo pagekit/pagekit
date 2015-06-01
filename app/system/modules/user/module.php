@@ -69,7 +69,7 @@ return [
             'url'      => '@user',
             'active'   => '@user*',
             'access'   => 'user: manage users || user: manage user permissions',
-            'priority' => 15
+            'priority' => 115
         ],
         'user: users' => [
             'label'    => 'List',
@@ -77,7 +77,6 @@ return [
             'url'      => '@user',
             'active'   => '@user(?!permission|role)',
             'access'   => 'user: manage users',
-            'priority' => 15
         ],
         'user: permissions' => [
             'label'    => 'Permissions',

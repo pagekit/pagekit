@@ -3,6 +3,7 @@
 namespace Pagekit\Mail\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Util\Arr;
 
 /**
  * @Access("system: access settings", admin=true)
@@ -35,7 +36,7 @@ class MailController
     {
         try {
 
-            $config = App::module('system/mail')->config->merge($option);
+            $config = Arr::merge(App::module('system/mail')->config(), $option);
 
             $response['success'] = (bool) App::mailer()->create(__('Test email!'), __('Testemail'), $config['from_address'])->send();
             $response['message'] = $response['success'] ? __('Mail successfully sent!') : __('Mail delivery failed!');

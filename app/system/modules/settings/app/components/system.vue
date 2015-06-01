@@ -57,7 +57,7 @@
     module.exports = {
 
         section: {
-            name: 'settings-system',
+            name: 'system',
             label: 'System',
             icon: 'uk-icon-wrench',
             priority: 10

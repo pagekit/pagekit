@@ -41,7 +41,7 @@
     module.exports = {
 
         section: {
-            name: 'settings-locale',
+            name: 'locale',
             label: 'Localization',
             icon: 'uk-icon-globe',
             priority: 20

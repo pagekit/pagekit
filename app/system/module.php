@@ -72,7 +72,6 @@ return [
         'system/info',
         'system/mail',
         'system/menu',
-        'system/oauth',
         'system/package',
         'system/page',
         'system/settings',

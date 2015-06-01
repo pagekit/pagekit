@@ -34,7 +34,7 @@ return [
             'icon'     => 'system/dashboard:assets/images/icon-dashboard.svg',
             'url'      => '@dashboard',
             'active'   => '@dashboard*',
-            'priority' => 0
+            'priority' => 100
         ]
 
     ],

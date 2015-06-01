@@ -3,6 +3,7 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Util\Arr;
 
 /**
  * @Access("site: manage site")
@@ -19,11 +20,28 @@ class SiteController
 
         return [
             '$view' => [
-                'title' => __('Nodes'),
+                'title' => __('Pages'),
                 'name'  => 'site:views/admin/index.php'
             ],
             '$data' => [
                 'types' => array_values($site->getTypes())
+            ]
+        ];
+    }
+
+    /**
+     * @Route("site/settings")
+     * @Access(admin=true)
+     */
+    public function settingsAction()
+    {
+        return [
+            '$view' => [
+                'title' => __('Settings'),
+                'name'  => 'site:views/admin/settings.php'
+            ],
+            '$data' => [
+                'config' => Arr::extract(App::system()->config(), ['site.', 'maintenance.'])
             ]
         ];
     }

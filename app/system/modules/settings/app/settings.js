@@ -38,24 +38,18 @@ var Settings = Vue.extend({
             e.preventDefault();
 
             this.$broadcast('save', this.$data);
-
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
-
                 UIkit.notify(this.$trans('Settings saved.'));
-
             }, function (data) {
-
                 UIkit.notify(data, 'danger');
             });
-
         }
 
     },
 
     components: {
-        'settings-locale': require('./components/locale.vue'),
-        'settings-site':   require('./components/site.vue'),
-        'settings-system': require('./components/system.vue')
+        locale: require('./components/locale.vue'),
+        system: require('./components/system.vue')
     }
 
 });

@@ -64,7 +64,7 @@ return [
             'label'    => 'Marketplace',
             'icon'     => 'system/package:assets/images/icon-marketplace.svg',
             'url'      => '@system/marketplace/extensions',
-            'priority' => 15
+            'priority' => 125
         ],
 
         'system: marketplace extensions' => [
@@ -84,7 +84,7 @@ return [
             'parent'   => 'system: system',
             'url'      => '@system/package/extensions',
             'access'   => 'system: manage packages',
-            'priority' => 130
+            'priority' => 5
         ],
 
         'system: themes' => [
@@ -92,7 +92,7 @@ return [
             'parent'   => 'system: system',
             'url'      => '@system/package/themes',
             'access'   => 'system: manage packages',
-            'priority' => 130
+            'priority' => 10
         ]
 
     ]

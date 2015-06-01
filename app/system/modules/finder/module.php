@@ -49,7 +49,7 @@ return [
             'parent'   => 'system: system',
             'url'      => '@system/storage',
             'access'   => 'system: manage storage',
-            'priority' => 140
+            'priority' => 20
         ]
 
     ]

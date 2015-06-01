@@ -50,12 +50,18 @@ return [
             'icon'     => 'site:assets/images/icon-site.svg',
             'url'      => '@site',
             'active'   => '@site*',
-            'priority' => 0
+            'priority' => 105
         ],
         'site: pages' => [
             'label'    => 'Pages',
             'parent'   => 'site',
             'url'      => '@site'
+        ],
+        'site: settings' => [
+            'label'    => 'Settings',
+            'parent'   => 'site',
+            'url'      => '@site/settings',
+            'priority' => 5
         ]
 
     ],

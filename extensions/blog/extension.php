@@ -77,11 +77,12 @@ return [
     'menu' => [
 
         'blog' => [
-            'label'  => 'Blog',
-            'icon'   => 'extensions/blog/extension.svg',
-            'url'    => '@blog/post',
-            'active' => '@blog/post*',
-            'access' => 'blog: manage content || blog: manage comments'
+            'label'    => 'Blog',
+            'icon'     => 'extensions/blog/extension.svg',
+            'url'      => '@blog/post',
+            'active'   => '@blog/post*',
+            'access'   => 'blog: manage content || blog: manage comments',
+            'priority' => 110
         ],
         'blog: posts' => [
             'label'  => 'Posts',
