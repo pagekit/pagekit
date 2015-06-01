@@ -51,6 +51,11 @@ return [
             'url'      => '@site',
             'active'   => '@site*',
             'priority' => 0
+        ],
+        'site: pages' => [
+            'label'    => 'Pages',
+            'parent'   => 'site',
+            'url'      => '@site'
         ]
 
     ],

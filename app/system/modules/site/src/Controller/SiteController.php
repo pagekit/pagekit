@@ -30,7 +30,6 @@ class SiteController
 
     /**
      * @Route("api/site", name="api/site")
-     * @Access("site: manage site")
      */
     public function apiSiteAction()
     {
