@@ -29,7 +29,7 @@ return [
         };
 
         $app['router'] = function ($app) {
-            return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack']);
+            return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack'], ['cache' => $app['path.cache']]);
         };
 
         // , ['cache' => $app['path.cache']]

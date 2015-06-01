@@ -2,7 +2,7 @@
 
 namespace Pagekit\Routing;
 
-class Routes implements \IteratorAggregate
+class Routes implements \IteratorAggregate, \Serializable
 {
     /**
      * @var array
@@ -10,7 +10,7 @@ class Routes implements \IteratorAggregate
     protected $routes = [];
 
     /**
-     * @var \Closure[]
+     * @var callable[]
      */
     protected $callbacks = [];
 
@@ -34,39 +34,36 @@ class Routes implements \IteratorAggregate
      * Maps a route to a callback (GET).
      *
      * @param  string   $path
-     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function get($path, $name, $callback)
+    public function get($path, $callback)
     {
-        return $this->match($path, $name, $callback)->setMethods('GET');
+        return $this->match($path, $callback)->setMethods('GET');
     }
 
     /**
      * Maps a route to a callback (POST).
      *
      * @param  string   $path
-     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function post($path, $name, $callback)
+    public function post($path, $callback)
     {
-        return $this->match($path, $name, $callback)->setMethods('POST');
+        return $this->match($path, $callback)->setMethods('POST');
     }
 
     /**
      * Maps a route to a callback.
      *
      * @param  string   $path
-     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function match($path, $name, $callback)
+    public function match($path, $callback)
     {
-        return $this->add($name, ['path' => $path, 'controller' => $callback]);
+        return $this->add($path, ['path' => $path, 'controller' => $callback]);
     }
 
     /**
@@ -81,13 +78,27 @@ class Routes implements \IteratorAggregate
     }
 
     /**
-     * Implements the \IteratorAggregate.
-     *
-     * @return \ArrayIterator
+     * {@inheritdoc}
      */
     public function getIterator()
     {
         return new \ArrayIterator($this->routes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize($this->routes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $this->routes = unserialize($serialized);
     }
 
     /**
@@ -106,11 +117,12 @@ class Routes implements \IteratorAggregate
         $schemes = isset($config['schemes']) ? $config['schemes'] : [];
         $methods = isset($config['methods']) ? $config['methods'] : [];
         $condition = isset($config['condition']) ? $config['condition'] : '';
-        
+
         $options['controller'] = isset($config['controller']) ? $config['controller'] : '';
 
         if (is_callable($options['controller'])) {
             $this->callbacks[$name] = $options['controller'];
+            $options['controller'] = '__callback';
         } else {
             unset ($this->callbacks[$name]);
         }
