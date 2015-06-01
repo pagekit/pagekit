@@ -81,10 +81,10 @@ class RoutesLoader implements LoaderInterface
     {
         try {
 
-            foreach ($this->loader->load($controller) as $name => $r) {
+            foreach ($this->loader->load($controller) as $r) {
 
                 $this->addRoute($r
-                    ->setName(trim("$prefix/$name", "/"))
+                    ->setName(trim("$prefix/{$r->getName()}", "/"))
                     ->setPath(rtrim($route->getPath().$r->getPath(), '/'))
                     ->addDefaults($route->getDefaults())
                     ->addRequirements($route->getRequirements())

@@ -2,13 +2,15 @@
 
 namespace Pagekit\Routing\Loader;
 
+use Pagekit\Routing\Route;
+
 interface LoaderInterface
 {
     /**
-     * Loads a route collection.
+     * Loads routes.
      *
      * @param  mixed $routes
-     * @return RouteCollection
+     * @return Route[]
      */
     public function load($routes);
 }

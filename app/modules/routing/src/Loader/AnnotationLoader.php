@@ -26,11 +26,6 @@ class AnnotationLoader implements LoaderInterface
     protected $routeAnnotation = 'Pagekit\Routing\Annotation\Route';
 
     /**
-     * @var array
-     */
-    protected $routes = [];
-
-    /**
      * Constructor.
      *
      * @param Reader $reader
@@ -55,7 +50,7 @@ class AnnotationLoader implements LoaderInterface
             throw new \InvalidArgumentException(sprintf('Annotations from class "%s" cannot be read as it is abstract.', $class->getName()));
         }
 
-        $this->routes = [];
+        $routes = [];
         $globals = $this->getGlobals($class);
 
         foreach ($class->getMethods() as $method) {
@@ -64,37 +59,38 @@ class AnnotationLoader implements LoaderInterface
 
             if ($method->isPublic() && 'Action' == substr($method->name, -6)) {
 
-                $count = count($this->routes);
+                $count = count($routes);
 
                 foreach ($this->getAnnotationReader()->getMethodAnnotations($method) as $annotation) {
                     if ($annotation instanceof $this->routeAnnotation) {
-                        $this->addRoute($class, $method, $annotation, $globals);
+                        $this->addRoute($routes, $class, $method, $annotation, $globals);
                     }
                 }
 
-                if ($count == count($this->routes)) {
-                    $this->addRoute($class, $method, new $this->routeAnnotation(), $globals);
+                if ($count == count($routes)) {
+                    $this->addRoute($routes, $class, $method, new $this->routeAnnotation(), $globals);
                 }
             }
         }
 
-        return $this->routes;
+        return $routes;
     }
 
     /**
      * Adds a new route.
      *
+     * @param Route[]           $routes
      * @param \ReflectionClass  $class
      * @param \ReflectionMethod $method
      * @param RouteAnnotation   $annotation
      * @param array             $globals
      */
-    protected function addRoute(\ReflectionClass $class, \ReflectionMethod $method, $annotation, $globals)
+    protected function addRoute(array &$routes, \ReflectionClass $class, \ReflectionMethod $method, $annotation, $globals)
     {
-        $name = $annotation->getName() ?: $this->getDefaultRouteName($class, $method);
-        $path = $annotation->getPath() ?: $this->getDefaultRoutePath($class, $method);
+        $name = $annotation->getName() ?: $this->getDefaultRouteName($method);
+        $path = $annotation->getPath() ?: $this->getDefaultRoutePath($method);
 
-        $this->routes[] = (new Route(rtrim($globals['path'].$path, '/')))
+        $routes[] = (new Route(rtrim($globals['path'].$path, '/')))
             ->setName($globals['name'].$name)
             ->setDefaults(array_replace($globals['defaults'], $annotation->getDefaults(), ['_controller' => $class->name.'::'.$method->name]))
             ->setRequirements(array_replace($globals['requirements'], $annotation->getRequirements()))
@@ -153,11 +149,10 @@ class AnnotationLoader implements LoaderInterface
     /**
      * Gets the default route path for a class method.
      *
-     * @param  \ReflectionClass  $class
      * @param  \ReflectionMethod $method
      * @return string
      */
-    protected function getDefaultRoutePath(\ReflectionClass $class, \ReflectionMethod $method)
+    protected function getDefaultRoutePath(\ReflectionMethod $method)
     {
         $action = strtolower('/'.$this->parseControllerActionName($method));
 
@@ -171,11 +166,10 @@ class AnnotationLoader implements LoaderInterface
     /**
      * Gets the default route name for a class method.
      *
-     * @param  \ReflectionClass  $class
      * @param  \ReflectionMethod $method
      * @return string
      */
-    protected function getDefaultRouteName(\ReflectionClass $class, \ReflectionMethod $method)
+    protected function getDefaultRouteName(\ReflectionMethod $method)
     {
         if ('index' === $action = strtolower($this->parseControllerActionName($method))) {
             $action = '';
