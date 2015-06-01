@@ -3,7 +3,6 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Util\Arr;
 
 /**
  * @Access("site: manage site")
@@ -41,7 +40,7 @@ class SiteController
                 'name'  => 'site:views/admin/settings.php'
             ],
             '$data' => [
-                'config' => Arr::extract(App::system()->config(), ['site.', 'maintenance.'])
+                'config' => App::system()->config(['site.', 'maintenance.'])
             ]
         ];
     }

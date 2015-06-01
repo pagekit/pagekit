@@ -17,8 +17,8 @@ interface ModuleInterface
     /**
      * Gets a config setting.
      *
-     * @param  string $key
-     * @param  mixed  $default
+     * @param  mixed $key
+     * @param  mixed $default
      * @return mixed
      */
     public function config($key = null, $default = null);

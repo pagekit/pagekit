@@ -78,7 +78,7 @@ class WidgetModule extends Module
         });
 
         $app->on('app.request', function () use ($app) {
-            $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
+            // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
         });
 
     }

@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Util\Arr;
-
 return [
 
     'name' => 'system/settings',
@@ -50,12 +48,12 @@ return [
 
             $view->data('$settings', [
                 'options' => [
-                    'system' => Arr::extract($app['system']->config(), ['api.', 'site.', 'admin.', 'timezone', 'release_channel'])
+                    'system' => $app['system']->config(['api.', 'site.', 'admin.', 'timezone', 'release_channel'])
                 ],
                 'config' => [
-                    'system' => Arr::extract($app['system']->config(), ['storage']),
-                    'application' => Arr::extract($app['module']->get('application')->config(), ['debug']),
-                    'debug' => Arr::extract($app['module']->get('debug')->config(), ['enabled'])
+                    'system' => $app['system']->config(['storage']),
+                    'application' => $app['module']->get('application')->config(['debug']),
+                    'debug' => $app['module']->get('debug')->config(['enabled'])
                 ]
             ]);
 
