@@ -10,6 +10,11 @@ class Routes implements \IteratorAggregate
     protected $routes = [];
 
     /**
+     * @var \Closure[]
+     */
+    protected $callbacks = [];
+
+    /**
      * Adds a route.
      *
      * @param  string $name
@@ -29,39 +34,50 @@ class Routes implements \IteratorAggregate
      * Maps a route to a callback (GET).
      *
      * @param  string   $path
+     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function get($path, $callback)
+    public function get($path, $name, $callback)
     {
-        return $this->match($path, $callback)->setMethods('GET');
+        return $this->match($path, $name, $callback)->setMethods('GET');
     }
 
     /**
      * Maps a route to a callback (POST).
      *
      * @param  string   $path
+     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function post($path, $callback)
+    public function post($path, $name, $callback)
     {
-        return $this->match($path, $callback)->setMethods('POST');
+        return $this->match($path, $name, $callback)->setMethods('POST');
     }
 
     /**
      * Maps a route to a callback.
      *
      * @param  string   $path
+     * @param  string   $name
      * @param  callable $callback
      * @return Route
      */
-    public function match($path, $callback)
+    public function match($path, $name, $callback)
     {
-        $route = new Route($path);
-        $route->setDefault('_controller', $callback);
+        return $this->add($name, ['path' => $path, 'controller' => $callback]);
+    }
 
-        return $this->add($path, $route);
+    /**
+     * Gets a registered callback.
+     *
+     * @param  string $name
+     * @return callable|null
+     */
+    public function getCallback($name)
+    {
+        return isset($this->callbacks[$name]) ? $this->callbacks[$name] : null;
     }
 
     /**
@@ -90,9 +106,13 @@ class Routes implements \IteratorAggregate
         $schemes = isset($config['schemes']) ? $config['schemes'] : [];
         $methods = isset($config['methods']) ? $config['methods'] : [];
         $condition = isset($config['condition']) ? $config['condition'] : '';
+        
+        $options['controller'] = isset($config['controller']) ? $config['controller'] : '';
 
-        if (isset($config['controller'])) {
-            $options['controller'] = $config['controller'];
+        if (is_callable($options['controller'])) {
+            $this->callbacks[$name] = $options['controller'];
+        } else {
+            unset ($this->callbacks[$name]);
         }
 
         return (new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition))->setName($name);

@@ -62,7 +62,7 @@ class AnnotationLoader implements LoaderInterface
                 $count = count($routes);
 
                 foreach ($this->getAnnotationReader()->getMethodAnnotations($method) as $annotation) {
-                    if ($annotation instanceof $this->routeAnnotation) {
+                    if (is_a($annotation, $this->routeAnnotation, true)) {
                         $this->addRoute($routes, $class, $method, $annotation, $globals);
                     }
                 }

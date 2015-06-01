@@ -24,21 +24,23 @@ class ConfigureRouteListener implements EventSubscriberInterface
 
     /**
      * Reads the @Request annotations.
-     *
-     * @param ConfigureRouteEvent $event
      */
-    public function onConfigureRoute(ConfigureRouteEvent $event)
+    public function onConfigureRoute($event, $route)
     {
+        if (!$route->getControllerClass()) {
+            return;
+        }
+
         $reader = $this->getReader();
 
         foreach (['_request' => 'Request'] as $name => $class) {
 
             $class = "{$this->namespace}\\$class";
 
-            if (($annotation = $reader->getClassAnnotation($event->getControllerClass(), $class) or $annotation = $reader->getMethodAnnotation($event->getControllerMethod(), $class))
+            if (($annotation = $reader->getClassAnnotation($route->getControllerClass(), $class) or $annotation = $reader->getMethodAnnotation($route->getControllerMethod(), $class))
                 and $data = $annotation->getData()
             ) {
-                $event->getRoute()->setDefault($name, $data);
+                $route->setDefault($name, $data);
             }
         }
     }

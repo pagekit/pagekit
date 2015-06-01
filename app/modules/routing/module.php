@@ -78,6 +78,16 @@ return [
 
         }, 110);
 
+        $app->on('app.controller', function ($event, $request) use ($app) {
+
+            $name = $request->attributes->get('_route', '');
+
+            if ($callback = $app['routes']->getCallback($name)) {
+                $request->attributes->set('_controller', $callback);
+            };
+
+        }, 130);
+
         $app->error(function (HttpException $e) use ($app) {
 
             $request = $app['router']->getRequest();

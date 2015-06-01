@@ -5,6 +5,7 @@ namespace Pagekit\Routing;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Generator\UrlGeneratorDumper;
 use Pagekit\Routing\Generator\UrlGeneratorInterface;
+use Pagekit\Routing\Loader\LoaderInterface;
 use Pagekit\Routing\RequestContext as Context;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +78,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
      * @param RequestStack    $stack
      * @param array           $options
      */
-    public function __construct($resource, $loader, RequestStack $stack, array $options = [])
+    public function __construct($resource, LoaderInterface $loader, RequestStack $stack, array $options = [])
     {
         $this->resource = $resource;
         $this->loader   = $loader;

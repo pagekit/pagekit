@@ -8,8 +8,6 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Routing\Event\ConfigureRouteEvent;
-use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
 
 class AccessListener implements EventSubscriberInterface
@@ -31,20 +29,21 @@ class AccessListener implements EventSubscriberInterface
 
     /**
      * Reads the "@Access" annotations from the controller stores them in the "access" route option.
-     *
-     * @param ConfigureRouteEvent $event
      */
-    public function onConfigureRoute(ConfigureRouteEvent $event)
+    public function onConfigureRoute($event, $route)
     {
         if (!$this->reader) {
             $this->reader = new SimpleAnnotationReader;
             $this->reader->addNamespace('Pagekit\User\Annotation');
         }
 
-        $access = [];
-        $route  = $event->getRoute();
+        if (!$route->getControllerClass()) {
+            return;
+        }
 
-        foreach (array_merge($this->reader->getClassAnnotations($event->getControllerClass()), $this->reader->getMethodAnnotations($event->getControllerMethod())) as $annot) {
+        $access = [];
+
+        foreach (array_merge($this->reader->getClassAnnotations($route->getControllerClass()), $this->reader->getMethodAnnotations($route->getControllerMethod())) as $annot) {
             if ($annot instanceof Access) {
 
                 if ($expression = $annot->getExpression()) {
