@@ -2,16 +2,10 @@
 
 use Pagekit\Filter\FilterManager;
 use Pagekit\Kernel\Exception\HttpException;
-use Pagekit\Routing\Controller\AliasCollection;
-use Pagekit\Routing\Controller\CallbackCollection;
-use Pagekit\Routing\Controller\ControllerCollection;
-use Pagekit\Routing\Controller\ControllerReader;
+use Pagekit\Routing\Event\AliasListener;
 use Pagekit\Routing\Event\ConfigureRouteListener;
-use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\RouterListener;
-use Pagekit\Routing\Event\StringResponseListener;
 use Pagekit\Routing\Loader\RoutesLoader;
-use Pagekit\Routing\Middleware;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
@@ -24,31 +18,13 @@ return [
 
     'main' => function ($app) {
 
-        $app['routes'] = function () {
+        $app['routes'] = function ($app) {
             return new Routes();
         };
 
         $app['router'] = function ($app) {
             return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack'], ['cache' => $app['path.cache']]);
         };
-
-        // , ['cache' => $app['path.cache']]
-
-        // $app['aliases'] = function () {
-        //     return new AliasCollection();
-        // };
-
-        // $app['callbacks'] = function () {
-        //     return new CallbackCollection();
-        // };
-
-        // $app['controllers'] = function ($app) {
-        //     return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
-        // };
-
-        // $app['middleware'] = function ($app) {
-        //     return new Middleware($app['events']);
-        // };
 
     },
 
@@ -57,7 +33,8 @@ return [
         $app->subscribe(
             new ConfigureRouteListener,
             new ParamFetcherListener(new ParamFetcher(new FilterManager)),
-            new RouterListener($app['router'])
+            new RouterListener($app['router']),
+            new AliasListener($app['routes'])
         );
 
         // $app['middleware'];

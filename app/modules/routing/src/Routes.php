@@ -15,6 +15,11 @@ class Routes implements \IteratorAggregate, \Serializable
     protected $callbacks = [];
 
     /**
+     * @var array[]
+     */
+    protected $aliases = [];
+
+    /**
      * Adds a route.
      *
      * @param  string $name
@@ -78,6 +83,30 @@ class Routes implements \IteratorAggregate, \Serializable
     }
 
     /**
+     * Adds an alias.
+     *
+     * @param string $path
+     * @param string $name
+     * @param array  $defaults
+     */
+    public function alias($path, $name, array $defaults = [])
+    {
+        $path = preg_replace('/^[^\/]/', '/$0', $path);
+
+        $this->aliases[$name] = [$name, $path, $defaults];
+    }
+
+    /**
+     * Gets aliases.
+     *
+     * @return array[]
+     */
+    public function getAliases()
+    {
+        return $this->aliases;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getIterator()
@@ -90,7 +119,7 @@ class Routes implements \IteratorAggregate, \Serializable
      */
     public function serialize()
     {
-        return serialize($this->routes);
+        return serialize([$this->routes, $this->aliases]);
     }
 
     /**
@@ -98,7 +127,7 @@ class Routes implements \IteratorAggregate, \Serializable
      */
     public function unserialize($serialized)
     {
-        $this->routes = unserialize($serialized);
+        list($this->routes, $this->aliases) = unserialize($serialized);
     }
 
     /**

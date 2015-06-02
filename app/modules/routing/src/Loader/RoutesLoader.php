@@ -3,7 +3,6 @@
 namespace Pagekit\Routing\Loader;
 
 use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Routing\Event\ConfigureRouteEvent;
 use Pagekit\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -67,8 +66,8 @@ class RoutesLoader implements LoaderInterface
      */
     protected function addRoute($route)
     {
-        $this->events->trigger('route.configure', [$route]);
         $this->routes->add($route->getName(), $route);
+        $this->events->trigger('route.configure', [$route, $this->routes]);
     }
 
     /**

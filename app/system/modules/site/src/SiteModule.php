@@ -41,15 +41,15 @@ class SiteModule extends Module
 
         // }, 150);
 
-        // $app->on('app.request', function() use ($app) {
-        //     if ($this->frontpage) {
-        //         $app['aliases']->add('/', $this->frontpage);
-        //     } else {
-        //         $app['callbacks']->get('/', '_frontpage', function() {
-        //             return __('No Frontpage assigned.');
-        //         });
-        //     }
-        // }, 125);
+         $app->on('app.request', function() use ($app) {
+             if ($this->frontpage) {
+                 $app['routes']->alias('/', $this->frontpage);
+             } else {
+                 $app['routes']->get('/', function() {
+                     return __('No Frontpage assigned.');
+                 });
+             }
+         }, 125);
     }
 
     /**
