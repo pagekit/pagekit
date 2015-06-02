@@ -27,7 +27,7 @@ class Role extends BaseRole implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $role = $this->toJson();
 

@@ -135,21 +135,25 @@ class UserController
      */
     protected function getRoles(User $user = null)
     {
-        $roles = Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get();
+        $roles = [];
 
-        foreach ($roles as $role) {
+        foreach (Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get() as $role) {
+
+            $r = $role->jsonSerialize();
 
             if ($role->isAuthenticated()) {
-                $role->disabled = true;
+                $r['disabled'] = true;
             }
 
             if ($user && $user->getId() == App::user()->getId() && $user->isAdministrator() && $role->isAdministrator()) {
-                $role->disabled = true;
+                $r['disabled'] = true;
             }
 
             if ($user && $user->hasRole($role)) {
-                $role->selected = true;
+                $r['selected'] = true;
             }
+
+            $roles[] = $r;
         }
 
         return $roles;
