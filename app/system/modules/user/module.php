@@ -75,7 +75,7 @@ return [
             'label'    => 'List',
             'parent'   => 'user',
             'url'      => '@user',
-            'active'   => '@user(?!permission|role)',
+            'active'   => '@user(/edit)?',
             'access'   => 'user: manage users',
         ],
         'user: permissions' => [
