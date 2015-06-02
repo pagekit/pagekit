@@ -14,17 +14,16 @@ return [
 
     'routes' => [
 
-        // '@blog/site' => [
-        //     'label' => 'Blog',
-        //     'type' => 'blog',
-        //     'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
-        // ],
-        // '@blog/id' => [
-        //     'label' => 'Blog Post',
-        //     'type' => 'blog-post',
-        //     'alias' => '@blog/id'
-        // ],
-
+         '@blog/site' => [
+             'label' => 'Blog',
+             'type' => 'blog',
+             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
+         ],
+         '@blog/id' => [
+             'label' => 'Blog Post',
+             'type' => 'blog-post',
+             'alias' => true
+         ],
         '@blog' => [
             'path' => '/blog',
             'controller' => 'Pagekit\\Blog\\Controller\\BlogController'

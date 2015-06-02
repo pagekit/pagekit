@@ -14,6 +14,11 @@ return [
 
     'routes' => [
 
+        '@page/id' => [
+            'label' => 'Page',
+            'type' => 'page',
+            'alias' => 'true'
+        ],
         '@page' => [
             'path' => '/page',
             'controller' => 'Pagekit\\Page\\Controller\\SiteController'
