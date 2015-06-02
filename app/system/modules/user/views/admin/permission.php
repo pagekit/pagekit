@@ -14,9 +14,8 @@
             </thead>
             <tbody>
                 <tr v-repeat="permission: group">
-                    <td class="pk-table-text-break">
+                    <td class="pk-table-text-break" title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'bottom-left'}">
                         {{ permission.title | trans }}
-                        <small class="uk-text-muted uk-display-block" v-if="permission.description">{{ permission.description | trans }}</small>
                     </td>
                     <td class="uk-text-center" v-repeat="role: roles">
 
