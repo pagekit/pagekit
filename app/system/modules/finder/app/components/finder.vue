@@ -1,6 +1,6 @@
 <template>
 
-    <div v-cloak>
+    <div data-uk-observe v-cloak>
 
         <div class="pk-toolbar uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -89,7 +89,10 @@
 
             this.load().success(function () {
                 this.$dispatch('ready.finder', this);
+
             });
+
+            UIkit.init(this.$el);
         },
 
         watch: {
