@@ -112,8 +112,6 @@
                 }).error(function () {
                     this.$set('packages', null);
                     this.$set('status', 'error');
-                }).always(function() {
-
                 });
             },
 
