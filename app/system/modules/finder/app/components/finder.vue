@@ -56,10 +56,6 @@
             {{ 'No files.' | trans }}
         </div>
 
-        <div v-if="isWritable()" class="uk-placeholder uk-text-center uk-text-muted">
-            <img v-attr="src: $url('app/system/assets/images/finder-droparea.svg', true)" width="22" height="22" alt="{{ 'Droparea' | trans }}"> {{ 'Drop files here.' | trans }}
-        </div>
-
     </div>
 
 </template>

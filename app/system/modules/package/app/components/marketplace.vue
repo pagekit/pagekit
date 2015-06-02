@@ -2,7 +2,7 @@
 
     <div data-uk-observe>
 
-       <ul class="uk-grid uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+       <ul class="uk-grid uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
             <li v-repeat="pkg: packages">
                 <a class="uk-panel uk-panel-box pk-marketplace-panel uk-overlay-hover">
                     <div class="uk-panel-teaser">
@@ -112,6 +112,8 @@
                 }).error(function () {
                     this.$set('packages', null);
                     this.$set('status', 'error');
+                }).always(function() {
+
                 });
             },
 
