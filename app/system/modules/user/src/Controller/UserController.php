@@ -24,7 +24,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Users'),
-                'name'  => 'system/user:views/admin/user/index.php'
+                'name'  => 'system/user:views/admin/index.php'
             ],
             '$data' => [
                 'statuses' => User::getStatuses(),
@@ -59,7 +59,7 @@ class UserController
         return [
             '$view' => [
                 'title' => $id ? __('Edit User') : __('Add User'),
-                'name'  => 'system/user:views/admin/user/edit.php'
+                'name'  => 'system/user:views/admin/edit.php'
             ],
             '$data' => [
                 'user'     => $user,
@@ -135,21 +135,25 @@ class UserController
      */
     protected function getRoles(User $user = null)
     {
-        $roles = Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get();
+        $roles = [];
 
-        foreach ($roles as $role) {
+        foreach (Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get() as $role) {
+
+            $r = $role->jsonSerialize();
 
             if ($role->isAuthenticated()) {
-                $role->disabled = true;
+                $r['disabled'] = true;
             }
 
             if ($user && $user->getId() == App::user()->getId() && $user->isAdministrator() && $role->isAdministrator()) {
-                $role->disabled = true;
+                $r['disabled'] = true;
             }
 
             if ($user && $user->hasRole($role)) {
-                $role->selected = true;
+                $r['selected'] = true;
             }
+
+            $roles[] = $r;
         }
 
         return $roles;

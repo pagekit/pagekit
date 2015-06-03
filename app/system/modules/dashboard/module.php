@@ -12,15 +12,18 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system/dashboard:' => ''
+        '@dashboard' => [
+            'path' => '/dashboard',
+            'controller' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@dashboard: /dashboard' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
+        'system/dashboard:' => ''
 
     ],
 
@@ -31,7 +34,7 @@ return [
             'icon'     => 'system/dashboard:assets/images/icon-dashboard.svg',
             'url'      => '@dashboard',
             'active'   => '@dashboard*',
-            'priority' => 0
+            'priority' => 100
         ]
 
     ],

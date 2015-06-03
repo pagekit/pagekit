@@ -72,7 +72,6 @@ return [
         'system/info',
         'system/mail',
         'system/menu',
-        'system/oauth',
         'system/package',
         'system/page',
         'system/settings',
@@ -91,18 +90,30 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system:' => ''
+        '@system' => [
+            'path' => '/',
+            'controller' => 'Pagekit\\System\\Controller\\AdminController'
+        ],
+        '@system/intl' => [
+            'path' => '/system/intl',
+            'controller' => 'Pagekit\\System\\Controller\\IntlController'
+        ],
+        '@system/migration' => [
+            'path' => '/system/migration',
+            'controller' => 'Pagekit\\System\\Controller\\MigrationController'
+        ],
+        '@system/update' => [
+            'path' => '/system/update',
+            'controller' => 'Pagekit\\System\\Controller\\UpdateController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@system: /' => 'Pagekit\\System\\Controller\\AdminController',
-        '@system/intl: /system/intl' => 'Pagekit\\System\\Controller\\IntlController',
-        '@system/migration: /system/migration' => 'Pagekit\\System\\Controller\\MigrationController',
-        '@system/update: /system/update' => 'Pagekit\\System\\Controller\\UpdateController'
+        'system:' => ''
 
     ],
 

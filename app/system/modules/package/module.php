@@ -31,16 +31,22 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'system/package:' => ''
+        '@system/package' => [
+            'path' => '/system/package',
+            'controller' => 'Pagekit\\System\\Controller\\PackageController'
+        ],
+        '@system/marketplace' => [
+            'path' => '/system/marketplace',
+            'controller' => 'Pagekit\\System\\Controller\\MarketplaceController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@system/package: /system/package' => 'Pagekit\\System\\Controller\\PackageController',
-        '@system/marketplace: /system/marketplace' => 'Pagekit\\System\\Controller\\MarketplaceController'
+        'system/package:' => ''
 
     ],
 
@@ -58,7 +64,7 @@ return [
             'label'    => 'Marketplace',
             'icon'     => 'system/package:assets/images/icon-marketplace.svg',
             'url'      => '@system/marketplace/extensions',
-            'priority' => 15
+            'priority' => 125
         ],
 
         'system: marketplace extensions' => [
@@ -78,7 +84,7 @@ return [
             'parent'   => 'system: system',
             'url'      => '@system/package/extensions',
             'access'   => 'system: manage packages',
-            'priority' => 130
+            'priority' => 5
         ],
 
         'system: themes' => [
@@ -86,7 +92,7 @@ return [
             'parent'   => 'system: system',
             'url'      => '@system/package/themes',
             'access'   => 'system: manage packages',
-            'priority' => 130
+            'priority' => 10
         ]
 
     ]

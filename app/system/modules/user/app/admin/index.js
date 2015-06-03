@@ -1,17 +1,15 @@
-jQuery(function ($) {
+jQuery(function () {
 
     new Vue({
 
         el: '#js-user',
 
-        data: $.extend(window.$data, {
-            count: ''
-        }),
+        data: _.extend({count: ''}, window.$data),
 
         created: function () {
 
             this.resource = this.$resource('api/user/:id');
-            this.config.filter = $.extend({status: '', role: '', order: 'name asc'}, this.config.filter ? this.config.filter : {});
+            this.config.filter = _.extend({status: '', role: '', order: 'name asc'}, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true, true);
             this.$watch('config.filter', function () { this.load(0); }, true);
@@ -67,10 +65,16 @@ jQuery(function ($) {
             },
 
             remove: function () {
-                this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                    this.load();
-                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
-                });
+
+                UIkit.modal.confirm(this.$trans("Are you sure?"), function() {
+
+                    this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                        this.load();
+                        UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                    });
+
+                }.bind(this));
+                
             },
 
             toggleStatus: function (user) {

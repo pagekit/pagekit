@@ -12,9 +12,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system: /system' => 'Pagekit\\Cache\\Controller\\CacheController'
+        '@system' => [
+            'path' => '/system',
+            'controller' => 'Pagekit\\Cache\\Controller\\CacheController'
+        ]
 
     ],
 

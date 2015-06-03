@@ -220,7 +220,7 @@ class Post implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $post = $this->toJson();
 

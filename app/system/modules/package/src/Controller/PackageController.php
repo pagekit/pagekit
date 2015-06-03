@@ -122,7 +122,9 @@ class PackageController
 
         if ($package->getType() == 'extension') {
 
-            $module->disable();
+            if ($module instanceof Extension) {
+                $module->disable();
+            }
 
             App::config('system')->pull('extensions', $name);
             App::module('system/cache')->clearCache();

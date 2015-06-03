@@ -17,11 +17,33 @@ jQuery(function ($) {
 
         ready: function () {
 
-            Installer = this.$resource('installer/:action', {}, {'post': {method: 'POST'}});
-
+            Installer   = this.$resource('installer/:action', {}, {'post': {method: 'POST'}});
         },
 
         methods: {
+
+            gotoStep: function(step) {
+
+                if (UIkit.support.animation) {
+
+                    var vm      = this,
+                        slides  = $('[data-step]', this.$el),
+                        current = slides.filter(':visible'),
+                        next    = slides.filter('[data-step="'+step+'"]');
+
+                    UIkit.Utils.animate(current, 'uk-animation-slide-left uk-animation-reverse').then(function(){
+
+                        current.css('display', 'none');
+
+                        UIkit.Utils.animate(next, 'uk-animation-slide-right').then(function(){
+                            vm.$set('step', step);
+                        });
+                    });
+
+                } else {
+                    this.$set('step', step);
+                }
+            },
 
             stepDatabase: function (e) {
                 e.preventDefault();
@@ -33,7 +55,7 @@ jQuery(function ($) {
                     }
 
                     if (data.status == 'no-tables') {
-                        vm.$set('step', 'user');
+                        vm.gotoStep('user');
                     } else {
                         vm.$set('status', data.status);
                         vm.$set('message', data.message);
@@ -45,13 +67,13 @@ jQuery(function ($) {
             stepUser: function (e) {
                 e.preventDefault();
 
-                this.$set('step', 'site');
+                this.gotoStep('site');
             },
 
             stepSite: function (e) {
                 e.preventDefault();
 
-                this.$set('step', 'finish');
+                this.gotoStep('finish');
                 this.stepInstall();
             },
 
@@ -66,7 +88,7 @@ jQuery(function ($) {
                     }
 
                     if (data.status == 'success') {
-                        vm.$set('status', 'finished');
+                        vm.gotoStep('finished');
                     } else {
                         vm.$set('status', 'failed');
                         vm.$set('message', data.message);

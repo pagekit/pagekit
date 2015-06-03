@@ -2,18 +2,14 @@
 
 use Pagekit\Filter\FilterManager;
 use Pagekit\Kernel\Exception\HttpException;
-use Pagekit\Routing\Controller\AliasCollection;
-use Pagekit\Routing\Controller\CallbackCollection;
-use Pagekit\Routing\Controller\ControllerCollection;
-use Pagekit\Routing\Controller\ControllerReader;
+use Pagekit\Routing\Event\AliasListener;
 use Pagekit\Routing\Event\ConfigureRouteListener;
-use Pagekit\Routing\Event\EventDispatcher;
 use Pagekit\Routing\Event\RouterListener;
-use Pagekit\Routing\Event\StringResponseListener;
-use Pagekit\Routing\Middleware;
+use Pagekit\Routing\Loader\RoutesLoader;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
+use Pagekit\Routing\Routes;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 return [
@@ -22,24 +18,12 @@ return [
 
     'main' => function ($app) {
 
+        $app['routes'] = function ($app) {
+            return new Routes();
+        };
+
         $app['router'] = function ($app) {
-            return new Router($app['events'], $app['request.stack'], ['cache' => $app['path.cache']]);
-        };
-
-        $app['aliases'] = function () {
-            return new AliasCollection();
-        };
-
-        $app['callbacks'] = function () {
-            return new CallbackCollection();
-        };
-
-        $app['controllers'] = function ($app) {
-            return new ControllerCollection(new ControllerReader($app['events']), $app['autoloader'], $app['debug']);
-        };
-
-        $app['middleware'] = function ($app) {
-            return new Middleware($app['events']);
+            return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack'], ['cache' => $app['path.cache']]);
         };
 
     },
@@ -50,35 +34,36 @@ return [
             new ConfigureRouteListener,
             new ParamFetcherListener(new ParamFetcher(new FilterManager)),
             new RouterListener($app['router']),
-            $app['aliases'],
-            $app['callbacks'],
-            $app['controllers']
+            new AliasListener($app['routes'])
         );
 
-        $app['middleware'];
+        // $app['middleware'];
 
         $app->on('app.request', function () use ($app) {
 
             foreach ($app['module'] as $module) {
 
-                if (!isset($module->controllers)) {
+                if (!isset($module->routes)) {
                     continue;
                 }
 
-                foreach ($module->controllers as $prefix => $controller) {
-
-                    $namespace = '';
-
-                    if (strpos($prefix, ':') !== false) {
-                        list($namespace, $prefix) = explode(':', $prefix);
-                    }
-
-                    $app['controllers']->mount($prefix, $controller, $namespace);
+                foreach ($module->routes as $name => $route) {
+                    $app['routes']->add($name, $route);
                 }
 
             }
 
         }, 110);
+
+        $app->on('app.controller', function ($event, $request) use ($app) {
+
+            $name = $request->attributes->get('_route', '');
+
+            if ($callback = $app['routes']->getCallback($name)) {
+                $request->attributes->set('_controller', $callback);
+            };
+
+        }, 130);
 
         $app->error(function (HttpException $e) use ($app) {
 

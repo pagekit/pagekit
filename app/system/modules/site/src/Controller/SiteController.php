@@ -19,7 +19,7 @@ class SiteController
 
         return [
             '$view' => [
-                'title' => __('Nodes'),
+                'title' => __('Pages'),
                 'name'  => 'site:views/admin/index.php'
             ],
             '$data' => [
@@ -29,8 +29,24 @@ class SiteController
     }
 
     /**
+     * @Route("site/settings")
+     * @Access(admin=true)
+     */
+    public function settingsAction()
+    {
+        return [
+            '$view' => [
+                'title' => __('Settings'),
+                'name'  => 'site:views/admin/settings.php'
+            ],
+            '$data' => [
+                'config' => App::system()->config(['site.', 'maintenance.'])
+            ]
+        ];
+    }
+
+    /**
      * @Route("api/site", name="api/site")
-     * @Access("site: manage site")
      */
     public function apiSiteAction()
     {

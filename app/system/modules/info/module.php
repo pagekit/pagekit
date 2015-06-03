@@ -20,9 +20,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system/info: /system/info' => 'Pagekit\\Info\\Controller\\InfoController'
+        '@system/info' => [
+            'path' => '/system/info',
+            'controller' => 'Pagekit\\Info\\Controller\\InfoController'
+        ]
 
     ],
 
@@ -32,7 +35,7 @@ return [
             'label'    => 'Info',
             'parent'   => 'system: system',
             'url'      => '@system/info',
-            'priority' => 150
+            'priority' => 25
         ]
 
     ]

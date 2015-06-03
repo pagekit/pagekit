@@ -47,11 +47,13 @@ return [
             ]);
 
             $view->data('$settings', [
-                'options' => [ 'system' => $app['system']->config->extract(['api.', 'site.', 'admin.', 'maintenance.', 'timezone', 'release_channel']) ],
+                'options' => [
+                    'system' => $app['system']->config(['api.', 'site.', 'admin.', 'timezone', 'release_channel'])
+                ],
                 'config' => [
-                    'system' => $app['system']->config->extract(['storage']),
-                    'application' => $app['module']->get('application')->config->extract(['debug']),
-                    'debug' => $app['module']->get('debug')->config->extract(['enabled'])
+                    'system' => $app['system']->config(['storage']),
+                    'application' => $app['module']->get('application')->config(['debug']),
+                    'debug' => $app['module']->get('debug')->config(['enabled'])
                 ]
             ]);
 
@@ -65,9 +67,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system/settings: /system/settings' => 'Pagekit\\System\\Controller\\SettingsController'
+        '@system/settings' => [
+            'path' => '/system/settings',
+            'controller' => 'Pagekit\\System\\Controller\\SettingsController'
+        ]
 
     ],
 
@@ -77,14 +82,13 @@ return [
             'label'    => 'System',
             'icon'     => 'app/system/assets/images/icon-settings.svg',
             'url'      => '@system/settings',
-            'priority' => 110
+            'priority' => 120
         ],
 
         'system: settings' => [
             'label'    => 'Settings',
             'parent'   => 'system: system',
             'url'      => '@system/settings',
-            'priority' => 120
         ]
 
     ]

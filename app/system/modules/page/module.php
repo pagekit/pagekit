@@ -12,16 +12,28 @@ return [
 
     ],
 
+    'routes' => [
+
+        '@page/id' => [
+            'label' => 'Page',
+            'type' => 'page',
+            'alias' => 'true'
+        ],
+        '@page' => [
+            'path' => '/page',
+            'controller' => 'Pagekit\\Page\\Controller\\SiteController'
+        ],
+        '@page/api' => [
+            'path' => '/api/page',
+            'controller' => 'Pagekit\\Page\\Controller\\PageController'
+        ]
+
+    ],
+
     'resources' => [
 
         'system/page:' => ''
 
-    ],
-
-    'controllers' => [
-
-        '@page: /page' => 'Pagekit\\Page\\Controller\\SiteController',
-        '@page/api: /api/page' => 'Pagekit\\Page\\Controller\\PageController'
     ],
 
     'permissions' => [

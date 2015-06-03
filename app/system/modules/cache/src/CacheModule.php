@@ -78,9 +78,9 @@ class CacheModule extends Module
 
             $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
 
-            $view->script('settings-cache', 'app/system/modules/cache/app/bundle/settings.js', 'settings');
             $view->data('$caches', $caches);
-            $view->data('$settings', [ 'config' => [ $this->name => $this->config->extract(['caches.cache.storage', 'nocache'])]]);
+            $view->data('$settings', ['config' => [$this->name => $this->config(['caches.cache.storage', 'nocache'])]]);
+            $view->script('settings-cache', 'app/system/modules/cache/app/bundle/settings.js', 'settings');
 
         });
 

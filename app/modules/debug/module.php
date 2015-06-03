@@ -72,9 +72,13 @@ return [
             $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
         });
 
-        $app['callbacks']->get('_debugbar/{id}', '_debugbar', function ($id) use ($app) {
-            return $app['response']->json($app['debugbar']->getStorage()->get($id));
-        })->setDefault('_debugbar', false);
+        $app['routes']->add('_debugbar', [
+            'path' => '_debugbar/{id}',
+            'defaults' => ['_debugbar' => false],
+            'controller' => function ($id) use ($app) {
+                return $app['response']->json($app['debugbar']->getStorage()->get($id));
+            }
+        ]);
 
     },
 

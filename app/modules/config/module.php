@@ -9,7 +9,7 @@ return [
     'main' => function ($app) {
 
         $app['config'] = function ($app) {
-            return new ConfigManager($app['db'], $this->config->toArray());
+            return new ConfigManager($app['db'], $this->config);
         };
 
         if ($app['config.file']) {

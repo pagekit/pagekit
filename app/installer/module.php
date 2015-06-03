@@ -40,9 +40,12 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@installer: /installer' => 'Pagekit\\Installer\\InstallerController'
+        '@installer' => [
+            'path' => '/installer',
+            'controller' => 'Pagekit\\Installer\\InstallerController'
+        ]
 
     ],
 

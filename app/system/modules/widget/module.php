@@ -12,15 +12,22 @@ return [
 
     ],
 
-    'resources' => [
+    'routes' => [
 
-        'widget:' => ''
+        '@widget' => [
+            'path' => '/widget',
+            'controller' => 'Pagekit\\Widget\\Controller\\WidgetController'
+        ],
+        '@widget/api' => [
+            'path' => '/api/widget',
+            'controller' => 'Pagekit\\Widget\\Controller\\WidgetApiController'
+        ]
 
     ],
 
-    'controllers' => [
+    'resources' => [
 
-        '@widget/api: /api/widget' => 'Pagekit\\Widget\\Controller\\WidgetController'
+        'widget:' => ''
 
     ],
 
@@ -32,6 +39,16 @@ return [
 
     ],
 
+    'menu' => [
+
+        'site: widgets' => [
+            'label'  => 'Widgets',
+            'parent' => 'site',
+            'url'    => '@widget'
+        ]
+
+    ],
+
     'config' => [
 
         'widget' => [
@@ -39,7 +56,7 @@ return [
             'positions' => [],
             'config' => [],
             'defaults' => []
-            
+
         ]
 
     ]

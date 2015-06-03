@@ -24,7 +24,7 @@ exports.alpha = function (value) {
 };
 
 exports.alphaNum = function (value) {
-    return (/\w/).test(value);
+    return (/^\w+$/).test(value);
 };
 
 exports.email = function (value) {

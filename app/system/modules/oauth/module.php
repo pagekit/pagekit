@@ -13,9 +13,7 @@ return [
         };
 
         $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
-
             $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
-
             $view->data('$settings', [ 'options' => [ $this->name => $this->config ]]);
             $view->data('$oauth', [
                 'providers' => $app['oauth']->getProvider(),
@@ -30,14 +28,19 @@ return [
 
     ],
 
-    'controllers' => [
+    'routes' => [
 
-        '@system: /' => 'Pagekit\\OAuth\\Controller\\OAuthController'
+        '@system' => [
+            'path' => '/',
+            'controller' => 'Pagekit\\OAuth\\Controller\\OAuthController'
+        ]
 
     ],
 
     'config' => [
+
         'provider' => [],
+
     ]
 
 ];

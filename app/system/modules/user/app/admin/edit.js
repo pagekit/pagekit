@@ -1,6 +1,6 @@
-jQuery(function ($) {
+jQuery(function () {
 
-    var User, vm = new Vue({
+    new Vue({
 
         el: '#js-user-edit',
 
@@ -8,11 +8,9 @@ jQuery(function ($) {
 
         ready: function () {
 
-            User = this.$resource('api/user/:id');
-
             this.$watch('user.status', function (status) {
                 if (typeof status === 'string') {
-                    vm.user.status = parseInt(status);
+                    this.user.status = parseInt(status);
                 }
             });
 
@@ -25,10 +23,10 @@ jQuery(function ($) {
 
                 var roles = this.roles.filter(function (role) { return role.selected; }).map(function (role) { return role.id; });
 
-                User.save({ id: this.user.id }, { user: this.user, password: this.password, roles: roles }, function (data) {
+                this.$resource('api/user/:id').save({ id: this.user.id }, { user: this.user, password: this.password, roles: roles }, function (data) {
 
                     if (data.user) {
-                        vm.$set('user', data.user);
+                        this.$set('user', data.user);
                     }
 
                     UIkit.notify(data.message);
@@ -36,6 +34,7 @@ jQuery(function ($) {
                 }, function (data) {
 
                     UIkit.notify(data, 'danger');
+
                 });
             }
 

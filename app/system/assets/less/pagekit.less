@@ -117,8 +117,7 @@
 /* Modifier `pk-filter`
 ========================================================================== */
 
-.pk-filter:hover > *,
-.pk-filter.uk-active > * { color: @text-danger-color; }
+.pk-filter:hover > * { color: @text-danger-color; }
 
 
 /* Modifier `pk-breadcrumb`
@@ -277,13 +276,13 @@
 .pk-table-max-width-150 { max-width: 150px; }
 
 
-/* Sub-modifier `pk-table-sort`
+/* Sub-modifier `pk-table-order`
 ========================================================================== */
 
-.pk-table-sort:hover { cursor: pointer; }
+.pk-table-order:hover { cursor: pointer; }
 
-.pk-table-sort:hover,
-.pk-table-sort.uk-active { color: #666; }
+.pk-table-order:hover,
+.pk-table-order.uk-active { color: #666; }
 
 
 /* Sub-modifier `pk-table-fake`
@@ -292,11 +291,12 @@
 .pk-table-fake {
     display: table;
     width: 100%;
+    padding: 0;
 }
 
 .pk-table-fake > div {
     display: table-cell;
-    padding: 10px;
+    padding: 16px 12px;
     vertical-align: middle;
 }
 
@@ -304,27 +304,16 @@
  * Imitate table header
  */
 
-.pk-table-fake-header > div { font-weight: bold; }
+.pk-table-fake-header > div {
+    font-size: round((@global-font-size * 0.85)); // 12px / 14px
+    text-transform: uppercase;
+    font-weight: normal;
+    color: @global-muted-color;
+}
 
 .pk-table-fake-subheading { padding-top: 20px; }
 
 .pk-table-fake-border { border-bottom: 1px solid @global-border; }
-
-/*
- * Indent first cell
- */
-
-.pk-table-fake-header-indent > :first-child { padding-left: 40px; }
-
-.pk-table-fake-header-indent-nested > :first-child { padding-left: 48px; }
-
-/*
- * Make it work with `uk-nestable`
- */
-
-.pk-table-fake.uk-nestable-item { padding: 0; }
-
-.pk-table-fake .uk-nestable-handle { display: block; }
 
 /*
  * Fix height

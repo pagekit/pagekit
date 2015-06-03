@@ -1,6 +1,6 @@
 <template>
 
-    <div v-cloak>
+    <div data-uk-observe v-cloak>
 
         <div class="pk-toolbar uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -56,10 +56,6 @@
             {{ 'No files.' | trans }}
         </div>
 
-        <div v-if="isWritable()" class="uk-placeholder uk-text-center uk-text-muted">
-            <img v-attr="src: $url('app/system/assets/images/finder-droparea.svg', true)" width="22" height="22" alt="{{ 'Droparea' | trans }}"> {{ 'Drop files here.' | trans }}
-        </div>
-
     </div>
 
 </template>
@@ -93,7 +89,10 @@
 
             this.load().success(function () {
                 this.$dispatch('ready.finder', this);
+
             });
+
+            UIkit.init(this.$el);
         },
 
         watch: {

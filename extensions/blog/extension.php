@@ -12,20 +12,99 @@ return [
 
     ],
 
+    'routes' => [
+
+         '@blog/site' => [
+             'label' => 'Blog',
+             'type' => 'blog',
+             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
+         ],
+         '@blog/id' => [
+             'label' => 'Blog Post',
+             'type' => 'blog-post',
+             'alias' => true
+         ],
+        '@blog' => [
+            'path' => '/blog',
+            'controller' => 'Pagekit\\Blog\\Controller\\BlogController'
+        ],
+        '@blog/api' => [
+            'path' => '/api/blog',
+            'controller' => [
+                'Pagekit\\Blog\\Controller\\PostApiController',
+                'Pagekit\\Blog\\Controller\\CommentApiController'
+            ]
+        ]
+
+    ],
+
     'resources' => [
 
         'blog:' => ''
 
     ],
 
-    'controllers' => [
+    'permissions' => [
 
-        '@blog: /blog' => 'Pagekit\\Blog\\Controller\\BlogController',
-
-        '@blog/api: /api/blog' => [
-            'Pagekit\\Blog\\Controller\\PostApiController',
-            'Pagekit\\Blog\\Controller\\CommentApiController'
+        'blog: manage settings' => [
+            'title' => 'Manage settings'
+        ],
+        'blog: manage content' => [
+            'title' => 'Manage content'
+        ],
+        'blog: manage comments' => [
+            'title' => 'Manage comments'
+        ],
+        'blog: view comments' => [
+            'title' => 'View comments'
+        ],
+        'blog: post comments' => [
+            'title' => 'Post comments'
+        ],
+        'blog: skip comment approval' => [
+            'title' => 'Skip comment approval'
+        ],
+        'blog: comment approval required once' => [
+            'title' => 'Comment approval required only once'
+        ],
+        'blog: skip comment min idle' => [
+            'title' => 'Skip comment minimum idle time'
         ]
+
+    ],
+
+    'menu' => [
+
+        'blog' => [
+            'label'    => 'Blog',
+            'icon'     => 'extensions/blog/extension.svg',
+            'url'      => '@blog/post',
+            'active'   => '@blog/post*',
+            'access'   => 'blog: manage content || blog: manage comments',
+            'priority' => 110
+        ],
+        'blog: posts' => [
+            'label'  => 'Posts',
+            'parent' => 'blog',
+            'url'    => '@blog/post',
+            'active' => '@blog/post*',
+            'access' => 'blog: manage content'
+        ],
+        'blog: comments' => [
+            'label'  => 'Comments',
+            'parent' => 'blog',
+            'url'    => '@blog/comment',
+            'active' => '@blog/comment*',
+            'access' => 'blog: manage comments'
+        ],
+        'blog: settings' => [
+            'label'  => 'Settings',
+            'parent' => 'blog',
+            'url'    => '@blog/settings',
+            'active' => '@blog/settings*',
+            'access' => 'blog: manage settings'
+        ]
+
     ],
 
     'config' => [
@@ -65,68 +144,6 @@ return [
         'feed'          => [
             'type'  => 'rss2',
             'limit' => 20
-        ]
-
-    ],
-
-    'menu' => [
-
-        'blog' => [
-            'label'  => 'Blog',
-            'icon'   => 'extensions/blog/extension.svg',
-            'url'    => '@blog/post',
-            'active' => '@blog/post*',
-            'access' => 'blog: manage content || blog: manage comments'
-        ],
-        'blog: posts' => [
-            'label'  => 'Posts',
-            'parent' => 'blog',
-            'url'    => '@blog/post',
-            'active' => '@blog/post*',
-            'access' => 'blog: manage content'
-        ],
-        'blog: comments' => [
-            'label'  => 'Comments',
-            'parent' => 'blog',
-            'url'    => '@blog/comment',
-            'active' => '@blog/comment*',
-            'access' => 'blog: manage comments'
-        ],
-        'blog: settings' => [
-            'label'  => 'Settings',
-            'parent' => 'blog',
-            'url'    => '@blog/settings',
-            'active' => '@blog/settings*',
-            'access' => 'blog: manage settings'
-        ]
-
-    ],
-
-    'permissions' => [
-
-        'blog: manage settings' => [
-            'title' => 'Manage settings'
-        ],
-        'blog: manage content' => [
-            'title' => 'Manage content'
-        ],
-        'blog: manage comments' => [
-            'title' => 'Manage comments'
-        ],
-        'blog: view comments' => [
-            'title' => 'View comments'
-        ],
-        'blog: post comments' => [
-            'title' => 'Post comments'
-        ],
-        'blog: skip comment approval' => [
-            'title' => 'Skip comment approval'
-        ],
-        'blog: comment approval required once' => [
-            'title' => 'Comment approval required only once'
-        ],
-        'blog: skip comment min idle' => [
-            'title' => 'Skip comment minimum idle time'
         ]
 
     ]

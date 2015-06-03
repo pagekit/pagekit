@@ -2,12 +2,10 @@
 
 namespace Pagekit\Routing;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Routing\Event\RouteCollectionEvent;
-use Pagekit\Routing\Event\RouteResourcesEvent;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Generator\UrlGeneratorDumper;
 use Pagekit\Routing\Generator\UrlGeneratorInterface;
+use Pagekit\Routing\Loader\LoaderInterface;
 use Pagekit\Routing\RequestContext as Context;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +21,14 @@ use Symfony\Component\Routing\RouterInterface;
 class Router implements RouterInterface, UrlGeneratorInterface
 {
     /**
-     * @var EventDispatcherInterface
+     * @var mixed
      */
-    protected $events;
+    protected $resource;
+
+    /**
+     * @var LoaderInterface
+     */
+    protected $loader;
 
     /**
      * @var RequestStack
@@ -70,16 +73,18 @@ class Router implements RouterInterface, UrlGeneratorInterface
     /**
      * Constructor.
      *
-     * @param EventDispatcherInterface $events
-     * @param RequestStack             $stack
-     * @param array                    $options
+     * @param mixed           $resource
+     * @param LoaderInterface $loader
+     * @param RequestStack    $stack
+     * @param array           $options
      */
-    public function __construct(EventDispatcherInterface $events, RequestStack $stack, array $options = [])
+    public function __construct($resource, LoaderInterface $loader, RequestStack $stack, array $options = [])
     {
-        $this->events  = $events;
-        $this->stack   = $stack;
-        $this->context = new Context();
-        $this->options = array_replace([
+        $this->resource = $resource;
+        $this->loader   = $loader;
+        $this->stack    = $stack;
+        $this->context  = new Context();
+        $this->options  = array_replace([
             'cache'     => null,
             'matcher'   => 'Symfony\Component\Routing\Matcher\UrlMatcher',
             'generator' => 'Pagekit\Routing\Generator\UrlGenerator'
@@ -144,11 +149,10 @@ class Router implements RouterInterface, UrlGeneratorInterface
     }
 
     /**
-     * Gets a route by name.
+     * Gets a route.
      *
-     * @param string $name The route name
-     *
-     * @return Route|null A Route instance or null when not found
+     * @param  string $name
+     * @return Route|null
      */
     public function getRoute($name)
     {
@@ -161,7 +165,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
     public function getRouteCollection()
     {
         if (!$this->routes) {
-            $this->routes = $this->events->trigger(new RouteCollectionEvent)->getRoutes();
+            $this->routes = $this->loader->load($this->resource);
         }
 
         return $this->routes;
@@ -316,19 +320,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
         }
 
         if (!$this->cache) {
-
-            $modified  = 0;
-            $resources = $this->events->trigger(new RouteResourcesEvent)->getResources();
-
-            foreach ($resources as $controller) {
-                if (isset($controller['file']) && ($time = filemtime($controller['file'])) > $modified) {
-                    $modified = $time;
-                }
-            }
-
-            $resources['options'] = $this->options;
-
-            $this->cache = ['key' => sha1(json_encode($resources)), 'modified' => $modified];
+            $this->cache = ['key' => sha1(serialize($this->resource)), 'modified' => 0];
         }
 
         $file  = sprintf($file, $this->options['cache'], $this->cache['key']);

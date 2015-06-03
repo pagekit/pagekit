@@ -8,10 +8,7 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Routing\Event\ConfigureRouteEvent;
-use Pagekit\Routing\Event\RouteCollectionEvent;
 use Pagekit\User\Annotation\Access;
-
 
 class AccessListener implements EventSubscriberInterface
 {
@@ -32,30 +29,32 @@ class AccessListener implements EventSubscriberInterface
 
     /**
      * Reads the "@Access" annotations from the controller stores them in the "access" route option.
-     *
-     * @param ConfigureRouteEvent $event
      */
-    public function onConfigureRoute(ConfigureRouteEvent $event)
+    public function onConfigureRoute($event, $route)
     {
         if (!$this->reader) {
             $this->reader = new SimpleAnnotationReader;
             $this->reader->addNamespace('Pagekit\User\Annotation');
         }
 
-        $access = [];
-        $route  = $event->getRoute();
+        if (!$route->getControllerClass()) {
+            return;
+        }
 
-        foreach (array_merge($this->reader->getClassAnnotations($event->getClass()), $this->reader->getMethodAnnotations($event->getMethod())) as $annot) {
+        $access = [];
+
+        foreach (array_merge($this->reader->getClassAnnotations($route->getControllerClass()), $this->reader->getMethodAnnotations($route->getControllerMethod())) as $annot) {
             if ($annot instanceof Access) {
 
                 if ($expression = $annot->getExpression()) {
                     $access[] = $expression;
                 }
 
-                if (null !== $annot->getAdmin()) {
-                    $route->setDefault('_admin', $admin = $annot->getAdmin());
+                if ($admin = $annot->getAdmin() !== null) {
 
+                    $route->setPath('admin'.rtrim($route->getPath(), '/'));
                     $permission = 'system: access admin area';
+
                     if ($admin) {
                         $access[] = $permission;
                     } else {
@@ -123,27 +122,12 @@ class AccessListener implements EventSubscriberInterface
     }
 
     /**
-     * Prepends "/admin" path.
-     *
-     * @param RouteCollectionEvent $event
-     */
-    public function getRoutes(RouteCollectionEvent $event)
-    {
-        foreach ($event->getRoutes() as $route) {
-            if ($route->getDefault('_admin')) {
-                $route->setPath('admin'.rtrim($route->getPath(), '/'));
-            }
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function subscribe()
     {
         return [
             'route.configure'  => 'onConfigureRoute',
-            'route.collection' => ['getRoutes', -32],
             'auth.authorize'   => 'onAuthorize',
             'app.request'      => [
                 ['onLateRequest', -512],

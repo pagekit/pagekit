@@ -92,7 +92,7 @@ var Dashboard = Vue.extend({
                 edit: function(force) {
 
                     var id = this.widget.id;
-                    
+
                     if (!force && this.editing[id]) {
                         this.editing.$delete(id);
                     } else {
@@ -114,10 +114,14 @@ var Dashboard = Vue.extend({
                 remove: function() {
 
                     var id = this.widget.id;
-                    this.Widgets.delete({ id: id }, function() {
-                        this.widgets.splice(_.findIndex(this.widgets, { id: id }), 1);
-                    });
 
+                    UIkit.modal.confirm(this.$trans("Are you sure?"), function() {
+
+                        this.Widgets.delete({ id: id }, function() {
+                            this.widgets.splice(_.findIndex(this.widgets, { id: id }), 1);
+                        });
+
+                    }.bind(this));
                 }
 
             }

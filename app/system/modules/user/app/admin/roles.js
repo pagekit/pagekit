@@ -71,7 +71,8 @@ var app = new Permissions({
                 return;
             }
 
-            var children = sortable.element.children();
+            var children = sortable.children();
+
             this.$.ordered.forEach(function (model) {
                 model.role.priority = children.index(model.$el);
             });
