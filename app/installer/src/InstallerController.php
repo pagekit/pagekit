@@ -6,6 +6,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
+use Pagekit\Util\Arr;
 
 class InstallerController
 {
@@ -53,7 +54,7 @@ class InstallerController
                 if (!$this->config) {
                     foreach ($config as $name => $values) {
                         if ($module = App::module($name)) {
-                            $module->config->merge($values);
+                            Arr::merge($module->config, $values);
                         }
                     }
                 }
