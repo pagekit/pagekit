@@ -114,12 +114,6 @@
 }
 
 
-/* Modifier `pk-filter`
-========================================================================== */
-
-.pk-filter:hover > * { color: @text-danger-color; }
-
-
 /* Modifier `pk-breadcrumb`
 ========================================================================== */
 
@@ -283,6 +277,17 @@
 
 .pk-table-order:hover,
 .pk-table-order.uk-active { color: #666; }
+
+
+/* Modifier `pk-filter`
+========================================================================== */
+
+.pk-filter:hover > * { color: #666; }
+
+.pk-filter.uk-active  > * {
+    color: #666;
+    font-weight: bold;
+}
 
 
 /* Sub-modifier `pk-table-fake`
@@ -571,3 +576,4 @@
     top: 0;
     right: -20px;
 }
+
