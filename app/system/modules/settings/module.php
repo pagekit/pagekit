@@ -76,11 +76,17 @@ return [
 
     ],
 
+    'resources' => [
+
+            'settings:' => ''
+
+    ],
+
     'menu' => [
 
         'system: system' => [
             'label'    => 'System',
-            'icon'     => 'app/system/assets/images/icon-settings.svg',
+            'icon'     => 'settings:assets/images/icon-settings.svg',
             'url'      => '@system/settings',
             'priority' => 120
         ],
