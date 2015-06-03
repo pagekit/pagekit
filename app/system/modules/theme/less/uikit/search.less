@@ -8,14 +8,14 @@
 // ========================================================================
 
 @search-height:                                 @global-height;
-@search-padding:                                30px !important;
-@search-border:                                 rgba(0,0,0,0) !important;
+@search-padding:                                35px !important;
+@search-border:                                 transparent !important;
 @search-border-width:                           0;
-@search-background:                             rgba(0,0,0,0) !important;
+@search-background:                             transparent !important;
 @search-color:                                  @global-color !important;
 @search-placeholder-color:                      @global-muted-color;
 
-@search-icon-size:                              24px;
+@search-icon:                                   "";
 @search-icon-color:                             @global-muted-color;
 
 @dropdown-search-background:                    #fff;
@@ -37,14 +37,18 @@
 
 .hook-search() {}
 
-.hook-search-icon() { z-index: -1; }
+.hook-search-icon() {
+    height: @global-height;
+    background: url("@{global-image-path}/search.svg") 0 0 no-repeat;
+    z-index: -1;
+}
 
 
 // Sub-object `uk-search-field`
 // ========================================================================
 
 .hook-search-field() {
-    padding-left: (@search-padding + 5px) !important;
+    padding-left: (@search-padding + 15px) !important;
     font-size: 18px !important;
     line-height: 24px !important;
     font-weight: 300 !important;

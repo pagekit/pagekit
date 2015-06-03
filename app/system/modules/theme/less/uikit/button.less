@@ -26,11 +26,11 @@
 @button-small-padding-horizontal:               12px;
 @button-large-padding-horizontal:               20px;
 
-@button-background:                             @global-default-background;
-@button-color:                                  @global-color;
-@button-hover-background:                       @global-default-hover-background;
-@button-hover-color:                            @global-color;
-@button-active-background:                      @global-default-active-background;
+@button-background:                             transparent;
+@button-color:                                  @global-muted-color;
+@button-hover-background:                       transparent;
+@button-hover-color:                            #888;
+@button-active-background:                      transparent;
 @button-active-color:                           @global-color;
 
 @button-primary-background:                     @global-primary-background;
@@ -54,8 +54,8 @@
 @button-danger-active-background:               @global-danger-active-background;
 @button-danger-active-color:                    @global-contrast-color;
 
-@button-disabled-background:                    @global-default-hover-background;
-@button-disabled-color:                         @global-muted-color;
+@button-disabled-background:                    transparent;
+@button-disabled-color:                         lighten(@button-color, 10%);
 
 @button-link-color:                             @global-link-color;
 @button-link-hover-color:                       @global-link-hover-color;
@@ -67,13 +67,16 @@
 // ========================================================================
 
 .hook-button() {
+    border: 1px solid lighten(@button-color, 10%);
     border-radius: @global-border-radius;
     text-transform: uppercase;
+    -webkit-transition: all 0.05s linear;
+    transition: all 0.05s linear;
 }
 
-.hook-button-hover() {}
+.hook-button-hover() { border-color: lighten(@button-hover-color, 10%); }
 
-.hook-button-active() {}
+.hook-button-active() { border-color: lighten(@button-active-color, 10%); }
 
 
 // Color modifiers
@@ -83,37 +86,37 @@
 // Modifier: `uk-button-primary`
 //
 
-.hook-button-primary() {}
+.hook-button-primary() { border-color: transparent; }
 
-.hook-button-primary-hover() {}
+.hook-button-primary-hover() { border-color: transparent; }
 
-.hook-button-primary-active() {}
+.hook-button-primary-active() { border-color: transparent; }
 
 //
 // Modifier: `uk-button-success`
 //
 
-.hook-button-success() {}
+.hook-button-success() { border-color: transparent; }
 
-.hook-button-success-hover() {}
+.hook-button-success-hover() { border-color: transparent; }
 
-.hook-button-success-active() {}
+.hook-button-success-active() { border-color: transparent; }
 
 //
 // Modifier: `uk-button-danger`
 //
 
-.hook-button-danger() {}
+.hook-button-danger() { border-color: transparent; }
 
-.hook-button-danger-hover() {}
+.hook-button-danger-hover() { border-color: transparent; }
 
-.hook-button-danger-active() {}
+.hook-button-danger-active() { border-color: transparent; }
 
 
 // Disabled state
 // ========================================================================
 
-.hook-button-disable() {}
+.hook-button-disable() { border-color: lighten(@button-disabled-color, 10%); }
 
 
 // Modifier: `uk-button-link`
@@ -154,5 +157,23 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
+
+    /*
+     * Collapse border
+     */
+
+    .uk-button-group > .uk-button:nth-child(n+2),
+    .uk-button-group > div:nth-child(n+2) .uk-button { margin-left: -1px; }
+
+    /*
+     * Create position context to superimpose the successor elements border
+     * Known issue: If you use an `a` element as button and an icon inside,
+     * the active state will not work if you click the icon inside the button
+     * Workaround: Just use a `button` or `input` element as button
+     */
+
+    .uk-button-group .uk-button:hover,
+    .uk-button-group .uk-button:active,
+    .uk-button-group .uk-button.uk-active { position: relative; }
 
 }

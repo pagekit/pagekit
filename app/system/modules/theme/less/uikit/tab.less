@@ -8,13 +8,16 @@
 // ========================================================================
 
 @tab-border:                                    @global-border;
-@tab-color:                                     @global-link-color;
-@tab-hover-border:                              rgba(0,0,0,0.06);
-@tab-hover-background:                          #f5f5f5;
+@tab-padding-horizontal:                        24px;
+@tab-padding-vertical:                          15px;
+@tab-margin-horizontal:                         0;
+@tab-color:                                     @global-color;
+@tab-hover-border:                              rgba(0,0,0,0);
+@tab-hover-background:                          rgba(0,0,0,0);
 @tab-hover-color:                               @global-link-hover-color;
-@tab-active-border:                             @global-border;
-@tab-active-background:                         @global-background;
-@tab-active-color:                              @global-color;
+@tab-active-border:                             #50a1e5;
+@tab-active-background:                         rgba(0,0,0,0);
+@tab-active-color:                              @global-link-color;
 @tab-disabled-color:                            @global-muted-color;
 
 
@@ -25,16 +28,52 @@
 // Items
 //
 
-.hook-tab() { border-radius: @global-border-radius @global-border-radius 0 0; }
+.hook-tab() {
+
+    border-width: 0;
+    border-bottom-width: 1px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-transition: color 0.05s linear;
+    transition: color 0.05s linear;
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: transparent;
+    }
+}
+
 
 // Hover
-.hook-tab-hover() {}
+.hook-tab-hover() {
+
+    &:after { background: @tab-hover-border; }
+
+}
 
 // Active
-.hook-tab-active() {}
+.hook-tab-active() {
+
+    border-bottom-width: 0;
+
+    &:after {
+        bottom: -1px;
+        background: @tab-active-border;
+    }
+}
 
 // Disabled
-.hook-tab-disabled() {}
+.hook-tab-disabled() {
+
+    &:after { background: transparent; }
+
+}
 
 
 // Miscellaneous
@@ -42,29 +81,93 @@
 
 .hook-tab-misc() {
 
-    /* Modifier: `uk-tab-bottom'
-     ========================================================================== */
 
-    .uk-tab-bottom > li > a { border-radius: 0 0 @global-border-radius @global-border-radius; }
+    .uk-tab:not([class*="uk-tab-"]) > li:nth-child(n+2) { margin-left: 15px; }
 
+    .uk-tab-flip > li:nth-child(n+2) {
+        margin-left: 0;
+        margin-right: 15px;
+    }
 
-    /* Modifier: `uk-tab-left', `uk-tab-right'
+    /* Modifier: 'tab-bottom'
     ========================================================================== */
 
-    /* Tablet and bigger */
+    .uk-tab-bottom > li > a {
+
+        border-width: 0;
+
+        &:after {
+            top: 0;
+            bottom: auto;
+        }
+
+    }
+
+    /* Modifier: 'tab-left', 'tab-right'
+     ========================================================================== */
+
+    /* Only tablets and desktops */
     @media (min-width: @breakpoint-medium) {
 
-        /*
-         * Modifier: `uk-tab-left'
-         */
-
-        .uk-tab-left > li > a { border-radius: @global-border-radius 0 0 @global-border-radius; }
+        .uk-tab-left > li > a,
+        .uk-tab-right > li > a { padding: 0; }
 
         /*
-         * Modifier: `uk-tab-right'
+         * Modifier: 'tab-left'
          */
 
-        .uk-tab-right > li > a { border-radius: 0 @global-border-radius @global-border-radius 0; }
+        .uk-tab-left { border-right: 1px solid @tab-border; }
+
+        .uk-tab-left > li > a {
+
+            border-width: 0;
+
+            &:after {
+                top: 0;
+                bottom: 0 !important;
+                left: auto !important;
+                width: 2px;
+                height: auto;
+                background: transparent;
+            }
+
+        }
+
+        .uk-tab-left > li:not(.uk-active) > a:hover,
+        .uk-tab-left > li:not(.uk-active) > a:focus {
+            margin-right: 0;
+            padding-bottom: 0;
+        }
+
+        /*
+         * Modifier: 'tab-right'
+         */
+
+        .uk-tab-right { border-left: 1px solid @tab-border; }
+
+        .uk-tab-right > li > a {
+
+            padding-left: @tab-padding-horizontal;
+            border-width: 0;
+
+            &:after {
+                top: 0;
+                bottom: 0 !important;
+                right: auto !important;
+                left: 0 !important;
+                width: 2px;
+                height: auto;
+                background: transparent;
+            }
+
+        }
+
+        .uk-tab-right > li:not(.uk-active) > a:hover,
+        .uk-tab-right > li:not(.uk-active) > a:focus {
+            padding-left: @tab-padding-horizontal;
+            padding-bottom: 0;
+            margin-left: 0;
+        }
 
     }
 
