@@ -12,6 +12,33 @@
 html { overflow-y: scroll; }
 
 
+/* Font smoothing
+ ========================================================================== */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Reset for navbar
+ */
+
+.uk-navbar-nav > li > a {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
+/*
+ * Reset for badge
+ */
+
+.uk-badge {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
+
 /* Header
  ========================================================================== */
 
@@ -53,7 +80,7 @@ html { overflow-y: scroll; }
 @media (min-width: @breakpoint-xlarge) {
 
     .tm-headerbar-primary { margin-left: -(22px + 28px); } // Icon Width + Margin
-    
+
 }
 
 
