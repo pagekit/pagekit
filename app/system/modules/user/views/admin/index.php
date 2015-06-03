@@ -13,6 +13,7 @@
                     <li><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
                     <li><a class="uk-icon-check-circle-o" title="Activate" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                     <li><a class="uk-icon-ban" title="Block" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="pk-icon-test pk-icon-hover" title="Block" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                 </ul>
             </div>
 
