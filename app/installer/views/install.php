@@ -12,18 +12,18 @@
 
         <div id="installer">
 
-            <div v-show="step == 'start'" class="tm-slide uk-vertical-align uk-text-center">
+            <div v-show="step == 'start'" class="tm-slide uk-vertical-align uk-text-center" data-step="start">
                 <div class="uk-vertical-align-middle tm-panel">
 
                     <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
                     <p>
-                        <button class="uk-button" v-on="click: step = 'database'">{{ 'Begin' | trans }}</button>
+                        <button class="uk-button" v-on="click: gotoStep('database')">{{ 'Begin' | trans }}</button>
                     </p>
 
                 </div>
             </div>
 
-            <div v-show="step == 'database'" class="tm-slide uk-vertical-align uk-text-center">
+            <div v-show="step == 'database'" class="tm-slide uk-vertical-align uk-text-center" data-step="database">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Connect database' | trans }}</h1>
@@ -103,7 +103,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'user'" class="tm-slide uk-vertical-align uk-text-center">
+            <div v-show="step == 'user'" class="tm-slide uk-vertical-align uk-text-center" data-step="user">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Create your account' | trans }}</h1>
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'site'" class="tm-slide uk-vertical-align uk-text-center">
+            <div v-show="step == 'site'" class="tm-slide uk-vertical-align uk-text-center" data-step="site">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Setup your site' | trans }}</h1>
@@ -179,7 +179,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'finish'" class="tm-slide uk-vertical-align uk-text-center">
+            <div v-show="step == 'finish'" class="tm-slide uk-vertical-align uk-text-center" data-step="finish">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <div v-show="status == 'install'">
