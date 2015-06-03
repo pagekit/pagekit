@@ -54,7 +54,7 @@ class InstallerController
                 if (!$this->config) {
                     foreach ($config as $name => $values) {
                         if ($module = App::module($name)) {
-                            Arr::merge($module->config, $values);
+                            $module->config = Arr::merge($module->config, $values);
                         }
                     }
                 }
