@@ -10,10 +10,10 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
-                    <li><a class="uk-icon-check-circle-o" title="Activate" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                    <li><a class="uk-icon-check-circle-o" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                     <li><a class="uk-icon-ban" title="Block" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="pk-icon-test pk-icon-hover" title="Block" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="pk-icon-test pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                 </ul>
             </div>
 
@@ -63,7 +63,7 @@
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
-                        <a v-attr="href: $url('admin/user/edit', { id: user.id})">{{ user.username }}</a>
+                        <a v-attr="href: $url('admin/user/edit', { id: user.id })">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">

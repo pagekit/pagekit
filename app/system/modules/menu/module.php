@@ -24,7 +24,7 @@ return [
             $widgets->registerType(new MenuWidget);
         });
 
-        $app->on('view.site:views/admin/index', function ($event, $view) use ($app) {
+        $app->on('view.site:views/index', function ($event, $view) use ($app) {
 
             $app['scripts']->register('widget-menu', 'system/menu:app/bundle/widgets/menu.js', '~widgets');
             $view->data('$menus', array_values($app['module']->get('system/site')->getMenus()));

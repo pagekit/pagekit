@@ -115,7 +115,7 @@ var Dashboard = Vue.extend({
 
                     var id = this.widget.id;
 
-                    UIkit.modal.confirm(this.$trans("Are you sure?"), function() {
+                    UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
 
                         this.Widgets.delete({ id: id }, function() {
                             this.widgets.splice(_.findIndex(this.widgets, { id: id }), 1);

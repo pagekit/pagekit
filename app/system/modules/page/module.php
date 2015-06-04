@@ -12,13 +12,18 @@ return [
 
     ],
 
+    'nodes' => [
+
+        'page' => [
+            'name' => '@page/id',
+            'label' => 'Page',
+            'alias' => 'true'
+        ]
+
+    ],
+
     'routes' => [
 
-        '@page/id' => [
-            'label' => 'Page',
-            'type' => 'page',
-            'alias' => 'true'
-        ],
         '@page' => [
             'path' => '/page',
             'controller' => 'Pagekit\\Page\\Controller\\SiteController'

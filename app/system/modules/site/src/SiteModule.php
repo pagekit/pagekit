@@ -5,13 +5,10 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Model\TypeInterface;
-use Pagekit\Site\Model\UrlType;
 
 class SiteModule extends Module
 {
     protected $types;
-    protected $_types;
     protected $menus;
     protected $frontpage;
 
@@ -32,7 +29,7 @@ class SiteModule extends Module
 
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
 
-                if (!$type = $this->_getType($node->getType())) {
+                if (!$type = $this->getType($node->getType())) {
                     continue;
                 }
 
@@ -40,7 +37,7 @@ class SiteModule extends Module
                 $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()]);
 
                 if (isset($type['alias'])) {
-                    $app['routes']->alias($type['path'], $this->getLink($node, $type['name']), $type['defaults']);
+                    $app['routes']->alias($type['path'], $this->getLink($node, @$type['name']), $type['defaults']);
                 } elseif (isset($type['controller'])) {
                     $app['routes']->add($type['name'], $type);
                 }
@@ -54,26 +51,6 @@ class SiteModule extends Module
         }, 110);
 
         $app->on('app.request', function () use ($app) {
-
-            foreach ($app['module'] as $module) {
-
-                if (!isset($module->routes)) {
-                    continue;
-                }
-
-                foreach ($module->routes as $name => $route) {
-                    if (isset($route['type'])) {
-                        $route['name'] = $name;
-                        $this->addType($route['type'], $route);
-                        unset($module->routes[$name]);
-                    }
-                }
-
-            }
-
-        }, 120);
-
-        $app->on('app.request', function () use ($app) {
             if ($this->frontpage) {
                 $app['routes']->alias('/', $this->frontpage);
             } else {
@@ -85,28 +62,8 @@ class SiteModule extends Module
     }
 
     /**
-     * Adds a node type.
-     *
-     * @param string $type
-     * @param array  $route
-     */
-    public function addType($type, array $route)
-    {
-        $this->_types[$type] = $route;
-    }
-
-    /**
      * @param  string $type
-     * @return TypeInterface
-     */
-    public function _getType($type)
-    {
-        return isset($this->_types[$type]) ? $this->_types[$type] : null;
-    }
-
-    /**
-     * @param  string $type
-     * @return TypeInterface
+     * @return array
      */
     public function getType($type)
     {
@@ -122,7 +79,19 @@ class SiteModule extends Module
     {
         if (!$this->types) {
 
-            $this->registerType(new UrlType('alias', __('Alias')));
+            foreach (App::module() as $module) {
+
+                if (!isset($module->nodes)) {
+                    continue;
+                }
+
+                foreach ($module->nodes as $type => $route) {
+                    $this->registerType($type, $route);
+                }
+
+            }
+
+            $this->registerType('alias', ['label' => __('Alias')]);
 
             App::trigger('site.types', [$this]);
         }
@@ -131,17 +100,30 @@ class SiteModule extends Module
     }
 
     /**
-     * Registers a node type.
+     * Register a node type.
      *
-     * @param TypeInterface $type
+     * @param string $type
+     * @param array  $route
      */
-    public function registerType(TypeInterface $type)
+    public function registerType($type, array $route)
     {
-        $this->types[$type->getId()] = $type;
+        $route['id'] = $type;
+        $this->types[$type] = $route;
     }
 
     /**
+     * @param  string $id
      * @return array
+     */
+    public function getMenu($id)
+    {
+        $menus = $this->getMenus();
+
+        return isset($menus[$id]) ? $menus[$id] : null;
+    }
+
+    /**
+     * @return array[]
      */
     public function getMenus()
     {

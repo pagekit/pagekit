@@ -12,10 +12,17 @@ class NodeController
 {
     /**
      * @Route("/", methods="GET")
+     * @Request({"menu"})
      */
-    public function indexAction()
+    public function indexAction($menu = false)
     {
-        return array_values(Node::findAll());
+        $query  = Node::query();
+
+        if (is_string($menu)) {
+            $query->where(['menu' => $menu]);
+        }
+
+        return array_values($query->get());
     }
 
     /**
@@ -40,7 +47,7 @@ class NodeController
 
         $node->save($data);
 
-        return $node;
+        return ['message' => 'success', 'node' => $node];
     }
 
     /**

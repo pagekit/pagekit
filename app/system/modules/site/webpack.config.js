@@ -2,10 +2,11 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/site"
+            "index": "./app/index",
+            "edit": "./app/edit"
         },
         output: {
-            filename: "./app/bundle/site.js",
+            filename: "./app/bundle/[name].js",
             library: "Site"
         },
         externals: {

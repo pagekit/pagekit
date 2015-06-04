@@ -19,11 +19,11 @@ return [
             'controller' => 'Pagekit\\Site\\Controller\\SiteController'
         ],
         '@site/api/menu' => [
-            'path' => '/api/site/node',
+            'path' => '/api/site/menu',
             'controller' => 'Pagekit\\Site\\Controller\\MenuController'
         ],
         '@site/api/node' => [
-            'path' => '/api/site/menu',
+            'path' => '/api/site/node',
             'controller' => 'Pagekit\\Site\\Controller\\NodeController'
         ]
 
@@ -67,7 +67,9 @@ return [
     ],
 
     'config' => [
+
         'menus' => []
+
     ]
 
 ];

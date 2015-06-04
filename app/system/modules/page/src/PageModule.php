@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Page\Entity\Page;
-use Pagekit\Site\Model\UrlType;
 use Pagekit\System\Extension;
 
 class PageModule extends Extension
@@ -16,13 +15,9 @@ class PageModule extends Extension
      */
     public function main(App $app)
     {
-        $app->on('view.site:views/admin/index', function($event, $view) use ($app) {
+        $app->on('view.site:views/edit', function($event, $view) use ($app) {
             $view->script('page-site', 'system/page:app/bundle/site.js', 'site');
             $app->trigger(new EditorLoadEvent('editor.load'));
-        });
-
-        $app->on('site.types' , function($event, $site) {
-            $site->registerType(new UrlType('page', __('Page'), '@page/id'));
         });
 
         $app->on('site.node.preSave', function(EntityEvent $event) use ($app) {

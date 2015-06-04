@@ -12,18 +12,22 @@ return [
 
     ],
 
+    'nodes' => [
+
+        'blog' => [
+            'label' => 'Blog',
+            'name' => '@blog/site',
+            'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
+        ],
+        'blog-post' => [
+            'label' => 'Blog Post',
+            'alias' => '@blog/id'
+        ]
+
+    ],
+
     'routes' => [
 
-         '@blog/site' => [
-             'label' => 'Blog',
-             'type' => 'blog',
-             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
-         ],
-         '@blog/id' => [
-             'label' => 'Blog Post',
-             'type' => 'blog-post',
-             'alias' => true
-         ],
         '@blog' => [
             'path' => '/blog',
             'controller' => 'Pagekit\\Blog\\Controller\\BlogController'
@@ -37,6 +41,32 @@ return [
         ]
 
     ],
+
+//    'routes' => [
+//
+//         '@blog/site' => [
+//             'label' => 'Blog',
+//             'type' => 'blog',
+//             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
+//         ],
+//         '@blog/id' => [
+//             'label' => 'Blog Post',
+//             'type' => 'blog-post',
+//             'alias' => true
+//         ],
+//        '@blog' => [
+//            'path' => '/blog',
+//            'controller' => 'Pagekit\\Blog\\Controller\\BlogController'
+//        ],
+//        '@blog/api' => [
+//            'path' => '/api/blog',
+//            'controller' => [
+//                'Pagekit\\Blog\\Controller\\PostApiController',
+//                'Pagekit\\Blog\\Controller\\CommentApiController'
+//            ]
+//        ]
+//
+//    ],
 
     'resources' => [
 
