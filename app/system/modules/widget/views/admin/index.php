@@ -10,7 +10,7 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
                     <li><a class="uk-icon-check-circle-o" title="Activate" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                 </ul>
             </div>

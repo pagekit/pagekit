@@ -77,7 +77,7 @@
         </div>
         <div class="uk-width-medium-1-3">
 
-            <div class="uk-panel uk-panel-divider uk-text-center">
+            <div class="uk-panel uk-panel-box uk-text-center">
 
                 <p>
                     <img class="uk-border-circle" height="150" width="150" v-gravatar="user.email">

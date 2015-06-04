@@ -103,7 +103,7 @@ return [
 
         'registration' => 'admin',
         'require_verification' => true,
-        'users_per_page' => 20,
+        'users_per_page' => 5,
 
         'auth' => [
             'refresh_token' => false

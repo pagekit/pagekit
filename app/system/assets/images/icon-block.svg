@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px"
+	 height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<g id="icon-block" display="none">
+	<rect x="8" y="7" display="inline" width="1" height="9"/>
+	<rect x="11" y="7" display="inline" width="1" height="9"/>
+	<path display="inline" d="M18,3h-4V1H6v2H2v1h2v15h12V4h2V3L18,3z M7,2h6v1H7V2L7,2z M15,18H5V4h10V18L15,18z"/>
+</g>
+<g id="Ebene_15" display="none">
+	<g display="inline">
+		<path d="M10,2c4.411,0,8,3.589,8,8s-3.589,8-8,8s-8-3.589-8-8S5.589,2,10,2 M10,1c-4.972,0-9,4.028-9,9s4.028,9,9,9s9-4.028,9-9
+			S14.972,1,10,1L10,1z"/>
+		<rect x="9" y="9" width="2" height="6"/>
+		<rect x="9" y="6" width="2" height="2"/>
+	</g>
+</g>
+<g id="Ebene_3" display="none">
+	<g display="inline">
+		<g>
+			<polygon points="8.42,13.248 6.298,10.35 7.104,9.759 8.503,11.668 12.962,6.752 13.702,7.423 			"/>
+		</g>
+	</g>
+</g>
+<g id="Ebene_4" display="none">
+	<g display="inline">
+		<path d="M13,1H9H8v1h1v5H4V6H3v1v1v11h14V1H13z M16,18H4V8h6V2h6V18z"/>
+		<rect x="4" y="5" width="1" height="1"/>
+		<rect x="5" y="4" width="1" height="1"/>
+		<rect x="6" y="3" width="1" height="1"/>
+		<rect x="7" y="2" width="1" height="1"/>
+	</g>
+</g>
+<g id="Ebene_5">
+	<path d="M10,1c-4.972,0-9,4.028-9,9c0,4.971,4.028,9,9,9s9-4.029,9-9C19,5.028,14.972,1,10,1z M2.059,10
+		c0-1.999,0.748-3.822,1.971-5.22l11.19,11.19c-1.398,1.223-3.221,1.971-5.22,1.971C5.621,17.941,2.059,14.379,2.059,10z
+		 M15.969,15.222L4.778,4.032C6.176,2.808,8,2.059,10,2.059c4.379,0,7.941,3.562,7.941,7.941C17.941,12,17.192,13.824,15.969,15.222
+		z"/>
+</g>
+<g id="Ebene_6" display="none">
+	<g display="inline">
+		<polygon points="6.812,16.266 3,11.059 3.807,10.469 6.895,14.686 16.586,4 17.326,4.672 		"/>
+	</g>
+</g>
+<g id="Ebene_7" display="none">
+	<g display="inline">
+		<path d="M17,4H3C1.896,4,1,4.896,1,6v8c0,1.104,0.896,2,2,2h14c1.104,0,2-0.896,2-2V6C19,4.896,18.104,4,17,4z M18,14
+			c0,0.552-0.448,1-1,1H3c-0.552,0-1-0.448-1-1V6c0-0.552,0.448-1,1-1h14c0.552,0,1,0.448,1,1V14z"/>
+		<polygon points="10.249,10 3.498,6.117 3.002,6.986 10,11 10.5,11 17.423,6.984 16.923,6.119 		"/>
+		<polygon points="3,13.133 3.5,13.998 8.472,11.126 7.467,10.552 		"/>
+		<polygon points="11.953,11.158 16.925,14 17.421,13.131 12.956,10.579 		"/>
+	</g>
+</g>
+<g id="Ebene_8" display="none">
+	<polygon display="inline" points="10,3 2,10 4,10 4,17 8,17 8,12 12,12 12,17 16,17 16,10 18,10 	"/>
+</g>
+<g id="Ebene_9" display="none">
+	<polygon display="inline" points="13.354,8.854 9.5,5 5.646,8.854 6.354,9.561 9,7 9,15 10,15 10,7 12.646,9.561 	"/>
+</g>
+<g id="Ebene_10" display="none">
+	<polygon display="inline" points="13.354,11.146 9.5,15 5.646,11.146 6.354,10.439 9,13 9,5 10,5 10,13 12.646,10.439 	"/>
+</g>
+<g id="Ebene_11" display="none">
+	<polyline display="inline" points="4,11 9,11 9,16 11,16 11,11 16,11 16,9 11,9 11,4 9,4 9,9 4,9 	"/>
+</g>
+</svg>

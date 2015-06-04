@@ -38,7 +38,7 @@
                             <ul class="uk-subnav pk-subnav-icon uk-hidden">
                                 <li v-show="pkg.enabled"><a class="uk-icon-cog" title="Settings" data-uk-tooltip="{delay: 500}"></a></li>
                                 <li v-show="!pkg.enabled"><a class="uk-icon-check-circle-o" title="Enable" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
-                                <li v-show="!pkg.enabled"><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)"></a></li>
+                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)"></a></li>
                             </ul>
                         </div>
 

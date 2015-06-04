@@ -10,7 +10,7 @@
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
                         <li><a class="uk-icon-pencil" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: rename" v-show="selected.length === 1"></a></li>
                     </ul>
                 </div>

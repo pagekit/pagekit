@@ -10,10 +10,10 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove"></a></li>
+                    <li><a class="pk-icon-check pk-icon-hover" title="Publish" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
+                    <li><a class="pk-icon-block pk-icon-hover" title="Unpublish" data-uk-tooltip="{delay: 500}" v-on="click: status(3)"></a></li>
                     <li><a class="uk-icon-copy" title="Copy" data-uk-tooltip="{delay: 500}" v-on="click: copy"></a></li>
-                    <li><a class="uk-icon-check-circle-o" title="Publish" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
-                    <li><a class="uk-icon-ban" title="Unpublish" data-uk-tooltip="{delay: 500}" v-on="click: status(3)"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove"></a></li>
                 </ul>
             </div>
 
