@@ -28,13 +28,13 @@ return [
 
                 if (count($parts) > 2) {
                     $region = $parts[0];
-                    $name = $parts[1].' - '.$parts[2];
+                    $name   = $parts[1].' - '.$parts[2];
                 } elseif (count($parts) > 1) {
                     $region = $parts[0];
-                    $name = $parts[1];
+                    $name   = $parts[1];
                 } else {
                     $region = 'Other';
-                    $name = $parts[0];
+                    $name   = $parts[0];
                 }
 
                 $timezones[$region][$timezone] = str_replace('_', ' ', $name);
@@ -69,8 +69,8 @@ return [
 
     'routes' => [
 
-        '@system/settings' => [
-            'path' => '/system/settings',
+        '/system/settings' => [
+            'name' => '@system/settings',
             'controller' => 'Pagekit\\System\\Controller\\SettingsController'
         ]
 
@@ -78,23 +78,23 @@ return [
 
     'resources' => [
 
-            'settings:' => ''
+        'settings:' => ''
 
     ],
 
     'menu' => [
 
         'system: system' => [
-            'label'    => 'System',
-            'icon'     => 'settings:assets/images/icon-settings.svg',
-            'url'      => '@system/settings',
+            'label' => 'System',
+            'icon' => 'settings:assets/images/icon-settings.svg',
+            'url' => '@system/settings',
             'priority' => 120
         ],
 
         'system: settings' => [
-            'label'    => 'Settings',
-            'parent'   => 'system: system',
-            'url'      => '@system/settings',
+            'label' => 'Settings',
+            'parent' => 'system: system',
+            'url' => '@system/settings',
         ]
 
     ]

@@ -8,7 +8,7 @@ return [
 
     'main' => function ($app) {
 
-        $app['info'] = function() {
+        $app['info'] = function () {
             return new InfoHelper();
         };
 
@@ -22,8 +22,8 @@ return [
 
     'routes' => [
 
-        '@system/info' => [
-            'path' => '/system/info',
+        '/system/info' => [
+            'name' => '@system/info',
             'controller' => 'Pagekit\\Info\\Controller\\InfoController'
         ]
 
@@ -32,9 +32,9 @@ return [
     'menu' => [
 
         'system: info' => [
-            'label'    => 'Info',
-            'parent'   => 'system: system',
-            'url'      => '@system/info',
+            'label' => 'Info',
+            'parent' => 'system: system',
+            'url' => '@system/info',
             'priority' => 25
         ]
 

@@ -47,8 +47,8 @@ return [
                     continue;
                 }
 
-                foreach ($module->routes as $name => $route) {
-                    $app['routes']->add($name, $route);
+                foreach ($module->routes as $path => $route) {
+                    $app['routes']->add(array_merge(['path' => $path], $route));
                 }
 
             }

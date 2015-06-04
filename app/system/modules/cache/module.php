@@ -14,8 +14,8 @@ return [
 
     'routes' => [
 
-        '@system' => [
-            'path' => '/system',
+        '/system' => [
+            'name' => '@system',
             'controller' => 'Pagekit\\Cache\\Controller\\CacheController'
         ]
 
@@ -23,7 +23,7 @@ return [
 
     'config' => [
 
-        'caches'  => [],
+        'caches' => [],
         'nocache' => false
 
     ]

@@ -14,7 +14,7 @@ return [
 
         $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
             $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
-            $view->data('$settings', [ 'options' => [ $this->name => $this->config ]]);
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
             $view->data('$oauth', [
                 'providers' => $app['oauth']->getProvider(),
                 'redirect_url' => $app['oauth']->getRedirectUrl()
@@ -30,8 +30,8 @@ return [
 
     'routes' => [
 
-        '@system' => [
-            'path' => '/',
+        '/' => [
+            'name' => '@system',
             'controller' => 'Pagekit\\OAuth\\Controller\\OAuthController'
         ]
 

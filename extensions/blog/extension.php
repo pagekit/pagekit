@@ -15,8 +15,8 @@ return [
     'nodes' => [
 
         'blog' => [
-            'label' => 'Blog',
             'name' => '@blog/site',
+            'label' => 'Blog',
             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
         ],
         'blog-post' => [
@@ -28,12 +28,12 @@ return [
 
     'routes' => [
 
-        '@blog' => [
-            'path' => '/blog',
+        '/blog' => [
+            'name' => '@blog',
             'controller' => 'Pagekit\\Blog\\Controller\\BlogController'
         ],
-        '@blog/api' => [
-            'path' => '/api/blog',
+        '/api/blog' => [
+            'name' => '@blog/api',
             'controller' => [
                 'Pagekit\\Blog\\Controller\\PostApiController',
                 'Pagekit\\Blog\\Controller\\CommentApiController'
@@ -41,32 +41,6 @@ return [
         ]
 
     ],
-
-//    'routes' => [
-//
-//         '@blog/site' => [
-//             'label' => 'Blog',
-//             'type' => 'blog',
-//             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
-//         ],
-//         '@blog/id' => [
-//             'label' => 'Blog Post',
-//             'type' => 'blog-post',
-//             'alias' => true
-//         ],
-//        '@blog' => [
-//            'path' => '/blog',
-//            'controller' => 'Pagekit\\Blog\\Controller\\BlogController'
-//        ],
-//        '@blog/api' => [
-//            'path' => '/api/blog',
-//            'controller' => [
-//                'Pagekit\\Blog\\Controller\\PostApiController',
-//                'Pagekit\\Blog\\Controller\\CommentApiController'
-//            ]
-//        ]
-//
-//    ],
 
     'resources' => [
 
@@ -106,31 +80,31 @@ return [
     'menu' => [
 
         'blog' => [
-            'label'    => 'Blog',
-            'icon'     => 'extensions/blog/extension.svg',
-            'url'      => '@blog/post',
-            'active'   => '@blog/post*',
-            'access'   => 'blog: manage content || blog: manage comments',
+            'label' => 'Blog',
+            'icon' => 'extensions/blog/extension.svg',
+            'url' => '@blog/post',
+            'active' => '@blog/post*',
+            'access' => 'blog: manage content || blog: manage comments',
             'priority' => 110
         ],
         'blog: posts' => [
-            'label'  => 'Posts',
+            'label' => 'Posts',
             'parent' => 'blog',
-            'url'    => '@blog/post',
+            'url' => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage content'
         ],
         'blog: comments' => [
-            'label'  => 'Comments',
+            'label' => 'Comments',
             'parent' => 'blog',
-            'url'    => '@blog/comment',
+            'url' => '@blog/comment',
             'active' => '@blog/comment*',
             'access' => 'blog: manage comments'
         ],
         'blog: settings' => [
-            'label'  => 'Settings',
+            'label' => 'Settings',
             'parent' => 'blog',
-            'url'    => '@blog/settings',
+            'url' => '@blog/settings',
             'active' => '@blog/settings*',
             'access' => 'blog: manage settings'
         ]
@@ -139,40 +113,40 @@ return [
 
     'config' => [
 
-        'comments'      => [
+        'comments' => [
 
-            'autoclose'              => false,
-            'autoclose_days'         => 14,
-            'blacklist'              => '',
-            'comments_per_page'      => 20,
-            'gravatar'               => true,
-            'max_depth'              => 3,
-            'maxlinks'               => 2,
-            'minidle'                => 120,
-            'nested'                 => true,
-            'notifications'          => 'always',
-            'order'                  => 'ASC',
-            'replymail'              => true,
+            'autoclose' => false,
+            'autoclose_days' => 14,
+            'blacklist' => '',
+            'comments_per_page' => 20,
+            'gravatar' => true,
+            'max_depth' => 3,
+            'maxlinks' => 2,
+            'minidle' => 120,
+            'nested' => true,
+            'notifications' => 'always',
+            'order' => 'ASC',
+            'replymail' => true,
             'require_name_and_email' => true,
 
         ],
 
-        'posts'         => [
+        'posts' => [
 
-            'posts_per_page'   => 20,
+            'posts_per_page' => 20,
             'comments_enabled' => true,
             'markdown_enabled' => true,
-            'show_title'       => true
+            'show_title' => true
 
         ],
 
-        'permalink'     => [
-            'type'   => '',
+        'permalink' => [
+            'type' => '',
             'custom' => '{slug}'
         ],
 
-        'feed'          => [
-            'type'  => 'rss2',
+        'feed' => [
+            'type' => 'rss2',
             'limit' => 20
         ]
 

@@ -72,7 +72,8 @@ return [
             $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
         });
 
-        $app['routes']->add('_debugbar', [
+        $app['routes']->add([
+            'name' => '_debugbar',
             'path' => '_debugbar/{id}',
             'defaults' => ['_debugbar' => false],
             'controller' => function ($id) use ($app) {

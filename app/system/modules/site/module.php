@@ -14,16 +14,16 @@ return [
 
     'routes' => [
 
-        '@site' => [
-            'path' => '/',
+        '/' => [
+            'name' => '@site',
             'controller' => 'Pagekit\\Site\\Controller\\SiteController'
         ],
-        '@site/api/menu' => [
-            'path' => '/api/site/menu',
+        '/api/site/menu' => [
+            'name' => '@site/api/menu',
             'controller' => 'Pagekit\\Site\\Controller\\MenuController'
         ],
-        '@site/api/node' => [
-            'path' => '/api/site/node',
+        '/api/site/node' => [
+            'name' => '@site/api/node',
             'controller' => 'Pagekit\\Site\\Controller\\NodeController'
         ]
 
@@ -46,21 +46,21 @@ return [
     'menu' => [
 
         'site' => [
-            'label'    => 'Site',
-            'icon'     => 'site:assets/images/icon-site.svg',
-            'url'      => '@site',
-            'active'   => '@site*',
+            'label' => 'Site',
+            'icon' => 'site:assets/images/icon-site.svg',
+            'url' => '@site',
+            'active' => '@site*',
             'priority' => 105
         ],
         'site: pages' => [
-            'label'    => 'Pages',
-            'parent'   => 'site',
-            'url'      => '@site'
+            'label' => 'Pages',
+            'parent' => 'site',
+            'url' => '@site'
         ],
         'site: settings' => [
-            'label'    => 'Settings',
-            'parent'   => 'site',
-            'url'      => '@site/settings',
+            'label' => 'Settings',
+            'parent' => 'site',
+            'url' => '@site/settings',
             'priority' => 5
         ]
 

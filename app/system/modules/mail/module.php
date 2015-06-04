@@ -76,13 +76,14 @@ return [
             if ($app['mailer.initialized']) {
                 try {
                     $app['swift.spooltransport']->getSpool()->flushQueue($app['swift.transport']);
-                } catch (\Exception $e) {}
+                } catch (\Exception $e) {
+                }
             }
         });
 
         $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
             $view->data('$mail', ['ssl' => extension_loaded('openssl')]);
-            $view->data('$settings', [ 'options' => [$this->name => $this->config]]);
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
             $view->script('settings-mail', 'app/system/modules/mail/app/bundle/settings.js', 'settings');
         });
     },
@@ -95,8 +96,8 @@ return [
 
     'routes' => [
 
-        '@system' => [
-            'path' => '/system',
+        '/system' => [
+            'name' => '@system',
             'controller' => 'Pagekit\\Mail\\Controller\\MailController'
         ]
 
@@ -104,14 +105,14 @@ return [
 
     'config' => [
 
-        'driver'       => 'mail',
-        'host'         => 'localhost',
-        'port'         => 25,
-        'username'     => null,
-        'password'     => null,
-        'encryption'   => null,
-        'auth_mode'    => null,
-        'from_name'    => null,
+        'driver' => 'mail',
+        'host' => 'localhost',
+        'port' => 25,
+        'username' => null,
+        'password' => null,
+        'encryption' => null,
+        'auth_mode' => null,
+        'from_name' => null,
         'from_address' => null
 
     ]

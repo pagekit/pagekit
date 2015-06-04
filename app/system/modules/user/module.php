@@ -14,8 +14,8 @@ return [
 
     'routes' => [
 
-        '@user' => [
-            'path' => '/user',
+        '/user' => [
+            'name' => '@user',
             'controller' => [
                 'Pagekit\\User\\Controller\\AuthController',
                 'Pagekit\\User\\Controller\\ProfileController',
@@ -24,8 +24,8 @@ return [
                 'Pagekit\\User\\Controller\\UserController'
             ]
         ],
-        '@user/api' => [
-            'path' => '/api/user',
+        '/api/user' => [
+            'name' => '@user/api',
             'controller' => [
                 'Pagekit\\User\\Controller\\RoleApiController',
                 'Pagekit\\User\\Controller\\UserApiController'
@@ -64,37 +64,37 @@ return [
     'menu' => [
 
         'user' => [
-            'label'    => 'Users',
-            'icon'     => 'system/user:assets/images/icon-users.svg',
-            'url'      => '@user',
-            'active'   => '@user*',
-            'access'   => 'user: manage users || user: manage user permissions',
+            'label' => 'Users',
+            'icon' => 'system/user:assets/images/icon-users.svg',
+            'url' => '@user',
+            'active' => '@user*',
+            'access' => 'user: manage users || user: manage user permissions',
             'priority' => 115
         ],
         'user: users' => [
-            'label'    => 'List',
-            'parent'   => 'user',
-            'url'      => '@user',
-            'active'   => '@user(/edit)?',
-            'access'   => 'user: manage users',
+            'label' => 'List',
+            'parent' => 'user',
+            'url' => '@user',
+            'active' => '@user(/edit)?',
+            'access' => 'user: manage users',
         ],
         'user: permissions' => [
-            'label'    => 'Permissions',
-            'parent'   => 'user',
-            'url'      => '@user/permissions',
-            'access'   => 'user: manage user permissions'
+            'label' => 'Permissions',
+            'parent' => 'user',
+            'url' => '@user/permissions',
+            'access' => 'user: manage user permissions'
         ],
         'user: roles' => [
-            'label'    => 'Roles',
-            'parent'   => 'user',
-            'url'      => '@user/roles',
-            'access'   => 'user: manage user permissions'
+            'label' => 'Roles',
+            'parent' => 'user',
+            'url' => '@user/roles',
+            'access' => 'user: manage user permissions'
         ],
         'user: settings' => [
-            'label'    => 'Settings',
-            'parent'   => 'user',
-            'url'      => '@user/settings',
-            'access'   => 'user: manage user settings'
+            'label' => 'Settings',
+            'parent' => 'user',
+            'url' => '@user/settings',
+            'access' => 'user: manage user settings'
         ]
 
     ],

@@ -14,8 +14,8 @@ return [
 
     'routes' => [
 
-        '@dashboard' => [
-            'path' => '/dashboard',
+        '/dashboard' => [
+            'name' => '@dashboard',
             'controller' => 'Pagekit\\Dashboard\\Controller\\DashboardController'
         ]
 
@@ -30,10 +30,10 @@ return [
     'menu' => [
 
         'dashboard' => [
-            'label'    => 'Dashboard',
-            'icon'     => 'system/dashboard:assets/images/icon-dashboard.svg',
-            'url'      => '@dashboard',
-            'active'   => '@dashboard*',
+            'label' => 'Dashboard',
+            'icon' => 'system/dashboard:assets/images/icon-dashboard.svg',
+            'url' => '@dashboard',
+            'active' => '@dashboard*',
             'priority' => 100
         ]
 

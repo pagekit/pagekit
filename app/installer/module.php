@@ -42,8 +42,8 @@ return [
 
     'routes' => [
 
-        '@installer' => [
-            'path' => '/installer',
+        '/installer' => [
+            'name' => '@installer',
             'controller' => 'Pagekit\\Installer\\InstallerController'
         ]
 
@@ -51,7 +51,7 @@ return [
 
     'config' => [
 
-        'enabled'    => false,
+        'enabled' => false,
         'sampleData' => ''
 
     ]

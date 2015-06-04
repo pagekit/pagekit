@@ -92,20 +92,20 @@ return [
 
     'routes' => [
 
-        '@system' => [
-            'path' => '/',
+        '/' => [
+            'name' => '@system',
             'controller' => 'Pagekit\\System\\Controller\\AdminController'
         ],
-        '@system/intl' => [
-            'path' => '/system/intl',
+        '/system/intl' => [
+            'name' => '@system/intl',
             'controller' => 'Pagekit\\System\\Controller\\IntlController'
         ],
-        '@system/migration' => [
-            'path' => '/system/migration',
+        '/system/migration' => [
+            'name' => '@system/migration',
             'controller' => 'Pagekit\\System\\Controller\\MigrationController'
         ],
-        '@system/update' => [
-            'path' => '/system/update',
+        '/system/update' => [
+            'name' => '@system/update',
             'controller' => 'Pagekit\\System\\Controller\\UpdateController'
         ]
 

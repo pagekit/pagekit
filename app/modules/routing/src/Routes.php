@@ -22,14 +22,13 @@ class Routes implements \IteratorAggregate, \Serializable
     /**
      * Adds a route.
      *
-     * @param  string $name
-     * @param  mixed  $route
+     * @param  mixed $route
      * @return Route
      */
-    public function add($name, $route)
+    public function add($route)
     {
         if (is_array($route)) {
-            $route = $this->createRoute($name, $route);
+            $route = $this->createRoute($route);
         }
 
         return $this->routes[] = $route;
@@ -68,7 +67,7 @@ class Routes implements \IteratorAggregate, \Serializable
      */
     public function match($path, $callback)
     {
-        return $this->add($path, ['path' => $path, 'controller' => $callback]);
+        return $this->add(['path' => $path, 'controller' => $callback]);
     }
 
     /**
@@ -133,12 +132,12 @@ class Routes implements \IteratorAggregate, \Serializable
     /**
      * Creates a route from array definition.
      *
-     * @param  string $name
-     * @param  array  $config
+     * @param  array $config
      * @return Route
      */
-    protected function createRoute($name, array $config)
+    protected function createRoute(array $config)
     {
+        $name = isset($config['name']) ? $config['name'] : $config['path'];
         $defaults = isset($config['defaults']) ? $config['defaults'] : [];
         $requirements = isset($config['requirements']) ? $config['requirements'] : [];
         $options = isset($config['options']) ? $config['options'] : [];

@@ -14,8 +14,8 @@ return [
 
     'routes' => [
 
-        '@hello' => [
-            'path' => '/',
+        '/' => [
+            'name' => '@hello',
             'controller' => [
                 'Pagekit\\Hello\\Controller\\HelloController',
                 'Pagekit\\Hello\\Controller\\SiteController'
@@ -33,23 +33,23 @@ return [
     'menu' => [
 
         'hello' => [
-            'label'  => 'Hello',
-            'icon'   => 'extensions/hello/extension.svg',
-            'url'    => '@hello',
+            'label' => 'Hello',
+            'icon' => 'extensions/hello/extension.svg',
+            'url' => '@hello',
             // 'access' => 'hello: manage hellos'
         ],
 
         'hello: index' => [
-            'label'  => 'Hello',
-            'icon'   => 'extensions/hello/extension.svg',
-            'url'    => '@hello',
+            'label' => 'Hello',
+            'icon' => 'extensions/hello/extension.svg',
+            'url' => '@hello',
             'parent' => 'hello'
             // 'access' => 'hello: manage hellos'
         ],
 
         'hello: settings' => [
-            'label'  => 'Settings',
-            'url'    => '@hello/settings',
+            'label' => 'Settings',
+            'url' => '@hello/settings',
             'parent' => 'hello',
             // 'access' => 'hello: manage hellos'
         ]

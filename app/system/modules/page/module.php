@@ -24,12 +24,12 @@ return [
 
     'routes' => [
 
-        '@page' => [
-            'path' => '/page',
+        '/page' => [
+            'name' => '@page',
             'controller' => 'Pagekit\\Page\\Controller\\SiteController'
         ],
-        '@page/api' => [
-            'path' => '/api/page',
+        '/api/page' => [
+            'name' => '@page/api',
             'controller' => 'Pagekit\\Page\\Controller\\PageController'
         ]
 

@@ -39,7 +39,7 @@ class SiteModule extends Module
                 if (isset($type['alias'])) {
                     $app['routes']->alias($type['path'], $this->getLink($node, @$type['name']), $type['defaults']);
                 } elseif (isset($type['controller'])) {
-                    $app['routes']->add($type['name'], $type);
+                    $app['routes']->add($type);
                 }
 
                 if ($node->getId() == $this->config('frontpage')) {
