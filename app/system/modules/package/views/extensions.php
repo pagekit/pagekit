@@ -49,7 +49,7 @@
                     <td class="uk-text-right">
                         <ul class="uk-subnav pk-subnav-icon uk-flex-inline uk-invisible">
                             <li><a class="uk-icon-info-circle" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}"></a></li>
-                            <li v-show="pkg.enabled && pkg.permissions"><a class="uk-icon-users" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url('admin/user/permissions#ext-:name',{name:pkg.name})"></a></li>
+                            <li v-show="pkg.enabled && pkg.permissions"><a class="uk-icon-users" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url('admin/user/permissions#:name',{name:pkg.name})"></a></li>
                             <li v-show="!pkg.enabled"><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)"></a></li>
                         </ul>
                     </td>

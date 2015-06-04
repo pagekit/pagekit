@@ -4,7 +4,7 @@
 
     <h2>{{ 'Permissions' | trans }}</h2>
 
-    <div class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
+    <div id="{{ $key }}" class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
