@@ -45,7 +45,7 @@ class UserApiController
         }
 
         if ($access) {
-            $query->where('access > ?', [date('Y-m-d H:i:s', time() - min(0, $access))]);
+            $query->where('access > ?', [date('Y-m-d H:i:s', time() - max(0, (int) $access))]);
         }
 
         if (!preg_match('/^(name|email)\s(asc|desc)$/i', $order, $order)) {
