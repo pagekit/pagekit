@@ -25,7 +25,8 @@ class SiteController
                 'name'  => 'site:views/index.php'
             ],
             '$data' => [
-                'types' => array_values($site->getTypes())
+                'types' => array_values($site->getTypes()),
+                'frontpage' => $site->config('frontpage')
             ]
         ];
     }
@@ -50,7 +51,6 @@ class SiteController
             }
 
             $node->setMenu($menu);
-
         }
 
         if (!$node) {

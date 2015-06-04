@@ -68,7 +68,8 @@ return [
 
     'config' => [
 
-        'menus' => []
+        'menus' => [],
+        'frontpage' => 0
 
     ]
 

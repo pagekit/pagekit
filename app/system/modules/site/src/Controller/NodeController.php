@@ -16,7 +16,7 @@ class NodeController
      */
     public function indexAction($menu = false)
     {
-        $query  = Node::query();
+        $query = Node::query();
 
         if (is_string($menu)) {
             $query->where(['menu' => $menu]);
@@ -93,7 +93,8 @@ class NodeController
      * @Route("/updateOrder", methods="POST")
      * @Request({"menu", "nodes": "array"}, csrf=true)
      */
-    public function updateOrderAction($menu, $nodes = []) {
+    public function updateOrderAction($menu, $nodes = [])
+    {
         foreach ($nodes as $data) {
             if ($node = Node::find($data['id'])) {
 
@@ -104,6 +105,17 @@ class NodeController
                 $node->save();
             }
         }
+
+        return ['message' => 'success'];
+    }
+
+    /**
+     * @Route("/frontpage", methods="POST")
+     * @Request({"id": "int"}, csrf=true)
+     */
+    public function frontpageAction($id)
+    {
+        App::config('system/site')->set('frontpage', $id);
 
         return ['message' => 'success'];
     }

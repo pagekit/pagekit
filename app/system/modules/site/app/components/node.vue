@@ -6,7 +6,12 @@
             <div class="pk-table-width-minimum"><div class="uk-nestable-handle"></div></div>
             <div class="pk-table-width-minimum"><div class="uk-nestable-toggle" data-nestable-action="toggle"></div></div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
-            <div class="pk-table-min-width-100"><a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a></div>
+            <div class="pk-table-min-width-100">
+                <a v-attr="href: $url('admin/site/edit', { id: node.id })">
+                    {{ node.title }}
+                </a>
+                <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="node.id == frontpage"></i>
+            </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
                     <a class="uk-icon-circle" v-class="
@@ -18,9 +23,6 @@
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
                 <a>{{ node.path }}</a>
             </div>
-
-
-<!--            <i class="uk-float-right uk-icon-home" title="{{ 'Frontpage' | trans }}" v-show="node.data.frontpage"></i>-->
         </div>
 
         <ul class="uk-nestable-list" v-if="tree[node.id]">
@@ -35,7 +37,6 @@
 
     module.exports = {
 
-        paramAttributes: ['node', 'tree'],
         inherit: true,
         replace: true
 

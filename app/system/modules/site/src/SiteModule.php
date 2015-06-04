@@ -42,15 +42,12 @@ class SiteModule extends Module
                     $app['routes']->add($type['name'], $type);
                 }
 
-                if ($node->get('frontpage')) {
+                if ($node->getId() == $this->config('frontpage')) {
                     $this->setFrontpage($this->getLink($node, $type['name']));
                 }
 
             }
 
-        }, 110);
-
-        $app->on('app.request', function () use ($app) {
             if ($this->frontpage) {
                 $app['routes']->alias('/', $this->frontpage);
             } else {
@@ -58,7 +55,9 @@ class SiteModule extends Module
                     return __('No Frontpage assigned.');
                 });
             }
-        }, 105);
+
+        }, 110);
+
     }
 
     /**

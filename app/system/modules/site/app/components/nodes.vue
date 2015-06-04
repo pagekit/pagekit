@@ -7,9 +7,10 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
-                    <li><a class="uk-icon-check-circle-o" title="Enable" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                    <li><a class="uk-icon-ban" title="Disable" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                    <li><a class="uk-icon-check-circle-o" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                    <li><a class="uk-icon-ban" title="{{ 'Disable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="uk-icon-home" title="{{ 'Frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length === 1" v-on="click: setFrontpage()"></a></li>
                 </ul>
             </div>
         </div>
@@ -51,7 +52,11 @@
 
     module.exports = {
 
-        paramAttributes: ['menu', 'types'],
+        paramAttributes: ['menu'],
+
+        data: function() {
+            return _.merge({}, window.$data);
+        },
 
         created: function () {
             this.Nodes = this.$resource('api/site/node/:id');
@@ -67,7 +72,7 @@
 
                 // TODO this is still buggy
                 UIkit.nestable(vm.$$.nestable, { maxDepth: 20, group: 'site.nodes' }).off('change.uk.nestable').on('change.uk.nestable', function (e, el, type, root, nestable) {
-                    if (type !== 'removed') {
+                    if (e.target.tagName === 'UL' && type !== 'removed') {
                         vm.Nodes.save({ id: 'updateOrder' }, { menu: vm.menu.id, nodes: nestable.list() }, function() {
                             vm.load();
 
@@ -82,15 +87,24 @@
 
         methods: {
 
-            add: function (menu, type) {
-                this.select({ menu: menu.id, type: type.id })
-            },
-
             load: function () {
+                this.$set('selected', []);
                 this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
                     this.$set('nodes', nodes);
                     this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
                 });
+            },
+
+            setFrontpage: function() {
+
+                var frontpage = this.selected[0];
+
+                this.Nodes.save({ id: 'frontpage' }, { id: frontpage }, function () {
+                    this.load();
+                    this.$set('frontpage', frontpage);
+                    UIkit.notify('Frontpage set.');
+                });
+
             },
 
             status: function (status) {
