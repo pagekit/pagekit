@@ -60,9 +60,7 @@
                 </nav>
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-visible-small">
-                    <a href="#offcanvas" data-uk-offcanvas>
-                        <i class="tm-icon-menu uk-icon-bars"></i>
-                    </a>
+                    <a class="tm-icon-menu" href="#offcanvas" data-uk-offcanvas></a>
 
                     <h1 class="tm-heading uk-h3">{{ item.label | trans }}</h1>
 
