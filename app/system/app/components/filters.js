@@ -35,6 +35,14 @@ Vue.filter('toOptions', function toOptions(collection) {
     });
 });
 
+Vue.filter('trim', {
+
+    write: function (val) {
+        return val.trim();
+    }
+
+});
+
 var evalExp = function(expression) {
 
     try {
