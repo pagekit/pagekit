@@ -53,7 +53,8 @@ return [
     'permissions' => [
 
         'system: manage packages' => [
-            'title' => 'Manage extensions and themes'
+            'title' => 'Manage extensions and themes',
+            'description' => 'Manage extensions and themes'
         ]
 
     ],
