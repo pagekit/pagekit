@@ -7,7 +7,7 @@
 
             <div class="uk-panel">
 
-                <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable>
+                <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged'}">
                     <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" v-class="uk-active: current.id === role.id">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.isLocked">
                             <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(role)"><i class="uk-icon-pencil"></i></a></li>
