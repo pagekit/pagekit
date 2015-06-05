@@ -1,14 +1,13 @@
-/*global $data*/
 
-jQuery(function ($) {
+jQuery(function () {
 
     new Vue({
 
         el: '#js-post',
 
         data: {
-            data: $data,
-            post: $data.post
+            data: window.$data,
+            post: window.$data.post
         },
 
         created: function () {

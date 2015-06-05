@@ -1,22 +1,20 @@
-/*global $config, $data*/
+jQuery(function () {
 
-jQuery(function ($) {
-
-    var vm = new Vue({
+    new Vue({
 
         el: '#js-post',
 
-        data: $.extend(window.$data, {
+        data: _.merge({
             posts: null,
             pages: 0,
             count: '',
             selected: []
-        }),
+        }, window.$data),
 
         created: function () {
 
             this.resource = this.$resource('api/blog/post/:id');
-            this.config.filter = $.extend({ status: '' }, this.config.filter ? this.config.filter : {});
+            this.config.filter = _.extend({ status: '' }, this.config.filter ? this.config.filter : {});
 
             this.$watch('config.page', this.load, true, true);
             this.$watch('config.filter', function() { this.load(0); }, true);
@@ -39,7 +37,7 @@ jQuery(function ($) {
 
             save: function (post) {
                 this.resource.save({ id: post.id }, { post: post }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -53,7 +51,7 @@ jQuery(function ($) {
                 });
 
                 this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -63,7 +61,7 @@ jQuery(function ($) {
                 UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
 
                     this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                        vm.load();
+                        this.load();
                         UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                     });
 
@@ -82,7 +80,7 @@ jQuery(function ($) {
                 }
 
                 this.resource.save({ id: 'copy' }, { ids: this.selected }, function (data) {
-                    vm.load();
+                    this.load();
                     UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
                 });
             },
@@ -92,15 +90,16 @@ jQuery(function ($) {
                 page = page !== undefined ? page : this.config.page;
 
                 this.resource.query({ filter: this.config.filter, page: page }, function (data) {
-                    vm.$set('posts', data.posts);
-                    vm.$set('pages', data.pages);
-                    vm.$set('count', data.count);
-                    vm.$set('config.page', page);
-                    vm.$set('selected', []);
+                    this.$set('posts', data.posts);
+                    this.$set('pages', data.pages);
+                    this.$set('count', data.count);
+                    this.$set('config.page', page);
+                    this.$set('selected', []);
                 });
             },
 
             getSelected: function() {
+                var vm = this;
                 return this.posts.filter(function(post) { return vm.selected.indexOf(post.id.toString()) !== -1; });
             },
 

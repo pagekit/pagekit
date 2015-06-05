@@ -6,9 +6,7 @@
 
         <label for="form-post" class="uk-form-label">{{ 'Post' | trans }}</label>
         <div class="uk-form-controls">
-            <select class="uk-form-width-large" v-model="node.data.variables.id">
-                <option value="">- {{ 'Select Post' | trans }} -</option>
-            </select>
+            <select class="uk-form-width-large" v-model="node.data.variables.id" v-valid="required" options="postsOptions"></select>
         </div>
 
     </div>
@@ -26,6 +24,25 @@
             label: 'Settings',
             priority: 0,
             active: 'blog-post'
+        },
+
+        created: function() {
+
+            this.$resource('api/blog/post/:id').query(function(data) {
+                this.$set('posts', data.posts);
+            });
+
+        },
+
+        computed: {
+
+            postsOptions: function () {
+
+                return _.map(this.$data.posts, function (post) {
+                    return { text: post.title, value: post.id };
+                });
+            }
+
         }
 
     };
