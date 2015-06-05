@@ -25,6 +25,10 @@
 
 }
 
+/*
+ * Large Gutter
+ */
+
 /* Desktop and bigger */
 @media (min-width: @breakpoint-large) {
 
@@ -83,27 +87,6 @@
 }
 
 
-/* Toolbar
-========================================================================== */
-
-.pk-toolbar {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid @global-border;
-}
-
-
-/* Modifier `pk-badge`
-========================================================================== */
-
-.pk-badge {
-    background-color: @global-default-active-background;
-    color: @global-muted-color;
-}
-
-.pk-badge:hover { color: @global-muted-color; }
-
-
 /* Modifier `pk-search`
 ========================================================================== */
 
@@ -113,14 +96,50 @@
     border-left: 1px solid @global-border;
 }
 
+/* `pk-icon`
+ ========================================================================== */
 
-/* Modifier `pk-breadcrumb`
-========================================================================== */
-
-.pk-breadcrumb {
-    margin: 0 0 20px 0;
-    font-size: 12px;
+[class*='pk-icon-'] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: 50% 50% no-repeat;
+    vertical-align: middle;
 }
+
+.pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
+.pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
+.pk-icon-check { background-image: url("../../assets/images/icon-check.svg"); }
+.pk-icon-copy { background-image: url("../../assets/images/icon-copy.svg"); }
+
+.pk-icon-arrow-up,
+.pk-icon-arrow-down {
+    width: 9px;
+    height: 11px;
+}
+
+.pk-icon-arrow-up { background-image: url("../../assets/images/icon-arrow-up.svg"); }
+.pk-icon-arrow-down { background-image: url("../../assets/images/icon-arrow-down.svg"); }
+
+.pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
+
+/*
+ * Icon Hover
+ */
+
+.pk-icon-hover { opacity: 0.3; }
+.pk-icon-hover:hover { opacity: 1; }
+
+
+/*
+ * Link Hover with Icon and Text
+ */
+
+.pk-link-icon { color: @global-muted-color; }
+.pk-link-icon:hover { color: @global-color; }
+
+.pk-link-icon [class*='pk-icon-'] { opacity: 0.3; }
+.pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
 
 
 /* Modifier `pk-button-danger`
@@ -203,35 +222,6 @@
 
 .pk-subnav-icon > * > :hover,
 .pk-subnav-icon > * > :focus { color: @global-color; }
-
-
-/* `pk-icon`
- ========================================================================== */
-
-[class*='pk-icon-'] {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: 50% 50% no-repeat;
-    vertical-align: middle;
-}
-
-.pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
-.pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
-.pk-icon-check { background-image: url("../../assets/images/icon-check.svg"); }
-.pk-icon-copy { background-image: url("../../assets/images/icon-copy.svg"); }
-
-.pk-icon-arrow-up,
-.pk-icon-arrow-down {
-    width: 9px;
-    height: 11px;
-}
-
-.pk-icon-arrow-up { background-image: url("../../assets/images/icon-arrow-up.svg"); }
-.pk-icon-arrow-down { background-image: url("../../assets/images/icon-arrow-down.svg"); }
-
-.pk-icon-hover { opacity: 0.3; }
-.pk-icon-hover:hover { opacity: 1; }
 
 
 /* Sub-modifier `pk-overlay-border`

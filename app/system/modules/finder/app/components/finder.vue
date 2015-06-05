@@ -2,7 +2,7 @@
 
     <div data-uk-observe v-cloak>
 
-        <div class="pk-toolbar uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+        <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
                 <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice count {count:count} }}</h2>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <ul class="uk-breadcrumb pk-breadcrumb">
+        <ul class="uk-breadcrumb">
             <li v-repeat="breadcrumbs" v-class="'uk-active': current">
                 <span v-show="current">{{ title }}</span>
                 <a v-show="!current" v-on="click: setPath(path)">{{ title }}</a>
