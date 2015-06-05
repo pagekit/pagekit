@@ -43,8 +43,6 @@
 
                 <div class="uk-form-controls">
                     <input id="form-slug" class="uk-width-1-1 uk-form-large" name="id" type="text" v-model="menu.id">
-
-                    <p class="uk-form-help-block uk-text-danger" v-show="menuForm.id.invalid">{{ 'Invalid slug.' | trans }}</p>
                 </div>
             </div>
 
