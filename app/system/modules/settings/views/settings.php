@@ -14,7 +14,6 @@
             </div>
 
         </div>
-
         <div class="uk-flex-item-1">
 
             <ul class="uk-switcher uk-margin" v-el="content">

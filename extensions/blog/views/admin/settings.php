@@ -2,36 +2,37 @@
 
 <div id="settings" class="uk-form uk-form-horizontal">
 
-    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-        <div data-uk-margin>
-
-            <h2 class="uk-margin-remove">{{ 'Settings' | trans }}</h2>
-
-        </div>
-        <div data-uk-margin>
-
-            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
-
-        </div>
-    </div>
-
-    <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-1-4">
+    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
+        <div class="pk-width-sidebar">
 
             <div class="uk-panel">
+
                 <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
                     <li><a>{{ 'General' | trans }}</a></li>
                     <li><a>{{ 'Comments' | trans }}</a></li>
                 </ul>
+
             </div>
 
         </div>
-        <div class="uk-width-medium-3-4">
+        <div class="uk-flex-item-1">
 
             <ul id="tab-content" class="uk-switcher uk-margin">
                 <li>
 
-                    <h2>{{ 'General' | trans }}</h2>
+                    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+                        <div data-uk-margin>
+
+                            <h2 class="uk-margin-remove">{{ 'General' | trans }}</h2>
+
+                        </div>
+                        <div data-uk-margin>
+
+                            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
+
+                        </div>
+                    </div>
+
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Permalink' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
@@ -96,7 +97,19 @@
                 </li>
                 <li>
 
-                    <h2>{{ 'Comments' | trans }}</h2>
+                    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+                        <div data-uk-margin>
+
+                            <h2 class="uk-margin-remove">{{ 'Comments' | trans }}</h2>
+
+                        </div>
+                        <div data-uk-margin>
+
+                            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
+
+                        </div>
+                    </div>
+
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Comments' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
@@ -109,6 +122,7 @@
                             </p>
                         </div>
                     </div>
+                    
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Appearance' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
