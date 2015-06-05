@@ -27,6 +27,7 @@ class BlogExtension extends Extension
 
         $app->on('app.request', function() use ($app) {
             $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site');
+            $app['scripts']->register('v-image', 'blog:app/bundle/components/image.js', ['vue', 'finder']);
         });
     }
 

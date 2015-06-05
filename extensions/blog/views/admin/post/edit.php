@@ -1,4 +1,4 @@
-<?php $view->script('post-edit', 'blog:app/admin/post/edit.js', ['vue', 'uikit-datepicker', 'uikit-timepicker']) ?>
+<?php $view->script('post-edit', 'blog:app/admin/post/edit.js', ['vue', 'v-image', 'uikit-datepicker', 'uikit-timepicker']) ?>
 
 <form id="js-post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
@@ -39,6 +39,13 @@
 
             <div class="uk-panel uk-panel-divider">
                 <div class="uk-form-row">
+                    <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <v-image src="post.data.image"></v-image>
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
                     <div class="uk-form-controls">
                         <select id="form-status" class="uk-width-1-1" v-model="post.status" options="statuses"></select>
@@ -72,7 +79,7 @@
                 <div class="uk-form-row">
                     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-slug" class="uk-width-1-1" type="text" v-model="post.slug"">
+                        <input id="form-slug" class="uk-width-1-1" type="text" v-model="post.slug">
                     </div>
                 </div>
                 <div class="uk-form-row">
