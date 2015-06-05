@@ -7,15 +7,13 @@
 
             <div class="uk-panel">
 
-                <ul class="pk-nestable" data-uk-sortable>
-                    <li v-repeat="role: roles | orderBy 'priority'" v-ref="ordered">
-                        <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: current.id === role.id">
-                            <ol class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.isLocked">
-                                <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(role)"><i class="uk-icon-pencil"></i></a></li>
-                                <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(role)"><i class="uk-icon-minus-circle"></i></a></li>
-                            </ol>
-                            <a v-on="click: config.role = role.id">{{ role.name }}</a>
-                        </div>
+                <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable>
+                    <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" v-class="uk-active: current.id === role.id">
+                        <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.isLocked">
+                            <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(role)"><i class="uk-icon-pencil"></i></a></li>
+                            <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(role)"><i class="uk-icon-minus-circle"></i></a></li>
+                        </ul>
+                        <a v-on="click: config.role = role.id">{{ role.name }}</a>
                     </li>
                 </ul>
 

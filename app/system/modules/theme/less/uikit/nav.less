@@ -203,12 +203,21 @@
 .hook-nav-misc() {
 
     /*
-     * Needed because of nav-actions to keep style on hover
+     * Allow `uk-sub-nav` on hover
      */
 
-    /*.uk-nav-side > li:hover > a {
+    .uk-nav-side > li { position: relative; }
+
+    .uk-nav-side .uk-subnav {
+        position: absolute;
+        top: 4px;
+        right: 15px;
+    }
+
+    /* Needed if uk-subnav is used to keep style on hover */
+    .uk-nav-side > li:hover > a {
         background: @nav-side-hover-background;
         color: @nav-side-hover-color;
-    }*/
+    }
 
 }

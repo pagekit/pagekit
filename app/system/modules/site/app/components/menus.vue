@@ -2,15 +2,13 @@
 
     <div class="uk-panel">
 
-        <ul class="pk-nestable">
-            <li v-repeat="menu: menus">
-                <div class="pk-nestable-item uk-visible-hover" v-class="pk-active: active.id === menu.id">
-                    <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed">
-                        <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(menu)"><i class="uk-icon-pencil"></i></a></li>
-                        <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(menu)"><i class="uk-icon-minus-circle"></i></a></li>
-                    </ul>
-                    <a v-on="click: active = menu">{{ menu.label }}</a>
-                </div>
+        <ul class="uk-nav uk-nav-side">
+            <li class="uk-visible-hover" v-repeat="menu: menus" v-class="pk-active: active.id === menu.id">
+                <a v-on="click: active = menu">{{ menu.label }}</a>
+                <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed">
+                    <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(menu)"><i class="uk-icon-pencil"></i></a></li>
+                    <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(menu)"><i class="uk-icon-minus-circle"></i></a></li>
+                </ul>
             </li>
         </ul>
 

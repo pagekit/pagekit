@@ -171,16 +171,6 @@
 .pk-list-table > li:nth-child(n+2) > div { padding-top: 10px; }
 
 
-/* Align subnavs if used in navs or nestables
-========================================================================== */
-
-.pk-nestable-item .uk-subnav,
-.uk-nav-side .uk-subnav {
-    margin: 5px 15px 0 0;
-    float: right;
-}
-
-
 /* Modifier `pk-subnav-icon`
 ========================================================================== */
 
@@ -197,7 +187,7 @@
     flex-wrap: nowrap;
     /* 2 */
     margin-left: -10px;
-    margin-top: -10px;
+    margin-top: -10px !important;
     margin-bottom: 0;
     /* 3 */
     cursor: pointer;
@@ -229,7 +219,6 @@
 .pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
 .pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
 .pk-icon-check { background-image: url("../../assets/images/icon-check.svg"); }
-
 
 .pk-icon-hover { opacity: 0.3; }
 .pk-icon-hover:hover { opacity: 1; }
@@ -354,101 +343,6 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
-
-
-/* `pk-nestable`
-========================================================================== */
-
-.pk-nestable {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-/*
- * Sub-object `pk-nestable-list`
- */
-
-.pk-nestable-list {
-    margin: 0;
-    list-style: none;
-}
-
-/*
- * Sub-modifier `pk-nestable-list-dragged`
- */
-
-.pk-nestable-list-dragged {
-    position: absolute;
-    z-index: 1040;
-    padding-left: 0;
-    pointer-events: none;
-}
-
-.pk-nestable-list-dragged .uk-hidden {
-    display: block !important;
-    visibility: visible !important;
-}
-
-/*
- * Sub-object `pk-nestable-item`
- */
-
-.pk-nestable-item > a {
-    display: block;
-    padding: 5px 15px 5px 25px;
-    text-decoration: none;
-    color: @global-muted-color;
-}
-
-.pk-nestable-item.pk-active > a  {
-    background: #f0f0f0;
-    color: @global-color;
-}
-
-.pk-nestable-item:hover > a,
-.pk-nestable-list-dragged .pk-nestable-item > a  {
-    background: #fff;
-    color: @global-color;
-}
-
-/*
- * Sub-object `pk-nestable-placeholder`
- */
-
-.pk-nestable-placeholder {
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px dashed #99baca;
-    background: #f5fbfe;
-}
-
-/*
- * Sub-object `pk-nestable-empty`
- */
-
-.pk-nestable-empty { min-height: 40px; }
-
-/*
- * Sub-object `pk-nestable-handle`
- */
-
-.pk-nestable-handle {
-    float: left;
-    margin: 4px 0 0 5px;
-    width: 10px;
-    height: 20px;
-    background: url("../../assets/images/nestable-handle.svg") 0 0 no-repeat;
-}
-
-.pk-nestable-handle:hover { cursor: move; }
-
-/*
- * Sub-object `pk-nestable-moving`
- */
-
-.pk-nestable-moving,
-.pk-nestable-moving * { cursor: move; }
 
 
 /* `pk-finder`
