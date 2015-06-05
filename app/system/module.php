@@ -121,15 +121,15 @@ return [
 
         'system: access settings' => [
             'title' => 'Access system settings',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'system: software updates' => [
             'title' => 'Apply system updates',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'system: manage storage' => [
             'title' => 'Manage storage',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'system: manage storage read only' => [
             'title' => 'Manage storage (Read only)'

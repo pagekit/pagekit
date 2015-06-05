@@ -44,19 +44,19 @@ return [
 
         'user: manage users' => [
             'title' => 'Manage users',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'user: manage user permissions' => [
             'title' => 'Manage user permissions',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'user: manage settings' => [
             'title' => 'Manage settings',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ],
         'system: access admin area' => [
             'title' => 'Access admin area',
-            'description' => 'Warning: Give to trusted roles only; this permission has security implications.'
+            'trusted' => true
         ]
 
     ],

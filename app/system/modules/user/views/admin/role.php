@@ -40,6 +40,7 @@
                         <tr v-repeat="permission: group">
                             <td class="pk-table-text-break" title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'bottom-left'}">
                                 {{ permission.title | trans }}
+                                <i v-if="permission.trusted" class="uk-icon-warning"></i>
                             </td>
                             <td class="uk-text-center">
 
@@ -55,6 +56,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <p>
+                <i class="uk-icon-warning"></i> {{ 'Warning: Give to trusted roles only; this permission has security implications.' || trans }}
+            </p>
 
         </div>
     </div>
