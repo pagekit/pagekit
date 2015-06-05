@@ -8,31 +8,31 @@ exports.required = function (value) {
 };
 
 exports.numeric = function (value) {
-    return (/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/).test(value);
+    return /^[-+]?[0-9]+$/.test(value);
 };
 
 exports.integer = function (value) {
-    return (/^(-?[1-9]\d*|0)$/).test(value);
+    return /^(?:[-+]?(?:0|[1-9][0-9]*))$/.test(value);
 };
 
-exports.digits = function (value) {
-    return (/^[\d() \.\:\-\+#]+$/).test(value);
+exports.float = function (value) {
+    return /^(?:[-+]?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/.test(value);
 };
 
 exports.alpha = function (value) {
-    return (/^[a-zA-Z]+$/).test(value);
+    return /^[A-Z]+$/i.test(value);
 };
 
 exports.alphaNum = function (value) {
-    return (/^\w+$/).test(value);
+    return /^[0-9A-Z]+$/i.test(value);
 };
 
 exports.email = function (value) {
-    return (/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i).test(value);
+    return /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i.test(value);
 };
 
 exports.url = function (value) {
-    return (/^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/).test(value);
+    return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(value);
 };
 
 exports.minLength = function (value, arg) {

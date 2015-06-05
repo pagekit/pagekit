@@ -67,7 +67,7 @@ class PostApiController
         }
 
         if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
-            App::abort(404, __('Invalid slug.'));
+            App::abort(400, __('Invalid slug.'));
         }
 
         $data['date'] = Intl::date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));

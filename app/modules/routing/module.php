@@ -26,6 +26,10 @@ return [
             return new Router($app['routes'], new RoutesLoader($app['events']), $app['request.stack'], ['cache' => $app['path.cache']]);
         };
 
+        $app['middleware'] = function ($app) {
+            return new Routes($app['events']);
+        };
+
     },
 
     'boot' => function ($app) {
@@ -37,7 +41,7 @@ return [
             new AliasListener($app['routes'])
         );
 
-        // $app['middleware'];
+        $app['middleware'];
 
         $app->on('app.request', function () use ($app) {
 
