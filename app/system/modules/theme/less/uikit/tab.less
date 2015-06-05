@@ -10,13 +10,13 @@
 @tab-border:                                    @global-border;
 @tab-padding-horizontal:                        24px;
 @tab-padding-vertical:                          15px;
-@tab-margin-horizontal:                         0;
+@tab-margin-horizontal:                         15px;
 @tab-color:                                     @global-color;
-@tab-hover-border:                              rgba(0,0,0,0);
-@tab-hover-background:                          rgba(0,0,0,0);
+@tab-hover-border:                              transparent;
+@tab-hover-background:                          transparent;
 @tab-hover-color:                               @global-link-hover-color;
-@tab-active-border:                             #50a1e5;
-@tab-active-background:                         rgba(0,0,0,0);
+@tab-active-border:                             @global-primary-background;
+@tab-active-background:                         transparent;
 @tab-active-color:                              @global-link-color;
 @tab-disabled-color:                            @global-muted-color;
 
@@ -29,9 +29,8 @@
 //
 
 .hook-tab() {
-
-    border-width: 0;
-    border-bottom-width: 1px;
+    position: relative;
+    border-width: 0 !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     -webkit-transition: color 0.05s linear;
@@ -45,7 +44,6 @@
         bottom: 0;
         left: 0;
         height: 2px;
-        background: transparent;
     }
 }
 
@@ -60,12 +58,8 @@
 // Active
 .hook-tab-active() {
 
-    border-bottom-width: 0;
+    &:after { background: @tab-active-border; }
 
-    &:after {
-        bottom: -1px;
-        background: @tab-active-border;
-    }
 }
 
 // Disabled
@@ -81,27 +75,14 @@
 
 .hook-tab-misc() {
 
-
-    .uk-tab:not([class*="uk-tab-"]) > li:nth-child(n+2) { margin-left: 15px; }
-
-    .uk-tab-flip > li:nth-child(n+2) {
-        margin-left: 0;
-        margin-right: 15px;
-    }
-
     /* Modifier: 'tab-bottom'
     ========================================================================== */
 
-    .uk-tab-bottom > li > a {
-
-        border-width: 0;
-
-        &:after {
-            top: 0;
-            bottom: auto;
-        }
-
+    .uk-tab-bottom > li > a:after {
+        top: 0;
+        bottom: auto;
     }
+
 
     /* Modifier: 'tab-left', 'tab-right'
      ========================================================================== */
@@ -112,26 +93,18 @@
         .uk-tab-left > li > a,
         .uk-tab-right > li > a { padding: 0; }
 
+        .uk-tab-left > li > a:after,
+        .uk-tab-right > li > a:after {
+            top: 0;
+            bottom: 0;
+            left: auto;
+            width: 2px;
+            height: auto;
+        }
+
         /*
          * Modifier: 'tab-left'
          */
-
-        .uk-tab-left { border-right: 1px solid @tab-border; }
-
-        .uk-tab-left > li > a {
-
-            border-width: 0;
-
-            &:after {
-                top: 0;
-                bottom: 0 !important;
-                left: auto !important;
-                width: 2px;
-                height: auto;
-                background: transparent;
-            }
-
-        }
 
         .uk-tab-left > li:not(.uk-active) > a:hover,
         .uk-tab-left > li:not(.uk-active) > a:focus {
@@ -143,21 +116,13 @@
          * Modifier: 'tab-right'
          */
 
-        .uk-tab-right { border-left: 1px solid @tab-border; }
-
         .uk-tab-right > li > a {
 
             padding-left: @tab-padding-horizontal;
-            border-width: 0;
 
             &:after {
-                top: 0;
-                bottom: 0 !important;
-                right: auto !important;
-                left: 0 !important;
-                width: 2px;
-                height: auto;
-                background: transparent;
+                right: auto;
+                left: 0;
             }
 
         }
