@@ -37,7 +37,6 @@
         computed: {
 
             postsOptions: function () {
-
                 return _.map(this.$data.posts, function (post) {
                     return { text: post.title, value: post.id };
                 });

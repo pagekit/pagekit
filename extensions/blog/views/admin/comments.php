@@ -1,7 +1,7 @@
 <?php $view->style('comment-index', 'blog:assets/css/blog.admin.css') ?>
-<?php $view->script('comment-index', 'blog:app/admin/comment/index.js', 'vue') ?>
+<?php $view->script('comment-index', 'blog:app/bundle/admin/comments.js', 'vue') ?>
 
-<div id="js-comments" class="uk-form" v-cloak>
+<div id="comments" class="uk-form" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>

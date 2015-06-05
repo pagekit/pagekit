@@ -2,7 +2,11 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/components/site/site",
+            "admin/comments": "./app/admin/comments",
+            "admin/edit": "./app/admin/edit",
+            "admin/index": "./app/admin/index",
+            "admin/settings": "./app/admin/settings",
+            "admin/site": "./app/admin/site",
             "components/image": "./app/components/image.vue"
         },
         output: {

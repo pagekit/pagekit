@@ -1,6 +1,6 @@
-<?php $view->script('post-edit', 'blog:app/admin/post/edit.js', ['vue', 'v-image', 'uikit-datepicker', 'uikit-timepicker']) ?>
+<?php $view->script('post-edit', 'blog:app/bundle/admin/edit.js', ['vue', 'v-image', 'uikit-datepicker', 'uikit-timepicker']) ?>
 
-<form id="js-post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
+<form id="post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
