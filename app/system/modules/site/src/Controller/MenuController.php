@@ -20,12 +20,22 @@ class MenuController
     }
 
     /**
-     * @Route("/{id}", methods="POST")
-     * @Request({"id", "label"}, csrf=true)
+     * @Route("/{label}", methods="POST")
+     * @Request({"label", "id"}, csrf=true)
      */
-    public function createAction($id, $label)
+    public function createAction($label, $id = '')
     {
         $menus = $this->get();
+        $label = trim($label);
+
+        if (!$id = $this->slugify($id ?: $label)) {
+            App::abort(400, __('Invalid id.'));
+        }
+
+        if (array_key_exists($id, $menus)) {
+            throw new ConflictException(__('Duplicate Menu Id.'));
+        }
+
         $menus[$id] = compact('id', 'label');
         $this->update($menus);
 
@@ -33,12 +43,17 @@ class MenuController
     }
 
     /**
-     * @Route("/{id}", methods="PUT")
-     * @Request({"id", "label", "oldId"}, csrf=true)
+     * @Route("/{label}", methods="PUT")
+     * @Request({"label", "oldId", "id"}, csrf=true)
      */
-    public function updateAction($id, $label, $oldId)
+    public function updateAction($label, $oldId, $id = '')
     {
         $menus = $this->get();
+        $label = trim($label);
+
+        if (!$id = $this->slugify($id ?: $label)) {
+            App::abort(400, __('Invalid id.'));
+        }
 
         if ($id != $oldId) {
 
@@ -90,5 +105,17 @@ class MenuController
         $config = App::config('system/site', []);
         $config['menus'] = $menus;
         App::config()->set('system/site', $config);
+    }
+
+    protected function slugify($slug)
+    {
+        $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
+        $slug = str_replace('-', ' ', $slug);
+        $slug = preg_replace('#[:\#\*"@+=;!><&\.%()\]\/\'\\\\|\[]#', "\x20", $slug);
+        $slug = str_replace('?', '', $slug);
+        $slug = trim(mb_strtolower($slug, 'UTF-8'));
+        $slug = preg_replace('#\x20+#', '-', $slug);
+
+        return $slug;
     }
 }

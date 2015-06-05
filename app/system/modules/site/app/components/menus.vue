@@ -42,7 +42,7 @@
                 <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
 
                 <div class="uk-form-controls">
-                    <input id="form-slug" class="uk-width-1-1 uk-form-large" name="id" type="text" v-model="menu.id" v-valid="alphaNum, unique">
+                    <input id="form-slug" class="uk-width-1-1 uk-form-large" name="id" type="text" v-model="menu.id">
 
                     <p class="uk-form-help-block uk-text-danger" v-show="menuForm.id.invalid">{{ 'Invalid slug.' | trans }}</p>
                 </div>
@@ -66,7 +66,7 @@
         paramAttributes: ['active'],
 
         created: function() {
-            this.Menus = this.$resource('api/site/menu/:id', {}, { 'update': { method: 'PUT' }});
+            this.Menus = this.$resource('api/site/menu/:id:label', {}, { 'update': { method: 'PUT' }});
             this.load();
         },
 
@@ -85,9 +85,14 @@
 
             save: function (e) {
                 if (e) e.preventDefault();
-                this.Menus[this.menu.oldId ? 'update' : 'save']({ id: this.menu.id }, this.menu, this.load);
-                this.$set('active', this.menu.id);
-                this.cancel();
+                this.Menus[this.menu.oldId ? 'update' : 'save']({ label: this.menu.label }, this.menu, function() {
+                    this.load();
+                    this.$set('active', this.menu.id);
+                    this.cancel();
+                }).error(function(msg) {
+                    UIkit.notify(msg, 'danger');
+                });
+
             },
 
             remove: function (menu) {
@@ -125,17 +130,6 @@
                 return !menu || this.menu.oldId == menu.id;
             }
 
-        },
-
-        filters: {
-
-            trim: {
-
-                write: function (val) {
-                    return val.trim();
-                }
-
-            }
         }
 
     }
