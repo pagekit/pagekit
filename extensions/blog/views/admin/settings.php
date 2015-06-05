@@ -7,9 +7,9 @@
 
             <div class="uk-panel">
 
-                <ul class="uk-nav uk-nav-side" data-uk-tab="{ connect: '#tab-content' }">
-                    <li><a>{{ 'General' | trans }}</a></li>
-                    <li><a>{{ 'Comments' | trans }}</a></li>
+                <ul class="uk-nav uk-nav-side pk-nav-large" data-uk-tab="{ connect: '#tab-content' }">
+                    <li><a><i class="uk-icon-paragraph uk-icon-small uk-margin-right"></i> {{ 'General' | trans }}</a></li>
+                    <li><a><i class="uk-icon-comment-o uk-icon-small uk-margin-right"></i> {{ 'Comments' | trans }}</a></li>
                 </ul>
 
             </div>
