@@ -152,13 +152,13 @@ Vue.directive('order', {
             field = parts[0],
             dir   = parts[1] || 'asc';
 
-        this.indicator.removeClass('uk-icon-long-arrow-up uk-icon-long-arrow-down');
+        this.indicator.removeClass('pk-icon-arrow-up pk-icon-arrow-down');
 
         if (field == this.arg) {
             this.active = true;
             this.dir    = dir;
 
-            this.indicator.addClass(dir == 'asc' ? 'uk-icon-long-arrow-down':'uk-icon-long-arrow-up');
+            this.indicator.addClass(dir == 'asc' ? 'pk-icon-arrow-down':'pk-icon-arrow-up');
         } else {
             this.active = false;
             this.dir    = '';

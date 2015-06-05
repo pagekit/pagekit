@@ -219,6 +219,16 @@
 .pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
 .pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
 .pk-icon-check { background-image: url("../../assets/images/icon-check.svg"); }
+.pk-icon-copy { background-image: url("../../assets/images/icon-copy.svg"); }
+
+.pk-icon-arrow-up,
+.pk-icon-arrow-down {
+    width: 9px;
+    height: 11px;
+}
+
+.pk-icon-arrow-up { background-image: url("../../assets/images/icon-arrow-up.svg"); }
+.pk-icon-arrow-down { background-image: url("../../assets/images/icon-arrow-down.svg"); }
 
 .pk-icon-hover { opacity: 0.3; }
 .pk-icon-hover:hover { opacity: 1; }
@@ -282,10 +292,15 @@
 /* Sub-modifier `pk-table-order`
 ========================================================================== */
 
+.pk-table-order [class*='pk-icon-'] { opacity: 0.3; }
+
 .pk-table-order:hover { cursor: pointer; }
 
 .pk-table-order:hover,
 .pk-table-order.uk-active { color: #666; }
+
+.pk-table-order:hover [class*='pk-icon-'],
+.pk-table-order.uk-active [class*='pk-icon-'] { opacity: 1; }
 
 
 /* Modifier `pk-filter`
