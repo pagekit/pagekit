@@ -15,7 +15,7 @@ return [
     'nodes' => [
 
         'blog' => [
-            'name' => '@blog/site',
+            'name' => '@blog',
             'label' => 'Blog',
             'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
         ],

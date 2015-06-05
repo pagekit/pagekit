@@ -20,6 +20,11 @@ class Routes implements \IteratorAggregate, \Serializable
     protected $aliases = [];
 
     /**
+     * @var string
+     */
+    protected $prefix = '@';
+
+    /**
      * Adds a route.
      *
      * @param  mixed $route
@@ -84,15 +89,16 @@ class Routes implements \IteratorAggregate, \Serializable
     /**
      * Adds an alias.
      *
-     * @param string $path
-     * @param string $name
-     * @param array  $defaults
+     * @param  string $path
+     * @param  string $name
+     * @param  array  $defaults
+     * @return Route
      */
     public function alias($path, $name, array $defaults = [])
     {
         $path = preg_replace('/^[^\/]/', '/$0', $path);
 
-        $this->aliases[$name] = [$name, $path, $defaults];
+        return $this->aliases[$name] = $this->createRoute(compact('name', 'path', 'defaults'));
     }
 
     /**
@@ -137,7 +143,7 @@ class Routes implements \IteratorAggregate, \Serializable
      */
     protected function createRoute(array $config)
     {
-        $name = isset($config['name']) ? $config['name'] : $config['path'];
+        $name = isset($config['name']) ? $config['name'] : $this->generateRouteName($config);
         $defaults = isset($config['defaults']) ? $config['defaults'] : [];
         $requirements = isset($config['requirements']) ? $config['requirements'] : [];
         $options = isset($config['options']) ? $config['options'] : [];
@@ -156,5 +162,19 @@ class Routes implements \IteratorAggregate, \Serializable
         }
 
         return (new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition))->setName($name);
+    }
+
+    /**
+     * Creates a route name from the routes path.
+     *
+     * @param  array $config
+     * @return string
+     */
+    protected function generateRouteName(array $config)
+    {
+        $name = ltrim($config['path'], '/');
+        $name = trim(str_replace(array(':', '|', '-'), '_', $name), '_');
+        $name = preg_replace('/[^a-z0-9A-Z_.\/]+/', '', $name);
+        return $this->prefix.$name;
     }
 }

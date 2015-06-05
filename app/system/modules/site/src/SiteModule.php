@@ -36,14 +36,15 @@ class SiteModule extends Module
                 $type['path']     = $node->getPath();
                 $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()]);
 
+                $route = null;
                 if (isset($type['alias'])) {
-                    $app['routes']->alias($type['path'], $this->getLink($node, @$type['name']), $type['defaults']);
+                    $route = $app['routes']->alias($type['path'], $this->getLink($node, $type['alias']), $type['defaults']);
                 } elseif (isset($type['controller'])) {
-                    $app['routes']->add($type);
+                    $route = $app['routes']->add($type);
                 }
 
-                if ($node->getId() == $this->config('frontpage')) {
-                    $this->setFrontpage($this->getLink($node, $type['name']));
+                if ($route && $node->getId() == $this->config('frontpage')) {
+                    $this->setFrontpage($route->getName());
                 }
 
             }

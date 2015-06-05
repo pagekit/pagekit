@@ -15,9 +15,8 @@ return [
     'nodes' => [
 
         'page' => [
-            'name' => '@page/id',
             'label' => 'Page',
-            'alias' => 'true'
+            'alias' => '@page/id'
         ]
 
     ],

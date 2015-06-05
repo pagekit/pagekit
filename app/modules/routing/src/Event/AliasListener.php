@@ -34,7 +34,7 @@ class AliasListener implements EventSubscriberInterface
         $name = $route->getName();
 
         $aliases = array_filter($this->routes->getAliases(), function ($alias) use ($name) {
-            return $name == $alias[0] || $name == strtok($alias[0], '?');
+            return $name == $alias->getName() || $name == strtok($alias->getName(), '?');
         });
 
         if (!$aliases) {
@@ -44,15 +44,14 @@ class AliasListener implements EventSubscriberInterface
         $variables = $route->compile()->getPathVariables();
 
         foreach ($aliases as $alias) {
-            list($name, $path, $defaults) = $alias;
 
             // TODO: is this still needed?
             $params = [];
-            if ($query = substr(strstr($name, '?'), 1)) {
+            if ($query = substr(strstr($alias->getName(), '?'), 1)) {
                 parse_str($query, $params);
             }
 
-            $routes->add($name, new Route($path, array_merge($route->getDefaults(), $params, $defaults, ['_variables' => $variables])));
+            $routes->add($alias->getName(), new Route($alias->getPath(), array_merge($route->getDefaults(), $params, $alias->getDefaults(), ['_variables' => $variables])));
         }
     }
 

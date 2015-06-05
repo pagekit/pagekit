@@ -9,9 +9,6 @@ use Pagekit\Blog\Entity\Post;
 use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Database\Event\EntityEvent;
 
-/**
- * @Route(name="site")
- */
 class SiteController
 {
     /**
