@@ -83,7 +83,7 @@
         </table>
     </div>
 
-    <p class="uk-alert uk-alert-info" v-show="!posts.length">{{ 'No posts found.' | trans }}</p>
+    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!posts.length">{{ 'No posts found.' | trans }}</h3>
 
     <v-pagination page="{{ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 

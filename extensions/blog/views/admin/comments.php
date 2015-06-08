@@ -51,7 +51,7 @@
         </table>
     </div>
 
-    <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
+    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="comments && !comments.length">{{ 'No comments found.' | trans }}</h3>
 
     <v-pagination page="{{ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
