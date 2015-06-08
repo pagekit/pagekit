@@ -4,7 +4,7 @@
 
         <div class="uk-placeholder uk-text-center" v-if="!imageurl">
 
-            <img v-attr="src: (url+'/app/system/assets/images/placeholder-editor-image.svg')" width="60" height="60" alt="{{ 'Placeholder Image' | trans }}">
+            <img v-attr="src: (url+'/app/system/modules/editor/assets/images/placeholder-image.svg')" width="60" height="60" alt="{{ 'Placeholder Image' | trans }}">
             <p>
                 <a v-on="click: pick()">{{ 'Select an image' | trans }}</a>
             </p>

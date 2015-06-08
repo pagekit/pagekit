@@ -13,27 +13,17 @@ var Site = Vue.extend({
         this.tab = UIkit.tab(this.$$.tab, { connect: this.$$.content });
     },
 
-    filters: {
-
-        active: function (sections) {
-
-            var type = this.$get('type.id');
-
-            return sections.filter(function (section) {
-                return !section.active || type && type.match(section.active);
-            });
-        }
-
-    },
-
     computed: {
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], type = this.$get('type.id');
 
             _.each(this.$options.components, function (component) {
-                if (component.options.section) {
+
+                var section = component.options.section;
+
+                if (section && (!section.active || type && type.match(section.active))) {
                     sections.push(component.options.section);
                 }
             });

@@ -1,7 +1,7 @@
 <div class="js-editor-video uk-overlay uk-overlay-hover uk-display-block">
     ${preview}
     <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align ${src ? 'uk-hidden' : ''}">
-        <div class="uk-vertical-align-middle"><img data-js-no-parse src="<?= $view->url()->getStatic('app/system/assets/images/placeholder-editor-video.svg') ?>" width="60" height="60" alt="<?= __('Placeholder Video') ?>"></div>
+        <div class="uk-vertical-align-middle"><img data-js-no-parse src="<?= $view->url()->getStatic('app/system/modules/editor/assets/images/placeholder-video.svg') ?>" width="60" height="60" alt="<?= __('Placeholder Video') ?>"></div>
     </div>
     <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center pk-overlay-border">
         <div>

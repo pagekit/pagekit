@@ -3,77 +3,10 @@
  */
 
 var $ = require('jquery');
+var _ = require('lodash');
 var Vue = require('vue');
 var UIkit = require('uikit');
-
-var ImageVm = {
-
-    el: '#editor-image',
-
-    data: {
-        view: 'settings',
-        style: '',
-        image: {src: '', alt: ''},
-        finder: {root: '', select: ''}
-    },
-
-    ready: function () {
-
-        var vm = this;
-
-        this.$on('select.finder', function(selected) {
-            if (selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
-                vm.finder.select = selected[0];
-            } else {
-                vm.finder.select = '';
-            }
-        });
-
-        this.$watch('image.src', this.preview);
-        this.preview();
-    },
-
-    methods: {
-
-        update: function () {
-
-            var img = this.image;
-
-            img.replace(img.tag.template({src: img.src, alt: img.alt}));
-        },
-
-        preview: function () {
-
-            var vm = this, img = new Image(), src = '';
-
-            if (this.image.src) {
-                src = this.$url.static(this.image.src);
-            }
-
-            img.onerror = function() {
-                vm.style = '';
-            };
-
-            img.onload  = function() {
-                vm.style = 'background-image: url("' + src + '"); background-size: contain';
-            };
-
-            img.src = src;
-        },
-
-        openFinder: function () {
-            this.view = 'finder';
-            this.finder.select = '';
-        },
-
-        closeFinder: function (select) {
-            this.view = 'settings';
-            if (select) this.image.src = select;
-        }
-
-    }
-
-};
+var Picker = require('./picker.vue');
 
 UIkit.plugin('htmleditor', 'image', {
 
@@ -87,19 +20,11 @@ UIkit.plugin('htmleditor', 'image', {
         editor.element.off('action.image');
         editor.element.on('action.image', function() {
 
-            var cursor = editor.editor.getCursor(), image;
+            var cursor = editor.editor.getCursor();
 
-            self.images.every(function(img) {
-
-                if (img.inRange(cursor)) {
-                    image = img;
-                    return false;
-                }
-
-                return true;
-            });
-
-            self.openModal(image);
+            self.openModal(_.find(self.images, function(img) {
+                return img.inRange(cursor);
+            }));
         });
 
         editor.element.on('render', function() {
@@ -122,8 +47,10 @@ UIkit.plugin('htmleditor', 'image', {
 
     openModal: function(image) {
 
-        var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, ImageVm), modal;
-        var options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+        var editor = this.editor,
+            cursor = editor.editor.getCursor(),
+            options = editor.element.data('finder-options'),
+            root = options.root.replace(/^\/+|\/+$/g, '')+'/';
 
         if (!image) {
             image = {
@@ -134,16 +61,14 @@ UIkit.plugin('htmleditor', 'image', {
             };
         }
 
-        modal = $(require('./modal.html')).appendTo('body');
-        modal.on('hide.uk.modal', function() {
-            $(this).remove();
+        var vm = new Picker();
+
+        vm.$on('select', function(img) {
+            img.replace(img.tag.template({src: img.src, alt: img.alt}));
         });
-
-        UIkit.modal(modal).show();
-
-        $.extend(vm.data.image, image);
-        vm.data.finder.root = root;
-        vm = new Vue(vm);
+        vm.$set('image', $.extend(vm.$get('image'), image));
+        vm.$set('finder.root', root);
+        vm.$mount().$appendTo('body');
     },
 
     replaceInPreview: function(data) {

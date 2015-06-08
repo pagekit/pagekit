@@ -3,95 +3,10 @@
  */
 
 var $ = require('jquery');
+var _ = require('lodash');
 var Vue = require('vue');
 var UIkit = require('uikit');
-
-var VideoVm = {
-
-    el: '#editor-video',
-
-    data: {
-        view: 'settings',
-        video: {src: ''},
-        finder: {root: '', select: ''}
-    },
-
-    ready: function () {
-
-        var vm = this;
-
-        this.$on('select.finder', function(selected) {
-            if (selected.length == 1 && selected[0].match(/\.(mpeg|ogv|mp4|webm|wmv)$/i)) {
-                vm.finder.select = selected[0];
-            } else {
-                vm.finder.select = '';
-            }
-        });
-
-    },
-
-    methods: {
-
-        update: function () {
-
-            var vid = this.video;
-
-            vid.replace('(video)' + JSON.stringify({src: vid.src}));
-        },
-
-        preview: function (url) {
-
-            var youtubeRegExp = /(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/,
-                youtubeRegExpShort = /youtu\.be\/(.*)/,
-                vimeoRegExp = /(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/,
-                code, matches, session = sessionStorage || {};
-
-            if (matches = url.match(youtubeRegExp)) {
-
-                code = '<img src="//img.youtube.com/vi/' + matches[2] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-            } else if (matches = url.match(youtubeRegExpShort)) {
-
-                code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-            } else if (url.match(vimeoRegExp)) {
-
-                var imgid = btoa(url);
-
-                if (session[imgid]) {
-                    code = '<img src="' + session[imgid] + '" class="uk-width-1-1">';
-                } else {
-                    code = '<img data-imgid="' + imgid + '" src="" class="uk-width-1-1">';
-
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
-                        jsonp: 'callback',
-                        dataType: 'jsonp',
-                        success: function(data) {
-                            session[imgid] = data.thumbnail_url;
-                            $('img[data-id="' + imgid + '"]').replaceWith('<img src="' + session[imgid] + '" class="uk-width-1-1">');
-                        }
-                    });
-                }
-            }
-
-            return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
-        },
-
-        openFinder: function () {
-            this.view = 'finder';
-            this.finder.select = '';
-        },
-
-        closeFinder: function (select) {
-            this.view = 'settings';
-            if (select) this.video.src = select;
-        }
-
-    }
-
-};
+var Picker = require('./picker.vue');
 
 UIkit.plugin('htmleditor', 'video', {
 
@@ -109,19 +24,11 @@ UIkit.plugin('htmleditor', 'video', {
 
         editor.element.on('action.video', function(e, editor) {
 
-            var cursor = editor.getCursor(), video;
+            var cursor = editor.getCursor();
 
-            self.videos.every(function(vid) {
-
-                if (vid.inRange(cursor)) {
-                    video = vid;
-                    return false;
-                }
-
-                return true;
-            });
-
-            self.openModal(video);
+            self.openModal(_.find(self.videos, function(vid) {
+                return vid.inRange(cursor);
+            }));
         });
 
         editor.options.toolbar.push('video');
@@ -145,8 +52,9 @@ UIkit.plugin('htmleditor', 'video', {
 
     openModal: function(video) {
 
-        var editor = this.editor, cursor = editor.editor.getCursor(), vm = $.extend(true, {}, VideoVm), modal;
-        var options = editor.element.data('finder-options'), root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+        var editor = this.editor, cursor = editor.editor.getCursor(),
+            options = editor.element.data('finder-options'),
+            root = options.root.replace(/^\/+|\/+$/g, '')+'/';
 
         if (!video) {
             video = {
@@ -157,16 +65,14 @@ UIkit.plugin('htmleditor', 'video', {
             };
         }
 
-        modal = $(require('./modal.html')).appendTo('body');
-        modal.on('hide.uk.modal', function() {
-            $(this).remove();
+        var vm = new Picker();
+
+        vm.$on('select', function(vid) {
+            vid.replace('(video)' + JSON.stringify({src: vid.src}));
         });
-
-        UIkit.modal(modal).show();
-
-        $.extend(vm.data.video, video);
-        vm.data.finder.root = root;
-        vm = new Vue(vm);
+        vm.$set('video', $.extend(vm.$get('video'), video));
+        vm.$set('finder.root', root);
+        vm.$mount().$appendTo('body');
     },
 
     replaceInPreview: function(data) {

@@ -23,11 +23,11 @@
         </div>
 
         <ul class="uk-tab" v-el="tab">
-            <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+            <li v-repeat="section: sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
         </ul>
 
         <div class="uk-switcher uk-margin" v-el="content">
-            <div v-repeat="section: sections | active | orderBy 'priority'">
+            <div v-repeat="section: sections | orderBy 'priority'">
                 <div v-component="{{ section.name }}" node="{{ node }}" form="{{ form }}" type="{{ type }}"></div>
             </div>
         </div>

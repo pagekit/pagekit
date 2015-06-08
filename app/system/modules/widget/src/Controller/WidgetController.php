@@ -3,8 +3,6 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
-use Pagekit\Widget\Entity\Widget;
 
 /**
  * @Access("system: manage widgets", admin=true)

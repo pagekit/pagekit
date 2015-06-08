@@ -175,9 +175,9 @@ class PackageController
      */
     public function installAction($package = null, $path = '')
     {
-        try {
+        $temp = App::get('path.temp');
 
-            $temp = App::get('path.temp');
+        try {
 
             if ($package = App::package()->load($package)) {
                 $path = sha1(json_encode($package));
@@ -279,6 +279,10 @@ class PackageController
         }
     }
 
+    /**
+     * @param  string $name
+     * @return callable|null
+     */
     protected function errorHandler($name)
     {
         ini_set('display_errors', 0);

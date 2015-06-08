@@ -2,9 +2,10 @@
 
 namespace Pagekit\Database\Query;
 
-use Closure, PDO;
+use Closure;
 use Doctrine\DBAL\Types\Type;
 use Pagekit\Database\Connection;
+use PDO;
 
 class QueryBuilder
 {
