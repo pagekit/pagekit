@@ -46,7 +46,7 @@
             </li>
         </ul>
 
-        <div v-show="upload.running" class="uk-progress uk-progress-striped uk-active">
+        <div class="uk-progress uk-progress-striped uk-active" v-show="upload.running">
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
         </div>
 
@@ -228,9 +228,9 @@
 
                 if (!names) return;
 
-                if (UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
+                UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
                     this.command('removefiles', { names: names });
-                }.bind(this)));
+                }.bind(this));
             },
 
             /**
