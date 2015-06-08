@@ -7,13 +7,14 @@
 // Variables
 // ========================================================================
 
-@panel-title-margin-bottom:                     @global-margin;
-@panel-title-font-size:                         round((@global-font-size * 0.85)); // 12px / 14px
-@panel-title-line-height:                       round((@panel-title-font-size *  1.46)); // 18px / 20px
+@panel-title-margin-bottom:                     @global-margin-large;
+@panel-title-font-size:                         round((@global-font-size * 1.28)); // 18px / 20px
+@panel-title-line-height:                       round((@panel-title-font-size *  1.32)); // 24px / 26px
+@panel-title-font-weight:                       300;
 @panel-title-color:                             @global-color;
-@panel-title-text-transform:                    uppercase;
+@panel-title-text-transform:                    none;
 
-@panel-box-padding:                             @global-margin;
+@panel-box-padding:                             @global-margin-large;
 @panel-box-background:                          #fff;
 @panel-box-color:                               @global-color;
 @panel-box-title-color:                         @global-color;
@@ -26,7 +27,7 @@
 @panel-box-secondary-color:                     @global-color;
 @panel-box-secondary-title-color:               @global-color;
 
-@panel-hover-padding:                           @global-margin;
+@panel-hover-padding:                           @global-margin-large;
 @panel-hover-color:                             @global-color;
 @panel-hover-hover-color:                       @global-color;
 @panel-hover-hover-background:                  #fff;
@@ -37,14 +38,6 @@
 @panel-divider-gutter:                          20px;
 @panel-divider-gutter-large:                    20px;
 @panel-divider-border:                          @global-border;
-
-//
-// New
-//
-
-@panel-box-border:                              @global-border;
-
-@panel-hover-border:                            @global-border;
 
 
 // Sub-object: `uk-panel-title`
@@ -62,7 +55,7 @@
 // Modifier: `uk-panel-box`
 // ========================================================================
 
-.hook-panel-box() { border: 1px solid @panel-box-border; }
+.hook-panel-box() { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.09); }
 
 .hook-panel-box-hover() {}
 
@@ -70,7 +63,7 @@
 // Sub-modifier: `uk-panel-box-primary`
 //
 
-.hook-panel-box-primary() {}
+.hook-panel-box-primary() { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
 
 .hook-panel-box-primary-hover() {}
 
@@ -86,9 +79,9 @@
 // Modifier: `uk-panel-hover`
 // ========================================================================
 
-.hook-panel-hover() { border: 1px solid transparent; }
+.hook-panel-hover() {}
 
-.hook-panel-hover-hover() { border-color: @panel-hover-border; }
+.hook-panel-hover-hover() { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.09); }
 
 
 // Modifier: `uk-panel-header`
