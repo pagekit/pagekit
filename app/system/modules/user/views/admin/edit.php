@@ -66,6 +66,15 @@
             </div>
 
             <div class="uk-form-row">
+                <span class="uk-form-label">{{ 'Roles' | trans }}</span>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <p class="uk-form-controls-condensed" v-repeat="role: roles">
+                        <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
+                    </p>
+                </div>
+            </div>
+
+            <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Last login' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p>{{ $trans('%date%', { date: user.login ? $date(user.login, 'medium') : $trans('Never') }) }}</p>
@@ -75,16 +84,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Registered since' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p>{{ $trans('%date%', { date: $date(user.registered, 'medium') }) }}</p>
-                </div>
-            </div>
-
-            <div class="uk-form-row">
-                <span class="uk-form-label">{{ 'Roles' | trans }}</span>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-repeat="role: roles">
-                        <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
-                    </p>
+                    {{ $trans('%date%', { date: $date(user.registered, 'medium') }) }}
                 </div>
             </div>
 
