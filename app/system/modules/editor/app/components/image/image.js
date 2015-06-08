@@ -18,17 +18,14 @@ UIkit.plugin('htmleditor', 'image', {
         this.images = [];
 
         editor.element.off('action.image');
-        editor.element.on('action.image', function() {
-
-            var cursor = editor.editor.getCursor();
-
+        editor.element.on('action.image', function(e, editor) {
             self.openModal(_.find(self.images, function(img) {
-                return img.inRange(cursor);
+                return img.inRange(editor.getCursor());
             }));
         });
 
         editor.element.on('render', function() {
-            var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?)/gi;
+            var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
             self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
         });
 

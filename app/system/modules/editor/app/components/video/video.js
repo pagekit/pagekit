@@ -23,18 +23,15 @@ UIkit.plugin('htmleditor', 'video', {
         });
 
         editor.element.on('action.video', function(e, editor) {
-
-            var cursor = editor.getCursor();
-
             self.openModal(_.find(self.videos, function(vid) {
-                return vid.inRange(cursor);
+                return vid.inRange(editor.getCursor());
             }));
         });
 
         editor.options.toolbar.push('video');
 
         editor.element.on('render', function() {
-            self.videos = editor.replaceInPreview(/\(video\)(\{.+?\})/gi, self.replaceInPreview);
+            self.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, self.replaceInPreview);
         });
 
         editor.preview.on('click', '.js-editor-video .js-config', function() {
@@ -87,7 +84,7 @@ UIkit.plugin('htmleditor', 'video', {
 
         $.extend(data, settings || { src: '' });
 
-        return $('#editor-video-replace').text().template({src: data.src, preview: VideoVm.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
+        return $('#editor-video-replace').text().template({src: data.src, preview: Picker.options.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
     }
 
 });
