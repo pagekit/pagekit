@@ -10,8 +10,8 @@
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged'}">
                     <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" v-class="uk-active: current.id === role.id">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.isLocked">
-                            <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(role)"><i class="uk-icon-pencil"></i></a></li>
-                            <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(role)"><i class="uk-icon-minus-circle"></i></a></li>
+                            <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(role)"><i class="pk-icon-edit pk-icon-hover"></i></a></li>
+                            <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(role)"><i class="pk-icon-delete pk-icon-hover"></i></a></li>
                         </ul>
                         <a v-on="click: config.role = role.id">{{ role.name }}</a>
                     </li>
@@ -40,7 +40,7 @@
                         <tr v-repeat="permission: group">
                             <td class="pk-table-text-break" title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'bottom-left'}">
                                 {{ permission.title | trans }}
-                                <i v-if="permission.trusted" class="uk-icon-warning"></i>
+                                <i v-if="permission.trusted" class="pk-icon-warning"></i>
                             </td>
                             <td class="uk-text-center">
 
@@ -58,7 +58,7 @@
             </div>
 
             <p>
-                <i class="uk-icon-warning"></i> {{ 'Warning: Give to trusted roles only; this permission has security implications.' || trans }}
+                <i class="pk-icon-warning"></i> {{ 'Warning: Give to trusted roles only; this permission has security implications.' || trans }}
             </p>
 
         </div>
