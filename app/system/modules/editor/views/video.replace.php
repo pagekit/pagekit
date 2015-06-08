@@ -8,7 +8,7 @@
             <h3 class="uk-margin-small-bottom"><?= __('Video') ?></h3>
             <div data-uk-margin>
                 <button class="uk-button uk-button-primary js-config" type="button"><?= __('Settings') ?></button>
-                <button class="uk-button pk-button-danger js-remove" type="button"><?= __('Delete') ?></button>
+                <button class="uk-button uk-button-danger js-remove" type="button"><?= __('Delete') ?></button>
             </div>
         </div>
     </div>

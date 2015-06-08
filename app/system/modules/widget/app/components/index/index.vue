@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <a class="uk-button pk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
+            <a class="uk-button uk-button-danger" v-show="selected.length" v-on="click: remove">{{ 'Delete' | trans }}</a>
 
             <div class="uk-button-dropdown" v-show="selected.length" data-uk-dropdown="{ mode: 'click' }">
                 <button class="uk-button" type="button">{{ 'More' | trans }} <i class="uk-icon-caret-down"></i></button>
