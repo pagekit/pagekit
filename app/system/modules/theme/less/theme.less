@@ -141,6 +141,25 @@ body {
 .tm-contrast .uk-icon-hover:hover { color: @global-contrast-color; }
 
 
+/* `tm-panel-icon`
+ ========================================================================== */
+
+.tm-panel-icon {
+    padding: 10px 0;
+    color: #444;
+    text-align: center;
+}
+
+.tm-panel-icon:hover { color: #37a5e4; }
+
+.tm-panel-icon > p {
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 /* Dropdown
  ========================================================================== */
 
@@ -155,7 +174,7 @@ body {
     width: 400px;
 }
 
-.tm-sortable-dragged .pk-panel-icon {
+.tm-sortable-dragged .tm-panel-icon {
     background: @dropdown-background;
     border: 1px solid @global-border;
     border-radius: 3px;

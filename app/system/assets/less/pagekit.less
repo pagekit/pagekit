@@ -78,7 +78,7 @@
 }
 
 
-/* Modifier `pk-nav-large`
+/* Modifier: Side Nav Large
 ========================================================================== */
 
 .pk-nav-large > li > a {
@@ -87,7 +87,19 @@
 }
 
 
-/* Modifier `pk-search`
+/* Side Nav Dragged
+========================================================================== */
+
+.pk-sortable-dragged > * {
+    display: block;
+    padding: @nav-padding-vertical @nav-padding-horizontal;
+    background: #fff;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    color: @global-color;
+}
+
+
+/* Modifier: Search
 ========================================================================== */
 
 .pk-search {
@@ -97,7 +109,7 @@
 }
 
 
-/* `pk-icon`
+/* SVG Icons
  ========================================================================== */
 
 [class*='pk-icon-'] {
@@ -143,34 +155,6 @@
 .pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
 
 
-
-/* Form heading
-========================================================================== */
-
-.pk-form-heading {
-    padding-bottom: 5px;
-    border-bottom: 1px solid @global-border;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-
-/* Modifier `pk-list-table`
-========================================================================== */
-
-.pk-list-table { display: table; }
-
-.pk-list-table > li { display: table-row; }
-
-.pk-list-table > li > div {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.pk-list-table > li > div:nth-child(n+2) { padding-left: 10px; }
-.pk-list-table > li:nth-child(n+2) > div { padding-top: 10px; }
-
-
 /* Modifier `pk-subnav-icon`
 ========================================================================== */
 
@@ -209,17 +193,6 @@
 ========================================================================== */
 
 .pk-overlay-border { border: 1px dashed #ddd; }
-
-
-/* Text utility `pk-text-left-large`
-========================================================================== */
-
-/* Desktop and bigger */
-@media (min-width: 960px) {
-
-    .pk-text-right-large { text-align: right !important; }
-
-}
 
 
 /* Sub-modifier `pk-table-width-*`
@@ -322,25 +295,8 @@
 .pk-table-fake .uk-form-select { vertical-align: top; }
 
 
-/* `pk-padding-horizontal-remove`
-========================================================================== */
-
-.pk-padding-horizontal-remove {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
 
 
-/* `pk-sortable-dragged`
-========================================================================== */
-
-.pk-sortable-dragged > * {
-    display: block;
-    padding: @nav-padding-vertical @nav-padding-horizontal;
-    background: #fff;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-    color: @global-color;
-}
 
 
 
@@ -414,23 +370,7 @@
 }
 
 
-/* `pk-panel-icon`
- ========================================================================== */
 
-.pk-panel-icon {
-    padding: 10px 0;
-    color: #444;
-    text-align: center;
-}
-
-.pk-panel-icon:hover { color: #37a5e4; }
-
-.pk-panel-icon > p {
-    margin-top: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
 
 
 
