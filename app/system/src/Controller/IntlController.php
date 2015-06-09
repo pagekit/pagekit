@@ -17,6 +17,8 @@ class IntlController
     {
         $locale  = substr($locale, 0, 2);
         $numbers = App::intl()->get('numbers', $locale);
+        $dateFields = App::intl()->get('dateFields', $locale);
+        $plurals = json_decode(file_get_contents(App::path().'/app/modules/intl/data/plurals.json'), true);
 
         $messages = json_encode([
 
@@ -27,20 +29,26 @@ class IntlController
                     'dates' => [
                         'calendars' => [
                             'gregorian' => App::intl()->get('calendar', $locale)
-                        ]
+                        ],
+                        'fields' => $dateFields
                     ],
                     'numbers' => array_merge([
                         'defaultNumberingSystem' => 'latn',
-                        'symbols-numberSystem-latn' => $numbers['symbols']
+                        'symbols-numberSystem-latn' => $numbers['symbols'],
+                        'decimalFormats-numberSystem-latn' => [
+                          'standard' => '#,##0.###'
+                        ]
                     ])
                 ]
             ],
 
-            'supplemental' => ['likelySubtags' => [$locale => App::intl()->guessFullLocale($locale)]],
+            'supplemental' => [
+                'likelySubtags' => [$locale => App::intl()->guessFullLocale($locale)],
+                'plurals-type-cardinal' => [$locale => $plurals['supplemental']['plurals-type-cardinal'][$locale]]
+            ],
             'translations' => [$locale => App::translator()->getCatalogue($locale)->all()]
 
         ]);
-
 
         $request = App::request();
 

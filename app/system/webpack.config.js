@@ -90,7 +90,8 @@ module.exports = [
                 "cldr/supplemental$": assets + "/cldrjs/dist/cldr/supplemental.js",
                 "globalize$": assets + "/globalize/dist/globalize.js",
                 "globalize/number$": assets + "/globalize/dist/globalize/number.js",
-                "globalize/date$": assets + "/globalize/dist/globalize/date.js"
+                "globalize/date$": assets + "/globalize/dist/globalize/date.js",
+                "globalize/relative-time$": assets + "/globalize/dist/globalize/relative-time.js"
             }
         }
     }

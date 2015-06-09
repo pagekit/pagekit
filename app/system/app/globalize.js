@@ -594,6 +594,7 @@ var Translator = (function(document, undefined) {
 
 require('globalize/number');
 require('globalize/date');
+require('globalize/relative-time');
 
 var Globalize = require('globalize');
 

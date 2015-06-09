@@ -43,7 +43,6 @@ Vue.filter('trim', {
 
 });
 
-
 Vue.filter('relativeDate', function(value, reference) {
 
     var SECOND = 1000,
@@ -54,27 +53,24 @@ Vue.filter('relativeDate', function(value, reference) {
         YEAR = DAY * 365,
         MONTH = YEAR / 12;
 
-    var formats = [
-      [ 0.7 * MINUTE, 'just now' ],
-      [ 1.5 * MINUTE, 'a minute ago' ],
-      [ 60 * MINUTE, 'minutes ago', MINUTE ],
-      [ 1.5 * HOUR, 'an hour ago' ],
-      [ DAY, 'hours ago', HOUR ],
-      [ 2 * DAY, 'yesterday' ],
-      [ 7 * DAY, 'days ago', DAY ],
-      [ 1.5 * WEEK, 'a week ago'],
-      [ MONTH, 'weeks ago', WEEK ],
-      [ 1.5 * MONTH, 'a month ago' ],
-      [ YEAR, 'months ago', MONTH ],
-      [ 1.5 * YEAR, 'a year ago' ],
-      [ Number.MAX_VALUE, 'years ago', YEAR ]
-    ];
+        var formats = [
+
+            [ 1.5 * MINUTE, 'minute',MINUTE ],
+            [ 60 * MINUTE, 'minute', MINUTE ],
+            [ DAY, 'hour', HOUR ],
+            [ 7 * DAY, 'day', DAY ],
+            [ MONTH, 'week', WEEK ],
+            [ YEAR, 'month', MONTH ],
+            [ 1.5 * YEAR, 'year', YEAR ],
+            [ Number.MAX_VALUE, 'year', YEAR ]
+
+        ],formatter;
 
     if (typeof(value)) value = new Date(value);
     if (!reference) reference = (new Date).getTime();
     if (reference instanceof Date) reference = reference.getTime();
     if (value instanceof Date) value = value.getTime();
-    
+
     var delta = reference - value, format, i, len;
 
     for (i = -1, len=formats.length; ++i < len; ){
@@ -82,11 +78,15 @@ Vue.filter('relativeDate', function(value, reference) {
         format = formats[i];
 
         if (delta < format[0]){
-            return format[2] == undefined ? format[1] : Math.round(delta/format[2]) + ' ' + format[1];
+
+            formatter = Globalize.relativeTimeFormatter( format[1] );
+
+            return formatter(Math.round(delta/format[2])*-1);
         }
     }
-});
 
+    return value;
+});
 
 var evalExp = function(expression) {
 
