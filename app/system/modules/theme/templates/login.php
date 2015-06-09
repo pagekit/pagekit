@@ -19,7 +19,7 @@
 
                 <?= $view->render('messages') ?>
 
-                <form class="js-login js-toggle uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
+                <form class="js-login js-toggle uk-form tm-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
                     <div class="uk-panel uk-panel-box">
 
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         
-                        <p class="tm-panel-marginless-bottom"><button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button></p>
+                        <p class="uk-form-row tm-panel-marginless-bottom"><button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button></p>
 
                         <?php $view->token()->get() ?>
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
@@ -40,7 +40,7 @@
                     </div>
 
                     <p class="uk-contrast">
-                        <label><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
+                        <label class="uk-form"><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
                         <br><a class="uk-link" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Forgot Password?') ?></a>
                     </p>
 

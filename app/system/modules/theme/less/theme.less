@@ -213,10 +213,42 @@ body {
     padding: 20px;
 }
 
-.tm-container-small { width: 300px; }
+.tm-container-small { width: 350px; }
 
 .tm-panel-marginless-bottom {
-    margin-left: -@panel-box-padding;
-    margin-right: -@panel-box-padding;
-    margin-bottom: -@panel-box-padding;
+    margin-left: -50px;
+    margin-right: -50px;
+    margin-bottom: -50px;
 }
+
+/*
+ * Form
+ */
+
+.tm-form input:not([type]),
+.tm-form input[type="text"],
+.tm-form input[type="password"] {
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    border-bottom: 1px solid @global-border;
+    background: transparent;
+
+    // Focus state
+    &:focus {
+        border-color: darken(@global-border, 10%);
+        background: transparent;
+        .hook-form-focus;
+    }
+
+}
+
+.tm-form .uk-form-row + .uk-form-row { margin-top: 50px; }
+
+.tm-form button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 0;
+}
+
+.tm-form .uk-panel { padding: 50px; }
