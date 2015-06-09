@@ -90,9 +90,9 @@ body {
 
 [class*='tm-icon-']:hover { opacity: 1; }
 
-.tm-icon-visit { background-image: url("../../../assets/images/icon-visit.svg"); }
-.tm-icon-logout { background-image: url("../../../assets/images/icon-logout.svg"); }
-.tm-icon-menu { background-image: url("../../../assets/images/icon-menu.svg"); }
+.tm-icon-visit { background-image: url("../images/icon-visit.svg"); }
+.tm-icon-logout { background-image: url("../images/icon-logout.svg"); }
+.tm-icon-menu { background-image: url("../images/icon-menu.svg"); }
 
 /* Tablet and bigger */
 @media (min-width: @breakpoint-medium) {
@@ -195,11 +195,13 @@ body {
 /* Pages for login, error, etc
  ========================================================================== */
 
+.tm-background { background: url("../images/login.jpg") 50% 50% no-repeat; }
+
 /*
  * Helper class
  */
 
-.tm-height-4-5 { height: 80%; }
+.tm-height-4-5 { height: 80vh; }
 
 /*
  * Container
@@ -212,3 +214,9 @@ body {
 }
 
 .tm-container-small { width: 300px; }
+
+.tm-panel-marginless-bottom {
+    margin-left: -@panel-box-padding;
+    margin-right: -@panel-box-padding;
+    margin-bottom: -@panel-box-padding;
+}

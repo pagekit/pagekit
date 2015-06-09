@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="uk-height-1-1">
+<html class="tm-background">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +10,18 @@
         <?php $view->style('theme', 'system/theme:css/theme.css') ?>
         <?php $view->script('login', 'system/theme:js/login.js', ['uikit']) ?>
     </head>
-    <body class="uk-height-1-1">
+    <body>
 
-      <div class="tm-height-4-5 uk-vertical-align uk-text-center">
-            <div class="uk-vertical-align-middle">
+      <div class="uk-height-viewport tm-height-4-5 uk-flex uk-flex-center uk-flex-middle uk-text-center">
+            <div class="tm-container tm-container-small">
 
-                <div class="tm-container tm-container-small">
+                <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
 
-                    <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
+                <?= $view->render('messages') ?>
 
-                    <?= $view->render('messages') ?>
+                <form class="js-login js-toggle uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
-                    <form class="js-login js-toggle uk-panel uk-panel-box uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
+                    <div class="uk-panel uk-panel-box">
 
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
@@ -31,33 +31,33 @@
                                 <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
                             </div>
                         </div>
-                        <div class="uk-form-row">
-                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button>
-                        </div>
-                        <div class="uk-form-row uk-text-small">
-                            <label class="uk-float-left"><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
-                            <a class="uk-float-right uk-link uk-link-muted" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Forgot Password?') ?></a>
-                        </div>
+                        
+                        <p class="tm-panel-marginless-bottom"><button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button></p>
 
                         <?php $view->token()->get() ?>
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
 
-                    </form>
+                    </div>
 
-                    <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
+                    <p class="uk-contrast">
+                        <label><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
+                        <br><a class="uk-link" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Forgot Password?') ?></a>
+                    </p>
 
-                        <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
-                        </div>
-                        <div class="uk-form-row">
-                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
-                        </div>
+                </form>
 
-                        <?php $view->token()->get() ?>
+                <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
 
-                    </form>
+                    <div class="uk-form-row">
+                        <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
+                    </div>
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
+                    </div>
 
-                </div>
+                    <?php $view->token()->get() ?>
+
+                </form>
 
             </div>
         </div>

@@ -67,4 +67,19 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-contrast-misc() {}
+.hook-contrast-misc() {
+
+    .uk-form input[type="radio"],
+    .uk-form input[type="checkbox"] {
+        border-color: @contrast-color;
+        background: transparent;
+    }
+
+    .uk-form input[type="radio"]:checked,
+    .uk-form input[type="checkbox"]:checked,
+    .uk-form input[type=checkbox]:indeterminate {
+        border-color: @contrast-color;;
+        background: transparent;
+    }
+
+}
