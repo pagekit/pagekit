@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
-                    <th class="pk-table-min-width-200">{{ 'Title' | trans }}</th>
+                    <th class="pk-table-min-width-200" v-order="title: config.filter.order">{{ 'Title' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">
                         <div class="uk-form-select pk-filter" data-uk-form-select>
                             <span>{{ 'Status' | trans }}</span>
@@ -44,8 +44,8 @@
                         </div>
                     </th>
                     <th class="pk-table-width-100">{{ 'Author' | trans }}</th>
-                    <th class="pk-table-width-100 uk-text-center">{{ 'Comments' | trans }}</th>
-                    <th class="pk-table-width-100">{{ 'Date' | trans }}</th>
+                    <th class="pk-table-width-100 uk-text-center" v-order="comment_count: config.filter.order">{{ 'Comments' | trans }}</th>
+                    <th class="pk-table-width-100" v-order="date: config.filter.order">{{ 'Date' | trans }}</th>
                     <th class="pk-table-width-200 pk-table-min-width-200">{{ 'URL' | trans }}</th>
                 </tr>
             </thead>

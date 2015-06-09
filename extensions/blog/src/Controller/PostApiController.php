@@ -32,12 +32,16 @@ class PostApiController
             });
         }
 
+        if (!preg_match('/^(date|title|comment_count)\s(asc|desc)$/i', $order, $order)) {
+            $order = [1 => 'date', 2 => 'desc'];
+        }
+
         $limit = App::module('blog')->config('posts.posts_per_page');
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
 
-        $posts = array_values($query->offset($page * $limit)->related('user', 'comments')->limit($limit)->orderBy('date', 'DESC')->get());
+        $posts = array_values($query->offset($page * $limit)->related('user', 'comments')->limit($limit)->orderBy($order[1], $order[2])->get());
 
         return compact('posts', 'pages', 'count');
     }
