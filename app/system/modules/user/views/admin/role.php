@@ -37,10 +37,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-repeat="permission: group">
+                        <tr v-repeat="permission: group" v-class="uk-visible-hover-inline: permission.trusted">
                             <td class="pk-table-text-break">
                                 <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
-                                <i v-if="permission.trusted" class="pk-icon-warning"></i>
+                                <i class="pk-icon-warning uk-margin-small-left uk-invisible" v-if="permission.trusted"></i>
                             </td>
                             <td class="uk-text-center">
 
