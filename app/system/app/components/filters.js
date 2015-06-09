@@ -23,7 +23,7 @@ Vue.filter('date', function(date, format) {
 });
 
 Vue.filter('toOptions', function toOptions(collection) {
-    return Object.keys(collection).map(function (key) {
+    return collection ? Object.keys(collection).map(function (key) {
 
         var op = collection[key];
         if (typeof op === 'string') {
@@ -32,7 +32,7 @@ Vue.filter('toOptions', function toOptions(collection) {
             return { label: key, options: toOptions(op) };
         }
 
-    });
+    }) : [];
 });
 
 Vue.filter('trim', {
