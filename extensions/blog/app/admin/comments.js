@@ -7,10 +7,12 @@ var App = Vue.extend({
     created: function () {
 
         this.Comments = this.$resource('api/blog/comment/:id');
-        this.config.filter = _.extend({ status: '' }, this.config.filter ? this.config.filter : {});
+
+        this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter)
 
         this.$watch('config.page', this.load, false, true);
-        this.$watch('config.filter', function () { this.load(0); }, true);
+        this.$watch('config.filter.search', function () { this.load(0); });
+        this.$watch('config.filter.status', function () { this.load(0); });
     },
 
     computed: {
@@ -29,11 +31,6 @@ var App = Vue.extend({
     methods: {
 
         save: function (comment) {
-
-            if (!this.editing) {
-                return;
-            }
-
             this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
                 this.load();
                 UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
@@ -61,14 +58,9 @@ var App = Vue.extend({
             });
         },
 
-        toggleStatus: function (comment) {
-            comment.status = comment.status === 1 ? 0 : 1;
-            this.save(comment);
-        },
-
         load: function (page) {
 
-            page = page !== undefined ? page : this.config.page;
+            page = page !== undefined ? page : this.$get('config.page');
 
             this.cancel();
 
@@ -92,31 +84,21 @@ var App = Vue.extend({
             return this.statuses[comment.status];
         },
 
-        reply: function(comment) {
-            this.cancel();
-
-            this.$set('editing', { parent_id: comment.id });
-            this.comments.splice(this.comments.indexOf(comment) + 1, 0, this.editing);
-        },
-
-        edit: function(comment) {
-            this.cancel();
-
-            this.$set('editing', Vue.util.extend({}, comment));
-            this.comments.splice(this.comments.indexOf(comment), 0, this.editing);
-        },
-
         cancel: function(e) {
 
             if (e) {
                 e.preventDefault();
+                e.stopPropagation();
             }
 
-            if (this.editing) {
-                this.comments.splice(this.comments.indexOf(this.editing), 1);
-                this.$set('editing', null);
-            }
+            this.$broadcast('cancel');
         }
+
+    },
+
+    components: {
+
+        'comments-row': require('./comments-row.vue')
 
     }
 
