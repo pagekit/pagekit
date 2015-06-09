@@ -33,6 +33,10 @@ var App = Vue.extend({
 
     methods: {
 
+        active: function (post) {
+            return this.selected.indexOf(post.id.toString()) != -1;
+        },
+
         save: function (post) {
             this.resource.save({ id: post.id }, { post: post }, function (data) {
                 this.load();
