@@ -78,9 +78,28 @@ class WidgetModule extends Module
         });
 
         $app->on('app.request', function () use ($app) {
+            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
             // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
         });
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getWidgets()
+    {
+        $widgets = Widget::findAll();
+
+        foreach ($this->config('widget.positions') as $position => $assigned) {
+            foreach ($assigned as $id) {
+                if (isset($widgets[$id])) {
+                    $widgets[$id]->position = $position;
+                }
+            }
+        }
+
+        return $widgets;
     }
 
     /**

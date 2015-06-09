@@ -20,35 +20,10 @@ class WidgetApiController
 
     /**
      * @Route("/", methods="GET")
-     * @Request({"grouped": "bool"})
      */
-    public function indexAction($grouped = false)
+    public function indexAction()
     {
-        $widgets = Widget::findAll();
-
-        if (!$grouped) {
-            return $widgets;
-        }
-
-        $positions = ['' => []];
-
-        foreach ($this->widgets->config('widget.positions') as $position => $assigned) {
-
-            if (!$this->widgets->hasPosition($position)) {
-                $position = '';
-            }
-
-            foreach ($assigned as $id) {
-                if (isset($widgets[$id])) {
-                    $positions[$position][] = $widgets[$id];
-                    unset($widgets[$id]);
-                }
-            }
-        }
-
-        $positions[''] = array_merge($positions[''], array_values($widgets));
-
-        return $positions;
+        return array_values($this->widgets->getWidgets());
     }
 
     /**

@@ -5,7 +5,7 @@ namespace Pagekit\Widget\Model;
 use Pagekit\Application as App;
 use Pagekit\Util\Arr;
 
-class Widget implements WidgetInterface
+abstract class Widget implements WidgetInterface
 {
     /**
      * @var mixed
@@ -159,19 +159,5 @@ class Widget implements WidgetInterface
     public function __toString()
     {
         return $this->render();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function jsonSerialize()
-    {
-        $widget = get_object_vars($this);
-
-        if (!$widget['settings']) {
-            $widget['settings'] = new \stdClass();
-        }
-
-        return $widget;
     }
 }

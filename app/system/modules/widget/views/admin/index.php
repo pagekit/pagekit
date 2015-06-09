@@ -1,6 +1,6 @@
-<?php $view->script('widget-index', 'widget:app/admin/index.js', 'vue') ?>
+<?php $view->script('widget-index', 'widget:app/admin/index.js', 'widgets') ?>
 
-<div id="widgets" v-cloak>
+<div id="widget-index" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -28,7 +28,9 @@
                 <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li v-repeat="type: config.types"><a v-on="click: add(type)">{{ type.name }}</a></li>
+                        <li v-repeat="type: config.types">
+                            <a href="{{ $url('admin/widget/edit', {type: type.id}) }}">{{ type.name }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,7 +47,7 @@
             <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
         </div>
 
-        <div v-repeat="position: positions" v-show="position | hasWidgets">
+        <div v-repeat="position: config.positions" v-show="hasWidgets(position)">
 
             <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
                 <div>
@@ -54,7 +56,28 @@
                 </div>
             </div>
 
-            <widget-list></widget-list>
+            <ul class="uk-nestable uk-form" v-el="nestable">
+                <li class="uk-nestable-item" data-id="{{ widget.id }}" v-repeat="widget: positions[position.id]">
+
+                    <div class="uk-nestable-panel pk-table-fake">
+                        <div class="pk-table-width-minimum">
+                            <input type="checkbox" name="id" value="{{ widget.id }}">
+                        </div>
+                        <div class="pk-table-min-width-100">
+                            <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="getType(widget)">{{ widget.title }}</a>
+                            <span v-if="!getType(widget)">{{ widget.title }}</span>
+                        </div>
+                        <div class="pk-table-width-150">
+                            <div class="uk-form-select uk-nestable-nodrag" v-el="select">
+                                <a></a>
+                                <select class="uk-width-1-1" v-model="position.id" v-on="input: reassign" options="positionOptions"></select>
+                            </div>
+                        </div>
+                        <div class="pk-table-width-150">{{ getType(widget).name }}</div>
+                    </div>
+
+                </li>
+            </ul>
 
         </div>
 

@@ -66,4 +66,15 @@ class Widget extends BaseWidget
     {
         return in_array($id, $this->getNodes());
     }
+
+    public function jsonSerialize()
+    {
+        $widget = get_object_vars($this);
+
+        if (!$widget['settings']) {
+            $widget['settings'] = new \stdClass();
+        }
+
+        return $widget;
+    }
 }
