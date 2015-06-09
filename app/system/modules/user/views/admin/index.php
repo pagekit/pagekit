@@ -67,8 +67,8 @@
                     </td>
                     <td class="uk-text-center">
                         <a class="uk-icon-circle" href="#" title="{{ user.statusText }}" v-class="
-                            uk-text-success: !user.isNew && user.status,
-                            uk-text-danger: !user.isNew && !user.status
+                            uk-text-success: user.login && user.status,
+                            uk-text-danger: !user.status
                         " v-on="click: toggleStatus(user)"></a>
                     </td>
                     <td>
