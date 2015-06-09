@@ -18,70 +18,10 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
-        $app->on('view.site:views/admin/index', function ($event, $view) use ($app) {
-
-            if (!$app['user']->hasAccess('system: manage widgets')) {
-                return;
-            }
-
-            $view->script('widgets', 'widget:app/bundle/site.js', ['site', 'uikit-form-select']);
-
-            $view->data('$widgets', [
-
-                'positions' => array_values($this->getPositions()),
-                'types'     => array_values($this->getTypes())
-
-            ]);
-
-        });
-
-        $app->on('app.site', function ($event, $request) use ($app) {
-
-            // register renderer
-            foreach ($app['module'] as $module) {
-
-                if (!isset($module->renderer) || !is_array($module->renderer)) {
-                    continue;
-                }
-
-                foreach ($module->renderer as $id => $renderer) {
-                    $app['view']->map('position.'.$id, $renderer);
-                }
-            }
-
-            $app['view']->map('position.default', 'widget:views/widgets.php');
-
-            // assign widgets
-            $active    = (array) $request->attributes->get('_node');
-            $user      = $app['user'];
-            $positions = $app['view']->position();
-            $widgets   = Widget::findAll();
-
-            foreach ($this->config('widget.positions') as $position => $ids) {
-
-                if (!$this->hasPosition($position)) {
-                    continue;
-                }
-
-                foreach ($ids as $id) {
-
-                    if (!isset($widgets[$id]) or !$widget = $widgets[$id] or !$widget->hasAccess($user) or ($nodes = $widget->getNodes() and !array_intersect($nodes, $active))) {
-                        continue;
-                    }
-
-                    $widget->mergeSettings($this->getWidgetConfig($widget->getId()));
-
-                    $positions($position, $widget);
-                }
-            }
-
-        });
-
         $app->on('app.request', function () use ($app) {
             $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
             // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
         });
-
     }
 
     /**
