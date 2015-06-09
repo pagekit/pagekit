@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="tm-background">
+<html class="tm-background uk-height-viewport">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,10 +12,10 @@
     </head>
     <body>
 
-      <div class="uk-height-viewport tm-height-4-5 uk-flex uk-flex-center uk-flex-middle uk-text-center">
+      <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
             <div class="tm-container tm-container-small">
 
-                <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
+                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-login.svg') ?>" width="160" height="42" alt="Pagekit">
 
                 <?= $view->render('messages') ?>
 
@@ -31,7 +31,7 @@
                                 <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
                             </div>
                         </div>
-                        
+
                         <p class="uk-form-row tm-panel-marginless-bottom"><button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button></p>
 
                         <?php $view->token()->get() ?>
@@ -39,10 +39,10 @@
 
                     </div>
 
-                    <p class="uk-contrast">
-                        <label class="uk-form"><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
-                        <br><a class="uk-link" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Forgot Password?') ?></a>
-                    </p>
+                    <ul class="uk-list uk-contrast">
+                        <li><label class="uk-form"><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label></li>
+                        <li class="uk-margin-small-top"> <?= __('Forgot Password?') ?> <a class="uk-link" data-uk-toggle="{ target: '.js-toggle' }"><?= __('Request Password') ?></a></li>
+                    </ul>
 
                 </form>
 
