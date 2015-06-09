@@ -1,6 +1,6 @@
 <?php $view->script('widget-edit', 'widget:app/admin/edit.js', ['widgets', 'editor']) ?>
 
-<form id="widget-edit" name="widgetForm" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
+<form id="widget-edit" name="widgetForm" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
     <div class="uk-clearfix uk-margin" data-uk-margin>
 
@@ -38,7 +38,7 @@
 
         <div class="uk-width-medium-1-4">
 
-            <div class="uk-panel uk-panel-divider uk-form-stacked">
+            <div class="uk-panel uk-panel-divider">
 
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>

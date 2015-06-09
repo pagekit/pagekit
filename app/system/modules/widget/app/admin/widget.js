@@ -58,7 +58,8 @@ module.exports = Vue.extend({
 
     components: {
 
-        'site-text': require('../widgets/text.vue')
+        'site-text': require('./widget-text.vue'),
+        'assignment': require('./widget-assignment.vue')
 
     }
 

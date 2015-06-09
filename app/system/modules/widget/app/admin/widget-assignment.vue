@@ -34,13 +34,7 @@
             priority: 100
         },
 
-        paramAttributes: ['widget'],
-
-        partials: {
-
-            'node-item': require('./item.html')
-
-        }
+        paramAttributes: ['widget']
 
     }
 
