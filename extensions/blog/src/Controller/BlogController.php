@@ -18,6 +18,7 @@ class BlogController
      */
     public function postAction($filter = null, $page = 0)
     {
+
         return [
             '$view' => [
                 'title' => __('Posts'),
@@ -25,6 +26,7 @@ class BlogController
             ],
             '$data' => [
                 'statuses' => Post::getStatuses(),
+                'authors'  => Post::getAuthors(),
                 'config'   => [
                     'filter' => $filter,
                     'page'   => $page

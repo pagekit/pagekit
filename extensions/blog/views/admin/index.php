@@ -43,7 +43,12 @@
                             <select v-model="config.filter.status" options="statusOptions"></select>
                         </div>
                     </th>
-                    <th class="pk-table-width-100">{{ 'Author' | trans }}</th>
+                    <th class="pk-table-width-100">
+                        <div class="uk-form-select pk-filter" data-uk-form-select>
+                            <span>{{ 'Author' | trans }}</span>
+                            <select v-model="config.filter.author" options="authors"></select>
+                        </div>
+                    </th>
                     <th class="pk-table-width-100 uk-text-center" v-order="comment_count: config.filter.order">{{ 'Comments' | trans }}</th>
                     <th class="pk-table-width-100" v-order="date: config.filter.order">{{ 'Date' | trans }}</th>
                     <th class="pk-table-width-200 pk-table-min-width-200">{{ 'URL' | trans }}</th>

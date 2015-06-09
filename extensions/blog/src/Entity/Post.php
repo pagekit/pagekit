@@ -278,4 +278,12 @@ class Post implements \JsonSerializable
             ]
         );
     }
+
+    /**
+     * Get all users who have written an article
+     */
+    public static function getAuthors()
+    {
+        return self::query()->select('user_id', 'name')->groupBy('user_id', 'name')->join('@system_user', 'user_id = @system_user.id')->execute()->fetchAll();
+    }
 }

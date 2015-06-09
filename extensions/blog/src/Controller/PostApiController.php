@@ -32,6 +32,12 @@ class PostApiController
             });
         }
 
+        if ($author) {
+            $query->where(function($query) use ($author) {
+                $query->orWhere(['user_id' => (int) $author]);
+            });
+        }
+
         if (!preg_match('/^(date|title|comment_count)\s(asc|desc)$/i', $order, $order)) {
             $order = [1 => 'date', 2 => 'desc'];
         }
