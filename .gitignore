@@ -1,10 +1,13 @@
 **/app/bundle/**/*.js
+/app/installer/assets/css/*
+/app/system/modules/theme/css/*
 /extensions/*
 !/extensions/blog
 !/extensions/hello
 !/extensions/page
 /themes/*
 !/themes/alpha
+/themes/alpha/css/*
 /vendor/*
 !/vendor/assets
 /vendor/assets/*
