@@ -153,7 +153,7 @@ class UserController
                 $r['selected'] = true;
             }
 
-            $roles[] = $r;
+            $roles[$r['id']] = $r;
         }
 
         return $roles;
