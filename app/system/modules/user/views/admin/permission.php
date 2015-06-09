@@ -34,7 +34,7 @@
     </div>
 
     <p>
-        <i class="pk-icon-warning"></i> {{ 'Warning: Give to trusted roles only; this permission has security implications.' || trans }}
+        <i class="pk-icon-warning"></i> {{ 'Warning: This permission has security implications. Give it trusted roles only.' || trans }}
     </p>
 
 </div>
