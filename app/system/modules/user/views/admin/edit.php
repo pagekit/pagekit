@@ -93,14 +93,15 @@
 
             <div class="uk-panel uk-panel-box uk-text-center">
 
-                <div class="uk-panel-badge uk-badge" v-if="user.isNew">{{ 'New' | trans }}</div>
-                <div class="uk-panel-badge uk-badge uk-badge-{{ user.status ? 'success' : 'danger' }}" v-if="!user.isNew">{{ statuses[user.status] }}</div>
-
                 <div class="uk-panel-teaser">
                     <img height="280" width="280" v-gravatar="user.email">
                 </div>
 
-                <h3 class="uk-panel-tile uk-margin-bottom-remove">{{ user.name }}</h3>
+                <h3 class="uk-panel-tile uk-margin-bottom-remove">{{ user.name }}
+                    <i class="uk-icon-circle uk-text-primary" title="{{ 'New' | trans }}" v-if="user.isNew"></i>
+                    <i class="uk-icon-circle uk-text-{{ user.status ? 'success' : 'danger' }}" title="{{ statuses[user.status] }}" v-if="!user.isNew"></i>
+                </h3>
+
                 <div>
                     <a href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" title="{{ 'Verified email address' | trans }}" v-show="config.emailVerification && user.data.verified"></i>
                 </div>
