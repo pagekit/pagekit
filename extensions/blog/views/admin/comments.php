@@ -51,7 +51,7 @@
         </table>
     </div>
 
-    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="comments && !comments.length">{{ 'No comments found.' | trans }}</h3>
+    <p v-show="comments && !comments.length" class="uk-alert uk-alert-info">{{ 'No comments found.' | trans }}</p>
 
     <v-pagination page="{{ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
@@ -72,8 +72,8 @@
                 <br>
                 <a class="uk-link-reset uk-text-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
             </div>
-            <div class="uk-float-left uk-width-large-1-2">
-                <a v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | date medium }}</a>
+            <div class="uk-float-left uk-width-large-1-2 pk-text-right-large">
+                <a v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
                 <span v-if="!comment.post.isAccessible"></span>
             </div>
         </div>
