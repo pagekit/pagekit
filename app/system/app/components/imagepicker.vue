@@ -10,13 +10,15 @@
             </p>
         </div>
 
-        <figure class="uk-overlay uk-overlay-hover" v-if="imageurl">
-            <img v-attr="src: resolveUrl(imageurl)">
+        <figure class="uk-display-block uk-overlay uk-overlay-hover" v-if="imageurl">
+            <div class="uk-placeholder uk-padding-remove uk-flex uk-flex-middle uk-flex-center" style="min-height:145px;">
+                <img class="uk-display-block" v-attr="src: resolveUrl(imageurl)">
+            </div>
             <figcaption class="uk-overlay-panel uk-overlay-background">
 
                 <ul class="uk-subnav">
                     <li><a v-on="click: (imageurl = '')"><i class="uk-icon-trash-o"></i></a></li>
-                    <li><a v-on="click: pick()"><i class="uk-icon-edit"></i></a></li>
+                    <li><a v-on="click: pick()"><i class="uk-icon-hand-o-up"></i></a></li>
                 </ul>
 
             </figcaption>
@@ -27,7 +29,7 @@
             <div class="uk-modal-dialog uk-modal-dialog-large">
 
                 <h1 class="uk-h3">{{ 'Select Image' | trans }}</h1>
-                <v-finder root="/storage"></v-finder>
+                <v-finder root="{{ storage }}"></v-finder>
                 <div class="uk-margin-top">
                     <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !finder.select" v-on="click: select(finder.select)">{{ 'Select' | trans }}</button>
                     <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
