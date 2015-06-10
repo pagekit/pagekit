@@ -24,12 +24,12 @@
             </figcaption>
         </figure>
 
-        <div class="uk-modal" v-el="finder">
+        <div class="uk-modal" v-el="modal">
 
             <div class="uk-modal-dialog uk-modal-dialog-large">
 
                 <h1 class="uk-h3">{{ 'Select Image' | trans }}</h1>
-                <v-finder root="{{ storage }}"></v-finder>
+                <v-finder root="{{ storage }}" v-el="finder"></v-finder>
                 <div class="uk-margin-top">
                     <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !finder.select" v-on="click: select(finder.select)">{{ 'Select' | trans }}</button>
                     <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -66,11 +66,14 @@
 
             var vm = this;
 
-            this.finder = UIkit.modal(this.$$.finder);
+            this.modal = UIkit.modal(this.$$.modal);
+
+            this.finder  = {};
+            this.$finder = this.$$.finder.$finder;
 
             this.$on('select.finder', function(selected) {
 
-                if (selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+                if (selected.length > 0 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
                     vm.finder.select = selected[0];
                 } else {
                     vm.finder.select = '';
@@ -80,13 +83,13 @@
             if (this.src) {
                 this.imageurl = this.$parent.$get(this.src);
             }
-
         },
 
         methods: {
 
             pick: function() {
-                this.finder.show();
+                this.$finder.removeSelection();
+                this.modal.show();
             },
 
             select: function(url) {
@@ -97,13 +100,10 @@
                     this.$parent.$set(this.src, this.imageurl);
                 }
 
-                this.finder.hide();
+                this.modal.hide();
             },
 
             resolveUrl: function(url) {
-
-
-
                 return this.$url.static(url);
             }
         }

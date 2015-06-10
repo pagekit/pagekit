@@ -92,6 +92,8 @@
 
             });
 
+            this.$el.$finder = this;
+
             UIkit.init(this.$el);
         },
 
@@ -181,6 +183,10 @@
                 return this.selected.map(function (name) {
                     return path+name;
                 });
+            },
+
+            removeSelection: function() {
+                this.selected = [];
             },
 
             toggleSelect: function (name) {
