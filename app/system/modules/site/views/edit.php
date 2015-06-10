@@ -15,8 +15,8 @@
 
             <div class="uk-float-right">
 
-                <button class="uk-button uk-button-primary" type="submit" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
                 <a class="uk-button" v-attr="href: $url('admin/site')">{{ node.id ? 'Close' : 'Cancel' | trans }}</a>
+                <button class="uk-button uk-button-primary" type="submit" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
 
             </div>
 
