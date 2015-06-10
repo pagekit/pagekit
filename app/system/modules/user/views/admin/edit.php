@@ -98,8 +98,8 @@
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove">{{ user.name }}
-                    <i class="uk-icon-circle uk-text-primary" title="{{ 'New' | trans }}" v-if="user.isNew"></i>
-                    <i class="uk-icon-circle uk-text-{{ user.status ? 'success' : 'danger' }}" title="{{ statuses[user.status] }}" v-if="!user.isNew"></i>
+                    <i class="pk-icon-circle-primary" title="{{ 'New' | trans }}" v-if="user.isNew"></i>
+                    <i class="pk-icon-circle-{{ user.status ? 'success' : 'danger' }}" title="{{ statuses[user.status] }}" v-if="!user.isNew"></i>
                 </h3>
 
                 <div>

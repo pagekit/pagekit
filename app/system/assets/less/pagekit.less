@@ -140,12 +140,12 @@
     width: 12px;
     height: 12px;
     border-radius: 50px;
+    background-color: @global-muted-color;
 }
 
-.pk-icon-circle { background-color: @global-primary-background; }
+.pk-icon-circle-primary { background-color: @global-primary-background; }
 .pk-icon-circle-success { background-color: @global-success-background; }
 .pk-icon-circle-danger { background-color: @global-danger-background; }
-.pk-icon-circle-muted { background-color: @global-muted-color; }
 
 .pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
 
@@ -195,6 +195,8 @@
     padding-left: 10px;
     margin-top: 10px;
 }
+
+.uk-nav-side .pk-subnav-icon > * { padding-left: 5px; }
 
 .pk-subnav-icon > * > * { color: @global-muted-color; }
 
@@ -310,11 +312,6 @@
  */
 
 .pk-table-fake .uk-form-select { vertical-align: top; }
-
-
-
-
-
 
 
 /* `pk-finder`
