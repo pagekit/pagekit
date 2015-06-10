@@ -8,24 +8,27 @@
         <td class="pk-table-width-minimum">
             <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}" v-gravatar="comment.email">
         </td>
-        <td>
-            <div class="uk-margin uk-clearfix">
-                <div class="uk-float-left uk-width-large-1-2">
+        <td class="uk-visible-hover">
+
+            <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+                <div>
                     {{ comment.author }}
-                    <br>
-                    <a class="uk-link-reset uk-text-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
+                    <br><a class="uk-link-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
                 </div>
-                <div class="uk-float-left uk-width-large-1-2 pk-text-right-large">
+                <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+                    <ul class="uk-subnav pk-subnav-icon uk-invisible uk-margin-right">
+                        <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit"></a></li>
+                        <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
+                    </ul>
+
                     <a v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
                     <!-- TODO: remove ?-->
-                    <span v-if="!comment.post.isAccessible"></span>
+                    <span v-if="!comment.post.isAccessible">{{ comment.created | relativeDate }}</span>
                 </div>
             </div>
-            <div>{{ comment.content }}</div>
-            <ul class="uk-subnav uk-subnav-line">
-                <li><a v-on="click: edit">{{ 'Edit' | trans }}</a></li>
-                <li><a v-on="click: reply">{{ 'Reply' | trans }}</a></li>
-            </ul>
+
+            <div class="uk-margin">{{ comment.content }}</div>
+
         </td>
         <td class="uk-text-center">
             <a title="{{ getStatusText(comment) }}" v-on="click: toggleStatus(comment)">
