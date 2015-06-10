@@ -1,6 +1,11 @@
 <template>
 
-    <form class="uk-form uk-margin" v-if="editing">
+    <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
+
+        <div class="uk-margin uk-flex uk-flex-middle">
+            <h3 class="uk-margin-remove">{{ 'User Widget' | trans }}</h3>
+            <a class="pk-icon-delete pk-icon-hover uk-margin-left" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a>
+        </div>
 
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'User Type' | trans }}</span>
@@ -15,9 +20,9 @@
         </div>
 
         <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Number of Users' | trans }}</label>
+            <label class="uk-form-label" for="form-user-number">{{ 'Number of Users' | trans }}</label>
             <div class="uk-form-controls">
-                <select class="uk-form-width-large" v-model="widget.count" number>
+                <select id="form-user-number" class="uk-width-1-1" v-model="widget.count" number>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -40,14 +45,14 @@
 
     </form>
 
-    <h1 class="uk-h3" v-if="widget.show == 'registered'">
+    <h3 class="uk-panel-title" v-if="widget.show == 'registered'">
         {{ '{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users' | transChoice users.length {users:users.length} }}
-    </h1>
-    <h1 class="uk-h3" v-if="widget.show != 'registered'">
+    </h3>
+    <h3 class="uk-panel-title" v-if="widget.show != 'registered'">
         {{ '{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in' | transChoice users.length {users:users.length} }}
-    </h1>
+    </h3>
 
-    <ul v-show="users.length" data-user class="uk-grid uk-grid-small uk-grid-medium uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
+    <ul v-show="users.length" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
         <li v-repeat="user: users">
             <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.username }}">
                 <img class="uk-border-rounded" width="200" height="200" alt="{{ user.username }}" v-gravatar="user.email">

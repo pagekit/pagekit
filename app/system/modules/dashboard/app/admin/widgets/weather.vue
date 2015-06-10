@@ -1,12 +1,17 @@
 <template>
 
-    <form class="uk-form uk-margin" v-show="editing" v-on="submit: $event.preventDefault()">
+    <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" v-on="submit: $event.preventDefault()">
+
+        <div class="uk-margin uk-flex uk-flex-middle">
+            <h3 class="uk-margin-remove">{{ 'Weather Widget' | trans }}</h3>
+            <a class="pk-icon-delete pk-icon-hover uk-margin-left" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a>
+        </div>
 
         <div class="uk-form-row">
             <label for="form-weather-location" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
                 <div v-el="location" class="uk-autocomplete">
-                    <input id="form-weather-location" class="uk-form-width-large" type="text" v-model="widget.location" autocomplete="off">
+                    <input id="form-weather-location" class="uk-width-1-1" type="text" v-model="widget.location" autocomplete="off">
                 </div>
             </div>
         </div>

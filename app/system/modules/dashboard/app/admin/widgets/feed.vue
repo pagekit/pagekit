@@ -1,25 +1,30 @@
 <template>
 
-    <form class="uk-form uk-margin" v-if="editing">
+    <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
+
+        <div class="uk-margin uk-flex uk-flex-middle">
+            <h3 class="uk-margin-remove">{{ 'Feed Widget' | trans }}</h3>
+            <a class="pk-icon-delete pk-icon-hover uk-margin-left" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a>
+        </div>
 
         <div class="uk-form-row">
             <label for="form-feed-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-feed-title" class="uk-form-width-large" type="text" name="widget[title]" v-model="widget.title">
+                <input id="form-feed-title" class="uk-width-1-1" type="text" name="widget[title]" v-model="widget.title">
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-feed-url" class="uk-form-width-large" type="text" name="url" v-model="widget.url" lazy>
+                <input id="form-feed-url" class="uk-width-1-1" type="text" name="url" v-model="widget.url" lazy>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-feed-count" class="uk-form-label">{{ 'Number of Posts' | trans }}</label>
             <div class="uk-form-controls">
-                <select id="form-weather-count" class="uk-form-width-large" v-model="widget.count" number>
+                <select id="form-feed-count" class="uk-width-1-1" v-model="widget.count" number>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -51,7 +56,7 @@
 
     </form>
 
-    <h1 class="uk-h3" v-show="widget.title">{{ widget.title }}</h1>
+    <h3 class="uk-panel-title" v-show="widget.title">{{ widget.title }}</h1>
 
     <div>
         <div class="uk-text-center" v-show="status == 'loading'">
