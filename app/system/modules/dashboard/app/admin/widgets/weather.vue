@@ -10,7 +10,7 @@
         <div class="uk-form-row">
             <label for="form-weather-location" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
-                <div v-el="location" class="uk-autocomplete">
+                <div v-el="location" class="uk-autocomplete uk-width-1-1">
                     <input id="form-weather-location" class="uk-width-1-1" type="text" v-model="widget.location" autocomplete="off">
                 </div>
             </div>
