@@ -11,6 +11,7 @@ jQuery(function ($) {
 
             var menu = _(this.menu).sortBy('priority').groupBy('parent').value();
             var item = _.find(menu.root, 'active');
+            var self = this;
 
             this.$add('nav', menu.root);
 
@@ -18,6 +19,20 @@ jQuery(function ($) {
                 this.$add('item', item);
                 this.$add('subnav', menu[item.id]);
             }
+
+            // main menu order
+            $(this.$$.appnav).on('stop.uk.sortable', function () {
+
+                var data = {};
+
+                $(this).children().each(function (i) {
+                    data[$(this).data('id')] = i;
+                });
+
+                self.$http.post('admin/adminmenu', {order:data}, function() {
+                    // message?
+                });
+            });
         }
 
     });
@@ -25,20 +40,6 @@ jQuery(function ($) {
     // offcanvas menu
     menu.$addChild({el: '#offcanvas', inherit: true});
     menu.$addChild({el: '#offcanvas-flip', inherit: true});
-
-    // main menu order
-    // $('.js-menu').on('stop.uk.sortable', function () {
-
-    //     var data = {};
-
-    //     $(this).children().each(function (i) {
-    //         data[$(this).data('id')] = i;
-    //     });
-
-    //     $.post($(this).data('url'), {'order': data}, function () {
-    //         // message ?
-    //     });
-    // });
 
     UIkit.notify.message.defaults.timeout = 2000;
 
