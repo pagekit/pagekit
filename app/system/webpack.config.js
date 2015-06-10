@@ -12,7 +12,8 @@ module.exports = [
             "modules/package/app/bundle/upload": "./modules/package/app/components/upload.vue",
             "modules/cache/app/bundle/settings": "./modules/cache/app/components/settings.vue",
             "modules/mail/app/bundle/settings": "./modules/mail/app/components/settings.vue",
-            "modules/oauth/app/bundle/settings": "./modules/oauth/app/components/settings.vue"
+            "modules/oauth/app/bundle/settings": "./modules/oauth/app/components/settings.vue",
+            "app/bundle/imagepicker": "./app/components/imagepicker.vue"
         },
         output: {
             filename: "./[name].js"

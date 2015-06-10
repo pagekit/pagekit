@@ -6,8 +6,7 @@ module.exports = [
             "admin/edit": "./app/admin/edit",
             "admin/index": "./app/admin/index",
             "admin/settings": "./app/admin/settings",
-            "admin/site": "./app/admin/site",
-            "components/image": "./app/components/image.vue"
+            "admin/site": "./app/admin/site"
         },
         output: {
             filename: "./app/bundle/[name].js"

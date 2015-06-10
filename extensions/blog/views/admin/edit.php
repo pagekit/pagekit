@@ -1,4 +1,4 @@
-<?php $view->script('post-edit', 'blog:app/bundle/admin/edit.js', ['vue', 'v-image', 'uikit-datepicker', 'uikit-timepicker']) ?>
+<?php $view->script('post-edit', 'blog:app/bundle/admin/edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker']) ?>
 
 <form id="post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
@@ -41,7 +41,7 @@
                 <div class="uk-form-row">
                     <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
                     <div class="uk-form-controls">
-                        <v-image src="post.data.image"></v-image>
+                        <v-imagepicker src="post.data.image"></v-imagepicker>
                     </div>
                 </div>
 

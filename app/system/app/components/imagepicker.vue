@@ -107,6 +107,6 @@
         }
     };
 
-    Vue.component('v-image', module.exports);
+    Vue.component('v-imagepicker', module.exports);
 
 </script>
