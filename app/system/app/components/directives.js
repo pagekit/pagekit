@@ -38,6 +38,13 @@ Vue.directive('check-all', {
             vm.$set(keypath, self.state());
         });
 
+        $(vm.$el).on('click.check-all', '.check-item', function(e) {
+
+            if (!$(e.target).is(':input, a')) {
+                $(this).find(selector).trigger('click');
+            }
+        });
+
         this.unbindWatcher = vm.$watch(keypath, function(selected) {
 
             $(selector, vm.$el).prop('checked', function() {

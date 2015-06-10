@@ -55,7 +55,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="post: posts" v-class="uk-active: active(post)">
+                <tr class="check-item" v-repeat="post: posts" v-class="uk-active: active(post)">
                     <td><input type="checkbox" name="id" value="{{ post.id }}"></td>
                     <td>
                         <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
