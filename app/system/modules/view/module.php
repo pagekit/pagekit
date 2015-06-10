@@ -55,6 +55,8 @@ return [
             $app['scripts']->add('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
             $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
 
+            $app['scripts']->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
+
         }, 30);
 
         $app->subscribe(new CanonicalListener(), new ResponseListener());
