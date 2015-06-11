@@ -11,10 +11,10 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove"></a></li>
-                    <li><a class="uk-icon-check-circle-o" title="{{ 'Approve' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                    <li><a class="uk-icon-ban" title="{{ 'Unapprove' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="uk-icon-frown-o" title="{{ 'Mark as spam' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
+                    <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Approve' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                    <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unapprove' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="pk-icon-spam pk-icon-hover" title="{{ 'Mark as spam' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove"></a></li>
                 </ul>
             </div>
 
