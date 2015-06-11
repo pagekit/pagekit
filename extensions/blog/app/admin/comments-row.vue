@@ -2,8 +2,8 @@
 
     <tr v-if="!editComment">
 
-        <td>
-            <input class="pk-blog-comments-margin" type="checkbox" name="id" value="{{ comment.id }}">
+        <td class="pk-blog-comments-padding">
+            <input type="checkbox" name="id" value="{{ comment.id }}">
         </td>
         <td class="pk-table-width-minimum">
             <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}" v-gravatar="comment.email">
@@ -21,7 +21,7 @@
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
                     </ul>
 
-                    <a v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
+                    <a class="uk-link-muted" v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
                     <!-- TODO: remove ?-->
                     <span v-if="!comment.post.isAccessible">{{ comment.created | relativeDate }}</span>
                 </div>
@@ -30,7 +30,7 @@
             <div class="uk-margin">{{ comment.content }}</div>
 
         </td>
-        <td class="uk-text-center">
+        <td class="pk-blog-comments-padding uk-text-center">
             <a title="{{ getStatusText(comment) }}" v-on="click: toggleStatus(comment)">
                 <i class="uk-icon-circle" v-class="
                     uk-text-success: comment.status == 1,
@@ -39,9 +39,11 @@
                 "></i>
             </a>
         </td>
-        <td>
+        <td class="pk-blog-comments-padding">
             <a v-attr="href: $url('admin/blog/post/edit', { id: comment.post.id })">{{ comment.post.title }}</a>
-            <a title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}" class="uk-badge uk-badge-notification" v-class="pk-badge: comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })">{{ comment.post.comment_count }}</a>
+            <p>
+                <a class="uk-text-nowrap" v-class="pk-link-icon: !comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}"><i class="pk-icon-check" v-class="pk-icon-primary: comment.post.comments_pending"></i> {{ comment.post.comment_count }}</a>
+            </p>
         </td>
 
     </tr>

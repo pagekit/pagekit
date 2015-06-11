@@ -39,9 +39,9 @@
                             <select v-model="config.filter.status" options="statusOptions"></select>
                         </div>
                     </th>
-                    <th class="pk-table-width-200">
-                        <span v-if="!config.post">{{ 'In response to' | trans }}</span>
-                        <span v-if="config.post">{{ 'In response to %title%' | trans config.post }}</span>
+                    <th class="pk-table-width-200" v-class="pk-filter: config.post, uk-active: config.post">
+                        <span v-if="!config.post">{{ 'Post' | trans }}</span>
+                        <span v-if="config.post">{{ config.post.title }}</span>
                     </th>
                 </tr>
             </thead>
