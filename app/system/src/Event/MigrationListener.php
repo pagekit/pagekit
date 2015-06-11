@@ -15,7 +15,7 @@ class MigrationListener implements EventSubscriberInterface
      */
     public function onLogin(LoginEvent $event)
     {
-        if ($event->getUser()->hasAccess('system: software updates') && App::migrator()->create('app/system/migrations', App::config('system')->get('version'))->get()) {
+        if ($event->getUser()->hasAccess('system: software updates') && App::migrator()->create('system:migrations', App::config('system')->get('version'))->get()) {
             $event->setResponse(App::response()->redirect('@system/migration'));
         }
     }

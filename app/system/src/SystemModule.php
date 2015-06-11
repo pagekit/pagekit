@@ -3,7 +3,12 @@
 namespace Pagekit\System;
 
 use Pagekit\Application as App;
+use Pagekit\Kernel\Event\ExceptionListener;
 use Pagekit\Module\Module;
+use Pagekit\System\Event\MaintenanceListener;
+use Pagekit\System\Event\MigrationListener;
+use Pagekit\System\Event\SystemListener;
+use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
 
 class SystemModule extends Module
@@ -62,6 +67,53 @@ class SystemModule extends Module
                 $app['view']->map('layout', $app['theme.site']->getLayout());
             });
         }
+
+        $app->extend('migrator', function($migrator) {
+            $migrator->setLoader(new FilesystemLoader());
+            return $migrator;
+        });
+    }
+
+    public function boot($app) {
+
+        if (!$app['debug']) {
+            $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
+        }
+
+        $app->subscribe(
+            new MaintenanceListener,
+            new MigrationListener,
+            new SystemListener
+        );
+
+        if ($app->inConsole()) {
+            $app['isAdmin'] = false;
+        }
+
+        $app->on('app.request', function ($event, $request) use ($app) {
+
+            if (!$event->isMasterRequest()) {
+                return;
+            }
+
+            $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+            $app['intl']->setDefaultLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
+
+        }, 50);
+
+        $app->on('app.request', function () use ($app) {
+            foreach ($app['module'] as $module) {
+
+                if (!isset($module->resources)) {
+                    continue;
+                }
+
+                foreach ($module->resources as $prefix => $path) {
+                    $app['locator']->add($prefix, "$module->path/$path");
+                }
+            }
+        }, 2);
+
     }
 
     /**

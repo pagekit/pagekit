@@ -17,7 +17,7 @@ class HelloExtension extends Extension
     public function enable()
     {
         // run all migrations that are newer than the current version
-        if ($version = App::migrator()->create('extensions/hello/migrations', $this->config('version'))->run()) {
+        if ($version = App::migrator()->create('hello:migrations', $this->config('version'))->run()) {
             App::config($this->name)->set('version', $version);
         }
     }
@@ -30,7 +30,7 @@ class HelloExtension extends Extension
     public function uninstall()
     {
         // downgrade all migrations
-        App::migrator()->create('extensions/hello/migrations', $this->config('version'))->run(0);
+        App::migrator()->create('hello:migrations', $this->config('version'))->run(0);
 
         // remove the config
         App::config()->remove($this->name);

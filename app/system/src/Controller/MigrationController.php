@@ -27,7 +27,7 @@ class MigrationController
     {
         $config = App::config('system');
 
-        if ($version = App::migrator()->create('app/system/migrations', $config->get('version'))->run()) {
+        if ($version = App::migrator()->create('system:migrations', $config->get('version'))->run()) {
             $config->set('version', $version);
             App::message()->success(__('Your Pagekit database has been updated successfully.'));
         } else {

@@ -46,6 +46,8 @@ class Application extends Container
             foreach ($this['module'] as $module) {
                 if (isset($module->boot)) {
                     call_user_func($module->boot, $this);
+                } elseif (method_exists($module, 'boot')) {
+                    $module->boot($this);
                 }
             }
 
