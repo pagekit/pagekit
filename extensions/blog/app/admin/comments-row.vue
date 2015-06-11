@@ -15,7 +15,7 @@
                     {{ comment.author }}
                     <br><a class="uk-link-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
                 </div>
-                <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+                <div class="uk-flex uk-flex-middle">
                     <ul class="uk-subnav pk-subnav-icon uk-invisible uk-margin-right">
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit"></a></li>
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
@@ -31,12 +31,11 @@
 
         </td>
         <td class="pk-blog-comments-padding uk-text-center">
-            <a title="{{ getStatusText(comment) }}" v-on="click: toggleStatus(comment)">
-                <i class="uk-icon-circle" v-class="
-                    uk-text-success: comment.status == 1,
-                    uk-text-warning: comment.status == 0,
-                    uk-text-danger:  comment.status == 2
-                "></i>
+            <a class="uk-icon-circle" href="#" title="{{ getStatusText(comment) }}" v-class="
+                uk-text-success: comment.status == 1,
+                uk-text-warning: comment.status == 0,
+                uk-text-danger:  comment.status == 2
+            " v-on="click: toggleStatus(comment)">
             </a>
         </td>
         <td class="pk-blog-comments-padding">
@@ -55,9 +54,9 @@
             <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ editComment.author }}" v-gravatar="editComment.email">
         </td>
         <td colspan="3">
-            <form name="editform" class="uk-form uk-form-stacked" v-on="valid: submit">
+            <form class="uk-form uk-form-stacked" name="editform" v-on="valid: submit">
 
-                <div class="uk-grid uk-grid-width-small-1-3" data-uk-grid-margin>
+                <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-3" data-uk-grid-margin>
                     <div>
                         <label for="form-author" class="uk-form-label">{{ 'Name' | trans }}</label>
                         <input id="form-author" class="uk-width-1-1" name="author" type="text" v-model="editComment.author" v-valid="required">
@@ -70,14 +69,13 @@
                     </div>
                     <div>
                         <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
-                        <select id="form-status" class="uk-width-1-1" v-model="editComment.status" options="statuses | toOptions
-                    "></select>
+                        <select id="form-status" class="uk-width-1-1" v-model="editComment.status" options="statuses | toOptions"></select>
                     </div>
                 </div>
 
-                <div class="uk-grid uk-grid-width-1-1">
+                <div class="uk-grid uk-grid-medium uk-grid-width-1-1">
                     <div>
-                        <textarea class="uk-width-1-1" name="content" rows="6" v-model="editComment.content" v-valid="required"></textarea>
+                        <textarea class="uk-width-1-1" name="content" rows="10" v-model="editComment.content" v-valid="required"></textarea>
                         <p class="uk-form-help-block uk-text-danger" v-show="editform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
                     </div>
                 </div>
@@ -102,7 +100,7 @@
             <form name="replyform" class="uk-form" v-on="valid: submit">
 
                 <div class="uk-form-row">
-                    <textarea class="uk-width-1-1" name="content" rows="6" v-model="replyComment.content" v-valid="required"></textarea>
+                    <textarea class="uk-width-1-1" name="content" rows="10" v-model="replyComment.content" v-valid="required"></textarea>
                     <p class="uk-form-help-block uk-text-danger" v-show="replyform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
                 </div>
 
