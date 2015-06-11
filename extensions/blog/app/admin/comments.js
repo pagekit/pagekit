@@ -13,6 +13,8 @@ var App = Vue.extend({
         this.$watch('config.page', this.load, false, true);
         this.$watch('config.filter.search', function () { this.load(0); });
         this.$watch('config.filter.status', function () { this.load(0); });
+
+        UIkit.init(this.$el);
     },
 
     computed: {
