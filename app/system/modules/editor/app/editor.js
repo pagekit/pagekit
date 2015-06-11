@@ -1,26 +1,13 @@
-require('./components/image/image.js');
-require('./components/link/link.js');
-require('./components/video/video.js');
-require('./components/url.js');
-require('./components/util.js');
-
 var $ = require('jquery');
-var UIkit = require('uikit');
+var Vue = require('vue');
+var Editor = require('./components/editor.vue');
+
+Vue.component('v-editor', Editor);
 
 $(function () {
-
-    $(document).on('htmleditor-save', function (e, editor) {
-        if (editor.element[0].form) {
-            $(editor.element[0].form).submit();
-        }
+    $('[data-editor]').each(function () {
+        Editor.create(this, $(this).data('editor'));
     });
-
-    $('textarea[data-editor]').each(function () {
-
-        var options = $(this).data();
-
-        options.markdown = ('markdown' in options) && (options.markdown === '' || options.markdown);
-        UIkit.htmleditor(this, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, options));
-    });
-
 });
+
+module.exports = Editor;

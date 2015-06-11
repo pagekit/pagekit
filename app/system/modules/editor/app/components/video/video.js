@@ -4,87 +4,147 @@
 
 var $ = require('jquery');
 var _ = require('lodash');
-var Vue = require('vue');
-var UIkit = require('uikit');
 var Picker = require('./picker.vue');
 
-UIkit.plugin('htmleditor', 'video', {
+require('../util.js');
 
-    init: function(editor) {
+module.exports = {
 
-        var self = this;
-
-        this.editor = editor;
-        this.videos = [];
-
-        editor.addButton('video', {
-            title: 'Video',
-            label: '<i class="uk-icon-video-camera"></i>'
-        });
-
-        editor.element.on('action.video', function(e, editor) {
-            self.openModal(_.find(self.videos, function(vid) {
-                return vid.inRange(editor.getCursor());
-            }));
-        });
-
-        editor.options.toolbar.push('video');
-
-        editor.element.on('render', function() {
-            self.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, self.replaceInPreview);
-        });
-
-        editor.preview.on('click', '.js-editor-video .js-config', function() {
-            var index = editor.preview.find('.js-editor-video .js-config').index(this);
-            self.openModal(self.videos[index]);
-        });
-
-        editor.preview.on('click', '.js-editor-video .js-remove', function() {
-            var index = editor.preview.find('.js-editor-video .js-remove').index(this);
-            self.videos[index].replace('');
-        });
-
-        return editor;
+    plugin: {
+        name: 'video'
     },
 
-    openModal: function(video) {
+    methods: {
 
-        var editor = this.editor, cursor = editor.editor.getCursor(),
-            options = editor.element.data('finder-options'),
-            root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+        init: function () {
 
-        if (!video) {
-            video = {
-                src: '',
-                replace: function (value) {
-                    editor.editor.replaceRange(value, cursor);
+            var vm = this, editor = this.editor;
+
+            if (!editor || !editor.htmleditor) {
+                return;
+            }
+
+            this.videos = [];
+
+            editor.addButton('video', {
+                title: 'Video',
+                label: '<i class="uk-icon-video-camera"></i>'
+            });
+
+            editor.options.toolbar.push('video');
+
+            editor.element
+                .on('action.video', function(e, editor) {
+                    vm.openModal(_.find(vm.videos, function(vid) {
+                        return vid.inRange(editor.getCursor());
+                    }));
+                })
+                .on('render', function() {
+                    vm.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, vm.replaceInPreview);
+                })
+                .on('renderLate', function () {
+
+                    while (vm._children.length) {
+                        vm._children[0].$destroy();
+                    }
+
+                    Vue.nextTick(function() {
+                        vm.$compile(editor.preview[0]);
+                    });
+
+                });
+
+
+            editor.debouncedRedraw();
+        },
+
+        openModal: function(video) {
+
+            var editor = this.editor,
+                cursor = editor.editor.getCursor(),
+                options = _.extend({ root: '/storage' }, this.options.finder);
+
+            if (!video) {
+                video = {
+                    replace: function (value) {
+                        editor.editor.replaceRange(value, cursor);
+                    }
+                };
+            }
+
+            this
+                .$addChild({
+                    data: {
+                        video: _.extend({ src: '' }, video),
+                        finder: { root: options.root.replace(/^\/+|\/+$/g, '')+'/' }
+                    }
+                }, Picker)
+                .$mount()
+                .$appendTo('body')
+                .$on('select', function (video) {
+                    video.replace('(video)' + JSON.stringify({src: video.src}));
+                });
+        },
+
+        replaceInPreview: function(data) {
+
+            var settings;
+
+            try {
+
+                settings = JSON.parse(data.matches[1]);
+
+            } catch (e) {}
+
+            $.extend(data, settings || { src: '' });
+
+            return '<video-preview></video-preview>';
+        },
+
+        preview: function (url) {
+
+            var code, matches;
+
+            if ((matches = url.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/))
+                || (matches = url.match(/youtu\.be\/(.*)/))
+            ) {
+
+                code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
+
+            } else if (url.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/)) {
+
+                var id = btoa(url), session = sessionStorage || {};
+
+                if (session[id]) {
+                    code = '<img src="' + session[id] + '" class="uk-width-1-1">';
+                } else {
+                    code = '<img data-imgid="' + id + '" src="" class="uk-width-1-1">';
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
+                        jsonp: 'callback',
+                        dataType: 'jsonp',
+                        success: function (data) {
+                            session[id] = data.thumbnail_url;
+                            $('img[data-id="' + id + '"]').replaceWith('<img src="' + session[id] + '" class="uk-width-1-1">');
+                        }
+                    });
                 }
-            };
+            }
+
+            console.log(url);
+            console.log(Vue.url(url));
+
+            return code ? code : '<video class="uk-width-1-1" src="' + (url ? Vue.url(url) : '') + '"></video>';
         }
 
-        var vm = new Picker();
-
-        vm.$on('select', function(vid) {
-            vid.replace('(video)' + JSON.stringify({src: vid.src}));
-        });
-        vm.$set('video', $.extend(vm.$get('video'), video));
-        vm.$set('finder.root', root);
-        vm.$mount().$appendTo('body');
     },
 
-    replaceInPreview: function(data) {
+    components: {
 
-        var settings;
+        'video-preview': require('./preview.vue')
 
-        try {
-
-            settings = JSON.parse(data.matches[1]);
-
-        } catch (e) {}
-
-        $.extend(data, settings || { src: '' });
-
-        return $('#editor-video-replace').text().template({src: data.src, preview: Picker.options.methods.preview(data.src)}).replace(/(\r\n|\n|\r)/gm, '');
     }
 
-});
+};

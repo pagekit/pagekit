@@ -74,8 +74,8 @@ class SystemModule extends Module
         });
     }
 
-    public function boot($app) {
-
+    public function boot($app)
+    {
         if (!$app['debug']) {
             $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
         }
@@ -113,7 +113,6 @@ class SystemModule extends Module
                 }
             }
         }, 2);
-
     }
 
     /**

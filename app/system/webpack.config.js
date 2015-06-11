@@ -4,7 +4,6 @@ module.exports = [
 
     {
         entry: {
-            "modules/editor/app/bundle/editor": "./modules/editor/app/editor",
             "modules/finder/app/bundle/finder": "./modules/finder/app/finder",
             "modules/package/app/bundle/extensions": "./modules/package/app/extensions",
             "modules/package/app/bundle/themes": "./modules/package/app/themes",

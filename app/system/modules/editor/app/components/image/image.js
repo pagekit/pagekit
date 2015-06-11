@@ -4,91 +4,106 @@
 
 var $ = require('jquery');
 var _ = require('lodash');
-var Vue = require('vue');
-var UIkit = require('uikit');
 var Picker = require('./picker.vue');
 
-UIkit.plugin('htmleditor', 'image', {
+require('../util.js');
 
-    init: function(editor) {
+module.exports = {
 
-        var self = this;
-
-        this.editor = editor;
-        this.images = [];
-
-        editor.element.off('action.image');
-        editor.element.on('action.image', function(e, editor) {
-            self.openModal(_.find(self.images, function(img) {
-                return img.inRange(editor.getCursor());
-            }));
-        });
-
-        editor.element.on('render', function() {
-            var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
-            self.images = editor.replaceInPreview(regexp, self.replaceInPreview);
-        });
-
-        editor.preview.on('click', '.js-editor-image .js-config', function() {
-            var index = editor.preview.find('.js-editor-image .js-config').index(this);
-            self.openModal(self.images[index]);
-        });
-
-        editor.preview.on('click', '.js-editor-image .js-remove', function() {
-            var index = editor.preview.find('.js-editor-image .js-remove').index(this);
-            self.images[index].replace('');
-        });
-
-        return editor;
+    plugin: {
+        name: 'image'
     },
 
-    openModal: function(image) {
+    methods: {
 
-        var editor = this.editor,
-            cursor = editor.editor.getCursor(),
-            options = editor.element.data('finder-options'),
-            root = options.root.replace(/^\/+|\/+$/g, '')+'/';
+        init: function () {
 
-        if (!image) {
-            image = {
-                tag: editor.getCursorMode() == 'html' ? '<img src="${src}" alt="${alt}">' : '![${alt}](${src})',
-                replace: function (value) {
-                    editor.editor.replaceRange(value, cursor);
-                }
-            };
-        }
+            var vm = this, editor = this.editor;
 
-        var vm = new Picker();
-
-        vm.$on('select', function(img) {
-            img.replace(img.tag.template({src: img.src, alt: img.alt}));
-        });
-        vm.$set('image', $.extend(vm.$get('image'), image));
-        vm.$set('finder.root', root);
-        vm.$mount().$appendTo('body');
-    },
-
-    replaceInPreview: function(data) {
-
-        if (data.matches[0][0] == '<') {
-
-            if (data.matches[0].match(/js\-no\-parse/)) {
-                return false;
+            if (!editor || !editor.htmleditor) {
+                return;
             }
 
-            var src = data.matches[0].match(/src="(.*?)"/), alt = data.matches[0].match(/alt="(.*?)"/);
+            this.images = [];
 
-            data.src = src ? src[1] : '';
-            data.alt = alt ? alt[1] : '';
-            data.tag = data.matches[0].replace(/src="(.*?)"/, 'src="${src}"').replace(/alt="(.*?)"/, 'alt="${alt}"');
+            editor.element
+                .off('action.image')
+                .on('action.image', function (e, editor) {
+                    vm.openModal(_.find(vm.images, function (img) {
+                        return img.inRange(editor.getCursor());
+                    }));
+                })
+                .on('render', function () {
+                    var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
+                    vm.images = editor.replaceInPreview(regexp, vm.replaceInPreview);
+                })
+                .on('renderLate', function () {
 
-        } else {
-            data.src = data.matches[3].trim();
-            data.alt = data.matches[2];
-            data.tag = '![${alt}](${src})';
+                    while (vm._children.length) {
+                        vm._children[0].$destroy();
+                    }
+
+                    Vue.nextTick(function() {
+                        vm.$compile(editor.preview[0]);
+                    });
+
+                });
+
+        },
+
+        openModal: function (image) {
+
+            var editor = this.editor,
+                cursor = editor.editor.getCursor(),
+                options = _.extend({ root: '/storage' }, this.options.finder);
+
+            if (!image) {
+                image = {
+                    replace: function (value) {
+                        editor.editor.replaceRange(value, cursor);
+                    }
+                };
+            }
+
+            this.$addChild({
+                    data: {
+                        image: _.extend({ src: '', alt: '' }, image),
+                        finder: { root: options.root.replace(/^\/+|\/+$/g, '') + '/' }
+                    }
+                }, Picker)
+                .$mount()
+                .$appendTo('body')
+                .$on('select', function (image) {
+                    image.replace(this.$interpolate(
+                        (image.tag || editor.getCursorMode()) == 'html' ?
+                            '<img src="{{ image.src }}" alt="{{ image.alt }}">'
+                            : '![{{ image.alt }}]({{ image.src }})'
+                        )
+                    );
+                });
+        },
+
+        replaceInPreview: function (data) {
+
+            if (data.matches[0][0] == '<') {
+                data.src = data.matches[0].match(/src="(.*?)"/)[1];
+                data.alt = data.matches[0].match(/alt="(.*?)"/)[1];
+                data.tag = 'html';
+            } else {
+                data.src = data.matches[3];
+                data.alt = data.matches[2];
+                data.tag = 'gfm';
+            }
+
+            return '<image-preview></image-preview>';
         }
 
-        return $('#editor-image-replace').text().template({src: data.src, alt: data.alt}).replace(/(\r\n|\n|\r)/gm, '');
+    },
+
+    components: {
+
+        'image-preview': require('./preview.vue')
+
     }
 
-});
+};

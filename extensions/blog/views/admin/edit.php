@@ -1,4 +1,7 @@
-<?php $view->script('post-edit', 'blog:app/bundle/admin/edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker']) ?>
+<?php
+$view->style('codemirror');
+$view->script('post-edit', 'blog:app/bundle/admin/edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker', 'editor'])
+?>
 
 <form id="post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
@@ -24,7 +27,7 @@
                 <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
             </div>
             <div class="uk-form-row">
-                <?= $view->editor('', $post->getContent(), ['id' => 'post-content', 'v-model' => 'post.content', 'data-markdown' => $post->get('markdown', '0') ]) ?>
+                <v-editor id="post-content" value="{{ post.content }}" options="{{ {markdown : post.data.markdown} }}"></v-editor>
             </div>
 
             <div class="uk-form-row">

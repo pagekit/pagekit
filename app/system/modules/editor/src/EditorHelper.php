@@ -3,7 +3,6 @@
 namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
-use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\View\Helper\HelperInterface;
 
 class EditorHelper implements HelperInterface
@@ -13,9 +12,9 @@ class EditorHelper implements HelperInterface
      *
      * @see render()
      */
-    public function __invoke($name, $value, array $attributes = [], $parameters = [])
+    public function __invoke($name, $value, array $attributes = [])
     {
-        return $this->render($name, $value, $attributes, $parameters);
+        return $this->render($name, $value, $attributes);
     }
 
     /**
@@ -24,16 +23,29 @@ class EditorHelper implements HelperInterface
      * @param  string $name
      * @param  string $value
      * @param  array  $attributes
-     * @param  array  $parameters
      * @return string
      */
-    public function render($name, $value, array $attributes = [], $parameters = [])
+    public function render($name, $value, array $attributes = [])
     {
-        if ($editor = App::trigger(new EditorLoadEvent('editor.load', $parameters))->getEditor()) {
-            return $editor->render($value, array_merge($attributes, compact('name')));
+        $attributes = array_merge(['name' => $name, 'autocomplete' => 'off', 'style' => 'visibility:hidden; height:543px;'], $attributes);
+        return sprintf('<textarea%s>%s</textarea>', $this->parseAttributes($attributes), htmlspecialchars($value));
+    }
+
+    /**
+     * Get html attribute string
+     *
+     * @param  array $attributes
+     * @return string
+     */
+    protected function parseAttributes($attributes)
+    {
+        $html = '';
+
+        foreach ($attributes as $name => $val) {
+            $html .= is_bool($val) ? " $name" : sprintf(' %s="%s"', $name, htmlspecialchars($val));
         }
 
-        return __('Editor not found.');
+        return $html;
     }
 
     /**

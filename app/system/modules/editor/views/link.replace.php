@@ -1,1 +1,0 @@
-<a class="js-editor-link {{class}}" href="{{link}}">{{{txt}}}{{#unless txt}}<?= __('Select Link') ?>{{/unless}} <span class="uk-icon-pencil"></span></a>

@@ -2,28 +2,39 @@
  * URL resolver plugin
  */
 
-var UIkit = require('uikit');
+module.exports = {
 
-UIkit.plugin('htmleditor', 'urlresolver', {
+    plugin: {
+        name: 'video'
+    },
 
-    init: function(editor) {
+    methods: {
 
-        editor.element.on('renderLate', function() {
+        init: function () {
 
-            editor.replaceInPreview(/src=["'](.+?)["']/gi, function(data) {
+            var editor = this.editor;
 
-                var replacement = data.matches[0];
+            if (!editor || !editor.htmleditor) {
+                return;
+            }
 
-                if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
-                    replacement = replacement.replace(data.matches[1], Vue.url.static(data.matches[1], true));
-                }
+            editor.element.on('renderLate', function () {
 
-                return replacement;
+                editor.replaceInPreview(/src=["'](.+?)["']/gi, function (data) {
+
+                    var replacement = data.matches[0];
+
+                    if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
+                        replacement = replacement.replace(data.matches[1], Vue.url.static(data.matches[1], true));
+                    }
+
+                    return replacement;
+                });
+
             });
 
-        });
+        }
 
-        return editor;
     }
 
-});
+};

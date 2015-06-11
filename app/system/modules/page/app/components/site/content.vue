@@ -10,8 +10,7 @@
     <div class="uk-form-row">
         <label for="form-url" class="uk-form-label">{{ 'Content' | trans }}</label>
         <div class="uk-form-controls">
-            <!-- TODO: integrate editor-->
-            <textarea id="post-content" name="page[content]" autocomplete="off" style="visibility:hidden; height:543px;" data-finder-options="{root:'\/storage'}" v-model="page.content" v-el="editor"></textarea>
+            <v-editor id="post-content" name="page[content]" value="{{ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
         </div>
     </div>
 
@@ -40,10 +39,6 @@
             active: 'page'
         },
 
-        ready: function() {
-            this.editor = UIkit.htmleditor(this.$$.editor, $.extend({}, { marked: marked, CodeMirror: CodeMirror }, { markdown: this.$get('page.data.markdown') }));
-        },
-
         events: {
 
             save: function(data) {
@@ -60,14 +55,10 @@
                     this.$set('page', {});
                 }
 
-                this.$resource('api/page/:id').get({ id: id}, function (page) {
+                this.$resource('api/page/:id').get({id: id}, function (page) {
                     this.$set('page', page);
-                    this.editor.editor.setValue(page.content || '');
                 });
-            },
 
-            'page.data.markdown': function(markdown) {
-                this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
             }
 
         }

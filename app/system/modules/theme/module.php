@@ -21,9 +21,10 @@ return [
                 ];
 
                 $view->data('$pagekit', [
+                    'editor' => $app['module']['system/editor']->config('editor'),
+                    'storage' => $app['system']->config('storage'),
                     'user' => $user,
-                    'menu' => array_values($app['system']->getMenu()->getItems()),
-                    'storage' => $app['system']->config('storage')
+                    'menu' => array_values($app['system']->getMenu()->getItems())
                 ]);
                 
                 $event->setParameter('subset', 'latin,latin-ext');

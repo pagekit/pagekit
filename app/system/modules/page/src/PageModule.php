@@ -16,8 +16,8 @@ class PageModule extends Extension
     public function main(App $app)
     {
         $app->on('view.site:views/edit', function($event, $view) use ($app) {
-            $view->script('page-site', 'system/page:app/bundle/site.js', 'site');
-            $app->trigger(new EditorLoadEvent('editor.load'));
+            $view->style('codemirror');
+            $view->script('page-site', 'system/page:app/bundle/site.js', ['site', 'editor']);
         });
 
         $app->on('site.node.preSave', function(EntityEvent $event) use ($app) {

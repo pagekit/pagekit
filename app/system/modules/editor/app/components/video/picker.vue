@@ -8,7 +8,7 @@
 
                 <div class="uk-grid">
                     <div class="uk-width-1-3 uk-text-center">
-                        <div>{{{ preview(video.src) }}}</div>
+                        <div v-if="video.src">{{{ $parent.preview(video.src) }}}</div>
                     </div>
 
                     <div class="uk-width-2-3">
@@ -72,46 +72,6 @@
 
             update: function () {
                 this.$emit('select', this.video);
-            },
-
-            preview: function (url) {
-
-                var youtubeRegExp = /(\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/,
-                    youtubeRegExpShort = /youtu\.be\/(.*)/,
-                    vimeoRegExp = /(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/,
-                    code, matches, session = sessionStorage || {};
-
-                if (matches = url.match(youtubeRegExp)) {
-
-                    code = '<img src="//img.youtube.com/vi/' + matches[2] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-                } else if (matches = url.match(youtubeRegExpShort)) {
-
-                    code = '<img src="//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg" class="uk-width-1-1">';
-
-                } else if (url.match(vimeoRegExp)) {
-
-                    var imgid = btoa(url);
-
-                    if (session[imgid]) {
-                        code = '<img src="' + session[imgid] + '" class="uk-width-1-1">';
-                    } else {
-                        code = '<img data-imgid="' + imgid + '" src="" class="uk-width-1-1">';
-
-                        $.ajax({
-                            type: 'GET',
-                            url: 'http://vimeo.com/api/oembed.json?url=' + encodeURI(url),
-                            jsonp: 'callback',
-                            dataType: 'jsonp',
-                            success: function (data) {
-                                session[imgid] = data.thumbnail_url;
-                                $('img[data-id="' + imgid + '"]').replaceWith('<img src="' + session[imgid] + '" class="uk-width-1-1">');
-                            }
-                        });
-                    }
-                }
-
-                return code ? code : '<video class="uk-width-1-1" src="' + url + '"></video>';
             },
 
             openFinder: function () {
