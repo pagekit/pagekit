@@ -41,7 +41,7 @@
         <td class="pk-blog-comments-padding">
             <a v-attr="href: $url('admin/blog/post/edit', { id: comment.post.id })">{{ comment.post.title }}</a>
             <p>
-                <a class="uk-text-nowrap" v-class="pk-link-icon: !comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}"><i class="pk-icon-check" v-class="pk-icon-primary: comment.post.comments_pending"></i> {{ comment.post.comment_count }}</a>
+                <a class="uk-text-nowrap" v-class="pk-link-icon: !comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}"><i class="pk-icon-comment" v-class="pk-icon-primary: comment.post.comments_pending"></i> {{ comment.post.comment_count }}</a>
             </p>
         </td>
 
