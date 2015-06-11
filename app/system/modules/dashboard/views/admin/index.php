@@ -18,7 +18,7 @@
     <div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
         <div class="uk-width-medium-1-3" v-repeat="column: columns">
 
-            <div class="uk-panel uk-panel-box uk-visible-hover-inline" v-repeat="widget: column">
+            <div class="uk-panel uk-panel-box uk-visible-hover-inline" v-repeat="widget: column" v-class="uk-active:editing[widget.id]">
 
                 <div v-component="widget-panel" inline-template>
 
