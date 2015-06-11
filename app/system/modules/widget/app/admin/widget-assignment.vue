@@ -1,10 +1,10 @@
 <template>
 
-    <div class="uk-form-row" v-show="$root.tree[menu.id].length" v-repeat="menu: $root.menus">
-        <label for="form-h-it" class="uk-form-label">{{ menu.label }} {{ 'Menu' | trans }}</label>
+    <div class="uk-form-row" v-repeat="menu: menus">
+        <label for="form-h-it" class="uk-form-label">{{ menu.label }}</label>
         <div class="uk-form-controls uk-form-controls-text">
             <ul class="uk-list uk-margin-top-remove">
-                <li v-partial="node-item" v-repeat="node: $root.tree[menu.id]"></li>
+                <li v-partial="#node-item" v-repeat="node: menu.getNodes()"></li>
             </ul>
         </div>
     </div>
@@ -16,8 +16,8 @@
             {{ node.title }}
         </label>
 
-        <ul class="uk-list" v-if="$root.tree[node.id].length">
-            <li v-partial="node-item" v-repeat="node: $root.tree[node.id]"></li>
+        <ul class="uk-list" v-if="menu.getNodes(node)">
+            <li v-partial="#node-item" v-repeat="node: menu.getNodes(node)"></li>
         </ul>
 
     </script>
@@ -34,7 +34,26 @@
             priority: 100
         },
 
-        paramAttributes: ['widget']
+        inherit: true,
+
+        paramAttributes: ['widget'],
+
+        ready: function () {
+
+            var nodes = _(this.config.nodes).groupBy('menu').value();
+
+            this.menus = _.mapValues(this.config.menus, function (menu, id) {
+                return _.extend(menu, {
+
+                    nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parentId').value(),
+
+                    getNodes: function (node) {
+                        return node ? this.nodes[node.id] : this.nodes[0];
+                    }
+
+                });
+            });
+        }
 
     }
 

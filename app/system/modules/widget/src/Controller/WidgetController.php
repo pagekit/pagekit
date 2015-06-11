@@ -3,6 +3,7 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Site\Entity\Node;
 use Pagekit\Widget\Entity\Widget;
 
 /**
@@ -10,10 +11,12 @@ use Pagekit\Widget\Entity\Widget;
  */
 class WidgetController
 {
+    protected $site;
     protected $widgets;
 
     public function __construct()
     {
+        $this->site = App::module('system/site');
         $this->widgets = App::module('system/widget');
     }
 
@@ -53,6 +56,8 @@ class WidgetController
             '$data' => [
                 'widget' => $widget,
                 'config' => [
+                    'menus'     => $this->site->getMenus(),
+                    'nodes'     => array_values(Node::query()->get()),
                     'types'     => array_values($this->widgets->getTypes()),
                     'positions' => array_values($this->widgets->getPositions())
                 ]
