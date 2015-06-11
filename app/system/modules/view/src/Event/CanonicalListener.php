@@ -10,7 +10,7 @@ class CanonicalListener implements EventSubscriberInterface
     /**
      * Adds a canonical link to the document head.
      *
-     * @param GetResponseEvent $event
+     * @param $event
      */
     public function onSite($event, $request)
     {

@@ -46,11 +46,6 @@ return [
             'title' => 'Manage pages'
         ]
 
-    ],
-
-    'templates' => [
-
-        'page.edit' => 'system/page:views/tmpl/edit.php'
-
     ]
+
 ];
