@@ -1,4 +1,4 @@
-<div v-if="items.length" class="uk-overflow-container">
+<div class="uk-overflow-container">
     <table class="uk-table uk-table-hover uk-table-middle pk-finder-table">
         <thead>
             <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=name]"></th>
@@ -26,7 +26,7 @@
                 </td>
                 <td class="pk-table-text-break pk-table-min-width-200">{{ name }}</td>
                 <td class="uk-text-right uk-text-nowrap">{{ size }}</td>
-                <td class="uk-text-nowrap">{{ lastmodified | date medium }}</td>
+                <td class="uk-text-nowrap">{{ lastmodified | relativeDate }}</td>
             </tr>
 
         </tbody>

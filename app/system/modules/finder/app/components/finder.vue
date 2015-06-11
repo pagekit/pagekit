@@ -1,6 +1,6 @@
 <template>
 
-    <div data-uk-observe v-cloak>
+    <div class="uk-form" data-uk-observe v-cloak>
 
         <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -11,7 +11,7 @@
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
                         <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
-                        <li><a class="uk-icon-pencil" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: rename" v-show="selected.length === 1"></a></li>
+                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: rename"></a></li>
                     </ul>
                 </div>
 
@@ -22,18 +22,25 @@
                 </div>
 
             </div>
-            <div data-uk-margin>
+            <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-                <span class="uk-button uk-button-primary uk-form-file">
-                    {{ 'Upload' | trans }}
-                    <input type="file" name="files[]" multiple="multiple">
-                </span>
+                <div class="uk-margin-right">
+                    <ul class="uk-subnav pk-subnav-icon">
+                        <li v-class="'uk-active': view == 'table'">
+                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'table'"></a>
+                        </li>
+                        <li v-class="'uk-active': view == 'thumbnail'">
+                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Thumbnail View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'thumbnail'"></a>
+                        </li>
+                    </ul>
+                </div>
 
-                <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
-
-                <div class="uk-button-group">
-                    <button class="uk-button uk-icon-bars" v-class="'uk-active': view == 'table'"     v-on="click: view = 'table'"></button>
-                    <button class="uk-button uk-icon-th"   v-class="'uk-active': view == 'thumbnail'" v-on="click: view = 'thumbnail'"></button>
+                <div>
+                    <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
+                    <span class="uk-button uk-button-primary uk-form-file">
+                        {{ 'Upload' | trans }}
+                        <input type="file" name="files[]" multiple="multiple">
+                    </span>
                 </div>
 
             </div>
@@ -50,11 +57,9 @@
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
         </div>
 
-        <div v-partial="{{ view }}" v-if="items.length"></div>
+        <div v-partial="{{ view }}"></div>
 
-        <div class="uk-alert" v-if="!items.length">
-            {{ 'No files.' | trans }}
-        </div>
+        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!items.length">{{ 'No files found.' | trans }}</h3>
 
     </div>
 
