@@ -32,6 +32,10 @@ var App = Vue.extend({
 
     methods: {
 
+        active: function (comment) {
+            return this.selected.indexOf(comment.id.toString()) != -1;
+        },
+
         save: function (comment) {
             this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
                 this.load();

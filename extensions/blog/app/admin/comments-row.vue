@@ -1,6 +1,6 @@
 <template>
 
-    <tr v-if="!editComment">
+    <tr class="check-item" v-if="!editComment" v-class="uk-active: active(comment)">
 
         <td class="pk-blog-comments-padding"><input type="checkbox" name="id" value="{{ comment.id }}"></td>
         <td class="pk-table-width-minimum">
