@@ -28,6 +28,22 @@
 
             <div class="uk-margin">{{ comment.content }}</div>
 
+            <div v-if="replyComment">
+                <form name="replyform" class="uk-form" v-on="valid: submit">
+
+                    <div class="uk-form-row">
+                        <textarea class="uk-width-1-1" name="content" rows="10" v-model="replyComment.content" v-valid="required"></textarea>
+                        <p class="uk-form-help-block uk-text-danger" v-show="replyform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
+                    </div>
+
+                    <p>
+                        <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
+                        <button class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                    </p>
+
+                </form>
+            </div>
+
         </td>
         <td class="pk-blog-comments-padding uk-text-center">
             <a href="#" title="{{ getStatusText(comment) }}" v-class="
@@ -81,30 +97,6 @@
 
                 <p>
                     <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-                    <button class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                </p>
-
-            </form>
-        </td>
-
-    </tr>
-
-    <tr v-if="replyComment">
-
-        <td></td>
-        <td class="pk-table-width-minimum">
-            <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ replyComment.author }}" v-gravatar="replyComment.email">
-        </td>
-        <td colspan="3">
-            <form name="replyform" class="uk-form" v-on="valid: submit">
-
-                <div class="uk-form-row">
-                    <textarea class="uk-width-1-1" name="content" rows="10" v-model="replyComment.content" v-valid="required"></textarea>
-                    <p class="uk-form-help-block uk-text-danger" v-show="replyform.content.invalid">{{ 'Content cannot be blank.' | trans }}</p>
-                </div>
-
-                <p>
-                    <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
                     <button class="uk-button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
                 </p>
 
