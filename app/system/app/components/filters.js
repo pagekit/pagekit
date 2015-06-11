@@ -59,10 +59,7 @@ Vue.filter('relativeDate', function(value, reference) {
             [ 60 * MINUTE, 'minute', MINUTE ],
             [ DAY, 'hour', HOUR ],
             [ 7 * DAY, 'day', DAY ],
-            [ MONTH, 'week', WEEK ],
-            [ YEAR, 'month', MONTH ],
-            [ 1.5 * YEAR, 'year', YEAR ],
-            [ Number.MAX_VALUE, 'year', YEAR ]
+            [ MONTH, 'week', WEEK ]
 
         ],formatter;
 
@@ -85,7 +82,7 @@ Vue.filter('relativeDate', function(value, reference) {
         }
     }
 
-    return value;
+    return this.$date((new Date(value)).toISOString(), 'medium');
 });
 
 var evalExp = function(expression) {
