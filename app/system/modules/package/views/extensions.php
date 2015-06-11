@@ -41,8 +41,8 @@
                         <a>{{ pkg.title }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-icon-circle uk-text-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
-                        <a class="uk-icon-circle uk-text-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
+                        <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
+                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
                     <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>

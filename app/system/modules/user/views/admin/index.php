@@ -66,9 +66,10 @@
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-icon-circle" href="#" title="{{ user.statusText }}" v-class="
-                            uk-text-success: user.login && user.status,
-                            uk-text-danger: !user.status
+                        <a href="#" title="{{ user.statusText }}" v-class="
+                            pk-icon-circle-success: user.login && user.status,
+                            pk-icon-circle-danger: !user.status,
+                            pk-icon-circle-primary: user.status
                         " v-on="click: toggleStatus(user)"></a>
                     </td>
                     <td>

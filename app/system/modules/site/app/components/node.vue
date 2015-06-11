@@ -14,9 +14,9 @@
             </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
-                    <a class="uk-icon-circle" v-class="
-                            uk-text-success: node.status,
-                            uk-text-danger: !node.status
+                    <a v-class="
+                            pk-icon-circle-success: node.status,
+                            pk-icon-circle-danger: !node.status
                         " v-on="click: toggleStatus(node)"></a>
                 </td>
             </div>

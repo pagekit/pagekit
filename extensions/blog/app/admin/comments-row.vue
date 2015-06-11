@@ -29,10 +29,10 @@
 
         </td>
         <td class="pk-blog-comments-padding uk-text-center">
-            <a class="uk-icon-circle" href="#" title="{{ getStatusText(comment) }}" v-class="
-                uk-text-success: comment.status == 1,
-                uk-text-warning: comment.status == 0,
-                uk-text-danger:  comment.status == 2
+            <a href="#" title="{{ getStatusText(comment) }}" v-class="
+                pk-icon-circle-success: comment.status == 1,
+                pk-icon-circle-warning: comment.status == 0,
+                pk-icon-circle-danger:  comment.status == 2
             " v-on="click: toggleStatus(comment)">
             </a>
         </td>

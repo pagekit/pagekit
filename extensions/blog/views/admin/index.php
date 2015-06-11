@@ -62,11 +62,11 @@
                     </td>
                     <td class="uk-text-center">
                         <a title="{{ getStatusText(post) }}" v-class="
-                                uk-text-muted:   post.status == 0,
-                                uk-text-warning: post.status == 1,
-                                uk-text-success: post.status == 2,
-                                uk-text-danger:  post.status == 3,
-                                uk-icon-circle:  post.status != 2 || !post.isPublished,
+                                pk-icon-circle:   post.status == 0,
+                                pk-icon-circle-warning: post.status == 1,
+                                pk-icon-circle-success: post.status == 2,
+                                pk-icon-circle-danger:  post.status == 3,
+                                pk-icon-circle-primary:  post.status != 2 || !post.isPublished,
                                 pk-icon-schedule: post.status == 2 && post.isPublished
                             " v-on="click: toggleStatus(post)"></a>
                     </td>
