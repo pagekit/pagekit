@@ -10,7 +10,8 @@
 
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
                 <div>
-                    {{ comment.author }}
+                    <a v-attr="href: $url('admin/user/edit', { id: comment.user_id })" v-if="comment.user_id">{{ comment.author }}</a>
+                    <span v-if="!comment.user_id">{{ comment.author }}</span>
                     <br><a class="uk-link-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
                 </div>
                 <div class="uk-flex uk-flex-middle">
