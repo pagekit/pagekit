@@ -34,7 +34,7 @@ function install (Vue) {
 
     Vue.url.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
-    Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
+    Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf};
 
     Vue.url.static = function(url, params) {
 

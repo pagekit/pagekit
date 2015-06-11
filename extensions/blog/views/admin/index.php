@@ -13,7 +13,7 @@
                     <li><a class="pk-icon-check pk-icon-hover" title="Publish" data-uk-tooltip="{delay: 500}" v-on="click: status(2)"></a></li>
                     <li><a class="pk-icon-block pk-icon-hover" title="Unpublish" data-uk-tooltip="{delay: 500}" v-on="click: status(3)"></a></li>
                     <li><a class="pk-icon-copy pk-icon-hover" title="Copy" data-uk-tooltip="{delay: 500}" v-on="click: copy"></a></li>
-                    <li><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove" v-confirm="{title: 'Delete Posts', text:'Are you sure?'}"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-show="selected.length" v-on="click: remove" v-confirm="'Delete Posts?'"></a></li>
                 </ul>
             </div>
 
