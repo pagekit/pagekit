@@ -29,9 +29,8 @@ class HelloExtension extends Extension
 
     public function uninstall()
     {
-        // drop all own tables (created in migrations)
-        $util = App::db()->getUtility();
-        $util->dropTable('@hello_greetings');
+        // downgrade all migrations
+        App::migrator()->create('extensions/hello/migrations', $this->config('version'))->run(0);
 
         // remove the config
         App::config()->remove($this->name);

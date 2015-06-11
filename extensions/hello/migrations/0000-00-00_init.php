@@ -13,6 +13,15 @@ return [
                 $table->setPrimaryKey(['id']);
             });
         }
+    },
+
+    'down' => function() use ($app) {
+
+        $util = $app['db']->getUtility();
+
+        if ($util->tableExists('@hello_greetings')) {
+            $util->dropTable('@hello_greetings');
+        }
     }
 
 ];

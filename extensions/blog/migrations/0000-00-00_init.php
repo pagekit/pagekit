@@ -52,6 +52,19 @@ return [
 
         // skip migrations and return latest version
         return '0000-00-00_init';
+    },
+
+    'down' => function() use ($app) {
+
+        $util = $app['db']->getUtility();
+
+        if ($util->tableExists('@blog_post')) {
+            $util->dropTable('@blog_post');
+        }
+
+        if ($util->tableExists('@blog_comment')) {
+            $util->dropTable('@blog_comment');
+        }
     }
 
 ];

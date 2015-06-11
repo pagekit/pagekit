@@ -39,6 +39,7 @@ class BlogExtension extends Extension
 
     public function uninstall()
     {
+        App::migrator()->create('extensions/blog/migrations', $this->config('version'))->run(0);
         App::config()->remove($this->name);
     }
 
