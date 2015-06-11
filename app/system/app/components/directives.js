@@ -40,7 +40,7 @@ Vue.directive('check-all', {
 
         $(vm.$el).on('click.check-all', '.check-item', function(e) {
 
-            if (!$(e.target).is(':input, a')) {
+            if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
                 $(this).find(selector).trigger('click');
             }
         });
@@ -182,13 +182,15 @@ Vue.directive('order', {
 
 Vue.directive('confirm', {
 
-    isLiteral: true,
-
     bind: function () {
 
-        var el = this.el, self = this;
+        var el = this.el, self = this, _ = Vue.util, buttons = (_.attr(el, 'buttons') || '').split(',');
 
-        this.options = $.extend({},{title:false, text: this.vm.$trans('Are you sure?')}, UIkit.Utils.str2json(this.raw));
+        this.options = {
+            title:false,
+            text: this.vm.$trans('Are you sure?'),
+            labels: {Ok: (this.vm.$trans(buttons[0] || 'Ok')), Cancel:(this.vm.$trans(buttons[1] || 'Cancel'))}
+        };
 
         this. dirs = this.vm._directives.filter(function (dir) {
             return dir.name == 'on' && dir.el === el;
@@ -196,14 +198,26 @@ Vue.directive('confirm', {
 
         this.dirs.forEach(function (dir) {
 
-            Vue.util.off(dir.el, dir.arg, dir.handler);
-            Vue.util.on(dir.el, dir.arg, function (e) {
+            _.off(dir.el, dir.arg, dir.handler);
+            _.on(dir.el, dir.arg, function (e) {
 
                 UIkit.modal.confirm(self.vm.$trans(self.options.text), function() {
                     dir.handler(e);
                 }, self.options);
             });
         });
+    },
+
+    update: function(value) {
+
+        if(this.arg && value) {  // vue-confirm="'Title':'Text...?'"
+            this.options.title = this.arg;
+            this.options.text = value;
+        }else if(typeof(value) === 'string') { // vue-confirm="'Text...?'"
+            this.options.text = value;
+        } else if(typeof(value) === 'object') { // vue-confirm="{title:'Title', text:'Text...?'}"
+            this.options = $.extend(this.options, value);
+        }
     },
 
     unbind: function() {

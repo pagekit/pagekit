@@ -46,7 +46,7 @@ jQuery(function ($) {
 
     UIkit.modal.alert = function(content, options) {
 
-        options = UIkit.$.extend(true, {bgclose:false, keyboard:false, modal:false, title: false, labels:UIkit.modal.labels}, options);
+        options = UIkit.$.extend(true, {modal:false, title: false, labels:UIkit.modal.labels}, options);
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
@@ -66,7 +66,7 @@ jQuery(function ($) {
     UIkit.modal.confirm = function(content, onconfirm, options) {
 
         onconfirm = UIkit.$.isFunction(onconfirm) ? onconfirm : function(){};
-        options   = UIkit.$.extend(true, {bgclose:false, keyboard:false, modal:false, title: false, labels:UIkit.modal.labels}, options);
+        options   = UIkit.$.extend(true, {modal:false, title: false, labels:UIkit.modal.labels}, options);
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
