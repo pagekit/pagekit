@@ -56,7 +56,7 @@
         <td colspan="3">
             <form class="uk-form uk-form-stacked" name="editform" v-on="valid: submit">
 
-                <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-3" data-uk-grid-margin>
+                <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-3" data-uk-margin="{cls:'uk-margin-top'}">
                     <div>
                         <label for="form-author" class="uk-form-label">{{ 'Name' | trans }}</label>
                         <input id="form-author" class="uk-width-1-1" name="author" type="text" v-model="editComment.author" v-valid="required">
