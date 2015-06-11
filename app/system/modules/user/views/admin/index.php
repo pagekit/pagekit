@@ -12,7 +12,7 @@
                 <ul class="uk-subnav pk-subnav-icon">
                     <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                     <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="{title: 'Delete Users', text:'Are you sure?'}"></a></li>
                 </ul>
             </div>
 

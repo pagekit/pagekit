@@ -69,15 +69,10 @@ jQuery(function () {
 
             remove: function () {
 
-                UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
-
-                    this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                        this.load();
-                        UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
-                    });
-
-                }.bind(this));
-                
+                this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                    this.load();
+                    UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                });
             },
 
             toggleStatus: function (user) {

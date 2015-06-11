@@ -178,3 +178,37 @@ Vue.directive('order', {
         this.indicator.remove();
     }
 });
+
+
+Vue.directive('confirm', {
+
+    isLiteral: true,
+
+    bind: function () {
+
+        var el = this.el, self = this;
+
+        this.options = $.extend({},{title:false, text: this.vm.$trans('Are you sure?')}, UIkit.Utils.str2json(this.raw));
+
+        this. dirs = this.vm._directives.filter(function (dir) {
+            return dir.name == 'on' && dir.el === el;
+        });
+
+        this.dirs.forEach(function (dir) {
+
+            Vue.util.off(dir.el, dir.arg, dir.handler);
+            Vue.util.on(dir.el, dir.arg, function (e) {
+
+                UIkit.modal.confirm(self.vm.$trans(self.options.text), function() {
+                    dir.handler(e);
+                }, self.options);
+            });
+        });
+    },
+
+    unbind: function() {
+        this.dirs.forEach(function (dir) {
+            Vue.util.off(dir.el, dir.arg, dir.handler);
+        });
+    }
+});
