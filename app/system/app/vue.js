@@ -1,24 +1,39 @@
-require('./components/directives.js');
-require('./components/filters.js');
-require('./components/pagination.js');
-require('vue-resource');
-require('vue-validator');
-
 function install (Vue) {
 
     var config = window.$pagekit;
 
     /**
-     * Config
+     * Libraries
+     */
+
+    require('./lib/filters')(Vue);
+    require('./lib/trans')(Vue);
+    require('vue-validator');
+    require('vue-resource');
+
+    /**
+     * Components
+     */
+
+    Vue.component('v-pagination', require('./components/pagination'));
+
+    /**
+     * Directives
+     */
+
+    Vue.directive('check-all', require('./directives/check-all'));
+    Vue.directive('checkbox', require('./directives/checkbox'));
+    Vue.directive('confirm', require('./directives/confirm'));
+    Vue.directive('gravatar', require('./directives/gravatar'));
+    Vue.directive('order', require('./directives/order'));
+
+    /**
+     * Resource
      */
 
     Vue.url.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
     Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf, 'X-Requested-With': 'XMLHttpRequest'};
-
-    /**
-     * Methods
-     */
 
     Vue.url.static = function(url, params) {
 
@@ -35,29 +50,9 @@ function install (Vue) {
         return this(options);
     };
 
-    var formats = ['full', 'long', 'medium', 'short'];
-
-    Vue.prototype.$date = function(date, format) {
-
-        var options = format;
-
-        if (typeof date == 'string') {
-            date = new Date(date);
-        }
-
-        if (typeof options == 'string') {
-            if (formats.indexOf(format) != -1) {
-                options = {date: format};
-            } else {
-                options = {skeleton: format};
-            }
-        }
-
-        return Globalize.formatDate(date, options);
-    };
-
-    Vue.prototype.$trans = Globalize.trans;
-    Vue.prototype.$transChoice = Globalize.transChoice;
+    /**
+     * Partial
+     */
 
     var partial = Vue.directive('partial'), insert = partial.insert;
 

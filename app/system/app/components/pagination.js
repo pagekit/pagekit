@@ -1,10 +1,4 @@
-/**
- * Vue Pagination component.
- */
-
-var Vue = require('vue');
-
-Vue.component('v-pagination', {
+module.exports = {
 
     replace: true,
 
@@ -38,4 +32,4 @@ Vue.component('v-pagination', {
         pagination.selectPage(this.page);
     }
 
-});
+};
