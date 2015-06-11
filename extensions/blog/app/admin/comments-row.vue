@@ -2,9 +2,7 @@
 
     <tr v-if="!editComment">
 
-        <td class="pk-blog-comments-padding">
-            <input type="checkbox" name="id" value="{{ comment.id }}">
-        </td>
+        <td class="pk-blog-comments-padding"><input type="checkbox" name="id" value="{{ comment.id }}"></td>
         <td class="pk-table-width-minimum">
             <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ comment.author }}" v-gravatar="comment.email">
         </td>
