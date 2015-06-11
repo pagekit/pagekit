@@ -37,7 +37,7 @@ var App = Vue.extend({
                 return { text: author.name, value: author.user_id };
             });
 
-            return [{ text: this.$trans('Auhor'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{ text: this.$trans('Author'), value: '' }, { label: this.$trans('Filter by'), options: options }];
         }
     },
 

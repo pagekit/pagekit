@@ -20,6 +20,18 @@
         </div>
 
         <div class="uk-form-row">
+            <span class="uk-form-label">{{ 'Display' | trans }}</span>
+            <div class="uk-form-controls uk-form-controls-text">
+                <p class="uk-form-controls-condensed">
+                    <label><input type="radio" value="thumbnail" v-model="widget.display"> {{ 'Thumbnail' | trans }}</label>
+                </p>
+                <p class="uk-form-controls-condensed">
+                    <label><input type="radio" value="list" v-model="widget.display"> {{ 'List' | trans }}</label>
+                </p>
+            </div>
+        </div>
+
+        <div class="uk-form-row">
             <label class="uk-form-label" for="form-user-number">{{ 'Number of Users' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-user-number" class="uk-width-1-1" v-model="widget.count" number>
@@ -52,10 +64,19 @@
         {{ '{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in' | transChoice users.length {users:users.length} }}
     </h3>
 
-    <ul v-show="users.length" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
+    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
         <li v-repeat="user: users">
             <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.username }}">
                 <img class="uk-border-rounded" width="200" height="200" alt="{{ user.username }}" v-gravatar="user.email">
+            </a>
+        </li>
+    </ul>
+
+    <ul v-show="users.length && widget.display == 'list'" data-user class="uk-list uk-list-line">
+        <li v-repeat="user: users">
+            <a class="uk-flex uk-flex-middle" href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.name }}">
+                <img class="uk-border-circle uk-margin-right" width="40" height="40" alt="{{ user.username }}" v-gravatar="user.email">
+                <span class="uk-flex-item-1 uk-text-truncate">{{ user.username }}</span>
             </a>
         </li>
     </ul>
@@ -75,6 +96,7 @@
             },
             defaults: {
                 show: 'login',
+                display: 'thumbnail',
                 count: 5
             }
 
