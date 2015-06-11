@@ -6,10 +6,11 @@ function install (Vue) {
      * Libraries
      */
 
-    require('./lib/filters')(Vue);
-    require('./lib/trans')(Vue);
-    require('vue-validator');
     require('vue-resource');
+    require('vue-validator');
+    require('./lib/trans')(Vue);
+    require('./lib/filters')(Vue);
+    require('./directives/partial')(Vue);
 
     /**
      * Components
@@ -48,28 +49,6 @@ function install (Vue) {
         });
 
         return this(options);
-    };
-
-    /**
-     * Partial
-     */
-
-    var partial = Vue.directive('partial'), insert = partial.insert;
-
-    partial.insert = function(id) {
-
-        var partial = this.vm.$options.partials[id];
-
-        if (undefined === id || partial) {
-            return insert.call(this, id);
-        }
-
-        var frag = Vue.parsers.template.parse(id);
-
-        if (frag) {
-            this.vm.$options.partials[id] = frag;
-            return insert.call(this, id);
-        }
     };
 
 }
