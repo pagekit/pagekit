@@ -49,16 +49,11 @@ module.exports = {
         },
 
         uninstall: function (pkg) {
-
-            UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
-
-                this.uninstallPackage(pkg, this.packages).success(function (data) {
-                    UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
-                }).error(function (data) {
-                    UIkit.notify(data, 'danger');
-                });
-
-            }.bind(this));
+            this.uninstallPackage(pkg, this.packages).success(function (data) {
+                UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
+            }).error(function (data) {
+                UIkit.notify(data, 'danger');
+            });
         }
 
     }

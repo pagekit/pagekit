@@ -30,7 +30,6 @@ var app = new Permissions({
         },
 
         save: function (e) {
-
             e.preventDefault();
             e.stopPropagation();
 
@@ -53,15 +52,12 @@ var app = new Permissions({
                 }
 
             });
-
         },
 
         remove: function (role) {
-            var vm = this;
-            UIkit.modal.confirm(this.$trans('Are you sure?'), function () {
-                vm.Roles.remove({ id: role.id }, function () {
-                    this.roles.splice(_.findIndex(this.roles, { id: role.id }), 1);
-                });
+
+            this.Roles.remove({ id: role.id }, function () {
+                this.roles.splice(_.findIndex(this.roles, { id: role.id }), 1);
             });
         },
 
@@ -84,7 +80,6 @@ var app = new Permissions({
                     UIkit.notify(this.$trans('Failed to save roles.'), 'danger');
                 }
             });
-
         }
 
     }

@@ -7,7 +7,7 @@
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Are you sure?'"></a></li>
                     <li><a class="uk-icon-check-circle-o" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                     <li><a class="uk-icon-ban" title="{{ 'Disable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                     <li><a class="uk-icon-home" title="{{ 'Frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length === 1" v-on="click: setFrontpage()"></a></li>
@@ -88,7 +88,9 @@
         methods: {
 
             load: function () {
+
                 this.$set('selected', []);
+
                 this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
                     this.$set('nodes', nodes);
                     this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
@@ -104,7 +106,6 @@
                     this.$set('frontpage', frontpage);
                     UIkit.notify('Frontpage set.');
                 });
-
             },
 
             status: function (status) {
@@ -122,6 +123,7 @@
             },
 
             toggleStatus: function (node) {
+
                 node.status = !!node.status ? 0 : 1;
 
                 this.Nodes.save({ id: node.id }, { node: node }, function (data) {
@@ -131,17 +133,14 @@
             },
 
             remove: function() {
-                UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
-
-                    this.Nodes.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
-                        this.load();
-                        UIkit.notify('Page(s) deleted.');
-                    });
-
-                }.bind(this));
+                this.Nodes.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                    this.load();
+                    UIkit.notify('Page(s) deleted.');
+                });
             },
 
             getSelected: function () {
+
                 var vm = this;
 
                 return this.nodes.filter(function (node) {
