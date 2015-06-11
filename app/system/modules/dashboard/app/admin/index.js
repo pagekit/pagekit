@@ -65,9 +65,13 @@ var Dashboard = Vue.extend({
             inherit: true,
 
             ready: function() {
+
+                var vm = this;
+
                 if (this.type.editable !== false) {
                     this.$watch('widget', Vue.util.debounce(this.save, 500), true, false);
                 }
+
             },
 
             computed: {
@@ -115,13 +119,9 @@ var Dashboard = Vue.extend({
 
                     var id = this.widget.id;
 
-                    UIkit.modal.confirm(this.$trans('Are you sure?'), function() {
-
-                        this.Widgets.delete({ id: id }, function() {
-                            this.widgets.splice(_.findIndex(this.widgets, { id: id }), 1);
-                        });
-
-                    }.bind(this));
+                    this.Widgets.delete({ id: id }, function() {
+                        this.widgets.splice(_.findIndex(this.widgets, { id: id }), 1);
+                    });
                 }
 
             }

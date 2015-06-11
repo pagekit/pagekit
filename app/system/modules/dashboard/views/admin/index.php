@@ -23,7 +23,6 @@
                 <div v-component="widget-panel" inline-template>
 
                     <div class="uk-panel-badge">
-                        <a class="uk-icon-remove uk-icon-hover uk-hidden" title="{{ 'Delete' | trans }}" v-on="click: remove()"></a>
                         <a class="uk-icon-cog uk-icon-hover uk-hidden" title="{{ 'Settings' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
                     </div>
 
