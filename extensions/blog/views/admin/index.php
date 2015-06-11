@@ -67,14 +67,14 @@
                                 uk-text-success: post.status == 2,
                                 uk-text-danger:  post.status == 3,
                                 uk-icon-circle:  post.status != 2 || !post.isPublished,
-                                uk-icon-clock-o: post.status == 2 && post.isPublished
+                                pk-icon-schedule: post.status == 2 && post.isPublished
                             " v-on="click: toggleStatus(post)"></a>
                     </td>
                     <td>
                         <a v-attr="href: $url('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-check" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
+                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
                     </td>
                     <td>
                         {{ post.date | date medium }}
