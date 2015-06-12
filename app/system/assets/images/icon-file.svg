@@ -3,7 +3,7 @@
 <svg version="1.1" id="icon-file" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
 <g>
-	<path d="M17,0h-6h-1H9v1h1v6H4V6H3v13v1h14h1V1V0H17z M17,19H4V8h6h1V7V1h6V19z"/>
+	<path d="M16,0h-5h-1H9v1h1v6H4V6H3v11v1h13h1V1V0H16z M16,17H4V8h6h1V7V1h5V17z"/>
 	<rect x="4" y="5" width="1" height="1"/>
 	<rect x="5" y="4" width="1" height="1"/>
 	<rect x="6" y="3" width="1" height="1"/>
