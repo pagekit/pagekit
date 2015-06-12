@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="finder-file" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-<path fill="#E0E0E0" d="M38,22v18c0,0.55-0.45,1-1,1H14c-0.55,0-1-0.45-1-1V11c0-0.55,0.45-1,1-1h12V8H13c-1.1,0-2,0.9-2,2v31
-	c0,1.1,0.9,2,2,2h25c1.1,0,2-0.9,2-2V22H38z"/>
-<path fill="#E0E0E0" d="M40,20H29c-0.55,0-1-0.45-1-1V8L40,20z"/>
-<rect x="17" y="18" fill="#E0E0E0" width="8" height="2"/>
-<rect x="17" y="23" fill="#E0E0E0" width="17" height="2"/>
-<rect x="17" y="28" fill="#E0E0E0" width="17" height="2"/>
-<rect x="17" y="33" fill="#E0E0E0" width="12" height="2"/>
+<svg version="1.1" id="icon-file-large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="80px" height="80px" viewBox="-0.5 -0.5 80 80" enable-background="new -0.5 -0.5 80 80" xml:space="preserve">
+<rect x="43.5" y="37.5" fill="#AFAFB0" width="13" height="1"/>
+<rect x="28.5" y="44.5" fill="#AFAFB0" width="28" height="1"/>
+<rect x="28.5" y="51.5" fill="#AFAFB0" width="28" height="1"/>
+<rect x="28.5" y="58.5" fill="#AFAFB0" width="18.001" height="1"/>
+<g>
+	<path fill="#AFAFB0" d="M65.5,10.5v60h-50V26.991L36.842,10.5H65.5 M66.5,9.5h-30l-22,17v45h52V9.5L66.5,9.5z"/>
+</g>
+<g>
+	<path fill="#AFAFB0" d="M35.5,11.537V26.5H16.135L35.5,11.537 M36.5,9.5l-22,17v1h22V9.5L36.5,9.5z"/>
+</g>
 </svg>

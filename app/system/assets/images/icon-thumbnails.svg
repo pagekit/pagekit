@@ -2,16 +2,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="icon-thumbnails" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
-<g>
-	<path d="M17,12v5h-5v-5H17 M18,11h-7v7h7V11L18,11z"/>
-</g>
-<g>
-	<path d="M17,3v5h-5V3H17 M18,2h-7v7h7V2L18,2z"/>
-</g>
-<g>
-	<path d="M8,3v5H3V3H8 M9,2H2v7h7V2L9,2z"/>
-</g>
-<g>
-	<path d="M8,12v5H3v-5H8 M9,11H2v7h7V11L9,11z"/>
-</g>
+<path d="M17,12v5h-5v-5H17 M18,11h-7v7h7V11L18,11z"/>
+<path d="M17,3v5h-5V3H17 M18,2h-7v7h7V2L18,2z"/>
+<path d="M8,3v5H3V3H8 M9,2H2v7h7V2L9,2z"/>
+<path d="M8,12v5H3v-5H8 M9,11H2v7h7V11L9,11z"/>
 </svg>
