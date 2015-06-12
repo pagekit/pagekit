@@ -11,7 +11,7 @@
             <tr v-repeat="items | folders | searched" class="uk-visible-hover" v-on="click: toggleSelect">
                 <td><input type="checkbox" name="name" value="{{ name }}"></td>
                 <td class="pk-table-width-minimum">
-                    <i class="pk-icon-folder pk-icon-muted"></i>
+                    <i class="pk-icon-folder pk-icon-primary"></i>
                 </td>
                 <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: setPath(path)">{{ name }}</a></td>
                 <td></td>

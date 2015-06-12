@@ -36,7 +36,7 @@
                 </div>
 
                 <div>
-                    <button class="uk-button" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
+                    <button class="uk-button uk-margin-small-right" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
                     <span class="uk-button uk-button-primary uk-form-file">
                         {{ 'Upload' | trans }}
                         <input type="file" name="files[]" multiple="multiple">
