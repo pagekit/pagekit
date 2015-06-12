@@ -21,7 +21,6 @@
                     </ul>
 
                     <a class="uk-link-muted" v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
-                    <!-- TODO: remove ?-->
                     <span v-if="!comment.post.isAccessible">{{ comment.created | relativeDate }}</span>
                 </div>
             </div>

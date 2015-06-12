@@ -2,9 +2,9 @@ module.exports = {
 
     ready: function () {
 
-        var editor = UIkit.htmleditor(this.$el, _.extend({ marked: window.marked, CodeMirror: window.CodeMirror }, this.options));
+        this.editor = UIkit.htmleditor(this.$el, _.extend({ marked: window.marked, CodeMirror: window.CodeMirror }, this.options));
 
-        editor.element
+        this.editor.element
             .on('htmleditor-save', function (e, editor) {
                 if (editor.element[0].form) {
                     var event = document.createEvent('HTMLEvents');
@@ -12,8 +12,6 @@ module.exports = {
                     editor.element[0].form.dispatchEvent(event);
                 }
             });
-
-        this.$parent.$set('editor', editor);
     },
 
     watch: {

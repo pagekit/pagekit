@@ -8,13 +8,13 @@
 
                 <div class="uk-grid">
                     <div class="uk-width-1-3 uk-text-center">
-                        <div v-if="video.src">{{{ $parent.preview(video.src) }}}</div>
+                        <video-view src="{{ video.src }}"></video-view>
                     </div>
 
                     <div class="uk-width-2-3">
 
                         <div class="uk-form-row">
-                            <input type="text" class="uk-width-4-5" placeholder="{{ 'URL' | trans }}" v-model="video.src">
+                            <input type="text" class="uk-width-4-5" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
                             <button type="button" class="uk-button uk-float-right uk-width-1-6" v-on="click: openFinder">{{ 'Select video' | trans }}</button>
                         </div>
 

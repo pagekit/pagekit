@@ -2,11 +2,7 @@
  * Editor Image plugin.
  */
 
-var $ = require('jquery');
-var _ = require('lodash');
 var Picker = require('./picker.vue');
-
-require('../util.js');
 
 module.exports = {
 
@@ -14,42 +10,42 @@ module.exports = {
         name: 'image'
     },
 
-    methods: {
+    created: function () {
 
-        init: function () {
+        var vm = this, editor = this.editor;
 
-            var vm = this, editor = this.editor;
+        if (!editor || !editor.htmleditor) {
+            return;
+        }
 
-            if (!editor || !editor.htmleditor) {
-                return;
-            }
+        this.images = [];
 
-            this.images = [];
+        editor.element
+            .off('action.image')
+            .on('action.image', function (e, editor) {
+                vm.openModal(_.find(vm.images, function (img) {
+                    return img.inRange(editor.getCursor());
+                }));
+            })
+            .on('render', function () {
+                var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
+                vm.images = editor.replaceInPreview(regexp, vm.replaceInPreview);
+            })
+            .on('renderLate', function () {
 
-            editor.element
-                .off('action.image')
-                .on('action.image', function (e, editor) {
-                    vm.openModal(_.find(vm.images, function (img) {
-                        return img.inRange(editor.getCursor());
-                    }));
-                })
-                .on('render', function () {
-                    var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
-                    vm.images = editor.replaceInPreview(regexp, vm.replaceInPreview);
-                })
-                .on('renderLate', function () {
+                while (vm._children.length) {
+                    vm._children[0].$destroy();
+                }
 
-                    while (vm._children.length) {
-                        vm._children[0].$destroy();
-                    }
-
-                    Vue.nextTick(function() {
-                        vm.$compile(editor.preview[0]);
-                    });
-
+                Vue.nextTick(function() {
+                    vm.$compile(editor.preview[0]);
                 });
 
-        },
+            });
+
+    },
+
+    methods: {
 
         openModal: function (image) {
 

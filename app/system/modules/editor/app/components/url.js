@@ -8,32 +8,28 @@ module.exports = {
         name: 'video'
     },
 
-    methods: {
+    created: function () {
 
-        init: function () {
+        var editor = this.editor;
 
-            var editor = this.editor;
+        if (!editor || !editor.htmleditor) {
+            return;
+        }
 
-            if (!editor || !editor.htmleditor) {
-                return;
-            }
+        editor.element.on('renderLate', function () {
 
-            editor.element.on('renderLate', function () {
+            editor.replaceInPreview(/src=["'](.+?)["']/gi, function (data) {
 
-                editor.replaceInPreview(/src=["'](.+?)["']/gi, function (data) {
+                var replacement = data.matches[0];
 
-                    var replacement = data.matches[0];
+                if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
+                    replacement = replacement.replace(data.matches[1], Vue.url.static(data.matches[1], true));
+                }
 
-                    if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
-                        replacement = replacement.replace(data.matches[1], Vue.url.static(data.matches[1], true));
-                    }
-
-                    return replacement;
-                });
-
+                return replacement;
             });
 
-        }
+        });
 
     }
 

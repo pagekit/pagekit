@@ -1,6 +1,6 @@
 <template>
 
-    <textarea autocomplete="off" v-ref="editor" v-el="editor" v-model="value"></textarea>
+    <textarea autocomplete="off" v-el="editor" v-model="value"></textarea>
 
 </template>
 
@@ -9,28 +9,6 @@
     var Editor = Vue.extend({
 
         paramAttributes: ['type', 'value', 'options'],
-
-        created: function() {
-
-            var vm = this;
-
-            _.each(this.$options.components, function (component) {
-
-                if (component.options.plugin) {
-                    vm.$addChild({
-
-                        inherit: true,
-
-                        created: function() {
-                            Vue.nextTick(this.init.bind(this));
-                        }
-
-                    }, component);
-                }
-
-            });
-
-        },
 
         compiled: function() {
 
@@ -45,11 +23,22 @@
 
             }
 
-            if (!this.$options.components[this.type]) {
-                this.type = this.$options.components[window.$pagekit.editor] ? window.$pagekit.editor : 'textarea';
-            }
+            var components = this.$options.components;
+            this.editor = this.$addChild({ el: this.$$.editor, inherit: true }, components[this.type] || components[window.$pagekit.editor] || components['textarea']);
+        },
 
-            this.$addChild({ el: this.$$.editor, inherit: true }, this.$options.components[this.type]);
+        ready: function() {
+
+            var editor = this.editor;
+
+            _.each(this.$options.components, function (component) {
+
+                if (component.options.plugin) {
+                    editor.$addChild({ inherit: true }, component);
+                }
+
+            });
+
         },
 
         components: {

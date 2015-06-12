@@ -2,7 +2,7 @@
 
     <div class="uk-overlay uk-overlay-hover uk-display-block">
 
-        <div v-if="video.src">{{{ $parent.preview(video.src) }}}</div>
+        <video-view src="{{ video.src }}"></video-view>
 
         <div class="uk-placeholder uk-placeholder-large uk-text-center uk-vertical-align" v-if="!video.src">
             <div class="uk-vertical-align-middle"><img v-attr="src: $url.static('app/system/assets/images/placeholder-editor-video.svg')" width="60" height="60" alt="{{ 'Placeholder Video' | trans }}"></div>
