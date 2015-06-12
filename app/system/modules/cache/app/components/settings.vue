@@ -76,7 +76,10 @@
         paramAttributes: ['config', 'options'],
 
         data: function() {
-            return { caches: window.$caches };
+            return {
+                caches: window.$caches,
+                clear: {}
+            };
         },
 
         template: __vue_template__,

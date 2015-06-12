@@ -14,8 +14,8 @@ return [
 
     'routes' => [
 
-        '/system' => [
-            'name' => '@system',
+        '/system/cache' => [
+            'name' => '@system/cache',
             'controller' => 'Pagekit\\Cache\\Controller\\CacheController'
         ]
 
