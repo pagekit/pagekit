@@ -17,7 +17,7 @@
                 <div class="uk-flex uk-flex-middle">
                     <ul class="uk-subnav pk-subnav-icon uk-invisible uk-margin-right">
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit"></a></li>
-                        <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
+                        <li><a class="pk-icon-reply pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
                     </ul>
 
                     <a class="uk-link-muted" v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
