@@ -59,7 +59,7 @@
 
         <div v-partial="{{ view }}"></div>
 
-        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!items.length">{{ 'No files found.' | trans }}</h3>
+        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!items.length || noItemsAfterFilter">{{ 'No files found.' | trans }}</h3>
 
     </div>
 
@@ -159,6 +159,20 @@
                 crumbs[crumbs.length - 1].current = true;
 
                 return crumbs;
+            },
+
+            noItemsAfterFilter: function() {
+
+                if (this.count) {
+
+                    var query = this.search;
+
+                    return query ? !this.items.filter(function (file) {
+                        return file.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+                    }).length : false;
+                }
+
+                return false;
             }
 
         },
