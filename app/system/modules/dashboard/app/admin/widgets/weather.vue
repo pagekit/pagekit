@@ -43,6 +43,10 @@
             </div>
             <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
             <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
+            <h1 v-if="time" class="uk-h2 uk-margin-remove">{{ time | date format }}</h1>
+            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ widget.timezone.id }}</h2>
+            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ widget.timezone.name }}</h2>
+
         </div>
 
     </div>
@@ -70,35 +74,45 @@
 
         },
 
+        data: function() {
+            return {format: {time: 'medium'} };
+        },
+
         ready: function() {
 
-            var self = this;
+            var vm = this, list;
 
-            UIkit.autocomplete(this.$$.location, {
+            UIkit
+                .autocomplete(this.$$.location, {
 
-                source: function(release) {
+                    source: function(release) {
 
-                    self.$http.jsonp(api + '/find', {q: this.input.val(), type: 'like'}, function(data) {
+                        vm.$http.jsonp(api + '/find', {q: this.input.val(), type: 'like'}, function(data) {
 
-                        if (data.cod == 200) {
-                            release(data.list);
-                        } else {
+                            list = data.list || [];
+                            release(list);
+
+                        }).error(function() {
                             release([]);
-                        }
+                        });
 
-                    }).error(function() {
-                        release([]);
-                    });
+                    },
 
-                },
+                    template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
 
-                template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
+                })
+                .on('selectitem.uk.autocomplete', function(e, data) {
 
-            })
-            .on('selectitem.uk.autocomplete', function(e, data) {
-                self.$set('widget.uid', data.id);
-                self.$set('widget.location', data.value);
-            });
+                    var location = _.find(list, {id: data.id});
+
+                    if (!location) {
+                        return;
+                    }
+
+                    vm.$set('widget.uid', location.id);
+                    vm.$set('widget.location', location.name);
+                    vm.setTimezone(location.coord.lat, location.coord.lon);
+                });
 
             this.$watch('widget.uid', function(uid) {
 
@@ -121,8 +135,7 @@
                     return;
                 }
 
-                var key = 'weather-' + this.widget.uid + this.widget.units,
-                    cache = storage[key];
+                var key = 'weather-' + this.widget.uid + this.widget.units, cache = storage[key];
 
                 if (cache) {
 
@@ -156,6 +169,8 @@
                 this.$set('temperature', Math.round(data.main.temp) + (this.widget.units === 'metric' ? ' °C' : ' °F'));
                 this.$set('icon', this.getIconUrl(data.weather[0].icon));
                 this.$set('status', 'done');
+
+                setInterval(this.updateClock, 1000);
             },
 
             getIconUrl: function(icon) {
@@ -184,6 +199,26 @@
                 };
 
                 return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
+            },
+
+            setTimezone: function (lat, lon) {
+
+                this.$http.get(this.$url('admin/system/intl/timezone', {lat: lat, lon: lon}), function(data) {
+
+                    this.$set('widget.timezone', storage[location] = data);
+
+                }).error(function() {
+                    this.$set('status', 'error');
+                });
+
+            },
+
+            updateClock: function() {
+
+                var offset = this.$get('widget.timezone.offset'), date = new Date();
+
+                this.$set('time', offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : false);
+
             }
 
         }

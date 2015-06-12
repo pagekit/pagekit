@@ -21,7 +21,7 @@
 
                             <ul class="uk-comment-meta uk-subnav uk-subnav-line">
                                 <li>
-                                    <time>{{ comment.created | date medium }}</time>
+                                    <time>{{ comment.created | date 'medium' }}</time>
                                 </li>
                                 <li>
                                     <a href="#comment-{{ comment.id }}">#</a>

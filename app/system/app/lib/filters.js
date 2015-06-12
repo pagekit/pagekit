@@ -16,7 +16,7 @@ module.exports = function (Vue) {
     });
 
     Vue.filter('date', function(date, format) {
-        return this.$date(date, format);
+        return this.$date(date, evalExp.call(this, format));
     });
 
     Vue.filter('toOptions', function toOptions(collection) {

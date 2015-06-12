@@ -79,6 +79,7 @@ class PackageInstaller
      *
      * @param  PackageInterface $package
      * @param  string           $path
+     * @throws \Exception
      * @throws \RuntimeException
      */
     public function download(PackageInterface $package, $path)

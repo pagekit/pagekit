@@ -76,7 +76,7 @@
                         <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
                     </td>
                     <td>
-                        {{ post.date | date medium }}
+                        {{ post.date | date 'medium' }}
                     </td>
                     <td class="pk-table-text-break">
                         <a target="_blank" v-if="post.isAccessible" v-attr="href: post.url">{{ post.url | baseUrl }}</a>
