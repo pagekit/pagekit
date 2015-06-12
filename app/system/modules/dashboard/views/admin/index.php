@@ -23,7 +23,7 @@
                 <div v-component="widget-panel" inline-template>
 
                     <div class="uk-panel-badge">
-                        <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Settings' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
+                        <a class="pk-icon-edit pk-icon-hover pk-icon-confirm uk-hidden" title="{{ 'Settings' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
                     </div>
 
                     <div v-component="{{ component }}" v-with="widget: widget, editing: isEditing"></div>
