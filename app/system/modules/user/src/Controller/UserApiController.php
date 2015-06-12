@@ -24,11 +24,8 @@ class UserApiController
 
         if (is_numeric($status)) {
             $query->where(['status' => (int) $status]);
-            if (!$status) {
-                $query->where('access IS NOT NULL');
-            }
         } elseif ('new' == $status) {
-            $query->where(['status' => User::STATUS_BLOCKED, 'access IS NULL']);
+            $query->where(['status' => User::STATUS_ACTIVE, 'access IS NULL']);
         }
 
         if ($search) {

@@ -154,11 +154,6 @@ class User extends BaseUser implements \JsonSerializable
         return $this->isAdministrator() || parent::hasAccess($expression);
     }
 
-    public function isNew()
-    {
-        return $this->isBlocked() && !$this->access;
-    }
-
     public function validate()
     {
         if (empty($this->name)) {
@@ -198,9 +193,6 @@ class User extends BaseUser implements \JsonSerializable
 
         unset($user['password']);
         unset($user['activation']);
-
-        $user['isNew'] = $this->isNew();
-        $user['statusText'] = $this->isNew() ? __('New') : $this->getStatusText();
 
         if ($user['roles']) {
             $user['roles'] = array_values($user['roles']);

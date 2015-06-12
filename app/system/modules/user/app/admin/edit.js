@@ -16,6 +16,14 @@ jQuery(function () {
 
         },
 
+        computed: {
+
+            isNew: function() {
+                return !this.user.access && this.user.status;
+            }
+
+        },
+
         methods: {
 
             save: function (e) {
