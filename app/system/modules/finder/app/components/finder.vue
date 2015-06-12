@@ -10,8 +10,8 @@
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete files?'"></a></li>
                         <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: rename"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete files?'"></a></li>
                     </ul>
                 </div>
 

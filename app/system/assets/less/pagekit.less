@@ -116,9 +116,12 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: 50% 50% no-repeat;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
     vertical-align: middle;
 }
+
+.pk-icon-thumbnail { background-size: contain; }
 
 .pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
 .pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
@@ -130,6 +133,8 @@
 .pk-icon-comment { background-image: url("../../assets/images/icon-comment.svg"); }
 .pk-icon-schedule { background-image: url("../../assets/images/icon-schedule.svg"); }
 .pk-icon-spam { background-image: url("../../assets/images/icon-spam.svg"); }
+.pk-icon-file { background-image: url("../../assets/images/icon-file.svg"); }
+.pk-icon-folder { background-image: url("../../assets/images/icon-folder.svg"); }
 
 .pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
 
@@ -169,6 +174,11 @@
 .pk-icon-hover { opacity: 0.3; }
 .pk-icon-hover:hover { opacity: 1; }
 
+/*
+ * Icon Muted
+ */
+
+.pk-icon-muted { opacity: 0.3; }
 
 /*
  * Link Hover with Icon and Text
@@ -337,53 +347,27 @@
 .pk-table-fake .uk-form-select { vertical-align: top; }
 
 
-/* `pk-finder`
- ========================================================================== */
-
-/*
- * Sub-object `pk-finder-icons-*`
- */
-
-.pk-finder-icon-folder { color: #97BFF1; }
-
-.pk-finder-icon-file { color: #aaa; }
-
-/*
- * Modifier `pk-finder-table`
- */
-
-.pk-finder-table td:nth-child(2) { padding-right: 0; }
-
-
 /* `pk-thumbnail`
  ========================================================================== */
 
 .pk-thumbnail {
-    height: 150px;
-    border: 1px solid @global-border;
-    background-color: #fafafa;
+    height: 180px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: contain;
+    background-size: cover;
 }
-
-/*
- * Modifier
- */
-
-.pk-thumbnail-border-remove .pk-thumbnail { border: none; }
 
 /*
  * Placeholder
  */
 
 .pk-thumbnail-folder {
-    background-image: url("../../assets/images/finder-folder.svg");
+    background-image: url("../../assets/images/icon-folder-large.svg");
     background-size: 50px 50px;
 }
 
 .pk-thumbnail-file {
-    background-image: url("../../assets/images/finder-file.svg");
+    background-image: url("../../assets/images/icon-file-large.svg");
     background-size: 50px 50px;
 }
 
@@ -392,19 +376,6 @@
     background-size: 50px 50px;
 }
 
-
-/* `pk-thumbnail-icon`
- ========================================================================== */
-
-.pk-thumbnail-icon {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: contain;
-    vertical-align: middle;
-}
 
 
 /* Panel Teaser
