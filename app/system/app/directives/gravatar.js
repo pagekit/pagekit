@@ -1,4 +1,3 @@
-var $ = window.jQuery;
 var md5 = require('md5');
 
 module.exports = {

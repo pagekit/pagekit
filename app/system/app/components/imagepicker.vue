@@ -45,14 +45,9 @@
 
 <script>
 
-    var $ = require('jquery');
-    var Vue = require('vue');
-
     module.exports = {
 
         replace: true,
-
-        template: __vue_template__,
 
         paramAttributes: ['src'],
 
@@ -106,7 +101,10 @@
             resolveUrl: function(url) {
                 return this.$url.static(url);
             }
-        }
+        },
+
+        template: __vue_template__
+
     };
 
     Vue.component('v-imagepicker', module.exports);

@@ -62,8 +62,6 @@
 
 <script>
 
-    var Settings = require('settings');
-
     module.exports = {
 
         section: {
@@ -81,8 +79,6 @@
                 clear: {}
             };
         },
-
-        template: __vue_template__,
 
         methods: {
 
@@ -108,7 +104,9 @@
                 this.modal.hide();
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 

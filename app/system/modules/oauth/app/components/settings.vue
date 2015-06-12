@@ -55,8 +55,6 @@
 
 <script>
 
-    var Settings = require('settings');
-
     module.exports = {
 
         section: {
@@ -71,8 +69,6 @@
         data: function() {
             return window.$oauth
         },
-
-        template: __vue_template__,
 
         ready: function () {
 
@@ -111,7 +107,9 @@
                 return results;
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 

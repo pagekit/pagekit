@@ -95,8 +95,6 @@
 
 <script>
 
-    var Settings = require('settings');
-
     module.exports = {
 
         section: {
@@ -112,8 +110,6 @@
             return window.$mail;
         },
 
-        template: __vue_template__,
-
         methods: {
 
             test: function (driver) {
@@ -126,7 +122,9 @@
 
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 

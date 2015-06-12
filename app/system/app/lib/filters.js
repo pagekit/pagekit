@@ -1,6 +1,3 @@
-var $ = require('jquery');
-var _ = require('lodash');
-
 module.exports = function (Vue) {
 
     Vue.filter('baseUrl', function(url) {

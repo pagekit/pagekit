@@ -1,5 +1,3 @@
-var $ = window.jQuery;
-
 module.exports = {
 
     twoWay: true,
