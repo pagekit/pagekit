@@ -41,8 +41,8 @@
             <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
             <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
             <h1 v-if="time" class="uk-h2 uk-margin-remove">{{ time | date format }}</h1>
-            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ widget.timezone.id }}</h2>
-            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ widget.timezone.name }}</h2>
+            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.id }}</h2>
+            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.name }}</h2>
 
         </div>
 
@@ -108,7 +108,7 @@
 
                     vm.$set('widget.uid', location.id);
                     vm.$set('widget.location', location.name);
-                    vm.setTimezone(location.coord.lat, location.coord.lon);
+                    vm.$set('widget.coords', location.coord);
                 });
 
             this.$watch('widget.uid', function(uid) {
@@ -117,26 +117,32 @@
                     this.$parent.edit(true);
                 }
 
-                this.load();
+                this.loadWeather();
+                this.loadTime();
 
             }, false, true);
+        },
 
-            this.$watch('widget.units', this.load, false, false);
+        watch: {
+
+            'widget.units': 'loadWeather',
+            'widget.coords': 'loadTime'
+
         },
 
         methods: {
 
-            load: function() {
+            loadWeather: function() {
 
                 if (!this.widget.uid || !this.widget.units) {
                     return;
                 }
 
-                var key = 'weather-' + this.widget.uid + this.widget.units, cache = storage[key];
+                var key = 'weather-' + this.widget.uid + this.widget.units;
 
-                if (cache) {
+                if (storage[key]) {
 
-                    this.init(JSON.parse(cache));
+                    this.init(JSON.parse(storage[key]));
 
                 } else {
 
@@ -155,6 +161,32 @@
 
                 }
 
+            },
+
+            loadTime: function() {
+
+                if (!this.widget.coords) {
+                    return;
+                }
+
+                var key = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
+
+                if (storage[key]) {
+
+                    this.$set('timezone', JSON.parse(storage[key]));
+
+                } else {
+
+                    this.$http.get(this.$url('admin/system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}), function(data) {
+
+                        storage[key] = JSON.stringify(data);
+                        this.$set('timezone', data);
+
+                    }).error(function() {
+                        this.$set('status', 'error');
+                    });
+
+                }
             },
 
             init: function(data) {
@@ -198,21 +230,9 @@
                 return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
             },
 
-            setTimezone: function (lat, lon) {
-
-                this.$http.get(this.$url('admin/system/intl/timezone', {lat: lat, lon: lon}), function(data) {
-
-                    this.$set('widget.timezone', storage[location] = data);
-
-                }).error(function() {
-                    this.$set('status', 'error');
-                });
-
-            },
-
             updateClock: function() {
 
-                var offset = this.$get('widget.timezone.offset'), date = new Date();
+                var offset = this.$get('timezone.offset'), date = new Date();
 
                 this.$set('time', offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : false);
 
