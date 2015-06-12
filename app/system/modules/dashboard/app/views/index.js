@@ -83,7 +83,7 @@ var Dashboard = Vue.extend({
                 column = (this.children.length < sortables.eq(column)[0].children.length) ? idx : column;
             });
 
-            this.Widgets.save({ widget: _.merge({ type: type.id, column:column, idx: sortables.eq(column)[0].children.length }, type.defaults)}, function(data) {
+            this.Widgets.save({ widget: _.merge({ type: type.id, column:column, idx: (sortables.eq(column)[0].children.length-1) }, type.defaults)}, function(data) {
                 this.widgets.push(data);
                 this.editing.$set(data.id, true);
             });
