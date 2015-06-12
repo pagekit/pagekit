@@ -1,5 +1,5 @@
 <?php $view->style('comment-index', 'blog:assets/css/blog.admin.css') ?>
-<?php $view->script('comment-index', 'blog:app/bundle/admin/comments.js', 'vue') ?>
+<?php $view->script('comment-index', 'blog:app/bundle/comment-index.js', 'vue') ?>
 
 <div id="comments" class="uk-form" data-uk-observe v-cloak>
 

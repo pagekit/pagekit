@@ -1,4 +1,4 @@
-<?php $view->script('blog.settings', 'blog:app/bundle/admin/settings.js', 'vue') ?>
+<?php $view->script('blog-settings', 'blog:app/bundle/settings.js', 'vue') ?>
 
 <div id="settings" class="uk-form uk-form-horizontal">
 

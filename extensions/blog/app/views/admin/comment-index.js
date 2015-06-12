@@ -104,7 +104,7 @@ var App = Vue.extend({
 
     components: {
 
-        'comments-row': require('./comments-row.vue')
+        'comments-row': require('./comment-row.vue')
 
     }
 

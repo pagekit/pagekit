@@ -2,11 +2,11 @@ module.exports = [
 
     {
         entry: {
-            "admin/comments": "./app/admin/comments",
-            "admin/edit": "./app/admin/edit",
-            "admin/index": "./app/admin/index",
-            "admin/settings": "./app/admin/settings",
-            "admin/site": "./app/admin/site"
+            "comment-index": "./app/views/admin/comment-index",
+            "post-edit": "./app/views/admin/post-edit",
+            "post-index": "./app/views/admin/post-index",
+            "settings": "./app/views/admin/settings",
+            "site": "./app/components/site"
         },
         output: {
             filename: "./app/bundle/[name].js"

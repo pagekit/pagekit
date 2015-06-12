@@ -22,7 +22,7 @@ class BlogController
         return [
             '$view' => [
                 'title' => __('Posts'),
-                'name'  => 'blog:views/admin/index.php'
+                'name'  => 'blog:views/admin/post-index.php'
             ],
             '$data' => [
                 'statuses' => Post::getStatuses(),
@@ -65,7 +65,7 @@ class BlogController
             return [
                 '$view' => [
                     'title' => $id ? __('Edit Post') : __('Add Post'),
-                    'name'  => 'blog:views/admin/edit.php'
+                    'name'  => 'blog:views/admin/post-edit.php'
                 ],
                 '$data' => [
                     'post'     => $post,
@@ -98,7 +98,7 @@ class BlogController
         return [
             '$view' => [
                 'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments'),
-                'name'  => 'blog:views/admin/comments.php'
+                'name'  => 'blog:views/admin/comment-index.php'
             ],
             '$data'   => [
                 'statuses' => Comment::getStatuses(),
