@@ -53,8 +53,8 @@
             </li>
         </ul>
 
-        <div class="uk-progress uk-progress-striped uk-active" v-show="upload.running">
-            <div class="uk-progress-bar" v-style="width: upload.progress + '%'">{{ upload.progress }}%</div>
+        <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
+            <div class="uk-progress-bar" v-style="width: upload.progress + '%'"></div>
         </div>
 
         <div v-partial="{{ view }}"></div>
