@@ -50,9 +50,6 @@
 
 <script>
 
-    var $ = require('jquery');
-    var Vue = require('vue');
-
     module.exports = {
 
         replace: true,

@@ -46,15 +46,12 @@
 
 <script>
 
-    var $ = require('jquery');
-    var _ = require('lodash');
-
     module.exports = {
 
         replace: true,
 
         mixins: [
-            require('./package')
+            require('../lib/package')
         ],
 
         paramAttributes: ['api', 'search', 'type', 'installed'],

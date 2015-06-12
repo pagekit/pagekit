@@ -5,9 +5,9 @@ module.exports = [
     {
         entry: {
             "modules/finder/app/bundle/finder": "./modules/finder/app/finder",
-            "modules/package/app/bundle/extensions": "./modules/package/app/extensions",
-            "modules/package/app/bundle/themes": "./modules/package/app/themes",
-            "modules/package/app/bundle/marketplace": "./modules/package/app/marketplace",
+            "modules/package/app/bundle/extensions": "./modules/package/app/views/extensions",
+            "modules/package/app/bundle/themes": "./modules/package/app/views/themes",
+            "modules/package/app/bundle/marketplace": "./modules/package/app/views/marketplace",
             "modules/package/app/bundle/upload": "./modules/package/app/components/upload.vue",
             "modules/cache/app/bundle/settings": "./modules/cache/app/components/settings.vue",
             "modules/mail/app/bundle/settings": "./modules/mail/app/components/settings.vue",

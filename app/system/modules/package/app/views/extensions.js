@@ -1,9 +1,7 @@
-var $ = require('jquery');
-
 module.exports = {
 
     mixins: [
-        require('./package')
+        require('../lib/package')
     ],
 
     data: $.extend(window.$data, {
@@ -19,11 +17,13 @@ module.exports = {
     methods: {
 
         icon: function (pkg) {
-            if (pkg.extra.image) {
-                return this.$url.static('themes/:name/:image', {name: pkg.name, image: pkg.extra.image});
+
+            if (pkg.extra && pkg.extra.image) {
+                return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
             } else {
-                return this.$url.static('app/system/assets/images/placeholder-800x600.svg');
+                return this.$url.static('app/system/assets/images/placeholder-icon.svg');
             }
+
         },
 
         load: function () {
@@ -48,6 +48,14 @@ module.exports = {
             });
         },
 
+        disable: function (pkg) {
+            this.disablePackage(pkg).success(function (data) {
+                UIkit.notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
+            }).error(function (data) {
+                UIkit.notify(data, 'danger');
+            });
+        },
+
         uninstall: function (pkg) {
             this.uninstallPackage(pkg, this.packages).success(function (data) {
                 UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
@@ -59,3 +67,9 @@ module.exports = {
     }
 
 };
+
+$(function () {
+
+    new Vue(module.exports).$mount('#themes');
+
+});
