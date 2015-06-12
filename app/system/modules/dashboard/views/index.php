@@ -1,21 +1,5 @@
 <?php $view->script('dashboard', 'system/dashboard:app/bundle/index.js', ['vue', 'uikit-autocomplete']) ?>
 
-<style>
-    /* for testing */
-    .uk-sortable {
-        min-height: 30vh;
-    }
-
-    .uk-sortable > * {
-        margin-bottom: 25px;
-    }
-
-    .uk-sortable-moving .uk-sortable {
-        border: 1px rgba(0, 0, 0, 0.1) dashed;
-    }
-
-</style>
-
 <div id="dashboard">
 
     <div class="uk-margin uk-flex uk-flex-right" data-uk-margin>
@@ -32,10 +16,9 @@
     </div>
 
     <div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
-
         <div class="uk-width-medium-1-3">
 
-            <ul class="uk-list uk-sortable" data-column="0">
+            <ul class="uk-sortable pk-sortable" data-column="0">
                 <li v-repeat="widget: widgets | column 0" data-id="{{ widget.id }}">
 
                     <div class="uk-panel uk-panel-box uk-visible-hover-inline">
@@ -59,10 +42,9 @@
             </ul>
 
         </div>
-
         <div class="uk-width-medium-1-3">
 
-            <ul class="uk-list uk-sortable" data-column="1">
+            <ul class="uk-sortable pk-sortable" data-column="1">
                 <li v-repeat="widget: widgets | column 1" data-id="{{ widget.id }}">
 
                     <div class="uk-panel uk-panel-box uk-visible-hover-inline">
@@ -86,10 +68,9 @@
             </ul>
 
         </div>
-
         <div class="uk-width-medium-1-3">
 
-            <ul class="uk-list uk-sortable" data-column="2">
+            <ul class="uk-sortable pk-sortable" data-column="2">
                 <li v-repeat="widget: widgets | column 2" data-id="{{ widget.id }}">
 
                     <div class="uk-panel uk-panel-box uk-visible-hover-inline">
@@ -113,8 +94,6 @@
             </ul>
 
         </div>
-
-
     </div>
 
 </div>
