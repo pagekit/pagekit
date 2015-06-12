@@ -5,10 +5,10 @@
         <h3 class="uk-panel-title">{{ 'Location Widget' | trans }}</h3>
 
         <div class="uk-form-row">
-            <label for="form-location" class="uk-form-label">{{ 'Location' | trans }}</label>
+            <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
                 <div v-el="location" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-location" class="uk-width-1-1" type="text" v-model="widget.location" autocomplete="off">
+                    <input id="form-city" class="uk-width-1-1" type="text" v-model="widget.city" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -38,8 +38,7 @@
                 <img class="uk-text-top" v-attr="src: icon">
                 <span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>
             </div>
-            <h1 class="uk-h2 uk-margin-remove">{{ city }}</h1>
-            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ country }}</h2>
+            <h1 class="uk-h2 uk-margin-remove">{{ widget.city }}</h1>
             <h1 v-if="time" class="uk-h2 uk-margin-remove">{{ time | date format }}</h1>
             <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.id }}</h2>
             <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.name }}</h2>
@@ -72,7 +71,9 @@
         },
 
         data: function() {
-            return {format: {time: 'medium'} };
+            return {
+                format: {time: 'medium'}
+            };
         },
 
         ready: function() {
@@ -107,7 +108,8 @@
                     }
 
                     vm.$set('widget.uid', location.id);
-                    vm.$set('widget.location', location.name);
+                    vm.$set('widget.city', location.name);
+                    vm.$set('widget.country', location.sys.country);
                     vm.$set('widget.coords', location.coord);
                 });
 
@@ -121,6 +123,8 @@
                 this.loadTime();
 
             }, false, true);
+
+            this.timer = setInterval(this.updateClock, 1000);
         },
 
         watch: {
@@ -191,15 +195,10 @@
 
             init: function(data) {
 
-                var location = (this.widget.location || '').split(',');
-
-                this.$set('city', location[0]);
-                this.$set('country', location[1]);
                 this.$set('temperature', Math.round(data.main.temp) + (this.widget.units === 'metric' ? ' °C' : ' °F'));
                 this.$set('icon', this.getIconUrl(data.weather[0].icon));
                 this.$set('status', 'done');
 
-                this.timer = setInterval(this.updateClock, 1000);
             },
 
             getIconUrl: function(icon) {
