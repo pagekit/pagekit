@@ -27,10 +27,10 @@
                 <div class="uk-margin-right">
                     <ul class="uk-subnav pk-subnav-icon">
                         <li v-class="'uk-active': view == 'table'">
-                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'table'"></a>
+                            <a class="pk-icon-table pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'table'"></a>
                         </li>
                         <li v-class="'uk-active': view == 'thumbnail'">
-                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Thumbnail View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'thumbnail'"></a>
+                            <a class="pk-icon-thumbnails pk-icon-hover" title="{{ 'Thumbnails View' | trans }}" data-uk-tooltip="{delay: 500}" href="#" v-on="click: view = 'thumbnail'"></a>
                         </li>
                     </ul>
                 </div>
