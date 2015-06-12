@@ -26,7 +26,7 @@ var Dashboard = Vue.extend({
 
 
         // widget re-ordering
-        $('#dashboard').find('.uk-sortable').each(function(){
+        $('#dashboard').find('.uk-sortable[data-column]').each(function(){
 
             UIkit.sortable(this,{group:'widgets'});
 
@@ -77,7 +77,13 @@ var Dashboard = Vue.extend({
 
         add: function(type) {
 
-            this.Widgets.save({ widget: _.merge({ type: type.id, column:0, idx:100 }, type.defaults)}, function(data) {
+            var column = 0, sortables = $('#dashboard').find('.uk-sortable[data-column]');
+
+            sortables.each(function(idx) {
+                column = (this.children.length < sortables.eq(column)[0].children.length) ? idx : column;
+            });
+
+            this.Widgets.save({ widget: _.merge({ type: type.id, column:column, idx: sortables.eq(column)[0].children.length }, type.defaults)}, function(data) {
                 this.widgets.push(data);
                 this.editing.$set(data.id, true);
             });
