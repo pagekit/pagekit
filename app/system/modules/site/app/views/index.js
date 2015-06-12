@@ -1,8 +1,4 @@
-var $ = require('jquery');
-var _ = require('lodash');
-var UIkit = require('uikit');
-
-var Site = Vue.extend({
+module.exports = {
 
     data: function() {
         return _.merge({}, window.$data);
@@ -21,12 +17,10 @@ var Site = Vue.extend({
         'node-list': require('../components/nodes.vue')
     }
 
-});
+};
 
 $(function () {
 
-    new Site().$mount('#site');
+    new Vue(module.exports).$mount('#site');
 
 });
-
-module.exports = Site;

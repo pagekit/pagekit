@@ -1,7 +1,4 @@
-var $ = require('jquery');
-var UIkit = require('uikit');
-
-var Settings = Vue.extend({
+module.exports = {
 
     data: window.$data,
 
@@ -19,12 +16,10 @@ var Settings = Vue.extend({
 
     }
 
-});
+};
 
 $(function () {
 
-    new Settings().$mount('#settings');
+    new Vue(module.exports).$mount('#settings');
 
 });
-
-module.exports = Settings;
