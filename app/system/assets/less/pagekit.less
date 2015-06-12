@@ -149,14 +149,6 @@
 .pk-icon-arrow-up { background-image: url("../../assets/images/icon-arrow-up.svg"); }
 .pk-icon-arrow-down { background-image: url("../../assets/images/icon-arrow-down.svg"); }
 
-[class*='pk-icon-small-'] {
-    width: 14px;
-    height: 14px;
-}
-
-.pk-icon-small-delete { background-image: url("../../assets/images/icon-small-delete.svg"); }
-.pk-icon-small-edit { background-image: url("../../assets/images/icon-small-edit.svg"); }
-
 [class*='pk-icon-circle-'] {
     width: 12px;
     height: 12px;
@@ -196,16 +188,6 @@
 .pk-link-icon [class*='pk-icon-'] { opacity: 0.3; }
 .pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
 
-/*
- * Dashboard Confirm
- */
-
-.uk-active .pk-icon-confirm {
-    display: inline-block !important;
-    visibility: visible !important;
-    background-image: url("../../assets/images/icon-check.svg")
-}
-
 
 /* Modifier `pk-subnav-icon`
 ========================================================================== */
@@ -213,7 +195,6 @@
 /*
  * 1. Needed if in table width minimum
  * 2. Gutter
- * 3. Needed if no `href`
  */
 
 .pk-subnav-icon {
@@ -225,9 +206,6 @@
     margin-left: -10px;
     margin-top: -10px !important;
     margin-bottom: 0;
-    /* 3 */
-    cursor: pointer;
-    font-size: 16px;
 }
 
 .pk-subnav-icon > * {

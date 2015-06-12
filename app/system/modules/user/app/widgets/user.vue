@@ -2,10 +2,7 @@
 
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
 
-        <div class="uk-margin uk-flex uk-flex-middle">
-            <h3 class="uk-margin-remove">{{ 'User Widget' | trans }}</h3>
-            <a class="pk-icon-small-delete pk-icon-hover uk-margin-small-left" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}"  v-on="click: $parent.remove()" v-confirm="'Delete widget?'"></a>
-        </div>
+        <h3 class="uk-panel-title">{{ 'User Widget' | trans }}</h3>
 
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'User Type' | trans }}</span>

@@ -18,12 +18,16 @@
     <div class="uk-grid pk-grid-small uk-grid-medium" data-uk-grid-margin>
         <div class="uk-width-medium-1-3" v-repeat="column: columns">
 
-            <div class="uk-panel uk-panel-box uk-visible-hover-inline" v-repeat="widget: column" v-class="uk-active:editing[widget.id]">
+            <div class="uk-panel uk-panel-box uk-visible-hover-inline" v-repeat="widget: column">
 
                 <div v-component="widget-panel" inline-template>
 
                     <div class="uk-panel-badge">
-                        <a class="pk-icon-edit pk-icon-hover pk-icon-confirm uk-hidden" title="{{ 'Settings' | trans }}" v-on="click: edit()" v-if="type.editable !== false"></a>
+                        <ul class="uk-subnav pk-subnav-icon">
+                            <li v-if="editing[widget.id]"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a></li>
+                            <li v-if="type.editable !== false && !editing[widget.id]"><a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+                            <li v-if="type.editable !== false && editing[widget.id]"><a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+                        </ul>
                     </div>
 
                     <div v-component="{{ component }}" v-with="widget: widget, editing: isEditing"></div>
