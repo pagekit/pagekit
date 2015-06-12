@@ -25,9 +25,9 @@
                 </div>
             </div>
 
-            <div class="uk-margin">{{ comment.content }}</div>
+            <div>{{ comment.content }}</div>
 
-            <div v-if="replyComment">
+            <div class="uk-margin-top" v-if="replyComment">
                 <form name="replyform" class="uk-form" v-on="valid: submit">
 
                     <div class="uk-form-row">

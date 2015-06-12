@@ -28,7 +28,7 @@
     </div>
 
     <div class="uk-overflow-container">
-        <table class="uk-table uk-table-hover">
+        <table class="uk-table uk-table-hover pk-table-large">
             <thead>
                 <tr>
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
