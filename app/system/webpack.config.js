@@ -4,11 +4,6 @@ module.exports = [
 
     {
         entry: {
-            "modules/finder/app/bundle/finder": "./modules/finder/app/components/finder.vue",
-            "modules/package/app/bundle/extensions": "./modules/package/app/views/extensions",
-            "modules/package/app/bundle/themes": "./modules/package/app/views/themes",
-            "modules/package/app/bundle/marketplace": "./modules/package/app/views/marketplace",
-            "modules/package/app/bundle/upload": "./modules/package/app/components/upload.vue",
             "modules/cache/app/bundle/settings": "./modules/cache/app/components/settings.vue",
             "modules/mail/app/bundle/settings": "./modules/mail/app/components/settings.vue",
             "modules/oauth/app/bundle/settings": "./modules/oauth/app/components/settings.vue",
@@ -23,28 +18,6 @@ module.exports = [
             "jquery": "jQuery",
             "uikit": "UIkit",
             "settings": "Settings"
-        },
-        module: {
-            loaders: [
-                { test: /\.html$/, loader: "html" },
-                { test: /\.vue$/, loader: "vue" }
-            ]
-        }
-    },
-
-    {
-        entry: {
-            "system.settings": "./modules/settings/app/settings"
-        },
-        output: {
-            filename: "./modules/settings/app/bundle/settings.js",
-            library: "Settings"
-        },
-        externals: {
-            "vue": "Vue",
-            "lodash": "_",
-            "jquery": "jQuery",
-            "uikit": "UIkit"
         },
         module: {
             loaders: [
