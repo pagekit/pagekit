@@ -1,4 +1,4 @@
-<?php $view->script('dashboard', 'system/dashboard:app/bundle/views/index.js', ['vue', 'uikit-autocomplete']) ?>
+<?php $view->script('dashboard', 'system/dashboard:app/bundle/index.js', ['vue', 'uikit-autocomplete']) ?>
 
 <div id="dashboard">
 

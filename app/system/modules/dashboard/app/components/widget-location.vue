@@ -2,13 +2,13 @@
 
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" v-on="submit: $event.preventDefault()">
 
-        <h3 class="uk-panel-title">{{ 'Weather Widget' | trans }}</h3>
+        <h3 class="uk-panel-title">{{ 'Location Widget' | trans }}</h3>
 
         <div class="uk-form-row">
-            <label for="form-weather-location" class="uk-form-label">{{ 'Location' | trans }}</label>
+            <label for="form-location" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
                 <div v-el="location" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-weather-location" class="uk-width-1-1" type="text" v-model="widget.location" autocomplete="off">
+                    <input id="form-location" class="uk-width-1-1" type="text" v-model="widget.location" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -60,8 +60,8 @@
 
         type: {
 
-            id: 'weather',
-            label: 'Weather',
+            id: 'location',
+            label: 'Location',
             description: function () {
 
             },
