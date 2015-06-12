@@ -31,7 +31,7 @@ class DashboardController
         return [
             '$view' => [
                 'title' => __('Dashboard'),
-                'name'  => 'system/dashboard:views/admin/index.php'
+                'name'  => 'system/dashboard:views/index.php'
             ],
             '$data' => [
                 'widgets' => array_values($this->dashboard->getWidgets())

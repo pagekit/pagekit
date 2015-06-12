@@ -53,7 +53,7 @@
 
     </form>
 
-    <h3 class="uk-panel-title" v-show="widget.title">{{ widget.title }}</h1>
+    <h3 class="uk-panel-title" v-show="widget.title">{{ widget.title }}</h3>
 
     <div>
         <div class="uk-text-center" v-show="status == 'loading'">

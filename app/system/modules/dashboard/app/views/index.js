@@ -128,8 +128,8 @@ var Dashboard = Vue.extend({
 
         },
 
-        feed: require('./widgets/feed.vue'),
-        weather: require('./widgets/weather.vue')
+        feed: require('../components/feed.vue'),
+        weather: require('../components/weather.vue')
 
     }
 

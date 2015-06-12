@@ -2,7 +2,7 @@ module.exports = [
 
     {
         entry: {
-            "admin/index": "./app/admin/index"
+            "views/index": "./app/views/index"
         },
         output: {
             filename: "./app/bundle/[name].js",
