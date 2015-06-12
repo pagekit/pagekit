@@ -2,13 +2,11 @@
  * Editor Image plugin.
  */
 
-var Picker = require('./picker.vue');
+var Picker = require('./image-picker.vue');
 
 module.exports = {
 
-    plugin: {
-        name: 'image'
-    },
+    plugin: true,
 
     created: function () {
 
@@ -98,7 +96,7 @@ module.exports = {
 
     components: {
 
-        'image-preview': require('./preview.vue')
+        'image-preview': require('./image-preview.vue')
 
     }
 

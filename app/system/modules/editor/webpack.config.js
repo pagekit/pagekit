@@ -2,7 +2,7 @@ module.exports = [
 
     {
         entry: {
-            "editor": "./app/editor"
+            "components/editor": "./app/components/editor.vue"
         },
         output: {
             filename: "./app/bundle/[name].js",

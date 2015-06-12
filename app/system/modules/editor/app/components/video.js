@@ -2,13 +2,11 @@
  * Editor Video plugin.
  */
 
-var Picker = require('./picker.vue');
+var Picker = require('./video-picker.vue');
 
 module.exports = {
 
-    plugin: {
-        name: 'video'
-    },
+    plugin: true,
 
     created: function () {
 
@@ -101,8 +99,8 @@ module.exports = {
 
     components: {
 
-        'video-view': require('./view.vue'),
-        'video-preview': require('./preview.vue')
+        'video-view': require('./video-view.vue'),
+        'video-preview': require('./video-preview.vue')
 
     }
 

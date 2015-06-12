@@ -10,7 +10,7 @@ return [
 
         $app->on('app.request', function () use ($app) {
             $app['view']->addHelper(new EditorHelper());
-            $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder']);
+            $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/components/editor.js', ['uikit-htmleditor', 'finder']);
         });
 
     },

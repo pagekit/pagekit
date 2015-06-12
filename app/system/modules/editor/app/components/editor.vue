@@ -6,6 +6,9 @@
 
 <script>
 
+    var $ = require('jquery');
+    var Vue = require('vue');
+
     var Editor = Vue.extend({
 
         paramAttributes: ['type', 'value', 'options'],
@@ -44,9 +47,9 @@
         components: {
 
             textarea: {},
-            htmleditor: require('./htmleditor'),
-            image: require('./image/image'),
-            video: require('./video/video'),
+            htmleditor: require('./editor-html'),
+            image: require('./image'),
+            video: require('./video'),
             url: require('./url')
 
         }
@@ -56,6 +59,14 @@
     Editor.create = function (element, options) {
         return new Editor.extend({ el: element, data: options});
     };
+
+    Vue.component('v-editor', Editor);
+
+    $(function () {
+        $('[data-editor]').each(function () {
+            Editor.create(this, $(this).data('editor'));
+        });
+    });
 
     module.exports = Editor;
 
