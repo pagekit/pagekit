@@ -17,8 +17,8 @@ var Site = Vue.extend({
     },
 
     components: {
-        'menu-list': require('./components/menus.vue'),
-        'node-list': require('./components/nodes.vue')
+        'menu-list': require('../components/menus.vue'),
+        'node-list': require('../components/nodes.vue')
     }
 
 });

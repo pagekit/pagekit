@@ -1,4 +1,4 @@
-<?php $view->script('site', 'site:app/bundle/index.js', ['vue', 'uikit-nestable']) ?>
+<?php $view->script('site-index', 'site:app/bundle/index.js', ['vue', 'uikit-nestable']) ?>
 
 <div id="site" v-cloak>
 

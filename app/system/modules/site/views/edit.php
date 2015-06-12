@@ -1,4 +1,4 @@
-<?php $view->script('site', 'site:app/bundle/edit.js', ['vue', 'uikit']) ?>
+<?php $view->script('site-edit', 'site:app/bundle/edit.js', ['vue', 'uikit']) ?>
 
 <div id="site-edit" v-cloak>
 

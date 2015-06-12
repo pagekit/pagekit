@@ -2,12 +2,12 @@ module.exports = [
 
     {
         entry: {
-            "index": "./app/index",
-            "edit": "./app/edit"
+            "edit": "./app/views/edit",
+            "index": "./app/views/index",
+            "settings": "./app/views/settings"
         },
         output: {
             filename: "./app/bundle/[name].js",
-            library: "Site"
         },
         externals: {
             "lodash": "_",

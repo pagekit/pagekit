@@ -60,13 +60,13 @@ var Site = Vue.extend({
 
     partials: {
 
-        settings: require('./settings.html')
+        settings: require('../templates/settings.html')
 
     },
 
     components: {
 
-        alias: require('./components/alias.vue')
+        alias: require('../components/alias.vue')
 
     }
 
