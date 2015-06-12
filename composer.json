@@ -25,19 +25,19 @@
         "nikic/php-parser": "~1.2.2",
         "psr/log": "~1.0.0",
         "punic/punic": "~1.5.0",
-        "swiftmailer/swiftmailer": "~5.4.0",
-        "symfony/console": "~2.6.6",
-        "symfony/debug": "~2.6.6",
-        "symfony/finder": "~2.6.6",
-        "symfony/http-foundation": "~2.6.6",
-        "symfony/routing": "~2.6.6",
-        "symfony/stopwatch": "~2.6.6",
-        "symfony/templating": "~2.6.6",
-        "symfony/translation": "~2.6.6",
-        "symfony/var-dumper": "~2.6.6"
+        "swiftmailer/swiftmailer": "~5.4.1",
+        "symfony/console": "~2.6.9",
+        "symfony/debug": "~2.6.9",
+        "symfony/finder": "~2.6.9",
+        "symfony/http-foundation": "~2.6.9",
+        "symfony/routing": "~2.6.9",
+        "symfony/stopwatch": "~2.6.9",
+        "symfony/templating": "~2.6.9",
+        "symfony/translation": "~2.6.9",
+        "symfony/var-dumper": "~2.6.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.7.3"
     },
     "autoload": {
         "psr-4": {
