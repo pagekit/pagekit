@@ -34,7 +34,7 @@ class User extends BaseUser implements \JsonSerializable
     protected $registered;
 
     /** @Column(type="integer") */
-    protected $status = 0;
+    protected $status = User::STATUS_ACTIVE;
 
     /** @Column */
     protected $name;
