@@ -167,7 +167,7 @@
                 this.$set('icon', this.getIconUrl(data.weather[0].icon));
                 this.$set('status', 'done');
 
-                setInterval(this.updateClock, 1000);
+                this.timer = setInterval(this.updateClock, 1000);
             },
 
             getIconUrl: function(icon) {
@@ -217,6 +217,12 @@
                 this.$set('time', offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : false);
 
             }
+
+        },
+
+        destroyed: function() {
+
+            clearInterval(this.timer);
 
         }
 
