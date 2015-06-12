@@ -67,9 +67,6 @@
 
 <script>
 
-    var $ = require('jquery');
-    var UIkit = require('uikit');
-
     module.exports = {
 
         replace : true,
@@ -350,11 +347,25 @@
 
         partials: {
 
-            'table': require('./table.html'),
-            'thumbnail': require('./thumbnail.html')
+            'table': require('../templates/table.html'),
+            'thumbnail': require('../templates/thumbnail.html')
 
         }
 
     };
+
+    Vue.component('v-finder', $.extend({}, module.exports));
+
+    var Finder = function (element, options) {
+        return new Vue($.extend(true, {}, module.exports, { el: element, data: $.extend(module.exports.data(), options)} ));
+    };
+
+    $(function () {
+        $('[data-finder]').each(function () {
+            new Finder(this, $(this).data('finder'));
+        });
+    });
+
+    window.Finder = window.Finder || Finder;
 
 </script>

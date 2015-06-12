@@ -4,7 +4,7 @@ module.exports = [
 
     {
         entry: {
-            "modules/finder/app/bundle/finder": "./modules/finder/app/finder",
+            "modules/finder/app/bundle/finder": "./modules/finder/app/components/finder.vue",
             "modules/package/app/bundle/extensions": "./modules/package/app/views/extensions",
             "modules/package/app/bundle/themes": "./modules/package/app/views/themes",
             "modules/package/app/bundle/marketplace": "./modules/package/app/views/marketplace",
