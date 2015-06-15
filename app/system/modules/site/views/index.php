@@ -1,6 +1,6 @@
 <?php $view->script('site-index', 'site:app/bundle/index.js', ['vue', 'uikit-nestable']) ?>
 
-<div id="site" v-cloak>
+<div id="site" class="uk-form" v-cloak>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
 

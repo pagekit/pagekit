@@ -6,21 +6,21 @@
             <li class="uk-visible-hover" v-repeat="menu: menus" v-class="pk-active: active.id === menu.id">
                 <a v-on="click: active = menu">{{ menu.label }}</a>
                 <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed">
-                    <li><a title="{{ 'Edit' | trans }}" v-on="click: edit(menu)"><i class="uk-icon-pencil"></i></a></li>
-                    <li><a title="{{ 'Delete' | trans }}" v-on="click: remove(menu)"><i class="uk-icon-minus-circle"></i></a></li>
+                    <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit(menu)"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove(menu)" v-confirm="'Delete menu?'"></a></li>
                 </ul>
             </li>
         </ul>
 
-    </div>
+        <p>
+            <a class="uk-button" v-on="click: edit()">{{ 'Add Menu' | trans }}</a>
+        </p>
 
-    <p>
-        <a class="uk-button uk-width-1-1" v-on="click: edit()"><i class="uk-icon-th-list"></i> {{ 'Create Menu' | trans }}</a>
-    </p>
+    </div>
 
     <div class="uk-modal" v-el="modal">
 
-        <form class="uk-modal-dialog uk-form uk-form-stacked" name="menuForm" v-on="valid: save" v-if="menu">
+        <form class="uk-modal-dialog uk-form-stacked" name="menuForm" v-on="valid: save" v-if="menu">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Add Menu' | trans }}</h2>
@@ -28,17 +28,14 @@
 
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
-
                 <div class="uk-form-controls">
                     <input id="form-name" class="uk-width-1-1 uk-form-large" name="label" type="text" v-model="menu.label | trim" v-valid="required">
-
                     <p class="uk-form-help-block uk-text-danger" v-show="menuForm.label.invalid">{{ 'Invalid name.' | trans }}</p>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
-
                 <div class="uk-form-controls">
                     <input id="form-slug" class="uk-width-1-1 uk-form-large" name="id" type="text" v-model="menu.id">
                 </div>
