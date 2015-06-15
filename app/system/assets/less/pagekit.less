@@ -87,18 +87,18 @@
 }
 
 
-/* Side Nav Dragged
+/* Side Nav Sortable (Roles)
 ========================================================================== */
 
-.pk-sortable-dragged > * {
+.pk-sortable-dragged-list > * {
     display: block;
-    padding: @nav-padding-vertical @nav-padding-horizontal;
+    padding: 8px 16px;
     background: #fff;
     box-shadow: 0 3px 5px rgba(0,0,0,0.1);
     color: @global-color;
 }
 
-/* Dashboard Sortable
+/* Panel Sortable (Dashboard)
 ========================================================================== */
 
 .pk-sortable {
@@ -108,6 +108,8 @@
 }
 
 .pk-sortable > li + li { margin-top: @grid-gutter-vertical; }
+
+.pk-sortable-dragged-panel > * { box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
 
 
 /* Modifier: Search
