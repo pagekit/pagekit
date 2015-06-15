@@ -51,7 +51,6 @@
 
 <script>
 
-    var $ = require('jquery');
     var api = '//api.openweathermap.org/data/2.5';
     var storage = sessionStorage || {};
 

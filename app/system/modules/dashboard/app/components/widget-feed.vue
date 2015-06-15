@@ -74,10 +74,6 @@
 
 <script>
 
-    var Vue = require('vue');
-    var $ = require('jquery');
-    var api = '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?';
-
     module.exports = {
 
         type: {
@@ -128,8 +124,6 @@
 
             load: function() {
 
-                var self = this;
-
                 this.$set('feed', {});
                 this.$set('status', '');
 
@@ -139,18 +133,18 @@
 
                 this.$set('status', 'loading');
 
-                $.getJSON(api, {q: this.$get('widget.url'), num: this.$get('widget.count')}, function(data) {
+                this.$http.jsonp('//ajax.googleapis.com/ajax/services/feed/load', {v: '1.0', q: this.$get('widget.url'), num: this.$get('widget.count')}, function(data) {
 
                     if (data.responseStatus === 200) {
-                        self.$set('feed', data.responseData.feed);
-                        self.$set('status', 'done');
+                        this.$set('feed', data.responseData.feed);
+                        this.$set('status', 'done');
                     } else {
-                        self.$set('status', 'error');
+                        this.$set('status', 'error');
                     }
 
-                }).fail(function() {
+                }).error(function() {
 
-                    self.$set('status', 'error');
+                    this.$set('status', 'error');
 
                 });
 
