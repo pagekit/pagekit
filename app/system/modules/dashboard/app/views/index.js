@@ -24,9 +24,14 @@ var Dashboard = Vue.extend({
         }));
 
         this.$set('editing', {});
+    },
+
+    ready: function() {
+
+        var self = this;
 
         // widget re-ordering
-        $('#dashboard').find('.uk-sortable[data-column]').each(function(){
+        $(this.$el).find('.uk-sortable[data-column]').each(function(){
 
             UIkit.sortable(this,{group:'widgets', dragCustomClass: 'pk-sortable-dragged-panel'});
 
@@ -59,6 +64,7 @@ var Dashboard = Vue.extend({
                     });
             }
         });
+
     },
 
     filters: {
