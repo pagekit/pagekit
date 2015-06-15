@@ -6,14 +6,15 @@ var Dashboard = Vue.extend({
 
     created: function() {
 
+        var self = this;
+
         this.Widgets = this.$resource('admin/dashboard/:id');
 
-        var self = this;
-        this.$set('widgets', this.widgets.filter(function(widget) {
+        this.$set('widgets', this.widgets.filter(function(widget, idx) {
 
             if (self.getType(widget.type)) {
 
-                widget.idx   = widget.idx || 100;
+                widget.idx    = widget.idx === undefined ? idx:widget.idx;
                 widget.column = widget.column || 0;
 
                 return true;
@@ -24,11 +25,10 @@ var Dashboard = Vue.extend({
 
         this.$set('editing', {});
 
-
         // widget re-ordering
         $('#dashboard').find('.uk-sortable[data-column]').each(function(){
 
-            UIkit.sortable(this,{group:'widgets'});
+            UIkit.sortable(this,{group:'widgets', dragCustomClass: 'pk-sortable-dragged-panel'});
 
         }).on('change.uk.sortable', function(e, sortable, item, mode) {
 
@@ -41,10 +41,21 @@ var Dashboard = Vue.extend({
                 case 'added':
                 case 'moved':
 
-                    var widgets = [];
+                    var widgets = JSON.parse(JSON.stringify(self.widgets)), column = sortable.element.data('column'), data = {}, widget;
 
                     sortable.element.children().each(function(idx){
 
+                        widget = _.find(widgets, {id: this.getAttribute('data-id')});
+                        widget.column = column;
+                        widget.idx = idx;
+                    });
+
+                    widgets.forEach(function(widget){
+                        data[widget.id] = widget;
+                    });
+
+                    self.$http.post('admin/dashboard/savewidgets', {widgets: data}, function() {
+                        UIkit.notify(this.$trans('Dashboard updated'));
                     });
             }
         });
@@ -87,7 +98,6 @@ var Dashboard = Vue.extend({
                 this.widgets.push(data);
                 this.editing.$set(data.id, true);
             });
-
         },
 
         getType: function(id) {

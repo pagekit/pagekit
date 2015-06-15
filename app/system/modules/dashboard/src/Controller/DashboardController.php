@@ -40,6 +40,20 @@ class DashboardController
     }
 
     /**
+     * @Request({"widgets": "array"}, csrf=true)
+     */
+    public function saveWidgetsAction($widgets = [])
+    {
+
+        $widgets = array_merge($this->dashboard->getWidgets(), $widgets);
+
+        $this->dashboard->saveWidgets($widgets);
+
+        return ['widgets' => $widgets];
+    }
+
+
+    /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\w+"})
      * @Request({"id", "widget": "array"}, csrf=true)
