@@ -15,7 +15,7 @@ var Dashboard = Vue.extend({
             if (self.getType(widget.type)) {
 
                 widget.idx    = widget.idx === undefined ? idx:widget.idx;
-                widget.column = widget.column || 0;
+                widget.column = widget.column === undefined ? 0 : widget.column;
 
                 return true;
             }
@@ -41,7 +41,7 @@ var Dashboard = Vue.extend({
                 case 'added':
                 case 'moved':
 
-                    var widgets = JSON.parse(JSON.stringify(self.widgets)), column = sortable.element.data('column'), data = {}, widget;
+                    var widgets = JSON.parse(JSON.stringify(self.widgets)), column = parseInt(sortable.element.data('column'), 10), data = {}, widget;
 
                     sortable.element.children().each(function(idx){
 
@@ -94,7 +94,7 @@ var Dashboard = Vue.extend({
                 column = (this.children.length < sortables.eq(column)[0].children.length) ? idx : column;
             });
 
-            this.Widgets.save({ widget: _.merge({ type: type.id, column:column, idx: (sortables.eq(column)[0].children.length-1) }, type.defaults)}, function(data) {
+            this.Widgets.save({ widget: _.merge({ type: type.id, column:column, idx: 100 }, type.defaults)}, function(data) {
                 this.widgets.push(data);
                 this.editing.$set(data.id, true);
             });
