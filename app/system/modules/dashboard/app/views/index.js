@@ -59,7 +59,10 @@ var Dashboard = Vue.extend({
                         data[widget.id] = widget;
                     });
 
+                    self.$set('widgets', []);
+
                     self.$http.post('admin/dashboard/savewidgets', {widgets: data}, function() {
+                        self.$set('widgets', widgets);
                         UIkit.notify(this.$trans('Dashboard updated'));
                     });
             }
