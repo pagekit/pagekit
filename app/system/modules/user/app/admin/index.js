@@ -11,7 +11,7 @@ jQuery(function () {
             this.resource = this.$resource('api/user/:id');
             this.config.filter = _.extend({status: '', role: '', order: 'name asc'}, this.config.filter);
 
-            this.$watch('config.page', function() {this.load();}, false, true);
+            this.$watch('config.page', function() {this.load();}, {immediate: true});
             this.$watch('config.filter.role', function () { this.load(0); });
             this.$watch('config.filter.order', function () { this.load(0); });
             this.$watch('config.filter.search', function () { this.load(0); });

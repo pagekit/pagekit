@@ -30,7 +30,7 @@
 
             <div class="uk-switcher uk-margin" v-el="content">
                 <div v-repeat="section: sections | active | orderBy 'priority'">
-                    <div v-component="{{ section.name }}" widget="{{ widget }}" type="{{ type }}" config="{{ config }}" form="{{ widgetForm }}"></div>
+                    <component is="{{ section.name }}" widget="{{ widget }}" type="{{ type }}" config="{{ config }}" form="{{ widgetForm }}"></component>
                 </div>
             </div>
 

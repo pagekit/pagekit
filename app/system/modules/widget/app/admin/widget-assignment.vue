@@ -36,7 +36,7 @@
 
         inherit: true,
 
-        paramAttributes: ['widget'],
+        props: ['widget'],
 
         ready: function () {
 

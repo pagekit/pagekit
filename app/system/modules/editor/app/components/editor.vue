@@ -11,7 +11,7 @@
 
     var Editor = Vue.extend({
 
-        paramAttributes: ['type', 'value', 'options'],
+        props: ['type', 'value', 'options'],
 
         compiled: function() {
 
@@ -34,7 +34,7 @@
 
             var editor = this.editor;
 
-            _.each(this.$options.components, function (component) {
+            _.forIn(this.$options.components, function (component) {
 
                 if (component.options.plugin) {
                     editor.$addChild({ inherit: true }, component);

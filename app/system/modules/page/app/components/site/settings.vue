@@ -8,7 +8,7 @@
 
     module.exports = {
 
-        paramAttributes: ['node', 'form', 'type'],
+        props: ['node', 'form', 'type'],
 
         section: {
             name: 'page-settings',

@@ -70,6 +70,8 @@
 
         },
 
+        props: ['widget', 'editing'],
+
         data: function() {
             return {
                 format: {time: 'medium'}
@@ -122,7 +124,7 @@
                 this.loadWeather();
                 this.loadTime();
 
-            }, false, true);
+            }, {immediate: true});
 
             this.timer = setInterval(this.updateClock, 1000);
         },

@@ -13,8 +13,8 @@ module.exports = {
     },
 
     components: {
-        'menu-list': require('../components/menus.vue'),
-        'node-list': require('../components/nodes.vue')
+        menus: require('../components/menus.vue'),
+        nodes: require('../components/nodes.vue')
     }
 
 };

@@ -56,7 +56,7 @@
 
         template: __vue_template__,
 
-        paramAttributes: ['type'],
+        props: ['type'],
 
         data: function () {
             return {

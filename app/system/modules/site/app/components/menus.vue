@@ -59,7 +59,7 @@
 
     module.exports = {
 
-        paramAttributes: ['active'],
+        props: ['active'],
 
         created: function() {
             this.Menus = this.$resource('api/site/menu/:id:label', {}, { 'update': { method: 'PUT' }});

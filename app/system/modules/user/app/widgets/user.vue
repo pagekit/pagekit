@@ -99,12 +99,14 @@
 
         },
 
+        props: ['widget', 'editing'],
+
         template: __vue_template__,
 
         ready: function() {
 
-            this.$watch('widget.show', this.load, false, true);
-            this.$watch('widget.count', this.load, false, false);
+            this.$watch('widget.show', this.load, {immediate: true});
+            this.$watch('widget.count', this.load);
 
         },
 

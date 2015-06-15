@@ -4,8 +4,8 @@
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
 
-        <menu-list class="pk-width-sidebar" active="{{ menu }}"></menu-list>
-        <node-list class="uk-flex-item-1" menu="{{ menu }}"></node-list>
+        <menus class="pk-width-sidebar" active="{{ menu }}"></menus>
+        <nodes class="uk-flex-item-1" menu="{{ menu }}"></nodes>
 
     </div>
 

@@ -94,6 +94,8 @@
 
         },
 
+        props: ['widget', 'editing'],
+
         filters: {
 
             count: function(entries) {

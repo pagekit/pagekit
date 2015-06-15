@@ -71,7 +71,7 @@
         },
 
         template: __vue_template__,
-        paramAttributes: ['widget', 'config', 'form'],
+        props: ['widget', 'config', 'form'],
 
         data: function () {
             return { menus: window.$menus };

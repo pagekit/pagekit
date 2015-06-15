@@ -10,7 +10,6 @@ function install (Vue) {
     require('vue-validator');
     require('./lib/trans')(Vue);
     require('./lib/filters')(Vue);
-    require('./directives/partial')(Vue);
 
     /**
      * Components
@@ -27,6 +26,7 @@ function install (Vue) {
     Vue.directive('confirm', require('./directives/confirm'));
     Vue.directive('gravatar', require('./directives/gravatar'));
     Vue.directive('order', require('./directives/order'));
+    Vue.directive('partial', require('./directives/partial'));
 
     /**
      * Resource

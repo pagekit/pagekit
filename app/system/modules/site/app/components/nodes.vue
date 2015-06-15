@@ -43,7 +43,7 @@
     </div>
 
     <ul class="uk-nestable" v-el="nestable">
-        <node-item v-repeat="node: tree[0]"></node-item>
+        <node v-repeat="node: tree[0]"></node>
     </ul>
 
 </template>
@@ -52,7 +52,7 @@
 
     module.exports = {
 
-        paramAttributes: ['menu'],
+        props: ['menu'],
 
         data: function() {
             return _.merge({}, window.$data);
@@ -60,11 +60,11 @@
 
         created: function () {
             this.Nodes = this.$resource('api/site/node/:id');
+
+            this.$watch('menu', this.load, {immediate: true})
         },
 
         watch: {
-
-            menu: 'load',
 
             nodes: function() {
 
@@ -152,7 +152,7 @@
 
         components: {
 
-            'node-item': require('./node.vue')
+            node: require('./node.vue')
 
         }
 

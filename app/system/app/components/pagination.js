@@ -4,7 +4,7 @@ module.exports = {
 
     template: '<ul class="uk-pagination"></ul>',
 
-    paramAttributes: ['page', 'pages'],
+    props: ['page', 'pages'],
 
     data: function() {
         return {
@@ -23,11 +23,11 @@ module.exports = {
 
         this.$watch('page', function(page) {
             pagination.selectPage(page);
-        }, true);
+        });
 
         this.$watch('pages', function(pages) {
             pagination.render(pages);
-        }, true);
+        }, {deep: true});
 
         pagination.selectPage(this.page);
     }

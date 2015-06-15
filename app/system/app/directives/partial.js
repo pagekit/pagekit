@@ -1,21 +1,67 @@
-module.exports = function (Vue) {
+var _ = Vue.util;
+var templateParser = Vue.parsers.template;
+var vIf = Vue.directive('if');
+var compiler = Vue.compiler;
 
-    var partial = Vue.directive('partial'), insert = partial.insert;
+module.exports = {
 
-    partial.insert = function(id) {
+    isLiteral: true,
+
+    // same logic reuse from v-if
+    compile: vIf.compile,
+    teardown: vIf.teardown,
+    getContainedComponents: vIf.getContainedComponents,
+    unbind: vIf.unbind,
+
+    bind: function () {
+        var el = this.el;
+        this.start = document.createComment('v-partial-start');
+        this.end = document.createComment('v-partial-end');
+        if (el.nodeType !== 8) {
+            el.innerHTML = ''
+        }
+        if (el.tagName === 'TEMPLATE' || el.nodeType === 8) {
+            _.replace(el, this.end)
+        } else {
+            el.appendChild(this.end)
+        }
+        _.before(this.start, this.end);
+        if (!this._isDynamicLiteral) {
+            this.insert(this.expression)
+        }
+    },
+
+    update: function (id) {
+        this.teardown();
+        this.insert(id)
+    },
+
+    insert: function (id) {
 
         var partial = this.vm.$options.partials[id];
 
-        if (undefined === id || partial) {
-            return insert.call(this, id);
+        if (undefined !== id && !partial) {
+            this.vm.$options.partials[id] = partial = templateParser.parse(id);
         }
 
-        var frag = Vue.parsers.template.parse(id);
+        _.assertAsset(partial, 'partial', id);
+        if (partial) {
+            var filters = this.filters && this.filters.read;
+            if (filters) {
+                partial = _.applyFilters(partial, filters, this.vm)
+            }
 
-        if (frag) {
-            this.vm.$options.partials[id] = frag;
-            return insert.call(this, id);
+            this.template = templateParser.parse(partial, true);
+
+            // compile the nested partial
+            this.linker = compiler.compile(
+                this.template,
+                this.vm.$options,
+                true
+            );
+
+            this.compile()
         }
-    };
+    }
 
-};
+}

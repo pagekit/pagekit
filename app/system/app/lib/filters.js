@@ -5,15 +5,15 @@ module.exports = function (Vue) {
     });
 
     Vue.filter('trans', function(id, parameters, domain, locale) {
-        return this.$trans(id, evalExp.call(this, parameters), evalExp.call(this, domain), evalExp.call(this, locale));
+        return this.$trans(id, parameters, domain, locale);
     });
 
     Vue.filter('transChoice', function(id, number, parameters, domain, locale) {
-        return this.$transChoice(id, evalExp.call(this, number) || 0, evalExp.call(this, parameters), evalExp.call(this, domain), evalExp.call(this, locale));
+        return this.$transChoice(id, number, parameters, domain, locale);
     });
 
     Vue.filter('date', function(date, format) {
-        return this.$date(date, evalExp.call(this, format));
+        return this.$date(date, format);
     });
 
     Vue.filter('toOptions', function toOptions(collection) {
@@ -78,20 +78,5 @@ module.exports = function (Vue) {
 
         return this.$date((new Date(value)).toISOString(), 'medium');
     });
-
-    var evalExp = function(expression) {
-
-        try {
-
-            return undefined === expression ? expression : Vue.parsers.expression.parse(expression).get.call(this, this);
-
-        } catch (e) {
-
-            if (Vue.util.warn && Vue.config.warnExpressionErrors) {
-                Vue.util.warn('Error when evaluating expression "' + expression + '":\n   ' + e);
-            }
-        }
-
-    };
 
 };

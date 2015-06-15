@@ -10,7 +10,7 @@ var App = Vue.extend({
 
         this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter)
 
-        this.$watch('config.page', this.load, false, true);
+        this.$watch('config.page', this.load, {immediate: true});
         this.$watch('config.filter.search', function () { this.load(0); });
         this.$watch('config.filter.status', function () { this.load(0); });
 

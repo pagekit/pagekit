@@ -32,7 +32,7 @@ jQuery(function ($) {
 
                 var sections = [];
 
-                _.each(this.$options.components, function (component) {
+                _.forIn(this.$options.components, function (component) {
                     if (component.options.section) {
                         sections.push(component.options.section);
                     }

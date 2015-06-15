@@ -47,7 +47,7 @@
             priority: 20
         },
 
-        paramAttributes: ['config', 'options'],
+        props: ['config', 'options'],
 
         data: function() {
             return window.$system;

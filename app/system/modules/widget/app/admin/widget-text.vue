@@ -26,7 +26,7 @@
             priority: 0
         },
 
-        paramAttributes: ['widget', 'config', 'form']
+        props: ['widget', 'config', 'form']
 
     }
 

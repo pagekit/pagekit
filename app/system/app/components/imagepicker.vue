@@ -49,7 +49,7 @@
 
         replace: true,
 
-        paramAttributes: ['src'],
+        props: ['src'],
 
         data: function () {
             return $.extend({

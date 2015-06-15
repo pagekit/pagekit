@@ -26,7 +26,7 @@
         </div>
 
         <ul class="uk-nestable-list" v-if="tree[node.id]">
-            <node-item v-repeat="node: tree[node.id]"></node-item>
+            <node v-repeat="node: tree[node.id]"></node>
         </ul>
 
     </li>

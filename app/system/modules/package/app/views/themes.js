@@ -60,6 +60,6 @@ module.exports = {
 
 $(function () {
 
-    new Vue(module.exports).$mount('#extensions');
+    new Vue(module.exports).$mount('#themes');
 
 });

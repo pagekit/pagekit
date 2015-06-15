@@ -1,12 +1,27 @@
+<template>
+
+    <div class="uk-panel-badge">
+        <ul class="uk-subnav pk-subnav-icon">
+            <li v-if="editing[widget.id]"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a></li>
+            <li v-if="type.editable !== false && !editing[widget.id]"><a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+            <li v-if="type.editable !== false && editing[widget.id]"><a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+        </ul>
+    </div>
+
+    <component is="{{ component }}" widget="{{ widget }}" editing="{{ isEditing }}"></component>
+
+</template>
+
+<script>
+
 module.exports = {
 
-    replace: true,
     inherit: true,
 
     ready: function () {
 
         if (this.type.editable !== false) {
-            this.$watch('widget', Vue.util.debounce(this.save, 500), true, false);
+            this.$watch('widget', Vue.util.debounce(this.save, 500), {deep: true});
         }
 
     },
@@ -64,3 +79,5 @@ module.exports = {
     }
 
 };
+
+</script>

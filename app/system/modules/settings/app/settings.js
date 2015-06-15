@@ -1,11 +1,13 @@
-var $ = require('jquery');
-var _ = require('lodash');
-var UIkit = require('uikit');
-
-var Settings = Vue.extend({
+module.exports = Vue.extend({
 
     data: function () {
         return window.$settings;
+    },
+
+    ready: function() {
+
+        UIkit.tab(this.$$.tab, {connect: this.$$.content});
+
     },
 
     computed: {
@@ -14,7 +16,7 @@ var Settings = Vue.extend({
 
             var sections = [];
 
-            _.each(this.$options.components, function (component) {
+            _.forIn(this.$options.components, function (component) {
                 if (component.options.section) {
                     sections.push(component.options.section);
                 }
@@ -22,12 +24,6 @@ var Settings = Vue.extend({
 
             return sections;
         }
-
-    },
-
-    ready: function() {
-
-        UIkit.tab(this.$$.tab, {connect: this.$$.content});
 
     },
 
@@ -48,16 +44,16 @@ var Settings = Vue.extend({
     },
 
     components: {
+
         locale: require('./components/locale.vue'),
         system: require('./components/system.vue')
+
     }
 
 });
 
 $(function () {
 
-    new Settings().$mount('#settings');
+    (new module.exports()).$mount('#settings');
 
 });
-
-module.exports = Settings;

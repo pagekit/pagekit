@@ -54,7 +54,7 @@
             require('../lib/package')
         ],
 
-        paramAttributes: ['api', 'search', 'type', 'installed'],
+        props: ['api', 'search', 'type', 'installed'],
 
         data: function () {
             return {

@@ -30,7 +30,7 @@
 
     module.exports = {
 
-        paramAttributes: ['node', 'form'],
+        props: ['node', 'form'],
 
         section: {
             name: 'page-content',

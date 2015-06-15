@@ -14,8 +14,8 @@ var App = Vue.extend({
         this.resource = this.$resource('api/blog/post/:id');
         this.config.filter = _.extend({ status: '' , author:'', order: 'date desc'}, this.config.filter ? this.config.filter : {});
 
-        this.$watch('config.page', this.load, true, true);
-        this.$watch('config.filter', function() { this.load(0); }, true);
+        this.$watch('config.page', this.load, {deep: true, immediate: true});
+        this.$watch('config.filter', function() { this.load(0); }, {deep: true});
         this.$watch('config.filter.order', function () { this.load(0); });
         this.$watch('config.filter.author', function () { this.load(0); });
     },

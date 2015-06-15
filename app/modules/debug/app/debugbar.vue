@@ -13,7 +13,7 @@
         </div>
 
         <div v-repeat="panels">
-            <div class="pf-profiler-panel" v-style="display: $value === panel ? 'block' : 'none', height: height" v-component="{{ $value }}" data="{{ data[$value] }}"></div>
+            <component class="pf-profiler-panel" v-style="display: $value === panel ? 'block' : 'none', height: height" is="{{ $value }}" data="{{ data[$value] }}"></component>
         </div>
 
     </div>
@@ -43,15 +43,15 @@
 
         created: function () {
 
-            var self = this;
+            this.$http.get(config.url, function (data) {
 
-            $.getJSON(config.url, function (data) {
+                this.$set('data', data);
 
-                self.$set('data', data);
+                var panels = this.panels;
 
-                $.each(self.$options.components, function (name) {
+                $.each(this.$options.components, function (name) {
                     if (data[name]) {
-                        self.panels.push(name);
+                        panels.push(name);
                     }
                 });
 

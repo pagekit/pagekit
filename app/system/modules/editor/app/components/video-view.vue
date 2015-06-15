@@ -11,11 +11,11 @@
 
     module.exports = Vue.extend({
 
-        paramAttributes: ['src'],
+        props: ['src'],
 
         ready: function () {
 
-            this.$watch('src', this.update, false, true);
+            this.$watch('src', this.update, {immediate: true});
 
         },
 

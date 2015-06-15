@@ -15,7 +15,7 @@ module.exports = {
 
             var sections = [], type = this.$get('type.id');
 
-            _.each(this.$options.components, function (component) {
+            _.forIn(this.$options.components, function (component) {
 
                 var section = component.options.section;
 

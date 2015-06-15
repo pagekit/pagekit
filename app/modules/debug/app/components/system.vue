@@ -66,7 +66,7 @@
 
   module.exports = {
 
-    paramAttributes: ['data'],
+    props: ['data'],
 
     ready: function () {
         this.$data = this.data;

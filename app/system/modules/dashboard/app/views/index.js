@@ -1,7 +1,7 @@
 var Dashboard = Vue.extend({
 
     data: function() {
-        return window.$data;
+        return _.extend({ editing: false }, window.$data);
     },
 
     created: function() {
@@ -102,12 +102,10 @@ var Dashboard = Vue.extend({
 
         getType: function(id) {
             return _.find(this.getTypes(), { id: id });
-
         },
 
         getTypes: function() {
-
-            return _(this.$options.components)
+            return _(this.$options.components.__proto__)
                 .filter(function(component) { return _.has(component, 'options.type') })
                 .map(function(component) { return _.merge( component.options.type, { component: component.options.name } ) })
                 .value();
@@ -117,7 +115,7 @@ var Dashboard = Vue.extend({
 
     components: {
 
-        'widget-panel': require('../components/widget-panel'),
+        panel: require('../components/widget-panel.vue'),
         feed: require('../components/widget-feed.vue'),
         location: require('../components/widget-location.vue')
 
