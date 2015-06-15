@@ -236,11 +236,13 @@
 
                 if (!oldname) return;
 
-                var newname = prompt(this.$trans('New Name'), oldname);
+                UIkit.modal.prompt(this.$trans('New Name'), oldname, function(newname){
 
-                if (!newname) return;
+                    if (!newname) return;
 
-                this.command('rename', { oldname: oldname, newname: newname });
+                    this.command('rename', { oldname: oldname, newname: newname });
+
+                }.bind(this));
             },
 
             remove: function (names) {
