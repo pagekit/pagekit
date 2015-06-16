@@ -5,7 +5,8 @@ module.exports = [
             "finder": "./app/components/finder.vue"
         },
         output: {
-            filename: "./app/bundle/[name].js"
+            filename: "./app/bundle/[name].js",
+            library: "Finder"
         },
         module: {
             loaders: [

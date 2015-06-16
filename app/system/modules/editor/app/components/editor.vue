@@ -57,7 +57,7 @@
     });
 
     Editor.create = function (element, options) {
-        return new Editor.extend({ el: element, data: options});
+        return new Editor({ el: element, data: options});
     };
 
     Vue.component('v-editor', Editor);

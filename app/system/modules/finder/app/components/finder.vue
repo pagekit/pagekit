@@ -67,7 +67,7 @@
 
 <script>
 
-    module.exports = {
+    var Finder = Vue.extend({
 
         replace : true,
 
@@ -350,25 +350,28 @@
 
         partials: {
 
-            'table': require('../templates/table.html'),
-            'thumbnail': require('../templates/thumbnail.html')
+            table: require('../templates/table.html'),
+            thumbnail: require('../templates/thumbnail.html')
 
         }
 
+    });
+
+    Finder.create = function (element, options) {
+
+
+
+        return new Finder({ el: element, data: options });
     };
 
-    Vue.component('v-finder', $.extend({}, module.exports));
-
-    var Finder = function (element, options) {
-        return new Vue($.extend(true, {}, module.exports, { el: element, data: $.extend(module.exports.data(), options)} ));
-    };
+    Vue.component('v-finder', Finder);
 
     $(function () {
         $('[data-finder]').each(function () {
-            new Finder(this, $(this).data('finder'));
+            Finder.create(this, $(this).data('finder'));
         });
     });
 
-    window.Finder = window.Finder || Finder;
+    module.exports = Finder;
 
 </script>
