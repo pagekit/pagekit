@@ -4,6 +4,8 @@ return [
 
     'name' => 'hello',
 
+    'type' => 'extension',
+
     'main' => 'Pagekit\\Hello\\HelloExtension',
 
     'autoload' => [

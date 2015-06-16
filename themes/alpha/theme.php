@@ -10,6 +10,8 @@ return [
 
     'name' => 'alpha',
 
+    'type' => 'theme',
+
     /**
      * The main function.
      */

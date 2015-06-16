@@ -26,7 +26,7 @@ return [
                     'user' => $user,
                     'menu' => array_values($app['system']->getMenu()->getItems())
                 ]);
-                
+
                 $event->setParameter('subset', 'latin,latin-ext');
             });
 

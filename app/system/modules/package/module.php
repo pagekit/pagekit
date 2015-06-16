@@ -3,12 +3,17 @@
 use Pagekit\System\ExtensionRepository;
 use Pagekit\System\Package\PackageManager;
 use Pagekit\System\ThemeRepository;
+use Pagekit\System\Loader\ExtensionLoader;
+use Pagekit\System\Loader\ThemeLoader;
 
 return [
 
     'name' => 'system/package',
 
     'main' => function ($app) {
+
+        $app['module']->addLoader(new ExtensionLoader($app));
+        $app['module']->addLoader(new ThemeLoader($app));
 
         $app['package'] = function ($app) {
             return (new PackageManager)

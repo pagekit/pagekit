@@ -2,22 +2,11 @@
 
 namespace Pagekit\Module;
 
-use Pagekit\Application;
 use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
 
 class ModuleManager implements \ArrayAccess, \IteratorAggregate
 {
-    /**
-     * @var Application
-     */
-    protected $app;
-
-    /**
-     * @var LoaderInterface[]
-     */
-    protected $loaders = [];
-
     /**
      * @var array
      */
@@ -34,14 +23,14 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     protected $registered = [];
 
     /**
-     * Constructor.
-     *
-     * @param Application $app
+     * @var array
      */
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
-    }
+    protected $loaders = [];
+
+    /**
+     * @var LoaderInterface[]
+     */
+    protected $sorted = [];
 
     /**
      * Get shortcut.
@@ -101,27 +90,13 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $resolved = array_diff_key($resolved, $this->modules);
 
         foreach ($resolved as $name => $module) {
-            if ($mod = $this->loadModule($name, $module)) {
-                $mod->main($this->app);
+
+            foreach ($this->sorted as $loader) {
+                $module = $loader->load($name, $module);
             }
+
+            $this->modules[$name] = $module;
         }
-    }
-
-    /**
-     * Adds a module config loader.
-     *
-     * @param  LoaderInterface|callable $loader
-     * @return self
-     */
-    public function addLoader($loader)
-    {
-        if (is_callable($loader)) {
-            $loader = new CallableLoader($loader);
-        }
-
-        $this->loaders[] = $loader;
-
-        return $this;
     }
 
     /**
@@ -133,6 +108,28 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     public function addPath($paths)
     {
         $this->paths = array_merge($this->paths, (array) $paths);
+
+        return $this;
+    }
+
+    /**
+     * Adds a module loader.
+     *
+     * @param  LoaderInterface|callable $loader
+     * @param  int                      $priority
+     * @return self
+     */
+    public function addLoader($loader, $priority = 0)
+    {
+        if (is_callable($loader)) {
+            $loader = new CallableLoader($loader);
+        }
+
+        $this->loaders[$priority][] = $loader;
+
+        krsort($this->loaders);
+
+        $this->sorted = call_user_func_array('array_merge', $this->loaders);
 
         return $this;
     }
@@ -191,30 +188,6 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * Loads a module.
-     *
-     * @param  string $name
-     * @param  array  $module
-     * @return ModuleInterface
-     */
-    protected function loadModule($name, $module)
-    {
-        foreach ($this->loaders as $loader) {
-            $module = $loader->load($name, $module);
-        }
-
-        if (isset($module['autoload'])) {
-            foreach ($module['autoload'] as $namespace => $path) {
-                $this->app['autoloader']->addPsr4($namespace, $this->resolvePath($module, $path));
-            }
-        }
-
-        $class = is_string($module['main']) ? $module['main'] : 'Pagekit\\Module\\Module';
-
-        return $this->modules[$name] = new $class($module);
-    }
-
-    /**
      * Register modules from paths.
      */
     protected function registerModules()
@@ -233,6 +206,10 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
 
                 if (!isset($module['main'])) {
                     $module['main'] = null;
+                }
+
+                if (!isset($module['type'])) {
+                    $module['type'] = 'module';
                 }
 
                 $module['path'] = strtr(dirname($p), '\\', '/');

@@ -21,12 +21,12 @@ class ArrayLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, array $config)
+    public function load($name, $module)
     {
         if (isset($this->values[$name])) {
-            $config = array_replace_recursive($config, ['config' => $this->values[$name]]);
+            $module = array_replace_recursive($module, ['config' => $this->values[$name]]);
         }
 
-        return $config;
+        return $module;
     }
 }

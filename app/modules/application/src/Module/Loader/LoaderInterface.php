@@ -5,11 +5,11 @@ namespace Pagekit\Module\Loader;
 interface LoaderInterface
 {
     /**
-     * Loads the module config.
+     * Loads the module.
      *
      * @param  string $name
-     * @param  array  $config
-     * @return array
+     * @param  mixed  $module
+     * @return mixed
      */
-    public function load($name, array $config);
+    public function load($name, $module);
 }

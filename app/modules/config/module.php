@@ -13,14 +13,14 @@ return [
         };
 
         if ($app['config.file']) {
-            $app['module']->addLoader(function ($name, array $config) use ($app) {
+            $app['module']->addLoader(function ($name, $module) use ($app) {
 
                 if ($app['config']->has($name)) {
-                    $config = array_replace_recursive($config, ['config' => $app['config']->get($name)->toArray()]);
+                    $module = array_replace_recursive($module, ['config' => $app['config']->get($name)->toArray()]);
                 }
 
-                return $config;
-            });
+                return $module;
+            }, 5);
         }
 
         $app->on('app.response', function () use ($app) {

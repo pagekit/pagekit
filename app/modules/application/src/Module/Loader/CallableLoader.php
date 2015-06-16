@@ -21,8 +21,8 @@ class CallableLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, array $config)
+    public function load($name, $module)
     {
-        return call_user_func($this->callable, $name, $config);
+        return call_user_func($this->callable, $name, $module);
     }
 }
