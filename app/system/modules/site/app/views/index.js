@@ -1,7 +1,7 @@
 module.exports = {
 
     data: function() {
-        return _.merge({}, window.$data);
+        return _.merge({ menu: undefined }, window.$data);
     },
 
     http: {

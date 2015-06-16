@@ -18,7 +18,7 @@ return [
 
     'main' => function ($app) {
 
-        $app['routes'] = function ($app) {
+        $app['routes'] = function () {
             return new Routes();
         };
 

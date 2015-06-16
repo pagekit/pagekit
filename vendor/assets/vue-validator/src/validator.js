@@ -10,13 +10,17 @@ module.exports = {
 
     bind: function (dir) {
 
-        var self = this, name = dir.form;
+        var self = this, name = dir.form, vm = findVm(dir.el.form);
+
+        if (!vm) {
+            return;
+        }
 
         if (!this.validators[name]) {
 
             this.validators[name] = {
                 form: dir.el.form,
-                vm: dir.vm.$root,
+                vm: vm,
                 handler: function (e) {
                     e.preventDefault();
                     _.trigger(e.target, self.validate(name, true) ? 'valid' : 'invalid');
@@ -24,7 +28,7 @@ module.exports = {
                 dirs: []
             };
 
-            dir.vm.$root.$set(name, {});
+            vm.$add(name, {});
             _.on(dir.el.form, 'submit', this.validators[name].handler);
         }
 
@@ -43,6 +47,7 @@ module.exports = {
 
         if (!form.dirs.length) {
             _.off(dir.el.form, 'submit', form.handler);
+            form.vm.$delete(dir.form);
             delete this.validators[dir.form];
         }
     },
@@ -95,3 +100,18 @@ module.exports = {
     }
 
 };
+
+function findVm(elm) {
+
+    do {
+
+        if (elm.__vue__) {
+            return elm.__vue__;
+        }
+
+        elm = elm.parentElement;
+
+    } while (elm);
+
+    return undefined;
+}

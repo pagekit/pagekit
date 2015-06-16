@@ -6,17 +6,15 @@ var Validators = require('./validators');
  * Install plugin.
  */
 
-function install (Vue) {
+module.exports = function (Vue) {
 
     Vue.validators = Validators;
     Vue.directive('valid', Directive);
 
     Vue.prototype.$validator = Validator;
 
-}
+};
 
 if (window.Vue) {
-    Vue.use(install);
+    Vue.use(module.exports);
 }
-
-module.exports = install;

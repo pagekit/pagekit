@@ -55,7 +55,11 @@
         props: ['menu'],
 
         data: function() {
-            return _.merge({}, window.$data);
+            return _.merge({
+                nodes: [],
+                tree: [],
+                selected: []
+            }, window.$data);
         },
 
         created: function () {

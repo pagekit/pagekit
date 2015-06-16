@@ -4,7 +4,7 @@
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
 
-        <menus class="pk-width-sidebar" active="{{ menu }}"></menus>
+        <menus class="pk-width-sidebar" menu="{{@ menu }}"></menus>
         <nodes class="uk-flex-item-1" menu="{{ menu }}"></nodes>
 
     </div>
