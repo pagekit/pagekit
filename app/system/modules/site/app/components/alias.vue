@@ -1,6 +1,6 @@
 <template>
 
-    {{> settings}}
+    <div class="uk-form-row" v-partial="settings"></div>
 
     <div class="uk-form-row">
         <label for="form-alias-url" class="uk-form-label">{{ 'Url' | trans }}</label>

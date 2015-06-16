@@ -2,7 +2,7 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/components/site/site"
+            "site": "./app/components/site"
         },
         output: {
             filename: "./app/bundle/[name].js"
@@ -11,8 +11,7 @@ module.exports = [
             "lodash": "_",
             "jquery": "jQuery",
             "uikit": "UIkit",
-            "vue": "Vue",
-            "site": "Site"
+            "vue": "Vue"
         },
         module: {
             loaders: [

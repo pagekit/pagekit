@@ -26,7 +26,7 @@ class BlogExtension extends Extension
         }, 175);
 
         $app->on('app.request', function() use ($app) {
-            $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site');
+            $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
         });
     }
 

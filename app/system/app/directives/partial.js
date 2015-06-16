@@ -38,7 +38,7 @@ module.exports = {
 
     insert: function (id) {
 
-        var partial = this.vm.$options.partials[id];
+        var partial = getPartials(this.vm)[id];
 
         if (undefined !== id && !partial) {
             this.vm.$options.partials[id] = partial = templateParser.parse(id);
@@ -64,4 +64,24 @@ module.exports = {
         }
     }
 
+};
+
+function getPartials(vm) {
+
+    var partials = {};
+
+    do {
+
+        partials = defaults(partials, vm.$options.partials || {});
+
+        vm = vm.$parent;
+
+    } while (vm);
+
+    return defaults(partials, Vue.partials);
+}
+
+function defaults(target, source) {
+
+    return _.extend(_.extend({}, source), target)
 }

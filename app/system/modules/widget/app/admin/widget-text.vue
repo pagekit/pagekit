@@ -1,6 +1,6 @@
 <template>
 
-    {{> settings}}
+    <div class="uk-form-row" v-partial="settings"></div>
 
     <div class="uk-form-row">
         <div class="uk-form-controls">

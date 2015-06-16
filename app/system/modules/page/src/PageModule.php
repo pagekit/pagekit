@@ -17,7 +17,7 @@ class PageModule extends Extension
     {
         $app->on('view.site:views/edit', function($event, $view) use ($app) {
             $view->style('codemirror');
-            $view->script('page-site', 'system/page:app/bundle/site.js', ['site', 'editor']);
+            $view->script('page-site', 'system/page:app/bundle/site.js', ['site-edit', 'editor']);
         });
 
         $app->on('site.node.preSave', function(EntityEvent $event) use ($app) {

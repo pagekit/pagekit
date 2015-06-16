@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = Vue.extend({
 
     data: function () {
         return _.merge({}, window.$data);
@@ -66,10 +66,10 @@ module.exports = {
 
     }
 
-};
+});
 
 $(function () {
 
-    new Vue(module.exports).$mount('#site-edit');
+    (new module.exports()).$mount('#site-edit');
 
 });

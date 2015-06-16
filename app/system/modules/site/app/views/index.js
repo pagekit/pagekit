@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = Vue.extend({
 
     data: function() {
         return _.merge({ menu: undefined }, window.$data);
@@ -17,10 +17,10 @@ module.exports = {
         nodes: require('../components/nodes.vue')
     }
 
-};
+});
 
 $(function () {
 
-    new Vue(module.exports).$mount('#site');
+    (new module.exports()).$mount('#site');
 
 });

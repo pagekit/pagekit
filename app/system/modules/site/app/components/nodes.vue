@@ -22,7 +22,7 @@
 
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li v-repeat="type: types"><a v-attr="href: $url('admin/site/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
+                        <li v-repeat="type: types | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
                     </ul>
                 </div>
 
