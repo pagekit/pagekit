@@ -14,8 +14,8 @@
             <figcaption class="uk-overlay-panel uk-overlay-background">
 
                 <ul class="uk-subnav">
-                    <li><a v-on="click: (imageurl = '')"><i class="uk-icon-trash-o"></i></a></li>
-                    <li><a v-on="click: pick()"><i class="uk-icon-hand-o-up"></i></a></li>
+                    <li><a v-on="click: (imageurl = '')"><i class="pk-icon-delete pk-icon-hover"></i></a></li>
+                    <li><a v-on="click: pick()"><i class="pk-icon-select pk-icon-hover"></i></a></li>
                 </ul>
 
             </figcaption>
