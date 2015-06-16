@@ -32,7 +32,7 @@ class Application extends Container
         };
 
         $this['module'] = function() {
-            return new ModuleManager($this);
+            return new ModuleManager();
         };
     }
 

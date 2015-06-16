@@ -18,6 +18,8 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
+        $app['module']->addLoader(new WidgetLoader($app));
+
         $app->on('app.request', function () use ($app) {
             $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
             // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);

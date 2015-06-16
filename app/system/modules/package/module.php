@@ -1,10 +1,9 @@
 <?php
 
+use Pagekit\Module\Loader\ModuleLoader;
 use Pagekit\System\ExtensionRepository;
 use Pagekit\System\Package\PackageManager;
 use Pagekit\System\ThemeRepository;
-use Pagekit\System\Loader\ExtensionLoader;
-use Pagekit\System\Loader\ThemeLoader;
 
 return [
 
@@ -12,14 +11,14 @@ return [
 
     'main' => function ($app) {
 
-        $app['module']->addLoader(new ExtensionLoader($app));
-        $app['module']->addLoader(new ThemeLoader($app));
-
         $app['package'] = function ($app) {
             return (new PackageManager)
                 ->addPath($app['path.extensions'].'/*/extension.json')
                 ->addPath($app['path.themes'].'/*/theme.json');
         };
+
+        $app['module']->addLoader(new ModuleLoader($app, 'theme', 'Pagekit\\System\\Theme'));
+        $app['module']->addLoader(new ModuleLoader($app, 'extension', 'Pagekit\\System\\Extension'));
 
         $app->on('app.request', function () use ($app) {
 

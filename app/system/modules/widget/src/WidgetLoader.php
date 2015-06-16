@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\System\Loader;
+namespace Pagekit\Widget;
 
 use Pagekit\Application;
 use Pagekit\Module\Loader\ModuleLoader;
 
-class ExtensionLoader extends ModuleLoader
+class WidgetLoader extends ModuleLoader
 {
     /**
      * Constructor.
@@ -14,6 +14,6 @@ class ExtensionLoader extends ModuleLoader
      */
     public function __construct(Application $app)
     {
-        parent::__construct($app, 'extension', 'Pagekit\\System\\Extension');
+        parent::__construct($app, 'widget');
     }
 }
