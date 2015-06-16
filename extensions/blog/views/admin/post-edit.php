@@ -20,7 +20,7 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
     </div>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
-        
+
         <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
@@ -72,7 +72,7 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
                                 </div>
                             </div>
                             <div class="uk-width-large-1-2">
-                                <div class="uk-form-icon" data-uk-timepicker>
+                                <div class="uk-form-icon" data-uk-timepicker="{format:'12h'}">
                                     <i class="pk-icon-time pk-icon-muted"></i>
                                     <input class="uk-width-1-1" type="text" v-model="time" lazy>
                                 </div>
