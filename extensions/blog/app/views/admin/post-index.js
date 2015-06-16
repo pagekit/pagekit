@@ -12,7 +12,7 @@ module.exports = Vue.extend({
     created: function () {
 
         this.resource = this.$resource('api/blog/post/:id');
-        this.config.filter = _.extend({ status: '' , author:'', order: 'date desc'}, this.config.filter ? this.config.filter : {});
+        this.config.filter = _.extend({ search: '', status: '' , author:'', order: 'date desc'}, this.config.filter);
 
         this.$watch('config.page', this.load, {immediate: true});
         this.$watch('config.filter', function() { this.load(0); }, {deep: true});

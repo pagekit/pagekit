@@ -14,7 +14,7 @@ module.exports = Vue.extend({
 
         this.Comments = this.$resource('api/blog/comment/:id');
 
-        this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter)
+        this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter);
 
         this.$watch('config.page', this.load, {immediate: true});
         this.$watch('config.filter.search', function () { this.load(0); });

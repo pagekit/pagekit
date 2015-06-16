@@ -113,6 +113,13 @@
         inherit: true,
         replace: true,
 
+        data: function () {
+            return {
+                replyComment: false,
+                editComment: false
+            }
+        },
+
         events: {
 
             cancel: function() {

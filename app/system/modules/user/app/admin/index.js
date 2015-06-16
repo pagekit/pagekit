@@ -1,7 +1,5 @@
 var Users = {
 
-    el: '#users',
-
     data: function() {
         return _.merge({
             users: false,
@@ -14,7 +12,7 @@ var Users = {
     created: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({status: '', role: '', order: 'name asc'}, this.config.filter ? this.config.filter : {});
+        this.config.filter = _.extend({ search: '', status: '', role: '', order: 'name asc' }, this.config.filter);
 
         this.$watch('config.page', function () { this.load(); }, {immediate: true});
         this.$watch('config.filter', function () { this.load(0); }, {deep: true});
@@ -123,5 +121,5 @@ var Users = {
 };
 
 jQuery(function () {
-    new Vue(Users);
+    new Vue(Users).$mount('#users');
 });
