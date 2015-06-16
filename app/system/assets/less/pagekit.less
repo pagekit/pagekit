@@ -150,6 +150,8 @@
 .pk-icon-file { background-image: url("../../assets/images/icon-file.svg"); }
 .pk-icon-folder { background-image: url("../../assets/images/icon-folder.svg"); }
 .pk-icon-reply { background-image: url("../../assets/images/icon-reply.svg"); }
+.pk-icon-calendar { background-image: url("../../assets/images/icon-calendar.svg"); }
+.pk-icon-time { background-image: url("../../assets/images/icon-time.svg"); }
 
 .pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
 
@@ -200,6 +202,19 @@
 
 .pk-link-icon [class*='pk-icon-'] { opacity: 0.3; }
 .pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
+
+/*
+ * Form Icon
+ */
+
+.uk-form-icon > [class*='pk-icon-'] {
+  &:extend(.uk-form-icon > [class*='uk-icon-']);
+}
+
+.uk-form-icon-flip > [class*='pk-icon-'] {
+  &:extend(.uk-form-icon-flip > [class*='uk-icon-']);
+}
+
 
 
 /* Modifier `pk-subnav-icon`

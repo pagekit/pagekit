@@ -19,8 +19,9 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
         </div>
     </div>
 
-    <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-3-4">
+    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
+        
+        <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
                 <input class="uk-width-1-1 uk-form-large" type="text" name="title" v-model="post.title" placeholder="{{ 'Enter Title' | trans }}" v-valid="required">
@@ -38,16 +39,16 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
             </div>
 
         </div>
-        <div class="uk-width-medium-1-4">
+        <div class="pk-width-sidebar">
 
-            <div class="uk-panel uk-panel-divider">
+            <div class="uk-panel">
+
                 <div class="uk-form-row">
                     <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
                     <div class="uk-form-controls">
                         <v-imagepicker src="post.data.image"></v-imagepicker>
                     </div>
                 </div>
-
                 <div class="uk-form-row">
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
                     <div class="uk-form-controls">
@@ -66,14 +67,14 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
                         <div class="uk-grid uk-grid-small" data-uk-grid-margin>
                             <div class="uk-width-large-1-2">
                                 <div class="uk-form-icon">
-                                    <i class="uk-icon-calendar"></i>
-                                    <input class="uk-form-width-1-1 uk-form-small" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" v-model="date" lazy>
+                                    <i class="pk-icon-calendar pk-icon-muted"></i>
+                                    <input class="uk-width-1-1" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" v-model="date" lazy>
                                 </div>
                             </div>
                             <div class="uk-width-large-1-2">
                                 <div class="uk-form-icon" data-uk-timepicker>
-                                    <i class="uk-icon-clock-o"></i>
-                                    <input class="uk-form-width-1-1 uk-form-small" type="text" v-model="time" lazy>
+                                    <i class="pk-icon-time pk-icon-muted"></i>
+                                    <input class="uk-width-1-1" type="text" v-model="time" lazy>
                                 </div>
                             </div>
                         </div>

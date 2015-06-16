@@ -38,7 +38,7 @@
 
         <div class="uk-width-medium-1-4">
 
-            <div class="uk-panel uk-panel-divider">
+            <div class="uk-panel">
 
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
