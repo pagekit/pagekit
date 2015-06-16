@@ -57,7 +57,7 @@
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'"></div>
         </div>
 
-        <div v-partial="{{ view }}"></div>
+        <div class="uk-overflow-container" v-partial="{{ view }}"></div>
 
         <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!items.length || noItemsAfterFilter">{{ 'No files found.' | trans }}</h3>
 

@@ -50,7 +50,7 @@ jQuery(function ($) {
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
-            '<div class="uk-margin uk-modal-content">'+String(content)+'</div>',
+            '<div class="uk-margin uk-modal-content">'+(options.title ? content : '<h2>'+content+'</h2>')+'</div>',
             '<div class="uk-modal-footer uk-text-right"><button class="uk-button uk-button-link uk-modal-close">'+options.labels.Ok+'</button></div>'
         ]).join(""), options);
 
@@ -70,7 +70,7 @@ jQuery(function ($) {
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
-            '<div class="uk-margin uk-modal-content">'+String(content)+'</div>',
+            '<div class="uk-margin uk-modal-content">'+(options.title ? content : '<h2>'+content+'</h2>')+'</div>',
             '<div class="uk-modal-footer uk-text-right"><button class="uk-button uk-button-link uk-modal-close">'+options.labels.Cancel+'</button> <button class="uk-button uk-button-link js-modal-confirm">'+options.labels.Ok+'</button></div>'
         ]).join(""), options);
 
@@ -91,7 +91,7 @@ jQuery(function ($) {
     UIkit.modal.prompt = function(text, value, onsubmit, options) {
 
         onsubmit = UIkit.$.isFunction(onsubmit) ? onsubmit : function(value){};
-        options  = UIkit.$.extend(true, {bgclose:false, keyboard:false, modal:false, title: false, labels:UIkit.modal.labels}, options);
+        options  = UIkit.$.extend(true, {modal:false, title: false, labels:UIkit.modal.labels}, options);
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
