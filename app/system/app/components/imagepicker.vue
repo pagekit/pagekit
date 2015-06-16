@@ -7,19 +7,20 @@
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
         </a>
 
-        <figure class="uk-display-block uk-overlay uk-overlay-hover" v-if="imageurl">
-            <div class="uk-placeholder uk-padding-remove uk-flex uk-flex-middle uk-flex-center" style="min-height:145px;">
-                <img class="uk-display-block" v-attr="src: resolveUrl(imageurl)">
+        <div class="uk-overlay uk-overlay-hover pk-image-max-height" v-if="imageurl">
+
+            <img v-attr="src: resolveUrl(imageurl)">
+
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <ul class="uk-subnav pk-subnav-icon">
+                        <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Delete role?'"></a></li>
+                    </ul>
+                </div>
             </div>
-            <figcaption class="uk-overlay-panel uk-overlay-background">
 
-                <ul class="uk-subnav">
-                    <li><a v-on="click: (imageurl = '')"><i class="pk-icon-delete pk-icon-hover"></i></a></li>
-                    <li><a v-on="click: pick()"><i class="pk-icon-select pk-icon-hover"></i></a></li>
-                </ul>
-
-            </figcaption>
-        </figure>
+        </div>
 
         <div class="uk-modal" v-el="modal">
             <div class="uk-modal-dialog uk-modal-dialog-large">
