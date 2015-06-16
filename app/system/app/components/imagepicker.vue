@@ -49,7 +49,8 @@
 
         data: function () {
             return $.extend({
-                imageurl: ''
+                imageurl: '',
+                finder: {select:''}
             }, $pagekit);
         },
 
@@ -61,12 +62,11 @@
 
             this.modal.element.appendTo('body');
 
-            this.finder  = {};
             this.$finder = this.$$.finder.$finder;
 
             this.$on('select.finder', function(selected) {
 
-                if (selected.length > 0 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+                if (selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
                     vm.finder.select = selected[0];
                 } else {
                     vm.finder.select = '';
