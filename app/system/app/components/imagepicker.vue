@@ -2,13 +2,10 @@
 
     <div>
 
-        <div class="uk-placeholder uk-text-center" v-if="!imageurl">
-
+        <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!imageurl" v-on="click: pick()">
             <img v-attr="src: (url+'/app/system/modules/editor/assets/images/placeholder-image.svg')" width="60" height="60" alt="{{ 'Placeholder Image' | trans }}">
-            <p>
-                <a v-on="click: pick()">{{ 'Select an image' | trans }}</a>
-            </p>
-        </div>
+            <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
+        </a>
 
         <figure class="uk-display-block uk-overlay uk-overlay-hover" v-if="imageurl">
             <div class="uk-placeholder uk-padding-remove uk-flex uk-flex-middle uk-flex-center" style="min-height:145px;">
@@ -25,14 +22,13 @@
         </figure>
 
         <div class="uk-modal" v-el="modal">
-
             <div class="uk-modal-dialog uk-modal-dialog-large">
 
-                <h1 class="uk-h3">{{ 'Select Image' | trans }}</h1>
                 <v-finder root="{{ storage }}" v-el="finder"></v-finder>
-                <div class="uk-margin-top">
-                    <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !finder.select" v-on="click: select(finder.select)">{{ 'Select' | trans }}</button>
-                    <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="button" v-attr="disabled: !finder.select" v-on="click: select(finder.select)">{{ 'Select' | trans }}</button>
                 </div>
 
             </div>
