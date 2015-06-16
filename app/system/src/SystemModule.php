@@ -101,18 +101,6 @@ class SystemModule extends Module
 
         }, 50);
 
-        $app->on('app.request', function () use ($app) {
-            foreach ($app['module'] as $module) {
-
-                if (!isset($module->resources)) {
-                    continue;
-                }
-
-                foreach ($module->resources as $prefix => $path) {
-                    $app['locator']->add($prefix, "$module->path/$path");
-                }
-            }
-        }, 2);
     }
 
     /**
