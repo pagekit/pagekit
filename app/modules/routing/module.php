@@ -30,6 +30,18 @@ return [
             return new Routes($app['events']);
         };
 
+        $app['module']->addLoader(function ($name, $module) use ($app) {
+
+            if (is_object($module) && isset($module->routes)) {
+                foreach ($module->routes as $path => $route) {
+                    $app['routes']->add(array_merge(['path' => $path], $route));
+                }
+            }
+
+            return $module;
+
+        }, -10);
+
     },
 
     'boot' => function ($app) {
@@ -42,22 +54,6 @@ return [
         );
 
         $app['middleware'];
-
-        $app->on('app.request', function () use ($app) {
-
-            foreach ($app['module'] as $module) {
-
-                if (!isset($module->routes)) {
-                    continue;
-                }
-
-                foreach ($module->routes as $path => $route) {
-                    $app['routes']->add(array_merge(['path' => $path], $route));
-                }
-
-            }
-
-        }, 110);
 
         $app->on('app.controller', function ($event, $request) use ($app) {
 
