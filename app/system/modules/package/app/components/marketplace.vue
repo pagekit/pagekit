@@ -2,7 +2,7 @@
 
     <div data-uk-observe>
 
-       <div class="uk-grid uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
+        <div class="uk-grid uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
             <div v-repeat="pkg: packages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
@@ -20,12 +20,12 @@
                             <button class="uk-button uk-button-primary uk-button-large" v-on="click: details(pkg)">{{ 'Details' | trans }}</button>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
 
-        <v-pagination page="{{ page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
+        <v-pagination page="{{@ page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
         <div class="uk-modal" v-el="modal">
             <div class="uk-modal-dialog uk-modal-dialog-large pk-modal-dialog-iframe">

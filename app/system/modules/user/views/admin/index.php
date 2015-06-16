@@ -85,6 +85,6 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="users && !users.length">{{ 'No user found.' | trans }}</h3>
 
-    <v-pagination page="{{ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
+    <v-pagination page="{{@ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
 </div>
