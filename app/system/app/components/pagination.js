@@ -23,13 +23,12 @@ module.exports = {
 
         this.$watch('page', function(page) {
             pagination.selectPage(page);
-        });
+        }, {immediate: true});
 
         this.$watch('pages', function(pages) {
             pagination.render(pages);
         }, {deep: true});
 
-        pagination.selectPage(this.page);
     }
 
 };

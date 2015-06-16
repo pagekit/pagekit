@@ -2,7 +2,7 @@
 
 <div id="post" class="uk-form" v-cloak>
 
-    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin v-show="posts">
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Posts|{1} %count% Post|]1,Inf[ %count% Posts' | transChoice count {count:count} }}</h2>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="uk-overflow-container">
+    <div class="uk-overflow-container" v-show="posts">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
@@ -87,7 +87,7 @@
         </table>
     </div>
 
-    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!posts.length">{{ 'No posts found.' | trans }}</h3>
+    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="posts && !posts.length">{{ 'No posts found.' | trans }}</h3>
 
     <v-pagination page="{{@ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 

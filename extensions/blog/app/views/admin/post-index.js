@@ -1,10 +1,10 @@
-var App = Vue.extend({
+module.exports = Vue.extend({
 
     data: function() {
         return _.merge({
-            posts: null,
+            posts: false,
             pages: 0,
-            count: '',
+            count: 0,
             selected: []
         }, window.$data)
     },
@@ -14,10 +14,8 @@ var App = Vue.extend({
         this.resource = this.$resource('api/blog/post/:id');
         this.config.filter = _.extend({ status: '' , author:'', order: 'date desc'}, this.config.filter ? this.config.filter : {});
 
-        this.$watch('config.page', this.load, {deep: true, immediate: true});
+        this.$watch('config.page', this.load, {immediate: true});
         this.$watch('config.filter', function() { this.load(0); }, {deep: true});
-        this.$watch('config.filter.order', function () { this.load(0); });
-        this.$watch('config.filter.author', function () { this.load(0); });
     },
 
     computed: {
@@ -112,7 +110,7 @@ var App = Vue.extend({
         },
 
         getStatusText: function(post) {
-            return this.data.statuses[post.status];
+            return this.statuses[post.status];
         }
 
     }
@@ -120,7 +118,5 @@ var App = Vue.extend({
 });
 
 jQuery(function () {
-    new App().$mount('#post');
+    (new module.exports()).$mount('#post');
 });
-
-module.exports = App;

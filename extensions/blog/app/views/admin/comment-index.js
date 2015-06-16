@@ -1,7 +1,11 @@
-var App = Vue.extend({
+module.exports = Vue.extend({
 
     data: function () {
-        return _.merge({ user: window.$pagekit.user }, window.$data)
+        return _.merge({
+            count: 0,
+            comments: false,
+            user: window.$pagekit.user
+        }, window.$data)
     },
 
     created: function () {
@@ -111,7 +115,5 @@ var App = Vue.extend({
 });
 
 jQuery(function () {
-    new App().$mount('#comments');
+    (new module.exports()).$mount('#comments');
 });
-
-module.exports = App;

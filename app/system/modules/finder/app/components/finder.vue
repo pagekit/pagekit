@@ -1,6 +1,6 @@
 <template>
 
-    <div class="uk-form" data-uk-observe v-cloak>
+    <div class="uk-form" data-uk-observe v-show="items">
 
         <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -79,10 +79,10 @@
                 path: '/',
                 mode: 'write',
                 view: 'table',
-                count: '',
+                count: 0,
                 upload: {},
                 selected: [],
-                items: []
+                items: false
             };
         },
 

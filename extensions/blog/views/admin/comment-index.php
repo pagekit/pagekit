@@ -3,7 +3,7 @@
 
 <div id="comments" class="uk-form" data-uk-observe v-cloak>
 
-    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin v-show="comments">
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Comments|{1} %count% Comment|]1,Inf[ %count% Comments' | transChoice count {count:count} }}</h2>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="uk-overflow-container">
+    <div class="uk-overflow-container" v-show="comments">
         <table class="uk-table uk-table-hover pk-table-large">
             <thead>
                 <tr>
