@@ -95,7 +95,7 @@ jQuery(function ($) {
 
         var modal = UIkit.modal.dialog(([
             options.title ? '<div class="uk-modal-header"><h2>'+options.title+'</h2></div>':'',
-            text ? '<div class="uk-modal-content uk-form">'+String(text)+'</div>':'',
+            text ? '<div class="uk-modal-content uk-form">'+(options.title ? text : '<h2>'+text+'</h2>')+'</div>':'',
             '<div class="uk-margin-small-top uk-modal-content uk-form"><p><input type="text" class="uk-width-1-1"></p></div>',
             '<div class="uk-modal-footer uk-text-right"><button class="uk-button uk-button-link uk-modal-close">'+options.labels.Cancel+'</button> <button class="uk-button uk-button-link js-modal-ok">'+options.labels.Ok+'</button></div>'
         ]).join(""), options),

@@ -59,6 +59,8 @@
 
             this.modal = UIkit.modal(this.$$.modal);
 
+            this.modal.element.appendTo('body');
+
             this.finder  = {};
             this.$finder = this.$$.finder.$finder;
 
