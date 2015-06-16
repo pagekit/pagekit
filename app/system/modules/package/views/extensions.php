@@ -36,7 +36,10 @@
             <tbody>
                 <tr class="uk-visible-hover-inline" v-repeat="pkg: packages | filterBy search in 'title'">
                     <td class="pk-table-width-minimum">
-                        <img class="uk-img-preserve" width="50" height="50" alt="{{ pkg.title }}" v-attr="src: icon(pkg)">
+                        <div class="uk-position-relative">
+                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{icon(pkg)}});"></div>
+                            <canvas class="uk-display-block" width="50" height="50"></canvas>
+                        </div>
                     </td>
                     <td class="uk-text-nowrap">
                         <a>{{ pkg.title }}</a>

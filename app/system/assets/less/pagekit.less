@@ -354,7 +354,7 @@
 .pk-table-fake .uk-form-select { vertical-align: top; }
 
 
-/* `pk-thumbnail`
+/* Thumbnail (Finder + Image Picker)
  ========================================================================== */
 
 .pk-thumbnail {
@@ -384,7 +384,6 @@
 }
 
 
-
 /* Panel Teaser
  ========================================================================== */
 
@@ -395,33 +394,18 @@
 }
 
 
-
-
-
-
-
-/* ========================================================================
-   System extension
- ========================================================================== */
-
-/* Marketplace table template
- ========================================================================== */
-
-.pk-marketplace-panel .uk-overlay-area { border-radius: 2px; }
-
-
-/* Marketplace details template
+/* Modal with IFrame (Marketplace)
  ========================================================================== */
 
 /*
  * Position installer buttons
  */
 
-.uk-modal-dialog.pk-marketplace-modal-dialog { height: 600px; }
+.pk-modal-dialog-iframe { height: 600px; }
 
 @media (max-width: 767px) {
 
-    .uk-modal-dialog.pk-marketplace-modal-dialog {
+    .pk-modal-dialog-iframe {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -432,11 +416,17 @@
 
 }
 
-.pk-marketplace-modal-action {
+.pk-modal-dialog-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: @modal-dialog-padding;
+    right: @modal-dialog-padding;
 }
+
+
+
+
+
+
 
 
 /* Dashboard view
