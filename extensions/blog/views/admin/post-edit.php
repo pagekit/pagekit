@@ -28,7 +28,7 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
                 <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
             </div>
             <div class="uk-form-row">
-                <v-editor id="post-content" value="{{ post.content }}" options="{{ {markdown : post.data.markdown} }}"></v-editor>
+                <v-editor id="post-content" value="{{@ post.content }}" options="{{ {markdown : post.data.markdown} }}"></v-editor>
             </div>
 
             <div class="uk-form-row">

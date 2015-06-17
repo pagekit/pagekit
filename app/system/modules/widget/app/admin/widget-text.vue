@@ -5,7 +5,7 @@
     <div class="uk-form-row">
         <div class="uk-form-controls">
 
-            <v-editor value="{{ widget.settings.content }}" options="{{ {markdown : widget.settings.markdown} }}"></v-editor>
+            <v-editor value="{{@ widget.settings.content }}" options="{{ {markdown : widget.settings.markdown} }}"></v-editor>
 
             <p class="uk-form-controls-condensed">
                 <label><input type="checkbox" name="widget[settings][markdown]" v-model="widget.settings.markdown"> {{ 'Enable Markdown' | trans }}</label>

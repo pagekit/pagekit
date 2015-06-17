@@ -10,7 +10,7 @@
     <div class="uk-form-row">
         <label for="form-url" class="uk-form-label">{{ 'Content' | trans }}</label>
         <div class="uk-form-controls">
-            <v-editor id="post-content" name="page[content]" value="{{ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
+            <v-editor id="post-content" name="page[content]" value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
         </div>
     </div>
 
