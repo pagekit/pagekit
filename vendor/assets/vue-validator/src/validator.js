@@ -46,7 +46,9 @@ module.exports = {
         form.dirs.splice(form.dirs.indexOf(dir), 1);
 
         if (!form.dirs.length) {
-            _.off(dir.el.form, 'submit', form.handler);
+            if (form.form) {
+                _.off(form.form, 'submit', form.handler);
+            }
             form.vm.$delete(dir.form);
             delete this.validators[dir.form];
         }
