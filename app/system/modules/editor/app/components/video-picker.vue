@@ -6,23 +6,29 @@
             <div v-show="view == 'settings'">
                 <h1 class="uk-h3">{{ 'Video' | trans }}</h1>
 
-                <div class="uk-grid">
-                    <div class="uk-width-1-3 uk-text-center">
-                        <video-view src="{{ video.src }}"></video-view>
-                    </div>
 
-                    <div class="uk-width-2-3">
 
-                        <div class="uk-form-row">
-                            <input type="text" class="uk-width-4-5" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
-                            <button type="button" class="uk-button uk-float-right uk-width-1-6" v-on="click: openFinder">{{ 'Select video' | trans }}</button>
+                <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-on="click: openFinder" v-if="!video.src">
+                    <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
+                    <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
+                </a>
+
+                <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle" v-if="video.src">
+                    <video-view src="{{ video.src }}"></video-view>
+                    <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                        <div>
+                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: openFinder"></a>
                         </div>
-
                     </div>
                 </div>
-                <div class="uk-form-row uk-margin-top">
-                    <button class="uk-button uk-button-primary uk-modal-close" type="button" v-on="click: update">{{ 'Update' | trans }}</button>
-                    <button class="uk-button uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+
+                <div class="uk-margin">
+                    <input type="text" class="uk-width-1-1" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
+                </div>
+
+                <div class="uk-form-row uk-margin-top uk-text-right">
+                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link uk-button-primary uk-modal-close" type="button" v-on="click: update">{{ 'Update' | trans }}</button>
                 </div>
             </div>
 
