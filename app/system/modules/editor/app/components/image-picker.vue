@@ -6,22 +6,28 @@
             <div v-show="view == 'settings'">
                 <h1 class="uk-h3">{{ 'Image' | trans }}</h1>
 
-                <div class="uk-form-row">
-                    <div class="uk-form-controls">
-                        <div class="pk-thumbnail pk-thumbnail-image" v-attr="style: style"></div>
-                        <p class="uk-margin-small-top"><a v-on="click: openFinder">{{ 'Select image' | trans }}</a></p>
+                <a class="uk-placeholder uk-text-center uk-display-block" v-on="click: openFinder">
+                    <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="style: style">
+                    <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
+                </a>
+
+                <div class="uk-overlay uk-overlay-hover pk-image-max-height" v-if="imageurl">
+                    <img v-attr="src: resolveUrl(imageurl)">
+                    <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                        <div>
+                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a>
+                        </div>
                     </div>
                 </div>
+
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
-
                     <div class="uk-form-controls">
                         <input id="form-src" type="text" class="uk-width-1-1" v-model="image.src">
                     </div>
                 </div>
                 <div class="uk-form-row">
                     <label for="form-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
-
                     <div class="uk-form-controls">
                         <input id="form-alt" type="text" class="uk-width-1-1" v-model="image.alt">
                     </div>

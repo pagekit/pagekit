@@ -3,7 +3,7 @@
     <div>
 
         <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!imageurl" v-on="click: pick()">
-            <img v-attr="src: (url+'/app/system/modules/editor/assets/images/placeholder-image.svg')" width="60" height="60" alt="{{ 'Placeholder Image' | trans }}">
+            <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: (url+'/app/system/modules/editor/assets/images/placeholder-image.svg')">
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
         </a>
 
