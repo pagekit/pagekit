@@ -44,7 +44,6 @@ module.exports = {
             this.vm.$options.partials[id] = partial = templateParser.parse(id);
         }
 
-        _.assertAsset(partial, 'partial', id);
         if (partial) {
             var filters = this.filters && this.filters.read;
             if (filters) {
