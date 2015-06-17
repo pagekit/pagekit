@@ -3,7 +3,7 @@
     <div>
 
         <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!imageurl" v-on="click: pick()">
-            <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: (url+'/app/system/modules/editor/assets/images/placeholder-image.svg')">
+            <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
         </a>
 
@@ -11,7 +11,7 @@
 
             <img v-attr="src: resolveUrl(imageurl)">
 
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center pk-overlay-border">
                 <div>
                     <ul class="uk-subnav pk-subnav-icon">
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a></li>
