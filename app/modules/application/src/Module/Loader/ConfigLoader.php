@@ -2,7 +2,7 @@
 
 namespace Pagekit\Module\Loader;
 
-class ArrayLoader implements LoaderInterface
+class ConfigLoader implements LoaderInterface
 {
     /**
      * @var array
