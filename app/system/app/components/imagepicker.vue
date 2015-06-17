@@ -11,11 +11,11 @@
 
             <img v-attr="src: resolveUrl(imageurl)">
 
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center pk-overlay-border">
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle pk-overlay-border">
                 <div>
                     <ul class="uk-subnav pk-subnav-icon">
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove Image?'"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove image?'"></a></li>
                     </ul>
                 </div>
             </div>
