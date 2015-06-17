@@ -60,6 +60,6 @@
         </div>
     </div>
 
-    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | filterBy search in 'title'">{{ 'No theme found.' | trans }}</h3>
+    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No theme found.' | trans }}</h3>
 
 </div>

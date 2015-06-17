@@ -54,6 +54,14 @@ module.exports = {
             });
         }
 
+    },
+
+    filters: {
+
+        empty: function (packages) {
+            return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
+        }
+
     }
 
 };

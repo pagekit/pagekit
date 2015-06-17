@@ -67,7 +67,7 @@
         </table>
     </div>
 
-    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | filterBy search in 'title'">{{ 'No extension found.' | trans }}</h3>
+    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No extension found.' | trans }}</h3>
 
     <div class="uk-modal" id="modal-package">
 
