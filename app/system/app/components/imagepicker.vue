@@ -7,7 +7,7 @@
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
         </a>
 
-        <div class="uk-overlay uk-overlay-hover pk-image-max-height" v-if="imageurl">
+        <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle" v-if="imageurl">
 
             <img v-attr="src: resolveUrl(imageurl)">
 
