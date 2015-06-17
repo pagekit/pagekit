@@ -15,7 +15,7 @@
                 <div>
                     <ul class="uk-subnav pk-subnav-icon">
                         <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Delete role?'"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove Image?'"></a></li>
                     </ul>
                 </div>
             </div>

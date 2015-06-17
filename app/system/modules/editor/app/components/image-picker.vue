@@ -6,16 +6,16 @@
             <div v-show="view == 'settings'">
                 <h1 class="uk-h3">{{ 'Image' | trans }}</h1>
 
-                <a class="uk-placeholder uk-text-center uk-display-block" v-on="click: openFinder">
-                    <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="style: style">
+                <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-on="click: openFinder" v-if="!image.src">
+                    <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
                     <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
                 </a>
 
-                <div class="uk-overlay uk-overlay-hover pk-image-max-height" v-if="imageurl">
-                    <img v-attr="src: resolveUrl(imageurl)">
+                <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle" v-if="image.src">
+                    <img v-attr="src: resolveUrl(image.src)">
                     <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
                         <div>
-                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a>
+                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: openFinder"></a>
                         </div>
                     </div>
                 </div>
@@ -116,6 +116,10 @@
             closeFinder: function (select) {
                 this.view = 'settings';
                 if (select) this.image.src = select;
+            },
+
+            resolveUrl: function(url) {
+                return this.$url.static(url);
             }
 
         }
