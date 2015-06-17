@@ -28,10 +28,10 @@ var Dashboard = Vue.extend({
 
     ready: function() {
 
-        var self = this;
+        var self = this, list, startindex;
 
         // widget re-ordering
-        $(this.$el).find('.uk-sortable[data-column]').each(function(){
+        var sortables = $(this.$el).find('.uk-sortable[data-column]').each(function(){
 
             UIkit.sortable(this,{group:'widgets', dragCustomClass: 'pk-sortable-dragged-panel'});
 
@@ -39,16 +39,15 @@ var Dashboard = Vue.extend({
 
             if (!mode) return;
 
-            item     = $(item)
             sortable = sortable.element ? sortable : sortable.data('sortable');
 
             switch(mode) {
                 case 'added':
                 case 'moved':
 
-                    var widgets = JSON.parse(JSON.stringify(self.widgets)), column = parseInt(sortable.element.data('column'), 10), data = {}, widget;
+                    var widgets = self.widgets, column = parseInt(sortable.element.data('column'), 10), data = {}, widget;
 
-                    sortable.element.children().each(function(idx){
+                    sortable.element.children('[data-idx]').each(function(idx){
 
                         widget = _.find(widgets, {id: this.getAttribute('data-id')});
                         widget.column = column;
@@ -59,10 +58,7 @@ var Dashboard = Vue.extend({
                         data[widget.id] = widget;
                     });
 
-                    self.$set('widgets', []);
-
                     self.$http.post('admin/dashboard/savewidgets', {widgets: data}, function() {
-                        self.$set('widgets', widgets);
                         UIkit.notify(this.$trans('Dashboard updated'));
                     });
             }

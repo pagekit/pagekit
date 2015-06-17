@@ -22,6 +22,7 @@
                 <li v-repeat="widget: widgets | column $index" data-id="{{ widget.id }}" data-idx="{{ widget.idx }}">
                     <panel class="uk-panel uk-panel-box uk-visible-hover-inline"></panel>
                 </li>
+                <li class="uk-hidden" v-if="false">Vue fix for empty lists<li>
             </ul>
 
         </div>
