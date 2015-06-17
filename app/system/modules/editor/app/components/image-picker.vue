@@ -14,7 +14,7 @@
                     <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
                 </a>
 
-                <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="image.src">
+                <div class="uk-overlay uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="image.src">
                     <img v-attr="src: resolveUrl(image.src)">
                     <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle pk-overlay-border">
                         <div>
