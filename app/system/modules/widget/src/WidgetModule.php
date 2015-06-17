@@ -19,9 +19,20 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
-        $app['module']->addFactory('widget', new ModuleFactory($app));
         $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
         // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
+
+        $app['module']->addFactory('widget', function ($module) use ($app) {
+
+            $class = is_string($module['main']) ? $module['main'] : 'Pagekit\Widget\Model\Type2';
+
+            $module = new $class($module);
+            $module->main($app);
+
+            $this->registerType($module);
+
+            return $module;
+        });
     }
 
     /**
@@ -106,13 +117,6 @@ class WidgetModule extends Module
      */
     public function getTypes()
     {
-        if (!$this->types) {
-
-            $this->registerType(new TextWidget());
-            App::trigger('widget.types', [$this]);
-
-        }
-
         return $this->types;
     }
 

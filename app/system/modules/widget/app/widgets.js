@@ -1,6 +1,4 @@
-var Vue = require('vue');
-
-module.exports = Vue.extend({
+module.exports = window.Widgets = Vue.extend({
 
     data: function () {
         return {
@@ -52,14 +50,14 @@ module.exports = Vue.extend({
 
     partials: {
 
-        'settings': require('./widget-settings.html')
+        'settings': require('./templates/widget-settings.html')
 
     },
 
     components: {
 
-        'site-text': require('./widget-text.vue'),
-        'assignment': require('./widget-assignment.vue')
+        'assignment': require('./components/widget-assignment.vue'),
+        'site-text': require('./components/widget-text.vue')
 
     }
 

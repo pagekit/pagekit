@@ -25,7 +25,7 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'widget:views/admin/index.php'
+                'name'  => 'widget:views/index.php'
             ],
             '$data' => [
                 'config' => [
@@ -51,7 +51,7 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'widget:views/admin/edit.php'
+                'name'  => 'widget:views/edit.php'
             ],
             '$data' => [
                 'widget' => $widget,

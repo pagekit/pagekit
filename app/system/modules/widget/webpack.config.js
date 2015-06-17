@@ -2,14 +2,12 @@ module.exports = [
 
     {
         entry: {
-            "widgets": "./app/admin/widget"
+            "widgets": "./app/widgets",
+            "edit": "./app/views/edit",
+            "index": "./app/views/index"
         },
         output: {
             filename: "./app/bundle/[name].js",
-            library: "Widgets"
-        },
-        externals: {
-            "vue": "Vue"
         },
         module: {
             loaders: [

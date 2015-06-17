@@ -1,4 +1,4 @@
-<?php $view->script('widget-edit', 'widget:app/admin/edit.js', ['widgets', 'editor']) ?>
+<?php $view->script('widget-edit', 'widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
 <form id="widget-edit" name="widgetForm" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 

@@ -1,4 +1,4 @@
-<?php $view->script('widget-index', 'widget:app/admin/index.js', 'widgets') ?>
+<?php $view->script('widget-index', 'widget:app/bundle/index.js', 'widgets') ?>
 
 <div id="widget-index" v-cloak>
 
