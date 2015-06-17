@@ -3,7 +3,6 @@
 use Pagekit\Application as App;
 use Pagekit\Module\Loader\ArrayLoader;
 use Pagekit\Module\Loader\AutoLoader;
-use Pagekit\Module\Loader\ModuleLoader;
 
 $loader = require __DIR__.'/autoload.php';
 $config = require __DIR__.'/config.php';
@@ -21,9 +20,8 @@ $app['module']->addPath([
     $app['path.themes'].'/*/theme.php'
 ]);
 
-$app['module']->addLoader(new ModuleLoader($app));
-$app['module']->addLoader(new AutoLoader($loader), 10);
-$app['module']->addLoader(new ArrayLoader($config), 10);
+$app['module']->addLoader(new AutoLoader($loader));
+$app['module']->addLoader(new ArrayLoader($config));
 
 if (!$app['config.file']) {
 
@@ -34,12 +32,12 @@ if (!$app['config.file']) {
         exit;
     }
 
-    $app['module']->addLoader(new ArrayLoader(require __DIR__.'/installer/config.php'), 10);
+    $app['module']->addLoader(new ArrayLoader(require __DIR__.'/installer/config.php'));
     $app['module']->load('installer');
 
 } else {
 
-    $app['module']->addLoader(new ArrayLoader(require $app['config.file']), 10);
+    $app['module']->addLoader(new ArrayLoader(require $app['config.file']));
     $app['module']->load('system');
 
 }

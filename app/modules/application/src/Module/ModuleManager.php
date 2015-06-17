@@ -2,6 +2,8 @@
 
 namespace Pagekit\Module;
 
+use Pagekit\Module\Factory\CallableFactory;
+use Pagekit\Module\Factory\FactoryInterface;
 use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
 
@@ -23,14 +25,14 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     protected $registered = [];
 
     /**
-     * @var array
+     * @var LoaderInterface[]
      */
     protected $loaders = [];
 
     /**
-     * @var LoaderInterface[]
+     * @var FactoryInterface[]
      */
-    protected $sorted = [];
+    protected $factories = [];
 
     /**
      * Get shortcut.
@@ -91,12 +93,12 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
 
         foreach ($resolved as $name => $module) {
 
-            foreach ($this->sorted as $loader) {
+            foreach ($this->loaders as $loader) {
                 $module = $loader->load($name, $module);
             }
 
-            if ($module instanceof ModuleInterface) {
-                $this->modules[$name] = $module;
+            if ($factory = $this->getFactory($module['type'])) {
+                $this->modules[$name] = $factory->create($module);
             }
         }
     }
@@ -118,20 +120,44 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      * Adds a module loader.
      *
      * @param  LoaderInterface|callable $loader
-     * @param  int                      $priority
      * @return self
      */
-    public function addLoader($loader, $priority = 0)
+    public function addLoader($loader)
     {
         if (is_callable($loader)) {
             $loader = new CallableLoader($loader);
         }
 
-        $this->loaders[$priority][] = $loader;
+        $this->loaders[] = $loader;
 
-        krsort($this->loaders);
+        return $this;
+    }
 
-        $this->sorted = call_user_func_array('array_merge', $this->loaders);
+    /**
+     *  Gets a module factory.
+     *
+     * @param  string $type
+     * @return FactoryInterface
+     */
+    public function getFactory($type)
+    {
+        return isset($this->factories[$type]) ? $this->factories[$type] : null;
+    }
+
+    /**
+     * Adds a module factory.
+     *
+     * @param  string                    $type
+     * @param  FactoryInterface|callable $factory
+     * @return self
+     */
+    public function addFactory($type, $factory)
+    {
+        if (is_callable($factory)) {
+            $factory = new CallableFactory($factory);
+        }
+
+        $this->factories[$type] = $factory;
 
         return $this;
     }

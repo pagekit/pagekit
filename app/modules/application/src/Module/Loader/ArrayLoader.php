@@ -21,7 +21,7 @@ class ArrayLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, $module)
+    public function load($name, array $module)
     {
         if (isset($this->values[$name])) {
             $module = array_replace_recursive($module, ['config' => $this->values[$name]]);

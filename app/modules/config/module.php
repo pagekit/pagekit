@@ -20,7 +20,7 @@ return [
                 }
 
                 return $module;
-            }, 5);
+            });
         }
 
         $app->on('app.response', function () use ($app) {

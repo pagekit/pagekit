@@ -4,6 +4,7 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Module\Factory\ModuleFactory;
 use Pagekit\Util\Arr;
 use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
@@ -18,12 +19,9 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
-        $app['module']->addLoader(new WidgetLoader($app));
-
-        $app->on('app.request', function () use ($app) {
-            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
-            // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
-        });
+        $app['module']->addFactory('widget', new ModuleFactory($app));
+        $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
+        // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
     }
 
     /**

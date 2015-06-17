@@ -24,9 +24,9 @@ class AutoLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, $module)
+    public function load($name, array $module)
     {
-        if (is_array($module) && isset($module['autoload'])) {
+        if (isset($module['autoload'])) {
             foreach ($module['autoload'] as $namespace => $path) {
                 $this->loader->addPsr4($namespace, $this->resolvePath($module, $path));
             }

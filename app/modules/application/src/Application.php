@@ -7,6 +7,7 @@ use Pagekit\Application\Traits\RouterTrait;
 use Pagekit\Application\Traits\StaticTrait;
 use Pagekit\Event\EventDispatcher;
 use Pagekit\Module\ModuleManager;
+use Pagekit\Module\Factory\ModuleFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends Container
@@ -27,12 +28,16 @@ class Application extends Container
     {
         parent::__construct($values);
 
-        $this['events'] = function() {
+        $this['events'] = function () {
             return new EventDispatcher();
         };
 
-        $this['module'] = function() {
-            return new ModuleManager();
+        $this['module'] = function () {
+
+            $manager = new ModuleManager();
+            $manager->addFactory('module', new ModuleFactory($this));
+
+            return $manager;
         };
     }
 

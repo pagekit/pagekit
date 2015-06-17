@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Module\Loader\ModuleLoader;
+use Pagekit\Module\Factory\ModuleFactory;
 use Pagekit\System\ExtensionRepository;
 use Pagekit\System\Package\PackageManager;
 use Pagekit\System\ThemeRepository;
@@ -17,8 +17,8 @@ return [
                 ->addPath($app['path.themes'].'/*/theme.json');
         };
 
-        $app['module']->addLoader(new ModuleLoader($app, 'theme', 'Pagekit\\System\\Theme'));
-        $app['module']->addLoader(new ModuleLoader($app, 'extension', 'Pagekit\\System\\Extension'));
+        $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\\System\\Theme'));
+        $app['module']->addFactory('extension', new ModuleFactory($app, 'Pagekit\\System\\Extension'));
 
         $app->on('app.request', function () use ($app) {
 

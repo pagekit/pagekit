@@ -12,6 +12,8 @@ return [
 
     ],
 
+    'include' => 'widgets/widget*.php',
+
     'routes' => [
 
         '/widget' => [

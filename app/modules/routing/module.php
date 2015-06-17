@@ -32,15 +32,14 @@ return [
 
         $app['module']->addLoader(function ($name, $module) use ($app) {
 
-            if (is_object($module) && isset($module->routes)) {
-                foreach ($module->routes as $path => $route) {
+            if (isset($module['routes'])) {
+                foreach ($module['routes'] as $path => $route) {
                     $app['routes']->add(array_merge(['path' => $path], $route));
                 }
             }
 
             return $module;
-
-        }, -10);
+        });
 
     },
 

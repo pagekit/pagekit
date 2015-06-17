@@ -31,7 +31,8 @@ return [
         'system/site',
         'system/theme',
         'system/user',
-        'system/widget'
+        'system/widget',
+        'system/widget-text'
 
     ],
 

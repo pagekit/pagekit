@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Module\Loader;
+namespace Pagekit\Module\Factory;
 
-class CallableLoader implements LoaderInterface
+class CallableFactory implements FactoryInterface
 {
     /**
      * @var callable
@@ -21,8 +21,8 @@ class CallableLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, array $module)
+    public function create(array $module)
     {
-        return call_user_func($this->callable, $name, $module);
+        return call_user_func($this->callable, $module);
     }
 }
