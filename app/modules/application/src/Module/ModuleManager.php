@@ -95,7 +95,9 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                 $module = $loader->load($name, $module);
             }
 
-            $this->modules[$name] = $module;
+            if ($module instanceof ModuleInterface) {
+                $this->modules[$name] = $module;
+            }
         }
     }
 

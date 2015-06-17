@@ -5,7 +5,7 @@ namespace Pagekit\Module;
 use Pagekit\Application as App;
 use Pagekit\Util\Arr;
 
-class Module
+class Module implements ModuleInterface
 {
     /**
      * Constructor.
