@@ -49,39 +49,43 @@ return [
 
     },
 
-    'boot' => function ($app) {
+    'events' => [
 
-        if (!isset($app['debugbar'])) {
-            return;
-        }
+        'boot' => function ($app) {
 
-        $app->subscribe($app['debugbar']);
-
-        $app->on('app.request', function ($event) use ($app) {
-
-            if (!$event->isMasterRequest()) {
+            if (!isset($app['debugbar'])) {
                 return;
             }
 
-            if (isset($app['auth'])) {
-                $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
-            }
+            $app->subscribe($app['debugbar']);
 
-            $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
-            $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
-            $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
-        });
+            $app->on('app.request', function ($event) use ($app) {
 
-        $app['routes']->add([
-            'name' => '_debugbar',
-            'path' => '_debugbar/{id}',
-            'defaults' => ['_debugbar' => false],
-            'controller' => function ($id) use ($app) {
-                return $app['response']->json($app['debugbar']->getStorage()->get($id));
-            }
-        ]);
+                if (!$event->isMasterRequest()) {
+                    return;
+                }
 
-    },
+                if (isset($app['auth'])) {
+                    $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
+                }
+
+                $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
+                $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
+                $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
+            });
+
+            $app['routes']->add([
+                'name' => '_debugbar',
+                'path' => '_debugbar/{id}',
+                'defaults' => ['_debugbar' => false],
+                'controller' => function ($id) use ($app) {
+                    return $app['response']->json($app['debugbar']->getStorage()->get($id));
+                }
+            ]);
+
+        }
+
+    ],
 
     'require' => [
 

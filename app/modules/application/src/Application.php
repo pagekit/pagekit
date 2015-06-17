@@ -33,12 +33,8 @@ class Application extends Container
         };
 
         $this['module'] = function () {
-
-            $manager = new ModuleManager();
-            $manager->addFactory('module', new ModuleFactory($this));
-
-            return $manager;
-        };
+            return new ModuleManager($this);
+         };
     }
 
     /**
@@ -48,13 +44,7 @@ class Application extends Container
     {
         if (!$this->booted) {
 
-            foreach ($this['module'] as $module) {
-                if (isset($module->boot)) {
-                    call_user_func($module->boot, $this);
-                } elseif (method_exists($module, 'boot')) {
-                    $module->boot($this);
-                }
-            }
+            $this->trigger('boot', [$this]);
 
             $this->booted = true;
         }

@@ -3,9 +3,10 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application as App;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Util\Arr;
 
-class Module implements ModuleInterface
+class Module implements ModuleInterface, EventSubscriberInterface
 {
     /**
      * Constructor.
@@ -16,7 +17,7 @@ class Module implements ModuleInterface
     {
         foreach ($values as $key => $value) {
             if ($value instanceof \Closure) {
-                $this->$key = $value->bindTo($this);
+                $this->$key = $value->bindTo($this, $this);
             } else {
                 $this->$key = $value;
             }
@@ -48,4 +49,13 @@ class Module implements ModuleInterface
 
         return Arr::get($this->config, $key, $default);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function subscribe()
+    {
+        return isset($this->events) ? $this->events : [];
+    }
+
 }

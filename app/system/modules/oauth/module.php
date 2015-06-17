@@ -12,14 +12,6 @@ return [
             return new OAuthHelper;
         };
 
-        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
-            $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
-            $view->data('$settings', ['options' => [$this->name => $this->config]]);
-            $view->data('$oauth', [
-                'providers' => $app['oauth']->getProvider(),
-                'redirect_url' => $app['oauth']->getRedirectUrl()
-            ]);
-        });
     },
 
     'autoload' => [
@@ -34,6 +26,21 @@ return [
             'name' => '@system',
             'controller' => 'Pagekit\\OAuth\\Controller\\OAuthController'
         ]
+
+    ],
+
+    'events' => [
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+
+            $view->script('settings-oauth', 'app/system/modules/oauth/app/bundle/settings.js', 'settings');
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
+            $view->data('$oauth', [
+                'providers' => $app['oauth']->getProvider(),
+                'redirect_url' => $app['oauth']->getRedirectUrl()
+            ]);
+
+        }
 
     ],
 

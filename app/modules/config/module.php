@@ -23,12 +23,6 @@ return [
             });
         }
 
-        $app->on('app.response', function () use ($app) {
-            foreach ($app['config'] as $name => $config) {
-                $app['config']->set($name, $config);
-            }
-        }, 100);
-
     },
 
     'require' => [
@@ -48,6 +42,16 @@ return [
         'table'  => '@system_config',
         'prefix' => 'config.',
         'cache'  => ''
+
+    ],
+
+    'events' => [
+
+        'app.response' => [function () use ($app) {
+            foreach ($app['config'] as $name => $config) {
+                $app['config']->set($name, $config);
+            }
+        }, 100]
 
     ]
 

@@ -3,10 +3,7 @@
 namespace Pagekit\System;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Event\ExceptionListener;
 use Pagekit\Module\Module;
-use Pagekit\System\Event\MigrationListener;
-use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
 
@@ -26,27 +23,6 @@ class SystemModule extends Module
         $app['module']['auth']->config['rememberme.key'] = $this->config('key');
 
         $app['db.em']; // -TODO- fix me
-
-        // TODO accesses "view" to early
-        $app['view']->on('messages', function ($event) use ($app) {
-
-            $result = '';
-
-            if ($app['message']->peekAll()) {
-                foreach ($app['message']->levels() as $level) {
-                    if ($messages = $app['message']->get($level)) {
-                        foreach ($messages as $message) {
-                            $result .= sprintf('<div class="uk-alert uk-alert-%1$s" data-status="%1$s">%2$s</div>', $level == 'error' ? 'danger' : $level, $message);
-                        }
-                    }
-                }
-            }
-
-            if ($result) {
-                $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
-            }
-
-        });
 
         foreach ($this->config['extensions'] as $module) {
             try {
@@ -68,34 +44,6 @@ class SystemModule extends Module
             $migrator->setLoader(new FilesystemLoader());
             return $migrator;
         });
-    }
-
-    public function boot($app)
-    {
-        if (!$app['debug']) {
-            $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
-        }
-
-        $app->subscribe(
-            new MigrationListener,
-            new SystemListener
-        );
-
-        if ($app->inConsole()) {
-            $app['isAdmin'] = false;
-        }
-
-        $app->on('app.request', function ($event, $request) use ($app) {
-
-            if (!$event->isMasterRequest()) {
-                return;
-            }
-
-            $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
-            $app['intl']->setDefaultLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
-
-        }, 50);
-
     }
 
     /**

@@ -43,18 +43,33 @@ return [
 
     },
 
-    'boot' => function ($app) {
+    'events' => [
 
-        $app->subscribe(
-            new ConfigureRouteListener,
-            new ParamFetcherListener(new ParamFetcher(new FilterManager)),
-            new RouterListener($app['router']),
-            new AliasListener($app['routes'])
-        );
+        'boot' => function ($event, $app) {
 
-        $app['middleware'];
+            $app->subscribe(
+                new ConfigureRouteListener,
+                new ParamFetcherListener(new ParamFetcher(new FilterManager)),
+                new RouterListener($app['router']),
+                new AliasListener($app['routes'])
+            );
 
-        $app->on('app.controller', function ($event, $request) use ($app) {
+            $app['middleware'];
+
+            $app->error(function (HttpException $e) use ($app) {
+
+                $request = $app['router']->getRequest();
+                $types   = $request->getAcceptableContentTypes();
+
+                if ('json' == $request->getFormat(array_shift($types))) {
+                    return new JsonResponse($e->getMessage(), $e->getCode());
+                }
+
+            }, -10);
+
+        },
+
+        'app.controller' => [function ($event, $request) use ($app) {
 
             $name = $request->attributes->get('_route', '');
 
@@ -62,20 +77,9 @@ return [
                 $request->attributes->set('_controller', $callback);
             };
 
-        }, 130);
+        }, 130]
 
-        $app->error(function (HttpException $e) use ($app) {
-
-            $request = $app['router']->getRequest();
-            $types   = $request->getAcceptableContentTypes();
-
-            if ('json' == $request->getFormat(array_shift($types))) {
-                return new JsonResponse($e->getMessage(), $e->getCode());
-            }
-
-        }, -10);
-
-    },
+    ],
 
     'require' => [
 

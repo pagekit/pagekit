@@ -2,13 +2,20 @@
 
 namespace Pagekit\Module;
 
+use Pagekit\Application;
 use Pagekit\Module\Factory\CallableFactory;
 use Pagekit\Module\Factory\FactoryInterface;
+use Pagekit\Module\Factory\ModuleFactory;
 use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
 
 class ModuleManager implements \ArrayAccess, \IteratorAggregate
 {
+    /**
+     * @var Application
+     */
+    protected $app;
+
     /**
      * @var array
      */
@@ -33,6 +40,17 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      * @var FactoryInterface[]
      */
     protected $factories = [];
+
+    /**
+     * Constructor.
+     *
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+        $this->addFactory('module', new ModuleFactory($app));
+    }
 
     /**
      * Get shortcut.
@@ -221,6 +239,8 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     protected function registerModules()
     {
         $includes = [];
+
+        $app = $this->app;
 
         foreach ($this->paths as $path) {
 

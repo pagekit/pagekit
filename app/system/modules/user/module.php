@@ -1,5 +1,11 @@
 <?php
 
+use Pagekit\User\Event\AccessListener;
+use Pagekit\User\Event\AuthorizationListener;
+use Pagekit\User\Event\LoginAttemptListener;
+use Pagekit\User\Event\UserListener;
+use Pagekit\User\Widget\LoginWidget;
+
 return [
 
     'name' => 'system/user',
@@ -108,6 +114,28 @@ return [
         'auth' => [
             'refresh_token' => false
         ]
+
+    ],
+
+    'events' => [
+
+        'boot' => function($event, $app) {
+            $app->subscribe(
+                new AccessListener,
+                new AuthorizationListener,
+                new LoginAttemptListener,
+                new UserListener
+            );
+        },
+
+        'widget.types' => function ($event, $widgets) {
+            $widgets->registerType(new LoginWidget());
+        },
+
+        'app.request' => function () use ($app) {
+            $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
+            $app['scripts']->register('widget-user', 'system/user:app/bundle/widgets/user.js', '~dashboard');
+        }
 
     ]
 

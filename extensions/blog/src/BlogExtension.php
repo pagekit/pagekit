@@ -3,33 +3,10 @@
 namespace Pagekit\Blog;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\Content\ReadmorePlugin;
-use Pagekit\Blog\Event\CommentListener;
-use Pagekit\Blog\Event\RouteListener;
 use Pagekit\System\Extension;
 
 class BlogExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function main(App $app)
-    {
-        $app->subscribe(
-            new RouteListener,
-            new CommentListener,
-            new ReadmorePlugin
-        );
-
-        $app->on('app.request', function() use ($app) {
-            $app['module']->get('system/site')->setFrontpage('@blog/site');
-        }, 175);
-
-        $app->on('app.request', function() use ($app) {
-            $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
-        });
-    }
-
     public function enable()
     {
         if ($version = App::migrator()->create('blog:migrations', $this->config('version'))->run()) {

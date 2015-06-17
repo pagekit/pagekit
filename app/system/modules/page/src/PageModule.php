@@ -3,54 +3,21 @@
 namespace Pagekit\Page;
 
 use Pagekit\Application as App;
-use Pagekit\Database\Event\EntityEvent;
-use Pagekit\Editor\Event\EditorLoadEvent;
 use Pagekit\Page\Entity\Page;
+use Pagekit\Site\Entity\Node;
 use Pagekit\System\Extension;
 
 class PageModule extends Extension
 {
+    // TODO: move to SiteListener
+
     /**
-     * {@inheritdoc}
+     * Find page entity by node.
+     *
+     * @param  Node $node
+     * @return Page
      */
-    public function main(App $app)
-    {
-        $app->on('view.site:views/edit', function($event, $view) use ($app) {
-            $view->style('codemirror');
-            $view->script('page-site', 'system/page:app/bundle/site.js', ['site-edit', 'editor']);
-        });
-
-        $app->on('site.node.preSave', function(EntityEvent $event) use ($app) {
-            $node = $event->getEntity();
-            $data = $app['request']->get('page');
-
-            if ('page' !== $node->getType() or $data === null) {
-                return;
-            }
-
-            $page = $this->getPage($node);
-            $page->save($data);
-
-            $node->set('variables', ['id' => $page->getId()]);
-        });
-
-        $app->on('site.node.postDelete', function(EntityEvent $event) use ($app) {
-            $node = $event->getEntity();
-
-            if ('page' !== $node->getType()) {
-                return;
-            }
-
-            $page = $this->getPage($node);
-
-            if ($page->getId()) {
-                $page->delete();
-            }
-        });
-
-    }
-
-    protected function getPage($node)
+    public function getPage(Node $node)
     {
         $variables = $node->get('variables', []);
 

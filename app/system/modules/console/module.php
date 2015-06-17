@@ -4,9 +4,15 @@ return [
 
     'name' => 'system/console',
 
-    'main' => function ($app) {
+    'autoload' => [
 
-        $app->on('console.init', function ($event, $console) {
+        'Pagekit\\Console\\' => 'src'
+
+    ],
+
+    'events' => [
+
+        'console.init' => function ($event, $console) {
 
             $namespace = 'Pagekit\\Console\\';
 
@@ -15,13 +21,7 @@ return [
                 $console->add(new $class);
             }
 
-        });
-
-    },
-
-    'autoload' => [
-
-        'Pagekit\\Console\\' => 'src'
+        }
 
     ]
 

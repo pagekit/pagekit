@@ -8,19 +8,8 @@ return [
 
     'main' => function ($app) {
 
-        $app->on('app.request', function () use ($app) {
-
-            $app['view']->addHelper(new FinderHelper());
-            $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
-
-        });
-
         $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
         $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
-
-        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
-            $view->data('$settings', ['config' => [$this->name => $this->config]]);
-        });
 
     },
 
@@ -46,6 +35,26 @@ return [
     'resources' => [
 
         'system/finder:' => ''
+
+    ],
+
+    'events' => [
+
+        'boot' => function($event, $app) {
+            $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
+            $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
+        },
+
+        'app.request' => function () use ($app) {
+
+            $app['view']->addHelper(new FinderHelper());
+            $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
+
+        },
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+            $view->data('$settings', ['config' => [$this->name => $this->config]]);
+        }
 
     ],
 

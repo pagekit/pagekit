@@ -4,9 +4,56 @@ return [
 
     'name' => 'system/settings',
 
-    'main' => function ($app) {
+    'autoload' => [
 
-        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
+        'Pagekit\\System\\' => 'src'
+
+    ],
+
+    'routes' => [
+
+        '/system/settings' => [
+            'name' => '@system/settings',
+            'controller' => 'Pagekit\\System\\Controller\\SettingsController'
+        ]
+
+    ],
+
+    'resources' => [
+
+        'settings:' => ''
+
+    ],
+
+    'permissions' => [
+
+        'system: access settings' => [
+            'title' => 'Access system settings',
+            'trusted' => true
+        ]
+
+    ],
+
+    'menu' => [
+
+        'system: system' => [
+            'label' => 'System',
+            'icon' => 'settings:assets/images/icon-settings.svg',
+            'url' => '@system/settings',
+            'priority' => 120
+        ],
+
+        'system: settings' => [
+            'label' => 'Settings',
+            'parent' => 'system: system',
+            'url' => '@system/settings',
+        ]
+
+    ],
+
+    'events' => [
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
 
             $locales = [];
 
@@ -56,54 +103,7 @@ return [
                 ]
             ]);
 
-        });
-
-    },
-
-    'autoload' => [
-
-        'Pagekit\\System\\' => 'src'
-
-    ],
-
-    'routes' => [
-
-        '/system/settings' => [
-            'name' => '@system/settings',
-            'controller' => 'Pagekit\\System\\Controller\\SettingsController'
-        ]
-
-    ],
-
-    'resources' => [
-
-        'settings:' => ''
-
-    ],
-
-    'permissions' => [
-
-        'system: access settings' => [
-            'title' => 'Access system settings',
-            'trusted' => true
-        ]
-
-    ],
-
-    'menu' => [
-
-        'system: system' => [
-            'label' => 'System',
-            'icon' => 'settings:assets/images/icon-settings.svg',
-            'url' => '@system/settings',
-            'priority' => 120
-        ],
-
-        'system: settings' => [
-            'label' => 'Settings',
-            'parent' => 'system: system',
-            'url' => '@system/settings',
-        ]
+        }
 
     ]
 

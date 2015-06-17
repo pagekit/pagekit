@@ -32,19 +32,22 @@ return [
 
     },
 
-    'boot' => function ($app) {
+    'events' => [
 
-        $app->on('app.request', function ($event, $request) use ($app) {
+        'boot' => function ($event, $app) {
+
+            StreamWrapper::setFilesystem($app['file']);
+
+        },
+
+        'app.request' => [function ($event, $request) use ($app) {
 
             $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
 
             $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));
 
-        }, 100);
-
-        StreamWrapper::setFilesystem($app['file']);
-
-    },
+        }, 100]
+    ],
 
     'autoload' => [
 

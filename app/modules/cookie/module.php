@@ -19,14 +19,6 @@ return [
             return new CookieJar($app['request'], $path, $this->config['domain']);
         };
 
-        $app->on('app.response', function ($event) use ($app) {
-            if (isset($app['cookie.init'])) {
-                foreach ($app['cookie']->getQueuedCookies() as $cookie) {
-                    $event->getResponse()->headers->setCookie($cookie);
-                }
-            }
-        });
-
     },
 
     'autoload' => [
@@ -39,6 +31,18 @@ return [
 
         'path'   => null,
         'domain' => null,
+
+    ],
+
+    'events' => [
+
+        'app.response' => function ($event) use ($app) {
+            if (isset($app['cookie.init'])) {
+                foreach ($app['cookie']->getQueuedCookies() as $cookie) {
+                    $event->getResponse()->headers->setCookie($cookie);
+                }
+            }
+        }
 
     ]
 

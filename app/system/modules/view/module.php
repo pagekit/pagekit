@@ -27,7 +27,24 @@ return [
             return $assets;
         });
 
-        $app->on('app.request', function () use ($app) {
+    },
+
+    'autoload' => [
+
+        'Pagekit\\View\\' => 'src'
+
+    ],
+
+    'events' => [
+
+        'boot' => function($event, $app) {
+            $app->subscribe(
+                new CanonicalListener(),
+                new ResponseListener()
+            );
+        },
+
+        'app.request' => [function () use ($app) {
 
             $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
@@ -57,15 +74,7 @@ return [
 
             $app['scripts']->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
 
-        }, 30);
-
-        $app->subscribe(new CanonicalListener(), new ResponseListener());
-
-    },
-
-    'autoload' => [
-
-        'Pagekit\\View\\' => 'src'
+        }, 30]
 
     ]
 

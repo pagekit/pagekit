@@ -1,5 +1,9 @@
 <?php
 
+use Pagekit\Kernel\Event\ExceptionListener;
+use Pagekit\System\Event\MigrationListener;
+use Pagekit\System\Event\SystemListener;
+
 return [
 
     'name' => 'system',
@@ -83,6 +87,58 @@ return [
         'timezone' => 'UTC',
 
         'extensions' => []
+
+    ],
+
+    'events' => [
+
+        'boot' => function ($event, $app) {
+
+            if (!$app['debug']) {
+                $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
+            }
+
+            $app->subscribe(
+                new MigrationListener,
+                new SystemListener
+            );
+
+            if ($app->inConsole()) {
+                $app['isAdmin'] = false;
+            }
+
+            $app->on('app.request', function ($event, $request) use ($app) {
+
+                if (!$event->isMasterRequest()) {
+                    return;
+                }
+
+                $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app['intl']->setDefaultLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
+
+            }, 50);
+
+        },
+
+        'view.messages' => function ($event) use ($app) {
+
+            $result = '';
+
+            if ($app['message']->peekAll()) {
+                foreach ($app['message']->levels() as $level) {
+                    if ($messages = $app['message']->get($level)) {
+                        foreach ($messages as $message) {
+                            $result .= sprintf('<div class="uk-alert uk-alert-%1$s" data-status="%1$s">%2$s</div>', $level == 'error' ? 'danger' : $level, $message);
+                        }
+                    }
+                }
+            }
+
+            if ($result) {
+                $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+            }
+
+        }
 
     ]
 

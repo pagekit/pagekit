@@ -5,7 +5,6 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Site\Event\MaintenanceListener;
 
 class SiteModule extends Module
 {
@@ -25,46 +24,6 @@ class SiteModule extends Module
 
             return new Node;
         };
-
-        $app->on('app.request', function () use ($app) {
-
-            foreach (Node::where(['status = ?'], [1])->get() as $node) {
-
-                if (!$type = $this->getType($node->getType())) {
-                    continue;
-                }
-
-                $type['path']     = $node->getPath();
-                $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()]);
-
-                $route = null;
-                if (isset($type['alias'])) {
-                    $route = $app['routes']->alias($type['path'], $this->getLink($node, $type['alias']), $type['defaults']);
-                } elseif (isset($type['controller'])) {
-                    $route = $app['routes']->add($type);
-                }
-
-                if ($route && $node->getId() == $this->config('frontpage')) {
-                    $this->setFrontpage($route->getName());
-                }
-
-            }
-
-            if ($this->frontpage) {
-                $app['routes']->alias('/', $this->frontpage);
-            } else {
-                $app['routes']->get('/', function () {
-                    return __('No Frontpage assigned.');
-                });
-            }
-
-        }, 110);
-
-    }
-
-    public function boot($app)
-    {
-        $app->subscribe(new MaintenanceListener());
     }
 
     /**
@@ -188,37 +147,4 @@ class SiteModule extends Module
         $this->frontpage = $name;
     }
 
-    /**
-     * Gets the node's link.
-     *
-     * @param Node   $node
-     * @param string $url
-     * @return string
-     */
-    protected function getLink(Node $node, $url = '')
-    {
-        return $this->parseQuery($node->get('url', $url), $node->get('variables', []));
-    }
-
-    /**
-     * Parses query parameters into a URL.
-     *
-     * @param  string $url
-     * @param  array  $parameters
-     * @return string
-     */
-    protected function parseQuery($url, $parameters = [])
-    {
-        if ($query = substr(strstr($url, '?'), 1)) {
-            parse_str($query, $params);
-            $url        = strstr($url, '?', true);
-            $parameters = array_replace($parameters, $params);
-        }
-
-        if ($query = http_build_query($parameters, '', '&')) {
-            $url .= '?'.$query;
-        }
-
-        return $url;
-    }
 }

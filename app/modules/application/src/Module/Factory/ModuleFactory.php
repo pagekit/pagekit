@@ -38,6 +38,10 @@ class ModuleFactory implements FactoryInterface
         $module = new $class($module);
         $module->main($this->app);
 
+        if (is_a($module, 'Pagekit\Event\EventSubscriberInterface')) {
+            $this->app->subscribe($module);
+        }
+
         return $module;
     }
 }

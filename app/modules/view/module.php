@@ -74,13 +74,13 @@ return [
 
     },
 
-    'boot' => function ($app) {
+    'events' => [
 
-        $app->on('app.request', function () use ($app) {
+        'app.request' => function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));
-        });
+        }
 
-    },
+    ],
 
     'autoload' => [
 

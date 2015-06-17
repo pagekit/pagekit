@@ -65,15 +65,25 @@ class EventDispatcher implements EventDispatcherInterface
     public function subscribe(EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->subscribe() as $event => $params) {
+
             if (is_string($params)) {
                 $this->on($event, [$subscriber, $params]);
+            } elseif (is_callable($params)) {
+                $this->on($event, $params->bindTo($subscriber, $subscriber));
             } elseif (is_string($params[0])) {
                 $this->on($event, [$subscriber, $params[0]], isset($params[1]) ? $params[1] : 0);
+            } elseif (is_callable($params[0])) {
+                $this->on($event, $params[0]->bindTo($subscriber, $subscriber), isset($params[1]) ? $params[1] : 0);
             } else {
                 foreach ($params as $listener) {
-                    $this->on($event, [$subscriber, $listener[0]], isset($listener[1]) ? $listener[1] : 0);
+                    if (is_string($listener[0])) {
+                        $this->on($event, [$subscriber, $listener[0]], isset($listener[1]) ? $listener[1] : 0);
+                    } else {
+                        $this->on($event, $listener[0]->bindTo($subscriber, $subscriber), isset($listener[1]) ? $listener[1] : 0);
+                    }
                 }
             }
+
         }
     }
 

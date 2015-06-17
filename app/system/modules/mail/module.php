@@ -72,20 +72,6 @@ return [
             return new Swift_SpoolTransport($app['swift.spool']);
         };
 
-        $app->on('app.terminate', function () use ($app) {
-            if ($app['mailer.initialized']) {
-                try {
-                    $app['swift.spooltransport']->getSpool()->flushQueue($app['swift.transport']);
-                } catch (\Exception $e) {
-                }
-            }
-        });
-
-        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
-            $view->data('$mail', ['ssl' => extension_loaded('openssl')]);
-            $view->data('$settings', ['options' => [$this->name => $this->config]]);
-            $view->script('settings-mail', 'app/system/modules/mail/app/bundle/settings.js', 'settings');
-        });
     },
 
     'autoload' => [
@@ -100,6 +86,27 @@ return [
             'name' => '@system',
             'controller' => 'Pagekit\\Mail\\Controller\\MailController'
         ]
+
+    ],
+
+    'events' => [
+
+        'app.terminate' => function () use ($app) {
+
+            if ($app['mailer.initialized']) {
+                try {
+                    $app['swift.spooltransport']->getSpool()->flushQueue($app['swift.transport']);
+                } catch (\Exception $e) {
+                }
+            }
+
+        },
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+            $view->data('$mail', ['ssl' => extension_loaded('openssl')]);
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
+            $view->script('settings-mail', 'app/system/modules/mail/app/bundle/settings.js', 'settings');
+        }
 
     ],
 

@@ -39,10 +39,18 @@ return [
             return new RequestStack();
         };
 
-        // redirect the request if it has a trailing slash
-        if (!$app->inConsole()) {
+    },
 
-            $app->on('app.request', function ($event, $request) {
+    'events' => [
+
+        'app.request' => [
+
+            // redirect the request if it has a trailing slash
+            function ($event, $request) use ($app) {
+
+                if (!$app->inConsole()) {
+                    return;
+                }
 
                 $path = $request->getPathInfo();
 
@@ -50,10 +58,10 @@ return [
                     $event->setResponse(new RedirectResponse(rtrim($request->getUriForPath($path), '/'), 301));
                 }
 
-            }, 200);
+            }, 200
+        ]
 
-        }
-    },
+    ],
 
     'autoload' => [
 

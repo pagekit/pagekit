@@ -1,5 +1,9 @@
 <?php
 
+use Pagekit\Blog\Content\ReadmorePlugin;
+use Pagekit\Blog\Event\CommentListener;
+use Pagekit\Blog\Event\RouteListener;
+
 return [
 
     'name' => 'blog',
@@ -150,6 +154,30 @@ return [
         'feed' => [
             'type' => 'rss2',
             'limit' => 20
+        ]
+
+    ],
+
+    'events' => [
+
+        'boot' => function($event, $app) {
+            $app->subscribe(
+                new RouteListener,
+                new CommentListener,
+                new ReadmorePlugin
+            );
+        },
+
+        'app.request' => [
+
+            [function() use ($app) {
+                $app['module']->get('system/site')->setFrontpage('@blog/site');
+            }, 175],
+
+            [function() use ($app) {
+                $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
+            }]
+
         ]
 
     ]

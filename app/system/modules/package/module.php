@@ -20,22 +20,28 @@ return [
         $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\\System\\Theme'));
         $app['module']->addFactory('extension', new ModuleFactory($app, 'Pagekit\\System\\Extension'));
 
-        $app->on('app.request', function () use ($app) {
-
-            $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'vue');
-            $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['vue', 'uikit-upload']);
-
-        }, 120);
-
-        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
-            $view->data('$settings', ['options' => [$this->name => $this->config]]);
-        });
-
     },
 
     'autoload' => [
 
         'Pagekit\\System\\' => 'src'
+
+    ],
+
+    'events' => [
+
+        'app.request' => [function () use ($app) {
+
+            $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'vue');
+            $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['vue', 'uikit-upload']);
+
+        }, 120],
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
+
+        }
 
     ],
 
@@ -125,7 +131,7 @@ return [
 
         'api' => [
             'key' => '',
-            'url' => 'http://pagekit.com/api',
+            'url' => 'http://pagekit.com/api'
         ],
 
         'release_channel' => 'stable'
