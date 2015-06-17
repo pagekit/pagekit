@@ -38,11 +38,6 @@
 
                 <v-finder root="{{ finder.root }}" v-ref="finder"></v-finder>
 
-                <div class="uk-margin-top">
-                    <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !finder.select" v-on="click: closeFinder(finder.select)">{{ 'Select' | trans }}</button>
-                    <button class="uk-button" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
-                </div>
-
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
                     <button class="uk-button uk-button-link" type="button" v-attr="disabled: !finder.select" v-on="click: closeFinder(finder.select)">{{ 'Select' | trans }}</button>
