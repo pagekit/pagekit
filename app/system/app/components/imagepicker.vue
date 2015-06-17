@@ -4,7 +4,7 @@
 
         <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!imageurl" v-on="click: pick()">
             <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
-            <p class="uk-text-muted uk-margin-small-top">{{ 'Add post image' | trans }}</p>
+            <p class="uk-text-muted uk-margin-small-top">{{ 'Add image' | trans }}</p>
         </a>
 
         <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle" v-if="imageurl">
