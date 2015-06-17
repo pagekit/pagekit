@@ -14,7 +14,8 @@ class ArrayLoader implements LoaderInterface
      *
      * @param array $values
      */
-    public function __construct(array $values) {
+    public function __construct(array $values)
+    {
         $this->values = $values;
     }
 

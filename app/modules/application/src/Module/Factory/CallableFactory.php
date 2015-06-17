@@ -14,7 +14,8 @@ class CallableFactory implements FactoryInterface
      *
      * @param callable $callable
      */
-    public function __construct(callable $callable) {
+    public function __construct(callable $callable)
+    {
         $this->callable = $callable;
     }
 
