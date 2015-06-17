@@ -51,7 +51,7 @@ return [
 
     'events' => [
 
-        'boot' => function ($app) {
+        'boot' => function ($event, $app) {
 
             if (!isset($app['debugbar'])) {
                 return;
