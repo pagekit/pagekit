@@ -90,7 +90,7 @@
 
                                 <h1 style="margin: 0 0 30px 0; padding-bottom: 25px; border-bottom: 1px solid #e5e5e5; font-size: 34px; line-height: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #333 !important;"><?= __('Hi %name%!', ['%name%' => $user->getName()]) ?></h1>
 
-                                <p style="margin: 20px 0; text-align: left;"><?= __("We got a request to reset your %site% password for %username%. If you ignore this message, your password won't be changed.", ['%site%' => '<strong style="color: #444">'.$app['system']->config('site.title').'</strong>', '%username%' => '<strong style="color: #444">'.$user->getUsername().'</strong>']) ?></p>
+                                <p style="margin: 20px 0; text-align: left;"><?= __("We got a request to reset your %site% password for %username%. If you ignore this message, your password won't be changed.", ['%site%' => '<strong style="color: #444">'.$app['module']['system/site']->config('title').'</strong>', '%username%' => '<strong style="color: #444">'.$user->getUsername().'</strong>']) ?></p>
 
                                 <p style="margin: 40px 0 0 0; text-align: center;">
                                     <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="<?= $url ?>"><?= __('Reset Password') ?></a>

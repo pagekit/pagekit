@@ -12,7 +12,7 @@ return [
     'main' => function ($app) {
 
         $app['package'] = function ($app) {
-            return (new PackageManager)
+            return (new PackageManager())
                 ->addPath($app['path.extensions'].'/*/extension.json')
                 ->addPath($app['path.themes'].'/*/theme.json');
         };
@@ -26,6 +26,10 @@ return [
             $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['vue', 'uikit-upload']);
 
         }, 120);
+
+        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
+            $view->data('$settings', ['options' => [$this->name => $this->config]]);
+        });
 
     },
 
@@ -44,6 +48,10 @@ return [
         '/system/marketplace' => [
             'name' => '@system/marketplace',
             'controller' => 'Pagekit\\System\\Controller\\MarketplaceController'
+        ],
+        '/system/update' => [
+            'name' => '@system/update',
+            'controller' => 'Pagekit\\System\\Controller\\UpdateController'
         ]
 
     ],
@@ -59,6 +67,10 @@ return [
         'system: manage packages' => [
             'title' => 'Manage extensions and themes',
             'description' => 'Manage extensions and themes'
+        ],
+        'system: software updates' => [
+            'title' => 'Apply system updates',
+            'trusted' => true
         ]
 
     ],
@@ -98,7 +110,25 @@ return [
             'url' => '@system/package/themes',
             'access' => 'system: manage packages',
             'priority' => 10
+        ],
+
+        'system: update' => [
+            'label' => 'Update',
+            'parent' => 'system: system',
+            'url' => '@system/update',
+            'priority' => 25
         ]
+
+    ],
+
+    'config' => [
+
+        'api' => [
+            'key' => '',
+            'url' => 'http://pagekit.com/api',
+        ],
+
+        'release_channel' => 'stable'
 
     ]
 

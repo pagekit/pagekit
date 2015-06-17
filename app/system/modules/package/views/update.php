@@ -1,6 +1,6 @@
-<?php $view->script('update', 'app/system/app/update.js', 'vue') ?>
+<?php $view->script('update', 'app/system/app/bundle/update.js', 'vue') ?>
 
-<div id="js-update" v-cloak>
+<div id="update" v-cloak>
 
     <p v-repeat="errors" class="uk-alert uk-alert-warning">{{ $value }}</p>
 

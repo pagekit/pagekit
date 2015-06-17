@@ -12,7 +12,7 @@
 
         <div id="installer">
 
-            <div v-show="step == 'start'" class="tm-slide uk-vertical-align uk-text-center" data-step="start">
+            <div class="tm-slide uk-vertical-align uk-text-center" v-el="start" v-show="step == 'start'">
                 <div class="uk-vertical-align-middle tm-panel">
 
                     <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
@@ -23,14 +23,14 @@
                 </div>
             </div>
 
-            <div v-show="step == 'database'" class="tm-slide uk-vertical-align uk-text-center" data-step="database">
+            <div class="tm-slide uk-vertical-align uk-text-center" v-el="database" v-show="step == 'database'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Connect database' | trans }}</h1>
                     <p>{{ 'Enter your database connection details.' | trans }}</p>
                     <div class="uk-alert uk-alert-danger uk-margin" v-show="message"><p>{{ message }}</p></div>
 
-                    <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="valid: stepDatabase">
+                    <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="submit: stepDatabase">
 
                         <div class="uk-form-row">
                             <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="uk-form-row" v-show="config.database.default == 'mysql'">
+                        <div class="uk-form-row" v-if="config.database.default == 'mysql'">
                             <div class="uk-form-row">
                                 <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -103,7 +103,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'user'" class="tm-slide uk-vertical-align uk-text-center" data-step="user">
+            <div class="tm-slide uk-vertical-align uk-text-center" v-el="user" v-show="step == 'user'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Create your account' | trans }}</h1>
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'site'" class="tm-slide uk-vertical-align uk-text-center" data-step="site">
+            <div class="tm-slide uk-vertical-align uk-text-center" v-el="site" v-show="step == 'site'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <h1>{{ 'Setup your site' | trans }}</h1>
@@ -158,7 +158,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option.site.title" v-valid="required">
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-valid="required">
                                 <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" name="description" v-model="option.site.description"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" name="description" v-model="option['system/site'].description"></textarea>
                             </div>
                         </div>
 
@@ -179,7 +179,7 @@
                 </div>
             </div>
 
-            <div v-show="step == 'finish'" class="tm-slide uk-vertical-align uk-text-center" data-step="finish">
+            <div class="tm-slide uk-vertical-align uk-text-center" v-el="finish" v-show="step == 'finish'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
                     <div v-show="status == 'install'">
@@ -195,7 +195,7 @@
                             <i class="uk-icon-check-circle uk-icon-large"></i>
                         </p>
                         <p>
-                            <a class="uk-button uk-button-primary" href="<?= $redirect ?>">{{ 'Login now' | trans }}</a>
+                            <a class="uk-button uk-button-primary" href="{{ $url('admin') }}">{{ 'Login now' | trans }}</a>
                         </p>
                     </div>
 

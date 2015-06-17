@@ -35,7 +35,7 @@ return [
             'label' => 'Info',
             'parent' => 'system: system',
             'url' => '@system/info',
-            'priority' => 25
+            'priority' => 30
         ]
 
     ]

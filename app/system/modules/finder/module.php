@@ -15,6 +15,13 @@ return [
 
         });
 
+        $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
+        $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
+
+        $app->on('view.system:modules/settings/views/settings', function ($event, $view) use ($app) {
+            $view->data('$settings', ['config' => [$this->name => $this->config]]);
+        });
+
     },
 
     'autoload' => [
@@ -42,6 +49,18 @@ return [
 
     ],
 
+    'permissions' => [
+
+        'system: manage storage' => [
+            'title' => 'Manage storage',
+            'trusted' => true
+        ],
+        'system: manage storage read only' => [
+            'title' => 'Manage storage (Read only)'
+        ]
+
+    ],
+
     'menu' => [
 
         'system: storage' => [
@@ -51,6 +70,12 @@ return [
             'access' => 'system: manage storage',
             'priority' => 20
         ]
+
+    ],
+
+    'config' => [
+
+        'storage' => '/storage'
 
     ]
 

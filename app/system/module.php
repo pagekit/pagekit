@@ -57,10 +57,6 @@ return [
         '/system/migration' => [
             'name' => '@system/migration',
             'controller' => 'Pagekit\\System\\Controller\\MigrationController'
-        ],
-        '/system/update' => [
-            'name' => '@system/update',
-            'controller' => 'Pagekit\\System\\Controller\\UpdateController'
         ]
 
     ],
@@ -71,41 +67,11 @@ return [
 
     ],
 
-    'permissions' => [
-
-        'system: access settings' => [
-            'title' => 'Access system settings',
-            'trusted' => true
-        ],
-        'system: software updates' => [
-            'title' => 'Apply system updates',
-            'trusted' => true
-        ],
-        'system: manage storage' => [
-            'title' => 'Manage storage',
-            'trusted' => true
-        ],
-        'system: manage storage read only' => [
-            'title' => 'Manage storage (Read only)'
-        ],
-        'system: maintenance access' => [
-            'title' => 'Use the site in maintenance mode'
-        ]
-
-    ],
-
     'config' => [
 
         'key' => '',
 
-        'api' => [
-            'key' => '',
-            'url' => 'http://pagekit.com/api',
-        ],
-
         'site' => [
-            'title' => '',
-            'description' => '',
             'locale' => 'en_US',
             'theme' => 'alpha'
         ],
@@ -114,18 +80,9 @@ return [
             'locale' => 'en_US'
         ],
 
-        'maintenance' => [
-            'enabled' => false,
-            'msg' => ''
-        ],
-
         'timezone' => 'UTC',
 
-        'storage' => '/storage',
-
-        'extensions' => [],
-
-        'release_channel' => 'stable'
+        'extensions' => []
 
     ]
 

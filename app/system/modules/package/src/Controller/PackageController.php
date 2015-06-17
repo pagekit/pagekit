@@ -19,7 +19,7 @@ class PackageController
     public function __construct()
     {
         $client = new Client;
-        $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
+        $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
 
         $this->installer = new PackageInstaller($client);
     }

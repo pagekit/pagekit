@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Event;
+namespace Pagekit\Site\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
@@ -16,9 +16,11 @@ class MaintenanceListener implements EventSubscriberInterface
             return;
         }
 
-        if (App::system()->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('system: maintenance access'))) {
+        $site = App::module('system/site');
 
-            $message  = App::system()->config('maintenance.msg') ? : __("We'll be back soon.");
+        if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access'))) {
+
+            $message  = $site->config('maintenance.msg') ? : __("We'll be back soon.");
             $response = App::view('system/theme:templates/maintenance.php', compact('message'));
 
             $request->attributes->set('_disable_profiler_toolbar', true);

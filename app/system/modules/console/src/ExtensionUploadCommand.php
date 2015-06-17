@@ -66,13 +66,13 @@ class ExtensionUploadCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $temp = $this->container['path'].'/app/temp';
-        $api  = $this->container['system']->config('api.url');
+        $api  = $this->container['module']['system/package']->config('api.url');
 
         if (!is_dir($path = "{$this->path}/{$this->package}")) {
             $this->abort("Can't find {$this->json} in '{$this->path}'");
         }
 
-        if (!$key = $this->container['system']->config('api.key')) {
+        if (!$key = $this->container['module']['system/package']->config('api.key')) {
             $this->abort("Please set your api key");
         }
 

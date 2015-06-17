@@ -39,6 +39,9 @@ return [
 
         'site: manage site' => [
             'title' => 'Manage site'
+        ],
+        'site: maintenance access' => [
+            'title' => 'Use the site in maintenance mode'
         ]
 
     ],
@@ -69,7 +72,15 @@ return [
     'config' => [
 
         'menus' => [],
-        'frontpage' => 0
+        'frontpage' => 0,
+
+        'title' => '',
+        'description' => '',
+
+        'maintenance' => [
+            'enabled' => false,
+            'msg' => ''
+        ]
 
     ]
 

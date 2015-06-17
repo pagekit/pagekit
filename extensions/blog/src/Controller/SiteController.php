@@ -22,7 +22,7 @@ class SiteController
     public function __construct()
     {
         $this->module = App::module('blog');
-        $autoclose = $this->module->config('comments.autoclose') ? $this->module->config('comments.autoclose_days') : 0;
+        $autoclose    = $this->module->config('comments.autoclose') ? $this->module->config('comments.autoclose_days') : 0;
 
         App::on('blog.post.postLoad', function (EntityEvent $event) use ($autoclose) {
             $post = $event->getEntity();
@@ -56,19 +56,19 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Blog'),
-                'name'  => 'blog:views/site/post-index.php',
-                'link'  => [
+                'name' => 'blog:views/site/post-index.php',
+                'link' => [
                     'alternate' => [
-                        'href'  => App::url('@blog/site/feed', [], true),
-                        'title' => App::system()->config('site.title'),
-                        'type'  => App::feed()->create($this->module->config('feed.type'))->getMIMEType()
+                        'href' => App::url('@blog/site/feed', [], true),
+                        'title' => App::module('system/site')->config('title'),
+                        'type' => App::feed()->create($this->module->config('feed.type'))->getMIMEType()
                     ]
                 ]
             ],
-            'posts'               => $query->get(),
-            'params'              => $this->module->config,
-            'total'               => $total,
-            'page'                => $page
+            'posts' => $query->get(),
+            'params' => $this->module->config,
+            'total' => $total,
+            'page' => $page
         ];
     }
 
@@ -117,7 +117,7 @@ class SiteController
             }
 
             $comment = new Comment;
-            $comment->setUserId((int)$user->getId());
+            $comment->setUserId((int) $user->getId());
             $comment->setIp(App::request()->getClientIp());
             $comment->setCreated(new \DateTime);
             $comment->setPost($post);
@@ -175,7 +175,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __($post->getTitle()),
-                'name'  => 'blog:views/site/post.php'
+                'name' => 'blog:views/site/post.php'
             ],
             'post' => $post,
             'blog' => $this->module,
@@ -198,12 +198,13 @@ class SiteController
      */
     public function feedAction($type = '')
     {
+        $site = App::module('system/site');
         $feed = App::feed()->create($type ?: $this->module->config('feed.type'), [
-            'title'       => App::system()->config('site.title'),
-            'link'        => App::url('@blog/site', [], true),
-            'description' => App::system()->config('site.description'),
-            'element'     => ['language', App::module('system/locale')->config('locale')],
-            'selfLink'    => App::url('@blog/site/feed', [], true)
+            'title' => $site->config('title'),
+            'link' => App::url('@blog/site', [], true),
+            'description' => $site->config('description'),
+            'element' => ['language', App::module('system/locale')->config('locale')],
+            'selfLink' => App::url('@blog/site/feed', [], true)
         ]);
 
         if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
@@ -213,12 +214,12 @@ class SiteController
         foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->module->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
-                    'title'       => $post->getTitle(),
-                    'link'        => App::url('@blog/id', ['id' => $post->getId()], true),
+                    'title' => $post->getTitle(),
+                    'link' => App::url('@blog/id', ['id' => $post->getId()], true),
                     'description' => App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
-                    'date'        => $post->getDate(),
-                    'author'      => [$post->getUser()->getName(), $post->getUser()->getEmail()],
-                    'id'          => App::url('@blog/id', ['id' => $post->getId()], true)
+                    'date' => $post->getDate(),
+                    'author' => [$post->getUser()->getName(), $post->getUser()->getEmail()],
+                    'id' => App::url('@blog/id', ['id' => $post->getId()], true)
                 ])
             );
         }

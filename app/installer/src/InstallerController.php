@@ -4,6 +4,7 @@ namespace Pagekit\Installer;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception\ConnectionException;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
 use Pagekit\Util\Arr;
@@ -34,8 +35,7 @@ class InstallerController
             '$view' => [
                 'title' => __('Pagekit Installer'),
                 'name'  => 'app/installer/views/install.php'
-            ],
-            'redirect' => App::url('/admin')
+            ]
         ];
     }
 
@@ -68,9 +68,9 @@ class InstallerController
                     $status = 'no-tables';
                 }
 
-            } catch (\PDOException $e) {
+            } catch (ConnectionException $e) {
 
-                if ($e->getCode() == 1049) {
+                if ($e->getPrevious()->getCode() == 1049) {
                     $this->createDatabase();
                     $status = 'no-tables';
                 } else {
@@ -156,6 +156,12 @@ class InstallerController
                 }
             }
 
+            foreach ($option as $name => $values) {
+                App::config()->set($name, $values);
+            }
+
+            App::module('system/cache')->clearCache();
+
             $status = 'success';
 
         } catch (DBALException $e) {
@@ -178,13 +184,13 @@ class InstallerController
     protected function createDatabase()
     {
         $module = App::module('database');
-        $params = $module->config('database.connections')[$module->config('database.default')];
-        $dbname = App::db()->quoteIdentifier($params['dbname']);
+        $params = $module->config('connections')[$module->config('default')];
 
+        $name = $params['dbname'];
         unset($params['dbname']);
 
         $db = DriverManager::getConnection($params);
-        $db->getSchemaManager()->createDatabase($dbname);
+        $db->getSchemaManager()->createDatabase($db->quoteIdentifier($name));
         $db->close();
     }
 }

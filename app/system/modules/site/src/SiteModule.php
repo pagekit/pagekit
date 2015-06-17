@@ -5,6 +5,7 @@ namespace Pagekit\Site;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Event\MaintenanceListener;
 
 class SiteModule extends Module
 {
@@ -59,6 +60,11 @@ class SiteModule extends Module
 
         }, 110);
 
+    }
+
+    public function boot($app)
+    {
+        $app->subscribe(new MaintenanceListener());
     }
 
     /**

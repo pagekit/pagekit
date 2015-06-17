@@ -113,7 +113,7 @@ class Config implements \ArrayAccess, \Countable, \JsonSerializable
     }
 
     /**
-     * Merges a values from another array.
+     * Merges values from another array.
      *
      * @param  mixed $values
      * @param  bool  $replace

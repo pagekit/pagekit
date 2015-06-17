@@ -10,6 +10,7 @@ use Pagekit\Package\Exception\ChecksumVerificationException;
 use Pagekit\Package\Exception\DownloadErrorException;
 use Pagekit\Package\Exception\NotWritableException;
 use Pagekit\Package\Exception\UnauthorizedDownloadException;
+use Pagekit\System\Package\PackageInstaller;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -21,11 +22,11 @@ class UpdateController
         return [
             '$view' => [
                 'title' => __('Update'),
-                'name'  => 'system:views/admin/settings/update.php'
+                'name'  => 'system/package:views/update.php'
             ],
             '$config' => [
-                'api' => App::system()->config('api.url'),
-                'channel' => App::system()->config('release_channel', 'stable'),
+                'api' => App::module('system/package')->config('api.url'),
+                'channel' => App::module('system/package')->config('release_channel'),
                 'version' => App::version()
             ]
         ];
@@ -47,7 +48,13 @@ class UpdateController
             App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
 
             $client = new Client;
-            $client->setDefaultOption('query/api_key', App::system()->config('api.key'));
+            $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
+
+            $installer = new PackageInstaller($client);
+
+
+            $client = new Client;
+            $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
 
             $downloader = new PackageDownloader($client);
             $downloader->downloadFile($path, $update['url'], $update['shasum']);
@@ -80,11 +87,11 @@ class UpdateController
         // TODO: create maintenance file
         // TODO: cleanup old files
 
-        App::file()->delete("$updateDir/.htaccess");
-        App::file()->copyDir($updateDir, App::path());
-        App::file()->delete($updateDir);
-        App::module('system/cache')->clearCache();
-        App::session()->remove('system.updateDir');
+//        App::file()->delete("$updateDir/.htaccess");
+//        App::file()->copyDir($updateDir, App::path());
+//        App::file()->delete($updateDir);
+//        App::module('system/cache')->clearCache();
+//        App::session()->remove('system.updateDir');
 
         return ['message' => 'success'];
     }
@@ -95,9 +102,9 @@ class UpdateController
             App::abort(400, __('You may not call this step directly.'));
         }
 
-        App::system()->enable();
-        App::module('system/cache')->clearCache();
-        App::session()->remove('system.update');
+//        App::system()->enable();
+//        App::module('system/cache')->clearCache();
+//        App::session()->remove('system.update');
 
         return ['message' => 'success'];
     }

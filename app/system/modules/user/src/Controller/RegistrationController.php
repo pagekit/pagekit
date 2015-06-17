@@ -153,7 +153,7 @@ class RegistrationController
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::system()->config('site.title')]))
+                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::module('system/site')->config('title')]))
                  ->setBody(App::view('system/user:views/mails/welcome.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -166,7 +166,7 @@ class RegistrationController
 
             $mail = App::mailer()->create();
             $mail->setTo($user->getEmail())
-                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::system()->config('site.title')]))
+                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::module('system/site')->config('title')]))
                  ->setBody(App::view('system/user:views/mails/verification.php', compact('user', 'mail')), 'text/html')
                  ->send();
 
@@ -181,7 +181,7 @@ class RegistrationController
 
             $mail = App::mailer()->create();
             $mail->setTo(App::module('mail')->config('from_address'))
-                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::system()->config('site.title')]))
+                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::module('system/site')->config('title')]))
                  ->setBody(App::view('system/user:views/mails/approve.php', compact('user', 'mail')), 'text/html')
                  ->send();
 

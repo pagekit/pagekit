@@ -65,8 +65,6 @@ class PackageInstaller
      */
     public function uninstall(PackageInterface $package)
     {
-        $name = $package->getName();
-
         if (!$path = $package->get('path')) {
             throw new \RuntimeException(__('Package path is missing.'));
         }

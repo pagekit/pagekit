@@ -8,13 +8,13 @@ module.exports = [
             "imagepicker": "./app/components/imagepicker.vue"
         },
         output: {
-            filename: "./app/bundle/[name].js",
+            filename: "./app/bundle/[name].js"
         },
         resolve: {
             alias: {
                 "md5$": assets + "/js-md5/js/md5.min.js",
                 "vue-resource$": assets + "/vue-resource/src/index.js",
-                "vue-validator$": assets + "/vue-validator/src/index.js",
+                "vue-validator$": assets + "/vue-validator/src/index.js"
             }
         },
         module: {

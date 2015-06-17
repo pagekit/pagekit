@@ -48,10 +48,9 @@ return [
 
             $view->data('$settings', [
                 'options' => [
-                    'system' => $app['system']->config(['api.', 'site.', 'admin.', 'timezone', 'release_channel'])
+                    'system' => $app['system']->config(['site.', 'admin.', 'timezone'])
                 ],
                 'config' => [
-                    'system' => $app['system']->config(['storage']),
                     'application' => $app['module']->get('application')->config(['debug']),
                     'debug' => $app['module']->get('debug')->config(['enabled'])
                 ]
@@ -79,6 +78,15 @@ return [
     'resources' => [
 
         'settings:' => ''
+
+    ],
+
+    'permissions' => [
+
+        'system: access settings' => [
+            'title' => 'Access system settings',
+            'trusted' => true
+        ]
 
     ],
 

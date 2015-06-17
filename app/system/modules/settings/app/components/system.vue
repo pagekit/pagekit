@@ -16,14 +16,14 @@
     <div class="uk-form-row">
         <label for="form-apikey" class="uk-form-label">{{ 'API Key' | trans }}</label>
         <div class="uk-form-controls">
-            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$root.options.system.api.key"></textarea>
+            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$root.options['system/package'].api.key"></textarea>
         </div>
     </div>
 
     <div class="uk-form-row">
         <label for="form-channel" class="uk-form-label">{{ 'Release Channel' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-channel" class="uk-form-width-large" v-model="$root.options.system.release_channel">
+            <select id="form-channel" class="uk-form-width-large" v-model="$root.options['system/package'].release_channel">
                 <option value="stable">{{ 'Stable' | trans }}</option>
                 <option value="nightly">{{ 'Nightly' | trans }}</option>
             </select>
@@ -33,7 +33,7 @@
     <div class="uk-form-row">
         <label for="form-uploadfolder" class="uk-form-label">{{ 'Storage' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config.system.storage">
+            <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config['system/finder'].storage">
         </div>
     </div>
 

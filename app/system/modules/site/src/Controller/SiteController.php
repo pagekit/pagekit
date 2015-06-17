@@ -85,7 +85,7 @@ class SiteController
                 'name'  => 'site:views/settings.php'
             ],
             '$data' => [
-                'config' => App::system()->config(['site.', 'maintenance.'])
+                'config' => App::module('system/site')->config(['title', 'description', 'maintenance.'])
             ]
         ];
     }

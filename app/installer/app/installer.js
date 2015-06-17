@@ -1,104 +1,104 @@
-jQuery(function ($) {
+var installer = {
 
-    var Installer, Email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    var vm = new Vue({
-
-        el: '#installer',
-
-        data: {
+    data: function () {
+        return {
             step: 'start',
             status: '',
             message: '',
             config: {},
             option: {},
             user: {}
-        },
+        }
+    },
 
-        ready: function () {
+    ready: function () {
 
-            Installer   = this.$resource('installer/:action', {}, {'post': {method: 'POST'}});
-        },
+        this.resource = this.$resource('installer/:action', {}, { post: { method: 'POST' } });
 
-        methods: {
+    },
 
-            gotoStep: function(step) {
+    methods: {
 
-                if (UIkit.support.animation) {
+        gotoStep: function (step) {
 
-                    var vm      = this,
-                        slides  = $('[data-step]', this.$el),
-                        current = slides.filter(':visible'),
-                        next    = slides.filter('[data-step="'+step+'"]');
+            if (UIkit.support.animation) {
 
-                    UIkit.Utils.animate(current, 'uk-animation-slide-left uk-animation-reverse').then(function(){
+                var vm = this, current = this.$$[this.step], next = this.$$[step];
 
-                        current.css('display', 'none');
+                UIkit.Utils.animate(current, 'uk-animation-slide-left uk-animation-reverse').then(function () {
 
-                        UIkit.Utils.animate(next, 'uk-animation-slide-right').then(function(){
-                            vm.$set('step', step);
-                        });
+                    current.style.display = 'none';
+
+                    UIkit.Utils.animate(next, 'uk-animation-slide-right').then(function () {
+                        vm.$set('step', step);
                     });
-
-                } else {
-                    this.$set('step', step);
-                }
-            },
-
-            stepDatabase: function (e) {
-                e.preventDefault();
-
-                Installer.post({action: 'check'}, {config: this.config}, function (data) {
-
-                    if (!Vue.util.isPlainObject(data)) {
-                        data = {message: 'Whoops, something went wrong'};
-                    }
-
-                    if (data.status == 'no-tables') {
-                        vm.gotoStep('user');
-                    } else {
-                        vm.$set('status', data.status);
-                        vm.$set('message', data.message);
-                    }
-
                 });
-            },
 
-            stepUser: function (e) {
-                e.preventDefault();
+            } else {
+                this.$set('step', step);
+            }
+        },
 
-                this.gotoStep('site');
-            },
+        stepDatabase: function (e) {
+            e.preventDefault();
 
-            stepSite: function (e) {
-                e.preventDefault();
-
-                this.gotoStep('finish');
-                this.stepInstall();
-            },
-
-            stepInstall: function () {
-
-                this.$set('status', 'install');
-
-                Installer.post({action: 'install'}, {config: this.config, option: {'system': this.option}, user: this.user}, function (data) {
-
-                    if (!Vue.util.isPlainObject(data)) {
-                        data = {message: 'Whoops, something went wrong'};
-                    }
-
-                    if (data.status == 'success') {
-                        vm.gotoStep('finished');
-                    } else {
-                        vm.$set('status', 'failed');
-                        vm.$set('message', data.message);
-                    }
-
-                });
+            if (!this.$validator.validate('formDatabase', true)) {
+                return false;
             }
 
+            this.resource.post({ action: 'check' }, { config: this.config }, function (data) {
+
+                if (!Vue.util.isPlainObject(data)) {
+                    data = { message: 'Whoops, something went wrong' };
+                }
+
+                if (data.status == 'no-tables') {
+                    this.gotoStep('user');
+                } else {
+                    this.$set('status', data.status);
+                    this.$set('message', data.message);
+                }
+
+            });
+        },
+
+        stepUser: function (e) {
+            e.preventDefault();
+
+            this.gotoStep('site');
+        },
+
+        stepSite: function (e) {
+            e.preventDefault();
+
+            this.gotoStep('finish');
+            this.stepInstall();
+        },
+
+        stepInstall: function () {
+
+            this.$set('status', 'install');
+
+            this.resource.post({ action: 'install' }, { config: this.config, option: this.option, user: this.user }, function (data) {
+
+                if (!Vue.util.isPlainObject(data)) {
+                    data = { message: 'Whoops, something went wrong' };
+                }
+
+                if (data.status == 'success') {
+                    this.$set('status', 'finished');
+                } else {
+                    this.$set('status', 'failed');
+                    this.$set('message', data.message);
+                }
+
+            });
         }
 
-    });
+    }
 
+};
+
+jQuery(function () {
+    new Vue(installer).$mount('#installer');
 });

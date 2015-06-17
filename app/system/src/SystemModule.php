@@ -5,7 +5,6 @@ namespace Pagekit\System;
 use Pagekit\Application as App;
 use Pagekit\Kernel\Event\ExceptionListener;
 use Pagekit\Module\Module;
-use Pagekit\System\Event\MaintenanceListener;
 use Pagekit\System\Event\MigrationListener;
 use Pagekit\System\Event\SystemListener;
 use Pagekit\System\Migration\FilesystemLoader;
@@ -26,12 +25,9 @@ class SystemModule extends Module
 
         $app['module']['auth']->config['rememberme.key'] = $this->config('key');
 
-        $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
-        $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
-
         $app['db.em']; // -TODO- fix me
 
-        // TODO access "view" to early
+        // TODO accesses "view" to early
         $app['view']->on('messages', function ($event) use ($app) {
 
             $result = '';
@@ -81,7 +77,6 @@ class SystemModule extends Module
         }
 
         $app->subscribe(
-            new MaintenanceListener,
             new MigrationListener,
             new SystemListener
         );
