@@ -39,7 +39,7 @@ class PackageController
                 'name'  => 'system:modules/package/views/themes.php'
             ],
             '$data' => [
-                'api' => App::system()->config('api'),
+                'api' => App::module('system/package')->config('api'),
                 'packages' => $packages
             ]
         ];
@@ -62,7 +62,7 @@ class PackageController
                 'name'  => 'system:modules/package/views/extensions.php'
             ],
             '$data' => [
-                'api' => App::system()->config('api'),
+                'api' => App::module('system/package')->config('api'),
                 'packages' => $packages
             ]
         ];

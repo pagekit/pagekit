@@ -4,7 +4,7 @@ module.exports = {
         require('../lib/package')
     ],
 
-    data: $.extend(window.$data, {
+    data: _.extend(window.$data, {
         updates: null,
         search: '',
         status: ''

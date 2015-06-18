@@ -1,10 +1,9 @@
 module.exports = Vue.extend({
 
     data: function() {
-        return {
-            config: window.$config,
+        return _.extend({
             view: 'index',
-            version: false,
+            update: false,
             progress: 0,
             errors: [],
             steps: [
@@ -12,7 +11,7 @@ module.exports = Vue.extend({
                 { action: 'copy', msg: 'Copying files...', progress: 66 },
                 { action: 'database', msg: 'Updating database...', progress: 100 }
             ]
-        };
+        }, window.$data);
     },
 
     created: function() {
@@ -23,7 +22,7 @@ module.exports = Vue.extend({
     computed: {
 
         hasUpdate: function() {
-            return this.version && this.version.version != this.config.version;
+            return this.update && this.update.version != this.version;
         }
 
     },
@@ -32,9 +31,9 @@ module.exports = Vue.extend({
 
         getVersions: function() {
 
-            this.$http.jsonp(this.config.api + '/update', function(data) {
+            this.$http.jsonp(this.api.url + '/update', function(data) {
 
-                this.$set('version', data[this.config.channel == 'nightly' ? 'nightly' : 'latest']);
+                this.$set('update', data[this.channel == 'nightly' ? 'nightly' : 'latest']);
 
             }).error(function() {
 
@@ -46,7 +45,7 @@ module.exports = Vue.extend({
 
         install: function() {
             this.$set('view', 'installation');
-            this.step({ update: this.version });
+            this.step({ update: this.update });
         },
 
         step: function(data) {

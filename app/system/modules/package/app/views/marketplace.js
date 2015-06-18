@@ -1,6 +1,6 @@
 module.exports = {
 
-    data: $.extend(window.$data, {
+    data: _.extend(window.$data, {
         search: ''
     }),
 
