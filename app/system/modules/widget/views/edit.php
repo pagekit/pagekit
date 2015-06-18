@@ -1,4 +1,4 @@
-<?php $view->script('widget-edit', 'widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
+<?php $view->style('codemirror'); $view->script('widget-edit', 'widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
 <form id="widget-edit" name="widgetForm" class="uk-form uk-form-stacked" v-on="submit: save" v-cloak>
 
@@ -6,7 +6,7 @@
 
         <div class="uk-float-left">
 
-            <h2 class="uk-h2" v-if="widget.id">{{ widget.title }} ({{ type.name }})</h2>
+            <h2 class="uk-h2" v-if="widget.id">{{ widget.title }}</h2>
             <h2 class="uk-h2" v-if="!widget.id">{{ 'Add %type%' | trans {type:widget.type} }}</h2>
 
         </div>
@@ -50,7 +50,7 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
                     <div class="uk-form-controls uk-form-controls-text">
-                        <p v-repeat="role: roles" class="uk-form-controls-condensed">
+                        <p v-repeat="role: config.roles" class="uk-form-controls-condensed">
                             <label><input type="checkbox" value="{{ role.id }}" v-checkbox="widget.roles"> {{ role.name }}</label>
                         </p>
                     </div>

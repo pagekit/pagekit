@@ -18,7 +18,6 @@ class BlogController
      */
     public function postAction($filter = null, $page = 0)
     {
-
         return [
             '$view' => [
                 'title' => __('Posts'),

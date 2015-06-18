@@ -51,7 +51,7 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializ
     /**
      * Finds a position by widget id.
      *
-     * @param  int $id
+     * @param  integer $id
      * @return string
      */
     public function find($id)
@@ -61,6 +61,8 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializ
                 return $pos;
             }
         }
+
+        return '';
     }
 
     /**

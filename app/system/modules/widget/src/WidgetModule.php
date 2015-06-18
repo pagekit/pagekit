@@ -11,9 +11,9 @@ use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module
 {
-    protected $types = [];
-    protected $registered = [];
-    protected $positions;
+    public $types = [];
+    public $registered = [];
+    public $positions;
 
     /**
      * {@inheritdoc}
@@ -35,24 +35,6 @@ class WidgetModule extends Module
             $this->registerType($module);
 
             return $module;
-        });
-
-        $app->on('system.widget.postLoad', function ($event, $widget) {
-
-            $widget->position = $this->positions->find($widget->getId());
-
-        });
-
-        $app->on('system.widget.postSave', function ($event, $widget) {
-
-            if ($position = isset($widget->position) ? $widget->position : false) {
-                App::config('system/widget')->set('widget.positions', $this->positions->set($position, $widget->getId()));
-            }
-
-            // if (false !== $config) {
-            //     App::config('system/widget')->set('widget.config.' . $widget->getId(), $config);
-            // }
-
         });
     }
 

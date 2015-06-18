@@ -4,7 +4,7 @@ module.exports = {
 
     ready: function () {
 
-        UIkit.tab(this.$$.tab, { connect: this.$$.content });
+        UIkit.tab(this.$$.tab, {connect: this.$$.content});
         // this.$set('widget.settings', _.defaults({}, this.widget.settings, this.type.defaults));
 
     },

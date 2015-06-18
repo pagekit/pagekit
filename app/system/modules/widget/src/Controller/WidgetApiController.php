@@ -45,16 +45,10 @@ class WidgetApiController
      */
     public function saveAction($data, $id = 0)
     {
-        if ($id) {
-
-            if (!$widget = Widget::find($id)) {
-                throw new NotFoundException('Widget not found.');
-            }
-
-        } else {
-
-            $widget = new Widget;
-
+        if (!$id) {
+            $widget = new Widget();
+        } else if (!$widget = Widget::find($id)) {
+            throw new NotFoundException('Widget not found.');
         }
 
         $widget->position = $data['position'];
@@ -69,11 +63,11 @@ class WidgetApiController
      */
     public function deleteAction($id)
     {
-        if ($widget = Widget::find($id)) {
-            $widget->delete();
-        } else {
+        if (!$widget = Widget::find($id)) {
             throw new NotFoundException('Widget not found.');
         }
+
+        $widget->delete();
 
         return ['message' => 'success'];
     }
@@ -119,25 +113,10 @@ class WidgetApiController
     public function positionsAction($position, $widgets = [])
     {
         $positions = $this->widgets->config('widget.positions');
-        $positions = $this->filterPositions($positions, $widgets);
-
         $positions[$position] = $widgets;
 
         App::config('system/widget')->set('widget.positions', $positions);
 
         return ['message' => 'success'];
-    }
-
-    /**
-     * @param  array $positions
-     * @param  array $widgets
-     * @return mixed
-     */
-    protected function filterPositions(array $positions = [], $widgets = [])
-    {
-        foreach ($positions as $pos => $ids) {
-            $positions[$pos] = array_diff($ids, $widgets);
-        }
-        return $positions;
     }
 }

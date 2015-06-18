@@ -1,25 +1,25 @@
-var App = Vue.extend({
+module.exports = {
 
-    data: function() {
-        return window.$data
+    data: function () {
+        return window.$data;
     },
 
     methods: {
 
-        save: function() {
-            this.$http.post('admin/system/settings/config', { name: 'blog', config: this.config }, function() {
+        save: function () {
+            this.$http.post('admin/system/settings/config', { name: 'blog', config: this.config }, function () {
                 UIkit.notify(this.$trans('Settings saved.'), '');
-            }).error(function(data) {
+            }).error(function (data) {
                 UIkit.notify(data, 'danger');
             });
         }
 
     }
 
-});
+};
 
-jQuery(function () {
-    new App().$mount('#settings');
-});
+$(function () {
 
-module.exports = App;
+    new Vue(module.exports).$mount('#settings');
+
+});

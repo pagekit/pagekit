@@ -62,6 +62,28 @@ return [
 
         ]
 
+    ],
+
+    'events' => [
+
+        'system.widget.postLoad' => function ($event, $widget) use ($app) {
+            $widget->position = $this->positions->find($widget->getId());
+        },
+
+        'system.widget.postSave' => function ($event, $widget) use ($app) {
+
+            $config = $app['config']->get('system/widget');
+
+            if ($position = isset($widget->position) ? $widget->position : false) {
+                $config->set('widget.positions', $this->positions->set($position, $widget->getId()));
+            }
+
+            // if (false !== $config) {
+            //     $config->set('widget.config.' . $widget->getId(), $config);
+            // }
+
+        },
+
     ]
 
 ];

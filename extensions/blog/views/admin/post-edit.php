@@ -1,7 +1,4 @@
-<?php
-$view->style('codemirror');
-$view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker', 'editor'])
-?>
+<?php $view->style('codemirror'); $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker', 'editor']) ?>
 
 <form id="post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
 
