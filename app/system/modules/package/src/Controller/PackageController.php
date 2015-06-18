@@ -6,7 +6,6 @@ use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
 use Pagekit\System\Extension;
-use Pagekit\System\Package\PackageDownloader;
 use Pagekit\System\Package\PackageInstaller;
 
 /**
@@ -262,7 +261,7 @@ class PackageController
                 $zip = new \ZipArchive;
 
                 if ($zip->open($file) === true) {
-                    $json = $zip->getFromName("theme.json") ?: $zip->getFromName("extension.json");
+                    $json = $zip->getFromName('theme.json') ?: $zip->getFromName('extension.json');
                     $zip->close();
                 }
             }

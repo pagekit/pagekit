@@ -1,8 +1,8 @@
-<?php $view->script('update', 'app/system/app/bundle/update.js', 'vue') ?>
+<?php $view->script('update', 'system/package:app/bundle/update.js', 'vue') ?>
 
 <div id="update" v-cloak>
 
-    <p v-repeat="errors" class="uk-alert uk-alert-warning">{{ $value }}</p>
+    <p class="uk-alert uk-alert-warning" v-repeat="errors">{{ $value }}</p>
 
     <div v-show="version && view == 'index'">
 

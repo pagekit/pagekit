@@ -4,12 +4,7 @@ namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Package\Downloader\PackageDownloader;
-use Pagekit\Package\Exception\ArchiveExtractionException;
-use Pagekit\Package\Exception\ChecksumVerificationException;
-use Pagekit\Package\Exception\DownloadErrorException;
-use Pagekit\Package\Exception\NotWritableException;
-use Pagekit\Package\Exception\UnauthorizedDownloadException;
+use Pagekit\System\Package\Package;
 use Pagekit\System\Package\PackageInstaller;
 
 /**
@@ -48,29 +43,15 @@ class UpdateController
             App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
 
             $client = new Client;
-            $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
-
             $installer = new PackageInstaller($client);
 
+            $package = new Package([]);
+            $package->set('dist', $update);
 
-            $client = new Client;
-            $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
-
-            $downloader = new PackageDownloader($client);
-            $downloader->downloadFile($path, $update['url'], $update['shasum']);
+            $installer->download($package, $path);
 
             return ['message' => 'success'];
 
-        } catch (ArchiveExtractionException $e) {
-            $error = __('Package extraction failed.');
-        } catch (ChecksumVerificationException $e) {
-            $error = __('Package checksum verification failed.');
-        } catch (UnauthorizedDownloadException $e) {
-            $error = __('Invalid API key.');
-        } catch (DownloadErrorException $e) {
-            $error = __('Package download failed.');
-        } catch (NotWritableException $e) {
-            $error = __('Path is not writable.');
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
@@ -87,11 +68,11 @@ class UpdateController
         // TODO: create maintenance file
         // TODO: cleanup old files
 
-//        App::file()->delete("$updateDir/.htaccess");
-//        App::file()->copyDir($updateDir, App::path());
-//        App::file()->delete($updateDir);
-//        App::module('system/cache')->clearCache();
-//        App::session()->remove('system.updateDir');
+        App::file()->delete("$updateDir/.htaccess");
+        App::file()->copyDir($updateDir, App::path());
+        App::file()->delete($updateDir);
+        App::module('system/cache')->clearCache();
+        App::session()->remove('system.updateDir');
 
         return ['message' => 'success'];
     }
@@ -102,9 +83,9 @@ class UpdateController
             App::abort(400, __('You may not call this step directly.'));
         }
 
-//        App::system()->enable();
-//        App::module('system/cache')->clearCache();
-//        App::session()->remove('system.update');
+        App::system()->enable();
+        App::module('system/cache')->clearCache();
+        App::session()->remove('system.update');
 
         return ['message' => 'success'];
     }

@@ -8,14 +8,15 @@ module.exports = Vue.extend({
             progress: 0,
             errors: [],
             steps: [
-                { url: 'admin/system/update/download', msg: 'Downloading...', progress: 33 },
-                { url: 'admin/system/update/copy', msg: 'Copying files...', progress: 66 },
-                { url: 'admin/system/update/database', msg: 'Updating database...', progress: 100 }
+                { action: 'download', msg: 'Downloading...', progress: 33 },
+                { action: 'copy', msg: 'Copying files...', progress: 66 },
+                { action: 'database', msg: 'Updating database...', progress: 100 }
             ]
         };
     },
 
-    compiled: function() {
+    created: function() {
+        this.resource = this.$resource('admin/system/update/:action');
         this.getVersions();
     },
 
@@ -50,15 +51,15 @@ module.exports = Vue.extend({
 
         step: function(data) {
 
-            var step = this.steps.shift();
+            var vm = this, step = this.steps.shift();
 
             if (!step) return;
 
             this.$set('message', this.$trans(step.msg));
 
-            this.$http.get(step.url, data || {}, function(data) {
+            this.resource.get(_.extend({ action: step.action }, data), function(data) {
 
-                if (data !== 'success' || data.error) {
+                if (data.error) {
                     this.errors.push(data.error || this.$trans('Whoops, something went wrong.'));
                     return;
                 }
@@ -70,7 +71,7 @@ module.exports = Vue.extend({
                     this.$set('message', this.$trans('Installed successfully.'));
 
                     setTimeout(function() {
-                        window.location = this.$url('admin');
+                        window.location = vm.$url('admin');
                     }, 1000);
                 }
 
