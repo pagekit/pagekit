@@ -17,6 +17,7 @@ module.exports = {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.$set('enabled', true);
+                    document.location.reload();
                 }
             });
         },
@@ -25,6 +26,7 @@ module.exports = {
             return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.$set('enabled', false);
+                    document.location.reload();
                 }
             });
         },
