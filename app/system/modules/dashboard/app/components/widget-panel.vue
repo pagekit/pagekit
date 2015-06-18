@@ -2,9 +2,9 @@
 
     <div class="uk-panel-badge">
         <ul class="uk-subnav pk-subnav-icon">
-            <li v-if="editing[widget.id]"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a></li>
-            <li v-if="type.editable !== false && !editing[widget.id]"><a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
-            <li v-if="type.editable !== false && editing[widget.id]"><a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+            <li v-show="editing[widget.id]"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a></li>
+            <li v-show="type.editable !== false && !editing[widget.id]"><a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
+            <li v-show="type.editable !== false && editing[widget.id]"><a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a></li>
         </ul>
     </div>
 
