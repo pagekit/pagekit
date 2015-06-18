@@ -29,7 +29,7 @@
                 <div class="uk-dropdown uk-dropdown-small">
                     <ul class="uk-nav uk-nav-dropdown">
                         <li v-repeat="type: config.types">
-                            <a href="{{ $url('admin/widget/edit', {type: type.id}) }}">{{ type.name }}</a>
+                            <a href="{{ $url('admin/widget/edit', {type: type.name}) }}">{{ type.name }}</a>
                         </li>
                     </ul>
                 </div>

@@ -4,9 +4,9 @@ module.exports = Vue.extend({
         return _.merge({
             posts: false,
             pages: 0,
-            count: 0,
+            count: '',
             selected: []
-        }, window.$data)
+        }, window.$data);
     },
 
     created: function () {

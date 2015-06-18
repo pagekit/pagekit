@@ -24,7 +24,7 @@ class WidgetModule extends Module
 
         $app['module']->addFactory('widget', function ($module) use ($app) {
 
-            $class = is_string($module['main']) ? $module['main'] : 'Pagekit\Widget\Model\Type2';
+            $class = is_string($module['main']) ? $module['main'] : 'Pagekit\Widget\Model\Type';
 
             $module = new $class($module);
             $module->main($app);
@@ -127,7 +127,7 @@ class WidgetModule extends Module
      */
     public function registerType(TypeInterface $type)
     {
-        $this->types[$type->getId()] = $type;
+        $this->types[$type->name] = $type;
     }
 
     /**

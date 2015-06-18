@@ -20,9 +20,9 @@
     module.exports = {
 
         section: {
-            name: 'site-text',
+            name: 'widget-text',
             label: 'Settings',
-            active: 'site.text',
+            active: 'system/widget-text',
             priority: 0
         },
 

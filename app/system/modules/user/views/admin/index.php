@@ -2,7 +2,7 @@
 
 <div id="users" class="uk-form" v-cloak>
 
-    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin v-show="users">
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users' | transChoice count {count:count} }}</h2>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="uk-overflow-container" v-show="users">
+    <div class="uk-overflow-container">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>

@@ -2,52 +2,18 @@
 
 namespace Pagekit\Widget\Model;
 
-abstract class Type implements TypeInterface
+use Pagekit\Module\Module;
+
+class Type extends Module implements TypeInterface
 {
-    protected $id;
-    protected $name;
-    protected $type;
-    protected $description;
-    protected $defaults;
-
-    public function __construct($id, $name, $description = '', $defaults = [])
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->defaults = $defaults;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function render(WidgetInterface $widget, $options = [])
     {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDescription(WidgetInterface $widget = null)
-    {
-        return $this->description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaults()
-    {
-        return $this->defaults;
+        if (is_callable($this->render)) {
+            return call_user_func($this->render, $widget, $options);
+        }
     }
 
     /**
@@ -55,6 +21,6 @@ abstract class Type implements TypeInterface
      */
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        return ['name' => $this->name];
     }
 }

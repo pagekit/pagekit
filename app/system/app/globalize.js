@@ -530,9 +530,9 @@ var Translator = (function(document, undefined) {
                 this.fallback
             );
 
-            var _number  = parseInt(number, 10);
+            var _number = parseInt(number, 10) || 0;
 
-            if (undefined != _message && !isNaN(_number)) {
+            if (undefined != _message) {
                 _message = pluralize(
                     _message,
                     _number,

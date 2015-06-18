@@ -3,8 +3,8 @@ module.exports = Vue.extend({
     data: function () {
         return _.merge({
             comments: false,
-            count: 0,
             pages: 0,
+            count: '',
             selected: [],
             user: window.$pagekit.user
         }, window.$data)

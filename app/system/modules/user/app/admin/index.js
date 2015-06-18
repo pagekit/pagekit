@@ -4,7 +4,7 @@ var Users = {
         return _.merge({
             users: false,
             pages: 0,
-            count: 0,
+            count: '',
             selected: []
         }, window.$data)
     },
