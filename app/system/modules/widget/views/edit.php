@@ -1,6 +1,6 @@
 <?php $view->script('widget-edit', 'widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
-<form id="widget-edit" name="widgetForm" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
+<form id="widget-edit" name="widgetForm" class="uk-form uk-form-stacked" v-on="submit: save" v-cloak>
 
     <div class="uk-clearfix uk-margin" data-uk-margin>
 
@@ -43,7 +43,7 @@
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
                     <div class="uk-form-controls">
-                        <select id="form-position" name="position" class="uk-width-1-1" v-model="position" options="positionOptions"></select>
+                        <select id="form-position" name="position" class="uk-width-1-1" v-model="widget.position" options="positionOptions"></select>
                     </div>
                 </div>
 

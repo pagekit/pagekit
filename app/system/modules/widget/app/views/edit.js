@@ -9,16 +9,6 @@ module.exports = {
 
     },
 
-    filters: {
-
-        active: function (sections) {
-            return sections.filter(function (section) {
-                return !section.active || this.widget.type.match(section.active);
-            }.bind(this));
-        }
-
-    },
-
     computed: {
 
         sections: function () {
@@ -47,25 +37,28 @@ module.exports = {
     methods: {
 
         save: function (e) {
-
             e.preventDefault();
 
-            var data = { widget: this.widget, config: this.config };
-
-            this.$broadcast('save', data);
-
-            this.$resource('api/widget/:id').save({ id: this.widget.id }, data, function () {
+            this.$broadcast('save', {widget: this.widget});
+            this.$resource('api/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function () {
                 this.$dispatch('saved');
             });
-
         },
 
         cancel: function (e) {
-
             e.preventDefault();
 
             this.$dispatch('cancel');
+        }
 
+    },
+
+    filters: {
+
+        active: function (sections) {
+            return sections.filter(function (section) {
+                return !section.active || this.widget.type.match(section.active);
+            }.bind(this));
         }
 
     }

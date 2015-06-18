@@ -11,14 +11,17 @@ use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module
 {
-    protected $types     = [];
-    protected $positions = [];
+    protected $types = [];
+    protected $registered = [];
+    protected $positions;
 
     /**
      * {@inheritdoc}
      */
     public function main(App $app)
     {
+        $this->positions = new PositionManager($this->config('widget.positions'));
+
         $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
         // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
 
@@ -33,24 +36,24 @@ class WidgetModule extends Module
 
             return $module;
         });
-    }
 
-    /**
-     * @return array
-     */
-    public function getWidgets()
-    {
-        $widgets = Widget::findAll();
+        $app->on('system.widget.postLoad', function ($event, $widget) {
 
-        foreach ($this->config('widget.positions') as $position => $assigned) {
-            foreach ($assigned as $id) {
-                if (isset($widgets[$id])) {
-                    $widgets[$id]->position = $position;
-                }
+            $widget->position = $this->positions->find($widget->getId());
+
+        });
+
+        $app->on('system.widget.postSave', function ($event, $widget) {
+
+            if ($position = isset($widget->position) ? $widget->position : false) {
+                App::config('system/widget')->set('widget.positions', $this->positions->set($position, $widget->getId()));
             }
-        }
 
-        return $widgets;
+            // if (false !== $config) {
+            //     App::config('system/widget')->set('widget.config.' . $widget->getId(), $config);
+            // }
+
+        });
     }
 
     /**
@@ -69,7 +72,7 @@ class WidgetModule extends Module
      */
     public function getPositions()
     {
-        if (!$this->positions) {
+        if (!$this->registered) {
 
             foreach (App::module() as $module) {
 
@@ -86,7 +89,7 @@ class WidgetModule extends Module
             App::trigger('widget.positions', [$this]);
         }
 
-        return $this->positions;
+        return $this->registered;
     }
 
     /**
@@ -98,7 +101,15 @@ class WidgetModule extends Module
      */
     public function registerPosition($id, $name, $description = '')
     {
-        $this->positions[$id] = compact('id', 'name', 'description');
+        $this->registered[$id] = compact('id', 'name', 'description');
+    }
+
+    /**
+     * @return array
+     */
+    public function getPositionManager()
+    {
+        return new PositionManager($this->config('widget.positions'));
     }
 
     /**

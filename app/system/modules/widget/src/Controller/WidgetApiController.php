@@ -23,7 +23,7 @@ class WidgetApiController
      */
     public function indexAction()
     {
-        return array_values($this->widgets->getWidgets());
+        return array_values(Widget::findAll());
     }
 
     /**
@@ -41,9 +41,9 @@ class WidgetApiController
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"widget": "array", "id": "int", "position", "config": "array"}, csrf=true)
+     * @Request({"widget": "array", "id": "int"}, csrf=true)
      */
-    public function saveAction($data, $id = 0, $position = false, $config = false)
+    public function saveAction($data, $id = 0)
     {
         if ($id) {
 
@@ -57,19 +57,8 @@ class WidgetApiController
 
         }
 
+        $widget->position = $data['position'];
         $widget->save($data);
-
-        if (false !== $config) {
-            App::config('system/widget')->set('widget.config.' . $widget->getId(), $config);
-        }
-
-        $positions = $this->widgets->config('widget.positions');
-
-        if ($position && !isset($positions[$position]) || !in_array($widget->getId(), $positions[$position])) {
-            $positions = $this->filterPositions($positions, [$widget->getId()]);
-            $positions[$position][] = $widget->getId();
-            App::config('system/widget')->set('widget.positions', $positions);
-        }
 
         return $widget;
     }

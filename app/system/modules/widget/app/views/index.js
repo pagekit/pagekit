@@ -28,7 +28,7 @@ module.exports = {
     methods: {
 
         getType: function (widget) {
-            return _.find(this.config.types, {id: widget.type});
+            return _.find(this.config.types, {name: widget.type});
         },
 
         hasWidgets: function (position) {

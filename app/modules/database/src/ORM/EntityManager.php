@@ -319,7 +319,7 @@ class EntityManager
             }
         }
 
-        $this->connection->getEventDispatcher()->trigger($event);
+        $this->connection->getEventDispatcher()->trigger($event, [$entity]);
     }
 
     /**
