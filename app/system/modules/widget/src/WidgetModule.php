@@ -100,9 +100,7 @@ class WidgetModule extends Module
      */
     public function getType($type)
     {
-        $types = $this->getTypes();
-
-        return isset($types[$type]) ? $types[$type] : null;
+        return isset($this->types[$type]) ? $this->types[$type] : null;
     }
 
     /**
@@ -121,16 +119,5 @@ class WidgetModule extends Module
     public function registerType(TypeInterface $type)
     {
         $this->types[$type->name] = $type;
-    }
-
-    /**
-     * Gets the widget config.
-     *
-     * @param  int $id
-     * @return array
-     */
-    public function getWidgetConfig($id = 0)
-    {
-        return Arr::merge($this->config('widget.defaults'), $this->config("widget.config.$id", []), true);
     }
 }
