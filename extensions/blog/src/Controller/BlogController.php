@@ -73,6 +73,7 @@ class BlogController
                     'roles'    => array_values(Role::findAll()),
                     'authors'  => App::db()->createQueryBuilder()
                         ->from('@system_user')
+                        ->where('id IN (SELECT user_id FROM @system_user_role WHERE role_id > 2)')
                         ->execute('id, username')
                         ->fetchAll()
                 ],
