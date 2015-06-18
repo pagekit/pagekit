@@ -18,27 +18,31 @@ module.exports = {
         this.start = document.createComment('v-partial-start');
         this.end = document.createComment('v-partial-end');
         if (el.nodeType !== 8) {
-            el.innerHTML = ''
+            el.innerHTML = '';
         }
         if (el.tagName === 'TEMPLATE' || el.nodeType === 8) {
-            _.replace(el, this.end)
+            _.replace(el, this.end);
         } else {
-            el.appendChild(this.end)
+            el.appendChild(this.end);
         }
         _.before(this.start, this.end);
         if (!this._isDynamicLiteral) {
-            this.insert(this.expression)
+            this.insert(this.expression);
         }
     },
 
     update: function (id) {
         this.teardown();
-        this.insert(id)
+        this.insert(id);
     },
 
     insert: function (id) {
 
         var partial = getPartials(this.vm)[id];
+
+        if (!this.vm.$options.partials) {
+            this.vm.$options.partials = {};
+        }
 
         if (undefined !== id && !partial) {
             this.vm.$options.partials[id] = partial = templateParser.parse(id);
@@ -47,7 +51,7 @@ module.exports = {
         if (partial) {
             var filters = this.filters && this.filters.read;
             if (filters) {
-                partial = _.applyFilters(partial, filters, this.vm)
+                partial = _.applyFilters(partial, filters, this.vm);
             }
 
             this.template = templateParser.parse(partial, true);
@@ -59,7 +63,7 @@ module.exports = {
                 true
             );
 
-            this.compile()
+            this.compile();
         }
     }
 

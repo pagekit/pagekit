@@ -6,13 +6,13 @@ return [
 
     'main' => 'Pagekit\\Widget\\WidgetModule',
 
+    'include' => 'widgets/widget*.php',
+
     'autoload' => [
 
         'Pagekit\\Widget\\' => 'src'
 
     ],
-
-    'include' => 'widgets/widget*.php',
 
     'routes' => [
 

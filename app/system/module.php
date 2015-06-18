@@ -10,6 +10,8 @@ return [
 
     'main' => 'Pagekit\\System\\SystemModule',
 
+    'include' => 'modules/*/module.php',
+
     'require' => [
 
         'application',
@@ -39,8 +41,6 @@ return [
         'system/widget-text'
 
     ],
-
-    'include' => 'modules/*/module.php',
 
     'autoload' => [
 
