@@ -68,7 +68,7 @@ $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicke
                             <div class="uk-width-large-1-2">
                                 <div class="uk-form-icon uk-display-block">
                                     <i class="pk-icon-calendar pk-icon-muted"></i>
-                                    <input class="uk-width-1-1" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD' }" v-model="date" lazy>
+                                    <input class="uk-width-1-1" type="text" data-uk-datepicker="{ format: 'YYYY-MM-DD', pos: 'bottom' }" v-model="date" lazy>
                                 </div>
                             </div>
                             <div class="uk-width-large-1-2">

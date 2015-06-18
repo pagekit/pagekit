@@ -217,6 +217,10 @@
                 -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
             },
 
+            isSelected: function (name) {
+                return this.selected.indexOf(name.toString()) != -1;
+            },
+
             createFolder: function () {
 
                 UIkit.modal.prompt(this.$trans('Folder Name'), '', function(name){
@@ -236,13 +240,13 @@
 
                 if (!oldname) return;
 
-                UIkit.modal.prompt(this.$trans('New Name'), oldname, function(newname){
+                UIkit.modal.prompt(this.$trans('Name'), oldname, function(newname){
 
                     if (!newname) return;
 
                     this.command('rename', { oldname: oldname, newname: newname });
 
-                }.bind(this));
+                }.bind(this), {title: this.$trans('Rename')});
             },
 
             remove: function (names) {
