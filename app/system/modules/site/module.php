@@ -61,7 +61,8 @@ return [
         'site: pages' => [
             'label' => 'Pages',
             'parent' => 'site',
-            'url' => '@site'
+            'url' => '@site',
+            'active' => '@site(/edit)?'
         ],
         'site: settings' => [
             'label' => 'Settings',
