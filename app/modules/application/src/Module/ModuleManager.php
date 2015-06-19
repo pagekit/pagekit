@@ -239,6 +239,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     protected function registerModules()
     {
         $includes = [];
+        $defaults = ['type' => 'module', 'main' => null, 'config' => []];
 
         $app = $this->app;
 
@@ -252,18 +253,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                     continue;
                 }
 
-                if (!isset($module['type'])) {
-                    $module['type'] = 'module';
-                }
-
-                if (!isset($module['main'])) {
-                    $module['main'] = null;
-                }
-
-                if (!isset($module['config'])) {
-                    $module['config'] = [];
-                }
-
+                $module = array_replace($defaults, $module);
                 $module['path'] = strtr(dirname($p), '\\', '/');
 
                 if (isset($module['include'])) {
