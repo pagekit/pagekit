@@ -1,11 +1,12 @@
 <?php $view->script('user-edit', 'system/user:app/admin/edit.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="js-user-edit" name="form" class="uk-form uk-form-horizontal" v-on="valid: save" v-cloak>
+<form id="js-user-edit" class="uk-form uk-form-horizontal" name="form" v-on="valid: save" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ 'Edit User' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-if="user.id">{{ 'Edit User' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-if="!user.id">{{ 'Add User' | trans }}</h2>
 
         </div>
         <div data-uk-margin>

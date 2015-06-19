@@ -13,6 +13,7 @@
             <div class="pk-table-width-minimum">
                 <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="node.id == frontpage"></i>
             </div>
+            <div class="pk-table-width-minimum uk-text-muted">{{ node.type }}</div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
                     <a v-class="

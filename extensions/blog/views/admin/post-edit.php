@@ -1,11 +1,12 @@
 <?php $view->style('codemirror'); $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'v-imagepicker', 'uikit-datepicker', 'uikit-timepicker', 'editor']) ?>
 
-<form id="post" name="form" class="uk-form uk-form-stacked" v-on="valid: save" v-cloak>
+<form id="post" class="uk-form uk-form-stacked" name="form" v-on="valid: save" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
 
-            <h2 class="uk-margin-remove">{{ 'Edit Post' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-if="post.id">{{ 'Edit Post' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-if="!post.id">{{ 'Add Post' | trans }}</h2>
 
         </div>
         <div data-uk-margin>
