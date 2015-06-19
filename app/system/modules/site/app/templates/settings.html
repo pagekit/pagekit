@@ -2,15 +2,17 @@
     <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
     <div class="uk-form-controls">
         <input id="form-title" class="uk-form-width-large" type="text" name="node[title]" v-model="node.title" v-valid="required">
-        <span class="uk-form-help-block uk-text-danger" v-show="form['node[title]'].invalid">{{ 'Invalid name.' | trans }}</span>
+        <div class="uk-form-help-block uk-text-danger" v-show="form['node[title]'].invalid">{{ 'Invalid name.' | trans }}</div>
     </div>
 </div>
 
 <div class="uk-form-row">
     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
     <div class="uk-form-controls">
-        <span>{{ $parent.path }}</span><br>
         <input id="form-slug" class="uk-form-width-large" type="text" name="node[slug]" v-model="node.slug">
+        <div class="uk-margin-small-top">
+            <a v-attr="href: $url($parent.path)">{{ $parent.path }}</a>
+        </div>
     </div>
 </div>
 

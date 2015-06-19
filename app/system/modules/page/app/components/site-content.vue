@@ -1,26 +1,33 @@
 <template>
 
-    <div class="uk-form-row">
-        <label for="form-page-title" class="uk-form-label">{{ 'Page Title' | trans }}</label>
-        <div class="uk-form-controls">
-            <input id="form-page-title" class="uk-form-width-large" type="text" name="page[title]" v-model="page.title">
-        </div>
-    </div>
+    <div class="uk-grid pk-grid-large uk-form-stacked" data-uk-grid-margin>
+        <div class="uk-flex-item-1">
 
-    <div class="uk-form-row">
-        <label for="form-url" class="uk-form-label">{{ 'Content' | trans }}</label>
-        <div class="uk-form-controls">
-            <v-editor id="post-content" name="page[content]" value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
-        </div>
-    </div>
+            <div class="uk-form-row">
+                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title">
+            </div>
 
-    <div class="uk-form-row">
-        <span class="uk-form-label">{{ 'Options' | trans }}</span>
-        <div class="uk-form-controls">
-            <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
+            <div class="uk-form-row">
+                <v-editor name="page[content]" value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
+            </div>
+
         </div>
-        <div class="uk-form-controls">
-            <label><input type="checkbox" name="page[data][markdown]" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
+        <div class="pk-width-sidebar">
+
+            <div class="uk-panel">
+
+                <div class="uk-form-row">
+                    <span class="uk-form-label">{{ 'Options' | trans }}</span>
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
+                    </div>
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" name="page[data][markdown]" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 

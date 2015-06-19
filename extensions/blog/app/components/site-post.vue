@@ -1,8 +1,8 @@
 <template>
 
-    <div class="uk-form-row" v-partial="settings"></div>
+    <div class="uk-form-row uk-form-horizontal" v-partial="settings"></div>
 
-    <div class="uk-form-row">
+    <div class="uk-form-row uk-form-horizontal">
 
         <label for="form-post" class="uk-form-label">{{ 'Post' | trans }}</label>
         <div class="uk-form-controls">

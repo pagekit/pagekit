@@ -6,14 +6,12 @@
             <div class="pk-table-width-minimum pk-table-collapse"><div class="uk-nestable-toggle" data-nestable-action="toggle"></div></div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
             <div class="pk-table-min-width-100">
-                <a v-attr="href: $url('admin/site/edit', { id: node.id })">
-                    {{ node.title }}
-                </a>
+                <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
                 <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="node.id == frontpage"></i>
             </div>
-            <div class="pk-table-width-minimum uk-text-muted">{{ node.type }}</div>
+            <div class="pk-table-width-minimum uk-text-nowrap">{{ node.type }}</div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
                     <a v-class="
@@ -23,7 +21,7 @@
                 </td>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a>{{ node.path }}</a>
+                <a v-attr="href: $url(node.path)">{{ node.path }}</a>
             </div>
         </div>
 
