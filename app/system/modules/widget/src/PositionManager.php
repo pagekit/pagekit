@@ -2,50 +2,26 @@
 
 namespace Pagekit\Widget;
 
-class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializable
+class PositionManager implements \JsonSerializable
 {
     /**
      * @var array
      */
-    protected $positions;
+    protected $assigned = [];
+
+    /**
+     * @var array
+     */
+    protected $registered = [];
 
     /**
      * Constructor.
      *
-     * @param array $positions
+     * @param array $assigned
      */
-    public function __construct(array $positions)
+    public function __construct(array $assigned = [])
     {
-        $this->positions = $positions;
-    }
-
-    /**
-     * Gets assigned widget ids.
-     *
-     * @param  string $position
-     * @return array
-     */
-    public function get($position)
-    {
-        return isset($this->positions[$position]) ? $this->positions[$position] : [];
-    }
-
-    /**
-     * Sets widget id to a position.
-     *
-     * @param  string $position
-     * @param  int    $id
-     * @return self
-     */
-    public function set($position, $id)
-    {
-        foreach ($this->positions as $pos => $ids) {
-            $this->positions[$pos] = array_diff($ids, [$id]);
-        }
-
-        $this->positions[$position][] = $id;
-
-        return $this;
+        $this->assigned = $assigned;
     }
 
     /**
@@ -56,7 +32,7 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializ
      */
     public function find($id)
     {
-        foreach ($this->positions as $pos => $ids) {
+        foreach ($this->assigned as $pos => $ids) {
             if (in_array($id, $ids)) {
                 return $pos;
             }
@@ -66,49 +42,64 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializ
     }
 
     /**
-     * Implements ArrayAccess interface.
-     */
-    public function offsetExists($position)
-    {
-        return array_key_exists($position, $this->positions);
-    }
-
-    /**
-     * Implements ArrayAccess interface.
+     * Assigns widget id to a position.
      *
-     * @see get()
+     * @param  string $position
+     * @param  int    $id
+     * @return self
      */
-    public function offsetGet($position)
+    public function assign($position, $id)
     {
-        return $this->get($position);
+        foreach ($this->assigned as $pos => $ids) {
+            $this->assigned[$pos] = array_diff($ids, [$id]);
+        }
+
+        $this->assigned[$position][] = $id;
+
+        return $this;
     }
 
     /**
-     * Implements ArrayAccess interface.
+     * Gets assigned widget ids.
      *
-     * @see set()
+     * @param  string $position
+     * @return array
      */
-    public function offsetSet($position, $id)
+    public function assigned($position)
     {
-        $this->set($position, $id);
+        return isset($this->assigned[$position]) ? $this->assigned[$position] : [];
     }
 
     /**
-     * Implements ArrayAccess interface.
-     */
-    public function offsetUnset($position)
-    {
-        unset($this->positions[$position]);
-    }
-
-    /**
-     * Implements the IteratorAggregate interface.
+     * Registers a position.
      *
-     * @return \ArrayIterator
+     * @param string $name
+     * @param string $label
+     * @param string $description
      */
-    public function getIterator()
+    public function register($name, $label, $description = '')
     {
-        return new \ArrayIterator($this->positions);
+        $this->registered[$name] = compact('name', 'label', 'description');
+    }
+
+    /**
+     * Gets the assigned widget ids.
+     *
+     * @return array
+     */
+    public function getAssigned()
+    {
+        return $this->assigned;
+    }
+
+    /**
+     * Gets the registered positions.
+     *
+     * @return array
+     */
+    public function getRegistered()
+    {
+        return $this->registered;
     }
 
     /**
@@ -118,14 +109,6 @@ class PositionManager implements \ArrayAccess, \IteratorAggregate, \JsonSerializ
      */
     public function jsonSerialize()
     {
-        $positions = [];
-
-        foreach ($this->positions as $pos => $ids) {
-            if ($ids) {
-                $positions[$pos] = $ids;
-            }
-        }
-
-        return $positions;
+        return array_values($this->registered);
     }
 }

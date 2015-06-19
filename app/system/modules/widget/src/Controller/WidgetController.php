@@ -4,9 +4,8 @@ namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Site\Entity\Node;
-use Pagekit\Widget\Entity\Widget;
 use Pagekit\User\Entity\Role;
-
+use Pagekit\Widget\Entity\Widget;
 /**
  * @Access("system: manage widgets", admin=true)
  */
@@ -31,7 +30,7 @@ class WidgetController
             '$data' => [
                 'config' => [
                     'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => array_values($this->widgets->getPositions())
+                    'positions' => $this->widgets->getPositions()
                 ]
             ]
         ];
@@ -62,7 +61,7 @@ class WidgetController
                     'nodes'     => array_values(Node::query()->get()),
                     'roles'     => array_values(Role::findAll()),
                     'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => array_values($this->widgets->getPositions())
+                    'positions' => $this->widgets->getPositions()
                 ]
             ]
         ];

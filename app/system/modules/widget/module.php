@@ -67,7 +67,7 @@ return [
     'events' => [
 
         'system.widget.postLoad' => function ($event, $widget) use ($app) {
-            $widget->position = $this->positions->find($widget->getId());
+            $widget->position = $this->getPositions()->find($widget->getId());
         },
 
         'system.widget.postSave' => function ($event, $widget) use ($app) {
@@ -75,7 +75,7 @@ return [
             $config = $app['config']->get('system/widget');
 
             if ($position = isset($widget->position) ? $widget->position : false) {
-                $config->set('widget.positions', $this->positions->set($position, $widget->getId()));
+                $config->set('widget.positions', $this->getPositions()->assign($position, $widget->getId())->getAssigned());
             }
 
             // if (false !== $config) {

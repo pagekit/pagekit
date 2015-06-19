@@ -51,13 +51,13 @@
 
             <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
                 <div>
-                    {{ position.name | trans }}
+                    {{ position.label | trans }}
                     <span class="uk-text-muted" v-if="position.description">{{ position.description | trans }}</span>
                 </div>
             </div>
 
             <ul class="uk-nestable uk-form">
-                <li class="uk-nestable-item" data-id="{{ widget.id }}" v-repeat="widget: positions[position.id]">
+                <li class="uk-nestable-item" data-id="{{ widget.id }}" v-repeat="widget: positions[position.name]">
 
                     <div class="uk-nestable-panel pk-table-fake">
                         <div class="pk-table-width-minimum">
@@ -70,7 +70,7 @@
                         <div class="pk-table-width-150">
                             <div class="uk-nestable-nodrag" v-el="select">
                                 <a></a>
-                                <select class="uk-width-1-1" v-model="position.id" v-on="input: reassign" options="positionOptions"></select>
+                                <select class="uk-width-1-1" v-model="position.name" v-on="input: reassign" options="positionOptions"></select>
                             </div>
                         </div>
                         <div class="pk-table-width-150">{{ getType(widget).name }}</div>

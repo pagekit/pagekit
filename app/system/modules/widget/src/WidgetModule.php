@@ -12,7 +12,6 @@ use Pagekit\Widget\Model\TypeInterface;
 class WidgetModule extends Module
 {
     public $types = [];
-    public $registered = [];
     public $positions;
 
     /**
@@ -20,8 +19,6 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
-        $this->positions = new PositionManager($this->config('widget.positions'));
-
         $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
         // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
 
@@ -39,54 +36,24 @@ class WidgetModule extends Module
     }
 
     /**
-     * @param  string $name
-     * @return bool
-     */
-    public function hasPosition($name)
-    {
-        $positions = $this->getPositions();
-
-        return isset($positions[$name]);
-    }
-
-    /**
      * @return array
      */
     public function getPositions()
     {
-        if (!$this->registered) {
+        if (!$this->positions) {
 
-            foreach (App::module() as $module) {
-                foreach ((array) $module->get('positions') as $id => $position) {
-                    list($name, $description) = array_merge((array) $position, ['']);
-                    $this->registerPosition($id, $name, $description);
-                }
+            $theme = App::get('theme.site');
+            $config = $this->config('widget.positions');
+
+            $this->positions = new PositionManager($config);
+
+            foreach ((array) $theme->get('positions') as $name => $position) {
+                list($label, $description) = array_merge((array) $position, ['']);
+                $this->positions->register($name, $label, $description);
             }
-
-            App::trigger('widget.positions', [$this]);
         }
 
-        return $this->registered;
-    }
-
-    /**
-     * Registers a position.
-     *
-     * @param string $id
-     * @param string $name
-     * @param string $description
-     */
-    public function registerPosition($id, $name, $description = '')
-    {
-        $this->registered[$id] = compact('id', 'name', 'description');
-    }
-
-    /**
-     * @return array
-     */
-    public function getPositionManager()
-    {
-        return new PositionManager($this->config('widget.positions'));
+        return $this->positions;
     }
 
     /**
