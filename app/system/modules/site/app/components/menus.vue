@@ -3,7 +3,7 @@
     <div class="uk-panel">
 
         <ul class="uk-nav uk-nav-side">
-            <li class="uk-visible-hover" v-repeat="menu: menus" v-class="pk-active: isActive(menu)">
+            <li class="uk-visible-hover" v-repeat="menu: menus" v-class="uk-active: isActive(menu)">
                 <a v-on="click: select(menu)">{{ menu.label }}</a>
                 <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed">
                     <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: editMenu(menu)"></a></li>
