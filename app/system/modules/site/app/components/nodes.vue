@@ -3,49 +3,50 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
 
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+
             <h2 class="uk-margin-remove">{{ menu.label | trans }}</h2>
 
             <div class="uk-margin-left" v-show="selected.length">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="uk-icon-trash-o" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Are you sure?'"></a></li>
-                    <li><a class="uk-icon-check-circle-o" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                    <li><a class="uk-icon-ban" title="{{ 'Disable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="uk-icon-home" title="{{ 'Frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-show="selected.length === 1" v-on="click: setFrontpage()"></a></li>
+                    <li v-show="selected.length === 1"><a class="pk-icon-home pk-icon-hover" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: setFrontpage()"></a></li>
+                    <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                    <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete item?'"></a></li>
                 </ul>
             </div>
+
         </div>
 
         <div class="uk-position-relative" data-uk-margin>
+
             <div data-uk-dropdown="{ mode: 'click' }">
-
                 <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
-
-                <div class="uk-dropdown uk-dropdown-small">
+                <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                     <ul class="uk-nav uk-nav-dropdown">
                         <li v-repeat="type: types | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
                     </ul>
                 </div>
-
             </div>
+
         </div>
 
     </div>
 
     <div class="uk-overflow-container">
 
-        <div class="pk-table-fake pk-table-fake-header pk-table-fake-header-indent-nested">
+        <div class="pk-table-fake pk-table-fake-header">
             <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
             <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
             <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
             <div class="pk-table-width-150">{{ 'URL' | trans }}</div>
         </div>
 
+        <ul class="uk-nestable uk-margin-remove" v-el="nestable">
+            <node v-repeat="node: tree[0]"></node>
+        </ul>
+
     </div>
-
-    <ul class="uk-nestable" v-el="nestable">
-        <node v-repeat="node: tree[0]"></node>
-    </ul>
-
+    
 </template>
 
 <script>
