@@ -36,8 +36,8 @@ class UserModule extends Module
         if (!$this->perms) {
 
             foreach (App::module() as $module) {
-                if (isset($module->permissions)) {
-                    $this->registerPermissions($module->name, $module->permissions);
+                if ($perms = $module->get('permissions')) {
+                    $this->registerPermissions($module->get('name'), $perms);
                 }
             }
 

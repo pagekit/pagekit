@@ -252,12 +252,16 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                     continue;
                 }
 
+                if (!isset($module['type'])) {
+                    $module['type'] = 'module';
+                }
+
                 if (!isset($module['main'])) {
                     $module['main'] = null;
                 }
 
-                if (!isset($module['type'])) {
-                    $module['type'] = 'module';
+                if (!isset($module['config'])) {
+                    $module['config'] = [];
                 }
 
                 $module['path'] = strtr(dirname($p), '\\', '/');

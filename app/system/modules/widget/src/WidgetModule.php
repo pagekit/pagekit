@@ -57,12 +57,7 @@ class WidgetModule extends Module
         if (!$this->registered) {
 
             foreach (App::module() as $module) {
-
-                if (!isset($module->positions) || !is_array($module->positions)) {
-                    continue;
-                }
-
-                foreach ($module->positions as $id => $position) {
+                foreach ((array) $module->get('positions') as $id => $position) {
                     list($name, $description) = array_merge((array) $position, ['']);
                     $this->registerPosition($id, $name, $description);
                 }

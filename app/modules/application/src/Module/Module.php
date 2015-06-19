@@ -9,23 +9,36 @@ use Pagekit\Util\Arr;
 class Module implements ModuleInterface, EventSubscriberInterface
 {
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $path;
+
+    /**
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * @var array
+     */
+    protected $options;
+
+    /**
      * Constructor.
      *
-     * @param array $values
+     * @param array $options
      */
-    public function __construct(array $values = [])
+    public function __construct(array $options = [])
     {
-        foreach ($values as $key => $value) {
-            if ($value instanceof \Closure) {
-                $this->$key = $value->bindTo($this, $this);
-            } else {
-                $this->$key = $value;
-            }
-        }
-
-        if (!isset($this->config)) {
-            $this->config = [];
-        }
+        $this->name = $options['name'];
+        $this->path = $options['path'];
+        $this->config = $options['config'];
+        $this->options = $options;
     }
 
     /**
@@ -33,9 +46,23 @@ class Module implements ModuleInterface, EventSubscriberInterface
      */
     public function main(App $app)
     {
-        if (is_callable($this->main)) {
-            return call_user_func($this->main, $app);
+        $main = $this->options['main'];
+
+        if ($main instanceof \Closure) {
+            $main = $main->bindTo($this, $this);
         }
+
+        if (is_callable($main)) {
+            return call_user_func($main, $app);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($key, $default = null)
+    {
+        return Arr::get($this->options, $key, $default);
     }
 
     /**
@@ -55,7 +82,6 @@ class Module implements ModuleInterface, EventSubscriberInterface
      */
     public function subscribe()
     {
-        return isset($this->events) ? $this->events : [];
+        return isset($this->options['events']) ? $this->options['events'] : [];
     }
-
 }

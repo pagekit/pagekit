@@ -60,12 +60,7 @@ class SystemModule extends Module
             $menu = new SystemMenu();
 
             foreach (App::module() as $module) {
-
-                if (!isset($module->menu)) {
-                    continue;
-                }
-
-                foreach ($module->menu as $id => $item) {
+                foreach ((array) $module->get('menu') as $id => $item) {
                     $menu->addItem($id, $item);
                 }
             }

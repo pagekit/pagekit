@@ -45,15 +45,9 @@ class SiteModule extends Module
         if (!$this->types) {
 
             foreach (App::module() as $module) {
-
-                if (!isset($module->nodes)) {
-                    continue;
-                }
-
-                foreach ($module->nodes as $type => $route) {
+                foreach ((array) $module->get('nodes') as $type => $route) {
                     $this->registerType($type, $route);
                 }
-
             }
 
             $this->registerType('alias', ['label' => __('Alias')]);
@@ -95,12 +89,7 @@ class SiteModule extends Module
         if (!$this->menus) {
 
             foreach (App::module() as $module) {
-
-                if (!isset($module->menus)) {
-                    continue;
-                }
-
-                foreach ($module->menus as $id => $menu) {
+                foreach ((array) $module->get('menus') as $id => $menu) {
                     $this->registerMenu($id, $menu, ['fixed' => true]);
                 }
             }

@@ -37,7 +37,7 @@ return [
             foreach ($app['module'] as $module) {
 
                 $domains = [];
-                $files   = glob("{$module->path}/languages/{$locale}/*") ?: [];
+                $files   = glob($module->get('path')."/languages/{$locale}/*") ?: [];
 
                 foreach ($files as $file) {
 
