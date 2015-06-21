@@ -27,25 +27,17 @@
 
     </form>
 
-    <div class="uk-text-center">
-
-        <div v-show="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
-        <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
-        <div class="uk-alert uk-alert-warning" v-show="!widget.uid && !editing">{{ 'No location given.' | trans }}</div>
-
-        <div v-show="status != 'error'">
-            <div class="pk-weather-image">
-                <img class="uk-text-top" v-attr="src: icon">
-                <span class="uk-text-large uk-text-muted pk-weather-temperature">{{ temperature }}</span>
-            </div>
-            <h1 class="uk-h2 uk-margin-remove">{{ widget.city }}</h1>
-            <h1 v-if="time" class="uk-h2 uk-margin-remove">{{ time | date format }}</h1>
-            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.id }}</h2>
-            <h2 class="uk-h3 uk-margin-remove uk-text-muted">{{ timezone.name }}</h2>
-
+    <div v-show="status != 'error'">
+        <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
+        <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+            <h3 class="uk-h3 uk-margin-remove">{{ widget.location }}</h3>
+            <h3 class="uk-h3 uk-margin-remove">{{ temperature }} <img class="uk-text-top" v-attr="src: icon" width="40" height="40" alt="Weather"></h3>
         </div>
-
     </div>
+
+    <div v-show="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
+    <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
+    <div class="uk-alert uk-alert-warning" v-show="!widget.uid && !editing">{{ 'No location given.' | trans }}</div>
 
 </template>
 
