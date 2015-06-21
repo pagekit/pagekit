@@ -53,22 +53,20 @@
 
     </form>
 
-    <h3 class="uk-panel-title" v-show="widget.title">{{ widget.title }}</h3>
+    <h3 class="uk-panel-title" v-if="widget.title">{{ widget.title }}</h3>
 
-    <div>
-        <div class="uk-text-center" v-show="status == 'loading'">
-            <i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i>
-        </div>
-        <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</div>
-        <div class="uk-alert uk-alert-warning" v-show="!widget.url && !editing">{{ 'No URL given.' | trans }}</div>
-        <ul class="uk-list uk-list-line">
-            <li v-repeat="entry: feed.entries | count">
-                <a v-attr="href: entry.link">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
-                <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
-                <p class="uk-margin-small-top" v-if="widget.content == '2'">{{ $index == 0 ? entry.contentSnippet : '' }}</p>
-            </li>
-        </ul>
-    </div>
+    <ul class="uk-list uk-list-line uk-margin-remove">
+        <li v-repeat="entry: feed.entries | count">
+            <a v-attr="href: entry.link">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
+            <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
+            <p class="uk-margin-small-top" v-if="widget.content == '2'">{{ $index == 0 ? entry.contentSnippet : '' }}</p>
+        </li>
+    </ul>
+
+    <p class="uk-text-center" v-if="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></p>
+    <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</p>
+    <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.url && !editing">{{ 'No URL given.' | trans }}</p>
+        
 
 </template>
 
