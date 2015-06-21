@@ -1,6 +1,6 @@
 <template>
 
-    <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" v-on="submit: $event.preventDefault()">
+    <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing" v-on="submit: $event.preventDefault()">
 
         <h3 class="uk-panel-title">{{ 'Location Widget' | trans }}</h3>
 
@@ -27,7 +27,7 @@
 
     </form>
 
-    <div v-show="status != 'error'">
+    <div v-if="status != 'error'">
         <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-h3 uk-margin-remove">{{ widget.location }}</h3>
@@ -35,9 +35,9 @@
         </div>
     </div>
 
-    <div v-show="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></div>
-    <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</div>
-    <div class="uk-alert uk-alert-warning" v-show="!widget.uid && !editing">{{ 'No location given.' | trans }}</div>
+    <p class="uk-text-center" v-if="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></p>
+    <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</p>
+    <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.uid && !editing">{{ 'No location given.' | trans }}</p>
 
 </template>
 
