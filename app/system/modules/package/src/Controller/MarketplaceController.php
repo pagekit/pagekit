@@ -19,7 +19,7 @@ class MarketplaceController
             '$data' => [
                 'title' => 'Themes',
                 'type' => 'theme',
-                'api' => App::system()->config('api'),
+                'api' => App::module('system/package')->config('api'),
                 'packages' => App::package()->all()
             ]
         ];
@@ -35,7 +35,7 @@ class MarketplaceController
             '$data' => [
                 'title' => 'Extensions',
                 'type' => 'extension',
-                'api' => App::system()->config('api'),
+                'api' => App::module('system/package')->config('api'),
                 'packages' => App::package()->all()
             ]
         ];
