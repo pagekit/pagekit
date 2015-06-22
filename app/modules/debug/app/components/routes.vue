@@ -1,23 +1,29 @@
 <template>
 
-    <h1>Routes</h1>
+    <a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>
 
-    <table class="pf-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Pattern</th>
-                <th>Controller</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-repeat="routes">
-                <td>{{ name }}</td>
-                <td>{{ pattern }} {{ methods | str }}</td>
-                <td><abbr title="{{ controller }}">{{ controller | short }}</abbr></td>
-            </tr>
-        </tbody>
-    </table>
+    <script id="panel-routes" type="text/template">
+
+        <h1>Routes</h1>
+
+        <table class="pf-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Pattern</th>
+                    <th>Controller</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-repeat="routes">
+                    <td>{{ name }}</td>
+                    <td>{{ pattern }} {{ methods | str }}</td>
+                    <td><abbr title="{{ controller }}">{{ controller | short }}</abbr></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </script>
 
 </template>
 
@@ -25,11 +31,18 @@
 
   module.exports = {
 
+    section: {
+        priority: 20,
+        panel: '#panel-routes'
+    },
+
+    replace: true,
+
     props: ['data'],
 
     ready: function () {
         this.$data = this.data;
-        this.$parent.add(this, '<a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>', {priority: 20, panel: 'routes'});
+        this.$parent.add(this);
     },
 
     filters: {

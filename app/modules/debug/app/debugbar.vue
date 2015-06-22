@@ -4,17 +4,17 @@
 
         <div class="pf-navbar">
 
-            <ul class="pf-navbar-nav" v-repeat="navbar | orderBy 'priority'">
-                <li v-html="html" v-on="click: open(panel)"></li>
+            <ul class="pf-navbar-nav">
+                <li v-repeat="sections | orderBy 'priority'" v-on="click: open(name)">
+                    <component is="{{ name }}" data="{{ data[name] }}"></component>
+                </li>
             </ul>
 
             <a class="pf-close" v-on="click: close"></a>
 
         </div>
 
-        <div v-repeat="panels">
-            <component class="pf-profiler-panel" v-style="display: $value === panel ? 'block' : 'none', height: height" is="{{ $value }}" data="{{ data[$value] }}"></component>
-        </div>
+        <div class="pf-profiler-panel" v-el="panel" v-style="display: panel ? 'block' : 'none', height: height"></div>
 
     </div>
 
@@ -35,9 +35,9 @@
         data: function () {
             return {
                 data: {},
-                navbar: [],
-                panels: [],
-                panel: null
+                panel: null,
+                sections: [],
+                instances: {}
             }
         },
 
@@ -47,11 +47,11 @@
 
                 this.$set('data', data);
 
-                var panels = this.panels;
+                var sections = this.sections;
 
-                $.each(this.$options.components, function (name) {
+                $.each(this.$options.components, function (name, component) {
                     if (data[name]) {
-                        panels.push(name);
+                        sections.push($.extend({name: name}, component.options.section));
                     }
                 });
 
@@ -61,7 +61,7 @@
 
         computed: {
 
-            height: function() {
+            height: function () {
                 return Math.ceil(window.innerHeight / 2) + 'px';
             }
 
@@ -69,24 +69,34 @@
 
         methods: {
 
-            add: function (collector, navbar, options) {
-
-                this.navbar.push($.extend({ html: collector.$interpolate(navbar || '') }, options));
-
+            add: function (instance) {
+                this.instances[instance.$options.name] = instance;
             },
 
-            open: function (panel) {
+            open: function (name) {
 
-                if (panel) {
+                var instance = this.instances[name], el = document.createElement('div'), template = instance.$options.section.panel, panel;
+
+                if (template) {
+
+                    if (this.panel) {
+                        this.panel.$destroy(true);
+                    }
+
+                    panel = instance.$addChild({el: el, template: template, inherit: true});
+                    panel.$appendTo(this.$$.panel);
+
                     this.$set('panel', panel);
                 }
-
             },
 
             close: function () {
 
-                this.$set('panel', null);
+                if (this.panel) {
+                    this.panel.$destroy(true);
+                }
 
+                this.$set('panel', null);
             }
 
         }

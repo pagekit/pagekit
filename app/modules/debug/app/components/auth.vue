@@ -1,33 +1,29 @@
 <template>
 
-    <div v-el="navbar" style="display: none">
+    <a title="User"><div class="pf-icon pf-icon-auth" v-class="pf-parent: user"></div> {{ label }}</a>
 
-        <a title="User"><div class="pf-icon pf-icon-auth" v-class="pf-parent: user"></div> {{ label }}</a>
+    <div class="pf-dropdown" v-show="user">
 
-        <div class="pf-dropdown" v-show="user">
-
-            <table class="pf-table pf-table-dropdown">
-                <tbody>
-                    <tr>
-                        <td>Username</td>
-                        <td>{{ user }}</td>
-                    </tr>
-                    <tr>
-                        <td>Roles</td>
-                        <td>{{ roles | json }}</td>
-                    </tr>
-                    <tr>
-                        <td>Authenticated</td>
-                        <td>{{ authenticated ? 'yes' : 'no' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td>{{ user_class }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <table class="pf-table pf-table-dropdown">
+            <tbody>
+                <tr>
+                    <td>Username</td>
+                    <td>{{ user }}</td>
+                </tr>
+                <tr>
+                    <td>Roles</td>
+                    <td>{{ roles | json }}</td>
+                </tr>
+                <tr>
+                    <td>Authenticated</td>
+                    <td>{{ authenticated ? 'yes' : 'no' }}</td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>{{ user_class }}</td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 
@@ -37,11 +33,17 @@
 
   module.exports = {
 
+    section: {
+        priority: 60
+    },
+
+    replace: true,
+
     props: ['data'],
 
     ready: function () {
         this.$data = this.data;
-        this.$parent.add(this, $(this.$$.navbar).html(), {priority: 60});
+        this.$parent.add(this);
     },
 
     computed: {

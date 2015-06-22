@@ -1,21 +1,27 @@
 <template>
 
-    <h1>Logs</h1>
+    <a title="Log">Log ({{ records.length }})</a>
 
-    <table class="pf-table">
-        <thead>
-            <tr>
-                <th>Message</th>
-                <th>Level</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-repeat="records">
-                <td>{{ message }}</td>
-                <td>{{ level_name }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <script id="panel-log" type="text/template">
+
+        <h1>Logs</h1>
+
+        <table class="pf-table">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-repeat="records">
+                    <td>{{ message }}</td>
+                    <td>{{ level_name }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </script>
 
 </template>
 
@@ -23,11 +29,18 @@
 
   module.exports = {
 
+    section: {
+        priority: 70,
+        panel: '#panel-log'
+    },
+
+    replace: true,
+
     props: ['data'],
 
     ready: function () {
         this.$data = this.data;
-        this.$parent.add(this, '<a title="Log">Log ({{ records.length }})</a>', {priority: 70, panel: 'log'});
+        this.$parent.add(this);
     }
 
   };
