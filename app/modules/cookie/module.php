@@ -36,10 +36,10 @@ return [
 
     'events' => [
 
-        'response' => function ($event) use ($app) {
+        'response' => function ($event, $request, $response) use ($app) {
             if (isset($app['cookie.init'])) {
                 foreach ($app['cookie']->getQueuedCookies() as $cookie) {
-                    $event->getResponse()->headers->setCookie($cookie);
+                    $$response->headers->setCookie($cookie);
                 }
             }
         }

@@ -113,7 +113,7 @@ return [
 
         }, 100],
 
-        'response' => [function ($event, $request) use ($app) {
+        'response' => [function ($event, $request, $response) use ($app) {
 
             if (!$event->isMasterRequest() || !$app['session.test']) {
                 return;
@@ -126,7 +126,7 @@ return [
                 $params = session_get_cookie_params();
                 $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 
-                $event->getResponse()->headers->setCookie($cookie);
+                $response->headers->setCookie($cookie);
             }
 
         }, -100]
