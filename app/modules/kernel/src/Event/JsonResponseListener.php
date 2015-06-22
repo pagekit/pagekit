@@ -39,8 +39,8 @@ class JsonResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.request'    => ['onRequest', 130],
-            'app.controller' => ['onController', 20]
+            'request'    => ['onRequest', 130],
+            'controller' => ['onController', 20]
         ];
     }
 }

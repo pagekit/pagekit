@@ -43,7 +43,7 @@ class CsrfListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.request' => ['onRequest', -10]
+            'request' => ['onRequest', -10]
         ];
     }
 }

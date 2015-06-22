@@ -50,7 +50,7 @@ return [
                 return;
             }
 
-            $app->on('app.request', function () use ($app) {
+            $app->on('request', function () use ($app) {
 
                 try {
 

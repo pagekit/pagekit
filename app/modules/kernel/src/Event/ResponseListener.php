@@ -48,7 +48,7 @@ class ResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.response' => ['onResponse', -10]
+            'response' => ['onResponse', -10]
         ];
     }
 }

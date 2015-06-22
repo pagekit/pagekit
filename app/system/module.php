@@ -107,7 +107,7 @@ return [
                 $app['isAdmin'] = false;
             }
 
-            $app->on('app.request', function ($event, $request) use ($app) {
+            $app->on('request', function ($event, $request) use ($app) {
 
                 if (!$event->isMasterRequest()) {
                     return;

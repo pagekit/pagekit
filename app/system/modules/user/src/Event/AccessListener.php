@@ -125,7 +125,7 @@ class AccessListener implements EventSubscriberInterface
         return [
             'route.configure'  => 'onConfigureRoute',
             'auth.authorize'   => 'onAuthorize',
-            'app.request'      => [
+            'request'      => [
                 ['onLateRequest', -512],
                 ['onRequest', -256]
             ]

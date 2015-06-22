@@ -72,7 +72,7 @@ class ControllerListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.controller' => [
+            'controller' => [
                 ['resolveController', 120],
                 ['executeController', 100]
             ]

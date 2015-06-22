@@ -20,7 +20,7 @@ return [
 
     'events' => [
 
-        'app.request' => function () use ($app) {
+        'request' => function () use ($app) {
             $app['view']->addHelper(new EditorHelper());
             $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/components/editor.js', ['uikit-htmleditor', 'finder']);
         }

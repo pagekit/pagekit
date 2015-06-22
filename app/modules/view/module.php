@@ -76,7 +76,7 @@ return [
 
     'events' => [
 
-        'app.request' => function () use ($app) {
+        'request' => function () use ($app) {
             $app->subscribe(new ViewListener($app['view']));
         }
 

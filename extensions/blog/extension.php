@@ -168,7 +168,7 @@ return [
             );
         },
 
-        'app.request' => [
+        'request' => [
 
             [function() use ($app) {
                 $app['module']->get('system/site')->setFrontpage('@blog/site');

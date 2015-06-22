@@ -27,7 +27,7 @@ class StringResponseListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.controller' => ['onController', 10],
+            'controller' => ['onController', 10],
         ];
     }
 }

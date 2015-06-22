@@ -44,7 +44,7 @@ return [
             );
         },
 
-        'app.request' => [function () use ($app) {
+        'request' => [function () use ($app) {
 
             $app['view']->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 

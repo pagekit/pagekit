@@ -96,7 +96,7 @@ return [
 
         },
 
-        'app.request' => [function () use ($app) {
+        'request' => [function () use ($app) {
 
             foreach (Node::where(['status = ?'], [1])->get() as $node) {
 

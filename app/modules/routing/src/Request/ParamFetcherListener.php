@@ -53,7 +53,7 @@ class ParamFetcherListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.controller' => ['onController', 110]
+            'controller' => ['onController', 110]
         ];
     }
 }

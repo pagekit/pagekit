@@ -69,7 +69,7 @@ return [
 
         },
 
-        'app.controller' => [function ($event, $request) use ($app) {
+        'controller' => [function ($event, $request) use ($app) {
 
             $name = $request->attributes->get('_route', '');
 

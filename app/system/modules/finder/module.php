@@ -45,7 +45,7 @@ return [
             $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
         },
 
-        'app.request' => function () use ($app) {
+        'request' => function () use ($app) {
 
             $app['view']->addHelper(new FinderHelper());
             $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);

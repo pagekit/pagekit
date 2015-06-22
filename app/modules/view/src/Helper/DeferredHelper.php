@@ -39,7 +39,7 @@ class DeferredHelper implements HelperInterface
 
         }, 15);
 
-        $events->on('app.response', function ($e, $request, $response) use ($view) {
+        $events->on('response', function ($e, $request, $response) use ($view) {
 
             $dispatcher = $e->getDispatcher();
 

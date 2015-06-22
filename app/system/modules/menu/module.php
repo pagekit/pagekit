@@ -29,7 +29,7 @@ return [
 
     'events' => [
 
-        'app.request' => function() use ($app) {
+        'request' => function() use ($app) {
 
             $app['menus']->registerFilter('access', 'Pagekit\Menu\Filter\AccessFilter', 16);
             $app['menus']->registerFilter('status', 'Pagekit\Menu\Filter\StatusFilter', 16);

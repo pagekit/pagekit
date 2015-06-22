@@ -111,7 +111,7 @@ class MenuListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.site'                   => 'onSite',
+            'site'                   => 'onSite',
             'system.menu'                => 'onSystemMenu',
             'system.menuitem.postSave'   => 'clearCache',
             'system.menuitem.postDelete' => 'clearCache',

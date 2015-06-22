@@ -18,14 +18,14 @@ class AlphaTheme extends Theme
      */
     public function main(App $app)
     {
-        $app->on('app.site', function () use ($app) {
+        $app->on('site', function () use ($app) {
             $app['view']->on('layout', function ($event, $view) use ($app) {
                 $event->setName($this->getLayout());
                 $event->setParameter('theme', $app['theme.site']);
             });
         });
 
-        $app->on('app.request', function () use ($app) {
+        $app->on('request', function () use ($app) {
             $app['scripts']->register('theme-settings', 'alpha:app/bundle/widgets/theme.js', '~widgets');
         });
     }

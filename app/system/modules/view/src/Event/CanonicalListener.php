@@ -31,7 +31,7 @@ class CanonicalListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.site' => 'onSite'
+            'site' => 'onSite'
         ];
     }
 }

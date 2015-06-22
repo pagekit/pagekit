@@ -42,7 +42,7 @@ class RouteListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.request'          => ['onAppRequest', 130],
+            'request'          => ['onAppRequest', 130],
             'route.configure'      => 'onConfigureRoute',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'

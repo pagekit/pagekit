@@ -94,7 +94,7 @@ class CacheModule extends Module
      */
     public function clearCache(array $options = [])
     {
-        App::on('app.terminate', function() use ($options) {
+        App::on('terminate', function() use ($options) {
             $this->doClearCache($options);
         }, -512);
     }

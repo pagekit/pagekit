@@ -9,7 +9,7 @@ use Pagekit\Finder\Event\FileAccessEvent;
 class SystemListener implements EventSubscriberInterface
 {
     /**
-     * Dispatches the 'app.site' or 'app.admin' event.
+     * Dispatches the 'site' or 'admin' event.
      */
     public function onRequest($event)
     {
@@ -17,7 +17,7 @@ class SystemListener implements EventSubscriberInterface
             return;
         }
 
-        App::trigger(App::isAdmin() ? 'app.admin' : 'app.site', [App::request()]);
+        App::trigger(App::isAdmin() ? 'admin' : 'site', [App::request()]);
     }
 
     /**
@@ -38,7 +38,7 @@ class SystemListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.request'   => 'onRequest',
+            'request'   => 'onRequest',
             'system.finder' => 'onSystemFinder'
         ];
     }

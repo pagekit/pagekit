@@ -66,7 +66,7 @@ class HttpKernel implements HttpKernelInterface
     {
         try {
 
-            $event = new RequestEvent('app.request', $this);
+            $event = new RequestEvent('request', $this);
 
             $this->stack->push($request);
             $this->events->trigger($event, [$request]);
@@ -133,7 +133,7 @@ class HttpKernel implements HttpKernelInterface
      */
     public function terminate(Request $request, Response $response)
     {
-        $event = new KernelEvent('app.terminate', $this);
+        $event = new KernelEvent('terminate', $this);
         $this->events->trigger($event, [$request, $response]);
     }
 
@@ -144,7 +144,7 @@ class HttpKernel implements HttpKernelInterface
      */
     protected function handleController()
     {
-        $event = new ControllerEvent('app.controller', $this);
+        $event = new ControllerEvent('controller', $this);
         $this->events->trigger($event, [$this->getRequest()]);
 
         $response = $event->getResponse();
@@ -171,7 +171,7 @@ class HttpKernel implements HttpKernelInterface
      */
     protected function handleResponse(Response $response)
     {
-        $event = new KernelEvent('app.response', $this);
+        $event = new KernelEvent('response', $this);
         $this->events->trigger($event, [$this->getRequest(), $response]);
         $this->stack->pop();
 
@@ -187,7 +187,7 @@ class HttpKernel implements HttpKernelInterface
      */
     protected function handleException(\Exception $e)
     {
-        $event = new ExceptionEvent('app.exception', $this, $e);
+        $event = new ExceptionEvent('exception', $this, $e);
         $this->events->trigger($event, [$this->getRequest()]);
 
         $e = $event->getException();

@@ -43,9 +43,8 @@ return [
 
     'events' => [
 
-        'app.request' => [
+        'request' => [
 
-            // redirect the request if it has a trailing slash
             function ($event, $request) use ($app) {
 
                 if (!$app->inConsole()) {
@@ -54,6 +53,7 @@ return [
 
                 $path = $request->getPathInfo();
 
+                // redirect the request if it has a trailing slash
                 if ('/' != $path && '/' == substr($path, -1) && '//' != substr($path, -2)) {
                     $event->setResponse(new RedirectResponse(rtrim($request->getUriForPath($path), '/'), 301));
                 }

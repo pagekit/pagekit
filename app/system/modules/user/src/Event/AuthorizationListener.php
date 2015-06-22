@@ -71,7 +71,7 @@ class AuthorizationListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.request' => [
+            'request' => [
                 ['onRequest', 0],
                 ['onSystemInit', 50]
             ],

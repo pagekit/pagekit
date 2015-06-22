@@ -30,7 +30,7 @@ return [
 
     'events' => [
 
-        'app.request' => [function () use ($app) {
+        'request' => [function () use ($app) {
 
             $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'vue');
             $app['scripts']->register('v-upload', 'system/package:app/bundle/upload.js', ['vue', 'uikit-upload']);

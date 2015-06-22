@@ -39,7 +39,7 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.terminate' => ['onTerminate', -1000]
+            'terminate' => ['onTerminate', -1000]
         ];
     }
 }

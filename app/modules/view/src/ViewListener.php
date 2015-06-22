@@ -89,7 +89,7 @@ class ViewListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.controller' => ['onController', 50]
+            'controller' => ['onController', 50]
         ];
     }
 }

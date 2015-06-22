@@ -70,7 +70,7 @@ class ExceptionListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'app.exception' => ['onException', -100]
+            'exception' => ['onException', -100]
         ];
     }
 

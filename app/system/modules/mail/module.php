@@ -91,7 +91,7 @@ return [
 
     'events' => [
 
-        'app.terminate' => function () use ($app) {
+        'terminate' => function () use ($app) {
 
             if ($app['mailer.initialized']) {
                 try {

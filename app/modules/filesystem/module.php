@@ -40,7 +40,7 @@ return [
 
         },
 
-        'app.request' => [function ($event, $request) use ($app) {
+        'request' => [function ($event, $request) use ($app) {
 
             $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
 

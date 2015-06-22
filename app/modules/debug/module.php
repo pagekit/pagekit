@@ -59,7 +59,7 @@ return [
 
             $app->subscribe($app['debugbar']);
 
-            $app->on('app.request', function ($event) use ($app) {
+            $app->on('request', function ($event) use ($app) {
 
                 if (!$event->isMasterRequest()) {
                     return;

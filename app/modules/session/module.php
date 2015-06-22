@@ -91,7 +91,7 @@ return [
 
         },
 
-        'app.request' => [function ($event, $request) use ($app) {
+        'request' => [function ($event, $request) use ($app) {
 
             if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
                 $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
@@ -113,7 +113,7 @@ return [
 
         }, 100],
 
-        'app.response' => [function ($event, $request) use ($app) {
+        'response' => [function ($event, $request) use ($app) {
 
             if (!$event->isMasterRequest() || !$app['session.test']) {
                 return;

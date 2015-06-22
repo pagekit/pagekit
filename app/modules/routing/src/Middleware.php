@@ -20,13 +20,13 @@ class Middleware
     {
         $this->events = $events;
 
-        $events->on('app.request', function ($event, $request) {
+        $events->on('request', function ($event, $request) {
             if ($name = $request->attributes->get('_route', '')) {
                 $event->getDispatcher()->trigger('before'.$name, [$request]);
             }
         }, 50);
 
-        $events->on('app.response', function ($event, $request, $response) {
+        $events->on('response', function ($event, $request, $response) {
             if ($name = $request->attributes->get('_route', '')) {
                 $event->getDispatcher()->trigger('after'.$name, [$request, $response]);
             }
