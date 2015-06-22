@@ -9,7 +9,7 @@
                 <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
-                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="node.id == frontpage"></i>
+                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="isFrontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ node.type }}</div>
             <div class="pk-table-width-100 uk-text-center">
@@ -21,7 +21,7 @@
                 </td>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a v-attr="href: $url(node.path)">{{ node.path }}</a>
+                <a target="_blank" v-attr="href: url">{{ isFrontpage ? '/' : node.path }}</a>
             </div>
         </div>
 
@@ -38,7 +38,23 @@
     module.exports = {
 
         inherit: true,
-        replace: true
+        replace: true,
+
+        computed: {
+
+            url: function() {
+
+                return this.$url(this.isFrontpage ? '' : this.node.path.replace(/^\/+/, ''))
+
+            },
+
+            isFrontpage: function() {
+
+                return this.node.id == this.frontpage;
+
+            }
+
+        }
 
     }
 

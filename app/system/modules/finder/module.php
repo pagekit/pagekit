@@ -9,7 +9,7 @@ return [
     'main' => function ($app) {
 
         $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
-        $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
+        $app['path.storage'] = $app['path'].$this->config['storage'];
 
     },
 
