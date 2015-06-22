@@ -57,7 +57,7 @@
 
     <ul class="uk-list uk-list-line uk-margin-remove">
         <li v-repeat="entry: feed.entries | count">
-            <a v-attr="href: entry.link">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
+            <a v-attr="href: entry.link" target="_blank">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
             <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
             <p class="uk-margin-small-top" v-if="widget.content == '2'">{{ $index == 0 ? entry.contentSnippet : '' }}</p>
         </li>
@@ -66,7 +66,7 @@
     <p class="uk-text-center" v-if="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></p>
     <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</p>
     <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.url && !editing">{{ 'No URL given.' | trans }}</p>
-        
+
 
 </template>
 
