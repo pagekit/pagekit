@@ -45,11 +45,11 @@
 
             <div v-if="view == 'finder'">
 
-                <v-finder root="{{ finder.root }}" v-ref="finder"></v-finder>
+                <v-finder root="{{ storage }}" v-ref="finder"></v-finder>
 
                 <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-link" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link" type="button" v-attr="disabled: !finder.select" v-on="click: closeFinder(finder.select)">{{ 'Select' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="button" v-attr="disabled: !selected" v-on="click: select">{{ 'Select' | trans }}</button>
                 </div>
 
             </div>
@@ -68,7 +68,7 @@
                 view: 'settings',
                 style: '',
                 image: { src: '', alt: '' },
-                finder: { root: '', select: '' }
+                storage: window.$pagekit.storage ? window.$pagekit.storage : '/storage'
             }
         },
 
@@ -81,10 +81,6 @@
             });
 
             modal.show();
-
-            this.$on('select.finder', function (selected) {
-                this.finder.select = selected.length == 1 && selected[0].match(/\.(png|jpg|jpeg|gif|svg)$/i) ? selected[0] : '';
-            });
 
             this.$watch('image.src', this.preview);
             this.preview();
@@ -117,16 +113,30 @@
 
             openFinder: function () {
                 this.view = 'finder';
-                this.finder.select = '';
             },
 
-            closeFinder: function (select) {
+            select: function(e) {
+                e.preventDefault();
+                this.image.src = this.$.finder.getSelected()[0];
+                this.cancel(e);
+            },
+
+            cancel: function(e) {
+                e.preventDefault();
                 this.view = 'settings';
-                if (select) this.image.src = select;
             },
 
             resolveUrl: function(url) {
                 return this.$url.static(url);
+            }
+
+        },
+
+        computed: {
+
+            selected: function() {
+                var selected = this.$.finder.getSelected();
+                return selected.length == 1 && this.$.finder.isImage(selected[0]);
             }
 
         }

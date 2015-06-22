@@ -190,7 +190,11 @@
             },
 
             getFullPath: function () {
-                return (this.root+this.path).replace(/^\/+|\/+$/g, '')+'/';
+                return this.getRoot()+'/'+this.path.replace(/^\/+|\/+$/g, '')+'/';
+            },
+
+            getRoot: function() {
+                return this.root.replace(/^\/+|\/+$/g, '')
             },
 
             getSelected: function () {
@@ -278,7 +282,7 @@
 
             command: function (cmd, params) {
 
-                return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.root}, params), function (data) {
+                return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.getRoot()}, params), function (data) {
 
                     this.load();
                     UIkit.notify(data.message, data.error ? 'danger' : '');
@@ -291,7 +295,7 @@
 
             load: function () {
 
-                return this.resource.get({path: this.path, root: this.root}, function (data) {
+                return this.resource.get({path: this.path, root: this.getRoot()}, function (data) {
 
                     this.$set('items', data.items || []);
                     this.$set('count', this.items.length);
@@ -317,7 +321,7 @@
                         action: this.$url('system/finder/upload'),
 
                         before: function (options) {
-                            $.extend(options.params, { path: finder.path, root: finder.root, _csrf: $pagekit.csrf });
+                            $.extend(options.params, { path: finder.path, root: finder.getRoot(), _csrf: $pagekit.csrf });
                         },
 
                         loadstart: function () {

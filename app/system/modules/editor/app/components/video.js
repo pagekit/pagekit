@@ -54,9 +54,7 @@ module.exports = {
 
         openModal: function(video) {
 
-            var editor = this.editor,
-                cursor = editor.editor.getCursor(),
-                options = _.extend({ root: '/storage' }, this.options.finder);
+            var editor = this.editor, cursor = editor.editor.getCursor();
 
             if (!video) {
                 video = {
@@ -69,8 +67,7 @@ module.exports = {
             this
                 .$addChild({
                     data: {
-                        video: _.extend({ src: '' }, video),
-                        finder: { root: options.root.replace(/^\/+|\/+$/g, '')+'/' }
+                        video: video
                     }
                 }, Picker)
                 .$mount()

@@ -24,7 +24,7 @@ return [
 
             $view->data('$pagekit', [
                 'editor' => $app['module']['system/editor']->config('editor'),
-                'storage' => $app['system']->config('storage'),
+                'storage' => $app['module']['system/finder']->config('storage'),
                 'user' => $user,
                 'menu' => array_values($app['system']->getMenu()->getItems())
             ]);

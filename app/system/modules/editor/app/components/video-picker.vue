@@ -36,11 +36,11 @@
 
             <div v-if="view == 'finder'">
 
-                <v-finder root="{{ finder.root }}" v-ref="finder"></v-finder>
+                <v-finder root="{{ storage }}" v-ref="finder"></v-finder>
 
                 <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-link" type="button" v-on="click: closeFinder(false)">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link" type="button" v-attr="disabled: !finder.select" v-on="click: closeFinder(finder.select)">{{ 'Select' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="button" v-attr="disabled: !selected" v-on="click: select">{{ 'Select' | trans }}</button>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@
             return {
                 view: 'settings',
                 video: { src: '' },
-                finder: { root: '', select: '' }
+                storage: window.$pagekit.storage ? window.$pagekit.storage : '/storage'
             };
         },
 
@@ -72,10 +72,6 @@
 
             modal.show();
 
-            this.$on('select.finder', function (selected) {
-                this.finder.select = selected.length == 1 && selected[0].match(/\.(mpeg|ogv|mp4|webm|wmv)$/i) ? selected[0] : '';
-            });
-
         },
 
         methods: {
@@ -86,12 +82,26 @@
 
             openFinder: function () {
                 this.view = 'finder';
-                this.finder.select = '';
             },
 
-            closeFinder: function (select) {
+            select: function(e) {
+                e.preventDefault();
+                this.video.src = this.$.finder.getSelected()[0];
+                this.cancel(e);
+            },
+
+            cancel: function(e) {
+                e.preventDefault();
                 this.view = 'settings';
-                if (select) this.video.src = select;
+            }
+
+        },
+
+        computed: {
+
+            selected: function() {
+                var selected = this.$.finder.getSelected();
+                return selected.length == 1 && selected[0].match(/\.(mpeg|ogv|mp4|webm|wmv)$/i);
             }
 
         }

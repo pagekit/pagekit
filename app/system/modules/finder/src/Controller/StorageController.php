@@ -16,7 +16,7 @@ class StorageController
                 'title' => __('Storage'),
                 'name'  => 'system:modules/finder/views/storage.php'
             ],
-            'root' => App::system()->config('storage'),
+            'root' => App::module('system/finder')->config('storage'),
             'mode' => 'write'
         ];
     }

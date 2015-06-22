@@ -47,9 +47,7 @@ module.exports = {
 
         openModal: function (image) {
 
-            var editor = this.editor,
-                cursor = editor.editor.getCursor(),
-                options = _.extend({ root: '/storage' }, this.options.finder);
+            var editor = this.editor, cursor = editor.editor.getCursor();
 
             if (!image) {
                 image = {
@@ -61,8 +59,7 @@ module.exports = {
 
             this.$addChild({
                     data: {
-                        image: _.extend({ src: '', alt: '' }, image),
-                        finder: { root: options.root.replace(/^\/+|\/+$/g, '') + '/' }
+                        image: image
                     }
                 }, Picker)
                 .$mount()
