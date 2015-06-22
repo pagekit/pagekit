@@ -11,22 +11,22 @@ class Module implements ModuleInterface, EventSubscriberInterface
     /**
      * @var string
      */
-    protected $name;
+    public $name;
 
     /**
      * @var string
      */
-    protected $path;
+    public $path;
 
     /**
      * @var array
      */
-    protected $config;
+    public $config;
 
     /**
      * @var array
      */
-    protected $options;
+    public $options;
 
     /**
      * Constructor.
