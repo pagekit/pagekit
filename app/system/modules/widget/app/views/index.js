@@ -13,12 +13,11 @@ module.exports = {
 
         widgets: function () {
 
-            $('.uk-nestable', this.$el).each(function () {
-                UIkit.nestable(this, {maxDepth: 0, group: 'positions'}).off('change.uk.nestable').on('change.uk.nestable', function (e, el, type, root, nestable) {
-                    // update postions ...
-                });
+            $('.uk-sortable').each(function() {
+                UIkit.sortable(this, {group:'position'});
+            }).on('change.uk.nestable', function (e, el, type, root, nestable) {
+                // update postions ...
             });
-
         }
 
     },
