@@ -86,8 +86,6 @@ class AccessListener implements EventSubscriberInterface
 
     /**
      * Reads the access expressions and evaluates them on the current user.
-     *
-     * @param GetResponseEvent $event
      */
     public function onLateRequest($event, $request)
     {
@@ -103,8 +101,6 @@ class AccessListener implements EventSubscriberInterface
 
     /**
      * Checks for the "system: access admin area" and redirects to login.
-     *
-     * @param GetResponseEvent $event
      */
     public function onRequest($event, $request)
     {

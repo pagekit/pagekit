@@ -302,7 +302,7 @@
                     this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
-                }).error(function(data) {
+                }).error(function() {
 
                     UIkit.notify('Unable to access directory.', 'danger')
 

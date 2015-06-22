@@ -5,7 +5,6 @@ namespace Pagekit\Blog\Event;
 use Pagekit\Application as App;
 use Pagekit\Blog\UrlResolver;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Routing\Event\RouteCollectionEvent;
 
 class RouteListener implements EventSubscriberInterface
 {
@@ -20,15 +19,13 @@ class RouteListener implements EventSubscriberInterface
     }
 
     /**
-     * Register alias routes.
+     * Registers permalink route alias.
      */
-    public function onRouteCollection(RouteCollectionEvent $event)
+    public function onConfigureRoute($event, $route)
     {
-        if (!$this->permalink or !$route = $event->getRoutes()->get('@blog/id')) {
-            return;
+        if ($route->getName() == '@blog/id' && $this->permalink) {
+            App::routes()->alias(dirname($route->getPath()).'/'.ltrim($this->permalink, '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
         }
-
-        App::aliases()->add(dirname($route->getPath()).'/'.ltrim($this->permalink, '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
     }
 
     /**
@@ -46,7 +43,7 @@ class RouteListener implements EventSubscriberInterface
     {
         return [
             'app.request'          => ['onAppRequest', 130],
-            'route.collection'     => 'onRouteCollection',
+            'route.configure'      => 'onConfigureRoute',
             'blog.post.postSave'   => 'clearCache',
             'blog.post.postDelete' => 'clearCache'
         ];

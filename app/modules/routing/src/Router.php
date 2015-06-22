@@ -20,7 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 class Router implements RouterInterface, UrlGeneratorInterface
 {
     /**
-     * @var mixed
+     * @var ResourceInterface
      */
     protected $resource;
 
@@ -72,12 +72,12 @@ class Router implements RouterInterface, UrlGeneratorInterface
     /**
      * Constructor.
      *
-     * @param mixed           $resource
-     * @param LoaderInterface $loader
-     * @param RequestStack    $stack
-     * @param array           $options
+     * @param ResourceInterface $resource
+     * @param LoaderInterface   $loader
+     * @param RequestStack      $stack
+     * @param array             $options
      */
-    public function __construct($resource, LoaderInterface $loader, RequestStack $stack, array $options = [])
+    public function __construct(ResourceInterface $resource, LoaderInterface $loader, RequestStack $stack, array $options = [])
     {
         $this->resource = $resource;
         $this->loader   = $loader;
@@ -319,7 +319,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
         }
 
         if (!$this->cache) {
-            $this->cache = ['key' => sha1(serialize($this->resource)), 'modified' => 0];
+            $this->cache = ['key' => sha1(serialize($this->resource).serialize($this->options)), 'modified' => $this->resource->getModified()];
         }
 
         $file  = sprintf($file, $this->options['cache'], $this->cache['key']);
