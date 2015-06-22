@@ -4,7 +4,7 @@
 
         <div class="uk-margin" v-if="user.canView">
 
-            <div v-if="comments.length">
+            <div v-show="comments.length">
                 <h2 class="uk-h3">{{ 'Comments (%count%)' | trans {count:count} }}</h2>
                 <ul class="uk-comment-list">
 

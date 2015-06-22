@@ -60,7 +60,7 @@ class SiteController
                 ]
             ],
             'posts' => $query->get(),
-            'params' => $this->blog->config,
+            'params' => $this->blog->config(),
             'total' => $total,
             'page' => $page
         ];
