@@ -15,10 +15,9 @@
 
             <comments-reply v-if="config.enabled && !reply"></comments-reply>
 
-            <span v-if="!config.enabled">{{ 'Comments are closed.' | trans }}</span>
-
         </div>
 
+        <p v-if="!config.enabled">{{ 'Comments are closed.' | trans }}</p>
         <p v-if="!user.canView && user.isAuthenticated">{{ 'You are not allowed to view comments.' | trans }}</p>
         <p v-if="!user.canView && !user.isAuthenticated">{{ 'Please login to view comments.' | trans }}</p>
 
