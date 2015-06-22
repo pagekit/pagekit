@@ -91,7 +91,7 @@ class AnnotationLoader implements LoaderInterface
         $path = $annotation->getPath() ?: $this->getDefaultRoutePath($method);
 
         $routes[] = (new Route(rtrim($globals['path'].$path, '/')))
-            ->setName($globals['name'].$name)
+            ->setName($globals['name'].'/'.$name)
             ->setDefaults(array_replace($globals['defaults'], $annotation->getDefaults(), ['_controller' => $class->name.'::'.$method->name]))
             ->setRequirements(array_replace($globals['requirements'], $annotation->getRequirements()))
             ->setOptions(array_replace($globals['options'], $annotation->getOptions()))
