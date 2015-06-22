@@ -135,5 +135,4 @@ class SiteModule extends Module
     {
         $this->frontpage = $name;
     }
-
 }

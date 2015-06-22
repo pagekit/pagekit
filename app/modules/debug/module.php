@@ -25,7 +25,7 @@ return [
             $debugbar->setStorage($app['debugbar.storage']);
             $debugbar->addCollector(new MemoryCollector());
             $debugbar->addCollector(new TimeDataCollector());
-            $debugbar->addCollector(new RoutesDataCollector($app['router']));
+            $debugbar->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
 
             if (isset($app['info'])) {
                 $debugbar->addCollector(new SystemDataCollector($app['info']));

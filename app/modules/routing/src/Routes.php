@@ -2,7 +2,7 @@
 
 namespace Pagekit\Routing;
 
-class Routes implements \IteratorAggregate, \Serializable
+class Routes implements \IteratorAggregate, ResourceInterface
 {
     /**
      * @var array
@@ -23,6 +23,11 @@ class Routes implements \IteratorAggregate, \Serializable
      * @var string
      */
     protected $prefix = '@';
+
+    /**
+     * @var int
+     */
+    protected $modified = 0;
 
     /**
      * Adds a route.
@@ -122,6 +127,14 @@ class Routes implements \IteratorAggregate, \Serializable
     /**
      * {@inheritdoc}
      */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function serialize()
     {
         return serialize([$this->routes, $this->aliases]);
@@ -154,11 +167,14 @@ class Routes implements \IteratorAggregate, \Serializable
 
         $options['controller'] = isset($config['controller']) ? $config['controller'] : '';
 
+        unset ($this->callbacks[$name]);
         if (is_callable($options['controller'])) {
             $this->callbacks[$name] = $options['controller'];
             $options['controller'] = '__callback';
-        } else {
-            unset ($this->callbacks[$name]);
+        } elseif ($options['controller']) {
+            foreach((array) $options['controller'] as $controller) {
+                $this->modified = max($this->modified, filemtime((new \ReflectionClass($controller))->getFileName()));
+            }
         }
 
         return (new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition))->setName($name);

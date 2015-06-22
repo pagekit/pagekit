@@ -36,8 +36,7 @@
             return {
                 data: {},
                 panel: null,
-                sections: [],
-                instances: {}
+                sections: {}
             }
         },
 
@@ -51,7 +50,7 @@
 
                 $.each(this.$options.components, function (name, component) {
                     if (data[name]) {
-                        sections.push($.extend({name: name}, component.options.section));
+                        sections.$add(name, $.extend({name: name}, component.options.section));
                     }
                 });
 
@@ -69,21 +68,21 @@
 
         methods: {
 
-            add: function (instance) {
-                this.instances[instance.$options.name] = instance;
+            add: function (vm) {
+                this.sections[vm.$options.name]['vm'] = vm;
             },
 
             open: function (name) {
 
-                var instance = this.instances[name], el = document.createElement('div'), template = instance.$options.section.panel, panel;
+                var section = this.sections[name], el = document.createElement('div'), panel;
 
-                if (template) {
+                if (section.panel) {
 
                     if (this.panel) {
                         this.panel.$destroy(true);
                     }
 
-                    panel = instance.$addChild({el: el, template: template, inherit: true});
+                    panel = section.vm.$addChild({el: el, template: section.panel, inherit: true});
                     panel.$appendTo(this.$$.panel);
 
                     this.$set('panel', panel);
