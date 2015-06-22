@@ -2,6 +2,7 @@ module.exports = Vue.extend({
 
     data: function () {
         return _.merge({
+            posts: [],
             comments: false,
             pages: 0,
             count: '',
@@ -76,7 +77,8 @@ module.exports = Vue.extend({
 
             this.cancel();
 
-            this.Comments.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page }, function (data) {
+            this.Comments.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page, limit: this.config.limit }, function (data) {
+                this.$set('posts', data.posts);
                 this.$set('comments', data.comments);
                 this.$set('pages', data.pages);
                 this.$set('count', data.count);

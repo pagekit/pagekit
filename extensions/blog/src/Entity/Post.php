@@ -7,6 +7,7 @@ use Pagekit\Comment\CommentsTrait;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
+use Pagekit\User\Model\User;
 
 /**
  * @Entity(tableClass="@blog_post", eventPrefix="blog.post")
@@ -39,7 +40,7 @@ class Post implements \JsonSerializable
     /** @Column(type="integer") */
     protected $user_id;
 
-    /** @Column(type="datetime")*/
+    /** @Column(type="datetime") */
     protected $date;
 
     /** @Column(type="text") */
@@ -172,9 +173,9 @@ class Post implements \JsonSerializable
     public static function getStatuses()
     {
         return [
-            self::STATUS_PUBLISHED      => __('Published'),
-            self::STATUS_UNPUBLISHED    => __('Unpublished'),
-            self::STATUS_DRAFT          => __('Draft'),
+            self::STATUS_PUBLISHED => __('Published'),
+            self::STATUS_UNPUBLISHED => __('Unpublished'),
+            self::STATUS_DRAFT => __('Draft'),
             self::STATUS_PENDING_REVIEW => __('Pending Review')
         ];
     }
@@ -193,13 +194,16 @@ class Post implements \JsonSerializable
 
     public function setUser($user)
     {
-        $this->user = $user;
+        $this->user    = $user;
         $this->user_id = $user->getId();
     }
 
     public function isCommentable()
     {
-        return $this->commentable;
+        $blog      = App::module('blog');
+        $autoclose = $blog->config('comments.autoclose') ? $blog->config('comments.autoclose_days') : 0;
+
+        return $this->getCommentStatus() && (!$autoclose or $this->getDate() >= new \DateTime("-{$autoclose} day"));
     }
 
     public function setCommentable($commentable)
@@ -212,9 +216,9 @@ class Post implements \JsonSerializable
         return $this->status === self::STATUS_PUBLISHED && $this->date < new \DateTime;
     }
 
-    public function isAccessible()
+    public function isAccessible(User $user = null)
     {
-        return $this->isPublished() && $this->hasAccess(App::user());
+        return $this->isPublished() && $this->hasAccess($user ?: App::user());
     }
 
     /**
@@ -230,7 +234,9 @@ class Post implements \JsonSerializable
         }
 
         if ($post['comments']) {
-            $post['comments_pending'] = count(array_filter($post['comments'], function($comment) { return $comment->getStatus() == Comment::STATUS_PENDING; }));
+            $post['comments_pending'] = count(array_filter($post['comments'], function ($comment) {
+                return $comment->getStatus() == Comment::STATUS_PENDING;
+            }));
             unset($post['comments']);
         }
 
@@ -248,10 +254,14 @@ class Post implements \JsonSerializable
     {
         $this->modified = new \DateTime;
 
-        $i = 2;
+        $i  = 2;
         $id = $this->id;
 
-        while (self::where('slug = ?', [$this->slug])->where(function($query) use($id) { if ($id) $query->where('id <> ?', [$id]); })->first()) {
+        while (self::where('slug = ?', [$this->slug])->where(function ($query) use ($id) {
+            if ($id) {
+                $query->where('id <> ?', [$id]);
+            }
+        })->first()) {
             $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
         }
     }

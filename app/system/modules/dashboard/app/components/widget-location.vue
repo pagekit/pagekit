@@ -174,7 +174,7 @@
 
                 } else {
 
-                    this.$http.get(this.$url('admin/system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}), function(data) {
+                    this.$http.get(this.$url('system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}), function(data) {
 
                         storage[key] = JSON.stringify(data);
                         this.$set('timezone', data);

@@ -6,15 +6,12 @@ use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Kernel\Exception\NotFoundException;
 
-/**
- * TODO should this be available in the frontend as well?
- * @Access(admin=true)
- */
 class IntlController
 {
     const CACHE_KEY = 'intl.locations:';
 
     /**
+     * TODO: does this need a permission?
      * @Request({"locale"})
      */
     public function indexAction($locale = null)
@@ -50,6 +47,7 @@ class IntlController
                 'likelySubtags' => [$locale => App::intl()->guessFullLocale($locale)],
                 'plurals-type-cardinal' => [$locale => $plurals['supplemental']['plurals-type-cardinal'][$locale]]
             ],
+
             'translations' => [$locale => App::translator()->getCatalogue($locale)->all()]
 
         ]);
@@ -69,6 +67,7 @@ class IntlController
     }
 
     /**
+     * @Access(admin=true)
      * @Request({"lat", "lon"})
      */
     public function timezoneAction($lat, $lon)

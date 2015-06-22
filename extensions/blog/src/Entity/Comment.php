@@ -88,7 +88,10 @@ class Comment extends BaseComment implements \JsonSerializable
     public function setPost($post)
     {
         $this->post = $post;
-        $this->post_id = $post->getId();
+
+        if ($post) {
+            $this->post_id = $post->getId();
+        }
     }
 
     public function getUser()

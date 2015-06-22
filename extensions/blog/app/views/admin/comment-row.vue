@@ -20,8 +20,8 @@
                         <li><a class="pk-icon-reply pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
                     </ul>
 
-                    <a class="uk-link-muted" v-if="comment.post.isAccessible" v-attr="href: comment.post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
-                    <span v-if="!comment.post.isAccessible">{{ comment.created | relativeDate }}</span>
+                    <a class="uk-link-muted" v-if="post.isAccessible" v-attr="href: post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
+                    <span v-if="!post.isAccessible">{{ comment.created | relativeDate }}</span>
                 </div>
             </div>
 
@@ -53,9 +53,9 @@
             </a>
         </td>
         <td class="pk-blog-comments-padding">
-            <a v-attr="href: $url('admin/blog/post/edit', { id: comment.post.id })">{{ comment.post.title }}</a>
+            <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
             <p>
-                <a class="uk-text-nowrap" v-class="pk-link-icon: !comment.post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: comment.post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice comment.post.comments_pending comment.post }}"><i class="pk-icon-comment" v-class="pk-icon-primary: comment.post.comments_pending"></i> {{ comment.post.comment_count }}</a>
+                <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice post.comments_pending post }}"><i class="pk-icon-comment" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
             </p>
         </td>
 
@@ -129,11 +129,19 @@
 
         },
 
+        computed: {
+
+            post: function() {
+                return _.find(this.posts, {id: this.comment.post_id}) || {};
+            }
+
+        },
+
         methods: {
 
             reply: function() {
                 this.cancel();
-                this.$set('replyComment', { parent_id: this.comment.id, author: this.user.name, email: this.user.email });
+                this.$set('replyComment', { parent_id: this.comment.id, post_id: this.comment.post_id, author: this.user.name, email: this.user.email });
             },
 
             edit: function() {

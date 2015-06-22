@@ -1,11 +1,13 @@
+<?php
+$view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify'])
+?>
+
 <article class="uk-article">
 
     <h1 class="uk-article-title"><?= $post->getTitle() ?></h1>
 
     <div><?= $post->getContent() ?></div>
 
-    <?php if ($post->isCommentable() || $post->getCommentCount()) : ?>
-    <?= $view->render('blog:views/site/comment/vuecomments.php', ['post' => $post, 'blog' => $blog]) ?>
-    <?php endif ?>
+    <div id="comments"></div>
 
 </article>

@@ -4,54 +4,92 @@ namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\Entity\Comment;
+use Pagekit\Blog\Entity\Post;
 
 /**
- * @Access("blog: manage comments")
  * @Route("comment", name="comment")
  */
 class CommentApiController
 {
-    /**
-     * @Route("/", methods="GET")
-     * @Request({"filter": "array", "post":"int", "page":"int"})
-     */
-    public function indexAction($filter = [], $post = 0, $page = 0)
+    protected $blog;
+    protected $user;
+
+    public function __construct()
     {
-        $query  = Comment::query()->related(['post']);
+        $this->blog = App::module('blog');
+        $this->user = App::user();
+    }
+
+    /**
+     * @Access("blog: view comments")
+     * @Route("/", methods="GET")
+     * @Request({"filter": "array", "post":"int", "page":"int", "limit":"int"})
+     */
+    public function indexAction($filter = [], $post = 0, $page = 0, $limit = 0)
+    {
+        $query  = Comment::query();
         $filter = array_merge(array_fill_keys(['status', 'search'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
         if ($post) {
             $query->where(['post_id = ?'], [$post]);
+        } elseif (!$this->user->hasAccess('blog: manage comments')) {
+            App::abort(403, __('Insufficient user rights.'));
         }
 
-        if (is_numeric($status)) {
+        if (!$this->user->hasAccess('blog: manage comments')) {
+
+            $query->where(['status = ?'], [Comment::STATUS_APPROVED]);
+
+            if ($this->user->isAuthenticated()) {
+                $query->orWhere(function ($query) {
+                    $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, App::user()->getId()]);
+                });
+            }
+
+        } elseif (is_numeric($status)) {
             $query->where(['status = ?'], [(int) $status]);
         } else {
-            $query->where(function($query) {
+            $query->where(function ($query) {
                 $query->orWhere(['status = ?', 'status = ?'], [Comment::STATUS_APPROVED, Comment::STATUS_PENDING]);
             });
         }
 
         if ($search) {
-            $query->where(function($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                 $query->orWhere(['author LIKE ?', 'email LIKE ?', 'url LIKE ?', 'ip LIKE ?', 'content LIKE ?'], array_fill(0, 5, "%{$search}%"));
             });
         }
 
-        $limit    = App::module('blog')->config('comments.comments_per_page');
-        $count    = $query->count();
-        $pages    = ceil($count / $limit);
-        $page     = max(0, min($pages - 1, $page));
-        $comments = array_values($query->offset($page * $limit)->related(['post' => function($query) {
-            return $query->related('comments');
-        }])->limit($limit)->orderBy('created', 'DESC')->get());
+        $count = $query->count();
+        $pages = ceil($count / ($limit ?: PHP_INT_MAX));
+        $page  = max(0, min($pages - 1, $page));
 
-        foreach ($comments as $comment) {
-            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
+        if ($limit) {
+            $query->offset($page * $limit)->limit($limit);
         }
 
-        return compact('comments', 'pages', 'count');
+        $comments = $query->related(['post' => function ($query) {
+            return $query->related('comments');
+        }])->orderBy('created', 'DESC')->get();
+
+        $posts = [];
+        foreach ($comments as $i => $comment) {
+
+            $p = $comment->getPost();
+            if (($post && !$p) || !$p->hasAccess($this->user) || !($p->isPublished() || $this->user->hasAccess('blog: manage comments'))) {
+                App::abort(403, __('Post not found.'));
+            }
+
+            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
+            $posts[$p->getId()] = $p;
+            $comment->setPost(null);
+        }
+
+        $comments = array_values($comments);
+        $posts    = array_values($posts);
+
+        return compact('comments', 'posts', 'pages', 'count');
     }
 
     /**
@@ -61,37 +99,77 @@ class CommentApiController
      */
     public function saveAction($data, $id = 0)
     {
-        $user = App::user();
-
         if (!$id || !$comment = Comment::find($id)) {
 
             if ($id) {
-                App::abort(400, __('Comment not found.'));
+                App::abort(404, __('Comment not found.'));
             }
 
-            if (!$parent = Comment::find((int) @$data['parent_id'])) {
-                App::abort(400, __('Invalid comment reply.'));
+            if (!$this->user->hasAccess('blog: post comments')) {
+                App::abort(403, __('Insufficient User Rights.'));
             }
 
             $comment = new Comment;
-            $comment->setUserId((int) $user->getId());
+
+            if ($this->user->isAuthenticated()) {
+                $data['author'] = $this->user->getName();
+                $data['email']  = $this->user->getEmail();
+                $data['url']    = $this->user->getUrl();
+            } elseif ($this->blog->config('comments.require_name_and_email') && (!@$data['author'] || !@$data['email'])) {
+                App::abort(400, __('Please provide valid name and email.'));
+            }
+
+            $comment->setUserId((int) $this->user->getId());
             $comment->setIp(App::request()->getClientIp());
-            $comment->setAuthor($user->getName());
-            $comment->setEmail($user->getEmail());
-            $comment->setUrl($user->getUrl());
-            $comment->setStatus(Comment::STATUS_APPROVED);
-            $comment->setPostId($parent->getPostId());
-            $comment->setParent($parent);
+            $comment->setCreated(new \DateTime);
+
+        } else {
+
+            if (!$this->user->hasAccess('blog: manage comments')) {
+                App::abort(403, __('Insufficient User Rights.'));
+            }
+
         }
 
-        unset($data['created']);
+        // check minimum idle time in between user comments
+        if (!$this->user->hasAccess('blog: skip comment min idle')
+            and $minidle = $this->blog->config('comments.minidle')
+            and $comment = Comment::where($this->user->isAuthenticated() ? ['user_id' => $this->user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
+        ) {
+
+            $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
+
+            if ($diff->invert) {
+                App::abort(403, __('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s + $diff->i * 60 + $diff->h * 3600]));
+            }
+        }
+
+        if (@$data['parent_id'] && !$parent = Comment::find((int) $data['parent_id'])) {
+            App::abort(404, __('Parent not found.'));
+        }
+
+        if (!@$data['post_id'] || !$post = Post::where(['id' => $data['post_id']])->first() or !($this->user->hasAccess('blog: manage comments') || $post->isCommentable() && $post->isPublished())) {
+            App::abort(404, __('Post not found.'));
+        }
+
+        $approved_once = (boolean) Comment::where(['user_id' => $this->user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+        $comment->setStatus($this->user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $this->user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
+
+        // check the max links rule
+        if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->blog->config('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            $comment->setStatus(Comment::STATUS_PENDING);
+        }
+
+        // check for spam
+        //App::trigger('system.comment.spam_check', new CommentEvent($comment));
 
         $comment->save($data);
 
-        return ['message' => $id ? __('Comment saved.') : __('Comment created.')];
+        return ['message' => 'success', 'comment' => $comment];
     }
 
     /**
+     * @Access("blog: manage comments")
      * @Route("/{id}", methods="DELETE", requirements={"id"="\d+"})
      * @Request({"id": "int"}, csrf=true)
      */
@@ -105,6 +183,7 @@ class CommentApiController
     }
 
     /**
+     * @Access("blog: manage comments")
      * @Route("/bulk", methods="POST")
      * @Request({"comments": "array"}, csrf=true)
      */
@@ -118,6 +197,7 @@ class CommentApiController
     }
 
     /**
+     * @Access("blog: manage comments")
      * @Route("/bulk", methods="DELETE")
      * @Request({"ids": "array"}, csrf=true)
      */

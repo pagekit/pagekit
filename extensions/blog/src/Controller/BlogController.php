@@ -105,7 +105,8 @@ class BlogController
                 'config'   => [
                     'filter' => $filter,
                     'page'   => $page,
-                    'post'   => $post
+                    'post'   => $post,
+                    'limit'  => App::module('blog')->config('comments.comments_per_page')
                 ]
             ]
         ];
