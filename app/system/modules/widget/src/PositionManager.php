@@ -79,7 +79,8 @@ class PositionManager implements \JsonSerializable
      */
     public function register($name, $label, $description = '')
     {
-        $this->registered[$name] = compact('name', 'label', 'description');
+        $assigned = $this->assigned($name);
+        $this->registered[$name] = compact('name', 'label', 'description', 'assigned');
     }
 
     /**

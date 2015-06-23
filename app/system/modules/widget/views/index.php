@@ -1,5 +1,11 @@
 <?php $view->script('widget-index', 'widget:app/bundle/index.js', ['widgets', 'uikit-nestable']) ?>
 
+<style media="screen">
+    .uk-sortable {
+        min-height: 50px;
+    }
+</style>
+
 <div id="widget-index" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
@@ -56,10 +62,11 @@
                 </div>
             </div>
 
-            <ul class="uk-sortable uk-list uk-form">
-                <li data-id="{{ widget.id }}" v-repeat="widget: positions[position.id]">
+            <ul class="uk-sortable uk-list uk-form" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ position.name }}">
 
-                    <div class="uk-nestable-panel pk-table-fake">
+                <li data-id="{{ widget.id }}" v-repeat="widget: positions[position.name].widgets" data-index="{{ $index }}">
+
+                    <div class="uk-nestable-panel pk-table-fake uk-form">
                         <div class="pk-table-width-minimum">
                             <input type="checkbox" name="id" value="{{ widget.id }}">
                         </div>
@@ -70,13 +77,14 @@
                         <div class="pk-table-width-150">
                             <div class="uk-nestable-nodrag" v-el="select">
                                 <a></a>
-                                <select class="uk-width-1-1" v-model="position.id" v-on="input: reassign" options="positionOptions"></select>
+                                <select class="uk-width-1-1" v-model="widget.position" v-on="change: reassign(widget, position.name, $index)" options="positionOptions"></select>
                             </div>
                         </div>
                         <div class="pk-table-width-150">{{ getType(widget).name }}</div>
                     </div>
 
                 </li>
+
             </ul>
 
         </div>

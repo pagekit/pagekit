@@ -17,8 +17,27 @@ module.exports = window.Widgets = Vue.extend({
         load: function () {
 
             this.resource.query(function (data) {
+
                 this.$set('widgets', data);
-                this.$set('positions', _(data).groupBy('position').value());
+
+                var indexedwidgets = _(data).groupBy('id').value(),
+                    positions      = {};
+
+                $data.config.positions.forEach(function(position) {
+
+                    position.widgets = [];
+
+                    position.assigned.forEach(function(widgetId) {
+
+                        if (indexedwidgets[widgetId]) {
+                            position.widgets.push(indexedwidgets[widgetId][0]);
+                        }
+                    });
+
+                    positions[position.name] = position;
+                });
+
+                this.$set('positions', positions);
             });
 
             this.resource.query({id: 'config'}, function (data) {
@@ -44,6 +63,11 @@ module.exports = window.Widgets = Vue.extend({
 
         reorder: function (position, widgets) {
             this.resource.save({id: 'positions'}, {position: position, widgets: _.pluck(widgets, 'id')}, this.load);
+        },
+
+        reassign: function(widget, position, index) {
+
+            this.positions[widget.position].widgets.push(this.positions[position].widgets.splice(index, 1)[0]);
         }
 
     },

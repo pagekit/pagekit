@@ -6,20 +6,34 @@ module.exports = {
     }, window.$data),
 
     ready: function () {
+
+        var vm = this;
+
         this.load();
-    },
 
-    watch: {
+        $(this.$el).on('change.uk.sortable', function (e, sortable, ele, mode) {
 
-        widgets: function () {
+            if (!mode) return;
 
-            $('.uk-sortable').each(function() {
-                UIkit.sortable(this, {group:'position'});
-            }).on('change.uk.nestable', function (e, el, type, root, nestable) {
-                // update postions ...
-            });
-        }
+            ele = $(ele);
 
+            var newpos   = ele.parent().data('position'),
+                newindex = ele.index(),
+                oldpos   = ele.data('start-list').data('position'),
+                oldindex = ele.data('start-index')
+
+            switch(mode) {
+
+                case 'moved':
+                case 'added':
+
+                    vm.positions[oldpos].widgets[oldindex].position = newpos;
+                    vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
+
+                    break;
+            }
+
+        });
     },
 
     computed: {
@@ -36,6 +50,12 @@ module.exports = {
             );
         }
 
+    },
+
+    watch: {
+        positions: function() {
+            UIkit.init(this.$el);
+        }
     },
 
     methods: {
