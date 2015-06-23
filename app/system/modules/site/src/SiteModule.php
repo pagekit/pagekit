@@ -66,7 +66,7 @@ class SiteModule extends Module
      */
     public function registerType($type, array $route)
     {
-        $route['id'] = $type;
+        $route['id']        = $type;
         $this->types[$type] = $route;
     }
 
@@ -99,6 +99,16 @@ class SiteModule extends Module
             }
 
             App::trigger('site.menus', [$this]);
+
+            foreach (App::db()->createQueryBuilder()
+                         ->from('@system_node')
+                         ->where('menu <> ""')
+                         ->whereIn('menu', array_keys($this->menus), true)
+                         ->groupBy('menu')->execute('menu')
+                         ->fetchAll(\PDO::FETCH_COLUMN) as $menu
+            ) {
+                $this->registerMenu($menu, $menu, ['ghost' => true]);
+            }
         }
 
         return $this->menus;
