@@ -79,15 +79,18 @@
                 UIkit.nestable(vm.$$.nestable, { maxDepth: 20, group: 'site.nodes' }).off('change.uk.nestable').on('change.uk.nestable', function (e, el, type, root, nestable) {
                     if (e.target.tagName === 'UL' && type !== 'removed') {
                         vm.Nodes.save({ id: 'updateOrder' }, { menu: vm.menu.id, nodes: nestable.list() }, function() {
+
                             // @TODO reload everything on reorder really needed?
-                            //vm.load();
+
+                            vm.load(function() {
+                                el.remove();
+                            });
+
                             UIkit.notify(this.$trans('Order updated.'));
                         });
                     }
                 });
-
             }
-
         },
 
         filters: {
@@ -116,11 +119,14 @@
 
         methods: {
 
-            load: function () {
+            load: function (cb) {
 
                 this.$set('selected', []);
 
                 this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
+
+                    if (cb) cb();
+
                     this.$set('nodes', nodes);
                     this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
                 });
