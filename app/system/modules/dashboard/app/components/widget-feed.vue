@@ -61,7 +61,7 @@
         </li>
     </ul>
 
-    <p class="uk-text-center" v-if="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></p>
+    <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
     <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</p>
     <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.url && !editing">{{ 'No URL given.' | trans }}</p>
 

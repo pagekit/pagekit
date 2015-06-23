@@ -16,6 +16,7 @@ function install (Vue) {
      */
 
     Vue.component('v-pagination', require('./components/pagination'));
+    Vue.component('v-loader', require('./components/loader.vue'));
 
     /**
      * Directives

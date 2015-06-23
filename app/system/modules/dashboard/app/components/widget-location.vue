@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-    <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing" v-on="submit: $event.preventDefault()">
+    <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" v-on="submit: $event.preventDefault()">
 
         <div class="uk-form-row">
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <p class="uk-text-center" v-if="status == 'loading'"><i class="uk-icon-medium uk-icon-spinner uk-icon-spin"></i></p>
+    <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
     <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</p>
     <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.uid && !editing">{{ 'No location given.' | trans }}</p>
 

@@ -442,8 +442,6 @@
     background: @global-primary-background;
 }
 
-.pk-panel-teaser + .pk-panel-bg { margin-top: -(@panel-teaser-margin-bottom + 1px); }
-
 
 /* Modal with IFrame (Marketplace)
  ========================================================================== */
@@ -489,3 +487,58 @@
 .uk-dragover { box-shadow: none; }
 
 
+/* SVG Loader
+ ========================================================================== */
+
+@radius: 13px;
+@size: 15px; // A little larger to prevent overflow clipping
+@offset: round(2 * 3.141 * @radius);
+@duration: 1.4s;
+
+.pk-loader {
+    vertical-align: middle;
+    animation: pk-loader-rotate @duration linear infinite;
+}
+
+/*
+ * Group
+ * Only needed because `transform-origin: center` is not working in Firefox
+ */
+
+.pk-loader > * { transform: translate(@size, @size); }
+
+/*
+ * Circle
+ */
+
+.pk-loader > * > * {
+    stroke-dasharray: @offset;
+    stroke-dashoffset: 0;
+    // transform-origin: center;
+    animation: pk-loader-dash @duration ease-in-out infinite, 
+               pk-loader-color (@duration*4) ease-in-out infinite;
+    stroke-linecap: round;
+}
+
+@keyframes pk-loader-rotate {
+    0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+@keyframes pk-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        transform:rotate(450deg);
+    }
+}
+
+@keyframes pk-loader-color {
+    0% { stroke: #444; }
+    50% { stroke: #444; }
+    100% { stroke: #444; }
+}
