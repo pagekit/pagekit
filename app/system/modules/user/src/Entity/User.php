@@ -99,7 +99,7 @@ class User extends BaseUser implements \JsonSerializable
     public static function getStatuses()
     {
         return [
-            self::STATUS_ACTIVE  => __('Active'),
+            self::STATUS_ACTIVE => __('Active'),
             self::STATUS_BLOCKED => __('Blocked')
         ];
     }
@@ -174,13 +174,15 @@ class User extends BaseUser implements \JsonSerializable
 
         if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
             $query->orWhere(['username = :username', 'email = :username'], ['username' => $this->username]);
-        })->first()) {
+        })->first()
+        ) {
             throw new Exception(__('Username not available.'));
         }
 
         if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
             $query->orWhere(['username = :email', 'email = :email'], ['email' => $this->email]);
-        })->first()) {
+        })->first()
+        ) {
             throw new Exception(__('Email not available.'));
         }
 
@@ -209,16 +211,19 @@ class User extends BaseUser implements \JsonSerializable
     public function postSave()
     {
         if (is_array($this->roles)) {
+            self::getConnection()->transactional(function ($connection) {
 
-            self::getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
+                $connection->delete('@system_user_role', ['user_id' => $this->getId()]);
 
-            if (!array_key_exists(Role::ROLE_AUTHENTICATED, $this->roles)) {
-                $this->roles[Role::ROLE_AUTHENTICATED] = self::getManager()->find('Pagekit\User\Entity\Role', Role::ROLE_AUTHENTICATED);
-            }
+                if (!array_key_exists(Role::ROLE_AUTHENTICATED, $this->roles)) {
+                    $this->roles[Role::ROLE_AUTHENTICATED] = self::getManager()->find('Pagekit\User\Entity\Role', Role::ROLE_AUTHENTICATED);
+                }
 
-            foreach ($this->roles as $role) {
-                self::getConnection()->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
-            }
+                foreach ($this->roles as $role) {
+                    $connection->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
+                }
+
+            });
         }
     }
 

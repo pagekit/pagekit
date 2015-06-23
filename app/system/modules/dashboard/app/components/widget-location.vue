@@ -63,27 +63,32 @@
 
         props: ['widget', 'editing'],
 
-        data: function() {
+        data: function () {
             return {
-                format: {time: 'medium'}
+                status: '',
+                timezone: {},
+                icon: '',
+                temperature: 0,
+                time: 0,
+                format: { time: 'medium' }
             };
         },
 
-        ready: function() {
+        ready: function () {
 
             var vm = this, list;
 
             UIkit
                 .autocomplete(this.$$.location, {
 
-                    source: function(release) {
+                    source: function (release) {
 
-                        vm.$http.jsonp(api + '/find', {q: this.input.val(), type: 'like'}, function(data) {
+                        vm.$http.jsonp(api + '/find', { q: this.input.val(), type: 'like' }, function (data) {
 
                             list = data.list || [];
                             release(list);
 
-                        }).error(function() {
+                        }).error(function () {
                             release([]);
                         });
 
@@ -92,9 +97,9 @@
                     template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
 
                 })
-                .on('selectitem.uk.autocomplete', function(e, data) {
+                .on('selectitem.uk.autocomplete', function (e, data) {
 
-                    var location = _.find(list, {id: data.id});
+                    var location = _.find(list, { id: data.id });
 
                     if (!location) {
                         return;
@@ -106,7 +111,7 @@
                     vm.$set('widget.coords', location.coord);
                 });
 
-            this.$watch('widget.uid', function(uid) {
+            this.$watch('widget.uid', function (uid) {
 
                 if (!uid) {
                     this.$parent.edit(true);
@@ -115,7 +120,7 @@
                 this.loadWeather();
                 this.loadTime();
 
-            }, {immediate: true});
+            }, { immediate: true });
 
             this.timer = setInterval(this.updateClock, 1000);
         },
@@ -123,13 +128,14 @@
         watch: {
 
             'widget.units': 'loadWeather',
-            'widget.coords': 'loadTime'
+            'widget.coords': 'loadTime',
+            'timezone': 'updateClock'
 
         },
 
         methods: {
 
-            loadWeather: function() {
+            loadWeather: function () {
 
                 if (!this.widget.uid || !this.widget.units) {
                     return;
@@ -143,7 +149,7 @@
 
                 } else {
 
-                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: this.widget.units }, function(data) {
+                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: this.widget.units }, function (data) {
 
                         if (data.cod == 200) {
                             storage[key] = JSON.stringify(data);
@@ -152,7 +158,7 @@
                             this.$set('status', 'error');
                         }
 
-                    }).error(function() {
+                    }).error(function () {
                         this.$set('status', 'error');
                     });
 
@@ -160,7 +166,7 @@
 
             },
 
-            loadTime: function() {
+            loadTime: function () {
 
                 if (!this.widget.coords) {
                     return;
@@ -174,19 +180,19 @@
 
                 } else {
 
-                    this.$http.get(this.$url('system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}), function(data) {
+                    this.$http.get(this.$url('system/intl/timezone', { lat: this.widget.coords.lat, lon: this.widget.coords.lon }), function (data) {
 
                         storage[key] = JSON.stringify(data);
                         this.$set('timezone', data);
 
-                    }).error(function() {
+                    }).error(function () {
                         this.$set('status', 'error');
                     });
 
                 }
             },
 
-            init: function(data) {
+            init: function (data) {
 
                 this.$set('temperature', Math.round(data.main.temp) + (this.widget.units === 'metric' ? ' °C' : ' °F'));
                 this.$set('icon', this.getIconUrl(data.weather[0].icon));
@@ -194,7 +200,7 @@
 
             },
 
-            getIconUrl: function(icon) {
+            getIconUrl: function (icon) {
 
                 var icons = {
 
@@ -219,10 +225,10 @@
 
                 };
 
-                return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
+                return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', { icon: icons[icon] });
             },
 
-            updateClock: function() {
+            updateClock: function () {
 
                 var offset = this.$get('timezone.offset'), date = new Date();
 
@@ -232,7 +238,7 @@
 
         },
 
-        destroyed: function() {
+        destroyed: function () {
 
             clearInterval(this.timer);
 
