@@ -2,7 +2,7 @@ module.exports = [
 
     {
         entry: {
-            "site": "./app/components/site"
+            "site": "./app/components/site.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"
