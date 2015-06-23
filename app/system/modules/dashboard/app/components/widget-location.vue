@@ -39,7 +39,7 @@
 
     </form>
 
-    <div class="pk-panel-bg uk-contrast" v-if="status != 'error'">
+    <div class="pk-panel-background uk-contrast" v-if="status != 'error'">
         <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
         <p class="uk-text-center" v-if="time">{{ time | date 'medium' }}</p>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
