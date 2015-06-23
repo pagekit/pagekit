@@ -3,11 +3,11 @@
 namespace Pagekit\Page;
 
 use Pagekit\Application as App;
+use Pagekit\Module\Module;
 use Pagekit\Page\Entity\Page;
 use Pagekit\Site\Entity\Node;
-use Pagekit\System\Extension;
 
-class PageModule extends Extension
+class PageModule extends Module
 {
     // TODO: move to SiteListener
 

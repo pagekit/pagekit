@@ -3,17 +3,15 @@
 namespace %NAMESPACE%;
 
 use Pagekit\Application as App;
-use Pagekit\System\Extension;
+use Pagekit\Module\Module;
 
-class %CLASSNAME% extends Extension
+class %CLASSNAME% extends Module
 {
     /**
      * {@inheritdoc}
      */
-    public function boot(App $app)
+    public function main(App $app)
     {
-        parent::boot($app);
-
         // your code here...
     }
 }

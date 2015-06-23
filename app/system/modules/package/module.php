@@ -1,9 +1,7 @@
 <?php
 
 use Pagekit\Module\Factory\ModuleFactory;
-use Pagekit\System\ExtensionRepository;
 use Pagekit\System\Package\PackageManager;
-use Pagekit\System\ThemeRepository;
 
 return [
 
@@ -18,7 +16,7 @@ return [
         };
 
         $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\\System\\Theme'));
-        $app['module']->addFactory('extension', new ModuleFactory($app, 'Pagekit\\System\\Extension'));
+        $app['module']->addFactory('extension', new ModuleFactory($app));
 
     },
 

@@ -5,7 +5,7 @@ namespace Pagekit\System\Controller;
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
-use Pagekit\System\Extension;
+use Pagekit\Kernel\Exception\InternalErrorException;
 use Pagekit\System\Package\PackageInstaller;
 
 /**
@@ -85,25 +85,18 @@ class PackageController
             App::abort(400, __('Unable to enable "%name%".', ['%name%' => $name]));
         }
 
+        App::trigger('enable', [$module]);
+        App::trigger("enable.$name", [$module]);
+
         if ($package->getType() == 'theme') {
-
             App::config('system')->set('theme.site', $name);
-            App::exception()->setHandler($handler);
-
-            return ['message' => 'success'];
-        }
-
-        if ($package->getType() == 'extension') {
-
-            if ($module instanceof Extension) {
-                $module->enable();
-            }
-
+        } elseif ($package->getType() == 'extension') {
             App::config('system')->push('extensions', $name);
-            App::exception()->setHandler($handler);
-
-            return ['message' => 'success'];
         }
+
+        App::exception()->setHandler($handler);
+
+        return ['message' => 'success'];
     }
 
     /**
@@ -119,17 +112,16 @@ class PackageController
             App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $name]));
         }
 
+        App::trigger('disable', [$module]);
+        App::trigger("disable.$name", [$module]);
+
         if ($package->getType() == 'extension') {
-
-            if ($module instanceof Extension) {
-                $module->disable();
-            }
-
             App::config('system')->pull('extensions', $name);
-            App::module('system/cache')->clearCache();
-
-            return ['message' => 'success'];
         }
+
+        App::module('system/cache')->clearCache();
+
+        return ['message' => 'success'];
     }
 
     /**
@@ -223,23 +215,18 @@ class PackageController
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
-        $type = $package->getType();
-
-        if ($type == 'extension') {
-
-            if (!App::module($name)) {
-                App::module()->load($name);
-            }
-
-            if (!$module = App::module($name)) {
-                App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $name]));
-            }
-
-            $module->disable();
-            $module->uninstall();
-
-            App::config('system')->pull('extensions', $name);
+        if (!App::module($name)) {
+            App::module()->load($name);
         }
+
+        if (!$module = App::module($name)) {
+            App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $name]));
+        }
+
+        $this->disableAction($name);
+
+        App::trigger('uninstall', [$module]);
+        App::trigger("uninstall.$name", [$module]);
 
         $this->installer->uninstall($package);
 
@@ -298,7 +285,7 @@ class PackageController
                 $message .= '<br><br>'.$exception->getMessage();
             }
 
-            App::response()->json(['error' => true, 'message' => $message])->send();
+            App::response()->json($message, 500)->send();
         });
     }
 }

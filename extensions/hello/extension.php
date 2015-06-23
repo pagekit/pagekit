@@ -6,7 +6,9 @@ return [
 
     'type' => 'extension',
 
-    'main' => 'Pagekit\\Hello\\HelloExtension',
+    'main' => function() {
+        // bootstrap code
+    },
 
     'autoload' => [
 
@@ -61,6 +63,29 @@ return [
     'config' => [
 
         'default' => 'World'
+
+    ],
+
+    'events' => [
+
+        'enable.hello' => function () use ($app) {
+            // run all migrations that are newer than the current version
+            if ($version = $app['migrator']->create('hello:migrations', $this->config('version'))->run()) {
+                $app['config']($this->name)->set('version', $version);
+            }
+        },
+
+        'disable.hello' => function() use ($app) {
+            // disable hook
+        },
+
+        'uninstall.hello' => function() use ($app) {
+            // downgrade all migrations
+            $app['migrator']->create('hello:migrations', $this->config('version'))->run(0);
+
+            // remove the config
+            $app['config']->remove($this->name);
+        }
 
     ]
 

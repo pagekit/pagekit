@@ -19,4 +19,6 @@
 
     };
 
+    window.Site.component('blog', module.exports);
+
 </script>

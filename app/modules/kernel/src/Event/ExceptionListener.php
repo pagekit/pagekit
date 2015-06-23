@@ -3,7 +3,7 @@
 namespace Pagekit\Kernel\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Exception\HttpException;
+use Pagekit\Kernel\Exception\HttpException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;

@@ -23,11 +23,8 @@ return [
         'blog' => [
             'name' => '@blog',
             'label' => 'Blog',
-            'controller' => 'Pagekit\\Blog\\Controller\\SiteController'
-        ],
-        'blog-post' => [
-            'label' => 'Blog Post',
-            'alias' => '@blog/id'
+            'controller' => 'Pagekit\\Blog\\Controller\\SiteController',
+            'protected' => true
         ]
 
     ],
@@ -160,7 +157,7 @@ return [
 
     'events' => [
 
-        'boot' => function($event, $app) {
+        'boot' => function ($event, $app) {
             $app->subscribe(
                 new RouteListener,
                 new CommentListener,
@@ -170,15 +167,27 @@ return [
 
         'request' => [
 
-            [function() use ($app) {
+            [function () use ($app) {
                 $app['module']->get('system/site')->setFrontpage('@blog/site');
             }, 175],
 
-            [function() use ($app) {
+            [function () use ($app) {
                 $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
             }]
 
-        ]
+        ],
+
+        'enable.blog' => function () use ($app) {
+            if ($version = $app['migrator']->create('blog:migrations', $this->config('version'))->run()) {
+                $app['config']($this->name)->set('version', $version);
+            }
+        },
+
+        'uninstall.blog' => function () use ($app) {
+
+            $app['migrator']->create('blog:migrations', $this->config('version'))->run(0);
+            $app['config']()->remove($this->name);
+        }
 
     ]
 

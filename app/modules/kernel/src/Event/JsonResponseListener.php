@@ -9,8 +9,6 @@ class JsonResponseListener implements EventSubscriberInterface
 {
     /**
      * Transforms the body of a JSON request to POST parameters.
-     *
-     * @param $event
      */
     public function onRequest($event, $request)
     {
@@ -21,10 +19,8 @@ class JsonResponseListener implements EventSubscriberInterface
 
     /**
      * Converts a array to a JSON response.
-     *
-     * @param $event
      */
-    public function onController($event, $request)
+    public function onController($event)
     {
         $result = $event->getControllerResult();
 
