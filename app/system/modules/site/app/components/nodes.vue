@@ -82,7 +82,7 @@
 
                             // @TODO reload everything on reorder really needed?
 
-                            vm.load(function() {
+                            vm.load().success(function() {
                                 el.remove();
                             });
 
@@ -98,6 +98,7 @@
             protected: function (types) {
 
                 return _.reject(types, {protected: true});
+
             }
 
         },
@@ -118,14 +119,11 @@
 
         methods: {
 
-            load: function (cb) {
+            load: function () {
 
                 this.$set('selected', []);
 
-                this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
-
-                    if ('function'===typeof(cb)) cb();
-
+                return this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
                     this.$set('nodes', nodes);
                     this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
                 });
