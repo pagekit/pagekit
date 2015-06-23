@@ -5,7 +5,6 @@ namespace Pagekit\System\Controller;
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
-use Pagekit\Kernel\Exception\InternalErrorException;
 use Pagekit\System\Package\PackageInstaller;
 
 /**

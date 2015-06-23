@@ -4,9 +4,6 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Module\Factory\ModuleFactory;
-use Pagekit\Util\Arr;
-use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
 
 class WidgetModule extends Module

@@ -4,7 +4,6 @@ namespace Pagekit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 use Pagekit\Routing\Router;
-use Pagekit\Routing\Routes;
 
 class RoutesDataCollector implements DataCollectorInterface
 {

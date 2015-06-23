@@ -7,7 +7,6 @@ use Pagekit\Application\Traits\RouterTrait;
 use Pagekit\Application\Traits\StaticTrait;
 use Pagekit\Event\EventDispatcher;
 use Pagekit\Module\ModuleManager;
-use Pagekit\Module\Factory\ModuleFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends Container

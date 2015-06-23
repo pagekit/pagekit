@@ -6,6 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Site\Entity\Node;
 use Pagekit\User\Entity\Role;
 use Pagekit\Widget\Entity\Widget;
+
 /**
  * @Access("system: manage widgets", admin=true)
  */
