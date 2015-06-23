@@ -37,9 +37,10 @@
 
                         <div class="uk-margin-left">
                             <ul class="uk-subnav pk-subnav-icon uk-hidden">
-                                <li v-show="pkg.enabled"><a class="uk-icon-cog" title="Settings" data-uk-tooltip="{delay: 500}"></a></li>
-                                <li v-show="!pkg.enabled"><a class="uk-icon-check-circle-o" title="Enable" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
-                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)" v-confirm="'Uninstall theme?'"></a></li>
+                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: details(pkg)"></a></li>
+                                <li v-show="pkg.enabled"><a class="uk-icon-cog" title="{{ 'Settings' | trans }}" data-uk-tooltip="{delay: 500}"></a></li>
+                                <li v-show="!pkg.enabled"><a class="uk-icon-check-circle-o" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
+                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)" v-confirm="'Uninstall theme?'"></a></li>
                             </ul>
                         </div>
 
@@ -61,5 +62,11 @@
     </div>
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No theme found.' | trans }}</h3>
+
+    <div class="uk-modal" v-el="details">
+        <div class="uk-modal-dialog">
+            <details api="{{ api }}" package="{{ package }}"></details>
+        </div>
+    </div>
 
 </div>

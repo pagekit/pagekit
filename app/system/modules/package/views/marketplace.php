@@ -19,6 +19,6 @@
         </div>
     </div>
 
-    <v-marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ packages }}"></v-marketplace>
+    <marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ packages }}"></marketplace>
 
 </div>

@@ -83,7 +83,7 @@
             var vm = this;
 
             this.query();
-            this.queryUpdates(this.api, this.installed).success(function (data) {
+            this.queryUpdates(this.installed, function (data) {
                 vm.$set('updates', data.packages.length ? data.packages : null);
             });
         },

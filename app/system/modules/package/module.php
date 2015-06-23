@@ -28,12 +28,6 @@ return [
 
     'events' => [
 
-        'request' => [function () use ($app) {
-
-            $app['scripts']->register('v-marketplace', 'system/package:app/bundle/marketplace.js', 'vue');
-
-        }, 120],
-
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
 
             $view->data('$settings', ['options' => [$this->name => $this->config]]);

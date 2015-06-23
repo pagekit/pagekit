@@ -16,7 +16,7 @@
         </div>
         <div data-uk-margin>
 
-            <v-upload type="extension"></v-upload>
+            <upload api="{{ api }}" type="extension"></upload>
 
         </div>
     </div>
@@ -56,7 +56,7 @@
                     <td class="uk-text-right">
                         <div class="uk-invisible">
                             <ul class="uk-subnav pk-subnav-icon">
-                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}"></a></li>
+                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: details(pkg)"></a></li>
                                 <li v-show="pkg.enabled && pkg.permissions"><a class="pk-icon-permission pk-icon-hover" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url('admin/user/permissions#:name',{name:pkg.name})"></a></li>
                                 <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)" v-confirm="'Uninstall extension?'"></a></li>
                             </ul>
@@ -69,39 +69,10 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No extension found.' | trans }}</h3>
 
-    <div class="uk-modal" id="modal-package">
-
+    <div class="uk-modal" v-el="details">
         <div class="uk-modal-dialog">
-
-            <h3>{{ upload.package.title }}</h3>
-
-            <div class="uk-grid">
-
-                <div class="uk-width-medium-2-3">
-                    {{ upload.package.description }}
-                </div>
-
-                <div class="uk-width-medium-1-3">
-
-                    <div class="uk-margin uk-text-center">
-                        <img src="{{ upload.package.extra.image }}" alt="{{ upload.package.title }}" />
-                    </div>
-
-                    <div class="uk-margin">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-primary" v-on="click: install(upload)">{{ 'Install Package' | trans }}</button>
-                <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
-            </div>
-
+            <details api="{{ api }}" package="{{ package }}"></details>
         </div>
-
     </div>
 
 </div>

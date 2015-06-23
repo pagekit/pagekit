@@ -2,15 +2,22 @@ module.exports = {
 
     methods: {
 
-        queryUpdates: function (api, packages) {
+        queryUpdates: function (packages, success) {
 
             var pkgs = {};
 
-            $.each(packages, function (name, pkg) {
+            _.each(packages, function (pkg) {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return this.$http.jsonp(api.url + '/package/update', {api_key: api.key, packages: JSON.stringify(pkgs)});
+            return this.$http.jsonp(this.api.url + '/package/update', {api_key: this.api.key, packages: JSON.stringify(pkgs)}, success);
+        },
+
+        queryPackage: function (pkg, success) {
+
+            var name = _.isObject(pkg) ? pkg.name : pkg;
+
+            return this.$http.jsonp(this.api.url + '/package/:name', {api_key: this.api.key, name: name}, success);
         },
 
         enablePackage: function (pkg) {

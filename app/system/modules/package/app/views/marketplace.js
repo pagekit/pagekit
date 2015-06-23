@@ -5,7 +5,7 @@ module.exports = {
     }),
 
     components: {
-        'v-marketplace': require('../components/marketplace.vue')
+        'marketplace': require('../components/marketplace.vue')
     }
 
 };

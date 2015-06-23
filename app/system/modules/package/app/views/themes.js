@@ -5,6 +5,7 @@ module.exports = {
     ],
 
     data: _.extend(window.$data, {
+        package: {},
         updates: null,
         search: '',
         status: ''
@@ -12,6 +13,7 @@ module.exports = {
 
     ready: function () {
         this.load();
+        this.modal = UIkit.modal(this.$$.details);
     },
 
     methods: {
@@ -30,7 +32,7 @@ module.exports = {
 
             this.$set('status', 'loading');
 
-            this.queryUpdates(this.api, this.packages).success(function (data) {
+            this.queryUpdates(this.packages, function (data) {
                 vm.$set('updates', data.packages.length ? data.packages : null);
                 vm.$set('status', '');
             }).error(function () {
@@ -38,20 +40,25 @@ module.exports = {
             });
         },
 
+        details: function (pkg) {
+            this.$set('package', pkg);
+            this.modal.show();
+        },
+
         enable: function (pkg) {
             this.enablePackage(pkg).success(function (data) {
                 UIkit.notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
-            }).error(function (data) {
-                UIkit.notify(data, 'danger');
-            });
+            }).error(this.error);
         },
 
         uninstall: function (pkg) {
             this.uninstallPackage(pkg, this.packages).success(function (data) {
                 UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
-            }).error(function (data) {
-                UIkit.notify(data, 'danger');
-            });
+            }).error(this.error);
+        },
+
+        error: function (message) {
+            UIkit.notify(message, 'danger');
         }
 
     },
@@ -66,7 +73,8 @@ module.exports = {
 
     components: {
 
-        'v-upload': require('../components/upload.vue')
+        'details': require('../components/details.vue'),
+        'upload':  require('../components/upload.vue')
 
     }
 
