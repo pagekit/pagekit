@@ -98,7 +98,6 @@
             protected: function (types) {
 
                 return _.reject(types, {protected: true});
-
             }
 
         },
@@ -125,7 +124,7 @@
 
                 this.Nodes.query({ menu: this.$get('menu.id') }, function (nodes) {
 
-                    if (cb) cb();
+                    if ('function'===typeof(cb)) cb();
 
                     this.$set('nodes', nodes);
                     this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
