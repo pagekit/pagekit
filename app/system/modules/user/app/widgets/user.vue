@@ -70,9 +70,9 @@
     <ul v-show="users.length && widget.display == 'list'" data-user class="uk-list uk-list-line">
         <li class="uk-flex uk-flex-middle" v-repeat="user: users">
             <img class="uk-border-circle uk-margin-right" width="40" height="40" alt="{{ user.username }}" v-gravatar="user.email">
-            <div>
-                <a class="uk-display-block" href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.name }}">{{ user.username }}</a>
-                <a class="uk-link-muted uk-flex-item-1 uk-text-truncate" href="mailto:{{ user.email }}">{{ user.email }}</a>
+            <div class="uk-flex-item-1 uk-text-truncate">
+                <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.name }}">{{ user.username }}</a>
+                <br><a class="uk-link-muted" href="mailto:{{ user.email }}">{{ user.email }}</a>
             </div>
         </li>
     </ul>
