@@ -2,8 +2,6 @@
 
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
 
-        <h3 class="uk-panel-title">{{ 'Feed Widget' | trans }}</h3>
-
         <div class="uk-form-row">
             <label for="form-feed-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">

@@ -2,8 +2,6 @@
 
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing" v-on="submit: $event.preventDefault()">
 
-        <h3 class="uk-panel-title">{{ 'Location Widget' | trans }}</h3>
-
         <div class="uk-form-row">
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
@@ -123,6 +121,8 @@
             }, { immediate: true });
 
             this.timer = setInterval(this.updateClock, 1000);
+
+            $(this.$parent.$el).addClass('uk-panel-box-primary');
         },
 
         watch: {

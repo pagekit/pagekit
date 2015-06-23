@@ -2,8 +2,6 @@
 
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
 
-        <h3 class="uk-panel-title">{{ 'User Widget' | trans }}</h3>
-
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'User Type' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
