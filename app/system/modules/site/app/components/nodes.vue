@@ -46,7 +46,7 @@
         </ul>
 
     </div>
-    
+
 </template>
 
 <script>
@@ -79,8 +79,8 @@
                 UIkit.nestable(vm.$$.nestable, { maxDepth: 20, group: 'site.nodes' }).off('change.uk.nestable').on('change.uk.nestable', function (e, el, type, root, nestable) {
                     if (e.target.tagName === 'UL' && type !== 'removed') {
                         vm.Nodes.save({ id: 'updateOrder' }, { menu: vm.menu.id, nodes: nestable.list() }, function() {
-                            vm.load();
-
+                            // @TODO reload everything on reorder really needed?
+                            //vm.load();
                             UIkit.notify(this.$trans('Order updated.'));
                         });
                     }
