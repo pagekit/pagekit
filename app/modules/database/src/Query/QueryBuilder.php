@@ -166,15 +166,16 @@ class QueryBuilder
      *
      * @param  string $column
      * @param  mixed  $values
+     * @param  bool   $not
      * @return self
      */
-    public function whereIn($column, $values)
+    public function whereIn($column, $values, $not = false)
     {
         $params = [];
 
         if (is_array($values)) {
 
-            $values = implode(', ', $values);
+            $values = implode(', ', array_map([$this->connection, 'quote'], $values));
 
         } elseif ($values instanceof Closure) {
 
@@ -186,7 +187,9 @@ class QueryBuilder
             $params = $query->params();
         }
 
-        return $this->addWhere("$column IN ($values)", $params, CompositeExpression::TYPE_AND);
+        $not = $not ? ' NOT' : '';
+
+        return $this->addWhere("$column $not IN ($values)", $params, CompositeExpression::TYPE_AND);
     }
 
     /**
@@ -194,15 +197,16 @@ class QueryBuilder
      *
      * @param  string $column
      * @param  mixed  $values
+     * @param  bool   $not
      * @return self
      */
-    public function orWhereIn($column, $values)
+    public function orWhereIn($column, $values, $not = false)
     {
         $params = [];
 
         if (is_array($values)) {
 
-            $values = implode(', ', $values);
+            $values = implode(', ', array_map([$this->connection, 'quote'], $values));
 
         } elseif ($values instanceof Closure) {
 
@@ -214,7 +218,9 @@ class QueryBuilder
             $params = $query->params();
         }
 
-        return $this->addWhere("$column IN ($values)", $params, CompositeExpression::TYPE_OR);
+        $not = $not ? ' NOT' : '';
+
+        return $this->addWhere("$column $not IN ($values)", $params, CompositeExpression::TYPE_OR);
     }
 
     /**
