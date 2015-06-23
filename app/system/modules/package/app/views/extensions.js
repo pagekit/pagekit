@@ -42,7 +42,7 @@ module.exports = {
             });
         },
 
-         details: function (pkg) {
+        details: function (pkg) {
             this.$set('package', pkg);
             this.modal.show();
         },
