@@ -67,6 +67,7 @@ module.exports = window.Widgets = Vue.extend({
 
         reassign: function(widget, position, index) {
 
+            if (!position || !widget.position) return;
             this.positions[widget.position].widgets.push(this.positions[position].widgets.splice(index, 1)[0]);
         }
 
