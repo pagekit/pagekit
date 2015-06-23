@@ -121,8 +121,6 @@
             }, { immediate: true });
 
             this.timer = setInterval(this.updateClock, 1000);
-
-            $(this.$parent.$el).addClass('uk-panel-box-primary');
         },
 
         watch: {
