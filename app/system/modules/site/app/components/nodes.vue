@@ -11,7 +11,7 @@
                     <li v-show="selected.length === 1"><a class="pk-icon-home pk-icon-hover" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: setFrontpage()"></a></li>
                     <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                     <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete item?'"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete item?'" v-show="showDelete"></a></li>
                 </ul>
             </div>
 
@@ -23,7 +23,7 @@
                 <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li v-repeat="type: types | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
+                        <li v-repeat="type: types | protected | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -90,6 +90,30 @@
 
         },
 
+        filters: {
+
+            protected: function (types) {
+
+                return _.reject(types, {protected: true});
+
+            }
+
+        },
+
+        computed: {
+
+            showDelete: function() {
+
+                var vm = this;
+                return = _.every(this.getSelected(), function(node) {
+                    var type = vm.getType(node);
+                    return !type || !type['protected'];
+                });
+
+            }
+
+        },
+
         methods: {
 
             load: function () {
@@ -121,7 +145,7 @@
                     user.status = status;
                 });
 
-                this.Nodes.save({ id: 'bulk' }, { nodes: nodes }, function (data) {
+                this.Nodes.save({ id: 'bulk' }, { nodes: nodes }, function () {
                     this.load();
                     UIkit.notify('Page(s) saved.');
                 });
@@ -131,14 +155,14 @@
 
                 node.status = !!node.status ? 0 : 1;
 
-                this.Nodes.save({ id: node.id }, { node: node }, function (data) {
+                this.Nodes.save({ id: node.id }, { node: node }, function () {
                     this.load();
                     UIkit.notify('Page saved.');
                 });
             },
 
             remove: function() {
-                this.Nodes.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+                this.Nodes.delete({ id: 'bulk' }, { ids: this.selected }, function () {
                     this.load();
                     UIkit.notify('Page(s) deleted.');
                 });
@@ -151,6 +175,10 @@
                 return this.nodes.filter(function (node) {
                     return vm.selected.indexOf(node.id.toString()) !== -1;
                 });
+            },
+
+            getType: function(node) {
+                return _.find(this.types, {id: node.type});
             }
 
         },

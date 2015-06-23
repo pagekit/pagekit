@@ -14,7 +14,7 @@ class UserListener implements EventSubscriberInterface
      */
     public function onUserChange()
     {
-        App::config('system/user')->set('auth.refresh_token', time());
+        App::config('system/user')->set('auth.refresh_token', App::get('auth.random')->generateString(16));
     }
 
     /**
@@ -41,12 +41,12 @@ class UserListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'auth.login'           => 'onUserLogin',
-            'terminate'        => 'onUserAccess',
-            'user.role.postSave'   => 'onUserChange',
+            'auth.login' => 'onUserLogin',
+            'terminate' => 'onUserAccess',
+            'user.role.postSave' => 'onUserChange',
             'user.role.postDelete' => 'onUserChange',
-            'user.postSave'        => 'onUserChange',
-            'user.postDelete'      => 'onUserChange'
+            'user.postSave' => 'onUserChange',
+            'user.postDelete' => 'onUserChange'
         ];
     }
 }

@@ -61,6 +61,11 @@ class NodeController
     public function deleteAction($id)
     {
         if ($node = Node::find($id)) {
+
+            if ($type = App::module('system/site')->getType($node->getType()) and isset($type['protected']) and $type['protected']) {
+                App::abort(400, __('Invalid type.'));
+            }
+
             $node->delete();
         }
 

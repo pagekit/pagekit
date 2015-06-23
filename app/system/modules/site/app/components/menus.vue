@@ -64,7 +64,7 @@
         },
 
         created: function() {
-            this.Menus = this.$resource('api/site/menu/:id:label', {}, { 'update': { method: 'PUT' }});
+            this.Menus = this.$resource('api/site/menu/:id:label', {}, { update: { method: 'PUT' }});
             this.load();
         },
 

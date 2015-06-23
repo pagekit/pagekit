@@ -370,9 +370,6 @@
     });
 
     Finder.create = function (element, options) {
-
-
-
         return new Finder({ el: element, data: options });
     };
 
