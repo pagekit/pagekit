@@ -41,6 +41,7 @@
 
     <div class="pk-panel-bg uk-contrast" v-if="status != 'error'">
         <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
+        <p class="uk-text-center" v-if="time">{{ time | date 'medium' }}</p>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-margin-remove">{{ widget.city }}</h3>
             <h3 class="uk-margin-remove">{{ temperature }} <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
@@ -83,7 +84,7 @@
                 icon: '',
                 temperature: 0,
                 time: 0,
-                format: { time: 'medium' }
+                format: { time: 'short' }
             };
         },
 
@@ -135,7 +136,7 @@
 
             }, { immediate: true });
 
-            this.timer = setInterval(this.updateClock, 1000);
+            this.timer = setInterval(this.updateClock, 60 * 1000);
         },
 
         watch: {
@@ -243,9 +244,11 @@
 
             updateClock: function () {
 
-                var offset = this.$get('timezone.offset'), date = new Date();
+                var offset = this.$get('timezone.offset'),
+                    date   = new Date(),
+                    time   = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000): false;
 
-                this.$set('time', offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : false);
+                this.$set('time', time);
 
             }
 
