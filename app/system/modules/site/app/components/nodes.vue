@@ -105,7 +105,7 @@
             showDelete: function() {
 
                 var vm = this;
-                return = _.every(this.getSelected(), function(node) {
+                return _.every(this.getSelected(), function(node) {
                     var type = vm.getType(node);
                     return !type || !type['protected'];
                 });
