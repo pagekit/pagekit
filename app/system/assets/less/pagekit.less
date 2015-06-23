@@ -159,8 +159,6 @@
 .pk-icon-settings { background-image: url("../../assets/images/icon-settings.svg"); }
 .pk-icon-refresh { background-image: url("../../assets/images/icon-refresh.svg"); }
 
-.pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
-
 .pk-icon-arrow-up,
 .pk-icon-arrow-down {
     width: 9px;
@@ -186,7 +184,7 @@
  * Icon Hover
  */
 
-.pk-icon-hover { opacity: 0.3; }
+.pk-icon-hover { opacity: 0.5; }
 .pk-icon-hover:hover { opacity: 1; }
 
 /*
@@ -194,6 +192,18 @@
  */
 
 .pk-icon-muted { opacity: 0.3; }
+
+/*
+ * Icon Primary
+ */
+
+.pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
+
+/*
+ * Icon Contrast
+ */
+
+.pk-icon-contrast.pk-icon-edit { background-image: url("../../assets/images/icon-edit-contrast.svg"); }
 
 /*
  * Link Hover with Icon and Text
@@ -421,6 +431,18 @@
     padding: @panel-box-padding;
     border-bottom: 1px solid @global-border;
 }
+
+
+/* Panel Background (Dashboard)
+ ========================================================================== */
+
+.pk-panel-bg {
+    margin: -@panel-box-padding;
+    padding: @panel-box-padding;
+    background: @global-primary-background;
+}
+
+.pk-panel-teaser + .pk-panel-bg { margin-top: -(@panel-teaser-margin-bottom + 1px); }
 
 
 /* Modal with IFrame (Marketplace)

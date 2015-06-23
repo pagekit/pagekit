@@ -1,5 +1,19 @@
 <template>
 
+    <div class="uk-panel-badge">
+        <ul class="uk-subnav pk-subnav-icon">
+            <li v-show="$parent.editing[widget.id]">
+                <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a>
+            </li>
+            <li v-show="!$parent.editing[widget.id]">
+                <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+            </li>
+            <li v-show="$parent.editing[widget.id]">
+                <a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+            </li>
+        </ul>
+    </div>
+
     <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing" v-on="submit: $event.preventDefault()">
 
         <div class="uk-form-row">
@@ -25,11 +39,11 @@
 
     </form>
 
-    <div v-if="status != 'error'">
+    <div class="pk-panel-bg uk-contrast" v-if="status != 'error'">
         <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-            <h3 class="uk-h3 uk-margin-remove">{{ widget.location }}</h3>
-            <h3 class="uk-h3 uk-margin-remove">{{ temperature }} <img class="uk-text-top" v-attr="src: icon" width="40" height="40" alt="Weather"></h3>
+            <h3 class="uk-margin-remove">{{ widget.city }}</h3>
+            <h3 class="uk-margin-remove">{{ temperature }} <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
         </div>
     </div>
 
@@ -50,6 +64,7 @@
 
             id: 'location',
             label: 'Location',
+            disableToolbar: true,
             description: function () {
 
             },
