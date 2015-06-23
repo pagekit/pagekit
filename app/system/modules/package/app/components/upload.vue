@@ -6,7 +6,6 @@
         <input id="upload-extension" type="file" name="file">
     </a>
 
-
     <div class="uk-modal" v-el="modal">
         <div class="uk-modal-dialog">
 
@@ -53,8 +52,6 @@
     module.exports = {
 
         replace: true,
-
-        template: __vue_template__,
 
         props: ['type'],
 
@@ -251,7 +248,5 @@
                 return null;
         }
     }
-
-    Vue.component('v-upload', module.exports);
 
 </script>

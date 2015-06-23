@@ -72,6 +72,12 @@ module.exports = {
             return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
         }
 
+    },
+
+    components: {
+
+        'v-upload': require('../components/upload.vue')
+
     }
 
 };
