@@ -108,7 +108,7 @@
 
                     },
 
-                    template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}}</a></li>{{/items}}</ul>'
+                    template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}} <span class="uk-text-muted">, {{$item.sys.country}}</span></a></li>{{/items}}</ul>'
 
                 })
                 .on('selectitem.uk.autocomplete', function (e, data) {
