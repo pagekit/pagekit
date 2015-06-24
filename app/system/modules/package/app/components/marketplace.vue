@@ -4,7 +4,7 @@
 
         <div class="uk-grid uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
             <div v-repeat="pkg: packages">
-                <div class="uk-panel uk-panel-box uk-overlay-hover">
+                <div class="uk-panel uk-panel-box">
 
                     <div class="uk-panel-teaser uk-position-relative">
                         <div class="uk-cover-background uk-position-cover" style="background-image: url({{pkg.extra.teaser}});"></div>
@@ -12,14 +12,8 @@
                     </div>
 
                     <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>
-
                     <p class="uk-text-muted uk-margin-remove">{{ pkg.author.name }}</p>
-
-                    <div class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle">
-                        <div>
-                            <button class="uk-button uk-button-primary uk-button-large" v-on="click: details(pkg)">{{ 'Details' | trans }}</button>
-                        </div>
-                    </div>
+                    <a class="uk-position-cover" v-on="click: details(pkg)"></a>
 
                 </div>
             </div>
