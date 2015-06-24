@@ -82,8 +82,8 @@ return [
 
         'defaults' => [
 
-            '1' => [
-                'id' => '1',
+            'userdefault' => [
+                'id' => 'userdefault',
                 'type' => 'user'
             ]
 
