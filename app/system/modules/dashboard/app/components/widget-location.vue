@@ -44,7 +44,7 @@
         <div class="uk-text-center" v-if="time">{{ time | date 'medium' }}</div>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-margin-remove">{{ widget.city }}</h3>
-            <h3 class="uk-margin-remove">{{ temperature }} <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
+            <h3 class="uk-margin-remove" v-if="icon">{{ temperature }} <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
         </div>
     </div>
 
