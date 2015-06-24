@@ -40,8 +40,8 @@
     </form>
 
     <div class="pk-panel-background uk-contrast" v-if="status != 'error'">
-        <h1 class="uk-margin-remove uk-text-center" v-if="time">{{ time | date format }}</h1>
-        <p class="uk-text-center" v-if="time">{{ time | date 'medium' }}</p>
+        <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center" v-if="time">{{ time | date format }}</h1>
+        <div class="uk-text-center" v-if="time">{{ time | date 'medium' }}</div>
         <div class="uk-margin-large-top uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-margin-remove">{{ widget.city }}</h3>
             <h3 class="uk-margin-remove">{{ temperature }} <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
