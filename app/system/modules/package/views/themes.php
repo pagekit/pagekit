@@ -26,8 +26,19 @@
             <div class="uk-panel uk-panel-box uk-visible-hover">
 
                 <div class="uk-panel-teaser uk-position-relative">
-                    <div class="uk-cover-background uk-position-cover" style="background-image: url({{icon(pkg)}});"></div>
-                    <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+
+                    <div class="uk-overlay uk-overlay-hover uk-display-block">
+                        <div class="uk-cover-background uk-position-cover" style="background-image: url({{icon(pkg)}});"></div>
+                        <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+                        <div class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                            <div class="uk-flex uk-flex-middle">
+                                <i class="pk-icon-search pk-icon-muted uk-margin-small-right"></i>
+                                <h3 class="uk-margin-remove">Details</h3>
+                                <a class="uk-position-cover" v-on="click: details(pkg)"></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
@@ -35,27 +46,21 @@
 
                         <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>
 
-                        <div class="uk-margin-left">
+                        <div class="uk-margin-left" v-show="!pkg.enabled">
                             <ul class="uk-subnav pk-subnav-icon uk-hidden">
-                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: details(pkg)"></a></li>
-                                <li v-show="pkg.enabled"><a class="uk-icon-cog" title="{{ 'Settings' | trans }}" data-uk-tooltip="{delay: 500}"></a></li>
-                                <li v-show="!pkg.enabled"><a class="uk-icon-check-circle-o" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
-                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)" v-confirm="'Uninstall theme?'"></a></li>
+                                <li><a class="pk-icon-star pk-icon-hover" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
+                                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg)" v-confirm="'Uninstall theme?'"></a></li>
                             </ul>
                         </div>
 
                     </div>
-                    <div data-uk-margin>
+                    <div>
 
-                        <span class="uk-badge" v-show="pkg.enabled">{{ 'Active' | trans }}</span>
+                        <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled">Customize</button>
+                        <button class="uk-button uk-button-success uk-button-small">{{ 'Update' | trans }}</button>
 
                     </div>
                 </div>
-
-                <p class="uk-text-muted">
-                    {{ pkg.version }}
-                    <br>/{{ pkg.name }}
-                </p>
 
             </div>
         </div>

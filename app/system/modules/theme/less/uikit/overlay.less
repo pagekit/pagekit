@@ -45,6 +45,10 @@
 
 .hook-overlay-misc() {
 
-    .uk-overlay { min-height: 100px; }
+    .uk-overlay {
+    	min-height: 100px;
+    	/* Reset fix because it causes a 1px gap */
+    	-webkit-transform: none;
+    }
 
 }

@@ -45,7 +45,7 @@
                         <a>{{ pkg.title }}</a>
                     </td>
                     <td>
-                        <a class="uk-button uk-button-success">{{ 'Update' | trans }}</a>
+                        <a class="uk-button uk-button-success uk-button-small">{{ 'Update' | trans }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
