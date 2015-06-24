@@ -11,26 +11,19 @@ module.exports = {
 
         this.load();
 
-        $(this.$el).on('change.uk.sortable', function (e, sortable, ele, mode) {
+        $(this.$el).on('change.uk.sortable', function (e, sortable, el, mode) {
 
-            if (!mode) return;
+            el = $(el);
 
-            ele = $(ele);
+            if (mode == 'moved' || mode == 'added') {
 
-            var newpos   = ele.parent().data('position'),
-                newindex = ele.index(),
-                oldpos   = ele.data('start-list').data('position'),
-                oldindex = ele.data('start-index')
+                var newpos   = el.parent().data('position'),
+                    newindex = el.index(),
+                    oldpos   = el.data('start-list').data('position'),
+                    oldindex = el.data('start-index');
 
-            switch(mode) {
-
-                case 'moved':
-                case 'added':
-
-                    vm.positions[oldpos].widgets[oldindex].position = newpos;
-                    vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
-
-                    break;
+                vm.positions[oldpos].widgets[oldindex].position = newpos;
+                vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
             }
 
         });
@@ -53,9 +46,11 @@ module.exports = {
     },
 
     watch: {
-        positions: function() {
+
+        positions: function () {
             UIkit.init(this.$el);
         }
+
     },
 
     methods: {

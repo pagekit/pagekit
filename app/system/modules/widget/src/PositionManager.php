@@ -67,7 +67,7 @@ class PositionManager implements \JsonSerializable
      */
     public function assigned($position)
     {
-        return isset($this->assigned[$position]) ? $this->assigned[$position] : [];
+        return isset($this->assigned[$position]) ? array_values($this->assigned[$position]) : [];
     }
 
     /**
@@ -79,8 +79,7 @@ class PositionManager implements \JsonSerializable
      */
     public function register($name, $label, $description = '')
     {
-        $assigned = $this->assigned($name);
-        $this->registered[$name] = compact('name', 'label', 'description', 'assigned');
+        $this->registered[$name] = compact('name', 'label', 'description');
     }
 
     /**
@@ -110,6 +109,16 @@ class PositionManager implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return array_values($this->registered);
+        $positions = [];
+
+        foreach ($this->registered as $name => $pos) {
+            $positions[] = array_merge($pos, ['assigned' => $this->assigned($name), 'registered' => true]);
+        }
+
+        foreach (array_diff_key($this->assigned, $this->registered) as $name => $ids) {
+            $positions[] = ['name' => $name, 'label' => $name, 'description' => '', 'assigned' => $ids];
+        }
+
+        return $positions;
     }
 }
