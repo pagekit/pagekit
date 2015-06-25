@@ -84,9 +84,10 @@ return [
 
             'userdefault' => [
                 'id' => 'userdefault',
-                'type' => 'user'
+                'type' => 'user',
+                'show' => 'login',
+                'display' => 'thumbnail'
             ]
-
         ]
 
     ]
