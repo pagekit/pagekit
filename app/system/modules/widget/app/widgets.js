@@ -17,27 +17,7 @@ module.exports = window.Widgets = Vue.extend({
         load: function () {
 
             this.resource.query(function (data) {
-
                 this.$set('widgets', data);
-
-                var indexedwidgets = _(data).groupBy('id').value(),
-                    positions      = {};
-
-                $data.config.positions.forEach(function(position) {
-
-                    position.widgets = [];
-
-                    position.assigned.forEach(function(widgetId) {
-
-                        if (indexedwidgets[widgetId]) {
-                            position.widgets.push(indexedwidgets[widgetId][0]);
-                        }
-                    });
-
-                    positions[position.name] = position;
-                });
-
-                this.$set('positions', positions);
             });
 
             this.resource.query({id: 'config'}, function (data) {

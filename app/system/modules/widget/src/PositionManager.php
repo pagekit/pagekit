@@ -42,10 +42,10 @@ class PositionManager implements \JsonSerializable
     }
 
     /**
-     * Assigns widget id to a position.
+     * Assigns widget id(s) to a position.
      *
-     * @param  string $position
-     * @param  int    $id
+     * @param  string        $position
+     * @param  array|integer $id
      * @return self
      */
     public function assign($position, $id)
@@ -54,7 +54,11 @@ class PositionManager implements \JsonSerializable
             $this->assigned[$pos] = array_diff($ids, [$id]);
         }
 
-        $this->assigned[$position][] = $id;
+        if (is_array($id)) {
+            $this->assigned[$position] = $id;
+        } else {
+            $this->assigned[$position][] = $id;
+        }
 
         return $this;
     }

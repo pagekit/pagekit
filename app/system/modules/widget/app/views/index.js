@@ -15,16 +15,16 @@ module.exports = {
 
             el = $(el);
 
-            if (mode == 'moved' || mode == 'added') {
+            // if (mode == 'moved' || mode == 'added') {
 
-                var newpos   = el.parent().data('position'),
-                    newindex = el.index(),
-                    oldpos   = el.data('start-list').data('position'),
-                    oldindex = el.data('start-index');
+            //     var newpos   = el.parent().data('position'),
+            //         newindex = el.index(),
+            //         oldpos   = el.data('start-list').data('position'),
+            //         oldindex = el.data('start-index');
 
-                vm.positions[oldpos].widgets[oldindex].position = newpos;
-                vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
-            }
+            //     vm.positions[oldpos].widgets[oldindex].position = newpos;
+            //     vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
+            // }
 
         });
     },
@@ -55,12 +55,34 @@ module.exports = {
 
     methods: {
 
-        getType: function (widget) {
-            return _.find(this.config.types, {name: widget.type});
-        },
-
         hasWidgets: function (position) {
             return this.positions[position.id] !== undefined;
+        }
+
+    },
+
+    components: {
+
+        'v-item': {
+
+            inherit: true,
+
+            props: ['id'],
+
+            computed: {
+
+                widget: function () {
+                    return this.widgets[this.id] || {};
+                },
+
+                type: function () {
+                    if (this.widget) {
+                        return _.find(this.config.types, {name: this.widget.type});
+                    }
+                }
+
+            }
+
         }
 
     }

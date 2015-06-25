@@ -64,15 +64,15 @@
 
             <ul class="uk-sortable uk-list uk-form" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ position.name }}">
 
-                <li data-id="{{ widget.id }}" v-repeat="widget: positions[position.name].widgets" data-index="{{ $index }}">
+                <li v-repeat="id: position.assigned" data-id="{{ id }}" data-index="{{ $index }}">
 
-                    <div class="uk-nestable-panel pk-table-fake uk-form">
+                    <v-item class="uk-nestable-panel pk-table-fake uk-form" id="{{ id }}" inline-template>
                         <div class="pk-table-width-minimum">
                             <input type="checkbox" name="id" value="{{ widget.id }}">
                         </div>
                         <div class="pk-table-min-width-100">
-                            <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="getType(widget)">{{ widget.title }}</a>
-                            <span v-if="!getType(widget)">{{ widget.title }}</span>
+                            <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
+                            <span v-if="!type">{{ widget.title }}</span>
                         </div>
                         <div class="pk-table-width-150">
                             <div class="uk-nestable-nodrag" v-el="select">
@@ -80,8 +80,8 @@
                                 <select class="uk-width-1-1" v-model="widget.position" v-on="change: reassign(widget, position.name, $index)" options="positionOptions"></select>
                             </div>
                         </div>
-                        <div class="pk-table-width-150">{{ getType(widget).name }}</div>
-                    </div>
+                        <div class="pk-table-width-150">{{ type.name }}</div>
+                    </v-item>
 
                 </li>
 
