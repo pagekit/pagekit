@@ -3,6 +3,7 @@
 namespace Pagekit\Database\Query;
 
 use Closure;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Types\Type;
 use Pagekit\Database\Connection;
 use PDO;
@@ -88,11 +89,12 @@ class QueryBuilder
      *
      * @param  string $table
      * @param  string $condition
+     * @param  string $type
      * @return self
      */
-    public function join($table, $condition = null)
+    public function join($table, $condition = null, $type = 'inner')
     {
-        return $this->innerJoin($table, $condition);
+        return $this->addPart('join', compact('type', 'table', 'condition'));
     }
 
     /**
@@ -104,9 +106,7 @@ class QueryBuilder
      */
     public function innerJoin($table, $condition = null)
     {
-        $type = 'inner';
-
-        return $this->addPart('join', compact('type', 'table', 'condition'));
+        return $this->join($table, $condition);
     }
 
     /**
@@ -118,9 +118,7 @@ class QueryBuilder
      */
     public function leftJoin($table, $condition = null)
     {
-        $type = 'left';
-
-        return $this->addPart('join', compact('type', 'table', 'condition'));
+        return $this->join($table, $condition, 'left');
     }
 
     /**
@@ -132,9 +130,7 @@ class QueryBuilder
      */
     public function rightJoin($table, $condition = null)
     {
-        $type = 'right';
-
-        return $this->addPart('join', compact('type', 'table', 'condition'));
+        return $this->join($table, $condition, 'right');
     }
 
     /**
@@ -164,12 +160,13 @@ class QueryBuilder
     /**
      * Creates and adds a "where in" to the query.
      *
-     * @param  string $column
-     * @param  mixed  $values
-     * @param  bool   $not
+     * @param  string  $column
+     * @param  mixed   $values
+     * @param  bool    $not
+     * @param  string  $type
      * @return self
      */
-    public function whereIn($column, $values, $not = false)
+    public function whereIn($column, $values, $not = false, $type = null)
     {
         $params = [];
 
@@ -189,7 +186,7 @@ class QueryBuilder
 
         $not = $not ? ' NOT' : '';
 
-        return $this->addWhere("$column $not IN ($values)", $params, CompositeExpression::TYPE_AND);
+        return $this->addWhere("{$column}{$not} IN ({$values})", $params, $type ?: CompositeExpression::TYPE_AND);
     }
 
     /**
@@ -202,34 +199,18 @@ class QueryBuilder
      */
     public function orWhereIn($column, $values, $not = false)
     {
-        $params = [];
-
-        if (is_array($values)) {
-
-            $values = implode(', ', array_map([$this->connection, 'quote'], $values));
-
-        } elseif ($values instanceof Closure) {
-
-            $query = $this->newQuery();
-
-            call_user_func($values, $query);
-
-            $values = $query->getSQL();
-            $params = $query->params();
-        }
-
-        $not = $not ? ' NOT' : '';
-
-        return $this->addWhere("$column $not IN ($values)", $params, CompositeExpression::TYPE_OR);
+        return $this->whereIn($column, $values, $not, CompositeExpression::TYPE_OR);
     }
 
     /**
      * Creates and adds a "where exists" to the query.
      *
      * @param  Closure $callback
+     * @param  bool    $not
+     * @param  string  $type
      * @return self
      */
-    public function whereExists(Closure $callback)
+    public function whereExists(Closure $callback, $not = false, $type = null)
     {
         $query = $this->newQuery();
 
@@ -237,24 +218,21 @@ class QueryBuilder
 
         $exists = $query->getSQL();
 
-        return $this->addWhere("EXISTS ($exists)", $query->params(), CompositeExpression::TYPE_AND);
+        $not = $not ? 'NOT ' : '';
+
+        return $this->addWhere("{$not}EXISTS ({$exists})", $query->params(), $type ?: CompositeExpression::TYPE_AND);
     }
 
     /**
      * Creates and adds a "or where exists" to the query.
      *
      * @param  Closure $callback
+     * @param  bool    $not
      * @return self
      */
-    public function orWhereExists(Closure $callback)
+    public function orWhereExists(Closure $callback, $not = false)
     {
-        $query = $this->newQuery();
-
-        call_user_func($callback, $query);
-
-        $exists = $query->getSQL();
-
-        return $this->addWhere("EXISTS ($exists)", $query->params(), CompositeExpression::TYPE_OR);
+        return $this->whereExists($callback, $not, CompositeExpression::TYPE_OR);
     }
 
     /**
@@ -277,9 +255,8 @@ class QueryBuilder
 
             foreach ($condition as $key => $value) {
 
-                $name = str_replace('.', '_', $key);
-
                 if (!is_numeric($key)) {
+                    $name = $this->parameter($key);
                     $params[$name] = $value;
                     $value = "$key = :$name";
                 }
@@ -326,19 +303,21 @@ class QueryBuilder
     /**
      * Creates and adds a "having" to the query.
      *
-     * @param  mixed $having
+     * @param  mixed  $having
+     * @param  string $type
      * @return self
      */
-    public function having($having)
+    public function having($having, $type = null)
     {
+        $type   = $type ?: CompositeExpression::TYPE_AND;
         $args   = func_get_args();
         $having = $this->getPart('having');
 
-        if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_AND) {
+        if ($having instanceof CompositeExpression && $having->getType() === $type) {
             $having->addMultiple($args);
         } else {
             array_unshift($args, $having);
-            $having = new CompositeExpression(CompositeExpression::TYPE_AND, $args);
+            $having = new CompositeExpression($type, $args);
         }
 
         return $this->setPart('having', $having);
@@ -352,17 +331,7 @@ class QueryBuilder
      */
     public function orHaving($having)
     {
-        $args   = func_get_args();
-        $having = $this->getPart('having');
-
-        if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_OR) {
-            $having->addMultiple($args);
-        } else {
-            array_unshift($args, $having);
-            $having = new CompositeExpression(CompositeExpression::TYPE_OR, $args);
-        }
-
-        return $this->setPart('having', $having);
+        return $this->having($having, CompositeExpression::TYPE_OR);
     }
 
     /**
@@ -583,7 +552,7 @@ class QueryBuilder
      * Execute the "select" query.
      *
      * @param  mixed $columns
-     * @return mixed
+     * @return Statement
      */
     public function execute($columns = ['*'])
     {
@@ -598,12 +567,14 @@ class QueryBuilder
      * Execute the "update" query with the given values.
      *
      * @param  array $values
-     * @return mixed
+     * @return int
      */
     public function update(array $values)
     {
         foreach ($values as $key => $value) {
-            $this->addPart('set', "$key = :$key");
+            $name = $this->parameter($key);
+            $values[$name] = $value;
+            $this->addPart('set', "$key = :$name");
         }
 
         return $this->params($values)->executeQuery('update');
@@ -612,7 +583,7 @@ class QueryBuilder
     /**
      * Execute the "delete" query.
      *
-     * @return mixed
+     * @return int
      */
     public function delete()
     {
@@ -719,7 +690,13 @@ class QueryBuilder
     {
         extract($this->parts);
 
-        $query = "UPDATE $from SET ".implode(', ', $set);
+        $query = "UPDATE $from";
+
+        foreach ($join as $j) {
+            $query .= sprintf(' %s JOIN %s ON %s', strtoupper($j['type']), $j['table'], (string) $j['condition']);
+        }
+
+        $query .= " SET ".implode(', ', $set);
 
         if ($where) {
             $query .= ' WHERE '.$where;
@@ -738,6 +715,10 @@ class QueryBuilder
         extract($this->parts);
 
         $query = 'DELETE FROM '.$from;
+
+        foreach ($join as $j) {
+            $query .= sprintf(' %s JOIN %s ON %s', strtoupper($j['type']), $j['table'], (string) $j['condition']);
+        }
 
         if ($where) {
             $query .= ' WHERE '.$where;
@@ -761,5 +742,10 @@ class QueryBuilder
             }
         }
         return $types;
+    }
+
+    protected function parameter($name)
+    {
+        return preg_replace('/[^a-zA-Z0-9_]/', '_', $name);
     }
 }

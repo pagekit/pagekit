@@ -54,7 +54,7 @@ class CompositeExpression implements \Countable
      * Adds an expression to composite expression.
      *
      * @param  mixed $part
-     * @return CompositeExpression
+     * @return self
      */
     public function add($part)
     {
@@ -69,7 +69,7 @@ class CompositeExpression implements \Countable
      * Adds multiple parts to composite expression.
      *
      * @param  array $parts
-     * @return CompositeExpression
+     * @return self
      */
     public function addMultiple(array $parts = [])
     {
