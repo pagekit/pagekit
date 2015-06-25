@@ -19,6 +19,8 @@ class SiteController
     {
         $site = App::module('system/site');
 
+        Node::fixOrphanedNodes();
+
         return [
             '$view' => [
                 'title' => __('Pages'),

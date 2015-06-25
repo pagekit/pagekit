@@ -156,7 +156,7 @@ class Node implements NodeInterface, \JsonSerializable
 
         // Update own path
         $path = '/'.$this->getSlug();
-        if ($this->getParentId() && $parent = self::find($this->getParentId())) {
+        if ($this->parentId && $parent = self::find($this->parentId) and $parent->getMenu() === $this->menu) {
             $path = $parent->getPath().$path;
         } else {
             // set Parent to 0, if old parent is not found
@@ -166,8 +166,9 @@ class Node implements NodeInterface, \JsonSerializable
 
         if ($this->id) {
             // Update children's paths
-            foreach (self::where('parent_id = ?', [$this->id])->get() as $child) {
-                if (0 !== strpos($child->getPath(), $this->getPath().'/')) {
+            foreach (self::where(['parent_id' => $this->id])->get() as $child) {
+                if (0 !== strpos($child->getPath(), $this->path.'/') || $this->getMenu() !== $this->menu) {
+                    $child->setMenu($this->menu);
                     $child->save();
                 }
             }
@@ -176,8 +177,9 @@ class Node implements NodeInterface, \JsonSerializable
             $this->priority = 1 + $db->createQueryBuilder()
                     ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
                     ->from('@system_node')
-                    ->where('parent_id = ?', [$this->parentId])
-                    ->execute()->fetchColumn();
+                    ->where(['parent_id' => $this->parentId])
+                    ->execute()
+                    ->fetchColumn();
         }
     }
 
@@ -224,5 +226,20 @@ class Node implements NodeInterface, \JsonSerializable
         }
 
         return $url;
+    }
+
+    /**
+     * Sets parent_id of orphaned nodes to zero.
+     *
+     * @return int
+     */
+    public static function fixOrphanedNodes()
+    {
+        // fix orphaned nodes
+        return self::getConnection()->createQueryBuilder()
+            ->from('@system_node n')
+            ->leftJoin('@system_node c', 'c.id = n.parent_id AND c.menu = n.menu')
+            ->where(['n.parent_id <> 0', 'c.id IS NULL'])
+            ->update(['n.parent_id' => 0]);
     }
 }

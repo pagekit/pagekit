@@ -4,9 +4,7 @@ namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\BlogExtension;
-use Pagekit\Blog\Entity\Comment;
 use Pagekit\Blog\Entity\Post;
-use Pagekit\Comment\Event\CommentEvent;
 use Pagekit\Database\Event\EntityEvent;
 
 class SiteController

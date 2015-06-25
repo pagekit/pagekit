@@ -7,6 +7,16 @@ return [
         $db = $app['db'];
         $util = $app['db']->getUtility();
 
+        if ($util->tableExists('@system_config') === false) {
+            $util->createTable('@system_config', function($table) {
+                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+                $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
+                $table->addColumn('value', 'text');
+                $table->setPrimaryKey(['id']);
+                $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
+            });
+        }
+
         if ($util->tableExists('@system_node') === false) {
             $util->createTable('@system_node', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
@@ -24,13 +34,13 @@ return [
             });
         }
 
-        if ($util->tableExists('@system_config') === false) {
-            $util->createTable('@system_config', function($table) {
+        if ($util->tableExists('@system_page') === false) {
+            $util->createTable('@system_page', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
-                $table->addColumn('value', 'text');
+                $table->addColumn('title', 'string', ['length' => 255]);
+                $table->addColumn('content', 'text');
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
             });
         }
 
@@ -95,16 +105,6 @@ return [
                 $table->addColumn('title', 'string', ['length' => 255]);
                 $table->addColumn('pages', 'text');
                 $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
-                $table->addColumn('data', 'json_array', ['notnull' => false]);
-                $table->setPrimaryKey(['id']);
-            });
-        }
-
-        if ($util->tableExists('@system_page') === false) {
-            $util->createTable('@system_page', function($table) {
-                $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('title', 'string', ['length' => 255]);
-                $table->addColumn('content', 'text');
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });

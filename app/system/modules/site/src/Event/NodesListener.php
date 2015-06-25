@@ -15,7 +15,7 @@ class NodesListener implements EventSubscriberInterface
     {
         $site = App::module('system/site');
 
-        foreach (Node::where(['status = ?'], [1])->get() as $node) {
+        foreach (Node::where(['status' => 1])->get() as $node) {
 
             if (!$type = $site->getType($node->getType())) {
                 continue;

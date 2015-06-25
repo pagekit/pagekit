@@ -100,15 +100,19 @@ class SiteModule extends Module
 
             App::trigger('site.menus', [$this]);
 
-            foreach (App::db()->createQueryBuilder()
-                         ->from('@system_node')
-                         ->where('menu <> ""')
+            foreach (Node::where(['menu <> ?', 'menu <> ?'], ['', 'trash'])
                          ->whereIn('menu', array_keys($this->menus), true)
                          ->groupBy('menu')->execute('menu')
                          ->fetchAll(\PDO::FETCH_COLUMN) as $menu
             ) {
                 $this->registerMenu($menu, $menu, ['ghost' => true]);
             }
+
+            uasort($this->menus, function ($a, $b) {
+                return strcmp($a['label'], $b['label']);
+            });
+
+            $this->registerMenu('', 'Not Linked', ['fixed' => true]);
         }
 
         return $this->menus;
