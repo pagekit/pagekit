@@ -147,14 +147,12 @@
             <div class="pk-table-width-minimum uk-text-nowrap">{{ getType(node).label }}</div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
-                    <a v-class="
-                            pk-icon-circle-danger:  !node.status,
-                            pk-icon-circle-success: node.status
-                        " v-on="click: toggleStatus(node)"></a>
+                    <a v-class="pk-icon-circle-danger: !node.status, pk-icon-circle-success: node.status" v-on="click: toggleStatus(node)"></a>
                 </td>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a target="_blank" v-attr="href: url">{{ isFrontpage ? '/' : node.path }}</a>
+                <a target="_blank" v-attr="href: url" v-show="node.status">{{ isFrontpage ? '/' : node.path }}</a>
+                <span v-show="!node.status">{{ isFrontpage ? '/' : node.path }}</span>
             </div>
         </div>
 

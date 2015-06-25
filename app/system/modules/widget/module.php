@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Widget\Event\SiteListener;
+
 return [
 
     'name' => 'system/widget',
@@ -66,6 +68,10 @@ return [
 
     'events' => [
 
+        'boot' => function($event, $app) {
+            $app->subscribe(new SiteListener());
+        },
+
         'system.widget.postLoad' => function ($event, $widget) use ($app) {
             $widget->position = $this->getPositions()->find($widget->getId());
         },
@@ -82,8 +88,7 @@ return [
             //     $config->set('widget.config.' . $widget->getId(), $config);
             // }
 
-        },
-
+        }
     ]
 
 ];

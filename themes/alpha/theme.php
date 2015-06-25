@@ -56,6 +56,7 @@ return [
      */
     'renderer' => [
 
+        'default'   => 'themes/alpha/views/renderer/position.blank.php',
         'blank'     => 'themes/alpha/views/renderer/position.blank.php',
         'grid'      => 'themes/alpha/views/renderer/position.grid.php',
         'navbar'    => 'themes/alpha/views/renderer/position.navbar.php',

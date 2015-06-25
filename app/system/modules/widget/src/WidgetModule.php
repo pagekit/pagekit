@@ -33,7 +33,7 @@ class WidgetModule extends Module
     }
 
     /**
-     * @return array
+     * @return PositionManager
      */
     public function getPositions()
     {
