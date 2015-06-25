@@ -23,9 +23,6 @@ class Widget extends BaseWidget
     /** @Column */
     protected $title = '';
 
-    /** @Column(type="text") */
-    protected $pages = '';
-
     /** @Column(name="nodes", type="simple_array") */
     protected $nodes = [];
 
@@ -40,16 +37,6 @@ class Widget extends BaseWidget
     public function setShowTitle($showTitle)
     {
         $this->set('show_title', (bool) $showTitle);
-    }
-
-    public function getPages()
-    {
-        return $this->pages;
-    }
-
-    public function setPages($pages)
-    {
-        $this->pages = $pages;
     }
 
     public function getNodes()

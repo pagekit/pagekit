@@ -16,10 +16,8 @@ class SiteListener implements EventSubscriberInterface
 
         // register renderer
         foreach (App::module() as $module) {
-            if (isset($module->renderer) && is_array($module->renderer)) {
-                foreach ($module->renderer as $id => $renderer) {
-                    App::view()->map('position.'.$id, $renderer);
-                }
+            foreach ((array) $module->get('renderer') as $id => $renderer) {
+                App::view()->map('position.'.$id, $renderer);
             }
         }
 

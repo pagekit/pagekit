@@ -150,7 +150,7 @@ abstract class Widget implements WidgetInterface
     {
         $type = App::module('system/widget')->getType($this->type);
 
-        return $type ? $type->render($this, $options) : '';
+        return $type ? call_user_func($type->get('render'), $this, $options) : '';
     }
 
     /**
