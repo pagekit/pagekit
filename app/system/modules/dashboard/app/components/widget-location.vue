@@ -20,7 +20,7 @@
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
                 <div v-el="location" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" v-model="widget.city" autocomplete="off">
+                    <input id="form-city" class="uk-width-1-1" type="text" v-el="locationInput"  autocomplete="off">
                 </div>
             </div>
         </div>
@@ -118,6 +118,10 @@
                     if (!location) {
                         return;
                     }
+
+                    setTimeout(function(){
+                        vm.$$.locationInput.value = '';
+                    }, 0);
 
                     vm.$set('widget.uid', location.id);
                     vm.$set('widget.city', location.name);
