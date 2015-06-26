@@ -34,13 +34,16 @@
                         <tr>
                             <th class="pk-table-min-width-200">{{ $key }}</th>
                             <th class="pk-table-width-minimum"></th>
+                            <th class="pk-table-width-minimum"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-repeat="permission: group" v-class="uk-visible-hover-inline: permission.trusted">
                             <td class="pk-table-text-break">
                                 <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
-                                <i class="pk-icon-warning uk-margin-small-left uk-invisible" v-if="permission.trusted"></i>
+                            </td>
+                            <td>
+                                <i class="pk-icon-warning uk-invisible" title="{{ 'This permission has security implications. Give it trusted roles only.' | trans }}" data-uk-tooltip v-if="permission.trusted"></i>
                             </td>
                             <td class="uk-text-center">
 
@@ -56,10 +59,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <p>
-                <i class="pk-icon-warning"></i> {{ 'Warning: Give to trusted roles only; this permission has security implications.' || trans }}
-            </p>
 
         </div>
     </div>
