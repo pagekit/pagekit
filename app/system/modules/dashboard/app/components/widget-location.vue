@@ -18,19 +18,22 @@
 
         <div class="uk-form-row">
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
+
             <div class="uk-form-controls">
-                <div v-el="location" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" v-el="locationInput" onblur="this.value=''" placeholder="{{ widget.city ? widget.city+', '+widget.country:'' }}"  autocomplete="off">
+                <div v-el="autocomplete" class="uk-autocomplete uk-width-1-1">
+                    <input id="form-city" class="uk-width-1-1" type="text" placeholder="{{ location }}" v-el="location" v-on="blur: clear" autocomplete="off">
                 </div>
             </div>
         </div>
 
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'Unit' | trans }}</span>
+
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed">
                     <label><input type="radio" value="metric" v-model="widget.units"> {{ 'Metric' | trans }}</label>
                 </p>
+
                 <p class="uk-form-controls-condensed">
                     <label><input type="radio" value="imperial" v-model="widget.units"> {{ 'Imperial' | trans }}</label>
                 </p>
@@ -41,14 +44,18 @@
 
     <div class="pk-panel-background uk-contrast">
         <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-large" v-if="time">{{ time | date format }}</h1>
+
         <div class="uk-text-center uk-h4" v-if="time">{{ time | date 'long' }}</div>
         <div class="uk-margin-large-top uk-flex uk-flex-bottom uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-margin-remove" v-if="widget.city">{{ widget.city }}</h3>
+
             <h3 class="uk-margin-remove" v-if="status=='done'"><span class="pk-v-align-bottom">{{ temperature }}</span> <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
         </div>
     </div>
 
-    <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
+    <p class="uk-text-center" v-if="status == 'loading'">
+        <v-loader></v-loader>
+    </p>
 
 </template>
 
@@ -84,7 +91,7 @@
                 icon: '',
                 temp: 0,
                 time: 0,
-                format: { time: 'short' }
+                format: {time: 'short'}
             };
         },
 
@@ -93,11 +100,11 @@
             var vm = this, list;
 
             UIkit
-                .autocomplete(this.$$.location, {
+                .autocomplete(this.$$.autocomplete, {
 
                     source: function (release) {
 
-                        vm.$http.jsonp(api + '/find', { q: encodeURI(this.input.val()), type: 'like' }, function (data) {
+                        vm.$http.jsonp(api + '/find', {q: encodeURI(this.input.val()), type: 'like'}, function (data) {
 
                             list = data.list || [];
                             release(list);
@@ -113,16 +120,20 @@
                                   {{^items.length}}<li class="uk-skip"><a class="uk-text-muted">{{msgNoResults}}</a></li>{{/end}} \
                                </ul>',
 
-                    renderer: function(data) {
+                    renderer: function (data) {
 
-                        this.dropdown.append(this.template({"items":data || [], "msgNoResults": vm.$trans('No location found.') }));
+                        this.dropdown.append(this.template({"items": data || [], "msgNoResults": vm.$trans('No location found.')}));
                         this.show();
                     }
 
                 })
                 .on('selectitem.uk.autocomplete', function (e, data) {
 
-                    var location = _.find(list, { id: data.id });
+                    var location = _.find(list, {id: data.id});
+
+                    Vue.nextTick(function() {
+                        vm.$$.location.blur();
+                    });
 
                     if (!location) {
                         return;
@@ -143,7 +154,7 @@
                 this.loadWeather();
                 this.loadTime();
 
-            }, { immediate: true });
+            }, {immediate: true});
 
             this.timer = setInterval(this.updateClock(), 60 * 1000);
         },
@@ -157,13 +168,17 @@
 
         computed: {
 
-            temperature: function() {
+            location: function () {
+                return this.widget.city ? this.widget.city + ', ' + this.widget.country : '';
+            },
+
+            temperature: function () {
 
                 if (this.widget.units !== 'imperial') {
                     return Math.round(this.temp) + ' °C';
                 }
 
-                return Math.round(this.temp * (9/5) + 32) + ' °F';
+                return Math.round(this.temp * (9 / 5) + 32) + ' °F';
             }
 
         },
@@ -184,7 +199,7 @@
 
                 } else {
 
-                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: 'metric' }, function (data) {
+                    this.$http.jsonp(api + '/weather?callback=?', {id: this.widget.uid, units: 'metric'}, function (data) {
 
                         if (data.cod == 200) {
                             storage[key] = JSON.stringify(data);
@@ -215,7 +230,7 @@
 
                 } else {
 
-                    this.$http.get(this.$url('admin/system/intl/timezone', { lat: this.widget.coords.lat, lon: this.widget.coords.lon }), function (data) {
+                    this.$http.get(this.$url('admin/system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}), function (data) {
 
                         storage[key] = JSON.stringify(data);
                         this.$set('timezone', data);
@@ -260,18 +275,22 @@
 
                 };
 
-                return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', { icon: icons[icon] });
+                return this.$url.static('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
             },
 
             updateClock: function () {
 
                 var offset = this.$get('timezone.offset'),
-                    date   = new Date(),
-                    time   = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000): new Date();
+                    date = new Date(),
+                    time = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : new Date();
 
                 this.$set('time', time);
 
                 return this.updateClock;
+            },
+
+            clear: function(e) {
+                this.$$.location.value = '';
             }
 
         },
