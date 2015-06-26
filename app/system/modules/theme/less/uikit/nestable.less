@@ -13,8 +13,8 @@
 
 @nestable-placeholder-border:                   #99baca;
 
-@nestable-toggle-icon:                          "\f0d7";
-@nestable-toggle-collapsed-icon:                "\f0da";
+@nestable-toggle-icon:                          "";
+@nestable-toggle-collapsed-icon:                "";
 
 @nestable-panel-padding:                        16px 12px;
 @nestable-panel-background:                     @global-background;
@@ -53,4 +53,15 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-nestable-misc() {}
+.hook-nestable-misc() {
+
+    .uk-nestable-toggle:after {
+        display: block;
+        height: 20px;
+        width: 8px;
+        background: url("@{global-image-path}/caret-down.svg") 0 0 no-repeat;
+    }
+
+    .uk-collapsed .uk-nestable-toggle:after { background-image: url("@{global-image-path}/caret-right.svg"); }
+
+}
