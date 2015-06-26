@@ -39,17 +39,16 @@
 
     </form>
 
-    <div class="pk-panel-background uk-contrast" v-if="status != 'error'">
+    <div class="pk-panel-background uk-contrast">
         <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-large" v-if="time">{{ time | date format }}</h1>
         <div class="uk-text-center uk-h4" v-if="time">{{ time | date 'long' }}</div>
         <div class="uk-margin-large-top uk-flex uk-flex-bottom uk-flex-space-between uk-flex-wrap" data-uk-margin>
-            <h3 class="uk-margin-remove">{{ widget.city }}</h3>
-            <h3 class="uk-margin-remove" v-if="icon"><span class="pk-v-align-bottom">{{ temperature }}</span> <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
+            <h3 class="uk-margin-remove" v-if="widget.city">{{ widget.city }}</h3>
+            <h3 class="uk-margin-remove" v-if="status=='done'"><span class="pk-v-align-bottom">{{ temperature }}</span> <img v-attr="src: icon" width="26" height="26" alt="Weather"></h3>
         </div>
     </div>
 
     <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
-    <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</p>
 
 </template>
 
@@ -96,7 +95,7 @@
 
                     source: function (release) {
 
-                        vm.$http.jsonp(api + '/find', { q: this.input.val(), type: 'like' }, function (data) {
+                        vm.$http.jsonp(api + '/find', { q: encodeURI(this.input.val()), type: 'like' }, function (data) {
 
                             list = data.list || [];
                             release(list);
@@ -107,7 +106,16 @@
 
                     },
 
-                    template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">{{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}} <span class="uk-text-muted">, {{$item.sys.country}}</span></a></li>{{/items}}</ul>'
+                    template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">\
+                                  {{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}} <span class="uk-text-muted">, {{$item.sys.country}}</span></a></li>{{/items}}\
+                                  {{^items.length}}<li class="uk-skip"><a class="uk-text-muted">{{msgNoResults}}</a></li>{{/end}} \
+                               </ul>',
+
+                    renderer: function(data) {
+
+                        this.dropdown.append(this.template({"items":data || [], "msgNoResults": vm.$trans('No location found.') }));
+                        this.show();
+                    }
 
                 })
                 .on('selectitem.uk.autocomplete', function (e, data) {
