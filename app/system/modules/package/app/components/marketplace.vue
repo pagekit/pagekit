@@ -2,13 +2,16 @@
 
     <div data-uk-observe>
 
-        <div class="uk-grid uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
+        <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
             <div v-repeat="pkg: packages">
-                <div class="uk-panel uk-panel-box">
+                <div class="uk-panel uk-panel-box uk-visible-hover uk-overlay-hover">
 
                     <div class="uk-panel-teaser uk-position-relative">
-                        <div class="uk-cover-background uk-position-cover" style="background-image: url({{pkg.extra.teaser}});"></div>
-                        <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+                        <div class="uk-overlay uk-display-block">
+                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{pkg.extra.teaser}});"></div>
+                            <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+                            <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
+                        </div>
                     </div>
 
                     <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>

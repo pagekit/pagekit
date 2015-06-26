@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="uk-grid uk-grid-match uk-grid-width-medium-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
+    <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-medium-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
         <div v-repeat="pkg: packages | filterBy search in 'title'">
             <div class="uk-panel uk-panel-box uk-visible-hover uk-overlay-hover">
 
@@ -29,7 +29,7 @@
                     <div class="uk-overlay uk-display-block">
                         <div class="uk-cover-background uk-position-cover" style="background-image: url({{icon(pkg)}});"></div>
                         <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
-                        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
+                        <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                     </div>
                 </div>
 
