@@ -39,16 +39,10 @@
                         </ul>
                     </div>
 
-                    <div class="pk-search">
-                        <div class="uk-search">
-                            <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
-                        </div>
-                    </div>
-
                 </div>
                 <div data-uk-margin>
 
-                    <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+                    <div class="uk-button-dropdown" data-uk-dropdown="{mode: 'click'}">
                         <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                         <div class="uk-dropdown uk-dropdown-small">
                             <ul class="uk-nav uk-nav-dropdown">
@@ -70,9 +64,9 @@
                     <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                 </div>
 
-                <div v-repeat="p: positions" track-by="name">
+                <div v-repeat="p: config.positions" track-by="name" v-show="p | show">
 
-                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading" v-show="positions.length > 1">
+                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading" v-show="!position">
                         <div>
                             {{ p.label | trans }}
                             <span class="uk-text-muted" v-if="p.description">{{ p.description | trans }}</span>

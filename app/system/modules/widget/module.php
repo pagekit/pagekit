@@ -80,10 +80,6 @@ return [
 
             $config = $app['config']->get('system/widget');
 
-            if ($position = isset($widget->position) ? $widget->position : false) {
-                $config->set('widget.positions', $this->getPositions()->assign($position, $widget->getId())->getAssigned());
-            }
-
             // if (false !== $config) {
             //     $config->set('widget.config.' . $widget->getId(), $config);
             // }

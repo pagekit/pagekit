@@ -2,8 +2,7 @@ module.exports = {
 
     data: $.extend(true, {
         position: undefined,
-        selected: [],
-        config: {filter: {}}
+        selected: []
     }, window.$data),
 
     ready: function () {
@@ -34,15 +33,6 @@ module.exports = {
 
         count: function () {
             return this.widgets.length || '';
-        },
-
-        positions: function () {
-
-            if (!this.position) {
-                return this.config.positions;
-            }
-
-            return [_.find(this.config.positions, 'name', this.position.name)];
         },
 
         positionOptions: function () {
@@ -79,6 +69,10 @@ module.exports = {
     },
 
     filters: {
+
+        show: function (position) {
+            return !this.position || this.position.name === position.name;
+        },
 
         exists: function (ids) {
             return ids.filter(function (id) {
