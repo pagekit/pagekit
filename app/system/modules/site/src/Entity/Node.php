@@ -235,11 +235,16 @@ class Node implements NodeInterface, \JsonSerializable
      */
     public static function fixOrphanedNodes()
     {
-        // fix orphaned nodes
-        return self::getConnection()->createQueryBuilder()
+        if ($orphaned = self::getConnection()
+            ->createQueryBuilder()
             ->from('@system_node n')
             ->leftJoin('@system_node c', 'c.id = n.parent_id AND c.menu = n.menu')
             ->where(['n.parent_id <> 0', 'c.id IS NULL'])
-            ->update(['n.parent_id' => 0]);
+            ->execute('n.id')->fetchAll(\PDO::FETCH_COLUMN)
+        ) {
+            Node::query()
+                ->whereIn('id', $orphaned)
+                ->update(['parent_id' => 0]);
+        }
     }
 }
