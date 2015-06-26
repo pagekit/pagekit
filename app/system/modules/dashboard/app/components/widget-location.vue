@@ -122,7 +122,7 @@
 
                     renderer: function (data) {
 
-                        this.dropdown.append(this.template({"items": data || [], "msgNoResults": vm.$trans('No location found.')}));
+                        this.dropdown.append(this.template({items: data || [], msgNoResults: vm.$trans('No location found.')}));
                         this.show();
                     }
 
@@ -151,8 +151,7 @@
                     this.$parent.edit(true);
                 }
 
-                this.loadWeather();
-                this.loadTime();
+                this.load();
 
             }, {immediate: true});
 
@@ -161,8 +160,7 @@
 
         watch: {
 
-            'widget.coords': 'loadTime',
-            'timezone': 'updateClock'
+            timezone: 'updateClock'
 
         },
 
@@ -185,7 +183,7 @@
 
         methods: {
 
-            loadWeather: function () {
+            load: function () {
 
                 if (!this.widget.uid) {
                     return;
@@ -214,15 +212,7 @@
 
                 }
 
-            },
-
-            loadTime: function () {
-
-                if (!this.widget.coords) {
-                    return;
-                }
-
-                var key = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
+                key = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
 
                 if (storage[key]) {
 
@@ -240,6 +230,7 @@
                     });
 
                 }
+
             },
 
             init: function (data) {
@@ -289,7 +280,7 @@
                 return this.updateClock;
             },
 
-            clear: function(e) {
+            clear: function() {
                 this.$$.location.value = '';
             }
 
