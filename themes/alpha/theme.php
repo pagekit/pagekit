@@ -52,16 +52,14 @@ return [
     ],
 
     /**
-     * List of renderers provided by this theme. A renderer determines the markup to be used in a widget position.
+     * List of renderer views provided by this theme. A renderer view determines the markup to be used in a widget position.
      */
-    'renderer' => [
+    'views' => [
 
-        'default'   => 'themes/alpha/views/renderer/position.blank.php',
-        'blank'     => 'themes/alpha/views/renderer/position.blank.php',
-        'grid'      => 'themes/alpha/views/renderer/position.grid.php',
-        'navbar'    => 'themes/alpha/views/renderer/position.navbar.php',
-        'offcanvas' => 'themes/alpha/views/renderer/position.offcanvas.php',
-        'panel'     => 'themes/alpha/views/renderer/position.panel.php'
+        'grid'      => 'alpha:views/position.grid.php',
+        'navbar'    => 'alpha:views/position.navbar.php',
+        'offcanvas' => 'alpha:views/position.offcanvas.php',
+        'panel'     => 'alpha:views/position.panel.php'
 
     ],
 

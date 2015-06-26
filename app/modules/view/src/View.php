@@ -27,7 +27,7 @@ class View
     protected $globals = [];
 
     /**
-     * @var array
+     * @var HelperInterface[]
      */
     protected $helpers = [];
 
@@ -127,13 +127,11 @@ class View
      * @param  HelperInterface $helper
      * @return self
      */
-    public function addHelper($helper)
+    public function addHelper(HelperInterface $helper)
     {
-        if (!$helper instanceof HelperInterface) {
-            throw new \InvalidArgumentException(sprintf('%s does not implement HelperInterface', get_class($helper)));
-        }
-
         $this->helpers[$helper->getName()] = $helper;
+
+        $helper->register($this);
 
         return $this;
     }
@@ -141,7 +139,7 @@ class View
     /**
      * Adds multiple view helpers.
      *
-     * @param  array $helpers
+     * @param  HelperInterface[] $helpers
      * @return self
      */
     public function addHelpers(array $helpers)

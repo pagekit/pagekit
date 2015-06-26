@@ -8,6 +8,11 @@ use Pagekit\View\View;
 class DeferredHelper implements HelperInterface
 {
     /**
+     * @var EventDispatcher
+     */
+    protected $events;
+
+    /**
      * @var array
      */
     protected $deferred = [];
@@ -19,11 +24,18 @@ class DeferredHelper implements HelperInterface
 
     /**
      * Constructor.
-     *
-     * @param View            $view
+
      * @param EventDispatcher $events
      */
-    public function __construct(View $view, EventDispatcher $events)
+    public function __construct(EventDispatcher $events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function register(View $view)
     {
         $view->on('render', function ($event) {
 
@@ -39,7 +51,7 @@ class DeferredHelper implements HelperInterface
 
         }, 15);
 
-        $events->on('response', function ($e, $request, $response) use ($view) {
+        $this->events->on('response', function ($e, $request, $response) use ($view) {
 
             $dispatcher = $e->getDispatcher();
 

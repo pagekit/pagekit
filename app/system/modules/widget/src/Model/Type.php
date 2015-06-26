@@ -9,10 +9,10 @@ class Type extends Module implements TypeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(WidgetInterface $widget, $options = [])
+    public function render(WidgetInterface $widget)
     {
-        if (is_callable($this->render)) {
-            return call_user_func($this->render, $widget, $options);
+        if (is_callable($this->get('render'))) {
+            return call_user_func($this->get('render'), $widget);
         }
     }
 

@@ -5,7 +5,7 @@ module.exports = {
     ready: function () {
 
         UIkit.tab(this.$$.tab, {connect: this.$$.content});
-        // this.$set('widget.settings', _.defaults({}, this.widget.settings, this.type.defaults));
+        // this.$set('widget.data', _.defaults({}, this.widget.data, this.type.defaults));
 
     },
 

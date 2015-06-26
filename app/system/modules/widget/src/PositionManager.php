@@ -64,17 +64,6 @@ class PositionManager implements \JsonSerializable
     }
 
     /**
-     * Gets assigned widget ids.
-     *
-     * @param  string $position
-     * @return array
-     */
-    public function assigned($position)
-    {
-        return isset($this->assigned[$position]) ? array_values($this->assigned[$position]) : [];
-    }
-
-    /**
      * Registers a position.
      *
      * @param string $name
@@ -89,11 +78,16 @@ class PositionManager implements \JsonSerializable
     /**
      * Gets the assigned widget ids.
      *
+     * @param  null|string $position
      * @return array
      */
-    public function getAssigned()
+    public function getAssigned($position = null)
     {
-        return $this->assigned;
+        if ($position === null) {
+            return $this->assigned;
+        }
+
+        return isset($this->assigned[$position]) ? array_values($this->assigned[$position]) : [];
     }
 
     /**
@@ -116,7 +110,7 @@ class PositionManager implements \JsonSerializable
         $positions = [];
 
         foreach ($this->registered as $name => $pos) {
-            $positions[] = array_merge($pos, ['assigned' => $this->assigned($name)]);
+            $positions[] = array_merge($pos, ['assigned' => $this->getAssigned($name)]);
         }
 
         foreach (array_diff_key($this->assigned, $this->registered) as $name => $ids) {

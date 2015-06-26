@@ -3,9 +3,9 @@
 namespace Pagekit\Editor;
 
 use Pagekit\Application as App;
-use Pagekit\View\Helper\HelperInterface;
+use Pagekit\View\Helper\Helper;
 
-class EditorHelper implements HelperInterface
+class EditorHelper extends Helper
 {
     /**
      * Render shortcut.

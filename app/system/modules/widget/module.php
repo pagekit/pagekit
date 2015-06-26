@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Widget\Event\SiteListener;
+use Pagekit\Widget\PositionHelper;
 
 return [
 
@@ -69,7 +69,7 @@ return [
     'events' => [
 
         'boot' => function($event, $app) {
-            $app->subscribe(new SiteListener());
+            $app['view']->addHelper(new PositionHelper());
         },
 
         'system.widget.postLoad' => function ($event, $widget) use ($app) {

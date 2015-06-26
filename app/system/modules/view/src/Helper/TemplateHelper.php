@@ -6,13 +6,8 @@ use Pagekit\Application;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\View;
 
-class TemplateHelper implements HelperInterface
+class TemplateHelper extends Helper
 {
-    /**
-     * @var View
-     */
-    protected $view;
-
     /**
      * @var AssetManager
      */
@@ -21,13 +16,19 @@ class TemplateHelper implements HelperInterface
     /**
      * Constructor.
      *
-     * @param View         $view
      * @param AssetManager $assets
      */
-    public function __construct(View $view, AssetManager $assets = null)
+    public function __construct(AssetManager $assets = null)
     {
-        $this->view = $view;
         $this->assets = $assets ?: new AssetManager();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function register(View $view)
+    {
+        parent::register($view);
 
         $view->on('head', function ($event) {
             $event->addResult($this->render());

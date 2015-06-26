@@ -4,13 +4,8 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\View\View;
 
-class SectionHelper implements HelperInterface
+class SectionHelper extends Helper
 {
-    /**
-     * @var View
-     */
-    protected $view;
-
     /**
      * @var array
      */
@@ -22,14 +17,13 @@ class SectionHelper implements HelperInterface
     protected $openSections = [];
 
     /**
-     * Constructor.
-     *
-     * @param View $view
+     * {@inheritdoc}
      */
-    public function __construct(View $view)
+    public function register(View $view)
     {
-        $this->view = $view;
-        $this->view->on('render', function ($event) {
+        parent::register($view);
+
+        $view->on('render', function ($event) {
             if ($this->exists($name = $event->getTemplate())) {
                 $event->setResult($this->get($name));
             }

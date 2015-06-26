@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Markdown\Markdown;
 
-class MarkdownHelper implements HelperInterface
+class MarkdownHelper extends Helper
 {
     /**
      * @var Markdown

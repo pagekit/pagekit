@@ -5,7 +5,7 @@ namespace Pagekit\View\Helper;
 use Pagekit\Application\UrlProvider;
 use Pagekit\Routing\Generator\UrlGenerator;
 
-class UrlHelper implements HelperInterface
+class UrlHelper extends Helper
 {
     /**
      * @var UrlProvider

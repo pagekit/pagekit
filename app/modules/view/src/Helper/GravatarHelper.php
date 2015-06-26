@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-class GravatarHelper implements HelperInterface
+class GravatarHelper extends Helper
 {
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.

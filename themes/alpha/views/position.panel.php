@@ -9,7 +9,7 @@
     <h3><?= $widget->getTitle() ?></h3>
     <?php endif ?>
 
-    <?= $widget->render($options) ?>
+    <?= $widget->get('result') ?>
     
 </div>
 <?php endforeach ?>

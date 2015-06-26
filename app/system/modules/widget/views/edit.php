@@ -59,7 +59,7 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" v-model="widget.settings.show_title"> {{ 'Show Title' | trans }}</label>
+                        <label><input type="checkbox" v-model="widget.data.show_title"> {{ 'Show Title' | trans }}</label>
                     </div>
                 </div>
 

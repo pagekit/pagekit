@@ -3,9 +3,9 @@
 namespace Pagekit\Finder;
 
 use Pagekit\Application as App;
-use Pagekit\View\Helper\HelperInterface;
+use Pagekit\View\Helper\Helper;
 
-class FinderHelper implements HelperInterface
+class FinderHelper extends Helper
 {
     /**
      * @param  string $root

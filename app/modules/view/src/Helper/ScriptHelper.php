@@ -15,13 +15,18 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param View         $view
      * @param AssetManager $scripts
      */
-    public function __construct(View $view, AssetManager $scripts = null)
+    public function __construct(AssetManager $scripts = null)
     {
         $this->scripts = $scripts ?: new AssetManager();
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function register(View $view)
+    {
         $view->on('head', function ($event) {
             $event->addResult($this->render());
         }, 5);

@@ -8,7 +8,6 @@ use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MapHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\MetaHelper;
-use Pagekit\View\Helper\PositionHelper;
 use Pagekit\View\Helper\ScriptHelper;
 use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
@@ -31,15 +30,14 @@ return [
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
             $view->addHelpers([
-                new DataHelper($view),
-                new DeferredHelper($view, $app['events']),
+                new DataHelper(),
+                new DeferredHelper($app['events']),
                 new GravatarHelper(),
-                new MapHelper($view),
-                new MetaHelper($view),
-                new PositionHelper($view),
-                new ScriptHelper($view, $app['scripts']),
-                new SectionHelper($view),
-                new StyleHelper($view, $app['styles']),
+                new MapHelper(),
+                new MetaHelper(),
+                new ScriptHelper($app['scripts']),
+                new SectionHelper(),
+                new StyleHelper($app['styles']),
                 new UrlHelper($app['url'])
             ]);
 
@@ -71,6 +69,17 @@ return [
         $app['scripts'] = function ($app) {
             return new AssetManager($app['assets']);
         };
+
+        $app['module']->addLoader(function ($name, $module) use ($app) {
+
+            if (isset($module['views'])) {
+                foreach ((array) $module['views'] as $name => $view) {
+                    $app['view']->map($name, $view);
+                }
+            }
+
+            return $module;
+        });
 
     },
 

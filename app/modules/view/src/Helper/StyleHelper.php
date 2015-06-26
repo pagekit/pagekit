@@ -15,13 +15,18 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
     /**
      * Constructor.
      *
-     * @param View         $view
      * @param AssetManager $styles
      */
-    public function __construct(View $view, AssetManager $styles = null)
+    public function __construct(AssetManager $styles = null)
     {
         $this->styles = $styles ?: new AssetManager();
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function register(View $view)
+    {
         $view->on('head', function ($event) {
             $event->addResult($this->render());
         }, 15);

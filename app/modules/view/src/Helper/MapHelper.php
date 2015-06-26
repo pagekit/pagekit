@@ -12,11 +12,9 @@ class MapHelper implements HelperInterface, \IteratorAggregate
     protected $map = [];
 
     /**
-     * Constructor.
-     *
-     * @param View $view
+     * {@inheritdoc}
      */
-    public function __construct(View $view)
+    public function register(View $view)
     {
         $view->on('render', function ($event) {
             if ($this->has($name = $event->getTemplate())) {

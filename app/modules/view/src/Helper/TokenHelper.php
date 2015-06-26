@@ -4,7 +4,7 @@ namespace Pagekit\View\Helper;
 
 use Pagekit\Session\Csrf\Provider\CsrfProviderInterface;
 
-class TokenHelper implements HelperInterface
+class TokenHelper extends Helper
 {
     /**
      * @var CsrfProviderInterface

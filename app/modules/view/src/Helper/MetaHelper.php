@@ -12,11 +12,9 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
     protected $metas = [];
 
     /**
-     * Constructor.
-     *
-     * @param View $view
+     * {@inheritdoc}
      */
-    public function __construct(View $view)
+    public function register(View $view)
     {
         $view->on('head', function ($event) {
             $event->addResult($this->render());

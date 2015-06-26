@@ -14,7 +14,7 @@ return [
 
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
-            $view->addHelper(new TemplateHelper($view, $app['scripts']));
+            $view->addHelper(new TemplateHelper($app['scripts']));
 
             return $view;
         });

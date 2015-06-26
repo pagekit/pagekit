@@ -7,8 +7,8 @@ interface TypeInterface extends \JsonSerializable
     /**
      * Renders the widget.
      *
-     * @param WidgetInterface $widget
-     * @param array           $options
+     * @param  WidgetInterface $widget
+     * @return string
      */
-    public function render(WidgetInterface $widget, $options = []);
+    public function render(WidgetInterface $widget);
 }
