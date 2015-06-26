@@ -157,7 +157,6 @@
 
                 this.load();
 
-
             }, {immediate: true});
 
             this.timer = setInterval(this.updateClock(), 60 * 1000);
