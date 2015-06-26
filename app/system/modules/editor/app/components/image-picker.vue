@@ -14,13 +14,12 @@
                     <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
                 </a>
 
-                <div class="uk-overlay uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="image.src">
-                    <img v-attr="src: resolveUrl(image.src)">
-                    <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle pk-overlay-border">
-                        <div>
-                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: openFinder"></a>
-                        </div>
+                <div class="uk-panel uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="image.src">
+                    <div class="uk-overlay">
+                        <img v-attr="src: resolveUrl(image.src)">
+                        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
                     </div>
+                    <a class="uk-position-cover" v-on="click: openFinder"></a>
                 </div>
 
                 <div class="uk-form-row">

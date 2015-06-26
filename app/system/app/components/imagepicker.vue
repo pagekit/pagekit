@@ -7,17 +7,19 @@
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add image' | trans }}</p>
         </a>
 
-        <div class="uk-overlay uk-overlay-hover pk-image-max-height uk-flex uk-flex-center uk-flex-middle" v-if="imageurl">
+        <div class="uk-panel uk-visible-hover uk-overlay-hover" v-if="imageurl">
 
-            <img v-attr="src: resolveUrl(imageurl)">
+            <div class="uk-overlay pk-image-max-height">
+                <img v-attr="src: resolveUrl(imageurl)">
+                <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
+            </div>
 
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle pk-overlay-border">
-                <div>
-                    <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: pick()"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove image?'"></a></li>
-                    </ul>
-                </div>
+            <a class="uk-position-cover" v-on="click: pick()"></a>
+
+            <div class="uk-panel-badge pk-panel-badge uk-hidden">
+                <ul class="uk-subnav pk-subnav-icon">
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove image?'"></a></li>
+                </ul>
             </div>
 
         </div>

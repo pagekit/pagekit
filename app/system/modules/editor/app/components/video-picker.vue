@@ -14,17 +14,19 @@
                     <p class="uk-text-muted uk-margin-small-top">{{ 'Select video' | trans }}</p>
                 </a>
 
-                <div class="uk-overlay uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="video.src">
-                    <video-view src="{{ video.src }}"></video-view>
-                    <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle pk-overlay-border">
-                        <div>
-                            <a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: openFinder"></a>
-                        </div>
+                <div class="uk-panel uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="video.src">
+                    <div class="uk-overlay">
+                        <video-view src="{{ video.src }}"></video-view>
+                        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
                     </div>
+                    <a class="uk-position-cover" v-on="click: openFinder"></a>
                 </div>
 
-                <div class="uk-margin">
-                    <input type="text" class="uk-width-1-1" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
+                <div class="uk-form-row">
+                    <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input type="text" class="uk-width-1-1" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
+                    </div>
                 </div>
 
                 <div class="uk-modal-footer uk-text-right">
