@@ -3,7 +3,6 @@ module.exports = window.Widgets = Vue.extend({
     data: function () {
         return {
             widgets: [],
-            positions: {},
             configs: {}
         };
     },
@@ -39,16 +38,6 @@ module.exports = window.Widgets = Vue.extend({
 
         remove: function () {
             this.resource.delete({id: 'bulk'}, {ids: this.selected}, this.load);
-        },
-
-        reorder: function (position, widgets) {
-            this.resource.save({id: 'positions'}, {position: position, widgets: _.pluck(widgets, 'id')}, this.load);
-        },
-
-        reassign: function(widget, position, index) {
-
-            if (!position || !widget.position) return;
-            this.positions[widget.position].widgets.push(this.positions[position].widgets.splice(index, 1)[0]);
         }
 
     },

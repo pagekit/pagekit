@@ -51,7 +51,7 @@ class PositionManager implements \JsonSerializable
     public function assign($position, $id)
     {
         foreach ($this->assigned as $pos => $ids) {
-            $this->assigned[$pos] = array_diff($ids, [$id]);
+            $this->assigned[$pos] = array_diff($ids, (array) $id);
         }
 
         if (is_array($id)) {
@@ -116,11 +116,11 @@ class PositionManager implements \JsonSerializable
         $positions = [];
 
         foreach ($this->registered as $name => $pos) {
-            $positions[] = array_merge($pos, ['assigned' => $this->assigned($name), 'registered' => true]);
+            $positions[] = array_merge($pos, ['assigned' => $this->assigned($name)]);
         }
 
         foreach (array_diff_key($this->assigned, $this->registered) as $name => $ids) {
-            $positions[] = ['name' => $name, 'label' => $name, 'description' => '', 'assigned' => $ids];
+            $positions[] = ['name' => $name, 'label' => $name, 'description' => '', 'assigned' => $this->assigned($name)];
         }
 
         return $positions;

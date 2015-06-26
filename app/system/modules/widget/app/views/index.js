@@ -1,6 +1,7 @@
 module.exports = {
 
     data: $.extend(true, {
+        position: undefined,
         selected: [],
         config: {filter: {}}
     }, window.$data),
@@ -11,9 +12,11 @@ module.exports = {
 
         this.load();
 
-        $(this.$el).on('change.uk.sortable', function (e, sortable, el, mode) {
+        UIkit.init(this.$el);
 
-            el = $(el);
+        $(this.$el).on('change.uk.sortable', function (e, sortable, element, action) {
+
+            // el = $(el);
 
             // if (mode == 'moved' || mode == 'added') {
 
@@ -35,6 +38,15 @@ module.exports = {
             return this.widgets.length || '';
         },
 
+        positions: function () {
+
+            if (!this.position) {
+                return this.config.positions;
+            }
+
+            return [_.find(this.config.positions, 'name', this.position.name)];
+        },
+
         positionOptions: function () {
             return [{text: this.$trans('- Assign -'), value: ''}].concat(
                 _.map(this.config.positions, function (position) {
@@ -45,18 +57,35 @@ module.exports = {
 
     },
 
-    watch: {
+    methods: {
 
-        positions: function () {
-            UIkit.init(this.$el);
+        active: function (position) {
+
+            if (!position) {
+                return this.position === position;
+            }
+
+            return this.position && this.position.name === position.name;
+        },
+
+        select: function (position) {
+            this.$set('position', position);
+        },
+
+        assign: function (position, ids) {
+            this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
+                this.config.$set('positions', data.positions);
+            });
         }
 
     },
 
-    methods: {
+    filters: {
 
-        hasWidgets: function (position) {
-            return this.positions[position.id] !== undefined;
+        exists: function (ids) {
+            return ids.filter(function (id) {
+                return this.widgets[id] !== undefined;
+            }.bind(this));
         }
 
     },
@@ -67,13 +96,9 @@ module.exports = {
 
             inherit: true,
 
-            props: ['id'],
+            props: ['widget'],
 
             computed: {
-
-                widget: function () {
-                    return this.widgets[this.id] || {};
-                },
 
                 type: function () {
                     if (this.widget) {

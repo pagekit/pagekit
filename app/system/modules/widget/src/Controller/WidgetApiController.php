@@ -23,7 +23,7 @@ class WidgetApiController
      */
     public function indexAction()
     {
-        return array_values(Widget::findAll());
+        return Widget::findAll();
     }
 
     /**
@@ -36,6 +36,27 @@ class WidgetApiController
         }
 
         return $widget;
+    }
+
+    /**
+     * @Route("/config", methods="GET")
+     */
+    public function configAction()
+    {
+        return $this->widgets->config('widget.config', []) + ['defaults' => $this->widgets->config('widget.defaults')];
+    }
+
+    /**
+     * @Request({"position", "ids"}, csrf=true)
+     */
+    public function assignAction($position, $ids)
+    {
+        $positions = $this->widgets->getPositions();
+        $positions->assign($position, $ids);
+
+        App::config('system/widget')->set('widget.positions', $positions->getAssigned());
+
+        return ['message' => 'success', 'positions' => $positions];
     }
 
     /**
@@ -94,28 +115,6 @@ class WidgetApiController
         foreach (array_filter($ids) as $id) {
             $this->deleteAction($id);
         }
-
-        return ['message' => 'success'];
-    }
-
-    /**
-     * @Route("/config", methods="GET")
-     */
-    public function configAction()
-    {
-        return $this->widgets->config('widget.config', []) + ['defaults' => $this->widgets->config('widget.defaults')];
-    }
-
-    /**
-     * @Route("/positions", methods="POST")
-     * @Request({"position", "widgets": "array"}, csrf=true)
-     */
-    public function positionsAction($position, $widgets = [])
-    {
-        $positions = $this->widgets->config('widget.positions');
-        $positions[$position] = $widgets;
-
-        App::config('system/widget')->set('widget.positions', $positions);
 
         return ['message' => 'success'];
     }
