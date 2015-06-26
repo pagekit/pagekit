@@ -7,7 +7,9 @@ module.exports = Vue.extend({
             pages: 0,
             count: '',
             selected: [],
-            user: window.$pagekit.user
+            user: window.$pagekit.user,
+            replyComment: {},
+            editComment: {}
         }, window.$data)
     },
 
@@ -43,10 +45,14 @@ module.exports = Vue.extend({
             return this.selected.indexOf(comment.id.toString()) != -1;
         },
 
+        submit: function () {
+            this.save(this.editComment.id ? this.editComment : this.replyComment);
+        },
+
         save: function (comment) {
-            this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
+            return this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Comment saved.'));
             });
         },
 
@@ -60,14 +66,14 @@ module.exports = Vue.extend({
 
             this.Comments.save({ id: 'bulk' }, { comments: comments }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Comments saved.'));
             });
         },
 
         remove: function () {
             this.Comments.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Comment(s) deleted.'));
             });
         },
 
@@ -105,14 +111,47 @@ module.exports = Vue.extend({
                 e.stopPropagation();
             }
 
-            this.$broadcast('cancel');
+            this.$set('replyComment', {});
+            this.$set('editComment', {});
         }
 
     },
 
     components: {
 
-        'comments-row': require('./comment-row.vue')
+        row: {
+
+            replace: false,
+            inherit: true,
+
+            computed: {
+
+                post: function () {
+                    return _.find(this.posts, {id: this.comment.post_id}) || {};
+                }
+
+            },
+
+            methods: {
+
+                reply: function () {
+                    this.cancel();
+                    this.$set('replyComment', {parent_id: this.comment.id, post_id: this.comment.post_id, author: this.user.name, email: this.user.email});
+                },
+
+                edit: function () {
+                    this.cancel();
+                    this.$set('editComment', _.merge({}, this.comment));
+                },
+
+                toggleStatus: function () {
+                    this.comment.status = this.comment.status === 1 ? 0 : 1;
+                    this.save(this.comment);
+                }
+
+            }
+
+        }
 
     }
 

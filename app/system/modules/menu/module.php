@@ -27,6 +27,12 @@ return [
 
     ],
 
+    'views' => [
+
+        'menu' => 'system/menu:views/menu.php'
+
+    ],
+
     'events' => [
 
         'request' => function() use ($app) {

@@ -131,6 +131,8 @@ class CommentApiController
 
         }
 
+        unset($data['created']);
+
         // check minimum idle time in between user comments
         if (!$this->user->hasAccess('blog: skip comment min idle')
             and $minidle = $this->blog->config('comments.minidle')
