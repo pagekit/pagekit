@@ -1,7 +1,5 @@
 module.exports = {
 
-    replace: true,
-
     template: '<ul class="uk-pagination"></ul>',
 
     props: ['page', 'pages'],

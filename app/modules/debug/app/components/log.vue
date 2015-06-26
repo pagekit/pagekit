@@ -34,8 +34,6 @@
         panel: '#panel-log'
     },
 
-    replace: true,
-
     props: ['data'],
 
     ready: function () {

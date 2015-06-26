@@ -57,8 +57,6 @@
         panel: '#panel-database'
     },
 
-    replace: true,
-
     props: ['data'],
 
     ready: function () {

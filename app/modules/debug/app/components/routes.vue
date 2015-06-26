@@ -36,8 +36,6 @@
         panel: '#panel-routes'
     },
 
-    replace: true,
-
     props: ['data'],
 
     ready: function () {

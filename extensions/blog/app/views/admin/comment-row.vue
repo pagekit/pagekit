@@ -111,7 +111,6 @@
     module.exports = {
 
         inherit: true,
-        replace: true,
 
         data: function () {
             return {

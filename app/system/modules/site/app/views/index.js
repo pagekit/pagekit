@@ -240,7 +240,6 @@ module.exports = Vue.extend({
         node: {
 
             inherit: true,
-            replace: true,
             template: '#node',
 
             computed: {

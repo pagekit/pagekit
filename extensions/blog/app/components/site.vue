@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-form-horizontal">
-    
+
         <partial name="settings"></partial>
 
     </div>

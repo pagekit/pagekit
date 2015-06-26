@@ -49,7 +49,6 @@
     module.exports = {
 
         inherit: true,
-        replace: true,
 
         props: ['depth'],
 

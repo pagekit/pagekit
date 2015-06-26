@@ -12,8 +12,6 @@
         priority: 30
     },
 
-    replace: true,
-
     props: ['data'],
 
     ready: function () {

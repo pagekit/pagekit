@@ -25,8 +25,6 @@
 
     module.exports = {
 
-        replace: true,
-
         props: ['api', 'type'],
 
         data: function () {

@@ -44,8 +44,6 @@
 
     module.exports = {
 
-        replace: true,
-
         props: ['src'],
 
         data: function () {

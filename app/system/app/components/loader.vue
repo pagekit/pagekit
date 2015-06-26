@@ -11,8 +11,6 @@
 
     module.exports = {
 
-        replace: true,
-
     };
 
 </script>

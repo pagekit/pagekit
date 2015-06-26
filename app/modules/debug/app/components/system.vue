@@ -77,8 +77,6 @@
         panel: '#panel-system'
     },
 
-    replace: true,
-
     props: ['data'],
 
     ready: function () {

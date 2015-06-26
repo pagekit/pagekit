@@ -48,8 +48,6 @@
 
     module.exports = {
 
-        replace: true,
-
         mixins: [
             require('../lib/package')
         ],
