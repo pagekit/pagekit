@@ -81,7 +81,7 @@
                 status: '',
                 timezone: {},
                 icon: '',
-                temperature: 0,
+                temp: 0,
                 time: 0,
                 format: { time: 'short' }
             };
@@ -140,9 +140,21 @@
 
         watch: {
 
-            'widget.units': 'loadWeather',
             'widget.coords': 'loadTime',
             'timezone': 'updateClock'
+
+        },
+
+        computed: {
+
+            temperature: function() {
+
+                if (this.widget.units !== 'imperial') {
+                    return Math.round(this.temp) + ' °C';
+                }
+
+                return Math.round(this.temp * (9/5) + 32) + ' °F';
+            }
 
         },
 
@@ -150,11 +162,11 @@
 
             loadWeather: function () {
 
-                if (!this.widget.uid || !this.widget.units) {
+                if (!this.widget.uid) {
                     return;
                 }
 
-                var key = 'weather-' + this.widget.uid + this.widget.units;
+                var key = 'weather-' + this.widget.uid;
 
                 if (storage[key]) {
 
@@ -162,7 +174,7 @@
 
                 } else {
 
-                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: this.widget.units }, function (data) {
+                    this.$http.jsonp(api + '/weather?callback=?', { id: this.widget.uid, units: 'metric' }, function (data) {
 
                         if (data.cod == 200) {
                             storage[key] = JSON.stringify(data);
@@ -207,7 +219,7 @@
 
             init: function (data) {
 
-                this.$set('temperature', Math.round(data.main.temp) + (this.widget.units === 'metric' ? ' °C' : ' °F'));
+                this.$set('temp', data.main.temp);
                 this.$set('icon', this.getIconUrl(data.weather[0].icon));
                 this.$set('status', 'done');
 
