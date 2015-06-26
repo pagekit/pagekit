@@ -37,11 +37,13 @@ var Dashboard = Vue.extend({
 
         }).on('change.uk.sortable', function(e, sortable, item, mode) {
 
-            if (!mode) return;
+            if (!mode) {
+                return;
+            }
 
             sortable = sortable.element ? sortable : sortable.data('sortable');
 
-            switch(mode) {
+            switch (mode) {
                 case 'added':
                 case 'moved':
 
@@ -58,9 +60,7 @@ var Dashboard = Vue.extend({
                         data[widget.id] = widget;
                     });
 
-                    self.$http.post('admin/dashboard/savewidgets', {widgets: data}, function() {
-                        UIkit.notify(this.$trans('Dashboard updated'));
-                    });
+                    self.$http.post('admin/dashboard/savewidgets', {widgets: data});
             }
         });
 

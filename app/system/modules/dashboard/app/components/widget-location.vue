@@ -9,7 +9,7 @@
                 <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
             </li>
             <li v-show="$parent.editing[widget.id]">
-                <a class="pk-icon-check pk-icon-hover" title="{{ 'Confirm' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
+                <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
             </li>
         </ul>
     </div>
