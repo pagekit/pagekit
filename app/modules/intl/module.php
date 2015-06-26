@@ -24,36 +24,13 @@ return [
 
         $app['intl']->setDefaultLocale($this->config['locale']);
 
-        $app['translator'] = function ($app) {
+        $app['translator'] = function () {
 
-            $locale = $app['intl']->getDefaultLocale();
-
-            $translator = new Translator($locale);
+            $translator = new Translator($this->config('locale'));
             $translator->addLoader('php', new PhpFileLoader);
             $translator->addLoader('mo', new MoFileLoader);
             $translator->addLoader('po', new PoFileLoader);
             $translator->addLoader('array', new ArrayLoader);
-
-            foreach ($app['module'] as $module) {
-
-                $domains = [];
-                $files   = glob($module->get('path')."/languages/{$locale}/*") ?: [];
-
-                foreach ($files as $file) {
-
-                    $format = substr(strrchr($file, '.'), 1);
-                    $domain = basename($file, '.'.$format);
-
-                    if (in_array($domain, $domains)) {
-                        continue;
-                    }
-
-                    $domains[] = $domain;
-
-                    $translator->addResource($format, $file, $locale, $domain);
-                    $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
-                }
-            }
 
             return $translator;
         };

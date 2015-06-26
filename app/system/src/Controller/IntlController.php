@@ -16,6 +16,8 @@ class IntlController
      */
     public function indexAction($locale = null)
     {
+        App::system()->loadLocale($locale);
+
         $locale  = substr($locale, 0, 2);
         $numbers = App::intl()->get('numbers', $locale);
         $dateFields = App::intl()->get('dateFields', $locale);

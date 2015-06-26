@@ -68,4 +68,33 @@ class SystemModule extends Module
 
         return $menu;
     }
+
+    /**
+     * Loads language files.
+     *
+     * @param $locale
+     */
+    public function loadLocale($locale)
+    {
+        foreach (App::module() as $module) {
+
+            $domains = [];
+            $files   = glob($module->get('path')."/languages/{$locale}/*") ?: [];
+
+            foreach ($files as $file) {
+
+                $format = substr(strrchr($file, '.'), 1);
+                $domain = basename($file, '.'.$format);
+
+                if (in_array($domain, $domains)) {
+                    continue;
+                }
+
+                $domains[] = $domain;
+
+                App::translator()->addResource($format, $file, $locale, $domain);
+                App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
+            }
+        }
+    }
 }

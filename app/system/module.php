@@ -1,8 +1,6 @@
 <?php
 
 use Pagekit\Kernel\Event\ExceptionListener;
-use Pagekit\System\Event\MigrationListener;
-use Pagekit\System\Event\SystemListener;
 
 return [
 
@@ -98,27 +96,49 @@ return [
                 $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
             }
 
-            $app->subscribe(
-                new MigrationListener,
-                new SystemListener
-            );
-
             if ($app->inConsole()) {
                 $app['isAdmin'] = false;
             }
 
-            $app->on('request', function ($event, $request) use ($app) {
+        },
+
+        'request' => [
+
+            [function ($event, $request) use ($app) {
 
                 if (!$event->isMasterRequest()) {
                     return;
                 }
 
                 $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
-                $app['intl']->setDefaultLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
-            }, 50);
+                $locale = $this->config($admin ? 'admin.locale' : 'site.locale');
+                $app['intl']->setDefaultLocale($locale);
+                $app['translator']->setLocale($locale);
+                $this->loadLocale($locale);
 
-        },
+            }, 50],
+
+            [function ($event, $request) use ($app) {
+
+                if (!$event->isMasterRequest()) {
+                    return;
+                }
+
+                $app->trigger($app['isAdmin'] ? 'admin' : 'site', [$request]);
+
+            }]
+
+        ],
+
+        'auth.login' => [function ($event) use ($app) {
+
+            if ($event->getUser()->hasAccess('system: software updates') && $app['migrator']->create('system:migrations', $this->config('version'))->get()) {
+                $event->setResponse($app['response']->redirect('@system/migration'));
+
+            }
+
+        }, 8],
 
         'view.messages' => function ($event) use ($app) {
 
