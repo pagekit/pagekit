@@ -42,7 +42,7 @@
 
     </form>
 
-    <div class="pk-panel-background uk-contrast">
+    <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
         <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-large" v-if="time">{{ time | date format }}</h1>
 
         <div class="uk-text-center uk-h4" v-if="time">{{ time | date 'long' }}</div>
@@ -53,9 +53,7 @@
         </div>
     </div>
 
-    <p class="uk-text-center" v-if="status == 'loading'">
-        <v-loader></v-loader>
-    </p>
+    <div class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></div>
 
 </template>
 

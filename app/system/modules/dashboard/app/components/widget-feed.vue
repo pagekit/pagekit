@@ -51,20 +51,25 @@
 
     </form>
 
-    <h3 class="uk-panel-title" v-if="widget.title">{{ widget.title }}</h3>
+    <div v-show="status != 'loading'">
 
-    <ul class="uk-list uk-list-line uk-margin-remove">
-        <li v-repeat="entry: feed.entries | count">
-            <a v-attr="href: entry.link" target="_blank">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
-            <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
-            <p class="uk-margin-small-top" v-if="widget.content == '2'">{{ $index == 0 ? entry.contentSnippet : '' }}</p>
-        </li>
-    </ul>
+        <h3 class="uk-panel-title" v-if="widget.title">{{ widget.title }}</h3>
 
-    <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
-    <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</p>
-    <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.url && !editing">{{ 'No URL given.' | trans }}</p>
+        <ul class="uk-list uk-list-line uk-margin-remove">
+            <li v-repeat="entry: feed.entries | count">
+                <a v-attr="href: entry.link" target="_blank">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
+                <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
+                <p class="uk-margin-small-top" v-if="widget.content == '2'">{{ $index == 0 ? entry.contentSnippet : '' }}</p>
+            </li>
+        </ul>
 
+        <div v-if="status == 'error'">{{ 'Unable to retrieve feed data.' | trans }}</div>
+
+        <div v-if="!widget.url && !editing">{{ 'No URL given.' | trans }}</div>
+
+    </div>
+
+    <div class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></div>
 
 </template>
 
