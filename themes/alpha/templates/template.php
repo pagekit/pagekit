@@ -17,7 +17,7 @@
 
             <?php if ($view->position()->exists('logo')) : ?>
             <div class="tm-logo uk-hidden-small">
-                <a href="<?= $view->url()->get() ?>" class="tm-brand"><?= $view->position()->render('logo') ?></a>
+                <a href="<?= $view->url()->get() ?>" class="tm-brand"><?= $view->position('logo') ?></a>
             </div>
             <?php endif ?>
 
@@ -25,7 +25,7 @@
             <div class="tm-navbar">
 
                 <nav class="uk-navbar uk-hidden-small">
-                    <?= $view->position()->render('navbar', 'navbar') ?>
+                    <?= $view->position('navbar', 'navbar') ?>
                 </nav>
 
                 <?php if ($view->position()->exists('offcanvas')) : ?>
@@ -34,7 +34,7 @@
 
                 <?php if ($view->position()->exists('logo-small')) : ?>
                 <div class="uk-navbar-content uk-navbar-center uk-visible-small">
-                    <a href="<?= $view->url()->get() ?>" class="tm-brand"><?= $view->position()->render('logo-small') ?></a>
+                    <a href="<?= $view->url()->get() ?>" class="tm-brand"><?= $view->position('logo-small') ?></a>
                 </div>
                 <?php endif ?>
 
@@ -45,7 +45,7 @@
 
             <?php if ($view->position()->exists('top')) : ?>
             <section class="uk-grid uk-grid-divider" data-uk-grid-match="{ target: '> div > .uk-panel' }" data-uk-grid-margin>
-                <?= $view->position()->render('top', 'grid') ?>
+                <?= $view->position('top', 'grid') ?>
             </section>
             <?php endif ?>
 
@@ -57,13 +57,13 @@
 
                 <?php if ($view->position()->exists('sidebar-a')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-a.class') ?>">
-                    <?= $view->position()->render('sidebar-a', 'panel') ?>
+                    <?= $view->position('sidebar-a', 'panel') ?>
                 </aside>
                 <?php endif ?>
 
                 <?php if ($view->position()->exists('sidebar-b')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-b.class') ?>">
-                    <?= $view->position()->render('sidebar-b', 'panel') ?>
+                    <?= $view->position('sidebar-b', 'panel') ?>
                 </aside>
                 <?php endif ?>
 
@@ -71,7 +71,7 @@
 
             <?php if ($view->position()->exists('footer')) : ?>
             <footer class="uk-grid" data-uk-grid-match="{ target: '> div > .uk-panel' }" data-uk-grid-margin>
-                <?= $view->position()->render('footer', 'grid') ?>
+                <?= $view->position('footer', 'grid') ?>
             </footer>
             <?php endif ?>
 
@@ -80,7 +80,7 @@
         <?php if ($view->position()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
-                <?= $view->position()->render('offcanvas', 'offcanvas') ?>
+                <?= $view->position('offcanvas', 'offcanvas') ?>
             </div>
         </div>
         <?php endif ?>

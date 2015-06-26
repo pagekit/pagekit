@@ -5,18 +5,11 @@ namespace Pagekit\Widget;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\View\Helper\Helper;
-use Pagekit\Widget\Entity\Widget;
-use Pagekit\Widget\Model\WidgetInterface;
 
 class PositionHelper extends Helper
 {
     /**
      * @var Module
-     */
-    protected $module;
-
-    /**
-     * @var WidgetInterface[]
      */
     protected $widgets;
 
@@ -25,38 +18,17 @@ class PositionHelper extends Helper
      */
     public function __construct()
     {
-        $this->module = App::module('system/widget');
+        $this->widgets = App::module('system/widget');
     }
 
     /**
      * Set shortcut.
      *
-     * @see get()
+     * @see render()
      */
-    public function __invoke($name)
+    public function __invoke($name, $view = null, array $parameters = [])
     {
-        return $this->get($name);
-    }
-
-    /**
-     * Gets widgets for a position.
-     *
-     * @param  string $name
-     * @return WidgetInterface[]
-     */
-    public function get($name)
-    {
-        $widgets  = $this->getWidgets();
-        $assigned = $this->module->getPositions()->getAssigned($name);
-
-        return array_filter(array_map(function($id) use ($widgets) {
-            return (isset($widgets[$id])
-                and $widget = $widgets[$id]
-                and $widget->hasAccess(App::user())
-                and (!$nodes = $widget->getNodes() or in_array(App::node()->getId(), $nodes))
-                and $type = $this->module->getType($widget->getType())
-            ) ? $widget : null;
-        }, $assigned));
+        return $this->render($name, $view, $parameters);
     }
 
     /**
@@ -67,40 +39,38 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) $this->get($name);
+        return (bool) $this->widgets->getPositions()->getWidgets($name);
     }
 
     /**
      * Renders a position.
      *
-     * @param string       $name
-     * @param array|string $view
-     * @param array        $options
+     * @param  string       $name
+     * @param  array|string $view
+     * @param  array        $parameters
+     * @return string
      */
-    public function render($name, $view = null, array $options = [])
+    public function render($name, $view = null, array $parameters = [])
     {
         if (is_array($view)) {
-            $options = $view;
+            $parameters = $view;
+            $view = false;
         }
 
-        $widgets = $this->get($name);
+        $parameters['widgets'] = $this->widgets->getPositions()->getWidgets($name);
 
-        foreach ($widgets as $widget) {
-            $type = $this->module->getType($widget->getType());
-            $widget->set('result', $type->render($widget));
-        }
+        if (!$view) {
 
-        $options['widgets'] = $widgets;
+            $result = '';
 
-        if ($view) {
-            echo $this->view->render($view, $options);
-        } else {
-
-            foreach ($widgets as $widget) {
-                echo $widget->get('result');
+            foreach ($parameters['widgets'] as $widget) {
+                $result .= $widget->get('result');
             }
 
+            return $result;
         }
+
+        return $this->view->render($view, $parameters);
     }
 
     /**
@@ -109,17 +79,5 @@ class PositionHelper extends Helper
     public function getName()
     {
         return 'position';
-    }
-
-    /**
-     * @return WidgetInterface[]
-     */
-    protected function getWidgets()
-    {
-        if (null === $this->widgets) {
-            $this->widgets = Widget::findAll();
-        }
-
-        return $this->widgets;
     }
 }

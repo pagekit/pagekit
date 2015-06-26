@@ -2,6 +2,10 @@
 
 namespace Pagekit\Widget;
 
+use Pagekit\Application as App;
+use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Model\WidgetInterface;
+
 class PositionManager implements \JsonSerializable
 {
     /**
@@ -13,6 +17,11 @@ class PositionManager implements \JsonSerializable
      * @var array
      */
     protected $registered = [];
+
+    /**
+     * @var WidgetInterface[]
+     */
+    protected $widgets;
 
     /**
      * Constructor.
@@ -88,6 +97,50 @@ class PositionManager implements \JsonSerializable
         }
 
         return isset($this->assigned[$position]) ? array_values($this->assigned[$position]) : [];
+    }
+
+    /**
+     * Gets active widgets.
+     *
+     * @param  string $position
+     * @return WidgetInterface[]
+     */
+    public function getWidgets($position = null)
+    {
+        if ($this->widgets === null) {
+
+            foreach ($this->getAssigned() as $name => $ids) {
+
+                $widgets = Widget::findAll();
+                $module  = App::module('system/widget');
+                $node    = App::node()->getId();
+
+                foreach ($ids as $id) {
+
+                    if (!isset($widgets[$id])
+                        or !$widget = $widgets[$id]
+                        or !$widget->hasAccess(App::user())
+                        or ($nodes = $widget->getNodes() and !in_array($node, $nodes))
+                        or !$type = $module->getType($widget->getType())
+                    ) {
+                        continue;
+                    }
+
+                    $widget->set('result', $type->render($widget));
+
+                    $this->widgets[$name][] = $widget;
+
+                }
+
+            }
+
+        }
+
+        if ($position === null) {
+            return $this->widgets;
+        }
+
+        return isset($this->widgets[$position]) ? $this->widgets[$position] : [];
     }
 
     /**

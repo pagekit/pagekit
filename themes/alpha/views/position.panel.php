@@ -5,7 +5,7 @@
     <div class="<?= $widget->get('theme.badge.type') ?>"><?= $widget->get('theme.badge.text') ?></div>
     <?php endif ?>
 
-    <?php if ($widget->getShowTitle()) : ?>
+    <?php if ($widget->get('showtitle')) : ?>
     <h3><?= $widget->getTitle() ?></h3>
     <?php endif ?>
 
