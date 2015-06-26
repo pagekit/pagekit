@@ -75,7 +75,7 @@
 
                     <ul class="uk-sortable uk-list uk-form" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ p.name }}">
 
-                        <li v-repeat="id: p.assigned | exists" data-id="{{ id }}" data-index="{{ $index }}">
+                        <li v-repeat="id: p.assigned | exists" data-id="{{ id }}">
 
                             <v-item class="uk-nestable-panel pk-table-fake uk-form" widget="{{ widgets[id] }}" inline-template>
                                 <div class="pk-table-width-minimum">
