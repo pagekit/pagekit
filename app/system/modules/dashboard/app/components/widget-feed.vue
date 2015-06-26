@@ -86,6 +86,8 @@
 
         },
 
+        replace: false,
+
         props: ['widget', 'editing'],
 
         filters: {

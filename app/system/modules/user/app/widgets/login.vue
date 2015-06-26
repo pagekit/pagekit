@@ -29,8 +29,11 @@
             priority: 0
         },
 
-        template: __vue_template__,
-        props: ['widget', 'config', 'form']
+        replace: false,
+
+        props: ['widget', 'config', 'form'],
+
+        template: __vue_template__
 
     };
 

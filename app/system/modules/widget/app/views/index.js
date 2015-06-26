@@ -87,6 +87,7 @@ module.exports = {
         'v-item': {
 
             inherit: true,
+            replace: false,
 
             props: ['widget'],
 

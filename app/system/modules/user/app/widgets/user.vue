@@ -98,9 +98,9 @@
 
         },
 
-        props: ['widget', 'editing'],
+        replace: false,
 
-        template: __vue_template__,
+        props: ['widget', 'editing'],
 
         ready: function() {
 
@@ -134,7 +134,9 @@
 
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 

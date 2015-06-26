@@ -23,6 +23,7 @@
 module.exports = {
 
     inherit: true,
+    replace: false,
 
     ready: function () {
 

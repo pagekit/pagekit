@@ -73,6 +73,8 @@
 
         },
 
+        replace: false,
+
         props: ['widget', 'editing'],
 
         data: function () {
