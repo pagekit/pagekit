@@ -145,11 +145,11 @@ body {
 
 .tm-panel-icon {
     padding: 10px 0;
-    color: #444;
+    color: @global-color;
     text-align: center;
 }
 
-.tm-panel-icon:hover { color: #37a5e4; }
+.tm-panel-icon:hover { color: @global-muted-color; }
 
 .tm-panel-icon > p {
     margin-top: 10px;
@@ -175,10 +175,7 @@ body {
 
 .tm-sortable-dragged .tm-panel-icon {
     background: @dropdown-background;
-    border: 1px solid fade(@global-border, 60%);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.09);
-    border-radius: 3px;
-
+    box-shadow: 0 1px 3px rgba(0,0,0,0.09);
 }
 
 
