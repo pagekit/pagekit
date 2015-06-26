@@ -299,6 +299,8 @@
     line-height: 64px;
 }
 
+.pk-text-bold { font-weight: 400; }
+
 
 /* Modifier `pk-table-large`
 ========================================================================== */
@@ -468,7 +470,8 @@
 .pk-panel-background {
     margin: -@panel-box-padding;
     padding: @panel-box-padding;
-    background: @global-primary-background;
+    background: @global-primary-background url("../../assets/images/dashboard-location.jpg") 0 0 no-repeat;
+    background-size: cover;
 }
 
 /*
@@ -476,6 +479,9 @@
  */
 
 .pk-v-align-bottom { vertical-align: bottom; }
+
+
+.pk-overlay-background { background: rgba(255,255,255,0.2); }
 
 
 /* Modal with IFrame (Marketplace)
