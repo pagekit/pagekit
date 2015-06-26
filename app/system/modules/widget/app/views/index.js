@@ -16,18 +16,16 @@ module.exports = {
 
         $(this.$el).on('change.uk.sortable', function (e, sortable, element, action) {
 
-            // el = $(el);
+            var ul = $(element).parent(), position = ul.data('position'), ids = [];
 
-            // if (mode == 'moved' || mode == 'added') {
+            if (action == 'added' || action == 'moved') {
 
-            //     var newpos   = el.parent().data('position'),
-            //         newindex = el.index(),
-            //         oldpos   = el.data('start-list').data('position'),
-            //         oldindex = el.data('start-index');
+                ul.children().each(function () {
+                    ids.push($(this).data('id'));
+                });
 
-            //     vm.positions[oldpos].widgets[oldindex].position = newpos;
-            //     vm.positions[newpos].widgets.splice(newindex, 0, vm.positions[oldpos].widgets.splice(oldindex, 1)[0]);
-            // }
+                vm.assign(position, ids);
+            }
 
         });
     },

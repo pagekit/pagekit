@@ -1,4 +1,4 @@
-<?php $view->script('widget-index', 'widget:app/bundle/index.js', ['widgets', 'uikit-nestable']) ?>
+<?php $view->script('widget-index', 'widget:app/bundle/index.js', ['widgets', 'uikit-sortable']) ?>
 
 <style media="screen">
     .uk-sortable {
@@ -67,7 +67,6 @@
                 <div class="pk-table-fake pk-table-fake-header pk-table-fake-border">
                     <div class="pk-table-width-minimum"><input type="checkbox"  v-check-all="selected: input[name=id]"></div>
                     <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
-                    <div class="pk-table-width-150">{{ 'Position' | trans }}</div>
                     <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                 </div>
 
@@ -91,12 +90,6 @@
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
-                                </div>
-                                <div class="pk-table-width-150">
-                                    <div class="uk-nestable-nodrag" v-el="select">
-                                        <a></a>
-                                        <select class="uk-width-1-1" v-model="widget.position" v-on="change: assign(widget.position, widget.id)" options="positionOptions"></select>
-                                    </div>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.name }}</div>
                             </v-item>

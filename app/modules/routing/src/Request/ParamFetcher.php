@@ -50,7 +50,7 @@ class ParamFetcher implements ParamFetcherInterface
         foreach ($params as $name => $type) {
 
             if (is_numeric($name)) {
-                list($name, $type) = [$type, 'string'];
+                list($name, $type) = [$type, ''];
             }
 
             $this->params[] = ['name' => $name, 'type' => $type, 'options' => isset($options[$name]) ? $options[$name] : []];
