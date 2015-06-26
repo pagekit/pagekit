@@ -20,7 +20,7 @@
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
             <div class="uk-form-controls">
                 <div v-el="location" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" v-el="locationInput" onblur="this.value=''" placeholder="{{ widget.city }}, {{ widget.country }}"  autocomplete="off">
+                    <input id="form-city" class="uk-width-1-1" type="text" v-el="locationInput" onblur="this.value=''" placeholder="{{ widget.city ? widget.city+', '+widget.country:'' }}"  autocomplete="off">
                 </div>
             </div>
         </div>
@@ -50,7 +50,6 @@
 
     <p class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></p>
     <p class="uk-alert uk-alert-danger uk-margin-remove" v-if="status == 'error'">{{ 'Unable to retrieve weather data.' | trans }}</p>
-    <p class="uk-alert uk-alert-warning uk-margin-remove" v-if="!widget.uid && !editing">{{ 'No location given.' | trans }}</p>
 
 </template>
 
@@ -136,7 +135,7 @@
 
             }, { immediate: true });
 
-            this.timer = setInterval(this.updateClock, 60 * 1000);
+            this.timer = setInterval(this.updateClock(), 60 * 1000);
         },
 
         watch: {
@@ -246,10 +245,11 @@
 
                 var offset = this.$get('timezone.offset'),
                     date   = new Date(),
-                    time   = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000): false;
+                    time   = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000): new Date();
 
                 this.$set('time', time);
 
+                return this.updateClock;
             }
 
         },
