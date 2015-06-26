@@ -27,7 +27,6 @@ function install (Vue) {
     Vue.directive('confirm', require('./directives/confirm'));
     Vue.directive('gravatar', require('./directives/gravatar'));
     Vue.directive('order', require('./directives/order'));
-    Vue.directive('partial', require('./directives/partial'));
 
     /**
      * Resource

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="uk-form-row" v-partial="settings"></div>
+    <partial name="settings"></partial>
 
     <div class="uk-form-row">
         <label class="uk-form-label">{{ 'Login Redirect' | trans }}</label>

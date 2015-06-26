@@ -54,12 +54,6 @@ module.exports = Vue.extend({
 
     },
 
-    partials: {
-
-        settings: require('../templates/settings.html')
-
-    },
-
     components: {
 
         alias: require('../components/alias.vue')
@@ -69,6 +63,8 @@ module.exports = Vue.extend({
 });
 
 $(function () {
+
+    Vue.partial('settings', require('../templates/settings.html'));
 
     (new module.exports()).$mount('#site-edit');
 
