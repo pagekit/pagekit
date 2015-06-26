@@ -147,11 +147,16 @@
 
             this.$watch('widget.uid', function (uid) {
 
-                if (!uid) {
+                if (uid === undefined) {
+                    this.$set('widget.uid', '');
+                    this.$parent.save();
                     this.$parent.edit(true);
                 }
 
+                if (!uid) return;
+
                 this.load();
+
 
             }, {immediate: true});
 
