@@ -123,6 +123,13 @@
 
         },
 
+        ready: function() {
+
+            if (this.$get('widget.url')) {
+                this.load();
+            }
+        },
+
         methods: {
 
             load: function() {
