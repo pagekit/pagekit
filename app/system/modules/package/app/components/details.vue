@@ -22,8 +22,8 @@
         <li><strong>{{ 'Version' | trans }}</strong> {{ package.version }}</li>
         <li><strong>{{ 'Path:' | trans }}</strong> /{{ package.name }}</li>
         <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
-        <li><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors.email }}">{{ package.authors[0].email }}</a></li>
-        <li><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors.homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
+        <li><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
+        <li><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors[0].homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
     </ul>
 
 </template>
