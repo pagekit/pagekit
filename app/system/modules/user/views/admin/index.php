@@ -59,7 +59,7 @@
                 <tr class="check-item" v-repeat="user: users" v-class="uk-active: active(user)">
                     <td><input type="checkbox" name="id" value="{{ user.id }}"></td>
                     <td class="pk-table-width-minimum">
-                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="" v-gravatar="user.email">
+                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ user.name }}" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
                         <a v-attr="href: $url('admin/user/edit', { id: user.id })">{{ user.username }}</a>

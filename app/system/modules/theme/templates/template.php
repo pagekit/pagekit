@@ -45,7 +45,7 @@
                         <ul class="uk-grid uk-grid-small uk-flex-middle">
                             <li><a class="tm-icon-visit" href="{{ $url() }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
                             <li><a class="tm-icon-logout" href="{{ $url('user/logout', {redirect: 'admin/login'}) }}" title="{{ 'Logout' | trans }}"></a></li>
-                            <li class="uk-margin-small-left"><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.username }}" v-gravatar="user.email"> {{ user.username }}</a></li>
+                            <li class="uk-margin-small-left"><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.name }}" v-gravatar="user.email"> {{ user.username }}</a></li>
                         </ul>
 
                     </div>

@@ -95,7 +95,7 @@
             <div class="uk-panel uk-panel-box uk-text-center">
 
                 <div class="uk-panel-teaser">
-                    <img height="280" width="280" v-gravatar="user.email">
+                    <img height="280" width="280" v-attr="alt: user.name" v-gravatar="user.email">
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove">{{ user.name }}
