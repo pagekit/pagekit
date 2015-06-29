@@ -26,7 +26,7 @@ class WidgetModule extends Module
             $module = new $class($module);
             $module->main($app);
 
-            $this->registerType($module);
+            $this->registerType($module->name, $module);
 
             return $module;
         });
@@ -70,10 +70,11 @@ class WidgetModule extends Module
     /**
      * Registers a type.
      *
+     * @param string        $name
      * @param TypeInterface $type
      */
-    public function registerType(TypeInterface $type)
+    public function registerType($name, TypeInterface $type)
     {
-        $this->types[$type->name] = $type;
+        $this->types[$name] = $type;
     }
 }

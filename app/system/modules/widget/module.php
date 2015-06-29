@@ -71,12 +71,8 @@ return [
         },
 
         'system.widget.postSave' => function ($event, $widget) use ($app) {
-
-            $config = $app['config']->get('system/widget');
-
-            // if (false !== $config) {
-            //     $config->set('widget.config.' . $widget->getId(), $config);
-            // }
+            $this->getPositions()->assign($widget->position, $widget->getId());
+            $app['config']->get('system/widget')->set('widget.positions', $this->getPositions()->getAssigned());
 
         }
     ]
