@@ -33,9 +33,8 @@ class SystemModule extends Module
             }
         }
 
-        $app['module']->load($theme = $this->config('site.theme'));
-
-        $app['theme.site'] = $app['module']->get($theme);
+        $theme = $this->config('site.theme');
+        $app['theme'] = $app['module']->load($theme)->get($theme);
 
         $app->extend('migrator', function($migrator) {
             return $migrator->setLoader(new FilesystemLoader());

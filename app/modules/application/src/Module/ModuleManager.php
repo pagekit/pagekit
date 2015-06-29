@@ -86,7 +86,8 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Loads modules by name.
      *
-     * @param string|array $modules
+     * @param  string|array $modules
+     * @return self
      */
     public function load($modules)
     {
@@ -119,6 +120,8 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                 $this->modules[$name] = $factory->create($module);
             }
         }
+
+        return $this;
     }
 
     /**

@@ -17,7 +17,7 @@ class WidgetModule extends Module
     public function main(App $app)
     {
         $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
-        // $this->config->merge(['widget' => ['defaults' => $app['theme.site']->config('widget.defaults', [])]]);
+        // $this->config->merge(['widget' => ['defaults' => $app['theme']->config('widget.defaults', [])]]);
 
         $app['module']->addFactory('widget', function ($module) use ($app) {
 
@@ -39,12 +39,9 @@ class WidgetModule extends Module
     {
         if (!$this->positions) {
 
-            $theme = App::get('theme.site');
-            $config = $this->config('widget.positions');
+            $this->positions = new PositionManager($this->config('widget.positions'));
 
-            $this->positions = new PositionManager($config);
-
-            foreach ((array) $theme->get('positions') as $name => $position) {
+            foreach ((array) App::theme()->get('positions') as $name => $position) {
                 list($label, $description) = array_merge((array) $position, ['']);
                 $this->positions->register($name, $label, $description);
             }

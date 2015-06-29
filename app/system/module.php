@@ -171,7 +171,7 @@ return [
                 return;
             }
 
-            if ($theme = $app['isAdmin'] ? $app['module']['system/theme'] : $app['theme.site'] ? : null) {
+            if ($theme = $app['isAdmin'] ? $app['module']['system/theme'] : $app['theme'] ? : null) {
                 $event->setParameter('theme', $theme);
                 $event->setTemplate($theme->getLayout());
             }
