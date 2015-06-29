@@ -43,6 +43,7 @@
                     </td>
                     <td class="uk-text-nowrap">
                         <a>{{ pkg.title }}</a>
+                        <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
                     </td>
                     <td>
                         <a class="uk-button uk-button-success uk-button-small">{{ 'Update' | trans }}</a>

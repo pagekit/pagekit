@@ -35,6 +35,8 @@
 
                 <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>
 
+                <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
+
                 <a class="uk-position-cover" v-on="click: details(pkg)"></a>
 
                 <div class="pk-panel-badge-bottom-right">
