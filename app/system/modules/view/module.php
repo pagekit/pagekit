@@ -51,6 +51,7 @@ return [
         },
 
         'view.head' => [function ($event, $view) use ($app) {
+
             $view->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
 
             $app['styles']->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
@@ -77,7 +78,7 @@ return [
             $app['scripts']->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
             $app['scripts']->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
             $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
-
+            
         }, 50]
 
     ]

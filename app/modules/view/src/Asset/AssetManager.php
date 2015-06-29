@@ -93,9 +93,7 @@ class AssetManager implements \IteratorAggregate
             $asset = $this->registered->get($name);
         }
 
-        if ($asset) {
-            $this->queue[$name] = true;
-        }
+        $this->queue[$name] = true;
 
         return $asset;
     }
