@@ -196,8 +196,9 @@ module.exports = Vue.extend({
             var vm = this;
 
             // TODO this is still buggy
-            UIkit.nestable(this.$$.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, el, type, root, nestable) {
-                if (e.target.tagName === 'UL' && type !== 'removed') {
+            UIkit.nestable(this.$$.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
+
+                if (type && type !== 'removed') {
                     vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
 
                         // @TODO reload everything on reorder really needed?
