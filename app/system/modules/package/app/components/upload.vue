@@ -11,10 +11,10 @@
 
             <details api="{{ api }}" package="{{ package }}"></details>
 
-            <p>
-                <button class="uk-button uk-button-primary" v-on="click: install()">{{ 'Install' | trans }}</button>
-                <button class="uk-button uk-modal-close">{{ 'Cancel' | trans }}</button>
-            </p>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-link uk-modal-close">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" v-on="click: install()">{{ 'Install' | trans }}</button>
+            </div>
 
         </div>
     </div>
