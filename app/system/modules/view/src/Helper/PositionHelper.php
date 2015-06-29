@@ -1,26 +1,12 @@
 <?php
 
-namespace Pagekit\Widget;
+namespace Pagekit\View\Helper;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Module;
-use Pagekit\View\Helper\Helper;
+use Pagekit\Widget\PositionManager;
 
 class PositionHelper extends Helper
 {
-    /**
-     * @var Module
-     */
-    protected $widgets;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->widgets = App::module('system/widget');
-    }
-
     /**
      * Set shortcut.
      *
@@ -39,7 +25,7 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) $this->widgets->getPositions()->getWidgets($name);
+        return (bool) $this->getPositions()->getWidgets($name);
     }
 
     /**
@@ -57,7 +43,7 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = $this->widgets->getPositions()->getWidgets($name);
+        $parameters['widgets'] = $this->getPositions()->getWidgets($name);
 
         if (!$view) {
 
@@ -79,5 +65,13 @@ class PositionHelper extends Helper
     public function getName()
     {
         return 'position';
+    }
+
+    /**
+     * @return PositionManager
+     */
+    protected function getPositions()
+    {
+        return App::module('system/widget')->getPositions();
     }
 }

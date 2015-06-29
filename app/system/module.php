@@ -112,10 +112,15 @@ return [
 
                 $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
-                $locale = $this->config($admin ? 'admin.locale' : 'site.locale');
-                $app['intl']->setDefaultLocale($locale);
-                $app['translator']->setLocale($locale);
-                $this->loadLocale($locale);
+                $app->extend('translator', function ($translator) use ($app) {
+
+                    $locale = $this->config($app['isAdmin'] ? 'admin.locale' : 'site.locale');
+                    $app['intl']->setDefaultLocale($locale);
+                    $translator->setLocale($locale);
+                    $this->loadLocale($locale, $translator);
+
+                    return $translator;
+                });
 
             }, 50],
 
@@ -156,6 +161,19 @@ return [
 
             if ($result) {
                 $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+            }
+
+        },
+
+        'view.layout' => function($event, $view) use ($app) {
+
+            if ($event->getTemplate() !== 'layout') {
+                return;
+            }
+
+            if ($theme = $app['isAdmin'] ? $app['module']['system/theme'] : $app['theme.site'] ? : null) {
+                $event->setParameter('theme', $theme);
+                $event->setTemplate($theme->getLayout());
             }
 
         }

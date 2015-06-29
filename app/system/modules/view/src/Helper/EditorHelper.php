@@ -1,9 +1,8 @@
 <?php
 
-namespace Pagekit\Editor;
+namespace Pagekit\View\Helper;
 
 use Pagekit\Application as App;
-use Pagekit\View\Helper\Helper;
 
 class EditorHelper extends Helper
 {

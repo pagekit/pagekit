@@ -15,7 +15,7 @@ use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\PhpEngine;
 use Pagekit\View\View;
-use Pagekit\View\ViewListener;
+use Symfony\Component\HttpFoundation\Response;
 
 return [
 
@@ -73,9 +73,12 @@ return [
         $app['module']->addLoader(function ($name, $module) use ($app) {
 
             if (isset($module['views'])) {
-                foreach ((array) $module['views'] as $name => $view) {
-                    $app['view']->map($name, $view);
-                }
+                $app->extend('view', function($view) use ($module) {
+                    foreach ((array) $module['views'] as $name => $path) {
+                        $view->map($name, $path);
+                    }
+                    return $view;
+                });
             }
 
             return $module;
@@ -85,9 +88,61 @@ return [
 
     'events' => [
 
-        'request' => function () use ($app) {
-            $app->subscribe(new ViewListener($app['view']));
-        }
+        'controller' => [function ($event) use ($app) {
+
+            $layout = true;
+            $result = $event->getControllerResult();
+
+            if (is_array($result) && isset($result['$view'])) {
+
+                foreach ($result as $key => $value) {
+                    if ($key === '$view') {
+
+                        if (isset($value['name'])) {
+                            $name = $value['name'];
+                            unset($value['name']);
+                        }
+
+                        if (isset($value['layout'])) {
+                            $layout = $value['layout'];
+                            unset($value['layout']);
+                        }
+
+                        $app['view']->meta($value);
+
+                    } elseif ($key[0] === '$') {
+
+                        $app['view']->data($key, $value);
+                    }
+                }
+
+                if (isset($name)) {
+                    $response = $result = $app['view']->render($name, $result);
+                }
+            }
+
+            if (!is_string($result)) {
+                return;
+            }
+
+            if (is_string($layout)) {
+                $app['view']->map('layout', $layout);
+            }
+
+            if ($layout) {
+
+                $app['view']->section('content', (string) $result);
+
+                if (null !== $result = $app['view']->render('layout')) {
+                    $response = $result;
+                }
+            }
+
+            if (isset($response)) {
+                $event->setResponse(new Response($response));
+            }
+
+        }, 50]
 
     ],
 

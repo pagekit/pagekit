@@ -3,24 +3,9 @@
 namespace Pagekit\Debug;
 
 use DebugBar\DebugBar as BaseDebugBar;
-use Pagekit\Event\EventSubscriberInterface;
 
-class DebugBar extends BaseDebugBar implements EventSubscriberInterface
+class DebugBar extends BaseDebugBar
 {
-    /**
-     * Collect and save debug data.
-     */
-    public function onTerminate($event, $request)
-    {
-        $route = $request->attributes->get('_route');
-
-        if (!$event->isMasterRequest() || $route == '_debugbar') {
-            return;
-        }
-
-        $this->collect();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -31,15 +16,5 @@ class DebugBar extends BaseDebugBar implements EventSubscriberInterface
         }
 
         return $this->requestId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function subscribe()
-    {
-        return [
-            'terminate' => ['onTerminate', -1000]
-        ];
     }
 }

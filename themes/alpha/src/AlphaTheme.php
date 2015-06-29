@@ -13,23 +13,6 @@ class AlphaTheme extends Theme
      */
     protected $classes;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function main(App $app)
-    {
-        $app->on('site', function () use ($app) {
-            $app['view']->on('layout', function ($event, $view) use ($app) {
-                $event->setName($this->getLayout());
-                $event->setParameter('theme', $app['theme.site']);
-            });
-        });
-
-        $app->on('request', function () use ($app) {
-            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widgets/theme.js', '~widgets');
-        });
-    }
-
     public function getClasses($key = null)
     {
         if (null === $this->classes) {

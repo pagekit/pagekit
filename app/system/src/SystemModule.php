@@ -6,6 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class SystemModule extends Module
 {
@@ -34,15 +35,10 @@ class SystemModule extends Module
 
         $app['module']->load($theme = $this->config('site.theme'));
 
-        if ($app['theme.site'] = $app['module']->get($theme)) {
-            $app->on('site', function () use ($app) {
-                $app['view']->map('layout', $app['theme.site']->getLayout());
-            });
-        }
+        $app['theme.site'] = $app['module']->get($theme);
 
         $app->extend('migrator', function($migrator) {
-            $migrator->setLoader(new FilesystemLoader());
-            return $migrator;
+            return $migrator->setLoader(new FilesystemLoader());
         });
     }
 
@@ -72,10 +68,13 @@ class SystemModule extends Module
     /**
      * Loads language files.
      *
-     * @param $locale
+     * @param string     $locale
+     * @param TranslatorInterface $translator
      */
-    public function loadLocale($locale)
+    public function loadLocale($locale, TranslatorInterface $translator = null)
     {
+        $translator = $translator ?: App::translator();
+
         foreach (App::module() as $module) {
 
             $domains = [];
@@ -92,8 +91,8 @@ class SystemModule extends Module
 
                 $domains[] = $domain;
 
-                App::translator()->addResource($format, $file, $locale, $domain);
-                App::translator()->addResource($format, $file, substr($locale, 0, 2), $domain);
+                $translator->addResource($format, $file, $locale, $domain);
+                $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
             }
         }
     }

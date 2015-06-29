@@ -80,11 +80,14 @@ class Migrator
     /**
      * Sets the loader.
      *
-     * @param LoaderInterface $loader
+     * @param  LoaderInterface $loader
+     * @return self
      */
     public function setLoader($loader)
     {
         $this->loader = $loader;
+
+        return $this;
     }
 
     /**

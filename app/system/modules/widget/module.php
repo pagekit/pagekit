@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Widget\PositionHelper;
-
 return [
 
     'name' => 'system/widget',
@@ -67,10 +65,6 @@ return [
     ],
 
     'events' => [
-
-        'boot' => function($event, $app) {
-            $app['view']->addHelper(new PositionHelper());
-        },
 
         'system.widget.postLoad' => function ($event, $widget) use ($app) {
             $widget->position = $this->getPositions()->find($widget->getId());

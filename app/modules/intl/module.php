@@ -19,10 +19,10 @@ return [
             $intl = Intl::getInstance();
             $intl['date'] = new DateHelper();
 
+            $intl->setDefaultLocale($this->config['locale']);
+
             return $intl;
         };
-
-        $app['intl']->setDefaultLocale($this->config['locale']);
 
         $app['translator'] = function () {
 

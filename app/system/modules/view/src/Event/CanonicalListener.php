@@ -12,16 +12,17 @@ class CanonicalListener implements EventSubscriberInterface
      *
      * @param $event
      */
-    public function onSite($event, $request)
+    public function onHead($event, $view)
     {
-        if ($request->getRequestFormat() != 'html') {
+        if (App::isAdmin()) {
             return;
         }
 
-        $route = App::url($request->attributes->get('_route'), $request->attributes->get('_route_params', []));
+        $request = App::request();
+        $route   = App::url($request->attributes->get('_route'), $request->attributes->get('_route_params', []));
 
         if ($route != $request->getRequestUri()) {
-            App::view()->meta(['canonical' => $route]);
+            $view->meta(['canonical' => $route]);
         }
     }
 
@@ -31,7 +32,7 @@ class CanonicalListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'site' => 'onSite'
+            'view.head' => 'onHead'
         ];
     }
 }

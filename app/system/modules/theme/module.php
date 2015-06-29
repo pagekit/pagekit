@@ -4,16 +4,15 @@ return [
 
     'name' => 'system/theme',
 
+    'type' => 'theme',
+
     'events' => [
 
-        'admin' => function () use ($app) {
-
-            $app['view']->map('layout', $this->path.'/templates/template.php');
-            $app['view']->map('component', $this->path.'/templates/template.php');
-
-        },
-
         'view.layout' => function ($event, $view) use ($app) {
+
+            if (!$app['isAdmin']) {
+                return;
+            }
 
             $user = [
                 'id' => $app['user']->getId(),

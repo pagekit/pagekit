@@ -1,17 +1,8 @@
 <?php
 
-use Pagekit\Finder\FinderHelper;
-
 return [
 
     'name' => 'system/finder',
-
-    'main' => function ($app) {
-
-        $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
-        $app['path.storage'] = $app['path'].$this->config['storage'];
-
-    },
 
     'autoload' => [
 
@@ -40,16 +31,13 @@ return [
 
     'events' => [
 
-        'boot' => function($event, $app) {
+        'boot' => function ($event, $app) {
             $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
-            $app['path.storage'] = rtrim($app['path'].$this->config['storage'], '/');
+            $app['path.storage']     = $app['path'].$this->config['storage'];
         },
 
         'request' => function () use ($app) {
-
-            $app['view']->addHelper(new FinderHelper());
             $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
-
         },
 
         'system.finder' => function ($event) use ($app) {

@@ -40,14 +40,14 @@ return [
      */
     'positions' => [
 
-        'logo'       => 'Logo',
+        'logo' => 'Logo',
         'logo-small' => 'Logo Small',
-        'navbar'     => 'Navbar',
-        'top'        => 'Top',
-        'sidebar-a'  => 'Sidebar A',
-        'sidebar-b'  => 'Sidebar B',
-        'footer'     => 'Footer',
-        'offcanvas'  => 'Offcanvas'
+        'navbar' => 'Navbar',
+        'top' => 'Top',
+        'sidebar-a' => 'Sidebar A',
+        'sidebar-b' => 'Sidebar B',
+        'footer' => 'Footer',
+        'offcanvas' => 'Offcanvas'
 
     ],
 
@@ -56,10 +56,11 @@ return [
      */
     'views' => [
 
-        'grid'      => 'alpha:views/position.grid.php',
-        'navbar'    => 'alpha:views/position.navbar.php',
+        'grid' => 'alpha:views/position.grid.php',
+        'navbar' => 'alpha:views/position.navbar.php',
         'offcanvas' => 'alpha:views/position.offcanvas.php',
-        'panel'     => 'alpha:views/position.panel.php'
+        'panel' => 'alpha:views/position.panel.php',
+        'menu' => 'alpha:views/menu.php'
 
     ],
 
@@ -68,7 +69,7 @@ return [
      */
     'menus' => [
 
-        'main'    => 'Main',
+        'main' => 'Main',
         'sidebar' => 'Sidebar'
 
     ],
@@ -91,6 +92,14 @@ return [
             'alignment' => ''
 
         ]
+
+    ],
+
+    'events' => [
+
+        'request' => function () use ($app) {
+            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widgets/theme.js', '~widgets');
+        }
 
     ]
 

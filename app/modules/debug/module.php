@@ -20,27 +20,8 @@ return [
         }
 
         $app['debugbar'] = function ($app) {
-
             $debugbar = new DebugBar();
-            $debugbar->setStorage($app['debugbar.storage']);
-            $debugbar->addCollector(new MemoryCollector());
-            $debugbar->addCollector(new TimeDataCollector());
-            $debugbar->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
-
-            if (isset($app['info'])) {
-                $debugbar->addCollector(new SystemDataCollector($app['info']));
-            }
-
-            if (isset($app['db'])) {
-                $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);
-                $debugbar->addCollector(new DatabaseDataCollector($app['db'], $app['db.debug_stack']));
-            }
-
-            if (isset($app['log.debug'])) {
-                $debugbar->addCollector($app['log.debug']);
-            }
-
-            return $debugbar;
+            return $debugbar->setStorage($app['debugbar.storage']);
         };
 
         $app['debugbar.storage'] = function () {
@@ -57,22 +38,44 @@ return [
                 return;
             }
 
-            $app->subscribe($app['debugbar']);
+            $app['debugbar']->addCollector(new MemoryCollector());
+            $app['debugbar']->addCollector(new TimeDataCollector());
+            $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
 
-            $app->on('request', function ($event) use ($app) {
+            if (isset($app['auth'])) {
+                $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
+            }
 
-                if (!$event->isMasterRequest()) {
+            if (isset($app['info'])) {
+                $app['debugbar']->addCollector(new SystemDataCollector($app['info']));
+            }
+
+            if (isset($app['db'])) {
+                $app['db']->getConfiguration()->setSQLLogger($app['db.debug_stack']);
+                $app['debugbar']->addCollector(new DatabaseDataCollector($app['db'], $app['db.debug_stack']));
+            }
+
+            if (isset($app['log.debug'])) {
+                $app['debugbar']->addCollector($app['log.debug']);
+            }
+
+            $app->on('view.head', function($event, $view) use ($app) {
+                $view->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
+                $view->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
+                $view->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
+            }, 50);
+
+            $app->on('terminate', function ($event, $request) use ($app) {
+
+                $route = $request->attributes->get('_route');
+
+                if (!$event->isMasterRequest() || $route == '_debugbar') {
                     return;
                 }
 
-                if (isset($app['auth'])) {
-                    $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
-                }
+                $app['debugbar']->collect();
 
-                $app['view']->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
-                $app['view']->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
-                $app['view']->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);
-            });
+            }, -1000);
 
             $app['routes']->add([
                 'name' => '_debugbar',
