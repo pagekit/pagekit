@@ -110,7 +110,7 @@
 
             <div class="uk-overflow-container">
 
-                <div class="pk-table-fake pk-table-fake-header">
+                <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !tree[0]">
                     <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                     <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
                     <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
@@ -122,6 +122,8 @@
                 </ul>
 
             </div>
+
+            <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!tree[0]">{{ 'No pages found.' | trans }}</h3>
 
         </div>
 
