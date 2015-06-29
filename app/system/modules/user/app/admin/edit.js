@@ -2,7 +2,7 @@ jQuery(function () {
 
     new Vue({
 
-        el: '#js-user-edit',
+        el: '#user-edit',
 
         data: window.$data,
 
