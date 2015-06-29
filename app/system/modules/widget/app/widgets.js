@@ -42,12 +42,6 @@ module.exports = window.Widgets = Vue.extend({
 
     },
 
-    partials: {
-
-        'settings': require('./templates/widget-settings.html')
-
-    },
-
     components: {
 
         'assignment': require('./components/widget-assignment.vue'),
@@ -56,3 +50,6 @@ module.exports = window.Widgets = Vue.extend({
     }
 
 });
+
+// TODO workaround for partials inheritance
+Vue.partial('settings', require('./templates/widget-settings.html'));

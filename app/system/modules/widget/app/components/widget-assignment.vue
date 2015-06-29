@@ -1,26 +1,14 @@
 <template>
 
-    <div class="uk-form-row" v-repeat="menu: menus">
+    <div class="uk-form-row" v-repeat="menu: menus" v-show="menu.getNodes().length">
         <label for="form-h-it" class="uk-form-label">{{ menu.label }}</label>
+
         <div class="uk-form-controls uk-form-controls-text">
             <ul class="uk-list uk-margin-top-remove">
-                <li v-partial="#node-item" v-repeat="node: menu.getNodes()"></li>
+                <node v-repeat="node: menu.getNodes()"></node>
             </ul>
         </div>
     </div>
-
-    <script id="node-item" type="text/template">
-
-        <label>
-            <input type="checkbox" value="{{ node.id }}" v-checkbox="widget.nodes">
-            {{ node.title }}
-        </label>
-
-        <ul class="uk-list" v-if="menu.getNodes(node)">
-            <li v-partial="#node-item" v-repeat="node: menu.getNodes(node)"></li>
-        </ul>
-
-    </script>
 
 </template>
 
@@ -43,6 +31,7 @@
             var nodes = _(this.config.nodes).groupBy('menu').value();
 
             this.menus = _.mapValues(this.config.menus, function (menu, id) {
+
                 return _.extend(menu, {
 
                     nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parentId').value(),
@@ -53,6 +42,27 @@
 
                 });
             });
+        },
+
+        components: {
+
+            node: {
+
+                inherit: true,
+
+                template:
+                        '<li>'+
+                            '<label>' +
+                                '<input type="checkbox" value="{{ node.id }}" v-checkbox="widget.nodes">' +
+                                ' {{ node.title }}' +
+                            '</label>' +
+                            '<ul class="uk-list" v-if="menu.getNodes(node)">' +
+                                '<node v-repeat="node: menu.getNodes(node)"></node>' +
+                            '</ul>'+
+                        '<li>'
+
+            }
+
         }
 
     }
