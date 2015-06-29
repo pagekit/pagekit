@@ -1,10 +1,10 @@
 <template>
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
-        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package.extra.image">
+        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon">
         <div class="uk-flex-item-1">
-            <h2 class="uk-margin-remove">{{ package.title }}</h2>
-            <div class="uk-text-muted">{{ package.authors[0].name }}</div>
+            <h2 class="uk-margin-remove">{{ package.title }} {{ package.version }}</h2>
+            <div class="uk-text-muted">{{ package.author.name }}</div>
         </div>
     </div>
 
@@ -19,7 +19,6 @@
     <p>{{ package.description }}</p>
 
     <ul class="uk-list">
-        <li><strong>{{ 'Version' | trans }}</strong> {{ package.version }}</li>
         <li><strong>{{ 'Path:' | trans }}</strong> /{{ package.name }}</li>
         <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
         <li><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
@@ -48,12 +47,33 @@
             };
         },
 
+        filters: {
+
+            icon: function (pkg) {
+
+                var extra = pkg.extra || {};
+
+                if (!extra.image) {
+                    return this.$url.static('app/system/assets/images/placeholder-icon.svg');
+                } else if (!extra.image.match(/^(https?:)?\//)) {
+                    return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                }
+
+                return extra.image;
+            }
+
+        },
+
         watch: {
 
             package: function () {
 
                 if (!this.package.name) {
                     return;
+                }
+
+                if (_.isArray(this.package.authors)) {
+                    this.package.$add('author', this.package.authors[0]);
                 }
 
                 this.$set('messages', {});
