@@ -109,6 +109,6 @@ module.exports = {
 
 $(function () {
 
-    (new Widgets(module.exports)).$mount('#widget-index');
+    (new Widgets(module.exports)).$mount('#widgets');
 
 });

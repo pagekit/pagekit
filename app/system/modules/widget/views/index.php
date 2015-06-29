@@ -6,7 +6,7 @@
     }
 </style>
 
-<div id="widget-index" v-cloak>
+<div id="widgets" class="uk-form" v-cloak>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
@@ -74,18 +74,13 @@
                 <div v-repeat="p: config.positions" track-by="name" v-show="p | show">
 
                     <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading" v-show="!position">
-                        <div>
-                            {{ p.label | trans }}
-                            <span class="uk-text-muted" v-if="p.description">{{ p.description | trans }}</span>
-                        </div>
+                        <div>{{ p.label | trans }}</div>
                     </div>
 
-                    <ul class="uk-sortable uk-list uk-form" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ p.name }}">
+                    <ul class="uk-sortable uk-list uk-margin-remove" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ p.name }}">
                         <li v-repeat="id: p.assigned | exists" data-id="{{ id }}">
                             <v-item class="uk-nestable-panel pk-table-fake uk-form" widget="{{ widgets[id] }}" inline-template>
-                                <div class="pk-table-width-minimum">
-                                    <input type="checkbox" name="id" value="{{ widget.id }}">
-                                </div>
+                                <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
