@@ -3,7 +3,6 @@
 <div id="site" class="uk-form" v-cloak>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
-
         <div class="pk-width-sidebar">
 
             <div class="uk-panel">
@@ -25,7 +24,6 @@
             </div>
 
             <div class="uk-modal" v-el="modal">
-
                 <form class="uk-modal-dialog uk-form-stacked" name="menuForm" v-on="valid: saveMenu" v-if="edit">
 
                     <div class="uk-modal-header">
@@ -58,15 +56,12 @@
                     </div>
 
                 </form>
-
             </div>
 
         </div>
-
         <div class="uk-flex-item-1">
 
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
                     <h2 class="uk-margin-remove">{{ menu.label | trans }}</h2>
@@ -78,25 +73,21 @@
                             <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                             <li v-show="showMove" data-uk-dropdown="{ mode: 'click' }">
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
-
                                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li v-repeat="menus | trash"><a v-on="click: moveNodes(id)">{{ label }}</a></li>
                                     </ul>
                                 </div>
-
                             </li>
                             <li v-show="showDelete"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: removeNodes" v-confirm="'Delete item?'"></a></li>
                         </ul>
                     </div>
 
                 </div>
-
                 <div class="uk-position-relative" data-uk-margin>
 
                     <div data-uk-dropdown="{ mode: 'click' }">
                         <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
-
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
                                 <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
@@ -105,7 +96,6 @@
                     </div>
 
                 </div>
-
             </div>
 
             <div class="uk-overflow-container">
@@ -126,7 +116,6 @@
             <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!tree[0]">{{ 'No pages found.' | trans }}</h3>
 
         </div>
-
     </div>
 
 </div>
