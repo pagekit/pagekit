@@ -32,11 +32,11 @@ function install (Vue) {
      * Resource
      */
 
-    Vue.url.options.root = config.url;
+    Vue.url.options.root = config.url || '/';
     Vue.http.options.emulateHTTP = true;
     Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf};
 
-    Vue.url.static = function(url, params) {
+    Vue.url.static = function (url, params) {
 
         var options = url;
 
