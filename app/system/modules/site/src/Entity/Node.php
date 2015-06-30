@@ -5,6 +5,7 @@ namespace Pagekit\Site\Entity;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\Site\Model\NodeInterface;
 use Pagekit\System\Entity\DataTrait;
+use Pagekit\System\Entity\NodeTrait;
 use Pagekit\User\Entity\AccessTrait;
 
 /**
@@ -12,7 +13,7 @@ use Pagekit\User\Entity\AccessTrait;
  */
 class Node implements NodeInterface, \JsonSerializable
 {
-    use AccessTrait, DataTrait, ModelTrait;
+    use AccessTrait, DataTrait, ModelTrait, NodeTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;

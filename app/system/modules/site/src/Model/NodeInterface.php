@@ -2,7 +2,9 @@
 
 namespace Pagekit\Site\Model;
 
-interface NodeInterface
+use Pagekit\System\Entity\NodeInterface as BaseNodeInterface;
+
+interface NodeInterface extends BaseNodeInterface
 {
     public function getId();
 

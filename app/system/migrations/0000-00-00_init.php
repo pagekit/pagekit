@@ -103,7 +103,6 @@ return [
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('type', 'string', ['length' => 255]);
                 $table->addColumn('title', 'string', ['length' => 255]);
-                $table->addColumn('pages', 'text');
                 $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);

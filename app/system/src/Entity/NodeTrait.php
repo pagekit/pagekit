@@ -1,23 +1,21 @@
 <?php
 
-namespace Pagekit\Tree;
+namespace Pagekit\System\Entity;
 
-use Pagekit\Tree\Iterator\RecursiveIterator;
-
-class Node implements \IteratorAggregate, \Countable
+trait NodeTrait
 {
     /**
-     * @var Node|null
+     * @var NodeInterface|null
      */
     protected $parent;
 
     /**
-     * @var Node[]
+     * @var NodeInterface[]
      */
     protected $children = [];
 
     /**
-     * @return Node|null
+     * @return NodeInterface|null
      */
     public function getParent()
     {
@@ -25,14 +23,9 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Sets the parent node.
-     *
-     * @param  Node|null $parent
-     * @return self
-     *
-     * @throws \InvalidArgumentException
+     * {@inheritdoc}
      */
-    public function setParent(Node $parent = null)
+    public function setParent(NodeInterface $parent = null)
     {
         if ($parent === $this) {
             throw new \InvalidArgumentException('A node cannot have itself as a parent');
@@ -56,9 +49,7 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks for child nodes.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasChildren()
     {
@@ -66,9 +57,7 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Gets all child nodes.
-     *
-     * @return Node[]
+     * {@inheritdoc}
      */
     public function getChildren()
     {
@@ -76,14 +65,9 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Adds a node.
-     *
-     * @param  Node $node
-     * @return self
-     *
-     * @throws \InvalidArgumentException
+     * {@inheritdoc}
      */
-    public function add(Node $node)
+    public function add(NodeInterface $node)
     {
          $this->children[$node->hashCode()] = $node->setParent($this);
 
@@ -91,10 +75,7 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Add an array of nodes.
-     *
-     * @param  Node[]  $nodes
-     * @return self
+     * {@inheritdoc}
      */
     public function addAll(array $nodes)
     {
@@ -106,14 +87,11 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Removes a node.
-     *
-     * @param  Node|string $node
-     * @return bool
+     * {@inheritdoc}
      */
     public function remove($node)
     {
-        $hash = $node instanceof Node ? $node->hashCode() : (string) $node;
+        $hash = $node instanceof NodeInterface ? $node->hashCode() : (string) $node;
 
         if ($node = $this->find($hash)) {
 
@@ -127,10 +105,7 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Removes all nodes or an given array of nodes.
-     *
-     * @param  (Node|string)[] $nodes
-     * @return bool
+     * {@inheritdoc}
      */
     public function removeAll(array $nodes = [])
     {
@@ -157,13 +132,9 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Find a node by its hashcode.
-     *
-     * @param  string $hash
-     * @param  bool   $recursive
-     * @return Node|null
+     * {@inheritdoc}
      */
-    public function find($hash, $recursive = true)
+    public function findChild($hash, $recursive = true)
     {
         $node = isset($this->children[$hash]) ? $this->children[$hash] : null;
 
@@ -179,21 +150,15 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if the tree contains the given node.
-     *
-     * @param  Node|string $node
-     * @param  bool        $recursive
-     * @return bool
+     * {@inheritdoc}
      */
     public function contains($node, $recursive = true)
     {
-        return $this->find(($node instanceof Node ? $node->hashCode() : (string) $node), $recursive) !== null;
+        return $this->find(($node instanceof NodeInterface ? $node->hashCode() : (string) $node), $recursive) !== null;
     }
 
     /**
-     * Gets the nodes depth.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getDepth()
     {
@@ -205,9 +170,7 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns a hashcode as unique identifier for a node.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function hashCode()
     {
@@ -215,19 +178,15 @@ class Node implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Gets an iterator for iterating over the tree nodes.
-     *
-     * @return RecursiveIterator
+     * {@inheritdoc}
      */
     public function getIterator()
     {
-        return new RecursiveIterator($this);
+        return $this;
     }
 
     /**
-     * Returns the number of children.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function count()
     {

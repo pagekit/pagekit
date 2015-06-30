@@ -15,6 +15,8 @@ return [
 
     ],
 
+    'include' => 'widgets/widget-menu.php',
+
     'routes' => [
 
         '/' => [
@@ -34,7 +36,7 @@ return [
 
     'resources' => [
 
-        'site:' => ''
+        'system/site:' => ''
 
     ],
 
@@ -53,7 +55,7 @@ return [
 
         'site' => [
             'label' => 'Site',
-            'icon' => 'site:assets/images/icon-site.svg',
+            'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site',
             'active' => '@site*',
             'priority' => 105

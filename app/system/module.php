@@ -17,7 +17,6 @@ return [
         'markdown',
         'migration',
         'package',
-        'tree',
         'system/view',
         'system/cache',
         'system/comment',
@@ -28,7 +27,6 @@ return [
         'system/finder',
         'system/info',
         'system/mail',
-        'system/menu',
         'system/package',
         'system/page',
         'system/settings',
@@ -36,7 +34,8 @@ return [
         'system/theme',
         'system/user',
         'system/widget',
-        'system/widget-text'
+        'system/widget-text',
+        'system/widget-menu'
 
     ],
 

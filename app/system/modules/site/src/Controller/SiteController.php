@@ -24,7 +24,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Pages'),
-                'name'  => 'site:views/index.php'
+                'name'  => 'system/site:views/index.php'
             ],
             '$data' => [
                 'types' => array_values($site->getTypes()),
@@ -66,7 +66,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Pages'),
-                'name'  => 'site:views/edit.php'
+                'name'  => 'system/site:views/edit.php'
             ],
             '$data' => [
                 'node' => $node,
@@ -84,7 +84,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Settings'),
-                'name'  => 'site:views/settings.php'
+                'name'  => 'system/site:views/settings.php'
             ],
             '$data' => [
                 'config' => App::module('system/site')->config(['title', 'description', 'maintenance.'])
