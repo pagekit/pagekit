@@ -4,12 +4,15 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
+use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
+use Pagekit\Widget\Model\WidgetInterface;
 
 class WidgetModule extends Module
 {
-    public $types = [];
-    public $positions;
+    protected $types = [];
+    protected $positions;
+    protected $widgets;
 
     /**
      * {@inheritdoc}
@@ -76,5 +79,48 @@ class WidgetModule extends Module
     public function registerType($name, TypeInterface $type)
     {
         $this->types[$name] = $type;
+    }
+
+    /**
+     * Gets active widgets.
+     *
+     * @param  string $position
+     * @return WidgetInterface[]
+     */
+    public function getWidgets($position = null)
+    {
+        if ($this->widgets === null) {
+
+            foreach ($this->getPositions()->getAssigned() as $name => $ids) {
+
+                $widgets = Widget::findAll();
+                $node    = App::node()->getId();
+
+                foreach ($ids as $id) {
+
+                    if (!isset($widgets[$id])
+                        or !$widget = $widgets[$id]
+                        or !$widget->hasAccess(App::user())
+                        or ($nodes = $widget->getNodes() and !in_array($node, $nodes))
+                        or !$type = $this->getType($widget->getType())
+                    ) {
+                        continue;
+                    }
+
+                    $widget->set('result', $type->render($widget));
+
+                    $this->widgets[$name][] = $widget;
+
+                }
+
+            }
+
+        }
+
+        if ($position === null) {
+            return $this->widgets;
+        }
+
+        return isset($this->widgets[$position]) ? $this->widgets[$position] : [];
     }
 }

@@ -3,7 +3,6 @@
 namespace Pagekit\View\Helper;
 
 use Pagekit\Application as App;
-use Pagekit\Widget\PositionManager;
 
 class PositionHelper extends Helper
 {
@@ -25,7 +24,7 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) $this->getPositions()->getWidgets($name);
+        return (bool) App::module('system/widget')->getWidgets($name);
     }
 
     /**
@@ -43,7 +42,7 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = $this->getPositions()->getWidgets($name);
+        $parameters['widgets'] = App::module('system/widget')->getWidgets($name);
 
         if (!$view) {
 
@@ -65,13 +64,5 @@ class PositionHelper extends Helper
     public function getName()
     {
         return 'position';
-    }
-
-    /**
-     * @return PositionManager
-     */
-    protected function getPositions()
-    {
-        return App::module('system/widget')->getPositions();
     }
 }
