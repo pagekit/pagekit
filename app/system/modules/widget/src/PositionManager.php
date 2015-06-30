@@ -61,7 +61,7 @@ class PositionManager implements \JsonSerializable
         }
 
         if (is_array($id)) {
-            $this->assigned[$position] = $id;
+            $this->assigned[$position] = array_unique($id);
         } else {
             $this->assigned[$position][] = $id;
         }
@@ -120,7 +120,7 @@ class PositionManager implements \JsonSerializable
         }
 
         foreach (array_diff_key($this->assigned, $this->registered) as $name => $ids) {
-            $positions[] = ['name' => $name, 'label' => $name, 'description' => '', 'assigned' => $this->assigned($name)];
+            $positions[] = ['name' => $name, 'label' => $name, 'description' => '', 'assigned' => $this->getAssigned($name)];
         }
 
         return $positions;

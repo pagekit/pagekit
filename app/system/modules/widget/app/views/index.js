@@ -44,7 +44,7 @@ module.exports = {
         },
 
         assign: function (position, ids) {
-            this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
+            return this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
                 this.config.$set('positions', data.positions);
                 this.$set('selected', []);
             });
@@ -52,10 +52,12 @@ module.exports = {
 
         move: function (position, ids) {
 
+            ids = _.map(ids, _.parseInt);
             position = _.find(this.positions, 'name', position);
-            ids = _.unique(position.assigned.concat(_.map(ids, _.parseInt)));
 
-            this.assign(position.name, ids);
+            this.assign(position.name, position.assigned.concat(ids)).success(function () {
+                UIkit.notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
+            });
         }
 
     },
