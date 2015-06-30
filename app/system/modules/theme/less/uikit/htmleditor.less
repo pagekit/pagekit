@@ -7,33 +7,24 @@
 // Variables
 // ========================================================================
 
-@htmleditor-navbar-background:                @global-default-background;
+@htmleditor-navbar-background:                #f1f1f3;
 
-@htmleditor-navbar-nav-height:                41px;
-@htmleditor-navbar-nav-line-height:           @htmleditor-navbar-nav-height - 1;
-@htmleditor-navbar-nav-color:                 @global-color;
+@htmleditor-navbar-nav-height:                46px;
+@htmleditor-navbar-nav-padding-horizontal:    19px;
+@htmleditor-navbar-nav-line-height:           @htmleditor-navbar-nav-height;
+@htmleditor-navbar-nav-color:                 fade(@global-color, 80%);
 
-@htmleditor-navbar-nav-hover-background:      @global-default-hover-background;
-@htmleditor-navbar-nav-hover-color:           @global-color;
-@htmleditor-navbar-nav-onclick-background:    @global-default-active-background;
-@htmleditor-navbar-nav-onclick-color:         @global-color;
-@htmleditor-navbar-nav-active-background:     @global-default-hover-background;
-@htmleditor-navbar-nav-active-color:          @global-color;
+@htmleditor-navbar-nav-hover-background:      rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-hover-color:           darken(@global-color, 10%);
+@htmleditor-navbar-nav-onclick-background:    rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-onclick-color:         darken(@global-color, 10%);
+@htmleditor-navbar-nav-active-background:     rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-active-color:          darken(@global-color, 10%);
 
-@htmleditor-content-border:                   @global-border;
+@htmleditor-content-border:                   #EEE;
 @htmleditor-content-background:               @global-background;
 
 @htmleditor-fullscreen-z-index:               @global-z-index - 10;
-
-//
-// New
-//
-
-@htmleditor-navbar-border:                    rgba(0,0,0,0.06);
-
-@htmleditor-navbar-nav-hover-border:          rgba(0,0,0,0.1);
-@htmleditor-navbar-nav-hover-border-top:      rgba(0,0,0,0.1);
-@htmleditor-navbar-nav-onclick-border-top:    rgba(0,0,0,0.2);
 
 
 // Component
@@ -42,91 +33,20 @@
 
 .hook-htmleditor() {}
 
-.hook-htmleditor-navbar() {
-    border: 1px solid @htmleditor-navbar-border;
-    border-top-left-radius: @global-border-radius;
-    border-top-right-radius: @global-border-radius;
-}
+.hook-htmleditor-navbar() {}
 
-//
-// 1. Overlap top border
-// 2. Collapse horizontal borders
-//
+.hook-htmleditor-navbar-nav() {}
 
-.hook-htmleditor-navbar-nav() {
-    margin-top: -1px; // 1
-    margin-left: -1px; // 2
-    border: 1px solid transparent;
-    border-bottom-width: 0;
-}
+.hook-htmleditor-navbar-nav-hover() {}
 
-.hook-htmleditor-navbar-nav-hover() {
-    position: relative; // 1
-    z-index: 1; // 2
-    border-left-color: @htmleditor-navbar-nav-hover-border;
-    border-right-color: @htmleditor-navbar-nav-hover-border;
-    border-top-color: @htmleditor-navbar-nav-hover-border-top;
-}
+.hook-htmleditor-navbar-nav-onclick() {}
 
-.hook-htmleditor-navbar-nav-onclick() {
-    border-left-color: @htmleditor-navbar-nav-hover-border;
-    border-right-color: @htmleditor-navbar-nav-hover-border;
-    border-top-color: @htmleditor-navbar-nav-onclick-border-top;
-}
+.hook-htmleditor-navbar-nav-active() {}
 
-.hook-htmleditor-navbar-nav-active() {
-    border-left-color: @htmleditor-navbar-nav-hover-border;
-    border-right-color: @htmleditor-navbar-nav-hover-border;
-    border-top-color: @htmleditor-navbar-nav-hover-border-top;
-}
-
-.hook-htmleditor-content() {
-    border-bottom-left-radius: @global-border-radius;
-    border-bottom-right-radius: @global-border-radius;
-}
+.hook-htmleditor-content() {}
 
 
 // Miscellaneous
 // ========================================================================
 
-.hook-htmleditor-misc() {
-
-    /*
-     * Apply same `border-radius` as `uk-htmleditor-navbar`
-     */
-
-    .uk-htmleditor-navbar-nav:first-child > li:first-child > a { border-top-left-radius: @global-border-radius; }
-
-    /*
-     * Sub-modifier `uk-htmleditor-navbar-flip`
-     */
-
-    /* Collapse border */
-    .uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav > li > a {
-        margin-left: 0;
-        margin-right: -1px;
-    }
-
-    /* Apply same `border-radius` as `uk-htmleditor-navbar` */
-    .uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav:first-child > li:first-child > a { border-top-left-radius: 0; }
-    .uk-htmleditor-navbar-flip .uk-htmleditor-navbar-nav:last-child > li:last-child > a { border-top-right-radius: @global-border-radius; }
-
-    /*
-     * Sub-modifier `uk-htmleditor-fullscreen`
-     */
-
-    .uk-htmleditor-fullscreen .uk-htmleditor-navbar {
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-    }
-
-    .uk-htmleditor-fullscreen .uk-htmleditor-content {
-        border: none;
-        border-radius: 0;
-    }
-
-    .uk-htmleditor-fullscreen .uk-htmleditor-navbar-nav > li > a { border-radius: 0 !important; }
-
-}
+.hook-htmleditor-misc() {}
