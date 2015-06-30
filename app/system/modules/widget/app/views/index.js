@@ -11,18 +11,19 @@ module.exports = {
 
     computed: {
 
-        positions: function() {
-            return this.config.positions.concat(
-                {name:'', label: this.$trans('Inactive'), description: '', assigned: this.unassigned}
-            );
+        positions: function () {
+            return this.config.positions.concat(this.unassigned);
         },
 
-        unassigned: function() {
-            return _.pluck(this.widgets, 'id').filter(function(id) {
-                return !this.config.positions.some(function(position) {
+        unassigned: function () {
+
+            var config = this.config, ids = _.pluck(this.widgets, 'id').filter(function (id) {
+                return !config.positions.some(function (position) {
                     return position.assigned.indexOf(id) !== -1;
                 });
-            }.bind(this));
+            });
+
+            return {name: '_unassigned', label: 'Unassigned', assigned: ids};
         }
 
     },
@@ -30,15 +31,15 @@ module.exports = {
     methods: {
 
         active: function (position) {
-
-            if (!position) {
-                return this.position === position;
-            }
-
-            return this.position && this.position.name === position.name;
+            return this.position === position || this.position.name == position.name;
         },
 
         select: function (position) {
+
+            if (position) {
+                this.$set('selected', []);
+            }
+
             this.$set('position', position);
         },
 
@@ -50,8 +51,11 @@ module.exports = {
         },
 
         move: function (position, ids) {
+
             position = _.find(this.positions, 'name', position);
-            this.assign(position.name, _.unique(position.assigned.concat(_.map(ids, _.parseInt))));
+            ids = _.unique(position.assigned.concat(_.map(ids, _.parseInt)));
+
+            this.assign(position.name, ids);
         }
 
     },
@@ -59,22 +63,30 @@ module.exports = {
     filters: {
 
         show: function (position) {
-            return !this.position || this.position.name === position.name;
+
+            if (!this.position) {
+                return position.name != '_unassigned' ? position.assigned.length : 0;
+            }
+
+            return this.active(position);
         },
 
         assigned: function (ids) {
+
+            var widgets = this.widgets;
+
             return ids.map(function (id) {
-                return _.find(this.widgets, 'id', id);
-            }.bind(this)).filter(function (widget) {
+                return _.find(widgets, 'id', id);
+            }).filter(function (widget) {
                 return widget !== undefined;
-            }.bind(this));
+            });
         }
 
     },
 
     components: {
 
-        'v-position': {
+        'position': {
 
             inherit: true,
             replace: false,
@@ -82,18 +94,19 @@ module.exports = {
             ready: function () {
 
                 var vm = this;
+
                 UIkit.sortable(this.$el, {group: 'position', removeWhitespace: false})
                     .element.off('change.uk.sortable')
                     .on('change.uk.sortable', function (e, sortable, element, action) {
                         if (action == 'added' || action == 'moved') {
-                            vm.assign(vm.p.name, _.pluck(sortable.serialize(), 'id'));
+                            vm.assign(vm.pos.name, _.pluck(sortable.serialize(), 'id'));
                         }
                     });
             }
 
         },
 
-        'v-item': {
+        'item': {
 
             inherit: true,
             replace: false,

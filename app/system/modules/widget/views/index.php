@@ -17,9 +17,12 @@
                     <li class="uk-visible-hover" v-class="uk-active: active()">
                         <a v-on="click: select()">{{ 'All' | trans }}</a>
                     </li>
-                    <li class="uk-nav-header">Positions</li>
-                    <li class="uk-visible-hover" v-class="uk-active: active(p)" v-repeat="p: positions" track-by="name">
-                        <a v-on="click: select(p)">{{ p.label }}</a>
+                    <li class="uk-visible-hover" v-class="uk-active: active(unassigned)" v-show="unassigned.assigned.length">
+                        <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
+                    </li>
+                    <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
+                    <li class="uk-visible-hover" v-class="uk-active: active(pos)" v-repeat="pos: config.positions" track-by="name">
+                        <a v-on="click: select(pos)">{{ pos.label }}</a>
                     </li>
                 </ul>
 
@@ -40,7 +43,7 @@
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                        <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -64,34 +67,30 @@
             </div>
 
             <div class="uk-overflow-container">
+                <div v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                <div class="pk-table-fake pk-table-fake-header pk-table-fake-border">
-                    <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
-                    <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
-                    <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
-                </div>
-
-                <div v-repeat="p: positions" track-by="name" v-show="p | show">
-
-                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading" v-show="!position">
-                        <div>{{ p.label | trans }}</div>
+                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
+                        <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
+                        <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="v-position">
-                        <li v-repeat="widget: p.assigned | assigned" data-id="{{ widget.id }}">
-                            <v-item class="uk-nestable-panel pk-table-fake uk-form" inline-template>
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position">
+                        <li v-repeat="widget: pos.assigned | assigned" data-id="{{ widget.id }}">
+
+                            <div class="uk-nestable-panel pk-table-fake uk-form" v-component="item" inline-template>
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.name }}</div>
-                            </v-item>
+                            </div>
+
                         </li>
                     </ul>
 
                 </div>
-
             </div>
 
         </div>
