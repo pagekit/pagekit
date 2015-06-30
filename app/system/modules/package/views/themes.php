@@ -59,7 +59,7 @@
 
     <div class="uk-modal" v-el="details">
         <div class="uk-modal-dialog">
-            <details api="{{ api }}" package="{{ package }}"></details>
+            <package-details api="{{ api }}" package="{{ package }}"></package-details>
         </div>
     </div>
 

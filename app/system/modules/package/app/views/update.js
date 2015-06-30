@@ -85,7 +85,7 @@ module.exports = Vue.extend({
 
 });
 
-jQuery(function () {
+$(function () {
 
     (new module.exports()).$mount('#update');
 

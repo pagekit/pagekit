@@ -21,8 +21,8 @@
     <ul class="uk-list">
         <li><strong>{{ 'Path:' | trans }}</strong> /{{ package.name }}</li>
         <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
-        <li><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
-        <li><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors[0].homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
+        <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
+        <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
     </ul>
 
 </template>
