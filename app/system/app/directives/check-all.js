@@ -4,30 +4,34 @@ module.exports = {
 
     bind: function () {
 
-        var self = this, vm = this.vm, el = $(this.el), keypath = this.arg, selector = this.expression;
+        var self = this, keypath = this.arg, selector = this.expression;
 
-        el.on('change.check-all', function () {
-            $(selector, vm.$el).prop('checked', $(this).prop('checked'));
-            vm.$set(keypath, self.checked());
+        this.$el = this.vm.$el;
+        this.checked = false;
+
+        $(this.el).on('change.check-all', function () {
+            $(selector, self.$el).prop('checked', $(this).prop('checked'));
+            self.selected(true);
         });
 
-        $(vm.$el).on('change.check-all', selector, function () {
-            vm.$set(keypath, self.state());
+        $(this.$el).on('change.check-all', selector, function () {
+            self.selected(true);
+            self.state();
         });
 
-        $(vm.$el).on('click.check-all', '.check-item', function (e) {
-
+        $(this.$el).on('click.check-all', '.check-item', function (e) {
             if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
                 $(this).find(selector).trigger('click');
             }
         });
 
-        this.unbindWatcher = vm.$watch(keypath, function (selected) {
+        this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
 
-            $(selector, vm.$el).prop('checked', function () {
+            $(selector, this.$el).prop('checked', function () {
                 return selected.indexOf($(this).val()) !== -1;
             });
 
+            self.selected();
             self.state();
         });
 
@@ -36,7 +40,7 @@ module.exports = {
     unbind: function () {
 
         $(this.el).off('.check-all');
-        $(this.vm.$el).off('.check-all');
+        $(this.$el).off('.check-all');
 
         if (this.unbindWatcher) {
             this.unbindWatcher();
@@ -45,30 +49,47 @@ module.exports = {
 
     state: function () {
 
-        var el = $(this.el), checked = this.checked();
+        var el = $(this.el);
 
-        if (checked.length === 0) {
-            el.prop('checked', false).prop('indeterminate', false);
-        } else if (checked.length == $(this.expression, this.vm.$el).length) {
-            el.prop('checked', true).prop('indeterminate', false);
-        } else {
+        if (this.checked === undefined) {
             el.prop('indeterminate', true);
+        } else {
+            el.prop('checked', this.checked).prop('indeterminate', false);
         }
 
-        return checked;
     },
 
-    checked: function () {
+    selected: function (update) {
 
-        var checked = [];
+        var keypath = this.arg, selected = [], values = [], value;
 
-        $(this.expression, this.vm.$el).each(function () {
+        $(this.expression, this.$el).each(function () {
+
+            value = $(this).val();
+            values.push(value);
+
             if ($(this).prop('checked')) {
-                checked.push($(this).val());
+                selected.push(value);
             }
         });
 
-        return checked;
+        if (update) {
+
+            update = this.vm.$get(keypath).filter(function (value) {
+                return values.indexOf(value) === -1;
+            });
+
+            this.vm.$set(keypath, update.concat(selected));
+        }
+
+        if (selected.length === 0) {
+            this.checked = false;
+        } else if (selected.length == values.length) {
+            this.checked = true;
+        } else {
+            this.checked = undefined;
+        }
+
     }
 
 };
