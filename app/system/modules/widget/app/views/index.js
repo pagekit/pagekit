@@ -6,27 +6,8 @@ module.exports = {
     }, window.$data),
 
     ready: function () {
-
-        var vm = this;
-
         this.load();
-
         UIkit.init(this.$el);
-
-        $(this.$el).on('change.uk.sortable', function (e, sortable, element, action) {
-
-            var ul = $(element).parent(), position = ul.data('position'), ids = [];
-
-            if (action == 'added' || action == 'moved') {
-
-                ul.children().each(function () {
-                    ids.push($(this).data('id'));
-                });
-
-                vm.assign(position, ids);
-            }
-
-        });
     },
 
     computed: {
@@ -63,7 +44,14 @@ module.exports = {
         assign: function (position, ids) {
             this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
                 this.config.$set('positions', data.positions);
+                this.$set('selected', []);
             });
+        },
+
+        move: function (position, ids) {
+            position = _.find(this.config.positions, 'name', position);
+            Array.prototype.push.apply(position.assigned, ids);
+            this.assign(position.name, position.assigned);
         }
 
     },
@@ -83,6 +71,22 @@ module.exports = {
     },
 
     components: {
+
+        'v-position': {
+            inherit: true,
+            replace: false,
+
+            ready: function () {
+
+                var vm = this;
+                $(this.$el).on('change.uk.sortable', function (e, sortable, element, action) {
+                    if (action == 'added' || action == 'moved') {
+                        vm.assign(vm.p.name, _.pluck(sortable.serialize(), 'id'));
+                    }
+                });
+            }
+
+        },
 
         'v-item': {
 
