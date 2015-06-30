@@ -75,6 +75,8 @@
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
 
+                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.assigned.length">{{ 'No widgets found.' | trans }}</h3>
+
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position">
                         <li v-repeat="widget: pos.assigned | assigned" data-id="{{ widget.id }}">
 
