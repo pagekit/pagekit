@@ -35,7 +35,7 @@
             </div>
 
         </div>
-        <div class="pk-width-sidebar">
+        <div class="pk-width-sidebar pk-width-sidebar-large">
 
             <div class="uk-panel">
 
