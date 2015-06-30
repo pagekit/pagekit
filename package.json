@@ -11,11 +11,11 @@
     "gulp-less": "^3.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-util": "^3.0.4",
-    "html-loader": "^0.2.3",
+    "html-loader": "^0.3.0",
+    "json-loader": "^0.5.2",
     "lodash": "^3.7.0",
     "merge-stream": "^0.1.7",
-    "vue-loader": "^1.1.5",
-    "json-loader": "^0.5.2",
-    "webpack": "^1.9.10"
+    "vue-loader": "1.1.6",
+    "webpack": "^1.10.0"
   }
 }
