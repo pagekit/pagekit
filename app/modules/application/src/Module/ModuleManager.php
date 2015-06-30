@@ -118,6 +118,10 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
 
             if ($factory = $this->getFactory($module['type'])) {
                 $this->modules[$name] = $factory->create($module);
+
+                if (is_a($this->modules[$name], 'Pagekit\Event\EventSubscriberInterface')) {
+                    $this->app->subscribe($this->modules[$name]);
+                }
             }
         }
 
