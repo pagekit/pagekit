@@ -77,7 +77,7 @@
                         <div>{{ p.label | trans }}</div>
                     </div>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" data-uk-sortable="{group:'position', removeWhitespace:false}" data-position="{{ p.name }}"  v-component="v-position">
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="v-position">
                         <li v-repeat="id: p.assigned | exists" data-id="{{ id }}">
                             <v-item class="uk-nestable-panel pk-table-fake uk-form" widget="{{ widgets[id] }}" inline-template>
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>

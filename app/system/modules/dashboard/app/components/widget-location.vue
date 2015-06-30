@@ -127,7 +127,7 @@
                 })
                 .on('selectitem.uk.autocomplete', function (e, data) {
 
-                    var location = _.find(list, {id: data.id});
+                    var location = _.find(list, 'id', data.id);
 
                     Vue.nextTick(function() {
                         vm.$$.location.blur();

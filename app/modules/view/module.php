@@ -113,6 +113,7 @@ return [
                     } elseif ($key[0] === '$') {
 
                         $app['view']->data($key, $value);
+
                     }
                 }
 

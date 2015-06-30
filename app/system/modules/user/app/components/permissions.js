@@ -34,7 +34,7 @@ module.exports = Vue.extend({
 
         savePermissions: function(role) {
 
-            if (!_.find(this.debounced, {id: role.id})) {
+            if (!_.find(this.debounced, 'id', role.id)) {
                 this.debounced.push(role);
             }
 

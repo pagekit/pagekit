@@ -127,7 +127,7 @@ module.exports = Vue.extend({
             computed: {
 
                 post: function () {
-                    return _.find(this.posts, {id: this.comment.post_id}) || {};
+                    return _.find(this.posts, 'id', this.comment.post_id) || {};
                 }
 
             },

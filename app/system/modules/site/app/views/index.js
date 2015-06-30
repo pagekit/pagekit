@@ -139,7 +139,7 @@ module.exports = Vue.extend({
         },
 
         getType: function (node) {
-            return _.find(this.types, {id: node.type});
+            return _.find(this.types, 'id', node.type);
         },
 
         getSelected: function () {
@@ -188,7 +188,7 @@ module.exports = Vue.extend({
         },
 
         menus: function (menus) {
-            this.selectMenu(_.find(menus, {id: this.$get('menu.id')}) || menus[0]);
+            this.selectMenu(_.find(menus, 'id', this.$get('menu.id')) || menus[0]);
         },
 
         nodes: function () {
@@ -218,7 +218,7 @@ module.exports = Vue.extend({
     validators: {
 
         unique: function (value) {
-            var menu = _.find(this.menus, {id: value});
+            var menu = _.find(this.menus, 'id', value);
             return !menu || this.edit.oldId === menu.id;
         }
 
@@ -227,11 +227,11 @@ module.exports = Vue.extend({
     filters: {
 
         protected: function (types) {
-            return _.reject(types, {protected: true});
+            return _.reject(types, 'protected', true);
         },
 
         trash: function (menus) {
-            return _.reject(menus, {id: 'trash'});
+            return _.reject(menus, 'id', 'trash');
         }
 
     },

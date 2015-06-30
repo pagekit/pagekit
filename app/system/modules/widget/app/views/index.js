@@ -7,23 +7,6 @@ module.exports = {
 
     ready: function () {
         this.load();
-        UIkit.init(this.$el);
-    },
-
-    computed: {
-
-        count: function () {
-            return this.widgets.length || '';
-        },
-
-        positionOptions: function () {
-            return [{text: this.$trans('- Assign -'), value: ''}].concat(
-                _.map(this.config.positions, function (position) {
-                    return {text: this.$trans(position.label), value: position.name};
-                }.bind(this))
-            );
-        }
-
     },
 
     methods: {
@@ -49,9 +32,13 @@ module.exports = {
         },
 
         move: function (position, ids) {
-            position = _.find(this.config.positions, 'name', position);
+            position = this.getPosition(position);
             Array.prototype.push.apply(position.assigned, ids);
             this.assign(position.name, position.assigned);
+        },
+
+        getPosition: function (position) {
+            return _.find(this.config.positions, 'name', position);
         }
 
     },
@@ -73,17 +60,22 @@ module.exports = {
     components: {
 
         'v-position': {
+
             inherit: true,
             replace: false,
 
             ready: function () {
 
                 var vm = this;
-                $(this.$el).on('change.uk.sortable', function (e, sortable, element, action) {
-                    if (action == 'added' || action == 'moved') {
-                        vm.assign(vm.p.name, _.pluck(sortable.serialize(), 'id'));
-                    }
-                });
+                UIkit.sortable(this.$el, {group: 'position', removeWhitespace: false})
+                    .element.off('change.uk.sortable')
+                    .on('change.uk.sortable', function (e, sortable, element, action) {
+                        if (action == 'added' || action == 'moved') {
+                            var position = vm.getPosition(vm.p.name);
+                            position.assigned = _.pluck(sortable.serialize(), 'id');
+                            vm.assign(position.name, position.assigned);
+                        }
+                    });
             }
 
         },

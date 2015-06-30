@@ -17,7 +17,7 @@ var app = new Permissions({
     computed: {
 
         current: function () {
-            return _.find(this.roles, {id: this.config.role}) || this.roles[0];
+            return _.find(this.roles, 'id', this.config.role) || this.roles[0];
         }
 
     },
@@ -41,7 +41,7 @@ var app = new Permissions({
 
             this.Roles.save({ id: this.role.id }, { role: this.role }, function (data) {
 
-                var role = _.findIndex(this.roles, {id: this.role.id});
+                var role = _.findIndex(this.roles, 'id', this.role.id);
 
                 if (role !== -1) {
                     this.roles.splice(role, 1, data);
