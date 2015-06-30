@@ -23,7 +23,7 @@ class WidgetApiController
      */
     public function indexAction()
     {
-        return Widget::findAll();
+        return array_values(Widget::findAll());
     }
 
     /**

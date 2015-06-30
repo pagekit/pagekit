@@ -18,7 +18,7 @@
                         <a v-on="click: select()">{{ 'All' | trans }}</a>
                     </li>
                     <li class="uk-nav-header">Positions</li>
-                    <li class="uk-visible-hover" v-class="uk-active: active(p)" v-repeat="p: config.positions" track-by="name">
+                    <li class="uk-visible-hover" v-class="uk-active: active(p)" v-repeat="p: positions" track-by="name">
                         <a v-on="click: select(p)">{{ p.label }}</a>
                     </li>
                 </ul>
@@ -40,7 +40,7 @@
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="config.positions"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                        <li v-repeat="positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -71,15 +71,15 @@
                     <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                 </div>
 
-                <div v-repeat="p: config.positions" track-by="name" v-show="p | show">
+                <div v-repeat="p: positions" track-by="name" v-show="p | show">
 
                     <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading" v-show="!position">
                         <div>{{ p.label | trans }}</div>
                     </div>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="v-position">
-                        <li v-repeat="id: p.assigned | exists" data-id="{{ id }}">
-                            <v-item class="uk-nestable-panel pk-table-fake uk-form" widget="{{ widgets[id] }}" inline-template>
+                        <li v-repeat="widget: p.assigned | assigned" data-id="{{ widget.id }}">
+                            <v-item class="uk-nestable-panel pk-table-fake uk-form" inline-template>
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>

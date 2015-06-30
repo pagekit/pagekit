@@ -9,6 +9,24 @@ module.exports = {
         this.load();
     },
 
+    computed: {
+
+        positions: function() {
+            return this.config.positions.concat(
+                {name:'', label: this.$trans('Inactive'), description: '', assigned: this.unassigned}
+            );
+        },
+
+        unassigned: function() {
+            return _.pluck(this.widgets, 'id').filter(function(id) {
+                return !this.config.positions.some(function(position) {
+                    return position.assigned.indexOf(id) !== -1;
+                });
+            }.bind(this));
+        }
+
+    },
+
     methods: {
 
         active: function (position) {
@@ -32,13 +50,8 @@ module.exports = {
         },
 
         move: function (position, ids) {
-            position = this.getPosition(position);
-            Array.prototype.push.apply(position.assigned, ids);
-            this.assign(position.name, position.assigned);
-        },
-
-        getPosition: function (position) {
-            return _.find(this.config.positions, 'name', position);
+            position = _.find(this.positions, 'name', position);
+            this.assign(position.name, _.unique(position.assigned.concat(_.map(ids, _.parseInt))));
         }
 
     },
@@ -49,9 +62,11 @@ module.exports = {
             return !this.position || this.position.name === position.name;
         },
 
-        exists: function (ids) {
-            return ids.filter(function (id) {
-                return this.widgets[id] !== undefined;
+        assigned: function (ids) {
+            return ids.map(function (id) {
+                return _.find(this.widgets, 'id', id);
+            }.bind(this)).filter(function (widget) {
+                return widget !== undefined;
             }.bind(this));
         }
 
@@ -71,9 +86,7 @@ module.exports = {
                     .element.off('change.uk.sortable')
                     .on('change.uk.sortable', function (e, sortable, element, action) {
                         if (action == 'added' || action == 'moved') {
-                            var position = vm.getPosition(vm.p.name);
-                            position.assigned = _.pluck(sortable.serialize(), 'id');
-                            vm.assign(position.name, position.assigned);
+                            vm.assign(vm.p.name, _.pluck(sortable.serialize(), 'id'));
                         }
                     });
             }
@@ -84,8 +97,6 @@ module.exports = {
 
             inherit: true,
             replace: false,
-
-            props: ['widget'],
 
             computed: {
 

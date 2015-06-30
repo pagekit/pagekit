@@ -63,6 +63,10 @@ class PositionManager implements \JsonSerializable
             $this->assigned[$pos] = array_diff($ids, (array) $id);
         }
 
+        if (!$position) {
+            return $this;
+        }
+
         if (is_array($id)) {
             $this->assigned[$position] = $id;
         } else {
