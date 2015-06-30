@@ -44,10 +44,11 @@ return [
     'events' => [
 
         'boot' => function ($event, $app) {
-            $app->subscribe(
-                new CanonicalListener(),
-                new ResponseListener()
-            );
+            $app->subscribe(new ResponseListener());
+        },
+
+        'site' => function($event) use ($app) {
+            $app->subscribe(new CanonicalListener());
         },
 
         'view.head' => [function ($event, $view) use ($app) {
