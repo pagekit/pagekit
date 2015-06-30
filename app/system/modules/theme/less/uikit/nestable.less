@@ -35,7 +35,11 @@
 
 .hook-nestable-handle() {}
 
-.hook-nestable-toggle() {}
+.hook-nestable-toggle() {
+    height: 20px;
+    width: 8px;
+    background: url("@{global-image-path}/caret-down.svg") 0 0 no-repeat;
+}
 
 .hook-nestable-panel() {
     margin-top: -1px;
@@ -55,13 +59,6 @@
 
 .hook-nestable-misc() {
 
-    .uk-nestable-toggle:after {
-        display: block;
-        height: 20px;
-        width: 8px;
-        background: url("@{global-image-path}/caret-down.svg") 0 0 no-repeat;
-    }
-
-    .uk-collapsed .uk-nestable-toggle:after { background-image: url("@{global-image-path}/caret-right.svg"); }
+    .uk-collapsed .uk-nestable-toggle { background-image: url("@{global-image-path}/caret-right.svg"); }
 
 }

@@ -7,7 +7,7 @@
 // Variables
 // ========================================================================
 
-@htmleditor-navbar-background:                #f1f1f3;
+@htmleditor-navbar-background:                @global-default-background;
 
 @htmleditor-navbar-nav-height:                46px;
 @htmleditor-navbar-nav-padding-horizontal:    19px;
@@ -15,13 +15,13 @@
 @htmleditor-navbar-nav-color:                 fade(@global-color, 80%);
 
 @htmleditor-navbar-nav-hover-background:      rgba(255,255,255,0.5);
-@htmleditor-navbar-nav-hover-color:           darken(@global-color, 10%);
+@htmleditor-navbar-nav-hover-color:           darken(@global-color, 20%);
 @htmleditor-navbar-nav-onclick-background:    rgba(255,255,255,0.5);
-@htmleditor-navbar-nav-onclick-color:         darken(@global-color, 10%);
+@htmleditor-navbar-nav-onclick-color:         darken(@global-color, 20%);
 @htmleditor-navbar-nav-active-background:     rgba(255,255,255,0.5);
-@htmleditor-navbar-nav-active-color:          darken(@global-color, 10%);
+@htmleditor-navbar-nav-active-color:          darken(@global-color, 20%);
 
-@htmleditor-content-border:                   #EEE;
+@htmleditor-content-border:                   @global-border;
 @htmleditor-content-background:               @global-background;
 
 @htmleditor-fullscreen-z-index:               @global-z-index - 10;
@@ -35,7 +35,10 @@
 
 .hook-htmleditor-navbar() {}
 
-.hook-htmleditor-navbar-nav() {}
+.hook-htmleditor-navbar-nav() {
+	-webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
 
 .hook-htmleditor-navbar-nav-hover() {}
 
