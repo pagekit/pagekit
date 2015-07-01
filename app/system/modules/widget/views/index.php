@@ -21,8 +21,8 @@
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li class="uk-visible-hover" v-class="uk-active: active(pos)" v-repeat="pos: config.positions" track-by="name">
-                        <a v-on="click: select(pos)">{{ pos.label }}</a>
+                    <li class="uk-visible-hover" v-class="uk-active: active(pos)" v-repeat="pos: config.positions">
+                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-badge uk-float-right" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
                     </li>
                 </ul>
 
