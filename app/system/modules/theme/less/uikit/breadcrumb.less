@@ -7,14 +7,18 @@
 // Variables
 // ========================================================================
 
-@breadcrumb-disabled-color:                     @global-muted-color;
+@breadcrumb-disabled-color:                     fade(@global-muted-color, 50%);
 @breadcrumb-divider-margin:                     12px;
 
 
 // Component
 // ========================================================================
 
-.hook-breadcrumb() { text-transform: uppercase; }
+.hook-breadcrumb() {
+    color: @global-muted-color;
+    font-size: 12px;
+    text-transform: uppercase;
+}
 
 
 // Items
