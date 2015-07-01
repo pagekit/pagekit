@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="icon-calendar" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" width="20px" height="20px" viewBox="0.5 20.5 20 20" enable-background="new 0.5 20.5 20 20" xml:space="preserve">
-<path d="M3.5,37.5h15v-14h-4l0,0v-1h-1v1h-5v-1h-1v1h-4 M17.5,36.5h-13v-8h13V36.5L17.5,36.5L17.5,36.5z M4.5,27.5v-3h3v2h1v-2h5v2
-	h1v-2h3v3H4.5L4.5,27.5L4.5,27.5z"/>
+	 y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<path fill="#727272" d="M3,17h15V3h-4l0,0V2h-1v1H8V2H7v1H3 M17,16H4V8h13V16L17,16L17,16z M4,7V4h3v2h1V4h5v2h1V4h3v3H4L4,7L4,7z"
+	/>
 </svg>

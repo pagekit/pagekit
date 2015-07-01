@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="icon-delete" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="20px" height="20px" viewBox="0.5 -0.5 20 20" enable-background="new 0.5 -0.5 20 20" xml:space="preserve">
+<svg version="1.1" id="icon-delete" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
 <g id="Ebene_1_1_">
-	<rect x="8.5" y="6.5" width="1" height="9"/>
-	<rect x="11.5" y="6.5" width="1" height="9"/>
-	<path d="M18.5,2.5h-4v-2h-8v2h-4v1h2v15h12v-15h2V2.5L18.5,2.5z M7.5,1.5h6v1h-6V1.5L7.5,1.5z M15.5,17.5h-10v-14h10V17.5
-		L15.5,17.5z"/>
+	<rect x="8" y="7" fill="#727272" width="1" height="9"/>
+	<rect x="11" y="7" fill="#727272" width="1" height="9"/>
+	<path fill="#727272" d="M18,3h-4V1H6v2H2v1h2v15h12V4h2V3L18,3z M7,2h6v1H7V2L7,2z M15,18H5V4h10V18L15,18z"/>
 </g>
 </svg>
