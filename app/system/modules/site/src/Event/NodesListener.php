@@ -13,7 +13,8 @@ class NodesListener implements EventSubscriberInterface
      */
     public function onRequest()
     {
-        $site = App::module('system/site');
+        $site      = App::module('system/site');
+        $frontpage = false;
 
         foreach (Node::where(['status' => 1])->get() as $node) {
 
@@ -31,19 +32,16 @@ class NodesListener implements EventSubscriberInterface
                 $route = App::routes()->add($type);
             }
 
-            if ($route && $node->getId() == $site->config('frontpage')) {
-                $site->setFrontpage($route->getName());
+            if ($route && ($node->frontpage || isset($type['frontpage']) && $type['frontpage'] && !$frontpage)) {
+                App::routes()->alias('/', $frontpage = $route->getName());
+                $site->config['frontpage'] = $node->getId();
             }
 
         }
 
-        if ($frontpage = $site->getFrontpage()) {
-            App::routes()->alias('/', $frontpage);
-        } else {
-            App::routes()->get('/', function () {
-                return __('No Frontpage assigned.');
-            });
-        }
+        App::routes()->get('/', function () {
+            return __('No Frontpage assigned.');
+        });
     }
 
     /**

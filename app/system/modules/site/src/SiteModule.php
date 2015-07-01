@@ -10,7 +10,6 @@ class SiteModule extends Module
 {
     protected $types;
     protected $menus;
-    protected $frontpage;
 
     /**
      * {@inheritdoc}
@@ -128,25 +127,5 @@ class SiteModule extends Module
     public function registerMenu($id, $label, array $options = [])
     {
         $this->menus[$id] = array_merge($options, compact('id', 'label'));
-    }
-
-    /**
-     * Gets the site's frontpage route.
-     *
-     * @return string
-     */
-    public function getFrontpage()
-    {
-        return $this->frontpage;
-    }
-
-    /**
-     * Sets the site's frontpage route.
-     *
-     * @param string $name
-     */
-    public function setFrontpage($name)
-    {
-        $this->frontpage = $name;
     }
 }

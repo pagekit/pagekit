@@ -26,25 +26,26 @@ return [
 
     'render' => function ($widget) use ($app) {
 
-        if (ini_get('xdebug.max_nesting_level') < 1000) {
-            ini_set('xdebug.max_nesting_level', 1000);
-        }
-
         if (!$menu = $widget->get('menu')) {
             return '';
         }
 
+        if (ini_get('xdebug.max_nesting_level') < 1000) {
+            ini_set('xdebug.max_nesting_level', 1000);
+        }
+
         $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
-        $root       = new Node();
-        $activeId   = $app['node']->getId();
-        $active     = null;
+        $nodes[0]   = new Node();
+        $root       = $nodes[0];
+        $path       = $app['node']->getPath();
         $user       = $app['user'];
         $startLevel = (int) $widget->get('start_level', 1) - 1;
         $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
 
+        $root->setParentId(null);
         foreach ($nodes as $node) {
 
-            $parent = !$node->getParentId() ? $root : (isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null);
+            $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
 
             if (!$parent || $parent->getDepth() >= $maxDepth || !$node->hasAccess($user)) {
                 continue;
@@ -53,25 +54,13 @@ return [
             $node->setParent($parent);
             $parent->set('parent', true);
 
-            if ($activeId === $node->getId()) {
-                $active = $node;
+            if (0 === strpos($path, $node->getPath())) {
+                $node->set('active', true);
+                if ($node->getDepth() == $startLevel) {
+                    $root = $node;
+                }
             }
         }
-
-        if ($active) {
-
-            do {
-
-                $active->set('active', true);
-
-                if ($active->getDepth() == $startLevel) {
-                    $root = $active;
-                }
-
-            } while ($active = $active->getParent());
-
-        }
-
 
         if ($root->getDepth() != $startLevel) {
             return '';

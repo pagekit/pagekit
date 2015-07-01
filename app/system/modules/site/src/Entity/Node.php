@@ -208,6 +208,16 @@ class Node implements NodeInterface, \JsonSerializable
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        $node = $this->toJson();
+        $node['frontpage'] = isset($this->frontpage) ? $this->frontpage : false;
+        return $node;
+    }
+
+    /**
      * Parses query parameters into a URL.
      *
      * @param  string $url

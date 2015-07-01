@@ -27,8 +27,7 @@ class SiteController
                 'name'  => 'system/site:views/index.php'
             ],
             '$data' => [
-                'types' => array_values($site->getTypes()),
-                'frontpage' => $site->config('frontpage')
+                'types' => array_values($site->getTypes())
             ]
         ];
     }

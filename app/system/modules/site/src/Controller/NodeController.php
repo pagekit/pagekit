@@ -49,6 +49,7 @@ class NodeController
             App::abort(400, __('Invalid slug.'));
         }
 
+        $node->frontpage = $data['frontpage'];
         $node->save($data);
 
         return ['message' => 'success', 'node' => $node];
@@ -114,17 +115,6 @@ class NodeController
                 $node->save();
             }
         }
-
-        return ['message' => 'success'];
-    }
-
-    /**
-     * @Route("/frontpage", methods="POST")
-     * @Request({"id": "int"}, csrf=true)
-     */
-    public function frontpageAction($id)
-    {
-        App::config('system/site')->set('frontpage', $id);
 
         return ['message' => 'success'];
     }

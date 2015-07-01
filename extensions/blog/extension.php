@@ -24,7 +24,8 @@ return [
             'name' => '@blog',
             'label' => 'Blog',
             'controller' => 'Pagekit\\Blog\\Controller\\SiteController',
-            'protected' => true
+            'protected' => true,
+            'frontpage' => true
         ]
 
     ],
@@ -165,17 +166,9 @@ return [
             );
         },
 
-        'request' => [
-
-            [function () use ($app) {
-                $app['module']->get('system/site')->setFrontpage('@blog/site');
-            }, 175],
-
-            [function () use ($app) {
-                $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
-            }]
-
-        ],
+        'request' => function () use ($app) {
+            $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
+        },
 
         'enable.blog' => function () use ($app) {
             if ($version = $app['migrator']->create('blog:migrations', $this->config('version'))->run()) {

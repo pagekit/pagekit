@@ -71,12 +71,12 @@ module.exports = Vue.extend({
 
         setFrontpage: function () {
 
-            var frontpage = this.selected[0];
+            var node = this.getSelected()[0];
 
-            this.Nodes.save({id: 'frontpage'}, {id: frontpage}, function () {
+            node.frontpage = true;
+            this.Nodes.save({id: node.id}, {node: node}, function () {
                 this.load();
-                this.$set('frontpage', frontpage);
-                UIkit.notify('Frontpage set.');
+                UIkit.notify('Frontpage updated.');
             });
         },
 
@@ -246,11 +246,7 @@ module.exports = Vue.extend({
             computed: {
 
                 url: function () {
-                    return this.$url(this.isFrontpage ? '' : this.node.path.replace(/^\/+/, ''))
-                },
-
-                isFrontpage: function () {
-                    return this.node.id == this.frontpage;
+                    return this.$url(this.node.frontpage ? '' : this.node.path.replace(/^\/+/, ''))
                 }
 
             }

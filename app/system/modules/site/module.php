@@ -93,12 +93,26 @@ return [
     'events' => [
 
         'boot' => function ($event, $app) {
-
             $app->subscribe(
                 new MaintenanceListener(),
                 new NodesListener()
             );
+        },
 
+        'site.node.postLoad' => function ($event, $entity) {
+            $entity->frontpage = $entity->getId() === $this->config('frontpage');
+        },
+
+        'site.node.postSave' => function ($event, $entity) use ($app) {
+            if ($entity->frontpage || $this->config('frontpage') === $entity->getId()) {
+                $app['config']->get('system/site')->set('frontpage', $entity->frontpage ? $entity->getId() : 0);
+            }
+        },
+
+        'site.node.postDelete' => function ($event, $entity) use ($app) {
+            if ($this->config('frontpage') === $entity->getId()) {
+                $app['config']->get('system/site')->set('frontpage', 0);
+            }
         }
 
     ]
