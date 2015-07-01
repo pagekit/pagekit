@@ -68,7 +68,6 @@
 
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
-                            <li v-show="selected.length === 1"><a class="pk-icon-home pk-icon-hover" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: setFrontpage()"></a></li>
                             <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
                             <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                             <li v-show="showMove" data-uk-dropdown="{ mode: 'click' }">
@@ -133,6 +132,7 @@
                 <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
+                <a class="pk-icon-home" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: setFrontpage(node)"></a>
                 <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="node.frontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ getType(node).label }}</div>

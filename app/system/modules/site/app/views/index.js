@@ -69,10 +69,7 @@ module.exports = Vue.extend({
             this.modal.hide();
         },
 
-        setFrontpage: function () {
-
-            var node = this.getSelected()[0];
-
+        setFrontpage: function (node) {
             node.frontpage = true;
             this.Nodes.save({id: node.id}, {node: node}, function () {
                 this.load();
