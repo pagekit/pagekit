@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <ul class="uk-breadcrumb">
+        <ul class="uk-breadcrumb uk-margin-large-top">
             <li v-repeat="breadcrumbs" v-class="'uk-active': current">
                 <span v-show="current">{{ title }}</span>
                 <a v-show="!current" v-on="click: setPath(path)">{{ title }}</a>
