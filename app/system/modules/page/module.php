@@ -52,7 +52,7 @@ return [
 
     'events' => [
 
-        'view.site:views/edit' => function($event, $view) use ($app) {
+        'view.system/site:views/edit' => function($event, $view) use ($app) {
 
             $view->style('codemirror');
             $view->script('page-site', 'system/page:app/bundle/site.js', ['site-edit', 'editor']);
