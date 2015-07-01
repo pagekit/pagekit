@@ -30,10 +30,6 @@ return [
             return '';
         }
 
-        if (ini_get('xdebug.max_nesting_level') < 1000) {
-            ini_set('xdebug.max_nesting_level', 1000);
-        }
-
         $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
         $nodes[0]   = new Node();
         $root       = $nodes[0];
@@ -45,23 +41,18 @@ return [
         $root->setParentId(null);
         foreach ($nodes as $node) {
 
-            $depth = substr_count($node->getPath(), '/');
-
-            if (0 === strpos($path, $node->getPath())) {
-
-                $node->set('active', true);
-
-            } else {
-
-                if ($widget->get('mode') == 'active' && 0 !== strpos($node->getPath(), $path)) {
-                    continue;
-                }
-
-            }
-
+            $depth  = substr_count($node->getPath(), '/');
             $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
 
-            if (!$parent || $depth > $maxDepth || !$node->hasAccess($user)) {
+            $node->set('active', 0 === strpos($path, $node->getPath()));
+
+            if (!$parent
+                || $depth > $maxDepth
+                || !$node->hasAccess($user)
+                || (!$node->get('active')
+                    && $widget->get('mode') == 'active'
+                    && 0 !== strpos($node->getPath(), $path))
+            ) {
                 continue;
             }
 
