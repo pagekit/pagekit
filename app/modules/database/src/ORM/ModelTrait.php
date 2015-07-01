@@ -71,10 +71,6 @@ trait ModelTrait
      */
     public static function find($id)
     {
-        if ($entity = static::getManager()->getById($id, get_called_class())) {
-            return $entity;
-        }
-
         return static::where([static::getMetadata()->getIdentifier() => $id])->first();
     }
 

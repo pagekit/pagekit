@@ -8,10 +8,6 @@ use Pagekit\Database\Events;
 
 class EntityManager
 {
-    const STATE_MANAGED  = 1;
-    const STATE_NEW      = 2;
-    const STATE_DETACHED = 3;
-
     /**
      * @var Connection
      */
@@ -26,11 +22,6 @@ class EntityManager
      * @var string
      */
     protected $eventClass;
-
-    /**
-     * @var EntityMap
-     */
-    protected $entities;
 
     /**
      * @var EntityManager
@@ -54,7 +45,6 @@ class EntityManager
         $this->connection = $connection;
         $this->metadata   = $metadata;
         $this->eventClass = $eventClass;
-        $this->entities   = new EntityMap($this);
 
         static::$instance = $this;
     }
@@ -124,41 +114,6 @@ class EntityManager
     }
 
     /**
-     * Gets the state of an entity.
-     *
-     * @param  object  $entity
-     * @param  integer $assume
-     * @return int
-     */
-    public function getEntityState($entity, $assume = null)
-    {
-        if ($this->entities->has($entity)) {
-            return self::STATE_MANAGED;
-        }
-
-        if ($assume !== null) {
-            return $assume;
-        }
-
-        $metadata   = $this->getMetadata($entity);
-        $identifier = $metadata->getIdentifier();
-
-        return !$metadata->getValue($entity, $identifier) ? self::STATE_NEW : self::STATE_DETACHED;
-    }
-
-    /**
-     * Gets an entity.
-     *
-     * @param  int|string $id
-     * @param  string     $class
-     * @return mixed|false
-     */
-    public function getById($id, $class)
-    {
-        return $this->entities->get($id, $class);
-    }
-
-    /**
      * Relate target entities to the entity's relation.
      *
      * @param  array        $entities
@@ -191,36 +146,31 @@ class EntityManager
      */
     public function save($entity, array $data = [])
     {
-        $metadata = $this->getMetadata($entity);
+        $metadata   = $this->getMetadata($entity);
         $identifier = $metadata->getIdentifier(true);
 
         $metadata->setValues($entity, $data);
 
         $this->dispatchEvent(Events::preSave, $entity, $metadata);
 
-        switch ($this->getEntityState($entity, self::STATE_NEW)) {
+        if (!$id = $metadata->getValue($entity, $identifier, true)) {
 
-            case self::STATE_NEW:
 
-                $this->dispatchEvent(Events::preCreate, $entity, $metadata);
+            $this->dispatchEvent(Events::preCreate, $entity, $metadata);
 
-                $this->connection->insert($metadata->getTable(), $metadata->getValues($entity, true, true));
-                $this->entities->add($entity, $id = $this->connection->lastInsertId());
+            $this->connection->insert($metadata->getTable(), $metadata->getValues($entity, true, true));
 
-                $metadata->setValue($entity, $identifier, $id, true);
+            $metadata->setValue($entity, $identifier, $this->connection->lastInsertId(), true);
 
-                $this->dispatchEvent(Events::postCreate, $entity, $metadata);
+            $this->dispatchEvent(Events::postCreate, $entity, $metadata);
 
-                break;
+        } else {
 
-            case self::STATE_MANAGED:
+            $this->dispatchEvent(Events::preUpdate, $entity, $metadata);
 
-                $this->dispatchEvent(Events::preUpdate, $entity, $metadata);
+            $this->connection->update($metadata->getTable(), $metadata->getValues($entity, true, true), [$identifier => $id]);
 
-                $values = $metadata->getValues($entity, true, true);
-                $this->connection->update($metadata->getTable(), $values, [$identifier => $values[$identifier]]);
-
-                $this->dispatchEvent(Events::postUpdate, $entity, $metadata);
+            $this->dispatchEvent(Events::postUpdate, $entity, $metadata);
         }
 
         $this->dispatchEvent(Events::postSave, $entity, $metadata);
@@ -234,33 +184,21 @@ class EntityManager
      */
     public function delete($entity)
     {
-        $metadata = $this->getMetadata($entity);
+        $metadata   = $this->getMetadata($entity);
         $identifier = $metadata->getIdentifier(true);
 
-        switch ($state = $this->getEntityState($entity)) {
+        if ($value = $metadata->getValue($entity, $identifier, true)) {
 
-            case self::STATE_MANAGED:
+            $this->dispatchEvent(Events::preDelete, $entity, $metadata);
 
-                $this->dispatchEvent(Events::preDelete, $entity, $metadata);
+            $this->connection->delete($metadata->getTable(), [$identifier => $value]);
 
-                if (!$value = $metadata->getValue($entity, $identifier, true)) {
-                    throw new \InvalidArgumentException("Can't remove entity with empty identifier value.");
-                }
+            $this->dispatchEvent(Events::postDelete, $entity, $metadata);
 
-                $this->connection->delete($metadata->getTable(), [$identifier => $value]);
-                $this->entities->remove($entity);
+            $metadata->setValue($entity, $identifier, null, true);
 
-                $this->dispatchEvent(Events::postDelete, $entity, $metadata);
-
-                $metadata->setValue($entity, $identifier, null, true);
-
-                break;
-
-            case self::STATE_DETACHED:
-                throw new \InvalidArgumentException("Detached entity can not be removed");
-
-            default:
-                throw new \InvalidArgumentException(sprintf("Unexpected entity state: %s.", $state));
+        } else {
+            throw new \InvalidArgumentException("Can't remove entity with empty identifier value.");
         }
     }
 
@@ -274,7 +212,7 @@ class EntityManager
     public function hydrateOne($statement, Metadata $metadata)
     {
         if ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            return $this->entities->load($metadata, $row);
+            return $this->load($metadata, $row);
         }
 
         return false;
@@ -289,15 +227,32 @@ class EntityManager
      */
     public function hydrateAll($statement, Metadata $metadata)
     {
-        $result = [];
+        $result     = [];
         $identifier = $metadata->getIdentifier();
 
         while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            $entity = $this->entities->load($metadata, $row);
+            $entity = $this->load($metadata, $row);
             $result[$metadata->getValue($entity, $identifier)] = $entity;
         }
 
         return $result;
+    }
+
+    /**
+     * Loads an entity or creates a new one if it does not already exist.
+     *
+     * @param  Metadata $metadata
+     * @param  array    $data
+     * @return object
+     */
+    public function load(Metadata $metadata, array $data)
+    {
+        $entity = $metadata->newInstance();
+        $metadata->setValues($entity, $data, true, true);
+
+        $this->dispatchEvent(Events::postLoad, $entity, $metadata);
+
+        return $entity;
     }
 
     /**
