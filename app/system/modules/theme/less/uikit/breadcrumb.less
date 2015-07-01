@@ -16,7 +16,10 @@
 // Component
 // ========================================================================
 
-.hook-breadcrumb() {}
+.hook-breadcrumb() {
+    color: @global-muted-color;
+    text-transform: uppercase;
+}
 
 
 // Items
@@ -29,11 +32,6 @@
 // ========================================================================
 
 .hook-breadcrumb-misc() {
-
-    .uk-breadcrumb > li {
-        color: @global-muted-color;
-        text-transform: uppercase;
-    }
 
 	.uk-breadcrumb > li > a { color: @global-muted-color; }
 	.uk-breadcrumb > li > a:hover { color: @global-color; }
