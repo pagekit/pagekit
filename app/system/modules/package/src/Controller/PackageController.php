@@ -51,7 +51,7 @@ class PackageController
         foreach ($packages as $package) {
             if ($module = App::module($package->getName())) {
                 $package->set('enabled', true);
-                $package->set('permissions', isset($module->permissions));
+                $package->set('permissions', (bool) $module->get('permissions'));
             }
         }
 
