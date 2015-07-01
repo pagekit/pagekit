@@ -123,7 +123,7 @@
 
     <li class="uk-nestable-item" v-class="uk-parent: tree[node.id]" data-id="{{ node.id }}">
 
-        <div class="uk-nestable-panel pk-table-fake uk-form">
+        <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
             </div>
@@ -132,8 +132,8 @@
                 <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: setFrontpage(node)"></a>
-                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-show="node.frontpage"></i>
+                <a class="pk-icon-home uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!node.frontpage && node.status" v-on="click: setFrontpage(node)"></a>
+                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="node.frontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ getType(node).label }}</div>
             <div class="pk-table-width-100 uk-text-center">
