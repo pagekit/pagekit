@@ -111,7 +111,7 @@ module.exports = Vue.extend({
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Pages moved to trash.'));
+                UIkit.notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({label: this.$trans('Trash')}), 'id', menu).label}));
             });
         },
 
