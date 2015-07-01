@@ -33,7 +33,7 @@ class NodesListener implements EventSubscriberInterface
             }
 
             if ($route && ($node->frontpage || isset($type['frontpage']) && $type['frontpage'] && !$frontpage)) {
-                App::routes()->alias('/', $frontpage = $route->getName());
+                App::routes()->alias('/', $frontpage = $route->getName(), $type['defaults']);
                 $site->config['frontpage'] = $node->getId();
             }
 

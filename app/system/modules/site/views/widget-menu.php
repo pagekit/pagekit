@@ -6,7 +6,7 @@
 
         <li class="<?= $node->get('parent') ? 'uk-parent' : ''?><?= $node->get('active') ? ' uk-active' : ''?>">
             <a href="<?= $view->url($node->frontpage ? '/' : $node->getPath()) ?>"><?= $node->getTitle() ?></a>
-            <?php if ($node->hasChildren() && ($node->get('active') || $widget->get('mode', 'all') == 'all' || !$root->getDepth() == 0)) : ?>
+            <?php if ($node->hasChildren()) : ?>
                 <ul class="uk-nav-sub">
                     <?= $view->render('menu', ['root' => $node, 'widget' => $widget]) ?>
                 </ul>

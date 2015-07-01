@@ -45,21 +45,33 @@ return [
         $root->setParentId(null);
         foreach ($nodes as $node) {
 
+            $depth = substr_count($node->getPath(), '/');
+
+            if (0 === strpos($path, $node->getPath())) {
+
+                $node->set('active', true);
+
+            } else {
+
+                if ($widget->get('mode') == 'active' && 0 !== strpos($node->getPath(), $path)) {
+                    continue;
+                }
+
+            }
+
             $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
 
-            if (!$parent || $parent->getDepth() >= $maxDepth || !$node->hasAccess($user)) {
+            if (!$parent || $depth > $maxDepth || !$node->hasAccess($user)) {
                 continue;
             }
 
             $node->setParent($parent);
             $parent->set('parent', true);
 
-            if (0 === strpos($path, $node->getPath())) {
-                $node->set('active', true);
-                if ($node->getDepth() == $startLevel) {
-                    $root = $node;
-                }
+            if ($node->get('active') && $depth == $startLevel) {
+                $root = $node;
             }
+
         }
 
         if ($root->getDepth() != $startLevel) {
