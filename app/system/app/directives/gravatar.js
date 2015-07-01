@@ -2,11 +2,11 @@ var md5 = require('md5');
 
 module.exports = {
 
+    _cache: {},
+
     update: function (value) {
 
-        var el = $(this.el), url = '//gravatar.com/avatar/', img = new Image(), size = (el.attr('height') || 50), params = [];
-
-        el.attr('src', this.letterAvatar(el.attr('title') || el.attr('alt'), size));
+        var el = $(this.el), url = '//gravatar.com/avatar/', size = (el.attr('height') || 50), params = [];
 
         params.push('r=g');
         params.push('d=mm');
@@ -15,9 +15,24 @@ module.exports = {
 
         url += md5(value) + '?' + params.join('&');
 
+        // load image url from cache if exists
+        if (this._cache[url]) {
+            return el.attr('src', this._cache[url]);
+        }
+
+        var img = new Image();
+
+        el.css('visibility', 'hidden');
+
         img.onload = function() {
-            el.attr('src', url);
-        };
+            this._cache[url] = url;
+            el.attr('src', url).css('visibility', '');
+        }.bind(this);
+
+        img.onerror = function() {
+            this._cache[url] = this.letterAvatar(el.attr('title') || el.attr('alt'), size);
+            el.attr('src', this._cache[url]).css('visibility', '');
+        }.bind(this);
 
         img.src = url;
     },
