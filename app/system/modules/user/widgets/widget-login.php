@@ -10,8 +10,8 @@ return [
     'type' => 'widget',
 
     'views' => [
-        'login' => 'system/user:views/widget-login.php',
-        'logout' => 'system/user:views/widget-logout.php'
+        'login' => 'system/user:views/site/widget-login.php',
+        'logout' => 'system/user:views/site/widget-logout.php'
     ],
 
     'events' => [
