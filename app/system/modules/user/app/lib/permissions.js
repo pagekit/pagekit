@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function () {
         return window.$data;
@@ -59,4 +59,4 @@ module.exports = Vue.extend({
 
     }
 
-});
+};

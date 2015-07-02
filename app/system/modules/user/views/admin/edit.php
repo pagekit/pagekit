@@ -1,4 +1,4 @@
-<?php $view->script('user-edit', 'system/user:app/admin/edit.js', ['vue', 'uikit-form-password']) ?>
+<?php $view->script('user-edit', 'system/user:app/bundle/edit.js', ['vue', 'uikit-form-password']) ?>
 
 <form id="user-edit" class="uk-form uk-form-horizontal" name="form" v-on="valid: save" v-cloak>
 

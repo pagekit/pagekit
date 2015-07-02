@@ -17,7 +17,7 @@ trait WidgetModelTrait
      */
     public static function findActive($position = null)
     {
-        static $widgets = null;
+        static $widgets;
 
         if ($widgets === null) {
 
@@ -26,7 +26,6 @@ trait WidgetModelTrait
             $widgets = self::where(['status' => 1])->get();
 
             foreach ($module->getPositions() as $pos) {
-
                 foreach ($pos['assigned'] as $id) {
 
                     if (!isset($widgets[$id])
@@ -40,12 +39,9 @@ trait WidgetModelTrait
                     }
 
                     $widget->set('result', $result);
-
                     $widgets[$pos['name']][] = $widget;
                 }
-
             }
-
         }
 
         if ($position === null) {

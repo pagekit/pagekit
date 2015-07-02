@@ -4,7 +4,6 @@ use Pagekit\User\Event\AccessListener;
 use Pagekit\User\Event\AuthorizationListener;
 use Pagekit\User\Event\LoginAttemptListener;
 use Pagekit\User\Event\UserListener;
-use Pagekit\User\Widget\LoginWidget;
 
 return [
 
@@ -128,14 +127,10 @@ return [
             );
         },
 
-        'widget.types' => function ($event, $widgets) {
-            $widgets->registerType(new LoginWidget());
-        },
-
-        'request' => function () use ($app) {
-            $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets/login.js', '~widgets');
-            $app['scripts']->register('widget-user', 'system/user:app/bundle/widgets/user.js', '~dashboard');
-        }
+        'view.head' => [function () use ($app) {
+            $app['scripts']->register('widget-login', 'system/user:app/bundle/widgets-login.js', '~widgets');
+            $app['scripts']->register('widget-user', 'system/user:app/bundle/widgets-user.js', '~dashboard');
+        }, 50]
 
     ]
 

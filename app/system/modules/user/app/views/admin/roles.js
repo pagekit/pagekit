@@ -1,6 +1,8 @@
-var Permissions = require('../components/permissions');
+module.exports = {
 
-var app = new Permissions({
+    mixins: [
+        require('../../lib/permissions')
+    ],
 
     data: {
         role: {},
@@ -84,10 +86,10 @@ var app = new Permissions({
 
     }
 
-});
+};
 
-jQuery(function () {
+$(function () {
 
-    app.$mount('#roles');
+    new Vue(module.exports).$mount('#roles');
 
 });

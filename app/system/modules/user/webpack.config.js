@@ -2,19 +2,16 @@ module.exports = [
 
     {
         entry: {
-            "widgets/login": "./app/widgets/login.vue",
-            "widgets/user": "./app/widgets/user.vue",
-            "admin/roles": "./app/admin/roles",
-            "admin/permissions": "./app/admin/permissions"
+            "edit": "./app/views/admin/edit",
+            "index": "./app/views/admin/index",
+            "permissions": "./app/views/admin/permissions",
+            "roles": "./app/views/admin/roles",
+            "settings": "./app/views/admin/settings",
+            "widget-login": "./app/components/widget-login.vue",
+            "widget-user": "./app/components/widget-user.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"
-        },
-        externals: {
-            "lodash": "_",
-            "jquery": "jQuery",
-            "uikit": "UIkit",
-            "vue": "Vue"
         },
         module: {
             loaders: [

@@ -1,4 +1,4 @@
-var Users = {
+module.exports = {
 
     data: function() {
         return _.merge({
@@ -6,7 +6,7 @@ var Users = {
             pages: 0,
             count: '',
             selected: []
-        }, window.$data)
+        }, window.$data);
     },
 
     created: function () {
@@ -120,6 +120,6 @@ var Users = {
 
 };
 
-jQuery(function () {
-    new Vue(Users).$mount('#users');
+$(function () {
+    new Vue(module.exports).$mount('#users');
 });

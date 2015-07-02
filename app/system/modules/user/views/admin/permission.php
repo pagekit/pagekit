@@ -1,4 +1,4 @@
-<?php $view->script('permission-index', 'system/user:app/bundle/admin/permissions.js', 'vue') ?>
+<?php $view->script('permission-index', 'system/user:app/bundle/permissions.js', 'vue') ?>
 
 <div id="permissions" class="uk-form" v-cloak>
 
