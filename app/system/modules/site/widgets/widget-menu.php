@@ -8,10 +8,6 @@ return [
 
     'type' => 'widget',
 
-    'main' => function ($app) {
-
-    },
-
     'views' => [
         'menu' => 'system/site:views/widget-menu.php'
     ],
@@ -33,6 +29,7 @@ return [
         $user       = $app['user'];
         $startLevel = (int) $widget->get('start_level', 1);
         $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
+
         $path       = $app['node']->getPath();
         $segments   = explode('/', $path);
         $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';

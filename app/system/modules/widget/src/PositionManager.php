@@ -48,12 +48,12 @@ class PositionManager implements \JsonSerializable
      *
      * @param  string        $position
      * @param  array|integer $id
-     * @return self
+     * @return integer[]
      */
     public function assign($position, $id)
     {
         if (!is_array($id) && $position === $this->find($id)) {
-            return $this;
+            return $this->assigned[$position];
         }
 
         foreach ($this->assigned as $pos => $ids) {
@@ -61,7 +61,7 @@ class PositionManager implements \JsonSerializable
         }
 
         if (!$position) {
-            return $this;
+            return [];
         }
 
         if (is_array($id)) {
@@ -70,7 +70,7 @@ class PositionManager implements \JsonSerializable
             $this->assigned[$position][] = $id;
         }
 
-        return $this;
+        return $this->assigned[$position];
     }
 
     /**
@@ -111,9 +111,7 @@ class PositionManager implements \JsonSerializable
     }
 
     /**
-     * Implements JsonSerializable interface.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function jsonSerialize()
     {

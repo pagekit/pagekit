@@ -47,7 +47,7 @@ class SiteController
             $node = new Node();
             $node->setType($id);
 
-            if ($menu && !$site->getMenu($menu)) {
+            if ($menu && !App::menus($menu)) {
                 throw new NotFoundException(__('Menu not found.'));
             }
 

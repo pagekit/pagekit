@@ -27,7 +27,7 @@ class MenuController
      */
     public function indexAction()
     {
-        $menus = App::module('system/site')->getMenus();
+        $menus = App::menus()->get();
 
         $menus['trash'] = ['id' => 'trash', 'label' => 'Trash', 'fixed' => true];
 

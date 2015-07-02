@@ -11,7 +11,6 @@ use Pagekit\Widget\Model\WidgetInterface;
 class WidgetModule extends Module
 {
     protected $types = [];
-    protected $positions;
     protected $widgets;
 
     /**
@@ -19,7 +18,6 @@ class WidgetModule extends Module
      */
     public function main(App $app)
     {
-        $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
         // $this->config->merge(['widget' => ['defaults' => $app['theme']->config('widget.defaults', [])]]);
 
         $app['module']->addFactory('widget', function ($module) use ($app) {
@@ -33,24 +31,18 @@ class WidgetModule extends Module
 
             return $module;
         });
-    }
 
-    /**
-     * @return PositionManager
-     */
-    public function getPositions()
-    {
-        if (!$this->positions) {
+        $app['positions'] = function($app) {
 
-            $this->positions = new PositionManager($this->config('widget.positions'));
+            $positions = new PositionManager($this->config('widget.positions'));
 
-            foreach ((array) App::theme()->get('positions') as $name => $position) {
+            foreach ((array) $app['theme']->get('positions') as $name => $position) {
                 list($label, $description) = array_merge((array) $position, ['']);
-                $this->positions->register($name, $label, $description);
+                $positions->register($name, $label, $description);
             }
-        }
 
-        return $this->positions;
+            return $positions;
+        };
     }
 
     /**
@@ -91,7 +83,7 @@ class WidgetModule extends Module
     {
         if ($this->widgets === null) {
 
-            foreach ($this->getPositions()->getAssigned() as $name => $ids) {
+            foreach (App::positions()->getAssigned() as $name => $ids) {
 
                 $widgets = Widget::findAll();
                 $node    = App::node()->getId();

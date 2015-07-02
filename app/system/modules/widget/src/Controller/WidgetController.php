@@ -12,12 +12,10 @@ use Pagekit\Widget\Entity\Widget;
  */
 class WidgetController
 {
-    protected $site;
     protected $widgets;
 
     public function __construct()
     {
-        $this->site = App::module('system/site');
         $this->widgets = App::module('system/widget');
     }
 
@@ -31,7 +29,7 @@ class WidgetController
             '$data' => [
                 'config' => [
                     'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => $this->widgets->getPositions()
+                    'positions' => App::positions()
                 ]
             ]
         ];
@@ -58,11 +56,11 @@ class WidgetController
             '$data' => [
                 'widget' => $widget,
                 'config' => [
-                    'menus'     => $this->site->getMenus(),
+                    'menus'     => App::menus(),
                     'nodes'     => array_values(Node::query()->get()),
                     'roles'     => array_values(Role::findAll()),
                     'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => $this->widgets->getPositions()
+                    'positions' => App::positions()
                 ]
             ]
         ];

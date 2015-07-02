@@ -66,14 +66,16 @@ return [
 
     'events' => [
 
+        'view.layout' => function($event) use ($app) {
+            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
+        },
+
         'system.widget.postLoad' => function ($event, $widget) use ($app) {
-            $widget->position = $this->getPositions()->find($widget->getId());
+            $widget->position = $app['positions']->find($widget->getId());
         },
 
         'system.widget.postSave' => function ($event, $widget) use ($app) {
-            $this->getPositions()->assign($widget->position, $widget->getId());
-            $app['config']->get('system/widget')->set('widget.positions', $this->getPositions()->getAssigned());
-
+            $app['config']->get('system/widget')->set('widget.positions.'.$widget->position, $app['positions']->assign($widget->position, $widget->getId()));
         }
     ]
 

@@ -9,7 +9,6 @@ use Pagekit\Site\Entity\Node;
 class SiteModule extends Module
 {
     protected $types;
-    protected $menus;
 
     /**
      * {@inheritdoc}
@@ -22,6 +21,33 @@ class SiteModule extends Module
             }
 
             return new Node;
+        };
+
+        $app['menus'] = function ($app) {
+
+            $menus = new MenuManager();
+
+            foreach ($app['module'] as $module) {
+                foreach ((array) $module->get('menus') as $id => $menu) {
+                    $menus->register($id, $menu, ['fixed' => true]);
+                }
+            }
+
+            foreach ($this->config('menus') as $menu) {
+                $menus->register($menu['id'], $menu['label']);
+            }
+
+            $app->trigger('site.menus', [$this]);
+
+            foreach (Node::where(['menu <> ?', 'menu <> ?'], ['', 'trash'])
+                         ->whereIn('menu', array_keys($menus->get()), true)
+                         ->groupBy('menu')->execute('menu')
+                         ->fetchAll(\PDO::FETCH_COLUMN) as $menu
+            ) {
+                $menus->register($menu, $menu, ['ghost' => true]);
+            }
+
+            return $menus;
         };
     }
 
@@ -67,65 +93,5 @@ class SiteModule extends Module
     {
         $route['id']        = $type;
         $this->types[$type] = $route;
-    }
-
-    /**
-     * @param  string $id
-     * @return array
-     */
-    public function getMenu($id)
-    {
-        $menus = $this->getMenus();
-
-        return isset($menus[$id]) ? $menus[$id] : null;
-    }
-
-    /**
-     * @return array[]
-     */
-    public function getMenus()
-    {
-        if (!$this->menus) {
-
-            foreach (App::module() as $module) {
-                foreach ((array) $module->get('menus') as $id => $menu) {
-                    $this->registerMenu($id, $menu, ['fixed' => true]);
-                }
-            }
-
-            foreach ($this->config('menus') as $menu) {
-                $this->registerMenu($menu['id'], $menu['label']);
-            }
-
-            App::trigger('site.menus', [$this]);
-
-            foreach (Node::where(['menu <> ?', 'menu <> ?'], ['', 'trash'])
-                         ->whereIn('menu', array_keys($this->menus), true)
-                         ->groupBy('menu')->execute('menu')
-                         ->fetchAll(\PDO::FETCH_COLUMN) as $menu
-            ) {
-                $this->registerMenu($menu, $menu, ['ghost' => true]);
-            }
-
-            uasort($this->menus, function ($a, $b) {
-                return strcmp($a['label'], $b['label']);
-            });
-
-            $this->registerMenu('', 'Not Linked', ['fixed' => true]);
-        }
-
-        return $this->menus;
-    }
-
-    /**
-     * Registers a menu.
-     *
-     * @param string $id
-     * @param string $label
-     * @param array  $options
-     */
-    public function registerMenu($id, $label, array $options = [])
-    {
-        $this->menus[$id] = array_merge($options, compact('id', 'label'));
     }
 }

@@ -51,10 +51,9 @@ class WidgetApiController
      */
     public function assignAction($position, $ids)
     {
-        $positions = $this->widgets->getPositions();
-        $positions->assign($position, $ids);
+        $positions = App::positions();
 
-        App::config('system/widget')->set('widget.positions', $positions->getAssigned());
+        App::config('system/widget')->set('widget.positions.'.$position, $positions->assign($position, $ids));
 
         return ['message' => 'success', 'positions' => $positions];
     }
