@@ -18,7 +18,7 @@ class PostApiController
      */
     public function indexAction($filter = [], $page = 0)
     {
-        $query = Post::query();
+        $query  = Post::query();
         $filter = array_merge(array_fill_keys(['status', 'search'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
@@ -27,13 +27,13 @@ class PostApiController
         }
 
         if ($search) {
-            $query->where(function($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                 $query->orWhere(['title LIKE :search', 'slug LIKE :search'], ['search' => "%{$search}%"]);
             });
         }
 
         if ($author) {
-            $query->where(function($query) use ($author) {
+            $query->where(function ($query) use ($author) {
                 $query->orWhere(['user_id' => (int) $author]);
             });
         }
@@ -43,6 +43,7 @@ class PostApiController
         }
 
         $limit = App::module('blog')->config('posts.posts_per_page');
+        $count = $query->count();
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
@@ -80,7 +81,7 @@ class PostApiController
             App::abort(400, __('Invalid slug.'));
         }
 
-        $data['date'] = Intl::date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+        $data['date']           = App::intl()->date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
         $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
         $post->save($data);
