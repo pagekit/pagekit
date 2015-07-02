@@ -4,7 +4,6 @@ namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\Model\Post;
-use Pagekit\Intl\Intl;
 
 /**
  * @Access("blog: manage content")
@@ -43,7 +42,6 @@ class PostApiController
         }
 
         $limit = App::module('blog')->config('posts.posts_per_page');
-        $count = $query->count();
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
