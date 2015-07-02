@@ -3,9 +3,12 @@
 namespace Pagekit\Widget\Model;
 
 use Pagekit\Application as App;
+use Pagekit\Database\ORM\ModelTrait;
 
 trait WidgetModelTrait
 {
+    use ModelTrait;
+
     /**
      * Gets active widgets.
      *
@@ -18,9 +21,9 @@ trait WidgetModelTrait
 
         if ($widgets === null) {
 
-            $widgets = self::where(['status' => 1])->get();
             $node    = App::node()->getId();
             $module  = App::widget();
+            $widgets = self::where(['status' => 1])->get();
 
             foreach ($module->getPositions() as $pos) {
 
@@ -39,7 +42,6 @@ trait WidgetModelTrait
                     $widget->set('result', $result);
 
                     $widgets[$pos['name']][] = $widget;
-
                 }
 
             }
@@ -51,6 +53,5 @@ trait WidgetModelTrait
         }
 
         return isset($widgets[$position]) ? $widgets[$position] : [];
-
     }
 }

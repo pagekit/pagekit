@@ -3,7 +3,6 @@
 namespace Pagekit\Widget\Model;
 
 use Pagekit\Application as App;
-use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
 
@@ -12,7 +11,7 @@ use Pagekit\User\Entity\AccessTrait;
  */
 class Widget implements WidgetInterface
 {
-    use AccessTrait, DataTrait, ModelTrait, WidgetModelTrait;
+    use AccessTrait, DataTrait, WidgetModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;

@@ -48,10 +48,10 @@ class InfoHelper
 
         $directories = [
             App::get('path.extensions'),
-            App::get('path.storage'),
             App::get('path.themes'),
-            App::get('config.file'),
-            App::path().'/app'
+            App::get('path.storage'),
+            App::get('path.temp'),
+            App::get('config.file')
         ];
 
         $result = [];
