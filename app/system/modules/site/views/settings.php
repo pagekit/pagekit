@@ -16,12 +16,10 @@
         </div>
     </div>
 
-
     <ul class="uk-tab" v-el="tab">
         <li><a>{{ 'General' | trans }}</a></li>
         <li><a>{{ 'Code' | trans }}</a></li>
     </ul>
-
 
     <div id="settings-panels" class="uk-switcher uk-margin-large-top">
 

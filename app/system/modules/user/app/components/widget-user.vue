@@ -53,10 +53,10 @@
     </form>
 
     <h3 class="uk-panel-title" v-if="widget.show == 'registered'">
-        {{ '{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users' | transChoice users.length {users:users.length} }}
+        {{ '{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% of %userscount% registered users' | transChoice users.length {users:users.length,userscount:userscount} }}
     </h3>
     <h3 class="uk-panel-title" v-if="widget.show != 'registered'">
-        {{ '{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in' | transChoice users.length {users:users.length} }}
+        {{ '{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% of %userscount% users logged in' | transChoice users.length {users:users.length,userscount:userscount} }}
     </h3>
 
     <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
@@ -126,12 +126,13 @@
                     }
                 }
 
-                query.limit = this.$get('widget.count');
+                //query.limit = this.$get('widget.count');
 
                 this.$resource('api/user/:id').query(query, function(data) {
-                    this.$set('users', data.users);
-                });
 
+                    this.$set('userscount', data.users.length);
+                    this.$set('users', data.users.slice(0, this.$get('widget.count')));
+                });
             }
 
         },
