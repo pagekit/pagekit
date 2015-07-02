@@ -50,7 +50,6 @@
                     </div>
                 </div>
 
-
                 <div class="uk-form-row">
                     <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
                     <div class="uk-form-controls">

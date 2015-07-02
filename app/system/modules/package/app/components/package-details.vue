@@ -3,8 +3,8 @@
     <div class="uk-modal-header uk-flex uk-flex-middle">
         <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon">
         <div class="uk-flex-item-1">
-            <h2 class="uk-margin-remove">{{ package.title }} {{ package.version }}</h2>
-            <div class="uk-text-muted">{{ package.author.name }}</div>
+            <h2 class="uk-margin-remove">{{ package.title }}</h2>
+            <div class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</div>
         </div>
     </div>
 
@@ -19,8 +19,9 @@
     <p>{{ package.description }}</p>
 
     <ul class="uk-list">
-        <li><strong>{{ 'Path:' | trans }}</strong> /{{ package.name }}</li>
+        <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
         <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
+        <li><strong>{{ 'Author:' | trans }}</strong> {{ package.author.name }}</li>
         <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
         <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
     </ul>
