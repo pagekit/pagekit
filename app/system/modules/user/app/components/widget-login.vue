@@ -23,9 +23,9 @@
     module.exports = {
 
         section: {
-            name: 'site-user-login',
+            name: 'widget-login',
             label: 'Settings',
-            active: 'site.user.login',
+            active: 'system/widget-login',
             priority: 0
         },
 
@@ -37,6 +37,6 @@
 
     };
 
-    window.Widgets.component('site-user-login', module.exports)
+    window.Widgets.component('widget-login', module.exports);
 
 </script>

@@ -1,4 +1,4 @@
-<?php $view->script('user-index', 'system/user:app/bundle/index.js', 'vue') ?>
+<?php $view->script('user-index', 'system/user:app/bundle/user-index.js', 'vue') ?>
 
 <div id="users" class="uk-form" v-cloak>
 

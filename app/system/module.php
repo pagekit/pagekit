@@ -34,8 +34,9 @@ return [
         'system/theme',
         'system/user',
         'system/widget',
-        'system/widget-text',
-        'system/widget-menu'
+        'system/widget-login',
+        'system/widget-menu',
+        'system/widget-text'
 
     ],
 

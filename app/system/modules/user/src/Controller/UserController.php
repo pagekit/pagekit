@@ -24,7 +24,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Users'),
-                'name'  => 'system/user:views/admin/index.php'
+                'name'  => 'system/user:views/admin/user-index.php'
             ],
             '$data' => [
                 'statuses' => User::getStatuses(),
@@ -59,7 +59,7 @@ class UserController
         return [
             '$view' => [
                 'title' => $id ? __('Edit User') : __('Add User'),
-                'name'  => 'system/user:views/admin/edit.php'
+                'name'  => 'system/user:views/admin/user-edit.php'
             ],
             '$data' => [
                 'user'     => $user,
@@ -81,7 +81,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Permissions'),
-                'name'  => 'system/user:views/admin/permission.php'
+                'name'  => 'system/user:views/admin/permission-index.php'
             ],
             '$data' => [
                 'permissions' => App::module('system/user')->getPermissions(),
@@ -99,7 +99,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Roles'),
-                'name'  => 'system/user:views/admin/role.php'
+                'name'  => 'system/user:views/admin/role-index.php'
             ],
             '$config' => [
                 'role' => $id

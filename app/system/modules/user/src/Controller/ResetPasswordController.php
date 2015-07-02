@@ -17,7 +17,7 @@ class ResetPasswordController
         return [
             '$view' => [
                 'title' => __('Reset'),
-                'name'  => 'system/user:views/site/reset/request.php'
+                'name'  => 'system/user:views/site/reset-request.php'
             ]
         ];
     }
@@ -127,7 +127,7 @@ class ResetPasswordController
         return [
             '$view' => [
                 'title' => __('Reset Confirm'),
-                'name'  => 'system/user:views/site/reset/confirm.php'
+                'name'  => 'system/user:views/site/reset-confirm.php'
             ],
             'username' => $username,
             'activation' => $activation

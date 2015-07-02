@@ -13,7 +13,7 @@
     <p>
         <label><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label>
         <br><a href="<?= $view->url('@user/resetpassword') ?>"><?= __('Forgot Password?') ?></a>
-        <?php if ($app['module']->get('user')->config('registration') != 'admin'): ?>
+        <?php if ($app['module']->get('system/user')->config('registration') != 'admin'): ?>
         <br><a href="<?= $view->url('@user/registration') ?>"><?= __('Sign up') ?></a>
         <?php endif ?>
     </p>

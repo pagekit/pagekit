@@ -17,6 +17,8 @@ return [
 
     ],
 
+    'include' => 'widgets/widget-login.php',
+
     'routes' => [
 
         '/user' => [
@@ -128,7 +130,6 @@ return [
         },
 
         'view.head' => [function () use ($app) {
-            $app['scripts']->register('widget-login', 'system/user:app/bundle/widget-login.js', '~widgets');
             $app['scripts']->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
         }, 50]
 
