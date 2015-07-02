@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\Application as App;
+use Pagekit\Widget\Model\Widget;
 
 class PositionHelper extends Helper
 {
@@ -24,7 +24,7 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) App::module('system/widget')->getWidgets($name);
+        return (bool) Widget::findActive($name);
     }
 
     /**
@@ -42,7 +42,7 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = App::module('system/widget')->getWidgets($name);
+        $parameters['widgets'] = Widget::findActive($name);
 
         if (!$view) {
 

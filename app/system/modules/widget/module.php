@@ -71,11 +71,11 @@ return [
         },
 
         'system.widget.postLoad' => function ($event, $widget) use ($app) {
-            $widget->position = $app['widget']->findPosition($widget->getId());
+            $widget->position = $this->findPosition($widget->getId());
         },
 
         'system.widget.postSave' => function ($event, $widget) use ($app) {
-            $app['config']->get('system/widget')->set('widget.positions.'.$widget->position, $app['widget']->assign($widget->position, $widget->getId()));
+            $this->assign($widget->position, $widget->getId());
         }
     ]
 

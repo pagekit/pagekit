@@ -5,7 +5,7 @@ namespace Pagekit\Widget\Controller;
 use Pagekit\Application as App;
 use Pagekit\Site\Entity\Node;
 use Pagekit\User\Entity\Role;
-use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Model\Widget;
 
 /**
  * @Access("system: manage widgets", admin=true)

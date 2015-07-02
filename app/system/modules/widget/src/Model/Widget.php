@@ -1,19 +1,18 @@
 <?php
 
-namespace Pagekit\Widget\Entity;
+namespace Pagekit\Widget\Model;
 
 use Pagekit\Application as App;
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Entity\DataTrait;
 use Pagekit\User\Entity\AccessTrait;
-use Pagekit\Widget\Model\WidgetInterface;
 
 /**
  * @Entity(tableClass="@system_widget", eventPrefix="system.widget")
  */
 class Widget implements WidgetInterface
 {
-    use AccessTrait, DataTrait, ModelTrait;
+    use AccessTrait, DataTrait, ModelTrait, WidgetModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;

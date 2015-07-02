@@ -4,7 +4,7 @@ namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Kernel\Exception\NotFoundException;
-use Pagekit\Widget\Entity\Widget;
+use Pagekit\Widget\Model\Widget;
 
 /**
  * @Access("system: manage widgets")
@@ -41,13 +41,13 @@ class WidgetApiController
     }
 
     /**
-     * @Request({"position", "ids"}, csrf=true)
+     * @Request({"position", "ids": "array"}, csrf=true)
      */
     public function assignAction($position, $ids)
     {
         $widgets = App::widget();
 
-        App::config('system/widget')->set('widget.positions.'.$position, $widgets->assign($position, $ids));
+        $widgets->assign($position, $ids);
 
         return ['message' => 'success', 'positions' => $widgets->getPositions()];
     }

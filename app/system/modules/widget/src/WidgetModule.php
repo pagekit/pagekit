@@ -4,9 +4,7 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Widget\Entity\Widget;
 use Pagekit\Widget\Model\TypeInterface;
-use Pagekit\Widget\Model\WidgetInterface;
 
 class WidgetModule extends Module
 {
@@ -78,29 +76,27 @@ class WidgetModule extends Module
      *
      * @param  string        $position
      * @param  array|integer $id
-     * @return integer[]
+     * @return self
      */
     public function assign($position, $id)
     {
-        if (!is_array($id) && $position === $this->findPosition($id)) {
-            return $this->positions[$position]['assigned'];
+        if (!isset($this->positions[$position]) || !is_array($id) && $position === $this->findPosition($id)) {
+            return $this;
         }
 
-        foreach ($this->positions as $pos) {
-            $pos['assigned'] = array_diff($pos['assigned'], (array) $id);
-        }
-
-        if (!$position) {
-            return [];
+        foreach ($this->positions as &$pos) {
+            $pos['assigned'] = array_values(array_diff($pos['assigned'], (array) $id));
         }
 
         if (is_array($id)) {
-            $this->positions[$position]['assigned'] = array_unique($id);
+            $this->positions[$position]['assigned'] = array_values(array_unique($id));
         } else {
             $this->positions[$position]['assigned'][] = $id;
         }
 
-        return $this->positions[$position]['assigned'];
+        App::config('system/widget')->set('widget.positions', array_map(function($position) { return $position['assigned']; }, $this->positions));
+
+        return $this;
     }
 
     /**
@@ -141,49 +137,5 @@ class WidgetModule extends Module
     public function getPositions()
     {
         return array_values($this->positions);
-    }
-
-    /**
-     * Gets active widgets.
-     *
-     * @param  string $position
-     * @return WidgetInterface[]
-     */
-    public function getWidgets($position = null)
-    {
-        if ($this->widgets === null) {
-
-            foreach ($this->positions->getAssigned() as $name => $ids) {
-
-                $widgets = Widget::findAll();
-                $node    = App::node()->getId();
-
-                foreach ($ids as $id) {
-
-                    if (!isset($widgets[$id])
-                        or !$widget = $widgets[$id]
-                        or !$widget->hasAccess(App::user())
-                        or ($nodes = $widget->getNodes() and !in_array($node, $nodes))
-                        or !$type = $this->getType($widget->getType())
-                        or !$result = $type->render($widget)
-                    ) {
-                        continue;
-                    }
-
-                    $widget->set('result', $result);
-
-                    $this->widgets[$name][] = $widget;
-
-                }
-
-            }
-
-        }
-
-        if ($position === null) {
-            return $this->widgets;
-        }
-
-        return isset($this->widgets[$position]) ? $this->widgets[$position] : [];
     }
 }
