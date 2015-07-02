@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="tm-background uk-height-viewport">
     <head>
         <meta charset="utf-8">
         <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -13,10 +13,11 @@
         <div id="installer">
 
             <div class="tm-slide uk-vertical-align uk-text-center" v-el="start" v-show="step == 'start'">
-                <div class="uk-vertical-align-middle tm-panel">
+                <div class="uk-vertical-align-middle tm-panel uk-contrast">
 
                     <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
                     <p>
+                        <h1 class="uk-heading-large">{{ 'Pagekit' | trans }}</h1>
                         <button class="uk-button" v-on="click: gotoStep('database')">{{ 'Begin' | trans }}</button>
                     </p>
 
@@ -26,8 +27,8 @@
             <div class="tm-slide uk-vertical-align uk-text-center" v-el="database" v-show="step == 'database'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
-                    <h1>{{ 'Connect database' | trans }}</h1>
-                    <p>{{ 'Enter your database connection details.' | trans }}</p>
+                    <h1 class="uk-margin-small-bottom">{{ 'Connect database' | trans }}</h1>
+                    <div class="uk-margin-large-bottom uk-text-muted">{{ 'Enter your database connection details.' | trans }}</div>
                     <div class="uk-alert uk-alert-danger uk-margin" v-show="message"><p>{{ message }}</p></div>
 
                     <form class="uk-form tm-form-horizontal uk-text-left" name="formDatabase" v-on="submit: stepDatabase">
@@ -95,7 +96,7 @@
                         </div>
 
                         <p class="uk-text-right">
-                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} <i class="uk-icon-arrow-right"></i></button>
+                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} </button>
                         </p>
 
                     </form>
@@ -106,8 +107,8 @@
             <div class="tm-slide uk-vertical-align uk-text-center" v-el="user" v-show="step == 'user'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
-                    <h1>{{ 'Create your account' | trans }}</h1>
-                    <p>{{ 'You will be the site administrator.' | trans }}</p>
+                    <h1 class="uk-margin-small-bottom">{{ 'Create your account' | trans }}</h1>
+                    <div class="uk-margin-large-bottom uk-text-muted">{{ 'You will be the site administrator.' | trans }}</div>
 
                     <form class="uk-form tm-form-horizontal uk-text-left" name="formUser" v-on="valid: stepUser">
 
@@ -139,7 +140,7 @@
                         </div>
 
                         <p class="uk-text-right">
-                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} <i class="uk-icon-arrow-right"></i></button>
+                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} </button>
                         </p>
 
                     </form>
@@ -150,8 +151,8 @@
             <div class="tm-slide uk-vertical-align uk-text-center" v-el="site" v-show="step == 'site'">
                 <div class="uk-panel uk-panel-box tm-panel uk-vertical-align-middle">
 
-                    <h1>{{ 'Setup your site' | trans }}</h1>
-                    <p>{{ 'Enter your website details.' | trans }}</p>
+                    <h1 class="uk-margin-small-bottom">{{ 'Setup your site' | trans }}</h1>
+                    <div class="uk-margin-large-bottom uk-text-muted">{{ 'Enter your website details.' | trans }}</div>
 
                     <form class="uk-form tm-form-horizontal uk-text-left" name="formSite" v-on="valid: stepSite">
 
@@ -171,7 +172,7 @@
                         </div>
 
                         <p class="uk-text-right">
-                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} <i class="uk-icon-arrow-right"></i></button>
+                            <button class="uk-button uk-button-primary" type="submit">{{ 'Next' | trans }} </button>
                         </p>
 
                     </form>
