@@ -3,8 +3,8 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Site\Entity\Node;
-use Pagekit\User\Entity\Role;
+use Pagekit\Site\Model\Node;
+use Pagekit\User\Model\Role;
 use Pagekit\Widget\Model\Widget;
 
 /**

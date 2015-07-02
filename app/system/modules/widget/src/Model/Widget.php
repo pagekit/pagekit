@@ -3,8 +3,8 @@
 namespace Pagekit\Widget\Model;
 
 use Pagekit\Application as App;
-use Pagekit\System\Entity\DataTrait;
-use Pagekit\User\Entity\AccessTrait;
+use Pagekit\System\Model\DataTrait;
+use Pagekit\User\Model\AccessTrait;
 
 /**
  * @Entity(tableClass="@system_widget", eventPrefix="system.widget")

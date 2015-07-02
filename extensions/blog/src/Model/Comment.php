@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Blog\Entity;
+namespace Pagekit\Blog\Model;
 
-use Pagekit\Comment\Entity\Comment as BaseComment;
+use Pagekit\Comment\Model\Comment as BaseComment;
 
 /**
  * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")
@@ -27,7 +27,7 @@ class Comment extends BaseComment implements \JsonSerializable
     /** @BelongsTo(targetEntity="Post", keyFrom="post_id") */
     protected $post;
 
-    /** @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id") */
+    /** @BelongsTo(targetEntity="Pagekit\User\Model\User", keyFrom="user_id") */
     protected $user;
 
     public function getPostId()

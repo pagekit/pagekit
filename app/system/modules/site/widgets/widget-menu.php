@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Model\Node;
 
 return [
 

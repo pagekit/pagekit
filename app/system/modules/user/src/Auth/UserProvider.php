@@ -5,7 +5,7 @@ namespace Pagekit\User\Auth;
 use Pagekit\Auth\Encoder\PasswordEncoderInterface;
 use Pagekit\Auth\UserInterface;
 use Pagekit\Auth\UserProviderInterface;
-use Pagekit\User\Entity\User;
+use Pagekit\User\Model\User;
 
 class UserProvider implements UserProviderInterface
 {

@@ -4,8 +4,8 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
-use Pagekit\User\Entity\User;
 use Pagekit\User\Event\ProfileSaveEvent;
+use Pagekit\User\Model\User;
 
 class ProfileController
 {

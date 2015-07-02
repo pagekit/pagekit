@@ -5,8 +5,8 @@ namespace Pagekit\User\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
 use Pagekit\Module\Module;
-use Pagekit\User\Entity\Role;
-use Pagekit\User\Entity\User;
+use Pagekit\User\Model\Role;
+use Pagekit\User\Model\User;
 
 class RegistrationController
 {

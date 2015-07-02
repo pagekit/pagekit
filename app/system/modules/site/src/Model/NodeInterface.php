@@ -2,7 +2,7 @@
 
 namespace Pagekit\Site\Model;
 
-use Pagekit\System\Entity\NodeInterface as BaseNodeInterface;
+use Pagekit\System\Model\NodeInterface as BaseNodeInterface;
 
 interface NodeInterface extends BaseNodeInterface
 {

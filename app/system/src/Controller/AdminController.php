@@ -5,7 +5,7 @@ namespace Pagekit\System\Controller;
 use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\RememberMe;
-use Pagekit\User\Entity\User;
+use Pagekit\User\Model\User;
 
 class AdminController
 {

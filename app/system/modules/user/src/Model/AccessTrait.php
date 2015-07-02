@@ -1,9 +1,6 @@
 <?php
 
-namespace Pagekit\User\Entity;
-
-use Pagekit\User\Model\RoleInterface;
-use Pagekit\User\Model\UserInterface;
+namespace Pagekit\User\Model;
 
 trait AccessTrait
 {

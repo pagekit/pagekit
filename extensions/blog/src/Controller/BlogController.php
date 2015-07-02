@@ -3,9 +3,9 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\Entity\Comment;
-use Pagekit\Blog\Entity\Post;
-use Pagekit\User\Entity\Role;
+use Pagekit\Blog\Model\Comment;
+use Pagekit\Blog\Model\Post;
+use Pagekit\User\Model\Role;
 
 /**
  * @Access(admin=true)

@@ -3,7 +3,7 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\Entity\Post;
+use Pagekit\Blog\Model\Post;
 use Pagekit\Intl\Intl;
 
 /**

@@ -4,8 +4,8 @@ namespace Pagekit\Page;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Page\Entity\Page;
-use Pagekit\Site\Entity\Node;
+use Pagekit\Page\Model\Page;
+use Pagekit\Site\Model\Node;
 
 class PageModule extends Module
 {

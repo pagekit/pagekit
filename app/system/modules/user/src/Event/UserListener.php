@@ -5,7 +5,7 @@ namespace Pagekit\User\Event;
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\User\Entity\User;
+use Pagekit\User\Model\User;
 
 class UserListener implements EventSubscriberInterface
 {

@@ -3,8 +3,8 @@
 namespace Pagekit\Blog\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Blog\Entity\Comment;
-use Pagekit\Blog\Entity\Post;
+use Pagekit\Blog\Model\Comment;
+use Pagekit\Blog\Model\Post;
 
 /**
  * @Route("comment", name="comment")

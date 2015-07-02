@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Page\Entity;
+namespace Pagekit\Page\Model;
 
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Entity\DataTrait;
+use Pagekit\System\Model\DataTrait;
 
 /**
  * @Entity(tableClass="@system_page", eventPrefix="page.page")

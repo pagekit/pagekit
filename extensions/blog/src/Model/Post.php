@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Blog\Entity;
+namespace Pagekit\Blog\Model;
 
 use Pagekit\Application as App;
 use Pagekit\Comment\CommentsTrait;
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Entity\DataTrait;
-use Pagekit\User\Entity\AccessTrait;
+use Pagekit\System\Model\DataTrait;
+use Pagekit\User\Model\AccessTrait;
 use Pagekit\User\Model\User;
 
 /**
@@ -65,7 +65,7 @@ class Post implements \JsonSerializable
     protected $data;
 
     /**
-     * @BelongsTo(targetEntity="Pagekit\User\Entity\User", keyFrom="user_id")
+     * @BelongsTo(targetEntity="Pagekit\User\Model\User", keyFrom="user_id")
      */
     protected $user;
 

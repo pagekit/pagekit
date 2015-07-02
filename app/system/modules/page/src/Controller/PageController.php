@@ -3,7 +3,7 @@
 namespace Pagekit\Page\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Page\Entity\Page;
+use Pagekit\Page\Model\Page;
 
 /**
  * @Access("site: manage pages")

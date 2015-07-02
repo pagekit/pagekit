@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Entity;
+namespace Pagekit\System\Model;
 
 use Pagekit\Util\Arr;
 

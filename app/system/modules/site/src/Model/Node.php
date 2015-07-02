@@ -1,19 +1,17 @@
 <?php
 
-namespace Pagekit\Site\Entity;
+namespace Pagekit\Site\Model;
 
-use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\Site\Model\NodeInterface;
-use Pagekit\System\Entity\DataTrait;
-use Pagekit\System\Entity\NodeTrait;
-use Pagekit\User\Entity\AccessTrait;
+use Pagekit\System\Model\DataTrait;
+use Pagekit\System\Model\NodeTrait;
+use Pagekit\User\Model\AccessTrait;
 
 /**
  * @Entity(tableClass="@system_node", eventPrefix="site.node")
  */
 class Node implements NodeInterface, \JsonSerializable
 {
-    use AccessTrait, DataTrait, ModelTrait, NodeTrait;
+    use AccessTrait, DataTrait, NodeModelTrait, NodeTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -209,25 +207,5 @@ class Node implements NodeInterface, \JsonSerializable
         $node = $this->toJson();
         $node['frontpage'] = isset($this->frontpage) ? $this->frontpage : false;
         return $node;
-    }
-
-    /**
-     * Sets parent_id of orphaned nodes to zero.
-     *
-     * @return int
-     */
-    public static function fixOrphanedNodes()
-    {
-        if ($orphaned = self::getConnection()
-            ->createQueryBuilder()
-            ->from('@system_node n')
-            ->leftJoin('@system_node c', 'c.id = n.parent_id AND c.menu = n.menu')
-            ->where(['n.parent_id <> 0', 'c.id IS NULL'])
-            ->execute('n.id')->fetchAll(\PDO::FETCH_COLUMN)
-        ) {
-            Node::query()
-                ->whereIn('id', $orphaned)
-                ->update(['parent_id' => 0]);
-        }
     }
 }

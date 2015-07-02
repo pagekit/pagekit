@@ -2,7 +2,7 @@
 
 namespace Pagekit\User\Event;
 
-use Pagekit\System\Entity\DataTrait;
+use Pagekit\System\Model\DataTrait;
 use Pagekit\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 

@@ -4,7 +4,7 @@ namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Kernel\Exception\NotFoundException;
-use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Model\Node;
 
 /**
  * @Access("site: manage site")

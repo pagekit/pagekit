@@ -2,7 +2,7 @@
 
 namespace Pagekit\Blog\Event;
 
-use Pagekit\Blog\Entity\Post;
+use Pagekit\Blog\Model\Post;
 use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Event\EventSubscriberInterface;
 

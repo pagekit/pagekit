@@ -2,26 +2,25 @@
 
 namespace Pagekit\User\Model;
 
-class Role implements RoleInterface
+use Pagekit\Database\ORM\ModelTrait;
+
+/**
+ * @Entity(tableClass="@system_role", eventPrefix="user.role")
+ */
+class Role implements RoleInterface, \JsonSerializable
 {
-    /**
-     * @var string
-     */
+    use ModelTrait;
+
+    /** @Column(type="integer") @Id */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @Column(type="string") */
     protected $name;
 
-    /**
-     * @var int
-     */
+    /** @Column(type="integer") */
     protected $priority = 0;
 
-    /**
-     * @var string[]
-     */
+    /** @Column(type="simple_array") */
     protected $permissions = [];
 
     /**
@@ -144,7 +143,35 @@ class Role implements RoleInterface
         return $this->id == self::ROLE_ADMINISTRATOR;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString() {
         return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        $role = $this->toJson();
+
+        $role['isLocked'] = $this->isLocked();
+        $role['isAnonymous'] = $this->isAnonymous();
+        $role['isAuthenticated'] = $this->isAuthenticated();
+        $role['isAdministrator'] = $this->isAdministrator();
+
+        return $role;
+    }
+
+    /**
+     * @PreSave
+     */
+    public function preSave()
+    {
+        if (!$this->id) {
+            $this->setPriority(self::getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace Pagekit\Site\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Model\Node;
 
 class NodesListener implements EventSubscriberInterface
 {

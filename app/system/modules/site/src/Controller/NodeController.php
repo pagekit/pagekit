@@ -3,7 +3,7 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Model\Node;
 
 /**
  * @Access("site: manage site")

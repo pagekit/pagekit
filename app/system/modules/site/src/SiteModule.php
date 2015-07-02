@@ -4,7 +4,7 @@ namespace Pagekit\Site;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\Site\Entity\Node;
+use Pagekit\Site\Model\Node;
 
 class SiteModule extends Module
 {
