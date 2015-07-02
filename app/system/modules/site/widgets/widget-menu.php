@@ -31,14 +31,20 @@ return [
         }
 
         $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
-        $nodes[0]   = new Node();
-        $path       = $app['node']->getPath();
-        $user       = $app['user'];
-        $startLevel = (int) $widget->get('start_level', 1) - 1;
-        $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
-        $rootPath   = $path ? implode('/', array_slice(explode('/', $path), 0, $startLevel + 1)) : '';
 
+        $nodes[0]   = new Node();
         $nodes[0]->setParentId(null);
+
+        $user       = $app['user'];
+        
+        $startLevel = (int) $widget->get('start_level', 1);
+        $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
+
+        $path       = $app['node']->getPath();
+        $segments   = explode('/', $path);
+        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
+
+
         foreach ($nodes as $node) {
 
             $depth  = substr_count($node->getPath(), '/');
@@ -46,21 +52,19 @@ return [
 
             $node->set('active', !$node->getPath() || 0 === strpos($path, $node->getPath()));
 
-            if (!$parent
-                || $depth > $maxDepth
+            if ($depth >= $maxDepth
                 || !$node->hasAccess($user)
                 || !($widget->get('mode') == 'all'
                     || $node->get('active')
                     || $rootPath && 0 === strpos($node->getPath(), $rootPath)
-                    || $depth - 1 == $startLevel)
+                    || $depth == $startLevel)
             ) {
                 continue;
             }
 
             $node->setParent($parent);
-            $parent->set('parent', true);
 
-            if ($node->get('active') && $depth == $startLevel) {
+            if ($node->get('active') && $depth == $startLevel - 1) {
                 $root = $node;
             }
 

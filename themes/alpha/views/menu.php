@@ -4,7 +4,7 @@
 
     <?php foreach ($root->getChildren() as $node) : ?>
 
-        <li class="<?= $node->get('parent') ? 'uk-parent' : '' ?><?= $node->get('active') ? ' uk-active' : '' ?>">
+        <li class="<?= $node->hasChildren() ? 'uk-parent' : '' ?><?= $node->get('active') ? ' uk-active' : '' ?>">
             <a href="<?= $view->url($node->frontpage ? '/' : $node->getPath()) ?>"><?= $node->getTitle() ?></a>
 
             <?php if ($node->hasChildren()) : ?>
