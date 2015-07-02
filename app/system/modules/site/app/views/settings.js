@@ -2,6 +2,10 @@ module.exports = {
 
     data: window.$data,
 
+    ready: function() {
+        UIkit.tab(this.$$.tab, {connect: '#settings-panels'});
+    },
+
     methods: {
 
         save: function() {
