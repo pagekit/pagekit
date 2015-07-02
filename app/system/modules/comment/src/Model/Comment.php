@@ -1,33 +1,32 @@
 <?php
 
 namespace Pagekit\Comment\Model;
+use Pagekit\Database\ORM\ModelTrait;
 
+/**
+ * @MappedSuperclass
+ */
 abstract class Comment implements CommentInterface
 {
-    /**
-     * @var mixed
-     */
+    use ModelTrait;
+
+    /** @Column(type="integer") @Id */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @Column(type="text") */
     protected $content;
 
-    /**
-     * @var string
-     */
+    /** @Column(type="string") */
     protected $author;
 
-    /**
-     * @var \DateTime
-     */
+    /** @Column(type="datetime") */
     protected $created;
 
-    /**
-     * @var integer
-     */
+    /** @Column(type="smallint") */
     protected $status = 0;
+
+    /** @Column(type="integer") */
+    protected $parent_id;
 
     /**
      * Should be mapped by the end developer.
@@ -35,6 +34,14 @@ abstract class Comment implements CommentInterface
      * @var CommentInterface
      */
     protected $parent;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime;
+    }
 
     /**
      * {@inheritDoc}
@@ -66,6 +73,7 @@ abstract class Comment implements CommentInterface
     public function setParent(CommentInterface $parent)
     {
         $this->parent = $parent;
+        $this->setParentId($parent->getId());
     }
 
     /**
@@ -131,6 +139,30 @@ abstract class Comment implements CommentInterface
     public function setStatus($status)
     {
         $this->status = (int) $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * @param mixed $parentId
+     */
+    public function setParentId($parentId)
+    {
+        $this->parent_id = $parentId;
+    }
+
+    /**
+     * @PreDelete
+     */
+    public function preDelete()
+    {
+        self::where(['parent_id = :old_parent'], [':old_parent' => $this->id])->update(['parent_id' => $this->parent_id]);
     }
 
     public function __toString()

@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Database\Event\EntityEvent;
-
 return [
 
     'name' => 'system/page',
@@ -59,7 +57,7 @@ return [
 
         },
 
-        'site.node.preSave' => function(EntityEvent $event) use ($app) {
+        'site.node.preSave' => function($event) use ($app) {
 
             $node = $event->getEntity();
             $data = $app['request']->get('page');
@@ -75,7 +73,7 @@ return [
 
         },
 
-        'site.node.postDelete' => function(EntityEvent $event) use ($app) {
+        'site.node.postDelete' => function($event) use ($app) {
 
             $node = $event->getEntity();
 

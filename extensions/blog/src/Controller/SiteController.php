@@ -5,7 +5,6 @@ namespace Pagekit\Blog\Controller;
 use Pagekit\Application as App;
 use Pagekit\Blog\BlogExtension;
 use Pagekit\Blog\Model\Post;
-use Pagekit\Database\Event\EntityEvent;
 
 class SiteController
 {
@@ -28,7 +27,7 @@ class SiteController
      */
     public function indexAction($page = 1)
     {
-        App::on('blog.post.postLoad', function (EntityEvent $event) {
+        App::on('blog.post.postLoad', function ($event) {
             $post = $event->getEntity();
             $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
         });
