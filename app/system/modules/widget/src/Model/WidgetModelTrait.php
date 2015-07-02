@@ -22,7 +22,7 @@ trait WidgetModelTrait
             $node    = App::node()->getId();
             $module  = App::widget();
 
-            foreach ($module->getPositions() as $name => $pos) {
+            foreach ($module->getPositions() as $pos) {
 
                 foreach ($pos['assigned'] as $id) {
 
@@ -38,7 +38,7 @@ trait WidgetModelTrait
 
                     $widget->set('result', $result);
 
-                    $widgets[$name][] = $widget;
+                    $widgets[$pos['name']][] = $widget;
 
                 }
 
