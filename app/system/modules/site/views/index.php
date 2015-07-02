@@ -132,7 +132,7 @@
                 <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!node.frontpage && node.status" v-on="click: setFrontpage(node)"></a>
+                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!node.frontpage && node.status" v-on="click: setFrontpage(node)"></a>
                 <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="node.frontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ getType(node).label }}</div>
