@@ -22,7 +22,7 @@
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
                     <li class="uk-visible-hover" v-class="uk-active: active(pos)" v-repeat="pos: config.positions">
-                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-badge uk-float-right" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
+                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right uk-hidden" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
                     </li>
                 </ul>
 
