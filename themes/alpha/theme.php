@@ -98,7 +98,7 @@ return [
     'events' => [
 
         'request' => function () use ($app) {
-            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widgets/theme.js', '~widgets');
+            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widget-theme.js', '~widgets');
         }
 
     ]

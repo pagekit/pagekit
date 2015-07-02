@@ -2,7 +2,7 @@ module.exports = [
 
     {
         entry: {
-            "widgets/theme": "./app/components/widgets/theme.vue"
+            "widget-theme": "./app/components/widget-theme.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"
