@@ -18,11 +18,14 @@ class Widget implements WidgetInterface
     /** @Column(type="integer") @Id */
     protected $id;
 
+    /** @Column */
+    protected $title = '';
+
     /** @Column(type="string") */
     protected $type;
 
-    /** @Column */
-    protected $title = '';
+    /** @Column(type="integer") */
+    protected $status = 0;
 
     /** @Column(name="nodes", type="simple_array") */
     protected $nodes = [];
@@ -40,6 +43,16 @@ class Widget implements WidgetInterface
         $this->id = $id;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
     public function getType()
     {
         return $this->type;
@@ -50,14 +63,14 @@ class Widget implements WidgetInterface
         $this->type = $type;
     }
 
-    public function getTitle()
+    public function getStatus()
     {
-        return $this->title;
+        return $this->status;
     }
 
-    public function setTitle($title)
+    public function setStatus($status)
     {
-        $this->title = $title;
+        $this->status = $status;
     }
 
     public function getNodes()

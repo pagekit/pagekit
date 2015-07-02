@@ -100,10 +100,11 @@ return [
         if ($util->tableExists('@system_widget') === false) {
             $util->createTable('@system_widget', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('roles', 'simple_array', ['notnull' => false]);
-                $table->addColumn('type', 'string', ['length' => 255]);
                 $table->addColumn('title', 'string', ['length' => 255]);
+                $table->addColumn('type', 'string', ['length' => 255]);
+                $table->addColumn('status', 'smallint');
                 $table->addColumn('nodes', 'simple_array', ['notnull' => false]);
+                $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
             });

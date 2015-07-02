@@ -72,6 +72,7 @@
                     <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
 
@@ -85,6 +86,11 @@
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
+                                </div>
+                                <div class="pk-table-width-100 uk-text-center">
+                                    <td class="uk-text-center">
+                                        <a v-class="pk-icon-circle-danger: !widget.status, pk-icon-circle-success: widget.status" v-on="click: toggleStatus(widget)"></a>
+                                    </td>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.name }}</div>
                             </div>

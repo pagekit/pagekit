@@ -58,6 +58,15 @@ module.exports = {
             this.assign(position.name, position.assigned.concat(ids)).success(function () {
                 UIkit.notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
             });
+        },
+
+        toggleStatus: function (widget) {
+
+            widget.status = widget.status ? 0 : 1;
+
+            this.resource.save({id: widget.id}, {widget: widget}, function () {
+                UIkit.notify(this.$trans('Widget saved.'));
+            });
         }
 
     },
