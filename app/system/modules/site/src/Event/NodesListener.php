@@ -27,7 +27,7 @@ class NodesListener implements EventSubscriberInterface
 
             $route = null;
             if (isset($type['alias'])) {
-                $route = App::routes()->alias($type['path'], $node->getLink($type['alias']), $type['defaults']);
+                $route = App::routes()->alias($type['path'], $this->getLink($node, $type['alias']), $type['defaults']);
             } elseif (isset($type['controller'])) {
                 $route = App::routes()->add($type);
             }
@@ -74,6 +74,45 @@ class NodesListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Gets the node's link.
+     *
+     * @param  string $url
+     * @return string
+     */
+    public function getLink(Node $node, $url = '')
+    {
+        return $this->parseQuery($node->get('url', $url), $node->get('variables', []));
+    }
+
+    /**
+     * Parses query parameters into a URL.
+     *
+     * @param  string $url
+     * @param  array  $parameters
+     * @return string
+     */
+    protected function parseQuery($url, $parameters = [])
+    {
+        if ($query = substr(strstr($url, '?'), 1)) {
+            parse_str($query, $params);
+            $url        = strstr($url, '?', true);
+            $parameters = array_replace($parameters, $params);
+        }
+
+        if ($query = http_build_query($parameters, '', '&')) {
+            $url .= '?'.$query;
+        }
+
+        return $url;
+    }
+
+    /**
+     * Slugifys a string.
+     *
+     * @param  string $slug
+     * @return string
+     */
     protected function slugify($slug)
     {
         $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);

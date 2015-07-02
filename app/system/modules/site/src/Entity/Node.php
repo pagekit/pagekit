@@ -135,6 +135,11 @@ class Node implements NodeInterface, \JsonSerializable
         $this->menu = $menu;
     }
 
+    public function getRoutePath()
+    {
+        return isset($this->frontpage) && $this->frontpage ? '/' : $this->getPath();
+    }
+
     /**
      * @PreSave
      */
@@ -197,17 +202,6 @@ class Node implements NodeInterface, \JsonSerializable
     }
 
     /**
-     * Gets the node's link.
-     *
-     * @param  string $url
-     * @return string
-     */
-    public function getLink($url = '')
-    {
-        return $this->parseQuery($this->get('url', $url), $this->get('variables', []));
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
@@ -215,28 +209,6 @@ class Node implements NodeInterface, \JsonSerializable
         $node = $this->toJson();
         $node['frontpage'] = isset($this->frontpage) ? $this->frontpage : false;
         return $node;
-    }
-
-    /**
-     * Parses query parameters into a URL.
-     *
-     * @param  string $url
-     * @param  array  $parameters
-     * @return string
-     */
-    protected function parseQuery($url, $parameters = [])
-    {
-        if ($query = substr(strstr($url, '?'), 1)) {
-            parse_str($query, $params);
-            $url        = strstr($url, '?', true);
-            $parameters = array_replace($parameters, $params);
-        }
-
-        if ($query = http_build_query($parameters, '', '&')) {
-            $url .= '?'.$query;
-        }
-
-        return $url;
     }
 
     /**
