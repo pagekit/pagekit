@@ -1,4 +1,4 @@
-<?php $view->script('registration', 'system/user:app/site/registration.js', ['vue', 'uikit-form-password']) ?>
+<?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
 <form id="user-registration" class="uk-article uk-form uk-form-stacked" name="form" v-on="valid: submit">
 

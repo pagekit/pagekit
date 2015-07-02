@@ -1,30 +1,30 @@
-jQuery(function ($) {
+module.exports = {
 
-    var vm = new Vue({
+    data: {
+        user: {},
+        error: null
+    },
 
-        el: '#user-registration',
+    methods: {
 
-        data: {
-            user: {},
-            error: null
-        },
+        submit: function (e) {
+            e.preventDefault();
 
-        methods: {
+            var self = this;
 
-            submit: function (e) {
-                e.preventDefault();
-
-                var self = this;
-
-                this.$http.post('user/registration/register', {user: this.user}, function (data) {
-                    window.location.replace(data.redirect);
-                }).error(function (error) {
-                    self.error = error;
-                });
-            }
-
+            this.$http.post('user/registration/register', {user: this.user}, function (data) {
+                window.location.replace(data.redirect);
+            }).error(function (error) {
+                self.error = error;
+            });
         }
 
-    });
+    }
+
+};
+
+$(function () {
+
+    new Vue(module.exports).$mount('#user-registration');
 
 });

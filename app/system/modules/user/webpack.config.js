@@ -7,6 +7,7 @@ module.exports = [
             "permissions": "./app/views/admin/permissions",
             "roles": "./app/views/admin/roles",
             "settings": "./app/views/admin/settings",
+            "registration": "./app/views/site/registration",
             "widget-login": "./app/components/widget-login.vue",
             "widget-user": "./app/components/widget-user.vue"
         },
