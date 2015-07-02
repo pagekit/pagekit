@@ -11,11 +11,9 @@ use Pagekit\Widget\Model\WidgetInterface;
 class WidgetModule extends Module
 {
     protected $types = [];
+    protected $positions = [];
     protected $widgets;
 
-    /**
-     * {@inheritdoc}
-     */
     public function main(App $app)
     {
         // $this->config->merge(['widget' => ['defaults' => $app['theme']->config('widget.defaults', [])]]);
@@ -32,17 +30,19 @@ class WidgetModule extends Module
             return $module;
         });
 
-        $app['positions'] = function($app) {
+        $app['module']->addLoader(function ($name, $module) use ($app) {
 
-            $positions = new PositionManager($this->config('widget.positions'));
-
-            foreach ((array) $app['theme']->get('positions') as $name => $position) {
-                list($label, $description) = array_merge((array) $position, ['']);
-                $positions->register($name, $label, $description);
+            if (isset($module['positions'])) {
+                foreach ($module['positions'] as $name => $position) {
+                    list($label, $description) = array_merge((array) $position, ['']);
+                    $this->registerPosition($name, $label, $description);
+                }
             }
 
-            return $positions;
-        };
+            return $module;
+        });
+
+        $app['widget'] = $this;
     }
 
     /**
@@ -74,6 +74,76 @@ class WidgetModule extends Module
     }
 
     /**
+     * Assigns widget id(s) to a position.
+     *
+     * @param  string        $position
+     * @param  array|integer $id
+     * @return integer[]
+     */
+    public function assign($position, $id)
+    {
+        if (!is_array($id) && $position === $this->findPosition($id)) {
+            return $this->positions[$position]['assigned'];
+        }
+
+        foreach ($this->positions as $pos) {
+            $pos['assigned'] = array_diff($pos['assigned'], (array) $id);
+        }
+
+        if (!$position) {
+            return [];
+        }
+
+        if (is_array($id)) {
+            $this->positions[$position]['assigned'] = array_unique($id);
+        } else {
+            $this->positions[$position]['assigned'][] = $id;
+        }
+
+        return $this->positions[$position]['assigned'];
+    }
+
+    /**
+     * Finds a position by widget id.
+     *
+     * @param  integer $id
+     * @return string
+     */
+    public function findPosition($id)
+    {
+        foreach ($this->positions as $name => $position) {
+            if (in_array($id, $position['assigned'])) {
+                return $name;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Registers a position.
+     *
+     * @param string $name
+     * @param string $label
+     * @param string $description
+     */
+    public function registerPosition($name, $label, $description = '')
+    {
+        $assigned = (array) $this->config('widget.positions.'.$name, []);
+        $this->positions[$name] = compact('name', 'label', 'description', 'assigned');
+    }
+
+    /**
+     * Gets the registered positions.
+     *
+     * @return array
+     */
+    public function getPositions()
+    {
+        return array_values($this->positions);
+    }
+
+    /**
      * Gets active widgets.
      *
      * @param  string $position
@@ -83,7 +153,7 @@ class WidgetModule extends Module
     {
         if ($this->widgets === null) {
 
-            foreach (App::positions()->getAssigned() as $name => $ids) {
+            foreach ($this->positions->getAssigned() as $name => $ids) {
 
                 $widgets = Widget::findAll();
                 $node    = App::node()->getId();
@@ -95,11 +165,12 @@ class WidgetModule extends Module
                         or !$widget->hasAccess(App::user())
                         or ($nodes = $widget->getNodes() and !in_array($node, $nodes))
                         or !$type = $this->getType($widget->getType())
+                        or !$result = $type->render($widget)
                     ) {
                         continue;
                     }
 
-                    $widget->set('result', $type->render($widget));
+                    $widget->set('result', $result);
 
                     $this->widgets[$name][] = $widget;
 

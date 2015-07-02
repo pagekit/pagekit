@@ -12,13 +12,6 @@ use Pagekit\Widget\Entity\Widget;
  */
 class WidgetController
 {
-    protected $widgets;
-
-    public function __construct()
-    {
-        $this->widgets = App::module('system/widget');
-    }
-
     public function indexAction()
     {
         return [
@@ -28,8 +21,8 @@ class WidgetController
             ],
             '$data' => [
                 'config' => [
-                    'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => App::positions()
+                    'types'     => App::widget()->getTypes(),
+                    'positions' => array_values(App::widget()->getPositions())
                 ]
             ]
         ];
@@ -59,8 +52,8 @@ class WidgetController
                     'menus'     => App::menus(),
                     'nodes'     => array_values(Node::query()->get()),
                     'roles'     => array_values(Role::findAll()),
-                    'types'     => array_values($this->widgets->getTypes()),
-                    'positions' => App::positions()
+                    'types'     => array_values(App::widget()->getTypes()),
+                    'positions' => App::widget()->getPositions()
                 ]
             ]
         ];

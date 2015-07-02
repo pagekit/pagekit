@@ -11,13 +11,6 @@ use Pagekit\Widget\Entity\Widget;
  */
 class WidgetApiController
 {
-    protected $widgets;
-
-    public function __construct()
-    {
-        $this->widgets = App::module('system/widget');
-    }
-
     /**
      * @Route("/", methods="GET")
      */
@@ -43,7 +36,8 @@ class WidgetApiController
      */
     public function configAction()
     {
-        return $this->widgets->config('widget.config', []) + ['defaults' => $this->widgets->config('widget.defaults')];
+        $module = App::module('system/widget');
+        return $module->config('widget.config', []) + ['defaults' => $module->config('widget.defaults')];
     }
 
     /**
@@ -51,11 +45,11 @@ class WidgetApiController
      */
     public function assignAction($position, $ids)
     {
-        $positions = App::positions();
+        $widgets = App::widget();
 
-        App::config('system/widget')->set('widget.positions.'.$position, $positions->assign($position, $ids));
+        App::config('system/widget')->set('widget.positions.'.$position, $widgets->assign($position, $ids));
 
-        return ['message' => 'success', 'positions' => $positions];
+        return ['message' => 'success', 'positions' => $widgets->getPositions()];
     }
 
     /**
