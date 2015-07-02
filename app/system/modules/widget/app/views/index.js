@@ -60,6 +60,20 @@ module.exports = {
             });
         },
 
+        status: function () {
+            var widgets = this.getSelected();
+
+            widgets.forEach(function (widget) {
+                widget.status = status;
+            });
+
+            this.resource.save({id: 'bulk'}, {widgets: widgets}, function () {
+                this.load();
+                this.$set('selected', []);
+                UIkit.notify('Widget(s) saved.');
+            });
+        },
+
         toggleStatus: function (widget) {
 
             widget.status = widget.status ? 0 : 1;
@@ -67,6 +81,12 @@ module.exports = {
             this.resource.save({id: widget.id}, {widget: widget}, function () {
                 UIkit.notify(this.$trans('Widget saved.'));
             });
+        },
+
+        getSelected: function () {
+            return this.widgets.filter(function (widget) {
+                return this.selected.indexOf(widget.id.toString()) !== -1;
+            }.bind(this));
         }
 
     },
@@ -97,7 +117,7 @@ module.exports = {
 
     components: {
 
-        'position': {
+        position: {
 
             inherit: true,
             replace: false,
@@ -117,7 +137,7 @@ module.exports = {
 
         },
 
-        'item': {
+        item: {
 
             inherit: true,
             replace: false,

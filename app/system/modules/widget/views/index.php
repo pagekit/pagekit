@@ -39,6 +39,7 @@
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
                             <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                            <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
                             <li data-uk-dropdown="{mode: 'click'}">
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
                                 <div class="uk-dropdown uk-dropdown-small">
@@ -78,7 +79,7 @@
 
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.assigned.length">{{ 'No widgets found.' | trans }}</h3>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position">
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" inline-template>
                         <li v-repeat="widget: pos.assigned | assigned" data-id="{{ widget.id }}">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form" v-component="item" inline-template>
