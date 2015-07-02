@@ -86,6 +86,16 @@ return [
         'maintenance' => [
             'enabled' => false,
             'msg' => ''
+        ],
+
+        'icons' => [
+            'favicon' => '',
+            'appicon' => ''
+        ],
+
+        'code' => [
+            'header' => '',
+            'footer' => ''
         ]
 
     ],

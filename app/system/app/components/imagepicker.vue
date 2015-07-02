@@ -18,7 +18,7 @@
 
             <div class="uk-panel-badge pk-panel-badge uk-hidden">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: (imageurl = '')" v-confirm="'Remove image?'"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Remove image?'"></a></li>
                 </ul>
             </div>
 
@@ -95,6 +95,11 @@
                 }
 
                 this.modal.hide();
+            },
+
+            remove: function() {
+                this.imageurl = '';
+                this.$parent.$set(this.src, this.imageurl);
             },
 
             resolveUrl: function(url) {

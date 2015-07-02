@@ -33,7 +33,7 @@ module.exports = {
             this.$set('status', 'loading');
 
             this.queryUpdates(this.packages, function (data) {
-                vm.$set('updates', data.packages.length ? data.packages : null);
+                vm.$set('updates', data.packages.length ? _.indexBy(data.packages, 'name') : null);
                 vm.$set('status', '');
             }).error(function () {
                 vm.$set('status', 'error');

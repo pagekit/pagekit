@@ -41,7 +41,7 @@
 
                 <div class="pk-panel-badge-bottom-right">
                     <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled">Customize</button>
-                    <button class="uk-button uk-button-success uk-button-small">{{ 'Update' | trans }}</button>
+                    <button class="uk-button uk-button-success uk-button-small" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
                 </div>
 
                 <div class="uk-panel-badge pk-panel-badge uk-hidden" v-if="!pkg.enabled">
