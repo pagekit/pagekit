@@ -52,6 +52,10 @@ class PositionManager implements \JsonSerializable
      */
     public function assign($position, $id)
     {
+        if (!is_array($id) && $position === $this->find($id)) {
+            return $this;
+        }
+
         foreach ($this->assigned as $pos => $ids) {
             $this->assigned[$pos] = array_diff($ids, (array) $id);
         }

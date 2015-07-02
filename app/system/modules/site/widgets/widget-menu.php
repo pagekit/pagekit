@@ -30,20 +30,16 @@ return [
             return '';
         }
 
-        $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
-
-        $nodes[0]   = new Node();
-        $nodes[0]->setParentId(null);
-
         $user       = $app['user'];
-        
         $startLevel = (int) $widget->get('start_level', 1);
         $maxDepth   = $startLevel + ($widget->get('depth') ?: PHP_INT_MAX);
-
         $path       = $app['node']->getPath();
         $segments   = explode('/', $path);
         $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
 
+        $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
+        $nodes[0]   = new Node();
+        $nodes[0]->setParentId(null);
 
         foreach ($nodes as $node) {
 
