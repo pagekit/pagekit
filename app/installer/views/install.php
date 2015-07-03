@@ -17,7 +17,6 @@
 
                     <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
                     <p>
-                        <h1 class="uk-heading-large">{{ 'Pagekit' | trans }}</h1>
                         <button class="uk-button" v-on="click: gotoStep('database')">{{ 'Begin' | trans }}</button>
                     </p>
 
@@ -156,16 +155,15 @@
 
                 </div>
 
-                <div class="uk-contrast uk-text-center" v-el="finish" v-show="step == 'finish'">
+                <div v-el="finish" v-show="step == 'finish'">
 
-                    <div v-show="status == 'install'">
+                    <div class="uk-text-center" v-show="status == 'install'">
                         <svg class="tm-loader" width="150px" height="150px" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                             <g><circle cx="0" cy="0" r="70" fill="none" stroke-width="2"/></g>
                         </svg>
                     </div>
 
-                    <div v-show="status == 'finished'">
-                        <h1>{{ 'Finished!' | trans }}</h1>
+                    <div class="uk-text-center" v-show="status == 'finished'">
                         <p>
                             <i class="uk-icon-check-circle uk-icon-large"></i>
                         </p>
@@ -174,13 +172,10 @@
                         </p>
                     </div>
 
-                    <div v-show="status == 'failed'">
+                    <div class="uk-panel uk-panel-box" v-show="status == 'failed'">
                         <h1>{{ 'Installation failed!' | trans }}</h1>
                         <div class="uk-alert uk-alert-danger">{{ message }}</div>
-                        <p>
-                            <i class="uk-icon-times-circle uk-icon-large"></i>
-                        </p>
-                        <p>
+                        <p class="uk-text-right">
                             <button type="button" class="uk-button uk-button-primary" v-on="click: stepInstall">{{ 'Retry' | trans }}</button>
                         </p>
                     </div>
