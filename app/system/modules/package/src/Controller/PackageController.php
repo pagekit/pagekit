@@ -179,6 +179,11 @@ class PackageController
             }
 
             $package = $this->loadPackage($path = "{$temp}/{$path}");
+            $name    = $package->getName();
+
+            if ($enabled = (bool) App::module($name)) {
+                $this->disableAction($name);
+            }
 
             if ($package->get('type') == 'extension') {
                 $this->installer->install($package, App::get('path.extensions'));
@@ -189,6 +194,10 @@ class PackageController
             }
 
             App::module('system/cache')->clearCache();
+
+            if ($enabled) {
+                $this->enableAction($name);
+            }
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
@@ -202,7 +211,7 @@ class PackageController
             App::abort(400, $error);
         }
 
-        return ['message' => __('Package "%name%" installed.', ['%name%' => $package->getName()])];
+        return ['message' => 'success', 'package' => App::package($name)];
     }
 
     /**

@@ -14,10 +14,7 @@ module.exports = {
         },
 
         queryPackage: function (pkg, success) {
-
-            var name = _.isObject(pkg) ? pkg.name : pkg;
-
-            return this.$http.jsonp(this.api.url + '/package/:name', {api_key: this.api.key, name: name}, success);
+            return this.$http.jsonp(this.api.url + '/package/:name', {api_key: this.api.key, name: _.isObject(pkg) ? pkg.name : pkg}, success);
         },
 
         enablePackage: function (pkg) {
@@ -39,9 +36,17 @@ module.exports = {
         },
 
         installPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/install',  {package: pkg.version}, function (data) {
-                if (packages && data.message) {
-                    packages.push(pkg);
+            return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
+                if (packages && data.package) {
+
+                    var index = _.findIndex(packages, 'name', data.package.name);
+
+                    if (-1 !== index) {
+                        packages.splice(index, 1, data.package);
+                    } else {
+                        packages.push(data.package);
+                    }
+
                 }
             });
         },

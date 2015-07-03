@@ -73,13 +73,10 @@
             };
         },
 
-        ready: function () {
-
-            var vm = this;
-
+        created: function () {
             this.query();
             this.queryUpdates(this.installed, function (data) {
-                vm.$set('updates', data.packages.length ? data.packages : null);
+                this.$set('updates', data.packages.length ? data.packages : null);
             });
         },
 

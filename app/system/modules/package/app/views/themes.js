@@ -27,16 +27,13 @@ module.exports = {
         },
 
         load: function () {
-
-            var vm = this;
-
             this.$set('status', 'loading');
 
             this.queryUpdates(this.packages, function (data) {
-                vm.$set('updates', data.packages.length ? _.indexBy(data.packages, 'name') : null);
-                vm.$set('status', '');
+                this.$set('updates', data.packages.length ? _.indexBy(data.packages, 'name') : null);
+                this.$set('status', '');
             }).error(function () {
-                vm.$set('status', 'error');
+                this.$set('status', 'error');
             });
         },
 
@@ -46,14 +43,21 @@ module.exports = {
         },
 
         enable: function (pkg) {
-            this.enablePackage(pkg).success(function (data) {
+            this.enablePackage(pkg).success(function () {
                 UIkit.notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
             }).error(this.error);
         },
 
         uninstall: function (pkg) {
-            this.uninstallPackage(pkg, this.packages).success(function (data) {
+            this.uninstallPackage(pkg, this.packages).success(function () {
                 UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
+            }).error(this.error);
+        },
+
+        update: function (pkg) {
+            this.installPackage(pkg, this.packages).success(function () {
+                UIkit.notify(this.$trans('"%title%" updated.', {title: pkg.title}));
+                this.load();
             }).error(this.error);
         },
 
@@ -74,7 +78,7 @@ module.exports = {
     components: {
 
         'package-details': require('../components/package-details.vue'),
-        'package-upload':  require('../components/package-upload.vue')
+        'package-upload': require('../components/package-upload.vue')
 
     }
 

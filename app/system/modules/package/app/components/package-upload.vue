@@ -9,11 +9,11 @@
     <div class="uk-modal" v-el="modal">
         <div class="uk-modal-dialog">
 
-            <details api="{{ api }}" package="{{ package }}"></details>
+            <package-details api="{{ api }}" package="{{ package }}"></package-details>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: install()">{{ 'Install' | trans }}</button>
+                <button class="uk-button uk-button-link" v-on="click: install">{{ 'Install' | trans }}</button>
             </div>
 
         </div>
@@ -38,17 +38,18 @@
 
         ready: function () {
 
-            var type = this.type, settings = {
-                action: this.$url('admin/system/package/upload'),
-                type: 'json',
-                param: 'file',
-                before: function (options) {
-                    $.extend(options.params, {_csrf: $pagekit.csrf, type: type});
-                },
-                loadstart: this.onStart,
-                progress: this.onProgress,
-                allcomplete: this.onComplete
-            };
+            var type = this.type,
+                settings = {
+                    action: this.$url('admin/system/package/upload'),
+                    type: 'json',
+                    param: 'file',
+                    before: function (options) {
+                        _.merge(options.params, {_csrf: $pagekit.csrf, type: type});
+                    },
+                    loadstart: this.onStart,
+                    progress: this.onProgress,
+                    allcomplete: this.onComplete
+                };
 
             UIkit.uploadSelect(this.$$.input, settings);
 
@@ -67,12 +68,12 @@
 
             onComplete: function (data) {
 
-                var self = this;
+                var vm = this;
 
                 this.progress = '100%';
 
                 setTimeout(function () {
-                    self.progress = '';
+                    vm.progress = '';
                 }, 250);
 
                 if (data.error) {
@@ -86,22 +87,21 @@
                 this.modal.show();
             },
 
-            install: function () {
+            install: function (e) {
 
-                var vm = this;
+                e.preventDefault();
 
-                vm.modal.hide();
+                this.modal.hide();
 
-                this.$http.post('admin/system/package/install', { path: this.upload.install }, function (data) {
+                this.$http.post('admin/system/package/install', {path: this.upload.install}, function () {
 
-                    UIkit.notify(data.message, 'success');
+                    UIkit.notify(this.$trans('"%title%" installed.', {title: this.package.title}));
 
                     setTimeout(function () {
                         location.reload();
                     }, 600);
 
                 }).error(function (msg) {
-
                     UIkit.notify(msg, 'danger');
                 });
             }
