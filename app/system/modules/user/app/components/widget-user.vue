@@ -27,6 +27,18 @@
         </div>
 
         <div class="uk-form-row">
+            <span class="uk-form-label">{{ 'Total Users' | trans }}</span>
+            <div class="uk-form-controls uk-form-controls-text">
+                <p class="uk-form-controls-condensed">
+                    <label><input type="radio" value="1" v-model="widget.total"> {{ 'Show' | trans }}</label>
+                </p>
+                <p class="uk-form-controls-condensed">
+                    <label><input type="radio" value="" v-model="widget.total"> {{ 'Hide' | trans }}</label>
+                </p>
+            </div>
+        </div>
+
+        <div class="uk-form-row">
             <label class="uk-form-label" for="form-user-number">{{ 'Number of Users' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-user-number" class="uk-width-1-1" v-model="widget.count" number>
@@ -52,14 +64,15 @@
 
     </form>
 
-    <h3 class="uk-panel-title" v-if="widget.show == 'registered'">
-        {{ '{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% of %userscount% registered users' | transChoice users.length {users:users.length,userscount:userscount} }}
-    </h3>
-    <h3 class="uk-panel-title" v-if="widget.show != 'registered'">
-        {{ '{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% of %userscount% users logged in' | transChoice users.length {users:users.length,userscount:userscount} }}
-    </h3>
+    <div class="pk-text-large" v-if="widget.total">{{ userscount }}</div>
 
-    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
+    <h3 class="uk-panel-title" v-if="widget.show == 'registered' && widget.total">{{ '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' | transChoice users.length}}</h3>
+    <h3 class="uk-panel-title" v-if="widget.show != 'registered' && widget.total">{{ '{0} Logged in Users|{1} Logged in User|]1,Inf[ Logged in Users' | transChoice users.length}}</h3>
+
+    <h3 class="uk-panel-title" v-if="widget.show == 'registered' && !widget.total">{{ 'Latest registered Users' | trans}}</h3>
+    <h3 class="uk-panel-title" v-if="widget.show != 'registered' && !widget.total">{{ 'Latest logged in Users' | trans}}</h3>
+
+    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-5" data-uk-grid-margin>
         <li v-repeat="user: users">
             <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.username }}">
                 <img class="uk-border-rounded" width="200" height="200" alt="{{ user.name }}" v-gravatar="user.email">
@@ -93,7 +106,8 @@
             defaults: {
                 show: 'login',
                 display: 'thumbnail',
-                count: 5
+                total: true,
+                count: 4
             }
 
         },
