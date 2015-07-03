@@ -12,7 +12,7 @@
             <details api="{{ api }}" package="{{ package }}"></details>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
                 <button class="uk-button uk-button-link" v-on="click: install()">{{ 'Install' | trans }}</button>
             </div>
 

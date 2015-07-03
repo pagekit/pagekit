@@ -64,7 +64,7 @@
     </div>
 
     <div id="modal-role" class="uk-modal">
-        <form class="uk-modal-dialog uk-form-stacked" v-on="submit: save">
+        <form class="uk-modal-dialog uk-form-stacked" name="form" v-on="valid: save">
 
             <div class="uk-modal-header">
                 <h2>{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>
@@ -73,12 +73,13 @@
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" v-model="role.name">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" name="name" v-model="role.name" v-valid="required">
+                    <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
                 <button class="uk-button uk-button-link" type="submit">{{ 'Save' | trans }}</button>
             </div>
 

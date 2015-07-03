@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-link uk-modal-close" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                        <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
                         <button class="uk-button uk-button-link" v-attr="disabled: menuForm.invalid || !edit.label || !edit.id">{{ 'Save' | trans }}</button>
                     </div>
 
