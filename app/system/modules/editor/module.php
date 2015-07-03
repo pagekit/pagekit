@@ -19,7 +19,7 @@ return [
     'events' => [
 
         'request' => function () use ($app) {
-            $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/components/editor.js', ['uikit-htmleditor', 'finder']);
+            $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder']);
         }
 
     ]
