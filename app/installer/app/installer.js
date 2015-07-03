@@ -8,7 +8,7 @@ var installer = {
             config: {},
             option: {},
             user: {}
-        }
+        };
     },
 
     ready: function () {
@@ -81,17 +81,27 @@ var installer = {
 
             this.resource.post({ action: 'install' }, { config: this.config, option: this.option, user: this.user }, function (data) {
 
-                if (!Vue.util.isPlainObject(data)) {
-                    data = { message: 'Whoops, something went wrong' };
-                }
+                setTimeout(function(){
 
-                if (data.status == 'success') {
-                    this.$set('status', 'finished');
-                } else {
-                    this.$set('status', 'failed');
-                    this.$set('message', data.message);
-                }
+                    if (!Vue.util.isPlainObject(data)) {
+                        data = { message: 'Whoops, something went wrong' };
+                    }
 
+                    if (data.status == 'success') {
+                        this.$set('status', 'finished');
+
+                        // redirect to login after 3s
+                        setTimeout(function(){
+                            location.href = Vue.url.static('admin');
+                        }, 3000);
+
+                    } else {
+                        this.$set('status', 'failed');
+                        this.$set('message', data.message);
+                    }
+
+
+                }.bind(this), 2000);
             });
         }
 
