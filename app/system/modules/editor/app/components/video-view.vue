@@ -13,10 +13,11 @@
 
         props: ['src'],
 
-        ready: function () {
-
-            this.$watch('src', this.update, {immediate: true});
-
+        watch: {
+            src: {
+                handler: 'update',
+                immediate: true
+            }
         },
 
         methods: {

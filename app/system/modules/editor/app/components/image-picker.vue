@@ -11,12 +11,14 @@
 
                 <a class="uk-placeholder uk-text-center uk-display-block" v-on="click: openFinder" v-if="!image.src">
                     <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
+
                     <p class="uk-text-muted uk-margin-small-top">{{ 'Select image' | trans }}</p>
                 </a>
 
                 <div class="uk-panel uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="image.src">
                     <div class="uk-overlay">
                         <img v-attr="src: resolveUrl(image.src)">
+
                         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
                     </div>
                     <a class="uk-position-cover" v-on="click: openFinder"></a>
@@ -24,12 +26,14 @@
 
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
+
                     <div class="uk-form-controls">
                         <input id="form-src" type="text" class="uk-width-1-1" v-model="image.src">
                     </div>
                 </div>
                 <div class="uk-form-row">
                     <label for="form-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
+
                     <div class="uk-form-controls">
                         <input id="form-alt" type="text" class="uk-width-1-1" v-model="image.alt">
                     </div>
@@ -66,7 +70,7 @@
             return {
                 view: 'settings',
                 style: '',
-                image: { src: '', alt: '' },
+                image: {src: '', alt: ''},
                 storage: window.$pagekit.storage ? window.$pagekit.storage : '/storage'
             }
         },
@@ -81,8 +85,15 @@
 
             modal.show();
 
-            this.$watch('image.src', this.preview);
-            this.preview();
+        },
+
+        watch: {
+
+            'image.src': {
+                handler: 'preview',
+                immediate: true
+            }
+
         },
 
         methods: {
@@ -114,18 +125,18 @@
                 this.view = 'finder';
             },
 
-            select: function(e) {
+            select: function (e) {
                 e.preventDefault();
                 this.image.src = this.$.finder.getSelected()[0];
                 this.cancel(e);
             },
 
-            cancel: function(e) {
+            cancel: function (e) {
                 e.preventDefault();
                 this.view = 'settings';
             },
 
-            resolveUrl: function(url) {
+            resolveUrl: function (url) {
                 return this.$url.static(url);
             }
 
@@ -133,7 +144,7 @@
 
         computed: {
 
-            selected: function() {
+            selected: function () {
                 var selected = this.$.finder.getSelected();
                 return selected.length == 1 && this.$.finder.isImage(selected[0]);
             }

@@ -36,9 +36,9 @@ return [
             $app['path.storage']     = $app['path'].$this->config['storage'];
         },
 
-        'request' => function () use ($app) {
+        'view.head' => [function () use ($app) {
             $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
-        },
+        }, 50],
 
         'system.finder' => function ($event) use ($app) {
             if ($app['user']->hasAccess('system: manage storage | system: manage storage read only')) {

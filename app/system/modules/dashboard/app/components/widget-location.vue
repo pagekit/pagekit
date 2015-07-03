@@ -143,26 +143,31 @@
                     vm.$set('widget.coords', location.coord);
                 });
 
-            this.$watch('widget.uid', function (uid) {
-
-                if (uid === undefined) {
-                    this.$set('widget.uid', '');
-                    this.$parent.save();
-                    this.$parent.edit(true);
-                }
-
-                if (!uid) return;
-
-                this.load();
-
-            }, {immediate: true});
-
             this.timer = setInterval(this.updateClock(), 60 * 1000);
         },
 
         watch: {
 
-            timezone: 'updateClock'
+            'widget.uid': {
+
+                handler: function (uid) {
+
+                    if (uid === undefined) {
+                        this.$set('widget.uid', '');
+                        this.$parent.save();
+                        this.$parent.edit(true);
+                    }
+
+                    if (!uid) return;
+
+                    this.load();
+
+                },
+                immediate: true
+
+            },
+
+            'timezone': 'updateClock'
 
         },
 

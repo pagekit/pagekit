@@ -11,7 +11,7 @@ jQuery(function ($) {
 
             var menu = _(this.menu).sortBy('priority').groupBy('parent').value();
             var item = _.find(menu.root, 'active');
-            var self = this;
+            var vm   = this;
 
             this.$add('nav', menu.root);
 
@@ -29,7 +29,7 @@ jQuery(function ($) {
                     data[$(this).data('id')] = i;
                 });
 
-                self.$http.post('admin/adminmenu', {order:data}, function() {
+                vm.$http.post('admin/adminmenu', {order:data}, function() {
                     // message?
                 });
             });

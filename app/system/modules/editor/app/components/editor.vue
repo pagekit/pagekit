@@ -6,9 +6,6 @@
 
 <script>
 
-    var $ = require('jquery');
-    var Vue = require('vue');
-
     var Editor = Vue.extend({
 
         props: ['type', 'value', 'options'],

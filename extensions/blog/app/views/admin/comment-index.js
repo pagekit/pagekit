@@ -16,14 +16,20 @@ module.exports = Vue.extend({
     created: function () {
 
         this.Comments = this.$resource('api/blog/comment/:id');
-
         this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter);
 
-        this.$watch('config.page', this.load, {immediate: true});
-        this.$watch('config.filter.search', function () { this.load(0); });
-        this.$watch('config.filter.status', function () { this.load(0); });
-
         UIkit.init(this.$el);
+    },
+
+    watch: {
+
+        'config.page': 'load',
+
+        'config.filter': {
+            handler: function () { this.load(0); },
+            deep: true
+        }
+
     },
 
     computed: {

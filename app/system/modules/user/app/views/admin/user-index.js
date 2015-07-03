@@ -14,8 +14,17 @@ module.exports = {
         this.resource = this.$resource('api/user/:id');
         this.config.filter = _.extend({ search: '', status: '', role: '', order: 'name asc' }, this.config.filter);
 
-        this.$watch('config.page', function () { this.load(); }, {immediate: true});
-        this.$watch('config.filter', function () { this.load(0); }, {deep: true});
+    },
+
+    watch: {
+
+        'config.page': 'load',
+
+        'config.filter': {
+            handler: function () { this.load(0); },
+            deep: true
+        }
+
     },
 
     computed: {
