@@ -42,22 +42,10 @@
             <label class="uk-form-label" for="form-user-number">{{ 'Number of Users' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-user-number" class="uk-width-1-1" v-model="widget.count" number>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
                     <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
                     <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
+                    <option value="18">16</option>
+                    <option value="24">24</option>
                 </select>
             </div>
         </div>
@@ -72,7 +60,7 @@
     <h3 class="uk-panel-title" v-if="widget.show == 'registered' && !widget.total">{{ 'Latest registered Users' | trans}}</h3>
     <h3 class="uk-panel-title" v-if="widget.show != 'registered' && !widget.total">{{ 'Latest logged in Users' | trans}}</h3>
 
-    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-5" data-uk-grid-margin>
+    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-6" data-uk-grid-margin>
         <li v-repeat="user: users">
             <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.username }}">
                 <img class="uk-border-rounded" width="200" height="200" alt="{{ user.name }}" v-gravatar="user.email">
@@ -107,7 +95,7 @@
                 show: 'login',
                 display: 'thumbnail',
                 total: true,
-                count: 4
+                count: 12
             }
 
         },
