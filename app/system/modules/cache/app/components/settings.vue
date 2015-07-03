@@ -15,6 +15,7 @@
 
     <div class="uk-form-row">
         <span class="uk-form-label">{{ 'Cache' | trans }}</span>
+
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed" v-repeat="cache: caches">
                 <label><input type="radio" value="{{ $key }}" v-model="config.caches.cache.storage" v-attr="disabled: !cache.supported"> {{ cache.name }}</label>
@@ -24,18 +25,20 @@
 
     <div class="uk-form-row">
         <span class="uk-form-label">{{ 'Developer' | trans }}</span>
+
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
                 <label><input type="checkbox" value="1" v-model="config.nocache"> {{ 'Disable cache' | trans }}</label>
             </p>
+
             <p>
-                <button class="uk-button uk-button-primary" v-on="click: open">{{ 'Clear Cache' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" v-on="click: open">{{ 'Clear Cache' | trans }}</button>
             </p>
         </div>
     </div>
 
     <div class="uk-modal" v-el="modal">
-        <div class="uk-modal-dialog uk-form-stacked">
+        <form class="uk-modal-dialog uk-form-stacked">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Select Cache to Clear' | trans }}</h2>
@@ -43,19 +46,20 @@
 
             <div class="uk-form-row">
                 <p class="uk-form-controls-condensed">
-                    <label><input type="checkbox" v-model="clear.cache"> {{ 'System Cache' | trans }}</label>
+                    <label><input type="checkbox" v-model="cache.cache"> {{ 'System Cache' | trans }}</label>
                 </p>
+
                 <p class="uk-form-controls-condensed">
-                    <label><input type="checkbox" v-model="clear.temp"> {{ 'Temporary Files' | trans }}</label>
+                    <label><input type="checkbox" v-model="cache.temp"> {{ 'Temporary Files' | trans }}</label>
                 </p>
             </div>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="submit" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" type="submit" v-on="click: clear">{{ 'Clear' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" v-on="click: clear">{{ 'Clear' | trans }}</button>
             </div>
 
-        </div>
+        </form>
     </div>
 
 </template>
@@ -73,32 +77,42 @@
 
         props: ['config', 'options'],
 
-        data: function() {
+        data: function () {
             return {
-                caches: window.$caches,
-                clear: {}
+                caches: window.$caches
             };
+        },
+
+        compiled: function () {
+
+            this.$addChild({
+                el: this.$$.modal,
+                inherit: true
+            }).$appendTo('body');
+
         },
 
         methods: {
 
-            open: function(e) {
+            open: function (e) {
                 e.preventDefault();
 
-                this.$set('clear', { cache: true });
+                this.$set('cache', {cache: true});
 
                 this.modal = UIkit.modal(this.$$.modal);
                 this.modal.show();
             },
 
-            clear: function(e) {
+            clear: function (e) {
                 e.preventDefault();
 
-                this.$http.post('admin/system/cache/clear', { caches: this.clear });
+                this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
+                    UIkit.notify('Cache cleared.')
+                });
                 this.cancel(e);
             },
 
-            cancel: function(e) {
+            cancel: function (e) {
                 e.preventDefault();
 
                 this.modal.hide();
