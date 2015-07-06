@@ -39,9 +39,11 @@ class NodesListener implements EventSubscriberInterface
 
         }
 
-        App::routes()->get('/', function () {
-            return __('No Frontpage assigned.');
-        });
+        if (!$frontpage) {
+            App::routes()->get('/', function () {
+                return __('No Frontpage assigned.');
+            });
+        }
     }
 
     /**

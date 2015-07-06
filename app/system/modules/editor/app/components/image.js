@@ -31,7 +31,7 @@ module.exports = {
             })
             .on('renderLate', function () {
 
-                while (vm._children.length) {
+                while (vm._children && vm._children.length) {
                     vm._children[0].$destroy();
                 }
 

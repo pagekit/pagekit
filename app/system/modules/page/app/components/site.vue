@@ -18,14 +18,17 @@
 
                 <div class="uk-form-row">
                     <label for="form-navigation-title" class="uk-form-label">{{ 'Navigation Title' | trans }}</label>
+
                     <div class="uk-form-controls">
                         <input id="form-navigation-title" class="uk-form-width-large" type="text" name="node[title]" v-model="node.title" v-valid="required">
+
                         <div class="uk-form-help-block uk-text-danger" v-show="form['node[title]'].invalid">{{ 'Invalid name.' | trans }}</div>
                     </div>
                 </div>
 
                 <div class="uk-form-row">
                     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
+
                     <div class="uk-form-controls">
                         <input id="form-slug" class="uk-form-width-large" type="text" name="node[slug]" v-model="node.slug">
                     </div>
@@ -33,6 +36,7 @@
 
                 <div class="uk-form-row">
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
+
                     <div class="uk-form-controls">
                         <select id="form-status" class="uk-form-width-large" v-model="node.status">
                             <option value="0">{{ 'Disabled' | trans }}</option>
@@ -44,6 +48,7 @@
 
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
+
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
                     </div>
@@ -76,7 +81,7 @@
 
         events: {
 
-            save: function(data) {
+            save: function (data) {
                 data.page = this.page;
             }
 
@@ -84,15 +89,20 @@
 
         watch: {
 
-            'node.data.variables.id': function(id) {
+            'node.data.variables.id': {
 
-                if (!id) {
-                    this.$set('page', {});
-                }
+                handler: function (id) {
 
-                this.$resource('api/page/:id').get({id: id}, function (page) {
-                    this.$set('page', page);
-                });
+                    if (!id) {
+                        this.$set('page', {});
+                    }
+
+                    this.$resource('api/page/:id').get({id: id}, function (page) {
+                        this.$set('page', page);
+                    });
+
+                },
+                immediate: true
 
             }
 
