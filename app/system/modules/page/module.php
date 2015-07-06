@@ -50,11 +50,14 @@ return [
 
     'events' => [
 
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('page-link', 'system/page:app/bundle/link.js', '~v-linkpicker');
+            $scripts->register('page-site', 'system/page:app/bundle/site.js', ['~site-edit', 'editor']);
+        },
+
+        // TODO workaround, until the editor is made lazy
         'view.system/site:views/edit' => function($event, $view) use ($app) {
-
             $view->style('codemirror');
-            $view->script('page-site', 'system/page:app/bundle/site.js', ['site-edit', 'editor']);
-
         },
 
         'site.node.preSave' => function($event) use ($app) {

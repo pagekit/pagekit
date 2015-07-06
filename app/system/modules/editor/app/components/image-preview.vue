@@ -41,8 +41,7 @@
         computed: {
 
             image: function() {
-                var vm = this;
-                return this.$parent.images[_.findIndex(this.$parent._children, function(child) { return child === vm; })] || {};
+                return this.$parent.images[_.findIndex(this.$parent.$children, function(child) { return child === this; }, this)] || {};
             }
 
         },

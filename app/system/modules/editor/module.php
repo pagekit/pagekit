@@ -19,7 +19,7 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder']);
+            $scripts->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder', 'v-linkpicker']);
         }
 
     ]

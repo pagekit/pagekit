@@ -32,14 +32,3 @@ module.exports = {
     }
 
 };
-
-//editor-html.js
-//editor.vue
-//image-picker.vue
-//image-preview.vue
-//image.js
-//url.js
-//video-picker.vue
-//video-preview.vue
-//video-view.vue
-//video.js

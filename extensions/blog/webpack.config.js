@@ -7,7 +7,8 @@ module.exports = [
             "post-index": "./app/views/admin/post-index",
             "settings": "./app/views/admin/settings",
             "comments": "./app/components/comments.vue",
-            "site": "./app/components/site.vue"
+            "site": "./app/components/site.vue",
+            "link": "./app/components/link.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

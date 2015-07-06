@@ -29,15 +29,13 @@
 
         ready: function() {
 
-            var editor = this.editor;
-
             _.forIn(this.$options.components, function (component) {
 
                 if (component.options.plugin) {
-                    editor.$addChild({ inherit: true }, component);
+                    this.editor.$addChild({ inherit: true }, component);
                 }
 
-            });
+            }, this);
 
         },
 
@@ -45,6 +43,7 @@
 
             textarea: {},
             htmleditor: require('./editor-html'),
+            link: require('./link'),
             image: require('./image'),
             video: require('./video'),
             url: require('./url')

@@ -18,7 +18,7 @@ module.exports = {
 
         this.images = [];
 
-        editor.element
+        editor
             .off('action.image')
             .on('action.image', function (e, editor) {
                 vm.openModal(_.find(vm.images, function (img) {
@@ -31,8 +31,8 @@ module.exports = {
             })
             .on('renderLate', function () {
 
-                while (vm._children && vm._children.length) {
-                    vm._children[0].$destroy();
+                while (vm.$children.length) {
+                    vm.$children[0].$destroy();
                 }
 
                 Vue.nextTick(function() {

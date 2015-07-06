@@ -1,4 +1,4 @@
-<?php $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'uikit']) ?>
+<?php $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'input-link', 'uikit']) ?>
 
 <form id="site-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
 

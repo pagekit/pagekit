@@ -168,6 +168,7 @@ return [
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
+            $scripts->register('blog-link', 'blog:app/bundle/link.js', '~v-linkpicker');
         },
 
         'enable.blog' => function () use ($app) {

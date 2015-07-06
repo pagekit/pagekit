@@ -41,8 +41,7 @@
         computed: {
 
             video: function() {
-                var vm = this;
-                return this.$parent.videos[_.findIndex(this.$parent._children, function(child) { return child === vm; })] || {};
+                return this.$parent.videos[_.findIndex(this.$parent.$children, function(child) { return child === this; }, this)] || {};
             }
 
         },

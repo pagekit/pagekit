@@ -109,6 +109,11 @@ return [
             );
         },
 
+        'view.head' => [function () use ($app) {
+            $app['scripts']->register('v-linkpicker', 'system/site:app/bundle/linkpicker.js', 'vue');
+            $app['scripts']->register('input-link', 'system/site:app/bundle/input-link.js', 'v-linkpicker');
+        }, 50],
+
         'site.node.postLoad' => function ($event, $entity) {
             $entity->frontpage = $entity->getId() === $this->config('frontpage');
         },

@@ -25,7 +25,7 @@
 -- (1, NULL, 'widget.menu', 'Main Menu', 'navbar', 0, 1, '', NULL, '{"menu":"1","style":"list"}');
 
 -- INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `priority`, `status`, `pages`, `nodes`, `data`) VALUES
--- (2, NULL, 'widget.user.login', 'Login', 'sidebar', 0, 1, '', NULL, '{"redirect.login":"","redirect.logout":""}');
+-- (2, NULL, 'widget.user.login', 'Login', 'sidebar', 0, 1, '', NULL, '{"redirect_login":"","redirect_logout":""}');
 
 -- INSERT INTO `@system_widget` (`id`, `roles`, `type`, `title`, `position`, `priority`, `status`, `pages`, `nodes`, `data`) VALUES
 -- (3, NULL, 'widget.text', 'Copyright', 'footer', 0, 1, '', NULL, '{"content":"Powered by <a href=\\"\\">Pagekit<\\/a>"}');

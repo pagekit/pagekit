@@ -5,13 +5,13 @@
     <div class="uk-form-row">
         <label class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
         <div class="uk-form-controls uk-form-controls-text">
-            <input type="text" v-model="widget.settings['redirect.login']">
+            <input-link url="{{@ widget.data.redirect_login}}"></input-link>
         </div>
     </div>
     <div class="uk-form-row">
         <label class="uk-form-label">{{ 'Logout Redirect' | trans }}</label>
         <div class="uk-form-controls uk-form-controls-text">
-            <input type="text" v-model="widget.settings['redirect.logout']">
+            <input-link url="{{@ widget.data.redirect_logout}}"></input-link>
         </div>
     </div>
 

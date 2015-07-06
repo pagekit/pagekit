@@ -25,7 +25,7 @@ module.exports = {
 
         editor.options.toolbar.push('video');
 
-        editor.element
+        editor
             .on('action.video', function(e, editor) {
                 vm.openModal(_.find(vm.videos, function(vid) {
                     return vid.inRange(editor.getCursor());
@@ -36,8 +36,8 @@ module.exports = {
             })
             .on('renderLate', function () {
 
-                while (vm._children && vm._children.length) {
-                    vm._children[0].$destroy();
+                while (vm.$children.length) {
+                    vm.$children[0].$destroy();
                 }
 
                 Vue.nextTick(function() {

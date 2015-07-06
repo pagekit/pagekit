@@ -93,13 +93,11 @@ class SiteController
     }
 
     /**
-     * @Route("api/site", name="api/site")
+     * @Route("api/site/link", name="api/link")
+     * @Request({"link"})
      */
-    public function apiSiteAction()
+    public function apiSiteAction($link)
     {
-        return [
-            'menus' => json_decode(App::forward('@site/api/menu')->getContent()),
-            'nodes' => json_decode(App::forward('@site/api/node')->getContent())
-        ];
+        return ['message' => 'success', 'url' => App::url($link, [], 'base') ?: $link];
     }
 }

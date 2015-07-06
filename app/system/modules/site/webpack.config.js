@@ -24,9 +24,26 @@ module.exports = [
 
     {
         entry: {
+            "linkpicker": "./app/components/linkpicker.vue"
+        },
+        output: {
+            filename: "./app/bundle/[name].js",
+            library: "Linkpicker"
+        },
+        module: {
+            loaders: [
+                { test: /\.html$/, loader: "html" },
+                { test: /\.vue$/, loader: "vue" }
+            ]
+        }
+    },
+
+    {
+        entry: {
             "index": "./app/views/index",
             "settings": "./app/views/settings",
-            "widget-menu": "./app/components/widget-menu.vue"
+            "widget-menu": "./app/components/widget-menu.vue",
+            "input-link": "./app/components/input-link.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

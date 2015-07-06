@@ -18,7 +18,7 @@ class PostApiController
     public function indexAction($filter = [], $page = 0)
     {
         $query  = Post::query();
-        $filter = array_merge(array_fill_keys(['status', 'search'], ''), $filter);
+        $filter = array_merge(array_fill_keys(['status', 'search', 'author', 'order', 'limit'], ''), $filter);
         extract($filter, EXTR_SKIP);
 
         if (is_numeric($status)) {
@@ -41,7 +41,7 @@ class PostApiController
             $order = [1 => 'date', 2 => 'desc'];
         }
 
-        $limit = App::module('blog')->config('posts.posts_per_page');
+        $limit = (int) $limit ?: App::module('blog')->config('posts.posts_per_page');
         $count = $query->count();
         $pages = ceil($count / $limit);
         $page  = max(0, min($pages - 1, $page));
