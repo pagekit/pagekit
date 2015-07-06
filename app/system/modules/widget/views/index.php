@@ -93,7 +93,7 @@
                                         <a v-class="pk-icon-circle-danger: !widget.status, pk-icon-circle-success: widget.status" v-on="click: toggleStatus(widget)"></a>
                                     </td>
                                 </div>
-                                <div class="pk-table-width-150">{{ type.name }}</div>
+                                <div class="pk-table-width-150">{{ type.label || type.name }}</div>
                             </div>
 
                         </li>

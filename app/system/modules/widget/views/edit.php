@@ -6,8 +6,8 @@
 
         <div class="uk-float-left">
 
-            <h2 class="uk-h2" v-if="widget.id">{{ widget.title }}</h2>
-            <h2 class="uk-h2" v-if="!widget.id">{{ 'Add %type%' | trans {type:widget.type} }}</h2>
+            <h2 class="uk-h2" v-if="widget.title">{{ widget.title }}</h2>
+            <h2 class="uk-h2" v-if="!widget.title">{{ 'Add Widget' | trans }}</h2>
 
         </div>
 
