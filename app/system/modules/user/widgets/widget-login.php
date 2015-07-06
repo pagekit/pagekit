@@ -18,8 +18,8 @@ return [
 
     'events' => [
 
-        'view.layout' => function () use ($app) {
-            $app['scripts']->register('widget-login', 'system/user:app/bundle/widget-login.js', '~widgets');
+        'view.scripts' => function ($event, $scripts) use ($app) {
+            $scripts->register('widget-login', 'system/user:app/bundle/widget-login.js', '~widgets');
         }
 
     ],

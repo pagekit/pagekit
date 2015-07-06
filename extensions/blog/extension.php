@@ -166,8 +166,8 @@ return [
             );
         },
 
-        'request' => function () use ($app) {
-            $app['scripts']->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
         },
 
         'enable.blog' => function () use ($app) {
@@ -177,7 +177,6 @@ return [
         },
 
         'uninstall.blog' => function () use ($app) {
-
             $app['migrator']->create('blog:migrations', $this->config('version'))->run(0);
             $app['config']()->remove($this->name);
         }

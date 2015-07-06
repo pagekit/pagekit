@@ -16,7 +16,8 @@ class DataHelper implements HelperInterface
      */
     public function register(View $view)
     {
-        $view->on('head', function ($event) {
+        $view->on('head', function ($event) use ($view) {
+            $view->trigger('data', [$this]);
             $event->addResult($this->render());
         }, 10);
     }

@@ -16,8 +16,8 @@ return [
 
     'events' => [
 
-        'view.layout' => function () use ($app) {
-            $app['scripts']->register('widget-menu', 'system/site:app/bundle/widget-menu.js', '~widgets');
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('widget-menu', 'system/site:app/bundle/widget-menu.js', '~widgets');
         }
 
     ],

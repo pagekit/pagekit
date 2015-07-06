@@ -59,7 +59,7 @@ return [
                 $app['debugbar']->addCollector($app['log.debug']);
             }
 
-            $app->on('view.head', function($event, $view) use ($app) {
+            $app->on('view.head', function ($event, $view) use ($app) {
                 $view->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
                 $view->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
                 $view->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);

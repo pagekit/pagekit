@@ -18,9 +18,9 @@ return [
 
     'events' => [
 
-        'view.head' => [function () use ($app) {
-            $app['scripts']->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder']);
-        }, 50]
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder']);
+        }
 
     ]
 

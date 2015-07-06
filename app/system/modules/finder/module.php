@@ -36,18 +36,18 @@ return [
             $app['path.storage']     = $app['path'].$this->config['storage'];
         },
 
-        'view.head' => [function () use ($app) {
-            $app['scripts']->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
-        }, 50],
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
+        },
+
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+            $view->data('$settings', ['config' => [$this->name => $this->config]]);
+        },
 
         'system.finder' => function ($event) use ($app) {
             if ($app['user']->hasAccess('system: manage storage | system: manage storage read only')) {
                 $event->path('#^'.strtr($app['path.storage'], '\\', '/').'($|\/.*)#', $app['user']->hasAccess('system: manage storage') ? 'w' : 'r');
             }
-        },
-
-        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
-            $view->data('$settings', ['config' => [$this->name => $this->config]]);
         }
 
     ],

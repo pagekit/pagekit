@@ -129,9 +129,9 @@ return [
             );
         },
 
-        'view.head' => [function () use ($app) {
-            $app['scripts']->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
-        }, 50]
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
+        }
 
     ]
 

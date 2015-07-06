@@ -27,7 +27,8 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
      */
     public function register(View $view)
     {
-        $view->on('head', function ($event) {
+        $view->on('head', function ($event) use ($view) {
+            $view->trigger('scripts', [$this->scripts]);
             $event->addResult($this->render());
         }, 5);
     }

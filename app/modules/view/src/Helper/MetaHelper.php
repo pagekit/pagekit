@@ -16,7 +16,8 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
      */
     public function register(View $view)
     {
-        $view->on('head', function ($event) {
+        $view->on('head', function ($event) use ($view) {
+            $view->trigger('meta', [$this]);
             $event->addResult($this->render());
         }, 20);
     }

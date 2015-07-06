@@ -97,8 +97,8 @@ return [
 
     'events' => [
 
-        'request' => function () use ($app) {
-            $app['scripts']->register('theme-settings', 'alpha:app/bundle/widget-theme.js', '~widgets');
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('theme-settings', 'alpha:app/bundle/widget-theme.js', '~widgets');
         }
 
     ]

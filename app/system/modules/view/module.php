@@ -51,36 +51,39 @@ return [
             $app->subscribe(new CanonicalListener());
         },
 
-        'view.head' => [function ($event, $view) use ($app) {
+        'view.data' => function ($event, $data) use ($app) {
+            $data->add('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+        },
 
-            $view->data('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+        'view.styles' => function ($event, $styles) {
+            $styles->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
+        },
 
-            $app['styles']->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
-            $app['scripts']->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
-            $app['scripts']->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js');
-            $app['scripts']->register('lodash', 'vendor/assets/lodash/lodash.min.js');
-            $app['scripts']->register('marked', 'vendor/assets/marked/marked.js');
-            $app['scripts']->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery');
-            $app['scripts']->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit');
-            $app['scripts']->register('uikit-datepicker', 'vendor/assets/uikit/js/components/datepicker.min.js', 'uikit');
-            $app['scripts']->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit');
-            $app['scripts']->register('uikit-form-select', 'vendor/assets/uikit/js/components/form-select.min.js', 'uikit');
-            $app['scripts']->register('uikit-htmleditor', 'vendor/assets/uikit/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
-            $app['scripts']->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit');
-            $app['scripts']->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit');
-            $app['scripts']->register('uikit-tooltip', 'vendor/assets/uikit/js/components/tooltip.min.js', 'uikit');
-            $app['scripts']->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
-            $app['scripts']->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit');
-            $app['scripts']->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
-            $app['scripts']->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
-            $app['scripts']->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
-            $app['scripts']->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'globalize']);
-            $app['scripts']->register('vue-dist', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
-            $app['scripts']->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
-            $app['scripts']->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
-            $app['scripts']->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
-
-        }, 50]
+        'view.scripts' => function ($event, $scripts) use ($app) {
+            $scripts->register('codemirror', 'vendor/assets/codemirror/codemirror.js');
+            $scripts->register('jquery', 'vendor/assets/jquery/dist/jquery.min.js');
+            $scripts->register('lodash', 'vendor/assets/lodash/lodash.min.js');
+            $scripts->register('marked', 'vendor/assets/marked/marked.js');
+            $scripts->register('uikit', 'vendor/assets/uikit/js/uikit.min.js', 'jquery');
+            $scripts->register('uikit-autocomplete', 'vendor/assets/uikit/js/components/autocomplete.min.js', 'uikit');
+            $scripts->register('uikit-datepicker', 'vendor/assets/uikit/js/components/datepicker.min.js', 'uikit');
+            $scripts->register('uikit-form-password', 'vendor/assets/uikit/js/components/form-password.min.js', 'uikit');
+            $scripts->register('uikit-form-select', 'vendor/assets/uikit/js/components/form-select.min.js', 'uikit');
+            $scripts->register('uikit-htmleditor', 'vendor/assets/uikit/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
+            $scripts->register('uikit-nestable', 'vendor/assets/uikit/js/components/nestable.min.js', 'uikit');
+            $scripts->register('uikit-notify', 'vendor/assets/uikit/js/components/notify.min.js', 'uikit');
+            $scripts->register('uikit-tooltip', 'vendor/assets/uikit/js/components/tooltip.min.js', 'uikit');
+            $scripts->register('uikit-pagination', 'vendor/assets/uikit/js/components/pagination.min.js', 'uikit');
+            $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit');
+            $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
+            $scripts->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
+            $scripts->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
+            $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'globalize']);
+            $scripts->register('vue-dist', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
+            $scripts->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
+            $scripts->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
+            $scripts->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
+        }
 
     ]
 

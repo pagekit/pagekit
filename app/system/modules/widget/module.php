@@ -66,8 +66,8 @@ return [
 
     'events' => [
 
-        'view.layout' => function($event) use ($app) {
-            $app['scripts']->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
         },
 
         'system.widget.postLoad' => function ($event, $widget) use ($app) {

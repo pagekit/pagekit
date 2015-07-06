@@ -164,6 +164,22 @@ class View
     }
 
     /**
+     * Triggers an event.
+     *
+     * @param  string $event
+     * @param  array  $arguments
+     * @return EventInterface
+     */
+    public function trigger($event, array $arguments = [])
+    {
+        if (is_string($event)) {
+            $event = $this->prefix.$event;
+        }
+
+        return $this->events->trigger($event, $arguments);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function render($name, array $parameters = [])
