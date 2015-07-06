@@ -86,7 +86,7 @@ module.exports = {
         getSelected: function () {
             return this.widgets.filter(function (widget) {
                 return this.selected.indexOf(widget.id.toString()) !== -1;
-            }.bind(this));
+            }, this);
         }
 
     },

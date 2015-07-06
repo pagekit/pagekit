@@ -44,13 +44,13 @@ class MenuController
 
     /**
      * @Route("/{label}", methods="POST")
-     * @Request({"label", "id"}, csrf=true)
+     * @Request({"label"}, csrf=true)
      */
-    public function createAction($label, $id = '')
+    public function createAction($label)
     {
         $label = trim($label);
 
-        if (!$id = $this->slugify($id ?: $label)) {
+        if (!$id = $this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
         }
 
@@ -65,13 +65,13 @@ class MenuController
 
     /**
      * @Route("/{label}", methods="PUT")
-     * @Request({"label", "oldId", "id"}, csrf=true)
+     * @Request({"label", "oldId"}, csrf=true)
      */
-    public function updateAction($label, $oldId, $id = '')
+    public function updateAction($label, $oldId)
     {
         $label = trim($label);
 
-        if (!$id = $this->slugify($id ?: $label)) {
+        if (!$id = $this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
         }
 

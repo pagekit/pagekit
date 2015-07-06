@@ -27,24 +27,8 @@ class SiteModule extends Module
 
             $menus = new MenuManager();
 
-            foreach ($app['module'] as $module) {
-                foreach ((array) $module->get('menus') as $id => $menu) {
-                    $menus->register($id, $menu, ['fixed' => true]);
-                }
-            }
-
             foreach ($this->config('menus') as $menu) {
                 $menus->register($menu['id'], $menu['label']);
-            }
-
-            $app->trigger('site.menus', [$this]);
-
-            foreach (Node::where(['menu <> ?', 'menu <> ?'], ['', 'trash'])
-                         ->whereIn('menu', array_keys($menus->get()), true)
-                         ->groupBy('menu')->execute('menu')
-                         ->fetchAll(\PDO::FETCH_COLUMN) as $menu
-            ) {
-                $menus->register($menu, $menu, ['ghost' => true]);
             }
 
             return $menus;

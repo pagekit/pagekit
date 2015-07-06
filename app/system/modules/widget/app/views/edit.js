@@ -28,7 +28,7 @@ module.exports = {
             return [{text: this.$trans('- Assign -'), value: ''}].concat(
                 _.map(this.config.positions, function (position) {
                     return {text: this.$trans(position.label), value: position.name};
-                }.bind(this))
+                }, this)
             );
         }
 
@@ -58,7 +58,7 @@ module.exports = {
         active: function (sections) {
             return sections.filter(function (section) {
                 return !section.active || this.widget.type.match(section.active);
-            }.bind(this));
+            }, this);
         }
 
     }

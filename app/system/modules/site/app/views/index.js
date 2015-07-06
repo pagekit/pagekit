@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function () {
         return _.merge({
@@ -14,7 +14,6 @@ module.exports = Vue.extend({
     created: function () {
         this.Menus = this.$resource('api/site/menu/:id:label', {}, {update: {method: 'PUT'}});
         this.Nodes = this.$resource('api/site/node/:id');
-
         this.load();
     },
 
@@ -31,7 +30,7 @@ module.exports = Vue.extend({
         },
 
         selectMenu: function (menu) {
-            this.$set('menu', menu)
+            this.$set('menu', menu);
         },
 
         editMenu: function (menu) {
@@ -47,7 +46,9 @@ module.exports = Vue.extend({
 
         saveMenu: function (e) {
 
-            if (e) e.preventDefault();
+            if (e) {
+                e.preventDefault();
+            }
 
             this.Menus[this.edit.oldId ? 'update' : 'save']({label: this.edit.label}, this.edit, function () {
                 this.load();
@@ -64,7 +65,11 @@ module.exports = Vue.extend({
         },
 
         cancel: function (e) {
-            if (e) e.preventDefault();
+
+            if (e) {
+                e.preventDefault();
+            }
+
             this.$set('edit', null);
             this.modal.hide();
         },
@@ -142,7 +147,7 @@ module.exports = Vue.extend({
         getSelected: function () {
             return this.nodes.filter(function (node) {
                 return this.isSelected(node);
-            }.bind(this));
+            }, this);
         },
 
         isSelected: function (node, children) {
@@ -150,7 +155,7 @@ module.exports = Vue.extend({
             if (_.isArray(node)) {
                 return _.every(node, function (node) {
                     return this.isSelected(node, children);
-                }.bind(this))
+                }, this);
             }
 
             return this.selected.indexOf(node.id.toString()) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
@@ -163,7 +168,7 @@ module.exports = Vue.extend({
         showDelete: function () {
             return this.showMove && _.every(this.getSelected(), function (node) {
                     return !(this.getType(node) || {})['protected'];
-                }.bind(this));
+                }, this);
         },
 
         showMove: function () {
@@ -212,15 +217,6 @@ module.exports = Vue.extend({
 
     },
 
-    validators: {
-
-        unique: function (value) {
-            var menu = _.find(this.menus, 'id', value);
-            return !menu || this.edit.oldId === menu.id;
-        }
-
-    },
-
     filters: {
 
         protected: function (types) {
@@ -243,17 +239,17 @@ module.exports = Vue.extend({
             computed: {
 
                 url: function () {
-                    return this.$url(this.node.frontpage ? '' : this.node.path.replace(/^\/+/, ''))
+                    return this.$url(this.node.frontpage ? '' : this.node.path.replace(/^\/+/, ''));
                 }
 
             }
         }
     }
 
-});
+};
 
 $(function () {
 
-    (new module.exports()).$mount('#site');
+    (new Vue(module.exports)).$mount('#site');
 
 });

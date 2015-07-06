@@ -4,9 +4,8 @@ namespace Pagekit\System;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\View\Section\SectionManager;
 
-class Theme extends Module
+class Theme extends Module implements \JsonSerializable
 {
     /**
      * @var string
@@ -14,12 +13,42 @@ class Theme extends Module
     protected $layout = '/templates/template.php';
 
     /**
-     * Returns the theme layout absolute path.
+     * Gets the layout path.
      *
-     * @return string|false
+     * @return string
      */
     public function getLayout()
     {
         return $this->path.$this->layout;
+    }
+
+    /**
+     * Gets the theme menus.
+     *
+     * @return array
+     */
+    public function getMenus()
+    {
+        return $this->get('menus');
+    }
+
+    /**
+     * Gets the theme positions.
+     *
+     * @return array
+     */
+    public function getPositions()
+    {
+        return $this->get('positions');
+    }
+
+    /**
+     * Implements JsonSerializable interface.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->get(['name', 'menus', 'positions']);
     }
 }

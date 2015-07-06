@@ -27,6 +27,7 @@ class SiteController
                 'name'  => 'system/site:views/index.php'
             ],
             '$data' => [
+                'theme' => App::theme(),
                 'types' => array_values($site->getTypes())
             ]
         ];

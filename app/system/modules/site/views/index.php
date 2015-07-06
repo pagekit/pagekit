@@ -41,18 +41,17 @@
                     </div>
 
                     <div class="uk-form-row">
-                        <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
-
-                        <div class="uk-form-controls">
-                            <input id="form-slug" class="uk-width-1-1 uk-form-large" name="id" type="text" v-model="edit.id" v-valid="unique">
-
-                            <p class="uk-form-help-block uk-text-danger" v-show="menuForm.id.invalid">{{ 'Id must be unique.' | trans }}</p>
+                        <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
+                        <div class="uk-form-controls uk-form-controls-text">
+                            <p class="uk-form-controls-condensed" v-repeat="theme.menus">
+                                <label><input type="checkbox" value="{{ $key }}"> {{ $value | trans }}</label>
+                            </p>
                         </div>
                     </div>
 
                     <div class="uk-modal-footer uk-text-right">
                         <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                        <button class="uk-button uk-button-link" v-attr="disabled: menuForm.invalid || !edit.label || !edit.id">{{ 'Save' | trans }}</button>
+                        <button class="uk-button uk-button-link" v-attr="disabled: menuForm.invalid || !edit.label">{{ 'Save' | trans }}</button>
                     </div>
 
                 </form>

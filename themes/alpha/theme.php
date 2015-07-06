@@ -13,11 +13,6 @@ return [
     'type' => 'theme',
 
     /**
-     * The main function.
-     */
-    'main' => 'Pagekit\\Alpha\\AlphaTheme',
-
-    /**
      * Namespace to autoload theme classes.
      */
     'autoload' => [
@@ -27,27 +22,16 @@ return [
     ],
 
     /**
+     * The main function.
+     */
+    'main' => 'Pagekit\\Alpha\\AlphaTheme',
+
+    /**
      * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.
      */
     'resources' => [
 
         'alpha:' => ''
-
-    ],
-
-    /**
-     * Widget positions offered by this theme. These positions will be rendered in different locations of the theme's template.
-     */
-    'positions' => [
-
-        'logo' => 'Logo',
-        'logo-small' => 'Logo Small',
-        'navbar' => 'Navbar',
-        'top' => 'Top',
-        'sidebar-a' => 'Sidebar A',
-        'sidebar-b' => 'Sidebar B',
-        'footer' => 'Footer',
-        'offcanvas' => 'Offcanvas'
 
     ],
 
@@ -65,12 +49,28 @@ return [
     ],
 
     /**
-     * List of fixed menus provided by this theme.
+     * Menu postions provided by this theme.
      */
     'menus' => [
 
         'main' => 'Main',
         'sidebar' => 'Sidebar'
+
+    ],
+
+    /**
+     * Widget positions provided by this theme. These positions will be rendered in different locations of the theme's template.
+     */
+    'positions' => [
+
+        'logo' => 'Logo',
+        'logo-small' => 'Logo Small',
+        'navbar' => 'Navbar',
+        'top' => 'Top',
+        'sidebar-a' => 'Sidebar A',
+        'sidebar-b' => 'Sidebar B',
+        'footer' => 'Footer',
+        'offcanvas' => 'Offcanvas'
 
     ],
 
