@@ -7,6 +7,8 @@ return [
 
     'name' => 'system/widget-login',
 
+    'label' => 'Login',
+
     'type' => 'widget',
 
     'views' => [

@@ -21,6 +21,6 @@ class Type extends Module implements TypeInterface
      */
     public function jsonSerialize()
     {
-        return ['name' => $this->name];
+        return $this->get(['name', 'label']);
     }
 }

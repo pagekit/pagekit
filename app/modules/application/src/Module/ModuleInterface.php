@@ -16,7 +16,7 @@ interface ModuleInterface
     /**
      * Gets a option value.
      *
-     * @param  sting $key
+     * @param  mixed $key
      * @param  mixed $default
      * @return mixed
      */

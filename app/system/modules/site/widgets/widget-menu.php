@@ -6,6 +6,8 @@ return [
 
     'name' => 'system/widget-menu',
 
+    'label' => 'Menu',
+
     'type' => 'widget',
 
     'views' => [

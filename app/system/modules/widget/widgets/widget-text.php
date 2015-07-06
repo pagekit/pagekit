@@ -4,6 +4,8 @@ return [
 
     'name' => 'system/widget-text',
 
+    'label' => 'Text',
+
     'type' => 'widget',
 
     'main' => function ($app) {

@@ -62,6 +62,10 @@ class Module implements ModuleInterface, EventSubscriberInterface
      */
     public function get($key, $default = null)
     {
+        if (is_array($key)) {
+            return Arr::extract($this->options, $key);
+        }
+
         return Arr::get($this->options, $key, $default);
     }
 
