@@ -6,9 +6,9 @@
         <div class="uk-panel">
             <ul class="uk-nav uk-nav-side pk-nav-large" data-uk-tab="{ connect: '#tab-content' }">
                 <li class="uk-active"><a> <i class="pk-icon-large-server uk-margin-right"></i>{{ 'System' | trans }}</a></li>
-                <li><a><i class="pk-icon-large-code uk-icon-small uk-margin-right"></i> {{ 'PHP' | trans }}</a></li>
-                <li><a><i class="pk-icon-large-database uk-icon-small uk-margin-right"></i> {{ 'Database' | trans }}</a></li>
-                <li><a><i class="pk-icon-large-lock-file uk-icon-small uk-margin-right"></i> {{ 'Permissions' | trans }}</a></li>
+                <li><a><i class="pk-icon-large-code uk-margin-right"></i> {{ 'PHP' | trans }}</a></li>
+                <li><a><i class="pk-icon-large-database uk-margin-right"></i> {{ 'Database' | trans }}</a></li>
+                <li><a><i class="pk-icon-large-lock-file uk-margin-right"></i> {{ 'Permissions' | trans }}</a></li>
             </ul>
         </div>
 
