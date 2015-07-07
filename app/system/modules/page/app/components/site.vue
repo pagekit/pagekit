@@ -68,8 +68,6 @@
 
     module.exports = {
 
-        props: ['node', 'form', 'type'],
-
         section: {
             name: 'page',
             label: 'Content',
@@ -77,7 +75,13 @@
             active: 'page'
         },
 
-        template: __vue_template__,
+        props: ['node', 'form', 'type'],
+
+        data: function () {
+            return {
+                page: {}
+            };
+        },
 
         events: {
 
@@ -93,20 +97,21 @@
 
                 handler: function (id) {
 
-                    if (!id) {
-                        this.$set('page', {});
+                    if (id) {
+                        this.$resource('api/page/:id').get({id: id}, function (page) {
+                            this.$set('page', page);
+                        });
                     }
 
-                    this.$resource('api/page/:id').get({id: id}, function (page) {
-                        this.$set('page', page);
-                    });
-
                 },
+
                 immediate: true
 
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 
