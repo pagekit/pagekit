@@ -57,7 +57,7 @@
                 if (!extra.image) {
                     return this.$url.static('app/system/assets/images/placeholder-icon.svg');
                 } else if (!extra.image.match(/^(https?:)?\//)) {
-                    return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                    return this.$url.static(pkg.type + 's/:name/:image', {name: pkg.name, image: pkg.extra.image});
                 }
 
                 return extra.image;
