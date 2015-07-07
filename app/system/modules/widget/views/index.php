@@ -14,15 +14,15 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side">
-                    <li class="uk-visible-hover" v-class="uk-active: active()">
+                    <li v-class="uk-active: active()">
                         <a v-on="click: select()">{{ 'All' | trans }}</a>
                     </li>
-                    <li class="uk-visible-hover" v-class="uk-active: active(unassigned)" v-show="unassigned.assigned.length">
+                    <li v-class="uk-active: active(unassigned)" v-show="unassigned.assigned.length">
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li class="uk-visible-hover" v-class="uk-active: active(pos)" v-repeat="pos: config.positions">
-                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right uk-hidden" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
+                    <li v-class="uk-active: active(pos)" v-repeat="pos: config.positions">
+                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
                     </li>
                 </ul>
 
