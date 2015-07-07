@@ -26,7 +26,7 @@ module.exports = {
 
         positionOptions: function () {
             return [{text: this.$trans('- Assign -'), value: ''}].concat(
-                _.map(this.config.positions, function (position) {
+                _.map(this.theme.positions, function (position) {
                     return {text: this.$trans(position.label), value: position.name};
                 }, this)
             );

@@ -20,10 +20,8 @@ class WidgetController
                 'name'  => 'widget:views/index.php'
             ],
             '$data' => [
-                'config' => [
-                    'types'     => App::widget()->getTypes(),
-                    'positions' => array_values(App::widget()->getPositions())
-                ]
+                'theme' => App::theme(),
+                'types' => App::widget()->getTypes()
             ]
         ];
     }
@@ -48,12 +46,12 @@ class WidgetController
             ],
             '$data' => [
                 'widget' => $widget,
+                'theme' => App::theme(),
                 'config' => [
                     'menus'     => App::menu(),
                     'nodes'     => array_values(Node::query()->get()),
                     'roles'     => array_values(Role::findAll()),
-                    'types'     => array_values(App::widget()->getTypes()),
-                    'positions' => App::widget()->getPositions()
+                    'types'     => array_values(App::widget()->getTypes())
                 ]
             ]
         ];

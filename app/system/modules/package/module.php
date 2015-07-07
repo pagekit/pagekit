@@ -1,11 +1,18 @@
 <?php
 
 use Pagekit\Module\Factory\ModuleFactory;
+use Pagekit\Module\Loader\ConfigLoader;
 use Pagekit\System\Package\PackageManager;
 
 return [
 
     'name' => 'system/package',
+
+    'autoload' => [
+
+        'Pagekit\\System\\' => 'src'
+
+    ],
 
     'main' => function ($app) {
 
@@ -15,23 +22,16 @@ return [
                 ->addPath($app['path.themes'].'/*/theme.json');
         };
 
-        $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\\System\\Theme'));
+        $app['module']->addLoader(new ConfigLoader($app['config']->get('theme')->toArray()));
+        $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\System\Theme'));
         $app['module']->addFactory('extension', new ModuleFactory($app));
 
     },
 
-    'autoload' => [
-
-        'Pagekit\\System\\' => 'src'
-
-    ],
-
     'events' => [
 
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
-
             $view->data('$settings', ['options' => [$this->name => $this->config]]);
-
         }
 
     ],

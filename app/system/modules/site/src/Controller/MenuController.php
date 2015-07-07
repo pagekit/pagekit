@@ -82,6 +82,7 @@ class MenuController
             }
 
             $this->config->remove('menus.'.$oldId);
+
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
 

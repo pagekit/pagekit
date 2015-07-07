@@ -44,7 +44,7 @@
                         <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed" v-repeat="theme.menus">
-                                <label><input type="checkbox" value="{{ $key }}"> {{ $value | trans }}</label>
+                                <label><input type="checkbox" value="{{ edit.id }}" v-model="theme.config.menus[$key]"> {{ $value | trans }}</label>
                             </p>
                         </div>
                     </div>

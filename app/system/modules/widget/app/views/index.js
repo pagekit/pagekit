@@ -12,13 +12,13 @@ module.exports = {
     computed: {
 
         positions: function () {
-            return this.config.positions.concat(this.unassigned);
+            return this.theme.positions.concat(this.unassigned);
         },
 
         unassigned: function () {
 
-            var config = this.config, ids = _.pluck(this.widgets, 'id').filter(function (id) {
-                return !config.positions.some(function (position) {
+            var theme = this.theme, ids = _.pluck(this.widgets, 'id').filter(function (id) {
+                return !theme.positions.some(function (position) {
                     return position.assigned.indexOf(id) !== -1;
                 });
             });
@@ -45,7 +45,7 @@ module.exports = {
 
         assign: function (position, ids) {
             return this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
-                this.config.$set('positions', data.positions);
+                this.$set('theme', data.theme);
                 this.$set('selected', []);
             });
         },
@@ -146,7 +146,7 @@ module.exports = {
 
                 type: function () {
                     if (this.widget) {
-                        return _.find(this.config.types, {name: this.widget.type});
+                        return _.find(this.types, {name: this.widget.type});
                     }
                 }
 

@@ -37,6 +37,7 @@ class WidgetApiController
     public function configAction()
     {
         $module = App::module('system/widget');
+
         return $module->config('widget.config', []) + ['defaults' => $module->config('widget.defaults')];
     }
 
@@ -45,11 +46,10 @@ class WidgetApiController
      */
     public function assignAction($position, $ids)
     {
-        $widgets = App::widget();
+        $theme = App::theme();
+        $theme->assignPosition($position, $ids);
 
-        $widgets->assign($position, $ids);
-
-        return ['message' => 'success', 'positions' => $widgets->getPositions()];
+        return ['message' => 'success', 'theme' => $theme];
     }
 
     /**

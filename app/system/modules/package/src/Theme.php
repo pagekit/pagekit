@@ -29,7 +29,17 @@ class Theme extends Module implements \JsonSerializable
      */
     public function getMenus()
     {
-        return $this->get('menus');
+        $menus = [];
+
+        foreach ($this->get('menus', []) as $name => $label) {
+            $menus[$name] = [
+                'name' => $name,
+                'label' => $label,
+                'assigned' => $this->config("menus.$name", [])
+            ];
+        }
+
+        return $menus;
     }
 
     /**
@@ -39,7 +49,72 @@ class Theme extends Module implements \JsonSerializable
      */
     public function getPositions()
     {
-        return $this->get('positions');
+        $positions = [];
+
+        foreach ($this->get('positions', []) as $name => $label) {
+            $positions[$name] = [
+                'name' => $name,
+                'label' => $label,
+                'assigned' => $this->config("positions.$name", [])
+            ];
+        }
+
+        return $positions;
+    }
+
+    /**
+     * Finds a theme position by widget id.
+     *
+     * @param  integer $id
+     * @return string
+     */
+    public function findPosition($id)
+    {
+        foreach ($this->config('positions', []) as $name => $assigned) {
+            if (in_array($id, $assigned)) {
+                return $name;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Assigns widgets to a theme position.
+     *
+     * @param string        $position
+     * @param array|integer $id
+     */
+    public function assignPosition($position, $id)
+    {
+        $positions = $this->config('positions', []);
+
+        if (!is_array($id) && $position === $this->findPosition($id)) {
+            return;
+        }
+
+        foreach ($positions as $name => $assigned) {
+            $positions[$name] = array_values(array_diff($assigned, (array) $id));
+        }
+
+        if (is_array($id)) {
+            $positions[$position] = array_values(array_unique($id));
+        } else {
+            $positions[$position][] = $id;
+        }
+
+        $this->config['positions'] = $positions;
+        $this->save();
+    }
+
+    /**
+     * Saves the theme config.
+     *
+     * @return array
+     */
+    public function save()
+    {
+        App::config('theme')->set($this->name, $this->config(['menus', 'positions']));
     }
 
     /**
@@ -49,6 +124,10 @@ class Theme extends Module implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->get(['name', 'menus', 'positions']);
+        $data = $this->get(['name', 'config']);
+        $data['menus'] = array_values($this->getMenus());
+        $data['positions'] = array_values($this->getPositions());
+
+        return $data;
     }
 }

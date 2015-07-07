@@ -21,7 +21,7 @@
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li v-class="uk-active: active(pos)" v-repeat="pos: config.positions">
+                    <li v-class="uk-active: active(pos)" v-repeat="pos: theme.positions">
                         <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
                     </li>
                 </ul>
@@ -44,7 +44,7 @@
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                        <li v-repeat="theme.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -59,7 +59,7 @@
                         <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="type: config.types"><a href="{{ $url('admin/widget/edit', {type: type.name}) }}">{{ type.label || type.name }}</a></li>
+                                <li v-repeat="type: types"><a href="{{ $url('admin/widget/edit', {type: type.name}) }}">{{ type.label || type.name }}</a></li>
                             </ul>
                         </div>
                     </div>
