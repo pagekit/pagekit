@@ -71,7 +71,7 @@
         section: {
             name: 'system/cache',
             label: 'Cache',
-            icon: 'uk-icon-bolt',
+            icon: 'pk-icon-large-cache',
             priority: 30
         },
 

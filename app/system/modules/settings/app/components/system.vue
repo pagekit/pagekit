@@ -59,7 +59,7 @@
         section: {
             name: 'system',
             label: 'System',
-            icon: 'uk-icon-wrench',
+            icon: 'pk-icon-large-system',
             priority: 10
         },
 

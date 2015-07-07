@@ -43,7 +43,7 @@
         section: {
             name: 'locale',
             label: 'Localization',
-            icon: 'uk-icon-globe',
+            icon: 'pk-icon-large-localization',
             priority: 20
         },
 
