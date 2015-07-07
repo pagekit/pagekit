@@ -49,7 +49,7 @@ class WidgetController
             '$data' => [
                 'widget' => $widget,
                 'config' => [
-                    'menus'     => App::menus(),
+                    'menus'     => App::menu(),
                     'nodes'     => array_values(Node::query()->get()),
                     'roles'     => array_values(Role::findAll()),
                     'types'     => array_values(App::widget()->getTypes()),
