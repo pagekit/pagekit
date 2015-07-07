@@ -30,14 +30,14 @@ module.exports = {
         }.bind(this);
 
         img.onerror = function() {
-            this._cache[url] = this.letterAvatar(el.attr('title') || el.attr('alt'), size);
+            this._cache[url] = this.letterAvatar(el.attr('title') || el.attr('alt'), size, el.attr('colored'));
             el.attr('src', this._cache[url]).css('visibility', '');
         }.bind(this);
 
         img.src = url;
     },
 
-    letterAvatar: function(name, size) {
+    letterAvatar: function(name, size, colored) {
         name  = name || '';
         size  = size || 60;
 
@@ -67,7 +67,7 @@ module.exports = {
         canvas.height = size;
         context       = canvas.getContext("2d");
 
-        context.fillStyle = colours[colourIndex - 1];
+        context.fillStyle = colored ? colours[colourIndex - 1] : '#bdc3c7';
         context.fillRect (0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width/2)+"px Arial";
         context.textAlign = "center";
