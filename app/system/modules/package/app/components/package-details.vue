@@ -1,10 +1,13 @@
 <template>
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
-        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon">
+        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.type == 'extension'">
         <div class="uk-flex-item-1">
-            <h2 class="uk-margin-remove">{{ package.title }}</h2>
-            <div class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</div>
+            <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
+            <ul class="uk-subnav uk-margin-bottom-remove">
+                <li class="uk-text-muted">{{ package.author.name }}</li>
+                <li class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</li>
+            </ul>
         </div>
     </div>
 
@@ -16,15 +19,25 @@
         {{ 'There is an update available for the uploaded package. Please consider installing it instead.' | trans }}
     </div>
 
-    <p>{{ package.description }}</p>
+    <div class="uk-grid uk-grid-medium" v-class="uk-grid-width-1-2: package.type == 'theme'">
+        <div v-if="package.type == 'theme'">
 
-    <ul class="uk-list">
-        <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
-        <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
-        <li><strong>{{ 'Author:' | trans }}</strong> {{ package.author.name }}</li>
-        <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
-        <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
-    </ul>
+            <img class="uk-margin-right" width="800" height="600" alt="{{ package.title }}" v-attr="src: package | icon" >
+
+        </div>
+        <div>
+            
+            <p>{{ package.description }}</p>
+
+            <ul class="uk-list">
+                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
+                <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
+                <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
+                <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
+            </ul>
+
+        </div>
+    </div>
 
 </template>
 
