@@ -64,6 +64,6 @@
 
     };
 
-    window.Linkpicker.component('page', module.exports);
+    window.Links.component('page', module.exports);
 
 </script>

@@ -9,7 +9,7 @@
                 <h2>{{ 'Select Link' | trans }}</h2>
             </div>
 
-            <linkpicker url="{{ url }}" v-ref="linkpicker"></linkpicker>
+            <panel-link url="{{ url }}" v-ref="links"></panel-link>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
@@ -23,7 +23,7 @@
 
 <script>
 
-    var Input = Vue.extend({
+    module.exports = Vue.extend({
 
         props: ['url'],
 
@@ -67,14 +67,14 @@
             open: function (e) {
                 e.preventDefault();
 
-                this.$.linkpicker.url = this.url;
+                this.$.links.url = this.url;
                 this.modal = UIkit.modal(this.$$.modal);
                 this.modal.show();
             },
 
             update: function (e) {
                 e.preventDefault();
-                this.$set('url', this.$.linkpicker.url);
+                this.$set('url', this.$.links.url);
                 this.cancel(e);
             },
 
@@ -83,28 +83,10 @@
                 this.modal.hide();
             }
 
-        },
-
-        components: {
-
-            linkpicker: window.Linkpicker
-
         }
 
     });
 
-    Input.create = function (element, options) {
-        return new Input({el: element, data: options});
-    };
-
-    Vue.component('input-link', Input);
-
-    $(function () {
-        $('[data-linkpicker]').each(function () {
-            Input.create(this, $(this).data('link'));
-        });
-    });
-
-    module.exports = Input;
+    Vue.component('input-link', module.exports);
 
 </script>

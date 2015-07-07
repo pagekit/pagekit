@@ -67,7 +67,7 @@
 
 <script>
 
-    var Finder = Vue.extend({
+    module.exports = Vue.extend({
 
         replace : true,
 
@@ -369,18 +369,6 @@
 
     });
 
-    Finder.create = function (element, options) {
-        return new Finder({ el: element, data: options });
-    };
-
-    Vue.component('v-finder', Finder);
-
-    $(function () {
-        $('[data-finder]').each(function () {
-            Finder.create(this, $(this).data('finder'));
-        });
-    });
-
-    module.exports = Finder;
+    Vue.component('panel-finder', module.exports);
 
 </script>

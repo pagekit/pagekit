@@ -16,10 +16,16 @@ return [
 
     ],
 
+    'resources' => [
+
+        'system/editor:' => ''
+
+    ],
+
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('editor', 'app/system/modules/editor/app/bundle/editor.js', ['uikit-htmleditor', 'finder', 'v-linkpicker']);
+            $scripts->register('editor', 'system/editor:app/bundle/editor.js', ['uikit-htmleditor', 'panel-finder', 'panel-link']);
         }
 
     ]

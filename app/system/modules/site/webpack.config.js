@@ -24,11 +24,11 @@ module.exports = [
 
     {
         entry: {
-            "linkpicker": "./app/components/linkpicker.vue"
+            "panel-link": "./app/components/panel-link.vue"
         },
         output: {
             filename: "./app/bundle/[name].js",
-            library: "Linkpicker"
+            library: "Links"
         },
         module: {
             loaders: [

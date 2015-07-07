@@ -1,10 +1,10 @@
 <template>
 
     <div class="uk-form-row">
-        <label for="form-linkpicker-url" class="uk-form-label">{{ 'Url' | trans }}</label>
+        <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
 
         <div class="uk-form-controls">
-            <input id="form-linkpicker-url" class="uk-form-width-large" type="text" v-model="url">
+            <input id="form-link-url" class="uk-form-width-large" type="text" v-model="url">
         </div>
     </div>
 
@@ -22,7 +22,7 @@
 
 <script>
 
-    var Linkpicker = Vue.extend({
+    module.exports = Vue.extend({
 
         props: {
 
@@ -61,6 +61,6 @@
 
     });
 
-    module.exports = Linkpicker;
+    Vue.component('panel-link', module.exports);
 
 </script>

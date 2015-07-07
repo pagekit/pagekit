@@ -6,7 +6,7 @@
 
 <script>
 
-    var Editor = Vue.extend({
+    module.exports = Vue.extend({
 
         props: ['type', 'value', 'options'],
 
@@ -53,18 +53,6 @@
 
     });
 
-    Editor.create = function (element, options) {
-        return new Editor({ el: element, data: options});
-    };
-
-    Vue.component('v-editor', Editor);
-
-    $(function () {
-        $('[data-editor]').each(function () {
-            Editor.create(this, $(this).data('editor'));
-        });
-    });
-
-    module.exports = Editor;
+    Vue.component('v-editor', module.exports);
 
 </script>

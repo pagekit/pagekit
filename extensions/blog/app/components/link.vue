@@ -88,6 +88,6 @@
 
     };
 
-    window.Linkpicker.component('blog', module.exports);
+    window.Links.component('blog', module.exports);
 
 </script>

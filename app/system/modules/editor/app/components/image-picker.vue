@@ -48,7 +48,7 @@
 
             <div v-if="view == 'finder'">
 
-                <v-finder root="{{ storage }}" v-ref="finder"></v-finder>
+                <panel-finder root="{{ storage }}" v-ref="finder"></panel-finder>
 
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>

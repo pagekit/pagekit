@@ -146,7 +146,7 @@ return [
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
-            $scripts->register('user-link', 'system/user:app/bundle/link.js', '~v-linkpicker');
+            $scripts->register('user-link', 'system/user:app/bundle/link.js', '~panel-link');
         }
 
     ]

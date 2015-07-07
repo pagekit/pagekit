@@ -4,8 +4,7 @@ module.exports = [
 
     {
         entry: {
-            "vue": "./app/vue",
-            "imagepicker": "./app/components/imagepicker.vue"
+            "vue": "./app/vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

@@ -37,7 +37,8 @@ return [
         },
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('finder', 'system/finder:app/bundle/finder.js', ['vue', 'uikit-upload']);
+            $scripts->register('panel-finder', 'system/finder:app/bundle/panel-finder.js', ['vue', 'uikit-upload']);
+            $scripts->register('input-image', 'system/finder:app/bundle/input-image.js', ['vue', 'panel-finder']);
         },
 
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {

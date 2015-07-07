@@ -8,14 +8,14 @@
             </div>
 
             <div class="uk-form-row">
-                <label for="form-linkpicker-title" class="uk-form-label">{{ 'Title' | trans }}</label>
+                <label for="form-link-title" class="uk-form-label">{{ 'Title' | trans }}</label>
 
                 <div class="uk-form-controls">
-                    <input id="form-linkpicker-title" type="text" class="uk-form-width-large" v-model="link.txt">
+                    <input id="form-link-title" type="text" class="uk-form-width-large" v-model="link.txt">
                 </div>
             </div>
 
-            <linkpicker url="{{@ link.link }}" v-ref="linkpicker"></linkpicker>
+            <panel-link url="{{@ link.link }}"></panel-link>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -57,12 +57,6 @@
             update: function () {
                 this.$emit('select', this.link);
             }
-
-        },
-
-        components: {
-
-            linkpicker: window.Linkpicker
 
         }
 

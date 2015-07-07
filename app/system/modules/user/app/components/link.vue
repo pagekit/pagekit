@@ -53,6 +53,6 @@
 
     };
 
-    window.Linkpicker.component('user', module.exports);
+    window.Links.component('user', module.exports);
 
 </script>

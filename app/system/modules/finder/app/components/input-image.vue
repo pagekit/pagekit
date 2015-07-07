@@ -27,7 +27,7 @@
         <div class="uk-modal" v-el="modal">
             <div class="uk-modal-dialog uk-modal-dialog-large">
 
-                <v-finder root="{{ storage }}" v-el="finder"></v-finder>
+                <panel-finder root="{{ storage }}" v-el="finder"></panel-finder>
 
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -111,6 +111,6 @@
 
     };
 
-    Vue.component('v-imagepicker', module.exports);
+    Vue.component('input-image', module.exports);
 
 </script>

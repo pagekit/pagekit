@@ -2,8 +2,6 @@
 
 use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
-use Pagekit\View\Helper\EditorHelper;
-use Pagekit\View\Helper\FinderHelper;
 use Pagekit\View\Helper\MenuHelper;
 use Pagekit\View\Helper\PositionHelper;
 use Pagekit\View\Helper\TemplateHelper;
@@ -18,8 +16,6 @@ return [
 
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
-            $view->addHelper(new EditorHelper());
-            $view->addHelper(new FinderHelper());
             $view->addHelper(new MenuHelper());
             $view->addHelper(new PositionHelper());
             $view->addHelper(new TemplateHelper($app['scripts']));
@@ -82,7 +78,6 @@ return [
             $scripts->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'globalize']);
             $scripts->register('vue-dist', 'vendor/assets/vue/dist/'.($app['debug'] ? 'vue.js' : 'vue.min.js'));
-            $scripts->register('v-imagepicker', 'app/system/app/bundle/imagepicker.js', ['vue', 'finder']);
             $scripts->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
             $scripts->register('globalize-data', $app['url']->getRoute('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
         }
