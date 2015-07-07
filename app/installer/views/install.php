@@ -64,7 +64,7 @@
                                 <div class="uk-form-controls">
                                     <div class="uk-form-password uk-width-1-1">
                                         <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="password" value="" autocomplete="off" v-model="config.database.connections.mysql.password">
-                                        <a class="uk-form-password-toggle" href="" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
+                                        <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                             <div class="uk-form-controls">
                                 <div class="uk-form-password uk-width-1-1">
                                     <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-valid="required">
-                                    <a class="uk-form-password-toggle" href="" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
+                                    <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                 </div>
                                 <p class="uk-form-help-block uk-text-danger" v-show="formUser.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
                             </div>
