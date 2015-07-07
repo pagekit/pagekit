@@ -31,6 +31,27 @@ body {
     background-size: cover;
 }
 
+/* Not used at the moment */
+.tm-background-clip:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background: lighten(@global-primary-background, 10%) url("../../../system/modules/theme/images/background.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%, 50% 75%, 75% 50%, 50% 25%, 25% 50%, 0 50%);
+    -webkit-filter: blur(5px);
+    animation: tm-clip 5s infinite;
+
+}
+
+@keyframes tm-clip {
+    0% { -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%, 50% 75%, 75% 50%, 50% 25%, 25% 50%, 0 50%); }
+    100% { -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, -100% 50%, 50% 200%, 200% 50%, 50% -100%, -100% 50%, 0 50%); }
+}
+
 
 /* Container
  ========================================================================== */
@@ -41,7 +62,7 @@ body {
     padding: 20px;
 }
 
-.tm-container .uk-panel { padding: 50px; }
+.tm-container .uk-panel-box { padding: 50px; }
 
 
 /* Modifier: `tm-form-horizontal`
@@ -75,7 +96,7 @@ body {
 
 .tm-loader {
     vertical-align: middle;
-    animation: pk-loader-rotate @duration linear infinite;
+    animation: tm-loader-rotate @duration linear infinite;
 }
 
 /*
@@ -93,17 +114,17 @@ body {
     stroke-dasharray: @offset;
     stroke-dashoffset: 0;
     // transform-origin: center;
-    animation: pk-loader-dash @duration ease-in-out infinite,
-               pk-loader-color (@duration*4) ease-in-out infinite;
+    animation: tm-loader-dash @duration ease-in-out infinite,
+               tm-loader-color (@duration*4) ease-in-out infinite;
     stroke-linecap: round;
 }
 
-@keyframes pk-loader-rotate {
+@keyframes tm-loader-rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(270deg); }
 }
 
-@keyframes pk-loader-dash {
+@keyframes tm-loader-dash {
     0% { stroke-dashoffset: @offset; }
     50% {
         stroke-dashoffset: @offset/4;
@@ -115,10 +136,41 @@ body {
     }
 }
 
-@keyframes pk-loader-color {
+@keyframes tm-loader-color {
     0% { stroke: #fff; }
     50% { stroke: #fff; }
     100% { stroke: #fff; }
+}
+
+
+/* SVG Arrow
+ ========================================================================== */
+
+.tm-arrow { animation: tm-arrow 2s ease-out infinite; }
+
+@keyframes tm-arrow {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    25% { transform: translateX(3px); }
+    30% { transform: translateX(-3px); }
+    35% { transform: translateX(3px); }
+    40% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+
+/* SVG Checkmark
+ ========================================================================== */
+
+.tm-checkmark {
+  stroke-dashoffset: 132;
+  stroke-dasharray: 132;
+  animation: tm-dash 1s ease-out infinite;
+}
+
+@keyframes tm-dash {
+    0% { stroke-dashoffset: 132; }
+    100% { stroke-dashoffset: 0; }
 }
 
 

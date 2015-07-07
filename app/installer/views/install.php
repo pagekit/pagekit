@@ -10,15 +10,20 @@
     </head>
     <body>
 
-        <div id="installer" class="tm-background uk-height-viewport uk-flex uk-flex-center uk-flex-middle">
+        <div id="installer" class="tm-background uk-height-viewport uk-flex uk-flex-center uk-flex-middle" >
             <div class="tm-container">
 
-                <div class="uk-contrast uk-text-center" v-el="start" v-show="step == 'start'">
+                <div class="uk-text-center" v-el="start" v-show="step == 'start'">
 
-                    <img class="uk-margin-top" src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
-                    <p>
-                        <button class="uk-button" v-on="click: gotoStep('database')">{{ 'Begin' | trans }}</button>
-                    </p>
+                    <a class="uk-panel" v-on="click: gotoStep('database')">
+                        <img src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
+                        <p>
+                            <svg class="tm-arrow" width="40px" height="40px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                                <line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="2" y1="18" x2="36" y2="18"/>
+                                <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="26.071,6.5 37.601,18.03 26,29.631 "/>
+                            </svg>
+                        </p>
+                    </a>
 
                 </div>
 
@@ -145,7 +150,7 @@
                         <div class="uk-form-row">
                             <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
                             <div class="uk-form-controls">
-                                <textarea id="form-sitedescription" class="uk-width-1-1" name="description" v-model="option['system/site'].description"></textarea>
+                                <textarea id="form-sitedescription" class="uk-width-1-1" name="description" rows="4" v-model="option['system/site'].description"></textarea>
                             </div>
                         </div>
                         <p class="uk-text-right">
@@ -164,12 +169,9 @@
                     </div>
 
                     <div class="uk-text-center" v-show="status == 'finished'">
-                        <p>
-                            <i class="uk-icon-check-circle uk-icon-large"></i>
-                        </p>
-                        <p>
-                            <a class="uk-button uk-button-primary" href="{{ $url('admin') }}">{{ 'Login now' | trans }}</a>
-                        </p>
+                        <svg class="tm-checkmark" width="100px" height="100px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="5.125,63.25 27.375,89.375 95.25,18.875"/>
+                        </svg>
                     </div>
 
                     <div class="uk-panel uk-panel-box" v-show="status == 'failed'">
