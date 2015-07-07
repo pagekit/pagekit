@@ -43,6 +43,7 @@
 
             textarea: {},
             htmleditor: require('./editor-html'),
+            code: require('./editor-code'),
             link: require('./link'),
             image: require('./image'),
             video: require('./video'),
