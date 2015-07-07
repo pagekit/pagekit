@@ -23,7 +23,7 @@ class SiteModule extends Module
             return new Node;
         };
 
-        $app['menu'] = function ($app) {
+        $app['menu'] = function () {
 
             $menus = new MenuManager();
 

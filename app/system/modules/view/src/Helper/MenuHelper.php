@@ -43,7 +43,7 @@ class MenuHelper extends Helper
             $view = false;
         }
 
-        $parameters['root'] = Node::getTree($name);
+        $parameters['root'] = Node::getTree($name, $parameters);
 
         return $this->view->render($view ?: 'menu', $parameters);
     }
