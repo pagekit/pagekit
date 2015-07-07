@@ -25,7 +25,7 @@ class ResetPasswordController
     /**
      * @Request({"email"})
      */
-    public function resetAction($email)
+    public function requestAction($email)
     {
         try {
 

@@ -1,51 +1,54 @@
-<?php $view->script('uikit-form-password') ?>
+<?php $view->script('profile', 'system/user:app/bundle/profile.js', ['vue', 'uikit-form-password']) ?>
 
-<form class="uk-article uk-form uk-form-stacked" action="<?= $view->url('@user/profile/save') ?>" method="post">
+<form id="user-profile" class="uk-article uk-form uk-form-stacked" name="form" v-on="valid: save">
 
-    <h1 class="uk-article-title"><?= __('Your Profile') ?></h1>
+    <h1 class="uk-article-title">{{ 'Your Profile' | trans }}</h1>
+
+    <div class="uk-alert uk-alert-success" v-show="message">{{ message }}</div>
+    <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
     <div class="uk-form-row">
-        <label for="form-name" class="uk-form-label"><?= __('Name') ?></label>
+        <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-name" class="uk-form-width-large" type="text" name="user[name]" value="<?= $user->getName() ?>" required>
+            <input id="form-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-valid="required">
+            <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
         </div>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-name" class="uk-form-label"><?= __('Email') ?></label>
+        <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-name" class="uk-form-width-large" type="text" name="user[email]" value="<?= $user->getEmail() ?>" required>
+            <input id="form-email" class="uk-form-width-large" type="text" name="email" v-model="user.email" v-valid="email">
+            <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid">{{ 'Invalid Email.' | trans }}</p>
         </div>
     </div>
 
-    <div class="uk-form-row js-password">
-        <a href="#" data-uk-toggle="{ target: '.js-password' }"><?= __('Change password') ?></a>
+    <div class="uk-form-row">
+        <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
     </div>
 
     <div class="uk-form-row js-password uk-hidden">
-        <label for="form-password-old" class="uk-form-label"><?= __('Current Password') ?></label>
+        <label for="form-password-old" class="uk-form-label">{{ 'Current Password' | trans }}</label>
         <div class="uk-form-controls">
             <div class="uk-form-password">
-                <input id="form-password-old" class="uk-form-width-large" type="password" name="user[password_old]" value="">
-                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
+                <input id="form-password-old" class="uk-form-width-large" type="password" value="" v-model="user.password_old">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
             </div>
         </div>
     </div>
 
     <div class="uk-form-row js-password uk-hidden">
-        <label for="form-password-new" class="uk-form-label"><?= __('New Password') ?></label>
+        <label for="form-password-new" class="uk-form-label">{{ 'New Password' | trans }}</label>
         <div class="uk-form-controls">
             <div class="uk-form-password">
-                <input id="form-password-new" class="uk-form-width-large" type="password" name="user[password_new]" value="">
-                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
+                <input id="form-password-new" class="uk-form-width-large" type="password" value="" v-model="user.password_new">
+                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
             </div>
         </div>
     </div>
 
     <div class="uk-form-row">
-        <button class="uk-button uk-button-primary" type="submit"><?= __('Save') ?></button>
+        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
     </div>
-
-    <?php $view->token()->get() ?>
 
 </form>

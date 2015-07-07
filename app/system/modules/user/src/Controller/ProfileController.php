@@ -4,14 +4,15 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
-use Pagekit\User\Event\ProfileSaveEvent;
 use Pagekit\User\Model\User;
 
 class ProfileController
 {
     public function indexAction()
     {
-        if (!App::user()->isAuthenticated()) {
+        $user = App::user();
+
+        if (!$user->isAuthenticated()) {
             return App::redirect('@user/login', ['redirect' => App::url()->current()]);
         }
 
@@ -20,7 +21,12 @@ class ProfileController
                 'title' => __('Your Profile'),
                 'name'  => 'system/user:views/site/profile.php'
             ],
-            'user' => App::user()
+            '$data' => [
+                'user' => [
+                    'name' => $user->getName(),
+                    'email' => $user->getEmail()
+                ]
+            ]
         ];
     }
 
@@ -29,63 +35,43 @@ class ProfileController
      */
     public function saveAction($data)
     {
-        if (!App::user()->isAuthenticated()) {
+        $user = App::user();
+
+        if (!$user->isAuthenticated()) {
             App::abort(404);
         }
 
         try {
 
-            $user = User::find(App::user()->getId());
+            $user = User::find($user->getId());
 
-            $name    = trim(@$data['name']);
-            $email   = trim(@$data['email']);
-            $passNew = @$data['password_new'];
-            $passOld = @$data['password_old'];
+            if ($password = @$data['password_new']) {
 
-            if (strlen($name) < 3) {
-                throw new Exception(__('Name is invalid.'));
-            }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new Exception(__('Email is invalid.'));
-            }
-
-            if (User::where(['email = ?', 'id <> ?'], [$email, $user->getId()])->first()) {
-                throw new Exception(__('Email not available.'));
-            }
-
-            if ($passNew) {
-
-                if (!App::auth()->getUserProvider()->validateCredentials($this->user, ['password' => $passOld])) {
+                if (!App::auth()->getUserProvider()->validateCredentials($user, ['password' => @$data['password_old']])) {
                     throw new Exception(__('Invalid Password.'));
                 }
 
-                if (trim($passNew) != $passNew || strlen($passNew) < 3) {
-                    throw new Exception(__('New Password is invalid.'));
+                if (trim($password) != $password || strlen($password) < 3) {
+                    throw new Exception(__('Invalid Password.'));
                 }
 
-                $user->setPassword(App::get('auth.password')->hash($passNew));
+                $user->setPassword(App::get('auth.password')->hash($password));
             }
 
-            if ($email != $user->getEmail()) {
+            if (@$data['email'] != $user->getEmail()) {
                 $user->set('verified', false);
             }
 
-            $user->setName($name);
-            $user->setEmail($email);
+            $user->setName(@$data['name']);
+            $user->setEmail(@$data['email']);
 
-            App::trigger('user.profile.save', new ProfileSaveEvent($user, $data));
-
+            $user->validate();
             $user->save();
 
-            App::trigger('user.profile.saved', new ProfileSaveEvent($user, $data));
-
-            App::message()->success(__('Profile updated.'));
+            return ['message' => 'success'];
 
         } catch (Exception $e) {
-            App::message()->error($e->getMessage());
+            App::abort(400, $e->getMessage());
         }
-
-        return App::redirect('@user/profile');
     }
 }

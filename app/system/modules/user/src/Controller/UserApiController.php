@@ -3,6 +3,7 @@
 namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Application\Exception;
 use Pagekit\Database\Connection;
 use Pagekit\User\Model\Role;
 use Pagekit\User\Model\User;
@@ -80,77 +81,64 @@ class UserApiController
      */
     public function saveAction($data, $password = null, $roles = null, $id = 0)
     {
-        // is new ?
-        if (!$user = User::find($id)) {
+        try {
 
-            if ($id) {
-                App::abort(400, __('User not found.'));
+            // is new ?
+            if (!$user = User::find($id)) {
+
+                if ($id) {
+                    App::abort(400, __('User not found.'));
+                }
+
+                if (!$password) {
+                    App::abort(400, __('Password required.'));
+                }
+
+                $user = new User;
+                $user->setRegistered(new \DateTime);
             }
 
-            if (!$password) {
-                App::abort(400, __('Password required.'));
+            $user->setName(@$data['name']);
+            $user->setUsername(@$data['username']);
+            $user->setEmail(@$data['email']);
+
+            $self = App::user()->getId() == $user->getId();
+            if ($self && @$data['status'] == User::STATUS_BLOCKED) {
+                App::abort(400, __('Unable to block yourself.'));
             }
 
-            $user = new User;
-            $user->setRegistered(new \DateTime);
-        }
-
-        $self = App::user()->getId() == $user->getId();
-
-        if ($self && @$data['status'] == User::STATUS_BLOCKED) {
-            App::abort(400, __('Unable to block yourself.'));
-        }
-
-        $name  = trim(@$data['username']);
-        $email = trim(@$data['email']);
-
-        if (strlen($name) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $name)) {
-            App::abort(400, __('Username is invalid.'));
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            App::abort(400, __('Email is invalid.'));
-        }
-
-        if (User::where(['id <> :id',], compact('id'))->where(function ($query) use ($name) {
-            $query->orWhere(['username = :username', 'email = :username'], ['username' => $name]);
-        })->first()
-        ) {
-            App::abort(400, __('Username not available.'));
-        }
-
-        if (User::where(['id <> :id'], compact('id'))->where(function ($query) use ($email) {
-            $query->orWhere(['username = :email', 'email = :email'], ['email' => $email]);
-        })->first()
-        ) {
-            App::abort(400, __('Email not available.'));
-        }
-
-        $data['username'] = $name;
-        $data['email']    = $email;
-
-        if ($email != $user->getEmail()) {
-            $user->set('verified', false);
-        }
-
-        if (!empty($password)) {
-            $user->setPassword(App::get('auth.password')->hash($password));
-        }
-
-        if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
-
-            if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
-                $roles[] = Role::ROLE_ADMINISTRATOR;
+            if (@$data['email'] != $user->getEmail()) {
+                $user->set('verified', false);
             }
 
-            $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
+            if (!empty($password)) {
+
+                if (trim($password) != $password || strlen($password) < 3) {
+                    throw new Exception(__('Invalid Password.'));
+                }
+
+                $user->setPassword(App::get('auth.password')->hash($password));
+            }
+
+            if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
+
+                if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
+                    $roles[] = Role::ROLE_ADMINISTRATOR;
+                }
+
+                $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
+            }
+
+            unset($data['access'], $data['login'], $data['registered']);
+
+            $user->validate();
+            $user->save($data);
+
+            return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
+
+        } catch (Exception $e) {
+            App::abort(400, $e->getMessage());
         }
-
-        unset($data['access'], $data['login'], $data['registered']);
-
-        $user->save($data);
-
-        return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
     }
 
     /**

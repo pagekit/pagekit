@@ -55,12 +55,17 @@ class RegistrationController
                 throw new Exception(__('Invalid token. Please try again.'));
             }
 
+            $password = @$data['password'];
+            if (trim($password) != $password || strlen($password) < 3) {
+                throw new Exception(__('Invalid Password.'));
+            }
+
             $user = new User;
             $user->setRegistered(new \DateTime);
             $user->setName(@$data['name']);
             $user->setUsername(@$data['username']);
             $user->setEmail(@$data['email']);
-            $user->setPassword(App::get('auth.password')->hash(@$data['password']));
+            $user->setPassword(App::get('auth.password')->hash($password));
             $user->setStatus(User::STATUS_BLOCKED);
             $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 

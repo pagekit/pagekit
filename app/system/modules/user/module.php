@@ -25,10 +25,25 @@ return [
             'name' => '@user',
             'controller' => [
                 'Pagekit\\User\\Controller\\AuthController',
-                'Pagekit\\User\\Controller\\ProfileController',
-                'Pagekit\\User\\Controller\\RegistrationController',
-                'Pagekit\\User\\Controller\\ResetPasswordController',
                 'Pagekit\\User\\Controller\\UserController'
+            ]
+        ],
+        '/user/profile' => [
+            'name' => '@user/profile',
+            'controller' => [
+                'Pagekit\\User\\Controller\\ProfileController',
+            ]
+        ],
+        '/user/registration' => [
+            'name' => '@user/registration',
+            'controller' => [
+                'Pagekit\\User\\Controller\\RegistrationController',
+            ]
+        ],
+        '/user/resetpassword' => [
+            'name' => '@user/resetpassword',
+            'controller' => [
+                'Pagekit\\User\\Controller\\ResetPasswordController',
             ]
         ],
         '/api/user' => [
@@ -131,6 +146,7 @@ return [
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
+            $scripts->register('user-link', 'system/user:app/bundle/link.js', '~v-linkpicker');
         }
 
     ]
