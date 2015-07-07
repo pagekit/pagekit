@@ -9,7 +9,7 @@
 
             <?php if ($node->hasChildren()) : ?>
                 <ul class="uk-nav-sub">
-                    <?= $view->render('menu', ['root' => $node, 'widget' => $widget]) ?>
+                    <?= $view->render('menu', ['root' => $node]) ?>
                 </ul>
             <?php endif ?>
         </li>

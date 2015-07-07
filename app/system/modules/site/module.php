@@ -42,7 +42,7 @@ return [
 
     'views' => [
 
-        'menu' => 'system/site:views/widget-menu.php'
+        'menu' => 'system/site:views/menu.php'
 
     ],
 
