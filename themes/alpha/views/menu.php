@@ -1,21 +1,11 @@
-<?php if ($root->getDepth() === 0) : ?>
-<ul class="uk-nav">
-    <?php endif ?>
+<?php
 
-    <?php foreach ($root->getChildren() as $node) : ?>
+    if ($widget->position == 'navbar') {
 
-        <li class="<?= $node->hasChildren() ? 'uk-parent' : '' ?><?= $node->get('active') ? ' uk-active' : '' ?>">
-            <a href="<?= $view->url($node->getRoutePath()) ?>"><?= $node->getTitle() ?></a>
+        echo $view->render('alpha:views/menu/navbar.php', compact('widget', 'root'));
 
-            <?php if ($node->hasChildren()) : ?>
-                <ul class="uk-nav-sub">
-                    <?= $view->render('menu', ['root' => $node, 'widget' => $widget]) ?>
-                </ul>
-            <?php endif ?>
-        </li>
+    } else {
 
-    <?php endforeach ?>
+        echo $view->render('alpha:views/menu/default.php', compact('widget', 'root'));
 
-    <?php if ($root->getDepth() === 0) : ?>
-</ul>
-<?php endif ?>
+    }
