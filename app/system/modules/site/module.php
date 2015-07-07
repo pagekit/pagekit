@@ -40,6 +40,12 @@ return [
 
     ],
 
+    'views' => [
+
+        'menu' => 'system/site:views/widget-menu.php'
+
+    ],
+
     'permissions' => [
 
         'site: manage site' => [

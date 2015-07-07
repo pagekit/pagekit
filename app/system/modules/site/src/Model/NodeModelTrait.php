@@ -2,6 +2,7 @@
 
 namespace Pagekit\Site\Model;
 
+use Pagekit\Application as App;
 use Pagekit\Database\ORM\ModelTrait;
 
 trait NodeModelTrait
@@ -26,5 +27,67 @@ trait NodeModelTrait
                 ->whereIn('id', $orphaned)
                 ->update(['parent_id' => 0]);
         }
+    }
+
+    /**
+     * Gets a node tree.
+     *
+     * @param  string $menu
+     * @param  array  $parameters
+     * @return NodeInterface|null
+     */
+    public static function getTree($menu, $parameters = [])
+    {
+        $parameters = array_replace([
+            'start_level' => 1,
+            'depth' => PHP_INT_MAX,
+            'mode' => 'all'
+        ], $parameters);
+
+
+        $user       = App::user();
+        $startLevel = (int) $parameters['start_level'] ?: 1;
+        $maxDepth   = $startLevel + ($parameters['depth'] ?: PHP_INT_MAX);
+
+        $path       = App::node()->getPath();
+        $segments   = explode('/', $path);
+        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
+
+        $nodes      = self::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
+        $nodes[0]   = new static();
+        $nodes[0]->setParentId(null);
+
+        foreach ($nodes as $node) {
+
+            $depth  = substr_count($node->getPath(), '/');
+            $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
+
+            $node->set('active', !$node->getPath() || 0 === strpos($path, $node->getPath()));
+
+            if ($depth >= $maxDepth
+                || !$node->hasAccess($user)
+                || !($parameters['mode'] == 'all'
+                    || $node->get('active')
+                    || $rootPath && 0 === strpos($node->getPath(), $rootPath)
+                    || $depth == $startLevel)
+            ) {
+                continue;
+            }
+
+            $node->setParent($parent);
+
+            if ($node->get('active') && $depth == $startLevel - 1) {
+                $root = $node;
+            }
+
+        }
+
+        if (!isset($root)) {
+            return null;
+        }
+
+        $root->setParent();
+
+        return $root;
     }
 }

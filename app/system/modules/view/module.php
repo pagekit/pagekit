@@ -4,6 +4,7 @@ use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
 use Pagekit\View\Helper\EditorHelper;
 use Pagekit\View\Helper\FinderHelper;
+use Pagekit\View\Helper\MenuHelper;
 use Pagekit\View\Helper\PositionHelper;
 use Pagekit\View\Helper\TemplateHelper;
 
@@ -19,6 +20,7 @@ return [
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
             $view->addHelper(new EditorHelper());
             $view->addHelper(new FinderHelper());
+            $view->addHelper(new MenuHelper());
             $view->addHelper(new PositionHelper());
             $view->addHelper(new TemplateHelper($app['scripts']));
 

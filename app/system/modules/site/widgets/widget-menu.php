@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Site\Model\Node;
+
 return [
 
     'name' => 'system/widget-menu',
@@ -7,10 +9,6 @@ return [
     'label' => 'Menu',
 
     'type' => 'widget',
-
-    'views' => [
-        'menu' => 'system/site:views/widget-menu.php'
-    ],
 
     'events' => [
 
@@ -26,7 +24,7 @@ return [
             return '';
         }
 
-        $root = $app['menu']->render($menu, [
+        $root = Node::getTree($menu, [
             'start_level' => (int) $widget->get('start_level', 1),
             'depth' => $widget->get('depth'),
             'mode' => $widget->get('mode')

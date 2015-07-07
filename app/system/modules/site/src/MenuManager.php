@@ -60,68 +60,6 @@ class MenuManager implements \JsonSerializable
     }
 
     /**
-     * Renders a menu.
-     *
-     * @param string $menu
-     * @param array  $options
-     * @return NodeInterface|null
-     */
-    public function render($menu, $options = [])
-    {
-        $options = array_replace([
-            'start_level' => 1,
-            'depth' => PHP_INT_MAX,
-            'mode' => 'all'
-        ], $options);
-
-
-        $user       = App::user();
-        $startLevel = (int) $options['start_level'] ?: 1;
-        $maxDepth   = $startLevel + ($options['depth'] ?: PHP_INT_MAX);
-
-        $path       = App::node()->getPath();
-        $segments   = explode('/', $path);
-        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
-
-        $nodes      = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
-        $nodes[0]   = new Node();
-        $nodes[0]->setParentId(null);
-
-        foreach ($nodes as $node) {
-
-            $depth  = substr_count($node->getPath(), '/');
-            $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
-
-            $node->set('active', !$node->getPath() || 0 === strpos($path, $node->getPath()));
-
-            if ($depth >= $maxDepth
-                || !$node->hasAccess($user)
-                || !($options['mode'] == 'all'
-                    || $node->get('active')
-                    || $rootPath && 0 === strpos($node->getPath(), $rootPath)
-                    || $depth == $startLevel)
-            ) {
-                continue;
-            }
-
-            $node->setParent($parent);
-
-            if ($node->get('active') && $depth == $startLevel - 1) {
-                $root = $node;
-            }
-
-        }
-
-        if (!isset($root)) {
-            return null;
-        }
-
-        $root->setParent();
-
-        return $root;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
