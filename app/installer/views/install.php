@@ -169,9 +169,11 @@
                     </div>
 
                     <div class="uk-text-center" v-show="status == 'finished'">
-                        <svg class="tm-checkmark" width="100px" height="100px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="5.125,63.25 27.375,89.375 95.25,18.875"/>
-                        </svg>
+                        <a class="uk-panel" href="{{ $url('admin') }}">
+                            <svg class="tm-checkmark" width="100px" height="100px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="5.125,63.25 27.375,89.375 95.25,18.875"/>
+                            </svg>
+                        </a>
                     </div>
 
                     <div class="uk-panel uk-panel-box" v-show="status == 'failed'">
