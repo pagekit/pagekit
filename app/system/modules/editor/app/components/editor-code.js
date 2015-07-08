@@ -2,7 +2,7 @@ module.exports = {
 
     ready: function () {
 
-        var $this = this, $el = $(this.$el);
+        var $this = this, $el = $(this.$el).wrap('<div class="pk-editor"></div>');
 
         this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
             mode: "htmlmixed",
