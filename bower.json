@@ -4,8 +4,8 @@
     "gravatarjs": "~1.0.0",
     "lodash": "~3.9.0",
     "uikit": "#master",
-    "vue": "0.12.6",
-    "vue-resource": "~0.1.4"
+    "vue": "~0.12.7",
+    "vue-resource": "~0.1.5"
   },
   "devDependencies": {
     "globalize": "~1.0.0",
