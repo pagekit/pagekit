@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="icon-large-cache" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
-<path fill="#666666" d="M18,1c-2.415,2.935-5,7-5,7h7L7,21l3-9H5c0,0,5.642-7.669,8-11H18 M20,8h0.005 M20.118,0H18h-5h-0.517
-	l-0.299,0.422c-2.327,3.286-7.933,10.909-7.99,10.985L3.023,13H5h3.613l-2.562,7.684l-1.339,4.019l2.995-2.995l13-13L22.414,7
-	h-2.409H20h-5.146c0.965-1.437,2.48-3.618,3.918-5.365L20.118,0L20.118,0z"/>
+<svg version="1.1" id="icon-large-cache" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<path fill="#666666" d="M17.658,1l-3.484,7H19c0,0-7.036,9.856-11,15c-0.003-0.002,3.265-11,3.265-11H7.528L12,1H17.658 M19.273,0
+	h-1.615H12h-0.673l-0.253,0.624l-4.472,11L6.042,13h1.486h2.397l-1.252,4.215L7.55,20.996l-0.37,1.247
+	c-0.188,0.633-0.35,1.18,0.265,1.589l0.777,0.518l0.569-0.739c3.93-5.099,10.951-14.931,11.021-15.029L20.942,7H19h-3.211
+	l2.765-5.554L19.273,0L19.273,0z"/>
 </svg>

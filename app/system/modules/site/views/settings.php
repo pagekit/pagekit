@@ -6,8 +6,8 @@
 
         <div class="uk-panel">
             <ul class="uk-nav uk-nav-side pk-nav-large" data-uk-tab="{ connect: '#tab-content' }">
-                <li class="uk-active"><a> <i class="uk-icon-wrench uk-icon-small uk-margin-right"></i>{{ 'General' | trans }}</a></li>
-                <li><a><i class="uk-icon-code uk-icon-small uk-margin-right"></i> {{ 'Code' | trans }}</a></li>
+                <li class="uk-active"><a> <i class="pk-icon-large-system uk-margin-right"></i>{{ 'General' | trans }}</a></li>
+                <li><a><i class="pk-icon-large-code uk-margin-right"></i> {{ 'Code' | trans }}</a></li>
             </ul>
         </div>
 
