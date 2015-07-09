@@ -16,7 +16,7 @@ function install (Vue) {
      */
 
     Vue.component('v-loader', require('./components/loader.vue'));
-    Vue.component('v-modal', require('./components/modal'));
+    Vue.component('v-modal', require('./components/modal.vue'));
     Vue.component('v-pagination', require('./components/pagination'));
 
     /**
