@@ -1,23 +1,30 @@
 <template>
 
-    <a href="#" v-on="click: open">{{ link ? link : 'Select Link' | trans }} <i class="uk-icon-pencil"></i></a>
+    <input type="text" v-model="url" v-attr="name: name, id: id, class: class">
 
-    <div class="uk-modal" v-el="modal">
-        <form class="uk-modal-dialog uk-form uk-form-stacked">
+    <div>
+        <a href="#" v-on="click: open">{{ 'Pick' | trans }} <i class="uk-icon-pencil"></i></a>
+        <span v-show="link">{{ link }}</span>
+    </div>
+
+    <v-modal v-ref="modal">
+
+        <form class="uk-form uk-form-stacked" v-on="submit: update">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Select Link' | trans }}</h2>
             </div>
 
-            <panel-link url="{{ url }}" v-ref="links"></panel-link>
+            <panel-link v-ref="links"></panel-link>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: update">{{ 'Update' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" type="submit" v-attr="disabled: !showUpdate()">{{ 'Update' | trans }}</button>
             </div>
 
         </form>
-    </div>
+
+    </v-modal>
 
 </template>
 
@@ -25,25 +32,16 @@
 
     module.exports = Vue.extend({
 
-        props: ['url'],
+        props: ['url', 'name', 'class', 'id'],
 
-        data: function() {
+        data: function () {
             return {link: false};
-        },
-
-        compiled: function () {
-
-            this.$addChild({
-                el: this.$$.modal,
-                inherit: true
-            }).$appendTo('body');
-
         },
 
         watch: {
 
             url: {
-                handler:'load',
+                handler: 'load',
                 immediate: true
             }
 
@@ -51,9 +49,9 @@
 
         methods: {
 
-            load: function() {
+            load: function () {
                 if (this.url) {
-                    this.$http.get('api/site/link', {link: this.url}, function(data) {
+                    this.$http.get('api/site/link', {link: this.url}, function (data) {
                         this.link = data.url ? data.url : false;
                     }).error(function () {
                         this.link = false;
@@ -66,21 +64,18 @@
 
             open: function (e) {
                 e.preventDefault();
-
-                this.$.links.url = this.url;
-                this.modal = UIkit.modal(this.$$.modal);
-                this.modal.show();
+                this.$.modal.open();
             },
 
             update: function (e) {
                 e.preventDefault();
+
                 this.$set('url', this.$.links.url);
-                this.cancel(e);
+                this.$.modal.close();
             },
 
-            cancel: function (e) {
-                e.preventDefault();
-                this.modal.hide();
+            showUpdate: function () {
+                return !!this.$.links.url;
             }
 
         }

@@ -5,9 +5,9 @@
         <partial name="settings"></partial>
 
         <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Url' | trans }}</label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <input-link url="{{@ node.data.url}}"></input-link>
+            <label for="form-url" class="uk-form-label">{{ 'Url' | trans }}</label>
+            <div class="uk-form-controls">
+                <input-link id="form-url" class="uk-form-width-large" url="{{@ node.data.url}}"></input-link>
             </div>
         </div>
 

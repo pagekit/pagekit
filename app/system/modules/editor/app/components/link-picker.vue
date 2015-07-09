@@ -16,7 +16,13 @@
                     </div>
                 </div>
 
-                <panel-link url="{{@ link.link }}"></panel-link>
+                <div class="uk-form-row">
+                    <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
+
+                    <div class="uk-form-controls">
+                        <input-link id="form-link-url" class="uk-form-width-large" url="{{@ link.link}}"></input-link>
+                    </div>
+                </div>
 
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
