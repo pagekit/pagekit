@@ -76,9 +76,7 @@ module.exports = {
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                if (!data.error) {
-                    UIkit.notify(this.$trans('Roles saved'));
-                } else {
+                if (data.error) {
                     UIkit.notify(this.$trans('Failed to save roles.'), 'danger');
                 }
             });

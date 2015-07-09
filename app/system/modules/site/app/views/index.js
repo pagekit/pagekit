@@ -207,9 +207,10 @@ module.exports = {
 
                         vm.load().success(function () {
                             el.remove();
+                        }).error(function() {
+                            UIkit.notify(this.$trans('Reorder failed.'), 'danger');
                         });
 
-                        UIkit.notify(this.$trans('Order updated.'));
                     });
                 }
             });
