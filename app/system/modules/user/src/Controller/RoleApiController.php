@@ -36,6 +36,11 @@ class RoleApiController
     {
         // is new ?
         if (!$role = Role::find($id)) {
+
+            if ($id) {
+                App::abort(404, __('Role not found.'));
+            }
+
             $role = new Role;
         }
 

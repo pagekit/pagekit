@@ -87,7 +87,7 @@ class UserApiController
             if (!$user = User::find($id)) {
 
                 if ($id) {
-                    App::abort(400, __('User not found.'));
+                    App::abort(404, __('User not found.'));
                 }
 
                 if (!$password) {

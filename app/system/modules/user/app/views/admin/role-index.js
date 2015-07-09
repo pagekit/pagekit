@@ -43,10 +43,11 @@ module.exports = {
 
             this.Roles.save({ id: this.role.id }, { role: this.role }, function (data) {
 
-                var role = _.findIndex(this.roles, 'id', this.role.id);
-
-                if (role !== -1) {
+                if (this.role.id) {
+                    
+                    var role = _.findIndex(this.roles, 'id', this.role.id);
                     this.roles.splice(role, 1, data);
+
                     UIkit.notify(this.$trans('Role saved'));
                 } else {
                     this.roles.push(data);
