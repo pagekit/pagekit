@@ -100,6 +100,16 @@
                     </ul>
 
                 </div>
+
+                <!-- TODO: Only show on ALL and if no widgets -->
+                <div class="pk-table-fake pk-table-fake-header pk-table-fake-border" v-show="0">
+                    <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
+                    <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
+                    <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                    <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
+                </div>
+                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="0">{{ 'No widgets found.' | trans }}</h3>
+
             </div>
 
         </div>
