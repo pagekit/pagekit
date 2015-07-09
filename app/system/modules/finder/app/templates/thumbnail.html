@@ -15,7 +15,7 @@
     <li v-repeat="files | searched" v-on="click: toggleSelect">
         <div class="uk-panel uk-panel-box uk-text-center">
             <div class="uk-panel-teaser uk-position-relative">
-                <div class="uk-cover-background uk-position-cover" v-if="isImage(path)" style="background-image: url('{{ encodeURI(url) }}');"></div>
+                <div class="uk-cover-background uk-position-cover" v-if="isImage(path)" v-lazy-background="url"></div>
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-if="!isImage(path)"></div>
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
             </div>

@@ -20,7 +20,7 @@
         <tr v-repeat="files | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
             <td><input type="checkbox" name="name" value="{{ name }}"></td>
             <td class="pk-table-width-minimum">
-                <i v-if="isImage(url)" class="pk-icon-contain" style="background-image: url('{{ encodeURI(url) }}');"></i>
+                <i v-if="isImage(url)" class="pk-icon-contain" v-lazy-background="url"></i>
                 <i v-if="!isImage(url)" class="pk-icon-file pk-icon-muted"></i>
             </td>
             <td class="pk-table-text-break pk-table-min-width-200">{{ name }}</td>
