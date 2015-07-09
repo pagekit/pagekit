@@ -46,16 +46,19 @@
 
                 </form>
 
-                <form class="js-toggle uk-panel uk-panel-box uk-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
+                <form class="js-toggle uk-form tm-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
 
-                    <div class="uk-form-row">
-                        <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
-                    </div>
-                    <div class="uk-form-row">
-                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
-                    </div>
+                    <div class="uk-panel uk-panel-box">
 
-                    <?php $view->token()->get() ?>
+                        <div class="uk-form-row">
+                            <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
+                        </div>
+                        <div class="uk-form-row tm-panel-marginless-bottom">
+                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
+                        </div>
+
+                        <?php $view->token()->get() ?>
+                    </div>
 
                 </form>
 
