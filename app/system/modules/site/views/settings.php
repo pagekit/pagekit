@@ -66,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+
             </li>
             <li>
 
@@ -78,7 +79,9 @@
                     </div>
                 </div>
 
-                <div class="uk-form uk-form-horizontal">
+                <p>{{ 'Insert code in the header and footer of your theme. This is useful for tracking codes and meta tags.' | trans }}</p>
+
+                <div class="uk-form uk-form-stacked">
                     <div class="uk-form-row">
                         <label for="form-codeheader" class="uk-form-label">{{ 'Header' | trans }}</label>
                         <div class="uk-form-controls">
