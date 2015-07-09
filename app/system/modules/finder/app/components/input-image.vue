@@ -28,7 +28,7 @@
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-link" type="button" v-attr="disabled: !selectButton" v-on="click: select()">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" v-on="click: select()">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>
