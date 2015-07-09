@@ -61,7 +61,7 @@
             <partial name="{{ view }}"></partial>
         </div>
 
-        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!items.length || noItemsAfterFilter">{{ 'No files found.' | trans }}</h3>
+        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!hasItems">{{ 'No files found.' | trans }}</h3>
 
     </div>
 
@@ -81,7 +81,6 @@
                 path: '/',
                 mode: 'write',
                 view: 'table',
-                count: 0,
                 upload: {},
                 selected: [],
                 items: false
@@ -94,10 +93,7 @@
 
             this.load().success(function () {
                 this.$dispatch('ready.finder', this);
-
             });
-
-            this.$el.$finder = this;
 
             UIkit.init(this.$el);
         },
@@ -117,26 +113,9 @@
         filters: {
 
             searched: function (files) {
-
-                var query = this.search;
-
-                return query ? files.filter(function (file) {
-                    return file.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-                }) : files;
-            },
-
-            folders: function (items) {
-
-                return items ? items.filter(function (item) {
-                    return item.mime === 'application/folder';
-                }) : [];
-            },
-
-            files: function (items) {
-
-                return items ? items.filter(function (item) {
-                    return item.mime === 'application/file';
-                }) : [];
+                return files.filter(function (file) {
+                    return !this.search || file.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+                }, this);
             }
 
         },
@@ -161,18 +140,20 @@
                 return crumbs;
             },
 
-            noItemsAfterFilter: function() {
+            hasItems: function() {
+                return this.$options.filters.searched(this.items || []).length;
+            },
 
-                if (this.count) {
+            count: function() {
+                return this.items ? this.items.length : 0;
+            },
 
-                    var query = this.search;
+            folders: function () {
+                return _.filter(this.items, 'mime', 'application/folder');
+            },
 
-                    return query ? !this.items.filter(function (file) {
-                        return file.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-                    }).length : false;
-                }
-
-                return false;
+            files: function () {
+                return _.filter(this.items, 'mime', 'application/file');
             }
 
         },
@@ -215,7 +196,9 @@
             toggleSelect: function (name) {
 
                 if (name.targetVM) {
-                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A')  return;
+                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A') {
+                        return;
+                    }
                     name = name.targetVM.$data.name;
                 }
 
@@ -300,13 +283,12 @@
                 return this.resource.get({path: this.path, root: this.getRoot()}, function (data) {
 
                     this.$set('items', data.items || []);
-                    this.$set('count', this.items.length);
                     this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
                 }).error(function() {
 
-                    UIkit.notify('Unable to access directory.', 'danger')
+                    UIkit.notify(this.$trans('Unable to access directory.'), 'danger')
 
                 });
             }

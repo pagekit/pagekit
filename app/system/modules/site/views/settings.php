@@ -55,14 +55,14 @@
                     <div class="uk-form-row">
                         <label for="form-favicon" class="uk-form-label">{{ 'Site favicon' | trans }}</label>
                         <div class="uk-form-controls uk-form-width-large">
-                            <input-image src="config.icons.favicon"></input-image>
+                            <input-image src="{{@ config.icons.favicon }}"></input-image>
                         </div>
                     </div>
 
                     <div class="uk-form-row">
                         <label for="form-appicon" class="uk-form-label">{{ 'Site appicon' | trans }}</label>
                         <div class="uk-form-controls uk-form-width-large">
-                            <input-image src="config.icons.appicon"></input-image>
+                            <input-image src="{{@ config.icons.appicon }}"></input-image>
                         </div>
                     </div>
                 </div>

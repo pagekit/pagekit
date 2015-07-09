@@ -37,8 +37,8 @@
         </div>
     </div>
 
-    <div class="uk-modal" v-el="modal">
-        <form class="uk-modal-dialog uk-form-stacked">
+    <v-modal v-ref="modal">
+        <form class="uk-form-stacked">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Select Cache to Clear' | trans }}</h2>
@@ -55,12 +55,12 @@
             </div>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
                 <button class="uk-button uk-button-link" v-on="click: clear">{{ 'Clear' | trans }}</button>
             </div>
 
         </form>
-    </div>
+    </v-modal>
 
 </template>
 
@@ -83,15 +83,6 @@
             };
         },
 
-        compiled: function () {
-
-            this.$addChild({
-                el: this.$$.modal,
-                inherit: true
-            }).$appendTo('body');
-
-        },
-
         methods: {
 
             open: function (e) {
@@ -99,8 +90,7 @@
 
                 this.$set('cache', {cache: true});
 
-                this.modal = UIkit.modal(this.$$.modal);
-                this.modal.show();
+                this.$.modal.open();
             },
 
             clear: function (e) {
@@ -109,13 +99,8 @@
                 this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
                     UIkit.notify('Cache cleared.')
                 });
-                this.cancel(e);
-            },
 
-            cancel: function (e) {
-                e.preventDefault();
-
-                this.modal.hide();
+                this.$.modal.close();
             }
 
         },

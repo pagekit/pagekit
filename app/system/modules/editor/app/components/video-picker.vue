@@ -66,13 +66,11 @@
 
         ready: function () {
 
-            var vm = this, modal = UIkit.modal(this.$$.modal);
+            var vm = this;
 
-            modal.on('hide.uk.modal', function () {
+            UIkit.modal(this.$$.modal).show().on('hide.uk.modal', function () {
                 vm.$destroy(true);
             });
-
-            modal.show();
 
         },
 

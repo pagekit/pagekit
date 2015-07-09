@@ -7,7 +7,7 @@
     </thead>
     <tbody>
 
-        <tr v-repeat="items | folders | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
+        <tr v-repeat="folders | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
             <td><input type="checkbox" name="name" value="{{ name }}"></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder"></i>
@@ -17,7 +17,7 @@
             <td></td>
         </tr>
 
-        <tr v-repeat="items | files | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
+        <tr v-repeat="files | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
             <td><input type="checkbox" name="name" value="{{ name }}"></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(url)" class="pk-icon-contain" style="background-image: url('{{ encodeURI(url) }}');"></i>
