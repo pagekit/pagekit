@@ -84,8 +84,10 @@
                 </div>
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
-                    <div v-repeat="role: data.roles" class="uk-form-controls">
-                        <label><input type="checkbox" v-checkbox="post.roles" value="{{ role.id }}"> {{ role.name }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p v-repeat="role: data.roles" class="uk-form-controls-condensed">
+                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="post.roles"> {{ role.name }}</label>
+                        </p>
                     </div>
                 </div>
                 <div class="uk-form-row">

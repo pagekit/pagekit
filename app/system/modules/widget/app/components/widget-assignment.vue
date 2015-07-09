@@ -1,13 +1,16 @@
 <template>
 
-    <div class="uk-form-row" v-repeat="menu: menus" v-show="menu.getNodes().length">
-        <label for="form-h-it" class="uk-form-label">{{ menu.label }}</label>
+    <div class="uk-form-horizontal">
 
-        <div class="uk-form-controls uk-form-controls-text">
-            <ul class="uk-list uk-margin-top-remove">
-                <node v-repeat="node: menu.getNodes()"></node>
-            </ul>
+        <div class="uk-form-row" v-repeat="menu: menus" v-show="menu.getNodes().length">
+            <label class="uk-form-label">{{ menu.label }}</label>
+            <div class="uk-form-controls uk-form-controls-text">
+                <ul class="uk-list uk-margin-top-remove">
+                    <node v-repeat="node: menu.getNodes()"></node>
+                </ul>
+            </div>
         </div>
+
     </div>
 
 </template>

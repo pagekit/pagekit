@@ -45,10 +45,8 @@
                     </div>
                 </div>
 
-
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
-
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
                     </div>
