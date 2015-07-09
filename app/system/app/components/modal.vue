@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-modal">
-        <div class="uk-modal-dialog" v-class="'uk-modal-dialog-large': large, 'uk-modal-dialog-lightbox': lightbox">
+        <div class="uk-modal-dialog{{ modifier ? ' '+modifier : '' }}" v-class="'uk-modal-dialog-large': large, 'uk-modal-dialog-lightbox': lightbox">
             <div v-if="opened">
                 <content></content>
             </div>
@@ -19,7 +19,7 @@
             return {opened: false};
         },
 
-        props: {large: Boolean, lightbox: Boolean, closed: Function},
+        props: {large: Boolean, lightbox: Boolean, closed: Function, modifier: String},
 
         created: function () {
 
