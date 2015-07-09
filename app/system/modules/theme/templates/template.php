@@ -26,7 +26,7 @@
 
                         <i class="tm-icon-menu"></i>
 
-                        <h1 class="tm-heading">{{ item.label | trans }}</h1>
+                        <h1 class="tm-heading" v-text="item.label | trans"></h1>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }"  v-el="appnav">
@@ -45,7 +45,7 @@
                         <ul class="uk-grid uk-grid-small uk-flex-middle">
                             <li><a class="tm-icon-visit" href="{{ $url() }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
                             <li><a class="tm-icon-logout" href="{{ $url('user/logout', {redirect: 'admin/login'}) }}" title="{{ 'Logout' | trans }}"></a></li>
-                            <li class="uk-margin-small-left"><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" alt="{{ user.name }}" v-gravatar="user.email"> {{ user.username }}</a></li>
+                            <li class="uk-margin-small-left"><a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right uk-invisible" height="32" width="32" title="{{ user.name }}" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
                         </ul>
 
                     </div>
@@ -54,7 +54,7 @@
                 <nav class="uk-navbar tm-navbar uk-hidden-small" v-show="subnav">
                     <ul class="uk-navbar-nav">
                         <li v-class="uk-active: item.active" v-repeat="item: subnav">
-                            <a v-attr="href: item.url">{{ item.label | trans }}</a>
+                            <a v-attr="href: item.url" v-text="item.label | trans"></a>
                         </li>
                     </ul>
                 </nav>

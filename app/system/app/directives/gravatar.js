@@ -22,16 +22,16 @@ module.exports = {
 
         var img = new Image();
 
-        el.css('visibility', 'hidden');
+        el.addClass('uk-invisible');
 
         img.onload = function() {
             this._cache[url] = url;
-            el.attr('src', url).css('visibility', '');
+            el.attr('src', url).removeClass('uk-invisible');
         }.bind(this);
 
         img.onerror = function() {
             this._cache[url] = this.letterAvatar(el.attr('title') || el.attr('alt'), size, el.attr('colored'));
-            el.attr('src', this._cache[url]).css('visibility', '');
+            el.attr('src', this._cache[url]).removeClass('uk-invisible');
         }.bind(this);
 
         img.src = url;
