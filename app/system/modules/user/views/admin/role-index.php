@@ -63,8 +63,8 @@
         </div>
     </div>
 
-    <div id="modal-role" class="uk-modal">
-        <form class="uk-modal-dialog uk-form-stacked" name="form" v-on="valid: save">
+    <v-modal v-ref="modal">
+        <form class="uk-form-stacked" name="form" v-on="valid: save">
 
             <div class="uk-modal-header">
                 <h2>{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>
@@ -84,6 +84,6 @@
             </div>
 
         </form>
-    </div>
+    </v-modal>
 
 </div>

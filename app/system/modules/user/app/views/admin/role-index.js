@@ -12,7 +12,6 @@ module.exports = {
     ready: function () {
 
         $(this.$el).on('change.uk.sortable', this.reorder);
-        this.modal = UIkit.modal('#modal-role');
 
     },
 
@@ -28,7 +27,7 @@ module.exports = {
 
         edit: function (role) {
             this.$set('role', $.extend({}, role));
-            this.modal.show();
+            this.$.modal.open();
         },
 
         save: function (e) {
@@ -39,12 +38,10 @@ module.exports = {
                 return;
             }
 
-            this.modal.hide();
-
             this.Roles.save({ id: this.role.id }, { role: this.role }, function (data) {
 
                 if (this.role.id) {
-                    
+
                     var role = _.findIndex(this.roles, 'id', this.role.id);
                     this.roles.splice(role, 1, data);
 
@@ -55,6 +52,8 @@ module.exports = {
                 }
 
             });
+
+            this.$.modal.close();
         },
 
         remove: function (role) {
