@@ -4,7 +4,7 @@
         <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.type == 'extension'">
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
-            <ul class="uk-subnav uk-margin-bottom-remove">
+            <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
                 <li class="uk-text-muted">{{ package.author.name }}</li>
                 <li class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</li>
             </ul>
@@ -26,7 +26,7 @@
 
         </div>
         <div>
-            
+
             <p>{{ package.description }}</p>
 
             <ul class="uk-list">
