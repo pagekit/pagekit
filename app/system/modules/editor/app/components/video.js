@@ -77,7 +77,7 @@ module.exports = {
                 });
         },
 
-        replaceInPreview: function(data) {
+        replaceInPreview: function(data, index) {
 
             var settings;
 
@@ -89,7 +89,7 @@ module.exports = {
 
             _.merge(data, settings || { src: '' });
 
-            return '<video-preview></video-preview>';
+            return '<video-preview index="'+index+'"></video-preview>';
         }
 
     },

@@ -30,10 +30,12 @@
 
     module.exports = Vue.extend({
 
+        props: ['index'],
+
         computed: {
 
             image: function() {
-                return this.$parent.images[_.findIndex(this.$parent.$children, function(child) { return child === this; }, this)] || {};
+                return this.$parent.images[this.index] || {};
             }
 
         },

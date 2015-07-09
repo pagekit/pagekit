@@ -38,7 +38,6 @@ module.exports = {
                 Vue.nextTick(function() {
                     vm.$compile(editor.preview[0]);
                 });
-
             });
 
     },
@@ -74,7 +73,7 @@ module.exports = {
                 });
         },
 
-        replaceInPreview: function (data) {
+        replaceInPreview: function (data, index) {
 
             if (data.matches[0][0] == '<') {
                 data.src = data.matches[0].match(/src="(.*?)"/)[1];
@@ -86,7 +85,7 @@ module.exports = {
                 data.tag = 'gfm';
             }
 
-            return '<image-preview></image-preview>';
+            return '<image-preview index="'+index+'"></image-preview>';
         }
 
     },

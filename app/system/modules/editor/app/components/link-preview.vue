@@ -8,10 +8,12 @@
 
     module.exports = Vue.extend({
 
+        props: ['index'],
+
         computed: {
 
             link: function() {
-                return this.$parent.links[_.findIndex(this.$parent.$children, function(child) { return child === this; }, this)] || {};
+                return this.$parent.links[this.index] || {};
             }
 
         },

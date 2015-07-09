@@ -38,10 +38,12 @@
 
     module.exports = Vue.extend({
 
+        props: ['index'],
+
         computed: {
 
             video: function() {
-                return this.$parent.videos[_.findIndex(this.$parent.$children, function(child) { return child === this; }, this)] || {};
+                return this.$parent.videos[this.index] || {};
             }
 
         },

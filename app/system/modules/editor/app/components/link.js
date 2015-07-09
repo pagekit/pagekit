@@ -74,7 +74,7 @@ module.exports = {
                 });
         },
 
-        replaceInPreview: function (data) {
+        replaceInPreview: function (data, index) {
 
             if (data.matches[0][0] == '<') {
 
@@ -94,7 +94,7 @@ module.exports = {
 
             }
 
-            return '<link-preview></link-preview>';
+            return '<link-preview index="'+index+'"></link-preview>';
         }
 
     },

@@ -13,6 +13,10 @@
 
         props: ['src'],
 
+        data: function() {
+            return {image: undefined, video: undefined};
+        },
+
         watch: {
             src: {
                 handler: 'update',

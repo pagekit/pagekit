@@ -4,7 +4,7 @@ module.exports = {
         return {opened: false};
     },
 
-    props: {large: Boolean, lightbox: Boolean},
+    props: {large: Boolean, lightbox: Boolean, closed: Function},
 
     template: '',
 
@@ -43,6 +43,10 @@ module.exports = {
             });
 
             vm.opened = false;
+
+            if (vm.closed) {
+                vm.closed();
+            }
         });
     },
 

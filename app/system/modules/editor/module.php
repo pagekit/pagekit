@@ -12,7 +12,7 @@ return [
 
     'config' => [
 
-        'editor' => 'htmleditor'
+        'editor' => 'html'
 
     ],
 

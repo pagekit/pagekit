@@ -1,28 +1,30 @@
 <template>
 
-    <div class="uk-modal" v-el="modal">
-        <div class="uk-modal-dialog uk-form uk-form-stacked">
+    <div>
+        <v-modal v-ref="modal" closed="{{ close }}">
+            <form class="uk-form uk-form-stacked" v-on="submit: update">
 
-            <div class="uk-modal-header">
-                <h2>{{ 'Add Link' | trans }}</h2>
-            </div>
-
-            <div class="uk-form-row">
-                <label for="form-link-title" class="uk-form-label">{{ 'Title' | trans }}</label>
-
-                <div class="uk-form-controls">
-                    <input id="form-link-title" type="text" class="uk-form-width-large" v-model="link.txt">
+                <div class="uk-modal-header">
+                    <h2>{{ 'Add Link' | trans }}</h2>
                 </div>
-            </div>
 
-            <panel-link url="{{@ link.link }}"></panel-link>
+                <div class="uk-form-row">
+                    <label for="form-link-title" class="uk-form-label">{{ 'Title' | trans }}</label>
 
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: update">{{ 'Update' | trans }}</button>
-            </div>
+                    <div class="uk-form-controls">
+                        <input id="form-link-title" type="text" class="uk-form-width-large" v-model="link.txt">
+                    </div>
+                </div>
 
-        </div>
+                <panel-link url="{{@ link.link }}"></panel-link>
+
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="submit">{{ 'Update' | trans }}</button>
+                </div>
+
+            </form>
+        </v-modal>
     </div>
 
 </template>
@@ -38,19 +40,19 @@
         },
 
         ready: function () {
-
-            var vm = this;
-
-            UIkit.modal(this.$$.modal).show().on('hide.uk.modal', function () {
-                vm.$destroy(true);
-            });
-
+            this.$.modal.open();
         },
 
 
         methods: {
 
-            update: function () {
+            close: function() {
+                this.$destroy(true);
+            },
+
+            update: function (e) {
+                e.preventDefault();
+                this.$.modal.close();
                 this.$emit('select', this.link);
             }
 
