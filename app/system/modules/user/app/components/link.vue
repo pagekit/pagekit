@@ -2,9 +2,8 @@
 
     <div class="uk-form-row">
         <label for="form-link-page" class="uk-form-label">{{ 'Page' | trans }}</label>
-
         <div class="uk-form-controls">
-            <select id="form-link-page" class="uk-form-width-large" v-model="view">
+            <select id="form-link-page" class="uk-width-1-1" v-model="view">
                 <option value="">{{ '- Select View -' | trans}}</option>
                 <option value="@user/login">{{ 'User Login' | trans}}</option>
                 <option value="@user/logout">{{ 'User Logout' | trans}}</option>
