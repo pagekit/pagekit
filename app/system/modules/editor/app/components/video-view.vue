@@ -2,7 +2,7 @@
 
     <div>
         <img class="uk-width-1-1" v-attr="src: image" v-if="image">
-        <video class="uk-width-1-1" v-attr="src: video" v-if="video">
+        <video class="uk-width-1-1" v-attr="src: video" v-if="video"></video>
     </div>
 
 </template>

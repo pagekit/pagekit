@@ -24,7 +24,7 @@
             }
 
             var components = this.$options.components, type = 'editor-'+this.type;
-            this.editor = this.$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['textarea']);
+            this.editor = this.$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea']);
         },
 
         ready: function() {
@@ -41,13 +41,13 @@
 
         components: {
 
-            textarea: {},
+            'editor-textarea': {},
             'editor-html': require('./editor-html'),
             'editor-code': require('./editor-code'),
-            link: require('./link'),
-            image: require('./image'),
-            video: require('./video'),
-            url: require('./url')
+            'plugin-link': require('./link'),
+            'plugin-image': require('./image'),
+            'plugin-video': require('./video'),
+            'plugin-url': require('./url')
 
         }
 
