@@ -32,7 +32,7 @@
                     <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Connect database' | trans }}</h1>
                     <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your database connection details.' | trans }}</div>
 
-                    <div class="uk-alert uk-alert-danger uk-margin" v-show="message"><p>{{ message }}</p></div>
+                    <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
                     <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formDatabase" v-on="submit: stepDatabase">
                         <div class="uk-form-row">
