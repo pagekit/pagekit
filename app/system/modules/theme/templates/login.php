@@ -32,7 +32,9 @@
                             </div>
                         </div>
 
-                        <p class="uk-form-row tm-panel-marginless-bottom"><button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button></p>
+                        <p class="uk-form-row tm-panel-marginless-bottom">
+                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button>
+                        </p>
 
                         <?php $view->token()->get() ?>
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
@@ -53,9 +55,10 @@
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
                         </div>
-                        <div class="uk-form-row tm-panel-marginless-bottom">
+
+                        <p class="uk-form-row tm-panel-marginless-bottom">
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
-                        </div>
+                        </p>
 
                         <?php $view->token()->get() ?>
                     </div>
