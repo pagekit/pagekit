@@ -50,9 +50,10 @@ module.exports = {
 
     unbind: function () {
         this.dirs.forEach(function (dir) {
-            try{
+            try {
                 _.off(dir.el, dir.arg, dir.handler);
-            }catch(e){}
+            } catch (e) {
+            }
         });
     }
 

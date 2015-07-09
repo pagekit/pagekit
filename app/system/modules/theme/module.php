@@ -37,6 +37,12 @@ return [
 
         'system/theme:' => ''
 
-    ]
+    ],
+
+    'views' => [
+
+        'error' => 'system/theme:templates/error.php'
+
+    ],
 
 ];

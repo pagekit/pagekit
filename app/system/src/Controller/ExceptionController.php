@@ -25,7 +25,7 @@ class ExceptionController
         }
 
         $content  = $this->getAndCleanOutputBuffering($request->headers->get('X-Php-Ob-Level', -1));
-        $response = App::view('system/theme:templates/error.php', compact('title', 'exception', 'content'));
+        $response = App::view('error', compact('title', 'exception', 'content'));
 
         return App::response($response, $exception->getCode(), $exception->getHeaders());
     }
