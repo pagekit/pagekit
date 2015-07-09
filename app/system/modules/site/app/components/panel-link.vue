@@ -2,17 +2,14 @@
 
     <div class="uk-form-row">
         <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
-
         <div class="uk-form-controls">
-            <input id="form-link-url" class="uk-form-width-large" type="text" v-model="url">
+            <input id="form-link-url" class="uk-width-1-1" type="text" v-model="url">
         </div>
     </div>
-
     <div class="uk-form-row">
         <label for="form-style" class="uk-form-label">{{ 'Type' | trans }}</label>
-
         <div class="uk-form-controls">
-            <select id="form-style" class="uk-form-width-large" v-model="type" options="types | orderBy 'name'"></select>
+            <select id="form-style" class="uk-width-1-1" v-model="type" options="types | orderBy 'name'"></select>
         </div>
     </div>
 

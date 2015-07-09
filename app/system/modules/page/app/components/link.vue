@@ -2,9 +2,8 @@
 
     <div class="uk-form-row">
         <label for="form-link-page" class="uk-form-label">{{ 'Page' | trans }}</label>
-
         <div class="uk-form-controls">
-            <select id="form-link-page" class="uk-form-width-large" v-model="page" options="pageOptions"></select>
+            <select id="form-link-page" class="uk-width-1-1" v-model="page" options="pageOptions"></select>
         </div>
     </div>
 
