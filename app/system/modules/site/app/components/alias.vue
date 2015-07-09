@@ -6,7 +6,7 @@
 
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Url' | trans }}</label>
-            <div class="uk-form-controls">
+            <div class="uk-form-controls uk-form-controls-text">
                 <input-link url="{{@ node.data.url}}"></input-link>
             </div>
         </div>
