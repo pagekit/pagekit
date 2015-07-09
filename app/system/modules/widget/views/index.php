@@ -68,9 +68,9 @@
             </div>
 
             <div class="uk-overflow-container">
-                <div v-repeat="pos: positions" track-by="name" v-show="pos | show">
+                <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-subheading">
+                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.assigned.length">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
