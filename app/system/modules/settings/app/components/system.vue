@@ -59,7 +59,7 @@
         section: {
             name: 'system',
             label: 'System',
-            icon: 'pk-icon-large-system',
+            icon: 'pk-icon-large-settings',
             priority: 10
         },
 

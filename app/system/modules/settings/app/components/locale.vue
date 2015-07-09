@@ -43,7 +43,7 @@
         section: {
             name: 'locale',
             label: 'Localization',
-            icon: 'pk-icon-large-localization',
+            icon: 'pk-icon-large-pin',
             priority: 20
         },
 
