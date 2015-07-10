@@ -25,7 +25,7 @@
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input type="text" class="uk-width-1-1" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
+                        <input class="uk-width-1-1" type="text" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
                     </div>
                 </div>
 

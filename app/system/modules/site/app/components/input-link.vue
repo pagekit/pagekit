@@ -1,11 +1,15 @@
 <template>
 
-    <input type="text" v-model="url" v-attr="name: name, id: id, class: class">
+    <div v-attr="class: class">
+        <div class="uk-flex uk-flex-middle">
 
-    <div>
-        <a href="#" v-on="click: open">{{ 'Pick' | trans }} <i class="uk-icon-pencil"></i></a>
-        <span v-show="link">{{ link }}</span>
+            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id">
+            <a class="pk-icon-edit pk-icon-hover uk-margin-small-left" title="{{ 'Pick' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: open"></a>
+
+        </div>
     </div>
+
+    <p class="uk-text-muted uk-margin-small-top" v-show="link">{{ link }}</p>
 
     <v-modal v-ref="modal">
 

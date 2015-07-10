@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-form-row">
-        <label for="form-style" class="uk-form-label">{{ 'Type' | trans }}</label>
+        <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
         <div class="uk-form-controls">
             <select id="form-style" class="uk-width-1-1" v-model="type" options="types"></select>
         </div>
