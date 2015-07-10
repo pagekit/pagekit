@@ -7,11 +7,7 @@
         <?= __('Written by %name% on %date%', ['%name%' => $post->getUser()->getName(), '%date%' => '<time datetime="'.$intl->date($post->getDate(), 'iso').'">'.$intl->date($post->getDate()).'</time>' ]) ?>
     </p>
 
-    <?php if ($post->getExcerpt()) : ?>
-    <div><?= $post->getExcerpt() ?></div>
-    <?php else : ?>
-    <div><?= $post->getContent() ?></div>
-    <?php endif ?>
+    <div class="uk-margin"><?= ($post->getExcerpt()) ? $post->getExcerpt() : $post->getContent() ?></div>
 
     <ul class="uk-subnav uk-subnav-line">
         <?php if (isset($post->readmore) && $post->readmore || $post->getExcerpt()) : ?>
@@ -25,17 +21,15 @@
 </article>
 <?php endforeach ?>
 
-<p>
-    <ul class="uk-pagination">
-        <?php if ($page > 1) : ?>
-        <li class="uk-pagination-previous">
-            <a href="<?= $view->url('@blog/page', ['page' => $page-1]) ?>"><?= __('Newer posts') ?></a>
-        </li>
-        <?php endif ?>
-        <?php if ($page < $total) : ?>
-        <li class="uk-pagination-next">
-            <a href="<?= $view->url('@blog/page', ['page' => $page+1]) ?>"><?= __('Older posts') ?></a>
-        </li>
-        <?php endif ?>
-    </ul>
-</p>
+<ul class="uk-pagination">
+    <?php if ($page > 1) : ?>
+    <li class="uk-pagination-previous">
+        <a href="<?= $view->url('@blog/page', ['page' => $page-1]) ?>"><?= __('Newer posts') ?></a>
+    </li>
+    <?php endif ?>
+    <?php if ($page < $total) : ?>
+    <li class="uk-pagination-next">
+        <a href="<?= $view->url('@blog/page', ['page' => $page+1]) ?>"><?= __('Older posts') ?></a>
+    </li>
+    <?php endif ?>
+</ul>
