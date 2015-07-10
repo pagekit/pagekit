@@ -61,6 +61,7 @@ module.exports = {
         },
 
         status: function () {
+
             var widgets = this.getSelected();
 
             widgets.forEach(function (widget) {
@@ -96,7 +97,7 @@ module.exports = {
         show: function (position) {
 
             if (!this.position) {
-                return position.name != '_unassigned' ? position.assigned.length : 0;
+                return position.widgets ? position.widgets.length : 0;
             }
 
             return this.active(position);

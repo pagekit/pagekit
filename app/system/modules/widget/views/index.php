@@ -21,8 +21,8 @@
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li v-class="uk-active: active(pos)" v-repeat="pos: theme.positions">
-                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.assigned.length">{{ pos.assigned.length }}</span></a>
+                    <li v-class="uk-active: active(pos)" v-repeat="pos: theme.positions" v-var="pos.widgets: pos.assigned | assigned">
+                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
 
@@ -70,17 +70,17 @@
             <div class="uk-overflow-container">
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.assigned.length">
+                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
 
-                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.assigned.length">{{ 'No widgets found.' | trans }}</h3>
+                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" inline-template>
-                        <li v-repeat="widget: pos.assigned | assigned" data-id="{{ widget.id }}">
+                        <li v-repeat="widget: pos.widgets" data-id="{{ widget.id }}">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form" v-component="item" inline-template>
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
