@@ -122,6 +122,10 @@ module.exports = {
             return this.active(position);
         },
 
+        type: function (widget) {
+            return _.find(this.types, {name: widget.type});
+        },
+
         assigned: function (ids) {
             return ids.map(function (id) {
                 return _.find(this.widgets, 'id', id);
@@ -150,23 +154,6 @@ module.exports = {
                             vm.assign(vm.pos.name, _.pluck(sortable.serialize(), 'id'));
                         }
                     });
-            }
-
-        },
-
-        item: {
-
-            inherit: true,
-            replace: false,
-
-            computed: {
-
-                type: function () {
-                    if (this.widget) {
-                        return _.find(this.types, {name: this.widget.type});
-                    }
-                }
-
             }
 
         }

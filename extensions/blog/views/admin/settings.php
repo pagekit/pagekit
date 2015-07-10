@@ -39,25 +39,25 @@
                             <p class="uk-form-controls-condensed">
                                 <label>
                                     <input type="radio" v-model="config.permalink.type" value="">
-                                    {{ 'Numeric' | trans }} <code>{{ '/blog/123' | trans }}</code>
+                                    {{ 'Numeric' | trans }} <code>{{ '/123' | trans }}</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
                                     <input type="radio" v-model="config.permalink.type" value="{slug}">
-                                    {{ 'Name' | trans }} <code>{{ '/blog/sample-post' | trans }}</code>
+                                    {{ 'Name' | trans }} <code>{{ '/sample-post' | trans }}</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
                                     <input type="radio" v-model="config.permalink.type" value="{year}/{month}/{day}/{slug}">
-                                    {{ 'Day and name' | trans }} <code>{{ '/blog/2014/06/12/sample-post' | trans }}</code>
+                                    {{ 'Day and name' | trans }} <code>{{ '/2014/06/12/sample-post' | trans }}</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">
                                 <label>
                                     <input type="radio" v-model="config.permalink.type" value="{year}/{month}/{slug}">
-                                    {{ 'Month and name' | trans }} <code>{{ '/blog/2014/06/sample-post' | trans }}</code>
+                                    {{ 'Month and name' | trans }} <code>{{ '/2014/06/sample-post' | trans }}</code>
                                 </label>
                             </p>
                             <p class="uk-form-controls-condensed">

@@ -80,9 +80,9 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" inline-template>
-                        <li v-repeat="widget: pos.widgets" data-id="{{ widget.id }}">
+                        <li v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}">
 
-                            <div class="uk-nestable-panel pk-table-fake uk-form" v-component="item" inline-template>
+                            <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
@@ -101,9 +101,8 @@
 
                 </div>
 
-                <!-- TODO: Only show on ALL and if no widgets -->
                 <div class="pk-table-fake pk-table-fake-header pk-table-fake-border" v-show="empty">
-                    <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
+                    <div class="pk-table-width-minimum"><input type="checkbox"></div>
                     <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
                     <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                     <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
