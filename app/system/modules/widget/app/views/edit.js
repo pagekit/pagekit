@@ -1,6 +1,8 @@
 module.exports = {
 
-    data: window.$data,
+    data: function () {
+        return _.extend({}, window.$data);
+    },
 
     ready: function () {
 

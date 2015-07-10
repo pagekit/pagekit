@@ -17,8 +17,8 @@
                     <li v-class="uk-active: active()">
                         <a v-on="click: select()">{{ 'All' | trans }}</a>
                     </li>
-                    <li v-class="uk-active: active(unassigned)" v-show="unassigned.assigned.length">
-                        <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }}</a>
+                    <li v-class="uk-active: active(unassigned)" v-show="unassigned.widgets.length">
+                        <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
                     <li v-class="uk-active: active(pos)" v-repeat="pos: theme.positions" v-var="pos.widgets: pos.assigned | assigned">

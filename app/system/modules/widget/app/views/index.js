@@ -16,7 +16,10 @@ module.exports = {
         },
 
         unassigned: function () {
-            return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(this.get('unassigned'), 'id')};
+
+            var widgets = this.get('unassigned');
+
+            return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(widgets, 'id'), widgets: widgets};
         },
 
         empty: function () {
@@ -113,15 +116,17 @@ module.exports = {
         show: function (position) {
 
             if (!this.position) {
-                return position.widgets ? position.widgets.length : 0;
+                return position.name != '_unassigned' ? position.widgets.length : 0;
             }
 
             return this.active(position);
         },
 
         assigned: function (ids) {
-            return this.get('assigned').filter(function (widget) {
-                return ids.indexOf(widget.id) !== -1;
+            return ids.map(function (id) {
+                return _.find(this.widgets, 'id', id);
+            }, this).filter(function (widget) {
+                return widget !== undefined;
             });
         }
 

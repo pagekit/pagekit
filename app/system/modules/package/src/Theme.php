@@ -146,10 +146,11 @@ class Theme extends Module implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $data = $this->get(['name', 'config']);
-        $data['menus'] = array_values($this->getMenus());
-        $data['positions'] = array_values($this->getPositions());
-
-        return $data;
+        return [
+            'name' => $this->name,
+            'config' => $this->config,
+            'menus' => array_values($this->getMenus()),
+            'positions' => array_values($this->getPositions())
+        ];
     }
 }
