@@ -16,19 +16,41 @@ module.exports = {
         },
 
         unassigned: function () {
+            return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(this.get('unassigned'), 'id')};
+        },
 
-            var theme = this.theme, ids = _.pluck(this.widgets, 'id').filter(function (id) {
-                return !theme.positions.some(function (position) {
-                    return position.assigned.indexOf(id) !== -1;
-                });
-            });
-
-            return {name: '_unassigned', label: 'Unassigned', assigned: ids};
+        empty: function () {
+            return !this.position && !this.get('assigned').length;
         }
 
     },
 
     methods: {
+
+        get: function (filter) {
+
+            var filters = {
+
+                selected: function (widget) {
+                    return this.selected.indexOf(widget.id.toString()) !== -1;
+                },
+
+                assigned: function (widget) {
+                    return this.theme.positions.some(function (position) {
+                        return position.assigned.indexOf(widget.id) !== -1;
+                    });
+                },
+
+                unassigned: function (widget) {
+                    return !this.theme.positions.some(function (position) {
+                        return position.assigned.indexOf(widget.id) !== -1;
+                    });
+                }
+
+            };
+
+            return filters[filter] ? this.widgets.filter(filters[filter], this) : this.widgets;
+        },
 
         active: function (position) {
             return this.position === position || this.position.name == position.name;
@@ -62,7 +84,7 @@ module.exports = {
 
         status: function () {
 
-            var widgets = this.getSelected();
+            var widgets = this.get('selected');
 
             widgets.forEach(function (widget) {
                 widget.status = status;
@@ -82,12 +104,6 @@ module.exports = {
             this.resource.save({id: widget.id}, {widget: widget}, function () {
                 UIkit.notify(this.$trans('Widget saved.'));
             });
-        },
-
-        getSelected: function () {
-            return this.widgets.filter(function (widget) {
-                return this.selected.indexOf(widget.id.toString()) !== -1;
-            }, this);
         }
 
     },
@@ -104,13 +120,8 @@ module.exports = {
         },
 
         assigned: function (ids) {
-
-            var widgets = this.widgets;
-
-            return ids.map(function (id) {
-                return _.find(widgets, 'id', id);
-            }).filter(function (widget) {
-                return widget !== undefined;
+            return this.get('assigned').filter(function (widget) {
+                return ids.indexOf(widget.id) !== -1;
             });
         }
 
