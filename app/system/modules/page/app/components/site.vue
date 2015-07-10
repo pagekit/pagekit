@@ -4,7 +4,7 @@
         <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
-                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title">
+                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" lazy>
             </div>
 
             <div class="uk-form-row">
@@ -77,7 +77,9 @@
 
         data: function () {
             return {
-                page: {}
+                page: {
+                    data: {title:true}
+                }
             };
         },
 
@@ -105,6 +107,13 @@
 
                 immediate: true
 
+            },
+
+            'page.title': function() {
+
+                if (!this.node.title) {
+                    this.node.title = this.page.title;
+                }
             }
 
         },
