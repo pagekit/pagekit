@@ -2,9 +2,9 @@ module.exports = {
 
     data: function () {
         return _.merge({
+            edit: undefined,
             menu: undefined,
             menus: [],
-            edit: undefined,
             nodes: [],
             tree: [],
             selected: []
@@ -12,7 +12,7 @@ module.exports = {
     },
 
     created: function () {
-        this.Menus = this.$resource('api/site/menu/:id:label', {}, {update: {method: 'PUT'}});
+        this.Menus = this.$resource('api/site/menu/:id');
         this.Nodes = this.$resource('api/site/node/:id');
         this.load();
     },
@@ -33,49 +33,46 @@ module.exports = {
             this.$set('menu', menu);
         },
 
-        editMenu: function (menu) {
-
-            var edit = _.extend({}, menu || {label: '', id: ''});
-            edit.oldId = edit.id;
-
-            this.$set('edit', edit);
-
-            this.modal = UIkit.modal(this.$$.modal);
-            this.modal.show();
-        },
-
-        saveMenu: function (e) {
-
-            if (e) {
-                e.preventDefault();
-            }
-
-            this.Menus[this.edit.oldId ? 'update' : 'save']({label: this.edit.label}, this.edit, function () {
-                this.load();
-                this.$set('menu.id', this.edit.id);
-                this.cancel();
-            }).error(function (msg) {
-                UIkit.notify(msg, 'danger');
-            });
-
-        },
-
         removeMenu: function (menu) {
             this.Menus.delete({id: menu.id}, this.load);
         },
 
-        cancel: function (e) {
+        editMenu: function (menu) {
 
-            if (e) {
-                e.preventDefault();
+            if (!menu) {
+                menu = {
+                    id: '',
+                    label: ''
+                };
             }
 
-            this.$set('edit', null);
-            this.modal.hide();
+            this.$set('edit', _.extend({
+                assigned: _.pluck(_.filter(this.theme.menus, 'assigned', menu.id), 'name')
+            }, menu));
+
+            this.$.modal.open();
+        },
+
+        saveMenu: function (menu) {
+
+            this.Menus.save({id: menu.id}, {menu: menu}, function (data) {
+                this.load();
+                this.$set('theme', data.theme);
+            }).error(function (msg) {
+                UIkit.notify(msg, 'danger');
+            });
+
+            this.cancel();
+        },
+
+        cancel: function () {
+            this.$.modal.close();
         },
 
         setFrontpage: function (node) {
+
             node.frontpage = true;
+
             this.Nodes.save({id: node.id}, {node: node}, function () {
                 this.load();
                 UIkit.notify('Frontpage updated.');
@@ -220,6 +217,10 @@ module.exports = {
 
     filters: {
 
+        label: function (id) {
+            return _.result(_.find(this.menus, 'id', id), 'label');
+        },
+
         protected: function (types) {
             return _.reject(types, 'protected', true);
         },
@@ -245,6 +246,7 @@ module.exports = {
 
             }
         }
+
     }
 
 };

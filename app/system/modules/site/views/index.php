@@ -23,40 +23,6 @@
 
             </div>
 
-            <div class="uk-modal" v-el="modal">
-                <form class="uk-modal-dialog uk-form-stacked" name="menuForm" v-on="valid: saveMenu" v-if="edit">
-
-                    <div class="uk-modal-header">
-                        <h2>{{ 'Add Menu' | trans }}</h2>
-                    </div>
-
-                    <div class="uk-form-row">
-                        <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
-
-                        <div class="uk-form-controls">
-                            <input id="form-name" class="uk-width-1-1 uk-form-large" name="label" type="text" v-model="edit.label | trim" v-valid="required">
-
-                            <p class="uk-form-help-block uk-text-danger" v-show="menuForm.label.invalid">{{ 'Invalid name.' | trans }}</p>
-                        </div>
-                    </div>
-
-                    <div class="uk-form-row">
-                        <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
-                        <div class="uk-form-controls uk-form-controls-text">
-                            <p class="uk-form-controls-condensed" v-repeat="theme.menus">
-                                <label><input type="checkbox" value="{{ edit.id }}" v-model="theme.config.menus[$key]"> {{ $value | trans }}</label>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
-                        <button class="uk-button uk-button-link" v-attr="disabled: menuForm.invalid || !edit.label">{{ 'Save' | trans }}</button>
-                    </div>
-
-                </form>
-            </div>
-
         </div>
         <div class="uk-flex-item-1">
 
@@ -115,6 +81,40 @@
 
         </div>
     </div>
+
+    <v-modal v-ref="modal">
+        <form class="uk-form-stacked" name="form" v-on="valid: saveMenu(edit)">
+
+            <div class="uk-modal-header">
+                <h2>{{ 'Add Menu' | trans }}</h2>
+            </div>
+
+            <div class="uk-form-row">
+                <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
+
+                <div class="uk-form-controls">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" name="label" type="text" v-model="edit.label | trim" v-valid="required">
+
+                    <p class="uk-form-help-block uk-text-danger" v-show="form.label.invalid">{{ 'Invalid name.' | trans }}</p>
+                </div>
+            </div>
+
+            <div class="uk-form-row">
+                <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <p class="uk-form-controls-condensed" v-repeat="theme.menus" v-var="current: assigned | label">
+                        <label><input type="checkbox" value="{{ name }}" v-checkbox="edit.assigned"> {{ label }}</label> <span class="uk-text-muted" v-if="current && assigned != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:current} }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" v-attr="disabled: form.invalid || !edit.label">{{ 'Save' | trans }}</button>
+            </div>
+
+        </form>
+    </v-modal>
 
 </div>
 

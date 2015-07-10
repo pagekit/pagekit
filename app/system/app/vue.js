@@ -29,6 +29,7 @@ function install (Vue) {
     Vue.directive('gravatar', require('./directives/gravatar'));
     Vue.directive('order', require('./directives/order'));
     Vue.directive('lazy-background', require('./directives/lazy-background'));
+    Vue.directive('var', require('./directives/var'));
 
     /**
      * Resource

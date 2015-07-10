@@ -12,7 +12,7 @@ class WidgetModule extends Module
 
     public function main(App $app)
     {
-        // $this->config->merge(['widget' => ['defaults' => $app['theme']->config('widget.defaults', [])]]);
+        $app['widget'] = $this;
 
         $app['module']->addFactory('widget', function ($module) use ($app) {
 
@@ -25,8 +25,6 @@ class WidgetModule extends Module
 
             return $module;
         });
-
-        $app['widget'] = $this;
     }
 
     /**

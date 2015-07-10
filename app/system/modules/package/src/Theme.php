@@ -35,11 +35,33 @@ class Theme extends Module implements \JsonSerializable
             $menus[$name] = [
                 'name' => $name,
                 'label' => $label,
-                'assigned' => $this->config("menus.$name", [])
+                'assigned' => $this->config("menus.$name", null)
             ];
         }
 
         return $menus;
+    }
+
+    /**
+     * Assigns menus to a theme menu.
+     *
+     * @param array   $positions
+     * @param integer $id
+     */
+    public function assignMenu(array $positions, $id)
+    {
+        $menus = $this->config('menus', []);
+
+        foreach ($this->getMenus() as $name => $menu) {
+            if (in_array($name, $positions)) {
+                $menus[$name] = $id;
+            } elseif ($menu['assigned'] == $id) {
+                $menus[$name] = null;
+            }
+        }
+
+        $this->config['menus'] = $menus;
+        $this->save();
     }
 
     /**

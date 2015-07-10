@@ -43,33 +43,13 @@ class MenuController
     }
 
     /**
-     * @Route("/{label}", methods="POST")
-     * @Request({"label"}, csrf=true)
+     * @Route("/{id}", methods="POST", defaults={"id" = ""})
+     * @Request({"id", "menu"}, csrf=true)
      */
-    public function createAction($label)
+    public function saveAction($id, $menu)
     {
-        $label = trim($label);
-
-        if (!$id = $this->slugify($label)) {
-            App::abort(400, __('Invalid id.'));
-        }
-
-        if ($this->config->has('menus.'.$id)) {
-            throw new ConflictException(__('Duplicate Menu Id.'));
-        }
-
-        $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
-
-        return ['message' => 'success'];
-    }
-
-    /**
-     * @Route("/{label}", methods="PUT")
-     * @Request({"label", "oldId"}, csrf=true)
-     */
-    public function updateAction($label, $oldId)
-    {
-        $label = trim($label);
+        $oldId = trim($menu['id']);
+        $label = trim($menu['label']);
 
         if (!$id = $this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
@@ -82,13 +62,15 @@ class MenuController
             }
 
             $this->config->remove('menus.'.$oldId);
+            $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
 
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
 
-        $this->config->set('menus.'.$id, compact('id', 'label'));
+        $theme = App::theme();
+        $theme->assignMenu($menu['assigned'], $id);
 
-        return ['message' => 'success'];
+        return ['message' => 'success', 'theme' => $theme];
     }
 
     /**

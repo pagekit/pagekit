@@ -48,10 +48,10 @@ class WidgetController
                 'widget' => $widget,
                 'theme' => App::theme(),
                 'config' => [
-                    'menus'     => App::menu(),
-                    'nodes'     => array_values(Node::query()->get()),
-                    'roles'     => array_values(Role::findAll()),
-                    'types'     => array_values(App::widget()->getTypes())
+                    'menus' => App::menu(),
+                    'nodes' => array_values(Node::query()->get()),
+                    'roles' => array_values(Role::findAll()),
+                    'types' => array_values(App::widget()->getTypes())
                 ]
             ]
         ];
