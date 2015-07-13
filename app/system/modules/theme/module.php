@@ -10,12 +10,14 @@ return [
 
         'view.meta' => [function($event, $meta) use ($app) {
             $meta([
-                'link:shortcut icon' => [
+                'link:favicon' => [
                     'href' => $app['url']->getStatic('system/theme:favicon.ico'),
+                    'rel' => 'shortcut icon',
                     'type' => 'image/x-icon'
                 ],
-                'link:apple-touch-icon-precomposed' => [
-                    'href' => $app['url']->getStatic('system/theme:apple_touch_icon.png')
+                'link:appicon' => [
+                    'href' => $app['url']->getStatic('system/theme:apple_touch_icon.png'),
+                    'rel' => 'apple-touch-icon-precomposed'
                 ]
             ]);
         }, 10],

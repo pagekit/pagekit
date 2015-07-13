@@ -88,8 +88,6 @@
             priority: 0
         },
 
-        template: __vue_template__,
-
         props: ['widget', 'config', 'form'],
 
         created: function () {
@@ -108,7 +106,9 @@
                 }));
             }
 
-        }
+        },
+
+        template: __vue_template__
 
     };
 

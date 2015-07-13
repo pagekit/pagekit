@@ -13,7 +13,7 @@
 
             <?php if ($node->hasChildren()) : ?>
                 <ul class="uk-nav uk-nav-navbar">
-                    <?= $view->render('menu', ['root' => $node, 'widget' => $widget]) ?>
+                    <?= $view->render('menu', ['root' => $node]) ?>
                 </ul>
             <?php endif ?>
 

@@ -48,12 +48,11 @@ class SiteController
             '$view' => [
                 'title' => __('Blog'),
                 'name' => 'blog:views/site/post-index.php',
-                'link' => [
+                'link:feed' => [
                     'rel' => 'alternate',
                     'href' => App::url('@blog/feed', [], true),
                     'title' => App::module('system/site')->config('title'),
                     'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
-
                 ]
             ],
             'posts' => $query->get(),

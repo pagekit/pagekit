@@ -34,7 +34,7 @@ return [
             'mode' => $widget->get('mode')
         ]);
 
-        return $app['view']->render('widget-menu', compact('widget', 'root'));
+        return $app['view']->render('menu', compact('widget', 'root'));
     }
 
 ];

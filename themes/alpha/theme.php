@@ -40,11 +40,12 @@ return [
      */
     'views' => [
 
-        'grid' => 'alpha:views/position.grid.php',
-        'navbar' => 'alpha:views/position.navbar.php',
-        'offcanvas' => 'alpha:views/position.offcanvas.php',
-        'panel' => 'alpha:views/position.panel.php',
-        'menu' => 'alpha:views/menu.php'
+        'grid' => 'alpha:views/position-grid.php',
+        'navbar' => 'alpha:views/position-navbar.php',
+        'offcanvas' => 'alpha:views/position-offcanvas.php',
+        'panel' => 'alpha:views/position-panel.php',
+        'menu' => 'alpha:views/menu.php',
+        'menu-navbar' => 'alpha:views/menu-navbar.php'
 
     ],
 
@@ -54,7 +55,8 @@ return [
     'menus' => [
 
         'main' => 'Main',
-        'sidebar' => 'Sidebar'
+        'sidebar-a' => 'Sidebar A',
+        'sidebar-b' => 'Sidebar B'
 
     ],
 

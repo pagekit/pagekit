@@ -19,11 +19,19 @@
             </div>
             <?php endif ?>
 
-            <?php if ($view->position()->exists('navbar')) : ?>
+            <?php if ($view->position()->exists('navbar') || $view->menu()->exists('main')) : ?>
             <div class="tm-navbar">
 
                 <nav class="uk-navbar uk-hidden-small">
+
+                    <?php if ($view->position()->exists('navbar')) : ?>
                     <?= $view->position('navbar', 'navbar') ?>
+                    <?php endif ?>
+
+                    <?php if ($view->menu()->exists('main')) : ?>
+                        <?= $view->menu('main', 'menu-navbar') ?>
+                    <?php endif ?>
+
                 </nav>
 
                 <?php if ($view->position()->exists('offcanvas')) : ?>
@@ -53,15 +61,25 @@
                     <?= $view->render('content') ?>
                 </div>
 
-                <?php if ($view->position()->exists('sidebar-a')) : ?>
+                <?php if ($view->position()->exists('sidebar-a') || $view->menu()->exists('sidebar-a')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-a.class') ?>">
-                    <?= $view->position('sidebar-a', 'panel') ?>
+                    <?php if ($view->position()->exists('sidebar-a')) : ?>
+                        <?= $view->position('sidebar-a', 'panel') ?>
+                    <?php endif ?>
+                    <?php if ($view->menu()->exists('sidebar-a')) : ?>
+                        <?= $view->menu('sidebar-a') ?>
+                    <?php endif ?>
                 </aside>
                 <?php endif ?>
 
-                <?php if ($view->position()->exists('sidebar-b')) : ?>
+                <?php if ($view->position()->exists('sidebar-b') || $view->menu()->exists('sidebar-b')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-b.class') ?>">
-                    <?= $view->position('sidebar-b', 'panel') ?>
+                    <?php if ($view->position()->exists('sidebar-b')) : ?>
+                        <?= $view->position('sidebar-b', 'panel') ?>
+                    <?php endif ?>
+                    <?php if ($view->menu()->exists('sidebar-b')) : ?>
+                        <?= $view->menu('sidebar-b') ?>
+                    <?php endif ?>
                 </aside>
                 <?php endif ?>
 

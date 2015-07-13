@@ -129,15 +129,17 @@ return [
                 }
 
                 if ($icon = $this->config('icons.favicon')) {
-                    $meta->add('link:shortcut icon', [
+                    $meta->add('link:favicon', [
                         'href' => $app['url']->getStatic($icon),
+                        'rel' => 'shortcut icon',
                         'type' => 'image/x-icon'
                     ]);
                 }
 
                 if ($icon = $this->config('icons.appicon')) {
-                    $meta->add('link:apple-touch-icon-precomposed', [
-                        'href' => $app['url']->getStatic($icon)
+                    $meta->add('link:appicon', [
+                        'href' => $app['url']->getStatic($icon),
+                        'rel' => 'apple-touch-icon-precomposed'
                     ]);
                 }
 

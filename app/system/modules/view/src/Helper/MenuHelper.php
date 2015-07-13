@@ -2,7 +2,7 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\Application;
+use Pagekit\Application as App;
 use Pagekit\Site\Model\Node;
 
 class MenuHelper extends Helper
@@ -18,18 +18,18 @@ class MenuHelper extends Helper
     }
 
     /**
-     * Checks if the position exists.
+     * Checks if the menu exists.
      *
      * @param  string $name
      * @return bool
      */
     public function exists($name)
     {
-        return true;
+        return (bool) $this->getMenu($name);
     }
 
     /**
-     * Renders a position.
+     * Renders a menu.
      *
      * @param  string       $name
      * @param  array|string $view
@@ -43,7 +43,11 @@ class MenuHelper extends Helper
             $view = false;
         }
 
-        $parameters['root'] = Node::getTree($name, $parameters);
+        if (!$menu = $this->getMenu($name)) {
+            return '';
+        }
+
+        $parameters['root'] = Node::getTree($menu, $parameters);
 
         return $this->view->render($view ?: 'menu', $parameters);
     }
@@ -54,5 +58,16 @@ class MenuHelper extends Helper
     public function getName()
     {
         return 'menu';
+    }
+
+    protected function getMenu($name)
+    {
+        static $menus;
+
+        if (null === $menus) {
+            $menus = App::theme()->getMenus();
+        }
+
+        return isset($menus[$name]) && $menus[$name]['assigned'] ? $menus[$name]['assigned'] : null;
     }
 }
