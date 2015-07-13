@@ -65,7 +65,14 @@ class WidgetApiController
             throw new NotFoundException('Widget not found.');
         }
 
-        $widget->position = $data['position'];
+        if (isset($data['position'])) {
+            $widget->position = $data['position'];
+        }
+
+        if (isset($data['theme'])) {
+            $widget->theme = $data['theme'];
+        }
+
         $widget->save($data);
 
         return $widget;

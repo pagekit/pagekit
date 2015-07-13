@@ -81,10 +81,7 @@ return [
      */
     'config' => [
 
-        // TODO remove
-        'settings.view' => 'themes/alpha/views/admin/settings.razr',
-
-        'widget.defaults' => [
+        'widget' => [
 
             'panel' => '',
             'badge' => [
