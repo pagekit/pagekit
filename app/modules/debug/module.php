@@ -60,6 +60,11 @@ return [
             }
 
             $app->on('view.head', function ($event, $view) use ($app) {
+
+                if ($app['request']->get('_disable_debugbar')) {
+                    return;
+                }
+
                 $view->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
                 $view->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
                 $view->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue', 'jquery']);

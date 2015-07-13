@@ -20,12 +20,20 @@ class MaintenanceListener implements EventSubscriberInterface
 
         if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access'))) {
 
-            $message  = $site->config('maintenance.msg') ? : __("We'll be back soon.");
+            $message  = $site->config('maintenance.msg') ?: __("We'll be back soon.");
             $response = App::view('system/theme:templates/maintenance.php', compact('message'));
 
-            $request->attributes->set('_disable_profiler_toolbar', true);
+            $request->attributes->set('_disable_debugbar', true);
 
-            $event->setResponse(App::response($response));
+            $types = $request->getAcceptableContentTypes();
+
+            if ('json' == $request->getFormat(array_shift($types))) {
+                $response = App::response()->json($message, 503);
+            } else {
+                $response = App::response($response, 503);
+            }
+
+            $event->setResponse($response);
         }
     }
 
