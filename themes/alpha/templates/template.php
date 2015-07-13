@@ -8,7 +8,6 @@
         <?php $view->style('theme', 'themes/alpha/css/theme.css') ?>
         <?php $view->script('jquery') ?>
         <?php $view->script('uikit') ?>
-        <?= $app['module']('system/site')->config('code.header') ?>
     </head>
     <body>
 
@@ -76,6 +75,8 @@
 
         </div>
 
+        <?= $view->render('footer') ?>
+
         <?php if ($view->position()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
@@ -83,8 +84,6 @@
             </div>
         </div>
         <?php endif ?>
-
-        <?= $app['module']('system/site')->config('code.footer') ?>
 
     </body>
 </html>

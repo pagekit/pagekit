@@ -120,24 +120,36 @@ return [
             $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
         },
 
-        'view.meta' => function ($event, $meta) use ($app) {
+        'site' => function () use ($app) {
 
-            if ($app['isAdmin']) {
-                return;
-            }
+            $app->on('view.meta', function ($event, $meta) use ($app) {
 
-            if ($icon = $this->config('icons.favicon')) {
-                $meta->add('link:shortcut icon', [
-                    'href' => $app['url']->getStatic($icon),
-                    'type' => 'image/x-icon'
-                ]);
-            }
+                if ($app['isAdmin']) {
+                    return;
+                }
 
-            if ($icon = $this->config('icons.appicon')) {
-                $meta->add('link:apple-touch-icon-precomposed', [
-                    'href' => $app['url']->getStatic($icon)
-                ]);
-            }
+                if ($icon = $this->config('icons.favicon')) {
+                    $meta->add('link:shortcut icon', [
+                        'href' => $app['url']->getStatic($icon),
+                        'type' => 'image/x-icon'
+                    ]);
+                }
+
+                if ($icon = $this->config('icons.appicon')) {
+                    $meta->add('link:apple-touch-icon-precomposed', [
+                        'href' => $app['url']->getStatic($icon)
+                    ]);
+                }
+
+            });
+
+            $app->on('view.head', function ($event, $view) use ($app) {
+                $event->addResult($this->config('code.header'));
+            }, -10);
+
+            $app->on('view.footer', function ($event, $view) use ($app) {
+                $event->addResult($this->config('code.footer'));
+            }, -10);
 
         },
 
