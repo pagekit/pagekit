@@ -49,11 +49,11 @@ class SiteController
                 'title' => __('Blog'),
                 'name' => 'blog:views/site/post-index.php',
                 'link' => [
-                    'alternate' => [
-                        'href' => App::url('@blog/site/feed', [], true),
-                        'title' => App::module('system/site')->config('title'),
-                        'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
-                    ]
+                    'rel' => 'alternate',
+                    'href' => App::url('@blog/feed', [], true),
+                    'title' => App::module('system/site')->config('title'),
+                    'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
+
                 ]
             ],
             'posts' => $query->get(),
@@ -113,10 +113,10 @@ class SiteController
         $site = App::module('system/site');
         $feed = App::feed()->create($type ?: $this->blog->config('feed.type'), [
             'title' => $site->config('title'),
-            'link' => App::url('@blog/site', [], true),
+            'link' => App::url('@blog', [], true),
             'description' => $site->config('description'),
             'element' => ['language', App::module('system/locale')->config('locale')],
-            'selfLink' => App::url('@blog/site/feed', [], true)
+            'selfLink' => App::url('@blog/feed', [], true)
         ]);
 
         if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {

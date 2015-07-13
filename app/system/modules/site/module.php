@@ -115,10 +115,31 @@ return [
             );
         },
 
-        'view.head' => [function () use ($app) {
-            $app['scripts']->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
-            $app['scripts']->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
-        }, 50],
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
+            $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
+        },
+
+        'view.meta' => function ($event, $meta) use ($app) {
+
+            if ($app['isAdmin']) {
+                return;
+            }
+
+            if ($icon = $this->config('icons.favicon')) {
+                $meta->add('link:shortcut icon', [
+                    'href' => $app['url']->getStatic($icon),
+                    'type' => 'image/x-icon'
+                ]);
+            }
+
+            if ($icon = $this->config('icons.appicon')) {
+                $meta->add('link:apple-touch-icon-precomposed', [
+                    'href' => $app['url']->getStatic($icon)
+                ]);
+            }
+
+        },
 
         'site.node.postLoad' => function ($event, $entity) {
             $entity->frontpage = $entity->getId() === $this->config('frontpage');

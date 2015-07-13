@@ -73,24 +73,17 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
 
         foreach ($this->metas as $name => $value) {
 
-            if ($name == 'link') {
+            if (preg_match('/^link:?/i', $name)) {
 
-                foreach ($value as $rel => $attributes) {
-
-                    if (!$attributes) {
-                        continue;
-                    }
-
-                    if (!isset($attributes['rel'])) {
-                        $attributes['rel'] = $rel;
-                    }
-
-                    $attrs = '';
-                    foreach ($attributes as $name => $value) {
-                        $attrs .= sprintf(' %s="%s"', $name, htmlspecialchars($value));
-                    }
-                    $output .= sprintf("        <link%s>\n", $attrs);
+                if (!isset($value['rel'])) {
+                    $value['rel'] = substr($name, 5);
                 }
+
+                $attributes = '';
+                foreach ($value as $attr => $val) {
+                    $attributes .= sprintf(' %s="%s"', $attr, htmlspecialchars($val));
+                }
+                $output .= sprintf("        <link%s>\n", $attributes);
 
             } else {
 
