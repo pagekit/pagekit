@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="icon-file-large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" width="80px" height="80px" viewBox="-0.5 -0.5 80 80" enable-background="new -0.5 -0.5 80 80" xml:space="preserve">
-<rect x="43.5" y="37.5" fill="#AFAFB0" width="13" height="1"/>
-<rect x="28.5" y="44.5" fill="#AFAFB0" width="28" height="1"/>
-<rect x="28.5" y="51.5" fill="#AFAFB0" width="28" height="1"/>
-<rect x="28.5" y="58.5" fill="#AFAFB0" width="18.001" height="1"/>
+	 y="0px" width="80px" height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
 <g>
-	<path fill="#AFAFB0" d="M65.5,10.5v60h-50V26.991L36.842,10.5H65.5 M66.5,9.5h-30l-22,17v45h52V9.5L66.5,9.5z"/>
-</g>
-<g>
-	<path fill="#AFAFB0" d="M35.5,11.537V26.5H16.135L35.5,11.537 M36.5,9.5l-22,17v1h22V9.5L36.5,9.5z"/>
+	<rect x="26" y="38" fill="#A3A3A3" width="28" height="1"/>
+	<rect x="26" y="45" fill="#A3A3A3" width="28" height="1"/>
+	<rect x="26" y="52" fill="#A3A3A3" width="18" height="1"/>
+	<path fill="#A3A3A3" d="M32,7h-1L14,24v1v47h52V7H32z M31,8.414V24H15.414L31,8.414z M65,71H15V25h17V8h33V71z"/>
+	<rect x="41" y="31" fill="#A3A3A3" width="13" height="1"/>
 </g>
 </svg>
