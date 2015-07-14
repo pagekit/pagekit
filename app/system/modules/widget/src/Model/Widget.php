@@ -13,6 +13,9 @@ class Widget implements WidgetInterface
 {
     use AccessTrait, DataTrait, WidgetModelTrait;
 
+    public $theme = [];
+    public $position = '';
+
     /** @Column(type="integer") @Id */
     protected $id;
 
