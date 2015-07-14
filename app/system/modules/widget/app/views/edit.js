@@ -42,8 +42,14 @@ module.exports = {
             e.preventDefault();
 
             this.$broadcast('save', {widget: this.widget});
-            this.$resource('api/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function () {
+            this.$resource('api/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
+
+                if (data.widget) {
+                    this.$set('widget', data.widget);
+                }
+
+                UIkit.notify(data.message);
             });
         },
 

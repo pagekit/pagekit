@@ -135,7 +135,7 @@ class Theme extends Module implements \JsonSerializable
      * @param  integer $id
      * @return array
      */
-    public function getWidget($id)
+    public function getWidget($id = 0)
     {
         $config  = $this->config("widgets.$id", []);
         $default = $this->config("widget", []);
