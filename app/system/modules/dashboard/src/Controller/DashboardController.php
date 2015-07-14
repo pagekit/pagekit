@@ -28,7 +28,6 @@ class DashboardController
      */
     public function indexAction()
     {
-        //var_dump($this->dashboard->getWidgets());
         return [
             '$view' => [
                 'title' => __('Dashboard'),
