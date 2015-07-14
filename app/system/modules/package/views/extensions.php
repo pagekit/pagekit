@@ -42,7 +42,8 @@
                         </div>
                     </td>
                     <td class="uk-text-nowrap">
-                        <a>{{ pkg.title }}</a>
+                        <a v-on="click: settings(pkg)" v-show="pkg.enabled && pkg.settings">{{ pkg.title }}</a>
+                        <span v-show="!pkg.enabled || !pkg.settings">{{ pkg.title }}</span>
                         <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
                     </td>
                     <td>
@@ -70,10 +71,12 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No extension found.' | trans }}</h3>
 
-    <div class="uk-modal" v-el="details">
-        <div class="uk-modal-dialog">
-            <package-details api="{{ api }}" package="{{ package }}"></package-details>
-        </div>
-    </div>
+    <v-modal v-ref="details">
+        <package-details api="{{ api }}" package="{{ package }}"></package-details>
+    </v-modal>
+
+    <v-modal v-ref="settings">
+        <component is="{{ view }}" package="{{ package }}"></component>
+    </v-modal>
 
 </div>

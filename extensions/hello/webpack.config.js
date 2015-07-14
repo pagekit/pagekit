@@ -2,11 +2,16 @@ module.exports = [
 
     {
         entry: {
-            "widget-theme": "./app/components/widget-theme.vue",
             "settings": "./app/components/settings.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"
+        },
+        externals: {
+            "lodash": "_",
+            "jquery": "jQuery",
+            "uikit": "UIkit",
+            "vue": "Vue"
         },
         module: {
             loaders: [

@@ -115,6 +115,8 @@ return [
 
     ],
 
+    'settings' => '@blog/settings',
+
     'config' => [
 
         'comments' => [

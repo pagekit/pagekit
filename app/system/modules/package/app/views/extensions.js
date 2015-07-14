@@ -1,19 +1,21 @@
-module.exports = {
+module.exports = Vue.extend({
 
     mixins: [
         require('../lib/package')
     ],
 
-    data: _.extend(window.$data, {
-        package: {},
-        updates: null,
-        search: '',
-        status: ''
-    }),
+    data: function () {
+        return _.extend(window.$data, {
+            package: {},
+            view: false,
+            updates: null,
+            search: '',
+            status: ''
+        })
+    },
 
     ready: function () {
         this.load();
-        this.modal = UIkit.modal(this.$$.details);
     },
 
     methods: {
@@ -41,7 +43,31 @@ module.exports = {
 
         details: function (pkg) {
             this.$set('package', pkg);
-            this.modal.show();
+            this.$.details.open();
+        },
+
+        settings: function (pkg) {
+            if (!pkg.settings) {
+                return;
+            }
+
+            var view;
+            _.forIn(this.$options.components, function (component, name) {
+                if (component.options.settings && pkg.settings === name) {
+                    view = name;
+                }
+            });
+
+            if (view) {
+
+                this.$set('package', pkg);
+                this.$set('view', view);
+                this.$.settings.open();
+
+            } else {
+                window.location = pkg.settings;
+            }
+
         },
 
         enable: function (pkg) {
@@ -90,10 +116,12 @@ module.exports = {
 
     }
 
-};
+});
+
+window.Extensions = module.exports;
 
 $(function () {
 
-    new Vue(module.exports).$mount('#extensions');
+    (new module.exports).$mount('#extensions');
 
 });

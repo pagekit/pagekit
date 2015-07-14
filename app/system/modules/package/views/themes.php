@@ -40,7 +40,7 @@
                 <a class="uk-position-cover" v-on="click: details(pkg)"></a>
 
                 <div class="pk-panel-badge-bottom-right">
-                    <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled">Customize</button>
+                    <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled && pkg.settings" v-on="click: settings(pkg)">Customize</button>
                     <button class="uk-button uk-button-success uk-button-small" v-on="click: update(updates[pkg.name].version)" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
                 </div>
 
@@ -57,10 +57,12 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No theme found.' | trans }}</h3>
 
-    <div class="uk-modal" v-el="details">
-        <div class="uk-modal-dialog uk-modal-dialog-large">
-            <package-details api="{{ api }}" package="{{ package }}"></package-details>
-        </div>
-    </div>
+    <v-modal v-ref="details" large>
+        <package-details api="{{ api }}" package="{{ package }}"></package-details>
+    </v-modal>
+
+    <v-modal v-ref="settings">
+        <component is="{{ view }}" package="{{ package }}"></component>
+    </v-modal>
 
 </div>

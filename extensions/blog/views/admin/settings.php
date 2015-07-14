@@ -74,7 +74,7 @@
                         <label class="uk-form-label">{{ 'Posts per page' | trans }}</label>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
-                                <input type="number" v-model="config.posts.posts_per_page" class="uk-form-width-small" required>
+                                <input type="number" v-model="config.posts.posts_per_page" class="uk-form-width-small">
                             </p>
                         </div>
                     </div>

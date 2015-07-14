@@ -28,8 +28,17 @@ class PackageController
 
         foreach ($packages as $package) {
             if ($module = App::module($package->getName())) {
-                $package->set('enabled', true);
+
+                if ($settings = $module->get('settings') and $settings[0] === '@') {
+                    $settings = App::url($settings);
+                }
+
+                $package->set('settings', $settings);
+                $package->set('config', $module->config);
+
             }
+
+            $package->set('enabled', (bool) $module);
         }
 
         return [
@@ -50,7 +59,14 @@ class PackageController
 
         foreach ($packages as $package) {
             if ($module = App::module($package->getName())) {
+
+                if ($settings = $module->get('settings') and $settings[0] === '@') {
+                    $settings = App::url($settings);
+                }
+
                 $package->set('enabled', true);
+                $package->set('settings', $settings);
+                $package->set('config', $module->config);
                 $package->set('permissions', (bool) $module->get('permissions'));
             }
         }

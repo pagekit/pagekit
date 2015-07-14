@@ -75,6 +75,8 @@ return [
 
     ],
 
+    'settings' => 'settings-alpha',
+
     /**
      * Define default settings values and views where end users can change these values.
      */
@@ -96,7 +98,8 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('theme-settings', 'alpha:app/bundle/widget-theme.js', '~widgets');
+            $scripts->register('theme-widget', 'alpha:app/bundle/widget-theme.js', '~widgets');
+            $scripts->register('theme-settings', 'alpha:app/bundle/settings.js', '~themes');
         }
 
     ]

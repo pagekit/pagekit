@@ -60,6 +60,8 @@ return [
 
     ],
 
+    'settings' => 'settings-hello',
+
     'config' => [
 
         'default' => 'World'
@@ -85,6 +87,10 @@ return [
 
             // remove the config
             $app['config']->remove($this->name);
+        },
+
+        'view.scripts' => function($event, $scripts) {
+            $scripts->register('hello-settings', 'hello:app/bundle/settings.js', '~extensions');
         }
 
     ]
