@@ -55,8 +55,7 @@ return [
     'menus' => [
 
         'main' => 'Main',
-        'sidebar-a' => 'Sidebar A',
-        'sidebar-b' => 'Sidebar B'
+        'offcanvas' => 'Offcanvas'
 
     ],
 

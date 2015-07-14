@@ -43,14 +43,16 @@ module.exports = {
                 if (this.role.id) {
 
                     var role = _.findIndex(this.roles, 'id', this.role.id);
-                    this.roles.splice(role, 1, data);
+                    this.roles.splice(role, 1, data.role);
 
                     UIkit.notify(this.$trans('Role saved'));
                 } else {
-                    this.roles.push(data);
+                    this.roles.push(data.role);
                     UIkit.notify(this.$trans('Role added'));
                 }
 
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
 
             this.$.modal.close();
@@ -76,9 +78,9 @@ module.exports = {
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                if (data.error) {
-                    UIkit.notify(this.$trans('Failed to save roles.'), 'danger');
-                }
+                UIkit.notify(this.$trans('Roles reordered.'));
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
         }
 

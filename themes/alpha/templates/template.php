@@ -61,25 +61,15 @@
                     <?= $view->render('content') ?>
                 </div>
 
-                <?php if ($view->position()->exists('sidebar-a') || $view->menu()->exists('sidebar-a')) : ?>
+                <?php if ($view->position()->exists('sidebar-a')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-a.class') ?>">
-                    <?php if ($view->position()->exists('sidebar-a')) : ?>
-                        <?= $view->position('sidebar-a', 'panel') ?>
-                    <?php endif ?>
-                    <?php if ($view->menu()->exists('sidebar-a')) : ?>
-                        <?= $view->menu('sidebar-a') ?>
-                    <?php endif ?>
+                    <?= $view->position('sidebar-a', 'panel') ?>
                 </aside>
                 <?php endif ?>
 
-                <?php if ($view->position()->exists('sidebar-b') || $view->menu()->exists('sidebar-b')) : ?>
+                <?php if ($view->position()->exists('sidebar-b')) : ?>
                 <aside class="<?= $theme->getClasses('columns.sidebar-b.class') ?>">
-                    <?php if ($view->position()->exists('sidebar-b')) : ?>
-                        <?= $view->position('sidebar-b', 'panel') ?>
-                    <?php endif ?>
-                    <?php if ($view->menu()->exists('sidebar-b')) : ?>
-                        <?= $view->menu('sidebar-b') ?>
-                    <?php endif ?>
+                    <?= $view->position('sidebar-b', 'panel') ?>
                 </aside>
                 <?php endif ?>
 
@@ -93,15 +83,23 @@
 
         </div>
 
-        <?= $view->render('footer') ?>
-
-        <?php if ($view->position()->exists('offcanvas')) : ?>
+        <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
-                <?= $view->position('offcanvas', 'offcanvas') ?>
+
+                <?php if ($view->position()->exists('offcanvas')) : ?>
+                    <?= $view->position('offcanvas', 'offcanvas') ?>
+                <?php endif ?>
+
+                <?php if ($view->menu()->exists('offcanvas')) : ?>
+                    <?= $view->menu('offcanvas') ?>
+                <?php endif ?>
+
             </div>
         </div>
         <?php endif ?>
+
+        <?= $view->render('footer') ?>
 
     </body>
 </html>

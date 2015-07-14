@@ -60,3 +60,6 @@ function install (Vue) {
 if (window.Vue) {
     Vue.use(install);
 }
+
+window.history.pushState = window.history.pushState || function() {};
+window.history.replaceState = window.history.replaceState || function() {};

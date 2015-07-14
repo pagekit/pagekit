@@ -46,7 +46,7 @@ class RoleApiController
 
         $role->save($data);
 
-        return $role;
+        return ['message' => 'success', 'role' => $role];
     }
 
     /**
@@ -59,7 +59,7 @@ class RoleApiController
             $role->delete();
         }
 
-        return ['message' => 'Success'];
+        return ['message' => 'success'];
     }
 
     /**
@@ -72,7 +72,7 @@ class RoleApiController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return ['message' => 'Success'];
+        return ['message' => 'success'];
     }
 
     /**
@@ -85,6 +85,6 @@ class RoleApiController
             $this->deleteAction($id);
         }
 
-        return ['message' => 'Success'];
+        return ['message' => 'success'];
     }
 }

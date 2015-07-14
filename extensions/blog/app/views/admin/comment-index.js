@@ -56,9 +56,11 @@ module.exports = Vue.extend({
         },
 
         save: function (comment) {
-            return this.Comments.save({ id: comment.id }, { comment: comment }, function (data) {
+            return this.Comments.save({ id: comment.id }, { comment: comment }, function () {
                 this.load();
                 UIkit.notify(this.$trans('Comment saved.'));
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
         },
 

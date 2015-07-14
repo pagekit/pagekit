@@ -181,7 +181,7 @@ class CommentApiController
             $comment->delete();
         }
 
-        return ['message' => __('Success')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -195,7 +195,7 @@ class CommentApiController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return ['message' => __('Comments saved.')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -209,6 +209,6 @@ class CommentApiController
             $this->deleteAction($id);
         }
 
-        return ['message' => __('Comments deleted.')];
+        return ['message' => 'success'];
     }
 }

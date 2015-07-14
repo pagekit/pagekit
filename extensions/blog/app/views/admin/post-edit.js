@@ -59,11 +59,16 @@ var App = Vue.extend({
 
             this.resource.save({ id: this.post.id }, { post: this.post, id: this.post.id }, function (data) {
 
-                if (data.post) {
-                    this.$set('post', data.post);
+                if (!this.post.id) {
+                    window.history.replaceState({}, '', this.$url('admin/blog/post/edit', {id: data.post.id}))
                 }
 
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                this.$set('post', data.post);
+
+                UIkit.notify(this.$trans('Post saved.'));
+
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
         }
 

@@ -84,7 +84,7 @@ class PostApiController
 
         $post->save($data);
 
-        return ['message' => $id ? __('Post saved.') : __('Post created.'), 'post' => $post];
+        return ['message' => 'success', 'post' => $post];
     }
 
     /**
@@ -97,7 +97,7 @@ class PostApiController
             $post->delete();
         }
 
-        return ['message' => __('Success')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -130,7 +130,7 @@ class PostApiController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return ['message' => __('Posts saved.')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -143,7 +143,7 @@ class PostApiController
             $this->deleteAction($id);
         }
 
-        return ['message' => __('Posts deleted.')];
+        return ['message' => 'success'];
     }
 
     protected function slugify($slug)

@@ -39,16 +39,22 @@ module.exports = Vue.extend({
 
             e.preventDefault();
 
-            var data = { node: this.node };
+            var data = { node: this.node};
 
             this.$broadcast('save', data);
 
             this.Nodes.save({ id: this.node.id }, data, function (data) {
 
+                if (!this.node.id) {
+                    window.history.replaceState({}, '', this.$url('admin/site/edit', {id: data.node.id}))
+                }
+
                 this.$set('node', data.node);
 
                 UIkit.notify(this.$trans('%type% saved.', { type: this.type.label }));
 
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
         }
 

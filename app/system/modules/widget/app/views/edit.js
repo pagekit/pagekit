@@ -45,11 +45,15 @@ module.exports = {
             this.$resource('api/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
 
-                if (data.widget) {
-                    this.$set('widget', data.widget);
+                if (!this.widget.id) {
+                    window.history.replaceState({}, '', this.$url('admin/widget/edit', {id: data.widget.id}))
                 }
 
+                this.$set('widget', data.widget);
+
                 UIkit.notify(data.message);
+            }, function (data) {
+                UIkit.notify(data, 'danger');
             });
         },
 

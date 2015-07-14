@@ -33,16 +33,16 @@ module.exports = {
 
             this.$resource('api/user/:id').save({id: this.user.id}, {user: this.user, password: this.password, roles: roles}, function (data) {
 
-                if (data.user) {
-                    this.$set('user', data.user);
+                if (!this.user.id) {
+                    window.history.replaceState({}, '', this.$url('admin/user/edit', {id: data.user.id}))
                 }
 
-                UIkit.notify(data.message);
+                this.$set('user', data.user);
 
-            }, function (data) {
+                UIkit.notify(this.$trans('User saved.'));
 
+            }).error(function (data) {
                 UIkit.notify(data, 'danger');
-
             });
         }
 
