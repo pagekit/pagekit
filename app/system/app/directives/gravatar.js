@@ -67,7 +67,7 @@ module.exports = {
         canvas.height = size;
         context       = canvas.getContext("2d");
 
-        context.fillStyle = colored ? colours[colourIndex - 1] : '#bdc3c7';
+        context.fillStyle = colored ? colours[colourIndex - 1] : '#cfd2d7';
         context.fillRect (0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width/2)+"px Arial";
         context.textAlign = "center";
