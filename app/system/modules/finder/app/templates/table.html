@@ -8,7 +8,7 @@
     <tbody>
 
         <tr v-repeat="folders | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
-            <td><input type="checkbox" name="name" value="{{ name }}"></td>
+            <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder"></i>
             </td>

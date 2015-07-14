@@ -156,6 +156,17 @@ module.exports = {
             }
 
             return this.selected.indexOf(node.id.toString()) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
+        },
+
+        toggleSelect: function(node) {
+
+            var index = this.selected.indexOf(node.id.toString());
+
+            if (index == -1) {
+                this.selected.push(node.id.toString());
+            } else {
+                this.selected.splice(index, 1);
+            }
         }
 
     },

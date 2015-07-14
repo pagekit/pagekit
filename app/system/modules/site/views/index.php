@@ -120,9 +120,9 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" v-class="uk-parent: tree[node.id]" data-id="{{ node.id }}">
+    <li class="uk-nestable-item" v-class="uk-parent: tree[node.id], uk-active: isSelected(node)" data-id="{{ node.id }}">
 
-        <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
+        <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover" v-on="click: toggleSelect(node)">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
             </div>
