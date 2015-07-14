@@ -567,6 +567,7 @@
 
 .pk-loader {
     vertical-align: middle;
+    -webkit-animation: pk-loader-rotate @duration linear infinite;
     animation: pk-loader-rotate @duration linear infinite;
 }
 
@@ -575,7 +576,10 @@
  * Only needed because `transform-origin: center` is not working in Firefox
  */
 
-.pk-loader > * { transform: translate(@size, @size); }
+.pk-loader > * {
+    -webkit-transform: translate(@size, @size);
+    transform: translate(@size, @size);
+}
 
 /*
  * Circle
@@ -585,14 +589,33 @@
     stroke-dasharray: @offset;
     stroke-dashoffset: 0;
     // transform-origin: center;
+    -webkit-animation: pk-loader-dash @duration ease-in-out infinite,
+                       pk-loader-color (@duration*4) ease-in-out infinite;
     animation: pk-loader-dash @duration ease-in-out infinite,
                pk-loader-color (@duration*4) ease-in-out infinite;
     stroke-linecap: round;
 }
 
+@-webkit-keyframes pk-loader-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(270deg); }
+}
+
 @keyframes pk-loader-rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(270deg); }
+}
+
+@-webkit-keyframes pk-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        -webkit-transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        -webkit-transform:rotate(450deg);
+    }
 }
 
 @keyframes pk-loader-dash {
@@ -605,6 +628,12 @@
         stroke-dashoffset: @offset;
         transform:rotate(450deg);
     }
+}
+
+@-webkit-keyframes pk-loader-color {
+    0% { stroke: @global-primary-hover-background; }
+    50% { stroke: @global-primary-hover-background; }
+    100% { stroke: @global-primary-hover-background; }
 }
 
 @keyframes pk-loader-color {
