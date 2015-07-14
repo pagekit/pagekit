@@ -88,7 +88,7 @@ class PackageController
         App::trigger("enable.$name", [$module]);
 
         if ($package->getType() == 'theme') {
-            App::config('system')->set('theme', $name);
+            App::config('system')->set('site.theme', $name);
         } elseif ($package->getType() == 'extension') {
             App::config('system')->push('extensions', $name);
         }
