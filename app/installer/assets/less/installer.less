@@ -64,6 +64,11 @@ body {
 
 .tm-container .uk-panel-box { padding: 50px; }
 
+/* Needed for next button
+ ========================================================================== */
+
+.tm-vertical-middle { vertical-align: middle!important; }
+
 
 /* Modifier: `tm-form-horizontal`
  ========================================================================== */
@@ -96,6 +101,7 @@ body {
 
 .tm-loader {
     vertical-align: middle;
+    -webkit-transform: tm-loader-rotate @duration linear infinite;
     animation: tm-loader-rotate @duration linear infinite;
 }
 
@@ -104,7 +110,10 @@ body {
  * Only needed because `transform-origin: center` is not working in Firefox
  */
 
-.tm-loader > * { transform: translate(@size, @size); }
+.tm-loader > * {
+    -webkit-transform: translate(@size, @size);
+    transform: translate(@size, @size);
+}
 
 /*
  * Circle
@@ -114,14 +123,33 @@ body {
     stroke-dasharray: @offset;
     stroke-dashoffset: 0;
     // transform-origin: center;
+    -webkit-animation: tm-loader-dash @duration ease-in-out infinite,
+                       tm-loader-color (@duration*4) ease-in-out infinite;
     animation: tm-loader-dash @duration ease-in-out infinite,
                tm-loader-color (@duration*4) ease-in-out infinite;
     stroke-linecap: round;
 }
 
+@-webkit-keyframes tm-loader-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(270deg); }
+}
+
 @keyframes tm-loader-rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(270deg); }
+}
+
+@-webkit-keyframes tm-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        -webkit-transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        -webkit-transform:rotate(450deg);
+    }
 }
 
 @keyframes tm-loader-dash {
@@ -136,6 +164,12 @@ body {
     }
 }
 
+@-webkit-keyframes tm-loader-color {
+    0% { stroke: #fff; }
+    50% { stroke: #fff; }
+    100% { stroke: #fff; }
+}
+
 @keyframes tm-loader-color {
     0% { stroke: #fff; }
     50% { stroke: #fff; }
@@ -146,7 +180,20 @@ body {
 /* SVG Arrow
  ========================================================================== */
 
-.tm-arrow { animation: tm-arrow 2s ease-out infinite; }
+.tm-arrow {
+    -webkit-animation: tm-arrow 2s ease-out infinite;
+    animation: tm-arrow 2s ease-out infinite;
+}
+
+@-webkit-keyframes tm-arrow {
+    0% { -webkit-transform: translateX(0); }
+    20% { -webkit-transform: translateX(0); }
+    25% { -webkit-transform: translateX(3px); }
+    30% { -webkit-transform: translateX(-3px); }
+    35% { -webkit-transform: translateX(3px); }
+    40% { -webkit-transform: translateX(0); }
+    100% { -webkit-transform: translateX(0); }
+}
 
 @keyframes tm-arrow {
     0% { transform: translateX(0); }
@@ -165,8 +212,15 @@ body {
 .tm-checkmark {
   stroke-dashoffset: 132;
   stroke-dasharray: 132;
+  -webkit-animation: tm-checkmark 1s ease-out forwards;
   animation: tm-checkmark 1s ease-out forwards;
 }
+
+@-webkit-keyframes tm-checkmark {
+    0% { stroke-dashoffset: 132; }
+    100% { stroke-dashoffset: 0; }
+}
+
 
 @keyframes tm-checkmark {
     0% { stroke-dashoffset: 132; }
