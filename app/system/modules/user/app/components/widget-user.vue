@@ -69,7 +69,7 @@
 
     <h3 class="uk-panel-title" v-if="widget.show != 'registered' && !widget.total">{{ 'Latest logged in Users' | trans}}</h3>
 
-    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-6" data-uk-grid-margin>
+    <ul v-show="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-6" v-stack-margin="users">
         <li v-repeat="user: users">
             <a href="{{ $url('admin/user/edit', {id: user.id}) }}" title="{{ user.username }}">
                 <img class="uk-border-rounded" width="200" height="200" alt="{{ user.name }}" v-gravatar="user.email">
