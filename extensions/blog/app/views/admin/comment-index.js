@@ -16,7 +16,7 @@ module.exports = Vue.extend({
     created: function () {
 
         this.Comments = this.$resource('api/blog/comment/:id');
-        this.config.filter = _.extend({ filter: { search: '', status: '' } }, this.config.filter);
+        this.config.filter = _.extend({filter: {search: '', status: ''}}, this.config.filter);
 
         UIkit.init(this.$el);
     },
@@ -26,7 +26,9 @@ module.exports = Vue.extend({
         'config.page': 'load',
 
         'config.filter': {
-            handler: function () { this.load(0); },
+            handler: function () {
+                this.load(0);
+            },
             deep: true
         }
 
@@ -37,10 +39,10 @@ module.exports = Vue.extend({
         statusOptions: function () {
 
             var options = _.map(this.$data.statuses, function (status, id) {
-                return { text: status, value: id };
+                return {text: status, value: id};
             });
 
-            return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{text: this.$trans('Status'), value: ''}, {label: this.$trans('Filter by'), options: options}];
         }
 
     },
@@ -56,7 +58,7 @@ module.exports = Vue.extend({
         },
 
         save: function (comment) {
-            return this.Comments.save({ id: comment.id }, { comment: comment }, function () {
+            return this.Comments.save({id: comment.id}, {comment: comment}, function () {
                 this.load();
                 UIkit.notify(this.$trans('Comment saved.'));
             }, function (data) {
@@ -72,14 +74,14 @@ module.exports = Vue.extend({
                 comment.status = status;
             });
 
-            this.Comments.save({ id: 'bulk' }, { comments: comments }, function (data) {
+            this.Comments.save({id: 'bulk'}, {comments: comments}, function () {
                 this.load();
                 UIkit.notify(this.$trans('Comments saved.'));
             });
         },
 
         remove: function () {
-            this.Comments.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+            this.Comments.delete({id: 'bulk'}, {ids: this.selected}, function () {
                 this.load();
                 UIkit.notify(this.$trans('Comment(s) deleted.'));
             });
@@ -91,7 +93,7 @@ module.exports = Vue.extend({
 
             this.cancel();
 
-            this.Comments.query({ filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page, limit: this.config.limit }, function (data) {
+            this.Comments.query({filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: page, limit: this.config.limit}, function (data) {
                 this.$set('posts', data.posts);
                 this.$set('comments', data.comments);
                 this.$set('pages', data.pages);
@@ -112,7 +114,7 @@ module.exports = Vue.extend({
             return this.statuses[comment.status];
         },
 
-        cancel: function(e) {
+        cancel: function (e) {
 
             if (e) {
                 e.preventDefault();
@@ -127,10 +129,15 @@ module.exports = Vue.extend({
 
     components: {
 
-        row: {
-
-            replace: false,
+        'row': {
             inherit: true,
+            template: '<component is="{{ editComment.id !== comment.id ? \'default-row\' : \'edit-row\' }}"></component>'
+        },
+
+        'default-row': {
+
+            inherit: true,
+            template: '#default-row',
 
             computed: {
 
@@ -158,6 +165,13 @@ module.exports = Vue.extend({
                 }
 
             }
+
+        },
+
+        'edit-row': {
+
+            inherit: true,
+            template: '#edit-row'
 
         }
 
