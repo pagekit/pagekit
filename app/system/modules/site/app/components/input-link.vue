@@ -3,7 +3,8 @@
     <div v-attr="class: class">
         <div class="uk-flex uk-flex-middle">
 
-            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id">
+            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="!isRequired">
+            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="isRequired" v-valid="required">
             <a class="pk-icon-edit pk-icon-hover uk-margin-small-left" title="{{ 'Pick' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: open"></a>
 
         </div>
@@ -36,7 +37,7 @@
 
     module.exports = Vue.extend({
 
-        props: ['url', 'name', 'class', 'id'],
+        props: ['url', 'name', 'class', 'id', 'required'],
 
         data: function () {
             return {link: false};
@@ -47,6 +48,14 @@
             url: {
                 handler: 'load',
                 immediate: true
+            }
+
+        },
+
+        computed: {
+
+            isRequired: function() {
+                return this.required !== undefined;
             }
 
         },
