@@ -59,7 +59,7 @@
                         <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="type: types"><a href="{{ $url('admin/widget/edit', {type: type.name, position: position ? position.name : ''}) }}">{{ type.label || type.name }}</a></li>
+                                <li v-repeat="type: types"><a href="{{ $url('admin/widget/edit', {type: type.name}) }}">{{ type.label || type.name }}</a></li>
                             </ul>
                         </div>
                     </div>

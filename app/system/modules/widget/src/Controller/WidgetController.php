@@ -27,16 +27,16 @@ class WidgetController
     }
 
     /**
-     * @Request({"id": "int", "type": "string", "position": "string"})
+     * @Request({"id": "int", "type": "string"})
      */
-    public function editAction($id = 0, $type = null, $position = null)
+    public function editAction($id = 0, $type = null)
     {
         $widget = Widget::find($id);
 
         if (!$widget) {
             $widget = new Widget();
             $widget->setType($type);
-            $widget->position = $position;
+            $widget->position = '';
             $widget->theme = App::theme()->getWidget();
         }
 
