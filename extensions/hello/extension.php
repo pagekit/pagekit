@@ -16,13 +16,23 @@ return [
 
     ],
 
+    'nodes' => [
+
+        'hello' => [
+            'name' => '@hello',
+            'label' => 'Hello',
+            'controller' => 'Pagekit\\Hello\\Controller\\SiteController',
+            'protected' => true
+        ]
+
+    ],
+
     'routes' => [
 
-        '/' => [
-            'name' => '@hello',
+        '/hello' => [
+            'name' => '@hello/admin',
             'controller' => [
-                'Pagekit\\Hello\\Controller\\HelloController',
-                'Pagekit\\Hello\\Controller\\SiteController'
+                'Pagekit\\Hello\\Controller\\HelloController'
             ]
         ]
 
@@ -39,24 +49,25 @@ return [
         'hello' => [
             'label' => 'Hello',
             'icon' => 'extensions/hello/extension.svg',
-            'url' => '@hello',
+            'url' => '@hello/admin',
             // 'access' => 'hello: manage hellos'
         ],
 
-        'hello: index' => [
+        'hello: panel' => [
             'label' => 'Hello',
             'icon' => 'extensions/hello/extension.svg',
-            'url' => '@hello',
+            'url' => '@hello/admin',
             'parent' => 'hello'
             // 'access' => 'hello: manage hellos'
-        ],
-
-        'hello: settings' => [
-            'label' => 'Settings',
-            'url' => '@hello/settings',
-            'parent' => 'hello',
-            // 'access' => 'hello: manage hellos'
         ]
+
+    ],
+
+    'permissions' => [
+
+        'hello: manage settings' => [
+            'title' => 'Manage settings'
+        ],
 
     ],
 
@@ -91,6 +102,8 @@ return [
 
         'view.scripts' => function($event, $scripts) {
             $scripts->register('hello-settings', 'hello:app/bundle/settings.js', '~extensions');
+            $scripts->register('hello-site', 'hello:app/bundle/site.js', '~site-edit');
+            $scripts->register('hello-link', 'hello:app/bundle/link.js', '~panel-link');
         }
 
     ]

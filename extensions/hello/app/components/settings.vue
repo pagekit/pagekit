@@ -52,6 +52,6 @@
 
     };
 
-    window.Themes.component('settings-hello', module.exports);
+    window.Extensions.component('settings-hello', module.exports);
 
 </script>

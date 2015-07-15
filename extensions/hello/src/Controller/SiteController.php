@@ -8,17 +8,16 @@ class SiteController
 {
     /**
      * @Route("/")
-     * @Route("/{name}")
+     * @Route("/{name}", name="name")
      */
-    public function indexAction($name)
+    public function indexAction($name = '')
     {
-
-        $names = explode(',', $name);
+        $names = explode(',', $name ?: App::module('hello')->config('default'));
 
         return [
             '$view' => [
                 'title' => __('Hello %name%', ['%name%' => $names[0]]),
-                'name'  => 'hello:views/index.php'
+                'name' => 'hello:views/index.php'
             ],
             'names' => $names
         ];
@@ -26,18 +25,16 @@ class SiteController
 
     /**
      * @Route("/greet")
-     * @Route("/greet/{name}", name="site/greet/name")
+     * @Route("/greet/{name}", name="name")
      */
-    public function greetAction($name='')
+    public function greetAction($name = '')
     {
-        $config = App::module('hello')->config();
-
-        $names = explode(',', $name ?: $config['message']);
+        $names = explode(',', $name ?: App::module('hello')->config('default'));
 
         return [
             '$view' => [
                 'title' => __('Hello %name%', ['%name%' => $names[0]]),
-                'name'  => 'hello:views/index.php'
+                'name' => 'hello:views/index.php'
             ],
             'names' => $names
         ];
@@ -45,14 +42,12 @@ class SiteController
 
     public function redirectAction()
     {
-        return App::response()->redirect('@hello/greet/name', ['name' => 'Someone']);
+        return App::response()->redirect('@hello/greet', ['name' => 'Someone']);
     }
 
     public function jsonAction()
     {
-        $data = ['error' => true, 'message' => 'There is nothing here. Move along.'];
-
-        return App::response()->json($data);
+        return ['message' => 'There is nothing here. Move along.'];
     }
 
     public function downloadAction()
@@ -62,6 +57,6 @@ class SiteController
 
     function forbiddenAction()
     {
-        return App::response(__('Permission denied.'), 401);
+        App::abort(401, __('Permission denied.'));
     }
 }
