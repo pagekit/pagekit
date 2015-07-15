@@ -59,7 +59,7 @@ class SiteModule extends Module
                 }
             }
 
-            $this->registerType('alias', ['label' => 'Alias']);
+            $this->registerType('alias', ['label' => 'Alias', 'alias' => true]);
 
             App::trigger('site.types', [$this]);
         }
