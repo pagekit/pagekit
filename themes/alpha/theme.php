@@ -36,7 +36,7 @@ return [
     ],
 
     /**
-     * List of renderer views provided by this theme. A renderer view determines the markup to be used in a widget position.
+     * List of named views provided by this theme.
      */
     'views' => [
 
@@ -50,7 +50,7 @@ return [
     ],
 
     /**
-     * Menu postions provided by this theme.
+     * Menu positions provided by this theme.
      */
     'menus' => [
 
@@ -81,6 +81,15 @@ return [
      * Define default settings values and views where end users can change these values.
      */
     'config' => [
+
+        'sidebars' => [
+            'sidebar-a' => [
+                'width' => 12
+            ],
+            'sidebar-b' => [
+                'width' => 12
+            ],
+        ],
 
         'widget' => [
 
