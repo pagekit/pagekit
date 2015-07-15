@@ -1,15 +1,9 @@
-<?php
-
-$view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify'])
-
-?>
-
 <article class="uk-article">
 
     <h1 class="uk-article-title"><?= $post->getTitle() ?></h1>
 
     <div class="uk-margin"><?= $post->getContent() ?></div>
 
-    <div id="comments"></div>
+    <?= $view->render('blog:views/site/comment-index.php') ?>
 
 </article>
