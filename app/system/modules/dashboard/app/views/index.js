@@ -60,7 +60,13 @@ var Dashboard = Vue.extend({
                         data[widget.id] = widget;
                     });
 
-                    self.$http.post('admin/dashboard/savewidgets', {widgets: data});
+                    self.$http.post('admin/dashboard/savewidgets', {widgets: data}).then(function() {
+
+                        // cleanup empty items - maybe fixed with future vue.js version
+                        sortables.children().each(function() {
+                            if(!this.children.length) $(this).remove();
+                        });
+                    });
             }
         });
 

@@ -29,8 +29,18 @@ module.exports = {
             return this.menu && this.menu.id === menu.id;
         },
 
-        selectMenu: function (menu) {
-            this.$set('menu', menu);
+        selectMenu: function (menu, reload) {
+
+            var vm = this;
+
+            if (reload === false) {
+                this.$set('menu', menu);
+            } else {
+
+                this.load().then(function(){
+                    vm.$set('menu', menu);
+                });
+            }
         },
 
         removeMenu: function (menu) {
@@ -198,7 +208,7 @@ module.exports = {
         },
 
         menus: function (menus) {
-            this.selectMenu(_.find(menus, 'id', this.$get('menu.id')) || menus[0]);
+            this.selectMenu(_.find(menus, 'id', this.$get('menu.id')) || menus[0], false);
         },
 
         nodes: function () {
@@ -209,16 +219,14 @@ module.exports = {
             UIkit.nestable(this.$$.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
 
                 if (type && type !== 'removed') {
+
                     vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
 
                         // @TODO reload everything on reorder really needed?
+                        //vm.load().success(function () { el.remove(); });
 
-                        vm.load().success(function () {
-                            el.remove();
-                        }).error(function() {
-                            UIkit.notify(this.$trans('Reorder failed.'), 'danger');
-                        });
-
+                    }).error(function() {
+                        UIkit.notify(this.$trans('Reorder failed.'), 'danger');
                     });
                 }
             });
