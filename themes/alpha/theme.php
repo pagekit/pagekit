@@ -31,7 +31,7 @@ return [
      */
     'resources' => [
 
-        'alpha:' => ''
+        'theme:' => ''
 
     ],
 
@@ -40,12 +40,12 @@ return [
      */
     'views' => [
 
-        'grid' => 'alpha:views/position-grid.php',
-        'navbar' => 'alpha:views/position-navbar.php',
-        'offcanvas' => 'alpha:views/position-offcanvas.php',
-        'panel' => 'alpha:views/position-panel.php',
-        'menu' => 'alpha:views/menu.php',
-        'menu-navbar' => 'alpha:views/menu-navbar.php'
+        'grid' => 'theme:views/position-grid.php',
+        'navbar' => 'theme:views/position-navbar.php',
+        'offcanvas' => 'theme:views/position-offcanvas.php',
+        'panel' => 'theme:views/position-panel.php',
+        'menu' => 'theme:views/menu.php',
+        'menu-navbar' => 'theme:views/menu-navbar.php'
 
     ],
 
@@ -107,8 +107,8 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('theme-widget', 'alpha:app/bundle/widget-theme.js', '~widgets');
-            $scripts->register('theme-settings', 'alpha:app/bundle/settings.js', '~themes');
+            $scripts->register('theme-widget', 'theme:app/bundle/widget-theme.js', '~widgets');
+            $scripts->register('theme-settings', 'theme:app/bundle/settings.js', '~themes');
         }
 
     ]
