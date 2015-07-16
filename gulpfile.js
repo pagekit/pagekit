@@ -17,7 +17,7 @@ var merge      = require('merge-stream'),
 var pkgs = [
     { path: 'app/installer/', data: '../../composer.json' },
     { path: 'app/system/modules/theme/', data: '../../../../composer.json' },
-    { path: 'themes/alpha/', data: 'theme.json' }
+    { path: 'themes/one/', data: 'theme.json' }
 ];
 
 // banner for the css files
