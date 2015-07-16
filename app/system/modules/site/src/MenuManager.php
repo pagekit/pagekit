@@ -3,8 +3,6 @@
 namespace Pagekit\Site;
 
 use Pagekit\Application as App;
-use Pagekit\Site\Model\Node;
-use Pagekit\System\Model\NodeInterface;
 
 class MenuManager implements \JsonSerializable
 {

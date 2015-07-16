@@ -41,19 +41,34 @@ class UrlResolver implements ParamsResolverInterface
      */
     public function match(array $parameters = [])
     {
-        $slug = $parameters['slug'];
-
-        if (!isset($this->cacheEntries[$slug])) {
-
-            if (!$post = Post::where(compact('slug'))->first()) {
-                throw new NotFoundException(__('Post with slug "%slug%" not found!', ['%slug%' => $slug]));
-            }
-
-            $this->cacheEntries[$slug] = $post->getId();
-            $this->cacheDirty = true;
+        if (isset($parameters['id'])) {
+            return $parameters;
         }
 
-        $parameters['id'] = $this->cacheEntries[$slug];
+        if (!isset($parameters['slug'])) {
+            App::abort(404, 'Post not found.');
+        }
+
+        $slug = $parameters['slug'];
+
+        $id = false;
+        foreach ($this->cacheEntries as $entry) {
+            if ($entry['slug'] === $slug) {
+                $id = $entry['id'];
+            }
+        }
+
+        if (!$id) {
+
+            if (!$post = Post::where(compact('slug'))->first()) {
+                App::abort(404, 'Post not found.');
+            }
+
+            $this->addCache($post);
+            $id = $post->getId();
+        }
+
+        $parameters['id'] = $id;
         return $parameters;
     }
 
@@ -67,21 +82,10 @@ class UrlResolver implements ParamsResolverInterface
         if (!isset($this->cacheEntries[$id])) {
 
             if (!$post = Post::where(compact('id'))->first()) {
-                throw new RouteNotFoundException(__('Post with id "%id%" not found!', ['%id%' => $id]));
+                throw new RouteNotFoundException('Post not found!');
             }
 
-            $this->cacheEntries[$id] = [
-                'id'     => $post->getId(),
-                'slug'   => $post->getSlug(),
-                'year'   => $post->getDate()->format('Y'),
-                'month'  => $post->getDate()->format('m'),
-                'day'    => $post->getDate()->format('d'),
-                'hour'   => $post->getDate()->format('H'),
-                'minute' => $post->getDate()->format('i'),
-                'second' => $post->getDate()->format('s'),
-            ];
-
-            $this->cacheDirty = true;
+            $this->addCache($post);
         }
 
         $meta = $this->cacheEntries[$id];
@@ -105,5 +109,21 @@ class UrlResolver implements ParamsResolverInterface
         if ($this->cacheDirty) {
             App::cache()->save(self::CACHE_KEY, $this->cacheEntries);
         }
+    }
+
+    protected function addCache($post)
+    {
+        $this->cacheEntries[$post->getId()] = [
+            'id'     => $post->getId(),
+            'slug'   => $post->getSlug(),
+            'year'   => $post->getDate()->format('Y'),
+            'month'  => $post->getDate()->format('m'),
+            'day'    => $post->getDate()->format('d'),
+            'hour'   => $post->getDate()->format('H'),
+            'minute' => $post->getDate()->format('i'),
+            'second' => $post->getDate()->format('s'),
+        ];
+
+        $this->cacheDirty = true;
     }
 }

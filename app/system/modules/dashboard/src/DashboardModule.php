@@ -4,7 +4,6 @@ namespace Pagekit\Dashboard;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\User\Model\User;
 
 class DashboardModule extends Module
 {

@@ -44,7 +44,6 @@ trait NodeModelTrait
             'mode' => 'all'
         ], $parameters);
 
-
         $user       = App::user();
         $startLevel = (int) $parameters['start_level'] ?: 1;
         $maxDepth   = $startLevel + ($parameters['depth'] ?: PHP_INT_MAX);
