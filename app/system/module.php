@@ -75,7 +75,7 @@ return [
 
         'site' => [
             'locale' => 'en_US',
-            'theme' => 'alpha'
+            'theme' => 'one'
         ],
 
         'admin' => [

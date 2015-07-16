@@ -6,8 +6,8 @@
 !/extensions/hello
 !/extensions/page
 /themes/*
-!/themes/alpha
-/themes/alpha/css/*
+!/themes/one
+/themes/one/css/*
 /vendor/*
 !/vendor/assets
 /vendor/assets/*
