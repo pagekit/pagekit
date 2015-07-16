@@ -69,6 +69,6 @@
 
     };
 
-    window.Themes.component('settings-alpha', module.exports);
+    window.Themes.component('settings-one', module.exports);
 
 </script>

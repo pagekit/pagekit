@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Alpha;
+namespace Pagekit\One;
 
 use Pagekit\Application as App;
 use Pagekit\System\Theme;
 use Pagekit\Util\Arr;
 
-class AlphaTheme extends Theme
+class OneTheme extends Theme
 {
     /**
      * @var array

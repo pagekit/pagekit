@@ -8,7 +8,7 @@
  */
 return [
 
-    'name' => 'alpha',
+    'name' => 'one',
 
     'type' => 'theme',
 
@@ -17,14 +17,14 @@ return [
      */
     'autoload' => [
 
-        'Pagekit\\Alpha\\' => 'src'
+        'Pagekit\\One\\' => 'src'
 
     ],
 
     /**
      * The main function.
      */
-    'main' => 'Pagekit\\Alpha\\AlphaTheme',
+    'main' => 'Pagekit\\One\\OneTheme',
 
     /**
      * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.
@@ -75,7 +75,7 @@ return [
 
     ],
 
-    'settings' => 'settings-alpha',
+    'settings' => 'settings-one',
 
     /**
      * Define default settings values and views where end users can change these values.
