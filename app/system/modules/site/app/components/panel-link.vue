@@ -41,10 +41,10 @@
 
                 var types = [];
 
-                _.forIn(this.$options.components, function (component) {
+                _.forIn(this.$options.components, function (component, name) {
 
                     if (component.options.link) {
-                        types.push({ text: component.options.link.label, value: component.options.link.name });
+                        types.push({ text: component.options.link.label, value: name });
                     }
 
                 });

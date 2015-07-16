@@ -15,12 +15,13 @@ module.exports = Vue.extend({
 
             var sections = [], type = this.$get('type.id');
 
-            _.forIn(this.$options.components, function (component) {
+            _.forIn(this.$options.components, function (component, name) {
 
                 var section = component.options.section;
 
                 if (section && (!section.active || type && type.match(section.active))) {
-                    sections.push(component.options.section);
+                    section.name = name;
+                    sections.push(section);
                 }
             });
 

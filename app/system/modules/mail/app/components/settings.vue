@@ -98,7 +98,6 @@
     module.exports = {
 
         section: {
-            name: 'system/mail',
             label: 'Mail',
             icon: 'pk-icon-large-mail',
             priority: 40
@@ -128,6 +127,6 @@
 
     };
 
-    Settings.component('system/mail', module.exports);
+    window.Settings.component('system/mail', module.exports);
 
 </script>

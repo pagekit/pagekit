@@ -14,7 +14,6 @@
     module.exports = {
 
         link: {
-            name: 'hello',
             label: 'Hello'
         },
 

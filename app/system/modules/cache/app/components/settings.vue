@@ -69,7 +69,6 @@
     module.exports = {
 
         section: {
-            name: 'system/cache',
             label: 'Cache',
             icon: 'pk-icon-large-bolt',
             priority: 30
@@ -109,6 +108,6 @@
 
     };
 
-    Settings.component('system/cache', module.exports);
+    window.Settings.component('system/cache', module.exports);
 
 </script>

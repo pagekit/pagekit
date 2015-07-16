@@ -20,7 +20,6 @@
     module.exports = {
 
         link: {
-            name: 'user',
             label: 'User'
         },
 

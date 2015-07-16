@@ -15,7 +15,6 @@
         props: ['node', 'form', 'type'],
 
         section: {
-            name: 'hello',
             label: 'Settings',
             priority: 0,
             active: 'hello$'

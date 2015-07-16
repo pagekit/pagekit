@@ -67,7 +67,6 @@
     module.exports = {
 
         section: {
-            name: 'page',
             label: 'Content',
             priority: 0,
             active: 'page'

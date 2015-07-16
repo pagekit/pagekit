@@ -16,9 +16,12 @@ module.exports = Vue.extend({
 
             var sections = [];
 
-            _.forIn(this.$options.components, function (component) {
-                if (component.options.section) {
-                    sections.push(component.options.section);
+            _.forIn(this.$options.components, function (component, name) {
+
+                var section = component.options.section;
+                if (section) {
+                    section.name = name;
+                    sections.push(section);
                 }
             });
 
