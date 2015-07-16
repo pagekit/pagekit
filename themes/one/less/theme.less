@@ -11,52 +11,71 @@
 html { overflow-y: scroll; }
 
 
-/* Layout
- ========================================================================== */
-
-.tm-logo {
-    margin-top: 80px;
-    text-align: center;
-}
-
-/* Navbar center
+/* Navbar
  ========================================================================== */
 
 .tm-navbar {
-    margin: 20px 0;
-    text-align: center;
+    border-bottom: 1px solid @global-border;
+    background: @navbar-background;
 }
 
-.tm-navbar > .uk-navbar {
-    display: inline-block;
-    vertical-align: middle;
+/* Navbar as overlay */
+.tm-navbar-overlay:not(.uk-active) {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
 }
 
-/* Only large screens */
-@media (min-width: @breakpoint-medium) {
+// Transparent background
+.tm-navbar-transparent {
+    border-bottom-color: transparent;
+    background: transparent;
+}
 
-    .tm-navbar {
-        margin: 40px 0;
-        text-align: center;
-    }
+.tm-navbar-transparent .uk-navbar { background: none; }
+
+// Contrast color
+.tm-navbar-contrast {
+
+    .uk-navbar { color: @contrast-color; }
+
+    // Nav
+    .uk-navbar-nav > li > a { color: fade(@contrast-color, 70%); }
+
+    .uk-navbar-nav > li:hover > a,
+    .uk-navbar-nav > li > a:focus,
+    .uk-navbar-nav > li.uk-open > a { color: @contrast-color; }
+
+    .uk-navbar-nav > li > a:active { color: @contrast-color; }
+
+    .uk-navbar-nav > li.uk-active > a { color: @contrast-color; }
+
+    // Link
+    .uk-navbar-content > a:not([class]) { color: fade(@contrast-color, 70%); }
+    .uk-navbar-content > a:not([class]):hover { color: @contrast-color; }
+
+    // Brand
+    .uk-navbar-brand { color: fade(@contrast-color, 70%); }
+
+    .uk-navbar-brand:hover,
+    .uk-navbar-brand:focus { color: @contrast-color; }
+
+    // Toggle
+    .uk-navbar-toggle { color: fade(@contrast-color, 70%); }
+
+    .uk-navbar-toggle:hover,
+    .uk-navbar-toggle:focus { color: @contrast-color; }
 
 }
 
 
-/* Brand
+/* Blocks
  ========================================================================== */
 
-.tm-brand {
-    display: inline-block;
-    font-size: 28px;
-    color: #333335;
-}
+.tm-block-height { min-height: ~"calc(100vh - 81px)"; }
 
-.tm-brand:hover { text-decoration: none; }
+/*
+ * Footer
+ */
 
-/* Only large screens */
-@media (min-width: @breakpoint-medium) {
-
-    .tm-brand { font-size: 42px; }
-
-}
+.tm-footer .uk-panel + .uk-panel { margin-top: @global-grid-gutter; }
