@@ -23,51 +23,39 @@
 @nav-parent-icon-width:                         @global-line-height;
 
 @nav-side-color:                                @global-color;
-@nav-side-hover-background:                     @global-default-background;
 @nav-side-hover-color:                          @global-color;
 @nav-side-active-background:                    @global-primary-background;
 @nav-side-active-color:                         @global-contrast-color;
 @nav-side-header-color:                         @global-color;
 @nav-side-divider-border:                       @global-border;
-@nav-side-nested-color:                         @global-muted-color;
-@nav-side-nested-hover-color:                   @global-link-color;
+@nav-side-nested-color:                         @global-link-color;
+@nav-side-nested-hover-color:                   @global-link-hover-color;
 
 @nav-dropdown-color:                            @global-color;
 @nav-dropdown-hover-background:                 @global-primary-background;
 @nav-dropdown-hover-color:                      @global-contrast-color;
 @nav-dropdown-header-color:                     @global-muted-color;
 @nav-dropdown-divider-border:                   @global-border;
-@nav-dropdown-nested-color:                     @global-muted-color;
-@nav-dropdown-nested-hover-color:               @global-link-color;
+@nav-dropdown-nested-color:                     @global-link-color;
+@nav-dropdown-nested-hover-color:               @global-link-hover-color;
 
 @nav-navbar-color:                              @global-color;
 @nav-navbar-hover-background:                   @global-primary-background;
 @nav-navbar-hover-color:                        @global-contrast-color;
 @nav-navbar-header-color:                       @global-muted-color;
 @nav-navbar-divider-border:                     @global-border;
-@nav-navbar-nested-color:                       @global-muted-color;
-@nav-navbar-nested-hover-color:                 @global-link-color;
+@nav-navbar-nested-color:                       @global-link-color;
+@nav-navbar-nested-hover-color:                 @global-link-hover-color;
 
 @nav-offcanvas-color:                           @offcanvas-panel-link-color;
-@nav-offcanvas-hover-background:                darken(@offcanvas-bar-background, 4%);
+@nav-offcanvas-hover-background:                lighten(@offcanvas-bar-background, 5%);
 @nav-offcanvas-hover-color:                     @offcanvas-panel-link-hover-color;
-@nav-offcanvas-active-background:               @global-primary-background;
-@nav-offcanvas-active-color:                    @global-contrast-color;
+@nav-offcanvas-active-background:               darken(@offcanvas-bar-background, 10%);
+@nav-offcanvas-active-color:                    @offcanvas-panel-link-hover-color;
 @nav-offcanvas-header-color:                    @offcanvas-panel-color;
-@nav-offcanvas-divider-border:                  lighten(@offcanvas-bar-background, 6%);
-@nav-offcanvas-divider-border-width:            1px;
+@nav-offcanvas-divider-border:                  darken(@offcanvas-bar-background, 10%);
 @nav-offcanvas-nested-color:                    @offcanvas-panel-link-color;
 @nav-offcanvas-nested-hover-color:              @offcanvas-panel-link-hover-color;
-
-//
-// New
-//
-
-@nav-dropdown-active-color:                     @global-link-color;
-@nav-dropdown-active-hover-color:               @global-contrast-color;
-
-@nav-navbar-active-color:                       @global-link-color;
-@nav-navbar-active-hover-color:                 @global-contrast-color;
 
 
 // Sub-object: `uk-nav-header`
@@ -101,7 +89,7 @@
 // Items
 //
 
-.hook-nav-side() { border-radius: @global-border-radius; }
+.hook-nav-side() {}
 
 // Hover
 .hook-nav-side-hover() {}
@@ -176,13 +164,17 @@
 // ========================================================================
 
 .hook-nav-offcanvas-link() {}
+
 .hook-nav-offcanvas-link-hover() {}
 
 //
 // Items
 //
 
-.hook-nav-offcanvas() { text-transform: uppercase; }
+.hook-nav-offcanvas() {}
+
+// Hover
+.hook-nav-offcanvas-hover() {}
 
 // Active
 .hook-nav-offcanvas-active() {}
@@ -203,19 +195,4 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-nav-misc() {
-
-	/*
-	 * In panel box
-	 */
-
-    .uk-panel-box .uk-nav-side > li > a { border-radius: 0; }
-
-    /* Active color */
-    .uk-nav-dropdown > li.uk-active > a { color: @nav-dropdown-active-color; }
-    .uk-nav-dropdown > li.uk-active > a:hover { color: @nav-dropdown-active-hover-color; }
-
-    .uk-nav-navbar > li.uk-active > a { color: @nav-navbar-active-color; }
-    .uk-nav-navbar > li.uk-active > a:hover { color: @nav-navbar-active-hover-color; }
-
-}
+.hook-nav-misc() {}

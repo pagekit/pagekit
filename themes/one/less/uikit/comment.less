@@ -28,8 +28,9 @@
 @comment-border:                                @global-border;
 @comment-background:                            #fafafa;
 
-@comment-primary-border:                        #fe634a;
-@comment-primary-background:                    #fff;
+@comment-primary-border:                        fade(@comment-primary-color, 30%);
+@comment-primary-background:                    #ebf7fd;
+@comment-primary-color:                         #2d7091;
 
 
 // Component
@@ -90,6 +91,7 @@
     .uk-comment-primary .uk-comment-header {
         border-color: @comment-primary-border;
         background-color: @comment-primary-background;
+        color: @comment-primary-color;
     }
 
 }

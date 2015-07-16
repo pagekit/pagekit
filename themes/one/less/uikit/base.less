@@ -7,15 +7,16 @@
 // Variables
 // ========================================================================
 
-@base-body-font-family:                         "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 @base-body-background:                          @global-background;
+@base-body-font-family:                         "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @base-body-font-size:                           @global-font-size;
 @base-body-line-height:                         @global-line-height;
 @base-body-color:                               @global-color;
 
 @base-link-color:                               @global-link-color;
 @base-link-hover-color:                         @global-link-hover-color;
-@base-em-color:                                 #67aad9;
+@base-em-color:                                 #f0615c;
 @base-ins-background:                           #ffd;
 @base-ins-color:                                @global-color;
 @base-mark-background:                          #ffd;
@@ -25,7 +26,7 @@
 
 @base-heading-font-family:                      "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @base-heading-font-weight:                      300;
-@base-heading-color:                            #333335;
+@base-heading-color:                            @global-color;
 @base-heading-margin-top:                       @global-margin-large;
 @base-h1-font-size:                             round((@global-font-size * 2.6)); // 36px / 42px
 @base-h1-line-height:                           round((@base-h1-font-size * 1.154)); // 42px / 48px
@@ -43,17 +44,16 @@
 @base-hr-border:                                @global-border;
 
 @base-blockquote-border:                        @global-border;
-@base-blockquote-small-color:                   @global-muted-color;
 @base-blockquote-font-size:                     round((@global-font-size * 1.14)); // 16px / 18px
 @base-blockquote-line-height:                   round((@base-blockquote-font-size * 1.36)); // 22px / 24px
 
-@base-code-color:                               #67aad9;
-@base-code-font-size:                           round((@global-font-size * 0.85)); // 12px / 14px
+@base-code-color:                               #f0615c;
+@base-code-font-size:                           12px;
 
 @base-pre-background:                           #fafafa;
 @base-pre-color:                                @global-color;
-@base-pre-font-size:                            round((@global-font-size * 0.85)); // 12px / 14px
-@base-pre-line-height:                          round((@base-pre-font-size * 1.46)); // 18px / 20px
+@base-pre-font-size:                            12px;
+@base-pre-line-height:                          18px;
 
 //
 // New
@@ -70,7 +70,7 @@
 .hook-base-body() {}
 
 
-// Code and preformatted text
+// Text-level semantics
 // ========================================================================
 
 .hook-base-code() {
@@ -80,11 +80,26 @@
     background: @base-code-background;
 }
 
-.hook-base-code-reset() {
-    padding: 0;
-    border: 0;
-    background: transparent;
-}
+
+// Headings
+// ========================================================================
+
+.hook-base-h1() {}
+
+.hook-base-h2() {}
+
+.hook-base-h3() {}
+
+.hook-base-h4() {}
+
+.hook-base-h5() {}
+
+.hook-base-h6() {}
+
+
+// Preformatted text
+// ========================================================================
+
 
 .hook-base-pre() {
     border: 1px solid @base-pre-border;

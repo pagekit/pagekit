@@ -9,9 +9,7 @@
 
 @overlay-panel-color:                           @global-contrast-color;
 
-@overlay-panel-background:                      rgba(255,255,255,0.95);
-
-@overlay-icon-color:                            @global-muted-color;
+@overlay-icon-color:                            @global-contrast-color;
 
 
 // Sub-object `uk-overlay-panel`
@@ -23,9 +21,13 @@
 // Sub-object `uk-overlay-background`
 // ========================================================================
 
-.hook-overlay-background() {
-    color: @global-color;
-}
+.hook-overlay-background() {}
+
+
+// Sub-object `uk-overlay-image`
+// ========================================================================
+
+.hook-overlay-image() {}
 
 
 // Sub-object `uk-overlay-icon`

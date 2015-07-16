@@ -3,6 +3,8 @@
 
 @import "../../../../vendor/assets/uikit/less/uikit.less";
 
+@icon-font-path: "../../../../../vendor/assets/uikit/fonts";
+
 // Components: Navs
 @import "../../../../vendor/assets/uikit/less/components/dotnav.less";
 @import "../../../../vendor/assets/uikit/less/components/slidenav.less";
@@ -12,9 +14,11 @@
 @import "../../../../vendor/assets/uikit/less/components/progress.less";
 
 // Components: JavaScript
-@import "../../../../vendor/assets/uikit/less/components/slideshow.less";
 @import "../../../../vendor/assets/uikit/less/components/accordion.less";
+@import "../../../../vendor/assets/uikit/less/components/slider.less";
+@import "../../../../vendor/assets/uikit/less/components/slideshow.less";
 @import "../../../../vendor/assets/uikit/less/components/search.less";
+@import "../../../../vendor/assets/uikit/less/components/sticky.less";
 @import "../../../../vendor/assets/uikit/less/components/tooltip.less";
 
 
@@ -30,6 +34,7 @@
 // Layout
 @import "grid.less";
 @import "panel.less";
+@import "block.less";
 @import "article.less";
 @import "comment.less";
 
@@ -40,6 +45,7 @@
 @import "breadcrumb.less";
 @import "pagination.less";
 @import "tab.less";
+@import "thumbnav.less";
 
 // Elements
 @import "list.less";
@@ -55,17 +61,11 @@
 @import "alert.less";
 @import "thumbnail.less";
 @import "overlay.less";
-@import "progress.less";
 
 // JavaScript
 @import "dropdown.less";
 @import "modal.less";
 @import "offcanvas.less";
-@import "tooltip.less";
-
-// Need to be loaded last
-@import "text.less";
-@import "utility.less";
 
 // Components: Navs
 @import "dotnav.less";
@@ -73,7 +73,15 @@
 
 // Components: Common
 @import "form-password.less";
+@import "progress.less";
 
 // Components: JavaScript
 @import "accordion.less";
 @import "search.less";
+@import "sticky.less";
+@import "tooltip.less";
+
+// Need to be loaded last
+@import "text.less";
+@import "utility.less";
+@import "contrast.less";

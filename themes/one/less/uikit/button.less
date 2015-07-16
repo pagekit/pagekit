@@ -66,7 +66,6 @@
 // New
 //
 
-@button-font-size:                              round((@global-font-size * 0.92)); // 13px
 @button-border:                                 rgba(0,0,0,0.1);
 @button-hover-border:                           rgba(0,0,0,0.15);
 
@@ -77,13 +76,11 @@
 .hook-button() {
     border: 1px solid @button-border;
     border-radius: @global-border-radius;
-    font-size: @button-font-size;
-    text-transform: uppercase;
 }
 
 .hook-button-hover() { border-color: @button-hover-border; }
 
-.hook-button-active() { box-shadow: inset 0 1px 5px -1px rgba(0,0,0,0.1); }
+.hook-button-active() {}
 
 
 // Color modifiers
@@ -97,10 +94,7 @@
 
 .hook-button-primary-hover() { border-color: transparent; }
 
-.hook-button-primary-active() {
-    border-color: transparent;
-    box-shadow: inset 0 1px 3px fade(darken(@button-primary-active-background, 15%), 20%);
-}
+.hook-button-primary-active() { border-color: transparent; }
 
 //
 // Modifier: `uk-button-success`
@@ -110,10 +104,7 @@
 
 .hook-button-success-hover() { border-color: transparent; }
 
-.hook-button-success-active() {
-    border-color: transparent;
-    box-shadow: inset 0 1px 3px fade(darken(@button-success-active-background, 15%), 20%);
-}
+.hook-button-success-active() { border-color: transparent; }
 
 //
 // Modifier: `uk-button-danger`
@@ -123,25 +114,19 @@
 
 .hook-button-danger-hover() { border-color: transparent; }
 
-.hook-button-danger-active() {
-    border-color: transparent;
-    box-shadow: inset 0 1px 3px fade(darken(@button-danger-active-background, 20%), 20%);
-}
+.hook-button-danger-active() { border-color: transparent; }
 
 
 // Disabled state
 // ========================================================================
 
-.hook-button-disable() {
-    border-color: @button-border;
-    box-shadow: none;
-}
+.hook-button-disable() { border-color: @button-border; }
 
 
 // Modifier: `uk-button-link`
 // ========================================================================
 
-.hook-button-link() { box-shadow: none; }
+.hook-button-link() {}
 
 
 // Size modifiers
@@ -192,6 +177,7 @@
      */
 
     .uk-button-group .uk-button:hover,
-    .uk-button-group .uk-button:active { position: relative; }
+    .uk-button-group .uk-button:active,
+    .uk-button-group .uk-button.uk-active { position: relative; }
 
 }

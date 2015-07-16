@@ -8,9 +8,14 @@
 // ========================================================================
 
 @modal-z-index:                                 @global-z-index + 10;
-@modal-background:                              rgba(245,245,245,0.8);
 
 @modal-dialog-background:                       @global-background;
+
+@modal-header-margin-bottom:                    @global-margin;
+
+@modal-footer-margin-top:                       @global-margin;
+
+@modal-caption-color:                           @global-contrast-color;
 
 
 // Component
@@ -23,9 +28,8 @@
 // ========================================================================
 
 .hook-modal-dialog() {
-	border: 1px solid @global-border;
     border-radius: @global-border-radius;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 
@@ -38,13 +42,25 @@
 // Sub-object: `uk-modal-header`
 // ========================================================================
 
-.hook-modal-header() {}
+.hook-modal-header() {
+    margin: (-@modal-dialog-padding) (-@modal-dialog-padding) @modal-header-margin-bottom (-@modal-dialog-padding);
+    padding: @modal-dialog-padding;
+    border-bottom: 1px solid @global-border;
+    border-radius: @global-border-radius @global-border-radius 0 0;
+    background: #fafafa;
+}
 
 
 // Sub-object: `uk-modal-footer`
 // ========================================================================
 
-.hook-modal-footer() {}
+.hook-modal-footer() {
+    margin: @modal-footer-margin-top (-@modal-dialog-padding) (-@modal-dialog-padding) (-@modal-dialog-padding);
+    padding: @modal-dialog-padding;
+    border-top: 1px solid @global-border;
+    border-radius: 0 0 @global-border-radius @global-border-radius;
+    background: #fafafa;
+}
 
 
 // Sub-object: `uk-modal-caption`

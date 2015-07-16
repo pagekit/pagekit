@@ -12,7 +12,7 @@
 @dropdown-color:                                @global-color;
 @dropdown-divider-border:                       @global-border;
 
-@dropdown-navbar-margin:                        6px;
+@dropdown-navbar-margin:                        5px;
 @dropdown-navbar-background:                    #fff;
 @dropdown-navbar-color:                         @global-color;
 
@@ -35,11 +35,7 @@
 // Modifier: `uk-dropdown-navbar`
 // ========================================================================
 
-.hook-dropdown-navbar() {
-    left: -1px;
-    border: 1px solid @dropdown-border;
-    border-radius: @global-border-radius;
-}
+.hook-dropdown-navbar() {}
 
 
 // Miscellaneous
@@ -47,6 +43,6 @@
 
 .hook-dropdown-misc() {
 
-    .uk-dropdown-navbar.uk-dropdown-flip { left: auto; }
+    .uk-dropdown-navbar .uk-nav { margin: -5px -@dropdown-padding; }
 
 }

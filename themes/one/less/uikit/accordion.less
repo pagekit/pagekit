@@ -8,9 +8,17 @@
 // ========================================================================
 
 @accordion-title-margin-bottom:                 @global-margin;
+@accordion-title-padding-vertical:              8px;
 @accordion-title-padding-horizontal:            @global-margin;
-@accordion-title-font-size:                     round((@global-font-size * 1.28)); // 18px / 20px
-@accordion-title-line-height:                   round((@accordion-title-font-size * 1.32)); // 24px / 26px
+@accordion-title-font-size:                     round((@global-font-size * 1.14)); // 16px / 18px
+@accordion-title-line-height:                   round((@accordion-title-font-size * 1.36)); // 22px / 24px
+@accordion-title-background:                    transparent;
+
+//
+// New
+//
+
+@accordion-title-border:                        @global-border;
 
 
 // Component
@@ -22,7 +30,10 @@
 // Modifier: `uk-accordion-title`
 // ========================================================================
 
-.hook-accordion-title() {}
+.hook-accordion-title() {
+	border: 1px solid @accordion-title-border;
+	border-radius: @global-border-radius;
+}
 
 
 // Modifier: `uk-accordion-content`

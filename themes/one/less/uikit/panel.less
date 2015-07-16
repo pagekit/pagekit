@@ -10,22 +10,19 @@
 @panel-title-margin-bottom:                     @global-margin;
 @panel-title-font-size:                         round((@global-font-size * 1.28)); // 18px / 20px
 @panel-title-line-height:                       round((@panel-title-font-size * 1.32)); // 24px / 26px
-@panel-title-color:                             #333335;
-@panel-title-font-weight:						300;
+@panel-title-color:                             @global-color;
 
 @panel-box-padding:                             @global-margin;
 @panel-box-background:                          @global-background;
 @panel-box-color:                               @global-color;
-@panel-box-title-color:                         #333335;
+@panel-box-title-color:                         @global-color;
 @panel-box-teaser-margin:                       -(@panel-box-padding + 1);
 
 @panel-box-primary-background:                  @global-default-hover-background;
 @panel-box-primary-color:                       @global-color;
-@panel-box-primary-title-color:                 #333335;
+@panel-box-primary-title-color:                 @global-color;
 
-@panel-box-secondary-background:                #333335;
-@panel-box-secondary-color:                		@global-contrast-color;
-@panel-box-secondary-title-color:               @global-contrast-color;
+@panel-box-secondary-background:                @global-default-background;
 
 @panel-hover-padding:                           @global-margin;
 @panel-hover-color:                             @global-color;
@@ -71,9 +68,17 @@
 
 .hook-panel-box-hover() {}
 
+//
+// Sub-modifier: `uk-panel-box-primary`
+//
+
 .hook-panel-box-primary() {}
 
 .hook-panel-box-primary-hover() {}
+
+//
+// Sub-modifier: `uk-panel-box-secondary`
+//
 
 .hook-panel-box-secondary() {}
 
@@ -102,9 +107,12 @@
 
 .hook-panel-misc() {
 
-    .uk-panel-box .uk-panel-teaser > * {
+	.uk-panel-box .uk-panel-teaser {
         border-top-left-radius: @global-border-radius;
         border-top-right-radius: @global-border-radius;
+        overflow: hidden;
+        // Fixed `overflow: hidden` to be ignored with border-radius and CSS transforms in Webkit
+        -webkit-transform: translateZ(0);
     }
 
 }

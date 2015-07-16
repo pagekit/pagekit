@@ -14,14 +14,14 @@
 // New
 //
 
-@breadcrumb-font-size:                          round((@global-font-size * 0.85)); // 12px
+@breadcrumb-font-size:                          round((@global-font-size * 0.85)); // 12px / 14px
 
 
 // Component
 // ========================================================================
 
 .hook-breadcrumb() {
-	font-size: @breadcrumb-font-size;
+    font-size: @breadcrumb-font-size;
     text-transform: uppercase;
 }
 
@@ -29,10 +29,7 @@
 // Items
 // ========================================================================
 
-.hook-breadcrumb-divider() {
-	font-weight: 300;
-	color: @global-muted-color;
-}
+.hook-breadcrumb-divider() { color: @global-muted-color; }
 
 
 // Miscellaneous
