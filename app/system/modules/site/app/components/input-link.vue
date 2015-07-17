@@ -1,12 +1,10 @@
 <template>
 
     <div v-attr="class: class">
-        <div class="uk-flex uk-flex-middle">
-
-            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="!isRequired">
-            <input class="uk-flex-item-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="isRequired" v-valid="required">
-            <a class="pk-icon-edit pk-icon-hover uk-margin-small-left" title="{{ 'Pick' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: open"></a>
-
+        <div class="pk-form-link uk-width-1-1">
+            <input class="uk-width-1-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="!isRequired">
+            <input class="uk-width-1-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="isRequired" v-valid="required">
+            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-edit pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>
 
