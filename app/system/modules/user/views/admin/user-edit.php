@@ -92,7 +92,7 @@
         </div>
         <div class="uk-width-medium-1-4">
 
-            <div class="uk-panel uk-panel-box uk-text-center">
+            <div class="uk-panel uk-panel-box uk-text-center" v-show="user.name">
 
                 <div class="uk-panel-teaser">
                     <img height="280" width="280" v-attr="alt: user.name" v-gravatar="user.email">
