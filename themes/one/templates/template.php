@@ -17,7 +17,7 @@ include(__DIR__.'/template.config.php');
     </head>
     <body>
 
-        <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
+        <?php if ($view->position()->exists('logo') || $view->menu()->exists('primary')) : ?>
         <div class="tm-navbar">
             <div class="uk-container uk-container-center">
 
@@ -29,9 +29,9 @@ include(__DIR__.'/template.config.php');
                     </a>
                     <?php endif ?>
 
-                    <?php if ($view->menu()->exists('main')) : ?>
+                    <?php if ($view->menu()->exists('primary')) : ?>
                     <div class="uk-navbar-flip uk-hidden-small">
-                        <?= $view->menu('main', 'menu-navbar') ?>
+                        <?= $view->menu('primary', 'menu-navbar') ?>
                     </div>
                     <?php endif ?>
 

@@ -38,7 +38,7 @@ return [
      */
     'menus' => [
 
-        'main' => 'Main',
+        'primary' => 'Primary',
         'offcanvas' => 'Offcanvas'
 
     ],
