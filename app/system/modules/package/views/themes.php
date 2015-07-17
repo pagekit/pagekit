@@ -61,7 +61,7 @@
         <package-details api="{{ api }}" package="{{ package }}"></package-details>
     </v-modal>
 
-    <v-modal v-ref="settings">
+    <v-modal v-ref="settings" large>
         <component is="{{ view }}" package="{{ package }}"></component>
     </v-modal>
 
