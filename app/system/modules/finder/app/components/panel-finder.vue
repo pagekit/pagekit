@@ -73,7 +73,7 @@
 
         replace : true,
 
-        props: ['root', 'path', 'mode', 'view'],
+        props: ['root', 'path', 'mode', 'view', 'modal'],
 
         data: function () {
             return {

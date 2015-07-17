@@ -4,7 +4,7 @@
         <div class="uk-modal-dialog uk-form uk-form-stacked" v-class="uk-modal-dialog-large: view == 'finder'">
 
             <div v-show="view == 'settings'">
-                
+
                 <div class="uk-modal-header">
                     <h2>{{ 'Add Video' | trans }}</h2>
                 </div>
@@ -38,7 +38,7 @@
 
             <div v-if="view == 'finder'">
 
-                <panel-finder root="{{ storage }}" v-ref="finder"></panel-finder>
+                <panel-finder root="{{ storage }}" v-ref="finder" modal="true"></panel-finder>
 
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
