@@ -50,9 +50,12 @@ return [
 
         'logo' => 'Logo',
         'logo-small' => 'Logo Small',
-        'top' => 'Top',
+        'top-a' => 'Top A',
+        'top-b' => 'Top B',
         'sidebar-a' => 'Sidebar A',
         'sidebar-b' => 'Sidebar B',
+        'bottom-a' => 'Bottom A',
+        'bottom-b' => 'Bottom B',
         'footer' => 'Footer',
         'offcanvas' => 'Offcanvas'
 
@@ -93,22 +96,6 @@ return [
                 'width' => false,
                 'height' => false
             ],
-            'top-c' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'top-d' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
             'main' => [
                 'background' => 'default',
                 'image' => '',
@@ -126,22 +113,6 @@ return [
                 'height' => false
             ],
             'bottom-b' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'bottom-c' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'bottom-d' => [
                 'background' => 'default',
                 'image' => '',
                 'contrast' => '',
@@ -170,42 +141,12 @@ return [
                 'responsive' => '',
                 'divider' => false
             ],
-            'top-c' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'top-d' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
             'bottom-a' => [
                 'layout' => 'parallel',
                 'responsive' => '',
                 'divider' => false
             ],
             'bottom-b' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'bottom-c' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'bottom-d' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'main-top' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'main-bottom' => [
                 'layout' => 'parallel',
                 'responsive' => '',
                 'divider' => false

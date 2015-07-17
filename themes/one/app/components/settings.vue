@@ -15,7 +15,6 @@
             </div>
         </div>
 
-
         <h2>{{ 'Sidebars' | trans }}</h2>
 
         <p>{{ 'Choose the grid layout for each position. Further, you can enable horizontal dividers and prevent the responsive grid behavior. Note: Both options are not taken into account for the stacked layout.' | trans }}</p>
@@ -58,6 +57,7 @@
                 <th>{{ 'Background' | trans }}</th>
                 <th>{{ 'Image' | trans }}</th>
                 <th>{{ 'White' | trans }}</th>
+                <th>{{ 'Padding' | trans }}</th>
                 <th>{{ 'Full Width' | trans }}</th>
                 <th>{{ 'Full Height' | trans }}</th>
             </tr>

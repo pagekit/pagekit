@@ -91,6 +91,16 @@ foreach ($config['blocks'] as $name => $position) {
 
 }
 
+/*
+ * Flatten classes
+ */
+
+$classes = array_map(function($array) { return implode(' ', $array); }, $classes);
+
+/*
+ * Helper
+ */
+
 class GridHelper
 {
     public static function gcf($a, $b = 60)

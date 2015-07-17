@@ -53,15 +53,15 @@ include(__DIR__.'/template.config.php');
 
         <?= $view->render('messages') ?>
 
-        <?php if ($view->position()->exists('top')) : ?>
-        <div id="tm-top" class="tm-top uk-block">
+        <?php if ($view->position()->exists('top-a')) : ?>
+        <div id="tm-top-a" class="tm-top-a uk-block">
             
             <?php if (1) : ?>
             <div class="uk-container uk-container-center">
             <?php endif; ?>
 
                 <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('top', 'grid') ?>
+                    <?= $view->position('top-a', 'grid') ?>
                 </section>
             
             <?php if (1) : ?>
@@ -70,10 +70,6 @@ include(__DIR__.'/template.config.php');
 
         </div>
         <?php endif; ?>
-
-
-
-
 
         <div id="tm-main" class="tm-main uk-block">
             
