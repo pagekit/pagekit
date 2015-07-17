@@ -27,8 +27,6 @@ return [
     'views' => [
 
         'grid' => 'theme:views/position-grid.php',
-        'navbar' => 'theme:views/position-navbar.php',
-        'offcanvas' => 'theme:views/position-offcanvas.php',
         'panel' => 'theme:views/position-panel.php',
         'menu' => 'theme:views/menu.php',
         'menu-navbar' => 'theme:views/menu-navbar.php'
@@ -52,7 +50,6 @@ return [
 
         'logo' => 'Logo',
         'logo-small' => 'Logo Small',
-        'navbar' => 'Navbar',
         'top' => 'Top',
         'sidebar-a' => 'Sidebar A',
         'sidebar-b' => 'Sidebar B',

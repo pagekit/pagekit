@@ -17,7 +17,7 @@ include(__DIR__.'/template.config.php');
     </head>
     <body>
 
-        <?php if ($view->position()->exists('logo') || $view->position()->exists('navbar') || $view->menu()->exists('main')) : ?>
+        <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
         <div class="tm-navbar">
             <div class="uk-container uk-container-center">
 
@@ -29,16 +29,9 @@ include(__DIR__.'/template.config.php');
                     </a>
                     <?php endif ?>
 
-                    <?php if ($view->position()->exists('navbar') || $view->menu()->exists('main')) : ?>
+                    <?php if ($view->menu()->exists('main')) : ?>
                     <div class="uk-navbar-flip uk-hidden-small">
-                        <?php if ($view->position()->exists('navbar')) : ?>
-                            <?= $view->position('navbar', 'navbar') ?>
-                        </div>
-                        <?php endif ?>
-
-                        <?php if ($view->menu()->exists('main')) : ?>
-                            <?= $view->menu('main', 'menu-navbar') ?>
-                        <?php endif ?>
+                        <?= $view->menu('main', 'menu-navbar') ?>
                     </div>
                     <?php endif ?>
 
@@ -134,12 +127,12 @@ include(__DIR__.'/template.config.php');
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
 
-                <?php if ($view->position()->exists('offcanvas')) : ?>
-                    <?= $view->position('offcanvas', 'offcanvas') ?>
-                <?php endif ?>
-
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
                     <?= $view->menu('offcanvas') ?>
+                <?php endif ?>
+
+                <?php if ($view->position()->exists('offcanvas')) : ?>
+                    <?= $view->position('offcanvas', 'panel') ?>
                 <?php endif ?>
 
             </div>
