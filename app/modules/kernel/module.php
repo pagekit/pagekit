@@ -6,7 +6,6 @@ use Pagekit\Kernel\Event\JsonResponseListener;
 use Pagekit\Kernel\Event\ResponseListener;
 use Pagekit\Kernel\Event\StringResponseListener;
 use Pagekit\Kernel\HttpKernel;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 return [
@@ -43,23 +42,20 @@ return [
 
     'events' => [
 
-        'request' => [
+        'request' => [function ($event, $request) use ($app) {
 
-            function ($event, $request) use ($app) {
+            if ($app->inConsole()) {
+                return;
+            }
 
-                if (!$app->inConsole()) {
-                    return;
-                }
+            $path = $request->getPathInfo();
 
-                $path = $request->getPathInfo();
+            // redirect the request if it has a trailing slash
+            if ('/' != $path && '/' == substr($path, -1) && '//' != substr($path, -2)) {
+                $event->setResponse($app->redirect(rtrim($request->getUriForPath($path), '/'), [], 301));
+            }
 
-                // redirect the request if it has a trailing slash
-                if ('/' != $path && '/' == substr($path, -1) && '//' != substr($path, -2)) {
-                    $event->setResponse(new RedirectResponse(rtrim($request->getUriForPath($path), '/'), 301));
-                }
-
-            }, 200
-        ]
+        }, 200]
 
     ],
 
