@@ -1,3 +1,9 @@
+<?php
+
+// get theme configuration
+include(__DIR__.'/template.config.php');
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -84,18 +90,18 @@
 
                 <div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 
-                    <main class="<?= $theme->getClasses('columns.main.class') ?>">
+                    <main class="<?= '' //$theme->getClasses('columns.main.class') ?>">
                         <?= $view->render('content') ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar-a')) : ?>
-                    <aside class="<?= $theme->getClasses('columns.sidebar-a.class') ?>">
+                    <aside class="<?= '' //$theme->getClasses('columns.sidebar-a.class') ?>">
                         <?= $view->position('sidebar-a', 'panel') ?>
                     </aside>
                     <?php endif ?>
 
                     <?php if ($view->position()->exists('sidebar-b')) : ?>
-                    <aside class="<?= $theme->getClasses('columns.sidebar-b.class') ?>">
+                    <aside class="<?= '' //$theme->getClasses('columns.sidebar-b.class') ?>">
                         <?= $view->position('sidebar-b', 'panel') ?>
                     </aside>
                     <?php endif ?>

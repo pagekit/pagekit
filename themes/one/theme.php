@@ -13,20 +13,6 @@ return [
     'type' => 'theme',
 
     /**
-     * Namespace to autoload theme classes.
-     */
-    'autoload' => [
-
-        'Pagekit\\One\\' => 'src'
-
-    ],
-
-    /**
-     * The main function.
-     */
-    'main' => 'Pagekit\\One\\OneTheme',
-
-    /**
      * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.
      */
     'resources' => [
@@ -75,7 +61,7 @@ return [
 
     ],
 
-    'settings' => 'settings-one',
+    'settings' => 'settings-theme',
 
     /**
      * Define default settings values and views where end users can change these values.
@@ -84,11 +70,149 @@ return [
 
         'sidebars' => [
             'sidebar-a' => [
-                'width' => 12
+                'width' => 12,
+                'first' => false
             ],
             'sidebar-b' => [
-                'width' => 12
+                'width' => 12,
+                'first' => false
+            ]
+        ],
+
+        'blocks' => [
+            'top-a' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
             ],
+            'top-b' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'top-c' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'top-d' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'main' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'bottom-a' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'bottom-b' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'bottom-c' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'bottom-d' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ],
+            'footer' => [
+                'background' => 'default',
+                'image' => '',
+                'contrast' => '',
+                'padding' => '',
+                'width' => false,
+                'height' => false
+            ]
+        ],
+
+        'grid' => [
+            'top-a' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'top-b' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'top-c' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'top-d' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'bottom-a' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'bottom-b' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'bottom-c' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'bottom-d' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'main-top' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ],
+            'main-bottom' => [
+                'layout' => 'parallel',
+                'responsive' => '',
+                'divider' => false
+            ]
         ],
 
         'widget' => [
