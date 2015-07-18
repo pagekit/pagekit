@@ -37,7 +37,7 @@ php path/to/composer.phar install
 ```
 
 Pagekit uses [npm](https://www.npmjs.com/) for JavaScript dependencies. Make sure you also have 
-[Bower](http://bower.io/) installed, which is called automatically during `npm install`.
+[Bower](http://bower.io/) and [Webpack](http://webpack.github.io/) installed, which are called automatically during `npm install`.
 
 ```
 npm install
