@@ -14,11 +14,12 @@ include(__DIR__.'/template.config.php');
         <?php $view->style('theme', 'theme:css/theme.css') ?>
         <?php $view->script('jquery') ?>
         <?php $view->script('uikit') ?>
+        <?php $view->script('uikit-sticky') ?>
     </head>
     <body class="<?= $classes['body'] ?>">
 
         <?php if ($view->position()->exists('logo') || $view->menu()->exists('primary')) : ?>
-        <div class="tm-navbar">
+        <div class="tm-navbar" data-uk-sticky="{showup: true, animation: 'uk-animation-slide-top'}">
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
@@ -71,7 +72,7 @@ include(__DIR__.'/template.config.php');
         </div>
         <?php endif; ?>
 
-        <div id="tm-main" class="tm-main uk-block">
+        <div id="tm-main" class="tm-main uk-block <?= $classes['block.main'] ?>">
             
             <?php if (!$config['blocks']['main']['width']) : ?>
             <div class="uk-container uk-container-center">
@@ -103,8 +104,26 @@ include(__DIR__.'/template.config.php');
 
         </div>
 
+        <?php if ($view->position()->exists('bottom-a')) : ?>
+        <div id="tm-bottom-a" class="tm-bottom-a uk-block <?= $classes['block.bottom-a'] ?>">
+            
+            <?php if (!$config['blocks']['bottom-a']['width']) : ?>
+            <div class="uk-container uk-container-center">
+            <?php endif; ?>
+
+                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                    <?= $view->position('bottom-a', 'grid') ?>
+                </section>
+            
+            <?php if (!$config['blocks']['bottom-a']['width']) : ?>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <?php endif; ?>
+
         <?php if ($view->position()->exists('footer')) : ?>
-        <div id="tm-footer" class="tm-footer uk-block">
+        <div id="tm-footer" class="tm-footer uk-block <?= $classes['block.footer'] ?>">
             
             <?php if (!$config['blocks']['footer']['width']) : ?>
             <div class="uk-container uk-container-center uk-text-center">
