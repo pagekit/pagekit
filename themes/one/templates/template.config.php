@@ -33,13 +33,13 @@ if ($count = count($sidebars)) {
 */
 
 // $displays = array('small', 'medium', 'large');
-foreach ($config['grid'] as $name => $position) {
+// foreach ($config['grid'] as $name => $position) {
 
-    $grid = array("tm-{$name} uk-grid");
+//     $grid = array("tm-{$name} uk-grid");
 
-    if ($position['divider']) {
-        $grid[] = 'uk-grid-divider';
-    }
+//     if ($position['divider']) {
+//         $grid[] = 'uk-grid-divider';
+//     }
 
 //    $widgets = $this['widgets']->load($name);
 //
@@ -51,8 +51,8 @@ foreach ($config['grid'] as $name => $position) {
 //            $grid[] = "uk-hidden-{$display}";
 //        }
 //    }
-    $classes["grid.$name"] = $grid;
-}
+//     $classes["grid.$name"] = $grid;
+// }
 
 /*
 * Blocks

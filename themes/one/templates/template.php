@@ -15,7 +15,7 @@ include(__DIR__.'/template.config.php');
         <?php $view->script('jquery') ?>
         <?php $view->script('uikit') ?>
     </head>
-    <body>
+    <body class="<?= $classes['body'] ?>">
 
         <?php if ($view->position()->exists('logo') || $view->menu()->exists('primary')) : ?>
         <div class="tm-navbar">
@@ -54,9 +54,9 @@ include(__DIR__.'/template.config.php');
         <?= $view->render('messages') ?>
 
         <?php if ($view->position()->exists('top-a')) : ?>
-        <div id="tm-top-a" class="tm-top-a uk-block">
+        <div id="tm-top-a" class="tm-top-a uk-block <?= $classes['block.top-a'] ?>">
             
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['top-a']['width']) : ?>
             <div class="uk-container uk-container-center">
             <?php endif; ?>
 
@@ -64,7 +64,7 @@ include(__DIR__.'/template.config.php');
                     <?= $view->position('top-a', 'grid') ?>
                 </section>
             
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['top-a']['width']) : ?>
             </div>
             <?php endif; ?>
 
@@ -73,31 +73,31 @@ include(__DIR__.'/template.config.php');
 
         <div id="tm-main" class="tm-main uk-block">
             
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['main']['width']) : ?>
             <div class="uk-container uk-container-center">
             <?php endif; ?>
 
                 <div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 
-                    <main class="<?= '' //$theme->getClasses('columns.main.class') ?>">
+                    <main class="<?= $classes['layout.main'] ?>">
                         <?= $view->render('content') ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar-a')) : ?>
-                    <aside class="<?= '' //$theme->getClasses('columns.sidebar-a.class') ?>">
+                    <aside class="<?= $classes['layout.sidebar-a'] ?>">
                         <?= $view->position('sidebar-a', 'panel') ?>
                     </aside>
                     <?php endif ?>
 
                     <?php if ($view->position()->exists('sidebar-b')) : ?>
-                    <aside class="<?= '' //$theme->getClasses('columns.sidebar-b.class') ?>">
+                    <aside class="<?= $classes['layout.sidebar-b'] ?>">
                         <?= $view->position('sidebar-b', 'panel') ?>
                     </aside>
                     <?php endif ?>
 
                 </div>
             
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['main']['width']) : ?>
             </div>
             <?php endif; ?>
 
@@ -106,13 +106,13 @@ include(__DIR__.'/template.config.php');
         <?php if ($view->position()->exists('footer')) : ?>
         <div id="tm-footer" class="tm-footer uk-block">
             
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['footer']['width']) : ?>
             <div class="uk-container uk-container-center uk-text-center">
             <?php endif; ?>
                 
                 <?= $view->position('footer', 'grid') ?>
 
-            <?php if (1) : ?>
+            <?php if (!$config['blocks']['footer']['width']) : ?>
             </div>
             <?php endif; ?>
 
