@@ -65,6 +65,7 @@ trait NodeModelTrait
 
             if ($depth >= $maxDepth
                 || !$node->hasAccess($user)
+                || $node->get('menu_hide')
                 || !($parameters['mode'] == 'all'
                     || $node->get('active')
                     || $rootPath && 0 === strpos($node->getPath(), $rootPath)

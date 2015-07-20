@@ -53,6 +53,9 @@
                     <div class="uk-form-controls">
                         <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
                     </div>
+                    <div class="uk-form-controls">
+                        <label><input type="checkbox" v-model="node.data.menu_hide"> {{ 'Hide in menu' | trans }}</label>
+                    </div>
                 </div>
 
             </div>

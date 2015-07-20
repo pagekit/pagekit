@@ -38,7 +38,8 @@ function install (Vue) {
 
     Vue.url.options.root = config.url || '/';
     Vue.http.options.emulateHTTP = true;
-    Vue.http.options.headers = {'X-XSRF-TOKEN': config.csrf};
+
+    Vue.http.headers.custom = {'X-XSRF-TOKEN': config.csrf};
 
     Vue.url.static = function (url, params) {
 
@@ -55,6 +56,9 @@ function install (Vue) {
         return this(options);
     };
 
+    Vue.url.current = Vue.url.parse(window.location.href);
+
+    Vue.prototype.$session = window.sessionStorage || {};
 }
 
 if (window.Vue) {
