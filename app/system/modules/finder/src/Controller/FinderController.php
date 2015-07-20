@@ -34,7 +34,7 @@ class FinderController
                 'name'     => $file->getFilename(),
                 'mime'     => 'application/'.($file->isDir() ? 'folder':'file'),
                 'path'     => $this->normalizePath($path.'/'.$file->getFilename()),
-                'url'      => App::url()->getStatic($file->getPathname()),
+                'url'      => ltrim(App::url()->getStatic($file->getPathname(), [], 'base'), '/'),
                 'writable' => $mode == 'w'
             ];
 

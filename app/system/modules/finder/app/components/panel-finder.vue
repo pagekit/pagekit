@@ -181,12 +181,9 @@
             },
 
             getSelected: function () {
-
-                var path = this.getFullPath();
-
                 return this.selected.map(function (name) {
-                    return path+name;
-                });
+                    return _.find(this.items, 'name', name).url;
+                }, this);
             },
 
             removeSelection: function() {
@@ -202,7 +199,8 @@
                     name = name.targetVM.$data.name;
                 }
 
-                var index  = this.selected.indexOf(name);
+                var index = this.selected.indexOf(name);
+
                 -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
             },
 
