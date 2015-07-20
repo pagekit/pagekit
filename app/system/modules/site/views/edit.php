@@ -12,7 +12,7 @@
         <div data-uk-margin>
 
             <a class="uk-button uk-margin-small-right" v-attr="href: $url('admin/site')">{{ node.id ? 'Close' : 'Cancel' | trans }}</a>
-            <button class="uk-button uk-button-primary" type="submit" v-attr="disabled: form.invalid">{{ 'Save' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
         </div>
     </div>

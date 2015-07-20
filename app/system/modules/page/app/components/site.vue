@@ -4,11 +4,12 @@
         <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
-                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" lazy>
+                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" v-valid="required" lazy>
+                <div class="uk-form-help-block uk-text-danger" v-show="form['page[title]'].invalid">{{ 'Invalid title.' | trans }}</div>
             </div>
 
             <div class="uk-form-row">
-                <v-editor name="page[content]" value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
+                <v-editor value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
             </div>
 
         </div>
@@ -20,9 +21,7 @@
                     <label for="form-navigation-title" class="uk-form-label">{{ 'Navigation Title' | trans }}</label>
 
                     <div class="uk-form-controls">
-                        <input id="form-navigation-title" class="uk-form-width-large" type="text" name="node[title]" v-model="node.title" v-valid="required">
-
-                        <div class="uk-form-help-block uk-text-danger" v-show="form['node[title]'].invalid">{{ 'Invalid name.' | trans }}</div>
+                        <input id="form-navigation-title" class="uk-form-width-large" type="text" v-model="node.title">
                     </div>
                 </div>
 
@@ -30,7 +29,7 @@
                     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
 
                     <div class="uk-form-controls">
-                        <input id="form-slug" class="uk-form-width-large" type="text" name="node[slug]" v-model="node.slug">
+                        <input id="form-slug" class="uk-form-width-large" type="text" v-model="node.slug">
                     </div>
                 </div>
 
@@ -49,10 +48,10 @@
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
 
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
+                        <label><input type="checkbox" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
                     </div>
                     <div class="uk-form-controls">
-                        <label><input type="checkbox" name="page[data][markdown]" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
+                        <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
                     </div>
                 </div>
 
@@ -87,6 +86,10 @@
 
             save: function (data) {
                 data.page = this.page;
+
+                if (!this.node.title) {
+                    this.node.title = this.page.title;
+                }
             }
 
         },
@@ -107,13 +110,6 @@
 
                 immediate: true
 
-            },
-
-            'page.title': function () {
-
-                if (!this.node.title) {
-                    this.node.title = this.page.title;
-                }
             }
 
         },
