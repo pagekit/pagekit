@@ -65,6 +65,8 @@ class UrlProvider
 
         if ($referenceType === UrlGenerator::ABSOLUTE_URL) {
             $url = $request->getSchemeAndHttpHost().$url;
+        } elseif ($referenceType === self::BASE_PATH) {
+            $url = '';
         }
 
         return $url;

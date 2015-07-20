@@ -44,13 +44,21 @@ class RoutesLoader implements LoaderInterface
 
         foreach ($routes as $route) {
 
-            foreach ((array) $route->getOption('controller') as $controller) {
+            if ($route->getOption('controller')) {
 
-                if (is_string($controller) && class_exists($controller)) {
-                    $this->addController($route, $controller);
-                } else {
-                    $this->addRoute($route);
+                foreach ((array) $route->getOption('controller') as $controller) {
+
+                    if (is_string($controller) && class_exists($controller)) {
+                        $this->addController($route, $controller);
+                    } else {
+                        $this->addRoute($route);
+                    }
+
                 }
+
+            } else {
+                
+                $this->addRoute($route);
 
             }
 

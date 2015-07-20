@@ -107,6 +107,21 @@ class Routes implements \IteratorAggregate, ResourceInterface
     }
 
     /**
+     * Adds a redirect route.
+     *
+     * @param  string $path
+     * @param  string $redirect
+     * @param  array  $defaults
+     * @return Route
+     */
+    public function redirect($path, $redirect, array $defaults = [])
+    {
+        $defaults['_redirect'] = $redirect;
+
+        return $this->add(compact('path', 'defaults'));
+    }
+
+    /**
      * Gets aliases.
      *
      * @return array[]
@@ -167,13 +182,20 @@ class Routes implements \IteratorAggregate, ResourceInterface
 
         $options['controller'] = isset($config['controller']) ? $config['controller'] : '';
 
-        unset ($this->callbacks[$name]);
-        if (is_callable($options['controller'])) {
+        if (!is_string($options['controller']) && is_callable($options['controller'])) {
             $this->callbacks[$name] = $options['controller'];
-            $options['controller'] = '__callback';
+            unset($options['controller']);
         } elseif ($options['controller']) {
             foreach((array) $options['controller'] as $controller) {
-                $this->modified = max($this->modified, filemtime((new \ReflectionClass($controller))->getFileName()));
+
+                if (is_callable($controller)) {
+                    $refl = new \ReflectionMethod($controller);
+                    $defaults['_controller'] = $controller;
+                } else {
+                    $refl = new \ReflectionClass($controller);
+                }
+
+                $this->modified = max($this->modified, filemtime($refl->getFileName()));
             }
         }
 

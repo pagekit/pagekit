@@ -15,18 +15,15 @@ return [
     'nodes' => [
 
         'page' => [
+            'name' => '@page',
             'label' => 'Page',
-            'alias' => '@page/id'
+            'controller' => 'Pagekit\\Page\\Controller\\SiteController::indexAction'
         ]
 
     ],
 
     'routes' => [
 
-        '/page' => [
-            'name' => '@page',
-            'controller' => 'Pagekit\\Page\\Controller\\SiteController'
-        ],
         '/api/page' => [
             'name' => '@page/api',
             'controller' => 'Pagekit\\Page\\Controller\\PageController'
@@ -60,25 +57,21 @@ return [
             $view->style('codemirror');
         },
 
-        'site.node.preSave' => function($event) use ($app) {
+        'site.node.preSave' => function($event, $node) use ($app) {
 
-            $node = $event->getEntity();
-            $data = $app['request']->get('page');
-
-            if ('page' !== $node->getType() or $data === null) {
+            if ('page' !== $node->getType() or null === $data = $app['request']->get('page')) {
                 return;
             }
 
             $page = $this->getPage($node);
             $page->save($data);
 
-            $node->set('variables', ['id' => $page->getId()]);
+            $node->set('defaults', ['id' => $page->getId()]);
+            $node->setLink('@page/'.$page->getId());
 
         },
 
-        'site.node.postDelete' => function($event) use ($app) {
-
-            $node = $event->getEntity();
+        'site.node.postDelete' => function($event, $node) use ($app) {
 
             if ('page' !== $node->getType()) {
                 return;
@@ -90,6 +83,14 @@ return [
                 $page->delete();
             }
 
+        },
+
+        'route.configure' => function ($event, $route, $routes) use ($app) {
+            if ($route->getName() === '@page') {
+                $routes->remove('@page');
+                $route->setName('@page/'.$route->getDefault('id'));
+                $routes->add($route->getName(), $route);
+            }
         }
 
     ],

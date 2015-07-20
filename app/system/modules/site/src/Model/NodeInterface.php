@@ -20,6 +20,8 @@ interface NodeInterface extends BaseNodeInterface
 
     public function getPath();
 
+    public function getLink();
+
     public function getType();
 
     public function getMenu();

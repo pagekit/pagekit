@@ -69,11 +69,17 @@ return [
 
         },
 
+        'request' => [function ($event, $request) use ($app) {
+
+            if ($redirect = $request->attributes->get('_redirect')) {
+                $event->setResponse($app->redirect($redirect), [], 301);
+            };
+
+        }, 90],
+
         'controller' => [function ($event, $request) use ($app) {
 
-            $name = $request->attributes->get('_route', '');
-
-            if ($callback = $app['routes']->getCallback($name)) {
+            if (!$request->attributes->get('_controller') && $callback = $app['routes']->getCallback($request->attributes->get('_route', ''))) {
                 $request->attributes->set('_controller', $callback);
             };
 

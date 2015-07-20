@@ -2,13 +2,13 @@
 
     <div v-attr="class: class">
         <div class="pk-form-link uk-width-1-1">
-            <input class="uk-width-1-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="!isRequired">
-            <input class="uk-width-1-1" type="text" v-model="url" v-attr="name: name, id: id" v-if="isRequired" v-valid="required">
+            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-if="!isRequired" lazy>
+            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-if="isRequired" v-valid="required" lazy>
             <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-edit pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>
 
-    <p class="uk-text-muted uk-margin-small-top" v-show="link">{{ link }}</p>
+    <p class="uk-text-muted uk-margin-small-top" v-show="url">{{ url }}</p>
 
     <v-modal v-ref="modal">
 
@@ -35,15 +35,15 @@
 
     module.exports = Vue.extend({
 
-        props: ['url', 'name', 'class', 'id', 'required'],
+        props: ['link', 'name', 'class', 'id', 'required'],
 
         data: function () {
-            return {link: false};
+            return {url: false};
         },
 
         watch: {
 
-            url: {
+            link: {
                 handler: 'load',
                 immediate: true
             }
@@ -61,14 +61,14 @@
         methods: {
 
             load: function () {
-                if (this.url) {
-                    this.$http.get('api/site/link', {link: this.url}, function (data) {
-                        this.link = data.url ? data.url : false;
+                if (this.link) {
+                    this.$http.get('api/site/link', {link: this.link}, function (data) {
+                        this.url = data.url ? data.url : false;
                     }).error(function () {
-                        this.link = false;
+                        this.url = false;
                     })
                 } else {
-                    this.link = false;
+                    this.url = false;
                 }
 
             },
@@ -81,12 +81,13 @@
             update: function (e) {
                 e.preventDefault();
 
-                this.$set('url', this.$.links.url);
+                // TODO does not validate the parent form on update
+                this.$set('link', this.$.links.link);
                 this.$.modal.close();
             },
 
             showUpdate: function () {
-                return !!this.$.links.url;
+                return !!this.$.links.link;
             }
 
         }

@@ -155,19 +155,9 @@ return [
 
         },
 
-        'site.node.postLoad' => function ($event, $entity) {
-            $entity->frontpage = $entity->getId() === $this->config('frontpage');
-        },
-
-        'site.node.postSave' => function ($event, $entity) use ($app) {
-            if ($entity->frontpage || $this->config('frontpage') === $entity->getId()) {
-                $app['config']->get('system/site')->set('frontpage', $entity->frontpage ? $entity->getId() : 0);
-            }
-        },
-
-        'site.node.postDelete' => function ($event, $entity) use ($app) {
-            if ($this->config('frontpage') === $entity->getId()) {
-                $app['config']->get('system/site')->set('frontpage', 0);
+        'site.node.postLoad' => function ($event, $node) use ($app) {
+            if ('link' === $node->getType() && $node->get('redirect')) {
+                $node->setLink($node->getPath());
             }
         }
 

@@ -69,7 +69,7 @@ module.exports = Vue.extend({
 
     components: {
 
-        alias: require('../components/alias.vue')
+        link: require('../components/link.vue')
 
     }
 

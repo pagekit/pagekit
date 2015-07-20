@@ -41,7 +41,6 @@
     module.exports = {
 
         section: {
-            name: 'locale',
             label: 'Localization',
             icon: 'pk-icon-large-pin',
             priority: 20

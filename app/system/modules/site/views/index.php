@@ -131,8 +131,8 @@
                 <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!node.frontpage && node.status" v-on="click: setFrontpage(node)"></a>
-                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="node.frontpage"></i>
+                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status" v-on="click: setFrontpage(node)"></a>
+                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ getType(node).label }}</div>
             <div class="pk-table-width-100 uk-text-center">
@@ -141,8 +141,8 @@
                 </td>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a target="_blank" v-attr="href: url" v-show="node.status">{{ node.frontpage ? '/' : node.path }}</a>
-                <span v-show="!node.status">{{ node.frontpage ? '/' : node.path }}</span>
+                <a target="_blank" v-attr="href: url" v-show="node.status">{{ node.url }}</a>
+                <span v-show="!node.status">{{ node.url }}</span>
             </div>
         </div>
 

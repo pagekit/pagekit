@@ -47,6 +47,7 @@
 
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
+
                     <div class="uk-form-controls">
                         <label><input type="checkbox" name="page[data][title]" v-model="page.data.title"> {{ 'Show Title' | trans }}</label>
                     </div>
@@ -77,7 +78,7 @@
         data: function () {
             return {
                 page: {
-                    data: {title:true}
+                    data: {title: true}
                 }
             };
         },
@@ -92,7 +93,7 @@
 
         watch: {
 
-            'node.data.variables.id': {
+            'node.data.defaults.id': {
 
                 handler: function (id) {
 
@@ -108,7 +109,7 @@
 
             },
 
-            'page.title': function() {
+            'page.title': function () {
 
                 if (!this.node.title) {
                     this.node.title = this.page.title;

@@ -57,7 +57,6 @@
     module.exports = {
 
         section: {
-            name: 'system',
             label: 'System',
             icon: 'pk-icon-large-settings',
             priority: 10

@@ -2,6 +2,7 @@
 
 namespace Pagekit\Site\Model;
 
+use Pagekit\Application as App;
 use Pagekit\System\Model\DataTrait;
 use Pagekit\System\Model\NodeTrait;
 use Pagekit\User\Model\AccessTrait;
@@ -30,6 +31,9 @@ class Node implements NodeInterface, \JsonSerializable
 
     /** @Column(type="string") */
     protected $path;
+
+    /** @Column(type="string") */
+    protected $link;
 
     /** @Column(type="string") */
     protected $title;
@@ -113,6 +117,21 @@ class Node implements NodeInterface, \JsonSerializable
         $this->path = $path;
     }
 
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+
+    public function getUrl($referenceType = false)
+    {
+        return App::url($this->getLink(), [], $referenceType);
+    }
+
     public function getType()
     {
         return $this->type;
@@ -131,11 +150,6 @@ class Node implements NodeInterface, \JsonSerializable
     public function setMenu($menu)
     {
         $this->menu = $menu;
-    }
-
-    public function getRoutePath()
-    {
-        return isset($this->frontpage) && $this->frontpage ? '/' : $this->getPath();
     }
 
     /**
@@ -205,7 +219,7 @@ class Node implements NodeInterface, \JsonSerializable
     public function jsonSerialize()
     {
         $node = $this->toJson();
-        $node['frontpage'] = isset($this->frontpage) ? $this->frontpage : false;
+        $node['url'] = $this->getUrl('base');
         return $node;
     }
 }

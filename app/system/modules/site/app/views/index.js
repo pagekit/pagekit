@@ -80,10 +80,7 @@ module.exports = {
         },
 
         setFrontpage: function (node) {
-
-            node.frontpage = true;
-
-            this.Nodes.save({id: node.id}, {node: node}, function () {
+            this.Nodes.save({id: 'frontpage'}, {id: node.id}, function () {
                 this.load();
                 UIkit.notify('Frontpage updated.');
             });
@@ -259,8 +256,12 @@ module.exports = {
 
             computed: {
 
-                url: function () {
-                    return this.$url(this.node.frontpage ? '' : this.node.path.replace(/^\/+/, ''));
+                isFrontpage: function () {
+                    return this.node.url === '/';
+                },
+
+                url: function() {
+                    return this.$url(this.node.url.substr(1));
                 }
 
             }

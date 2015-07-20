@@ -19,9 +19,9 @@ class PageModule extends Module
      */
     public function getPage(Node $node)
     {
-        $variables = $node->get('variables', []);
+        $defaults = $node->get('defaults', []);
 
-        if (!isset($variables['id']) or !$page = Page::find($variables['id'])) {
+        if (!isset($defaults['id']) or !$page = Page::find($defaults['id'])) {
             $page = new Page();
         }
 

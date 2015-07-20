@@ -17,7 +17,7 @@
             label: 'Page'
         },
 
-        props: ['url'],
+        props: ['link'],
 
         data: function () {
             return {
@@ -39,7 +39,7 @@
         watch: {
 
             page: function (page) {
-                this.url = '@page/id?id=' + page;
+                this.link = '@page/' + page;
             }
 
         },

@@ -8,10 +8,6 @@ use Pagekit\Page\Model\Page;
 
 class SiteController
 {
-    /**
-     * @Route("/{id}", name="id")
-     * @Request({"id" : "int"})
-     */
     public function indexAction($id = 0)
     {
         if (!$page = Page::find($id)) {

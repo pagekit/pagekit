@@ -14,32 +14,37 @@ class NodesListener implements EventSubscriberInterface
     public function onRequest()
     {
         $site      = App::module('system/site');
-        $frontpage = false;
+        $frontpage = $site->config('frontpage');
+        $nodes     = Node::where(['status' => 1])->get();
 
-        foreach (Node::where(['status' => 1])->get() as $node) {
+        foreach ($nodes as $node) {
 
             if (!$type = $site->getType($node->getType())) {
                 continue;
             }
 
-            $type['path']     = $node->getPath();
+            $type             = array_replace(['alias' => '', 'redirect' => '', 'controller' => ''], $type);
             $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()]);
+            $type['path']     = $node->getPath();
 
             $route = null;
-            if (isset($type['alias'])) {
-                $route = App::routes()->alias($type['path'], $this->getLink($node, $type['alias']), $type['defaults']);
-            } elseif (isset($type['controller'])) {
-                $route = App::routes()->add($type);
+            if ($node->get('alias')) {
+                App::routes()->alias($node->getPath(), $node->getLink(), $type['defaults']);
+            } elseif ($node->get('redirect')) {
+                App::routes()->redirect($node->getPath(), $node->get('redirect'), $type['defaults']);
+            } elseif ($type['controller']) {
+                App::routes()->add($type);
             }
 
-            if ($route && ($node->frontpage || isset($type['frontpage']) && $type['frontpage'] && !$frontpage)) {
-                App::routes()->alias('/', $frontpage = $route->getName(), $type['defaults']);
-                $site->config['frontpage'] = $node->getId();
+            if (!$frontpage && isset($type['frontpage']) && $type['frontpage']) {
+                $frontpage = $node->getId();
             }
 
         }
 
-        if (!$frontpage) {
+        if ($frontpage && isset($nodes[$frontpage])) {
+            App::routes()->alias('/', $nodes[$frontpage]->getLink());
+        } else {
             App::routes()->get('/', function () {
                 return __('No Frontpage assigned.');
             });
@@ -59,6 +64,7 @@ class NodesListener implements EventSubscriberInterface
                 $node->setSlug($this->slugify($route['label']));
                 $node->setType($type);
                 $node->setStatus(1);
+                $node->setLink($route['name']);
 
                 $node->save();
             }
@@ -74,39 +80,6 @@ class NodesListener implements EventSubscriberInterface
             'request' => ['onRequest', 110],
             'enable' => 'onEnable'
         ];
-    }
-
-    /**
-     * Gets the node's link.
-     *
-     * @param  string $url
-     * @return string
-     */
-    public function getLink(Node $node, $url = '')
-    {
-        return $this->parseQuery($node->get('url', $url), $node->get('variables', []));
-    }
-
-    /**
-     * Parses query parameters into a URL.
-     *
-     * @param  string $url
-     * @param  array  $parameters
-     * @return string
-     */
-    protected function parseQuery($url, $parameters = [])
-    {
-        if ($query = substr(strstr($url, '?'), 1)) {
-            parse_str($query, $params);
-            $url        = strstr($url, '?', true);
-            $parameters = array_replace($parameters, $params);
-        }
-
-        if ($query = http_build_query($parameters, '', '&')) {
-            $url .= '?'.$query;
-        }
-
-        return $url;
     }
 
     /**

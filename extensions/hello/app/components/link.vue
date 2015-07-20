@@ -17,7 +17,7 @@
             label: 'Hello'
         },
 
-        props: ['url'],
+        props: ['link'],
 
         data: function () {
             return {
@@ -28,7 +28,7 @@
         watch: {
 
             name: function (name) {
-                this.url = '@hello/name?name=' + name;
+                this.link = '@hello/name?name=' + name;
             }
 
         },

@@ -3,7 +3,7 @@
     <div class="uk-form-row">
         <label for="form-link-blog" class="uk-form-label">{{ 'View' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-link-blog" class="uk-width-1-1" v-model="url" options="postOptions"></select>
+            <select id="form-link-blog" class="uk-width-1-1" v-model="link" options="postOptions"></select>
         </div>
     </div>
 
@@ -17,7 +17,7 @@
             label: 'Blog'
         },
 
-        props: ['url'],
+        props: ['link'],
 
         data: function () {
             return {
@@ -28,7 +28,6 @@
         created: function () {
             this.$resource('api/blog/post').get({limit: 100}, function (data) {
                 this.$set('posts', data.posts);
-                this.url = '@blog'
             });
         },
 
