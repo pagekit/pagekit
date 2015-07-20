@@ -93,7 +93,7 @@ trait NodeTrait
     {
         $hash = $node instanceof NodeInterface ? $node->hashCode() : (string) $node;
 
-        if ($node = $this->find($hash)) {
+        if ($node = $this->findChild($hash)) {
 
             unset($this->children[$hash]);
             $node->setParent(null);
@@ -154,7 +154,7 @@ trait NodeTrait
      */
     public function contains($node, $recursive = true)
     {
-        return $this->find(($node instanceof NodeInterface ? $node->hashCode() : (string) $node), $recursive) !== null;
+        return $this->findChild(($node instanceof NodeInterface ? $node->hashCode() : (string) $node), $recursive) !== null;
     }
 
     /**

@@ -17,7 +17,7 @@ class DatabaseDataCollector extends DoctrineCollector
      * Constructor.
      *
      * @param Connection $connection
-     * @param DebugStack $logger
+     * @param DebugStack $debugStack
      */
     public function __construct(Connection $connection, DebugStack $debugStack = null)
     {
