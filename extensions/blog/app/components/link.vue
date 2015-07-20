@@ -31,6 +31,10 @@
             });
         },
 
+        ready: function() {
+            this.link = '@blog';
+        },
+
         computed: {
 
             postOptions: function () {

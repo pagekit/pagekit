@@ -2,8 +2,8 @@
 
     <div v-attr="class: class">
         <div class="pk-form-link uk-width-1-1">
-            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-if="!isRequired" lazy>
-            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-if="isRequired" v-valid="required" lazy>
+            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-show="!isRequired" lazy>
+            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-show="isRequired" v-valid="required" v-el="input">
             <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-edit pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>
@@ -70,7 +70,6 @@
                 } else {
                     this.url = false;
                 }
-
             },
 
             open: function (e) {
@@ -81,8 +80,12 @@
             update: function (e) {
                 e.preventDefault();
 
-                // TODO does not validate the parent form on update
                 this.$set('link', this.$.links.link);
+
+                Vue.nextTick(function() {
+                    this.$$.input.dispatchEvent(new Event('input'));
+                }.bind(this));
+
                 this.$.modal.close();
             },
 

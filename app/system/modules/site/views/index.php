@@ -142,7 +142,7 @@
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
                 <a target="_blank" v-attr="href: url" v-show="node.status">{{ node.url }}</a>
-                <span v-show="!node.status">{{ node.url }}</span>
+                <span v-show="!node.status">{{ node.path }}</span>
             </div>
         </div>
 

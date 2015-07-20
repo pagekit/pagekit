@@ -66,7 +66,7 @@
                 set: function (type) {
                     this.$set('node.data', _.extend(this.node.data, {
                         alias: type === 'alias',
-                        redirect: type === ('redirect' ? this.node.link : false)
+                        redirect: type === 'redirect' ? this.node.link : false
                     }));
                 }
 
