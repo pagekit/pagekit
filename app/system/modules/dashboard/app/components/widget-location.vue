@@ -53,14 +53,15 @@
         </div>
     </div>
 
-    <div class="uk-text-center" v-if="status == 'loading'"><v-loader></v-loader></div>
+    <div class="uk-text-center" v-if="status == 'loading'">
+        <v-loader></v-loader>
+    </div>
 
 </template>
 
 <script>
 
-    var api = '//api.openweathermap.org/data/2.5';
-    var storage = sessionStorage || {};
+    var api = 'http://api.openweathermap.org/data/2.5';
 
     module.exports = {
 
@@ -102,7 +103,7 @@
 
                     source: function (release) {
 
-                        vm.$http.jsonp(api + '/find', {q: encodeURI(this.input.val()), type: 'like'}, function (data) {
+                        vm.$http.get(api + '/find', {q: encodeURI(this.input.val()), type: 'like'}, function (data) {
 
                             list = data.list || [];
                             release(list);
@@ -129,7 +130,7 @@
 
                     var location = _.find(list, 'id', data.id);
 
-                    Vue.nextTick(function() {
+                    Vue.nextTick(function () {
                         vm.$$.location.blur();
                     });
 
@@ -196,18 +197,18 @@
                     return;
                 }
 
-                var key = 'weather-' + this.widget.uid;
+                var weatherKey = 'weather-' + this.widget.uid;
 
-                if (storage[key]) {
+                if (this.$session[weatherKey]) {
 
-                    this.init(JSON.parse(storage[key]));
+                    this.init(JSON.parse(this.$session[weatherKey]));
 
                 } else {
 
-                    this.$http.jsonp(api + '/weather?callback=?', {id: this.widget.uid, units: 'metric'}, function (data) {
+                    this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric'}, function (data) {
 
                         if (data.cod == 200) {
-                            storage[key] = JSON.stringify(data);
+                            this.$session[weatherKey] = JSON.stringify(data);
                             this.init(data)
                         } else {
                             this.$set('status', 'error');
@@ -219,17 +220,17 @@
 
                 }
 
-                key = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
+                timezoneKey = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
 
-                if (storage[key]) {
+                if (this.$session[timezoneKey]) {
 
-                    this.$set('timezone', JSON.parse(storage[key]));
+                    this.$set('timezone', JSON.parse(this.$session[timezoneKey]));
 
                 } else {
 
-                    this.$http.get('admin/system/intl/timezone', {lat: this.widget.coords.lat, lon: this.widget.coords.lon}, function (data) {
+                    this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)}, function (data) {
 
-                        storage[key] = JSON.stringify(data);
+                        this.$session[timezoneKey] = JSON.stringify(data);
                         this.$set('timezone', data);
 
                     }).error(function () {
@@ -287,7 +288,7 @@
                 return this.updateClock;
             },
 
-            clear: function() {
+            clear: function () {
                 this.$$.location.value = '';
             }
 

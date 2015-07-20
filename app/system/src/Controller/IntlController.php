@@ -2,9 +2,7 @@
 
 namespace Pagekit\System\Controller;
 
-use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
 
 class IntlController
 {
@@ -66,44 +64,5 @@ class IntlController
         }
 
         return $response->setContent($json ? $messages : sprintf('var $globalize = %s;', $messages));
-    }
-
-    /**
-     * @Access(admin=true)
-     * @Request({"lat", "lon"})
-     */
-    public function timezoneAction($lat, $lon)
-    {
-        $location = $lat.','.$lon;
-
-        if (!$data = App::cache()->fetch(self::CACHE_KEY.$location)) {
-
-            $client = new Client();
-
-            try {
-
-                $data = @json_decode($client->get('https://maps.googleapis.com/maps/api/timezone/json', [
-                    'query' => [
-                        'location' => $location,
-                        'timestamp' => time()
-                    ]
-                ])->getBody());
-
-                $data = [
-                    'id' => $data->timeZoneId,
-                    'name' => $data->timeZoneName,
-                    'offset' => $data->rawOffset + $data->dstOffset
-                ];
-
-                App::cache()->save(self::CACHE_KEY.$location, $data, 86400);
-
-            } catch (\Exception $e) {
-                throw new NotFoundException('No timezone found.');
-            }
-
-        }
-
-        return $data;
-
     }
 }
