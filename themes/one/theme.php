@@ -49,13 +49,10 @@ return [
     'positions' => [
 
         'logo' => 'Logo',
-        'logo-small' => 'Logo Small',
-        'top-a' => 'Top A',
-        'top-b' => 'Top B',
-        'sidebar-a' => 'Sidebar A',
-        'sidebar-b' => 'Sidebar B',
-        'bottom-a' => 'Bottom A',
-        'bottom-b' => 'Bottom B',
+        'hero' => 'Hero',
+        'top' => 'Top',
+        'sidebar' => 'Sidebar',
+        'bottom' => 'Bottom',
         'footer' => 'Footer',
         'offcanvas' => 'Offcanvas'
 
@@ -68,90 +65,8 @@ return [
      */
     'config' => [
 
-        'sidebars' => [
-            'sidebar-a' => [
-                'width' => 12,
-                'first' => false
-            ],
-            'sidebar-b' => [
-                'width' => 12,
-                'first' => false
-            ]
-        ],
-
-        'blocks' => [
-            'top-a' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'top-b' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'main' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'bottom-a' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'bottom-b' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ],
-            'footer' => [
-                'background' => 'default',
-                'image' => '',
-                'contrast' => '',
-                'padding' => '',
-                'width' => false,
-                'height' => false
-            ]
-        ],
-
-        'grid' => [
-            'top-a' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'top-b' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'bottom-a' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ],
-            'bottom-b' => [
-                'layout' => 'parallel',
-                'responsive' => '',
-                'divider' => false
-            ]
-        ],
+        'sidebar-first' => false,
+        'hero-image' => '',
 
         'widget' => [
 

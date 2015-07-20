@@ -1,9 +1,3 @@
-<?php
-
-// get theme configuration
-include(__DIR__.'/template.config.php');
-
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,9 +34,9 @@ include(__DIR__.'/template.config.php');
                     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                     <?php endif ?>
 
-                    <?php if ($view->position()->exists('logo-small')) : ?>
+                    <?php if ($view->position()->exists('logo')) : ?>
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <?= $view->position('logo-small') ?>
+                        <?= $view->position('logo') ?>
                     </a>
                     <?php endif ?>
                
@@ -52,89 +46,70 @@ include(__DIR__.'/template.config.php');
         </div>
         <?php endif ?>
 
-        <?= $view->render('messages') ?>
-
-        <?php if ($view->position()->exists('top-a')) : ?>
-        <div id="tm-top-a" class="tm-top-a uk-block <?= $classes['block.top-a'] ?>">
-            
-            <?php if (!$config['blocks']['top-a']['width']) : ?>
+        <?php if ($view->position()->exists('hero')) : ?>
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero']; ?>');">
             <div class="uk-container uk-container-center">
-            <?php endif; ?>
 
                 <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('top-a', 'grid') ?>
+                    <?= $view->position('hero', 'grid') ?>
                 </section>
             
-            <?php if (!$config['blocks']['top-a']['width']) : ?>
             </div>
-            <?php endif; ?>
-
         </div>
         <?php endif; ?>
 
-        <div id="tm-main" class="tm-main uk-block <?= $classes['block.main'] ?>">
-            
-            <?php if (!$config['blocks']['main']['width']) : ?>
+        <?php if ($view->position()->exists('top')) : ?>
+        <div id="tm-top" class="tm-top uk-block uk-block-muted">
             <div class="uk-container uk-container-center">
-            <?php endif; ?>
+
+                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                    <?= $view->position('top', 'grid') ?>
+                </section>
+            
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <div id="tm-main" class="tm-main uk-block uk-block-default">
+            <div class="uk-container uk-container-center">
 
                 <div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 
-                    <main class="<?= $classes['layout.main'] ?>">
+                    <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
+                        <?= $view->render('messages') ?>
                         <?= $view->render('content') ?>
                     </main>
 
-                    <?php if ($view->position()->exists('sidebar-a')) : ?>
-                    <aside class="<?= $classes['layout.sidebar-a'] ?>">
-                        <?= $view->position('sidebar-a', 'panel') ?>
-                    </aside>
-                    <?php endif ?>
-
-                    <?php if ($view->position()->exists('sidebar-b')) : ?>
-                    <aside class="<?= $classes['layout.sidebar-b'] ?>">
-                        <?= $view->position('sidebar-b', 'panel') ?>
+                    <?php if ($view->position()->exists('sidebar')) : ?>
+                    <aside class="uk-width-medium-1-4 <?= $theme->config['sidebar-first'] ? 'uk-flex-order-first-medium' : ''; ?>">
+                        <?= $view->position('sidebar', 'panel') ?>
                     </aside>
                     <?php endif ?>
 
                 </div>
             
-            <?php if (!$config['blocks']['main']['width']) : ?>
             </div>
-            <?php endif; ?>
-
         </div>
 
-        <?php if ($view->position()->exists('bottom-a')) : ?>
-        <div id="tm-bottom-a" class="tm-bottom-a uk-block <?= $classes['block.bottom-a'] ?>">
-            
-            <?php if (!$config['blocks']['bottom-a']['width']) : ?>
+        <?php if ($view->position()->exists('bottom')) : ?>
+        <div id="tm-bottom" class="tm-bottom uk-block uk-block-muted">
             <div class="uk-container uk-container-center">
-            <?php endif; ?>
 
                 <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('bottom-a', 'grid') ?>
+                    <?= $view->position('bottom', 'grid') ?>
                 </section>
             
-            <?php if (!$config['blocks']['bottom-a']['width']) : ?>
             </div>
-            <?php endif; ?>
-
         </div>
         <?php endif; ?>
 
         <?php if ($view->position()->exists('footer')) : ?>
-        <div id="tm-footer" class="tm-footer uk-block <?= $classes['block.footer'] ?>">
-            
-            <?php if (!$config['blocks']['footer']['width']) : ?>
+        <div id="tm-footer" class="tm-footer uk-block uk-block-secondary uk-contrast">
             <div class="uk-container uk-container-center uk-text-center">
-            <?php endif; ?>
                 
                 <?= $view->position('footer', 'grid') ?>
 
-            <?php if (!$config['blocks']['footer']['width']) : ?>
             </div>
-            <?php endif; ?>
-
         </div>
         <?php endif; ?>
 
