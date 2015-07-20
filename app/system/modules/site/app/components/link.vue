@@ -25,8 +25,6 @@
             </div>
         </div>
 
-        <pre>{{ node | json}}</pre>
-
     </div>
 
 </template>

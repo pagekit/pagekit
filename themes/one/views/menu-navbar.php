@@ -5,7 +5,7 @@
     <?php foreach ($root->getChildren() as $node) : ?>
 
         <li class="<?= $node->hasChildren() ? 'uk-parent' : '' ?><?= $node->get('active') ? ' uk-active' : '' ?>" <?= ($root->getDepth() === 0 && $node->hasChildren()) ? 'data-uk-dropdown':'' ?>>
-            <a href="<?= $view->url($node->getUrl()) ?>"><?= $node->getTitle() ?></a>
+            <a href="<?= $node->getUrl() ?>"><?= $node->getTitle() ?></a>
 
             <?php if ($root->getDepth() === 0 && $node->hasChildren()) : ?>
             <div class="uk-dropdown uk-dropdown-navbar">
