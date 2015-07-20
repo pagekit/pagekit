@@ -10,7 +10,7 @@
         <?php $view->script('uikit') ?>
         <?php $view->script('uikit-sticky') ?>
     </head>
-    <body class="<?= $classes['body'] ?>">
+    <body>
 
         <?php if ($view->position()->exists('logo') || $view->menu()->exists('primary')) : ?>
         <div class="tm-navbar" data-uk-sticky="{showup: true, animation: 'uk-animation-slide-top'}">
