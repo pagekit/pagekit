@@ -57,7 +57,7 @@
             <div class="uk-progress-bar" v-style="width: upload.progress + '%'"></div>
         </div>
 
-        <div class="uk-overflow-container">
+        <div class="uk-overflow-container tm-overflow-container">
             <partial name="{{ view }}"></partial>
         </div>
 
