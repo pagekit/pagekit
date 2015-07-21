@@ -36,13 +36,8 @@ return [
 
     'resources' => [
 
-        'system/site:' => ''
-
-    ],
-
-    'views' => [
-
-        'menu' => 'system/site:views/menu.php'
+        'system/site:' => '',
+        'views:system/site' => 'views'
 
     ],
 

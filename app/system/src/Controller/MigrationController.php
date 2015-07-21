@@ -14,7 +14,7 @@ class MigrationController
         return [
             '$view' => [
                 'title'  => __('Update Pagekit'),
-                'name'   => 'system/theme:templates/migration.php',
+                'name'   => 'system/theme:views/migration.php',
                 'layout' => false
             ]
         ];

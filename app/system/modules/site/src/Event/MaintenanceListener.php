@@ -21,7 +21,7 @@ class MaintenanceListener implements EventSubscriberInterface
         if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access'))) {
 
             $message  = $site->config('maintenance.msg') ?: __("We'll be back soon.");
-            $response = App::view('system/theme:templates/maintenance.php', compact('message'));
+            $response = App::view('system/theme:views/maintenance.php', compact('message'));
 
             $request->attributes->set('_disable_debugbar', true);
 

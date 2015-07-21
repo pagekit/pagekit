@@ -29,7 +29,7 @@ class AdminController
         return [
             '$view' => [
                 'title'  => __('Login'),
-                'name'   => 'system/theme:templates/login.php',
+                'name'   => 'system/theme:views/login.php',
                 'layout' => false
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),

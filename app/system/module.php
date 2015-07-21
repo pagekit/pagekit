@@ -16,7 +16,6 @@ return [
         'feed',
         'markdown',
         'migration',
-        'package',
         'system/view',
         'system/cache',
         'system/comment',

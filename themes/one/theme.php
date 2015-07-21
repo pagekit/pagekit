@@ -17,19 +17,8 @@ return [
      */
     'resources' => [
 
-        'theme:' => ''
-
-    ],
-
-    /**
-     * List of named views provided by this theme.
-     */
-    'views' => [
-
-        'grid' => 'theme:views/position-grid.php',
-        'panel' => 'theme:views/position-panel.php',
-        'menu' => 'theme:views/menu.php',
-        'menu-navbar' => 'theme:views/menu-navbar.php'
+        'theme:' => '',
+        'views:' => 'views'
 
     ],
 

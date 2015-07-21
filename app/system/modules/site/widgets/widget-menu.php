@@ -10,10 +10,6 @@ return [
 
     'type' => 'widget',
 
-    'views' => [
-        'widget-menu' => 'system/site:views/menu.php'
-    ],
-
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
@@ -34,7 +30,7 @@ return [
             'mode' => $widget->get('mode')
         ]);
 
-        return $app['view']->render('menu', compact('widget', 'root'));
+        return $app['view']->render('system/site/widget-menu', compact('widget', 'root'));
     }
 
 ];

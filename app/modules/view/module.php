@@ -50,9 +50,17 @@ return [
             }
 
             $view->on('render', function ($event) use ($app) {
-                if (isset($app['locator']) and $name = $app['locator']->get($event->getTemplate())) {
-                    $event->setTemplate($name);
+
+                $template = $event->getTemplate();
+
+                if (!strpos($template, ':')) {
+                    $template = "views:{$template}";
                 }
+
+                if (isset($app['locator']) and $template = $app['locator']->get($template)) {
+                    $event->setTemplate($template);
+                }
+
             }, 10);
 
             return $view;

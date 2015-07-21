@@ -58,7 +58,8 @@ return [
 
     'resources' => [
 
-        'system/user:' => ''
+        'system/user:' => '',
+        'views:system/user' => 'views'
 
     ],
 

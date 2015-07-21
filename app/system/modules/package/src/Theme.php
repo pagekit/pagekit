@@ -10,7 +10,7 @@ class Theme extends Module implements \JsonSerializable
     /**
      * @var string
      */
-    protected $layout = '/templates/template.php';
+    protected $layout = '/views/template.php';
 
     /**
      * Gets the layout path.

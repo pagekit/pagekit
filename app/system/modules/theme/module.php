@@ -48,14 +48,9 @@ return [
 
     'resources' => [
 
-        'system/theme:' => ''
+        'system/theme:' => '',
+        'views:system' => 'views'
 
-    ],
-
-    'views' => [
-
-        'error' => 'system/theme:templates/error.php'
-
-    ],
+    ]
 
 ];
