@@ -19,7 +19,7 @@ class ProfileController
         return [
             '$view' => [
                 'title' => __('Your Profile'),
-                'name'  => 'system/user:views/site/profile.php'
+                'name'  => 'system/user/profile.php'
             ],
             '$data' => [
                 'user' => [

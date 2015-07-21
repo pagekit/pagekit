@@ -1,3 +1,10 @@
+<?php if ($user->isAuthenticated()): ?>
+
+<?= __('Hi %username%', ['%username%' => $user->getUsername()]) ?><br>
+<a href="<?= $view->url('@user/logout', ['redirect' => $redirect]) ?>"><?= __('Logout') ?></a>
+
+<?php else: ?>
+
 <form class="uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
     <div class="uk-form-row">
@@ -22,3 +29,5 @@
     <?php $view->token()->get() ?>
 
 </form>
+
+<?php endif; ?>
