@@ -72,7 +72,7 @@
         section: {
             label: 'Content',
             priority: 0,
-            active: 'page'
+            active: '^page$'
         },
 
         props: ['node', 'form', 'type'],
