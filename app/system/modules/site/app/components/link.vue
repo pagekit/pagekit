@@ -33,7 +33,7 @@
 
     module.exports = {
 
-        props: ['node', 'form', 'type'],
+        inherit: true,
 
         section: {
             label: 'Settings',

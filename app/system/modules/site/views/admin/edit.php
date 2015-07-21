@@ -23,7 +23,7 @@
 
     <div class="uk-switcher uk-margin" v-el="content">
         <div v-repeat="section: sections | orderBy 'priority'">
-            <component is="{{ section.name }}" node="{{ node }}" form="{{ form }}" type="{{ type }}"></component>
+            <component is="{{ section.name }}"></component>
         </div>
     </div>
 

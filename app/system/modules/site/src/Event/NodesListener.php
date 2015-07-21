@@ -24,7 +24,7 @@ class NodesListener implements EventSubscriberInterface
             }
 
             $type             = array_replace(['alias' => '', 'redirect' => '', 'controller' => ''], $type);
-            $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()]);
+            $type['defaults'] = array_merge(isset($type['defaults']) ? $type['defaults'] : [], $node->get('defaults', []), ['_node' => $node->getId()], ['_access' => $node->getRoles()]);
             $type['path']     = $node->getPath();
 
             $route = null;

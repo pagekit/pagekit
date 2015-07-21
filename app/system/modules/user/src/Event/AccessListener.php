@@ -6,7 +6,6 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
-use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\User\Annotation\Access;
 
@@ -74,13 +73,12 @@ class AccessListener implements EventSubscriberInterface
     /**
      * Checks if the user is authorized to login to administration section.
      *
-     * @param  AuthorizeEvent $event
-     * @throws AuthException
+     * @param AuthorizeEvent $event
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
         if (strpos(App::request()->get('redirect'), App::url('@system', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
-            throw new AuthException(__('You do not have access to the administration area of this site.'));
+            App::abort(403, __('You do not have access to the administration area of this site.'));
         }
     }
 
@@ -92,8 +90,7 @@ class AccessListener implements EventSubscriberInterface
         if ($access = $request->attributes->get('_access')) {
             foreach ($access as $expression) {
                 if (!App::user()->hasAccess($expression)) {
-                    $event->setResponse(App::response(__('Insufficient User Rights.'), 403));
-                    break;
+                    App::abort(403, __('Insufficient User Rights.'));
                 }
             }
         }
@@ -123,9 +120,9 @@ class AccessListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'route.configure'  => 'onConfigureRoute',
-            'auth.authorize'   => 'onAuthorize',
-            'request'      => [
+            'route.configure' => 'onConfigureRoute',
+            'auth.authorize' => 'onAuthorize',
+            'request' => [
                 ['onLateRequest', -512],
                 ['onRequest', -256]
             ]

@@ -27,6 +27,10 @@ class SiteController
      */
     public function indexAction($page = 1)
     {
+        if (!App::node()->hasAccess(App::user())) {
+            App::abort(403, __('Insufficient User Rights.'));
+        }
+
         App::on('blog.post.postLoad', function ($event) {
             $post = $event->getEntity();
             $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
@@ -72,7 +76,7 @@ class SiteController
         }
 
         if (!$post->hasAccess(App::user())) {
-            App::abort(403, __('Unable to access this post!'));
+            App::abort(403, __('Insufficient User Rights.'));
         }
 
         $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
@@ -108,6 +112,10 @@ class SiteController
      */
     public function feedAction($type = '')
     {
+        if (!App::node()->hasAccess(App::user())) {
+            App::abort(403, __('Insufficient User Rights.'));
+        }
+
         $site = App::module('system/site');
         $feed = App::feed()->create($type ?: $this->blog->config('feed.type'), [
             'title' => $site->config('title'),

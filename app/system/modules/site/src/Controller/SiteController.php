@@ -5,6 +5,7 @@ namespace Pagekit\Site\Controller;
 use Pagekit\Application as App;
 use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Site\Model\Node;
+use Pagekit\User\Model\Role;
 
 /**
  * @Access("site: manage site")
@@ -70,7 +71,9 @@ class SiteController
             ],
             '$data' => [
                 'node' => $node,
-                'type' => $type
+                'type' => $type,
+                'roles' => array_values(Role::findAll())
+
             ]
         ];
     }

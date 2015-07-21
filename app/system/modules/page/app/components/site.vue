@@ -5,6 +5,7 @@
 
             <div class="uk-form-row">
                 <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" v-valid="required" lazy>
+
                 <div class="uk-form-help-block uk-text-danger" v-show="form['page[title]'].invalid">{{ 'Invalid title.' | trans }}</div>
             </div>
 
@@ -45,6 +46,16 @@
                 </div>
 
                 <div class="uk-form-row">
+                    <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
+
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p v-repeat="role: roles" class="uk-form-controls-condensed">
+                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="node.roles"> {{ role.name }}</label>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
 
                     <div class="uk-form-controls">
@@ -75,7 +86,7 @@
             active: '^page$'
         },
 
-        props: ['node', 'form', 'type'],
+        inherit: true,
 
         data: function () {
             return {
