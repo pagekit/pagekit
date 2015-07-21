@@ -22,7 +22,7 @@ return [
             'mode' => $widget->get('mode')
         ]);
 
-        return $app['view']->render('system/site/widget-menu', compact('widget', 'root'));
+        return $app['view']->render('system/site/widget-menu.php', compact('widget', 'root'));
     },
 
     'events' => [

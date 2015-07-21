@@ -48,13 +48,24 @@ trait NodeModelTrait
         $startLevel = (int) $parameters['start_level'] ?: 1;
         $maxDepth   = $startLevel + ($parameters['depth'] ?: PHP_INT_MAX);
 
-        $path       = App::node()->getPath();
-        $segments   = explode('/', $path);
-        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
-
         $nodes      = self::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
         $nodes[0]   = new static();
         $nodes[0]->setParentId(null);
+
+        $node = App::node();
+        $path = $node->getPath();
+        
+        if (!isset($nodes[$node->getId()])) {
+            foreach($nodes as $node) {
+                if ($node->getUrl('base') === $path) {
+                    $path = $node->getPath();
+                    break;
+                }
+            }
+        }
+
+        $segments   = explode('/', $path);
+        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
 
         foreach ($nodes as $node) {
 
