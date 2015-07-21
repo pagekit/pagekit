@@ -261,7 +261,11 @@ module.exports = {
                 },
 
                 url: function() {
-                    return this.$url(this.node.url.substr(1));
+                    return this.node.url ? this.$url(this.node.url.substr(1)) : false;
+                },
+
+                type: function() {
+                    return this.getType(this.node);
                 }
 
             }

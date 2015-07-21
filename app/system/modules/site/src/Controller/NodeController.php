@@ -30,7 +30,11 @@ class NodeController
      */
     public function getAction($id)
     {
-        return Node::find($id);
+        if (!$node = Node::find($id)) {
+            App::abort(404, __('Node not found.'));
+        }
+
+        return $node;
     }
 
     /**
@@ -124,6 +128,14 @@ class NodeController
      */
     public function frontpageAction($id)
     {
+        if (!$node = Node::find($id) or !$type = App::module('system/site')->getType($node->getType())) {
+            App::abort(404, __('Node not found.'));
+        }
+
+        if (isset($type['frontpage']) and !$type['frontpage']) {
+            App::abort(400, __('Invalid node type.'));
+        }
+
         App::config('system/site')->set('frontpage', $id);
         return ['message' => 'success'];
     }

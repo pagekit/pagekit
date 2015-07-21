@@ -59,7 +59,7 @@ class SiteModule extends Module
                 }
             }
 
-            $this->registerType('link', ['label' => 'Link']);
+            $this->registerType('link', ['label' => 'Link', 'frontpage' => false]);
 
             App::trigger('site.types', [$this]);
         }
