@@ -43,6 +43,15 @@
                     vm.closed();
                 }
             });
+
+            this.modal.on('show.uk.modal', function () {
+
+                // catch .uk-overflow-container
+                setTimeout(function() {
+                    vm.modal.resize();
+                }, 250)
+            });
+
         },
 
         methods: {
