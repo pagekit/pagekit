@@ -47,7 +47,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __('Blog'),
-                'name' => 'blog:views/site/post-index.php',
+                'name' => 'blog:views/site/posts.php',
                 'link:feed' => [
                     'rel' => 'alternate',
                     'href' => App::url('@blog/feed', [], true),

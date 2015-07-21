@@ -260,10 +260,6 @@ module.exports = {
                     return this.node.url === '/';
                 },
 
-                url: function() {
-                    return this.node.url ? this.$url(this.node.url.substr(1)) : false;
-                },
-
                 type: function() {
                     return this.getType(this.node);
                 }
