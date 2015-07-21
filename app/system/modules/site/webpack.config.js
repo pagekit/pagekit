@@ -42,8 +42,9 @@ module.exports = [
         entry: {
             "index": "./app/views/index",
             "settings": "./app/views/settings",
+            "input-link": "./app/components/input-link.vue",
             "widget-menu": "./app/components/widget-menu.vue",
-            "input-link": "./app/components/input-link.vue"
+            "widget-text": "./app/components/widget-text.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

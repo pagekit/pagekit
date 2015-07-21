@@ -9,13 +9,13 @@ return [
 
     'main' => 'Pagekit\\Site\\SiteModule',
 
+    'include' => 'widgets/widget-*.php',
+
     'autoload' => [
 
         'Pagekit\\Site\\' => 'src'
 
     ],
-
-    'include' => 'widgets/widget-menu.php',
 
     'routes' => [
 

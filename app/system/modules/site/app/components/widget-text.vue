@@ -36,8 +36,12 @@
             priority: 0
         },
 
-        props: ['widget', 'config', 'form']
+        props: ['widget', 'config', 'form'],
+
+        template: __vue_template__
 
     }
+
+    window.Widgets.component('widget-text', module.exports);
 
 </script>

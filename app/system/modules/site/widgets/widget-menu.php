@@ -10,14 +10,6 @@ return [
 
     'type' => 'widget',
 
-    'events' => [
-
-        'view.scripts' => function ($event, $scripts) {
-            $scripts->register('widget-menu', 'system/site:app/bundle/widget-menu.js', '~widgets');
-        }
-
-    ],
-
     'render' => function ($widget) use ($app) {
 
         if (!$menu = $widget->get('menu')) {
@@ -31,6 +23,14 @@ return [
         ]);
 
         return $app['view']->render('system/site/widget-menu', compact('widget', 'root'));
-    }
+    },
+
+    'events' => [
+
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('widget-menu', 'system/site:app/bundle/widget-menu.js', '~widgets');
+        }
+
+    ]
 
 ];

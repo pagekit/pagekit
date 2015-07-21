@@ -112,6 +112,6 @@
 
     };
 
-    window.Widgets.component('widget-menu', module.exports)
+    window.Widgets.component('widget-menu', module.exports);
 
 </script>
