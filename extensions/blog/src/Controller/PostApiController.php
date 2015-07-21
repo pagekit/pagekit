@@ -85,7 +85,7 @@ class PostApiController
 
         // user without universal access can only edit their own posts
         if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
-            return ['error' => __('Access denied.)'];
+            return ['error' => __('Access denied.')];
         }
 
         // user without universal access is not allowed to assign posts to other users
@@ -110,7 +110,7 @@ class PostApiController
         if ($post = Post::find($id)) {
 
             if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
-                return ['error' => __('Access denied')];
+                return ['error' => __('Access denied.')];
             }
 
             $post->delete();
