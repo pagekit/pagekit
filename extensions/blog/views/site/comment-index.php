@@ -4,7 +4,7 @@ $view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify']
 
 <div id="comments" class="uk-margin" v-if="config.enabled || comments.length">
 
-    <div class="uk-margin" v-if="user.canView">
+    <div class="uk-margin">
 
         <div v-show="comments.length">
             <h2 class="uk-h3">{{ 'Comments (%count%)' | trans {count:count} }}</h2>
@@ -20,8 +20,6 @@ $view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify']
     </div>
 
     <p v-if="!config.enabled">{{ 'Comments are closed.' | trans }}</p>
-    <p v-if="!user.canView && user.isAuthenticated">{{ 'You are not allowed to view comments.' | trans }}</p>
-    <p v-if="!user.canView && !user.isAuthenticated">{{ 'Please login to view comments.' | trans }}</p>
 
 </div>
 

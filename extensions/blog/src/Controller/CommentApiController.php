@@ -21,7 +21,6 @@ class CommentApiController
     }
 
     /**
-     * @Access("blog: view comments")
      * @Route("/", methods="GET")
      * @Request({"filter": "array", "post":"int", "page":"int", "limit":"int"})
      */

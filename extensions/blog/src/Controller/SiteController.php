@@ -95,7 +95,6 @@ class SiteController
                 'user' => [
                     'name' => $user->getName(),
                     'isAuthenticated' => $user->isAuthenticated(),
-                    'canView' => $user->hasAccess('blog: view comments'),
                     'canComment' => $user->hasAccess('blog: post comments'),
                 ],
 

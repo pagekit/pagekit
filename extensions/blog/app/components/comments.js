@@ -19,10 +19,6 @@ module.exports = {
 
         load: function () {
 
-            if (!this.user.canView) {
-                return;
-            }
-
             this.Comments.query({post: this.config.post}, function (data) {
                 this.$set('comments', data.comments);
                 this.$set('tree', _.groupBy(data.comments, 'parent_id'));

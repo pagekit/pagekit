@@ -63,9 +63,6 @@ return [
         'blog: manage comments' => [
             'title' => 'Manage comments'
         ],
-        'blog: view comments' => [
-            'title' => 'View comments'
-        ],
         'blog: post comments' => [
             'title' => 'Post comments'
         ],
