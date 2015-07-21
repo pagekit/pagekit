@@ -10,7 +10,7 @@
         <tr v-repeat="folders | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
             <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
-                <i class="pk-icon-folder"></i>
+                <i class="pk-icon-folder-circle"></i>
             </td>
             <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: setPath(path)">{{ name }}</a></td>
             <td></td>
@@ -21,7 +21,7 @@
             <td><input type="checkbox" name="name" value="{{ name }}"></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(url)" class="pk-icon-contain" v-lazy-background="$url.static(url)"></i>
-                <i v-if="!isImage(url)" class="pk-icon-file pk-icon-muted"></i>
+                <i v-if="!isImage(url)" class="pk-icon-file-circle"></i>
             </td>
             <td class="pk-table-text-break pk-table-min-width-200">{{ name }}</td>
             <td class="uk-text-right uk-text-nowrap">{{ size }}</td>

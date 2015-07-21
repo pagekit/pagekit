@@ -150,8 +150,6 @@
 .pk-icon-spam { background-image: url("../../assets/images/icon-spam.svg"); }
 .pk-icon-thumbnails { background-image: url("../../assets/images/icon-thumbnails.svg"); }
 .pk-icon-table { background-image: url("../../assets/images/icon-table.svg"); }
-.pk-icon-file { background-image: url("../../assets/images/icon-file.svg"); }
-.pk-icon-folder { background-image: url("../../assets/images/icon-folder.svg"); }
 .pk-icon-reply { background-image: url("../../assets/images/icon-reply.svg"); }
 .pk-icon-calendar { background-image: url("../../assets/images/icon-calendar.svg"); }
 .pk-icon-time { background-image: url("../../assets/images/icon-time.svg"); }
@@ -167,6 +165,16 @@
 .pk-icon-move { background-image: url("../../assets/images/icon-move.svg"); }
 .pk-icon-pen { background-image: url("../../assets/images/icon-pen.svg"); }
 .pk-icon-link { background-image: url("../../assets/images/icon-link.svg"); }
+
+.pk-icon-folder-circle,
+.pk-icon-file-circle {
+    width: 30px;
+    height: 30px;
+    margin: -2px;
+}
+
+.pk-icon-folder-circle { background-image: url("../../assets/images/icon-folder-circle.svg"); }
+.pk-icon-file-circle { background-image: url("../../assets/images/icon-file-circle.svg"); }
 
 .pk-icon-arrow-up,
 .pk-icon-arrow-down {
@@ -480,11 +488,13 @@
  */
 
 .pk-thumbnail-folder {
+    background-color: @global-primary-background;
     background-image: url("../../assets/images/icon-folder-large.svg");
     background-size: 80px 80px;
 }
 
 .pk-thumbnail-file {
+    background-color: #cfd2d8;
     background-image: url("../../assets/images/icon-file-large.svg");
     background-size: 80px 80px;
 }
