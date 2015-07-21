@@ -132,7 +132,7 @@
             </div>
             <div class="pk-table-width-minimum">
                 <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" v-on="click: setFrontpage(node)"></a>
-                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
+                <i class="pk-icon-home-active pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ type.label }}</div>
             <div class="pk-table-width-100 uk-text-center">
@@ -145,8 +145,8 @@
                 </td>
             </div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a target="_blank" v-attr="href: url" v-show="node.status && url">{{ node.url }}</a>
-                <span v-show="!node.status || !url">{{ node.path }}</span>
+                <a target="_blank" v-attr="href: $url(node.url.substr(1))" v-show="node.status && node.url">{{ node.url }}</a>
+                <span v-show="!node.status || !node.url">{{ node.path }}</span>
             </div>
         </div>
 

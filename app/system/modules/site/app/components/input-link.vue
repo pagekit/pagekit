@@ -4,7 +4,7 @@
         <div class="pk-form-link uk-width-1-1">
             <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-show="!isRequired" lazy>
             <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-show="isRequired" v-valid="required" v-el="input" lazy>
-            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-edit pk-icon-hover uk-margin-small-left"></i></a>
+            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>
 

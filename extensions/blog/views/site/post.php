@@ -4,6 +4,6 @@
 
     <div class="uk-margin"><?= $post->getContent() ?></div>
 
-    <?= $view->render('blog:views/site/comment-index.php') ?>
+    <?= $view->render('blog:views/site/comments.php') ?>
 
 </article>

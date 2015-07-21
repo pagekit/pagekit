@@ -6,7 +6,7 @@ module.exports = [
             "post-edit": "./app/views/admin/post-edit",
             "post-index": "./app/views/admin/post-index",
             "settings": "./app/views/admin/settings",
-            "comments": "./app/components/comments",
+            "comments": "./app/views/site/comments",
             "site": "./app/components/site.vue",
             "link": "./app/components/link.vue"
         },
