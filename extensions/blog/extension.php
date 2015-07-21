@@ -55,25 +55,36 @@ return [
     'permissions' => [
 
         'blog: manage settings' => [
-            'title' => 'Manage settings'
+            'title' => 'Manage settings',
+            'description' => 'View and change settings'
         ],
-        'blog: manage content' => [
-            'title' => 'Manage content'
+        'blog: manage own posts' => [
+            'title' => 'Manage own posts',
+            'description' => 'Create, edit, delete and publish posts of their own'
+        ],
+        'blog: manage all posts' => [
+            'title' => 'Manage all posts',
+            'description' => 'Create, edit, delete and publish posts by all users'
         ],
         'blog: manage comments' => [
-            'title' => 'Manage comments'
+            'title' => 'Manage comments',
+            'description' => 'Approve, edit and delete comments'
         ],
         'blog: post comments' => [
-            'title' => 'Post comments'
+            'title' => 'Post comments',
+            'description' => 'Allowed to write comments on the site'
         ],
         'blog: skip comment approval' => [
-            'title' => 'Skip comment approval'
+            'title' => 'Skip comment approval',
+            'description' => 'User can write comments without admin approval'
         ],
         'blog: comment approval required once' => [
-            'title' => 'Comment approval required only once'
+            'title' => 'Comment approval required only once',
+            'description' => 'First comment needs to be approved, later comments are approved automatically'
         ],
         'blog: skip comment min idle' => [
-            'title' => 'Skip comment minimum idle time'
+            'title' => 'Skip comment minimum idle time',
+            'description' => 'User can write multiple comments without having to wait in between'
         ]
 
     ],
@@ -85,7 +96,7 @@ return [
             'icon' => 'extensions/blog/extension.svg',
             'url' => '@blog/post',
             'active' => '@blog/post*',
-            'access' => 'blog: manage content || blog: manage comments',
+            'access' => 'blog: manage own posts || blog: manage all posts || blog: manage comments || blog: manage settings',
             'priority' => 110
         ],
         'blog: posts' => [
@@ -93,7 +104,7 @@ return [
             'parent' => 'blog',
             'url' => '@blog/post',
             'active' => '@blog/post*',
-            'access' => 'blog: manage content'
+            'access' => 'blog: manage own posts || blog: manage all posts'
         ],
         'blog: comments' => [
             'label' => 'Comments',

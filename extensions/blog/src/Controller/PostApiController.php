@@ -6,7 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Blog\Model\Post;
 
 /**
- * @Access("blog: manage content")
+ * @Access("blog: manage own posts || blog: manage all posts")
  * @Route("post", name="post")
  */
 class PostApiController
@@ -20,6 +20,10 @@ class PostApiController
         $query  = Post::query();
         $filter = array_merge(array_fill_keys(['status', 'search', 'author', 'order', 'limit'], ''), $filter);
         extract($filter, EXTR_SKIP);
+
+        if(!App::user()->hasAccess('blog: manage all posts')) {
+            $author = App::user()->getId();
+        }
 
         if (is_numeric($status)) {
             $query->where(['status' => (int) $status]);
@@ -79,7 +83,17 @@ class PostApiController
             App::abort(400, __('Invalid slug.'));
         }
 
-        $data['date']           = App::intl()->date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
+        // user without universal access can only edit their own posts
+        if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+            return ['error' => __('Access denied.)'];
+        }
+
+        // user without universal access is not allowed to assign posts to other users
+        if(!App::user()->hasAccess('blog: manage all posts')) {
+            $data['user_id'] = App::user()->getId();
+        }
+
+        $data['date'] = App::intl()->date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
         $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
 
         $post->save($data);
@@ -94,6 +108,11 @@ class PostApiController
     public function deleteAction($id)
     {
         if ($post = Post::find($id)) {
+
+            if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+                return ['error' => __('Access denied')];
+            }
+
             $post->delete();
         }
 
@@ -105,8 +124,13 @@ class PostApiController
      */
     public function copyAction($ids = [])
     {
+        $count = 0;
         foreach ($ids as $id) {
             if ($post = Post::find((int) $id)) {
+                if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+                    continue;
+                }
+
                 $post = clone $post;
                 $post->setId(null);
                 $post->setStatus(Post::STATUS_DRAFT);
@@ -114,10 +138,11 @@ class PostApiController
                 $post->setTitle($post->getTitle().' - '.__('Copy'));
                 $post->setCommentCount(0);
                 $post->save();
+                $count++;
             }
         }
 
-        return ['message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', count($ids))];
+        return ['message' => _c('{0} No post copied.|{1} Post copied.|]1,Inf[ Posts copied.', $count)];
     }
 
     /**

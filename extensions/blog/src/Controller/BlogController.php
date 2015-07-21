@@ -7,13 +7,15 @@ use Pagekit\Blog\Model\Comment;
 use Pagekit\Blog\Model\Post;
 use Pagekit\User\Model\Role;
 
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+
 /**
  * @Access(admin=true)
  */
 class BlogController
 {
     /**
-     * @Access("blog: manage content")
+     * @Access("blog: manage own posts || blog: manage all posts")
      * @Request({"filter": "array", "page":"int"})
      */
     public function postAction($filter = null, $page = 0)
@@ -26,6 +28,7 @@ class BlogController
             '$data' => [
                 'statuses' => Post::getStatuses(),
                 'authors'  => Post::getAuthors(),
+                'canEditAll' => App::user()->hasAccess('blog: manage all posts'),
                 'config'   => [
                     'filter' => $filter,
                     'page'   => $page
@@ -36,7 +39,7 @@ class BlogController
 
     /**
      * @Route("/post/edit", name="post/edit")
-     * @Access("blog: manage content")
+     * @Access("blog: manage own posts || blog: manage all posts")
      * @Request({"id": "int"})
      */
     public function editAction($id = 0)
@@ -61,6 +64,13 @@ class BlogController
                 $post->set('markdown', $module->config('posts.markdown_enabled'));
             }
 
+            $user = App::user();
+            if(!$user->hasAccess('blog: manage all posts') && $post->getUserId() !== $user->getId()) {
+
+                throw new AccessDeniedException("You do not have access to edit this post");
+
+            }
+
             return [
                 '$view' => [
                     'title' => $id ? __('Edit Post') : __('Add Post'),
@@ -70,6 +80,7 @@ class BlogController
                     'post'     => $post,
                     'statuses' => Post::getStatuses(),
                     'roles'    => array_values(Role::findAll()),
+                    'canEditAll' => App::user()->hasAccess('blog: manage all posts'),
                     'authors'  => App::db()->createQueryBuilder()
                         ->from('@system_user')
                         ->where('id IN (SELECT user_id FROM @system_user_role WHERE role_id > 2)')

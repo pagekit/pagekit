@@ -5,7 +5,8 @@ module.exports = Vue.extend({
             posts: false,
             pages: 0,
             count: '',
-            selected: []
+            selected: [],
+            canEditAll: false
         }, window.$data);
     },
 

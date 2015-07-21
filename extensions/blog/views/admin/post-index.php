@@ -44,9 +44,9 @@
                         </div>
                     </th>
                     <th class="pk-table-width-100">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
+                        <div data-uk-form-select v-class="uk-form-select: canEditAll, pk-filter: canEditAll">
                             <span>{{ 'Author' | trans }}</span>
-                            <select v-model="config.filter.author" options="authors"></select>
+                            <select v-model="config.filter.author" options="authors" v-if="canEditAll"></select>
                         </div>
                     </th>
                     <th class="pk-table-width-100 uk-text-center" v-order="comment_count: config.filter.order">{{ 'Comments' | trans }}</th>
