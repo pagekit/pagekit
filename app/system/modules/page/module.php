@@ -53,7 +53,7 @@ return [
         },
 
         // TODO workaround, until the editor is made lazy
-        'view.system/site:views/edit' => function($event, $view) use ($app) {
+        'view.system/site/admin/edit' => function($event, $view) use ($app) {
             $view->style('codemirror');
         },
 
