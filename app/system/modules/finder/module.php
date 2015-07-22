@@ -70,10 +70,10 @@ return [
 
         'system: storage' => [
             'label' => 'Storage',
-            'parent' => 'system: system',
+            'parent' => 'site',
             'url' => '@system/storage',
             'access' => 'system: manage storage',
-            'priority' => 20
+            'priority' => 10
         ]
 
     ],
