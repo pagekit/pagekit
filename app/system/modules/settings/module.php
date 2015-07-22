@@ -39,6 +39,7 @@ return [
         'system: system' => [
             'label' => 'System',
             'icon' => 'settings:assets/images/icon-settings.svg',
+            'access' => 'system: access settings',
             'url' => '@system/settings',
             'priority' => 120
         ],

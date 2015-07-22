@@ -89,6 +89,7 @@ return [
             'label' => 'Marketplace',
             'icon' => 'system/package:assets/images/icon-marketplace.svg',
             'url' => '@system/marketplace/extensions',
+            'access' => 'system: manage packages',
             'priority' => 125
         ],
 

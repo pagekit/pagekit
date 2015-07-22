@@ -58,6 +58,7 @@ return [
             'label' => 'Site',
             'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site',
+            'access' => 'site: manage site',
             'active' => '@site*',
             'priority' => 105
         ],
@@ -71,7 +72,7 @@ return [
             'label' => 'Settings',
             'parent' => 'site',
             'url' => '@site/settings',
-            'priority' => 5
+            'priority' => 20
         ]
 
     ],
