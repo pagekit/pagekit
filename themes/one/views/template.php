@@ -30,7 +30,7 @@
                     </div>
                     <?php endif ?>
 
-                    <?php if ($view->position()->exists('offcanvas')) : ?>
+                    <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
                     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                     <?php endif ?>
 
@@ -118,7 +118,7 @@
             <div class="uk-offcanvas-bar">
 
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
-                    <?= $view->menu('offcanvas') ?>
+                    <?= $view->menu('offcanvas', 'system/site/menu.php', ['classes' => 'uk-nav-offcanvas']) ?>
                 <?php endif ?>
 
                 <?php if ($view->position()->exists('offcanvas')) : ?>

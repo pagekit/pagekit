@@ -1,5 +1,6 @@
 <?php if ($root->getDepth() === 0) : ?>
-<ul class="uk-nav <?= $widget->position == 'offcanvas' ? 'uk-nav-offcanvas' : 'uk-nav-side' ?>">
+
+<ul class="uk-nav <?= @$classes ?: '' ?>">
     <?php endif ?>
 
     <?php foreach ($root->getChildren() as $node) : ?>
