@@ -21,7 +21,7 @@
 
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: update">{{ 'Update' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="submit">{{ 'Update' | trans }}</button>
                 </div>
 
             </form>
