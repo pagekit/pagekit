@@ -126,16 +126,13 @@ class UserApiController
 
             if (isset($data['roles'])) {
 
-                $roles = $data['roles'];
+                $roles  = $data['roles'];
+                $key    = array_search(Role::ROLE_ADMINISTRATOR, $roles);
+                $add    = false !== $key && !$user->isAdministrator();
+                $remove = false === $key && $user->isAdministrator();
 
-                // Admins cannot remove their Admin Role
-                if ($self && $user->isAdministrator() && !in_array(Role::ROLE_ADMINISTRATOR, $roles)) {
-                    $roles[] = Role::ROLE_ADMINISTRATOR;
-                }
-
-                // Non admins cannot assign the Admin Role
-                if (-1 !== $key = array_search(Role::ROLE_ADMINISTRATOR, $roles) and !App::user()->isAdministrator()) {
-                    unset($roles[$key]);
+                if (($self && $remove) || !App::user()->isAdministrator() && ($remove || $add)) {
+                    App::abort(403, 'Cannot add/remove Admin Role.');
                 }
 
                 $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
