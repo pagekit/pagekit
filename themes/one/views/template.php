@@ -118,7 +118,7 @@
             <div class="uk-offcanvas-bar">
 
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
-                    <?= $view->menu('offcanvas', 'system/site/menu.php', ['classes' => 'uk-nav-offcanvas']) ?>
+                    <?= $view->menu('offcanvas', ['classes' => 'uk-nav-offcanvas']) ?>
                 <?php endif ?>
 
                 <?php if ($view->position()->exists('offcanvas')) : ?>

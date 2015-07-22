@@ -49,7 +49,7 @@ class MenuHelper extends Helper
 
         $parameters['root'] = Node::getTree($menu, $parameters);
 
-        return $this->view->render($view ?: 'menu', $parameters);
+        return $this->view->render($view ?: 'system/site/menu.php', $parameters);
     }
 
     /**
