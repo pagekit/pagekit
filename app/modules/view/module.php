@@ -51,13 +51,15 @@ return [
 
             $view->on('render', function ($event) use ($app) {
 
-                $template = $event->getTemplate();
+                $tmpl = $event->getTemplate();
 
-                if (!strpos($template, ':')) {
-                    $template = "views:{$template}";
+                if (!isset($app['locator'])) {
+                    return;
                 }
 
-                if (isset($app['locator']) and $template = $app['locator']->get($template)) {
+                if (!strpos($tmpl, ':') and $template = $app['locator']->get("views:{$tmpl}")) {
+                    $event->setTemplate($template);
+                } elseif ($template = $app['locator']->get($tmpl)) {
                     $event->setTemplate($template);
                 }
 
