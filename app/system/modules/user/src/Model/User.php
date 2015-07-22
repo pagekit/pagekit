@@ -369,6 +369,7 @@ class User implements UserInterface, \JsonSerializable
             throw new Exception(__('Username is invalid.'));
         }
 
+        // TODO: email validation differs from email validation in vuejs
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception(__('Email is invalid.'));
         }
@@ -401,7 +402,7 @@ class User implements UserInterface, \JsonSerializable
         unset($user['activation']);
 
         if ($user['roles']) {
-            $user['roles'] = array_map('strval', array_keys($user['roles']));
+            $user['roles'] = array_map(function($role) { return (string) $role->getId(); }, $user['roles']);
         }
 
         return $user;

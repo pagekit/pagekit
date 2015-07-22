@@ -99,6 +99,7 @@ class UserApiController
                 }
 
                 $user = new User;
+                $user->setRoles([]);
                 $user->setRegistered(new \DateTime);
             }
 
