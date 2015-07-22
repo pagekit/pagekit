@@ -132,7 +132,7 @@
             </div>
             <div class="pk-table-width-minimum">
                 <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" v-on="click: setFrontpage(node)"></a>
-                <i class="pk-icon-home pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
+                <i class="pk-icon-home-active pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-minimum uk-text-nowrap">{{ type.label }}</div>
             <div class="pk-table-width-100 uk-text-center">
