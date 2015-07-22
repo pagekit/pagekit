@@ -1,5 +1,4 @@
-<?php $view->style('codemirror') ?>
-<?php $view->script('site-settings', 'system/site:app/bundle/settings.js', ['vue', 'editor', 'input-image']) ?>
+<?php $view->style('codemirror'); $view->script('site-settings', 'system/site:app/bundle/settings.js', ['vue', 'editor']) ?>
 
 <div id="settings" class="uk-grid pk-grid-large" data-uk-grid-margin>
     <div class="pk-width-sidebar">
@@ -55,14 +54,14 @@
                     <div class="uk-form-row">
                         <label for="form-favicon" class="uk-form-label">{{ 'Favicon' | trans }}</label>
                         <div class="uk-form-controls uk-form-width-large">
-                            <input-image src="{{@ config.icons.favicon }}"></input-image>
+                            <input-image source="{{@ config.icons.favicon }}"></input-image>
                         </div>
                     </div>
 
                     <div class="uk-form-row">
                         <label for="form-appicon" class="uk-form-label">{{ 'Appicon' | trans }}</label>
                         <div class="uk-form-controls uk-form-width-large">
-                            <input-image src="{{@ config.icons.appicon }}"></input-image>
+                            <input-image source="{{@ config.icons.appicon }}"></input-image>
                         </div>
                     </div>
                 </div>

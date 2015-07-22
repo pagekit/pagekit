@@ -9,17 +9,8 @@
                     <h2>{{ 'Add Video' | trans }}</h2>
                 </div>
 
-                <a class="uk-placeholder uk-text-center uk-display-block" v-on="click: openFinder" v-if="!video.src">
-                    <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
-                    <p class="uk-text-muted uk-margin-small-top">{{ 'Select video' | trans }}</p>
-                </a>
-
-                <div class="uk-panel uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="video.src">
-                    <div class="uk-overlay">
-                        <video-view src="{{ video.src }}"></video-view>
-                        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
-                    </div>
-                    <a class="uk-position-cover" v-on="click: openFinder"></a>
+                <div class="uk-form-row">
+                    <input-video source="{{@ video.src }}"></input-video>
                 </div>
 
                 <div class="uk-form-row">

@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="uk-form-row">
-                    <input-image src="{{@ image.src }}"></input-image>
+                    <input-image source="{{@ image.src }}"></input-image>
                 </div>
 
                 <div class="uk-form-row">

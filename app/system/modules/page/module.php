@@ -52,11 +52,6 @@ return [
             $scripts->register('page-site', 'system/page:app/bundle/site.js', ['~site-edit', 'editor']);
         },
 
-        // TODO workaround, until the editor is made lazy
-        'view.system/site/admin/edit' => function($event, $view) use ($app) {
-            $view->style('codemirror');
-        },
-
         'site.node.preSave' => function($event, $node) use ($app) {
 
             if ('page' !== $node->getType() or null === $data = $app['request']->get('page')) {

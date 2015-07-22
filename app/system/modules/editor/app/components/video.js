@@ -96,7 +96,6 @@ module.exports = {
 
     components: {
 
-        'video-view': require('./video-view.vue'),
         'video-preview': require('./video-preview.vue')
 
     }

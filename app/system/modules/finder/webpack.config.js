@@ -18,7 +18,8 @@ module.exports = [
 
     {
         entry: {
-            "input-image": "./app/components/input-image.vue"
+            "input-image": "./app/components/input-image.vue",
+            "input-video": "./app/components/input-video.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

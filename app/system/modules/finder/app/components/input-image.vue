@@ -1,14 +1,14 @@
 <template>
 
-    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!src" v-on="click: pick()">
+    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
         <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add image' | trans }}</p>
     </a>
 
-    <div class="uk-panel uk-visible-hover uk-overlay-hover" v-if="src">
+    <div class="uk-panel uk-visible-hover uk-overlay-hover" v-if="source">
 
         <div class="uk-overlay pk-image-max-height">
-            <img v-attr="src: $url.static(src)">
+            <img v-attr="src: $url.static(source)">
             <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
         </div>
 
@@ -24,7 +24,7 @@
 
     <v-modal v-ref="modal" large>
 
-        <panel-finder root="{{ storage }}" v-ref="finder"  modal="true"></panel-finder>
+        <panel-finder root="{{ storage }}" v-ref="finder" modal="true"></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -39,7 +39,7 @@
 
     module.exports = {
 
-        props: ['src'],
+        props: ['source'],
 
         data: function () {
             return _.merge({}, $pagekit);
@@ -61,12 +61,12 @@
             },
 
             select: function() {
-                this.src = this.$.finder.getSelected()[0];
+                this.source = this.$.finder.getSelected()[0];
                 this.$.modal.close();
             },
 
             remove: function() {
-                this.src = ''
+                this.source = ''
             }
 
         },

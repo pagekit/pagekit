@@ -18,7 +18,8 @@
     <div class="uk-panel uk-visible-hover uk-overlay-hover uk-display-inline-block" v-if="video.src">
 
         <div class="uk-overlay">
-            <video-view src="{{ video.src }}"></video-view>
+            <img class="uk-width-1-1" v-attr="src: imageSrc" v-if="imageSrc">
+            <video class="uk-width-1-1" v-attr="src: videoSrc" v-if="videoSrc"></video>
             <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
         </div>
 
@@ -40,6 +41,17 @@
 
         props: ['index'],
 
+        data: function() {
+            return {imageSrc: undefined, videoSrc: undefined};
+        },
+
+        watch: {
+            'video.src': {
+                handler: 'update',
+                immediate: true
+            }
+        },
+
         computed: {
 
             video: function() {
@@ -56,6 +68,41 @@
 
             remove: function() {
                 this.video.replace('');
+            },
+
+            update: function (src) {
+
+                this.$set('imageSrc', undefined);
+                this.$set('videoSrc', undefined);
+
+                if (matches = (src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || src.match(/youtu\.be\/(.*)/))) {
+
+                    this.imageSrc = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
+
+                } else if (src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/)) {
+
+                    var id = btoa(src);
+
+                    if (this.$session[id]) {
+
+                        this.imageSrc = this.$session[id];
+
+                    } else {
+
+                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, function (data) {
+
+                            this.imageSrc = this.$session[id] = data.thumbnail_url;
+
+                        });
+
+                    }
+
+                } else {
+
+                    this.videoSrc = this.$url(src);
+
+                }
+
             }
 
         }
