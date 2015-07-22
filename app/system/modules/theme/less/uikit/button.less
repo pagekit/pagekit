@@ -68,6 +68,7 @@
 // ========================================================================
 
 .hook-button() {
+    min-width: 90px;
     border: 1px solid lighten(@button-color, 10%);
     border-radius: @global-border-radius;
     text-transform: uppercase;
@@ -123,7 +124,7 @@
 // Modifier: `uk-button-link`
 // ========================================================================
 
-.hook-button-link() {}
+.hook-button-link() { min-width: inherit; }
 
 
 // Size modifiers
