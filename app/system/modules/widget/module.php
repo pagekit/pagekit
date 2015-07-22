@@ -45,6 +45,7 @@ return [
             'label' => 'Widgets',
             'parent' => 'site',
             'url' => '@widget',
+            'access' => 'system: manage widgets',
             'active' => '@widget(/edit)?'
         ]
 
