@@ -147,7 +147,7 @@
         </div>
 
         <ul class="uk-nestable-list" v-if="tree[node.id]">
-            <node v-repeat="node: tree[node.id]"></node>
+            <node v-repeat="node: tree[node.id]" track-by="node.id"></node>
         </ul>
 
     </li>

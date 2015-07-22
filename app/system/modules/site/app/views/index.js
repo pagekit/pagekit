@@ -220,7 +220,15 @@ module.exports = {
                     vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
 
                         // @TODO reload everything on reorder really needed?
-                        //vm.load().success(function () { el.remove(); });
+                        vm.load().success(function () {
+
+                            // hack for weird flickr bug
+                            if (el.parent()[0] === nestable.element[0]) {
+                                setTimeout(function() {
+                                    el.remove();
+                                }, 50);
+                            }
+                        });
 
                     }).error(function() {
                         UIkit.notify(this.$trans('Reorder failed.'), 'danger');
