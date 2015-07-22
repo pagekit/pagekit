@@ -1,6 +1,6 @@
 module.exports = {
 
-    data: function() {
+    data: function () {
         return _.merge({
             users: false,
             pages: 0,
@@ -12,7 +12,7 @@ module.exports = {
     created: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({ search: '', status: '', role: '', order: 'name asc' }, this.config.filter);
+        this.config.filter = _.extend({search: '', status: '', role: '', order: 'name asc'}, this.config.filter);
 
     },
 
@@ -21,7 +21,9 @@ module.exports = {
         'config.page': 'load',
 
         'config.filter': {
-            handler: function () { this.load(0); },
+            handler: function () {
+                this.load(0);
+            },
             deep: true
         }
 
@@ -31,20 +33,20 @@ module.exports = {
 
         statuses: function () {
 
-            var options = [{ text: this.$trans('New'), value: 'new' }].concat(_.map(this.$data.statuses, function (status, id) {
-                return { text: status, value: id };
+            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.$data.statuses, function (status, id) {
+                return {text: status, value: id};
             }));
 
-            return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{text: this.$trans('Status'), value: ''}, {label: this.$trans('Filter by'), options: options}];
         },
 
         roles: function () {
 
             var options = this.$data.roles.map(function (role) {
-                return { text: role.name, value: role.id };
+                return {text: role.name, value: role.id};
             });
 
-            return [{ text: this.$trans('Role'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{text: this.$trans('Role'), value: ''}, {label: this.$trans('Filter by'), options: options}];
         }
 
     },
@@ -56,9 +58,9 @@ module.exports = {
         },
 
         save: function (user) {
-            this.resource.save({ id: user.id }, { user: user }, function (data) {
+            this.resource.save({id: user.id}, {user: user}, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('User saved.'));
             });
         },
 
@@ -70,17 +72,16 @@ module.exports = {
                 user.status = status;
             });
 
-            this.resource.save({ id: 'bulk' }, { users: users }, function (data) {
+            this.resource.save({id: 'bulk'}, {users: users}, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Users saved.'));
             });
         },
 
         remove: function () {
-
-            this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Users deleted.'));
             });
         },
 
@@ -94,21 +95,20 @@ module.exports = {
         },
 
         showRoles: function (user) {
-            return user.roles
-                .filter(function (role) {
-                    return role.id != 2;
-                })
-                .map(function (role) {
-                    return role.name;
-                })
-                .join(', ');
+            return _.reduce(user.roles, function (roles, id) {
+                var role = _.find(this.$data.roles, 'id', parseInt(id));
+                if (id !== 2 && role) {
+                    roles.push(role.name);
+                }
+                return roles;
+            }, [], this).join(', ');
         },
 
         load: function (page) {
 
             page = page !== undefined ? page : this.config.page;
 
-            this.resource.query({ filter: this.config.filter, page: page }, function (data) {
+            this.resource.query({filter: this.config.filter, page: page}, function (data) {
                 this.$set('users', data.users);
                 this.$set('pages', data.pages);
                 this.$set('count', data.count);
@@ -118,11 +118,9 @@ module.exports = {
         },
 
         getSelected: function () {
-            var vm = this;
-
             return this.users.filter(function (user) {
-                return vm.selected.indexOf(user.id.toString()) !== -1;
-            });
+                return this.selected.indexOf(user.id.toString()) !== -1;
+            }, this);
         }
 
     }

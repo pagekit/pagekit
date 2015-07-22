@@ -401,7 +401,7 @@ class User implements UserInterface, \JsonSerializable
         unset($user['activation']);
 
         if ($user['roles']) {
-            $user['roles'] = array_values($user['roles']);
+            $user['roles'] = array_map('strval', array_keys($user['roles']));
         }
 
         return $user;

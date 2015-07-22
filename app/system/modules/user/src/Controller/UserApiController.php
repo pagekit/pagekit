@@ -71,15 +71,19 @@ class UserApiController
      */
     public function getAction($id)
     {
-        return User::find($id);
+        if (!$user = User::find($id)) {
+            App::abort(404, 'User not found.');
+        }
+
+        return $user;
     }
 
     /**
      * @Route("/", methods="POST")
      * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-     * @Request({"user": "array", "password", "roles": "array", "id": "int"}, csrf=true)
+     * @Request({"user": "array", "password", "id": "int"}, csrf=true)
      */
-    public function saveAction($data, $password = null, $roles = null, $id = 0)
+    public function saveAction($data, $password = null, $id = 0)
     {
         try {
 
@@ -120,10 +124,18 @@ class UserApiController
                 $user->setPassword(App::get('auth.password')->hash($password));
             }
 
-            if (null !== $roles && App::user()->hasAccess('user: manage user permissions')) {
+            if (isset($data['roles'])) {
 
-                if ($self && $user->hasRole(Role::ROLE_ADMINISTRATOR) && (!$roles || !in_array(Role::ROLE_ADMINISTRATOR, $roles))) {
+                $roles = $data['roles'];
+
+                // Admins cannot remove their Admin Role
+                if ($self && $user->isAdministrator() && !in_array(Role::ROLE_ADMINISTRATOR, $roles)) {
                     $roles[] = Role::ROLE_ADMINISTRATOR;
+                }
+
+                // Non admins cannot assign the Admin Role
+                if (-1 !== $key = array_search(Role::ROLE_ADMINISTRATOR, $roles) and !App::user()->isAdministrator()) {
+                    unset($roles[$key]);
                 }
 
                 $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
@@ -134,7 +146,7 @@ class UserApiController
             $user->validate();
             $user->save($data);
 
-            return ['message' => $id ? __('User saved.') : __('User created.'), 'user' => $user];
+            return ['message' => 'success', 'user' => $user];
 
         } catch (Exception $e) {
             App::abort(400, $e->getMessage());
@@ -155,7 +167,7 @@ class UserApiController
             $user->delete();
         }
 
-        return ['message' => __('Success')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -168,7 +180,7 @@ class UserApiController
             $this->saveAction($data, null, null, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return ['message' => __('Users saved.')];
+        return ['message' => 'success'];
     }
 
     /**
@@ -181,7 +193,7 @@ class UserApiController
             $this->deleteAction($id);
         }
 
-        return ['message' => __('Users deleted.')];
+        return ['message' => 'success'];
     }
 
     /**

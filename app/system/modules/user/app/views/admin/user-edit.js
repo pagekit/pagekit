@@ -25,13 +25,7 @@ module.exports = {
         save: function (e) {
             e.preventDefault();
 
-            var roles = this.roles.filter(function (role) {
-                return role.selected;
-            }).map(function (role) {
-                return role.id;
-            });
-
-            this.$resource('api/user/:id').save({id: this.user.id}, {user: this.user, password: this.password, roles: roles}, function (data) {
+            this.$resource('api/user/:id').save({id: this.user.id}, {user: this.user, password: this.password}, function (data) {
 
                 if (!this.user.id) {
                     window.history.replaceState({}, '', this.$url('admin/user/edit', {id: data.user.id}))

@@ -70,7 +70,7 @@
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="role: roles">
-                        <label><input type="checkbox" v-model="role.selected" v-attr="disabled: role.disabled"> {{ role.name }}</label>
+                        <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" v-attr="disabled: role.disabled"> {{ role.name }}</label>
                     </p>
                 </div>
             </div>
