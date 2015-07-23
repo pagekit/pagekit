@@ -97,6 +97,17 @@ module.exports = Vue.extend({
 
         empty: function (packages) {
             return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
+        },
+
+        themeorder: function(packages) {
+
+            var index = packages.indexOf(_.find(packages, {enabled:true}));
+
+            if (index !== -1) {
+                packages.splice(0, 0, packages.splice(index, 1)[0]);
+            }
+
+            return packages;
         }
 
     },
