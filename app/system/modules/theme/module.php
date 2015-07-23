@@ -40,7 +40,18 @@ return [
                 'menu' => array_values($app['system']->getMenu()->getItems())
             ]);
 
-            $event->setParameter('subset', 'latin,latin-ext');
+            $subsets = 'latin,latin-ext';
+            $subset  = '';
+
+            if ('cyrillic' == $subset) {
+    			$subsets .= ',cyrillic,cyrillic-ext';
+    		} elseif ('greek' == $subset) {
+    			$subsets .= ',greek,greek-ext';
+    		} elseif ('vietnamese' == $subset) {
+    			$subsets .= ',vietnamese';
+    		}
+
+            $event->setParameter('subset', $subsets);
 
         }
 
