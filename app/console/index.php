@@ -2,5 +2,8 @@
 
 use Pagekit\Application\Console\Application as Console;
 
-$console = new Console($app, 'Pagekit', $app['version']);
+$app['module']->addPath(__DIR__.'/module.php');
+$app['module']->load('console');
+
+$console = new Console($app, 'Pagekit');
 $console->run();
