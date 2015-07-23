@@ -21,6 +21,8 @@
 </article>
 <?php endforeach ?>
 
+
+<?php if ($total > 1) : ?>
 <ul class="uk-pagination">
     <?php if ($page > 1) : ?>
     <li class="uk-pagination-previous">
@@ -33,3 +35,4 @@
     </li>
     <?php endif ?>
 </ul>
+<?php endif ?>
